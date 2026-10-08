@@ -61,8 +61,9 @@ razlogPrioriteta: Rešava konkretan problem iz prakse; raspoređeno naizmenično
 status:
   istrazivanje: zavrseno
   pisanje: napisano
-  tehnickaProvera: nije-provereno
-  jezickaProvera: nije-provereno
+  tehnickaProvera: provereno
+  jezickaProvera: provereno
+napomenaProvere: "urednička provera (AI-asistirana) 2026-10-08: otvoreni Carsystem 1K Epoxy Primer TDS v.01 (03/2021), R-M PM 2A32 (07/2026), Cosmos Lac Metal Primer (Version 02, 17/06/2026) i rad Vetere i Romagnoli; podloge, 3–4 sloja i 30–40 µm za PM 2A32 i uslovi bez rđe se poklapaju. Ispravljeno (3): „prajmeri iz našeg programa“ suženo na navedene listove; nalaz iz rada pripisan kao opšta stručna pozadina iz laboratorije, a ne kao dokaz uzroka vraćanja mehura; znak sa ispupčenjima preformulisan kao mogući znak."
 strucnaPotvrda:
   potrebna: false
   status: nije-potrebno
@@ -73,13 +74,13 @@ Ne, prelakiranje mehura rđe ne zaustavlja koroziju. Mehur znači da je korozija
 
 ## Zašto prelakiranje ne pomaže
 
-Opšte objašnjenje: rđa ispod laka nastaje kada vlaga dođe do metala kroz oštećenje, ivicu ili spoj limova. Proizvodi korozije podižu lak, pa se pojave mehurići. Kada se preko toga nanese nova boja, rđa i vlaga ostaju zarobljene ispod, a novi sloj nema dobru podlogu. Prajmeri iz našeg programa zato traže metal bez rđe: Carsystem za 1K Epoxy Primer traži da se rđa potpuno ukloni[^cs-1k-epoxy-tds], a Cosmos Lac za Metal Primer traži uklanjanje prašine, rđe i ulja[^cosmos-metal-primer-tds].
+Opšte objašnjenje: rđa ispod laka nastaje kada vlaga dođe do metala kroz oštećenje, ivicu ili spoj limova. Proizvodi korozije podižu lak, pa se pojave mehurići. Kada se preko toga nanese nova boja, rđa i vlaga ostaju zarobljene ispod, a novi sloj nema dobru podlogu. Prajmeri koje ovde navodimo zato traže metal bez rđe: Carsystem za 1K Epoxy Primer traži da se rđa potpuno ukloni[^cs-1k-epoxy-tds], a Cosmos Lac za Metal Primer traži uklanjanje prašine, rđe i ulja[^cosmos-metal-primer-tds].
 
-U stručnom radu o tretmanima zarđalih površina autori navode da dobra boja na zarđaloj površini rano otkazuje[^vetere-tannins]. To je razlog zašto se mehuri posle „brze“ popravke vraćaju.
+U stručnom radu o tretmanima zarđalih površina (laboratorijsko istraživanje, van našeg programa) autori navode da dobra boja na zarđaloj površini rano otkazuje[^vetere-tannins]. To je opšti razlog zbog kog „brza“ popravka preko rđe ne traje, a mehuri se mogu vratiti.
 
 ## Kako proveriti koliko je korozija zahvatila
 
-1. **Pogledajte okolinu mehura pod kosim svetlom.** Sitna ispupčenja oko vidljivog mehura znače da je korozija šira.
+1. **Pogledajte okolinu mehura pod kosim svetlom.** Sitna ispupčenja oko vidljivog mehura mogu da znače da je korozija šira.
 2. **Otvorite jedan mehur.** Ispod se vidi da li je rđa površinska ili je lim izjeden.
 3. **Brusite postepeno ka zdravom laku.** Prestaje se tek kada lak oko mesta dobro prianja i kada je metal svetao, bez tamnih tačaka.
 4. **Proverite odakle vlaga dolazi.** Mehuri na ivici vrata, pragu ili blatobranu mogu poticati iznutra, iz šupljine ili spoja limova. Tada spoljna popravka nije dovoljna bez zaštite unutrašnjosti; vidi [Zaštita šupljina karoserije](/vodici/zastita-supljina-karoserije).

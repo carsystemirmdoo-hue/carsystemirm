@@ -58,15 +58,16 @@ razlogPrioriteta: Rešava konkretan problem iz prakse; raspoređeno naizmenično
 status:
   istrazivanje: zavrseno
   pisanje: napisano
-  tehnickaProvera: nije-provereno
-  jezickaProvera: nije-provereno
+  tehnickaProvera: provereno
+  jezickaProvera: provereno
+napomenaProvere: "urednička provera (AI-asistirana) 2026-10-08: otvoreni Carsystem Anti Rust Putty TDS V03 (08/2022), Multi Green TDS V08 (11/2024), C.A.R.FIT Glas Plus Putty TDS i rad Vetere i Romagnoli; navodi o podlozi, P80–P120 i namena Glas Plus se poklapaju. Protivrečnost Anti Rust Putty (opis: odlično prianjanje na pocinkovanim podlogama; odeljak o podlozi: nije pogodan za pocinkovane površine) prikazana tačno, uz uputstvo da se pita tehnička podrška. Ispravljeno (4): uvodna tvrdnja da „listovi kitova iz programa“ traže podlogu bez rđe suzena (izričito to traži samo Glas Plus; Carsystem listovi traže čistu, suvu, odmašćenu i izbrušenu podlogu i ne predviđaju nanošenje preko rđe); odgovor o antikorozivnom kitu preformulisan prema tome; zapremina proizvoda korozije označena kao opšte objašnjenje; rad Vetere i Romagnoli označen kao laboratorijski."
 strucnaPotvrda:
   potrebna: false
   status: nije-potrebno
 poslednjaProvera: 2026-10-08
 ponovniPregled: 2027-04-08
 ---
-Ne. Kit se nanosi na čistu, suvu, odmašćenu i dobro izbrušenu podlogu bez rđe, i to traže tehnički listovi kitova iz našeg programa, uključujući i kitove namenjene mestima oštećenim korozijom. Kit preko rđe ne zaustavlja koroziju, a rđa ispod njega oslabljuje prianjanje. Isto važi za lim koji je samo „otprilike“ očišćen: tamne tačke u udubljenjima su rđa koja ostaje ispod popravke.
+Ne. Kit se nanosi na čistu, suvu, odmašćenu i dobro izbrušenu podlogu bez rđe. Tehnički listovi kitova koje ovde navodimo traže čistu i izbrušenu podlogu i nijedan ne predviđa nanošenje preko rđe, a C.A.R.FIT Glas Plus, namenjen i mestima oštećenim korozijom, izričito traži da se korozija ukloni brušenjem[^carfit-glas-plus-tds]. Kit preko rđe ne zaustavlja koroziju, a rđa ispod njega oslabljuje prianjanje. Isto važi za lim koji je samo „otprilike“ očišćen: tamne tačke u udubljenjima su rđa koja ostaje ispod popravke.
 
 ## Šta tehnički listovi kitova traže
 
@@ -80,13 +81,13 @@ Primer C.A.R.FIT Glas Plus je koristan jer pokazuje kako se čita opis proizvoda
 
 ## Da li antikorozivni kit sme preko rđe?
 
-Ne. Carsystem Anti Rust Putty je dvokomponentni poliesterski kit sa ugrađenom zaštitom od korozije, ali tehnički list za njega traži istu pripremu: čistu, suvu, odmašćenu i dobro izbrušenu podlogu[^cs-anti-rust-putty-tds]. Zaštita od korozije u kitu dodatno štiti čist metal; ne zamenjuje uklanjanje rđe.
+Tehnički list to ne predviđa. Carsystem Anti Rust Putty je dvokomponentni poliesterski kit sa ugrađenom zaštitom od korozije, ali list za njega traži istu pripremu: čistu, suvu, odmašćenu i dobro izbrušenu podlogu[^cs-anti-rust-putty-tds]. Nanošenje preko rđe se u listu ne pominje. Prema uredničkoj proceni, zaštita od korozije u kitu dodatno štiti čist metal i ne zamenjuje uklanjanje rđe.
 
 Napomena za pocinkovani lim: isti tehnički list u opisu navodi odlično prianjanje na pocinkovanim podlogama, a u odeljku o podlozi piše da kit nije pogodan za pocinkovane površine[^cs-anti-rust-putty-tds]. Dok proizvođač to ne razjasni, ne nanosite ga na pocinkovan lim bez potvrde tehničke podrške.
 
 ## Šta se dešava sa takvom popravkom posle nekoliko meseci
 
-Opšte objašnjenje, bez tvrdnje o tačnom roku: korozija ispod kita se nastavlja, jer u rđi i oko nje ostaje vlaga, a kit i boja preko njega nisu zaptivna barijera koja bi to zaustavila. Proizvodi korozije zauzimaju više prostora od metala i podižu kit, pa se na popravljenom mestu pojave mehuri, pukotine ili ivica koja se odvaja. U stručnom radu o tretmanima zarđalih površina autori navode da premaz na zarđaloj površini rano otkazuje[^vetere-tannins]. Kada će se to videti, zavisi od količine preostale rđe, vlage i debljine kita, pa rok ne navodimo.
+Opšte objašnjenje, bez tvrdnje o tačnom roku: korozija ispod kita se nastavlja, jer u rđi i oko nje ostaje vlaga, a kit i boja preko njega nisu zaptivna barijera koja bi to zaustavila. Proizvodi korozije zauzimaju više prostora od metala i podižu kit, pa se na popravljenom mestu mogu pojaviti mehuri, pukotine ili ivica koja se odvaja. U laboratorijskom stručnom radu o tretmanima zarđalih površina autori navode da premaz na zarđaloj površini rano otkazuje[^vetere-tannins]. Kada će se to videti, zavisi od količine preostale rđe, vlage i debljine kita, pa rok ne navodimo.
 
 Mogući znaci da je kit nanet preko nedovoljno očišćene podloge:
 

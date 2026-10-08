@@ -50,7 +50,7 @@ izvori:
     datumIzvora: 2026-09-09
     pristupljeno: 2026-10-08
     tip: katalog-proizvodjaca
-    napomena: "Tanjiri i međuslojevi str. 30–35; blokovi sa usisavanjem str. 36–39; Star Mask str. 184–185; Star Dust 2.0 str. 190–191; RUPES S145 str. 208–209."
+    napomena: "Tanjiri i međuslojevi str. 30–35; blokovi sa usisavanjem str. 36–39; oznake filtera i maski str. 188–191; RUPES S145 str. 208–209."
   - id: rupes-s145
     naziv: "RUPES, S145 45 liter professional vacuum cleaner — stranica proizvoda"
     url: https://www.rupes.com/product/45-liter-professional-vacuum-cleaner/
@@ -108,7 +108,7 @@ Usisavanje radi samo kada su svi delovi usklađeni: usisivač, crevo, brusilica 
 
 ## Klasa prašine kod usisivača
 
-Usisivači za brušenje svrstavaju se u klase prašine. RUPES za S145 navodi dve klase prema standardu EN 60335-2-69: klasu L, za prašinu sa graničnom vrednošću izloženosti većom od 1,0 mg/m³, i klasu M, za prašinu sa graničnom vrednošću do 0,1 mg/m³[^rupes-s145]. U katalogu Carsystem navedene su verzije S145L, S145PL, S145EM i S145EPM[^cs-katalog-2026], a RUPES verzije sa oznakom L svrstava u klasu L, a sa oznakom M u klasu M[^rupes-s145].
+Usisivači za brušenje svrstavaju se u klase prašine. RUPES za S145 navodi dve klase prema standardu EN 60335-2-69: klasu L, za prašinu sa graničnom vrednošću izloženosti većom od 1,0 mg/m³, i klasu M, za koju navodi graničnu vrednost izloženosti od 0,1 mg/m³[^rupes-s145]. U katalogu Carsystem navedene su verzije S145L, S145PL, S145EM i S145EPM[^cs-katalog-2026], a RUPES verzije sa oznakom L svrstava u klasu L, a sa oznakom M u klasu M[^rupes-s145].
 
 Koja klasa je potrebna, zavisi od prašine koju brusite i od graničnih vrednosti koje važe za nju. To se utvrđuje procenom rizika na radnom mestu, uz bezbednosne listove materijala, a ne izborom „najjače“ verzije napamet.
 
@@ -125,7 +125,7 @@ Ovi bezbednosni listovi zaštitu navode za proizvod uopšte, ne posebno za fazu 
 
 ### Kako se čitaju oznake filtera
 
-Carsystem u katalogu objašnjava oznake na svojim proizvodima: filter klase P2 štiti od čestica kao što su prašina, dim i aerosoli, a filter od aktivnog uglja klase A2 od organskih para; polumaska Star Mask nosi oznaku A2 P2 R[^cs-katalog-2026]. Za jednokratne maske Star Dust 2.0 katalog navodi klase FFP2 i FFP3 prema standardu EN 149:2001+A1:2009 i preporučuje zamenu maske posle svake smene[^cs-katalog-2026]. Ove maske su navedene samo radi objašnjenja oznaka; njihova dostupnost u našem programu nije potvrđena.
+Carsystem u katalogu, uz opremu za zaštitu disanja, objašnjava oznake: filter klase P2 štiti od čestica kao što su prašina, dim i aerosoli, a filter od aktivnog uglja klase A2 od organskih para; za jednokratne maske za prašinu navodi klase FFP2 i FFP3 prema standardu EN 149:2001+A1:2009[^cs-katalog-2026]. Katalog ovde služi samo kao objašnjenje oznaka, a ne kao preporuka određenog proizvoda; dostupnost opreme za zaštitu disanja u našem programu nije potvrđena.
 
 Slovo P označava zaštitu od čestica, pa i od prašine od brušenja. Slovo A označava zaštitu od organskih para, koje nastaju pri radu sa rastvaračima. Ako u istom prostoru i prskate, pogledajte i vodič [Da li je obična maska sa filterom dovoljna za 2K lak](/vodici/maska-za-2k-lak).
 

@@ -72,8 +72,9 @@ razlogPrioriteta: Dopunjuje osnovni vodič teme konkretnim pitanjem; raspoređen
 status:
   istrazivanje: zavrseno
   pisanje: napisano
-  tehnickaProvera: nije-provereno
-  jezickaProvera: nije-provereno
+  tehnickaProvera: provereno
+  jezickaProvera: provereno
+napomenaProvere: "urednička provera (AI-asistirana) 2026-10-08: otvoreni Carsystem KS-250 V05 (05/2024), KS-300.2 V01 (06/2025), KS-400 v.01 (03/2021), C.A.R.FIT Cavity Protection Spray TDS i SATA HRS E stranica; 160 °C, 2½ h / 3½ h, 20–30 °C, 8 h, −25 do +160 °C, 15–30 °C, 2 min, 3–5 min, 2,5 h i opis HRS E se poklapaju. Ispravljeno (3): postupak sa sondom (nanošenje pri izvlačenju) označen kao opšte uputstvo, a ne navod proizvođača; nejasna rečenica o „strožem zahtevu“ preformulisana; jezik: „ako list o tome ćuti“ → „ako list to ne navodi“."
 strucnaPotvrda:
   potrebna: false
   status: nije-potrebno
@@ -110,10 +111,10 @@ Vosak se nanosi i kao obnova zaštite na vozilu koje se ne lakira, na primer pos
 
 ## Kako se nanosi kroz otvore
 
-1. **Priprema.** Za KS-250 površine moraju biti bez grube rđe i što manje prašnjave[^cs-ks-250-tds]. Za KS-300.2 Carsystem traži čistu, suvu površinu bez masti i rđe[^cs-ks-300-2-tds]. Stroži zahtev važi za proizvod koji koristite.
+1. **Priprema.** Za KS-250 površine moraju biti bez grube rđe i što manje prašnjave[^cs-ks-250-tds]. Za KS-300.2 Carsystem traži čistu, suvu površinu bez masti i rđe[^cs-ks-300-2-tds]. Važi zahtev iz tehničkog lista proizvoda koji koristite.
 2. **Temperatura.** Proizvod i deo se dovode na temperaturu iz tehničkog lista. KS-250 se nanosi na sobnoj temperaturi od 15 do 30 °C[^cs-ks-250-tds]; za KS-300.2 Carsystem ne preporučuje nanošenje ispod 15 °C i savetuje da proizvod, kabina i objekat budu oko 20 °C[^cs-ks-300-2-tds].
 3. **Mućkanje.** Sprej se dobro promućka; C.A.R.FIT za svoj sprej navodi najmanje 2 minuta[^carfit-cavity-tds].
-4. **Nanošenje.** Sonda se uvede kroz fabrički otvor do kraja šupljine i nanosi se dok se izvlači, da vosak pokrije zidove celom dužinom. Uglovi, ivice i varovi se prskaju posebno pažljivo i deblje, kako Carsystem navodi za KS-250[^cs-ks-250-tds].
+4. **Nanošenje.** Opšte uputstvo: sonda se uvede kroz fabrički otvor do kraja šupljine i nanosi se dok se izvlači, da vosak pokrije zidove celom dužinom. Uglovi, ivice i varovi se prskaju posebno pažljivo i deblje, kako Carsystem navodi za KS-250[^cs-ks-250-tds].
 5. **Više tankih slojeva.** C.A.R.FIT navodi nekoliko slojeva i odzračivanje od 3–5 minuta između njih[^carfit-cavity-tds].
 6. **Čišćenje.** Posle rada limenka se okrene naopako i kratko prska da se očisti ventil, kako navode i Carsystem za KS-400 i C.A.R.FIT[^cs-ks-400-tds][^carfit-cavity-tds]. Svež vosak sa spoljne površine C.A.R.FIT skida razređivačem, a osušen mehanički[^carfit-cavity-tds].
 
@@ -127,7 +128,7 @@ Za veće količine postoje pištolji sa sondama. SATA HRS E je, prema stranici p
 
 ### Sme li se vosak za šupljine prelakirati?
 
-Za KS-250 Carsystem piše da ne sme[^cs-ks-250-tds]. Za ostale proizvode proverite tehnički list; ako list o tome ćuti, ne računajte da se može prelakirati.
+Za KS-250 Carsystem piše da ne sme[^cs-ks-250-tds]. Za ostale proizvode proverite tehnički list; ako list to ne navodi, ne računajte da se može prelakirati.
 
 ### Koliko često se zaštita šupljina obnavlja?
 

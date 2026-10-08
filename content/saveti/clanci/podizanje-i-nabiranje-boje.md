@@ -85,16 +85,16 @@ strucnaPotvrda:
 poslednjaProvera: 2026-10-08
 ponovniPregled: 2027-10-08
 ---
-Nova boja se nabira ili podiže kada rastvarači iz nje omekšaju sloj ispod, pa taj sloj nabubri i povuče novi. R-M ovu grešku opisuje kao bubrenje i podizanje donjih slojeva pri nanošenju nove boje, koje se može pojaviti tokom nanošenja ili tokom sušenja[^rm-help-crinkling]. Kao slojeve osetljive na rastvarač R-M navodi termoplastične akrilne (TPA) i nitro slojeve i sintetičke boje koje nisu potpuno otvrdnule[^rm-help-solvent-test]. Rizik se proverava pre lakiranja, testom rastvaračem na probrušenom mestu.
+Opšte objašnjenje: nova boja se nabira ili podiže kada rastvarači iz nje omekšaju sloj ispod, pa taj sloj nabubri i povuče novi. R-M ovu grešku opisuje kao bubrenje i podizanje donjih slojeva pri nanošenju nove boje, koje se može pojaviti tokom nanošenja ili tokom sušenja[^rm-help-crinkling]. Kao slojeve osetljive na rastvarač R-M navodi termoplastične akrilne (TPA) i nitro slojeve i sintetičke boje koje nisu potpuno otvrdnule[^rm-help-solvent-test]. Rizik se proverava pre lakiranja, testom rastvaračem na probrušenom mestu.
 
 ## Kako izgleda
 
-Površina se nabere kao koža, tokom nanošenja ili tek tokom sušenja[^rm-help-crinkling]. Nabiranje može biti po celoj površini ili samo na prelazu, tamo gde je stari lak probrušen u tanku ivicu. Slična, blaža pojava je ocrtavanje ivica: R-M opisuje nabubrele ili „oznojene“ ivice u završnom sloju oko starog laka koji je izbrušen u prelaz[^rm-help-edge-marking]. Ako se ivice vide tek posle nekoliko nedelja, o tome piše tekst [Vidljive ivice popravke posle nekoliko nedelja](/vodici/vidljive-ivice-popravke).
+Površina se nabere kao koža, tokom nanošenja ili tek tokom sušenja[^rm-help-crinkling]. Opšte objašnjenje: nabiranje može biti po celoj površini ili samo na prelazu, tamo gde je stari lak probrušen u tanku ivicu. Slična, blaža pojava je ocrtavanje ivica: R-M opisuje nabubrele ili „oznojene“ ivice u završnom sloju oko starog laka koji je izbrušen u prelaz[^rm-help-edge-marking]. Ako se ivice vide tek posle nekoliko nedelja, o tome piše tekst [Vidljive ivice popravke posle nekoliko nedelja](/vodici/vidljive-ivice-popravke).
 
 ## Mogući uzroci
 
 - **Stari sloj osetljiv na rastvarač.** Prema R-M, to su TPA slojevi, nitro slojevi i sintetičke boje koje nisu otvrdnule[^rm-help-solvent-test]. Na vozilu koje je ranije popravljano obično ne znate šta je sve ispod.
-- **Pogrešan sistem preko termoplastičnog sloja.** baslac među uzrocima pucanja navodi direktno nanošenje poliesterskog kita ili punioca, reaktivnog prajmera ili sintetičkih materijala na TPA, i traži da se za fabričke TPA slojeve poštuju posebni postupci popravke[^baslac-cracking]. Isti izvor navodi i prekratko odzračivanje u postupku mokro-na-mokro.
+- **Pogrešan sistem preko termoplastičnog sloja.** baslac ovo navodi za drugu grešku, pucanje, a ne za nabiranje: među uzrocima je direktno nanošenje poliesterskog kita ili punioca, reaktivnog prajmera ili sintetičkih materijala na TPA, uz zahtev da se za fabričke TPA slojeve poštuju posebni postupci popravke[^baslac-cracking]. Navodimo ga jer se tiče iste podloge osetljive na rastvarač.
 - **Jak rastvarač u novom materijalu.** Glasurit, brend koji nije u našem programu, podizanje u rečniku pojmova vezuje za prejake rastvarače u novoj boji i kao primer daje nitro materijal preko sintetičke boje sušene na vazduhu[^glasurit-prirucnik].
 - **Sredstvo za čišćenje.** I odmašćivač može da omekša osetljiv sloj. R-M za SILICONE Remov-R navodi da se ne koristi na podlogama osetljivim na rastvarače[^rm-pk1p10-tds], a Carsystem za vodeni Silicone Remover Water 2.0 upozorava da može da rastvori neke 1K prajmere i preporučuje probu[^cs-silicone-remover-water-tds].
 
@@ -106,7 +106,7 @@ Površina se nabere kao koža, tokom nanošenja ili tek tokom sušenja[^rm-help-
 
 ## Sanacija
 
-Nabran sloj se ne može izravnati brušenjem samo gornjeg sloja, jer je uzrok ispod. baslac kod pucanja zbog pogrešnog sistema na TPA navodi brušenje do zdrave podloge i ponovno lakiranje odgovarajućim materijalima podloge i završnim materijalima[^baslac-cracking]. Za nabiranje izvori koje smo mogli da otvorimo ne opisuju poseban postupak; R-M detaljne savete za tu grešku daje samo prijavljenim korisnicima. Opšte objašnjenje: osetljiv sloj se uklanja do tvrde podloge, jer bi i sledeći sloj ponovo reagovao sa njim. Postupke uklanjanja opisuje vodič [Skidanje stare boje](/vodici/skidanje-stare-boje), a pripremu zdravog starog laka [Priprema starog laka za novo lakiranje](/vodici/priprema-starog-laka).
+Opšte objašnjenje: nabran sloj se ne može izravnati brušenjem samo gornjeg sloja, jer je uzrok ispod. baslac kod pucanja zbog pogrešnog sistema na TPA navodi brušenje do zdrave podloge i ponovno lakiranje odgovarajućim materijalima podloge i završnim materijalima[^baslac-cracking]. Za nabiranje izvori koje smo mogli da otvorimo ne opisuju poseban postupak; R-M detaljne savete za tu grešku daje samo prijavljenim korisnicima. Opšte objašnjenje: osetljiv sloj se uklanja do tvrde podloge, jer bi i sledeći sloj ponovo reagovao sa njim. Postupke uklanjanja opisuje vodič [Skidanje stare boje](/vodici/skidanje-stare-boje), a pripremu zdravog starog laka [Priprema starog laka za novo lakiranje](/vodici/priprema-starog-laka).
 
 ## Ograničenja
 

@@ -106,8 +106,9 @@ razlogPrioriteta: Dopunjuje osnovni vodič teme konkretnim pitanjem; raspoređen
 status:
   istrazivanje: zavrseno
   pisanje: napisano
-  tehnickaProvera: nije-provereno
-  jezickaProvera: nije-provereno
+  tehnickaProvera: provereno
+  jezickaProvera: provereno
+napomenaProvere: "urednička provera (AI-asistirana) 2026-10-08: otvoreni ONYX HD, AGILIS, RA 050, HB 034, A 2560, DIAMONT (07/2026), baslac 35 Line 08/2023 i 45 Line 03/2026; svi odnosi, razređivači i DIN 4 vrednosti se poklapaju; ispravke: redosled mešanja 45 Line (odmah posle baza i ponovo posle 45-R45), preformulisana zamena AGILIS X veziva i RA 050X prema TDS-u."
 strucnaPotvrda:
   potrebna: false
   status: nije-potrebno

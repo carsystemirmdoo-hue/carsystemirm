@@ -110,7 +110,7 @@ baslac navodi ove moguće uzroke[^baslac-solvent-boil]:
 1. **Predebeo sloj.** Uporedite broj slojeva i, ako je merena, debljinu sa tehničkim listom.
 2. **Prebrz učvršćivač ili razređivač.** Proverite da li je izbor odgovarao temperaturi u prostoru.
 3. **Prekratko odzračivanje između slojeva**, uključujući slojeve ispod laka u postupku mokro-na-mokro. Uporedite stvarno vreme sa tehničkim listom svakog sloja.
-4. **Sušenje u kabini ili IR lampom.** baslac navodi odzračivanje pre sušenja koje ne odgovara propisanom (stranica kao uzrok navodi predugo odzračivanje) i premalo rastojanje IR lampe, zbog koga je temperatura sušenja previsoka.
+4. **Sušenje u kabini ili IR lampom.** baslac navodi premalo rastojanje IR lampe, zbog koga je temperatura sušenja previsoka. Na istoj stranici kao uzrok piše i *predugo* odzračivanje pre sušenja u kabini ili IR lampom. To se ne slaže sa opštim objašnjenjem ove greške (rastvarač ostaje zarobljen kada nema dovoljno vremena da ispari) ni sa prevencijom na istoj stranici, koja traži propisana vremena odzračivanja; moguće je da je navod na stranici pogrešan. Zato ga ne tumačite kao savet da se odzračivanje skraćuje: proverite da li je vreme pre sušenja bilo ono iz tehničkog lista Vašeg laka.
 
 Glasurit u biltenu dodaje i moguće uzroke koji se tiču prostora: prejak ili preslab protok vazduha u kabini, preniska ili previsoka temperatura sušenja i izlaganje sveže osušenog vozila direktnom suncu, posebno kod tamnih boja[^glasurit-prirucnik]. Ako se mehurići pojave samo na tamnim delovima ili samo posle izlaganja suncu, to vredi zapisati.
 
@@ -120,8 +120,8 @@ Vreme odzračivanja razlikuje se od laka do laka, pa se uvek čita iz tehničkog
 
 | Lak | Odzračivanje prema tehničkom listu |
 | --- | --- |
-| baslac 40-100 | najmanje 3 minuta između slojeva na 20 °C[^baslac-40-100-tds] |
-| R-M C 2P42 | 1–3 minuta između slojeva, bez odzračivanja pre sušenja u kabini[^rm-c2p42-tds] |
+| baslac 40-100 | najmanje 3 minuta između dva sloja na 20 °C; kao drugi način pola sloja i pun sloj bez odzračivanja[^baslac-40-100-tds] |
+| R-M C 2P42 | 1–3 minuta između dva sloja, bez odzračivanja pre sušenja u kabini; kao drugi način 1½ sloja bez odzračivanja[^rm-c2p42-tds] |
 | Carsystem CC.26 ECO-X | 4–6 minuta između slojeva, 10 minuta pre sušenja u kabini[^cs-cc26-tds] |
 | Carsystem Speed Plus | 5–7 minuta između slojeva, 10 minuta pre sušenja u kabini[^cs-speed-plus-tds] |
 
@@ -133,7 +133,7 @@ Prevencija koju navodi baslac je ogledalo uzroka: debljina sloja prema preporuci
 
 ## Sanacija
 
-Mehurići su zarobljeni u sloju, pa ih poliranje po pravilu ne uklanja. baslac navodi brušenje do zdrave podloge i ponovno nanošenje odgovarajućih slojeva podloge i završnih slojeva[^baslac-solvent-boil]. Ako se mehurići samo pokriju novim lakom, na tom mestu ostaju rupice. R-M takve rupice, nastale jer stara greška nije uklonjena iz podloge, opisuje kao posebnu grešku u novom laku[^rm-help-pinhole-marks]. Razlika između mehurića, rupica i kratera opisana je u tekstu [Krater, rupica ili mehurić](/vodici/razlika-kratera-rupica-i-mehurica).
+Opšte objašnjenje: mehurići su zarobljeni u sloju, pa ih poliranje ne uklanja. baslac navodi brušenje do zdrave podloge i ponovno nanošenje odgovarajućih slojeva podloge i završnih slojeva[^baslac-solvent-boil]. Ako se mehurići samo pokriju novim lakom, na tom mestu ostaju rupice. R-M takve rupice, nastale jer stara greška nije uklonjena iz podloge, opisuje kao posebnu grešku u novom laku[^rm-help-pinhole-marks]. Razlika između mehurića, rupica i kratera opisana je u tekstu [Krater, rupica ili mehurić](/vodici/razlika-kratera-rupica-i-mehurica).
 
 ## Ograničenja
 
@@ -143,7 +143,7 @@ Navedeni uzroci su mogući, ne sigurni. Mehurići mogu doći i iz slojeva ispod 
 
 ### Kako debljina sloja utiče na kuvanje?
 
-Što je sloj deblji, rastvarač duže izlazi iz njega, pa je veća verovatnoća da se površina zatvori pre nego što izađe. baslac zato predebeo sloj navodi kao prvi mogući uzrok[^baslac-solvent-boil], a Glasurit upozorava da HVLP nanošenje materijala sa niskim sadržajem VOC daje veliku debljinu po sloju i da preveliki sloj može izazvati i kuvanje[^glasurit-prirucnik]. Merenje debljine opisuje vodič [Debljina suvog sloja](/vodici/debljina-suvog-sloja).
+Opšte objašnjenje: što je sloj deblji, rastvarač duže izlazi iz njega, pa je veća verovatnoća da se površina zatvori pre nego što izađe. baslac predebeo sloj navodi kao prvi mogući uzrok[^baslac-solvent-boil], a Glasurit upozorava da HVLP nanošenje materijala sa niskim sadržajem VOC daje veliku debljinu po sloju i da preveliki sloj može izazvati i kuvanje[^glasurit-prirucnik]. Merenje debljine opisuje vodič [Debljina suvog sloja](/vodici/debljina-suvog-sloja).
 
 ### Hoće li mehurići nestati poliranjem?
 

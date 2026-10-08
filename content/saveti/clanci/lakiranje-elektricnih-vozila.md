@@ -33,7 +33,7 @@ povezani:
   - SV-0187
 izvori:
   - id: rm-nev-repair
-    naziv: "R-M, R-M® unveils its first NEV Repair solutions for body shops (vodič o rešenjima za popravku novih električnih vozila)"
+    naziv: "R-M, R-M® unveils its first NEV Repair solutions for body shops (vest o rešenjima za popravku novih električnih vozila)"
     url: https://www.rmpaint.com/en-int/news/r-mr-unveils-its-first-nev-repair-solutions-body-shops
     datumIzvora: 2025-02-10
     pristupljeno: 2026-10-08
@@ -61,8 +61,9 @@ razlogPrioriteta: Dopunjuje osnovni vodič teme konkretnim pitanjem; raspoređen
 status:
   istrazivanje: zavrseno
   pisanje: napisano
-  tehnickaProvera: nije-provereno
-  jezickaProvera: nije-provereno
+  tehnickaProvera: ispravke-potrebne
+  jezickaProvera: provereno
+napomenaProvere: "urednička provera (AI-asistirana) 2026-10-08: otvoreni R-M vest NEV Repair (10.02.2025, BASF Coatings), TDS C 2P42 i C 2P55 07/2026, baslac 40-450 12/2025; vrednost „ispod 60 °C, najduže 45 min“ predstavljena kao mogućnost materijala, ne kao granica za bateriju; ispravke: izvor opisan kao vest (ne vodič, 3 mesta), pripadnost serije Pioneer potkrepljena tehničkim listovima. Oznaka za stručnu potvrdu je opravdana (granice proizvođača vozila i rad na visokonaponskom sistemu bez izvora)."
 strucnaPotvrda:
   potrebna: true
   razlog: "Granice temperature i trajanja sušenja za bateriju i pravila za rad na visokonaponskom sistemu daje proizvođač vozila; nismo otvorili nijedno uputstvo proizvođača vozila ni propis o osposobljenosti za rad na visokonaponskim sistemima. Podatak R-M (ispod 60 °C, najduže 45 min) opisuje mogućnosti materijala iz 2025, a ne granicu za određeno vozilo. Deo o visokonaponskom sistemu treba da potvrdi stručna osoba."
@@ -70,7 +71,7 @@ strucnaPotvrda:
 poslednjaProvera: 2026-10-08
 ponovniPregled: 2027-04-08
 ---
-Kod električnih i hibridnih vozila lakiranje i sušenje rade se prema uputstvu za popravku proizvođača vozila, a materijal se bira tako da može da se osuši u granicama koje to uputstvo dozvoljava. R-M (tada brend kompanije BASF Coatings) je 10. februara 2025. u svom vodiču o rešenjima za popravku novih električnih vozila naveo da njegov program za takva vozila omogućava sušenje na temperaturama ispod 60 °C, najduže 45 minuta, radi zaštite veka baterije, i podsetio lakirere da strogo poštuju standarde popravke proizvođača vozila[^rm-nev-repair]. To je opis mogućnosti materijala, a ne granica za Vaše vozilo; nju daje proizvođač vozila.
+Kod električnih i hibridnih vozila lakiranje i sušenje rade se prema uputstvu za popravku proizvođača vozila, a materijal se bira tako da može da se osuši u granicama koje to uputstvo dozvoljava. R-M (tada brend kompanije BASF Coatings) je 10. februara 2025. u vesti o rešenjima za popravku novih električnih vozila (engl. *NEV Repair*) naveo da njegov program za takva vozila omogućava sušenje na temperaturama ispod 60 °C, najduže 45 minuta, radi zaštite veka baterije, i podsetio lakirere da strogo poštuju standarde popravke proizvođača vozila[^rm-nev-repair]. To je opis mogućnosti materijala, a ne granica za Vaše vozilo; nju daje proizvođač vozila.
 
 ## Zašto je bitna temperatura baterije
 
@@ -80,7 +81,7 @@ Opšte objašnjenje: infracrvena lampa zagreva površinu lokalno i može da podi
 
 ## Materijali koji se suše na nižoj temperaturi
 
-Kada uputstvo vozila ograničava temperaturu, bira se materijal čiji tehnički list daje vreme sušenja za dozvoljenu temperaturu. Primeri iz programa R-M, iz serije koju R-M navodi u rešenjima za električna vozila[^rm-nev-repair]:
+Kada uputstvo vozila ograničava temperaturu, bira se materijal čiji tehnički list daje vreme sušenja za dozvoljenu temperaturu. Primeri iz programa R-M: oba laka tehnički list svrstava u seriju Pioneer[^rm-c2p42-tds][^rm-c2p55-tds], koju R-M navodi u rešenjima za električna vozila[^rm-nev-repair]:
 
 | Proizvod | Sušenje prema tehničkom listu |
 | --- | --- |
@@ -115,4 +116,4 @@ To određuju proizvođač vozila u uputstvu za popravku i propisi o bezbednosti 
 
 ### Šta proizvođač vozila propisuje?
 
-Uputstvo za popravku određuje pripremu vozila, dozvoljenu temperaturu i trajanje sušenja, postupak oko senzora i delove koji se ne smeju dirati. R-M u vodiču iz 2025. navodi da je poštovanje standarda popravke proizvođača vozila obavezno[^rm-nev-repair], a isto traže i napomene u tehničkim listovima[^rm-c2p42-tds]. Ako uputstvo nemate, zatražite ga pre početka rada. Opšta lična zaštita lakirera opisana je u vodiču [Lična zaštitna oprema autolakirera](/vodici/licna-zastitna-oprema-autolakirera).
+Uputstvo za popravku određuje pripremu vozila, dozvoljenu temperaturu i trajanje sušenja, postupak oko senzora i delove koji se ne smeju dirati. R-M u vesti iz 2025. navodi da je poštovanje standarda popravke proizvođača vozila obavezno[^rm-nev-repair], a isto traže i napomene u tehničkim listovima[^rm-c2p42-tds]. Ako uputstvo nemate, zatražite ga pre početka rada. Opšta lična zaštita lakirera opisana je u vodiču [Lična zaštitna oprema autolakirera](/vodici/licna-zastitna-oprema-autolakirera).

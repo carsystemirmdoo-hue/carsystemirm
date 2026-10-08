@@ -76,15 +76,15 @@ strucnaPotvrda:
 poslednjaProvera: 2026-10-08
 ponovniPregled: 2027-04-08
 ---
-Dok vazduh protiče kroz crevo, spojnice i adaptere, deo pritiska se gubi, pa na pištolj stiže manje nego što pokazuje regulator na zidu. SATA navodi da je izbor prečnika creva presudan i da su praktična ispitivanja pokazala koliko veliki može biti pad pritiska samo zbog neodgovarajućeg creva[^sata-mali-pomocnici]. Za jet X uputstvo traži crevo unutrašnjeg prečnika najmanje 9 mm[^sata-jetx-uputstvo]. Ako pritisak na pištolju pada tokom rada, uzrok se traži redom: crevo, spojnice, regulator i kompresor.
+Opšte objašnjenje: dok vazduh protiče kroz crevo, spojnice i adaptere, deo pritiska se gubi, pa na pištolj stiže manje nego što pokazuje regulator na zidu. SATA navodi da je izbor prečnika creva presudan i da su praktična ispitivanja pokazala koliko veliki može biti pad pritiska samo zbog neodgovarajućeg creva[^sata-mali-pomocnici]. Za jet X uputstvo traži crevo unutrašnjeg prečnika najmanje 9 mm[^sata-jetx-uputstvo]. Ako pritisak na pištolju pada tokom rada, praktičan redosled provere je crevo, spojnice, regulator i kompresor (urednički predlog).
 
 ## Zašto crevo i spojnice smanjuju pritisak
 
 Opšte objašnjenje: vazduh na putu od regulatora do pištolja savladava otpor zidova creva i svakog suženja. Otpor raste kada je crevo uže i duže i kada vazduh brže protiče. Zato se razlika ne vidi dok okidač nije povučen: bez protoka manometar pokazuje pritisak mirovanja, a čim vazduh krene, pritisak na pištolju padne.
 
-Spojnice, nipli, adapteri i redukcije često imaju uži prolaz od samog creva. Svaki takav deo dodaje svoje suženje, pa više delova u nizu znači i veći ukupan gubitak. Isto važi za crevo koje je presavijeno, zgnječeno ili oštećeno.
+I ovo je opšte objašnjenje: spojnice, nipli, adapteri i redukcije mogu da imaju uži prolaz od samog creva. Svaki takav deo dodaje svoje suženje, pa više delova u nizu znači i veći ukupan gubitak. Isto važi za crevo koje je presavijeno, zgnječeno ili oštećeno.
 
-Posledica nije samo „slabiji mlaz“. Ako je ulazni pritisak niži od onog iz tehničkog lista materijala, materijal se raspršuje drugačije nego što je proizvođač boje predvideo. Ako se to nadoknadi povećanjem pritiska na mreži, SATA upozorava da previsok pritisak traži veliku silu na okidaču i može da pokvari rezultat lakiranja[^sata-jetx-uputstvo].
+Posledica nije samo „slabiji mlaz“: ako je ulazni pritisak niži od onog iz tehničkog lista materijala, materijal se, po opštem objašnjenju, raspršuje drugačije nego što je proizvođač boje predvideo. Ako se to nadoknadi povećanjem pritiska na mreži, SATA upozorava da previsok pritisak traži veliku silu na okidaču i može da pokvari rezultat lakiranja[^sata-jetx-uputstvo].
 
 ## Kakvo crevo traži proizvođač pištolja
 
@@ -109,7 +109,7 @@ Tabela nije sigurna dijagnoza. Isti simptom može da ima više uzroka istovremen
 
 1. **Izmerite pritisak na ulazu u pištolj**, a ne na zidu, dok je okidač potpuno povučen. Uputstvo za SATAjet X 5500 rangira načine merenja i podešavanje samo regulatorom na razvodu označava kao najmanje tačno[^sata-x5500-uputstvo]. Za merenje na ulazu možete da koristite, na primer, [SATA manometar](/proizvodi/sata-manometer).
 2. **Uporedite sa regulatorom.** Pri istom protoku zabeležite pritisak na regulatoru i na pištolju. Velika razlika ukazuje na gubitke između njih.
-3. **Zamenite crevo** ispravnim crevom odgovarajućeg prečnika i ponovite merenje. Ako se razlika smanji, uzrok je bio u crevu.
+3. **Zamenite crevo** ispravnim crevom odgovarajućeg prečnika i ponovite merenje. Ako se razlika smanji, uzrok je verovatno bio u crevu.
 4. **Skidajte delove jedan po jedan**: adaptere, produžetke, dodatne spojnice. Posle svake promene ponovite merenje.
 5. **Ako pritisak i dalje pada**, proverite kompresor i razvod.
 
@@ -119,7 +119,7 @@ Postupak podešavanja posle provere opisuje vodič [Podešavanje pištolja](/vod
 
 ### Zašto pada pritisak pri radu?
 
-Zato što pad pritiska u crevu i spojnicama postoji samo dok vazduh protiče. Kada je okidač otpušten, manometar pokazuje pritisak mirovanja; kada ga povučete, deo pritiska se troši na savladavanje otpora. Zato SATA traži da se ulazni pritisak podešava dok je okidač potpuno povučen[^sata-x5500-uputstvo].
+Opšte objašnjenje: pad pritiska u crevu i spojnicama postoji samo dok vazduh protiče. Kada je okidač otpušten, manometar pokazuje pritisak mirovanja; kada ga povučete, deo pritiska se troši na savladavanje otpora. Zato SATA traži da se ulazni pritisak podešava dok je okidač potpuno povučen[^sata-x5500-uputstvo].
 
 ### Može li obično crevo iz radionice ili baštensko crevo?
 

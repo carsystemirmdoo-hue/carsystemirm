@@ -86,8 +86,9 @@ razlogPrioriteta: Dopunjuje osnovni vodič teme konkretnim pitanjem; raspoređen
 status:
   istrazivanje: zavrseno
   pisanje: napisano
-  tehnickaProvera: nije-provereno
-  jezickaProvera: nije-provereno
+  tehnickaProvera: provereno
+  jezickaProvera: provereno
+napomenaProvere: "urednička provera (AI-asistirana) 2026-10-08: otvoreni baslac Color Chips, Info R-M Metamerism, TDS Colour Match Lamp V03, CS LED Lamp V02, SATA trueSun stranica i uputstvo, Booth Mask Stick, C.A.R.FIT Tack Coating; sve vrednosti (K, CRI, lm, lx, radne temperature) i bezbednosne napomene se poklapaju; bez ispravki."
 strucnaPotvrda:
   potrebna: false
   status: nije-potrebno

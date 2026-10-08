@@ -84,14 +84,14 @@ strucnaPotvrda:
 poslednjaProvera: 2026-10-08
 ponovniPregled: 2027-04-08
 ---
-Brusni blok se bira prema površini i zadatku: krut i dugačak za ravnanje ravnih i blago zakrivljenih površina, savitljiv ili oblikovan za konkavne i konveksne delove, a mali za teško dostupna mesta. Bira se i prema formatu abraziva koji koristite, trake ili disku. Carsystem, na primer, tvrdi gumeni blok namenjuje izravnavanju površina[^cs-katalog-2026], a sunđerasti blok 300 + 100 opisuje kao blok koji se prilagođava konturama vozila[^cs-sanding-blocks]. Tehnika je u oba slučaja ista: blok leži ravno, pritisak je ravnomeran, a pokreti idu preko šire površine od same popravke.
+Brusni blok se bira prema površini i zadatku: krut i dugačak za ravnanje ravnih i blago zakrivljenih površina, savitljiv ili oblikovan za konkavne i konveksne delove, a mali za teško dostupna mesta. Bira se i prema formatu abraziva koji koristite: traci ili disku. Carsystem, na primer, tvrdi gumeni blok namenjuje izravnavanju površina[^cs-katalog-2026], a sunđerasti blok 300 + 100 opisuje kao blok koji se prilagođava konturama vozila[^cs-sanding-blocks]. Tehnika je u oba slučaja ista: blok leži ravno, pritisak je ravnomeran, a pokreti idu preko šire površine od same popravke.
 
 ## Po čemu se blokovi razlikuju
 
 - **Dužina.** Što je blok duži, to više premošćuje talase. Dugačak blok ravna, kratak prati oblik.
 - **Tvrdoća.** Tvrd blok skida ono što viri, mekan se prilagođava površini.
 - **Oblik podloge.** Ravna, konkavna ili konveksna podloga, ili savitljiva ploča koja se podešava.
-- **Pričvršćivanje abraziva.** Većina blokova u programu ima čičak, pa se trake i diskovi menjaju bez sečenja i stezanja papira[^cs-sanding-blocks].
+- **Pričvršćivanje abraziva.** Carsystem blokovi iz brošure imaju čičak, pa se trake menjaju bez sečenja i stezanja papira[^cs-sanding-blocks].
 - **Usisavanje.** Blokovi sa priključkom odvode prašinu dok brusite. Carsystem za takve blokove navodi da optimizovano usisavanje sprečava brzo zapunjavanje abraziva[^cs-sanding-blocks].
 
 ## Blokovi u programu
@@ -136,8 +136,8 @@ Tvrd blok je bolji kada treba ravnati: on skida izbočine, a udubljenja ostavlja
 
 ### Kako se na blok stavlja abraziv?
 
-Na blok sa čičkom abraziv se samo prisloni i pritisne, pazeći da rupe budu poravnate kada blok ima usisavanje. Kod listova bez čička koristi se odgovarajući držač ili jastučić. Carsystem za listove ProFlex Neptune preporučuje rad rukom sa jastučićem Neptune Pad, a za teško dostupna mesta sa mekšim jastučićem[^cs-neptune-tds].
+Na blok sa čičkom abraziv se samo prisloni i pritisne, pazeći da rupe budu poravnate kada blok ima usisavanje. Za listove namenjene ručnom radu koristi se jastučić koji navodi proizvođač. Carsystem za listove ProFlex Neptune preporučuje rad rukom sa jastučićem Neptune Pad, a za teško dostupna mesta sa mekšim jastučićem[^cs-neptune-tds].
 
 ### Da li ručno brušenje može da zameni brusilicu?
 
-Na malim površinama i za ravnanje često je čak bolje. Na velikim površinama brusilica radi brže i ravnomernije. Kako se bira brusilica, objašnjava vodič [Ekscentarska brusilica: šta znači hod](/vodici/ekscentarska-brusilica-hod).
+Na malim površinama i pri ravnanju blokom ručno brušenje može da bude i bolji izbor. Na velikim površinama brusilica po pravilu radi brže i ravnomernije. Ovo je urednička procena, a ne navod proizvođača. Kako se bira brusilica, objašnjava vodič [Ekscentarska brusilica: šta znači hod](/vodici/ekscentarska-brusilica-hod).

@@ -85,7 +85,7 @@ strucnaPotvrda:
 poslednjaProvera: 2026-10-08
 ponovniPregled: 2027-04-08
 ---
-Klasični brusni disk ima zrno na papiru ili filmu i niz rupa kroz koje se usisava prašina. Mrežasti abraziv ima zrno nanešeno na otvorenu mrežu, pa prašina prolazi kroz celu površinu, a ne samo kroz rupe. C.A.R.FIT za svoj mrežasti disk navodi da ima najveću površinu za odvođenje prašine u poređenju sa klasičnim abrazivima sa rupama i da se prašina ne zadržava između površine i diska[^carfit-color-net]. Koji je bolji izbor, zavisi od faze rada i opreme, a ne od same vrste podloge.
+Klasični brusni disk ima zrno na papiru ili filmu i niz rupa kroz koje se usisava prašina. Mrežasti abraziv ima zrno naneto na otvorenu mrežu, pa prašina prolazi kroz celu površinu, a ne samo kroz rupe. C.A.R.FIT za svoj mrežasti disk navodi da ima najveću površinu za odvođenje prašine u poređenju sa klasičnim abrazivima sa rupama i da se prašina ne zadržava između površine i diska[^carfit-color-net]. Koji je bolji izbor, zavisi od faze rada i opreme, a ne od same vrste podloge.
 
 ## Kako je napravljen jedan, a kako drugi
 
@@ -126,7 +126,7 @@ Dokumenti koje smo pregledali ne porede brzinu skidanja materijala, vek trajanja
 
 ### Utiče li vrsta abraziva na usisavanje?
 
-Da. Kod diska sa rupama usisavanje zavisi od toga da li se rupe poklapaju sa tanjirom i međuslojem i da li usisivač radi. Kod mrežastog abraziva prašina prolazi kroz celu mrežu, što proizvođači ističu kao prednost[^carfit-color-net][^cs-n20-tds]. U oba slučaja abraziv bez usisavanja brže se zapunjava.
+Da. Kod diska sa rupama usisavanje zavisi od toga da li se rupe poklapaju sa tanjirom i međuslojem i da li usisivač radi. Kod mrežastog abraziva prašina prolazi kroz celu mrežu, što proizvođači ističu kao prednost[^carfit-color-net][^cs-n20-tds]. Kao opšte pravilo, abraziv bez usisavanja brže se zapunjava prašinom.
 
 ### Da li mrežasti abraziv zamenjuje sve diskove?
 

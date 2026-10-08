@@ -88,8 +88,9 @@ razlogPrioriteta: Dopunjuje osnovni vodič teme konkretnim pitanjem; raspoređen
 status:
   istrazivanje: zavrseno
   pisanje: napisano
-  tehnickaProvera: nije-provereno
-  jezickaProvera: nije-provereno
+  tehnickaProvera: provereno
+  jezickaProvera: provereno
+napomenaProvere: "urednička provera (AI-asistirana) 2026-10-08: otvoreni baslac Mazda 51K (standard, blend 1 i 2, 03/2025), 45-W10 06/2023, 45 Line variant 49 03/2026, R-M DIAMONT i ONYX HD 07/2026, Info R-M AGILIS three-coat; vrednosti se poklapaju; urednički opis stepenastog probnog lima jasno označen; ispravke: uklonjena neproverena oznaka „rastvaračka“ za DIAMONT, preciziran sloj koji se ponavlja (sloj za efekat drugog koraka), „probna pločica“ → „probni lim“ prema rečniku, pitanje „sa više broja slojeva“ → „sa različitim brojem slojeva“ (naslov, podnaslov, dodatno pitanje)."
 strucnaPotvrda:
   potrebna: false
   status: nije-potrebno

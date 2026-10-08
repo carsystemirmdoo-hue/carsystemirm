@@ -122,7 +122,7 @@ Tabela prikazuje šta piše u tehničkom listu svake trake. Ne služi za poređe
 - **Lak, guma, staklo, hrom.** Za Master Tape II, Master Tape Green i Top Tape Carsystem navodi prianjanje na lakirani metal, gumu, staklo i hromirane delove[^cs-master-tape-ii-tds][^cs-master-tape-green-tds][^cs-top-tape-tds].
 - **Plastika i gumene zaptivke.** Slim Tape je tanka traka sa akrilnim lepkom koja, prema tehničkom listu, izuzetno dobro prianja na plastične delove i gumene zaptivke i namenjena je i višebojnom lakiranju[^cs-slim-tape-tds].
 - **Oštra linija.** Fine Line Tape Blue je od PVC folije. Tehnički list traži nanošenje na čistu i odmašćenu površinu pri temperaturi od +15 °C do +30 °C, uz jak početni pritisak, a puno prianjanje postiže se tek posle 24 h na +23 °C[^cs-fine-line-tds].
-- **Vodena ili rastvaračka boja.** Master Tape II je, prema tehničkom listu, namenjen i vodenim i rastvaračkim bojama[^cs-master-tape-ii-tds], dok tehnički list Top Tape pominje nanošenje rastvaračkih boja[^cs-top-tape-tds]. Ako radite sa vodenom bazom, birajte traku za koju proizvođač to navodi.
+- **Vodena ili rastvaračka boja.** Master Tape II i Master Tape Green su, prema tehničkim listovima, namenjeni i vodenim i rastvaračkim bojama[^cs-master-tape-ii-tds][^cs-master-tape-green-tds], dok tehnički list Top Tape pominje nanošenje rastvaračkih boja[^cs-top-tape-tds]. Ako radite sa vodenom bazom, birajte traku za koju proizvođač to navodi.
 
 Gde se traka koristi za gumice i lajsne, pogledajte [Maskiranje gumica, lajsni i stakla](/vodici/maskiranje-gumica-i-lajsni). Trake su u [katalogu Carsystem](/katalog?brend=carsystem) i [katalogu C.A.R.FIT](/katalog?brend=carfit).
 

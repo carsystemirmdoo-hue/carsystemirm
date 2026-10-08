@@ -76,11 +76,6 @@ izvori:
     verzija: "V08, 11/2024"
     pristupljeno: 2026-10-08
     tip: tehnicki-list
-  - id: baslac-orange-peel
-    naziv: "baslac, Paint Defects: Orange peel effect"
-    url: https://www.baslac.com/en-emea/orange-peel-effect
-    pristupljeno: 2026-10-08
-    tip: edukacija-proizvodjaca
   - id: glasurit-prirucnik
     naziv: "Glasurit (BASF), Technical Information AD3233G, tehnički priručnik za Severnu Ameriku, rev. 4/12/18 — brend koji nije u našem programu; kopija koju objavljuje Skills/Compétences Canada"
     url: https://www.skillscompetencescanada.com/wp-content/uploads/2018/05/SCNC18-36-AD3233G-Glasurit-Manual_EN.17May18.pdf
@@ -101,11 +96,11 @@ strucnaPotvrda:
 poslednjaProvera: 2026-10-08
 ponovniPregled: 2027-04-08
 ---
-Tragovi brušenja vide se kroz boju kada su ogrebotine u podlozi pregrube ili preduboke da bi ih slojevi preko njih sakrili. R-M ovu grešku opisuje kao kružne tragove brušenja u podlozi koji se u završnom sloju vide kao linije[^rm-help-sanding-marks]. Mogući uzroci su završna granulacija grublja od one koju navodi tehnički list punioca, kit ili goli lim brušen grubim papirom bez punioca preko i preskočen korak između granulacija. Pre popravke se proverava granulacija i redosled brušenja.
+Opšte objašnjenje: tragovi brušenja vide se kroz boju kada su ogrebotine u podlozi pregrube ili preduboke da bi ih slojevi preko njih sakrili. R-M ovu grešku opisuje kao kružne tragove brušenja u podlozi koji se u završnom sloju vide kao linije[^rm-help-sanding-marks]. Javni izvori proizvođača iz našeg programa ne daju listu uzroka, pa se, kao opšte objašnjenje, proveravaju: završna granulacija grublja od one koju navodi tehnički list punioca, kit ili goli lim brušen grubim papirom bez punioca preko i preskočen korak između granulacija. Pre popravke se proverava granulacija i redosled brušenja.
 
 ## Kako izgleda
 
-Na površini se vide fine linije ili kružni tragovi, najbolje u kosom svetlu i na tamnim, jednoličnim bojama. Tragovi prate oblik brušenja: kružni od ekscentarske brusilice, ravni od ručnog bloka. Ako su vidljivi samo na mestu gde je bio kit, uzrok je verovatnije u brušenju kita; ako su po celom delu, verovatnije u brušenju punioca. To je urednička procena za usmeravanje provere.
+Na površini se vide fine linije ili kružni tragovi, najbolje u kosom svetlu i na tamnim, jednoličnim bojama. Tragovi prate oblik brušenja: kružni od ekscentarske brusilice, ravni od ručnog bloka. Urednička procena za usmeravanje provere: tragovi samo na mestu gde je bio kit mogu da ukažu na brušenje kita, a tragovi po celom delu na brušenje punioca.
 
 ## Mogući uzroci i kako se proveravaju
 
@@ -132,10 +127,6 @@ Svaka sledeća granulacija treba da ukloni tragove prethodne. Glasurit, brend ko
 ### Nekontrolisano brušenje
 
 Bez kontrolnog praha teško je videti da li su svi tragovi grublje granulacije uklonjeni; Glasurit u istom postupku za kontrolu brušenja navodi kontrolni prah (guide coat)[^glasurit-prirucnik]. Vidi [Kontrolni prah pri brušenju](/vodici/kontrolni-prah-pri-brusenju).
-
-### Podloga nedovoljno ili neravnomerno brušena
-
-baslac nedovoljno brušenu podlogu navodi i kao mogući uzrok narandžine kore[^baslac-orange-peel], što pokazuje da se stanje podloge prenosi na izgled laka. Proverite da li je cela zona ujednačeno izbrušena istom granulacijom.
 
 ## Sanacija
 

@@ -75,7 +75,7 @@ strucnaPotvrda:
 poslednjaProvera: 2026-10-08
 ponovniPregled: 2027-04-08
 ---
-Komprimovani vazduh iz kompresora nosi vlagu, a kod kompresora podmazivanih uljem i tragove ulja; uz to može da povuče čestice iz usisa i razvoda. Sve što je u vazduhu pištolj raspršuje zajedno sa bojom. SATA zato u uputstvu za jet X kao osnovne uslove za rad navodi čist komprimovani vazduh, dovoljnu količinu vazduha i ulazni pritisak prema tehničkim podacima pištolja, i crevo unutrašnjeg prečnika najmanje 9 mm[^sata-jetx-uputstvo]. Kao posledice nedovoljno pripremljenog vazduha SATA navodi uključke prašine, kondenzat i kratere od silikona[^sata-filteri].
+Opšte objašnjenje: komprimovani vazduh iz kompresora nosi vlagu, a kod kompresora podmazivanih uljem i tragove ulja; uz to može da povuče čestice iz usisa i razvoda, a sve što je u vazduhu pištolj raspršuje zajedno sa bojom. SATA u uputstvu za jet X kao osnovne uslove za rad navodi čist komprimovani vazduh, dovoljnu količinu vazduha i ulazni pritisak prema tehničkim podacima pištolja, i crevo unutrašnjeg prečnika najmanje 9 mm[^sata-jetx-uputstvo]. Kao posledice nedovoljno pripremljenog vazduha SATA navodi uključke prašine, kondenzat i kratere od silikona[^sata-filteri].
 
 ## Odakle voda, ulje i čestice
 
@@ -92,13 +92,13 @@ U uputstvima za SATA pištolje iz našeg programa zahtevi za vazduh stoje na po�
 - **crevo unutrašnjeg prečnika najmanje 9 mm**, otporno na rastvarače, antistatičko, neoštećeno i trajno otporno na pritisak od najmanje 10 bara[^sata-jetx-uputstvo];
 - **uzemljenje svih delova**[^sata-jetx-uputstvo].
 
-Čist vazduh nije potreban samo dok se laka. Uputstvo za SATAjet X 5500 traži da se pištolj, kanali za materijal, vazdušna kapa i čaša posle čišćenja produvaju čistim komprimovanim vazduhom, jer u suprotnom postoji rizik od korozije[^sata-x5500-uputstvo]. Vazduh sa kondenzatom tu radi suprotno od onoga što se želi.
+Čist vazduh nije potreban samo dok se laka. Uputstvo za SATAjet X 5500 traži da se pištolj, kanali za materijal, vazdušna kapa i čaša posle čišćenja produvaju čistim komprimovanim vazduhom, jer u suprotnom postoji rizik od korozije[^sata-x5500-uputstvo]. Opšte objašnjenje: vazduh sa kondenzatom tu radi suprotno od onoga što se želi.
 
-Filtere za komprimovani vazduh trenutno nemamo u programu. Izbor i ugradnju opreme za pripremu vazduha dogovorite sa proizvođačem ili serviserom kompresora, a zahteve za vazduh proverite u uputstvu Vašeg pištolja.
+Filteri za komprimovani vazduh nisu u našem programu. Izbor i ugradnju opreme za pripremu vazduha dogovorite sa proizvođačem ili serviserom kompresora, a zahteve za vazduh proverite u uputstvu Vašeg pištolja.
 
 ## Koliko vazduha troši pištolj
 
-Pištolj troši vazduh neprekidno dok je okidač povučen, pa kompresor mora da ga isporučuje bez pada pritiska na ulazu u pištolj. Potrošnju navodi uputstvo pištolja, obično u normalnim litrima u minuti (Nl/min) pri određenom ulaznom pritisku:
+Opšte objašnjenje: pištolj troši vazduh neprekidno dok je okidač povučen, pa kompresor mora da ga isporučuje bez pada pritiska na ulazu u pištolj. Potrošnju navodi uputstvo pištolja, obično u normalnim litrima u minuti (Nl/min) pri određenom ulaznom pritisku:
 
 | Pištolj | RP | HVLP |
 | --- | --- | --- |
@@ -107,7 +107,7 @@ Pištolj troši vazduh neprekidno dok je okidač povučen, pa kompresor mora da 
 
 Opšte objašnjenje: kapacitet kompresora iz kataloga često je podatak o usisu, a ne o vazduhu koji kompresor stvarno isporučuje pod pritiskom. Za poređenje sa potrošnjom pištolja treba Vam podatak o isporučenoj količini, koji daje proizvođač kompresora. Ako u radionici više alata radi istovremeno, njihova potrošnja se sabira. Razlika između RP i HVLP tehnologije objašnjena je u vodiču [HVLP, RP i ostale tehnologije pištolja](/vodici/vrste-pistolja-za-lakiranje).
 
-Kada kompresor ne stiže, pritisak na pištolju pada tokom prolaza. Isti simptom može da da i neodgovarajuće crevo ili spojnica, o čemu piše vodič [Crevo i spojnice za pištolj](/vodici/crevo-i-spojnice-za-pistolj). Kako se pritisak meri na samom pištolju, opisuje vodič [Podešavanje pištolja](/vodici/podesavanje-pistolja).
+Opšte objašnjenje: kada kompresor ne stiže, pritisak na pištolju pada tokom prolaza. Isti simptom može da da i neodgovarajuće crevo ili spojnica, o čemu piše vodič [Crevo i spojnice za pištolj](/vodici/crevo-i-spojnice-za-pistolj). Kako se pritisak meri na samom pištolju, opisuje vodič [Podešavanje pištolja](/vodici/podesavanje-pistolja).
 
 ## Kako se proverava da li je vazduh čist
 

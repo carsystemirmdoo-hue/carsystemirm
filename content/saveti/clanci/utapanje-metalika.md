@@ -98,8 +98,9 @@ razlogPrioriteta: Dopunjuje osnovni vodič teme konkretnim pitanjem; raspoređen
 status:
   istrazivanje: zavrseno
   pisanje: napisano
-  tehnickaProvera: nije-provereno
-  jezickaProvera: nije-provereno
+  tehnickaProvera: provereno
+  jezickaProvera: provereno
+napomenaProvere: "urednička provera (AI-asistirana) 2026-10-08: otvoreni baslac Blend into adjacent panel, Mazda 51K blend 03/2025, 45-W10 06/2023, R-M A 2530, A 2530X, A 2525, A 2520, A 1510 i ONYX HD (07/2026); svi koraci, pritisci i odnosi se poklapaju; ispravljena 1 jezička greška („snižanim“ → „sniženim“, 2 mesta)."
 strucnaPotvrda:
   potrebna: false
   status: nije-potrebno

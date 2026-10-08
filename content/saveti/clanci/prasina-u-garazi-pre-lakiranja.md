@@ -75,8 +75,9 @@ razlogPrioriteta: Dopunjuje osnovni vodič teme konkretnim pitanjem; raspoređen
 status:
   istrazivanje: zavrseno
   pisanje: napisano
-  tehnickaProvera: nije-provereno
-  jezickaProvera: nije-provereno
+  tehnickaProvera: provereno
+  jezickaProvera: provereno
+napomenaProvere: "urednička provera (AI-asistirana) 2026-10-08: otvoreni TDS Booth Mask Stick v.04, C.A.R.FIT Tack Coating, Coverall Black Suit V01, Coverall 2.0 V01 04/2026, Staub Stop Water V03, SATA dry jet 2 uputstvo; vrednosti se poklapaju; ispravke: tvrdnja „glavni izvor prašine“ preformulisana u opšte objašnjenje, preciziran zahtev za isključenje napajanja lampi i utičnica, preformulisan opis kombinezona."
 strucnaPotvrda:
   potrebna: false
   status: nije-potrebno
@@ -87,7 +88,7 @@ Prašina se smanjuje redosledom rada: brušenje se odvaja od lakiranja, prostor 
 
 ## 1. Odvojite brušenje od lakiranja
 
-Brušenje je glavni izvor sitne prašine u prostoru. Ako je moguće, brusi se na drugom mestu ili u drugom delu dana, a pre lakiranja se prostor očisti. Kada se brusi na suvo, prašina se odvodi usisavanjem na samom alatu; o tome piše vodič [Usisavanje prašine pri suvom brušenju](/vodici/usisavanje-prasine-pri-brusenju).
+Opšte objašnjenje: brušenje stvara mnogo sitne prašine, koja se dugo zadržava u vazduhu i na površinama. Ako je moguće, brusi se na drugom mestu ili u drugom delu dana, a pre lakiranja se prostor očisti. Kada se brusi na suvo, prašina se odvodi usisavanjem na samom alatu; o tome piše vodič [Usisavanje prašine pri suvom brušenju](/vodici/usisavanje-prasine-pri-brusenju).
 
 ## 2. Očistite prostor pre pripreme vozila
 
@@ -104,11 +105,11 @@ Dva premaza imaju različita uputstva:
 | Carsystem Booth Mask Stick | oko 1 l na 15 m², nanosi se i na staklo i svetla; nije pogodan za čelične i pocinkovane zidove kabine jer redovno pranje vodom može da izazove koroziju[^cs-booth-mask-stick-tds] |
 | C.A.R.FIT Tack Coating for Spray Booth | 8–10 m² po litru; za zidove od aluminijuma, čelika i pocinkovanog lima; pri temperaturi u kabini od 70–90 °C obnavlja se najmanje jednom mesečno[^carfit-tack-coating-tds] |
 
-Pre nanošenja Carsystem traži da se zidovi očiste ili obnove i potpuno osuše, a pre skidanja premaza vodom da se isključe sve lampe i utičnice u kabini[^cs-booth-mask-stick-tds]. Premaz se nanosi na čiste zidove: C.A.R.FIT ga ne predviđa za zidove koji su već izloženi preprašivanju[^carfit-tack-coating-tds]. Održavanje kabine i filtera opisuje tekst [Održavanje kabine za lakiranje i filteri](/vodici/filteri-kabine-odrzavanje).
+Pre nanošenja Carsystem traži da se zidovi očiste ili obnove i potpuno osuše, a pre skidanja premaza vodom da se isključi napajanje svih lampi i utičnica u kabini[^cs-booth-mask-stick-tds]. Premaz se nanosi na čiste zidove: C.A.R.FIT ga ne predviđa za zidove koji su već izloženi preprašivanju[^carfit-tack-coating-tds]. Održavanje kabine i filtera opisuje tekst [Održavanje kabine za lakiranje i filteri](/vodici/filteri-kabine-odrzavanje).
 
 ## 4. Obucite odeću koja ne otpušta vlakna
 
-Opšte objašnjenje: obična radna odeća i džemperi mogu da otpuštaju vlakna. Za lakiranje se nosi kombinezon namenjen tome. Carsystem za Coverall Black Suit navodi antistatičku oblogu, i da je kombinezon bez silikona, prašine i vlakana[^cs-coverall-black-tds]. Jednokratni Coverall 2.0 je zaštitni kombinezon kategorije III, tip 5 i 6, sa antistatičkom oblogom i bez lateksa i silikona[^cs-coverall-20-tds]. Kombinezon je i lična zaštita; šta još spada u nju, objašnjava vodič [Lična zaštitna oprema autolakirera](/vodici/licna-zastitna-oprema-autolakirera).
+Opšte objašnjenje: obična radna odeća i džemperi mogu da otpuštaju vlakna. Za lakiranje se nosi kombinezon namenjen tome. Carsystem za Coverall Black Suit navodi antistatičku oblogu i da kombinezon ne sadrži silikon i ne otpušta prašinu ni vlakna[^cs-coverall-black-tds]. Jednokratni Coverall 2.0 je zaštitni kombinezon kategorije III, tip 5 i 6, sa antistatičkom oblogom i bez lateksa i silikona[^cs-coverall-20-tds]. Kombinezon je i lična zaštita; šta još spada u nju, objašnjava vodič [Lična zaštitna oprema autolakirera](/vodici/licna-zastitna-oprema-autolakirera).
 
 ## 5. Ne podižite prašinu vazduhom
 

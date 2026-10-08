@@ -79,8 +79,9 @@ razlogPrioriteta: Rešava konkretan problem iz prakse; raspoređeno naizmenično
 status:
   istrazivanje: zavrseno
   pisanje: napisano
-  tehnickaProvera: nije-provereno
-  jezickaProvera: nije-provereno
+  tehnickaProvera: provereno
+  jezickaProvera: provereno
+napomenaProvere: "urednička provera (AI-asistirana) 2026-10-08: otvoreni Info R-M Clouding, ONYX HD 07/2026, AGILIS 07/2026, A 2530 07/2026, baslac Basecoat application i Blend into adjacent panel, SATA Practical advice; sve tvrdnje se poklapaju sa izvorima (uzroci, sito, 12–15 µm, završni sloj, istrošena dizna); bez ispravki."
 strucnaPotvrda:
   potrebna: false
   status: nije-potrebno

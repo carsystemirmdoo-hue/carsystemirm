@@ -82,17 +82,17 @@ Sistem čašica za jednokratnu upotrebu ima smisla kada često menjate nijanse i
 
 ## Kako sistem radi
 
-Klasična čaša za višekratnu upotrebu je kruta posuda koja se puni, prazni i pere. Sistem za jednokratnu upotrebu umesto toga koristi tanku unutrašnju čašicu i poklopac sa ugrađenim sitom, koji se posle upotrebe bacaju ili zatvaraju za čuvanje.
+Opšte objašnjenje: klasična čaša za višekratnu upotrebu je kruta posuda koja se puni, prazni i pere. Sistem za jednokratnu upotrebu umesto toga koristi tanku čašicu i poklopac sa ugrađenim sitom, koji se posle upotrebe bacaju ili zatvaraju za čuvanje.
 
 - **SATA RPS** se sastoji od samo tri dela: čašice, poklopca i sita. SATA ga opisuje kao sistem za mešanje, lakiranje, ponovnu upotrebu i čuvanje vodenih i rastvaračkih materijala. Čašice su zapremine 0,3, 0,6 i 0,9 l, sa ravnim ili utičnim sitom od 125 µm ili 200 µm, a priključak je QCC[^sata-rps-stranica].
 - **Carsystem CPS 3.0** ima tvrdu čašu, prsten za zaključavanje, savitljive čašice, poklopce sa filterom i zaptivne kapice. Tehnički list navodi zapremine od 180 ml do 850 ml i filter od 125 µm (providan) ili 190 µm (crven)[^carsystem-cps3-tds].
-- **Carsystem CPS 2.0** je stariji sistem sa prstenastim zatvaranjem, u zapreminama od 400 ml do 800 ml, sa poklopcima sa sitom od 125 µm[^carsystem-cps2-tds].
+- **Carsystem CPS 2.0** je sistem sa prstenastim zatvaranjem, u zapreminama od 400 ml do 800 ml, sa poklopcima sa sitom od 125 µm[^carsystem-cps2-tds].
 
 ## Šta proizvođači navode kao prednosti
 
 | Prednost | Izvor |
 | --- | --- |
-| mešanje i lakiranje iz iste čašice, bez presipanja | Carsystem CPS 3.0[^carsystem-cps3-tds]; SATA RPS ima i univerzalnu skalu za mešanje[^sata-rps-stranica] |
+| mešanje i lakiranje iz iste čašice, bez presipanja | Carsystem CPS 3.0[^carsystem-cps3-tds]; CPS 2.0 navodi mešanje u čašici za lakiranje[^carsystem-cps2-tds]; SATA RPS ima i univerzalnu skalu za mešanje[^sata-rps-stranica] |
 | manje čišćenja i brži prelaz na drugu nijansu | SATA RPS[^sata-rps-stranica] |
 | ujednačen dotok materijala i potpuno iskorišćenje materijala | SATA RPS[^sata-rps-stranica] |
 | direktan priključak na SATA pištolj, uz manje taloženja čestica u kanalu za materijal | SATA RPS[^sata-rps-stranica] |

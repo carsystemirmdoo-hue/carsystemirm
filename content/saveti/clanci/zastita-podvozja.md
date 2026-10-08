@@ -86,8 +86,9 @@ razlogPrioriteta: Dopunjuje osnovni vodič teme konkretnim pitanjem; raspoređen
 status:
   istrazivanje: zavrseno
   pisanje: napisano
-  tehnickaProvera: nije-provereno
-  jezickaProvera: nije-provereno
+  tehnickaProvera: provereno
+  jezickaProvera: provereno
+napomenaProvere: "urednička provera (AI-asistirana) 2026-10-08: otvoreni Carsystem KS-100 v.03, KS-550 v.04, KS-850 v.01 (sva tri izdanje 03/2021), KS-4000.2 V01 (06/2025), C.A.R.FIT Bitumen Underbody Protection (Version 1 / 0921), Cosmos Lac Antichip (Version 04, 9/7/2026) i stranica Stripping Disc; temperature, 75/135 min pri 400 µm mokrog sloja, 270–550 µm, 5–8 min, 80 %, razređivači i izuzeci za maskiranje se poklapaju. Ispravljeno (3): za KS-4000.2 dodato da list navodi i optimalnu temperaturu iznad 10 °C, uz napomenu da se ispod 15 °C ne preporučuje (unutrašnja razlika u listu prikazana, a ne razrešena); „može se prelakirati“ za KS-4000.2 precizirano (vodene boje, rastvarački sistemi tek posle potpunog otvrdnjavanja); rečenica o sprejevima označena kao opšte pravilo."
 strucnaPotvrda:
   potrebna: false
   status: nije-potrebno
@@ -103,7 +104,7 @@ Zaštita podvozja se nanosi na čistu, suvu površinu bez masti, ulja i rđe, u 
 | Carsystem KS-100 | tiksotropna smeša bitumena i smole za nanošenje četkom; dugotrajna zaštita podvozja[^cs-ks-100-tds] |
 | Carsystem KS-550 | bitumenska zaštita podvozja u spreju; nanosi se u više tankih slojeva[^cs-ks-550-tds] |
 | Carsystem KS-850 | zaštita podvozja na bazi voska u spreju; posle sušenja tvrd, elastičan voštani film[^cs-ks-850-tds] |
-| Carsystem KS-4000.2 | zaštita na vodenoj bazi, brzo se suši, može se prelakirati[^cs-ks-4000-2-tds] |
+| Carsystem KS-4000.2 | zaštita na vodenoj bazi, brzo se suši; prelakira se vodenim bojama, a rastvaračkim sistemima tek posle potpunog otvrdnjavanja[^cs-ks-4000-2-tds] |
 | C.A.R.FIT Bitumen Underbody Protection | zaštita na bazi voska i bitumena za podove, pragove i unutrašnje blatobrane[^carfit-bitumen-tds] |
 
 Za ivice i delove izložene udarima kamenčića postoje i posebne zaštite od udara kamenčića, na primer Cosmos Lac Antichip na bazi sintetičkih smola i gume, koji se može prelakirati[^cosmos-antichip-tds]. One su opisane u vodiču [Zaštita ivica, pragova i spojeva](/vodici/zastita-ivica-i-pragova).
@@ -117,7 +118,7 @@ Za ivice i delove izložene udarima kamenčića postoje i posebne zaštite od ud
 
 ## Nanošenje
 
-- **Temperatura.** KS-100 se nanosi na 15 °C[^cs-ks-100-tds], KS-850 na sobnoj temperaturi od +15 do +30 °C[^cs-ks-850-tds]. Za KS-4000.2 Carsystem ne preporučuje nanošenje ispod 15 °C i savetuje da proizvod i objekat budu oko 20 °C[^cs-ks-4000-2-tds]. C.A.R.FIT za svoju bitumensku zaštitu traži najmanje +10 °C i vlažnost vazduha najviše 80 %[^carfit-bitumen-tds].
+- **Temperatura.** KS-100 se nanosi na 15 °C[^cs-ks-100-tds], KS-850 na sobnoj temperaturi od +15 do +30 °C[^cs-ks-850-tds]. Za KS-4000.2 list u podacima o proizvodu navodi optimalnu temperaturu nanošenja iznad 10 °C, a u napomeni ne preporučuje nanošenje ispod 15 °C i savetuje da proizvod i objekat budu oko 20 °C[^cs-ks-4000-2-tds]; pridržavajte se strože vrednosti. C.A.R.FIT za svoju bitumensku zaštitu traži najmanje +10 °C i vlažnost vazduha najviše 80 %[^carfit-bitumen-tds].
 - **Debljina i broj slojeva.** KS-550 se nanosi u više tankih slojeva[^cs-ks-550-tds]. Za KS-4000.2 tehnički list daje debljinu suvog sloja od 270–550 µm[^cs-ks-4000-2-tds]. C.A.R.FIT navodi 1–2 nanošenja i odzračivanje od 5–8 minuta između slojeva[^carfit-bitumen-tds].
 - **Sušenje.** Zavisi od debljine i uslova. Za KS-550 tehnički list navodi suvo na dodir posle oko 75 minuta i potpuno suvo posle oko 135 minuta, na 20 °C i 65 % relativne vlažnosti, za mokar sloj od oko 400 µm[^cs-ks-550-tds]. Za KS-100 Carsystem navodi da sušenje zavisi od debljine i uslova i iznosi oko 12 sati[^cs-ks-100-tds].
 
@@ -128,7 +129,7 @@ Samo prema tehničkom listu tog proizvoda:
 - KS-100 se, prema tehničkom listu, može razrediti mineralnim rastvaračem (mineral spirits)[^cs-ks-100-tds].
 - KS-4000.2 se nanosi kako je isporučen, a po potrebi razređuje demineralizovanom vodom[^cs-ks-4000-2-tds].
 - C.A.R.FIT Bitumen Underbody Protection je spreman za prskanje[^carfit-bitumen-tds].
-- Za sprejeve razređivanje nije predviđeno.
+- Sprejevi su gotovi za upotrebu i ne razređuju se; ovo je opšte pravilo za aerosole.
 
 Benzin i nafta nisu navedeni ni u jednom od ovih listova. Pored toga što menjaju svojstva sloja na nepoznat način, benzin je i opasno zapaljiv; ovo je urednička napomena.
 
@@ -144,7 +145,7 @@ Tehnički listovi podvozja iz našeg programa ne opisuju posebno nanošenje prek
 
 ### Koja je razlika između bitumenske, voštane i vodene zaštite?
 
-Prema tehničkim listovima: bitumenske zaštite KS-100 i KS-550 navode zaštitu od kamenčića i soli i smanjenje buke[^cs-ks-100-tds][^cs-ks-550-tds]. Voštana KS-850 stvara tvrd, elastičan film i odbija vodu[^cs-ks-850-tds]. Vodena KS-4000.2 se brzo suši, može se prelakirati i razređuje se vodom[^cs-ks-4000-2-tds]. Izbor zavisi od toga da li deo treba prelakirati, kako se nanosi i kakva je stara zaštita na vozilu.
+Prema tehničkim listovima: bitumenske zaštite KS-100 i KS-550 navode zaštitu od kamenčića i soli i smanjenje buke[^cs-ks-100-tds][^cs-ks-550-tds]. Voštana KS-850 stvara tvrd, elastičan film i odbija vodu[^cs-ks-850-tds]. Vodena KS-4000.2 se brzo suši, može se prelakirati (rastvaračkim sistemima tek posle potpunog otvrdnjavanja) i po potrebi razređuje demineralizovanom vodom[^cs-ks-4000-2-tds]. Izbor zavisi od toga da li deo treba prelakirati, kako se nanosi i kakva je stara zaštita na vozilu.
 
 ### Treba li zaštita podvozja i u šupljinama?
 

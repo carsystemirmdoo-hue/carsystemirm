@@ -94,7 +94,7 @@ HVLP i RP su dve tehnologije raspršivanja kod pištolja na komprimovani vazduh.
 
 ## Šta se zapravo razlikuje
 
-Razlika se najbolje vidi u tehničkim podacima istog pištolja u dve izvedbe. Uputstvo za SATA jet X navodi za obe izvedbe isti radni opseg ulaznog pritiska, 0,5–2,4 bara, ali različitu potrošnju vazduha pri ulaznom pritisku od 2,0 bara: 325 Nl/min za RP i 430 Nl/min za HVLP[^sata-jetx-uputstvo]. To je i smisao naziva: HVLP pokreće veću količinu vazduha pod manjim pritiskom u vazdušnoj kapi.
+Razlika se najbolje vidi u tehničkim podacima istog pištolja u dve izvedbe. Uputstvo za SATA jet X navodi za obe izvedbe isti radni opseg ulaznog pritiska, 0,5–2,4 bara, ali različitu potrošnju vazduha pri ulaznom pritisku od 2,0 bara: 325 Nl/min za RP i 430 Nl/min za HVLP[^sata-jetx-uputstvo]. To odgovara i samom nazivu (opšte objašnjenje): HVLP pokreće veću količinu vazduha pod manjim pritiskom u vazdušnoj kapi.
 
 Kod HVLP izvedbe jet X uputstvo daje i granicu: do ulaznog pritiska od najviše 2,0 bara pištolj radi kao HVLP, a iznad 2,0 bara (pritisak u vazdušnoj kapi iznad 0,7 bara) svrstava se u kategoriju „compliant“[^sata-jetx-uputstvo]. Za SATAjet X 5500 uputstvo navodi slične granice i potrošnju vazduha od 290 Nl/min za RP i 430 Nl/min za HVLP[^sata-x5500-uputstvo]. Vrednosti važe za te modele, a za drugi pištolj čitaju se iz njegovog uputstva.
 
@@ -108,7 +108,7 @@ Rastojanje se razlikuje i od modela do modela. Za jet X uputstvo ne deli preporu
 
 ## Kako se oznake pojavljuju u tehničkom listu boje
 
-Proizvođači boja u tehničkom listu obično navode podatke za nanošenje posebno za svaku vrstu pištolja. R-M za bezbojni lak C 2A40 AirTOP daje dve kolone: za „Compliant Gravity Spray Gun“ ulazni pritisak 2 bara i diznu 1,2–1,4, a za „HVLP Spray Gun“ pritisak u vazdušnoj kapi 0,7 bara i diznu 1,3[^rm-c2a40-tds]. baslac za vodenu baznu boju 45 Line navodi samo HVLP pištolj: ulazni pritisak 2 bara, pritisak u vazdušnoj kapi 0,7 bara i diznu 1,4[^baslac-45-line-tds].
+Tehnički list boje može da navede podatke za nanošenje posebno za svaku vrstu pištolja. R-M za bezbojni lak C 2A40 AirTOP daje dve kolone: za „Compliant Gravity Spray Gun“ ulazni pritisak 2 bara i diznu 1,2–1,4, a za „HVLP Spray Gun“ pritisak u vazdušnoj kapi 0,7 bara i diznu 1,3[^rm-c2a40-tds]. baslac za vodenu baznu boju 45 Line navodi samo HVLP pištolj: ulazni pritisak 2 bara, pritisak u vazdušnoj kapi 0,7 bara i diznu 1,4[^baslac-45-line-tds].
 
 Iz toga slede dve stvari. Prvo, ako tehnički list za Vaš materijal daje podatke samo za jednu tehnologiju, to je tehnologija za koju je proizvođač boje opisao rezultat. Drugo, dizna i pritisak se ne prenose sa jedne tehnologije na drugu. SATA i sama upućuje na tehnički list proizvođača materijala kao mesto gde se nalazi preporuka za tehnologiju i diznu[^sata-saveti]. Izbor dizne objašnjava vodič [Izbor dizne prema materijalu](/vodici/izbor-dizne).
 
@@ -121,13 +121,13 @@ Oznake HVLP i RP govore o raspršivanju, a ne o tome kako materijal stiže do di
 - **sa donjom (visećom) čašom**: [SATAjet H](/proizvodi/satajet-h);
 - automatski pištolji i pištolji za airbrush, za posebne namene.
 
-Za popravke na vozilu u tekstovima proizvođača boja iz našeg programa navode se pištolji sa gornjom čašom, kao u primerima iz prethodnog odeljka[^rm-c2a40-tds].
+R-M u tehničkom listu za C 2A40 AirTOP jednu od kolona izričito naziva „Compliant Gravity Spray Gun“, odnosno pištolj sa gornjom čašom[^rm-c2a40-tds].
 
 ## Kako da izaberete
 
 1. **Krenite od materijala.** Pogledajte za koju vrstu pištolja i diznu tehnički list daje podatke.
 2. **Proverite vazduh.** HVLP izvedba troši više vazduha, pa kompresor i razvod moraju da obezbede potrebnu količinu pri potrebnom pritisku na pištolju. SATA u uputstvu za jet X kao osnovni uslov navodi potrošnju i preporučeni ulazni pritisak iz tehničkih podataka, čist vazduh i crevo unutrašnjeg prečnika najmanje 9 mm[^sata-jetx-uputstvo]. Više u vodiču [Kompresor i vazduh za lakiranje](/vodici/kompresor-i-vazduh-za-lakiranje).
-3. **Uzmite u obzir način rada.** HVLP traži kraće rastojanje, a RP dozvoljava veću brzinu, prema opisu proizvođača pištolja[^sata-pistolji].
+3. **Uzmite u obzir način rada.** SATA u praktičnim savetima za HVLP pištolje navodi kraće rastojanje nego za RP[^sata-saveti], a RP opisuje kao tehnologiju koja omogućava najveću brzinu rada[^sata-pistolji].
 4. **Odlučite koliko pištolja Vam treba.** Da li jedan pištolj može za sve materijale, razmatra vodič [Jedan pištolj ili poseban za prajmer, bazu i lak](/vodici/jedan-pistolj-ili-vise).
 
 SATA pištolje iz našeg programa naći ćete na strani [SATA](/brendovi/sata).
@@ -136,7 +136,7 @@ SATA pištolje iz našeg programa naći ćete na strani [SATA](/brendovi/sata).
 
 ### Šta znači prenos materijala?
 
-Prenos materijala pokazuje koliki deo raspršenog materijala zaista završi na objektu, a koliki ode u vazduh kao preprašivanje. Što je veći, manje materijala se troši za isti sloj. SATA u čestim pitanjima navodi da savremeni HVLP i optimizovani RP pištolji imaju prenos materijala veći od 65 %[^sata-faq]. Prenos ne zavisi samo od pištolja: rastojanje, pritisak i način vođenja takođe utiču na to koliko materijala ostane na površini.
+Prenos materijala pokazuje koliki deo raspršenog materijala zaista završi na objektu, a koliki ode u vazduh kao preprašivanje. Što je veći, manje materijala se troši za isti sloj. SATA u čestim pitanjima navodi da savremeni HVLP i optimizovani RP pištolji imaju prenos materijala veći od 65 %[^sata-faq]. Kao opšte objašnjenje: prenos ne zavisi samo od pištolja, jer rastojanje, pritisak i način vođenja takođe utiču na to koliko materijala ostane na površini.
 
 ### Šta znači oznaka „compliant“ u tehničkom listu?
 
@@ -144,4 +144,4 @@ U tehničkom listu R-M „Compliant Gravity Spray Gun“ je posebna kolona pored
 
 ### Šta je sa LVLP i drugim oznakama?
 
-U izvorima koje navodimo SATA svoje pištolje za lakiranje vozila svrstava u RP i HVLP. Oznake drugih proizvođača ne opisujemo, jer za njih nemamo proveren izvor. Ako imate pištolj sa drugom oznakom, uporedite ulazni pritisak, potrošnju vazduha i preporučeno rastojanje iz njegovog uputstva sa podacima iz tehničkog lista boje.
+Na stranici pištolja za lakiranje SATA navodi dve tehnologije dizni, HVLP i RP[^sata-pistolji]. Oznake drugih proizvođača ne opisujemo, jer za njih nemamo proveren izvor. Ako imate pištolj sa drugom oznakom, uporedite ulazni pritisak, potrošnju vazduha i preporučeno rastojanje iz njegovog uputstva sa podacima iz tehničkog lista boje.

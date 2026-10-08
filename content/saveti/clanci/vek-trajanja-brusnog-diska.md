@@ -73,6 +73,12 @@ izvori:
     pristupljeno: 2026-10-08
     tip: katalog-proizvodjaca
     napomena: "ProFlex Jupiter str. 12–13; SW20 str. 28–29; Pad Saver str. 34–35; blokovi sa usisavanjem str. 36–39; Fine Block str. 40–41."
+  - id: cs-elastic-tds
+    naziv: "Carsystem, Technical Data Sheet Elastic weiss, polyester fine putty white"
+    dokument: /documents/products/carsystem/carsystem-git-elastic-weiss-tds.pdf
+    verzija: "03/2021"
+    pristupljeno: 2026-10-08
+    tip: tehnicki-list
   - id: carfit-color-net
     naziv: "C.A.R.FIT (August Handel GmbH), Color Net Disc — stranica proizvoda"
     url: https://carfitrepair.com/en/color-net-disc-netzschleifscheibe/
@@ -92,7 +98,7 @@ strucnaPotvrda:
 poslednjaProvera: 2026-10-08
 ponovniPregled: 2027-04-08
 ---
-Disk treba zameniti kada više ne seče ravnomerno: kada se za isti trag mora jače pritiskati ili duže brusiti, kada je površina diska zapunjena prašinom koja se ne skida, ili kada je disk oštećen. Proizvođači ne daju broj popravki ni minuta posle kojih se disk menja, jer vek zavisi od materijala, granulacije, pritiska i usisavanja. Ono što navode jeste šta vek produžava: za Carsystem F.19 to je poseban raspored rupa koji daje jače usisavanje[^cs-f19-tds], a za F.23 Ceramic keramičko zrno i stearatni sloj protiv zapunjavanja[^cs-f23-tds].
+Disk treba zameniti kada više ne seče ravnomerno: kada se za isti trag mora jače pritiskati ili duže brusiti, kada je površina diska zapunjena prašinom koja se ne skida, ili kada je disk oštećen. Pregledani dokumenti proizvođača ne navode broj popravki ni minuta posle kojih se disk menja; vek zavisi od materijala, granulacije, pritiska i usisavanja. Ono što navode jeste šta vek produžava: za Carsystem F.19 to je poseban raspored rupa koji daje jače usisavanje[^cs-f19-tds], a za F.23 Ceramic keramičko zrno i stearatni sloj protiv zapunjavanja[^cs-f23-tds].
 
 ## Znaci da disk više ne radi kako treba
 
@@ -130,4 +136,4 @@ Kod finih filmskih abraziva proizvođač to i predviđa. Za ProFlex Jupiter disk
 
 ### Produžava li mokro brušenje vek abraziva?
 
-Kod mokrog brušenja laka voda odnosi prašinu sa abraziva. Carsystem za vodu za brušenje SW20 navodi da produžava vek abraziva i poboljšava njegovo kvašenje[^cs-sw20-tds]. To ne znači da se svaki materijal sme brusiti mokro: kit se, na primer, brusi suvo. Vidi vodič [Suvo ili mokro brušenje](/vodici/suvo-ili-mokro-brusenje).
+Kod mokrog brušenja laka voda odnosi prašinu sa abraziva. Carsystem za vodu za brušenje SW20 navodi da produžava vek abraziva i poboljšava njegovo kvašenje[^cs-sw20-tds]. To ne znači da se svaki materijal sme brusiti mokro: način brušenja određuje tehnički list materijala. Za Carsystem Elastic weiss kit, na primer, tehnički list navodi samo suvo brušenje[^cs-elastic-tds]. Vidi vodič [Suvo ili mokro brušenje](/vodici/suvo-ili-mokro-brusenje).

@@ -15,7 +15,7 @@ namera: informativna
 dodatnaPitanja:
   - Zašto se mehurići rđe šire ispod laka?
   - Šta je kontaktna korozija?
-  - Štiti li cinkani sloj i kada je oštećen?
+  - Da li cinkov sloj štiti čelik i kada je oštećen?
 poreklopitanja:
   tip: pronadjeno-u-izvoru
   napomena: "Opšte pitanje kako zaštititi auto od korozije viđeno je kao naslov teme na forumu Krstarica (q074 u questions.json); pitanje o mehurima rđe ispod laka je urednički predlog q161."
@@ -67,8 +67,9 @@ razlogPrioriteta: Osnovni vodič teme — ulaz u tematsku celinu, objavljuje se 
 status:
   istrazivanje: zavrseno
   pisanje: napisano
-  tehnickaProvera: nije-provereno
-  jezickaProvera: nije-provereno
+  tehnickaProvera: provereno
+  jezickaProvera: provereno
+napomenaProvere: "urednička provera (AI-asistirana) 2026-10-08: otvoreni NIH ORF Technical Bulletin Issue 161 (June 2026), AGA „What is Cathodic Protection?“, rad Vetere i Romagnoli (CIC), Carsystem Zink-Spray TDS v.02 (03/2021) i Cosmos Lac Alu-Zinc TDS Version 02 (18/06/2026); sve citirane tvrdnje se poklapaju. Ispravljeno (6): NIH bilten i AGA pripisani kao stručni izvori van programa pisani za građevinske objekte, odnosno toplo cinkovanje; mere protiv galvanske korozije usklađene sa biltenom; zapremina proizvoda korozije, kretanje vlage ispod laka i probijena korozija iznutra označeni kao opšte objašnjenje; čelik/aluminijum na automobilu označen kao opšte objašnjenje; jezik: „cinkani“ → „cinkov“, „ljuspanje“ → „ljuštenje“, „vruće cinkovan“ → „toplo cinkovan“."
 strucnaPotvrda:
   potrebna: false
   status: nije-potrebno
@@ -79,7 +80,7 @@ Korozija na karoseriji se u praksi prepoznaje po tome gde je i koliko je duboka.
 
 ## Šta je korozija, ukratko
 
-Opšte objašnjenje: čelik korodira kada su na njegovoj površini istovremeno prisutni vlaga i kiseonik, a so sa puta i prljavština proces ubrzavaju jer zadržavaju vlagu i povećavaju provodljivost vode. Lak, prajmer i cinkani sloj štite čelik tako što ga odvajaju od okoline. Kada se ta zaštita probije, korozija počinje na mestu oštećenja.
+Opšte objašnjenje: čelik korodira kada su na njegovoj površini istovremeno prisutni vlaga i kiseonik, a so sa puta i prljavština proces ubrzavaju jer zadržavaju vlagu i povećavaju provodljivost vode. Lak, prajmer i cinkov sloj štite čelik tako što ga odvajaju od okoline. Kada se ta zaštita probije, korozija počinje na mestu oštećenja.
 
 Zato je priprema važna. U stručnom radu o tretmanima zarđalih površina autori navode da dobra boja nanesena na kontaminiranu ili zarđalu površinu rano otkazuje i da je potpuno uklanjanje rđe važan uslov trajnosti premaza[^vetere-tannins].
 
@@ -88,7 +89,7 @@ Zato je priprema važna. U stručnom radu o tretmanima zarđalih površina autor
 | Oblik | Kako izgleda | Šta obično znači za popravku |
 | --- | --- | --- |
 | Površinska rđa | narandžasto-smeđi sloj na golom metalu, na ogrebotini ili udaru kamenčića; lim je ravan i čvrst | brušenje do čistog metala i zaštita |
-| Korozija ispod laka | mehurići, ispupčenja ili ljuspanje laka, često oko oštećenja ili ivice | otvaranje celog zahvaćenog polja, do zdravog metala |
+| Korozija ispod laka | mehurići, ispupčenja ili ljuštenje laka, često oko oštećenja ili ivice | otvaranje celog zahvaćenog polja, do zdravog metala |
 | Probijena korozija | rupe, tanak i krt lim, rđa koja se lomi u slojevima | zamena ili limarska popravka dela |
 | Kontaktna (galvanska) korozija | rđa ili beli talog na spoju različitih metala, oko zavrtnjeva i nosača | uklanjanje korozije i razdvajanje metala, prema uputstvu proizvođača vozila |
 
@@ -100,19 +101,19 @@ Javlja se brzo na golom čeliku, na primer posle brušenja ili na mestu udara ka
 
 ### Korozija ispod laka
 
-Počinje na mestu gde je vlaga stigla do metala: ogrebotina, udar kamenčića, ivica dela ili spoj limova. Proizvodi korozije zauzimaju više prostora od metala iz kog su nastali, pa podižu lak i stvaraju mehuriće. Ispod laka korozija napreduje i tamo gde površina još izgleda zdravo, pa je oštećenje veće nego što izgleda. Šta se tada radi, objašnjava vodič [Mehuri rđe ispod laka](/vodici/mehuri-rdje-ispod-laka).
+Počinje na mestu gde je vlaga stigla do metala: ogrebotina, udar kamenčića, ivica dela ili spoj limova. Opšte objašnjenje: proizvodi korozije zauzimaju više prostora od metala iz kog su nastali, pa podižu lak i stvaraju mehuriće. Ispod laka korozija napreduje i tamo gde površina još izgleda zdravo, pa je oštećenje veće nego što izgleda. Šta se tada radi, objašnjava vodič [Mehuri rđe ispod laka](/vodici/mehuri-rdje-ispod-laka).
 
 ### Probijena korozija
 
-Često kreće iznutra: iz šupljina, pragova, duplih limova i spojeva u kojima se zadržava vlaga. Kada se pojavi spolja, lim je obično već stanjen. Takvo mesto se ne popravlja kitom ni bojom; vidi [Može li kit preko rđe](/vodici/kit-preko-rdje) i [Zaštita šupljina karoserije](/vodici/zastita-supljina-karoserije).
+Opšte objašnjenje: često kreće iznutra, iz šupljina, pragova, duplih limova i spojeva u kojima se zadržava vlaga. Kada se pojavi spolja, lim je obično već stanjen. Takvo mesto se ne popravlja kitom ni bojom; vidi [Može li kit preko rđe](/vodici/kit-preko-rdje) i [Zaštita šupljina karoserije](/vodici/zastita-supljina-karoserije).
 
 ### Kontaktna (galvanska) korozija
 
-Nastaje kada su dva različita metala električno spojena i izložena elektrolitu, na primer vodi, kondenzu ili solima. Manje plemenit metal postaje anoda i korodira brže, a plemenitiji je zaštićen[^nih-galvanic-corrosion]. Ista tehnička publikacija navodi da mala anoda spojena sa velikom katodom znatno povećava gustinu struje korozije[^nih-galvanic-corrosion]. Na automobilu je to tema kod spojeva čelika i aluminijuma i kod zavrtnjeva od drugog metala.
+Tehnički bilten kancelarije za objekte američkog NIH-a (Office of Research Facilities), stručni izvor pisan za projektovanje i izgradnju objekata, opisuje je ovako: nastaje kada su dva različita metala električno spojena i izložena elektrolitu, na primer vodi, kondenzu ili solima; manje plemenit metal postaje anoda i korodira brže, a plemenitiji je zaštićen[^nih-galvanic-corrosion]. Isti bilten navodi da mala anoda spojena sa velikom katodom znatno povećava gustinu struje korozije[^nih-galvanic-corrosion]. Princip je opšti, pa je na automobilu to tema kod spojeva čelika i aluminijuma i kod zavrtnjeva od drugog metala; to je opšte objašnjenje, a ne podatak iz biltena.
 
-## Zašto je cinkani sloj poseban slučaj
+## Zašto je cinkov sloj poseban slučaj
 
-Cink štiti čelik na dva načina: kao zaštitni sloj i katodno, žrtvujući sebe kada je sloj oštećen. Američko udruženje za cinkovanje objašnjava da katodna zaštita počinje kada ogrebotina otkrije čelik i kada vlaga napravi elektrolit između cinka i čelika[^aga-cathodic-protection]. To je opšte objašnjenje za vruće cinkovan čelik; koliko dugo i na kolikoj površini to radi na karoseriji, zavisi od debljine sloja i uslova, pa se ne prenosi kao pravilo.
+Cink štiti čelik na dva načina: kao zaštitni sloj i katodno, žrtvujući sebe kada je sloj oštećen. American Galvanizers Association, udruženje industrije toplog cinkovanja i stručni izvor van našeg programa, objašnjava da katodna zaštita počinje kada ogrebotina otkrije čelik i kada vlaga iz okoline napravi elektrolit između cinka i čelika[^aga-cathodic-protection]. To objašnjenje se odnosi na toplo cinkovan čelik; koliko dugo i na kolikoj površini to radi na karoseriji, zavisi od debljine sloja i uslova, pa se ne prenosi kao pravilo.
 
 Na istom principu rade i sprejevi za hladno cinkovanje. Carsystem Zink-Spray je, prema tehničkom listu, sprej za hladno cinkovanje metalnih podloga[^cs-zinc-spray-tds], a Cosmos Lac Alu-Zinc navodi i popravku pocinkovanih površina[^cosmos-alu-zinc-tds]. Kada se koriste, objašnjavaju vodiči [Zaštita lima i šavova posle varenja](/vodici/zastita-lima-posle-varenja) i [Pocinkovani lim](/vodici/pocinkovani-lim-priprema).
 
@@ -124,12 +125,12 @@ Ovaj tekst opisuje oblike korozije opšte i služi za prepoznavanje. Ne zamenjuj
 
 ### Zašto se mehurići rđe šire ispod laka?
 
-Zato što korozija ne staje na mestu gde je počela. Vlaga se kreće duž granice između metala i laka, a proizvodi korozije podižu lak dalje od prvobitnog oštećenja. Zbog toga se popravka ne svodi na vidljive mehuriće nego na celo polje do zdravog metala, kako opisuje vodič [Uklanjanje rđe sa karoserije](/vodici/uklanjanje-rdje-sa-karoserije).
+Opšte objašnjenje: korozija ne staje na mestu gde je počela. Vlaga se kreće duž granice između metala i laka, a proizvodi korozije podižu lak dalje od prvobitnog oštećenja. Zbog toga se popravka ne svodi na vidljive mehuriće nego na celo polje do zdravog metala, kako opisuje vodič [Uklanjanje rđe sa karoserije](/vodici/uklanjanje-rdje-sa-karoserije).
 
 ### Šta je kontaktna korozija?
 
-To je drugo ime za galvansku koroziju: ubrzana korozija manje plemenitog metala na spoju sa plemenitijim, uz vlagu. Tehnička publikacija NIH-a kao mere navodi izbor sličnih metala, prekidanje električnog spoja izolacionim podloškama i zaptivkama, i zaštitne premaze tamo gde se metali ne mogu razdvojiti[^nih-galvanic-corrosion].
+To je drugo ime za galvansku koroziju: ubrzana korozija manje plemenitog metala na spoju sa plemenitijim, uz vlagu. Tehnički bilten NIH-a, pisan za građevinske objekte, kao mere navodi izbor sličnih metala, prekidanje električnog spoja neprovodnim zaptivkama, izolacionim čaurama i spojnicama, i zaštitne premaze tamo gde se metali ne mogu razdvojiti[^nih-galvanic-corrosion]. Za spojeve na vozilu važi uputstvo proizvođača vozila.
 
-### Štiti li cinkani sloj i kada je oštećen?
+### Da li cinkov sloj štiti čelik i kada je oštećen?
 
-Da, u određenoj meri, jer cink katodno štiti čelik na mestu ogrebotine dok ima vlage i cinka u okolini[^aga-cathodic-protection]. To nije razlog da se oštećenje ostavi: mesto se priprema i štiti kao svaki drugi metal, prema vodiču [Pocinkovani lim: priprema i izbor podloge](/vodici/pocinkovani-lim-priprema).
+Da, u određenoj meri: prema objašnjenju American Galvanizers Association za toplo cinkovan čelik, cink katodno štiti čelik na mestu ogrebotine[^aga-cathodic-protection]. To nije razlog da se oštećenje ostavi: mesto se priprema i štiti kao svaki drugi metal, prema vodiču [Pocinkovani lim: priprema i izbor podloge](/vodici/pocinkovani-lim-priprema).

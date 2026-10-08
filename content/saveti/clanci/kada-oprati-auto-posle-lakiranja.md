@@ -69,8 +69,9 @@ razlogPrioriteta: Rešava konkretan problem iz prakse; raspoređeno naizmenično
 status:
   istrazivanje: zavrseno
   pisanje: napisano
-  tehnickaProvera: nije-provereno
-  jezickaProvera: nije-provereno
+  tehnickaProvera: ispravke-potrebne
+  jezickaProvera: provereno
+napomenaProvere: "urednička provera (AI-asistirana) 2026-10-08: otvoreni TDS CS 2K Clear VOC 420 V09, CC 19 AS V01, C.A.R.FIT 2K Ultra HS v2/0325, C-Wax C-80 V01, Nano Carnauba Wax v.01; svi podaci se poklapaju (7 dana, 5–7 dana, 25 min/60 °C + 5 dana, < 30 °C, 3–5 min); bez ispravki. Oznaka za stručnu potvrdu je opravdana: rok za pranje, perionicu i vosak nijedan izvor ne navodi."
 strucnaPotvrda:
   potrebna: true
   razlog: "Nijedan pregledani tehnički list laka ili voska iz programa ne navodi rok za prvo pranje, automatsku perionicu ili nanošenje voska na sveže lakiranu površinu. Tekst daje samo podatke o potpunoj tvrdoći i upućuje na radionicu; preporuku o pranju i vosku treba da potvrdi stručna osoba ili proizvođač laka."

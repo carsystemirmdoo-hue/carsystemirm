@@ -85,8 +85,9 @@ razlogPrioriteta: Dopunjuje osnovni vodič teme konkretnim pitanjem; raspoređen
 status:
   istrazivanje: zavrseno
   pisanje: napisano
-  tehnickaProvera: nije-provereno
-  jezickaProvera: nije-provereno
+  tehnickaProvera: provereno
+  jezickaProvera: provereno
+napomenaProvere: "urednička provera (AI-asistirana) 2026-10-08: otvoreni R-M Digital color search i Color Competence, Info R-M ScanR, ViewR, Kohinoor i Refinity Scan, baslac e-finder star (vest 17.04.2023 i stranica), Color Chips, Metamerism; tvrdnje se poklapaju; ispravke: dodati izvori za module ViewR i Kohinoor (ranije bez sopstvenog URL-a), jezički preciziran opis Refinity modula."
 strucnaPotvrda:
   potrebna: false
   status: nije-potrebno

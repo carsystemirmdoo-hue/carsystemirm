@@ -88,7 +88,7 @@ strucnaPotvrda:
 poslednjaProvera: 2026-10-08
 ponovniPregled: 2027-04-08
 ---
-Kada bezbojni lak nekoliko dana posle nanošenja postane mutan ili „upadne“ (engl. dieback), mogući uzroci su u nanošenju i sušenju, a ne u starenju laka. baslac za gubitak sjaja navodi predebeo sloj, pogrešnu mešavinu učvršćivača i razređivača, prerano poliranje, preranu izloženost teškim uslovima, slabu cirkulaciju vazduha u kabini tokom sušenja i prekinuto sušenje na povišenoj temperaturi[^baslac-loss-gloss]. Isti izvor kao prvu popravku navodi poliranje, a ako sjaj ne vrati, ponovno lakiranje[^baslac-loss-gloss].
+Kada bezbojni lak nekoliko dana posle nanošenja postane mutan ili „upadne“ (engl. dieback), mogući uzroci se pre traže u nanošenju i sušenju nego u starenju laka. baslac za gubitak sjaja navodi predebeo sloj, pogrešnu mešavinu učvršćivača i razređivača, prerano poliranje, preranu izloženost teškim uslovima, slabu cirkulaciju vazduha u kabini tokom sušenja i prekinuto sušenje na povišenoj temperaturi[^baslac-loss-gloss]. Isti izvor kao prvu popravku navodi poliranje, a ako sjaj ne vrati, ponovno lakiranje[^baslac-loss-gloss].
 
 ## Kako izgleda i po čemu se razlikuje
 
@@ -125,7 +125,7 @@ Kako se faze sušenja čitaju, objašnjava vodič [Faze sušenja iz tehničkog l
 
 baslac navodi da se gubitak sjaja prvo pokuša ukloniti poliranjem abrazivnom pastom i završno finom pastom, a ako to ne vrati sjaj, zahvaćena mesta se ponovo lakiraju[^baslac-loss-gloss]. Pre poliranja lak mora biti osušen prema tehničkom listu; prerano poliranje je i samo na listu mogućih uzroka[^baslac-loss-gloss]. Postupak opisuje vodič [Poliranje posle lakiranja](/vodici/poliranje-posle-lakiranja-osnove).
 
-Ako se sjaj posle poliranja ponovo izgubi, uzrok je verovatnije u samom sloju, na primer u zaostalom rastvaraču, nego na površini. To je urednička procena; u tom slučaju sačekajte i obratite se tehničkoj podršci pre ponovnog lakiranja.
+Urednička procena: ako se sjaj posle poliranja ponovo izgubi, uzrok može biti u samom sloju, na primer u zaostalom rastvaraču, a ne samo na površini. U tom slučaju se pre ponovnog lakiranja obratite tehničkoj podršci.
 
 ## Ograničenja
 

@@ -109,15 +109,16 @@ razlogPrioriteta: Dopunjuje osnovni vodič teme konkretnim pitanjem; raspoređen
 status:
   istrazivanje: zavrseno
   pisanje: napisano
-  tehnickaProvera: nije-provereno
-  jezickaProvera: nije-provereno
+  tehnickaProvera: provereno
+  jezickaProvera: provereno
+napomenaProvere: "urednička provera (AI-asistirana) 2026-10-08: otvoreni Carsystem Zink-Spray TDS i TM v.02 (03/2021), 1K Easy Primer v.2 (03/2021), KS-50.2 V01 (02/2025), UNIFLEX MS V07 (07/2025), KS-250 V05 (05/2024), C.A.R.FIT Zinc Spray, Cosmos Lac Zinc Maximum, Alu-Zinc i Anti-Spatter, AGA stranica; 490 °C / 350 °C, P80–P240, 24 h, 15–25 °C, dva sata za UNIFLEX MS i namene se poklapaju. Ispravljeno (4): za Zink-Spray dodato da engleski list navodi samo „painting over spot welds“, a da je oznaka za tačkasto varenje iz nemačkog lista; uvodno nabrajanje usklađeno (tri koraka spolja i vosak iznutra); tvrdnja da korozija zatvorenih profila „često“ kreće iznutra označena kao opšte objašnjenje; AGA pripisan kao stručni izvor van programa za toplo cinkovan čelik."
 strucnaPotvrda:
   potrebna: false
   status: nije-potrebno
 poslednjaProvera: 2026-10-08
 ponovniPregled: 2027-04-08
 ---
-Lim posle varenja se štiti u tri sloja zaštite: provodljivim cink prajmerom na površinama koje se spajaju tačkastim varenjem, prajmerom za goli metal na očišćenom šavu i okolini, i zaptivnom masom na spojevima i preklopima, a unutrašnja strana se na kraju štiti voskom za šupljine. Varenjem nastaje goli i oštećen metal sa obe strane lima, pa zaštita mora da stigne i do mesta koja se posle ne vide. Za noseće delove i strukturne spojeve uputstvo proizvođača vozila za popravku ima prednost nad ovim opštim redosledom.
+Lim posle varenja se spolja štiti u tri koraka: provodljivim cink prajmerom na površinama koje se spajaju tačkastim varenjem, prajmerom za goli metal na očišćenom šavu i okolini, i zaptivnom masom na spojevima i preklopima, a unutrašnja strana se na kraju štiti voskom za šupljine. Varenjem nastaje goli i oštećen metal sa obe strane lima, pa zaštita mora da stigne i do mesta koja se posle ne vide. Za noseće delove i strukturne spojeve uputstvo proizvođača vozila za popravku ima prednost nad ovim opštim redosledom.
 
 ## Zašto su šavovi i preklopi osetljivi
 
@@ -129,7 +130,7 @@ To je cink premaz koji ostaje na površinama koje se spajaju tačkastim varenjem
 
 | Proizvod | Šta tehnički list navodi |
 | --- | --- |
-| Carsystem Zink-Spray | sprej za hladno cinkovanje na bazi cinka i epoksida, električno provodljiv; nemački list ga navodi i kao boju za tačkasto varenje (Punktschweißfarbe)[^cs-zinc-spray-tds][^cs-zinc-spray-tm] |
+| Carsystem Zink-Spray | sprej za hladno cinkovanje na bazi cinka i epoksida, električno provodljiv; engleski list navodi da je pogodan i za premazivanje tačkastih varova („painting over spot welds“), a nemački ga navodi kao boju za tačkasto varenje (Punktschweißfarbe)[^cs-zinc-spray-tds][^cs-zinc-spray-tm] |
 | C.A.R.FIT Zinc Spray | za hladno cinkovanje i kao prajmer kroz koji se vari pri kontaktnom (tačkastom) varenju[^carfit-zinc-spray-tds] |
 | Cosmos Lac Zinc Maximum | sprej bogat cinkom za hladno cinkovanje; proizvođač ga navodi kao pogodan za zaštitu zavarenih površina[^cosmos-zinc-maximum-tds] |
 | Cosmos Lac Alu-Zinc | cink i aluminijum, za zaštitu varova i popravku pocinkovanih površina[^cosmos-alu-zinc-tds] |
@@ -158,7 +159,7 @@ Kod obe mase proizvođač preporučuje probu prianjanja i kompatibilnosti sa boj
 
 ### Da li je cink sprej bolji od obične temeljne boje na sveže zavarenom limu?
 
-Nemaju istu namenu, pa ih ne poredimo kao „bolji“ i „lošiji“. Cink premaz štiti čelik i katodno, kao žrtvovani metal na mestu gde je čelik otkriven[^aga-cathodic-protection], i postoji u izvedbi kroz koju se vari. Prajmer za goli metal je podloga za dalje slojeve sistema. Da li preko cink spreja sme prajmer, punilac ili kit, proverite u tehničkim listovima oba proizvoda; listovi cink sprejeva iz ovog teksta o tome daju malo podataka. C.A.R.FIT, na primer, za Zinc Spray navodi samo da se može ponovo prelakirati posle 24 h[^carfit-zinc-spray-tds].
+Nemaju istu namenu, pa ih ne poredimo kao „bolji“ i „lošiji“. Cink premaz štiti čelik i katodno, kao žrtvovani metal na mestu gde je čelik otkriven; tako to za toplo cinkovan čelik objašnjava American Galvanizers Association, stručno udruženje van našeg programa[^aga-cathodic-protection], i postoji u izvedbi kroz koju se vari. Prajmer za goli metal je podloga za dalje slojeve sistema. Da li preko cink spreja sme prajmer, punilac ili kit, proverite u tehničkim listovima oba proizvoda; listovi cink sprejeva iz ovog teksta o tome daju malo podataka. C.A.R.FIT, na primer, za Zinc Spray navodi samo da se može ponovo prelakirati posle 24 h[^carfit-zinc-spray-tds].
 
 ### Koliko je cink sprej otporan na toplotu?
 
@@ -166,4 +167,4 @@ Zavisi od proizvoda: Carsystem za Zink-Spray navodi do 490 °C[^cs-zinc-spray-td
 
 ### Treba li zaštititi šav i sa unutrašnje strane praga?
 
-Da, jer se korozija na zatvorenim profilima često razvija iznutra. Pragovi i spojevi posebno su obrađeni u vodiču [Zaštita ivica, pragova i spojeva](/vodici/zastita-ivica-i-pragova).
+Da. Opšte objašnjenje: na zatvorenim profilima korozija se često razvija iznutra, gde se zadržava vlaga. Pragovi i spojevi posebno su obrađeni u vodiču [Zaštita ivica, pragova i spojeva](/vodici/zastita-ivica-i-pragova).

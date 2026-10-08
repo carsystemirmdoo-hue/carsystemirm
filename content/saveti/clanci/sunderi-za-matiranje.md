@@ -76,13 +76,13 @@ strucnaPotvrda:
 poslednjaProvera: 2026-10-08
 ponovniPregled: 2027-04-08
 ---
-Flis i sunđerasti abrazivi koriste se tamo gde ravan papir ili disk ne može da prati oblik: na uglovima, ivicama, zaobljenjima, u žlebovima i udubljenjima. Carsystem flis V.19 u obliku jastučića i rolne namenjuje matiranju uglova, zaobljenja i oštrih ivica pre nanošenja punioca ili boje[^cs-v19-pad-tds]. Na velikim ravnim površinama ravnomerniji i brži rezultat po pravilu daje disk na brusilici. Oznake finoće čitajte uvek u okviru jednog proizvođača, jer boja nije zajednički standard.
+Flis i sunđerasti abrazivi koriste se tamo gde ravan papir ili disk ne može da prati oblik: na uglovima, ivicama, zaobljenjima, u žlebovima i udubljenjima. Carsystem flis V.19 u obliku jastučića i rolne namenjuje matiranju uglova, zaobljenja i oštrih ivica pre nanošenja punioca ili boje[^cs-v19-pad-tds][^cs-katalog-2026]. Na velikim ravnim površinama ravnomerniji i brži rezultat po pravilu daje disk na brusilici. Oznake finoće čitajte uvek u okviru jednog proizvođača, jer boja nije zajednički standard.
 
 ## Flis i sunđer nisu isto
 
-**Flis (sunđer za matiranje, engl. scuff pad)** je netkani materijal sa trodimenzionalnom strukturom. Za V.19 Carsystem navodi da sintetička smola prožima vlakno i raspoređuje brusno zrno kroz ceo flis, a kao materijal najlonsko vlakno i zrno aluminijum-oksida[^cs-v19-pad-tds]. C.A.R.FIT svoj flis opisuje kao najlonsko vlakno impregnirano sintetičkom gumom[^carfit-katalog-2026]. Flis nema ravnu brusnu površinu, pa se dobro uvlači u neravnine i ne ostavlja oštre ivice papira.
+**Flis (sunđer za matiranje, engl. scuff pad)** je netkani materijal sa trodimenzionalnom strukturom. Za V.19 Carsystem navodi da sintetička smola prožima vlakno i raspoređuje brusno zrno kroz ceo flis, a kao materijal najlonsko vlakno i zrno aluminijum-oksida[^cs-v19-pad-tds]. C.A.R.FIT svoj flis opisuje kao najlonsko vlakno impregnirano sintetičkom gumom[^carfit-katalog-2026]. Flis nema ravnu i krutu brusnu površinu, pa se dobro uvlači u neravnine; ovo je opšte objašnjenje, ne navod proizvođača.
 
-**Sunđerasti abraziv (soft pad)** je sunđer na koji je nanešeno brusno zrno. Za Classicline Soft Pad Carsystem navodi sunđerastu podlogu i zrno aluminijum-oksida[^cs-katalog-2026]. Za razliku od flisa, sunđeri u katalogu imaju oznaku finoće povezanu sa P-granulacijom, pa se lakše uklapaju u redosled brušenja.
+**Sunđerasti abraziv (soft pad)** je sunđer na koji je naneto brusno zrno. Za Classicline Soft Pad Carsystem navodi sunđerastu podlogu i zrno aluminijum-oksida[^cs-katalog-2026]. Za razliku od flisa, Carsystem sunđerasti abrazivi u katalogu imaju oznaku finoće povezanu sa P-granulacijom, pa se lakše uklapaju u redosled brušenja.
 
 ## Kada flis ili sunđer, a kada papir ili disk
 
@@ -102,7 +102,7 @@ Boja je oznaka proizvođača. Isti broj ili ista boja kod dva proizvođača ne z
 | C.A.R.FIT flis | crveni „very fine“, sivi „ultra fine“ | matiranje prajmera i punilaca pre dalje obrade[^carfit-katalog-2026] |
 | Carsystem Double Sanding Soft Pad | braon P240, zeleni P500, ljubičasti P1500 | najgrublji pre punioca, finiji pre boje[^cs-katalog-2026] |
 | Carsystem Classicline Soft Pad | medium P220–P280, fine P320–P400, super fine P400–P500, ultra fine P800–P1200 | medium i fine pre punioca, super fine i ultra fine pre boje[^cs-katalog-2026] |
-| Carsystem Topline Soft Pad | medium P280–P360, fine P400–P500, super fine P600–P800, ultra fine P1000–P1200 | medium pre punioca, finije oznake pre boje[^cs-katalog-2026] |
+| Carsystem Topline Soft Pad | medium P280–P360, fine P400–P500, super fine P600–P800, ultra fine P1000–P1200 | medium pre punioca, fine i ultra fine pre boje (za super fine katalog ne navodi posebnu napomenu)[^cs-katalog-2026] |
 | C.A.R.FIT Spongecut | fine (braon), super fine (zeleni), micro fine (ljubičasti) | teško dostupna mesta, prajmer-punilac i međubrušenje boje[^carfit-katalog-2026] |
 
 Iz tabele se vide dve stvari. Prvo, u ovim primerima crvena kod flisa znači grublju oznaku, namenjenu podlozi pre punioca, a siva finiju, pre boje. Drugo, ista reč nema isto značenje svuda: „super fine“ je kod Classicline P400–P500, a kod Topline P600–P800[^cs-katalog-2026]. Zato se oznaka uvek proverava u katalogu ili tehničkom listu konkretnog proizvoda.

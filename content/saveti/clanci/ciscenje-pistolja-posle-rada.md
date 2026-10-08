@@ -98,7 +98,7 @@ strucnaPotvrda:
 poslednjaProvera: 2026-10-08
 ponovniPregled: 2027-04-08
 ---
-Pištolj se čisti odmah posle rada: odvoji se od vazduha, isprazni, skine se set dizni i pištolj se očisti ručno četkama, a posle promene materijala može i u mašini za pranje koju preporučuje proizvođač pištolja[^sata-jetx-uputstvo]. Pištolj se ne potapa u sredstvo za čišćenje ni u razređivač, jer ostaci ulaze u vazdušne kanale[^sata-jetx-uputstvo][^sata-faq]. Na kraju se pištolj produva čistim vazduhom i osuši, a pri sklapanju se podmažu delovi koje proizvođač navodi.
+Pištolj se čisti odmah posle rada: odvoji se od vazduha, isprazni, skine se set dizni i pištolj se očisti ručno četkama, a posle promene materijala može i u mašini za pranje koju preporučuje proizvođač pištolja[^sata-jetx-uputstvo]. Pištolj se ne potapa u sredstvo za čišćenje ni u razređivač, jer ostaci ulaze u vazdušne kanale[^sata-jetx-uputstvo][^sata-faq]. Na kraju se pištolj produva čistim vazduhom i osuši[^sata-x5500-uputstvo], a pri sklapanju se podmažu delovi koje proizvođač navodi[^sata-mali-pomocnici].
 
 ## Postupak korak po korak
 
@@ -113,7 +113,7 @@ Postupak je sastavljen prema uputstvima i savetima SATA. Kod drugog pištolja pr
 7. **Sklopite obrnutim redom**: dizna za materijal, vazdušna kapa, pa igla[^sata-saveti]. Kod jet X podmazuju se igla, opruga igle i navoj zavrtnja za količinu materijala; SATA za to preporučuje svoju mast visokih performansi, bez supstanci koje mogu da oštete lak[^sata-mali-pomocnici].
 8. **Proverite lepezu** na probnom papiru posle čišćenja seta dizni[^sata-x5500-uputstvo], kao u vodiču [Test lepeze na papiru](/vodici/test-lepeze-na-papiru).
 
-SATA je objavila i video uputstvo za čišćenje i održavanje jet X, u izvedbama BASIC i DIGITAL[^sata-video-ciscenje].
+SATA je na svom YouTube kanalu objavila i video pod nazivom „Cleaning and Maintenance jet X BASIC EN“[^sata-video-ciscenje]; njegov sadržaj ovde ne prepričavamo, a postupak iznad sastavljen je prema pisanim izvorima.
 
 ## Šta se ne radi
 
@@ -132,7 +132,7 @@ SATA navodi i da set dizni treba temeljno ručno očistiti najmanje dva puta dne
 
 ### Sme li ceo pištolj u razređivač?
 
-Ne. SATA objašnjava da se u razređivaču nečistoća i ostaci boje rastvore, ali mogu da uđu u vazdušne kanale pištolja. Kanali su veoma fini, pa se postepeno zapušavaju; rezultat lakiranja se polako pogoršava, sve do promene nijanse, uključaka i manjeg mlaza, a uzrok se često traži u boji ili vazduhu, a ne u pištolju[^sata-faq]. Isto stoji u uputstvu za jet X: pištolj se ne potapa niti stavlja u sredstvo za čišćenje[^sata-jetx-uputstvo]. To važi i za ostavljanje pištolja u razređivaču preko noći.
+Ne. SATA objašnjava da se u razređivaču nečistoća i ostaci boje rastvore, ali mogu da uđu u vazdušne kanale pištolja. Kanali su veoma fini, pa se postepeno zapušavaju; rezultat lakiranja se polako pogoršava, sve do promene nijanse, uključaka i manjeg mlaza, a uzrok se često traži u boji ili vazduhu, a ne u pištolju[^sata-faq]. Isto stoji u uputstvu za jet X: pištolj se ne potapa niti stavlja u sredstvo za čišćenje[^sata-jetx-uputstvo]. Iz toga sledi da pištolj ne treba ostavljati ni da stoji u razređivaču preko noći.
 
 ### Kako se čisti posle vodene baze?
 

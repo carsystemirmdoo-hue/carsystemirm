@@ -100,7 +100,7 @@ strucnaPotvrda:
 poslednjaProvera: 2026-10-08
 ponovniPregled: 2027-04-08
 ---
-Krateri su okrugla udubljenja u laku; R-M ih opisuje kao udubljenja prečnika približno 0,5 do 3 mm, od plitkih u gornjem sloju do dubokih, sve do podloge[^rm-help-cratering]. Kao mogući uzrok se navodi nečistoća na površini ili u materijalu, najpre silikon: Glasurit, brend koji nije u našem programu, navodi da se silikonska ulja nalaze u sredstvima za poliranje i negu vozila i da su ih lakireri prepoznali kao uzrok kratera[^glasurit-prirucnik]. Pre popravke se traži izvor nečistoće, jer se krateri inače ponavljaju.
+Krateri su okrugla udubljenja u laku; R-M ih opisuje kao udubljenja prečnika približno 0,5 do 3 mm, od plitkih u gornjem sloju do dubokih, sve do podloge[^rm-help-cratering]. Kao mogući uzrok se navodi nečistoća na površini ili u materijalu, posebno silikon: Glasurit, brend koji nije u našem programu, navodi da se silikonska ulja nalaze u sredstvima za poliranje i negu vozila i da su ih lakireri prepoznali kao uzrok kratera[^glasurit-prirucnik]. Pre popravke se traži izvor nečistoće, jer se krateri inače ponavljaju.
 
 ## Kako izgleda
 
@@ -121,7 +121,7 @@ Proizvođači iz našeg programa ne objavljuju javno listu uzroka kratera, pa je
 
 1. **Raspored kratera.** Zapišite da li su krateri rasuti po celom delu ili u grupi. Grupa na jednom mestu više upućuje na lokalnu nečistoću na delu, a krateri po svemu što je tog dana lakirano više na vazduh, opremu ili materijal. To je urednička procena, ne pravilo proizvođača.
 2. **Dubina.** Probrušavanjem malog mesta proverite do kog sloja krater ide; R-M razlikuje plitke od onih koji idu do podloge[^rm-help-cratering].
-3. **Probni lim.** Očišćen lim isprskajte istim materijalom i pištoljem. Ako se krateri pojave i na njemu, izvor nije deo vozila.
+3. **Probni lim.** Očišćen lim isprskajte istim materijalom i pištoljem. Urednička procena: ako se krateri pojave i na njemu, izvor verovatno nije sam deo vozila, nego vazduh, oprema ili materijal, pa proveru nastavite tamo.
 4. **Postupak čišćenja.** Uporedite postupak sa tehničkim listom odmašćivača (sledeći odeljak).
 
 ## Čišćenje pre lakiranja
@@ -153,4 +153,4 @@ Ne uklanja izvor nečistoće. Glasurit za sopstveni aditiv protiv silikona navod
 
 ### Da li odmašćivač uvek uklanja silikon?
 
-Odmašćivač je namenjen tome, ali samo ako se koristi prema tehničkom listu: čistom krpom, deo po deo i uz brisanje dok sredstvo ne ispari. Ako se silikon neprestano vraća iz vazduha ili sa opreme, čišćenje dela neće biti dovoljno.
+Odmašćivač je namenjen tome, ali samo ako se koristi prema tehničkom listu. Za Silicone Remover Mild, na primer, Carsystem navodi čišćenje deo po deo i brisanje drugom čistom krpom pre nego što se sredstvo osuši na površini[^cs-silicone-remover-mild-tds]. Ako se silikon neprestano vraća iz vazduha ili sa opreme, čišćenje dela neće biti dovoljno.

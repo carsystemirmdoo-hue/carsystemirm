@@ -125,7 +125,7 @@ strucnaPotvrda:
 poslednjaProvera: 2026-10-08
 ponovniPregled: 2027-04-08
 ---
-Veličina dizne se bira prema materijalu, a preporuku daje tehnički list tog materijala, posebno za HVLP i za pištolj „compliant“. U primerima iz našeg programa punioci se nanose većom diznom nego bazne boje i lakovi: za R-M PerformFILLER P 2A41 tehnički list navodi 1,6–1,8 mm uz pištolj compliant, a za bezbojni lak R-M C 2A40 AirTOP 1,2–1,4 mm[^rm-p2a41-tds][^rm-c2a40-tds]. Tačnu vrednost uvek uzmite iz tehničkog lista proizvoda koji nanosite.
+Veličina dizne se bira prema materijalu, a preporuku daje tehnički list tog materijala, posebno za HVLP i za pištolj „compliant“. U primerima iz tehničkih listova koje navodimo punioci za brušenje se nanose većom diznom nego bazne boje i lakovi: za R-M PerformFILLER P 2A41 tehnički list navodi 1,6–1,8 mm uz pištolj compliant, a za bezbojni lak R-M C 2A40 AirTOP 1,2–1,4 mm[^rm-p2a41-tds][^rm-c2a40-tds]. Tačnu vrednost uvek uzmite iz tehničkog lista proizvoda koji nanosite.
 
 ## Gde se nalazi preporuka
 
@@ -145,19 +145,19 @@ Uputstvo za SATA jet X dodaje dva pravila iz ugla pištolja. Veličina dizne bir
 | bezbojni lak | R-M C 2A40 AirTOP | 1,2–1,4 mm[^rm-c2a40-tds] | 1,3 mm[^rm-c2a40-tds] |
 | bezbojni lak | baslac 40-100 High Speed 2K Clear VOC | 1,2–1,3 mm[^baslac-40-100-tds] | ne navodi se[^baslac-40-100-tds] |
 
-Tabela ne pravi pravilo za sve proizvode iste vrste. Pokazuje da se vrednosti razlikuju i po vrsti materijala i od proizvoda do proizvoda. Punilac mokro-na-mokro, na primer, radi sa manjom diznom od punioca za brušenje; o tome piše vodič [Nanošenje punioca pištoljem](/vodici/nanosenje-punioca-pistoljem).
+Tabela ne pravi pravilo za sve proizvode iste vrste. Pokazuje da se vrednosti razlikuju i po vrsti materijala i od proizvoda do proizvoda. U baslac tabeli preporučenih pištolja, na primer, punioci mokro-na-mokro 20-35 i 20-95 navedeni su uz manju diznu od punilaca 20-24, 20-34 i 20-94[^baslac-pistolji]; o nanošenju punioca piše vodič [Nanošenje punioca pištoljem](/vodici/nanosenje-punioca-pistoljem).
 
 ## Tabele proizvođača pištolja i boje
 
 Neki proizvođači boja objavljuju i spisak preporučenih pištolja. baslac u dokumentu iz januara 2026. za [SATA jet X](/proizvodi/sata-jet-x) navodi: RP sa diznom 1,3 I ili O za bezbojne lakove i punioce mokro-na-mokro 20-35 i 20-95, HVLP sa diznom 1,3 O za baznu boju 45 Line, lakove i iste punioce, i RP 1,2 I ili O za lakove, sve na 2,0 bara. Za punioce 20-24, 20-34 i 20-94 isti dokument navodi [SATAjet 100 B](/proizvodi/satajet-100-b) F sa diznom 1,6 (RP) ili 1,7–1,8 (HVLP)[^baslac-pistolji].
 
-SATA objavljuje tabele dizni i pritiska po proizvođaču boje. Tabela za R-M nosi datum iz jula 2023. i obuhvata više modela, među njima SATAjet X 5500, 5000 B, 4000 B, 100 B i minijet 4400 B, ali ne i jet X; za vodenu baznu boju ONYX HD na SATAjet X 5500 RP navodi diznu 1,4 I ili O na 2,0 bara[^sata-tabela-rm]. Uz tabelu SATA napominje da podaci nisu garantovani i da važe uputstva proizvođača boje[^sata-tabela-rm]. Zato tabela služi kao orijentir, a tehnički list materijala ima prednost.
+SATA objavljuje tabele dizni i pritiska po proizvođaču boje. Tabela za R-M (prema podacima PDF fajla napravljena u julu 2023) obuhvata više modela, među njima SATAjet X 5500, 5000 B, 4000 B, 100 B i minijet 4400 B, ali ne i jet X; za vodenu baznu boju ONYX HD na SATAjet X 5500 RP navodi diznu 1,4 I ili O na 2,0 bara[^sata-tabela-rm]. Uz tabelu SATA napominje da podaci nisu garantovani i da važe uputstva proizvođača boje[^sata-tabela-rm]. Zato tabela služi kao orijentir, a tehnički list materijala ima prednost.
 
 ## Kako da izaberete diznu, korak po korak
 
 1. Otvorite tehnički list materijala i pronađite tabelu za nanošenje.
 2. Izaberite kolonu za tehnologiju Vašeg pištolja (HVLP ili compliant). Razliku objašnjava vodič [HVLP, RP i ostale tehnologije pištolja](/vodici/vrste-pistolja-za-lakiranje).
-3. Proverite da li je za Vaš model pištolja ta veličina dostupna. Za jet X, na primer, stranica proizvoda nudi dizne od 1,1 do 1,4 mm, u izvedbama I (Control) i O (Speed)[^sata-jetx-stranica]; punioci iz tabele zato traže drugi pištolj ili drugi set dizni prema ponudi proizvođača.
+3. Proverite da li je za Vaš model pištolja ta veličina dostupna. Za jet X, na primer, stranica proizvoda nudi dizne od 1,1 do 1,4 mm, u izvedbama I (Control) i O (Speed)[^sata-jetx-stranica]; za punioce sa diznom 1,6 mm i većom iz gornje tabele zato je potreban drugi pištolj ili drugi set dizni prema ponudi proizvođača.
 4. Podesite pištolj prema vodiču [Podešavanje pištolja](/vodici/podesavanje-pistolja) i proverite lepezu na probnom papiru.
 
 ## Pitanja i odgovori
@@ -172,4 +172,4 @@ U tehničkom listu materijala, u tabeli za nanošenje. Dodatno, neki proizvođa�
 
 ### Da li SATA tabele za boje važe i za jet X?
 
-Tabela za R-M iz 2023. ne obuhvata jet X[^sata-tabela-rm]. Za jet X preporuke iz našeg programa trenutno daje baslac dokument iz januara 2026[^baslac-pistolji]; za ostale materijale važi tehnički list materijala.
+Tabela za R-M iz 2023. ne obuhvata jet X[^sata-tabela-rm]. Od izvora koje navodimo, preporuke za jet X daje baslac dokument iz januara 2026, i to samo za baslac materijale[^baslac-pistolji]; za ostale materijale važi tehnički list materijala.

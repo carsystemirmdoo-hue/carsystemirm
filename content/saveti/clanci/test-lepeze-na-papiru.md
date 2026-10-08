@@ -72,9 +72,11 @@ strucnaPotvrda:
 poslednjaProvera: 2026-10-08
 ponovniPregled: 2027-04-08
 ---
-Probni otisak lepeze pravi se kratkim povlačenjem okidača dok pištolj miruje na propisanom rastojanju, upravno na papir. Ispravan otisak je simetričan, ujednačeno popunjen i bez „rupa“. Kada je mlaz premali, kos, jednostran ili podeljen, SATA kao moguće uzroke navodi zaprljane otvore na vazdušnoj kapi ili oštećenu diznu za materijal[^sata-x5500-uputstvo]. Najkorisniji je otisak koji možete da uporedite sa referentnim otiskom istog pištolja.
+Probni otisak lepeze se, po opštoj praksi, pravi kratkim povlačenjem okidača dok pištolj miruje na propisanom rastojanju, upravno na papir. Ispravan otisak je simetričan, ujednačeno popunjen i bez „rupa“. Kada je mlaz premali, kos, jednostran ili podeljen, SATA kao moguće uzroke navodi zaprljane otvore na vazdušnoj kapi ili oštećenu diznu za materijal[^sata-x5500-uputstvo]. Najviše govori otisak koji možete da uporedite sa referentnim otiskom istog pištolja, na čemu se zasniva i SATA pribor za kontrolu otiska[^sata-mali-pomocnici].
 
 ## Kako se pravi probni otisak
+
+Koraci su opšti postupak; vrednosti rastojanja su iz uputstava pištolja.
 
 1. **Podesite pištolj** prema tehničkom listu materijala: dizna, ulazni pritisak i široka lepeza. Postupak je u vodiču [Podešavanje pištolja](/vodici/podesavanje-pistolja).
 2. **Pripremite podlogu.** Papir za maskiranje ili poseban blok za otiske pričvrstite uspravno, na mestu gde je preprašivanje bezbedno odvedeno.
@@ -94,20 +96,20 @@ Opšte objašnjenje: otisak se gleda po obliku, simetriji i popunjenosti. Kod us
 | lepeza ne može da se suzi ili proširi | zaprljan regulator lepeze[^sata-jetx-uputstvo] | regulator skinuti, očistiti ili zameniti[^sata-jetx-uputstvo] |
 | nemiran mlaz koji „pljuje“ | nedovoljno pritegnuta dizna, oštećena zaptivka dizne i drugi uzroci[^sata-jetx-uputstvo] | vodič [Pištolj pljuje ili prekida mlaz](/vodici/pistolj-pljuje-ili-prekida) |
 
-Uzrok sa papira nije sigurna dijagnoza. Isti izgled može da ima više uzroka, a konačan uzrok zavisi i od materijala, viskoziteta i uslova rada. Zato se uz otisak proverava i podešavanje: ako se otisak promeni čim vratite pritisak i diznu na vrednosti iz tehničkog lista, problem verovatno nije u pištolju.
+Uzrok sa papira nije sigurna dijagnoza. Isti izgled može da ima više uzroka, a konačan uzrok zavisi i od materijala, viskoziteta i uslova rada. Zato se uz otisak proverava i podešavanje. Opšte objašnjenje: ako se otisak popravi čim vratite pritisak i diznu na vrednosti iz tehničkog lista, uzrok je verovatnije bio u podešavanju nego u samom pištolju.
 
-Istrošen set dizni SATA povezuje sa greškama koje se vide tek na objektu: oblacima u metalik i bisernoj baznoj boji, narandžinom korom na bezbojnom laku i tamnijom nijansom metalika i bisera[^sata-saveti]. Probni otisak koji se postepeno udaljava od referentnog može da bude rani znak takvog habanja.
+Istrošen set dizni SATA povezuje sa greškama koje se vide tek na objektu: oblacima u metalik i bisernoj baznoj boji, narandžinom korom na bezbojnom laku i tamnijom nijansom metalika i bisera[^sata-saveti]. SATA pribor za kontrolu otiska namenjen je upravo tome da se odstupanja od referentnog otiska uoče na vreme[^sata-mali-pomocnici]; da li je uzrok habanje, pokazuje tek pregled seta dizni.
 
 ## Pitanja i odgovori
 
 ### Šta znači lepeza u obliku banane?
 
-Lepeza savijena u luk na jednu stranu spada u ono što SATA opisuje kao kos ili jednostran otisak. Mogući uzroci prema uputstvu su zaprljani otvori na vazdušnoj kapi ili oštećena dizna za materijal[^sata-x5500-uputstvo]. Opšti način provere: posle čišćenja kape napravite novi otisak; ako se greška nastavi, pregledajte diznu. Otvori na kapi čiste se samo SATA četkama ili iglama za čišćenje dizni, jer drugi alat može da ošteti otvore i promeni lepezu[^sata-jetx-uputstvo].
+SATA ovaj izraz ne koristi. Lepeza savijena u luk na jednu stranu najbliža je onome što uputstvo opisuje kao kos ili jednostran otisak. Mogući uzroci prema uputstvu su zaprljani otvori na vazdušnoj kapi ili oštećena dizna za materijal[^sata-x5500-uputstvo]. Opšti način provere: posle čišćenja kape napravite novi otisak; ako se greška nastavi, pregledajte diznu. Otvori na kapi čiste se samo SATA četkama ili iglama za čišćenje dizni, jer drugi alat može da ošteti otvore i promeni lepezu[^sata-jetx-uputstvo].
 
 ### Koliko često se radi probni otisak?
 
-SATA traži proveru otiska posle čišćenja seta dizni[^sata-x5500-uputstvo], a pribor SATA cert namenjen je redovnoj, preventivnoj kontroli u odnosu na referentni otisak[^sata-mali-pomocnici]. Probni otisak ima smisla i pre svakog važnog posla, posebno posle zamene materijala.
+SATA traži proveru otiska posle čišćenja seta dizni[^sata-x5500-uputstvo], a pribor SATA cert namenjen je redovnoj, preventivnoj kontroli u odnosu na referentni otisak[^sata-mali-pomocnici]. Urednička preporuka, bez posebnog izvora: probni otisak ima smisla i pre svakog važnog posla, posebno posle zamene materijala.
 
 ### Zašto se lepeza okreće uspravno ili položeno?
 
-Smer lepeze određuje položaj vazdušne kape. SATA navodi da se za uspravnu lepezu kapa okreće tako da se laserska oznaka čita spreda, a za položenu tako da probna oznaka podešivača na boku kape bude okrenuta nagore[^sata-faq].
+Smer lepeze zavisi od položaja vazdušne kape. SATA navodi da se za uspravnu lepezu kapa okreće tako da se laserska oznaka čita spreda, a za položenu tako da probna oznaka podešivača na boku kape bude okrenuta nagore[^sata-faq].

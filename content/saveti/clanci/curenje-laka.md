@@ -89,7 +89,7 @@ Lak curi kada se na vertikalnoj površini nanese više materijala nego što sloj
 
 ## Kako izgleda
 
-R-M curenje opisuje kao zadebljanja, kapi, veće grudve ili efekat „zavese“ u završnom sloju na vertikalnim površinama[^rm-help-runs]. Ako je curenje samo na jednom mestu, uzrok je verovatnije u tehnici nanošenja na tom mestu; ako je po celom delu, verovatnije je u materijalu ili uslovima. To je urednička procena, ne pravilo proizvođača.
+R-M curenje opisuje kao zadebljanja, kapi, veće grudve ili efekat „zavese“ u završnom sloju na vertikalnim površinama[^rm-help-runs]. Urednička procena, ne pravilo proizvođača: curenje samo na jednom mestu može da ukaže na tehniku nanošenja na tom mestu, a curenje po celom delu na materijal ili uslove. Oba slučaja treba proveriti prema tabeli ispod.
 
 ## Mogući uzroci i kako se proveravaju
 
@@ -101,7 +101,7 @@ R-M curenje opisuje kao zadebljanja, kapi, veće grudve ili efekat „zavese“ 
 | Preniska temperatura materijala, objekta ili kabine | Temperatura u prostoru i temperatura dela, posebno ako je deo unet sa hladnog mesta |
 | Učvršćivač i razređivač | Da li odgovaraju temperaturi i veličini posla |
 
-Za odzračivanje i debljinu sloja vrednosti se čitaju iz tehničkog lista tog laka. Za Carsystem CC.26 ECO-X tehnički list navodi 4–6 minuta odzračivanja između slojeva, 1,5 do 2 sloja i preporučenu debljinu mokrog sloja 90–100 µm po sloju[^cs-cc26-tds]. Za R-M C 2P42 odzračivanje između dva sloja je 1–3 minuta[^rm-c2p42-tds], a za R-M C 2A40 između pola sloja i punog sloja nema odzračivanja[^rm-c2a40-tds]. Ista tehnika zato ne daje isti rezultat sa različitim lakovima.
+Za odzračivanje i debljinu sloja vrednosti se čitaju iz tehničkog lista tog laka. Za Carsystem CC.26 ECO-X tehnički list navodi 4–6 minuta odzračivanja između slojeva, 1,5 do 2 sloja i preporučenu debljinu mokrog sloja 90–100 µm po sloju[^cs-cc26-tds]. Za R-M C 2P42 odzračivanje između dva sloja je 1–3 minuta, a kao drugi način tehnički list navodi 1½ sloja bez odzračivanja[^rm-c2p42-tds], a za R-M C 2A40 između pola sloja i punog sloja nema odzračivanja[^rm-c2a40-tds]. Ista tehnika zato ne daje isti rezultat sa različitim lakovima.
 
 Temperatura je posebno važna. Carsystem za CC.26 ne preporučuje nanošenje ispod 18 °C i navodi da materijal, kabina i objekat pre nanošenja treba da budu na oko 20 °C[^cs-cc26-tds]. Broj slojeva laka objašnjava vodič [Koliko slojeva bezbojnog laka nanositi](/vodici/koliko-slojeva-laka).
 
@@ -112,7 +112,7 @@ Temperatura je posebno važna. Carsystem za CC.26 ne preporučuje nanošenje isp
 3. **Polirajte.** baslac kao prvu popravku navodi brušenje i poliranje[^baslac-runs]. Postupak opisuje vodič [Mokro brušenje laka pre poliranja](/vodici/mokro-brusenje-laka-pre-poliranja).
 4. **Ako poliranje nije moguće,** na primer jer bi se lak probio ili je curenje zahvatilo i baznu boju, baslac navodi brušenje i ponovno lakiranje[^baslac-runs].
 
-Dok je lak još mokar, curenje se ne dira: pokušaj da se skine krpom ili četkom obično ošteti veću površinu. To je urednička preporuka.
+Urednička preporuka: dok je lak još mokar, curenje se ne dira, jer pokušaj da se skine krpom ili četkom može da ošteti veću površinu.
 
 ## Kako se curenje sprečava kod vertikalnih površina
 

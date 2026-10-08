@@ -118,7 +118,7 @@ Folija je bolji izbor kada treba brzo pokriti veliku površinu ili ceo automobil
 
 ## Papir za maskiranje
 
-Papir za maskiranje nije običan pakpapir. Proizvođači ga obrađuju tako da ne propušta vodu i rastvarač i da vlakna ne ostaju na površini.
+Papir za maskiranje nije običan pakpapir. Proizvođači ga obrađuju radi veće otpornosti na vodu, kod nekih papira i na rastvarače, i da se vlakna ne odvajaju sa površine, kako pokazuju primeri ispod.
 
 - **Carsystem Masking Paper Master II** je kraft papir od 40 g/m² sa povećanom otpornošću na vodu, glatkom neporoznom stranom da se vlakna ne odvajaju i otpornošću na rastvarače; barijera je napravljena mehaničkom obradom vlakna, bez PFAS[^cs-paper-master-ii-tds].
 - **Carsystem Masking Paper Top II** je takođe kraft papir od 40 g/m², sa povećanom otpornošću na vodu i neporoznom površinom[^cs-paper-top-ii-tds].

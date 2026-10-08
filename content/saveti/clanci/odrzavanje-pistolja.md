@@ -75,12 +75,12 @@ strucnaPotvrda:
 poslednjaProvera: 2026-10-08
 ponovniPregled: 2027-04-08
 ---
-Održavanje pištolja počinje redovnim čišćenjem, a nastavlja se pregledom pre rada, podmazivanjem određenih delova i zamenom potrošnih delova kada se pojave znaci habanja. Najviše se habaju igla i dizna za materijal, kroz koje prolazi materijal; SATA ih zato menja samo kao ceo set dizni, zajedno sa vazdušnom kapom[^sata-saveti]. Zaptivke se menjaju kada počnu da propuštaju materijal ili vazduh, a podmazuje se samo mašću bez silikona koju preporučuje proizvođač pištolja[^sata-x5500-uputstvo].
+Održavanje pištolja počinje redovnim čišćenjem, a nastavlja se pregledom pre rada, podmazivanjem određenih delova i zamenom potrošnih delova kada se pojave znaci habanja. Najviše se habaju igla i dizna za materijal, kroz koje prolazi materijal; SATA ih zato prodaje samo kao ceo set dizni, zajedno sa vazdušnom kapom[^sata-saveti]. Zaptivke se menjaju kada počnu da propuštaju materijal ili vazduh, a podmazuje se mašću koju navodi proizvođač pištolja[^sata-x5500-uputstvo]; za SATA pištolje to je mast visokih performansi bez silikona[^sata-mali-pomocnici].
 
 ## Pre svakog rada
 
 - **Pregled.** Pištolj se pre svake upotrebe proverava da li je oštećen i da li su svi delovi na mestu; oštećen ili nepotpun pištolj se ne koristi[^sata-jetx-uputstvo].
-- **Pritegnutost delova.** Uputstvo za SATAjet X 5500 pre puštanja u rad traži proveru svih zavrtanja; dizna za materijal priteže se ključem na 11 Nm, a zavrtanj za osiguranje mikrometra najviše na 1 Nm[^sata-x5500-uputstvo]. Za drugi model važe vrednosti iz njegovog uputstva.
+- **Pritegnutost delova.** Uputstvo za SATAjet X 5500 pre puštanja u rad traži proveru svih zavrtanja; dizna za materijal priteže se na 11 Nm, a zavrtanj za osiguranje mikrometra najviše na 1 Nm[^sata-x5500-uputstvo]. Za drugi model važe vrednosti iz njegovog uputstva.
 - **Crevo za vazduh.** SATA preporučuje da se crevo koje se koristi svakodnevno menja najmanje jednom godišnje[^sata-saveti]. Više o crevu i spojnicama u vodiču [Crevo i spojnice za pištolj](/vodici/crevo-i-spojnice-za-pistolj).
 
 ## Potrošni delovi i kada se menjaju
@@ -103,7 +103,7 @@ Habanje seta dizni ne vidi se golim okom. SATA objašnjava da se istrošenom set
 
 ## Podmazivanje
 
-Uputstvo za SATAjet X 5500 pri zameni seta dizni traži da se podmaže igla u delu ispred čaure igle, opruga igle i zavrtanj za količinu materijala; pri zameni vazdušnog klipa podmazuju se kućište mikrometra i šipka vazdušnog klipa, i to SATA mašću visokih performansi[^sata-x5500-uputstvo]. Za jet X SATA posle čišćenja navodi podmazivanje igle, opruge igle i navoja zavrtnja za količinu materijala[^sata-mali-pomocnici].
+Uputstvo za SATAjet X 5500 pri zameni seta dizni traži da se podmaže igla u delu ispred čaure igle, opruga igle i zavrtanj za količinu materijala; pri zameni vazdušnog klipa i zaptivke na strani vazduha podmazuju se kućište mikrometra i šipka vazdušnog klipa, i to SATA mašću visokih performansi[^sata-x5500-uputstvo]. Za jet X SATA posle čišćenja navodi podmazivanje igle, opruge igle i navoja zavrtnja za količinu materijala[^sata-mali-pomocnici].
 
 SATA preporučuje svoju [mast visokih performansi](/proizvodi/sata-high-performance-grease-silicone-and-acid-free-100), bez silikona i kiselina, uz obrazloženje da ne sadrži supstance koje mogu da oštete lak[^sata-mali-pomocnici]. Opšte objašnjenje: obično mazivo sa silikonom u pištolju može da dospe u materijal i izazove kratere, pa se za pištolj ne koristi bilo koje mazivo iz radionice. Krateri su obrađeni u vodiču [Krateri u laku](/vodici/krateri-u-laku).
 
@@ -111,7 +111,7 @@ SATA preporučuje svoju [mast visokih performansi](/proizvodi/sata-high-performa
 
 - Koriste se samo originalni rezervni delovi i pribor; pištolj se ne prepravlja[^sata-jetx-uputstvo].
 - Pištolj se čuva na suvom, čistom mestu zaštićenom od mraza[^sata-jetx-uputstvo].
-- Pribor, rezervni delovi i tehnička podrška nabavljaju se preko prodavca SATA opreme[^sata-jetx-uputstvo]. SATA navodi i da pištolj, filter za vazduh i opremu za zaštitu disanja sa dovodom vazduha možete prijaviti za produženu garanciju „Premium Warranty“ u roku od 30 dana od kupovine[^sata-faq].
+- Pribor, rezervni delovi i tehnička podrška nabavljaju se preko prodavca SATA opreme[^sata-jetx-uputstvo]. SATA navodi i da se pištolj može prijaviti za produženu garanciju „Premium Warranty“ u roku od 30 dana od kupovine[^sata-faq].
 
 SATA pištolje i pribor za održavanje iz našeg programa naći ćete na strani [SATA](/brendovi/sata), a prodajno mesto na strani [Prodavnice](/prodavnice).
 
@@ -123,7 +123,7 @@ Najviše igla i dizna za materijal, jer kroz njih teče materijal i „trlja“ 
 
 ### Čime se podmazuje?
 
-Mašću za pištolje bez silikona i kiselina, koju preporučuje proizvođač pištolja; za SATA pištolje to je SATA mast visokih performansi[^sata-mali-pomocnici]. Podmazuju se samo delovi koje navodi uputstvo, a ne kanali za materijal i vazduh.
+Mašću za pištolje bez silikona i kiselina, koju preporučuje proizvođač pištolja; za SATA pištolje to je SATA mast visokih performansi[^sata-mali-pomocnici]. Podmazuju se delovi koje navodi uputstvo pištolja[^sata-x5500-uputstvo].
 
 ### Može li da se zameni samo igla ili samo dizna?
 

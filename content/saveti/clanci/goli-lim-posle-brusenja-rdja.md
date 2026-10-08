@@ -61,8 +61,9 @@ razlogPrioriteta: Rešava konkretan problem iz prakse; raspoređeno naizmenično
 status:
   istrazivanje: zavrseno
   pisanje: napisano
-  tehnickaProvera: nije-provereno
-  jezickaProvera: nije-provereno
+  tehnickaProvera: provereno
+  jezickaProvera: provereno
+napomenaProvere: "urednička provera (AI-asistirana) 2026-10-08: otvoreni R-M PK 2P50 i P 2A26 (07/2026), Carsystem 2K Epoxy Fill Primer V03 (03/2024) i KS-4000.2 V01 (06/2025); 1 min, „max. 8h“, 10 min, 18–25 °C i 40–60 % se poklapaju. Kondenzacija i uticaj vlage su označeni kao opšte objašnjenje i urednički pregled. Ispravljeno (2): rok za PRO Prep-R prenet doslovno kako ga list navodi (mat površina, „max. 8h“), bez tumačenja; dodato da je KS-4000.2 zaštita podvozja, navedena samo kao primer uslova."
 strucnaPotvrda:
   potrebna: false
   status: nije-potrebno
@@ -85,14 +86,14 @@ Tri česta pokretača u radionici, kao urednički pregled:
 
 Opšte pravilo u minutima ili satima ne postoji, jer zavisi od uslova u prostoriji. Postoje samo rokovi vezani za konkretan proizvod:
 
-- R-M za PRO Prep-R maramice navodi da površina posle brisanja mora ostati vlažna najmanje 1 minut, a da odzračivanje na 20 °C traje dok površina ne postane mat, najduže 8 h[^rm-pk2p50-tds]. To je rok za taj korak u R-M sistemu, a ne pravilo za goli lim uopšte.
+- R-M za PRO Prep-R maramice navodi da površina posle brisanja mora ostati vlažna najmanje 1 minut, a za odzračivanje na 20 °C navodi mat površinu, uz oznaku „max. 8h“[^rm-pk2p50-tds]. To je rok za taj korak u R-M sistemu, a ne pravilo za goli lim uopšte.
 - Za reaktivni prajmer R-M CorrosionPROTECT P 2A26 tehnički list navodi sušenje od 10 min na 20 °C[^rm-p2a26-tds], posle čega lim više nije go.
 
 U praksi to znači: brusiti i odmastiti samo onoliko površine koliko se može odmah zaštititi; ovo je urednička procena.
 
 ## Utiče li vlažnost u radionici?
 
-Da. Proizvođači zato daju uslove za nanošenje. Carsystem za 2K Epoxy Fill Primer navodi optimalno nanošenje na 18–25 °C i relativnu vlažnost od 40–60 %[^cs-2k-epoxy-fill-tds]. Za druge materijale, na primer KS-4000.2, Carsystem traži da proizvod, kabina i objekat budu oko 20 °C i upozorava na nagla zagrevanja i hlađenja[^cs-ks-4000-2-tds]. Ovi uslovi su dati za te proizvode, ali pokazuju da temperatura objekta i vlaga u vazduhu nisu sporedni.
+Da. Proizvođači zato daju uslove za nanošenje. Carsystem za 2K Epoxy Fill Primer navodi optimalno nanošenje na 18–25 °C i relativnu vlažnost od 40–60 %[^cs-2k-epoxy-fill-tds]. Za druge materijale, na primer zaštitu podvozja KS-4000.2, Carsystem traži da proizvod, kabina i objekat budu oko 20 °C i upozorava na nagla zagrevanja i hlađenja[^cs-ks-4000-2-tds]. Ovi uslovi su dati za te proizvode, ali pokazuju da temperatura objekta i vlaga u vazduhu nisu sporedni.
 
 Ako se deo unosi spolja, ostavite ga da se ugreje na temperaturu prostorije pre brušenja i nanošenja; ovo je opšte objašnjenje koje sledi iz pojave kondenza.
 

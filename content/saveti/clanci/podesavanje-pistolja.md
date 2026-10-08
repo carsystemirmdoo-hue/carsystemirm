@@ -98,15 +98,15 @@ strucnaPotvrda:
 poslednjaProvera: 2026-10-08
 ponovniPregled: 2027-04-08
 ---
-SATA preporučuje da se pištolj podešava ovim redom: prvo oblik lepeze regulatorom okruglog i širokog mlaza, zatim količina materijala, i na kraju ulazni pritisak mikrometrom vazduha[^sata-saveti]. Vrednost ulaznog pritiska i diznu ne treba pogađati: daje ih tehnički list materijala, a meri se na samom pištolju dok je okidač potpuno povučen[^sata-x5500-uputstvo]. Na novom SATA pištolju sve ovo polazi od fabričke postavke, jer je pištolj spreman za rad odmah po raspakivanju[^sata-saveti].
+SATA preporučuje da se pištolj podešava ovim redom: prvo oblik lepeze regulatorom okruglog i širokog mlaza, zatim količina materijala, i na kraju ulazni pritisak mikrometrom vazduha[^sata-saveti]. Vrednost ulaznog pritiska i diznu ne treba pogađati: SATA upućuje na tehnički list proizvođača materijala[^sata-saveti], a uputstvo za SATAjet X 5500 traži da se pritisak podešava dok je okidač potpuno povučen[^sata-x5500-uputstvo]. Na novom SATA pištolju sve ovo polazi od fabričke postavke, jer je pištolj spreman za rad odmah po raspakivanju[^sata-saveti].
 
 ## Tri regulatora na pištolju
 
-Većina pištolja sa gornjom čašom ima tri regulatora. Na SATAjet X 5500 uputstvo ih navodi kao regulator okruglog i širokog mlaza, zavrtanj za količinu materijala sa kontranavrtkom i mikrometar vazduha[^sata-x5500-uputstvo].
+Pištolj sa gornjom čašom po pravilu ima tri regulatora (opšte objašnjenje). Na SATAjet X 5500 uputstvo ih navodi kao regulator okruglog i širokog mlaza, zavrtanj za količinu materijala sa kontranavrtkom i mikrometar vazduha[^sata-x5500-uputstvo].
 
-- **Regulator lepeze** menja oblik mlaza od širokog (izduženog) do okruglog. Fabrička postavka kod SATAjet X 5500 je široki mlaz[^sata-x5500-uputstvo]. Široka lepeza se obično koristi za veće površine, a uža za manja mesta; navedena uputstva ne propisuju određenu širinu.
-- **Regulator količine materijala** određuje koliko se igla povlači kada povučete okidač, odnosno koliko materijala prolazi kroz diznu.
-- **Mikrometar vazduha** na dršci menja ulazni pritisak na pištolju.
+- **Regulator lepeze** menja oblik mlaza od širokog (izduženog) do okruglog. Fabrička postavka kod SATAjet X 5500 je široki mlaz[^sata-x5500-uputstvo]. Opšte objašnjenje, bez propisane vrednosti u navedenim uputstvima: široka lepeza se koristi za veće površine, a uža za manja mesta.
+- **Regulator količine materijala** određuje koliko se igla povlači kada povučete okidač, odnosno koliko materijala prolazi kroz diznu (opšte objašnjenje funkcije).
+- **Mikrometar vazduha** na dršci menja ulazni pritisak na pištolju[^sata-saveti].
 
 ## Redosled podešavanja
 
@@ -119,7 +119,7 @@ Većina pištolja sa gornjom čašom ima tri regulatora. Na SATAjet X 5500 uputs
 
 Pritisak koji navodi tehnički list boje kod R-M i baslac zove se *application pressure* i za vodenu baznu boju R-M AGILIS iznosi 2 bara uz pištolj „compliant“. U istom dokumentu R-M pojašnjava da je pritisak za nanošenje isto što i ulazni pritisak, a da postavka zavisi od proizvođača pištolja[^rm-agilis-tds].
 
-Za HVLP pištolj tehnički listovi često navode i pritisak u vazdušnoj kapi (*nozzle pressure*):
+Za HVLP pištolj tehnički list može da navede i pritisak u vazdušnoj kapi (*nozzle pressure*):
 
 | Proizvod | Vrsta pištolja | Ulazni pritisak | Pritisak u vazdušnoj kapi |
 | --- | --- | --- | --- |
@@ -127,7 +127,7 @@ Za HVLP pištolj tehnički listovi često navode i pritisak u vazdušnoj kapi (*
 | R-M C 2A40 AirTOP, bezbojni lak | compliant / HVLP | 2 bara za compliant[^rm-c2a40-tds] | 0,7 bara za HVLP[^rm-c2a40-tds] |
 | baslac 45 Line, vodena bazna boja | HVLP | 2 bara[^baslac-45-line-tds] | 0,7 bara[^baslac-45-line-tds] |
 
-Na pištolju se u radu podešava ulazni pritisak. Vrednost za vazdušnu kapu pokazuje u kojim granicama HVLP pištolj treba da radi, a kako se ona proverava na konkretnom pištolju, navodi proizvođač pištolja.
+Na pištolju se u radu podešava ulazni pritisak. Vrednost za vazdušnu kapu pokazuje u kojim granicama HVLP pištolj treba da radi. Za SATA jet X uputstvo tu granicu povezuje sa ulaznim pritiskom: do 2,0 bara pištolj radi kao HVLP, a iznad toga pritisak u vazdušnoj kapi prelazi 0,7 bara[^sata-jetx-uputstvo]. Za drugi pištolj ovaj odnos navodi njegov proizvođač.
 
 ## Merenje ulaznog pritiska na pištolju
 
@@ -147,12 +147,12 @@ Za jet X postoje digitalne jedinice adam X i [adam X pro](/proizvodi/sata-adam-x
 
 ### Zašto se ulazni pritisak meri na samom pištolju?
 
-Zato što tehnički list i uputstvo pištolja navode pritisak na ulazu u pištolj, a ne na kompresoru. Između regulatora i pištolja pritisak opada u crevu i spojnicama, pa ista vrednost na zidnom manometru na različitim crevima daje različit pritisak na pištolju. SATA podešavanje samo na razvodu vazduha označava kao najmanje tačan način[^sata-x5500-uputstvo].
+Zato što tehnički list i uputstvo pištolja navode pritisak na ulazu u pištolj, a ne na kompresoru. Opšte objašnjenje: između regulatora i pištolja pritisak opada u crevu i spojnicama, pa ista vrednost na zidnom manometru na različitim crevima daje različit pritisak na pištolju. SATA podešavanje samo na razvodu vazduha označava kao najmanje tačan način[^sata-x5500-uputstvo].
 
 ### Razlikuje li se pritisak sa i bez povučenog okidača?
 
-Da. Dok je okidač otpušten, vazduh ne protiče i manometar pokazuje pritisak mirovanja. Kada vazduh krene, pritisak na pištolju padne. Zato SATA traži da se pritisak podešava dok je okidač potpuno povučen[^sata-x5500-uputstvo], a na stranici jet X preporučeni pritisak navodi kao dinamički ulazni pritisak od 2 bara[^sata-jetx-stranica].
+Da. Opšte objašnjenje: dok je okidač otpušten, vazduh ne protiče i manometar pokazuje pritisak mirovanja, a kada vazduh krene, pritisak na pištolju padne. Zato SATA traži da se pritisak podešava dok je okidač potpuno povučen[^sata-x5500-uputstvo], a na stranici jet X preporučeni pritisak navodi kao dinamički ulazni pritisak od 2 bara[^sata-jetx-stranica].
 
 ### Šta ako na pištolju ne mogu da postignem potreban pritisak?
 
-SATA navodi da se tada povećava pritisak u mreži komprimovanog vazduha. Previsok pritisak, međutim, traži veliku silu na okidaču i može da pokvari rezultat lakiranja[^sata-jetx-uputstvo]. Ako pritisak na pištolju stalno pada, proverite i crevo, spojnice i kapacitet kompresora. Vodič [Kompresor i vazduh za lakiranje](/vodici/kompresor-i-vazduh-za-lakiranje) opisuje šta je potrebno.
+SATA navodi da se tada povećava pritisak u mreži komprimovanog vazduha. Previsok pritisak, međutim, traži veliku silu na okidaču i može da pokvari rezultat lakiranja[^sata-jetx-uputstvo]. Ako pritisak na pištolju stalno pada, korisno je proveriti i crevo, spojnice i kapacitet kompresora. Vodič [Kompresor i vazduh za lakiranje](/vodici/kompresor-i-vazduh-za-lakiranje) opisuje šta je potrebno.

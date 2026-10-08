@@ -69,7 +69,7 @@ izvori:
     verzija: "2026"
     pristupljeno: 2026-10-08
     tip: katalog-proizvodjaca
-    napomena: "Vlies Non-woven str. 83; Spongecut i Semi Round Sanding Block str. 86–87; Radius Flex Longboard str. 88."
+    napomena: "Spongecut i Semi Round Sanding Block str. 86–87."
 prioritet: 1414
 razlogPrioriteta: Dopunjuje osnovni vodič teme konkretnim pitanjem; raspoređeno naizmenično sa drugim temama.
 status:
@@ -106,7 +106,7 @@ Zato isti broj prolaza koji je na ravnom delu sasvim bezbedan na ivici može da 
 
 ## Profili i udubljenja
 
-Kod udubljenih profila problem je obrnut: ravan blok ne dopire do dna, a ivice udubljenja se brzo probiju. Tu pomažu blokovi oblikovani prema površini. Carsystem Sanding Block 198 Kit ima četiri izmenljive podloge, za ravne, konkavne i konveksne površine[^cs-katalog-2026]. C.A.R.FIT ima polukružni blok za male, složene i teško dostupne površine i savitljivi dugačak blok sa podesivim radijusom[^carfit-katalog-2026]. Kako se bira blok, objašnjava vodič [Ručno brušenje: izbor bloka i tehnika](/vodici/rucno-brusenje-blokovi).
+Kod udubljenih profila problem je obrnut: ravan blok ne dopire do dna, a ivice udubljenja se brzo probiju. Tu pomažu blokovi oblikovani prema površini. Carsystem Sanding Block 198 Kit ima četiri izmenljive podloge, za ravne, konkavne i konveksne površine[^cs-katalog-2026]. C.A.R.FIT ima polukružni blok za male, složene i teško dostupne površine[^carfit-katalog-2026]. Kako se bira blok, objašnjava vodič [Ručno brušenje: izbor bloka i tehnika](/vodici/rucno-brusenje-blokovi).
 
 ## Pitanja i odgovori
 
@@ -116,7 +116,7 @@ Savitljiv abraziv i podloga koja prati oblik. Na brusilici to je meki međusloj 
 
 ### Šta uraditi ako se ivica ipak probije?
 
-Prvo proverite do kog sloja ste stigli: do punioca, do prajmera ili do golog lima. Ako se vidi goli lim ili kit, sloj je pretanak i to mesto se ponovo gradi prema sistemu proizvođača, a ne „prelazi“ bazom. Postupak sa puniocem opisuje vodič [Brušenje punioca pre nanošenja bazne boje](/vodici/brusenje-punioca-pre-baze).
+Prvo proverite do kog sloja ste stigli: do punioca, do prajmera ili do golog lima. Ako se vidi goli lim, to mesto se po pravilu ponovo gradi prema sistemu proizvođača (prajmer, punilac), a ne „prelazi“ samo bazom. Na koju podlogu sme da ide naredni sloj, navodi tehnički list tog materijala. Postupak sa puniocem opisuje vodič [Brušenje punioca pre nanošenja bazne boje](/vodici/brusenje-punioca-pre-baze).
 
 ### Važi li isto i za poliranje?
 

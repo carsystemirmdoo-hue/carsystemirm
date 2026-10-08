@@ -2,6 +2,8 @@
 id: SV-0193
 slug: skidac-boje-i-zdravlje
 naslov: "Hemijski skidač boje: rizici i bezbedan rad"
+metaNaslov: "Hemijski skidač boje: rizici po zdravlje i zaštita"
+opis: "Koliko je hemijski skidač boje opasan po zdravlje, gde su upozorenja i koju zaštitu traži bezbednosni list, na primeru skidača iz našeg programa."
 kategorija: zastita-na-radu
 podtema: skidači boje
 tip: resavanje-problema
@@ -11,18 +13,110 @@ glavnoPitanje: Koliko je hemijski skidač boje opasan i kako se bezbedno koristi
 namera: rešavanje problema
 dodatnaPitanja:
   - Gde se nalaze upozorenja za skidač?
-brendovi: []
-proizvodi: []
-povezani: []
-izvori: []
+  - Sme li skidač da se koristi u zatvorenoj garaži?
+  - Šta raditi ako skidač dospe na kožu ili u oči?
+poreklopitanja:
+  tip: pronadjeno-u-izvoru
+  napomena: "Pitanje „koliko je skidač boje štetan po zdravlje“ (q129) postavlja se u FAQ prodavca koji nije naš brend; izvor služi samo kao dokaz pitanja."
+  izvori:
+    - https://www.nonpaints.com/en/faq
+brendovi:
+  - carfit
+  - cosmos-lac
+proizvodi:
+  - carfit-paint-remover-spray
+  - cosmos-lac-cleaners-733-400-ml-paint-remover-733
+povezani:
+  - SV-0037
+  - SV-0187
+  - SV-0190
+  - SV-0205
+  - SV-0204
+izvori:
+  - id: carfit-paint-remover-sds
+    naziv: "C.A.R.FIT, Safety Data Sheet Paint Remover Spray (GB, EN)"
+    url: https://carfitrepair.com/wp-content/uploads/2025/09/C.A.R.FIT-Paint-Remover-Spray_GB_en.pdf
+    verzija: "SDS Version 1.0, revizija 05/08/2025"
+    pristupljeno: 2026-10-08
+    tip: bezbednosni-list
+  - id: carfit-paint-remover-tds
+    naziv: "C.A.R.FIT, Technical data sheet Paint Remover Spray"
+    url: https://carfitrepair.com/wp-content/uploads/2023/05/car-fit-paint-remover-spray-technical-data-sheet.pdf
+    verzija: "EN - 1/0121"
+    pristupljeno: 2026-10-08
+    tip: tehnicki-list
+  - id: cosmos-paint-remover-tds
+    naziv: "Cosmos Lac, TDS Paint Remover"
+    url: https://cosmoslac.com/pdfs/products/en/Paint-Remover_tds.pdf
+    verzija: "Version 01, 16/9/2025"
+    datumIzvora: 2025-09-16
+    pristupljeno: 2026-10-08
+    tip: tehnicki-list
 prioritet: 623
 razlogPrioriteta: Rešava konkretan problem iz prakse; raspoređeno naizmenično sa drugim temama.
 status:
   istrazivanje: zavrseno
-  pisanje: nije-pocelo
+  pisanje: napisano
   tehnickaProvera: nije-provereno
   jezickaProvera: nije-provereno
 strucnaPotvrda:
   potrebna: false
   status: nije-potrebno
+poslednjaProvera: 2026-10-08
+ponovniPregled: 2027-04-08
 ---
+Koliko je skidač boje opasan, zavisi od njegovog sastava, pa se procenjuje prema bezbednosnom listu tog proizvoda. Za C.A.R.FIT Paint Remover Spray iz našeg programa bezbednosni list navodi tri opasnosti: izuzetno zapaljiv aerosol pod pritiskom, moguću alergijsku reakciju na koži i ozbiljnu iritaciju oka[^carfit-paint-remover-sds]. Isti list navodi i da je proizvod namenjen samo profesionalnim korisnicima[^carfit-paint-remover-sds]. Bezbedan rad zato počinje čitanjem etikete i lista, a nastavlja se provetravanjem, zaštitom očiju i ruku i radom dalje od izvora paljenja.
+
+## Šta je u skidaču opasno
+
+Na primeru C.A.R.FIT Paint Remover Spray, prema bezbednosnom listu[^carfit-paint-remover-sds]:
+
+- **Koža.** Proizvod može da izazove alergijsku reakciju na koži (H317). List navodi da se alergijska reakcija obično javlja 12–72 sata posle izlaganja, pa se ne mora primetiti odmah[^carfit-paint-remover-sds].
+- **Oči.** Izaziva ozbiljnu iritaciju oka (H319)[^carfit-paint-remover-sds].
+- **Rastvarači.** List upozorava da organski rastvarači iz proizvoda mogu da deluju na nervni sistem i da ponovljeno izlaganje razgrađuje prirodni masni sloj kože, pa koža lakše upija druge opasne materije[^carfit-paint-remover-sds].
+- **Trudnoća i dojenje.** U odeljku 7 navodi da se dodir izbegava tokom trudnoće i dojenja[^carfit-paint-remover-sds].
+- **Požar.** Izuzetno zapaljiv aerosol (H222), ambalaža pod pritiskom koja zagrevanjem može da pukne (H229); pri upotrebi može da nastane zapaljiva ili eksplozivna smeša para i vazduha[^carfit-paint-remover-sds].
+
+Za Cosmos Lac Paint Remover tehnički list navodi da je izuzetno zapaljiv i upućuje da se pre upotrebe pročita bezbednosni list, koji se dobija na zahtev[^cosmos-paint-remover-tds]. Ostale opasnosti tog proizvoda zato ovde ne navodimo. Pravila za ranije skidače sa diklormetanom opisuje vodič [Skidanje stare boje: brušenje, peskarenje ili hemijski skidač](/vodici/skidanje-stare-boje).
+
+## Zaštita pri radu
+
+Šta navodi odeljak 8 bezbednosnog lista C.A.R.FIT Paint Remover Spray[^carfit-paint-remover-sds]:
+
+| Zaštita | Šta list navodi |
+| --- | --- |
+| Oči | zaštitne naočare sa bočnom zaštitom, standard EN ISO 16321-1 |
+| Ruke | zaštitne rukavice prema EN 374; materijal i vreme proboja nisu navedeni |
+| Disanje | pri kratkom izlaganju ili maloj koncentraciji filterski uređaj, pri intenzivnom ili dužem izlaganju uređaj nezavisan od okolnog vazduha |
+| Higijena | ne jesti, ne piti i ne pušiti u radnom prostoru; posle rada temeljno oprati izložene delove tela, posebno ruke, podlaktice i lice |
+
+Pošto list ne navodi materijal rukavica, za izbor pitajte proizvođača rukavica; vidi vodič [Rukavice za rad sa rastvaračima i 2K materijalima](/vodici/rukavice-za-rastvarace).
+
+Iz tehničkog lista istog proizvoda važni su i uslovi rada: dovoljno provetravanje prostorije jer su pare teže od vazduha, uz upozorenje da se bez dovoljnog provetravanja može stvoriti eksplozivna smeša, i rad na temperaturi od najmanje 15 °C i do 80 % relativne vlažnosti[^carfit-paint-remover-tds]. Skinuta boja odlaže se kao opasan otpad[^carfit-paint-remover-tds]. Cosmos Lac za svoj skidač navodi da se ne koristi na toplim površinama ni na suncu[^cosmos-paint-remover-tds].
+
+## Česte greške
+
+Urednički izbor grešaka koje proizlaze iz upozorenja u navedenim listovima, ne statistika učestalosti:
+
+- **Rad bez naočara „jer se samo prska na lim“.** Odskočila kap ili omekšala boja lako dospeju u oko.
+- **Brisanje skidača golom rukom ili krpom bez rukavica.** Reakcija na koži može da se javi danima kasnije.
+- **Pranje kože razređivačem.** List izričito kaže da se koža pere vodom i sapunom, a ne rastvaračima ili razređivačima[^carfit-paint-remover-sds].
+- **Rad u zatvorenom prostoru pored grejalice.** Aerosol je izuzetno zapaljiv, a pare se zadržavaju pri podu[^carfit-paint-remover-sds][^carfit-paint-remover-tds].
+
+## Ograničenja
+
+Tekst ne daje medicinske savete. Kod nezgode postupite prema odeljku 4 bezbednosnog lista i potražite lekarsku pomoć, uz etiketu ili bezbednosni list proizvoda. Ako radite kao zaposleni, zaštitnu opremu i postupak određuje akt o proceni rizika poslodavca; pregled opreme je u vodiču [Lična zaštitna oprema autolakirera](/vodici/licna-zastitna-oprema-autolakirera).
+
+## Pitanja i odgovori
+
+### Gde se nalaze upozorenja za skidač?
+
+Na etiketi su piktogrami, reč upozorenja i H i P oznake; njihovo značenje objašnjava vodič [Oznake opasnosti na ambalaži](/vodici/oznake-opasnosti-na-ambalazi). Detalji su u bezbednosnom listu: opasnosti u odeljku 2, prva pomoć u odeljku 4, rukovanje u odeljku 7, zaštita u odeljku 8 i uticaj na zdravlje u odeljku 11. Raspored odeljaka objašnjava vodič [Bezbednosni list: šta je u kom od 16 odeljaka](/vodici/bezbednosni-list-16-odeljaka). Za Cosmos Lac Paint Remover bezbednosni list se traži od proizvođača[^cosmos-paint-remover-tds].
+
+### Sme li skidač da se koristi u zatvorenoj garaži?
+
+Samo uz dovoljno provetravanje i bez izvora paljenja, kako navode listovi[^carfit-paint-remover-tds][^carfit-paint-remover-sds]. O provetravanju piše vodič [Ventilacija pri lakiranju u garaži](/vodici/ventilacija-pri-lakiranju-u-garazi).
+
+### Šta raditi ako skidač dospe na kožu ili u oči?
+
+Postupite prema odeljku 4 bezbednosnog lista. Za C.A.R.FIT Paint Remover Spray list navodi: kožu oprati sa mnogo vode i sapuna i skinuti zaprljanu odeću; oči odmah ispirati vodom najmanje 5 minuta i nastaviti dok iritacija ne prestane, uz vađenje kontaktnih sočiva; ako iritacija ili osip ne prolaze, potražiti lekarsku pomoć[^carfit-paint-remover-sds].

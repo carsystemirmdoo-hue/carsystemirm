@@ -70,7 +70,7 @@ izvori:
     datumIzvora: 2026-09-09
     pristupljeno: 2026-10-08
     tip: katalog-proizvodjaca
-    napomena: "F.19, F.19 Finish i F.23 Ceramic str. 8–9; P.25 Ceramic str. 10–11; trake F.23 i P.25 Ceramic str. 18–19; Topline WP S str. 26–27; blokovi str. 36–39."
+    napomena: "F.19, F.19 Finish i F.23 Ceramic str. 8–9; P.25 Ceramic str. 10–11; trake F.23 i P.25 Ceramic str. 18–19; ProFlex Jupiter str. 12–13; Topline WP S str. 26–27; blokovi str. 36–39."
   - id: carfit-katalog-2026
     naziv: "C.A.R.FIT (August Handel GmbH), Car Refinish Consumables katalog 2026, poglavlje Abrasives"
     dokument: /documents/carfit/catalogs/carfit-catalogue-2026.pdf
@@ -96,7 +96,7 @@ strucnaPotvrda:
 poslednjaProvera: 2026-10-08
 ponovniPregled: 2027-04-08
 ---
-Keramičko zrno je vrsta brusnog zrna koju proizvođači ističu zbog bržeg skidanja materijala i dužeg veka diska. Kod Carsystem diskova to nije čista keramika: za F.23 Ceramic i P.25 Ceramic tehnički listovi navode mešavinu mineralnog zrna sa keramičkim udelom[^cs-f23-tds][^cs-p25-tds]. Prednost se najviše vidi tamo gde se skida mnogo materijala ili se brusi tvrda površina. Za vrlo fino brušenje i matiranje pred bazu ili poliranje u našem programu se koriste diskovi sa drugim zrnom.
+Keramičko zrno je vrsta brusnog zrna koju proizvođači ističu zbog bržeg skidanja materijala i dužeg veka diska. Kod Carsystem diskova to nije čista keramika: za F.23 Ceramic i P.25 Ceramic tehnički listovi navode mešavinu mineralnog zrna sa keramičkim udelom[^cs-f23-tds][^cs-p25-tds]. Prema namenama koje navode proizvođači, prednost se očekuje tamo gde se skida mnogo materijala ili se brusi tvrda površina; nezavisno merenje nismo našli. Za vrlo fino brušenje i matiranje pred bazu ili poliranje u našem programu se koriste diskovi sa drugim zrnom.
 
 ## Šta proizvođači navode za keramičko zrno
 
@@ -107,9 +107,9 @@ Keramičko zrno je vrsta brusnog zrna koju proizvođači ističu zbog bržeg ski
 | Carsystem P.25 Ceramic, disk 150 mm, 25 rupa | papir | mešavina sa keramičkim udelom | efikasno skidanje, dug vek, velika otpornost, manje zapunjavanja; P80–P600[^cs-p25-tds] |
 | C.A.R.FIT Purple Ceramic Film, disk 150 mm, 21 rupa | film | samooštreće keramičko zrno | stalno agresivno brušenje, pogodno za tvrde površine; P40–P2000[^carfit-katalog-2026] |
 
-Za P.25 Ceramic katalog 2026/27 navodi raspon od P40 do P600[^cs-katalog-2026], a tehnički list V01 od P80 do P600[^cs-p25-tds]. Pre narudžbe grube granulacije proverite da li je dostupna.
+Za P.25 Ceramic dva dokumenta proizvođača navode različit raspon: katalog 2026/27 od P40 do P600[^cs-katalog-2026], a tehnički list V01 iz 05/2025 od P80 do P600[^cs-p25-tds]. Granulacije P40 i P60 postoje samo u novijem katalogu, a njihova dostupnost kod nas nije potvrđena; pre narudžbe ih proverite.
 
-Kao namenu, Carsystem za sva tri proizvoda navodi sve poslove od grubog do finog brušenja[^cs-f23-tds][^cs-p25-tds]. C.A.R.FIT za Purple Ceramic navodi brušenje kitova, punilaca, slojeva boje i kompozitnih materijala, suvo i mokro, i ističe da je zrno pogodno i za tvrde površine kao što su lakovi otporni na ogrebotine, prajmeri i kataforezni sloj[^carfit-katalog-2026].
+Kao namenu, Carsystem za sva tri proizvoda navodi sve poslove od grubog do finog brušenja[^cs-f23-tds][^cs-f23-strips-tds][^cs-p25-tds]. C.A.R.FIT za Purple Ceramic navodi brušenje kitova, punilaca, slojeva boje i kompozitnih materijala, suvo i mokro, i ističe da je zrno pogodno i za tvrde površine kao što su lakovi otporni na ogrebotine, prajmeri i elektroforetski (kataforezni) premazi[^carfit-katalog-2026].
 
 ## Po čemu se razlikuje od aluminijum-oksida
 
@@ -128,7 +128,7 @@ Za C.A.R.FIT disk sa aluminijum-oksidom (korundom) iz istog kataloga, Red Film D
 Na osnovu namena koje navode proizvođači, a ne merenja:
 
 - **Grubo i srednje brušenje** kita i punioca, gde se skida mnogo materijala. Carsystem za trake F.23 i P.25 Ceramic predviđa i ručne blokove[^cs-katalog-2026], o čemu piše vodič [Brušenje kita: blok, mašina i redosled](/vodici/brusenje-kita-blokom).
-- **Tvrde površine**, kao lakovi otporni na ogrebotine, prajmeri i kataforezni sloj, za koje C.A.R.FIT ističe svoj keramički disk[^carfit-katalog-2026].
+- **Tvrde površine**, kao lakovi otporni na ogrebotine, prajmeri i elektroforetski premazi, za koje C.A.R.FIT ističe svoj keramički disk[^carfit-katalog-2026].
 - **Duže serije brušenja**, kada je važno da disk dugo zadrži snagu. Kako se prepoznaje istrošen disk, objašnjava vodič [Kada zameniti brusni disk](/vodici/vek-trajanja-brusnog-diska).
 
 Kod završnog brušenja i matiranja zrno nije glavni izbor. Carsystem diskovi za utapanje i završnu obradu, F.19 Finish od P1000 do P2000 i ProFlex Jupiter, imaju zrno aluminijum-oksida[^cs-katalog-2026]. Tu su važniji podloga, međusloj i finoća traga. Granulaciju po fazi rada objašnjava vodič [Granulacije brusnog papira](/vodici/granulacije-brusnog-papira).

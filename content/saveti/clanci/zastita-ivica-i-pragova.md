@@ -84,8 +84,9 @@ razlogPrioriteta: Dopunjuje osnovni vodič teme konkretnim pitanjem; raspoređen
 status:
   istrazivanje: zavrseno
   pisanje: napisano
-  tehnickaProvera: nije-provereno
-  jezickaProvera: nije-provereno
+  tehnickaProvera: provereno
+  jezickaProvera: provereno
+napomenaProvere: "urednička provera (AI-asistirana) 2026-10-08: otvoreni Carsystem KS-50.2 V01 (02/2025), UNIFLEX MS V07 (07/2025), UNIFLEX PU V10 (06/2025), KS-1050 v.01 (03/2021), KS-250 V05 (05/2024), Cosmos Lac Antichip (Version 04, 9/7/2026) i Master Mechanic 13 (Version 02, 15/06/2026); 15–25 °C, 1–2 dana, dva sata, najmanje 1 sat, oko 2 sata, 25–30 cm, 2–3 sloja i 5–10 min, namene i izuzeci se poklapaju; V-dizna postoji u katalogu. Ispravljeno (1): tvrdnja da se preko zaštite od udara kamenčića „obično“ lakira označena kao opšte objašnjenje."
 strucnaPotvrda:
   potrebna: false
   status: nije-potrebno
@@ -118,7 +119,7 @@ Za presavijene ivice Carsystem u programu ima i dizne za UNIFLEX sistem, na prim
 
 ## Šta je zaštita od udara kamenčića
 
-To je elastičan, teksturisan premaz za donji deo karoserije, pragove, spojlere i druge delove u koje udaraju kamenčići. Za razliku od zaštite podvozja, obično se preko nje lakira u boji vozila.
+To je elastičan, teksturisan premaz za donji deo karoserije, pragove, spojlere i druge delove u koje udaraju kamenčići. Opšte objašnjenje: za razliku od zaštite podvozja, preko nje se obično lakira u boji vozila.
 
 | Proizvod | Šta tehnički list navodi |
 | --- | --- |

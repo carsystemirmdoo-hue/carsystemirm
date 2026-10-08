@@ -71,8 +71,9 @@ razlogPrioriteta: Rešava konkretan problem iz prakse; raspoređeno naizmenično
 status:
   istrazivanje: zavrseno
   pisanje: napisano
-  tehnickaProvera: nije-provereno
-  jezickaProvera: nije-provereno
+  tehnickaProvera: provereno
+  jezickaProvera: provereno
+napomenaProvere: "urednička provera (AI-asistirana) 2026-10-08: otvoreni SDS Norbin N15-V20 (3.0, 24.06.2021), C.A.R.FIT Express Clearcoat (2.0, 10.07.2022), TDS CS 2K Clear VOC 420, SATA trueSun uputstvo, CS LED Lamp; bezbednost grejača svedena na mere iz SDS-a; ispravke: P-oznake P241–P243 navedene samo za Norbin (C.A.R.FIT ih ima u odeljku 7, ne kao oznake), ventilacija potkrepljena sa oba lista, uklonjeno nabrajanje vrsta grejača koje SDS ne navodi, preciziran uvod."
 strucnaPotvrda:
   potrebna: false
   status: nije-potrebno

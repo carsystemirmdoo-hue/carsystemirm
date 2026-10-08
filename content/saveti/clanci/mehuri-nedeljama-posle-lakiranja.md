@@ -80,7 +80,7 @@ strucnaPotvrda:
 poslednjaProvera: 2026-10-08
 ponovniPregled: 2027-04-08
 ---
-Plikovi koji se pojave nedeljama posle popravke, posle vlažnog vremena, mogući su znak da su ispod laka ostale vlaga ili soli rastvorljive u vodi. R-M objašnjava da boja u vlažnom vremenu upija malo vodene pare i u suvom je ponovo otpušta, što dobro izvedenom sistemu ne škodi. Ako su pri pripremi ispod ostale higroskopne ili u vodi rastvorljive materije, na tom mestu nastaje rastvor soli koji podiže sloj u plikove[^rm-help-blistering]. Uzrok je ispod laka, pa se plikovi ne uklanjaju samo poliranjem.
+Plikovi koji se pojave nedeljama posle popravke, posle vlažnog vremena, mogući su znak da su ispod laka ostale vlaga ili soli rastvorljive u vodi. R-M objašnjava da boja u vlažnom vremenu upija malo vodene pare i u suvom je ponovo otpušta, što dobro izvedenom sistemu ne škodi. Ako su zbog loše obrade prajmera ispod ostale higroskopne ili u vodi rastvorljive materije (soli), na tom mestu nastaje rastvor soli koji podiže sloj u plikove[^rm-help-blistering]. Uzrok je ispod laka, pa se plikovi ne uklanjaju samo poliranjem.
 
 ## Kako izgleda
 
@@ -96,7 +96,7 @@ Proizvođači iz našeg programa vodu na podlozi navode i među uzrocima gubitka
 
 - **Mokro brušenje vodom iz česme.** Proverite da li je posle mokrog brušenja površina isprana i potpuno osušena pre sledećeg sloja. Ulogu ostataka vode iz česme opisuje Glasurit[^glasurit-prirucnik].
 - **Vodeni odmašćivači.** Carsystem za Silicone Remover Water 2.0 traži dovoljno odzračivanje na svim podlogama, da ne bi ostale zarobljene vlaga ili rastvarač[^cs-silicone-remover-water-tds]. U baslac tabeli pripreme površina se posle odmašćivača briše na suvo[^baslac-cleaners].
-- **Komprimovani vazduh.** Voda iz instalacije može da dospe na površinu kroz pištolj ili pištolj za izduvavanje. SATA u uputstvu za pištolj traži čist komprimovani vazduh i kao primer navodi filter[^sata-x5500-uputstvo]. Vodič [Kompresor i vazduh za lakiranje](/vodici/kompresor-i-vazduh-za-lakiranje) opisuje odvajanje vode.
+- **Komprimovani vazduh.** Opšte objašnjenje: voda iz instalacije može da dospe na površinu kroz pištolj ili pištolj za izduvavanje. SATA u uputstvu za pištolj traži čist komprimovani vazduh i kao primer navodi filter[^sata-x5500-uputstvo]. Vodič [Kompresor i vazduh za lakiranje](/vodici/kompresor-i-vazduh-za-lakiranje) opisuje odvajanje vode.
 - **Hladan deo u toplom prostoru.** Deo unet sa hladnog mesta može da se orosi pre nego što se zagreje[^glasurit-prirucnik]. Zapišite odakle je deo došao i koliko je stajao u prostoru. Vidi vodič [Temperatura i vlažnost pri lakiranju](/vodici/temperatura-i-vlaznost-pri-lakiranju).
 - **Podloga koja upija vodu.** Glasurit higroskopne materije, koje privlače i zadržavaju vodu, navodi kao mogući uzrok plikova[^glasurit-prirucnik]. Proverite da li je u sistemu bio upojan materijal koji je mogao da upije vodu pre lakiranja.
 
@@ -118,7 +118,7 @@ Ovo su mogući uzroci prema izvorima, ne dijagnoza. Isti izgled mogu imati i pli
 
 ### Kako vlaga i nečistoće ispod laka utiču na to?
 
-Prema R-M, rastvorljive materije zaostale pri pripremi, zajedno sa vlagom koju boja upija u vlažnom vremenu, stvaraju rastvor soli koji podiže sloj u plikove[^rm-help-blistering]. Bez takvih ostataka, ista vlaga dobro izvedenom sistemu ne škodi.
+Prema R-M, rastvorljive materije zaostale pri lošoj obradi prajmera, zajedno sa vlagom koju boja upija u vlažnom vremenu, stvaraju rastvor soli koji podiže sloj u plikove[^rm-help-blistering]. Bez takvih ostataka, ista vlaga dobro izvedenom sistemu ne škodi.
 
 ### Hoće li plikovi nestati kada se vreme osuši?
 

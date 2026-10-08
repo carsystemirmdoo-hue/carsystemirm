@@ -76,15 +76,16 @@ razlogPrioriteta: Dopunjuje osnovni vodič teme konkretnim pitanjem; raspoređen
 status:
   istrazivanje: zavrseno
   pisanje: napisano
-  tehnickaProvera: nije-provereno
-  jezickaProvera: nije-provereno
+  tehnickaProvera: provereno
+  jezickaProvera: provereno
+napomenaProvere: "urednička provera (AI-asistirana) 2026-10-08: otvoreni Carsystem 1K Epoxy Primer TDS v.01 (03/2021), Primer Spray TDS v.02 (03/2021) i stranica Stripping Disc, C.A.R.FIT Glas Plus Putty i Zinc Spray TDS, Cosmos Lac Rust Shock Freeze Penetrating Oil TDS (19/9/25); granulacije P80–P120 i P80–P240, SA 2½, namena diska i opis spreja se poklapaju. Ispravljeno (4): tvrdnja o „svim“ tehničkim listovima iz programa suzena na listove navedene u tekstu (Carsystem Anti Rust Putty ima posebna pravila, vidi SV-0045); znaci u koraku procene i posle brušenja preformulisani kao mogući znaci; odmašćivanje pre brušenja označeno kao opšte objašnjenje; jedna rečenica bez glagola dopunjena."
 strucnaPotvrda:
   potrebna: false
   status: nije-potrebno
 poslednjaProvera: 2026-10-08
 ponovniPregled: 2027-04-08
 ---
-Rđa se uklanja mehanički do čistog, zdravog metala, i to na celoj zahvaćenoj površini, a ne samo tamo gde se vidi. Posle toga se metal odmašćuje i što pre štiti prajmerom koji je namenjen golom metalu. Tehnički listovi materijala iz našeg programa traže podlogu bez rđe; nijedan od njih ne predviđa nanošenje preko preostale rđe. Ako je lim stanjen ili probijen, brušenje nije dovoljno i potrebna je limarska popravka.
+Rđa se uklanja mehanički do čistog, zdravog metala, i to na celoj zahvaćenoj površini, a ne samo tamo gde se vidi. Posle toga se metal odmašćuje i što pre štiti prajmerom koji je namenjen golom metalu. Tehnički listovi prajmera, kitova i zaštitnih premaza koje ovde navodimo traže podlogu bez rđe; nijedan od njih ne predviđa nanošenje preko preostale rđe. Ako je lim stanjen ili probijen, brušenje nije dovoljno i potrebna je limarska popravka.
 
 ## Šta proizvođači traže od podloge
 
@@ -99,14 +100,14 @@ Granulacije iz ovih listova važe za te proizvode. Za drugi materijal čitajte n
 
 ## Postupak korak po korak
 
-1. **Procena.** Lak oko vidljive rđe se pregleda i lagano kucne ili pritisne. Mehurići, podignut lak i mesta gde lak lako puca pokazuju da korozija ide dalje ispod. Kako se oblici korozije razlikuju, opisuje vodič [Korozija na automobilu: vrste](/vodici/korozija-na-automobilu-vrste).
-2. **Odmašćivanje pre brušenja.** Da se nečistoća i so sa puta ne utrljaju u metal.
+1. **Procena.** Lak oko vidljive rđe se pregleda i lagano kucne ili pritisne. Mehurići, podignut lak i mesta gde lak lako puca mogu da ukazuju na to da korozija ide dalje ispod. Kako se oblici korozije razlikuju, opisuje vodič [Korozija na automobilu: vrste](/vodici/korozija-na-automobilu-vrste).
+2. **Odmašćivanje pre brušenja.** Opšte objašnjenje: radi se da se nečistoća i so sa puta ne bi utrljali u metal.
 3. **Skidanje laka i rđe.** Za veću površinu i debele premaze postoje diskovi za grubo čišćenje. Carsystem Stripping Disc je, prema stranici proizvoda, namenjen mašinskom uklanjanju zaštite podvozja, zaštite od udara kamenčića, zaptivnih masa, boje i rđe[^cs-stripping-disc]. Poštujte najveći dozvoljeni broj obrtaja koji proizvođač navodi za prečnik diska[^cs-stripping-disc].
 4. **Brušenje do zdravog metala.** Rđa se skida dok ne ostane ravnomerno svetao metal, bez tamnih tačaka u udubljenjima. U udubljenjima rđa ostaje najduže, pa se ona posebno proveravaju.
 5. **Prelaz prema zdravom laku.** Ivica laka oko golog metala se brusi u blag prelaz.
 6. **Ponovno odmašćivanje i zaštita.** Goli metal se ne ostavlja nezaštićen. Redosled pripreme i izbor granulacije opisuje vodič [Priprema golog čeličnog lima](/vodici/priprema-golog-lima).
 
-Ako se posle brušenja vide sitne rupice ili lim popušta pod pritiskom, to je znak probijene korozije.
+Ako se posle brušenja vide sitne rupice ili lim popušta pod pritiskom, to je verovatan znak probijene korozije, a konačnu procenu radi limar.
 
 ## Koliko daleko od vidljive rđe treba brusiti
 

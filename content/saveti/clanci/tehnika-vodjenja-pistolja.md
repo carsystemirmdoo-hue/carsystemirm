@@ -56,6 +56,11 @@ izvori:
     url: https://www.sata.com/en/jet-x/CF1931336
     pristupljeno: 2026-10-08
     tip: sajt-proizvodjaca
+  - id: rm-oblaci
+    naziv: "R-M, Help Centre: Clouding (Info R-M International)"
+    url: https://info.rmpaint.com/help/clouding
+    pristupljeno: 2026-10-08
+    tip: edukacija-proizvodjaca
   - id: rm-c2a40-tds
     naziv: "R-M, Technical Information C 2A40 AirTOP, Clear coat, air drying"
     dokument: /documents/products/rm/c-2a40-airtop/rm-c-2a40-airtop-technical-data-sheet.pdf
@@ -98,13 +103,13 @@ Rastojanje se uzima iz uputstva pištolja. SATA za HVLP pištolje navodi pribli�
 | SATAjet X 5500 HVLP | 10–21 cm[^sata-x5500-uputstvo] | 10–15 cm[^sata-x5500-uputstvo] |
 | SATA jet X (RP i HVLP) | 10–21 cm[^sata-jetx-uputstvo] | 15–19 cm[^sata-jetx-uputstvo] |
 
-Izvori se ne slažu potpuno. Uputstvo za jet X daje jednu preporuku za obe tehnologije, a stranica proizvoda za varijantu jet X RP 1.2 navodi 17–21 cm[^sata-jetx-uputstvo][^sata-jetx-stranica]. Kada se podaci razlikuju, držite se uputstva za tačno Vaš model i proverite rezultat na probnom limu.
+Izvori se ne slažu potpuno. Uputstvo za jet X daje jednu preporuku za obe tehnologije, 15–19 cm[^sata-jetx-uputstvo]. Stranica proizvoda jet X, otvorena za varijantu RP 1.2, navodi preporučeno rastojanje 17–21 cm, uz napomenu da se podaci odnose na celu liniju proizvoda, a ne na pojedinačne varijante[^sata-jetx-stranica]. Ta vrednost odgovara opštoj SATA preporuci za RP pištolje[^sata-saveti]. Kada se podaci razlikuju, držite se uputstva za tačno Vaš model i proverite rezultat na probnom limu.
 
 Uputstvo za jet X rastojanje pominje i kao bezbednosnu meru: između pištolja i objekta treba da postoji dovoljno rastojanje, koje zavisi od materijala[^sata-jetx-uputstvo]. Opšte objašnjenje: preblizu se nanosi previše materijala na malu površinu, što može da dovede do curenja; predaleko materijal stiže suvlji, a više ga odlazi u preprašivanje.
 
 ## Ugao i putanja
 
-Na slici u uputstvu za SATAjet X 5500 pištolj je postavljen pod uglom od 90° prema površini i pomera se paralelno sa njom, tako da rastojanje ostaje isto duž celog prolaza[^sata-x5500-uputstvo]. U praksi to znači:
+Na slici u uputstvu za SATAjet X 5500 pištolj je postavljen pod uglom od 90° prema površini i pomera se paralelno sa njom, tako da rastojanje ostaje isto duž celog prolaza[^sata-x5500-uputstvo]. Opšte objašnjenje onoga što to znači u radu:
 
 - pištolj se vodi celom rukom, a ne zakretanjem zgloba, jer bi se zakretanjem rastojanje menjalo na krajevima prolaza;
 - na zaobljenim delovima pištolj prati oblik površine, tako da ostane upravan na nju;
@@ -114,23 +119,23 @@ Na slici u uputstvu za SATAjet X 5500 pištolj je postavljen pod uglom od 90° p
 
 Opšte objašnjenje: pri istom podešavanju pištolja brzina određuje koliko materijala padne na jedinicu površine. Sporiji prolaz daje deblji, vlažniji sloj, a brži tanji i suvlji. Zato SATA navodi brzinu nanošenja kao jedan od faktora koji menjaju odgovarajuće rastojanje[^sata-saveti], a uputstvo za jet X kaže da se veličina dizne bira i prema željenoj brzini nanošenja[^sata-jetx-uputstvo].
 
-Najvažnije je da brzina bude ujednačena tokom celog prolaza i od prolaza do prolaza. Pravu brzinu za Vaš materijal najlakše ćete naći na probnom limu: sloj treba da se razlije bez curenja i da pokrije podlogu na način koji opisuje tehnički list.
+Opšte pravilo, bez brojčane vrednosti u izvorima: brzina treba da bude ujednačena tokom celog prolaza i od prolaza do prolaza. Pravu brzinu za Vaš materijal najlakše ćete naći na probnom limu: sloj treba da se razlije bez curenja i da pokrije podlogu na način koji opisuje tehnički list.
 
 ## Preklapanje
 
-Svaki sledeći prolaz delimično prelazi preko prethodnog, jer lepeza na krajevima nanosi manje materijala nego u sredini. Opšte objašnjenje: preklapanje se bira tako da zbir dva susedna prolaza da ujednačenu debljinu bez traka. Premalo preklapanja ostavlja svetlije i tamnije pruge, posebno kod metalik i bisernih boja, a previše daje deblje zone. Kao probu koristite probni lim ili papir pre rada na vozilu.
+R-M kao jedan od načina da se izbegnu oblaci (svetlije i tamnije mrlje ili pruge, uglavnom kod metalik završnica) navodi ujednačeno nanošenje, pravilno preklopljeno sa prethodnim prolazom pištolja[^rm-oblaci]. Opšte objašnjenje: svaki sledeći prolaz delimično prelazi preko prethodnog, jer lepeza na krajevima nanosi manje materijala nego u sredini, pa se preklapanje bira tako da zbir dva susedna prolaza da ujednačenu debljinu bez traka; previše preklapanja daje deblje zone. Kao probu koristite probni lim ili papir pre rada na vozilu.
 
-Izvori koje navodimo ne daju procenat preklapanja, pa ga ovde ne navodimo. Ako ga proizvođač Vašeg materijala navodi u uputstvu za nanošenje, držite se tog podatka.
+Izvori koje navodimo ne daju procenat preklapanja, pa ga ovde ne navodimo; R-M traži „pravilno“ preklapanje, bez broja[^rm-oblaci]. Ako ga proizvođač Vašeg materijala navodi u uputstvu za nanošenje, držite se tog podatka.
 
 ## Pitanja i odgovori
 
 ### Zašto se pištolj drži upravno?
 
-Lepeza je projektovana tako da daje ujednačen otisak kada je pištolj upravan na površinu. Ako se pištolj nagne, jedan kraj lepeze je bliže površini od drugog, pa sloj na toj strani bude deblji. Zato uputstvo za SATAjet X 5500 prikazuje ugao od 90° i paralelno vođenje[^sata-x5500-uputstvo].
+Opšte objašnjenje: lepeza daje ujednačen otisak kada je pištolj upravan na površinu. Ako se pištolj nagne, jedan kraj lepeze je bliže površini od drugog, pa sloj na toj strani bude deblji. Zato uputstvo za SATAjet X 5500 prikazuje ugao od 90° i paralelno vođenje[^sata-x5500-uputstvo].
 
 ### Zašto je preporučeno rastojanje različito za HVLP i RP?
 
-HVLP raspršuje materijal većom količinom vazduha pod manjim pritiskom, pa se drži bliže; RP radi sa nešto višim pritiskom i preporučuje se na većem rastojanju. Za SATAjet X 5500 uputstvo navodi 10–15 cm za HVLP i 17–21 cm za RP[^sata-x5500-uputstvo]. Razliku tehnologija objašnjava vodič [HVLP, RP i ostale tehnologije pištolja](/vodici/vrste-pistolja-za-lakiranje).
+SATA u praktičnim savetima za HVLP pištolje navodi kraće rastojanje nego za RP[^sata-saveti], a izvori koje navodimo ne objašnjavaju razlog. Za SATAjet X 5500 uputstvo navodi 10–15 cm za HVLP i 17–21 cm za RP[^sata-x5500-uputstvo]. Razliku tehnologija objašnjava vodič [HVLP, RP i ostale tehnologije pištolja](/vodici/vrste-pistolja-za-lakiranje).
 
 ### Koliko slojeva se nanosi?
 

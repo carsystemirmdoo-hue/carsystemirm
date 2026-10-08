@@ -67,25 +67,27 @@ strucnaPotvrda:
 poslednjaProvera: 2026-10-08
 ponovniPregled: 2027-04-08
 ---
-Kada pištolj pljuje, prekida mlaz ili pulsira, a u čaši se pojavljuju mehurići, to pokazuje da u kanal za materijal ulazi vazduh ili da materijal ne dotiče ravnomerno. SATA kao moguće uzroke navodi nedovoljno pritegnutu diznu za materijal, oštećenu ili istrošenu zaptivku dizne, olabavljenu vazdušnu kapu, zapušen procep između vazdušne kape i dizne, zapušen ili oštećen set dizni, premalo materijala u čaši i neispravnu zaptivku igle[^sata-jetx-uputstvo]. Uzroci se proveravaju redom, od najjednostavnijeg, a konačan uzrok zavisi i od materijala i uslova rada.
+Kada pištolj pljuje, prekida mlaz ili pulsira, a u čaši se pojavljuju mehurići, to po opštem objašnjenju može da znači da u kanal za materijal ulazi vazduh ili da materijal ne dotiče ravnomerno. Za nemiran mlaz koji pljuje SATA kao moguće uzroke navodi nedovoljno pritegnutu diznu za materijal i oštećenu ili istrošenu zaptivku dizne; za mehuriće u čaši još i olabavljenu vazdušnu kapu, zapušen procep između vazdušne kape i dizne, zapušen ili oštećen set dizni, premalo materijala u čaši i neispravnu zaptivku igle[^sata-jetx-uputstvo]. Uzroci se proveravaju redom, od najjednostavnijeg, a konačan uzrok zavisi i od materijala i uslova rada.
 
 ## Mogući uzroci i provera
 
-| Mogući uzrok | Kako se proverava i otklanja |
-| --- | --- |
-| premalo materijala u čaši | dopuniti čašu i ponoviti probu[^sata-jetx-uputstvo] |
-| dizna za materijal nije dovoljno pritegnuta | pritegnuti diznu; za SATAjet X 5500 uputstvo navodi moment od 11 Nm[^sata-x5500-uputstvo] |
-| oštećena ili istrošena zaptivka dizne za materijal | zameniti zaptivku[^sata-jetx-uputstvo] |
-| olabavljena vazdušna kapa | pritegnuti kapu rukom[^sata-jetx-uputstvo] |
-| zapušen procep između vazdušne kape i dizne | očistiti, prema poglavlju o čišćenju[^sata-jetx-uputstvo] |
-| zapušen ili oštećen set dizni | očistiti set ili ga zameniti[^sata-jetx-uputstvo] |
-| neispravna zaptivka igle | zameniti zaptivku igle[^sata-jetx-uputstvo] |
+| Mogući uzrok | Uz koji simptom ga SATA navodi | Kako se proverava i otklanja |
+| --- | --- | --- |
+| premalo materijala u čaši | mehurići u čaši[^sata-jetx-uputstvo] | dopuniti čašu i ponoviti probu[^sata-jetx-uputstvo] |
+| dizna za materijal nije dovoljno pritegnuta | nemiran mlaz koji pljuje, mehurići u čaši[^sata-jetx-uputstvo] | pritegnuti diznu; za SATAjet X 5500 uputstvo navodi moment od 11 Nm[^sata-x5500-uputstvo] |
+| oštećena ili istrošena zaptivka dizne za materijal | nemiran mlaz koji pljuje, mehurići u čaši[^sata-jetx-uputstvo] | zameniti zaptivku[^sata-jetx-uputstvo] |
+| olabavljena vazdušna kapa | mehurići u čaši[^sata-jetx-uputstvo] | pritegnuti kapu rukom[^sata-jetx-uputstvo] |
+| zapušen procep između vazdušne kape i dizne | mehurići u čaši[^sata-jetx-uputstvo] | očistiti, prema poglavlju o čišćenju[^sata-jetx-uputstvo] |
+| zapušen ili oštećen set dizni | mehurići u čaši[^sata-jetx-uputstvo] | očistiti set ili ga zameniti[^sata-jetx-uputstvo] |
+| neispravna zaptivka igle | mehurići u čaši[^sata-jetx-uputstvo] | zameniti zaptivku igle[^sata-jetx-uputstvo] |
 
 Iste uzroke za nemiran mlaz i mehuriće u čaši navodi i uputstvo za SATAjet X 5500[^sata-x5500-uputstvo]. Pre svake provere i rastavljanja pištolj se odvaja od vazduha[^sata-jetx-uputstvo].
 
 ## Redosled provere
 
-1. **Količina materijala.** Najjednostavniji uzrok: kada je materijala malo, pištolj uz materijal povlači i vazduh.
+Redosled je urednički predlog, od najjednostavnijeg ka složenijem; uzroci su iz SATA tabela, a objašnjenja uz njih su opšta.
+
+1. **Količina materijala.** Najjednostavniji uzrok: kada je materijala malo, pištolj uz materijal može da povuče i vazduh.
 2. **Pritegnutost.** Proverite vazdušnu kapu i diznu za materijal. Olabavljen spoj može da propušta vazduh u kanal za materijal.
 3. **Čistoća.** Skinite set dizni i proverite procep između kape i dizne, otvore kape i vrh igle. Čistite samo SATA četkama i iglama za čišćenje dizni, kako je opisano u vodiču [Čišćenje pištolja posle rada](/vodici/ciscenje-pistolja-posle-rada).
 4. **Zaptivke.** Ako ništa od prethodnog ne pomogne, na red dolaze zaptivka dizne za materijal i zaptivka igle.
@@ -97,11 +99,11 @@ Opšte objašnjenje: mlaz može da bude nemiran i kada materijal ne dotiče ravn
 
 ### Kako se proverava zaptivka dizne?
 
-Zaptivka dizne za materijal zaptiva spoj između dizne i tela pištolja. Opšti način provere: skinite iglu, vazdušnu kapu i diznu tim redom, pregledajte zaptivku i dosedne površine, pa ih očistite. Ako je zaptivka zarezana, deformisana ili nedostaje, zamenite je; SATA za oštećenu ili istrošenu zaptivku navodi zamenu kao rešenje za nemiran mlaz[^sata-jetx-uputstvo]. Zaptivke se za SATAjet X 5500 prodaju u pakovanju od pet komada[^sata-x5500-uputstvo]. SATA je objavila i video uputstvo za zamenu ove zaptivke[^sata-video-zaptivka]. Posle zamene dizna se priteže prema uputstvu i proverava se lepeza.
+Opšte objašnjenje: zaptivka dizne za materijal zaptiva spoj između dizne i tela pištolja. Opšti način provere: skinite iglu, vazdušnu kapu i diznu tim redom, pregledajte zaptivku i dosedne površine, pa ih očistite. Ako je zaptivka zarezana, deformisana ili nedostaje, zamenite je; SATA za oštećenu ili istrošenu zaptivku navodi zamenu kao rešenje za nemiran mlaz[^sata-jetx-uputstvo]. Zaptivke se za SATAjet X 5500 prodaju u pakovanju od pet komada[^sata-x5500-uputstvo]. Na stranici sa video materijalima SATA navodi i video pod nazivom „SATA - Exchange of the fluid tip seal“[^sata-video-zaptivka]; njegov sadržaj ovde ne prepričavamo. Posle zamene dizna se priteže prema uputstvu i proverava se lepeza.
 
 ### Šta znače mehurići u čaši?
 
-Mehurići koji izlaze u čašu tokom prskanja znače da vazduh ulazi u kanal za materijal. Prema SATA tabelama, uzrok može biti olabavljena vazdušna kapa, nepritegnuta dizna, oštećena zaptivka dizne, zapušen procep oko dizne, zapušen set dizni, neispravna zaptivka igle ili premalo materijala[^sata-jetx-uputstvo].
+Opšte objašnjenje: mehurići koji izlaze u čašu tokom prskanja ukazuju na to da vazduh ulazi u kanal za materijal. Prema SATA tabelama, uzrok može biti olabavljena vazdušna kapa, nepritegnuta dizna, oštećena zaptivka dizne, zapušen procep oko dizne, zapušen set dizni, neispravna zaptivka igle ili premalo materijala[^sata-jetx-uputstvo].
 
 ### Pištolj kaplje na vrhu dizne: da li je to isti problem?
 

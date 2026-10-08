@@ -90,8 +90,9 @@ razlogPrioriteta: Rešava konkretan problem iz prakse; raspoređeno naizmenično
 status:
   istrazivanje: zavrseno
   pisanje: napisano
-  tehnickaProvera: nije-provereno
-  jezickaProvera: nije-provereno
+  tehnickaProvera: ispravke-potrebne
+  jezickaProvera: provereno
+napomenaProvere: "urednička provera (AI-asistirana) 2026-10-08: otvoreni SDS HB 002 (v4.0, 15.05.2026), HB 032 (v3.0), 45-R45 (v4.0), 45-W331 (v4.0, 29.04.2026), TDS ONYX HD, AGILIS, 45 Line i R-M stranica SDS; svi uslovi skladištenja (odeljci 7 i 10, 5–40 °C) se poklapaju; bez ispravki. Oznaka za stručnu potvrdu je opravdana: nijedan izvor ne opisuje upotrebljivost materijala posle smrzavanja."
 strucnaPotvrda:
   potrebna: true
   razlog: "Bezbednosni i tehnički listovi koje smo otvorili navode samo uslove skladištenja (zaštita od mraza, 5–40 °C za R-M HB 002, HB 032 i baslac 45-R45). Nijedan izvor proizvođača ne opisuje šta se dešava sa smrznutom vodenom baznom bojom niti da li je upotrebljiva posle odmrzavanja; za baslac 45 Line baze (45-W331) list ne navodi ni temperaturni raspon. Potrebna je potvrda tehničke podrške R-M/baslac pre objave odgovora na glavno pitanje."

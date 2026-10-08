@@ -93,8 +93,9 @@ razlogPrioriteta: Dopunjuje osnovni vodič teme konkretnim pitanjem; raspoređen
 status:
   istrazivanje: zavrseno
   pisanje: napisano
-  tehnickaProvera: nije-provereno
-  jezickaProvera: nije-provereno
+  tehnickaProvera: provereno
+  jezickaProvera: provereno
+napomenaProvere: "urednička provera (AI-asistirana) 2026-10-08: otvoreni TDS CS 2K Clear VOC 420 V09, Premium V08, HS/SR V04, CC 19 AS V01, Carbo Clear Plus V02, CC.26 ECO-X V01 04/2026, C.A.R.FIT 2K Ultra HS v2/0325, Cosmos Lac Master Mechanic 20 v02; tabela tvrdoće proverena na slici tabele u PDF-u, sve vrednosti tačne; R-M/baslac listovi iz lokalne baze ne navode potpunu tvrdoću; ispravke: napomena o hlađenju vezana samo za 2K Clear VOC 420, uklonjena neproverena oznaka „1K“ za sprej, jedna jezička ispravka."
 strucnaPotvrda:
   potrebna: false
   status: nije-potrebno

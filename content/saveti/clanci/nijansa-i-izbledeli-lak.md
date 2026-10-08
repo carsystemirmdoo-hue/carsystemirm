@@ -68,8 +68,9 @@ razlogPrioriteta: Rešava konkretan problem iz prakse; raspoređeno naizmenično
 status:
   istrazivanje: zavrseno
   pisanje: napisano
-  tehnickaProvera: nije-provereno
-  jezickaProvera: nije-provereno
+  tehnickaProvera: provereno
+  jezickaProvera: provereno
+napomenaProvere: "urednička provera (AI-asistirana) 2026-10-08: otvoreni Info R-M After care, Metamerism i Color Adjustment, baslac Color Chips i Blend into adjacent panel, R-M Digital color search; sve tvrdnje se poklapaju; ispravka: razdvojena tvrdnja baslac (provera na očišćenom i ispoliranom delu) od uredničkog objašnjenja zašto se polira."
 strucnaPotvrda:
   potrebna: false
   status: nije-potrebno

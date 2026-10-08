@@ -81,8 +81,9 @@ razlogPrioriteta: Rešava konkretan problem iz prakse; raspoređeno naizmenično
 status:
   istrazivanje: zavrseno
   pisanje: napisano
-  tehnickaProvera: nije-provereno
-  jezickaProvera: nije-provereno
+  tehnickaProvera: ispravke-potrebne
+  jezickaProvera: provereno
+napomenaProvere: "urednička provera (AI-asistirana) 2026-10-08: otvoreni rad Vetere i Romagnoli (CIC), Carsystem 1K Epoxy Primer TDS v.01 i Zink-Spray TDS v.02 (03/2021), Cosmos Lac Master Mechanic Epoxy Primer (Version 03, 9/7/2026), Metal Primer (Version 02, 17/06/2026) i Rust Shock Freeze Penetrating Oil (19/9/25), R-M P 5480 (07/2026); uslovi za podlogu u tabeli i navodi iz rada se poklapaju, tuđi konvertor se ne preporučuje. Ispravljeno (5): uvodna tvrdnja o „svim“ listovima suzena na listove iz tabele; rad jasno označen kao laboratorijski (paneli AISI 1010), a ne uputstvo za automobil, i to ponovljeno u odgovoru o ispiranju; dodat laboratorijski nalaz o nepretvorenoj rđi ispod sloja tanata uz ogradu; ograničenja izvedena iz načina rada označena kao opšte objašnjenje; „garancija sistema“ preformulisana. Stručna potvrda ostaje: suština (da li konvertor ima mesto u popravci karoserije) nema izvor za karoseriju ni proizvod iz programa."
 strucnaPotvrda:
   potrebna: true
   razlog: "U našem programu nema konvertora rđe, pa nema tehničkog lista iz koga bi se proverili nanošenje, vreme sušenja i kompatibilnost sa sledećim slojem. Jedini nezavisni izvor je stariji naučni rad o tanin-fosfatnim tretmanima, bez podataka za karoseriju. Odgovor na glavno pitanje (da li konvertor zaustavlja koroziju na automobilu) treba da potvrdi stručna osoba ili tehnička podrška proizvođača prajmera."
@@ -90,24 +91,24 @@ strucnaPotvrda:
 poslednjaProvera: 2026-10-08
 ponovniPregled: 2027-04-08
 ---
-Konvertor rđe hemijski menja deo rđe u drugo jedinjenje, ali to nije isto što i uklanjanje rđe. U našem programu konvertora rđe nema, a svi prajmeri i zaštitni materijali iz našeg programa čije smo tehničke listove proverili traže podlogu bez rđe. Zato za popravku karoserije materijalima iz našeg programa ne možemo da preporučimo konvertor kao zamenu za brušenje do zdravog metala. Da li određeni konvertor sme ispod određenog prajmera, može da kaže samo tehnički list tog konvertora i proizvođač prajmera.
+Konvertor rđe hemijski menja deo rđe u drugo jedinjenje, ali to nije isto što i uklanjanje rđe. U našem programu konvertora rđe nema, a prajmeri i zaštitni materijali čije tehničke listove navodimo u tabeli ispod traže podlogu bez rđe. Zato za popravku karoserije materijalima iz našeg programa ne možemo da preporučimo konvertor kao zamenu za brušenje do zdravog metala. Da li određeni konvertor sme ispod određenog prajmera, može da kaže samo tehnički list tog konvertora i proizvođač prajmera.
 
 ## Šta konvertor radi
 
-Postoji više vrsta konvertora; jedna dugo poznata vrsta su kisele vodene smeše sa taninima i fosfornom kiselinom. Naučni rad Veterea i Romanjolija opisuje da tanini reaguju sa jedinjenjima gvožđa i da na čeliku nastaje sloj tanata, a da fosforna kiselina pomaže stvaranju tog sloja i rastvaranju oksida[^vetere-tannins]. Isti rad navodi da su takvi tretmani alternativa kada temeljno mehaničko čišćenje nije moguće[^vetere-tannins].
+Postoji više vrsta konvertora; jedna dugo poznata vrsta su kisele vodene smeše sa taninima i fosfornom kiselinom[^vetere-tannins]. Laboratorijski naučni rad Veterea i Romanjolija (stručni izvor van našeg programa) opisuje da tanini reaguju sa jedinjenjima gvožđa i da na čeliku nastaje sloj tanata, a da fosforna kiselina pomaže stvaranju tog sloja i rastvaranju oksida[^vetere-tannins]. Isti rad navodi da su takvi tretmani alternativa kada temeljno mehaničko čišćenje nije moguće[^vetere-tannins].
 
 Iz istog izvora vide se i ograničenja:
 
 - Produkti reakcije tanina sa gvožđem delom ne prianjaju, pa se površina posle tretmana vodenim suspenzijama tanina pere da bi se uklonili labavi produkti[^vetere-tannins].
 - Autori na početku rada navode da je potpuno uklanjanje rđe važan uslov trajnosti premaza i da dobra boja na zarđaloj površini rano otkazuje[^vetere-tannins].
 
-Rad je laboratorijski i ne govori o karoseriji, šupljinama ni o konkretnom komercijalnom proizvodu. Zato iz njega ne izvodimo koliko konvertor štiti automobil.
+Rad je laboratorijski: ispituje male čelične pločice i suspenzije tanina, a ne govori o karoseriji, šupljinama ni o konkretnom komercijalnom proizvodu. Zato nije uputstvo za rad na automobilu i iz njega ne izvodimo koliko konvertor štiti automobil.
 
 ## Kada konvertor ne pomaže
 
-Ovo su ograničenja koja proizlaze iz načina rada i iz tehničkih listova prajmera, a ne iz ispitivanja konkretnog konvertora:
+Ovo su ograničenja koja proizlaze iz načina rada (opšte objašnjenje) i iz tehničkih listova prajmera, a ne iz ispitivanja konkretnog konvertora:
 
-- **Debela, slojevita rđa.** Hemijska reakcija deluje na površinu do koje tečnost dopre. Labavi slojevi ispod ostaju.
+- **Debela, slojevita rđa.** Hemijska reakcija deluje na površinu do koje tečnost dopre. Labavi slojevi ispod ostaju. I u pomenutom laboratorijskom radu je, kod nekih tanina, ispod sloja tanata ostala znatna količina nepretvorene rđe[^vetere-tannins].
 - **Probijen ili stanjen lim.** Konvertor ne vraća izgubljeni metal. Takvo mesto traži limarsku popravku; vidi [Uklanjanje rđe sa karoserije](/vodici/uklanjanje-rdje-sa-karoserije).
 - **Rđa ispod laka.** Konvertor ne stiže ispod laka koji se nije skinuo, pa korozija tamo nastavlja. Više u vodiču [Mehuri rđe ispod laka](/vodici/mehuri-rdje-ispod-laka).
 - **Kit preko „pretvorene“ rđe.** Ni kitovi iz našeg programa ne predviđaju takvu podlogu; vidi [Može li kit preko rđe](/vodici/kit-preko-rdje).
@@ -124,7 +125,7 @@ Ovo su ograničenja koja proizlaze iz načina rada i iz tehničkih listova prajm
 
 R-M P 5480 je iz programa za komercijalna vozila i ovde je naveden samo kao još jedan primer istog uslova.
 
-Nijedan od ovih listova ne pominje konvertor rđe kao dozvoljenu podlogu. To ne znači da je svaka kombinacija nemoguća, nego da nije opisana u dokumentima proizvođača, pa za nju nema garancije sistema.
+Nijedan od ovih listova ne pominje konvertor rđe kao dozvoljenu podlogu. To ne znači da je svaka kombinacija nemoguća, nego da nije opisana u dokumentima proizvođača, pa je proizvođač prajmera svojim uputstvom ne pokriva.
 
 ## Pitanja i odgovori
 
@@ -138,7 +139,7 @@ To piše u tehničkom listu konvertora, a mora se uporediti i sa tehničkim list
 
 ### Da li posle konvertora treba isprati površinu?
 
-Zavisi od proizvoda. Za vodene suspenzije tanina naučni rad navodi ispiranje labavih produkata reakcije[^vetere-tannins], a kod drugih formulacija postupak može biti drugačiji. Pratite tehnički list konvertora.
+Zavisi od proizvoda. Za vodene suspenzije tanina laboratorijski rad navodi ispiranje labavih produkata reakcije[^vetere-tannins]; to je nalaz iz laboratorije, a ne uputstvo za automobil, a kod drugih formulacija postupak može biti drugačiji. Pratite tehnički list konvertora.
 
 ### Da li je Cosmos Lac Rust Shock Freeze konvertor rđe?
 

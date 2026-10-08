@@ -97,7 +97,7 @@ strucnaPotvrda:
 poslednjaProvera: 2026-10-08
 ponovniPregled: 2027-04-08
 ---
-Poseban pištolj za svaki materijal nije obavezan, ali dve granice u izvorima postoje. Prva je vrsta materijala: SATA preporučuje odvojene pištolje za rastvaračke i vodene boje, da bi se izbegle greške u laku[^sata-faq]. Druga je veličina dizne: punioci se nanose većom diznom od baznih boja i lakova, pa za njih treba drugi pištolj ili drugi set dizni. Bazna boja i bezbojni lak iz istog sistema mogu, prema nekim preporukama proizvođača boje, da se nanose istim pištoljem i istom diznom, uz temeljno čišćenje između materijala.
+Poseban pištolj za svaki materijal nije obavezan, ali dve granice u izvorima postoje. Prva je vrsta materijala: SATA preporučuje odvojene pištolje za rastvaračke i vodene boje, da bi se izbegle greške u laku[^sata-faq]. Druga je veličina dizne: u primerima iz tehničkih listova punilac za brušenje se nanosi većom diznom od bezbojnog laka[^rm-p2a41-tds][^rm-c2a40-tds], pa za njega treba drugi pištolj ili drugi set dizni. baslac za jet X navodi isto podešavanje pištolja i dizne za svoju vodenu baznu boju i za bezbojne lakove[^baslac-pistolji], a pri promeni materijala uputstvo za jet X predviđa međučišćenje[^sata-jetx-uputstvo].
 
 ## Šta odlučuje koliko pištolja Vam treba
 
@@ -111,7 +111,7 @@ Tehnički listovi daju različite dizne za različite slojeve. R-M za punilac P 
 
 ### Šta navodi proizvođač boje
 
-baslac u preporuci pištolja iz januara 2026. za [SATA jet X](/proizvodi/sata-jet-x) HVLP sa diznom 1,3 O na 2,0 bara označava i vodenu baznu boju 45 Line i bezbojne lakove, a za punioce 20-24, 20-34 i 20-94 navodi drugi pištolj, [SATAjet 100 B](/proizvodi/satajet-100-b) F, sa diznom 1,6 (RP) ili 1,7–1,8 (HVLP)[^baslac-pistolji]. Prema tom dokumentu, dakle, jedan pištolj sa jednom diznom pokriva bazu i lak, a punilac ide drugim. Ta preporuka važi za baslac materijale iz dokumenta; za drugi sistem proverite preporuke njegovog proizvođača.
+baslac u preporuci pištolja iz januara 2026. za [SATA jet X](/proizvodi/sata-jet-x) HVLP sa diznom 1,3 O na 2,0 bara označava i vodenu baznu boju 45 Line i bezbojne lakove, a za punioce 20-24, 20-34 i 20-94 navodi drugi pištolj, [SATAjet 100 B](/proizvodi/satajet-100-b) F, sa diznom 1,6 (RP) ili 1,7–1,8 (HVLP)[^baslac-pistolji]. Dokument, dakle, za bazu i lak navodi isto podešavanje (model, diznu i pritisak), a za punilac drugi pištolj. Ne kaže da li baza i lak treba da idu istim fizičkim pištoljem; za vodene i rastvaračke materijale SATA preporučuje odvojene pištolje[^sata-faq], pa se ove dve preporuke čitaju zajedno. Preporuka važi za baslac materijale iz dokumenta; za drugi sistem proverite preporuke njegovog proizvođača.
 
 ## Primeri organizacije
 
@@ -129,7 +129,7 @@ Opšte objašnjenje: za radionicu koja često menja materijale razdvojeni pišto
 
 - **Čišćenje pri promeni materijala.** Uputstvo za jet X posle promene materijala predviđa međučišćenje u odgovarajućoj mašini za pranje, a posle završetka rada ručno čišćenje uz skinut set dizni[^sata-jetx-uputstvo]. Postupak je u vodiču [Čišćenje pištolja posle rada](/vodici/ciscenje-pistolja-posle-rada).
 - **Sredstvo za čišćenje prema materijalu.** SATA navodi da proizvođač boje za svaki materijal preporučuje određeno sredstvo za čišćenje, kako bi se materijal rastvorio bez neželjenih reakcija, na primer pahuljica[^sata-saveti]. Opšte objašnjenje: ostatak jednog materijala koji reaguje sa sledećim može da se pojavi kao nečistoća u sloju.
-- **Dizna prema materijalu.** Ako se menja materijal, menja se i set dizni, a regulator materijala ostaje potpuno otvoren, kako SATA preporučuje radi najmanjeg habanja[^sata-jetx-uputstvo].
+- **Dizna prema materijalu.** Ako novi materijal traži drugu diznu, menja se set dizni, a regulator materijala ostaje potpuno otvoren, kako SATA preporučuje radi najmanjeg habanja[^sata-jetx-uputstvo].
 - **Provera lepeze** na probnom papiru pre nanošenja novog materijala, kao u vodiču [Test lepeze na papiru](/vodici/test-lepeze-na-papiru).
 
 ## Ograničenja

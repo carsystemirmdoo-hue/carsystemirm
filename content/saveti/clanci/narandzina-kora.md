@@ -105,7 +105,7 @@ Narandžina kora je neravna tekstura laka koja podseća na koru pomorandže; tak
 
 Površina laka nije ravna kao ogledalo, nego ima sitne, ravnomerne talase. Najbolje se vidi u odsjaju pravih linija, na primer cevi svetla u kabini. Popravka se procenjuje poređenjem sa susednim delom koji nije lakiran; to je urednička preporuka, ne mera proizvođača.
 
-Ako je tekstura samo na delu površine, na primer na ivicama ili na kraju posla, zapišite to: uzrok je verovatnije u tehnici ili materijalu koji se menjao tokom rada nego u materijalu kao celini. Opšti metod beleženja podataka opisuje vodič [Greške pri lakiranju: kako se proverava uzrok](/vodici/greske-pri-lakiranju-kako-se-proverava-uzrok).
+Ako je tekstura samo na delu površine, na primer na ivicama ili na kraju posla, zapišite to. Opšte objašnjenje: takav raspored može da ukaže na tehniku ili uslove koji su se menjali tokom rada, ali to treba proveriti, a ne pretpostaviti. Opšti metod beleženja podataka opisuje vodič [Greške pri lakiranju: kako se proverava uzrok](/vodici/greske-pri-lakiranju-kako-se-proverava-uzrok).
 
 ## Mogući uzroci i kako se proverava svaki
 
@@ -133,7 +133,7 @@ SATA navodi da istrošen komplet dizne izbacuje više materijala nego što vazdu
 
 ### Debljina sloja
 
-baslac navodi pretanke slojeve kao mogući uzrok[^baslac-orange-peel]. Uporedite broj slojeva i debljinu sa tehničkim listom: za 40-100 to su dva sloja i 40–50 µm suvog sloja[^baslac-40-100-tds]. Ako se debljina ne meri, bar zapišite koliko je slojeva naneto i da li je pištolj vođen brže ili dalje nego obično.
+baslac navodi pretanke slojeve kao mogući uzrok[^baslac-orange-peel]. Uporedite broj slojeva i debljinu sa tehničkim listom: za 40-100 to su dva sloja (ili, kao drugi način, pola sloja i pun sloj) i 40–50 µm suvog sloja[^baslac-40-100-tds]. Ako se debljina ne meri, bar zapišite koliko je slojeva naneto i da li je pištolj vođen brže ili dalje nego obično.
 
 ### Učvršćivač i razređivač prema temperaturi
 
@@ -145,7 +145,7 @@ Ako je podloga nedovoljno izbrušena, baslac i to navodi kao uzrok[^baslac-orang
 
 ## Sanacija
 
-baslac za manje zahvaćenu površinu navodi brušenje papirom P1200 i poliranje abrazivnom, pa finom pastom za poliranje. Kada je zahvaćena veća površina, površina se brusi dok ne bude ravna, pa se ponovo lakira[^baslac-orange-peel]. Pre brušenja proverite da lak nije pretanak, da se ne bi probio do baze. Postupak brušenja laka opisuje vodič [Mokro brušenje laka pre poliranja](/vodici/mokro-brusenje-laka-pre-poliranja).
+baslac za manje zahvaćenu površinu navodi brušenje papirom P1200 i poliranje abrazivnom, pa finom pastom za poliranje. Kada je zahvaćena veća površina, površina se brusi dok ne bude ravna, pa se ponovo lakira[^baslac-orange-peel]. Opšte pravilo: pre brušenja proverite da lak nije pretanak, da se ne bi probio do bazne boje. Postupak brušenja laka opisuje vodič [Mokro brušenje laka pre poliranja](/vodici/mokro-brusenje-laka-pre-poliranja).
 
 Ponovno lakiranje ima smisla tek kada je uzrok uklonjen: drugačiji viskozitet, ispravan pritisak, odgovarajući učvršćivač ili nov komplet dizne. Inače će se tekstura ponoviti.
 

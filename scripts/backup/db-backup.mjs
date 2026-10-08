@@ -146,8 +146,10 @@ async function verify(o) {
   });
   try {
     await adminSql.unsafe(`CREATE DATABASE "${dbName}"`);
-    // Uloge iz dozvola moraju postojati da bi se GRANT vratio; prave se bez prijave.
-    for (const role of [...new Set(manifest.grants.map((g) => g.grantee))]) {
+    // Sve uloge koje kopija pominje (dozvole, podrazumevane dozvole — npr. Neon
+    // `neon_superuser`, `cloud_admin`) moraju postojati da bi se vraćanje izvršilo
+    // bez greške; prave se bez prava prijave, samo u probnoj bazi.
+    for (const role of new Set([...manifest.grants.map((g) => g.grantee), ...(await rolesInDump(o.dump))])) {
       await adminSql.unsafe(`DO $$ BEGIN IF NOT EXISTS (SELECT 1 FROM pg_roles WHERE rolname = ${quoteLit(role)}) THEN CREATE ROLE "${role.replace(/"/g, '""')}" NOLOGIN; END IF; END $$`);
     }
     const target = new URL(admin);
@@ -181,6 +183,29 @@ async function verify(o) {
 }
 
 const quoteLit = (s) => `'${String(s).replace(/'/g, "''")}'`;
+
+/** Imena uloga iz šeme kopije (GRANT/REVOKE/ALTER DEFAULT PRIVILEGES), bez pseudo-uloga. */
+export function rolesFromDdl(ddl) {
+  const roles = new Set();
+  for (const m of ddl.matchAll(/\b(?:TO|FROM|FOR ROLE)\s+((?:"[^"]+"|[A-Za-z_][A-Za-z0-9_$]*)(?:\s*,\s*(?:"[^"]+"|[A-Za-z_][A-Za-z0-9_$]*))*)/g)) {
+    for (const raw of m[1].split(",")) {
+      const r = raw.trim().replace(/^"|"$/g, "");
+      if (!r || /^(PUBLIC|CURRENT_USER|SESSION_USER|CURRENT_ROLE)$/i.test(r) || /^pg_/.test(r)) continue;
+      roles.add(r);
+    }
+  }
+  return [...roles];
+}
+
+function rolesInDump(dump) {
+  return new Promise((ok, fail) => {
+    const p = spawn(bin("pg_restore"), ["--schema-only", "--file=-", dump], { stdio: ["ignore", "pipe", "pipe"] });
+    let out = "";
+    p.stdout.on("data", (d) => (out += d));
+    p.on("error", fail);
+    p.on("close", (c) => (c === 0 ? ok(rolesFromDdl(out.split("\n").filter((l) => /^(GRANT|REVOKE|ALTER DEFAULT PRIVILEGES)/.test(l)).join("\n"))) : fail(new Error("pg_restore --schema-only nije uspeo"))));
+  });
+}
 
 async function encrypt(o) {
   if (!o.in || !o.recipients) throw new Error("encrypt traži --in i --recipients (fajl sa javnim ključem).");

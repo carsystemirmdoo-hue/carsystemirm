@@ -240,6 +240,14 @@ for (const name of files) {
     if (!SOURCE_TYPES.has(source.tip)) err(file, `izvor „${source.id}“: tip „${source.tip}“ nije poznat`);
   }
   if (written && !izvori.length) err(file, "napisan članak mora imati bar jedan izvor");
+  if (written && tip !== "novost") {
+    const origin = front.poreklopitanja;
+    if (!origin || !["pronadjeno-u-izvoru", "urednicka-procena"].includes(origin.tip)) {
+      err(file, "poreklopitanja.tip mora biti pronadjeno-u-izvoru ili urednicka-procena");
+    } else if (origin.tip === "pronadjeno-u-izvoru" && !(origin.izvori ?? []).length) {
+      err(file, "pitanje „pronađeno u izvoru“ mora navesti bar jedan URL izvora");
+    }
+  }
   if (written && izvori.length && izvori.every((source) => source.tip === "javna-diskusija")) {
     err(file, "javne diskusije služe za pitanje, ne za odgovor — potreban je stručni ili proizvođački izvor");
   }

@@ -8,6 +8,20 @@
   padding-block: var(--ds-space-major, 96px) var(--ds-space-section, 96px);
 }
 
+.pageWithCrumbs {
+  padding-block: var(--ds-space-l, 40px) var(--ds-space-section, 96px);
+}
+
+.pageWithCrumbs > nav {
+  margin-bottom: 20px;
+}
+
+/* Putanja poravnata sa sadržajem rubrike (ista širina i ivica kao .container). */
+.pageWithCrumbs > nav > ol {
+  width: min(var(--ds-container-max), 100% - (var(--ds-gutter) * 2));
+  padding-inline: 0;
+}
+
 .container {
   width: min(var(--ds-container-max), 100% - (var(--ds-gutter) * 2));
   margin-inline: auto;

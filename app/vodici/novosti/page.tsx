@@ -53,10 +53,10 @@ export default function NovostiPage() {
           />
         </>
       ) : null}
-      <main className={styles.page}>
+      <main className={styles.pageWithCrumbs}>
+        <SeoBreadcrumbs items={breadcrumbs} />
         <div className={styles.container}>
-          <SeoBreadcrumbs items={breadcrumbs} />
-          <header className={styles.hero} style={{ marginTop: 24 }}>
+          <header className={styles.hero}>
             <p className={styles.eyebrow}>Saveti i vodiči</p>
             <h1 className={styles.title}>Novosti</h1>
             <p className={styles.intro}>

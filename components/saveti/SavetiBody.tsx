@@ -10,12 +10,19 @@ type RenderContext = {
   publicSlugs: Set<string>;
 };
 
+/** Broj i jedinica ostaju u istom redu (20 °C, 30 min, 2 bara). */
+const NUMBER_UNIT = /(\d)\s(?=(?:°|%|min\b|h\b|s\b|µm|μm|bar|ml\b|mm\b|g\/l|meseci|minuta|sati|dana))/g;
+
+function keepUnitsTogether(text: string) {
+  return text.replace(NUMBER_UNIT, "$1\u00a0");
+}
+
 function renderInline(nodes: SavetiInline[], context: RenderContext, keyPrefix: string): ReactNode[] {
   return nodes.map((node, index) => {
     const key = `${keyPrefix}-${index}`;
     switch (node.t) {
       case "text":
-        return node.v;
+        return keepUnitsTogether(node.v);
       case "code":
         return (
           <code key={key} className={styles.code}>

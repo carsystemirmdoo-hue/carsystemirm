@@ -150,10 +150,10 @@ export default async function SavetRoute({ params }: RouteProps) {
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={jsonLd(breadcrumbJsonLd(breadcrumbs))} />
       <script type="application/ld+json" dangerouslySetInnerHTML={jsonLd(articleNode)} />
-      <main className={styles.page}>
+      <main className={styles.pageWithCrumbs}>
+        <SeoBreadcrumbs items={breadcrumbs} />
         <div className={styles.container}>
-          <SeoBreadcrumbs items={breadcrumbs} />
-          <div className={styles.articleLayout} style={{ marginTop: 24 }}>
+          <div className={styles.articleLayout}>
             <article className={styles.articleMain}>
               <header className={styles.articleHeader}>
                 <p className={styles.eyebrow}>
@@ -291,7 +291,7 @@ export default async function SavetRoute({ params }: RouteProps) {
                 </p>
                 <div className={styles.ctaRow}>
                   <Link className={styles.ctaPrimary} href="/prodavnice">
-                    Pronađi najbližu prodavnicu
+                    Pronađite najbližu prodavnicu
                   </Link>
                   <Link className={styles.ctaSecondary} href="/kontakt?tema=tehnicka-podrska">
                     Pitajte tehničku podršku

@@ -75,10 +75,10 @@ export default async function KategorijaPage({ params }: RouteProps) {
           }),
         )}
       />
-      <main className={styles.page}>
+      <main className={styles.pageWithCrumbs}>
+        <SeoBreadcrumbs items={breadcrumbs} />
         <div className={styles.container}>
-          <SeoBreadcrumbs items={breadcrumbs} />
-          <header className={styles.hero} style={{ marginTop: 24 }}>
+          <header className={styles.hero}>
             <p className={styles.eyebrow}>Saveti i vodiči</p>
             <h1 className={styles.title}>{kategorija.naziv}</h1>
             <p className={styles.intro}>{kategorija.opis}</p>

@@ -98,15 +98,16 @@ razlogPrioriteta: Dopunjuje osnovni vodič teme konkretnim pitanjem; raspoređen
 status:
   istrazivanje: zavrseno
   pisanje: napisano
-  tehnickaProvera: nije-provereno
-  jezickaProvera: nije-provereno
+  tehnickaProvera: provereno
+  jezickaProvera: provereno
+napomenaProvere: "urednička provera (AI-asistirana) 2026-10-08: otvoreni Multi Green V08, Multi Black Rapid V01, Vario Plus V 01, 20-22 06/2023, Wet on Wet Plus V01, SW20 V02, F.19 V01, katalog Carsystem 2026/27 i Sikkens Polykit IV; navod Sikkensa jasno pripisan proizvođaču van programa kao opšta pozadina; ispravljene dve formulacije koje su uopštavale zaključak iz tri primera."
 strucnaPotvrda:
   potrebna: false
   status: nije-potrebno
 poslednjaProvera: 2026-10-08
 ponovniPregled: 2027-04-08
 ---
-Kit se brusi suvo, punilac suvo ili mokro, a bezbojni lak pre poliranja po pravilu mokro, finim granulacijama. Tako to navode i tehnički listovi iz našeg programa: za kitove Carsystem Multi Green i Multi Black Rapid predviđeno je samo suvo brušenje[^cs-multi-green-tds][^cs-multi-black-rapid-tds], a za punilac 2K Filler Vario Plus dati su posebni rasponi za suvo i za mokro brušenje[^cs-vario-plus-tds]. Izbor zato ne zavisi od navike, nego od materijala i faze rada.
+Kit se brusi suvo, punilac suvo ili mokro, a bezbojni lak pre poliranja po pravilu mokro, finim granulacijama. Tako to navode i tehnički listovi iz našeg programa: za kitove Carsystem Multi Green i Multi Black Rapid navedeno je samo suvo brušenje[^cs-multi-green-tds][^cs-multi-black-rapid-tds], a za punilac 2K Filler Vario Plus dati su posebni rasponi za suvo i za mokro brušenje[^cs-vario-plus-tds]. Izbor zato ne zavisi od navike, nego od materijala i faze rada.
 
 ## Šta se razlikuje u radu
 
@@ -124,7 +125,7 @@ Kit se brusi suvo, punilac suvo ili mokro, a bezbojni lak pre poliranja po pravi
 | Punilac | baslac 20-22 | ekscentar P400/P500[^baslac-20-22-tds] | ručno P800[^baslac-20-22-tds] |
 | Punilac mokro-na-mokro, sitne greške | Carsystem 2K Filler Wet on Wet Plus | P600[^cs-wow-plus-tds] | P800–P1000[^cs-wow-plus-tds] |
 
-Vidi se pravilo: kada proizvođač dozvoljava oba načina, za mokro brušenje navodi finiju granulaciju nego za suvo. Zato se suva granulacija ne prenosi na mokro brušenje i obrnuto.
+U ovim primerima, kada proizvođač dozvoljava oba načina, za mokro brušenje navodi finiju granulaciju nego za suvo. Zato se suva granulacija ne prenosi na mokro brušenje i obrnuto.
 
 ## Mokro brušenje laka
 

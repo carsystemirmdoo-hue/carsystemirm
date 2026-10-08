@@ -82,8 +82,9 @@ razlogPrioriteta: Dopunjuje osnovni vodič teme konkretnim pitanjem; raspoređen
 status:
   istrazivanje: zavrseno
   pisanje: napisano
-  tehnickaProvera: nije-provereno
-  jezickaProvera: nije-provereno
+  tehnickaProvera: provereno
+  jezickaProvera: provereno
+napomenaProvere: "urednička provera (AI-asistirana) 2026-10-08: otvoreni TDS ONYX HD, AGILIS, DIAMONT (07/2026), baslac 35 Line, 45 Line, uputstvo Blend 35 Line i Info R-M Clouding; sva vremena se poklapaju. Ispravljena interpunkcija u listi."
 strucnaPotvrda:
   potrebna: false
   status: nije-potrebno
@@ -119,7 +120,7 @@ Izraz koji se ponavlja u tehničkim listovima oba proizvođača je „do mat izg
 
 Pri proveri obratite pažnju na:
 
-- **celu površinu**, ne samo jedno mesto. ivice, uglovi i udubljenja mogu ostati sjajni duže od ravnih delova;
+- **celu površinu**, ne samo jedno mesto, jer ivice, uglovi i udubljenja mogu ostati sjajni duže od ravnih delova;
 - **ujednačenost**, jer sjajna ostrva na mat površini znače da sloj još nije spreman;
 - **dodir**, koji se ne koristi. Prst ostavlja trag i masnoću.
 

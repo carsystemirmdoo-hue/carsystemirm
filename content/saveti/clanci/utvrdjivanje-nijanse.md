@@ -81,8 +81,9 @@ razlogPrioriteta: Osnovni vodič teme — ulaz u tematsku celinu, objavljuje se 
 status:
   istrazivanje: zavrseno
   pisanje: napisano
-  tehnickaProvera: nije-provereno
-  jezickaProvera: nije-provereno
+  tehnickaProvera: provereno
+  jezickaProvera: provereno
+napomenaProvere: "urednička provera (AI-asistirana) 2026-10-08: otvorene stranice baslac Color Chips, e-finder star (17. 4. 2023), R-M Color Competence, Info R-M Basic Knowledge Color i Metamerism, TDS baslac 45 Line var. 49 (03/2026) i Carsystem Colour Match Lamp V03; svi navodi se poklapaju, bez izmena u sadržaju."
 strucnaPotvrda:
   potrebna: false
   status: nije-potrebno

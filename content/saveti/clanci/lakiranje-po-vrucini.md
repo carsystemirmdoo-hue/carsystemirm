@@ -94,8 +94,9 @@ razlogPrioriteta: Rešava konkretan problem iz prakse; raspoređeno naizmenično
 status:
   istrazivanje: zavrseno
   pisanje: napisano
-  tehnickaProvera: nije-provereno
-  jezickaProvera: nije-provereno
+  tehnickaProvera: provereno
+  jezickaProvera: provereno
+napomenaProvere: "urednička provera (AI-asistirana) 2026-10-08: otvoreni C 2A40, ONYX HD, ONYX HD TROPICAL, AGILIS, A 2530, R 2P45, C 2P55 07/2026, 2K Clear VOC Speed Plus V06, 40-100 06/2026; ispravljeno: pravilo kombinovanja X komponenti AGILIS preformulisano tačno prema tehničkom listu."
 strucnaPotvrda:
   potrebna: false
   status: nije-potrebno
@@ -124,7 +125,7 @@ Ovo je opšte objašnjenje, a ne podatak za određeni proizvod:
 | R-M R 2P45 CLEAR Thinn-R | samo uz učvršćivače H 2P25 ili H 2P35, pri vrlo visokim temperaturama okoline i kod IR sušenja[^rm-r2p45-tds] |
 | baslac 40-100 | spori učvršćivač 50-430 samo u vrlo toplim uslovima[^baslac-40-100-tds] |
 
-Sporije komponente nisu zamena za rad iznad gornje granice. One proširuju mogućnosti unutar opsega koji proizvođač dozvoljava. Komponente se ne mešaju između sistema: X razređivač ide samo uz X komponente baze[^rm-agilis-tds].
+Sporije komponente nisu zamena za rad iznad gornje granice. One proširuju mogućnosti unutar opsega koji proizvođač dozvoljava. Komponente se ne kombinuju proizvoljno: R-M navodi da se AGILIS HB 010X i HB 030X mešaju samo sa razređivačem RA 050X, a HB 010 i HB 030 samo sa RA 050[^rm-agilis-tds].
 
 ## Deo na suncu i zagrejan prostor
 

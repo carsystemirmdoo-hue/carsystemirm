@@ -71,11 +71,12 @@ razlogPrioriteta: Dopunjuje osnovni vodič teme konkretnim pitanjem; raspoređen
 status:
   istrazivanje: zavrseno
   pisanje: napisano
-  tehnickaProvera: nije-provereno
-  jezickaProvera: nije-provereno
+  tehnickaProvera: provereno
+  jezickaProvera: provereno
 strucnaPotvrda:
   potrebna: false
   status: nije-potrebno
+napomenaProvere: "urednička provera (AI-asistirana) 2026-10-08: otvoreni Carsystem stranica Finish Clay i Silicone Remover Mild v.01 05/2021 (katran, ostaci lepka, površine od 0,5 m² i odmah brisanje), C.A.R.FIT Silicone Remover „Strawberry“, R-M PK 1P10 07/2026 i Cosmos Lac Sticker and Glue Remover verzija 02 od 18. 6. 2026 (može da ošteti lakirane i plastične površine); sve tvrdnje se poklapaju. Ispravljena jedna nespretna rečenica."
 poslednjaProvera: 2026-10-08
 ponovniPregled: 2027-04-08
 ---
@@ -92,7 +93,7 @@ Katran i smola su lepljivi i delimično rastvorljivi. Kada preko njih pređe bru
    - Carsystem Silicone Remover Mild uklanja prljavštinu, masnoću, ulje, silikon, vosak, katran i ostatke lepka[^carsystem-silicone-remover-mild-tds];
    - C.A.R.FIT Silicone Remover „Strawberry“ je rastvarački odmašćivač za početno čišćenje od katrana, silikona, ulja i masnoće[^carfit-silicone-remover-strawberry-tds];
    - R-M SILICONE Remov-R je rastvarački odmašćivač za prvi korak čišćenja, za uklanjanje katrana, masnoće i silikona[^rm-pk1p10-tds].
-3. **Brisanje.** Sredstvo se ne ostavlja da se osuši: Carsystem traži da se površina čisti u malim delovima i odmah briše drugom čistom krpom[^carsystem-silicone-remover-mild-tds]. Tvrdokorna mesta se ponavljaju, umesto da se jače trljaju.
+3. **Brisanje.** Sredstvo se ne ostavlja da se osuši: Carsystem traži da se površina čisti u malim delovima i odmah briše drugom čistom krpom[^carsystem-silicone-remover-mild-tds]. Na tvrdokornim mestima postupak se ponavlja, umesto da se jače trlja.
 4. **Glina za lak** za ono što je ostalo, na primer sitne tačke smole, insekte i preprašenu boju.
 5. **Odmašćivanje** pre brušenja ili poliranja, prema vodiču [Odmašćivanje pre lakiranja](/vodici/odmascivanje-pre-lakiranja).
 

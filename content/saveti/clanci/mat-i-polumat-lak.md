@@ -78,15 +78,16 @@ razlogPrioriteta: Dopunjuje osnovni vodič teme konkretnim pitanjem; raspoređen
 status:
   istrazivanje: zavrseno
   pisanje: napisano
-  tehnickaProvera: nije-provereno
-  jezickaProvera: nije-provereno
+  tehnickaProvera: provereno
+  jezickaProvera: provereno
+napomenaProvere: "urednička provera (AI-asistirana) 2026-10-08: otvoreni TDS R-M C 2P91, C 2P96, C 2A93 (07/2026), baslac 40-620, 40-40 varijanta 80-20, Carsystem Matt/Silkmatt V01; tabela i odnosi se poklapaju. Ispravljeno: uvod više ne uopštava „pomerene preklope“ i odzračivanje do mat na sve listove, razdvojen razlog za nepoliranje od debljine sloja, „ručno mešanje“ pripisano samo baslac 40-620."
 strucnaPotvrda:
   potrebna: false
   status: nije-potrebno
 poslednjaProvera: 2026-10-08
 ponovniPregled: 2027-04-08
 ---
-Mat i polumat bezbojni lak se nanosi u dva ujednačena sloja, sa pomerenim preklopima i odzračivanjem dok površina ne postane mat, jer svaka razlika u debljini sloja menja stepen sjaja. Iz istog razloga ne može da se polira: poliranje menja sjaj, pa ni prašina u laku ne može da se ukloni poliranjem, kako navodi R-M za C 2A93[^rm-c2a93-tds]. Popravka se zato radi na celom delu, a stepen sjaja se pre rada proverava na probnom limu. Tačan postupak, odnos mešanja i vreme odzračivanja čitaju se iz tehničkog lista Vašeg mat laka.
+Mat i polumat bezbojni lak se u listovima iz našeg programa nanosi u dva ujednačena sloja, a kod R-M i baslac mat lakova i sa pomerenim preklopima, jer razlika u debljini sloja menja stepen sjaja[^baslac-40-620-tds]. Mat lak se ne polira: poliranje menja sjaj, pa ni prašina u laku ne može da se ukloni poliranjem, kako navodi R-M za C 2A93[^rm-c2a93-tds]. Popravka se zato radi na celom delu, a stepen sjaja se pre rada proverava na probnom limu. Tačan postupak, odnos mešanja i vreme odzračivanja čitaju se iz tehničkog lista Vašeg mat laka.
 
 ## Kako se dobija željeni stepen sjaja
 
@@ -100,7 +101,7 @@ Stepen sjaja zavisi i od drugih sastojaka smeše. Za C 2P91 R-M navodi da upotre
 
 ## Pre nanošenja
 
-- **Ručno mešanje.** R-M za C 2P91, C 2P96 i C 2A93 i baslac za 40-620 navode da se lak ne sme držati na mešalici, nego se pre upotrebe dobro meša ručno[^rm-c2p91-tds][^rm-c2p96-tds][^rm-c2a93-tds][^baslac-40-620-tds].
+- **Ručno mešanje.** R-M za C 2P91, C 2P96 i C 2A93 i baslac za 40-620 navode da se lak ne sme držati na mešalici i da se pre upotrebe dobro promeša; baslac za 40-620 izričito traži ručno mešanje[^rm-c2p91-tds][^rm-c2p96-tds][^rm-c2a93-tds][^baslac-40-620-tds].
 - **Samo količina za isti dan.** Za aditiv 80-20 baslac upozorava da se stepen sjaja smeše može promeniti ako stoji[^baslac-40-40-80-20-tds].
 - **Probni lim.** baslac za 40-620 navodi da sjaj može biti veći kod svetlih i čisto srebrnih nijansi i da se razlikuje između vertikalnih i horizontalnih površina, pa preporučuje probu pre popravke[^baslac-40-620-tds]. Kako se radi proba, opisuje vodič [Probni lim](/vodici/probni-lim-pre-lakiranja).
 

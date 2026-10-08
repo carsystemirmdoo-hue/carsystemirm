@@ -35,14 +35,14 @@ povezani:
 izvori:
   - id: rm-onyx-hd-tds
     naziv: "R-M, Technical Information ONYX HD, Waterborne basecoat line"
-    url: https://techinfo.rmpaint.com/en_UK/documents/pdf/tech_infos/ONYX_HD.pdf
-    verzija: "07/2025"
+    url: https://techinfo.rmpaint.com/unicorn/en/ONYX%20HD-ONYX%20HD%20Waterborne%20basecoat%20line.pdf
+    verzija: "07/2026"
     pristupljeno: 2026-10-08
     tip: tehnicki-list
   - id: rm-onyx-activator-tds
     naziv: "R-M, Technical Information ONYX HD, Variant ONYX ACTIVATOR"
-    url: https://techinfo.rmpaint.com/en_UK/documents/pdf/tech_infos/ONYX_HD_var_ONYX_ACTIVATOR.pdf
-    verzija: "02/2024"
+    url: https://techinfo.rmpaint.com/unicorn/en/ONYX%20HD-ONYX%20HD%20Variant%20ONYX%20ACTIVATOR.pdf
+    verzija: "07/2026"
     pristupljeno: 2026-10-08
     tip: tehnicki-list
   - id: rm-c2a40-tds
@@ -68,11 +68,12 @@ razlogPrioriteta: Rešava konkretan problem iz prakse; raspoređeno naizmenično
 status:
   istrazivanje: zavrseno
   pisanje: napisano
-  tehnickaProvera: nije-provereno
-  jezickaProvera: nije-provereno
+  tehnickaProvera: ispravke-potrebne
+  jezickaProvera: provereno
+napomenaProvere: "urednička provera (AI-asistirana) 2026-10-08: ONYX HD TDS usklađen na važeću verziju 07/2026 (unicorn putanja; en_UK 07/2025 je zamenjen — sadržaj isti osim podatka o skladištenju koji tekst ne koristi), varijanta sa aktivatorom takođe 07/2026; uklonjena napomena o starijoj verziji, mehanizam aktivatora preformulisan prema listu (A 2210 kao učvršćivač). Vrednosti C 2A40, 35 Line i 45 Line proverene. Stručna potvrda ostaje: nijedan list ne daje gornju granicu za bazu bez aktivatora."
 strucnaPotvrda:
   potrebna: true
-  razlog: "Od pregledanih tehničkih listova bazne boje (R-M ONYX HD 07/2025, ONYX HD varijanta sa aktivatorom 02/2024, baslac 35 Line 08/2023 i 45 Line 03/2026) gornju granicu vremena do bezbojnog laka navodi samo varijanta sa aktivatorom (4 h). Za bazu bez aktivatora nijedan list ne kaže koliko najduže sme da stoji, niti šta se radi kada je baza stajala preko noći. Odgovor na glavno pitanje i postupak posle isteka roka treba da potvrdi tehnička podrška proizvođača ili stručna osoba."
+  razlog: "Od pregledanih tehničkih listova bazne boje (R-M ONYX HD 07/2026, ONYX HD varijanta sa aktivatorom 07/2026, baslac 35 Line 08/2023 i 45 Line 03/2026) gornju granicu vremena do bezbojnog laka navodi samo varijanta sa aktivatorom (4 h). Za bazu bez aktivatora nijedan list ne kaže koliko najduže sme da stoji, niti šta se radi kada je baza stajala preko noći. Odgovor na glavno pitanje i postupak posle isteka roka treba da potvrdi tehnička podrška proizvođača ili stručna osoba."
   status: potrebno
 poslednjaProvera: 2026-10-08
 ponovniPregled: 2027-04-08
@@ -92,9 +93,9 @@ Najkraće vreme pre laka je posebna tema: kako se odzračuje baza i zašto se ne
 
 ## Kada aktivator određuje rok
 
-Aktivator u vodenoj baznoj boji pokreće reakciju, pa takva baza ima vreme upotrebljivosti. Za ONYX HD sa aktivatorom R-M navodi 30 min na 20 °C posle mešanja[^rm-onyx-activator-tds], a pomenuti rok od 4 h odnosi se na vreme od nanošenja baze do laka[^rm-onyx-activator-tds].
+R-M aktivator A 2210 u listu vodi kao učvršćivač (*hardener*), pa aktivirana baza ima vreme upotrebljivosti. Za ONYX HD sa aktivatorom R-M navodi 30 min na 20 °C posle mešanja[^rm-onyx-activator-tds], a pomenuti rok od 4 h odnosi se na vreme od nanošenja baze do laka[^rm-onyx-activator-tds].
 
-Ovo je važno i kada aktivator niste izabrali sami. Za lak C 2A40 AirTOP R-M propisuje da se 5 % aktivatora A 2210 dodaje u svaki sloj vodene bazne boje ispod tog laka, uključujući sive nijanse baze, blender i sve slojeve troslojnog sistema, i da baza pre laka mora biti potpuno suva[^rm-c2a40-tds]. Ko radi sa C 2A40, radi sa aktiviranom bazom i treba da poštuje rok iz lista te varijante. Napomena: lak je opisan u listu iz 07/2026, a varijanta baze sa aktivatorom u listu iz 02/2024, pa proverite da li postoji novija verzija.
+Ovo je važno i kada aktivator niste izabrali sami. Za lak C 2A40 AirTOP R-M propisuje da se 5 % aktivatora A 2210 dodaje u svaki sloj vodene bazne boje ispod tog laka, uključujući sive nijanse baze, blender i sve slojeve troslojnog sistema, i da baza pre laka mora biti potpuno suva[^rm-c2a40-tds]. Ko radi sa C 2A40, radi sa aktiviranom bazom i treba da poštuje rok iz lista te varijante.
 
 ## Kako planirati posao
 

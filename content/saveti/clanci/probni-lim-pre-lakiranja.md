@@ -76,8 +76,9 @@ razlogPrioriteta: Dopunjuje osnovni vodič teme konkretnim pitanjem; raspoređen
 status:
   istrazivanje: zavrseno
   pisanje: napisano
-  tehnickaProvera: nije-provereno
-  jezickaProvera: nije-provereno
+  tehnickaProvera: provereno
+  jezickaProvera: provereno
+napomenaProvere: "urednička provera (AI-asistirana) 2026-10-08: otvoreni baslac Color Chips i Basecoat application, R-M Digital color search, Info R-M Color/Metamerism, ONYX HD TDS 07/2026 (važeća verzija, usklađena sa SV-0101) i Colour Match Lamp V03; navodi se poklapaju. Ublažena apsolutna tvrdnja („jedini način“)."
 strucnaPotvrda:
   potrebna: false
   status: nije-potrebno
@@ -88,7 +89,7 @@ Probni lim je pločica na koju se zamešana boja nanese istim postupkom kao na d
 
 ## Zašto posuda nije dovoljna
 
-U posudi gledate debeo sloj tečnog materijala, bez strukture koju daje pištolj. Na delu ćete gledati tanak, osušen sloj, kod metalika sa listićima koji su legli na način koji zavisi od nanošenja, i to ispod bezbojnog laka. To su dva različita prizora. Probni lim je jedini način da pre lakiranja dela vidite onaj drugi.
+U posudi gledate debeo sloj tečnog materijala, bez strukture koju daje pištolj. Na delu ćete gledati tanak, osušen sloj, kod metalika sa listićima koji su legli na način koji zavisi od nanošenja, i to ispod bezbojnog laka. To su dva različita prizora. Probni lim Vam taj drugi prizor pokazuje pre lakiranja dela.
 
 Probni lim ima i praktičnu vrednost: ako nijansa ne odgovara, greška se otkriva na pločici, a ne na delu koji bi posle trebalo ponovo brusiti i lakirati.
 

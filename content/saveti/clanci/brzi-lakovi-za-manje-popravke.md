@@ -95,15 +95,16 @@ razlogPrioriteta: Dopunjuje osnovni vodič teme konkretnim pitanjem; raspoređen
 status:
   istrazivanje: zavrseno
   pisanje: napisano
-  tehnickaProvera: nije-provereno
-  jezickaProvera: nije-provereno
+  tehnickaProvera: provereno
+  jezickaProvera: provereno
+napomenaProvere: "urednička provera (AI-asistirana) 2026-10-08: otvoreni TDS R-M C 2P45, C 2P55, C 2P42, C 2A40 (07/2026), baslac 40-100, 40-450 i varijanta 60-05, Carsystem CC.21 X-press FIVE V02 i Speed Plus V06; vrednosti se poklapaju. Protivrečnost X-press FIVE (uvod „5 min / 40 °C“ vs tabela 5 min na 60 °C) sada je prikazana doslovno i u tabeli i u tekstu, bez pretpostavke koja vrednost važi; uklonjena nepotkrepljena „osetljivost na temperaturu“."
 strucnaPotvrda:
   potrebna: false
   status: nije-potrebno
 poslednjaProvera: 2026-10-08
 ponovniPregled: 2027-04-08
 ---
-Brzi bezbojni lak je dobar izbor kada popravka nije velika, a deo treba što pre da ide na poliranje i montažu. Cena brzine je kraće vreme za rad: za R-M C 2P45 SPEED Finish-R tehnički list navodi vreme upotrebljivosti od 45 min na 20 °C, a za univerzalni C 2P55 MULTI Finish-R iz iste serije 2 h[^rm-c2p45-tds][^rm-c2p55-tds]. Kod nekih brzih lakova postoji i rok za doradu posle nanošenja, a uz to su osetljiviji na temperaturu. Zato brz lak nije automatski bolji za svaki posao.
+Brzi bezbojni lak je dobar izbor kada popravka nije velika, a deo treba što pre da ide na poliranje i montažu. Cena brzine je kraće vreme za rad: za R-M C 2P45 SPEED Finish-R tehnički list navodi vreme upotrebljivosti od 45 min na 20 °C, a za univerzalni C 2P55 MULTI Finish-R iz iste serije 2 h[^rm-c2p45-tds][^rm-c2p55-tds]. Kod nekih brzih lakova postoji i rok za doradu posle nanošenja, a izbor učvršćivača mora da prati temperaturu. Zato brz lak nije automatski bolji za svaki posao.
 
 ## Šta proizvođači nazivaju brzim lakom
 
@@ -114,10 +115,10 @@ Brzi bezbojni lak je dobar izbor kada popravka nije velika, a deo treba što pre
 | R-M C 2P45 SPEED Finish-R | više delova, i manja oštećenja | 45 min[^rm-c2p45-tds] | 5–6 h na 20 °C, 10–15 min na 60 °C[^rm-c2p45-tds] |
 | R-M C 2P42 RACE Finish-R | više vertikalnih i horizontalnih delova | 30 min[^rm-c2p42-tds] | 2–3 h na 20 °C, 10 min na 60 °C[^rm-c2p42-tds] |
 | baslac 40-100 High Speed | lak za kraće sušenje i niže temperature | 30 min[^baslac-40-100-tds] | 3 h na 20 °C, 10–20 min na 60 °C[^baslac-40-100-tds] |
-| Carsystem CC.21 X-press FIVE | mali i srednji radovi | 50 min[^carsystem-xpress-five-tds] | za poliranje 15–20 min na 40 °C, 5 min na 60 °C[^carsystem-xpress-five-tds] |
+| Carsystem CC.21 X-press FIVE | mali i srednji radovi | 50 min[^carsystem-xpress-five-tds] | za poliranje 15–20 min na 40 °C; za 60 °C tabela lista navodi 5 min, ali uvodni opis istog lista navodi 5 min na 40 °C (vidi napomenu ispod)[^carsystem-xpress-five-tds] |
 | Carsystem 2K Clear VOC Speed Plus | od malih delova do celog prednjeg dela | 50 min[^carsystem-speed-plus-tds] | za poliranje 25–30 min na 40 °C, 15 min na 60 °C[^carsystem-speed-plus-tds] |
 
-Vremena sušenja kod Carsystem lakova data su za temperaturu objekta, a ne vazduha[^carsystem-speed-plus-tds]. Kod X-press FIVE uvodni opis lista navodi 5 min na 40 °C, dok tabela istog lista navodi 5 min na 60 °C[^carsystem-xpress-five-tds]; pre rada proverite važeću verziju lista. Novost o laku 40-100 i njegove podatke detaljnije opisuje tekst [baslac 40-100 i 40-620](/vodici/baslac-40-100-i-40-620-novi-lakovi).
+Vremena sušenja kod Carsystem lakova data su za temperaturu objekta, a ne vazduha[^carsystem-speed-plus-tds][^carsystem-xpress-five-tds]. Tehnički list X-press FIVE (V02, 01/2025) sam sebi protivreči: u uvodnom opisu navodi „15–20 min / 40 °C“ i „5 min / 40 °C“, a u tabeli sušenja 15–20 min na 40 °C i 5 min na 60 °C[^carsystem-xpress-five-tds]. Iz lista se zato ne može sa sigurnošću reći na kojoj temperaturi objekta važi kraće vreme. Pre rada to proverite kod tehničke podrške proizvođača ili u novijoj verziji lista. Novost o laku 40-100 i njegove podatke detaljnije opisuje tekst [baslac 40-100 i 40-620](/vodici/baslac-40-100-i-40-620-novi-lakovi).
 
 Posebna grupa su lakovi za sušenje na vazduhu. R-M C 2A40 AirTOP je takav lak, za popravke od manjih oštećenja do cele strane vozila, sa vremenom upotrebljivosti od 25 min na 20 °C[^rm-c2a40-tds].
 

@@ -90,15 +90,16 @@ razlogPrioriteta: Rešava konkretan problem iz prakse; raspoređeno naizmenično
 status:
   istrazivanje: zavrseno
   pisanje: napisano
-  tehnickaProvera: nije-provereno
-  jezickaProvera: nije-provereno
+  tehnickaProvera: provereno
+  jezickaProvera: provereno
+napomenaProvere: "urednička provera (AI-asistirana) 2026-10-08: otvoreni C 2A40, P 5480, A 2P15, A 2560, C 2E50 07/2026, 2K Clear VOC 420 V09, 2K Filler VOC 540 V11, 40-100 06/2026; vrednosti se poklapaju; jezička ispravka (viskozitet umesto „gušći“)."
 strucnaPotvrda:
   potrebna: false
   status: nije-potrebno
 poslednjaProvera: 2026-10-08
 ponovniPregled: 2027-04-08
 ---
-Na niskoj temperaturi materijal je gušći, sporije odzračuje i sporije se suši, a 2K reakcija se usporava. Prehladno je onda kada vazduh, deo ili materijal padnu ispod granice koju navodi tehnički list proizvoda, i ta granica nije ista za sve. R-M za bezbojni lak C 2A40 navodi opseg od 15–35 °C[^rm-c2a40-tds], a Carsystem za 2K Clear VOC 420 ne preporučuje nanošenje ispod 18 °C[^cs-clear-420-tds]. Za epoksidni prajmer P 5480 R-M navodi najnižu temperaturu okoline od +15 °C i za nanošenje i za sušenje[^rm-p5480-tds].
+Na niskoj temperaturi materijal ima veći viskozitet, sporije odzračuje i sporije se suši, a 2K reakcija se usporava. Prehladno je onda kada vazduh, deo ili materijal padnu ispod granice koju navodi tehnički list proizvoda, i ta granica nije ista za sve. R-M za bezbojni lak C 2A40 navodi opseg od 15–35 °C[^rm-c2a40-tds], a Carsystem za 2K Clear VOC 420 ne preporučuje nanošenje ispod 18 °C[^cs-clear-420-tds]. Za epoksidni prajmer P 5480 R-M navodi najnižu temperaturu okoline od +15 °C i za nanošenje i za sušenje[^rm-p5480-tds].
 
 ## Šta se menja kada je hladno
 

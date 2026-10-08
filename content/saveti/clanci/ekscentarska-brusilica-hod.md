@@ -76,8 +76,9 @@ razlogPrioriteta: Dopunjuje osnovni vodič teme konkretnim pitanjem; raspoređen
 status:
   istrazivanje: zavrseno
   pisanje: napisano
-  tehnickaProvera: nije-provereno
-  jezickaProvera: nije-provereno
+  tehnickaProvera: provereno
+  jezickaProvera: provereno
+napomenaProvere: "urednička provera (AI-asistirana) 2026-10-08: otvoreni katalog Carsystem 2026/27 (brusilice) i stranice RUPES za Skorpio E, Skorpio III 3 i 6 mm, ER303TE/ER305TE, LD30 i TA50; svi pomenuti RUPES modeli postoje u Carsystem programu (catalog-digest); dodata napomena da su to RUPES proizvodi iz Carsystem programa."
 strucnaPotvrda:
   potrebna: false
   status: nije-potrebno
@@ -87,6 +88,8 @@ ponovniPregled: 2027-04-08
 Hod ekscentarske brusilice je prečnik kruga koji podloška opisuje oko ose, pored toga što se okreće. U katalogu se navodi kao „orbital diameter“, u milimetrima. Veći hod brže skida materijal, ali ostavlja grublji trag; manji hod skida sporije i ostavlja finiji trag. RUPES za Skorpio E sa hodom 3 mm navodi završne radove sa granulacijama P320 i finijim, a za hod 6 mm najbolji odnos skidanja materijala i kvaliteta površine, sa granulacijama od P120 do P320[^rupes-skorpio-e].
 
 ## Hodovi brusilica u programu
+
+RUPES brusilice u tabeli su RUPES proizvodi iz Carsystem programa.
 
 | Brusilica | Pogon | Hod | Napomena iz izvora |
 | --- | --- | --- | --- |

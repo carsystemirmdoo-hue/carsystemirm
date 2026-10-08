@@ -107,21 +107,22 @@ razlogPrioriteta: Dopunjuje osnovni vodič teme konkretnim pitanjem; raspoređen
 status:
   istrazivanje: zavrseno
   pisanje: napisano
-  tehnickaProvera: nije-provereno
-  jezickaProvera: nije-provereno
+  tehnickaProvera: provereno
+  jezickaProvera: provereno
 strucnaPotvrda:
   potrebna: false
   status: nije-potrebno
+napomenaProvere: "urednička provera (AI-asistirana) 2026-10-08: otvoreni baslac Chart 1 03/2024 (proveren prikaz tabele), 27-10 i 12-20 06/2023, R-M P 2P63, PK 2P50 i P 5480 07/2026, C.A.R.FIT 2K Wash Primer 2:1 i 2K Epoxy Primer 1:1, Carsystem Etch Primer v.03, Multi Green V08 11/2024 (tabela prianjanja: pocinkovani lim označen) i Elastic weiss v.04 (samo čelik); sve tvrdnje se poklapaju. Ispravljeno: „kod mnogih sistema“ suženo na primere iz programa, objašnjenje o čuvanju cinkanog sloja označeno kao opšte."
 poslednjaProvera: 2026-10-08
 ponovniPregled: 2027-04-08
 ---
-Pocinkovani lim se odmasti, blago matira tako da cinkani sloj ostane sačuvan, ponovo odmasti i zatim temelji materijalom koji u tehničkom listu izričito navodi pocinkovani lim kao podlogu. Kod mnogih sistema to su reaktivni prajmeri (wash primer) i prajmeri ili prajmer-punioci za direktno nanošenje na metal; neki kitovi se mogu nanositi direktno, a neki ne. Da li proizvod sme na cink, ne pretpostavlja se: piše u listi podloga.
+Pocinkovani lim se odmasti, blago matira tako da cinkani sloj ostane sačuvan, ponovo odmasti i zatim temelji materijalom koji u tehničkom listu izričito navodi pocinkovani lim kao podlogu. U primerima iz našeg programa to su reaktivni prajmeri (wash primer) i prajmeri ili prajmer-punioci za direktno nanošenje na metal; neki kitovi se mogu nanositi direktno, a neki ne. Da li proizvod sme na cink, ne pretpostavlja se: piše u listi podloga.
 
 ## Zašto pocinkovani lim traži posebnu pažnju
 
 Cinkani sloj štiti čelik od korozije. Materijal koji nije napravljen za cink može na njemu slabije da prione, pa proizvođači pocinkovani lim navode kao posebnu podlogu. baslac u tabeli podloga, na primer, razdvaja čelični lim, pocinkovani lim, aluminijum, fabrički KTL sloj i stari lak[^baslac-undercoats-chart].
 
-Zato je cilj pripreme da se površina očisti i matira, a ne da se cinkani sloj izbrusi do čelika. Mesto na kome se probije do čelika ponaša se kao goli čelik.
+Zato je cilj pripreme da se površina očisti i matira, a ne da se cinkani sloj izbrusi do čelika. Mesto na kome se probije do čelika ponaša se kao goli čelik. Ovo je opšte objašnjenje, a granulaciju i način matiranja određuje tehnički list materijala.
 
 ## Postupak korak po korak
 

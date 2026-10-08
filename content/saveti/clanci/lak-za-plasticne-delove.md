@@ -83,13 +83,20 @@ izvori:
     verzija: "06/2023"
     pristupljeno: 2026-10-08
     tip: tehnicki-list
+  - id: rm-a2p05-tds
+    naziv: "R-M, Technical Information FLEX Tune-R A 2P05 eSense flex additive"
+    url: https://techinfo.rmpaint.com/unicorn/en/A%202P05-eSense%20flex%20additive.pdf
+    verzija: "07/2026"
+    pristupljeno: 2026-10-08
+    tip: tehnicki-list
 prioritet: 916
 razlogPrioriteta: Dopunjuje osnovni vodič teme konkretnim pitanjem; raspoređeno naizmenično sa drugim temama.
 status:
   istrazivanje: zavrseno
   pisanje: napisano
-  tehnickaProvera: nije-provereno
-  jezickaProvera: nije-provereno
+  tehnickaProvera: provereno
+  jezickaProvera: provereno
+napomenaProvere: "urednička provera (AI-asistirana) 2026-10-08: otvoreni TDS baslac 80-10, 80-30, 40-40 i varijante 80-10/80-20, 40-440 varijanta 80-10, 40-10 i varijanta 80-10; recepti, viskoziteti i vreme upotrebljivosti se poklapaju. Dodat izvor R-M FLEX Tune-R A 2P05 (07/2026) za do tada necitiranu tvrdnju (25 % po zapremini, Pioneer Series)."
 strucnaPotvrda:
   potrebna: false
   status: nije-potrebno
@@ -106,7 +113,7 @@ Kako se prepoznaje vrsta plastike, objašnjava vodič [Kako prepoznati vrstu pla
 
 ## 2. Šta tehnički list laka predviđa
 
-baslac za svoje lakove ima posebne varijante tehničkog lista sa elastifikatorom 80-10, opisane kao postupak za savitljive popravke[^baslac-40-40-80-10-tds]. Kod R-M sistema postoji elastifikator A 2P05 FLEX Tune-R; količinu i lakove sa kojima se koristi pročitajte u njegovom tehničkom listu, a pregled daje vodič [Aditivi: ubrzivači, elastifikatori i drugi dodaci](/vodici/aditivi-ubrzivaci-i-elastifikatori).
+baslac za svoje lakove ima posebne varijante tehničkog lista sa elastifikatorom 80-10, opisane kao postupak za savitljive popravke[^baslac-40-40-80-10-tds]. Kod R-M sistema postoji elastifikator A 2P05 FLEX Tune-R, namenjen bezbojnim lakovima Pioneer Series; list navodi dodatak od 25 % po zapremini, a odnos mešanja i nanošenje upućuje na tehnički list laka u koji se dodaje[^rm-a2p05-tds]. Pregled daje vodič [Aditivi: ubrzivači, elastifikatori i drugi dodaci](/vodici/aditivi-ubrzivaci-i-elastifikatori).
 
 Ako tehnički list Vašeg laka ne pominje plastiku ni elastifikator, to nije dozvola da se aditiv iz drugog sistema doda „za svaki slučaj“. Pitajte tehničku podršku proizvođača laka.
 

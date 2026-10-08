@@ -63,7 +63,8 @@ izvori:
   - id: sata-dry-jet-2-bal
     naziv: "SATA, Operating instructions SATA dry jet 2"
     url: https://www.sata.com/media/84/06/70/1790259017/BAL-SATA-DRY-JET-2.PDF.PDF?ts=1790259017
-    datumIzvora: 2025-11-27
+    verzija: "3456-201106-1"
+    napomena: "Oznaka dokumenta na poslednjoj strani; datum izmene PDF fajla 2022-03-07."
     pristupljeno: 2026-10-08
     tip: uputstvo-proizvodjaca
   - id: sata-dry-jet-2-stranica
@@ -76,8 +77,9 @@ razlogPrioriteta: Dopunjuje osnovni vodič teme konkretnim pitanjem; raspoređen
 status:
   istrazivanje: zavrseno
   pisanje: napisano
-  tehnickaProvera: nije-provereno
-  jezickaProvera: nije-provereno
+  tehnickaProvera: provereno
+  jezickaProvera: provereno
+napomenaProvere: "urednička provera (AI-asistirana) 2026-10-08: otvoreni ONYX HD, AGILIS 07/2026, 45 Line 03/2026, Mazda 51K blend 2 03/2025, uputstvo SATA dry jet 2 i stranica proizvoda; ispravljeno: tri navoda pripisana SATA uputstvu kojih u njemu nema (nečistoće na sloju, nepravilan protok, čestice bez sita) preformulisana prema uputstvu, datum izvora uputstva zamenjen oznakom dokumenta 3456-201106-1."
 strucnaPotvrda:
   potrebna: false
   status: nije-potrebno
@@ -94,8 +96,8 @@ Isto uputstvo navodi namenu: forsirano sušenje vodenih boja. Manje površine, k
 
 ## Postupak
 
-1. **Obezbedite čist vazduh.** SATA traži čist komprimovani vazduh i navodi da nečistoće u vazduhu mogu da završe na nanetom sloju[^sata-dry-jet-2-bal]. O pripremi vazduha piše vodič [Kompresor i vazduh za lakiranje](/vodici/kompresor-i-vazduh-za-lakiranje).
-2. **Proverite sito na usisu.** Uputstvo traži da se sito redovno menja; zapušeno sito daje nepravilan ili slab protok[^sata-dry-jet-2-bal].
+1. **Obezbedite čist vazduh.** SATA traži čist komprimovani vazduh, na primer uz odgovarajući filter za vazduh[^sata-dry-jet-2-bal]. O pripremi vazduha piše vodič [Kompresor i vazduh za lakiranje](/vodici/kompresor-i-vazduh-za-lakiranje).
+2. **Proverite sito na usisu.** Uputstvo traži da se sito redovno menja, jer ga čestice iz usisanog vazduha zapušavaju, a zapušeno sito umanjuje rad duvalice[^sata-dry-jet-2-bal].
 3. **Usmerite mlaz pravilno.** Za dry jet 2 SATA kao optimalno navodi rastojanje od 30–50 cm do površine i ugao od 20–40°[^sata-dry-jet-2-bal].
 4. **Ne duvajte prema podu.** Uzvitlana prašina može da padne na sveži sloj[^sata-dry-jet-2-bal].
 5. **Duvajte do mat površine.** Za ONYX HD R-M traži odzračivanje dok sloj ne postane mat posle svakog sloja[^rm-onyx-hd-tds], a za AGILIS dok površina ne postane potpuno mat posle završnog sloja[^rm-agilis-tds]. Tek tada se nanosi sledeći sloj ili bezbojni lak.
@@ -110,7 +112,7 @@ SATA u uputstvu za dry jet 2 navodi tri situacije[^sata-dry-jet-2-bal]:
 
 - **premalo rastojanje** između duvalice i površine može da pomeri boju;
 - **mlaz usmeren ka podu** diže prašinu koja pada na sloj;
-- **nedostaje sito ili je vazduh nečist,** pa se na površini pojave čestice.
+- **zapušeno sito** umanjuje rad duvalice, pa se sito redovno menja.
 
 Ako se posle sušenja vide čestice u sloju, mogući uzroci i provera opisani su u tekstu [Prašina i trunje u laku](/vodici/prasina-i-trunje-u-laku).
 

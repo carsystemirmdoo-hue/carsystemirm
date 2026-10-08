@@ -73,15 +73,16 @@ razlogPrioriteta: Dopunjuje osnovni vodič teme konkretnim pitanjem; raspoređen
 status:
   istrazivanje: zavrseno
   pisanje: napisano
-  tehnickaProvera: nije-provereno
-  jezickaProvera: nije-provereno
+  tehnickaProvera: provereno
+  jezickaProvera: provereno
+napomenaProvere: "urednička provera (AI-asistirana) 2026-10-08: otvoreni TDS baslac 65-10, 40-620, 45-W10, R-M C 2A93, C 2P42, C 2P30 (07/2026); tvrdnje se poklapaju. Ispravljeno: „odmah posle laka“ više se ne pripisuje listu 65-10 (upućeno na SV-0114 gde je izvor), uklonjena nepotkrepljena tehnika kraćih poteza, preciznije preneta napomena R-M o poliranju mat laka. Preklapanje sa SV-0114 provereno: tekst ostaje na celom postupku i linkuje na njega."
 strucnaPotvrda:
   potrebna: false
   status: nije-potrebno
 poslednjaProvera: 2026-10-08
 ponovniPregled: 2027-04-08
 ---
-Kod utapanja bezbojni lak se ne nanosi do ivice dela, nego se završava unutar postojećeg laka. Na rubu nove površine ostaje hrapava zona preprašivanja, pa se odmah posle laka na nju nanosi razređivač za utapanje, koji je rastvara i izravnava prelaz. baslac, na primer, svoj 65-10 namenjuje bezbojnim lakovima grupe 40- i navodi 2–3 sloja na zoni prelaza[^baslac-65-10-tds]. Prelaz se posle sušenja polira. Utapanje nije moguće kod svakog laka: za mat lak 40-620 baslac izričito traži lakiranje celog dela[^baslac-40-620-tds].
+Kod utapanja bezbojni lak se ne nanosi do ivice dela, nego se završava unutar postojećeg laka. Na rubu nove površine ostaje hrapava zona preprašivanja, pa se posle laka na nju nanosi razređivač za utapanje, koji je rastvara i izravnava prelaz. baslac, na primer, svoj 65-10 namenjuje bezbojnim lakovima grupe 40- i navodi 2–3 sloja na zoni prelaza[^baslac-65-10-tds]. Prelaz se posle sušenja polira. Utapanje nije moguće kod svakog laka: za mat lak 40-620 baslac izričito traži lakiranje celog dela[^baslac-40-620-tds].
 
 ## Kada se lak utapa, a kada lakira ceo deo
 
@@ -93,8 +94,8 @@ Za utapanje laka nije dovoljno da se dobro utopi samo bazna boja. Baza i lak su 
 
 1. **Priprema zone.** Cela površina na koju dolazi novi lak, uključujući zonu prelaza, mora biti matirana i očišćena. Kako, opisuje vodič [Brušenje i matiranje zone utapanja](/vodici/priprema-zone-utapanja).
 2. **Bazna boja.** Nanosi se samo koliko je potrebno da pokrije popravku i utopi nijansu, uz odzračivanje iz tehničkog lista baze.
-3. **Bezbojni lak.** Nanosi se prema tehničkom listu laka, a prema rubu u kraćim potezima, tako da zona preprašivanja ostane uska.
-4. **Razređivač za utapanje, odmah posle laka.** Za 65-10 baslac navodi da je spreman za upotrebu, da služi za stapanje preprašenih zona i zona preklapanja i da se na zone prelaza laka nanosi u 2–3 sloja[^baslac-65-10-tds]. Tehniku nanošenja i uporedne podatke za druge proizvode iz našeg programa daje vodič [Razređivač za utapanje](/vodici/razredjivac-za-utapanje).
+3. **Bezbojni lak.** Nanosi se prema tehničkom listu laka. Cilj je da zona preprašivanja na rubu ostane što uža.
+4. **Razređivač za utapanje, posle laka.** Za 65-10 baslac navodi da je spreman za upotrebu, da služi za stapanje preprašenih zona i zona preklapanja i da se na zone prelaza laka nanosi u 2–3 sloja[^baslac-65-10-tds]. Kada se tačno nanosi (neki proizvođači traže da to bude odmah posle laka), tehniku i uporedne podatke za druge proizvode iz našeg programa daje vodič [Razređivač za utapanje](/vodici/razredjivac-za-utapanje).
 5. **Sušenje.** Za 65-10 važi vreme sušenja upotrebljenog baslac laka[^baslac-65-10-tds].
 6. **Poliranje prelaza.** Polira se tek kada lak odsuši i ohladi se; R-M to, na primer, navodi za C 2P42[^rm-c2p42-tds]. Poliranjem se uklanja preostala hrapavost i izjednačava sjaj na prelazu.
 
@@ -102,7 +103,7 @@ Postoje i posebni sistemi za male popravke. R-M za UV lak C 2P30 UV Finish-R nav
 
 ## Kada se utapanje laka ne preporučuje
 
-- **Mat i polumat lak.** baslac za 40-620 navodi da se mat lak ne može utapati jer debljina sloja u zoni prelaza varira, a to menja stepen sjaja; zato je lakiranje celog dela obavezno[^baslac-40-620-tds]. R-M za mat lak C 2A93 navodi da poliranje menja stepen sjaja[^rm-c2a93-tds], pa se ni prelaz ne može izjednačiti poliranjem. Više u vodiču [Mat i polumat lak](/vodici/mat-i-polumat-lak).
+- **Mat i polumat lak.** baslac za 40-620 navodi da se mat lak ne može utapati jer debljina sloja u zoni prelaza varira, a to menja stepen sjaja; zato je lakiranje celog dela obavezno[^baslac-40-620-tds]. R-M za mat lak C 2A93 navodi da se na mat površini ni prašina ne može ukloniti poliranjem, jer poliranje menja stepen sjaja[^rm-c2a93-tds]. Zato se ni prelaz na mat laku ne izjednačava poliranjem. Više u vodiču [Mat i polumat lak](/vodici/mat-i-polumat-lak).
 - **Kada proizvođač vozila propisuje drugačije.** R-M i baslac u tehničkim listovima lakova navode da se uputstva proizvođača vozila za popravku, posebno u vezi sa ugrađenim senzorima, moraju poštovati uz uputstva iz lista[^rm-c2p42-tds][^baslac-40-620-tds].
 - **Kada razređivač za utapanje nije predviđen za taj lak.** baslac 65-10 je namenjen baslac lakovima grupe 40-[^baslac-65-10-tds]. Proizvod iz drugog sistema koristite samo ako to dozvoljava proizvođač Vašeg laka.
 

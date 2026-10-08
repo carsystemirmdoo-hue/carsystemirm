@@ -83,8 +83,9 @@ razlogPrioriteta: Dopunjuje osnovni vodič teme konkretnim pitanjem; raspoređen
 status:
   istrazivanje: zavrseno
   pisanje: napisano
-  tehnickaProvera: nije-provereno
-  jezickaProvera: nije-provereno
+  tehnickaProvera: provereno
+  jezickaProvera: provereno
+napomenaProvere: "urednička provera (AI-asistirana) 2026-10-08: otvoreni TDS ONYX HD, AGILIS, DIAMONT (07/2026), baslac 35 Line, 45 Line, 30 Line i Basecoat application; slojevi i debljine se poklapaju. Ispravljeno: AGILIS „završni sloj“ više se ne predstavlja kao sloj za efekat, uklonjena necitirana tvrdnja o R-M i baslac sivim puniocima (upućeno na SV-0088)."
 strucnaPotvrda:
   potrebna: false
   status: nije-potrebno
@@ -110,7 +111,7 @@ Tabela ne poredi kvalitet. Pokazuje samo da proizvođači broj slojeva vezuju za
 1. **Prvi sloj.** Nanosi se ujednačeno po celoj površini koja se lakira. Za 45 Line baslac u uputstvu za nanošenje navodi jedan mokar sloj, pa odzračivanje do mat izgleda[^baslac-basecoat-application].
 2. **Drugi sloj.** Isto, preko celog dela. Posle njega se proverava pokrivenost. Za 45 Line baslac navodi drugi mokar sloj i odzračivanje do mat izgleda[^baslac-basecoat-application].
 3. **Dodatni sloj, ako podloga još prosijava.** Samo do granice koju dozvoljava tehnički list, uz odzračivanje kao između prethodnih slojeva.
-4. **Sloj za efekat kod metalika i bisera.** Tanji sloj kojim se ujednačava raspored listića. Za 45 Line baslac navodi tanak sloj sa razdaljine od oko 30 cm, radi pravilnog poklapanja nijanse[^baslac-basecoat-application]. Kod AGILIS sistema tu ulogu ima završni sloj koji se nanosi mokro na mokro, posle čega se materijal odzračuje dok površina ne postane potpuno mat[^rm-agilis-tds].
+4. **Sloj za efekat kod metalika i bisera.** Tanji sloj kojim se ujednačava raspored listića. Za 45 Line baslac navodi tanak sloj sa razdaljine od oko 30 cm, radi pravilnog poklapanja nijanse[^baslac-basecoat-application]. Za AGILIS R-M ne navodi poseban sloj za efekat: nanose se jedan pun sloj i jedan „završni sloj“ (*finish coat*) mokro na mokro, a zatim se odzračuje dok površina ne postane potpuno mat[^rm-agilis-tds].
 
 Koliko se čeka između slojeva opisuje vodič [Vreme između slojeva bazne boje](/vodici/vreme-izmedju-slojeva-baze).
 
@@ -128,7 +129,7 @@ To je sposobnost boje da u što tanjem sloju sakrije ono što je ispod nje. basl
 
 ### Zašto neke boje slabije pokrivaju?
 
-Pokrivnost zavisi od pigmenata u recepturi i od toga koliko se nijansa razlikuje od podloge ispod nje. R-M i baslac imaju punioce koji se mešaju u različite sive nijanse, a mogući uzroci slabe pokrivenosti i njihova provera opisani su u vodiču [Kroz novu boju se vidi podloga](/vodici/kroz-boju-se-vidi-podloga).
+Pokrivnost zavisi od pigmenata u recepturi i od toga koliko se nijansa razlikuje od podloge ispod nje. Mogući uzroci slabe pokrivenosti i njihova provera, uključujući izbor sive nijanse punioca, opisani su u vodiču [Kroz novu boju se vidi podloga](/vodici/kroz-boju-se-vidi-podloga).
 
 ### Da li isto važi za boju sa direktnim sjajem?
 

@@ -71,16 +71,17 @@ razlogPrioriteta: Dopunjuje osnovni vodič teme konkretnim pitanjem; raspoređen
 status:
   istrazivanje: zavrseno
   pisanje: napisano
-  tehnickaProvera: nije-provereno
-  jezickaProvera: nije-provereno
+  tehnickaProvera: ispravke-potrebne
+  jezickaProvera: provereno
 strucnaPotvrda:
   potrebna: true
   razlog: "Tehnički listovi i uputstva proizvođača iz našeg programa (R-M, baslac, Carsystem, C.A.R.FIT) ne opisuju posebno pripremu plastičnog dela koji dolazi sa fabričkim prajmerom. Provera otpornosti fabričkog sloja na rastvarač (u izvoru pisana za KTL sloj na limu) i napomena o agresivnom sredstvu za čišćenje plastike oslanjaju se na Glasurit priručnik za Severnu Ameriku (brend van našeg programa, rev. 2009–2018). Potrebna je potvrda stručne osobe ili tehničke službe dobavljača."
   status: potrebno
+napomenaProvere: "urednička provera (AI-asistirana) 2026-10-08: otvoreni baslac Plastic Repair System VOC 10/2024 i 80-30 06/2023, R-M PK 2P40 i PK 2P10 07/2026 i Glasurit priručnik (kopija Skills/Compétences Canada): tabela pripreme (pranje vodom i sapunom), bilten GLABUL0202-E od 19. 1. 2009. za fabrički KTL sloj, 541-30 (ne koristi se na prajmerima) i 934-70 (sirova i nerastvorljiva prajmerisana plastika) odgovaraju citatima. Glasurit je jasno pripisan kao brend van programa, njegovi proizvodi se ne imenuju niti preporučuju. Oznaka za stručnu potvrdu je opravdana: provera fabričkog sloja na plastici je prenesena sa Glasurit biltena za lim. Ispravljeno: redosled u uvodu usklađen sa koracima, uklonjen zaključak da je PLASTIC Clean-R „dakle“ samo za sirovu plastiku, dodato da baslac postupak za nove delove ne razlikuje prajmerisane delove, vizuelna provera prianjanja označena kao urednička, „flis“ uklonjen radi terminologije."
 poslednjaProvera: 2026-10-08
 ponovniPregled: 2027-04-08
 ---
-Nov branik sa fabričkim prajmerom se ne priprema kao sirova plastika. Fabrički sloj se prvo proverava: ako omekša, nabubri ili postane lepljiv pod rastvaračem, ili se ne drži za plastiku, uklanja se. Ako je stabilan, deo se opere, očisti, ceo matira i ponovo očisti, a zatim se nastavlja sistemom koji proizvođač materijala propisuje. Tehnički listovi iz našeg programa ovaj slučaj ne opisuju posebno, pa tekst čeka stručnu potvrdu i ne zamenjuje uputstvo dobavljača dela.
+Nov branik sa fabričkim prajmerom se ne priprema kao sirova plastika. Deo se opere, a fabrički sloj se zatim proverava: ako omekša, nabubri ili postane lepljiv pod rastvaračem, ili se ne drži za plastiku, uklanja se. Ako je stabilan, deo se očisti, ceo matira i ponovo očisti, a zatim se nastavlja sistemom koji proizvođač materijala propisuje. Tehnički listovi iz našeg programa ovaj slučaj ne opisuju posebno, pa tekst čeka stručnu potvrdu i ne zamenjuje uputstvo dobavljača dela.
 
 ## Zašto fabrički prajmer nije isto što i sirova plastika
 
@@ -94,8 +95,8 @@ Redosled ispod je urednički sastavljen od koraka koje proizvođači navode za p
 
 1. **Pranje.** Deo se opere vodom i sredstvom za pranje, ispere i osuši. Glasurit u tabeli pripreme navodi pranje vodom i sapunom pre čišćenja plastike[^glasurit-prirucnik].
 2. **Provera otpornosti na rastvarač.** Na skrivenom mestu se izvede test opisan u odeljku ispod.
-3. **Čišćenje.** Sredstvo za čišćenje bira se prema podlozi. R-M PLASTIC Clean-R je, prema tehničkom listu, sredstvo isključivo za plastične delove koje uklanja sredstva za odvajanje iz proizvodnje[^rm-pk2p40-tds], dakle napravljeno za sirovu plastiku. R-M MULTI Clean-R ima širi spisak podloga i antistatičko dejstvo za plastiku[^rm-pk2p10-tds].
-4. **Matiranje celog dela.** Fabrički sloj se ravnomerno matira sunđerom ili flisom za matiranje, bez probijanja do plastike. baslac i za nove plastične delove u svom postupku traži matiranje cele površine i ponovno čišćenje sredstvom 70-20[^baslac-plastic-system].
+3. **Čišćenje.** Sredstvo za čišćenje bira se prema podlozi. R-M PLASTIC Clean-R je, prema tehničkom listu, sredstvo isključivo za plastične delove koje uklanja sredstva za odvajanje iz proizvodnje[^rm-pk2p40-tds]; da li je pogodno i za fabrički prajmer, list ne navodi. R-M MULTI Clean-R ima širi spisak podloga, među kojima su prajmer, punilac i stari lak, i antistatičko dejstvo za plastiku[^rm-pk2p10-tds].
+4. **Matiranje celog dela.** Fabrički sloj se ravnomerno matira sunđerom za matiranje, bez probijanja do plastike. baslac u postupku za nove plastične delove traži matiranje cele površine i ponovno čišćenje sredstvom 70-20[^baslac-plastic-system]; postupak ne navodi da li je deo fabrički prajmerisan.
 5. **Ponovno čišćenje** i nastavak po sistemu.
 
 Ako se pri matiranju sloj probije do sirove plastike, to mesto se tretira kao sirova plastika, prema vodiču [Priprema plastičnih delova pre lakiranja](/vodici/priprema-plastike-pre-lakiranja).
@@ -104,13 +105,13 @@ Ako se pri matiranju sloj probije do sirove plastike, to mesto se tretira kao si
 
 Za ovu proveru nismo pronašli postupak u dokumentima proizvođača iz našeg programa. Glasurit, brend koji nije u našem programu, u servisnom biltenu za nove limene delove sa fabričkim KTL slojem navodi test otpornosti na rastvarač i pravilo: ako fabrički prajmer nabubri, postane lepljiv ili omekša, mora da se ukloni[^glasurit-prirucnik]. Bilten je pisan za lim, ali isti princip se ovde primenjuje na fabrički sloj na plastici; to je urednička procena. Isti priručnik za svoje promotore prianjanja navodi da su pogodni za sirovu plastiku i za prajmerisanu plastiku koja se ne rastvara[^glasurit-prirucnik].
 
-Kako se test radi, opisuje vodič [Test starog laka razređivačem](/vodici/test-starog-laka-razredjivacem). Prianjanje fabričkog sloja na plastiku proverava se i vizuelno posle matiranja: sloj ne sme da se ljušti na ivicama ni da se diže pod sunđerom. Ako ste u nedoumici, pitajte dobavljača dela kakav je fabrički sloj i za šta je namenjen.
+Kako se test radi, opisuje vodič [Test starog laka razređivačem](/vodici/test-starog-laka-razredjivacem). Prianjanje fabričkog sloja na plastiku proverava se i vizuelno posle matiranja: sloj ne sme da se ljušti na ivicama ni da se diže pod sunđerom. I ovo je urednička preporuka, a ne postupak iz tehničkog lista. Ako ste u nedoumici, pitajte dobavljača dela kakav je fabrički sloj i za šta je namenjen.
 
 ## Treba li dodatni prajmer za plastiku?
 
 Na mestima gde je fabrički prajmer netaknut, sledeći sloj se vezuje za njega, pa prajmer za plastiku tu nije namenjen podlozi. Potreban je tamo gde je otkrivena sirova plastika, a odluka zavisi od sistema. Kada je prajmer za plastiku deo postupka, a kada ga sistem zamenjuje drugim rešenjem, objašnjava vodič [Prajmer za plastiku: kada je potreban](/vodici/prajmer-za-plastiku-kada-treba).
 
-baslac za nove plastične delove u svom postupku ne koristi poseban prajmer, nego punilac 20-35 ili 20-95 sa aditivom 80-30 Additive Plast[^baslac-plastic-system]. Za 80-30 tehnički list navodi da se po potrebi može naneti i na susedne delove sa KTL slojem, ali da na PP i PE ne daje dovoljno prianjanje[^baslac-80-30-tds]. Ovaj postupak se odnosi na baslac sistem.
+baslac za nove plastične delove u svom postupku ne koristi poseban prajmer, nego punilac 20-35 ili 20-95 sa aditivom 80-30 Additive Plast[^baslac-plastic-system]. Taj postupak ne razlikuje sirove i fabrički prajmerisane delove. Za 80-30 tehnički list navodi da se po potrebi može naneti i na susedne delove sa KTL slojem, ali da na PP i PE ne daje dovoljno prianjanje[^baslac-80-30-tds]. Ovaj postupak se odnosi na baslac sistem.
 
 ## Česte greške
 

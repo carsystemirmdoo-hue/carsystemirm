@@ -90,11 +90,12 @@ razlogPrioriteta: Dopunjuje osnovni vodič teme konkretnim pitanjem; raspoređen
 status:
   istrazivanje: zavrseno
   pisanje: napisano
-  tehnickaProvera: nije-provereno
-  jezickaProvera: nije-provereno
+  tehnickaProvera: provereno
+  jezickaProvera: provereno
 strucnaPotvrda:
   potrebna: false
   status: nije-potrebno
+napomenaProvere: "urednička provera (AI-asistirana) 2026-10-08: otvoreni C.A.R.FIT 2K Epoxy Primer 1:1, 1K Etch Primer Spray i Silicone Remover, Carsystem Silicone Remover Mild v.01 05/2021 i Prep & Scuff v.02 03/2021, R-M PK 1P10 i P 2P63 07/2026 i baslac Chart 1 03/2024 (proveren prikaz tabele: kolona Old paintwork označena za 12-20, 20-24, 20-34, 20-94, 25-30, 27-10 i 20-35/95); podloge, granulacije, redosled odmašćivanja i opis gela odgovaraju izvorima. Ispravljeno: za 2K Epoxy Primer navedeno da su granulacije opšte za sve podloge i da ručno brušenje može biti suvo ili mokro; sitna jezička ispravka."
 poslednjaProvera: 2026-10-08
 ponovniPregled: 2027-04-08
 ---
@@ -104,7 +105,7 @@ Zdrav stari lak se ne skida do lima: opere se, odmasti, matira brušenjem ili su
 
 Proizvođači stari lak navode kao redovnu podlogu, ali uz uslov. C.A.R.FIT za 2K Epoxy Primer 1:1 navodi stare završne slojeve „u dobrom stanju“ među podlogama[^carfit-2k-epoxy-tds], a za Silicone Remover potpuno očvrsle stare ili sveže slojeve, uz upozorenje da se ne koristi na podlogama osetljivim na rastvarače, na primer termoplastičnim slojevima[^carfit-silicone-remover-tds]. R-M za SILICONE Remov-R stari lak navodi kao podlogu, ali ne i podloge osetljive na rastvarače[^rm-pk1p10-tds].
 
-Pre pripreme zato proverite, kao urednički spisak:
+Pre pripreme zato proverite (urednički spisak):
 
 - da li se lak drži za podlogu, bez ljuštenja na ivicama i oko oštećenja;
 - da li ima sitne pukotine ili mrežu pukotina;
@@ -129,7 +130,7 @@ Granulaciju određuje materijal koji ide preko starog laka. Primeri iz tehnički
 
 | Materijal preko starog laka | Priprema starog laka prema tehničkom listu |
 | --- | --- |
-| C.A.R.FIT 2K Epoxy Primer 1:1 | ručno P280–P320, mašinski suvo P180–P220[^carfit-2k-epoxy-tds] |
+| C.A.R.FIT 2K Epoxy Primer 1:1 | ručno (suvo ili mokro) P280–P320, mašinski suvo P180–P220; list ove granulacije daje za sve podloge[^carfit-2k-epoxy-tds] |
 | C.A.R.FIT 1K Etch Primer Spray | P220–P320 suvo ili P400 mokro[^carfit-etch-primer-tds] |
 
 Ako preko starog laka ide samo bazna boja ili bezbojni lak, na primer u zoni utapanja, matira se znatno finije. To je posebna tema: vidi [Brušenje i matiranje zone utapanja](/vodici/priprema-zone-utapanja).

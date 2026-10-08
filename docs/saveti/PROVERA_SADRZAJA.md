@@ -5,10 +5,10 @@ Generiše `npm run saveti:build`. Ne menjati ručno.
 | Pokazatelj | Broj |
 | --- | ---: |
 | Teme u inventaru | 224 |
-| Napisano | 134 |
-| Tehnička provera prošla | 56 |
-| Jezička provera prošla | 64 |
-| Čeka stručnu potvrdu | 22 |
+| Napisano | 151 |
+| Tehnička provera prošla | 90 |
+| Jezička provera prošla | 106 |
+| Čeka stručnu potvrdu | 24 |
 | Odobreno za objavu (imenovana osoba) | 0 |
 | Od toga novosti | 9 |
 

@@ -70,13 +70,19 @@ izvori:
     verzija: "07/2026"
     pristupljeno: 2026-10-08
     tip: tehnicki-list
+  - id: inform-after-care
+    naziv: "Info R-M, Help Centre: After care of vehicle paintwork"
+    url: https://info.rmpaint.com/help/after-care-vehicle-paintwork
+    pristupljeno: 2026-10-08
+    tip: edukacija-proizvodjaca
 prioritet: 816
 razlogPrioriteta: Rešava konkretan problem iz prakse; raspoređeno naizmenično sa drugim temama.
 status:
   istrazivanje: zavrseno
   pisanje: napisano
-  tehnickaProvera: nije-provereno
-  jezickaProvera: nije-provereno
+  tehnickaProvera: ispravke-potrebne
+  jezickaProvera: provereno
+napomenaProvere: "urednička provera (AI-asistirana) 2026-10-08: otvoreni TDS Carsystem HS/SR V04, CC.26 V01, Klarlack-Spray v.02, baslac 40-40, R-M GHD TOPCOAT i C 5450; svi navodi se poklapaju. Dodat izvor Info R-M (nega laka) za spoljne uticaje na lak, uz napomenu da ne objašnjava žućenje. Stručna potvrda opravdana: uzroci žućenja, provera i sanacija nemaju izvor."
 strucnaPotvrda:
   potrebna: true
   razlog: "Pregledani tehnički listovi (Carsystem HS/SR, CC.26, Klarlack-Spray; baslac 40-40; R-M GHD TOPCOAT i C 5450) samo navode otpornost na UV zračenje i vremenske uslove ili napominju boju učvršćivača. Nijedan ne objašnjava uzroke žućenja ili gubitka sjaja starog laka, ne daje postupak provere ni sanacije. Uzroke, proveru i mogućnost ispravke treba da potvrdi stručna osoba ili tehnička podrška proizvođača; tekst zato ne navodi uzroke."
@@ -110,7 +116,7 @@ Ove provere ne daju dijagnozu. Služe da stručna osoba ili tehnička podrška d
 
 ## Može li se sprečiti ili ispraviti
 
-Sprečavanje se, prema dostupnim izvorima, svodi na izbor laka čiji list navodi otpornost na UV zračenje i vremenske uslove i na rad prema tom listu. Kako se lak bira, objašnjava vodič [Kako se bira bezbojni lak](/vodici/izbor-bezbojnog-laka).
+Sprečavanje se, prema dostupnim izvorima, svodi na izbor laka čiji list navodi otpornost na UV zračenje i vremenske uslove i na rad prema tom listu. R-M u savetima za negu laka navodi da stanju laka, između ostalog, štete UV zračenje, kisele kiše, so sa puta, ptičji izmet, smola drveća, industrijski gasovi i deterdženti pri pranju[^inform-after-care]. Koliko svaki od tih uticaja doprinosi žućenju konkretnog laka, izvor ne kaže. Kako se lak bira, objašnjava vodič [Kako se bira bezbojni lak](/vodici/izbor-bezbojnog-laka).
 
 Za ispravku pregledani izvori ne daju postupak. Da li je dovoljno poliranje ili je potrebno novo lakiranje, zavisi od toga gde je promena i koliko je duboka, pa to procenjuje stručna osoba na vozilu. Ne pokušavajte da žućkast ton „prekrijete“ novim slojem laka bez te procene.
 

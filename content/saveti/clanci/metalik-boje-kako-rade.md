@@ -87,8 +87,9 @@ razlogPrioriteta: Dopunjuje osnovni vodič teme konkretnim pitanjem; raspoređen
 status:
   istrazivanje: zavrseno
   pisanje: napisano
-  tehnickaProvera: nije-provereno
-  jezickaProvera: nije-provereno
+  tehnickaProvera: provereno
+  jezickaProvera: provereno
+napomenaProvere: "urednička provera (AI-asistirana) 2026-10-08: otvoreni TDS ONYX HD, AGILIS, DIAMONT (07/2026), baslac 45 Line, Basecoat application, Color Chips, e-finder star i Info R-M Clouding; navodi se poklapaju. Ispravljeno: AGILIS u tabeli označen kao sistem bez posebnog sloja za efekat, ublažena apsolutna tvrdnja u odgovoru o „kristalima“."
 strucnaPotvrda:
   potrebna: false
   status: nije-potrebno
@@ -105,13 +106,13 @@ Proizvođači to uzimaju u obzir i kod merenja. Za uređaj baslac e-finder star 
 
 ## Kako način nanošenja menja izgled metalika
 
-Isti materijal može izgledati svetlije ili tamnije zavisno od toga kako je nanet. Opšte objašnjenje je ovo: u mokrom sloju listići imaju više vremena da se slegnu i okrenu, a u suvljem sloju se brže „zamrznu“ u položaju u kome su pali. Proizvođači za metalik i biserne nijanse propisuju i poseban sloj „za ujednačavanje efekta“ (engl. *to match the effect*):
+Isti materijal može izgledati svetlije ili tamnije zavisno od toga kako je nanet. Opšte objašnjenje je ovo: u mokrom sloju listići imaju više vremena da se slegnu i okrenu, a u suvljem sloju se brže „zamrznu“ u položaju u kome su pali. Većina proizvođača za metalik i biserne nijanse propisuje i poseban sloj „za ujednačavanje efekta“ (engl. *to match the effect*):
 
 | Proizvod | Slojevi za metalik i biserne nijanse prema tehničkom listu |
 | --- | --- |
 | R-M ONYX HD | 1 ili 2 sloja + 1 sloj za ujednačavanje efekta, 12–15 µm[^rm-onyx-hd-tds] |
 | R-M DIAMONT | 2 + 1 za efekat, 15 µm[^rm-diamont-tds] |
-| R-M AGILIS | 1 pun sloj + 1 završni sloj mokro na mokro, 10–15 µm[^rm-agilis-tds] |
+| R-M AGILIS | poseban sloj za efekat nije naveden; za sve nijanse 1 pun sloj + 1 završni sloj mokro na mokro, 10–15 µm[^rm-agilis-tds] |
 | baslac 45 Line | 2 do pokrivanja + ½ za efekat, 10–15 µm[^baslac-45-line-tds] |
 
 Za 45 Line baslac u uputstvu za nanošenje opisuje taj završni sloj kao tanak sloj preko celog dela sa razdaljine od oko 30 cm, radi pravilnog poklapanja nijanse[^baslac-basecoat-application]. Za ONYX HD R-M upozorava i da se u pištolj ne stavlja sito kada se nanosi metalik ili biserna bazna boja[^rm-onyx-hd-tds].
@@ -140,4 +141,4 @@ Mokriji ili suvlji sloj, razmak pištolja i preklapanje utiču na to kako listi�
 
 ### Mogu li da dobijem krupnije „kristale“ drugačijim nanošenjem?
 
-Ne. Veličina metalik čestica je deo recepture i baslac je navodi kao osobinu varijante nijanse[^baslac-color-chips]. Nanošenjem se menja raspored čestica, ne njihova veličina.
+Ne u smislu veličine čestica. Veličina metalik čestica je deo recepture i baslac je navodi kao osobinu varijante nijanse[^baslac-color-chips]. Nanošenjem se menja raspored čestica, ne njihova veličina.

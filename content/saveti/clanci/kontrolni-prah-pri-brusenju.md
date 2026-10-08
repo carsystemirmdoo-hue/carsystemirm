@@ -83,8 +83,9 @@ razlogPrioriteta: Dopunjuje osnovni vodič teme konkretnim pitanjem; raspoređen
 status:
   istrazivanje: zavrseno
   pisanje: napisano
-  tehnickaProvera: nije-provereno
-  jezickaProvera: nije-provereno
+  tehnickaProvera: provereno
+  jezickaProvera: provereno
+napomenaProvere: "urednička provera (AI-asistirana) 2026-10-08: otvoreni Dry Coat 2.0 V03, Control-Spray v.02, katalozi Carsystem 2026/27 i C.A.R.FIT 2026, baslac Putty application metal, B 2P93 i P 2E23 07/2026; ispravljeno: R-M „Guide Coat“ preveden kao kontrolni sloj (dokument ne navodi da li je prah ili sprej)."
 strucnaPotvrda:
   potrebna: false
   status: nije-potrebno

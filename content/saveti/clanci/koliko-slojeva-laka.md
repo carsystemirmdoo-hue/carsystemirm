@@ -104,19 +104,20 @@ razlogPrioriteta: Dopunjuje osnovni vodič teme konkretnim pitanjem; raspoređen
 status:
   istrazivanje: zavrseno
   pisanje: napisano
-  tehnickaProvera: nije-provereno
-  jezickaProvera: nije-provereno
+  tehnickaProvera: provereno
+  jezickaProvera: provereno
+napomenaProvere: "urednička provera (AI-asistirana) 2026-10-08: otvoreni TDS R-M C 2P42, C 2P45, C 2A40, C 5450 (07/2026), baslac 40-100 (06/2026), 40-510, 40-620, Carsystem CC.26 i Speed Plus V06, Norbin N15-020; slojevi, odzračivanje i debljine odgovaraju. Ispravljeno: kolona „debljina suvog sloja“ preimenovana u „debljina sloja prema listu“, jer samo Carsystem izričito navodi suvi sloj."
 strucnaPotvrda:
   potrebna: false
   status: nije-potrebno
 poslednjaProvera: 2026-10-08
 ponovniPregled: 2027-04-08
 ---
-Broj slojeva bezbojnog laka nije stvar navike nego podatak iz tehničkog lista tog laka. U listovima iz našeg programa navode se dva sloja, jedan i po sloj (pola sloja pa pun sloj) ili jedan sloj za male delove, a često su dva postupka data kao ravnopravne mogućnosti. Za R-M C 2P42 list navodi 2 sloja sa 1–3 min odzračivanja ili, kao alternativu, 1½ sloj bez odzračivanja[^rm-c2p42-tds]. Cilj je uvek isti: debljina suvog sloja koju list navodi, za C 2P42 40–50 µm[^rm-c2p42-tds].
+Broj slojeva bezbojnog laka nije stvar navike nego podatak iz tehničkog lista tog laka. U listovima iz našeg programa navode se dva sloja, jedan i po sloj (pola sloja pa pun sloj) ili jedan sloj za male delove, a često su dva postupka data kao ravnopravne mogućnosti. Za R-M C 2P42 list navodi 2 sloja sa 1–3 min odzračivanja ili, kao alternativu, 1½ sloj bez odzračivanja[^rm-c2p42-tds]. Cilj je uvek isti: debljina sloja koju list navodi, za C 2P42 40–50 µm[^rm-c2p42-tds].
 
 ## Šta navode tehnički listovi
 
-| Lak | Slojevi | Odzračivanje između slojeva | Debljina suvog sloja |
+| Lak | Slojevi | Odzračivanje između slojeva | Debljina sloja prema listu |
 | --- | --- | --- | --- |
 | R-M C 2P42 RACE Finish-R | 2, ili 1½ | 1–3 min; kod 1½ bez odzračivanja[^rm-c2p42-tds] | 40–50 µm[^rm-c2p42-tds] |
 | R-M C 2P45 SPEED Finish-R | 1½, ili 2 | kod 1½ bez; kod 2 oko 3–5 min[^rm-c2p45-tds] | 40–60 µm[^rm-c2p45-tds] |
@@ -126,7 +127,7 @@ Broj slojeva bezbojnog laka nije stvar navike nego podatak iz tehničkog lista t
 | Carsystem CC.26 ECO-X | 1,5–2 | 4–6 min[^carsystem-cc26-tds] | 50–60 µm[^carsystem-cc26-tds] |
 | Norbin N15-020 | 2 | 3 min[^norbin-n15-020-tds] | 50–60 µm[^norbin-n15-020-tds] |
 
-Tabela pokazuje da „dva sloja“ ne znači isto kod svakog laka: razlikuju se i pauza između slojeva i ciljana debljina. Za CC.26 Carsystem navodi i mokri sloj od 90–100 µm po prolazu[^carsystem-cc26-tds], što je podatak koji pomaže da se sloj ne nanese pretanko ili predebelo.
+Tabela pokazuje da „dva sloja“ ne znači isto kod svakog laka: razlikuju se i pauza između slojeva i ciljana debljina. Carsystem za CC.26 izričito navodi da je to debljina suvog sloja[^carsystem-cc26-tds], dok ostali listovi daju samo „debljinu sloja“ (*film thickness*). Za CC.26 Carsystem navodi i mokri sloj od 90–100 µm po prolazu[^carsystem-cc26-tds], što je podatak koji pomaže da se sloj ne nanese pretanko ili predebelo.
 
 ## Postupak u jednom i po sloju
 

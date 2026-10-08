@@ -75,16 +75,17 @@ razlogPrioriteta: Dopunjuje osnovni vodič teme konkretnim pitanjem; raspoređen
 status:
   istrazivanje: zavrseno
   pisanje: napisano
-  tehnickaProvera: nije-provereno
-  jezickaProvera: nije-provereno
+  tehnickaProvera: ispravke-potrebne
+  jezickaProvera: provereno
 strucnaPotvrda:
   potrebna: true
   razlog: "Za peskarenje karoserije (oštećenje i deformacija tankog lima, izbor abraziva i pritiska) nije pronađen izvor proizvođača iz našeg programa; tekst o tome samo upućuje na uputstvo opreme i proizvođača vozila. Bezbednosni list za Cosmos Lac Paint Remover nije javno dostupan (prema TDS-u dobija se na zahtev), pa su bezbednosni podaci ograničeni na TDS. Primena REACH ograničenja u Srbiji nije proverena."
   status: potrebno
+napomenaProvere: "urednička provera (AI-asistirana) 2026-10-08: otvoreni Carsystem stranica Stripping Disc (namena, neoštećena podloga, 6.000/4.000 o/min), C.A.R.FIT Zinc Spray, Cosmos Lac Paint Remover verzija 01 od 16. 9. 2025 (nanošenje, sunce, oštećenje lakiranih površina, tačka paljenja ispod 0 °C, bez hlorovanih rastvarača, SDS na zahtev, PE i PP), R-M P 5480 i P 5530 07/2026 i Uredba 276/2010 (EUR-Lex, unos 59: 0,1 %, 6. 12. 2011, 6. 6. 2012, izuzetak za obučene profesionalce, industrijska postrojenja); sve se poklapa, 3M se ne pominje. Oznaka za stručnu potvrdu je opravdana: izbor postupka i peskarenje tankog lima nemaju izvor proizvođača iz programa, a primena REACH ograničenja u Srbiji nije proverena. Ispravljeno: uporedni uvod označen kao urednička procena i vezan za tehnički list skidača, „špahtla“ zamenjena „lopaticom“ (u rečniku je špahtla sinonim za kit)."
 poslednjaProvera: 2026-10-08
 ponovniPregled: 2027-04-08
 ---
-Ne postoji jedan postupak koji je najbolji za svaki deo. Za manju površinu i lokalnu popravku stara boja se obično skida brušenjem ili diskom za skidanje boje, jer se tako najlakše kontroliše koliko se skida. Hemijski skidač je opcija za veće površine i teško dostupna mesta, ali je zapaljiv, traži zaštitu i ne sme na susedne lakirane površine. Peskarenje je postupak za koji u dokumentima iz našeg programa nismo našli uputstvo za tanki lim karoserije, pa ga ovde samo pominjemo.
+Ne postoji jedan postupak koji je najbolji za svaki deo. Prema uredničkoj proceni, za manju površinu i lokalnu popravku stara boja se obično skida brušenjem ili diskom za skidanje boje, jer se tako najlakše kontroliše koliko se skida. Hemijski skidač je opcija za veće površine i teško dostupna mesta, ali skidač iz našeg programa je, prema tehničkom listu, izuzetno zapaljiv i može da ošteti susedne lakirane površine[^cosmos-paint-remover-tds], pa traži zaštitu. Peskarenje je postupak za koji u dokumentima iz našeg programa nismo našli uputstvo za tanki lim karoserije, pa ga ovde samo pominjemo.
 
 ## Pre izbora: da li boju treba skidati
 
@@ -110,7 +111,7 @@ Kada peskarenje oštećuje lim, u dokumentima proizvođača iz našeg programa n
 
 ## Hemijski skidač boje
 
-Skidač se nanosi u debljem sloju, ostavi da prodre kroz boju, pa se omekšala boja skida špahtlom ili krpom. Tako za Cosmos Lac Paint Remover navodi tehnički list, uz napomenu da se ne koristi na toplim površinama ni na suncu[^cosmos-paint-remover-tds]. Isti list upozorava da skidač može da ošteti lakirane površine[^cosmos-paint-remover-tds], pa se susedni delovi koji se ne skidaju zaštite.
+Skidač se nanosi u debljem sloju, ostavi da prodre kroz boju, pa se omekšala boja skida lopaticom ili krpom. Tako za Cosmos Lac Paint Remover navodi tehnički list, uz napomenu da se ne koristi na toplim površinama ni na suncu[^cosmos-paint-remover-tds]. Isti list upozorava da skidač može da ošteti lakirane površine[^cosmos-paint-remover-tds], pa se susedni delovi koji se ne skidaju zaštite.
 
 Posle skidanja ostaje goli metal, koji se dalje priprema prema vodiču [Priprema golog čeličnog lima](/vodici/priprema-golog-lima).
 

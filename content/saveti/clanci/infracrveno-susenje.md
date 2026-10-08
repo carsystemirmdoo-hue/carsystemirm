@@ -111,8 +111,9 @@ razlogPrioriteta: Dopunjuje osnovni vodič teme konkretnim pitanjem; raspoređen
 status:
   istrazivanje: zavrseno
   pisanje: napisano
-  tehnickaProvera: nije-provereno
-  jezickaProvera: nije-provereno
+  tehnickaProvera: provereno
+  jezickaProvera: provereno
+napomenaProvere: "urednička provera (AI-asistirana) 2026-10-08: otvoreni 40-450 12/2025, 12-20 06/2023, 40-510 01/2024, 45 Line variant 50-45 12/2025, P 2P51, C 2P55, AGILIS, R 2P45 07/2026, 2K Clear VOC 420 V09, 2K Filler VOC 540 V11, 1K Epoxy Primer v.01 i FenderBender članak (2018-02-27); B-Tec Systems jasno pripisan kao proizvođač IR opreme van programa; ispravljeno: nepotkrepljena tvrdnja o ograničenjima električnih vozila ublažena."
 strucnaPotvrda:
   potrebna: false
   status: nije-potrebno
@@ -147,7 +148,7 @@ Iz tabele se vidi nekoliko stvari. Vrednosti se razlikuju po vrsti materijala i 
 
 ## Ograničenja
 
-- **Vozilo nije gola karoserija.** R-M u tehničkim listovima napominje da se uz uputstva za materijal uvek poštuju uputstva proizvođača vozila za popravku, posebno u vezi sa ugrađenim senzorima[^rm-c2p55-tds]. Kod električnih vozila važe i ograničenja zbog baterije; o tome piše vodič [Lakiranje električnih i hibridnih vozila](/vodici/lakiranje-elektricnih-vozila).
+- **Vozilo nije gola karoserija.** R-M u tehničkim listovima napominje da se uz uputstva za materijal uvek poštuju uputstva proizvođača vozila za popravku, posebno u vezi sa ugrađenim senzorima[^rm-c2p55-tds]. Kod električnih i hibridnih vozila proizvođač vozila može imati dodatna ograničenja, na primer zbog visokonaponske baterije; o tome piše vodič [Lakiranje električnih i hibridnih vozila](/vodici/lakiranje-elektricnih-vozila).
 - **Trake i folije za maskiranje** imaju svoju granicu temperature. Pogledajte tekst [Trake za maskiranje i temperatura sušenja](/vodici/trake-za-maskiranje-i-temperatura).
 - **Vreme iz jednog lista ne prenosi se na drugi proizvod.** I varijanta istog proizvoda može imati poseban list sa drugačijim vremenom, kao što baslac ima za 45 Line sa aktivatorom 50-45[^baslac-45-50-45-tds].
 

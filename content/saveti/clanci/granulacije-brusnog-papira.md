@@ -120,8 +120,9 @@ razlogPrioriteta: Osnovni vodič teme — ulaz u tematsku celinu, objavljuje se 
 status:
   istrazivanje: zavrseno
   pisanje: napisano
-  tehnickaProvera: nije-provereno
-  jezickaProvera: nije-provereno
+  tehnickaProvera: provereno
+  jezickaProvera: provereno
+napomenaProvere: "urednička provera (AI-asistirana) 2026-10-08: otvoreni svi izvori (Multi Green V08, Multi Black Rapid V01, 2K Filler Vario Plus V 01, P 2A41 07/2026, 20-22 06/2023, baslac Putty application metal, Mazda 51K blend 03/2025, katalozi Carsystem 2026/27 i C.A.R.FIT 2026, FEPA, ISO 6344-2/-3); granulacije se poklapaju; ispravljeno: uvodni pasus više ne uopštava vrednosti jednog proizvoda na sve kitove i punioce, raspon ProFlex Jupiter Soft H₂O dopunjen (P2500–P4000)."
 strucnaPotvrda:
   potrebna: false
   status: nije-potrebno

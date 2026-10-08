@@ -71,8 +71,9 @@ razlogPrioriteta: Dopunjuje osnovni vodič teme konkretnim pitanjem; raspoređen
 status:
   istrazivanje: zavrseno
   pisanje: napisano
-  tehnickaProvera: nije-provereno
-  jezickaProvera: nije-provereno
+  tehnickaProvera: provereno
+  jezickaProvera: provereno
+napomenaProvere: "urednička provera (AI-asistirana) 2026-10-08: otvoreni Mazda 51K blend 03/2025, katalog Carsystem 2026/27 (F.19 Finish, V.19, Mattflex Pad, Matting Mousse), Matting Mousse v.02, Prep & Scuff v.02, F.19 Finish 77 mm V01; sve tvrdnje se poklapaju, bez ispravki sadržaja."
 strucnaPotvrda:
   potrebna: false
   status: nije-potrebno

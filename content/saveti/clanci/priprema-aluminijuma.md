@@ -102,15 +102,16 @@ razlogPrioriteta: Dopunjuje osnovni vodič teme konkretnim pitanjem; raspoređen
 status:
   istrazivanje: zavrseno
   pisanje: napisano
-  tehnickaProvera: nije-provereno
-  jezickaProvera: nije-provereno
+  tehnickaProvera: provereno
+  jezickaProvera: provereno
 strucnaPotvrda:
   potrebna: false
   status: nije-potrebno
+napomenaProvere: "urednička provera (AI-asistirana) 2026-10-08: otvoreni FCA US (Stellantis) bilten 31-001-23 od 3. 2. 2023 (čiste brusne podloge, prostorija odvojena od radova na čeliku, galvanska korozija; bilten u spisku materijala navodi 3M proizvode, koji se u tekstu ne pominju), baslac Chart 1 03/2024 (proveren prikaz tabele), Chart 2 05/2024 i 27-10 06/2023, R-M PK 1A05, PK 2P50 i P 2P63 07/2026, C.A.R.FIT 2K Wash Primer 2:1, Carsystem Etch Primer v.03 i 1K Epoxy Primer v.01; podloge, ograničenja nanošenja i 1 minut vlaženja odgovaraju izvorima. Ispravljeno: „kod mnogih sistema“ suženo na primere iz programa, tačan naziv sredstva 70-10, „što pre“ označeno kao urednička preporuka."
 poslednjaProvera: 2026-10-08
 ponovniPregled: 2027-04-08
 ---
-Aluminijumski deo se priprema redom: odmašćivanje, matiranje ili brušenje alatom i abrazivom koji nisu korišćeni na čeliku, ponovno odmašćivanje i, gde je otkriven goli aluminijum, materijal koji tehnički list izričito navodi za aluminijum. Kod mnogih sistema to je reaktivni prajmer ili prajmer-punilac za direktno nanošenje na metal, a kod nekih proizvoda hemijska priprema maramicama. Granulaciju i prajmer određuje sistem u kome radite.
+Aluminijumski deo se priprema redom: odmašćivanje, matiranje ili brušenje alatom i abrazivom koji nisu korišćeni na čeliku, ponovno odmašćivanje i, gde je otkriven goli aluminijum, materijal koji tehnički list izričito navodi za aluminijum. U primerima iz našeg programa to je reaktivni ili epoksidni prajmer ili prajmer-punilac za direktno nanošenje na metal, a kod nekih proizvoda hemijska priprema maramicama. Granulaciju i prajmer određuje sistem u kome radite.
 
 ## Zašto se za aluminijum koristi poseban alat
 
@@ -127,9 +128,9 @@ Za uputstvo konkretnog vozila važi uputstvo njegovog proizvođača za popravku.
 ## Postupak korak po korak
 
 1. **Pranje i prvo odmašćivanje.** R-M MetalPREP je, prema tehničkom listu, sredstvo za čišćenje golih metalnih površina, uključujući aluminijum[^rm-pk1a05-tds].
-2. **Brušenje ili matiranje.** baslac u tabeli pripreme za goli čelik i aluminijum daje isti postupak: čišćenje odmašćivačem 70-10, brušenje P80/P150, ponovno čišćenje[^baslac-cleaners-chart]. C.A.R.FIT za aluminijum pod 2K Wash Primer 2:1 navodi odmašćivanje, matiranje abrazivnom tkaninom i ponovno odmašćivanje[^carfit-wash-primer-tds].
+2. **Brušenje ili matiranje.** baslac u tabeli pripreme za goli čelik i aluminijum daje isti postupak: čišćenje sredstvom 70-10 Silicone Remover, brušenje P80/P150, ponovno čišćenje[^baslac-cleaners-chart]. C.A.R.FIT za aluminijum pod 2K Wash Primer 2:1 navodi odmašćivanje, matiranje abrazivnom tkaninom i ponovno odmašćivanje[^carfit-wash-primer-tds].
 3. **Drugo odmašćivanje** i sušenje. Posle toga se površina ne dodiruje golom rukom.
-4. **Prajmer** na goli aluminijum, što pre posle čišćenja.
+4. **Prajmer** na goli aluminijum, što pre posle čišćenja (urednička preporuka; rok, ako postoji, piše u tehničkom listu prajmera).
 
 Granulacije iz tabele baslac važe za baslac sistem. Za drugi sistem pročitajte tehnički list prajmera; opšte objašnjenje daje vodič [Granulacije brusnog papira](/vodici/granulacije-brusnog-papira).
 

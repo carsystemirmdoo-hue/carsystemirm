@@ -95,8 +95,9 @@ razlogPrioriteta: Dopunjuje osnovni vodič teme konkretnim pitanjem; raspoređen
 status:
   istrazivanje: zavrseno
   pisanje: napisano
-  tehnickaProvera: nije-provereno
-  jezickaProvera: nije-provereno
+  tehnickaProvera: provereno
+  jezickaProvera: provereno
+napomenaProvere: "urednička provera (AI-asistirana) 2026-10-08: otvoreni 40-510 01/2024, C 5450, C 2P55, C 2E50, A 2P15 07/2026, 40-10 06/2023, 40-100 06/2026, 2K Filler VOC 540 V11, 2K Clear VOC 420 V09; ispravljeno: jasno navedeno da je C 5450 iz R-M programa GRAPHITE HD za komercijalna vozila (autobusi, sanduci) i da se njegova vremena ne prenose na lakove za putnička vozila, preciziran red za 60 °C i tvrdnja o jeziku tehničkih listova."
 strucnaPotvrda:
   potrebna: false
   status: nije-potrebno
@@ -107,7 +108,7 @@ Izrazi za faze sušenja govore šta sme da se radi sa delom posle navedenog vrem
 
 ## Izrazi koje ćete sresti
 
-Tehnički listovi iz našeg programa pisani su na engleskom ili nemačkom. Ovo su izrazi iz dokumenata koje smo pregledali i njihovo značenje za rad:
+Tehnički listovi iz našeg programa koje smo pregledali pisani su na engleskom. Ovo su izrazi iz dokumenata koje smo pregledali i njihovo značenje za rad:
 
 | Izraz u tehničkom listu | Na srpskom | Šta posle toga sme |
 | --- | --- | --- |
@@ -124,7 +125,7 @@ Rečenica o fazi uvek važi za uslove uz koje je navedena: temperaturu, učvrš�
 
 ## Primeri iz tehničkih listova
 
-Isti lak može imati vrlo različita vremena za različite faze. R-M za bezbojni lak C 5450 GRAPHITE HD CLEAR (program za privredna vozila) na 20 °C navodi suvo na dodir posle 2 h, suvo za montažu posle 12 h, a za maskiranje i brušenje posle 16 h; na 60 °C sve faze su dostignute posle 30 min[^rm-c5450-tds]. Isti list navodi da se lak sam preko sebe može lakirati najviše 16 h posle nanošenja, uz sušenje na sobnoj temperaturi[^rm-c5450-tds].
+Isti lak može imati vrlo različita vremena za različite faze. Primer je bezbojni lak C 5450 GRAPHITE HD CLEAR iz R-M programa GRAPHITE HD za komercijalna vozila; tehnički list kao primenu navodi autobuse i sanduke nadgradnji, pa njegova vremena ne važe za lakove za putnička vozila. Na 20 °C R-M navodi suvo na dodir posle 2 h, suvo za montažu posle 12 h, a za maskiranje i brušenje posle 16 h; za 60 °C tabela za sve faze navodi 30 min[^rm-c5450-tds]. Isti list navodi da se lak sam preko sebe može lakirati najviše 16 h posle nanošenja, uz sušenje na sobnoj temperaturi[^rm-c5450-tds].
 
 baslac za 40-510 posebno navodi da se vremena poliranja odnose na sitne čestice prašine[^baslac-40-510-tds]. To znači da vreme za poliranje nije opšta oznaka „lak je gotov“, nego podatak za određenu vrstu posla.
 

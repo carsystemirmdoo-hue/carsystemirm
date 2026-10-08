@@ -81,8 +81,9 @@ razlogPrioriteta: Dopunjuje osnovni vodič teme konkretnim pitanjem; raspoređen
 status:
   istrazivanje: zavrseno
   pisanje: napisano
-  tehnickaProvera: nije-provereno
-  jezickaProvera: nije-provereno
+  tehnickaProvera: provereno
+  jezickaProvera: provereno
+napomenaProvere: "urednička provera (AI-asistirana) 2026-10-08: otvoreni Interface Pad V01, Back Pad T.19 V02, katalozi Carsystem 2026/27 i C.A.R.FIT 2026, Mazda 51K blend 03/2025, A 2560 07/2026; ispravljeno: A 2560 pogrešno svrstan u punioce (to je materijal koji zamenjuje izolator i baznu boju u enterijeru), navod premešten u posebnu stavku sa uslovom od 8 sati."
 strucnaPotvrda:
   potrebna: false
   status: nije-potrebno
@@ -93,7 +94,8 @@ Meki međusloj (interface pad) je tanak sunđer sa čičkom koji se stavlja izme
 
 ## Kada se koristi
 
-- **Fino brušenje punioca.** baslac u postupku utapanja brusi mesto punioca sa P500/P600 uz meki međusloj[^baslac-blend-51k]. R-M za AGILIS AMPLIFIER A 2560, kada prođe vreme posle kog je potrebno brušenje, navodi ekscentarsko brušenje sa mekim međuslojem P500–P600[^rm-a2560-tds].
+- **Fino brušenje punioca.** baslac u postupku utapanja brusi mesto punioca sa P500/P600 uz meki međusloj[^baslac-blend-51k].
+- **Brušenje pre sledećeg sloja.** R-M za AGILIS AMPLIFIER A 2560, materijal koji zamenjuje izolator i baznu boju u enterijeru, navodi da se posle 8 sati pre nanošenja AGILIS bazne boje brusi ekscentarski sa mekim međuslojem, P500–P600[^rm-a2560-tds].
 - **Zakrivljene površine, zaobljenja i ivice.** Na takvim mestima tvrd tanjir naleže samo na deo diska, pa pritisak raste na ivici. Međusloj raspoređuje pritisak.
 - **Fini filmski diskovi.** Za ProFlex Jupiter diskove Carsystem preporučuje ProFlex međuslojeve, čiji mikro čičak, prema katalogu, ne izaziva ogrebotine kroz meki film[^cs-katalog-2026].
 - **Zona utapanja.** Kada se stari lak matira finim diskom, međusloj pomaže da trag bude ravnomeran. Postupak opisuje vodič [Brušenje i matiranje zone utapanja](/vodici/priprema-zone-utapanja).

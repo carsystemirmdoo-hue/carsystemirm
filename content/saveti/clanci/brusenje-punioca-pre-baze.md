@@ -92,15 +92,16 @@ razlogPrioriteta: Dopunjuje osnovni vodič teme konkretnim pitanjem; raspoređen
 status:
   istrazivanje: zavrseno
   pisanje: napisano
-  tehnickaProvera: nije-provereno
-  jezickaProvera: nije-provereno
+  tehnickaProvera: provereno
+  jezickaProvera: provereno
+napomenaProvere: "urednička provera (AI-asistirana) 2026-10-08: otvoreni P 2A41, P 2P51, P 2E23 07/2026, 20-22 06/2023, Vario Plus V 01, Wet on Wet Plus V01, F.19 Soft V01, Mazda 51K blend 03/2025; vrednosti se poklapaju; ispravljeno: uopštena tvrdnja o mokrom brušenju i nepotkrepljen navod o metalik efektima."
 strucnaPotvrda:
   potrebna: false
   status: nije-potrebno
 poslednjaProvera: 2026-10-08
 ponovniPregled: 2027-04-08
 ---
-Punilac se pre bazne boje brusi finije od kita, a završnu granulaciju daje tehnički list punioca. U tehničkim listovima punilaca koje smo pregledali to je na suvo raspon u okviru P320–P600: za R-M P 2A41 tehnički list navodi P400–P500[^rm-p2a41-tds], za R-M P 2P51 P400–P600[^rm-p2p51-tds], a za baslac 20-22 P400/P500 ekscentrom[^baslac-20-22-tds]. Mokro se brusi još finije. Brusi se tek kada je punilac osušen prema tehničkom listu.
+Punilac se pre bazne boje brusi finije od kita, a završnu granulaciju daje tehnički list punioca. U tehničkim listovima punilaca koje smo pregledali to je na suvo raspon u okviru P320–P600: za R-M P 2A41 tehnički list navodi P400–P500[^rm-p2a41-tds], za R-M P 2P51 P400–P600[^rm-p2p51-tds], a za baslac 20-22 P400/P500 ekscentrom[^baslac-20-22-tds]. Kada tehnički list navodi i mokro brušenje, za njega daje finiju granulaciju. Brusi se tek kada je punilac osušen prema tehničkom listu.
 
 ## Završna granulacija prema tehničkom listu
 
@@ -130,7 +131,7 @@ Punilac mokro-na-mokro se obično ne brusi. Za Carsystem 2K Filler Wet on Wet Pl
 
 Mogući uzroci, koje treba proveriti pre nego što se izabere sanacija:
 
-- **Pregruba završna granulacija.** Trag grublji od onoga što tehnički list navodi može ostati vidljiv kroz baznu boju, naročito kod metalik efekata. Proverite koju ste granulaciju koristili na kraju u odnosu na raspon iz tabele.
+- **Pregruba završna granulacija.** Trag grublji od onoga što tehnički list navodi može ostati vidljiv kroz baznu boju. Proverite koju ste granulaciju koristili na kraju u odnosu na raspon iz tabele.
 - **Preskočena granulacija.** Završna granulacija je ispravna, ali nisu uklonjeni tragovi ranijeg, grubljeg koraka. Kontrolni prah to pokazuje pre lakiranja.
 - **Punilac brušen pre nego što se osušio.** Materijal koji se još suši može kasnije da se slegne u tragovima brušenja. Uporedite vreme do brušenja sa tehničkim listom.
 - **Tragovi brušenja kita ispod punioca.** Ako su duboki, punilac ih ne popuni u potpunosti.

@@ -77,16 +77,29 @@ izvori:
     verzija: "10/2024"
     pristupljeno: 2026-10-08
     tip: uputstvo-proizvodjaca
+  - id: carsystem-staub-stop-water-tds
+    naziv: "Carsystem, Technical Data Sheet Staub Stop Water, tack cloth V03"
+    url: https://www.carsystem.org/fileadmin/products/datasheets/tds-staub-stop-water-v03.pdf
+    verzija: "V03, 01/2025"
+    pristupljeno: 2026-10-08
+    tip: tehnicki-list
+  - id: carsystem-staub-stop-water-black-tds
+    naziv: "Carsystem, Technical Data Sheet Staub Stop Water Black, tack cloth V02"
+    url: https://www.carsystem.org/fileadmin/products/datasheets/tds-staub-stop-water-black-v02.pdf
+    verzija: "V02, 11/2021"
+    pristupljeno: 2026-10-08
+    tip: tehnicki-list
 prioritet: 1111
 razlogPrioriteta: Rešava konkretan problem iz prakse; raspoređeno naizmenično sa drugim temama.
 status:
   istrazivanje: zavrseno
   pisanje: napisano
-  tehnickaProvera: nije-provereno
-  jezickaProvera: nije-provereno
+  tehnickaProvera: provereno
+  jezickaProvera: provereno
 strucnaPotvrda:
   potrebna: false
   status: nije-potrebno
+napomenaProvere: "urednička provera (AI-asistirana) 2026-10-08: otvoreni R-M PK 2P10 i PK 2P40 07/2026, baslac 70-45 06/2023, Plastic Repair System VOC 10/2024 i Mazda 51K standardni postupak 03/2025, Carsystem Silicone Remover Water 2.0 V02 09/2025 i Mild v.01 05/2021; VOC 186 i 198 g/l, antistatičko dejstvo, postupak sa dve krpe i upozorenje o 1K prajmerima odgovaraju izvorima. Ispravljeno: netačna tvrdnja da Carsystem krpe za prašinu ne navode antistatičko dejstvo (Staub Stop Water V03 i Water Black V02 ga navode; dodata dva izvora), Mild više nije opisan kao „rastvarački“ (list to ne navodi), namena PLASTIC Clean-R vezana za tehnički list (pre kita ili punioca)."
 poslednjaProvera: 2026-10-08
 ponovniPregled: 2027-04-08
 ---
@@ -107,9 +120,9 @@ Zato se prašina kod plastike ne rešava samo čistom kabinom. Kako se smanjuje 
 | R-M MULTI Clean-R (PK 2P10) | vodeno sredstvo; antistatičko dejstvo pri lakiranju plastike; VOC 186 g/l[^rm-pk2p10-tds] |
 | baslac 70-45 Cleaner | deluje kao antistatik i smanjuje taloženje prašine pri nanošenju završnog sloja na plastične delove; VOC 198 g/l[^baslac-70-45-tds] |
 | Carsystem Silicone Remover Water 2.0 | vodeno sredstvo; antistatičko dejstvo da se izbegnu uključci prašine; proba na podlozi se preporučuje[^carsystem-silicone-remover-water-tds] |
-| Carsystem Silicone Remover Mild | rastvarački odmašćivač; antistatičko dejstvo da se izbegnu uključci prašine[^carsystem-silicone-remover-mild-tds] |
+| Carsystem Silicone Remover Mild | blagi odmašćivač; antistatičko dejstvo da se izbegnu uključci prašine[^carsystem-silicone-remover-mild-tds] |
 
-Antistatičko dejstvo ne navode svi odmašćivači. R-M PLASTIC Clean-R, sredstvo za uklanjanje sredstava za odvajanje sa plastike, u tehničkom listu ga ne pominje[^rm-pk2p40-tds]. To je sredstvo za prvo čišćenje sirove plastike, a ne za korak neposredno pre bazne boje.
+Antistatičko dejstvo ne navode svi odmašćivači. R-M PLASTIC Clean-R, sredstvo za uklanjanje sredstava za odvajanje sa plastike, u tehničkom listu ga ne pominje[^rm-pk2p40-tds]. Prema tehničkom listu, to je sredstvo za uklanjanje sredstava za odvajanje pre nanošenja kita ili punioca[^rm-pk2p40-tds], a ne za korak neposredno pre bazne boje.
 
 ## Kako se plastika čisti pred lakiranje
 
@@ -134,7 +147,7 @@ Opšti pregled izvora trunja daje vodič [Prašina i trunje u laku](/vodici/pras
 
 ### Pomaže li antistatička krpa?
 
-baslac u postupku za baznu boju 51K navodi da se prašina sa dela ukloni komprimovanim vazduhom i da se deo obriše antistatičkom krpom[^baslac-51k-standard]. Tehnički listovi Carsystem krpa za prašinu koje smo pregledali ne navode antistatičko dejstvo, nego impregnaciju koja zadržava prašinu. Krpa za prašinu ne zamenjuje antistatičko čišćenje, nego ide posle njega; o njoj piše vodič [Krpa za prašinu pre lakiranja](/vodici/krpa-za-prasinu-pre-lakiranja).
+baslac u postupku za baznu boju 51K navodi da se prašina sa dela ukloni komprimovanim vazduhom i da se deo obriše antistatičkom krpom[^baslac-51k-standard]. Carsystem za krpe Staub Stop Water i Staub Stop Water Black navodi i antistatička svojstva, uz upijanje prašine[^carsystem-staub-stop-water-tds][^carsystem-staub-stop-water-black-tds]. Po redosledu iz baslac postupka, krpa ide posle čišćenja sredstvom, a ne umesto njega; o njoj piše vodič [Krpa za prašinu pre lakiranja](/vodici/krpa-za-prasinu-pre-lakiranja).
 
 ### Može li vodeno sredstvo na svaku plastiku?
 

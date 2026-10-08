@@ -85,8 +85,9 @@ razlogPrioriteta: Dopunjuje osnovni vodič teme konkretnim pitanjem; raspoređen
 status:
   istrazivanje: zavrseno
   pisanje: napisano
-  tehnickaProvera: nije-provereno
-  jezickaProvera: nije-provereno
+  tehnickaProvera: provereno
+  jezickaProvera: provereno
+napomenaProvere: "urednička provera (AI-asistirana) 2026-10-08: otvoreni TDS baslac 40-40 i varijanta MS (06/2023), 40-10, 40-440 (12/2025), Norbin N15-020, Carsystem CC.25 V02 i R-M C 5450 (07/2026); tabela, VOC oznake i odnosi mešanja se poklapaju. Ispravljeno: odgovor o razređivanju HS laka koristio je MS lak 40-10 kao primer — zamenjeno podacima za 40-40 kao HS lak."
 strucnaPotvrda:
   potrebna: false
   status: nije-potrebno
@@ -142,4 +143,4 @@ Ne postoji jedan odnos za sve HS lakove. baslac 40-40 se meša 2:1 + 10 % po zap
 
 ### Mogu li HS lak razrediti više da lakše radim?
 
-Samo u granicama koje dozvoljava tehnički list. Za 40-10 baslac navodi najviše 30 % razređivača[^baslac-40-10-tds]. Kada proizvođač predviđa drugi postupak sa više razređivača, kao MS varijantu laka 40-40, menjaju se i ostali podaci za nanošenje[^baslac-40-40-ms-tds].
+Samo u granicama koje dozvoljava tehnički list. Za 40-40 kao HS lak baslac navodi 10 % razređivača[^baslac-40-40-tds]. Kada proizvođač predviđa drugi postupak sa više razređivača, kao MS varijantu laka 40-40 sa 30 %, menjaju se i ostali podaci za nanošenje: broj slojeva, debljina i sušenje[^baslac-40-40-ms-tds]. Takav postupak više nije HS postupak, već MS.

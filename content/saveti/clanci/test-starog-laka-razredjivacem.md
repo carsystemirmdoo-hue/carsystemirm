@@ -65,16 +65,17 @@ razlogPrioriteta: Dopunjuje osnovni vodič teme konkretnim pitanjem; raspoređen
 status:
   istrazivanje: zavrseno
   pisanje: napisano
-  tehnickaProvera: nije-provereno
-  jezickaProvera: nije-provereno
+  tehnickaProvera: ispravke-potrebne
+  jezickaProvera: provereno
 strucnaPotvrda:
   potrebna: true
   razlog: "Postupak testa (krpa natopljena razređivačem na probrušenom mestu; bubrenje, lepljivost ili omekšavanje znače da se sloj uklanja) nije opisan u dokumentima proizvođača iz našeg programa. Oslanja se na Glasurit priručnik za Severnu Ameriku (brend van našeg programa; bilten iz 2009. pisan za fabrički KTL sloj, rečnik pojmova) i na upozorenja R-M i C.A.R.FIT o podlogama osetljivim na rastvarače. Koji razređivač se koristi za test u sistemima iz našeg programa nije potvrđeno. Odgovor na pitanje o izolaciji nema izvor iz našeg programa."
   status: potrebno
+napomenaProvere: "urednička provera (AI-asistirana) 2026-10-08: otvoreni Glasurit priručnik (kopija Skills/Compétences Canada; rečnik: Reversible, Lifting, Sealer; bilten GLABUL0202-E od 19. 1. 2009), R-M PK 1P10 07/2026, C.A.R.FIT Silicone Remover i 2K Epoxy Primer 1:1, Carsystem Silicone Remover Water 2.0 V02 09/2025; citati odgovaraju izvorima, Glasurit je pripisan kao brend van programa i njegovi proizvodi se ne imenuju. Oznaka za stručnu potvrdu je opravdana: nijedan izvor ne opisuje izvođenje testa (krpa, probrušeno mesto), a pravilo o uklanjanju odnosi se na fabrički KTL sloj. Ispravljeno: izvođenje testa u uvodu i koraku 4 jasno označeno kao urednički opis (bilten samo navodi test, bez postupka), odgovor o omekšalom laku označen kao analogija i urednička procena."
 poslednjaProvera: 2026-10-08
 ponovniPregled: 2027-04-08
 ---
-Test se radi na mestu gde je stari lak probrušen kroz sve slojeve: krpa natopljena razređivačem prevuče se preko tog mesta i posmatra se da li neki sloj nabubri, postane lepljiv ili omekša. Ako se to desi, taj sloj je osetljiv na rastvarače i preko njega se ne nanosi nov sistem bez uklanjanja. Ako svi slojevi ostanu tvrdi, stari lak se dalje priprema kao zdrava podloga. Tumačenje rezultata zasnovano je na dokumentima brenda Glasurit, koji nije u našem programu, pa tekst čeka stručnu potvrdu.
+Test se radi na mestu gde je stari lak probrušen kroz sve slojeve: krpa natopljena razređivačem prevuče se preko tog mesta i posmatra se da li neki sloj nabubri, postane lepljiv ili omekša. Ako se to desi, taj sloj je osetljiv na rastvarače i preko njega se ne nanosi nov sistem bez uklanjanja. Ako svi slojevi ostanu tvrdi, stari lak se dalje priprema kao zdrava podloga. Način izvođenja testa je urednički opis, a tumačenje rezultata zasnovano je na dokumentima brenda Glasurit, koji nije u našem programu, pa tekst čeka stručnu potvrdu.
 
 ## Zašto se radi test
 
@@ -89,7 +90,7 @@ Proizvođači iz našeg programa takve podloge izdvajaju u tehničkim listovima.
 1. **Izbor mesta.** Mesto na delu koji se popravlja, po mogućnosti manje vidljivo.
 2. **Probrušavanje.** Urednička preporuka: stari lak se na malom mestu probrusi kroz sve slojeve, tako da se na ivici vide svi slojevi, od laka do podloge. Tako se proverava svaki sloj, ne samo gornji.
 3. **Čišćenje** mesta od prašine.
-4. **Test.** Čista krpa se natopi razređivačem i prevuče preko probrušenog mesta. Glasurit u servisnom biltenu za fabrički KTL sloj koristi razređivač iz sopstvenog sistema[^glasurit-prirucnik]. Koji razređivač je odgovarajući za sistem u kome Vi radite, proverite kod proizvođača ili dobavljača tog sistema.
+4. **Test.** Urednički opis: čista krpa se natopi razređivačem i prevuče preko probrušenog mesta. Glasurit u servisnom biltenu za fabrički KTL sloj samo navodi test osetljivosti na rastvarač razređivačem iz sopstvenog sistema, bez opisa načina izvođenja[^glasurit-prirucnik]. Koji razređivač je odgovarajući za sistem u kome Vi radite, proverite kod proizvođača ili dobavljača tog sistema.
 5. **Posmatranje.** Prati se da li neki sloj nabubri, postane lepljiv ili omekša, odnosno da li se boja skida na krpu.
 
 ## Šta znače rezultati
@@ -108,7 +109,7 @@ Ovaj test ne zamenjuje tehnički list. Odmašćivači i materijali iz našeg pro
 
 ### Šta znači ako stari lak omekša?
 
-Da je bar jedan sloj osetljiv na rastvarač i da može da nabubri kada se preko njega nanese novi materijal. Takav sloj se ne ostavlja ispod novog sistema, nego se uklanja do čvrste podloge.
+Da je bar jedan sloj osetljiv na rastvarač i da može da nabubri kada se preko njega nanese novi materijal. Po analogiji sa Glasurit pravilom za fabrički sloj[^glasurit-prirucnik], takav sloj se ne ostavlja ispod novog sistema, nego se uklanja do čvrste podloge; primena tog pravila na stari lak je urednička procena.
 
 ### Kada je potrebna izolacija?
 

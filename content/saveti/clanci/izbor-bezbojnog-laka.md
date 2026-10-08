@@ -99,8 +99,9 @@ razlogPrioriteta: Osnovni vodič teme — ulaz u tematsku celinu, objavljuje se 
 status:
   istrazivanje: zavrseno
   pisanje: napisano
-  tehnickaProvera: nije-provereno
-  jezickaProvera: nije-provereno
+  tehnickaProvera: provereno
+  jezickaProvera: provereno
+napomenaProvere: "urednička provera (AI-asistirana) 2026-10-08: otvoreni TDS R-M C 2A40/C 2P45/C 2P85 (07/2026), baslac 40-10, 40-440, 40-510, Carsystem CC.26 V01 i Klarlack-Spray v.02, Norbin N15-020 (01/2022); vrednosti odgovaraju izvorima. Ispravljeno: tvrdnja o „seriji C 2A“ suzena na C 2A40 (prenos podatka), aktivator A 2210 „u sve slojeve“ baze, uklonjena nepotkrepljena „osetljivost na temperaturu“ brzih lakova, link kataloga bez filtera samo za R-M."
 strucnaPotvrda:
   potrebna: false
   status: nije-potrebno
@@ -111,9 +112,9 @@ Bezbojni lak se bira prema pet stvari: kom sistemu pripada bazna boja, kolika je
 
 ## 1. Kom sistemu pripada bazna boja
 
-Lak i bazna boja rade kao par. Proizvođači to jasno pišu: R-M lakove serije C 2A navodi kao lakove posebno za ONYX HD baznu boju[^rm-c2a40-tds], a baslac lak 40-10 kao lak za baslac baznu boju 35-[^baslac-40-10-tds]. Carsystem za CC.26 navodi da se može naneti preko rastvaračke i vodene bazne boje, ali izričito preporučuje rad unutar sistema, jer sa razređivačima i učvršćivačima iz drugog sistema ne mogu da se isključe problemi sa sušenjem i prianjanjem[^carsystem-cc26-tds]. Norbin N15-020 je opisan kao 2K lak za sve bazne boje[^norbin-n15-020-tds].
+Lak i bazna boja rade kao par. Proizvođači to jasno pišu: R-M za C 2A40 navodi da je lak namenjen posebno ONYX HD baznoj boji[^rm-c2a40-tds], a baslac lak 40-10 kao lak za baslac baznu boju 35-[^baslac-40-10-tds]. Carsystem za CC.26 navodi da se može naneti preko rastvaračke i vodene bazne boje, ali izričito preporučuje rad unutar sistema, jer sa razređivačima i učvršćivačima iz drugog sistema ne mogu da se isključe problemi sa sušenjem i prianjanjem[^carsystem-cc26-tds]. Norbin N15-020 je opisan kao 2K lak za sve bazne boje[^norbin-n15-020-tds].
 
-Ponekad lak menja i pripremu baze. Za C 2A40 R-M propisuje da se u svaku vodenu baznu boju ispod tog laka doda 5 % aktivatora A 2210[^rm-c2a40-tds]. Zato se lak bira pre nego što se zameša baza. Zašto je bolje ostati u jednom sistemu, objašnjava vodič [Zašto materijale birati kao sistem jednog proizvođača](/vodici/sistem-materijala-jednog-proizvodjaca).
+Ponekad lak menja i pripremu baze. Za C 2A40 R-M propisuje da se u sve slojeve vodene bazne boje ispod tog laka doda 5 % aktivatora A 2210[^rm-c2a40-tds]. Zato se lak bira pre nego što se zameša baza. Zašto je bolje ostati u jednom sistemu, objašnjava vodič [Zašto materijale birati kao sistem jednog proizvođača](/vodici/sistem-materijala-jednog-proizvodjaca).
 
 ## 2. Kolika je popravka
 
@@ -152,7 +153,7 @@ HS i MS govore o udelu suvog ostatka u laku, a oznaka VOC o tome da li lak sprem
 
 ## Ograničenja
 
-Ovaj tekst pokazuje kriterijume i primere iz navedenih verzija tehničkih listova. Ne zamenjuje tehnički list laka koji koristite, a proizvođač ga može izmeniti. Kada niste sigurni da li lak odgovara Vašoj baznoj boji ili podlozi, pitajte tehničku podršku proizvođača ili prodavca. Proizvode iz našeg programa pogledajte u [katalogu](/katalog?brend=rm) ili u najbližoj [prodavnici](/prodavnice).
+Ovaj tekst pokazuje kriterijume i primere iz navedenih verzija tehničkih listova. Ne zamenjuje tehnički list laka koji koristite, a proizvođač ga može izmeniti. Kada niste sigurni da li lak odgovara Vašoj baznoj boji ili podlozi, pitajte tehničku podršku proizvođača ili prodavca. Proizvode iz našeg programa pogledajte u [katalogu](/katalog) ili u najbližoj [prodavnici](/prodavnice).
 
 ## Pitanja i odgovori
 
@@ -162,7 +163,7 @@ HS (*high solids*) i MS (*medium solids*) označavaju veći, odnosno srednji ude
 
 ### Zašto je brz lak praktičan za manje popravke?
 
-Kraće sušenje znači da deo ranije ide na poliranje i montažu. Za C 2P45 R-M navodi sušenje od 10–15 min na 60 °C i 5–6 h na 20 °C[^rm-c2p45-tds]. Brz lak ima i ograničenja, pre svega kraće vreme upotrebljivosti i osetljivost na temperaturu, o čemu piše tekst [Brzi lakovi za manje popravke](/vodici/brzi-lakovi-za-manje-popravke).
+Kraće sušenje znači da deo ranije ide na poliranje i montažu. Za C 2P45 R-M navodi sušenje od 10–15 min na 60 °C i 5–6 h na 20 °C[^rm-c2p45-tds]. Brz lak ima i ograničenja, pre svega kraće vreme upotrebljivosti smeše, o čemu piše tekst [Brzi lakovi za manje popravke](/vodici/brzi-lakovi-za-manje-popravke).
 
 ### Koji lak ako nemam kompresor ni pištolj?
 

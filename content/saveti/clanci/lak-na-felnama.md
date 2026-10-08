@@ -80,11 +80,12 @@ razlogPrioriteta: Dopunjuje osnovni vodič teme konkretnim pitanjem; raspoređen
 status:
   istrazivanje: zavrseno
   pisanje: napisano
-  tehnickaProvera: nije-provereno
-  jezickaProvera: nije-provereno
+  tehnickaProvera: ispravke-potrebne
+  jezickaProvera: provereno
+napomenaProvere: "urednička provera (AI-asistirana) 2026-10-08: otvoreni TDS Cosmos Lac Wheel Rim i Wheel Rim 229 Deluxe (v02, 18/06/2026), Master Mechanic 14 i 20 (v02, 15/06/2026), stranica Wheel Rim 326 i Carsystem Silver Wheel v.02; vrednosti se poklapaju, protivrečnost sjaja (high gloss vs 0–10 GU) pošteno prikazana. Ispravljeno: svrha prskanja naopako (lista ne navodi čišćenje ventila), uklonjena tvrdnja o „pregledanim listovima R-M i baslac“ koji nisu navedeni kao izvori. Stručna potvrda opravdana: otpornost na toplotu i hemikalije nema izvor."
 strucnaPotvrda:
   potrebna: true
-  razlog: "Glavno pitanje traži otpornost na toplotu i hemikalije. Pregledani tehnički listovi sprejeva za felne (Cosmos Lac Wheel Rim, Wheel Rim 229 Deluxe, Master Mechanic 14 Wheel Paint, Carsystem Silver Wheel) ne navode temperaturnu otpornost ni ispitivanje hemijske otpornosti; samo stranica proizvoda Wheel Rim 326 opisuje otpornost na prašinu od kočnica i hemikalije. Pregledani listovi R-M i baslac lakova ne pominju felne, pa nanošenje pištoljem 2K sistemom na felne nije potvrđeno izvorom. List Wheel Rim uz to navodi i visok sjaj i stepen sjaja 0–10 (mat), što je protivrečno. Stručna osoba ili proizvođač treba da potvrde otpornost i preporučeni sistem."
+  razlog: "Glavno pitanje traži otpornost na toplotu i hemikalije. Pregledani tehnički listovi sprejeva za felne (Cosmos Lac Wheel Rim, Wheel Rim 229 Deluxe, Master Mechanic 14 Wheel Paint, Carsystem Silver Wheel) ne navode temperaturnu otpornost ni ispitivanje hemijske otpornosti; samo stranica proizvoda Wheel Rim 326 opisuje otpornost na prašinu od kočnica i hemikalije. Nanošenje pištoljem 2K sistemom na felne nije potvrđeno izvorom. List Wheel Rim uz to navodi i visok sjaj i stepen sjaja 0–10 (mat), što je protivrečno. Stručna osoba ili proizvođač treba da potvrde otpornost i preporučeni sistem."
   status: potrebno
 poslednjaProvera: 2026-10-08
 ponovniPregled: 2027-04-08
@@ -116,7 +117,7 @@ Ako je felna od golog aluminijuma ili je boja skinuta do metala, potrebna je pri
 - **Mućkanje.** Za Silver Wheel Carsystem navodi najmanje 2 min mućkanja[^carsystem-silver-wheel-tds], a Cosmos Lac traži temeljno mućkanje[^cosmos-wheel-rim-tds].
 - **Rastojanje i slojevi.** Oko 25–30 cm, tanki slojevi u ujednačenim pokretima gore-dole i levo-desno[^carsystem-silver-wheel-tds]; za Cosmos Lac 2–3 tanka sloja u razmaku od 3–5 min[^cosmos-wheel-rim-tds].
 - **Temperatura.** Cosmos Lac navodi najbolju temperaturu nanošenja od 10 do 25 °C[^cosmos-wheel-rim-tds].
-- **Posle rada.** Cosmos Lac preporučuje da se limenka okrene naopako i prska oko 3 s, da se očisti ventil[^cosmos-wheel-rim-tds].
+- **Posle rada.** Cosmos Lac preporučuje da se limenka okrene naopako i prska oko 3 s, a kapica očisti rastvaračem[^cosmos-wheel-rim-tds].
 
 Opšta tehnika rada sa sprejom opisana je u vodiču [Tehnika nanošenja spreja](/vodici/tehnika-nanosenja-spreja).
 
@@ -132,7 +133,7 @@ Cosmos Lac na stranici proizvoda Wheel Rim 326 navodi otpornost na prašinu od k
 
 ### Sprej ili pištolj za felne?
 
-Sprej za felne iz našeg programa je gotov proizvod za ovu namenu i ima tehnički list za nju. Nanošenje pištoljem znači rad sa sistemom za lakiranje vozila; pregledani tehnički listovi R-M i baslac bezbojnih lakova felne ne pominju, pa takav sistem za felne proverite sa proizvođačem. Šta sprej može, a šta ne, objašnjava vodič [Popravka sprejom](/vodici/popravka-sprejom-osnove).
+Sprej za felne iz našeg programa je gotov proizvod za ovu namenu i ima tehnički list za nju. Nanošenje pištoljem znači rad sa 2K sistemom za lakiranje vozila (prajmer, bazna boja, bezbojni lak). Za takav posao na felnama ovaj tekst nema potvrđen postupak iz tehničkih listova, pa sistem i postupak proverite sa tehničkom podrškom proizvođača. Šta sprej može, a šta ne, objašnjava vodič [Popravka sprejom](/vodici/popravka-sprejom-osnove).
 
 ### Treba li bezbojni lak preko boje za felne?
 

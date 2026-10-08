@@ -83,8 +83,9 @@ razlogPrioriteta: Dopunjuje osnovni vodič teme konkretnim pitanjem; raspoređen
 status:
   istrazivanje: zavrseno
   pisanje: napisano
-  tehnickaProvera: nije-provereno
-  jezickaProvera: nije-provereno
+  tehnickaProvera: ispravke-potrebne
+  jezickaProvera: provereno
+napomenaProvere: "urednička provera (AI-asistirana) 2026-10-08: otvoreni TDS R-M RA 050X, A 2560, AGILIS, ONYX HD (07/2026), baslac 45 Line i Gloss levels (02/2025), stranice baslac Tinting chart i Info R-M Bodyshop Equipment. Ispravljeno: podaci o 80-20 (25/50/70 %) pogrešno pripisani dokumentu Gloss levels — zamenjeni stvarnom tabelom iz tog dokumenta (40-620/40-450/50-420/60-20 po težini); uvod više ne iznosi uredničko obrazloženje kao činjenicu; modul R-M opisan kao oprema radionice, ne mešaonice; RA 050X preciziran. Stručna potvrda opravdana: zašto vaga i potrebna tačnost nemaju izvor."
 strucnaPotvrda:
   potrebna: true
   razlog: "Proizvođači iz programa potvrđuju da se materijal u mešaoni uobičajeno odmerava po težini (R-M RA 050X, A 2560, baslac Gloss levels), ali u pregledanim izvorima ne obrazlažu zašto, niti navode potrebnu tačnost i proveru vage. Obrazloženje u tekstu je urednička; potrebno je da ga potvrdi stručna osoba (tehnička podrška R-M/baslac ili iskusan mešač boje), a zahtev za tačnost vage treba proveriti u uputstvu sistema za mešanje."
@@ -92,7 +93,7 @@ strucnaPotvrda:
 poslednjaProvera: 2026-10-08
 ponovniPregled: 2027-04-08
 ---
-Bazna boja se u mešaonici pravi po recepturi iz baze proizvođača, od više baza za mešanje, pa se odmerava na vagi jer je to način na koji su sistemi za mešanje predviđeni da rade. R-M za razređivač AGILIS MIX RA 050X navodi zapreminski odnos baze i razređivača 2:1, uz napomenu da se materijal može podesiti i na uobičajen način po težini, računarskom vagom sa programom SHOP MASTER[^rm-ra050x-tds]. Mešanje od oka ne daje ponovljivu nijansu, a merenje po zapremini je za male dodatke baza neprecizno.
+Bazna boja se u mešaonici pravi po recepturi iz baze proizvođača, od više baza za mešanje, i uobičajeno se odmerava na vagi. R-M za razređivač AGILIS MIX RA 050X navodi zapreminski odnos baze i razređivača 2:1, uz napomenu da se materijal može podesiti i na uobičajen način po težini, računarskom vagom sa programom SHOP MASTER[^rm-ra050x-tds]. Zašto je vaga pouzdanija od merenja od oka ili po zapremini, pregledani izvori ne obrazlažu; urednički opis principa je u odeljku niže i čeka stručnu potvrdu.
 
 ## Šta proizvođači pišu o mešanju
 
@@ -104,7 +105,7 @@ Tehnički listovi baznih boja ne opisuju vagu, ali opisuju redosled i mešanje, 
 
 ## Gde proizvođač daje odnos po težini
 
-Neki dokumenti iz našeg programa odnos mešanja daju direktno po težini. Za AGILIS AMPLIFIER A 2560 R-M navodi 60 delova po težini A 2560, 20 delova bezbojne baze HB 030, 20 delova AGILIS baza, 5 delova aktivatora A 2220 i 50 delova razređivača RA 050[^rm-a2560-tds]. Za podešavanje stepena sjaja bezbojnog laka baslac daje odnose dodatka 80-20 po težini: 25 % za polusjaj, 50 % za satenski i 70 % za svilenkasto mat izgled, na 100 % laka[^baslac-gloss-levels].
+Neki dokumenti iz našeg programa odnos mešanja daju direktno po težini. Za AGILIS AMPLIFIER A 2560 R-M navodi 60 delova po težini A 2560, 20 delova bezbojne baze HB 030, 20 delova AGILIS baza, 5 delova aktivatora A 2220 i 50 delova razređivača RA 050[^rm-a2560-tds]. Za mat bezbojni lak baslac daje tabelu stepena sjaja u kojoj su svi sastojci izraženi u procentima po težini: za 30 jedinica sjaja, na primer, 90 % laka 40-620, 10 % laka 40-450, 35 % učvršćivača 50-420 i 16 % razređivača 60-20[^baslac-gloss-levels].
 
 To pokazuje da odnos „po težini“ i odnos „po zapremini“ nisu zamenljivi: proizvođač ga uvek navodi za određeni način merenja. U tehničkom listu zato uvek proverite koji je od ta dva navedeno.
 
@@ -117,7 +118,7 @@ Sledeće je urednički opis principa, a ne preporuka proizvođača:
 
 ## Ograničenja
 
-Ovaj tekst ne zamenjuje uputstvo sistema za mešanje i uputstvo proizvođača vage. Recepture, redosled i podešavanje programa daje proizvođač boje, a R-M opremu mešaone obrađuje u posebnom edukativnom modulu[^inform-equipment]. Kada sam proizvod ili receptura navode odnos po zapremini, on se ne pretvara u težinu bez podataka proizvođača.
+Ovaj tekst ne zamenjuje uputstvo sistema za mešanje i uputstvo proizvođača vage. Recepture, redosled i podešavanje programa daje proizvođač boje, a R-M opremu radionice za lakiranje obrađuje u posebnom edukativnom modulu[^inform-equipment]. Kada sam proizvod ili receptura navode odnos po zapremini, on se ne pretvara u težinu bez podataka proizvođača.
 
 ## Pitanja i odgovori
 
@@ -127,4 +128,4 @@ Važna je, jer greška u maloj komponenti recepture menja nijansu. Koja tačnost
 
 ### Mogu li baznu boju da mešam po zapremini?
 
-Gotova nijansa iz baze recepata pravi se po recepturi i uputstvu sistema za mešanje. Razređivač se dodaje kako navodi tehnički list, a R-M za AGILIS dozvoljava i zapreminski odnos 2:1 i odmeravanje po težini vagom[^rm-ra050x-tds].
+Gotova nijansa iz baze recepata pravi se po recepturi i uputstvu sistema za mešanje. Razređivač se dodaje kako navodi tehnički list, a R-M za AGILIS sa razređivačem RA 050X navodi zapreminski odnos 2:1, uz mogućnost odmeravanja po težini vagom[^rm-ra050x-tds].

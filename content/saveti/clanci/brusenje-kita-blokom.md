@@ -74,8 +74,9 @@ razlogPrioriteta: Dopunjuje osnovni vodič teme konkretnim pitanjem; raspoređen
 status:
   istrazivanje: zavrseno
   pisanje: napisano
-  tehnickaProvera: nije-provereno
-  jezickaProvera: nije-provereno
+  tehnickaProvera: provereno
+  jezickaProvera: provereno
+napomenaProvere: "urednička provera (AI-asistirana) 2026-10-08: otvoreni baslac Putty application metal, katalog i brošura brusnih blokova Carsystem, Multi Green V08, B 2P93 07/2026; ispravljeno: odgovor o brušenju samo brusilicom (R-M B 2P93 navodi samo ekscentar, baslac blok), tamna mesta kao mogući a ne siguran znak udubljenja, „Guide Coat“ kao kontrolni sloj, tvrdnja o dužini bloka."
 strucnaPotvrda:
   potrebna: false
   status: nije-potrebno
@@ -86,7 +87,7 @@ Kit se prvo ravna ručnim blokom grubljom granulacijom, a tek onda fino brusi ek
 
 ## Zašto blok, a ne odmah mašina
 
-Ručni blok je krut i duži od same popravke. Kada leži istovremeno na kitu i na zdravoj površini oko njega, brusi samo ono što je više od te ravni. Ekscentarska brusilica sa mekšom podloškom i međuslojem prilagođava se obliku površine. To je prednost na zaobljenjima, ali kod ravnanja kita znači da disk skida materijal i sa nižih delova, pa talas ostaje.
+Ručni blok je krut. Kada je duži od same popravke i leži istovremeno na kitu i na zdravoj površini oko njega, brusi samo ono što je više od te ravni. Ekscentarska brusilica sa mekšom podloškom i međuslojem prilagođava se obliku površine. To je prednost na zaobljenjima, ali kod ravnanja kita znači da disk skida materijal i sa nižih delova, pa talas ostaje.
 
 Carsystem tvrdoću podloške opisuje kao odnos snage brušenja i fleksibilnosti: tvrda podloška T.19 ima najveću snagu brušenja i najmanju fleksibilnost, meka obrnuto[^cs-katalog-2026]. Za kit koji se tek oblikuje bira se kruta strana tog odnosa: blok ili tvrđa podloška.
 
@@ -95,8 +96,8 @@ Carsystem tvrdoću podloške opisuje kao odnos snage brušenja i fleksibilnosti:
 1. **Sačekajte vreme sušenja iz tehničkog lista.** Carsystem za Multi Green navodi da se brusi posle navedenog vremena sušenja[^cs-multi-green-tds].
 2. **Kontrolni prah.** Nanesite ga preko kita i ivice prelaza; baslac ga uvodi pre završne obrade[^baslac-putty-metal]. Postupak opisuje vodič [Kontrolni prah pri brušenju](/vodici/kontrolni-prah-pri-brusenju).
 3. **Grubo ravnanje blokom.** Brusite unakrsno, u dva pravca pod uglom, preko cele popravke, tako da blok uvek naleže i na okolnu površinu. Granulaciju uzmite iz tehničkog lista kita: za Multi Green kao kit za popunjavanje prvo brušenje je P80–P240[^cs-multi-green-tds].
-4. **Provera.** Ponovite kontrolni prah. Tamna mesta u sredini znače udubljenje: tu se dodaje kit, ne brusi se dalje okolina.
-5. **Fino brušenje brusilicom.** Kada je oblik dobar, ekscentarskom brusilicom se uklanjaju tragovi grube granulacije. R-M za UV Bodyfill-R B 2P93 navodi ekscentarsko suvo brušenje P80 / P150 + P240 / P320 uz kontrolni prah[^rm-b2p93-tds].
+4. **Provera.** Ponovite kontrolni prah. Tamna mesta u sredini mogu da znače udubljenje. Proverite ih blokom; ako je mesto zaista niže, tu se dodaje kit, a ne brusi se dalje okolina.
+5. **Fino brušenje brusilicom.** Kada je oblik dobar, ekscentarskom brusilicom se uklanjaju tragovi grube granulacije. R-M za UV Bodyfill-R B 2P93 navodi ekscentarsko suvo brušenje P80 / P150 + P240 / P320 uz kontrolni sloj („Guide Coat“)[^rm-b2p93-tds].
 6. **Prelaz na staru boju.** Okolna površina se brusi najfinije u nizu, kod baslac primera P320[^baslac-putty-metal], da prelaz bude postepen i da punilac kasnije dobro prione.
 
 ## Kada blok, a kada mašina
@@ -121,7 +122,7 @@ Konačan uzrok zavisi od materijala i načina rada; kontrolni prah i blok pokazu
 
 ### Može li kit da se brusi samo brusilicom?
 
-Na malim, ravnim popravkama to se radi, ali je rizik od talasa veći. Proizvođači u primerima koje smo pregledali uvode blok za prvo ravnanje[^baslac-putty-metal].
+Na malim, ravnim popravkama to se radi, ali je rizik od talasa veći. Uputstva se tu razlikuju: baslac za kit na metalu uvodi blok za prvo ravnanje[^baslac-putty-metal], dok R-M za UV Bodyfill-R B 2P93 navodi samo ekscentarsko brušenje[^rm-b2p93-tds]. Pratite uputstvo za kit koji koristite.
 
 ### Kojom granulacijom počinje brušenje kita?
 

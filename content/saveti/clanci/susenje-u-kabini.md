@@ -81,15 +81,16 @@ razlogPrioriteta: Dopunjuje osnovni vodič teme konkretnim pitanjem; raspoređen
 status:
   istrazivanje: zavrseno
   pisanje: napisano
-  tehnickaProvera: nije-provereno
-  jezickaProvera: nije-provereno
+  tehnickaProvera: provereno
+  jezickaProvera: provereno
+napomenaProvere: "urednička provera (AI-asistirana) 2026-10-08: otvoreni C 2E50, C 2P55, C 2A46 07/2026, 40-510 01/2024, Gloss levels 02/2025, 2K Clear VOC Speed Plus V06 i 2K Clear VOC 420 V09; vrednosti se poklapaju; ispravljeno: formulacija o računanju vremena sušenja i nepotkrepljena tvrdnja o električnim vozilima."
 strucnaPotvrda:
   potrebna: false
   status: nije-potrebno
 poslednjaProvera: 2026-10-08
 ponovniPregled: 2027-04-08
 ---
-Ciklus sušenja u kabini ima četiri dela: odzračivanje posle poslednjeg sloja, zagrevanje, zadržavanje na temperaturi sušenja i hlađenje. Vreme sušenja iz tehničkog lista važi od trenutka kada deo dostigne propisanu temperaturu, a ne od uključenja grejanja. R-M za bezbojni lak C 2E50 navodi 30 min na 60 °C i upozorava da se u kombinovanim kabinama uračuna dodatno vreme zagrevanja dok lim ne dostigne tu temperaturu[^rm-c2e50-tds]. Carsystem vremena za 2K Clear VOC Speed Plus daje izričito za temperaturu objekta: 25–30 min na 40 °C i 15 min na 60 °C[^cs-speed-plus-tds].
+Ciklus sušenja u kabini ima četiri dela: odzračivanje posle poslednjeg sloja, zagrevanje, zadržavanje na temperaturi sušenja i hlađenje. Vreme sušenja iz tehničkog lista vezano je za temperaturu dela, pa se računa tek kada deo dostigne propisanu temperaturu, a ne od uključenja grejanja. R-M za bezbojni lak C 2E50 navodi 30 min na 60 °C i upozorava da se u kombinovanim kabinama uračuna dodatno vreme zagrevanja dok lim ne dostigne tu temperaturu[^rm-c2e50-tds]. Carsystem vremena za 2K Clear VOC Speed Plus daje izričito za temperaturu objekta: 25–30 min na 40 °C i 15 min na 60 °C[^cs-speed-plus-tds].
 
 ## Faze ciklusa
 
@@ -112,7 +113,7 @@ Vreme se čita za temperaturu koju navodi tehnički list. Primeri:
 | baslac 40-510 sa 50-530 | 10 min na 60 °C temperature objekta, poliranje posle hlađenja[^baslac-40-510-tds] |
 | Carsystem 2K Clear VOC Speed Plus | 25–30 min na 40 °C ili 15 min na 60 °C temperature objekta, do poliranja[^cs-speed-plus-tds] |
 
-Viša temperatura nije uvek dozvoljena. Kod električnih vozila važe ograničenja zbog baterije, a R-M u tehničkim listovima napominje da se uputstva proizvođača vozila za popravku poštuju i zbog ugrađenih senzora[^rm-c2e50-tds]. Više o tome piše vodič [Lakiranje električnih i hibridnih vozila](/vodici/lakiranje-elektricnih-vozila).
+Viša temperatura nije uvek dozvoljena. Kod električnih i hibridnih vozila proizvođač vozila može imati dodatna ograničenja, na primer zbog visokonaponske baterije, a R-M u tehničkim listovima napominje da se uputstva proizvođača vozila za popravku poštuju i zbog ugrađenih senzora[^rm-c2e50-tds]. Više o tome piše vodič [Lakiranje električnih i hibridnih vozila](/vodici/lakiranje-elektricnih-vozila).
 
 ### 4. Hlađenje
 

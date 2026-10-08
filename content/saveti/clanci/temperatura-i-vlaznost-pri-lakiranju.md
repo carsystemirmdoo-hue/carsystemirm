@@ -88,15 +88,16 @@ razlogPrioriteta: Osnovni vodič teme — ulaz u tematsku celinu, objavljuje se 
 status:
   istrazivanje: zavrseno
   pisanje: napisano
-  tehnickaProvera: nije-provereno
-  jezickaProvera: nije-provereno
+  tehnickaProvera: provereno
+  jezickaProvera: provereno
+napomenaProvere: "urednička provera (AI-asistirana) 2026-10-08: otvoreni C 2A40, H 2P05, AGILIS, A 2560 07/2026, 2K Filler VOC 540 V11, 2K Clear VOC Speed Plus V06, baslac Gloss levels 02/2025 i Wattyl I-05 Version 6; Wattyl jasno označen kao proizvođač van programa, a pravilo 3 °C kao pravilo za industrijske zaštitne premaze, ne za reparaturne materijale; ispravljeno: formulacija o važenju podataka van opsega, viskozitet umesto gustine."
 strucnaPotvrda:
   potrebna: false
   status: nije-potrebno
 poslednjaProvera: 2026-10-08
 ponovniPregled: 2027-04-08
 ---
-Na lakiranje utiču tri temperature (vazduha u prostoru, dela koji se lakira i samog materijala) i relativna vlažnost vazduha. Proizvođači za svaki proizvod navode opseg u kome važe podaci iz tehničkog lista. R-M za bezbojni lak C 2A40 navodi najbolje rezultate pri vlažnosti od 20–80 % i temperaturi od 15–35 °C[^rm-c2a40-tds]. Carsystem za 2K Filler VOC 540 i 2K Clear VOC Speed Plus navodi uslove rada od 18–22 °C uz relativnu vlažnost od 40–60 %[^cs-filler-540-tds][^cs-speed-plus-tds]. Van tih granica vremena sušenja i izgled sloja iz tehničkog lista više nisu zagarantovani.
+Na lakiranje utiču tri temperature (vazduha u prostoru, dela koji se lakira i samog materijala) i relativna vlažnost vazduha. Proizvođači za svaki proizvod navode opseg u kome važe podaci iz tehničkog lista. R-M za bezbojni lak C 2A40 navodi najbolje rezultate pri vlažnosti od 20–80 % i temperaturi od 15–35 °C[^rm-c2a40-tds]. Carsystem za 2K Filler VOC 540 i 2K Clear VOC Speed Plus navodi uslove rada od 18–22 °C uz relativnu vlažnost od 40–60 %[^cs-filler-540-tds][^cs-speed-plus-tds]. Van tih granica podaci iz tehničkog lista, kao vremena sušenja i izgled sloja, ne moraju da važe.
 
 ## Tri temperature, ne jedna
 
@@ -108,7 +109,7 @@ Kada se kaže „temperatura pri lakiranju“, misli se na tri različite vredno
 
 Carsystem to piše izričito: pre nanošenja temperaturu proizvoda, kabine i objekta treba podesiti na oko 20 °C, a proizvod treba da dostigne temperaturu za rad prirodno, bez naglog zagrevanja ili hlađenja[^cs-filler-540-tds]. Isti list ne preporučuje nanošenje ispod 18 °C, jer niska temperatura menja svojstva sloja i može da pokvari izgled[^cs-filler-540-tds].
 
-I podaci za nanošenje vezani su za temperaturu. Viskozitet za 2K Filler VOC 540 dat je za 20 °C: 25–30 sekundi u DIN 4 čaši[^cs-filler-540-tds]. Isti materijal na nižoj ili višoj temperaturi neće imati istu gustinu u pištolju.
+I podaci za nanošenje vezani su za temperaturu. Viskozitet za 2K Filler VOC 540 dat je za 20 °C: 25–30 sekundi u DIN 4 čaši[^cs-filler-540-tds]. Isti materijal na nižoj ili višoj temperaturi neće imati isti viskozitet u pištolju.
 
 ## Vlažnost vazduha
 
@@ -116,7 +117,7 @@ Vlažnost deluje na više mesta, i to na različite načine kod rastvaračkih i 
 
 - **2K učvršćivači.** R-M u tehničkom listu učvršćivača H 2P05 upozorava da su učvršćivači osetljivi na vlagu i da posude sa ostatkom treba pažljivo zatvoriti[^rm-h2p05-tds]. O zamućenom učvršćivaču piše vodič [Zamućen ili kristalisan učvršćivač](/vodici/ucvrscivac-zamucen-ili-kristalisan).
 - **Vodene bazne boje.** Voda iz sloja mora da ispari, pa vlažnost i strujanje vazduha utiču na odzračivanje. R-M za AGILIS predviđa posebne komponente sa oznakom X za visoke temperature, nisku vlažnost ili velike površine[^rm-agilis-tds]. Za AGILIS AMPLIFIER A 2560 navodi da pri nižoj temperaturi okoline ili većoj vlažnosti može biti potrebno duže odzračivanje[^rm-2560-tds]. Razlike između vodenih i rastvaračkih baza objašnjava vodič [Vodene i rastvaračke bazne boje](/vodici/vodene-i-rastvaracke-bazne-boje).
-- **Odzračivanje laka.** baslac za mat bezbojni lak navodi da vreme odzračivanja zavisi od brzine vazduha i temperature kabine i da ne treba da traje duže od 25 minuta[^baslac-gloss-levels].
+- **Odzračivanje laka.** Ni kod rastvaračkog laka vreme odzračivanja nije fiksno: baslac za mat bezbojni lak navodi da vreme odzračivanja zavisi od brzine vazduha i temperature kabine i da ne treba da traje duže od 25 minuta[^baslac-gloss-levels].
 
 Previsoka vlažnost može da se vidi i na samom laku. Mogući uzroci i provera opisani su u tekstu [Mlečan ili zamućen lak pri visokoj vlažnosti](/vodici/mlecan-lak-pri-vlaznosti).
 
@@ -138,8 +139,8 @@ Granice se razlikuju od proizvoda do proizvoda. Za C 2A40 R-M kao donju granicu 
 
 ### Šta je tačka rose?
 
-Tačka rose je temperatura na kojoj vlaga iz vazduha počinje da se kondenzuje. Australijski proizvođač industrijskih premaza Wattyl (nije u našem programu) u informativnom listu o uslovima nanošenja kao uobičajenu meru sigurnosti navodi da podloga bude najmanje 3 °C toplija od tačke rose[^wattyl-dew-point]. To pravilo potiče iz zaštitnih premaza na čeliku. Tehnički listovi reparaturnih materijala iz našeg programa koje smo pregledali ne pominju tačku rose, ali njihovi opsezi vlažnosti i temperature objekta služe istoj svrsi: da na površini ne bude vlage kada se nanosi materijal. U praksi je rizik najveći kada se hladan deo unese u topliju i vlažniju prostoriju.
+Tačka rose je temperatura na kojoj vlaga iz vazduha počinje da se kondenzuje. Australijski proizvođač industrijskih premaza Wattyl (nije u našem programu) u informativnom listu o uslovima nanošenja kao uobičajenu meru sigurnosti navodi da podloga bude najmanje 3 °C toplija od tačke rose[^wattyl-dew-point]. To pravilo je dato za industrijske zaštitne premaze (list kao primere navodi epoksidne i cink-silikatne premaze), a ne za reparaturne auto-boje, pa ga ne čitajte kao preporuku za materijale iz našeg programa. Tehnički listovi reparaturnih materijala iz našeg programa koje smo pregledali ne pominju tačku rose, ali njihovi opsezi vlažnosti i temperature objekta služe istoj svrsi: da na površini ne bude vlage kada se nanosi materijal. U praksi je rizik najveći kada se hladan deo unese u topliju i vlažniju prostoriju.
 
 ### Koja temperatura je presudna?
 
-Sve tri, ali na različit način. Temperatura materijala utiče na gustinu i nanošenje, temperatura vazduha na odzračivanje, a temperatura objekta na to kako sloj na delu reaguje i suši se. Carsystem vremena sušenja za 2K Filler VOC 540 daje prema temperaturi objekta, za 20 °C i 60 °C[^cs-filler-540-tds]. Kako se vremena za različite temperature čitaju iz tehničkog lista, objašnjava vodič [Faze sušenja iz tehničkog lista](/vodici/faze-susenja-iz-tehnickog-lista).
+Sve tri, ali na različit način. Temperatura materijala utiče na viskozitet i nanošenje, temperatura vazduha na odzračivanje, a temperatura objekta na to kako sloj na delu reaguje i suši se. Carsystem vremena sušenja za 2K Filler VOC 540 daje prema temperaturi objekta, za 20 °C i 60 °C[^cs-filler-540-tds]. Kako se vremena za različite temperature čitaju iz tehničkog lista, objašnjava vodič [Faze sušenja iz tehničkog lista](/vodici/faze-susenja-iz-tehnickog-lista).

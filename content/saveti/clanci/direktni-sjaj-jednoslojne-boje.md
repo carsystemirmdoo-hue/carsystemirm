@@ -52,6 +52,7 @@ izvori:
   - id: baslac-30-cv-gloss-tds
     naziv: "baslac, Technical Information Gloss levels – baslac 30 Line CV"
     dokument: /documents/products/baslac/30_CV_Gloss_levels.pdf
+    verzija: "03/2026"
     pristupljeno: 2026-10-08
     tip: tehnicki-list
   - id: rm-ghd-topcoat-tds
@@ -71,15 +72,16 @@ razlogPrioriteta: Dopunjuje osnovni vodič teme konkretnim pitanjem; raspoređen
 status:
   istrazivanje: zavrseno
   pisanje: napisano
-  tehnickaProvera: nije-provereno
-  jezickaProvera: nije-provereno
+  tehnickaProvera: provereno
+  jezickaProvera: provereno
+napomenaProvere: "urednička provera (AI-asistirana) 2026-10-08: otvoreni TDS baslac 30 Line, 30 Line CV (12/2025), Gloss levels 30 Line CV (03/2026, verzija dodata), R-M GHD TOPCOAT (07/2026), Carsystem Matt/Silkmatt; vrednosti se poklapaju. Ispravljeno: primena na velikim površinama suzena na 30 Line CV i GHD TOPCOAT, „solid“ namena pripisana 30 Line CV, „dobra“ → „odlična“ UV otpornost prema listu, hrvatski izraz „gospodarska vozila“ → „komercijalna vozila“."
 strucnaPotvrda:
   potrebna: false
   status: nije-potrebno
 poslednjaProvera: 2026-10-08
 ponovniPregled: 2027-04-08
 ---
-Boja sa direktnim sjajem (jednoslojna boja, 2K boja sa sjajem; engl. *topcoat*, *solid 2K*) u jednom materijalu daje i nijansu i sjaj, pa preko nje nije potreban bezbojni lak. Koristi se za jednobojne nijanse bez metalik ili biser efekta; u našem programu takve boje imaju baslac (30 Line i 30 Line CV) i R-M (GHD TOPCOAT), a tehnički listovi ih opisuju i za velike površine. baslac 30 Line je, prema tehničkom listu, 2K boja sa direktnim sjajem i velikim udelom suvog ostatka i pigmenta, sa dobrom pokrivnošću i malom potrošnjom materijala[^baslac-30-line-tds]. Metalik i biserne nijanse i dalje traže sistem bazne boje i bezbojnog laka.
+Boja sa direktnim sjajem (jednoslojna boja, 2K boja sa sjajem; engl. *topcoat*, *solid 2K*) u jednom materijalu daje i nijansu i sjaj, pa preko nje nije potreban bezbojni lak. U našem programu takve boje imaju baslac (30 Line i 30 Line CV) i R-M (GHD TOPCOAT), a za 30 Line CV i GHD TOPCOAT tehnički listovi navode i primenu na velikim površinama[^baslac-30-line-cv-tds][^rm-ghd-topcoat-tds]. baslac 30 Line je, prema tehničkom listu, 2K boja sa direktnim sjajem i velikim udelom suvog ostatka i pigmenta, sa dobrom pokrivnošću i malom potrošnjom materijala[^baslac-30-line-tds]. 30 Line CV je izričito opisan kao jednoslojna boja za jednobojne (*solid*) nijanse[^baslac-30-line-cv-tds]. Metalik i biserne nijanse se u reparaturnom lakiranju rade sistemom bazne boje i bezbojnog laka.
 
 ## Po čemu se razlikuje od baze i laka
 
@@ -90,14 +92,14 @@ U sistemu baza i lak bazna boja daje nijansu i efekat, ali sama nema sjaj ni otp
 | Proizvod | Opis i namena prema listu | Mešanje i nanošenje |
 | --- | --- | --- |
 | baslac 30 Line | 2K boja sa direktnim sjajem; učvršćivač i razređivač prema temperaturi i veličini objekta[^baslac-30-line-tds] | 2:1 + 10 %, 2 sloja, 50–70 µm, oko 5 min odzračivanja posle svakog sloja[^baslac-30-line-tds] |
-| baslac 30 Line CV | HS jednoslojna boja usklađena sa VOC propisima, za velike površine, sa dobrom otpornošću na UV zračenje[^baslac-30-line-cv-tds] | 2 sloja, 50–70 µm; moguće i nanošenje *airless* i *airmix* postupkom[^baslac-30-line-cv-tds] |
+| baslac 30 Line CV | HS jednoslojna boja usklađena sa VOC propisima, za velike površine, sa odličnom otpornošću na UV zračenje[^baslac-30-line-cv-tds] | 2 sloja, 50–70 µm; moguće i nanošenje *airless* i *airmix* postupkom[^baslac-30-line-cv-tds] |
 | R-M GHD TOPCOAT | sjajna boja za nanošenje na R-M CV prajmer-punioce i punioce, za velike površine[^rm-ghd-topcoat-tds] | 100:25:25, 1,5 sloj, 40–60 µm, bez odzračivanja[^rm-ghd-topcoat-tds] |
 
 Za 30 Line baslac upozorava da se baze za mešanje ne koriste same, nego uvek sa konvertorom 30-[^baslac-30-line-tds]. Nijansa se, dakle, ne pravi iz baze za baznu boju, nego u sistemu boje sa direktnim sjajem.
 
 ## Gde se koriste
 
-- **Velike površine i program za gospodarska vozila (CV).** Za GHD TOPCOAT R-M navodi da je pokriven ceo raspon nijansi za takve primene[^rm-ghd-topcoat-tds], a 30 Line CV je opisan kao pogodan za velike površine[^baslac-30-line-cv-tds].
+- **Velike površine i program za komercijalna vozila (CV).** Za GHD TOPCOAT R-M navodi da je pokriven ceo raspon nijansi za takve primene[^rm-ghd-topcoat-tds], a 30 Line CV je opisan kao pogodan za velike površine[^baslac-30-line-cv-tds].
 - **Jednobojne nijanse.** 30 Line CV je opisan kao jednoslojna boja za jednobojne (*solid*) nijanse[^baslac-30-line-cv-tds].
 - **Višebojni radovi.** GHD TOPCOAT se, prema listu, može preći istim materijalom bez međubrušenja do 16 h od prvog sloja; ako je površina sušena zagrevanjem ili je odzračivala 16 h, pre višebojnog završnog sloja nanosi se sredstvo za prianjanje TRANSPARENT SEALER CP[^rm-ghd-topcoat-tds].
 
@@ -117,7 +119,7 @@ Pregledani tehnički listovi 30 Line, 30 Line CV i GHD TOPCOAT ne navode postupa
 
 ### Gde se koriste?
 
-Za velike površine, program za gospodarska vozila i jednobojne nijanse, kako je opisano gore. Za metalik i biserne nijanse koristi se sistem bazne boje i bezbojnog laka; vidi [Kako se bira bezbojni lak](/vodici/izbor-bezbojnog-laka).
+Za velike površine, program za komercijalna vozila i jednobojne nijanse, kako je opisano gore. Za metalik i biserne nijanse koristi se sistem bazne boje i bezbojnog laka; vidi [Kako se bira bezbojni lak](/vodici/izbor-bezbojnog-laka).
 
 ### Može li se boja sa direktnim sjajem dobiti i u mat izvedbi?
 

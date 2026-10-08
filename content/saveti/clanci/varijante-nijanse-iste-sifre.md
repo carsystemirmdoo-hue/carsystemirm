@@ -66,8 +66,9 @@ razlogPrioriteta: Rešava konkretan problem iz prakse; raspoređeno naizmenično
 status:
   istrazivanje: zavrseno
   pisanje: napisano
-  tehnickaProvera: nije-provereno
-  jezickaProvera: nije-provereno
+  tehnickaProvera: provereno
+  jezickaProvera: provereno
+napomenaProvere: "urednička provera (AI-asistirana) 2026-10-08: otvorene stranice baslac Color Chips i e-finder star, R-M Color Competence i Digital color search, Info R-M Basic Knowledge Color; navodi o varijantama i alatima se poklapaju; preklapanje sa SV-0082 prihvatljivo (SV-0082 je pregled i linkuje ovde). Bez izmena u sadržaju."
 strucnaPotvrda:
   potrebna: false
   status: nije-potrebno

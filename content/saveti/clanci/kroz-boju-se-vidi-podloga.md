@@ -94,11 +94,12 @@ razlogPrioriteta: Rešava konkretan problem iz prakse; raspoređeno naizmenično
 status:
   istrazivanje: zavrseno
   pisanje: napisano
-  tehnickaProvera: nije-provereno
-  jezickaProvera: nije-provereno
+  tehnickaProvera: ispravke-potrebne
+  jezickaProvera: provereno
+napomenaProvere: "urednička provera (AI-asistirana) 2026-10-08: otvoreni TDS baslac 35/45 Line, tabele sivih nijansi 20-24/-34/-94 i 20-35/-95, 45 Line var. 49, R-M ONYX HD, P 2P81, P 2P51 (07/2026) i Info R-M Bleeding; odnosi sivih nijansi se poklapaju. Ispravljeno: „krvarenje“ preneto tačnije (R-M kaže da su mrlje često crvene ili žute, ne da se javlja kod crvenih i žutih nijansi). Stručna potvrda opravdana jer glavno pitanje traži ivice i crvene/žute/bele nijanse, za šta izvora nema."
 strucnaPotvrda:
   potrebna: true
-  razlog: "U pregledanim izvorima R-M i baslac nema tvrdnje da crvene, žute i bele nijanse slabije pokrivaju, niti posebnog uputstva za nanošenje bazne boje na ivice i profile. Ti delovi teksta su napisani kao opšte objašnjenje i treba da ih potvrdi stručna osoba (tehnička podrška proizvođača ili iskusan lakirer)."
+  razlog: "Glavno pitanje izričito pita za ivice i za crvene, žute i bele nijanse. U pregledanim izvorima R-M i baslac nema tvrdnje da te nijanse slabije pokrivaju, niti posebnog uputstva za nanošenje bazne boje na ivice i profile; tekst to otvoreno kaže, a objašnjenja o ivicama i kontrastu podloge napisana su kao opšte objašnjenje. Taj deo odgovora treba da potvrdi stručna osoba (tehnička podrška proizvođača ili iskusan lakirer)."
   status: potrebno
 poslednjaProvera: 2026-10-08
 ponovniPregled: 2027-04-08
@@ -115,7 +116,7 @@ Ako se kroz novu baznu boju vidi podloga, prvo se proverava da li je sloj boje d
 | tamne ili svetle fleke ispod (kit, ostaci stare boje) | ako se vide samo konture popravke, uzrok može biti ispod punioca; vidi [Fleke iznad kita koje se vide kroz boju](/vodici/fleke-iznad-kita) |
 | tragovi brušenja | ako se vide linije, a ne površine, vidi [Tragovi brušenja vidljivi kroz boju](/vodici/tragovi-brusenja-kroz-boju) |
 
-Kod crvenih i žutih nijansi postoji i pojava koja liči na slabu pokrivnost, a nije: R-M opisuje „krvarenje“ (engl. *bleeding*), kada rastvorljiva boja iz podloge prodire kroz novi sloj i pravi mrlje, često kod crvenih i žutih boja. Slične tragove može da izazove i višak peroksidnog učvršćivača u poliesterskom kitu[^inform-bleeding]. Takve mrlje se ne rešavaju dodatnim slojem baze, pa uzrok treba utvrditi pre popravke.
+Postoji i pojava koja liči na slabu pokrivnost, a nije: R-M opisuje „krvarenje“ (engl. *bleeding*), kada rastvorljiva boja iz podloge prodire kroz novi sloj i pravi mrlje ili fleke promenjene boje, prema R-M često crvene ili žute. Slične tragove može da izazove i višak peroksidnog učvršćivača u poliesterskom kitu[^inform-bleeding]. Takve mrlje se ne rešavaju dodatnim slojem baze, pa uzrok treba utvrditi pre popravke.
 
 ## Siva podloga odgovarajuće nijanse
 

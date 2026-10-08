@@ -60,8 +60,9 @@ razlogPrioriteta: Dopunjuje osnovni vodič teme konkretnim pitanjem; raspoređen
 status:
   istrazivanje: zavrseno
   pisanje: napisano
-  tehnickaProvera: nije-provereno
-  jezickaProvera: nije-provereno
+  tehnickaProvera: provereno
+  jezickaProvera: provereno
+napomenaProvere: "urednička provera (AI-asistirana) 2026-10-08: na pravno-informacioni-sistem.rs otvoren prečišćen Pravilnik o klasifikaciji, pakovanju, obeležavanju i oglašavanju (105/2013, 52/2017, 21/2019, 40/2023, 91/2025 — brojevi glasnika potvrđeni; čl. 3 tač. 5 reči upozorenja, čl. 18 sadržaj etikete i srpski jezik, čl. 21 „Opasnost“ isključuje „Pažnja“, čl. 29 najviše šest P obaveštenja) i Zakon o hemikalijama čl. 16 (obeležavanje i na srpskom); otvoren SDS C.A.R.FIT Perfekt Füller 4:1 grau (V 1.0, 30. 8. 2025: Achtung, H226/H315/H317/H319/H373, P210/P260/P280, EUH205). Tvrdnje o CLP piktogramima i grupama H/P oznaka odgovaraju Uredbi CLP i srpskom pravilniku. Ispravljeno: prevod P260 i P280 dopunjen prema tekstu u listu."
 strucnaPotvrda:
   potrebna: false
   status: nije-potrebno
@@ -109,7 +110,7 @@ Bezbednosni list za C.A.R.FIT Perfekt Füller 4:1 grau, verzija 1.0, navodi reč
 - **H317**: može izazvati alergijsku reakciju kože;
 - **H373**: može oštetiti organe pri dugotrajnom ili ponovljenom izlaganju;
 - **P210**: držati dalje od toplote, varnica i otvorenog plamena, ne pušiti;
-- **P260** i **P280**: ne udisati prašinu, paru ni maglicu i nositi zaštitne rukavice, odeću i zaštitu za oči i lice;
+- **P260** i **P280**: ne udisati prašinu, dim, gas, maglicu, paru ni aerosol i nositi zaštitne rukavice, zaštitnu odeću, zaštitu za oči i lice i zaštitu sluha;
 - **EUH205**: sadrži epoksidne sastojke i može izazvati alergijsku reakciju.
 
 Prevodi su urednički i služe samo za objašnjenje. Zvaničan srpski tekst oznaka je u prilozima pravilnika i na etiketi proizvoda. Prema Prilogu V Uredbe CLP, zapaljivoj tečnosti kategorije 3 odgovara piktogram plamena, nadražaju i preosetljivosti kože uzvičnik, a štetnosti po organe pri ponovljenom izlaganju simbol opasnosti po zdravlje[^eu-clp].

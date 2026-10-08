@@ -109,8 +109,9 @@ razlogPrioriteta: Rešava konkretan problem iz prakse; raspoređeno naizmenično
 status:
   istrazivanje: zavrseno
   pisanje: napisano
-  tehnickaProvera: nije-provereno
-  jezickaProvera: nije-provereno
+  tehnickaProvera: provereno
+  jezickaProvera: provereno
+napomenaProvere: "urednička provera (AI-asistirana) 2026-10-08: otvorene baslac stranice Loss of adhesion i Cracking, tehnički listovi Multi Green V08, Multi V06, Füllspachtel v.02, Steel v.06 (Carsystem), C.A.R.FIT Multi Putty i Glas Plus, B 2A16 i B 2A36 07/2026 (R-M), 12-20 06/2023; uzroci, podloge i popravka se poklapaju i predstavljeni su kao mogući; ispravke nisu bile potrebne."
 strucnaPotvrda:
   potrebna: false
   status: nije-potrebno

@@ -76,6 +76,11 @@ izvori:
     pristupljeno: 2026-10-08
     tip: tehnicki-list
     napomena: "Dokument ne navodi broj verzije ni datum; postavljen u folderu 2023/05 sajta proizvođača."
+  - id: carfit-2k-epoxy-tds
+    naziv: "C.A.R.FIT, Technical Data Sheet 2K Epoxy Primer 1:1"
+    url: https://carfitrepair.com/wp-content/uploads/2023/05/car-fit-2k-epoxy-primer-11-technical-data-sheet.pdf
+    pristupljeno: 2026-10-08
+    tip: tehnicki-list
   - id: baslac-gloss-levels
     naziv: "baslac, Technical Information Gloss levels – Mat finish"
     dokument: /documents/products/baslac/Gloss_levels.pdf
@@ -100,16 +105,17 @@ razlogPrioriteta: Dopunjuje osnovni vodič teme konkretnim pitanjem; raspoređen
 status:
   istrazivanje: zavrseno
   pisanje: napisano
-  tehnickaProvera: nije-provereno
-  jezickaProvera: nije-provereno
+  tehnickaProvera: ispravke-potrebne
+  jezickaProvera: provereno
+napomenaProvere: "urednička provera (AI-asistirana) 2026-10-08: otvoreni R-M C 2A40, P 2P51 i P 2P92 (07/2026), baslac 40-100 (06/2026) i Gloss levels (02/2025), Norbin N55-V29 (10/2022), C.A.R.FIT Perfekt Füller i 2K Epoxy Primer 1:1, SATA tekst (20. 8. 2025, prema DeKoLaKa listu 010) i stranica DIN EN ISO 2808:2019-12 (važeći); sve debljine, broj slojeva, odzračivanja (20 s / 60 s / 90 s, 3 min) i 80–130 µm odgovaraju izvorima. Ispravljeno: tvrdnja da listovi „iz našeg programa“ ne navode suv sloj suzena na listove iz tabele i dodat primer C.A.R.FIT lista koji izričito navodi „dry coat thickness“, napomena o mat laku vezana za baslac 40-620. Stručna potvrda opravdana: za R-M, baslac i Norbin listove i dalje nije potvrđeno da se „Film thickness“ odnosi na suv sloj, a to je suština naslova i odgovora."
 strucnaPotvrda:
   potrebna: true
-  razlog: "Tehnički listovi iz našeg programa navode „Film thickness“/„Schichtdicke“ bez oznake da li je reč o suvom ili mokrom sloju; to da se vrednost odnosi na suv sloj treba potvrditi kod proizvođača. Za metode merenja (vrste merača po podlozi, merenje mokrog sloja) nije otvoren izvor koji bi ih opisao, pa tekst namerno ne opisuje princip rada merača."
+  razlog: "Tehnički listovi R-M, baslac, Norbin i C.A.R.FIT (Perfekt Füller) navode „Film thickness“/„Schichtdicke“ bez oznake da li je reč o suvom ili mokrom sloju (izričito „dry coat thickness“ piše samo u pojedinim listovima, npr. C.A.R.FIT 2K Epoxy Primer 1:1); to da se vrednost odnosi na suv sloj treba potvrditi kod proizvođača. Za metode merenja (vrste merača po podlozi, merenje mokrog sloja) nije otvoren izvor koji bi ih opisao, pa tekst namerno ne opisuje princip rada merača."
   status: potrebno
 poslednjaProvera: 2026-10-08
 ponovniPregled: 2027-04-08
 ---
-Debljina sloja u tehničkom listu je raspon u mikrometrima (µm) koji proizvođač navodi za taj proizvod pri propisanom broju slojeva. Za bezbojni lak R-M C 2A40 to je 40–50 µm pri nanošenju ½ + 1 sloja[^rm-c2a40-tds], a za prajmer-punilac R-M P 2P51 50–70 µm u dva sloja[^rm-p2p51-tds]. Listovi pišu samo *Film thickness* (nem. *Schichtdicke*) i ne navode izričito da li je reč o suvom sloju. Na gotovom vozilu debljina se proverava meračem koji meri bez oštećenja površine, ali on po pravilu pokazuje ukupnu debljinu, a ne pojedinačne slojeve[^sata-ukupna-debljina].
+Debljina sloja u tehničkom listu je raspon u mikrometrima (µm) koji proizvođač navodi za taj proizvod pri propisanom broju slojeva. Za bezbojni lak R-M C 2A40 to je 40–50 µm pri nanošenju ½ + 1 sloja[^rm-c2a40-tds], a za prajmer-punilac R-M P 2P51 50–70 µm u dva sloja[^rm-p2p51-tds]. Ovi listovi pišu samo *Film thickness* (nem. *Schichtdicke*) i ne navode izričito da li je reč o suvom sloju. Na gotovom vozilu debljina se proverava meračem koji meri bez oštećenja površine, ali on po pravilu pokazuje ukupnu debljinu, a ne pojedinačne slojeve[^sata-ukupna-debljina].
 
 ## Šta znači raspon u listu
 
@@ -130,7 +136,7 @@ Tabela ne služi za poređenje proizvoda. Pokazuje da debljina zavisi od vrste m
 C.A.R.FIT u listu za Perfekt Füller izričito upozorava da se preporučena debljina sloja ne prekoračuje[^carfit-perfekt-fueller-tds]. Razlozi koje navode proizvođači iz našeg programa:
 
 - **Sušenje i vreme rada zavise od debljine.** Norbin za N55-V29 navodi da se vreme sušenja i vreme upotrebljivosti mogu promeniti sa debljinom sloja, temperaturom, vlažnošću i vrstom učvršćivača. Vrednosti iz lista važe za standardni učvršćivač i 20 °C[^norbin-n55-v29-tds].
-- **Sjaj zavisi od ujednačene debljine.** Kod mat bezbojnih lakova baslac traži dva jednako puna sloja da bi debljina bila ujednačena. Utapanje mat laka nije dozvoljeno, jer se debljina u zoni prelaza menja, a sa njom i stepen sjaja[^baslac-gloss-levels].
+- **Sjaj zavisi od ujednačene debljine.** Za mat bezbojni lak 40-620 baslac traži dva jednako puna sloja da bi debljina bila ujednačena. Utapanje mat laka nije dozvoljeno, jer se debljina u zoni prelaza menja, a sa njom i stepen sjaja[^baslac-gloss-levels].
 
 Opšte objašnjenje: rastvarač iz debljeg sloja duže isparava, pa sloj sporije očvršćava. Zato se pri preterano debelom sloju lakše javljaju greške kao što su [curenje](/vodici/curenje-laka) i [mehurići od rastvarača](/vodici/mehurici-kuvanje-laka). Konkretan uzrok greške uvek zavisi i od materijala, podloge i uslova rada.
 
@@ -152,4 +158,4 @@ Ne sama po sebi. SATA prenosi stav nemačke stručne komisije za popravku laka i
 
 ### Da li je „Film thickness“ debljina suvog ili mokrog sloja?
 
-Listovi iz našeg programa to ne navode izričito. Engleski izraz za debljinu suvog sloja je *dry film thickness* (DFT). Ako Vam je razlika važna za kontrolu rada, pitajte proizvođača ili prodavca.
+Listovi iz tabele u ovom tekstu to ne navode izričito. Neki listovi to kažu: C.A.R.FIT za 2K Epoxy Primer 1:1 uz vreme sušenja navodi „100–140 µm dry coat thickness“, odnosno debljinu suvog sloja[^carfit-2k-epoxy-tds]. Engleski izraz za debljinu suvog sloja je *dry film thickness* (DFT). Ako Vam je razlika važna za kontrolu rada, pitajte proizvođača ili prodavca.

@@ -117,7 +117,7 @@ Kod tamnog kita kontrolni sloj nije uvek potreban. Za Multi Black Rapid Carsyste
 5. **Ponovite pre svake finije granulacije.** Novi sloj praha pokazuje da li je sledeća granulacija uklonila tragove prethodne.
 6. **Očistite površinu pre sledećeg sloja.** baslac posle brušenja kita navodi pažljivo čišćenje sredstvom za čišćenje[^baslac-putty-metal].
 
-Upotrebu kontrolnog praha izričito navode i drugi proizvođači iz programa. baslac ga uvodi pre završnog brušenja kita[^baslac-putty-metal]. R-M za UV Bodyfill-R B 2P93 uz granulacije P80 / P150 + P240 / P320 navodi upotrebu kontrolnog praha[^rm-b2p93-tds], a za punilac P 2E23 savetuje ga radi boljeg rezultata brušenja[^rm-p2e23-tds].
+Kontrolni sloj izričito navode i drugi proizvođači iz programa. baslac ga uvodi pre završnog brušenja kita[^baslac-putty-metal]. R-M za UV Bodyfill-R B 2P93 uz granulacije P80 / P150 + P240 / P320 navodi upotrebu kontrolnog sloja („Guide Coat“)[^rm-b2p93-tds], a za punilac P 2E23 ga savetuje radi boljeg rezultata brušenja[^rm-p2e23-tds]. Ti dokumenti ne navode da li je reč o prahu ili spreju.
 
 ## Šta pokazuju tamna mesta
 

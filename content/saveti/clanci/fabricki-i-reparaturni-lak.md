@@ -128,4 +128,4 @@ Zato što vozilo u radionici više nije gola karoserija. Toplota koju podnosi li
 
 ### Može li popravka da bude izdržljiva kao fabrički lak?
 
-Proizvođači vozila odobravaju reparaturne sisteme tek posle ispitivanja. BASF je 2015. objavio da je R-M dobio globalno tehničko odobrenje Porschea za popravke posle udesa, uključujući garancijske popravke, i da Porsche odobrava samo proizvode koji ispune njegove zahteve za kvalitet i svojstva[^basf-rm-porsche]. Trajnost konkretne popravke ipak zavisi i od pripreme, izbora materijala i poštovanja tehničkih listova.
+Proizvođači vozila mogu da odobre reparaturni sistem posle sopstvenih zahteva i provere. BASF je 2015. objavio da je R-M dobio globalno tehničko odobrenje Porschea za popravke posle udesa, uključujući garancijske popravke, i da Porsche odobrava samo proizvode koji ispune njegove zahteve za kvalitet i svojstva[^basf-rm-porsche]. Trajnost konkretne popravke ipak zavisi i od pripreme, izbora materijala i poštovanja tehničkih listova.

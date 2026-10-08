@@ -73,8 +73,9 @@ razlogPrioriteta: Dopunjuje osnovni vodič teme konkretnim pitanjem; raspoređen
 status:
   istrazivanje: zavrseno
   pisanje: napisano
-  tehnickaProvera: nije-provereno
-  jezickaProvera: nije-provereno
+  tehnickaProvera: provereno
+  jezickaProvera: provereno
+napomenaProvere: "urednička provera (AI-asistirana) 2026-10-08: otvoreni tehnički listovi Multi Green V08, Liquid Putty V02, Glas V05 (Carsystem), B 2A16 07/2026 (R-M) i baslac uputstvo Putty application – metal (12-20, P150, 20 min / 4 min, P150/240, P240, P320); vrednosti se poklapaju; ispravljeno: raspon sušenja 15–30 min u uvodu dobio izvor koji sadrži gornju granicu (Liquid Putty)."
 strucnaPotvrda:
   potrebna: false
   status: nije-potrebno

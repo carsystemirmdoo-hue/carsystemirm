@@ -91,8 +91,9 @@ razlogPrioriteta: Dopunjuje osnovni vodič teme konkretnim pitanjem; raspoređen
 status:
   istrazivanje: zavrseno
   pisanje: napisano
-  tehnickaProvera: nije-provereno
-  jezickaProvera: nije-provereno
+  tehnickaProvera: provereno
+  jezickaProvera: provereno
+napomenaProvere: "urednička provera (AI-asistirana) 2026-10-08: otvoreni R-M C 2A40 i P 2P51 (07/2026), baslac 40-100 (06/2026), Norbin N55-V29 (10/2022), C.A.R.FIT Perfekt Füller 4:1 (30–55 s, DIN 4 mm, bez temperature), Carsystem Multi Green V08 i stranice DIN Media za DIN 53211 (povučen, zamenjen DIN EN ISO 2431:1996-05) i DIN EN ISO 2431:2020-02 (važeći, njutnovsko ponašanje); sve vrednosti u tabeli i tekstu odgovaraju izvorima; bez ispravki."
 strucnaPotvrda:
   potrebna: false
   status: nije-potrebno

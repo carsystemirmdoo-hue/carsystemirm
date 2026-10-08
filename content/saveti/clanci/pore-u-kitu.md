@@ -77,8 +77,9 @@ razlogPrioriteta: Rešava konkretan problem iz prakse; raspoređeno naizmenično
 status:
   istrazivanje: zavrseno
   pisanje: napisano
-  tehnickaProvera: nije-provereno
-  jezickaProvera: nije-provereno
+  tehnickaProvera: ispravke-potrebne
+  jezickaProvera: provereno
+napomenaProvere: "urednička provera (AI-asistirana) 2026-10-08: otvoreni tehnički listovi Elastic weiss v.04, Liquid Putty V02, Multi V06 (Carsystem), C.A.R.FIT Spray Putty, B 2A16 07/2026 (R-M) i baslac stranica Bleeding; svi citirani navodi se poklapaju; ispravljeno: verzija Elastic weiss (v.04, 08-06-2010), dodato ograničenje Elastic weiss samo na čelik. Stručna potvrda opravdana: nijedan pregledani izvor proizvođača ne navodi uzroke pora u poliesterskom kitu, a to je suština glavnog pitanja."
 strucnaPotvrda:
   potrebna: true
   razlog: "Tehnički listovi i stranice o greškama proizvođača iz našeg programa (Carsystem, C.A.R.FIT, R-M, baslac) koje smo pregledali ne navode uzroke pora u poliesterskom kitu. Tekst zato daje samo proverljive navode (mešanje, podloga, popravka finim, tečnim ili kitom za prskanje); spisak uzroka treba da potvrdi stručna osoba ili tehnička podrška proizvođača."

@@ -128,7 +128,7 @@ strucnaPotvrda:
 poslednjaProvera: 2026-10-08
 ponovniPregled: 2027-04-08
 ---
-Granulacija se ne bira napamet, nego prema materijalu koji brusite i fazi rada, a vrednost daje tehnički list tog materijala. U tehničkim listovima iz našeg programa kit se prvo brusi grubljim granulacijama, od P80 do P240[^cs-multi-green-tds], punilac pre bazne boje finijim, od P320 do P600 na suvo[^cs-vario-plus-tds], a stari lak u zoni utapanja još finijim, P1000/P2000[^baslac-blend-51k]. Što je broj posle slova P veći, zrno je sitnije i trag brušenja finiji.
+Granulacija se ne bira napamet, nego prema materijalu koji brusite i fazi rada, a vrednost daje tehnički list tog materijala. Primeri iz našeg programa: za kit Carsystem Multi Green tehnički list navodi prvo brušenje granulacijama od P80 do P240[^cs-multi-green-tds], za punilac Carsystem 2K Filler Vario Plus od P320 do P600 na suvo[^cs-vario-plus-tds], a baslac postupak utapanja za stari lak oko popravke P1000/P2000[^baslac-blend-51k]. Što je broj posle slova P veći, zrno je sitnije i trag brušenja finiji.
 
 ## Šta znači oznaka P
 
@@ -138,7 +138,7 @@ Za praksu je dovoljno znati dve stvari. Prvo, isti broj sa slovom P kod različi
 
 ## Koje granulacije postoje u programu
 
-Raspon granulacija pokazuje za šta je abraziv namenjen. U katalogu Carsystem disk F.19 od 150 mm postoji od P80 do P800, keramički F.23 od P80 do P800, papirni P.25 Ceramic od P40 do P600, a F.19 Finish od P1000 do P2000 za utapanje, matiranje i uklanjanje grešaka[^cs-katalog-2026]. ProFlex Jupiter Soft H₂O ide do P4000 i namenjen je mokrom brušenju pred poliranje[^cs-katalog-2026]. U katalogu C.A.R.FIT papirni Gold Paper Disc postoji od P40 do P500, a filmski Red Film Disc od P60 do P2000[^carfit-katalog-2026].
+Raspon granulacija pokazuje za šta je abraziv namenjen. U katalogu Carsystem disk F.19 od 150 mm postoji od P80 do P800, keramički F.23 od P80 do P800, papirni P.25 Ceramic od P40 do P600, a F.19 Finish od P1000 do P2000 za utapanje, matiranje i uklanjanje grešaka[^cs-katalog-2026]. ProFlex Jupiter Soft H₂O postoji od P2500 do P4000 i namenjen je mokrom završnom brušenju pre poliranja[^cs-katalog-2026]. U katalogu C.A.R.FIT papirni Gold Paper Disc postoji od P40 do P500, a filmski Red Film Disc od P60 do P2000[^carfit-katalog-2026].
 
 ## Granulacija po fazi rada
 

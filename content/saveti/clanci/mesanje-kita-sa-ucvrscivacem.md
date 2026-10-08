@@ -87,8 +87,9 @@ razlogPrioriteta: Dopunjuje osnovni vodič teme konkretnim pitanjem; raspoređen
 status:
   istrazivanje: zavrseno
   pisanje: napisano
-  tehnickaProvera: nije-provereno
-  jezickaProvera: nije-provereno
+  tehnickaProvera: provereno
+  jezickaProvera: provereno
+napomenaProvere: "urednička provera (AI-asistirana) 2026-10-08: otvoreni tehnički listovi Multi Green V08, Multi V06, Liquid Putty V02 (Carsystem), C.A.R.FIT Multi Putty, B 2A16 07/2026 (R-M), 12-20 06/2023 i baslac stranica Bleeding; svi procenti, učvršćivači i vremena upotrebljivosti u tabeli se poklapaju; ispravljeno: persiranje u podnaslovu pitanja, „za većinu“ ograničeno na kitove iz tabele."
 strucnaPotvrda:
   potrebna: false
   status: nije-potrebno

@@ -72,8 +72,9 @@ razlogPrioriteta: Dopunjuje osnovni vodič teme konkretnim pitanjem; raspoređen
 status:
   istrazivanje: zavrseno
   pisanje: napisano
-  tehnickaProvera: nije-provereno
-  jezickaProvera: nije-provereno
+  tehnickaProvera: provereno
+  jezickaProvera: provereno
+napomenaProvere: "urednička provera (AI-asistirana) 2026-10-08: na pravno-informacioni-sistem.rs otvoreni Pravilnik o sadržaju bezbednosnog lista („Sl. glasnik RS“, br. 11 od 14. 2. 2024; čl. 2 nazivi 16 poglavlja, čl. 5, čl. 100 prestanak Pravilnika 100/11, čl. 101 primena od 1. 9. 2024) i prečišćen Zakon o hemikalijama (36/09, 88/10, 92/11, 93/12, 25/15; čl. 20, 22, 23) — brojevi glasnika, članovi i nazivi odeljaka u tabeli tačni; na EUR-Lex otvorena Uredba (EU) 2020/878 (čl. 2–3, Prilog 0.2.5 i odeljak 16); otvoren SDS C.A.R.FIT Perfekt Füller 4:1 grau (V 1.0, 30. 8. 2025). Ispravljeno: H oznake navedene pojedinačno umesto raspona, skladišna klasa vezana za TRGS 510, uklonjena necitirana tvrdnja o posebnim listovima po pakovanju, dodat izuzetak za odeljak 16, „najkorisniji“ preformulisano."
 strucnaPotvrda:
   potrebna: false
   status: nije-potrebno
@@ -116,15 +117,15 @@ Nazivi u levoj koloni su iz srpskog pravilnika[^pravilnik-bl-rs]. Na listovima i
 Bezbednosni list za C.A.R.FIT Perfekt Füller 4:1 grau, verzija 1.0 od 30. 8. 2025, na nemačkom je i sledi isti raspored[^carfit-perfekt-fueller-sds]:
 
 - **Odeljak 1** navodi naziv proizvoda, broj artikla, snabdevača (August Handel GmbH), broj za hitne slučajeve i jedinstveni identifikator formule UFI[^carfit-perfekt-fueller-sds].
-- **Odeljak 2** navodi klasifikaciju prema Uredbi (EZ) br. 1272/2008, reč upozorenja *Achtung* (pažnja) i oznake od H226 do H373[^carfit-perfekt-fueller-sds]. Šta znače, objašnjava vodič [Oznake opasnosti na ambalaži](/vodici/oznake-opasnosti-na-ambalazi).
-- **Odeljak 7** navodi da se čuva u dobro zatvorenoj posudi, na sobnoj temperaturi od 18–23 °C, i da spada u skladišnu klasu 3 (zapaljive tečnosti)[^carfit-perfekt-fueller-sds].
+- **Odeljak 2** navodi klasifikaciju prema Uredbi (EZ) br. 1272/2008, reč upozorenja *Achtung* (pažnja) i oznake opasnosti H226, H315, H317, H319 i H373[^carfit-perfekt-fueller-sds]. Šta znače, objašnjava vodič [Oznake opasnosti na ambalaži](/vodici/oznake-opasnosti-na-ambalazi).
+- **Odeljak 7** navodi da se čuva u dobro zatvorenoj posudi, na sobnoj temperaturi od 18–23 °C, i da prema nemačkom pravilu TRGS 510 spada u skladišnu klasu 3 (zapaljive tečnosti)[^carfit-perfekt-fueller-sds].
 - **Odeljak 8** navodi zaštitne rukavice prema EN 374 i zaštitne naočare sa bočnom zaštitom. Za disanje navodi filtersku zaštitu pri kratkom ili malom izlaganju, a za intenzivno ili duže izlaganje uređaj nezavisan od okolnog vazduha[^carfit-perfekt-fueller-sds].
 
-Ovo je primer jednog proizvoda. Drugi proizvod ima svoj bezbednosni list sa svojim podacima, a neki proizvođači izdaju poseban list i za svaku veličinu pakovanja.
+Ovo je primer jednog proizvoda. Drugi proizvod ima svoj bezbednosni list sa svojim podacima.
 
 ## Kako se čita pre rada
 
-Za radionicu i za pojedinca najkorisniji su odeljci 2, 4, 7, 8 i 13. Pre prvog rada sa novim proizvodom proverite odeljak 2 (koje su opasnosti) i odeljak 8 (kakvu zaštitu propisuje). Odeljak 4 držite dostupnim, jer se u nezgodi nema vremena za traženje. Pri planiranju skladišta pogledajte odeljak 7, a pre bacanja ostataka odeljak 13. Opšti pregled zaštitne opreme je u vodiču [Lična zaštitna oprema autolakirera](/vodici/licna-zastitna-oprema-autolakirera), ali konkretnu opremu za proizvod određuje njegov bezbednosni list.
+Pre rada su posebno važni odeljci 2, 4, 7, 8 i 13. Pre prvog rada sa novim proizvodom proverite odeljak 2 (koje su opasnosti) i odeljak 8 (kakvu zaštitu propisuje). Odeljak 4 držite dostupnim, jer se u nezgodi nema vremena za traženje. Pri planiranju skladišta pogledajte odeljak 7, a pre bacanja ostataka odeljak 13. Opšti pregled zaštitne opreme je u vodiču [Lična zaštitna oprema autolakirera](/vodici/licna-zastitna-oprema-autolakirera), ali konkretnu opremu za proizvod određuje njegov bezbednosni list.
 
 ## Pitanja i odgovori
 
@@ -138,4 +139,4 @@ Prema Zakonu o hemikalijama, snabdevač koji stavlja u promet opasnu hemikaliju 
 
 ### Kako znam da je bezbednosni list aktuelan?
 
-Na prvoj strani mora da stoji datum izrade. Kod revidiranog lista tu su i datum revizije, broj verzije i datum od kog se zamenjuje prethodna verzija[^pravilnik-bl-rs]. Snabdevač koji izmeni list dužan je da ga dostavi onima kojima je hemikaliju isporučio u prethodnih 12 meseci, sa napomenom „Revidiran“ i datumom izmene[^zakon-hemikalije-rs]. EU pravila traže da se izmene navedu u odeljku 16[^eu-2020-878].
+Na prvoj strani mora da stoji datum izrade. Kod revidiranog lista tu su i datum revizije, broj verzije i datum od kog se zamenjuje prethodna verzija[^pravilnik-bl-rs]. Snabdevač koji izmeni list dužan je da ga dostavi onima kojima je hemikaliju isporučio u prethodnih 12 meseci, sa napomenom „Revidiran“ i datumom izmene[^zakon-hemikalije-rs]. EU pravila traže da se izmene navedu u odeljku 16, osim ako su naznačene na drugom mestu u listu[^eu-2020-878].

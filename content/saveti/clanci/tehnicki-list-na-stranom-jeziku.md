@@ -85,15 +85,16 @@ razlogPrioriteta: Dopunjuje osnovni vodič teme konkretnim pitanjem; raspoređen
 status:
   istrazivanje: zavrseno
   pisanje: napisano
-  tehnickaProvera: nije-provereno
-  jezickaProvera: nije-provereno
+  tehnickaProvera: provereno
+  jezickaProvera: provereno
+napomenaProvere: "urednička provera (AI-asistirana) 2026-10-08: otvoreni R-M C 2A40 (07/2026), baslac 40-100 (06/2026), C.A.R.FIT Perfekt Füller 4:1 grau (TDS na nemačkom i SDS V 1.0), Carsystem Multi Green V08 i MMIR-Mask Aqua Tec (nemački, v.01 03/2021), Zakon o hemikalijama čl. 20 na pravno-informacioni-sistem.rs; nemački izrazi i sve vrednosti u tabelama odgovaraju izvorima. Ispravljeno: tvrdnja o jezicima listova suzena na pregledane listove (C.A.R.FIT ima i engleske listove), „überlackierbar mit“ preveden prema izvoru (boje, ne samo bazne boje), tvrdnja da listovi iz programa ne koriste DFT suzena na navedene listove."
 strucnaPotvrda:
   potrebna: false
   status: nije-potrebno
 poslednjaProvera: 2026-10-08
 ponovniPregled: 2027-04-08
 ---
-Tehnički listovi proizvođača iz našeg programa izdaju se uglavnom na engleskom (R-M, baslac, Carsystem) ili nemačkom (C.A.R.FIT i deo Carsystem listova). Isti izrazi ponavljaju se od lista do lista. *Pot life* (nem. *Topfzeit*) je vreme upotrebljivosti smeše, *flash-off* (nem. *Ablüftzeit*) je odzračivanje, a *DFT* je skraćenica za *dry film thickness*, debljinu suvog sloja. Rečnik ispod daje izraz na oba jezika, srpski izraz koji koristimo u vodičima i primer iz stvarnog lista.
+Tehnički listovi proizvođača iz našeg programa koje smo pregledali uglavnom su na engleskom (R-M, baslac, Carsystem) ili nemačkom (deo C.A.R.FIT i Carsystem listova). Isti izrazi ponavljaju se od lista do lista. *Pot life* (nem. *Topfzeit*) je vreme upotrebljivosti smeše, *flash-off* (nem. *Ablüftzeit*) je odzračivanje, a *DFT* je skraćenica za *dry film thickness*, debljinu suvog sloja. Rečnik ispod daje izraz na oba jezika, srpski izraz koji koristimo u vodičima i primer iz stvarnog lista.
 
 ## Mešanje i priprema
 
@@ -130,7 +131,7 @@ Zapis *½ + 1* znači pola sloja, pa pun sloj. C 2A40 tako navodi broj slojeva, 
 | Infrared, short wave | Kurzwelle Infrarot-Trocknung | kratkotalasno infracrveno sušenje | Perfekt Füller: 8 min[^carfit-perfekt-fueller-tds] |
 | Sanding, dry | Trockenschliff | suvo brušenje | Perfekt Füller: P400–P600[^carfit-perfekt-fueller-tds] |
 | Grit | Körnung | granulacija | oznaka P, na primer P400 |
-| Overcoatable with | überlackierbar mit | može se prelakirati sa | Perfekt Füller: rastvaračke i vodene bazne boje[^carfit-perfekt-fueller-tds] |
+| Overcoatable with | überlackierbar mit | može se prelakirati sa | Perfekt Füller: sve konvencionalne (rastvaračke) i vodene boje[^carfit-perfekt-fueller-tds] |
 
 Izraze za faze sušenja, kao što su *dust-free* i *ready to assemble*, objašnjava vodič [Faze sušenja](/vodici/faze-susenja-iz-tehnickog-lista).
 
@@ -149,7 +150,7 @@ U nemačkom listu za foliju Carsystem MMIR-Mask Aqua Tec rok stoji pod *Lagerzei
 
 ### Šta znače pot life, flash-off i DFT?
 
-*Pot life* je vreme upotrebljivosti smeše posle dodavanja učvršćivača, uvek uz temperaturu: za C 2A40 25 minuta na 20 °C[^rm-c2a40-tds]. Više u vodiču [Vreme upotrebljivosti smeše](/vodici/vreme-upotrebljivosti-smese). *Flash-off* je odzračivanje: vreme da rastvarač ispari između slojeva ili pre sušenja, za 40-100 najmanje 3 minuta na 20 °C između slojeva[^baslac-40-100-tds]. *DFT* (*dry film thickness*) je debljina suvog sloja. Listovi iz našeg programa ovu skraćenicu ne koriste, već pišu samo *Film thickness* ili *Schichtdicke*.
+*Pot life* je vreme upotrebljivosti smeše posle dodavanja učvršćivača, uvek uz temperaturu: za C 2A40 25 minuta na 20 °C[^rm-c2a40-tds]. Više u vodiču [Vreme upotrebljivosti smeše](/vodici/vreme-upotrebljivosti-smese). *Flash-off* je odzračivanje: vreme da rastvarač ispari između slojeva ili pre sušenja, za 40-100 najmanje 3 minuta na 20 °C između slojeva[^baslac-40-100-tds]. *DFT* (*dry film thickness*) je debljina suvog sloja. U listovima koje navodimo ova skraćenica se ne pojavljuje; u njima piše *Film thickness* ili *Schichtdicke*.
 
 ### Mogu li da koristim mašinski prevod?
 

@@ -102,8 +102,9 @@ razlogPrioriteta: Dopunjuje osnovni vodič teme konkretnim pitanjem; raspoređen
 status:
   istrazivanje: zavrseno
   pisanje: napisano
-  tehnickaProvera: nije-provereno
-  jezickaProvera: nije-provereno
+  tehnickaProvera: provereno
+  jezickaProvera: provereno
+napomenaProvere: "urednička provera (AI-asistirana) 2026-10-08: otvoreni tehnički listovi Multi Green V08, Feinspachtel v.02, EF.21 V05, Etch Primer v.03, Spray Plus V09, Multi Super Flex v.3 (Carsystem), P 2A26 i P 2P16 07/2026 (R-M), C.A.R.FIT Glas Plus i 2K Epoxy Primer 1:1; zabrane i dozvole za kit preko prajmera se poklapaju; ispravljeno: tabela prianjanja Multi Green pogrešno je razdvajala „2K“ i „poliesterski kit“ (u izvoru je to jedna kolona: 2K poliesterski kit), ispravljeno u tabeli i u odgovoru."
 strucnaPotvrda:
   potrebna: false
   status: nije-potrebno

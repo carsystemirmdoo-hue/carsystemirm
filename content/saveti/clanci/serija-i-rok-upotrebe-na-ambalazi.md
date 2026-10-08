@@ -65,18 +65,20 @@ izvori:
     pristupljeno: 2026-10-08
     tip: bezbednosni-list
   - id: zakon-zastita-potrosaca-rs
-    naziv: "Zakon o zaštiti potrošača („Službeni glasnik RS“, br. 88/2021)"
-    url: https://pravno-informacioni-sistem.rs/eli/rep/sgrs/skupstina/zakon/2021/88/1/reg
+    naziv: "Zakon o zaštiti potrošača („Službeni glasnik RS“, br. 35/2026)"
+    url: https://pravno-informacioni-sistem.rs/eli/rep/sgrs/skupstina/zakon/2026/35/1/reg
+    datumIzvora: 2026-04-23
     pristupljeno: 2026-10-08
     tip: propis
-    napomena: "Tekst u Pravno-informacionom sistemu RS; čl. 55 (izjavljivanje reklamacije uz račun ili drugi dokaz o kupovini)."
+    napomena: "Tekst u Pravno-informacionom sistemu RS; čl. 5 tač. 1 (potrošač), čl. 63 (izjavljivanje reklamacije uz račun ili drugi dokaz o kupovini). Zakon iz 2021. (88/2021) PIS označava kao nevažeći."
 prioritet: 525
 razlogPrioriteta: Dopunjuje osnovni vodič teme konkretnim pitanjem; raspoređeno naizmenično sa drugim temama.
 status:
   istrazivanje: zavrseno
   pisanje: napisano
-  tehnickaProvera: nije-provereno
-  jezickaProvera: nije-provereno
+  tehnickaProvera: ispravke-potrebne
+  jezickaProvera: provereno
+napomenaProvere: "urednička provera (AI-asistirana) 2026-10-08: otvoreni Carsystem Multi Green V08, MMIR-Mask Aqua Tec v.01 03/2021 i Latex gloves V01 06/2021, Norbin N55-V29 10/2022 i SDS C.A.R.FIT Perfekt Füller (odeljak 7); rokovi, polazni datumi i uslovi skladištenja odgovaraju izvorima. Na pravno-informacioni-sistem.rs utvrđeno da je Zakon o zaštiti potrošača 88/2021 nevažeći; izvor zamenjen važećim zakonom („Sl. glasnik RS“, br. 35 od 23. 4. 2026), u kom je pravilo o načinu izjavljivanja reklamacije uz račun ili drugi dokaz o kupovini u čl. 63, a definicija potrošača u čl. 5 tač. 1. Ostale ispravke: serija komponenti formulisana opreznije. Stručna potvrda opravdana: šta firma traži od kupca pri reklamaciji i gde proizvođači na ambalaži štampaju seriju i datum nije potvrđeno izvorom proizvođača ni firme."
 strucnaPotvrda:
   potrebna: true
   razlog: "Za proizvođače iz našeg programa nije pronađen zvaničan izvor o tome gde se na ambalaži nalaze oznaka serije i datum proizvodnje ili roka i kako proizvođač koristi oznaku serije pri reklamaciji. Deo o seriji je opšte objašnjenje; potrebno je da firma potvrdi postupak reklamacije i podatke koje traži od kupca."
@@ -90,7 +92,7 @@ Oznaka serije (engl. *batch*, *lot*, nem. *Charge*) je broj proizvodne serije iz
 
 Proizvod se pravi u serijama, a pakovanja iz jedne serije nose istu oznaku. Svrha oznake je da se konkretno pakovanje može povezati sa proizvodnjom iz koje potiče, na primer kada se kasnije postavi pitanje o kvalitetu. Sama oznaka ne govori ništa o kvalitetu ni o roku.
 
-Kod materijala koji se kombinuju, na primer laka, učvršćivača i razređivača, svaka komponenta ima svoju seriju. Ako sačuvate oznake svih komponenti, kasnije se može proveriti svaka.
+Kod materijala koji se kombinuju, na primer laka, učvršćivača i razređivača, svaka komponenta obično ima svoju oznaku serije. Ako sačuvate oznake svih komponenti, kasnije se može proveriti svaka.
 
 ## Kako se čita rok
 

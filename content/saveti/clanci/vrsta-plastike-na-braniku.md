@@ -91,24 +91,25 @@ razlogPrioriteta: Dopunjuje osnovni vodič teme konkretnim pitanjem; raspoređen
 status:
   istrazivanje: zavrseno
   pisanje: napisano
-  tehnickaProvera: nije-provereno
-  jezickaProvera: nije-provereno
+  tehnickaProvera: provereno
+  jezickaProvera: provereno
 strucnaPotvrda:
   potrebna: false
   status: nije-potrebno
+napomenaProvere: "urednička provera (AI-asistirana) 2026-10-08: Odluka 2003/138/EZ (EUR-Lex PDF, Prilog: plastika > 100 g, ISO 1043-1, 1043-2, 11469, zagrade umesto < >, primena od 1. 7. 2003), baslac Plastic Repair System VOC 10/2024, Chart 1 03/2024 (proveren prikaz tabele), 21-20 06/2023, R-M PM 2P10 i A 2P40 07/2026, Carsystem Plastic Primer V03 i HpP Primer V04 otvoreni i podaci se poklapaju. Ispravljeno: odredba Odluke preformulisana (nomenklatura, ne samo skraćeni nazivi; dodat datum primene), uklonjen neprovereni opis mesta oznake i primer >PP-EPDM< kao doslovni otisak, napomena o delovima bez oznake označena kao urednička procena, baslac tabela opisana kao tabela za kit i punioce."
 poslednjaProvera: 2026-10-08
 ponovniPregled: 2027-04-08
 ---
-Vrsta plastike se najpouzdanije prepoznaje po utisnutoj oznaci na unutrašnjoj strani dela, na primer >PP-EPDM< ili >PUR<. Za plastične delove vozila teže od 100 grama EU propisuje oznake prema ISO standardima za skraćene nazive plastike[^eu-odluka-2003-138]. Kada pročitate oznaku, uporedite je sa spiskom podloga u tehničkom listu sredstva za čišćenje i prajmera koji nameravate da koristite. Ako oznake nema, vrsta plastike se ne pogađa: pitajte dobavljača dela ili proizvođača vozila.
+Vrsta plastike se najpouzdanije prepoznaje po utisnutoj oznaci na unutrašnjoj strani dela, na primer >PUR< ili oznaci u kojoj se javljaju PP i EPDM. Za plastične delove vozila teže od 100 grama EU propisuje označavanje prema ISO standardima za oznake plastike[^eu-odluka-2003-138]. Kada pročitate oznaku, uporedite je sa spiskom podloga u tehničkom listu sredstva za čišćenje i prajmera koji nameravate da koristite. Ako oznake nema, vrsta plastike se ne pogađa: pitajte dobavljača dela ili proizvođača vozila.
 
 ## Gde se oznaka nalazi i kako izgleda
 
-Branik se obično skida ili se gleda sa unutrašnje strane, uz ivicu ili blizu nosača. Oznaka je utisnuta u materijal, obično između znakova > i <, ponekad u zagradama. Odluka Komisije 2003/138/EZ propisuje da se za plastične komponente vozila koriste skraćeni nazivi iz standarda ISO 1043-1, ISO 1043-2 i ISO 11469, i dozvoljava da se znaci „<“ i „>“ zamene zagradama[^eu-odluka-2003-138].
+Oznaka se traži na unutrašnjoj strani dela, pa se branik po potrebi skida; tačno mesto zavisi od dela i proizvođača. Oznaka je utisnuta u materijal, obično između znakova > i <, ponekad u zagradama. Odluka Komisije 2003/138/EZ propisuje da se za označavanje plastičnih komponenti vozila koristi nomenklatura standarda ISO 1043-1, ISO 1043-2 i ISO 11469, dozvoljava da se znaci „<“ i „>“ zamene zagradama i primenjuje se od 1. jula 2003[^eu-odluka-2003-138].
 
 Iz toga proizlaze dve praktične stvari:
 
 - među navedenim standardima je i deo o punilima i ojačanjima (ISO 1043-2), pa oznaka nije uvek samo dva ili tri slova;
-- delovi starijih vozila ili delovi koji nisu originalni mogu biti bez oznake.
+- Odluka se primenjuje od 1. jula 2003. i obavezuje države članice EU, pa delovi starijih vozila, vozila sa drugih tržišta ili delovi koji nisu originalni mogu biti bez oznake; ovo je urednička procena.
 
 Ovo je urednička napomena, a ne pravilo iz propisa: oznaka pokazuje materijal dela, ali ne govori da li je deo već prajmerisan ili ranije lakiran.
 
@@ -125,7 +126,7 @@ baslac u uputstvu za lakiranje plastičnih delova navodi plastike koje se korist
 | PE | polietilen | podblatnici |
 | BMC | masa za presovanje (bulk moulding compound) | spojleri |
 
-U tehničkim listovima R-M i baslac sreću se i oznake Pur-RIM, GRP-SMC (u baslac tabeli GFK/SMC), PC-PBTP, PA (poliamid) i tvrdi PVC. R-M ih za PLASTIC Prim-R navodi kao podloge: Pur-RIM, PP-EPDM, ABS, GRP-SMC, PC-PBTP, PA, PPO i tvrdi PVC[^rm-pm2p10-tds]. Ista grupa oznaka stoji i u baslac tabeli podloga za punioce[^baslac-undercoats-chart].
+U tehničkim listovima R-M i baslac sreću se i oznake Pur-RIM, GRP-SMC (u baslac tabeli GFK/SMC), PC-PBTP, PA (poliamid) i tvrdi PVC. R-M ih za PLASTIC Prim-R navodi kao podloge: Pur-RIM, PP-EPDM, ABS, GRP-SMC, PC-PBTP, PA, PPO i tvrdi PVC[^rm-pm2p10-tds]. Ista grupa oznaka stoji i u baslac tabeli podloga za kit i punioce[^baslac-undercoats-chart].
 
 ## Koje plastike se teško lakiraju
 

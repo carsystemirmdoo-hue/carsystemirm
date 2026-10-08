@@ -5,10 +5,10 @@ Generiše `npm run saveti:build`. Ne menjati ručno.
 | Pokazatelj | Broj |
 | --- | ---: |
 | Teme u inventaru | 224 |
-| Napisano | 98 |
-| Tehnička provera prošla | 46 |
-| Jezička provera prošla | 51 |
-| Čeka stručnu potvrdu | 13 |
+| Napisano | 134 |
+| Tehnička provera prošla | 56 |
+| Jezička provera prošla | 64 |
+| Čeka stručnu potvrdu | 22 |
 | Odobreno za objavu (imenovana osoba) | 0 |
 | Od toga novosti | 9 |
 
@@ -16,6 +16,6 @@ Generiše `npm run saveti:build`. Ne menjati ručno.
 
 Nema.
 
-## Upozorenja (1)
+## Upozorenja (0)
 
-- content/saveti/clanci/direktni-sjaj-jednoslojne-boje.md: jezik (dodatnoPitanje): „najčešće“ (tvrdnja o učestalosti)
+Nema.

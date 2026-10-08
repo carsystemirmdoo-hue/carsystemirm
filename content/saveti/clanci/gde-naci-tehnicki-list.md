@@ -53,7 +53,7 @@ izvori:
     url: https://www.rmpaint.com/en-int/msds
     pristupljeno: 2026-10-08
     tip: sajt-proizvodjaca
-    napomena: "Pretraga po zemlji, jeziku i šifri ili nazivu proizvoda; Srbija i srpski jezik nisu bili u ponuđenim listama na dan pristupa."
+    napomena: "Pretraga po zemlji, jeziku i šifri ili nazivu proizvoda, uz preporuku da se za najpotpunije dokumente kontaktira lokalni predstavnik; adresa preusmerava na /en-int/sds."
   - id: baslac-sds-primer
     naziv: "baslac, Safety Data Sheet baslac Ready Mix L30 CV AO30-02 1L Metal can (UK)"
     url: https://msds.baslac.com/files/50613677_MSDS_GB_EN.PDF
@@ -99,8 +99,9 @@ razlogPrioriteta: Dopunjuje osnovni vodič teme konkretnim pitanjem; raspoređen
 status:
   istrazivanje: zavrseno
   pisanje: napisano
-  tehnickaProvera: nije-provereno
-  jezickaProvera: nije-provereno
+  tehnickaProvera: provereno
+  jezickaProvera: provereno
+napomenaProvere: "urednička provera (AI-asistirana) 2026-10-08: otvoreni R-M informacija o proizvodu C 2A40 (linkovi na TDS i stranicu SDS) i TDS 07/2026, R-M stranica SDS (preusmerava na /en-int/sds), baslac SDS L30 CV (V 2.0, 16. 3. 2026, UK REACH), Norbin SDS N75-021 0,5 L (V 3.1, 2. 6. 2021, UN GHS; postoji i list za 2,5 L), Carsystem stranica Prep & Scuff (bez srpskog među jezicima), SDS C.A.R.FIT Perfekt Füller, Zakon o hemikalijama čl. 20 i 23 i Pravilnik 11/2024 čl. 5 na pravno-informacioni-sistem.rs; proverene oznake „Dokumentacija“ i strane /katalozi, /kontakt, /prodavnice u kodu sajta. Ispravljeno: neproverljiva tvrdnja da Srbija i srpski nisu u filterima R-M stranice zamenjena onim što stranica stvarno navodi, C.A.R.FIT jezik vezan za citirani dokument."
 strucnaPotvrda:
   potrebna: false
   status: nije-potrebno
@@ -121,11 +122,11 @@ Na stranici proizvoda, na primer [R-M C 2A40 AirTOP](/proizvodi/c-2a40-airtop), 
 
 Svaki proizvođač iz našeg programa objavljuje dokumente na svoj način:
 
-- **R-M.** Tehnički listovi su na portalu techinfo.rmpaint.com, a informacija o proizvodu za C 2A40 vodi na tehnički list i na stranicu za bezbednosne listove[^rm-c2a40-info]. Na toj stranici se bezbednosni list traži po zemlji, jeziku i šifri ili nazivu proizvoda. Na dan provere Srbija i srpski jezik nisu bili u ponuđenim listama, a stranica upućuje i na kontakt sa lokalnim predstavnikom[^rm-sds-stranica].
+- **R-M.** Tehnički listovi su na portalu techinfo.rmpaint.com, a informacija o proizvodu za C 2A40 vodi na tehnički list i na stranicu za bezbednosne listove[^rm-c2a40-info]. Na toj stranici se bezbednosni list traži po zemlji, jeziku i šifri ili nazivu proizvoda. Da li postoji list za Srbiju i na srpskom jeziku, proverite u filterima. Stranica i sama savetuje da se za najpotpunije i ažurne bezbednosne dokumente obratite lokalnom predstavniku[^rm-sds-stranica].
 - **baslac.** Tehnički listovi su na techinfo.baslac.com, a bezbednosni listovi na msds.baslac.com. Tamo je svaki list posebna datoteka za broj artikla, zemlju i jezik, na primer list za Veliku Britaniju na engleskom za limenku od 1 L[^baslac-sds-primer].
 - **Norbin.** Na sajtu norbin-paint.com tehnički i bezbednosni listovi su u posebnim fasciklama. Bezbednosni list je poseban za svako pakovanje: za učvršćivač N75-021 postoje odvojeni listovi za 0,5 L i za 2,5 L[^norbin-n75-021-sds].
 - **Carsystem.** Stranica proizvoda na carsystem.org ima „Technical Data Sheet“ i „Safety Data Sheet“ sa izborom jezika. Kod proizvoda Prep & Scuff srpski nije bio među ponuđenim jezicima[^carsystem-prep-scuff-stranica].
-- **C.A.R.FIT.** Tehnički i bezbednosni listovi objavljeni su kao PDF na carfitrepair.com, na nemačkom ili engleskom[^carfit-perfekt-fueller-sds].
+- **C.A.R.FIT.** Tehnički i bezbednosni listovi objavljeni su kao PDF na carfitrepair.com. Bezbednosni list za Perfekt Füller 4:1 grau, na primer, je na nemačkom[^carfit-perfekt-fueller-sds].
 
 ## Korak 4: zatražite od prodavca
 

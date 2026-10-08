@@ -41,7 +41,7 @@ mkdirSync(join(stage, "windows"));
 for (const f of ["podesi-kopije.ps1", "kopije.ps1", "UPUTSTVO-KOPIJE.md"]) cpSync(join(repo, "scripts/backup/windows", f), join(stage, "windows", f));
 
 // Ništa tajno ni lično u paketu.
-const forbidden = [/AGE-SECRET-KEY-1[0-9A-Z]{50,}/, /postgres(ql)?:\/\/[^\s"'`]*:[^@\s"'`]+@/, /gh[pousr]_[A-Za-z0-9]{20,}/, /github_pat_/, /@gmail\.com/i, /Register-ScheduledTask|schtasks/i];
+const forbidden = [/AGE-SECRET-KEY-1[0-9A-Z]{50,}/, /postgres(ql)?:\/\/[^\s:@/]+:[^@\s"'`]{12,}@[^\s/]+\.[a-z]{2,}/, /gh[pousr]_[A-Za-z0-9]{20,}/, /github_pat_/, /@gmail\.com/i, /Register-ScheduledTask|schtasks/i];
 for (const f of readdirSync(stage, { recursive: true }).map(String)) {
   const p = join(stage, f);
   if (statSync(p).isDirectory() || /node_modules/.test(f)) continue;

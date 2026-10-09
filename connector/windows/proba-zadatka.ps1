@@ -7,11 +7,16 @@
     1. registruje ZASEBAN zadatak \Carsystem\CarsystemProba pod ovim nalogom,
        istim podesavanjima kao pravi zadatak (Interactive, RunLevel Limited,
        MultipleInstances IgnoreNew), BEZ okidaca - ne pokrece se sam;
-    2. akcija: node.exe (apsolutna putanja) connector.mjs --packaged --help;
-       --help ne cita kljuc ni konfiguraciju, ne otvara mrezu i ne dira fakture;
+    2. akcija kao pravi zadatak: -Prikaz Skriveno (podrazumevano) = wscript.exe +
+       windows\pokreni-skriveno.js + node.exe, bez konzolnog prozora; -Prikaz Prozor =
+       node.exe direktno. Pokrece connector.mjs --packaged --help: ne cita kljuc ni
+       konfiguraciju, ne otvara mrezu i ne dira fakture;
     3. pokrece ga (Task Scheduler COM, rezervno schtasks /Run) i ceka kraj;
     4. trazi LastTaskResult = 0 i LastRunTime posle pokretanja;
-    5. UVEK uklanja zadatak (i kada nesto pukne) i proverava da ga vise nema.
+    5. DRUGI prolaz: node.exe namerno zavrsava sa 7 - LastTaskResult mora biti 7
+       (dokaz da se izlazni kod prenosi kroz pokretac, ne gubi);
+    6. UVEK uklanja zadatak (i kada nesto pukne) i proverava da ga vise nema.
+  Za vreme probe NE sme da se pojavi konzolni prozor (Skriveno) - to proverava covek.
 
   NE dira: pravi zadatak CarsystemConnector, config.json, kljuc, red, fakture.
   Izlaz: 0 = PROBA PROSLA, 1 = proba nije prosla, 2 = preduslov nije ispunjen.
@@ -29,7 +34,8 @@ param(
   [int]$CekanjeSekundi = 90,
   [switch]$SamoUkloni,
   # Jedini nalog je administrator: pokrenuti u administratorskoj sesiji TOG naloga (docs/b2b/49).
-  [switch]$JedanNalogSaUAC
+  [switch]$JedanNalogSaUAC,
+  [ValidateSet('Skriveno', 'Prozor')] [string]$Prikaz = 'Skriveno'
 )
 
 $ErrorActionPreference = 'Stop'
@@ -82,70 +88,89 @@ try {
 } catch { Korak 'Stanje pravog zadatka CarsystemConnector nije procitano; proba ga ne dira.' }
 
 # ----------------------------------------------------- registracija i pokretanje
-$uspeh = $false
-try {
-  Korak 'Registrujem probni zadatak (bez okidaca)...'
-  $action = New-ScheduledTaskAction -Execute $nodeInfo.Path `
-    -Argument "--no-warnings `"$entry`" --packaged --help" `
-    -WorkingDirectory $PackagePath
-  $settings = New-ScheduledTaskSettingsSet `
-    -DontStopIfGoingOnBatteries `
-    -AllowStartIfOnBatteries `
-    -MultipleInstances IgnoreNew `
-    -ExecutionTimeLimit (New-TimeSpan -Minutes 5)
-  $principal = New-ScheduledTaskPrincipal -UserId $nalog -LogonType Interactive -RunLevel Limited
-  Register-ScheduledTask -TaskName $TaskName -TaskPath $TaskPath `
-    -Action $action -Settings $settings -Principal $principal | Out-Null
-  $t = Get-Proba
-  if (-not $t.Postoji) { throw 'Zadatak nije vidljiv posle registracije (COM + schtasks).' }
-  if ($t.Izvor -ne 'com') { throw 'Zadatak postoji (schtasks), ali COM ne cita njegovu definiciju - proba ne moze da potvrdi akciju.' }
-  if ($t.RunLevel -ne 'Limited') { throw "RunLevel je $($t.RunLevel), ocekivano Limited." }
-  if ($t.Execute -ne $nodeInfo.Path) { throw 'Akcija ne pokrece ocekivani node.exe.' }
-  if ($t.Arguments -notmatch '--packaged --help$') { throw 'Argumenti akcije nisu --packaged --help.' }
-  if ($t.BrojOkidaca -ne 0) { throw 'Probni zadatak ima okidac.' }
-  Ok "Registrovan i potvrdjen (COM): RunLevel Limited, akcija = node.exe --help, bez okidaca, nalog $($t.UserId)."
+$wscript = Join-Path $env:SystemRoot 'System32\wscript.exe'
+$pokretac = Join-Path $PackagePath 'windows\pokreni-skriveno.js'
+if ($Prikaz -eq 'Skriveno') {
+  foreach ($f in @($wscript, $pokretac)) { if (-not (Test-Path -LiteralPath $f -PathType Leaf)) { Los "Nema $f (Skriveno trazi 0.3.13+)."; exit 2 } }
+}
 
-  $pocetak = Get-Date
-  Start-Sleep -Seconds 1
-  Korak 'Pokrecem (Task Scheduler COM, rezervno schtasks /Run)...'
-  $kanal = Start-ZadatakCs -TaskPath $TaskPath -TaskName $TaskName
-  Korak "Pokrenut ($kanal)."
+<# Jedan prolaz: registracija (bez okidaca), pokretanje, cekanje, poredjenje izlaza, uklanjanje. #>
+function Proba-Prolaz([string]$nodeArgumenti, [int64]$ocekivano, [string]$opis) {
+  $ok = $false
+  try {
+    Korak "[$opis] Registrujem probni zadatak (prikaz $Prikaz, bez okidaca)..."
+    if ($Prikaz -eq 'Skriveno') {
+      $izvrsni = $wscript
+      $argumenti = "//B //NoLogo `"$pokretac`" `"$($nodeInfo.Path)`" $nodeArgumenti"
+    } else {
+      $izvrsni = $nodeInfo.Path
+      $argumenti = $nodeArgumenti
+    }
+    $akcijaProbe = New-ScheduledTaskAction -Execute $izvrsni -Argument $argumenti -WorkingDirectory $PackagePath
+    $settings = New-ScheduledTaskSettingsSet `
+      -DontStopIfGoingOnBatteries `
+      -AllowStartIfOnBatteries `
+      -MultipleInstances IgnoreNew `
+      -ExecutionTimeLimit (New-TimeSpan -Minutes 5)
+    $principal = New-ScheduledTaskPrincipal -UserId $nalog -LogonType Interactive -RunLevel Limited
+    Register-ScheduledTask -TaskName $TaskName -TaskPath $TaskPath `
+      -Action $akcijaProbe -Settings $settings -Principal $principal | Out-Null
+    $t = Get-Proba
+    if (-not $t.Postoji) { throw 'Zadatak nije vidljiv posle registracije (COM + schtasks).' }
+    if ($t.Izvor -ne 'com') { throw 'Zadatak postoji (schtasks), ali COM ne cita njegovu definiciju - proba ne moze da potvrdi akciju.' }
+    if ($t.RunLevel -ne 'Limited') { throw "RunLevel je $($t.RunLevel), ocekivano Limited." }
+    if ($t.Execute -ne $izvrsni) { throw "Akcija ne pokrece ocekivani $izvrsni." }
+    if ($t.BrojOkidaca -ne 0) { throw 'Probni zadatak ima okidac.' }
+    Ok "[$opis] Registrovan i potvrdjen (COM): RunLevel Limited, akcija $izvrsni, bez okidaca, nalog $($t.UserId)."
 
-  $rok = (Get-Date).AddSeconds($CekanjeSekundi)
-  $info = $null
-  do {
-    Start-Sleep -Seconds 2
-    $info = Get-Proba
-    $stanje = $info.Stanje
-  } while (($stanje -eq 'Running' -or $null -eq $info.LastRunTime -or $info.LastRunTime -lt $pocetak) -and (Get-Date) -lt $rok)
+    $pocetak = Get-Date
+    Start-Sleep -Seconds 1
+    Korak "[$opis] Pokrecem (Task Scheduler COM, rezervno schtasks /Run)..."
+    $kanal = Start-ZadatakCs -TaskPath $TaskPath -TaskName $TaskName
+    Korak "[$opis] Pokrenut ($kanal)."
 
-  $rez = [int64]$info.LastTaskResult
-  $hex = '0x{0:X8}' -f ([int64]$rez -band [int64]4294967295)
-  $kada = if ($info.LastRunTime) { $info.LastRunTime.ToString('HH:mm:ss') } else { 'nikad' }
-  Korak "Stanje $stanje, poslednje pokretanje $kada, rezultat $rez ($hex)."
-  if ($null -eq $info.LastRunTime -or $info.LastRunTime -lt $pocetak) {
-    Los "Zadatak se nije pokrenuo za $CekanjeSekundi s (rezultat $hex). 0x00041303 = jos nije pokrenut."
-  } elseif ($stanje -eq 'Running') {
-    Los "Zadatak i dalje radi posle $CekanjeSekundi s."
-  } elseif ($rez -ne 0) {
-    Los "node.exe je zavrsio sa rezultatom $rez ($hex). Proveriti istoriju detekcija antivirusa za vreme iznad."
-  } else {
-    Ok 'Task Scheduler je pokrenuo node.exe i dobio izlaz 0.'
-    $uspeh = $true
+    $rok = (Get-Date).AddSeconds($CekanjeSekundi)
+    $info = $null
+    do {
+      Start-Sleep -Seconds 2
+      $info = Get-Proba
+      $stanje = $info.Stanje
+    } while (($stanje -eq 'Running' -or $null -eq $info.LastRunTime -or $info.LastRunTime -lt $pocetak) -and (Get-Date) -lt $rok)
+
+    $rez = [int64]$info.LastTaskResult
+    $hex = '0x{0:X8}' -f ([int64]$rez -band [int64]4294967295)
+    $kada = if ($info.LastRunTime) { $info.LastRunTime.ToString('HH:mm:ss') } else { 'nikad' }
+    Korak "[$opis] Stanje $stanje, poslednje pokretanje $kada, rezultat $rez ($hex)."
+    if ($null -eq $info.LastRunTime -or $info.LastRunTime -lt $pocetak) {
+      Los "[$opis] Zadatak se nije pokrenuo za $CekanjeSekundi s (rezultat $hex). 0x00041303 = jos nije pokrenut."
+    } elseif ($stanje -eq 'Running') {
+      Los "[$opis] Zadatak i dalje radi posle $CekanjeSekundi s."
+    } elseif ($rez -ne $ocekivano) {
+      $napomena = if ($rez -eq 87 -or $rez -eq 86) { ' (kod pokretaca: 87 = neispravni argumenti, 86 = node.exe nije pokrenut)' } else { ' Proveriti istoriju detekcija antivirusa za vreme iznad.' }
+      Los "[$opis] Rezultat $rez ($hex), ocekivano $ocekivano.$napomena"
+    } else {
+      Ok "[$opis] Task Scheduler je dobio tacan izlazni kod node.exe-a: $rez."
+      $ok = $true
+    }
   }
+  catch {
+    Los "[$opis] Proba je prekinuta: $($_.Exception.Message)"
+  }
+  finally {
+    Korak "[$opis] Uklanjam probni zadatak..."
+    if (-not (Ukloni-Probu)) { $ok = $false }
+  }
+  return $ok
 }
-catch {
-  Los "Proba je prekinuta: $($_.Exception.Message)"
-}
-finally {
-  Korak 'Uklanjam probni zadatak...'
-  $uklonjen = Ukloni-Probu
-  if (-not $uklonjen) { $uspeh = $false }
+
+$uspeh = Proba-Prolaz "--no-warnings `"$entry`" --packaged --help" 0 '1/2 izlaz 0'
+if ($uspeh) {
+  $uspeh = Proba-Prolaz '--no-warnings -e process.exit(7)' 7 '2/2 izlaz 7'
 }
 
 Write-Host ''
 if ($uspeh) {
-  Write-Host "[$(Vreme)] PROBA PROSLA: registracija, pokretanje kroz Task Scheduler i uklanjanje. Proverite istoriju detekcija antivirusa za ovaj period." -ForegroundColor Green
+  Write-Host "[$(Vreme)] PROBA PROSLA (prikaz $Prikaz): registracija, pokretanje kroz Task Scheduler, izlazni kod 0 i 7 preneti tacno, uklanjanje. Proverite da se konzolni prozor NIJE pojavio i istoriju detekcija antivirusa za ovaj period." -ForegroundColor Green
   exit 0
 }
 Write-Host "[$(Vreme)] PROBA NIJE PROSLA - vidi [FAIL] iznad." -ForegroundColor Red

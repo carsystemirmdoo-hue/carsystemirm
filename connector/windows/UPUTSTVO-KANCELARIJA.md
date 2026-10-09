@@ -171,6 +171,32 @@ Ako je fajl još na disku, njegov SHA-256 mora odgovarati zabeleženom dokumentu
 Upisuje se vreme potvrde; ništa se ne šalje, a dokument i istorija ostaju u redu.
 Posle toga `rucno` više ne prikazuje dokument među stavkama, nego u polju `zatvoreni`.
 
+## 3d. Zadatak bez konzolnog prozora (od 0.3.13)
+
+Od 0.3.13 zakazani zadatak pokreće konektor **bez konzolnog prozora**: akcija je
+`C:\Windows\System32\wscript.exe` sa `windows\pokreni-skriveno.js` iz instalacionog
+foldera, koji pokreće isti `node.exe` sa istim argumentima i vraća njegov izlazni kod.
+Nalog, „samo dok je prijavljen“ (Interactive), RunLevel Limited, ključ (DPAPI), red i
+dnevnik ostaju isti.
+
+Posle ažuriranja na 0.3.13 (odeljak 1), u administratorskom PowerShell-u istog naloga,
+**između dva ciklusa** (npr. :10–:50):
+
+1. Proba (pravi zadatak se ne dira; za vreme probe NE sme da se pojavi prozor):
+   ```powershell
+   & 'C:\Program Files\CarsystemConnector\windows\proba-zadatka.ps1' -JedanNalogSaUAC
+   ```
+   Očekivano: `[1/2 izlaz 0] … izlazni kod … 0`, `[2/2 izlaz 7] … 7`, pa `PROBA PROSLA (prikaz Skriveno)`.
+2. Ponovna registracija pravog zadatka sa skrivenim prikazom:
+   ```powershell
+   & 'C:\Program Files\CarsystemConnector\windows\task.ps1' -Action install -Mode Production -Apply -JedanNalogSaUAC
+   ```
+   Očekivano: `Registrovano i potvrdjeno (COM): prikaz Skriveno, akcija C:\Windows\System32\wscript.exe, RunLevel Limited`.
+3. Prvi sledeći ciklus (HH:02): u portalu (Sinhronizacija) javljanje i obrađen ciklus kao i ranije.
+
+Povratak na vidljiv prozor: isti `task.ps1` sa `-Prikaz Prozor`. Ako antivirus prijavi
+`wscript.exe`/`pokreni-skriveno.js`, ne dodavati izuzetak — vratiti `-Prikaz Prozor` i javiti.
+
 ## 4. Povratak na prethodnu verziju — kao Administrator
 
 ```powershell

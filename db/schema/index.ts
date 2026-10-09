@@ -17,3 +17,4 @@ export * from "./partners";
 export * from "./ordering";
 export * from "./remember";
 export * from "./backup";
+export * from "./base-prices";

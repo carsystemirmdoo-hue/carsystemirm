@@ -65,6 +65,13 @@ GRANT SELECT, INSERT, UPDATE, DELETE ON ALL TABLES IN SCHEMA public TO :runtime_
 REVOKE UPDATE, DELETE, TRUNCATE ON audit_log, customer_contact_consents, sync_command_events, sync_device_cycles FROM :runtime_role;
 GRANT SELECT, INSERT ON audit_log, customer_contact_consents, sync_command_events, sync_device_cycles TO :runtime_role;
 
+--    Osnovne cene (0038): istorija cena i pročitane stavke cenovnika se samo
+--    dodaju. Otpremanje cenovnika se ne briše; jedina izmena je jednokratna
+--    odluka (primena/odbacivanje), koju okidač iz 0038 sužava.
+REVOKE UPDATE, DELETE, TRUNCATE ON article_base_prices, price_list_import_rows FROM :runtime_role;
+GRANT SELECT, INSERT ON article_base_prices, price_list_import_rows TO :runtime_role;
+REVOKE DELETE, TRUNCATE ON price_list_imports FROM :runtime_role;
+
 --    Potvrda kontakta se ne briše; jedina dozvoljena izmena je opoziv
 --    (`revoked_at`, `revoked_by`, `revocation_reason`), koju okidač iz 0028
 --    sužava na te kolone.

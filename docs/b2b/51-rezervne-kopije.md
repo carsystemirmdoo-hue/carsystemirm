@@ -5,6 +5,11 @@ potpun prolaz, preuzimanje i dešifrovanje provereni). Kopija van GitHub-a i PDF
 kancelarijskog računara posle konektora 0.3.12 i migracije 0037. Ovaj dokument ne sadrži adrese,
 lozinke ni ključeve.
 
+Kancelarijski računar čuva kopije baze **lokalno**, uz ograničeno čuvanje (KANC-01: 7 dnevnih, 4 nedeljne,
+3 mesečne). `offsite_stored` znači „sačuvano na firminom računaru (van GitHub-a)“ — **ne** kopija u oblaku:
+Google Drive se otprema ručno i portal ga ne prati. PDF kopija je opciona i trenutno isključena (dokumenti su
+u BizniSoftu; nezavisna kopija BizniSoft baze još nije potvrđena).
+
 ## Tri odvojene tvrdnje (portal → Sinhronizacija; upozorenje na Početnoj)
 
 | Zapis (`backup_runs.kind`) | Šta dokazuje | Upozorenje |

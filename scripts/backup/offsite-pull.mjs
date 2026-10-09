@@ -5,6 +5,8 @@
  *   GH_BACKUP_TOKEN=… BACKUP_REPO=vlasnik/repo node scripts/backup/offsite-pull.mjs --dest <fascikla> [--izvestaj <izvestaj.json>]
  *   node scripts/backup/offsite-pull.mjs --from-dir <raspakovan artefakt> --dest <fascikla>   (proba, bez mreže)
  *
+ *   (opciono: --dnevnih 7 --nedeljnih 4 --mesecnih 3 — ograničeno čuvanje)
+ *
  * Koraci: poslednji artefakt `carsystem-db-*` → raspakivanje u privremenu
  * fasciklu → provera SHA-256 svakog `.age` fajla prema `status.json` →
  * premeštanje u `<dest>/<datum>/` → politika čuvanja (14 dnevnih, 8 nedeljnih,
@@ -28,7 +30,7 @@ import { installAbortHandlers, isAborting, onAbort } from "../../lib/backup/abor
 import { checkDeviceBackupReport } from "../../lib/backup/deviceReport.mjs";
 import { publicStatusProblems } from "../../lib/backup/publicStatus.mjs";
 import { makeLogger } from "../../lib/backup/redact.mjs";
-import { planRetention } from "../../lib/backup/retention.mjs";
+import { DEFAULT_RETENTION, planRetention } from "../../lib/backup/retention.mjs";
 
 const log = makeLogger(undefined, () => [process.env.GH_BACKUP_TOKEN].filter(Boolean));
 
@@ -76,8 +78,23 @@ async function downloadLatest(work) {
   return { dir: work, artifact: art.name };
 }
 
+/**
+ * Ograničeno čuvanje (`--dnevnih`, `--nedeljnih`, `--mesecnih`, svako 1–60).
+ * Bez njih važi DEFAULT_RETENTION. Najnovija kopija se nikad ne briše.
+ */
+export function retentionPolicy(o = {}) {
+  const n = (k, d) => {
+    if (o[k] === undefined) return d;
+    const v = Number(o[k]);
+    if (!Number.isInteger(v) || v < 1 || v > 60) throw new Error(`--${k} mora biti ceo broj 1–60.`);
+    return v;
+  };
+  return { daily: n("dnevnih", DEFAULT_RETENTION.daily), weekly: n("nedeljnih", DEFAULT_RETENTION.weekly), monthly: n("mesecnih", DEFAULT_RETENTION.monthly) };
+}
+
 export async function pull(o) {
   if (!o.dest) throw new Error("--dest je obavezan.");
+  const policy = retentionPolicy(o); // neispravna granica se odbija PRE preuzimanja
   const dest = resolve(o.dest);
   mkdirSync(dest, { recursive: true });
   // Nedovršene fascikle prethodnog prekida se brišu (kopija u njima nije proverena do kraja).
@@ -119,7 +136,7 @@ export async function pull(o) {
     const copies = readdirSync(dest)
       .filter((d) => /^\d{8}T\d{6}Z$/.test(d))
       .map((d) => ({ id: d, createdAt: `${d.slice(0, 4)}-${d.slice(4, 6)}-${d.slice(6, 8)}T${d.slice(9, 11)}:${d.slice(11, 13)}:${d.slice(13, 15)}Z` }));
-    const plan = planRetention(copies);
+    const plan = planRetention(copies, policy);
     for (const id of plan.remove) rmSync(join(dest, id), { recursive: true, force: true });
     log(`čuva se ${plan.keep.length} kopija, uklonjeno po politici ${plan.remove.length}`);
 

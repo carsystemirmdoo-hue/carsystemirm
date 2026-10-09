@@ -73,7 +73,18 @@ param(
     pokrece ovu skriptu i (2) je UAC ukljucen i ne podize prava tiho. Zadatak i
     dalje radi sa RunLevel Limited (ogranicen token, bez povisenih prava).
   #>
-  [switch]$JedanNalogSaUAC
+  [switch]$JedanNalogSaUAC,
+  <#
+    Prikaz pri pokretanju zadatka (0.3.13).
+      Skriveno (podrazumevano): akcija je %SystemRoot%\System32\wscript.exe sa
+        windows\pokreni-skriveno.js iz INSTALACIONOG foldera; node.exe radi bez
+        konzolnog prozora, a izlazni kod node.exe-a je izlazni kod zadatka.
+      Prozor: kao do 0.3.12 - akcija je node.exe direktno (vidljiv prozor).
+    Nalog, LogonType Interactive, RunLevel Limited, radni direktorijum i
+    argumenti konektora su ISTI u oba slucaja.
+  #>
+  [ValidateSet('Skriveno', 'Prozor')]
+  [string]$Prikaz = 'Skriveno'
 )
 
 $ErrorActionPreference = 'Stop'
@@ -365,6 +376,19 @@ switch ($Action) {
       u folderu stanja koji RunAsAccount mora moći da piše. `Smoke` ostaje na
       podrazumevanoj putanji (folder stanja) — kućni tok na to i dalje računa.
     #>
+    <#
+      Skriveno: wscript.exe (Windows program bez konzole) iz System32, apsolutna
+      putanja, i pokretac iz INSTALACIONOG foldera (pisanje samo Administrators/
+      SYSTEM). Folder stanja i dalje nema nijedan izvrsni fajl.
+    #>
+    $wscript = Join-Path $env:SystemRoot 'System32\wscript.exe'
+    $pokretac = Join-Path $resolvedPackagePath 'windows\pokreni-skriveno.js'
+    if ($Prikaz -eq 'Skriveno') {
+      foreach ($f in @($wscript, $pokretac)) {
+        if (-not (Test-Path -LiteralPath $f -PathType Leaf)) { throw "Za -Prikaz Skriveno nedostaje $f (ili pokrenite sa -Prikaz Prozor)." }
+        if ((Get-Item -LiteralPath $f -Force).Attributes -band [System.IO.FileAttributes]::ReparsePoint) { throw "$f je symlink/reparse-point - odbijeno." }
+      }
+    }
     $nodePathZaPrikaz = if ($nodeInfo) { $nodeInfo.Path } else { '(nije razrešen — videti poruku iznad)' }
     $argumentZaPrikaz = if ($Mode -eq 'Production') {
       "--no-warnings `"$resolvedPackagePath\connector\bin\connector.mjs`" --packaged --config `"$productionConfigPath`" auto"
@@ -372,7 +396,12 @@ switch ($Action) {
     else {
       "--no-warnings `"$resolvedPackagePath\connector\bin\connector.mjs`" --packaged auto"
     }
-    Write-Plan "Registrujem '$TaskPath$TaskName' [$Mode]: izvršni $nodePathZaPrikaz, argumenti $argumentZaPrikaz, nalog $RunAsAccount, radni direktorijum $resolvedPackagePath."
+    $izvrsniZadatka = if ($Prikaz -eq 'Skriveno') { $wscript } else { $nodePathZaPrikaz }
+    $argumentiZadatka = if ($Prikaz -eq 'Skriveno') {
+      "//B //NoLogo `"$pokretac`" `"$nodePathZaPrikaz`" $argumentZaPrikaz"
+    }
+    else { $argumentZaPrikaz }
+    Write-Plan "Registrujem '$TaskPath$TaskName' [$Mode, prikaz $Prikaz]: izvršni $izvrsniZadatka, argumenti $argumentiZadatka, nalog $RunAsAccount, radni direktorijum $resolvedPackagePath."
     if ($Apply) {
       <#
         NE `$action`: PowerShell ne razlikuje velika i mala slova, pa bi to bio
@@ -380,9 +409,16 @@ switch ($Action) {
         "MSFT_TaskExecAction is not a valid value for the Action variable"
         (kancelarija 0.3.7, posle prvog stvarnog prolaza).
       #>
-      $akcijaZadatka = New-ScheduledTaskAction -Execute $nodeInfo.Path `
-        -Argument $argumentZaPrikaz `
-        -WorkingDirectory $resolvedPackagePath
+      $akcijaZadatka = if ($Prikaz -eq 'Skriveno') {
+        New-ScheduledTaskAction -Execute $wscript `
+          -Argument "//B //NoLogo `"$pokretac`" `"$($nodeInfo.Path)`" $argumentZaPrikaz" `
+          -WorkingDirectory $resolvedPackagePath
+      }
+      else {
+        New-ScheduledTaskAction -Execute $nodeInfo.Path `
+          -Argument $argumentZaPrikaz `
+          -WorkingDirectory $resolvedPackagePath
+      }
       Register-ScheduledTask -TaskName $TaskName -TaskPath $TaskPath `
         -Action $akcijaZadatka -Trigger $trigger -Settings $settings -Principal $principal -Force | Out-Null
       <#
@@ -392,9 +428,13 @@ switch ($Action) {
       $z = Get-ZadatakCs -TaskPath $TaskPath -TaskName $TaskName
       if (-not $z.Postoji) { throw "Registracija '$TaskPath$TaskName' nije potvrdjena: zadatak ne postoji posle Register-ScheduledTask." }
       if ($z.Izvor -eq 'com') {
-        if ($z.Execute -ne $nodeInfo.Path) { throw "Registrovan zadatak ne pokrece ocekivani node.exe." }
+        if ($Prikaz -eq 'Skriveno') {
+          if ($z.Execute -ne $wscript) { throw "Registrovan zadatak ne pokrece ocekivani wscript.exe." }
+          if (-not $z.Arguments.Contains("`"$pokretac`" `"$($nodeInfo.Path)`"")) { throw "Argumenti zadatka ne pokrecu ocekivani pokretac i node.exe." }
+        }
+        elseif ($z.Execute -ne $nodeInfo.Path) { throw "Registrovan zadatak ne pokrece ocekivani node.exe." }
         if ($z.RunLevel -ne 'Limited') { throw "Registrovan zadatak nema RunLevel Limited." }
-        Write-Host "Registrovano i potvrdjeno (COM): akcija node.exe, RunLevel Limited, nalog $($z.UserId)."
+        Write-Host "Registrovano i potvrdjeno (COM): prikaz $Prikaz, akcija $($z.Execute), RunLevel Limited, nalog $($z.UserId)."
       }
       else {
         Write-Warn "Registrovano; postojanje potvrdio schtasks.exe, detalji (akcija, RunLevel) nisu procitani kroz COM."

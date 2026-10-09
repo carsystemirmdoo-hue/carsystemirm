@@ -79,3 +79,10 @@ test("podešavanje: lokalna fascikla, PDF samo uz -SaPdf, ograničeno čuvanje 7
   assert.match(scripts.podesi, /\[ValidateRange\(1, 60\)\] \[int\] \$Mesecnih = 3/);
   assert.doesNotMatch(scripts.podesi, /Google Drive-u \(npr/);
 });
+
+test("ProveraGitHub: samo --samo-provera, token se briše iz okruženja i kad provera padne", () => {
+  const blok = scripts.kopije.slice(scripts.kopije.indexOf("if ($Akcija -eq 'ProveraGitHub')"), scripts.kopije.indexOf("$kod = 0"));
+  assert.match(blok, /'--samo-provera'\) \}/);
+  assert.match(blok, /finally \{ Remove-Item Env:\\GH_BACKUP_TOKEN, Env:\\BACKUP_REPO/);
+  assert.doesNotMatch(blok, /--dest|Potvrdi/);
+});

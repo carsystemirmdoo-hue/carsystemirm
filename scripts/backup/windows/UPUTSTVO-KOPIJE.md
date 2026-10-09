@@ -28,6 +28,12 @@ Lokalna fascikla: Enter prihvata `Documents\Carsystem kopije`. Token se unosi sk
 
 Provera bez mreže: `.\windows\kopije.ps1 -Akcija Provera`
 
+Provera tokena i repoa na GitHub-u (bez preuzimanja): `.\windows\kopije.ps1 -Akcija ProveraGitHub`
+- `[token_odbijen]` (401): token istekao, opozvan ili pogrešno unet → nov token, ponovo `podesi-kopije.ps1`.
+- `[nema_dozvole]` (403): u tokenu nedostaje Repository permissions → **Actions: Read-only**.
+- `[repo_nedostupan]` (404): token nije dat za `carsystem-backup` (Only select repositories) ili je napravljen drugim nalogom.
+- `[nema_artefakta]` / `[svi_istekli]`: pristup radi, ali kopije nema — proverava se noćni posao na GitHub-u.
+
 ## Prvi ručni prolaz
 ```powershell
 .\windows\kopije.ps1 -Akcija Preuzmi

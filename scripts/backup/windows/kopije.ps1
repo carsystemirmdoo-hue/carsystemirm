@@ -2,6 +2,7 @@
   Kopije na kancelarijskom racunaru (isti koraci koje radi zakazani zadatak).
 
     -Akcija Provera   : sta je podeseno, bez mreze i bez upisa
+    -Akcija ProveraGitHub : token i repo na GitHub-u (bez preuzimanja i bez upisa)
     -Akcija Preuzmi   : poslednja sifrovana kopija baze sa GitHub-a -> provera otiska -> druga kopija -> potpisana potvrda
     -Akcija Pdf       : dnevna inkrementalna sifrovana kopija PDF-ova -> druga kopija -> potpisana potvrda
     -Akcija Sve       : Preuzmi, pa Pdf ako je PDF kopija podesena
@@ -15,7 +16,7 @@
   Token za preuzimanje se desifruje (DPAPI) samo u okruzenje podprocesa; ne ispisuje se.
 #>
 [CmdletBinding()]
-param([Parameter(Mandatory)][ValidateSet('Provera', 'Preuzmi', 'Pdf', 'Sve')] [string] $Akcija)
+param([Parameter(Mandatory)][ValidateSet('Provera', 'ProveraGitHub', 'Preuzmi', 'Pdf', 'Sve')] [string] $Akcija)
 $ErrorActionPreference = 'Stop'
 $root = Join-Path $env:LOCALAPPDATA 'CarsystemKopije'
 $app = Join-Path (Split-Path -Parent $PSScriptRoot) 'app'
@@ -67,6 +68,16 @@ if ($Akcija -eq 'Provera') {
   Write-Host "Konektor:      $(Test-Path -LiteralPath $cfg.konektor) / config $(Test-Path -LiteralPath $cfg.konektorConfig)"
   Write-Host "DPAPI fajl:     $(Test-Path -LiteralPath (Join-Path $root 'tajne.dpapi.json'))"
   exit 0
+}
+
+if ($Akcija -eq 'ProveraGitHub') {
+  $tajne = Get-Content -LiteralPath (Join-Path $root 'tajne.dpapi.json') -Raw | ConvertFrom-Json
+  $env:GH_BACKUP_TOKEN = Otkljucaj $tajne.token
+  $env:BACKUP_REPO = $cfg.repo
+  try { $k = Node-U-Log @((Join-Path $app 'scripts\backup\offsite-pull.mjs'), '--samo-provera') }
+  finally { Remove-Item Env:\GH_BACKUP_TOKEN, Env:\BACKUP_REPO -ErrorAction SilentlyContinue }
+  Get-Content -LiteralPath $log -Tail 1
+  exit $k
 }
 
 $kod = 0

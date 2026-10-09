@@ -1,5 +1,5 @@
-import { generateKeyPairSync } from "node:crypto";
-import { access, copyFile, mkdir, readdir } from "node:fs/promises";
+import { createHash, generateKeyPairSync } from "node:crypto";
+import { access, copyFile, mkdir, readdir, readFile } from "node:fs/promises";
 import { basename, dirname, join } from "node:path";
 import { keyFingerprint, SIGNED_PATHS } from "../../lib/sync/device/signing.mjs";
 import { ucitajKonfiguraciju } from "./config.mjs";
@@ -38,7 +38,7 @@ import {
  * Jedna komanda „uradi sve“ bi značila da proba i slanje izgledaju isto.
  */
 
-const KOMANDE = ["doctor", "init", "export-key", "dry-run", "run-once", "auto", "poll-once", "watch", "status", "storna", "rucno", "preseli-adresu"];
+const KOMANDE = ["doctor", "init", "export-key", "dry-run", "run-once", "auto", "poll-once", "watch", "status", "storna", "rucno", "preseli-adresu", "potvrdi-rucno"];
 
 function ispisi(objekat) {
   process.stdout.write(`${JSON.stringify(objekat, null, 2)}\n`);
@@ -706,7 +706,7 @@ async function rucno(p) {
   const { store } = await otvori(p);
   try {
     const lista = store.zaRucnuProveru();
-    ispisi({ komanda: "rucno", broj: lista.length, storno: UPUTSTVO_STORNO, kasniIzvoz: UPUTSTVO_KASNI, stavke: lista });
+    ispisi({ komanda: "rucno", broj: lista.length, storno: UPUTSTVO_STORNO, kasniIzvoz: UPUTSTVO_KASNI, stavke: lista, zatvoreni: store.rucnePotvrde() });
     return 0;
   } finally {
     store.zatvori();
@@ -718,7 +718,7 @@ async function storna(p) {
   const { store } = await otvori(p);
   try {
     const lista = store.stornaZaRucniUpload();
-    ispisi({ komanda: "storna", broj: lista.length, uputstvo: UPUTSTVO_STORNO, storna: lista });
+    ispisi({ komanda: "storna", broj: lista.length, uputstvo: UPUTSTVO_STORNO, storna: lista, zatvoreni: store.rucnePotvrde() });
     return 0;
   } finally {
     store.zatvori();
@@ -835,6 +835,67 @@ export async function preseliAdresu(
   return 0;
 }
 
+/**
+ * Zatvaranje podsetnika za dokument koji je VEĆ ručno obrađen u portalu
+ * (storno otpremljen ručno, kasni izvoz proveren).
+ *
+ *   potvrdi-rucno --otisak <prvih 12+ znakova SHA-256> [--napomena "…"] [--potvrdi]
+ *
+ * Bez `--potvrdi` samo prikazuje koji podsetnik bi se zatvorio. Sa `--potvrdi`
+ * upisuje potvrdu (vreme, uneti otisak, da li je fajl proveren). Ako je fajl
+ * još na disku, njegov SHA-256 mora biti jednak otisku stavke. Ništa se ne
+ * šalje, stavka i istorija ostaju; podsetnik se samo više ne prikazuje.
+ */
+export async function potvrdiRucno(p, argv = [], now = new Date()) {
+  const vrednost = (ime) => {
+    const i = argv.indexOf(ime);
+    return i >= 0 && argv[i + 1] && !argv[i + 1].startsWith("--") ? argv[i + 1] : null;
+  };
+  const uneti = String(vrednost("--otisak") ?? "").trim().toLowerCase().replace(/^sd:/, "");
+  if (!/^[0-9a-f]{12,64}$/.test(uneti)) {
+    ispisi({ komanda: "potvrdi-rucno", status: "greska", kod: "otisak_neispravan", uputstvo: "--otisak traži najmanje 12 heksadecimalnih znakova (iz komande storna/rucno)" });
+    return 2;
+  }
+  const napomena = vrednost("--napomena")?.slice(0, 200) ?? null;
+  const { store } = await otvori(p);
+  try {
+    const kandidati = store.podsetniciPoOtisku(uneti);
+    if (kandidati.length === 0) {
+      ispisi({ komanda: "potvrdi-rucno", status: "nema", kod: "nema_podsetnika", otisak: uneti });
+      return 1;
+    }
+    if (kandidati.length > 1) {
+      ispisi({ komanda: "potvrdi-rucno", status: "greska", kod: "otisak_nije_jedinstven", broj: kandidati.length });
+      return 1;
+    }
+    const s = kandidati[0];
+    const ref = `sd:${s.source_hash.slice(0, 12)}`;
+    if (s.potvrdjeno_u) {
+      ispisi({ komanda: "potvrdi-rucno", status: "vec_potvrdjeno", ref, potvrdjeno: s.potvrdjeno_u });
+      return 0;
+    }
+    let fajlProveren = false;
+    if (await postoji(s.putanja)) {
+      const h = createHash("sha256").update(await readFile(s.putanja)).digest("hex");
+      if (h !== s.source_hash) {
+        ispisi({ komanda: "potvrdi-rucno", status: "odbijeno", kod: "fajl_promenjen", ref, razlog: "fajl na disku više nema isti sadržaj kao zabeleženi dokument" });
+        return 1;
+      }
+      fajlProveren = true;
+    }
+    const opis = { ref, fajl: basename(s.putanja), razlog: s.razlog, fajlNaDisku: fajlProveren ? "proveren (SHA-256 se poklapa)" : "nije na disku — potvrda po zapisu u redu" };
+    if (!argv.includes("--potvrdi")) {
+      ispisi({ komanda: "potvrdi-rucno", status: "plan", ...opis, sledece: "pokrenuti ponovo sa --potvrdi" });
+      return 0;
+    }
+    const r = store.potvrdiRucnuObradu({ sourceHash: s.source_hash, razlog: s.razlog, uneti, fajlProveren, napomena, now });
+    ispisi({ komanda: "potvrdi-rucno", status: r.novo ? "potvrdjeno" : "vec_potvrdjeno", ...opis, potvrdjeno: r.potvrdjenoU, poslato: false });
+    return 0;
+  } finally {
+    store.zatvori();
+  }
+}
+
 /* ========================================================================= */
 
 export async function main(argv = process.argv.slice(2), env = process.env) {
@@ -875,6 +936,8 @@ export async function main(argv = process.argv.slice(2), env = process.env) {
         return await rucno(p);
       case "heartbeat":
         return await heartbeat(p);
+      case "potvrdi-rucno":
+        return await potvrdiRucno(p, argv);
       case "preseli-adresu":
         return await preseliAdresu(p, { potvrdi: argv.includes("--potvrdi") });
       default:

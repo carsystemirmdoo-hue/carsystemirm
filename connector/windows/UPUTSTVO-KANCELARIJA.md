@@ -133,6 +133,26 @@ ne menja. Ako ga prihvati: pravi doslednu kopiju reda i podešavanja u
 `%LOCALAPPDATA%\CarsystemConnector\rezerve\`, pa u identitetu reda menja samo
 adresu. Brojevi stavki pre i posle moraju biti isti; ponovno pokretanje je bezopasno.
 
+## 3c. Zatvaranje podsetnika za ručno obrađen dokument (od 0.3.11)
+
+Storno se nikad ne šalje automatski, pa konektor podseća na njega dok operater
+ne potvrdi da je već ručno otpremljen u portalu. Isto važi za kasno izvezene
+starije račune. Otisak (`sd:…`) se vidi u izlazu komandi `storna` i `rucno`.
+
+Pod nalogom koji pokreće zadatak:
+
+```powershell
+& 'C:\Program Files\CarsystemConnector\connector.cmd' potvrdi-rucno --otisak a7ba188dacbc
+```
+Prikazuje koji podsetnik bi se zatvorio, bez izmene. Zatim:
+
+```powershell
+& 'C:\Program Files\CarsystemConnector\connector.cmd' potvrdi-rucno --otisak a7ba188dacbc --napomena "storno 26-1169 otpremljen rucno 06.10.2026" --potvrdi
+```
+Ako je fajl još na disku, njegov SHA-256 mora odgovarati zabeleženom dokumentu.
+Upisuje se vreme potvrde; ništa se ne šalje, a dokument i istorija ostaju u redu.
+Zatvoreni podsetnici se vide u izlazu `storna` i `rucno` (polje `zatvoreni`).
+
 ## 4. Povratak na prethodnu verziju — kao Administrator
 
 ```powershell

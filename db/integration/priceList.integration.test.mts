@@ -177,3 +177,34 @@ test("baza: istorija cena i stavke se samo dodaju; podaci otpremanja se ne menja
   await assert.rejects(db.sql`INSERT INTO article_base_prices (article_id, net_price, vat_percent, valid_from, source, created_by)
     VALUES (${a.id}, 10, 20, '2027-01-01', 'cenovnik', ${owner.id})`, /article_base_prices_source_check/);
 });
+
+test("cena kupca (stvarni model): potvrđen rabat 0 % daje cenu, bez pravila je cena na upit ka komercijalisti", async (t) => {
+  if (guard(t)) return;
+  const { precedenceLevelFor, scopeKeyFor } = await import("@/lib/pricing/precedence.mjs");
+  const { customerPrices } = await import("@/lib/pricing/customer-price-service");
+  const [a1] = await db.sql<{ id: string }[]>`SELECT id FROM articles WHERE code = ${code(1)}`;
+  const [c0, cx] = await db.sql<{ id: string }[]>`
+    INSERT INTO customers (pib, name) VALUES (${`QA${run}c0`}, 'QA kupac nula'), (${`QA${run}cx`}, 'QA kupac bez pravila') RETURNING id`;
+  await db.sql`INSERT INTO customer_assignments (customer_id, user_id) VALUES (${cx.id}, ${office.id})`;
+  const scope = { customerScope: "customer", customerId: c0.id, productScope: "article", articleId: a1.id };
+  await db.sql`
+    INSERT INTO price_rules (customer_scope, customer_id, product_scope, article_id, precedence_level, scope_key, value_kind, discount_percent,
+                             effective_from, status, reason, proposed_by, proposed_at, decided_by, decided_at)
+    VALUES ('customer', ${c0.id}, 'article', ${a1.id}, ${precedenceLevelFor(scope)}, ${scopeKeyFor(scope)}, 'discount_percent', 0,
+            '2026-01-01', 'approved_pending_biznisoft', 'QA: dogovoreno bez rabata', ${owner.id}, now(), ${owner.id}, now())`;
+  try {
+    const zero = await customerPrices(c0.id, [a1.id], "2026-12-15");
+    assert.deepEqual(zero.prices.get(a1.id), { status: "cena", baseCents: 530050, discountPercent: 0, netCents: 530050, basis: "osnovna cena, ugovoreni rabat 0 %" });
+    const unknown = await customerPrices(cx.id, [a1.id], "2026-12-15");
+    assert.equal(unknown.prices.get(a1.id)?.status, "na_upit");
+    assert.equal((unknown.prices.get(a1.id) as { reason: string }).reason, "rabat_nepoznat");
+    assert.deepEqual(unknown.routeTo.map((r) => r.name), [office.name], "zahtev ide komercijalisti dodeljenom kupcu");
+    // Pre prve osnovne cene: rabat 0 % postoji, ali cena nije poznata → na upit, ne 0 din.
+    const beforeBase = await customerPrices(c0.id, [a1.id], "2026-10-01");
+    assert.equal((beforeBase.prices.get(a1.id) as { reason: string }).reason, "nema_osnovne_cene");
+  } finally {
+    await db.sql`DELETE FROM price_rules WHERE customer_id = ${c0.id}`;
+    await db.sql`DELETE FROM customer_assignments WHERE customer_id = ${cx.id}`;
+    await db.sql`DELETE FROM customers WHERE id IN (${c0.id}, ${cx.id})`;
+  }
+});

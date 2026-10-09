@@ -183,10 +183,20 @@ function priceOf(row: ArticleRow, terms: Term[], customerId: string, list: Price
     onDate: today,
   });
   const conflict = decision.conflict.length > 0;
+  /*
+   * Potvrđen rabat (i izričito 0 %) ≠ nepoznat rabat.
+   *
+   * Bez pravila koje pokriva par kupac–artikal rabat NIJE 0 — nepoznat je.
+   * Takva stavka se kupcu prikazuje kao „cena na upit“ (vidi
+   * `orderabilityProblem`, `rebate_unknown`), nikad kao puna cenovnička cena
+   * predstavljena kao njegova dogovorena cena.
+   */
+  const rebate: "ugovoren" | "nepoznat" = decision.winner ? "ugovoren" : "nepoznat";
   const discountPercent = decision.winner ? Number(decision.winner.discountPercent) : 0;
   const listPrice = Number(row.list_price);
   return {
     conflict,
+    rebate,
     listPrice,
     discountPercent,
     netPrice: netUnitPrice(listPrice, discountPercent),
@@ -199,7 +209,7 @@ function priceOf(row: ArticleRow, terms: Term[], customerId: string, list: Price
     currency: list.currency,
     basis:
       `${list.name} (${list.code})` +
-      (decision.winner ? ` · rabat kupca ${discountPercent}% (${decision.levelLabel})` : " · bez rabata kupca"),
+      (decision.winner ? ` · rabat kupca ${discountPercent}% (${decision.levelLabel})` : " · rabat kupca nije potvrđen (cena na upit)"),
   };
 }
 
@@ -246,6 +256,7 @@ function offerFor(row: ArticleRow, terms: Term[], customerId: string, mode: Orde
       rowVariantKeys: facts.rowVariantKeys,
       priceItem: price,
       pricingConflict: price?.conflict ?? false,
+      rebateUnknown: price ? price.rebate === "nepoznat" : false,
     }) ?? (mode.enabled ? null : { code: "ordering_off", message: mode.reason });
   return {
     articleId: row.article_id,
@@ -993,8 +1004,10 @@ export type CatalogOffer = {
   vatPercent: number | null;
   minQuantity: number;
   quantityStep: number;
-  /** `orderable` | `no_price` (cena nije određena) | ostali razlozi. */
+  /** `orderable` | `no_price` (cena na upit: nije u cenovniku, rabat nepotvrđen ili u sukobu) | ostali razlozi. */
   state: "orderable" | "no_price" | "blocked";
+  /** Tačan razlog (`rebate_unknown`, `price_conflict`, `no_price`, …) ili `null`. */
+  reason: string | null;
   message: string | null;
 };
 
@@ -1028,7 +1041,9 @@ export async function loadCustomerOffers(customerId: string): Promise<{ mode: Or
     if (!product || !offer.catalog) continue;
     const family = getFamilyForProduct(product);
     const priced = mode.priceList ? priceOf(r, terms, customerId, mode.priceList, today) : null;
-    const state: CatalogOffer["state"] = !offer.problem ? "orderable" : offer.problem.code === "no_price" ? "no_price" : "blocked";
+    // Bez cene, nepotvrđen rabat i sukob pravila su za kupca isto: cena na upit.
+    const PRICE_ON_REQUEST = ["no_price", "rebate_unknown", "price_conflict"];
+    const state: CatalogOffer["state"] = !offer.problem ? "orderable" : PRICE_ON_REQUEST.includes(offer.problem.code) ? "no_price" : "blocked";
     offers.push({
       articleCode: r.code,
       articleName: r.name,
@@ -1046,6 +1061,7 @@ export async function loadCustomerOffers(customerId: string): Promise<{ mode: Or
       minQuantity: priced?.minQuantity ?? 1,
       quantityStep: priced?.quantityStep ?? 1,
       state,
+      reason: offer.problem?.code ?? null,
       message: offer.problem?.message ?? null,
     });
   }

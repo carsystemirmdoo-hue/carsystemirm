@@ -79,7 +79,7 @@ export function PriceListApplyForm({ importId, reportDate, defaultDate, unclear,
       </label>
       <label className="pl-check">
         <input type="checkbox" name="potvrda" value="da" required disabled={pending} />
-        <span>Promene su pregledane. Primena upisuje {toApply} osnovnih cena (plus označene nejasne); rabati kupaca i fakture se ne menjaju.</span>
+        <span>Promene su pregledane. Iznosi su u dinarima (RSD), bez PDV-a. Primena upisuje {toApply} osnovnih cena (plus označene nejasne); rabati kupaca i fakture se ne menjaju.</span>
       </label>
       <small className="pl-mfa">Upis traži prijavu sa drugim faktorom u poslednjih 10 minuta. Ako je prošlo više, odjavite se i prijavite ponovo.</small>
       <button type="submit" className="portal-button" data-variant="primary" disabled={pending}>{pending ? "Primenjujem…" : "Primenite cenovnik"}</button>

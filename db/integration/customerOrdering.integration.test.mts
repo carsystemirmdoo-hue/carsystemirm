@@ -169,10 +169,11 @@ test("cena iz cenovnika i rabata kupca (uži opseg pobeđuje), nikad iz fakture"
   // 3×3132 + 2×940,5 + 2803,3 = 14080,30; PDV 20 % po stavci.
   assert.deepEqual(q.totals, { net: 14080.3, vat: 2816.06, gross: 16896.36 });
   assert.equal(q.canSubmit, true);
-  // Druga firma bez rabata dobija cenovničku cenu.
-  await svc.addToCart(session("b"), { articleCode: code("BZ"), quantity: "1" });
-  assert.equal((await svc.loadCartQuote(firm.b.customerId)).lines[0].price!.netPrice, 3480);
-  await clearCart("b");
+  // Druga firma BEZ potvrđenog rabata: cena na upit, ne cenovnička cena kao „njena“.
+  const naUpit = await svc.addToCart(session("b"), { articleCode: code("BZ"), quantity: "1" });
+  assert.equal(naUpit.ok, false);
+  assert.match((naUpit as { message: string }).message, /Cena na upit/);
+  // (Demo uslovi ne dozvoljavaju 0 % — 0029; potvrđen rabat 0 % postoji u stvarnim pravilima, vidi customerPrice.integration.)
 });
 
 test("izolacija firmi: tuđa korpa i tuđi zahtev nisu dostupni", async (t) => {

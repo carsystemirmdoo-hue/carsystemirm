@@ -62,9 +62,11 @@ export function CustomerBuyPanel({ fallbackSlug, fallbackName }: { fallbackSlug:
       ) : (
         <>
           <p className={styles.note}>
-            {here.length > 0
-              ? "Za ovu varijantu Vaša cena još nije određena u cenovniku."
-              : "Za ovaj proizvod Vaša cena još nije određena."}{" "}
+            {here.some((o) => o.reason === "rebate_unknown" || o.reason === "price_conflict")
+              ? "Cena na upit: Vaš rabat za ovaj artikal još nije potvrđen."
+              : here.length > 0
+                ? "Za ovu varijantu Vaša cena još nije određena u cenovniku."
+                : "Za ovaj proizvod Vaša cena još nije određena."}{" "}
             Pošaljite zahtev — javiće Vam se komercijalista ili kancelarija.
           </p>
           <PriceRequest data={data} slug={slug} variantKey={variantKey} articleCode={here[0]?.articleCode ?? null} kind="no_price" />
@@ -131,7 +133,7 @@ function BuyForm({ data, offers, slug, variantKey }: { data: OffersPayload; offe
           <dd>
             {offer.discountPercent
               ? `cenovnik ${money.format(offer.listPrice!)} − rabat ${qfmt.format(offer.discountPercent)} %`
-              : "cenovnička cena, bez ugovorenog rabata"}
+              : "cenovnička cena, ugovoreni rabat 0 %"}
           </dd>
         </div>
       </dl>

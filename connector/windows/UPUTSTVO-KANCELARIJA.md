@@ -111,6 +111,19 @@ U portalu (**Uvoz → Sinhronizacija**) se odvojeno vide poslednje javljanje,
 poslednji ciklus i poslednje uspešno skeniranje. Kada izostanu dva očekivana
 termina zaredom, portal upozorava da računar verovatno ne radi.
 
+## 3a-1. Ručne komande konektora (Production instalacija)
+
+Komande se pokreću DIREKTNO preko `node.exe`, sa `--packaged` i punom putanjom
+`--config`, kao što ih pokreće i zakazani zadatak. `connector.cmd` ne prosleđuje
+`--config`, pa traži config.json u fascikli stanja i vraća `config_missing`.
+PowerShell otvoriti pod nalogom koji pokreće zadatak:
+
+```powershell
+& "$env:ProgramFiles\nodejs\node.exe" --no-warnings "C:\Program Files\CarsystemConnector\connector\bin\connector.mjs" --packaged --config "C:\Program Files\CarsystemConnector\config.json" doctor
+```
+
+U primerima ispod deo pre imena komande je uvek isti.
+
 ## 3b. Promena adrese servera (od 0.3.10)
 
 Red (`queue.db`) pamti adresu servera kojem je slao. Posle promene `serverOrigin`
@@ -118,15 +131,13 @@ na novu adresu ISTOG servera (npr. pilot → `https://carsystemirm.com`) konekto
 javlja `identity_mismatch` dok se red kontrolisano ne preseli. Ključ, uređaj i
 potvrde poslatih faktura se ne diraju.
 
-Pod nalogom koji pokreće zadatak (ne kao drugi korisnik):
-
 ```powershell
-& 'C:\Program Files\CarsystemConnector\connector.cmd' preseli-adresu
+& "$env:ProgramFiles\nodejs\node.exe" --no-warnings "C:\Program Files\CarsystemConnector\connector\bin\connector.mjs" --packaged --config "C:\Program Files\CarsystemConnector\config.json" preseli-adresu
 ```
 Prikazuje plan (stara i nova adresa, broj stavki po stanju) bez ikakve izmene. Zatim:
 
 ```powershell
-& 'C:\Program Files\CarsystemConnector\connector.cmd' preseli-adresu --potvrdi
+& "$env:ProgramFiles\nodejs\node.exe" --no-warnings "C:\Program Files\CarsystemConnector\connector\bin\connector.mjs" --packaged --config "C:\Program Files\CarsystemConnector\config.json" preseli-adresu --potvrdi
 ```
 Prvo šalje potpisan heartbeat na NOVU adresu; ako ga server ne prihvati, ništa se
 ne menja. Ako ga prihvati: pravi doslednu kopiju reda i podešavanja u
@@ -135,23 +146,30 @@ adresu. Brojevi stavki pre i posle moraju biti isti; ponovno pokretanje je bezop
 
 ## 3c. Zatvaranje podsetnika za ručno obrađen dokument (od 0.3.11)
 
-Storno se nikad ne šalje automatski, pa konektor podseća na njega dok operater
-ne potvrdi da je već ručno otpremljen u portalu. Isto važi za kasno izvezene
-starije račune. Otisak (`sd:…`) se vidi u izlazu komandi `storna` i `rucno`.
-
-Pod nalogom koji pokreće zadatak:
+Konektor podseća na dokumente koje ne šalje sam: storna (razlog
+`storno_rucni_upload`) i starije račune izvezene posle početka slanja (razlog
+`kasni_izvoz_rucna_provera`). Dokument sa datumom pre `posaljiOdDatuma` dobija
+`kasni_izvoz_rucna_provera` čak i kada je storno — datum se proverava pre vrste.
+Otisak (`sd:…`) i razlog se vide u izlazu komande `rucno`:
 
 ```powershell
-& 'C:\Program Files\CarsystemConnector\connector.cmd' potvrdi-rucno --otisak a7ba188dacbc
+& "$env:ProgramFiles\nodejs\node.exe" --no-warnings "C:\Program Files\CarsystemConnector\connector\bin\connector.mjs" --packaged --config "C:\Program Files\CarsystemConnector\config.json" rucno
 ```
-Prikazuje koji podsetnik bi se zatvorio, bez izmene. Zatim:
+
+Kada je dokument već ručno obrađen u portalu, prvo plan (bez izmene):
 
 ```powershell
-& 'C:\Program Files\CarsystemConnector\connector.cmd' potvrdi-rucno --otisak a7ba188dacbc --napomena "storno 26-1169 otpremljen rucno 06.10.2026" --potvrdi
+& "$env:ProgramFiles\nodejs\node.exe" --no-warnings "C:\Program Files\CarsystemConnector\connector\bin\connector.mjs" --packaged --config "C:\Program Files\CarsystemConnector\config.json" potvrdi-rucno --otisak a7ba188dacbc
+```
+Proveriti da plan pokazuje očekivani fajl i ISTI razlog kao `rucno`, i da je
+fajl na disku proveren. Zatim:
+
+```powershell
+& "$env:ProgramFiles\nodejs\node.exe" --no-warnings "C:\Program Files\CarsystemConnector\connector\bin\connector.mjs" --packaged --config "C:\Program Files\CarsystemConnector\config.json" potvrdi-rucno --otisak a7ba188dacbc --napomena "storno 26-1169 otpremljen rucno 06.10.2026" --potvrdi
 ```
 Ako je fajl još na disku, njegov SHA-256 mora odgovarati zabeleženom dokumentu.
 Upisuje se vreme potvrde; ništa se ne šalje, a dokument i istorija ostaju u redu.
-Zatvoreni podsetnici se vide u izlazu `storna` i `rucno` (polje `zatvoreni`).
+Posle toga `rucno` više ne prikazuje dokument među stavkama, nego u polju `zatvoreni`.
 
 ## 4. Povratak na prethodnu verziju — kao Administrator
 

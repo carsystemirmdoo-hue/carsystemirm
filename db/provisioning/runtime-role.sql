@@ -80,6 +80,15 @@ REVOKE DELETE, TRUNCATE ON invoice_reversals FROM :runtime_role;
 --    uspešnom.
 REVOKE INSERT, UPDATE, DELETE, TRUNCATE ON backup_runs FROM :runtime_role;
 GRANT SELECT ON backup_runs TO :runtime_role;
+--    Potpisana potvrda uređaja (0037) ide SAMO kroz funkciju koja proverava da
+--    li kopija odgovara proverenom GitHub prolazu; `db_verified` ne može.
+DO $$
+BEGIN
+  IF to_regprocedure('record_device_backup(backup_run_kind, text, text, text, bigint, integer, integer, integer, bigint, timestamptz)') IS NOT NULL THEN
+    EXECUTE format('GRANT EXECUTE ON FUNCTION record_device_backup(backup_run_kind, text, text, text, bigint, integer, integer, integer, bigint, timestamptz) TO %I',
+                   current_setting('my.runtime_role'));
+  END IF;
+END $$;
 
 -- 6. Sekvence — `nextval` za `bigserial` kolone.
 GRANT USAGE, SELECT ON ALL SEQUENCES IN SCHEMA public TO :runtime_role;

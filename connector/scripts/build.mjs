@@ -29,6 +29,7 @@ const DIST = join(KONEKTOR, "dist");
 /** Zajednički moduli — po jedan izvor istine, kopiran bez izmene. */
 const MODULI = [
   "lib/pdf/biznisoftLayout.mjs",
+  "lib/backup/deviceReport.mjs",
   "lib/sync/device/signing.mjs",
   "lib/sync/contract/canonical.mjs",
   "lib/sync/contract/decimal.mjs",

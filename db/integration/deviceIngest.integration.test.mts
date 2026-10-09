@@ -1143,3 +1143,46 @@ test("nijedna kolona ne čuva privatni ključ", async (t) => {
   // Ed25519 SPKI je tačno 44 bajta; privatni PKCS#8 je 48 i drugačijeg prefiksa.
   assert.equal(der.length, 44, "sačuvan materijal nije Ed25519 SPKI javni ključ");
 });
+
+/* =========================================================================
+ * Potvrda rezervne kopije (0037) — isti potpisan kanal, bez lozinke baze.
+ * ====================================================================== */
+
+const backup = async () => (await import("@/app/api/sync/backup/route")).POST;
+
+test("potvrda kopije: samo potpisano, samo za otisak koji je GitHub proverio, bez dupliranja", async (t) => {
+  if (guard(t)) return;
+  const uredjaj = await aktivanUredjaj();
+  const post = await backup();
+  const run = `8${Date.now()}`;
+  const sha = randomBytes(32).toString("hex");
+  const izvestaj = { vrsta: "offsite_stored", githubRunId: run, sifrovanSha256: sha, bajtova: 1234, kopijaOd: new Date().toISOString(), cuvaSe: 1 };
+
+  // Nepotpisano: odbijeno pre baze.
+  const bez = await post(new Request(`${BASE}/api/sync/backup`, { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify(izvestaj) }));
+  assert.equal(bez.status, 401);
+  // Potpis za heartbeat ne važi ovde.
+  const tudj = await potpisanZahtev(uredjaj, { path: "/api/sync/backup", signWithPath: "/api/sync/heartbeat", body: izvestaj });
+  assert.equal((await telo(await post(tudj.request))).code, "signature_invalid");
+  // Nepoznata kopija (GitHub je nije proverio): 409.
+  const nepoznata = await post((await potpisanZahtev(uredjaj, { path: "/api/sync/backup", body: izvestaj })).request);
+  assert.equal(nepoznata.status, 409);
+  assert.equal((await telo(nepoznata)).code, "backup_unknown");
+  // Dodatno polje (npr. putanja): 400.
+  const visak = await post((await potpisanZahtev(uredjaj, { path: "/api/sync/backup", body: { ...izvestaj, putanja: "C:/x" } })).request);
+  assert.equal(visak.status, 400);
+
+  await db.sql`INSERT INTO backup_runs (kind, ok, source_label, encrypted_sha256, github_run_id) VALUES ('db_verified', true, 'qa-uredjaj', ${sha}, ${run})`;
+  const prva = await post((await potpisanZahtev(uredjaj, { path: "/api/sync/backup", body: izvestaj })).request);
+  assert.equal(prva.status, 200);
+  assert.equal((await telo(prva)).code, "backup_recorded");
+  const druga = await post((await potpisanZahtev(uredjaj, { path: "/api/sync/backup", body: izvestaj })).request);
+  assert.equal((await telo(druga)).code, "backup_already_recorded");
+  const [{ n, by }] = await db.sql<{ n: number; by: string }[]>`
+    SELECT count(*)::int AS n, min(recorded_by) AS by FROM backup_runs WHERE kind = 'offsite_stored' AND github_run_id = ${run}`;
+  assert.deepEqual({ n, by }, { n: 1, by: `uredjaj:${uredjaj.deviceCode}` });
+
+  // Uređaj ne može da proglasi proveru baze.
+  const lazna = await post((await potpisanZahtev(uredjaj, { path: "/api/sync/backup", body: { ...izvestaj, vrsta: "db_verified" } })).request);
+  assert.equal(lazna.status, 400);
+});

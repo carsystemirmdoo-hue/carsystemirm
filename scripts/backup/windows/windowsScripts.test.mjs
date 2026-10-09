@@ -4,6 +4,7 @@ import test from "node:test";
 
 const read = (f) => readFileSync(new URL(f, import.meta.url), "utf8");
 const scripts = { podesi: read("./podesi-kopije.ps1"), kopije: read("./kopije.ps1") };
+const zakazi = read("./zakazi-kopije.ps1");
 
 test("Windows skripte kopija: bez preuzimanja, izvršavanja niza, zaobilaženja politike i zakazanih zadataka", () => {
   for (const [name, s] of Object.entries(scripts)) {
@@ -24,7 +25,22 @@ test("tajne: DPAPI (SecureString), ne ispisuju se, brišu se iz okruženja posle
   assert.match(scripts.podesi, /ConvertFrom-SecureString -SecureString/);
   assert.ok(!/Write-Host[^\n]*(token|status|Otkljucaj|\$tajne)/i.test(scripts.kopije));
   assert.match(scripts.kopije, /ZeroFreeBSTR/);
-  assert.match(scripts.kopije, /Remove-Item Env:\\BACKUP_STATUS_URL, Env:\\GH_BACKUP_TOKEN/);
+  assert.match(scripts.kopije, /Remove-Item Env:\\GH_BACKUP_TOKEN, Env:\\BACKUP_REPO/);
+});
+
+test("bez lozinke baze: potvrdu šalje konektor potpisom uređaja", () => {
+  for (const [name, s] of Object.entries({ ...scripts, zakazi })) {
+    assert.ok(!/BACKUP_STATUS_URL|postgres(ql)?:\/\/|carsystem_backup_status/i.test(s.replace(/^\s*#.*$/gm, "").replace(/<#[\s\S]*?#>/g, "")), `${name}: pristup bazi`);
+  }
+  assert.match(scripts.kopije, /prijavi-kopiju --izvestaj/);
+  assert.match(scripts.kopije, /if \(\$k -eq 0\) \{ \$k = Potvrdi \$izv \}/, "potvrda samo posle uspešne kopije");
+  assert.match(scripts.podesi, /0\.3\.12/);
+});
+
+test("zakazani zadatak: samo schtasks.exe, tekući nalog, bez povišenih prava, samo dok je prijavljen", () => {
+  for (const re of [/Invoke-Expression|\biex\b/i, /ExecutionPolicy\s+Bypass/i, /Invoke-WebRequest|DownloadFile/i, /\/RL', 'HIGHEST|\/RU|\/RP/i]) assert.ok(!re.test(zakazi), String(re));
+  assert.match(zakazi, /'\/RL', 'LIMITED', '\/IT'/);
+  assert.match(zakazi, /-Akcija Sve/);
 });
 
 test("fascikla druge kopije ne sme biti unutar izvora PDF-ova", () => {

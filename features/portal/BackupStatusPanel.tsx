@@ -25,7 +25,25 @@ function detailOf(item: BackupStatusItem) {
   return parts.join(" · ");
 }
 
-/** Tri odvojene tvrdnje o kopijama; nijedna ne zamenjuje drugu. */
+const SHORT: Record<string, string> = {
+  db_verified: "provera kopije baze",
+  offsite_stored: "kopija van GitHub-a",
+  pdf_backup: "kopija PDF-ova",
+};
+
+const MISSING: Record<string, string> = {
+  offsite_stored: "Šifrovana kopija van GitHub-a (firmin računar i Google Drive) još nije podešena.",
+  pdf_backup: "Šifrovana kopija izvornih PDF-ova još nije podešena.",
+};
+
+/**
+ * Tri odvojene tvrdnje o kopijama; nijedna ne zamenjuje drugu.
+ *
+ * „Kopija baze proverena“ i „Zaštita i čuvanje kopija nisu potpuno podešeni“
+ * su dve različite poruke: dnevna kopija može da radi i da bude zelena, a da
+ * druga lokacija ili PDF kopija još ne postoje. Tada portal NE kaže da kopija
+ * nema.
+ */
 export function BackupStatusPanel({ items, compact = false }: { items: BackupStatusItem[] | null; compact?: boolean }) {
   if (items === null) {
     return (
@@ -39,49 +57,73 @@ export function BackupStatusPanel({ items, compact = false }: { items: BackupSta
       <section className="portal-panel" data-accent="warning">
         <SectionHeader
           title="Backup nije podešen"
-          description="Automatske rezervne kopije još nisu uključene. Do tada portal ne prikazuje nijednu kopiju kao uspešnu."
+          description="Nijedna automatska kopija još nije zabeležena. Do tada portal ne prikazuje nijednu kopiju kao uspešnu."
         />
         {!compact ? (
           <ul className="bk-missing">
-            <li>{BACKUP_LABELS.db_verified}: nije uključeno (dnevna kopija iz privatnog GitHub repoa firme).</li>
-            <li>{BACKUP_LABELS.offsite_stored}: nije uključeno (preuzimanje na firmin računar i u oblak).</li>
-            <li>{BACKUP_LABELS.pdf_backup}: nije uključeno (dnevna šifrovana kopija izvornih PDF-ova).</li>
+            <li>{BACKUP_LABELS.db_verified}: još nije zabeležena (dnevna kopija iz privatnog GitHub repoa firme).</li>
+            <li>{BACKUP_LABELS.offsite_stored}: nije podešeno (preuzimanje na firmin računar i u oblak).</li>
+            <li>{BACKUP_LABELS.pdf_backup}: nije podešeno (dnevna šifrovana kopija izvornih PDF-ova).</li>
           </ul>
         ) : null}
       </section>
     );
   }
-  const shown = compact ? items.filter((i) => i.tone !== "success") : items;
-  if (compact && shown.length === 0) return null;
+  const active = items.filter((i) => i.state !== "nije_podesen");
+  const missing = items.filter((i) => i.state === "nije_podesen");
+  const shown = compact ? active.filter((i) => i.tone !== "success") : active;
+  if (compact && shown.length === 0 && missing.length === 0) return null;
+  const dbOk = active.some((i) => i.kind === "db_verified" && i.tone === "success");
+  const accent = active.some((i) => i.tone === "danger") ? "danger" : active.some((i) => i.tone === "warning") || missing.length ? "warning" : undefined;
   return (
-    <section className="portal-panel" data-accent={items.some((i) => i.tone === "danger") ? "danger" : items.some((i) => i.tone === "warning") ? "warning" : undefined}>
+    <section className="portal-panel" data-accent={accent}>
       <SectionHeader
         title="Rezervne kopije"
-        description={compact ? "Upozorenje o kopijama — detalji su u Sinhronizaciji." : "Tri odvojene provere. Zelena je samo ona koja je zaista urađena u roku."}
+        description={
+          compact
+            ? `${dbOk ? "Kopija baze proverena je u roku. " : ""}Detalji su u Sinhronizaciji.`
+            : "Odvojene provere. Zelena je samo ona koja je zaista urađena u roku."
+        }
       />
-      <ul className="bk-list">
-        {shown.map((i) => (
-          <li key={i.kind} className="bk-item" data-tone={i.tone}>
-            <div className="bk-head">
-              <strong>{BACKUP_LABELS[i.kind as keyof typeof BACKUP_LABELS]}</strong>
-              <span className="kk-status" data-tone={i.tone}>
-                {i.state === "nije_podesen" ? "nije podešeno" : i.state === "nikad" ? "nema" : i.tone === "success" ? "u roku" : i.tone === "warning" ? "pažnja" : "kasni"}
-              </span>
-            </div>
-            <p className="bk-when">
-              {i.state === "nije_podesen" ? "Automatika nije uključena." : i.lastOk ? `Poslednja uspešna: ${DT.format(new Date(i.lastOk.finished_at))} (pre ${i.ageHours} h)` : "Nijedna uspešna još nije zabeležena."}
-              {i.lastOk?.source_label ? ` · ${i.lastOk.source_label}` : ""}
-            </p>
-            {i.tone !== "success" ? <p className="bk-msg">{i.message}</p> : null}
-            {!compact ? (
-              <>
-                {detailOf(i) ? <small>{detailOf(i)}</small> : null}
-                <small>{WHAT[i.kind]} Upozorenje posle {BACKUP_THRESHOLDS[i.kind as keyof typeof BACKUP_THRESHOLDS].warn} h.</small>
-              </>
-            ) : null}
-          </li>
-        ))}
-      </ul>
+      {shown.length ? (
+        <ul className="bk-list">
+          {shown.map((i) => (
+            <li key={i.kind} className="bk-item" data-tone={i.tone}>
+              <div className="bk-head">
+                <strong>{BACKUP_LABELS[i.kind as keyof typeof BACKUP_LABELS]}</strong>
+                <span className="kk-status" data-tone={i.tone}>
+                  {i.state === "nikad" ? "nema" : i.tone === "success" ? "u roku" : i.tone === "warning" ? "pažnja" : "kasni"}
+                </span>
+              </div>
+              <p className="bk-when">
+                {i.lastOk ? `Poslednja uspešna: ${DT.format(new Date(i.lastOk.finished_at))} (pre ${i.ageHours} h)` : "Nijedna uspešna još nije zabeležena."}
+                {i.lastOk?.source_label ? ` · ${i.lastOk.source_label}` : ""}
+              </p>
+              {i.tone !== "success" ? <p className="bk-msg">{i.message}</p> : null}
+              {!compact ? (
+                <>
+                  {detailOf(i) ? <small>{detailOf(i)}</small> : null}
+                  <small>{WHAT[i.kind]} Upozorenje posle {BACKUP_THRESHOLDS[i.kind as keyof typeof BACKUP_THRESHOLDS].warn} h.</small>
+                </>
+              ) : null}
+            </li>
+          ))}
+        </ul>
+      ) : null}
+      {missing.length ? (
+        <div className="bk-incomplete" data-tone="warning">
+          <strong>Zaštita i čuvanje kopija nisu potpuno podešeni</strong>
+          {!compact ? (
+            <ul className="bk-missing">
+              {missing.map((i) => (
+                <li key={i.kind}>{MISSING[i.kind] ?? `${BACKUP_LABELS[i.kind as keyof typeof BACKUP_LABELS]}: nije podešeno.`}</li>
+              ))}
+            </ul>
+          ) : (
+            <p className="bk-msg">Još nije podešeno: {missing.map((i) => SHORT[i.kind] ?? i.kind).join(", ")}.</p>
+          )}
+        </div>
+      ) : null}
     </section>
   );
 }

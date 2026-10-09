@@ -1,8 +1,9 @@
 #!/usr/bin/env node
 /**
  * Pravi Windows paket kopija: samo skripte za preuzimanje i PDF kopiju, njihove
- * zavisnosti (lib/backup, postgres) i PowerShell omotače. Bez ključeva, tajni i
- * zakazanih zadataka. Izlaz: <fascikla>/carsystem-kopije-<commit>.zip + SHA-256.
+ * zavisnosti (lib/backup) i PowerShell omotače. Bez ključeva i tajni; bez
+ * drajvera baze — potvrdu šalje konektor potpisom uređaja. Zakazani zadatak
+ * pravi samo `zakazi-kopije.ps1`, na zahtev. Izlaz: <fascikla>/carsystem-kopije-<commit>.zip + SHA-256.
  *
  *   node scripts/backup/windows/napravi-paket.mjs --out <fascikla van repoa>
  */
@@ -26,6 +27,7 @@ const FILES = [
   "scripts/backup/offsite-pull.mjs",
   "scripts/backup/pdf-backup.mjs",
   "lib/backup/abort.mjs",
+  "lib/backup/deviceReport.mjs",
   "lib/backup/pdfIndex.mjs",
   "lib/backup/publicStatus.mjs",
   "lib/backup/redact.mjs",
@@ -35,18 +37,20 @@ for (const f of FILES) {
   mkdirSync(join(stage, "app", f, ".."), { recursive: true });
   cpSync(join(repo, f), join(stage, "app", f));
 }
-cpSync(join(repo, "node_modules", "postgres"), join(stage, "app", "node_modules", "postgres"), { recursive: true, dereference: true });
 writeFileSync(join(stage, "app", "package.json"), JSON.stringify({ name: "carsystem-kopije", private: true, type: "module" }, null, 1));
 mkdirSync(join(stage, "windows"));
-for (const f of ["podesi-kopije.ps1", "kopije.ps1", "UPUTSTVO-KOPIJE.md"]) cpSync(join(repo, "scripts/backup/windows", f), join(stage, "windows", f));
+for (const f of ["podesi-kopije.ps1", "kopije.ps1", "zakazi-kopije.ps1", "UPUTSTVO-KOPIJE.md"]) cpSync(join(repo, "scripts/backup/windows", f), join(stage, "windows", f));
 
 // Ništa tajno ni lično u paketu.
-const forbidden = [/AGE-SECRET-KEY-1[0-9A-Z]{50,}/, /postgres(ql)?:\/\/[^\s:@/]+:[^@\s"'`]{12,}@[^\s/]+\.[a-z]{2,}/, /gh[pousr]_[A-Za-z0-9]{20,}/, /github_pat_[A-Za-z0-9_]{40,}/, /@gmail\.com/i, /Register-ScheduledTask|schtasks/i];
+const forbidden = [/AGE-SECRET-KEY-1[0-9A-Z]{50,}/, /postgres(ql)?:\/\/[^\s:@/]+:[^@\s"'`]{12,}@[^\s/]+\.[a-z]{2,}/, /gh[pousr]_[A-Za-z0-9]{20,}/, /github_pat_[A-Za-z0-9_]{40,}/, /@gmail\.com/i, /BACKUP_STATUS_URL/];
+// Zakazani zadatak sme da pravi SAMO zakazi-kopije.ps1 (izričito, na zahtev).
+const forbiddenOutsideScheduler = /Register-ScheduledTask|schtasks/i;
 for (const f of readdirSync(stage, { recursive: true }).map(String)) {
   const p = join(stage, f);
   if (statSync(p).isDirectory() || /node_modules/.test(f)) continue;
   const text = readFileSync(p, "utf8");
   for (const re of forbidden) if (re.test(text)) throw new Error(`Zabranjen sadržaj u paketu: ${f} (${re})`);
+  if (!f.endsWith("zakazi-kopije.ps1") && !f.endsWith("UPUTSTVO-KOPIJE.md") && forbiddenOutsideScheduler.test(text)) throw new Error(`Zakazani zadatak van zakazi-kopije.ps1: ${f}`);
 }
 mkdirSync(out, { recursive: true });
 const zip = join(out, `${name}.zip`);

@@ -8976,3 +8976,16 @@ section.portal-metrics {
 .bk-deferred .kk-status { margin-right: 6px; vertical-align: 1px; }
 @media (max-width: 960px) { .bk-deferred { margin: 0 14px 16px; } }
 @media (max-width: 960px) { .bk-incomplete { margin: 0 14px 16px; } }
+
+/* Cenovnik (0038) */
+.pl-facts { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px 24px; margin: 0; padding: 4px 20px 20px; font-size: 13px; }
+.pl-facts div { display: grid; gap: 2px; }
+.pl-facts dt { color: var(--p-muted); font-size: 12px; }
+.pl-facts dd { margin: 0; color: var(--p-ink); }
+.pl-trial { display: grid; gap: 4px; margin: 0; padding: 4px 20px 12px 38px; font-size: 13px; }
+.pl-check { display: flex !important; gap: 8px; align-items: flex-start; }
+.pl-check input { margin-top: 3px; }
+.pl-unclear { border: 1px solid var(--p-line); border-radius: 8px; padding: 12px; }
+.pl-unclear legend { font-weight: 650; padding: 0 6px; }
+.pl-search { flex-direction: row; align-items: end; }
+@media (max-width: 960px) { .pl-facts { grid-template-columns: 1fr; padding: 4px 14px 16px; } }

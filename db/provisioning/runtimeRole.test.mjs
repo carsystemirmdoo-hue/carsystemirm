@@ -25,10 +25,11 @@ const statements = script
 /**
  * Tabele čiji okidač dozvoljava OGRANIČENU izmenu, pa uloga zadržava UPDATE:
  *  - potvrda kontakta: samo opoziv određenih kolona (0028);
- *  - zapis naknadnog storna: prelaz stanja, bez promene odštampane reference (0033).
+ *  - zapis naknadnog storna: prelaz stanja, bez promene odštampane reference (0033);
+ *  - otpremanje cenovnika: jednokratna odluka, podaci fajla se ne menjaju (0038).
  * DELETE im se i dalje oduzima.
  */
-const REVOCATION_ONLY = new Set(["customer_contact_verifications", "invoice_reversals"]);
+const REVOCATION_ONLY = new Set(["customer_contact_verifications", "invoice_reversals", "price_list_imports"]);
 
 function guardedTables() {
   /** @type {Map<string, Set<string>>} */

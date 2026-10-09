@@ -445,6 +445,8 @@ test("nijedna API ruta ne postoji van izričito dozvoljenog spiska", async (t) =
     // P2: prijem sa uređaja, iza feature gate-a koji je podrazumevano isključen.
     "sync/heartbeat/route.ts",
     "sync/ingest/route.ts",
+    // Potpisana potvrda rezervne kopije sa uređaja (0037).
+    "sync/backup/route.ts",
     /*
      * P4: ručne komande, iza DRUGOG gate-a koji je takođe podrazumevano
      * isključen. Idu kroz isti `withAuthenticatedDevice` kao prijem.

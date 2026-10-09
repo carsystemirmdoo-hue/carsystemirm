@@ -2,6 +2,7 @@ import { createHash, generateKeyPairSync } from "node:crypto";
 import { access, copyFile, mkdir, readdir, readFile } from "node:fs/promises";
 import { basename, dirname, join } from "node:path";
 import { keyFingerprint, SIGNED_PATHS } from "../../lib/sync/device/signing.mjs";
+import { checkDeviceBackupReport, DEVICE_BACKUP_PATH } from "../../lib/backup/deviceReport.mjs";
 import { ucitajKonfiguraciju } from "./config.mjs";
 import { izaberiAdapter, KeystoreError } from "./keystore/index.mjs";
 import { napraviLog, podrazumevanaPutanjaLoga } from "./logging.mjs";
@@ -18,7 +19,7 @@ import {
 } from "./schedule.mjs";
 import { otvoriStore, podrazumevanaPutanjaStanja, preseliIdentitetReda, SEMA_VERZIJA, StoreError } from "./store.mjs";
 import { proveriIzvor } from "./scanner.mjs";
-import { posaljiHeartbeat } from "./client.mjs";
+import { posaljiHeartbeat, posaljiPotpisano } from "./client.mjs";
 import { readFileSync } from "node:fs";
 import {
   izvrsiKomandu,
@@ -38,7 +39,7 @@ import {
  * Jedna komanda „uradi sve“ bi značila da proba i slanje izgledaju isto.
  */
 
-const KOMANDE = ["doctor", "init", "export-key", "dry-run", "run-once", "auto", "poll-once", "watch", "status", "storna", "rucno", "preseli-adresu", "potvrdi-rucno"];
+const KOMANDE = ["doctor", "init", "export-key", "dry-run", "run-once", "auto", "poll-once", "watch", "status", "storna", "rucno", "preseli-adresu", "potvrdi-rucno", "prijavi-kopiju"];
 
 function ispisi(objekat) {
   process.stdout.write(`${JSON.stringify(objekat, null, 2)}\n`);
@@ -898,6 +899,54 @@ export async function potvrdiRucno(p, argv = [], now = new Date()) {
 
 /* ========================================================================= */
 
+/**
+ * Potpisana potvrda rezervne kopije (0.3.12) — zamena za lozinku baze na ovom računaru.
+ *
+ *   prijavi-kopiju --izvestaj <izvestaj.json>
+ *
+ * Izveštaj pravi skripta kopije (offsite-pull / pdf-backup): samo brojevi,
+ * otisci i vreme. Proverava se ISTIM modulom kao na serveru, pa se potpisuje
+ * ključem ovog uređaja i šalje na /api/sync/backup. Server prihvata kopiju
+ * van GitHub-a samo ako otisak odgovara proverenom GitHub prolazu. Red faktura
+ * se ne otvara i ne dira.
+ */
+export async function prijaviKopiju(p, argv = [], { fetchImpl } = {}) {
+  const i = argv.indexOf("--izvestaj");
+  const fajl = i >= 0 ? argv[i + 1] : null;
+  if (!fajl) {
+    ispisi({ komanda: "prijavi-kopiju", status: "greska", kod: "izvestaj_nedostaje" });
+    return 2;
+  }
+  let izvestaj;
+  try {
+    izvestaj = JSON.parse(await readFile(fajl, "utf8"));
+  } catch {
+    ispisi({ komanda: "prijavi-kopiju", status: "greska", kod: "izvestaj_necitljiv" });
+    return 2;
+  }
+  const provera = checkDeviceBackupReport(izvestaj);
+  if (!provera.ok) {
+    ispisi({ komanda: "prijavi-kopiju", status: "greska", kod: provera.code });
+    return 2;
+  }
+  const k = await ucitajKonfiguraciju(p.konfiguracija);
+  const kljuc = await (await izaberiAdapter()).adapter.ucitaj({ putanja: p.kljuc });
+  const odgovor = await posaljiPotpisano({
+    origin: k.serverOrigin,
+    zastitaPristupa: k.vercelZastita ?? null,
+    path: DEVICE_BACKUP_PATH,
+    bodyBytes: new TextEncoder().encode(JSON.stringify(provera.report)),
+    deviceCode: k.deviceCode,
+    keyId: k.keyId,
+    privateKeyPkcs8Der: kljuc,
+    timeoutMs: k.timeoutMs,
+    ...(fetchImpl ? { fetchImpl } : {}),
+  });
+  const prihvaceno = odgovor.code === "backup_recorded" || odgovor.code === "backup_already_recorded";
+  ispisi({ komanda: "prijavi-kopiju", vrsta: provera.report.vrsta, http: odgovor.httpStatus, kod: odgovor.code, status: prihvaceno ? "potvrdjeno" : "odbijeno" });
+  return prihvaceno ? 0 : 1;
+}
+
 export async function main(argv = process.argv.slice(2), env = process.env) {
   const komanda = argv[0];
   const p = putanje(env);
@@ -938,6 +987,8 @@ export async function main(argv = process.argv.slice(2), env = process.env) {
         return await heartbeat(p);
       case "potvrdi-rucno":
         return await potvrdiRucno(p, argv);
+      case "prijavi-kopiju":
+        return await prijaviKopiju(p, argv);
       case "preseli-adresu":
         return await preseliAdresu(p, { potvrdi: argv.includes("--potvrdi") });
       default:

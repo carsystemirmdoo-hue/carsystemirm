@@ -1,7 +1,9 @@
 # 51 — Rezervne kopije: baza i izvorni PDF-ovi
 
-**Stanje: kod i lokalna proba završeni; automatika NIJE uključena** (čeka privatni repo,
-uloge u bazi i ključ — odluke vlasnika). Ovaj dokument ne sadrži adrese, lozinke ni ključeve.
+**Stanje (9. 10. 2026): dnevna kopija baze radi** (privatni repo firme, GitHub Actions; prvi
+potpun prolaz, preuzimanje i dešifrovanje provereni). Kopija van GitHub-a i PDF kopija rade sa
+kancelarijskog računara posle konektora 0.3.12 i migracije 0037. Ovaj dokument ne sadrži adrese,
+lozinke ni ključeve.
 
 ## Tri odvojene tvrdnje (portal → Sinhronizacija; upozorenje na Početnoj)
 
@@ -44,8 +46,20 @@ indeksu, objekat ostaje. Ništa se automatski ne briše. Indeks u skladištu je
 ## Van GitHub-a (`scripts/backup/offsite-pull.mjs`)
 
 Poslednji artefakt → provera SHA-256 → `<dest>/<vreme>/` → politika čuvanja
-(14 dnevnih, 8 nedeljnih, 12 mesečnih; `lib/backup/retention.mjs`) → `offsite_stored`.
-Privatni ključ nije potreban na tom računaru.
+(14 dnevnih, 8 nedeljnih, 12 mesečnih; `lib/backup/retention.mjs`) → izveštaj (`--izvestaj`).
+Privatni ključ nije potreban na tom računaru, a ni lozinka baze.
+
+## Potpisana potvrda sa računara (0037, konektor 0.3.12)
+
+Računar ne upisuje u bazu. Izveštaj kopije (samo brojevi, otisci i vreme; bela lista u
+`lib/backup/deviceReport.mjs`) potpisuje konektor ključem uređaja (`prijavi-kopiju`) i šalje na
+`/api/sync/backup` (isti Ed25519 kanal kao fakture). Aplikacija nema INSERT nad `backup_runs`;
+upis ide samo kroz `record_device_backup` (SECURITY DEFINER, EXECUTE samo za `carsystem_app`):
+
+- `offsite_stored` samo ako postoji USPEŠAN `db_verified` istog GitHub prolaza sa ISTIM otiskom
+  šifrovane kopije (inače 409 `backup_unknown`); ponovljena potvrda istog prolaza ne pravi nov red;
+- `pdf_backup` samo nenegativni brojevi;
+- `db_verified` nikad.
 
 ## Tokovi (privatni repo, ne ovaj)
 
@@ -54,12 +68,18 @@ starija od 30 h). Fiksirane verzije: akcije po punom SHA, `postgres:17.11-bookwo
 po digestu, `age` v1.3.2 po SHA-256. Dozvole: globalno nijedna; posao kopije
 `contents: read`; nadzor `actions: read`. Artefakt 7 dana, samo `.age`, status, otisci.
 
-## Dok automatika nije uključena
+## Šta portal prikazuje
 
-Portal prikazuje **„Backup nije podešen“** (žuto, nikad zeleno) za svaku vrstu kopije koja nije navedena u
-`BACKUP_AUTOMATION` (npr. `db_verified,offsite_stored,pdf_backup`). Zapisi neuključenih vrsta se ne prikazuju.
-`BACKUP_SOURCE_LABEL` (npr. `pilot`) dodatno ograničava prikaz na zapise te oznake izvora — probe i ručne
-kopije se ne mešaju sa stvarnim.
+Vrsta kopije se prikazuje kao stvarna samo uz zapis **dokazivog porekla**: `db_verified` iz GitHub
+prolaza (`github_run_id`, nije uređaj), `offsite_stored`/`pdf_backup` iz potpisane potvrde uređaja
+(`recorded_by = uredjaj:<oznaka>`). Ručni ili probni upis nema to poreklo i ne računa se.
+
+- nijedna vrsta nema takav zapis → **„Backup nije podešen“**;
+- proverena kopija baze postoji, a druga lokacija ili PDF kopija ne → zelena „Kopija baze proverena“ i
+  odvojeno **„Zaštita i čuvanje kopija nisu potpuno podešeni“** sa spiskom onoga što fali (portal NE
+  kaže da kopija nema);
+- `BACKUP_AUTOMATION` (npr. `db_verified,offsite_stored,pdf_backup`), ako je zadat, važi tačno — i za
+  izričito isključenje; `BACKUP_SOURCE_LABEL` (oznaka `produkcija`) sužava kopiju baze na tu oznaku.
 
 ## Šta sme nešifrovano u GitHub artefaktu
 
@@ -79,6 +99,7 @@ Proveru izvodi `scripts/backup/interrupt.test.mjs` (lokalne baze: `BACKUP_TEST_S
 
 ## Windows paket (`scripts/backup/windows/`)
 
-`napravi-paket.mjs` pravi ZIP sa skriptama za preuzimanje i PDF kopiju, zavisnostima i omotačima
-`podesi-kopije.ps1` / `kopije.ps1` (DPAPI za tajne, `age.exe` po SHA-256 zvaničnog izdanja). Paket ne
-sadrži ključeve ni tajne i ne registruje zakazane zadatke; uputstvo `UPUTSTVO-KOPIJE.md`.
+`napravi-paket.mjs` pravi ZIP sa skriptama za preuzimanje i PDF kopiju i omotačima `podesi-kopije.ps1` /
+`kopije.ps1` / `zakazi-kopije.ps1` (DPAPI samo za GitHub token, `age.exe` po SHA-256 zvaničnog izdanja,
+potvrda kroz konektor). Paket ne sadrži ključeve, tajne ni drajver baze; zakazani zadatak pravi samo
+`zakazi-kopije.ps1` (schtasks, tekući nalog, bez povišenih prava). Uputstvo `UPUTSTVO-KOPIJE.md`.

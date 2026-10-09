@@ -2,7 +2,7 @@
 /**
  * Dnevna inkrementalna kopija izvornih PDF-ova (samo čitanje izvora).
  *
- *   node scripts/backup/pdf-backup.mjs run --source <fascikla> --dest <skladište> --state <stanje.json> --recipients <age.pub> [--label kancelarija]
+ *   node scripts/backup/pdf-backup.mjs run --source <fascikla> --dest <skladište> --state <stanje.json> --recipients <age.pub> [--izvestaj <izvestaj.json>]
  *   node scripts/backup/pdf-backup.mjs restore --dest <skladište> --index <index.json.age> --identity <age.key> --out <fascikla> [--prefix 2026/]
  *
  * - Izvor se samo čita; ništa se ne pomera ni ne briše.
@@ -12,18 +12,20 @@
  * - Stanje (`--state`) je lokalno, na istom računaru gde su PDF-ovi (600).
  *   U skladište ide samo ŠIFROVAN indeks (`index/<vreme>.json.age`), jer
  *   putanje mogu sadržati nazive kupaca.
- * - Opciono upisuje sažetak (samo brojeve) u portal: BACKUP_STATUS_URL.
+ * - Opciono piše izveštaj za portal (`--izvestaj`, samo brojevi); potpisuje ga i
+ *   šalje konektor (`prijavi-kopiju`) — ovaj računar nema pristup bazi.
  */
 import { spawn } from "node:child_process";
 import { createHash, randomBytes } from "node:crypto";
 import { chmodSync, createReadStream, existsSync, mkdirSync, readdirSync, readFileSync, renameSync, rmSync, statSync, writeFileSync } from "node:fs";
 import { dirname, join, relative, resolve, sep } from "node:path";
 import { installAbortHandlers, isAborting, killOnAbort, onAbort } from "../../lib/backup/abort.mjs";
+import { checkDeviceBackupReport } from "../../lib/backup/deviceReport.mjs";
 import { applyScan, emptyIndex, markStored, objectPath, planScan } from "../../lib/backup/pdfIndex.mjs";
 import { pathToFileURL } from "node:url";
 import { makeLogger, redact } from "../../lib/backup/redact.mjs";
 
-const log = makeLogger(undefined, () => [process.env.BACKUP_STATUS_URL].filter(Boolean));
+const log = makeLogger();
 const AGE_BIN = process.env.AGE_BIN ?? "age";
 
 function args() {
@@ -160,15 +162,18 @@ export async function runBackup(o) {
     ukupnoObjekata: Object.keys(index.objects).length,
   };
   log(`PDF kopija: ${JSON.stringify(summary)}`);
-  if (process.env.BACKUP_STATUS_URL) {
-    const postgres = (await import("postgres")).default;
-    const sql = postgres(process.env.BACKUP_STATUS_URL, { max: 1, onnotice: () => {} });
-    try {
-      await sql`INSERT INTO backup_runs (kind, ok, started_at, finished_at, source_label, files_new, files_changed, files_missing, rows)
-        VALUES ('pdf_backup', true, ${now}, now(), ${o.label ?? null}, ${summary.novih}, ${summary.promenjenih}, ${summary.nestalihUIzvoru}, ${summary.ukupnoObjekata})`;
-    } finally {
-      await sql.end();
-    }
+  if (o.izvestaj) {
+    const report = {
+      vrsta: "pdf_backup",
+      pocetak: now,
+      novih: summary.novih,
+      promenjenih: summary.promenjenih,
+      nestalih: summary.nestalihUIzvoru,
+      ukupnoObjekata: summary.ukupnoObjekata,
+    };
+    const check = checkDeviceBackupReport(report);
+    if (!check.ok) throw new Error(`Izveštaj za portal nije ispravan (${check.code}).`);
+    writeFileSync(resolve(o.izvestaj), JSON.stringify(report), { mode: 0o600 });
   }
   return summary;
 }

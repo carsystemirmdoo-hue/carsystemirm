@@ -2,13 +2,17 @@
 /**
  * Preuzimanje šifrovane kopije baze VAN GitHub-a (firmin računar / oblak).
  *
- *   GH_BACKUP_TOKEN=… BACKUP_REPO=vlasnik/repo node scripts/backup/offsite-pull.mjs --dest <fascikla> [--label kancelarija]
+ *   GH_BACKUP_TOKEN=… BACKUP_REPO=vlasnik/repo node scripts/backup/offsite-pull.mjs --dest <fascikla> [--izvestaj <izvestaj.json>]
  *   node scripts/backup/offsite-pull.mjs --from-dir <raspakovan artefakt> --dest <fascikla>   (proba, bez mreže)
  *
  * Koraci: poslednji artefakt `carsystem-db-*` → raspakivanje u privremenu
  * fasciklu → provera SHA-256 svakog `.age` fajla prema `status.json` →
  * premeštanje u `<dest>/<datum>/` → politika čuvanja (14 dnevnih, 8 nedeljnih,
- * 12 mesečnih) → upis `offsite_stored` u portal (BACKUP_STATUS_URL, opciono).
+ * 12 mesečnih) → izveštaj za portal (`--izvestaj`, samo brojevi i otisci).
+ *
+ * Ovaj računar NEMA pristup bazi. Izveštaj potpisuje i šalje konektor
+ * (`prijavi-kopiju`), a portal ga prihvata samo ako se otisak poklapa sa
+ * proverenim GitHub prolazom.
  *
  * Privatni ključ NIJE potreban ovde i ne sme biti na ovom računaru: kopija se
  * čuva šifrovana; dešifruje se samo u mesečnoj probi vraćanja.
@@ -21,11 +25,12 @@ import { tmpdir } from "node:os";
 import { join, resolve } from "node:path";
 import { pathToFileURL } from "node:url";
 import { installAbortHandlers, isAborting, onAbort } from "../../lib/backup/abort.mjs";
+import { checkDeviceBackupReport } from "../../lib/backup/deviceReport.mjs";
 import { publicStatusProblems } from "../../lib/backup/publicStatus.mjs";
 import { makeLogger } from "../../lib/backup/redact.mjs";
 import { planRetention } from "../../lib/backup/retention.mjs";
 
-const log = makeLogger(undefined, () => [process.env.GH_BACKUP_TOKEN, process.env.BACKUP_STATUS_URL].filter(Boolean));
+const log = makeLogger(undefined, () => [process.env.GH_BACKUP_TOKEN].filter(Boolean));
 
 function args() {
   const o = {};
@@ -118,20 +123,24 @@ export async function pull(o) {
     for (const id of plan.remove) rmSync(join(dest, id), { recursive: true, force: true });
     log(`čuva se ${plan.keep.length} kopija, uklonjeno po politici ${plan.remove.length}`);
 
-    if (process.env.BACKUP_STATUS_URL) {
-      const postgres = (await import("postgres")).default;
-      const sql = postgres(process.env.BACKUP_STATUS_URL, { max: 1, onnotice: () => {} });
-      try {
-        await sql`INSERT INTO backup_runs (kind, ok, started_at, finished_at, source_label, dump_sha256, encrypted_sha256, bytes, migrations, tables, rows, detail)
-          VALUES ('offsite_stored', true, ${status.createdAt}, now(), ${o.label ?? null}, ${status.dumpSha256 ?? null}, ${status.encrypted[0]?.sha256 ?? null},
-                  ${status.encrypted[0]?.bytes ?? null}, ${status.summary?.migrations ?? null}, ${status.summary?.tables ?? null}, ${status.summary?.rows ?? null},
-                  ${`kopija od ${day}; čuva se ${plan.keep.length}`})`;
-      } finally {
-        await sql.end();
-      }
-      log("upisano u portal: offsite_stored");
+    // Izveštaj za potpisanu potvrdu (konektor `prijavi-kopiju`). Otisak je onaj
+    // šifrovane kopije baze koji je GitHub prolaz upisao kao proveren.
+    const dump = status.encrypted.find((f) => f.name.endsWith(".dump.age")) ?? status.encrypted[0];
+    const report = {
+      vrsta: "offsite_stored",
+      githubRunId: String(status.githubRunId ?? ""),
+      sifrovanSha256: dump.sha256,
+      bajtova: dump.bytes,
+      kopijaOd: status.createdAt,
+      cuvaSe: plan.keep.length,
+    };
+    const check = checkDeviceBackupReport(report);
+    if (!check.ok) throw new Error(`Izveštaj za portal nije ispravan (${check.code}) — kopija je sačuvana, potvrda se ne šalje.`);
+    if (o.izvestaj) {
+      writeFileSync(resolve(o.izvestaj), JSON.stringify(report), { mode: 0o600 });
+      log("izveštaj za portal spreman (šalje ga konektor: prijavi-kopiju)");
     }
-    return { target, keep: plan.keep.length, removed: plan.remove.length };
+    return { target, keep: plan.keep.length, removed: plan.remove.length, report };
   } finally {
     rmSync(work, { recursive: true, force: true });
     offWork();

@@ -111,6 +111,28 @@ U portalu (**Uvoz → Sinhronizacija**) se odvojeno vide poslednje javljanje,
 poslednji ciklus i poslednje uspešno skeniranje. Kada izostanu dva očekivana
 termina zaredom, portal upozorava da računar verovatno ne radi.
 
+## 3b. Promena adrese servera (od 0.3.10)
+
+Red (`queue.db`) pamti adresu servera kojem je slao. Posle promene `serverOrigin`
+na novu adresu ISTOG servera (npr. pilot → `https://carsystemirm.com`) konektor
+javlja `identity_mismatch` dok se red kontrolisano ne preseli. Ključ, uređaj i
+potvrde poslatih faktura se ne diraju.
+
+Pod nalogom koji pokreće zadatak (ne kao drugi korisnik):
+
+```powershell
+& 'C:\Program Files\CarsystemConnector\connector.cmd' preseli-adresu
+```
+Prikazuje plan (stara i nova adresa, broj stavki po stanju) bez ikakve izmene. Zatim:
+
+```powershell
+& 'C:\Program Files\CarsystemConnector\connector.cmd' preseli-adresu --potvrdi
+```
+Prvo šalje potpisan heartbeat na NOVU adresu; ako ga server ne prihvati, ništa se
+ne menja. Ako ga prihvati: pravi doslednu kopiju reda i podešavanja u
+`%LOCALAPPDATA%\CarsystemConnector\rezerve\`, pa u identitetu reda menja samo
+adresu. Brojevi stavki pre i posle moraju biti isti; ponovno pokretanje je bezopasno.
+
 ## 4. Povratak na prethodnu verziju — kao Administrator
 
 ```powershell

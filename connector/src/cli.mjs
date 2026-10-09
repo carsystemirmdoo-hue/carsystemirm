@@ -1,5 +1,5 @@
 import { generateKeyPairSync } from "node:crypto";
-import { access, mkdir, readdir } from "node:fs/promises";
+import { access, copyFile, mkdir, readdir } from "node:fs/promises";
 import { basename, dirname, join } from "node:path";
 import { keyFingerprint, SIGNED_PATHS } from "../../lib/sync/device/signing.mjs";
 import { ucitajKonfiguraciju } from "./config.mjs";
@@ -16,7 +16,7 @@ import {
   sledeciTermin,
   sledeciTerminRadnoVreme,
 } from "./schedule.mjs";
-import { otvoriStore, podrazumevanaPutanjaStanja, SEMA_VERZIJA, StoreError } from "./store.mjs";
+import { otvoriStore, podrazumevanaPutanjaStanja, preseliIdentitetReda, SEMA_VERZIJA, StoreError } from "./store.mjs";
 import { proveriIzvor } from "./scanner.mjs";
 import { posaljiHeartbeat } from "./client.mjs";
 import { readFileSync } from "node:fs";
@@ -38,7 +38,7 @@ import {
  * Jedna komanda „uradi sve“ bi značila da proba i slanje izgledaju isto.
  */
 
-const KOMANDE = ["doctor", "init", "export-key", "dry-run", "run-once", "auto", "poll-once", "watch", "status", "storna", "rucno"];
+const KOMANDE = ["doctor", "init", "export-key", "dry-run", "run-once", "auto", "poll-once", "watch", "status", "storna", "rucno", "preseli-adresu"];
 
 function ispisi(objekat) {
   process.stdout.write(`${JSON.stringify(objekat, null, 2)}\n`);
@@ -785,6 +785,56 @@ async function heartbeat(p) {
   }
 }
 
+/**
+ * Preseljenje reda na novu adresu ISTOG servera (`serverOrigin` je već promenjen
+ * u config.json).
+ *
+ * Bez `--potvrdi`: samo plan (stara i nova adresa, brojevi u redu), bez mreže i
+ * bez izmene. Sa `--potvrdi`:
+ *  1. potpisan heartbeat na NOVU adresu ovim uređajem i ključem mora biti
+ *     prihvaćen — dokaz da nova adresa zna ovaj uređaj (ista baza);
+ *  2. dosledna kopija reda (`rezerve/queue-pre-preseljenja-<vreme>.db`) + kopija config.json;
+ *  3. u identitetu reda menja se SAMO `origin`; potvrde i neposlate stavke ostaju.
+ * Ključ, registracija uređaja i potvrde slanja se ne diraju.
+ */
+export async function preseliAdresu(
+  p,
+  {
+    potvrdi = false,
+    now = new Date(),
+    posalji = posaljiHeartbeat,
+    ucitajKljuc = async () => (await izaberiAdapter()).adapter.ucitaj({ putanja: p.kljuc }),
+  } = {},
+) {
+  const k = await ucitajKonfiguraciju(p.konfiguracija);
+  const novi = identitetOd(k);
+  const stamp = now.toISOString().replace(/[-:]/g, "").replace(/\..+/, "Z");
+  const rezervaPutanja = join(p.folder, "rezerve", `queue-pre-preseljenja-${stamp}.db`);
+  const plan = preseliIdentitetReda({ putanja: p.baza, novi, rezervaPutanja, vlasnik: `preseljenje-${process.pid}`, potvrdi: false });
+  if (plan.status === "vec_preseljeno" || !potvrdi) {
+    ispisi({ komanda: "preseli-adresu", ...plan, sledece: plan.status === "plan" ? "pokrenuti ponovo sa --potvrdi" : null });
+    return 0;
+  }
+  const kljuc = await ucitajKljuc();
+  const odgovor = await posalji({
+    origin: k.serverOrigin,
+    zastitaPristupa: k.vercelZastita ?? null,
+    deviceCode: k.deviceCode,
+    keyId: k.keyId,
+    privateKeyPkcs8Der: kljuc,
+    timeoutMs: k.timeoutMs,
+  });
+  if (odgovor.code !== "acknowledged") {
+    ispisi({ komanda: "preseli-adresu", status: "odbijeno", razlog: "nova adresa nije prihvatila potpisan zahtev ovog uređaja", http: odgovor.httpStatus, kod: odgovor.code });
+    return 1;
+  }
+  await mkdir(join(p.folder, "rezerve"), { recursive: true });
+  await copyFile(p.konfiguracija, join(p.folder, "rezerve", `config-pre-preseljenja-${stamp}.json`));
+  const r = preseliIdentitetReda({ putanja: p.baza, novi, rezervaPutanja, vlasnik: `preseljenje-${process.pid}`, potvrdi: true, now });
+  ispisi({ komanda: "preseli-adresu", ...r, rezerva: r.rezerva ? basename(r.rezerva) : null, dokaz: "heartbeat na novu adresu prihvaćen" });
+  return 0;
+}
+
 /* ========================================================================= */
 
 export async function main(argv = process.argv.slice(2), env = process.env) {
@@ -825,6 +875,8 @@ export async function main(argv = process.argv.slice(2), env = process.env) {
         return await rucno(p);
       case "heartbeat":
         return await heartbeat(p);
+      case "preseli-adresu":
+        return await preseliAdresu(p, { potvrdi: argv.includes("--potvrdi") });
       default:
         process.stderr.write(`Nepoznata komanda: ${komanda}\n`);
         return 2;

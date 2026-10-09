@@ -249,6 +249,100 @@ function pripremiRed(db, ulaz) {
   }
 }
 
+/**
+ * Kontrolisano preseljenje reda na NOVU adresu istog servera.
+ *
+ * Identitet reda (`meta.identitet`) vezuje red za server, uređaj i opseg, i
+ * pri otvaranju se samo poredi — zato promena `serverOrigin` daje
+ * `identity_mismatch`. Kada je nova adresa ISTI server (ista baza, isti
+ * uređaj i ključ — to proverava pozivalac potpisanim zahtevom PRE ovoga),
+ * potvrde poslatih faktura i neposlate stavke važe i dalje, pa se menja samo
+ * polje `origin`. Ostala polja moraju biti identična.
+ *
+ * Redosled: brava reda (nijedan ciklus ne radi) → dosledna kopija
+ * (`VACUUM INTO`) i provera kopije → jedna transakcija sa uslovnim UPDATE-om →
+ * poređenje brojeva pre i posle. Ništa se ne briše; ključ se ne dira.
+ *
+ * @param {{ putanja: string, novi: object, rezervaPutanja: string, vlasnik: string, potvrdi: boolean, now?: Date }} ulaz
+ */
+export function preseliIdentitetReda(ulaz) {
+  const db = new DatabaseSync(ulaz.putanja);
+  try {
+    const meta = citajMetu(db);
+    if (!meta.identitet) throw new StoreError("identity_missing", "Red nema identitet — nema šta da se preseli.");
+    const zatecena = Number(meta.sema_verzija ?? 0);
+    if (zatecena > SEMA_VERZIJA) throw new StoreError("schema_newer", "Red je novije šeme od ovog konektora.");
+    const stari = JSON.parse(meta.identitet);
+    const novi = ulaz.novi;
+    const kljucevi = [...new Set([...Object.keys(stari), ...Object.keys(novi)])].sort();
+    const razlike = kljucevi.filter((k) => JSON.stringify(stari[k]) !== JSON.stringify(novi[k]));
+    if (razlike.length === 0) {
+      return { status: "vec_preseljeno", staraAdresa: stari.origin, novaAdresa: novi.origin };
+    }
+    if (razlike.length !== 1 || razlike[0] !== "origin") {
+      throw new StoreError(
+        "identity_mismatch",
+        `Razlikuje se više od adrese servera (${razlike.join(", ")}) — preseljenje nije dozvoljeno.`,
+      );
+    }
+    const brojevi = () => ({
+      stavke: db.prepare("SELECT count(*) AS n FROM stavke").get().n,
+      poStanju: Object.fromEntries(db.prepare("SELECT stanje, count(*) AS n FROM stavke GROUP BY stanje ORDER BY stanje").all().map((r) => [r.stanje, r.n])),
+      komande: db.prepare("SELECT count(*) AS n FROM komande").get().n,
+      dogadjaji: db.prepare("SELECT count(*) AS n FROM komanda_dogadjaji").get().n,
+      potvrdjeniDogadjaji: db.prepare("SELECT count(*) AS n FROM komanda_dogadjaji WHERE potvrdjen = 1").get().n,
+    });
+    const pre = brojevi();
+    const plan = { status: "plan", staraAdresa: stari.origin, novaAdresa: novi.origin, brojevi: pre };
+    if (!ulaz.potvrdi) return plan;
+
+    const api = napraviApi(db, ulaz.putanja);
+    const now = ulaz.now ?? new Date();
+    if (!api.uzmiZakljucavanje({ vlasnik: ulaz.vlasnik, now }).uzeto) {
+      throw new StoreError("locked", "Red je zaključan (ciklus u toku) — pokušajte posle završetka ciklusa.");
+    }
+    try {
+      // Dosledna kopija celog reda pre izmene (SQLite VACUUM INTO piše jedan konzistentan snimak).
+      mkdirSync(dirname(ulaz.rezervaPutanja), { recursive: true });
+      db.exec(`VACUUM INTO '${ulaz.rezervaPutanja.replace(/'/g, "''")}'`);
+      const kopija = new DatabaseSync(ulaz.rezervaPutanja, { readOnly: true });
+      try {
+        const k = citajMetu(kopija);
+        const kn = kopija.prepare("SELECT count(*) AS n FROM stavke").get().n;
+        if (k.identitet !== meta.identitet || kn !== pre.stavke) {
+          throw new StoreError("backup_mismatch", "Rezervna kopija reda se ne poklapa sa redom — preseljenje prekinuto.");
+        }
+      } finally {
+        kopija.close();
+      }
+
+      const noviJson = JSON.stringify(novi);
+      db.exec("BEGIN IMMEDIATE");
+      try {
+        const r = db.prepare("UPDATE meta SET vrednost = ? WHERE kljuc = 'identitet' AND vrednost = ?").run(noviJson, meta.identitet);
+        if (Number(r.changes) !== 1) throw new StoreError("identity_changed", "Identitet se promenio u međuvremenu — ništa nije izmenjeno.");
+        db.prepare("INSERT OR REPLACE INTO meta(kljuc, vrednost) VALUES(?, ?)").run(
+          `preseljenje_${now.toISOString()}`,
+          JSON.stringify({ sa: stari.origin, na: novi.origin, rezerva: ulaz.rezervaPutanja.split(/[\\/]/).pop() }),
+        );
+        db.exec("COMMIT");
+      } catch (greska) {
+        try { db.exec("ROLLBACK"); } catch { /* već vraćeno */ }
+        throw greska;
+      }
+      const posle = brojevi();
+      if (JSON.stringify(posle) !== JSON.stringify(pre)) {
+        throw new StoreError("counts_changed", "Brojevi u redu su se promenili tokom preseljenja — proveriti ručno; kopija je sačuvana.");
+      }
+      return { status: "preseljeno", staraAdresa: stari.origin, novaAdresa: novi.origin, brojevi: posle, rezerva: ulaz.rezervaPutanja };
+    } finally {
+      api.otpustiZakljucavanje(ulaz.vlasnik);
+    }
+  } finally {
+    db.close();
+  }
+}
+
 function citajMetu(db) {
   const redovi = db.prepare("SELECT kljuc, vrednost FROM meta").all();
   return Object.fromEntries(redovi.map((r) => [r.kljuc, r.vrednost]));

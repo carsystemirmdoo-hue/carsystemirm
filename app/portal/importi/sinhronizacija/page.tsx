@@ -137,7 +137,8 @@ export default async function SyncOperationsPage() {
             title="Ručne komande su isključene"
             description={
               "Prijem dokumenata radi, ali daljinsko pokretanje skeniranja nije uključeno. " +
-              "Automatski termin u 09:00 se time ne menja."
+              "Automatski ciklusi konektora se time ne menjaju: radnim danima svakog sata od 08:02 do 19:02 " +
+              "(praznici se preskaču), dok je kancelarijski računar uključen i nalog prijavljen."
             }
           />
         </section>

@@ -1,13 +1,13 @@
 import { SectionHeader } from "@/components/portal/PortalPrimitives";
 import type { BackupStatusItem } from "@/lib/backup/status-service";
-import { BACKUP_LABELS, BACKUP_THRESHOLDS } from "@/lib/backup/status.mjs";
+import { BACKUP_LABELS, BACKUP_THRESHOLDS, DEFERRED_KINDS } from "@/lib/backup/status.mjs";
 
 const DT = new Intl.DateTimeFormat("sr-Latn-RS", { dateStyle: "short", timeStyle: "short", timeZone: "Europe/Belgrade" });
 const N = new Intl.NumberFormat("sr-Latn-RS");
 
 const WHAT: Record<string, string> = {
   db_verified: "Kopija iz jednog snimka baze, vraćena u praznu bazu; poklopili su se sve tabele, sekvence, dozvole i zbirovi prodaje. Ovo NE znači da je kopija sačuvana van GitHub-a.",
-  offsite_stored: "Šifrovana kopija preuzeta sa GitHub-a, otisak proveren i sačuvana na firminom računaru ili u oblaku. Tek ovo je kopija van GitHub-a.",
+  offsite_stored: "Šifrovana kopija preuzeta sa GitHub-a, otisak proveren i sačuvana na firminom računaru (van GitHub-a). Ovo NE potvrđuje kopiju u oblaku: Google Drive se otprema ručno i portal ga ne prati.",
   pdf_backup: "Dnevna inkrementalna šifrovana kopija izvornih PDF-ova. Obrisan original ne briše sačuvanu kopiju.",
 };
 
@@ -27,13 +27,18 @@ function detailOf(item: BackupStatusItem) {
 
 const SHORT: Record<string, string> = {
   db_verified: "provera kopije baze",
-  offsite_stored: "kopija van GitHub-a",
+  offsite_stored: "kopija na firminom računaru",
   pdf_backup: "kopija PDF-ova",
 };
 
 const MISSING: Record<string, string> = {
-  offsite_stored: "Šifrovana kopija van GitHub-a (firmin računar i Google Drive) još nije podešena.",
-  pdf_backup: "Šifrovana kopija izvornih PDF-ova još nije podešena.",
+  offsite_stored: "Šifrovana kopija na firminom računaru (van GitHub-a) još nije podešena.",
+  pdf_backup: "Kopija izvornih PDF-ova nije uključena.",
+};
+
+const DEFERRED: Record<string, string> = {
+  pdf_backup:
+    "Kopija izvornih PDF-ova je odložena odlukom firme — dokumenti se čuvaju u BizniSoftu. Ovo nije greška konektora, a nije ni potvrda da je BizniSoft zaštićen: nezavisna kopija BizniSoft baze još nije proverena.",
 };
 
 /**
@@ -70,7 +75,8 @@ export function BackupStatusPanel({ items, compact = false }: { items: BackupSta
     );
   }
   const active = items.filter((i) => i.state !== "nije_podesen");
-  const missing = items.filter((i) => i.state === "nije_podesen");
+  const deferred = items.filter((i) => i.state === "nije_podesen" && (DEFERRED_KINDS as readonly string[]).includes(i.kind));
+  const missing = items.filter((i) => i.state === "nije_podesen" && !deferred.includes(i));
   const shown = compact ? active.filter((i) => i.tone !== "success") : active;
   if (compact && shown.length === 0 && missing.length === 0) return null;
   const dbOk = active.some((i) => i.kind === "db_verified" && i.tone === "success");
@@ -123,6 +129,15 @@ export function BackupStatusPanel({ items, compact = false }: { items: BackupSta
             <p className="bk-msg">Još nije podešeno: {missing.map((i) => SHORT[i.kind] ?? i.kind).join(", ")}.</p>
           )}
         </div>
+      ) : null}
+      {!compact && deferred.length ? (
+        <ul className="bk-deferred">
+          {deferred.map((i) => (
+            <li key={i.kind}>
+              <span className="kk-status" data-tone="neutral">odloženo</span> {DEFERRED[i.kind] ?? `${BACKUP_LABELS[i.kind as keyof typeof BACKUP_LABELS]}: odloženo.`}
+            </li>
+          ))}
+        </ul>
       ) : null}
     </section>
   );

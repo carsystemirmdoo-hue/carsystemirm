@@ -32,7 +32,7 @@ test("bez lozinke baze: potvrdu šalje konektor potpisom uređaja", () => {
   for (const [name, s] of Object.entries({ ...scripts, zakazi })) {
     assert.ok(!/BACKUP_STATUS_URL|postgres(ql)?:\/\/|carsystem_backup_status/i.test(s.replace(/^\s*#.*$/gm, "").replace(/<#[\s\S]*?#>/g, "")), `${name}: pristup bazi`);
   }
-  assert.match(scripts.kopije, /prijavi-kopiju --izvestaj/);
+  assert.match(scripts.kopije, /'prijavi-kopiju', '--izvestaj'/);
   assert.match(scripts.kopije, /if \(\$k -eq 0\) \{ \$k = Potvrdi \$izv \}/, "potvrda samo posle uspešne kopije");
   assert.match(scripts.podesi, /0\.3\.12/);
 });
@@ -45,4 +45,37 @@ test("zakazani zadatak: samo schtasks.exe, tekući nalog, bez povišenih prava, 
 
 test("fascikla druge kopije ne sme biti unutar izvora PDF-ova", () => {
   assert.match(scripts.podesi, /ne sme biti unutar fascikle sa PDF-ovima/);
+});
+
+test("zakazivanje podrazumevano pokreće samo preuzimanje kopije baze", () => {
+  assert.match(zakazi, /\[ValidateSet\('Preuzmi', 'Sve'\)\] \[string\] \$Akcija = 'Preuzmi'/);
+  assert.match(zakazi, /-Akcija \$Akcija"/);
+});
+
+test("PowerShell: nijedna promenljiva ne deli ime sa drugom koja se razlikuje samo po velikim slovima", () => {
+  // `$akcija = …` bi tiho pregazio parametar `$Akcija` (PowerShell ne razlikuje velika i mala slova).
+  for (const [name, s] of Object.entries({ ...scripts, zakazi })) {
+    const imena = new Map();
+    for (const [, v] of s.matchAll(/\$([A-Za-z_][A-Za-z0-9_]*)/g)) {
+      const k = v.toLowerCase();
+      if (!imena.has(k)) imena.set(k, new Set());
+      imena.get(k).add(v);
+    }
+    for (const [k, v] of imena) assert.equal(v.size, 1, `${name}: ${[...v].join(" / ")} (${k})`);
+  }
+});
+
+test("node pozivi idu kroz omotač koji čuva izlazni kod uprkos stderr-u (PS 5.1)", () => {
+  assert.match(scripts.kopije, /\$ErrorActionPreference = 'Continue'\s*\n\s*try \{ & \$node --no-warnings @argumenti \*>> \$log; return \$LASTEXITCODE \}/);
+  // Jedini drugi direktan poziv je `node --version` u Proveri (bez preusmeravanja).
+  assert.deepEqual((scripts.kopije.match(/& \$node [^;\n)]*/g) ?? []).sort(), ["& $node --no-warnings @argumenti *>> $log", "& $node --version"].sort());
+  assert.match(scripts.kopije, /'--dnevnih', "\$\(\$cuvanje\.dnevnih\)"/);
+});
+
+test("podešavanje: lokalna fascikla, PDF samo uz -SaPdf, ograničeno čuvanje 7/4/3", () => {
+  assert.match(scripts.podesi, /\[switch\] \$SaPdf/);
+  assert.match(scripts.podesi, /\[ValidateRange\(1, 60\)\] \[int\] \$Dnevnih = 7/);
+  assert.match(scripts.podesi, /\[ValidateRange\(1, 60\)\] \[int\] \$Nedeljnih = 4/);
+  assert.match(scripts.podesi, /\[ValidateRange\(1, 60\)\] \[int\] \$Mesecnih = 3/);
+  assert.doesNotMatch(scripts.podesi, /Google Drive-u \(npr/);
 });

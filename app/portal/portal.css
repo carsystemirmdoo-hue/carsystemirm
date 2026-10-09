@@ -8972,4 +8972,7 @@ section.portal-metrics {
 .bk-list:has(> .bk-item:only-child) { grid-template-columns: minmax(0, 1fr); }
 .bk-incomplete { display: grid; gap: 6px; margin: 0 20px 20px; padding: 12px 14px; border: 1px solid var(--p-line); border-left: 4px solid oklch(0.72 0.14 75); border-radius: 8px; background: var(--p-surface); font-size: 13px; }
 .bk-incomplete .bk-missing { padding: 0 0 0 18px; }
+.bk-deferred { display: grid; gap: 6px; margin: 0 20px 20px; padding: 0; list-style: none; font-size: 12.5px; line-height: 1.5; color: var(--p-muted); }
+.bk-deferred .kk-status { margin-right: 6px; vertical-align: 1px; }
+@media (max-width: 960px) { .bk-deferred { margin: 0 14px 16px; } }
 @media (max-width: 960px) { .bk-incomplete { margin: 0 14px 16px; } }

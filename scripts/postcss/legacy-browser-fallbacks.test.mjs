@@ -61,3 +61,9 @@ test("fajl bez modernih boja ostaje netaknut", async () => {
   const source = ".a { color: #111; composes: b from \"./c.css\"; }\n:global(.x) .y { margin: 0; }";
   assert.equal(await run(source), source);
 });
+
+test("border sa autorovom rezervom: rezerva ostaje u pravilu, original ide u @supports (minifikator ih inače spaja)", async () => {
+  const css = await run(".b { border: 1px solid var(--line); border-left: 4px solid #d79628; border-left: 4px solid oklch(0.72 0.14 75); border-radius: 8px; }");
+  assert.match(css, /\.b \{ border: 1px solid var\(--line\); border-left: 4px solid #d79628; border-radius: 8px; \}/);
+  assert.match(css, /@supports [^{]+\{\s*\.b \{ border-left: 4px solid oklch\(0\.72 0\.14 75\); border-radius: 8px; \}/);
+});

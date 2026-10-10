@@ -256,6 +256,8 @@ function legacyBrowserFallbacks() {
        * kad se kopira kakva jeste) za `@supports` blok iza pravila
        */
       const supportsCopies = new Map();
+      /** deklaracije koje posle obilaska ostaju samo u @supports kopiji */
+      const removed = new Set();
 
       root.walkDecls((decl) => {
         if (decl.parent?.type !== "rule") return;
@@ -276,7 +278,20 @@ function legacyBrowserFallbacks() {
           !COLOR_MIX.test(previous.value) &&
           !decl.value.includes("var(")
         ) {
-          return; // autor je već napisao rezervu
+          // Autor je već napisao rezervu. Za border*/outline* minifikator ipak
+          // spaja dve iste osobine i briše raniju (rezervu), pa original i
+          // ovde ide u @supports kopiju, a u pravilu ostaje autorova rezerva.
+          if (/^(?:border|outline)/.test(decl.prop)) {
+            const rule = decl.parent;
+            if (!supportsCopies.has(rule)) supportsCopies.set(rule, new Map());
+            const copies = supportsCopies.get(rule);
+            copies.set(decl, decl.clone());
+            for (const later of laterSameFamily(decl)) {
+              if (!copies.has(later)) copies.set(later, null);
+            }
+            removed.add(decl);
+          }
+          return;
         }
 
         const fallback = fallbackFor(decl.prop, decl.value);
@@ -303,6 +318,7 @@ function legacyBrowserFallbacks() {
         const declarations = rule.nodes
           .filter((node) => copies.has(node))
           .map((node) => copies.get(node) ?? node.clone());
+        for (const node of removed) if (node.parent === rule) node.remove();
         const supports = new AtRule({ name: "supports", params: SUPPORTS_MODERN });
         const copy = rule.clone({ nodes: [] });
         copy.append(declarations);

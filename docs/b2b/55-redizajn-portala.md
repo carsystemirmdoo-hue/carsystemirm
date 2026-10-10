@@ -72,27 +72,49 @@ nesačuvanih izmena, odbijanje zastarelih radnji. Nema ručnog unosa cene. Bez m
 
 ## 6. Provere
 
-- `npm test` 2220/2220, `npm run typecheck`, `npm run lint` (0 grešaka, 2 ranija upozorenja van
-  obuhvata), `npm run test:integration` 560/560 (postojeća lokalna test baza), `npm run build:check`.
-- Lokalna kopija, 61 adresa × uloge Vlasnik / kancelarija / komercijalista na 1440; Vlasnik na 390,
-  768, 1366×768, 1920: bez vodoravnog prelivanja strane, bez engleskih oznaka, bez JS grešaka
-  (jedini 403 u konzoli je postojeći ekran odbijanja portalske korpe).
-- Kalendar (Playwright): unos, Od/Do bez preklapanja, otvaranje, izbor meseca i godine, izbor dana,
-  Escape, brisanje; 390, 768, 1366×768, 1440, 1920 i zum 125/150/200 % na 1366×768 — kalendar ceo
-  u prozoru. Zum je emuliran smanjenim CSS prozorom uz `deviceScaleFactor` (isti CSS raspored kao
-  zum pregledača).
-- Duge liste (261–500 redova): zaglavlje tabele ostaje na vrhu okvira, neprozirno, ispod trake portala.
-- Kupčev panel i prijave (1440, 390, tamna tema): piksel-identični pre/posle, osim kupčevih Faktura
-  gde deljeno polje perioda sada ima iste čitljive oznake kao interni portal. Javni sajt ne učitava
-  portal.css.
+Automatske: `npm test` 2220/2220, `npm run typecheck`, `npm run lint` (0 grešaka, 2 ranija upozorenja
+van obuhvata), `npm run test:integration` 560/560 (postojeća lokalna test baza), `npm run build:check`.
 
-## 7. Nije provereno
+Stvarno pokretano (lokalna kopija, dev server):
+- Chromium (Playwright): 61 adresa × Vlasnik / kancelarija / komercijalista na 1440; Vlasnik na 390,
+  768, 1366×768, 1920 — bez vodoravnog prelivanja, bez engleskih oznaka, bez JS grešaka.
+- Google Chrome sa STVARNIM zumom pregledača (profil sa `default_zoom_level`, prozor 1366×768, novi
+  headless; potvrđeno `devicePixelRatio` 1,25 / 1,5 / 2 i širina 1093 / 911 / 683 CSS px): Početna,
+  Kupci, kartica kupca, Prodaja, Za razgovor, Cene, Rabati po kupcu, Sinhronizacija, Lozinka, Zahtevi —
+  bez prelivanja; kalendar ceo u prozoru; unos, Od/Do bez preklapanja, izbor meseca/godine/dana, brisanje.
+- Kalendar u Chromium-u na 390, 768, 1366×768, 1440, 1920: isto, plus Escape.
+- Duge liste (261–500 redova): zaglavlje tabele ostaje na vrhu okvira, neprozirno, ispod trake.
+- Kupčev panel i prijave (1440, 390, tamna tema): piksel-identični pre/posle, osim kupčevih Faktura gde
+  deljeno polje perioda ima iste čitljive oznake kao interni portal. Javni sajt ne učitava portal.css.
 
-- Stvarni zum pregledača (Preferences) i pravi Safari/Firefox za interni portal — provereni su
-  Chromium i emulirani zum.
+Simulirano (nije pravi pregledač/zum): ranije provere zuma smanjenim CSS prozorom uz
+`deviceScaleFactor` — zamenjene gornjom proverom stvarnog zuma u Chrome-u.
+
+Snimci tokom restarta dev servera: snimak bez učitanog stila ne prijavljuje grešku, pa su svi skupovi
+naknadno provereni pikselima (tamna bočna traka na desktopu, udeo tamnih piksela na telefonu; detektor
+proveren na poznatom lošem snimku). Nađena 3 loša snimka (Kupci 390, Otprema 768, Administracija 1920)
+ponovljena i pregledana. Detalj zahteva je imao isto skraćeno ime fajla kao njegova štampa — snimljen
+posebno za sve tri uloge.
+
+Greška 403 u konzoli: jedino `/portal/korpa` (provereno prolazom kroz svih 61 adresa). Očekivano —
+`getPortalCommerceAccess()` traži uključen `PORTAL_COMMERCE`; lokalno je isključen pa strana namerno
+vraća `forbidden()` (HTTP 403, ekran „Nemate pristup“). Kod nepromenjen u odnosu na main. Komercijalista
+na fakturi kupca koji mu nije dodeljen dobija 404 (`loadInvoiceDetail` vraća null) — takođe namerno.
+
+## 7. Odnos sa PR #20 (širina + stari pregledači)
+
+- Zajednički fajl je samo `app/portal/portal.css`. PR #20 menja 4 boje radi kontrasta i širinu
+  `.portal-main` (1680 → `clamp(1680px, 85vw, 2200px)`); ovaj PR menja veličine fonta u istim pravilima.
+- Ova grana je preuzela identične linije boja iz PR #20, pa ni jedan redosled spajanja ne poništava
+  ni boju ni veličinu. `git merge-tree` i dalje prijavljuje 3 trivijalna sukoba (samo `font-size`):
+  pravilno rešenje je veličina iz ove grane (12 / 12 / 13 px). Širina iz PR #20 se spaja automatski.
+- Spojeni CSS propušten kroz `scripts/postcss/legacy-browser-fallbacks.cjs` iz PR #20: bez upozorenja;
+  ovaj PR ne dodaje `oklch`/`color-mix` (čuvar `cssFallback.test.mjs`).
+
+## 8. Nije provereno
+
+- Pravi Safari i Firefox za interni portal; stariji Windows pregledači (Chrome/Edge 109) — to je
+  predmet PR #20.
 - Čitač ekrana (VoiceOver/NVDA).
-- Stariji Windows pregledači (vidi PR #20) — CSS ovog PR-a ne uvodi `oklch`/`color-mix`
-  (`cssFallback.test.mjs`).
-- Ekrani sa stvarnim radnjama koje menjaju podatke (odobravanje pravila, dodela, uvoz) — samo izgled,
-  bez pokretanja radnji.
+- Radnje koje menjaju podatke (odobravanje pravila, dodela, uvoz) — samo izgled, radnje nisu pokretane.
 - Preview: dogovor o objavi sa mogućnošću povratka ostaje za završni pregled.

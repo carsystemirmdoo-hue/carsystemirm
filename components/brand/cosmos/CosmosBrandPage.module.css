@@ -50,7 +50,8 @@
   font-weight: 600;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  opacity: 0.62;
+  /* 0.62 je na zelenom panelu EASY MAX davao 3.66:1 (izmereno na pikselima). */
+  opacity: 0.8;
   margin: 0;
 }
 
@@ -750,6 +751,11 @@
   display: grid;
   grid-template-columns: minmax(0, 1fr);
   gap: 30px;
+  /* Kartica je bila široka koliko i prozor: na 2560px su tri kataloške kartice
+     bile po ~780px (slika 656px, 1,9× više nego na 1440px). Do ~1780px prozora
+     ništa se ne menja; iznad toga kartica staje na 1720px i centrira se. */
+  max-width: 1720px;
+  margin-inline: auto;
 }
 
 .commerceHead {

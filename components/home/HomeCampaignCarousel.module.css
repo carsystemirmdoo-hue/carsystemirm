@@ -154,6 +154,17 @@
     filter 180ms ease;
 }
 
+/*
+ * Pregledač bez color-mix() (Chrome/Edge < 111, npr. 109 na Windows 7/8.1)
+ * dobija čistu boju slajda kao rezervu (PostCSS korak). Unutrašnja senka od
+ * 8 % crne vraća isto produbljivanje — bez nje beli tekst pada na 4.42:1.
+ */
+@supports not (color: color-mix(in oklab, red, red)) {
+  .campaignPrimaryCta {
+    box-shadow: inset 0 0 0 100vmax rgb(0 0 0 / 0.08);
+  }
+}
+
 .campaignSlide[data-visual="artwork"] .campaignPrimaryCta {
   color: #06171f;
 }

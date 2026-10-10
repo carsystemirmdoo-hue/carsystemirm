@@ -69,7 +69,20 @@ export function CartProvider({
    */
   useEffect(() => {
     setReady(false);
-    setState(parseStoredCart(window.localStorage.getItem(storageKey)));
+    /*
+     * `localStorage` baca SecurityError kad su podaci sajta blokirani
+     * (podešavanje pregledača ili politika firme). Neuhvaćena greška u efektu
+     * obara ceo portal, pa korpa tada radi samo u memoriji ove kartice.
+     */
+    let storage: Storage;
+    try {
+      storage = window.localStorage;
+      setState(parseStoredCart(storage.getItem(storageKey)));
+    } catch {
+      setState(parseStoredCart(null));
+      setReady(true);
+      return;
+    }
     setReady(true);
     /*
      * Zapisi iz ranijih verzija se UKLANJAJU, ne migriraju.
@@ -79,14 +92,22 @@ export function CartProvider({
      * utvrditi kom nalogu zapis pripada, pa bi prenos znacio pripisivanje tudje
      * korpe.
      */
-    for (const key of Object.keys(window.localStorage)) {
-      if (isDiscardedCartKey(key)) window.localStorage.removeItem(key);
+    try {
+      for (const key of Object.keys(storage)) {
+        if (isDiscardedCartKey(key)) storage.removeItem(key);
+      }
+    } catch {
+      // Čišćenje starih zapisa nije neophodno za rad korpe.
     }
   }, [storageKey]);
 
   useEffect(() => {
     if (!ready) return;
-    window.localStorage.setItem(storageKey, JSON.stringify(state));
+    try {
+      window.localStorage.setItem(storageKey, JSON.stringify(state));
+    } catch {
+      // Skladište blokirano ili puno: korpa ostaje u memoriji ove kartice.
+    }
   }, [ready, state, storageKey]);
 
   const add = useCallback((item: CartInput, quantity = 1) => {

@@ -1,7 +1,11 @@
 .catalogShell {
   /* #e5322a sa belim tekstom = 4.36:1; ista crvena, za nijansu dublja, drži ≥ 4.5:1 (ispuna i tekst). */
   --catalog-red: #d42c24;
-  --catalog-red-bright: #d42c24;
+  /* TEKST u crvenoj na svetloj podlozi: ista nijansa, ~7 % tamnija (4.95:1 na
+     #eef0f3; #d42c24 je kao tekst davao 4.39:1). Ispuna ostaje --catalog-red. */
+  --catalog-red-bright: #c52921;
+  /* Aktivni čip sortiranja: tekst na sopstvenoj roze podlozi (12 % crvene). */
+  --catalog-sort-active-text: #b2251e;
   --catalog-red-tint: #fdecea;
   --catalog-steel: oklch(0.55 0.075 245);
   --catalog-bg: #f4f5f7;
@@ -41,6 +45,7 @@
   /* --catalog-red je ISPUNA ispod belog teksta, --catalog-red-bright TEKST na tamnom. */
   --catalog-red: oklch(0.56 0.215 27);
   --catalog-red-bright: oklch(0.7 0.19 27);
+  --catalog-sort-active-text: var(--catalog-red-bright);
   --catalog-red-tint: oklch(0.33 0.08 27 / 0.42);
   --catalog-bg: var(--dk-0);
   --catalog-bg-soft: oklch(0.13 0.008 255);
@@ -70,7 +75,7 @@
 
 .topbarInner {
   display: flex;
-  max-width: 1320px;
+  max-width: calc(1320px + var(--ds-container-grow, 0px));
   align-items: center;
   justify-content: space-between;
   gap: 18px;
@@ -169,7 +174,7 @@
 }
 
 .main {
-  max-width: 1320px;
+  max-width: calc(1320px + var(--ds-container-grow, 0px));
   margin-inline: auto;
   padding: 34px 48px 96px;
 }
@@ -858,7 +863,7 @@
 
 .sortTabActive {
   background: color-mix(in srgb, var(--catalog-red-bright) 12%, transparent);
-  color: var(--catalog-red-bright);
+  color: var(--catalog-sort-active-text, var(--catalog-red-bright));
 }
 
 .sortTab:focus-visible {
@@ -881,6 +886,14 @@
    */
   .productGrid {
     grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+/* Na širokim ekranima kontejner raste (--ds-container-grow); četvrta kolona
+   drži karticu približno iste veličine kao na 1440px umesto da raste ~1,3×. */
+@media (min-width: 1880px) {
+  .productGrid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
   }
 }
 

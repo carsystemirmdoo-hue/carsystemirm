@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { requireCustomerSession } from "@/lib/authz/customer-session";
-import { listRequestArticles, requestOrderingEnabled } from "@/lib/ordering/request-service";
+import { listRequestArticles } from "@/lib/ordering/request-service";
+import { orderingEnabledFor } from "@/lib/ordering/trial";
 import { AddItem } from "./AddItem";
 
 export const dynamic = "force-dynamic";
@@ -15,7 +16,7 @@ const money = (n: number) => `${n.toLocaleString("sr-RS", { minimumFractionDigit
 export default async function RequestCatalogPage({ searchParams }: { searchParams: Promise<{ q?: string }> }) {
   const session = await requireCustomerSession("/kupac/naruci");
   const { q } = await searchParams;
-  if (!requestOrderingEnabled()) {
+  if (!(await orderingEnabledFor(session.customerId))) {
     return (
       <section className="portal-panel">
         <div className="portal-panel-body">

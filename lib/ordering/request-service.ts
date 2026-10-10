@@ -13,6 +13,7 @@ import { customerPrices } from "@/lib/pricing/customer-price-service";
 import { approvedPaymentOptions } from "@/lib/pricing/payment-option-service";
 import { optionLabel, optionNote } from "@/lib/pricing/paymentOptions.mjs";
 import { belgradeDate } from "@/lib/recommendations/customerRhythm.mjs";
+import { orderingEnabledFor } from "@/lib/ordering/trial";
 
 /**
  * Zahtev za porudžbinu iz STVARNOG cenovnika (0044):
@@ -27,6 +28,7 @@ import { belgradeDate } from "@/lib/recommendations/customerRhythm.mjs";
 type Tx = Parameters<Parameters<Database["transaction"]>[0]>[0];
 type Exec = Database | Tx;
 
+/** Globalni prekidač (svi kupci). Za pojedinačnog kupca koristiti `orderingEnabledFor`. */
 export function requestOrderingEnabled() {
   return process.env.CUSTOMER_ORDERING === "cenovnik";
 }
@@ -151,7 +153,7 @@ function fingerprintOf(option: string | null, lines: RequestLine[]) {
 export async function loadRequestQuote(customerId: string, option: string | null, exec: Exec = getDb()): Promise<RequestQuote> {
   if (!customerId) throw new Error("Upit kupca bez customer_id se ne sme izvršiti.");
   const today = belgradeDate(new Date());
-  const enabled = requestOrderingEnabled();
+  const enabled = await orderingEnabledFor(customerId);
   const cart = [...(await exec.execute<{ article_id: string; quantity: string; source_order_id: string | null }>(sql`
     SELECT article_id, quantity::text AS quantity, source_order_id FROM customer_cart_items WHERE customer_id = ${customerId} ORDER BY created_at, article_id`))];
   const priced = await priceLines(exec, customerId, cart.map((c) => ({ articleId: c.article_id, quantity: Number(c.quantity) })), option, today);
@@ -219,7 +221,7 @@ async function cartCount(customerId: string, exec: Exec = getDb()) {
 export async function addRequestItem(session: CustomerSession, input: { articleId: string; quantity: unknown }): Promise<RequestCartChange> {
   const customerId = session.customerId;
   if (!customerId) throw new Error("Upit kupca bez customer_id se ne sme izvršiti.");
-  if (!requestOrderingEnabled()) return { ok: false, message: "Poručivanje preko sajta još nije uključeno." };
+  if (!(await orderingEnabledFor(customerId))) return { ok: false, message: "Poručivanje preko sajta još nije uključeno." };
   if (!/^[0-9a-f-]{36}$/.test(input.articleId)) return { ok: false, message: "Neispravan artikal." };
   const db = getDb();
   const [a] = [...(await db.execute<{ unit: string | null; out: boolean; ok: boolean }>(sql`
@@ -332,7 +334,8 @@ export async function submitOrderRequest(
       const approved = await approvedPaymentOptions(customerId, today);
       const opt = input.paymentOption ?? null;
       if (approved.length ? !approved.includes(opt ?? "") : opt !== null) {
-        return { status: "blocked" as const, message: "Izabrana opcija plaćanja nije odobrena za Vašu firmu.", blockers: [] };
+        // Opcija je opozvana ili promenjena posle prikaza korpe: nova potvrda kupca, ne tiha zamena.
+        return { status: "price_changed" as const, message: "Izabrana opcija plaćanja više nije odobrena za Vašu firmu. Izaberite odobrenu opciju, pregledajte nove iznose i potvrdite ponovo." };
       }
       const quote = await loadRequestQuote(customerId, opt, tx);
       if (!quote.canSubmit) return { status: "blocked" as const, message: "Zahtev se ne može poslati.", blockers: quote.blockers };

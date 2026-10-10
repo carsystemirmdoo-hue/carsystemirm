@@ -77,6 +77,8 @@ after(async () => {
     await db.sql`DELETE FROM customer_orders WHERE customer_id = ${customerId}`;
     await db.sql`DELETE FROM price_rules WHERE customer_id = ${customerId}`;
     await db.sql`TRUNCATE customer_payment_options, article_base_prices, article_programme_decisions, customer_commercial_status_decisions`;
+    await db.sql`DELETE FROM customer_message_outbox WHERE customer_user_id IN (SELECT id FROM customer_users WHERE customer_id = ${customerId})`;
+    await db.sql`DELETE FROM customer_account_tokens WHERE customer_user_id IN (SELECT id FROM customer_users WHERE customer_id = ${customerId})`;
     await db.sql`DELETE FROM customer_users WHERE customer_id = ${customerId}`;
     await db.sql`DELETE FROM customer_assignments WHERE customer_id = ${customerId}`;
     await db.sql`DELETE FROM customers WHERE id = ${customerId}`;
@@ -119,7 +121,8 @@ test("slanje: neodobrena opcija odbijena, promena cene traži novu potvrdu, isti
   const s = await svc();
   const q = await s.loadRequestQuote(customerId, "avans");
   const bad = await s.submitOrderRequest(session(), { idempotencyKey: randomUUID(), fingerprint: q.fingerprint, paymentOption: "odlozeno_60" });
-  assert.equal(bad.status, "blocked");
+  assert.equal(bad.status, "price_changed", "neodobrena opcija: bez zahteva, nova potvrda");
+  assert.equal((await db.sql`SELECT 1 FROM customer_orders WHERE customer_id = ${customerId}`).length, 0);
   assert.equal((await s.submitOrderRequest(session("remembered"), { idempotencyKey: randomUUID(), fingerprint: q.fingerprint, paymentOption: "avans" })).status, "reauth");
   // Cena se promenila posle prikaza korpe (novo pravilo za CS GIT) → nova potvrda.
   await db.sql`UPDATE price_rules SET discount_percent = 42 WHERE customer_id = ${customerId} AND article_id = ${art.C1}`;
@@ -165,6 +168,48 @@ test("izmenjen predlog: original netaknut, komercijalista ne menja, kupac potvr�
   assert.equal(detail.paymentOptionLabel, "Avansno plaćanje");
   assert.equal(detail.preparedByName !== null, true);
   assert.equal(detail.lines.length, 2);
+});
+
+test("opoziv opcije plaćanja posle prikaza korpe traži novu potvrdu", async (t) => {
+  if (guard(t)) return;
+  const s = await svc();
+  await s.addRequestItem(session(), { articleId: art.B1, quantity: "1" });
+  const q = await s.loadRequestQuote(customerId, "avans");
+  await db.sql`UPDATE customer_payment_options SET status = 'opozvano' WHERE customer_id = ${customerId} AND option_code = 'avans'`;
+  try {
+    const r = await s.submitOrderRequest(session(), { idempotencyKey: randomUUID(), fingerprint: q.fingerprint, paymentOption: "avans" });
+    assert.equal(r.status, "price_changed");
+    assert.match(String((r as { message?: string }).message), /potvrdite ponovo/);
+  } finally {
+    await db.sql`UPDATE customer_payment_options SET status = 'odobreno' WHERE customer_id = ${customerId} AND option_code = 'avans'`;
+    await db.sql`DELETE FROM customer_cart_items WHERE customer_id = ${customerId}`;
+  }
+});
+
+test("kontrolisana proba: isključeno za sve osim izdvojenog test kupca; probni nalog samo vlasnik", async (t) => {
+  if (guard(t)) return;
+  const s = await svc();
+  const { createTrialAccount } = await import("@/lib/ordering/trial-service");
+  delete process.env.CUSTOMER_ORDERING;
+  const [other] = await db.sql<{ id: string }[]>`INSERT INTO customers (pib, name) VALUES (${`QY${RUN}`}, ${`QA DRUGI ${RUN}`}) RETURNING id`;
+  try {
+    assert.equal((await s.loadRequestQuote(customerId, "avans")).enabled, false, "bez spiska i bez prekidača isključeno");
+    assert.equal((await s.addRequestItem(session(), { articleId: art.B1, quantity: "1" })).ok, false);
+    await db.sql`INSERT INTO system_settings (key, value) VALUES ('ordering.trial', ${db.sql.json({ customerIds: [customerId] })})
+                 ON CONFLICT (key) DO UPDATE SET value = EXCLUDED.value`;
+    assert.equal((await s.loadRequestQuote(customerId, "avans")).enabled, true, "test kupac uključen");
+    assert.equal((await s.loadRequestQuote(other.id, "avans")).enabled, false, "drugi kupac ostaje isključen");
+    await assert.rejects(async () => createTrialAccount(await user("tamara"), { customerId, email: `qy-${RUN}@qa.invalid`, name: "x" }), /vlasnik/);
+    await assert.rejects(async () => createTrialAccount(await user("owner"), { customerId: other.id, email: `qy-${RUN}@qa.invalid`, name: "x" }), /test kupca/);
+    const r = await createTrialAccount(await user("owner"), { customerId, email: `qy-${RUN}@qa.invalid`, name: "Proba" });
+    assert.match(r.link, /^\/prijava\/kupac\/aktivacija\?token=/);
+    const [{ n }] = await db.sql<{ n: number }[]>`SELECT count(*)::int AS n FROM customer_users WHERE customer_id = ${other.id}`;
+    assert.equal(n, 0, "drugi kupac bez naloga");
+  } finally {
+    await db.sql`DELETE FROM system_settings WHERE key = 'ordering.trial'`;
+    await db.sql`DELETE FROM customers WHERE id = ${other.id}`;
+    process.env.CUSTOMER_ORDERING = "cenovnik";
+  }
 });
 
 test("kupac van pripreme za portal ne može da pošalje zahtev", async (t) => {

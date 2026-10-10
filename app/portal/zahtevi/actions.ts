@@ -3,6 +3,7 @@
 import { sql } from "drizzle-orm";
 import { getDb } from "@/db/client";
 import { proposeOrderRevision } from "@/lib/ordering/request-service";
+import { createTrialAccount } from "@/lib/ordering/trial-service";
 
 import { revalidatePath } from "next/cache";
 import { requireCapability } from "@/lib/authz/session";
@@ -64,5 +65,17 @@ export async function proposeRevisionAction(orderId: string, lines: { code: stri
     return { ok: true, message: `Izmenjen predlog ${r.requestNumber} je poslat kupcu na potvrdu.`, orderId: r.orderId };
   } catch (error) {
     return { ok: false, message: error instanceof Error ? error.message : "Predlog nije sačuvan." };
+  }
+}
+
+/** Probni nalog kontrolisane probe (samo vlasnik, samo izdvojeni test kupac). Link se prikazuje jednom. */
+export async function createTrialAccountAction(customerId: string, email: string, name: string) {
+  const user = await requireCapability("customer_accounts:manage", "/portal/zahtevi");
+  try {
+    const r = await createTrialAccount(user, { customerId: String(customerId), email: String(email ?? ""), name: String(name ?? "") });
+    revalidatePath("/portal/zahtevi");
+    return { ok: true, link: r.link, expiresAt: r.expiresAt.toISOString() };
+  } catch (error) {
+    return { ok: false, message: error instanceof Error ? error.message : "Nalog nije napravljen." };
   }
 }

@@ -5,6 +5,8 @@ import { PageHeader } from "@/components/portal/PortalPrimitives";
 import { can } from "@/lib/authz/permissions.mjs";
 import { requireCapability } from "@/lib/authz/session";
 import { listOrderRequests, loadOrderingMode } from "@/lib/ordering/ordering-service";
+import { trialOverview } from "@/lib/ordering/trial-service";
+import { TrialPanel } from "./TrialPanel";
 
 export const dynamic = "force-dynamic";
 
@@ -21,6 +23,8 @@ export default async function OrderRequestsPage({ searchParams }: { searchParams
   const q = ((await searchParams).q ?? "").trim().slice(0, 80);
   const [rows, mode] = await Promise.all([listOrderRequests(user, null, q), loadOrderingMode()]);
   const canReview = can(user, "customer_orders:review");
+  const isOwner = can(user, "customer_accounts:manage") && can(user, "prices:approve");
+  const trials = isOwner ? await trialOverview() : [];
 
   return (
     <>
@@ -61,6 +65,12 @@ export default async function OrderRequestsPage({ searchParams }: { searchParams
           </span>
         </div>
       </section>
+      {isOwner ? (
+        <section className="portal-panel">
+          <div className="portal-section-header"><div><h2>Kontrolisana proba</h2></div></div>
+          <TrialPanel trials={trials} />
+        </section>
+      ) : null}
       {GROUPS.map((g) => {
         const list = rows.filter((r) => g.statuses.includes(r.status));
         if (list.length === 0 && (g.key !== "new" || q)) return null;

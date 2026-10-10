@@ -115,9 +115,9 @@ export function RequestCartForm({ view }: { view: RequestCartView }) {
       <dl className="ka-facts ka-facts-wide">
         <div><dt>Osnovica (bez PDV-a)</dt><dd>{money(view.totals.net)}</dd></div>
         <div><dt>PDV</dt><dd>{money(view.totals.vat)}</dd></div>
-        <div><dt>Ukupno sa PDV-om — {selectedLabel}</dt><dd>{money(view.totals.gross)}{view.onRequest ? <small>bez {view.onRequest} stavki na upit</small> : null}</dd></div>
+        <div><dt>{view.onRequest ? `Zbir stavki sa poznatom cenom — nije konačan iznos zahteva — ${selectedLabel}` : `Ukupno sa PDV-om — ${selectedLabel}`}</dt><dd>{money(view.totals.gross)}{view.onRequest ? <small>sa PDV-om · bez {view.onRequest} stavki na upit</small> : null}</dd></div>
       </dl>
-      {view.onRequest ? <p className="portal-data-note">Stavke na upit nemaju potvrđenu cenu za izabranu opciju; kancelarija Vam javlja cenu. Ukupan iznos ih ne sadrži.</p> : null}
+      {view.onRequest ? <p className="portal-data-note">Stavke na upit nemaju potvrđenu cenu za izabranu opciju; kancelarija Vam javlja cenu. Zbir ih ne sadrži i nije konačan iznos zahteva.</p> : null}
       <div className="kr-fields">
         <label className="rr-field"><span>Napomena (nije obavezno)</span><textarea rows={2} value={note} onChange={(e) => setNote(e.target.value)} maxLength={1000} /></label>
         <label className="rr-field"><span>Adresa isporuke (ako se razlikuje)</span><input value={address} onChange={(e) => setAddress(e.target.value)} maxLength={300} /></label>

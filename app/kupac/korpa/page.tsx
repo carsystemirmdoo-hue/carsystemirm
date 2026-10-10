@@ -3,7 +3,8 @@ import Link from "next/link";
 import { requireCustomerSession } from "@/lib/authz/customer-session";
 import { loadCartQuote } from "@/lib/ordering/ordering-service";
 import { CartForm, type CartView } from "./CartForm";
-import { loadRequestQuote, requestOrderingEnabled } from "@/lib/ordering/request-service";
+import { loadRequestQuote } from "@/lib/ordering/request-service";
+import { orderingEnabledFor } from "@/lib/ordering/trial";
 import { RequestCartForm, type RequestCartView } from "./RequestCartForm";
 
 export const dynamic = "force-dynamic";
@@ -15,7 +16,7 @@ export const dynamic = "force-dynamic";
  */
 export default async function CustomerCartPage({ searchParams }: { searchParams: Promise<{ opcija?: string }> }) {
   const session = await requireCustomerSession("/kupac/korpa");
-  if (requestOrderingEnabled()) {
+  if ((await orderingEnabledFor(session.customerId))) {
     const { opcija } = await searchParams;
     const q = await loadRequestQuote(session.customerId, opcija ? String(opcija).slice(0, 20) : null);
     const view: RequestCartView = {

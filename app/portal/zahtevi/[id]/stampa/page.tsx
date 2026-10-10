@@ -95,9 +95,9 @@ export default async function OrderPrintPage({ params }: { params: Promise<{ id:
           <dl>
             <div><dt>Osnovica bez PDV-a</dt><dd>{money(o.netTotal)} RSD</dd></div>
             <div><dt>PDV</dt><dd>{money(o.vatTotal)} RSD</dd></div>
-            <div className="zp-grand"><dt>Ukupno sa PDV-om</dt><dd>{money(o.grossTotal)} RSD</dd></div>
+            <div className="zp-grand"><dt>{onRequest.length ? "Zbir stavki sa poznatom cenom — nije konačan iznos zahteva (sa PDV-om)" : "Ukupno sa PDV-om"}</dt><dd>{money(o.grossTotal)} RSD</dd></div>
           </dl>
-          {onRequest.length ? <p>Zbir ne sadrži {onRequest.length} stavki na upit.</p> : null}
+          {onRequest.length ? <p>Zbir stavki sa poznatom cenom — nije konačan iznos zahteva: ne sadrži {onRequest.length} stavki na upit, čiju cenu potvrđuje kancelarija.</p> : null}
         </section>
 
         {onRequest.length ? (

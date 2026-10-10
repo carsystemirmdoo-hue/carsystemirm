@@ -1,4 +1,5 @@
 import "server-only";
+import { isTrialCustomer } from "@/lib/ordering/trial";
 import { randomUUID } from "node:crypto";
 import { and, asc, eq, inArray, isNull, sql } from "drizzle-orm";
 import { getDb, type Database } from "@/db/client";
@@ -97,6 +98,8 @@ export async function checkInvitationGate(
 ) {
   const input = await loadGateInput(accountId, executor);
   if (!input) return { allowed: false, reasons: [] as GateReason[], found: false };
+  // Izdvojeni TEST kupac kontrolisane probe (nema BizniSoft partnera): kapija se ne traži.
+  if (input.customerActive && (await isTrialCustomer(input.account.customerId))) return { allowed: true, reasons: [] as GateReason[], found: true };
   return { ...decideInvitation({ ...input, now }), found: true };
 }
 
@@ -108,6 +111,7 @@ export async function checkActivationGate(
 ) {
   const input = await loadGateInput(accountId, executor);
   if (!input) return { allowed: false, reasons: [] as GateReason[] };
+  if (input.customerActive && (await isTrialCustomer(input.account.customerId))) return { allowed: true, reasons: [] as GateReason[] };
   return decideActivation({ ...input, now });
 }
 

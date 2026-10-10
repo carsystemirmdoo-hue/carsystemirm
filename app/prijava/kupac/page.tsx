@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { redirect } from "next/navigation";
 import { getCustomerSession } from "@/lib/authz/customer-session";
 import { normalizeCustomerReturn } from "@/lib/authz/redirects.mjs";
+import { customerLandingAfterLogin } from "@/lib/authz/customer-landing";
 import { isRememberEnabled } from "@/lib/auth/rememberRules.mjs";
 import { CustomerLoginForm } from "./CustomerLoginForm";
 import "../../portal/portal.css";
@@ -25,11 +26,13 @@ export default async function CustomerLoginPage({
       ? "Odjavljeni ste sa svih uređaja."
       : poruka === "lozinka"
         ? "Lozinka je promenjena. Prijavite se novom lozinkom — ostali uređaji su odjavljeni."
-        : null;
+        : poruka === "odjava"
+          ? "Odjavljeni ste."
+          : null;
   const session = await getCustomerSession();
 
   if (session) {
-    redirect(normalizeCustomerReturn(callbackUrl) ?? "/");
+    redirect(customerLandingAfterLogin(normalizeCustomerReturn(callbackUrl)));
   }
 
   return <CustomerLoginForm callbackUrl={callbackUrl ?? ""} rememberAvailable={isRememberEnabled()} notice={notice} />;

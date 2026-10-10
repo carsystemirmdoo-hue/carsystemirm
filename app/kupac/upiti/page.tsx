@@ -1,3 +1,4 @@
+import { publicSiteOpen } from "@/lib/site-mode";
 import Link from "next/link";
 import { srDateTime } from "@/components/customer/account-format";
 import { requireCustomerSession } from "@/lib/authz/customer-session";
@@ -30,7 +31,7 @@ export default async function CustomerPriceRequestsPage() {
             promena cene u korpi dok uslov ne bude unet u cenovnik.
           </p>
         </div>
-        <Link href="/katalog" className="portal-section-link">Katalog →</Link>
+        {publicSiteOpen() ? <Link href="/katalog" className="portal-section-link">Katalog →</Link> : null}
       </div>
       <div className="kk-contacts">
         <span>
@@ -74,7 +75,7 @@ export default async function CustomerPriceRequestsPage() {
                   <small>{srDateTime(r.createdAt)}</small>
                 </div>
                 <p>
-                  <Link href={`/proizvodi/${r.slug}`}>{r.catalogName}</Link>
+                  {publicSiteOpen() ? <Link href={`/proizvodi/${r.slug}`}>{r.catalogName}</Link> : r.catalogName}
                   {r.variantLabel ? ` · ${r.variantLabel}` : ""} · količina {qfmt.format(r.quantity)} ·{" "}
                   {PRICE_REQUEST_KIND_LABELS[r.kind] ?? r.kind}
                 </p>

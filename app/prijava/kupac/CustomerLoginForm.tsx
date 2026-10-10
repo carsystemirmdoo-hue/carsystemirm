@@ -1,6 +1,6 @@
 "use client";
 
-import { useActionState } from "react";
+import { useActionState, useState } from "react";
 import { PortalIcon } from "@/components/portal/PortalIcon";
 import {
   customerSignInAction,
@@ -20,6 +20,8 @@ export function CustomerLoginForm({ callbackUrl, rememberAvailable = false, noti
     customerSignInAction,
     INITIAL,
   );
+  // Kontrolisano polje: posle neuspele prijave React prazni obrazac, a e-pošta treba da ostane.
+  const [email, setEmail] = useState("");
 
   return (
     <main className="portal-login-root">
@@ -86,6 +88,8 @@ export function CustomerLoginForm({ callbackUrl, rememberAvailable = false, noti
               <input
                 type="email"
                 name="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 autoComplete="username"
                 required
                 maxLength={254}

@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { OrderDetailView } from "@/components/ordering/OrderDetailView";
+import { CrumbLabel } from "@/components/portal/Breadcrumbs";
 import { can } from "@/lib/authz/permissions.mjs";
 import { requireCapability } from "@/lib/authz/session";
 import { loadOrderRequest } from "@/lib/ordering/ordering-service";
@@ -17,6 +18,7 @@ export default async function OrderRequestPage({ params }: { params: Promise<{ i
 
   return (
     <>
+      <CrumbLabel segment={order.id} label={order.orderNumber ?? order.requestNumber} />
       <p className="kk-back">
         <Link href="/portal/zahtevi">← Svi zahtevi</Link> · <Link href={`/portal/kupci/${order.customerId}`}>Kartica kupca</Link> ·{" "}
         <Link href={`/portal/zahtevi/${order.id}/stampa`} className="portal-button" data-variant="secondary">Odštampajte zahtev</Link>
@@ -29,10 +31,15 @@ export default async function OrderRequestPage({ params }: { params: Promise<{ i
           canReview={can(user, "customer_orders:review")}
           canConfirm={can(user, "customer_orders:confirm")}
           biznisoftDocumentNumber={order.biznisoftDocumentNumber}
+          onRequestLines={order.onRequestLines ?? 0}
         />
-        {order.pricingSource === "cenovnik" && ["submitted", "under_review"].includes(order.status) && can(user, "customer_orders:review") ? (
+        {order.pricingSource === "cenovnik" && ["submitted", "under_review", "changes_requested"].includes(order.status) && (!order.replacedBy || order.replacedBy.status === "cancelled") && can(user, "customer_orders:review") ? (
           <div className="portal-panel-body">
-            <RevisionForm orderId={order.id} lines={order.lines.map((l) => ({ code: l.articleCode, name: l.articleName, unit: l.unit, quantity: String(l.quantity) }))} />
+            <RevisionForm
+              orderId={order.id}
+              lines={order.lines.map((l) => ({ code: l.articleCode, name: l.articleName, unit: l.unit, quantity: String(l.quantity) }))}
+              rebatesHref={can(user, "view:rabati") ? `/portal/cene/rabati-iz-faktura/kupci/${order.customerId}` : null}
+            />
           </div>
         ) : null}
       </section>

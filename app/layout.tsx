@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Archivo, Geist, Geist_Mono, IBM_Plex_Mono, IBM_Plex_Sans } from "next/font/google";
 import { PublicSiteChrome } from "@/components/layout/PublicSiteChrome";
+import { publicSiteOpen } from "@/lib/site-mode";
 import { MotionSystem } from "@/components/motion/MotionSystem";
 import { SiteAccessHandoffScript } from "@/components/layout/SiteAccessHandoffScript";
 import { ThemeScript } from "@/components/layout/ThemeScript";
@@ -110,7 +111,7 @@ export default function RootLayout({
         suppressHydrationWarning
       >
         <MotionSystem>
-          <PublicSiteChrome>{children}</PublicSiteChrome>
+          <PublicSiteChrome publicSiteOpen={publicSiteOpen()}>{children}</PublicSiteChrome>
         </MotionSystem>
       </body>
     </html>

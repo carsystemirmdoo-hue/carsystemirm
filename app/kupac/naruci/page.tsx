@@ -44,6 +44,7 @@ export default async function RequestCatalogPage({ searchParams }: { searchParam
           <input name="q" defaultValue={q ?? ""} placeholder="šifra ili naziv" />
         </label>
         <button type="submit">Pretražite</button>
+        {q ? <Link href="/kupac/naruci">Poništite pretragu</Link> : null}
       </form>
       <div className="portal-table-wrap">
         <table className="portal-table rr-table kn-table">
@@ -53,7 +54,7 @@ export default async function RequestCatalogPage({ searchParams }: { searchParam
               {options.map((o) => (
                 <th scope="col" key={o.key}>{o.label}</th>
               ))}
-              <th scope="col">Zahtev</th>
+              <th scope="col">Dodavanje</th>
             </tr>
           </thead>
           <tbody>
@@ -78,14 +79,18 @@ export default async function RequestCatalogPage({ searchParams }: { searchParam
                     </td>
                   );
                 })}
-                <td data-label="Zahtev">
+                <td data-label="Dodavanje">
                   <AddItem articleId={a.articleId} step={a.step} unit={a.unit} />
                 </td>
               </tr>
             ))}
             {articles.length === 0 ? (
               <tr>
-                <td colSpan={options.length + 2}>Nema artikala. Pokušajte drugu pretragu.</td>
+                <td colSpan={options.length + 2}>
+                  {q
+                    ? `Nema artikla za „${q}“. Proverite šifru ili probajte deo naziva.`
+                    : "Vaša firma još nema kupovina iz kojih bismo prikazali artikle. Robu pronađite pretragom po šifri ili nazivu."}
+                </td>
               </tr>
             ) : null}
           </tbody>

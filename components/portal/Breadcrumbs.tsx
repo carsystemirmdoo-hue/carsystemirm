@@ -45,6 +45,7 @@ const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
 const RECORD_LABELS: Record<string, string> = {
   kupci: "Detalj kupca",
   porudzbine: "Detalj porudžbine",
+  zahtevi: "Zahtev",
 };
 
 /** Opšti naziv za ID segment, dok stranica ne javi pravo ime. */

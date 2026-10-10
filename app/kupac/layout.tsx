@@ -5,6 +5,8 @@ import { AccountTabs } from "@/components/customer/AccountTabs";
 import { DataStrip } from "@/components/portal/DataStrip";
 import { getCustomerSession } from "@/lib/authz/customer-session";
 import { loadDatasetInfo } from "@/lib/data-state/dataset";
+import { publicSiteOpen } from "@/lib/site-mode";
+import { orderingEnabledFor } from "@/lib/ordering/trial";
 import "../portal/portal.css";
 
 export const metadata: Metadata = {
@@ -37,9 +39,11 @@ export default async function CustomerAccountLayout({ children }: { children: Re
             </p>
           </div>
           <div className="ka-head-actions">
-            <Link href="/katalog" className="portal-button" data-variant="secondary">
-              Nazad na katalog
-            </Link>
+            {publicSiteOpen() ? (
+              <Link href="/katalog" className="portal-button" data-variant="secondary">
+                Nazad na katalog
+              </Link>
+            ) : null}
             <form action={customerSignOutAction}>
               <button type="submit" className="portal-button" data-variant="ghost">
                 Odjavite se
@@ -47,7 +51,7 @@ export default async function CustomerAccountLayout({ children }: { children: Re
             </form>
           </div>
         </div>
-        <AccountTabs />
+        <AccountTabs ordering={await orderingEnabledFor(session.customerId)} />
         {children}
       </main>
     </div>

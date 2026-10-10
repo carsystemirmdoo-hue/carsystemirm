@@ -1,4 +1,6 @@
 import "server-only";
+import { approvedPaymentOptions } from "@/lib/pricing/payment-option-service";
+import { optionLabel, optionNote } from "@/lib/pricing/paymentOptions.mjs";
 import { sql } from "drizzle-orm";
 import { getDb } from "@/db/client";
 import { resolveCustomerPrice } from "@/lib/pricing/customerPrice.mjs";
@@ -14,7 +16,11 @@ import { evaluatePricing } from "@/lib/pricing/precedence.mjs";
  *
  * `naUpit` stavke nose primaoce zahteva: komercijaliste dodeljene kupcu.
  */
-export async function customerPrices(customerId: string, articleIds: string[], onDate: string) {
+/**
+ * Cena kupca po artiklu na dan. `paymentOption` (0043): šifra ODOBRENE opcije plaćanja;
+ * bez nje važi osnovni (bezuslovni) uslov. Opciju proverava pozivalac (`customerPricesByOption`).
+ */
+export async function customerPrices(customerId: string, articleIds: string[], onDate: string, paymentOption: string | null = null) {
   if (!customerId) throw new Error("Upit kupca bez customer_id se ne sme izvršiti.");
   const db = getDb();
   const statuses = sql.join(ACTIVE_RULE_STATUSES.map((s) => sql`${s}`), sql`, `);
@@ -24,7 +30,7 @@ export async function customerPrices(customerId: string, articleIds: string[], o
       SELECT id, customer_scope::text AS "customerScope", product_scope::text AS "productScope", value_kind::text AS "valueKind",
              customer_id AS "customerId", customer_group_id AS "customerGroupId", article_id AS "articleId", product_group AS "productGroup", brand,
              discount_percent::text AS "discountPercent", net_price::text AS "netPrice", effective_from::text AS "effectiveFrom",
-             effective_to::text AS "effectiveTo", status::text AS status
+             effective_to::text AS "effectiveTo", status::text AS status, payment_condition AS "paymentCondition"
         FROM price_rules WHERE status::text IN (${statuses})
          AND (customer_scope::text <> 'customer' OR customer_id = ${customerId}::uuid)`),
     db.execute<{ group_id: string }>(sql`SELECT group_id FROM customer_group_members WHERE customer_id = ${customerId}::uuid`),
@@ -52,7 +58,7 @@ export async function customerPrices(customerId: string, articleIds: string[], o
       out.set(a.id, { status: "van_ponude", reason: "van_programa", message: "Artikal nije u aktuelnoj ponudi.", unit: a.unit, pack: null });
       continue;
     }
-    const decision = evaluatePricing(rules, { customerId, customerGroupIds: groups, articleId: a.id, productGroup: a.product_group, brand: a.brand, onDate });
+    const decision = evaluatePricing(rules, { customerId, customerGroupIds: groups, articleId: a.id, productGroup: a.product_group, brand: a.brand, onDate, paymentCondition: paymentOption });
     const price = resolveCustomerPrice(decision, base.get(a.id) ?? null);
     // Cena po JM iz BizniSofta; cena PAKOVANJA samo uz dokaz (veza, količina pakovanja).
     const pack =
@@ -69,4 +75,22 @@ export async function customerPrices(customerId: string, articleIds: string[], o
     out.set(a.id, { ...price, unit: a.unit, pack });
   }
   return { prices: out, routeTo: [...reps] };
+}
+
+/**
+ * Cene za SVE odobrene opcije plaćanja kupca (0043). Kupac bez odobrene opcije
+ * dobija jednu cenu po osnovnom uslovu (`code: null`). Opcija koja nije
+ * odobrena tom kupcu na taj dan se ne računa — ne može se izmisliti iz zahteva.
+ */
+export async function customerPricesByOption(customerId: string, articleIds: string[], onDate: string) {
+  const codes = await approvedPaymentOptions(customerId, onDate);
+  const list = codes.length ? codes : [null];
+  const options = [];
+  let routeTo: Awaited<ReturnType<typeof customerPrices>>["routeTo"] = [];
+  for (const code of list) {
+    const r = await customerPrices(customerId, articleIds, onDate, code);
+    routeTo = r.routeTo;
+    options.push({ code, label: optionLabel(code), note: optionNote(code), prices: r.prices });
+  }
+  return { options, routeTo };
 }

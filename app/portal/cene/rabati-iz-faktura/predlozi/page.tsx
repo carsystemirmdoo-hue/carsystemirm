@@ -5,9 +5,11 @@ import { Metric, PageHeader } from "@/components/portal/PortalPrimitives";
 import { can, seesAllCustomers } from "@/lib/authz/permissions.mjs";
 import { requireCapability } from "@/lib/authz/session";
 import { rebateCoverage, SINGLE_GROUP, UNASSIGNED, type CoveragePair } from "@/lib/pricing/rebate-coverage-service";
+import { COMMERCIAL_STATUSES } from "@/lib/customers/commercial-status.mjs";
 import { COVERAGE_RULES } from "@/lib/pricing/rebateCoverage.mjs";
 import { belgradeDate } from "@/lib/recommendations/customerRhythm.mjs";
 import { pct } from "../format";
+import { CustomerGroupsForm } from "./CustomerGroupsForm";
 import { GroupApproveButton } from "./GroupApproveButton";
 
 export const dynamic = "force-dynamic";
@@ -19,6 +21,7 @@ const OUTCOME: Record<CoveragePair["outcome"], string> = {
   izvedeno: "Pouzdano izvedeno",
   nejasno: "Nejasno",
   van_programa: "Van programa",
+  poseban_status: "Poseban poslovni status",
 };
 
 const share = (n: number, total: number) => (total ? `${Math.round((n / total) * 100)} %` : "—");
@@ -46,8 +49,13 @@ export default async function RebateCoveragePage({ searchParams }: { searchParam
   const scopePairs = cov.customers
     .filter((c) => (!komercijalista || owner(c.salespeople) === komercijalista) && (!kupac || c.customerName.toLowerCase().includes(kupac)))
     .flatMap((c) => c.pairs);
-  const seg = (s: string) => scopePairs.filter((p) => p.segment === s);
+  const scoped = cov.customers.filter((c) => (!komercijalista || owner(c.salespeople) === komercijalista) && (!kupac || c.customerName.toLowerCase().includes(kupac)));
+  // Metrike: samo kupci koje stvarno pripremamo za portal i koji nemaju poseban dogovor.
+  const preparedPairs = scoped.filter((c) => c.prepared && c.status === "redovan").flatMap((c) => c.pairs);
+  const seg = (s: string) => preparedPairs.filter((p) => p.segment === s);
   const cur = seg("aktuelno");
+  const special = scoped.filter((c) => c.status !== "redovan");
+  const allCur = scopePairs.filter((p) => p.segment === "aktuelno");
   const count = (rows: CoveragePair[], o: CoveragePair["outcome"]) => rows.filter((p) => p.outcome === o).length;
   const canApprove = can(user, "prices:approve");
   const canPropose = can(user, "prices:propose");
@@ -71,11 +79,61 @@ export default async function RebateCoveragePage({ searchParams }: { searchParam
       />
 
       <section className="portal-metrics rr-metrics" aria-label="Pokrivenost aktuelnih parova">
-        <Metric label="Aktuelno: parova" value={String(cur.length)} context="aktivan kupac i artikal, kupljeno u 12 meseci" />
+        <Metric label="Za portal: aktuelnih parova" value={String(cur.length)} context="redovni kupci u pripremi; aktivan kupac i artikal, kupljeno u 12 meseci" />
         <Metric label="Odobreno pravilo" value={String(count(cur, "odobreno"))} tone="success" context={share(count(cur, "odobreno"), cur.length)} />
         <Metric label="Direktno potvrđeno" value={String(count(cur, "direktno"))} tone="success" context={`${share(count(cur, "direktno"), cur.length)} · čeka grupno odobrenje`} />
         <Metric label="Pouzdano izvedeno" value={String(count(cur, "izvedeno"))} tone="warning" context={`${share(count(cur, "izvedeno"), cur.length)} · čeka grupno odobrenje`} />
         <Metric label="Nejasno" value={String(count(cur, "nejasno"))} tone="danger" context={`${share(count(cur, "nejasno"), cur.length)} · ručni pregled`} />
+      </section>
+      <section className="portal-panel">
+        <h2>Svi kupci, kupci za portal i posebni računi</h2>
+        <div className="portal-table-wrap">
+          <table className="portal-table rr-table">
+            <thead>
+              <tr>
+                <th scope="col">Skup (aktuelni parovi)</th>
+                <th scope="col">Kupaca</th>
+                <th scope="col">Parova</th>
+                <th scope="col">Odobreno</th>
+                <th scope="col">Direktno + izvedeno</th>
+                <th scope="col">Nejasno</th>
+                <th scope="col">Poseban status</th>
+              </tr>
+            </thead>
+            <tbody>
+              {[
+                { label: "Svi kupci", rows: allCur, n: scoped.filter((c) => c.pairs.some((p) => p.segment === "aktuelno")).length },
+                { label: "Pripremamo za portal (redovni)", rows: cur, n: scoped.filter((c) => c.prepared && c.status === "redovan" && c.pairs.some((p) => p.segment === "aktuelno")).length },
+                { label: "Posebni računi", rows: special.flatMap((c) => c.pairs).filter((p) => p.segment === "aktuelno"), n: special.length },
+              ].map((r) => (
+                <tr key={r.label}>
+                  <th scope="row">{r.label}</th>
+                  <td>{r.n}</td>
+                  <td>{r.rows.length}</td>
+                  <td>{count(r.rows, "odobreno")}</td>
+                  <td>{count(r.rows, "direktno") + count(r.rows, "izvedeno")}</td>
+                  <td>{count(r.rows, "nejasno")}</td>
+                  <td>{count(r.rows, "poseban_status")}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <p className="portal-data-note">
+          Izdvajanje posebnih računa menja samo osnovicu procenta — to NIJE novootkriven rabat. Iz uslova posebnih kupaca ništa se ne izvodi ni za njih ni za druge kupce.
+        </p>
+        {special.length ? (
+          <ul className="rc-articles">
+            {special.map((c) => (
+              <li key={c.customerId}>
+                <strong>{c.customerName}</strong> — {COMMERCIAL_STATUSES[c.status as keyof typeof COMMERCIAL_STATUSES] ?? c.status}
+                {c.prepared ? "" : " · ne priprema se za portal (bez naloga)"}
+                {c.pairs.some((p) => p.special) ? ` · ranije odobrenih pravila: ${c.pairs.filter((p) => p.special).length} — poseban slučaj za odluku` : ""}
+                {c.statusReason ? <small> — {c.statusReason}</small> : null}
+              </li>
+            ))}
+          </ul>
+        ) : null}
       </section>
       <p className="portal-data-note">
         Retke kupovine aktuelnih artikala (kupljeno pre više od 12 meseci): {seg("retko").length} parova — odobreno {count(seg("retko"), "odobreno")}, izvedeno{" "}
@@ -107,7 +165,6 @@ export default async function RebateCoveragePage({ searchParams }: { searchParam
 
         {shown.length === 0 ? <p className="portal-empty">Nema grupa ni nejasnih parova za izabrane filtere.</p> : null}
         {shown.map((c) => {
-          const allExpected = c.groups.flatMap((g) => g.pairs.map((p) => ({ articleId: p.articleId, percent: p.percent as number })));
           return (
             <details key={c.customerId} className="rc-customer">
               <summary>
@@ -139,7 +196,7 @@ export default async function RebateCoveragePage({ searchParams }: { searchParam
                             <td data-label="Dokaz kupca">
                               {g.evidence ? (
                                 <small>
-                                  {g.evidence.articles} artikala · {g.evidence.days} dana · {Math.round(g.evidence.share * 100)} % stavki
+                                  Poreklo: izvedeno iz faktura kupca (nije BizniSoft grupa) · {g.evidence.articles} artikala · {g.evidence.days} dana · {Math.round(g.evidence.share * 100)} % stavki
                                   {g.evidence.window ? ` · ${srDate(g.evidence.window[0])} – ${srDate(g.evidence.window[1])}` : ""}
                                   {g.evidence.actions ? ` · akcija na fakturi: ${g.evidence.actions} (ne menja uslov)` : ""}
                                 </small>
@@ -184,9 +241,17 @@ export default async function RebateCoveragePage({ searchParams }: { searchParam
                 </div>
               ) : null}
               {canPropose && c.groups.length > 1 ? (
-                <p className="rc-all">
-                  <GroupApproveButton customerId={c.customerId} groupKey="*" expected={allExpected} label={`${verb} sve grupe kupca (${allExpected.length})`} />
-                </p>
+                <CustomerGroupsForm
+                  customerId={c.customerId}
+                  verb={verb}
+                  groups={c.groups.map((g) => ({
+                    key: g.key,
+                    label: g.key === SINGLE_GROUP ? "pojedinačni artikli (izuzeci)" : `„${g.key}“ ${g.percent === null ? "" : pct(g.percent)}`,
+                    percent: g.percent,
+                    preselect: g.key !== SINGLE_GROUP,
+                    expected: g.pairs.map((p) => ({ articleId: p.articleId, percent: p.percent as number })),
+                  }))}
+                />
               ) : null}
               {c.unclear.length ? (
                 <details className="rc-unclear">

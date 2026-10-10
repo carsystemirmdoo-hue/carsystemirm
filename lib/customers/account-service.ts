@@ -1,4 +1,5 @@
 import "server-only";
+import { assertPreparedForPortal } from "@/lib/customers/commercial-status-service";
 import { randomUUID } from "node:crypto";
 import { and, asc, eq, inArray, isNull, sql } from "drizzle-orm";
 import { getDb } from "@/db/client";
@@ -12,6 +13,15 @@ import { loadAssignedCustomerIds } from "@/lib/authz/user-repository";
 import type { PortalUser } from "@/lib/authz/session";
 
 export type AccountActor = { id: string; name: string; role: string };
+
+/** Kupac van pripreme za portal (0042) ne dobija nalog — provera na serveru, ne samo u UI. */
+export async function assertCustomerPrepared(customerId: string) {
+  try {
+    await assertPreparedForPortal(customerId);
+  } catch (error) {
+    throw new CustomerAccountError(error instanceof Error ? error.message : "Kupac nije u pripremi za portal.", "not_prepared");
+  }
+}
 
 export class CustomerAccountError extends Error {
   constructor(
@@ -57,6 +67,7 @@ export async function proposeCustomerContact(
 ): Promise<{ id: string }> {
   const email = input.email.trim().toLowerCase();
   const reason = input.reason.trim();
+  await assertCustomerPrepared(input.customerId);
 
   if (reason.length < 3) {
     throw new CustomerAccountError(

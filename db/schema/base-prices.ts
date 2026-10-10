@@ -1,4 +1,5 @@
 import { boolean, date, index, integer, jsonb, numeric, pgEnum, pgTable, primaryKey, text, timestamp, unique, uuid } from "drizzle-orm/pg-core";
+import { customers } from "./permissions";
 import { articles } from "./sales";
 import { users } from "./users";
 
@@ -96,4 +97,21 @@ export const articleProgrammeDecisions = pgTable(
     decidedAt: timestamp("decided_at", { withTimezone: true }).notNull().defaultNow(),
   },
   (t) => [index("article_programme_decisions_latest_idx").on(t.articleId, t.decidedAt, t.id)],
+);
+
+/**
+ * Poseban poslovni status kupca (0042). Samo dodavanje; važi poslednja odluka.
+ * Kupac bez odluke je redovan. Iz uslova posebnih kupaca ništa se ne izvodi.
+ */
+export const customerCommercialStatusDecisions = pgTable(
+  "customer_commercial_status_decisions",
+  {
+    id: uuid("id").primaryKey().defaultRandom(),
+    customerId: uuid("customer_id").notNull().references(() => customers.id, { onDelete: "restrict" }),
+    status: text("status").notNull(),
+    reason: text("reason").notNull(),
+    decidedBy: uuid("decided_by").notNull().references(() => users.id, { onDelete: "restrict" }),
+    decidedAt: timestamp("decided_at", { withTimezone: true }).notNull().defaultNow(),
+  },
+  (t) => [index("customer_commercial_status_latest_idx").on(t.customerId, t.decidedAt, t.id)],
 );

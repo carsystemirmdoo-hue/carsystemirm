@@ -133,16 +133,18 @@ export async function loadRebateReview(viewer: PortalUser, customerId: string) {
       id: string; status: string; product_scope: string; product_group: string | null; brand: string | null;
       article_code: string | null; value_kind: string; discount_percent: string | null; net_price: string | null;
       effective_from: string; effective_to: string | null; group_name: string | null;
-      article_id: string | null; portal_only: boolean; source_batch: string | null;
+      article_id: string | null; portal_only: boolean; source_batch: string | null; payment_condition: string | null;
     }>(sql`
       SELECT r.id, r.status::text AS status, r.product_scope::text AS product_scope, r.product_group, r.brand,
              a.code AS article_code, r.value_kind::text AS value_kind, r.discount_percent::text AS discount_percent,
              r.net_price::text AS net_price, r.effective_from::text AS effective_from, r.effective_to::text AS effective_to,
-             g.name AS group_name, r.article_id, NOT r.biznisoft_entry_required AS portal_only, r.source_batch
+             g.name AS group_name, r.article_id, NOT r.biznisoft_entry_required AS portal_only, r.source_batch, r.payment_condition
         FROM price_rules r
         LEFT JOIN articles a ON a.id = r.article_id
         LEFT JOIN customer_groups g ON g.id = r.customer_group_id
        WHERE r.status::text IN (${sql.join([...APPROVED, ...PENDING].map((s) => sql`${s}`), sql`, `)})
+         -- Zatvoreno pravilo (zamenjeno promenom, 0041) je istorija, ne važeći uslov.
+         AND (r.effective_to IS NULL OR r.effective_to >= (now() AT TIME ZONE 'Europe/Belgrade')::date)
          AND (r.customer_id = ${customerId}::uuid
               OR r.customer_group_id IN (SELECT group_id FROM customer_group_members WHERE customer_id = ${customerId}::uuid))
        ORDER BY r.effective_from DESC`),
@@ -164,7 +166,8 @@ export async function loadRebateReview(viewer: PortalUser, customerId: string) {
       : r.product_scope === "brand" ? `brend ${r.brand ?? "—"}`
       : r.product_scope,
     via: r.group_name ? `preko grupe kupaca ${r.group_name}` : null,
-    value: r.value_kind === "discount_percent" ? `${Number(r.discount_percent)} %` : `${r.net_price} RSD`,
+    value: (r.value_kind === "discount_percent" ? `${Number(r.discount_percent)} %` : `${r.net_price} RSD`) + (r.payment_condition ? " · uz kratak rok plaćanja" : ""),
+    paymentCondition: r.payment_condition,
     effectiveFrom: r.effective_from,
     effectiveTo: r.effective_to,
     articleId: r.article_id,

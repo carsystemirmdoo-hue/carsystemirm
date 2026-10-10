@@ -307,6 +307,10 @@ const RESETTABLE_TABLES = [
   "article_base_prices",
   /* Program artikla (0040): samo dodavanje. */
   "article_programme_decisions",
+  /* Poslovni status kupca (0042): samo dodavanje. */
+  "customer_commercial_status_decisions",
+  /* Opcije plaćanja (0043): bez brisanja. */
+  "customer_payment_options",
   "price_list_import_rows",
   "price_list_imports",
   "partner_records",

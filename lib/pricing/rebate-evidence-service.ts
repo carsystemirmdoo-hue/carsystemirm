@@ -54,7 +54,7 @@ export async function loadRebateEvidence(viewer: PortalUser) {
     db.execute<{ customer_id: string; product_group: string; discount_percent: string; status: string }>(sql`
       SELECT customer_id, product_group, discount_percent::text AS discount_percent, status::text AS status
         FROM price_rules
-       WHERE customer_scope = 'customer' AND product_scope = 'product_group' AND value_kind = 'discount_percent'
+       WHERE customer_scope = 'customer' AND product_scope = 'product_group' AND value_kind = 'discount_percent' AND payment_condition IS NULL
          AND status NOT IN ('rejected', 'revoked', 'expired') AND ${inScope(sql`customer_id`)}`),
     db.execute<{ customer_id: string; product_group: string; discount_percent: string; code: string; kind: string }>(sql`
       SELECT t.customer_id, t.product_group, t.discount_percent::text AS discount_percent, pl.code, pl.kind::text AS kind

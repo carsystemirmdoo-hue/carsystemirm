@@ -18,7 +18,7 @@ import {
   generateRecoveryCode,
   looksLikeRecoveryCode,
 } from "@/lib/auth/recovery-codes.mjs";
-import { CustomerAccountError, type AccountActor } from "@/lib/customers/account-service";
+import { assertCustomerPrepared, CustomerAccountError, type AccountActor } from "@/lib/customers/account-service";
 import {
   checkActivationGate,
   checkInvitationGate,
@@ -183,12 +183,14 @@ export async function issueInvitation(
       id: customerUsers.id,
       email: customerUsers.email,
       status: customerUsers.status,
+      customerId: customerUsers.customerId,
     })
     .from(customerUsers)
     .where(eq(customerUsers.id, input.accountId))
     .limit(1);
 
   if (!account) throw new CustomerAccountError("Nalog ne postoji.", "not_found");
+  await assertCustomerPrepared(account.customerId);
   if (account.status === "rejected" || account.status === "suspended") {
     throw new CustomerAccountError(
       "Nalog je odbijen ili isključen — poziv se ne izdaje dok se to ne promeni.",

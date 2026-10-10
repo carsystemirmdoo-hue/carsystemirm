@@ -6,6 +6,8 @@ import { AUDIT_ACTIONS, recordAudit } from "@/lib/audit/record";
 import { can } from "@/lib/authz/permissions.mjs";
 import type { PortalUser } from "@/lib/authz/user-repository";
 import { resolveLedgerScope } from "@/lib/ledger/effective-sales";
+import { allowsAutomaticRebates, isPreparedForPortal, statusReason } from "@/lib/customers/commercial-status.mjs";
+import { commercialStatuses } from "@/lib/customers/commercial-status-service";
 import { outOfProgrammeArticles } from "@/lib/pricing/article-programme-service";
 import { classifyCustomer, COVERAGE_RULES, segmentPair } from "@/lib/pricing/rebateCoverage.mjs";
 import { proposePriceRule, transitionPriceRule } from "@/lib/pricing/rule-service";
@@ -22,7 +24,9 @@ export type CoveragePair = {
   lastOn: string;
   purchases: number;
   lastInvoices: { invoiceId: string; documentLabel: string | null; issuedOn: string; percent: number }[];
-  outcome: "odobreno" | "ceka_odobrenje" | "direktno" | "izvedeno" | "nejasno" | "van_programa";
+  outcome: "odobreno" | "ceka_odobrenje" | "direktno" | "izvedeno" | "nejasno" | "van_programa" | "poseban_status";
+  /** Ranije odobreno pravilo kupca sa posebnim statusom — poseban slučaj za odluku (ne briše se). */
+  special?: boolean;
   percent: number | null;
   reason: string | null;
   family?: string | null;
@@ -63,9 +67,10 @@ export async function rebateCoverage(viewer: PortalUser, asOf: string, onlyCusto
     db.execute<{ c: string; a: string; p: string; s: string }>(sql`
       SELECT customer_id AS c, article_id AS a, discount_percent::text AS p, status::text AS s
         FROM price_rules
-       WHERE customer_scope = 'customer' AND product_scope = 'article' AND value_kind = 'discount_percent'
+       WHERE customer_scope = 'customer' AND product_scope = 'article' AND value_kind = 'discount_percent' AND payment_condition IS NULL
          AND status::text IN (${sql.join([...APPROVED, ...PENDING].map((s) => sql`${s}`), sql`, `)})
          AND (effective_to IS NULL OR effective_to >= ${asOf}::date)
+         AND (status::text IN ('draft', 'pending_approval') OR effective_from <= ${asOf}::date)
          AND ${inScope(sql.raw("customer_id"))}`),
     db.execute<{ id: string; name: string }>(sql`SELECT id, name FROM customers WHERE ${inScope(sql.raw("id"))}`),
     db.execute<{ customer_id: string; name: string }>(sql`
@@ -78,6 +83,7 @@ export async function rebateCoverage(viewer: PortalUser, asOf: string, onlyCusto
        WHERE il.article_id IS NOT NULL AND ril.issued_on <= ${asOf}::date GROUP BY 1`),
     outOfProgrammeArticles(),
   ]);
+  const statuses = await commercialStatuses();
 
   const names = new Map(customers.map((c) => [c.id, c.name]));
   const repsOf = new Map<string, string[]>();
@@ -100,6 +106,14 @@ export async function rebateCoverage(viewer: PortalUser, asOf: string, onlyCusto
       ...p,
       segment: segmentPair({ customerLastOn, articleLastSoldOn: soldOn.get(p.articleId) ?? null, articleInStock: false, outOfProgramme: out.ids.has(p.articleId), pairLastOn: p.lastOn, asOf }) as Pair["segment"],
     }));
+    // Poseban poslovni status (0042): ništa se ne izvodi automatski; ranije odobreno ostaje vidljivo.
+    const st = statuses.get(customerId) ?? null;
+    if (st && !allowsAutomaticRebates(st.status)) {
+      for (const p of pairs) {
+        if (p.outcome === "odobreno") p.special = true;
+        else if (p.outcome !== "van_programa") Object.assign(p, { outcome: "poseban_status", percent: null, reason: statusReason(st.status) });
+      }
+    }
     const famByKey = new Map(res.families.filter((f) => f.ok).map((f) => [f.key, f]));
     const groups = new Map<string, CoverageGroup>();
     for (const p of pairs) {
@@ -117,6 +131,9 @@ export async function rebateCoverage(viewer: PortalUser, asOf: string, onlyCusto
     }
     result.push({
       customerId,
+      status: st?.status ?? "redovan",
+      statusReason: st?.reason ?? null,
+      prepared: isPreparedForPortal(st?.status ?? "redovan"),
       customerName: names.get(customerId) ?? "—",
       salespeople: repsOf.get(customerId) ?? [],
       lastOn: customerLastOn,
@@ -138,7 +155,7 @@ export type RebateCoverage = Awaited<ReturnType<typeof rebateCoverage>>;
  */
 export async function approveRebateGroup(
   actor: PortalUser,
-  input: { customerId: string; groupKey: string; expected: { articleId: string; percent: number }[]; asOf: string },
+  input: { customerId: string; groupKey: string; expected: { articleId: string; percent: number }[]; asOf: string; batchId?: string },
 ) {
   const approve = can(actor, "prices:approve") && can(actor, "prices:propose");
   if (!approve && !can(actor, "prices:propose")) throw new Error("Nemate pravo da predlažete rabate.");
@@ -151,7 +168,7 @@ export async function approveRebateGroup(
   if (!input.expected.length || changed.length) {
     return { ok: false as const, message: `Stanje se promenilo za ${changed.length || "sve"} artikala; osvežite stranu i pogledajte ponovo.` };
   }
-  const batchId = `rabati-v2-${input.asOf}-${randomUUID().slice(0, 8)}`;
+  const batchId = input.batchId ?? `rabati-v2-${input.asOf}-${randomUUID().slice(0, 8)}`;
   const created: string[] = [];
   for (const e of input.expected) {
     const { p, g } = now.get(e.articleId)!;
@@ -196,4 +213,32 @@ export async function approveRebateGroup(
     correlationId: batchId,
   });
   return { ok: true as const, batchId, count: created.length, approved: approve };
+}
+
+/** Paket na čekanju (predlozi jedne serije) — za odluku gazde jednim potezom. */
+export async function pendingBatches(viewer: PortalUser) {
+  if (!can(viewer, "prices:approve")) return [];
+  const rows = await getDb().execute<{ batch: string; customer: string; n: number; min: string; max: string; replaces: number; proposer: string; at: string }>(sql`
+    SELECT r.source_batch AS batch, coalesce(c.name, '—') AS customer, count(*)::int AS n,
+           min(r.discount_percent)::text AS min, max(r.discount_percent)::text AS max,
+           count(r.replaces_rule_id)::int AS replaces, coalesce(u.name, '—') AS proposer, max(r.proposed_at)::text AS at
+      FROM price_rules r
+      LEFT JOIN customers c ON c.id = r.customer_id
+      LEFT JOIN users u ON u.id = r.proposed_by
+     WHERE r.status = 'pending_approval' AND r.source_batch IS NOT NULL
+     GROUP BY r.source_batch, c.name, u.name
+     ORDER BY max(r.proposed_at) DESC`);
+  return [...rows];
+}
+
+/** Odluka gazde za ceo paket na čekanju: svako pravilo kroz postojeći prelaz (zamena, trag, sukobi). */
+export async function decidePendingBatch(actor: PortalUser, input: { batchId: string; to: "approved_pending_biznisoft" | "rejected"; reason: string | null }) {
+  if (!can(actor, "prices:approve")) throw new Error("Paket odobrava samo vlasnik.");
+  if (input.to === "rejected" && !(input.reason ?? "").trim()) throw new Error("Odbijanje traži razlog.");
+  const ids = await getDb().execute<{ id: string }>(sql`
+    SELECT id FROM price_rules WHERE source_batch = ${input.batchId} AND status = 'pending_approval' ORDER BY created_at`);
+  for (const r of ids) {
+    await transitionPriceRule({ ruleId: r.id, to: input.to, reason: input.reason ?? `Odluka za paket ${input.batchId}` }, actor, { correlationId: input.batchId, notify: false });
+  }
+  return { count: ids.length };
 }

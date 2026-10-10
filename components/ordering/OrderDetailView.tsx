@@ -26,8 +26,23 @@ export function OrderDetailView({ order, audience }: { order: OrderDetail; audie
   const base = audience === "office" ? "/portal/zahtevi" : "/kupac/porudzbine";
   const money = (n: number | null) => (n === null ? "—" : srMoney(String(n), order.currency));
   const confirmed = order.status === "confirmed";
+  const current = order.current && order.current.id !== order.id ? order.current : null;
+  const allOnRequest = order.lines.length > 0 && order.lines.every((l) => l.priceStatus === "na_upit");
+  const numberOf = (v: { requestNumber: string; orderNumber: string | null }) => v.orderNumber ?? v.requestNumber;
   return (
     <>
+      {current ? (
+        <div className="kk-old-version" role="note">
+          <span>
+            <strong>Stara verzija — važeća je {numberOf(current)}.</strong>
+            <br />
+            Ovaj zapis ostaje u istoriji; radnje se obavljaju na važećoj verziji.
+          </span>
+          <Link href={`${base}/${current.id}`} className="portal-button">
+            Otvorite važeću verziju
+          </Link>
+        </div>
+      ) : null}
       <div className="kk-order-head">
         <div>
           <span className="ka-eyebrow">{confirmed ? "Potvrđena porudžbina" : "Zahtev za porudžbinu"}</span>
@@ -45,7 +60,7 @@ export function OrderDetailView({ order, audience }: { order: OrderDetail; audie
       </div>
 
       <div className="kk-state" data-status={order.status}>
-        <p>{ORDER_STATUS_HELP[order.status as keyof typeof ORDER_STATUS_HELP]}</p>
+        {current ? null : <p>{ORDER_STATUS_HELP[order.status as keyof typeof ORDER_STATUS_HELP]}</p>}
         {order.replaces ? (
           <p>
             Ispravka zahteva <Link href={`${base}/${order.replaces.id}`}>{order.replaces.requestNumber}</Link>.
@@ -80,9 +95,15 @@ export function OrderDetailView({ order, audience }: { order: OrderDetail; audie
       </div>
 
       <dl className="ka-facts ka-facts-wide">
-        <div><dt>Osnovica (bez PDV-a)</dt><dd>{money(order.netTotal)}</dd></div>
-        <div><dt>PDV</dt><dd>{money(order.vatTotal)}</dd></div>
-        <div><dt>{order.onRequestLines ? "Zbir stavki sa poznatom cenom — nije konačan iznos zahteva" : "Ukupno sa PDV-om"}</dt><dd>{money(order.grossTotal)}{order.onRequestLines ? <small>sa PDV-om · nije uračunato na upit: {countOf(order.onRequestLines, STAVKA)}</small> : null}</dd></div>
+        {allOnRequest ? (
+          <div><dt>Ukupan iznos</dt><dd>Iznos još nije utvrđen<small>sve stavke su na upit; cenu potvrđuje kancelarija</small></dd></div>
+        ) : (
+          <>
+            <div><dt>Osnovica (bez PDV-a)</dt><dd>{money(order.netTotal)}</dd></div>
+            <div><dt>PDV</dt><dd>{money(order.vatTotal)}</dd></div>
+            <div><dt>{order.onRequestLines ? "Zbir stavki sa poznatom cenom — nije konačan iznos zahteva" : "Ukupno sa PDV-om"}</dt><dd>{money(order.grossTotal)}{order.onRequestLines ? <small>sa PDV-om · nije uračunato na upit: {countOf(order.onRequestLines, STAVKA)}</small> : null}</dd></div>
+          </>
+        )}
         {order.deliveryAddress ? <div><dt>Adresa isporuke</dt><dd>{order.deliveryAddress}</dd></div> : null}
         {order.contactPhone || order.contactEmail ? <div><dt>Kontakt</dt><dd>{[order.contactPhone, order.contactEmail].filter(Boolean).join(" · ")}</dd></div> : null}
         <div>
@@ -101,9 +122,9 @@ export function OrderDetailView({ order, audience }: { order: OrderDetail; audie
             <span>Artikal</span>
             <span>JM / pakovanje</span>
             <span>Količina</span>
-            <span>Cena bez PDV-a</span>
+            <span>Cena po jedinici bez PDV-a</span>
             <span>PDV</span>
-            <span>Ukupno</span>
+            <span>Ukupno za količinu sa PDV-om</span>
           </li>
           {order.lines.map((l) => (
             <li key={l.lineNumber}>
@@ -134,12 +155,12 @@ export function OrderDetailView({ order, audience }: { order: OrderDetail; audie
               <span data-label="Količina">{qfmt.format(l.quantity)}</span>
               {l.priceStatus === "na_upit" ? (
                 <span data-label="Cena" className="kk-on-request">
-                  Na upit
+                  Na upit — iznos još nije utvrđen
                   <small>{audience === "office" ? l.onRequestReason ?? "cenu potvrđuje kancelarija" : "cenu potvrđuje kancelarija"}</small>
                 </span>
               ) : (
                 <>
-                  <span data-label="Cena bez PDV-a">
+                  <span data-label="Cena po jedinici bez PDV-a">
                     {money(l.netPrice)}
                     {l.discountPercent ? <small>cenovnik {money(l.listPrice)} − {qfmt.format(l.discountPercent)} %</small> : null}
                   </span>
@@ -147,7 +168,7 @@ export function OrderDetailView({ order, audience }: { order: OrderDetail; audie
                     {money(l.lineVat)}
                     <small>{l.vatPercent === null ? "—" : qfmt.format(l.vatPercent)} %</small>
                   </span>
-                  <span data-label="Ukupno" className="ka-amount">
+                  <span data-label="Ukupno za količinu sa PDV-om" className="ka-amount">
                     {money(l.lineGross)}
                     <small>bez PDV-a {money(l.lineNet)}</small>
                   </span>
@@ -161,6 +182,23 @@ export function OrderDetailView({ order, audience }: { order: OrderDetail; audie
           <p className="kk-customer-note">
             <strong>Napomena kupca:</strong> {order.customerNote}
           </p>
+        ) : null}
+
+        {order.versions.length > 1 ? (
+          <>
+            <h3>Verzije zahteva</h3>
+            <ol className="kk-versions">
+              {order.versions.map((v) => (
+                <li key={v.id} aria-current={v.id === order.id ? "true" : undefined}>
+                  {v.id === order.id ? <span>{numberOf(v)}</span> : <Link href={`${base}/${v.id}`}>{numberOf(v)}</Link>}
+                  <span>· {srDateTime(v.submittedAt)}</span>
+                  <span>· {ORDER_STATUS_LABELS[v.status as keyof typeof ORDER_STATUS_LABELS] ?? v.status}</span>
+                  {v.current ? <strong>· važeća</strong> : null}
+                  {v.id === order.id ? <small>(prikazana)</small> : null}
+                </li>
+              ))}
+            </ol>
+          </>
         ) : null}
 
         <h3>Istorija</h3>

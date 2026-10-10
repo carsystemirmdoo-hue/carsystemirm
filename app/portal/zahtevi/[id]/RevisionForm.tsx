@@ -15,14 +15,15 @@ const money = new Intl.NumberFormat("sr-Latn-RS", { minimumFractionDigits: 2, ma
  * važećim odobrenim uslovima i istoj opciji plaćanja — kancelarija ih ne upisuje
  * ručno. Original ostaje sačuvan; kupac predlog potvrđuje ili odbija.
  */
-export function RevisionForm({ orderId, lines, rebatesHref }: { orderId: string; lines: Line[]; rebatesHref: string | null }) {
+export function RevisionForm({ orderId, lines, rebatesHref, version }: { orderId: string; lines: Line[]; rebatesHref: string | null; version: string }) {
   const [rows, setRows] = useState<Line[]>(lines);
   const [query, setQuery] = useState("");
   const [found, setFound] = useState<Found[] | null>(null);
   const [reason, setReason] = useState("");
   const [preview, setPreview] = useState<Preview | null>(null);
   const [pending, start] = useTransition();
-  const [msg, setMsg] = useState<{ ok: boolean; text: string; orderId?: string } | null>(null);
+  const [msg, setMsg] = useState<{ ok: boolean; text: string; orderId?: string; stale?: { currentId: string; currentNumber: string } } | null>(null);
+  const dirty = reason.trim() !== "" || query.trim() !== "" || JSON.stringify(rows) !== JSON.stringify(lines);
 
   const change = (next: Line[]) => {
     setRows(next);
@@ -53,7 +54,7 @@ export function RevisionForm({ orderId, lines, rebatesHref }: { orderId: string;
   const byCode = new Map((preview?.lines ?? []).map((l) => [l.code, l]));
   const blocked = preview?.lines.some((l) => l.problem);
   return (
-    <details className="rc-unclear">
+    <details className="rc-unclear" data-unsaved={dirty ? "true" : undefined}>
       <summary>Pripremite izmenjen predlog (kupac ga potvrđuje)</summary>
       <div className="rc-change">
         <p className="kk-fine">
@@ -74,7 +75,8 @@ export function RevisionForm({ orderId, lines, rebatesHref }: { orderId: string;
                 <th scope="col">Šifra</th>
                 <th scope="col">Naziv</th>
                 <th scope="col">Količina</th>
-                <th scope="col">Cena (proveriti)</th>
+                <th scope="col">Cena po jedinici bez PDV-a</th>
+                <th scope="col">Ukupno za količinu sa PDV-om</th>
                 <th scope="col">
                   <span className="sr-only">Radnja</span>
                 </th>
@@ -98,7 +100,7 @@ export function RevisionForm({ orderId, lines, rebatesHref }: { orderId: string;
                     </td>
                     <td>
                       {!p ? (
-                        <small>—</small>
+                        <small>proverite cene</small>
                       ) : p.problem ? (
                         <span className="kk-problem">{p.problem}</span>
                       ) : p.status === "na_upit" ? (
@@ -107,8 +109,17 @@ export function RevisionForm({ orderId, lines, rebatesHref }: { orderId: string;
                         </>
                       ) : (
                         <>
-                          {money.format(p.netPrice ?? 0)} RSD<small>rabat {p.discountPercent} % · sa PDV-om {money.format(p.gross ?? 0)}</small>
+                          {money.format(p.netPrice ?? 0)} RSD<small>rabat {p.discountPercent} % · po {r.unit || "JM"}</small>
                         </>
+                      )}
+                    </td>
+                    <td>
+                      {!p || p.problem ? (
+                        <small>—</small>
+                      ) : p.status === "na_upit" ? (
+                        <small>Iznos još nije utvrđen</small>
+                      ) : (
+                        <strong>{money.format(p.gross ?? 0)} RSD</strong>
                       )}
                     </td>
                     <td>
@@ -173,8 +184,14 @@ export function RevisionForm({ orderId, lines, rebatesHref }: { orderId: string;
         </label>
         {preview ? (
           <p className="kk-fine" role="status">
-            Zbir sa PDV-om: <strong>{money.format(preview.gross)} RSD</strong>
-            {preview.onRequest ? ` · stavke na upit: ${preview.onRequest} (nisu u zbiru)` : ""}
+            {preview.onRequest >= preview.lines.length ? (
+              <>Ukupan iznos: <strong>Iznos još nije utvrđen</strong> (sve stavke su na upit)</>
+            ) : (
+              <>
+                Zbir sa PDV-om: <strong>{money.format(preview.gross)} RSD</strong>
+                {preview.onRequest ? ` · stavke na upit: ${preview.onRequest} (nisu u zbiru)` : ""}
+              </>
+            )}
           </p>
         ) : null}
         <div className="kk-step-actions">
@@ -188,8 +205,8 @@ export function RevisionForm({ orderId, lines, rebatesHref }: { orderId: string;
             title={!preview ? "Prvo proverite cene" : undefined}
             onClick={() =>
               start(async () => {
-                const r = await proposeRevisionAction(orderId, rows.map((x) => ({ code: x.code, quantity: x.quantity })), reason);
-                setMsg(r.ok ? { ok: true, text: r.message, orderId: (r as { orderId?: string }).orderId } : { ok: false, text: r.message });
+                const r = await proposeRevisionAction(orderId, rows.map((x) => ({ code: x.code, quantity: x.quantity })), reason, version);
+                setMsg(r.ok ? { ok: true, text: r.message, orderId: (r as { orderId?: string }).orderId } : { ok: false, text: r.message, stale: (r as { stale?: { currentId: string; currentNumber: string } }).stale });
               })
             }
           >
@@ -198,7 +215,15 @@ export function RevisionForm({ orderId, lines, rebatesHref }: { orderId: string;
         </div>
         {msg && !msg.ok ? (
           <p className="portal-login-error" role="alert">
-            {msg.text}
+            <span>
+              {msg.text}
+              {msg.stale ? (
+                <>
+                  {" "}
+                  <a href={`/portal/zahtevi/${msg.stale.currentId}`}>Otvorite aktuelnu verziju{msg.stale.currentNumber ? ` (${msg.stale.currentNumber})` : ""}</a>
+                </>
+              ) : null}
+            </span>
           </p>
         ) : null}
       </div>

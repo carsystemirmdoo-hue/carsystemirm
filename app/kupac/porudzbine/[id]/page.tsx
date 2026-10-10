@@ -2,7 +2,9 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { OrderDetailView } from "@/components/ordering/OrderDetailView";
 import { requireCustomerSession } from "@/lib/authz/customer-session";
+import { LiveRefresh } from "@/components/ordering/LiveRefresh";
 import { loadCustomerOrder } from "@/lib/ordering/ordering-service";
+import { customerOrderStamp } from "@/lib/ordering/live-stamp";
 import { CustomerOrderActions } from "./CustomerOrderActions";
 
 export const dynamic = "force-dynamic";
@@ -22,6 +24,7 @@ export default async function CustomerOrderPage({
   const session = await requireCustomerSession(`/kupac/porudzbine/${encodeURIComponent(id)}`);
   const order = await loadCustomerOrder(session.customerId, id);
   if (!order) notFound();
+  const stamp = await customerOrderStamp(session.customerId, order.id);
 
   return (
     <section className="portal-panel">
@@ -37,10 +40,13 @@ export default async function CustomerOrderPage({
       </div>
       <OrderDetailView order={order} audience="customer" />
       <CustomerOrderActions
+        key={order.version}
+        version={order.version}
         orderId={order.id}
         status={order.status}
         pendingProposal={order.replacedBy && order.replacedBy.status !== "cancelled" ? order.replacedBy : null}
       />
+      <LiveRefresh endpoint={`/api/kupac/zahtevi/stanje?id=${order.id}`} stamp={stamp} what="Zahtev" />
     </section>
   );
 }

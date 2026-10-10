@@ -14,6 +14,14 @@ import { approvedPaymentOptions } from "@/lib/pricing/payment-option-service";
 import { optionLabel, optionNote } from "@/lib/pricing/paymentOptions.mjs";
 import { belgradeDate } from "@/lib/recommendations/customerRhythm.mjs";
 import { orderingEnabledFor } from "@/lib/ordering/trial";
+import { staleVersionProblem } from "@/lib/ordering/ordering-service";
+
+/** Radnja nad zastarelom verzijom zahteva — nosi važeću verziju za ponudu korisniku. */
+export class StaleVersionError extends Error {
+  constructor(message: string, readonly stale: { currentId: string; currentNumber: string } | undefined) {
+    super(message);
+  }
+}
 import { foldedMatch } from "@/lib/ordering/search-fold";
 
 /**
@@ -391,7 +399,7 @@ async function statusEvent(tx: Tx, orderId: string, from: string | null, to: str
  * uslovima i istoj opciji plaćanja). Original ostaje netaknut ('changes_requested'
  * sa razlogom); predlog je nova verzija koja čeka potvrdu kupca.
  */
-export async function proposeOrderRevision(viewer: PortalUser, orderId: string, input: { lines: { articleId: string; quantity: number }[]; reason: string }) {
+export async function proposeOrderRevision(viewer: PortalUser, orderId: string, input: { lines: { articleId: string; quantity: number }[]; reason: string; expectedVersion?: string | null }) {
   if (!can(viewer, "customer_orders:review")) throw new Error("Nemate pravo da menjate zahteve.");
   const reason = input.reason.trim();
   if (reason.length < 5) throw new Error("Razlog izmene: najmanje 5 znakova.");
@@ -406,6 +414,8 @@ export async function proposeOrderRevision(viewer: PortalUser, orderId: string, 
     if (!o) throw new Error("Zahtev ne postoji.");
     if (scope.customerIds !== null && !scope.customerIds.includes(o.customer_id)) throw new Error("Zahtev nije u Vašem opsegu.");
     if (o.pricing_source !== "cenovnik") throw new Error("Izmenjen predlog važi samo za zahteve iz stvarnog cenovnika.");
+    const stale = await staleVersionProblem(tx, o.id, input.expectedVersion);
+    if (stale) throw new StaleVersionError(stale.message, stale.stale);
     if (!["submitted", "under_review", "changes_requested"].includes(o.status)) throw new Error("Predlog izmene je moguć dok je zahtev poslat, u obradi ili čeka izmenu.");
     // Posle odbijenog predloga (otkazan) sme novi; dok jedan čeka kupca ili je potvrđen — ne.
     const [active] = [...(await tx.execute<{ n: string }>(sql`
@@ -498,7 +508,7 @@ export async function previewOrderRevision(viewer: PortalUser, orderId: string, 
 }
 
 /** Kupac potvrđuje (postaje poslat zahtev; original „vraćen na ispravku“) ili odbija izmenjen predlog. */
-export async function answerOrderRevision(session: CustomerSession, orderId: string, accept: boolean) {
+export async function answerOrderRevision(session: CustomerSession, orderId: string, accept: boolean, expectedVersion?: string | null) {
   const customerId = session.customerId;
   if (!customerId) throw new Error("Upit kupca bez customer_id se ne sme izvršiti.");
   if (accept && session.assurance === "remembered") return { ok: false as const, message: "Radi sigurnosti, pre potvrde ponovo unesite lozinku." };
@@ -507,6 +517,8 @@ export async function answerOrderRevision(session: CustomerSession, orderId: str
     const [r] = [...(await tx.execute<{ id: string; status: string; replaces_order_id: string | null }>(sql`
       SELECT id, status::text AS status, replaces_order_id FROM customer_orders WHERE id = ${orderId}::uuid AND customer_id = ${customerId} FOR UPDATE`))];
     if (!r) return { ok: false as const, message: "Predlog ne postoji." };
+    const stale = await staleVersionProblem(tx, r.id, expectedVersion);
+    if (stale) return stale;
     if (r.status !== "awaiting_customer") return { ok: false as const, message: "Predlog više ne čeka potvrdu." };
     const to = accept ? "submitted" : "cancelled";
     const problem = transitionProblem({ from: "awaiting_customer", to, actor: "customer", reason: null });

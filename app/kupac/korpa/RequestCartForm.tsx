@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useMemo, useState, useTransition } from "react";
+import { useEffect, useMemo, useRef, useState, useTransition } from "react";
 import { countOf, STAVKA } from "@/lib/ordering/plural.mjs";
 import { confirmPasswordAction, setRequestQuantityAction, submitRequestAction } from "./actions";
 
@@ -71,6 +71,15 @@ export function RequestCartForm({ view }: { view: RequestCartView }) {
   // Prikaz koji je kupac video pre nego što je server javio promenu — razlika se prikazuje uz novu potvrdu.
   const [seen, setSeen] = useState<RequestCartView | null>(null);
   const changes = useMemo(() => (seen && seen.fingerprint !== view.fingerprint ? describeChanges(seen, view) : []), [seen, view]);
+  // Automatsko osvežavanje (drugi prozor, nova cena ili opcija): prikaz se ne menja neprimetno — razlika ostaje vidljiva.
+  const previous = useRef(view);
+  const ownChange = useRef(false);
+  useEffect(() => {
+    // Sopstvena izmena (količina, uklanjanje) nije „promena od prikaza“.
+    if (ownChange.current) ownChange.current = false;
+    else if (previous.current.fingerprint !== view.fingerprint && !seen) setSeen(previous.current);
+    previous.current = view;
+  }, [view, seen]);
   const selectedLabel = view.options.find((o) => o.code === view.selected)?.label ?? "Plaćanje po dogovoru sa kancelarijom";
   const submit = () =>
     start(async () => {
@@ -106,7 +115,7 @@ export function RequestCartForm({ view }: { view: RequestCartView }) {
     );
   }
   return (
-    <div className="portal-panel-body kr-cart">
+    <div className="portal-panel-body kr-cart" data-unsaved={note.trim() || address.trim() || phone.trim() ? "true" : undefined}>
       {view.correcting ? <p className="portal-data-note">Ispravka zahteva {view.correcting}.</p> : null}
       {view.options.length > 1 ? (
         <fieldset className="kr-options">
@@ -131,11 +140,12 @@ export function RequestCartForm({ view }: { view: RequestCartView }) {
               <small>Šifra {l.articleCode} · {l.packConfirmed ? `pakovanje ${l.packLabel}` : `JM: ${l.unit}`}</small>
               {l.problem ? <small className="kk-problem">{l.problem}</small> : null}
             </div>
-            <ul className="kr-prices">
+            <ul className="kr-prices" aria-label="Cena po jedinici bez PDV-a">
+              <li className="kr-prices-head">Cena po jedinici bez PDV-a</li>
               {l.prices.map((p) => (
                 <li key={p.key} aria-current={p.key === (view.selected ?? "osnovni") ? "true" : undefined}>
                   <span>{p.label}</span>
-                  {p.status === "cena" ? <strong>{money(p.netPrice!)} <small>bez PDV-a / {l.unit}</small></strong> : <strong>na upit</strong>}
+                  {p.status === "cena" ? <strong>{money(p.netPrice!)} <small>/ {l.unit}</small></strong> : <strong>na upit</strong>}
                 </li>
               ))}
             </ul>
@@ -143,22 +153,29 @@ export function RequestCartForm({ view }: { view: RequestCartView }) {
               <span>Količina ({l.unit})</span>
               <input key={`${l.articleId}-${l.quantity}`} defaultValue={String(l.quantity).replace(".", ",")} inputMode="decimal"
                 onKeyDown={(e) => { if (e.key === "Enter") { e.preventDefault(); e.currentTarget.blur(); } }}
-                onBlur={(e) => e.target.value.trim() !== e.target.defaultValue && start(async () => { const r = await setRequestQuantityAction({ articleId: l.articleId, quantity: e.target.value.replace(",", ".") }); if (!r.ok) setResult({ ok: false, text: r.message }); router.refresh(); })} />
+                onBlur={(e) => e.target.value.trim() !== e.target.defaultValue && start(async () => { const r = await setRequestQuantityAction({ articleId: l.articleId, quantity: e.target.value.replace(",", ".") }); if (!r.ok) setResult({ ok: false, text: r.message }); ownChange.current = true; router.refresh(); })} />
               {l.quantityProblem ? <small className="kk-problem">{l.quantityProblem}</small> : null}
             </label>
             <div className="kr-amount">
-              {l.amounts ? <><strong>{money(l.amounts.net)}</strong><small>bez PDV-a</small></> : <small>na upit — nije u zbiru</small>}
+              <small className="kr-amount-head">Ukupno za količinu sa PDV-om</small>
+              {l.amounts ? <><strong>{money(l.amounts.gross)}</strong><small>bez PDV-a {money(l.amounts.net)}</small></> : <><strong>Iznos još nije utvrđen</strong><small>na upit — nije u zbiru</small></>}
               <button type="button" className="portal-button" data-variant="ghost" disabled={pending}
-                onClick={() => start(async () => { await setRequestQuantityAction({ articleId: l.articleId, quantity: "0" }); router.refresh(); })}>Uklonite</button>
+                onClick={() => start(async () => { await setRequestQuantityAction({ articleId: l.articleId, quantity: "0" }); ownChange.current = true; router.refresh(); })}>Uklonite</button>
             </div>
           </li>
         ))}
       </ol>
-      <dl className="ka-facts ka-facts-wide">
-        <div><dt>Osnovica (bez PDV-a)</dt><dd>{money(view.totals.net)}</dd></div>
-        <div><dt>PDV</dt><dd>{money(view.totals.vat)}</dd></div>
-        <div><dt>{view.onRequest ? `Zbir stavki sa poznatom cenom — nije konačan iznos zahteva — ${selectedLabel}` : `Ukupno sa PDV-om — ${selectedLabel}`}</dt><dd>{money(view.totals.gross)}{view.onRequest ? <small>sa PDV-om · nije uračunato na upit: {countOf(view.onRequest, STAVKA)}</small> : null}</dd></div>
-      </dl>
+      {view.onRequest >= view.lines.length ? (
+        <dl className="ka-facts ka-facts-wide">
+          <div><dt>Ukupan iznos — {selectedLabel}</dt><dd>Iznos još nije utvrđen<small>sve stavke su na upit ({countOf(view.onRequest, STAVKA)}); cenu potvrđuje kancelarija</small></dd></div>
+        </dl>
+      ) : (
+        <dl className="ka-facts ka-facts-wide">
+          <div><dt>Osnovica (bez PDV-a)</dt><dd>{money(view.totals.net)}</dd></div>
+          <div><dt>PDV</dt><dd>{money(view.totals.vat)}</dd></div>
+          <div><dt>{view.onRequest ? `Zbir stavki sa poznatom cenom — nije konačan iznos zahteva — ${selectedLabel}` : `Ukupno sa PDV-om — ${selectedLabel}`}</dt><dd>{money(view.totals.gross)}{view.onRequest ? <small>sa PDV-om · nije uračunato na upit: {countOf(view.onRequest, STAVKA)}</small> : null}</dd></div>
+        </dl>
+      )}
       {view.onRequest ? <p className="portal-data-note">Stavke na upit nemaju potvrđenu cenu za izabranu opciju; kancelarija Vam javlja cenu. Zbir ih ne sadrži i nije konačan iznos zahteva.</p> : null}
       <div className="kr-fields">
         <label className="rr-field"><span>Napomena (nije obavezno)</span><textarea rows={2} value={note} onChange={(e) => setNote(e.target.value)} maxLength={1000} /></label>

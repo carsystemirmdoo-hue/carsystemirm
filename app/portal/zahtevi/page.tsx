@@ -8,6 +8,8 @@ import { requireCapability } from "@/lib/authz/session";
 import { listOrderRequests, loadOrderingMode } from "@/lib/ordering/ordering-service";
 import { trialOverview } from "@/lib/ordering/trial-service";
 import { trialCustomerIds } from "@/lib/ordering/trial";
+import { LiveRefresh } from "@/components/ordering/LiveRefresh";
+import { staffOrderStamp } from "@/lib/ordering/live-stamp";
 import { TrialPanel } from "./TrialPanel";
 
 export const dynamic = "force-dynamic";
@@ -17,13 +19,21 @@ const GROUPS = [
   { key: "review", title: "U obradi", statuses: ["under_review"] },
   { key: "waiting", title: "Čeka se kupac", statuses: ["changes_requested", "awaiting_customer"] },
   { key: "confirmed", title: "Potvrđene porudžbine", statuses: ["confirmed"] },
-  { key: "closed", title: "Odbijeni, otkazani i vraćeni na ispravku", statuses: ["rejected", "cancelled", "superseded"] },
+  { key: "closed", title: "Odbijeni, otkazani i zamenjeni", statuses: ["rejected", "cancelled", "superseded"] },
 ];
 
-export default async function OrderRequestsPage({ searchParams }: { searchParams: Promise<{ q?: string }> }) {
+export default async function OrderRequestsPage({ searchParams }: { searchParams: Promise<{ q?: string; verzije?: string }> }) {
   const user = await requireCapability("view:zahtevi", "/portal/zahtevi");
-  const q = ((await searchParams).q ?? "").trim().slice(0, 80);
-  const [rows, mode, trialIds] = await Promise.all([listOrderRequests(user, null, q), loadOrderingMode(), trialCustomerIds()]);
+  const sp = await searchParams;
+  const q = (sp.q ?? "").trim().slice(0, 80);
+  // Podrazumevano samo važeća verzija svakog zahteva; stare verzije su u istoriji detalja.
+  const allVersions = sp.verzije === "sve";
+  const [rows, mode, trialIds, stamp] = await Promise.all([
+    listOrderRequests(user, null, q, { allVersions }),
+    loadOrderingMode(),
+    trialCustomerIds(),
+    staffOrderStamp(user, null),
+  ]);
   const allCustomers = process.env.CUSTOMER_ORDERING === "cenovnik";
   const canReview = can(user, "customer_orders:review");
   const isOwner = can(user, "customer_accounts:manage") && can(user, "prices:approve");
@@ -54,7 +64,11 @@ export default async function OrderRequestsPage({ searchParams }: { searchParams
           aria-label="Pretraga zahteva"
         />
         <button type="submit" className="portal-button" data-variant="secondary">Tražite</button>
-        {q ? <Link href="/portal/zahtevi">Poništite</Link> : null}
+        {allVersions ? <input type="hidden" name="verzije" value="sve" /> : null}
+        {q ? <Link href={allVersions ? "/portal/zahtevi?verzije=sve" : "/portal/zahtevi"}>Poništite</Link> : null}
+        <Link href={allVersions ? `/portal/zahtevi${q ? `?q=${encodeURIComponent(q)}` : ""}` : `/portal/zahtevi?verzije=sve${q ? `&q=${encodeURIComponent(q)}` : ""}`}>
+          {allVersions ? "Samo važeće verzije" : "Prikažite i stare verzije"}
+        </Link>
       </form>
       <section className="portal-panel">
         {allCustomers ? (
@@ -123,6 +137,7 @@ export default async function OrderRequestsPage({ searchParams }: { searchParams
                             {o.orderNumber ? `zahtev ${o.requestNumber}` : countOf(o.lineCount, STAVKA)}
                             {o.replacesNumber ? ` · ispravka ${o.replacesNumber}` : ""}
                             {o.revisionNo > 1 ? ` · verzija ${o.revisionNo}` : ""}
+                            {!allVersions && o.otherVersions ? ` · starije verzije u istoriji: ${o.otherVersions}` : ""}
                           </small>
                         </span>
                         <span>
@@ -134,7 +149,7 @@ export default async function OrderRequestsPage({ searchParams }: { searchParams
                           <OrderStatusBadge status={o.status} />
                         </span>
                         <span className="ka-amount">
-                          {srMoney(String(o.grossTotal), o.currency)}
+                          {o.lineCount > 0 && o.onRequestLinesCount >= o.lineCount ? "Iznos još nije utvrđen" : srMoney(String(o.grossTotal), o.currency)}
                           {o.priceListKind === "demo" ? <small>demo cene</small> : null}
                           {o.onRequestLinesCount ? <small>+ {countOf(o.onRequestLinesCount, STAVKA)} na upit</small> : null}
                         </span>
@@ -147,6 +162,7 @@ export default async function OrderRequestsPage({ searchParams }: { searchParams
           </section>
         );
       })}
+      <LiveRefresh endpoint="/api/portal/zahtevi/stanje" stamp={stamp} what="Spisak zahteva" />
     </>
   );
 }

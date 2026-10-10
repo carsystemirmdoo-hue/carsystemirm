@@ -9144,7 +9144,7 @@ html:has(.portal-customer-area) { scroll-padding-top: 104px; }
 
 /* Izmenjen predlog kancelarije */
 .rv-scroll { overflow-x: auto; max-width: 100%; }
-.rv-table { min-width: 640px; }
+.rv-table { min-width: 760px; }
 .rv-table .rv-qty input { width: 6.5em; }
 .rv-table td small { display: block; color: var(--p-muted); font-size: 12px; }
 .rv-found { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
@@ -9157,3 +9157,19 @@ html:has(.portal-customer-area) { scroll-padding-top: 104px; }
 .kr-changes { border: 1px solid oklch(0.8 0.1 70); background: oklch(0.97 0.04 85); color: var(--p-ink); border-radius: 8px; padding: 10px 14px; font-size: 13px; }
 .kr-changes ul { margin: 6px 0 0; padding-left: 18px; display: grid; gap: 3px; }
 .dark .portal-customer-area .kr-changes { background: oklch(0.3 0.05 80); border-color: oklch(0.5 0.08 80); }
+
+/* Automatsko osvežavanje: promena dok obrazac ima nesnimljene izmene */
+.live-notice { position: sticky; bottom: 12px; z-index: 30; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px; margin: 12px 0; padding: 10px 14px; border: 1px solid oklch(0.78 0.1 70); border-radius: 8px; background: oklch(0.97 0.045 85); color: oklch(0.3 0.04 70); font-size: 13px; box-shadow: 0 6px 18px oklch(0 0 0 / 0.12); }
+.dark .portal-customer-area .live-notice { background: oklch(0.32 0.05 80); color: oklch(0.95 0.02 85); border-color: oklch(0.55 0.08 80); }
+
+/* Stara verzija zahteva */
+.kk-old-version { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; margin: 0 0 12px; padding: 12px 16px; border: 2px solid oklch(0.7 0.13 60); border-radius: 8px; background: oklch(0.96 0.05 80); color: oklch(0.28 0.05 60); }
+.kk-old-version strong { font-size: 15px; }
+.dark .portal-customer-area .kk-old-version { background: oklch(0.3 0.06 70); color: oklch(0.95 0.03 85); border-color: oklch(0.62 0.12 65); }
+.kk-versions { list-style: none; margin: 0 0 16px; padding: 0; display: grid; gap: 4px; font-size: 13px; }
+.kk-versions li { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.kk-versions [aria-current="true"] { font-weight: 700; }
+.kr-prices .kr-prices-head, .kr-amount .kr-amount-head { display: block; padding: 0 6px; color: var(--p-muted); font-size: 11px; font-weight: 650; letter-spacing: 0.03em; text-transform: uppercase; background: none; }
+.kr-amount .kr-amount-head { padding: 0; }
+.kk-old-version .portal-button { background: oklch(0.32 0.06 60); color: oklch(0.99 0 0); border-color: transparent; }
+.dark .portal-customer-area .kk-old-version .portal-button { background: oklch(0.95 0.04 85); color: oklch(0.25 0.05 60); }

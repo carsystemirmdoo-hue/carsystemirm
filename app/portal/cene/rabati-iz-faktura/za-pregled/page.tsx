@@ -55,7 +55,12 @@ export default async function RebateReviewQueuePage({
             {CRITERIA_TEXT[3]}.
           </span>
         }
-        actions={<Link className="rr-link" href="/portal/cene/rabati-iz-faktura/kupci">Pregled po kupcu →</Link>}
+        actions={
+          <>
+            <Link className="rr-link" href="/portal/cene/rabati-iz-faktura/predlozi">Predlozi sa dokazima →</Link>{" "}
+            <Link className="rr-link" href="/portal/cene/rabati-iz-faktura/kupci">Pregled po kupcu →</Link>
+          </>
+        }
       />
 
       <section className="portal-metrics rr-metrics" aria-label="Po komercijalisti">

@@ -194,7 +194,11 @@ test("cena kupca (stvarni model): potvrđen rabat 0 % daje cenu, bez pravila je 
             '2026-01-01', 'approved_pending_biznisoft', 'QA: dogovoreno bez rabata', ${owner.id}, now(), ${owner.id}, now())`;
   try {
     const zero = await customerPrices(c0.id, [a1.id], "2026-12-15");
-    assert.deepEqual(zero.prices.get(a1.id), { status: "cena", baseCents: 530050, discountPercent: 0, netCents: 530050, basis: "osnovna cena, ugovoreni rabat 0 %" });
+    const z = zero.prices.get(a1.id)!;
+    assert.deepEqual({ ...z, pack: undefined }, { status: "cena", baseCents: 530050, discountPercent: 0, netCents: 530050, basis: "osnovna cena, ugovoreni rabat 0 %", unit: "kom", pack: undefined });
+    // Bez potvrđene veze sa katalogom pakovanje se ne obračunava.
+    assert.equal(z.pack?.status, "blokirano");
+    assert.match((z.pack as { message: string }).message, /veza artikla sa katalogom/);
     const unknown = await customerPrices(cx.id, [a1.id], "2026-12-15");
     assert.equal(unknown.prices.get(a1.id)?.status, "na_upit");
     assert.equal((unknown.prices.get(a1.id) as { reason: string }).reason, "rabat_nepoznat");

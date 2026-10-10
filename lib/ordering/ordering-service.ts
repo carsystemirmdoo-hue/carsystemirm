@@ -362,7 +362,7 @@ export async function loadCartQuote(customerId: string, exec: Exec = getDb()): P
       ...offer,
       quantity,
       quantityProblem: qp,
-      amounts: offer.price && !offer.problem && !qp ? lineAmounts({ quantity, netPrice: offer.price.netPrice, vatPercent: offer.price.vatPercent }) : null,
+      amounts: offer.price && !offer.problem && !qp ? lineAmounts({ quantity, netPrice: offer.price.netPrice, vatPercent: offer.price.vatPercent, listPrice: offer.price.listPrice, discountPercent: offer.price.discountPercent }) : null,
     };
   });
   const valid = lines.filter((l) => l.amounts);
@@ -375,7 +375,7 @@ export async function loadCartQuote(customerId: string, exec: Exec = getDb()): P
     mode,
     correcting,
     lines,
-    totals: orderTotals(valid.map((l) => ({ quantity: l.quantity, netPrice: l.price!.netPrice, vatPercent: l.price!.vatPercent }))),
+    totals: orderTotals(valid.map((l) => ({ quantity: l.quantity, netPrice: l.price!.netPrice, vatPercent: l.price!.vatPercent, listPrice: l.price!.listPrice, discountPercent: l.price!.discountPercent }))),
     fingerprint: fingerprintOf(lines),
     canSubmit: blockers.length === 0,
     blockers,

@@ -25,10 +25,10 @@ const TRIAL_LABELS: Record<string, string> = {
   ostalo: "Ostalo",
 };
 
-export default async function PriceListReviewPage({ params, searchParams }: { params: Promise<{ id: string }>; searchParams: Promise<{ datum?: string }> }) {
+export default async function PriceListReviewPage({ params, searchParams }: { params: Promise<{ id: string }>; searchParams: Promise<{ datum?: string; isti?: string }> }) {
   const user = await requireCapability("pricelist:manage", "/portal/cene/cenovnik");
   const { id } = await params;
-  const { datum } = await searchParams;
+  const { datum, isti } = await searchParams;
   if (!/^[0-9a-f-]{36}$/.test(id)) notFound();
   const review = await loadPriceListReview(user, id, datum);
   if (!review) notFound();
@@ -57,6 +57,11 @@ export default async function PriceListReviewPage({ params, searchParams }: { pa
         description="Pregled pre primene. Ništa od ovoga još nije osnovna cena — upisuje se tek posle Vaše potvrde."
         meta={<span><Link href="/portal/cene/cenovnik">← Svi cenovnici</Link> · otpremio {DT.format(imp.uploadedAt)}</span>}
       />
+      {isti ? (
+        <p className="portal-permission-ok" role="status">
+          Isti fajl je već otpremljen {DT.format(imp.uploadedAt)} — nov unos nije napravljen. Prikazano je postojeće otpremanje.
+        </p>
+      ) : null}
 
       <section className="portal-panel">
         <SectionHeader title="Šta PDF sadrži" description="Pročitano iz samog dokumenta; ništa se ne pretpostavlja iz naziva fajla." />

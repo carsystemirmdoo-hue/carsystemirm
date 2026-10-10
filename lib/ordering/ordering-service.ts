@@ -15,6 +15,7 @@ import {
   lineAmounts,
   MAX_LINE_QUANTITY,
   netUnitPrice,
+  ORDER_STATUS_LABELS,
   orderabilityProblem,
   orderTotals,
   parseQuantity,
@@ -596,7 +597,18 @@ export type OrderListRow = {
   paymentOptionLabel: string | null;
   onRequestLinesCount: number;
   revisionNo: number;
+  /** Ostali zapisi istog lanca (original, odbijeni predlozi) — u istoriji detalja. */
+  otherVersions: number;
 };
+
+/**
+ * Samo važeća verzija lanca: bez zapisa koji imaju neotkazanu zamenu (zamenjen
+ * original, original čiji predlog čeka kupca) i bez odbijenih predloga dok je
+ * original živ. Stari zapisi ostaju u bazi i u istoriji detalja.
+ */
+const CURRENT_ONLY = sql`NOT EXISTS (SELECT 1 FROM customer_orders r WHERE r.replaces_order_id = o.id AND r.status <> 'cancelled')
+  AND NOT (o.status = 'cancelled' AND o.replaces_order_id IS NOT NULL
+           AND EXISTS (SELECT 1 FROM customer_orders p WHERE p.id = o.replaces_order_id AND p.status <> 'superseded'))`;
 
 function scopeWhere(scope: LedgerScope): SQL {
   if (scope.customerIds === null) return sql`true`;
@@ -609,10 +621,13 @@ async function listOrders(where: SQL): Promise<OrderListRow[]> {
     id: string; request_number: string; order_number: string | null; status: string; submitted_at: Date;
     gross_total: string; currency: string; line_count: number; price_list_kind: "demo" | "biznisoft";
     customer_name: string; customer_id: string; replaces_number: string | null;
-    payment_option_label: string | null; on_request_lines: number; revision: number;
+    payment_option_label: string | null; on_request_lines: number; revision: number; other_versions: number;
   }>(sql`
     SELECT o.id, o.request_number, o.order_number, o.status::text AS status, o.submitted_at,
            o.payment_option_label, o.on_request_lines, o.revision,
+           ((o.replaces_order_id IS NOT NULL)::int
+             + (SELECT count(*)::int FROM customer_orders s WHERE s.id <> o.id
+                  AND (s.replaces_order_id = o.id OR (o.replaces_order_id IS NOT NULL AND s.replaces_order_id = o.replaces_order_id)))) AS other_versions,
            (SELECT p.request_number FROM customer_orders p WHERE p.id = o.replaces_order_id) AS replaces_number,
            o.gross_total::text AS gross_total, o.currency, o.price_list_kind::text AS price_list_kind,
            (SELECT count(*)::int FROM customer_order_lines l WHERE l.order_id = o.id) AS line_count,
@@ -627,10 +642,16 @@ async function listOrders(where: SQL): Promise<OrderListRow[]> {
     lineCount: r.line_count, priceListKind: r.price_list_kind, customerName: r.customer_name, customerId: r.customer_id,
     replacesNumber: r.replaces_number,
     paymentOptionLabel: r.payment_option_label, onRequestLinesCount: Number(r.on_request_lines), revisionNo: Number(r.revision),
+    otherVersions: Number(r.other_versions),
   }));
 }
 
 export type OrderDetail = OrderListRow & {
+  /** Oznaka verzije (updated_at) — radnje je šalju da server odbije zastarelu. */
+  version: string;
+  /** Svi zapisi lanca (original, predlozi, ispravke) i važeća verzija. */
+  versions: OrderVersion[];
+  current: OrderVersion | null;
   replaces: { id: string; requestNumber: string } | null;
   replacedBy: { id: string; requestNumber: string; status: string } | null;
   netTotal: number;
@@ -675,8 +696,9 @@ async function loadOrder(where: SQL): Promise<OrderDetail | null> {
       delivery_address: string | null; contact_phone: string | null; contact_email: string | null; partner_code: string | null;
       prepared_by_name: string | null; on_request_lines: number;
       replaces_id: string | null; replaces_number: string | null; replaced_by_id: string | null; replaced_by_number: string | null; replaced_by_status: string | null;
+      version: string;
     }>(sql`
-      SELECT o.id, o.request_number, o.order_number, o.status::text AS status, o.submitted_at,
+      SELECT o.id, o.updated_at::text AS version, o.request_number, o.order_number, o.status::text AS status, o.submitted_at,
              o.gross_total::text AS gross_total, o.net_total::text AS net_total, o.vat_total::text AS vat_total,
              o.currency, o.price_list_kind::text AS price_list_kind, c.name AS customer_name, c.id AS customer_id,
              o.customer_note, o.status_reason, o.biznisoft_document_number, o.biznisoft_recorded_at,
@@ -699,7 +721,7 @@ async function loadOrder(where: SQL): Promise<OrderDetail | null> {
        LIMIT 1`)),
   ];
   if (!head) return null;
-  const [lines, events] = await Promise.all([
+  const [lines, events, chain] = await Promise.all([
     db.execute<Record<string, string>>(sql`
       SELECT line_number::text, article_id, article_code, article_name, catalog_product_slug, catalog_variant_id, catalog_name,
              unit, pack_label, quantity::text, list_price::text, discount_percent::text, net_price::text, vat_percent::text,
@@ -709,12 +731,17 @@ async function loadOrder(where: SQL): Promise<OrderDetail | null> {
       SELECT created_at, from_status::text AS from_status, to_status::text AS to_status, kind, actor_name,
              (actor_user_id IS NOT NULL) AS staff, reason
         FROM customer_order_events WHERE order_id = ${head.id} ORDER BY created_at, id`),
+    loadVersionChain(db, head.id),
   ]);
   return {
+    version: head.version,
+    versions: chain.versions,
+    current: chain.current,
     id: head.id, requestNumber: head.request_number, orderNumber: head.order_number, status: head.status,
     submittedAt: new Date(head.submitted_at), grossTotal: Number(head.gross_total), netTotal: Number(head.net_total),
     vatTotal: Number(head.vat_total), currency: head.currency, priceListKind: head.price_list_kind,
     customerName: head.customer_name, customerId: head.customer_id, lineCount: [...lines].length, replacesNumber: head.replaces_number,
+    otherVersions: Math.max(0, chain.versions.length - 1),
     customerNote: head.customer_note, statusReason: head.status_reason,
     biznisoftDocumentNumber: head.biznisoft_document_number,
     biznisoftRecordedAt: head.biznisoft_recorded_at ? new Date(head.biznisoft_recorded_at) : null,
@@ -749,9 +776,9 @@ async function loadOrder(where: SQL): Promise<OrderDetail | null> {
   };
 }
 
-export async function listCustomerOrders(customerId: string): Promise<OrderListRow[]> {
+export async function listCustomerOrders(customerId: string, opts: { allVersions?: boolean } = {}): Promise<OrderListRow[]> {
   if (!customerId) throw new Error("Upit kupca bez customer_id se ne sme izvršiti.");
-  return listOrders(sql`o.customer_id = ${customerId}`);
+  return listOrders(sql`o.customer_id = ${customerId} AND ${opts.allVersions ? sql`true` : CURRENT_ONLY}`);
 }
 
 /** Jedan zahtev kupca. Tuđi ID daje `null` — isto kao nepostojeći. */
@@ -765,13 +792,76 @@ export async function loadCustomerOrder(customerId: string, orderId: string): Pr
  * Prelazi statusa
  * ------------------------------------------------------------------------ */
 
-export type TransitionResult = { ok: true; changed: boolean } | { ok: false; message: string };
+export type TransitionResult =
+  | { ok: true; changed: boolean }
+  | { ok: false; message: string; stale?: { currentId: string; currentNumber: string } };
+
+/* ---------------------------------------------------------------------------
+ * Verzije zahteva
+ *
+ * Original i svi njegovi predlozi/ispravke čine lanac (`replaces_order_id`).
+ * Važeća verzija: od originala se ide na zamenu koja NIJE otkazana (odbijen
+ * predlog je otkazan), dok ih ima. Oznaka verzije za proveru zastarelosti je
+ * `updated_at` (menja ga svaka radnja nad zahtevom).
+ * ------------------------------------------------------------------------ */
+
+export type OrderVersion = { id: string; requestNumber: string; orderNumber: string | null; revision: number; status: string; submittedAt: Date; current: boolean };
+
+export async function loadVersionChain(exec: Exec, orderId: string): Promise<{ versions: OrderVersion[]; current: OrderVersion | null }> {
+  const rows = [...(await exec.execute<{ id: string; parent: string | null; request_number: string; order_number: string | null; revision: number; status: string; submitted_at: Date }>(sql`
+    WITH RECURSIVE up(id, parent) AS (
+      SELECT id, replaces_order_id FROM customer_orders WHERE id = ${orderId}::uuid
+      UNION ALL
+      SELECT p.id, p.replaces_order_id FROM customer_orders p JOIN up ON p.id = up.parent
+    ), tree(id) AS (
+      SELECT id FROM up WHERE parent IS NULL
+      UNION ALL
+      SELECT r.id FROM customer_orders r JOIN tree ON r.replaces_order_id = tree.id
+    )
+    SELECT o.id, o.replaces_order_id AS parent, o.request_number, o.order_number, o.revision, o.status::text AS status, o.submitted_at
+      FROM tree JOIN customer_orders o ON o.id = tree.id
+     ORDER BY o.submitted_at, o.revision`))];
+  if (!rows.length) return { versions: [], current: null };
+  let cur = rows.find((r) => r.parent === null) ?? rows[0];
+  for (;;) {
+    const next = rows.find((r) => r.parent === cur.id && r.status !== "cancelled");
+    if (!next) break;
+    cur = next;
+  }
+  const versions = rows.map((r) => ({
+    id: r.id, requestNumber: r.request_number, orderNumber: r.order_number, revision: Number(r.revision), status: r.status,
+    submittedAt: new Date(r.submitted_at), current: r.id === cur.id,
+  }));
+  return { versions, current: versions.find((v) => v.current) ?? null };
+}
+
+/**
+ * Radnja nad zastarelom verzijom: korisnik je video oznaku `expected`, a zahtev
+ * je u međuvremenu promenjen (drugi prozor, kupac, kancelarija). Poziva se
+ * POSLE zaključavanja reda (FOR UPDATE), pa se provera i upis ne mogu razići.
+ */
+export async function staleVersionProblem(exec: Exec, orderId: string, expected: string | null | undefined) {
+  if (!expected) return null;
+  const [o] = [...(await exec.execute<{ v: string; status: string }>(sql`SELECT updated_at::text AS v, status::text AS status FROM customer_orders WHERE id = ${orderId}::uuid`))];
+  if (!o || o.v === expected) return null;
+  const { current } = await loadVersionChain(exec, orderId);
+  const label = ORDER_STATUS_LABELS[o.status as keyof typeof ORDER_STATUS_LABELS] ?? o.status;
+  return {
+    ok: false as const,
+    message:
+      current && current.id !== orderId
+        ? `Zahtev je u međuvremenu promenjen — važeća verzija je ${current.orderNumber ?? current.requestNumber}. Radnja nije izvršena.`
+        : `Zahtev je u međuvremenu promenjen (sada: ${label}). Radnja nije izvršena — pregledajte aktuelno stanje.`,
+    stale: { currentId: current?.id ?? orderId, currentNumber: current ? current.orderNumber ?? current.requestNumber : "" },
+  };
+}
 
 async function transition(
   where: SQL,
   to: string,
   actor: { kind: "customer"; accountId: string; name: string } | { kind: "office"; user: PortalUser },
   reason: string | null,
+  expectedVersion?: string | null,
 ): Promise<TransitionResult> {
   const db = getDb();
   return db.transaction(async (tx) => {
@@ -783,6 +873,8 @@ async function transition(
     if (!o) return { ok: false as const, message: "Zahtev ne postoji." };
     // Isti prelaz dvaput (dvostruki klik) nije greška i ne pravi drugi događaj.
     if (o.status === to) return { ok: true as const, changed: false };
+    const stale = await staleVersionProblem(tx, o.id, expectedVersion);
+    if (stale) return stale;
     const problem = transitionProblem({ from: o.status, to, actor: actor.kind, reason });
     if (problem) return { ok: false as const, message: problem };
     // Porudžbina se ne potvrđuje sa nepoznatom cenom: stavke na upit prvo dobijaju cenu kroz izmenjen predlog.
@@ -835,7 +927,7 @@ async function transition(
 }
 
 /** Kupac otkazuje SVOJ zahtev (samo dok ga kancelarija nije uzela u obradu, ili kad traži izmenu). */
-export async function cancelCustomerOrder(session: CustomerSession, orderId: string): Promise<TransitionResult> {
+export async function cancelCustomerOrder(session: CustomerSession, orderId: string, expectedVersion?: string | null): Promise<TransitionResult> {
   const customerId = session.customerId;
   if (!customerId) throw new Error("Upit kupca bez customer_id se ne sme izvršiti.");
   if (!/^[0-9a-f-]{36}$/i.test(orderId)) return { ok: false, message: "Zahtev ne postoji." };
@@ -844,6 +936,7 @@ export async function cancelCustomerOrder(session: CustomerSession, orderId: str
     "cancelled",
     { kind: "customer", accountId: session.accountId, name: session.name },
     null,
+    expectedVersion,
   );
 }
 
@@ -857,7 +950,7 @@ export async function cancelCustomerOrder(session: CustomerSession, orderId: str
  * - Ponovljen klik ne dodaje stavke dvaput: prelaz i upis idu u istoj
  *   transakciji pod zaključanim redom; drugi poziv vidi `superseded` i ne radi ništa.
  */
-export async function returnOrderToCart(session: CustomerSession, orderId: string): Promise<TransitionResult> {
+export async function returnOrderToCart(session: CustomerSession, orderId: string, expectedVersion?: string | null): Promise<TransitionResult> {
   const customerId = session.customerId;
   if (!customerId) throw new Error("Upit kupca bez customer_id se ne sme izvršiti.");
   if (!/^[0-9a-f-]{36}$/i.test(orderId)) return { ok: false, message: "Zahtev ne postoji." };
@@ -870,6 +963,8 @@ export async function returnOrderToCart(session: CustomerSession, orderId: strin
     ];
     if (!o) return { ok: false as const, message: "Zahtev ne postoji." };
     if (o.status === "superseded") return { ok: true as const, changed: false };
+    const stale = await staleVersionProblem(tx, o.id, expectedVersion);
+    if (stale) return stale;
     const problem = transitionProblem({ from: o.status, to: "superseded", actor: "customer", reason: null });
     if (problem) return { ok: false as const, message: "Stavke se vraćaju u korpu samo kada kancelarija traži izmenu." };
 
@@ -893,7 +988,7 @@ export async function returnOrderToCart(session: CustomerSession, orderId: strin
  * ------------------------------------------------------------------------ */
 
 /** Zahtevi u opsegu korisnika (komercijalista: samo dodeljeni kupci). */
-export async function listOrderRequests(viewer: PortalUser, status?: string | null, query?: string | null): Promise<OrderListRow[]> {
+export async function listOrderRequests(viewer: PortalUser, status?: string | null, query?: string | null, opts: { allVersions?: boolean } = {}): Promise<OrderListRow[]> {
   const scope = await resolveLedgerScope(viewer);
   const statusWhere = status ? sql`o.status::text = ${status}` : sql`true`;
   // Pretraga po broju, kupcu, BizniSoft šifri/nazivu ili kataloškom nazivu stavke.
@@ -903,7 +998,7 @@ export async function listOrderRequests(viewer: PortalUser, status?: string | nu
            OR EXISTS (SELECT 1 FROM customer_order_lines l WHERE l.order_id = o.id
                        AND ${foldedMatch([sql`l.article_code`, sql`l.article_name`, sql`l.catalog_name`], q)}))`
     : sql`true`;
-  return listOrders(sql`${scopeWhere(scope)} AND ${statusWhere} AND ${queryWhere}`);
+  return listOrders(sql`${scopeWhere(scope)} AND ${statusWhere} AND ${queryWhere} AND ${opts.allVersions ? sql`true` : CURRENT_ONLY}`);
 }
 
 export async function loadOrderRequest(viewer: PortalUser, orderId: string): Promise<OrderDetail | null> {
@@ -912,17 +1007,17 @@ export async function loadOrderRequest(viewer: PortalUser, orderId: string): Pro
   return loadOrder(sql`o.id = ${orderId}::uuid AND ${scopeWhere(scope)}`);
 }
 
-export async function officeTransition(viewer: PortalUser, orderId: string, to: string, reason: string | null): Promise<TransitionResult> {
+export async function officeTransition(viewer: PortalUser, orderId: string, to: string, reason: string | null, expectedVersion?: string | null): Promise<TransitionResult> {
   if (!/^[0-9a-f-]{36}$/i.test(orderId)) return { ok: false, message: "Zahtev ne postoji." };
   const scope = await resolveLedgerScope(viewer);
-  return transition(sql`o.id = ${orderId}::uuid AND ${scopeWhere(scope)}`, to, { kind: "office", user: viewer }, reason);
+  return transition(sql`o.id = ${orderId}::uuid AND ${scopeWhere(scope)}`, to, { kind: "office", user: viewer }, reason, expectedVersion);
 }
 
 /**
  * Pilot: kancelarija ručno unosi potvrđenu porudžbinu u BizniSoft i ovde
  * upisuje broj tog dokumenta. Portal ne piše u BizniSoft.
  */
-export async function recordBiznisoftEntry(viewer: PortalUser, orderId: string, documentNumber: string): Promise<TransitionResult> {
+export async function recordBiznisoftEntry(viewer: PortalUser, orderId: string, documentNumber: string, expectedVersion?: string | null): Promise<TransitionResult> {
   const doc = String(documentNumber ?? "").trim().slice(0, 60);
   if (doc.length < 2) return { ok: false, message: "Upišite broj dokumenta iz BizniSofta." };
   if (!/^[0-9a-f-]{36}$/i.test(orderId)) return { ok: false, message: "Zahtev ne postoji." };
@@ -937,6 +1032,8 @@ export async function recordBiznisoftEntry(viewer: PortalUser, orderId: string, 
     if (!o) return { ok: false as const, message: "Zahtev ne postoji." };
     if (o.status !== "confirmed") return { ok: false as const, message: "Broj iz BizniSofta se upisuje tek za potvrđenu porudžbinu." };
     if (o.doc === doc) return { ok: true as const, changed: false };
+    const stale = await staleVersionProblem(tx, o.id, expectedVersion);
+    if (stale) return stale;
     if (o.doc) return { ok: false as const, message: `Već je upisan broj ${o.doc}. Isprava ide kroz BizniSoft, ne ovde.` };
     await tx.execute(sql`
       UPDATE customer_orders SET biznisoft_document_number = ${doc}, biznisoft_recorded_by = ${viewer.id},

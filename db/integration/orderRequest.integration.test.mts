@@ -223,6 +223,53 @@ test("odredište kupca posle prijave i odjave zavisi od režima „sajt u pripre
   }
 });
 
+test("verzije: važeća verzija, liste bez starih verzija, server odbija radnju nad zastarelom verzijom, otisak se menja", async (t) => {
+  if (guard(t)) return;
+  const s = await svc();
+  const ord = await import("@/lib/ordering/ordering-service");
+  const live = await import("@/lib/ordering/live-stamp");
+  const tamara = await user("tamara");
+  await s.addRequestItem(session(), { articleId: art.B1, quantity: "3" });
+  const q = await s.loadRequestQuote(customerId, "avans");
+  const sent = (await s.submitOrderRequest(session(), { idempotencyKey: randomUUID(), fingerprint: q.fingerprint, paymentOption: "avans" })) as { orderId: string };
+  const id = sent.orderId;
+  const listStamp0 = await live.staffOrderStamp(tamara, null);
+  const chain0 = await live.customerOrderStamp(customerId, id);
+  const v0 = (await ord.loadOrderRequest(tamara, id))!.version;
+  // Prozor A preuzima u obradu; prozor B (stara oznaka) pokušava da odbije → zastarelo, ništa se ne menja.
+  assert.equal((await ord.officeTransition(tamara, id, "under_review", null, v0)).ok, true);
+  const staleReject = await ord.officeTransition(tamara, id, "rejected", "drugi prozor", v0);
+  assert.equal(staleReject.ok, false);
+  assert.ok(!staleReject.ok && staleReject.stale, "odgovor nudi aktuelnu verziju");
+  assert.equal((await db.sql<{ s: string }[]>`SELECT status::text AS s FROM customer_orders WHERE id = ${id}`)[0].s, "under_review");
+  assert.notEqual(await live.staffOrderStamp(tamara, null), listStamp0, "otisak liste se promenio");
+  assert.notEqual(await live.customerOrderStamp(customerId, id), chain0, "otisak lanca se promenio");
+  // Predlog sa zastarelom oznakom se odbija; sa važećom prolazi.
+  await assert.rejects(async () => s.proposeOrderRevision(tamara, id, { lines: [{ articleId: art.B1, quantity: 2 }], reason: "zastarela oznaka", expectedVersion: v0 }), /u međuvremenu promenjen/);
+  const v1 = (await ord.loadOrderRequest(tamara, id))!.version;
+  const rev = await s.proposeOrderRevision(tamara, id, { lines: [{ articleId: art.B1, quantity: 2 }], reason: "predlog iz prozora A", expectedVersion: v1 });
+  // Original sada vodi na važeću verziju; liste prikazuju samo nju.
+  const orig = (await ord.loadOrderRequest(tamara, id))!;
+  assert.equal(orig.current?.id, rev.orderId, "važeća verzija originala je predlog");
+  assert.equal(orig.versions.length, 2);
+  const list = await ord.listOrderRequests(tamara, null, null);
+  assert.ok(list.some((o) => o.id === rev.orderId) && !list.some((o) => o.id === id), "lista: samo važeća verzija");
+  assert.equal(list.find((o) => o.id === rev.orderId)!.otherVersions, 1);
+  assert.ok((await ord.listOrderRequests(tamara, null, null, { allVersions: true })).some((o) => o.id === id), "sve verzije na zahtev");
+  assert.ok(!(await ord.listCustomerOrders(customerId)).some((o) => o.id === id), "kupčeva lista: samo važeća verzija");
+  // Kupac u dva prozora: A potvrđuje, B (stara oznaka) pokušava da odbije → zastarelo.
+  const pv = (await ord.loadCustomerOrder(customerId, rev.orderId))!.version;
+  assert.equal((await s.answerOrderRevision(session(), rev.orderId, true, pv)).ok, true);
+  const late = await s.answerOrderRevision(session(), rev.orderId, false, pv);
+  assert.equal(late.ok, false);
+  assert.match((late as { message: string }).message, /u međuvremenu promenjen/);
+  assert.equal((await db.sql<{ s: string }[]>`SELECT status::text AS s FROM customer_orders WHERE id = ${rev.orderId}`)[0].s, "submitted");
+  // Otkazivanje stare verzije (originala) iz zastarelog prozora → ponuđena važeća verzija.
+  const cancelOld = await ord.cancelCustomerOrder(session(), id, v0);
+  assert.equal(cancelOld.ok, false);
+  assert.equal(!cancelOld.ok && cancelOld.stale?.currentId, rev.orderId);
+});
+
 test("opoziv opcije plaćanja posle prikaza korpe traži novu potvrdu", async (t) => {
   if (guard(t)) return;
   const s = await svc();

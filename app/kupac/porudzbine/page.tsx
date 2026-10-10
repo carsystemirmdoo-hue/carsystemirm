@@ -4,6 +4,8 @@ import { OrderStatusBadge } from "@/components/ordering/OrderStatusBadge";
 import { requireCustomerSession } from "@/lib/authz/customer-session";
 import { listCustomerOrders } from "@/lib/ordering/ordering-service";
 import { orderingEnabledFor } from "@/lib/ordering/trial";
+import { LiveRefresh } from "@/components/ordering/LiveRefresh";
+import { customerOrderStamp } from "@/lib/ordering/live-stamp";
 
 export const dynamic = "force-dynamic";
 
@@ -13,7 +15,7 @@ export const dynamic = "force-dynamic";
  */
 export default async function CustomerOrdersPage() {
   const session = await requireCustomerSession("/kupac/porudzbine");
-  const [orders, enabled] = await Promise.all([listCustomerOrders(session.customerId), orderingEnabledFor(session.customerId)]);
+  const [orders, enabled, stamp] = await Promise.all([listCustomerOrders(session.customerId), orderingEnabledFor(session.customerId), customerOrderStamp(session.customerId, null)]);
 
   return (
     <section className="portal-panel">
@@ -57,6 +59,7 @@ export default async function CustomerOrdersPage() {
                   <span className="ka-inv-number">
                     {o.orderNumber ?? o.requestNumber}
                     {o.orderNumber ? <small>zahtev {o.requestNumber}</small> : <small>zahtev</small>}
+                    {o.otherVersions ? <small>starije verzije u istoriji: {o.otherVersions}</small> : null}
                   </span>
                   <span>{srDateTime(o.submittedAt)}</span>
                   <span>{o.lineCount}</span>
@@ -64,8 +67,9 @@ export default async function CustomerOrdersPage() {
                     <OrderStatusBadge status={o.status} />
                   </span>
                   <span className="ka-amount">
-                    {srMoney(String(o.grossTotal), o.currency)}
+                    {o.lineCount > 0 && o.onRequestLinesCount >= o.lineCount ? "Iznos još nije utvrđen" : srMoney(String(o.grossTotal), o.currency)}
                     {o.priceListKind === "demo" ? <small>demo cene</small> : null}
+                    {o.onRequestLinesCount && o.onRequestLinesCount < o.lineCount ? <small>bez stavki na upit</small> : null}
                   </span>
                 </Link>
               </li>
@@ -73,6 +77,7 @@ export default async function CustomerOrdersPage() {
           </ol>
         </div>
       )}
+      <LiveRefresh endpoint="/api/kupac/zahtevi/stanje" stamp={stamp} what="Spisak zahteva" />
     </section>
   );
 }

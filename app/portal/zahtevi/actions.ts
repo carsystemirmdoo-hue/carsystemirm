@@ -2,7 +2,7 @@
 
 import { sql } from "drizzle-orm";
 import { getDb } from "@/db/client";
-import { previewOrderRevision, proposeOrderRevision, searchRevisionArticles } from "@/lib/ordering/request-service";
+import { previewOrderRevision, proposeOrderRevision, searchRevisionArticles, StaleVersionError } from "@/lib/ordering/request-service";
 import { createTrialAccount } from "@/lib/ordering/trial-service";
 
 import { revalidatePath } from "next/cache";
@@ -14,43 +14,53 @@ import { officeTransition, recordBiznisoftEntry, type TransitionResult } from "@
  * opseg (koje firme) servis razrešava iz korisnika, ne iz ulaza.
  */
 
-export async function takeIntoReviewAction(orderId: string): Promise<TransitionResult> {
+export async function takeIntoReviewAction(orderId: string, version?: string | null): Promise<TransitionResult> {
   const user = await requireCapability("customer_orders:review", "/portal/zahtevi");
-  const r = await officeTransition(user, orderId, "under_review", null);
-  revalidatePath(`/portal/zahtevi/${orderId}`);
+  const r = await officeTransition(user, orderId, "under_review", null, version);
+  if (r.ok) {
+    revalidatePath(`/portal/zahtevi/${orderId}`);
+  }
   return r;
 }
 
-export async function requestChangesAction(orderId: string, reason: string): Promise<TransitionResult> {
+export async function requestChangesAction(orderId: string, reason: string, version?: string | null): Promise<TransitionResult> {
   const user = await requireCapability("customer_orders:review", "/portal/zahtevi");
-  const r = await officeTransition(user, orderId, "changes_requested", reason);
-  revalidatePath(`/portal/zahtevi/${orderId}`);
+  const r = await officeTransition(user, orderId, "changes_requested", reason, version);
+  if (r.ok) {
+    revalidatePath(`/portal/zahtevi/${orderId}`);
+  }
   return r;
 }
 
-export async function rejectOrderAction(orderId: string, reason: string): Promise<TransitionResult> {
+export async function rejectOrderAction(orderId: string, reason: string, version?: string | null): Promise<TransitionResult> {
   const user = await requireCapability("customer_orders:review", "/portal/zahtevi");
-  const r = await officeTransition(user, orderId, "rejected", reason);
-  revalidatePath(`/portal/zahtevi/${orderId}`);
+  const r = await officeTransition(user, orderId, "rejected", reason, version);
+  if (r.ok) {
+    revalidatePath(`/portal/zahtevi/${orderId}`);
+  }
   return r;
 }
 
-export async function confirmOrderAction(orderId: string): Promise<TransitionResult> {
+export async function confirmOrderAction(orderId: string, version?: string | null): Promise<TransitionResult> {
   const user = await requireCapability("customer_orders:confirm", "/portal/zahtevi");
-  const r = await officeTransition(user, orderId, "confirmed", null);
-  revalidatePath(`/portal/zahtevi/${orderId}`);
+  const r = await officeTransition(user, orderId, "confirmed", null, version);
+  if (r.ok) {
+    revalidatePath(`/portal/zahtevi/${orderId}`);
+  }
   return r;
 }
 
-export async function recordBiznisoftAction(orderId: string, documentNumber: string): Promise<TransitionResult> {
+export async function recordBiznisoftAction(orderId: string, documentNumber: string, version?: string | null): Promise<TransitionResult> {
   const user = await requireCapability("customer_orders:confirm", "/portal/zahtevi");
-  const r = await recordBiznisoftEntry(user, orderId, documentNumber);
-  revalidatePath(`/portal/zahtevi/${orderId}`);
+  const r = await recordBiznisoftEntry(user, orderId, documentNumber, version);
+  if (r.ok) {
+    revalidatePath(`/portal/zahtevi/${orderId}`);
+  }
   return r;
 }
 
 /** Izmenjen predlog (0044): kancelarija menja robu/količine; cene po važećim odobrenim uslovima; kupac potvrđuje. */
-export async function proposeRevisionAction(orderId: string, lines: { code: string; quantity: string }[], reason: string) {
+export async function proposeRevisionAction(orderId: string, lines: { code: string; quantity: string }[], reason: string, version?: string | null) {
   const user = await requireCapability("customer_orders:review", `/portal/zahtevi/${orderId}`);
   if (!/^[0-9a-f-]{36}$/.test(orderId) || !Array.isArray(lines) || lines.length > 500) return { ok: false, message: "Neispravan zahtev." };
   const codes = [...new Set(lines.map((l) => String(l.code).trim()).filter(Boolean))];
@@ -59,11 +69,12 @@ export async function proposeRevisionAction(orderId: string, lines: { code: stri
   const missing = codes.filter((c) => !byCode.has(c));
   if (missing.length) return { ok: false, message: `Nepoznata šifra: ${missing.join(", ")}` };
   try {
-    const r = await proposeOrderRevision(user, orderId, { lines: lines.map((l) => ({ articleId: byCode.get(String(l.code).trim())!, quantity: Number(String(l.quantity).replace(",", ".")) })), reason });
+    const r = await proposeOrderRevision(user, orderId, { lines: lines.map((l) => ({ articleId: byCode.get(String(l.code).trim())!, quantity: Number(String(l.quantity).replace(",", ".")) })), reason, expectedVersion: version });
     revalidatePath("/portal/zahtevi");
     revalidatePath(`/portal/zahtevi/${orderId}`);
     return { ok: true, message: `Izmenjen predlog ${r.requestNumber} je poslat kupcu na potvrdu.`, orderId: r.orderId };
   } catch (error) {
+    if (error instanceof StaleVersionError) return { ok: false, message: error.message, stale: error.stale };
     return { ok: false, message: error instanceof Error ? error.message : "Predlog nije sačuvan." };
   }
 }

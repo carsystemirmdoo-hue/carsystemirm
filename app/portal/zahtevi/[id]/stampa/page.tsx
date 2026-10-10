@@ -34,6 +34,12 @@ export default async function OrderPrintPage({ params }: { params: Promise<{ id:
         <Link href={`/portal/zahtevi/${o.id}`}>← Nazad na zahtev</Link> <PrintButton />{" "}
         <small>Za PDF u dijalogu štampe izaberite čuvanje kao PDF.</small>
       </p>
+      {o.current && o.current.id !== o.id ? (
+        <div className="kk-old-version zp-screen-only" role="note">
+          <strong>Stara verzija — važeća je {o.current.orderNumber ?? o.current.requestNumber}.</strong>
+          <Link href={`/portal/zahtevi/${o.current.id}/stampa`} className="portal-button">Otvorite važeću verziju</Link>
+        </div>
+      ) : null}
       {/* Broj zahteva i strana na svakom listu (margine strane A4), da se odvojen list može prepoznati. */}
       <style>{`@page { @bottom-left { content: ${JSON.stringify(`Zahtev za porudžbinu ${o.requestNumber}`)}; font-size: 7.5pt; color: #555; } @bottom-right { content: "Strana " counter(page) " od " counter(pages); font-size: 7.5pt; color: #555; } }`}</style>
       <article className="zp-doc" aria-label="Zahtev za porudžbinu">
@@ -46,6 +52,7 @@ export default async function OrderPrintPage({ params }: { params: Promise<{ id:
             <div><dt>Broj</dt><dd>{o.requestNumber}{o.revision > 1 ? ` (verzija ${o.revision})` : ""}</dd></div>
             <div><dt>Datum</dt><dd>{dt(o.submittedAt)}</dd></div>
             <div><dt>Status</dt><dd>{ORDER_STATUS_LABELS[o.status as keyof typeof ORDER_STATUS_LABELS] ?? o.status}</dd></div>
+            {o.current && o.current.id !== o.id ? <div><dt>Važeća</dt><dd>{o.current.orderNumber ?? o.current.requestNumber} (ovo je stara verzija)</dd></div> : null}
             {o.orderNumber ? <div><dt>Porudžbina</dt><dd>{o.orderNumber}</dd></div> : null}
           </dl>
         </header>
@@ -67,6 +74,7 @@ export default async function OrderPrintPage({ params }: { params: Promise<{ id:
           </div>
         </section>
 
+        {priced.length ? (
         <table className="zp-table">
           <colgroup>
             <col className="c-rb" /><col className="c-sifra" /><col className="c-naziv" /><col className="c-jm" /><col className="c-kol" />
@@ -75,7 +83,7 @@ export default async function OrderPrintPage({ params }: { params: Promise<{ id:
           <thead>
             <tr>
               <th>Rb</th><th>Šifra</th><th>Naziv artikla</th><th>JM / pakovanje</th><th className="r">Količina</th>
-              <th className="r">Osnovna cena</th><th className="r">Rabat</th><th className="r">Cena kupca</th><th className="r">Iznos bez PDV-a</th><th className="r">PDV</th>
+              <th className="r">Osnovna cena po JM</th><th className="r">Rabat</th><th className="r">Cena po jedinici bez PDV-a</th><th className="r">Ukupno za količinu bez PDV-a</th><th className="r">PDV</th>
             </tr>
           </thead>
           <tbody>
@@ -93,10 +101,18 @@ export default async function OrderPrintPage({ params }: { params: Promise<{ id:
                 <td className="r">{pct(l.vatPercent)}</td>
               </tr>
             ))}
-            {priced.length === 0 ? <tr><td colSpan={10}>Nema stavki sa potvrđenom cenom.</td></tr> : null}
           </tbody>
         </table>
+        ) : null}
 
+        {priced.length === 0 ? (
+          <section className="zp-totals">
+            <dl>
+              <div className="zp-grand"><dt>Ukupan iznos</dt><dd>Iznos još nije utvrđen</dd></div>
+            </dl>
+            <p>Sve stavke su na upit; cenu potvrđuje kancelarija.</p>
+          </section>
+        ) : (
         <section className="zp-totals">
           <dl>
             <div><dt>Osnovica bez PDV-a</dt><dd>{money(o.netTotal)} RSD</dd></div>
@@ -105,6 +121,7 @@ export default async function OrderPrintPage({ params }: { params: Promise<{ id:
           </dl>
           {onRequest.length ? <p>Nije uračunato na upit: {countOf(onRequest.length, STAVKA)}; cenu potvrđuje kancelarija.</p> : null}
         </section>
+        )}
 
         {onRequest.length ? (
           <>

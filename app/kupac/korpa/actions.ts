@@ -54,18 +54,22 @@ export async function submitCartAction(input: { idempotencyKey: string; fingerpr
   return result;
 }
 
-export async function cancelOrderAction(orderId: string): Promise<TransitionResult> {
+export async function cancelOrderAction(orderId: string, version?: string | null): Promise<TransitionResult> {
   const session = await requireCustomerSession("/kupac/porudzbine");
-  const result = await cancelCustomerOrder(session, orderId);
-  revalidatePath(`/kupac/porudzbine/${orderId}`);
+  const result = await cancelCustomerOrder(session, orderId, version);
+  if (result.ok) {
+    revalidatePath(`/kupac/porudzbine/${orderId}`);
+  }
   return result;
 }
 
-export async function returnOrderToCartAction(orderId: string): Promise<TransitionResult> {
+export async function returnOrderToCartAction(orderId: string, version?: string | null): Promise<TransitionResult> {
   const session = await requireCustomerSession("/kupac/porudzbine");
-  const result = await returnOrderToCart(session, orderId);
-  revalidatePath("/kupac/korpa");
-  revalidatePath(`/kupac/porudzbine/${orderId}`);
+  const result = await returnOrderToCart(session, orderId, version);
+  if (result.ok) {
+    revalidatePath("/kupac/korpa");
+    revalidatePath(`/kupac/porudzbine/${orderId}`);
+  }
   return result;
 }
 
@@ -110,10 +114,12 @@ export async function submitRequestAction(input: {
   return r;
 }
 
-export async function answerRevisionAction(orderId: string, accept: boolean) {
+export async function answerRevisionAction(orderId: string, accept: boolean, version?: string | null) {
   const session = await requireCustomerSession("/kupac/porudzbine");
-  const r = await answerOrderRevision(session, orderId, accept);
-  revalidatePath(`/kupac/porudzbine/${orderId}`);
-  revalidatePath("/kupac/porudzbine");
+  const r = await answerOrderRevision(session, orderId, accept, version);
+  if (r.ok) {
+    revalidatePath(`/kupac/porudzbine/${orderId}`);
+    revalidatePath("/kupac/porudzbine");
+  }
   return r;
 }

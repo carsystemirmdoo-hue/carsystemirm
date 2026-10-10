@@ -7,6 +7,8 @@ import { loadRequestQuote } from "@/lib/ordering/request-service";
 import { orderingEnabledFor } from "@/lib/ordering/trial";
 import { RequestCartForm, type RequestCartView } from "./RequestCartForm";
 import { publicSiteOpen } from "@/lib/site-mode";
+import { LiveRefresh } from "@/components/ordering/LiveRefresh";
+import { customerCartStamp } from "@/lib/ordering/live-stamp";
 
 export const dynamic = "force-dynamic";
 
@@ -49,6 +51,7 @@ export default async function CustomerCartPage({ searchParams }: { searchParams:
           <Link href="/kupac/naruci" className="portal-section-link">← Izbor robe</Link>
         </div>
         {view.lines.length ? <RequestCartForm view={view} /> : <div className="portal-panel-body ka-empty"><p>Korpa je prazna. <Link href="/kupac/naruci">Izaberite robu</Link>.</p></div>}
+        <LiveRefresh endpoint="/api/kupac/zahtevi/stanje?korpa=1" stamp={await customerCartStamp(session.customerId)} what="Korpa" />
       </section>
     );
   }

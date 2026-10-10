@@ -459,6 +459,13 @@ test("nijedna API ruta ne postoji van izričito dozvoljenog spiska", async (t) =
      */
     "kupac/sesija/route.ts",
     /*
+     * Automatsko osvežavanje zahteva: vraćaju samo otisak (md5 oznaka verzija),
+     * ne podatke. Kupac — samo sopstvena firma iz sesije; kancelarija — opseg
+     * korisnika i sposobnost view:zahtevi. Ništa ne pišu, nikad se ne keširaju.
+     */
+    "kupac/zahtevi/stanje/route.ts",
+    "portal/zahtevi/stanje/route.ts",
+    /*
      * F6: „Poručite ponovo" u katalogu. Kupac isključivo iz SOPSTVENE sesije,
      * ruta ne prima parametre, samo čita, bez cena, i nikad se ne kešira.
      * Izolacija: customerReorder.integration.test.mts.

@@ -23,7 +23,7 @@ postojeći ekrani odbijanja.
 ## 2. Zajednička pravila (app/portal/portal.css)
 
 - Tipografija: naslov strane 22/28, blok 16/22, tekst i polja 14, pomoćni 13; nijedan font ispod 12 px
-  (282 stara pravila od 7–11 px podignuta na 12–13 px).
+  (sva stara pravila od 7–11 px podignuta na 12–13 px).
 - Nadnaslov strane je mirna siva oznaka odeljka, ne crveni sitni monospace.
 - Dugmad i polja visine 40 px, radius 4; glavno dugme grafitno, opasno = crveni obris; dugmad u
   ćeliji tabele uokvirena (`.portal-cell-actions`).

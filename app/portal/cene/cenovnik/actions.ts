@@ -31,9 +31,11 @@ export async function uploadPriceListAction(_prev: PriceListActionState, formDat
   if (!(file instanceof File) || file.size === 0) return { error: "Izaberite PDF cenovnika.", ok: null };
   if (file.size > MAX_UPLOAD_FILE_BYTES) return { error: `Fajl je veći od ${formatMegabytes(MAX_UPLOAD_FILE_BYTES)}.`, ok: null };
   let importId: string;
+  let duplicate = false;
   try {
     const result = await uploadPriceList(actor, { fileName: file.name, bytes: new Uint8Array(await file.arrayBuffer()) });
     importId = result.importId;
+    duplicate = result.duplicate;
   } catch (error) {
     const m = message(error);
     if (m) return { error: `Cenovnik nije prihvaćen: ${m}`, ok: null };
@@ -41,7 +43,7 @@ export async function uploadPriceListAction(_prev: PriceListActionState, formDat
     return { error: "Otpremanje nije uspelo. Ništa nije upisano; pokušajte ponovo.", ok: null };
   }
   revalidatePath(PATH);
-  redirect(`${PATH}/${importId}`);
+  redirect(`${PATH}/${importId}${duplicate ? "?isti=1" : ""}`);
 }
 
 export async function applyPriceListAction(_prev: PriceListActionState, formData: FormData): Promise<PriceListActionState> {

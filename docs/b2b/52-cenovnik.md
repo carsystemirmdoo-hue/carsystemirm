@@ -62,3 +62,39 @@ Puna osnovna (VP) cena se nikad ne prikazuje kao dogovorena cena kupca samo zato
 1. **Automatski, prvom fakturom.** Kada BizniSoft izda prvu fakturu za šifru, konektor je donosi sa šifrom, nazivom i jedinicom mere; artikal tada postoji u portalu. Sledeći cenovnik ga povezuje sam (ili se pojedinačna osnovna cena unese ručno, sa obrazloženjem).
 2. **Ranije, kada artikal treba kupcima pre prve fakture.** Kancelarija iz BizniSofta izveze **šifarnik artikala** (šifra, naziv, jedinica mere, grupa). Uvoz šifarnika ide istim putem kao cenovnik: otpremanje → pregled (nove šifre, promene naziva, bez jedinice mere = greška) → potvrda gazde. Do tada nepovezane šifre ostaju na spisku u pregledu cenovnika.
 3. Osnovna cena za novu šifru upisuje se tek kada artikal postoji: primenom sledećeg cenovnika ili pojedinačnom izmenom.
+
+**Šta je potrebno za uvoz šifarnika (još ne postoji uzorak).** Format izvoza se ne izmišlja: potreban je jedan stvarni izvoz šifarnika iz BizniSofta (bilo koji format koji BizniSoft daje — XLSX, CSV ili PDF izveštaj). Obavezna polja po stavci: šifra (tekst, kao u BizniSoftu), naziv, jedinica mere (KOM, LIT, KT…). Poželjno: grupa artikla, stopa PDV-a, količina u pakovanju ako je BizniSoft vodi. Uvoznik se piše tek prema tom uzorku; do tada nepovezane šifre ostaju bez cene, a nejasni nazivi (ista šifra, drugi naziv) ostaju na pregledu.
+
+## Obračun: osnovna cena → rabat → neto → PDV → ukupno
+
+Obračun je u `lib/pricing/money.mjs` i ponavlja BizniSoft fakturu (provereno na svim fakturama 2021–2026):
+
+- iznos stavke = količina × osnovna cena × (1 − rabat/100), tačno decimalno, zaokruženo na paru; **tačna polovina pare naniže** (kao BizniSoft);
+- PDV se računa po stavci (iznos stavke × stopa, polovina naviše) i sabira; ukupno = neto + PDV;
+- „Vaša cena“ po jedinici = isti obračun za količinu 1.
+
+Rabat se uzima po kupcu i artiklu: isti artikal ima različitu cenu za različite kupce. Upit cene uvek traži kupca (`customerPrices` odbija upit bez `customer_id`), pa kupac ne može dobiti tuđi rabat. Nabavna cena, zaliha i marža se ne čuvaju i ne prikazuju nigde.
+
+## Pakovanje: cena po jedinici mere nije cena pakovanja
+
+Osnovna cena važi za BizniSoft jedinicu mere. Primer: lak „… 4L“ sa JM = LIT ima cenu **po litru**; faktura obračunava 4 (ili 12) litara. Cena litra se ne prikazuje kao cena limenke.
+
+Cena pakovanja (`lib/pricing/packPrice.mjs`) se računa samo kada je:
+
+| Uslov | Zašto |
+|---|---|
+| veza artikla sa katalogom potvrđena | tek tada se zna koje pakovanje kupac kupuje |
+| JM = KOM/KT i na fakturama nema necelih količina | pakovanje = 1 komad |
+| JM = LIT (ili druga mera) i postoji **potvrđena** količina pakovanja | mera u nazivu („4L“) je samo trag, ne potvrda |
+
+Inače je obračun pakovanja blokiran i ekran kaže šta nedostaje. Dok veze sa katalogom ne budu potvrđene, kupac vidi cenu po jedinici mere sa jasnom oznakom jedinice.
+
+## Predlozi rabata sa dokazima (`/portal/cene/rabati-iz-faktura/predlozi`)
+
+Za parove kupac–artikal bez odobrenog rabata (kupac vidi „cena na upit“) koji nisu ispunili stroga merila primene, i za parove čija poslednja faktura odstupa od odobrenog pravila. Ništa se ne primenjuje automatski.
+
+- **Jak dokaz:** poslednja faktura ≤ 180 dana; isti rabat u fakturama iste porodice (prva reč naziva) u 12 meseci i u odobrenim pravilima porodice istog kupca, oba ≥ 85 %, bez izuzetaka. Porodica je samo pomoćni dokaz — brend i grupa nisu upisani u portalu.
+- **Nedovoljan dokaz:** prikazuju se poslednje fakture i razlozi; odluku donosi nadležni komercijalista.
+- **Razlika sa odobrenim pravilom:** odobreno pravilo se ne prepisuje; odluka je na nadležnom (izmena pravila).
+
+„Predložite X %“ (sposobnost `prices:propose`) ponovo računa dokaz na serveru i šalje predlog u Odobravanje cena; par sa predlogom na čekanju više nije u spisku. Komercijalista vidi samo svoje kupce.

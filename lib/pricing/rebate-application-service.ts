@@ -9,6 +9,7 @@ import { resolveLedgerScope } from "@/lib/ledger/effective-sales";
 import { notify } from "@/lib/notifications/notification-service";
 import { applicationReason, evaluateArticle } from "@/lib/pricing/rebateApplication.mjs";
 import { REBATE_CRITERIA } from "@/lib/pricing/rebateCriteria.mjs";
+import { proposalEvidence } from "@/lib/pricing/rebateProposalEvidence.mjs";
 import { proposePriceRule, transitionPriceRule } from "@/lib/pricing/rule-service";
 
 /**
@@ -115,7 +116,8 @@ export async function applyRebateBatch(input: {
   }
   const batchId = input.batchId ?? `rabati-istorija-${asOf}-${randomUUID().slice(0, 8)}`;
   const evaluations = await evaluateRebateArticles(actor, asOf);
-  const toApply = evaluations.filter((e) => e.result.outcome === "primeni");
+  // „bez_rabata“ = dosledan 0 % po istim strogim merilima → izričito pravilo 0 %.
+  const toApply = evaluations.filter((e) => e.result.outcome === "primeni" || e.result.outcome === "bez_rabata");
   const counts: Record<string, number> = {};
   for (const e of evaluations) counts[e.result.outcome] = (counts[e.result.outcome] ?? 0) + 1;
   const summary = {
@@ -223,4 +225,90 @@ export async function revokeRebateBatch(input: { actor: PortalUser; batchId: str
     correlationId,
   });
   return { total: rows.length, revoked, skipped };
+}
+
+
+/**
+ * Predlozi sa dokazima za pregled nadležnog komercijaliste (10.10.2026).
+ *
+ * Parovi bez odobrenog pravila, sa rabatom na fakturi u poslednjih 6 meseci,
+ * koji NISU ispunili stroga merila (premalo faktura, promenljivo, kratko), i
+ * parovi gde se poslednja faktura razlikuje od ODOBRENOG pravila. Ništa se ne
+ * primenjuje: predlog ide u postojeći tok odobravanja tek kada ga čovek pošalje.
+ * Opseg je opseg pozivaoca (komercijalista vidi samo svoje kupce).
+ */
+export async function rebateProposals(viewer: PortalUser, asOf: string, onlyCustomerId?: string) {
+  const evaluations = await evaluateRebateArticles(viewer, asOf, onlyCustomerId);
+  const sixMonths = new Date(Date.parse(`${asOf}T00:00:00Z`) - 183 * 86400000).toISOString().slice(0, 10);
+  const recent = new Date(Date.parse(`${asOf}T00:00:00Z`) - 45 * 86400000).toISOString().slice(0, 10);
+  const byCustomer = new Map<string, typeof evaluations>();
+  for (const e of evaluations) byCustomer.set(e.customerId, [...(byCustomer.get(e.customerId) ?? []), e]);
+  const approvedOf = (e: (typeof evaluations)[number]) => {
+    const a = e.existing.filter((x) => x.approved);
+    return a.length === 1 ? a[0].discountPercent : null;
+  };
+  const out = [];
+  for (const e of evaluations) {
+    const inv = e.result.invoices;
+    const last = inv[inv.length - 1];
+    if (!last || last.issuedOn < sixMonths) continue;
+    const approved = e.existing.filter((x) => x.approved);
+    let kind: "bez_pravila" | "razlika_sa_odobrenim";
+    if (approved.length === 0) {
+      if (["primeni", "bez_rabata", "vec_vazi", "vec_predlozeno"].includes(e.result.outcome)) continue;
+      // Predlog na čekanju (bilo kog procenta) je već u toku odobravanja.
+      if (e.existing.some((x) => !x.approved)) continue;
+      if (last.percent === 0) continue;
+      kind = "bez_pravila";
+    } else {
+      if (last.issuedOn < recent || last.percent === null || approved.every((a) => Math.abs(a.discountPercent - (last.percent as number)) < 0.0005)) continue;
+      kind = "razlika_sa_odobrenim";
+    }
+    const evidence = proposalEvidence({
+      target: { articleId: e.articleId, name: e.articleName, invoices: inv },
+      customerPairs: (byCustomer.get(e.customerId) ?? []).map((p) => ({ articleId: p.articleId, name: p.articleName, invoices: p.result.invoices, approvedPercent: approvedOf(p) })),
+      asOf,
+    });
+    out.push({
+      kind,
+      customerId: e.customerId,
+      customerName: e.customerName,
+      articleId: e.articleId,
+      articleCode: e.articleCode,
+      articleName: e.articleName,
+      salespeople: e.salespeople,
+      outcome: e.result.outcome,
+      outcomeReason: e.result.reason,
+      approvedPercent: approved.length ? approved.map((a) => a.discountPercent) : null,
+      // Razlika sa odobrenim pravilom: odobreno se NE prepisuje, odluka je na nadležnom.
+      verdict: kind === "razlika_sa_odobrenim" ? ("odluka_nadleznog" as const) : evidence.verdict,
+      evidence,
+    });
+  }
+  return out;
+}
+
+/** Predlog JEDNOG para iz pregleda: dokaz se ponovo računa na serveru, pa ide na odobrenje. */
+export async function proposeFromEvidence(viewer: PortalUser, customerId: string, articleId: string, asOf: string) {
+  const list = await rebateProposals(viewer, asOf, customerId);
+  const p = list.find((x) => x.articleId === articleId);
+  if (!p) return { ok: false as const, message: "Par nije u opsegu ili više nije za predlog." };
+  if (p.kind !== "bez_pravila") return { ok: false as const, message: "Postoji odobreno pravilo — o razlici odlučuje nadležni kroz izmenu pravila, ne nov predlog." };
+  if (p.evidence.proposedPercent === null || p.evidence.proposedPercent <= 0) return { ok: false as const, message: "Poslednja faktura nema jedinstven rabat." };
+  const docs = p.evidence.lastInvoices.map((i) => `${i.documentLabel} ${i.issuedOn} ${i.percent ?? "mešano"} %`).join(", ");
+  const created = await proposePriceRule(
+    {
+      customerScope: "customer",
+      customerId,
+      productScope: "article",
+      articleId,
+      valueKind: "discount_percent",
+      discountPercent: p.evidence.proposedPercent,
+      effectiveFrom: asOf,
+      reason: `Predlog iz pregleda dokaza (${p.evidence.verdict === "jak_dokaz" ? "jak dokaz" : "nedovoljan dokaz — odluka čoveka"}). Poslednje fakture: ${docs}. Porodica „${p.evidence.family}“: fakture 12 m ${Math.round(p.evidence.familyInvoices.share * 100)} % = ${p.evidence.familyInvoices.value} %, odobrena pravila ${Math.round(p.evidence.familyRules.share * 100)} % = ${p.evidence.familyRules.value} %.${p.evidence.reasons.length ? ` Napomene: ${p.evidence.reasons.join("; ")}.` : ""}`.slice(0, 2000),
+      biznisoftEntryRequired: false,
+    },
+    viewer,
+  );
+  return { ok: true as const, ruleId: created.id };
 }

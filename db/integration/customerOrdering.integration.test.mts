@@ -173,7 +173,15 @@ test("cena iz cenovnika i rabata kupca (uži opseg pobeđuje), nikad iz fakture"
   const naUpit = await svc.addToCart(session("b"), { articleCode: code("BZ"), quantity: "1" });
   assert.equal(naUpit.ok, false);
   assert.match((naUpit as { message: string }).message, /Cena na upit/);
-  // (Demo uslovi ne dozvoljavaju 0 % — 0029; potvrđen rabat 0 % postoji u stvarnim pravilima, vidi customerPrice.integration.)
+  // Izričit rabat 0 % JE potvrđen uslov (0039): puna cenovnička cena.
+  const [nula] = await db.sql<{ id: string }[]>`
+    INSERT INTO price_list_customer_terms (price_list_id, customer_id, product_scope, discount_percent) VALUES (${listId}, ${firm.b.customerId}, 'all', 0) RETURNING id`;
+  assert.deepEqual(await svc.addToCart(session("b"), { articleCode: code("BZ"), quantity: "1" }), { ok: true, count: 1 });
+  const nulaQuote = await svc.loadCartQuote(firm.b.customerId);
+  assert.equal(nulaQuote.lines[0].price!.netPrice, 3480);
+  assert.equal(nulaQuote.lines[0].price!.discountPercent, 0);
+  await clearCart("b");
+  await db.sql`DELETE FROM price_list_customer_terms WHERE id = ${nula.id}`;
 });
 
 test("izolacija firmi: tuđa korpa i tuđi zahtev nisu dostupni", async (t) => {

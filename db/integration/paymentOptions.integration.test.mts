@@ -4,7 +4,7 @@ import test, { after, before } from "node:test";
 import { cleanupQa, closeTestDatabase, ensureTestCryptoEnv, initTestDatabase, seedAccounts, skipReason, type TestDatabase } from "./harness.mts";
 
 /**
- * 0043 — odobrene opcije plaćanja i rabati po opciji (scenario „VMTIM“):
+ * 0043 — odobrene opcije plaćanja i rabati po opciji:
  *  - opcija: predlog komercijaliste (samo svoj kupac) → odluka vlasnika; kancelarija ne predlaže; jedan aktivan po opciji;
  *  - BASLAC 44 % uz avans, 38 % osnovno (odloženo 30); CS ostaje na svom rabatu u obe opcije (44 % se ne prenosi);
  *  - pojedinačni dogovor artikla bez uslova + grupno pravilo opcije → za pregled (na upit), ne bira se tiho;

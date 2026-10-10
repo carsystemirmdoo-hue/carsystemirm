@@ -2,6 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import { useState, useTransition } from "react";
+import { ConfirmAction } from "@/components/ordering/ConfirmAction";
 import {
   confirmOrderAction,
   recordBiznisoftAction,
@@ -14,7 +15,8 @@ type Result = { ok: true; changed: boolean } | { ok: false; message: string; sta
 
 /**
  * Koraci kancelarije. Prikazuje se samo ono što je u ovom stanju dozvoljeno;
- * server svejedno proverava prelaz i sposobnost.
+ * server svejedno proverava prelaz, sposobnost i verziju (zastarela radnja se odbija).
+ * Glavna radnja desno; opasna odvojena i uvek kroz dijalog sa razlogom.
  */
 export function OfficeOrderActions({
   orderId,
@@ -24,6 +26,7 @@ export function OfficeOrderActions({
   biznisoftDocumentNumber,
   onRequestLines = 0,
   version,
+  revisable = false,
 }: {
   orderId: string;
   status: string;
@@ -33,124 +36,158 @@ export function OfficeOrderActions({
   onRequestLines?: number;
   /** Oznaka prikazane verzije — server odbija radnju ako se zahtev u međuvremenu promenio. */
   version: string;
+  /** Ispod je obrazac za izmenjen predlog. */
+  revisable?: boolean;
 }) {
   const router = useRouter();
   const [pending, start] = useTransition();
+  const [busy, setBusy] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [stale, setStale] = useState<{ currentId: string; currentNumber: string } | null>(null);
-  const [reason, setReason] = useState("");
   const [doc, setDoc] = useState("");
+  const [docError, setDocError] = useState<string | null>(null);
 
-  const run = (fn: () => Promise<Result>) =>
-    start(async () => {
-      const r = await fn();
-      setError(r.ok ? null : r.message);
-      setStale(!r.ok && r.stale ? r.stale : null);
-      if (r.ok) router.refresh();
-    });
+  const run = (which: string, fn: () => Promise<Result>) =>
+    new Promise<void>((resolve) =>
+      start(async () => {
+        setBusy(which);
+        const r = await fn();
+        setBusy(null);
+        setError(r.ok ? null : r.message);
+        setStale(!r.ok && r.stale ? r.stale : null);
+        if (r.ok) router.refresh();
+        resolve();
+      }),
+    );
 
   if (!canReview && !canConfirm) {
-    return (
-      <div className="portal-panel-body kk-actions">
-        <p className="kk-fine">Samo pregled. Prijem i potvrdu radi kancelarija.</p>
-      </div>
-    );
+    return <p className="pn-why">Samo pregled. Prijem i potvrdu radi kancelarija.</p>;
   }
 
+  const problem = error ? (
+    <div className="pn-note" data-tone="danger" role="alert">
+      <div className="pn-note-row">
+        <span>{error}</span>
+        {stale ? (
+          stale.currentId !== orderId ? (
+            <a href={`/portal/zahtevi/${stale.currentId}`} className="pn-btn" data-size="sm">
+              Otvorite aktuelnu verziju ({stale.currentNumber})
+            </a>
+          ) : (
+            <button type="button" className="pn-btn" data-size="sm" onClick={() => { setError(null); setStale(null); router.refresh(); }}>
+              Prikažite aktuelno stanje
+            </button>
+          )
+        ) : null}
+      </div>
+    </div>
+  ) : null;
+
   return (
-    <div className="portal-panel-body kk-office" data-unsaved={reason.trim() || doc.trim() ? "true" : undefined}>
+    <div className="pn" style={{ gap: 10 }} data-unsaved={doc.trim() ? "true" : undefined}>
       {status === "submitted" && canReview ? (
-        <div className="kk-step">
-          <h3>1. Prijem</h3>
-          <p>Preuzmite zahtev u obradu da kupac vidi da je u radu.</p>
-          <button type="button" className="portal-button" disabled={pending} onClick={() => run(() => takeIntoReviewAction(orderId, version))}>
-            Preuzmite u obradu
+        <div className="pn-actions">
+          <button type="button" className="pn-btn" data-variant="primary" disabled={pending} aria-busy={busy === "take" || undefined} onClick={() => run("take", () => takeIntoReviewAction(orderId, version))}>
+            {busy === "take" ? "Preuzima se…" : "Preuzmite u obradu"}
           </button>
         </div>
       ) : null}
 
       {status === "under_review" ? (
-        <div className="kk-step">
-          <h3>2. Provera i odluka</h3>
-          <p>Proverite artikle, količine i cene prema BizniSoftu. Potvrda dodeljuje broj porudžbine i obavezuje prema kupcu.</p>
-          {onRequestLines > 0 ? (
-            <p className="kk-fine">
-              Stavke na upit: {onRequestLines}. Potvrda je moguća tek kada sve stavke imaju cenu — pripremite izmenjen predlog
-              (posle odobrenja rabata u „Rabati kupca“) ili ga pošaljite bez tih stavki; kupac ga potvrđuje.
-            </p>
-          ) : null}
-          <div className="kk-step-actions">
+        <>
+          <div className="pn-actions">
+            {canReview ? (
+              <>
+                <ConfirmAction
+                  label="Odbijte zahtev…"
+                  variant="danger"
+                  title="Odbijte zahtev"
+                  body="Kupac vidi razlog. Odbijen zahtev ostaje u istoriji i ne može se vratiti u obradu."
+                  confirmLabel="Odbijte zahtev"
+                  pendingLabel="Odbija se…"
+                  reason={{ label: "Razlog (vidi ga kupac)", min: 5 }}
+                  pending={pending}
+                  onConfirm={(reason) => run("reject", () => rejectOrderAction(orderId, reason, version))}
+                />
+                <span className="pn-sep" aria-hidden="true" />
+                <ConfirmAction
+                  label="Tražite izmenu od kupca…"
+                  title="Tražite izmenu od kupca"
+                  body="Kupac vraća stavke u korpu i šalje ispravku. Ako želite da sami predložite robu i količine, koristite izmenjen predlog ispod."
+                  confirmLabel="Pošaljite zahtev za izmenu"
+                  confirmVariant="primary"
+                  reason={{ label: "Šta kupac treba da promeni (vidi ga kupac)", min: 5 }}
+                  pending={pending}
+                  onConfirm={(reason) => run("changes", () => requestChangesAction(orderId, reason, version))}
+                />
+              </>
+            ) : null}
             {canConfirm ? (
-              <button
-                type="button"
-                className="portal-button"
-                disabled={pending || onRequestLines > 0}
-                onClick={() => {
-                  if (confirm("Potvrditi porudžbinu? Kupac će videti broj porudžbine.")) run(() => confirmOrderAction(orderId, version));
-                }}
-              >
-                Potvrdite porudžbinu
-              </button>
+              <ConfirmAction
+                label="Potvrdite porudžbinu…"
+                variant="primary"
+                title="Potvrdite porudžbinu"
+                body="Potvrda dodeljuje broj porudžbine i obavezuje prema kupcu. Porudžbinu zatim ručno unosite u BizniSoft. Potvrda nije faktura."
+                confirmLabel="Potvrdite porudžbinu"
+                pendingLabel="Potvrđuje se…"
+                disabled={onRequestLines > 0}
+                pending={pending}
+                onConfirm={() => run("confirm", () => confirmOrderAction(orderId, version))}
+              />
             ) : null}
           </div>
-          {canReview ? (
-            <label className="kk-reason">
-              <span>Razlog (obavezan za izmenu i odbijanje; kupac ga vidi)</span>
-              <textarea value={reason} onChange={(e) => setReason(e.target.value)} rows={2} maxLength={1000} disabled={pending} />
-              <span className="kk-step-actions">
-                <button type="button" className="portal-button" data-variant="secondary" disabled={pending} onClick={() => run(() => requestChangesAction(orderId, reason, version))}>
-                  Tražite izmenu
-                </button>
-                <button type="button" className="portal-button" data-variant="ghost" disabled={pending} onClick={() => run(() => rejectOrderAction(orderId, reason, version))}>
-                  Odbijte zahtev
-                </button>
-              </span>
-            </label>
+          {canConfirm && onRequestLines > 0 ? (
+            <p className="pn-why" style={{ textAlign: "right" }}>
+              Potvrda nije moguća dok ima stavki bez cene (na upit: {onRequestLines}). Posle odobrenja rabata u „Rabati kupca“ ponovo proverite cene u
+              izmenjenom predlogu ili ga pošaljite bez tih stavki; kupac ga potvrđuje.
+            </p>
           ) : null}
-        </div>
+          {revisable ? (
+            <p className="pn-why" style={{ textAlign: "right" }}>
+              Promena robe ili količina: <a href="#izmena">izmenjen predlog ispod</a>.
+            </p>
+          ) : null}
+        </>
       ) : null}
 
       {status === "confirmed" && canConfirm ? (
-        <div className="kk-step">
-          <h3>3. Unos u BizniSoft (ručno, pilot)</h3>
-          {biznisoftDocumentNumber ? (
-            <p>
-              Upisan broj dokumenta <strong>{biznisoftDocumentNumber}</strong>.
-            </p>
-          ) : (
-            <>
-              <p>Unesite porudžbinu u BizniSoft i ovde upišite broj dokumenta koji je BizniSoft dodelio.</p>
-              <span className="kk-step-actions">
-                <input value={doc} onChange={(e) => setDoc(e.target.value)} placeholder="Broj dokumenta iz BizniSofta" aria-label="Broj dokumenta iz BizniSofta" disabled={pending} maxLength={60} />
-                <button type="button" className="portal-button" disabled={pending} onClick={() => run(() => recordBiznisoftAction(orderId, doc, version))}>
-                  Upišite broj
-                </button>
-              </span>
-            </>
-          )}
-        </div>
+        biznisoftDocumentNumber ? (
+          <p className="pn-small">
+            Upisan broj dokumenta iz BizniSofta: <strong className="pn-num">{biznisoftDocumentNumber}</strong>. Isprava ide kroz BizniSoft.
+          </p>
+        ) : (
+          <form
+            className="pn-filters"
+            onSubmit={(e) => {
+              e.preventDefault();
+              if (doc.trim().length < 2) {
+                setDocError("Upišite broj dokumenta koji je BizniSoft dodelio (najmanje 2 znaka).");
+                return;
+              }
+              setDocError(null);
+              void run("doc", () => recordBiznisoftAction(orderId, doc, version));
+            }}
+          >
+            <div className="pn-field" style={{ maxWidth: 360 }}>
+              <label htmlFor={`bs-${orderId}`}>Broj dokumenta iz BizniSofta</label>
+              <input id={`bs-${orderId}`} value={doc} onChange={(e) => setDoc(e.target.value)} disabled={pending} maxLength={60} aria-invalid={docError ? true : undefined} aria-describedby={docError ? `bs-${orderId}-e` : `bs-${orderId}-h`} autoComplete="off" />
+              {docError ? (
+                <span id={`bs-${orderId}-e`} className="pn-error">
+                  {docError}
+                </span>
+              ) : (
+                <span id={`bs-${orderId}-h`} className="pn-help">
+                  Portal ne piše u BizniSoft — ovde se samo beleži broj ručnog unosa.
+                </span>
+              )}
+            </div>
+            <button type="submit" className="pn-btn" data-variant="primary" disabled={pending} aria-busy={busy === "doc" || undefined}>
+              {busy === "doc" ? "Upisuje se…" : "Upišite broj"}
+            </button>
+          </form>
+        )
       ) : null}
-
-      {status === "changes_requested" ? (
-        <p className="kk-fine">Čeka se kupac. Ako je kupac odbio izmenjen predlog, ispod možete pripremiti novi.</p>
-      ) : null}
-      {["rejected", "cancelled", "superseded"].includes(status) ? (
-        <p className="kk-fine">Nema daljih koraka za kancelariju u ovom stanju.</p>
-      ) : null}
-      {error ? (
-        <p className="kk-problem" role="alert">
-          {error}{" "}
-          {stale ? (
-            stale.currentId !== orderId ? (
-              <a href={`/portal/zahtevi/${stale.currentId}`}>Otvorite aktuelnu verziju ({stale.currentNumber})</a>
-            ) : (
-              <button type="button" className="portal-button" data-variant="secondary" onClick={() => { setError(null); setStale(null); router.refresh(); }}>
-                Prikažite aktuelno stanje
-              </button>
-            )
-          ) : null}
-        </p>
-      ) : null}
+      {problem}
     </div>
   );
 }

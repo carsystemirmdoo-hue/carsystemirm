@@ -1,16 +1,12 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import {
-  DOCUMENT_KIND_LABELS,
-  srDate,
-  srDateTime,
-  srMoney,
-  srQuantity,
-} from "@/components/customer/account-format";
+import { DOCUMENT_KIND_LABELS } from "@/components/customer/account-format";
+import { ScrollTable } from "@/components/ordering/ScrollTable";
 import { requireCustomerSession } from "@/lib/authz/customer-session";
 import { loadCustomerInvoice } from "@/lib/customers/customer-queries";
 import { ORIGIN_LABELS } from "@/lib/data-state/data-state";
 import { loadDatasetInfo } from "@/lib/data-state/dataset";
+import { amount, dmy, dmyTime, money, percent, quantity } from "@/lib/ordering/panelFormat.mjs";
 
 export const dynamic = "force-dynamic";
 
@@ -32,49 +28,114 @@ export default async function CustomerInvoicePage({ params }: { params: Promise<
     dataset.kind === "demo"
       ? "Lokalni demo — izmišljen dokument"
       : ORIGIN_LABELS[invoice.origin as keyof typeof ORIGIN_LABELS] ?? invoice.origin;
+  const cur = invoice.currency ?? "RSD";
 
   return (
-    <section className="portal-panel">
-      <div className="portal-section-header">
+    <div className="pn">
+      <p className="pn-back">
+        <Link href="/kupac/fakture">← Sve fakture</Link>
+      </p>
+      <header className="pn-head">
         <div>
-          <h2>
+          <h1 className="pn-title">
             {DOCUMENT_KIND_LABELS[invoice.documentKind] ?? "Dokument"} {invoice.number}/{invoice.year}
-          </h2>
-          <p>Izdata {srDate(invoice.issuedOn)}</p>
+          </h1>
+          <p className="pn-lead">
+            Izdata {dmy(invoice.issuedOn)}
+            {invoice.reversed ? " · u potpunosti stornirana" : ""}
+          </p>
         </div>
-        <Link href="/kupac/fakture" className="portal-section-link">← Sve fakture</Link>
-      </div>
-      <dl className="ka-facts ka-facts-wide">
-        <div><dt>Osnovica</dt><dd>{srMoney(invoice.netAmount, invoice.currency)}</dd></div>
-        <div><dt>PDV</dt><dd>{srMoney(invoice.taxAmount, invoice.currency)}</dd></div>
-        <div><dt>Ukupno</dt><dd>{srMoney(invoice.totalAmount, invoice.currency)}</dd></div>
-        <div><dt>Poreklo</dt><dd>{origin}<small>uvezeno {srDateTime(invoice.ingestedAt)}</small></dd></div>
-      </dl>
-      <div className="portal-panel-body">
-        <h3>Stavke ({invoice.lines.length})</h3>
-        <ol className="ka-lines">
-          <li className="ka-lines-head" aria-hidden="true">
-            <span>Artikal</span><span>Količina</span><span>Cena na fakturi</span><span>Rabat</span><span>Iznos</span>
-          </li>
-          {invoice.lines.map((l) => (
-            <li key={l.lineNumber}>
-              <span className="ka-line-name">
-                <strong>{l.description ?? l.articleCode}</strong>
-                <small>{l.articleCode}</small>
-              </span>
-              <span data-label="Količina">{srQuantity(l.quantity)}</span>
-              <span data-label="Cena na fakturi">{srMoney(l.unitPrice, invoice.currency)}</span>
-              <span data-label="Rabat">{l.discountPercent && Number(l.discountPercent) ? `${srQuantity(l.discountPercent)} %` : "—"}</span>
-              <span data-label="Iznos" className="ka-amount">{srMoney(l.lineAmount, invoice.currency)}</span>
-            </li>
-          ))}
-        </ol>
-        <p className="portal-footnote">
-          Cene na ovoj fakturi su istorijske — važile su za ovu isporuku i nisu važeće cene u katalogu.
-          {invoice.confirmed ? "" : " Ovaj dokument još nije potvrđen iz izvornog dokumenta."}
-          {invoice.reversed ? " Ova faktura je u potpunosti stornirana i ne računa se u kupovinu." : ""}
+      </header>
+      {invoice.reversed ? (
+        <p className="pn-note" data-tone="warning">
+          <span>Ova faktura je u potpunosti stornirana i ne računa se u kupovinu.</span>
         </p>
+      ) : null}
+      <div className="pn-split">
+        <section className="pn-card" aria-label="Podaci fakture">
+          <dl className="pn-facts">
+            <div>
+              <dt>Vrsta dokumenta</dt>
+              <dd>{DOCUMENT_KIND_LABELS[invoice.documentKind] ?? "Dokument"}</dd>
+            </div>
+            <div>
+              <dt>Datum izdavanja</dt>
+              <dd className="pn-num">{dmy(invoice.issuedOn)}</dd>
+            </div>
+            <div>
+              <dt>Poreklo</dt>
+              <dd>
+                {origin}
+                <small>uvezeno {dmyTime(invoice.ingestedAt)}</small>
+              </dd>
+            </div>
+          </dl>
+          {invoice.confirmed ? null : <p className="pn-small pn-muted">Ovaj dokument još nije potvrđen iz izvornog dokumenta.</p>}
+        </section>
+        <section className="pn-card" aria-label="Iznosi fakture">
+          <h2 className="pn-h2">Iznosi</h2>
+          <dl className="pn-totals">
+            <dt>Osnovica</dt>
+            <dd>{money(invoice.netAmount, cur)}</dd>
+            <dt>PDV</dt>
+            <dd>{money(invoice.taxAmount, cur)}</dd>
+            <dt className="pn-grand">Ukupno</dt>
+            <dd className="pn-grand">{money(invoice.totalAmount, cur)}</dd>
+          </dl>
+        </section>
       </div>
-    </section>
+      <section className="pn-card pn-card-flush" aria-labelledby="faktura-stavke">
+        <div className="pn-card-h">
+          <h2 id="faktura-stavke">
+            Stavke <span className="pn-muted pn-num" style={{ fontWeight: 400 }}>· {invoice.lines.length}</span>
+          </h2>
+        </div>
+        <ScrollTable label="Stavke fakture">
+          <table className="pn-table pn-table-cards">
+            <thead>
+              <tr>
+                <th scope="col">Šifra</th>
+                <th scope="col">Naziv</th>
+                <th scope="col" className="pn-r">
+                  Količina
+                </th>
+                <th scope="col" className="pn-r">
+                  Cena na fakturi
+                </th>
+                <th scope="col" className="pn-r">
+                  Rabat
+                </th>
+                <th scope="col" className="pn-r">
+                  Iznos
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              {invoice.lines.map((l) => (
+                <tr key={l.lineNumber}>
+                  <td className="pn-c-code">{l.articleCode}</td>
+                  <td className="pn-c-name">
+                    <span className="pn-strong">{l.description ?? l.articleCode}</span>
+                  </td>
+                  <td className="pn-r pn-num" data-label="Količina">
+                    {quantity(l.quantity)}
+                  </td>
+                  <td className="pn-r pn-num" data-label="Cena na fakturi">
+                    {amount(l.unitPrice)}
+                  </td>
+                  <td className="pn-r pn-num" data-label="Rabat">
+                    {l.discountPercent && Number(l.discountPercent) ? percent(Number(l.discountPercent)) : "—"}
+                  </td>
+                  <td className="pn-r pn-num pn-strong pn-c-total" data-label="Iznos">
+                    {amount(l.lineAmount)}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </ScrollTable>
+        <p className="pn-card-foot">Iznosi su u {cur}. Cene na ovoj fakturi su istorijske — važile su za ovu isporuku i nisu važeće cene.</p>
+      </section>
+    </div>
   );
 }

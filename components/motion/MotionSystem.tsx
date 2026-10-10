@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 import { MotionConfigProvider } from "@/components/motion/MotionConfigProvider";
 import { PigmentCursor } from "@/components/motion/PigmentCursor";
 import { registerPointerConsumer } from "@/components/motion/pointerLifecycle";
-import { releasePortalRouteTransition } from "@/lib/portalRouteTransition.mjs";
+import { isPanelPath, releasePortalRouteTransition } from "@/lib/portalRouteTransition.mjs";
 import {
   motionSurfaceSelector,
   resetLocalPointerVars,
@@ -15,7 +15,8 @@ import {
 export function MotionSystem({ children }: { children: ReactNode }) {
   const pathname = usePathname();
 
-  if (pathname.startsWith("/portal")) return <PortalNoMotion>{children}</PortalNoMotion>;
+  // Poslovni panel (portal, kupčev nalog, prijava kupca): bez prelaza stranica i kursora.
+  if (pathname.startsWith("/portal") || isPanelPath(pathname)) return <PortalNoMotion>{children}</PortalNoMotion>;
 
   return <PublicMotionSystem>{children}</PublicMotionSystem>;
 }

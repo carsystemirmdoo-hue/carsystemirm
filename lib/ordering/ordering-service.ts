@@ -599,6 +599,8 @@ export type OrderListRow = {
   revisionNo: number;
   /** Ostali zapisi istog lanca (original, odbijeni predlozi) — u istoriji detalja. */
   otherVersions: number;
+  /** Broj dokumenta ručnog unosa u BizniSoft (samo prikaz: da li je potvrđena porudžbina uneta). */
+  biznisoftDocumentNumber: string | null;
 };
 
 /**
@@ -622,9 +624,10 @@ async function listOrders(where: SQL): Promise<OrderListRow[]> {
     gross_total: string; currency: string; line_count: number; price_list_kind: "demo" | "biznisoft";
     customer_name: string; customer_id: string; replaces_number: string | null;
     payment_option_label: string | null; on_request_lines: number; revision: number; other_versions: number;
+    biznisoft_document_number: string | null;
   }>(sql`
     SELECT o.id, o.request_number, o.order_number, o.status::text AS status, o.submitted_at,
-           o.payment_option_label, o.on_request_lines, o.revision,
+           o.payment_option_label, o.on_request_lines, o.revision, o.biznisoft_document_number,
            ((o.replaces_order_id IS NOT NULL)::int
              + (SELECT count(*)::int FROM customer_orders s WHERE s.id <> o.id
                   AND (s.replaces_order_id = o.id OR (o.replaces_order_id IS NOT NULL AND s.replaces_order_id = o.replaces_order_id)))) AS other_versions,
@@ -643,6 +646,7 @@ async function listOrders(where: SQL): Promise<OrderListRow[]> {
     replacesNumber: r.replaces_number,
     paymentOptionLabel: r.payment_option_label, onRequestLinesCount: Number(r.on_request_lines), revisionNo: Number(r.revision),
     otherVersions: Number(r.other_versions),
+    biznisoftDocumentNumber: r.biznisoft_document_number,
   }));
 }
 
@@ -779,6 +783,17 @@ async function loadOrder(where: SQL): Promise<OrderDetail | null> {
 export async function listCustomerOrders(customerId: string, opts: { allVersions?: boolean } = {}): Promise<OrderListRow[]> {
   if (!customerId) throw new Error("Upit kupca bez customer_id se ne sme izvršiti.");
   return listOrders(sql`o.customer_id = ${customerId} AND ${opts.allVersions ? sql`true` : CURRENT_ONLY}`);
+}
+
+/** Koliko važećih zahteva firme čeka kupca (izmenjen predlog ili tražena izmena) — oznaka u meniju. */
+export async function countCustomerOrdersAwaiting(customerId: string): Promise<number> {
+  if (!customerId) throw new Error("Upit kupca bez customer_id se ne sme izvršiti.");
+  const [r] = [
+    ...(await getDb().execute<{ n: number }>(sql`
+      SELECT count(*)::int AS n FROM customer_orders o
+       WHERE o.customer_id = ${customerId} AND o.status IN ('awaiting_customer', 'changes_requested') AND ${CURRENT_ONLY}`)),
+  ];
+  return Number(r?.n ?? 0);
 }
 
 /** Jedan zahtev kupca. Tuđi ID daje `null` — isto kao nepostojeći. */

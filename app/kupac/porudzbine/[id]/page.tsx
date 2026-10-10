@@ -1,10 +1,10 @@
-import Link from "next/link";
 import { notFound } from "next/navigation";
 import { OrderDetailView } from "@/components/ordering/OrderDetailView";
 import { requireCustomerSession } from "@/lib/authz/customer-session";
 import { LiveRefresh } from "@/components/ordering/LiveRefresh";
 import { loadCustomerOrder } from "@/lib/ordering/ordering-service";
 import { customerOrderStamp } from "@/lib/ordering/live-stamp";
+import { money } from "@/lib/ordering/panelFormat.mjs";
 import { CustomerOrderActions } from "./CustomerOrderActions";
 
 export const dynamic = "force-dynamic";
@@ -24,29 +24,44 @@ export default async function CustomerOrderPage({
   const session = await requireCustomerSession(`/kupac/porudzbine/${encodeURIComponent(id)}`);
   const order = await loadCustomerOrder(session.customerId, id);
   if (!order) notFound();
-  const stamp = await customerOrderStamp(session.customerId, order.id);
+  // Prethodna verzija (iste firme) samo za označavanje izmena u predlogu.
+  const [stamp, previous] = await Promise.all([
+    customerOrderStamp(session.customerId, order.id),
+    order.replaces ? loadCustomerOrder(session.customerId, order.replaces.id) : Promise.resolve(null),
+  ]);
+  const old = Boolean(order.current && order.current.id !== order.id);
+  const allOnRequest = order.lines.length > 0 && order.lines.every((l) => l.priceStatus === "na_upit");
+  const grossLabel = allOnRequest
+    ? "iznos još nije utvrđen (sve stavke su na upit)"
+    : `${money(order.grossTotal, order.currency)} sa PDV-om${order.onRequestLines ? ", bez stavki na upit" : ""}`;
 
   return (
-    <section className="portal-panel">
-      <div className="portal-section-header">
-        <div>
-          {sp.poslato === "1" && order.status === "submitted" ? (
-            <p className="kk-sent" role="status">
-              Zahtev {order.requestNumber} je poslat. Ovde pratite njegov status.
+    <>
+      <OrderDetailView
+        order={order}
+        audience="customer"
+        previous={previous}
+        notice={
+          sp.poslato === "1" && order.status === "submitted" ? (
+            <p className="pn-note" data-tone="success" role="status">
+              Zahtev {order.requestNumber} je poslat. Ovde pratite njegov status; stranica se sama osvežava.
             </p>
-          ) : null}
-        </div>
-        <Link href="/kupac/porudzbine" className="portal-section-link">← Svi zahtevi</Link>
-      </div>
-      <OrderDetailView order={order} audience="customer" />
-      <CustomerOrderActions
-        key={order.version}
-        version={order.version}
-        orderId={order.id}
-        status={order.status}
-        pendingProposal={order.replacedBy && order.replacedBy.status !== "cancelled" ? order.replacedBy : null}
+          ) : null
+        }
+        actions={
+          old ? null : (
+            <CustomerOrderActions
+              key={order.version}
+              version={order.version}
+              orderId={order.id}
+              status={order.status}
+              grossLabel={grossLabel}
+              pendingProposal={order.replacedBy && order.replacedBy.status !== "cancelled" ? order.replacedBy : null}
+            />
+          )
+        }
       />
       <LiveRefresh endpoint={`/api/kupac/zahtevi/stanje?id=${order.id}`} stamp={stamp} what="Zahtev" />
-    </section>
+    </>
   );
 }

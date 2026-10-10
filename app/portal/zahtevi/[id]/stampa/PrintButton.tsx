@@ -2,8 +2,8 @@
 
 export function PrintButton() {
   return (
-    <button type="button" className="portal-button" onClick={() => window.print()}>
-      Odštampajte zahtev
+    <button type="button" className="pn-btn" data-variant="primary" onClick={() => window.print()}>
+      Odštampajte
     </button>
   );
 }

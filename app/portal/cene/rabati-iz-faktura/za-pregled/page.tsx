@@ -57,7 +57,7 @@ export default async function RebateReviewQueuePage({
         }
         actions={
           <>
-            <Link className="rr-link" href="/portal/cene/rabati-iz-faktura/predlozi">Predlozi sa dokazima →</Link>{" "}
+            <Link className="rr-link" href="/portal/cene/rabati-iz-faktura/predlozi">Pokrivenost i grupni predlozi →</Link>{" "}
             <Link className="rr-link" href="/portal/cene/rabati-iz-faktura/kupci">Pregled po kupcu →</Link>
           </>
         }

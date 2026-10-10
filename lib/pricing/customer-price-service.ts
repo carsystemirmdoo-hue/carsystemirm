@@ -28,8 +28,9 @@ export async function customerPrices(customerId: string, articleIds: string[], o
         FROM price_rules WHERE status::text IN (${statuses})
          AND (customer_scope::text <> 'customer' OR customer_id = ${customerId}::uuid)`),
     db.execute<{ group_id: string }>(sql`SELECT group_id FROM customer_group_members WHERE customer_id = ${customerId}::uuid`),
-    db.execute<{ id: string; name: string; unit: string | null; product_group: string | null; brand: string | null; mapped: boolean; fractional: boolean }>(sql`
+    db.execute<{ id: string; name: string; unit: string | null; product_group: string | null; brand: string | null; mapped: boolean; fractional: boolean; out: boolean }>(sql`
       SELECT a.id, a.name, a.unit, a.product_group, a.brand,
+             EXISTS (SELECT 1 FROM articles_out_of_programme o WHERE o.article_id = a.id) AS out,
              EXISTS (SELECT 1 FROM article_catalog_mappings m WHERE m.article_id = a.id AND m.status = 'mapped') AS mapped,
              EXISTS (SELECT 1 FROM invoice_lines l WHERE l.article_id = a.id AND l.quantity <> trunc(l.quantity)) AS fractional
         FROM articles a
@@ -41,8 +42,16 @@ export async function customerPrices(customerId: string, articleIds: string[], o
   type Rule = { valueKind: string; discountPercent?: string | null; netPrice?: string | null } & Record<string, unknown>;
   const rules = [...ruleRows] as Rule[];
   const groups = [...groupRows].map((g) => g.group_id);
-  const out = new Map<string, ReturnType<typeof resolveCustomerPrice> & { unit: string | null; pack: ReturnType<typeof packPrice> | null }>();
+  type Price =
+    | (ReturnType<typeof resolveCustomerPrice> & { unit: string | null; pack: ReturnType<typeof packPrice> | null })
+    | { status: "van_ponude"; reason: "van_programa"; message: string; unit: string | null; pack: null };
+  const out = new Map<string, Price>();
   for (const a of articleRows) {
+    // Artikal van programa (0040): istorija ostaje, ali nije u ponudi — ni cena, ni upit.
+    if (a.out) {
+      out.set(a.id, { status: "van_ponude", reason: "van_programa", message: "Artikal nije u aktuelnoj ponudi.", unit: a.unit, pack: null });
+      continue;
+    }
     const decision = evaluatePricing(rules, { customerId, customerGroupIds: groups, articleId: a.id, productGroup: a.product_group, brand: a.brand, onDate });
     const price = resolveCustomerPrice(decision, base.get(a.id) ?? null);
     // Cena po JM iz BizniSofta; cena PAKOVANJA samo uz dokaz (veza, količina pakovanja).

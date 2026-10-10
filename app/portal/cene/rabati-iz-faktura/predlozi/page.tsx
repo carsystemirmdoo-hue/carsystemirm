@@ -1,155 +1,209 @@
 import Link from "next/link";
 import { srDate } from "@/components/customer/account-format";
 import { CrumbLabel } from "@/components/portal/Breadcrumbs";
-import { PageHeader } from "@/components/portal/PortalPrimitives";
+import { Metric, PageHeader } from "@/components/portal/PortalPrimitives";
 import { can, seesAllCustomers } from "@/lib/authz/permissions.mjs";
 import { requireCapability } from "@/lib/authz/session";
-import { rebateProposals } from "@/lib/pricing/rebate-application-service";
-import { OUTCOME_LABELS } from "@/lib/pricing/rebateApplication.mjs";
-import { PROPOSAL_RULES } from "@/lib/pricing/rebateProposalEvidence.mjs";
+import { rebateCoverage, SINGLE_GROUP, UNASSIGNED, type CoveragePair } from "@/lib/pricing/rebate-coverage-service";
+import { COVERAGE_RULES } from "@/lib/pricing/rebateCoverage.mjs";
 import { belgradeDate } from "@/lib/recommendations/customerRhythm.mjs";
 import { pct } from "../format";
-import { ProposeArticleButton } from "./ProposeArticleButton";
+import { GroupApproveButton } from "./GroupApproveButton";
 
 export const dynamic = "force-dynamic";
-const SHOWN = 200;
-const UNASSIGNED = "Bez dodele — vlasnik";
-const VERDICT: Record<string, { label: string; tone: string }> = {
-  jak_dokaz: { label: "Jak dokaz", tone: "success" },
-  nedovoljan_dokaz: { label: "Nedovoljan dokaz", tone: "warning" },
-  odluka_nadleznog: { label: "Razlika sa odobrenim pravilom", tone: "danger" },
+const UNCLEAR_SHOWN = 40;
+const OUTCOME: Record<CoveragePair["outcome"], string> = {
+  odobreno: "Odobreno pravilo",
+  ceka_odobrenje: "Čeka odobrenje",
+  direktno: "Direktno potvrđeno",
+  izvedeno: "Pouzdano izvedeno",
+  nejasno: "Nejasno",
+  van_programa: "Van programa",
 };
 
+const share = (n: number, total: number) => (total ? `${Math.round((n / total) * 100)} %` : "—");
+
 /**
- * Predlozi rabata sa dokazima: parovi bez odobrenog pravila (sa rabatom na
- * fakturi u poslednjih 6 meseci) koji nisu ispunili stroga merila, i parovi gde
- * poslednja faktura odstupa od ODOBRENOG pravila. Ništa se ne primenjuje samo;
- * „Predložite“ šalje u Odobravanje cena. Porodica (prva reč naziva) je samo
- * pomoćni dokaz. Komercijalista vidi samo svoje kupce.
+ * Pokrivenost rabata (rabati-v2): direktno potvrđeni, pouzdano izvedeni i
+ * stvarno nejasni parovi kupac–artikal. Izvedeni i direktni se odobravaju
+ * GRUPNO po kupcu i dokazanoj porodici; izuzeci se vide u grupi. Postojeća
+ * odobrena pravila se ne prepisuju. Komercijalista vidi samo svoje kupce.
  */
-export default async function RebateProposalsPage({ searchParams }: { searchParams: Promise<{ ocena?: string; komercijalista?: string }> }) {
+export default async function RebateCoveragePage({ searchParams }: { searchParams: Promise<{ komercijalista?: string; kupac?: string }> }) {
   const user = await requireCapability("view:rabati", "/portal/cene/rabati-iz-faktura/predlozi");
   const sp = await searchParams;
-  const ocena = sp.ocena && sp.ocena in VERDICT ? sp.ocena : "sve";
+  const asOf = belgradeDate(new Date());
+  const cov = await rebateCoverage(user, asOf);
+  const owner = (s: string[]) => (s.length ? s.join(", ") : UNASSIGNED);
+  const owners = [...new Set(cov.customers.map((c) => owner(c.salespeople)))].sort((a, b) => (a === UNASSIGNED ? 1 : b === UNASSIGNED ? -1 : a.localeCompare(b, "sr-Latn")));
   const komercijalista = (sp.komercijalista ?? "").slice(0, 120);
-  const all = await rebateProposals(user, belgradeDate(new Date()));
-  const owner = (e: (typeof all)[number]) => (e.salespeople.length ? e.salespeople.join(", ") : UNASSIGNED);
-  const owners = [...new Set(all.map(owner))].sort((a, b) => (a === UNASSIGNED ? 1 : b === UNASSIGNED ? -1 : a.localeCompare(b, "sr-Latn")));
-  const filtered = all
-    .filter((e) => (ocena === "sve" || e.verdict === ocena) && (!komercijalista || owner(e) === komercijalista))
-    .sort((a, b) => owner(a).localeCompare(owner(b), "sr-Latn") || a.customerName.localeCompare(b.customerName, "sr-Latn") || a.articleCode.localeCompare(b.articleCode));
+  const kupac = (sp.kupac ?? "").trim().toLowerCase().slice(0, 80);
+  const shown = cov.customers
+    .filter((c) => (!komercijalista || owner(c.salespeople) === komercijalista) && (!kupac || c.customerName.toLowerCase().includes(kupac)))
+    .map((c) => ({ ...c, open: c.groups.reduce((n, g) => n + g.pairs.length, 0), unclear: c.pairs.filter((p) => p.segment !== "istorijsko" && p.outcome === "nejasno") }))
+    .filter((c) => c.open > 0 || c.unclear.length > 0)
+    .sort((a, b) => owner(a.salespeople).localeCompare(owner(b.salespeople), "sr-Latn") || b.open - a.open);
+  const scopePairs = cov.customers
+    .filter((c) => (!komercijalista || owner(c.salespeople) === komercijalista) && (!kupac || c.customerName.toLowerCase().includes(kupac)))
+    .flatMap((c) => c.pairs);
+  const seg = (s: string) => scopePairs.filter((p) => p.segment === s);
+  const cur = seg("aktuelno");
+  const count = (rows: CoveragePair[], o: CoveragePair["outcome"]) => rows.filter((p) => p.outcome === o).length;
+  const canApprove = can(user, "prices:approve");
   const canPropose = can(user, "prices:propose");
+  const verb = canApprove ? "Odobrite" : "Predložite";
+
   return (
     <>
-      <CrumbLabel segment="predlozi" label="Predlozi sa dokazima" />
+      <CrumbLabel segment="predlozi" label="Pokrivenost i grupni predlozi" />
       <PageHeader
         eyebrow="Finansije · Rabati iz faktura"
-        title="Predlozi rabata sa dokazima"
-        description="Parovi kupac–artikal bez odobrenog rabata (kupac zato vidi „cena na upit“) i parovi gde poslednja faktura odstupa od odobrenog pravila. Ništa ovde ne menja cenu; predlog ide na odobrenje vlasniku."
+        title="Pokrivenost rabata i grupni predlozi"
+        description="Cela istorija kupca: poslednji uslovi, promene kroz vreme, doslednost po artiklu i porodice koje kupčeve fakture dokazuju. Ništa se ne primenjuje samo; grupa se odobrava jednim potezom, a izuzeci ostaju vidljivi."
         meta={
           <span>
-            {seesAllCustomers(user) ? "Svi kupci." : "Vaši dodeljeni kupci."} Jak dokaz: poslednja faktura ≤ {PROPOSAL_RULES.pairMaxAgeDays} dana, isti rabat u
-            fakturama porodice (12 meseci, ≥ {PROPOSAL_RULES.familyMinLines} stavki) i u odobrenim pravilima porodice (≥ {PROPOSAL_RULES.familyMinRules}), oba ≥ {Math.round(PROPOSAL_RULES.familyShare * 100)} %, bez izuzetaka. Porodica = prva reč naziva (pomoćni dokaz).
+            {seesAllCustomers(user) ? "Svi kupci." : "Vaši dodeljeni kupci."} Porodica važi tek kada je kupac dokaže: ≥ {COVERAGE_RULES.familyMinArticles} različita artikla,
+            ≥ {COVERAGE_RULES.familyMinDays} dana kupovine, ≥ {Math.round(COVERAGE_RULES.familyShare * 100)} % stavki sa istim rabatom u poslednjih 6 (najviše 12) meseci, bez promene uslova u toku.
+            Akcija na celoj fakturi ne menja uslov. Prva reč naziva ili opšti rabat kupca sami nisu dokaz. Kriterijum {COVERAGE_RULES.version}.
           </span>
         }
-        actions={<Link className="rr-link" href="/portal/cene/rabati-iz-faktura/za-pregled">Za pregled (stroga merila) →</Link>}
+        actions={<Link className="rr-link" href="/portal/cene/rabati-iz-faktura/za-pregled">Stroga merila (pojedinačno) →</Link>}
       />
-      <section className="portal-metrics rr-metrics" aria-label="Po komercijalisti">
-        {owners.map((o) => {
-          const l = all.filter((e) => owner(e) === o);
-          return (
-            <div key={o} className="portal-metric" data-tone={o === UNASSIGNED ? "warning" : "neutral"}>
-              <span className="portal-metric-label">{o}</span>
-              <strong className="portal-metric-value">{l.length}</strong>
-              <small className="portal-metric-context">
-                {Object.entries(VERDICT).map(([k, v]) => `${l.filter((e) => e.verdict === k).length} ${v.label.toLowerCase()}`).join(" · ")}
-              </small>
-            </div>
-          );
-        })}
+
+      <section className="portal-metrics rr-metrics" aria-label="Pokrivenost aktuelnih parova">
+        <Metric label="Aktuelno: parova" value={String(cur.length)} context="aktivan kupac i artikal, kupljeno u 12 meseci" />
+        <Metric label="Odobreno pravilo" value={String(count(cur, "odobreno"))} tone="success" context={share(count(cur, "odobreno"), cur.length)} />
+        <Metric label="Direktno potvrđeno" value={String(count(cur, "direktno"))} tone="success" context={`${share(count(cur, "direktno"), cur.length)} · čeka grupno odobrenje`} />
+        <Metric label="Pouzdano izvedeno" value={String(count(cur, "izvedeno"))} tone="warning" context={`${share(count(cur, "izvedeno"), cur.length)} · čeka grupno odobrenje`} />
+        <Metric label="Nejasno" value={String(count(cur, "nejasno"))} tone="danger" context={`${share(count(cur, "nejasno"), cur.length)} · ručni pregled`} />
       </section>
+      <p className="portal-data-note">
+        Retke kupovine aktuelnih artikala (kupljeno pre više od 12 meseci): {seg("retko").length} parova — odobreno {count(seg("retko"), "odobreno")}, izvedeno{" "}
+        {count(seg("retko"), "izvedeno")}, nejasno {count(seg("retko"), "nejasno")}. Istorijski skup (neaktivan kupac, artikal van programa ili van prodaje):{" "}
+        {seg("istorijsko").length} parova, od toga van programa {count(seg("istorijsko"), "van_programa")} — samo istorija, ne nudi se.
+      </p>
+
       <section className="portal-panel">
         <form method="get" className="rr-filters" aria-label="Filteri">
-          <label>
-            <span>Ocena</span>
-            <select name="ocena" defaultValue={ocena}>
-              <option value="sve">Sve ({all.length})</option>
-              {Object.entries(VERDICT).map(([k, v]) => (
-                <option key={k} value={k}>{v.label} ({all.filter((e) => e.verdict === k).length})</option>
-              ))}
-            </select>
-          </label>
           {owners.length > 1 ? (
             <label>
               <span>Nadležan</span>
               <select name="komercijalista" defaultValue={komercijalista}>
                 <option value="">Svi</option>
-                {owners.map((o) => <option key={o} value={o}>{o}</option>)}
+                {owners.map((o) => (
+                  <option key={o} value={o}>
+                    {o}
+                  </option>
+                ))}
               </select>
             </label>
           ) : null}
+          <label>
+            <span>Kupac</span>
+            <input name="kupac" defaultValue={sp.kupac ?? ""} placeholder="deo naziva" />
+          </label>
           <button type="submit">Prikažite</button>
         </form>
-        <div className="portal-table-wrap">
-          <table className="portal-table rr-table">
-            <thead>
-              <tr>
-                <th scope="col">Kupac</th>
-                <th scope="col">Artikal</th>
-                <th scope="col">Predlog i ocena</th>
-                <th scope="col">Poslednje fakture</th>
-                <th scope="col">Porodica</th>
-              </tr>
-            </thead>
-            <tbody>
-              {filtered.slice(0, SHOWN).map((e) => {
-                const v = VERDICT[e.verdict];
-                return (
-                  <tr key={`${e.customerId}|${e.articleId}`}>
-                    <th scope="row">
-                      <Link href={`/portal/cene/rabati-iz-faktura/kupci/${e.customerId}?artikli=pregled#artikli`}>{e.customerName}</Link>
-                      <small>{owner(e)}</small>
-                    </th>
-                    <td>
-                      {e.articleCode}
-                      <small>{e.articleName ?? ""}</small>
-                    </td>
-                    <td>
-                      <span className="kk-status" data-tone={v.tone}>{v.label}</span>
-                      <small>
-                        {e.kind === "razlika_sa_odobrenim"
-                          ? `Odobreno ${e.approvedPercent?.map((p) => pct(p)).join(", ")}, poslednja faktura ${e.evidence.proposedPercent === null ? "—" : pct(e.evidence.proposedPercent)}. Odobreno pravilo se ne prepisuje.`
-                          : `Predlog ${e.evidence.proposedPercent === null ? "—" : pct(e.evidence.proposedPercent)} · ${OUTCOME_LABELS[e.outcome as keyof typeof OUTCOME_LABELS] ?? e.outcome}`}
-                      </small>
-                      {e.evidence.reasons.length ? <small>{e.evidence.reasons.join(" · ")}</small> : null}
-                      {canPropose && e.kind === "bez_pravila" && e.evidence.proposedPercent ? (
-                        <ProposeArticleButton customerId={e.customerId} articleId={e.articleId} percent={e.evidence.proposedPercent} />
-                      ) : null}
-                    </td>
-                    <td>
-                      {e.evidence.lastInvoices.map((i, k) => (
-                        <small key={k}>
-                          {i.documentLabel} · {srDate(i.issuedOn)} · {i.percent === null ? "mešano" : pct(i.percent)}
-                        </small>
-                      ))}
-                    </td>
-                    <td>
-                      <small>„{e.evidence.family ?? "—"}“</small>
-                      <small>fakture 12 m: {e.evidence.familyInvoices.n ? `${Math.round(e.evidence.familyInvoices.share * 100)} % = ${pct(e.evidence.familyInvoices.value ?? 0)} (${e.evidence.familyInvoices.n})` : "nema"}</small>
-                      <small>pravila: {e.evidence.familyRules.n ? `${Math.round(e.evidence.familyRules.share * 100)} % = ${pct(e.evidence.familyRules.value ?? 0)} (${e.evidence.familyRules.n})` : "nema"}</small>
-                    </td>
-                  </tr>
-                );
-              })}
-              {filtered.length === 0 ? (
-                <tr>
-                  <td colSpan={5}>Nema predloga za izabrane filtere.</td>
-                </tr>
+
+        {shown.length === 0 ? <p className="portal-empty">Nema grupa ni nejasnih parova za izabrane filtere.</p> : null}
+        {shown.map((c) => {
+          const allExpected = c.groups.flatMap((g) => g.pairs.map((p) => ({ articleId: p.articleId, percent: p.percent as number })));
+          return (
+            <details key={c.customerId} className="rc-customer">
+              <summary>
+                <strong>{c.customerName}</strong>
+                <small>
+                  {owner(c.salespeople)} · poslednja faktura {srDate(c.lastOn)} · za grupno odobrenje {c.open} · nejasno {c.unclear.length}
+                </small>
+              </summary>
+              {c.groups.length ? (
+                <div className="portal-table-wrap">
+                  <table className="portal-table rr-table">
+                    <thead>
+                      <tr>
+                        <th scope="col">Porodica</th>
+                        <th scope="col">Uslov</th>
+                        <th scope="col">Dokaz kupca</th>
+                        <th scope="col">Artikli</th>
+                        <th scope="col">Odluka</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {c.groups.map((g) => {
+                        const direct = g.pairs.filter((p) => p.outcome === "direktno").length;
+                        const notes = g.pairs.filter((p) => p.reason);
+                        return (
+                          <tr key={g.key}>
+                            <th scope="row">{g.key === SINGLE_GROUP ? "Pojedinačni artikli (izuzeci i artikli bez porodice)" : `„${g.key}“`}</th>
+                            <td data-label="Uslov">{g.percent === null ? "po artiklu" : pct(g.percent)}</td>
+                            <td data-label="Dokaz kupca">
+                              {g.evidence ? (
+                                <small>
+                                  {g.evidence.articles} artikala · {g.evidence.days} dana · {Math.round(g.evidence.share * 100)} % stavki
+                                  {g.evidence.window ? ` · ${srDate(g.evidence.window[0])} – ${srDate(g.evidence.window[1])}` : ""}
+                                  {g.evidence.actions ? ` · akcija na fakturi: ${g.evidence.actions} (ne menja uslov)` : ""}
+                                </small>
+                              ) : (
+                                <small>sopstvena istorija svakog artikla (poslednje 2 kupovine isti rabat)</small>
+                              )}
+                            </td>
+                            <td data-label="Artikli">
+                              <details>
+                                <summary>
+                                  {g.pairs.length} ({direct} direktno, {g.pairs.length - direct} izvedeno){notes.length ? ` · napomena: ${notes.length}` : ""}
+                                </summary>
+                                <ul className="rc-articles">
+                                  {g.pairs.map((p) => (
+                                    <li key={p.articleId}>
+                                      {p.articleName} — <b>{pct(p.percent ?? 0)}</b> · {OUTCOME[p.outcome].toLowerCase()} · poslednje:{" "}
+                                      {p.lastInvoices.map((i) => `${srDate(i.issuedOn)} ${pct(i.percent)}`).join(", ")}
+                                      {p.segment === "retko" ? " · retka kupovina" : ""}
+                                      {p.reason ? <small> — {p.reason}</small> : null}
+                                    </li>
+                                  ))}
+                                </ul>
+                              </details>
+                            </td>
+                            <td data-label="Odluka">
+                              {canPropose ? (
+                                <GroupApproveButton
+                                  customerId={c.customerId}
+                                  groupKey={g.key}
+                                  expected={g.pairs.map((p) => ({ articleId: p.articleId, percent: p.percent as number }))}
+                                  label={`${verb} grupu (${g.pairs.length})`}
+                                />
+                              ) : (
+                                <small>predlaže komercijalista sa paketom „cene_predlog“</small>
+                              )}
+                            </td>
+                          </tr>
+                        );
+                      })}
+                    </tbody>
+                  </table>
+                </div>
               ) : null}
-            </tbody>
-          </table>
-        </div>
-        {filtered.length > SHOWN ? <p className="portal-data-note">Prikazano {SHOWN} od {filtered.length}. Suzite ocenu ili nadležnog.</p> : null}
+              {canPropose && c.groups.length > 1 ? (
+                <p className="rc-all">
+                  <GroupApproveButton customerId={c.customerId} groupKey="*" expected={allExpected} label={`${verb} sve grupe kupca (${allExpected.length})`} />
+                </p>
+              ) : null}
+              {c.unclear.length ? (
+                <details className="rc-unclear">
+                  <summary>Nejasno — ručni pregled ({c.unclear.length})</summary>
+                  <ul className="rc-articles">
+                    {c.unclear.slice(0, UNCLEAR_SHOWN).map((p) => (
+                      <li key={p.articleId}>
+                        {p.articleName} · {p.reason} · poslednje: {p.lastInvoices.map((i) => `${srDate(i.issuedOn)} ${pct(i.percent)}`).join(", ")}
+                      </li>
+                    ))}
+                  </ul>
+                  {c.unclear.length > UNCLEAR_SHOWN ? <p className="portal-data-note">Prikazano {UNCLEAR_SHOWN} od {c.unclear.length}.</p> : null}
+                </details>
+              ) : null}
+            </details>
+          );
+        })}
       </section>
     </>
   );

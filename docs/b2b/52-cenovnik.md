@@ -89,12 +89,24 @@ Cena pakovanja (`lib/pricing/packPrice.mjs`) se računa samo kada je:
 
 Inače je obračun pakovanja blokiran i ekran kaže šta nedostaje. Dok veze sa katalogom ne budu potvrđene, kupac vidi cenu po jedinici mere sa jasnom oznakom jedinice.
 
-## Predlozi rabata sa dokazima (`/portal/cene/rabati-iz-faktura/predlozi`)
+## Pokrivenost rabata i grupni predlozi (`/portal/cene/rabati-iz-faktura/predlozi`)
 
-Za parove kupac–artikal bez odobrenog rabata (kupac vidi „cena na upit“) koji nisu ispunili stroga merila primene, i za parove čija poslednja faktura odstupa od odobrenog pravila. Ništa se ne primenjuje automatski.
+Model `rabati-v2` (`lib/pricing/rebateCoverage.mjs`) gleda CELU istoriju kupca. Merenje na fakturama: na 88 % faktura jedan brend dobija isti rabat na celom računu, a 82 % ponovljenih parova kupac–artikal ima uvek isti rabat. Zato par ne pada samo zato što taj artikal nema tri kupovine — ako ga drugi, nezavisni dokazi istog kupca pouzdano potvrđuju.
 
-- **Jak dokaz:** poslednja faktura ≤ 180 dana; isti rabat u fakturama iste porodice (prva reč naziva) u 12 meseci i u odobrenim pravilima porodice istog kupca, oba ≥ 85 %, bez izuzetaka. Porodica je samo pomoćni dokaz — brend i grupa nisu upisani u portalu.
-- **Nedovoljan dokaz:** prikazuju se poslednje fakture i razlozi; odluku donosi nadležni komercijalista.
-- **Razlika sa odobrenim pravilom:** odobreno pravilo se ne prepisuje; odluka je na nadležnom (izmena pravila).
+| Ishod | Kada |
+|---|---|
+| odobreno | postoji odobreno pravilo — ne prepisuje se |
+| direktno | poslednje dve kupovine TOG artikla (u 2 godine, poslednja u 12 meseci) sa istim rabatom |
+| izvedeno | porodica kupca dokazana DRUGIM artiklima (bez samog para) |
+| nejasno | sve ostalo, sa razlogom — ručni pregled |
+| van programa | artikal nije u ponudi; istorija ostaje |
 
-„Predložite X %“ (sposobnost `prices:propose`) ponovo računa dokaz na serveru i šalje predlog u Odobravanje cena; par sa predlogom na čekanju više nije u spisku. Komercijalista vidi samo svoje kupce.
+**Porodica** — naziv daje samo kandidata (brend, ili brend + linija); važi tek kada je kupac dokaže: ≥ 3 različita artikla, ≥ 3 dana kupovine, ≥ 90 % stavki sa istim rabatom u poslednjih 6 (najviše 12) meseci, bez promene uslova u toku i bez većine odobrenih pravila protiv. **Akcija** (više artikala porodice na jednoj fakturi sa drugim rabatom) ne menja uslov, ako je retka. **Izuzetak** artikla važi samo kada je istovremen sa uslovom porodice; starije odstupanje je stari uslov. Prva reč naziva ili jedan opšti rabat kupca sami nikad nisu dokaz.
+
+**Podela:** aktuelno (kupac sa fakturom u 12 meseci, artikal u programu i prodavan u 12 meseci, par kupljen u 12 meseci), retko (isto, ali par kupljen ranije), istorijsko (sve ostalo). Grupe se prave samo za aktuelno i retko.
+
+**Grupno odobravanje:** jedan potez po grupi kupac × porodica (ili sve grupe kupca). Server ponovo računa dokaz i prihvata samo artikle koji su i dalje u grupi sa istim procentom. Vlasnik dobija odobrena pravila sa oznakom serije `rabati-v2-…` (opoziv kao serija); predlagač šalje predloge na odobrenje. Komercijalista vidi samo svoje kupce.
+
+## Program artikla (0040)
+
+Prisustvo šifre u lageru, cenovniku ili staroj fakturi NIJE odluka da je artikal u ponudi. Odluka „van programa“ (`article_programme_decisions`, samo dodavanje, važi poslednja; samo vlasnik) znači: istorija (fakture, osnovne cene, pravila) ostaje, ali artikal nema cenu kupca (`van_ponude`), ne poručuje se (`not_in_programme`), ne preporučuje se i ne ulazi u predloge rabata. 3M, sia i Molotow nisu u aktuelnom programu.

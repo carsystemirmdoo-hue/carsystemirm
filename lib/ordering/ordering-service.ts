@@ -111,6 +111,7 @@ type ArticleRow = {
   vat_percent: string | null;
   min_quantity: string | null;
   quantity_step: string | null;
+  out_of_programme: boolean;
 };
 
 type Term = {
@@ -218,7 +219,8 @@ async function loadArticleRows(exec: Exec, list: PriceListInfo | null, where: SQ
     SELECT a.id AS article_id, a.code, a.name, a.product_group, a.brand,
            m.status::text AS mapping_status, m.catalog_product_slug AS slug, m.catalog_variant_id AS variant,
            pli.unit, pli.pack_label, pli.net_price::text AS list_price, pli.vat_percent::text AS vat_percent,
-           pli.min_quantity::text AS min_quantity, pli.quantity_step::text AS quantity_step
+           pli.min_quantity::text AS min_quantity, pli.quantity_step::text AS quantity_step,
+           EXISTS (SELECT 1 FROM articles_out_of_programme o WHERE o.article_id = a.id) AS out_of_programme
       FROM articles a
       LEFT JOIN article_catalog_mappings m
              ON m.article_id = a.id AND m.status NOT IN ('rejected', 'revoked')
@@ -257,6 +259,7 @@ function offerFor(row: ArticleRow, terms: Term[], customerId: string, mode: Orde
       priceItem: price,
       pricingConflict: price?.conflict ?? false,
       rebateUnknown: price ? price.rebate === "nepoznat" : false,
+      outOfProgramme: row.out_of_programme,
     }) ?? (mode.enabled ? null : { code: "ordering_off", message: mode.reason });
   return {
     articleId: row.article_id,
@@ -969,6 +972,7 @@ export async function loadArticleOrderability(articleIds: string[]) {
       productExists: facts.productExists,
       rowVariantKeys: facts.rowVariantKeys,
       priceItem: r.list_price === null ? null : {},
+      outOfProgramme: r.out_of_programme,
     });
     out.set(r.article_id, {
       orderable: !problem,

@@ -1,4 +1,4 @@
-import { date, index, integer, jsonb, numeric, pgEnum, pgTable, primaryKey, text, timestamp, unique, uuid } from "drizzle-orm/pg-core";
+import { boolean, date, index, integer, jsonb, numeric, pgEnum, pgTable, primaryKey, text, timestamp, unique, uuid } from "drizzle-orm/pg-core";
 import { articles } from "./sales";
 import { users } from "./users";
 
@@ -77,4 +77,23 @@ export const articleBasePrices = pgTable(
     unique("article_base_prices_import_article_key").on(t.importId, t.articleId),
     index("article_base_prices_effective_idx").on(t.articleId, t.validFrom, t.createdAt),
   ],
+);
+
+/**
+ * Program artikla (0040): da li je artikal u aktuelnoj ponudi. Samo dodavanje;
+ * važi poslednja odluka; artikal bez odluke je u programu. Istorija artikla
+ * (fakture, cene, pravila) ostaje — van programa znači samo „nije u ponudi“.
+ */
+export const articleProgrammeDecisions = pgTable(
+  "article_programme_decisions",
+  {
+    id: uuid("id").primaryKey().defaultRandom(),
+    articleId: uuid("article_id").notNull().references(() => articles.id, { onDelete: "restrict" }),
+    inProgramme: boolean("in_programme").notNull(),
+    reason: text("reason").notNull(),
+    sourceBatch: text("source_batch"),
+    decidedBy: uuid("decided_by").notNull().references(() => users.id, { onDelete: "restrict" }),
+    decidedAt: timestamp("decided_at", { withTimezone: true }).notNull().defaultNow(),
+  },
+  (t) => [index("article_programme_decisions_latest_idx").on(t.articleId, t.decidedAt, t.id)],
 );

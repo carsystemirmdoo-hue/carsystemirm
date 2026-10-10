@@ -11,7 +11,8 @@ import { CRITERIA_TEXT } from "@/lib/pricing/rebateCriteria.mjs";
 import { loadRebateReview } from "@/lib/pricing/rebate-review-service";
 import { EXCEPTION_LABELS, HIGH_DISCOUNT, RECENT_DAYS, STATUS_LABELS } from "@/lib/pricing/rebateReview.mjs";
 import { pct } from "../../format";
-import { ProposeChangeForm } from "./ProposeChangeForm";
+import { customerFamilies } from "@/lib/pricing/rebate-change-service";
+import { RebateChangePanel } from "./RebateChangePanel";
 
 export const dynamic = "force-dynamic";
 
@@ -96,9 +97,10 @@ export default async function RebateReviewCustomerPage({
         articleCode: a.articleCode,
         articleName: a.articleName,
         lastPercent: last?.percent ?? null,
-        suggestedPercent: a.result.outcome === "primeni" ? a.result.percent : (last?.percent ?? null),
+        currentPercent: approvedByArticle.get(a.articleId)?.value ?? null,
       };
     });
+  const families = canPropose ? await customerFamilies(user, customer.id, today) : [];
   const initialArticle = sp.predlog && articles.some((a) => a.articleId === sp.predlog) ? sp.predlog : null;
   const exceptionKind = kind && kind in EXCEPTION_LABELS ? kind : null;
   const exceptions = exceptionKind ? r.exceptions.filter((e) => e.kind === exceptionKind) : r.exceptions;
@@ -397,17 +399,19 @@ export default async function RebateReviewCustomerPage({
             <section className="portal-panel">
               <div className="portal-section-header">
                 <div>
-                  <h2>Predložite promenu</h2>
-                  <p>Ide u postojeći tok: predlog → odobrenje vlasnika. Dok nije odobren, ne menja cenu.</p>
+                  <h2>Promena rabata</h2>
+                  <p>Jedan artikal, potvrđena grupa ili više artikala. Prvo pregled svih obuhvaćenih artikala, pa slanje. Predlog ide vlasniku na odobrenje i ne menja cenu dok ga ne odobri.</p>
                 </div>
               </div>
               <div className="portal-panel-body">
-                <ProposeChangeForm
+                <RebateChangePanel
                   customerId={customer.id}
                   customerName={customer.name}
                   today={today}
                   initialArticleId={initialArticle}
                   articles={formArticles}
+                  families={families}
+                  canApprove={can(user, "prices:approve")}
                 />
               </div>
             </section>

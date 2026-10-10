@@ -110,3 +110,15 @@ Model `rabati-v2` (`lib/pricing/rebateCoverage.mjs`) gleda CELU istoriju kupca. 
 ## Program artikla (0040)
 
 Prisustvo šifre u lageru, cenovniku ili staroj fakturi NIJE odluka da je artikal u ponudi. Odluka „van programa“ (`article_programme_decisions`, samo dodavanje, važi poslednja; samo vlasnik) znači: istorija (fakture, osnovne cene, pravila) ostaje, ali artikal nema cenu kupca (`van_ponude`), ne poručuje se (`not_in_programme`), ne preporučuje se i ne ulazi u predloge rabata. 3M, sia i Molotow nisu u aktuelnom programu.
+
+## Promena rabata kupca (0041)
+
+Na strani kupca (`/portal/cene/rabati-iz-faktura/kupci/[id]`, panel „Promena rabata“): **jedan artikal**, **potvrđena grupa** (porodica koju fakture tog kupca dokazuju — jasno označena kao izvedena, sa pregledom članstva) ili **više izabranih artikala**.
+
+1. **Pregled** pre slanja: svaki obuhvaćeni artikal, šta sada važi (procenat, poreklo, od kada), poslednja faktura, novi rabat i radnja (novo / zamena / bez promene / izuzetak / čeka odluku).
+2. **Izuzeci:** pravilo artikla koje odstupa od dosadašnjeg uslova grupe je pojedinačni dogovor — grupna promena ga NE menja, osim ako se izričito uključi. Već zakazana promena i predlog na čekanju se ne preklapaju.
+3. **Slanje:** obrazloženje (10–800 znakova) i datum početka (ne u prošlosti). Server ponovo računa pregled i odbija ako se stanje promenilo.
+4. **Zamena bez sukoba:** predlog nosi `replaces_rule_id`; do odobrenja važi staro pravilo, a odobrenje zatvara staro dan pre početka novog (u istoj transakciji, sa tragom). Za isti par najviše jedan predlog čeka odluku (jedinstveni indeks) — ponovljeno slanje se odbija.
+5. **Odobravanje:** komercijalistin predlog ne menja cenu dok vlasnik ne odobri; vlasnik može odobriti odmah, a pakete predloga odobrava ili odbija jednim potezom u „Odobravanju cena“.
+
+Dozvole (provera na serveru): predlaže `prices:propose` (paket `cene_predlog`) samo za kupce u opsegu — dodeljene, ili sve uz `analitika`; odobrava `prices:approve` (vlasnik); kancelarija vidi, ne predlaže. Fakture i BizniSoft se ne menjaju.

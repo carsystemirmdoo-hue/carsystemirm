@@ -3,7 +3,9 @@ import { can } from "@/lib/authz/permissions.mjs";
 import { requireCapability } from "@/lib/authz/session";
 import { listPriceRules } from "@/lib/pricing/rule-service";
 import { resolvePricingScope } from "@/lib/pricing/pricing-scope";
+import { pendingBatches } from "@/lib/pricing/rebate-coverage-service";
 import { RuleTable } from "../RuleTable";
+import { BatchDecision } from "./BatchDecision";
 
 export const dynamic = "force-dynamic";
 
@@ -36,6 +38,7 @@ export default async function PriceApprovalPage() {
     listPriceRules(scope, { statuses: ["office_recorded"] }),
     listPriceRules(scope, { statuses: ["reconciliation_failed"] }),
   ]);
+  const batches = await pendingBatches(user);
 
   return (
     <>
@@ -44,6 +47,41 @@ export default async function PriceApprovalPage() {
         title="Odobravanje cena"
         description="Odobrenje nije potvrda. Pravilo postaje potvrđeno tek kada kancelarija evidentira da je uslov upisan u BizniSoft."
       />
+
+      {batches.length ? (
+        <section className="portal-panel">
+          <h2>Paketi predloga ({batches.length})</h2>
+          <p>Grupni i višestruki predlozi jednog kupca. Paket se odobrava ili odbija ceo; pojedinačna pravila su i dalje u tabeli ispod.</p>
+          <div className="portal-table-wrap">
+            <table className="portal-table rr-table">
+              <thead>
+                <tr>
+                  <th scope="col">Kupac</th>
+                  <th scope="col">Predlog</th>
+                  <th scope="col">Predložio</th>
+                  <th scope="col">Odluka</th>
+                </tr>
+              </thead>
+              <tbody>
+                {batches.map((b) => (
+                  <tr key={`${b.batch}|${b.customer}`}>
+                    <th scope="row">
+                      {b.customer}
+                      <small>{b.batch}</small>
+                    </th>
+                    <td>
+                      {b.n} pravila · {Number(b.min) === Number(b.max) ? `${Number(b.min)} %` : `${Number(b.min)}–${Number(b.max)} %`}
+                      <small>{b.replaces ? `menja ${b.replaces} važećih pravila` : "samo nova pravila"}</small>
+                    </td>
+                    <td>{b.proposer}</td>
+                    <td>{canDecide ? <BatchDecision batchId={b.batch} count={b.n} /> : null}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </section>
+      ) : null}
 
       <section className="portal-panel">
         <h2>Čeka odobrenje ({waiting.length})</h2>

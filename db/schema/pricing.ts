@@ -1,4 +1,6 @@
+import { sql } from "drizzle-orm";
 import {
+  type AnyPgColumn,
   boolean,
   date,
   index,
@@ -180,6 +182,8 @@ export const priceRules = pgTable(
     biznisoftEntryRequired: boolean("biznisoft_entry_required").notNull().default(true),
     /** Oznaka serije upisa; služi za opoziv tačno tog upisa. Migracija 0035. */
     sourceBatch: text("source_batch"),
+    /** Predlog koji MENJA važeće pravilo istog opsega; pri odobrenju se staro zatvara. Migracija 0041. */
+    replacesRuleId: uuid("replaces_rule_id").references((): AnyPgColumn => priceRules.id, { onDelete: "restrict" }),
     proposedBy: uuid("proposed_by").references(() => users.id, {
       onDelete: "restrict",
     }),
@@ -235,6 +239,9 @@ export const priceRules = pgTable(
     index("price_rules_customer_idx").on(table.customerId),
     index("price_rules_article_idx").on(table.articleId),
     index("price_rules_status_idx").on(table.status),
+    uniqueIndex("price_rules_one_pending_per_scope")
+      .on(table.precedenceLevel, table.scopeKey)
+      .where(sql`${table.status} IN ('draft', 'pending_approval')`),
     // Traženje sudara je uvek „ista klasa, isti opseg" — indeks prati taj upit.
     index("price_rules_conflict_idx").on(
       table.precedenceLevel,

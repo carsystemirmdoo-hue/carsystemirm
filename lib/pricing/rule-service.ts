@@ -54,7 +54,20 @@ export type RuleDraft = {
   biznisoftEntryRequired?: boolean;
   /** Oznaka serije upisa (0035), za opoziv tačno tog upisa. */
   sourceBatch?: string | null;
+  /**
+   * Važeće pravilo ISTOG opsega koje ovaj predlog menja (0041). Pri odobrenju
+   * se staro zatvara dan pre početka novog; do tada staro važi.
+   */
+  replacesRuleId?: string | null;
 };
+
+/** Ponovljeno slanje: za isti opseg već čeka predlog (jedinstveni indeks 0041). */
+function isPendingDuplicate(error: unknown): boolean {
+  for (let e = error as { code?: string; constraint_name?: string; cause?: unknown } | undefined, i = 0; e && i < 4; e = e.cause as typeof e, i++) {
+    if (e.code === "23505" && String(e.constraint_name ?? "").includes("price_rules_one_pending_per_scope")) return true;
+  }
+  return false;
+}
 
 /**
  * Opcije za upis u seriji (npr. primena iz istorije faktura).
@@ -105,6 +118,18 @@ export async function proposePriceRule(
   const db = getDb();
 
   return db.transaction(async (tx) => {
+    if (draft.replacesRuleId) {
+      const [old] = await tx.select().from(priceRules).where(eq(priceRules.id, draft.replacesRuleId)).limit(1);
+      if (!old || old.precedenceLevel !== level || old.scopeKey !== scopeKey || !ACTIVE_RULE_STATUSES.includes(old.status)) {
+        throw new WorkflowError("Pravilo koje se menja nije važeće pravilo istog opsega.", "bad_replacement");
+      }
+      if (old.effectiveFrom >= draft.effectiveFrom) {
+        throw new WorkflowError("Promena mora početi posle početka važenja postojećeg pravila.", "bad_replacement");
+      }
+      if (old.effectiveTo && old.effectiveTo < draft.effectiveFrom) {
+        throw new WorkflowError("Postojeće pravilo se već završava pre ovog datuma — nije potrebna zamena.", "bad_replacement");
+      }
+    }
     const [created] = await tx
       .insert(priceRules)
       .values({
@@ -134,6 +159,7 @@ export async function proposePriceRule(
         reason,
         biznisoftEntryRequired: draft.biznisoftEntryRequired ?? true,
         sourceBatch: draft.sourceBatch ?? null,
+        replacesRuleId: draft.replacesRuleId ?? null,
         proposedBy: actor.id,
         proposedAt: sql`now()`,
       })
@@ -157,6 +183,7 @@ export async function proposePriceRule(
           vaziDo: draft.effectiveTo ?? null,
           unosUBizniSoft: draft.biznisoftEntryRequired ?? true,
           serija: draft.sourceBatch ?? null,
+          menja: draft.replacesRuleId ?? null,
         },
         reason,
         correlationId,
@@ -182,6 +209,11 @@ export async function proposePriceRule(
     );
 
     return { id: created.id, status: "pending_approval" as const };
+  }).catch((error: unknown) => {
+    if (isPendingDuplicate(error)) {
+      throw new WorkflowError("Za ovaj par već postoji predlog koji čeka odluku — novi nije poslat.", "duplicate_pending");
+    }
+    throw error;
   });
 }
 
@@ -311,6 +343,41 @@ export async function transitionPriceRule(
      * Ovde se gleda samo kada pravilo udje u stanje koje ucestvuje u ceni — to
      * je jedini trenutak u kome konflikt moze da NASTANE.
      */
+    /*
+     * Zamena (0041): odobren predlog zatvara pravilo koje menja, u ISTOJ
+     * transakciji — u svakom trenutku važi tačno jedno pravilo za opseg.
+     */
+    if (participatesInPricing(input.to) && rule.replacesRuleId) {
+      const closedTo = sql`(${rule.effectiveFrom}::date - 1)`;
+      const closed = await tx
+        .update(priceRules)
+        .set({ effectiveTo: closedTo as unknown as string, updatedAt: sql`now()` })
+        .where(
+          and(
+            eq(priceRules.id, rule.replacesRuleId),
+            inArray(priceRules.status, ACTIVE_RULE_STATUSES),
+            sql`coalesce(${priceRules.effectiveTo}, 'infinity'::date) >= ${rule.effectiveFrom}::date`,
+            sql`${priceRules.effectiveFrom} < ${rule.effectiveFrom}::date`,
+          ),
+        )
+        .returning({ id: priceRules.id });
+      if (closed.length) {
+        await recordAudit(
+          {
+            actor: { id: actor.id, name: actor.name, role: actor.role },
+            action: AUDIT_ACTIONS.priceRuleTransitioned,
+            entityType: "Pravilo cene",
+            entityId: rule.replacesRuleId,
+            entityLabel: `${precedenceLabelFor(rule.precedenceLevel)} · ${rule.scopeKey}`,
+            before: { vaziDo: null },
+            after: { vaziDo: `dan pre ${rule.effectiveFrom}`, zamenjenoPravilom: input.ruleId },
+            reason: `Zamenjeno odobrenom promenom od ${rule.effectiveFrom}`,
+            correlationId,
+          },
+          tx,
+        );
+      }
+    }
     if (participatesInPricing(input.to)) {
       await notifyRuleConflict(tx, rule, correlationId);
     }

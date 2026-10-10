@@ -288,6 +288,13 @@
       "when": 1791900000000,
       "tag": "0040_article_programme",
       "breakpoints": true
+    },
+    {
+      "idx": 41,
+      "version": "7",
+      "when": 1791986400000,
+      "tag": "0041_price_rule_replacement",
+      "breakpoints": true
     }
   ]
 }

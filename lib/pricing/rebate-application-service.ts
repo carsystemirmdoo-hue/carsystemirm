@@ -64,6 +64,7 @@ export async function evaluateRebateArticles(viewer: PortalUser, asOf: string, o
        WHERE customer_scope = 'customer' AND product_scope = 'article' AND value_kind = 'discount_percent'
          AND status::text IN (${sql.join([...APPROVED, ...PENDING].map((s) => sql`${s}`), sql`, `)})
          AND (effective_to IS NULL OR effective_to >= ${asOf}::date)
+         AND (status::text IN ('draft', 'pending_approval') OR effective_from <= ${asOf}::date)
          AND ${inScope(sql`customer_id`)}`),
     db.execute<{ customer_id: string; name: string }>(sql`
       SELECT ca.customer_id, u.name FROM customer_assignments ca JOIN users u ON u.id = ca.user_id

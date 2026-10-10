@@ -268,9 +268,10 @@ test("sudar dva aktivna pravila emituje kriticno obavestenje, jednom", async (t)
     { ...draft, discountPercent: 10, reason: "Prvi dogovor" },
     owner,
   );
-  const b = await proposePriceRule(
-    { ...draft, discountPercent: 20, reason: "Drugi dogovor" },
-    owner,
+  // Isti opseg sme imati samo JEDAN predlog na čekanju (0041); drugi ide posle odluke o prvom.
+  await assert.rejects(
+    () => proposePriceRule({ ...draft, discountPercent: 20, reason: "Drugi dogovor" }, owner),
+    /već postoji predlog/,
   );
 
   // Prvo odobrenje: jos nema sudara.
@@ -279,6 +280,12 @@ test("sudar dva aktivna pravila emituje kriticno obavestenje, jednom", async (t)
     owner,
   );
   assert.equal(await countKind("price_rule_conflict"), 0);
+
+  // Drugi predlog BEZ zamene (replacesRuleId) — sudar je i dalje moguć i mora se prijaviti.
+  const b = await proposePriceRule(
+    { ...draft, discountPercent: 20, reason: "Drugi dogovor" },
+    owner,
+  );
 
   // Drugo odobrenje pravi sudar iste klase i istog opsega.
   await transitionPriceRule(

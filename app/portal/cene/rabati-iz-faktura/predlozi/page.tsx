@@ -8,6 +8,7 @@ import { rebateCoverage, SINGLE_GROUP, UNASSIGNED, type CoveragePair } from "@/l
 import { COVERAGE_RULES } from "@/lib/pricing/rebateCoverage.mjs";
 import { belgradeDate } from "@/lib/recommendations/customerRhythm.mjs";
 import { pct } from "../format";
+import { CustomerGroupsForm } from "./CustomerGroupsForm";
 import { GroupApproveButton } from "./GroupApproveButton";
 
 export const dynamic = "force-dynamic";
@@ -107,7 +108,6 @@ export default async function RebateCoveragePage({ searchParams }: { searchParam
 
         {shown.length === 0 ? <p className="portal-empty">Nema grupa ni nejasnih parova za izabrane filtere.</p> : null}
         {shown.map((c) => {
-          const allExpected = c.groups.flatMap((g) => g.pairs.map((p) => ({ articleId: p.articleId, percent: p.percent as number })));
           return (
             <details key={c.customerId} className="rc-customer">
               <summary>
@@ -139,7 +139,7 @@ export default async function RebateCoveragePage({ searchParams }: { searchParam
                             <td data-label="Dokaz kupca">
                               {g.evidence ? (
                                 <small>
-                                  {g.evidence.articles} artikala · {g.evidence.days} dana · {Math.round(g.evidence.share * 100)} % stavki
+                                  Poreklo: izvedeno iz faktura kupca (nije BizniSoft grupa) · {g.evidence.articles} artikala · {g.evidence.days} dana · {Math.round(g.evidence.share * 100)} % stavki
                                   {g.evidence.window ? ` · ${srDate(g.evidence.window[0])} – ${srDate(g.evidence.window[1])}` : ""}
                                   {g.evidence.actions ? ` · akcija na fakturi: ${g.evidence.actions} (ne menja uslov)` : ""}
                                 </small>
@@ -184,9 +184,17 @@ export default async function RebateCoveragePage({ searchParams }: { searchParam
                 </div>
               ) : null}
               {canPropose && c.groups.length > 1 ? (
-                <p className="rc-all">
-                  <GroupApproveButton customerId={c.customerId} groupKey="*" expected={allExpected} label={`${verb} sve grupe kupca (${allExpected.length})`} />
-                </p>
+                <CustomerGroupsForm
+                  customerId={c.customerId}
+                  verb={verb}
+                  groups={c.groups.map((g) => ({
+                    key: g.key,
+                    label: g.key === SINGLE_GROUP ? "pojedinačni artikli (izuzeci)" : `„${g.key}“ ${g.percent === null ? "" : pct(g.percent)}`,
+                    percent: g.percent,
+                    preselect: g.key !== SINGLE_GROUP,
+                    expected: g.pairs.map((p) => ({ articleId: p.articleId, percent: p.percent as number })),
+                  }))}
+                />
               ) : null}
               {c.unclear.length ? (
                 <details className="rc-unclear">

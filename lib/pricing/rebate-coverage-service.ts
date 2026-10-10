@@ -66,6 +66,7 @@ export async function rebateCoverage(viewer: PortalUser, asOf: string, onlyCusto
        WHERE customer_scope = 'customer' AND product_scope = 'article' AND value_kind = 'discount_percent'
          AND status::text IN (${sql.join([...APPROVED, ...PENDING].map((s) => sql`${s}`), sql`, `)})
          AND (effective_to IS NULL OR effective_to >= ${asOf}::date)
+         AND (status::text IN ('draft', 'pending_approval') OR effective_from <= ${asOf}::date)
          AND ${inScope(sql.raw("customer_id"))}`),
     db.execute<{ id: string; name: string }>(sql`SELECT id, name FROM customers WHERE ${inScope(sql.raw("id"))}`),
     db.execute<{ customer_id: string; name: string }>(sql`
@@ -138,7 +139,7 @@ export type RebateCoverage = Awaited<ReturnType<typeof rebateCoverage>>;
  */
 export async function approveRebateGroup(
   actor: PortalUser,
-  input: { customerId: string; groupKey: string; expected: { articleId: string; percent: number }[]; asOf: string },
+  input: { customerId: string; groupKey: string; expected: { articleId: string; percent: number }[]; asOf: string; batchId?: string },
 ) {
   const approve = can(actor, "prices:approve") && can(actor, "prices:propose");
   if (!approve && !can(actor, "prices:propose")) throw new Error("Nemate pravo da predlažete rabate.");
@@ -151,7 +152,7 @@ export async function approveRebateGroup(
   if (!input.expected.length || changed.length) {
     return { ok: false as const, message: `Stanje se promenilo za ${changed.length || "sve"} artikala; osvežite stranu i pogledajte ponovo.` };
   }
-  const batchId = `rabati-v2-${input.asOf}-${randomUUID().slice(0, 8)}`;
+  const batchId = input.batchId ?? `rabati-v2-${input.asOf}-${randomUUID().slice(0, 8)}`;
   const created: string[] = [];
   for (const e of input.expected) {
     const { p, g } = now.get(e.articleId)!;
@@ -196,4 +197,32 @@ export async function approveRebateGroup(
     correlationId: batchId,
   });
   return { ok: true as const, batchId, count: created.length, approved: approve };
+}
+
+/** Paket na čekanju (predlozi jedne serije) — za odluku gazde jednim potezom. */
+export async function pendingBatches(viewer: PortalUser) {
+  if (!can(viewer, "prices:approve")) return [];
+  const rows = await getDb().execute<{ batch: string; customer: string; n: number; min: string; max: string; replaces: number; proposer: string; at: string }>(sql`
+    SELECT r.source_batch AS batch, coalesce(c.name, '—') AS customer, count(*)::int AS n,
+           min(r.discount_percent)::text AS min, max(r.discount_percent)::text AS max,
+           count(r.replaces_rule_id)::int AS replaces, coalesce(u.name, '—') AS proposer, max(r.proposed_at)::text AS at
+      FROM price_rules r
+      LEFT JOIN customers c ON c.id = r.customer_id
+      LEFT JOIN users u ON u.id = r.proposed_by
+     WHERE r.status = 'pending_approval' AND r.source_batch IS NOT NULL
+     GROUP BY r.source_batch, c.name, u.name
+     ORDER BY max(r.proposed_at) DESC`);
+  return [...rows];
+}
+
+/** Odluka gazde za ceo paket na čekanju: svako pravilo kroz postojeći prelaz (zamena, trag, sukobi). */
+export async function decidePendingBatch(actor: PortalUser, input: { batchId: string; to: "approved_pending_biznisoft" | "rejected"; reason: string | null }) {
+  if (!can(actor, "prices:approve")) throw new Error("Paket odobrava samo vlasnik.");
+  if (input.to === "rejected" && !(input.reason ?? "").trim()) throw new Error("Odbijanje traži razlog.");
+  const ids = await getDb().execute<{ id: string }>(sql`
+    SELECT id FROM price_rules WHERE source_batch = ${input.batchId} AND status = 'pending_approval' ORDER BY created_at`);
+  for (const r of ids) {
+    await transitionPriceRule({ ruleId: r.id, to: input.to, reason: input.reason ?? `Odluka za paket ${input.batchId}` }, actor, { correlationId: input.batchId, notify: false });
+  }
+  return { count: ids.length };
 }

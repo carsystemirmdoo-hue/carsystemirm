@@ -143,6 +143,8 @@ export async function loadRebateReview(viewer: PortalUser, customerId: string) {
         LEFT JOIN articles a ON a.id = r.article_id
         LEFT JOIN customer_groups g ON g.id = r.customer_group_id
        WHERE r.status::text IN (${sql.join([...APPROVED, ...PENDING].map((s) => sql`${s}`), sql`, `)})
+         -- Zatvoreno pravilo (zamenjeno promenom, 0041) je istorija, ne važeći uslov.
+         AND (r.effective_to IS NULL OR r.effective_to >= (now() AT TIME ZONE 'Europe/Belgrade')::date)
          AND (r.customer_id = ${customerId}::uuid
               OR r.customer_group_id IN (SELECT group_id FROM customer_group_members WHERE customer_id = ${customerId}::uuid))
        ORDER BY r.effective_from DESC`),

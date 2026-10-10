@@ -404,7 +404,8 @@ body:has(.portal-login-root) {
   gap: 10px;
   margin-top: auto;
   padding: 16px 18px 20px;
-  color: #767b81; color: oklch(0.58 0.012 255);
+  /* 0.58 je na tamnoj traci davao 4.34:1 za tekst od 10–11px. */
+  color: #8d939a; color: oklch(0.66 0.012 255);
   border-top: 1px solid #2b3138; border-top: 1px solid oklch(0.31 0.016 255);
 }
 .portal-sidebar-foot small {
@@ -4860,7 +4861,7 @@ section.portal-metrics {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  color: #767b81; color: oklch(0.58 0.012 255);
+  color: #8d939a; color: oklch(0.66 0.012 255);
   font-size: 12px;
 }
 .portal-login-brand footer span {
@@ -5196,7 +5197,8 @@ section.portal-metrics {
   align-items: center;
   justify-content: center;
   gap: 6px;
-  color: #848a90; color: oklch(0.63 0.012 255);
+  /* 0.63 na svetloj kartici prijave: 3.25:1. */
+  color: var(--p-muted);
   font-size: 12px;
   text-align: center;
 }
@@ -6725,7 +6727,8 @@ section.portal-metrics {
 }
 .portal-phase-notice-tag {
   margin: 2px 0 0;
-  color: var(--p-faint);
+  /* --p-faint na skoro beloj kartici: 2.72:1. */
+  color: var(--p-muted);
   font-size: 13px;
   font-weight: 600;
 }

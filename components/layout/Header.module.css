@@ -194,6 +194,11 @@
     both;
 }
 
+/*
+ * Zaglavlje u stanju „pending“ čeka JavaScript da odigra ulaz. Ako JavaScript
+ * ne radi (`html` bez `data-js`) ili je učitavanje palo na rezervni izlaz
+ * (`data-route-transition="fallback"`), navigacija mora biti odmah vidljiva.
+ */
 :global(html[data-header-entrance="seen"])
   .header[data-entrance-state="pending"],
 :global(html[data-header-entrance="seen"])
@@ -204,6 +209,30 @@
   .desktopNavList
   > .navItem,
 :global(html[data-header-entrance="seen"])
+  .header[data-entrance-state="pending"]
+  .actions,
+:global(html:not([data-js]))
+  .header[data-entrance-state="pending"],
+:global(html:not([data-js]))
+  .header[data-entrance-state="pending"]
+  .brandMark,
+:global(html:not([data-js]))
+  .header[data-entrance-state="pending"]
+  .desktopNavList
+  > .navItem,
+:global(html:not([data-js]))
+  .header[data-entrance-state="pending"]
+  .actions,
+:global(html[data-route-transition="fallback"])
+  .header[data-entrance-state="pending"],
+:global(html[data-route-transition="fallback"])
+  .header[data-entrance-state="pending"]
+  .brandMark,
+:global(html[data-route-transition="fallback"])
+  .header[data-entrance-state="pending"]
+  .desktopNavList
+  > .navItem,
+:global(html[data-route-transition="fallback"])
   .header[data-entrance-state="pending"]
   .actions {
   opacity: 1;
@@ -220,7 +249,7 @@
   position: relative;
   z-index: 3;
   display: grid;
-  width: min(calc(100% - 2rem), 74rem);
+  width: min(calc(100% - 2rem), calc(74rem + var(--ds-container-grow, 0px)));
   min-height: var(--header-height);
   grid-template-columns: auto minmax(0, 1fr) auto;
   align-items: center;

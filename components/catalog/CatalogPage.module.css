@@ -70,7 +70,7 @@
 
 .topbarInner {
   display: flex;
-  max-width: 1320px;
+  max-width: calc(1320px + var(--ds-container-grow, 0px));
   align-items: center;
   justify-content: space-between;
   gap: 18px;
@@ -169,7 +169,7 @@
 }
 
 .main {
-  max-width: 1320px;
+  max-width: calc(1320px + var(--ds-container-grow, 0px));
   margin-inline: auto;
   padding: 34px 48px 96px;
 }

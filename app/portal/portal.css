@@ -828,7 +828,9 @@ body:has(.portal-login-root) {
 
 .portal-main {
   width: 100%;
-  max-width: 1680px;
+  /* Do ~1980px prozora ostaje 1680px; na 2560px raste do 2176px, jer su
+     tabele i liste ovde glavni sadržaj (ranije ~314px prazno sa svake strane). */
+  max-width: clamp(1680px, 85vw, 2200px);
   min-height: calc(100vh - 64px);
   margin: 0 auto;
   overflow-x: clip;

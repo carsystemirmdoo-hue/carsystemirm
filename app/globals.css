@@ -830,14 +830,14 @@ a[data-cursor="link"]:focus-visible {
     visibility 0ms linear 670ms;
 }
 
-html:is(
+html[data-js]:is(
     [data-route-transition="booting"],
     [data-route-transition="closing"],
     [data-route-transition="covered"],
     [data-route-transition="navigating"],
     [data-route-transition="opening"]
   ):not([data-paint-wash-disabled="true"]),
-html:is(
+html[data-js]:is(
     [data-route-transition="booting"],
     [data-route-transition="closing"],
     [data-route-transition="covered"],
@@ -852,6 +852,16 @@ html:is(
 html[data-paint-wash-disabled="true"] .cs-route-transition {
   opacity: 0 !important;
   visibility: hidden !important;
+}
+
+/*
+ * Bez JavaScripta prekrivač nikad ne bi bio sklonjen: server ga renderuje u
+ * fazi „booting“, a skida ga tek React. `data-js` postavlja inline skript u
+ * <head> (SiteAccessHandoffScript) pre prvog prikaza; bez njega nema ni
+ * prekrivača ni zaključanog skrola.
+ */
+html:not([data-js]) .cs-route-transition {
+  display: none !important;
 }
 
 .cs-route-transition[data-phase="booting"],
@@ -1928,9 +1938,18 @@ html[data-route-transition="fallback"] .cs-route-transition-screen {
   --ds-space-major: clamp(80px, 10vw, 144px);
 
   /* --- Container / alignment spine ------------------------------------- */
-  /* content = min(1208px, 100% - 2*gutter); gutter raste sa viewportom.
-     Rešava izmereno skakanje leve ivice (116 → 60 → 72 → 56 → 116 → 60px). */
-  --ds-container-max: 1208px;
+  /* content = min(container-max, 100% - 2*gutter); gutter raste sa viewportom.
+     Rešava izmereno skakanje leve ivice (116 → 60 → 72 → 56 → 116 → 60px).
+
+     Do ~1610px širine kontejner je 1208px kao i ranije. Iznad toga raste sa
+     prozorom (75vw) do 1840px: na 1920px je 1440px, na 2560px 1840px. Ranije
+     je na 2560px sadržaj zauzimao 1208px, a sa strana je ostajalo po 676px
+     prazne pozadine. Čitljivost čuvaju max-width pravila samih tekstova, ne
+     kontejner. `--ds-container-grow` je koliko je kontejner porastao iznad
+     1208px — kontejneri sa sopstvenom širinom (header, footer, katalog…)
+     rastu za isto toliko, pa poravnanje ostaje isto kao na 1440px. */
+  --ds-container-max: clamp(1208px, 75vw, 1840px);
+  --ds-container-grow: calc(var(--ds-container-max) - 1208px);
   --ds-gutter: clamp(20px, 4vw, 56px);
 
   /* --- Radius — jedna vrednost (audit: broj radijusa ne korelira sa

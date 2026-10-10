@@ -21,7 +21,9 @@ export function CounterUp({
   const delayRef = useRef(0);
   const ref = useRef<HTMLSpanElement>(null);
   const hasStartedRef = useRef(false);
-  const [displayValue, setDisplayValue] = useState(0);
+  // Server i prvi prikaz nose stvarnu vrednost: bez JavaScripta (ili kad
+  // animacija ne krene) brojač ne sme da ostane na nuli.
+  const [displayValue, setDisplayValue] = useState(value);
 
   useEffect(() => {
     if (prefersReducedMotion) {
@@ -32,6 +34,7 @@ export function CounterUp({
 
     const node = ref.current;
     if (!node) return undefined;
+    if (!hasStartedRef.current) setDisplayValue(0);
 
     function startCount() {
       const startedAt = performance.now();

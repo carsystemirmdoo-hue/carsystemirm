@@ -54,6 +54,22 @@
   --takeover-canvas: #1d0f2e;
 }
 
+/*
+ * Bez JavaScripta (ili kad pokretanje padne na rezervni izlaz) niko ne pomera
+ * promenljive iz početnog, skrivenog stanja, pa je sekcija bila prazna površina
+ * visine 1,5 ekrana. Tada se prikazuje završni kadar: pozadina, kontrast i
+ * tekst. Kad skript radi, njegove inline vrednosti imaju prednost.
+ */
+:global(html:not([data-js])) .section,
+:global(html[data-route-transition="fallback"]) .section {
+  --surface-offset: 0px;
+  --background-opacity: 1;
+  --hero-global-opacity: 1;
+  --content-opacity: 1;
+  --content-offset: 0px;
+  --contrast-opacity: 1;
+}
+
 .section[data-paint-debug-layout="true"] {
   outline: 2px solid #ffd84a;
   outline-offset: -2px;

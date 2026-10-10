@@ -41,7 +41,7 @@ export function Footer() {
         data-motion-surface
       >
         <span className="cs-footer-ambient" aria-hidden="true" />
-        <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6 lg:py-16">
+        <div className="mx-auto max-w-[calc(72rem+var(--ds-container-grow,0px))] px-4 py-12 sm:px-6 lg:py-16">
           <div className="grid gap-10 lg:grid-cols-[1.15fr_1.6fr_0.95fr] lg:gap-12">
             <section className="max-w-md" aria-label="Carsystem i R-M">
               <p className="font-[var(--font-display)] text-xl font-black uppercase leading-none tracking-normal sm:text-2xl">

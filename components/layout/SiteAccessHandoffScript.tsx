@@ -6,8 +6,43 @@ import {
 import { HEADER_ENTRANCE_STORAGE_KEY } from "@/lib/header-entrance";
 import { PORTAL_ROUTE_TRANSITION_RELEASE } from "@/lib/portalRouteTransition.mjs";
 
+const BOOT_FALLBACK_MS = 6000;
+
 const SITE_ACCESS_HANDOFF_SCRIPT = `
 (function () {
+  /*
+   * \`data-js\` kaže CSS-u da JavaScript radi. Bez njega (isključen JS, blokiran
+   * inline skript) prekrivač učitavanja i skriveno zaglavlje se uopšte ne
+   * prikazuju, pa sadržaj ostaje vidljiv i upotrebljiv.
+   */
+  document.documentElement.setAttribute("data-js", "");
+
+  /*
+   * Last-resort boot protection. The React state machine normally clears the
+   * boot phase much earlier. This only runs if hydration or its JS chunk
+   * never becomes operational. Registered before anything that can throw:
+   * with blocked site data, \`sessionStorage\` throws and the old placement
+   * inside the try block left the page covered forever.
+   */
+  var releaseBoot = function () {
+    if (document.documentElement.dataset.routeTransition !== "booting") return;
+    document.documentElement.dataset.routeTransition = "fallback";
+    if (document.body) document.body.removeAttribute("aria-busy");
+  };
+  window.setTimeout(releaseBoot, ${BOOT_FALLBACK_MS});
+
+  /*
+   * Ne čekati ceo rezervni rok kad je jasno da pokretanje neće uspeti:
+   * JS paket nije stigao (proxy, antivirus, prekinuta veza) ili je kod pukao
+   * pre nego što je React preuzeo stranicu (npr. API koji stariji pregledač
+   * nema). Sadržaj sa servera je tada već tu i treba ga odmah pokazati.
+   */
+  window.addEventListener("error", function (event) {
+    var target = event.target;
+    var failedScript = target && target.tagName === "SCRIPT";
+    if (failedScript || event.error || event.message) releaseBoot();
+  }, true);
+
   try {
     var path = window.location.pathname;
 ${PORTAL_ROUTE_TRANSITION_RELEASE}
@@ -50,16 +85,6 @@ ${PORTAL_ROUTE_TRANSITION_RELEASE}
       }
     }
 
-    /*
-     * Last-resort boot protection. The React state machine normally clears the
-     * boot phase much earlier. This only runs if hydration or its JS chunk
-     * never becomes operational.
-     */
-    window.setTimeout(function () {
-      if (document.documentElement.dataset.routeTransition !== "booting") return;
-      document.documentElement.dataset.routeTransition = "fallback";
-      if (document.body) document.body.removeAttribute("aria-busy");
-    }, 6000);
   } catch (error) {
     delete document.documentElement.dataset.siteAccessHandoff;
   }

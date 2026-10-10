@@ -11,7 +11,7 @@ export const dynamic = "force-dynamic";
 const GROUPS = [
   { key: "new", title: "Novi — čekaju prijem", statuses: ["submitted"] },
   { key: "review", title: "U obradi", statuses: ["under_review"] },
-  { key: "waiting", title: "Čeka se kupac", statuses: ["changes_requested"] },
+  { key: "waiting", title: "Čeka se kupac", statuses: ["changes_requested", "awaiting_customer"] },
   { key: "confirmed", title: "Potvrđene porudžbine", statuses: ["confirmed"] },
   { key: "closed", title: "Odbijeni, otkazani i vraćeni na ispravku", statuses: ["rejected", "cancelled", "superseded"] },
 ];
@@ -95,9 +95,13 @@ export default async function OrderRequestsPage({ searchParams }: { searchParams
                           <small>
                             {o.orderNumber ? `zahtev ${o.requestNumber}` : `${o.lineCount} stavki`}
                             {o.replacesNumber ? ` · ispravka ${o.replacesNumber}` : ""}
+                            {o.revisionNo > 1 ? ` · verzija ${o.revisionNo}` : ""}
                           </small>
                         </span>
-                        <span>{o.customerName}</span>
+                        <span>
+                          {o.customerName}
+                          {o.paymentOptionLabel ? <small>{o.paymentOptionLabel}</small> : null}
+                        </span>
                         <span>{srDateTime(o.submittedAt)}</span>
                         <span>
                           <OrderStatusBadge status={o.status} />
@@ -105,6 +109,7 @@ export default async function OrderRequestsPage({ searchParams }: { searchParams
                         <span className="ka-amount">
                           {srMoney(String(o.grossTotal), o.currency)}
                           {o.priceListKind === "demo" ? <small>demo cene</small> : null}
+                          {o.onRequestLinesCount ? <small>+ {o.onRequestLinesCount} na upit</small> : null}
                         </span>
                       </Link>
                     </li>

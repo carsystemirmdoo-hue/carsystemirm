@@ -9034,3 +9034,82 @@ section.portal-metrics {
   .rc-preview .rr-table th, .rc-preview .rr-table td { padding: 3px 0; border: 0; }
   .rc-preview .rr-table td[data-label]::before { content: attr(data-label); display: block; color: var(--p-muted); font-size: 11px; font-weight: 650; text-transform: uppercase; letter-spacing: 0.04em; }
 }
+
+/* Zahtev za porudžbinu — dokument za štampu (A4). */
+.zp-doc { background: #fff; color: #111; max-width: 210mm; margin: 0 auto; padding: 14mm 12mm; font: 9.5pt/1.35 "IBM Plex Sans", Arial, sans-serif; box-shadow: 0 1px 4px rgba(0,0,0,.12); }
+.zp-head { display: flex; justify-content: space-between; gap: 12mm; border-bottom: 2px solid #111; padding-bottom: 4mm; margin-bottom: 4mm; }
+.zp-head h1 { font-size: 16pt; margin: 0; }
+.zp-not { margin: 1mm 0 0; font-size: 8.5pt; color: #444; }
+.zp-head dl { margin: 0; display: grid; grid-template-columns: auto auto; gap: 0 4mm; font-size: 9pt; }
+.zp-head dl div { display: contents; }
+.zp-head dt { color: #555; }
+.zp-head dd { margin: 0; font-weight: 600; }
+.zp-parties { display: grid; grid-template-columns: 1fr 1fr; gap: 8mm; margin-bottom: 4mm; }
+.zp-parties h2, .zp-h { font-size: 10pt; margin: 0 0 1mm; text-transform: uppercase; letter-spacing: .04em; }
+.zp-parties p { margin: 0 0 .6mm; }
+.zp-table { width: 100%; border-collapse: collapse; table-layout: fixed; font-size: 8.5pt; margin: 2mm 0 3mm; }
+.zp-table th, .zp-table td { border: 1px solid #999; padding: 1.2mm 1.4mm; vertical-align: top; overflow-wrap: anywhere; word-break: normal; }
+.zp-table td:first-child { white-space: nowrap; }
+.zp-table th { background: #eee; font-weight: 600; text-align: left; overflow-wrap: normal; hyphens: manual; }
+.zp-table .r { text-align: right; font-variant-numeric: tabular-nums; }
+.zp-table .c-rb { width: 9mm; } .zp-table .c-sifra { width: 15mm; } .zp-table .c-jm { width: 22mm; } .zp-table .c-kol { width: 15mm; }
+.zp-table .c-cena { width: 19mm; } .zp-table .c-rabat { width: 12mm; } .zp-table .c-iznos { width: 21mm; } .zp-table .c-pdv { width: 11mm; } .zp-table .c-razlog { width: 45mm; }
+.zp-totals { display: flex; justify-content: flex-end; flex-direction: column; align-items: flex-end; margin-bottom: 4mm; }
+.zp-totals dl { margin: 0; display: grid; grid-template-columns: auto auto; gap: .6mm 6mm; }
+.zp-totals dl div { display: contents; }
+.zp-totals dd { margin: 0; text-align: right; font-variant-numeric: tabular-nums; }
+.zp-grand dt, .zp-grand dd { font-weight: 700; font-size: 10.5pt; }
+.zp-notes p { margin: 0 0 1mm; }
+.zp-foot { margin-top: 5mm; border-top: 1px solid #999; padding-top: 2mm; font-size: 8pt; color: #444; }
+.zp-screen-only { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
+@media (max-width: 720px) {
+  .zp-doc { padding: 12px; font-size: 12px; box-shadow: none; }
+  .zp-head, .zp-parties { display: block; }
+  .zp-doc .zp-table { display: block; overflow-x: auto; }
+}
+@media print {
+  @page { size: A4 portrait; margin: 11mm 10mm 12mm; }
+  .portal-root:has(.zp-doc) .portal-sidebar,
+  .portal-root:has(.zp-doc) .portal-topbar,
+  .portal-root:has(.zp-doc) .portal-mobile-scrim,
+  .portal-root:has(.zp-doc) .portal-data-strip,
+  .portal-root:has(.zp-doc) [class*="data-strip"],
+  .zp-screen-only, nextjs-portal { display: none !important; }
+  .portal-root:has(.zp-doc), .portal-root:has(.zp-doc) .portal-workspace, .portal-root:has(.zp-doc) .portal-main { display: block !important; margin: 0 !important; padding: 0 !important; background: #fff !important; min-height: 0 !important; overflow: visible !important; }
+  html, body, .portal-root:has(.zp-doc), .portal-root:has(.zp-doc) .portal-workspace, .portal-root:has(.zp-doc) .portal-main { background: #fff !important; }
+  .zp-doc { box-shadow: none; max-width: none; margin: 0; padding: 0; font-size: 9pt; }
+  .zp-doc .zp-table { display: table; }
+  .zp-table thead { display: table-header-group; }
+  .zp-table tr, .zp-totals, .zp-parties { break-inside: avoid; }
+}
+
+/* Zahtev iz stvarnog cenovnika: izbor robe i korpa (kupac). */
+.kn-table td strong { white-space: nowrap; }
+.kn-add { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+.kn-add input { width: 72px; }
+.kr-cart { display: grid; gap: 14px; }
+.kr-options { border: 0; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 10px; }
+.kr-options legend { font-weight: 650; margin-bottom: 6px; }
+.kr-option { display: grid; gap: 2px; padding: 10px 14px; border: 1px solid var(--p-line); border-radius: 10px; color: inherit; text-decoration: none; min-width: 220px; }
+.kr-option small { color: var(--p-muted); font-size: 12px; }
+.kr-option[aria-current="true"] { border-color: var(--p-ink); box-shadow: inset 0 0 0 1px var(--p-ink); }
+.kr-lines { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+.kr-lines > li { display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 2fr) 120px minmax(0, 1fr); gap: 10px 16px; align-items: start; padding: 12px 0; border-bottom: 1px solid var(--p-line); }
+.kr-lines > li[data-on-request] { background: color-mix(in oklch, var(--p-surface, #fff) 92%, orange); }
+.kr-name { display: grid; gap: 2px; }
+.kr-name small { color: var(--p-muted); }
+.kr-prices { list-style: none; margin: 0; padding: 0; display: grid; gap: 4px; font-size: 13px; }
+.kr-prices li { display: flex; justify-content: space-between; gap: 8px; padding: 2px 6px; border-radius: 6px; }
+.kr-prices li[aria-current="true"] { background: color-mix(in oklch, var(--p-surface, #fff) 88%, var(--p-ink, #111)); font-weight: 650; }
+.kr-prices small { color: var(--p-muted); font-weight: 400; }
+.kr-qty { display: grid; gap: 2px; font-size: 13px; }
+.kr-qty input { width: 100%; }
+.kr-amount { display: grid; gap: 4px; justify-items: end; }
+.kr-fields { display: grid; gap: 10px; }
+.kr-reauth { display: flex; gap: 10px; align-items: end; flex-wrap: wrap; }
+.kk-lines .kk-on-request { grid-column: span 3; color: var(--p-muted); }
+@media (max-width: 720px) {
+  .kr-lines > li { grid-template-columns: 1fr; }
+  .kr-amount { justify-items: start; }
+  .kr-option { min-width: 0; width: 100%; }
+}

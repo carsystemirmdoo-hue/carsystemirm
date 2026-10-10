@@ -591,6 +591,10 @@ export type OrderListRow = {
   customerName: string;
   customerId: string;
   replacesNumber: string | null;
+  /** 0044 */
+  paymentOptionLabel: string | null;
+  onRequestLinesCount: number;
+  revisionNo: number;
 };
 
 function scopeWhere(scope: LedgerScope): SQL {
@@ -604,8 +608,10 @@ async function listOrders(where: SQL): Promise<OrderListRow[]> {
     id: string; request_number: string; order_number: string | null; status: string; submitted_at: Date;
     gross_total: string; currency: string; line_count: number; price_list_kind: "demo" | "biznisoft";
     customer_name: string; customer_id: string; replaces_number: string | null;
+    payment_option_label: string | null; on_request_lines: number; revision: number;
   }>(sql`
     SELECT o.id, o.request_number, o.order_number, o.status::text AS status, o.submitted_at,
+           o.payment_option_label, o.on_request_lines, o.revision,
            (SELECT p.request_number FROM customer_orders p WHERE p.id = o.replaces_order_id) AS replaces_number,
            o.gross_total::text AS gross_total, o.currency, o.price_list_kind::text AS price_list_kind,
            (SELECT count(*)::int FROM customer_order_lines l WHERE l.order_id = o.id) AS line_count,
@@ -619,6 +625,7 @@ async function listOrders(where: SQL): Promise<OrderListRow[]> {
     submittedAt: new Date(r.submitted_at), grossTotal: Number(r.gross_total), currency: r.currency,
     lineCount: r.line_count, priceListKind: r.price_list_kind, customerName: r.customer_name, customerId: r.customer_id,
     replacesNumber: r.replaces_number,
+    paymentOptionLabel: r.payment_option_label, onRequestLinesCount: Number(r.on_request_lines), revisionNo: Number(r.revision),
   }));
 }
 
@@ -632,14 +639,28 @@ export type OrderDetail = OrderListRow & {
   biznisoftDocumentNumber: string | null;
   biznisoftRecordedAt: Date | null;
   submittedByName: string;
+  /** 0044 */
+  pricingSource: "demo" | "cenovnik";
+  paymentOption: string | null;
+  paymentOptionLabel: string | null;
+  revision: number;
+  deliveryAddress: string | null;
+  contactPhone: string | null;
+  contactEmail: string | null;
+  partnerCode: string | null;
+  preparedByName: string | null;
+  onRequestLines: number;
   lines: {
-    lineNumber: number; articleId: string; articleCode: string; articleName: string; catalogSlug: string; catalogVariantId: string | null;
+    lineNumber: number; articleId: string; articleCode: string; articleName: string; catalogSlug: string | null; catalogVariantId: string | null;
     variantLabel: string | null;
-    catalogName: string; unit: string; packLabel: string; quantity: number; listPrice: number; discountPercent: number;
-    netPrice: number; vatPercent: number; lineNet: number; lineVat: number; lineGross: number; priceBasis: string;
+    catalogName: string | null; unit: string; packLabel: string; packConfirmed: boolean; quantity: number; listPrice: number | null; discountPercent: number | null;
+    netPrice: number | null; vatPercent: number | null; lineNet: number | null; lineVat: number | null; lineGross: number | null; priceBasis: string;
+    priceStatus: "cena" | "na_upit"; onRequestReason: string | null;
   }[];
   events: { at: Date; fromStatus: string | null; toStatus: string | null; kind: string; actor: string; staff: boolean; reason: string | null }[];
 };
+
+const num = (v: string | null | undefined) => (v === null || v === undefined ? null : Number(v));
 
 async function loadOrder(where: SQL): Promise<OrderDetail | null> {
   const db = getDb();
@@ -648,21 +669,30 @@ async function loadOrder(where: SQL): Promise<OrderDetail | null> {
       id: string; request_number: string; order_number: string | null; status: string; submitted_at: Date;
       gross_total: string; net_total: string; vat_total: string; currency: string; price_list_kind: "demo" | "biznisoft";
       customer_name: string; customer_id: string; customer_note: string | null; status_reason: string | null;
-      biznisoft_document_number: string | null; biznisoft_recorded_at: Date | null; submitted_by_name: string;
+      biznisoft_document_number: string | null; biznisoft_recorded_at: Date | null; submitted_by_name: string | null;
+      pricing_source: "demo" | "cenovnik"; payment_option: string | null; payment_option_label: string | null; revision: number;
+      delivery_address: string | null; contact_phone: string | null; contact_email: string | null; partner_code: string | null;
+      prepared_by_name: string | null; on_request_lines: number;
       replaces_id: string | null; replaces_number: string | null; replaced_by_id: string | null; replaced_by_number: string | null;
     }>(sql`
       SELECT o.id, o.request_number, o.order_number, o.status::text AS status, o.submitted_at,
              o.gross_total::text AS gross_total, o.net_total::text AS net_total, o.vat_total::text AS vat_total,
              o.currency, o.price_list_kind::text AS price_list_kind, c.name AS customer_name, c.id AS customer_id,
              o.customer_note, o.status_reason, o.biznisoft_document_number, o.biznisoft_recorded_at,
-             cu.name AS submitted_by_name,
+             cu.name AS submitted_by_name, cu.email AS contact_email,
+             o.pricing_source, o.payment_option, o.payment_option_label, o.revision, o.delivery_address, o.contact_phone,
+             o.on_request_lines, pu.name AS prepared_by_name,
+             (SELECT e.external_partner_code FROM customer_external_identifiers e
+               WHERE e.customer_id = c.id AND e.source_system = 'biznisoft' AND e.status = 'mapped'
+               ORDER BY e.external_partner_code LIMIT 1) AS partner_code,
              o.replaces_order_id AS replaces_id,
              (SELECT p.request_number FROM customer_orders p WHERE p.id = o.replaces_order_id) AS replaces_number,
              (SELECT r.id FROM customer_orders r WHERE r.replaces_order_id = o.id) AS replaced_by_id,
              (SELECT r.request_number FROM customer_orders r WHERE r.replaces_order_id = o.id) AS replaced_by_number
         FROM customer_orders o
         JOIN customers c ON c.id = o.customer_id
-        JOIN customer_users cu ON cu.id = o.submitted_by
+        LEFT JOIN customer_users cu ON cu.id = o.submitted_by
+        LEFT JOIN users pu ON pu.id = o.prepared_by
        WHERE ${where}
        LIMIT 1`)),
   ];
@@ -671,8 +701,8 @@ async function loadOrder(where: SQL): Promise<OrderDetail | null> {
     db.execute<Record<string, string>>(sql`
       SELECT line_number::text, article_id, article_code, article_name, catalog_product_slug, catalog_variant_id, catalog_name,
              unit, pack_label, quantity::text, list_price::text, discount_percent::text, net_price::text, vat_percent::text,
-             line_net::text, line_vat::text, line_gross::text, price_basis
-        FROM customer_order_lines WHERE order_id = ${head.id} ORDER BY line_number`),
+             line_net::text, line_vat::text, line_gross::text, price_basis, price_status, on_request_reason, pack_confirmed::text
+        FROM customer_order_lines WHERE order_id = ${head.id} ORDER BY customer_order_lines.line_number`),
     db.execute<{ created_at: Date; from_status: string | null; to_status: string | null; kind: string; actor_name: string; staff: boolean; reason: string | null }>(sql`
       SELECT created_at, from_status::text AS from_status, to_status::text AS to_status, kind, actor_name,
              (actor_user_id IS NOT NULL) AS staff, reason
@@ -686,16 +716,29 @@ async function loadOrder(where: SQL): Promise<OrderDetail | null> {
     customerNote: head.customer_note, statusReason: head.status_reason,
     biznisoftDocumentNumber: head.biznisoft_document_number,
     biznisoftRecordedAt: head.biznisoft_recorded_at ? new Date(head.biznisoft_recorded_at) : null,
-    submittedByName: head.submitted_by_name,
+    submittedByName: head.submitted_by_name ?? (head.prepared_by_name ? `kancelarija (${head.prepared_by_name})` : "—"),
+    pricingSource: head.pricing_source,
+    paymentOption: head.payment_option,
+    paymentOptionLabel: head.payment_option_label,
+    revision: Number(head.revision),
+    deliveryAddress: head.delivery_address,
+    contactPhone: head.contact_phone,
+    contactEmail: head.contact_email,
+    partnerCode: head.partner_code,
+    preparedByName: head.prepared_by_name,
+    onRequestLines: Number(head.on_request_lines),
+    onRequestLinesCount: Number(head.on_request_lines),
+    revisionNo: Number(head.revision),
     replaces: head.replaces_id ? { id: head.replaces_id, requestNumber: head.replaces_number! } : null,
     replacedBy: head.replaced_by_id ? { id: head.replaced_by_id, requestNumber: head.replaced_by_number! } : null,
     lines: [...lines].map((l) => ({
       lineNumber: Number(l.line_number), articleId: l.article_id, articleCode: l.article_code, articleName: l.article_name,
       catalogSlug: l.catalog_product_slug, catalogVariantId: l.catalog_variant_id, catalogName: l.catalog_name,
       variantLabel: variantLabelFor(l.catalog_product_slug, l.catalog_variant_id),
-      unit: l.unit, packLabel: l.pack_label, quantity: Number(l.quantity), listPrice: Number(l.list_price),
-      discountPercent: Number(l.discount_percent), netPrice: Number(l.net_price), vatPercent: Number(l.vat_percent),
-      lineNet: Number(l.line_net), lineVat: Number(l.line_vat), lineGross: Number(l.line_gross), priceBasis: l.price_basis,
+      unit: l.unit, packLabel: l.pack_label, packConfirmed: l.pack_confirmed === "true", quantity: Number(l.quantity), listPrice: num(l.list_price),
+      discountPercent: num(l.discount_percent), netPrice: num(l.net_price), vatPercent: num(l.vat_percent),
+      lineNet: num(l.line_net), lineVat: num(l.line_vat), lineGross: num(l.line_gross), priceBasis: l.price_basis,
+      priceStatus: (l.price_status === "na_upit" ? "na_upit" : "cena") as "cena" | "na_upit", onRequestReason: l.on_request_reason,
     })),
     events: [...events].map((e) => ({
       at: new Date(e.created_at), fromStatus: e.from_status, toStatus: e.to_status, kind: e.kind,

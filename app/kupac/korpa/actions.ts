@@ -15,6 +15,7 @@ import {
   type SubmitResult,
   type TransitionResult,
 } from "@/lib/ordering/ordering-service";
+import { answerOrderRevision, setRequestQuantity, submitOrderRequest, type RequestSubmitResult } from "@/lib/ordering/request-service";
 
 /*
  * Kupčeve akcije nad korpom i zahtevima.
@@ -81,4 +82,38 @@ export async function confirmPasswordAction(password: string): Promise<{ ok: boo
     throw error;
   }
   return { ok: true };
+}
+
+/* ---------------------------------------------------------------------------
+ * Zahtev iz stvarnog cenovnika (CUSTOMER_ORDERING=cenovnik, 0044)
+ * ------------------------------------------------------------------------ */
+
+export async function setRequestQuantityAction(input: { articleId: string; quantity: string }) {
+  const session = await requireCustomerSession("/kupac/korpa");
+  const r = await setRequestQuantity(session, input);
+  revalidatePath("/kupac/korpa");
+  return r;
+}
+
+export async function submitRequestAction(input: {
+  idempotencyKey: string;
+  fingerprint: string;
+  paymentOption: string | null;
+  note: string;
+  deliveryAddress: string;
+  contactPhone: string;
+}): Promise<RequestSubmitResult> {
+  const session = await requireCustomerSession("/kupac/korpa");
+  const r = await submitOrderRequest(session, input);
+  // Korpa se ne osvežava ovde: kupac odmah prelazi na stranu zahteva (inače bi prazna korpa sakrila potvrdu).
+  revalidatePath("/kupac/porudzbine");
+  return r;
+}
+
+export async function answerRevisionAction(orderId: string, accept: boolean) {
+  const session = await requireCustomerSession("/kupac/porudzbine");
+  const r = await answerOrderRevision(session, orderId, accept);
+  revalidatePath(`/kupac/porudzbine/${orderId}`);
+  revalidatePath("/kupac/porudzbine");
+  return r;
 }

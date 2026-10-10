@@ -22,14 +22,17 @@ function eventText(e: OrderDetail["events"][number]) {
  */
 export function OrderDetailView({ order, audience }: { order: OrderDetail; audience: "customer" | "office" }) {
   const base = audience === "office" ? "/portal/zahtevi" : "/kupac/porudzbine";
-  const money = (n: number) => srMoney(String(n), order.currency);
+  const money = (n: number | null) => (n === null ? "—" : srMoney(String(n), order.currency));
   const confirmed = order.status === "confirmed";
   return (
     <>
       <div className="kk-order-head">
         <div>
           <span className="ka-eyebrow">{confirmed ? "Potvrđena porudžbina" : "Zahtev za porudžbinu"}</span>
-          <h2>{confirmed ? order.orderNumber : order.requestNumber}</h2>
+          <h2>
+            {confirmed ? order.orderNumber : order.requestNumber}
+            {order.revision > 1 ? <small> · verzija {order.revision}</small> : null}
+          </h2>
           <p>
             {confirmed ? <>Iz zahteva {order.requestNumber} · </> : null}
             Poslato {srDateTime(order.submittedAt)} · {order.submittedByName}
@@ -56,6 +59,21 @@ export function OrderDetailView({ order, audience }: { order: OrderDetail; audie
             <strong>Razlog kancelarije:</strong> {order.statusReason}
           </p>
         ) : null}
+        {order.paymentOptionLabel ? (
+          <p>
+            <strong>Plaćanje:</strong> {order.paymentOptionLabel}
+            {order.paymentOption === "avans" ? " — cena važi uz uplatu pre isporuke; kancelarija proverava uplatu pre potvrde isporuke." : ""}
+            {" "}Izbor opcije nije dokaz uplate.
+          </p>
+        ) : null}
+        {order.onRequestLines ? (
+          <p>
+            <strong>Stavke na upit: {order.onRequestLines}.</strong> Za njih nema potvrđene cene za izabranu opciju; nisu u zbiru — cenu potvrđuje kancelarija.
+          </p>
+        ) : null}
+        {order.pricingSource === "cenovnik" && order.status === "submitted" ? (
+          <p>Zahtev je primljen. Raspoloživost i isporuku potvrđuje kancelarija; slanje ne pravi fakturu ni rezervaciju.</p>
+        ) : null}
         {order.priceListKind === "demo" ? (
           <p className="kk-demo-note">DEMO: izmišljene cene iz demo cenovnika. Ovaj zahtev ne ide u BizniSoft.</p>
         ) : null}
@@ -64,7 +82,9 @@ export function OrderDetailView({ order, audience }: { order: OrderDetail; audie
       <dl className="ka-facts ka-facts-wide">
         <div><dt>Osnovica (bez PDV-a)</dt><dd>{money(order.netTotal)}</dd></div>
         <div><dt>PDV</dt><dd>{money(order.vatTotal)}</dd></div>
-        <div><dt>Ukupno sa PDV-om</dt><dd>{money(order.grossTotal)}</dd></div>
+        <div><dt>Ukupno sa PDV-om</dt><dd>{money(order.grossTotal)}{order.onRequestLines ? <small>bez {order.onRequestLines} stavki na upit</small> : null}</dd></div>
+        {order.deliveryAddress ? <div><dt>Adresa isporuke</dt><dd>{order.deliveryAddress}</dd></div> : null}
+        {order.contactPhone || order.contactEmail ? <div><dt>Kontakt</dt><dd>{[order.contactPhone, order.contactEmail].filter(Boolean).join(" · ")}</dd></div> : null}
         <div>
           <dt>BizniSoft</dt>
           <dd>
@@ -89,9 +109,13 @@ export function OrderDetailView({ order, audience }: { order: OrderDetail; audie
             <li key={l.lineNumber}>
               <span className="kk-name">
                 <span>
-                  <Link href={`/proizvodi/${l.catalogSlug}${l.catalogVariantId ? `?varijanta=${encodeURIComponent(l.catalogVariantId)}` : ""}`}>
-                    {l.catalogName}
-                  </Link>
+                  {l.catalogSlug ? (
+                    <Link href={`/proizvodi/${l.catalogSlug}${l.catalogVariantId ? `?varijanta=${encodeURIComponent(l.catalogVariantId)}` : ""}`}>
+                      {l.catalogName}
+                    </Link>
+                  ) : (
+                    <strong>{l.articleName}</strong>
+                  )}
                   {l.variantLabel ? <small>Varijanta: {l.variantLabel}</small> : null}
                   {/*
                     Kupac vidi kataloški naziv, varijantu, pakovanje i šifru sa svojih
@@ -105,22 +129,31 @@ export function OrderDetailView({ order, audience }: { order: OrderDetail; audie
                 </span>
               </span>
               <span data-label="Pakovanje">
-                {l.packLabel}
-                <small>JM: {l.unit}</small>
+                {l.packConfirmed ? l.packLabel : `JM: ${l.unit}`}
+                <small>{l.packConfirmed ? `JM: ${l.unit}` : "pakovanje nije potvrđeno — cena po JM"}</small>
               </span>
               <span data-label="Količina">{qfmt.format(l.quantity)}</span>
-              <span data-label="Cena bez PDV-a">
-                {money(l.netPrice)}
-                {l.discountPercent ? <small>cenovnik {money(l.listPrice)} − {qfmt.format(l.discountPercent)} %</small> : null}
-              </span>
-              <span data-label="PDV">
-                {money(l.lineVat)}
-                <small>{qfmt.format(l.vatPercent)} %</small>
-              </span>
-              <span data-label="Ukupno" className="ka-amount">
-                {money(l.lineGross)}
-                <small>bez PDV-a {money(l.lineNet)}</small>
-              </span>
+              {l.priceStatus === "na_upit" ? (
+                <span data-label="Cena" className="kk-on-request">
+                  Na upit
+                  <small>{l.onRequestReason ?? "cenu potvrđuje kancelarija"}</small>
+                </span>
+              ) : (
+                <>
+                  <span data-label="Cena bez PDV-a">
+                    {money(l.netPrice)}
+                    {l.discountPercent ? <small>cenovnik {money(l.listPrice)} − {qfmt.format(l.discountPercent)} %</small> : null}
+                  </span>
+                  <span data-label="PDV">
+                    {money(l.lineVat)}
+                    <small>{l.vatPercent === null ? "—" : qfmt.format(l.vatPercent)} %</small>
+                  </span>
+                  <span data-label="Ukupno" className="ka-amount">
+                    {money(l.lineGross)}
+                    <small>bez PDV-a {money(l.lineNet)}</small>
+                  </span>
+                </>
+              )}
             </li>
           ))}
         </ol>

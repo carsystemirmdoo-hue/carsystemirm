@@ -5,6 +5,7 @@ import { can } from "@/lib/authz/permissions.mjs";
 import { requireCapability } from "@/lib/authz/session";
 import { loadOrderRequest } from "@/lib/ordering/ordering-service";
 import { OfficeOrderActions } from "./OfficeOrderActions";
+import { RevisionForm } from "./RevisionForm";
 
 export const dynamic = "force-dynamic";
 
@@ -17,7 +18,8 @@ export default async function OrderRequestPage({ params }: { params: Promise<{ i
   return (
     <>
       <p className="kk-back">
-        <Link href="/portal/zahtevi">← Svi zahtevi</Link> · <Link href={`/portal/kupci/${order.customerId}`}>Kartica kupca</Link>
+        <Link href="/portal/zahtevi">← Svi zahtevi</Link> · <Link href={`/portal/kupci/${order.customerId}`}>Kartica kupca</Link> ·{" "}
+        <Link href={`/portal/zahtevi/${order.id}/stampa`} className="portal-button" data-variant="secondary">Odštampajte zahtev</Link>
       </p>
       <section className="portal-panel">
         <OrderDetailView order={order} audience="office" />
@@ -28,6 +30,11 @@ export default async function OrderRequestPage({ params }: { params: Promise<{ i
           canConfirm={can(user, "customer_orders:confirm")}
           biznisoftDocumentNumber={order.biznisoftDocumentNumber}
         />
+        {order.pricingSource === "cenovnik" && ["submitted", "under_review"].includes(order.status) && can(user, "customer_orders:review") ? (
+          <div className="portal-panel-body">
+            <RevisionForm orderId={order.id} lines={order.lines.map((l) => ({ code: l.articleCode, name: l.articleName, unit: l.unit, quantity: String(l.quantity) }))} />
+          </div>
+        ) : null}
       </section>
     </>
   );

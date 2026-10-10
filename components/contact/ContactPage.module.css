@@ -14,7 +14,7 @@
 }
 
 .main {
-  max-width: 1320px;
+  max-width: calc(1320px + var(--ds-container-grow, 0px));
   margin-inline: auto;
   padding: clamp(40px, 6vw, 84px) clamp(16px, 4vw, 48px) clamp(56px, 7vw, 110px);
   display: grid;

@@ -60,7 +60,9 @@
 
 .kicker {
   margin: 0;
-  color: var(--manufacturer-accent);
+  /* Tekst, ne ispuna: u katalogu postoji posebna tekstualna crvena (svetla i
+     tamna tema); --manufacturer-accent je ispuna i kao tekst na tamnom daje 3.83:1. */
+  color: var(--catalog-red-bright, var(--manufacturer-accent));
   font-family: var(--font-technical), var(--font-geist-mono), monospace;
   font-size: 10px;
   font-weight: 850;

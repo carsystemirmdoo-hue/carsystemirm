@@ -57,6 +57,7 @@ export function RebateChangePanel({
   const [reason, setReason] = useState("");
   const [include, setInclude] = useState<Set<string>>(new Set());
   const [approveNow, setApproveNow] = useState(false);
+  const [condition, setCondition] = useState<"" | "kratak_rok">("");
   const [preview, setPreview] = useState<Preview | null>(null);
   const [msg, setMsg] = useState<{ ok: boolean; text: string } | null>(null);
   const [pending, start] = useTransition();
@@ -74,6 +75,7 @@ export function RebateChangePanel({
     newPercent: Number(percent.replace(",", ".")),
     effectiveFrom: from,
     includeExceptions: [...inc],
+    paymentCondition: condition || null,
   });
   const runPreview = (inc = include) =>
     start(async () => {
@@ -175,6 +177,14 @@ export function RebateChangePanel({
         </div>
       ) : null}
 
+      <label className="rr-field">
+        <span>Uslov plaćanja</span>
+        <select value={condition} onChange={(e) => { setCondition(e.target.value as "" | "kratak_rok"); reset(); }}>
+          <option value="">Bez uslova — podrazumevani rabat</option>
+          <option value="kratak_rok">Samo uz kratak rok plaćanja (do 7 dana) — za potvrdu</option>
+        </select>
+        <small>Uslovni rabat važi samo kada kupac izabere i ispuni uslov; nikad nije podrazumevan i ne menja rabat bez uslova.</small>
+      </label>
       <div className="rc-inline">
         <label className="rr-field rr-field-short">
           <span>Novi rabat (%)</span>
@@ -194,6 +204,7 @@ export function RebateChangePanel({
         <div className="rc-preview">
           <h3>
             Pregled: {pct(preview.newPercent)} od {preview.effectiveFrom}
+            {preview.paymentCondition ? " · samo uz kratak rok plaćanja" : ""}
             {preview.group ? ` · grupa „${preview.group.key}“ (sada ${pct(preview.group.percent)})` : ""}
           </h3>
           <div className="portal-table-wrap">

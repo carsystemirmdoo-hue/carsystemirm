@@ -76,6 +76,10 @@ REVOKE DELETE, TRUNCATE ON price_list_imports FROM :runtime_role;
 REVOKE UPDATE, DELETE, TRUNCATE ON article_programme_decisions FROM :runtime_role;
 GRANT SELECT, INSERT ON article_programme_decisions TO :runtime_role;
 
+--    Poslovni status kupca (0042): odluke se samo dodaju; važi poslednja.
+REVOKE UPDATE, DELETE, TRUNCATE ON customer_commercial_status_decisions FROM :runtime_role;
+GRANT SELECT, INSERT ON customer_commercial_status_decisions TO :runtime_role;
+
 --    Potvrda kontakta se ne briše; jedina dozvoljena izmena je opoziv
 --    (`revoked_at`, `revoked_by`, `revocation_reason`), koju okidač iz 0028
 --    sužava na te kolone.

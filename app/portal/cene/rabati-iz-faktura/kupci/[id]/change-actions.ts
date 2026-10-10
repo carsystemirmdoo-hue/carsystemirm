@@ -21,6 +21,7 @@ function clean(input: ChangeInput): ChangeInput {
     newPercent: Number(String(input.newPercent).replace(",", ".")),
     effectiveFrom: String(input.effectiveFrom),
     includeExceptions: (input.includeExceptions ?? []).filter((id) => UUID.test(id)).slice(0, 2000),
+    paymentCondition: input.paymentCondition === "kratak_rok" ? "kratak_rok" : null,
   };
 }
 

@@ -59,6 +59,8 @@ export type RuleDraft = {
    * se staro zatvara dan pre početka novog; do tada staro važi.
    */
   replacesRuleId?: string | null;
+  /** Uslov plaćanja (0042): bez vrednosti = bezuslovno. Uslovno pravilo nikad ne važi podrazumevano. */
+  paymentCondition?: "kratak_rok" | null;
 };
 
 /** Ponovljeno slanje: za isti opseg već čeka predlog (jedinstveni indeks 0041). */
@@ -160,6 +162,7 @@ export async function proposePriceRule(
         biznisoftEntryRequired: draft.biznisoftEntryRequired ?? true,
         sourceBatch: draft.sourceBatch ?? null,
         replacesRuleId: draft.replacesRuleId ?? null,
+        paymentCondition: draft.paymentCondition ?? null,
         proposedBy: actor.id,
         proposedAt: sql`now()`,
       })
@@ -184,6 +187,7 @@ export async function proposePriceRule(
           unosUBizniSoft: draft.biznisoftEntryRequired ?? true,
           serija: draft.sourceBatch ?? null,
           menja: draft.replacesRuleId ?? null,
+          uslovPlacanja: draft.paymentCondition ?? null,
         },
         reason,
         correlationId,

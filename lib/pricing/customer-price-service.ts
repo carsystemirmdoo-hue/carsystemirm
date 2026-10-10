@@ -24,7 +24,7 @@ export async function customerPrices(customerId: string, articleIds: string[], o
       SELECT id, customer_scope::text AS "customerScope", product_scope::text AS "productScope", value_kind::text AS "valueKind",
              customer_id AS "customerId", customer_group_id AS "customerGroupId", article_id AS "articleId", product_group AS "productGroup", brand,
              discount_percent::text AS "discountPercent", net_price::text AS "netPrice", effective_from::text AS "effectiveFrom",
-             effective_to::text AS "effectiveTo", status::text AS status
+             effective_to::text AS "effectiveTo", status::text AS status, payment_condition AS "paymentCondition"
         FROM price_rules WHERE status::text IN (${statuses})
          AND (customer_scope::text <> 'customer' OR customer_id = ${customerId}::uuid)`),
     db.execute<{ group_id: string }>(sql`SELECT group_id FROM customer_group_members WHERE customer_id = ${customerId}::uuid`),

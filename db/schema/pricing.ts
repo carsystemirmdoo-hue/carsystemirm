@@ -183,6 +183,8 @@ export const priceRules = pgTable(
     /** Oznaka serije upisa; služi za opoziv tačno tog upisa. Migracija 0035. */
     sourceBatch: text("source_batch"),
     /** Predlog koji MENJA važeće pravilo istog opsega; pri odobrenju se staro zatvara. Migracija 0041. */
+    /** Uslov plaćanja (0042): NULL = bez uslova; 'kratak_rok' važi samo kada je izabran i ispunjen. */
+    paymentCondition: text("payment_condition"),
     replacesRuleId: uuid("replaces_rule_id").references((): AnyPgColumn => priceRules.id, { onDelete: "restrict" }),
     proposedBy: uuid("proposed_by").references(() => users.id, {
       onDelete: "restrict",

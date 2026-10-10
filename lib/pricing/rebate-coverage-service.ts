@@ -6,6 +6,8 @@ import { AUDIT_ACTIONS, recordAudit } from "@/lib/audit/record";
 import { can } from "@/lib/authz/permissions.mjs";
 import type { PortalUser } from "@/lib/authz/user-repository";
 import { resolveLedgerScope } from "@/lib/ledger/effective-sales";
+import { allowsAutomaticRebates, isPreparedForPortal, statusReason } from "@/lib/customers/commercial-status.mjs";
+import { commercialStatuses } from "@/lib/customers/commercial-status-service";
 import { outOfProgrammeArticles } from "@/lib/pricing/article-programme-service";
 import { classifyCustomer, COVERAGE_RULES, segmentPair } from "@/lib/pricing/rebateCoverage.mjs";
 import { proposePriceRule, transitionPriceRule } from "@/lib/pricing/rule-service";
@@ -22,7 +24,9 @@ export type CoveragePair = {
   lastOn: string;
   purchases: number;
   lastInvoices: { invoiceId: string; documentLabel: string | null; issuedOn: string; percent: number }[];
-  outcome: "odobreno" | "ceka_odobrenje" | "direktno" | "izvedeno" | "nejasno" | "van_programa";
+  outcome: "odobreno" | "ceka_odobrenje" | "direktno" | "izvedeno" | "nejasno" | "van_programa" | "poseban_status";
+  /** Ranije odobreno pravilo kupca sa posebnim statusom — poseban slučaj za odluku (ne briše se). */
+  special?: boolean;
   percent: number | null;
   reason: string | null;
   family?: string | null;
@@ -63,7 +67,7 @@ export async function rebateCoverage(viewer: PortalUser, asOf: string, onlyCusto
     db.execute<{ c: string; a: string; p: string; s: string }>(sql`
       SELECT customer_id AS c, article_id AS a, discount_percent::text AS p, status::text AS s
         FROM price_rules
-       WHERE customer_scope = 'customer' AND product_scope = 'article' AND value_kind = 'discount_percent'
+       WHERE customer_scope = 'customer' AND product_scope = 'article' AND value_kind = 'discount_percent' AND payment_condition IS NULL
          AND status::text IN (${sql.join([...APPROVED, ...PENDING].map((s) => sql`${s}`), sql`, `)})
          AND (effective_to IS NULL OR effective_to >= ${asOf}::date)
          AND (status::text IN ('draft', 'pending_approval') OR effective_from <= ${asOf}::date)
@@ -79,6 +83,7 @@ export async function rebateCoverage(viewer: PortalUser, asOf: string, onlyCusto
        WHERE il.article_id IS NOT NULL AND ril.issued_on <= ${asOf}::date GROUP BY 1`),
     outOfProgrammeArticles(),
   ]);
+  const statuses = await commercialStatuses();
 
   const names = new Map(customers.map((c) => [c.id, c.name]));
   const repsOf = new Map<string, string[]>();
@@ -101,6 +106,14 @@ export async function rebateCoverage(viewer: PortalUser, asOf: string, onlyCusto
       ...p,
       segment: segmentPair({ customerLastOn, articleLastSoldOn: soldOn.get(p.articleId) ?? null, articleInStock: false, outOfProgramme: out.ids.has(p.articleId), pairLastOn: p.lastOn, asOf }) as Pair["segment"],
     }));
+    // Poseban poslovni status (0042): ništa se ne izvodi automatski; ranije odobreno ostaje vidljivo.
+    const st = statuses.get(customerId) ?? null;
+    if (st && !allowsAutomaticRebates(st.status)) {
+      for (const p of pairs) {
+        if (p.outcome === "odobreno") p.special = true;
+        else if (p.outcome !== "van_programa") Object.assign(p, { outcome: "poseban_status", percent: null, reason: statusReason(st.status) });
+      }
+    }
     const famByKey = new Map(res.families.filter((f) => f.ok).map((f) => [f.key, f]));
     const groups = new Map<string, CoverageGroup>();
     for (const p of pairs) {
@@ -118,6 +131,9 @@ export async function rebateCoverage(viewer: PortalUser, asOf: string, onlyCusto
     }
     result.push({
       customerId,
+      status: st?.status ?? "redovan",
+      statusReason: st?.reason ?? null,
+      prepared: isPreparedForPortal(st?.status ?? "redovan"),
       customerName: names.get(customerId) ?? "—",
       salespeople: repsOf.get(customerId) ?? [],
       lastOn: customerLastOn,

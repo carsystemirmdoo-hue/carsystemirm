@@ -13,6 +13,9 @@ import { EXCEPTION_LABELS, HIGH_DISCOUNT, RECENT_DAYS, STATUS_LABELS } from "@/l
 import { pct } from "../../format";
 import { customerFamilies } from "@/lib/pricing/rebate-change-service";
 import { RebateChangePanel } from "./RebateChangePanel";
+import { CommercialStatusForm } from "./CommercialStatusForm";
+import { commercialStatuses, type CommercialStatus } from "@/lib/customers/commercial-status-service";
+import { COMMERCIAL_STATUSES, statusReason } from "@/lib/customers/commercial-status.mjs";
 
 export const dynamic = "force-dynamic";
 
@@ -86,7 +89,8 @@ export default async function RebateReviewCustomerPage({
   const shownArticles = articles
     .filter((a) => filterDef.match(a.result.outcome))
     .sort((x, y) => ORDER.indexOf(x.result.outcome) - ORDER.indexOf(y.result.outcome) || (y.result.lastOn ?? "").localeCompare(x.result.lastOn ?? ""));
-  const approvedByArticle = new Map(approvedRules.filter((p) => p.articleId).map((p) => [p.articleId as string, p]));
+  // „Važi“ = bezuslovno pravilo; uslovni rabat (kratak rok) nikad nije podrazumevan.
+  const approvedByArticle = new Map(approvedRules.filter((p) => p.articleId && !p.paymentCondition).map((p) => [p.articleId as string, p]));
   const portalOnlyCount = approvedRules.filter((p) => p.portalOnly).length;
   const formArticles = [...articles]
     .sort((x, y) => (y.result.lastOn ?? "").localeCompare(x.result.lastOn ?? ""))
@@ -101,6 +105,7 @@ export default async function RebateReviewCustomerPage({
       };
     });
   const families = canPropose ? await customerFamilies(user, customer.id, today) : [];
+  const status = (await commercialStatuses()).get(customer.id) ?? null;
   const initialArticle = sp.predlog && articles.some((a) => a.articleId === sp.predlog) ? sp.predlog : null;
   const exceptionKind = kind && kind in EXCEPTION_LABELS ? kind : null;
   const exceptions = exceptionKind ? r.exceptions.filter((e) => e.kind === exceptionKind) : r.exceptions;
@@ -394,6 +399,26 @@ export default async function RebateReviewCustomerPage({
               <p className="portal-data-note">Prikazano {ARTICLES_SHOWN} od {shownArticles.length}.</p>
             ) : null}
           </section>
+
+          {status || can(user, "prices:approve") ? (
+            <section className="portal-panel" data-accent={status ? "warning" : undefined}>
+              <div className="portal-section-header">
+                <div>
+                  <h2>Poseban poslovni status{status ? `: ${COMMERCIAL_STATUSES[status.status]}` : ""}</h2>
+                  <p>
+                    {status
+                      ? `${statusReason(status.status)}. Obrazloženje: ${status.reason}. Fakture i ranije odobrena pravila ostaju; automatski predlozi i izvedene grupe se ne prave.`
+                      : "Redovan kupac. Vlasnik može označiti poseban dogovor, kompenzaciju, uslove plaćanja, retku saradnju ili kupca van pripreme za portal."}
+                  </p>
+                </div>
+              </div>
+              {can(user, "prices:approve") ? (
+                <div className="portal-panel-body">
+                  <CommercialStatusForm customerId={customer.id} current={(status?.status ?? "redovan") as CommercialStatus} />
+                </div>
+              ) : null}
+            </section>
+          ) : null}
 
           {canPropose ? (
             <section className="portal-panel">

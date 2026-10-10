@@ -5,6 +5,7 @@ import { getDb } from "@/db/client";
 import { AUDIT_ACTIONS, recordAudit } from "@/lib/audit/record";
 import { can } from "@/lib/authz/permissions.mjs";
 import { canAccessCustomer } from "@/lib/authz/scope.mjs";
+import { allowsAutomaticRebates } from "@/lib/customers/commercial-status.mjs";
 import { loadAssignedCustomerIds, type PortalUser } from "@/lib/authz/user-repository";
 import { classifyCustomer, familyCandidates } from "@/lib/pricing/rebateCoverage.mjs";
 import { proposePriceRule, transitionPriceRule } from "@/lib/pricing/rule-service";
@@ -51,6 +52,8 @@ export type ChangeInput = {
   effectiveFrom: string;
   /** Izuzeci (pojedinačni dogovori) koje korisnik IZRIČITO uključuje u grupnu promenu. */
   includeExceptions?: string[];
+  /** Uslov plaćanja (0042): bez vrednosti = podrazumevani rabat; 'kratak_rok' = važi samo uz taj uslov. */
+  paymentCondition?: "kratak_rok" | null;
 };
 
 export class RebateChangeError extends Error {}
@@ -72,6 +75,9 @@ async function assertCustomer(viewer: PortalUser, customerId: string) {
 /** Potvrđene grupe kupca: porodice koje njegove fakture dokazuju (sa članstvom). */
 export async function customerFamilies(viewer: PortalUser, customerId: string, asOf = belgradeDate(new Date())) {
   await assertCustomer(viewer, customerId);
+  // Poseban poslovni status (0042): iz njegovih faktura se ne izvodi nijedna grupa.
+  const [st] = [...(await getDb().execute<{ status: string }>(sql`SELECT status FROM customer_commercial_status WHERE customer_id = ${customerId}::uuid`))];
+  if (st && !allowsAutomaticRebates(st.status)) return [];
   const data = await loadCustomer(customerId, asOf);
   const res = classifyCustomer({ lines: data.lines, rules: data.rules.map((r) => ({ articleId: r.articleId, discountPercent: r.percent, approved: ACTIVE.includes(r.status) })), outOfProgramme: data.out, asOf });
   return res.families
@@ -85,7 +91,7 @@ export async function customerFamilies(viewer: PortalUser, customerId: string, a
     .sort((a, b) => b.members.length - a.members.length);
 }
 
-async function loadCustomer(customerId: string, asOf: string) {
+async function loadCustomer(customerId: string, asOf: string, condition: string | null = null) {
   const db = getDb();
   const [lines, rules, out] = await Promise.all([
     db.execute<{ a: string; code: string; n: string; inv: string; lbl: string; d: string; p: string }>(sql`
@@ -99,7 +105,7 @@ async function loadCustomer(customerId: string, asOf: string) {
     db.execute<{ id: string; article_id: string; p: string; status: string; effective_from: string; source_batch: string | null }>(sql`
       SELECT id, article_id, discount_percent::text AS p, status::text AS status, effective_from::text AS effective_from, source_batch
         FROM price_rules
-       WHERE customer_scope = 'customer' AND customer_id = ${customerId}::uuid AND product_scope = 'article' AND value_kind = 'discount_percent'
+       WHERE customer_scope = 'customer' AND customer_id = ${customerId}::uuid AND product_scope = 'article' AND value_kind = 'discount_percent' AND payment_condition IS NOT DISTINCT FROM ${condition}
          AND status::text IN (${sql.join([...ACTIVE, ...PENDING].map((s) => sql`${s}`), sql`, `)})
          AND (effective_to IS NULL OR effective_to >= ${asOf}::date)
          -- Odobreno pravilo sa budućim početkom još ne važi (zamena koja tek kreće).
@@ -109,7 +115,7 @@ async function loadCustomer(customerId: string, asOf: string) {
   const scheduled = await db.execute<{ article_id: string; p: string; f: string }>(sql`
     SELECT article_id, discount_percent::text AS p, effective_from::text AS f FROM price_rules
      WHERE customer_scope = 'customer' AND customer_id = ${customerId}::uuid AND product_scope = 'article'
-       AND status::text IN (${sql.join(ACTIVE.map((s) => sql`${s}`), sql`, `)}) AND effective_from > ${asOf}::date`);
+       AND payment_condition IS NOT DISTINCT FROM ${condition} AND status::text IN (${sql.join(ACTIVE.map((s) => sql`${s}`), sql`, `)}) AND effective_from > ${asOf}::date`);
   const articles = new Map<string, { id: string; code: string; name: string }>();
   for (const l of lines) articles.set(l.a, { id: l.a, code: l.code, name: l.n });
   return {
@@ -127,7 +133,7 @@ export async function previewRebateChange(viewer: PortalUser, input: ChangeInput
   await assertCustomer(viewer, input.customerId);
   if (!(input.newPercent >= 0 && input.newPercent < 100)) throw new RebateChangeError("Rabat mora biti između 0 i 100 %.");
   if (!/^\d{4}-\d{2}-\d{2}$/.test(input.effectiveFrom) || input.effectiveFrom < asOf) throw new RebateChangeError("Početak važenja ne sme biti u prošlosti.");
-  const data = await loadCustomer(input.customerId, asOf);
+  const data = await loadCustomer(input.customerId, asOf, input.paymentCondition ?? null);
   let ids: string[];
   let group: Awaited<ReturnType<typeof customerFamilies>>[number] | null = null;
   if (input.mode === "grupa") {
@@ -175,6 +181,7 @@ export async function previewRebateChange(viewer: PortalUser, input: ChangeInput
     group: group ? { key: group.key, percent: group.percent, evidence: group.evidence, origin: "izvedena iz faktura kupca (nije BizniSoft grupa)", members: group.members.length } : null,
     newPercent: input.newPercent,
     effectiveFrom: input.effectiveFrom,
+    paymentCondition: input.paymentCondition ?? null,
     rows,
   };
 }
@@ -215,10 +222,11 @@ export async function submitRebateChange(
         valueKind: "discount_percent",
         discountPercent: input.newPercent,
         effectiveFrom: input.effectiveFrom,
-        reason: `${reason} — Obuhvat: ${origin}. ${r.current ? `Menja ${r.current.percent} % (${r.current.origin}, od ${r.current.effectiveFrom}).` : "Novo pravilo."}${r.lastInvoice ? ` Poslednja faktura ${r.lastInvoice.label} ${r.lastInvoice.issuedOn}: ${r.lastInvoice.percent} %.` : ""}`.slice(0, 2000),
+        reason: `${reason} — Obuhvat: ${origin}.${input.paymentCondition ? " USLOV: važi samo uz izabran i ispunjen kratak rok plaćanja; nije podrazumevani rabat." : ""} ${r.current ? `Menja ${r.current.percent} % (${r.current.origin}, od ${r.current.effectiveFrom}).` : "Novo pravilo."}${r.lastInvoice ? ` Poslednja faktura ${r.lastInvoice.label} ${r.lastInvoice.issuedOn}: ${r.lastInvoice.percent} %.` : ""}`.slice(0, 2000),
         biznisoftEntryRequired: false,
         sourceBatch: batchId,
         replacesRuleId: r.current?.ruleId ?? null,
+        paymentCondition: input.paymentCondition ?? null,
       },
       viewer,
       { correlationId: batchId, notify: false },

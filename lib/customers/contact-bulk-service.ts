@@ -1,4 +1,6 @@
 import "server-only";
+import { isPreparedForPortal } from "@/lib/customers/commercial-status.mjs";
+import { commercialStatuses } from "@/lib/customers/commercial-status-service";
 import { randomUUID } from "node:crypto";
 import { and, eq, inArray, sql } from "drizzle-orm";
 import { getDb } from "@/db/client";
@@ -19,7 +21,7 @@ import type { AccountActor } from "@/lib/customers/account-service";
  */
 
 type Rows = ReturnType<typeof readContactProposals>;
-export type ContactOutcome = ReturnType<typeof planContactProposals>[number]["outcome"] | "created";
+export type ContactOutcome = ReturnType<typeof planContactProposals>[number]["outcome"] | "created" | "not_prepared";
 
 async function loadState(issuerCode: string, rows: Rows) {
   const db = getDb();
@@ -64,7 +66,14 @@ export async function applyContactProposals(
 ): Promise<{ red: number; code: string; outcome: ContactOutcome }[]> {
   const plan = planContactProposals({ rows: input.rows, ...(await loadState(input.issuerCode, input.rows)) });
   const out: { red: number; code: string; outcome: ContactOutcome }[] = [];
+  const statuses = await commercialStatuses();
+  const notPrepared = new Set([...statuses].filter(([, v]) => !isPreparedForPortal(v.status)).map(([k]) => k));
   for (const p of plan) {
+    // Kupac van pripreme za portal (0042): nalog se ne pravi ni u proveri ni u primeni.
+    if (p.outcome === "would_create" && notPrepared.has(p.customerId as string)) {
+      out.push({ red: p.row.red, code: p.row.code, outcome: "not_prepared" });
+      continue;
+    }
     if (p.outcome !== "would_create" || input.dryRun) {
       out.push({ red: p.row.red, code: p.row.code, outcome: p.outcome });
       continue;

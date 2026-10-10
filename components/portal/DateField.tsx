@@ -304,8 +304,9 @@ function Kalendar({
   const panelRef = useRef<HTMLDivElement>(null);
   const mrezaRef = useRef<HTMLDivElement>(null);
 
-  // Kalendar ne sme izaći van ekrana: na uskom ekranu je donji list, inače
-  // ispod polja (ili iznad ako dole nema mesta), poravnat da stane po širini.
+  // Kalendar ne sme izaći van ekrana: na uskom ili niskom ekranu je donji
+  // list, inače ispod polja (ili iznad ako dole nema mesta), poravnat da stane
+  // po širini.
   useLayoutEffect(() => {
     const omot = omotRef.current;
     const panel = panelRef.current;
@@ -317,7 +318,11 @@ function Kalendar({
     const r = omot.getBoundingClientRect();
     const visina = panel.offsetHeight;
     const sirina = panel.offsetWidth;
-    setPolozaj(r.bottom + visina + 12 > window.innerHeight && r.top > visina + 12 ? "gore" : "dole");
+    const staneDole = r.bottom + visina + 12 <= window.innerHeight;
+    const staneGore = r.top > visina + 12;
+    // Nizak prozor (npr. zum 150–200 %): ni ispod ni iznad nema mesta, pa
+    // kalendar postaje donji list koji je uvek ceo na ekranu.
+    setPolozaj(staneDole ? "dole" : staneGore ? "gore" : "list");
     setDesno(r.left + sirina + 12 > window.innerWidth);
   }, [omotRef]);
 

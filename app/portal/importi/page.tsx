@@ -13,6 +13,7 @@ import { AutoRecomputeStatus } from "@/components/portal/AutoRecomputeStatus";
 import { can } from "@/lib/authz/permissions.mjs";
 import { requireCapability } from "@/lib/authz/session";
 import { loadRecomputeStatus } from "@/lib/recommendations/auto-recompute";
+import { dmyTime } from "@/lib/ordering/panelFormat.mjs";
 
 export const dynamic = "force-dynamic";
 /**
@@ -121,10 +122,7 @@ export default async function ImportsPage({
                     <small>{run.sourcePath ?? "—"}</small>
                   </th>
                   <td>
-                    {new Intl.DateTimeFormat("sr-Latn-RS", {
-                      dateStyle: "short",
-                      timeStyle: "short",
-                    }).format(run.startedAt)}
+                    {dmyTime(run.startedAt)}
                   </td>
                   <td>{STATUS_LABELS[run.status] ?? run.status}</td>
                   <td className="portal-table-number">{run.rowsRead}</td>

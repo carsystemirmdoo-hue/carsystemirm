@@ -4,6 +4,7 @@ import { useMemo, useState, useTransition } from "react";
 import { DateField } from "@/components/portal/DateField";
 import type { ChangeAction } from "@/lib/pricing/rebate-change-service";
 import { previewChangeAction, submitChangeAction } from "./change-actions";
+import { countOf, ARTIKAL } from "@/lib/ordering/plural.mjs";
 
 type ArticleOption = { articleId: string; articleCode: string; articleName: string | null; lastPercent: number | null; currentPercent: string | null };
 type Family = {
@@ -128,7 +129,7 @@ export function RebateChangePanel({
           <span>Grupa artikala</span>
           <select value={brand} onChange={(e) => { setBrand(e.target.value); reset(); }}>
             {brands.map((b) => (
-              <option key={b.brand} value={b.brand}>{b.brand} · {b.n} artikala kupca</option>
+              <option key={b.brand} value={b.brand}>{b.brand} · {countOf(b.n, ARTIKAL)} kupca</option>
             ))}
           </select>
           <small>Jedno pravilo za celu grupu; posebni dogovori po artiklu ostaju na snazi.</small>
@@ -155,7 +156,7 @@ export function RebateChangePanel({
           <select value={groupKey} onChange={(e) => { setGroupKey(e.target.value); reset(); }}>
             {families.map((f) => (
               <option key={f.key} value={f.key}>
-                „{f.key}“ · sada {pct(f.percent)} · {f.members.length} artikala
+                „{f.key}“ · sada {pct(f.percent)} · {countOf(f.members.length, ARTIKAL)}
               </option>
             ))}
           </select>

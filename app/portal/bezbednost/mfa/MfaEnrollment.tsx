@@ -148,7 +148,7 @@ export function MfaEnrollment({
               <PortalIcon name="warning" /> {confirm.error}
             </p>
           ) : null}
-          <PortalButton type="submit" disabled={confirming}>
+          <PortalButton type="submit" variant="primary" disabled={confirming}>
             {confirming ? "Provera…" : "Aktivirajte drugi faktor"}
           </PortalButton>
         </form>
@@ -201,7 +201,7 @@ export function MfaEnrollment({
           </p>
         ) : null}
 
-        <PortalButton type="submit" disabled={starting}>
+        <PortalButton type="submit" variant="primary" disabled={starting}>
           {starting ? "Priprema…" : "Nastavite"}
         </PortalButton>
       </form>
@@ -233,7 +233,7 @@ export function MfaEnrollment({
                 <PortalIcon name="warning" /> {regen.error}
               </p>
             ) : null}
-            <PortalButton type="submit" disabled={regenerating}>
+            <PortalButton type="submit" variant="primary" disabled={regenerating}>
               {regenerating ? "Izdavanje…" : "Izdajte nove kodove"}
             </PortalButton>
           </form>

@@ -1,3 +1,4 @@
+import { dmy, quantity } from "@/lib/ordering/panelFormat.mjs";
 import { DateRangeField } from "@/components/portal/DateRangeField";
 import { Badge, Metric, PageHeader, SectionHeader } from "@/components/portal/PortalPrimitives";
 import { requireCapability } from "@/lib/authz/session";
@@ -27,6 +28,13 @@ import {
   problemiDokumenata as sloziProbleme,
   raspodelaFakturaPoKupcu,
 } from "@/lib/readiness/dataReadiness.mjs";
+
+
+/** `2026-10` → `10/2026` */
+function mesecTekst(mesec: string) {
+  const [g, m] = String(mesec).split("-");
+  return m ? `${m}/${g}` : String(mesec);
+}
 
 export const dynamic = "force-dynamic";
 
@@ -129,7 +137,7 @@ export default async function DataReadinessPage({
       <section className="portal-panel">
         <form className="portal-filters" method="get">
           <DateRangeField nameOd="od" nameDo="do" defaultOd={period.od} defaultDo={period.do} />
-          <button type="submit" className="portal-button" data-variant="secondary">
+          <button type="submit" className="portal-button" data-variant="primary">
             Primenite
           </button>
         </form>
@@ -162,21 +170,21 @@ export default async function DataReadinessPage({
       <section className="portal-metrics">
         <Metric
           label="Efektivnih prodajnih dokumenata"
-          value={String(zbir.dokumenata)}
+          value={quantity(zbir.dokumenata)}
           context="različitih faktura, ne stavki"
         />
-        <Metric label="Stavki" value={String(zbir.stavki)} context="redova na tim fakturama" />
-        <Metric label="Kupaca" value={String(zbir.kupaca)} context="sa bar jednom fakturom" />
-        <Metric label="Artikala" value={String(zbir.artikala)} context="različitih šifri" />
+        <Metric label="Stavki" value={quantity(zbir.stavki)} context="redova na tim fakturama" />
+        <Metric label="Kupaca" value={quantity(zbir.kupaca)} context="sa bar jednom fakturom" />
+        <Metric label="Artikala" value={quantity(zbir.artikala)} context="različitih šifri" />
         <Metric
           label="Parova kupac–artikal"
-          value={String(par.ukupno)}
+          value={quantity(par.ukupno)}
           context="različitih kombinacija"
         />
         <Metric
           label="Parova na ≥2 fakture"
-          value={String(par.saViseFaktura)}
-          context={`od toga na ≥2 različita datuma: ${par.saViseDatuma}`}
+          value={quantity(par.saViseFaktura)}
+          context={`od toga na ≥2 različita datuma: ${quantity(par.saViseDatuma)}`}
           tone="info"
         />
       </section>
@@ -190,11 +198,11 @@ export default async function DataReadinessPage({
         <dl className="portal-definition-grid">
           <div>
             <dt>Najraniji dokument</dt>
-            <dd>{zbir.najranije ?? "nema podataka"}</dd>
+            <dd>{zbir.najranije ? dmy(String(zbir.najranije).slice(0, 10)) : "nema podataka"}</dd>
           </div>
           <div>
             <dt>Najkasniji dokument</dt>
-            <dd>{zbir.najkasnije ?? "nema podataka"}</dd>
+            <dd>{zbir.najkasnije ? dmy(String(zbir.najkasnije).slice(0, 10)) : "nema podataka"}</dd>
           </div>
         </dl>
       </section>
@@ -217,9 +225,9 @@ export default async function DataReadinessPage({
             <tbody>
               {meseci.map((m) => (
                 <tr key={m.mesec}>
-                  <th scope="row">{m.mesec}</th>
-                  <td className="portal-table-number">{m.faktura}</td>
-                  <td className="portal-table-number">{m.stavki}</td>
+                  <th scope="row">{mesecTekst(m.mesec)}</th>
+                  <td className="portal-table-number">{quantity(m.faktura)}</td>
+                  <td className="portal-table-number">{quantity(m.stavki)}</td>
                 </tr>
               ))}
               {meseci.length === 0 ? (
@@ -256,7 +264,7 @@ export default async function DataReadinessPage({
               {raspodela.map((k) => (
                 <tr key={k.oznaka}>
                   <th scope="row">{k.oznaka}</th>
-                  <td className="portal-table-number">{k.kupaca}</td>
+                  <td className="portal-table-number">{quantity(k.kupaca)}</td>
                 </tr>
               ))}
             </tbody>
@@ -294,9 +302,9 @@ export default async function DataReadinessPage({
                     {naslov}
                     <small>{p.imenitelj}</small>
                   </th>
-                  <td className="portal-table-number">{p.potvrdjeno}</td>
-                  <td className="portal-table-number">{p.nepotvrdjeno}</td>
-                  <td className="portal-table-number">{p.ukupno}</td>
+                  <td className="portal-table-number">{quantity(p.potvrdjeno)}</td>
+                  <td className="portal-table-number">{quantity(p.nepotvrdjeno)}</td>
+                  <td className="portal-table-number">{quantity(p.ukupno)}</td>
                   <td className="portal-table-number">{pokrivenostTekst(p)}</td>
                 </tr>
               ))}

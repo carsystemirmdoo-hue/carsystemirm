@@ -213,7 +213,7 @@ test("rečenica o ritmu samo uz aktuelan obračun; nova faktura je skriva", asyn
   await purchase("a", "2026-09-29", [{ code: CODE.mapped, qty: 8 }]);
   const after_ = (await listFor("a")).items.find((i) => i.articleCode === CODE.mapped)!;
   assert.doesNotMatch(after_.reason, /Obično/, "obračun nije video novu fakturu — ritam se ne pominje");
-  assert.match(after_.reason, /poslednji put 29\. 9\. 2026\./, "nova kupovina je vidljiva odmah");
+  assert.match(after_.reason, /poslednji put 29\/09\/2026/, "nova kupovina je vidljiva odmah");
 });
 
 test("ruta uzima kupca samo iz sesije i ne prima parametre", async () => {

@@ -7,6 +7,8 @@
  * potvrđenog je ono što ovaj model čuva.
  */
 
+import { amount, percent } from "@/lib/ordering/panelFormat.mjs";
+
 export type Tone = "neutral" | "success" | "warning" | "danger" | "info" | "accent";
 
 export const PRICE_RULE_STATUS_LABELS: Record<string, string> = {
@@ -144,9 +146,9 @@ export function describeValue(rule: {
   currency?: string | null;
 }): string {
   if (rule.valueKind === "net_price") {
-    return `Fiksna neto cena ${rule.netPrice} ${rule.currency ?? "RSD"}`;
+    return `Fiksna neto cena ${amount(rule.netPrice)}\u00a0${rule.currency ?? "RSD"}`;
   }
-  return `Rabat ${rule.discountPercent}%`;
+  return `Rabat ${percent(rule.discountPercent == null ? null : Number(rule.discountPercent))}`;
 }
 
 /**

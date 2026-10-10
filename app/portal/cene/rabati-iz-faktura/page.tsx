@@ -6,6 +6,7 @@ import { requireCapability } from "@/lib/authz/session";
 import { loadDatasetInfo } from "@/lib/data-state/dataset";
 import { loadRebateEvidence, type RebateEvidenceItem } from "@/lib/pricing/rebate-evidence-service";
 import { ProposeRebateButton } from "./ProposeRebateButton";
+import { countOf, STAVKA } from "@/lib/ordering/plural.mjs";
 
 export const dynamic = "force-dynamic";
 
@@ -27,13 +28,13 @@ function Item({ item, canPropose }: { item: RebateEvidenceItem; canPropose: bool
         <span>{item.productGroup ?? "bez grupe"}</span>
         {item.candidatePercent !== null ? <span className="kk-status" data-tone="success">{item.candidatePercent} %</span> : null}
         <small>
-          {item.lineCount} stavki · {item.documentCount} dok. · {srDate(item.firstOn)} – {srDate(item.lastOn)}
+          {countOf(item.lineCount, STAVKA)} · {item.documentCount} dok. · {srDate(item.firstOn)} – {srDate(item.lastOn)}
         </small>
       </div>
       <ul className="rb-values">
         {item.values.map((v) => (
           <li key={v.discountPercent}>
-            <strong>{v.discountPercent} %</strong> na {v.lines} stavki, {v.documents} dok. — npr.{" "}
+            <strong>{v.discountPercent} %</strong> na {countOf(v.lines, STAVKA)}, {v.documents} dok. — npr.{" "}
             {v.samples.map((s: { invoiceId: string; documentLabel: string; issuedOn: string; articleCode: string }, i: number) => (
               <span key={s.invoiceId}>
                 {i ? ", " : ""}
@@ -81,7 +82,7 @@ export default async function RebatesFromInvoicesPage() {
           <strong>{lineCount} potvrđenih stavki</strong>
           <span>
             {dataset.kind === "demo" ? "DEMO: izmišljene fakture i rabati. " : ""}
-            {missingGroupLines ? `${missingGroupLines} stavki nema grupu artikla. ` : ""}
+            {missingGroupLines ? `${countOf(missingGroupLines, STAVKA)} bez grupe artikla. ` : ""}
             Korekcije popusta, storna i povrati se ne računaju u rabat i prikazuju se kao upozorenje.
           </span>
         </div>

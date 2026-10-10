@@ -143,20 +143,22 @@ export function MappingReview({
                 </td>
                 {canManage ? (
                   <td>
-                    <form action={proposeAction} style={{ display: "inline" }}>
-                      <input type="hidden" name="articleId" value={row.articleId} />
-                      <PortalButton type="submit" variant="ghost" disabled={proposing}>
-                        Predložite po šifri
+                    <div className="portal-cell-actions">
+                      <form action={proposeAction}>
+                        <input type="hidden" name="articleId" value={row.articleId} />
+                        <PortalButton type="submit" variant="ghost" disabled={proposing}>
+                          Predložite po šifri
+                        </PortalButton>
+                      </form>
+                      <PortalButton
+                        variant="ghost"
+                        onClick={() =>
+                          setOpenId(openId === row.articleId ? null : row.articleId)
+                        }
+                      >
+                        {openId === row.articleId ? "Zatvorite" : "Odlučite"}
                       </PortalButton>
-                    </form>
-                    <PortalButton
-                      variant="ghost"
-                      onClick={() =>
-                        setOpenId(openId === row.articleId ? null : row.articleId)
-                      }
-                    >
-                      {openId === row.articleId ? "Zatvorite" : "Odlučite"}
-                    </PortalButton>
+                    </div>
                   </td>
                 ) : null}
               </tr>

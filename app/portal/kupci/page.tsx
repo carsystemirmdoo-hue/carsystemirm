@@ -48,7 +48,7 @@ export default async function CustomersPage({
         title="Kupci"
         description={
           scoped
-            ? `Vidite ${customers.length} dodeljenih kupaca. Otvaranje tuđeg kupca preko adrese vraća 403.`
+            ? `Dodeljeni kupci: ${customers.length}. Kupac koji Vam nije dodeljen ne otvara se ni preko direktne adrese.`
             : `Svi kupci firme (${customers.length}).`
         }
       />
@@ -63,7 +63,7 @@ export default async function CustomersPage({
                 <option value="aktivni">Aktivni</option>
                 <option value="neaktivni">Neaktivni ({neaktivnih})</option>
               </select>
-              <button type="submit">Prikažite</button>
+              <button type="submit" className="portal-button" data-variant="primary">Prikažite</button>
             </form>
             <p>
               Iznosi su iz uvezenih faktura. Dugovanje i naplata nisu deo ovog

@@ -16,6 +16,7 @@ import {
 import { requireUser } from "@/lib/authz/session";
 import { BackupStatusPanel } from "@/features/portal/BackupStatusPanel";
 import { loadBackupStatus } from "@/lib/backup/status-service";
+import { dmy, dmyTime } from "@/lib/ordering/panelFormat.mjs";
 
 export const dynamic = "force-dynamic";
 
@@ -212,18 +213,10 @@ function formatCount(n: number) {
 }
 function formatDate(iso: string | null) {
   if (!iso) return "—";
-  const [y, m, d] = iso.slice(0, 10).split("-");
-  return `${Number(d)}. ${Number(m)}. ${y}.`;
+  return dmy(iso.slice(0, 10));
 }
 function formatDateTime(at: Date) {
-  return new Date(at).toLocaleString("sr-Latn-RS", {
-    timeZone: "Europe/Belgrade",
-    day: "numeric",
-    month: "numeric",
-    year: "numeric",
-    hour: "2-digit",
-    minute: "2-digit",
-  });
+  return dmyTime(at);
 }
 
 /** Stanja kupčevih naloga — samo brojevi, bez adresa. */

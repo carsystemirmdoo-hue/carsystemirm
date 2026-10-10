@@ -1,5 +1,6 @@
 import type { RecomputeStatus } from "@/lib/recommendations/auto-recompute";
 import { AutoRecomputeRetry } from "./AutoRecomputeRetry";
+import { dmyTime } from "@/lib/ordering/panelFormat.mjs";
 
 const SOURCE: Record<string, string> = {
   device: "uvoz sa uređaja",
@@ -9,7 +10,7 @@ const SOURCE: Record<string, string> = {
 
 function when(at: Date | null) {
   return at
-    ? new Date(at).toLocaleString("sr-Latn-RS", { timeZone: "Europe/Belgrade", day: "numeric", month: "numeric", hour: "2-digit", minute: "2-digit" })
+    ? dmyTime(at)
     : "—";
 }
 

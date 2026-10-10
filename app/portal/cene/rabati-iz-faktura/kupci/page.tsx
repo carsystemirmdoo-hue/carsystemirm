@@ -73,7 +73,7 @@ export default async function RebateReviewListPage({
           <span>
             {seesAllCustomers(user)
               ? `Svi kupci sa fakturama (${rows.length}).`
-              : `Vaši dodeljeni kupci sa fakturama (${rows.length}). Tuđi kupac preko adrese vraća 403.`}{" "}
+              : `Vaši dodeljeni kupci sa fakturama (${rows.length}). Kupac koji Vam nije dodeljen ne otvara se ni preko direktne adrese.`}{" "}
             {lineCount.toLocaleString("sr-Latn-RS")} potvrđenih stavki.
           </span>
         }
@@ -128,7 +128,7 @@ export default async function RebateReviewListPage({
               </select>
             </label>
           ) : null}
-          <button type="submit">Prikažite</button>
+          <button type="submit" className="portal-button" data-variant="primary">Prikažite</button>
         </form>
 
         <div className="portal-table-wrap">

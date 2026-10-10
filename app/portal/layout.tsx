@@ -19,6 +19,7 @@ import { BreadcrumbProvider } from "@/components/portal/Breadcrumbs";
 import { DataStrip } from "@/components/portal/DataStrip";
 import { loadDataHeartbeat } from "@/lib/data-state/data-state";
 import "./portal.css";
+import "./panel.css";
 
 export const metadata: Metadata = {
   title: "Poslovni sistem · Carsystem i R-M",

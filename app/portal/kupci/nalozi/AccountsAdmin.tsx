@@ -16,6 +16,7 @@ import {
   CUSTOMER_ACCOUNT_LABELS,
   CUSTOMER_ACCOUNT_TONES,
 } from "@/lib/portal/status-labels";
+import { dmy } from "@/lib/ordering/panelFormat.mjs";
 
 const INITIAL: AccountActionState = { error: null, ok: null };
 
@@ -247,7 +248,7 @@ export function AccountsAdmin({
                           {" · "}
                           {account.gate.verification.personRole}
                           {" · "}
-                          {new Date(account.gate.verification.verifiedAt).toLocaleDateString("sr-Latn-RS")}
+                          {dmy(new Date(account.gate.verification.verifiedAt))}
                           {account.gate.verification.verifiedByName
                             ? ` · ${account.gate.verification.verifiedByName}`
                             : ""}
@@ -256,7 +257,7 @@ export function AccountsAdmin({
                     </td>
                     <td>
                       {account.lastLoginAt
-                        ? new Date(account.lastLoginAt).toLocaleDateString("sr-Latn-RS")
+                        ? dmy(new Date(account.lastLoginAt))
                         : "—"}
                     </td>
                     {canManage ? (

@@ -33,7 +33,9 @@ export default async function PasswordPage() {
         title="Lozinka"
         description="Promena sopstvene lozinke uz potvrdu kodom iz aplikacije."
       />
-      <PasswordChange onSignOut={signOutAction} />
+      <div className="portal-narrow">
+        <PasswordChange onSignOut={signOutAction} />
+      </div>
     </>
   );
 }

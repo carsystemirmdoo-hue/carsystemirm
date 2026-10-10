@@ -7,6 +7,7 @@ import {
   removeAssignmentAction,
   type AssignmentActionState,
 } from "./actions";
+import { dmy } from "@/lib/ordering/panelFormat.mjs";
 
 const INITIAL: AssignmentActionState = { error: null, ok: null };
 
@@ -55,7 +56,7 @@ export function AssignmentPanel({
               <strong>{a.name}</strong>{" "}
               <small>
                 {BASIS_LABELS[a.basis] ?? a.basis} · od{" "}
-                {new Date(a.assignedAt).toLocaleDateString("sr-Latn-RS")}
+                {dmy(new Date(a.assignedAt))}
               </small>
               {canManage ? (
                 <form action={removeAction} className="portal-inline-form">

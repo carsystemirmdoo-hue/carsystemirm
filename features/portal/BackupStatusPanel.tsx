@@ -1,8 +1,9 @@
 import { SectionHeader } from "@/components/portal/PortalPrimitives";
 import type { BackupStatusItem } from "@/lib/backup/status-service";
 import { BACKUP_LABELS, BACKUP_THRESHOLDS, DEFERRED_KINDS } from "@/lib/backup/status.mjs";
+import { dmyTime } from "@/lib/ordering/panelFormat.mjs";
 
-const DT = new Intl.DateTimeFormat("sr-Latn-RS", { dateStyle: "short", timeStyle: "short", timeZone: "Europe/Belgrade" });
+const DT = { format: (d: Date) => dmyTime(d) };
 const N = new Intl.NumberFormat("sr-Latn-RS");
 
 const WHAT: Record<string, string> = {

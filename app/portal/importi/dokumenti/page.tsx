@@ -1,3 +1,4 @@
+import { dmy } from "@/lib/ordering/panelFormat.mjs";
 import { Metric, PageHeader } from "@/components/portal/PortalPrimitives";
 import { SourceDocumentReview } from "@/features/portal/SourceDocumentReview";
 import { requireCapability } from "@/lib/authz/session";
@@ -151,7 +152,7 @@ export default async function SourceDocumentsPage({
             <tbody>
               {corrective.map((row) => (
                 <tr key={row.invoiceId}>
-                  <th scope="row">{row.issuedOn}</th>
+                  <th scope="row" className="portal-nowrap">{dmy(String(row.issuedOn).slice(0, 10))}</th>
                   <td>{row.documentKind}</td>
                   <td>{row.bucket}</td>
                   <td className="portal-table-number">{row.lines}</td>

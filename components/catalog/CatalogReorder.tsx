@@ -10,8 +10,8 @@ import styles from "./CatalogReorder.module.css";
 type State = (ReorderList & { signedIn: true }) | null;
 
 function srDay(iso: string) {
-  const [y, m, d] = iso.split("-").map(Number);
-  return `${d}. ${m}. ${y}.`;
+  const [y, m, d] = iso.slice(0, 10).split("-");
+  return `${d}/${m}/${y}`;
 }
 
 /**

@@ -5162,7 +5162,8 @@ section.portal-metrics {
 }
 .portal-login-error {
   display: grid;
-  grid-template-columns: 20px 1fr;
+  /* Kolona za ikonicu samo kad ikonica postoji; inače bi tekst bio u koloni od 20 px (reč po reč). */
+  grid-template-columns: 1fr;
   gap: 8px;
   align-items: start;
   padding: 10px 11px;
@@ -5170,6 +5171,9 @@ section.portal-metrics {
   border: 1px solid oklch(0.86 0.055 25);
   border-radius: 7px;
   background: oklch(0.965 0.018 25);
+}
+.portal-login-error:has(> svg) {
+  grid-template-columns: 20px 1fr;
 }
 .portal-login-error > span {
   display: grid;

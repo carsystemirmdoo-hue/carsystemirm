@@ -175,12 +175,15 @@ test("ponude kataloga: varijanta i pakovanje, cena po kupcu, kartice proizvoda i
   assert.equal(by(a, "P400").variantKey, "156.056");
   assert.equal(by(a, "P400").variantLabel, "P400");
   assert.equal(by(a, "P400").netPrice, 2601, "2890 − 10 % za firmu A");
-  assert.equal(by(b, "P400").netPrice, 2890, "firma B bez rabata");
-  assert.equal(by(b, "P400").discountPercent, 0);
+  // Firma B nema potvrđen rabat: cena na upit, NE puna cenovnička cena kao „njena“.
+  assert.equal(by(b, "P400").netPrice, null, "firma B bez potvrđenog rabata");
+  assert.equal(by(b, "P400").state, "no_price");
+  assert.equal(by(b, "P400").reason, "rebate_unknown");
   // Dva pakovanja istog proizvoda bez varijanti-redova.
+  // Firma A ima rabat samo za grupu Abrazivi — za lak nema potvrđen rabat, pa su oba pakovanja „cena na upit“.
   const clear = a.filter((o) => o.slug === "c-2e50-clear-coat");
-  assert.deepEqual(clear.map((o) => o.packLabel).sort(), [`Pakovanje 2K1`, `Pakovanje 2K5`]);
-  assert.ok(clear.every((o) => o.state === "orderable" && o.variantKey === null));
+  assert.deepEqual(clear.map((o) => o.articleCode).sort(), [code("2K1"), code("2K5")]);
+  assert.ok(clear.every((o) => o.state === "no_price" && o.reason === "rebate_unknown" && o.netPrice === null && o.variantKey === null));
   assert.equal(by(a, "TAPE").state, "no_price", "povezan bez cene → zatraži cenu");
   assert.equal(by(a, "TAPE").netPrice, null);
   assert.ok(by(a, "P400").cardKeys.includes("carsystem-f19-brusni-diskovi"));

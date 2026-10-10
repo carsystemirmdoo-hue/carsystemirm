@@ -66,8 +66,8 @@ export default async function PriceListReviewPage({ params, searchParams }: { pa
           <div><dt>Datum štampe</dt><dd>{day(imp.printDate)}</dd></div>
           <div><dt>Strana / stavki</dt><dd>{imp.pageCount} / {imp.rowCount}</dd></div>
           <div><dt>Kontrola čitanja</dt><dd>{checks.totalVpMatches && checks.rowChecksFailed === 0 ? <Badge tone="success">zbir VP vrednosti i svi redovi se slažu</Badge> : <Badge tone="danger">ne slaže se — primena je zaključana</Badge>}</dd></div>
-          <div><dt>Cena</dt><dd>VP cena bez PDV-a (osnovica za rabat, kao na fakturi)</dd></div>
-          <div><dt>Valuta</dt><dd>{imp.currency} — PDF ne navodi valutu; iznosi su u dinarima kao i u BizniSoftu</dd></div>
+          <div><dt>Cena</dt><dd>VP cena bez PDV-a — potvrđeno na fakturama (jedinična cena = VP, PDV 20 % se dodaje posebno)</dd></div>
+          <div><dt>Valuta</dt><dd>{imp.currency} — <strong>nije navedena</strong> ni u cenovniku ni na fakturama; potvrđuje se pri primeni</dd></div>
           <div><dt>PDV</dt><dd>{vats.map((v) => `${v} %`).join(", ")}</dd></div>
           <div><dt>Jedinica mere</dt><dd>PDF je ne sadrži; koristi se jedinica artikla iz portala</dd></div>
           <div><dt>Ne čuva se</dt><dd>nabavna cena, količina na stanju, vrednosti i % RuC</dd></div>

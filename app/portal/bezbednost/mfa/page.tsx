@@ -45,14 +45,16 @@ export default async function MfaPage() {
             : "Uz lozinku se traži i jednokratni kod iz aplikacije na Vašem telefonu."
         }
       />
-      <MfaEnrollment
-        accountEmail={user.email}
-        mfaEnabled={status.enabled}
-        // Dozvola se traži samo za prvo vezivanje. Ko već ima faktor dokazao je
-        // identitet time što je prošao prijavu.
-        needsGrant={!status.enabled && !grantOpen ? true : !status.enabled}
-        onSignOut={signOutAction}
-      />
+      <div className="portal-narrow">
+        <MfaEnrollment
+          accountEmail={user.email}
+          mfaEnabled={status.enabled}
+          // Dozvola se traži samo za prvo vezivanje. Ko već ima faktor dokazao je
+          // identitet time što je prošao prijavu.
+          needsGrant={!status.enabled && !grantOpen ? true : !status.enabled}
+          onSignOut={signOutAction}
+        />
+      </div>
     </>
   );
 }

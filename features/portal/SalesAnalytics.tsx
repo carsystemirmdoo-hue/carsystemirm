@@ -11,6 +11,7 @@ import type {
   SalesLine,
   SalesSummary,
 } from "@/lib/sales/queries";
+import { percent } from "@/lib/ordering/panelFormat.mjs";
 
 const MONEY = new Intl.NumberFormat("sr-Latn-RS", {
   maximumFractionDigits: 0,
@@ -20,8 +21,14 @@ const MONEY2 = new Intl.NumberFormat("sr-Latn-RS", {
   maximumFractionDigits: 2,
 });
 
+/** Zaokruženo na ceo dinar (tabele; valuta je u zaglavlju kolone). */
 export function money(value: number | null) {
   return value === null ? "—" : MONEY.format(value);
+}
+
+/** Isto, uz oznaku valute — za pokazatelje i rečenice. */
+export function moneyRsd(value: number | null) {
+  return value === null ? "—" : `${MONEY.format(value)}\u00a0RSD`;
 }
 
 export type GroupView = "kupci" | "komercijalisti" | "artikli" | "grupe";
@@ -57,29 +64,29 @@ export function SalesTotals({
   const cards = [
     {
       label: "Bruto promet",
-      value: money(totals.gross),
+      value: moneyRsd(totals.gross),
       context: "zbir pozitivnih stavki",
       tone: "neutral",
     },
     {
       label: "Povrati robe",
-      value: money(totals.returnValue),
+      value: moneyRsd(totals.returnValue),
       context: `${MONEY2.format(totals.returnedQuantity)} jedinica vraćeno`,
       tone: "danger",
     },
     {
       label: "Korekcije",
-      value: money(totals.correctionValue),
+      value: moneyRsd(totals.correctionValue),
       context: "storno, odobrenja, korekcije cene",
       tone: "warning",
     },
     {
       label: "Neto promet",
-      value: money(totals.net),
+      value: moneyRsd(totals.net),
       context:
         change === null
           ? "nema uporednog perioda"
-          : `${change > 0 ? "+" : ""}${change}% u odnosu na prethodni period`,
+          : `${change > 0 ? "+" : ""}${percent(change)} u odnosu na prethodni period`,
       tone: "success",
     },
     {
@@ -90,13 +97,13 @@ export function SalesTotals({
     },
     {
       label: "Prosečna faktura",
-      value: money(averageInvoice(totals.net, invoiceCount)),
+      value: moneyRsd(averageInvoice(totals.net, invoiceCount)),
       context: "neto po dokumentu",
       tone: "info",
     },
     {
       label: "Koncentracija top 10",
-      value: udeo === null ? "—" : `${udeo}%`,
+      value: udeo === null ? "—" : percent(udeo),
       context: "udeo najvećih kupaca",
       tone: "warning",
     },
@@ -126,7 +133,7 @@ export function SalesTotals({
       {totals.unknownNegativeCount > 0 ? (
         <p className="portal-permission-ok" role="status">
           {totals.unknownNegativeCount} negativnih stavki u iznosu{" "}
-          {money(totals.unknownNegativeValue)}: {UNKNOWN_NEGATIVE_LABEL}. Ulaze u
+          {moneyRsd(totals.unknownNegativeValue)}: {UNKNOWN_NEGATIVE_LABEL}. Ulaze u
           neto promet, ali se ne pripisuju ni povratu ni korekciji.
         </p>
       ) : null}

@@ -12,6 +12,7 @@ import {
   suggestionReason,
   suggestionTone,
 } from "@/lib/recommendations/suggestionRanking.mjs";
+import { dmyTime } from "@/lib/ordering/panelFormat.mjs";
 
 type Tone = "success" | "warning" | "danger" | "neutral";
 
@@ -434,13 +435,7 @@ export function CustomerMethod({ profile }: { profile: CustomerProfile }) {
 
 function fmtTime(at: Date | null) {
   if (!at) return "—";
-  return new Date(at).toLocaleString("sr-Latn-RS", {
-    timeZone: "Europe/Belgrade",
-    day: "numeric",
-    month: "numeric",
-    hour: "2-digit",
-    minute: "2-digit",
-  });
+  return dmyTime(at);
 }
 
 /**

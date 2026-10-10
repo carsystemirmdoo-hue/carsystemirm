@@ -2,6 +2,7 @@
 
 import { useState, useTransition } from "react";
 import { createTrialAccountAction } from "./actions";
+import { dmyTime } from "@/lib/ordering/panelFormat.mjs";
 
 type Trial = { customerId: string; name: string; accounts: { email: string; status: string }[] };
 
@@ -43,7 +44,7 @@ export function TrialPanel({ trials }: { trials: Trial[] }) {
         <button type="button" className="pn-btn" disabled={pending || !email.includes("@")} aria-busy={pending || undefined}
           onClick={() => start(async () => {
             const r = await createTrialAccountAction(t.customerId, email, name);
-            setMsg(r.ok ? { ok: true, text: `Link važi do ${new Date(r.expiresAt ?? "").toLocaleString("sr-RS")}. Otvorite ga i sami postavite lozinku; prikazuje se samo sada.`, link: r.link } : { ok: false, text: r.message ?? "Nije uspelo." });
+            setMsg(r.ok ? { ok: true, text: `Link važi do ${dmyTime(new Date(r.expiresAt ?? ""))}. Otvorite ga i sami postavite lozinku; prikazuje se samo sada.`, link: r.link } : { ok: false, text: r.message ?? "Nije uspelo." });
           })}>
           {pending ? "Pravi se…" : "Napravite probni nalog"}
         </button>

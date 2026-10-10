@@ -1,3 +1,4 @@
+import { amount, dmy, percent } from "@/lib/ordering/panelFormat.mjs";
 import { DateField } from "@/components/portal/DateField";
 import Link from "next/link";
 import { asc } from "drizzle-orm";
@@ -16,6 +17,18 @@ import {
   PRICE_RULE_STATUS_LABELS,
   PRICE_RULE_STATUS_TONES,
 } from "@/lib/portal/status-labels";
+
+const CUSTOMER_SCOPE_LABELS: Record<string, string> = {
+  customer: "jedan kupac",
+  group: "grupa kupaca",
+  all: "svi kupci",
+};
+const PRODUCT_SCOPE_LABELS: Record<string, string> = {
+  article: "jedan artikal",
+  product_group: "grupa proizvoda",
+  brand: "proizvođač",
+  all: "svi proizvodi",
+};
 
 export const dynamic = "force-dynamic";
 
@@ -175,7 +188,7 @@ export default async function PricesOverviewPage({
         {preview ? (
           <div className="portal-panel" data-accent={preview.conflict.length > 0 ? "danger" : "info"}>
             <h3>
-              {preview.customerName} · {preview.articleCode} ({preview.onDate})
+              {preview.customerName} · {preview.articleCode} ({dmy(preview.onDate)})
             </h3>
             <p>{preview.reason}</p>
             {preview.winner ? (
@@ -212,8 +225,8 @@ export default async function PricesOverviewPage({
                         <td>{rule.scopeKey}</td>
                         <td>
                           {rule.valueKind === "net_price"
-                            ? `${rule.netPrice} ${rule.currency}`
-                            : `${rule.discountPercent}%`}
+                            ? `${amount(Number(rule.netPrice))}\u00a0${rule.currency}`
+                            : percent(Number(rule.discountPercent))}
                         </td>
                         <td>
                           {preview.winner?.id === rule.id
@@ -252,9 +265,10 @@ export default async function PricesOverviewPage({
                 <tr key={entry.level}>
                   <td>
                     <strong>{entry.level}</strong>
+                    <small>{entry.label}</small>
                   </td>
-                  <td>{entry.customerScope}</td>
-                  <td>{entry.productScope}</td>
+                  <td>{CUSTOMER_SCOPE_LABELS[entry.customerScope] ?? entry.customerScope}</td>
+                  <td>{PRODUCT_SCOPE_LABELS[entry.productScope] ?? entry.productScope}</td>
                 </tr>
               ))}
             </tbody>

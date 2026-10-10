@@ -1,3 +1,4 @@
+import { quantity } from "@/lib/ordering/panelFormat.mjs";
 import {
   Badge,
   Metric,
@@ -249,7 +250,7 @@ export default async function RecommendationsPage({
               <b>{proteklo(run?.finishedAt ? String(run.finishedAt) : null)}</b>
             </span>
             <span>
-              Osnov datuma: <b>{run?.dateBasis ?? "issued_on"}</b>
+              Osnov datuma: <b>{(run?.dateBasis ?? "issued_on") === "issued_on" ? "datum izdavanja fakture" : run?.dateBasis}</b>
             </span>
           </>
         }
@@ -311,25 +312,25 @@ export default async function RecommendationsPage({
       <section className="portal-metrics">
         <Metric
           label="Treba kontaktirati sada"
-          value={String(zbir(["due"]))}
+          value={quantity(zbir(["due"]))}
           tone="success"
           context="ceo opseg, bez filtera"
         />
         <Metric
           label="Kasni"
-          value={String(zbir(["overdue"]))}
+          value={quantity(zbir(["overdue"]))}
           tone="danger"
           context="ceo opseg, bez filtera"
         />
         <Metric
           label="Uskoro"
-          value={String(zbir(["due_soon"]))}
+          value={quantity(zbir(["due_soon"]))}
           tone="warning"
           context="ceo opseg, bez filtera"
         />
         <Metric
           label="Privremene procene"
-          value={String(zbir(["provisional"]))}
+          value={quantity(zbir(["provisional"]))}
           context="dve kupovine — nije ritam"
         />
       </section>

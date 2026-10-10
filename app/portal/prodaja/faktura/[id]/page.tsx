@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation";
 import { PageHeader } from "@/components/portal/PortalPrimitives";
 import { UnavailableValue } from "@/components/portal/PhaseNotice";
-import { money } from "@/features/portal/SalesAnalytics";
+import { amount } from "@/lib/ordering/panelFormat.mjs";
 import { requireCapability } from "@/lib/authz/session";
 import { loadInvoiceDetail } from "@/lib/sales/queries";
 import { UNKNOWN_NEGATIVE_LABEL } from "@/lib/sales/totals.mjs";
@@ -61,10 +61,10 @@ export default async function InvoiceDetailPage({
               <strong>Komercijalista:</strong> {invoice.salespersonName ?? "—"}
             </li>
             <li>
-              <strong>Neto iznos:</strong> {money(Number(invoice.netAmount))}
+              <strong>Neto iznos:</strong> {amount(invoice.netAmount)} RSD
             </li>
             <li>
-              <strong>Ukupno:</strong> {money(Number(invoice.totalAmount))}
+              <strong>Ukupno:</strong> {amount(invoice.totalAmount)} RSD
             </li>
             <li>
               <strong>Status plaćanja:</strong>{" "}
@@ -104,13 +104,13 @@ export default async function InvoiceDetailPage({
                     {QTY.format(Number(line.quantity))}
                   </td>
                   <td className="portal-table-number">
-                    {money(Number(line.unitPrice))}
+                    {amount(line.unitPrice)}
                   </td>
                   <td className="portal-table-number">
                     {QTY.format(Number(line.discountPercent))}
                   </td>
                   <td className="portal-table-number">
-                    <strong>{money(Number(line.lineAmount))}</strong>
+                    <strong>{amount(line.lineAmount)}</strong>
                   </td>
                 </tr>
               ))}

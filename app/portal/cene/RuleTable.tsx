@@ -12,6 +12,7 @@ import {
   PRICE_RULE_STATUS_LABELS,
   PRICE_RULE_STATUS_TONES,
 } from "@/lib/portal/status-labels";
+import { dmy } from "@/lib/ordering/panelFormat.mjs";
 
 const INITIAL: PriceActionState = { error: null, ok: null };
 
@@ -150,8 +151,8 @@ export function RuleTable({
                 <td>{describeScope(row)}</td>
                 <td>{describeValue(row)}</td>
                 <td>
-                  {row.effectiveFrom}
-                  <small>{row.effectiveTo ? `do ${row.effectiveTo}` : "bez roka"}</small>
+                  <span className="portal-nowrap">od {dmy(row.effectiveFrom)}</span>
+                  <small>{row.effectiveTo ? `do ${dmy(row.effectiveTo)}` : "bez roka"}</small>
                 </td>
                 <td>
                   <Badge tone={PRICE_RULE_STATUS_TONES[row.status] ?? "neutral"}>

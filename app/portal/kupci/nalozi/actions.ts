@@ -21,6 +21,7 @@ import {
   revokeCustomerAccess,
   verifyCustomerContact,
 } from "@/lib/customers/verification-service";
+import { dmyTime } from "@/lib/ordering/panelFormat.mjs";
 
 export type AccountActionState = { error: string | null; ok: string | null };
 
@@ -122,7 +123,7 @@ export async function issueInvitationAction(
     revalidatePath("/portal/kupci/nalozi");
     return {
       error: null,
-      ok: `Poziv važi do ${expiresAt.toLocaleString("sr-Latn-RS")}. Link se prikazuje samo sada.`,
+      ok: `Poziv važi do ${dmyTime(expiresAt)}. Link se prikazuje samo sada.`,
       link: `/prijava/kupac/aktivacija?token=${encodeURIComponent(token)}`,
     };
   } catch (error) {

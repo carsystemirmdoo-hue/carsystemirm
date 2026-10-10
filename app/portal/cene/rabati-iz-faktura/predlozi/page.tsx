@@ -1,3 +1,4 @@
+import { quantity } from "@/lib/ordering/panelFormat.mjs";
 import Link from "next/link";
 import { srDate } from "@/components/customer/account-format";
 import { CrumbLabel } from "@/components/portal/Breadcrumbs";
@@ -79,11 +80,11 @@ export default async function RebateCoveragePage({ searchParams }: { searchParam
       />
 
       <section className="portal-metrics rr-metrics" aria-label="Pokrivenost aktuelnih parova">
-        <Metric label="Za portal: aktuelnih parova" value={String(cur.length)} context="redovni kupci u pripremi; aktivan kupac i artikal, kupljeno u 12 meseci" />
-        <Metric label="Odobreno pravilo" value={String(count(cur, "odobreno"))} tone="success" context={share(count(cur, "odobreno"), cur.length)} />
-        <Metric label="Direktno potvrđeno" value={String(count(cur, "direktno"))} tone="success" context={`${share(count(cur, "direktno"), cur.length)} · čeka grupno odobrenje`} />
-        <Metric label="Pouzdano izvedeno" value={String(count(cur, "izvedeno"))} tone="warning" context={`${share(count(cur, "izvedeno"), cur.length)} · čeka grupno odobrenje`} />
-        <Metric label="Nejasno" value={String(count(cur, "nejasno"))} tone="danger" context={`${share(count(cur, "nejasno"), cur.length)} · ručni pregled`} />
+        <Metric label="Za portal: aktuelnih parova" value={quantity(cur.length)} context="redovni kupci u pripremi; aktivan kupac i artikal, kupljeno u 12 meseci" />
+        <Metric label="Odobreno pravilo" value={quantity(count(cur, "odobreno"))} tone="success" context={share(count(cur, "odobreno"), cur.length)} />
+        <Metric label="Direktno potvrđeno" value={quantity(count(cur, "direktno"))} tone="success" context={`${share(count(cur, "direktno"), cur.length)} · čeka grupno odobrenje`} />
+        <Metric label="Pouzdano izvedeno" value={quantity(count(cur, "izvedeno"))} tone="warning" context={`${share(count(cur, "izvedeno"), cur.length)} · čeka grupno odobrenje`} />
+        <Metric label="Nejasno" value={quantity(count(cur, "nejasno"))} tone="danger" context={`${share(count(cur, "nejasno"), cur.length)} · ručni pregled`} />
       </section>
       <section className="portal-panel">
         <h2>Svi kupci, kupci za portal i posebni računi</h2>
@@ -108,12 +109,12 @@ export default async function RebateCoveragePage({ searchParams }: { searchParam
               ].map((r) => (
                 <tr key={r.label}>
                   <th scope="row">{r.label}</th>
-                  <td>{r.n}</td>
-                  <td>{r.rows.length}</td>
-                  <td>{count(r.rows, "odobreno")}</td>
-                  <td>{count(r.rows, "direktno") + count(r.rows, "izvedeno")}</td>
-                  <td>{count(r.rows, "nejasno")}</td>
-                  <td>{count(r.rows, "poseban_status")}</td>
+                  <td className="portal-table-number">{quantity(r.n)}</td>
+                  <td className="portal-table-number">{quantity(r.rows.length)}</td>
+                  <td className="portal-table-number">{quantity(count(r.rows, "odobreno"))}</td>
+                  <td className="portal-table-number">{quantity(count(r.rows, "direktno") + count(r.rows, "izvedeno"))}</td>
+                  <td className="portal-table-number">{quantity(count(r.rows, "nejasno"))}</td>
+                  <td className="portal-table-number">{quantity(count(r.rows, "poseban_status"))}</td>
                 </tr>
               ))}
             </tbody>
@@ -160,7 +161,7 @@ export default async function RebateCoveragePage({ searchParams }: { searchParam
             <span>Kupac</span>
             <input name="kupac" defaultValue={sp.kupac ?? ""} placeholder="deo naziva" />
           </label>
-          <button type="submit">Prikažite</button>
+          <button type="submit" className="portal-button" data-variant="primary">Prikažite</button>
         </form>
 
         {shown.length === 0 ? <p className="portal-empty">Nema grupa ni nejasnih parova za izabrane filtere.</p> : null}

@@ -1,4 +1,5 @@
 /** Zajednički formati kupčevog naloga. */
+import { dmy, dmyTime } from "@/lib/ordering/panelFormat.mjs";
 
 export const DOCUMENT_KIND_LABELS: Record<string, string> = {
   faktura: "Faktura",
@@ -12,20 +13,13 @@ export const DOCUMENT_KIND_LABELS: Record<string, string> = {
 
 export function srDate(iso: string | null | undefined): string {
   if (!iso) return "—";
-  const [y, m, d] = iso.slice(0, 10).split("-");
-  return `${Number(d)}. ${Number(m)}. ${y}.`;
+  return dmy(iso.slice(0, 10));
 }
 
+/** Datum i vreme: dd/mm/yyyy HH:mm (Beograd), isto kao u panelu kupca i kancelarije. */
 export function srDateTime(at: Date | null): string {
   if (!at) return "—";
-  return new Date(at).toLocaleString("sr-Latn-RS", {
-    timeZone: "Europe/Belgrade",
-    day: "numeric",
-    month: "numeric",
-    year: "numeric",
-    hour: "2-digit",
-    minute: "2-digit",
-  });
+  return dmyTime(at);
 }
 
 const money = new Intl.NumberFormat("sr-Latn-RS", { minimumFractionDigits: 2, maximumFractionDigits: 2 });

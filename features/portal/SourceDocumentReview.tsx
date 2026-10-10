@@ -15,6 +15,7 @@ import {
   SOURCE_DOCUMENT_VALIDATION_LABELS,
   SOURCE_DOCUMENT_VALIDATION_TONES,
 } from "@/lib/portal/status-labels";
+import { dmy } from "@/lib/ordering/panelFormat.mjs";
 
 const INITIAL: DocumentReviewState = { error: null, ok: null };
 
@@ -118,7 +119,7 @@ export function SourceDocumentReview({
                 <td>
                   {row.issuerCode} / {row.externalPartnerCode ?? "—"}
                 </td>
-                <td>{row.documentDate ?? "—"}</td>
+                <td className="portal-nowrap">{row.documentDate ? dmy(row.documentDate.slice(0, 10)) : "—"}</td>
                 <td className="portal-table-number">{row.pageCount}</td>
                 <td className="portal-table-number">{row.lineCount}</td>
                 <td>
@@ -176,7 +177,7 @@ export function SourceDocumentReview({
                     .filter((row) => row.id !== openId)
                     .map((row) => (
                       <option key={row.id} value={row.id}>
-                        {row.fileHash.slice(0, 12)}… · {row.documentDate ?? "bez datuma"}
+                        {row.fileHash.slice(0, 12)}… · {row.documentDate ? dmy(row.documentDate.slice(0, 10)) : "bez datuma"}
                       </option>
                     ))}
                 </select>

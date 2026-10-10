@@ -15,6 +15,7 @@ import { listPriceRequests } from "@/lib/ordering/price-request-service";
 import { loadRecomputeStatus } from "@/lib/recommendations/auto-recompute";
 import { AutoRecomputeStatus } from "@/components/portal/AutoRecomputeStatus";
 import { RecomputeButton } from "./RecomputeButton";
+import { dmyTime } from "@/lib/ordering/panelFormat.mjs";
 
 export const dynamic = "force-dynamic";
 
@@ -56,14 +57,7 @@ function urgency(p: CustomerProfile): number {
 
 function fmtTime(at: Date | null) {
   if (!at) return "—";
-  return new Date(at).toLocaleString("sr-Latn-RS", {
-    timeZone: "Europe/Belgrade",
-    day: "numeric",
-    month: "numeric",
-    year: "numeric",
-    hour: "2-digit",
-    minute: "2-digit",
-  });
+  return dmyTime(at);
 }
 
 function CustomerItem({ item, showReps }: { item: Item; showReps: boolean }) {
@@ -269,7 +263,7 @@ export default async function TalkListPage({
                 <option value="neaktivni">Neaktivni kupci</option>
                 <option value="svi">Svi kupci</option>
               </select>
-              <button type="submit">Prikažite</button>
+              <button type="submit" className="portal-button" data-variant="primary">Prikažite</button>
             </form>
             {canRecompute ? <RecomputeButton label={stale.length ? "Preračunajte sada" : "Preračunajte"} /> : null}
           </div>

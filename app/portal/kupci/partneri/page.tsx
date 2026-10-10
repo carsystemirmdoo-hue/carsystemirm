@@ -14,6 +14,7 @@ import {
   listRegistryIssuers,
 } from "@/lib/partners/partner-registry-service";
 import { LinkPartnerForm, PlanApply, RepCodeForm, UploadForm } from "./RegistryForms";
+import { dmyTime } from "@/lib/ordering/panelFormat.mjs";
 
 export const dynamic = "force-dynamic";
 /**
@@ -96,7 +97,7 @@ export default async function PartnerRegistryPage({
             Poslednji uvoz · {issuerCode} · {registry.latestImport.fileName}
           </h2>
           <p>
-            {new Date(registry.latestImport.importedAt).toLocaleString("sr-Latn-RS")} ·{" "}
+            {dmyTime(new Date(registry.latestImport.importedAt))} ·{" "}
             {String(summary?.partners ?? "?")} partnera · {String(summary?.repAssignedCandidates ?? "?")} sa
             šifrom komercijaliste ({String(summary?.candidatesWithEmail ?? "?")} sa e-poštom iz izvora,{" "}
             {String(summary?.candidatesWithoutEmail ?? "?")} bez) · {String(summary?.needsReview ?? "?")} za
@@ -170,7 +171,7 @@ export default async function PartnerRegistryPage({
               <option value="needs_review">Za dodatnu proveru</option>
             </select>
             <input type="search" name="q" defaultValue={params.q ?? ""} placeholder="Šifra, naziv, PIB, mesto" aria-label="Pretraga" />
-            <button type="submit">Filtrirajte</button>
+            <button type="submit" className="portal-button" data-variant="primary">Filtrirajte</button>
           </form>
           {filtered.length > MAX_ROWS ? (
             <p className="portal-login-hint">Prikazano prvih {MAX_ROWS}; suzite filter.</p>

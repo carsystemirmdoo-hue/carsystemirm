@@ -17,7 +17,7 @@ export default async function PriceHistoryPage() {
     <>
       <PageHeader
         eyebrow="Finansije"
-        title="Istorija cena"
+        title="Istorija pravila"
         description={
           scope.seesAll
             ? "Sva pravila, u svakom stanju, sa podatkom ko je predložio, ko odlučio i da li je unos evidentiran."

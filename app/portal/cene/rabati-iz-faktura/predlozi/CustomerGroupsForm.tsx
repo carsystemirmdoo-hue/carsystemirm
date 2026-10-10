@@ -2,6 +2,7 @@
 
 import { useState, useTransition } from "react";
 import { approveRebateGroupsAction } from "./actions";
+import { countOf, ARTIKAL, GRUPA } from "@/lib/ordering/plural.mjs";
 
 type Group = { key: string; label: string; percent: number | null; expected: { articleId: string; percent: number }[]; preselect: boolean };
 
@@ -39,7 +40,7 @@ export function CustomerGroupsForm({ customerId, groups, verb }: { customerId: s
         disabled={pending || !chosen.length}
         onClick={() => start(async () => setMsg(await approveRebateGroupsAction(customerId, chosen.map((g) => ({ groupKey: g.key, expected: g.expected })))))}
       >
-        {pending ? "Upisujem…" : `${verb} izabrane grupe (${chosen.length} grupa, ${n} artikala)`}
+        {pending ? "Upisujem…" : `${verb} izabrane grupe (${countOf(chosen.length, GRUPA)}, ${countOf(n, ARTIKAL)})`}
       </button>
       {msg && !msg.ok ? <small className="kk-problem">{msg.message}</small> : null}
     </div>

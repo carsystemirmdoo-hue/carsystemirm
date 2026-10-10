@@ -6,6 +6,7 @@ import {
   listNotificationsFor,
 } from "@/lib/notifications/notification-service";
 import { NotificationList } from "./NotificationList";
+import { dmyTime } from "@/lib/ordering/panelFormat.mjs";
 
 export const dynamic = "force-dynamic";
 
@@ -41,7 +42,7 @@ export default async function NotificationsPage() {
           title: item.title,
           body: item.body,
           actionHref: item.actionHref,
-          createdAt: new Date(item.createdAt).toLocaleString("sr-Latn-RS"),
+          createdAt: dmyTime(new Date(item.createdAt)),
           resolutionNote: item.resolutionNote,
         }))}
         canResolve={canResolve}

@@ -21,6 +21,7 @@ import { optionLabel } from "@/lib/pricing/paymentOptions.mjs";
 import { CommercialStatusForm } from "./CommercialStatusForm";
 import { commercialStatuses, type CommercialStatus } from "@/lib/customers/commercial-status-service";
 import { COMMERCIAL_STATUSES, statusReason } from "@/lib/customers/commercial-status.mjs";
+import { countOf, STAVKA } from "@/lib/ordering/plural.mjs";
 
 export const dynamic = "force-dynamic";
 
@@ -213,7 +214,7 @@ export default async function RebateReviewCustomerPage({
                         <th scope="row">
                           {g.label}
                           <small>
-                            {BASIS_LABEL[g.basis]} · {g.lines} stavki, {g.invoices} fakt.
+                            {BASIS_LABEL[g.basis]} · {countOf(g.lines, STAVKA)}, {g.invoices} fakt.
                           </small>
                         </th>
                         <td>
@@ -268,7 +269,7 @@ export default async function RebateReviewCustomerPage({
                         </strong>{" "}
                         <span className="kk-status" data-tone="info">grupa — predlog iz naziva</span>
                         <small>
-                          {p.lines} stavki na {p.invoices} faktura ({Math.round(p.share * 100)} %)
+                          {countOf(p.lines, STAVKA)} na {p.invoices} faktura ({Math.round(p.share * 100)} %)
                           {p.changedRecently ? ` · promenjeno u poslednjih ${RECENT_DAYS} dana` : ""}
                         </small>
                       </li>
@@ -544,7 +545,7 @@ export default async function RebateReviewCustomerPage({
                         <td>
                           <strong>{pct(a.percent)}</strong>
                           <small>
-                            {a.lines} stavki, {a.invoices} fakt.
+                            {countOf(a.lines, STAVKA)}, {a.invoices} fakt.
                           </small>
                         </td>
                         <td>{pct(a.expected)}</td>

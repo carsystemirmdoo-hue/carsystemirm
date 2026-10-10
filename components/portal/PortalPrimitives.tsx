@@ -8,6 +8,7 @@ import {
   type ReactNode,
 } from "react";
 import { PortalIcon, type PortalIconName } from "./PortalIcon";
+import { dmy, dmyTime } from "@/lib/ordering/panelFormat.mjs";
 
 export function formatCurrency(value: number, compact = false) {
   return new Intl.NumberFormat("sr-Latn-RS", {
@@ -19,12 +20,7 @@ export function formatCurrency(value: number, compact = false) {
 }
 
 export function formatDate(value: string, includeTime = false) {
-  return new Intl.DateTimeFormat("sr-Latn-RS", {
-    day: "2-digit",
-    month: "short",
-    year: "numeric",
-    ...(includeTime ? { hour: "2-digit", minute: "2-digit" } : {}),
-  }).format(new Date(value));
+  return includeTime ? dmyTime(new Date(value)) : dmy(/^\d{4}-\d{2}-\d{2}$/.test(value) ? value : new Date(value));
 }
 
 export type Tone =

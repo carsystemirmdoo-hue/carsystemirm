@@ -11,6 +11,7 @@ import { BackupStatusPanel } from "@/features/portal/BackupStatusPanel";
 import { DeviceAdmin } from "@/features/portal/DeviceAdmin";
 import { loadBackupStatus } from "@/lib/backup/status-service";
 import { TriggerSync } from "@/features/portal/TriggerSync";
+import { dmyTime, quantity } from "@/lib/ordering/panelFormat.mjs";
 
 export const dynamic = "force-dynamic";
 
@@ -55,13 +56,7 @@ function proteklo(iso: string | null): string {
 }
 
 /** Vreme u Europe/Belgrade, bez obzira na zonu servera (Vercel radi u UTC). */
-const VREME_BG = new Intl.DateTimeFormat("sr-Latn-RS", {
-  timeZone: "Europe/Belgrade",
-  day: "numeric",
-  month: "numeric",
-  hour: "2-digit",
-  minute: "2-digit",
-});
+const VREME_BG = { format: (d: Date) => dmyTime(d) };
 function bg(iso: string | Date | null): string {
   if (!iso) return "—";
   const d = typeof iso === "string" ? new Date(iso) : iso;
@@ -150,7 +145,7 @@ export default async function SyncOperationsPage() {
       <section className="portal-metrics">
         <Metric
           label="Registrovanih uređaja"
-          value={String(uredjaji.length)}
+          value={quantity(uredjaji.length)}
           context={`aktivnih: ${aktivnih}`}
         />
         <Metric
@@ -360,10 +355,7 @@ export default async function SyncOperationsPage() {
               {prolazi.map((r) => (
                 <tr key={r.id}>
                   <th scope="row">
-                    {new Intl.DateTimeFormat("sr-Latn-RS", {
-                      dateStyle: "short",
-                      timeStyle: "short",
-                    }).format(r.startedAt)}
+                    {dmyTime(r.startedAt)}
                   </th>
                   <td>{STATUS_UVOZA[r.status] ?? r.status}</td>
                   <td className="portal-table-number">{r.rowsRead}</td>

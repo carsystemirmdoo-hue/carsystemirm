@@ -5,15 +5,16 @@ import { PriceListApplyForm, PriceListDiscardForm, type UnclearRow } from "@/fea
 import { requireCapability } from "@/lib/authz/session";
 import { rowsToApply } from "@/lib/pricing/priceListMatch.mjs";
 import { loadPriceListReview, trialPriceCalculation } from "@/lib/pricing/price-list-service";
+import { dmy, dmyTime, percent, quantity } from "@/lib/ordering/panelFormat.mjs";
 
 export const dynamic = "force-dynamic";
 
 const N = new Intl.NumberFormat("sr-Latn-RS", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-const D = new Intl.DateTimeFormat("sr-Latn-RS", { dateStyle: "medium", timeZone: "Europe/Belgrade" });
-const DT = new Intl.DateTimeFormat("sr-Latn-RS", { dateStyle: "short", timeStyle: "short", timeZone: "Europe/Belgrade" });
+const D = { format: (d: Date) => dmy(d) };
+const DT = { format: (d: Date) => dmyTime(d) };
 const rsd = (cents: number | null | undefined) => (cents === null || cents === undefined ? "—" : N.format(cents / 100));
 const day = (iso: string | null) => (iso ? D.format(new Date(`${iso}T12:00:00Z`)) : "—");
-const pct = (a: number, b: number) => `${a > b ? "+" : ""}${(((a / b) - 1) * 100).toFixed(1)} %`;
+const pct = (a: number, b: number) => `${a > b ? "+" : ""}${percent(Math.round(((a / b) - 1) * 1000) / 10)}`;
 const MAX_ROWS = 400;
 
 const TRIAL_LABELS: Record<string, string> = {
@@ -80,10 +81,10 @@ export default async function PriceListReviewPage({ params, searchParams }: { pa
       </section>
 
       <section className="portal-metrics">
-        <Metric label="Povezano" value={String(s.povezano)} tone="success" context={`nove ${s.nova} · promena ${s.promena} · iste ${s.ista}`} />
-        <Metric label="Nejasno" value={String(s.nejasno)} tone={s.nejasno ? "warning" : "neutral"} context="samo uz Vašu potvrdu" />
-        <Metric label="Nepovezano" value={String(s.nepovezano)} tone={s.nepovezano ? "warning" : "neutral"} context="šifra ne postoji u portalu" />
-        <Metric label="Duplikati i greške" value={String(s.duplikat + s.neispravnaCena)} tone={s.duplikat + s.neispravnaCena ? "danger" : "neutral"} context={`velika promena (>30 %): ${s.velikaPromena}`} />
+        <Metric label="Povezano" value={quantity(s.povezano)} tone="success" context={`nove ${s.nova} · promena ${s.promena} · iste ${s.ista}`} />
+        <Metric label="Nejasno" value={quantity(s.nejasno)} tone={s.nejasno ? "warning" : "neutral"} context="samo uz Vašu potvrdu" />
+        <Metric label="Nepovezano" value={quantity(s.nepovezano)} tone={s.nepovezano ? "warning" : "neutral"} context="šifra ne postoji u portalu" />
+        <Metric label="Duplikati i greške" value={quantity(s.duplikat + s.neispravnaCena)} tone={s.duplikat + s.neispravnaCena ? "danger" : "neutral"} context={`velika promena (>30 %): ${s.velikaPromena}`} />
       </section>
 
       {problems.length ? (

@@ -3,6 +3,7 @@ import { Badge, PageHeader, SectionHeader } from "@/components/portal/PortalPrim
 import { BasePriceForm, PriceListUploadForm } from "@/features/portal/PriceListForms";
 import { requireCapability } from "@/lib/authz/session";
 import { basePriceHistory, checksAllowApply, listPriceListImports } from "@/lib/pricing/price-list-service";
+import { dmy, dmyTime } from "@/lib/ordering/panelFormat.mjs";
 
 export const dynamic = "force-dynamic";
 
@@ -11,8 +12,8 @@ const STATUS: Record<string, { label: string; tone: "info" | "success" | "neutra
   primenjeno: { label: "primenjeno", tone: "success" },
   odbaceno: { label: "odbačeno", tone: "neutral" },
 };
-const D = new Intl.DateTimeFormat("sr-Latn-RS", { dateStyle: "medium", timeZone: "Europe/Belgrade" });
-const DT = new Intl.DateTimeFormat("sr-Latn-RS", { dateStyle: "short", timeStyle: "short", timeZone: "Europe/Belgrade" });
+const D = { format: (d: Date) => dmy(d) };
+const DT = { format: (d: Date) => dmyTime(d) };
 const N = new Intl.NumberFormat("sr-Latn-RS", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 const day = (iso: string | null) => (iso ? D.format(new Date(`${iso}T12:00:00Z`)) : "—");
 

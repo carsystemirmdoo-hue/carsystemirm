@@ -65,7 +65,7 @@ export default async function UnassignedCustomersPage({
               ))}
             </select>
           </label>
-          <button type="submit">Prikažite</button>
+          <button type="submit" className="portal-button" data-variant="primary">Prikažite</button>
         </form>
         <div className="portal-table-wrap">
           <table className="portal-table rr-table">

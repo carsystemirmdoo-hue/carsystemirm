@@ -9051,9 +9051,10 @@ section.portal-metrics {
 .zp-table th, .zp-table td { border: 1px solid #999; padding: 1.2mm 1.4mm; vertical-align: top; overflow-wrap: anywhere; word-break: normal; }
 .zp-table td:first-child { white-space: nowrap; }
 .zp-table th { background: #eee; font-weight: 600; text-align: left; overflow-wrap: normal; hyphens: manual; }
-.zp-table .r { text-align: right; font-variant-numeric: tabular-nums; }
-.zp-table .c-rb { width: 9mm; } .zp-table .c-sifra { width: 15mm; } .zp-table .c-jm { width: 22mm; } .zp-table .c-kol { width: 15mm; }
-.zp-table .c-cena { width: 19mm; } .zp-table .c-rabat { width: 12mm; } .zp-table .c-iznos { width: 21mm; } .zp-table .c-pdv { width: 11mm; } .zp-table .c-razlog { width: 45mm; }
+.zp-table .r { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; overflow-wrap: normal; }
+.zp-table th.r { white-space: normal; }
+.zp-table .c-rb { width: 9mm; } .zp-table .c-sifra { width: 15mm; } .zp-table .c-jm { width: 18mm; } .zp-table .c-kol { width: 15mm; }
+.zp-table .c-cena { width: 21mm; } .zp-table .c-rabat { width: 12mm; } .zp-table .c-iznos { width: 23mm; } .zp-table .c-pdv { width: 11mm; } .zp-table .c-razlog { width: 45mm; }
 .zp-totals { display: flex; justify-content: flex-end; flex-direction: column; align-items: flex-end; margin-bottom: 4mm; }
 .zp-totals dl { margin: 0; display: grid; grid-template-columns: auto auto; gap: .6mm 6mm; }
 .zp-totals dl div { display: contents; }

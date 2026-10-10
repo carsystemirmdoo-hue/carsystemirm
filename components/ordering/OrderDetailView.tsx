@@ -82,7 +82,7 @@ export function OrderDetailView({ order, audience }: { order: OrderDetail; audie
       <dl className="ka-facts ka-facts-wide">
         <div><dt>Osnovica (bez PDV-a)</dt><dd>{money(order.netTotal)}</dd></div>
         <div><dt>PDV</dt><dd>{money(order.vatTotal)}</dd></div>
-        <div><dt>{order.onRequestLines ? "Zbir stavki sa poznatom cenom — nije konačan iznos zahteva" : "Ukupno sa PDV-om"}</dt><dd>{money(order.grossTotal)}{order.onRequestLines ? <small>sa PDV-om · bez {order.onRequestLines} stavki na upit</small> : null}</dd></div>
+        <div><dt>{order.onRequestLines ? "Zbir stavki sa poznatom cenom — nije konačan iznos zahteva" : "Ukupno sa PDV-om"}</dt><dd>{money(order.grossTotal)}{order.onRequestLines ? <small>sa PDV-om · bez stavki na upit ({order.onRequestLines})</small> : null}</dd></div>
         {order.deliveryAddress ? <div><dt>Adresa isporuke</dt><dd>{order.deliveryAddress}</dd></div> : null}
         {order.contactPhone || order.contactEmail ? <div><dt>Kontakt</dt><dd>{[order.contactPhone, order.contactEmail].filter(Boolean).join(" · ")}</dd></div> : null}
         <div>

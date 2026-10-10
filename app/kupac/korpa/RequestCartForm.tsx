@@ -115,7 +115,7 @@ export function RequestCartForm({ view }: { view: RequestCartView }) {
       <dl className="ka-facts ka-facts-wide">
         <div><dt>Osnovica (bez PDV-a)</dt><dd>{money(view.totals.net)}</dd></div>
         <div><dt>PDV</dt><dd>{money(view.totals.vat)}</dd></div>
-        <div><dt>{view.onRequest ? `Zbir stavki sa poznatom cenom — nije konačan iznos zahteva — ${selectedLabel}` : `Ukupno sa PDV-om — ${selectedLabel}`}</dt><dd>{money(view.totals.gross)}{view.onRequest ? <small>sa PDV-om · bez {view.onRequest} stavki na upit</small> : null}</dd></div>
+        <div><dt>{view.onRequest ? `Zbir stavki sa poznatom cenom — nije konačan iznos zahteva — ${selectedLabel}` : `Ukupno sa PDV-om — ${selectedLabel}`}</dt><dd>{money(view.totals.gross)}{view.onRequest ? <small>sa PDV-om · bez stavki na upit ({view.onRequest})</small> : null}</dd></div>
       </dl>
       {view.onRequest ? <p className="portal-data-note">Stavke na upit nemaju potvrđenu cenu za izabranu opciju; kancelarija Vam javlja cenu. Zbir ih ne sadrži i nije konačan iznos zahteva.</p> : null}
       <div className="kr-fields">

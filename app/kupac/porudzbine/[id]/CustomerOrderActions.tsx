@@ -1,11 +1,21 @@
 "use client";
 
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState, useTransition } from "react";
 import { answerRevisionAction, cancelOrderAction, returnOrderToCartAction } from "@/app/kupac/korpa/actions";
 
 /** Kupac sme da otkaže zahtev dok ga kancelarija nije uzela u obradu, ili kad traži izmenu. */
-export function CustomerOrderActions({ orderId, status }: { orderId: string; status: string }) {
+export function CustomerOrderActions({
+  orderId,
+  status,
+  pendingProposal = null,
+}: {
+  orderId: string;
+  status: string;
+  /** Izmenjen predlog kancelarije za ovaj zahtev (čeka potvrdu ili je potvrđen) — tada se ovde ništa ne menja. */
+  pendingProposal?: { id: string; requestNumber: string; status: string } | null;
+}) {
   const router = useRouter();
   const [pending, start] = useTransition();
   const [error, setError] = useState<string | null>(null);
@@ -22,6 +32,18 @@ export function CustomerOrderActions({ orderId, status }: { orderId: string; sta
           Odbijte predlog
         </button>
         {error ? <p className="kk-problem" role="alert">{error}</p> : null}
+      </div>
+    );
+  }
+  if (status === "changes_requested" && pendingProposal) {
+    return (
+      <div className="portal-panel-body kk-actions">
+        <p>
+          {pendingProposal.status === "awaiting_customer"
+            ? "Kancelarija je pripremila izmenjen predlog. Potvrdite ga ili odbijte na predlogu:"
+            : "Zahtev je zamenjen novom verzijom:"}{" "}
+          <Link href={`/kupac/porudzbine/${pendingProposal.id}`}>{pendingProposal.requestNumber}</Link>
+        </p>
       </div>
     );
   }
@@ -56,7 +78,7 @@ export function CustomerOrderActions({ orderId, status }: { orderId: string; sta
           if (confirm("Otkazati ovaj zahtev?")) run(() => cancelOrderAction(orderId));
         }}
       >
-        Otkaži zahtev
+        Otkažite zahtev
       </button>
       {error ? <p className="kk-problem" role="alert">{error}</p> : null}
     </div>

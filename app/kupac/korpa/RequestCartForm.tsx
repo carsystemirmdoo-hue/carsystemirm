@@ -2,7 +2,8 @@
 
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useState, useTransition } from "react";
+import { useMemo, useState, useTransition } from "react";
+import { countOf, STAVKA } from "@/lib/ordering/plural.mjs";
 import { confirmPasswordAction, setRequestQuantityAction, submitRequestAction } from "./actions";
 
 export type RequestCartView = {
@@ -25,6 +26,34 @@ export type RequestCartView = {
 
 const money = (n: number) => `${n.toLocaleString("sr-RS", { minimumFractionDigits: 2, maximumFractionDigits: 2 })} RSD`;
 
+/** Šta se promenilo između prikaza koji je kupac video i nove ponude servera (za novu potvrdu). */
+export function describeChanges(before: RequestCartView, after: RequestCartView): string[] {
+  const out: string[] = [];
+  const label = (v: RequestCartView) => v.options.find((o) => o.code === v.selected)?.label ?? "po dogovoru";
+  if (before.selected !== after.selected) {
+    const still = after.options.some((o) => o.code === before.selected);
+    out.push(still ? `Opcija plaćanja: ${label(before)} → ${label(after)}.` : `Opcija „${label(before)}“ više nije odobrena; sada je izabrano: ${label(after)}.`);
+  }
+  for (const o of before.options) if (!after.options.some((x) => x.key === o.key) && o.code !== before.selected) out.push(`Opcija „${o.label}“ više nije ponuđena.`);
+  for (const o of after.options) if (!before.options.some((x) => x.key === o.key)) out.push(`Nova odobrena opcija: ${o.label}.`);
+  const sel = (v: RequestCartView, l: RequestCartView["lines"][number]) => l.prices.find((p) => p.key === (v.selected ?? "osnovni"));
+  for (const b of before.lines) {
+    const a = after.lines.find((x) => x.articleId === b.articleId);
+    if (!a) {
+      out.push(`${b.articleName}: uklonjeno iz korpe.`);
+      continue;
+    }
+    if (a.quantity !== b.quantity) out.push(`${b.articleName}: količina ${b.quantity} → ${a.quantity} ${a.unit}.`);
+    const pb = sel(before, b);
+    const pa = sel(after, a);
+    const fmt = (p: typeof pb, unit: string) => (p?.status === "cena" && p.netPrice !== null ? `${money(p.netPrice)}/${unit} (rabat ${p.discountPercent} %)` : "na upit");
+    if (fmt(pb, b.unit) !== fmt(pa, a.unit)) out.push(`${b.articleName}: ${fmt(pb, b.unit)} → ${fmt(pa, a.unit)}.`);
+  }
+  for (const a of after.lines) if (!before.lines.some((x) => x.articleId === a.articleId)) out.push(`${a.articleName}: dodato u korpu.`);
+  if (before.totals.gross !== after.totals.gross) out.push(`Zbir sa PDV-om: ${money(before.totals.gross)} → ${money(after.totals.gross)}.`);
+  return out;
+}
+
 /**
  * Korpa kao zahtev: jedna odobrena opcija plaćanja za ceo zahtev. Uz svaku stavku
  * cena za svaku odobrenu opciju (nije akcija ni precrtana cena). Stavka bez
@@ -39,10 +68,21 @@ export function RequestCartForm({ view }: { view: RequestCartView }) {
   const [password, setPassword] = useState("");
   const [needPassword, setNeedPassword] = useState(false);
   const [result, setResult] = useState<{ ok: boolean; text: string; href?: string; blockers?: string[] } | null>(null);
+  // Prikaz koji je kupac video pre nego što je server javio promenu — razlika se prikazuje uz novu potvrdu.
+  const [seen, setSeen] = useState<RequestCartView | null>(null);
+  const changes = useMemo(() => (seen && seen.fingerprint !== view.fingerprint ? describeChanges(seen, view) : []), [seen, view]);
   const selectedLabel = view.options.find((o) => o.code === view.selected)?.label ?? "Plaćanje po dogovoru sa kancelarijom";
   const submit = () =>
     start(async () => {
-      const r = await submitRequestAction({ idempotencyKey: view.idempotencyKey, fingerprint: view.fingerprint, paymentOption: view.selected, note, deliveryAddress: address, contactPhone: phone });
+      let r: Awaited<ReturnType<typeof submitRequestAction>>;
+      try {
+        r = await submitRequestAction({ idempotencyKey: view.idempotencyKey, fingerprint: view.fingerprint, paymentOption: view.selected, note, deliveryAddress: address, contactPhone: phone });
+      } catch {
+        // Isti ključ slanja ostaje: ponovni pokušaj ne može da napravi drugi zahtev.
+        setResult({ ok: false, text: "Veza sa serverom je prekinuta, pa nije sigurno da je zahtev stigao. Pokušajte ponovo — isti zahtev se neće poslati dvaput. Korpa je sačuvana." });
+        return;
+      }
+      setSeen(null);
       if (r.status === "created" || r.status === "existing") {
         setResult({ ok: true, text: `Zahtev ${r.requestNumber} je primljen. Raspoloživost i isporuku potvrđuje kancelarija; ovo još nije faktura ni rezervacija.`, href: `/kupac/porudzbine/${r.orderId}` });
         router.push(`/kupac/porudzbine/${r.orderId}?poslato=1`);
@@ -50,6 +90,7 @@ export function RequestCartForm({ view }: { view: RequestCartView }) {
         setNeedPassword(true);
         setResult({ ok: false, text: r.message });
       } else if (r.status === "price_changed") {
+        setSeen(view);
         setResult({ ok: false, text: r.message });
         router.refresh();
       } else if (r.status === "blocked") {
@@ -87,7 +128,7 @@ export function RequestCartForm({ view }: { view: RequestCartView }) {
           <li key={l.articleId} data-on-request={l.prices.find((p) => p.key === (view.selected ?? "osnovni"))?.status === "na_upit" ? "da" : undefined}>
             <div className="kr-name">
               <strong>{l.articleName}</strong>
-              <small>Šifra {l.articleCode} · {l.packConfirmed ? `pakovanje ${l.packLabel}` : `JM: ${l.unit} (pakovanje nije potvrđeno)`}</small>
+              <small>Šifra {l.articleCode} · {l.packConfirmed ? `pakovanje ${l.packLabel}` : `JM: ${l.unit}`}</small>
               {l.problem ? <small className="kk-problem">{l.problem}</small> : null}
             </div>
             <ul className="kr-prices">
@@ -100,8 +141,9 @@ export function RequestCartForm({ view }: { view: RequestCartView }) {
             </ul>
             <label className="kr-qty">
               <span>Količina ({l.unit})</span>
-              <input defaultValue={String(l.quantity).replace(".", ",")} inputMode="decimal"
-                onBlur={(e) => start(async () => { const r = await setRequestQuantityAction({ articleId: l.articleId, quantity: e.target.value.replace(",", ".") }); if (!r.ok) setResult({ ok: false, text: r.message }); router.refresh(); })} />
+              <input key={`${l.articleId}-${l.quantity}`} defaultValue={String(l.quantity).replace(".", ",")} inputMode="decimal"
+                onKeyDown={(e) => { if (e.key === "Enter") { e.preventDefault(); e.currentTarget.blur(); } }}
+                onBlur={(e) => e.target.value.trim() !== e.target.defaultValue && start(async () => { const r = await setRequestQuantityAction({ articleId: l.articleId, quantity: e.target.value.replace(",", ".") }); if (!r.ok) setResult({ ok: false, text: r.message }); router.refresh(); })} />
               {l.quantityProblem ? <small className="kk-problem">{l.quantityProblem}</small> : null}
             </label>
             <div className="kr-amount">
@@ -115,7 +157,7 @@ export function RequestCartForm({ view }: { view: RequestCartView }) {
       <dl className="ka-facts ka-facts-wide">
         <div><dt>Osnovica (bez PDV-a)</dt><dd>{money(view.totals.net)}</dd></div>
         <div><dt>PDV</dt><dd>{money(view.totals.vat)}</dd></div>
-        <div><dt>{view.onRequest ? `Zbir stavki sa poznatom cenom — nije konačan iznos zahteva — ${selectedLabel}` : `Ukupno sa PDV-om — ${selectedLabel}`}</dt><dd>{money(view.totals.gross)}{view.onRequest ? <small>sa PDV-om · bez stavki na upit ({view.onRequest})</small> : null}</dd></div>
+        <div><dt>{view.onRequest ? `Zbir stavki sa poznatom cenom — nije konačan iznos zahteva — ${selectedLabel}` : `Ukupno sa PDV-om — ${selectedLabel}`}</dt><dd>{money(view.totals.gross)}{view.onRequest ? <small>sa PDV-om · nije uračunato na upit: {countOf(view.onRequest, STAVKA)}</small> : null}</dd></div>
       </dl>
       {view.onRequest ? <p className="portal-data-note">Stavke na upit nemaju potvrđenu cenu za izabranu opciju; kancelarija Vam javlja cenu. Zbir ih ne sadrži i nije konačan iznos zahteva.</p> : null}
       <div className="kr-fields">
@@ -135,6 +177,12 @@ export function RequestCartForm({ view }: { view: RequestCartView }) {
         {pending ? "Šaljem…" : "Pošaljite zahtev za porudžbinu"}
       </button>
       <p className="portal-data-note">Slanjem nastaje zahtev — kancelarija proverava raspoloživost, cene i isporuku. Zahtev nije faktura ni rezervacija.</p>
+      {changes.length ? (
+        <div className="kr-changes" role="status">
+          <strong>Šta se promenilo od prikaza:</strong>
+          <ul>{changes.map((c) => <li key={c}>{c}</li>)}</ul>
+        </div>
+      ) : null}
       {result && !result.ok ? (
         <div className="portal-login-error" role="alert">
           {result.text}

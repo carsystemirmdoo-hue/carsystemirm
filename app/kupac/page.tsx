@@ -4,6 +4,7 @@ import { requireCustomerSession } from "@/lib/authz/customer-session";
 import { companyContact } from "@/lib/company-contact";
 import { loadCustomerInvoices, loadCustomerOverview } from "@/lib/customers/customer-queries";
 import { loadDatasetInfo } from "@/lib/data-state/dataset";
+import { orderingEnabledFor } from "@/lib/ordering/trial";
 
 export const dynamic = "force-dynamic";
 
@@ -13,6 +14,7 @@ export const dynamic = "force-dynamic";
  */
 export default async function CustomerHomePage() {
   const session = await requireCustomerSession("/kupac");
+  const ordering = await orderingEnabledFor(session.customerId);
   const [overview, recent, dataset] = await Promise.all([
     loadCustomerOverview(session.customerId),
     loadCustomerInvoices(session.customerId, { page: 1 }),
@@ -66,10 +68,17 @@ export default async function CustomerHomePage() {
 
       <section className="portal-panel">
         <h2>Porudžbine</h2>
-        <p>
-          Poručivanje kroz nalog još nije uključeno. Porudžbine i dalje šaljete kao do sada — svom
-          komercijalisti ili kancelariji.
-        </p>
+        {ordering ? (
+          <p>
+            Robu birate u odeljku <Link href="/kupac/naruci">Izbor robe</Link>, a zahtev šaljete iz{" "}
+            <Link href="/kupac/korpa">korpe</Link>. Zahtev postaje porudžbina tek kada ga kancelarija potvrdi.
+          </p>
+        ) : (
+          <p>
+            Poručivanje kroz nalog još nije uključeno. Porudžbine i dalje šaljete kao do sada — svom
+            komercijalisti ili kancelariji.
+          </p>
+        )}
         <p className="portal-footnote">
           Kancelarija:{" "}
           {companyContact.phone && companyContact.phoneHref ? (

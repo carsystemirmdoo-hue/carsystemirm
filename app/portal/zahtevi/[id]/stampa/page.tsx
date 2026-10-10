@@ -1,7 +1,9 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { CrumbLabel } from "@/components/portal/Breadcrumbs";
 import { requireCapability } from "@/lib/authz/session";
 import { loadOrderRequest } from "@/lib/ordering/ordering-service";
+import { countOf, STAVKA } from "@/lib/ordering/plural.mjs";
 import { ORDER_STATUS_LABELS } from "@/lib/ordering/orderRules.mjs";
 import { PrintButton } from "./PrintButton";
 
@@ -26,10 +28,14 @@ export default async function OrderPrintPage({ params }: { params: Promise<{ id:
   const onRequest = o.lines.filter((l) => l.priceStatus === "na_upit");
   return (
     <>
+      <CrumbLabel segment={o.id} label={o.orderNumber ?? o.requestNumber} />
+      <CrumbLabel segment="stampa" label="Štampa" />
       <p className="zp-screen-only kk-back">
         <Link href={`/portal/zahtevi/${o.id}`}>← Nazad na zahtev</Link> <PrintButton />{" "}
         <small>Za PDF u dijalogu štampe izaberite čuvanje kao PDF.</small>
       </p>
+      {/* Broj zahteva i strana na svakom listu (margine strane A4), da se odvojen list može prepoznati. */}
+      <style>{`@page { @bottom-left { content: ${JSON.stringify(`Zahtev za porudžbinu ${o.requestNumber}`)}; font-size: 7.5pt; color: #555; } @bottom-right { content: "Strana " counter(page) " od " counter(pages); font-size: 7.5pt; color: #555; } }`}</style>
       <article className="zp-doc" aria-label="Zahtev za porudžbinu">
         <header className="zp-head">
           <div>
@@ -97,7 +103,7 @@ export default async function OrderPrintPage({ params }: { params: Promise<{ id:
             <div><dt>PDV</dt><dd>{money(o.vatTotal)} RSD</dd></div>
             <div className="zp-grand"><dt>{onRequest.length ? "Zbir stavki sa poznatom cenom — nije konačan iznos zahteva (sa PDV-om)" : "Ukupno sa PDV-om"}</dt><dd>{money(o.grossTotal)} RSD</dd></div>
           </dl>
-          {onRequest.length ? <p>Stavke na upit nisu u zbiru (broj stavki: {onRequest.length}); njihovu cenu potvrđuje kancelarija.</p> : null}
+          {onRequest.length ? <p>Nije uračunato na upit: {countOf(onRequest.length, STAVKA)}; cenu potvrđuje kancelarija.</p> : null}
         </section>
 
         {onRequest.length ? (
@@ -119,7 +125,7 @@ export default async function OrderPrintPage({ params }: { params: Promise<{ id:
         ) : null}
 
         <section className="zp-notes">
-          <p><strong>Napomena kupca:</strong> {o.customerNote ?? "—"}</p>
+          {o.customerNote ? <p><strong>Napomena kupca:</strong> {o.customerNote}</p> : null}
           {o.statusReason ? <p><strong>Napomena kancelarije:</strong> {o.statusReason}</p> : null}
           {o.replaces ? <p>Verzija {o.revision} zahteva {o.replaces.requestNumber}{o.preparedByName ? ` — pripremila kancelarija (${o.preparedByName})` : ""}.</p> : null}
         </section>

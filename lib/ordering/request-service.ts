@@ -14,6 +14,7 @@ import { approvedPaymentOptions } from "@/lib/pricing/payment-option-service";
 import { optionLabel, optionNote } from "@/lib/pricing/paymentOptions.mjs";
 import { belgradeDate } from "@/lib/recommendations/customerRhythm.mjs";
 import { orderingEnabledFor } from "@/lib/ordering/trial";
+import { foldedMatch } from "@/lib/ordering/search-fold";
 
 /**
  * Zahtev za porudžbinu iz STVARNOG cenovnika (0044):
@@ -194,7 +195,6 @@ export async function loadRequestQuote(customerId: string, option: string | null
 /** Artikli koje kupac može da izabere: u programu, sa osnovnom cenom ili ranije kupljeni. Pretraga po šifri/nazivu. */
 export async function listRequestArticles(customerId: string, query: string | null, limit = 60) {
   const q = (query ?? "").trim().slice(0, 60);
-  const like = `%${q.replace(/[%_]/g, "")}%`;
   const rows = await getDb().execute<{ id: string; code: string; name: string; unit: string | null; bought: boolean; last_on: string | null }>(sql`
     SELECT a.id, a.code, a.name, a.unit,
            EXISTS (SELECT 1 FROM invoice_lines l JOIN invoices i ON i.id = l.invoice_id WHERE l.article_id = a.id AND i.customer_id = ${customerId}::uuid) AS bought,
@@ -203,7 +203,7 @@ export async function listRequestArticles(customerId: string, query: string | nu
      WHERE NOT EXISTS (SELECT 1 FROM articles_out_of_programme o WHERE o.article_id = a.id)
        AND (EXISTS (SELECT 1 FROM article_base_prices b WHERE b.article_id = a.id)
             OR EXISTS (SELECT 1 FROM invoice_lines l JOIN invoices i ON i.id = l.invoice_id WHERE l.article_id = a.id AND i.customer_id = ${customerId}::uuid))
-       AND ${q ? sql`(a.code ILIKE ${like} OR a.name ILIKE ${like})` : sql`EXISTS (SELECT 1 FROM invoice_lines l JOIN invoices i ON i.id = l.invoice_id WHERE l.article_id = a.id AND i.customer_id = ${customerId}::uuid)`}
+       AND ${q ? foldedMatch([sql`a.code`, sql`a.name`], q) : sql`EXISTS (SELECT 1 FROM invoice_lines l JOIN invoices i ON i.id = l.invoice_id WHERE l.article_id = a.id AND i.customer_id = ${customerId}::uuid)`}
      ORDER BY bought DESC, last_on DESC NULLS LAST, a.code
      LIMIT ${limit}`);
   const today = belgradeDate(new Date());
@@ -211,7 +211,7 @@ export async function listRequestArticles(customerId: string, query: string | nu
   return { options: priced.options, articles: priced.lines.map((l, i) => ({ ...l, bought: rows[i].bought, lastOn: rows[i].last_on })) };
 }
 
-export type RequestCartChange = { ok: true; count: number } | { ok: false; message: string };
+export type RequestCartChange = { ok: true; count: number; lineQuantity?: number } | { ok: false; message: string };
 
 async function cartCount(customerId: string, exec: Exec = getDb()) {
   const [{ n }] = [...(await exec.execute<{ n: number }>(sql`SELECT count(*)::int AS n FROM customer_cart_items WHERE customer_id = ${customerId}`))];
@@ -239,7 +239,8 @@ export async function addRequestItem(session: CustomerSession, input: { articleI
     VALUES (${customerId}, ${input.articleId}::uuid, ${parseQuantity(input.quantity)}, ${session.accountId})
     ON CONFLICT (customer_id, article_id)
     DO UPDATE SET quantity = LEAST(customer_cart_items.quantity + EXCLUDED.quantity, ${MAX_LINE_QUANTITY}), updated_at = now()`);
-  return { ok: true, count: await cartCount(customerId, db) };
+  const [line] = [...(await db.execute<{ q: string }>(sql`SELECT quantity::text AS q FROM customer_cart_items WHERE customer_id = ${customerId} AND article_id = ${input.articleId}::uuid`))];
+  return { ok: true, count: await cartCount(customerId, db), lineQuantity: line ? Number(line.q) : undefined };
 }
 
 export async function setRequestQuantity(session: CustomerSession, input: { articleId: string; quantity: unknown }): Promise<RequestCartChange> {
@@ -405,7 +406,11 @@ export async function proposeOrderRevision(viewer: PortalUser, orderId: string, 
     if (!o) throw new Error("Zahtev ne postoji.");
     if (scope.customerIds !== null && !scope.customerIds.includes(o.customer_id)) throw new Error("Zahtev nije u Vašem opsegu.");
     if (o.pricing_source !== "cenovnik") throw new Error("Izmenjen predlog važi samo za zahteve iz stvarnog cenovnika.");
-    if (!["submitted", "under_review"].includes(o.status)) throw new Error("Predlog izmene je moguć dok je zahtev poslat ili u obradi.");
+    if (!["submitted", "under_review", "changes_requested"].includes(o.status)) throw new Error("Predlog izmene je moguć dok je zahtev poslat, u obradi ili čeka izmenu.");
+    // Posle odbijenog predloga (otkazan) sme novi; dok jedan čeka kupca ili je potvrđen — ne.
+    const [active] = [...(await tx.execute<{ n: string }>(sql`
+      SELECT request_number AS n FROM customer_orders WHERE replaces_order_id = ${o.id}::uuid AND status <> 'cancelled' LIMIT 1`))];
+    if (active) throw new Error(`Za ovaj zahtev već postoji predlog ${active.n}. Novi je moguć tek ako ga kupac odbije.`);
     const today = belgradeDate(new Date());
     const approved = await approvedPaymentOptions(o.customer_id, today);
     if (o.payment_option && !approved.includes(o.payment_option)) throw new Error("Opcija plaćanja iz zahteva više nije odobrena — dogovorite novu sa kupcem.");
@@ -419,13 +424,19 @@ export async function proposeOrderRevision(viewer: PortalUser, orderId: string, 
       await tx.execute(sql`UPDATE customer_orders SET status = 'under_review', reviewed_by = ${viewer.id}::uuid, reviewed_at = now(), updated_at = now() WHERE id = ${o.id}::uuid`);
       await statusEvent(tx, o.id, "submitted", "under_review", { staff: viewer }, null);
     }
-    const rev = o.revision + 1;
+    const [{ last }] = [...(await tx.execute<{ last: number }>(sql`
+      SELECT coalesce(max(revision), ${o.revision})::int AS last FROM customer_orders WHERE replaces_order_id = ${o.id}::uuid`))];
+    const rev = Math.max(o.revision, last) + 1;
     const number = `${o.request_number}/${rev}`;
     const why = `Kancelarija je pripremila izmenjen predlog ${number}: ${reason}`;
-    const problem = transitionProblem({ from: "under_review", to: "changes_requested", actor: "office", reason: why });
-    if (problem) throw new Error(problem);
-    await tx.execute(sql`UPDATE customer_orders SET status = 'changes_requested', status_reason = ${why}, decided_by = ${viewer.id}::uuid, decided_at = now(), updated_at = now() WHERE id = ${o.id}::uuid`);
-    await statusEvent(tx, o.id, "under_review", "changes_requested", { staff: viewer }, why);
+    if (o.status === "changes_requested") {
+      await tx.execute(sql`UPDATE customer_orders SET status_reason = ${why}, decided_by = ${viewer.id}::uuid, decided_at = now(), updated_at = now() WHERE id = ${o.id}::uuid`);
+    } else {
+      const problem = transitionProblem({ from: "under_review", to: "changes_requested", actor: "office", reason: why });
+      if (problem) throw new Error(problem);
+      await tx.execute(sql`UPDATE customer_orders SET status = 'changes_requested', status_reason = ${why}, decided_by = ${viewer.id}::uuid, decided_at = now(), updated_at = now() WHERE id = ${o.id}::uuid`);
+      await statusEvent(tx, o.id, "under_review", "changes_requested", { staff: viewer }, why);
+    }
     const [nw] = [...(await tx.execute<{ id: string }>(sql`
       INSERT INTO customer_orders (customer_id, submitted_by, prepared_by, request_number, status, idempotency_key, pricing_source, currency,
                                    net_total, vat_total, gross_total, customer_note, status_reason, replaces_order_id, payment_option, payment_option_label,
@@ -442,6 +453,48 @@ export async function proposeOrderRevision(viewer: PortalUser, orderId: string, 
     );
     return { orderId: nw.id, requestNumber: number };
   });
+}
+
+/** Zahtev iz opsega kancelarije koji sme da dobije izmenjen predlog (bez upisa). */
+async function revisableOrder(viewer: PortalUser, orderId: string) {
+  if (!can(viewer, "customer_orders:review")) throw new Error("Nemate pravo da menjate zahteve.");
+  if (!/^[0-9a-f-]{36}$/i.test(orderId)) throw new Error("Zahtev ne postoji.");
+  const scope = await resolveLedgerScope(viewer);
+  const [o] = [...(await getDb().execute<{ id: string; customer_id: string; payment_option: string | null }>(sql`
+    SELECT id, customer_id, payment_option FROM customer_orders WHERE id = ${orderId}::uuid AND pricing_source = 'cenovnik'`))];
+  if (!o || (scope.customerIds !== null && !scope.customerIds.includes(o.customer_id))) throw new Error("Zahtev ne postoji.");
+  return o;
+}
+
+/** Pretraga artikala za izmenjen predlog: šifra ili naziv, bez artikala van programa. */
+export async function searchRevisionArticles(viewer: PortalUser, orderId: string, query: string) {
+  await revisableOrder(viewer, orderId);
+  const q = String(query ?? "").trim().slice(0, 60);
+  if (q.length < 2) return [];
+  const rows = await getDb().execute<{ code: string; name: string; unit: string | null }>(sql`
+    SELECT a.code, a.name, a.unit FROM articles a
+     WHERE ${foldedMatch([sql`a.code`, sql`a.name`], q)}
+       AND NOT EXISTS (SELECT 1 FROM articles_out_of_programme o WHERE o.article_id = a.id)
+     ORDER BY (a.code = ${q}) DESC, a.name LIMIT 12`);
+  return [...rows].map((r) => ({ code: r.code, name: r.name, unit: r.unit ?? "" }));
+}
+
+/** Pregled izmenjenog predloga pre slanja: cena po stavci za opciju iz zahteva, zbir. Ništa ne upisuje. */
+export async function previewOrderRevision(viewer: PortalUser, orderId: string, items: { articleId: string; quantity: number }[]) {
+  const o = await revisableOrder(viewer, orderId);
+  const today = belgradeDate(new Date());
+  const priced = await priceLines(getDb(), o.customer_id, items.filter((i) => i.quantity > 0), o.payment_option, today);
+  const lines = priced.lines.map((l) => ({
+    code: l.articleCode,
+    problem: l.problem ?? l.quantityProblem,
+    status: l.selected?.status ?? null,
+    netPrice: l.selected?.status === "cena" ? l.selected.netPrice : null,
+    discountPercent: l.selected?.status === "cena" ? l.selected.discountPercent : null,
+    gross: l.amounts?.gross ?? null,
+    note: l.selected?.status === "na_upit" ? ON_REQUEST_NOTE[l.selected.reason] ?? "cenu potvrđuje kancelarija" : null,
+  }));
+  const gross = lines.reduce((sum, l) => sum + (l.gross ?? 0), 0);
+  return { lines, gross: Math.round(gross * 100) / 100, onRequest: lines.filter((l) => l.status === "na_upit").length };
 }
 
 /** Kupac potvrđuje (postaje poslat zahtev; original „vraćen na ispravku“) ili odbija izmenjen predlog. */

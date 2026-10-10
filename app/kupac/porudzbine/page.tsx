@@ -2,7 +2,8 @@ import Link from "next/link";
 import { srDateTime, srMoney } from "@/components/customer/account-format";
 import { OrderStatusBadge } from "@/components/ordering/OrderStatusBadge";
 import { requireCustomerSession } from "@/lib/authz/customer-session";
-import { listCustomerOrders, loadOrderingMode } from "@/lib/ordering/ordering-service";
+import { listCustomerOrders } from "@/lib/ordering/ordering-service";
+import { orderingEnabledFor } from "@/lib/ordering/trial";
 
 export const dynamic = "force-dynamic";
 
@@ -12,7 +13,7 @@ export const dynamic = "force-dynamic";
  */
 export default async function CustomerOrdersPage() {
   const session = await requireCustomerSession("/kupac/porudzbine");
-  const [orders, mode] = await Promise.all([listCustomerOrders(session.customerId), loadOrderingMode()]);
+  const [orders, enabled] = await Promise.all([listCustomerOrders(session.customerId), orderingEnabledFor(session.customerId)]);
 
   return (
     <section className="portal-panel">
@@ -30,13 +31,15 @@ export default async function CustomerOrdersPage() {
         <div className="portal-panel-body ka-empty">
           <p>
             <strong>Još nema poslatih zahteva.</strong>{" "}
-            {mode.enabled
-              ? "Artikle dodajete iz kataloga, u odeljku „Poručite ponovo”, a zahtev šaljete iz korpe."
+            {enabled
+              ? "Artikle birate u odeljku „Izbor robe“, a zahtev šaljete iz korpe."
               : "Poručivanje kroz nalog još nije uključeno — porudžbine i dalje šaljete svom komercijalisti."}
           </p>
-          <p>
-            <Link href="/katalog">Otvorite katalog →</Link>
-          </p>
+          {enabled ? (
+            <p>
+              <Link href="/kupac/naruci">Izbor robe →</Link>
+            </p>
+          ) : null}
         </div>
       ) : (
         <div className="portal-panel-body">

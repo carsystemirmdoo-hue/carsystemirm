@@ -170,6 +170,59 @@ test("izmenjen predlog: original netaknut, komercijalista ne menja, kupac potvr�
   assert.equal(detail.lines.length, 2);
 });
 
+test("stavka na upit blokira potvrdu; posle odbijenog predloga novi dobija sledeći broj; pretraga bez kvačica", async (t) => {
+  if (guard(t)) return;
+  const s = await svc();
+  const ord = await import("@/lib/ordering/ordering-service");
+  const tamara = await user("tamara");
+  await db.sql`UPDATE articles SET name = 'CS RAZREĐIVAČ QA BEZ PRAVILA' WHERE id = ${art.N1}`;
+  assert.ok((await s.listRequestArticles(customerId, "razredjivac qa")).articles.some((a) => a.articleId === art.N1), "razredjivac → RAZREĐIVAČ");
+  assert.ok((await s.listRequestArticles(customerId, "razređivač")).articles.some((a) => a.articleId === art.N1), "razređivač → RAZREĐIVAČ");
+  await s.addRequestItem(session(), { articleId: art.B1, quantity: "2" });
+  await s.addRequestItem(session(), { articleId: art.N1, quantity: "1" });
+  const q = await s.loadRequestQuote(customerId, "avans");
+  const sent = await s.submitOrderRequest(session(), { idempotencyKey: randomUUID(), fingerprint: q.fingerprint, paymentOption: "avans" });
+  assert.equal(sent.status, "created");
+  const id = (sent as { orderId: string }).orderId;
+  assert.ok((await ord.listOrderRequests(tamara, null, "razredjivac")).some((o) => o.id === id), "pretraga zahteva po nazivu stavke bez kvačica");
+  assert.equal((await ord.officeTransition(tamara, id, "under_review", null)).ok, true);
+  const blocked = await ord.officeTransition(tamara, id, "confirmed", null);
+  assert.equal(blocked.ok, false, "potvrda sa stavkom na upit");
+  assert.match((blocked as { message: string }).message, /na upit/);
+  const r2 = await s.proposeOrderRevision(tamara, id, { lines: [{ articleId: art.B1, quantity: 2 }, { articleId: art.N1, quantity: 1 }], reason: "prvi predlog" });
+  assert.match(r2.requestNumber, /\/2$/);
+  await assert.rejects(async () => s.proposeOrderRevision(tamara, id, { lines: [{ articleId: art.B1, quantity: 1 }], reason: "dok čeka kupca" }), /već postoji predlog/);
+  assert.equal((await s.answerOrderRevision(session(), r2.orderId, false)).ok, true);
+  const r3 = await s.proposeOrderRevision(tamara, id, { lines: [{ articleId: art.B1, quantity: 2 }], reason: "drugi predlog bez stavke na upit" });
+  assert.match(r3.requestNumber, /\/3$/, "drugi predlog ne ponavlja broj /2");
+  const orig = (await ord.loadOrderRequest(tamara, id))!;
+  assert.equal(orig.replacedBy?.requestNumber, r3.requestNumber, "važeća zamena je /3, ne odbijena /2");
+  assert.equal((await s.answerOrderRevision(session(), r3.orderId, true)).ok, true);
+  assert.equal((await ord.officeTransition(tamara, r3.orderId, "under_review", null)).ok, true);
+  assert.equal((await ord.officeTransition(tamara, r3.orderId, "confirmed", null)).ok, true, "bez stavki na upit potvrda prolazi");
+  await db.sql`UPDATE articles SET name = 'CS NOVI ARTIKAL BEZ PRAVILA' WHERE id = ${art.N1}`;
+});
+
+test("odredište kupca posle prijave i odjave zavisi od režima „sajt u pripremi“", async () => {
+  const { customerLandingAfterLogin, customerLandingAfterLogout } = await import("@/lib/authz/customer-landing");
+  const prev = process.env.MAINTENANCE_MODE;
+  try {
+    process.env.MAINTENANCE_MODE = "1";
+    assert.equal(customerLandingAfterLogin(null), "/kupac");
+    assert.equal(customerLandingAfterLogin("/katalog"), "/kupac", "javna strana bi vodila na /site-u-pripremi");
+    assert.equal(customerLandingAfterLogin("/kupac/korpa"), "/kupac/korpa");
+    assert.equal(customerLandingAfterLogout("/katalog"), "/prijava/kupac?poruka=odjava");
+    process.env.MAINTENANCE_MODE = "0";
+    assert.equal(customerLandingAfterLogin(null), "/kupac");
+    assert.equal(customerLandingAfterLogin("/katalog"), "/katalog");
+    assert.equal(customerLandingAfterLogout("/katalog"), "/katalog");
+    assert.equal(customerLandingAfterLogout("/kupac/korpa"), "/");
+  } finally {
+    if (prev === undefined) delete process.env.MAINTENANCE_MODE;
+    else process.env.MAINTENANCE_MODE = prev;
+  }
+});
+
 test("opoziv opcije plaćanja posle prikaza korpe traži novu potvrdu", async (t) => {
   if (guard(t)) return;
   const s = await svc();

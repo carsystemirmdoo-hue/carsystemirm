@@ -8348,7 +8348,7 @@ section.portal-metrics {
 .kk-lines { display: grid; margin: 0; padding: 0; list-style: none; border: 1px solid var(--p-line); border-radius: 8px; overflow: hidden; }
 .kk-lines > li {
   display: grid;
-  grid-template-columns: minmax(0, 2.6fr) minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1.1fr) minmax(0, 0.9fr) minmax(0, 1.1fr);
+  grid-template-columns: minmax(0, 2.4fr) minmax(0, 0.8fr) minmax(0, 0.7fr) minmax(0, 1.25fr) minmax(0, 0.95fr) minmax(0, 1.35fr);
   align-items: start;
   gap: 12px;
   padding: 12px 14px;
@@ -8422,6 +8422,7 @@ section.portal-metrics {
 .kk-back a { color: var(--p-red); font-weight: 650; text-decoration: none; }
 .kk-orders .ka-inv-number small { display: block; color: var(--p-muted); font-size: 11px; font-weight: 500; }
 .kk-orders .ka-amount small { display: block; color: var(--p-muted); font-size: 11px; font-weight: 500; }
+.kk-orders li > a > span > small { display: block; color: var(--p-muted); font-size: 11px; font-weight: 500; }
 @media (max-width: 860px) {
   .kk-lines-head { display: none !important; }
   .kk-lines > li { grid-template-columns: 1fr 1fr; gap: 8px 12px; }
@@ -9061,6 +9062,7 @@ section.portal-metrics {
 .zp-totals dd { margin: 0; text-align: right; font-variant-numeric: tabular-nums; }
 .zp-grand dt, .zp-grand dd { font-weight: 700; font-size: 10.5pt; }
 .zp-notes p { margin: 0 0 1mm; }
+.zp-notes, .zp-foot { break-inside: avoid; }
 .zp-foot { margin-top: 5mm; border-top: 1px solid #999; padding-top: 2mm; font-size: 8pt; color: #444; }
 .zp-screen-only { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
 @media (max-width: 720px) {
@@ -9114,3 +9116,40 @@ section.portal-metrics {
   .kr-amount { justify-items: start; }
   .kr-option { min-width: 0; width: 100%; }
 }
+
+/*
+ * Lepljivo zaglavlje portala (64 px) i fiksno zaglavlje javnog sajta iznad kupčevog dela.
+ * App Router posle navigacije poziva scrollIntoView na novom segmentu; bez ovoga vrh
+ * strane (veze „Svi zahtevi“, „Odštampajte zahtev“) ostaje ispod zaglavlja.
+ */
+html:has(.portal-root) { scroll-padding-top: 76px; }
+html:has(.portal-customer-area) { scroll-padding-top: 104px; }
+@media (max-width: 760px) {
+  html:has(.portal-root) { scroll-padding-top: 68px; }
+  html:has(.portal-customer-area) { scroll-padding-top: 88px; }
+}
+
+.kk-lines-note { margin: 8px 0 0; color: var(--p-muted); font-size: 12px; }
+.kk-lines-static .ka-amount, .kk-lines-static > li > span[data-label^="Cena"], .kk-lines-static > li > span[data-label="PDV"] { overflow-wrap: anywhere; }
+
+/* Zaglavlje naloga dok je javni sajt u pripremi (AccountOnlyHeader). */
+.acct-bar { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 12px max(16px, calc((100vw - 1200px) / 2)); border-bottom: 1px solid var(--border); background: var(--background); color: var(--foreground); }
+.acct-bar-brand { display: inline-flex; align-items: center; gap: 10px; color: inherit; text-decoration: none; font-weight: 700; font-size: 15px; }
+.acct-bar-brand img { width: 36px; height: 36px; border-radius: 6px; }
+.acct-bar-brand small { display: block; font-weight: 500; font-size: 12px; color: var(--muted-foreground); }
+
+/* Izmenjen predlog kancelarije */
+.rv-scroll { overflow-x: auto; max-width: 100%; }
+.rv-table { min-width: 640px; }
+.rv-table .rv-qty input { width: 6.5em; }
+.rv-table td small { display: block; color: var(--p-muted); font-size: 12px; }
+.rv-found { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
+.rv-found li { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 6px 10px; border: 1px solid var(--p-line); border-radius: 6px; }
+.rv-found small { color: var(--p-muted); }
+.rc-inline .rr-field { flex: 1 1 220px; min-width: 0; }
+.rc-inline .rr-field input { width: 100%; max-width: 100%; }
+
+/* Nova potvrda u korpi: konkretne promene od prikaza */
+.kr-changes { border: 1px solid oklch(0.8 0.1 70); background: oklch(0.97 0.04 85); color: var(--p-ink); border-radius: 8px; padding: 10px 14px; font-size: 13px; }
+.kr-changes ul { margin: 6px 0 0; padding-left: 18px; display: grid; gap: 3px; }
+.dark .portal-customer-area .kr-changes { background: oklch(0.3 0.05 80); border-color: oklch(0.5 0.08 80); }

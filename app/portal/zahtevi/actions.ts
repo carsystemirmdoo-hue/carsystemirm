@@ -2,7 +2,7 @@
 
 import { sql } from "drizzle-orm";
 import { getDb } from "@/db/client";
-import { proposeOrderRevision } from "@/lib/ordering/request-service";
+import { previewOrderRevision, proposeOrderRevision, searchRevisionArticles } from "@/lib/ordering/request-service";
 import { createTrialAccount } from "@/lib/ordering/trial-service";
 
 import { revalidatePath } from "next/cache";
@@ -65,6 +65,33 @@ export async function proposeRevisionAction(orderId: string, lines: { code: stri
     return { ok: true, message: `Izmenjen predlog ${r.requestNumber} je poslat kupcu na potvrdu.`, orderId: r.orderId };
   } catch (error) {
     return { ok: false, message: error instanceof Error ? error.message : "Predlog nije sačuvan." };
+  }
+}
+
+/** Pretraga artikala za izmenjen predlog (šifra ili naziv). */
+export async function searchRevisionArticlesAction(orderId: string, query: string) {
+  const user = await requireCapability("customer_orders:review", `/portal/zahtevi/${orderId}`);
+  try {
+    return { ok: true as const, items: await searchRevisionArticles(user, String(orderId), String(query ?? "")) };
+  } catch (error) {
+    return { ok: false as const, message: error instanceof Error ? error.message : "Pretraga nije uspela." };
+  }
+}
+
+/** Pregled cena izmenjenog predloga pre slanja kupcu. */
+export async function previewRevisionAction(orderId: string, lines: { code: string; quantity: string }[]) {
+  const user = await requireCapability("customer_orders:review", `/portal/zahtevi/${orderId}`);
+  if (!/^[0-9a-f-]{36}$/.test(orderId) || !Array.isArray(lines) || lines.length > 500) return { ok: false as const, message: "Neispravan zahtev." };
+  const codes = [...new Set(lines.map((l) => String(l.code).trim()).filter(Boolean))];
+  const found = codes.length ? await getDb().execute<{ id: string; code: string }>(sql`SELECT id, code FROM articles WHERE code IN (${sql.join(codes.map((c) => sql`${c}`), sql`, `)})`) : [];
+  const byCode = new Map([...found].map((a) => [a.code, a.id]));
+  const missing = codes.filter((c) => !byCode.has(c));
+  if (missing.length) return { ok: false as const, message: `Nepoznata šifra: ${missing.join(", ")}` };
+  try {
+    const items = lines.map((l) => ({ articleId: byCode.get(String(l.code).trim())!, quantity: Number(String(l.quantity).replace(",", ".")) }));
+    return { ok: true as const, ...(await previewOrderRevision(user, orderId, items)) };
+  } catch (error) {
+    return { ok: false as const, message: error instanceof Error ? error.message : "Pregled nije uspeo." };
   }
 }
 

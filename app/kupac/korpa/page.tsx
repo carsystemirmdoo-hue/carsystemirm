@@ -6,6 +6,7 @@ import { CartForm, type CartView } from "./CartForm";
 import { loadRequestQuote } from "@/lib/ordering/request-service";
 import { orderingEnabledFor } from "@/lib/ordering/trial";
 import { RequestCartForm, type RequestCartView } from "./RequestCartForm";
+import { publicSiteOpen } from "@/lib/site-mode";
 
 export const dynamic = "force-dynamic";
 
@@ -94,7 +95,7 @@ export default async function CustomerCartPage({ searchParams }: { searchParams:
             kada ga kancelarija potvrdi.
           </p>
         </div>
-        <Link href="/katalog" className="portal-section-link">← Katalog</Link>
+        {publicSiteOpen() ? <Link href="/katalog" className="portal-section-link">← Katalog</Link> : null}
       </div>
 
       {list && quote.mode.enabled ? (
@@ -108,8 +109,8 @@ export default async function CustomerCartPage({ searchParams }: { searchParams:
         </div>
       ) : (
         <div className="kk-pricelist" data-kind="off">
-          <strong>Poručivanje nije uključeno</strong>
-          <span>{quote.mode.enabled ? "" : quote.mode.reason} Porudžbine i dalje šaljete svom komercijalisti.</span>
+          <strong>Poručivanje preko naloga još nije uključeno</strong>
+          <span>Porudžbine i dalje šaljete svom komercijalisti.</span>
         </div>
       )}
 
@@ -119,7 +120,7 @@ export default async function CustomerCartPage({ searchParams }: { searchParams:
             <strong>Korpa je prazna.</strong> Artikle dodajete iz kataloga, u odeljku „Poručite ponovo”.
           </p>
           <p>
-            <Link href="/katalog">Otvorite katalog →</Link> · <Link href="/kupac/porudzbine">Poslati zahtevi →</Link>
+            {publicSiteOpen() ? <><Link href="/katalog">Otvorite katalog →</Link> · </> : null}<Link href="/kupac/porudzbine">Poslati zahtevi →</Link>
           </p>
         </div>
       ) : (

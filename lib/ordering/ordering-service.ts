@@ -8,6 +8,7 @@ import { recordAudit } from "@/lib/audit/record";
 import { getCarsystemProductBySlug, getProductVariantSelector } from "@/lib/carsystem-data";
 import { loadDatasetInfo } from "@/lib/data-state/dataset";
 import { resolveLedgerScope, type LedgerScope } from "@/lib/ledger/effective-sales";
+import { foldedMatch } from "@/lib/ordering/search-fold";
 import {
   formatOrderNumber,
   formatRequestNumber,
@@ -345,7 +346,7 @@ export async function loadCartQuote(customerId: string, exec: Exec = getDb()): P
     const [src] = [
       ...(await exec.execute<{ id: string; request_number: string; status_reason: string | null; replaced_by: string | null }>(sql`
         SELECT o.id, o.request_number, o.status_reason,
-               (SELECT r.request_number FROM customer_orders r WHERE r.replaces_order_id = o.id) AS replaced_by
+               (SELECT r.request_number FROM customer_orders r WHERE r.replaces_order_id = o.id AND r.status <> 'cancelled' ORDER BY r.revision DESC LIMIT 1) AS replaced_by
           FROM customer_orders o WHERE o.id = ${sources[0]}::uuid AND o.customer_id = ${customerId}`)),
     ];
     if (src) correcting = { orderId: src.id, requestNumber: src.request_number, reason: src.status_reason, replacedBy: src.replaced_by };
@@ -631,7 +632,7 @@ async function listOrders(where: SQL): Promise<OrderListRow[]> {
 
 export type OrderDetail = OrderListRow & {
   replaces: { id: string; requestNumber: string } | null;
-  replacedBy: { id: string; requestNumber: string } | null;
+  replacedBy: { id: string; requestNumber: string; status: string } | null;
   netTotal: number;
   vatTotal: number;
   customerNote: string | null;
@@ -673,7 +674,7 @@ async function loadOrder(where: SQL): Promise<OrderDetail | null> {
       pricing_source: "demo" | "cenovnik"; payment_option: string | null; payment_option_label: string | null; revision: number;
       delivery_address: string | null; contact_phone: string | null; contact_email: string | null; partner_code: string | null;
       prepared_by_name: string | null; on_request_lines: number;
-      replaces_id: string | null; replaces_number: string | null; replaced_by_id: string | null; replaced_by_number: string | null;
+      replaces_id: string | null; replaces_number: string | null; replaced_by_id: string | null; replaced_by_number: string | null; replaced_by_status: string | null;
     }>(sql`
       SELECT o.id, o.request_number, o.order_number, o.status::text AS status, o.submitted_at,
              o.gross_total::text AS gross_total, o.net_total::text AS net_total, o.vat_total::text AS vat_total,
@@ -687,8 +688,9 @@ async function loadOrder(where: SQL): Promise<OrderDetail | null> {
                ORDER BY e.external_partner_code LIMIT 1) AS partner_code,
              o.replaces_order_id AS replaces_id,
              (SELECT p.request_number FROM customer_orders p WHERE p.id = o.replaces_order_id) AS replaces_number,
-             (SELECT r.id FROM customer_orders r WHERE r.replaces_order_id = o.id) AS replaced_by_id,
-             (SELECT r.request_number FROM customer_orders r WHERE r.replaces_order_id = o.id) AS replaced_by_number
+             (SELECT r.id FROM customer_orders r WHERE r.replaces_order_id = o.id ORDER BY (r.status = 'cancelled'), r.revision DESC LIMIT 1) AS replaced_by_id,
+             (SELECT r.request_number FROM customer_orders r WHERE r.replaces_order_id = o.id ORDER BY (r.status = 'cancelled'), r.revision DESC LIMIT 1) AS replaced_by_number,
+             (SELECT r.status::text FROM customer_orders r WHERE r.replaces_order_id = o.id ORDER BY (r.status = 'cancelled'), r.revision DESC LIMIT 1) AS replaced_by_status
         FROM customer_orders o
         JOIN customers c ON c.id = o.customer_id
         LEFT JOIN customer_users cu ON cu.id = o.submitted_by
@@ -730,7 +732,7 @@ async function loadOrder(where: SQL): Promise<OrderDetail | null> {
     onRequestLinesCount: Number(head.on_request_lines),
     revisionNo: Number(head.revision),
     replaces: head.replaces_id ? { id: head.replaces_id, requestNumber: head.replaces_number! } : null,
-    replacedBy: head.replaced_by_id ? { id: head.replaced_by_id, requestNumber: head.replaced_by_number! } : null,
+    replacedBy: head.replaced_by_id ? { id: head.replaced_by_id, requestNumber: head.replaced_by_number!, status: head.replaced_by_status! } : null,
     lines: [...lines].map((l) => ({
       lineNumber: Number(l.line_number), articleId: l.article_id, articleCode: l.article_code, articleName: l.article_name,
       catalogSlug: l.catalog_product_slug, catalogVariantId: l.catalog_variant_id, catalogName: l.catalog_name,
@@ -774,14 +776,22 @@ async function transition(
   const db = getDb();
   return db.transaction(async (tx) => {
     const [o] = [
-      ...(await tx.execute<{ id: string; status: string; request_number: string }>(sql`
-        SELECT o.id, o.status::text AS status, o.request_number FROM customer_orders o WHERE ${where} FOR UPDATE`)),
+      ...(await tx.execute<{ id: string; status: string; request_number: string; on_request: number }>(sql`
+        SELECT o.id, o.status::text AS status, o.request_number, coalesce(o.on_request_lines, 0)::int AS on_request
+          FROM customer_orders o WHERE ${where} FOR UPDATE`)),
     ];
     if (!o) return { ok: false as const, message: "Zahtev ne postoji." };
     // Isti prelaz dvaput (dvostruki klik) nije greška i ne pravi drugi događaj.
     if (o.status === to) return { ok: true as const, changed: false };
     const problem = transitionProblem({ from: o.status, to, actor: actor.kind, reason });
     if (problem) return { ok: false as const, message: problem };
+    // Porudžbina se ne potvrđuje sa nepoznatom cenom: stavke na upit prvo dobijaju cenu kroz izmenjen predlog.
+    if (to === "confirmed" && o.on_request > 0) {
+      return {
+        ok: false as const,
+        message: `Zahtev ima stavke na upit (${o.on_request}). Pre potvrde pripremite izmenjen predlog sa potvrđenom cenom ili bez tih stavki; kupac ga potvrđuje.`,
+      };
+    }
 
     let orderNumber: string | null = null;
     if (to === "confirmed") {
@@ -888,11 +898,10 @@ export async function listOrderRequests(viewer: PortalUser, status?: string | nu
   const statusWhere = status ? sql`o.status::text = ${status}` : sql`true`;
   // Pretraga po broju, kupcu, BizniSoft šifri/nazivu ili kataloškom nazivu stavke.
   const q = (query ?? "").trim().slice(0, 80);
-  const term = `%${q.replace(/[\\%_]/g, (m) => `\\${m}`)}%`;
   const queryWhere = q
-    ? sql`(o.request_number ILIKE ${term} OR coalesce(o.order_number, '') ILIKE ${term} OR c.name ILIKE ${term}
+    ? sql`(${foldedMatch([sql`o.request_number`, sql`o.order_number`, sql`c.name`], q)}
            OR EXISTS (SELECT 1 FROM customer_order_lines l WHERE l.order_id = o.id
-                       AND (l.article_code ILIKE ${term} OR l.article_name ILIKE ${term} OR l.catalog_name ILIKE ${term})))`
+                       AND ${foldedMatch([sql`l.article_code`, sql`l.article_name`, sql`l.catalog_name`], q)}))`
     : sql`true`;
   return listOrders(sql`${scopeWhere(scope)} AND ${statusWhere} AND ${queryWhere}`);
 }

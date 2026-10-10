@@ -29,17 +29,18 @@ export default async function CustomerOrderPage({
         <div>
           {sp.poslato === "1" && order.status === "submitted" ? (
             <p className="kk-sent" role="status">
-              Zahtev {order.requestNumber} je primljen.{" "}
-              {order.pricingSource === "cenovnik"
-                ? "Raspoloživost i isporuku potvrđuje kancelarija; zahtev još nije faktura ni rezervacija. Ovde pratite njegov status."
-                : "Ovde pratite njegov status."}
+              Zahtev {order.requestNumber} je poslat. Ovde pratite njegov status.
             </p>
           ) : null}
         </div>
         <Link href="/kupac/porudzbine" className="portal-section-link">← Svi zahtevi</Link>
       </div>
       <OrderDetailView order={order} audience="customer" />
-      <CustomerOrderActions orderId={order.id} status={order.status} />
+      <CustomerOrderActions
+        orderId={order.id}
+        status={order.status}
+        pendingProposal={order.replacedBy && order.replacedBy.status !== "cancelled" ? order.replacedBy : null}
+      />
     </section>
   );
 }

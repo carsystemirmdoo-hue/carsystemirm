@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useActionState, useId } from "react";
+import { useActionState, useState, useId } from "react";
 import { PortalIcon } from "@/components/portal/PortalIcon";
 import { signInAction, type LoginState } from "@/app/portal/actions";
 import { CALLBACK_PARAM } from "@/lib/authz/redirects.mjs";
@@ -10,6 +10,8 @@ const INITIAL: LoginState = { error: null };
 
 export function PortalLoginForm({ callbackUrl }: { callbackUrl: string }) {
   const [state, formAction, pending] = useActionState(signInAction, INITIAL);
+  // Kontrolisano polje: posle neuspele prijave React prazni obrazac, a e-pošta treba da ostane.
+  const [email, setEmail] = useState("");
   const secondFactorHintId = useId();
 
   return (
@@ -72,6 +74,8 @@ export function PortalLoginForm({ callbackUrl }: { callbackUrl: string }) {
               <input
                 type="email"
                 name="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 autoComplete="username"
                 required
                 maxLength={254}

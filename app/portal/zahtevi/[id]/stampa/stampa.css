@@ -1,0 +1,81 @@
+/* =========================================================================
+ * Zahtev / porudžbina za štampu (A4, uspravno). Stavke 10 pt; više strana je
+ * bolje od presitnog teksta. Kolone fiksne širine (iznosi se ne lome), naziv
+ * zauzima ostatak i prelama se po rečima.
+ * ====================================================================== */
+.zp-doc {
+  background: #fff; color: #000; max-width: 210mm; margin: 16px auto 0; padding: 12mm 10mm;
+  font: 10pt/1.35 Arial, "Helvetica Neue", Helvetica, sans-serif;
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.14);
+  -webkit-print-color-adjust: exact; print-color-adjust: exact;
+}
+.zp-doc :is(h1, h2, p, dl, dd) { margin: 0; }
+.zp-old { margin: 0 0 4mm !important; padding: 2mm 3mm; border: 2px solid #000; font-weight: 700; font-size: 11pt; text-align: center; letter-spacing: 0.02em; }
+.zp-head { display: flex; justify-content: space-between; gap: 10mm; border-bottom: 2px solid #000; padding-bottom: 3mm; margin-bottom: 4mm; }
+.zp-firm { font-size: 9pt; color: #333; }
+.zp-head h1 { font-size: 16pt; line-height: 1.2; margin-top: 1mm; }
+.zp-not { margin-top: 1mm !important; font-size: 9pt; color: #333; }
+.zp-head dl { display: grid; grid-template-columns: auto auto; gap: 0.6mm 4mm; font-size: 10pt; align-content: start; }
+.zp-head dl div { display: contents; }
+.zp-head dt { color: #444; }
+.zp-head dd { font-weight: 700; text-align: right; }
+.zp-parties { display: grid; grid-template-columns: 1.4fr 1fr; gap: 8mm; margin-bottom: 4mm; break-inside: avoid; }
+.zp-parties h2, .zp-h { font-size: 9pt; margin: 0 0 1mm; text-transform: uppercase; letter-spacing: 0.05em; color: #333; }
+.zp-h { margin-top: 5mm; font-size: 10pt; color: #000; break-after: avoid; }
+.zp-parties p { margin: 0 0 0.6mm; overflow-wrap: anywhere; }
+
+.zp-table { width: 100%; border-collapse: collapse; table-layout: fixed; font-size: 10pt; line-height: 1.3; margin: 0 0 3mm; }
+.zp-table th, .zp-table td { border: 0.6pt solid #888; padding: 1.2mm 1.4mm; vertical-align: top; text-align: left; }
+.zp-table th { background: #e9e9e9; font-size: 8.5pt; font-weight: 700; line-height: 1.2; vertical-align: bottom; hyphens: manual; }
+.zp-table .r { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.zp-table th.r { white-space: normal; }
+.zp-table .nw { white-space: nowrap; font-variant-numeric: tabular-nums; }
+.zp-table .b { font-weight: 700; }
+.zp-table .zp-name { overflow-wrap: break-word; word-break: normal; }
+.zp-sub { display: block; font-size: 8.5pt; color: #444; }
+/* Širine kolona: zbir 190 mm (A4 − margine 10 mm). Iznos do 99.999.999,99 staje u 10 pt; naziv dobija ostatak (~55 mm). */
+.zp-table .c-rb { width: 8mm; }
+.zp-table .c-sifra { width: 14mm; }
+.zp-table .c-jm { width: 12mm; }
+.zp-table .c-kol { width: 14mm; }
+.zp-table .c-osn { width: 23mm; }
+.zp-table .c-rabat { width: 12mm; }
+.zp-table .c-cena { width: 23mm; }
+.zp-table .c-iznos { width: 28mm; }
+.zp-table .c-pdv { width: 11mm; }
+.zp-table .c-razlog { width: 58mm; }
+
+.zp-totals { display: flex; flex-direction: column; align-items: flex-end; gap: 1mm; margin: 0 0 4mm; break-inside: avoid; }
+.zp-totals dl { display: grid; grid-template-columns: auto auto; gap: 0.8mm 8mm; font-size: 10pt; }
+.zp-totals dl div { display: contents; }
+.zp-totals dd { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.zp-grand dt, .zp-grand dd { font-weight: 700; font-size: 11pt; padding-top: 1mm; border-top: 1pt solid #000; }
+.zp-totals p { font-size: 9pt; color: #333; }
+.zp-unknown { margin: 0 0 4mm; padding: 2mm 3mm; border: 1pt solid #000; font-size: 10.5pt; break-inside: avoid; }
+.zp-notes p { margin: 0 0 1.2mm; overflow-wrap: anywhere; }
+.zp-notes, .zp-foot { break-inside: avoid; }
+.zp-foot { margin-top: 4mm; border-top: 0.6pt solid #888; padding-top: 1.5mm; font-size: 8.5pt; color: #333; }
+
+@media (max-width: 720px) {
+  .zp-doc { padding: 12px; font-size: 13px; box-shadow: none; }
+  .zp-head, .zp-parties { display: block; }
+  .zp-head dl { margin-top: 8px; }
+  .zp-doc .zp-table { display: block; overflow-x: auto; }
+  .zp-doc .zp-table colgroup { display: none; }
+}
+
+@media print {
+  @page { size: A4 portrait; margin: 12mm 10mm 13mm; }
+  .portal-root:has(.zp-doc) .portal-sidebar,
+  .portal-root:has(.zp-doc) .portal-topbar,
+  .portal-root:has(.zp-doc) .portal-mobile-scrim,
+  .portal-root:has(.zp-doc) .portal-data-strip,
+  .portal-root:has(.zp-doc) [class*="data-strip"],
+  .zp-screen-only, .pn-live, nextjs-portal { display: none !important; }
+  .portal-root:has(.zp-doc), .portal-root:has(.zp-doc) .portal-workspace, .portal-root:has(.zp-doc) .portal-main { display: block !important; margin: 0 !important; padding: 0 !important; background: #fff !important; min-height: 0 !important; overflow: visible !important; max-width: none !important; }
+  html, body { background: #fff !important; }
+  .zp-doc { box-shadow: none; max-width: none; margin: 0; padding: 0; }
+  .zp-doc .zp-table { display: table; }
+  .zp-table thead { display: table-header-group; }
+  .zp-table tr { break-inside: avoid; }
+}

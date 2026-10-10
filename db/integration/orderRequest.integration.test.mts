@@ -114,6 +114,10 @@ test("korpa: obe cene, zbir po izabranoj opciji, stavka na upit bez iznosa, van 
   assert.equal(av.lines.find((l) => l.articleId === art.N1)!.amounts, null);
   assert.notEqual(av.fingerprint, od.fingerprint, "opcija je deo otiska");
   assert.equal(av.canSubmit, true, "stavka na upit ne blokira slanje");
+  // Prikaz (redizajn 2026-10): zbir za svaku opciju je isti kao zbir kada je ta opcija izabrana.
+  assert.deepEqual({ ...av.optionTotals.avans, onRequest: undefined }, { ...av.totals, onRequest: undefined });
+  assert.deepEqual({ ...av.optionTotals.odlozeno_30, onRequest: undefined }, { ...od.totals, onRequest: undefined });
+  assert.equal(av.optionTotals.odlozeno_30.onRequest, od.onRequest);
 });
 
 test("slanje: neodobrena opcija odbijena, promena cene traži novu potvrdu, isti ključ = isti zahtev", async (t) => {

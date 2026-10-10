@@ -1,5 +1,6 @@
 import { randomUUID } from "node:crypto";
 import Link from "next/link";
+import { countOf, STAVKA } from "@/lib/ordering/plural.mjs";
 import { requireCustomerSession } from "@/lib/authz/customer-session";
 import { loadCartQuote } from "@/lib/ordering/ordering-service";
 import { CartForm, type CartView } from "./CartForm";
@@ -30,6 +31,7 @@ export default async function CustomerCartPage({ searchParams }: { searchParams:
       options: q.options,
       selected: q.selected,
       totals: q.totals,
+      optionTotals: q.optionTotals,
       onRequest: q.onRequest,
       correcting: q.correcting?.requestNumber ?? null,
       lines: q.lines.map((l) => ({
@@ -37,22 +39,42 @@ export default async function CustomerCartPage({ searchParams }: { searchParams:
         quantity: l.quantity, step: l.step, problem: l.problem, quantityProblem: l.quantityProblem, amounts: l.amounts,
         prices: q.options.map((o) => {
           const p = l.byOption[o.key];
-          return { key: o.key, label: o.label, status: p.status, netPrice: p.status === "cena" ? p.netPrice : null, discountPercent: p.status === "cena" ? p.discountPercent : null };
+          return {
+            key: o.key, label: o.label, status: p.status,
+            netPrice: p.status === "cena" ? p.netPrice : null,
+            listPrice: p.status === "cena" ? p.listPrice : null,
+            discountPercent: p.status === "cena" ? p.discountPercent : null,
+          };
         }),
       })),
     };
     return (
-      <section className="portal-panel">
-        <div className="portal-section-header">
+      <div className="pn">
+        <header className="pn-head">
           <div>
-            <h2>Korpa — zahtev za porudžbinu</h2>
-            <p>Korpa pripada firmi {session.customerName}. Cene su iz cenovnika i Vaših odobrenih uslova, bez PDV-a.</p>
+            <h1 className="pn-title">Korpa</h1>
+            <p className="pn-lead">
+              {view.lines.length ? `${countOf(view.lines.length, STAVKA)} · ` : ""}
+              Cene su iz cenovnika i Vaših odobrenih uslova, bez PDV-a. Korpa pripada firmi i vide je svi nalozi firme.
+            </p>
           </div>
-          <Link href="/kupac/naruci" className="portal-section-link">← Izbor robe</Link>
-        </div>
-        {view.lines.length ? <RequestCartForm view={view} /> : <div className="portal-panel-body ka-empty"><p>Korpa je prazna. <Link href="/kupac/naruci">Izaberite robu</Link>.</p></div>}
+          <Link href="/kupac/naruci" className="pn-btn" data-size="sm">
+            ← Nastavite izbor robe
+          </Link>
+        </header>
+        {view.lines.length ? (
+          <RequestCartForm view={view} />
+        ) : (
+          <div className="pn-card pn-empty">
+            <strong>Korpa je prazna.</strong>
+            <p>Robu birate u odeljku „Izbor robe“: artikli koje Vaša firma kupuje ili pretraga po šifri i nazivu.</p>
+            <Link href="/kupac/naruci" className="pn-btn" data-variant="primary">
+              Izaberite robu
+            </Link>
+          </div>
+        )}
         <LiveRefresh endpoint="/api/kupac/zahtevi/stanje?korpa=1" stamp={await customerCartStamp(session.customerId)} what="Korpa" />
-      </section>
+      </div>
     );
   }
   const quote = await loadCartQuote(session.customerId);

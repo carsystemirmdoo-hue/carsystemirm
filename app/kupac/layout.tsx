@@ -7,7 +7,9 @@ import { getCustomerSession } from "@/lib/authz/customer-session";
 import { loadDatasetInfo } from "@/lib/data-state/dataset";
 import { publicSiteOpen } from "@/lib/site-mode";
 import { orderingEnabledFor } from "@/lib/ordering/trial";
+import { countCustomerOrdersAwaiting } from "@/lib/ordering/ordering-service";
 import "../portal/portal.css";
+import "../portal/panel.css";
 
 export const metadata: Metadata = {
   title: "Moj nalog · Carsystem i R-M",
@@ -22,36 +24,36 @@ export const dynamic = "force-dynamic";
  * Bez sesije okvir se ne iscrtava — strana sama preusmerava na prijavu sa
  * povratnom adresom (`requireCustomerSession(putanja)`), pa se posle prijave
  * kupac vraća baš tamo gde je krenuo.
+ *
+ * Firma i odjava su u jednom tankom redu; naslov strane (h1) daje svaka strana.
  */
 export default async function CustomerAccountLayout({ children }: { children: React.ReactNode }) {
   const [session, dataset] = await Promise.all([getCustomerSession(), loadDatasetInfo()]);
   if (!session) return <>{children}</>;
+  const [ordering, awaiting] = await Promise.all([orderingEnabledFor(session.customerId), countCustomerOrdersAwaiting(session.customerId)]);
   return (
     <div className="portal-root portal-customer-area">
       <main className="portal-main">
         <DataStrip dataset={dataset} />
-        <div className="ka-head">
-          <div>
-            <span className="ka-eyebrow">Moj nalog</span>
-            <h1>{session.customerName}</h1>
-            <p>
-              Prijavljeni ste kao {session.name}. Nalog vidi isključivo podatke ove firme.
-            </p>
+        <div className="pn-account">
+          <div className="pn-account-name">
+            <strong>{session.customerName}</strong>
+            <span>Prijavljeni ste kao {session.name}. Nalog vidi isključivo podatke ove firme.</span>
           </div>
-          <div className="ka-head-actions">
+          <div className="pn-inline">
             {publicSiteOpen() ? (
-              <Link href="/katalog" className="portal-button" data-variant="secondary">
+              <Link href="/katalog" className="pn-btn" data-size="sm">
                 Nazad na katalog
               </Link>
             ) : null}
             <form action={customerSignOutAction}>
-              <button type="submit" className="portal-button" data-variant="ghost">
+              <button type="submit" className="pn-btn" data-size="sm">
                 Odjavite se
               </button>
             </form>
           </div>
         </div>
-        <AccountTabs ordering={await orderingEnabledFor(session.customerId)} />
+        <AccountTabs ordering={ordering} awaiting={awaiting} />
         {children}
       </main>
     </div>

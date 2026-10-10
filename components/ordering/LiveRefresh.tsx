@@ -63,12 +63,13 @@ export function LiveRefresh({ endpoint, stamp, what = "Prikaz" }: { endpoint: st
 
   if (!changed) return null;
   return (
-    <div className="live-notice" role="status" aria-live="polite">
+    <div className="pn-live" role="status" aria-live="polite" aria-label={`${what}: novo stanje`}>
       <span>
-        {what} je u međuvremenu promenjen (drugi prozor, kupac ili kancelarija). Vaše nesnimljene izmene u obrascu su zadržane.
+        <strong>Stanje se u međuvremenu promenilo</strong> (drugi prozor, kupac ili kancelarija). Vaš nesnimljen unos je
+        zadržan — pregledajte novo stanje pre slanja.
       </span>
-      <button type="button" className="portal-button" data-variant="secondary" onClick={() => router.refresh()}>
-        Osvežite prikaz
+      <button type="button" className="pn-btn" data-size="sm" onClick={() => router.refresh()}>
+        Prikažite novo stanje
       </button>
     </div>
   );

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { CUSTOMER_PASSWORD_MIN } from "@/lib/customers/invitation-service";
 import { PasswordSetupForm } from "./PasswordSetupForm";
 import "../../../portal/portal.css";
+import "../../../portal/panel.css";
 
 export const metadata: Metadata = {
   title: "Aktivacija naloga · Carsystem i R-M",

@@ -1,7 +1,8 @@
 "use client";
 
+import Link from "next/link";
 import { useActionState } from "react";
-import { Field, PortalButton } from "@/components/portal/PortalPrimitives";
+import { CustomerAuthShell } from "@/components/customer/CustomerAuthShell";
 import {
   activateAccountAction,
   type ActivationState,
@@ -26,60 +27,53 @@ export function PasswordSetupForm({
   const [state, formAction, pending] = useActionState(activateAccountAction, INITIAL);
 
   return (
-    <main className="portal-login-root">
-      <section className="portal-login-form-side">
-        <form className="portal-login-form" action={formAction}>
-          <header>
-            <span>Pristup za kupce</span>
-            <h2>Aktivacija naloga</h2>
-            <p>
-              Postavite lozinku koju znate samo Vi. Niko iz firme je ne vidi i ne
-              može je pročitati.
-            </p>
-          </header>
-
+    <CustomerAuthShell title="Aktivacija naloga" lead="Postavite lozinku koju znate samo Vi. Niko iz firme je ne vidi i ne može je pročitati.">
+      {state.ok ? (
+        <div className="pn-note" data-tone="success" role="status">
+          <div className="pn-note-row">
+            <span>{state.ok}</span>
+            <Link href="/prijava/kupac" className="pn-btn" data-size="sm">
+              Idite na prijavu
+            </Link>
+          </div>
+        </div>
+      ) : (
+        <form action={formAction}>
           <input type="hidden" name="token" value={token} />
-
-          <Field label="Nova lozinka" required hint={`Najmanje ${minLength} znakova.`}>
+          <div className="pn-field">
+            <label htmlFor="aktivacija-lozinka">Nova lozinka</label>
             <input
+              id="aktivacija-lozinka"
               type="password"
               name="password"
               minLength={minLength}
               maxLength={200}
               autoComplete="new-password"
               required
+              aria-describedby="aktivacija-pomoc"
             />
-          </Field>
-          <Field label="Ponovite lozinku" required>
-            <input
-              type="password"
-              name="confirm"
-              minLength={minLength}
-              maxLength={200}
-              autoComplete="new-password"
-              required
-            />
-          </Field>
+            <span id="aktivacija-pomoc" className="pn-help">
+              Najmanje {minLength} znakova.
+            </span>
+          </div>
+          <div className="pn-field">
+            <label htmlFor="aktivacija-potvrda">Ponovite lozinku</label>
+            <input id="aktivacija-potvrda" type="password" name="confirm" minLength={minLength} maxLength={200} autoComplete="new-password" required />
+          </div>
 
           {state.error ? (
-            <div className="portal-login-error" role="alert">
+            <p className="pn-note" data-tone="danger" role="alert">
               <span>
-                <strong>Nije uspelo</strong>
-                <small>{state.error}</small>
+                <strong>Nije uspelo.</strong> {state.error}
               </span>
-            </div>
-          ) : null}
-          {state.ok ? (
-            <p className="portal-login-hint" role="status">
-              {state.ok} <a href="/prijava/kupac">Idite na prijavu</a>.
             </p>
           ) : null}
 
-          <PortalButton type="submit" variant="primary" disabled={pending}>
-            {pending ? "Čuvanje…" : "Sačuvajte lozinku"}
-          </PortalButton>
+          <button className="pn-btn" data-variant="primary" type="submit" disabled={pending} aria-busy={pending || undefined} style={{ width: "100%" }}>
+            {pending ? "Čuva se…" : "Sačuvajte lozinku"}
+          </button>
         </form>
-      </section>
-    </main>
+      )}
+    </CustomerAuthShell>
   );
 }

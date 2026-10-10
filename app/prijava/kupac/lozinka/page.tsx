@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { CustomerAuthShell } from "@/components/customer/CustomerAuthShell";
 import "../../../portal/portal.css";
+import "../../../portal/panel.css";
 
 export const metadata: Metadata = {
   title: "Zaboravljena lozinka · Carsystem i R-M",
@@ -16,22 +18,10 @@ export const metadata: Metadata = {
  */
 export default function CustomerPasswordPage() {
   return (
-    <main className="portal-login-root">
-      <section className="portal-login-form-side">
-        <div className="portal-login-form">
-          <header>
-            <span>Pristup za kupce</span>
-            <h2>Zaboravljena lozinka</h2>
-            <p>
-              Za novu lozinku se obratite svom komercijalisti ili kancelariji. Dobićete nov
-              link za pristup, preko kog sami postavljate lozinku.
-            </p>
-          </header>
-          <p className="portal-login-hint">
-            <Link href="/prijava/kupac">Nazad na prijavu</Link>
-          </p>
-        </div>
-      </section>
-    </main>
+    <CustomerAuthShell title="Zaboravljena lozinka" lead="Za novu lozinku obratite se svom komercijalisti ili kancelariji. Dobićete nov link za pristup, preko kog sami postavljate lozinku.">
+      <Link href="/prijava/kupac" className="pn-btn" style={{ justifySelf: "start" }}>
+        ← Nazad na prijavu
+      </Link>
+    </CustomerAuthShell>
   );
 }

@@ -29,7 +29,10 @@ export default async function CustomerOrderPage({
         <div>
           {sp.poslato === "1" && order.status === "submitted" ? (
             <p className="kk-sent" role="status">
-              Zahtev {order.requestNumber} je poslat kancelariji. Ovde pratite njegov status.
+              Zahtev {order.requestNumber} je primljen.{" "}
+              {order.pricingSource === "cenovnik"
+                ? "Raspoloživost i isporuku potvrđuje kancelarija; zahtev još nije faktura ni rezervacija. Ovde pratite njegov status."
+                : "Ovde pratite njegov status."}
             </p>
           ) : null}
         </div>

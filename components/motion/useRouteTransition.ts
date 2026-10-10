@@ -432,6 +432,10 @@ export function useRouteTransition() {
       const destination = `${nextUrl.pathname}${nextUrl.search}${nextUrl.hash}`;
       if (destination === `${currentUrl.pathname}${currentUrl.search}${currentUrl.hash}`) return;
 
+      // Dok se nova strana još otkriva, klik se ne guta: navigacija ide uobičajenim
+      // putem (bez prelaza). Ranije je preventDefault pre provere faze tiho bacao klik.
+      if (machineRef.current.phase === "opening") return;
+
       event.preventDefault();
 
       if (machineRef.current.phase !== "idle") return;

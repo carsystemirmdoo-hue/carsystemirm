@@ -1,4 +1,5 @@
 import {
+  boolean,
   date,
   index,
   integer,
@@ -34,6 +35,8 @@ export const customerOrderStatus = pgEnum("customer_order_status", [
   "cancelled",
   // 0030: vraćen kupcu na ispravku; ostaje u istoriji, zamenjuje ga nov zahtev.
   "superseded",
+  // 0044: izmenjen predlog kancelarije čeka potvrdu kupca.
+  "awaiting_customer",
 ]);
 export const priceRequestStatus = pgEnum("price_request_status", ["open", "in_progress", "answered", "closed"]);
 export const priceRequestKind = pgEnum("price_request_kind", ["no_price", "special_terms"]);
@@ -128,17 +131,24 @@ export const customerOrders = pgTable(
     customerId: uuid("customer_id")
       .notNull()
       .references(() => customers.id, { onDelete: "restrict" }),
-    submittedBy: uuid("submitted_by")
-      .notNull()
-      .references(() => customerUsers.id, { onDelete: "restrict" }),
+    /** 0044: kupac koji je poslao; izmenjen predlog kancelarije ga nema (vidi preparedBy). */
+    submittedBy: uuid("submitted_by").references(() => customerUsers.id, { onDelete: "restrict" }),
     requestNumber: text("request_number").notNull(),
     orderNumber: text("order_number"),
     status: customerOrderStatus("status").notNull().default("submitted"),
     idempotencyKey: text("idempotency_key").notNull(),
-    priceListId: uuid("price_list_id")
-      .notNull()
-      .references(() => priceLists.id, { onDelete: "restrict" }),
-    priceListKind: priceListKind("price_list_kind").notNull(),
+    priceListId: uuid("price_list_id").references(() => priceLists.id, { onDelete: "restrict" }),
+    priceListKind: priceListKind("price_list_kind"),
+    /** 0044: 'demo' (demo cenovnik) ili 'cenovnik' (osnovne cene + odobreni rabati). */
+    pricingSource: text("pricing_source").notNull().default("demo"),
+    /** 0044: izabrana odobrena opcija plaćanja (šifra i naziv pri slanju). Nije dokaz uplate. */
+    paymentOption: text("payment_option"),
+    paymentOptionLabel: text("payment_option_label"),
+    revision: integer("revision").notNull().default(1),
+    deliveryAddress: text("delivery_address"),
+    contactPhone: text("contact_phone"),
+    preparedBy: uuid("prepared_by").references(() => users.id, { onDelete: "restrict" }),
+    onRequestLines: integer("on_request_lines").notNull().default(0),
     currency: text("currency").notNull(),
     netTotal: numeric("net_total", { precision: 14, scale: 2 }).notNull(),
     vatTotal: numeric("vat_total", { precision: 14, scale: 2 }).notNull(),
@@ -179,20 +189,24 @@ export const customerOrderLines = pgTable(
       .references(() => articles.id, { onDelete: "restrict" }),
     articleCode: text("article_code").notNull(),
     articleName: text("article_name").notNull(),
-    catalogProductSlug: text("catalog_product_slug").notNull(),
+    catalogProductSlug: text("catalog_product_slug"),
     catalogVariantId: text("catalog_variant_id"),
-    catalogName: text("catalog_name").notNull(),
+    catalogName: text("catalog_name"),
     unit: text("unit").notNull(),
     packLabel: text("pack_label").notNull(),
     quantity: numeric("quantity", { precision: 14, scale: 3 }).notNull(),
-    listPrice: numeric("list_price", { precision: 14, scale: 4 }).notNull(),
-    discountPercent: numeric("discount_percent", { precision: 6, scale: 3 }).notNull().default("0"),
-    netPrice: numeric("net_price", { precision: 14, scale: 4 }).notNull(),
-    vatPercent: numeric("vat_percent", { precision: 5, scale: 2 }).notNull(),
-    lineNet: numeric("line_net", { precision: 14, scale: 2 }).notNull(),
-    lineVat: numeric("line_vat", { precision: 14, scale: 2 }).notNull(),
-    lineGross: numeric("line_gross", { precision: 14, scale: 2 }).notNull(),
+    listPrice: numeric("list_price", { precision: 14, scale: 4 }),
+    discountPercent: numeric("discount_percent", { precision: 6, scale: 3 }).default("0"),
+    netPrice: numeric("net_price", { precision: 14, scale: 4 }),
+    vatPercent: numeric("vat_percent", { precision: 5, scale: 2 }),
+    lineNet: numeric("line_net", { precision: 14, scale: 2 }),
+    lineVat: numeric("line_vat", { precision: 14, scale: 2 }),
+    lineGross: numeric("line_gross", { precision: 14, scale: 2 }),
     priceBasis: text("price_basis").notNull(),
+    /** 0044: 'cena' ili 'na_upit' (bez potvrđene cene za izabranu opciju — bez iznosa). */
+    priceStatus: text("price_status").notNull().default("cena"),
+    onRequestReason: text("on_request_reason"),
+    packConfirmed: boolean("pack_confirmed").notNull().default(false),
   },
   (table) => [uniqueIndex("customer_order_lines_key").on(table.orderId, table.lineNumber)],
 );

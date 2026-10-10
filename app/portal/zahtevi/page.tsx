@@ -5,13 +5,15 @@ import { PageHeader } from "@/components/portal/PortalPrimitives";
 import { can } from "@/lib/authz/permissions.mjs";
 import { requireCapability } from "@/lib/authz/session";
 import { listOrderRequests, loadOrderingMode } from "@/lib/ordering/ordering-service";
+import { trialOverview } from "@/lib/ordering/trial-service";
+import { TrialPanel } from "./TrialPanel";
 
 export const dynamic = "force-dynamic";
 
 const GROUPS = [
   { key: "new", title: "Novi — čekaju prijem", statuses: ["submitted"] },
   { key: "review", title: "U obradi", statuses: ["under_review"] },
-  { key: "waiting", title: "Čeka se kupac", statuses: ["changes_requested"] },
+  { key: "waiting", title: "Čeka se kupac", statuses: ["changes_requested", "awaiting_customer"] },
   { key: "confirmed", title: "Potvrđene porudžbine", statuses: ["confirmed"] },
   { key: "closed", title: "Odbijeni, otkazani i vraćeni na ispravku", statuses: ["rejected", "cancelled", "superseded"] },
 ];
@@ -21,6 +23,8 @@ export default async function OrderRequestsPage({ searchParams }: { searchParams
   const q = ((await searchParams).q ?? "").trim().slice(0, 80);
   const [rows, mode] = await Promise.all([listOrderRequests(user, null, q), loadOrderingMode()]);
   const canReview = can(user, "customer_orders:review");
+  const isOwner = can(user, "customer_accounts:manage") && can(user, "prices:approve");
+  const trials = isOwner ? await trialOverview() : [];
 
   return (
     <>
@@ -61,6 +65,12 @@ export default async function OrderRequestsPage({ searchParams }: { searchParams
           </span>
         </div>
       </section>
+      {isOwner ? (
+        <section className="portal-panel">
+          <div className="portal-section-header"><div><h2>Kontrolisana proba</h2></div></div>
+          <TrialPanel trials={trials} />
+        </section>
+      ) : null}
       {GROUPS.map((g) => {
         const list = rows.filter((r) => g.statuses.includes(r.status));
         if (list.length === 0 && (g.key !== "new" || q)) return null;
@@ -95,9 +105,13 @@ export default async function OrderRequestsPage({ searchParams }: { searchParams
                           <small>
                             {o.orderNumber ? `zahtev ${o.requestNumber}` : `${o.lineCount} stavki`}
                             {o.replacesNumber ? ` · ispravka ${o.replacesNumber}` : ""}
+                            {o.revisionNo > 1 ? ` · verzija ${o.revisionNo}` : ""}
                           </small>
                         </span>
-                        <span>{o.customerName}</span>
+                        <span>
+                          {o.customerName}
+                          {o.paymentOptionLabel ? <small>{o.paymentOptionLabel}</small> : null}
+                        </span>
                         <span>{srDateTime(o.submittedAt)}</span>
                         <span>
                           <OrderStatusBadge status={o.status} />
@@ -105,6 +119,7 @@ export default async function OrderRequestsPage({ searchParams }: { searchParams
                         <span className="ka-amount">
                           {srMoney(String(o.grossTotal), o.currency)}
                           {o.priceListKind === "demo" ? <small>demo cene</small> : null}
+                          {o.onRequestLinesCount ? <small>+ {o.onRequestLinesCount} na upit</small> : null}
                         </span>
                       </Link>
                     </li>

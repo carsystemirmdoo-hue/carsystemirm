@@ -429,6 +429,10 @@
   );
   margin-block-end: calc(var(--bf-section-y) * -0.5);
   aspect-ratio: 5 / 4;
+  /* Ploča ide do ivice prozora pa raste sa širinom: na 2560px je bila
+     1416×1135, viša od ekrana. Na 1440×900 je ~641px i granica je ne dira;
+     iznad nje slika ostaje „cover“ u nižem kadru. */
+  max-height: min(46rem, 78vh);
 }
 
 .heroObjectImage {
@@ -1494,6 +1498,10 @@
   display: grid;
   gap: 2px;
   grid-template-columns: minmax(0, 1fr);
+  /* Traka je preko cele širine; na 2560px su kvadrati bili 852px. Iznad 1720px
+     traka se centrira na tamnoj podlozi sekcije. */
+  max-width: 1720px;
+  margin-inline: auto;
 }
 
 .detailFrame {

@@ -2,7 +2,10 @@
   --red: oklch(0.59 0.22 27);
   --red-bright: oklch(0.68 0.22 27);
   --red-deep: oklch(0.43 0.18 26);
-  --red-grad: linear-gradient(135deg, var(--red-bright), var(--red-deep));
+  /* Ispuna dugmadi sa belim tekstom. Gradijent počinje od osnovne crvene, ne od
+     --red-bright (svetla crvena za TEKST na tamnom): beli tekst je na tom tonu
+     imao 3.28:1, na --red 4.58:1. Kraj gradijenta je isti. */
+  --red-grad: linear-gradient(135deg, var(--red), var(--red-deep));
   --bg: oklch(0.13 0.012 255);
   --bg2: oklch(0.16 0.014 255);
   --surface: oklch(0.98 0.004 255 / 0.045);
@@ -1127,6 +1130,17 @@
   --cs-orb-halo: oklch(0.24 0.028 250 / 0.11);
   --cs-orb-ring: oklch(0.24 0.028 250 / 0.34);
   --cs-orb-ring-strong: oklch(0.24 0.028 250 / 0.48);
+}
+
+/* Tamna tema: kartica prodavnice u lokatoru stoji na svetlijem, crvenkastom
+   tonu (izabrana stavka + gradijent kartice). Adresa u --text3 je tu davala
+   3.58:1, a tip lokacije u --red-bright 3.67:1. */
+:global(html.dark) .storePreviewItem .storePreviewContent > span:not(.storePreviewHeading) {
+  color: var(--text2);
+}
+
+:global(html.dark) .storePreviewItem .storePreviewHeading small {
+  color: oklch(0.76 0.15 27);
 }
 
 /* Svetla tema: tip lokacije u pregledu prodavnice je sitan crveni tekst na svetloplavoj
@@ -3759,7 +3773,8 @@
 }
 
 :global(html.dark) .supportVisual figcaption {
-  color: var(--lc-kicker);
+  /* --lc-kicker (#9296a0) je na sivoj sceni slike bio ispod 4.5:1. */
+  color: #c3c7cf;
 }
 
 /*

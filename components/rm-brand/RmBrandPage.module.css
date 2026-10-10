@@ -2089,7 +2089,9 @@
 }
 
 .systemProcessPath li span {
-  opacity: 0.56;
+  /* Redni broj koraka nosi informaciju; prigušen preko već prigušene boje
+     padao je na 2.1–3.3:1. Hijerarhiju sada drži samo debljina naziva. */
+  opacity: 1;
 }
 
 .systemProcessPath li strong {
@@ -2163,7 +2165,8 @@
 }
 
 .systemTechnicalSlot small {
-  color: var(--system-card-muted);
+  /* Na svetloj pločici --system-card-muted je davao 2.75:1. */
+  color: var(--system-card-foreground);
   font-family: var(--font-technical), monospace;
   font-size: 0.44rem;
   letter-spacing: 0.08em;

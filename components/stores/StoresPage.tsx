@@ -7,12 +7,14 @@ import styles from "./StoresPage.module.css";
 export function StoresPage({ stores }: { stores: PartnerStore[] }) {
   return (
     <div className={styles.pageShell}>
-      <SeoBreadcrumbs
-        items={[
-          { name: "Početna", path: "/" },
-          { name: "Prodavnice", path: "/prodavnice" },
-        ]}
-      />
+      <div className="ds-container">
+        <SeoBreadcrumbs
+          items={[
+            { name: "Početna", path: "/" },
+            { name: "Prodavnice", path: "/prodavnice" },
+          ]}
+        />
+      </div>
       <StoreLocator stores={stores} />
       <Footer />
     </div>

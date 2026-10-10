@@ -13,7 +13,9 @@
   --cl-chalk: #f4f7f2;
   --cl-hairline: rgba(244, 247, 242, 0.14);
 
-  --cl-gutter: clamp(20px, 4vw, 60px);
+  /* Sekcije su preko cele širine (pozadina), a sadržaj počinje na liniji
+     zajedničkog kontejnera — ranije je na 3440px stajao 60px od ivice. */
+  --cl-gutter: max(var(--ds-gutter, clamp(20px, 4vw, 56px)), calc((100% - var(--ds-container-max, 1208px)) / 2));
   --cl-display: clamp(56px, 5.2vw, 76px);
   --cl-eyebrow: 13px;
 
@@ -289,8 +291,10 @@
 .heroContent {
   position: relative;
   z-index: 2;
-  padding: 0 var(--cl-gutter) clamp(48px, 7vh, 88px);
-  width: min(100%, 760px);
+  /* Levo: linija kontejnera; tekst sam zadržava čitljivu širinu (~640px),
+     nezavisno od toga koliki je razmak do ivice ekrana. */
+  padding: 0 var(--ds-gutter, clamp(20px, 4vw, 56px)) clamp(48px, 7vh, 88px) var(--cl-gutter);
+  width: min(100%, calc(var(--cl-gutter) + 700px));
   display: grid;
   /*
    * An implicit `auto` column sizes to its items' content, so a wide CTA row

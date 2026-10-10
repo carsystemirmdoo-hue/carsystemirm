@@ -249,7 +249,9 @@
   position: relative;
   z-index: 3;
   display: grid;
-  width: min(calc(100% - 2rem), calc(74rem + var(--ds-container-grow, 0px)));
+  /* Isti kontejner i bočni razmak kao sadržaj strane — logo i navigacija
+     počinju na istoj liniji kao naslovi odeljaka. */
+  width: min(var(--ds-container-max, 1208px), 100% - (var(--ds-gutter, clamp(20px, 4vw, 56px)) * 2));
   min-height: var(--header-height);
   grid-template-columns: auto minmax(0, 1fr) auto;
   align-items: center;
@@ -1644,7 +1646,7 @@
   }
 
   .shell {
-    width: min(calc(100% - 1.25rem), 74rem);
+    width: calc(100% - (var(--ds-gutter, clamp(20px, 4vw, 56px)) * 2));
     gap: 0.55rem;
   }
 

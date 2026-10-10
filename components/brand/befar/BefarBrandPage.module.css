@@ -70,7 +70,8 @@
 
 .container {
   width: 100%;
-  max-width: var(--bf-max);
+  /* Sadržaj = zajednički kontejner (razmak se dodaje, ne oduzima od njega). */
+  max-width: calc(var(--bf-max) + var(--bf-gutter) * 2);
   margin-inline: auto;
   padding-inline: var(--bf-gutter);
 }

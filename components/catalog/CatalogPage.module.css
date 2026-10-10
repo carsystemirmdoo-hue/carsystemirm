@@ -75,12 +75,12 @@
 
 .topbarInner {
   display: flex;
-  max-width: calc(1320px + var(--ds-container-grow, 0px));
+  max-width: calc(var(--ds-container-max, 1208px) + 2 * var(--ds-gutter, clamp(20px, 4vw, 56px)));
   align-items: center;
   justify-content: space-between;
   gap: 18px;
   margin-inline: auto;
-  padding: 14px 48px;
+  padding: 14px var(--ds-gutter, clamp(20px, 4vw, 56px));
 }
 
 .brandLink {
@@ -174,9 +174,9 @@
 }
 
 .main {
-  max-width: calc(1320px + var(--ds-container-grow, 0px));
+  max-width: calc(var(--ds-container-max, 1208px) + 2 * var(--ds-gutter, clamp(20px, 4vw, 56px)));
   margin-inline: auto;
-  padding: 34px 48px 96px;
+  padding: 34px var(--ds-gutter, clamp(20px, 4vw, 56px)) 96px;
 }
 
 .staticCatalogSection {
@@ -897,6 +897,19 @@
   }
 }
 
+/* Ultrawide: kontejner raste do 2240px (68vw); peta i šesta kolona drže
+   karticu na ~300–360px, kao na 1440–1920px, umesto da naraste na ~480px. */
+@media (min-width: 2700px) {
+  .productGrid {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
+}
+@media (min-width: 3200px) {
+  .productGrid {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+  }
+}
+
 .productCard .catalogProductVisual {
   min-height: 0;
   aspect-ratio: 1.1 / 1;
@@ -1249,7 +1262,7 @@
 @media (max-width: 1180px) {
   .topbarInner,
   .main {
-    padding-inline: 32px;
+    padding-inline: var(--ds-gutter, clamp(20px, 4vw, 56px));
   }
 
   .hero {
@@ -1331,7 +1344,7 @@
 @media (max-width: 640px) {
   .topbarInner {
     gap: 10px;
-    padding: 14px 16px;
+    padding: 14px var(--ds-gutter, clamp(20px, 4vw, 56px));
   }
 
   .brandCopy span {
@@ -1339,7 +1352,7 @@
   }
 
   .main {
-    padding: 24px 16px 78px;
+    padding: 24px var(--ds-gutter, clamp(20px, 4vw, 56px)) 78px;
   }
 
   .hero {

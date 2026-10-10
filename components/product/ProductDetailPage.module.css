@@ -70,12 +70,12 @@
 
 .topbarInner {
   display: flex;
-  max-width: calc(1320px + var(--ds-container-grow, 0px));
+  max-width: calc(var(--ds-container-max, 1208px) + 2 * var(--ds-gutter, clamp(20px, 4vw, 56px)));
   align-items: center;
   justify-content: space-between;
   gap: 18px;
   margin-inline: auto;
-  padding: 14px clamp(16px, 4vw, 48px);
+  padding: 14px var(--ds-gutter, clamp(20px, 4vw, 56px));
 }
 
 .brandLink {
@@ -168,9 +168,9 @@
 }
 
 .pageMain {
-  max-width: calc(1440px + var(--ds-container-grow, 0px));
+  max-width: calc(var(--ds-container-max, 1208px) + 2 * var(--ds-gutter, clamp(20px, 4vw, 56px)));
   margin-inline: auto;
-  padding: clamp(18px, 2.8vw, 32px) clamp(16px, 4vw, 48px) 92px;
+  padding: clamp(18px, 2.8vw, 32px) var(--ds-gutter, clamp(20px, 4vw, 56px)) 92px;
 }
 
 .breadcrumb {

@@ -302,6 +302,13 @@
       "when": 1792072800000,
       "tag": "0042_customer_status_payment_condition",
       "breakpoints": true
+    },
+    {
+      "idx": 43,
+      "version": "7",
+      "when": 1792159200000,
+      "tag": "0043_payment_options",
+      "breakpoints": true
     }
   ]
 }

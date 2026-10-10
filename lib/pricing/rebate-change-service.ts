@@ -7,6 +7,9 @@ import { can } from "@/lib/authz/permissions.mjs";
 import { canAccessCustomer } from "@/lib/authz/scope.mjs";
 import { allowsAutomaticRebates } from "@/lib/customers/commercial-status.mjs";
 import { loadAssignedCustomerIds, type PortalUser } from "@/lib/authz/user-repository";
+import { approvedPaymentOptions } from "@/lib/pricing/payment-option-service";
+import { isOptionCode, optionLabel } from "@/lib/pricing/paymentOptions.mjs";
+import { scopeKeyFor } from "@/lib/pricing/precedence.mjs";
 import { classifyCustomer, familyCandidates } from "@/lib/pricing/rebateCoverage.mjs";
 import { proposePriceRule, transitionPriceRule } from "@/lib/pricing/rule-service";
 import { belgradeDate } from "@/lib/recommendations/customerRhythm.mjs";
@@ -45,15 +48,18 @@ export type ChangeRow = {
 
 export type ChangeInput = {
   customerId: string;
-  mode: "artikli" | "grupa";
+  /** artikli · grupa (izvedena iz faktura) · brend (pregledana grupa artikala) · osnovni (svi artikli kupca) */
+  mode: "artikli" | "grupa" | "brend" | "osnovni";
+  /** Za mode „brend“: pregledana grupa (articles.brand). */
+  brand?: string;
   articleIds?: string[];
   groupKey?: string;
   newPercent: number;
   effectiveFrom: string;
   /** Izuzeci (pojedinačni dogovori) koje korisnik IZRIČITO uključuje u grupnu promenu. */
   includeExceptions?: string[];
-  /** Uslov plaćanja (0042): bez vrednosti = podrazumevani rabat; 'kratak_rok' = važi samo uz taj uslov. */
-  paymentCondition?: "kratak_rok" | null;
+  /** Opcija plaćanja (0043): bez vrednosti = osnovni uslov; inače šifra ODOBRENE opcije kupca. */
+  paymentCondition?: string | null;
 };
 
 export class RebateChangeError extends Error {}
@@ -133,6 +139,12 @@ export async function previewRebateChange(viewer: PortalUser, input: ChangeInput
   await assertCustomer(viewer, input.customerId);
   if (!(input.newPercent >= 0 && input.newPercent < 100)) throw new RebateChangeError("Rabat mora biti između 0 i 100 %.");
   if (!/^\d{4}-\d{2}-\d{2}$/.test(input.effectiveFrom) || input.effectiveFrom < asOf) throw new RebateChangeError("Početak važenja ne sme biti u prošlosti.");
+  if (input.paymentCondition) {
+    if (!isOptionCode(input.paymentCondition)) throw new RebateChangeError("Nepoznata opcija plaćanja.");
+    const ok = await approvedPaymentOptions(input.customerId, input.effectiveFrom);
+    if (!ok.includes(input.paymentCondition)) throw new RebateChangeError(`${optionLabel(input.paymentCondition)} nije odobreno ovom kupcu za ${input.effectiveFrom} — prvo predložite i odobrite opciju.`);
+  }
+  if (input.mode === "brend" || input.mode === "osnovni") return previewScopeChange(input, asOf);
   const data = await loadCustomer(input.customerId, asOf, input.paymentCondition ?? null);
   let ids: string[];
   let group: Awaited<ReturnType<typeof customerFamilies>>[number] | null = null;
@@ -182,8 +194,108 @@ export async function previewRebateChange(viewer: PortalUser, input: ChangeInput
     newPercent: input.newPercent,
     effectiveFrom: input.effectiveFrom,
     paymentCondition: input.paymentCondition ?? null,
+    scope: null as ScopeSummary | null,
     rows,
   };
+}
+
+export type ScopeSummary = {
+  productScope: "brand" | "all";
+  brand: string | null;
+  current: { ruleId: string; percent: number; effectiveFrom: string; origin: string } | null;
+  pending: { percent: number } | null;
+  scheduled: { percent: number; from: string } | null;
+  action: "novo" | "zamena" | "bez_promene" | "ceka_odluku" | "zakazano";
+};
+
+/**
+ * Pregled za ŠIROK opseg (brend ili svi artikli kupca): jedno pravilo. Prikazuje sve
+ * artikle kupca na koje utiče i posebne dogovore (uže pravilo), koji ostaju na snazi
+ * jer artikal ima prednost nad grupom, a grupa nad osnovnim rabatom.
+ */
+async function previewScopeChange(input: ChangeInput, asOf: string) {
+  const db = getDb();
+  const productScope = input.mode === "brend" ? ("brand" as const) : ("all" as const);
+  const brand = productScope === "brand" ? String(input.brand ?? "").trim() : null;
+  if (productScope === "brand" && !brand) throw new RebateChangeError("Izaberite pregledanu grupu artikala.");
+  const cond = input.paymentCondition ?? null;
+  const key = scopeKeyFor({ customerScope: "customer", customerId: input.customerId, productScope, brand, paymentCondition: cond });
+  const rules = await db.execute<{ id: string; p: string; status: string; f: string; t: string | null; sb: string | null }>(sql`
+    SELECT id, discount_percent::text AS p, status::text AS status, effective_from::text AS f, effective_to::text AS t, source_batch AS sb
+      FROM price_rules WHERE scope_key = ${key} AND value_kind = 'discount_percent'
+       AND status::text IN (${sql.join([...ACTIVE, ...PENDING].map((x) => sql`${x}`), sql`, `)})
+       AND (effective_to IS NULL OR effective_to >= ${asOf}::date)`);
+  const cur = rules.find((r) => ACTIVE.includes(r.status) && r.f <= asOf) ?? null;
+  const pending = rules.find((r) => PENDING.includes(r.status)) ?? null;
+  const scheduled = rules.find((r) => ACTIVE.includes(r.status) && r.f > asOf) ?? null;
+  const action: ScopeSummary["action"] = pending ? "ceka_odluku" : scheduled ? "zakazano"
+    : cur && Math.abs(Number(cur.p) - input.newPercent) < 0.0005 ? "bez_promene" : cur ? "zamena" : "novo";
+  if (cur && cur.f >= input.effectiveFrom) throw new RebateChangeError(`Postojeće pravilo počinje ${cur.f} — izaberite kasniji datum.`);
+  // Artikli kupca na koje opseg utiče, i uža pravila koja ostaju na snazi.
+  const arts = await db.execute<{ id: string; code: string; name: string; brand: string | null }>(sql`
+    SELECT DISTINCT a.id, a.code, a.name, a.brand
+      FROM recommendation_input_lines ril JOIN invoice_lines il ON il.id = ril.invoice_line_id JOIN articles a ON a.id = il.article_id
+     WHERE ril.customer_id = ${input.customerId}::uuid
+       AND NOT EXISTS (SELECT 1 FROM articles_out_of_programme o WHERE o.article_id = a.id)
+       AND ${productScope === "brand" ? sql`a.brand = ${brand}` : sql`true`}
+     ORDER BY a.code`);
+  const narrower = await db.execute<{ article_id: string | null; brand: string | null; product_scope: string; p: string; c: string | null }>(sql`
+    SELECT article_id, brand, product_scope::text AS product_scope, discount_percent::text AS p, payment_condition AS c FROM price_rules
+     WHERE customer_scope = 'customer' AND customer_id = ${input.customerId}::uuid AND value_kind = 'discount_percent'
+       AND status::text IN (${sql.join(ACTIVE.map((x) => sql`${x}`), sql`, `)})
+       AND effective_from <= ${asOf}::date AND (effective_to IS NULL OR effective_to >= ${asOf}::date)
+       AND product_scope::text IN (${productScope === "brand" ? sql`'article', 'product_group'` : sql`'article', 'product_group', 'brand'`})
+       AND (payment_condition IS NULL OR payment_condition IS NOT DISTINCT FROM ${cond})`);
+  const rows: ChangeRow[] = arts.map((a) => {
+    const own = narrower.find((r) => r.article_id === a.id && r.c === cond) ?? narrower.find((r) => r.article_id === a.id && r.c === null);
+    const viaBrand = productScope === "all" ? narrower.find((r) => r.product_scope === "brand" && r.brand && r.brand === a.brand && (r.c === cond || r.c === null)) : null;
+    const wins = own ?? viaBrand ?? null;
+    const review = Boolean(cond && own && own.c === null);
+    return {
+      articleId: a.id,
+      articleCode: a.code,
+      articleName: a.name,
+      current: null,
+      pending: null,
+      lastInvoice: null,
+      action: wins ? "izuzetak" : "novo",
+      included: !wins,
+      note: wins
+        ? review
+          ? `poseban dogovor ${Number(wins.p)} % bez uslova plaćanja — za izabranu opciju cena ide na pregled`
+          : `važi uže pravilo ${Number(wins.p)} % (${own ? "artikal" : `grupa ${viaBrand?.brand}`}) — ostaje na snazi`
+        : null,
+    };
+  });
+  return {
+    customerId: input.customerId,
+    mode: input.mode,
+    group: null,
+    newPercent: input.newPercent,
+    effectiveFrom: input.effectiveFrom,
+    paymentCondition: cond,
+    scope: {
+      productScope,
+      brand,
+      current: cur ? { ruleId: cur.id, percent: Number(cur.p), effectiveFrom: cur.f, origin: originOf(cur.sb) } : null,
+      pending: pending ? { percent: Number(pending.p) } : null,
+      scheduled: scheduled ? { percent: Number(scheduled.p), from: scheduled.f } : null,
+      action,
+    } as ScopeSummary | null,
+    rows,
+  };
+}
+
+/** Pregledane grupe artikala (brend) prisutne u istoriji kupca — za izbor u panelu. */
+export async function customerBrands(viewer: PortalUser, customerId: string) {
+  await assertCustomer(viewer, customerId);
+  const rows = await getDb().execute<{ brand: string; n: number }>(sql`
+    SELECT a.brand, count(DISTINCT a.id)::int AS n
+      FROM recommendation_input_lines ril JOIN invoice_lines il ON il.id = ril.invoice_line_id JOIN articles a ON a.id = il.article_id
+     WHERE ril.customer_id = ${customerId}::uuid AND a.brand IS NOT NULL
+       AND NOT EXISTS (SELECT 1 FROM articles_out_of_programme o WHERE o.article_id = a.id)
+     GROUP BY a.brand ORDER BY 2 DESC`);
+  return [...rows];
 }
 
 /**
@@ -192,13 +304,14 @@ export async function previewRebateChange(viewer: PortalUser, input: ChangeInput
  */
 export async function submitRebateChange(
   viewer: PortalUser,
-  input: ChangeInput & { reason: string; expected: { articleId: string; replacesRuleId: string | null }[]; approveNow?: boolean },
+  input: ChangeInput & { reason: string; expected: { articleId: string; replacesRuleId: string | null }[]; approveNow?: boolean; expectedScopeRuleId?: string | null },
 ) {
   if (!can(viewer, "prices:propose")) throw new RebateChangeError("Nemate pravo da predlažete promenu rabata.");
   if (input.approveNow && !can(viewer, "prices:approve")) throw new RebateChangeError("Direktno odobrava samo vlasnik.");
   const reason = input.reason.trim();
   if (reason.length < 10 || reason.length > 800) throw new RebateChangeError("Obrazloženje: 10–800 znakova.");
   const preview = await previewRebateChange(viewer, input);
+  if (preview.scope) return submitScopeChange(viewer, input, preview, reason);
   const doing = preview.rows.filter((r) => r.included);
   const key = (x: { articleId: string; replacesRuleId: string | null }) => `${x.articleId}|${x.replacesRuleId ?? ""}`;
   const now = new Set(doing.map((r) => key({ articleId: r.articleId, replacesRuleId: r.current?.ruleId ?? null })));
@@ -255,4 +368,84 @@ export async function submitRebateChange(
     correlationId: batchId,
   });
   return { batchId, count: created.length, approved: Boolean(input.approveNow) };
+}
+
+async function submitScopeChange(
+  viewer: PortalUser,
+  input: ChangeInput & { expected: { articleId: string; replacesRuleId: string | null }[]; approveNow?: boolean; expectedScopeRuleId?: string | null },
+  preview: Awaited<ReturnType<typeof previewRebateChange>>,
+  reason: string,
+) {
+  const sc = preview.scope!;
+  if (sc.action === "ceka_odluku" || sc.action === "zakazano" || sc.action === "bez_promene") {
+    throw new RebateChangeError(sc.action === "bez_promene" ? "Isti rabat već važi." : "Za ovaj opseg već postoji predlog ili zakazana promena.");
+  }
+  if ((input.expectedScopeRuleId ?? null) !== (sc.current?.ruleId ?? null)) throw new RebateChangeError("Stanje se promenilo od pregleda. Otvorite pregled ponovo.");
+  const batchId = `promena-${input.effectiveFrom}-${randomUUID().slice(0, 8)}`;
+  const label = sc.productScope === "brand" ? `grupa artikala „${sc.brand}“ (pregledana)` : "osnovni rabat kupca (svi artikli)";
+  const kept = preview.rows.filter((r) => !r.included).length;
+  const rule = await proposePriceRule(
+    {
+      customerScope: "customer",
+      customerId: input.customerId,
+      productScope: sc.productScope,
+      brand: sc.brand,
+      valueKind: "discount_percent",
+      discountPercent: input.newPercent,
+      effectiveFrom: input.effectiveFrom,
+      reason: `${reason} — Obuhvat: ${label}${input.paymentCondition ? ` · ${optionLabel(input.paymentCondition)}` : ""}. ${sc.current ? `Menja ${sc.current.percent} % (od ${sc.current.effectiveFrom}).` : "Novo pravilo."} Posebni dogovori koji ostaju na snazi: ${kept}.`.slice(0, 2000),
+      biznisoftEntryRequired: false,
+      sourceBatch: batchId,
+      replacesRuleId: sc.current?.ruleId ?? null,
+      paymentCondition: input.paymentCondition ?? null,
+    },
+    viewer,
+    { correlationId: batchId, notify: false },
+  );
+  if (input.approveNow) {
+    await transitionPriceRule({ ruleId: rule.id, to: "approved_pending_biznisoft", reason: `Direktno odobrenje promene ${batchId}` }, viewer, { correlationId: batchId, notify: false });
+  }
+  return { batchId, count: 1, approved: Boolean(input.approveNow) };
+}
+
+/**
+ * Posle odobrenog GRUPNOG pravila (brend, bez uslova) zatvara pravila artikla te
+ * grupe koja su mu JEDNAKA (isti procenat, bez uslova) — ona ništa ne dodaju, a kao
+ * uža pravila bi sprečila jednoznačnu primenu rabata opcije (npr. avans za grupu).
+ * Pravila sa DRUGAČIJIM procentom su pojedinačni dogovori: ne diraju se, vraćaju se za pregled.
+ * Istorija ostaje (effective_to + trag). Samo vlasnik.
+ */
+export async function closeRedundantArticleRules(actor: PortalUser, input: { customerId: string; brand: string; percent: number; closeAfter: string; reason: string }) {
+  if (!can(actor, "prices:approve")) throw new RebateChangeError("Samo vlasnik.");
+  const db = getDb();
+  const rows = await db.execute<{ id: string; p: string; code: string; f: string }>(sql`
+    SELECT r.id, r.discount_percent::text AS p, a.code, r.effective_from::text AS f
+      FROM price_rules r JOIN articles a ON a.id = r.article_id
+     WHERE r.customer_scope = 'customer' AND r.customer_id = ${input.customerId}::uuid AND r.product_scope = 'article'
+       AND r.payment_condition IS NULL AND a.brand = ${input.brand}
+       AND r.status::text IN (${sql.join(ACTIVE.map((x) => sql`${x}`), sql`, `)})
+       AND (r.effective_to IS NULL OR r.effective_to > ${input.closeAfter}::date)`);
+  const same = rows.filter((r) => Math.abs(Number(r.p) - input.percent) < 0.0005 && r.f <= input.closeAfter);
+  const review = rows.filter((r) => !same.includes(r));
+  const batch = `zatvaranje-${randomUUID().slice(0, 8)}`;
+  await db.transaction(async (tx) => {
+    for (const r of same) {
+      await tx.execute(sql`UPDATE price_rules SET effective_to = ${input.closeAfter}::date, updated_at = now() WHERE id = ${r.id}::uuid`);
+    }
+    await recordAudit(
+      {
+        actor: { id: actor.id, name: actor.name, role: actor.role },
+        action: AUDIT_ACTIONS.priceRuleTransitioned,
+        entityType: "Serija pravila cene",
+        entityId: batch,
+        entityLabel: `${input.brand} · ${input.percent} %`,
+        before: { pravilaArtikla: rows.length },
+        after: { zatvoreno: same.length, vaziDo: input.closeAfter, zaPregled: review.map((r) => `${r.code} ${Number(r.p)} %`) },
+        reason: input.reason,
+        correlationId: batch,
+      },
+      tx,
+    );
+  });
+  return { closed: same.length, review: review.map((r) => ({ code: r.code, percent: Number(r.p) })) };
 }

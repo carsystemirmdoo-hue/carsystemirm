@@ -82,7 +82,7 @@ after(async () => {
     await db.sql`DELETE FROM source_documents WHERE issuer_code = ${ISSUER}`;
     await db.sql`DELETE FROM invoice_lines WHERE invoice_id IN (SELECT id FROM invoices WHERE company_id = ${ISSUER})`;
     await db.sql`DELETE FROM invoices WHERE company_id = ${ISSUER}`;
-    await db.sql`TRUNCATE customer_commercial_status_decisions, article_base_prices`;
+    await db.sql`TRUNCATE customer_commercial_status_decisions, article_base_prices, customer_payment_options`;
     await db.sql`DELETE FROM customer_users WHERE customer_id = ${customerId}`;
     await db.sql`DELETE FROM customer_assignments WHERE customer_id = ${customerId}`;
     await db.sql`DELETE FROM customer_external_identifiers WHERE customer_id = ${customerId}`;
@@ -96,19 +96,24 @@ after(async () => {
 
 const user = async (k: string) => (await (await import("@/lib/authz/user-repository")).loadPortalUser(ids[k]))!;
 
-test("uslovni rabat (kratak rok): predlog po uslovu, bez sukoba; cena kupca ga ne uzima podrazumevano", async (t) => {
+test("uslovni rabat (avans): samo odobrena opcija; predlog po uslovu, bez sukoba; cena kupca ga ne uzima podrazumevano", async (t) => {
   if (guard(t)) return;
   const { previewRebateChange, submitRebateChange } = await import("@/lib/pricing/rebate-change-service");
   const { customerPrices } = await import("@/lib/pricing/customer-price-service");
   const owner = await user("owner");
   const from = plus(TODAY, 1);
-  const input = { customerId, mode: "artikli" as const, articleIds: [art.A], newPercent: 44, effectiveFrom: from, paymentCondition: "kratak_rok" as const };
+  const { proposePaymentOption, decidePaymentOption } = await import("@/lib/pricing/payment-option-service");
+  const input = { customerId, mode: "artikli" as const, articleIds: [art.A], newPercent: 44, effectiveFrom: from, paymentCondition: "avans" };
+  // Neodobrena opcija se odbija.
+  await assert.rejects(() => previewRebateChange(owner, input), /nije odobreno/);
+  const opt = await proposePaymentOption(owner, { customerId, optionCode: "avans", effectiveFrom: TODAY, reason: "QA dogovor o avansu" });
+  await decidePaymentOption(owner, { id: opt.id, to: "odobreno", reason: null });
   const p = await previewRebateChange(owner, input);
   assert.equal(p.rows[0].action, "novo", "postojeće bezuslovno 40 % se NE menja uslovnim predlogom");
   await submitRebateChange(owner, { ...input, reason: "kupac plaća u roku od 1 dana — uslov za potvrdu", approveNow: true, expected: [{ articleId: art.A, replacesRuleId: null }] });
   const rules = await db.sql<{ p: string; c: string | null; t: string | null }[]>`
     SELECT discount_percent::text AS p, payment_condition AS c, effective_to::text AS t FROM price_rules WHERE customer_id = ${customerId} AND article_id = ${art.A} ORDER BY created_at`;
-  assert.deepEqual(rules.map((r) => [Number(r.p), r.c, r.t]), [[40, null, null], [44, "kratak_rok", null]], "bezuslovno ostaje otvoreno; uslovno je odvojeno");
+  assert.deepEqual(rules.map((r) => [Number(r.p), r.c, r.t]), [[40, null, null], [44, "avans", null]], "bezuslovno ostaje otvoreno; uslovno je odvojeno");
   const price = await customerPrices(customerId, [art.A], from);
   const a = price.prices.get(art.A)!;
   assert.equal(a.status, "cena");

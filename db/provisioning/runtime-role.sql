@@ -80,6 +80,9 @@ GRANT SELECT, INSERT ON article_programme_decisions TO :runtime_role;
 REVOKE UPDATE, DELETE, TRUNCATE ON customer_commercial_status_decisions FROM :runtime_role;
 GRANT SELECT, INSERT ON customer_commercial_status_decisions TO :runtime_role;
 
+--    Opcije plaćanja (0043): status se menja kroz servis; brisanje nikad (samo opoziv).
+REVOKE DELETE, TRUNCATE ON customer_payment_options FROM :runtime_role;
+
 --    Potvrda kontakta se ne briše; jedina dozvoljena izmena je opoziv
 --    (`revoked_at`, `revoked_by`, `revocation_reason`), koju okidač iz 0028
 --    sužava na te kolone.

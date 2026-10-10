@@ -36,6 +36,8 @@ export function RebateChangePanel({
   today,
   articles,
   families,
+  brands,
+  options,
   canApprove,
   initialArticleId,
 }: {
@@ -44,10 +46,13 @@ export function RebateChangePanel({
   today: string;
   articles: ArticleOption[];
   families: Family[];
+  brands: { brand: string; n: number }[];
+  options: { code: string; label: string }[];
   canApprove: boolean;
   initialArticleId: string | null;
 }) {
-  const [mode, setMode] = useState<"jedan" | "grupa" | "vise">(initialArticleId ? "jedan" : families.length ? "grupa" : "jedan");
+  const [mode, setMode] = useState<"jedan" | "grupa" | "vise" | "brend" | "osnovni">(initialArticleId ? "jedan" : families.length ? "grupa" : "jedan");
+  const [brand, setBrand] = useState(brands[0]?.brand ?? "");
   const [articleId, setArticleId] = useState(initialArticleId ?? articles[0]?.articleId ?? "");
   const [groupKey, setGroupKey] = useState(families[0]?.key ?? "");
   const [picked, setPicked] = useState<Set<string>>(new Set());
@@ -57,7 +62,7 @@ export function RebateChangePanel({
   const [reason, setReason] = useState("");
   const [include, setInclude] = useState<Set<string>>(new Set());
   const [approveNow, setApproveNow] = useState(false);
-  const [condition, setCondition] = useState<"" | "kratak_rok">("");
+  const [condition, setCondition] = useState<string>("");
   const [preview, setPreview] = useState<Preview | null>(null);
   const [msg, setMsg] = useState<{ ok: boolean; text: string } | null>(null);
   const [pending, start] = useTransition();
@@ -69,7 +74,8 @@ export function RebateChangePanel({
 
   const input = (inc = include) => ({
     customerId,
-    mode: mode === "grupa" ? ("grupa" as const) : ("artikli" as const),
+    mode: mode === "grupa" ? ("grupa" as const) : mode === "brend" ? ("brend" as const) : mode === "osnovni" ? ("osnovni" as const) : ("artikli" as const),
+    brand: mode === "brend" ? brand : undefined,
     articleIds: mode === "jedan" ? [articleId] : mode === "vise" ? [...picked] : [],
     groupKey: mode === "grupa" ? groupKey : undefined,
     newPercent: Number(percent.replace(",", ".")),
@@ -110,7 +116,25 @@ export function RebateChangePanel({
         <label>
           <input type="radio" name="obuhvat" checked={mode === "vise"} onChange={() => setMode("vise")} /> Više izabranih artikala
         </label>
+        <label>
+          <input type="radio" name="obuhvat" checked={mode === "brend"} onChange={() => setMode("brend")} disabled={!brands.length} /> Pregledana grupa artikala (brend)
+        </label>
+        <label>
+          <input type="radio" name="obuhvat" checked={mode === "osnovni"} onChange={() => setMode("osnovni")} /> Osnovni rabat kupca (svi artikli)
+        </label>
       </fieldset>
+      {mode === "brend" ? (
+        <label className="rr-field">
+          <span>Grupa artikala</span>
+          <select value={brand} onChange={(e) => { setBrand(e.target.value); reset(); }}>
+            {brands.map((b) => (
+              <option key={b.brand} value={b.brand}>{b.brand} · {b.n} artikala kupca</option>
+            ))}
+          </select>
+          <small>Jedno pravilo za celu grupu; posebni dogovori po artiklu ostaju na snazi.</small>
+        </label>
+      ) : null}
+      {mode === "osnovni" ? <p className="portal-data-note">Osnovni rabat važi za sve artikle kupca koji nemaju pravilo za grupu ili artikal.</p> : null}
 
       {mode === "jedan" ? (
         <label className="rr-field">
@@ -179,11 +203,13 @@ export function RebateChangePanel({
 
       <label className="rr-field">
         <span>Uslov plaćanja</span>
-        <select value={condition} onChange={(e) => { setCondition(e.target.value as "" | "kratak_rok"); reset(); }}>
-          <option value="">Bez uslova — podrazumevani rabat</option>
-          <option value="kratak_rok">Samo uz kratak rok plaćanja (do 7 dana) — za potvrdu</option>
+        <select value={condition} onChange={(e) => { setCondition(e.target.value); reset(); }}>
+          <option value="">Osnovni uslov (važi za sve opcije bez svog pravila)</option>
+          {options.map((o) => (
+            <option key={o.code} value={o.code}>Samo za: {o.label}</option>
+          ))}
         </select>
-        <small>Uslovni rabat važi samo kada kupac izabere i ispuni uslov; nikad nije podrazumevan i ne menja rabat bez uslova.</small>
+        <small>{options.length ? "Rabat za opciju važi samo kada kupac izabere tu odobrenu opciju; nikad nije podrazumevan." : "Kupac nema odobrenu opciju plaćanja — predložite je u delu „Opcije plaćanja“."}</small>
       </label>
       <div className="rc-inline">
         <label className="rr-field rr-field-short">
@@ -204,7 +230,8 @@ export function RebateChangePanel({
         <div className="rc-preview">
           <h3>
             Pregled: {pct(preview.newPercent)} od {preview.effectiveFrom}
-            {preview.paymentCondition ? " · samo uz kratak rok plaćanja" : ""}
+            {preview.paymentCondition ? ` · samo za: ${options.find((o) => o.code === preview.paymentCondition)?.label ?? preview.paymentCondition}` : ""}
+            {preview.scope ? ` · ${preview.scope.productScope === "brand" ? `grupa „${preview.scope.brand}“` : "osnovni rabat"}: sada ${preview.scope.current ? pct(preview.scope.current.percent) : "nema pravila"} → ${pct(preview.newPercent)}` : ""}
             {preview.group ? ` · grupa „${preview.group.key}“ (sada ${pct(preview.group.percent)})` : ""}
           </h3>
           <div className="portal-table-wrap">
@@ -274,7 +301,7 @@ export function RebateChangePanel({
           <button
             type="button"
             className="portal-button"
-            disabled={pending || !included.length || reason.trim().length < 10}
+            disabled={pending || (!preview.scope && !included.length) || reason.trim().length < 10 || Boolean(preview.scope && ["ceka_odluku", "zakazano", "bez_promene"].includes(preview.scope.action))}
             onClick={() =>
               start(async () => {
                 const r = await submitChangeAction({
@@ -282,6 +309,7 @@ export function RebateChangePanel({
                   reason,
                   approveNow,
                   expected: included.map((x) => ({ articleId: x.articleId, replacesRuleId: x.current?.ruleId ?? null })),
+                  expectedScopeRuleId: preview.scope?.current?.ruleId ?? null,
                 });
                 if (r.ok) {
                   setPreview(null);
@@ -291,7 +319,7 @@ export function RebateChangePanel({
               })
             }
           >
-            {pending ? "Šaljem…" : approveNow ? `Odobrite promenu (${included.length})` : `Pošaljite na odobrenje (${included.length})`}
+            {pending ? "Šaljem…" : preview.scope ? (approveNow ? "Odobrite promenu (1 pravilo)" : "Pošaljite na odobrenje (1 pravilo)") : approveNow ? `Odobrite promenu (${included.length})` : `Pošaljite na odobrenje (${included.length})`}
           </button>
           {reason.trim().length < 10 ? <small> Obrazloženje: najmanje 10 znakova.</small> : null}
         </div>

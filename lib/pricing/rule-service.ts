@@ -60,7 +60,7 @@ export type RuleDraft = {
    */
   replacesRuleId?: string | null;
   /** Uslov plaćanja (0042): bez vrednosti = bezuslovno. Uslovno pravilo nikad ne važi podrazumevano. */
-  paymentCondition?: "kratak_rok" | null;
+  paymentCondition?: string | null;
 };
 
 /** Ponovljeno slanje: za isti opseg već čeka predlog (jedinstveni indeks 0041). */

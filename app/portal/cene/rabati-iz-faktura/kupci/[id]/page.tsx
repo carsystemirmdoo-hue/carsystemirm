@@ -13,6 +13,11 @@ import { EXCEPTION_LABELS, HIGH_DISCOUNT, RECENT_DAYS, STATUS_LABELS } from "@/l
 import { pct } from "../../format";
 import { customerFamilies } from "@/lib/pricing/rebate-change-service";
 import { RebateChangePanel } from "./RebateChangePanel";
+import { PaymentOptionsPanel } from "./PaymentOptionsPanel";
+import { approvedPaymentOptions, listPaymentOptions } from "@/lib/pricing/payment-option-service";
+import { customerPricesByOption } from "@/lib/pricing/customer-price-service";
+import { customerBrands } from "@/lib/pricing/rebate-change-service";
+import { optionLabel } from "@/lib/pricing/paymentOptions.mjs";
 import { CommercialStatusForm } from "./CommercialStatusForm";
 import { commercialStatuses, type CommercialStatus } from "@/lib/customers/commercial-status-service";
 import { COMMERCIAL_STATUSES, statusReason } from "@/lib/customers/commercial-status.mjs";
@@ -106,6 +111,13 @@ export default async function RebateReviewCustomerPage({
     });
   const families = canPropose ? await customerFamilies(user, customer.id, today) : [];
   const status = (await commercialStatuses()).get(customer.id) ?? null;
+  const [optionRows, approvedOptions, brands] = await Promise.all([
+    listPaymentOptions(customer.id),
+    approvedPaymentOptions(customer.id, today),
+    canPropose ? customerBrands(user, customer.id) : Promise.resolve([]),
+  ]);
+  const previewArticles = formArticles.slice(0, 25);
+  const priceView = await customerPricesByOption(customer.id, previewArticles.map((a) => a.articleId), today);
   const initialArticle = sp.predlog && articles.some((a) => a.articleId === sp.predlog) ? sp.predlog : null;
   const exceptionKind = kind && kind in EXCEPTION_LABELS ? kind : null;
   const exceptions = exceptionKind ? r.exceptions.filter((e) => e.kind === exceptionKind) : r.exceptions;
@@ -420,6 +432,64 @@ export default async function RebateReviewCustomerPage({
             </section>
           ) : null}
 
+          <section className="portal-panel" id="opcije-placanja">
+            <div className="portal-section-header">
+              <div>
+                <h2>Opcije plaćanja</h2>
+                <p>Kupac bira samo odobrenu opciju. Svaka opcija ima svoje rabate (artikal → grupa → osnovni rabat); opcija bez svog pravila koristi osnovni uslov.</p>
+              </div>
+            </div>
+            <div className="portal-panel-body">
+              <PaymentOptionsPanel customerId={customer.id} rows={optionRows} canPropose={canPropose} canApprove={can(user, "prices:approve")} today={today} />
+            </div>
+          </section>
+
+          <section className="portal-panel" id="cene-kupca">
+            <div className="portal-section-header">
+              <div>
+                <h2>Cena kupca po opciji (pregled)</h2>
+                <p>Poslednjih {previewArticles.length} artikala kupca: osnovna cena iz cenovnika, odobreni rabat i cena bez PDV-a po jedinici mere. Ovo vidi kupac na sajtu.</p>
+              </div>
+            </div>
+            <div className="portal-table-wrap">
+              <table className="portal-table rr-table">
+                <thead>
+                  <tr>
+                    <th scope="col">Artikal</th>
+                    {priceView.options.map((o) => (
+                      <th scope="col" key={o.code ?? "osnovni"}>{o.label}</th>
+                    ))}
+                  </tr>
+                </thead>
+                <tbody>
+                  {previewArticles.map((a) => (
+                    <tr key={a.articleId}>
+                      <th scope="row">
+                        {a.articleCode}
+                        <small>{a.articleName}</small>
+                      </th>
+                      {priceView.options.map((o) => {
+                        const p = o.prices.get(a.articleId);
+                        return (
+                          <td key={o.code ?? "osnovni"} data-label={o.label}>
+                            {p && p.status === "cena" ? (
+                              <>
+                                <strong>{(p.netCents / 100).toLocaleString("sr-RS", { minimumFractionDigits: 2, maximumFractionDigits: 2 })} RSD</strong>
+                                <small>bez PDV-a / {p.unit ?? "JM"} · rabat {p.discountPercent ?? "—"} %</small>
+                              </>
+                            ) : (
+                              <small>{p && "message" in p ? p.message : "—"}</small>
+                            )}
+                          </td>
+                        );
+                      })}
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </section>
+
           {canPropose ? (
             <section className="portal-panel">
               <div className="portal-section-header">
@@ -436,6 +506,8 @@ export default async function RebateReviewCustomerPage({
                   initialArticleId={initialArticle}
                   articles={formArticles}
                   families={families}
+                  brands={brands}
+                  options={approvedOptions.map((c) => ({ code: c, label: optionLabel(c) }))}
                   canApprove={can(user, "prices:approve")}
                 />
               </div>

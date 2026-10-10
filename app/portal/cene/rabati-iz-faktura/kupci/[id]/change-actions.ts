@@ -4,6 +4,7 @@ import { revalidatePath } from "next/cache";
 import { requireCapability } from "@/lib/authz/session";
 import { previewRebateChange, RebateChangeError, submitRebateChange, type ChangeInput } from "@/lib/pricing/rebate-change-service";
 import { WorkflowError, PricingRuleError } from "@/lib/pricing/rule-service";
+import { isOptionCode } from "@/lib/pricing/paymentOptions.mjs";
 
 /*
  * Promena rabata sa strane kupca: pregled (ne upisuje) i slanje. Obe akcije
@@ -15,13 +16,14 @@ const UUID = /^[0-9a-f-]{36}$/;
 function clean(input: ChangeInput): ChangeInput {
   return {
     customerId: String(input.customerId),
-    mode: input.mode === "grupa" ? "grupa" : "artikli",
+    mode: (["grupa", "brend", "osnovni"] as const).find((m) => m === input.mode) ?? "artikli",
+    brand: input.brand ? String(input.brand).slice(0, 40) : undefined,
     articleIds: (input.articleIds ?? []).filter((id) => UUID.test(id)).slice(0, 2000),
     groupKey: input.groupKey ? String(input.groupKey).slice(0, 80) : undefined,
     newPercent: Number(String(input.newPercent).replace(",", ".")),
     effectiveFrom: String(input.effectiveFrom),
     includeExceptions: (input.includeExceptions ?? []).filter((id) => UUID.test(id)).slice(0, 2000),
-    paymentCondition: input.paymentCondition === "kratak_rok" ? "kratak_rok" : null,
+    paymentCondition: isOptionCode(input.paymentCondition) ? (input.paymentCondition as string) : null,
   };
 }
 
@@ -40,7 +42,7 @@ export async function previewChangeAction(input: ChangeInput) {
 }
 
 export async function submitChangeAction(
-  input: ChangeInput & { reason: string; expected: { articleId: string; replacesRuleId: string | null }[]; approveNow?: boolean },
+  input: ChangeInput & { reason: string; expected: { articleId: string; replacesRuleId: string | null }[]; approveNow?: boolean; expectedScopeRuleId?: string | null },
 ) {
   const user = await requireCapability("prices:propose", `/portal/cene/rabati-iz-faktura/kupci/${input.customerId}`);
   try {
@@ -49,6 +51,7 @@ export async function submitChangeAction(
       reason: String(input.reason ?? ""),
       expected: (input.expected ?? []).filter((e) => UUID.test(e.articleId)).map((e) => ({ articleId: e.articleId, replacesRuleId: e.replacesRuleId && UUID.test(e.replacesRuleId) ? e.replacesRuleId : null })),
       approveNow: Boolean(input.approveNow),
+      expectedScopeRuleId: input.expectedScopeRuleId && UUID.test(input.expectedScopeRuleId) ? input.expectedScopeRuleId : null,
     });
     revalidatePath(`/portal/cene/rabati-iz-faktura/kupci/${input.customerId}`);
     return {

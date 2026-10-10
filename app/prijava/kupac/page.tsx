@@ -6,6 +6,7 @@ import { customerLandingAfterLogin } from "@/lib/authz/customer-landing";
 import { isRememberEnabled } from "@/lib/auth/rememberRules.mjs";
 import { CustomerLoginForm } from "./CustomerLoginForm";
 import "../../portal/portal.css";
+import "../../portal/panel.css";
 
 export const metadata: Metadata = {
   title: "Prijava kupca · Carsystem i R-M",

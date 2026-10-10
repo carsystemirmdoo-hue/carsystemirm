@@ -74,6 +74,8 @@ export type RequestQuote = {
   lines: RequestLine[];
   totals: { net: number; vat: number; gross: number };
   onRequest: number;
+  /** Samo prikaz: zbir i broj stavki na upit za SVAKU odobrenu opciju (isto pravilo kao `totals` za izabranu). */
+  optionTotals: Record<string, { net: number; vat: number; gross: number; onRequest: number }>;
   fingerprint: string;
   canSubmit: boolean;
   blockers: string[];
@@ -189,6 +191,21 @@ export async function loadRequestQuote(customerId: string, option: string | null
     lines: priced.lines,
     totals: orderTotals(valid.map((l) => ({ quantity: l.quantity, netPrice: (l.selected as { netPrice: number }).netPrice, vatPercent: (l.selected as { vatPercent: number }).vatPercent, listPrice: (l.selected as { listPrice: number }).listPrice, discountPercent: (l.selected as { discountPercent: number }).discountPercent }))),
     onRequest: priced.lines.filter((l) => l.selected?.status === "na_upit").length,
+    optionTotals: Object.fromEntries(
+      priced.options.map((o) => {
+        const ok = priced.lines.filter((l) => !l.problem && !l.quantityProblem && l.byOption[o.key]?.status === "cena");
+        return [
+          o.key,
+          {
+            ...orderTotals(ok.map((l) => {
+              const p = l.byOption[o.key] as Extract<OptionPrice, { status: "cena" }>;
+              return { quantity: l.quantity, netPrice: p.netPrice, vatPercent: p.vatPercent, listPrice: p.listPrice, discountPercent: p.discountPercent };
+            })),
+            onRequest: priced.lines.filter((l) => l.byOption[o.key]?.status === "na_upit").length,
+          },
+        ];
+      }),
+    ),
     fingerprint: fingerprintOf(priced.selected, priced.lines),
     canSubmit: blockers.length === 0,
     blockers,
@@ -500,11 +517,23 @@ export async function previewOrderRevision(viewer: PortalUser, orderId: string, 
     status: l.selected?.status ?? null,
     netPrice: l.selected?.status === "cena" ? l.selected.netPrice : null,
     discountPercent: l.selected?.status === "cena" ? l.selected.discountPercent : null,
+    /** Samo prikaz: osnovna cena iz cenovnika i iznosi stavke (isti `lineAmounts` kao zbir). */
+    listPrice: l.selected?.status === "cena" ? l.selected.listPrice : null,
+    net: l.amounts?.net ?? null,
+    vat: l.amounts?.vat ?? null,
     gross: l.amounts?.gross ?? null,
     note: l.selected?.status === "na_upit" ? ON_REQUEST_NOTE[l.selected.reason] ?? "cenu potvrđuje kancelarija" : null,
   }));
   const gross = lines.reduce((sum, l) => sum + (l.gross ?? 0), 0);
-  return { lines, gross: Math.round(gross * 100) / 100, onRequest: lines.filter((l) => l.status === "na_upit").length };
+  const net = lines.reduce((sum, l) => sum + (l.net ?? 0), 0);
+  const vat = lines.reduce((sum, l) => sum + (l.vat ?? 0), 0);
+  return {
+    lines,
+    gross: Math.round(gross * 100) / 100,
+    net: Math.round(net * 100) / 100,
+    vat: Math.round(vat * 100) / 100,
+    onRequest: lines.filter((l) => l.status === "na_upit").length,
+  };
 }
 
 /** Kupac potvrđuje (postaje poslat zahtev; original „vraćen na ispravku“) ili odbija izmenjen predlog. */

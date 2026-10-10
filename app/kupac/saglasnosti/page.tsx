@@ -1,10 +1,4 @@
 import type { Metadata } from "next";
-import Link from "next/link";
-import {
-  PageHeader,
-  Panel,
-  SectionHeader,
-} from "@/components/portal/PortalPrimitives";
 import { requireCustomerSession } from "@/lib/authz/customer-session";
 import {
   loadConsentHistory,
@@ -12,7 +6,7 @@ import {
 } from "@/lib/customers/consent-service";
 import { CONSENT_LABELS, CONSENT_PURPOSES } from "@/lib/customers/consent.mjs";
 import { ConsentControls } from "./ConsentControls";
-import "../../portal/portal.css";
+import { dmy, dmyTime } from "@/lib/ordering/panelFormat.mjs";
 
 export const metadata: Metadata = {
   title: "Saglasnosti · Carsystem i R-M",
@@ -48,44 +42,37 @@ export default async function CustomerConsentsPage() {
   const rows = CONSENT_PURPOSES.map((purpose: string) => ({
     purpose,
     granted: state[purpose]?.granted ?? false,
-    since: state[purpose]?.since
-      ? new Date(state[purpose].since as string).toLocaleDateString("sr-Latn-RS")
-      : null,
+    since: state[purpose]?.since ? dmy(new Date(state[purpose].since as string)) : null,
     textVersion: state[purpose]?.textVersion ?? null,
   }));
 
   return (
-    <>
-      <PageHeader
-        eyebrow="Moj nalog"
-        title="Saglasnosti"
-        description="Dve odvojene odluke. Nijedna nije uslov za korišćenje naloga, i svaku možete povući jednako lako kao što ste je dali."
-      />
-
-      <Panel>
-        <SectionHeader
-          title="Vaše odluke"
-          description="Podrazumevano stanje je bez saglasnosti."
-        />
-        <div className="portal-panel-body">
-        <ConsentControls rows={rows} />
-        <p className="portal-login-hint">
-          Poruke o nalogu — poziv, promena lozinke i obaveštenja o bezbednosti —
-          nisu marketing i stižu bez obzira na ove odluke.
-        </p>
+    <div className="pn">
+      <header className="pn-head">
+        <div>
+          <h1 className="pn-title">Saglasnosti</h1>
+          <p className="pn-lead">
+            Dve odvojene odluke. Nijedna nije uslov za korišćenje naloga, i svaku možete povući jednako lako kao što ste je dali. Podrazumevano stanje je bez
+            saglasnosti.
+          </p>
         </div>
-      </Panel>
-
-      <Panel>
-        <SectionHeader
-          title="Istorija"
-          description="Povlačenje ne briše raniji zapis; dodaje se nov događaj."
-        />
-        <div className="portal-panel-body">
+      </header>
+      <section className="pn-card pn-form-width" style={{ maxWidth: 900 }} aria-labelledby="odluke">
+        <h2 id="odluke" className="pn-h2">
+          Vaše odluke
+        </h2>
+        <ConsentControls rows={rows} />
+        <p className="pn-small pn-muted">Poruke o nalogu — poziv, promena lozinke i obaveštenja o bezbednosti — nisu marketing i stižu bez obzira na ove odluke.</p>
+      </section>
+      <section className="pn-card pn-card-flush" aria-labelledby="istorija-saglasnosti">
+        <div className="pn-card-h">
+          <h2 id="istorija-saglasnosti">Istorija</h2>
+          <span className="pn-small pn-muted">Povlačenje ne briše raniji zapis; dodaje se nov događaj.</span>
+        </div>
         {history.length === 0 ? (
-          <p>Još nema nijedne zabeležene odluke.</p>
+          <p className="pn-empty pn-muted">Još nema nijedne zabeležene odluke.</p>
         ) : (
-          <table className="portal-table">
+          <table className="pn-table pn-table-cards">
             <thead>
               <tr>
                 <th scope="col">Kada</th>
@@ -98,26 +85,17 @@ export default async function CustomerConsentsPage() {
             <tbody>
               {history.map((event) => (
                 <tr key={event.id}>
-                  <td>
-                    {new Date(event.occurredAt).toLocaleString("sr-Latn-RS")}
-                  </td>
-                  <td>
-                    {CONSENT_LABELS[event.purpose as keyof typeof CONSENT_LABELS]?.title ?? event.purpose}
-                  </td>
-                  <td>{ACTION_LABEL[event.action] ?? event.action}</td>
-                  <td>{SOURCE_LABEL[event.source] ?? event.source}</td>
-                  <td>{event.consentTextVersion}</td>
+                  <td className="pn-c-name pn-num">{dmyTime(new Date(event.occurredAt))}</td>
+                  <td data-label="Svrha">{CONSENT_LABELS[event.purpose as keyof typeof CONSENT_LABELS]?.title ?? event.purpose}</td>
+                  <td data-label="Odluka">{ACTION_LABEL[event.action] ?? event.action}</td>
+                  <td data-label="Izvor">{SOURCE_LABEL[event.source] ?? event.source}</td>
+                  <td data-label="Verzija teksta">{event.consentTextVersion}</td>
                 </tr>
               ))}
             </tbody>
           </table>
         )}
-        </div>
-      </Panel>
-
-      <p>
-        <Link href="/kupac">Nazad na nalog</Link>
-      </p>
-    </>
+      </section>
+    </div>
   );
 }

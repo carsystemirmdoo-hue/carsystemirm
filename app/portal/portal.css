@@ -8526,6 +8526,22 @@ section.portal-metrics {
   color: var(--p-ink);
 }
 .dark .portal-customer-area .portal-panel { box-shadow: none; }
+/* Hover reda tabele je u svetlom portalu fiksno svetao (oklch 0.976); u tamnom
+   nalogu je tekst svetao, pa bi red pri prelasku mišem postao nečitljiv (1.08:1). */
+.dark .portal-customer-area .portal-table tbody tr:hover td,
+.dark .portal-customer-area .portal-table tbody tr:hover th,
+.dark .portal-customer-area .portal-table tbody tr:hover .portal-sticky-cell { background: var(--p-surface-subtle); }
+/* Crveni TEKST na tamnoj podlozi: --p-red je boja ispune (beli tekst preko nje),
+   kao tekst na tamnom daje 3.79:1. Svetlija nijansa je ista kao --accent-text sajta. */
+.dark .portal-customer-area .ka-eyebrow,
+.dark .portal-customer-area .kk-contacts a { color: oklch(0.7 0.19 25); }
+
+/* Kupčev nalog, obe teme: sitni pomoćni red ispod naziva artikla („Šifra … · JM …“)
+   je bio --p-faint (2.58:1 u svetloj temi). U nalogu se čita kao podatak, ne ukras. */
+.portal-customer-area .portal-table td small,
+.portal-customer-area .portal-table tbody th small { color: var(--p-muted); }
+/* Jedinica uz izabranu cenu u korpi („/ LIT“) na istaknutoj podlozi: 4.03:1 → ink. */
+.portal-customer-area .kr-prices li[aria-current="true"] small { color: var(--p-ink); }
 .dark .portal-customer-area .ka-recent a:hover,
 .dark .portal-customer-area .ka-invoices a:hover { background: var(--p-surface-subtle); }
 .dark .portal-customer-area .kk-pricelist { background: var(--p-surface-subtle); }

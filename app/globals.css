@@ -1941,14 +1941,16 @@ html[data-route-transition="fallback"] .cs-route-transition-screen {
   /* content = min(container-max, 100% - 2*gutter); gutter raste sa viewportom.
      Rešava izmereno skakanje leve ivice (116 → 60 → 72 → 56 → 116 → 60px).
 
-     Do ~1610px širine kontejner je 1208px kao i ranije. Iznad toga raste sa
-     prozorom (75vw) do 1840px: na 1920px je 1440px, na 2560px 1840px. Ranije
+     Do ~1680px širine kontejner je 1208px kao i ranije. Iznad toga raste sa
+     prozorom (72vw) do 1600px: na 1920px je 1382px, na 2560px 1600px. Ranije
      je na 2560px sadržaj zauzimao 1208px, a sa strana je ostajalo po 676px
-     prazne pozadine. Čitljivost čuvaju max-width pravila samih tekstova, ne
-     kontejner. `--ds-container-grow` je koliko je kontejner porastao iznad
-     1208px — kontejneri sa sopstvenom širinom (header, footer, katalog…)
-     rastu za isto toliko, pa poravnanje ostaje isto kao na 1440px. */
-  --ds-container-max: clamp(1208px, 75vw, 1840px);
+     prazne pozadine. Gornja granica je namerno 1600px a ne šira: mreže sa
+     fiksnim brojem kolona (kartice, pakovanja) bi inače rasle ~1,5× i jedna
+     kartica bi bila viša od ekrana. Čitljivost teksta čuvaju max-width
+     pravila samih tekstova. `--ds-container-grow` je koliko je kontejner
+     porastao iznad 1208px — kontejneri sa sopstvenom širinom (header,
+     footer, katalog…) rastu za isto toliko, pa poravnanje ostaje isto. */
+  --ds-container-max: clamp(1208px, 72vw, 1600px);
   --ds-container-grow: calc(var(--ds-container-max) - 1208px);
   --ds-gutter: clamp(20px, 4vw, 56px);
 

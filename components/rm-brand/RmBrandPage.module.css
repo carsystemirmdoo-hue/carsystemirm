@@ -1364,6 +1364,13 @@
   margin-top: clamp(2.5rem, 4vw, 4rem);
 }
 
+/* Široki ekrani: četiri pakovanja u jednom redu umesto 2×2 kartica višlje od ekrana. */
+@media (min-width: 1880px) {
+  .agilisProductGrid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
 .agilisActions {
   display: flex;
   align-items: center;

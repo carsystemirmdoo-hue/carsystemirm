@@ -2,18 +2,38 @@
 
 import { revalidatePath } from "next/cache";
 import { requireCapability } from "@/lib/authz/session";
-import { proposeFromEvidence } from "@/lib/pricing/rebate-application-service";
+import { approveRebateGroup } from "@/lib/pricing/rebate-coverage-service";
 import { belgradeDate } from "@/lib/recommendations/customerRhythm.mjs";
 
-/** Predlog jednog para kupac–artikal; dokaz i procenat se ponovo računaju na serveru. Ide na odobrenje vlasnika. */
-export async function proposeArticleRebateAction(customerId: string, articleId: string): Promise<{ ok: boolean; message: string }> {
-  const user = await requireCapability("prices:propose", "/portal/cene/rabati-iz-faktura/predlozi");
-  if (!/^[0-9a-f-]{36}$/.test(customerId) || !/^[0-9a-f-]{36}$/.test(articleId)) return { ok: false, message: "Neispravan zahtev." };
+const PATH = "/portal/cene/rabati-iz-faktura/predlozi";
+
+/**
+ * Grupa kupac × porodica jednim potezom. Vlasnik odobrava (pravila sa oznakom
+ * serije, opoziva se kao serija); predlagač šalje predloge na odobrenje. Server
+ * ponovo računa dokaz i prihvata samo artikle koji su i dalje u grupi.
+ */
+export async function approveRebateGroupAction(
+  customerId: string,
+  groupKey: string,
+  expected: { articleId: string; percent: number }[],
+): Promise<{ ok: boolean; message: string }> {
+  const user = await requireCapability("prices:propose", PATH);
+  const uuid = /^[0-9a-f-]{36}$/;
+  if (!uuid.test(customerId) || !Array.isArray(expected) || expected.length > 2000 || expected.some((e) => !uuid.test(e.articleId) || typeof e.percent !== "number")) {
+    return { ok: false, message: "Neispravan zahtev." };
+  }
   try {
-    const r = await proposeFromEvidence(user, customerId, articleId, belgradeDate(new Date()));
-    revalidatePath("/portal/cene/rabati-iz-faktura/predlozi");
-    return r.ok ? { ok: true, message: "Predlog je poslat na odobrenje (Odobravanje cena)." } : { ok: false, message: r.message };
+    const r = await approveRebateGroup(user, { customerId, groupKey: String(groupKey).slice(0, 120), expected, asOf: belgradeDate(new Date()) });
+    revalidatePath(PATH);
+    if (!r.ok) return { ok: false, message: r.message };
+    return {
+      ok: true,
+      message: r.approved
+        ? `Odobreno ${r.count} pravila (serija ${r.batchId}; opoziv kao serija).`
+        : `Poslato na odobrenje: ${r.count} predloga.`,
+    };
   } catch (error) {
-    return { ok: false, message: error instanceof Error ? error.message : "Predlog nije sačuvan." };
+    return { ok: false, message: error instanceof Error ? error.message : "Grupa nije sačuvana." };
   }
 }
+

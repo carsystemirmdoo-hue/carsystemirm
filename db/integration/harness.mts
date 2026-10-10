@@ -305,6 +305,8 @@ const RESETTABLE_TABLES = [
   "price_lists",
   /* Osnovne cene i otpremanja cenovnika (0038): samo dodavanje, pa TRUNCATE. */
   "article_base_prices",
+  /* Program artikla (0040): samo dodavanje. */
+  "article_programme_decisions",
   "price_list_import_rows",
   "price_list_imports",
   "partner_records",

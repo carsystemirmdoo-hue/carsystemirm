@@ -8989,3 +8989,28 @@ section.portal-metrics {
 .pl-unclear legend { font-weight: 650; padding: 0 6px; }
 .pl-search { flex-direction: row; align-items: end; }
 @media (max-width: 960px) { .pl-facts { grid-template-columns: 1fr; padding: 4px 14px 16px; } }
+
+/* Pokrivenost rabata (rabati-v2): kupac kao sklopiv blok, grupe u tabeli. */
+.rc-customer { border-top: 1px solid var(--p-line); padding: 12px 0; }
+.rc-customer > summary { cursor: pointer; display: flex; flex-wrap: wrap; gap: 4px 12px; align-items: baseline; }
+.rc-customer > summary small { color: var(--p-muted); font-size: 13px; }
+.rc-customer[open] > summary { margin-bottom: 10px; }
+.rc-articles { margin: 6px 0 0; padding-left: 18px; font-size: 13px; line-height: 1.5; }
+.rc-articles small { color: var(--p-muted); }
+.rc-all { margin: 10px 0 0; }
+.rc-unclear { margin-top: 10px; }
+.rc-unclear > summary { cursor: pointer; color: var(--p-muted); font-weight: 600; }
+@media (max-width: 720px) {
+  .rc-customer .portal-table-wrap { overflow: visible; max-height: none; }
+  .rc-customer .rr-table thead { display: none; }
+  .rc-customer .rr-table,
+  .rc-customer .rr-table tbody,
+  .rc-customer .rr-table tr,
+  .rc-customer .rr-table th,
+  .rc-customer .rr-table td { display: block; width: auto; min-width: 0; }
+  .rc-customer .rr-table tr { border-bottom: 1px solid var(--p-line); padding: 10px 0; }
+  .rc-customer .rr-table th,
+  .rc-customer .rr-table td { padding: 4px 0; border: 0; }
+  .rc-customer .rr-table td[data-label]::before { content: attr(data-label); display: block; color: var(--p-muted); font-size: 11px; font-weight: 650; letter-spacing: 0.04em; text-transform: uppercase; }
+}
+.rc-customer .rr-table td, .rc-articles li { white-space: normal; overflow-wrap: anywhere; }

@@ -25,7 +25,7 @@ const guard = (t: { skip: (m?: string) => void }) => {
   return false;
 };
 
-const APPEND_ONLY = ["audit_log", "customer_contact_consents", "sync_command_events", "sync_device_cycles", "article_base_prices", "price_list_import_rows"];
+const APPEND_ONLY = ["audit_log", "customer_contact_consents", "sync_command_events", "sync_device_cycles", "article_base_prices", "price_list_import_rows", "article_programme_decisions"];
 /** Ograničena izmena (opoziv 0028, prelaz stanja storna 0033, odluka o cenovniku 0038): UPDATE ostaje, DELETE ne. */
 const REVOCATION_ONLY = ["customer_contact_verifications", "invoice_reversals", "price_list_imports"];
 /** Samo čitanje (0036): evidenciju kopija upisuje posebna uloga, nikad aplikacija. */

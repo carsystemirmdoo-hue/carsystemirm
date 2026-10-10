@@ -13,6 +13,7 @@ import {
   inputDiagnostics,
   purchaseEvents,
 } from "@/lib/ledger/recommendation-input";
+import { outOfProgrammeArticles } from "@/lib/pricing/article-programme-service";
 import { evaluateAll } from "@/lib/recommendations/cadence.mjs";
 import { ALGORITHM_VERSION, DATE_BASIS, DEFAULT_POLICY } from "@/lib/recommendations/policy.mjs";
 
@@ -137,10 +138,17 @@ export async function recomputeRecommendations(
   }
 
   try {
-    const [dijagnostika, events] = await Promise.all([
+    const [dijagnostika, sveKupovine, vanPrograma] = await Promise.all([
       inputDiagnostics(scope, { asOfDate }),
       purchaseEvents(scope, { asOfDate }),
+      outOfProgrammeArticles(),
     ]);
+    /*
+     * Artikli van programa (0040) se ne preporučuju. Istorija ostaje u
+     * fakturama; ovde se samo ne nudi. Broj ide u zapis prolaza.
+     */
+    const events = sveKupovine.filter((e) => !vanPrograma.codes.has(e.articleCode));
+    const vanProgramaDogadjaja = sveKupovine.length - events.length;
 
     /*
      * Matematika ide kroz ČISTU funkciju, bez ijednog upita.
@@ -247,7 +255,7 @@ export async function recomputeRecommendations(
           pairCount: ocene.length,
           repeatPairCount: zaUpis.length,
           resultCount: zaUpis.length,
-          exclusions: dijagnostika.excluded,
+          exclusions: { ...dijagnostika.excluded, article_out_of_programme_events: vanProgramaDogadjaja },
           statusCounts,
           confidenceCounts,
         })

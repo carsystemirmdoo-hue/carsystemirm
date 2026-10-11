@@ -40,8 +40,17 @@ function trimAtWord(value: string, maximum = 165) {
   const normalized = normalizeText(value);
   if ([...normalized].length <= maximum) return normalized;
   const candidate = [...normalized].slice(0, maximum + 1).join("");
+  // Prvo celu rečenicu: opis koji se završava usred rečenice („…prema poslu koji.”) izgleda kao greška.
+  const sentenceEnd = Math.max(
+    candidate.lastIndexOf(". "),
+    candidate.lastIndexOf("! "),
+    candidate.lastIndexOf("? "),
+  );
+  if (sentenceEnd > maximum * 0.5) return candidate.slice(0, sentenceEnd + 1);
+  // Inače presek na granici reči, sa trotačkom — ne tačkom, jer rečenica nije završena.
   const boundary = candidate.lastIndexOf(" ");
-  return `${candidate.slice(0, boundary > maximum * 0.7 ? boundary : maximum).trimEnd()}.`;
+  const cut = candidate.slice(0, boundary > maximum * 0.7 ? boundary : maximum).trimEnd();
+  return `${cut.replace(/[\s,;:–-]+$/u, "")}…`;
 }
 
 function titleWithSite(title: string) {
@@ -145,11 +154,19 @@ export function buildProductMetadata({
     ? getRmCategorySingularName(product.rmMetadata.category)
     : undefined;
   const descriptor = category ? `${brand.name} ${category}` : `${brand.name} proizvod`;
-  const title = `${product.name} – ${descriptor}`;
   const baseDescription =
     product.seoDescription ?? product.shortDescription ?? product.purpose;
   // Javna šifra ima prednost: interni `sku` se ne predstavlja kao šifra proizvođača.
   const publicCode = product.publicCode ?? publicSkuOf(product);
+  // Više R-M proizvoda deli komercijalni naziv („R-M THINNER”, „R-M GHD HARDENER”); bez šifre bi
+  // stranice imale isti <title>. Šifra proizvođača se dodaje samo kada je potvrđena i nije već u nazivu.
+  const titleCode = product.brandSlug === "rm" ? (product.manufacturerCode ?? publicCode) : null;
+  const compact = (text: string) => text.toLowerCase().replace(/[^a-z0-9]/g, "");
+  const nameWithCode =
+    titleCode && !compact(product.name).includes(compact(titleCode))
+      ? `${product.name} ${titleCode}`
+      : product.name;
+  const title = `${nameWithCode} – ${descriptor}`;
   const productIdentifier = publicCode
     ? `Šifra proizvoda ${publicCode}. `
     : "";

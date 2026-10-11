@@ -77,7 +77,12 @@ const EXPECTED = [
    * substring slučajnost kakve su uklonjene gore.
    */
   { query: "ral", count: 130 },
-  { query: "600 ml", count: 4 },
+  /*
+   * `600 ml`: 4 → 0. Jedina pakovanja od 600 ml bila su Molotow (uklonjen iz kataloga). Bez
+   * pravog pogotka upit je kroz fuzzy (`600ml` ~ `400ml`) vraćao 689 drugih pakovanja; mera se
+   * sada ne traži fuzzy (lib/search/engine.mjs), pa je ispravan rezultat prazan.
+   */
+  { query: "600 ml", count: 0 },
   // `antichip`: ostaje 8. Alias grupa je razdvojena (antikorozivno ≠ zaštita od kamenčića),
   // pa R-M antikorozivni prajmeri više ne dobijaju lažan pogodak — vidi `lib/search/aliases.mjs`.
   { query: "antichip", count: 8 },

@@ -147,7 +147,7 @@ export const BRAND_LINKS: NavigationLink[] = [
   {
     href: "/brendovi/norbin",
     title: "Norbin",
-    description: "Boje, lakovi i materijali za profesionalnu obradu.",
+    description: "Bezbojni lakovi, punioci i učvršćivači.",
     logo: "/brands/norbin.svg",
   },
   {
@@ -173,6 +173,12 @@ export const BRAND_LINKS: NavigationLink[] = [
     title: "SATA",
     description: "Oprema za precizno i ponovljivo nanošenje.",
     logo: "/brands/sata.svg",
+  },
+  {
+    // Bez logotipa: odobren RUPES logo fajl ne postoji (RUPES_IMAGE_RIGHTS_REVIEW).
+    href: "/brendovi/rupes",
+    title: "RUPES",
+    description: "Polirke, brusilice i pribor za završnu obradu.",
   },
 ];
 

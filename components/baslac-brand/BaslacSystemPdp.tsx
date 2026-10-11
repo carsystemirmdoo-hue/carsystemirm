@@ -40,11 +40,13 @@ export function BaslacSystemPdp({
   system,
   systemName,
   intro,
+  lineDocument,
 }: {
   familyName: string;
   system: BaslacSystemId;
   systemName: string;
   intro: string;
+  lineDocument?: { href: string; title: string };
 }) {
   const bases = useMemo(() => baslacPublicBases(system), [system]);
 
@@ -320,6 +322,18 @@ export function BaslacSystemPdp({
           Prikazani kvadratić boje predstavlja orijentacionu grupu pigmenta, a ne
           garantovanu automobilsku nijansu.
         </p>
+
+        {lineDocument ? (
+          <section className={styles.documents} aria-labelledby={`${searchId}-dokumentacija`}>
+            <h3 id={`${searchId}-dokumentacija`} className={styles.kicker}>
+              Dokumentacija
+            </h3>
+            <a href={lineDocument.href} target="_blank" rel="noopener">
+              Tehnički list sistema — {lineDocument.title}
+              <small>PDF · engleski · baslac</small>
+            </a>
+          </section>
+        ) : null}
       </div>
 
     </div>

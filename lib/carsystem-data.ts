@@ -2027,24 +2027,23 @@ const productRecords: CarsystemProduct[] = [
           },
         ],
       },
+      // Zvanična F.23 stranica (recommendedProductUrls u data/carsystem-sync/raw/website-en.generated.json)
+      // preporučuje upravo ova dva zapisa: interface-pad-interface-pad-150-mm i excenter-back-pad-t19-back-pad-150-mm.
       compatibleProducts: {
-        reviewStatus: "needs_confirmation",
-        reviewerNote:
-          "Zvanična F.23 stranica preporučuje Interface Pad i Excenter Back Pad T.19; veza sa tim proizvodima u katalogu još nije potvrđena.",
+        reviewStatus: "confirmed",
         content: {
           title: "Koristi se zajedno sa",
-          description:
-            "Prikazuju se samo proizvodi čija je kompatibilnost potvrđena zvaničnim izvorom.",
+          description: "Pribor koji proizvođač preporučuje uz ovaj proizvod.",
           items: [
             {
               productSlug: "carsystem-interface-pad",
               note: "Zvanično preporučen uz F.23.",
-              reviewStatus: "needs_confirmation",
+              reviewStatus: "confirmed",
             },
             {
               productSlug: "carsystem-excenter-back-pad-t-19",
               note: "Zvanično preporučen uz F.23.",
-              reviewStatus: "needs_confirmation",
+              reviewStatus: "confirmed",
             },
           ],
         },

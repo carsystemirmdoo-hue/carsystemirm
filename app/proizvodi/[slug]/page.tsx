@@ -9,6 +9,7 @@ import {
   getProductCompatibleProducts,
   getProgramGroupBySlug,
   getRefinishPhaseBySlug,
+  type CarsystemProduct,
 } from "@/lib/carsystem-data";
 import { buildProductMetadata } from "@/lib/seo/metadata-builders";
 import { getProductBreadcrumbItems } from "@/lib/seo/product-breadcrumbs";
@@ -78,7 +79,11 @@ export default async function ProductPage({ params }: ProductPageProps) {
   // Only documents that are actually available and linked on the page.
   const availableDocuments = product.documents
     .filter((document) => document.status === "available" && document.href)
-    .map((document) => ({ title: document.title, href: document.href! }));
+    .map((document) => ({
+      title: document.title,
+      href: document.href!,
+      language: documentLanguage(document.href!, product),
+    }));
 
   const relationshipNode = productRelationshipJsonLd({
     product,
@@ -119,4 +124,32 @@ export default async function ProductPage({ params }: ProductPageProps) {
       />
     </>
   );
+}
+
+/**
+ * Jezik PDF-a za JSON-LD: iz pregledanog dokumenta (detail.documents) ili iz zvanične putanje
+ * („/en/”, „_en.”). Kada nije poznat, ne tvrdi se ništa — ranije je svaki dokument dobijao „sr-Latn”.
+ */
+/** Podaci nose ili kod (`en`) ili srpski naziv (`Engleski`); JSON-LD traži BCP 47 kod. */
+const LANGUAGE_CODES: Record<string, string> = {
+  engleski: "en",
+  nemacki: "de",
+  nemački: "de",
+  italijanski: "it",
+  francuski: "fr",
+  srpski: "sr",
+};
+
+function languageCode(value: string): string | undefined {
+  const normalized = value.trim().toLowerCase();
+  if (/^[a-z]{2}(?:-[a-z]{2})?$/.test(normalized)) return normalized;
+  // `multilingual` i slični opisi nisu jedan jezik — tada se `inLanguage` izostavlja.
+  return LANGUAGE_CODES[normalized];
+}
+
+function documentLanguage(href: string, product: CarsystemProduct): string | undefined {
+  const reviewed = product.detail?.documents?.content.find((document) => document.href === href)?.language;
+  if (reviewed) return languageCode(reviewed);
+  const match = href.match(/[/_-](en|de|fr|it|es|nl|pl|sr)(?=[/_.-])/i);
+  return match ? match[1].toLowerCase() : undefined;
 }

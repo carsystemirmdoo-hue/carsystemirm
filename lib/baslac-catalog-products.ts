@@ -41,6 +41,8 @@ export type BaslacFamilyDefinition = {
   seoTitle: string;
   seoDescription: string;
   intro: string;
+  /** Zvanični tehnički list linije (techinfo.baslac.com, lokalna kopija iz baslac synca). */
+  lineDocument: { href: string; title: string; sourceUrl: string };
 };
 
 export const baslacSystemFamilies: BaslacFamilyDefinition[] = [
@@ -56,6 +58,11 @@ export const baslacSystemFamilies: BaslacFamilyDefinition[] = [
       "Baslac Line 30 je 2K sistem završnih boja sa direktnim sjajem. Pregled S baza, pakovanja i tehničke dokumentacije uz upit za dostupnost.",
     intro:
       "Pigmentirani 2K sistem sa direktnim sjajem. Nijansa se meša po formuli iz S baza, bez obaveznog posebnog bezbojnog laka.",
+    lineDocument: {
+      href: "/documents/products/baslac/30_Line.pdf",
+      title: "30 Line Topcoat, direct gloss",
+      sourceUrl: "https://techinfo.baslac.com/en/30_Line.pdf",
+    },
   },
   {
     system: "line-35",
@@ -69,6 +76,11 @@ export const baslacSystemFamilies: BaslacFamilyDefinition[] = [
       "Baslac Line 35 je konvencionalni bazni sistem sa solid, transparent, metallic, pearl i Xirallic M komponentama. Pregled baza i pakovanja.",
     intro:
       "Konvencionalni solventni bazni sistem. M komponente se mešaju po formuli u solid, transparent, metallic, pearl i Xirallic nijanse.",
+    lineDocument: {
+      href: "/documents/products/baslac/35_Line.pdf",
+      title: "35 Line Basecoat",
+      sourceUrl: "https://techinfo.baslac.com/en/35_Line.pdf",
+    },
   },
   {
     system: "line-45",
@@ -82,6 +94,11 @@ export const baslacSystemFamilies: BaslacFamilyDefinition[] = [
       "Baslac Line 45 je vodeni bazni sistem sa W baznim komponentama, reducerom, aditivima i 49-W pearl koncentratima.",
     intro:
       "Vodeni bazni sistem. W komponente pokrivaju solid, transparent, metallic i pearl nijanse, uz reducer, aditive i 49-W koncentrate efekta.",
+    lineDocument: {
+      href: "/documents/products/baslac/45_Line.pdf",
+      title: "45 Line Basecoat",
+      sourceUrl: "https://techinfo.baslac.com/en/45_Line.pdf",
+    },
   },
   {
     system: "line-30-cv",
@@ -95,6 +112,11 @@ export const baslacSystemFamilies: BaslacFamilyDefinition[] = [
       "Baslac Line 30 CV je direct-gloss program za kamione, autobuse i druge velike transportne površine.",
     intro:
       "Direct-gloss program za velike transportne površine — kamione, autobuse i prikolice.",
+    lineDocument: {
+      href: "/documents/products/baslac/30_Line_CV.pdf",
+      title: "30 Line CV Topcoat",
+      sourceUrl: "https://techinfo.baslac.com/en/30_Line_CV.pdf",
+    },
   },
 ];
 

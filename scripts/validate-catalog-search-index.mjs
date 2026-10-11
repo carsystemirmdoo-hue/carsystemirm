@@ -203,7 +203,8 @@ expect(
 /* -- Zabranjena rich polja ------------------------------------------------- */
 
 for (const field of FORBIDDEN_FIELDS) {
-  const hits = firstText.split(`"${field}"`).length - 1;
+  // Traži se KLJUČ (`"purpose":`), ne reč: „Multi Purpose Cup” daje pojam `purpose` u `terms`.
+  const hits = firstText.split(`"${field}":`).length - 1;
   expect(hits === 0, `Zabranjeno polje \`${field}\` se pojavljuje ${hits}× u indeksu.`);
 }
 

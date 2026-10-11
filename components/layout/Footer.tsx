@@ -24,6 +24,7 @@ const brandLinks = [
   { href: "/brendovi/carfit", label: "Car Fit" },
   { href: "/brendovi/cosmos-lac", label: "Cosmos Lac" },
   { href: "/brendovi/befar", label: "Befar" },
+  { href: "/brendovi/rupes", label: "RUPES" },
 ];
 
 const supportLinks = [

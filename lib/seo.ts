@@ -395,7 +395,7 @@ export function productRelationshipJsonLd({
   product: CarsystemProduct;
   compatibleProducts: CarsystemProduct[];
   similarProducts: CarsystemProduct[];
-  documents: { title: string; href: string }[];
+  documents: { title: string; href: string; language?: string }[];
 }) {
   const url = absoluteUrl(`/proizvodi/${product.slug}`);
   const toRef = (item: CarsystemProduct) => ({
@@ -423,7 +423,7 @@ export function productRelationshipJsonLd({
       name: document.title,
       url: absoluteUrl(document.href),
       encodingFormat: "application/pdf",
-      inLanguage: siteConfig.language,
+      ...(document.language ? { inLanguage: document.language } : {}),
     }));
   }
 

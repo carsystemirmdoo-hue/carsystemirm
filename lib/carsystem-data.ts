@@ -1,3 +1,4 @@
+import { abrasiveBackingTerms } from "@/lib/search/abrasive-backing.mjs";
 import { publicSkuOf } from "@/lib/catalog/public-code";
 import removedFromCustomerCatalog from "@/data/catalog/removed-from-customer-catalog.json";
 import suppliedImages from "@/data/catalog/image-supply/supplied-images.json";
@@ -1820,6 +1821,8 @@ const productRecords: CarsystemProduct[] = [
     longDescription:
       "Carsystem F19 brusni diskovi su deo abrazivnog programa za pripremu površine, od obrade gita do finije pripreme pre naredne faze.",
     sku: "CS-F19-DISC",
+    // Zvanični podnaslov (carsystem.org): „Film abrasive - 150 mm - 25 holes” — film, ne papir.
+    searchTerms: abrasiveBackingTerms("Film abrasive - 150 mm - 25 holes"),
     packages: [{ label: "P80-P800", detail: "Granulacije po izboru" }],
     purpose: "Međufazno brušenje i priprema za podlogu ili boju",
     badges: ["Abrazivi", "P80-P800", "Na upit"],

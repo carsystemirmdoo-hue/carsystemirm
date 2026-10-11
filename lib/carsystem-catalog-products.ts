@@ -1,3 +1,4 @@
+import { abrasiveBackingTerms } from "@/lib/search/abrasive-backing.mjs";
 import catalogData from "@/data/carsystem-catalog-products.generated.json";
 import type {
   CarsystemProduct,
@@ -386,9 +387,12 @@ function createCatalogProduct(entry: CatalogProductEntry, knownSlugs: Set<string
         ? entry.leadArticleNumber
         : null,
     ...(manufacturer?.modelCode ? { publicCode: manufacturer.modelCode } : {}),
+    ...(abrasiveBackingTerms(entry.officialSubtitle).length && !manufacturer
+      ? { searchTerms: abrasiveBackingTerms(entry.officialSubtitle) }
+      : {}),
     ...(manufacturer
       ? {
-          searchTerms: manufacturerSearchTerms(entry, manufacturer),
+          searchTerms: [...manufacturerSearchTerms(entry, manufacturer), ...abrasiveBackingTerms(entry.officialSubtitle)],
           variantManufacturerCodes: [
             ...new Set(Object.values(manufacturer.articleModelCodes).flatMap((model) => [model.modelCode, ...model.aliases])),
           ],

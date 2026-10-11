@@ -153,7 +153,17 @@ export function buildProductMetadata({
   const category = product.rmMetadata
     ? getRmCategorySingularName(product.rmMetadata.category)
     : undefined;
-  const descriptor = category ? `${brand.name} ${category}` : `${brand.name} proizvod`;
+  const compactName = (text: string) => text.toLowerCase().replace(/[^a-z0-9]/g, "");
+  /*
+   * Brend se ne ponavlja: „Carsystem Polish – Carsystem proizvod | Carsystem i R-M” nosi isti podatak
+   * tri puta. Kada naziv već sadrži brend, ostaje samo kategorija (ako postoji); inače samo brend.
+   */
+  const nameHasBrand = compactName(product.name).includes(compactName(brand.name));
+  const descriptor = nameHasBrand
+    ? category
+    : category
+      ? `${brand.name} ${category}`
+      : brand.name;
   const baseDescription =
     product.seoDescription ?? product.shortDescription ?? product.purpose;
   // Javna šifra ima prednost: interni `sku` se ne predstavlja kao šifra proizvođača.
@@ -161,12 +171,11 @@ export function buildProductMetadata({
   // Više R-M proizvoda deli komercijalni naziv („R-M THINNER”, „R-M GHD HARDENER”); bez šifre bi
   // stranice imale isti <title>. Šifra proizvođača se dodaje samo kada je potvrđena i nije već u nazivu.
   const titleCode = product.brandSlug === "rm" ? (product.manufacturerCode ?? publicCode) : null;
-  const compact = (text: string) => text.toLowerCase().replace(/[^a-z0-9]/g, "");
   const nameWithCode =
-    titleCode && !compact(product.name).includes(compact(titleCode))
+    titleCode && !compactName(product.name).includes(compactName(titleCode))
       ? `${product.name} ${titleCode}`
       : product.name;
-  const title = `${nameWithCode} – ${descriptor}`;
+  const title = descriptor ? `${nameWithCode} – ${descriptor}` : nameWithCode;
   const productIdentifier = publicCode
     ? `Šifra proizvoda ${publicCode}. `
     : "";

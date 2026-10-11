@@ -478,8 +478,37 @@ export function FreshnessLine({ profile }: { profile: CustomerProfile }) {
  * Predlozi dodatnih proizvoda — interno. Svaki predlog nosi razlog koji se može
  * proveriti; slab signal je označen kao slab, a nedostatak podataka rečima.
  */
+/** Koliko predloga za proširenje se prikazuje odmah; ostali su iza „Prikažite ostalih“. */
+const XS_ODMAH = 20;
+
 export function CustomerCrossSell({ crossSell, names }: { crossSell: CrossSell; names: Record<string, string> }) {
   const label = (code: string) => names[code] ?? code;
+  const row = (s: CrossSell["suggestions"][number]) => (
+    <li key={s.articleCode}>
+      <span className="cs-xs-name">
+        <strong>{s.identity?.catalog?.name ?? s.identity?.bizName ?? s.articleCode}</strong>
+        {s.identity?.catalog?.variantLabel ? <small> · {s.identity.catalog.variantLabel}</small> : null}
+        <small>
+          BizniSoft {s.articleCode}
+          {s.identity?.bizName ? ` — ${s.identity.bizName}` : ""}
+        </small>
+      </span>
+      <span className="cs-xs-why">
+        {s.peer ? (
+          <span>
+            {s.peer.strength === "weak" ? <em className="cs-xs-weak">slab signal</em> : null}
+            {s.peer.support} od {s.peer.peers} firmi sa sličnim kupovinama uzima i ovo (uz{" "}
+            {s.peer.because.map(label).join(", ")}).
+          </span>
+        ) : null}
+        {s.catalog ? (
+          <span>
+            Katalog: kompatibilno sa „{s.catalog.viaName}” koji kupac uzima ({s.catalog.viaCode}).
+          </span>
+        ) : null}
+      </span>
+    </li>
+  );
   return (
     <section className="portal-panel">
       <div className="portal-section-header">
@@ -500,34 +529,19 @@ export function CustomerCrossSell({ crossSell, names }: { crossSell: CrossSell; 
         {crossSell.suggestions.length === 0 ? (
           crossSell.ok ? <p>Nema predloga: nijedan artikal ne uzima dovoljno sličnih firmi, a katalog ne navodi kompatibilne povezane proizvode.</p> : null
         ) : (
-          <ol className="cs-xs">
-            {crossSell.suggestions.map((s) => (
-              <li key={s.articleCode}>
-                <span className="cs-xs-name">
-                  <strong>{s.identity?.catalog?.name ?? s.identity?.bizName ?? s.articleCode}</strong>
-                  {s.identity?.catalog?.variantLabel ? <small> · {s.identity.catalog.variantLabel}</small> : null}
-                  <small>
-                    BizniSoft {s.articleCode}
-                    {s.identity?.bizName ? ` — ${s.identity.bizName}` : ""}
-                  </small>
-                </span>
-                <span className="cs-xs-why">
-                  {s.peer ? (
-                    <span>
-                      {s.peer.strength === "weak" ? <em className="cs-xs-weak">slab signal</em> : null}
-                      {s.peer.support} od {s.peer.peers} firmi sa sličnim kupovinama uzima i ovo (uz{" "}
-                      {s.peer.because.map(label).join(", ")}).
-                    </span>
-                  ) : null}
-                  {s.catalog ? (
-                    <span>
-                      Katalog: kompatibilno sa „{s.catalog.viaName}” koji kupac uzima ({s.catalog.viaCode}).
-                    </span>
-                  ) : null}
-                </span>
-              </li>
-            ))}
-          </ol>
+          <>
+            <ol className="cs-xs">{crossSell.suggestions.slice(0, XS_ODMAH).map(row)}</ol>
+            {/* Prvih nekoliko odmah, ostatak na jedan klik — redosled i podaci se ne menjaju
+                (539 predloga pravilo je karticu od ~37.000 px). */}
+            {crossSell.suggestions.length > XS_ODMAH ? (
+              <details className="cs-sugg-more">
+                <summary>Prikažite ostalih {crossSell.suggestions.length - XS_ODMAH} predloga</summary>
+                <ol className="cs-xs" start={XS_ODMAH + 1}>
+                  {crossSell.suggestions.slice(XS_ODMAH).map(row)}
+                </ol>
+              </details>
+            ) : null}
+          </>
         )}
         <p className="portal-footnote">
           Osnov: potvrđene kupovine iz poslednjih 365 dana ({crossSell.customersWithHistory} firmi, od toga{" "}

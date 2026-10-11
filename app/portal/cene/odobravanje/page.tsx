@@ -1,3 +1,4 @@
+import { percent, quantity } from "@/lib/ordering/panelFormat.mjs";
 import { PageHeader } from "@/components/portal/PortalPrimitives";
 import { can } from "@/lib/authz/permissions.mjs";
 import { requireCapability } from "@/lib/authz/session";
@@ -70,7 +71,7 @@ export default async function PriceApprovalPage() {
                       <small>{b.batch}</small>
                     </th>
                     <td>
-                      {b.n} pravila · {Number(b.min) === Number(b.max) ? `${Number(b.min)} %` : `${Number(b.min)}–${Number(b.max)} %`}
+                      {b.n} pravila · {Number(b.min) === Number(b.max) ? percent(Number(b.min)) : `${quantity(Number(b.min))}–${percent(Number(b.max))}`}
                       <small>{b.replaces ? `menja ${b.replaces} važećih pravila` : "samo nova pravila"}</small>
                     </td>
                     <td>{b.proposer}</td>

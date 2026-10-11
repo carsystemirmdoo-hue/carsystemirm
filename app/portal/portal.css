@@ -9672,3 +9672,75 @@ html:has(.portal-customer-area) { scroll-padding-top: 104px; }
     min-width: 0;
   }
 }
+
+/* =========================================================================
+ * Završna dorada PR #22
+ * ====================================================================== */
+
+/* Mreža definicija (Raspon uvezenih datuma, zaglavlje fakture): broj kolona
+ * prati broj podataka. Ranije su bile fiksne 3 kolone, pa su 2 podatka
+ * ostavljala praznu treću ćeliju, a 5 podataka praznu šestu. Stavke rastu
+ * da popune red (nema prazne ćelije), na uskom ekranu se slažu jedna ispod
+ * druge. Linije: svaka stavka crta desnu i donju, a okvir odseca spoljne. */
+.portal-definition-grid {
+  display: flex;
+  flex-wrap: wrap;
+  overflow: hidden;
+}
+.portal-definition-grid > div,
+.portal-definition-grid > div:nth-child(3n),
+.portal-definition-grid > div:nth-last-child(-n + 3) {
+  flex: 1 1 220px;
+  margin: 0 -1px -1px 0;
+  border-right: 1px solid var(--p-line);
+  border-bottom: 1px solid var(--p-line);
+}
+
+/* Kartice pokazatelja: uravnoteženi redovi prema broju kartica.
+ *  6 kartica: 6 u redu → 3 × 2 → 2 × 3 → 1
+ *  8 kartica: 8 u redu → 4 × 2 → 2 × 4 → 1
+ *  4 kartice: 4 → 2 × 2 → 1;  3 kartice: 3 → 1
+ * Kartica nikad nije uža od 240px (iznos „337.773.083 RSD“ i dugi nazivi
+ * staju bez smanjivanja fonta). Bez upita za širinu kontejnera: širina
+ * kolone se bira izrazom — prvi raspored u kome kartica ima ≥ 240px.
+ * K(x) je pozitivno (veliko) samo kada x NE staje. */
+.portal-metrics {
+  --m-gap: 12px;
+  --m-min: 240px;
+  gap: var(--m-gap);
+}
+.portal-metrics:has(> :nth-child(6):last-child) {
+  --m-a: calc((100% - 5 * var(--m-gap)) / 6 - 1px);
+  --m-b: calc((100% - 2 * var(--m-gap)) / 3 - 1px);
+  --m-c: calc((100% - var(--m-gap)) / 2 - 1px);
+}
+.portal-metrics:has(> :nth-child(8):last-child) {
+  --m-a: calc((100% - 7 * var(--m-gap)) / 8 - 1px);
+  --m-b: calc((100% - 3 * var(--m-gap)) / 4 - 1px);
+  --m-c: calc((100% - var(--m-gap)) / 2 - 1px);
+}
+.portal-metrics:has(> :nth-child(4):last-child) {
+  --m-a: calc((100% - 3 * var(--m-gap)) / 4 - 1px);
+  --m-b: calc((100% - var(--m-gap)) / 2 - 1px);
+  --m-c: calc((100% - var(--m-gap)) / 2 - 1px);
+}
+.portal-metrics:has(> :nth-child(3):last-child) {
+  --m-a: calc((100% - 2 * var(--m-gap)) / 3 - 1px);
+  --m-b: 100%;
+  --m-c: 100%;
+}
+.portal-metrics:is(:has(> :nth-child(6):last-child), :has(> :nth-child(8):last-child), :has(> :nth-child(4):last-child), :has(> :nth-child(3):last-child)) {
+  grid-template-columns: repeat(
+    auto-fill,
+    minmax(
+      max(
+        var(--m-a),
+        min(
+          max(var(--m-b), min(max(var(--m-c), min(100%, (var(--m-min) - var(--m-c)) * 1000)), (var(--m-min) - var(--m-b)) * 1000)),
+          (var(--m-min) - var(--m-a)) * 1000
+        )
+      ),
+      1fr
+    )
+  );
+}

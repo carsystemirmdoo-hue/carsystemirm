@@ -18,7 +18,7 @@ for m in json.load(open(f'{P}/sata/_manifest.json')):
           match='—',rights='—',need=None)
 # Cosmos
 BK='preuzeto/cosmos-lac/brand-kit/'; SJ='preuzeto/cosmos-lac/sajt/'
-BKR='DA — zvanični Cosmos Brand Kit (isti izvor kao 742 objavljene Cosmos slike)'
+BKR='NIJE DOKUMENTOVANO — zvanični Cosmos Brand Kit (isti izvor kao 742 objavljene slike), ali pisana dozvola za web upotrebu ne postoji u dokumentaciji, a izvorni ZIP-ovi više nisu u Downloads; potrebna potvrda Cosmos Lac-a'
 COS={
  'cosmos-lac-acrylic-varnish-376-gloss':('acrylic-varnish-376-gloss.png','acrylic-varnish-376-gloss.png','Proizvod da (Acrylic Varnish 400 ml); završnica NE — proizvođač koristi istu sliku za 376/377/378 (bajt-identično i na sajtu)'),
  'cosmos-lac-acrylic-varnish-377-matt':('acrylic-varnish-377-matt.png','acrylic-varnish-377-matt.png','Proizvod da; završnica NE — ista slika kao 376/378'),
@@ -29,12 +29,12 @@ COS={
  'cosmos-lac-high-heat-351-black-container':('high-heat-351-black-container.png','high-heat-351-black-container-175ml-v2.png','Proizvod da; boja NE — ista slika za 350/351/353'),
  'cosmos-lac-high-heat-353-maroon-container':('high-heat-353-maroon-container.png','high-heat-353-maroon-container-175ml-v2.png','Proizvod da; boja NE — ista slika za 350/351/353'),
  'cosmos-lac-ral-9003-matt-signal-white':('ral-9003-matt-signal-white-v2.png','ral-9003-matt-signal-white-v2.png','Potvrđeno — natpis „MATT RAL 9003 SIGNAL WHITE”, 400 ml'),
- 'cosmos-lac-flame-orange-fo-314-piglet-pink-dark':('flame™-orange-fo-314-piglet-pink-dark.png','flame-orange-fo-314-piglet-pink-dark.png','Potvrđeno — zvanična slika sa stranice FO-314 na cosmoslac.com i iz Brand Kit-a (FLAME ORANGE 400 ml); napomena: Brand Kit isti fajl nosi i pod nazivom FO-313'),
+ 'cosmos-lac-flame-orange-fo-314-piglet-pink-dark':('flame™-orange-fo-314-piglet-pink-dark.png','flame-orange-fo-314-piglet-pink-dark.png','ČEKA POTVRDU — etiketa ne prikazuje šifru ni nijansu; stranica FO-314 na cosmoslac.com koristi ovaj fajl, ali Brand Kit isti fajl nosi i kao „fo-313-Piglet-Pink-Dark” (zvanični FO-313 je Cherry Dark, drugi fajl); poklopac je crven, bliži FO-312/313 nego „pink” nijansama 308–310 — podudaranje nije dokazano'),
 }
 for s,(bk,sj,match) in COS.items():
     F[s]=dict(found='Da — lokalno u Brand Kit-u + preuzeto sa cosmoslac.com',url='https://cosmoslac.com/wp-content/uploads/'+sj,page='',file=BK+bk,sha=sha(os.path.join(P,'cosmos-lac/brand-kit',bk)),
       match=match,rights=BKR+(' — za ovu sliku potvrdite i nijansu/pakovanje' if 'NE' in match else ''),
-      need=('Odluka: prihvatate li zajedničku sliku porodice (ne prikazuje varijantu)' if 'NE' in match else None))
+      need=('Potvrda Cosmos Lac-a: koja je slika FO-314 Piglet Pink Dark' if match.startswith('ČEKA') else ('Odluka: prihvatate li zajedničku sliku porodice (ne prikazuje varijantu) + potvrda prava Brand Kit-a' if 'NE' in match else 'Potvrda prava Brand Kit-a (Cosmos Lac)')))
 F['cosmos-lac-easy-max-glitter-912-multi']=dict(found='Da — preuzeto sa cosmoslac.com (nema je u Brand Kit-u)',url='https://cosmoslac.com/wp-content/uploads/easy-max-glitter-912-multi-1.png',page='',file=SJ+'easy-max-glitter-912-multi-1.png',sha=sha(os.path.join(P,'cosmos-lac/sajt/easy-max-glitter-912-multi-1.png')),
   match='Potvrđeno — natpis „EASY MAX GLITTER MULTI”, 400 ml',rights='NE — uslovi cosmoslac.com traže pisanu dozvolu',need='Potvrda prava: pisana dozvola Cosmos Lac (ili dopuna Brand Kit-a)')
 # R-M

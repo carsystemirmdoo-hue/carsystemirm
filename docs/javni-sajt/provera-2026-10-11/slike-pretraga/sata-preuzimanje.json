@@ -72,10 +72,11 @@
   "filenameMatches": "no",
   "note": "no image for main article 4754; image only for sibling article(s) 9902 13870 37655 50252 50591 50641 51300 53090 189068 195420 (URL shown = 9902)",
   "http": 200,
-  "file": "sata__sata-air-hose__4754.webp",
+  "file": "sata__sata-air-hose__glavni-4754__slika-srodnog-9902.webp",
   "bytes": 61074,
   "sha256": "023e8ab73554529bddc17b5bda7a4d55e1d0a7898ec3a4b1535083f837f67ef4",
-  "status": "preuzeto"
+  "status": "preuzeto",
+  "siblingArticleShown": "9902"
  },
  {
   "slug": "sata-air-hose-g-1-4",
@@ -732,10 +733,11 @@
   "filenameMatches": "no",
   "note": "no image for main article 1172; image only for sibling article(s) 153288 1222851 1230078 1231365 1231381 1231886 (URL shown = 153288)",
   "http": 200,
-  "file": "sata__sata-lackierpistolenkoffer__1172.webp",
+  "file": "sata__sata-lackierpistolenkoffer__glavni-1172__slika-srodnog-153288.webp",
   "bytes": 82464,
   "sha256": "92739e03a6e28ba4f10fb86f6b4057101d8bf1fd7393b22d0940fc26b96a8797",
-  "status": "preuzeto"
+  "status": "preuzeto",
+  "siblingArticleShown": "153288"
  },
  {
   "slug": "sata-jet-x-clearcoat-edition",
@@ -771,10 +773,11 @@
   "filenameMatches": "no",
   "note": "no image for main article 9860; image only for sibling article(s) 27771 48934 (URL shown = 27771)",
   "http": 200,
-  "file": "sata__sata-luftmikrometer__9860.webp",
+  "file": "sata__sata-luftmikrometer__glavni-9860__slika-srodnog-27771.webp",
   "bytes": 140466,
   "sha256": "da4814fb4dc1b269ba728a68676384e99a14a1b371fd9cb9767ec69d553b3c1b",
-  "status": "preuzeto"
+  "status": "preuzeto",
+  "siblingArticleShown": "27771"
  },
  {
   "slug": "sata-manometer",
@@ -823,10 +826,11 @@
   "filenameMatches": "no",
   "note": "no image for main article 49155; image only for sibling article(s) 49999 50161 (URL shown = 49999)",
   "http": 200,
-  "file": "sata__sata-material-hose__49155.webp",
+  "file": "sata__sata-material-hose__glavni-49155__slika-srodnog-49999.webp",
   "bytes": 148770,
   "sha256": "30c22fb59168bfd55bc4a565b4006d39d2f54011c44b536db86e41a30ee56852",
-  "status": "preuzeto"
+  "status": "preuzeto",
+  "siblingArticleShown": "49999"
  },
  {
   "slug": "sata-material-hose-solvent-resistant",
@@ -901,10 +905,11 @@
   "filenameMatches": "no",
   "note": "no image for main article 21733; image only for sibling article(s) 56408 57232 83444 120840 (URL shown = 56408)",
   "http": 200,
-  "file": "sata__sata-mini-set-2__21733.webp",
+  "file": "sata__sata-mini-set-2__glavni-21733__slika-srodnog-56408.webp",
   "bytes": 132330,
   "sha256": "fa5aca98a420c323163d2efd57a978163c151de50ef475c92c97b733d0b46c1a",
-  "status": "preuzeto"
+  "status": "preuzeto",
+  "siblingArticleShown": "56408"
  },
  {
   "slug": "sata-nipple-with-swivel-nut",
@@ -1292,10 +1297,11 @@
   "filenameMatches": "no",
   "note": "no image for main article 117051; image only for sibling article(s) 173435 (URL shown = 173435)",
   "http": 200,
-  "file": "sata__sata-shaker-ring-rps-the-original__117051.webp",
+  "file": "sata__sata-shaker-ring-rps-the-original__glavni-117051__slika-srodnog-173435.webp",
   "bytes": 89324,
   "sha256": "5757f9a6647ef6099e53e2ba01bafc60c7dd62f87d22763016e6609b34bae197",
-  "status": "preuzeto"
+  "status": "preuzeto",
+  "siblingArticleShown": "173435"
  },
  {
   "slug": "sata-sge-paint-hose-with-ascension-pipe",
@@ -1632,10 +1638,11 @@
   "filenameMatches": "no",
   "note": "no image for main article 56010; image only for sibling article(s) 61507 61515 62745 72678 72694 81406 81661 90662 95109 (URL shown = 61507)",
   "http": 200,
-  "file": "sata__sata-vario-top-spray__56010.webp",
+  "file": "sata__sata-vario-top-spray__glavni-56010__slika-srodnog-61507.webp",
   "bytes": 127676,
   "sha256": "5cbe7582198c9fe3df1b1187a77e8434dc5ed541bcc9c309145aef9a43b34e10",
-  "status": "preuzeto"
+  "status": "preuzeto",
+  "siblingArticleShown": "61507"
  },
  {
   "slug": "sata-turbo-blow-with-quick-coupling-nipple-blow-gun",

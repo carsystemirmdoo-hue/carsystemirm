@@ -1,4 +1,4 @@
-import json, csv, re, sys, os
+import json, csv, re, sys, os, collections
 from openpyxl import Workbook
 from openpyxl.styles import Font, Alignment, PatternFill
 from openpyxl.utils import get_column_letter
@@ -122,21 +122,26 @@ def status_of(x,f):
     if not f['file']:
         n=final_need(x,f)
         return 'nije pronađeno — '+('placeholder prihvaćen' if n.startswith('Ništa') else 'potrebna Vaša fotografija')
-    if f['rights'].startswith('NE'): return 'pronađeno — čeka pravo'+('' if f['match'].startswith('Potvrđeno') else ' i potvrdu varijante')
-    if f['match'].startswith('Potvrđeno'): return 'pronađeno — spremno za uvoz (pravo: Brand Kit)'
+    if not f['rights'].startswith('DA'):
+        if f['match'].startswith('Potvrđeno'): return 'pronađeno — čeka pravo'
+        if x['brand']=='cosmos-lac': return 'pronađeno — čeka pravo i Vašu odluku o zajedničkoj slici'
+        return 'pronađeno — čeka pravo i potvrdu varijante'
+    if f['match'].startswith('Potvrđeno'): return 'pronađeno — spremno za uvoz'
     return 'pronađeno — čeka Vašu odluku o zajedničkoj slici'
 ws=wb.active; ws.title="Nedostaje fotografija"
-H=["#","Brend","Tačan naziv","Šifra proizvođača","Varijanta / pakovanje","Link naše stranice","1. Fotografija pronađena i preuzeta","2. Podudaranje proizvod / varijanta / pakovanje","3. Pravo objavljivanja","Izvorni URL slike","Stranica izvora","Lokalni fajl (za pregled, NIJE objavljen)","SHA-256","Potrebno od Vas","Predloženi upit za pretragu","Napomena iz izveštaja"]+EMPTYC
+PRIV=os.environ.get("PRIVATNO")=="1"
+PROG=json.load(open("priv/program-zakljucak.json")) if PRIV else {}
+H=["#","Brend","Tačan naziv","Šifra proizvođača","Varijanta / pakovanje","Link naše stranice"]+(["Aktuelno u našem programu (interni šifarnik)"] if PRIV else [])+["1. Fotografija pronađena i preuzeta","2. Podudaranje proizvod / varijanta / pakovanje","3. Pravo objavljivanja","Izvorni URL slike","Stranica izvora","Lokalni fajl (za pregled, NIJE objavljen)","SHA-256","Potrebno od Vas","Predloženi upit za pretragu","Napomena iz izveštaja"]+EMPTYC
 data=[]
 for i,x in enumerate(missing,1):
     code,cnote=code_of(x)
     note=note_of(x)+(f" ({cnote})" if cnote else "")
     f=row_status(x)
     st=status_of(x,f)
-    data.append([i,BR[x['brand']],x['name'],code,pack_of(x),SITE+x['href'],f['found'],f['match'],f['rights'],f['url'],f['page'],
+    data.append([i,BR[x['brand']],x['name'],code,pack_of(x),SITE+x['href']]+([PROG.get(x['slug'],'nije provereno (van 25)')] if PRIV else [])+[f['found'],f['match'],f['rights'],f['url'],f['page'],
                  ('~/Carsystem/radno/slike-za-pronalazenje/'+f['file']) if f['file'] else '',f['sha'][:16],final_need(x,f),query_of(x,code),note,
                  f['url'] or '', os.path.basename(f['file']) if f['file'] else '', st])
-sheet(ws,H,data,[5,10,40,16,18,38,40,48,40,40,34,46,18,36,34,50,34,30,30],EMPTYC)
+sheet(ws,H,data,[5,10,40,16,18,38]+([46] if PRIV else [])+[40,48,40,40,34,46,18,36,34,50,34,30,30],EMPTYC)
 STATUS=[r[-1] for r in data]
 
 ws2=wb.create_sheet("Čeka potvrdu prava")
@@ -157,23 +162,39 @@ for i,x in enumerate(pending,1):
 sheet(ws2,H2,data2,[5,10,42,18,22,40,48,40,48,36,14,14],["Odluka (da/ne)","Status"])
 
 # --- ambalaža po zapremini (baslac sistemske strane) ---
+INV=json.load(open('audit/inventory.json'))
+fam=lambda p:p['canonical'].split('?')[0].split('/')[-1]
+SYS={'baslac-line-30':'Line 30','baslac-line-35':'Line 35','baslac-line-45':'Line 45'}
+bases=[p for p in INV['products'] if p['brand']=='baslac' and p['redirect'] and fam(p) in SYS]
+SLOT={('Line 30','1 L'):'F-30-1L',('Line 35','1 L'):'F-35-1L',('Line 35','0,5 L'):'F-35-05L',('Line 45','5 L'):'F-45-5L',('Line 45','1 L'):'F-45-1L',('Line 45','0,5 L'):'F-45-05L',('Line 45','0,1 L'):'F-45-01L'}
+rowsB=[]
+for p in sorted(bases,key=lambda p:(fam(p),p['name'])):
+    vol='/'.join(p['packages']) or (p['volume'] or '')
+    key=(SYS[fam(p)],vol); slot=SLOT.get(key)
+    if not slot: continue
+    ph='placeholder' in (p['image'] or '')
+    rowsB.append([SYS[fam(p)],vol,slot,p['sku'],p['name'],SITE+p['canonical'],'da' if ph else 'ne (prikazuje se primer limenke linije 45-W)','DA' if ph else 'ne'])
+cntV=collections.Counter(r[2] for r in rowsB); cnt66=collections.Counter(r[2] for r in rowsB if r[7]=='DA')
 ws4=wb.create_sheet("baslac ambalaža po zapremini")
-H4=["#","Sistem","Pakovanje","Baza (varijanti)","Šta nedostaje","Postojeći materijal","1. Pronađeno","2. Podudaranje","3. Pravo","Potrebno od Vas","Status"]
-slots=[("Line 30","1 L",17,"Ima: 30-S110 (1 L) — sopstveni packshot te baze na Surventis portalu (asset 12114); generička 1 L limenka sistema ne postoji"),
-       ("Line 35","1 L",17,"Portal nema generičku 1 L limenku"),("Line 35","0,5 L",32,"Portal nema generičku 0,5 L limenku"),
-       ("Line 45","5 L",2,"Portal nema generičku 5 L limenku"),("Line 45","1 L",7,"Primer limenke linije 1 L (prikazuje se uz napomenu)"),
-       ("Line 45","0,5 L",49,"Portal nema generičku 0,5 L limenku"),("Line 45","0,1 L",12,"Portal nema generičku 0,1 L limenku")]
-d4=[]
-for i,(sy,pk,n,mat) in enumerate(slots,1):
-    d4.append([i,sy,pk,n,f"Fotografija PRAZNE/generičke limenke {sy} {pk} — ne fotografija pojedinačne baze (baze se razlikuju šifrom i nijansom, ne limenkom)",mat,"Ne","—","—",f"Jedna Vaša fotografija limenke {sy} {pk} pokriva svih {n} baza","nije pronađeno — potrebna Vaša fotografija (1 snimak)"])
-ws4.append(H4)
-for c in ws4[1]: c.font=HDR; c.fill=FILL; c.alignment=Alignment(wrap_text=True,vertical="top")
-for r in d4: ws4.append(r)
-for i,w in enumerate([5,10,10,14,60,50,10,10,10,40,36],1): ws4.column_dimensions[get_column_letter(i)].width=w
-for row in ws4.iter_rows(min_row=2):
+ws4.append(["Slotovi: BROJ VARIJANTI ≠ BROJ POTREBNIH FOTOGRAFIJA. Svaka fotografija je jedna generička limenka sistema u datoj zapremini; baze se razlikuju šifrom i nijansom, ne limenkom."])
+ws4.append([])
+ws4.append(["Slot fotografije","Sistem","Pakovanje","Varijanti (baza) u slotu","Od toga u spisku od 66 (bez ikakve slike)","Potrebnih različitih fotografija","Postojeći materijal","Potrebno od Vas"])
+NOTE={'F-30-1L':'Na Surventis portalu postoji sopstveni 1 L packshot SAMO za bazu 30-S110 (asset 12114) — pokriva tu jednu varijantu, ne slot','F-45-1L':'Generička „45-W” limenka koju je vlasnik dostavio (prikazuje se kao primer)'}
+for slot in SLOT.values():
+    sy,pk=[k for k,v in SLOT.items() if v==slot][0]
+    ws4.append([slot,sy,pk,cntV.get(slot,0),cnt66.get(slot,0),1,NOTE.get(slot,'Generička limenka ove zapremine ne postoji na portalu' if sy!='Line 45' else 'Prikazuje se primer limenke 45-W (druga zapremina); tačna zapremina nedostaje'),f'Jedna fotografija prazne/generičke limenke {sy} {pk}'])
+ws4.append(["UKUPNO","","",sum(cntV.values()),sum(cnt66.values()),len(SLOT),"",""])
+ws4.append([]); ws4.append(["Mapiranje varijanti na slotove (sve baze sistemskih strana; kolona „u spisku 66” označava redove iz spiska druge sesije)"])
+hdr=["Sistem","Pakovanje","Slot fotografije","Šifra baze","Naziv","Link (varijanta)","Zapis bez ikakve slike","U spisku 66"]
+ws4.append(hdr)
+hr=ws4.max_row
+for c in ws4[3]+ws4[hr]: c.font=HDR; c.fill=FILL; c.alignment=Alignment(wrap_text=True,vertical="top")
+for r in rowsB: ws4.append(r)
+for i,w in enumerate([12,10,12,14,40,60,26,10],1): ws4.column_dimensions[get_column_letter(i)].width=w
+for row in ws4.iter_rows(min_row=3):
     for c in row: c.alignment=Alignment(wrap_text=True,vertical="top")
-ws4.freeze_panes="B2"
-
+ws4['A1'].font=Font(bold=True)
+BASLAC_SUM=(sum(cntV.values()),sum(cnt66.values()),len(SLOT),dict(cnt66))
 # --- pregled ---
 import collections
 ws3=wb.create_sheet("Pregled",0)
@@ -182,7 +203,10 @@ byb=collections.defaultdict(collections.Counter)
 for x,st in zip(missing,STATUS): byb[BR[x['brand']]][st]+=1
 lines=[["Pregled pretrage fotografija — 2026-10-11"],[""],
  ["Glavni spisak","189 proizvoda bez fotografije (list „Nedostaje fotografija”) + 7 slotova ambalaže baslac sistema (poseban list) + 31 slika koja čeka prava (list „Čeka potvrdu prava”). Ovo je JEDINI glavni spisak; zamenjuje radni fajl ~/Carsystem/radno/slike-za-pronalazenje/SLIKE_ZA_PRONALAZENJE.xlsx (255 redova) iz druge sesije."],
- ["66 baslac redova iz druge sesije","To su baze sa sistemskih strana Line 30 (17 × 1 L) i Line 35 (17 × 1 L + 32 × 0,5 L). Nisu posebni proizvodi bez slike: baze se kupcu prikazuju na sistemskoj strani, a nedostaje jedna fotografija generičke limenke po pakovanju. Isti nalaz je već evidentiran kao 3 slota ambalaže (OLD-043…045). Zato su u glavnom spisku 3 reda (plus 4 za Line 45), a ne 66 zadataka. Nisu ponovljeni nalazi među 189 — preklapanje je 0."],
+ ["66 baslac redova iz druge sesije","To su baze sa sistemskih strana Line 30 (17 × 1 L) i Line 35 (17 × 1 L + 32 × 0,5 L). Nisu posebni proizvodi bez slike: baze se kupcu prikazuju na sistemskoj strani, a nedostaje jedna fotografija generičke limenke po pakovanju. Isti nalaz je već evidentiran kao 3 slota ambalaže (OLD-043…045): 66 varijanti = 3 potrebne fotografije (Line 30 1 L: 17, Line 35 1 L: 17, Line 35 0,5 L: 32). Sa Line 45 (68 baza, prikazuje se primer limenke) ukupno 134 baze = 7 fotografija. Mapiranje svake varijante je na listu „baslac ambalaža po zapremini”. Nisu ponovljeni nalazi među 189 — preklapanje je 0."],
+ ["FO-314","Prebačeno u „čeka potvrdu identiteta”: etiketa ne nosi šifru ni nijansu, Brand Kit isti fajl nosi i kao FO-313 (zvanični FO-313 je Cherry Dark), a poklopac je crven, bliži FO-312/313 nego pink nijansama 308–310."],
+ ["Cosmos Brand Kit — pravo","ISPRAVKA: ranije označeno kao potvrđeno. Brand Kit je zvaničan izvor (742 objavljene slike), ali pisana dozvola za web upotrebu nije dokumentovana — vidi nacrt zahteva Cosmos Lac-u."],
+ ["Pregled sa slikama","~/Carsystem/radno/slike-za-pronalazenje/PREGLED_SPORNIH_SLIKA.html (i .jpg): 8 Cosmos sa zajedničkom slikom, 7 SATA sa slikom srodnog artikla, FO-314; neslaganje 175/185 ml za Chrome 450 / Gold 451 je istaknuto — katalog NIJE menjan."],
  [""],["Stanje","Broj"]]+[[k,v] for k,v in sorted(cnt.items(),key=lambda t:-t[1])]+[[""],["Po brendu","Stanja"]]+[[b, "; ".join(f"{k}: {v}" for k,v in c.items())] for b,c in byb.items()]+[[""],
  ["Gde su fajlovi","~/Carsystem/radno/slike-za-pronalazenje/preuzeto/<brend>/ — van git-a, nije objavljeno. SATA _manifest.json ima URL, SHA-256 i stranicu artikla za svaki fajl."],
  ["Pravila","Podudaranje „Potvrđeno” samo kad slika nosi tačnu šifru/naziv ili je sopstvena glavna slika artikla na stranici proizvođača. Zajednička slika porodice je označena posebno. Šifre se ne izmišljaju."]]

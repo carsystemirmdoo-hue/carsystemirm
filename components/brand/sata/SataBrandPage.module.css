@@ -30,6 +30,8 @@
   --sata-paper: #f4f6f8;
   --sata-paper-raised: #ffffff;
   --sata-void: #071624;
+  /* Tamna traka (sekcije „Sistem”, lanac) — ista u obe teme; `--sata-ink` je boja teksta. */
+  --sata-band: #0d1117;
   --sata-chalk: #e8eef4;
 
   /* Linije — sistemski jezik stranice je linija, ne senka. */
@@ -388,7 +390,7 @@
 }
 
 .systemSection {
-  background: var(--sata-ink);
+  background: var(--sata-band);
   color: var(--sata-chalk);
 }
 
@@ -541,7 +543,7 @@
   gap: 0.55rem;
   min-width: 0;
   padding: clamp(1.25rem, 2.4vw, 1.75rem);
-  background: var(--sata-ink);
+  background: var(--sata-band);
 }
 
 .chainStep {
@@ -1281,4 +1283,27 @@
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
+}
+
+/* ---------------------------------------------------------------- tamna tema */
+
+/*
+ * Ranije su svetla i tamna verzija bile iste. Menjaju se tokeni površina, teksta i linija;
+ * tamne trake (`--sata-band`, hero) ostaju kakve jesu.
+ */
+:global(html[data-theme="dark"]) .page {
+  --sata-ink: #e8eef4;
+  --sata-paper: #0b1219;
+  --sata-paper-raised: #111b25;
+  --sata-band: #050a10;
+  --sata-line: rgb(232 238 244 / 0.14);
+  --sata-line-strong: rgb(232 238 244 / 0.28);
+  --sata-muted: #a7b3c1;
+  /* Plava kao tekst na tamnoj podlozi; #0a4a8f bi davao oko 2:1. */
+  --sata-blue: #5aa6e8;
+  --brand-nav-surface: rgb(11 18 25 / 0.94);
+}
+
+:global(html[data-theme="dark"]) .localCta .ctaPrimary {
+  background: #0a4a8f;
 }

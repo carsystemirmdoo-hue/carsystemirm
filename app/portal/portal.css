@@ -9744,3 +9744,12 @@ html:has(.portal-customer-area) { scroll-padding-top: 104px; }
     )
   );
 }
+/* Tabela čija prva kolona ostaje uz levu ivicu (zaglavlje reda): i naslov te
+ * kolone ostaje na mestu pri vodoravnom pomeranju, inače ispod zalepljene
+ * kolone prolaze naslovi drugih kolona. */
+.portal-table:has(tbody th[scope="row"]) thead th:first-child {
+  position: sticky;
+  left: 0;
+  z-index: 4;
+  box-shadow: 1px 0 0 var(--p-line);
+}

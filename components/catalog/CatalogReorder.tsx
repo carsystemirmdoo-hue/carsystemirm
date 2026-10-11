@@ -162,7 +162,8 @@ const money = new Intl.NumberFormat("sr-Latn-RS", { minimumFractionDigits: 2, ma
  */
 function ReorderQuantity({ item }: { item: ReorderItem }) {
   const o = item.order!;
-  const [packs, setPacks] = useState(String(o.suggestedPacks));
+  // Bez predloga (istorija nije ceo broj pakovanja) polje ostaje prazno — ništa se ne zaokružuje.
+  const [packs, setPacks] = useState(o.suggestedPacks === null ? "" : String(o.suggestedPacks));
   const [pending, start] = useTransition();
   const [state, setState] = useState<{ ok: boolean; text: string } | null>(null);
   const add = () =>
@@ -184,6 +185,7 @@ function ReorderQuantity({ item }: { item: ReorderItem }) {
           </span>
         ))}
       </p>
+      {o.suggestionNote ? <p className={styles.orderFacts}>{o.suggestionNote}</p> : null}
       <div className={styles.orderRow}>
         <label className={styles.qtyLabel}>
           <span>Broj pakovanja</span>
@@ -193,6 +195,7 @@ function ReorderQuantity({ item }: { item: ReorderItem }) {
             min={1}
             step={1}
             value={packs}
+            placeholder={o.suggestedPacks === null ? "broj" : undefined}
             onChange={(e) => setPacks(e.target.value)}
             disabled={pending}
           />

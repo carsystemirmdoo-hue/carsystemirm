@@ -198,6 +198,13 @@ export function RevisionForm({
                           <span className="pn-sub pn-num">rabat {percent(p.discountPercent ?? 0)}</span>
                         </>
                       )}
+                      {!r.removed && p?.packNote ? (
+                        p.packException ? (
+                          <span className="pn-tag" data-tone="warning">{p.packNote}</span>
+                        ) : (
+                          <span className="pn-sub">{p.packNote}</span>
+                        )
+                      ) : null}
                     </td>
                     <td className="pn-r pn-num" data-label="Iznos bez PDV-a">
                       {!p || p.problem || p.status === "na_upit" ? <span className="pn-muted">—</span> : amount(p.net)}

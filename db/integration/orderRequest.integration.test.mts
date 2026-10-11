@@ -422,9 +422,27 @@ test("pakovanja (0047): 2 × 5 L = 10 LIT kroz ponudu, korpu i zahtev; LIT bez p
       SELECT quantity::text AS q, pack_count AS n, pack_quantity::text AS pq, line_net::text AS net FROM customer_order_lines WHERE order_id = ${sent.orderId}`;
     assert.deepEqual(line, { q: "10.000", n: 2, pq: "5.000", net: "5376.00" });
     const { loadOrderRequest } = await import("@/lib/ordering/ordering-service");
-    const detail = await loadOrderRequest(await user("tamara"), sent.orderId);
+    const tamara = await user("tamara");
+    const detail = await loadOrderRequest(tamara, sent.orderId);
     assert.equal(detail?.lines[0].packCount, 2);
     assert.equal(detail?.lines[0].packQuantity, 5);
+
+    // Kancelarija u predlogu: 7 LIT nije ceo broj kanti od 5 L → izuzetak, bez „2 × kanta“.
+    const pre = await s.previewOrderRevision(tamara, sent.orderId, [{ articleId: five, quantity: 7 }]);
+    assert.equal(pre.lines[0].problem, null, "kancelarija sme izuzetak");
+    assert.equal(pre.lines[0].packException, true);
+    assert.match(pre.lines[0].packNote ?? "", /Izuzetak: 7 LIT nije ceo broj pakovanja \(kanta 5 L\)/);
+    const rev = await s.proposeOrderRevision(tamara, sent.orderId, { lines: [{ articleId: five, quantity: 7 }], reason: "na stanju samo 7 litara" });
+    const revised = await loadOrderRequest(tamara, rev.orderId);
+    assert.deepEqual(
+      { q: revised?.lines[0].quantity, n: revised?.lines[0].packCount, pq: revised?.lines[0].packQuantity },
+      { q: 7, n: null, pq: 5 },
+      "pamti pakovanje, ali NE broj pakovanja — prikaz mora reći izuzetak",
+    );
+    // Celo pakovanje u predlogu (15 LIT) ostaje „3 × kanta 5 L“.
+    const whole = await s.previewOrderRevision(tamara, sent.orderId, [{ articleId: five, quantity: 15 }]);
+    assert.equal(whole.lines[0].packException, false);
+    assert.equal(whole.lines[0].packNote, "3 × kanta 5 L = 15 LIT");
   } finally {
     await db.sql`DELETE FROM customer_cart_items WHERE customer_id = ${customerId}`;
     await db.sql`DELETE FROM article_pack_sizes WHERE article_id IN (${five}, ${bare})`;

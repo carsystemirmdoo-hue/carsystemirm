@@ -692,6 +692,40 @@ try {
     const prelivanje = await t.locator("td.zp-code").evaluateAll((els) => els.filter((e) => e.scrollWidth > e.clientWidth + 1).map((e) => e.textContent));
     check("kancelarija: šifra u štampi ne prelazi u susednu kolonu", prelivanje.length === 0 && (await t.locator("td.zp-code").count()) === 3, JSON.stringify(prelivanje));
     await t.screenshot({ path: `${OUT}/s12-stampa.png`, fullPage: true });
+
+    // 11. Kancelarija u predlogu menja kante 10 LIT → 7 LIT (nije celo pakovanje): izuzetak svuda, bez „2 × kanta“.
+    await go(t, href);
+    if (await t.getByRole("button", { name: "Preuzmite u obradu" }).count()) {
+      await t.getByRole("button", { name: "Preuzmite u obradu" }).click();
+      await t.waitForLoadState("networkidle"); await t.waitForTimeout(1500);
+    }
+    await t.locator("details#izmena > summary").click();
+    const form = t.locator("details#izmena");
+    await form.locator('input[aria-label^="Količina, SINT-C04"]').fill("7");
+    await form.locator("textarea").fill("Na stanju samo 7 litara — izuzetak od cele kante");
+    await form.getByRole("button", { name: "Proverite cene" }).click();
+    await form.getByRole("button", { name: /Pošaljite izmenjen predlog/ }).and(form.locator("button:not([disabled])")).waitFor({ timeout: 30000 });
+    const fz = await txt(form);
+    check("kancelarija: predlog upozorava „Izuzetak: 7 LIT nije ceo broj pakovanja (kanta 5 L)“", /Izuzetak: 7 LIT nije ceo broj pakovanja \(kanta 5 L\)/.test(fz), "");
+    await t.screenshot({ path: `${OUT}/s13-kancelarija-izuzetak.png`, fullPage: true });
+    await form.getByRole("button", { name: /Pošaljite izmenjen predlog/ }).click();
+    await t.waitForTimeout(2500); await t.waitForLoadState("networkidle");
+    await go(k, "/kupac/porudzbine");
+    const hp = await k.locator("a", { hasText: /\/2/ }).first().getAttribute("href");
+    await go(k, hp);
+    const kp = await txt(k.locator("main"));
+    const c04row = await txt(k.locator("tr", { hasText: "SINT ANTISILIKON 5L" }).first());
+    check("kupac: predlog pokazuje novu količinu 7 LIT i izuzetak, ne „2 × kanta 5 L“", /Izuzetak: nije ceo broj pakovanja \(kanta 5 L\)/i.test(c04row) && /7 LIT/.test(c04row) && !/2 × kanta 5 L/.test(c04row) && /Količina 10 → 7/.test(c04row), c04row.slice(0, 200));
+    check("kupac: ostale stavke predloga ostaju u celim pakovanjima", /Potvrdite predlog/.test(kp));
+    await k.screenshot({ path: `${OUT}/s14-kupac-predlog-izuzetak.png`, fullPage: true });
+    await go(t, "/portal/zahtevi");
+    const hpOffice = await t.locator('a[href^="/portal/zahtevi/"]').filter({ hasText: /\/2/ }).first().getAttribute("href").catch(() => null);
+    if (hpOffice) {
+      await go(t, `${hpOffice}/stampa`);
+      const st2 = await txt(t.locator("body"));
+      check("kancelarija: štampa predloga — „IZUZETAK: 7 LIT nije ceo broj pakovanja“", /IZUZETAK: 7 LIT nije ceo broj pakovanja \(kanta 5 L\)/.test(st2));
+      await t.screenshot({ path: `${OUT}/s15-stampa-izuzetak.png`, fullPage: true });
+    }
     check("sajt: bez 5xx odgovora", errors.length === 0, errors.join(", "));
   }
   if (STEP === "b9") {

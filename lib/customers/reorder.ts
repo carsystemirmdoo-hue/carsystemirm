@@ -54,7 +54,10 @@ export type ReorderItem = {
     unit: string;
     /** Potvrđeno pojedinačno pakovanje (količina u JM) — poručuju se cela pakovanja. */
     pack: { label: string; quantity: number };
-    suggestedPacks: number;
+    /** Predlog broja pakovanja; `null` kada uobičajena količina nije ceo broj pakovanja (ne zaokružuje se). */
+    suggestedPacks: number | null;
+    /** Objašnjenje kada predloga nema (npr. „ranije 7 L, pakovanje 5 L“). */
+    suggestionNote: string | null;
     /** Cena celog pakovanja i cena po JM, po svakoj odobrenoj opciji plaćanja, bez PDV-a. */
     prices: { label: string; packNet: number; netPrice: number; vatPercent: number }[];
   } | null;
@@ -92,10 +95,16 @@ function orderFields(
   if (!prices.length) return { orderable: false, order: null, orderNote: null };
   // Uobičajena količina sa faktura je u JM; predlog je broj celih pakovanja (inače 1).
   const usual = usualQuantity(events);
-  const suggested = usual && usual.unit?.toUpperCase() === line.unit ? suggestedPacks(usual.low, pack.quantity) : 1;
+  const sameUnit = Boolean(usual && usual.unit?.toUpperCase() === line.unit);
+  const suggested = usual && sameUnit ? suggestedPacks(usual.low, pack.quantity) : 1;
+  const qty = (n: number) => String(n).replace(".", ",");
+  const suggestionNote =
+    suggested === null && usual
+      ? `Uobičajeno ste kupovali ${qty(usual.low)} ${line.unit}, a pakovanje je ${pack.label} — to nije ceo broj pakovanja. Unesite broj pakovanja.`
+      : null;
   return {
     orderable: true,
-    order: { articleId: line.articleId, unit: line.unit, pack: { label: pack.label, quantity: pack.quantity }, suggestedPacks: suggested, prices },
+    order: { articleId: line.articleId, unit: line.unit, pack: { label: pack.label, quantity: pack.quantity }, suggestedPacks: suggested, suggestionNote, prices },
     orderNote: null,
   };
 }

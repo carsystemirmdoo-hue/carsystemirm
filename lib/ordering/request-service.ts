@@ -197,7 +197,7 @@ async function priceLines(
       : !pack
       ? null
       : packs === null
-        ? "Unesite broj pakovanja (stavka je dodata pre prelaska na pakovanja)."
+        ? `Količina ${String(quantity).replace(".", ",")} ${unit} nije ceo broj pakovanja (${pack.label}) — unesite broj pakovanja.`
         : quantityProblem(packs, { minQuantity: 1, quantityStep: 1 });
     const sel = byOption[keyOf(selected)];
     const problem = a.out ? "Artikal nije u aktuelnoj ponudi." : mode === "office" ? null : packProblem;
@@ -737,6 +737,13 @@ export async function previewOrderRevision(viewer: PortalUser, orderId: string, 
     vat: l.amounts?.vat ?? null,
     gross: l.amounts?.gross ?? null,
     note: l.selected?.status === "na_upit" ? ON_REQUEST_NOTE[l.selected.reason] ?? "cenu potvrđuje kancelarija" : null,
+    /** Pakovanje: obračun celih pakovanja, ili izuzetak koji će kupac videti. */
+    packNote: !l.pack
+      ? null
+      : l.packs === null
+        ? `Izuzetak: ${String(l.quantity).replace(".", ",")} ${l.unit} nije ceo broj pakovanja (${l.pack.label}) — kupac vidi izuzetak.`
+        : l.packSummary,
+    packException: Boolean(l.pack && l.packs === null),
   }));
   const gross = lines.reduce((sum, l) => sum + (l.gross ?? 0), 0);
   const net = lines.reduce((sum, l) => sum + (l.net ?? 0), 0);

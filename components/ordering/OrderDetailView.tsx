@@ -241,7 +241,7 @@ export function OrderDetailView({
                         naziv vide samo kancelarija i komercijalisti.
                       */}
                       {audience === "office" && l.catalogSlug ? <span className="pn-sub">BizniSoft: {l.articleName}</span> : null}
-                      {l.packConfirmed && l.packCount === null ? <span className="pn-sub">Pakovanje {l.packLabel}</span> : null}
+                      {l.packConfirmed && l.packQuantity === null ? <span className="pn-sub">Pakovanje {l.packLabel}</span> : null}
                       {ch?.added ? <span className="pn-tag" data-tone="success">Dodato u ovoj verziji</span> : null}
                       {ch?.quantityFrom !== undefined ? (
                         <span className="pn-tag" data-tone="warning">
@@ -270,6 +270,12 @@ export function OrderDetailView({
                       ) : (
                         <>
                           {quantity(l.quantity)} {l.unit}
+                          {/* Kancelarija je odstupila od celih pakovanja: kupac to mora jasno da vidi. */}
+                          {l.packQuantity !== null && l.packCount === null ? (
+                            <span className="pn-tag" data-tone="warning">
+                              Izuzetak: nije ceo broj pakovanja ({l.packLabel})
+                            </span>
+                          ) : null}
                         </>
                       )}
                     </td>

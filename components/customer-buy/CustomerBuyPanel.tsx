@@ -112,10 +112,9 @@ function BuyForm({ data, offers, slug, variantKey }: { data: OffersPayload; offe
             <label key={o.articleId} className={styles.pack} data-active={o.articleId === offer.articleId ? "true" : undefined}>
               <input type="radio" name={`pack-${slug}-${variantKey ?? ""}`} value={o.articleId} checked={o.articleId === offer.articleId} onChange={() => setId(o.articleId)} />
               <span>
-                <strong>{isSinglePiece(o.pack, o.unit) ? o.articleName : o.pack?.label}</strong>
-                <small>
-                  {isSinglePiece(o.pack, o.unit) ? `šifra ${o.articleCode} · 1 kom` : `${o.articleName} · šifra ${o.articleCode}`}
-                </small>
+                {/* Kupac vidi potvrđeno pakovanje i šifru; interni BizniSoft naziv (npr. „… 400ML“) vidi samo kancelarija. */}
+                <strong>{isSinglePiece(o.pack, o.unit) ? `1 ${unitLabel(o.unit)}` : o.pack?.label}</strong>
+                <small>šifra {o.articleCode}</small>
               </span>
               <span className={styles.packPrice}>
                 {first && first.status === "cena" && first.packAmounts ? (

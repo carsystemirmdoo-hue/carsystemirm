@@ -763,6 +763,65 @@ try {
     await k.screenshot({ path: `${OUT}/s17-kom-limenka-05.png`, fullPage: false });
     check("sajt: bez 5xx odgovora", errors.length === 0, errors.join(", "));
   }
+  if (STEP === "kontrolne") {
+    // Deset kontrolnih veza (potvrda vlasnika 2026-10-11): stvarni artikli i osnovne cene iz privatnog
+    // snimka, sintetički rabat firme A (20 % / avans 25 %). Pre koraka: reset, seed-control-links.mts,
+    // apply-confirmed-links.mts --upis. Plan veza čita iz CONTROL_LINKS (privatni JSON).
+    const plan = JSON.parse(readFileSync(process.env.CONTROL_LINKS, "utf8")).veze;
+    const envText = readFileSync(process.env.SYNTH_ENV_FILE ?? process.env.HOME + "/.carsystem-secrets/revizija-sinteticki.env", "utf8");
+    const code = envText.match(/^SITE_ACCESS_PASSWORD=(.*)$/m)[1];
+    const ctx = await b.newContext(desk);
+    await ctx.request.post(`${B}/site-u-pripremi/access`, { form: { accessCode: code }, maxRedirects: 0 });
+    const k = await ctx.newPage();
+    const errors = []; k.on("response", (x) => { if (x.status() >= 500) errors.push(`${x.status()} ${new URL(x.url()).pathname}`); });
+    await customer(k);
+    await sqlc`DELETE FROM customer_cart_items WHERE customer_id = ${A}`;
+    const money = (n) => new Intl.NumberFormat("sr-Latn-RS", { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(n);
+    const offers = await k.evaluate(async () => (await (await fetch("/api/kupac/ponude", { cache: "no-store" })).json()).offers);
+    const panel = k.locator('section[aria-labelledby="buy-panel-title"]');
+    for (const v of plan) {
+      const [{ base }] = await sqlc`SELECT b.net_price::numeric AS base FROM article_base_prices b JOIN articles a ON a.id = b.article_id WHERE a.code = ${v.sifra} ORDER BY b.valid_from DESC LIMIT 1`;
+      const o = offers.find((x) => x.articleCode === v.sifra);
+      const unitNet = Math.round(Number(base) * 0.75 * 100) / 100;
+      const packNet = Math.round(unitNet * v.pakovanje * 100) / 100;
+      const apiOk = o && o.state === "orderable" && o.pack?.quantity === v.pakovanje && o.pack?.label === v.oznaka && o.byOption.avans?.netPrice === unitNet && o.byOption.avans?.packAmounts?.net === packNet;
+      await go(k, `/proizvodi/${v.slug}${v.varijanta ? `?varijanta=${encodeURIComponent(v.varijanta)}` : ""}`);
+      await panel.waitFor({ timeout: 60000 }); await k.waitForTimeout(800);
+      const radio = panel.locator("label", { hasText: `šifra ${v.sifra}` }).locator('input[type="radio"]');
+      if (await radio.count()) { await radio.check(); await k.waitForTimeout(300); }
+      const pt = await txt(panel);
+      const shown = pt.includes(`${money(packNet)} RSD / ${v.pakovanje === 1 && v.jm === "KOM" && !v.oznaka ? "1 kom" : v.oznaka}`);
+      const no400 = v.sifra !== "125686" || !/400\s*ml/i.test(pt);
+      check(`kontrolna ${v.sifra}: pakovanje „${v.oznaka}“ = ${v.pakovanje} ${v.jm}, cena pakovanja ${money(packNet)} (osnovna × 0,75 × ${v.pakovanje})`, Boolean(apiOk && shown && no400), apiOk ? (shown ? (no400 ? "" : "400 ml prikazan") : pt.slice(0, 160)) : JSON.stringify(o?.pack ?? o?.state ?? "nema ponude"));
+      await panel.locator('input[type="number"]').fill("1");
+      await panel.getByRole("button", { name: "Dodajte u korpu" }).click();
+      await panel.locator('[role="status"]').waitFor({ timeout: 30000 });
+      if (v.sifra === "125686" || v.sifra === "635020" || v.sifra === "504597") await k.screenshot({ path: `${OUT}/c-${v.sifra}.png` });
+    }
+    const cart = await sqlc`SELECT a.code, ci.pack_count AS n, ci.quantity::text AS q FROM customer_cart_items ci JOIN articles a ON a.id = ci.article_id WHERE ci.customer_id = ${A}`;
+    const cartOk = plan.every((v) => cart.some((c) => c.code === v.sifra && c.n === 1 && Number(c.q) === v.pakovanje));
+    check("kontrolne: korpa — 1 pakovanje svakog, obračun u JM (LIT 1/5/4/5, KOM 1)", cartOk && cart.length === plan.length, JSON.stringify(cart));
+    await korpa(k, "Avansno plaćanje");
+    await k.screenshot({ path: `${OUT}/c-korpa.png`, fullPage: true });
+    await fillAndSend(k);
+    await k.waitForFunction(() => location.pathname.startsWith("/kupac/porudzbine/"), null, { timeout: 60000 });
+    const broj = (await txt(k.locator("main"))).match(/Z-\d{4}-\d+/)?.[0] ?? "";
+    const lines = await sqlc`SELECT l.article_code AS c, l.quantity::numeric AS q, l.pack_count AS n, l.pack_quantity::numeric AS pq, l.pack_label AS lab, l.net_price::numeric AS p
+      FROM customer_order_lines l JOIN customer_orders o ON o.id = l.order_id WHERE o.request_number = ${broj}`;
+    const linesOk = plan.every((v) => lines.some((l) => l.c === v.sifra && l.n === 1 && Number(l.pq) === v.pakovanje && Number(l.q) === v.pakovanje && l.lab === v.oznaka));
+    check(`kontrolne: zahtev ${broj} — broj pakovanja, količina pakovanja, obračun i oznaka po stavci`, linesOk && lines.length === plan.length, "");
+    const t = await (await b.newContext(desk)).newPage(); await staff(t, "kancelarija");
+    await go(t, "/portal/zahtevi");
+    const href = await t.locator('a[href^="/portal/zahtevi/"]').filter({ hasText: broj }).first().getAttribute("href");
+    await go(t, `${href}/stampa`);
+    const st = await txt(t.locator("body"));
+    const printOk = plan.every((v) => st.includes(v.sifra)) && /poručeno: 1 × kanta 5 L = 5 LIT/.test(st) && /poručeno: 1 × kanta 4 L = 4 LIT/.test(st) && /poručeno: 1 × limenka 0,5 L = 1 KOM/.test(st) && /poručeno: 1 × sprej = 1 KOM/.test(st);
+    check("kontrolne: štampa — sve šifre, „1 × kanta 5 L = 5 LIT“, „1 × kanta 4 L = 4 LIT“, „1 × limenka 0,5 L = 1 KOM“, „1 × sprej = 1 KOM“", printOk, "");
+    const overflow = await t.locator("td.zp-code").evaluateAll((els) => els.filter((e) => e.scrollWidth > e.clientWidth + 1).length);
+    check("kontrolne: štampa — šifre ne prelaze u susednu kolonu", overflow === 0, String(overflow));
+    await t.screenshot({ path: `${OUT}/c-stampa.png`, fullPage: true });
+    check("kontrolne: bez 5xx", errors.length === 0, errors.join(", "));
+  }
   if (STEP === "b9") {
     // Kod za otključavanje sajta: tačan radi; posle 20 pogrešnih i tačan je odbijen dok traje blokada.
     const envText = readFileSync(process.env.SYNTH_ENV_FILE ?? process.env.HOME + "/.carsystem-secrets/revizija-sinteticki.env", "utf8");

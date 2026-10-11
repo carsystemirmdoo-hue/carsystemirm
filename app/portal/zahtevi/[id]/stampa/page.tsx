@@ -174,7 +174,7 @@ export default async function OrderPrintPage({ params }: { params: Promise<{ id:
                   <td className="zp-code">{l.articleCode}</td>
                   <td className="zp-name">
                     {l.articleName}
-                    {l.packCount !== null && l.packQuantity !== null && !isSinglePiece({ quantity: l.packQuantity }, l.unit) ? (
+                    {l.packCount !== null && l.packQuantity !== null && !isSinglePiece({ quantity: l.packQuantity, label: l.packLabel }, l.unit) ? (
                       <span className="zp-sub">poručeno: {l.packCount} × {l.packLabel} = {quantity(l.packCount * l.packQuantity)} {l.unit}</span>
                     ) : l.packQuantity !== null && l.packCount === null ? (
                       <span className="zp-sub">IZUZETAK: {quantity(l.quantity)} {l.unit} nije ceo broj pakovanja ({l.packLabel})</span>
@@ -248,7 +248,7 @@ export default async function OrderPrintPage({ params }: { params: Promise<{ id:
                     <td className="zp-code">{l.articleCode}</td>
                     <td className="zp-name">
                       {l.articleName}
-                      {l.packCount !== null && l.packQuantity !== null && !isSinglePiece({ quantity: l.packQuantity }, l.unit) ? (
+                      {l.packCount !== null && l.packQuantity !== null && !isSinglePiece({ quantity: l.packQuantity, label: l.packLabel }, l.unit) ? (
                       <span className="zp-sub">poručeno: {l.packCount} × {l.packLabel} = {quantity(l.packCount * l.packQuantity)} {l.unit}</span>
                     ) : l.packQuantity !== null && l.packCount === null ? (
                       <span className="zp-sub">IZUZETAK: {quantity(l.quantity)} {l.unit} nije ceo broj pakovanja ({l.packLabel})</span>

@@ -258,7 +258,7 @@ export function OrderDetailView({
                       ) : null}
                     </td>
                     <td className="pn-r pn-num" data-label="Količina">
-                      {l.packCount !== null && !isSinglePiece({ quantity: l.packQuantity ?? 0 }, l.unit) ? (
+                      {l.packCount !== null && !isSinglePiece({ quantity: l.packQuantity ?? 0, label: l.packLabel }, l.unit) ? (
                         <>
                           <span className="pn-strong">
                             {l.packCount} × {l.packLabel}

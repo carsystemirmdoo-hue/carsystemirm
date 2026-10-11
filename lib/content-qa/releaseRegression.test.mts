@@ -55,10 +55,10 @@ const technicalFacts = (slug: string) =>
 
 /* -- GAP-009: prevodi -------------------------------------------------------------------- */
 
-test("tabela prevoda: 20 iskaza (17 odobrenih + 3 dopunska), svaka sa TDS izvorom, originalom i srpskim tekstom", () => {
-  assert.equal(allRules.length, 29, "broj pravila (po šifri) se promenio — ažurirati test i izveštaj");
+test("tabela prevoda: 24 iskaza (17 odobrenih + 3 dopunska + 4 sušenja baslac 40-440/40-450), svaka sa TDS izvorom, originalom i srpskim tekstom", () => {
+  assert.equal(allRules.length, 33, "broj pravila (po šifri) se promenio — ažurirati test i izveštaj");
   const distinct = new Set(allRules.map((rule) => rule.original));
-  assert.equal(distinct.size, 20, "broj različitih originalnih iskaza");
+  assert.equal(distinct.size, 24, "broj različitih originalnih iskaza");
   for (const rule of allRules) {
     assert.match(rule.tds.url, /^https:\/\/(www\.norbin-paint\.com|techinfo\.baslac\.com|techinfo\.rmpaint\.com)\//, `${rule.code}: TDS URL`);
     assert.ok(rule.tds.page >= 1, `${rule.code}: strana TDS-a`);
@@ -115,9 +115,18 @@ test("R-M C 2A40: odnos 1:1 + 20% bez naslova sledećeg odeljka", () => {
   assert.equal(ratio, "Odnos mešanja: 1:1 + 20% zapreminski (lak : učvršćivač + razređivač)");
 });
 
-test("ispravke parsiranja su označene i ograničene na tri proizvoda", () => {
-  const corrections = allRules.filter((rule) => rule.kind === "parser-correction").map((rule) => rule.code).sort();
-  assert.deepEqual(corrections, ["40-10", "C 2A40", "P 5540"]);
+test("baslac 40-440 i 40-450: sušenje po učvršćivaču iz TDS-a (str. 2), ne samo šifra „50-415”", () => {
+  const d440 = technicalFacts("baslac-40-440-2k-voc-clear").find((fact) => fact.startsWith("Sušenje"));
+  assert.ok(d440?.includes("20°C: učvršćivač 50-415 10 h, 50-420 16 h, 50-430 16 h"), d440);
+  assert.ok(d440?.includes("60°C: učvršćivač 50-415 30 min, 50-420 40 min, 50-430 40 min"), d440);
+  const d450 = technicalFacts("baslac-40-450-universal-clear-voc").find((fact) => fact.startsWith("Sušenje"));
+  assert.ok(d450?.includes("20°C: učvršćivač 50-415 6 h, 50-420 10 h, 50-430 16 h"), d450);
+  assert.ok(d450?.includes("60°C: učvršćivač 50-415 20 min, 50-420 30 min, 50-430 40 min"), d450);
+});
+
+test("ispravke parsiranja su označene i ograničene na pet proizvoda", () => {
+  const corrections = [...new Set(allRules.filter((rule) => rule.kind === "parser-correction").map((rule) => rule.code))].sort();
+  assert.deepEqual(corrections, ["40-10", "40-440", "40-450", "C 2A40", "P 5540"]);
 });
 
 /* -- carfit-clearcoar-matt → carfit-clearcoat-matt --------------------------------------- */

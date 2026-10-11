@@ -510,7 +510,10 @@ const DRYING_LABELS: [RegExp, string][] = [
 function dryingText(drying: string[]): string {
   return drying
     .map((line) => {
-      const [label, value] = line.split(": ");
+      // Deli se samo na PRVOJ „: ” — vrednost sama sme da sadrži „: ” (npr. „50-415: 10 h”);
+      // ranije je sve posle druge dvotačke nestajalo, pa je ostajala samo šifra učvršćivača.
+      const [label, ...rest] = line.split(": ");
+      const value = rest.join(": ");
       const translated = DRYING_LABELS.reduce((text, [pattern, replacement]) => text.replace(pattern, replacement), label).trim();
       return `${translated || label}: ${value}`;
     })

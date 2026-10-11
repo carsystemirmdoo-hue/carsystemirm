@@ -16,6 +16,8 @@ import {
   absoluteSeoUrl,
   seoSiteConfig,
 } from "@/lib/seo/site-config";
+import { variantCountLabel } from "@/lib/sr-plural";
+import { presentTechnicalFacts } from "@/lib/technical-facts-display.mjs";
 
 export const siteConfig = seoSiteConfig;
 
@@ -263,11 +265,13 @@ function visibleProductFacts(product: CarsystemProduct) {
     ) {
       return [];
     }
-    return product.detail.technicalFacts.content.filter(
-      (fact) => fact.reviewStatus === "confirmed" && fact.label && fact.value,
+    return presentTechnicalFacts(
+      product.detail.technicalFacts.content.filter(
+        (fact) => fact.reviewStatus === "confirmed" && fact.label && fact.value,
+      ),
     );
   }
-  return product.specifications.filter((fact) => fact.label && fact.value);
+  return presentTechnicalFacts(product.specifications.filter((fact) => fact.label && fact.value));
 }
 
 /**
@@ -296,7 +300,7 @@ export function productGroupJsonLd(family: ProductFamily) {
     "@id": `${url}#productgroup`,
     url,
     name: family.name,
-    description: `${family.name} — ${family.variants.length} varijanti u Carsystem i R-M ponudi.`,
+    description: `${family.name} — ${variantCountLabel(family.variants.length)} u Carsystem i R-M ponudi.`,
     inLanguage: siteConfig.language,
     brand: {
       "@type": "Brand",

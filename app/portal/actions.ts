@@ -3,6 +3,7 @@
 import { AuthError } from "next-auth";
 import { redirect } from "next/navigation";
 import { signIn, signOut } from "@/auth";
+import { revokeCurrentSession } from "@/lib/auth/revoked-sessions";
 import { CALLBACK_PARAM, LOGIN_ROUTE, normalizeCallback } from "@/lib/authz/redirects.mjs";
 
 /**
@@ -11,6 +12,8 @@ import { CALLBACK_PARAM, LOGIN_ROUTE, normalizeCallback } from "@/lib/authz/redi
  * prvo gasi sa `redirect: false`, a Next zatim eksplicitno vodi na `LOGIN_ROUTE`.
  */
 export async function signOutAction() {
+  // Odjava gasi i sam token, ne samo kolačić (B8).
+  await revokeCurrentSession();
   await signOut({ redirect: false });
   redirect(LOGIN_ROUTE);
 }

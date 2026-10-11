@@ -991,6 +991,63 @@ export async function openIngestionRun(
 }
 
 /**
+ * Zatvara `import_runs` zapis ručnog PDF uvoza ishodom tog fajla.
+ *
+ * Ranije je zapis ostajao „u toku“ sa nulama zauvek (revizija 2026-10-11, B2):
+ * istorija uvoza nije govorila šta je prošlo. Ishod ide u status i brojeve;
+ * poruka je opis ishoda, nikad tekst dokumenta ni stack trace.
+ */
+export async function closeIngestionRun(
+  runId: number | null | undefined,
+  outcome: IngestOutcome | { result: "error" },
+): Promise<void> {
+  if (!runId) return;
+  const db = getDb();
+  let lines = 0;
+  if ("sourceDocumentId" in outcome && outcome.sourceDocumentId) {
+    const [row] = await db
+      .select({ n: sourceDocuments.lineCount })
+      .from(sourceDocuments)
+      .where(eq(sourceDocuments.id, outcome.sourceDocumentId))
+      .limit(1);
+    lines = row?.n ?? 0;
+  }
+  const r = outcome.result;
+  // Čeka samo povezivanje kupca = upozorenje; karantin i sudari traže pregled = greška (sačuvano, bez knjiženja).
+  const status =
+    r === "ingested"
+      ? "uspesno"
+      : r === "duplicate_file"
+        ? "preskoceno_duplikat"
+        : r === "awaiting_customer_mapping"
+          ? "uspesno_sa_upozorenjima"
+          : "greska";
+  const message: Record<string, string> = {
+    ingested: "Proknjiženo.",
+    duplicate_file: "Isti fajl je već uvezen.",
+    awaiting_customer_mapping: "Sačuvano; čeka povezivanje šifre partnera sa kupcem.",
+    business_key_conflict: "Drugi fajl tvrdi isti broj dokumenta — na pregledu (Izvorni dokumenti).",
+    already_imported_other_source: "Već knjiženo iz drugog izvora — na pregledu.",
+    quarantined: "Sačuvano bez knjiženja — na pregledu (Izvorni dokumenti).",
+    source_hash_content_mismatch: "Sadržaj se ne slaže sa otiskom — na pregledu.",
+    error: "Fajl nije pročitan.",
+  };
+  await db
+    .update(importRuns)
+    .set({
+      status,
+      rowsRead: lines,
+      rowsValid: r === "ingested" ? lines : 0,
+      rowsWarning: status === "uspesno_sa_upozorenjima" ? lines : 0,
+      rowsInvalid: status === "greska" ? lines : 0,
+      invoicesCreated: r === "ingested" ? 1 : 0,
+      finishedAt: new Date(),
+      message: message[r] ?? "Obrađeno.",
+    })
+    .where(and(eq(importRuns.id, runId), eq(importRuns.status, "u_toku")));
+}
+
+/**
  * Pregled izvornih dokumenata za portal.
  *
  * Vraća SAMO interna polja: otisak, status, broj stavki, šifru partnera. Naziv

@@ -2,9 +2,11 @@
 
 import { revalidatePath } from "next/cache";
 import { z } from "zod";
-import { requireCapability } from "@/lib/authz/session";
+import { requireCapability, type PortalUser } from "@/lib/authz/session";
 import {
   CustomerAccountError,
+  customerIdOfAccount,
+  customerIdOfOutboxItem,
   proposeCustomerContact,
   setCustomerAccountStatus,
 } from "@/lib/customers/account-service";
@@ -24,6 +26,19 @@ import {
 import { dmyTime } from "@/lib/ordering/panelFormat.mjs";
 
 export type AccountActionState = { error: string | null; ok: string | null };
+
+const NOT_FOUND = "Nalog nije pronađen.";
+
+/**
+ * Opseg pre svake radnje nad postojećim nalogom: komercijalista bez
+ * `customers:view_all` sme samo naloge dodeljenih kupaca (403 inače), isto
+ * kao ekran kupca. `false` = nalog ne postoji.
+ */
+async function inScope(actor: PortalUser, customerId: string | null): Promise<boolean> {
+  if (!customerId) return false;
+  await requireCustomerAccess(actor, customerId);
+  return true;
+}
 
 const proposeSchema = z.object({
   customerId: z.string().uuid(),
@@ -113,6 +128,9 @@ export async function issueInvitationAction(
   if (!parsed.success) {
     return { error: "Unesite razlog (najmanje 3 znaka).", ok: null, link: null };
   }
+  if (!(await inScope(actor, await customerIdOfAccount(parsed.data.accountId)))) {
+    return { error: NOT_FOUND, ok: null, link: null };
+  }
 
   try {
     const { token, expiresAt } = await issueInvitation(parsed.data, {
@@ -146,6 +164,9 @@ export async function markHandedOverAction(
   );
   const parsed = outboxSchema.safeParse(formData.get("id"));
   if (!parsed.success) return { error: "Stavka nije prepoznata.", ok: null };
+  if (!(await inScope(actor, await customerIdOfOutboxItem(parsed.data)))) {
+    return { error: "Stavka nije dostupna.", ok: null };
+  }
 
   const done = await markOutboxHandedOver(parsed.data, {
     id: actor.id,
@@ -180,6 +201,9 @@ export async function setAccountStatusAction(
   });
   if (!parsed.success) {
     return { error: "Izaberite stanje i unesite razlog (najmanje 3 znaka).", ok: null };
+  }
+  if (!(await inScope(actor, await customerIdOfAccount(parsed.data.accountId)))) {
+    return { error: NOT_FOUND, ok: null };
   }
 
   try {
@@ -240,6 +264,9 @@ export async function recordOfflineConsentAction(
         "Izaberite svrhu i odluku, i unesite referencu na zahtev (najmanje 3 znaka).",
       ok: null,
     };
+  }
+  if (!(await inScope(actor, await customerIdOfAccount(parsed.data.accountId)))) {
+    return { error: NOT_FOUND, ok: null };
   }
 
   let result: { recorded: boolean; reason: string | null };
@@ -311,6 +338,9 @@ export async function verifyContactAction(
       ok: null,
     };
   }
+  if (!(await inScope(actor, await customerIdOfAccount(parsed.data.accountId)))) {
+    return { error: NOT_FOUND, ok: null };
+  }
   try {
     await verifyCustomerContact(parsed.data, { id: actor.id, name: actor.name, role: actor.role });
   } catch (error) {
@@ -340,6 +370,9 @@ export async function revokeAccessAction(
     reason: formData.get("reason") ?? "",
   });
   if (!parsed.success) return { error: "Unesite razlog opoziva (najmanje 3 znaka).", ok: null };
+  if (!(await inScope(actor, await customerIdOfAccount(parsed.data.accountId)))) {
+    return { error: NOT_FOUND, ok: null };
+  }
   try {
     await revokeCustomerAccess(parsed.data, { id: actor.id, name: actor.name, role: actor.role });
   } catch (error) {

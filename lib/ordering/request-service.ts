@@ -23,6 +23,8 @@ export class StaleVersionError extends Error {
   }
 }
 import { foldedMatch } from "@/lib/ordering/search-fold";
+import { isUuid } from "@/lib/sales/filterInput.mjs";
+import { notifyOrderSubmitted } from "@/lib/ordering/order-notifications";
 
 /**
  * Zahtev za porudžbinu iz STVARNOG cenovnika (0044):
@@ -87,7 +89,7 @@ const keyOf = (code: string | null) => code ?? "osnovni";
 async function priceLines(exec: Exec, customerId: string, items: { articleId: string; quantity: number }[], option: string | null, today: string) {
   const ids = items.map((i) => i.articleId);
   const [opts, arts, vats] = await Promise.all([
-    approvedPaymentOptions(customerId, today),
+    approvedPaymentOptions(customerId, today, exec),
     ids.length
       ? exec.execute<{ id: string; code: string; name: string; unit: string | null; out: boolean }>(sql`
           SELECT a.id, a.code, a.name, a.unit, EXISTS (SELECT 1 FROM articles_out_of_programme o WHERE o.article_id = a.id) AS out
@@ -106,7 +108,7 @@ async function priceLines(exec: Exec, customerId: string, items: { articleId: st
   const vat = new Map([...vats].map((v) => [v.article_id, Number(v.vat)]));
   const byId = new Map([...arts].map((a) => [a.id, a]));
   const perOption = new Map<string, Awaited<ReturnType<typeof customerPrices>>["prices"]>();
-  for (const c of codes) perOption.set(keyOf(c), (await customerPrices(customerId, ids, today, c)).prices);
+  for (const c of codes) perOption.set(keyOf(c), (await customerPrices(customerId, ids, today, c, exec)).prices);
   const lines: RequestLine[] = items.map((it) => {
     const a = byId.get(it.articleId)!;
     const unit = (a.unit ?? "").toUpperCase() || "JM";
@@ -164,7 +166,7 @@ function fingerprintOf(option: string | null, lines: RequestLine[]) {
 export async function loadRequestQuote(customerId: string, option: string | null, exec: Exec = getDb()): Promise<RequestQuote> {
   if (!customerId) throw new Error("Upit kupca bez customer_id se ne sme izvršiti.");
   const today = belgradeDate(new Date());
-  const enabled = await orderingEnabledFor(customerId);
+  const enabled = await orderingEnabledFor(customerId, exec);
   const cart = [...(await exec.execute<{ article_id: string; quantity: string; source_order_id: string | null }>(sql`
     SELECT article_id, quantity::text AS quantity, source_order_id FROM customer_cart_items WHERE customer_id = ${customerId} ORDER BY created_at, article_id`))];
   const priced = await priceLines(exec, customerId, cart.map((c) => ({ articleId: c.article_id, quantity: Number(c.quantity) })), option, today);
@@ -271,6 +273,9 @@ export async function addRequestItem(session: CustomerSession, input: { articleI
 export async function setRequestQuantity(session: CustomerSession, input: { articleId: string; quantity: unknown }): Promise<RequestCartChange> {
   const customerId = session.customerId;
   if (!customerId) throw new Error("Upit kupca bez customer_id se ne sme izvršiti.");
+  // Isti uslovi kao dodavanje: loš ID je poruka, ne greška baze; isključena proba ne menja korpu (B7).
+  if (!isUuid(input.articleId)) return { ok: false, message: "Stavka nije u korpi." };
+  if (!(await orderingEnabledFor(customerId))) return { ok: false, message: "Poručivanje preko naloga nije uključeno za Vašu firmu." };
   const db = getDb();
   if (String(input.quantity ?? "").trim() === "" || Number(input.quantity) === 0) {
     await db.execute(sql`DELETE FROM customer_cart_items WHERE customer_id = ${customerId} AND article_id = ${input.articleId}::uuid`);
@@ -349,15 +354,16 @@ export async function submitOrderRequest(
   const db = getDb();
   const earlier = await existingByKey(db, key);
   if (earlier) return earlier.customer_id === customerId ? { status: "existing", orderId: earlier.id, requestNumber: earlier.request_number } : { status: "blocked", message: "Neispravan zahtev.", blockers: [] };
+  let created: Parameters<typeof notifyOrderSubmitted>[0] | null = null;
   try {
-    return await db.transaction(async (tx) => {
+    const result = await db.transaction(async (tx) => {
       await tx.execute(sql`SELECT id FROM customers WHERE id = ${customerId} FOR UPDATE`);
       const again = await existingByKey(tx, key);
       if (again) return again.customer_id === customerId ? { status: "existing" as const, orderId: again.id, requestNumber: again.request_number } : { status: "blocked" as const, message: "Neispravan zahtev.", blockers: [] };
       const [st] = [...(await tx.execute<{ status: string }>(sql`SELECT status FROM customer_commercial_status WHERE customer_id = ${customerId}::uuid`))];
       if (st && !isPreparedForPortal(st.status)) return { status: "blocked" as const, message: "Zahtev preko sajta nije dostupan za ovu firmu. Javite se kancelariji.", blockers: [] };
       const today = belgradeDate(new Date());
-      const approved = await approvedPaymentOptions(customerId, today);
+      const approved = await approvedPaymentOptions(customerId, today, tx);
       const opt = input.paymentOption ?? null;
       if (approved.length ? !approved.includes(opt ?? "") : opt !== null) {
         // Opcija je opozvana ili promenjena posle prikaza korpe: nova potvrda kupca, ne tiha zamena.
@@ -388,8 +394,12 @@ export async function submitOrderRequest(
       await tx.execute(sql`INSERT INTO customer_order_events (order_id, from_status, to_status, kind, actor_customer_user_id, actor_name)
                            VALUES (${order.id}, NULL, 'submitted', 'submitted', ${session.accountId}, ${session.name})`);
       await tx.execute(sql`DELETE FROM customer_cart_items WHERE customer_id = ${customerId}`);
+      created = { orderId: order.id, requestNumber, customerName: session.customerName, lineCount: quote.lines.length, onRequest: quote.onRequest, revision: false };
       return { status: "created" as const, orderId: order.id, requestNumber };
     });
+    // Posle upisa, van transakcije: kancelarija saznaje i kada lista nije otvorena (B3).
+    if (created) await notifyOrderSubmitted(created);
+    return result;
   } catch (error) {
     const e = error as { code?: string; cause?: { code?: string } };
     if (e?.code === "23505" || e?.cause?.code === "23505") {
@@ -439,7 +449,7 @@ export async function proposeOrderRevision(viewer: PortalUser, orderId: string, 
       SELECT request_number AS n FROM customer_orders WHERE replaces_order_id = ${o.id}::uuid AND status <> 'cancelled' LIMIT 1`))];
     if (active) throw new Error(`Za ovaj zahtev već postoji predlog ${active.n}. Novi je moguć tek ako ga kupac odbije.`);
     const today = belgradeDate(new Date());
-    const approved = await approvedPaymentOptions(o.customer_id, today);
+    const approved = await approvedPaymentOptions(o.customer_id, today, tx);
     if (o.payment_option && !approved.includes(o.payment_option)) throw new Error("Opcija plaćanja iz zahteva više nije odobrena — dogovorite novu sa kupcem.");
     const priced = await priceLines(tx, o.customer_id, items, o.payment_option, today);
     const bad = priced.lines.filter((l) => l.problem || l.quantityProblem);
@@ -541,10 +551,14 @@ export async function answerOrderRevision(session: CustomerSession, orderId: str
   const customerId = session.customerId;
   if (!customerId) throw new Error("Upit kupca bez customer_id se ne sme izvršiti.");
   if (accept && session.assurance === "remembered") return { ok: false as const, message: "Radi sigurnosti, pre potvrde ponovo unesite lozinku." };
+  if (!isUuid(orderId)) return { ok: false as const, message: "Predlog ne postoji." };
   const db = getDb();
-  return db.transaction(async (tx) => {
-    const [r] = [...(await tx.execute<{ id: string; status: string; replaces_order_id: string | null }>(sql`
-      SELECT id, status::text AS status, replaces_order_id FROM customer_orders WHERE id = ${orderId}::uuid AND customer_id = ${customerId} FOR UPDATE`))];
+  let accepted: Parameters<typeof notifyOrderSubmitted>[0] | null = null;
+  const result = await db.transaction(async (tx) => {
+    const [r] = [...(await tx.execute<{ id: string; status: string; replaces_order_id: string | null; request_number: string; on_request_lines: number; lines: number }>(sql`
+      SELECT id, status::text AS status, replaces_order_id, request_number, on_request_lines,
+             (SELECT count(*)::int FROM customer_order_lines l WHERE l.order_id = customer_orders.id) AS lines
+        FROM customer_orders WHERE id = ${orderId}::uuid AND customer_id = ${customerId} FOR UPDATE`))];
     if (!r) return { ok: false as const, message: "Predlog ne postoji." };
     const stale = await staleVersionProblem(tx, r.id, expectedVersion);
     if (stale) return stale;
@@ -558,6 +572,9 @@ export async function answerOrderRevision(session: CustomerSession, orderId: str
       await tx.execute(sql`UPDATE customer_orders SET status = 'superseded', updated_at = now() WHERE id = ${r.replaces_order_id}::uuid AND status = 'changes_requested'`);
       await statusEvent(tx, r.replaces_order_id, "changes_requested", "superseded", { customer: session }, "Zamenjen potvrđenim izmenjenim predlogom");
     }
+    if (accept) accepted = { orderId: r.id, requestNumber: r.request_number, customerName: session.customerName, lineCount: Number(r.lines), onRequest: Number(r.on_request_lines), revision: true };
     return { ok: true as const, message: accept ? "Potvrdili ste izmenjen zahtev. Kancelarija ga obrađuje." : "Odbili ste izmenjen predlog. Raniji zahtev ostaje sa statusom „Potrebna izmena“." };
   });
+  if (accepted) await notifyOrderSubmitted(accepted);
+  return result;
 }

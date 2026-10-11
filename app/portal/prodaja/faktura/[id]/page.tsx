@@ -4,6 +4,7 @@ import { UnavailableValue } from "@/components/portal/PhaseNotice";
 import { amount, dmy, money } from "@/lib/ordering/panelFormat.mjs";
 import { requireCapability } from "@/lib/authz/session";
 import { loadInvoiceDetail } from "@/lib/sales/queries";
+import { isUuid } from "@/lib/sales/filterInput.mjs";
 import { UNKNOWN_NEGATIVE_LABEL } from "@/lib/sales/totals.mjs";
 
 export const dynamic = "force-dynamic";
@@ -24,6 +25,8 @@ export default async function InvoiceDetailPage({
 
   // `loadInvoiceDetail` vraća `null` i kada faktura postoji ali je izvan opsega
   // korisnika — tuđi dokument se ne otvara ni direktnim ID-om.
+  // Ne-UUID iz adrese je 404, ne greška baze (B7).
+  if (!isUuid(id)) notFound();
   const detail = await loadInvoiceDetail(user, id);
   if (!detail) notFound();
 

@@ -26,6 +26,10 @@ declare module "next-auth" {
       assurance?: string;
       /** Kada je drugi faktor potvrđen; osnova za „sudo" prozor. */
       mfaVerifiedAt?: number;
+      /** Identitet ove sesije (opoziv pri odjavi). */
+      sid?: string;
+      /** Vreme prijave u sekundama; osnova apsolutnog roka. */
+      loginAt?: number;
     } & DefaultSession["user"];
   }
 }
@@ -36,6 +40,8 @@ declare module "next-auth/jwt" {
     subject?: string;
     assurance?: string;
     mfaVerifiedAt?: number;
+    sid?: string;
+    loginAt?: number;
   }
 }
 

@@ -45,6 +45,11 @@ export default async function CustomerInvoicePage({ params }: { params: Promise<
             {invoice.reversed ? " · u potpunosti stornirana" : ""}
           </p>
         </div>
+        <div className="pn-head-actions">
+          <Link href={`/kupac/fakture/${invoice.id}/stampa`} className="pn-btn">
+            Pregled za štampu
+          </Link>
+        </div>
       </header>
       {invoice.reversed ? (
         <p className="pn-note" data-tone="warning">

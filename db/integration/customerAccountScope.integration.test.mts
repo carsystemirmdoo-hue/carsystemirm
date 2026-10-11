@@ -88,3 +88,44 @@ test("kancelarija (customers:view_all) vidi oba kupca", async (t) => {
   const ids = new Set(rows.map((r) => r.customerId));
   assert.ok(ids.has(customerA) && ids.has(customerB));
 });
+
+/**
+ * Radnje nad nalogom (poziv, stanje, saglasnost, potvrda, opoziv, predaja)
+ * primaju samo ID naloga; kupac se razrešava ovde, pa se opseg proverava istim
+ * pravilom kao ekran kupca (revizija 2026-10-11, A12).
+ */
+test("radnja nad tuđim nalogom: kupac se razrešava iz naloga i opseg ga odbija", async (t) => {
+  if (guard(t)) return;
+  const { customerIdOfAccount, customerIdOfOutboxItem } = await import("@/lib/customers/account-service");
+  const { canAccessCustomer } = await import("@/lib/authz/scope.mjs");
+  const [accA] = await db.sql<{ id: string }[]>`
+    SELECT id FROM customer_users WHERE email = ${`qa1bverify-${run}-a@qa-1b.invalid`}`;
+  const [accB] = await db.sql<{ id: string }[]>`
+    SELECT id FROM customer_users WHERE email = ${`qa1bverify-${run}-b@qa-1b.invalid`}`;
+  assert.equal(await customerIdOfAccount(accA.id), customerA);
+  assert.equal(await customerIdOfAccount(accB.id), customerB);
+  assert.equal(await customerIdOfAccount(randomUUID()), null);
+
+  const [box] = await db.sql<{ id: string }[]>`
+    INSERT INTO customer_message_outbox (customer_user_id, kind) VALUES (${accB.id}, 'invitation') RETURNING id`;
+  assert.equal(await customerIdOfOutboxItem(Number(box.id)), customerB);
+  assert.equal(await customerIdOfOutboxItem(Number.MAX_SAFE_INTEGER), null);
+
+  const repWithPackage = viewer(rep, ["kupacki_nalozi"]);
+  assert.equal(canAccessCustomer(repWithPackage, [customerA], customerA), true);
+  assert.equal(canAccessCustomer(repWithPackage, [customerA], customerB), false);
+  assert.equal(canAccessCustomer(viewer(office), [], customerB), true);
+});
+
+test("poruke za ručnu predaju poštuju opseg (B10)", async (t) => {
+  if (guard(t)) return;
+  const { listPendingOutbox } = await import("@/lib/customers/invitation-service");
+  const [accA] = await db.sql<{ id: string }[]>`SELECT id FROM customer_users WHERE email = ${`qa1bverify-${run}-a@qa-1b.invalid`}`;
+  const [accB] = await db.sql<{ id: string }[]>`SELECT id FROM customer_users WHERE email = ${`qa1bverify-${run}-b@qa-1b.invalid`}`;
+  await db.sql`INSERT INTO customer_message_outbox (customer_user_id, kind) VALUES (${accA.id}, 'invitation'), (${accB.id}, 'invitation')`;
+  const mine = (await listPendingOutbox(viewer(rep, ["kupacki_nalozi"]))).filter((m) => [accA.id, accB.id].includes(m.accountId));
+  assert.deepEqual(mine.map((m) => m.accountId), [accA.id]);
+  assert.deepEqual(await listPendingOutbox(viewer(idleRep, ["kupacki_nalozi"])), []);
+  const all = (await listPendingOutbox(viewer(office))).filter((m) => [accA.id, accB.id].includes(m.accountId));
+  assert.equal(new Set(all.map((m) => m.accountId)).size, 2);
+});

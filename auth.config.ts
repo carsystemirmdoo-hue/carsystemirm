@@ -72,7 +72,16 @@ export const authConfig = {
       return `${baseUrl}${safe ?? "/portal"}`;
     },
     jwt({ token, user }) {
-      if (user?.id) token.sub = user.id;
+      if (user?.id) {
+        token.sub = user.id;
+        /*
+         * Identitet OVE sesije i vreme prijave — samo pri prijavi, nikad pri
+         * osvežavanju. Odjava opoziva `sid`; `loginAt` daje apsolutni rok
+         * (vidi `lib/auth/session-lifetime.mjs`).
+         */
+        token.sid = crypto.randomUUID();
+        token.loginAt = Math.floor(Date.now() / 1000);
+      }
       /*
        * Uz identitet se nosi i verzija sesije iz trenutka prijave.
        *
@@ -125,6 +134,8 @@ export const authConfig = {
         session.user.subject = token.subject;
         session.user.assurance = token.assurance;
         session.user.mfaVerifiedAt = token.mfaVerifiedAt;
+        session.user.sid = token.sid;
+        session.user.loginAt = token.loginAt;
       }
       return session;
     },

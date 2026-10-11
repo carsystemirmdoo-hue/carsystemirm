@@ -260,6 +260,14 @@ test("validan potpisan dokument daje JEDNU fakturu sa tačnim stavkama i poreklo
 
   const stavke = await db.sql<{ n: number }[]>`SELECT count(*)::int AS n FROM invoice_lines`;
   assert.equal(stavke[0].n, 7);
+
+  // Istorija uvoza (B2): prijem sa uređaja se vidi po danu, kao proknjižen.
+  const { loadDeviceReceipts } = await import("@/lib/import/device-receipts");
+  const dani = await loadDeviceReceipts(14);
+  const [{ code }] = await db.sql<{ code: string }[]>`SELECT device_code AS code FROM sync_devices WHERE id = ${uredjaj.deviceId}`;
+  const moj = dani.filter((d) => d.deviceCode === code);
+  assert.equal(moj.length, 1);
+  assert.deepEqual({ received: moj[0].received, booked: moj[0].booked, pending: moj[0].pending }, { received: 1, booked: 1, pending: 0 });
 });
 
 test("akter u tragu je UREĐAJ, ne čovek koji ga je registrovao", async (t) => {

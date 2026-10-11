@@ -8,6 +8,7 @@ import { getCarsystemProductBySlug, getProductVariantSelector } from "@/lib/cars
 import { resolveLedgerScope, type LedgerScope } from "@/lib/ledger/effective-sales";
 import { parseQuantity, quantityProblem } from "@/lib/ordering/orderRules.mjs";
 import { belgradeDate } from "@/lib/recommendations/customerRhythm.mjs";
+import { notifyPriceRequestSubmitted } from "@/lib/ordering/order-notifications";
 
 /**
  * „Zatraži cenu/uslove" — kupac traži cenu za proizvod bez cene, ili posebne
@@ -109,6 +110,8 @@ export async function createPriceRequest(
           ${product.slug}, ${variantId}, ${product.name}, ${variantLabel}, ${articleId}::uuid, ${quantity}, ${note})
         RETURNING id`)),
     ];
+    // Kancelarija saznaje za upit i kada lista nije otvorena (B3); neuspeh ne obara upit.
+    await notifyPriceRequestSubmitted({ requestId: row.id, requestNumber, customerName: session.customerName, productName: variantLabel ? `${product.name} — ${variantLabel}` : product.name });
     return { ok: true, id: row.id, requestNumber, existing: false };
   } catch (error) {
     const e = error as { code?: string; cause?: { code?: string } };

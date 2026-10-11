@@ -99,7 +99,7 @@ export async function checkInvitationGate(
   const input = await loadGateInput(accountId, executor);
   if (!input) return { allowed: false, reasons: [] as GateReason[], found: false };
   // Izdvojeni TEST kupac kontrolisane probe (nema BizniSoft partnera): kapija se ne traži.
-  if (input.customerActive && (await isTrialCustomer(input.account.customerId))) return { allowed: true, reasons: [] as GateReason[], found: true };
+  if (input.customerActive && (await isTrialCustomer(input.account.customerId, executor))) return { allowed: true, reasons: [] as GateReason[], found: true };
   return { ...decideInvitation({ ...input, now }), found: true };
 }
 
@@ -111,7 +111,7 @@ export async function checkActivationGate(
 ) {
   const input = await loadGateInput(accountId, executor);
   if (!input) return { allowed: false, reasons: [] as GateReason[] };
-  if (input.customerActive && (await isTrialCustomer(input.account.customerId))) return { allowed: true, reasons: [] as GateReason[] };
+  if (input.customerActive && (await isTrialCustomer(input.account.customerId, executor))) return { allowed: true, reasons: [] as GateReason[] };
   return decideActivation({ ...input, now });
 }
 

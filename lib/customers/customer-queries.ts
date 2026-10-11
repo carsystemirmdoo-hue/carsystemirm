@@ -3,6 +3,7 @@ import { and, count, desc, eq, sql } from "drizzle-orm";
 import { getDb } from "@/db/client";
 import { invoices } from "@/db/schema";
 import { notReversedCondition } from "@/lib/ledger/effective-invoice";
+import { isoDateOrNull } from "@/lib/sales/filterInput.mjs";
 
 /**
  * Upiti u kupčevoj putanji.
@@ -114,7 +115,6 @@ export type CustomerInvoiceListRow = {
 
 export const CUSTOMER_INVOICE_PAGE_SIZE = 25;
 
-const ISO = /^\d{4}-\d{2}-\d{2}$/;
 
 export function normalizeInvoiceFilter(raw: {
   q?: string;
@@ -123,8 +123,10 @@ export function normalizeInvoiceFilter(raw: {
   strana?: string;
 }): Required<CustomerInvoiceFilter> {
   const q = (raw.q ?? "").trim().slice(0, 80);
-  const from = raw.od && ISO.test(raw.od) ? raw.od : null;
-  const to = raw.do && ISO.test(raw.do) ? raw.do : null;
+  // Stvaran kalendarski dan: `2026-02-31` je davao 500 iz baze (B7); obrnut period se okreće.
+  let from = isoDateOrNull(raw.od);
+  let to = isoDateOrNull(raw.do);
+  if (from && to && from > to) [from, to] = [to, from];
   const page = Math.max(1, Math.min(1000, Number.parseInt(raw.strana ?? "1", 10) || 1));
   return { q: q || null, from, to, page };
 }
@@ -213,6 +215,8 @@ export type CustomerInvoiceDetail = {
     unitPrice: string;
     discountPercent: string | null;
     lineAmount: string;
+    /** Jedinica mere iz registra artikala (BizniSoft JM), ako je artikal poznat. */
+    unit: string | null;
   }[];
 };
 
@@ -245,13 +249,14 @@ export async function loadCustomerInvoice(
   if (!head) return null;
   const lines = await db.execute<{
     line_number: number; article_code: string; description: string | null; quantity: string;
-    unit_price: string; discount_percent: string | null; line_amount: string;
+    unit_price: string; discount_percent: string | null; line_amount: string; unit: string | null;
   }>(sql`
     SELECT l.line_number, l.article_code, l.description, l.quantity::text AS quantity,
            l.unit_price::text AS unit_price, l.discount_percent::text AS discount_percent,
-           l.line_amount::text AS line_amount
+           l.line_amount::text AS line_amount, a.unit
       FROM invoice_lines l
       JOIN invoices i ON i.id = l.invoice_id
+      LEFT JOIN articles a ON a.id = l.article_id
      WHERE l.invoice_id = ${invoiceId}::uuid AND i.customer_id = ${customerId}
      ORDER BY l.line_number`);
   return {
@@ -276,6 +281,7 @@ export async function loadCustomerInvoice(
       unitPrice: l.unit_price,
       discountPercent: l.discount_percent,
       lineAmount: l.line_amount,
+      unit: l.unit,
     })),
   };
 }

@@ -235,3 +235,49 @@ test("M-3: dva ISTOVREMENA uvoza istog fajla — jedan pobedjuje, drugi je ureda
     SELECT count(*)::int AS lines FROM source_document_lines`;
   assert.equal(lines, 1);
 });
+
+/**
+ * Istorija uvoza (revizija 2026-10-11, B2): ručni PDF uvoz zatvara svoj
+ * `import_runs` zapis ishodom; ranije je ostajao „u toku“ sa nulama.
+ */
+test("ručni uvoz zatvara zapis istorije: proknjiženo, duplikat, greška", async (t) => {
+  if (guard(t)) return;
+  const { ingestBiznisoftPdf, openIngestionRun, closeIngestionRun } = await import("@/lib/pdf/ingest");
+  await clean();
+  await db.sql`DELETE FROM import_runs`;
+
+  const [customer] = await db.sql<{ id: string }[]>`
+    INSERT INTO customers (pib, name) VALUES (${`QA${randomUUID().slice(0,6)}`}, 'QA Kupac B2') RETURNING id`;
+  await db.sql`
+    INSERT INTO customer_external_identifiers (source_system, issuer_code, external_partner_code, customer_id, status)
+    VALUES ('biznisoft', ${ISSUER}, '09002', ${customer.id}, 'mapped')`;
+
+  const bytes = await bytesOf("vise-stavki.pdf");
+  const hash = (await import("node:crypto")).createHash("sha256").update(bytes).digest("hex");
+  const run1 = await openIngestionRun({ fileName: "b2.pdf", fileHash: hash }, actor);
+  const out1 = await ingestBiznisoftPdf({ bytes, fileName: "b2.pdf", issuerCode: ISSUER, runId: run1 ?? undefined }, actor);
+  assert.equal(out1.result, "ingested");
+  await closeIngestionRun(run1, out1);
+  const [r1] = await db.sql<{ status: string; rows_read: number; rows_valid: number; invoices_created: number; finished: boolean; message: string }[]>`
+    SELECT status::text AS status, rows_read, rows_valid, invoices_created, finished_at IS NOT NULL AS finished, message FROM import_runs WHERE id = ${run1}`;
+  assert.deepEqual({ ...r1 }, { status: "uspesno", rows_read: 7, rows_valid: 7, invoices_created: 1, finished: true, message: "Proknjiženo." });
+
+  // Isti fajl pod drugim imenom: novi zapis (drugo ime), ishod duplikat.
+  const run2 = await openIngestionRun({ fileName: "b2-kopija.pdf", fileHash: `${hash}-2` }, actor);
+  const out2 = await ingestBiznisoftPdf({ bytes, fileName: "b2-kopija.pdf", issuerCode: ISSUER, runId: run2 ?? undefined }, actor);
+  await closeIngestionRun(run2, out2);
+  const [r2] = await db.sql<{ status: string }[]>`SELECT status::text AS status FROM import_runs WHERE id = ${run2}`;
+  assert.equal(r2.status, "preskoceno_duplikat");
+
+  const run3 = await openIngestionRun({ fileName: "pokvaren.pdf", fileHash: `${hash}-3` }, actor);
+  await closeIngestionRun(run3, { result: "error" });
+  const [r3] = await db.sql<{ status: string; message: string }[]>`SELECT status::text AS status, message FROM import_runs WHERE id = ${run3}`;
+  assert.deepEqual({ ...r3 }, { status: "greska", message: "Fajl nije pročitan." });
+
+  // Zatvoren zapis se ne prepisuje drugim ishodom.
+  await closeIngestionRun(run1, { result: "error" });
+  const [again] = await db.sql<{ status: string }[]>`SELECT status::text AS status FROM import_runs WHERE id = ${run1}`;
+  assert.equal(again.status, "uspesno");
+  await clean();
+  await db.sql`DELETE FROM import_runs WHERE id IN (${run1}, ${run2}, ${run3})`;
+});

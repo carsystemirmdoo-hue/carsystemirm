@@ -5,6 +5,8 @@ import { listCustomerAccounts } from "@/lib/customers/account-service";
 import { listScopedCustomers } from "@/lib/pricing/pricing-scope";
 import { listAccountGates } from "@/lib/customers/verification-service";
 import { AccountsAdmin } from "./AccountsAdmin";
+import { OutboxPanel } from "./OutboxPanel";
+import { listPendingOutbox } from "@/lib/customers/invitation-service";
 
 export const dynamic = "force-dynamic";
 
@@ -25,6 +27,8 @@ export default async function CustomerAccountsPage() {
   ]);
   // Kapija se računa na serveru; ekran je samo prikazuje (i server je proverava ponovo).
   const gates = canManage ? await listAccountGates(accounts.map((a) => a.id)) : new Map();
+  // Poruke za ručnu predaju (B10): samo ko upravlja nalozima, u istom opsegu.
+  const outbox = canManage ? await listPendingOutbox(user) : [];
 
   return (
     <>
@@ -33,6 +37,18 @@ export default async function CustomerAccountsPage() {
         title="Nalozi kupaca"
         description="Kupčev nalog je odvojen identitet, ne peta interna uloga. Nalog nosi oznaku svog kupca i ne postoji put kojim bi se ta oznaka uzela odnekud drugde."
       />
+      {canManage ? (
+        <OutboxPanel
+          items={outbox.map((m) => ({
+            id: m.id,
+            kind: m.kind,
+            createdAt: m.createdAt.toISOString(),
+            email: m.email,
+            customerName: m.customerName,
+            accountStatus: m.accountStatus,
+          }))}
+        />
+      ) : null}
       <AccountsAdmin
         accounts={accounts.map((a) => ({ ...a, gate: gates.get(a.id) ?? null }))}
         customers={customerRows.map((customer) => ({

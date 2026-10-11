@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { notFound } from "next/navigation";
 import { eq } from "drizzle-orm";
 import { CrumbLabel } from "@/components/portal/Breadcrumbs";
@@ -6,6 +7,7 @@ import { getDb } from "@/db/client";
 import { customers } from "@/db/schema";
 import { can } from "@/lib/authz/permissions.mjs";
 import { requireCapability, requireCustomerAccess } from "@/lib/authz/session";
+import { isUuid } from "@/lib/sales/filterInput.mjs";
 import { listCustomerAssignees, listSalesReps } from "@/lib/partners/assignment-service";
 import { loadCustomerProfile } from "@/lib/recommendations/customer-profile";
 import { AssignmentPanel } from "./AssignmentPanel";
@@ -28,6 +30,8 @@ export default async function CustomerDetailPage({
   const order = (await searchParams).redosled === "dosadasnji" ? "dosadasnji" : "r1";
   const user = await requireCapability("view:kupci", `/portal/kupci/${id}`);
 
+  // Ne-UUID iz adrese je 404, ne greška baze (B7).
+  if (!isUuid(id)) notFound();
   // Provera se radi pre bilo kakvog čitanja podataka: menjanje ID-a u adresi
   // vraća 403, a ne tuđeg kupca.
   await requireCustomerAccess(user, id);
@@ -43,10 +47,17 @@ export default async function CustomerDetailPage({
   const canManageAssignments = can(user, "assignments:manage");
   // Isto pravilo kao ekran preporuka: prekidač blokira preračun, ne prikaz.
   const showSignals = can(user, "view:preporuke");
+  /*
+   * Istorija kupovine (sažetak, artikli, metod) je promet kupca — vidi je ko
+   * vidi Prodaju. Kancelarija je ranije dobijala praznu karticu jer je sve
+   * stajalo iza `view:preporuke` (revizija 2026-10-11, B4); predlozi za
+   * razgovor i proširenje i dalje traže `view:preporuke`.
+   */
+  const showHistory = showSignals || can(user, "view:prodaja");
   const [assignees, reps, profile, crossSell] = await Promise.all([
     listCustomerAssignees(customer.id),
     canManageAssignments ? listSalesReps() : Promise.resolve([]),
-    showSignals ? loadCustomerProfile(customer.id) : Promise.resolve(null),
+    showHistory ? loadCustomerProfile(customer.id) : Promise.resolve(null),
     // Opseg je već proveren iznad (`requireCustomerAccess`); predlog je deo iste kartice.
     showSignals ? loadCrossSell([customer.id]).then((m) => m.get(customer.id) ?? null) : Promise.resolve(null),
   ]);
@@ -70,13 +81,21 @@ export default async function CustomerDetailPage({
         </p>
       ) : null}
       {profile ? (
-        <CustomerSummary profile={profile} assignees={assignees.map((a) => a.name)} inactive={!customer.active} />
+        <CustomerSummary profile={profile} assignees={assignees.map((a) => a.name)} inactive={!customer.active} showNextStep={showSignals} />
       ) : null}
-      {profile && customer.active ? (
+      {can(user, "view:prodaja") || can(user, "view:zahtevi") ? (
+        <nav className="portal-panel cs-links" aria-label="Dokumenti kupca">
+          {can(user, "view:prodaja") ? <Link href={`/portal/prodaja?kupac=${customer.id}`}>Prodaja i fakture ovog kupca →</Link> : null}
+          {can(user, "view:zahtevi") ? (
+            <Link href={`/portal/zahtevi?stanje=svi&q=${encodeURIComponent(customer.name)}`}>Zahtevi ovog kupca →</Link>
+          ) : null}
+        </nav>
+      ) : null}
+      {showSignals && profile && customer.active ? (
         <CustomerSuggestions profile={profile} identities={identities} order={order} />
       ) : null}
       {profile ? <CustomerArticles profile={profile} identities={identities} /> : null}
-      {profile && crossSell && customer.active ? (
+      {showSignals && profile && crossSell && customer.active ? (
         <CustomerCrossSell
           crossSell={crossSell}
           names={Object.fromEntries(profile.articles.map((a) => [a.articleCode, a.articleName ?? a.articleCode]))}

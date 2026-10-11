@@ -44,11 +44,14 @@ export function CustomerSummary({
   profile,
   assignees,
   inactive = false,
+  showNextStep = true,
 }: {
   profile: CustomerProfile;
   assignees: string[];
   /** Neaktivan kupac: bez predloga za razgovor. */
   inactive?: boolean;
+  /** Bez `view:preporuke` (npr. kancelarija): istorija da, predlog za razgovor ne. */
+  showNextStep?: boolean;
 }) {
   const s = profile.summary;
   return (
@@ -82,11 +85,13 @@ export function CustomerSummary({
           <p>{s.change}</p>
         </div>
 
-        <div className="cs-block cs-next">
-          <h3>Predlog za sledeći razgovor</h3>
-          <p>{inactive ? "Kupac je neaktivan — predlog za razgovor se ne daje." : s.nextStep}</p>
-          <small>Interna pomoć komercijalisti. Ne šalje se kupcu i ne menja cenu ni uslove.</small>
-        </div>
+        {showNextStep ? (
+          <div className="cs-block cs-next">
+            <h3>Predlog za sledeći razgovor</h3>
+            <p>{inactive ? "Kupac je neaktivan — predlog za razgovor se ne daje." : s.nextStep}</p>
+            <small>Interna pomoć komercijalisti. Ne šalje se kupcu i ne menja cenu ni uslove.</small>
+          </div>
+        ) : null}
       </div>
     </section>
   );

@@ -17,6 +17,7 @@ import {
   loadSalespeople,
   loadScopedCustomers,
 } from "@/lib/sales/queries";
+import { normalizeSalesFilter } from "@/lib/sales/filterInput.mjs";
 
 export const dynamic = "force-dynamic";
 
@@ -38,13 +39,8 @@ export default async function SalesPage({
     );
   }
 
-  const filter = {
-    from: params.from || null,
-    to: params.to || null,
-    customerId: params.kupac || null,
-    salespersonId: params.komercijalista || null,
-    productGroup: params.grupa || null,
-  };
+  // Neispravan datum ili ID iz adrese ne sme da obori stranu (B7).
+  const filter = normalizeSalesFilter(params);
 
   // Zbirovi nad CELIM filtriranim skupom u bazi; lista stavki je samo prikaz.
   const [summary, byCustomer, lines, customers, salespeople, productGroups] =

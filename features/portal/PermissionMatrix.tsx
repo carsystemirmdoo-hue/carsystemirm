@@ -121,13 +121,13 @@ export function PermissionMatrix({
             <input
               type="password"
               name="password"
-              minLength={10}
+              minLength={12}
               maxLength={200}
               required
               disabled={pending}
               autoComplete="new-password"
             />
-            <small>Najmanje 10 znakova. Prenesite je zaposlenom lično.</small>
+            <small>Najmanje 12 znakova. Prenesite je zaposlenom lično.</small>
           </label>
           {createNeedsToken ? (
             <label>

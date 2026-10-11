@@ -80,7 +80,7 @@ async function loadActivePriceList(exec: Exec = getDb()): Promise<PriceListInfo 
  * cenovnik, veze artikala i postupak kancelarije.
  */
 export async function loadOrderingMode(exec: Exec = getDb()): Promise<OrderingMode> {
-  const [priceList, dataset] = await Promise.all([loadActivePriceList(exec), loadDatasetInfo()]);
+  const [priceList, dataset] = await Promise.all([loadActivePriceList(exec), loadDatasetInfo(exec)]);
   if (process.env.CUSTOMER_ORDERING !== "demo") {
     return { enabled: false, reason: "Poručivanje preko sajta još nije uključeno.", priceList };
   }
@@ -1003,9 +1003,25 @@ export async function returnOrderToCart(session: CustomerSession, orderId: strin
  * ------------------------------------------------------------------------ */
 
 /** Zahtevi u opsegu korisnika (komercijalista: samo dodeljeni kupci). */
-export async function listOrderRequests(viewer: PortalUser, status?: string | null, query?: string | null, opts: { allVersions?: boolean } = {}): Promise<OrderListRow[]> {
+/**
+ * Stanja liste zahteva kancelarije — u SQL-u, da brojači i filter važe nad
+ * CELIM skupom, a ne nad 200 najnovijih koje lista prikazuje (revizija
+ * 2026-10-11, B3). „Otvoreni“ = sve što još traži nečiji korak.
+ */
+export const ORDER_STATES = {
+  otvoreni: sql`(o.status IN ('submitted', 'under_review', 'changes_requested', 'awaiting_customer') OR (o.status = 'confirmed' AND o.biznisoft_document_number IS NULL))`,
+  novi: sql`o.status = 'submitted'`,
+  obrada: sql`o.status = 'under_review'`,
+  kupac: sql`o.status IN ('changes_requested', 'awaiting_customer')`,
+  biznisoft: sql`(o.status = 'confirmed' AND o.biznisoft_document_number IS NULL)`,
+  potvrdjene: sql`o.status = 'confirmed'`,
+  zatvoreni: sql`o.status IN ('rejected', 'cancelled', 'superseded')`,
+  svi: sql`true`,
+} as const;
+export type OrderStateKey = keyof typeof ORDER_STATES;
+
+async function orderRequestsWhere(viewer: PortalUser, query?: string | null, opts: { allVersions?: boolean } = {}): Promise<SQL> {
   const scope = await resolveLedgerScope(viewer);
-  const statusWhere = status ? sql`o.status::text = ${status}` : sql`true`;
   // Pretraga po broju, kupcu, BizniSoft šifri/nazivu ili kataloškom nazivu stavke.
   const q = (query ?? "").trim().slice(0, 80);
   const queryWhere = q
@@ -1013,7 +1029,23 @@ export async function listOrderRequests(viewer: PortalUser, status?: string | nu
            OR EXISTS (SELECT 1 FROM customer_order_lines l WHERE l.order_id = o.id
                        AND ${foldedMatch([sql`l.article_code`, sql`l.article_name`, sql`l.catalog_name`], q)}))`
     : sql`true`;
-  return listOrders(sql`${scopeWhere(scope)} AND ${statusWhere} AND ${queryWhere} AND ${opts.allVersions ? sql`true` : CURRENT_ONLY}`);
+  return sql`${scopeWhere(scope)} AND ${queryWhere} AND ${opts.allVersions ? sql`true` : CURRENT_ONLY}`;
+}
+
+export async function listOrderRequests(viewer: PortalUser, status?: string | null, query?: string | null, opts: { allVersions?: boolean; state?: OrderStateKey } = {}): Promise<OrderListRow[]> {
+  const statusWhere = status ? sql`o.status::text = ${status}` : sql`true`;
+  const stateWhere = opts.state ? ORDER_STATES[opts.state] : sql`true`;
+  return listOrders(sql`${await orderRequestsWhere(viewer, query, opts)} AND ${statusWhere} AND ${stateWhere}`);
+}
+
+/** Broj zahteva po stanju nad celim skupom (isti opseg, pretraga i verzije kao lista). */
+export async function countOrderRequestsByState(viewer: PortalUser, query?: string | null, opts: { allVersions?: boolean } = {}): Promise<Record<OrderStateKey, number>> {
+  const keys = Object.keys(ORDER_STATES) as OrderStateKey[];
+  const cols = sql.join(keys.map((k) => sql`count(*) FILTER (WHERE ${ORDER_STATES[k]})::int AS ${sql.identifier(k)}`), sql`, `);
+  const [row] = [...(await getDb().execute<Record<OrderStateKey, number>>(sql`
+    SELECT ${cols} FROM customer_orders o JOIN customers c ON c.id = o.customer_id
+     WHERE ${await orderRequestsWhere(viewer, query, opts)}`))];
+  return Object.fromEntries(keys.map((k) => [k, Number(row?.[k] ?? 0)])) as Record<OrderStateKey, number>;
 }
 
 export async function loadOrderRequest(viewer: PortalUser, orderId: string): Promise<OrderDetail | null> {

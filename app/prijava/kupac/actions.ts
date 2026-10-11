@@ -5,6 +5,7 @@ import { cookies, headers } from "next/headers";
 import { redirect } from "next/navigation";
 import { signIn, signOut } from "@/auth";
 import { forgetThisDevice, setRememberCookie } from "@/lib/auth/remember-session";
+import { revokeCurrentSession } from "@/lib/auth/revoked-sessions";
 import { isRememberEnabled } from "@/lib/auth/rememberRules.mjs";
 import { issueRememberToken } from "@/lib/auth/remember-tokens";
 import { findCustomerAccountByEmail } from "@/lib/customers/account-service";
@@ -88,6 +89,8 @@ export async function customerSignInAction(
 export async function customerSignOutAction(formData?: FormData) {
   // Odjava zaboravlja i ovaj uređaj: bez toga bi ga sledeća poseta ponovo prijavila.
   await forgetThisDevice();
+  // Odjava gasi i sam token, ne samo kolačić (B8).
+  await revokeCurrentSession();
   await signOut({ redirect: false });
   (await cookies()).delete(CUSTOMER_MARKER_COOKIE);
   const back = normalizeCustomerReturn(formData?.get("returnTo") ?? null);

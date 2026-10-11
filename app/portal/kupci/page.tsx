@@ -11,20 +11,35 @@ import {
   loadScopedCustomers,
 } from "@/lib/sales/queries";
 import { matchesStatusFilter, parseCustomerStatusFilter } from "@/lib/customers/customerStatus.mjs";
+import { filterCustomerList, parseCustomerListFilter } from "@/lib/customers/customerListFilter.mjs";
+import { listAssigneesByCustomer, listSalesReps } from "@/lib/partners/assignment-service";
 
 export const dynamic = "force-dynamic";
 
 export default async function CustomersPage({
   searchParams,
 }: {
-  searchParams: Promise<{ status?: string }>;
+  searchParams: Promise<{ status?: string; q?: string; komercijalista?: string }>;
 }) {
   const user = await requireCapability("view:kupci", "/portal/kupci");
   const scoped = !seesAllCustomers(user);
   // Lista prometa podrazumevano prikazuje sve kupce; neaktivni nose oznaku.
-  const statusFilter = parseCustomerStatusFilter((await searchParams).status, "svi");
+  const params = await searchParams;
+  const statusFilter = parseCustomerStatusFilter(params.status, "svi");
+  // Pretraga i komercijalista po DODELI (B5); filter po komercijalisti ima smisla samo ko vidi sve kupce.
+  const listFilter = parseCustomerListFilter(params);
+  if (scoped) listFilter.rep = "";
   const allScoped = await loadScopedCustomers(user);
-  const customers = allScoped.filter((c) => matchesStatusFilter(c.active, statusFilter));
+  const [assignees, reps] = await Promise.all([
+    listAssigneesByCustomer(allScoped.map((c) => c.id)),
+    scoped ? Promise.resolve([]) : listSalesReps(),
+  ]);
+  const customers = filterCustomerList(
+    allScoped.filter((c) => matchesStatusFilter(c.active, statusFilter)),
+    listFilter,
+    assignees,
+  );
+  const filtered = Boolean(listFilter.q || listFilter.rep);
   const neaktivnih = allScoped.filter((c) => !c.active).length;
 
   if (!(await hasImportedInvoices())) {
@@ -48,8 +63,8 @@ export default async function CustomersPage({
         title="Kupci"
         description={
           scoped
-            ? `Dodeljeni kupci: ${customers.length}. Kupac koji Vam nije dodeljen ne otvara se ni preko direktne adrese.`
-            : `Svi kupci firme (${customers.length}).`
+            ? `Dodeljeni kupci: ${allScoped.length}. Kupac koji Vam nije dodeljen ne otvara se ni preko direktne adrese.`
+            : `Svi kupci firme (${allScoped.length}).`
         }
       />
 
@@ -58,6 +73,18 @@ export default async function CustomersPage({
           <div>
             <h2>Promet po kupcu</h2>
             <form method="get" className="portal-inline-form">
+              <input type="search" name="q" defaultValue={listFilter.q} placeholder="Naziv, PIB ili grad" aria-label="Pretraga kupaca" maxLength={80} />
+              {scoped ? null : (
+                <select name="komercijalista" defaultValue={listFilter.rep} aria-label="Komercijalista">
+                  <option value="">Svi komercijalisti</option>
+                  {reps.map((r) => (
+                    <option key={r.id} value={r.id}>
+                      {r.name}
+                    </option>
+                  ))}
+                  <option value="bez">Bez komercijaliste</option>
+                </select>
+              )}
               <select name="status" defaultValue={statusFilter} aria-label="Kupci po statusu">
                 <option value="svi">Svi kupci</option>
                 <option value="aktivni">Aktivni</option>
@@ -66,7 +93,7 @@ export default async function CustomersPage({
               <button type="submit" className="portal-button" data-variant="primary">Prikažite</button>
             </form>
             <p>
-              Iznosi su iz uvezenih faktura. Dugovanje i naplata nisu deo ovog
+              {filtered ? `Prikazano ${customers.length} od ${allScoped.length}. ` : ""}Iznosi su iz uvezenih faktura. Dugovanje i naplata nisu deo ovog
               izvora podataka.
             </p>
           </div>
@@ -78,6 +105,7 @@ export default async function CustomersPage({
                 <th scope="col">Kupac</th>
                 <th scope="col">PIB</th>
                 <th scope="col">Grad</th>
+                <th scope="col">Komercijalista</th>
                 <th scope="col">Bruto</th>
                 <th scope="col">Povrati</th>
                 <th scope="col">Neto</th>
@@ -98,6 +126,7 @@ export default async function CustomersPage({
                     </th>
                     <td>{customer.pib}</td>
                     <td>{customer.city ?? "—"}</td>
+                    <td>{(assignees.get(customer.id) ?? []).map((a) => a.name).join(", ") || "—"}</td>
                     <td className="portal-table-number">
                       {money(totals?.gross ?? 0)}
                     </td>
@@ -121,8 +150,10 @@ export default async function CustomersPage({
               })}
               {customers.length === 0 ? (
                 <tr>
-                  <td colSpan={8}>
-                    {statusFilter !== "svi" && allScoped.length > 0
+                  <td colSpan={9}>
+                    {filtered && allScoped.length > 0
+                      ? "Nijedan kupac ne odgovara pretrazi i izabranom komercijalisti."
+                      : statusFilter !== "svi" && allScoped.length > 0
                       ? `Nema ${statusFilter === "neaktivni" ? "neaktivnih" : "aktivnih"} kupaca u ovom prikazu.`
                       : scoped
                         ? "Nemate dodeljenih kupaca. Dodelu radi Vlasnik."

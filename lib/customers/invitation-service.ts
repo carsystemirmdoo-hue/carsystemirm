@@ -1,10 +1,11 @@
 import "server-only";
 import { randomUUID } from "node:crypto";
-import { and, eq, gt, isNull, sql } from "drizzle-orm";
+import { and, desc, eq, gt, inArray, isNull, sql } from "drizzle-orm";
 import { getDb } from "@/db/client";
 import {
   customerAccountTokens,
   customerMessageOutbox,
+  customers,
   customerUsers,
   type CustomerTokenPurpose,
 } from "@/db/schema";
@@ -25,6 +26,9 @@ import {
   type GateReason,
 } from "@/lib/customers/verification-service";
 import { GATE_REASONS } from "@/lib/customers/contactVerification.mjs";
+import { seesAllCustomers } from "@/lib/authz/permissions.mjs";
+import { loadAssignedCustomerIds } from "@/lib/authz/user-repository";
+import type { PortalUser } from "@/lib/authz/session";
 
 /** Poziv odbijen kapijom — nosi SVE razloge, da ih ekran prikaže odjednom. */
 export class InvitationBlockedError extends CustomerAccountError {
@@ -542,7 +546,13 @@ export async function changeCustomerPassword(input: {
 }
 
 /** Outbox stavke koje čekaju da ih neko isporuči. */
-export async function listPendingOutbox() {
+export async function listPendingOutbox(viewer: Pick<PortalUser, "id" | "role" | "permissions">) {
+  /*
+   * Isti opseg kao spisak naloga: komercijalista bez `customers:view_all` vidi
+   * samo poruke dodeljenih kupaca; prazna dodela = prazno (revizija B10).
+   */
+  const scope = seesAllCustomers(viewer) ? null : await loadAssignedCustomerIds(viewer.id);
+  if (scope !== null && scope.length === 0) return [];
   const db = getDb();
   return db
     .select({
@@ -552,13 +562,21 @@ export async function listPendingOutbox() {
       createdAt: customerMessageOutbox.createdAt,
       email: customerUsers.email,
       accountId: customerUsers.id,
+      accountStatus: customerUsers.status,
+      customerName: customers.name,
     })
     .from(customerMessageOutbox)
     .innerJoin(
       customerUsers,
       eq(customerUsers.id, customerMessageOutbox.customerUserId),
     )
-    .where(eq(customerMessageOutbox.status, "pending"))
+    .innerJoin(customers, eq(customers.id, customerUsers.customerId))
+    .where(
+      scope === null
+        ? eq(customerMessageOutbox.status, "pending")
+        : and(eq(customerMessageOutbox.status, "pending"), inArray(customerUsers.customerId, scope)),
+    )
+    .orderBy(desc(customerMessageOutbox.createdAt))
     .limit(200);
 }
 

@@ -352,6 +352,7 @@ const RESETTABLE_TABLES = [
 
   "audit_log",
   "auth_rate_limits",
+  "auth_revoked_sessions",
   "user_mfa",
   "mfa_recovery_codes",
   "mfa_enrollment_grants",

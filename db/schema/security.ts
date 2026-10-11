@@ -207,3 +207,23 @@ export const mfaEnrollmentGrants = pgTable(
     index("mfa_enrollment_grants_user_idx").on(table.userId, table.usedAt),
   ],
 );
+
+/**
+ * Opozvane pojedinačne sesije (0045, revizija 2026-10-11 B8).
+ *
+ * Odjava upisuje `sid` iz tokena; serverska kapija (zaposleni i kupac) takav
+ * token odbija. Zapis traje do apsolutnog isteka tokena (`expires_at`), posle
+ * toga token i onako pada i zapis se briše pri sledećem opozivu.
+ */
+export const authRevokedSessions = pgTable(
+  "auth_revoked_sessions",
+  {
+    sid: uuid("sid").primaryKey(),
+    /** `internal` | `customer` — samo za trag; provera ide po `sid`. */
+    subject: text("subject").notNull(),
+    subjectId: uuid("subject_id").notNull(),
+    revokedAt: timestamp("revoked_at", { withTimezone: true }).notNull().defaultNow(),
+    expiresAt: timestamp("expires_at", { withTimezone: true }).notNull(),
+  },
+  (table) => [index("auth_revoked_sessions_expires_idx").on(table.expiresAt)],
+);

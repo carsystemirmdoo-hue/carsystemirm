@@ -498,6 +498,8 @@ try {
       await Promise.all([p.waitForURL((u) => u.pathname !== "/prijava/kupac", { timeout: 60000 }), p.keyboard.press("Enter")]);
       await p.waitForLoadState("networkidle");
     }
+    // Status u identitetu varijante (ProductIdentity: <small>Status</small><strong>…</strong>).
+    const statusOf = async (p) => { await p.waitForTimeout(600); return txt(p.locator('span:has(> small:text-is("Status")) > strong').first()); };
     const loginIcon = (p) => p.locator('header a[aria-label="Prijava za kupce"]').first();
     const pathOf = (p) => { const u = new URL(p.url()); return decodeURIComponent(u.pathname + u.search); };
     async function cartRows(id) { return sqlc`SELECT a.code, ci.quantity::text AS q FROM customer_cart_items ci JOIN articles a ON a.id = ci.article_id WHERE ci.customer_id = ${id} ORDER BY a.code`; }
@@ -510,6 +512,7 @@ try {
     const anonApi = await anon.ctx.request.get(`${B}/api/kupac/ponude`);
     const anonBody = await anonApi.text();
     check("sajt: /api/kupac/ponude bez sesije — bez ponuda, no-store", !/"offers":\[\{/.test(anonBody) && !/SINT/.test(anonBody) && /no-store/.test(anonApi.headers()["cache-control"] ?? ""), `${anonApi.status()} ${anonBody.slice(0, 80)} · ${anonApi.headers()["cache-control"]}`);
+    check("sajt: neprijavljen — javni status „Na upit“", /Na upit/i.test(await statusOf(anon.page)), await statusOf(anon.page));
     await anon.page.screenshot({ path: `${OUT}/s1-anoniman-proizvod.png` });
 
     // 2. Prijava sa konkretnog proizvoda (varijanta u adresi) → povratak na istu stranu.
@@ -521,6 +524,16 @@ try {
     const pA = await panelText(a.page);
     check("sajt: firma A — cena po opciji, bez i sa PDV-om (1.800,00/2.160,00 avans; 1.920,00/2.304,00 odloženo)",
       /SINT Auto Lak/i.test(pA) && ["1.800,00", "2.160,00", "1.920,00", "2.304,00"].every((x) => pA.includes(x)), pA.slice(0, 260));
+    check("sajt: status prati ponudu — „Vaša cena potvrđena“ (ne „Na upit“) za varijantu sa cenom", /Vaša cena potvrđena/i.test(await statusOf(a.page)), await statusOf(a.page));
+    // Izbor druge varijante na istoj strani (bez nove strane): status i panel prate izbor.
+    await a.page.locator("button, a, label").filter({ hasText: "152.416" }).first().click();
+    await a.page.waitForFunction(() => location.search.includes("152.416") || document.body.innerText.includes("152.416"), null, { timeout: 15000 }).catch(() => {});
+    const st416 = await statusOf(a.page);
+    const pn416 = await panelText(a.page);
+    check("sajt: druga varijanta na istoj strani — status „Na upit“, panel bez cene", /^Na upit$/i.test(st416) && /nije povezan/.test(pn416) && !pn416.includes("1.800,00"), `${st416} · ${pn416.slice(0, 90)}`);
+    await a.page.locator("button, a, label").filter({ hasText: "152.580" }).first().click();
+    await a.page.waitForTimeout(800);
+    check("sajt: povratak na varijantu sa cenom — status ponovo „Vaša cena potvrđena“", /Vaša cena potvrđena/i.test(await statusOf(a.page)) && (await panelText(a.page)).includes("1.800,00"));
     check("sajt: panel kaže na šta se cena odnosi i da nije rezervacija", /SINT-C01/.test(pA) && /bez PDV/i.test(pA) && /rezerv/i.test(pA));
     await a.page.screenshot({ path: `${OUT}/s2-A-proizvod-cena.png` });
     await panelOf(a.page).locator('input[type="number"]').fill("2");
@@ -545,9 +558,11 @@ try {
     // 4. Na upit: povezan bez cene / nepovezana varijanta.
     await go(a.page, `${VOC}?varijanta=144.027`);
     const pNo = await panelText(a.page);
+    check("sajt: status varijante bez cene = „Cena na upit“", /Cena na upit/i.test(await statusOf(a.page)), await statusOf(a.page));
     check("sajt: povezan artikal bez cene → „Cena na upit“, bez nule", /Cena na upit: za ovaj artikal/.test(pNo) && !/0,00 RSD/.test(pNo), pNo.slice(0, 160));
     await go(a.page, `${VOC}?varijanta=144.539`);
     const pUn = await panelText(a.page);
+    check("sajt: status nepovezane varijante = javni „Na upit“", /^Na upit$/i.test(await statusOf(a.page)), await statusOf(a.page));
     check("sajt: nepovezana varijanta → „Cena na upit … nije povezan“", /nije povezan/.test(pUn) && !/Dodajte u korpu/.test(pUn), pUn.slice(0, 160));
     await a.page.screenshot({ path: `${OUT}/s4-A-na-upit.png` });
 
@@ -653,6 +668,8 @@ try {
     await go(t, `${href}/stampa`);
     const st = await txt(t.locator("body"));
     check("kancelarija: štampa zahteva sadrži stavke i broj", st.includes(broj) && /SINT-C01/.test(st) && /SINT-C04/.test(st));
+    const prelivanje = await t.locator("td.zp-code").evaluateAll((els) => els.filter((e) => e.scrollWidth > e.clientWidth + 1).map((e) => e.textContent));
+    check("kancelarija: šifra u štampi ne prelazi u susednu kolonu", prelivanje.length === 0 && (await t.locator("td.zp-code").count()) === 3, JSON.stringify(prelivanje));
     await t.screenshot({ path: `${OUT}/s12-stampa.png`, fullPage: true });
     check("sajt: bez 5xx odgovora", errors.length === 0, errors.join(", "));
   }

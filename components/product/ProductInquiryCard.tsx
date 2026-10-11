@@ -6,6 +6,7 @@ import {
 import { companyContact } from "@/lib/company-contact";
 import { SplitContactCta } from "@/components/ui/SplitContactCta";
 import styles from "./ProductDetailPage.module.css";
+import { CustomerStatus } from "@/components/customer-buy/CustomerStatus";
 
 export function ProductInquiryCard({ product }: { product: CarsystemProduct }) {
   const publicStatus = getProductPublicStatus(product);
@@ -23,7 +24,7 @@ export function ProductInquiryCard({ product }: { product: CarsystemProduct }) {
       <dl className={styles.inquiryFacts}>
         <div>
           <dt>Status</dt>
-          <dd>{publicStatus}</dd>
+          <dd><CustomerStatus publicStatus={publicStatus} fallbackSlug={product.slug} /></dd>
         </div>
         <div>
           <dt>Odgovor</dt>

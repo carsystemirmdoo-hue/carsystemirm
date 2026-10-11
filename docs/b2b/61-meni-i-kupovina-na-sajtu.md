@@ -150,18 +150,19 @@ potvrđuju ručno po artiklu: više Vašeg rada, a ne više programiranja.
 | K3 prikaz: pakovanje po BizniSoft artiklu, cena po JM bez/sa PDV-om po odobrenoj opciji, osnova (osnovna − rabat), „Cena na upit“ | ✅ | ✅ | ne |
 | K4 ista serverska korpa iz kataloga i „Poručite ponovo“, broj stavki u zaglavlju | ✅ | ✅ | ne |
 | K5 slanje uz ponovni obračun; stavka pamti potvrđenu katalošku vezu; „Moj nalog“ → Podaci firme | ✅ | ✅ | ne |
-| K6 tok `synthetic-portal-flow.mjs sajt` | ✅ | ✅ 32/32 | — |
+| K6 tok `synthetic-portal-flow.mjs sajt` (uklj. status po varijanti i štampu) | ✅ | ✅ 39/39 | — |
 
 Pravila koja važe u kodu:
 - „Kataloški broj“ iz BizniSofta se ne koristi kao broj proizvođača (najčešće ponavlja internu šifru).
 - Šifra se poredi kao tekst od šest cifara (`000000`), bez dodavanja ili brisanja nula van tog pravila.
 - Iz kataloga se u korpu dodaje samo artikal sa **potvrđenom** vezom (`mapped`); predlog nije potvrda.
-- Komada u kutiji je informacija, nikad minimum.
+- Komada u kutiji je informacija, nikad minimum. Kolone dobavljača (Carsystem „VE“/„MOQ“, Befar „BOX QUANTITY“) **nisu** dokaz broja komada u transportnoj kutiji — beleže se kao „količina dobavljača“ sa nazivom kolone, a komada u kutiji ostaje „nije potvrđeno“ dok dobavljač posebno ne potvrdi.
+- Status na strani proizvoda prati izabranu varijantu i ponudu prijavljenog kupca (`components/customer-buy/offerStatus.mjs`, isto pravilo kao panel): cena potvrđena → „Vaša cena potvrđena“; povezan bez cene → „Cena na upit“; inače javni status. Server i neprijavljen posetilac dobijaju javni status.
 
 Šta K6 proverava (sintetički podaci): neprijavljen posetilac (ni panel, ni cena u HTML-u, API `no-store`); dve firme sa različitim rabatom u dva prozora istovremeno; jedna i dve opcije plaćanja; prijava sa početne, iz kataloga i sa proizvoda (sa `?varijanta=`) i povratak na istu stranu; odjava na istu stranu bez cena i ponovna prijava; ista korpa iz kataloga i „Poručite ponovo“, i posle ponovne prijave; telefon; dva pakovanja jedne kartice; povezan artikal bez cene i nepovezana varijanta → „Cena na upit“; promena rabata pre slanja → nova potvrda; prijem u kancelariji i štampa.
 
 Otvoreno:
 1. Potvrda 10 kontrolnih veza i odgovori (LIT po litru ili po limenci, „5/1“, razlika zapremine, dva pakovanja na kartici).
 2. Upis potvrđenih veza na Production — posebno odobrenje.
-3. Javna oznaka „Status: Na upit“ na strani proizvoda stoji i za prijavljenog kupca koji vidi cenu ispod (strana je statična).
+3. Potvrda transportnog pakovanja (komada u kutiji) od dobavljača — nijedan broj još nije potvrđen.
 4. Stari demo put (`loadCustomerOffers`, `addToCartAction`) više ne koristi katalog; uklanja se posebno.

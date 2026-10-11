@@ -10,6 +10,7 @@ import { ProductGallery } from "@/components/product/ProductGallery";
 import { ProductInquiryCard } from "@/components/product/ProductInquiryCard";
 import { SplitContactCta } from "@/components/ui/SplitContactCta";
 import styles from "./ProductDetailPage.module.css";
+import { CustomerStatus } from "@/components/customer-buy/CustomerStatus";
 
 export function ProductHero({
   product,
@@ -65,7 +66,7 @@ export function ProductHero({
 
           <div className={styles.statusLine} aria-label="Status proizvoda">
             <span>Status</span>
-            <strong>{publicStatus}</strong>
+            <strong><CustomerStatus publicStatus={publicStatus} fallbackSlug={product.slug} /></strong>
           </div>
 
           <dl className={styles.metaGrid}>

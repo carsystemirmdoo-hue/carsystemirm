@@ -7,9 +7,9 @@ import { requestPriceAction } from "@/app/kupac/upiti/actions";
 import { useOptionalProductVariant } from "@/components/product/ProductVariantProvider";
 import type { CatalogRequestOffer } from "@/lib/ordering/request-service";
 import { money, unitLabel, useCustomerOffers, withVat, type OffersPayload } from "./useCustomerOffers";
+import { offersForView } from "./offerStatus.mjs";
 import styles from "./CustomerBuy.module.css";
 
-const same = (a: string | null | undefined, b: string | null | undefined) => Boolean(a && b && a.toLowerCase() === b.toLowerCase());
 
 /**
  * Kupovina na stranici proizvoda — samo za prijavljenog kupca.
@@ -30,10 +30,7 @@ export function CustomerBuyPanel({ fallbackSlug, fallbackName }: { fallbackSlug:
   const variantLabel = view?.shadeLabel ?? null;
 
   const here = useMemo(
-    () =>
-      (data?.offers ?? []).filter(
-        (o) => o.slug === slug && (o.variantKey === null || viewKeys.some((k) => same(k, o.variantKey))),
-      ),
+    () => offersForView(data?.offers ?? [], slug, viewKeys),
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [data, slug, viewKeys.join("|")],
   );

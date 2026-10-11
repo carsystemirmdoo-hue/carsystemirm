@@ -170,7 +170,7 @@ export default async function OrderPrintPage({ params }: { params: Promise<{ id:
               {priced.map((l) => (
                 <tr key={l.lineNumber}>
                   <td className="r">{l.lineNumber}.</td>
-                  <td className="nw">{l.articleCode}</td>
+                  <td className="zp-code">{l.articleCode}</td>
                   <td className="zp-name">
                     {l.articleName}
                     {l.packConfirmed ? <span className="zp-sub">pakovanje {l.packLabel}</span> : null}
@@ -238,7 +238,7 @@ export default async function OrderPrintPage({ params }: { params: Promise<{ id:
                 {onRequest.map((l) => (
                   <tr key={l.lineNumber}>
                     <td className="r">{l.lineNumber}.</td>
-                    <td className="nw">{l.articleCode}</td>
+                    <td className="zp-code">{l.articleCode}</td>
                     <td className="zp-name">
                       {l.articleName}
                       {l.packConfirmed ? <span className="zp-sub">pakovanje {l.packLabel}</span> : null}

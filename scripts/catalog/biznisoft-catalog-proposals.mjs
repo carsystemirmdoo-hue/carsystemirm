@@ -78,10 +78,13 @@ for (const f of readdirSync(`${ROOT}data`).filter((f) => f.endsWith("-catalog-pr
       code: v.code ?? null,
       articleNumber: v.articleNumber ?? null,
       amount: amount(`${v.label ?? ""} ${v.size ?? ""}`),
-      // Odvojeno: prodajno pakovanje (komada po prodajnoj jedinici) i komada u kutiji
-      // (izvor: zvanični katalog proizvođača, polje kakvo je u podacima kataloga).
+      // Odvojeno: prodajno pakovanje i broj iz kolone dobavljača. Taj broj NIJE potvrđen
+      // broj komada u kutiji: Carsystem ga zove „VE“ (sajt) i „MOQ“ (katalog — minimalna
+      // količina porudžbine), Befar „BOX QUANTITY“ bez objašnjenja. Samo informacija za
+      // pregled; „komada u kutiji“ ostaje „nije potvrđeno“ dok dobavljač ne potvrdi.
       salesPack: v.salesPack ?? null,
-      boxUnits: v.packagingUnit ?? v.boxQuantity ?? v.pcsPerPack ?? null,
+      supplierQty: v.packagingUnit ?? v.boxQuantity ?? v.pcsPerPack ?? null,
+      supplierQtyColumn: v.packagingUnit != null ? "Carsystem VE (sajt) / MOQ (katalog)" : v.boxQuantity != null ? "Befar BOX QUANTITY (katalog)" : v.pcsPerPack != null ? "pcsPerPack" : null,
     })),
   }));
 }
@@ -156,15 +159,16 @@ for (const r of sifarnik) {
     ...base, status: "predlog", nivo_dokaza: best.e, dokaz: best.why,
     proizvod: best.prod.slug, naziv_u_katalogu: best.prod.name,
     varijanta: best.v ? best.v.id : null, varijanta_opis: best.v?.label ?? "",
-    prodajno_pakovanje_katalog: best.v?.salesPack ?? "", komada_u_kutiji_katalog: best.v?.boxUnits ?? "",
-    izvor_kutije: best.v?.boxUnits ? `katalog proizvođača (${brand}), polje packagingUnit` : "nije potvrđeno",
+    prodajno_pakovanje_katalog: best.v?.salesPack ?? "",
+    kolicina_dobavljaca: best.v?.supplierQty ?? "", kolona_dobavljaca: best.v?.supplierQtyColumn ?? "",
+    komada_u_kutiji: "nije potvrđeno",
     razlike: diffs.join("; "),
   });
 }
 
 mkdirSync(outDir, { recursive: true });
 writeFileSync(`${outDir}/predlozi-veza.json`, JSON.stringify(out, null, 1));
-const cols = ["sifra", "naziv", "jm", "aktivan", "prodato_kupcima_12m", "brend", "status", "nivo_dokaza", "dokaz", "proizvod", "naziv_u_katalogu", "varijanta", "varijanta_opis", "zapremina_iz_naziva", "prodajno_pakovanje_katalog", "komada_u_kutiji_katalog", "izvor_kutije", "razlike"];
+const cols = ["sifra", "naziv", "jm", "aktivan", "prodato_kupcima_12m", "brend", "status", "nivo_dokaza", "dokaz", "proizvod", "naziv_u_katalogu", "varijanta", "varijanta_opis", "zapremina_iz_naziva", "prodajno_pakovanje_katalog", "kolicina_dobavljaca", "kolona_dobavljaca", "komada_u_kutiji", "razlike"];
 const csv = [cols.join(";"), ...out.map((o) => cols.map((c) => `"${String(o[c] ?? "").replace(/"/g, '""')}"`).join(";"))].join("\n");
 writeFileSync(`${outDir}/predlozi-veza.csv`, "\uFEFF" + csv);
 const count = (f) => out.filter(f).length;

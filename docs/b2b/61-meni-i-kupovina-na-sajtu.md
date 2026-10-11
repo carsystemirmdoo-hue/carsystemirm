@@ -139,3 +139,30 @@ potvrđuju ručno po artiklu: više Vašeg rada, a ne više programiranja.
 | Odgovor: da li je „Kat. br.“ popunjen za većinu artikala (procena: ~sve / pola / retko) | od toga zavisi koliko veza se predlaže samo | pogled na nekoliko strana šifarnika |
 | **Kontrolni uzorak**: 10 artikala koje dobro poznajete (BizniSoft šifra + koji je to proizvod u katalogu) | provera da predlog po Kat. br. daje tačnu vezu | ručno, papir ili poruka |
 | JM kojom se prodaju lakovi i razređivači (LIT ili KOM po limenci) | prikaz cene po JM i pakovanju | šifarnik |
+
+### B.6 Stanje (grana `feat/kupovina-na-sajtu`, nije spojeno ni objavljeno)
+
+| Korak | Lokalno | Pregledač (sintetička baza) | Objavljeno |
+|---|---|---|---|
+| K1 alat za predloge veza (`scripts/catalog/biznisoft-catalog-proposals.mjs`; dokazi E1 šifra/kataloški broj, E2 kod proizvođača, E3 samo sličan naziv) | ✅ | — (izlaz privatan) | ne |
+| K1 potvrda veza | ⏳ čeka potvrdu 10 kontrolnih veza; ništa nije upisano | — | ne |
+| K2 jedan obračun (`loadCatalogRequestOffers`, isti `priceLines` kao korpa) | ✅ | ✅ | ne |
+| K3 prikaz: pakovanje po BizniSoft artiklu, cena po JM bez/sa PDV-om po odobrenoj opciji, osnova (osnovna − rabat), „Cena na upit“ | ✅ | ✅ | ne |
+| K4 ista serverska korpa iz kataloga i „Poručite ponovo“, broj stavki u zaglavlju | ✅ | ✅ | ne |
+| K5 slanje uz ponovni obračun; „Moj nalog“ → Podaci firme | ✅ | ✅ | ne |
+| K6 tok `synthetic-portal-flow.mjs sajt` | ✅ | ✅ 32/32 | — |
+
+Pravila koja važe u kodu:
+- „Kataloški broj“ iz BizniSofta se ne koristi kao broj proizvođača (najčešće ponavlja internu šifru).
+- Šifra se poredi kao tekst od šest cifara (`000000`), bez dodavanja ili brisanja nula van tog pravila.
+- Iz kataloga se u korpu dodaje samo artikal sa **potvrđenom** vezom (`mapped`); predlog nije potvrda.
+- Komada u kutiji je informacija, nikad minimum.
+
+Šta K6 proverava (sintetički podaci): neprijavljen posetilac (ni panel, ni cena u HTML-u, API `no-store`); dve firme sa različitim rabatom u dva prozora istovremeno; jedna i dve opcije plaćanja; prijava sa početne, iz kataloga i sa proizvoda (sa `?varijanta=`) i povratak na istu stranu; odjava na istu stranu bez cena i ponovna prijava; ista korpa iz kataloga i „Poručite ponovo“, i posle ponovne prijave; telefon; dva pakovanja jedne kartice; povezan artikal bez cene i nepovezana varijanta → „Cena na upit“; promena rabata pre slanja → nova potvrda; prijem u kancelariji i štampa.
+
+Otvoreno:
+1. Potvrda 10 kontrolnih veza i odgovori (LIT po litru ili po limenci, „5/1“, razlika zapremine, dva pakovanja na kartici).
+2. Upis potvrđenih veza na Production — posebno odobrenje.
+3. Javna oznaka „Status: Na upit“ na strani proizvoda stoji i za prijavljenog kupca koji vidi cenu ispod (strana je statična).
+4. Stavka zahteva iz kataloga ne beleži katalošku varijantu (`catalog_product_slug`/`catalog_variant_id` prazni); kancelarija vidi šifru i naziv iz BizniSofta.
+5. Stari demo put (`loadCustomerOffers`, `addToCartAction`) više ne koristi katalog; uklanja se posebno.

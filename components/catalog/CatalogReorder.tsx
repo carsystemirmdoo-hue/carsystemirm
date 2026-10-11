@@ -51,8 +51,8 @@ export function CatalogReorder() {
           </p>
           <h2 id="reorder-title">Poručite ponovo</h2>
           <p className={styles.lead}>
-            Artikli koje ste ranije kupovali, iz potvrđenih faktura do {srDay(state.dataUntil)} Cenu i
-            dostupnost potvrđuje Vaš komercijalista.
+            Artikli koje ste ranije kupovali, iz potvrđenih faktura do {srDay(state.dataUntil)}. Cena je Vaša
+            važeća cena; raspoloživost i rok isporuke potvrđuje kancelarija.
           </p>
         </div>
         <span className={styles.headLinks}>

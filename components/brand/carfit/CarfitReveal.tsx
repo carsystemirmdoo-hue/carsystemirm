@@ -37,7 +37,9 @@ export function CarfitReveal({
         node.setAttribute("data-cf-reveal", "in");
         observer.disconnect();
       },
-      { rootMargin: "0px 0px -12% 0px", threshold: 0.08 },
+      // Prag 0: blok viši od ~12 ekrana (lista proizvoda) nikad ne dostigne 8 % vidljivosti,
+      // pa bi sa pragom 0.08 zauvek ostao providan. Ulazak bilo kog dela u vidno polje je dovoljan.
+      { rootMargin: "0px 0px -12% 0px", threshold: 0 },
     );
 
     observer.observe(node);

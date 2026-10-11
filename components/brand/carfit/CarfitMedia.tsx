@@ -24,7 +24,6 @@ export function CarfitMedia({
   if (!slot.src) {
     return (
       <div className={`${styles.mediaFallback} ${className ?? ""}`} aria-hidden="true">
-        <p className={styles.mediaFallbackCode}>{slot.id}</p>
         <p className={styles.mediaFallbackMark}>
           {mark}
           <span>.</span>

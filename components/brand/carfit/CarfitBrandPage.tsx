@@ -219,7 +219,7 @@ export function CarfitBrandPage({ brand }: { brand: CarsystemBrand }) {
               <div className={styles.stage}>
                 <div className={`${styles.stageCell} ${styles.stageCellWide}`}>
                   <p className={styles.stageCode}>
-                    {heroProduct ? heroProduct.programName : carfitHero.media.id}
+                    {heroProduct?.programName ?? ""}
                   </p>
                   <div className={styles.stageMedia}>
                     {heroProduct?.image ? (
@@ -686,7 +686,7 @@ export function CarfitBrandPage({ brand }: { brand: CarsystemBrand }) {
                   Zvanični C.A.R.FIT katalog
                 </h2>
                 <p className={styles.sectionLead}>
-                  Kompletan program u jednom PDF-u — kitovi, punioci, klar lakovi, aerosoli i pribor.
+                  Kompletan program u jednom PDF-u — kitovi, punioci, bezbojni lakovi, aerosoli i pribor.
                 </p>
               </CarfitReveal>
 

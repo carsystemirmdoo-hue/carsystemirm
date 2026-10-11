@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useState, useTransition } from "react";
-import { addToCartAction } from "@/app/kupac/korpa/actions";
+import { addRequestItemAction } from "@/app/kupac/naruci/actions";
 import { ensureCustomerSession, hasCustomerMarker } from "@/components/customer-buy/customerSession";
 import type { ReorderItem, ReorderList } from "@/lib/customers/reorder";
 import styles from "./CatalogReorder.module.css";
@@ -166,19 +166,22 @@ function ReorderQuantity({ item }: { item: ReorderItem }) {
   const [state, setState] = useState<{ ok: boolean; text: string } | null>(null);
   const add = () =>
     start(async () => {
-      const r = await addToCartAction({ articleCode: item.articleCode, quantity: qty });
+      const r = await addRequestItemAction({ articleId: o.articleId, quantity: qty });
       setState(r.ok ? { ok: true, text: `Dodato u korpu (${r.count} ${r.count === 1 ? "stavka" : "stavke"}).` } : { ok: false, text: r.message });
+      if (r.ok) window.dispatchEvent(new CustomEvent("cs-korpa", { detail: { count: r.count } }));
     });
+  const unit = o.unit === "LIT" ? "L" : o.unit === "KOM" ? "kom" : o.unit.toLowerCase();
   return (
     <div className={styles.order}>
       <p className={styles.orderFacts}>
-        {o.packLabel} · JM {o.unit}
-        <br />
-        <strong>
-          {money.format(o.netPrice)} {o.currency}
-        </strong>{" "}
-        bez PDV-a / {o.unit} · PDV {o.vatPercent} %
-        {o.demoPriceList ? <span className={styles.demoPrice}>demo cenovnik</span> : null}
+        Cena po {unit}, bez PDV-a:
+        {o.prices.map((p) => (
+          <span key={p.label}>
+            <br />
+            {o.prices.length > 1 ? `${p.label}: ` : ""}
+            <strong>{money.format(p.netPrice)} RSD</strong> / {unit} · PDV {p.vatPercent} %
+          </span>
+        ))}
       </p>
       <div className={styles.orderRow}>
         <label className={styles.qtyLabel}>

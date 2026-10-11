@@ -388,3 +388,13 @@ export async function loadCustomerPurchasedArticles(
   }
   return [...byCode.values()];
 }
+
+/** Podaci firme za stranu „Podaci firme“ (dok. 61 K5). Firma isključivo iz sesije pozivaoca. */
+export async function loadCustomerCompany(customerId: string): Promise<{ name: string; pib: string; city: string | null } | null> {
+  if (!customerId) {
+    throw new Error("Upit kupca bez customer_id se ne sme izvršiti.");
+  }
+  const [row] = [...(await getDb().execute<{ name: string; pib: string; city: string | null }>(sql`
+    SELECT name, pib, city FROM customers WHERE id = ${customerId}::uuid`))];
+  return row ?? null;
+}

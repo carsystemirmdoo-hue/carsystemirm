@@ -2,14 +2,13 @@
 
 import Link from "next/link";
 import { useEffect, useMemo, useState, useTransition } from "react";
-import { addToCartAction } from "@/app/kupac/korpa/actions";
+import { addCatalogItemAction } from "@/app/kupac/naruci/actions";
 import { requestPriceAction } from "@/app/kupac/upiti/actions";
 import { useOptionalProductVariant } from "@/components/product/ProductVariantProvider";
-import type { CatalogOffer } from "@/lib/ordering/ordering-service";
-import { money, useCustomerOffers, type OffersPayload } from "./useCustomerOffers";
+import type { CatalogRequestOffer } from "@/lib/ordering/request-service";
+import { money, unitLabel, useCustomerOffers, withVat, type OffersPayload } from "./useCustomerOffers";
 import styles from "./CustomerBuy.module.css";
 
-const qfmt = new Intl.NumberFormat("sr-Latn-RS", { maximumFractionDigits: 3 });
 const same = (a: string | null | undefined, b: string | null | undefined) => Boolean(a && b && a.toLowerCase() === b.toLowerCase());
 
 /**
@@ -46,7 +45,6 @@ export function CustomerBuyPanel({ fallbackSlug, fallbackName }: { fallbackSlug:
     <section className={styles.panel} aria-labelledby="buy-panel-title">
       <header className={styles.panelHead}>
         <span className={styles.kicker}>Za Vašu firmu · {data.company}</span>
-        {data.ordering.enabled && data.ordering.priceList.kind === "demo" ? <span className={styles.demo}>DEMO cenovnik</span> : null}
       </header>
       <h2 id="buy-panel-title" className={styles.panelTitle}>
         {name}
@@ -54,7 +52,7 @@ export function CustomerBuyPanel({ fallbackSlug, fallbackName }: { fallbackSlug:
       </h2>
       {!data.ordering.enabled ? (
         <>
-          <p className={styles.note}>{data.ordering.reason} Cenu i uslove možete zatražiti ovde.</p>
+          <p className={styles.note}>{data.ordering.reason ?? "Poručivanje preko sajta još nije uključeno."} Cenu i uslove možete zatražiti ovde.</p>
           <PriceRequest data={data} slug={slug} variantKey={variantKey} articleCode={null} kind="no_price" />
         </>
       ) : orderable.length > 0 ? (
@@ -62,11 +60,9 @@ export function CustomerBuyPanel({ fallbackSlug, fallbackName }: { fallbackSlug:
       ) : (
         <>
           <p className={styles.note}>
-            {here.some((o) => o.reason === "rebate_unknown" || o.reason === "price_conflict")
-              ? "Cena na upit: Vaš rabat za ovaj artikal još nije potvrđen."
-              : here.length > 0
-                ? "Za ovu varijantu Vaša cena još nije određena u cenovniku."
-                : "Za ovaj proizvod Vaša cena još nije određena."}{" "}
+            {here.length > 0
+              ? "Cena na upit: za ovaj artikal Vaša cena još nije potvrđena."
+              : "Cena na upit: ovaj proizvod još nije povezan sa našim šifrarnikom."}{" "}
             Pošaljite zahtev — javiće Vam se komercijalista ili kancelarija.
           </p>
           <PriceRequest data={data} slug={slug} variantKey={variantKey} articleCode={here[0]?.articleCode ?? null} kind="no_price" />
@@ -76,72 +72,91 @@ export function CustomerBuyPanel({ fallbackSlug, fallbackName }: { fallbackSlug:
   );
 }
 
-function BuyForm({ data, offers, slug, variantKey }: { data: OffersPayload; offers: CatalogOffer[]; slug: string; variantKey: string | null }) {
-  const [code, setCode] = useState(offers[0].articleCode);
-  const offer = offers.find((o) => o.articleCode === code) ?? offers[0];
-  const [qty, setQty] = useState(String(offer.minQuantity));
+function BuyForm({ data, offers, slug, variantKey }: { data: OffersPayload; offers: CatalogRequestOffer[]; slug: string; variantKey: string | null }) {
+  const [id, setId] = useState(offers[0].articleId);
+  const offer = offers.find((o) => o.articleId === id) ?? offers[0];
+  const [qty, setQty] = useState(String(offer.step));
   const [pending, start] = useTransition();
   const [msg, setMsg] = useState<{ ok: boolean; text: string } | null>(null);
   const [askTerms, setAskTerms] = useState(false);
-  const currency = data.ordering.enabled ? data.ordering.priceList.currency : "RSD";
-  useEffect(() => setMsg(null), [code]);
+  useEffect(() => {
+    setMsg(null);
+    setQty(String(offer.step));
+  }, [id, offer.step]);
+  const unit = unitLabel(offer.unit);
+  // Samo ODOBRENE opcije kupca, istim redom kao u korpi.
+  const prices = data.options.map((o) => ({ option: o, price: offer.byOption[o.key] })).filter((x) => x.price);
 
   const add = () =>
     start(async () => {
-      const r = await addToCartAction({ articleCode: offer.articleCode, quantity: qty });
+      const r = await addCatalogItemAction({ articleId: offer.articleId, quantity: qty });
       setMsg(r.ok ? { ok: true, text: `Dodato u korpu (${r.count} ${r.count === 1 ? "stavka" : "stavke"}).` } : { ok: false, text: r.message });
+      if (r.ok) window.dispatchEvent(new CustomEvent("cs-korpa", { detail: { count: r.count } }));
     });
-
-  const vat = offer.netPrice !== null && offer.vatPercent !== null ? (offer.netPrice * offer.vatPercent) / 100 : null;
 
   return (
     <div className={styles.buy}>
       <fieldset className={styles.packs}>
-        <legend>Pakovanje</legend>
-        {offers.map((o) => (
-          <label key={o.articleCode} className={styles.pack} data-active={o.articleCode === offer.articleCode ? "true" : undefined}>
-            <input type="radio" name={`pack-${slug}-${variantKey ?? ""}`} value={o.articleCode} checked={o.articleCode === offer.articleCode} onChange={() => setCode(o.articleCode)} />
-            <span>
-              <strong>{o.packLabel}</strong>
-              <small>
-                JM {o.unit} · šifra {o.articleCode}
-              </small>
-            </span>
-            <span className={styles.packPrice}>
-              {money.format(o.netPrice!)} {currency}
-              <small>bez PDV-a / {o.unit}</small>
-            </span>
-          </label>
-        ))}
+        <legend>Pakovanje (BizniSoft artikal)</legend>
+        {offers.map((o) => {
+          const first = data.options.map((x) => o.byOption[x.key]).find((p) => p?.status === "cena");
+          return (
+            <label key={o.articleId} className={styles.pack} data-active={o.articleId === offer.articleId ? "true" : undefined}>
+              <input type="radio" name={`pack-${slug}-${variantKey ?? ""}`} value={o.articleId} checked={o.articleId === offer.articleId} onChange={() => setId(o.articleId)} />
+              <span>
+                <strong>{o.articleName}</strong>
+                <small>
+                  šifra {o.articleCode} · cena po {unitLabel(o.unit)}
+                </small>
+              </span>
+              <span className={styles.packPrice}>
+                {first && first.status === "cena" ? (
+                  <>
+                    {money.format(first.netPrice)} RSD
+                    <small>bez PDV-a / {unitLabel(o.unit)}</small>
+                  </>
+                ) : (
+                  <small>na upit</small>
+                )}
+              </span>
+            </label>
+          );
+        })}
       </fieldset>
 
-      <dl className={styles.priceFacts}>
-        <div>
-          <dt>Vaša cena bez PDV-a</dt>
-          <dd>
-            {money.format(offer.netPrice!)} {currency} / {offer.unit}
-          </dd>
-        </div>
-        <div>
-          <dt>PDV {qfmt.format(offer.vatPercent ?? 0)} %</dt>
-          <dd>
-            {vat !== null ? `${money.format(vat)} ${currency}` : "—"}
-          </dd>
-        </div>
-        <div>
-          <dt>Osnov</dt>
-          <dd>
-            {offer.discountPercent
-              ? `cenovnik ${money.format(offer.listPrice!)} − rabat ${qfmt.format(offer.discountPercent)} %`
-              : "cenovnička cena, ugovoreni rabat 0 %"}
-          </dd>
-        </div>
+      <dl className={styles.priceFacts} aria-label="Vaša cena po opciji plaćanja">
+        {prices.map(({ option, price }) =>
+          price.status === "cena" ? (
+            <div key={option.key}>
+              <dt>
+                {option.label}
+                {option.note ? <small> · {option.note}</small> : null}
+              </dt>
+              <dd>
+                <strong>
+                  {money.format(price.netPrice)} RSD / {unit}
+                </strong>{" "}
+                bez PDV-a · {money.format(withVat(price.netPrice, price.vatPercent))} RSD sa PDV-om ({money.format(price.vatPercent)} %)
+                <small>
+                  {price.discountPercent
+                    ? `osnovna ${money.format(price.listPrice)} − rabat ${money.format(price.discountPercent)} %`
+                    : "osnovna cena, ugovoreni rabat 0 %"}
+                </small>
+              </dd>
+            </div>
+          ) : (
+            <div key={option.key}>
+              <dt>{option.label}</dt>
+              <dd>na upit</dd>
+            </div>
+          ),
+        )}
       </dl>
 
       <div className={styles.row}>
         <label className={styles.qty}>
-          <span>Količina ({offer.unit})</span>
-          <input type="number" inputMode="decimal" min={offer.minQuantity} step={offer.quantityStep} value={qty} onChange={(e) => setQty(e.target.value)} disabled={pending} />
+          <span>Količina ({unit})</span>
+          <input type="number" inputMode="decimal" min={offer.step} step={offer.step} value={qty} onChange={(e) => setQty(e.target.value)} disabled={pending} />
         </label>
         <button type="button" className={styles.add} onClick={add} disabled={pending} aria-busy={pending}>
           {pending ? "Dodajem…" : "Dodajte u korpu"}
@@ -153,9 +168,10 @@ function BuyForm({ data, offers, slug, variantKey }: { data: OffersPayload; offe
         </p>
       ) : null}
       <p className={styles.fine}>
-        Dostupnost i rok isporuke potvrđuje kancelarija pri potvrdi zahteva. Stanje zaliha se ne prikazuje.
+        Cena važi za {unit} kako je vodi BizniSoft. Opciju plaćanja birate u korpi, za ceo zahtev. Raspoloživost i rok isporuke potvrđuje kancelarija;
+        zahtev nije rezervacija ni faktura.
       </p>
-      {offer.discountPercent === 0 ? (
+      {prices.every((x) => x.price.status !== "cena" || x.price.discountPercent === 0) ? (
         askTerms ? (
           <PriceRequest data={data} slug={slug} variantKey={variantKey} articleCode={offer.articleCode} kind="special_terms" />
         ) : (

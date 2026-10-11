@@ -48,9 +48,16 @@ export function CustomerAccountMenu({ variant = "desktop", onNavigate }: { varia
       load();
     }
     window.addEventListener("focus", load);
+    // Dodavanje u korpu sa kataloga ili „Poručite ponovo“ javlja novi broj stavki (ista serverska korpa).
+    const onCart = (e: Event) => {
+      const count = (e as CustomEvent<{ count?: number }>).detail?.count;
+      if (typeof count === "number") setState((st) => (st && st.signedIn ? { ...st, cartCount: count } : st));
+    };
+    window.addEventListener("cs-korpa", onCart);
     return () => {
       alive = false;
       window.removeEventListener("focus", load);
+      window.removeEventListener("cs-korpa", onCart);
     };
   }, [pathname]);
 
@@ -85,11 +92,16 @@ export function CustomerAccountMenu({ variant = "desktop", onNavigate }: { varia
     );
   }
 
+  const cartLabel = state.cartCount ? `Korpa (${state.cartCount})` : "Korpa";
+  // „Moj nalog“ otvara postojeći kupčev panel (dok. 61 K5).
   const links = [
     { href: "/kupac", label: "Pregled naloga" },
-    { href: "/kupac/korpa", label: state.cartCount ? `Korpa (${state.cartCount})` : "Korpa" },
+    { href: "/kupac/korpa", label: cartLabel },
     { href: "/kupac/fakture", label: "Fakture" },
-    { href: "/kupac/porudzbine", label: "Porudžbine" },
+    { href: "/kupac/porudzbine", label: "Zahtevi i porudžbine" },
+    { href: "/kupac/upiti", label: "Upiti" },
+    { href: "/kupac/firma", label: "Podaci firme" },
+    { href: "/kupac/bezbednost", label: "Bezbednost naloga" },
   ];
 
   if (variant === "mobile") {
@@ -114,6 +126,10 @@ export function CustomerAccountMenu({ variant = "desktop", onNavigate }: { varia
 
   return (
     <div className={styles.root} ref={rootRef}>
+      <Link href="/kupac/korpa" className={styles.cart} aria-label={state.cartCount ? `Korpa, ${state.cartCount} stavki` : "Korpa"}>
+        <CartIcon />
+        {state.cartCount ? <span className={styles.cartCount}>{state.cartCount}</span> : null}
+      </Link>
       <button
         type="button"
         className={styles.trigger}
@@ -143,6 +159,16 @@ export function CustomerAccountMenu({ variant = "desktop", onNavigate }: { varia
         </div>
       ) : null}
     </div>
+  );
+}
+
+function CartIcon() {
+  return (
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <path d="M3 4h2l2.4 11.2a1.5 1.5 0 0 0 1.5 1.2h8.6a1.5 1.5 0 0 0 1.5-1.1L21 8H6.2" />
+      <circle cx="10" cy="20" r="1.2" />
+      <circle cx="17.5" cy="20" r="1.2" />
+    </svg>
   );
 }
 

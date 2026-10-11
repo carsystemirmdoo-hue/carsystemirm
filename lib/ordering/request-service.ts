@@ -14,7 +14,7 @@ import { approvedPaymentOptions } from "@/lib/pricing/payment-option-service";
 import { optionLabel, optionNote } from "@/lib/pricing/paymentOptions.mjs";
 import { belgradeDate } from "@/lib/recommendations/customerRhythm.mjs";
 import { orderingEnabledFor } from "@/lib/ordering/trial";
-import { staleVersionProblem } from "@/lib/ordering/ordering-service";
+import { catalogOfferFacts, staleVersionProblem } from "@/lib/ordering/ordering-service";
 
 /** Radnja nad zastarelom verzijom zahteva — nosi važeću verziju za ponudu korisniku. */
 export class StaleVersionError extends Error {
@@ -155,6 +155,102 @@ async function priceLines(exec: Exec, customerId: string, items: { articleId: st
     };
   });
   return { options, selected, lines };
+}
+
+/* ---------------------------------------------------------------------------
+ * Ponude javnog kataloga — ISTI obračun kao korpa i slanje (dok. 61 K2)
+ * ------------------------------------------------------------------------ */
+
+export type CatalogRequestOffer = {
+  articleId: string;
+  articleCode: string;
+  /** BizniSoft naziv — u njemu je i zapremina pakovanja (npr. „… 5L“). */
+  articleName: string;
+  slug: string;
+  variantKey: string | null;
+  variantLabel: string | null;
+  cardKeys: string[];
+  catalogName: string;
+  /** BizniSoft jedinica mere: cena važi za nju (npr. LIT = po litru). */
+  unit: string;
+  /** Korak količine u JM (KOM = 1). */
+  step: number;
+  /** Cena po svakoj ODOBRENOJ opciji plaćanja kupca (ključ = šifra opcije ili „osnovni“). */
+  byOption: Record<string, OptionPrice>;
+  /** `orderable` = bar jedna opcija ima cenu; inače cena na upit. */
+  state: "orderable" | "no_price";
+};
+
+/**
+ * Sve POTVRĐENE veze artikal → katalog, sa cenom ovog kupca po odobrenim
+ * opcijama plaćanja. Isti `priceLines` kao korpa i slanje — nema drugog
+ * obračuna. Bez potvrđene veze artikal se ne nudi (katalog nudi upit); bez
+ * cene ili sa nepotvrđenim rabatom → „na upit“, nikad nula ni demo cena.
+ * Kupac isključivo iz sesije pozivaoca; rezultat se ne kešira.
+ */
+export async function loadCatalogRequestOffers(customerId: string): Promise<{
+  enabled: boolean;
+  reason: string | null;
+  options: { code: string | null; key: string; label: string; note: string | null }[];
+  offers: CatalogRequestOffer[];
+}> {
+  if (!customerId) throw new Error("Upit kupca bez customer_id se ne sme izvršiti.");
+  const db = getDb();
+  if (!(await orderingEnabledFor(customerId, db))) {
+    return { enabled: false, reason: "Poručivanje preko sajta još nije uključeno za Vašu firmu.", options: [], offers: [] };
+  }
+  const rows = [...(await db.execute<{ id: string; slug: string; variant: string | null }>(sql`
+    SELECT a.id, m.catalog_product_slug AS slug, m.catalog_variant_id AS variant
+      FROM article_catalog_mappings m JOIN articles a ON a.id = m.article_id
+     WHERE m.status = 'mapped' AND m.catalog_product_slug IS NOT NULL
+       AND NOT EXISTS (SELECT 1 FROM articles_out_of_programme o WHERE o.article_id = a.id)`))];
+  if (!rows.length) return { enabled: true, reason: null, options: [], offers: [] };
+  const today = belgradeDate(new Date());
+  const priced = await priceLines(db, customerId, rows.map((r) => ({ articleId: r.id, quantity: 1 })), null, today);
+  const byId = new Map(rows.map((r) => [r.id, r]));
+  const offers: CatalogRequestOffer[] = [];
+  for (const l of priced.lines) {
+    const r = byId.get(l.articleId)!;
+    const facts = catalogOfferFacts(r.slug, r.variant);
+    if (!facts.productExists || !facts.link) continue;
+    offers.push({
+      articleId: l.articleId,
+      articleCode: l.articleCode,
+      articleName: l.articleName,
+      slug: facts.link.slug,
+      variantKey: facts.link.variantKey,
+      variantLabel: facts.link.variantLabel,
+      cardKeys: facts.cardKeys,
+      catalogName: facts.link.name,
+      unit: l.unit,
+      step: l.step,
+      byOption: l.byOption,
+      state: Object.values(l.byOption).some((p) => p.status === "cena") ? "orderable" : "no_price",
+    });
+  }
+  return { enabled: true, reason: null, options: priced.options, offers };
+}
+
+/**
+ * Cene kupca za zadate artikle (isti `priceLines`) — za „Poručite ponovo“, koji
+ * puni istu korpu i za artikle bez kataloške veze (kupac ih zna sa fakture).
+ */
+export async function loadArticleRequestPrices(customerId: string, articleIds: string[]) {
+  if (!customerId) throw new Error("Upit kupca bez customer_id se ne sme izvršiti.");
+  const ids = [...new Set(articleIds.filter(isUuid))];
+  const db = getDb();
+  if (!ids.length || !(await orderingEnabledFor(customerId, db))) return { enabled: ids.length ? false : true, options: [], lines: new Map<string, RequestLine>() };
+  const priced = await priceLines(db, customerId, ids.map((articleId) => ({ articleId, quantity: 1 })), null, belgradeDate(new Date()));
+  return { enabled: true, options: priced.options, lines: new Map(priced.lines.map((l) => [l.articleId, l])) };
+}
+
+/** Dodavanje iz javnog kataloga: artikal mora imati POTVRĐENU vezu (dok. 61 K4). */
+export async function addCatalogItem(session: CustomerSession, input: { articleId: string; quantity: unknown }): Promise<RequestCartChange> {
+  if (!isUuid(input.articleId)) return { ok: false, message: "Neispravan artikal." };
+  const [m] = [...(await getDb().execute<{ ok: boolean }>(sql`
+    SELECT true AS ok FROM article_catalog_mappings WHERE article_id = ${input.articleId}::uuid AND status = 'mapped' LIMIT 1`))];
+  if (!m) return { ok: false, message: "Ovaj artikal još nije povezan sa katalogom — zatražite cenu/uslove." };
+  return addRequestItem(session, input);
 }
 
 function fingerprintOf(option: string | null, lines: RequestLine[]) {

@@ -134,6 +134,20 @@ export type CatalogLink = {
   variantLabel: string | null;
 };
 
+/**
+ * Kataloški podaci veze (proizvod, varijanta-red, kartice na kojima se nudi) za
+ * zajedničke ponude kataloga (`loadCatalogRequestOffers`, dok. 61 K2).
+ */
+export function catalogOfferFacts(slug: string | null, variantId: string | null) {
+  const facts = catalogFacts(slug, variantId);
+  const product = slug ? getCarsystemProductBySlug(slug) : null;
+  const family = product ? getFamilyForProduct(product) : null;
+  return {
+    ...facts,
+    cardKeys: product ? [product.slug, ...(family ? [`family:${family.slug}`] : [])] : [],
+  };
+}
+
 function catalogFacts(slug: string | null, variantId: string | null) {
   const product = slug ? getCarsystemProductBySlug(slug) : null;
   if (!product) return { productExists: false, rowVariantKeys: [] as string[], link: null as CatalogLink | null };

@@ -1,15 +1,16 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import type { CatalogOffer } from "@/lib/ordering/ordering-service";
+import type { CatalogRequestOffer } from "@/lib/ordering/request-service";
 import { ensureCustomerSession, hasCustomerMarker } from "./customerSession";
 
 export type OffersPayload = {
   signedIn: true;
   company: string;
-  demo: boolean;
-  ordering: { enabled: true; priceList: { name: string; kind: "demo" | "biznisoft"; currency: string } } | { enabled: false; reason: string };
-  offers: CatalogOffer[];
+  ordering: { enabled: true } | { enabled: false; reason: string | null };
+  /** Odobrene opcije plaćanja kupca (bez odobrene: jedna „osnovni“). */
+  options: { code: string | null; key: string; label: string; note: string | null }[];
+  offers: CatalogRequestOffer[];
   contacts: { reps: { name: string; email: string }[]; office: {
       phone: string | null;
       phoneHref: string | null;
@@ -51,3 +52,14 @@ export function useCustomerOffers(): OffersPayload | null | undefined {
 }
 
 export const money = new Intl.NumberFormat("sr-Latn-RS", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+
+/** BizniSoft JM za kupca: LIT → „L“, KOM → „kom“. */
+export function unitLabel(unit: string | null | undefined) {
+  const u = String(unit ?? "").toUpperCase();
+  return u === "LIT" ? "L" : u === "KOM" ? "kom" : u === "KG" ? "kg" : u.toLowerCase() || "JM";
+}
+
+/** Prikaz cene sa PDV-om (zaokruženo na paru); obračun zahteva radi server. */
+export function withVat(net: number, vatPercent: number) {
+  return Math.round(net * (100 + vatPercent)) / 100;
+}

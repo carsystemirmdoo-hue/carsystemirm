@@ -2,7 +2,9 @@ import "server-only";
 import { getCarsystemProductBySlug, getProductVariantSelector } from "@/lib/carsystem-data";
 import { loadCustomerPurchasedArticles } from "@/lib/customers/customer-queries";
 import { loadDatasetInfo } from "@/lib/data-state/dataset";
-import { loadOffersByCode } from "@/lib/ordering/ordering-service";
+import { sql } from "drizzle-orm";
+import { getDb } from "@/db/client";
+import { loadArticleRequestPrices, type RequestLine } from "@/lib/ordering/request-service";
 import { variantRedirectTarget } from "@/lib/product-families";
 import { loadCustomerProfile } from "@/lib/recommendations/customer-profile";
 import { belgradeDate } from "@/lib/recommendations/customerRhythm.mjs";
@@ -41,20 +43,18 @@ export type ReorderItem = {
   /** Put kada veza sa katalogom ne postoji: kupčeve fakture sa ovim artiklom. */
   invoicesHref: string;
   /**
-   * Poručivo SADA: potvrđena veza, tačna varijanta, stavka aktivnog cenovnika
-   * i uključeno poručivanje. Samo tada kartica nudi količinu i korpu.
+   * Poručivo SADA: poručivanje uključeno za firmu i bar jedna odobrena opcija
+   * plaćanja ima cenu (isti obračun kao korpa). Puni ISTU korpu.
    */
   orderable: boolean;
   /** Podaci za unos količine; `null` kada artikal nije poručiv. */
   order: {
+    articleId: string;
     unit: string;
-    packLabel: string;
-    netPrice: number;
-    vatPercent: number;
-    currency: string;
     step: number;
     suggestedQuantity: number;
-    demoPriceList: boolean;
+    /** Cena po svakoj odobrenoj opciji plaćanja, bez PDV-a, po JM. */
+    prices: { label: string; netPrice: number; vatPercent: number }[];
   } | null;
 };
 
@@ -72,28 +72,20 @@ function imageOf(src: string | null | undefined, alt: string) {
 }
 
 function orderFields(
-  offer: Awaited<ReturnType<typeof loadOffersByCode>> extends Map<string, infer T> ? T | undefined : never,
-  presented: ReorderItem["product"],
+  line: RequestLine | undefined,
+  options: { key: string; label: string }[],
   events: { quantity: number; units: (string | null)[] }[],
 ): Pick<ReorderItem, "orderable" | "order"> {
-  // Poručiva stavka mora biti i PRIKAZANA kao proizvod — ista potvrđena veza.
-  if (!offer || offer.problem || !offer.price || !presented) return { orderable: false, order: null };
+  if (!line || line.problem) return { orderable: false, order: null };
+  const prices = options.flatMap((o) => {
+    const p = line.byOption[o.key];
+    return p?.status === "cena" ? [{ label: o.label, netPrice: p.netPrice, vatPercent: p.vatPercent }] : [];
+  });
+  if (!prices.length) return { orderable: false, order: null };
   const usual = usualQuantity(events);
-  const step = offer.price.quantityStep;
-  const suggested = usual && usual.unit === offer.price.unit ? Math.max(offer.price.minQuantity, Math.round(usual.low / step) * step) : offer.price.minQuantity;
-  return {
-    orderable: true,
-    order: {
-      unit: offer.price.unit,
-      packLabel: offer.price.packLabel,
-      netPrice: offer.price.netPrice,
-      vatPercent: offer.price.vatPercent,
-      currency: offer.price.currency,
-      step,
-      suggestedQuantity: suggested,
-      demoPriceList: offer.price.listKind === "demo",
-    },
-  };
+  const step = line.step;
+  const suggested = usual && usual.unit?.toUpperCase() === line.unit ? Math.max(step, Math.round(usual.low / step) * step) : step;
+  return { orderable: true, order: { articleId: line.articleId, unit: line.unit, step, suggestedQuantity: suggested, prices } };
 }
 
 /** Samo kupčeva istorija. `customerId` dolazi isključivo iz kupčeve sesije. */
@@ -115,7 +107,13 @@ export async function loadReorderList(customerId: string, now: Date = new Date()
   }));
   const chosen = orderReorderItems(candidates);
 
-  const offers = await loadOffersByCode(customerId, chosen.map((a) => a.articleCode));
+  // Cene iz ISTOG obračuna kao korpa (dok. 61 K4): šifra → artikal → priceLines.
+  const codes = chosen.map((a) => a.articleCode);
+  const idRows = codes.length
+    ? [...(await getDb().execute<{ id: string; code: string }>(sql`SELECT id, code FROM articles WHERE code IN (${sql.join(codes.map((c) => sql`${c}`), sql`, `)})`))]
+    : [];
+  const idByCode = new Map(idRows.map((r) => [r.code, r.id]));
+  const priced = await loadArticleRequestPrices(customerId, idRows.map((r) => r.id));
 
   const items: ReorderItem[] = chosen.map((a) => {
     const bought = byCode.get(a.articleCode);
@@ -151,7 +149,7 @@ export async function loadReorderList(customerId: string, now: Date = new Date()
       lastPurchaseOn: a.lastPurchaseOn,
       product: presented,
       invoicesHref: `/kupac/fakture?q=${encodeURIComponent(a.articleCode)}`,
-      ...orderFields(offers.get(a.articleCode), presented, bought?.events ?? []),
+      ...orderFields(priced.lines.get(idByCode.get(a.articleCode) ?? ""), priced.options, bought?.events ?? []),
     };
   });
 

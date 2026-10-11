@@ -74,10 +74,11 @@ for (const r of sif) {
   else if (!hits.length) [status, why] = ["predlog — stari broj", "poklapa se samo sa starim kataloškim brojem; pravilo važi za važeću šifru"];
   else if (hits.length > 1) [status, why] = ["sukob — višestruko poklapanje", "ista šifra kod više kataloških varijanti"];
   else if (hits[0].removed) [status, why] = ["izostavljeno", "kartica je uklonjena iz kataloga za kupce"];
-  else if (nameBrand && nameBrand !== hits[0].brand) [status, why] = ["sukob — brend", `naziv ukazuje na ${nameBrand}, šifra na ${hits[0].brand}`];
-  else if (!nameBrand) [status, why] = ["provera — naziv bez brenda", "šifra se poklapa, ali naziv ne nosi oznaku brenda (CS/BEFAR…): uporediti naziv i kataloški proizvod (slučajno ista šifra je moguća)"];
+  // Prvo da li je artikal uopšte aktivan u portalu, pa tek onda provera brenda u nazivu.
   else if (!p) [status, why] = ["nije u portalu", "artikal postoji samo u šifarniku (nema ga u portalu) — ne dodaje se"];
   else if (!(p.kupaca_12m > 0)) [status, why] = ["bez prodaje poslednjih 12 meseci", "veza po pravilu postoji; izostavljeno iz prvog upisa (ne uklanja se iz kataloga)"];
+  else if (nameBrand && nameBrand !== hits[0].brand) [status, why] = ["sukob — brend", `naziv ukazuje na ${nameBrand}, šifra na ${hits[0].brand}`];
+  else if (!nameBrand) [status, why] = ["provera — naziv bez brenda", "šifra se poklapa, ali naziv ne nosi oznaku brenda (CS/BEFAR…): uporediti naziv i kataloški proizvod (slučajno ista šifra je moguća)"];
   else {
     const piece = ["KOM", "KT"].includes(String(p.unit).toUpperCase());
     const sp = Number(hits[0].salesPack);

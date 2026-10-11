@@ -67,7 +67,10 @@ def local_of(x):
     if x['slug']=='baslac-30-s510-s-serija':
         return "public/products/baslac/baslac-30-s510-s-serija.webp postoji, ali prikazuje drugi proizvod (35-M1020) — ne koristi se"
     return "Nema (pretraženi public/, review-assets/, assets/, tmp/, _incoming/)"
+SYSTEMS={'rm-agilis-x-treme':'AGILIS X-TREME','rm-onyx-hd-tropical':'ONYX HD TROPICAL'}
 def need_of(x):
+    if x['slug'] in SYSTEMS:
+        return "Odluka o prikazu SISTEMA "+SYSTEMS[x['slug']]+" (nema jednu ambalažu): npr. bez fotografije, zvanična slika sistema/kolekcije ili konkretna komponenta — NE fotografisati jednu limenku"
     if x['brand']=='sata':
         reason=(unres.get(x['slug']) or {}).get('reason','')
         if reason.startswith('Vlasnik je ranije prihvatio placeholder'):
@@ -78,7 +81,7 @@ def need_of(x):
     if x['brand']=='cosmos-lac': return "Potvrda prava: pisana dozvola Cosmos Lac ili dopuna Brand Kit-a"
     if x['slug']=='baslac-30-s510-s-serija': return "Potvrda identiteta (Line 30 Topcoat ili 30 CV), pa Vaša fotografija ambalaže"
     if x['slug']=='rm-diamont-bezbojni-lak': return "Potvrda koji je to DIAMONT lak (šifra), pa Vaša fotografija ambalaže"
-    return "Vaša fotografija ambalaže (proizvođač ne objavljuje sliku ove šifre)"
+    return "Vaša fotografija ambalaže, ako je artikal u našoj ponudi (proizvođač ne objavljuje sliku ove šifre)"
 missing=[x for x in rows if 'placeholder' in (x['image'] or '') and not (x['brand']=='baslac' and x['redirect'])]
 pending=[x for x in rows if 'pending-rights' in (x['image'] or '') or (x['brand']=='rupes' and 'placeholder' not in (x['image'] or ''))]
 missing.sort(key=lambda x:(ORDER[x['brand']],x['name'].lower()))
@@ -118,31 +121,33 @@ def final_need(x,f):
     if f.get('need'): return f['need']
     return need_of(x)
 def status_of(x,f):
+    if x['slug'] in SYSTEMS: return 'nije pronađeno — čeka odluku o prikazu sistema'
     if f['match'].startswith('ČEKA'): return 'čeka potvrdu identiteta'
     if not f['file']:
         n=final_need(x,f)
-        return 'nije pronađeno — '+('placeholder prihvaćen' if n.startswith('Ništa') else 'potrebna Vaša fotografija')
+        return 'nije pronađeno — '+('placeholder prihvaćen' if n.startswith('Ništa') else 'potrebna Vaša fotografija (ako je u ponudi)')
     if not f['rights'].startswith('DA'):
         if f['match'].startswith('Potvrđeno'): return 'pronađeno — čeka pravo'
         if x['brand']=='cosmos-lac': return 'pronađeno — čeka pravo i Vašu odluku o zajedničkoj slici'
-        return 'pronađeno — čeka pravo i potvrdu varijante'
+        return 'kandidat (slika srodnog artikla) — bez uvoza dok se ne potvrdi šta prikazuje; čeka i pravo'
     if f['match'].startswith('Potvrđeno'): return 'pronađeno — spremno za uvoz'
     return 'pronađeno — čeka Vašu odluku o zajedničkoj slici'
 ws=wb.active; ws.title="Nedostaje fotografija"
 PRIV=os.environ.get("PRIVATNO")=="1"
-PROG=json.load(open("priv/program-zakljucak.json")) if PRIV else {}
-H=["#","Brend","Tačan naziv","Šifra proizvođača","Varijanta / pakovanje","Link naše stranice"]+(["Aktuelno u našem programu (interni šifarnik)"] if PRIV else [])+["1. Fotografija pronađena i preuzeta","2. Podudaranje proizvod / varijanta / pakovanje","3. Pravo objavljivanja","Izvorni URL slike","Stranica izvora","Lokalni fajl (za pregled, NIJE objavljen)","SHA-256","Potrebno od Vas","Predloženi upit za pretragu","Napomena iz izveštaja"]+EMPTYC
+PROG=json.load(open("priv/program-detalji.json")) if PRIV else {}
+H=["#","Brend","Tačan naziv","Šifra proizvođača","Varijanta / pakovanje","Link naše stranice"]+(["Aktuelno u našem programu","Pronađeno u pregledanom šifarniku (lager 23.07. / stanje 09.10.2026)","Trenutno stanje magacina","Istorijska evidencija (lager 23.07.2026)"] if PRIV else [])+["1. Fotografija pronađena i preuzeta","2. Podudaranje proizvod / varijanta / pakovanje","3. Pravo objavljivanja","Izvorni URL slike","Stranica izvora","Lokalni fajl (za pregled, NIJE objavljen)","SHA-256","Potrebno od Vas","Predloženi upit za pretragu","Napomena iz izveštaja"]+EMPTYC
 data=[]
 for i,x in enumerate(missing,1):
     code,cnote=code_of(x)
     note=note_of(x)+(f" ({cnote})" if cnote else "")
     f=row_status(x)
     st=status_of(x,f)
-    data.append([i,BR[x['brand']],x['name'],code,pack_of(x),SITE+x['href']]+([PROG.get(x['slug'],'nije provereno (van 25)')] if PRIV else [])+[f['found'],f['match'],f['rights'],f['url'],f['page'],
+    data.append([i,BR[x['brand']],x['name'],code,pack_of(x),SITE+x['href']]+([PROG[x['slug']]['aktuelno'],PROG[x['slug']]['sifarnik_tekst'],PROG[x['slug']]['magacin_sada'],PROG[x['slug']]['istorija_jul']] if (PRIV and x['slug'] in PROG) else (['nije provereno (van spiska 25)','nije provereno','nepoznato','—'] if PRIV else []))+[f['found'],f['match'],f['rights'],f['url'],f['page'],
                  ('~/Carsystem/radno/slike-za-pronalazenje/'+f['file']) if f['file'] else '',f['sha'][:16],final_need(x,f),query_of(x,code),note,
                  f['url'] or '', os.path.basename(f['file']) if f['file'] else '', st])
-sheet(ws,H,data,[5,10,40,16,18,38]+([46] if PRIV else [])+[40,48,40,40,34,46,18,36,34,50,34,30,30],EMPTYC)
+sheet(ws,H,data,[5,10,40,16,18,38]+([30,46,22,26] if PRIV else [])+[40,48,40,40,34,46,18,36,34,50,34,30,30],EMPTYC)
 STATUS=[r[-1] for r in data]
+json.dump({x['slug']:{'status':st,'need':r[H.index('Potrebno od Vas')]} for x,st,r in zip(missing,STATUS,data)},open('statusi.json','w'),ensure_ascii=False,indent=1)
 
 ws2=wb.create_sheet("Čeka potvrdu prava")
 H2=["#","Brend","Tačan naziv","Šifra proizvođača","Varijanta / pakovanje","Link naše stranice","Slika koju već imamo (fajl u repou)","Poreklo slike","Šta treba potvrditi","Gde se danas prikazuje"]+["Odluka (da/ne)","Status"]
@@ -206,6 +211,9 @@ lines=[["Pregled pretrage fotografija — 2026-10-11"],[""],
  ["66 baslac redova iz druge sesije","To su baze sa sistemskih strana Line 30 (17 × 1 L) i Line 35 (17 × 1 L + 32 × 0,5 L). Nisu posebni proizvodi bez slike: baze se kupcu prikazuju na sistemskoj strani, a nedostaje jedna fotografija generičke limenke po pakovanju. Isti nalaz je već evidentiran kao 3 slota ambalaže (OLD-043…045): 66 varijanti = 3 potrebne fotografije (Line 30 1 L: 17, Line 35 1 L: 17, Line 35 0,5 L: 32). Sa Line 45 (68 baza, prikazuje se primer limenke) ukupno 134 baze = 7 fotografija. Mapiranje svake varijante je na listu „baslac ambalaža po zapremini”. Nisu ponovljeni nalazi među 189 — preklapanje je 0."],
  ["FO-314","Prebačeno u „čeka potvrdu identiteta”: etiketa ne nosi šifru ni nijansu, Brand Kit isti fajl nosi i kao FO-313 (zvanični FO-313 je Cherry Dark), a poklopac je crven, bliži FO-312/313 nego pink nijansama 308–310."],
  ["Cosmos Brand Kit — pravo","ISPRAVKA: ranije označeno kao potvrđeno. Brand Kit je zvaničan izvor (742 objavljene slike), ali pisana dozvola za web upotrebu nije dokumentovana — vidi nacrt zahteva Cosmos Lac-u."],
+ ["Ponuda i magacin","Za 25 proizvoda bez pronađene slike ponuda nije potvrđena; odsustvo iz pregledanog šifarnika NE znači uklanjanje sa sajta. Trenutno stanje magacina je nepoznato dok ga vlasnik ne proveri (spisak: MAGACIN_PROVERA.xlsx, privatno)."],
+ ["Sistemi bez šifre","AGILIS X-TREME i ONYX HD TROPICAL: nema zahteva za fotografiju jedne ambalaže — traži se odluka o prikazu sistema."],
+ ["SATA — slike srodnih artikala","7 slika su samo kandidati: ne uvoze se dok se ne potvrdi šta tačno prikazuju (i dok nema prava)."],
  ["Pregled sa slikama","~/Carsystem/radno/slike-za-pronalazenje/PREGLED_SPORNIH_SLIKA.html (i .jpg): 8 Cosmos sa zajedničkom slikom, 7 SATA sa slikom srodnog artikla, FO-314; neslaganje 175/185 ml za Chrome 450 / Gold 451 je istaknuto — katalog NIJE menjan."],
  [""],["Stanje","Broj"]]+[[k,v] for k,v in sorted(cnt.items(),key=lambda t:-t[1])]+[[""],["Po brendu","Stanja"]]+[[b, "; ".join(f"{k}: {v}" for k,v in c.items())] for b,c in byb.items()]+[[""],
  ["Gde su fajlovi","~/Carsystem/radno/slike-za-pronalazenje/preuzeto/<brend>/ — van git-a, nije objavljeno. SATA _manifest.json ima URL, SHA-256 i stranicu artikla za svaki fajl."],

@@ -17,7 +17,7 @@ Ranije postojećeg glavnog fajla za nedostatke javnog sajta nije bilo. Najbliži
 
 ---
 
-## 0. Stanje posle ispravki (2026-10-11, veče)
+## 0. Stanje posle ispravki (2026-10-11, veče; dopunjeno drugim krugom)
 
 **Grana:** `fix/javni-sajt-2026-10-11` (od `company/main` d81267f), radno stablo `~/Carsystem/radno/javni-sajt-ispravke`. Nije pushovano, nema deploya.
 **Provera:** izolovani produkcioni build iste grane (`NEXT_DIST_DIR=.next-javni`, port 3520). Pre ispravki je baza ponovo izmerena u istom buildu, pa su ključni browser nalazi potvrđeni nezavisno od `.next-verify` koji je druga sesija ponovo izgradila u 16:42.
@@ -27,12 +27,12 @@ Stanje svakog reda je u CSV-u, u novim kolonama `stanje` i `resenje_i_provera`.
 
 | Stanje | Redova | Napomena |
 |---|---:|---|
-| REŠENO | 416 | proveren konkretan prikaz u izolovanom buildu |
-| DELIMIČNO | 3 | rešen tekst, ali ostaje odluka ili materijal |
+| REŠENO | 469 | proveren konkretan prikaz u izolovanom buildu |
+| DELIMIČNO | 4 | rešen tekst, ali ostaje odluka ili materijal |
 | NIJE NEDOSTATAK | 39 | ponovo provereno: npr. različite vrednosti iste oznake, zvanični engleski nazivi SATA, pogrešno prebrojane kartice |
-| OTVORENO | 566 | slike, prava, tvrdnje, odluke i stavke van ovog kruga |
+| OTVORENO | 512 | slike, prava, tvrdnje, odluke i stavke van ovog kruga |
 
-Po radnom redu: red 1 — 376 rešeno, 39 nije nedostatak, 2 delimično, 170 otvoreno · red 2 — 38 rešeno, 1 delimično, 92 otvoreno · red 3 — 2 rešeno (sušenje baslac 40-440/40-450 prema zvaničnom TDS-u), 304 otvoreno.
+Po radnom redu: red 1 — 426 rešeno, 39 nije nedostatak, 2 delimično, 120 otvoreno · red 2 — 41 rešeno, 2 delimično, 88 otvoreno · red 3 — 2 rešeno (sušenje baslac 40-440/40-450 prema zvaničnom TDS-u), 304 otvoreno.
 
 ### 0.1 Šta je rešeno i kako je provereno
 
@@ -47,11 +47,18 @@ Po radnom redu: red 1 — 376 rešeno, 39 nije nedostatak, 2 delimično, 170 otv
 | Norbin i SATA tamna tema (JS-0210, JS-0211) | tokeni tamne teme; posebni tokeni za površinu i tamnu traku da bela slova na plavom ostanu bela | udeo svetlih blokova u tamnoj temi: Norbin 48 %/87 % → 0 %/0 %, SATA 35 %/54 % → 0 %/0 % (1.440/390) |
 | Katalog bez JavaScript-a (JS-0001) | spisak dokumenata se renderuje na serveru (`DocumentLibrarySections`), filter posle hidracije | statički HTML `/katalozi`: 0 → 50 PDF linkova |
 | SATA PDF (G04) | 65 jedinstvenih zamena: isti naziv fajla na zvaničnoj stranici **istog artikla** (sourceUrl), svaka proverena kao PDF (`%PDF`); primenjeno kroz `data/sata-sync` i potvrđeno sa `sata:sync:check` (0 razlika), menjaju se samo URL-ovi | svih 670 spoljnih linkova 200 (bilo 47 × 404); spisak zamena: `provera-2026-10-11/posle-ispravki/sata-pdf-zamene.json` |
+| SEO naslovi i opisi (JS-0166, JS-0474…JS-0515) | `trimAtWord` seče na kraju rečenice (ako je posle polovine limita) ili na granici reči sa „…”; R-M naslov nosi R-M oznaku kada je nema u nazivu | 1.167 PDP stranica: 0 duplih `<title>` (bilo 21 R-M par), 0 opisa koji se završavaju prekinutom rečenicom |
+| JSON-LD jezik dokumenta (JS-0475) | `inLanguage` = jezik PDF-a (iz podataka ili adrese; „Engleski” → `en`), umesto jezika sajta | tehnički listovi: `en` 516, `de` 7; `sr-Latn` ostaje samo na samoj (srpskoj) stranici grupe |
+| Navigacija (JS-0150, JS-0470) | RUPES u meniju „Brendovi” (tekstualna oznaka dok logo nije odobren) i u footeru; opis Norbin-a u meniju; `/korpa` → korpa kupca | meni prikazuje 9 brendova (snimak `posle-ispravki/zaglavlje-brendovi-rupes.png`); `/korpa` → `/kupac/korpa` → `/prijava/kupac?callbackUrl=/kupac/korpa`; korpa portala zaposlenih vodi direktno na `/portal/korpa` |
+| Pretraga (JS-0471, JS-0472, JS-0628) | mera se ne traži fuzzy (`600ml` je bio na distanci 1 od `400ml`); srpski sinonimi boja, završnica i abraziva; validator indeksa proverava ključ, ne reč | „600 ml” 689 → 0 (pakovanja od 600 ml nema u katalogu), „sprej crni mat” 886 → 5, „brusni disk” 7 → 14, „brusna traka” 3 → 10, „brusni papir” 1 → 2 (delimično); zabranjenih ključeva u indeksu 0 („purpose” je bio pojam iz „Multi Purpose Cup”) |
+| Cosmos alt (JS-0208, JS-0526) | alt = zvanični naziv (generator + 742 zapisa), bez „, zvanična Cosmos Lac ambalaža” | 0 pojava na brend strani i u katalogu; `cosmos:validate` i `cosmos-lac:sync:validate` prolaze |
+| F.23 (JS-0165) | Interface Pad 150 mm i Excenter Back Pad T.19 kao „Koristi se zajedno sa” | preporuka je potvrđena u `recommendedProductUrls` zvanične F.23 stranice (carsystem sync); oba linka na PDP-u |
+| baslac sistemi (JS-0625…JS-0627) | sekcija „Dokumentacija” sa zvaničnim TDS-om linije (30, 35, 45 i 30 CV) iz lokalne kopije baslac synca | sva 4 PDF-a 200 `application/pdf`; test vezuje link za `data/baslac-sync`; snimci `posle-ispravki/baslac-line-30-dokumentacija-*.png` (svetla 1.440 i tamna 390) |
 | Ostalo usput | množina „varijanta/varijante/varijanti”; „RAL RAL” u nazivu (5 Cosmos zapisa, slug nepromenjen); javna šifra (`publicCode`/`publicSkuOf`) i u listing prikazima i u bloku „Aktivna varijanta”; „brendove koje zastupamo” → „brendove iz naše ponude” (sigurna formulacija) | crawl: „2–4 varijanti” 22 → 0 strana, „RAL RAL” 1 → 0 |
 
-Regresija: `npm test` 77 grupa / 2.233 testa / 0 padova; `tsc`, `eslint` (izmenjeni fajlovi) i `content:check` čisti; svih 2.955 internih linkova i 3.022 slike 200; svih 670 spoljnih linkova 200; browser prolaz preko 1.271 stranice na 390 px (svetla tema) i 1.440 px (tamna tema): 0 horizontalnih preliva, 0 slika koje se ne učitaju, 0 grešaka u konzoli, 0 neuspelih zahteva (stranice sa timeout-om zbog poznatog AVIF zastoja lokalnog `next start` ponovljene posle restarta — sve prošle); provera skrivenog sadržaja na 41 stranici: Car Fit više nije skriven; footer na `/katalog` se otkriva tek na kraju beskonačne liste (provereno do 1.167. proizvoda — nije nedostatak); filteri `/katalog?program=…` 307/223/217/111/309 = brojevi na `/program`. Validatori kataloga i pretrage daju iste nalaze kao pre (postojeći dug: polje `purpose` u indeksu, 695 delta), bez novih.
+Regresija: `npm test` 77 grupa / 2.233 testa / 0 padova; `tsc`, `eslint` (izmenjeni fajlovi) i `content:check` čisti; svih 2.955 internih linkova i 3.022 slike 200; svih 670 spoljnih linkova 200; browser prolaz preko 1.271 stranice na 390 px (svetla tema) i 1.440 px (tamna tema): 0 horizontalnih preliva, 0 slika koje se ne učitaju, 0 grešaka u konzoli, 0 neuspelih zahteva (stranice sa timeout-om zbog poznatog AVIF zastoja lokalnog `next start` ponovljene posle restarta — sve prošle); provera skrivenog sadržaja na 41 stranici: Car Fit više nije skriven; footer na `/katalog` se otkriva tek na kraju beskonačne liste (provereno do 1.167. proizvoda — nije nedostatak); filteri `/katalog?program=…` 307/223/217/111/309 = brojevi na `/program`. Validatori kataloga i pretrage daju iste nalaze kao pre (postojeći dug: polje `purpose` u indeksu, 695 delta), bez novih. **Drugi krug:** `npm test` 77 grupa / 2.271 test / 0 padova (+ `lib/search/*.test.mjs` 54/0 i novi testovi za meru i baslac TDS); `validate-catalog-search-index` prolazi; `validate-search-deltas` 695 → 4 razlike koje potiču od ranijih syncova kataloga, ne od ovih izmena („ral” 130 → 131, „1 l” 79 → 82, „satajet” 1 → 31) — brojevi nisu ponovo zaključani bez pregleda.
 
-Commitovi na `fix/javni-sajt-2026-10-11`: `95fb06b` (izveštaj i dokazi), `e96a73d` Car Fit, `4a20bd1` tamna tema, `adbdc1a` /katalozi, `2c91b42` tehnički podaci i baslac sušenje, `86cb249` SATA PDF, `0b20dbd` sadržaj i brojevi, i završni docs commit.
+Commitovi na `fix/javni-sajt-2026-10-11`: `95fb06b` (izveštaj i dokazi), `e96a73d` Car Fit, `4a20bd1` tamna tema, `adbdc1a` /katalozi, `2c91b42` tehnički podaci i baslac sušenje, `86cb249` SATA PDF, `0b20dbd` sadržaj i brojevi, docs commitovi, i drugi krug (SEO, navigacija, pretraga, Cosmos alt, F.23, baslac TDS).
 
 Dva postojeća testa su namerno zaključala stare tekstove i ažurirana su: RUPES uvod (`scripts/carsystem-sync/third-party.test.mjs`) i broj pravila lokalizacije TDS-a (`lib/content-qa/releaseRegression.test.mts`, dodata provera sušenja 40-440/40-450). Novi test: `lib/technical-facts-display.test.mjs` (u `npm test`).
 
@@ -70,10 +77,10 @@ Poseban pregled: [`SLIKE_ZA_PRONALAZENJE.xlsx`](SLIKE_ZA_PRONALAZENJE.xlsx).
 ### 0.3 Šta ostaje otvoreno u radnom redu 1 (može bez Vas, ali nije bilo u ovom krugu)
 
 - Interne šifre R-M ručnih zapisa (`RM-DIA-BASE`, `RM-PASTA-190-1L`…) na karticama, JS-0020: zvanična šifra nije potvrđena, a skrivanje ključa traži odluku o prikazu.
-- Meta opisi presečeni usred rečenice (`trimAtWord`), 17 grupa duplih naslova, `inLanguage` dokumenta u JSON-LD.
-- RUPES u meniju i footeru (JS-0150), `/korpa` → prijava kupca (JS-0470).
+- Naslovi duži od 70 znakova (JS-0473, 318 stranica) — skraćivanje menja SEO tekst i treba urednički pregled.
 - Preostali anglicizmi i stilske preporuke iz uredničkog pregleda (G24-jezik preporuke).
-- F.23 kompatibilni proizvodi (JS-0165), srpski sinonimi u pretrazi (JS-0628).
+- „brusni papir” još ne nalazi Carsystem papirne diskove (JS-0628, delimično).
+- Ponovni pregled brojeva u `validate-search-deltas` („ral”, „1 l”, „satajet”).
 
 ### 0.4 Pitanja za Vas (ažurirano posle ispravki)
 

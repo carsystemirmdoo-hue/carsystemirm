@@ -331,6 +331,8 @@ test("katalog (dok. 61): ponuda samo za potvrđenu vezu, iste cene kao korpa; be
   const s = await svc();
   const slug = "baslac-70-10-silicone-remover-for-oil-silicone-and-grease";
   await db.sql`DELETE FROM customer_cart_items WHERE customer_id = ${customerId}`;
+  // Prethodni test ostavlja firmu „van pripreme portala“ — ovde je ponovo redovan kupac.
+  await db.sql`INSERT INTO customer_commercial_status_decisions (customer_id, status, reason, decided_by) VALUES (${customerId}, 'redovan', 'QA ponovo redovan', ${ids.owner})`;
   await db.sql`INSERT INTO article_catalog_mappings (article_id, catalog_product_slug, status, confirmed_by, confirmed_at) VALUES (${art.B1}, ${slug}, 'mapped', ${ids.owner}, now())`;
   await db.sql`INSERT INTO article_catalog_mappings (article_id, catalog_product_slug, status) VALUES (${art.N1}, ${slug}, 'suggested')`;
   try {
@@ -354,6 +356,11 @@ test("katalog (dok. 61): ponuda samo za potvrđenu vezu, iste cene kao korpa; be
     assert.equal(q.lines.length, 1);
     assert.equal((q.lines[0].byOption.avans as { netPrice: number }).netPrice, 560, "korpa i katalog: isti obračun");
     assert.equal(q.totals.net, 1120);
+    const sent = (await s.submitOrderRequest(session(), { idempotencyKey: randomUUID(), fingerprint: q.fingerprint, paymentOption: "avans" })) as { orderId: string };
+    assert.ok(sent.orderId, JSON.stringify(sent));
+    const [line] = await db.sql<{ slug: string | null; net: string }[]>`SELECT catalog_product_slug AS slug, net_price::text AS net FROM customer_order_lines WHERE order_id = ${sent.orderId}`;
+    assert.equal(line.slug, slug, "stavka zahteva pamti potvrđenu katalošku vezu");
+    assert.equal(Number(line.net), 560);
   } finally {
     await db.sql`DELETE FROM customer_cart_items WHERE customer_id = ${customerId}`;
     await db.sql`DELETE FROM article_catalog_mappings WHERE article_id IN (${art.B1}, ${art.N1})`;

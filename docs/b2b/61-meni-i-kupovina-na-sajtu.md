@@ -149,7 +149,7 @@ potvrđuju ručno po artiklu: više Vašeg rada, a ne više programiranja.
 | K2 jedan obračun (`loadCatalogRequestOffers`, isti `priceLines` kao korpa) | ✅ | ✅ | ne |
 | K3 prikaz: pakovanje po BizniSoft artiklu, cena po JM bez/sa PDV-om po odobrenoj opciji, osnova (osnovna − rabat), „Cena na upit“ | ✅ | ✅ | ne |
 | K4 ista serverska korpa iz kataloga i „Poručite ponovo“, broj stavki u zaglavlju | ✅ | ✅ | ne |
-| K5 slanje uz ponovni obračun; „Moj nalog“ → Podaci firme | ✅ | ✅ | ne |
+| K5 slanje uz ponovni obračun; stavka pamti potvrđenu katalošku vezu; „Moj nalog“ → Podaci firme | ✅ | ✅ | ne |
 | K6 tok `synthetic-portal-flow.mjs sajt` | ✅ | ✅ 32/32 | — |
 
 Pravila koja važe u kodu:
@@ -164,5 +164,4 @@ Otvoreno:
 1. Potvrda 10 kontrolnih veza i odgovori (LIT po litru ili po limenci, „5/1“, razlika zapremine, dva pakovanja na kartici).
 2. Upis potvrđenih veza na Production — posebno odobrenje.
 3. Javna oznaka „Status: Na upit“ na strani proizvoda stoji i za prijavljenog kupca koji vidi cenu ispod (strana je statična).
-4. Stavka zahteva iz kataloga ne beleži katalošku varijantu (`catalog_product_slug`/`catalog_variant_id` prazni); kancelarija vidi šifru i naziv iz BizniSofta.
-5. Stari demo put (`loadCustomerOffers`, `addToCartAction`) više ne koristi katalog; uklanja se posebno.
+4. Stari demo put (`loadCustomerOffers`, `addToCartAction`) više ne koristi katalog; uklanja se posebno.

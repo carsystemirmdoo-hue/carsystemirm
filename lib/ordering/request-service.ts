@@ -420,19 +420,25 @@ async function insertLines(tx: Tx, orderId: string, lines: RequestLine[]) {
     const p = l.selected!;
     if (p.status === "cena") {
       await tx.execute(sql`
-        INSERT INTO customer_order_lines (order_id, line_number, article_id, article_code, article_name, unit, pack_label, pack_confirmed, quantity,
+        INSERT INTO customer_order_lines (order_id, line_number, article_id, article_code, article_name, catalog_product_slug, catalog_variant_id, unit, pack_label, pack_confirmed, quantity,
           list_price, discount_percent, net_price, vat_percent, line_net, line_vat, line_gross, price_basis, price_status)
-        VALUES (${orderId}, ${n}, ${l.articleId}, ${l.articleCode}, ${l.articleName}, ${l.unit}, ${l.packLabel}, ${l.packConfirmed}, ${l.quantity},
+        VALUES (${orderId}, ${n}, ${l.articleId}, ${l.articleCode}, ${l.articleName}, ${mappedSlug(l.articleId)}, ${mappedVariant(l.articleId)}, ${l.unit}, ${l.packLabel}, ${l.packConfirmed}, ${l.quantity},
           ${p.listPrice}, ${p.discountPercent}, ${p.netPrice}, ${p.vatPercent}, ${l.amounts!.net}, ${l.amounts!.vat}, ${l.amounts!.gross}, ${p.basis}, 'cena')`);
     } else {
       await tx.execute(sql`
-        INSERT INTO customer_order_lines (order_id, line_number, article_id, article_code, article_name, unit, pack_label, pack_confirmed, quantity,
+        INSERT INTO customer_order_lines (order_id, line_number, article_id, article_code, article_name, catalog_product_slug, catalog_variant_id, unit, pack_label, pack_confirmed, quantity,
           list_price, discount_percent, net_price, vat_percent, line_net, line_vat, line_gross, price_basis, price_status, on_request_reason)
-        VALUES (${orderId}, ${n}, ${l.articleId}, ${l.articleCode}, ${l.articleName}, ${l.unit}, ${l.packLabel}, ${l.packConfirmed}, ${l.quantity},
+        VALUES (${orderId}, ${n}, ${l.articleId}, ${l.articleCode}, ${l.articleName}, ${mappedSlug(l.articleId)}, ${mappedVariant(l.articleId)}, ${l.unit}, ${l.packLabel}, ${l.packConfirmed}, ${l.quantity},
           NULL, NULL, NULL, NULL, NULL, NULL, NULL, ${"cena na upit"}, 'na_upit', ${ON_REQUEST_NOTE[p.reason] ?? "cenu potvrđuje kancelarija"})`);
     }
   }
 }
+
+/** Potvrđena kataloška veza artikla u trenutku slanja — kancelarija vidi proizvod i varijantu. */
+const mappedSlug = (articleId: string) =>
+  sql`(SELECT catalog_product_slug FROM article_catalog_mappings WHERE article_id = ${articleId} AND status = 'mapped')`;
+const mappedVariant = (articleId: string) =>
+  sql`(SELECT catalog_variant_id FROM article_catalog_mappings WHERE article_id = ${articleId} AND status = 'mapped')`;
 
 /**
  * Slanje zahteva. Server: opcija mora biti odobrena tom kupcu i važiti danas;

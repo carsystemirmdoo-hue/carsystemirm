@@ -9,13 +9,113 @@
 | Production | `https://carsystemirm.com/` → **307 na `/site-u-pripremi`** (režim održavanja). Javni sadržaj danas nije dostupan posetiocu, pa je proveren lokalni build istog koda. |
 | Izvori | Ovaj fajl + `JAVNI_SAJT_NEDOSTACI.csv` (1.024 nalaza, jedan red po URL-u i nalazu) + `JAVNI_SAJT_INVENTAR_PROIZVODA.csv` (svih 1.912 zapisa proizvoda) |
 
+**Ispravke:** grana `fix/javni-sajt-2026-10-11` — stanje posle ispravki je u odeljku 0; odeljci 1–8 su snimak stanja PRE ispravki.
+
 **Status pregleda: NIJE ZAVRŠEN u celini.** Automatski su proverene sve javne adrese i svi proizvodi; vizuelno su provereni svi jedinstveni šabloni. Ostaje neprovereno ono što je navedeno u odeljku 8 (tačnost tehničkih podataka prema TDS-u za svaki proizvod, prava na slike, Production posle otvaranja sajta).
 
 Ranije postojećeg glavnog fajla za nedostatke javnog sajta nije bilo. Najbliži su `docs/CONTENT_GAPS_REQUIRING_OWNER_INPUT.md`, `docs/catalog/image-gaps-2026-10/`, `CARSYSTEM_IMAGE_AUDIT.csv` i paket `EXPERT_REVIEW_MASTER_FINAL.md` (postoji samo na grani `chore/expert-review-package-preservation`). Zato je napravljen ovaj fajl. Stari izveštaji su korišćeni kao tragovi: 158 tvrdnji je ponovo provereno (odeljak 7).
 
 ---
 
-## 1. Zbirni brojevi
+## 0. Stanje posle ispravki (2026-10-11, veče)
+
+**Grana:** `fix/javni-sajt-2026-10-11` (od `company/main` d81267f), radno stablo `~/Carsystem/radno/javni-sajt-ispravke`. Nije pushovano, nema deploya.
+**Provera:** izolovani produkcioni build iste grane (`NEXT_DIST_DIR=.next-javni`, port 3520). Pre ispravki je baza ponovo izmerena u istom buildu, pa su ključni browser nalazi potvrđeni nezavisno od `.next-verify` koji je druga sesija ponovo izgradila u 16:42.
+**Tuđe izmene:** druga sesija je u međuvremenu komitovala svoj rad na `feat/kupovina-na-sajtu` (status i kupovina za prijavljenog kupca). Ništa od toga ne rešava ove nalaze i ništa nije dirano.
+
+Stanje svakog reda je u CSV-u, u novim kolonama `stanje` i `resenje_i_provera`.
+
+| Stanje | Redova | Napomena |
+|---|---:|---|
+| REŠENO | 416 | proveren konkretan prikaz u izolovanom buildu |
+| DELIMIČNO | 3 | rešen tekst, ali ostaje odluka ili materijal |
+| NIJE NEDOSTATAK | 39 | ponovo provereno: npr. različite vrednosti iste oznake, zvanični engleski nazivi SATA, pogrešno prebrojane kartice |
+| OTVORENO | 566 | slike, prava, tvrdnje, odluke i stavke van ovog kruga |
+
+Po radnom redu: red 1 — 376 rešeno, 39 nije nedostatak, 2 delimično, 170 otvoreno · red 2 — 38 rešeno, 1 delimično, 92 otvoreno · red 3 — 2 rešeno (sušenje baslac 40-440/40-450 prema zvaničnom TDS-u), 304 otvoreno.
+
+### 0.1 Šta je rešeno i kako je provereno
+
+| Grupa | Rešenje | Dokaz posle ispravke |
+|---|---|---|
+| Car Fit lista (JS-0026) | `CarfitReveal` prag 0 umesto 0,08 | kartice #0, #40, #110: najmanja opacity u lancu predaka 1 (bilo 0) na 1.440 i 390 px |
+| Interni i nedovršeni tekst (G10, G09, G19, G24-placeholder, G21) | uklonjene ili zamenjene rečenice na brend stranama, programima, kategorijama i PDP-u; placeholder stavke dokumenata uklonjene | crawl celog sajta: „U pripremi za javni katalog” 19 → 0 strana, „Fotografija u pripremi” 1 → 0, „dostavljen…” 73 → 1 (preostala je tvrdnja o Emil Frey, čeka Vas), „javni/lokalni katalog/zapis” 21 → 0, interna šifra `NORBIN-…` 4 → 0, „PDF str. 72” 1 → 0 |
+| Dupli tehnički redovi (G05) | jedinstveno pravilo prikaza `lib/technical-facts-display.mjs`: red se izostavlja samo kad ima istu oznaku i sve brojeve već sadržane u ranijem redu; isto važi za JSON-LD | duplikat ISTOG podatka: R-M 81 → 0, Norbin 8 → 0 strana; na 2 R-M i 5 Norbin strana ostaju redovi iste oznake sa RAZLIČITIM vrednostima (npr. VOC uz napomenu o česticama, dva odnosa mešanja P 5540) — namerno se ne spajaju |
+| Engleske vrednosti i format (G06, G07) | srpske jedinice („24 meseca”, „7 dana”, „na 20°C”), decimalni zarez, crta opsega | engleske vrednosti 12 → 0 strana (osim namerno doslovnih zvaničnih SATA naziva); decimalna tačka 185 → 1 („0.820 kg”, tri decimale — vidi JS-0324) |
+| baslac 40-440 / 40-450 (G08) | `parser-correction` u `data/baslac-sync/technical-localization.json` prema zvaničnom TDS-u (str. 2, Drying) + ispravka `dryingText` | „Sušenje: 20°C: učvršćivač 50-415 10 h, 50-420 16 h, 50-430 16 h · 60°C: … 30/40/40 min …” (40-450: 6/10/16 h, 20/30/40 min — **razlikuje se od 40-440**, što GAP-009 nije naveo) |
+| Brojevi proizvoda (G13, G24-broj) | brojevi iz stvarnog kataloga (`countCatalogCardsForProgramSlugs`); filter „Potrošni materijal” uključuje aerosole kao i program; Carsystem i Cosmos brojači | `/program`: 307 / 223 / 217 / 111 / 309 = isto kao `/katalog?program=…`; katalog „5 programa”; Cosmos „669 … u 25 linija” i „+124 varijante u 16 linija” |
+| Norbin i SATA tamna tema (JS-0210, JS-0211) | tokeni tamne teme; posebni tokeni za površinu i tamnu traku da bela slova na plavom ostanu bela | udeo svetlih blokova u tamnoj temi: Norbin 48 %/87 % → 0 %/0 %, SATA 35 %/54 % → 0 %/0 % (1.440/390) |
+| Katalog bez JavaScript-a (JS-0001) | spisak dokumenata se renderuje na serveru (`DocumentLibrarySections`), filter posle hidracije | statički HTML `/katalozi`: 0 → 50 PDF linkova |
+| SATA PDF (G04) | 65 jedinstvenih zamena: isti naziv fajla na zvaničnoj stranici **istog artikla** (sourceUrl), svaka proverena kao PDF (`%PDF`); primenjeno kroz `data/sata-sync` i potvrđeno sa `sata:sync:check` (0 razlika), menjaju se samo URL-ovi | svih 670 spoljnih linkova 200 (bilo 47 × 404); spisak zamena: `provera-2026-10-11/posle-ispravki/sata-pdf-zamene.json` |
+| Ostalo usput | množina „varijanta/varijante/varijanti”; „RAL RAL” u nazivu (5 Cosmos zapisa, slug nepromenjen); javna šifra (`publicCode`/`publicSkuOf`) i u listing prikazima i u bloku „Aktivna varijanta”; „brendove koje zastupamo” → „brendove iz naše ponude” (sigurna formulacija) | crawl: „2–4 varijanti” 22 → 0 strana, „RAL RAL” 1 → 0 |
+
+Regresija: `npm test` 77 grupa / 2.233 testa / 0 padova; `tsc`, `eslint` (izmenjeni fajlovi) i `content:check` čisti; svih 2.955 internih linkova i 3.022 slike 200; svih 670 spoljnih linkova 200; browser prolaz preko 1.271 stranice na 390 px (svetla tema) i 1.440 px (tamna tema): 0 horizontalnih preliva, 0 slika koje se ne učitaju, 0 grešaka u konzoli, 0 neuspelih zahteva (stranice sa timeout-om zbog poznatog AVIF zastoja lokalnog `next start` ponovljene posle restarta — sve prošle); provera skrivenog sadržaja na 41 stranici: Car Fit više nije skriven; footer na `/katalog` se otkriva tek na kraju beskonačne liste (provereno do 1.167. proizvoda — nije nedostatak); filteri `/katalog?program=…` 307/223/217/111/309 = brojevi na `/program`. Validatori kataloga i pretrage daju iste nalaze kao pre (postojeći dug: polje `purpose` u indeksu, 695 delta), bez novih.
+
+Commitovi na `fix/javni-sajt-2026-10-11`: `95fb06b` (izveštaj i dokazi), `e96a73d` Car Fit, `4a20bd1` tamna tema, `adbdc1a` /katalozi, `2c91b42` tehnički podaci i baslac sušenje, `86cb249` SATA PDF, `0b20dbd` sadržaj i brojevi, i završni docs commit.
+
+Dva postojeća testa su namerno zaključala stare tekstove i ažurirana su: RUPES uvod (`scripts/carsystem-sync/third-party.test.mjs`) i broj pravila lokalizacije TDS-a (`lib/content-qa/releaseRegression.test.mts`, dodata provera sušenja 40-440/40-450). Novi test: `lib/technical-facts-display.test.mjs` (u `npm test`).
+
+### 0.2 Proizvodi bez fotografije
+
+Poseban pregled: [`SLIKE_ZA_PRONALAZENJE.xlsx`](SLIKE_ZA_PRONALAZENJE.xlsx).
+
+- List „Nedostaje fotografija” ima **189** proizvoda: R-M 17, baslac 4, Norbin 4, Cosmos Lac 11 i SATA 153. Kolone su naziv, šifra (samo potvrđena), pakovanje, link, upit za pretragu, napomena, poznat zvanični izvor, lokalni materijal i šta je potrebno od Vas, plus prazne kolone za Vaše beleške.
+  - **Vaša fotografija:** 25 proizvoda — 23 bez slike kod proizvođača, baslac 30-S510 (prvo potvrditi identitet) i R-M DIAMONT bezbojni lak (prvo potvrditi šifru).
+  - **SATA:** 140 čeka pisanu saglasnost, za 12 je placeholder ranije prihvaćen, a 1 artikal SATA ne objavljuje.
+  - **Cosmos Lac:** 11 čeka dozvolu.
+  - **Lokalni materijal:** ni za jedan od 189 ne postoji upotrebljiv fajl. Jedini nađen fajl, `baslac-30-s510-s-serija.webp`, prikazuje drugi proizvod.
+- List „Čeka potvrdu prava” ima **31** sliku koju već imamo: Norbin 6 (na Production-u se kriju) i RUPES 25 (prikazuju se).
+- **Preklapanje je provereno: 0.** Ovih 6 Norbin proizvoda nije među 189 (lokalno imaju sliku iz `pending-rights`). Na Production-u je zato bez slike 189 + 6 = 195 stranica.
+
+### 0.3 Šta ostaje otvoreno u radnom redu 1 (može bez Vas, ali nije bilo u ovom krugu)
+
+- Interne šifre R-M ručnih zapisa (`RM-DIA-BASE`, `RM-PASTA-190-1L`…) na karticama, JS-0020: zvanična šifra nije potvrđena, a skrivanje ključa traži odluku o prikazu.
+- Meta opisi presečeni usred rečenice (`trimAtWord`), 17 grupa duplih naslova, `inLanguage` dokumenta u JSON-LD.
+- RUPES u meniju i footeru (JS-0150), `/korpa` → prijava kupca (JS-0470).
+- Preostali anglicizmi i stilske preporuke iz uredničkog pregleda (G24-jezik preporuke).
+- F.23 kompatibilni proizvodi (JS-0165), srpski sinonimi u pretrazi (JS-0628).
+
+### 0.4 Pitanja za Vas (ažurirano posle ispravki)
+
+1. **Otvaranje sajta** (JS-0919). Kada gasimo režim održavanja? Od P1 stavki u radnom redu 1 otvorene su samo one koje zavise od Vas (slike, CRYSTAL BASE).
+2. **SATA fotografije** (140 + brend strana). Imate li pisanu saglasnost SATA, ili je tražimo? Ko šalje zahtev?
+3. **Cosmos Lac fotografije** (11). Tražimo li pisanu dozvolu ili dopunu Brand Kit-a?
+4. **Fotografije iz magacina** (23 artikla, spisak u xlsx-u, kolona „Potrebno od Vas”).
+   - Možete li da ih fotografišete ili da potvrdite da ih ne držimo?
+   - baslac 30-S510: da li je to Line 30 Topcoat ili 30 CV?
+   - R-M DIAMONT bezbojni lak: koja je tačna šifra?
+5. **Norbin renderi sa sajta Väritikka** (6). Potvrđujete li pravo korišćenja? Bez potvrde na Production-u ostaju bez slike.
+6. **RUPES** (25 slika + logo). Smemo li da koristimo slike sa carsystem.org i imate li odobren RUPES logo?
+7. **Brend strane.**
+   - Norbin: da li tražimo pravo na zvaničnu grupnu fotografiju? Tekst „Fotografija u pripremi” je uklonjen, ali polje ostaje prazno.
+   - Carsystem: dozvola VOSSCHEMIE ili sopstveno fotografisanje?
+   - R-M: da li je CRYSTAL BASE u programu? Ako nije, uklanjamo dve prazne kartice (JS-0014/JS-0915).
+8. **Tvrdnje o brendovima** (20, JS-0920…JS-0939). Na sajtu i dalje stoji rečenica o Emil Frey Racing („…u dostavljenom zvaničnom kampanjskom materijalu”). Potvrđujete li tvrdnju ili je uklanjamo? Isto pitanje važi za:
+   - Surventis/Glasurit kod Norbin-a;
+   - baslac „20 godina”;
+   - SATA garanciju od 3 godine;
+   - Befar „od 2002.”;
+   - „držimo na zalihama” kod Cosmos Lac-a.
+9. **Pisanje naziva brendova.** „baslac” ili „Baslac”? „C.A.R.FIT” ili „Car Fit”?
+10. **R-M interne šifre** (JS-0020). Koje su zvanične R-M šifre za DIAMONT baznu boju, DIAMONT bezbojni lak, Pastu 190 (1 L / 5 L) i Body Filler White? Do odgovora na kartici stoji interni ključ (`RM-DIA-BASE` …). Ako zvanične šifre nema, možemo da ga sakrijemo.
+11. **Kategorije** (`/kategorije/*`) danas prikazuju samo R-M proizvode. Proširujemo li ih na sve brendove ili ih preimenujemo u „R-M …”?
+12. **Car Fit kategorije bez broja** („Fileri i prajmeri”, „Priprema i čišćenje”, „Zaštita i lepkovi”, „Radionički pribor”). Proizvodi postoje, ali pravilo kategorije ih ne pogađa. Odobravate li novo mapiranje po zvaničnoj Car Fit taksonomiji?
+13. **Politika privatnosti** (JS-0918). Ko priprema i odobrava tekst?
+14. **Stranica „O nama”** (JS-0944). Ako je želite, trebaju nam podaci o firmi.
+15. **Katalozi** (JS-0943). Imate li R-M, Norbin, SATA, Befar i RUPES kataloge i noviji Cosmos Lac katalog?
+16. **Bezbednosni listovi R-M i baslac** (JS-1019/1020). Da li ih objavljujemo ili ostaju „na upit”? Ako ostaju na upit, oznaka „U pripremi” (206 stranica) se uklanja.
+17. **C.A.R.FIT TDS/SDS** (302 fajla) i **RUPES uputstva**. Smemo li da ih objavimo ili linkujemo?
+18. **Prodajna mesta** (JS-0970). Treba nam radno vreme 9 prodavnica i odluka o 82 lokacije na čekanju.
+19. **Vodiči** (JS-1021). Ko imenovano odobrava objavu? Do tada `/vodici` sakrivamo.
+20. **Stručni pregled** (43 odluke). Sajt i dalje prikazuje sporne vrednosti:
+    - WR Lifting Tape: „do 120°C/1 h” (CS-05);
+    - Car Fit gustine: 900, 1854, 1820–1840 i 1260 g/l (CF-05…09).
+21. **baslac klasifikacija** (JS-0530) i preimenovanje adrese `sata-coupling-with` (JS-0532).
+
+Napomena o GAP-009: ispravka sušenja 40-440/40-450 je urađena isključivo prema zvaničnom TDS-u. Izvod je u `provera-2026-10-11/posle-ispravki/baslac-40-4x0-tds-susenje.txt`. Vrednosti za 40-450 su drugačije od 40-440, pa je tabela GAP-009 („isto kao 40-440”) u tom delu bila netačna.
+
+
+## 1. Zbirni brojevi (stanje pre ispravki)
 
 **Statusi:** 777 potvrđenih nedostataka · 102 preporuke · 145 neproverenih stavki · **306 redova je u radnom redu 3 (Vaš podatak ili odluka); 308 redova ima oznaku `potrebna_odluka = DA`**.
 **Prioritet:** P1 = 284 (vidljivo pokvareno, prazno ili pravno rizično) · P2 = 304 · P3 = 436.
@@ -337,10 +437,11 @@ Interne nedoslednosti starih dokumenata nisu nedostaci javnog sajta: OLD-067 (na
 | Fajl | Sadržaj |
 |---|---|
 | `docs/javni-sajt/JAVNI_SAJT_NEDOSTACI.md` | ovaj izveštaj |
-| `docs/javni-sajt/JAVNI_SAJT_NEDOSTACI.csv` | 1.024 nalaza. Kolone: `id, status, radni_red, prioritet, grupa, url, stranica_ili_proizvod, brend, vrsta_nedostatka, dokaz, fajl_u_kodu, predlog_dopune, izvor_materijala, potrebna_odluka, pitanje_za_vlasnika, nacin_provere, trag` |
+| `docs/javni-sajt/JAVNI_SAJT_NEDOSTACI.csv` | 1.024 nalaza. Kolone: `id, status, radni_red, prioritet, grupa, url, stranica_ili_proizvod, brend, vrsta_nedostatka, dokaz, fajl_u_kodu, predlog_dopune, izvor_materijala, potrebna_odluka, pitanje_za_vlasnika, nacin_provere, trag, stanje, resenje_i_provera` (poslednje dve dodate posle ispravki) |
 | `docs/javni-sajt/JAVNI_SAJT_INVENTAR_PROIZVODA.csv` | 1.912 zapisa: URL, HTTP, stanje slike, alt, dužine opisa, pakovanje, dokumenti sa linkom, dokumenti 404, dupli/engleski/format tehničkih podataka, SEO naslov i opis, H1, JSON-LD, klasa iz image audita |
-| `tmp/javni-sajt-provera-2026-10-11/` (gitignored, lokalno) | `sheets/` (snimci šablona 1.440/390 × svetla/tamna i mreže), `probe_*.jpg` i `carfit-card40.jpg` (dokaz za Car Fit), `podaci/` (sirovi JSON crawla, linkova, browser prolaza, filtera, urednički pregled, tragovi starih izveštaja), `skripte/` (sve skripte provere za ponavljanje) |
+| `docs/javni-sajt/SLIKE_ZA_PRONALAZENJE.xlsx` | 189 proizvoda bez fotografije + 31 slika koja čeka potvrdu prava (odvojeni listovi, bez preklapanja) |
+| `docs/javni-sajt/provera-2026-10-11/` | `snimci/` (šabloni 1.440/390 × svetla/tamna, mreže, dokaz Car Fit), `podaci/` (sirovi podaci prve provere, veliki JSON-i u gzip-u), `posle-ispravki/` (provera pre/posle, SATA zamene, tehnički podaci posle, linkovi posle, izvod iz baslac TDS-a), `skripte/` (sve skripte provere, `verify.mjs` za ponavljanje ključnih nalaza, `status.py`, `xlsx.py`, `sata-docs.mjs`) |
 
-Ponavljanje provere: `npm run build:check` → `npm run start:check` (port 3220) → skripte iz `tmp/javni-sajt-provera-2026-10-11/skripte/`, ovim redom: `_audit_inventory.mts` (preko `tsx`), `crawl.mjs`, `links.mjs ext`, `dl.mjs`, `dl2.mjs`, `browse.mjs`, `filters.mjs`, `shots.mjs`, `gen.py`. Skripte čitaju i pišu fajlove u svom folderu; `gen.py` traži `old-reports-tracks.csv` u nadređenom folderu (kopija je u `podaci/`) i prima izlazni folder kao argument.
+Ponavljanje ključne provere: build grane (`NEXT_DIST_DIR=.next-javni npx next build` → `next start --port 3520`) pa `node provera-2026-10-11/skripte/verify.mjs http://localhost:3520`. Potpun crawl: `crawl.mjs`, `links.mjs ext`, `dl.mjs`, `dl2.mjs`, `browse.mjs` (sa adresom servera u skripti).
 
-U ovom koraku nije menjan sadržaj sajta, nije rađen commit niti deploy.
+Bez deploya. Ispravke su komitovane na lokalnoj grani `fix/javni-sajt-2026-10-11` (nije pushovano).

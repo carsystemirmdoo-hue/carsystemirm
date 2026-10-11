@@ -99,6 +99,8 @@ export type CatalogListingEntity = {
   brandSlug: string;
   programSlug: string;
   phaseSlug: RefinishPhaseSlug;
+  /** Dodatne faze za filter (R-M komponente sa više zvaničnih primena). */
+  secondaryPhaseSlugs?: RefinishPhaseSlug[];
   categorySlugs: string[];
   /** Everything the shared visual surface renders, pre-resolved. */
   presentation: ProductVisualPresentation;
@@ -229,6 +231,7 @@ function productEntity(
     brandSlug: product.brandSlug,
     programSlug: product.programSlug,
     phaseSlug: product.phaseSlug,
+    ...(product.secondaryPhaseSlugs ? { secondaryPhaseSlugs: product.secondaryPhaseSlugs } : {}),
     categorySlugs: category ? [category] : [],
     presentation: toProductVisualPresentation(product),
     productCode: productCodeOf(product),
@@ -275,14 +278,18 @@ function variantEntity(
 ): CatalogVariantEntity {
   const full = productEntity(product, "variant", family);
   const style = full.presentation.style as Record<string, string>;
+  const key = canonicalVariantKey(product);
 
   return {
     id: full.id,
     name: full.name,
     familySlug: family.slug,
     productCode: full.productCode,
-    // Samo kada zapis nema javnu šifru: adresa varijante ostaje ista kao ranije.
-    ...(full.productCode ? {} : { variantKey: canonicalVariantKey(product) }),
+    // Kada se ključ razlikuje od prikazane šifre: zapis bez javne šifre, ili deljena Cosmos šifra
+    // („01” za Primer Grey i White) — link mora nositi jedinstven ključ, ne prikazanu šifru.
+    ...(!full.productCode || (product.catalogMetadata?.cosmosCodeShared && key !== full.productCode)
+      ? { variantKey: key }
+      : {}),
     technicalLine: full.technicalLine,
     finish: full.finish,
     search: full.search,

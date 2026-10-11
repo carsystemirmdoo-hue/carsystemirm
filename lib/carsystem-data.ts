@@ -292,6 +292,8 @@ export type CarsystemProduct = {
   brandSlug: string;
   programSlug: string;
   phaseSlug: RefinishPhaseSlug;
+  /** Dodatne faze u kojima se proizvod zvanično koristi (R-M komponente) — samo za filtere. */
+  secondaryPhaseSlugs?: RefinishPhaseSlug[];
   shortDescription: string;
   longDescription: string;
   sku: string;
@@ -2562,6 +2564,7 @@ export function toProductListingProduct(product: CarsystemProduct): CarsystemPro
     brandSlug: product.brandSlug,
     programSlug: product.programSlug,
     phaseSlug: product.phaseSlug,
+    ...(product.secondaryPhaseSlugs ? { secondaryPhaseSlugs: product.secondaryPhaseSlugs } : {}),
     shortDescription: product.shortDescription,
     longDescription: product.longDescription,
     sku: product.sku,

@@ -5614,6 +5614,10 @@
         "category": "boje",
         "programSlug": "boje-i-lakovi",
         "phaseSlug": "boja",
+        "secondaryPhaseSlugs": [
+          "podloga",
+          "lak"
+        ],
         "visualType": "color",
         "rule": "component-basecoat"
       },
@@ -5725,6 +5729,10 @@
         "category": "boje",
         "programSlug": "boje-i-lakovi",
         "phaseSlug": "podloga",
+        "secondaryPhaseSlugs": [
+          "boja",
+          "lak"
+        ],
         "visualType": "primer",
         "rule": "component-undercoat"
       },
@@ -5860,6 +5868,10 @@
         "category": "boje",
         "programSlug": "boje-i-lakovi",
         "phaseSlug": "podloga",
+        "secondaryPhaseSlugs": [
+          "boja",
+          "lak"
+        ],
         "visualType": "primer",
         "rule": "component-undercoat"
       },
@@ -6146,6 +6158,9 @@
         "category": "boje",
         "programSlug": "boje-i-lakovi",
         "phaseSlug": "lak",
+        "secondaryPhaseSlugs": [
+          "boja"
+        ],
         "visualType": "clearcoat",
         "rule": "component-clearcoat"
       },
@@ -6607,6 +6622,9 @@
         "category": "boje",
         "programSlug": "boje-i-lakovi",
         "phaseSlug": "lak",
+        "secondaryPhaseSlugs": [
+          "boja"
+        ],
         "visualType": "clearcoat",
         "rule": "component-clearcoat"
       },
@@ -7338,6 +7356,9 @@
         "category": "boje",
         "programSlug": "boje-i-lakovi",
         "phaseSlug": "lak",
+        "secondaryPhaseSlugs": [
+          "boja"
+        ],
         "visualType": "clearcoat",
         "rule": "component-clearcoat"
       },
@@ -7491,6 +7512,9 @@
         "category": "boje",
         "programSlug": "boje-i-lakovi",
         "phaseSlug": "lak",
+        "secondaryPhaseSlugs": [
+          "boja"
+        ],
         "visualType": "clearcoat",
         "rule": "component-clearcoat"
       },
@@ -8741,6 +8765,10 @@
         "category": "boje",
         "programSlug": "boje-i-lakovi",
         "phaseSlug": "boja",
+        "secondaryPhaseSlugs": [
+          "podloga",
+          "lak"
+        ],
         "visualType": "color",
         "rule": "component-basecoat"
       },
@@ -8850,6 +8878,10 @@
         "category": "boje",
         "programSlug": "boje-i-lakovi",
         "phaseSlug": "boja",
+        "secondaryPhaseSlugs": [
+          "podloga",
+          "lak"
+        ],
         "visualType": "color",
         "rule": "component-basecoat"
       },
@@ -8959,6 +8991,10 @@
         "category": "boje",
         "programSlug": "boje-i-lakovi",
         "phaseSlug": "boja",
+        "secondaryPhaseSlugs": [
+          "podloga",
+          "lak"
+        ],
         "visualType": "color",
         "rule": "component-basecoat"
       },
@@ -9262,6 +9298,9 @@
         "category": "boje",
         "programSlug": "boje-i-lakovi",
         "phaseSlug": "boja",
+        "secondaryPhaseSlugs": [
+          "lak"
+        ],
         "visualType": "color",
         "rule": "component-basecoat"
       },
@@ -15577,6 +15616,10 @@
         "category": "boje",
         "programSlug": "boje-i-lakovi",
         "phaseSlug": "podloga",
+        "secondaryPhaseSlugs": [
+          "lak",
+          "boja"
+        ],
         "visualType": "primer",
         "rule": "component-undercoat"
       },
@@ -15795,6 +15838,10 @@
         "category": "boje",
         "programSlug": "boje-i-lakovi",
         "phaseSlug": "podloga",
+        "secondaryPhaseSlugs": [
+          "lak",
+          "boja"
+        ],
         "visualType": "primer",
         "rule": "component-undercoat"
       },
@@ -16000,6 +16047,9 @@
         "category": "boje",
         "programSlug": "boje-i-lakovi",
         "phaseSlug": "podloga",
+        "secondaryPhaseSlugs": [
+          "lak"
+        ],
         "visualType": "primer",
         "rule": "component-undercoat"
       },
@@ -16088,6 +16138,9 @@
         "category": "boje",
         "programSlug": "boje-i-lakovi",
         "phaseSlug": "podloga",
+        "secondaryPhaseSlugs": [
+          "lak"
+        ],
         "visualType": "primer",
         "rule": "component-undercoat"
       },
@@ -16177,6 +16230,10 @@
         "category": "boje",
         "programSlug": "boje-i-lakovi",
         "phaseSlug": "podloga",
+        "secondaryPhaseSlugs": [
+          "lak",
+          "boja"
+        ],
         "visualType": "primer",
         "rule": "component-undercoat"
       },
@@ -16474,6 +16531,10 @@
         "category": "boje",
         "programSlug": "boje-i-lakovi",
         "phaseSlug": "podloga",
+        "secondaryPhaseSlugs": [
+          "lak",
+          "boja"
+        ],
         "visualType": "primer",
         "rule": "component-undercoat"
       },
@@ -16665,6 +16726,9 @@
         "category": "boje",
         "programSlug": "boje-i-lakovi",
         "phaseSlug": "podloga",
+        "secondaryPhaseSlugs": [
+          "lak"
+        ],
         "visualType": "primer",
         "rule": "component-undercoat"
       },
@@ -16851,6 +16915,9 @@
         "category": "boje",
         "programSlug": "boje-i-lakovi",
         "phaseSlug": "boja",
+        "secondaryPhaseSlugs": [
+          "podloga"
+        ],
         "visualType": "color",
         "rule": "component-basecoat"
       },
@@ -17994,6 +18061,9 @@
         "category": "boje",
         "programSlug": "boje-i-lakovi",
         "phaseSlug": "boja",
+        "secondaryPhaseSlugs": [
+          "lak"
+        ],
         "visualType": "color",
         "rule": "component-basecoat"
       },
@@ -20211,6 +20281,9 @@
         "category": "boje",
         "programSlug": "boje-i-lakovi",
         "phaseSlug": "lak",
+        "secondaryPhaseSlugs": [
+          "boja"
+        ],
         "visualType": "clearcoat",
         "rule": "component-clearcoat"
       },
@@ -20450,6 +20523,9 @@
         "category": "boje",
         "programSlug": "boje-i-lakovi",
         "phaseSlug": "lak",
+        "secondaryPhaseSlugs": [
+          "boja"
+        ],
         "visualType": "clearcoat",
         "rule": "component-clearcoat"
       },
@@ -20608,6 +20684,10 @@
         "category": "boje",
         "programSlug": "boje-i-lakovi",
         "phaseSlug": "boja",
+        "secondaryPhaseSlugs": [
+          "podloga",
+          "lak"
+        ],
         "visualType": "color",
         "rule": "component-basecoat"
       },
@@ -22092,6 +22172,10 @@
         "category": "boje",
         "programSlug": "boje-i-lakovi",
         "phaseSlug": "podloga",
+        "secondaryPhaseSlugs": [
+          "lak",
+          "boja"
+        ],
         "visualType": "primer",
         "rule": "component-undercoat"
       },
@@ -22249,6 +22333,9 @@
         "category": "boje",
         "programSlug": "boje-i-lakovi",
         "phaseSlug": "podloga",
+        "secondaryPhaseSlugs": [
+          "lak"
+        ],
         "visualType": "primer",
         "rule": "component-undercoat"
       },
@@ -22305,6 +22392,10 @@
         "category": "boje",
         "programSlug": "boje-i-lakovi",
         "phaseSlug": "podloga",
+        "secondaryPhaseSlugs": [
+          "lak",
+          "boja"
+        ],
         "visualType": "primer",
         "rule": "component-undercoat"
       },

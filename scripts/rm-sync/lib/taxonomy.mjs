@@ -27,5 +27,24 @@ export function resolveTaxonomy(product, byCode, rules) {
         .reduce((best, candidate) => ((usedByCounts.get(candidate.when.usedByRole) ?? 0) > (usedByCounts.get(best.when.usedByRole) ?? 0) ? candidate : best))
     : first;
   if (!rule) return null;
-  return { category: rule.category, programSlug: rule.programSlug, phaseSlug: rule.phaseSlug, visualType: rule.visualType, rule: rule.id };
+  /*
+   * Glavna faza je jedna (većina primena), ali komponenta ostaje vidljiva i u filterima ostalih faza
+   * u kojima je zvanično koriste: H 2A14 je „Lak” (7 lakova) i dodatno „Boja” (2 topcoat-a).
+   */
+  const secondaryPhaseSlugs = rule.when?.usedByRole
+    ? [...new Set(
+        matches
+          .filter((candidate) => candidate.when?.usedByRole && candidate.phaseSlug !== rule.phaseSlug)
+          .sort((a, b) => (usedByCounts.get(b.when.usedByRole) ?? 0) - (usedByCounts.get(a.when.usedByRole) ?? 0))
+          .map((candidate) => candidate.phaseSlug),
+      )]
+    : [];
+  return {
+    category: rule.category,
+    programSlug: rule.programSlug,
+    phaseSlug: rule.phaseSlug,
+    ...(secondaryPhaseSlugs.length ? { secondaryPhaseSlugs } : {}),
+    visualType: rule.visualType,
+    rule: rule.id,
+  };
 }

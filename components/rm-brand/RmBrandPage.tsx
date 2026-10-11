@@ -1,3 +1,4 @@
+import { matchesPhase } from "@/lib/catalog/phase-match.mjs";
 import { srPlural } from "@/lib/sr-plural";
 import Image from "next/image";
 import Link from "next/link";
@@ -122,7 +123,7 @@ function RmProcessFlow({ products }: { products: CarsystemProduct[] }) {
       <ol className={styles.processFlow}>
         {rmProcessSteps.map((step) => {
           const count = products.filter(
-            (product) => product.phaseSlug === step.phase,
+            (product) => matchesPhase(product, step.phase),
           ).length;
 
           return (

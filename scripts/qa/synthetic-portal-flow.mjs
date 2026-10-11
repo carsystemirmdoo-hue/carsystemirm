@@ -817,8 +817,9 @@ try {
     const href = await t.locator('a[href^="/portal/zahtevi/"]').filter({ hasText: broj }).first().getAttribute("href");
     await go(t, `${href}/stampa`);
     const st = await txt(t.locator("body"));
-    const printOk = plan.every((v) => st.includes(v.sifra)) && /poručeno: 1 × kanta 5 L = 5 LIT/.test(st) && /poručeno: 1 × kanta 4 L = 4 LIT/.test(st) && /poručeno: 1 × limenka 0,5 L = 1 KOM/.test(st) && /poručeno: 1 × sprej = 1 KOM/.test(st);
-    check("kontrolne: štampa — sve šifre, „1 × kanta 5 L = 5 LIT“, „1 × kanta 4 L = 4 LIT“, „1 × limenka 0,5 L = 1 KOM“, „1 × sprej = 1 KOM“", printOk, "");
+    // Za svaku stavku: „poručeno: 1 × <oznaka> = <pakovanje> <JM>“ (oznaka je opis prodajne jedinice).
+    const missing = plan.filter((v) => !st.includes(v.sifra) || !st.includes(`poručeno: 1 × ${v.oznaka} = ${String(v.pakovanje).replace(".", ",")} ${v.jm}`));
+    check("kontrolne: štampa — sve šifre i „poručeno: 1 × <pakovanje> = <količina> <JM>“ za svaku stavku", missing.length === 0, missing.map((v) => v.sifra).join(", "));
     const overflow = await t.locator("td.zp-code").evaluateAll((els) => els.filter((e) => e.scrollWidth > e.clientWidth + 1).length);
     check("kontrolne: štampa — šifre ne prelaze u susednu kolonu", overflow === 0, String(overflow));
     await t.screenshot({ path: `${OUT}/c-stampa.png`, fullPage: true });

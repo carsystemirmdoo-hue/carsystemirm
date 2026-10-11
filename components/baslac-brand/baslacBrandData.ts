@@ -200,7 +200,7 @@ export const baslacMedia: Record<BaslacMediaId, BaslacMediaDefinition> = {
       "/images/brands/baslac/commercial/baslac-commercial-vehicles.webp",
     width: 2400,
     height: 1575,
-    alt: "Zvanični baslac render dostavnog kamiona sa sandukom, obojenog u svetloplavu",
+    alt: "Dostavni kamion sa sandukom, obojen u svetloplavu",
     priority: "medium",
   },
 };

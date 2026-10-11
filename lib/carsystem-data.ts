@@ -603,7 +603,7 @@ export const brands: CarsystemBrand[] = [
     description:
       "RUPES proizvodi iz Carsystem programa — polirke, brusilice, usisivač i pribor za pripremu i završnu obradu.",
     overview:
-      "RUPES proizvodi koje vodi Carsystem katalog 2026/27: BigFoot polirke, iBrid Nano, Skorpio i orbitalne brusilice, usisivač S145 i prateći pribor. Ovo nije kompletan RUPES katalog.",
+      "RUPES proizvodi iz naše ponude: BigFoot polirke, iBrid Nano, Skorpio i orbitalne brusilice, usisivač S145 i prateći pribor.",
     programSlugs: ["oprema", "poliranje"],
     catalogOrder: 9,
     presentation: {
@@ -943,12 +943,6 @@ const legacyProducts: CarsystemProduct[] = [
         status: "placeholder",
         note: "Dokument se potvrđuje kroz upit",
       },
-      {
-        title: "Uputstvo za upotrebu",
-        kind: "PDF",
-        status: "disabled",
-        note: "Biće povezano sa zvaničnim dokumentom",
-      },
     ],
     relatedProductSlugs: [
       "rm-diamont-bazna-boja",
@@ -1009,12 +1003,6 @@ const legacyProducts: CarsystemProduct[] = [
         status: "placeholder",
         note: "Dokument se potvrđuje kroz upit",
       },
-      {
-        title: "Uputstvo za upotrebu",
-        kind: "PDF",
-        status: "disabled",
-        note: "U pripremi",
-      },
     ],
     relatedProductSlugs: [
       "carsystem-git-multi-green",
@@ -1065,12 +1053,6 @@ const legacyProducts: CarsystemProduct[] = [
         kind: "PDF",
         status: "placeholder",
         note: "Dokument se potvrđuje kroz upit",
-      },
-      {
-        title: "Tehnički list",
-        kind: "PDF",
-        status: "disabled",
-        note: "Dodaje se po proizvodnoj liniji",
       },
     ],
     relatedProductSlugs: [
@@ -1244,12 +1226,6 @@ const legacyProducts: CarsystemProduct[] = [
         status: "placeholder",
         note: "Dokument se potvrđuje kroz upit",
       },
-      {
-        title: "Uputstvo za upotrebu",
-        kind: "PDF",
-        status: "disabled",
-        note: "Dodaje se po artiklu",
-      },
     ],
     relatedProductSlugs: [
       "car-fit-prajmer",
@@ -1356,12 +1332,6 @@ const legacyProducts: CarsystemProduct[] = [
         status: "placeholder",
         note: "Dokument se potvrđuje kroz upit",
       },
-      {
-        title: "Bezbednosni list",
-        kind: "PDF",
-        status: "disabled",
-        note: "Biće povezano sa zvaničnim dokumentom",
-      },
     ],
     relatedProductSlugs: [
       "rm-diamont-bezbojni-lak",
@@ -1411,12 +1381,6 @@ const legacyProducts: CarsystemProduct[] = [
         status: "placeholder",
         note: "Dokument se potvrđuje kroz upit",
       },
-      {
-        title: "Uputstvo za upotrebu",
-        kind: "PDF",
-        status: "disabled",
-        note: "Dodaje se po proizvodnoj liniji",
-      },
     ],
     relatedProductSlugs: [
       "rm-diamont-bezbojni-lak",
@@ -1458,12 +1422,6 @@ const legacyProducts: CarsystemProduct[] = [
       { label: "Rok trajanja", value: "Prema deklaraciji na ambalaži" },
     ],
     documents: [
-      {
-        title: "Uputstvo za upotrebu",
-        kind: "PDF",
-        status: "disabled",
-        note: "Dodaje se po proizvodnoj liniji",
-      },
     ],
     relatedProductSlugs: [
       "car-fit-prajmer",
@@ -1516,7 +1474,7 @@ function tdsDocument(href: string): ProductDocument {
     kind: "PDF",
     href,
     status: "available",
-    note: "Dostupno iz dostavljenog TDS materijala.",
+    note: "Tehnički list proizvođača.",
   };
 }
 
@@ -1528,12 +1486,6 @@ function documentsWithTds(productName: string, href: string): ProductDocument[] 
       kind: "PDF",
       status: "placeholder",
       note: `Dostupno na upit za ${productName}.`,
-    },
-    {
-      title: "Uputstvo za upotrebu",
-      kind: "PDF",
-      status: "disabled",
-      note: "U pripremi za javni katalog.",
     },
   ];
 }
@@ -1551,12 +1503,6 @@ function documentsOnRequest(productName: string): ProductDocument[] {
       kind: "PDF",
       status: "placeholder",
       note: "Dostavlja se kada je primenljivo za potvrđen artikal.",
-    },
-    {
-      title: "Uputstvo za upotrebu",
-      kind: "PDF",
-      status: "disabled",
-      note: "U pripremi za javni katalog.",
     },
   ];
 }
@@ -2304,12 +2250,6 @@ const productRecords: CarsystemProduct[] = [
         status: "placeholder",
         note: "Dostupno na upit za Baslac 60-20 razređivač.",
       },
-      {
-        title: "Uputstvo za upotrebu",
-        kind: "PDF",
-        status: "disabled",
-        note: "U pripremi za javni katalog.",
-      },
     ],
     specifications: [
       { label: "Pakovanje", value: "5 L" },
@@ -2620,6 +2560,9 @@ export function toProductListingProduct(product: CarsystemProduct): CarsystemPro
     shortDescription: product.shortDescription,
     longDescription: product.longDescription,
     sku: product.sku,
+    // Pravilo javne šifre (`publicSkuOf`, `publicCode`) mora da važi i u listing prikazima.
+    ...(product.skuIsInternalOnly ? { skuIsInternalOnly: true } : {}),
+    ...(product.publicCode ? { publicCode: product.publicCode } : {}),
     packages: product.packages,
     purpose: product.purpose,
     badges: product.badges,
@@ -2863,7 +2806,7 @@ function getFamilyVariantSelector(
             item.catalogMetadata?.volume ??
             item.name),
       optionValueIds: { [groupId]: item.variantId ?? item.slug },
-      sku: item.catalogMetadata?.cosmosCode ?? publicSkuOf(item) ?? undefined,
+      sku: item.catalogMetadata?.cosmosCode ?? item.publicCode ?? publicSkuOf(item) ?? undefined,
       package: getProductPackageLabel(item),
       status: getProductPublicStatus(item),
       slug: item.slug,
@@ -2927,7 +2870,7 @@ function getBefarVariantSelector(
         color: `color:${item.variantOptions?.color}`,
         size: `size:${item.variantOptions?.size}`,
       },
-      sku: item.sku,
+      sku: item.publicCode ?? publicSkuOf(item) ?? undefined,
       package: item.packages[0]?.label,
       dimension: item.variantOptions?.size,
       status: getProductPublicStatus(item),

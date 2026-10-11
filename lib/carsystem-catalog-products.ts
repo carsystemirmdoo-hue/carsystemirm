@@ -11,6 +11,7 @@ import type {
   ProductDetailDocument,
   ProductVariantSection,
 } from "@/types/product-detail";
+import { variantCountLabel } from "@/lib/sr-plural";
 
 /**
  * Carsystem proizvodi uvezeni iz zvaničnog kataloga i sa carsystem.org.
@@ -282,7 +283,7 @@ function summarizeVariants(entry: CatalogProductEntry) {
   const labels = entry.variants.map((variant) => variant.label);
   if (labels.length === 1) return labels[0];
   if (entry.variantColumn.key === "grit") return `${labels[0]}–${labels[labels.length - 1]}`;
-  return `${labels.length} varijanti`;
+  return variantCountLabel(labels.length);
 }
 
 function createCatalogProduct(entry: CatalogProductEntry, knownSlugs: Set<string>): CarsystemProduct {
@@ -343,7 +344,8 @@ function createCatalogProduct(entry: CatalogProductEntry, knownSlugs: Set<string
         ...(entry.legacyArticleNumbers ?? []).map((legacy) => ({
           label: "Prethodna šifra artikla",
           value: legacy.articleNumber,
-          detail: `Šifra iz kataloga proizvođača: ${legacy.source}.`,
+          // Izvor (katalog, strana PDF-a) je trag porekla za nas, ne podatak za kupca.
+          detail: "Ranija šifra istog artikla iz kataloga proizvođača.",
           reviewStatus: "confirmed" as const,
         })),
       ],

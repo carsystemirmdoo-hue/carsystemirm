@@ -129,6 +129,7 @@ export default async function CatalogPaginationRoute({
           phases={refinishPhases}
           entities={products}
           programs={programGroups}
+          paginated
         />
         <CatalogPaginationNav currentPage={page} totalPages={totalPages} />
       </main>

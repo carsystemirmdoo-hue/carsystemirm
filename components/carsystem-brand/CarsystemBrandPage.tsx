@@ -3,7 +3,7 @@ import Link from "next/link";
 import { BrandSectionNav } from "@/components/brand/BrandSectionNav";
 import { DocumentCard } from "@/components/documents/DocumentCard";
 import { Footer } from "@/components/layout/Footer";
-import type { CarsystemProduct } from "@/lib/carsystem-data";
+import { publicProgramGroups, type CarsystemProduct } from "@/lib/carsystem-data";
 import { getFeaturedDocuments } from "@/lib/documents";
 import { CarsystemFinishSystem } from "./CarsystemFinishSystem";
 import { CarsystemHero } from "./CarsystemHero";
@@ -60,8 +60,12 @@ export function CarsystemBrandPage({
 }
 
 function Metrics({ products }: { products: CarsystemProduct[] }) {
-  const programCount = new Set(products.map((product) => product.programSlug))
-    .size;
+  // Broje se JAVNI programi (/program) u kojima postoji bar jedan Carsystem proizvod —
+  // interni programSlug-ovi (7) nisu ono što posetilac vidi u meniju (5 programa).
+  const productPrograms = new Set(products.map((product) => product.programSlug));
+  const programCount = publicProgramGroups.filter((program) =>
+    program.internalProgramSlugs.some((slug) => productPrograms.has(slug)),
+  ).length;
 
   function resolveValue(value: (typeof carsystemMetrics)[number]["value"]) {
     if (value === "catalog-count") {
@@ -114,11 +118,12 @@ function Families({
     >
       <header className={styles.sectionHeader}>
         <div>
-          <p className={styles.sectionKicker}>Potvrđene programske celine</p>
+          <p className={styles.sectionKicker}>Sistemi</p>
           <h2 id="carsystem-families-title">Sistemi koji nose radionicu</h2>
         </div>
         <p>
-          Četiri celine obuhvataju Carsystem proizvode iz našeg kataloga.
+          Četiri sistema povezuju Carsystem proizvode iz našeg kataloga po
+          radnom zadatku.
         </p>
       </header>
 

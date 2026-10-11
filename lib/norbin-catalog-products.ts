@@ -151,20 +151,9 @@ function detailDocuments(slug: string, documents: SyncDocument[]): ProductDetail
     note: document.note,
     reviewStatus: "confirmed" as const,
   }));
-  // Tehnički list postoji samo za 8 od 13 proizvoda; gde ga proizvođač nema, to se i kaže.
-  return listed.some((document) => document.kind === "tds")
-    ? listed
-    : [
-        ...listed,
-        {
-          id: `${slug}-tds`,
-          title: "Tehnički list",
-          kind: "tds" as const,
-          availability: "preparing" as const,
-          note: "Proizvođač za ovaj proizvod ne objavljuje tehnički list.",
-          reviewStatus: "confirmed" as const,
-        },
-      ];
+  // Tehnički list postoji samo za 8 od 13 proizvoda. Gde ga proizvođač ne objavljuje, red se ne
+  // prikazuje: oznaka „U pripremi” uz „proizvođač ne objavljuje” bila je kontradiktorna.
+  return listed;
 }
 
 /**
@@ -322,6 +311,9 @@ export function applyNorbinSyncEnrichment(record: CarsystemProduct): CarsystemPr
   return {
     ...record,
     manufacturerCode: enrichment.code,
+    // Zapis iz ručnog kataloga ima interni ključ (`NORBIN-N15-020-5L`) kao `sku`; kupac vidi
+    // zvaničnu Norbin oznaku iz synca. `sku` ostaje ključ za rute i `?varijanta=`.
+    publicCode: enrichment.code,
     externalSku: enrichment.code,
     taxonomyCategory: enrichment.taxonomy.category as ProductCategorySlug,
     programSlug: enrichment.taxonomy.programSlug,

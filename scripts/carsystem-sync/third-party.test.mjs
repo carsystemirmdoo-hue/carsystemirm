@@ -58,7 +58,8 @@ test("rupes je aktivan brend sa tekstualnim nazivom, nije u futureBrands, bez tv
   assert.equal(brand.logo, undefined, "logo fajl nije odobren — brend se prikazuje tekstualno");
   assert.ok(!data.futureBrands.some((candidate) => candidate.slug === "rupes"));
   assert.match(`${brand.description} ${brand.presentation.heroKicker}`, /RUPES proizvodi iz Carsystem programa/);
-  assert.match(brand.overview, /nije kompletan RUPES katalog/i);
+  // Opseg: samo proizvodi iz naše ponude, ne ceo RUPES program (bez tvrdnje o zastupanju).
+  assert.match(brand.overview, /RUPES proizvodi iz naše ponude/i);
   assert.doesNotMatch(JSON.stringify(brand), /zvani[čc]n\w* (distributer|zastupnik)|ovla[šs][ćc]en|ekskluzivn|authori[sz]ed|official/i);
   // Programi brenda pokrivaju programe svih njegovih proizvoda.
   const programs = new Set(data.getPublicProgramGroupsForBrand("rupes").flatMap((group) => group.internalProgramSlugs));

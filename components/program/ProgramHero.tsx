@@ -41,10 +41,6 @@ export function ProgramHero({
           <h1 id="program-title" className={styles.title}>
             {program.name}
           </h1>
-          <p className={styles.heroLead}>
-            Tehnički izbor po fazi refinish procesa, povezanim brendovima i
-            nameni proizvoda.
-          </p>
           <p className={styles.subtitle}>{program.description}</p>
 
           <div className={styles.badgeRow} aria-label="Faze i kategorije">

@@ -9,6 +9,7 @@ import {
 } from "@/components/catalog/CatalogSeoContent";
 import { CATALOG_BATCH_SIZE } from "@/components/catalog/catalogInfiniteScroll.mjs";
 import { Footer } from "@/components/layout/Footer";
+import { publicProgramGroups } from "@/lib/carsystem-data";
 import type {
   CarsystemBrand,
   ProgramGroup,
@@ -34,7 +35,8 @@ export function CatalogPage({
   return (
     <div className={styles.catalogShell}>
       <main className={styles.main}>
-        <CatalogHero brandCount={brands.length} programCount={programs.length} />
+        {/* Javni programi (/program), ne interni programGroups koji služe filterima. */}
+        <CatalogHero brandCount={brands.length} programCount={publicProgramGroups.length} />
         {/* Prijavljeni kupac: sopstvena istorija. Anonimno: ništa, bez zahteva. */}
         <CatalogReorder />
         <CatalogCategoryLinks />
@@ -46,6 +48,7 @@ export function CatalogPage({
                 entities={firstPageProducts}
                 phases={phases}
                 programs={programs}
+                paginated
               />
               <CatalogPaginationNav currentPage={1} totalPages={totalPages} />
             </>

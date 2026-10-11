@@ -133,7 +133,9 @@ const catalogModules: CatalogModule[] = [
     label: "Potrošni materijal",
     detail: "Maskiranje i radionica",
     slug: "potrosni-materijal",
-    programSlugs: ["potrosni-materijal"],
+    // Isto kao javni program „Potrošni materijal” (lib/carsystem-data.ts, publicProgramGroups):
+    // aerosoli su deo tog programa, pa ih filter ne sme izostaviti.
+    programSlugs: ["potrosni-materijal", "aerosoli"],
   },
 ];
 

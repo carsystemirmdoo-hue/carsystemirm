@@ -11,6 +11,7 @@ import type {
   ProductDetailDocument,
   ProductVariantSection,
 } from "@/types/product-detail";
+import { variantCountLabel } from "@/lib/sr-plural";
 
 /**
  * C.A.R.FIT proizvodi uvezeni sa carfitrepair.com i iz zvaničnog kataloga.
@@ -239,7 +240,7 @@ function legacyDocuments(productName: string, documents: CatalogDocument[]): Pro
 function summarizeVariants(entry: CatalogProductEntry) {
   const labels = entry.variants.map((variant) => variant.label);
   if (labels.length === 1) return labels[0];
-  return `${labels.length} varijanti`;
+  return variantCountLabel(labels.length);
 }
 
 function createCatalogProduct(entry: CatalogProductEntry, knownSlugs: Set<string>): CarsystemProduct {

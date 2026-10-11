@@ -93,9 +93,23 @@ const syncOf = (record: CosmosLacGeneratedRecord): CosmosSyncEntry | undefined =
  * `REMOVED_FROM_CUSTOMER_CATALOG` (Molotow, 2026-09-21): zapis ostaje u Brand Kit datasetu kao istorijski podatak,
  * ali ne ulazi u runtime — nema kartice, varijante, pretrage ni sitemap adrese. Stare adrese preusmerava sync dataset.
  */
-const records = [...(generatedRecords as CosmosLacGeneratedRecord[]), ...syncProducts].filter(
-  (record) => syncOf(record)?.status !== "REMOVED_FROM_CUSTOMER_CATALOG",
-);
+/*
+ * Generator je za liniju „RAL” nazivu dodao prefiks linije ispred oznake „RAL 3002”, pa je pet
+ * zapisa glasilo „Cosmos Lac RAL RAL 3002 …”. Ispravlja se samo PRIKAZ (naziv, alt, SEO);
+ * slug, id i `?varijanta=` ključ ostaju, da se adrese ne pomere.
+ */
+const withoutDoubledRal = (text: string) => text.replace(/\bRAL RAL\b/g, "RAL");
+
+const records = [...(generatedRecords as CosmosLacGeneratedRecord[]), ...syncProducts]
+  .filter((record) => syncOf(record)?.status !== "REMOVED_FROM_CUSTOMER_CATALOG")
+  .map((record) => ({
+    ...record,
+    officialName: withoutDoubledRal(record.officialName),
+    displayNameSr: withoutDoubledRal(record.displayNameSr),
+    imageAlt: withoutDoubledRal(record.imageAlt),
+    seoTitle: withoutDoubledRal(record.seoTitle),
+    seoDescription: withoutDoubledRal(record.seoDescription),
+  }));
 
 const technicalCategoryLabels: Record<string, string> = {
   cleaner: "Čistač",

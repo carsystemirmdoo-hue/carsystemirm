@@ -11,6 +11,7 @@ import {
   carsystemRangeCategories,
 } from "./carsystemBrandData";
 import styles from "./CarsystemBrandPage.module.css";
+import { programLabel } from "./programLabel";
 
 type ProductFilterId = (typeof carsystemProductFilters)[number]["id"];
 
@@ -45,7 +46,7 @@ export function CarsystemProducts({
     >
       <header className={styles.sectionHeader}>
         <div>
-          <p className={styles.sectionKicker}>Lokalni javni katalog</p>
+          <p className={styles.sectionKicker}>Katalog</p>
           <h2 id="carsystem-products-title">
             Carsystem proizvodi dostupni kod nas
           </h2>
@@ -100,8 +101,8 @@ export function CarsystemProducts({
 
       <div className={styles.productsFooter}>
         <p>
-          Potreban Vam je artikal koji još nema javnu fotografiju? Pošaljite
-          naziv ili šifru i proverićemo odgovarajući zapis.
+          Ne vidite artikal koji Vam treba? Pošaljite naziv ili šifru i
+          proverićemo dostupnost.
         </p>
         <Link className={styles.primaryButton} href={carsystemCatalogHref()}>
           Pogledajte sve Carsystem proizvode
@@ -150,7 +151,7 @@ function ProductCard({
         </span>
 
         <span className={styles.productCardCopy}>
-          <span>{product.programSlug.replaceAll("-", " ")}</span>
+          <span>{programLabel(product.programSlug)}</span>
           <h3>{product.name}</h3>
           <p>{product.shortDescription}</p>
           <strong>

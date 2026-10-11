@@ -28,8 +28,7 @@ export function ProgramProducts({
         <p className={styles.sectionKicker}>Proizvodi</p>
         <h2 id="program-products-title">Tehnički proizvodi u programu</h2>
         <p>
-          Proizvodi su filtrirani po programskoj celini i vode na postojeće
-          stranice proizvoda sa upitom i dokumentacijom.
+          Svaki proizvod vodi na stranicu sa namenom, dokumentacijom i upitom.
         </p>
       </div>
 

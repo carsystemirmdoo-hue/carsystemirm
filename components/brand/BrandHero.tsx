@@ -78,7 +78,7 @@ export function BrandHero({
                 priority
               />
             </div>
-            <p className={styles.logoStageMeta}>Aktivan brend u Carsystem i R-M programu</p>
+            <p className={styles.logoStageMeta}>Brend u ponudi Carsystem i R-M</p>
           </div>
         </div>
       </section>

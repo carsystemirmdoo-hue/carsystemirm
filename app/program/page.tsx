@@ -5,9 +5,9 @@ import { SeoBreadcrumbs } from "@/components/seo/SeoBreadcrumbs";
 import styles from "@/components/brand-program/BrandProgramPage.module.css";
 import {
   getAllPublicProgramGroups,
-  getCarsystemProductsByPublicProgramSlug,
   refinishPhases,
 } from "@/lib/carsystem-data";
+import { countCatalogCardsForProgramSlugs } from "@/lib/catalog-listing";
 import type { RefinishPhase } from "@/lib/carsystem-data";
 import {
   breadcrumbJsonLd,
@@ -86,7 +86,7 @@ export default function ProgramIndexPage() {
           </div>
           <div className={styles.programCardGrid}>
             {programs.map((program) => {
-              const productCount = getCarsystemProductsByPublicProgramSlug(program.slug).length;
+              const productCount = countCatalogCardsForProgramSlugs(program.internalProgramSlugs);
               const phases = program.phaseSlugs
                 .map((phaseSlug) => phaseBySlug.get(phaseSlug))
                 .filter((phase): phase is RefinishPhase => Boolean(phase));

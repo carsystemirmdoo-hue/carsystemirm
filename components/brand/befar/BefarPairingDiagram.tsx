@@ -59,7 +59,7 @@ export function BefarPairingDiagram() {
           </div>
         </div>
         <figcaption className={styles.pairingCaption}>
-          {active.foamLabel} nalaže podlošku od {active.plate} mm.
+          {active.foamLabel} zahteva podlošku od {active.plate} mm.
         </figcaption>
       </figure>
 

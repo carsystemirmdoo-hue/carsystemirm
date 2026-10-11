@@ -80,7 +80,7 @@ export function CosmosBrandPage({ brand, products }: Props) {
       {/* 01 — hero */}
       <CosmosHero
         cans={cosmosHeroCans}
-        familyCount={cosmosCounts.featuredFamilies}
+        lineCount={cosmosCounts.lines}
         variantCount={cosmosCounts.variants}
       />
 

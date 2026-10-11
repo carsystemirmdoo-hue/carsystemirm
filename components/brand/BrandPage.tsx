@@ -46,7 +46,7 @@ export function BrandPage({
         <div className={styles.manufacturerRailSection}>
           <ManufacturerRail
             brands={brands}
-            description="Otvorite stranicu drugog proizvođača bez povratka na indeks brendova."
+            description="Pogledajte i ostale brendove iz naše ponude."
             id={`brand-${brand.slug}-manufacturers`}
             mode="links"
             selectedSlug={brand.slug}
@@ -98,8 +98,7 @@ function BrandOverview({
         <p className={styles.sectionKicker}>Program brenda</p>
         <h2 id="brand-overview-title">Programi i proizvodi brenda {brand.name}</h2>
         <p>
-          Pregled stvarnih programskih celina i linija koje su povezane sa javnim
-          katalogom.
+          Programi u kojima se nalaze proizvodi ovog brenda, sa vezom ka katalogu.
         </p>
       </div>
 

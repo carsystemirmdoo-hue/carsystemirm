@@ -787,7 +787,7 @@ export const befarInUse = {
 export const befarDiscoveryMeta = {
   title: "Befar u našem katalogu",
   lead:
-    "Prikazani su proizvodi koji već imaju stranicu na sajtu. Ostale porodice vode u filtriran katalog.",
+    "Izdvojene pene za poliranje. Ostale Befar porodice pogledajte u katalogu.",
   catalogHref: "/katalog?brend=befar",
   catalogLabel: "Ceo Befar program u katalogu",
 };
@@ -900,7 +900,7 @@ export const befarManufacturer = {
     { label: "Tip", value: "Porodična firma" },
   ],
   body:
-    "Befar proizvodi pene za poliranje, aparate za poliranje, mikrofiber krpe i međupodloške za industriju brušenja. Isti program koristi se i u vazduhoplovstvu, železničkom saobraćaju, brodogradnji i industriji mebla.",
+    "Befar proizvodi pene za poliranje, aparate za poliranje, mikrofiber krpe i međupodloške za industriju brušenja. Isti program koristi se i u vazduhoplovstvu, železničkom saobraćaju, brodogradnji i industriji nameštaja.",
   quote: {
     text: "Kalite Keyif Verir…",
     translation: "„Kvalitet donosi zadovoljstvo.“",

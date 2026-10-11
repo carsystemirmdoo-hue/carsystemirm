@@ -82,10 +82,10 @@ export default async function CategoryRoute({ params }: CategoryRouteProps) {
             <p className={styles.subtitle}>{category.intro}</p>
           </div>
           <div className={styles.heroTools}>
-            <p className={styles.searchLabel}>Potvrđeni R-M proizvodi</p>
+            <p className={styles.searchLabel}>R-M proizvodi u kategoriji</p>
             <p className={styles.subtitle}>
-              {products.length} proizvoda sa direktnim linkovima ka nameni,
-              dokumentaciji i upitu za dostupnost.
+              Prikazano: {products.length}. Svaki proizvod vodi na stranicu sa
+              namenom, dokumentacijom i upitom za dostupnost.
             </p>
             <Link className={styles.primaryButton} href="/brendovi/rm">
               Otvorite R-M program

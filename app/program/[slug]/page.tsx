@@ -1,3 +1,4 @@
+import { countCatalogCardsForProgramSlugs } from "@/lib/catalog-listing";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { ProgramPage } from "@/components/program/ProgramPage";
@@ -72,6 +73,7 @@ export default async function ProgramRoute({ params }: ProgramRouteProps) {
           toProductListingProduct,
         )}
         program={program}
+        catalogCardCount={countCatalogCardsForProgramSlugs(program.internalProgramSlugs)}
         programBySlug={new Map(programGroups.map((item) => [item.slug, item]))}
       />
     </>

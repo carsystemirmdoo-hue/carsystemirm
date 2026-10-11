@@ -194,7 +194,7 @@ export const brandDocuments: BrandDocument[] = [
     file: "/documents/carfit/catalogs/carfit-catalogue-2026.pdf",
     cover: "/brands/carfit/documents/carfit-catalogue-2026-cover.webp",
     description:
-      "Kompletan C.A.R.FIT program: kitovi, punioci, klar lakovi, aerosoli, razređivači, poliranje, maskiranje, čišćenje i abrazivi.",
+      "Kompletan C.A.R.FIT program: kitovi, punioci, bezbojni lakovi, aerosoli, razređivači, poliranje, maskiranje, čišćenje i abrazivi.",
     categories: [
       "Putties",
       "Fillers",
@@ -220,7 +220,7 @@ export const brandDocuments: BrandDocument[] = [
     file: "/documents/cosmos-lac/catalogs/cosmos-lac-catalogue-2022.pdf",
     cover: "/brands/cosmos-lac/documents/cosmos-lac-catalogue-2022-cover.webp",
     description:
-      "Kompletan Cosmos LAC program u boji: RAL, Fast Acrylic, Easy Max, Spray.Bike, Chalk Effect, Flame, kao i specijalni programi (High Heat, primeri, lakovi, cink, automotive, effect, fluorescentni).",
+      "Kompletan Cosmos LAC program u boji: RAL, Fast Acrylic, Easy Max, Spray.Bike, Chalk Effect, Flame, kao i specijalni programi (High Heat, prajmeri, lakovi, cink, automotive, effect, fluorescentni).",
     categories: [
       "RAL",
       "Fast Acrylic",

@@ -452,9 +452,9 @@ export const rmColorSystems: RmColorSystemData[] = [
     title: "DIAMONT",
     technology: "Solventna bazna linija",
     description:
-      "Sistem baznih boja sa postojećim artiklima i direktnim ulazom u naš R-M katalog.",
+      "Solventni sistem baznih boja R-M.",
     stages: ["Priprema", "Prajmer", "DIAMONT", "Bezbojni lak"],
-    benefit: "Direktan ulaz u postojeći katalog",
+    benefit: "Solventni radni tok",
   },
   {
     system: "uno-hd",
@@ -912,7 +912,7 @@ export const rmProductFamilies: RmProductFamilyData[] = [
     category: "clearcoat",
     href: rmCatalogHref({ category: "clearcoat" }),
     description:
-      "Završni lakovi predstavljeni prema procesnoj nameni, bez izmišljanja nedostupnih komercijalnih naziva.",
+      "Završni lakovi grupisani prema nameni u procesu lakiranja.",
     tags: [
       "Brzo sušenje",
       "Vazdušno sušenje",

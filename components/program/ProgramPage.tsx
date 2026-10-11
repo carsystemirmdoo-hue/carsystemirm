@@ -21,6 +21,7 @@ export function ProgramPage({
   products,
   program,
   programBySlug,
+  catalogCardCount,
 }: {
   brandBySlug: Map<string, CarsystemBrand>;
   brands: BrandReference[];
@@ -29,11 +30,13 @@ export function ProgramPage({
   products: CarsystemProduct[];
   program: PublicProgramGroup;
   programBySlug: Map<string, ProgramGroup>;
+  /** Broj kartica u `/katalog?program=…` — isti broj koji posetilac vidi u katalogu. */
+  catalogCardCount: number;
 }) {
   return (
     <div className={styles.pageShell}>
       <main className={styles.main}>
-        <ProgramHero phases={phases} productCount={products.length} program={program} />
+        <ProgramHero phases={phases} productCount={catalogCardCount} program={program} />
         <ProgramProcessRail phases={Array.from(phaseBySlug.values())} program={program} />
         <ProgramGuidance program={program} />
         <ProgramBrands brands={brands} program={program} />
@@ -49,7 +52,7 @@ export function ProgramPage({
           extraLabel="Pogledajte katalog"
           primaryHref={`/kontakt?tema=proizvod&program=${program.slug}`}
           primaryLabel="Pošaljite upit"
-          title={`Pronađite proizvode za ${program.name}`}
+          title={`Pronađite proizvode iz programa „${program.name}”`}
         />
       </main>
       <Footer />
@@ -73,8 +76,8 @@ function ProgramProcessRail({
         <p className={styles.sectionKicker}>Refinish proces</p>
         <h2 id="program-process-title">Mesto programa u procesu rada</h2>
         <p>
-          Program se čita kroz redosled pripreme, podloge, boje, laka i završne
-          obrade. Aktivne faze su označene crvenim signalom.
+          Faze procesa od pripreme do završne obrade. Označene su faze u kojima se
+          koristi ovaj program.
         </p>
       </div>
 

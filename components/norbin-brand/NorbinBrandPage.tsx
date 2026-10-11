@@ -90,10 +90,6 @@ function NorbinHero() {
                 <strong>5</strong>
                 <span>odnosa mešanja</span>
               </div>
-              <div>
-                <strong>0</strong>
-                <span>bez sistema boje</span>
-              </div>
             </div>
 
             <div className={styles.heroActions}>
@@ -113,9 +109,7 @@ function NorbinHero() {
             <span className={`${styles.heroRibbon} ${styles.heroRibbonBlue}`} aria-hidden="true" />
             <span className={`${styles.heroRibbon} ${styles.heroRibbonGold}`} aria-hidden="true" />
             <div className={styles.heroPhotoWedge}>
-              <div className={styles.heroPhotoWedgeEmpty} role="img" aria-label="Fotografija radionice još nije dostupna">
-                Fotografija u pripremi
-              </div>
+              <div className={styles.heroPhotoWedgeEmpty} aria-hidden="true" />
             </div>
           </div>
         </div>
@@ -209,8 +203,8 @@ function OdnosSection() {
           Svaki proizvod ima tačno propisanog partnera.
         </h2>
         <p className={styles.sectionLead}>
-          Pet odnosa mešanja pokrivaju ceo Norbin program — baza i
-          učvršđivač uvek idu u tačno propisanoj razmeri, prema tehničkom
+          Pet odnosa mešanja pokriva ceo Norbin program — baza i
+          učvršćivač uvek idu u tačno propisanoj razmeri, prema tehničkom
           listu.
         </p>
 
@@ -307,7 +301,7 @@ function OurProgramSection({ products }: { products: CarsystemProduct[] }) {
           Šta zaista možete poručiti kod nas.
         </h2>
         <p className={styles.sectionLead}>
-          Puni EMEA program ima 13 proizvoda. U našoj ponudi je danas
+          Norbin program ima 13 proizvoda. U našoj ponudi je danas
           potvrđen N15-020, u dva pakovanja — dostupnost ostalih artikala
           potvrđujemo kroz upit.
         </p>
@@ -340,7 +334,7 @@ function OurProgramSection({ products }: { products: CarsystemProduct[] }) {
                   )}
                 </div>
                 <div className={styles.stockedCopy}>
-                  <strong>{product.sku}</strong>
+                  <strong>{product.publicCode ?? product.sku}</strong>
                   <small>{product.packages?.[0]?.label ?? product.name}</small>
                 </div>
               </Link>
@@ -349,9 +343,9 @@ function OurProgramSection({ products }: { products: CarsystemProduct[] }) {
 
           <div className={styles.systemPanel}>
             <p>
-              Pun EMEA program ima 13 proizvoda u pet familija odnosa
-              mešanja. Dostupnost artikala van trenutne ponude potvrđuje se
-              kroz upit — ne prikazujemo ih kao proizvode sa strane sajta.
+              Norbin program obuhvata 13 proizvoda u pet familija odnosa
+              mešanja. Dostupnost artikala koji nisu u našoj trenutnoj ponudi
+              proveravamo na upit.
             </p>
             <p>
               <Link className={styles.buttonText} href="/kontakt?tema=proizvod&brend=norbin">
@@ -377,7 +371,7 @@ function TechnicalSection() {
       <div className={styles.container}>
         <p className={styles.sectionKicker}>Tehnički podaci</p>
         <h2 className={styles.sectionTitle} id="norbin-tech-title">
-          Vrednosti onako kako su odštampane.
+          Podaci iz tehničkih listova proizvođača.
         </h2>
 
         <div className={styles.techLayout}>
@@ -480,7 +474,7 @@ function OriginSection() {
           </div>
 
           <div className={styles.originMedia}>
-            <div className={styles.originMediaEmpty}>Fotografija u pripremi</div>
+            <div className={styles.originMediaEmpty} aria-hidden="true" />
           </div>
         </div>
       </div>

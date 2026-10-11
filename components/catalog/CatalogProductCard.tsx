@@ -14,6 +14,7 @@ import { ProductVisualSurface } from "@/components/product/ProductVisualSurface"
 import { getBrandCardColor } from "@/lib/brand-card-colors";
 import type { CSSProperties, Ref } from "react";
 import styles from "./CatalogPage.module.css";
+import { variantCountLabel } from "@/lib/sr-plural";
 
 export function CatalogProductCard({
   brand,
@@ -113,7 +114,7 @@ export function CatalogProductCard({
       prefetch={false}
       aria-label={
         isFamily
-          ? `Pogledajte grupu proizvoda ${listing.name}, ${listing.variantCount} varijanti`
+          ? `Pogledajte grupu proizvoda ${listing.name}, ${variantCountLabel(listing.variantCount ?? 0)}`
           : `Pogledajte proizvod ${listing.name}`
       }
       data-cursor="card"

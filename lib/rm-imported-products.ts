@@ -91,7 +91,29 @@ export type RmImportedProductsAudit = {
   contentReviewCount: number;
 };
 
-const entries = importedData.products as ImportedProductEntry[];
+/*
+ * Uvoznik je za artikle bez sopstvenog opisa upisao napomenu o poreklu („…, dokumentovan kroz
+ * dostavljeni zvanični R-M materijal.”), a u alt slike „…, dostavljeni prikaz proizvoda”. To je
+ * interna evidencija, ne tekst za posetioca: uklanja se pri čitanju, bez novih tvrdnji.
+ * Generisani JSON ostaje netaknut kao trag porekla (uvoznik traži originalnu arhivu).
+ */
+const PROVENANCE_CLAUSE = /,\s*dokumentovan kroz dostavljeni zvanični R-M materijal\./g;
+const PROVENANCE_ALT = /,\s*dostavljeni prikaz proizvoda$/;
+
+function withoutProvenance(text: string): string {
+  return text.replace(PROVENANCE_CLAUSE, ".");
+}
+
+const entries = (importedData.products as ImportedProductEntry[]).map((entry) => ({
+  ...entry,
+  content: {
+    ...entry.content,
+    shortDescription: withoutProvenance(entry.content.shortDescription),
+    purpose: withoutProvenance(entry.content.purpose),
+    benefit: withoutProvenance(entry.content.benefit),
+  },
+  image: { ...entry.image, alt: entry.image.alt.replace(PROVENANCE_ALT, "") },
+}));
 
 export const rmImportedProductsAudit =
   importedData.audit as RmImportedProductsAudit;
@@ -330,7 +352,7 @@ function getReviewedTechnicalFacts(
     {
       label: "Odnos mešanja",
       value: "3:1:1",
-      detail: "Prema dostavljenom tehničkom listu C 2P42, strana 1.",
+      detail: "Prema tehničkom listu C 2P42, strana 1.",
       reviewStatus: "confirmed",
     },
     {

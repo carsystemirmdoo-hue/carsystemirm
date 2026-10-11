@@ -48,6 +48,7 @@ import {
   toProductVisualPresentation,
   type ProductVisualPresentation,
 } from "@/components/product/productVisualPresentation";
+import { variantCountLabel } from "@/lib/sr-plural";
 
 export type CatalogListingKind = "family" | "product" | "variant";
 
@@ -317,7 +318,7 @@ function familyEntity(family: ProductFamily): CatalogListingEntity {
     categorySlugs: [...categories],
     presentation: toProductVisualPresentation(representative),
     productCode: family.line ?? representative.catalogMetadata?.line ?? family.brandName,
-    technicalLine: `${family.variants.length} varijanti`,
+    technicalLine: variantCountLabel(family.variants.length),
     badges: representative.badges,
     publicStatus: representative.publicStatus,
     stockStatus: representative.stockStatus,
@@ -424,6 +425,16 @@ export function getCatalogListingData(): CatalogListingData {
 
   cached = { canonical, variants };
   return cached;
+}
+
+/**
+ * Broj KARTICA kataloga (porodica = jedna kartica) za interne programe. Ovo je broj koji
+ * posetilac vidi u `/katalog?program=…`; zbir zapisa sa varijantama bio bi veći (npr. 876
+ * naspram 209) i ne bi se slagao sa katalogom.
+ */
+export function countCatalogCardsForProgramSlugs(programSlugs: readonly string[]): number {
+  const wanted = new Set(programSlugs);
+  return getCatalogListingData().canonical.filter((entity) => wanted.has(entity.programSlug)).length;
 }
 
 /**

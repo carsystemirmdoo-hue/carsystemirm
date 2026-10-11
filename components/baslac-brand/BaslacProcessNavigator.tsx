@@ -51,7 +51,7 @@ export function BaslacProcessNavigator() {
             href={baslacCatalogHref({ query: activeStep.query })}
             aria-label={`Pretražite katalog za fazu ${activeStep.title}`}
           >
-            Pretražite javni katalog
+            Pogledajte proizvode u katalogu
             <span aria-hidden="true">↗</span>
           </Link>
         </div>

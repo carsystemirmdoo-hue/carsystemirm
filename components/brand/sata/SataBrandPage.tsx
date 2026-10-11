@@ -195,10 +195,9 @@ export function SataBrandPage({ brand, products }: Props) {
         </header>
 
         <p className={styles.scopeNotice} role="note">
-          <strong>Ovo je program proizvođača, ne naš lager.</strong> Prisustvo
-          proizvoda u našem online katalogu nije potvrda prodaje ni zaliha. Za
-          dostupnost, konfiguraciju i rok isporuke kontaktirajte Carsystem i R-M
-          — cene, zalihe i rokovi ovde nisu navedeni.
+          <strong>Pregled programa proizvođača.</strong> Dostupnost,
+          konfiguraciju i rok isporuke potvrđujemo na upit — cene, zalihe i
+          rokovi ovde nisu navedeni.
         </p>
 
         <div className={styles.familyGrid}>
@@ -421,7 +420,7 @@ export function SataBrandPage({ brand, products }: Props) {
             <h3 className={styles.localCtaTitle}>Proverite dostupnost</h3>
             <p className={styles.localCtaBody}>
               Napišite koji materijal radite i kakav vazduh imate u radionici, pa
-              predlažemo oblast programa i konfiguraciju. Bez obaveze i bez
+              predložićemo oblast programa i konfiguraciju. Bez obaveze i bez
               javnih cena.
             </p>
           </div>

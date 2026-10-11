@@ -6,6 +6,7 @@ import {
   type ProgramGroup,
 } from "@/lib/carsystem-data";
 import styles from "./ProductDetailPage.module.css";
+import { publicSkuOf } from "@/lib/catalog/public-code";
 
 export function ProductReferenceDetails({
   brand,
@@ -22,7 +23,7 @@ export function ProductReferenceDetails({
     ["Brend", brand.name],
     ["Program", program.name],
     ["Faza", phase?.name ?? product.phaseSlug],
-    ["Šifra", product.sku],
+    ["Šifra", product.publicCode ?? publicSkuOf(product)],
     ["Pakovanje", packageSummary],
     ["Status", getProductPublicStatus(product)],
   ].filter(([, value]) => Boolean(value));

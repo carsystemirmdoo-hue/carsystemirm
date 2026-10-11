@@ -159,6 +159,8 @@ const CATALOG = [
   ["SINT-C03", "SINT ANTISILIKON 1L", "LIT", "1000.00", "baslac-70-10-silicone-remover-for-oil-silicone-and-grease", null],
   ["SINT-C04", "SINT ANTISILIKON 5L", "LIT", "960.00", "baslac-70-10-silicone-remover-for-oil-silicone-and-grease", null],
   ["SINT-C05", "SINT VOC FILLER 540 UCVRSCIVAC VEOMA BRZI 0,9L", "KOM", null, "carsystem-2k-voc-filler-540", "144.027"],
+  // LIT sa cenom i potvrđenom vezom, ali BEZ potvrđenog pakovanja → ne poručuje se (nema preračuna).
+  ["SINT-C06", "SINT LAK VOC 4L", "LIT", "2300.00", "norbin-n15-v20-clear-voc", null],
 ] as const;
 for (const [code, name, unit, price, slug, variant] of CATALOG) {
   const [a] = await sql<{ id: string }[]>`INSERT INTO articles (code, name, unit, brand) VALUES (${code}, ${name}, ${unit}, 'SINTKAT') RETURNING id`;
@@ -169,6 +171,14 @@ for (const [code, name, unit, price, slug, variant] of CATALOG) {
   }
   await sql`INSERT INTO article_catalog_mappings (article_id, catalog_product_slug, catalog_variant_id, status, note, proposed_by, proposed_at, confirmed_by, confirmed_at)
             VALUES (${a.id}, ${slug}, ${variant}, 'mapped', 'sintetička potvrđena veza', ${staff.vlasnik}, now(), ${staff.vlasnik}, now())`;
+}
+// 0047: potvrđeno pakovanje (količina u JM) za LIT artikle — kupac poručuje cela pakovanja.
+for (const [code, qty, label] of [
+  ["SINT-B01", "1", "limenka 1 L"], ["SINT-B02", "5", "kanta 5 L"], ["SINT-P01", "1", "limenka 1 L"],
+  ["SINT-C03", "1", "limenka 1 L"], ["SINT-C04", "5", "kanta 5 L"],
+] as const) {
+  await sql`INSERT INTO article_pack_sizes (article_id, pack_quantity, unit, label, evidence, confirmed_by)
+            VALUES (${art[code]}, ${qty}, 'LIT', ${label}, 'sintetička potvrda', ${staff.vlasnik})`;
 }
 await rule(A, { productScope: "brand", brand: "SINTKAT" }, 20);
 await rule(A, { productScope: "brand", brand: "SINTKAT" }, 25, "avans");
@@ -222,6 +232,9 @@ for (const code of ["09001", "09002"]) {
   await sql`INSERT INTO article_base_prices (article_id, net_price, vat_percent, valid_from, source, reason, created_by)
             VALUES (${a1.id}, '5200.00', '20', '2026-01-01', 'rucno', 'sintetička osnovna cena', ${staff.vlasnik})`;
   await rule(A, { productScope: "article", articleId: a1.id }, 15);
+  // PDF fakture prodaju 900001 (KOM) i kao 1,5 — bez izričite potvrde „1 kom“ ne bi bio poručiv.
+  await sql`INSERT INTO article_pack_sizes (article_id, pack_quantity, unit, label, evidence, confirmed_by)
+            VALUES (${a1.id}, '1', 'KOM', '1 kom', 'sintetička potvrda: 1 kom = jedno pakovanje', ${staff.vlasnik})`;
   await sql`INSERT INTO article_catalog_mappings (article_id, catalog_product_slug, catalog_variant_id, status, note, proposed_by, proposed_at, confirmed_by, confirmed_at)
             VALUES (${a1.id}, 'carsystem-2k-voc-filler-540', '144.026', 'mapped', 'sintetička potvrđena veza', ${staff.vlasnik}, now(), ${staff.vlasnik}, now())`;
 }

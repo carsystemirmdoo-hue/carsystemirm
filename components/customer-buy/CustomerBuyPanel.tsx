@@ -6,7 +6,8 @@ import { addCatalogItemAction } from "@/app/kupac/naruci/actions";
 import { requestPriceAction } from "@/app/kupac/upiti/actions";
 import { useOptionalProductVariant } from "@/components/product/ProductVariantProvider";
 import type { CatalogRequestOffer } from "@/lib/ordering/request-service";
-import { money, unitLabel, useCustomerOffers, withVat, type OffersPayload } from "./useCustomerOffers";
+import { money, unitLabel, useCustomerOffers, type OffersPayload } from "./useCustomerOffers";
+import { isSinglePiece } from "@/lib/ordering/packRule.mjs";
 import { offersForView } from "./offerStatus.mjs";
 import styles from "./CustomerBuy.module.css";
 
@@ -60,9 +61,11 @@ export function CustomerBuyPanel({ fallbackSlug, fallbackName }: { fallbackSlug:
       ) : (
         <>
           <p className={styles.note}>
-            {here.length > 0
-              ? "Cena na upit: za ovaj artikal Vaša cena još nije potvrđena."
-              : "Cena na upit: ovaj proizvod još nije povezan sa našim šifrarnikom."}{" "}
+            {here.some((o) => o.state === "no_pack")
+              ? "Cena na upit: pakovanje (zapremina) ovog artikla još nije potvrđeno, pa se ne poručuje preko sajta."
+              : here.length > 0
+                ? "Cena na upit: za ovaj artikal Vaša cena još nije potvrđena."
+                : "Cena na upit: ovaj proizvod još nije povezan sa našim šifrarnikom."}{" "}
             Pošaljite zahtev — javiće Vam se komercijalista ili kancelarija.
           </p>
           <PriceRequest data={data} slug={slug} variantKey={variantKey} articleCode={here[0]?.articleCode ?? null} kind="no_price" />
@@ -75,21 +78,26 @@ export function CustomerBuyPanel({ fallbackSlug, fallbackName }: { fallbackSlug:
 function BuyForm({ data, offers, slug, variantKey }: { data: OffersPayload; offers: CatalogRequestOffer[]; slug: string; variantKey: string | null }) {
   const [id, setId] = useState(offers[0].articleId);
   const offer = offers.find((o) => o.articleId === id) ?? offers[0];
-  const [qty, setQty] = useState(String(offer.step));
+  const pack = offer.pack!;
+  const [packs, setPacks] = useState("1");
   const [pending, start] = useTransition();
   const [msg, setMsg] = useState<{ ok: boolean; text: string } | null>(null);
   const [askTerms, setAskTerms] = useState(false);
   useEffect(() => {
     setMsg(null);
-    setQty(String(offer.step));
-  }, [id, offer.step]);
+    setPacks("1");
+  }, [id]);
   const unit = unitLabel(offer.unit);
   // Samo ODOBRENE opcije kupca, istim redom kao u korpi.
   const prices = data.options.map((o) => ({ option: o, price: offer.byOption[o.key] })).filter((x) => x.price);
+  const n = /^\d{1,3}$/.test(packs.trim()) && Number(packs) >= 1 ? Number(packs) : null;
+  const billing = n !== null ? Math.round(n * pack.quantity * 1000) / 1000 : null;
+  // Jedan komad = jedno pakovanje: obračun je isti broj, ne ponavlja se.
+  const single = isSinglePiece(pack, offer.unit);
 
   const add = () =>
     start(async () => {
-      const r = await addCatalogItemAction({ articleId: offer.articleId, quantity: qty });
+      const r = await addCatalogItemAction({ articleId: offer.articleId, packs: packs.trim() });
       setMsg(r.ok ? { ok: true, text: `Dodato u korpu (${r.count} ${r.count === 1 ? "stavka" : "stavke"}).` } : { ok: false, text: r.message });
       if (r.ok) window.dispatchEvent(new CustomEvent("cs-korpa", { detail: { count: r.count } }));
     });
@@ -97,23 +105,23 @@ function BuyForm({ data, offers, slug, variantKey }: { data: OffersPayload; offe
   return (
     <div className={styles.buy}>
       <fieldset className={styles.packs}>
-        <legend>Pakovanje (BizniSoft artikal)</legend>
+        <legend>Pakovanje</legend>
         {offers.map((o) => {
           const first = data.options.map((x) => o.byOption[x.key]).find((p) => p?.status === "cena");
           return (
             <label key={o.articleId} className={styles.pack} data-active={o.articleId === offer.articleId ? "true" : undefined}>
               <input type="radio" name={`pack-${slug}-${variantKey ?? ""}`} value={o.articleId} checked={o.articleId === offer.articleId} onChange={() => setId(o.articleId)} />
               <span>
-                <strong>{o.articleName}</strong>
+                <strong>{isSinglePiece(o.pack, o.unit) ? o.articleName : o.pack?.label}</strong>
                 <small>
-                  šifra {o.articleCode} · cena po {unitLabel(o.unit)}
+                  {isSinglePiece(o.pack, o.unit) ? `šifra ${o.articleCode} · 1 kom` : `${o.articleName} · šifra ${o.articleCode}`}
                 </small>
               </span>
               <span className={styles.packPrice}>
-                {first && first.status === "cena" ? (
+                {first && first.status === "cena" && first.packAmounts ? (
                   <>
-                    {money.format(first.netPrice)} RSD
-                    <small>bez PDV-a / {unitLabel(o.unit)}</small>
+                    {money.format(first.packAmounts.net)} RSD
+                    <small>bez PDV-a / pakovanje</small>
                   </>
                 ) : (
                   <small>na upit</small>
@@ -124,9 +132,9 @@ function BuyForm({ data, offers, slug, variantKey }: { data: OffersPayload; offe
         })}
       </fieldset>
 
-      <dl className={styles.priceFacts} aria-label="Vaša cena po opciji plaćanja">
+      <dl className={styles.priceFacts} aria-label="Vaša cena pakovanja po opciji plaćanja">
         {prices.map(({ option, price }) =>
-          price.status === "cena" ? (
+          price.status === "cena" && price.packAmounts ? (
             <div key={option.key}>
               <dt>
                 {option.label}
@@ -134,10 +142,11 @@ function BuyForm({ data, offers, slug, variantKey }: { data: OffersPayload; offe
               </dt>
               <dd>
                 <strong>
-                  {money.format(price.netPrice)} RSD / {unit}
+                  {money.format(price.packAmounts.net)} RSD / {pack.label}
                 </strong>{" "}
-                bez PDV-a · {money.format(withVat(price.netPrice, price.vatPercent))} RSD sa PDV-om ({money.format(price.vatPercent)} %)
+                bez PDV-a · {money.format(price.packAmounts.gross)} RSD sa PDV-om ({money.format(price.vatPercent)} %)
                 <small>
+                  {single ? "" : `${money.format(price.netPrice)} RSD / ${unit} · `}
                   {price.discountPercent
                     ? `osnovna ${money.format(price.listPrice)} − rabat ${money.format(price.discountPercent)} %`
                     : "osnovna cena, ugovoreni rabat 0 %"}
@@ -155,21 +164,28 @@ function BuyForm({ data, offers, slug, variantKey }: { data: OffersPayload; offe
 
       <div className={styles.row}>
         <label className={styles.qty}>
-          <span>Količina ({unit})</span>
-          <input type="number" inputMode="decimal" min={offer.step} step={offer.step} value={qty} onChange={(e) => setQty(e.target.value)} disabled={pending} />
+          <span>{single ? `Količina (${unit})` : `Broj pakovanja (${pack.label})`}</span>
+          <input type="number" inputMode="numeric" min={1} step={1} value={packs} onChange={(e) => setPacks(e.target.value)} disabled={pending} />
         </label>
         <button type="button" className={styles.add} onClick={add} disabled={pending} aria-busy={pending}>
           {pending ? "Dodajem…" : "Dodajte u korpu"}
         </button>
       </div>
+      {billing !== null && !single ? (
+        <p className={styles.fine} data-billing>
+          {n} × {pack.label} = {String(billing).replace(".", ",")} {unit} u obračunu
+        </p>
+      ) : null}
       {msg ? (
         <p className={styles.msg} data-ok={msg.ok ? "true" : "false"} role="status">
           {msg.text} {msg.ok ? <Link href="/kupac/korpa">Otvorite korpu →</Link> : null}
         </p>
       ) : null}
       <p className={styles.fine}>
-        Cena važi za {unit} kako je vodi BizniSoft. Opciju plaćanja birate u korpi, za ceo zahtev. Raspoloživost i rok isporuke potvrđuje kancelarija;
-        zahtev nije rezervacija ni faktura.
+        {single
+          ? "Cena je po komadu, kako je vodi BizniSoft. "
+          : `Poručuju se cela pakovanja. Cenovnik vodi cenu po ${unit}; cena pakovanja = ${String(pack.quantity).replace(".", ",")} ${unit} × cena po ${unit}. `}
+        Opciju plaćanja birate u korpi, za ceo zahtev. Raspoloživost i rok isporuke potvrđuje kancelarija; zahtev nije rezervacija ni faktura.
       </p>
       {prices.every((x) => x.price.status !== "cena" || x.price.discountPercent === 0) ? (
         askTerms ? (

@@ -59,6 +59,8 @@ before(async () => {
     await db.sql`INSERT INTO article_base_prices (article_id, net_price, vat_percent, valid_from, source, reason, created_by) VALUES (${a.id}, ${price}, '20', '2026-01-01', 'rucno', 'QA osnovna', ${ids.owner})`;
   }
   await db.sql`INSERT INTO article_programme_decisions (article_id, in_programme, reason, decided_by) VALUES (${art.S1}, false, 'QA sia van programa', ${ids.owner})`;
+  // 0047: B1 (LIT, „1L“) se poručuje u celim pakovanjima — potvrđeno pakovanje 1 L.
+  await db.sql`INSERT INTO article_pack_sizes (article_id, pack_quantity, unit, label, evidence, confirmed_by) VALUES (${art.B1}, '1', 'LIT', 'limenka 1 L', 'QA', ${ids.owner})`;
   await rule({ productScope: "brand", brand: "BASLAC" }, 38);
   await rule({ productScope: "brand", brand: "BASLAC" }, 44, "avans");
   await rule({ productScope: "article", articleId: art.C1 }, 40);
@@ -76,7 +78,7 @@ after(async () => {
     await db.sql`DELETE FROM customer_order_lines WHERE order_id IN (SELECT id FROM customer_orders WHERE customer_id = ${customerId})`;
     await db.sql`DELETE FROM customer_orders WHERE customer_id = ${customerId}`;
     await db.sql`DELETE FROM price_rules WHERE customer_id = ${customerId}`;
-    await db.sql`TRUNCATE customer_payment_options, article_base_prices, article_programme_decisions, customer_commercial_status_decisions`;
+    await db.sql`TRUNCATE customer_payment_options, article_base_prices, article_pack_sizes, article_programme_decisions, customer_commercial_status_decisions`;
     await db.sql`DELETE FROM customer_message_outbox WHERE customer_user_id IN (SELECT id FROM customer_users WHERE customer_id = ${customerId})`;
     await db.sql`DELETE FROM customer_account_tokens WHERE customer_user_id IN (SELECT id FROM customer_users WHERE customer_id = ${customerId})`;
     await db.sql`DELETE FROM customer_users WHERE customer_id = ${customerId}`;
@@ -95,12 +97,12 @@ const user = async (k: string) => (await (await import("@/lib/authz/user-reposit
 test("korpa: obe cene, zbir po izabranoj opciji, stavka na upit bez iznosa, van programa se ne dodaje", async (t) => {
   if (guard(t)) return;
   const s = await svc();
-  assert.equal((await s.addRequestItem(session(), { articleId: art.B1, quantity: "4" })).ok, true);
-  assert.equal((await s.addRequestItem(session(), { articleId: art.C1, quantity: "2" })).ok, true);
-  assert.equal((await s.addRequestItem(session(), { articleId: art.N1, quantity: "1" })).ok, true);
-  const out = await s.addRequestItem(session(), { articleId: art.S1, quantity: "1" });
+  assert.equal((await s.addRequestItem(session(), { articleId: art.B1, packs: "4" })).ok, true);
+  assert.equal((await s.addRequestItem(session(), { articleId: art.C1, packs: "2" })).ok, true);
+  assert.equal((await s.addRequestItem(session(), { articleId: art.N1, packs: "1" })).ok, true);
+  const out = await s.addRequestItem(session(), { articleId: art.S1, packs: "1" });
   assert.equal(out.ok, false, "van programa se ne dodaje");
-  assert.equal((await s.addRequestItem(session(), { articleId: art.C1, quantity: "1,5" })).ok, false, "KOM bez delova");
+  assert.equal((await s.addRequestItem(session(), { articleId: art.C1, packs: "1,5" })).ok, false, "KOM bez delova");
   const av = await s.loadRequestQuote(customerId, "avans");
   const od = await s.loadRequestQuote(customerId, "odlozeno_30");
   assert.deepEqual(av.options.map((o) => o.label), ["Odloženo plaćanje — 30 dana", "Avansno plaćanje"]);
@@ -182,8 +184,8 @@ test("stavka na upit blokira potvrdu; posle odbijenog predloga novi dobija slede
   await db.sql`UPDATE articles SET name = 'CS RAZREĐIVAČ QA BEZ PRAVILA' WHERE id = ${art.N1}`;
   assert.ok((await s.listRequestArticles(customerId, "razredjivac qa")).articles.some((a) => a.articleId === art.N1), "razredjivac → RAZREĐIVAČ");
   assert.ok((await s.listRequestArticles(customerId, "razređivač")).articles.some((a) => a.articleId === art.N1), "razređivač → RAZREĐIVAČ");
-  await s.addRequestItem(session(), { articleId: art.B1, quantity: "2" });
-  await s.addRequestItem(session(), { articleId: art.N1, quantity: "1" });
+  await s.addRequestItem(session(), { articleId: art.B1, packs: "2" });
+  await s.addRequestItem(session(), { articleId: art.N1, packs: "1" });
   const q = await s.loadRequestQuote(customerId, "avans");
   const sent = await s.submitOrderRequest(session(), { idempotencyKey: randomUUID(), fingerprint: q.fingerprint, paymentOption: "avans" });
   assert.equal(sent.status, "created");
@@ -233,7 +235,7 @@ test("verzije: važeća verzija, liste bez starih verzija, server odbija radnju 
   const ord = await import("@/lib/ordering/ordering-service");
   const live = await import("@/lib/ordering/live-stamp");
   const tamara = await user("tamara");
-  await s.addRequestItem(session(), { articleId: art.B1, quantity: "3" });
+  await s.addRequestItem(session(), { articleId: art.B1, packs: "3" });
   const q = await s.loadRequestQuote(customerId, "avans");
   const sent = (await s.submitOrderRequest(session(), { idempotencyKey: randomUUID(), fingerprint: q.fingerprint, paymentOption: "avans" })) as { orderId: string };
   const id = sent.orderId;
@@ -277,7 +279,7 @@ test("verzije: važeća verzija, liste bez starih verzija, server odbija radnju 
 test("opoziv opcije plaćanja posle prikaza korpe traži novu potvrdu", async (t) => {
   if (guard(t)) return;
   const s = await svc();
-  await s.addRequestItem(session(), { articleId: art.B1, quantity: "1" });
+  await s.addRequestItem(session(), { articleId: art.B1, packs: "1" });
   const q = await s.loadRequestQuote(customerId, "avans");
   await db.sql`UPDATE customer_payment_options SET status = 'opozvano' WHERE customer_id = ${customerId} AND option_code = 'avans'`;
   try {
@@ -298,7 +300,7 @@ test("kontrolisana proba: isključeno za sve osim izdvojenog test kupca; probni 
   const [other] = await db.sql<{ id: string }[]>`INSERT INTO customers (pib, name) VALUES (${`QY${RUN}`}, ${`QA DRUGI ${RUN}`}) RETURNING id`;
   try {
     assert.equal((await s.loadRequestQuote(customerId, "avans")).enabled, false, "bez spiska i bez prekidača isključeno");
-    assert.equal((await s.addRequestItem(session(), { articleId: art.B1, quantity: "1" })).ok, false);
+    assert.equal((await s.addRequestItem(session(), { articleId: art.B1, packs: "1" })).ok, false);
     await db.sql`INSERT INTO system_settings (key, value) VALUES ('ordering.trial', ${db.sql.json({ customerIds: [customerId] })})
                  ON CONFLICT (key) DO UPDATE SET value = EXCLUDED.value`;
     assert.equal((await s.loadRequestQuote(customerId, "avans")).enabled, true, "test kupac uključen");
@@ -320,7 +322,7 @@ test("kupac van pripreme za portal ne može da pošalje zahtev", async (t) => {
   if (guard(t)) return;
   const s = await svc();
   await db.sql`INSERT INTO customer_commercial_status_decisions (customer_id, status, reason, decided_by) VALUES (${customerId}, 'van_pripreme_portala', 'QA fakturisanje za druge', ${ids.owner})`;
-  await s.addRequestItem(session(), { articleId: art.B1, quantity: "1" });
+  await s.addRequestItem(session(), { articleId: art.B1, packs: "1" });
   const q = await s.loadRequestQuote(customerId, "avans");
   const r = await s.submitOrderRequest(session(), { idempotencyKey: randomUUID(), fingerprint: q.fingerprint, paymentOption: "avans" });
   assert.equal(r.status, "blocked");
@@ -347,11 +349,11 @@ test("katalog (dok. 61): ponuda samo za potvrđenu vezu, iste cene kao korpa; be
     assert.equal((b1.byOption.odlozeno_30 as { netPrice: number }).netPrice, 620);
     assert.ok(b1.cardKeys.includes(slug));
 
-    const refused = await s.addCatalogItem(session(), { articleId: art.C1, quantity: "1" });
+    const refused = await s.addCatalogItem(session(), { articleId: art.C1, packs: "1" });
     assert.equal(refused.ok, false, "bez potvrđene veze se iz kataloga ne dodaje");
-    assert.equal((await s.addCatalogItem(session(), { articleId: art.N1, quantity: "1" })).ok, false, "predlog veze nije potvrda");
-    assert.equal((await s.addCatalogItem(session(), { articleId: "nije-uuid", quantity: "1" })).ok, false);
-    assert.equal((await s.addCatalogItem(session(), { articleId: art.B1, quantity: "2" })).ok, true);
+    assert.equal((await s.addCatalogItem(session(), { articleId: art.N1, packs: "1" })).ok, false, "predlog veze nije potvrda");
+    assert.equal((await s.addCatalogItem(session(), { articleId: "nije-uuid", packs: "1" })).ok, false);
+    assert.equal((await s.addCatalogItem(session(), { articleId: art.B1, packs: "2" })).ok, true);
     const q = await s.loadRequestQuote(customerId, "avans");
     assert.equal(q.lines.length, 1);
     assert.equal((q.lines[0].byOption.avans as { netPrice: number }).netPrice, 560, "korpa i katalog: isti obračun");
@@ -364,5 +366,68 @@ test("katalog (dok. 61): ponuda samo za potvrđenu vezu, iste cene kao korpa; be
   } finally {
     await db.sql`DELETE FROM customer_cart_items WHERE customer_id = ${customerId}`;
     await db.sql`DELETE FROM article_catalog_mappings WHERE article_id IN (${art.B1}, ${art.N1})`;
+  }
+});
+
+test("pakovanja (0047): 2 × 5 L = 10 LIT kroz ponudu, korpu i zahtev; LIT bez potvrde se ne dodaje; promena pakovanja traži novu potvrdu", async (t) => {
+  if (guard(t)) return;
+  const s = await svc();
+  const slug = "baslac-70-10-silicone-remover-for-oil-silicone-and-grease";
+  await db.sql`DELETE FROM customer_cart_items WHERE customer_id = ${customerId}`;
+  await db.sql`INSERT INTO customer_commercial_status_decisions (customer_id, status, reason, decided_by) VALUES (${customerId}, 'redovan', 'QA ponovo redovan', ${ids.owner})`;
+  const mk = async (k: string, name: string) => {
+    const [a] = await db.sql<{ id: string }[]>`INSERT INTO articles (code, name, unit, brand) VALUES (${code(k)}, ${name}, 'LIT', 'BASLAC') RETURNING id`;
+    await db.sql`INSERT INTO article_base_prices (article_id, net_price, vat_percent, valid_from, source, reason, created_by) VALUES (${a.id}, '960.00', '20', '2026-01-01', 'rucno', 'QA osnovna', ${ids.owner})`;
+    await db.sql`INSERT INTO article_catalog_mappings (article_id, catalog_product_slug, status, confirmed_by, confirmed_at) VALUES (${a.id}, ${slug}, 'mapped', ${ids.owner}, now())`;
+    return a.id;
+  };
+  const five = await mk("P5", "BASLAC ANTISILIKON 70-10 5L");
+  const bare = await mk("PX", "BASLAC ANTISILIKON 70-10 4L");
+  await db.sql`INSERT INTO article_pack_sizes (article_id, pack_quantity, unit, label, evidence, confirmed_by) VALUES (${five}, '5', 'LIT', 'kanta 5 L', 'QA', ${ids.owner})`;
+  try {
+    const cat = await s.loadCatalogRequestOffers(customerId);
+    const o5 = cat.offers.find((o) => o.articleId === five)!;
+    const ox = cat.offers.find((o) => o.articleId === bare)!;
+    assert.deepEqual(o5.pack, { quantity: 5, unit: "LIT", label: "kanta 5 L" });
+    assert.equal(o5.state, "orderable");
+    // avans 44 %: 960 → 537,60 / L; pakovanje 5 L = 2.688,00 bez PDV-a, 3.225,60 sa PDV-om
+    const av = o5.byOption.avans as Extract<typeof o5.byOption.avans, { status: "cena" }>;
+    assert.equal(av.netPrice, 537.6);
+    assert.deepEqual(av.packAmounts, { net: 2688, vat: 537.6, gross: 3225.6 });
+    assert.equal(ox.state, "no_pack", "cena postoji, pakovanje nije potvrđeno → nema poručivanja");
+    assert.equal(ox.pack, null);
+
+    assert.equal((await s.addCatalogItem(session(), { articleId: bare, packs: "1" })).ok, false, "LIT bez potvrde: bez preračuna");
+    assert.equal((await s.addCatalogItem(session(), { articleId: five, packs: "1,5" })).ok, false, "samo cela pakovanja");
+    assert.equal((await s.addCatalogItem(session(), { articleId: five, packs: "2" })).ok, true);
+    const [row] = await db.sql<{ q: string; n: number }[]>`SELECT quantity::text AS q, pack_count AS n FROM customer_cart_items WHERE customer_id = ${customerId} AND article_id = ${five}`;
+    assert.deepEqual(row, { q: "10.000", n: 2 });
+    const q = await s.loadRequestQuote(customerId, "avans");
+    const l = q.lines[0];
+    assert.equal(l.packs, 2);
+    assert.equal(l.quantity, 10);
+    assert.equal(l.packSummary, "2 × kanta 5 L = 10 LIT");
+    assert.equal(q.totals.net, 5376);
+
+    // Pakovanje promenjeno posle prikaza (npr. ispravka na 4 L): obračun se menja → nova potvrda.
+    await db.sql`UPDATE article_pack_sizes SET pack_quantity = 4, label = 'kanta 4 L' WHERE article_id = ${five}`;
+    const stale = await s.submitOrderRequest(session(), { idempotencyKey: randomUUID(), fingerprint: q.fingerprint, paymentOption: "avans" });
+    assert.equal(stale.status, "price_changed");
+    await db.sql`UPDATE article_pack_sizes SET pack_quantity = 5, label = 'kanta 5 L' WHERE article_id = ${five}`;
+
+    const q2 = await s.loadRequestQuote(customerId, "avans");
+    const sent = (await s.submitOrderRequest(session(), { idempotencyKey: randomUUID(), fingerprint: q2.fingerprint, paymentOption: "avans" })) as { orderId: string };
+    assert.ok(sent.orderId, JSON.stringify(sent));
+    const [line] = await db.sql<{ q: string; n: number; pq: string; net: string }[]>`
+      SELECT quantity::text AS q, pack_count AS n, pack_quantity::text AS pq, line_net::text AS net FROM customer_order_lines WHERE order_id = ${sent.orderId}`;
+    assert.deepEqual(line, { q: "10.000", n: 2, pq: "5.000", net: "5376.00" });
+    const { loadOrderRequest } = await import("@/lib/ordering/ordering-service");
+    const detail = await loadOrderRequest(await user("tamara"), sent.orderId);
+    assert.equal(detail?.lines[0].packCount, 2);
+    assert.equal(detail?.lines[0].packQuantity, 5);
+  } finally {
+    await db.sql`DELETE FROM customer_cart_items WHERE customer_id = ${customerId}`;
+    await db.sql`DELETE FROM article_pack_sizes WHERE article_id IN (${five}, ${bare})`;
+    await db.sql`DELETE FROM article_catalog_mappings WHERE article_id IN (${five}, ${bare})`;
   }
 });

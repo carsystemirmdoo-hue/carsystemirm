@@ -1,6 +1,6 @@
 "use client";
 
-import { money, unitLabel, useCustomerOffers } from "./useCustomerOffers";
+import { money, useCustomerOffers } from "./useCustomerOffers";
 import styles from "./CustomerBuy.module.css";
 
 /**
@@ -13,16 +13,16 @@ export function CustomerCardPrice({ cardKey }: { cardKey: string }) {
   if (!data || !data.ordering.enabled) return null;
   const mine = data.offers.filter((o) => o.cardKeys.includes(cardKey));
   if (mine.length === 0) return null;
-  // Najniža cena po svakoj ODOBRENOJ opciji (više pakovanja → „od“).
+  // Cena CELOG pakovanja, samo za potvrđena pakovanja; najniža po svakoj ODOBRENOJ opciji (više pakovanja → „od“).
   const rows = data.options
     .map((opt) => {
       const priced = mine.flatMap((o) => {
         const p = o.byOption[opt.key];
-        return p?.status === "cena" ? [{ net: p.netPrice, unit: o.unit }] : [];
+        return o.state === "orderable" && o.pack && p?.status === "cena" && p.packAmounts ? [{ net: p.packAmounts.net, pack: o.pack.label }] : [];
       });
       if (!priced.length) return null;
       const min = priced.reduce((a, b) => (b.net < a.net ? b : a));
-      return { key: opt.key, label: opt.label, net: min.net, unit: min.unit, from: priced.length > 1 };
+      return { key: opt.key, label: opt.label, net: min.net, pack: min.pack, from: priced.length > 1 };
     })
     .filter((x): x is NonNullable<typeof x> => Boolean(x));
   if (rows.length === 0) {
@@ -34,7 +34,7 @@ export function CustomerCardPrice({ cardKey }: { cardKey: string }) {
         <span key={r.key}>
           {rows.length > 1 ? `${r.label}: ` : "Vaša cena "}
           {r.from ? "od " : ""}
-          <strong>{money.format(r.net)} RSD</strong> / {unitLabel(r.unit)} bez PDV-a
+          <strong>{money.format(r.net)} RSD</strong> / {r.pack} bez PDV-a
         </span>
       ))}
     </span>

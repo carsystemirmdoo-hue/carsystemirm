@@ -6,7 +6,8 @@ import { useEffect, useMemo, useRef, useState, useTransition } from "react";
 import { countOf, STAVKA } from "@/lib/ordering/plural.mjs";
 import { amount, money, percent, quantity as fmtQty } from "@/lib/ordering/panelFormat.mjs";
 import { ScrollTable } from "@/components/ordering/ScrollTable";
-import { confirmPasswordAction, setRequestQuantityAction, submitRequestAction } from "./actions";
+import { confirmPasswordAction, setRequestPacksAction, submitRequestAction } from "./actions";
+import { isSinglePiece } from "@/lib/ordering/packRule.mjs";
 
 export type RequestCartView = {
   idempotencyKey: string;
@@ -21,8 +22,11 @@ export type RequestCartView = {
   correcting: string | null;
   lines: {
     articleId: string; articleCode: string; articleName: string; unit: string; packLabel: string; packConfirmed: boolean;
+    /** Obračunska količina u JM (BizniSoft) = broj pakovanja × pakovanje. */
     quantity: number; step: number; problem: string | null; quantityProblem: string | null;
-    prices: { key: string; label: string; status: "cena" | "na_upit"; netPrice: number | null; listPrice: number | null; discountPercent: number | null }[];
+    /** Broj celih pakovanja koje je kupac izabrao i potvrđeno pakovanje (null = ne poručuje se preko sajta). */
+    packs: number | null; pack: { label: string; quantity: number } | null;
+    prices: { key: string; label: string; status: "cena" | "na_upit"; netPrice: number | null; listPrice: number | null; discountPercent: number | null; packNet: number | null }[];
     amounts: { net: number; vat: number; gross: number } | null;
   }[];
 };
@@ -44,7 +48,8 @@ export function describeChanges(before: RequestCartView, after: RequestCartView)
       out.push(`${b.articleName}: uklonjeno iz korpe.`);
       continue;
     }
-    if (a.quantity !== b.quantity) out.push(`${b.articleName}: količina ${fmtQty(b.quantity)} → ${fmtQty(a.quantity)} ${a.unit}.`);
+    if (a.packs !== b.packs) out.push(`${b.articleName}: broj pakovanja ${b.packs ?? "—"} → ${a.packs ?? "—"}.`);
+    else if (a.quantity !== b.quantity) out.push(`${b.articleName}: obračunska količina ${fmtQty(b.quantity)} → ${fmtQty(a.quantity)} ${a.unit} (promenjeno pakovanje).`);
     const pb = sel(before, b);
     const pa = sel(after, a);
     const fmt = (p: typeof pb, unit: string) => (p?.status === "cena" && p.netPrice !== null ? `${money(p.netPrice)}/${unit} (rabat ${percent(p.discountPercent ?? 0)})` : "na upit");
@@ -238,7 +243,7 @@ export function RequestCartForm({ view }: { view: RequestCartView }) {
               <h2 id="korpa-stavke">
                 Stavke <span className="pn-muted pn-num" style={{ fontWeight: 400 }}>· {view.lines.length}</span>
               </h2>
-              <span className="pn-small pn-muted">Cene za: {selectedLabel} · bez PDV-a, po jedinici mere</span>
+              <span className="pn-small pn-muted">Cene za: {selectedLabel} · bez PDV-a, po pakovanju i po jedinici mere</span>
             </div>
             <ScrollTable label="Stavke korpe">
               <table className="pn-table pn-table-cards">
@@ -246,9 +251,11 @@ export function RequestCartForm({ view }: { view: RequestCartView }) {
                   <tr>
                     <th scope="col">Šifra</th>
                     <th scope="col">Naziv</th>
-                    <th scope="col" className="pn-r">Količina</th>
                     <th scope="col" className="pn-r">
-                      Cena kupca / JM <span className="pn-th-sub">bez PDV-a</span>
+                      Pakovanja <span className="pn-th-sub">obračun u JM</span>
+                    </th>
+                    <th scope="col" className="pn-r">
+                      Cena kupca <span className="pn-th-sub">pakovanje · JM, bez PDV-a</span>
                     </th>
                     <th scope="col" className="pn-r">
                       Iznos <span className="pn-th-sub">bez PDV-a</span>
@@ -271,18 +278,19 @@ export function RequestCartForm({ view }: { view: RequestCartView }) {
                         <td className="pn-c-code">{l.articleCode}</td>
                         <td className="pn-c-name">
                           <span className="pn-strong">{l.articleName}</span>
-                          {l.packConfirmed ? <span className="pn-sub">Pakovanje {l.packLabel}</span> : null}
+                          {l.pack && !isSinglePiece(l.pack, l.unit) ? <span className="pn-sub">Pakovanje: {l.pack.label}</span> : null}
                           {l.problem ? <span className="pn-error">{l.problem}</span> : null}
                         </td>
-                        <td className="pn-r" data-label={`Količina (${l.unit})`}>
+                        <td className="pn-r" data-label="Pakovanja">
+                          {l.pack ? (
                           <span className="pn-inline" style={{ justifyContent: "flex-end", flexWrap: "nowrap" }}>
                             <input
-                              key={`${l.articleId}-${l.quantity}`}
+                              key={`${l.articleId}-${l.packs}`}
                               className="pn-input pn-qty"
-                              aria-label={`Količina, ${l.articleName} (${l.unit})`}
+                              aria-label={`Broj pakovanja, ${l.articleName} (${l.pack.label})`}
                               aria-invalid={l.quantityProblem ? true : undefined}
-                              defaultValue={String(l.quantity).replace(".", ",")}
-                              inputMode="decimal"
+                              defaultValue={l.packs === null ? "" : String(l.packs)}
+                              inputMode="numeric"
                               disabled={busy === `q-${l.articleId}`}
                               onKeyDown={(e) => {
                                 if (e.key === "Enter") {
@@ -294,7 +302,7 @@ export function RequestCartForm({ view }: { view: RequestCartView }) {
                                 e.target.value.trim() !== e.target.defaultValue &&
                                 start(async () => {
                                   setBusy(`q-${l.articleId}`);
-                                  const r = await setRequestQuantityAction({ articleId: l.articleId, quantity: e.target.value.replace(",", ".") });
+                                  const r = await setRequestPacksAction({ articleId: l.articleId, packs: e.target.value.trim() });
                                   setBusy(null);
                                   if (!r.ok) setResult({ ok: false, text: r.message });
                                   ownChange.current = true;
@@ -302,14 +310,25 @@ export function RequestCartForm({ view }: { view: RequestCartView }) {
                                 })
                               }
                             />
-                            <span className="pn-muted pn-small" style={{ minWidth: 28, textAlign: "left" }}>{l.unit}</span>
+                            <span className="pn-muted pn-small" style={{ textAlign: "left", whiteSpace: "nowrap" }}>{isSinglePiece(l.pack, l.unit) ? l.unit : `× ${l.pack.label}`}</span>
                           </span>
+                          ) : (
+                            <span className="pn-muted">—</span>
+                          )}
+                          {l.pack && l.packs !== null && !isSinglePiece(l.pack, l.unit) ? (
+                            <span className="pn-sub pn-num">= {fmtQty(l.quantity)} {l.unit}</span>
+                          ) : null}
                           {l.quantityProblem ? <span className="pn-error" style={{ justifyContent: "flex-end" }}>{l.quantityProblem}</span> : null}
                         </td>
                         <td className="pn-r" data-label="Cena kupca / JM">
                           {p?.status === "cena" ? (
                             <>
-                              <span className="pn-num">
+                              {p.packNet !== null && l.pack && !isSinglePiece(l.pack, l.unit) ? (
+                                <span className="pn-num pn-strong">
+                                  {amount(p.packNet)} <span className="pn-muted" style={{ fontWeight: 400 }}>/ {l.pack.label}</span>
+                                </span>
+                              ) : null}
+                              <span className={p.packNet !== null && !isSinglePiece(l.pack, l.unit) ? "pn-sub pn-num" : "pn-num"}>
                                 {amount(p.netPrice)} <span className="pn-muted">/ {l.unit}</span>
                               </span>
                               {p.listPrice !== null ? <span className="pn-sub pn-num">osnovna {amount(p.listPrice)}</span> : null}
@@ -323,7 +342,7 @@ export function RequestCartForm({ view }: { view: RequestCartView }) {
                           )}
                           {others.map((o) => (
                             <span key={o.key} className="pn-sub pn-num" style={{ marginTop: 4 }}>
-                              {o.label}: {o.status === "cena" ? amount(o.netPrice) : "na upit"}
+                              {o.label}: {o.status === "cena" ? (o.packNet !== null && l.pack && !isSinglePiece(l.pack, l.unit) ? `${amount(o.packNet)} / ${l.pack.label}` : `${amount(o.netPrice)} / ${l.unit}`) : "na upit"}
                             </span>
                           ))}
                         </td>
@@ -345,7 +364,7 @@ export function RequestCartForm({ view }: { view: RequestCartView }) {
                             onClick={() =>
                               start(async () => {
                                 setBusy(`x-${l.articleId}`);
-                                await setRequestQuantityAction({ articleId: l.articleId, quantity: "0" });
+                                await setRequestPacksAction({ articleId: l.articleId, packs: "0" });
                                 setBusy(null);
                                 ownChange.current = true;
                                 router.refresh();

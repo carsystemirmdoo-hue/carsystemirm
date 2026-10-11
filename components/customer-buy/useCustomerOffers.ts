@@ -58,8 +58,3 @@ export function unitLabel(unit: string | null | undefined) {
   const u = String(unit ?? "").toUpperCase();
   return u === "LIT" ? "L" : u === "KOM" ? "kom" : u === "KG" ? "kg" : u.toLowerCase() || "JM";
 }
-
-/** Prikaz cene sa PDV-om (zaokruženo na paru); obračun zahteva radi server. */
-export function withVat(net: number, vatPercent: number) {
-  return Math.round(net * (100 + vatPercent)) / 100;
-}

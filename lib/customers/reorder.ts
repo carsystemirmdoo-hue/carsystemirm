@@ -5,6 +5,7 @@ import { loadDatasetInfo } from "@/lib/data-state/dataset";
 import { sql } from "drizzle-orm";
 import { getDb } from "@/db/client";
 import { loadArticleRequestPrices, type RequestLine } from "@/lib/ordering/request-service";
+import { suggestedPacks } from "@/lib/ordering/packRule.mjs";
 import { variantRedirectTarget } from "@/lib/product-families";
 import { loadCustomerProfile } from "@/lib/recommendations/customer-profile";
 import { belgradeDate } from "@/lib/recommendations/customerRhythm.mjs";
@@ -47,15 +48,18 @@ export type ReorderItem = {
    * plaćanja ima cenu (isti obračun kao korpa). Puni ISTU korpu.
    */
   orderable: boolean;
-  /** Podaci za unos količine; `null` kada artikal nije poručiv. */
+  /** Podaci za unos broja pakovanja; `null` kada artikal nije poručiv. */
   order: {
     articleId: string;
     unit: string;
-    step: number;
-    suggestedQuantity: number;
-    /** Cena po svakoj odobrenoj opciji plaćanja, bez PDV-a, po JM. */
-    prices: { label: string; netPrice: number; vatPercent: number }[];
+    /** Potvrđeno pojedinačno pakovanje (količina u JM) — poručuju se cela pakovanja. */
+    pack: { label: string; quantity: number };
+    suggestedPacks: number;
+    /** Cena celog pakovanja i cena po JM, po svakoj odobrenoj opciji plaćanja, bez PDV-a. */
+    prices: { label: string; packNet: number; netPrice: number; vatPercent: number }[];
   } | null;
+  /** Zašto se ne poručuje preko sajta iako ima cenu (npr. pakovanje nije potvrđeno). */
+  orderNote: string | null;
 };
 
 export type ReorderList = {
@@ -75,17 +79,25 @@ function orderFields(
   line: RequestLine | undefined,
   options: { key: string; label: string }[],
   events: { quantity: number; units: (string | null)[] }[],
-): Pick<ReorderItem, "orderable" | "order"> {
-  if (!line || line.problem) return { orderable: false, order: null };
+): Pick<ReorderItem, "orderable" | "order" | "orderNote"> {
+  if (!line) return { orderable: false, order: null, orderNote: null };
+  const priced = options.some((o) => line.byOption[o.key]?.status === "cena");
+  if (!line.pack) return { orderable: false, order: null, orderNote: priced ? line.packProblem : null };
+  if (line.problem) return { orderable: false, order: null, orderNote: null };
+  const pack = line.pack;
   const prices = options.flatMap((o) => {
     const p = line.byOption[o.key];
-    return p?.status === "cena" ? [{ label: o.label, netPrice: p.netPrice, vatPercent: p.vatPercent }] : [];
+    return p?.status === "cena" && p.packAmounts ? [{ label: o.label, packNet: p.packAmounts.net, netPrice: p.netPrice, vatPercent: p.vatPercent }] : [];
   });
-  if (!prices.length) return { orderable: false, order: null };
+  if (!prices.length) return { orderable: false, order: null, orderNote: null };
+  // Uobičajena količina sa faktura je u JM; predlog je broj celih pakovanja (inače 1).
   const usual = usualQuantity(events);
-  const step = line.step;
-  const suggested = usual && usual.unit?.toUpperCase() === line.unit ? Math.max(step, Math.round(usual.low / step) * step) : step;
-  return { orderable: true, order: { articleId: line.articleId, unit: line.unit, step, suggestedQuantity: suggested, prices } };
+  const suggested = usual && usual.unit?.toUpperCase() === line.unit ? suggestedPacks(usual.low, pack.quantity) : 1;
+  return {
+    orderable: true,
+    order: { articleId: line.articleId, unit: line.unit, pack: { label: pack.label, quantity: pack.quantity }, suggestedPacks: suggested, prices },
+    orderNote: null,
+  };
 }
 
 /** Samo kupčeva istorija. `customerId` dolazi isključivo iz kupčeve sesije. */

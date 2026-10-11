@@ -499,10 +499,10 @@ try {
       await p.waitForLoadState("networkidle");
     }
     // Status u identitetu varijante (ProductIdentity: <small>Status</small><strong>…</strong>).
-    const statusOf = async (p) => { await p.waitForTimeout(600); return txt(p.locator('span:has(> small:text-is("Status")) > strong').first()); };
+    const statusOf = async (p) => { await p.waitForTimeout(600); return txt(p.locator('xpath=//*[normalize-space(text())="Status"]/following-sibling::*[1]').first()); };
     const loginIcon = (p) => p.locator('header a[aria-label="Prijava za kupce"]').first();
     const pathOf = (p) => { const u = new URL(p.url()); return decodeURIComponent(u.pathname + u.search); };
-    async function cartRows(id) { return sqlc`SELECT a.code, ci.quantity::text AS q FROM customer_cart_items ci JOIN articles a ON a.id = ci.article_id WHERE ci.customer_id = ${id} ORDER BY a.code`; }
+    async function cartRows(id) { return sqlc`SELECT a.code, ci.quantity::text AS q, ci.pack_count AS n FROM customer_cart_items ci JOIN articles a ON a.id = ci.article_id WHERE ci.customer_id = ${id} ORDER BY a.code`; }
 
     // 1. Neprijavljen posetilac: bez panela, bez cena — ni u HTML-u ni u API-ju.
     const anon = await win();
@@ -539,21 +539,36 @@ try {
     await panelOf(a.page).locator('input[type="number"]').fill("2");
     await panelOf(a.page).getByRole("button", { name: "Dodajte u korpu" }).click();
     await panelOf(a.page).locator('[role="status"]').waitFor({ timeout: 30000 });
-    check("sajt: dodato iz kataloga u serversku korpu", JSON.stringify(await cartRows(A)) === JSON.stringify([{ code: "SINT-C01", q: "2.000" }]), JSON.stringify(await cartRows(A)));
+    check("sajt: dodato iz kataloga u serversku korpu (2 pakovanja = 2 kom)", JSON.stringify(await cartRows(A)) === JSON.stringify([{ code: "SINT-C01", q: "2.000", n: 2 }]), JSON.stringify(await cartRows(A)));
     const badge = await a.page.locator('header a[aria-label^="Korpa"]').first().getAttribute("aria-label");
     check("sajt: ikonica korpe u zaglavlju pokazuje broj stavki", /1 stavk/.test(badge ?? ""), badge ?? "");
 
     // 3. Dva pakovanja jedne kartice (1 L i 5 L), izbor 5 L.
     await go(a.page, ANTISIL);
     const pAs = await panelText(a.page);
-    check("sajt: dva pakovanja na jednoj kartici (SINT-C03 1 L i SINT-C04 5 L), cena po L, 1 L ispred 5 L", /SINT-C03/.test(pAs) && /SINT-C04/.test(pAs) && pAs.indexOf("SINT-C03") < pAs.indexOf("SINT-C04") && pAs.includes("800,00"), pAs.slice(0, 200));
+    check("sajt: dva pakovanja na jednoj kartici (limenka 1 L ispred kante 5 L), cena celog pakovanja", /SINT-C03/.test(pAs) && /SINT-C04/.test(pAs) && pAs.indexOf("SINT-C03") < pAs.indexOf("SINT-C04") && pAs.includes("800,00") && pAs.includes("3.840,00"), pAs.slice(0, 200));
     await panelOf(a.page).locator('label', { hasText: "SINT-C04" }).locator('input[type="radio"]').check();
     await a.page.waitForTimeout(400);
-    check("sajt: izbor pakovanja menja cenu (5 L: 720,00 avans)", (await txt(panelOf(a.page))).includes("720,00"));
-    await panelOf(a.page).locator('input[type="number"]').fill("5");
+    const p5 = await txt(panelOf(a.page));
+    check("sajt: kanta 5 L — cena pakovanja 3.600,00 avans (5 × 720,00), sa PDV-om 4.320,00; cena po L ostaje vidljiva", p5.includes("3.600,00 RSD / kanta 5 L") && p5.includes("4.320,00") && p5.includes("720,00 RSD / L"), p5.slice(0, 220));
+    await panelOf(a.page).locator('input[type="number"]').fill("2");
+    await a.page.waitForTimeout(300);
+    check("sajt: broj pakovanja i obračun — „2 × kanta 5 L = 10 L u obračunu“", /2 × kanta 5 L = 10 L u obračunu/.test(await txt(panelOf(a.page))));
+    await panelOf(a.page).locator('input[type="number"]').fill("0");
+    await panelOf(a.page).getByRole("button", { name: "Dodajte u korpu" }).click();
+    await panelOf(a.page).locator('[role="status"]').waitFor({ timeout: 30000 });
+    check("sajt: 0 pakovanja se ne prima (deo pakovanja odbija i server — integracioni test)", !/Dodato/.test(await txt(panelOf(a.page).locator('[role="status"]'))) && (await cartRows(A)).length === 1, await txt(panelOf(a.page).locator('[role="status"]')));
+    await panelOf(a.page).locator('input[type="number"]').fill("2");
     await panelOf(a.page).getByRole("button", { name: "Dodajte u korpu" }).click();
     await panelOf(a.page).locator('[role="status"]').waitFor({ timeout: 30000 });
     await a.page.screenshot({ path: `${OUT}/s3-A-dva-pakovanja.png` });
+
+    // 3b. LIT sa cenom, bez potvrđenog pakovanja: nema preračuna ni dodavanja — upit.
+    await go(a.page, "/proizvodi/norbin-n15-v20-clear-voc");
+    const pNp = await panelText(a.page);
+    check("sajt: LIT bez potvrđenog pakovanja → „Cena na upit: pakovanje … nije potvrđeno“, bez dugmeta i bez cene po L", /pakovanje \(zapremina\) ovog artikla još nije potvrđeno/.test(pNp) && !/Dodajte u korpu/.test(pNp) && !/2\.\d{3},00 RSD \/ L/.test(pNp), pNp.slice(0, 200));
+    check("sajt: status za LIT bez pakovanja = „Cena na upit“", /Cena na upit/i.test(await statusOf(a.page)), await statusOf(a.page));
+    await a.page.screenshot({ path: `${OUT}/s3b-A-bez-pakovanja.png`, fullPage: false });
 
     // 4. Na upit: povezan bez cene / nepovezana varijanta.
     await go(a.page, `${VOC}?varijanta=144.027`);
@@ -575,7 +590,7 @@ try {
     await item.getByRole("button", { name: "Dodajte u korpu" }).click();
     await item.locator('[role="status"]').waitFor({ timeout: 30000 });
     await a.page.screenshot({ path: `${OUT}/s5-A-poructe-ponovo.png` });
-    check("sajt: „Poručite ponovo“ i katalog — ista korpa (C01 2, C04 5, 900001 1)", JSON.stringify(await cartRows(A)) === JSON.stringify([{ code: "900001", q: "1.000" }, { code: "SINT-C01", q: "2.000" }, { code: "SINT-C04", q: "5.000" }]), JSON.stringify(await cartRows(A)));
+    check("sajt: „Poručite ponovo“ i katalog — ista korpa (C01 2 kom, C04 2 kante = 10 LIT, 900001 1)", JSON.stringify(await cartRows(A)) === JSON.stringify([{ code: "900001", q: "1.000", n: 1 }, { code: "SINT-C01", q: "2.000", n: 2 }, { code: "SINT-C04", q: "10.000", n: 2 }]), JSON.stringify(await cartRows(A)));
 
     // 6. Odjava sa proizvoda → ista strana, bez cena; ponovna prijava iz kataloga → katalog; korpa ostaje.
     await go(a.page, FILLER);
@@ -630,16 +645,17 @@ try {
     await panelOf(ph.page).locator('[role="status"]').waitFor({ timeout: 30000 });
     await go(ph.page, "/kupac/korpa");
     await ph.page.screenshot({ path: `${OUT}/s8-telefon-korpa.png`, fullPage: true });
-    check("sajt (telefon): korpa firme D ima samo svoju stavku", JSON.stringify(await cartRows(D)) === JSON.stringify([{ code: "SINT-C01", q: "1.000" }]));
+    check("sajt (telefon): korpa firme D ima samo svoju stavku", JSON.stringify(await cartRows(D)) === JSON.stringify([{ code: "SINT-C01", q: "1.000", n: 1 }]));
 
     // 9. Korpa A: zbir po opciji; promena rabata pre slanja → nova potvrda; slanje.
     const k = a.page;
     await korpa(k, "Avansno plaćanje");
     const zAv = await txt(k.locator("main"));
-    check("sajt: korpa A avans = 11.620,00 (2×1.800 + 5×720 + 4.420)", zAv.includes("11.620,00"), (zAv.match(/Osnovica[^A-Z]{0,40}/) ?? [""])[0]);
+    check("sajt: korpa A avans = 15.220,00 (2×1.800 + 2 kante × 3.600 + 4.420)", zAv.includes("15.220,00"), (zAv.match(/Osnovica[^A-Z]{0,40}/) ?? [""])[0]);
+    check("sajt: korpa prikazuje broj pakovanja, obračun u JM i cenu pakovanja", /× kanta 5 L/.test(zAv) && /= 10 LIT/.test(zAv) && zAv.includes("3.600,00"), "");
     await k.screenshot({ path: `${OUT}/s9-A-korpa.png`, fullPage: true });
     await korpa(k, "Odloženo");
-    check("sajt: korpa A odloženo = 12.100,00 (2×1.920 + 5×768 + 4.420)", (await txt(k.locator("main"))).includes("12.100,00"));
+    check("sajt: korpa A odloženo = 15.940,00 (2×1.920 + 2 × 3.840 + 4.420)", (await txt(k.locator("main"))).includes("15.940,00"));
     await korpa(k, "Avansno plaćanje");
     await sqlc`UPDATE price_rules SET discount_percent = 26 WHERE customer_id = ${A} AND brand = 'SINTKAT' AND payment_condition = 'avans'`;
     await fillAndSend(k);
@@ -653,8 +669,12 @@ try {
     await k.waitForLoadState("networkidle");
     const broj = (await txt(k.locator("main"))).match(/Z-\d{4}-\d+/)?.[0] ?? "";
     check("sajt: zahtev poslat iz korpe napunjene sa sajta", Boolean(broj), broj);
-    const red = await sqlc`SELECT l.article_code, l.quantity::text q, l.net_price::text p, l.catalog_product_slug s, l.catalog_variant_id v FROM customer_order_lines l JOIN customer_orders o ON o.id = l.order_id WHERE o.customer_id = ${A} ORDER BY l.article_code`.catch((e) => [{ greska: e.message }]);
+    const red = await sqlc`SELECT l.article_code, l.quantity::text q, l.pack_count n, l.pack_quantity::text pq, l.net_price::text p, l.catalog_product_slug s, l.catalog_variant_id v FROM customer_order_lines l JOIN customer_orders o ON o.id = l.order_id WHERE o.customer_id = ${A} ORDER BY l.article_code`.catch((e) => [{ greska: e.message }]);
     log("stavke zahteva", red);
+    const c04 = red.find((r) => r.article_code === "SINT-C04");
+    check("zahtev: C04 = 2 pakovanja × 5 = 10 LIT po 720,00/L (iznos 7.200,00)", c04 && c04.q === "10.000" && c04.n === 2 && c04.pq === "5.000" && c04.p === "720.0000", JSON.stringify(c04));
+    const det0 = await txt(k.locator("main"));
+    check("zahtev (kupac): stavka pokazuje „2 × kanta 5 L“ i „= 10 LIT“", /2 × kanta 5 L/.test(det0) && /= 10 LIT/.test(det0));
     await k.screenshot({ path: `${OUT}/s10-A-poslato.png`, fullPage: true });
 
     // 10. Kancelarija prima i štampa.
@@ -668,6 +688,7 @@ try {
     await go(t, `${href}/stampa`);
     const st = await txt(t.locator("body"));
     check("kancelarija: štampa zahteva sadrži stavke i broj", st.includes(broj) && /SINT-C01/.test(st) && /SINT-C04/.test(st));
+    check("kancelarija: štampa — količina u JM (10) i „poručeno: 2 × kanta 5 L = 10 LIT“", /poručeno: 2 × kanta 5 L = 10 LIT/.test(st) && /7\.200,00/.test(st));
     const prelivanje = await t.locator("td.zp-code").evaluateAll((els) => els.filter((e) => e.scrollWidth > e.clientWidth + 1).map((e) => e.textContent));
     check("kancelarija: šifra u štampi ne prelazi u susednu kolonu", prelivanje.length === 0 && (await t.locator("td.zp-code").count()) === 3, JSON.stringify(prelivanje));
     await t.screenshot({ path: `${OUT}/s12-stampa.png`, fullPage: true });

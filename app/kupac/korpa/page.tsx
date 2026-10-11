@@ -38,6 +38,7 @@ export default async function CustomerCartPage({ searchParams }: { searchParams:
       lines: q.lines.map((l) => ({
         articleId: l.articleId, articleCode: l.articleCode, articleName: l.articleName, unit: l.unit, packLabel: l.packLabel, packConfirmed: l.packConfirmed,
         quantity: l.quantity, step: l.step, problem: l.problem, quantityProblem: l.quantityProblem, amounts: l.amounts,
+        packs: l.packs, pack: l.pack ? { label: l.pack.label, quantity: l.pack.quantity } : null,
         prices: q.options.map((o) => {
           const p = l.byOption[o.key];
           return {
@@ -45,6 +46,7 @@ export default async function CustomerCartPage({ searchParams }: { searchParams:
             netPrice: p.status === "cena" ? p.netPrice : null,
             listPrice: p.status === "cena" ? p.listPrice : null,
             discountPercent: p.status === "cena" ? p.discountPercent : null,
+            packNet: p.status === "cena" && p.packAmounts ? p.packAmounts.net : null,
           };
         }),
       })),

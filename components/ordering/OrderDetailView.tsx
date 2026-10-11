@@ -8,6 +8,7 @@ import { ORDER_STATUS_LABELS } from "@/lib/ordering/orderRules.mjs";
 import { amount, dmyTime, money, percent, quantity } from "@/lib/ordering/panelFormat.mjs";
 import { orderStage } from "@/lib/ordering/statusView.mjs";
 import { versionDiff } from "@/lib/ordering/versionDiff.mjs";
+import { isSinglePiece } from "@/lib/ordering/packRule.mjs";
 
 type Audience = "customer" | "office";
 
@@ -240,7 +241,7 @@ export function OrderDetailView({
                         naziv vide samo kancelarija i komercijalisti.
                       */}
                       {audience === "office" && l.catalogSlug ? <span className="pn-sub">BizniSoft: {l.articleName}</span> : null}
-                      {l.packConfirmed ? <span className="pn-sub">Pakovanje {l.packLabel}</span> : null}
+                      {l.packConfirmed && l.packCount === null ? <span className="pn-sub">Pakovanje {l.packLabel}</span> : null}
                       {ch?.added ? <span className="pn-tag" data-tone="success">Dodato u ovoj verziji</span> : null}
                       {ch?.quantityFrom !== undefined ? (
                         <span className="pn-tag" data-tone="warning">
@@ -257,7 +258,20 @@ export function OrderDetailView({
                       ) : null}
                     </td>
                     <td className="pn-r pn-num" data-label="Količina">
-                      {quantity(l.quantity)} {l.unit}
+                      {l.packCount !== null && !isSinglePiece({ quantity: l.packQuantity ?? 0 }, l.unit) ? (
+                        <>
+                          <span className="pn-strong">
+                            {l.packCount} × {l.packLabel}
+                          </span>
+                          <span className="pn-sub">
+                            = {quantity(l.quantity)} {l.unit}
+                          </span>
+                        </>
+                      ) : (
+                        <>
+                          {quantity(l.quantity)} {l.unit}
+                        </>
+                      )}
                     </td>
                     {onRequest ? (
                       <>

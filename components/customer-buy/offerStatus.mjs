@@ -3,7 +3,7 @@
  * oznaci statusa. Bez Reacta i bez baze — isto pravilo koriste panel kupovine
  * i oznaka statusa, pa ne smeju da se razilaze.
  *
- * @typedef {{ slug: string; variantKey: string | null; state: "orderable" | "no_price" }} ViewOffer
+ * @typedef {{ slug: string; variantKey: string | null; state: "orderable" | "no_price" | "no_pack" }} ViewOffer
  */
 
 /** @param {string | null | undefined} a @param {string | null | undefined} b */

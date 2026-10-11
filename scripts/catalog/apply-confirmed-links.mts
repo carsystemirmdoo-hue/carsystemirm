@@ -2,11 +2,13 @@
  * Upis POTVRĐENIH veza BizniSoft artikal → katalog i potvrđenih pakovanja (dok. 61).
  *
  *   DATABASE_URL=<baza> npx tsx --tsconfig db/integration/tsconfig.test.json \
- *     scripts/catalog/apply-confirmed-links.mts <plan.json> --potvrdio <email> [--upis]
+ *     scripts/catalog/apply-confirmed-links.mts <plan.json> --potvrdio <email> [--upis | --povuci "<razlog>"]
  *
  * Plan (PRIVATAN, van repoa): { veze: [{ sifra, slug, varijanta|null, jm, pakovanje|null, oznaka, izvor? }], izvor }.
  * Bez `--upis` samo proverava i ispisuje plan. Veza se upisuje kroz `decideMapping`
  * (isti put kao ekran Mapiranja: audit, istorija); pakovanje u `article_pack_sizes`.
+ * `--povuci "<razlog>"` je povratak: veze iz plana koje su potvrđene na isti cilj prelaze u
+ * `revoked` (kroz `decideMapping`, sa razlogom), a pakovanja iz plana se brišu.
  * Production baza (neon) se odbija bez `--production-odobreno` — upis tamo traži
  * posebno odobrenje vlasnika.
  */
@@ -15,7 +17,12 @@ import { sql } from "drizzle-orm";
 
 const [planPath, ...rest] = process.argv.slice(2);
 const arg = (k: string) => { const i = rest.indexOf(k); return i >= 0 ? rest[i + 1] : null; };
-const write = rest.includes("--upis");
+const revokeReason = arg("--povuci");
+const write = rest.includes("--upis") || Boolean(revokeReason);
+if (rest.includes("--upis") && revokeReason) {
+  console.error("--upis i --povuci se ne kombinuju.");
+  process.exit(1);
+}
 const by = arg("--potvrdio");
 if (!planPath || (write && !by)) {
   console.error("Upotreba: <plan.json> [--potvrdio <email> --upis]");
@@ -86,6 +93,21 @@ for (const v of plan.veze) {
 console.table(rows.map((r) => Object.fromEntries(Object.entries(r).filter(([k]) => !k.startsWith("_")))));
 const ready = rows.filter((r) => r._ok);
 console.log(`Spremno: ${ready.length} / ${rows.length}${write ? "" : " — samo plan (bez --upis ništa nije upisano)"}`);
+if (revokeReason) {
+  if (revokeReason.trim().length < 5) { console.error("Razlog povlačenja: najmanje 5 znakova."); process.exit(1); }
+  let n = 0;
+  for (const r of rows) {
+    const v = r._v as Link;
+    if (!r._id) continue;
+    if (r._already) {
+      await decideMapping({ articleId: r._id as string, status: "revoked", note: `${revokeReason.trim()} — ${v.sifra}` }, actor);
+      n += 1;
+    }
+    if (has && v.pakovanje !== null) await db.execute(sql`DELETE FROM article_pack_sizes WHERE article_id = ${r._id as string}::uuid`);
+  }
+  console.log(`Povučeno veza: ${n}.`);
+  process.exit(0);
+}
 if (write) {
   for (const r of ready) {
     const v = r._v as Link;

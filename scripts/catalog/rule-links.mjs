@@ -77,7 +77,7 @@ for (const r of sif) {
   else if (nameBrand && nameBrand !== hits[0].brand) [status, why] = ["sukob — brend", `naziv ukazuje na ${nameBrand}, šifra na ${hits[0].brand}`];
   else if (!nameBrand) [status, why] = ["provera — naziv bez brenda", "šifra se poklapa, ali naziv ne nosi oznaku brenda (CS/BEFAR…): uporediti naziv i kataloški proizvod (slučajno ista šifra je moguća)"];
   else if (!p) [status, why] = ["nije u portalu", "artikal postoji samo u šifarniku (nema ga u portalu) — ne dodaje se"];
-  else if (!(p.kupaca_12m > 0)) [status, why] = ["neaktivan", "nije prodavan 12 meseci — veza po pravilu postoji, upis tek uz odluku"];
+  else if (!(p.kupaca_12m > 0)) [status, why] = ["bez prodaje poslednjih 12 meseci", "veza po pravilu postoji; izostavljeno iz prvog upisa (ne uklanja se iz kataloga)"];
   else {
     const piece = ["KOM", "KT"].includes(String(p.unit).toUpperCase());
     const sp = Number(hits[0].salesPack);

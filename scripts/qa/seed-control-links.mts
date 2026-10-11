@@ -29,10 +29,13 @@ const owner = creds.ids.vlasnik as string;
 let n = 0;
 for (const { sifra } of potvrde.veze) {
   const p = portal.get(sifra);
-  if (!p || !p.osnovna) throw new Error(`${sifra}: nema u snimku ili nema osnovne cene`);
+  if (!p) throw new Error(`${sifra}: nema u snimku`);
   const [a] = await sql<{ id: string }[]>`
     INSERT INTO articles (code, name, unit, brand) VALUES (${sifra}, ${p.name}, ${p.unit}, ${p.brand ?? "KONTROLA"})
     ON CONFLICT (code) DO UPDATE SET name = EXCLUDED.name RETURNING id`;
+  n += 1;
+  // Bez osnovne cene u snimku artikal ostaje „Cena na upit“ (ne izmišlja se).
+  if (!p.osnovna) continue;
   await sql`INSERT INTO article_base_prices (article_id, net_price, vat_percent, valid_from, source, reason, created_by)
             VALUES (${a.id}, ${p.osnovna}, ${p.pdv ?? "20"}, '2026-01-01', 'rucno', 'kontrolna veza: osnovna cena iz snimka', ${owner})`;
   for (const [pct, cond] of [[20, null], [25, "avans"]] as const) {
@@ -43,7 +46,6 @@ for (const { sifra } of potvrde.veze) {
       VALUES ('customer', ${A}, 'article', ${a.id}, ${precedenceLevelFor(s)}, ${scopeKeyFor(s)}, 'discount_percent', ${pct},
               '2026-01-01', 'approved_pending_biznisoft', 'sintetički rabat (kontrolna veza)', ${owner}, now(), ${owner}, now(), false, ${cond})`;
   }
-  n += 1;
 }
 console.log(`Kontrolni artikli u sintetičkoj bazi: ${n} (rabat firme A sintetički 20 % / avans 25 %).`);
 await sql.end();

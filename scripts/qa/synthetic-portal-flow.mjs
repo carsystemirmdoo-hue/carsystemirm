@@ -778,6 +778,7 @@ try {
     await sqlc`DELETE FROM customer_cart_items WHERE customer_id = ${A}`;
     const money = (n) => new Intl.NumberFormat("sr-Latn-RS", { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(n);
     const offers = await k.evaluate(async () => (await (await fetch("/api/kupac/ponude", { cache: "no-store" })).json()).offers);
+    log("ponude kataloga (stanja)", offers.reduce((m, o) => ({ ...m, [o.state]: (m[o.state] ?? 0) + 1 }), {}));
     const panel = k.locator('section[aria-labelledby="buy-panel-title"]');
     for (const v of plan) {
       const [{ base }] = await sqlc`SELECT b.net_price::numeric AS base FROM article_base_prices b JOIN articles a ON a.id = b.article_id WHERE a.code = ${v.sifra} ORDER BY b.valid_from DESC LIMIT 1`;
@@ -791,12 +792,13 @@ try {
       if (await radio.count()) { await radio.check(); await k.waitForTimeout(300); }
       const pt = await txt(panel);
       const shown = pt.includes(`${money(packNet)} RSD / ${v.pakovanje === 1 && v.jm === "KOM" && !v.oznaka ? "1 kom" : v.oznaka}`);
-      const no400 = v.sifra !== "125686" || !/400\s*ml/i.test(pt);
+      // Prefill: „400 ml“ iz BizniSoft naziva nije potvrđen kapacitet — kupac ga ne sme videti kao opis.
+      const no400 = !v.slug.includes("prefill") || !/400\s*ml/i.test(pt);
       check(`kontrolna ${v.sifra}: pakovanje „${v.oznaka}“ = ${v.pakovanje} ${v.jm}, cena pakovanja ${money(packNet)} (osnovna × 0,75 × ${v.pakovanje})`, Boolean(apiOk && shown && no400), apiOk ? (shown ? (no400 ? "" : "400 ml prikazan") : pt.slice(0, 160)) : JSON.stringify(o?.pack ?? o?.state ?? "nema ponude"));
       await panel.locator('input[type="number"]').fill("1");
       await panel.getByRole("button", { name: "Dodajte u korpu" }).click();
       await panel.locator('[role="status"]').waitFor({ timeout: 30000 });
-      if (v.sifra === "125686" || v.sifra === "635020" || v.sifra === "504597") await k.screenshot({ path: `${OUT}/c-${v.sifra}.png` });
+      await k.screenshot({ path: `${OUT}/c-${v.sifra}.png` });
     }
     const cart = await sqlc`SELECT a.code, ci.pack_count AS n, ci.quantity::text AS q FROM customer_cart_items ci JOIN articles a ON a.id = ci.article_id WHERE ci.customer_id = ${A}`;
     const cartOk = plan.every((v) => cart.some((c) => c.code === v.sifra && c.n === 1 && Number(c.q) === v.pakovanje));

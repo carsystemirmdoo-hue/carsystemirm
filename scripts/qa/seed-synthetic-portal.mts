@@ -85,6 +85,8 @@ const STAFF = [
   ["kancelarija", "kancelarija", "SINT Kancelarija"],
   ["petar", "komercijalista", "SINT Petar Komercijalista"],
   ["jovan", "komercijalista", "SINT Jovan Komercijalista"],
+  ["milan", "komercijalista", "SINT Milan Analitika"],
+  ["magacin", "magacioner", "SINT Magacin Magacioner"],
 ] as const;
 for (const [k, role, name] of STAFF) {
   const email = `sint-${k}@revizija.test`;
@@ -102,6 +104,11 @@ for (const [k, role, name] of STAFF) {
 // Jovan ima paket „Nalozi kupaca“, ali dodelu samo za firmu B (provera opsega, A12).
 await sql`INSERT INTO user_permissions (user_id, permission_key, granted_by, reason)
           VALUES (${staff.jovan}, 'kupacki_nalozi', ${staff.vlasnik}, 'sintetička provera opsega')`;
+// Petar i Milan predlažu rabate (kao komercijalisti na Production-u); Milan ima i „analitiku“ (vidi SVE kupce).
+for (const [who, key] of [["petar", "cene_predlog"], ["milan", "cene_predlog"], ["milan", "analitika"]] as const) {
+  await sql`INSERT INTO user_permissions (user_id, permission_key, granted_by, reason)
+            VALUES (${staff[who]}, ${key}, ${staff.vlasnik}, 'sintetički pregled uloga')`;
+}
 
 const customer = async (pib: string, name: string) =>
   (await sql<{ id: string }[]>`INSERT INTO customers (pib, name) VALUES (${pib}, ${name}) RETURNING id`)[0].id;

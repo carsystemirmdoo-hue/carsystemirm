@@ -145,7 +145,7 @@ potvrđuju ručno po artiklu: više Vašeg rada, a ne više programiranja.
 | Korak | Lokalno | Pregledač (sintetička baza) | Objavljeno |
 |---|---|---|---|
 | K1 alat za predloge veza (`scripts/catalog/biznisoft-catalog-proposals.mjs`; dokazi E1 šifra/kataloški broj, E2 kod proizvođača, E3 samo sličan naziv) | ✅ | — (izlaz privatan) | ne |
-| K1 potvrda veza | ⏳ čeka potvrdu 10 kontrolnih veza; ništa nije upisano | — | ne |
+| K1 potvrda veza | ✅ 10 kontrolnih veza i prodajnih jedinica potvrdio vlasnik; pravila Carsystem (šifra bez tačke) i Befar (dopuna nulama do 6) — `scripts/catalog/rule-links.mjs`; upis `scripts/catalog/apply-confirmed-links.mts` (plan samo za čitanje → upis kroz `decideMapping`) | ✅ tok `kontrolne` 15/15 | ne (upis na Production nije odobren; traži 0047) |
 | K2 jedan obračun (`loadCatalogRequestOffers`, isti `priceLines` kao korpa) | ✅ | ✅ | ne |
 | K3 prikaz: pakovanje po BizniSoft artiklu, cena po JM bez/sa PDV-om po odobrenoj opciji, osnova (osnovna − rabat), „Cena na upit“ | ✅ | ✅ | ne |
 | K4 ista serverska korpa iz kataloga i „Poručite ponovo“, broj stavki u zaglavlju | ✅ | ✅ | ne |

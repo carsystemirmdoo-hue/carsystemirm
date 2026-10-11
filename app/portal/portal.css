@@ -9622,19 +9622,53 @@ html:has(.portal-customer-area) { scroll-padding-top: 104px; }
   background: var(--p-surface-subtle);
 }
 
-/* Široki ekrani: tabela zauzima svoju prirodnu širinu, ali najmanje 1180px
- * (ili ceo okvir ako je uži). Široke poslovne tabele dobijaju koliko im treba,
- * a tabela od 2–5 kolona se ne razvlači 3–8× preko sadržaja (npr. meseci na
- * Spremnosti: 337px sadržaja na 2822px). Ispod 1500px se ništa ne menja;
- * kupčev panel nije obuhvaćen. */
+/* Široki ekrani (od 1500px, samo interni portal): širina panela prati sadržaj.
+ *  - Panel čiji je glavni sadržaj tabela (bez filtera i obrazaca) širok je
+ *    koliko i njegova tabela, ali najmanje 560px, da zaglavlje ostane čitljivo.
+ *    Opis, napomene i podnožje se prelamaju unutar te širine i ne šire panel
+ *    (contain: inline-size) — zaglavlje, tabela i podnožje su jedna celina.
+ *  - Široka poslovna tabela i dalje dobija ceo prostor (panel do 100%).
+ *  - Radna površina je red sa prelamanjem: uzastopni uži paneli staju jedan
+ *    pored drugog kada ima mesta; svi ostali blokovi su pune širine.
+ * Nema zajedničkog fiksnog limita: odlučuje sadržaj. Ispod 1500px i u
+ * kupčevom panelu ništa se ne menja. */
 @media (min-width: 1500px) {
-  .portal-root:not(.portal-customer-area) .portal-main :is(.portal-table, .pn-table) {
-    width: auto;
-    min-width: min(100%, 1180px);
+  .portal-root:not(.portal-customer-area) .portal-main {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    align-content: flex-start;
+    column-gap: 16px;
   }
-}
-@media (min-width: 1500px) {
-  .portal-root:not(.portal-customer-area) .portal-main .portal-table:not(:has(thead th:nth-child(4))) {
-    min-width: min(100%, 720px);
+  .portal-root:not(.portal-customer-area) .portal-main > * {
+    flex: 1 1 100%;
+    min-width: 0;
+  }
+  .portal-root:not(.portal-customer-area) .portal-main > .portal-metrics {
+    margin-bottom: 0;
+  }
+  .portal-root:not(.portal-customer-area) .portal-main
+    > .portal-panel:has(> .portal-table-wrap):not(:has(form, .portal-filters, .rr-filters, .portal-metrics, .portal-panel-body, .portal-definition-grid)) {
+    flex: 0 1 auto;
+    width: fit-content;
+    min-width: min(100%, 560px);
+    max-width: 100%;
+  }
+  .portal-root:not(.portal-customer-area) .portal-main
+    > .portal-panel:has(> .portal-table-wrap):not(:has(form, .portal-filters, .rr-filters, .portal-metrics, .portal-panel-body, .portal-definition-grid))
+    :is(.portal-section-header > div, .portal-data-note, .portal-readiness-note, > p, .portal-empty) {
+    contain: inline-size;
+  }
+  .portal-root:not(.portal-customer-area) .portal-main
+    > .portal-panel:has(> .portal-table-wrap):not(:has(form, .portal-filters, .rr-filters, .portal-metrics, .portal-panel-body, .portal-definition-grid))
+    .portal-section-header > div {
+    flex: 1 1 0;
+    min-width: 0;
+  }
+  .portal-root:not(.portal-customer-area) .portal-main
+    > .portal-panel:has(> .portal-table-wrap):not(:has(form, .portal-filters, .rr-filters, .portal-metrics, .portal-panel-body, .portal-definition-grid))
+    .portal-table {
+    width: 100%;
+    min-width: 0;
   }
 }

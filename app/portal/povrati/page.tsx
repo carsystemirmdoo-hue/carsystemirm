@@ -1,3 +1,4 @@
+import { dmy } from "@/lib/ordering/panelFormat.mjs";
 import { PageHeader } from "@/components/portal/PortalPrimitives";
 import {
   money,
@@ -123,7 +124,7 @@ export default async function ReturnsPage({
               {negatives.map((line, index) => (
                 <tr key={`${line.invoiceId}-${index}`}>
                   <th scope="row">{line.invoiceNumber}</th>
-                  <td>{line.issuedOn}</td>
+                  <td className="portal-nowrap">{dmy(String(line.issuedOn).slice(0, 10))}</td>
                   <td>{line.customerName}</td>
                   <td>
                     {line.documentKind === "nepoznato" ? (

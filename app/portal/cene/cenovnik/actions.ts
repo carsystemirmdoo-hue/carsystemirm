@@ -1,4 +1,5 @@
 "use server";
+import { dmy } from "@/lib/ordering/panelFormat.mjs";
 
 import { revalidatePath } from "next/cache";
 import { forbidden, redirect } from "next/navigation";
@@ -94,7 +95,7 @@ export async function setBasePriceAction(_prev: PriceListActionState, formData: 
       vatPercent: String(formData.get("pdv") ?? "") || null,
     });
     revalidatePath(PATH);
-    return { error: null, ok: `Osnovna cena ${r.netPrice} važi od ${r.validFrom}.` };
+    return { error: null, ok: `Osnovna cena ${r.netPrice} važi od ${dmy(String(r.validFrom).slice(0, 10))}.` };
   } catch (error) {
     const m = message(error);
     if (m) return { error: m, ok: null };

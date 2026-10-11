@@ -64,11 +64,25 @@ Portal
 - Kupčev panel i prijave: identični, osim poravnatog reda filtera na Fakturama i pomeraja od 1px na
   Izboru robe (ista visina oznake).
 
+## 3a. Dopuna pre spajanja
+
+- Sinhronizacija → Uređaji: kolona „Radnja“ je zalepljena uz desnu ivicu okvira tabele; na 1366 i 1440px
+  dugme „Skenirajte i sinhronizujte“ je celo vidljivo i stvarni je element pod kursorom (provereno).
+- Uske tabele na širokim ekranima (od 1500px, samo interni portal): tabela zauzima prirodnu širinu, najmanje
+  1180px (720px za 2–3 kolone) ili ceo okvir ako je uži. Ispod 1500px i u kupčevom panelu bez promene.
+- Funkcionalna provera (lokalna kopija, bez upisa osim probnog kupca): filteri Prodaje (period kucanjem +
+  kupac → adresa i rezultat), brzi izbor perioda, neispravan datum, pretraga (Bez komercijaliste), filteri
+  Za razgovor, provera cene sa izborom dana iz kalendara, checkbox (Cenovnik), radio (promena rabata),
+  izbor fajla + „Proverite (bez upisa)“ (Kontakti, sintetički CSV), izbor PDF-a bez slanja (Importi) —
+  sve prošlo na 1440 i 390px, bez JS grešaka. Kupčev tok zahteva + kancelarija (27 provera) — prošlo.
+- Stari i drugi pregledači: Chromium 109.0.5414 (sa isključenim CSSColor4, kao izdati 109), Firefox 151
+  i WebKit 26.5 (Playwright; WebKit nije pravi Safari): javni sajt, portal i kupčev panel na 1440 i 2560 —
+  bez prozirnih boja, bez prelivanja, poravnanja ista, bez JS grešaka. Prvi prolaz Firefox/WebKit je imao
+  ispade dev servera (strana bez stila, greške) koji se u ponovljenom prolazu nisu javili.
+
 ## 4. Ograničenja
 
-- Pravi Safari, Firefox i Chrome/Edge 109 nisu pokretani (CSS prolazi PostCSS rezerve iz #20).
+- Pravi Safari i Edge 109 nisu pokretani (Chromium 109, Firefox 151 i WebKit jesu — vidi 3a).
 - Dugme za izbor fajla prikazuje jezik pregledača („Choose File“) — nije menjano.
 - Čitač ekrana nije pokretan.
-- Tabela uređaja na Sinhronizaciji se na 1440px pomera u svom okviru (dozvoljeno), dugme je delimično
-  van vidnog dela dok se ne pomeri.
 - Radnje koje menjaju podatke nisu pokretane — samo izgled.

@@ -80,6 +80,25 @@ Portal
   bez prozirnih boja, bez prelivanja, poravnanja ista, bez JS grešaka. Prvi prolaz Firefox/WebKit je imao
   ispade dev servera (strana bez stila, greške) koji se u ponovljenom prolazu nisu javili.
 
+## 3b. Završna dorada (kod 4bad8b0)
+
+- Mreža definicija (Raspon uvezenih datuma, zaglavlje fakture): broj kolona prati broj podataka, bez prazne ćelije
+  (ranije fiksne 3 kolone); na uskom ekranu jedna ispod druge.
+- Kartice pokazatelja: uravnoteženi redovi bez upita za širinu kontejnera — 6 → 6 / 3 × 2 / 2 × 3 / 1, 8 → 8 / 4 × 2 /
+  2 × 4 / 1, 4 → 4 / 2 × 2, 3 → 3 / 1; kartica ≥ 240px, font nepromenjen. Provereno svakih 40px od 360 do 3440.
+- Procenti u srpskom zapisu (`100,0 %`) na Spremnosti, rabatima, cenovniku i odobravanju. Tekstovi u `lib/pricing` koji
+  se upisuju u razloge revizije nisu menjani.
+- Duge strane (uzrok: prikaz svih već učitanih redova): Kartica kupca → „Predlozi za proširenje“ prvih 20 + „Prikažite
+  ostalih N“ (54.556 → 18.995px); Rabati iz faktura → po odeljku prvih 20 + „Prikažite ostalih N“ (56.118 → 4.777px).
+  Upit i podaci isti. „Artikli“ na kartici nisu sklopljeni jer predlozi vode na njihova sidra (`#artikal-…`).
+- Naslov zalepljene prve kolone ostaje na mestu pri vodoravnom pomeranju (Sinhronizacija → Uređaji i ostale tabele sa
+  zaglavljem reda).
+
+Predlog za posebnu doradu (nije u ovom PR-u): Artikli na kartici kupca (272 reda, ~16.000px) — sklapanje grupa uz
+automatsko otvaranje grupe kada se prati veza `#artikal-…` (mala skripta na klijentu) ili prikaz po grupama sa
+brojem; na Spremnosti duga tabela meseci (720px, sama se pomera) određuje visinu reda kratkih panela na širokom ekranu,
+pa ispod kratkih ostaje do ~400px sive površine — rešivo samo drugim redosledom panela.
+
 ## 4. Ograničenja
 
 - Pravi Safari i Edge 109 nisu pokretani (Chromium 109, Firefox 151 i WebKit jesu — vidi 3a).

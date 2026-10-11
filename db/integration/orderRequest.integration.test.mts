@@ -325,3 +325,37 @@ test("kupac van pripreme za portal ne može da pošalje zahtev", async (t) => {
   const r = await s.submitOrderRequest(session(), { idempotencyKey: randomUUID(), fingerprint: q.fingerprint, paymentOption: "avans" });
   assert.equal(r.status, "blocked");
 });
+
+test("katalog (dok. 61): ponuda samo za potvrđenu vezu, iste cene kao korpa; bez veze se ne dodaje", async (t) => {
+  if (guard(t)) return;
+  const s = await svc();
+  const slug = "baslac-70-10-silicone-remover-for-oil-silicone-and-grease";
+  await db.sql`DELETE FROM customer_cart_items WHERE customer_id = ${customerId}`;
+  await db.sql`INSERT INTO article_catalog_mappings (article_id, catalog_product_slug, status, confirmed_by, confirmed_at) VALUES (${art.B1}, ${slug}, 'mapped', ${ids.owner}, now())`;
+  await db.sql`INSERT INTO article_catalog_mappings (article_id, catalog_product_slug, status) VALUES (${art.N1}, ${slug}, 'suggested')`;
+  try {
+    const cat = await s.loadCatalogRequestOffers(customerId);
+    assert.equal(cat.enabled, true);
+    const mine = cat.offers.filter((o) => [art.B1, art.C1, art.N1].includes(o.articleId));
+    assert.deepEqual(mine.map((o) => o.articleId), [art.B1], "samo potvrđena veza; predlog i nepovezan artikal se ne nude");
+    const b1 = mine[0];
+    assert.equal(b1.slug, slug);
+    assert.equal(b1.state, "orderable");
+    assert.equal((b1.byOption.avans as { netPrice: number }).netPrice, 560);
+    assert.equal((b1.byOption.odlozeno_30 as { netPrice: number }).netPrice, 620);
+    assert.ok(b1.cardKeys.includes(slug));
+
+    const refused = await s.addCatalogItem(session(), { articleId: art.C1, quantity: "1" });
+    assert.equal(refused.ok, false, "bez potvrđene veze se iz kataloga ne dodaje");
+    assert.equal((await s.addCatalogItem(session(), { articleId: art.N1, quantity: "1" })).ok, false, "predlog veze nije potvrda");
+    assert.equal((await s.addCatalogItem(session(), { articleId: "nije-uuid", quantity: "1" })).ok, false);
+    assert.equal((await s.addCatalogItem(session(), { articleId: art.B1, quantity: "2" })).ok, true);
+    const q = await s.loadRequestQuote(customerId, "avans");
+    assert.equal(q.lines.length, 1);
+    assert.equal((q.lines[0].byOption.avans as { netPrice: number }).netPrice, 560, "korpa i katalog: isti obračun");
+    assert.equal(q.totals.net, 1120);
+  } finally {
+    await db.sql`DELETE FROM customer_cart_items WHERE customer_id = ${customerId}`;
+    await db.sql`DELETE FROM article_catalog_mappings WHERE article_id IN (${art.B1}, ${art.N1})`;
+  }
+});

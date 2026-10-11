@@ -37,7 +37,10 @@ export function CustomerBuyPanel({ fallbackSlug, fallbackName }: { fallbackSlug:
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [data, slug, viewKeys.join("|")],
   );
-  const orderable = here.filter((o) => o.state === "orderable");
+  // Pakovanja po nazivu sa brojevima (0,5L → 1L → 5L), ne po redosledu iz baze.
+  const orderable = here
+    .filter((o) => o.state === "orderable")
+    .sort((a, b) => a.articleName.localeCompare(b.articleName, "sr", { numeric: true }));
 
   if (!data) return null;
 

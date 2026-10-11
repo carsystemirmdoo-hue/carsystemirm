@@ -151,6 +151,34 @@ for (const o of ["avans", "odlozeno_30"]) {
             VALUES (${A}, ${o}, 'odobreno', '2026-01-01', 'sintetički odobreno', ${staff.vlasnik}, ${staff.vlasnik}, now())`;
 }
 
+// Kupovina preko sajta (dok. 61, K6): sintetički artikli sa POTVRĐENOM vezom na stvarne
+// kataloške proizvode (cene izmišljene). C05 je povezan bez osnovne cene → „Cena na upit“;
+// ostale varijante tih proizvoda ostaju bez veze. C03 i C04 su dva pakovanja jedne kartice.
+const CATALOG = [
+  ["SINT-C01", "SINT FILLER AIR PLUS SIVI 1,25L", "KOM", "2400.00", "carsystem-2k-filler-air-plus", "152.580"],
+  ["SINT-C03", "SINT ANTISILIKON 1L", "LIT", "1000.00", "baslac-70-10-silicone-remover-for-oil-silicone-and-grease", null],
+  ["SINT-C04", "SINT ANTISILIKON 5L", "LIT", "960.00", "baslac-70-10-silicone-remover-for-oil-silicone-and-grease", null],
+  ["SINT-C05", "SINT VOC FILLER 540 UCVRSCIVAC VEOMA BRZI 0,9L", "KOM", null, "carsystem-2k-voc-filler-540", "144.027"],
+] as const;
+for (const [code, name, unit, price, slug, variant] of CATALOG) {
+  const [a] = await sql<{ id: string }[]>`INSERT INTO articles (code, name, unit, brand) VALUES (${code}, ${name}, ${unit}, 'SINTKAT') RETURNING id`;
+  art[code] = a.id;
+  if (price) {
+    await sql`INSERT INTO article_base_prices (article_id, net_price, vat_percent, valid_from, source, reason, created_by)
+              VALUES (${a.id}, ${price}, '20', '2026-01-01', 'rucno', 'sintetička osnovna cena', ${staff.vlasnik})`;
+  }
+  await sql`INSERT INTO article_catalog_mappings (article_id, catalog_product_slug, catalog_variant_id, status, note, proposed_by, proposed_at, confirmed_by, confirmed_at)
+            VALUES (${a.id}, ${slug}, ${variant}, 'mapped', 'sintetička potvrđena veza', ${staff.vlasnik}, now(), ${staff.vlasnik}, now())`;
+}
+await rule(A, { productScope: "brand", brand: "SINTKAT" }, 20);
+await rule(A, { productScope: "brand", brand: "SINTKAT" }, 25, "avans");
+// Firma D: drugi rabat, samo jedna opcija plaćanja.
+const D = await customer("SINT-0004", "SINT Lakirnica D");
+await sql`INSERT INTO customer_assignments (customer_id, user_id) VALUES (${D}, ${staff.petar})`;
+await rule(D, { productScope: "brand", brand: "SINTKAT" }, 10);
+await sql`INSERT INTO customer_payment_options (customer_id, option_code, status, effective_from, reason, proposed_by, decided_by, decided_at)
+          VALUES (${D}, 'avans', 'odobreno', '2026-01-01', 'sintetički odobreno', ${staff.vlasnik}, ${staff.vlasnik}, now())`;
+
 // Dve fakture firme A: „ranije kupljeno“ u izboru artikala i spisak faktura kupca.
 const invoices = [
   ["SINT-RN-0001", "2026-09-15", [["SINT-B01", "4.000", "1000.0000", "30", "2800.00"], ["SINT-K01", "2.000", "800.0000", "40", "960.00"]]],
@@ -166,7 +194,7 @@ for (const [number, day, lines] of invoices) {
   for (const [code, qty, price, disc, amount] of lines) {
     ln += 1;
     await sql`INSERT INTO invoice_lines (invoice_id, line_number, article_id, article_code, description, quantity, unit_price, discount_percent, line_amount)
-              VALUES (${inv.id}, ${ln}, ${art[code]}, ${code}, ${ARTICLES.find((a) => a[0] === code)![1]}, ${qty}, ${price}, ${disc}, ${amount})`;
+              VALUES (${inv.id}, ${ln}, ${art[code]}, ${code}, ${[...ARTICLES, ...CATALOG].find((a) => a[0] === code)![1]}, ${qty}, ${price}, ${disc}, ${amount})`;
   }
 }
 
@@ -187,7 +215,18 @@ for (const code of ["09001", "09002"]) {
   }
 }
 
-await sql`INSERT INTO system_settings (key, value) VALUES ('ordering.trial', ${sql.json({ customerIds: [A] })})`;
+// „Poručite ponovo“ čita samo potvrđene uvoze: artikal iz PDF uvoza (900001) dobija sintetičku
+// osnovnu cenu, rabat firme A i potvrđenu vezu na jednu stvarnu kataloški varijantu.
+{
+  const [a1] = await sql<{ id: string }[]>`SELECT id FROM articles WHERE code = '900001'`;
+  await sql`INSERT INTO article_base_prices (article_id, net_price, vat_percent, valid_from, source, reason, created_by)
+            VALUES (${a1.id}, '5200.00', '20', '2026-01-01', 'rucno', 'sintetička osnovna cena', ${staff.vlasnik})`;
+  await rule(A, { productScope: "article", articleId: a1.id }, 15);
+  await sql`INSERT INTO article_catalog_mappings (article_id, catalog_product_slug, catalog_variant_id, status, note, proposed_by, proposed_at, confirmed_by, confirmed_at)
+            VALUES (${a1.id}, 'carsystem-2k-voc-filler-540', '144.026', 'mapped', 'sintetička potvrđena veza', ${staff.vlasnik}, now(), ${staff.vlasnik}, now())`;
+}
+
+await sql`INSERT INTO system_settings (key, value) VALUES ('ordering.trial', ${sql.json({ customerIds: [A, D] })})`;
 
 const kupacEmail = "sint-kupac-a@revizija.test";
 const kupacPassword = randomBytes(18).toString("base64url");
@@ -196,10 +235,15 @@ const [kupac] = await sql<{ id: string }[]>`
   VALUES (${A}, ${kupacEmail}, 'SINT Kupac A', ${await hashPassword(kupacPassword)}, 'active') RETURNING id`;
 await sql`INSERT INTO customer_users (customer_id, email, name, status)
           VALUES (${B}, 'sint-kupac-b@revizija.test', 'SINT Kupac B', 'requested')`;
+const kupacDPassword = randomBytes(18).toString("base64url");
+const [kupacD] = await sql<{ id: string }[]>`
+  INSERT INTO customer_users (customer_id, email, name, password_hash, status)
+  VALUES (${D}, 'sint-kupac-d@revizija.test', 'SINT Kupac D', ${await hashPassword(kupacDPassword)}, 'active') RETURNING id`;
 creds.kupac = { email: kupacEmail, password: kupacPassword, role: "kupac" };
-creds.ids = { A, B, C, kupacA: kupac.id, ...staff };
+creds.kupacD = { email: "sint-kupac-d@revizija.test", password: kupacDPassword, role: "kupac" };
+creds.ids = { A, B, C, D, kupacA: kupac.id, kupacD: kupacD.id, ...staff };
 
 writeFileSync(credsFile, JSON.stringify(creds, null, 2), { mode: 0o600 });
-console.log(`Sintetička baza spremna: 3 firme, ${ARTICLES.length} artikala, 2 + 2 fakture (2 kroz pravi PDF uvoz), 4 zaposlena, 1 aktivan kupčev nalog.`);
+console.log(`Sintetička baza spremna: 4 firme, ${ARTICLES.length + CATALOG.length} artikala (${CATALOG.length} sa potvrđenom vezom na katalog), 2 + 2 fakture (2 kroz pravi PDF uvoz), 4 zaposlena, 2 aktivna kupčeva naloga (A: dve opcije, D: jedna).`);
 await sql.end();
 process.exit(0);

@@ -1,4 +1,5 @@
 "use server";
+import { dmy } from "@/lib/ordering/panelFormat.mjs";
 
 import { revalidatePath } from "next/cache";
 import { requireCapability } from "@/lib/authz/session";
@@ -57,7 +58,7 @@ export async function submitChangeAction(
     return {
       ok: true as const,
       message: r.approved
-        ? `Odobreno: ${r.count} pravila važe od ${input.effectiveFrom} (serija ${r.batchId}).`
+        ? `Odobreno: ${r.count} pravila važe od ${dmy(String(input.effectiveFrom).slice(0, 10))} (serija ${r.batchId}).`
         : `Poslato na odobrenje: ${r.count} predloga. Cena se ne menja dok ih vlasnik ne odobri.`,
     };
   } catch (error) {

@@ -25,14 +25,12 @@ export default async function PriceHistoryPage() {
         }
         meta={<span>Ukupno pravila: {rules.length}</span>}
       />
-      <section className="portal-panel">
-        <p>
-          Potpuni trag svake promene — sa starom i novom vrednošću — stoji u{" "}
-          <strong>Aktivnostima</strong>. Trag je append-only i ne može se
-          izmeniti ni obrisati, pa je ovaj pregled njegov sažetak, ne zamena.
-        </p>
-      </section>
-      <RuleTable rows={rules} showActions={canDecide} />
+      <RuleTable
+        rows={rules}
+        showActions={canDecide}
+        title={`Pravila (${rules.length})`}
+        description="Potpuni trag svake promene — sa starom i novom vrednošću — stoji u Aktivnostima. Trag se samo dopunjuje i ne može se izmeniti ni obrisati, pa je ovaj pregled njegov sažetak, ne zamena."
+      />
     </>
   );
 }

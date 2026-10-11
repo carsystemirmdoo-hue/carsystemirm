@@ -312,7 +312,7 @@ export default async function DataReadinessPage({
           </table>
         </div>
         <p className="portal-readiness-note">
-          Nulti imenitelj daje „nije dostupno“, ne 0% i ne 100%: nula od nule nije ni
+          Nulti imenitelj daje „nije dostupno“, ne 0 % i ne 100 %: nula od nule nije ni
           „ništa nije mapirano“ ni „sve je mapirano“.
         </p>
       </section>

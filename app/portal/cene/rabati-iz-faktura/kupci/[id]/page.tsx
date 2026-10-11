@@ -1,3 +1,4 @@
+import { percent } from "@/lib/ordering/panelFormat.mjs";
 import Link from "next/link";
 import { forbidden, notFound } from "next/navigation";
 import { DOCUMENT_KIND_LABELS, srDate } from "@/components/customer/account-format";
@@ -476,7 +477,7 @@ export default async function RebateReviewCustomerPage({
                             {p && p.status === "cena" ? (
                               <>
                                 <strong>{(p.netCents / 100).toLocaleString("sr-RS", { minimumFractionDigits: 2, maximumFractionDigits: 2 })} RSD</strong>
-                                <small>bez PDV-a / {p.unit ?? "JM"} · rabat {p.discountPercent ?? "—"} %</small>
+                                <small>bez PDV-a / {p.unit ?? "JM"} · rabat {p.discountPercent == null ? "—" : percent(Number(p.discountPercent))}</small>
                               </>
                             ) : (
                               <small>{p && "message" in p ? p.message : "—"}</small>

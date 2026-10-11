@@ -3,7 +3,7 @@ import { Badge, PageHeader, SectionHeader } from "@/components/portal/PortalPrim
 import { BasePriceForm, PriceListUploadForm } from "@/features/portal/PriceListForms";
 import { requireCapability } from "@/lib/authz/session";
 import { basePriceHistory, checksAllowApply, listPriceListImports } from "@/lib/pricing/price-list-service";
-import { dmy, dmyTime } from "@/lib/ordering/panelFormat.mjs";
+import { dmy, dmyTime, percent } from "@/lib/ordering/panelFormat.mjs";
 
 export const dynamic = "force-dynamic";
 
@@ -98,7 +98,7 @@ export default async function PriceListPage({ searchParams }: { searchParams: Pr
                     <tr key={idx}>
                       <td>{day(h.valid_from)}</td>
                       <td className="portal-table-number">{N.format(Number(h.net_price))}</td>
-                      <td className="portal-table-number">{Number(h.vat_percent)} %</td>
+                      <td className="portal-table-number">{percent(Number(h.vat_percent))}</td>
                       <td>{h.source === "rucno" ? "ručna izmena" : `cenovnik ${h.file_name ?? ""}`}</td>
                       <td>{h.reason ?? "—"}</td>
                       <td>{h.created_by ?? "—"} · {DT.format(new Date(h.created_at))}</td>

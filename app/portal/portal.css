@@ -7539,7 +7539,7 @@ section.portal-metrics {
 .portal-panel:has(> h2:first-child, > h3:first-child) {
   display: grid;
   gap: 12px;
-  padding: 18px 20px 20px;
+  padding: 16px;
 }
 /* Deca mreže smeju da se suze; inače obrazac od dve kolone gura panel preko ekrana. */
 .portal-panel:has(> h2:first-child, > h3:first-child) > *,
@@ -7569,27 +7569,27 @@ section.portal-metrics {
   line-height: 1.55;
 }
 .portal-panel:has(> h2:first-child, > h3:first-child) > .portal-table-wrap {
-  width: calc(100% + 40px);
+  width: calc(100% + 32px);
   max-width: none;
-  margin-inline: -20px;
+  margin-inline: -16px;
   border-top: 1px solid var(--p-line);
   border-radius: 0;
 }
 .portal-panel:has(> h2:first-child, > h3:first-child) > .portal-table-wrap:last-child {
-  margin-bottom: -20px;
-  border-radius: 0 0 10px 10px;
+  margin-bottom: -16px;
+  border-radius: 0 0 6px 6px;
 }
 .portal-panel-body > .portal-table-wrap {
-  width: calc(100% + 36px);
+  width: calc(100% + 32px);
   max-width: none;
-  margin-inline: -18px;
+  margin-inline: -16px;
   border-block: 1px solid var(--p-line);
   border-radius: 0;
 }
 .portal-panel-body > .portal-table-wrap:last-child {
-  margin-bottom: -18px;
+  margin-bottom: -16px;
   border-bottom: 0;
-  border-radius: 0 0 10px 10px;
+  border-radius: 0 0 6px 6px;
 }
 .portal-panel-body {
   display: grid;
@@ -7758,7 +7758,7 @@ section.portal-metrics {
   white-space: nowrap;
 }
 .portal-access-details > summary {
-  padding: 14px 20px;
+  padding: 14px 16px;
   cursor: pointer;
   color: var(--p-ink);
   font-size: 13px;
@@ -7789,7 +7789,7 @@ section.portal-metrics {
   grid-template-columns: auto 1fr;
   align-items: center;
   gap: 14px 24px;
-  padding: 18px 20px;
+  padding: 18px 16px;
   border-bottom: 1px solid var(--p-line);
 }
 .cs-summary-top .portal-badge {
@@ -7834,7 +7834,7 @@ section.portal-metrics {
   display: grid;
   align-content: start;
   gap: 8px;
-  padding: 16px 20px 18px;
+  padding: 16px 16px 18px;
 }
 .cs-block + .cs-block {
   border-left: 1px solid var(--p-line);
@@ -8111,7 +8111,7 @@ section.portal-metrics {
   font-weight: 650;
 }
 .cs-group-thin > .cs-group-list { margin-top: 8px; }
-.cs-method > summary { padding: 14px 20px; }
+.cs-method > summary { padding: 14px 16px; }
 .cs-method[open] > summary { border-bottom: 1px solid var(--p-line); }
 
 @media (max-width: 1100px) {
@@ -8145,7 +8145,7 @@ section.portal-metrics {
   display: flex;
   flex-wrap: wrap;
   gap: 4px 18px;
-  padding: 9px 20px;
+  padding: 9px 16px;
   border-bottom: 1px solid var(--p-line);
   background: #f7f8fa; background: oklch(0.98 0.003 255);
   color: var(--p-muted);
@@ -8170,7 +8170,7 @@ section.portal-metrics {
   align-items: center;
   justify-content: space-between;
   gap: 12px 24px;
-  padding: 14px 20px;
+  padding: 14px 16px;
 }
 .zr-status > div:first-child {
   display: flex;
@@ -8193,12 +8193,12 @@ section.portal-metrics {
 .zr-item {
   display: grid;
   gap: 8px;
-  padding: 16px 20px;
+  padding: 16px 16px;
 }
 .zr-item + .zr-item { border-top: 1px solid var(--p-line); }
 .zr-rest { border-top: 1px solid var(--p-line); }
 .zr-rest > summary {
-  padding: 12px 20px;
+  padding: 12px 16px;
   color: var(--p-ink);
   font-size: 13px;
   font-weight: 650;
@@ -8238,14 +8238,14 @@ section.portal-metrics {
 .zr-articles li[data-tone="success"] { border-left-color: var(--p-green); }
 .zr-next { padding: 10px 12px; border-radius: 8px; background: #f7fafe; background: oklch(0.985 0.006 255); }
 .zr-open { display: inline-block; margin-top: 8px; color: var(--p-red); font-size: 13px; font-weight: 650; }
-.zr-quiet > summary { padding: 14px 20px; cursor: pointer; font-size: 13px; font-weight: 650; color: var(--p-ink); }
+.zr-quiet > summary { padding: 14px 16px; cursor: pointer; font-size: 13px; font-weight: 650; color: var(--p-ink); }
 .zr-quiet[open] > summary { border-bottom: 1px solid var(--p-line); }
 .zr-quiet-list { display: grid; margin: 0; padding: 0; list-style: none; }
 .zr-quiet-list li {
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto;
   gap: 4px 12px;
-  padding: 10px 20px;
+  padding: 10px 16px;
   font-size: 13px;
 }
 .zr-quiet-list li + li { border-top: 1px solid var(--p-line); }
@@ -8302,7 +8302,7 @@ section.portal-metrics {
 .ka-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr)); gap: 16px; align-items: start; }
 .ka-grid > * + * { margin-top: 0; }
 .ka-facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px 20px; margin: 0; }
-.ka-facts-wide { padding: 14px 20px; border-bottom: 1px solid var(--p-line); }
+.ka-facts-wide { padding: 14px 16px; border-bottom: 1px solid var(--p-line); }
 .ka-facts dt { color: var(--p-muted); font-size: 13px; font-weight: 650; letter-spacing: 0.03em; text-transform: uppercase; }
 .ka-facts dd { margin: 3px 0 0; color: var(--p-ink); font-size: 14px; font-weight: 600; }
 .ka-facts dd small { display: block; margin-top: 2px; color: var(--p-muted); font-size: 12px; font-weight: 400; }
@@ -8319,7 +8319,7 @@ section.portal-metrics {
   grid-template-columns: minmax(0, 2fr) minmax(0, 1fr) minmax(0, 1fr) auto;
   align-items: end;
   gap: 10px 12px;
-  padding: 14px 20px;
+  padding: 14px 16px;
   border-bottom: 1px solid var(--p-line);
 }
 .ka-filters label { display: grid; gap: 4px; }
@@ -8389,7 +8389,7 @@ section.portal-metrics {
 /* =========================================================================
  * F7 — korpa, zahtevi i porudžbine (kupac i kancelarija)
  * ====================================================================== */
-.kk-pricelist { display: flex; flex-wrap: wrap; gap: 4px 12px; align-items: baseline; margin: 0; padding: 10px 20px; border-bottom: 1px solid var(--p-line); background: #ebf7ff; background: oklch(0.97 0.02 250); font-size: 13px; }
+.kk-pricelist { display: flex; flex-wrap: wrap; gap: 4px 12px; align-items: baseline; margin: 0; padding: 10px 16px; border-bottom: 1px solid var(--p-line); background: #ebf7ff; background: oklch(0.97 0.02 250); font-size: 13px; }
 .kk-pricelist[data-kind="demo"] { background: repeating-linear-gradient(135deg, #fef4df, #fef4df 10px, #fdefd2 10px, #fdefd2 20px); background: repeating-linear-gradient(135deg, oklch(0.97 0.03 85), oklch(0.97 0.03 85) 10px, oklch(0.955 0.04 85) 10px, oklch(0.955 0.04 85) 20px); }
 .kk-pricelist[data-kind="off"] { background: var(--p-bg); }
 .kk-pricelist strong { color: var(--p-ink); }
@@ -8444,7 +8444,7 @@ section.portal-metrics {
 .kk-status[data-tone="warning"] { background: #ffecc1; background: oklch(0.95 0.06 85); color: #663d00; color: oklch(0.4 0.09 70); border-color: #f0d49b; border-color: oklch(0.88 0.08 85); }
 .kk-status[data-tone="success"] { background: #d8f9dd; background: oklch(0.95 0.05 150); color: #085023; color: oklch(0.38 0.1 150); border-color: #b1dfb9; border-color: oklch(0.86 0.07 150); }
 .kk-status[data-tone="danger"] { background: #ffe5e0; background: oklch(0.95 0.04 27); color: #972622; color: oklch(0.45 0.15 27); border-color: #fdc9c2; border-color: oklch(0.88 0.06 27); }
-.kk-order-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; padding: 16px 20px 8px; }
+.kk-order-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; padding: 16px 16px 8px; }
 .kk-order-head h2 { margin: 4px 0 2px; font-size: 22px; font-variant-numeric: tabular-nums; }
 .kk-order-head p { margin: 0; color: var(--p-muted); font-size: 13px; }
 .kk-state { display: grid; gap: 4px; margin: 0 20px 12px; padding: 10px 12px; border-left: 3px solid #4f84ba; border-left: 3px solid oklch(0.6 0.1 250); background: var(--p-bg); font-size: 13px; }
@@ -8501,7 +8501,7 @@ section.portal-metrics {
 .kk-request-head { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
 .kk-request-head small { color: var(--p-muted); }
 .kk-answer { padding: 8px 10px; border-radius: 6px; background: #e0fae4; background: oklch(0.96 0.04 150); }
-.kk-contacts { display: flex; flex-wrap: wrap; gap: 6px 20px; padding: 10px 20px; border-bottom: 1px solid var(--p-line); background: var(--p-bg); font-size: 13px; }
+.kk-contacts { display: flex; flex-wrap: wrap; gap: 6px 20px; padding: 10px 16px; border-bottom: 1px solid var(--p-line); background: var(--p-bg); font-size: 13px; }
 .kk-contacts a { color: var(--p-red); }
 .rb-list { display: grid; gap: 10px; margin: 0; padding: 0; list-style: none; }
 .rb-item { display: grid; gap: 6px; padding: 12px 14px; border: 1px solid var(--p-line); border-radius: 8px; font-size: 13px; }
@@ -8981,7 +8981,7 @@ section.portal-metrics {
 /* Pregled rabata po kupcu (rr-) */
 .rr-link { display: inline-flex; align-items: center; min-height: 34px; padding: 0 12px; border: 1px solid var(--p-line); border-radius: 6px; background: var(--p-surface); color: var(--p-ink); font-size: 13px; font-weight: 650; text-decoration: none; }
 .rr-link:hover { border-color: var(--p-ink); }
-.rr-filters { display: flex; flex-wrap: wrap; gap: 10px 14px; align-items: flex-end; padding: 14px 20px; border-bottom: 1px solid var(--p-line); }
+.rr-filters { display: flex; flex-wrap: wrap; gap: 10px 14px; align-items: flex-end; padding: 14px 16px; border-bottom: 1px solid var(--p-line); }
 .rr-filters label { display: grid; gap: 4px; font-size: 12px; color: var(--p-muted); font-weight: 600; }
 .rr-filters input, .rr-filters select { height: 36px; min-width: 180px; padding: 0 10px; border: 1px solid var(--p-line); border-radius: 6px; background: var(--p-surface); color: var(--p-ink); font-size: 14px; }
 .rr-filters input { min-width: 240px; }
@@ -9010,7 +9010,7 @@ section.portal-metrics {
 .rr-chips { display: flex; flex-wrap: wrap; gap: 6px; }
 .rr-chips a { padding: 5px 10px; border: 1px solid var(--p-line); border-radius: 999px; color: var(--p-ink); font-size: 12px; text-decoration: none; white-space: nowrap; }
 .rr-chips a[aria-current="true"] { border-color: var(--p-ink); background: var(--p-ink); color: var(--p-surface); }
-.rr-details summary { padding: 14px 20px; cursor: pointer; font-weight: 700; }
+.rr-details summary { padding: 14px 16px; cursor: pointer; font-weight: 700; }
 @media (max-width: 860px) { .rr-three { grid-template-columns: 1fr; } }
 @media (max-width: 560px) {
   .rr-filters { padding: 12px 14px; }
@@ -9034,7 +9034,7 @@ section.portal-metrics {
 @media (max-width: 720px) { .rr-propose { grid-template-columns: 1fr; } }
 
 /* Rezervne kopije (bk-) */
-.bk-list { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin: 0; padding: 14px 20px 20px; list-style: none; }
+.bk-list { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin: 0; padding: 14px 16px 20px; list-style: none; }
 .bk-item { display: grid; gap: 6px; align-content: start; padding: 14px; border: 1px solid var(--p-line); border-left: 4px solid var(--p-line); border-radius: 8px; background: var(--p-surface); font-size: 13px; }
 .bk-item[data-tone="success"] { border-left-color: #3b9555; border-left-color: oklch(0.6 0.13 150); }
 .bk-item[data-tone="warning"] { border-left-color: #d79628; border-left-color: oklch(0.72 0.14 75); }
@@ -9054,7 +9054,7 @@ section.portal-metrics {
 @media (max-width: 960px) { .bk-incomplete { margin: 0 14px 16px; } }
 
 /* Cenovnik (0038) */
-.pl-facts { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px 24px; margin: 0; padding: 4px 20px 20px; font-size: 13px; }
+.pl-facts { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px 24px; margin: 0; padding: 4px 16px 20px; font-size: 13px; }
 .pl-facts div { display: grid; gap: 2px; }
 .pl-facts dt { color: var(--p-muted); font-size: 12px; }
 .pl-facts dd { margin: 0; color: var(--p-ink); }
@@ -9301,4 +9301,455 @@ html:has(.portal-customer-area) { scroll-padding-top: 104px; }
     flex: 0 0 auto;
     min-width: 0;
   }
+}
+
+/* =========================================================================
+ * Dorada portala (2026-10-11): radna površina, poravnanja i paneli
+ * ====================================================================== */
+
+/* Radna površina ostaje uz bočni meni, ne centrira se: putanja u traci,
+ * naslov strane i odeljci počinju na istoj liniji na svakoj širini. Gornja
+ * granica 2880px — poslovne tabele koriste ultrawide ekran, a tekstovi i
+ * obrasci imaju sopstvene čitljive širine (opisi do 90ch, .portal-narrow). */
+.portal-main {
+  max-width: 2880px;
+  margin-inline: 0;
+}
+/* Traka ima isti bočni razmak kao radna površina (bilo je 22 naspram 28px). */
+.portal-topbar {
+  padding-inline: 28px;
+}
+@media (max-width: 900px) {
+  .portal-topbar {
+    padding-inline: 18px;
+  }
+}
+@media (max-width: 640px) {
+  .portal-topbar {
+    padding-inline: 12px;
+  }
+}
+
+/* Panel: unutrašnji razmak više ne zavisi od toga čime panel počinje.
+ * Ranije ga je dobijao samo panel čije je prvo dete h2/h3 (18/20px) ili
+ * par .portal-section-header + .portal-panel-body; panel koji počinje
+ * filterom, pasusom ili listom ostajao je bez razmaka (Spremnost, Izvorni
+ * dokumenti, mapiranja, Istorija pravila). Sada:
+ *  - panel bez zaglavlja odeljka = kartica sa razmakom 16px (kao pn-card),
+ *    tabela u njemu ide od ivice do ivice;
+ *  - panel sa zaglavljem: sadržaj koji nije u .portal-panel-body dobija
+ *    iste bočne i donje razmake kao telo panela. */
+.portal-panel:not(:has(> .portal-section-header, > .portal-panel-body)) {
+  display: grid;
+  gap: 12px;
+  padding: 16px;
+}
+.portal-panel:not(:has(> .portal-section-header, > .portal-panel-body)) > * {
+  min-width: 0;
+}
+.portal-panel:not(:has(> .portal-section-header, > .portal-panel-body)) > :is(.portal-table-wrap, .rr-filters) {
+  width: calc(100% + 32px);
+  max-width: none;
+  margin-inline: -16px;
+  border-radius: 0;
+}
+.portal-panel:not(:has(> .portal-section-header, > .portal-panel-body)) > .portal-table-wrap:not(:first-child) {
+  border-top: 1px solid var(--p-line);
+}
+.portal-panel:not(:has(> .portal-section-header, > .portal-panel-body)) > :is(.portal-table-wrap, .rr-filters):first-child {
+  margin-top: -16px;
+  border-radius: 6px 6px 0 0;
+}
+.portal-panel:not(:has(> .portal-section-header, > .portal-panel-body)) > :is(.portal-table-wrap, .rr-filters):last-child {
+  margin-bottom: -16px;
+  border-radius: 0 0 6px 6px;
+}
+.portal-panel:has(> .portal-section-header)
+  > :not(.portal-section-header, .portal-panel-body, .portal-table-wrap, .portal-metrics, .rr-filters, .portal-definition-grid, details, .portal-panel, .portal-settings-form, .portal-state, .portal-phase-notice, .kk-pricelist, .cs-summary-top, .zr-status, .portal-readiness-limits, .portal-readiness-note) {
+  margin-inline: 16px;
+}
+.portal-panel:has(> .portal-section-header) > .portal-section-header
+  + :not(.portal-panel-body, .portal-table-wrap, .portal-metrics, .rr-filters, .portal-definition-grid, details, .portal-panel, .portal-settings-form, .portal-state, .portal-phase-notice, .kk-pricelist, .cs-summary-top, .zr-status, .portal-readiness-limits, .portal-readiness-note) {
+  margin-top: 16px;
+}
+.portal-panel:has(> .portal-section-header)
+  > :not(.portal-section-header, .portal-panel-body, .portal-table-wrap, .portal-metrics, .rr-filters, .portal-definition-grid, details, .portal-panel, .portal-settings-form, .portal-state, .portal-phase-notice, .kk-pricelist, .cs-summary-top, .zr-status, .portal-readiness-limits, .portal-readiness-note):last-child {
+  margin-bottom: 16px;
+}
+
+/* Red filtera sa periodom (Od/Do + brzi izbori): sve počinje od vrha, pa se
+ * polja za unos poravnavaju po jednoj liniji, a dugme za slanje staje u
+ * visinu polja datuma. Ranije je red bio poravnat po dnu: dugme i polje
+ * „Pretraga“ su se ravnali sa brzim izborima ispod datuma. Visina reda
+ * oznake je ista za sve oznake u redu: 20px + 6px razmaka. */
+.pd-field {
+  gap: 6px;
+}
+.pd-label,
+:is(.portal-filters, .pn-filters) :is(.portal-field, .pn-field) > :is(label, span:first-child) {
+  line-height: 20px;
+}
+:is(.portal-main, .pn-shell, body) :is(.portal-filters, .pn-filters):has(> .pd-range) {
+  align-items: flex-start;
+}
+:is(.portal-filters, .pn-filters):has(> .pd-range) > :is(button[type="submit"], .portal-button, .pn-inline) {
+  align-self: flex-start;
+  margin-top: 26px;
+}
+.pd-range-sep {
+  display: flex;
+  align-items: center;
+  align-self: end;
+  height: 40px;
+  padding-top: 0;
+}
+.pd-range-fields {
+  align-items: end;
+}
+/* Napomena ispod filtera je podnožje panela: preko cele širine, bez ograničenja
+ * pasusa (78ch) i bez dvostrukog uvlačenja. */
+.portal-panel > .portal-readiness-note {
+  max-width: none;
+  padding: 12px 16px;
+}
+.portal-panel:not(:has(> .portal-section-header, > .portal-panel-body)) > .portal-readiness-note {
+  margin-inline: -16px;
+}
+.portal-panel:not(:has(> .portal-section-header, > .portal-panel-body)) > .portal-readiness-note:last-child {
+  margin-bottom: -16px;
+}
+.portal-panel:has(> .portal-section-header) > .portal-readiness-note {
+  margin-inline: 0;
+}
+/* Kupčev panel ima polja i dugmad od 44px; polje datuma prati istu visinu. */
+.pn-filters .pd-control,
+.pn-filters .pd-range-sep {
+  height: 44px;
+}
+@media (max-width: 560px) {
+  .pd-range-sep {
+    display: none;
+  }
+}
+/* Tablet i telefon: dugmad su dodirne mete od 44px; polja u istom redu prate
+ * istu visinu, da red filtera ostane poravnat. */
+@media (max-width: 900px) {
+  .portal-main :is(.portal-settings-form, .portal-inline-form, .rr-filters, .portal-filters, .pl-search, .portal-field)
+    :is(input:not([type="checkbox"]):not([type="radio"]):not([type="file"]):not([type="hidden"]), select):not(.pd-input),
+  .portal-main .pd-control,
+  .portal-main .pd-range-sep {
+    min-height: 44px;
+    height: 44px;
+  }
+}
+
+/* Trake u panelu: blokovi sa sopstvenom pozadinom/linijom i razmakom, rađeni
+ * za panel bez razmaka (obrazac podešavanja i filtera, prazno stanje i
+ * „Šta je potrebno“, traka cenovnika, sažetak kartice kupca, stanje Za
+ * razgovor, ograde Spremnosti). U panelu sa razmakom idu od ivice do ivice
+ * kao tabela, a njihov bočni razmak je isti 16px — tekst u njima počinje na
+ * istoj liniji kao naslov panela, bez dvostrukog uvlačenja. */
+.portal-panel > :is(.portal-settings-form, .portal-state, .portal-phase-notice, .kk-pricelist, .cs-summary-top, .zr-status, .portal-readiness-limits, .portal-readiness-note) {
+  padding-inline: 16px;
+}
+.portal-panel:not(:has(> .portal-section-header, > .portal-panel-body)) > :is(.portal-settings-form, .portal-state, .portal-phase-notice, .kk-pricelist, .cs-summary-top, .zr-status, .portal-readiness-limits, .portal-readiness-note) {
+  width: calc(100% + 32px);
+  max-width: none;
+  margin-inline: -16px;
+}
+.portal-panel:not(:has(> .portal-section-header, > .portal-panel-body)) > :is(.portal-settings-form, .portal-state, .portal-phase-notice, .kk-pricelist, .cs-summary-top, .zr-status, .portal-readiness-limits, .portal-readiness-note):first-child {
+  margin-top: -16px;
+}
+.portal-panel:not(:has(> .portal-section-header, > .portal-panel-body)) > :is(.portal-settings-form, .portal-state, .portal-phase-notice, .kk-pricelist, .cs-summary-top, .zr-status, .portal-readiness-limits, .portal-readiness-note):last-child {
+  margin-bottom: -16px;
+}
+/* Napomena u telu panela i panelu sa razmakom ne dodaje sopstveni bočni
+ * pomeraj (bilo je 18px preko 16px razmaka panela). */
+:is(.portal-panel-body, .portal-panel:not(:has(> .portal-section-header, > .portal-panel-body))) > .portal-data-note {
+  margin-inline: 0;
+}
+.portal-panel:has(> .portal-section-header) > .portal-data-note {
+  margin-inline: 16px;
+}
+/* Lista ograda zadržava uvlačenje za oznake nabrajanja. */
+.portal-panel > .portal-readiness-limits {
+  padding-left: 34px;
+}
+/* Liste redova (Za razgovor) su od ivice do ivice panela, kao tabela; razmak
+ * imaju same stavke. */
+.portal-panel:has(> .portal-section-header) > :is(.zr-list, .zr-rest, .zr-quiet-list) {
+  margin-inline: 0;
+}
+.portal-panel:has(> .portal-section-header) > :is(.zr-list, .zr-rest, .zr-quiet-list):last-child {
+  margin-bottom: 0;
+}
+/* Ostale trake sa sopstvenim razmakom (kartica kupca, cenovnik, kopije):
+ * ne dobijaju dodatni razmak sadržaja ispod zaglavlja panela. */
+.portal-panel:has(> .portal-section-header) > :is(.pl-facts, .bk-list, .cs-block, .cs-freshness, .cs-method, .ka-facts-wide, .ka-filters, .kk-pricelist, .kk-order-head, .kk-contacts, .rr-details) {
+  margin-inline: 0;
+}
+.portal-panel:has(> .portal-section-header) > :is(.pl-facts, .bk-list, .cs-block, .cs-freshness, .cs-method, .ka-facts-wide, .ka-filters, .kk-pricelist, .kk-order-head, .kk-contacts, .rr-details):last-child {
+  margin-bottom: 0;
+}
+/* Polje za potvrdu i izbor u obrascima: prirodna veličina 18px (starije
+ * pravilo za sva polja obrasca davalo mu je visinu i razmak tekstualnog polja). */
+.portal-main :is(.portal-settings-form, .portal-panel form, .portal-filters) input:is([type="checkbox"], [type="radio"]) {
+  width: 18px;
+  height: 18px;
+  min-height: 0;
+  padding: 0;
+  margin: 2px 0 0;
+  flex: 0 0 auto;
+  accent-color: var(--pn-primary, #1f242c);
+}
+/* Zaglavlje kolone sa brojevima je tekst, ne broj: isti font kao ostala zaglavlja. */
+.portal-table th.portal-table-number {
+  font-family: inherit;
+}
+
+/* Oznake podataka: mirne oznake normalnim slovima, kao u Zahtevima kupaca
+ * (ranije VELIKA SLOVA sa proredom, ponovljena u svakom redu liste). Bočni
+ * meni, prijava i dani u kalendaru namerno zadržavaju svoj stil. */
+:is(.cs-basis-facts dt, .cs-block h3, .cs-article-fact small:first-child, .zr-body h3, .zr-xs h3,
+    .ka-eyebrow, .ka-facts dt, .ka-invoices-head, .ka-lines-head, .kk-lines-head, .rr-step,
+    .kr-prices .kr-prices-head, .kr-amount .kr-amount-head, .portal-detail-list > div > span,
+    .portal-notes-grid span, .portal-customer-signal span, .portal-diff header,
+    .portal-address-list article > div > span, .portal-approval-list > button > span:nth-child(2) > small,
+    .portal-command-results small, .portal-pricing-builder-body legend) {
+  text-transform: none;
+  letter-spacing: 0;
+}
+@media (max-width: 900px) {
+  :is(.ka-lines li > span[data-label], .kk-lines > li > span[data-label], .rc-customer .rr-table td[data-label], .rc-preview .rr-table td[data-label])::before {
+    text-transform: none;
+    letter-spacing: 0;
+  }
+}
+/* Kartica kupca: sažetak je traka od ivice do ivice (blokovi imaju svoj
+ * razmak), a dva bloka dele širinu na pola umesto 2/3 mreže od tri kolone. */
+.portal-panel:not(:has(> .portal-section-header, > .portal-panel-body)) > :is(.cs-summary-body, .cs-freshness) {
+  width: calc(100% + 32px);
+  max-width: none;
+  margin-inline: -16px;
+}
+.portal-panel:not(:has(> .portal-section-header, > .portal-panel-body)) > :is(.cs-summary-body, .cs-freshness):last-child {
+  margin-bottom: -16px;
+}
+.cs-summary-body {
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
+}
+.cs-summary.portal-panel {
+  gap: 0;
+}
+/* Obrazac u panelu: bez sopstvene gornje linije (bila je ograničena na
+ * širinu obrasca pa se prekidala); potvrda sa poljem za potvrdu ide preko
+ * cele širine obrasca, umesto u usku kolonu. */
+.portal-panel .portal-form {
+  margin-top: 0;
+  padding-top: 0;
+  border-top: 0;
+}
+.portal-form > :is(.portal-recovery-confirm, label:has(> input[type="checkbox"])) {
+  grid-column: 1 / -1;
+  margin: 4px 0 0;
+}
+/* Traka (filteri, sažetak) odmah iznad tabele: bez praznog razmaka mreže
+ * između dve linije. */
+.portal-panel:not(:has(> .portal-section-header, > .portal-panel-body)) > :is(.rr-filters, .portal-settings-form, .kk-pricelist, .cs-freshness, .zr-status) + .portal-table-wrap {
+  margin-top: -12px;
+  border-top: 0;
+}
+/* Zaglavlje reda u tabeli poravnato uz vrh, kao ostale ćelije (bilo je
+ * vertikalno centrirano pa je naziv „lebdeo“ u visokim redovima). */
+.portal-table tbody th {
+  vertical-align: top;
+}
+/* Redovi kupaca u grupnim predlozima su lista redova sa linijom između: bez
+ * dodatnog razmaka mreže panela; prvi red ispod trake filtera bez druge linije. */
+.portal-panel > .rc-customer {
+  margin-top: -12px;
+}
+.portal-panel > .rr-filters + .rc-customer,
+.portal-panel > .rr-filters + .portal-empty + .rc-customer {
+  margin-top: 0;
+  border-top: 0;
+}
+.cs-facts dt {
+  text-transform: none;
+  letter-spacing: 0;
+}
+/* Adrese e-pošte i slične duge vrednosti lome se na bilo kom mestu umesto
+ * na crtici, pa ne prave visoke redove u uskoj koloni. */
+.portal-cell-wrap {
+  min-width: 14ch;
+  overflow-wrap: anywhere;
+}
+/* Sporedna radnja (ghost) ima vidljiv okvir kao sporedna dugmad u Zahtevima
+ * kupaca; bez okvira je izgledala kao običan tekst. */
+.portal-main .portal-button[data-variant="ghost"] {
+  border-color: var(--p-line-strong);
+  background: var(--p-surface-raised, var(--p-surface));
+}
+.portal-panel > .portal-notification-list {
+  margin-top: 0;
+}
+.portal-main .portal-button[data-variant="danger"] {
+  font-size: 14px;
+}
+/* „Mirni kupci“ (sklopiva lista): naslov i redovi imaju svoj razmak; sam panel
+ * bez dodatnog razmaka. */
+.portal-panel.zr-quiet {
+  padding: 0;
+  gap: 0;
+}
+
+/* Tabela sa kolonom radnji (npr. Sinhronizacija → Uređaji): kolona „Radnja“
+ * je zalepljena uz desnu ivicu okvira tabele. Ostale kolone se pomeraju
+ * ispod nje, a radnja je uvek potpuno vidljiva i dostupna i na 1366/1440px. */
+.portal-table[data-sticky-actions="true"] :is(thead th, tbody td):last-child {
+  position: sticky;
+  right: 0;
+  z-index: 2;
+  background: var(--p-surface);
+  box-shadow: -1px 0 0 var(--p-line);
+  white-space: nowrap;
+}
+.portal-table[data-sticky-actions="true"] thead th:last-child {
+  z-index: 4;
+  background: var(--p-surface-subtle);
+}
+.portal-table[data-sticky-actions="true"] tbody tr:hover td:last-child {
+  background: var(--p-surface-subtle);
+}
+
+/* Široki ekrani (od 1500px, samo interni portal): širina panela prati sadržaj.
+ *  - Panel čiji je glavni sadržaj tabela (bez filtera i obrazaca) širok je
+ *    koliko i njegova tabela, ali najmanje 560px, da zaglavlje ostane čitljivo.
+ *    Opis, napomene i podnožje se prelamaju unutar te širine i ne šire panel
+ *    (contain: inline-size) — zaglavlje, tabela i podnožje su jedna celina.
+ *  - Široka poslovna tabela i dalje dobija ceo prostor (panel do 100%).
+ *  - Radna površina je red sa prelamanjem: uzastopni uži paneli staju jedan
+ *    pored drugog kada ima mesta; svi ostali blokovi su pune širine.
+ * Nema zajedničkog fiksnog limita: odlučuje sadržaj. Ispod 1500px i u
+ * kupčevom panelu ništa se ne menja. */
+@media (min-width: 1500px) {
+  .portal-root:not(.portal-customer-area) .portal-main {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    align-content: flex-start;
+    column-gap: 16px;
+  }
+  .portal-root:not(.portal-customer-area) .portal-main > * {
+    flex: 1 1 100%;
+    min-width: 0;
+  }
+  .portal-root:not(.portal-customer-area) .portal-main > .portal-metrics {
+    margin-bottom: 0;
+  }
+  .portal-root:not(.portal-customer-area) .portal-main
+    > .portal-panel:has(> .portal-table-wrap):not(:has(form, .portal-filters, .rr-filters, .portal-metrics, .portal-panel-body, .portal-definition-grid)) {
+    flex: 0 1 auto;
+    width: fit-content;
+    min-width: min(100%, 560px);
+    max-width: 100%;
+  }
+  .portal-root:not(.portal-customer-area) .portal-main
+    > .portal-panel:has(> .portal-table-wrap):not(:has(form, .portal-filters, .rr-filters, .portal-metrics, .portal-panel-body, .portal-definition-grid))
+    :is(.portal-section-header > div, .portal-data-note, .portal-readiness-note, > p, .portal-empty) {
+    contain: inline-size;
+  }
+  .portal-root:not(.portal-customer-area) .portal-main
+    > .portal-panel:has(> .portal-table-wrap):not(:has(form, .portal-filters, .rr-filters, .portal-metrics, .portal-panel-body, .portal-definition-grid))
+    .portal-section-header > div {
+    flex: 1 1 0;
+    min-width: 0;
+  }
+  .portal-root:not(.portal-customer-area) .portal-main
+    > .portal-panel:has(> .portal-table-wrap):not(:has(form, .portal-filters, .rr-filters, .portal-metrics, .portal-panel-body, .portal-definition-grid))
+    .portal-table {
+    width: 100%;
+    min-width: 0;
+  }
+}
+
+/* =========================================================================
+ * Završna dorada PR #22
+ * ====================================================================== */
+
+/* Mreža definicija (Raspon uvezenih datuma, zaglavlje fakture): broj kolona
+ * prati broj podataka. Ranije su bile fiksne 3 kolone, pa su 2 podatka
+ * ostavljala praznu treću ćeliju, a 5 podataka praznu šestu. Stavke rastu
+ * da popune red (nema prazne ćelije), na uskom ekranu se slažu jedna ispod
+ * druge. Linije: svaka stavka crta desnu i donju, a okvir odseca spoljne. */
+.portal-definition-grid {
+  display: flex;
+  flex-wrap: wrap;
+  overflow: hidden;
+}
+.portal-definition-grid > div,
+.portal-definition-grid > div:nth-child(3n),
+.portal-definition-grid > div:nth-last-child(-n + 3) {
+  flex: 1 1 220px;
+  margin: 0 -1px -1px 0;
+  border-right: 1px solid var(--p-line);
+  border-bottom: 1px solid var(--p-line);
+}
+
+/* Kartice pokazatelja: uravnoteženi redovi prema broju kartica.
+ *  6 kartica: 6 u redu → 3 × 2 → 2 × 3 → 1
+ *  8 kartica: 8 u redu → 4 × 2 → 2 × 4 → 1
+ *  4 kartice: 4 → 2 × 2 → 1;  3 kartice: 3 → 1
+ * Kartica nikad nije uža od 240px (iznos „337.773.083 RSD“ i dugi nazivi
+ * staju bez smanjivanja fonta). Bez upita za širinu kontejnera: širina
+ * kolone se bira izrazom — prvi raspored u kome kartica ima ≥ 240px.
+ * K(x) je pozitivno (veliko) samo kada x NE staje. */
+.portal-metrics {
+  --m-gap: 12px;
+  --m-min: 240px;
+  gap: var(--m-gap);
+}
+.portal-metrics:has(> :nth-child(6):last-child) {
+  --m-a: calc((100% - 5 * var(--m-gap)) / 6 - 1px);
+  --m-b: calc((100% - 2 * var(--m-gap)) / 3 - 1px);
+  --m-c: calc((100% - var(--m-gap)) / 2 - 1px);
+}
+.portal-metrics:has(> :nth-child(8):last-child) {
+  --m-a: calc((100% - 7 * var(--m-gap)) / 8 - 1px);
+  --m-b: calc((100% - 3 * var(--m-gap)) / 4 - 1px);
+  --m-c: calc((100% - var(--m-gap)) / 2 - 1px);
+}
+.portal-metrics:has(> :nth-child(4):last-child) {
+  --m-a: calc((100% - 3 * var(--m-gap)) / 4 - 1px);
+  --m-b: calc((100% - var(--m-gap)) / 2 - 1px);
+  --m-c: calc((100% - var(--m-gap)) / 2 - 1px);
+}
+.portal-metrics:has(> :nth-child(3):last-child) {
+  --m-a: calc((100% - 2 * var(--m-gap)) / 3 - 1px);
+  --m-b: 100%;
+  --m-c: 100%;
+}
+.portal-metrics:is(:has(> :nth-child(6):last-child), :has(> :nth-child(8):last-child), :has(> :nth-child(4):last-child), :has(> :nth-child(3):last-child)) {
+  grid-template-columns: repeat(
+    auto-fill,
+    minmax(
+      max(
+        var(--m-a),
+        min(
+          max(var(--m-b), min(max(var(--m-c), min(100%, (var(--m-min) - var(--m-c)) * 1000)), (var(--m-min) - var(--m-b)) * 1000)),
+          (var(--m-min) - var(--m-a)) * 1000
+        )
+      ),
+      1fr
+    )
+  );
+}
+/* Tabela čija prva kolona ostaje uz levu ivicu (zaglavlje reda): i naslov te
+ * kolone ostaje na mestu pri vodoravnom pomeranju, inače ispod zalepljene
+ * kolone prolaze naslovi drugih kolona. */
+.portal-table:has(tbody th[scope="row"]) thead th:first-child {
+  position: sticky;
+  left: 0;
+  z-index: 4;
+  box-shadow: 1px 0 0 var(--p-line);
 }

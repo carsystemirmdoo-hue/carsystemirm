@@ -1,4 +1,5 @@
 "use client";
+import { dmy } from "@/lib/ordering/panelFormat.mjs";
 
 import { useMemo, useState, useTransition } from "react";
 import { DateField } from "@/components/portal/DateField";
@@ -230,7 +231,7 @@ export function RebateChangePanel({
       {preview ? (
         <div className="rc-preview">
           <h3>
-            Pregled: {pct(preview.newPercent)} od {preview.effectiveFrom}
+            Pregled: {pct(preview.newPercent)} od {dmy(String(preview.effectiveFrom).slice(0, 10))}
             {preview.paymentCondition ? ` · samo za: ${options.find((o) => o.code === preview.paymentCondition)?.label ?? preview.paymentCondition}` : ""}
             {preview.scope ? ` · ${preview.scope.productScope === "brand" ? `grupa „${preview.scope.brand}“` : "osnovni rabat"}: sada ${preview.scope.current ? pct(preview.scope.current.percent) : "nema pravila"} → ${pct(preview.newPercent)}` : ""}
             {preview.group ? ` · grupa „${preview.group.key}“ (sada ${pct(preview.group.percent)})` : ""}
@@ -255,11 +256,11 @@ export function RebateChangePanel({
                     </th>
                     <td data-label="Sada važi">
                       {r.current ? pct(r.current.percent) : "—"}
-                      {r.current ? <small>{r.current.origin}, od {r.current.effectiveFrom}</small> : <small>nema pravila</small>}
+                      {r.current ? <small>{r.current.origin}, od {dmy(String(r.current.effectiveFrom).slice(0, 10))}</small> : <small>nema pravila</small>}
                     </td>
                     <td data-label="Poslednja faktura">
                       {r.lastInvoice ? pct(r.lastInvoice.percent) : "—"}
-                      {r.lastInvoice ? <small>{r.lastInvoice.label} · {r.lastInvoice.issuedOn}</small> : null}
+                      {r.lastInvoice ? <small>{r.lastInvoice.label} · {dmy(String(r.lastInvoice.issuedOn).slice(0, 10))}</small> : null}
                     </td>
                     <td data-label="Novo">{r.included ? pct(preview.newPercent) : "ne menja se"}</td>
                     <td data-label="Radnja">
@@ -292,7 +293,7 @@ export function RebateChangePanel({
           <p className="portal-data-note">
             Menja se {included.length} od {preview.rows.length}: novo {included.filter((r) => !r.current).length}, zamena {included.filter((r) => r.current).length}
             {preview.rows.some((r) => r.action === "izuzetak" && !r.included) ? `; izuzeci koji ostaju: ${preview.rows.filter((r) => r.action === "izuzetak" && !r.included).length}` : ""}.
-            Važeće pravilo ostaje do odobrenja; posle odobrenja se zatvara dan pre {preview.effectiveFrom}.
+            Važeće pravilo ostaje do odobrenja; posle odobrenja se zatvara dan pre {dmy(String(preview.effectiveFrom).slice(0, 10))}.
           </p>
           {canApprove ? (
             <label className="rc-include">

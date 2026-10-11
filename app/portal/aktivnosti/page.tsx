@@ -96,10 +96,8 @@ export default async function AuditLogPage() {
               <tbody>
                 {rows.map((row) => (
                   <tr key={row.id}>
-                    <td>
-                      {dmyTime(row.createdAt)}
-                    </td>
-                    <td>{row.actorLabel}</td>
+                    <td className="portal-nowrap">{dmyTime(row.createdAt)}</td>
+                    <td className="portal-cell-wrap">{row.actorLabel}</td>
                     <td>
                       <strong>{formatAction(row.action)}</strong>
                     </td>

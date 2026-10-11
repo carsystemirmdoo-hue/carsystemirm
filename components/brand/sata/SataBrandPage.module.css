@@ -40,8 +40,9 @@
   --sata-muted: #4d5765;
   --sata-muted-dark: rgb(232 238 244 / 0.66);
 
-  --sata-gutter: clamp(1.25rem, 4vw, 4rem);
-  --sata-shell: min(100%, 94rem);
+  /* Isti kontejner i razmak kao ostatak sajta (ranije sopstvenih 94rem). */
+  --sata-gutter: var(--ds-gutter, clamp(20px, 4vw, 56px));
+  --sata-shell: min(100%, calc(var(--ds-container-max, 1208px) + var(--sata-gutter) * 2));
   --sata-radius: 2px;
 
   /* Vrednosti koje čita zajednički BrandSectionNav. */
@@ -398,7 +399,8 @@
 
 .systemSection > *,
 .techSection > * {
-  width: var(--sata-shell);
+  /* Sekcija već ima bočni razmak; sadržaj je širok koliko i kontejner. */
+  width: min(100%, var(--ds-container-max, 1208px));
   margin-inline: auto;
 }
 

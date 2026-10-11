@@ -1,3 +1,4 @@
+import { percent, quantity } from "@/lib/ordering/panelFormat.mjs";
 import { PageHeader } from "@/components/portal/PortalPrimitives";
 import { can } from "@/lib/authz/permissions.mjs";
 import { requireCapability } from "@/lib/authz/session";
@@ -70,7 +71,7 @@ export default async function PriceApprovalPage() {
                       <small>{b.batch}</small>
                     </th>
                     <td>
-                      {b.n} pravila · {Number(b.min) === Number(b.max) ? `${Number(b.min)} %` : `${Number(b.min)}–${Number(b.max)} %`}
+                      {b.n} pravila · {Number(b.min) === Number(b.max) ? percent(Number(b.min)) : `${quantity(Number(b.min))}–${percent(Number(b.max))}`}
                       <small>{b.replaces ? `menja ${b.replaces} važećih pravila` : "samo nova pravila"}</small>
                     </td>
                     <td>{b.proposer}</td>
@@ -83,40 +84,31 @@ export default async function PriceApprovalPage() {
         </section>
       ) : null}
 
-      <section className="portal-panel">
-        <h2>Čeka odobrenje ({waiting.length})</h2>
-      </section>
-      <RuleTable rows={waiting} showActions={canDecide} />
+      <RuleTable rows={waiting} showActions={canDecide} title={`Čeka odobrenje (${waiting.length})`} />
 
-      <section className="portal-panel" data-accent="warning">
-        <h2>Odobreno — čeka upis u BizniSoft ({approved.length})</h2>
-        <p>
-          Ova pravila već učestvuju u odlučivanju o ceni, ali NISU potvrđena kao
-          fakturisani uslov. Dok upis ne bude evidentiran, cena nije garantovana.
-        </p>
-      </section>
-      <RuleTable rows={approved} showActions={canDecide} />
+      <RuleTable
+        rows={approved}
+        showActions={canDecide}
+        accent="warning"
+        title={`Odobreno — čeka upis u BizniSoft (${approved.length})`}
+        description="Ova pravila već učestvuju u odlučivanju o ceni, ali NISU potvrđena kao fakturisani uslov. Dok upis ne bude evidentiran, cena nije garantovana."
+      />
 
-      <section className="portal-panel">
-        <h2>Evidentiran unos — čeka usaglašavanje sa fakturom ({recorded.length})</h2>
-        <p>
-          Kancelarija je evidentirala unos u BizniSoft. To je tvrdnja čoveka, ne
-          dokaz — potvrdu daje tek usaglašavanje sa fakturom.
-        </p>
-      </section>
-      <RuleTable rows={recorded} showActions={canDecide} />
+      <RuleTable
+        rows={recorded}
+        showActions={canDecide}
+        title={`Evidentiran unos — čeka usaglašavanje sa fakturom (${recorded.length})`}
+        description="Kancelarija je evidentirala unos u BizniSoft. To je tvrdnja čoveka, ne dokaz — potvrdu daje tek usaglašavanje sa fakturom."
+      />
 
       {failed.length > 0 ? (
-        <>
-          <section className="portal-panel" data-accent="danger">
-            <h2>Usaglašavanje nije uspelo ({failed.length})</h2>
-            <p>
-              Odobreno u portalu, a upis u BizniSoft nije potvrđen. Ovo je jedino
-              stanje u kome portal i knjigovodstvo tvrde različite stvari.
-            </p>
-          </section>
-          <RuleTable rows={failed} showActions={canDecide} />
-        </>
+        <RuleTable
+          rows={failed}
+          showActions={canDecide}
+          accent="danger"
+          title={`Usaglašavanje nije uspelo (${failed.length})`}
+          description="Odobreno u portalu, a upis u BizniSoft nije potvrđen. Ovo je jedino stanje u kome portal i knjigovodstvo tvrde različite stvari."
+        />
       ) : null}
     </>
   );

@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation";
 import { PageHeader } from "@/components/portal/PortalPrimitives";
 import { UnavailableValue } from "@/components/portal/PhaseNotice";
-import { amount } from "@/lib/ordering/panelFormat.mjs";
+import { amount, dmy, money } from "@/lib/ordering/panelFormat.mjs";
 import { requireCapability } from "@/lib/authz/session";
 import { loadInvoiceDetail } from "@/lib/sales/queries";
 import { UNKNOWN_NEGATIVE_LABEL } from "@/lib/sales/totals.mjs";
@@ -36,7 +36,7 @@ export default async function InvoiceDetailPage({
       <PageHeader
         eyebrow="Prodaja"
         title={`Faktura ${invoice.number}`}
-        description={`${invoice.customerName} · PIB ${invoice.customerPib} · izdata ${invoice.issuedOn}`}
+        description={`${invoice.customerName} · PIB ${invoice.customerPib} · izdata ${dmy(String(invoice.issuedOn).slice(0, 10))}`}
       />
 
       <section className="portal-panel">
@@ -45,33 +45,36 @@ export default async function InvoiceDetailPage({
             <h2>Zaglavlje dokumenta</h2>
           </div>
         </div>
-        <div className="portal-phase-notice">
-          <ul>
-            <li>
-              <strong>Vrsta dokumenta:</strong>{" "}
+        <dl className="portal-definition-grid">
+          <div>
+            <dt>Vrsta dokumenta</dt>
+            <dd>
               {negativeUnknown ? (
-                <span className="portal-unavailable">
-                  {UNKNOWN_NEGATIVE_LABEL}
-                </span>
+                <span className="portal-unavailable">{UNKNOWN_NEGATIVE_LABEL}</span>
               ) : (
                 (invoice.sourceDocumentType ?? invoice.documentKind)
               )}
-            </li>
-            <li>
-              <strong>Komercijalista:</strong> {invoice.salespersonName ?? "—"}
-            </li>
-            <li>
-              <strong>Neto iznos:</strong> {amount(invoice.netAmount)} RSD
-            </li>
-            <li>
-              <strong>Ukupno:</strong> {amount(invoice.totalAmount)} RSD
-            </li>
-            <li>
-              <strong>Status plaćanja:</strong>{" "}
+            </dd>
+          </div>
+          <div>
+            <dt>Komercijalista</dt>
+            <dd>{invoice.salespersonName ?? "—"}</dd>
+          </div>
+          <div>
+            <dt>Status plaćanja</dt>
+            <dd>
               <UnavailableValue note="Fakture ne sadrže podatke o plaćanju." />
-            </li>
-          </ul>
-        </div>
+            </dd>
+          </div>
+          <div>
+            <dt>Neto iznos</dt>
+            <dd>{money(invoice.netAmount)}</dd>
+          </div>
+          <div>
+            <dt>Ukupno</dt>
+            <dd>{money(invoice.totalAmount)}</dd>
+          </div>
+        </dl>
       </section>
 
       <section className="portal-panel">

@@ -1,4 +1,5 @@
 "use client";
+import { dmy } from "@/lib/ordering/panelFormat.mjs";
 
 import { useState, useTransition } from "react";
 import { DateField } from "@/components/portal/DateField";
@@ -41,7 +42,7 @@ export function PaymentOptionsPanel({ customerId, rows, canPropose, canApprove, 
                 <tr key={r.id}>
                   <th scope="row">{r.label}</th>
                   <td data-label="Stanje"><span className="kk-status" data-tone={STATUS[r.status].tone}>{STATUS[r.status].label}</span></td>
-                  <td data-label="Važi">od {r.effectiveFrom}{r.effectiveTo ? ` do ${r.effectiveTo}` : ""}</td>
+                  <td data-label="Važi">od {dmy(String(r.effectiveFrom).slice(0, 10))}{r.effectiveTo ? ` do ${dmy(String(r.effectiveTo).slice(0, 10))}` : ""}</td>
                   <td data-label="Obrazloženje">{r.reason}<small>predložio {r.proposedBy}{r.decidedBy ? ` · odlučio ${r.decidedBy}` : ""}{r.decisionReason ? ` · ${r.decisionReason}` : ""}</small></td>
                   <td data-label="Odluka">
                     {canApprove && r.status === "predlog" ? (

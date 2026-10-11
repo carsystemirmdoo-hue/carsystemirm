@@ -11,7 +11,7 @@ import type {
   SalesLine,
   SalesSummary,
 } from "@/lib/sales/queries";
-import { percent } from "@/lib/ordering/panelFormat.mjs";
+import { dmy, percent } from "@/lib/ordering/panelFormat.mjs";
 
 const MONEY = new Intl.NumberFormat("sr-Latn-RS", {
   maximumFractionDigits: 0,
@@ -272,7 +272,7 @@ export function SalesLines({
                     {line.invoiceNumber}
                   </Link>
                 </th>
-                <td className="portal-table-nowrap">{line.issuedOn}</td>
+                <td className="portal-table-nowrap">{dmy(String(line.issuedOn).slice(0, 10))}</td>
                 <td>
                   {line.documentKind === "nepoznato" && line.lineAmount < 0 ? (
                     <span className="portal-unavailable">

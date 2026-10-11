@@ -102,7 +102,7 @@ export default async function PriceRulesPage() {
         />
       ) : null}
 
-      <RuleTable rows={rules} />
+      <RuleTable rows={rules} title={`Pravila (${rules.length})`} />
     </>
   );
 }

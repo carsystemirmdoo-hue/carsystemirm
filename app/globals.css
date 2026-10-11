@@ -2132,6 +2132,17 @@ html[data-route-transition="fallback"] .cs-route-transition-screen {
   --ds-badge-reserve: 40px;
 }
 
+/* Ultrawide (iznad ~2350px): kontejner nastavlja da raste (68vw) do 2240px,
+   bez skoka — na 2354px je tačno 1600px. Na 3440px sadržaj zauzima 2240px
+   umesto 1600px (ranije 46% širine ekrana, sada 65%). Mreže i mape koriste
+   prostor; tekstovi zadržavaju čitljivost kroz sopstvena max-width pravila
+   (ch), pa se ne razvlače. */
+@media (min-width: 2354px) {
+  :root {
+    --ds-container-max: min(68vw, 2240px);
+  }
+}
+
 /* Container primitiv — utility klasa, ne aplicira se nigde automatski. */
 .ds-container {
   width: min(var(--ds-container-max), 100% - (var(--ds-gutter) * 2));

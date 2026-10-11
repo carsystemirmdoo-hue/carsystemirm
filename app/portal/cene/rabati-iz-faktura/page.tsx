@@ -1,3 +1,5 @@
+import { pct } from "./format";
+import { quantity } from "@/lib/ordering/panelFormat.mjs";
 import Link from "next/link";
 import { DOCUMENT_KIND_LABELS, srDate } from "@/components/customer/account-format";
 import { PageHeader } from "@/components/portal/PortalPrimitives";
@@ -9,6 +11,9 @@ import { ProposeRebateButton } from "./ProposeRebateButton";
 import { countOf, STAVKA } from "@/lib/ordering/plural.mjs";
 
 export const dynamic = "force-dynamic";
+
+/** Koliko stavki odeljka se prikazuje odmah; ostale su iza „Prikažite ostalih“. */
+const RB_ODMAH = 20;
 
 const SECTIONS: { status: string; title: string; hint: string }[] = [
   { status: "consistent", title: "Dosledan rabat — kandidati za predlog", hint: "Isti rabat na najmanje 3 stavke u najmanje 2 dokumenta. Predlog ide na odobrenje; ne menja cenovnik." },
@@ -26,7 +31,7 @@ function Item({ item, canPropose }: { item: RebateEvidenceItem; canPropose: bool
           <strong>{item.customerName}</strong>
         </Link>
         <span>{item.productGroup ?? "bez grupe"}</span>
-        {item.candidatePercent !== null ? <span className="kk-status" data-tone="success">{item.candidatePercent} %</span> : null}
+        {item.candidatePercent !== null ? <span className="kk-status" data-tone="success">{pct(item.candidatePercent)}</span> : null}
         <small>
           {countOf(item.lineCount, STAVKA)} · {item.documentCount} dok. · {srDate(item.firstOn)} – {srDate(item.lastOn)}
         </small>
@@ -34,7 +39,7 @@ function Item({ item, canPropose }: { item: RebateEvidenceItem; canPropose: bool
       <ul className="rb-values">
         {item.values.map((v) => (
           <li key={v.discountPercent}>
-            <strong>{v.discountPercent} %</strong> na {countOf(v.lines, STAVKA)}, {v.documents} dok. — npr.{" "}
+            <strong>{pct(Number(v.discountPercent))}</strong> na {countOf(v.lines, STAVKA)}, {v.documents} dok. — npr.{" "}
             {v.samples.map((s: { invoiceId: string; documentLabel: string; issuedOn: string; articleCode: string }, i: number) => (
               <span key={s.invoiceId}>
                 {i ? ", " : ""}
@@ -45,7 +50,7 @@ function Item({ item, canPropose }: { item: RebateEvidenceItem; canPropose: bool
         ))}
       </ul>
       {item.existing.length ? (
-        <p className="rb-note">Postojeći uslov: {item.existing.map((e) => `${e.source} ${e.discountPercent} %`).join("; ")}</p>
+        <p className="rb-note">Postojeći uslov: {item.existing.map((e) => `${e.source} ${pct(Number(e.discountPercent))}`).join("; ")}</p>
       ) : null}
       {item.conflict ? <p className="rb-warn">Razlikuje se od postojećeg uslova — {item.conflict}.</p> : null}
       {item.corrections ? (
@@ -79,7 +84,7 @@ export default async function RebatesFromInvoicesPage() {
       />
       <section className="portal-panel">
         <div className="kk-pricelist" data-kind={dataset.kind === "demo" ? "demo" : "off"}>
-          <strong>{lineCount} potvrđenih stavki</strong>
+          <strong>{quantity(lineCount)} potvrđenih stavki</strong>
           <span>
             {dataset.kind === "demo" ? "DEMO: izmišljene fakture i rabati. " : ""}
             {missingGroupLines ? `${countOf(missingGroupLines, STAVKA)} bez grupe artikla. ` : ""}
@@ -102,10 +107,24 @@ export default async function RebatesFromInvoicesPage() {
             </div>
             <div className="portal-panel-body">
               <ol className="rb-list">
-                {list.map((i) => (
+                {list.slice(0, RB_ODMAH).map((i) => (
                   <Item key={`${i.customerId}|${i.productGroup}`} item={i} canPropose={canPropose} />
                 ))}
               </ol>
+              {/* Prvih nekoliko odmah, ostatak na jedan klik — redosled i podaci se ne menjaju
+                  (lista od 259 kupaca pravila je stranu od ~56.000 px). */}
+              {list.length > RB_ODMAH ? (
+                <details className="cs-sugg-more">
+                  <summary>
+                    Prikažite ostalih {list.length - RB_ODMAH} ({sec.title.toLowerCase()})
+                  </summary>
+                  <ol className="rb-list" start={RB_ODMAH + 1}>
+                    {list.slice(RB_ODMAH).map((i) => (
+                      <Item key={`${i.customerId}|${i.productGroup}`} item={i} canPropose={canPropose} />
+                    ))}
+                  </ol>
+                </details>
+              ) : null}
             </div>
           </section>
         );

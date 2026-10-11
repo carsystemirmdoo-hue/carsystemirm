@@ -2311,7 +2311,7 @@ a.colorOptionContent:active {
 
 @media (max-width: 47.99rem) {
   .pageMain {
-    width: min(calc(100% - 1.25rem), 76rem);
+    width: calc(100% - (var(--ds-gutter, clamp(20px, 4vw, 56px)) * 2));
     padding-top: 1rem;
   }
 

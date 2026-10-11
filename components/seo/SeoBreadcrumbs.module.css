@@ -11,9 +11,12 @@
   flex-wrap: wrap;
   align-items: center;
   gap: 0.45rem;
-  width: min(100%, 96rem);
-  margin: 0 auto;
-  padding: 1rem clamp(1rem, 4vw, 4rem);
+  /* Putanja ne dodaje sopstvenu širinu ni bočni razmak: stoji u bloku strane
+     (main) koji već ima zajednički kontejner, pa počinje na liniji logotipa.
+     Ranije: do 96rem uz razmak do 4rem — nigde nije bila poravnata. */
+  width: 100%;
+  margin: 0;
+  padding: 1rem 0;
   list-style: none;
 }
 

@@ -2433,7 +2433,7 @@
 }
 
 .section.supportChapter {
-  max-width: min(1760px, 100%);
+  max-width: none;
   padding-top: clamp(22px, 3vw, 42px);
   padding-bottom: clamp(64px, 7vw, 104px);
 }
@@ -3672,9 +3672,10 @@
     );
   }
 
+  /* Širinu daje zajednički kontejner (--ds-container-max); dodatni bočni
+     razmak bi suzio sadržaj ispod kontejnera i pomerio levu ivicu. */
   .trustInner {
-    max-width: var(--home-wide-outer);
-    padding-inline: var(--home-wide-gutter);
+    max-width: none;
   }
 
   .brandRail {
@@ -3694,7 +3695,6 @@
   }
 
   .categorySection,
-  .section,
   .sectionAlt {
     padding-inline: var(--home-wide-gutter);
   }
@@ -3707,7 +3707,7 @@
   }
 
   .section {
-    max-width: var(--home-wide-outer);
+    max-width: none;
   }
 
   .networkGrid {

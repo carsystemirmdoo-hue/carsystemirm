@@ -12,6 +12,7 @@ import type {
   PublicProgramGroup,
   RefinishPhase,
 } from "@/lib/carsystem-data";
+import { srPlural } from "@/lib/sr-plural";
 import styles from "@/components/brand-program/BrandProgramPage.module.css";
 
 export function BrandPage({
@@ -37,12 +38,16 @@ export function BrandPage({
       brand.presentation.accentOnDarkContrastColor,
   } as CSSProperties;
   const brands = Array.from(brandBySlug.values());
+  // Samo programi u kojima brend stvarno ima proizvode: broj u hero-u i kartice govore isto.
+  const programsWithProducts = publicPrograms.filter((program) =>
+    products.some((product) => program.internalProgramSlugs.includes(product.programSlug)),
+  );
 
   return (
     <div className={styles.pageShell} style={brandStyle}>
       <main className={styles.main}>
-        <BrandHero brand={brand} programs={publicPrograms} />
-        <BrandOverview brand={brand} products={products} programs={publicPrograms} />
+        <BrandHero brand={brand} programs={programsWithProducts} />
+        <BrandOverview brand={brand} products={products} programs={programsWithProducts} />
         <div className={styles.manufacturerRailSection}>
           <ManufacturerRail
             brands={brands}
@@ -88,6 +93,8 @@ function BrandOverview({
         .filter((line): line is string => Boolean(line)),
     ),
   ).sort((first, second) => first.localeCompare(second, "sr-Latn"));
+  const countIn = (program: PublicProgramGroup) =>
+    products.filter((product) => program.internalProgramSlugs.includes(product.programSlug)).length;
 
   return (
     <section
@@ -104,7 +111,11 @@ function BrandOverview({
 
       <div className={styles.gatewayGrid}>
         <div className={styles.gatewayPanel}>
-          <p>{brand.overview ?? brand.description}</p>
+          {/* Uvod brenda je već u hero-u; ovde ide podatak iz kataloga, ne isti pasus drugi put. */}
+          <p>
+            U katalogu: {products.length} {srPlural(products.length, "proizvod", "proizvoda", "proizvoda")} brenda{" "}
+            {brand.name}.
+          </p>
 
           {productLines.length > 0 && (
             <div className={styles.programPills} aria-label={`Linije brenda ${brand.name}`}>
@@ -129,12 +140,10 @@ function BrandOverview({
             >
               <p className={styles.cardKicker}>{program.shortName}</p>
               <h3>{program.name}</h3>
-              <p>{program.description}</p>
-              <div className={styles.programPills}>
-                {program.badges.slice(0, 3).map((badge) => (
-                  <span key={badge}>{badge}</span>
-                ))}
-              </div>
+              {/* Opšti opis programa („Pištolji, Dizne…”) ne opisuje ovaj brend; broj njegovih proizvoda opisuje. */}
+              <p>
+                {countIn(program)} {srPlural(countIn(program), "proizvod", "proizvoda", "proizvoda")} brenda {brand.name}
+              </p>
             </Link>
           ))}
         </div>

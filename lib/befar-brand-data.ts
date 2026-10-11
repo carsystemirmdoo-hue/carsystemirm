@@ -131,7 +131,7 @@ export const befarMaterialGroups = [
     body: "Paste, politure i zaštita laka. Broj na pakovanju je i prefiks šifre.",
     image: {
       src: "/brands/befar/products/befar-chem-75-liquid-compound.webp",
-      alt: "Befar Likit Pasta, kutija i boca sa oznakom 75",
+      alt: "Befar tečna pasta (Likit Pasta), kutija i boca sa oznakom 75",
       width: 1600,
       height: 1067,
     },
@@ -517,7 +517,7 @@ export const befarFamilies: BefarFamily[] = [
       height: 1920,
     },
     specs: [
-      { label: "Prečnici", value: "80 · 145 · 150 · 180 mm" },
+      { label: "Prečnici", value: "80 · 145 · 150 · 180 · 220 mm" },
       { label: "Montaža", value: "Čičak · M14 · ručno" },
       { label: "Boje", value: "bela · narandžasta · crna · žuta · plava · višnja" },
     ],
@@ -585,7 +585,7 @@ export const befarFamilies: BefarFamily[] = [
       height: 1164,
     },
     specs: [
-      { label: "75", value: "Likit pasta" },
+      { label: "75", value: "Tečna pasta (Likit Pasta)" },
       { label: "80", value: "Auto politura" },
       { label: "85", value: "Anti hologram" },
       { label: "90", value: "Zaštita laka" },
@@ -615,7 +615,7 @@ export const befarFamilies: BefarFamily[] = [
     name: "Potrošni materijal",
     kicker: "Krpe · folija · vuneni diskovi",
     body:
-      "Mikrofiber i medene krpe, tack cloth, poluantistatik folija, vuneni diskovi 150 mm i specijalni sunđeri za farove i felne.",
+      "Mikrofiber krpe, lepljive krpe za prašinu (Tack Cloth), maskirna folija Turkuaz Static, vuneni diskovi 150 mm i specijalni sunđeri za farove i felne.",
     weight: "minor",
     image: {
       src: "/brands/befar/products/befar-nonwoven-abrasive-grey.webp",
@@ -817,8 +817,8 @@ export const befarDiscoveryGroups = [
     },
     role: "Najagresivnija korekcija",
     variants: [
-      { slug: "befar-sundjer-narandzasti-25x150", label: "25 × 150 mm" },
-      { slug: "befar-sundjer-narandzasti-50x150", label: "50 × 150 mm" },
+      { slug: "befar-sundjer-narandzasti-25x150", label: "150 × 25 mm" },
+      { slug: "befar-sundjer-narandzasti-50x150", label: "150 × 50 mm" },
     ],
   },
   {
@@ -836,8 +836,8 @@ export const befarDiscoveryGroups = [
     },
     role: "Kontrolisana korekcija",
     variants: [
-      { slug: "befar-sundjer-beli-25x150", label: "25 × 150 mm" },
-      { slug: "befar-sundjer-beli-50x150", label: "50 × 150 mm" },
+      { slug: "befar-sundjer-beli-25x150", label: "150 × 25 mm" },
+      { slug: "befar-sundjer-beli-50x150", label: "150 × 50 mm" },
     ],
   },
   {
@@ -854,8 +854,8 @@ export const befarDiscoveryGroups = [
     },
     role: "Rafiniranje pre finiša",
     variants: [
-      { slug: "befar-sundjer-plavi-25x150", label: "25 × 150 mm" },
-      { slug: "befar-sundjer-plavi-50x150", label: "50 × 150 mm" },
+      { slug: "befar-sundjer-plavi-25x150", label: "150 × 25 mm" },
+      { slug: "befar-sundjer-plavi-50x150", label: "150 × 50 mm" },
     ],
   },
   {
@@ -872,8 +872,8 @@ export const befarDiscoveryGroups = [
     },
     role: "Završna obrada i sjaj",
     variants: [
-      { slug: "befar-sundjer-crni-25x150", label: "25 × 150 mm" },
-      { slug: "befar-sundjer-crni-50x150", label: "50 × 150 mm" },
+      { slug: "befar-sundjer-crni-25x150", label: "150 × 25 mm" },
+      { slug: "befar-sundjer-crni-50x150", label: "150 × 50 mm" },
     ],
   },
 ];

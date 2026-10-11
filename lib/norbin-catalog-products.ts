@@ -263,7 +263,7 @@ function createCatalogProduct(entry: SyncEntry): CarsystemProduct {
     stockStatus: "unknown",
     stockManaged: false,
     // Proizvođač ne objavljuje nijednu fotografiju proizvoda — placeholder je pošten prikaz.
-    productImage: { src: PLACEHOLDER_PRODUCT_IMAGE, alt: `${entry.name}, ilustrativni prikaz proizvoda` },
+    productImage: { src: PLACEHOLDER_PRODUCT_IMAGE, alt: `${entry.name} — fotografija proizvoda nije dostupna` },
     galleryImages: [],
     specifications: [
       { label: "Tip proizvoda", value: content.productType },

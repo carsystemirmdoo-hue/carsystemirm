@@ -214,10 +214,29 @@ function distinguisher(product) {
   return (unique.length ? unique : own).join(" - ") || null;
 }
 
+/*
+ * Pisanje RUPES naziva prema proizvođaču (rupes.com; beleške u third-party-manufacturers.json):
+ * brend „RUPES”, linija „iBrid”, tehnologija „Q-MAG” (Carsystem piše „Q-MAQ”), a „9.” u
+ * „Rupes 9. Holder BigFoot” je ostatak RUPES prefiksa šifre bez same šifre. Reči naziva se ne menjaju.
+ */
+const RUPES_SPELLING = [
+  [/^Rupes\b/, "RUPES"],
+  [/^(RUPES) 9\. /, "$1 "],
+  [/\bIbrid\b/g, "iBrid"],
+  [/\bQ-MAQ\b/g, "Q-MAG"],
+];
+
+function manufacturerSpelling(name) {
+  if (!/^rupes\b/i.test(name)) return name;
+  return RUPES_SPELLING.reduce((value, [pattern, replacement]) => value.replace(pattern, replacement), name);
+}
+
 /** RUPES je zaseban brend u Carsystem katalogu; „Carsystem RUPES …” bi bio netačan naziv. */
 function displayName(product) {
   // Bez prefiksa kada zvanični naziv već nosi brend („Carsystem Cap Black”).
-  const base = /^(rupes|carsystem)\b/i.test(product.officialName) ? product.officialName : `Carsystem ${product.officialName}`;
+  const base = /^(rupes|carsystem)\b/i.test(product.officialName)
+    ? manufacturerSpelling(product.officialName)
+    : `Carsystem ${product.officialName}`;
   const suffix = distinguisher(product);
   return suffix ? `${base} – ${suffix}` : base;
 }

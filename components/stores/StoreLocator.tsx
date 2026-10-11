@@ -376,6 +376,10 @@ export function StoreLocator({ stores }: { stores: PartnerStore[] }) {
                     </span>
                     <strong>{store.name}</strong>
                     <span className={styles.resultAddress}>{store.address}</span>
+                    {/* Telefon je vidljiv u svakoj kartici, ne tek posle izbora prodavnice. */}
+                    {store.phone ? (
+                      <span className={styles.resultAddress}>Tel. {store.phone}</span>
+                    ) : null}
                     {locationNotice(store) ? (
                       <span className={styles.resultNote}>{locationNotice(store)}</span>
                     ) : null}

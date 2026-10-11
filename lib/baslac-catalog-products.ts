@@ -719,7 +719,7 @@ function toSyncCatalogProduct(entry: SyncEntry): CarsystemProduct {
     stockManaged: false,
     productImage: image
       ? { src: image, alt: `${entry.name}, ${content.productType.toLocaleLowerCase("sr-Latn")}` }
-      : { src: PLACEHOLDER, alt: `${entry.name}, ilustrativni prikaz proizvoda` },
+      : { src: PLACEHOLDER, alt: `${entry.name} — fotografija proizvoda nije dostupna` },
     galleryImages: [],
     specifications: [
       { label: "Tip proizvoda", value: content.productType },

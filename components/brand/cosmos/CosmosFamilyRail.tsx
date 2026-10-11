@@ -96,7 +96,7 @@ export function CosmosFamilyRail({
 
   return (
     <section
-      aria-label="COSMOS LAC linije proizvoda"
+      aria-label="Cosmos Lac linije proizvoda"
       className={styles.rail}
       ref={sectionRef}
     >
@@ -144,7 +144,7 @@ export function CosmosFamilyRail({
             <p className={styles.eyebrow}>
               +{variantCountLabel(otherVariants)} u {otherLines} linija
             </p>
-            <h3 className={styles.panelName}>Sve COSMOS linije</h3>
+            <h3 className={styles.panelName}>Sve Cosmos Lac linije</h3>
             <span className={styles.panelTerminalArrow} aria-hidden="true">
               ↗
             </span>

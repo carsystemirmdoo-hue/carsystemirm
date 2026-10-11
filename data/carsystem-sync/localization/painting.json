@@ -180,9 +180,9 @@
     "advice": null,
     "variants": {
       "153.217": "A komponenta / 1 L",
-      "153.218": "Učvršćivač / 0.5 L",
+      "153.218": "Učvršćivač / 0,5 L",
       "153.207": "A komponenta / 5 L",
-      "153.208": "Učvršćivač / 2.5 L"
+      "153.208": "Učvršćivač / 2,5 L"
     }
   },
   "painting/2k-carbo-filler-transparent-10-2k-polyurethane-filler": {
@@ -227,7 +227,7 @@
         "description": "Zadržava svojstva pri izlaganju UV zračenju."
       }
     ],
-    "advice": "Napomena: ukupna debljina filma ne bi trebalo da pređe 180 μm, što odgovara najviše trima slojevima od približno 60 μm uz dizne veličine 1.6 mm. Ako se pređe 180 μm, punilac tokom nanošenja ili sušenja može dobiti mlečan ili zamućen izgled; taj optički efekat je privremen i nestaje nakon potpunog sušenja i naknadnog brušenja. Preporučuje se dosledno pridržavanje uputstva za nanošenje i propisanih debljina sloja.",
+    "advice": "Napomena: ukupna debljina filma ne bi trebalo da pređe 180 μm, što odgovara najviše trima slojevima od približno 60 μm uz dizne veličine 1,6 mm. Ako se pređe 180 μm, punilac tokom nanošenja ili sušenja može dobiti mlečan ili zamućen izgled; taj optički efekat je privremen i nestaje nakon potpunog sušenja i naknadnog brušenja. Preporučuje se dosledno pridržavanje uputstva za nanošenje i propisanih debljina sloja.",
     "variants": {
       "157.988": "A komponenta / providna / 1,0 L",
       "157.989": "B komponenta / 0,7 L"
@@ -265,12 +265,12 @@
     ],
     "advice": null,
     "variants": {
-      "144.138": "A komponenta / 1.0 L",
-      "144.140": "Učvršćivač 420 standard / 0.5 L",
-      "144.139": "Učvršćivač 421 brzi / 0.5 L",
-      "142.953": "A komponenta / 5.0 L",
-      "144.107": "Učvršćivač 420 standard / 2.5 L",
-      "144.108": "Učvršćivač 421 brzi / 2.5 L"
+      "144.138": "A komponenta / 1,0 L",
+      "144.140": "Učvršćivač 420 standard / 0,5 L",
+      "144.139": "Učvršćivač 421 brzi / 0,5 L",
+      "142.953": "A komponenta / 5,0 L",
+      "144.107": "Učvršćivač 420 standard / 2,5 L",
+      "144.108": "Učvršćivač 421 brzi / 2,5 L"
     }
   },
   "painting/2k-clear-voc-cc19-as-2k-clear-coat": {
@@ -309,7 +309,7 @@
     ],
     "advice": null,
     "variants": {
-      "156.931": "A+B komponenta / 1.5 L"
+      "156.931": "A+B komponenta / 1,5 L"
     }
   },
   "painting/2k-clear-voc-cc25-hs-as-2k-clear-coat": {
@@ -352,9 +352,9 @@
     ],
     "advice": "Preporučuje se rad isključivo unutar sistema. Pri upotrebi razređivača ili učvršćivača van sistema ne mogu se isključiti problemi sa sušenjem i prianjanjem.",
     "variants": {
-      "160.417": "A+B komponenta / 1.5 L / standardni",
+      "160.417": "A+B komponenta / 1,5 L / standardni",
       "160.418": "A+B komponenta / 1,5 L / brzi",
-      "160.419": "A komponenta / 5.0 L",
+      "160.419": "A komponenta / 5,0 L",
       "160.420": "Učvršćivač / 2,5L / standardni",
       "160.422": "Učvršćivač / 2,5L / brzi"
     }
@@ -444,11 +444,11 @@
     ],
     "advice": null,
     "variants": {
-      "153.223": "A+B komponenta / spori učvršćivač / 1.5 L",
-      "153.774": "A+B komponenta / standardni učvršćivač / 1.5 L",
-      "151.909": "A komponenta / 5.0 L",
-      "151.910": "Standardni učvršćivač / 2.5 L",
-      "151.911": "Brzi učvršćivač / 2.5 L"
+      "153.223": "A+B komponenta / spori učvršćivač / 1,5 L",
+      "153.774": "A+B komponenta / standardni učvršćivač / 1,5 L",
+      "151.909": "A komponenta / 5,0 L",
+      "151.910": "Standardni učvršćivač / 2,5 L",
+      "151.911": "Brzi učvršćivač / 2,5 L"
     }
   },
   "painting/2k-clear-voc-matt-2k-clear-coat-matt": {
@@ -480,10 +480,10 @@
     "benefits": [],
     "advice": null,
     "variants": {
-      "148.983": "A komponenta / mat / 1.0 L",
-      "148.986": "A komponenta / svilenkasto mat / 1.0 L",
-      "148.985": "Učvršćivač standardni / 0.5 L",
-      "148.984": "Učvršćivač brzi / 0.5 L"
+      "148.983": "A komponenta / mat / 1,0 L",
+      "148.986": "A komponenta / svilenkasto mat / 1,0 L",
+      "148.985": "Učvršćivač standardni / 0,5 L",
+      "148.984": "Učvršćivač brzi / 0,5 L"
     }
   },
   "painting/2k-clear-voc-premium-2k-clear-coat": {
@@ -523,8 +523,8 @@
     "advice": null,
     "variants": {
       "146.714": "A komponenta / 5 L",
-      "147.019": "Standardni učvršćivač / 2.5 L",
-      "147.862": "Brzi učvršćivač / 2.5 L"
+      "147.019": "Standardni učvršćivač / 2,5 L",
+      "147.862": "Brzi učvršćivač / 2,5 L"
     }
   },
   "painting/2k-clear-voc-speed-plus-2k-clear-coat": {
@@ -575,9 +575,9 @@
     ],
     "advice": "Za kompletna lakiranja preporučuje se brz i efikasan način rada.",
     "variants": {
-      "152.563": "A+B komponenta / 1.5 L",
-      "151.899": "A komponenta / 5.0 L",
-      "151.901": "Učvršćivač / 2.5 L"
+      "152.563": "A+B komponenta / 1,5 L",
+      "151.899": "A komponenta / 5,0 L",
+      "151.901": "Učvršćivač / 2,5 L"
     }
   },
   "painting/2k-epoxy-fill-primer-2k-spot-repair-epoxy-primer": {
@@ -653,11 +653,11 @@
     ],
     "advice": null,
     "variants": {
-      "152.580": "A + B komponenta / siva / 1.25 L",
-      "152.416": "A komponenta / bela / 3.6 L",
-      "152.417": "A komponenta / siva / 3.6 L",
-      "152.418": "A komponenta / crna / 3.6 L",
-      "152.419": "Učvršćivač / 0.9 L"
+      "152.580": "A + B komponenta / siva / 1,25 L",
+      "152.416": "A komponenta / bela / 3,6 L",
+      "152.417": "A komponenta / siva / 3,6 L",
+      "152.418": "A komponenta / crna / 3,6 L",
+      "152.419": "Učvršćivač / 0,9 L"
     }
   },
   "painting/2k-filler-vario-plus-2k-acrylic-filler": {
@@ -703,9 +703,9 @@
     ],
     "advice": null,
     "variants": {
-      "152.058": "A+B komponenta / svetlosiva / 1.2 L",
-      "152.057": "A komponenta / svetlosiva / 3.5 L",
-      "147.682": "Učvršćivač / 0.7 L"
+      "152.058": "A+B komponenta / svetlosiva / 1,2 L",
+      "152.057": "A komponenta / svetlosiva / 3,5 L",
+      "147.682": "Učvršćivač / 0,7 L"
     }
   },
   "painting/2k-filler-wet-on-wet-plus-2k-acryl-filler": {
@@ -744,9 +744,9 @@
     ],
     "advice": null,
     "variants": {
-      "153.455": "A+B komponenta / siva / 1.05 L",
-      "153.456": "A komponenta / siva / 3.6 L",
-      "153.457": "Učvršćivač / 0.6 L"
+      "153.455": "A+B komponenta / siva / 1,05 L",
+      "153.456": "A komponenta / siva / 3,6 L",
+      "153.457": "Učvršćivač / 0,6 L"
     }
   },
   "painting/2k-high-speed-klarlack-2k-spot-repair-clear-coat": {
@@ -829,16 +829,16 @@
     ],
     "advice": null,
     "variants": {
-      "144.541": "A+B komponenta / učvršćivač veoma brzi / bela / 1.25 L",
-      "147.432": "A+B komponenta / učvršćivač standardni / siva / 1.25 L",
-      "144.539": "A+B komponenta / učvršćivač veoma brzi / siva / 1.25 L",
-      "144.540": "A+B komponenta / učvršćivač veoma brzi / crna / 1.25 L",
-      "144.354": "A komponenta / bela / 3.6 L",
-      "144.026": "A komponenta / siva / 3.6 L",
-      "144.353": "A komponenta / crna / 3.6 L",
-      "144.977": "Učvršćivač VOC 541 / standardni / 0.9 L",
-      "144.027": "Učvršćivač veoma brzi / 0.9 L",
-      "153.493": "Učvršćivač VOC 541 CT / 0.9 L"
+      "144.541": "A+B komponenta / učvršćivač veoma brzi / bela / 1,25 L",
+      "147.432": "A+B komponenta / učvršćivač standardni / siva / 1,25 L",
+      "144.539": "A+B komponenta / učvršćivač veoma brzi / siva / 1,25 L",
+      "144.540": "A+B komponenta / učvršćivač veoma brzi / crna / 1,25 L",
+      "144.354": "A komponenta / bela / 3,6 L",
+      "144.026": "A komponenta / siva / 3,6 L",
+      "144.353": "A komponenta / crna / 3,6 L",
+      "144.977": "Učvršćivač VOC 541 / standardni / 0,9 L",
+      "144.027": "Učvršćivač veoma brzi / 0,9 L",
+      "153.493": "Učvršćivač VOC 541 CT / 0,9 L"
     }
   },
   "painting/acryl-thinner-acrylic-thinner": {
@@ -1040,10 +1040,10 @@
     ],
     "advice": null,
     "variants": {
-      "158.216": "A komponenta / bela / 3.6 L",
-      "158.218": "A komponenta / siva / 3.6 L",
-      "158.219": "A komponenta / crna / 3.6 L",
-      "158.220": "Učvršćivač / 0.9 L",
+      "158.216": "A komponenta / bela / 3,6 L",
+      "158.218": "A komponenta / siva / 3,6 L",
+      "158.219": "A komponenta / crna / 3,6 L",
+      "158.220": "Učvršćivač / 0,9 L",
       "158.221": "Razređivač standardni / 1 L",
       "159.237": "Razređivač Multi Wet-On-Wet / 1 L",
       "160.315": "Razređivač Air Dry Additive / 1 L"
@@ -1192,7 +1192,7 @@
     ],
     "advice": null,
     "variants": {
-      "147.447": "1.0 L"
+      "147.447": "1,0 L"
     }
   },
   "painting/bumper-structurant-spray-bumper-structurant-spray-black": {
@@ -1307,9 +1307,9 @@
     ],
     "advice": "Za kompletna lakiranja preporučuje se brz i efikasan način rada.",
     "variants": {
-      "158.423": "A + B komponenta / 1.5 L",
+      "158.423": "A + B komponenta / 1,5 L",
       "157.450": "A komponenta / 5 L",
-      "157.451": "Učvršćivač / 2.5 L"
+      "157.451": "Učvršćivač / 2,5 L"
     }
   },
   "painting/cc21-x-press-five-2k-clear-coat": {
@@ -1356,9 +1356,9 @@
     ],
     "advice": null,
     "variants": {
-      "158.251": "A+B komponenta / 1.5 L",
+      "158.251": "A+B komponenta / 1,5 L",
       "158.249": "A komponenta / 5 L",
-      "158.250": "Učvršćivač / 2.5 L"
+      "158.250": "Učvršćivač / 2,5 L"
     }
   },
   "painting/clear-coat-spray-paint-spray-transparent": {
@@ -1482,10 +1482,10 @@
     ],
     "advice": null,
     "variants": {
-      "137.664": "0.385 L",
-      "137.665": "0.75 L",
-      "137.666": "1.4 L",
-      "137.667": "2.3 L"
+      "137.664": "0,385 L",
+      "137.665": "0,75 L",
+      "137.666": "1,4 L",
+      "137.667": "2,3 L"
     }
   },
   "painting/dust-needle-dust-needle": {
@@ -1568,7 +1568,7 @@
     ],
     "advice": null,
     "variants": {
-      "158.248": "A+B komponenta / 1.5 L"
+      "158.248": "A+B komponenta / 1,5 L"
     }
   },
   "painting/etch-primer-primer": {
@@ -1736,7 +1736,7 @@
     "benefits": [],
     "advice": null,
     "variants": {
-      "144.752": "23 x 1.8 cm"
+      "144.752": "23 x 1,8 cm"
     }
   },
   "painting/mixing-stick-fast-plastic-mixing-stick": {
@@ -1802,8 +1802,8 @@
     ],
     "advice": null,
     "variants": {
-      "144.649": "36 kom. po kartonu / 5.5 L",
-      "145.315": "Poklopac / 5.5 L"
+      "144.649": "36 kom. po kartonu / 5,5 L",
+      "145.315": "Poklopac / 5,5 L"
     }
   },
   "painting/multi-mix-cup-disposable-mixing-cups": {
@@ -2090,9 +2090,9 @@
     ],
     "advice": null,
     "variants": {
-      "144.957": "100 kom. po kartonu / 0.5 L",
-      "144.958": "100 kom. po kartonu / 1.0 L",
-      "145.784": "100 kom. po kartonu / 1.8 L"
+      "144.957": "100 kom. po kartonu / 0,5 L",
+      "144.958": "100 kom. po kartonu / 1,0 L",
+      "145.784": "100 kom. po kartonu / 1,8 L"
     }
   },
   "painting/plastic-primer-plastic-primer": {
@@ -2656,7 +2656,7 @@
     "productType": "Pasta za nijansiranje",
     "subtype": "Pasta za nijansiranje",
     "shortDescription": "Pasta za nijansiranje Carsystem akrilnih punilaca, uz dodatak od najviše 1 - 5 %.",
-    "longDescription": "Tinting paste filler je pasta za nijansiranje akrilnih punilaca. Dodaje se u udelu od najviše 1 - 5 %, kako bi se punilac približio nijansi bazne boje. Dostupna je u crvenoj i crnoj varijanti od 0.5 L.",
+    "longDescription": "Tinting paste filler je pasta za nijansiranje akrilnih punilaca. Dodaje se u udelu od najviše 1 - 5 %, kako bi se punilac približio nijansi bazne boje. Dostupna je u crvenoj i crnoj varijanti od 0,5 L.",
     "purpose": "Nijansiranje akrilnih punilaca",
     "facts": [
       {
@@ -2676,8 +2676,8 @@
     ],
     "advice": "Pastu za nijansiranje prvo pomešajte sa A-komponentom, pa tek zatim dodajte učvršćivač, kako biste izbegli probleme sa prianjanjem.",
     "variants": {
-      "148.505": "Crvena / 0.5 L",
-      "148.504": "Crna / 0.5 L"
+      "148.505": "Crvena / 0,5 L",
+      "148.504": "Crna / 0,5 L"
     }
   },
   "painting/touch-up-paint-bottle-fillable-20ml": {

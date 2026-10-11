@@ -1,3 +1,4 @@
+import { srPlural } from "@/lib/sr-plural";
 import Image from "next/image";
 import Link from "next/link";
 import { Footer } from "@/components/layout/Footer";
@@ -706,7 +707,7 @@ function RmFinalCta() {
 }
 
 function productCountLabel(count: number) {
-  return count === 1 ? "proizvod" : "proizvoda";
+  return srPlural(count, "proizvod", "proizvoda", "proizvoda");
 }
 
 function getRmCategoryLabel(category: RmCategorySlug) {

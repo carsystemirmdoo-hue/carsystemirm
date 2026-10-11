@@ -260,6 +260,21 @@ function badgesFor(record: CosmosLacGeneratedRecord) {
   ].filter((badge): badge is string => Boolean(badge));
 }
 
+/*
+ * Cosmos šifra koju proizvođač deli između više varijanti iste kartice (Master Mechanic „10”:
+ * pet RAL nijansi; „CL-304”: mat, polusjaj, sjaj). Takva šifra ne može biti `?varijanta=` ključ,
+ * pa varijanta tada nosi svoju jedinstvenu katalošku šifru (vidi lib/catalog/variant-key.ts).
+ */
+const sharedCosmosCodes = (() => {
+  const counts = new Map<string, number>();
+  for (const record of records) {
+    if (!record.cosmosCode) continue;
+    const key = `${syncOf(record)?.baseProductSlug ?? record.baseProductSlug}|${record.cosmosCode}`;
+    counts.set(key, (counts.get(key) ?? 0) + 1);
+  }
+  return new Set([...counts].filter(([, count]) => count > 1).map(([key]) => key));
+})();
+
 function toCarsystemProduct(record: CosmosLacGeneratedRecord): CarsystemProduct {
   const useCase =
     record.useCase ?? "Primena se potvrđuje prema zvaničnom tehničkom listu i konkretnoj podlozi.";
@@ -357,6 +372,9 @@ function toCarsystemProduct(record: CosmosLacGeneratedRecord): CarsystemProduct 
       officialName: record.officialName,
       displayNameSr: record.displayNameSr,
       cosmosCode: record.cosmosCode,
+      ...(record.cosmosCode && sharedCosmosCodes.has(`${baseProductSlug}|${record.cosmosCode}`)
+        ? { cosmosCodeShared: true }
+        : {}),
       ralCode: record.ralCode,
       colorName: record.colorName,
       finish: record.finish,

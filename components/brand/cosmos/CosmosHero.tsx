@@ -69,7 +69,7 @@ export function CosmosHero({ cans, variantCount, lineCount }: Props) {
           Boja koja stiže odmah.
         </h1>
         <p className={styles.body}>
-          {variantCount} nijansi i varijanti u {lineCount} COSMOS linija —
+          {variantCount} nijansi i varijanti u {lineCount} Cosmos Lac linija —
           dostupnih kroz partnersku mrežu Carsystem i R-M.
         </p>
         <div className={styles.heroCtas}>
@@ -78,7 +78,7 @@ export function CosmosHero({ cans, variantCount, lineCount }: Props) {
             <span aria-hidden="true">→</span>
           </Link>
           <Link className={styles.ctaSecondary} href="/katalog?brend=cosmos-lac">
-            Pogledajte sve COSMOS proizvode
+            Pogledajte sve Cosmos Lac proizvode
           </Link>
         </div>
       </div>

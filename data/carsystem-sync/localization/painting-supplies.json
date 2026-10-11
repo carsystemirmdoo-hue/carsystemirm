@@ -45,8 +45,8 @@
     "sourceHash": "d8fd54a7ce8e1d3b",
     "productType": "Vazdušno crevo",
     "subtype": "Vazdušno crevo · komplet",
-    "shortDescription": "Antistatičko gumeno vazdušno crevo sa niplom i sigurnosnom spojnicom, dužine 12.5 m.",
-    "longDescription": "Air hose je antistatičko gumeno crevo sa niplom i sigurnosnom spojnicom, za dovod vazduha do pištolja za lakiranje i alata na komprimovani vazduh. Dimenzija creva je 9 x 16 mm, dužina 12.5 m, a maksimalni radni pritisak 12 bar. Unutrašnja cev je glatka EPDM u crnoj, a spoljašnja glatka EPDM u plavoj boji.",
+    "shortDescription": "Antistatičko gumeno vazdušno crevo sa niplom i sigurnosnom spojnicom, dužine 12,5 m.",
+    "longDescription": "Air hose je antistatičko gumeno crevo sa niplom i sigurnosnom spojnicom, za dovod vazduha do pištolja za lakiranje i alata na komprimovani vazduh. Dimenzija creva je 9 x 16 mm, dužina 12,5 m, a maksimalni radni pritisak 12 bar. Unutrašnja cev je glatka EPDM u crnoj, a spoljašnja glatka EPDM u plavoj boji.",
     "purpose": "Dovod vazduha za pištolje za lakiranje i pneumatske alate",
     "facts": [
       {
@@ -59,7 +59,7 @@
       },
       {
         "label": "Dužina",
-        "value": "12.5 m"
+        "value": "12,5 m"
       },
       {
         "label": "Maksimalni pritisak vazduha",
@@ -80,7 +80,7 @@
     "benefits": [],
     "advice": null,
     "variants": {
-      "139.039": "9 x 16 mm / dužina 12.5 m"
+      "139.039": "9 x 16 mm / dužina 12,5 m"
     }
   },
   "painting-supplies/blow-off-gun-blow-off-gun": {
@@ -220,7 +220,7 @@
         "description": "Sa hrapavih površina uklanja se peračem pod visokim pritiskom."
       }
     ],
-    "advice": "Preporučuje se mlaznica veličine 1.8 - 2.2 mm.",
+    "advice": "Preporučuje se mlaznica veličine 1,8–2,2 mm.",
     "variants": {
       "149.358": "5 L",
       "149.359": "20 L"
@@ -266,7 +266,7 @@
         "description": "Film je rastvorljiv u vodi."
       }
     ],
-    "advice": "Preporučuje se mlaznica veličine 1.8 - 2.2 mm.",
+    "advice": "Preporučuje se mlaznica veličine 1,8–2,2 mm.",
     "variants": {
       "149.338": "5 L",
       "149.339": "20 L",
@@ -320,7 +320,7 @@
         "description": "Lako se uklanja."
       }
     ],
-    "advice": "Preporučuje se mlaznica veličine 2.2 - 2.5 mm.",
+    "advice": "Preporučuje se mlaznica veličine 2,2–2,5 mm.",
     "variants": {
       "153.205": "19 L"
     }
@@ -415,7 +415,7 @@
       },
       {
         "label": "Baterija",
-        "value": "3.7V 2.6 Ah Li-Ion"
+        "value": "3,7V 2,6 Ah Li-Ion"
       },
       {
         "label": "Vreme punjenja",
@@ -498,7 +498,7 @@
       },
       {
         "label": "Baterija",
-        "value": "11.1V 4.4 Ah Li-Ion"
+        "value": "11,1V 4,4 Ah Li-Ion"
       },
       {
         "label": "Vreme punjenja",
@@ -506,7 +506,7 @@
       },
       {
         "label": "Vreme rada",
-        "value": "Zavisno od režima: 10 h / 5 h / 2.5 h"
+        "value": "Zavisno od režima: 10 h / 5 h / 2,5 h"
       },
       {
         "label": "Jačina svetla",
@@ -530,7 +530,7 @@
       },
       {
         "label": "Težina",
-        "value": "1.15 kg"
+        "value": "1,15 kg"
       },
       {
         "label": "Dimenzije",
@@ -1265,7 +1265,7 @@
       },
       {
         "label": "Baterija",
-        "value": "3.7V 5,2 Ah Li-Ion"
+        "value": "3,7V 5,2 Ah Li-Ion"
       },
       {
         "label": "Vreme punjenja",
@@ -1328,7 +1328,7 @@
       },
       {
         "label": "Baterija",
-        "value": "3.7V 2.6 Ah Li-Ion"
+        "value": "3,7V 2,6 Ah Li-Ion"
       },
       {
         "label": "Vreme punjenja",

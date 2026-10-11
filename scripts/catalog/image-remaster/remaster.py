@@ -35,6 +35,18 @@ are NOT part of the product, or the 1–2 px anti-aliasing band of its silhouett
   defringe            Silhouette band pixels that are far lighter (and grey) than the
                       product just inside them are background left by cut-out; their RGB
                       is replaced by the local product colour. Alpha is unchanged.
+
+Source "official-original" (2026-10-11): carsystem.org serves a 660 px `_processed_`
+derivative of each PNG packshot that is ≈ original^2.2 — darker, with crushed blacks and a
+wider alpha band (29/29 measured PNG pairs; WebP originals are faithful). An entry with
+`source` is rebuilt from the manufacturer's ORIGINAL file (`originalUrl`, SHA-locked):
+ICC → sRGB (two originals are Adobe RGB), premultiplied Lanczos resize to the EXACT pixel
+size of the public file (same framing, so subject boxes and metrics stay valid), and only
+then the reviewed operations above. No level, curve or retouch is applied — the official
+original is the reference. Originals are not in git (≈150 MB); they live in the local cache
+(`CARSYSTEM_ORIGINALS`, default ~/Carsystem/radno/slike-za-pronalazenje/preuzeto/
+carsystem-originali/original). Without the cache `--check` verifies the derivative against
+`repairedSha256` instead of recomputing it.
 """
 
 from __future__ import annotations
@@ -43,11 +55,12 @@ import argparse
 import hashlib
 import io
 import json
+import os
 import sys
 from pathlib import Path
 
 import numpy as np
-from PIL import Image, ImageDraw, ImageFilter
+from PIL import Image, ImageCms, ImageDraw, ImageFilter
 
 ROOT = Path(__file__).resolve().parents[3]
 PUBLIC = ROOT / "public"
@@ -55,6 +68,12 @@ PLAN = ROOT / "data/catalog/image-remaster/plan.json"
 DISPLAY_MAP = ROOT / "data/catalog/image-remaster/display-map.json"
 DERIVATIVE_ROOT = "/remastered"
 OPERATIONS = ("shadow-premultiply", "clear-edge-frame", "antialias-mask", "defringe")
+ORIGINALS_CACHE = Path(
+    os.environ.get(
+        "CARSYSTEM_ORIGINALS",
+        str(Path.home() / "Carsystem/radno/slike-za-pronalazenje/preuzeto/carsystem-originali/original"),
+    )
+)
 
 
 def sha256(data: bytes) -> str:
@@ -179,10 +198,43 @@ def load_plan() -> dict:
     return json.loads(PLAN.read_text("utf8"))
 
 
-def repaired(entry: dict, original: bytes) -> bytes:
+def official_original(entry: dict) -> bytes | None:
+    """The manufacturer's original for an entry with `source`, or None when it is not cached."""
+    source = entry["source"]
+    path = ORIGINALS_CACHE / source["cacheFile"]
+    if not path.exists():
+        return None
+    data = read_bytes(path)
+    if sha256(data) != source["sha256"]:
+        raise SystemExit(f"{entry['src']}: cached original does not match source.sha256 — refusing to rebuild")
+    return data
+
+
+def reexport(original: bytes, size: tuple[int, int]) -> np.ndarray:
+    """ICC → sRGB, then premultiplied Lanczos resize to `size`. No tonal change of its own."""
+    image = Image.open(io.BytesIO(original))
+    image.load()
+    rgba = image.convert("RGBA")
+    icc = image.info.get("icc_profile")
+    if icc:
+        profile = ImageCms.ImageCmsProfile(io.BytesIO(icc))
+        if "sRGB" not in ImageCms.getProfileDescription(profile):
+            rgb = ImageCms.profileToProfile(rgba.convert("RGB"), profile, ImageCms.createProfile("sRGB"), renderingIntent=0, outputMode="RGB")
+            rgba = Image.merge("RGBA", (*rgb.split(), rgba.getchannel("A")))
+    resized = rgba.convert("RGBa").resize(size, Image.LANCZOS, reducing_gap=3.0).convert("RGBA")
+    return np.asarray(resized)
+
+
+def repaired(entry: dict, original: bytes) -> bytes | None:
     image = Image.open(io.BytesIO(original))
     fmt = image.format
-    rgba = np.asarray(image.convert("RGBA"))
+    if entry.get("source"):
+        source = official_original(entry)
+        if source is None:
+            return None
+        rgba = reexport(source, image.size)
+    else:
+        rgba = np.asarray(image.convert("RGBA"))
     for step in entry["operations"]:
         rgba = APPLY[step["op"]](rgba, step.get("params", {}))
     buffer = io.BytesIO()
@@ -213,6 +265,9 @@ def preview(out_dir: Path) -> None:
             print("skip (original changed since review):", entry["src"])
             continue
         after = repaired(entry, before)
+        if after is None:
+            print("skip (official original not cached):", entry["src"])
+            continue
         a = Image.open(io.BytesIO(before)).convert("RGBA")
         b = Image.open(io.BytesIO(after)).convert("RGBA")
         sheet = Image.new("RGB", (cell * 3 * 2 + 30, cell * 2 + 40), (40, 40, 40))
@@ -265,6 +320,13 @@ def apply() -> int:
                 derivative.unlink()
             continue
         result = repaired(entry, current)
+        if result is None:
+            # Original nije u lokalnom kešu: zadržava se pregledan derivat ako se poklapa sa planom.
+            if derivative.exists() and sha256(read_bytes(derivative)) == entry.get("repairedSha256"):
+                entries[entry["src"]] = derivative_href(entry["src"])
+                continue
+            print(f"FAIL {entry['src']}: official original not cached and no matching derivative", file=sys.stderr)
+            return 1
         if not derivative.exists() or read_bytes(derivative) != result:
             derivative.parent.mkdir(parents=True, exist_ok=True)
             derivative.write_bytes(result)
@@ -279,6 +341,7 @@ def apply() -> int:
 
 def check() -> int:
     problems = []
+    unverified = 0
     mapped = json.loads(DISPLAY_MAP.read_text("utf8"))["images"] if DISPLAY_MAP.exists() else {}
     for entry in load_plan()["images"]:
         path = PUBLIC / entry["src"].lstrip("/")
@@ -290,15 +353,26 @@ def check() -> int:
             continue
         if mapped.get(entry["src"]) != derivative_href(entry["src"]):
             problems.append(f"{entry['src']}: reviewed repair is not in display-map.json")
-        elif not derivative.exists() or read_bytes(derivative) != repaired(entry, current):
-            problems.append(f"{entry['src']}: derivative missing or not reproducible from the original")
+        elif not derivative.exists():
+            problems.append(f"{entry['src']}: derivative missing")
+        else:
+            expected = repaired(entry, current)
+            if expected is None:
+                # Bez keša originala: derivat mora biti tačno onaj koji je pregledan.
+                if sha256(read_bytes(derivative)) != entry.get("repairedSha256"):
+                    problems.append(f"{entry['src']}: derivative differs from the reviewed repairedSha256")
+                else:
+                    unverified += 1
+            elif read_bytes(derivative) != expected:
+                problems.append(f"{entry['src']}: derivative not reproducible from the original")
     planned = {entry["src"] for entry in load_plan()["images"]}
     for src in mapped:
         if src not in planned:
             problems.append(f"{src}: mapped without a reviewed plan entry")
     for p in problems:
         print("FAIL", p, file=sys.stderr)
-    print(f"image-remaster check: {len(mapped)} mapped, {len(problems)} problem(s)")
+    note = f", {unverified} checked by SHA only (official original not cached)" if unverified else ""
+    print(f"image-remaster check: {len(mapped)} mapped, {len(problems)} problem(s){note}")
     return 1 if problems else 0
 
 

@@ -498,7 +498,7 @@
         "description": "Vozilo se može bezbedno pomerati po radionici."
       }
     ],
-    "advice": "Preporučuje se nanošenje novim pištoljem za punilac. Dizna: 1.9 - 2.2 mm.",
+    "advice": "Preporučuje se nanošenje novim pištoljem za punilac. Dizna: 1,9–2,2 mm.",
     "variants": {
       "138.718": "19 L"
     }
@@ -1124,7 +1124,7 @@
       },
       {
         "title": "Dodatno malo jezgro rolne",
-        "description": "Dodatno malo jezgro rolne (Ø ~2.5 cm) omogućava praktično rukovanje i štedi prostor."
+        "description": "Dodatno malo jezgro rolne (Ø ~2,5 cm) omogućava praktično rukovanje i štedi prostor."
       },
       {
         "title": "Dobra uočljivost",

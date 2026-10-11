@@ -5613,9 +5613,9 @@
       "taxonomy": {
         "category": "boje",
         "programSlug": "boje-i-lakovi",
-        "phaseSlug": "podloga",
-        "visualType": "primer",
-        "rule": "component-undercoat"
+        "phaseSlug": "boja",
+        "visualType": "color",
+        "rule": "component-basecoat"
       },
       "systemComponents": [],
       "lineProducts": [],
@@ -6145,9 +6145,9 @@
       "taxonomy": {
         "category": "boje",
         "programSlug": "boje-i-lakovi",
-        "phaseSlug": "boja",
-        "visualType": "color",
-        "rule": "component-basecoat"
+        "phaseSlug": "lak",
+        "visualType": "clearcoat",
+        "rule": "component-clearcoat"
       },
       "systemComponents": [],
       "lineProducts": [],
@@ -6606,9 +6606,9 @@
       "taxonomy": {
         "category": "boje",
         "programSlug": "boje-i-lakovi",
-        "phaseSlug": "boja",
-        "visualType": "color",
-        "rule": "component-basecoat"
+        "phaseSlug": "lak",
+        "visualType": "clearcoat",
+        "rule": "component-clearcoat"
       },
       "systemComponents": [],
       "lineProducts": [],
@@ -7337,9 +7337,9 @@
       "taxonomy": {
         "category": "boje",
         "programSlug": "boje-i-lakovi",
-        "phaseSlug": "boja",
-        "visualType": "color",
-        "rule": "component-basecoat"
+        "phaseSlug": "lak",
+        "visualType": "clearcoat",
+        "rule": "component-clearcoat"
       },
       "systemComponents": [],
       "lineProducts": [],
@@ -7490,9 +7490,9 @@
       "taxonomy": {
         "category": "boje",
         "programSlug": "boje-i-lakovi",
-        "phaseSlug": "boja",
-        "visualType": "color",
-        "rule": "component-basecoat"
+        "phaseSlug": "lak",
+        "visualType": "clearcoat",
+        "rule": "component-clearcoat"
       },
       "systemComponents": [],
       "lineProducts": [],
@@ -8740,9 +8740,9 @@
       "taxonomy": {
         "category": "boje",
         "programSlug": "boje-i-lakovi",
-        "phaseSlug": "podloga",
-        "visualType": "primer",
-        "rule": "component-undercoat"
+        "phaseSlug": "boja",
+        "visualType": "color",
+        "rule": "component-basecoat"
       },
       "systemComponents": [],
       "lineProducts": [],
@@ -8849,9 +8849,9 @@
       "taxonomy": {
         "category": "boje",
         "programSlug": "boje-i-lakovi",
-        "phaseSlug": "podloga",
-        "visualType": "primer",
-        "rule": "component-undercoat"
+        "phaseSlug": "boja",
+        "visualType": "color",
+        "rule": "component-basecoat"
       },
       "systemComponents": [],
       "lineProducts": [],
@@ -8958,9 +8958,9 @@
       "taxonomy": {
         "category": "boje",
         "programSlug": "boje-i-lakovi",
-        "phaseSlug": "podloga",
-        "visualType": "primer",
-        "rule": "component-undercoat"
+        "phaseSlug": "boja",
+        "visualType": "color",
+        "rule": "component-basecoat"
       },
       "systemComponents": [],
       "lineProducts": [],
@@ -16850,9 +16850,9 @@
       "taxonomy": {
         "category": "boje",
         "programSlug": "boje-i-lakovi",
-        "phaseSlug": "podloga",
-        "visualType": "primer",
-        "rule": "component-undercoat"
+        "phaseSlug": "boja",
+        "visualType": "color",
+        "rule": "component-basecoat"
       },
       "systemComponents": [],
       "lineProducts": [],
@@ -20210,9 +20210,9 @@
       "taxonomy": {
         "category": "boje",
         "programSlug": "boje-i-lakovi",
-        "phaseSlug": "boja",
-        "visualType": "color",
-        "rule": "component-basecoat"
+        "phaseSlug": "lak",
+        "visualType": "clearcoat",
+        "rule": "component-clearcoat"
       },
       "relations": [],
       "usedBy": [
@@ -20449,9 +20449,9 @@
       "taxonomy": {
         "category": "boje",
         "programSlug": "boje-i-lakovi",
-        "phaseSlug": "boja",
-        "visualType": "color",
-        "rule": "component-basecoat"
+        "phaseSlug": "lak",
+        "visualType": "clearcoat",
+        "rule": "component-clearcoat"
       },
       "relations": [],
       "usedBy": [
@@ -20607,9 +20607,9 @@
       "taxonomy": {
         "category": "boje",
         "programSlug": "boje-i-lakovi",
-        "phaseSlug": "podloga",
-        "visualType": "primer",
-        "rule": "component-undercoat"
+        "phaseSlug": "boja",
+        "visualType": "color",
+        "rule": "component-basecoat"
       },
       "relations": [],
       "usedBy": [

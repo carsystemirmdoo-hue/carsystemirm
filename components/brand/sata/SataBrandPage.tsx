@@ -1,3 +1,4 @@
+import { srPlural } from "@/lib/sr-plural";
 import Link from "next/link";
 import { BrandSectionNav } from "@/components/brand/BrandSectionNav";
 import { Footer } from "@/components/layout/Footer";
@@ -388,7 +389,7 @@ export function SataBrandPage({ brand, products }: Props) {
         <header className={styles.sectionHead}>
           <p className={styles.eyebrow}>SATA u našem online katalogu</p>
           <h2 className={styles.sectionTitle} id="sata-kod-nas-title">
-            Šta je evidentirano u katalogu
+            SATA proizvodi u katalogu
           </h2>
         </header>
 
@@ -403,8 +404,8 @@ export function SataBrandPage({ brand, products }: Props) {
         */}
         <p className={styles.localLead}>
           {products.length > 0
-            ? `U našem online katalogu je evidentirano ${products.length === 1 ? "1 SATA proizvod" : `${products.length} SATA proizvoda`}. Evidencija nije izjava o prodaji, zalihama ni ceni — za dostupnost, konfiguraciju i rok isporuke kontaktirajte Carsystem i R-M.`
-            : "Trenutno evidentirano u našem online katalogu: nijedan SATA proizvod. Za dostupnost, konfiguraciju i rok isporuke kontaktirajte Carsystem i R-M."}
+            ? `U našem online katalogu je ${products.length} ${srPlural(products.length, "SATA proizvod", "SATA proizvoda", "SATA proizvoda")}. Prikaz u katalogu nije podatak o zalihama ni ceni — za dostupnost, konfiguraciju i rok isporuke kontaktirajte Carsystem i R-M.`
+            : "U našem online katalogu trenutno nema SATA proizvoda. Za dostupnost, konfiguraciju i rok isporuke kontaktirajte Carsystem i R-M."}
         </p>
         {products.length > 0 ? (
           <p className={styles.localCatalogLink}>

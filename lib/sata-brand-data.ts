@@ -30,9 +30,9 @@ export const SATA_BRAND_SLUG = "sata";
 /** Zvanični SATA servisi. Otvaraju se kao spoljni linkovi, jasno označeni. */
 export const SATA_OFFICIAL = {
   site: "https://www.sata.com/en/",
-  sparePartsFinder: "https://www.sata.com/en-us/service/spare-parts-finder/",
+  sparePartsFinder: "https://www.sata.com/en/service/spare-parts-finder/",
   premiumWarranty:
-    "https://www.sata.com/en-us/service/product-service/premium-warranty/",
+    "https://www.sata.com/en/service/product-service/premium-warranty/",
 } as const;
 
 /* -------------------------------------------------------------------------- */

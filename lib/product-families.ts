@@ -77,9 +77,9 @@ export type ProductFamily = {
  * umesto da ih ukloni.
  */
 export const DEFERRED_VARIANT_PDP_FAMILIES: Record<string, string> = {
-  "cosmos-lac-master-mechanic-antigravel-paintable": "COSMOS_VARIANT_KEY_COLLISION_FOLLOWUP",
-  "cosmos-lac-master-mechanic-filler": "COSMOS_VARIANT_KEY_COLLISION_FOLLOWUP",
-  "cosmos-lac-master-mechanic-primer": "COSMOS_VARIANT_KEY_COLLISION_FOLLOWUP",
+  // Prazno od 2026-10-11: ključ varijante sa deljenom Cosmos šifrom sada je jedinstvena kataloška
+  // šifra (lib/catalog/variant-key.ts), pa „13”, „02” i „01” više ne sudaraju i porodice
+  // Antigravel, Filler i Primer rade kao varijantni PDP. Mehanizam ostaje za buduće slučajeve.
 };
 
 /**

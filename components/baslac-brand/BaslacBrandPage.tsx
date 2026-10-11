@@ -612,8 +612,8 @@ function BaslacFamilyPackshot({ system }: { system: BaslacSystemId }) {
       />
       <figcaption>
         {packshot.kind === "example"
-          ? "Primer ambalaže"
-          : "Zajednička ambalaža porodice"}
+          ? "Primer limenke linije"
+          : "Ista limenka za sve baze linije"}
       </figcaption>
     </figure>
   );

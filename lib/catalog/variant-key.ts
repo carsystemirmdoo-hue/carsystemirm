@@ -35,8 +35,11 @@ import type { CarsystemProduct } from "@/lib/carsystem-data";
  * se ne dira bez preusmerenja za stare vrednosti.
  */
 export function canonicalVariantKey(product: CarsystemProduct): string {
+  // Deljena Cosmos šifra (npr. „10” za pet nijansi) nije jednoznačna, pa ključ postaje `sku`.
+  // Stara adresa `?varijanta=<šifra>` i dalje radi: `findVariantByKey` prihvata šifru kao alias.
+  const metadata = product.catalogMetadata;
   return (
-    product.catalogMetadata?.cosmosCode ??
+    (metadata?.cosmosCodeShared ? null : metadata?.cosmosCode) ??
     product.sku ??
     product.variantId ??
     product.slug

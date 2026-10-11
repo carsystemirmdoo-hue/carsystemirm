@@ -42,8 +42,11 @@ export function BaslacGreyShade() {
           Tri baze. Jedna logika mešanja nijanse.
         </h2>
         <p>
-          20-24 (siva), 20-34 (bela) i 20-94 (crna) se, prema zvaničnom
-          posteru sivih nijansi, mogu međusobno mešati za dobijanje prelazne
+          20-24 (siva), 20-34 (bela) i 20-94 (crna) se, prema{" "}
+          <a href="/documents/baslac/guides/baslac-grey-shades-20-24-34-94.pdf">
+            baslac posteru sivih nijansi (PDF)
+          </a>
+          , mogu međusobno mešati za dobijanje prelazne
           nijanse podloge bliže boji koja sledi. Ovo je tehnički princip
           sistema — tačna dostupnost i odnos mešanja potvrđuju se prema
           važećem tehničkom listu i lokalnoj ponudi.

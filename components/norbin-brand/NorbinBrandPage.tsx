@@ -301,9 +301,9 @@ function OurProgramSection({ products }: { products: CarsystemProduct[] }) {
           Šta zaista možete poručiti kod nas.
         </h2>
         <p className={styles.sectionLead}>
-          Norbin program ima 13 proizvoda. U našoj ponudi je danas
-          potvrđen N15-020, u dva pakovanja — dostupnost ostalih artikala
-          potvrđujemo kroz upit.
+          Proizvođač u Norbin programu vodi 13 proizvoda; ispod su svi,
+          a N15-020 u oba pakovanja. U našoj ponudi je danas potvrđen
+          N15-020 — dostupnost ostalih artikala potvrđujemo kroz upit.
         </p>
 
         <div className={styles.programLayout}>

@@ -67,6 +67,19 @@ test("komponenta nasleđuje fazu proizvoda koji je koristi", () => {
   assert.equal(clearcoatHardener.phaseSlug, "lak");
 });
 
+test("komponenta više vrsta proizvoda dobija fazu većine (H 2A14: 7 lakova, 2 topcoat-a)", () => {
+  const byCode = new Map([
+    ...["C 1", "C 2", "C 3"].map((code) => [code, { role: "clearcoat" }]),
+    ["T 1", { role: "basecoat-topcoat" }],
+    ["P 1", { role: "undercoat" }],
+  ]);
+  const component = (usedBy) => resolveTaxonomy({ role: "hardener", kind: "component", introduction: [], tds: null, usedBy }, byCode, taxonomyRules);
+  assert.equal(component(["T 1", "C 1", "C 2", "C 3"]).phaseSlug, "lak");
+  // Nerešeno: ishod ne zavisi od redosleda u `usedBy`, nego od redosleda pravila.
+  assert.equal(component(["C 1", "P 1"]).rule, component(["P 1", "C 1"]).rule);
+  assert.equal(component(["P 1"]).phaseSlug, "podloga");
+});
+
 test("izvor: sistem je jedan zapis, a mixing baze nemaju karticu", { skip: !source && "nema source dataseta" }, () => {
   const systems = source.products.filter((product) => product.kind === "system");
   assert.ok(systems.length >= 8, "očekivano najmanje 8 sistema za nijansiranje");

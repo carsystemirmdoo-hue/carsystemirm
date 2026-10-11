@@ -171,6 +171,8 @@ export type ProductCatalogMetadata = {
   officialName: string;
   displayNameSr: string;
   cosmosCode: string | null;
+  /** Cosmos šifru deli više varijanti iste kartice — nije jedinstven `?varijanta=` ključ. */
+  cosmosCodeShared?: boolean;
   ralCode: string | null;
   colorName: string | null;
   finish: string | null;
@@ -517,9 +519,9 @@ export const brands: CarsystemBrand[] = [
     name: "Cosmos Lac",
     logo: "/brands/cosmos-spray.svg",
     description:
-      "Aerosolne boje, tehnički sprejevi i specijalizovane linije za automotive, industrijsku i dekorativnu primenu.",
+      "Aerosolne boje, tehnički sprejevi i specijalizovane linije za automobilsku, industrijsku i dekorativnu primenu.",
     overview:
-      "Cosmos Lac program povezuje RAL i akrilne nijanse, prajmere, lakove, automotive proizvode i specijalizovane linije kroz proverene šifre i varijante.",
+      "Cosmos Lac program povezuje RAL i akrilne nijanse, prajmere, lakove, proizvode za automobile i specijalizovane linije kroz proverene šifre i varijante.",
     programSlugs: ["aerosoli", "boje-i-lakovi", "priprema-povrsine", "potrosni-materijal"],
     catalogOrder: 5,
     presentation: {
@@ -537,7 +539,7 @@ export const brands: CarsystemBrand[] = [
     name: "Baslac",
     logo: "/brands/baslac.svg",
     description:
-      "Profesionalni automotive refinish sistem koji povezuje pripremu podloge, vodene i solventne boje, bezbojne lakove i digitalnu koloristiku.",
+      "Profesionalni refinish sistem za automobile koji povezuje pripremu podloge, vodene i solventne boje, bezbojne lakove i digitalnu koloristiku.",
     overview:
       "Baslac povezuje pripremu, boju, završni lak i pomoćne proizvode u pregledan sistem za radionice kojima su važni jednostavniji izbor i kontrolisan proces.",
     programSlugs: ["boje-i-lakovi", "poliranje"],
@@ -577,9 +579,9 @@ export const brands: CarsystemBrand[] = [
     name: "Befar",
     logo: "/brands/befar.svg",
     description:
-      "Program sunđera i pratećeg materijala za poliranje i završnu obradu u lakirnici.",
+      "Pene i sunđeri za poliranje, podloške, paste i brusni blokovi za završnu obradu u lakirnici.",
     overview:
-      "Befar u javnom katalogu pokriva sunđere za poliranje po boji, dimenziji i nameni, sa jasnim upitom za dostupnost.",
+      "Befar u našem katalogu: pene i sunđeri za poliranje po tvrdoći, dimenziji i nameni, uz podloške i prateći materijal; dostupnost potvrđujemo kroz upit.",
     programSlugs: ["poliranje"],
     catalogOrder: 6,
     presentation: {
@@ -1511,7 +1513,7 @@ function documentsOnRequest(productName: string): ProductDocument[] {
 function createProduct(seed: ProductSeed): CarsystemProduct {
   const image = seed.productImage ?? {
     src: placeholderProductImage,
-    alt: `${seed.name}, ilustrativni prikaz proizvoda`,
+    alt: `${seed.name} — fotografija proizvoda nije dostupna`,
   };
 
   return {
@@ -1563,12 +1565,13 @@ const befarPadColors = [
 
 const befarPadSizes = [
   {
-    label: "25 mm x 150 mm",
+    // Befar zapis: prečnik × debljina (kao u šiframa, npr. 04403 „150 × 25 mm”).
+    label: "150 × 25 mm",
     slug: "25x150",
     detail: "Uska kontaktna površina",
   },
   {
-    label: "50 mm x 150 mm",
+    label: "150 × 50 mm",
     slug: "50x150",
     detail: "Šira kontaktna površina",
   },

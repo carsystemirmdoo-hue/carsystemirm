@@ -121,7 +121,7 @@ export function CosmosBrandPage({ brand, products }: Props) {
       <section aria-labelledby="cosmos-commerce-title" className={styles.commerce}>
         <div className={styles.commerceCard}>
           <div className={styles.commerceHead}>
-            <p className={styles.eyebrow}>COSMOS LAC u Carsystem i R-M programu</p>
+            <p className={styles.eyebrow}>Cosmos Lac u Carsystem i R-M programu</p>
             <h2 className={styles.display} id="cosmos-commerce-title">
               Dostupno iz našeg programa
             </h2>
@@ -150,7 +150,7 @@ export function CosmosBrandPage({ brand, products }: Props) {
 
           <div className={styles.commerceFoot}>
             <Link className={styles.commerceLink} href={COSMOS_CATALOGUE_HREF}>
-              Svi COSMOS LAC proizvodi →
+              Svi Cosmos Lac proizvodi →
             </Link>
           </div>
         </div>
@@ -162,7 +162,7 @@ export function CosmosBrandPage({ brand, products }: Props) {
           <div className={styles.documentsHead}>
             <p className={styles.eyebrow}>Katalozi</p>
             <h2 className={styles.display} id="cosmos-documents-title">
-              Zvanični COSMOS LAC katalog
+              Zvanični Cosmos Lac katalog
             </h2>
             <p className={styles.body}>
               Kompletan program u boji, na jednom mestu — RAL, Fast Acrylic, Easy Max,
@@ -176,7 +176,7 @@ export function CosmosBrandPage({ brand, products }: Props) {
           </div>
           <div className={styles.commerceFoot}>
             <Link className={styles.documentsLink} href="/katalozi?brend=cosmos-lac">
-              Svi COSMOS LAC dokumenti →
+              Svi Cosmos Lac dokumenti →
             </Link>
           </div>
         </section>
@@ -200,7 +200,7 @@ export function CosmosBrandPage({ brand, products }: Props) {
           Pronađite najbližu prodavnicu
         </h2>
         <p className={styles.body}>
-          Proverite dostupnost COSMOS LAC programa kod najbližeg partnera.
+          Proverite dostupnost Cosmos Lac programa kod najbližeg partnera.
         </p>
         <div className={styles.heroCtas}>
           <Link className={styles.ctaPrimary} href="/prodavnice">

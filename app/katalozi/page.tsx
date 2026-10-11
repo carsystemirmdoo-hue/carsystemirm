@@ -6,7 +6,7 @@ import { collectionPageJsonLd, jsonLd, pageMetadata } from "@/lib/seo";
 export const metadata: Metadata = pageMetadata({
   title: "Katalozi i dokumentacija",
   description:
-    "Zvanični proizvođački katalozi, brošure proizvodnih sistema i tehnički vodiči za brendove koje zastupamo.",
+    "Zvanični proizvođački katalozi, brošure proizvodnih sistema i tehnički vodiči za brendove iz naše ponude.",
   path: "/katalozi",
   imageAlt: "Katalozi i tehnička dokumentacija",
 });

@@ -1,5 +1,6 @@
 import { Suspense } from "react";
 import { DocumentLibraryExplorer } from "@/components/documents/DocumentLibraryExplorer";
+import { DocumentLibrarySections } from "@/components/documents/DocumentLibrarySections";
 import { Footer } from "@/components/layout/Footer";
 import type { BrandDocument } from "@/lib/documents";
 import styles from "./DocumentLibraryPage.module.css";
@@ -17,7 +18,7 @@ import styles from "./DocumentLibraryPage.module.css";
  * eksplorer renderuje svoj hero na istom mestu, pa u DOM-u i dalje postoji
  * tačno jedan H1.
  */
-function DocumentLibraryHero() {
+function DocumentLibraryHero({ documents }: { documents: BrandDocument[] }) {
   return (
     <main className="ds-container">
       <div className={styles.page}>
@@ -26,9 +27,11 @@ function DocumentLibraryHero() {
           <h1 className={styles.title}>Katalozi i dokumentacija</h1>
           <p className={styles.lead}>
             Zvanični proizvođački katalozi, brošure proizvodnih sistema i tehnički vodiči
-            dostupni kroz brendove koje zastupamo.
+            za brendove iz naše ponude.
           </p>
         </header>
+        {/* Ceo spisak je u statičkom HTML-u; filter po brendu dolazi posle hidracije. */}
+        <DocumentLibrarySections documents={documents} />
       </div>
     </main>
   );
@@ -37,7 +40,7 @@ function DocumentLibraryHero() {
 export function DocumentLibraryPage({ documents }: { documents: BrandDocument[] }) {
   return (
     <>
-      <Suspense fallback={<DocumentLibraryHero />}>
+      <Suspense fallback={<DocumentLibraryHero documents={documents} />}>
         <DocumentLibraryExplorer documents={documents} />
       </Suspense>
       <Footer />

@@ -150,9 +150,11 @@ potvrđuju ručno po artiklu: više Vašeg rada, a ne više programiranja.
 | K3 prikaz: pakovanje po BizniSoft artiklu, cena po JM bez/sa PDV-om po odobrenoj opciji, osnova (osnovna − rabat), „Cena na upit“ | ✅ | ✅ | ne |
 | K4 ista serverska korpa iz kataloga i „Poručite ponovo“, broj stavki u zaglavlju | ✅ | ✅ | ne |
 | K5 slanje uz ponovni obračun; stavka pamti potvrđenu katalošku vezu; „Moj nalog“ → Podaci firme | ✅ | ✅ | ne |
-| K6 tok `synthetic-portal-flow.mjs sajt` (uklj. status po varijanti i štampu) | ✅ | ✅ 39/39 | — |
+| K7 poručivanje u celim pakovanjima (0047): broj pakovanja × potvrđena zapremina = BizniSoft količina | ✅ | ✅ | ne (migracija 0047 nije primenjena na Production) |
+| K6 tok `synthetic-portal-flow.mjs sajt` (status po varijanti, pakovanja, štampa) | ✅ | ✅ 47/47 | — |
 
 Pravila koja važe u kodu:
+- **Cela pakovanja (odluka vlasnika 2026-10-11).** Kupac bira broj pojedinačnih pakovanja; obračunska količina za BizniSoft = broj × potvrđena količina pakovanja u JM (`article_pack_sizes`, upisuje čovek sa dokazom; `lib/ordering/packRule.mjs`). JM LIT, 5 L: 2 pakovanja = 10 LIT; JM KOM: 2 = 2. Merna JM bez potvrde → nema preračuna, artikal ide na upit; mera iz naziva je samo predlog (`scripts/catalog/pack-sizes.mjs`). Prodaja na odmerene litre nije u početnoj verziji; kancelarija u izmenjenom predlogu i dalje radi u JM (izuzeci uz posebnu odluku). Katalog, korpa, zahtev i štampa pokazuju cenu celog pakovanja i „2 × kanta 5 L = 10 LIT“.
 - „Kataloški broj“ iz BizniSofta se ne koristi kao broj proizvođača (najčešće ponavlja internu šifru).
 - Šifra se poredi kao tekst od šest cifara (`000000`), bez dodavanja ili brisanja nula van tog pravila.
 - Iz kataloga se u korpu dodaje samo artikal sa **potvrđenom** vezom (`mapped`); predlog nije potvrda.

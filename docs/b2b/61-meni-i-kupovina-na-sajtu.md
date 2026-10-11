@@ -142,6 +142,8 @@ potvrđuju ručno po artiklu: više Vašeg rada, a ne više programiranja.
 
 ### B.6 Stanje (grana `feat/kupovina-na-sajtu`, nije spojeno ni objavljeno)
 
+Postupak objave (jedno odobrenje, zaustavlja se na prvom odstupanju): [62](62-objava-kupovine-i-veza.md).
+
 | Korak | Lokalno | Pregledač (sintetička baza) | Objavljeno |
 |---|---|---|---|
 | K1 alat za predloge veza (`scripts/catalog/biznisoft-catalog-proposals.mjs`; dokazi E1 šifra/kataloški broj, E2 kod proizvođača, E3 samo sličan naziv) | ✅ | — (izlaz privatan) | ne |

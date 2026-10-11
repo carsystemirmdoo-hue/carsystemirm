@@ -6,6 +6,7 @@ import { addRequestItemAction } from "@/app/kupac/naruci/actions";
 import { ensureCustomerSession, hasCustomerMarker } from "@/components/customer-buy/customerSession";
 import type { ReorderItem, ReorderList } from "@/lib/customers/reorder";
 import styles from "./CatalogReorder.module.css";
+import { isSinglePiece } from "@/lib/ordering/packRule.mjs";
 
 type State = (ReorderList & { signedIn: true }) | null;
 
@@ -173,15 +174,18 @@ function ReorderQuantity({ item }: { item: ReorderItem }) {
       if (r.ok) window.dispatchEvent(new CustomEvent("cs-korpa", { detail: { count: r.count } }));
     });
   const unit = o.unit === "LIT" ? "L" : o.unit === "KOM" ? "kom" : o.unit.toLowerCase();
+  // Jedan komad = jedno pakovanje: cena po komadu se ne ponavlja.
+  const single = isSinglePiece(o.pack, o.unit);
   return (
     <div className={styles.order}>
       <p className={styles.orderFacts}>
-        Cena pakovanja ({o.pack.label}), bez PDV-a:
+        {single ? `Cena po ${unit}, bez PDV-a:` : `Cena pakovanja (${o.pack.label}), bez PDV-a:`}
         {o.prices.map((p) => (
           <span key={p.label}>
             <br />
             {o.prices.length > 1 ? `${p.label}: ` : ""}
-            <strong>{money.format(p.packNet)} RSD</strong> · {money.format(p.netPrice)} / {unit} · PDV {p.vatPercent} %
+            <strong>{money.format(p.packNet)} RSD</strong>
+            {single ? "" : ` · ${money.format(p.netPrice)} / ${unit}`} · PDV {p.vatPercent} %
           </span>
         ))}
       </p>

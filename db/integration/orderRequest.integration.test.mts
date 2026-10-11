@@ -449,3 +449,33 @@ test("pakovanja (0047): 2 × 5 L = 10 LIT kroz ponudu, korpu i zahtev; LIT bez p
     await db.sql`DELETE FROM article_catalog_mappings WHERE article_id IN (${five}, ${bare})`;
   }
 });
+
+test("JM KOM sa „0,5L“ u nazivu: pakovanje je 1 komad, cena se ne množi sa 0,5; baza odbija 0,5 kao količinu za KOM", async (t) => {
+  if (guard(t)) return;
+  const s = await svc();
+  const slug = "baslac-50-420-2k-clear-hardener-normal-voc";
+  await db.sql`DELETE FROM customer_cart_items WHERE customer_id = ${customerId}`;
+  await db.sql`INSERT INTO customer_commercial_status_decisions (customer_id, status, reason, decided_by) VALUES (${customerId}, 'redovan', 'QA ponovo redovan', ${ids.owner})`;
+  const [a] = await db.sql<{ id: string }[]>`INSERT INTO articles (code, name, unit, brand) VALUES (${code("H05")}, 'BASLAC 2K HERTER NORMAL 50-420 0,5L', 'KOM', 'BASLAC') RETURNING id`;
+  await db.sql`INSERT INTO article_base_prices (article_id, net_price, vat_percent, valid_from, source, reason, created_by) VALUES (${a.id}, '2390.00', '20', '2026-01-01', 'rucno', 'QA osnovna', ${ids.owner})`;
+  await db.sql`INSERT INTO article_catalog_mappings (article_id, catalog_product_slug, status, confirmed_by, confirmed_at) VALUES (${a.id}, ${slug}, 'mapped', ${ids.owner}, now())`;
+  try {
+    await assert.rejects(
+      db.sql`INSERT INTO article_pack_sizes (article_id, pack_quantity, unit, label, evidence, confirmed_by) VALUES (${a.id}, '0.5', 'KOM', 'limenka 0,5 L', 'QA', ${ids.owner})`,
+      /article_pack_sizes_piece_check/,
+    );
+    await db.sql`INSERT INTO article_pack_sizes (article_id, pack_quantity, unit, label, evidence, confirmed_by) VALUES (${a.id}, '1', 'KOM', 'limenka 0,5 L', 'QA', ${ids.owner})`;
+    const offer = (await s.loadCatalogRequestOffers(customerId)).offers.find((o) => o.articleId === a.id)!;
+    assert.deepEqual(offer.pack, { quantity: 1, unit: "KOM", label: "limenka 0,5 L" });
+    const p = offer.byOption.avans as Extract<typeof offer.byOption.avans, { status: "cena" }>;
+    assert.equal(p.packAmounts?.net, p.netPrice, "cena pakovanja = cena po komadu");
+    assert.equal((await s.addCatalogItem(session(), { articleId: a.id, packs: "2" })).ok, true);
+    const q = await s.loadRequestQuote(customerId, "avans");
+    assert.equal(q.lines[0].quantity, 2);
+    assert.equal(q.lines[0].packSummary, "2 × limenka 0,5 L = 2 KOM");
+  } finally {
+    await db.sql`DELETE FROM customer_cart_items WHERE customer_id = ${customerId}`;
+    await db.sql`DELETE FROM article_pack_sizes WHERE article_id = ${a.id}`;
+    await db.sql`DELETE FROM article_catalog_mappings WHERE article_id = ${a.id}`;
+  }
+});

@@ -161,6 +161,8 @@ const CATALOG = [
   ["SINT-C05", "SINT VOC FILLER 540 UCVRSCIVAC VEOMA BRZI 0,9L", "KOM", null, "carsystem-2k-voc-filler-540", "144.027"],
   // LIT sa cenom i potvrđenom vezom, ali BEZ potvrđenog pakovanja → ne poručuje se (nema preračuna).
   ["SINT-C06", "SINT LAK VOC 4L", "LIT", "2300.00", "norbin-n15-v20-clear-voc", null],
+  // JM KOM, a u nazivu 0,5 L: pakovanje = 1 komad (limenka 0,5 L je opis), cena po komadu se ne množi.
+  ["SINT-C07", "SINT HERTER NORMAL 0,5L", "KOM", "2390.00", "baslac-50-420-2k-clear-hardener-normal-voc", null],
 ] as const;
 for (const [code, name, unit, price, slug, variant] of CATALOG) {
   const [a] = await sql<{ id: string }[]>`INSERT INTO articles (code, name, unit, brand) VALUES (${code}, ${name}, ${unit}, 'SINTKAT') RETURNING id`;
@@ -180,6 +182,8 @@ for (const [code, qty, label] of [
   await sql`INSERT INTO article_pack_sizes (article_id, pack_quantity, unit, label, evidence, confirmed_by)
             VALUES (${art[code]}, ${qty}, 'LIT', ${label}, 'sintetička potvrda', ${staff.vlasnik})`;
 }
+await sql`INSERT INTO article_pack_sizes (article_id, pack_quantity, unit, label, evidence, confirmed_by)
+          VALUES (${art["SINT-C07"]}, 1, 'KOM', 'limenka 0,5 L', 'sintetička potvrda: 1 KOM = limenka 0,5 L', ${staff.vlasnik})`;
 await rule(A, { productScope: "brand", brand: "SINTKAT" }, 20);
 await rule(A, { productScope: "brand", brand: "SINTKAT" }, 25, "avans");
 // Firma D: drugi rabat, samo jedna opcija plaćanja.
@@ -237,6 +241,22 @@ for (const code of ["09001", "09002"]) {
             VALUES (${a1.id}, '1', 'KOM', '1 kom', 'sintetička potvrda: 1 kom = jedno pakovanje', ${staff.vlasnik})`;
   await sql`INSERT INTO article_catalog_mappings (article_id, catalog_product_slug, catalog_variant_id, status, note, proposed_by, proposed_at, confirmed_by, confirmed_at)
             VALUES (${a1.id}, 'carsystem-2k-voc-filler-540', '144.026', 'mapped', 'sintetička potvrđena veza', ${staff.vlasnik}, now(), ${staff.vlasnik}, now())`;
+}
+
+// „Poručite ponovo“ sa količinom koja NIJE ceo broj pakovanja: tri potvrđene fakture firme A sa
+// SINT-C04 (kanta 5 L) po 7, 7 i 8 LIT — uobičajena količina 7 LIT se ne sme tiho zaokružiti.
+// Izvorni dokument (valid, original, partner 09001) je ono po čemu ih „Poručite ponovo“ priznaje.
+for (const [number, day, qty] of [["SINT-RN-0101", "2026-07-01", "7"], ["SINT-RN-0102", "2026-08-03", "7"], ["SINT-RN-0103", "2026-09-01", "8"]] as const) {
+  const amount = (Number(qty) * 720).toFixed(2);
+  const [inv] = await sql<{ id: string }[]>`
+    INSERT INTO invoices (company_id, document_kind, number, year, issued_on, customer_id, net_amount, tax_amount, total_amount, origin)
+    VALUES ('SINT', 'faktura', ${number}, 2026, ${day}, ${A}, ${amount}, ${(Number(amount) * 0.2).toFixed(2)}, ${(Number(amount) * 1.2).toFixed(2)}, 'manual_upload')
+    RETURNING id`;
+  await sql`INSERT INTO invoice_lines (invoice_id, line_number, article_id, article_code, description, quantity, unit_price, discount_percent, line_amount)
+            VALUES (${inv.id}, 1, ${art["SINT-C04"]}, 'SINT-C04', 'SINT ANTISILIKON 5L', ${qty}, '960.0000', '25', ${amount})`;
+  await sql`INSERT INTO source_documents (file_hash, file_name, page_count, line_count, issuer_code, business_document_type, business_document_number,
+                                          document_date, parser_version, validation_status, invoice_id, external_partner_code, origin)
+            VALUES (${`sint-${number}`}, ${`${number}.pdf`}, 1, 1, 'SINT', 'faktura', ${number}, ${day}, 'sinteticki', 'valid', ${inv.id}, '09001', 'manual_upload')`;
 }
 
 await sql`INSERT INTO system_settings (key, value) VALUES ('ordering.trial', ${sql.json({ customerIds: [A, D] })})`;

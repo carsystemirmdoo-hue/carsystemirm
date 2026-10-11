@@ -726,6 +726,41 @@ try {
       check("kancelarija: štampa predloga — „IZUZETAK: 7 LIT nije ceo broj pakovanja“", /IZUZETAK: 7 LIT nije ceo broj pakovanja \(kanta 5 L\)/.test(st2));
       await t.screenshot({ path: `${OUT}/s15-stampa-izuzetak.png`, fullPage: true });
     }
+
+    // 12. „Poručite ponovo“: uobičajeno 7 LIT, pakovanje kanta 5 L → bez predloga, objašnjenje, ručni unos celog broja.
+    await go(k, "/katalog");
+    const reo = k.locator('section[aria-labelledby="reorder-title"]');
+    await reo.waitFor({ timeout: 60000 });
+    const reoLi = reo.locator("li", { hasText: "SINT-C04" }).first();
+    await reoLi.scrollIntoViewIfNeeded();
+    const reoT = await txt(reoLi);
+    const val = await reoLi.locator('input[type="number"]').inputValue();
+    check("Poručite ponovo: 7 LIT nije ceo broj kanti — polje prazno, bez tihog zaokruživanja", val === "", `vrednost „${val}“`);
+    check("Poručite ponovo: objašnjenje „Uobičajeno ste kupovali 7 LIT, a pakovanje je kanta 5 L — nije ceo broj pakovanja“", /Uobičajeno ste kupovali 7 LIT, a pakovanje je kanta 5 L — to nije ceo broj pakovanja/.test(reoT), reoT.slice(0, 220));
+    const before = await cartRows(A);
+    await reoLi.getByRole("button", { name: "Dodajte u korpu" }).click();
+    await reoLi.locator('[role="status"]').waitFor({ timeout: 30000 });
+    const emptyMsg = await txt(reoLi.locator('[role="status"]'));
+    check("Poručite ponovo: prazno polje se ne šalje kao predlog — traži ceo broj pakovanja", /ceo broj pakovanja/.test(emptyMsg) && JSON.stringify(await cartRows(A)) === JSON.stringify(before), emptyMsg);
+    await k.screenshot({ path: `${OUT}/s16-poruci-ponovo-nedeljivo.png`, fullPage: false });
+    await reoLi.locator('input[type="number"]').fill("1");
+    await reoLi.getByRole("button", { name: "Dodajte u korpu" }).click();
+    await k.waitForTimeout(1500);
+    const reoCart = (await cartRows(A)).find((r) => r.code === "SINT-C04");
+    check("Poručite ponovo: ručno 1 kanta = 5 LIT u korpi", reoCart?.n === 1 && reoCart?.q === "5.000", JSON.stringify(reoCart));
+
+    // 13. Baslac „0,5L“ sa JM KOM: pakovanje = 1 komad (limenka 0,5 L), cena po komadu se NE množi sa 0,5.
+    await go(k, "/proizvodi/baslac-50-420-2k-clear-hardener-normal-voc");
+    const pk = await panelText(k);
+    check("KOM limenka 0,5 L: cena pakovanja = cena po komadu (1.792,50 avans), ne pola", pk.includes("1.792,50 RSD / limenka 0,5 L") && !pk.includes("896,25"), pk.slice(0, 220));
+    await panelOf(k).locator('input[type="number"]').fill("2");
+    await k.waitForTimeout(300);
+    check("KOM limenka 0,5 L: „2 × limenka 0,5 L = 2 kom u obračunu“", /2 × limenka 0,5 L = 2 kom u obračunu/.test(await txt(panelOf(k))));
+    await panelOf(k).getByRole("button", { name: "Dodajte u korpu" }).click();
+    await panelOf(k).locator('[role="status"]').waitFor({ timeout: 30000 });
+    const c07 = (await cartRows(A)).find((r) => r.code === "SINT-C07");
+    check("KOM limenka 0,5 L: korpa 2 pakovanja = 2.000 KOM", c07?.n === 2 && c07?.q === "2.000", JSON.stringify(c07));
+    await k.screenshot({ path: `${OUT}/s17-kom-limenka-05.png`, fullPage: false });
     check("sajt: bez 5xx odgovora", errors.length === 0, errors.join(", "));
   }
   if (STEP === "b9") {

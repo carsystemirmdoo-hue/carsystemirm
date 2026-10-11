@@ -78,7 +78,8 @@ if (cmd === "predlog") {
     for (const r of rows) {
       const q = Number(String(r.predlog_kolicina).replace(",", "."));
       const [a] = await sql`SELECT id, unit FROM articles WHERE code = ${r.sifra}`;
-      const problem = !a ? "artikal ne postoji" : String(a.unit ?? "").toUpperCase() !== String(r.jm).toUpperCase() ? `JM u bazi ${a.unit} ≠ ${r.jm}` : !(q > 0) ? "količina nije ispravna" : !String(r.dokaz).trim() ? "nedostaje dokaz" : null;
+      const piece = ["KOM", "KT"].includes(String(r.jm).toUpperCase());
+      const problem = !a ? "artikal ne postoji" : String(a.unit ?? "").toUpperCase() !== String(r.jm).toUpperCase() ? `JM u bazi ${a.unit} ≠ ${r.jm}` : !(q > 0) ? "količina nije ispravna" : piece && !Number.isInteger(q) ? "JM KOM: količina pakovanja je broj komada (zapremina ide u oznaku)" : !String(r.dokaz).trim() ? "nedostaje dokaz" : null;
       plan.push({ sifra: r.sifra, kolicina: q, jm: r.jm, oznaka: r.predlog_oznaka, problem, id: a?.id, dokaz: r.dokaz });
     }
     const ok = plan.filter((p) => !p.problem);

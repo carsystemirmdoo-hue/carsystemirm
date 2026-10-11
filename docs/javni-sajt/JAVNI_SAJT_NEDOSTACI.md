@@ -108,7 +108,50 @@ Testovi: `npm test` sada uključuje i `test:search-rules` (pravila pretrage, bez
 
 **Ostaje u A, nerešeno:** JS-0633 — TDS kaže N55-V20 „grey”, poster sivih tonova „Dark Grey”; iz teksta postera nije pouzdano koja oznaka pripada kom redu, pa tekst nije menjan.
 
-Regresija: `npm test` **79 grupa / 2.337 testova / 0 padova**; `tsc` i `eslint` (izmenjeni fajlovi) čisti; `remaster.py --check` 86 / 0 problema; Carsystem, R-M i C.A.R.FIT sync check 0 razlika; `validate-product-identity --strict`, `validate-search-deltas` i `validate-catalog-search-index` prolaze na izolovanom buildu.
+Regresija: `npm test` **79 grupa / 2.340 testova / 0 padova** (posle završnih provera); `tsc` i `eslint` (izmenjeni fajlovi) čisti; `remaster.py --check` 86 / 0 problema; Carsystem, R-M i C.A.R.FIT sync check 0 razlika; `validate-product-identity --strict`, `validate-search-deltas` i `validate-catalog-search-index` prolaze na izolovanom buildu.
+
+### 0.4a Završne provere (2026-10-12)
+
+**1. R-M komponente sa više namena.** Promena glavne faze prema većini primena NE sme da ih sakrije iz drugih filtera. Provera je pokazala da bi ih sakrila, jer filter `?faza=` poredi jednu fazu (`CatalogExplorer`, `EntityProductFilters`, brojevi na R-M strani). To je postojalo i pre (H 2A14 je ranije falio u „Lak”), ali je promena samo premestila prazninu. Ispravka: komponenta nosi i `secondaryPhaseSlugs` iz ostalih zvaničnih primena, a filteri traže glavnu ILI dodatnu fazu (`lib/catalog/phase-match.mjs`). Dodatne faze ima 26 R-M komponenti sa više primena. Kartica i PDP i dalje prikazuju samo glavnu fazu.
+
+| Šifra | Naziv | Faza pre | Glavna faza sada | Dodatno u filteru | Zvanične primene (`usedBy`) | Efekat na filter | Zapis |
+|---|---|---|---|---|---|---|---|
+| GV 200 | GV 200 GHD THINNER | Podloga | **Boja** | Podloga, Lak | basecoat-topcoat 4, clearcoat 1, undercoat 1 | ostaje u Podloga; dodato: Boja, Lak | `rm-gv-200-ghd-thinner` |
+| H 2A24 | H 2A24 TopCURE | Boja | **Lak** | Boja | clearcoat 7, basecoat-topcoat 3 | ostaje u Boja; dodato: Lak | `rm-h-2a24-topcure` |
+| H 2A34 | H 2A34 TopCURE | Boja | **Lak** | Boja | clearcoat 7, basecoat-topcoat 2 | ostaje u Boja; dodato: Lak | `rm-h-2a34-topcure` |
+| H 2P25 | H 2P25 CLEAR Harden-R | Boja | **Lak** | Boja | clearcoat 8, basecoat-topcoat 3, thinner 1 | ostaje u Boja; dodato: Lak | `rm-h-2p25-clear-harden-r` |
+| H 2P35 | H 2P35 CLEAR Harden-R | Boja | **Lak** | Boja | clearcoat 8, basecoat-topcoat 2, thinner 1 | ostaje u Boja; dodato: Lak | `rm-h-2p35-clear-harden-r` |
+| H 700 | H 700 GHD HARDENER | Podloga | **Boja** | Podloga, Lak | basecoat-topcoat 4, clearcoat 1, undercoat 1 | ostaje u Podloga; dodato: Boja, Lak | `rm-h-700-ghd-hardener` |
+| H 750 | H 750 GHD HARDENER | Podloga | **Boja** | Podloga, Lak | basecoat-topcoat 4, clearcoat 1, undercoat 1 | ostaje u Podloga; dodato: Boja, Lak | `rm-h-750-ghd-hardener` |
+| H 770 | H 770 GHD HARDENER | Podloga | **Boja** | Podloga, Lak | basecoat-topcoat 3, clearcoat 1, undercoat 1 | ostaje u Podloga; dodato: Boja, Lak | `rm-h-770-ghd-hardener` |
+| RA 050 | RA 050 AGILIS MIX | Podloga | **Boja** | Podloga | basecoat-topcoat 3, undercoat 1, thinner 1 | ostaje u Podloga; dodato: Boja | `rm-ra-050-agilis-mix` |
+| H 2A14 | H 2A14 TopCURE | Boja | **Lak** | Boja | clearcoat 7, basecoat-topcoat 2 | ostaje u Boja; dodato: Lak | `h-2a14-topcure` |
+| H 2P15 | H 2P15 CLEAR Harden-R | Boja | **Lak** | Boja | clearcoat 8, basecoat-topcoat 2 | ostaje u Boja; dodato: Lak | `h-2p15-clear-harden-r` |
+| HB 032 | HB 032 HYDROMIX | Podloga | **Boja** | Podloga, Lak | basecoat-topcoat 4, clearcoat 1, undercoat 1 | ostaje u Podloga; dodato: Boja, Lak | `hb-032-hydromix` |
+
+Provereno u pregledaču na `/katalog?brend=rm&faza=…`: H 2A14 i H 2P15 se nalaze u „Boja” i „Lak”; HB 032 i GV 200 u „Podloga”, „Boja” i „Lak”; RA 050 u „Podloga” i „Boja”. Testovi: `rm-sync.test.mjs` (svaka komponenta je u filteru svake faze u kojoj je zvanično koriste) i `lib/catalog/phase-match.test.mjs`.
+
+**2. Stari Cosmos linkovi sa zajedničkim kodom.** I dalje rade, ali **nisu jednoznačni**: šifra je ista za više nijansi/završnica, pa link bira PRVU varijantu te šifre u redosledu porodice. Ponašanje je isto kao pre izmene. Ko je ranije podelio takav link za drugu nijansu, dobija prvu; adresa ne nosi podatak koji bi to razrešio.
+
+| Porodica | Stari link | Bira | Varijante sa istom šifrom |
+|---|---|---|---|
+| `cosmos-lac-master-mechanic-antigravel-paintable` | `?varijanta=13` | Master Mechanic Antigravel Paintable 13 Black | 3: Master Mechanic Antigravel Paintable 13 Black; Master Mechanic Antigravel Paintable 13 Grey; Master Mechanic Antigravel Paintable 13 White |
+| `cosmos-lac-master-mechanic-brake-caliper-paint` | `?varijanta=15` | Master Mechanic Brake Caliper Paint 15 Blue | 3: Master Mechanic Brake Caliper Paint 15 Blue; Master Mechanic Brake Caliper Paint 15 Red; Master Mechanic Brake Caliper Paint 15 Yellow |
+| `cosmos-lac-master-mechanic-filler` | `?varijanta=02` | Master Mechanic Filler 02 Black | 2: Master Mechanic Filler 02 Black; Master Mechanic Filler 02 Grey |
+| `cosmos-lac-master-mechanic-heat-resistant-paint` | `?varijanta=12` | Master Mechanic Heat Resistant Paint 12 Black | 2: Master Mechanic Heat Resistant Paint 12 Black; Master Mechanic Heat Resistant Paint 12 Silver |
+| `cosmos-lac-master-mechanic-primer` | `?varijanta=01` | Master Mechanic Primer 01 Grey | 2: Master Mechanic Primer 01 Grey; Master Mechanic Primer 01 White |
+| `cosmos-lac-master-mechanic-ral` | `?varijanta=10` | Master Mechanic RAL 10 Black — mat | 5: Master Mechanic RAL 10 Black — mat; Master Mechanic RAL 10 Black — sjaj; Master Mechanic RAL 10 Silver; Master Mechanic RAL 10 White — mat; Master Mechanic RAL 10 White — sjaj |
+| `cosmos-lac-master-mechanic-wheel-paint` | `?varijanta=14` | Master Mechanic Wheel Paint 14 Black | 2: Master Mechanic Wheel Paint 14 Black; Master Mechanic Wheel Paint 14 Silver |
+| `cosmos-lac-ral` | `?varijanta=CL-301` | RAL CL 301 RAL 9010 White — mat | 2: RAL CL 301 RAL 9010 White — mat; RAL CL 301 RAL 9010 White — sjaj |
+| `cosmos-lac-ral` | `?varijanta=CL-304` | RAL CL 304 RAL 9005 Black — mat | 3: RAL CL 304 RAL 9005 Black — mat; RAL CL 304 RAL 9005 Black — polusjaj; RAL CL 304 RAL 9005 Black — sjaj |
+
+Sajt takve linkove više ne generiše: sitemap 0, HTML builda 0, indeks pretrage 0. Provera je otkrila da je pretraga do sada za ovih 29 varijanti davala baš deljenu šifru, pa je klik na „Primer 01 White” otvarao Grey. Ispravljeno je u `lib/catalog-listing.ts`, a test u `catalogRevision2026.test.mjs` pada bez ispravke. U pregledaču „master mechanic primer 01 white” sada otvara White.
+Zatečeno i nepromenjeno (izvan ovog obima): 35 linkova iz pretrage (Fast Acrylic 27, RAL 6, Norbin N15-020 2) nose prikazanu šifru umesto ključa sa PDP-a. Vode na ISTU, tačnu varijantu kroz alias, ali je to druga adresa iste varijante.
+
+**3. Preostali delimični nalaz iz kategorije A: JS-0642.**
+- **Rešeno:** HB 032 HYDROMIX ima glavnu fazu „Boja” (ONYX HD baze, 4 od 6 zvaničnih primena) i i dalje se vidi u „Podloga” i „Lak”.
+- **Ostaje:** GHD TOPCOAT je u `/kategorije/bazne-boje` jer ga R-M vodi u grupi „Basecoat/Topcoat”. Da li „Bazne boje” treba da ga obuhvate ili se kategorija proširuje/preimenuje, odlučujete Vi (pitanje o kategorijama).
+- Jedini drugi nerešen nalaz iz A je JS-0633: otvoren, ne delimičan (TDS „grey”, a poster „Dark Grey”).
 
 ### 0.5 Razvrstani preostali nalazi
 

@@ -1,7 +1,7 @@
 "use client";
 
 import { useActionState, useState } from "react";
-import { Badge, Field, PortalButton } from "@/components/portal/PortalPrimitives";
+import { Badge, Field, PortalButton, SectionHeader } from "@/components/portal/PortalPrimitives";
 import {
   transitionRuleAction,
   type PriceActionState,
@@ -97,23 +97,34 @@ const ACTIONS: Record<string, { to: string; label: string; needsReason: boolean 
 export function RuleTable({
   rows,
   showActions = false,
+  title,
+  description,
+  accent,
 }: {
   rows: RuleRow[];
   showActions?: boolean;
+  /** Naslov odeljka u istom panelu kao tabela (ranije zaseban panel iznad). */
+  title?: string;
+  description?: string;
+  accent?: "warning" | "danger";
 }) {
   const [state, formAction, pending] = useActionState(transitionRuleAction, INITIAL);
   const [openId, setOpenId] = useState<string | null>(null);
 
+  const header = title ? <SectionHeader title={title} description={description} /> : null;
+
   if (rows.length === 0) {
     return (
-      <section className="portal-panel">
+      <section className="portal-panel" data-accent={accent}>
+        {header}
         <p>Nema pravila za prikaz.</p>
       </section>
     );
   }
 
   return (
-    <section className="portal-panel">
+    <section className="portal-panel" data-accent={accent}>
+      {header}
       {state.error ? (
         <div className="portal-login-error" role="alert">
           <span>

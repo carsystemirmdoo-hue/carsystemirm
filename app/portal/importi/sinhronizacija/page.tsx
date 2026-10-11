@@ -85,6 +85,32 @@ const STATUS_UVOZA: Record<string, string> = {
   preskoceno_duplikat: "preskočeno (već uvezeno)",
 };
 
+
+/** Razlozi koje šalje konektor (kodovi ostaju u bazi; ovde je samo prikaz). */
+const RAZLOG: Record<string, string> = {
+  raspored: "raspored",
+  ceka_sledeci_ciklus: "čeka sledeći ciklus",
+  odlozeno_do_sledeceg_termina: "odloženo do sledećeg termina",
+  pre_termina: "pre termina",
+  pre_radnog_vremena: "pre radnog vremena",
+  posle_radnog_vremena: "posle radnog vremena",
+  radno_vreme: "van radnog vremena",
+  neradni_dan: "neradni dan",
+  sat_van_prozora: "van vremenskog prozora",
+  vec_izvrseno_danas: "već urađeno danas",
+  naknadni_kraj_dana: "naknadni kraj dana",
+  calendar_unverified: "kalendar praznika nije proveren",
+  folder_nedostupan: "folder nije dostupan",
+  popis_prekinut: "popis fajlova prekinut",
+  parser_greska: "greška čitanja dokumenta",
+  rate_limited: "previše zahteva — pokušaj kasnije",
+  nepoznat_odgovor: "nepoznat odgovor servera",
+};
+function razlogTekst(kod: string | null | undefined) {
+  if (!kod) return "—";
+  return RAZLOG[kod] ?? kod.replace(/_/g, " ");
+}
+
 export default async function SyncOperationsPage() {
   const user = await requireCapability("sync:monitor", "/portal/importi/sinhronizacija");
 
@@ -152,13 +178,13 @@ export default async function SyncOperationsPage() {
           label="Prijem sa uređaja"
           value={prijemUkljucen ? "uključen" : "isključen"}
           tone={prijemUkljucen ? "success" : "warning"}
-          context="serverski feature gate"
+          context="podešavanje servera"
         />
         <Metric
           label="Ručne komande"
           value={komandeUkljucene ? "uključene" : "isključene"}
           tone={komandeUkljucene ? "success" : "warning"}
-          context="zaseban gate"
+          context="posebno podešavanje servera"
         />
       </section>
 
@@ -318,7 +344,7 @@ export default async function SyncOperationsPage() {
                           <td>
                             <Badge tone={ISHOD[c.outcome]?.tone ?? "neutral"}>{ISHOD[c.outcome]?.tekst ?? c.outcome}</Badge>
                           </td>
-                          <td>{c.errorCode ?? c.reason ?? "—"}</td>
+                          <td>{razlogTekst(c.errorCode ?? c.reason)}</td>
                           <td className="portal-table-number">{c.scanned ?? "—"}</td>
                           <td className="portal-table-number">{c.newDocuments ?? "—"}</td>
                           <td className="portal-table-number">{c.sent ?? "—"}</td>

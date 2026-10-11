@@ -7758,7 +7758,7 @@ section.portal-metrics {
   white-space: nowrap;
 }
 .portal-access-details > summary {
-  padding: 14px 20px;
+  padding: 14px 16px;
   cursor: pointer;
   color: var(--p-ink);
   font-size: 13px;
@@ -7789,7 +7789,7 @@ section.portal-metrics {
   grid-template-columns: auto 1fr;
   align-items: center;
   gap: 14px 24px;
-  padding: 18px 20px;
+  padding: 18px 16px;
   border-bottom: 1px solid var(--p-line);
 }
 .cs-summary-top .portal-badge {
@@ -7834,7 +7834,7 @@ section.portal-metrics {
   display: grid;
   align-content: start;
   gap: 8px;
-  padding: 16px 20px 18px;
+  padding: 16px 16px 18px;
 }
 .cs-block + .cs-block {
   border-left: 1px solid var(--p-line);
@@ -8111,7 +8111,7 @@ section.portal-metrics {
   font-weight: 650;
 }
 .cs-group-thin > .cs-group-list { margin-top: 8px; }
-.cs-method > summary { padding: 14px 20px; }
+.cs-method > summary { padding: 14px 16px; }
 .cs-method[open] > summary { border-bottom: 1px solid var(--p-line); }
 
 @media (max-width: 1100px) {
@@ -8145,7 +8145,7 @@ section.portal-metrics {
   display: flex;
   flex-wrap: wrap;
   gap: 4px 18px;
-  padding: 9px 20px;
+  padding: 9px 16px;
   border-bottom: 1px solid var(--p-line);
   background: #f7f8fa; background: oklch(0.98 0.003 255);
   color: var(--p-muted);
@@ -8170,7 +8170,7 @@ section.portal-metrics {
   align-items: center;
   justify-content: space-between;
   gap: 12px 24px;
-  padding: 14px 20px;
+  padding: 14px 16px;
 }
 .zr-status > div:first-child {
   display: flex;
@@ -8193,12 +8193,12 @@ section.portal-metrics {
 .zr-item {
   display: grid;
   gap: 8px;
-  padding: 16px 20px;
+  padding: 16px 16px;
 }
 .zr-item + .zr-item { border-top: 1px solid var(--p-line); }
 .zr-rest { border-top: 1px solid var(--p-line); }
 .zr-rest > summary {
-  padding: 12px 20px;
+  padding: 12px 16px;
   color: var(--p-ink);
   font-size: 13px;
   font-weight: 650;
@@ -8238,14 +8238,14 @@ section.portal-metrics {
 .zr-articles li[data-tone="success"] { border-left-color: var(--p-green); }
 .zr-next { padding: 10px 12px; border-radius: 8px; background: #f7fafe; background: oklch(0.985 0.006 255); }
 .zr-open { display: inline-block; margin-top: 8px; color: var(--p-red); font-size: 13px; font-weight: 650; }
-.zr-quiet > summary { padding: 14px 20px; cursor: pointer; font-size: 13px; font-weight: 650; color: var(--p-ink); }
+.zr-quiet > summary { padding: 14px 16px; cursor: pointer; font-size: 13px; font-weight: 650; color: var(--p-ink); }
 .zr-quiet[open] > summary { border-bottom: 1px solid var(--p-line); }
 .zr-quiet-list { display: grid; margin: 0; padding: 0; list-style: none; }
 .zr-quiet-list li {
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto;
   gap: 4px 12px;
-  padding: 10px 20px;
+  padding: 10px 16px;
   font-size: 13px;
 }
 .zr-quiet-list li + li { border-top: 1px solid var(--p-line); }
@@ -8302,7 +8302,7 @@ section.portal-metrics {
 .ka-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr)); gap: 16px; align-items: start; }
 .ka-grid > * + * { margin-top: 0; }
 .ka-facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px 20px; margin: 0; }
-.ka-facts-wide { padding: 14px 20px; border-bottom: 1px solid var(--p-line); }
+.ka-facts-wide { padding: 14px 16px; border-bottom: 1px solid var(--p-line); }
 .ka-facts dt { color: var(--p-muted); font-size: 13px; font-weight: 650; letter-spacing: 0.03em; text-transform: uppercase; }
 .ka-facts dd { margin: 3px 0 0; color: var(--p-ink); font-size: 14px; font-weight: 600; }
 .ka-facts dd small { display: block; margin-top: 2px; color: var(--p-muted); font-size: 12px; font-weight: 400; }
@@ -8319,7 +8319,7 @@ section.portal-metrics {
   grid-template-columns: minmax(0, 2fr) minmax(0, 1fr) minmax(0, 1fr) auto;
   align-items: end;
   gap: 10px 12px;
-  padding: 14px 20px;
+  padding: 14px 16px;
   border-bottom: 1px solid var(--p-line);
 }
 .ka-filters label { display: grid; gap: 4px; }
@@ -8389,7 +8389,7 @@ section.portal-metrics {
 /* =========================================================================
  * F7 — korpa, zahtevi i porudžbine (kupac i kancelarija)
  * ====================================================================== */
-.kk-pricelist { display: flex; flex-wrap: wrap; gap: 4px 12px; align-items: baseline; margin: 0; padding: 10px 20px; border-bottom: 1px solid var(--p-line); background: #ebf7ff; background: oklch(0.97 0.02 250); font-size: 13px; }
+.kk-pricelist { display: flex; flex-wrap: wrap; gap: 4px 12px; align-items: baseline; margin: 0; padding: 10px 16px; border-bottom: 1px solid var(--p-line); background: #ebf7ff; background: oklch(0.97 0.02 250); font-size: 13px; }
 .kk-pricelist[data-kind="demo"] { background: repeating-linear-gradient(135deg, #fef4df, #fef4df 10px, #fdefd2 10px, #fdefd2 20px); background: repeating-linear-gradient(135deg, oklch(0.97 0.03 85), oklch(0.97 0.03 85) 10px, oklch(0.955 0.04 85) 10px, oklch(0.955 0.04 85) 20px); }
 .kk-pricelist[data-kind="off"] { background: var(--p-bg); }
 .kk-pricelist strong { color: var(--p-ink); }
@@ -8444,7 +8444,7 @@ section.portal-metrics {
 .kk-status[data-tone="warning"] { background: #ffecc1; background: oklch(0.95 0.06 85); color: #663d00; color: oklch(0.4 0.09 70); border-color: #f0d49b; border-color: oklch(0.88 0.08 85); }
 .kk-status[data-tone="success"] { background: #d8f9dd; background: oklch(0.95 0.05 150); color: #085023; color: oklch(0.38 0.1 150); border-color: #b1dfb9; border-color: oklch(0.86 0.07 150); }
 .kk-status[data-tone="danger"] { background: #ffe5e0; background: oklch(0.95 0.04 27); color: #972622; color: oklch(0.45 0.15 27); border-color: #fdc9c2; border-color: oklch(0.88 0.06 27); }
-.kk-order-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; padding: 16px 20px 8px; }
+.kk-order-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; padding: 16px 16px 8px; }
 .kk-order-head h2 { margin: 4px 0 2px; font-size: 22px; font-variant-numeric: tabular-nums; }
 .kk-order-head p { margin: 0; color: var(--p-muted); font-size: 13px; }
 .kk-state { display: grid; gap: 4px; margin: 0 20px 12px; padding: 10px 12px; border-left: 3px solid #4f84ba; border-left: 3px solid oklch(0.6 0.1 250); background: var(--p-bg); font-size: 13px; }
@@ -8501,7 +8501,7 @@ section.portal-metrics {
 .kk-request-head { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
 .kk-request-head small { color: var(--p-muted); }
 .kk-answer { padding: 8px 10px; border-radius: 6px; background: #e0fae4; background: oklch(0.96 0.04 150); }
-.kk-contacts { display: flex; flex-wrap: wrap; gap: 6px 20px; padding: 10px 20px; border-bottom: 1px solid var(--p-line); background: var(--p-bg); font-size: 13px; }
+.kk-contacts { display: flex; flex-wrap: wrap; gap: 6px 20px; padding: 10px 16px; border-bottom: 1px solid var(--p-line); background: var(--p-bg); font-size: 13px; }
 .kk-contacts a { color: var(--p-red); }
 .rb-list { display: grid; gap: 10px; margin: 0; padding: 0; list-style: none; }
 .rb-item { display: grid; gap: 6px; padding: 12px 14px; border: 1px solid var(--p-line); border-radius: 8px; font-size: 13px; }
@@ -8981,7 +8981,7 @@ section.portal-metrics {
 /* Pregled rabata po kupcu (rr-) */
 .rr-link { display: inline-flex; align-items: center; min-height: 34px; padding: 0 12px; border: 1px solid var(--p-line); border-radius: 6px; background: var(--p-surface); color: var(--p-ink); font-size: 13px; font-weight: 650; text-decoration: none; }
 .rr-link:hover { border-color: var(--p-ink); }
-.rr-filters { display: flex; flex-wrap: wrap; gap: 10px 14px; align-items: flex-end; padding: 14px 20px; border-bottom: 1px solid var(--p-line); }
+.rr-filters { display: flex; flex-wrap: wrap; gap: 10px 14px; align-items: flex-end; padding: 14px 16px; border-bottom: 1px solid var(--p-line); }
 .rr-filters label { display: grid; gap: 4px; font-size: 12px; color: var(--p-muted); font-weight: 600; }
 .rr-filters input, .rr-filters select { height: 36px; min-width: 180px; padding: 0 10px; border: 1px solid var(--p-line); border-radius: 6px; background: var(--p-surface); color: var(--p-ink); font-size: 14px; }
 .rr-filters input { min-width: 240px; }
@@ -9010,7 +9010,7 @@ section.portal-metrics {
 .rr-chips { display: flex; flex-wrap: wrap; gap: 6px; }
 .rr-chips a { padding: 5px 10px; border: 1px solid var(--p-line); border-radius: 999px; color: var(--p-ink); font-size: 12px; text-decoration: none; white-space: nowrap; }
 .rr-chips a[aria-current="true"] { border-color: var(--p-ink); background: var(--p-ink); color: var(--p-surface); }
-.rr-details summary { padding: 14px 20px; cursor: pointer; font-weight: 700; }
+.rr-details summary { padding: 14px 16px; cursor: pointer; font-weight: 700; }
 @media (max-width: 860px) { .rr-three { grid-template-columns: 1fr; } }
 @media (max-width: 560px) {
   .rr-filters { padding: 12px 14px; }
@@ -9034,7 +9034,7 @@ section.portal-metrics {
 @media (max-width: 720px) { .rr-propose { grid-template-columns: 1fr; } }
 
 /* Rezervne kopije (bk-) */
-.bk-list { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin: 0; padding: 14px 20px 20px; list-style: none; }
+.bk-list { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin: 0; padding: 14px 16px 20px; list-style: none; }
 .bk-item { display: grid; gap: 6px; align-content: start; padding: 14px; border: 1px solid var(--p-line); border-left: 4px solid var(--p-line); border-radius: 8px; background: var(--p-surface); font-size: 13px; }
 .bk-item[data-tone="success"] { border-left-color: #3b9555; border-left-color: oklch(0.6 0.13 150); }
 .bk-item[data-tone="warning"] { border-left-color: #d79628; border-left-color: oklch(0.72 0.14 75); }
@@ -9054,7 +9054,7 @@ section.portal-metrics {
 @media (max-width: 960px) { .bk-incomplete { margin: 0 14px 16px; } }
 
 /* Cenovnik (0038) */
-.pl-facts { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px 24px; margin: 0; padding: 4px 20px 20px; font-size: 13px; }
+.pl-facts { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px 24px; margin: 0; padding: 4px 16px 20px; font-size: 13px; }
 .pl-facts div { display: grid; gap: 2px; }
 .pl-facts dt { color: var(--p-muted); font-size: 12px; }
 .pl-facts dd { margin: 0; color: var(--p-ink); }
@@ -9365,15 +9365,15 @@ html:has(.portal-customer-area) { scroll-padding-top: 104px; }
   border-radius: 0 0 6px 6px;
 }
 .portal-panel:has(> .portal-section-header)
-  > :not(.portal-section-header, .portal-panel-body, .portal-table-wrap, .portal-metrics, .rr-filters, .portal-definition-grid, details, .portal-panel) {
+  > :not(.portal-section-header, .portal-panel-body, .portal-table-wrap, .portal-metrics, .rr-filters, .portal-definition-grid, details, .portal-panel, .portal-settings-form, .portal-state, .portal-phase-notice, .kk-pricelist, .cs-summary-top, .zr-status, .portal-readiness-limits, .portal-readiness-note) {
   margin-inline: 16px;
 }
 .portal-panel:has(> .portal-section-header) > .portal-section-header
-  + :not(.portal-panel-body, .portal-table-wrap, .portal-metrics, .rr-filters, .portal-definition-grid, details, .portal-panel) {
+  + :not(.portal-panel-body, .portal-table-wrap, .portal-metrics, .rr-filters, .portal-definition-grid, details, .portal-panel, .portal-settings-form, .portal-state, .portal-phase-notice, .kk-pricelist, .cs-summary-top, .zr-status, .portal-readiness-limits, .portal-readiness-note) {
   margin-top: 16px;
 }
 .portal-panel:has(> .portal-section-header)
-  > :not(.portal-section-header, .portal-panel-body, .portal-table-wrap, .portal-metrics, .rr-filters, .portal-definition-grid, details, .portal-panel):last-child {
+  > :not(.portal-section-header, .portal-panel-body, .portal-table-wrap, .portal-metrics, .rr-filters, .portal-definition-grid, details, .portal-panel, .portal-settings-form, .portal-state, .portal-phase-notice, .kk-pricelist, .cs-summary-top, .zr-status, .portal-readiness-limits, .portal-readiness-note):last-child {
   margin-bottom: 16px;
 }
 
@@ -9441,4 +9441,158 @@ html:has(.portal-customer-area) { scroll-padding-top: 104px; }
     min-height: 44px;
     height: 44px;
   }
+}
+
+/* Trake u panelu: blokovi sa sopstvenom pozadinom/linijom i razmakom, rađeni
+ * za panel bez razmaka (obrazac podešavanja i filtera, prazno stanje i
+ * „Šta je potrebno“, traka cenovnika, sažetak kartice kupca, stanje Za
+ * razgovor, ograde Spremnosti). U panelu sa razmakom idu od ivice do ivice
+ * kao tabela, a njihov bočni razmak je isti 16px — tekst u njima počinje na
+ * istoj liniji kao naslov panela, bez dvostrukog uvlačenja. */
+.portal-panel > :is(.portal-settings-form, .portal-state, .portal-phase-notice, .kk-pricelist, .cs-summary-top, .zr-status, .portal-readiness-limits, .portal-readiness-note) {
+  padding-inline: 16px;
+}
+.portal-panel:not(:has(> .portal-section-header, > .portal-panel-body)) > :is(.portal-settings-form, .portal-state, .portal-phase-notice, .kk-pricelist, .cs-summary-top, .zr-status, .portal-readiness-limits, .portal-readiness-note) {
+  width: calc(100% + 32px);
+  max-width: none;
+  margin-inline: -16px;
+}
+.portal-panel:not(:has(> .portal-section-header, > .portal-panel-body)) > :is(.portal-settings-form, .portal-state, .portal-phase-notice, .kk-pricelist, .cs-summary-top, .zr-status, .portal-readiness-limits, .portal-readiness-note):first-child {
+  margin-top: -16px;
+}
+.portal-panel:not(:has(> .portal-section-header, > .portal-panel-body)) > :is(.portal-settings-form, .portal-state, .portal-phase-notice, .kk-pricelist, .cs-summary-top, .zr-status, .portal-readiness-limits, .portal-readiness-note):last-child {
+  margin-bottom: -16px;
+}
+/* Napomena u telu panela i panelu sa razmakom ne dodaje sopstveni bočni
+ * pomeraj (bilo je 18px preko 16px razmaka panela). */
+:is(.portal-panel-body, .portal-panel:not(:has(> .portal-section-header, > .portal-panel-body))) > .portal-data-note {
+  margin-inline: 0;
+}
+.portal-panel:has(> .portal-section-header) > .portal-data-note {
+  margin-inline: 16px;
+}
+/* Lista ograda zadržava uvlačenje za oznake nabrajanja. */
+.portal-panel > .portal-readiness-limits {
+  padding-left: 34px;
+}
+/* Liste redova (Za razgovor) su od ivice do ivice panela, kao tabela; razmak
+ * imaju same stavke. */
+.portal-panel:has(> .portal-section-header) > :is(.zr-list, .zr-rest, .zr-quiet-list) {
+  margin-inline: 0;
+}
+.portal-panel:has(> .portal-section-header) > :is(.zr-list, .zr-rest, .zr-quiet-list):last-child {
+  margin-bottom: 0;
+}
+/* Ostale trake sa sopstvenim razmakom (kartica kupca, cenovnik, kopije):
+ * ne dobijaju dodatni razmak sadržaja ispod zaglavlja panela. */
+.portal-panel:has(> .portal-section-header) > :is(.pl-facts, .bk-list, .cs-block, .cs-freshness, .cs-method, .ka-facts-wide, .ka-filters, .kk-pricelist, .kk-order-head, .kk-contacts, .rr-details) {
+  margin-inline: 0;
+}
+.portal-panel:has(> .portal-section-header) > :is(.pl-facts, .bk-list, .cs-block, .cs-freshness, .cs-method, .ka-facts-wide, .ka-filters, .kk-pricelist, .kk-order-head, .kk-contacts, .rr-details):last-child {
+  margin-bottom: 0;
+}
+/* Polje za potvrdu i izbor u obrascima: prirodna veličina 18px (starije
+ * pravilo za sva polja obrasca davalo mu je visinu i razmak tekstualnog polja). */
+.portal-main :is(.portal-settings-form, .portal-panel form, .portal-filters) input:is([type="checkbox"], [type="radio"]) {
+  width: 18px;
+  height: 18px;
+  min-height: 0;
+  padding: 0;
+  margin: 2px 0 0;
+  flex: 0 0 auto;
+  accent-color: var(--pn-primary, #1f242c);
+}
+/* Zaglavlje kolone sa brojevima je tekst, ne broj: isti font kao ostala zaglavlja. */
+.portal-table th.portal-table-number {
+  font-family: inherit;
+}
+
+/* Oznake podataka: mirne oznake normalnim slovima, kao u Zahtevima kupaca
+ * (ranije VELIKA SLOVA sa proredom, ponovljena u svakom redu liste). Bočni
+ * meni, prijava i dani u kalendaru namerno zadržavaju svoj stil. */
+:is(.cs-basis-facts dt, .cs-block h3, .cs-article-fact small:first-child, .zr-body h3, .zr-xs h3,
+    .ka-eyebrow, .ka-facts dt, .ka-invoices-head, .ka-lines-head, .kk-lines-head, .rr-step,
+    .kr-prices .kr-prices-head, .kr-amount .kr-amount-head, .portal-detail-list > div > span,
+    .portal-notes-grid span, .portal-customer-signal span, .portal-diff header,
+    .portal-address-list article > div > span, .portal-approval-list > button > span:nth-child(2) > small,
+    .portal-command-results small, .portal-pricing-builder-body legend) {
+  text-transform: none;
+  letter-spacing: 0;
+}
+@media (max-width: 900px) {
+  :is(.ka-lines li > span[data-label], .kk-lines > li > span[data-label], .rc-customer .rr-table td[data-label], .rc-preview .rr-table td[data-label])::before {
+    text-transform: none;
+    letter-spacing: 0;
+  }
+}
+/* Kartica kupca: sažetak je traka od ivice do ivice (blokovi imaju svoj
+ * razmak), a dva bloka dele širinu na pola umesto 2/3 mreže od tri kolone. */
+.portal-panel:not(:has(> .portal-section-header, > .portal-panel-body)) > :is(.cs-summary-body, .cs-freshness) {
+  width: calc(100% + 32px);
+  max-width: none;
+  margin-inline: -16px;
+}
+.portal-panel:not(:has(> .portal-section-header, > .portal-panel-body)) > :is(.cs-summary-body, .cs-freshness):last-child {
+  margin-bottom: -16px;
+}
+.cs-summary-body {
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
+}
+.cs-summary.portal-panel {
+  gap: 0;
+}
+/* Obrazac u panelu: bez sopstvene gornje linije (bila je ograničena na
+ * širinu obrasca pa se prekidala); potvrda sa poljem za potvrdu ide preko
+ * cele širine obrasca, umesto u usku kolonu. */
+.portal-panel .portal-form {
+  margin-top: 0;
+  padding-top: 0;
+  border-top: 0;
+}
+.portal-form > :is(.portal-recovery-confirm, label:has(> input[type="checkbox"])) {
+  grid-column: 1 / -1;
+  margin: 4px 0 0;
+}
+/* Traka (filteri, sažetak) odmah iznad tabele: bez praznog razmaka mreže
+ * između dve linije. */
+.portal-panel:not(:has(> .portal-section-header, > .portal-panel-body)) > :is(.rr-filters, .portal-settings-form, .kk-pricelist, .cs-freshness, .zr-status) + .portal-table-wrap {
+  margin-top: -12px;
+  border-top: 0;
+}
+/* Zaglavlje reda u tabeli poravnato uz vrh, kao ostale ćelije (bilo je
+ * vertikalno centrirano pa je naziv „lebdeo“ u visokim redovima). */
+.portal-table tbody th {
+  vertical-align: top;
+}
+/* Redovi kupaca u grupnim predlozima su lista redova sa linijom između: bez
+ * dodatnog razmaka mreže panela; prvi red ispod trake filtera bez druge linije. */
+.portal-panel > .rc-customer {
+  margin-top: -12px;
+}
+.portal-panel > .rr-filters + .rc-customer,
+.portal-panel > .rr-filters + .portal-empty + .rc-customer {
+  margin-top: 0;
+  border-top: 0;
+}
+.cs-facts dt {
+  text-transform: none;
+  letter-spacing: 0;
+}
+/* Adrese e-pošte i slične duge vrednosti lome se na bilo kom mestu umesto
+ * na crtici, pa ne prave visoke redove u uskoj koloni. */
+.portal-cell-wrap {
+  min-width: 14ch;
+  overflow-wrap: anywhere;
+}
+/* Sporedna radnja (ghost) ima vidljiv okvir kao sporedna dugmad u Zahtevima
+ * kupaca; bez okvira je izgledala kao običan tekst. */
+.portal-main .portal-button[data-variant="ghost"] {
+  border-color: var(--p-line-strong);
+  background: var(--p-surface-raised, var(--p-surface));
+}
+.portal-panel > .portal-notification-list {
+  margin-top: 0;
+}
+.portal-main .portal-button[data-variant="danger"] {
+  font-size: 14px;
 }

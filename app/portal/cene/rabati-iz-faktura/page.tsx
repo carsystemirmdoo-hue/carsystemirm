@@ -1,3 +1,4 @@
+import { quantity } from "@/lib/ordering/panelFormat.mjs";
 import Link from "next/link";
 import { DOCUMENT_KIND_LABELS, srDate } from "@/components/customer/account-format";
 import { PageHeader } from "@/components/portal/PortalPrimitives";
@@ -79,7 +80,7 @@ export default async function RebatesFromInvoicesPage() {
       />
       <section className="portal-panel">
         <div className="kk-pricelist" data-kind={dataset.kind === "demo" ? "demo" : "off"}>
-          <strong>{lineCount} potvrđenih stavki</strong>
+          <strong>{quantity(lineCount)} potvrđenih stavki</strong>
           <span>
             {dataset.kind === "demo" ? "DEMO: izmišljene fakture i rabati. " : ""}
             {missingGroupLines ? `${countOf(missingGroupLines, STAVKA)} bez grupe artikla. ` : ""}

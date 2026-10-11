@@ -9596,3 +9596,9 @@ html:has(.portal-customer-area) { scroll-padding-top: 104px; }
 .portal-main .portal-button[data-variant="danger"] {
   font-size: 14px;
 }
+/* „Mirni kupci“ (sklopiva lista): naslov i redovi imaju svoj razmak; sam panel
+ * bez dodatnog razmaka. */
+.portal-panel.zr-quiet {
+  padding: 0;
+  gap: 0;
+}

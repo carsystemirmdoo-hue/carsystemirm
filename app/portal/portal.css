@@ -9602,3 +9602,39 @@ html:has(.portal-customer-area) { scroll-padding-top: 104px; }
   padding: 0;
   gap: 0;
 }
+
+/* Tabela sa kolonom radnji (npr. Sinhronizacija → Uređaji): kolona „Radnja“
+ * je zalepljena uz desnu ivicu okvira tabele. Ostale kolone se pomeraju
+ * ispod nje, a radnja je uvek potpuno vidljiva i dostupna i na 1366/1440px. */
+.portal-table[data-sticky-actions="true"] :is(thead th, tbody td):last-child {
+  position: sticky;
+  right: 0;
+  z-index: 2;
+  background: var(--p-surface);
+  box-shadow: -1px 0 0 var(--p-line);
+  white-space: nowrap;
+}
+.portal-table[data-sticky-actions="true"] thead th:last-child {
+  z-index: 4;
+  background: var(--p-surface-subtle);
+}
+.portal-table[data-sticky-actions="true"] tbody tr:hover td:last-child {
+  background: var(--p-surface-subtle);
+}
+
+/* Široki ekrani: tabela zauzima svoju prirodnu širinu, ali najmanje 1180px
+ * (ili ceo okvir ako je uži). Široke poslovne tabele dobijaju koliko im treba,
+ * a tabela od 2–5 kolona se ne razvlači 3–8× preko sadržaja (npr. meseci na
+ * Spremnosti: 337px sadržaja na 2822px). Ispod 1500px se ništa ne menja;
+ * kupčev panel nije obuhvaćen. */
+@media (min-width: 1500px) {
+  .portal-root:not(.portal-customer-area) .portal-main :is(.portal-table, .pn-table) {
+    width: auto;
+    min-width: min(100%, 1180px);
+  }
+}
+@media (min-width: 1500px) {
+  .portal-root:not(.portal-customer-area) .portal-main .portal-table:not(:has(thead th:nth-child(4))) {
+    min-width: min(100%, 720px);
+  }
+}

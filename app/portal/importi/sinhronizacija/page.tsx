@@ -198,7 +198,7 @@ export default async function SyncOperationsPage() {
           }
         />
         <div className="portal-table-wrap">
-          <table className="portal-table portal-readiness-table">
+          <table className="portal-table portal-readiness-table" data-sticky-actions={smeKomandu ? "true" : undefined}>
             <thead>
               <tr>
                 <th scope="col">Uređaj</th>

@@ -19,7 +19,8 @@ if (!decision.ok) {
   process.exit(1);
 }
 const [potvrdePath, portalPath] = process.argv.slice(2);
-const potvrde = JSON.parse(readFileSync(potvrdePath, "utf8")) as { veze: { sifra: string }[] };
+// `proba_cena`: samo za TEHNIČKU probu konverzije (npr. kada izvori cene nisu usklađeni) — sintetička cena.
+const potvrde = JSON.parse(readFileSync(potvrdePath, "utf8")) as { veze: { sifra: string; proba_cena?: string }[] };
 const portal = new Map((JSON.parse(readFileSync(portalPath, "utf8")) as { code: string; name: string; unit: string; brand: string | null; osnovna: string | null; pdv: string | null }[]).map((a) => [a.code, a]));
 const creds = JSON.parse(readFileSync(process.env.SYNTH_CREDS_FILE!, "utf8"));
 const { precedenceLevelFor, scopeKeyFor } = await import("@/lib/pricing/precedence.mjs");
@@ -27,8 +28,9 @@ const sql = postgres(testUrl!, { max: 1, onnotice: () => {} });
 const A = creds.ids.A as string;
 const owner = creds.ids.vlasnik as string;
 let n = 0;
-for (const { sifra } of potvrde.veze) {
-  const p = portal.get(sifra);
+for (const { sifra, proba_cena } of potvrde.veze) {
+  const found = portal.get(sifra);
+  const p = found && proba_cena ? { ...found, osnovna: proba_cena } : found;
   if (!p) throw new Error(`${sifra}: nema u snimku`);
   const [a] = await sql<{ id: string }[]>`
     INSERT INTO articles (code, name, unit, brand) VALUES (${sifra}, ${p.name}, ${p.unit}, ${p.brand ?? "KONTROLA"})

@@ -785,6 +785,7 @@ try {
       const o = offers.find((x) => x.articleCode === v.sifra);
       const unitNet = Math.round(Number(base) * 0.75 * 100) / 100;
       const packNet = Math.round(unitNet * v.pakovanje * 100) / 100;
+      const n = v.proba ?? 1; // broj pakovanja koje kupac bira u probi
       const apiOk = o && o.state === "orderable" && o.pack?.quantity === v.pakovanje && o.pack?.label === v.oznaka && o.byOption.avans?.netPrice === unitNet && o.byOption.avans?.packAmounts?.net === packNet;
       await go(k, `/proizvodi/${v.slug}${v.varijanta ? `?varijanta=${encodeURIComponent(v.varijanta)}` : ""}`);
       await panel.waitFor({ timeout: 60000 }); await k.waitForTimeout(800);
@@ -795,14 +796,19 @@ try {
       // Prefill: „400 ml“ iz BizniSoft naziva nije potvrđen kapacitet — kupac ga ne sme videti kao opis.
       const no400 = !v.slug.includes("prefill") || !/400\s*ml/i.test(pt);
       check(`kontrolna ${v.sifra}: pakovanje „${v.oznaka}“ = ${v.pakovanje} ${v.jm}, cena pakovanja ${money(packNet)} (osnovna × 0,75 × ${v.pakovanje})`, Boolean(apiOk && shown && no400), apiOk ? (shown ? (no400 ? "" : "400 ml prikazan") : pt.slice(0, 160)) : JSON.stringify(o?.pack ?? o?.state ?? "nema ponude"));
-      await panel.locator('input[type="number"]').fill("1");
+      await panel.locator('input[type="number"]').fill(String(n));
+      await k.waitForTimeout(200);
+      if (n > 1 || v.pakovanje !== 1) {
+        const bill = `${n} × ${v.oznaka} = ${String(n * v.pakovanje).replace(".", ",")} ${v.jm === "KOM" ? "kom" : v.jm === "LIT" ? "L" : v.jm} u obračunu`;
+        check(`kontrolna ${v.sifra}: kupac vidi „${bill}“`, (await txt(panel)).includes(bill), "");
+      }
       await panel.getByRole("button", { name: "Dodajte u korpu" }).click();
       await panel.locator('[role="status"]').waitFor({ timeout: 30000 });
       await k.screenshot({ path: `${OUT}/c-${v.sifra}.png` });
     }
     const cart = await sqlc`SELECT a.code, ci.pack_count AS n, ci.quantity::text AS q FROM customer_cart_items ci JOIN articles a ON a.id = ci.article_id WHERE ci.customer_id = ${A}`;
-    const cartOk = plan.every((v) => cart.some((c) => c.code === v.sifra && c.n === 1 && Number(c.q) === v.pakovanje));
-    check("kontrolne: korpa — 1 pakovanje svakog, obračun u JM (LIT 1/5/4/5, KOM 1)", cartOk && cart.length === plan.length, JSON.stringify(cart));
+    const cartOk = plan.every((v) => cart.some((c) => c.code === v.sifra && c.n === (v.proba ?? 1) && Number(c.q) === v.pakovanje * (v.proba ?? 1)));
+    check("kontrolne: korpa — broj pakovanja i BizniSoft količina (pakovanja × količina pakovanja) za svaki artikal", cartOk && cart.length === plan.length, JSON.stringify(cart));
     await korpa(k, "Avansno plaćanje");
     await k.screenshot({ path: `${OUT}/c-korpa.png`, fullPage: true });
     await fillAndSend(k);
@@ -810,7 +816,7 @@ try {
     const broj = (await txt(k.locator("main"))).match(/Z-\d{4}-\d+/)?.[0] ?? "";
     const lines = await sqlc`SELECT l.article_code AS c, l.quantity::numeric AS q, l.pack_count AS n, l.pack_quantity::numeric AS pq, l.pack_label AS lab, l.net_price::numeric AS p
       FROM customer_order_lines l JOIN customer_orders o ON o.id = l.order_id WHERE o.request_number = ${broj}`;
-    const linesOk = plan.every((v) => lines.some((l) => l.c === v.sifra && l.n === 1 && Number(l.pq) === v.pakovanje && Number(l.q) === v.pakovanje && l.lab === v.oznaka));
+    const linesOk = plan.every((v) => lines.some((l) => l.c === v.sifra && l.n === (v.proba ?? 1) && Number(l.pq) === v.pakovanje && Number(l.q) === v.pakovanje * (v.proba ?? 1) && l.lab === v.oznaka));
     check(`kontrolne: zahtev ${broj} — broj pakovanja, količina pakovanja, obračun i oznaka po stavci`, linesOk && lines.length === plan.length, "");
     const t = await (await b.newContext(desk)).newPage(); await staff(t, "kancelarija");
     await go(t, "/portal/zahtevi");
@@ -818,7 +824,7 @@ try {
     await go(t, `${href}/stampa`);
     const st = await txt(t.locator("body"));
     // Za svaku stavku: „poručeno: 1 × <oznaka> = <pakovanje> <JM>“ (oznaka je opis prodajne jedinice).
-    const missing = plan.filter((v) => !st.includes(v.sifra) || !st.includes(`poručeno: 1 × ${v.oznaka} = ${String(v.pakovanje).replace(".", ",")} ${v.jm}`));
+    const missing = plan.filter((v) => !st.includes(v.sifra) || !st.includes(`poručeno: ${v.proba ?? 1} × ${v.oznaka} = ${String(v.pakovanje * (v.proba ?? 1)).replace(".", ",")} ${v.jm}`));
     check("kontrolne: štampa — sve šifre i „poručeno: 1 × <pakovanje> = <količina> <JM>“ za svaku stavku", missing.length === 0, missing.map((v) => v.sifra).join(", "));
     const overflow = await t.locator("td.zp-code").evaluateAll((els) => els.filter((e) => e.scrollWidth > e.clientWidth + 1).length);
     check("kontrolne: štampa — šifre ne prelaze u susednu kolonu", overflow === 0, String(overflow));

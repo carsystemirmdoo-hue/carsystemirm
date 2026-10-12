@@ -13,7 +13,7 @@ Brojevi (koliko veza, koje šifre, snimak „pre“) su u privatnom planu
 |---|---|---|
 | PR #23 (revizija B0–B11) | po [59](59-objava-revizije.md) | 0045, 0046 |
 | Ovaj PR (kupovina preko sajta) | katalog na istom obračunu i korpi kao portal; „Moj nalog“; cela pakovanja (broj pakovanja × potvrđeno pakovanje = BizniSoft količina); izuzetak kancelarije; status po varijanti; alati za veze i pakovanja | **0047** |
-| Prvi skup veza (podaci) | 10 kontrolnih veza sa prodajnim jedinicama (potvrda vlasnika) + nesporne veze po pravilima Carsystem/Befar | — |
+| Odobreni skupovi veza (podaci) | prvi skup: 10 kontrolnih veza + nesporne veze po pravilima Carsystem/Befar; drugi skup: Carsystem diskovi, listovi, rolne i paketi po potvrdi vlasnika (kupac poručuje pakovanje, BizniSoft količina = pakovanje × količina pakovanja) | — |
 
 Ne menja se: poručivanje za stvarne kupce ostaje **isključeno** (samo test kupac PROBA u
 `ordering.trial`), preporuke isključene, održavanje sajta uključeno, nove promenljive okruženja nema.
@@ -53,9 +53,9 @@ ili `CUSTOMER_ORDERING` nisu kao pre. Povratak je u §6.
 | 5 | Spajanje PR #23 (squash) → Vercel Production build | ja | build uspeo; `/prijava` 200, `/portal` 307 |
 | 6 | Spajanje ovog PR-a (osnova je posle koraka 5 `main`) → build | ja | build uspeo |
 | 7 | Provera posle objave: tabela [59 §5](59-objava-revizije.md) + `/api/kupac/ponude` bez sesije = 401 i `no-store`; javna strana proizvoda bez cena u HTML-u | ja | sve kao očekivano |
-| 8 | Plan upisa (samo čitanje): `DATABASE_URL=<aplikacija> npx tsx --tsconfig db/integration/tsconfig.test.json scripts/catalog/apply-confirmed-links.mts <prvi-skup.json>` | ja | „Spremno: N / N“, N = privatni plan; nijedno „ODBIJENO“ |
-| 9 | Upis: isto + `--potvrdio <e-mail naloga vlasnika> --upis --production-odobreno` | ja | „Upisano: N“ (veze kroz `decideMapping` sa auditom; 10 pakovanja) |
-| 10 | Provera upisa (samo čitanje): ponovljen plan = „veza već potvrđena“ ×N; broj potvrđenih veza = N; pakovanja = 10; audit „Potvrđena veza…“ = N | ja | jednako |
+| 8 | Plan upisa (samo čitanje) za svaki odobreni skup: `DATABASE_URL=<aplikacija> npx tsx --tsconfig db/integration/tsconfig.test.json scripts/catalog/apply-confirmed-links.mts <skup.json>` | ja | „Spremno: N / N“ po skupu, N = privatni plan; nijedno „ODBIJENO“ |
+| 9 | Upis: isto + `--potvrdio <e-mail naloga vlasnika> --upis --production-odobreno`, skup po skup | ja | „Upisano: N“ po skupu (veze kroz `decideMapping` sa auditom; pakovanja po privatnom planu) |
+| 10 | Provera upisa (samo čitanje): ponovljen plan = „veza već potvrđena“ za sve; broj potvrđenih veza, pakovanja i audit zapisa = privatni plan | ja | jednako |
 | 11 | Prijavljeni tok na nalogu PROBA (§5) | **Vi** | sve stavke §5 |
 | 12 | Vercel logovi prvih 30 min bez 500; sledeći ciklus KANC-01 kao u [59 §5](59-objava-revizije.md) | ja | bez 500; ciklus „obrađeno“ |
 

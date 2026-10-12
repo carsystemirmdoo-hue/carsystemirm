@@ -786,13 +786,27 @@ try {
       const unitNet = Math.round(Number(base) * 0.75 * 100) / 100;
       const packNet = Math.round(unitNet * v.pakovanje * 100) / 100;
       const n = v.proba ?? 1; // broj pakovanja koje kupac bira u probi
-      const apiOk = o && o.state === "orderable" && o.pack?.quantity === v.pakovanje && o.pack?.label === v.oznaka && o.byOption.avans?.netPrice === unitNet && o.byOption.avans?.packAmounts?.net === packNet;
+      // Iznos pakovanja računa obračun iz osnovne cene × količina × (1 − rabat) u jednom koraku (kao fakture),
+      // pa sme da se razlikuje za paru od „zaokružena cena po JM × pakovanje“.
+      const apiPack = o?.byOption.avans?.packAmounts?.net;
+      const apiOk = o && o.state === "orderable" && o.pack?.quantity === v.pakovanje && o.pack?.label === v.oznaka && o.byOption.avans?.netPrice === unitNet && apiPack !== undefined && Math.abs(apiPack - Number(base) * 0.75 * v.pakovanje) <= 0.0051;
+      if (!v.slug) {
+        // Bez kartice na sajtu: poručuje se kroz „Izbor robe“ u nalogu (isto potvrđeno pakovanje).
+        await go(k, `/kupac/naruci?q=${encodeURIComponent(v.sifra)}`);
+        const row = k.locator("table.pn-table tbody tr", { hasText: v.sifra }).first();
+        const rt = await txt(row);
+        check(`kontrolna ${v.sifra} (bez kartice): Izbor robe nudi „${v.oznaka}“ po ceni pakovanja ${money(packNet)}`, rt.includes(`× ${v.oznaka}`) && rt.includes(money(packNet)), rt.slice(0, 160));
+        await row.locator("input").fill(String(n));
+        await row.getByRole("button", { name: "Dodajte u korpu" }).click();
+        await row.locator("[role=status]").filter({ hasText: /Dodato/ }).waitFor({ timeout: 30000 });
+        continue;
+      }
       await go(k, `/proizvodi/${v.slug}${v.varijanta ? `?varijanta=${encodeURIComponent(v.varijanta)}` : ""}`);
       await panel.waitFor({ timeout: 60000 }); await k.waitForTimeout(800);
       const radio = panel.locator("label", { hasText: `šifra ${v.sifra}` }).locator('input[type="radio"]');
       if (await radio.count()) { await radio.check(); await k.waitForTimeout(300); }
       const pt = await txt(panel);
-      const shown = pt.includes(`${money(packNet)} RSD / ${v.pakovanje === 1 && v.jm === "KOM" && !v.oznaka ? "1 kom" : v.oznaka}`);
+      const shown = pt.includes(`${money(apiPack ?? packNet)} RSD / ${v.oznaka}`);
       // Prefill: „400 ml“ iz BizniSoft naziva nije potvrđen kapacitet — kupac ga ne sme videti kao opis.
       const no400 = !v.slug.includes("prefill") || !/400\s*ml/i.test(pt);
       check(`kontrolna ${v.sifra}: pakovanje „${v.oznaka}“ = ${v.pakovanje} ${v.jm}, cena pakovanja ${money(packNet)} (osnovna × 0,75 × ${v.pakovanje})`, Boolean(apiOk && shown && no400), apiOk ? (shown ? (no400 ? "" : "400 ml prikazan") : pt.slice(0, 160)) : JSON.stringify(o?.pack ?? o?.state ?? "nema ponude"));
@@ -830,6 +844,55 @@ try {
     check("kontrolne: štampa — šifre ne prelaze u susednu kolonu", overflow === 0, String(overflow));
     await t.screenshot({ path: `${OUT}/c-stampa.png`, fullPage: true });
     check("kontrolne: bez 5xx", errors.length === 0, errors.join(", "));
+  }
+  if (STEP === "cediljke") {
+    // Kancelarijska izmena količine za artikal čije pakovanje je deo KOM (paket 125 cediljki = 0,5 KOM):
+    // korak je 0,5 KOM — 1,5 prolazi (3 paketa), 1,3 se odbija. Pre koraka: seed-control-links + apply sa 146958.
+    const code = readFileSync(process.env.SYNTH_ENV_FILE ?? process.env.HOME + "/.carsystem-secrets/revizija-sinteticki.env", "utf8").match(/^SITE_ACCESS_PASSWORD=(.*)$/m)[1];
+    const ctx = await b.newContext(desk);
+    await ctx.request.post(`${B}/site-u-pripremi/access`, { form: { accessCode: code }, maxRedirects: 0 });
+    const k = await ctx.newPage(); await customer(k);
+    await sqlc`DELETE FROM customer_cart_items WHERE customer_id = ${A}`;
+    await go(k, "/proizvodi/carsystem-multi-strain?varijanta=146.958");
+    const panel = k.locator('section[aria-labelledby="buy-panel-title"]'); await panel.waitFor({ timeout: 60000 }); await k.waitForTimeout(800);
+    await panel.locator('input[type="number"]').fill("1");
+    await panel.getByRole("button", { name: "Dodajte u korpu" }).click();
+    await panel.locator('[role="status"]').waitFor({ timeout: 30000 });
+    await korpa(k, "Avansno plaćanje"); await fillAndSend(k);
+    await k.waitForFunction(() => location.pathname.startsWith("/kupac/porudzbine/"), null, { timeout: 60000 });
+    const broj = (await txt(k.locator("main"))).match(/Z-\d{4}-\d+/)?.[0] ?? "";
+    const [l0] = await sqlc`SELECT l.quantity::text q, l.pack_count n FROM customer_order_lines l JOIN customer_orders o ON o.id = l.order_id WHERE o.request_number = ${broj}`;
+    check("cediljke: kupac 1 paket 125 = 0,5 KOM u zahtevu", l0?.q === "0.500" && l0?.n === 1, JSON.stringify(l0));
+    const t = await (await b.newContext(desk)).newPage(); await staff(t, "kancelarija");
+    await go(t, "/portal/zahtevi");
+    const href = await t.locator('a[href^="/portal/zahtevi/"]').filter({ hasText: broj }).first().getAttribute("href");
+    await go(t, href);
+    if (await t.getByRole("button", { name: "Preuzmite u obradu" }).count()) { await t.getByRole("button", { name: "Preuzmite u obradu" }).click(); await t.waitForLoadState("networkidle"); await t.waitForTimeout(1500); }
+    await t.locator("details#izmena > summary").click();
+    const form = t.locator("details#izmena");
+    const qty = form.locator('input[aria-label^="Količina, 146958"]');
+    await qty.fill("1,3");
+    await form.locator("textarea").fill("Proba koraka 0,5 KOM za cediljke");
+    await form.getByRole("button", { name: "Proverite cene" }).click();
+    await t.waitForTimeout(2500);
+    const bad = await txt(form);
+    check("cediljke: kancelarija 1,3 KOM se odbija (korak 0,5)", /koracima od 0,5\./.test(bad), (bad.match(/Količina[^.]*\./) ?? [""])[0]);
+    await qty.fill("1,5");
+    await form.getByRole("button", { name: "Proverite cene" }).click();
+    await form.getByRole("button", { name: /Pošaljite izmenjen predlog/ }).and(form.locator("button:not([disabled])")).waitFor({ timeout: 30000 });
+    const okText = await txt(form);
+    check("cediljke: kancelarija 1,5 KOM prolazi — „3 × paket 125 cediljki = 1,5 KOM“", /3 × paket 125 cediljki = 1,5 KOM/.test(okText), "");
+    await form.getByRole("button", { name: /Pošaljite izmenjen predlog/ }).click();
+    await t.waitForTimeout(2500); await t.waitForLoadState("networkidle");
+    const [l1] = await sqlc`SELECT l.quantity::text q, l.pack_count n, l.pack_quantity::text pq FROM customer_order_lines l JOIN customer_orders o ON o.id = l.order_id WHERE o.request_number = ${broj + "/2"}`;
+    check("cediljke: predlog upisan kao 1,5 KOM = 3 paketa", l1?.q === "1.500" && l1?.n === 3 && l1?.pq === "0.500", JSON.stringify(l1));
+    await t.screenshot({ path: `${OUT}/cediljke-predlog.png`, fullPage: true });
+    await go(k, "/kupac/porudzbine");
+    const h2 = await k.locator("a", { hasText: /\/2/ }).first().getAttribute("href");
+    await go(k, h2);
+    const kv = await txt(k.locator("tr", { hasText: "146958" }).first());
+    check("cediljke: kupac vidi „3 × paket 125 cediljki“ i „= 1,5 KOM“", /3 × paket 125 cediljki/.test(kv) && /= 1,5 KOM/.test(kv), kv.slice(0, 160));
+    await k.screenshot({ path: `${OUT}/cediljke-kupac.png`, fullPage: true });
   }
   if (STEP === "b9") {
     // Kod za otključavanje sajta: tačan radi; posle 20 pogrešnih i tačan je odbijen dok traje blokada.

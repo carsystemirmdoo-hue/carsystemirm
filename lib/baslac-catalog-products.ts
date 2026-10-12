@@ -17,6 +17,7 @@
 import syncData from "@/data/baslac-catalog-products.generated.json";
 import type { CarsystemProduct } from "@/lib/carsystem-data";
 import {
+  baslacBaseSlug,
   baslacAllBases,
   baslacFinishLabels,
   type BaslacBase,
@@ -124,7 +125,7 @@ function volumeLabel(volumeL: number | null): string {
 }
 
 function variantSlug(base: BaslacBase): string {
-  return `baslac-${base.code.toLowerCase().replace(/[^a-z0-9]+/g, "-")}`;
+  return baslacBaseSlug(base);
 }
 
 function toCatalogProduct(

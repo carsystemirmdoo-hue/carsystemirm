@@ -5,6 +5,7 @@
  *     scripts/catalog/apply-confirmed-links.mts <plan.json> --potvrdio <email> [--upis | --povuci "<razlog>"]
  *
  * Plan (PRIVATAN, van repoa): { veze: [{ sifra, slug, varijanta|null, jm, pakovanje|null, oznaka, izvor? }], izvor }.
+ * `slug: null` = samo potvrđeno pakovanje BEZ veze sa karticom (artikal bez kartice na sajtu, poručuje se kroz nalog).
  * Bez `--upis` samo proverava i ispisuje plan. Veza se upisuje kroz `decideMapping`
  * (isti put kao ekran Mapiranja: audit, istorija); pakovanje u `article_pack_sizes`.
  * `--povuci "<razlog>"` je povratak: veze iz plana koje su potvrđene na isti cilj prelaze u
@@ -42,7 +43,7 @@ const { catalogOfferFacts } = await import("@/lib/ordering/ordering-service");
 const { orderPack } = await import("@/lib/ordering/packRule.mjs");
 
 /** `deo_kom`: izričit izuzetak vlasnika — pakovanje je deo jednog KOM (npr. 0,5). */
-type Link = { sifra: string; slug: string; varijanta: string | null; jm: string; pakovanje: number | null; oznaka?: string; izvor?: string; deo_kom?: boolean };
+type Link = { sifra: string; slug: string | null; varijanta: string | null; jm: string; pakovanje: number | null; oznaka?: string; izvor?: string; deo_kom?: boolean };
 const plan = JSON.parse(readFileSync(planPath, "utf8")) as { izvor?: string; veze: Link[] };
 const db = getDb();
 if (!write) {
@@ -71,25 +72,27 @@ for (const v of plan.veze) {
       LEFT JOIN article_catalog_mappings m ON m.article_id = a.id
       ${has ? sql`LEFT JOIN article_pack_sizes ps ON ps.article_id = a.id` : sql``}
      WHERE a.code = ${v.sifra}`))];
-  const facts = catalogOfferFacts(v.slug, v.varijanta);
+  const packOnly = v.slug === null;
+  const facts = packOnly ? null : catalogOfferFacts(v.slug, v.varijanta);
   const problems: string[] = [];
   if (!a) problems.push("artikal ne postoji u bazi");
   else {
     if (String(a.unit ?? "").toUpperCase() !== v.jm.toUpperCase()) problems.push(`JM u bazi ${a.unit} ≠ ${v.jm}`);
     if (a.out) problems.push("artikal je van programa");
-    if (a.status === "mapped" && (a.slug !== v.slug || (a.variant ?? null) !== (v.varijanta ?? null))) problems.push(`već potvrđena DRUGA veza (${a.slug}${a.variant ? ` · ${a.variant}` : ""})`);
+    if (!packOnly && a.status === "mapped" && (a.slug !== v.slug || (a.variant ?? null) !== (v.varijanta ?? null))) problems.push(`već potvrđena DRUGA veza (${a.slug}${a.variant ? ` · ${a.variant}` : ""})`);
     if (a.status === "conflict") problems.push("veza je u statusu sukob");
   }
-  if (!facts.productExists) problems.push("kataloški proizvod ne postoji");
-  else if (v.varijanta && !facts.link?.variantKey) problems.push(`varijanta ${v.varijanta} nije pronađena u katalogu`);
+  if (facts && !facts.productExists) problems.push("kataloški proizvod ne postoji");
+  else if (facts && v.varijanta && !facts.link?.variantKey) problems.push(`varijanta ${v.varijanta} nije pronađena u katalogu`);
+  if (packOnly && v.pakovanje === null) problems.push("stavka bez veze mora imati pakovanje");
   if (v.pakovanje !== null) {
     const r = orderPack({ unit: v.jm, fractionalSales: a?.fractional, confirmed: { packQuantity: v.pakovanje, unit: v.jm, label: v.oznaka ?? "", fractionalOk: Boolean(v.deo_kom) } });
     if (r.status !== "pack") problems.push(`pakovanje: ${r.reason}`);
     if (!has) problems.push("pakovanje: 0047 nije primenjena");
     if (a?.pq && (Number(a.pq) !== Number(v.pakovanje) || a.pu !== v.jm.toUpperCase())) problems.push(`već postoji DRUGO pakovanje (${a.pq} ${a.pu})`);
   }
-  const already = a?.status === "mapped" && a.slug === v.slug && (a.variant ?? null) === (v.varijanta ?? null);
-  rows.push({ sifra: v.sifra, naziv: a?.name ?? "—", jm: v.jm, katalog: facts.link?.name ?? v.slug, varijanta: facts.link?.variantLabel ?? (v.varijanta ? "?" : "(proizvod)"), pakovanje: v.pakovanje === null ? "—" : `${v.pakovanje} ${v.jm} · ${v.oznaka ?? ""}`, stanje: problems.length ? `ODBIJENO: ${problems.join("; ")}` : already ? "veza već potvrđena" : "spremno", _id: a?.id, _ok: !problems.length, _already: already, _v: v });
+  const already = packOnly ? Boolean(a?.pq) : a?.status === "mapped" && a.slug === v.slug && (a.variant ?? null) === (v.varijanta ?? null);
+  rows.push({ sifra: v.sifra, naziv: a?.name ?? "—", jm: v.jm, katalog: packOnly ? "(bez kartice — samo pakovanje)" : (facts?.link?.name ?? v.slug), varijanta: packOnly ? "—" : (facts?.link?.variantLabel ?? (v.varijanta ? "?" : "(proizvod)")), pakovanje: v.pakovanje === null ? "—" : `${v.pakovanje} ${v.jm} · ${v.oznaka ?? ""}`, stanje: problems.length ? `ODBIJENO: ${problems.join("; ")}` : already ? (packOnly ? "pakovanje već upisano" : "veza već potvrđena") : "spremno", _id: a?.id, _ok: !problems.length, _already: already, _v: v });
 }
 console.table(rows.map((r) => Object.fromEntries(Object.entries(r).filter(([k]) => !k.startsWith("_")))));
 const ready = rows.filter((r) => r._ok);
@@ -100,7 +103,7 @@ if (revokeReason) {
   for (const r of rows) {
     const v = r._v as Link;
     if (!r._id) continue;
-    if (r._already) {
+    if (r._already && v.slug !== null) {
       await decideMapping({ articleId: r._id as string, status: "revoked", note: `${revokeReason.trim()} — ${v.sifra}` }, actor);
       n += 1;
     }
@@ -112,7 +115,7 @@ if (revokeReason) {
 if (write) {
   for (const r of ready) {
     const v = r._v as Link;
-    if (!r._already) {
+    if (!r._already && v.slug !== null) {
       await decideMapping(
         { articleId: r._id as string, status: "mapped", catalogProductSlug: v.slug, catalogVariantId: v.varijanta, note: `${v.izvor ?? plan.izvor ?? "Potvrda vlasnika"} — ${v.sifra}` },
         actor,

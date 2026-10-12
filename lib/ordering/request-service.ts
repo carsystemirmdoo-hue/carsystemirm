@@ -112,7 +112,7 @@ const keyOf = (code: string | null) => code ?? "osnovni";
 
 type ArticleRow = {
   id: string; code: string; name: string; unit: string | null; out: boolean; fractional: boolean;
-  pack_quantity: string | null; pack_unit: string | null; pack_label: string | null;
+  pack_quantity: string | null; pack_unit: string | null; pack_label: string | null; pack_fractional: boolean | null;
 };
 
 /**
@@ -135,7 +135,7 @@ async function priceLines(
       ? exec.execute<ArticleRow>(sql`
           SELECT a.id, a.code, a.name, a.unit, EXISTS (SELECT 1 FROM articles_out_of_programme o WHERE o.article_id = a.id) AS out,
                  EXISTS (SELECT 1 FROM invoice_lines l WHERE l.article_id = a.id AND l.quantity <> trunc(l.quantity)) AS fractional,
-                 ps.pack_quantity::text AS pack_quantity, ps.unit AS pack_unit, ps.label AS pack_label
+                 ps.pack_quantity::text AS pack_quantity, ps.unit AS pack_unit, ps.label AS pack_label, ps.fractional_ok AS pack_fractional
             FROM articles a LEFT JOIN article_pack_sizes ps ON ps.article_id = a.id
            WHERE a.id IN (${sql.join(ids.map((i) => sql`${i}::uuid`), sql`, `)})`)
       : Promise.resolve([] as ArticleRow[]),
@@ -160,7 +160,7 @@ async function priceLines(
     const rule = orderPack({
       unit: a.unit,
       fractionalSales: a.fractional,
-      confirmed: a.pack_quantity && a.pack_unit ? { packQuantity: a.pack_quantity, unit: a.pack_unit, label: a.pack_label ?? "" } : null,
+      confirmed: a.pack_quantity && a.pack_unit ? { packQuantity: a.pack_quantity, unit: a.pack_unit, label: a.pack_label ?? "", fractionalOk: Boolean(a.pack_fractional) } : null,
     });
     const pack: PackFacts | null = rule.status === "pack" ? { quantity: rule.packQuantity, unit: rule.unit, label: rule.label } : null;
     const packProblem = rule.status === "blocked" ? `Pakovanje nije potvrđeno: ${rule.reason}.` : null;
@@ -192,8 +192,10 @@ async function priceLines(
         byOption[keyOf(c)] = { status: "na_upit", reason, message: p && "message" in p ? p.message : "Cena na upit." };
       }
     }
+    // Kancelarija: korak je JM (KOM = 1), osim kada je potvrđeno pakovanje deo jednog KOM (tada korak = pakovanje).
+    const oStep = pack && !Number.isInteger(pack.quantity) ? pack.quantity : officeStep(unit);
     const qp = mode === "office"
-      ? quantityProblem(quantity, { minQuantity: officeStep(unit), quantityStep: officeStep(unit) })
+      ? quantityProblem(quantity, { minQuantity: oStep, quantityStep: oStep })
       : !pack
       ? null
       : packs === null
@@ -421,15 +423,15 @@ async function cartCount(customerId: string, exec: Exec = getDb()) {
 
 /** Potvrđeno pakovanje artikla (isto pravilo kao obračun) — za upis u korpu. */
 async function packFor(exec: Exec, articleId: string) {
-  const [a] = [...(await exec.execute<{ unit: string | null; fractional: boolean; pack_quantity: string | null; pack_unit: string | null; pack_label: string | null }>(sql`
+  const [a] = [...(await exec.execute<{ unit: string | null; fractional: boolean; pack_quantity: string | null; pack_unit: string | null; pack_label: string | null; pack_fractional: boolean | null }>(sql`
     SELECT a.unit, EXISTS (SELECT 1 FROM invoice_lines l WHERE l.article_id = a.id AND l.quantity <> trunc(l.quantity)) AS fractional,
-           ps.pack_quantity::text AS pack_quantity, ps.unit AS pack_unit, ps.label AS pack_label
+           ps.pack_quantity::text AS pack_quantity, ps.unit AS pack_unit, ps.label AS pack_label, ps.fractional_ok AS pack_fractional
       FROM articles a LEFT JOIN article_pack_sizes ps ON ps.article_id = a.id WHERE a.id = ${articleId}::uuid`))];
   if (!a) return null;
   return orderPack({
     unit: a.unit,
     fractionalSales: a.fractional,
-    confirmed: a.pack_quantity && a.pack_unit ? { packQuantity: a.pack_quantity, unit: a.pack_unit, label: a.pack_label ?? "" } : null,
+    confirmed: a.pack_quantity && a.pack_unit ? { packQuantity: a.pack_quantity, unit: a.pack_unit, label: a.pack_label ?? "", fractionalOk: Boolean(a.pack_fractional) } : null,
   });
 }
 

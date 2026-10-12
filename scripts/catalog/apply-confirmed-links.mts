@@ -41,7 +41,8 @@ const { decideMapping } = await import("@/lib/commercial/mapping-service");
 const { catalogOfferFacts } = await import("@/lib/ordering/ordering-service");
 const { orderPack } = await import("@/lib/ordering/packRule.mjs");
 
-type Link = { sifra: string; slug: string; varijanta: string | null; jm: string; pakovanje: number | null; oznaka?: string; izvor?: string };
+/** `deo_kom`: izričit izuzetak vlasnika — pakovanje je deo jednog KOM (npr. 0,5). */
+type Link = { sifra: string; slug: string; varijanta: string | null; jm: string; pakovanje: number | null; oznaka?: string; izvor?: string; deo_kom?: boolean };
 const plan = JSON.parse(readFileSync(planPath, "utf8")) as { izvor?: string; veze: Link[] };
 const db = getDb();
 if (!write) {
@@ -82,7 +83,7 @@ for (const v of plan.veze) {
   if (!facts.productExists) problems.push("kataloški proizvod ne postoji");
   else if (v.varijanta && !facts.link?.variantKey) problems.push(`varijanta ${v.varijanta} nije pronađena u katalogu`);
   if (v.pakovanje !== null) {
-    const r = orderPack({ unit: v.jm, fractionalSales: a?.fractional, confirmed: { packQuantity: v.pakovanje, unit: v.jm, label: v.oznaka ?? "" } });
+    const r = orderPack({ unit: v.jm, fractionalSales: a?.fractional, confirmed: { packQuantity: v.pakovanje, unit: v.jm, label: v.oznaka ?? "", fractionalOk: Boolean(v.deo_kom) } });
     if (r.status !== "pack") problems.push(`pakovanje: ${r.reason}`);
     if (!has) problems.push("pakovanje: 0047 nije primenjena");
     if (a?.pq && (Number(a.pq) !== Number(v.pakovanje) || a.pu !== v.jm.toUpperCase())) problems.push(`već postoji DRUGO pakovanje (${a.pq} ${a.pu})`);
@@ -119,8 +120,8 @@ if (write) {
     }
     if (v.pakovanje !== null) {
       await db.execute(sql`
-        INSERT INTO article_pack_sizes (article_id, pack_quantity, unit, label, evidence, confirmed_by)
-        VALUES (${r._id as string}::uuid, ${v.pakovanje}, ${v.jm.toUpperCase()}, ${v.oznaka ?? `${v.pakovanje} ${v.jm}`}, ${v.izvor ?? plan.izvor ?? "potvrda vlasnika"}, ${actor.id}::uuid)
+        INSERT INTO article_pack_sizes (article_id, pack_quantity, unit, label, evidence, confirmed_by, fractional_ok)
+        VALUES (${r._id as string}::uuid, ${v.pakovanje}, ${v.jm.toUpperCase()}, ${v.oznaka ?? `${v.pakovanje} ${v.jm}`}, ${v.izvor ?? plan.izvor ?? "potvrda vlasnika"}, ${actor.id}::uuid, ${Boolean(v.deo_kom)})
         ON CONFLICT (article_id) DO NOTHING`);
     }
   }

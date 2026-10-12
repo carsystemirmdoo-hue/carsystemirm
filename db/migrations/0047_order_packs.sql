@@ -21,9 +21,12 @@ CREATE TABLE IF NOT EXISTS "article_pack_sizes" (
   "evidence" text NOT NULL,
   "confirmed_by" uuid NOT NULL,
   "confirmed_at" timestamp with time zone DEFAULT now() NOT NULL,
+  -- Izričit izuzetak (potvrda vlasnika): pakovanje je DEO jednog KOM iz BizniSofta
+  -- (npr. KOM je vođen za staru kutiju od 250, a sada se prodaje paket od 125 = 0,5 KOM).
+  "fractional_ok" boolean DEFAULT false NOT NULL,
   CONSTRAINT "article_pack_sizes_quantity_check" CHECK ("pack_quantity" > 0),
   -- JM komad: pakovanje se broji u celim komadima (limenka 0,5 L sa JM KOM = 1, zapremina je u oznaci).
-  CONSTRAINT "article_pack_sizes_piece_check" CHECK ("unit" NOT IN ('KOM', 'KT') OR "pack_quantity" = trunc("pack_quantity")),
+  CONSTRAINT "article_pack_sizes_piece_check" CHECK ("unit" NOT IN ('KOM', 'KT') OR "pack_quantity" = trunc("pack_quantity") OR "fractional_ok"),
   CONSTRAINT "article_pack_sizes_article_fk" FOREIGN KEY ("article_id") REFERENCES "public"."articles"("id") ON DELETE RESTRICT,
   CONSTRAINT "article_pack_sizes_user_fk" FOREIGN KEY ("confirmed_by") REFERENCES "public"."users"("id") ON DELETE RESTRICT
 );

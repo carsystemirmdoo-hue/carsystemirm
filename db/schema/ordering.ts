@@ -232,6 +232,8 @@ export const articlePackSizes = pgTable("article_pack_sizes", {
     .notNull()
     .references(() => users.id, { onDelete: "restrict" }),
   confirmedAt: timestamp("confirmed_at", { withTimezone: true }).notNull().defaultNow(),
+  /** Izričit izuzetak: pakovanje je deo jednog KOM (npr. paket 125 = 0,5 KOM stare kutije od 250). */
+  fractionalOk: boolean("fractional_ok").notNull().default(false),
 });
 
 export const customerOrderEvents = pgTable(

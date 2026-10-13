@@ -289,6 +289,10 @@ function GreyShadeSection() {
 }
 
 function OurProgramSection({ products }: { products: CarsystemProduct[] }) {
+  const hasPhoto = (product: CarsystemProduct) =>
+    Boolean(product.productImage && !product.productImage.src.includes("placeholder-product"));
+  const pictured = products.filter(hasPhoto);
+  const unpictured = products.filter((product) => !hasPhoto(product));
   return (
     <section
       id="nas-program"
@@ -306,32 +310,22 @@ function OurProgramSection({ products }: { products: CarsystemProduct[] }) {
           N15-020 — dostupnost ostalih artikala potvrđujemo kroz upit.
         </p>
 
-        <div className={styles.programLayout}>
+        {/* Kartica samo uz fotografiju; ostali artikli su lista — ne siva polja „NORBIN“. */}
+        {pictured.length > 0 ? (
           <div className={styles.stockedGrid}>
-            {products.map((product) => (
+            {pictured.map((product) => (
               <Link
                 className={styles.stockedCard}
                 href={productCanonicalHref(product)}
                 key={product.slug}
               >
                 <div className={styles.stockedMedia}>
-                  {product.productImage &&
-                  !product.productImage.src.includes("placeholder-product") ? (
-                    <Image
-                      src={product.productImage.src}
-                      alt={product.productImage.alt}
-                      fill
-                      sizes="(min-width: 64rem) 18vw, 42vw"
-                    />
-                  ) : (
-                    <div
-                      className={styles.stockedNoImage}
-                      role="img"
-                      aria-label={`Fotografija za ${product.name} još nije dostupna`}
-                    >
-                      <span className={styles.stockedNoImageMark}>NORBIN</span>
-                    </div>
-                  )}
+                  <Image
+                    src={product.productImage!.src}
+                    alt={product.productImage!.alt}
+                    fill
+                    sizes="(min-width: 64rem) 18vw, 42vw"
+                  />
                 </div>
                 <div className={styles.stockedCopy}>
                   <strong>{product.publicCode ?? product.sku}</strong>
@@ -340,6 +334,20 @@ function OurProgramSection({ products }: { products: CarsystemProduct[] }) {
               </Link>
             ))}
           </div>
+        ) : null}
+
+        <div className={styles.programLayout}>
+          <ul className={styles.stockedList} aria-label="Ostali Norbin artikli">
+            {unpictured.map((product) => (
+              <li key={product.slug}>
+                <Link href={productCanonicalHref(product)}>
+                  <strong>{product.publicCode ?? product.sku}</strong>
+                  <span>{product.name}</span>
+                  <small>{product.packages?.[0]?.label ?? ""}</small>
+                </Link>
+              </li>
+            ))}
+          </ul>
 
           <div className={styles.systemPanel}>
             <p>

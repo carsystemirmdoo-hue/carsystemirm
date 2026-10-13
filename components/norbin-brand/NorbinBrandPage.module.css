@@ -657,8 +657,43 @@
 
 .stockedGrid {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 1rem;
+  margin-top: clamp(2rem, 4vw, 3rem);
+}
+
+.stockedList {
+  margin: 0;
+  padding: 0;
+  border-top: 1px solid var(--nb-line);
+  list-style: none;
+}
+
+.stockedList a {
+  display: grid;
+  grid-template-columns: 7.5rem minmax(0, 1fr) auto;
+  gap: 1rem;
+  align-items: baseline;
+  padding: 0.85rem 0.2rem;
+  border-bottom: 1px solid var(--nb-line);
+  color: inherit;
+  text-decoration: none;
+}
+
+.stockedList strong {
+  font-family: var(--font-technical), monospace;
+  font-size: 0.9rem;
+}
+
+.stockedList small {
+  color: var(--nb-muted);
+  font-size: 0.75rem;
+}
+
+.stockedList a:hover span,
+.stockedList a:focus-visible span {
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
 }
 
 .stockedCard {
@@ -678,24 +713,7 @@
   padding: 12%;
 }
 
-.stockedNoImage {
-  position: absolute;
-  inset: 0;
-  display: grid;
-  place-items: center;
-  gap: 0.5rem;
-  /* Norbin stranica je svetla u obe teme: fiksna svetla studio površina, bez pruga. */
-  background: var(--surface-studio-fixed-light);
-}
 
-.stockedNoImageMark {
-  padding: 0.3rem 0.6rem;
-  border: 1px solid var(--nb-line-strong);
-  color: var(--nb-ink);
-  font-family: var(--font-display), sans-serif;
-  font-size: 0.62rem;
-  font-weight: 700;
-}
 
 .stockedCopy {
   padding: 0.9rem;
@@ -919,7 +937,15 @@
   }
 
   .stockedGrid {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .stockedList a {
+    grid-template-columns: 6rem minmax(0, 1fr);
+  }
+
+  .stockedList small {
+    grid-column: 2;
   }
 }
 

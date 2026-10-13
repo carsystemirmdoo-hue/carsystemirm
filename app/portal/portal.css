@@ -9753,3 +9753,7 @@ html:has(.portal-customer-area) { scroll-padding-top: 104px; }
   z-index: 4;
   box-shadow: 1px 0 0 var(--p-line);
 }
+
+/* Kartica kupca: veze na prodaju i zahteve tog kupca (revizija 2026-10-11, B4). */
+.cs-links { display: flex; flex-wrap: wrap; gap: 8px 24px; }
+.cs-links a { font-weight: 600; }

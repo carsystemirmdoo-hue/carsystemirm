@@ -23,8 +23,8 @@ export type PaymentOptionRow = {
 };
 
 /** Opcije koje važe za kupca na dan (samo odobrene, u važenju), u redosledu prikaza. */
-export async function approvedPaymentOptions(customerId: string, onDate: string): Promise<string[]> {
-  const rows = await getDb().execute<{ option_code: string }>(sql`
+export async function approvedPaymentOptions(customerId: string, onDate: string, q: Pick<ReturnType<typeof getDb>, "execute"> = getDb()): Promise<string[]> {
+  const rows = await q.execute<{ option_code: string }>(sql`
     SELECT option_code FROM customer_payment_options
      WHERE customer_id = ${customerId}::uuid AND status = 'odobreno'
        AND effective_from <= ${onDate}::date AND (effective_to IS NULL OR effective_to >= ${onDate}::date)`);

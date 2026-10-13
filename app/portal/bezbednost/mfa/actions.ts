@@ -16,6 +16,12 @@ import {
   regenerateRecoveryCodes,
   verifyTotpForUser,
 } from "@/lib/auth/mfa-service";
+import { clientIpFromRequest } from "@/lib/auth/client-ip";
+import {
+  clearAccountAttempts,
+  isBucketBlocked,
+  registerAttempt,
+} from "@/lib/auth/rate-limit-service";
 import { requireEnrollmentUser, requireFullPortalUser } from "@/lib/authz/session";
 import { findUserByEmail } from "@/lib/authz/user-repository";
 import { EMPTY_ENROLLMENT, type EnrollmentState } from "./types";
@@ -33,6 +39,25 @@ import { EMPTY_ENROLLMENT, type EnrollmentState } from "./types";
 
 /** Ista poruka za sve odbijene pokušaje — razlog ide u audit, ne korisniku. */
 const GENERIC = "Podaci nisu ispravni ili je dozvola istekla. Zatražite novu.";
+const TOO_MANY = "Previše pokušaja. Sačekajte nekoliko minuta pa pokušajte ponovo.";
+
+/**
+ * Isti brojač kao promena lozinke (`totp`): ovi ekrani proveravaju lozinku i
+ * kod iza otvorene sesije, pa bez njega otvoren laptop omogućava neograničeno
+ * pogađanje (revizija 2026-10-11, B9).
+ *
+ * `null` = provera prošla; inače poruka za korisnika.
+ */
+async function checkWithLimit(email: string, check: () => Promise<boolean>): Promise<string | null> {
+  const clientIp = await clientIpFromRequest();
+  if (await isBucketBlocked({ scope: "totp", accountIdentifier: email, clientIp })) return TOO_MANY;
+  if (!(await check())) {
+    await registerAttempt({ scope: "totp", accountIdentifier: email, clientIp });
+    return GENERIC;
+  }
+  await clearAccountAttempts("totp", email);
+  return null;
+}
 
 /**
  * Korak 1 — pravi pending tajnu.
@@ -51,11 +76,20 @@ export async function startEnrollmentAction(
 
   const password = String(formData.get("password") ?? "");
   const grant = String(formData.get("grant") ?? "");
+  const currentToken = String(formData.get("token") ?? "");
 
-  const record = await findUserByEmail(user.email);
-  if (!record || !(await verifyPassword(password, record.passwordHash))) {
-    return { ...EMPTY_ENROLLMENT, error: GENERIC };
-  }
+  /*
+   * Promena uređaja traži i kod sa TRENUTNOG uređaja, ne samo lozinku: inače
+   * napadač sa lozinkom i otvorenom sesijom veže svoj telefon i zaključa
+   * vlasnika napolju. Izgubljen telefon rešava vlasnik poništavanjem faktora.
+   */
+  const failed = await checkWithLimit(user.email, async () => {
+    const record = await findUserByEmail(user.email);
+    const passwordOk = record !== null && (await verifyPassword(password, record.passwordHash));
+    const tokenOk = status.enabled ? await verifyTotpForUser({ userId: user.id, token: currentToken }) : true;
+    return passwordOk && tokenOk;
+  });
+  if (failed) return { ...EMPTY_ENROLLMENT, error: failed };
 
   /*
    * Dozvola se traži samo kada faktor još nije aktivan.
@@ -161,14 +195,15 @@ export async function regenerateRecoveryAction(
   const password = String(formData.get("password") ?? "");
   const token = String(formData.get("token") ?? "");
 
-  const record = await findUserByEmail(user.email);
-  if (!record || !(await verifyPassword(password, record.passwordHash))) {
-    return { ...EMPTY_ENROLLMENT, error: GENERIC };
-  }
-  // Ista replay zaštita kao pri prijavi — potrošen prozor ne prolazi drugi put.
-  if (!(await verifyTotpForUser({ userId: user.id, token }))) {
-    return { ...EMPTY_ENROLLMENT, error: GENERIC };
-  }
+  const failed = await checkWithLimit(user.email, async () => {
+    const record = await findUserByEmail(user.email);
+    const passwordOk = record !== null && (await verifyPassword(password, record.passwordHash));
+    // Ista replay zaštita kao pri prijavi — potrošen prozor ne prolazi drugi put.
+    // Kod se proverava i kada je lozinka pogrešna (isto vreme odgovora).
+    const tokenOk = await verifyTotpForUser({ userId: user.id, token });
+    return passwordOk && tokenOk;
+  });
+  if (failed) return { ...EMPTY_ENROLLMENT, error: failed };
 
   const codes = await regenerateRecoveryCodes({ userId: user.id });
 

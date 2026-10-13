@@ -296,3 +296,7 @@
     grid-template-columns: 1fr;
   }
 }
+
+/* Cena po opciji plaćanja na kartici: svaka opcija u svom redu (dok. 61 K3). */
+.cardPrice > span { display: block; }
+.priceFacts dd small { display: block; color: inherit; opacity: 0.75; font-weight: 400; }

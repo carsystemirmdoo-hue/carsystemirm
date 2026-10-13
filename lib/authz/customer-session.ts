@@ -10,6 +10,8 @@ import {
   isCustomerSubject,
 } from "@/lib/authz/customer-scope.mjs";
 import { isSessionVersionCurrent } from "@/lib/authz/user-repository";
+import { isWithinAbsoluteLifetime } from "@/lib/auth/session-lifetime.mjs";
+import { isSessionRevoked } from "@/lib/auth/revoked-sessions";
 
 /** Ruta prijave za kupce; odvojena od interne. */
 export const CUSTOMER_LOGIN_ROUTE = "/prijava/kupac";
@@ -55,6 +57,9 @@ export async function getCustomerSession(): Promise<CustomerSession | null> {
 
   // Odsustvo claim-a nije kupac. Vidi `lib/authz/customer-scope.mjs`.
   if (!isCustomerSubject(session.user)) return null;
+  // Apsolutni rok i opoziv odjavom (B8).
+  if (!isWithinAbsoluteLifetime(session.user.loginAt)) return null;
+  if (await isSessionRevoked(session.user.sid)) return null;
 
   const db = getDb();
   const rows = await db

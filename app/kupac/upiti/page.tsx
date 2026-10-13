@@ -1,4 +1,4 @@
-import { publicSiteOpen } from "@/lib/site-mode";
+import { publicSiteOpenForRequest } from "@/lib/site-access-request";
 import Link from "next/link";
 import { dmyTime } from "@/lib/ordering/panelFormat.mjs";
 import { requireCustomerSession } from "@/lib/authz/customer-session";
@@ -16,6 +16,7 @@ const qfmt = new Intl.NumberFormat("sr-Latn-RS", { maximumFractionDigits: 3 });
 
 /** Upiti za cenu i posebne uslove firme iz sesije, sa odgovorom kancelarije/komercijaliste. */
 export default async function CustomerPriceRequestsPage() {
+  const siteOpen = await publicSiteOpenForRequest();
   const session = await requireCustomerSession("/kupac/upiti");
   const [rows, contacts] = await Promise.all([
     listCustomerPriceRequests(session.customerId),
@@ -31,7 +32,7 @@ export default async function CustomerPriceRequestsPage() {
             unet u cenovnik.
           </p>
         </div>
-        {publicSiteOpen() ? (
+        {siteOpen ? (
           <Link href="/katalog" className="pn-btn" data-size="sm">
             Katalog →
           </Link>
@@ -76,7 +77,7 @@ export default async function CustomerPriceRequestsPage() {
           <div className="pn-empty">
             <strong>Još nema upita.</strong>
             <p>
-              {publicSiteOpen()
+              {siteOpen
                 ? "Na stranici proizvoda bez cene izaberite „Zatražite cenu/uslove“."
                 : "Za cenu ili posebne uslove obratite se komercijalisti ili kancelariji (kontakt iznad)."}
             </p>
@@ -95,7 +96,7 @@ export default async function CustomerPriceRequestsPage() {
                   <span className="pn-small pn-muted pn-num">{dmyTime(r.createdAt)}</span>
                 </span>
                 <span>
-                  {publicSiteOpen() ? <Link href={`/proizvodi/${r.slug}`}>{r.catalogName}</Link> : <strong>{r.catalogName}</strong>}
+                  {siteOpen ? <Link href={`/proizvodi/${r.slug}`}>{r.catalogName}</Link> : <strong>{r.catalogName}</strong>}
                   {r.variantLabel ? ` · ${r.variantLabel}` : ""} · količina {qfmt.format(r.quantity)} · {PRICE_REQUEST_KIND_LABELS[r.kind] ?? r.kind}
                 </span>
                 {r.customerNote ? <span className="pn-small pn-muted">Vaša napomena: {r.customerNote}</span> : null}

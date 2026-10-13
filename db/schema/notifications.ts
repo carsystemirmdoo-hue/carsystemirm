@@ -27,6 +27,10 @@ export const notificationKind = pgEnum("notification_kind", [
   "mapping_customer_facing_changed",
   "external_identity_conflict",
   "customer_account_status_changed",
+  /** Kupac je poslao zahtev za porudžbinu ili potvrdio izmenjen predlog (0046). */
+  "customer_order_submitted",
+  /** Kupac je poslao upit za cenu/uslove (0046). */
+  "customer_price_request_submitted",
 ]);
 
 export const notificationSeverity = pgEnum("notification_severity", [

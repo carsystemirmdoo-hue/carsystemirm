@@ -106,6 +106,8 @@ export const NOTIFICATION_KIND_LABELS: Record<string, string> = {
   mapping_customer_facing_changed: "Promena vidljiva kupcu",
   external_identity_conflict: "Konflikt šifre partnera",
   customer_account_status_changed: "Promena kupčevog naloga",
+  customer_order_submitted: "Zahtev kupca",
+  customer_price_request_submitted: "Upit za cenu",
 };
 
 /** Opis opsega pravila, čitljiv bez poznavanja modela. */

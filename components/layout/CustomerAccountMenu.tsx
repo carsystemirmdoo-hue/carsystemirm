@@ -1,11 +1,14 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useId, useRef, useState } from "react";
 import { customerSignOutAction } from "@/app/prijava/kupac/actions";
 import { ensureCustomerSession } from "@/components/customer-buy/customerSession";
 import styles from "./CustomerAccountMenu.module.css";
+
+/** Trenutna strana sa upitom (npr. `?varijanta=`), da se kupac vrati na isti proizvod i varijantu. */
+const here = (pathname: string | null) => (typeof window === "undefined" ? pathname || "/" : `${window.location.pathname}${window.location.search}`);
 
 type State = { signedIn: true; company: string; name: string; cartCount?: number } | { signedIn: false; loginLink: boolean } | null;
 
@@ -18,6 +21,7 @@ type State = { signedIn: true; company: string; name: string; cartCount?: number
  */
 export function CustomerAccountMenu({ variant = "desktop", onNavigate }: { variant?: "desktop" | "mobile"; onNavigate?: () => void }) {
   const pathname = usePathname();
+  const router = useRouter();
   const [state, setState] = useState<State>(null);
   const [open, setOpen] = useState(false);
   const menuId = useId();
@@ -48,9 +52,16 @@ export function CustomerAccountMenu({ variant = "desktop", onNavigate }: { varia
       load();
     }
     window.addEventListener("focus", load);
+    // Dodavanje u korpu sa kataloga ili „Poručite ponovo“ javlja novi broj stavki (ista serverska korpa).
+    const onCart = (e: Event) => {
+      const count = (e as CustomEvent<{ count?: number }>).detail?.count;
+      if (typeof count === "number") setState((st) => (st && st.signedIn ? { ...st, cartCount: count } : st));
+    };
+    window.addEventListener("cs-korpa", onCart);
     return () => {
       alive = false;
       window.removeEventListener("focus", load);
+      window.removeEventListener("cs-korpa", onCart);
     };
   }, [pathname]);
 
@@ -73,23 +84,34 @@ export function CustomerAccountMenu({ variant = "desktop", onNavigate }: { varia
   if (!state.signedIn) {
     if (!state.loginLink) return null;
     const href = `/prijava/kupac?callbackUrl=${encodeURIComponent(pathname || "/")}`;
+    // Varijanta se bira bez promene putanje — adresa za povratak se čita tek pri kliku.
+    const toLogin = (e: React.MouseEvent) => {
+      e.preventDefault();
+      onNavigate?.();
+      router.push(`/prijava/kupac?callbackUrl=${encodeURIComponent(here(pathname))}`);
+    };
     return variant === "mobile" ? (
-      <Link href={href} className={styles.mobileLink} onClick={onNavigate}>
+      <Link href={href} className={styles.mobileLink} onClick={toLogin}>
         Prijava za kupce
       </Link>
     ) : (
       // Kompaktno, kao pretraga: puna reč bi sabila glavnu navigaciju.
-      <Link href={href} className={styles.login} aria-label="Prijava za kupce" title="Prijava za kupce">
+      <Link href={href} className={styles.login} onClick={toLogin} aria-label="Prijava za kupce" title="Prijava za kupce">
         <UserIcon />
       </Link>
     );
   }
 
+  const cartLabel = state.cartCount ? `Korpa (${state.cartCount})` : "Korpa";
+  // „Moj nalog“ otvara postojeći kupčev panel (dok. 61 K5).
   const links = [
     { href: "/kupac", label: "Pregled naloga" },
-    { href: "/kupac/korpa", label: state.cartCount ? `Korpa (${state.cartCount})` : "Korpa" },
+    { href: "/kupac/korpa", label: cartLabel },
     { href: "/kupac/fakture", label: "Fakture" },
-    { href: "/kupac/porudzbine", label: "Porudžbine" },
+    { href: "/kupac/porudzbine", label: "Zahtevi i porudžbine" },
+    { href: "/kupac/upiti", label: "Upiti" },
+    { href: "/kupac/firma", label: "Podaci firme" },
+    { href: "/kupac/bezbednost", label: "Bezbednost naloga" },
   ];
 
   if (variant === "mobile") {
@@ -105,7 +127,7 @@ export function CustomerAccountMenu({ variant = "desktop", onNavigate }: { varia
           </Link>
         ))}
         <form action={customerSignOutAction}>
-          <input type="hidden" name="returnTo" value={pathname || "/"} />
+          <input type="hidden" name="returnTo" value={here(pathname)} />
           <button type="submit" className={styles.mobileLink}>Odjavite se</button>
         </form>
       </div>
@@ -114,6 +136,10 @@ export function CustomerAccountMenu({ variant = "desktop", onNavigate }: { varia
 
   return (
     <div className={styles.root} ref={rootRef}>
+      <Link href="/kupac/korpa" className={styles.cart} aria-label={state.cartCount ? `Korpa, ${state.cartCount} stavki` : "Korpa"}>
+        <CartIcon />
+        {state.cartCount ? <span className={styles.cartCount}>{state.cartCount}</span> : null}
+      </Link>
       <button
         type="button"
         className={styles.trigger}
@@ -137,12 +163,22 @@ export function CustomerAccountMenu({ variant = "desktop", onNavigate }: { varia
             </Link>
           ))}
           <form action={customerSignOutAction}>
-            <input type="hidden" name="returnTo" value={pathname || "/"} />
+            <input type="hidden" name="returnTo" value={here(pathname)} />
             <button type="submit" role="menuitem">Odjavite se</button>
           </form>
         </div>
       ) : null}
     </div>
+  );
+}
+
+function CartIcon() {
+  return (
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <path d="M3 4h2l2.4 11.2a1.5 1.5 0 0 0 1.5 1.2h8.6a1.5 1.5 0 0 0 1.5-1.1L21 8H6.2" />
+      <circle cx="10" cy="20" r="1.2" />
+      <circle cx="17.5" cy="20" r="1.2" />
+    </svg>
   );
 }
 

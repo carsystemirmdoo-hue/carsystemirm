@@ -4,7 +4,7 @@ import { z } from "zod";
 import { AUDIT_ACTIONS, recordAudit } from "@/lib/audit/record";
 import { clientIpFromRequest } from "@/lib/auth/client-ip";
 import { completePasswordReset } from "@/lib/auth/password-reset";
-import { registerAttempt } from "@/lib/auth/rate-limit-service";
+import { clearAccountAttempts, registerAttempt } from "@/lib/auth/rate-limit-service";
 import { EMPTY_RESET, type ResetFormState } from "./types";
 
 /**
@@ -89,6 +89,9 @@ export async function completeResetAction(
     newPassword: password,
   });
   if (!outcome.ok) return { ...EMPTY_RESET, error: GENERIC };
+  // I brojač prijave za ovaj nalog: nova lozinka mora odmah da radi (B9).
+  await clearAccountAttempts("password", outcome.email.toLowerCase());
+  await clearAccountAttempts("totp", outcome.email.toLowerCase());
 
   await recordAudit({
     actor: { id: outcome.userId, name: outcome.name, role: outcome.role },

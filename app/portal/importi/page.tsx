@@ -13,7 +13,8 @@ import { AutoRecomputeStatus } from "@/components/portal/AutoRecomputeStatus";
 import { can } from "@/lib/authz/permissions.mjs";
 import { requireCapability } from "@/lib/authz/session";
 import { loadRecomputeStatus } from "@/lib/recommendations/auto-recompute";
-import { dmyTime } from "@/lib/ordering/panelFormat.mjs";
+import { dmy, dmyTime } from "@/lib/ordering/panelFormat.mjs";
+import { loadDeviceReceipts } from "@/lib/import/device-receipts";
 
 export const dynamic = "force-dynamic";
 /**
@@ -47,6 +48,8 @@ export default async function ImportsPage({
     .from(importRuns)
     .orderBy(desc(importRuns.startedAt))
     .limit(50);
+
+  const deviceDays = await loadDeviceReceipts(14);
 
   const selectedId = uvoz ? Number(uvoz) : (runs[0]?.id ?? null);
   const problems = selectedId
@@ -124,7 +127,10 @@ export default async function ImportsPage({
                   <td>
                     {dmyTime(run.startedAt)}
                   </td>
-                  <td>{STATUS_LABELS[run.status] ?? run.status}</td>
+                  <td>
+                    {STATUS_LABELS[run.status] ?? run.status}
+                    {run.message ? <small>{run.message}</small> : null}
+                  </td>
                   <td className="portal-table-number">{run.rowsRead}</td>
                   <td className="portal-table-number">{run.rowsValid}</td>
                   <td className="portal-table-number">{run.rowsWarning}</td>
@@ -141,6 +147,48 @@ export default async function ImportsPage({
                   <td colSpan={10}>
                     Još nije obavljen nijedan uvoz. Otpremite prvi fajl iznad.
                   </td>
+                </tr>
+              ) : null}
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section className="portal-panel">
+        <div className="portal-section-header">
+          <div>
+            <h2>Prijem sa konektora — poslednjih 14 dana</h2>
+            <p>
+              Fakture koje uređaj (KANC-01) šalje iz fascikle štampe. „Na čekanju“ su sačuvane bez
+              knjiženja: čekaju povezivanje kupca ili pregled u Izvornim dokumentima. Stanje uređaja je u{" "}
+              <Link href="/portal/importi/sinhronizacija">Sinhronizaciji</Link>.
+            </p>
+          </div>
+        </div>
+        <div className="portal-table-wrap">
+          <table className="portal-table">
+            <thead>
+              <tr>
+                <th scope="col">Dan</th>
+                <th scope="col">Uređaj</th>
+                <th scope="col">Primljeno</th>
+                <th scope="col">Proknjiženo</th>
+                <th scope="col">Na čekanju</th>
+              </tr>
+            </thead>
+            <tbody>
+              {deviceDays.map((d) => (
+                <tr key={`${d.day}-${d.deviceCode}`}>
+                  <th scope="row">{dmy(d.day)}</th>
+                  <td>{d.deviceCode}</td>
+                  <td className="portal-table-number">{d.received}</td>
+                  <td className="portal-table-number">{d.booked}</td>
+                  <td className="portal-table-number">{d.pending}</td>
+                </tr>
+              ))}
+              {deviceDays.length === 0 ? (
+                <tr>
+                  <td colSpan={5}>U poslednjih 14 dana uređaji nisu poslali nijedan dokument.</td>
                 </tr>
               ) : null}
             </tbody>

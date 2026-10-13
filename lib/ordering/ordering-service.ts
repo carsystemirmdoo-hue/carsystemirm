@@ -80,7 +80,7 @@ async function loadActivePriceList(exec: Exec = getDb()): Promise<PriceListInfo 
  * cenovnik, veze artikala i postupak kancelarije.
  */
 export async function loadOrderingMode(exec: Exec = getDb()): Promise<OrderingMode> {
-  const [priceList, dataset] = await Promise.all([loadActivePriceList(exec), loadDatasetInfo()]);
+  const [priceList, dataset] = await Promise.all([loadActivePriceList(exec), loadDatasetInfo(exec)]);
   if (process.env.CUSTOMER_ORDERING !== "demo") {
     return { enabled: false, reason: "Poručivanje preko sajta još nije uključeno.", priceList };
   }
@@ -133,6 +133,20 @@ export type CatalogLink = {
   variantKey: string | null;
   variantLabel: string | null;
 };
+
+/**
+ * Kataloški podaci veze (proizvod, varijanta-red, kartice na kojima se nudi) za
+ * zajedničke ponude kataloga (`loadCatalogRequestOffers`, dok. 61 K2).
+ */
+export function catalogOfferFacts(slug: string | null, variantId: string | null) {
+  const facts = catalogFacts(slug, variantId);
+  const product = slug ? getCarsystemProductBySlug(slug) : null;
+  const family = product ? getFamilyForProduct(product) : null;
+  return {
+    ...facts,
+    cardKeys: product ? [product.slug, ...(family ? [`family:${family.slug}`] : [])] : [],
+  };
+}
 
 function catalogFacts(slug: string | null, variantId: string | null) {
   const product = slug ? getCarsystemProductBySlug(slug) : null;
@@ -682,6 +696,7 @@ export type OrderDetail = OrderListRow & {
     catalogName: string | null; unit: string; packLabel: string; packConfirmed: boolean; quantity: number; listPrice: number | null; discountPercent: number | null;
     netPrice: number | null; vatPercent: number | null; lineNet: number | null; lineVat: number | null; lineGross: number | null; priceBasis: string;
     priceStatus: "cena" | "na_upit"; onRequestReason: string | null;
+    packCount: number | null; packQuantity: number | null;
   }[];
   events: { at: Date; fromStatus: string | null; toStatus: string | null; kind: string; actor: string; staff: boolean; reason: string | null }[];
 };
@@ -729,7 +744,8 @@ async function loadOrder(where: SQL): Promise<OrderDetail | null> {
     db.execute<Record<string, string>>(sql`
       SELECT line_number::text, article_id, article_code, article_name, catalog_product_slug, catalog_variant_id, catalog_name,
              unit, pack_label, quantity::text, list_price::text, discount_percent::text, net_price::text, vat_percent::text,
-             line_net::text, line_vat::text, line_gross::text, price_basis, price_status, on_request_reason, pack_confirmed::text
+             line_net::text, line_vat::text, line_gross::text, price_basis, price_status, on_request_reason, pack_confirmed::text,
+             pack_count::text, pack_quantity::text
         FROM customer_order_lines WHERE order_id = ${head.id} ORDER BY customer_order_lines.line_number`),
     db.execute<{ created_at: Date; from_status: string | null; to_status: string | null; kind: string; actor_name: string; staff: boolean; reason: string | null }>(sql`
       SELECT created_at, from_status::text AS from_status, to_status::text AS to_status, kind, actor_name,
@@ -772,6 +788,9 @@ async function loadOrder(where: SQL): Promise<OrderDetail | null> {
       discountPercent: num(l.discount_percent), netPrice: num(l.net_price), vatPercent: num(l.vat_percent),
       lineNet: num(l.line_net), lineVat: num(l.line_vat), lineGross: num(l.line_gross), priceBasis: l.price_basis,
       priceStatus: (l.price_status === "na_upit" ? "na_upit" : "cena") as "cena" | "na_upit", onRequestReason: l.on_request_reason,
+      /** 0047: broj celih pakovanja koje je kupac poručio i količina pakovanja u JM (null = stari zahtev ili kancelarijski unos u JM). */
+      packCount: l.pack_count === null ? null : Number(l.pack_count),
+      packQuantity: num(l.pack_quantity),
     })),
     events: [...events].map((e) => ({
       at: new Date(e.created_at), fromStatus: e.from_status, toStatus: e.to_status, kind: e.kind,
@@ -989,11 +1008,11 @@ export async function returnOrderToCart(session: CustomerSession, orderId: strin
       VALUES (${o.id}, ${o.status}::customer_order_status, 'superseded', 'status', ${session.accountId}, ${session.name},
               'Stavke vraćene u korpu radi ispravke')`);
     await tx.execute(sql`
-      INSERT INTO customer_cart_items (customer_id, article_id, quantity, added_by, source_order_id)
-      SELECT ${customerId}, article_id, quantity, ${session.accountId}, ${o.id}
+      INSERT INTO customer_cart_items (customer_id, article_id, quantity, pack_count, added_by, source_order_id)
+      SELECT ${customerId}, article_id, quantity, pack_count, ${session.accountId}, ${o.id}
         FROM customer_order_lines WHERE order_id = ${o.id}
       ON CONFLICT (customer_id, article_id)
-      DO UPDATE SET quantity = EXCLUDED.quantity, source_order_id = EXCLUDED.source_order_id, updated_at = now()`);
+      DO UPDATE SET quantity = EXCLUDED.quantity, pack_count = EXCLUDED.pack_count, source_order_id = EXCLUDED.source_order_id, updated_at = now()`);
     return { ok: true as const, changed: true };
   });
 }
@@ -1003,9 +1022,25 @@ export async function returnOrderToCart(session: CustomerSession, orderId: strin
  * ------------------------------------------------------------------------ */
 
 /** Zahtevi u opsegu korisnika (komercijalista: samo dodeljeni kupci). */
-export async function listOrderRequests(viewer: PortalUser, status?: string | null, query?: string | null, opts: { allVersions?: boolean } = {}): Promise<OrderListRow[]> {
+/**
+ * Stanja liste zahteva kancelarije — u SQL-u, da brojači i filter važe nad
+ * CELIM skupom, a ne nad 200 najnovijih koje lista prikazuje (revizija
+ * 2026-10-11, B3). „Otvoreni“ = sve što još traži nečiji korak.
+ */
+export const ORDER_STATES = {
+  otvoreni: sql`(o.status IN ('submitted', 'under_review', 'changes_requested', 'awaiting_customer') OR (o.status = 'confirmed' AND o.biznisoft_document_number IS NULL))`,
+  novi: sql`o.status = 'submitted'`,
+  obrada: sql`o.status = 'under_review'`,
+  kupac: sql`o.status IN ('changes_requested', 'awaiting_customer')`,
+  biznisoft: sql`(o.status = 'confirmed' AND o.biznisoft_document_number IS NULL)`,
+  potvrdjene: sql`o.status = 'confirmed'`,
+  zatvoreni: sql`o.status IN ('rejected', 'cancelled', 'superseded')`,
+  svi: sql`true`,
+} as const;
+export type OrderStateKey = keyof typeof ORDER_STATES;
+
+async function orderRequestsWhere(viewer: PortalUser, query?: string | null, opts: { allVersions?: boolean } = {}): Promise<SQL> {
   const scope = await resolveLedgerScope(viewer);
-  const statusWhere = status ? sql`o.status::text = ${status}` : sql`true`;
   // Pretraga po broju, kupcu, BizniSoft šifri/nazivu ili kataloškom nazivu stavke.
   const q = (query ?? "").trim().slice(0, 80);
   const queryWhere = q
@@ -1013,7 +1048,23 @@ export async function listOrderRequests(viewer: PortalUser, status?: string | nu
            OR EXISTS (SELECT 1 FROM customer_order_lines l WHERE l.order_id = o.id
                        AND ${foldedMatch([sql`l.article_code`, sql`l.article_name`, sql`l.catalog_name`], q)}))`
     : sql`true`;
-  return listOrders(sql`${scopeWhere(scope)} AND ${statusWhere} AND ${queryWhere} AND ${opts.allVersions ? sql`true` : CURRENT_ONLY}`);
+  return sql`${scopeWhere(scope)} AND ${queryWhere} AND ${opts.allVersions ? sql`true` : CURRENT_ONLY}`;
+}
+
+export async function listOrderRequests(viewer: PortalUser, status?: string | null, query?: string | null, opts: { allVersions?: boolean; state?: OrderStateKey } = {}): Promise<OrderListRow[]> {
+  const statusWhere = status ? sql`o.status::text = ${status}` : sql`true`;
+  const stateWhere = opts.state ? ORDER_STATES[opts.state] : sql`true`;
+  return listOrders(sql`${await orderRequestsWhere(viewer, query, opts)} AND ${statusWhere} AND ${stateWhere}`);
+}
+
+/** Broj zahteva po stanju nad celim skupom (isti opseg, pretraga i verzije kao lista). */
+export async function countOrderRequestsByState(viewer: PortalUser, query?: string | null, opts: { allVersions?: boolean } = {}): Promise<Record<OrderStateKey, number>> {
+  const keys = Object.keys(ORDER_STATES) as OrderStateKey[];
+  const cols = sql.join(keys.map((k) => sql`count(*) FILTER (WHERE ${ORDER_STATES[k]})::int AS ${sql.identifier(k)}`), sql`, `);
+  const [row] = [...(await getDb().execute<Record<OrderStateKey, number>>(sql`
+    SELECT ${cols} FROM customer_orders o JOIN customers c ON c.id = o.customer_id
+     WHERE ${await orderRequestsWhere(viewer, query, opts)}`))];
+  return Object.fromEntries(keys.map((k) => [k, Number(row?.[k] ?? 0)])) as Record<OrderStateKey, number>;
 }
 
 export async function loadOrderRequest(viewer: PortalUser, orderId: string): Promise<OrderDetail | null> {

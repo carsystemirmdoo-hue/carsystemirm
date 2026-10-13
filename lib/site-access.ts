@@ -44,9 +44,23 @@ export async function createSiteAccessToken() {
   return Array.from(new Uint8Array(digest), (byte) => byte.toString(16).padStart(2, "0")).join("");
 }
 
+/**
+ * Poređenje bez ranog izlaska: vreme odgovora ne sme da kaže koliko je
+ * početnih znakova pogođeno (revizija 2026-10-11, B9). Radi i na edge-u.
+ */
+export function constantTimeEqual(a: string, b: string): boolean {
+  const left = new TextEncoder().encode(a);
+  const right = new TextEncoder().encode(b);
+  let diff = left.length ^ right.length;
+  for (let i = 0; i < Math.max(left.length, right.length); i += 1) {
+    diff |= (left[i] ?? 0) ^ (right[i] ?? 0);
+  }
+  return diff === 0;
+}
+
 export async function isValidSiteAccessToken(token: string | undefined) {
   if (!token) return false;
 
   const expectedToken = await createSiteAccessToken();
-  return Boolean(expectedToken && token === expectedToken);
+  return Boolean(expectedToken && constantTimeEqual(token, expectedToken));
 }

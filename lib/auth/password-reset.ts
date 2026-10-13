@@ -226,6 +226,13 @@ export async function completePasswordReset(input: {
         passwordHash,
         // Sve sesije padaju: ko je promenio lozinku očekuje da tuđa ne radi.
         sessionVersion: sql`${users.sessionVersion} + 1`,
+        /*
+         * Kod od vlasnika je dokaz identiteta: zaključavanje od ranijih
+         * promašaja se skida, inače nova lozinka ne radi do isteka blokade
+         * (revizija 2026-10-11, B9).
+         */
+        failedLoginAttempts: 0,
+        lockedUntil: null,
         updatedAt: now,
       })
       .where(eq(users.id, consumed && dozvoljen ? targetId : NEPOSTOJECI_ID));

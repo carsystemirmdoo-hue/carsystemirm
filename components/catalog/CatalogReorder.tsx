@@ -2,10 +2,11 @@
 
 import Link from "next/link";
 import { useEffect, useState, useTransition } from "react";
-import { addToCartAction } from "@/app/kupac/korpa/actions";
+import { addRequestItemAction } from "@/app/kupac/naruci/actions";
 import { ensureCustomerSession, hasCustomerMarker } from "@/components/customer-buy/customerSession";
 import type { ReorderItem, ReorderList } from "@/lib/customers/reorder";
 import styles from "./CatalogReorder.module.css";
+import { isSinglePiece } from "@/lib/ordering/packRule.mjs";
 
 type State = (ReorderList & { signedIn: true }) | null;
 
@@ -51,8 +52,8 @@ export function CatalogReorder() {
           </p>
           <h2 id="reorder-title">Poručite ponovo</h2>
           <p className={styles.lead}>
-            Artikli koje ste ranije kupovali, iz potvrđenih faktura do {srDay(state.dataUntil)} Cenu i
-            dostupnost potvrđuje Vaš komercijalista.
+            Artikli koje ste ranije kupovali, iz potvrđenih faktura do {srDay(state.dataUntil)}. Cena je Vaša
+            važeća cena; raspoloživost i rok isporuke potvrđuje kancelarija.
           </p>
         </div>
         <span className={styles.headLinks}>
@@ -135,6 +136,7 @@ function ReorderCard({ item }: { item: ReorderItem }) {
         ) : null}
 
         {item.orderable && item.order ? <ReorderQuantity item={item} /> : null}
+        {!item.orderable && item.orderNote ? <p className={styles.orderFacts}>{item.orderNote} Za ovaj artikal pošaljite upit komercijalisti ili kancelariji.</p> : null}
 
         <div className={styles.actions}>
           {p ? (
@@ -161,35 +163,44 @@ const money = new Intl.NumberFormat("sr-Latn-RS", { minimumFractionDigits: 2, ma
  */
 function ReorderQuantity({ item }: { item: ReorderItem }) {
   const o = item.order!;
-  const [qty, setQty] = useState(String(o.suggestedQuantity));
+  // Bez predloga (istorija nije ceo broj pakovanja) polje ostaje prazno — ništa se ne zaokružuje.
+  const [packs, setPacks] = useState(o.suggestedPacks === null ? "" : String(o.suggestedPacks));
   const [pending, start] = useTransition();
   const [state, setState] = useState<{ ok: boolean; text: string } | null>(null);
   const add = () =>
     start(async () => {
-      const r = await addToCartAction({ articleCode: item.articleCode, quantity: qty });
+      const r = await addRequestItemAction({ articleId: o.articleId, packs: packs.trim() });
       setState(r.ok ? { ok: true, text: `Dodato u korpu (${r.count} ${r.count === 1 ? "stavka" : "stavke"}).` } : { ok: false, text: r.message });
+      if (r.ok) window.dispatchEvent(new CustomEvent("cs-korpa", { detail: { count: r.count } }));
     });
+  const unit = o.unit === "LIT" ? "L" : o.unit === "KOM" ? "kom" : o.unit.toLowerCase();
+  // Jedan komad = jedno pakovanje: cena po komadu se ne ponavlja.
+  const single = isSinglePiece(o.pack, o.unit);
   return (
     <div className={styles.order}>
       <p className={styles.orderFacts}>
-        {o.packLabel} · JM {o.unit}
-        <br />
-        <strong>
-          {money.format(o.netPrice)} {o.currency}
-        </strong>{" "}
-        bez PDV-a / {o.unit} · PDV {o.vatPercent} %
-        {o.demoPriceList ? <span className={styles.demoPrice}>demo cenovnik</span> : null}
+        {single ? `Cena po ${unit}, bez PDV-a:` : `Cena pakovanja (${o.pack.label}), bez PDV-a:`}
+        {o.prices.map((p) => (
+          <span key={p.label}>
+            <br />
+            {o.prices.length > 1 ? `${p.label}: ` : ""}
+            <strong>{money.format(p.packNet)} RSD</strong>
+            {single ? "" : ` · ${money.format(p.netPrice)} / ${unit}`} · PDV {p.vatPercent} %
+          </span>
+        ))}
       </p>
+      {o.suggestionNote ? <p className={styles.orderFacts}>{o.suggestionNote}</p> : null}
       <div className={styles.orderRow}>
         <label className={styles.qtyLabel}>
-          <span>Količina</span>
+          <span>Broj pakovanja</span>
           <input
             type="number"
-            inputMode="decimal"
-            min={o.step}
-            step={o.step}
-            value={qty}
-            onChange={(e) => setQty(e.target.value)}
+            inputMode="numeric"
+            min={1}
+            step={1}
+            value={packs}
+            placeholder={o.suggestedPacks === null ? "broj" : undefined}
+            onChange={(e) => setPacks(e.target.value)}
             disabled={pending}
           />
         </label>

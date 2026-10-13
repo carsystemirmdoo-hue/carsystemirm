@@ -82,10 +82,10 @@ export default async function RequestCatalogPage({ searchParams }: { searchParam
                   <th scope="col">Naziv</th>
                   {options.map((o) => (
                     <th scope="col" className="pn-r" key={o.key}>
-                      {o.label} <span className="pn-th-sub">cena kupca / JM bez PDV-a</span>
+                      {o.label} <span className="pn-th-sub">cena pakovanja bez PDV-a</span>
                     </th>
                   ))}
-                  <th scope="col">Količina i dodavanje</th>
+                  <th scope="col">Broj pakovanja i dodavanje</th>
                 </tr>
               </thead>
               <tbody>
@@ -95,7 +95,7 @@ export default async function RequestCatalogPage({ searchParams }: { searchParam
                     <td className="pn-c-name">
                       <span className="pn-strong">{a.articleName}</span>
                       <span className="pn-sub">
-                        {a.packConfirmed ? `Pakovanje ${a.packLabel}` : `JM: ${a.unit}`}
+                        {a.pack ? `Pakovanje: ${a.pack.label}` : `JM: ${a.unit}`}
                         {a.lastOn ? ` · poslednja kupovina ${dmy(a.lastOn)}` : ""}
                       </span>
                       {a.problem ? <span className="pn-error">{a.problem}</span> : null}
@@ -106,11 +106,13 @@ export default async function RequestCatalogPage({ searchParams }: { searchParam
                         <td key={o.key} className="pn-r" data-label={o.label}>
                           {p.status === "cena" ? (
                             <>
-                              <span className="pn-num pn-strong">
-                                {amount(p.netPrice)} <span className="pn-muted" style={{ fontWeight: 400 }}>/ {a.unit}</span>
-                              </span>
-                              <span className="pn-sub pn-num">
-                                osnovna {amount(p.listPrice)} · rabat {percent(p.discountPercent)}
+                              {p.packAmounts && a.pack ? (
+                                <span className="pn-num pn-strong">
+                                  {amount(p.packAmounts.net)} <span className="pn-muted" style={{ fontWeight: 400 }}>/ {a.pack.label}</span>
+                                </span>
+                              ) : null}
+                              <span className={p.packAmounts ? "pn-sub pn-num" : "pn-num pn-strong"}>
+                                {amount(p.netPrice)} / {a.unit} · osnovna {amount(p.listPrice)} · rabat {percent(p.discountPercent)}
                               </span>
                             </>
                           ) : (
@@ -123,7 +125,13 @@ export default async function RequestCatalogPage({ searchParams }: { searchParam
                       );
                     })}
                     <td className="pn-c-actions" data-label="">
-                      <AddItem articleId={a.articleId} step={a.step} unit={a.unit} name={a.articleName} />
+                      {a.pack ? (
+                        <AddItem articleId={a.articleId} packLabel={a.pack.label} name={a.articleName} />
+                      ) : (
+                        <span className="pn-sub" style={{ maxWidth: 220, display: "inline-block" }}>
+                          Ne poručuje se preko sajta dok pakovanje nije potvrđeno. Javite se komercijalisti ili kancelariji.
+                        </span>
+                      )}
                     </td>
                   </tr>
                 ))}

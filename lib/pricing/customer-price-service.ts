@@ -20,12 +20,17 @@ import { evaluatePricing } from "@/lib/pricing/precedence.mjs";
  * Cena kupca po artiklu na dan. `paymentOption` (0043): šifra ODOBRENE opcije plaćanja;
  * bez nje važi osnovni (bezuslovni) uslov. Opciju proverava pozivalac (`customerPricesByOption`).
  */
-export async function customerPrices(customerId: string, articleIds: string[], onDate: string, paymentOption: string | null = null) {
+/**
+ * `q`: pozivalac u transakciji MORA proslediti svoju transakciju. Upit preko
+ * zasebne veze iz pool-a dok transakcija drži svoju zaglavi server kada je pool
+ * mali (`DATABASE_POOL_MAX=1` na Preview-u) ili zauzet istovremenim slanjima.
+ */
+export async function customerPrices(customerId: string, articleIds: string[], onDate: string, paymentOption: string | null = null, q: Pick<ReturnType<typeof getDb>, "execute"> = getDb()) {
   if (!customerId) throw new Error("Upit kupca bez customer_id se ne sme izvršiti.");
-  const db = getDb();
+  const db = q;
   const statuses = sql.join(ACTIVE_RULE_STATUSES.map((s) => sql`${s}`), sql`, `);
   const [base, ruleRows, groupRows, articleRows, reps] = await Promise.all([
-    effectiveBasePriceCents(onDate),
+    effectiveBasePriceCents(onDate, q),
     db.execute<Record<string, unknown>>(sql`
       SELECT id, customer_scope::text AS "customerScope", product_scope::text AS "productScope", value_kind::text AS "valueKind",
              customer_id AS "customerId", customer_group_id AS "customerGroupId", article_id AS "articleId", product_group AS "productGroup", brand,

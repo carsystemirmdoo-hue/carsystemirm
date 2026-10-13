@@ -216,6 +216,8 @@ test("uspesan reset menja hes i opoziva sesije, u istoj transakciji", async (t) 
   const { verifyPassword } = await import("@/lib/auth/password.mjs");
   const a = await seedAccounts(db, [{ key: "reset8", role: "komercijalista" }]);
   const { code } = await issuePasswordResetCode({ userId: a.reset8.id, issuedBy: null });
+  // Nalog zaključan ranijim promašajima: kod od vlasnika mora da ga otključa (B9).
+  await db.sql`UPDATE users SET failed_login_attempts = 8, locked_until = now() + interval '15 minutes' WHERE id = ${a.reset8.id}`;
 
   const [pre] = await db.sql<{ v: number; h: string }[]>`
     SELECT session_version AS v, password_hash AS h FROM users WHERE id = ${a.reset8.id}
@@ -232,6 +234,10 @@ test("uspesan reset menja hes i opoziva sesije, u istoj transakciji", async (t) 
   assert.notEqual(post.h, pre.h, "heš lozinke nije promenjen");
   assert.equal(await verifyPassword(nova, post.h), true);
   assert.equal(await verifyPassword(a.reset8.password, post.h), false);
+  const [lock] = await db.sql<{ n: number; l: Date | null }[]>`
+    SELECT failed_login_attempts AS n, locked_until AS l FROM users WHERE id = ${a.reset8.id}
+  `;
+  assert.deepEqual({ n: lock.n, l: lock.l }, { n: 0, l: null }, "zaključavanje nije skinuto");
 });
 
 /** Medijana — otporna na pojedinačni skok u mreži, za razliku od proseka. */

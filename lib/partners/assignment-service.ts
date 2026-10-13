@@ -283,6 +283,19 @@ export async function listSalesReps() {
   return [...rows].map((r) => ({ id: r.id, name: r.name, codes: r.codes ?? [] }));
 }
 
+/** Dodeljeni komercijalisti za više kupaca odjednom (lista kupaca, B5). */
+export async function listAssigneesByCustomer(customerIds: string[]): Promise<Map<string, { id: string; name: string }[]>> {
+  const out = new Map<string, { id: string; name: string }[]>();
+  if (!customerIds.length) return out;
+  const rows = await getDb().execute<{ customer_id: string; id: string; name: string }>(sql`
+    SELECT ca.customer_id, u.id, u.name
+      FROM customer_assignments ca JOIN users u ON u.id = ca.user_id
+     WHERE ca.customer_id IN (${sql.join(customerIds.map((id) => sql`${id}::uuid`), sql`, `)})
+     ORDER BY u.name`);
+  for (const r of rows) out.set(r.customer_id, [...(out.get(r.customer_id) ?? []), { id: r.id, name: r.name }]);
+  return out;
+}
+
 /** Da li kupac postoji (za kapiju forme). */
 export async function customerExists(customerId: string): Promise<boolean> {
   const [row] = await getDb()

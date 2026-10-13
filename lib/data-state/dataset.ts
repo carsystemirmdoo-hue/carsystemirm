@@ -19,9 +19,10 @@ export type DatasetInfo =
   | { kind: "live" }
   | { kind: "demo"; label: string; asOf: string | null };
 
-export async function loadDatasetInfo(): Promise<DatasetInfo> {
+/** `q`: pozivalac u transakciji prosleđuje svoju (ista veza; vidi revizija B0/B11). */
+export async function loadDatasetInfo(q: Pick<ReturnType<typeof getDb>, "select"> = getDb()): Promise<DatasetInfo> {
   try {
-    const [row] = await getDb()
+    const [row] = await q
       .select({ value: systemSettings.value })
       .from(systemSettings)
       .where(eq(systemSettings.key, DATASET_KEY))

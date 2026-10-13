@@ -4,6 +4,8 @@ import { auth } from "@/auth";
 import { loginUrlFor } from "@/lib/authz/redirects.mjs";
 import { canAccessCustomer } from "@/lib/authz/scope.mjs";
 import { isInternalSubject } from "@/lib/authz/customer-scope.mjs";
+import { isWithinAbsoluteLifetime } from "@/lib/auth/session-lifetime.mjs";
+import { isSessionRevoked } from "@/lib/auth/revoked-sessions";
 import {
   can,
   landingRouteFor,
@@ -86,6 +88,10 @@ export async function loadAuthenticatedSession(): Promise<AuthenticatedSession |
    * važe, a podrazumevana vrednost vodi ka MANJEM pristupu.
    */
   if (!isInternalSubject(session.user)) return null;
+
+  // Apsolutni rok i opoziv odjavom (B8) — pre svega ostalog.
+  if (!isWithinAbsoluteLifetime(session.user.loginAt)) return null;
+  if (await isSessionRevoked(session.user.sid)) return null;
 
   const user = await loadPortalUser(userId);
   if (!user) return null;

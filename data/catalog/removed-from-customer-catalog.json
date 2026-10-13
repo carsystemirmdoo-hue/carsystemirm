@@ -238,16 +238,6 @@
       "redirect": "/brendovi/carsystem"
     },
     {
-      "slug": "carsystem-star-mask-refill",
-      "brand": "carsystem",
-      "name": "Carsystem Star Mask Refill",
-      "status": "BUSINESS_OUT_OF_PROGRAMME",
-      "source": "CARSYSTEM_SYNC",
-      "reason": "Firma više ne radi respiratorne maske ni filtere ni od jednog brenda.",
-      "evidence": "Zamenski filterski ulošci sa aktivnim ugljem klase A2 za masku Star Mask.",
-      "redirect": "/brendovi/carsystem"
-    },
-    {
       "slug": "carsystem-star-mask-pre-p2-r",
       "brand": "carsystem",
       "name": "Carsystem Star Mask Pre P2 R",
@@ -336,36 +326,6 @@
       "reason": "Firma više ne radi filtere ni od jednog brenda (uvozna ograničenja).",
       "evidence": "Filter na ulazu pištolja (1/4\" spoljašnji navoj).",
       "redirect": "/brendovi/sata"
-    },
-    {
-      "slug": "carsystem-paint-strainer",
-      "brand": "carsystem",
-      "name": "Carsystem Paint Strainer",
-      "status": "BUSINESS_OUT_OF_PROGRAMME",
-      "source": "CARSYSTEM_SYNC",
-      "reason": "Firma više ne radi filtere ni sita za boju i materijal ni od jednog brenda (uvozna ograničenja).",
-      "evidence": "Filtriranje materijala za lakiranje.",
-      "redirect": "/brendovi/carsystem"
-    },
-    {
-      "slug": "carsystem-multi-strain",
-      "brand": "carsystem",
-      "name": "Carsystem Multi Strain",
-      "status": "BUSINESS_OUT_OF_PROGRAMME",
-      "source": "CARSYSTEM_SYNC",
-      "reason": "Firma više ne radi filtere ni sita za boju i materijal ni od jednog brenda (uvozna ograničenja).",
-      "evidence": "Filtriranje materijala za lakiranje.",
-      "redirect": "/brendovi/carsystem"
-    },
-    {
-      "slug": "carsystem-pg-fg-fine-filter",
-      "brand": "carsystem",
-      "name": "Carsystem PG - FG Fine Filter",
-      "status": "BUSINESS_OUT_OF_PROGRAMME",
-      "source": "CARSYSTEM_SYNC",
-      "reason": "Firma više ne radi filtere ni sita za boju i materijal ni od jednog brenda (uvozna ograničenja).",
-      "evidence": "Filtriranje boje u gravitacionoj čaši pištolja.",
-      "redirect": "/brendovi/carsystem"
     },
     {
       "slug": "carfit-disposable-paint-strainers",
@@ -477,6 +437,52 @@
     "filterAdjacentKept": [
       "sata-spray-gun-holder-with-strainer-holder",
       "sata-insert"
+    ]
+  },
+  "restoredOnOwnerDecision": {
+    "_comment": "Vraćeno u customer-facing katalog odlukom vlasnika 2026-10-12 (artikli se aktivno prodaju). Zapis o ranijem uklanjanju je sačuvan radi istorije.",
+    "decidedOn": "2026-10-12",
+    "records": [
+      {
+        "slug": "carsystem-star-mask-refill",
+        "brand": "carsystem",
+        "name": "Carsystem Star Mask Refill",
+        "status": "BUSINESS_OUT_OF_PROGRAMME",
+        "source": "CARSYSTEM_SYNC",
+        "reason": "Firma više ne radi respiratorne maske ni filtere ni od jednog brenda.",
+        "evidence": "Zamenski filterski ulošci sa aktivnim ugljem klase A2 za masku Star Mask.",
+        "redirect": "/brendovi/carsystem"
+      },
+      {
+        "slug": "carsystem-paint-strainer",
+        "brand": "carsystem",
+        "name": "Carsystem Paint Strainer",
+        "status": "BUSINESS_OUT_OF_PROGRAMME",
+        "source": "CARSYSTEM_SYNC",
+        "reason": "Firma više ne radi filtere ni sita za boju i materijal ni od jednog brenda (uvozna ograničenja).",
+        "evidence": "Filtriranje materijala za lakiranje.",
+        "redirect": "/brendovi/carsystem"
+      },
+      {
+        "slug": "carsystem-multi-strain",
+        "brand": "carsystem",
+        "name": "Carsystem Multi Strain",
+        "status": "BUSINESS_OUT_OF_PROGRAMME",
+        "source": "CARSYSTEM_SYNC",
+        "reason": "Firma više ne radi filtere ni sita za boju i materijal ni od jednog brenda (uvozna ograničenja).",
+        "evidence": "Filtriranje materijala za lakiranje.",
+        "redirect": "/brendovi/carsystem"
+      },
+      {
+        "slug": "carsystem-pg-fg-fine-filter",
+        "brand": "carsystem",
+        "name": "Carsystem PG - FG Fine Filter",
+        "status": "BUSINESS_OUT_OF_PROGRAMME",
+        "source": "CARSYSTEM_SYNC",
+        "reason": "Firma više ne radi filtere ni sita za boju i materijal ni od jednog brenda (uvozna ograničenja).",
+        "evidence": "Filtriranje boje u gravitacionoj čaši pištolja.",
+        "redirect": "/brendovi/carsystem"
+      }
     ]
   }
 }

@@ -4,7 +4,7 @@ import { OrderStatusBadge } from "@/components/ordering/OrderStatusBadge";
 import { ScrollTable } from "@/components/ordering/ScrollTable";
 import { can } from "@/lib/authz/permissions.mjs";
 import { requireCapability } from "@/lib/authz/session";
-import { listOrderRequests, loadOrderingMode, type OrderListRow } from "@/lib/ordering/ordering-service";
+import { countOrderRequestsByState, listOrderRequests, loadOrderingMode, type OrderStateKey } from "@/lib/ordering/ordering-service";
 import { trialOverview } from "@/lib/ordering/trial-service";
 import { trialCustomerIds } from "@/lib/ordering/trial";
 import { LiveRefresh } from "@/components/ordering/LiveRefresh";
@@ -15,17 +15,17 @@ import { TrialPanel } from "./TrialPanel";
 
 export const dynamic = "force-dynamic";
 
-/** Filteri stanja (ista podela kao ranije grupe). „Otvoreni“ = sve što još traži nečiji korak. */
-const FILTERS = [
-  { key: "otvoreni", title: "Otvoreni", test: (r: OrderListRow) => ["submitted", "under_review", "changes_requested", "awaiting_customer"].includes(r.status) || (r.status === "confirmed" && !r.biznisoftDocumentNumber) },
-  { key: "novi", title: "Novi", test: (r: OrderListRow) => r.status === "submitted" },
-  { key: "obrada", title: "U obradi", test: (r: OrderListRow) => r.status === "under_review" },
-  { key: "kupac", title: "Čeka kupca", test: (r: OrderListRow) => r.status === "changes_requested" || r.status === "awaiting_customer" },
-  { key: "biznisoft", title: "Potvrđene — za BizniSoft", test: (r: OrderListRow) => r.status === "confirmed" && !r.biznisoftDocumentNumber },
-  { key: "potvrdjene", title: "Potvrđene", test: (r: OrderListRow) => r.status === "confirmed" },
-  { key: "zatvoreni", title: "Odbijeni, otkazani i zamenjeni", test: (r: OrderListRow) => ["rejected", "cancelled", "superseded"].includes(r.status) },
-  { key: "svi", title: "Svi", test: () => true },
-] as const;
+/** Filteri stanja (ista podela kao ranije grupe); uslovi su u SQL-u (`ORDER_STATES`). */
+const FILTERS: { key: OrderStateKey; title: string }[] = [
+  { key: "otvoreni", title: "Otvoreni" },
+  { key: "novi", title: "Novi" },
+  { key: "obrada", title: "U obradi" },
+  { key: "kupac", title: "Čeka kupca" },
+  { key: "biznisoft", title: "Potvrđene — za BizniSoft" },
+  { key: "potvrdjene", title: "Potvrđene" },
+  { key: "zatvoreni", title: "Odbijeni, otkazani i zamenjeni" },
+  { key: "svi", title: "Svi" },
+];
 
 export default async function OrderRequestsPage({ searchParams }: { searchParams: Promise<{ q?: string; verzije?: string; stanje?: string }> }) {
   const user = await requireCapability("view:zahtevi", "/portal/zahtevi");
@@ -34,8 +34,9 @@ export default async function OrderRequestsPage({ searchParams }: { searchParams
   // Podrazumevano samo važeća verzija svakog zahteva; stare verzije su u istoriji detalja.
   const allVersions = sp.verzije === "sve";
   const filter = FILTERS.find((f) => f.key === sp.stanje) ?? FILTERS[0];
-  const [rows, mode, trialIds, stamp] = await Promise.all([
-    listOrderRequests(user, null, q, { allVersions }),
+  const [list, counts, mode, trialIds, stamp] = await Promise.all([
+    listOrderRequests(user, null, q, { allVersions, state: filter.key }),
+    countOrderRequestsByState(user, q, { allVersions }),
     loadOrderingMode(),
     trialCustomerIds(),
     staffOrderStamp(user, null),
@@ -44,7 +45,8 @@ export default async function OrderRequestsPage({ searchParams }: { searchParams
   const canReview = can(user, "customer_orders:review");
   const isOwner = can(user, "customer_accounts:manage") && can(user, "prices:approve");
   const trials = isOwner ? await trialOverview() : [];
-  const list = rows.filter(filter.test);
+  // Lista prikazuje najnovijih 200 u izabranom stanju; brojač je nad celim skupom.
+  const shownAll = list.length >= counts[filter.key];
   const href = (patch: Record<string, string | null>) => {
     const p = new URLSearchParams();
     const next = { q: q || null, verzije: allVersions ? "sve" : null, stanje: filter.key === "otvoreni" ? null : filter.key, ...patch };
@@ -126,7 +128,7 @@ export default async function OrderRequestsPage({ searchParams }: { searchParams
         <div className="pn-chips" role="group" aria-label="Stanje">
           {FILTERS.map((f) => (
             <Link key={f.key} href={href({ stanje: f.key === "otvoreni" ? null : f.key })} className="pn-chip" aria-current={f.key === filter.key ? "true" : undefined}>
-              {f.title} <span className="pn-num">{rows.filter(f.test).length}</span>
+              {f.title} <span className="pn-num">{counts[f.key]}</span>
             </Link>
           ))}
         </div>
@@ -135,7 +137,7 @@ export default async function OrderRequestsPage({ searchParams }: { searchParams
       <section className="pn-card pn-card-flush" aria-labelledby="lista-naslov">
         <div className="pn-card-h">
           <h2 id="lista-naslov">
-            {filter.title} <span className="pn-muted pn-num" style={{ fontWeight: 400 }}>· {list.length}</span>
+            {filter.title} <span className="pn-muted pn-num" style={{ fontWeight: 400 }}>· {counts[filter.key]}</span>
           </h2>
           <span className="pn-small pn-muted">
             {allVersions ? "Prikazane su i stare verzije" : "Prikazane su važeće verzije; stare su u istoriji svakog zahteva"}
@@ -215,7 +217,7 @@ export default async function OrderRequestsPage({ searchParams }: { searchParams
             </table>
           </ScrollTable>
         )}
-        {rows.length >= 200 ? <p className="pn-card-foot">Prikazano je najviše 200 najnovijih zahteva. Za starije koristite pretragu.</p> : null}
+        {shownAll ? null : <p className="pn-card-foot">Prikazano je {list.length} najnovijih od {counts[filter.key]} u ovom stanju. Za starije koristite pretragu.</p>}
       </section>
 
       {isOwner ? (

@@ -1,4 +1,31 @@
-.root { position: relative; }
+.root { position: relative; display: inline-flex; align-items: center; gap: 0.4rem; }
+.cart {
+  position: relative;
+  display: inline-grid;
+  place-items: center;
+  width: 2.65rem;
+  height: 2.65rem;
+  border: 1px solid var(--header-border);
+  border-radius: 999px;
+  color: var(--header-ink);
+}
+.cart:hover { border-color: var(--header-red); }
+.cart:focus-visible { outline: 2px solid var(--header-red); outline-offset: 2px; }
+.cartCount {
+  position: absolute;
+  top: -0.25rem;
+  right: -0.25rem;
+  min-width: 1.15rem;
+  height: 1.15rem;
+  padding: 0 0.25rem;
+  border-radius: 999px;
+  background: var(--header-red);
+  color: #fff;
+  font-size: 0.68rem;
+  font-weight: 750;
+  line-height: 1.15rem;
+  text-align: center;
+}
 .trigger {
   display: inline-flex;
   align-items: center;

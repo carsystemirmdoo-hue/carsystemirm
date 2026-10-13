@@ -5,6 +5,8 @@ import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { signOut } from "@/auth";
 import { getDb } from "@/db/client";
+import { clientIpFromRequest } from "@/lib/auth/client-ip";
+import { clearAccountAttempts, isBucketBlocked, registerAttempt } from "@/lib/auth/rate-limit-service";
 import { clearRememberCookie } from "@/lib/auth/remember-session";
 import { logoutAllDevices, revokeAllRememberTokens } from "@/lib/auth/remember-tokens";
 import { requireCustomerSession } from "@/lib/authz/customer-session";
@@ -50,9 +52,23 @@ export async function changePasswordAction(_prev: PasswordState, formData: FormD
   const current = String(formData.get("current") ?? "");
   const next = String(formData.get("next") ?? "");
   if (next !== String(formData.get("confirm") ?? "")) return { error: "Nova lozinka i potvrda se ne slažu." };
+  /*
+   * Isti brojač kao prijava (`password`, nalog + adresa): provera trenutne
+   * lozinke iza otvorene sesije bez njega dozvoljava neograničeno pogađanje
+   * (revizija 2026-10-11, B9).
+   */
+  const clientIp = await clientIpFromRequest();
+  const identifier = session.email.toLowerCase();
+  if (await isBucketBlocked({ scope: "password", accountIdentifier: identifier, clientIp })) {
+    return { error: "Previše pokušaja. Sačekajte nekoliko minuta pa pokušajte ponovo." };
+  }
   try {
     const { ok } = await changeCustomerPassword({ accountId: session.accountId, currentPassword: current, newPassword: next });
-    if (!ok) return { error: "Trenutna lozinka nije ispravna." };
+    if (!ok) {
+      await registerAttempt({ scope: "password", accountIdentifier: identifier, clientIp });
+      return { error: "Trenutna lozinka nije ispravna." };
+    }
+    await clearAccountAttempts("password", identifier);
   } catch (error) {
     if (error instanceof CustomerAccountError) return { error: error.message };
     throw error;

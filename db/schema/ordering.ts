@@ -118,6 +118,8 @@ export const customerCartItems = pgTable(
       .references(() => customerUsers.id, { onDelete: "restrict" }),
     /** 0030: stavka vraćena iz zahteva na ispravku. */
     sourceOrderId: uuid("source_order_id"),
+    /** 0047: broj celih pakovanja koje je kupac izabrao; `quantity` = broj × potvrđeno pakovanje. */
+    packCount: integer("pack_count"),
     createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
     updatedAt: timestamp("updated_at", { withTimezone: true }).notNull().defaultNow(),
   },
@@ -207,9 +209,32 @@ export const customerOrderLines = pgTable(
     priceStatus: text("price_status").notNull().default("cena"),
     onRequestReason: text("on_request_reason"),
     packConfirmed: boolean("pack_confirmed").notNull().default(false),
+    /** 0047: broj pakovanja koje je kupac poručio i količina jednog pakovanja u JM. */
+    packCount: integer("pack_count"),
+    packQuantity: numeric("pack_quantity", { precision: 14, scale: 3 }),
   },
   (table) => [uniqueIndex("customer_order_lines_key").on(table.orderId, table.lineNumber)],
 );
+
+/**
+ * 0047: potvrđena količina JEDNOG pakovanja u BizniSoft JM artikla (npr. LIT 5).
+ * Bez potvrde artikal sa mernom JM se ne poručuje u pakovanjima (mera iz naziva nije potvrda).
+ */
+export const articlePackSizes = pgTable("article_pack_sizes", {
+  articleId: uuid("article_id")
+    .primaryKey()
+    .references(() => articles.id, { onDelete: "restrict" }),
+  packQuantity: numeric("pack_quantity", { precision: 14, scale: 3 }).notNull(),
+  unit: text("unit").notNull(),
+  label: text("label").notNull(),
+  evidence: text("evidence").notNull(),
+  confirmedBy: uuid("confirmed_by")
+    .notNull()
+    .references(() => users.id, { onDelete: "restrict" }),
+  confirmedAt: timestamp("confirmed_at", { withTimezone: true }).notNull().defaultNow(),
+  /** Izričit izuzetak: pakovanje je deo jednog KOM (npr. paket 125 = 0,5 KOM stare kutije od 250). */
+  fractionalOk: boolean("fractional_ok").notNull().default(false),
+});
 
 export const customerOrderEvents = pgTable(
   "customer_order_events",

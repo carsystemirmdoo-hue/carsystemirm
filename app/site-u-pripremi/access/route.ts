@@ -1,5 +1,8 @@
 import { NextResponse, type NextRequest } from "next/server";
+import { clientIpFromRequest } from "@/lib/auth/client-ip";
+import { isBucketBlocked, registerAttempt } from "@/lib/auth/rate-limit-service";
 import {
+  constantTimeEqual,
   createSiteAccessToken,
   getSiteAccessPassword,
   SITE_ACCESS_COOKIE_MAX_AGE,
@@ -33,7 +36,14 @@ export async function POST(request: NextRequest) {
     return redirectToMaintenance(request, "missing");
   }
 
-  if (accessCode !== expectedPassword) {
+  // Ograničenje po adresi: bez njega se kod može pogađati neograničeno (B9).
+  const clientIp = await clientIpFromRequest();
+  if (await isBucketBlocked({ scope: "site_access", accountIdentifier: "site", clientIp })) {
+    return redirectToMaintenance(request, "invalid");
+  }
+
+  if (!constantTimeEqual(accessCode, expectedPassword)) {
+    await registerAttempt({ scope: "site_access", accountIdentifier: "site", clientIp });
     return redirectToMaintenance(request, "invalid");
   }
 

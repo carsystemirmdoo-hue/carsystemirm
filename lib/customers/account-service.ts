@@ -3,7 +3,7 @@ import { assertPreparedForPortal } from "@/lib/customers/commercial-status-servi
 import { randomUUID } from "node:crypto";
 import { and, asc, eq, inArray, isNull, sql } from "drizzle-orm";
 import { getDb } from "@/db/client";
-import { customerAccountTokens, customers, customerUsers } from "@/db/schema";
+import { customerAccountTokens, customerMessageOutbox, customers, customerUsers } from "@/db/schema";
 import type { CustomerAccountStatus } from "@/db/schema/customer-accounts";
 import { AUDIT_ACTIONS, recordAudit } from "@/lib/audit/record";
 import { notify } from "@/lib/notifications/notification-service";
@@ -439,6 +439,33 @@ export async function listCustomerAccounts(
     .where(conditions.length > 0 ? and(...conditions) : undefined)
     .orderBy(asc(customers.name), asc(customerUsers.email))
     .limit(500);
+}
+
+/**
+ * Kupac kome nalog pripada, ili `null` ako nalog ne postoji.
+ *
+ * Radnje nad nalogom primaju samo `accountId`; bez ovog koraka komercijalista
+ * sa paketom „kupacki_nalozi“ mogao je da menja naloge kupaca van svog opsega
+ * (spisak je bio ograničen, radnje nisu — revizija 2026-10-11, A12).
+ */
+export async function customerIdOfAccount(accountId: string): Promise<string | null> {
+  const [row] = await getDb()
+    .select({ customerId: customerUsers.customerId })
+    .from(customerUsers)
+    .where(eq(customerUsers.id, accountId))
+    .limit(1);
+  return row?.customerId ?? null;
+}
+
+/** Kupac kome pripada stavka izlazne pošte, ili `null`. */
+export async function customerIdOfOutboxItem(id: number): Promise<string | null> {
+  const [row] = await getDb()
+    .select({ customerId: customerUsers.customerId })
+    .from(customerMessageOutbox)
+    .innerJoin(customerUsers, eq(customerUsers.id, customerMessageOutbox.customerUserId))
+    .where(eq(customerMessageOutbox.id, id))
+    .limit(1);
+  return row?.customerId ?? null;
 }
 
 /** Broj naloga koji trenutno smeju da se prijave, po kupcu. */

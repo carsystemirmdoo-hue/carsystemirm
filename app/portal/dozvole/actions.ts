@@ -161,7 +161,7 @@ const createSchema = z
     email: z.string().trim().toLowerCase().email().max(254),
     name: z.string().trim().min(2).max(120),
     role: z.enum(userRole.enumValues),
-    password: z.string().min(10).max(200),
+    password: z.string().min(12).max(200),
     /*
      * Traži se samo kada je `role` „gazda“ — vidi proveru ispod. Isti oblik kao
      * `roleSchema.token` (changeRoleAction), da dva unosa istog koda ne bi
@@ -216,7 +216,7 @@ export async function createUserAction(
     return {
       error:
         tokenIssue?.message ??
-        "Proverite unos: ispravna e-pošta, ime od najmanje 2 znaka i lozinka od najmanje 10 znakova.",
+        "Proverite unos: ispravna e-pošta, ime od najmanje 2 znaka i lozinka od najmanje 12 znakova.",
       ok: null,
     };
   }

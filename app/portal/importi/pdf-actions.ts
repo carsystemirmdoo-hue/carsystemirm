@@ -4,7 +4,7 @@ import { requestRecomputeAfterIngest, scheduleRecomputeProcessing } from "@/lib/
 import { revalidatePath } from "next/cache";
 import { requireCapability } from "@/lib/authz/session";
 import { fileHashOf } from "@/lib/pdf/extract";
-import { ingestBiznisoftPdf, openIngestionRun } from "@/lib/pdf/ingest";
+import { closeIngestionRun, ingestBiznisoftPdf, openIngestionRun } from "@/lib/pdf/ingest";
 import {
   UPLOAD_PROCESSING_BUDGET_MS,
   uploadSelectionError,
@@ -72,6 +72,7 @@ export async function importPdfAction(
      * izveštaja zajedno sa dvadesetim koji je pukao, i operater nije imao
      * način da sazna šta je prošlo.
      */
+    let runId: number | null = null;
     try {
       const bytes = new Uint8Array(await file.arrayBuffer());
       obradjeno += 1;
@@ -83,7 +84,7 @@ export async function importPdfAction(
        * idempotentan, umesto da jedan prolaz „pokrije" dvadeset fajlova od
        * kojih je polovina već uvezena.
        */
-      const runId = await openIngestionRun(
+      runId = await openIngestionRun(
         { fileName: file.name, fileHash: fileHashOf(bytes) },
         actor,
       );
@@ -94,7 +95,10 @@ export async function importPdfAction(
       );
       // Storno se ne knjiži; ishod veze sa originalom je ono što operater treba da vidi (docs/b2b/48).
       bump(outcome.result === "quarantined" && outcome.reversal ? `storno_${outcome.reversal}` : outcome.result);
+      // Istorija uvoza dobija ishod, ne ostaje „u toku“ (B2).
+      await closeIngestionRun(runId, outcome).catch(() => undefined);
     } catch {
+      await closeIngestionRun(runId, { result: "error" }).catch(() => undefined);
       /*
        * Greška se NE prosleđuje dalje ni u kom obliku.
        *

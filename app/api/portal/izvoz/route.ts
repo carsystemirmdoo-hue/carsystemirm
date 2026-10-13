@@ -13,6 +13,7 @@ import {
   type SalesLine,
   type SalesSummary,
 } from "@/lib/sales/queries";
+import { isoDateOrNull } from "@/lib/sales/filterInput.mjs";
 
 /**
  * Najviše stavki u izvozu „Stavke faktura" po formatu. Zbirni izvozi (po kupcu,
@@ -30,8 +31,9 @@ export const runtime = "nodejs";
 const querySchema = z.object({
   format: z.enum(["csv", "xlsx", "pdf"]),
   view: z.enum(["stavke", "kupci", "komercijalisti", "artikli", "grupe"]),
-  from: z.string().optional(),
-  to: z.string().optional(),
+  // Stvaran kalendarski dan; `2026-02-31` je 400, ne 500 (B7).
+  from: z.string().refine((v) => isoDateOrNull(v) !== null).optional(),
+  to: z.string().refine((v) => isoDateOrNull(v) !== null).optional(),
   customerId: z.string().uuid().optional(),
   salespersonId: z.string().uuid().optional(),
   productGroup: z.string().optional(),

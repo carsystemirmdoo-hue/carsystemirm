@@ -7,7 +7,7 @@ import { CartForm, type CartView } from "./CartForm";
 import { loadRequestQuote } from "@/lib/ordering/request-service";
 import { orderingEnabledFor } from "@/lib/ordering/trial";
 import { RequestCartForm, type RequestCartView } from "./RequestCartForm";
-import { publicSiteOpen } from "@/lib/site-mode";
+import { publicSiteOpenForRequest } from "@/lib/site-access-request";
 import { LiveRefresh } from "@/components/ordering/LiveRefresh";
 import { customerCartStamp } from "@/lib/ordering/live-stamp";
 
@@ -19,6 +19,7 @@ export const dynamic = "force-dynamic";
  * pravi pri svakom prikazu, pa ponovljen klik na isto dugme ne pravi drugi zahtev.
  */
 export default async function CustomerCartPage({ searchParams }: { searchParams: Promise<{ opcija?: string }> }) {
+  const siteOpen = await publicSiteOpenForRequest();
   const session = await requireCustomerSession("/kupac/korpa");
   if ((await orderingEnabledFor(session.customerId))) {
     const { opcija } = await searchParams;
@@ -37,6 +38,7 @@ export default async function CustomerCartPage({ searchParams }: { searchParams:
       lines: q.lines.map((l) => ({
         articleId: l.articleId, articleCode: l.articleCode, articleName: l.articleName, unit: l.unit, packLabel: l.packLabel, packConfirmed: l.packConfirmed,
         quantity: l.quantity, step: l.step, problem: l.problem, quantityProblem: l.quantityProblem, amounts: l.amounts,
+        packs: l.packs, pack: l.pack ? { label: l.pack.label, quantity: l.pack.quantity } : null,
         prices: q.options.map((o) => {
           const p = l.byOption[o.key];
           return {
@@ -44,6 +46,7 @@ export default async function CustomerCartPage({ searchParams }: { searchParams:
             netPrice: p.status === "cena" ? p.netPrice : null,
             listPrice: p.status === "cena" ? p.listPrice : null,
             discountPercent: p.status === "cena" ? p.discountPercent : null,
+            packNet: p.status === "cena" && p.packAmounts ? p.packAmounts.net : null,
           };
         }),
       })),
@@ -120,7 +123,7 @@ export default async function CustomerCartPage({ searchParams }: { searchParams:
             kada ga kancelarija potvrdi.
           </p>
         </div>
-        {publicSiteOpen() ? <Link href="/katalog" className="portal-section-link">← Katalog</Link> : null}
+        {siteOpen ? <Link href="/katalog" className="portal-section-link">← Katalog</Link> : null}
       </div>
 
       {list && quote.mode.enabled ? (
@@ -145,7 +148,7 @@ export default async function CustomerCartPage({ searchParams }: { searchParams:
             <strong>Korpa je prazna.</strong> Artikle dodajete iz kataloga, u odeljku „Poručite ponovo”.
           </p>
           <p>
-            {publicSiteOpen() ? <><Link href="/katalog">Otvorite katalog →</Link> · </> : null}<Link href="/kupac/porudzbine">Poslati zahtevi →</Link>
+            {siteOpen ? <><Link href="/katalog">Otvorite katalog →</Link> · </> : null}<Link href="/kupac/porudzbine">Poslati zahtevi →</Link>
           </p>
         </div>
       ) : (

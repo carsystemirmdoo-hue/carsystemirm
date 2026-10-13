@@ -55,6 +55,11 @@ export type BaslacFinish =
 
 export type BaslacSystemId = "line-45" | "line-35" | "line-30" | "line-30-cv";
 
+/** Slug kataloškog zapisa baze, izveden iz oznake (`catalogSlug` je stari slug koji se preusmerava). */
+export function baslacBaseSlug(base: { code: string }): string {
+  return `baslac-${base.code.toLowerCase().replace(/[^a-z0-9]+/g, "-")}`;
+}
+
 export type BaslacBase = {
   system: BaslacSystemId;
   /** Oznaka artikla, npr. `35-M214`. */

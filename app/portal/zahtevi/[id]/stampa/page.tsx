@@ -9,6 +9,7 @@ import { amount, dmyTime, percent, quantity } from "@/lib/ordering/panelFormat.m
 import { companyContact } from "@/lib/company-contact";
 import { PrintButton } from "./PrintButton";
 import "./stampa.css";
+import { isSinglePiece } from "@/lib/ordering/packRule.mjs";
 
 export const dynamic = "force-dynamic";
 
@@ -170,10 +171,16 @@ export default async function OrderPrintPage({ params }: { params: Promise<{ id:
               {priced.map((l) => (
                 <tr key={l.lineNumber}>
                   <td className="r">{l.lineNumber}.</td>
-                  <td className="nw">{l.articleCode}</td>
+                  <td className="zp-code">{l.articleCode}</td>
                   <td className="zp-name">
                     {l.articleName}
-                    {l.packConfirmed ? <span className="zp-sub">pakovanje {l.packLabel}</span> : null}
+                    {l.packCount !== null && l.packQuantity !== null && !isSinglePiece({ quantity: l.packQuantity, label: l.packLabel }, l.unit) ? (
+                      <span className="zp-sub">poručeno: {l.packCount} × {l.packLabel} = {quantity(l.packCount * l.packQuantity)} {l.unit}</span>
+                    ) : l.packQuantity !== null && l.packCount === null ? (
+                      <span className="zp-sub">IZUZETAK: {quantity(l.quantity)} {l.unit} nije ceo broj pakovanja ({l.packLabel})</span>
+                    ) : l.packConfirmed && l.packQuantity === null ? (
+                      <span className="zp-sub">pakovanje {l.packLabel}</span>
+                    ) : null}
                   </td>
                   <td>{l.unit}</td>
                   <td className="r">{quantity(l.quantity)}</td>
@@ -238,10 +245,16 @@ export default async function OrderPrintPage({ params }: { params: Promise<{ id:
                 {onRequest.map((l) => (
                   <tr key={l.lineNumber}>
                     <td className="r">{l.lineNumber}.</td>
-                    <td className="nw">{l.articleCode}</td>
+                    <td className="zp-code">{l.articleCode}</td>
                     <td className="zp-name">
                       {l.articleName}
-                      {l.packConfirmed ? <span className="zp-sub">pakovanje {l.packLabel}</span> : null}
+                      {l.packCount !== null && l.packQuantity !== null && !isSinglePiece({ quantity: l.packQuantity, label: l.packLabel }, l.unit) ? (
+                      <span className="zp-sub">poručeno: {l.packCount} × {l.packLabel} = {quantity(l.packCount * l.packQuantity)} {l.unit}</span>
+                    ) : l.packQuantity !== null && l.packCount === null ? (
+                      <span className="zp-sub">IZUZETAK: {quantity(l.quantity)} {l.unit} nije ceo broj pakovanja ({l.packLabel})</span>
+                    ) : l.packConfirmed && l.packQuantity === null ? (
+                      <span className="zp-sub">pakovanje {l.packLabel}</span>
+                    ) : null}
                     </td>
                     <td>{l.unit}</td>
                     <td className="r">{quantity(l.quantity)}</td>

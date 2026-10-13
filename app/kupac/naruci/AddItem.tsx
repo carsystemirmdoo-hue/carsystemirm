@@ -3,12 +3,11 @@
 import Link from "next/link";
 import { useState, useTransition } from "react";
 import { countOf, STAVKA } from "@/lib/ordering/plural.mjs";
-import { quantity as fmtQty } from "@/lib/ordering/panelFormat.mjs";
 import { addRequestItemAction } from "./actions";
 
-/** Količina + „Dodajte u korpu“. Poruka o ishodu stoji uz red (čitač ekrana je čuje). */
-export function AddItem({ articleId, step, unit, name }: { articleId: string; step: number; unit: string; name: string }) {
-  const [q, setQ] = useState(String(step).replace(".", ","));
+/** Broj pakovanja + „Dodajte u korpu“. Poruka o ishodu stoji uz red (čitač ekrana je čuje). */
+export function AddItem({ articleId, packLabel, name }: { articleId: string; packLabel: string; name: string }) {
+  const [q, setQ] = useState("1");
   const [pending, start] = useTransition();
   const [msg, setMsg] = useState<{ ok: boolean; text: string } | null>(null);
   return (
@@ -16,15 +15,15 @@ export function AddItem({ articleId, step, unit, name }: { articleId: string; st
       <span className="pn-inline" style={{ flexWrap: "nowrap", justifyContent: "flex-end" }}>
         <input
           className="pn-input pn-qty"
-          inputMode="decimal"
+          inputMode="numeric"
           value={q}
           onChange={(e) => {
             setQ(e.target.value);
             setMsg(null);
           }}
-          aria-label={`Količina, ${name} (${unit})`}
+          aria-label={`Broj pakovanja, ${name} (${packLabel})`}
         />
-        <span className="pn-muted pn-small" style={{ minWidth: 28 }}>{unit}</span>
+        <span className="pn-muted pn-small" style={{ minWidth: 28 }}>× {packLabel}</span>
         <button
           type="button"
           className="pn-btn"
@@ -32,10 +31,10 @@ export function AddItem({ articleId, step, unit, name }: { articleId: string; st
           aria-busy={pending || undefined}
           onClick={() =>
             start(async () => {
-              const r = await addRequestItemAction({ articleId, quantity: q.replace(",", ".") });
+              const r = await addRequestItemAction({ articleId, packs: q.trim() });
               setMsg(
                 r.ok
-                  ? { ok: true, text: `Dodato${r.lineQuantity !== undefined ? ` · u korpi ${fmtQty(r.lineQuantity)} ${unit}` : ""} · ukupno ${countOf(r.count, STAVKA)}` }
+                  ? { ok: true, text: `Dodato${r.linePacks !== undefined ? ` · u korpi ${r.linePacks} × ${packLabel}` : ""} · ukupno ${countOf(r.count, STAVKA)}` }
                   : { ok: false, text: r.message },
               );
             })

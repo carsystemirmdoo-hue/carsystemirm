@@ -177,6 +177,25 @@ export function MfaEnrollment({
           aria-invalid={Boolean(start.error)}
         />
 
+        {mfaEnabled ? (
+          <>
+            <label htmlFor={`${tokenId}-s`}>Kod iz trenutne aplikacije</label>
+            <input
+              id={`${tokenId}-s`}
+              name="token"
+              inputMode="numeric"
+              autoComplete="one-time-code"
+              maxLength={8}
+              required
+              aria-invalid={Boolean(start.error)}
+              aria-describedby={`${tokenId}-s-hint`}
+            />
+            <small id={`${tokenId}-s-hint`}>
+              Iz aplikacije koja je sada vezana. Ako telefon više nemate, vlasnik poništava drugi faktor u „Nalozi zaposlenih“.
+            </small>
+          </>
+        ) : null}
+
         {needsGrant ? (
           <>
             <label htmlFor={grantId}>Dozvola za vezivanje</label>

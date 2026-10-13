@@ -5,11 +5,13 @@ import { cookies, headers } from "next/headers";
 import { redirect } from "next/navigation";
 import { signIn, signOut } from "@/auth";
 import { forgetThisDevice, setRememberCookie } from "@/lib/auth/remember-session";
+import { revokeCurrentSession } from "@/lib/auth/revoked-sessions";
 import { isRememberEnabled } from "@/lib/auth/rememberRules.mjs";
 import { issueRememberToken } from "@/lib/auth/remember-tokens";
 import { findCustomerAccountByEmail } from "@/lib/customers/account-service";
 import { normalizeCustomerReturn } from "@/lib/authz/redirects.mjs";
 import { customerLandingAfterLogin, customerLandingAfterLogout } from "@/lib/authz/customer-landing";
+import { publicSiteOpenForRequest } from "@/lib/site-access-request";
 
 /** Ista poruka za svaki neuspeh — iz odgovora se ne sme zaključiti da li nalog postoji. */
 /** Vidi `components/layout/CustomerAccountMenu.tsx`. */
@@ -36,7 +38,7 @@ export async function customerSignInAction(
    * bez nje na početnu. `/portal`, prijava i API su izričito zabranjeni —
    * vidi `normalizeCustomerReturn`.
    */
-  const safeRedirect = customerLandingAfterLogin(normalizeCustomerReturn(formData.get("callbackUrl")));
+  const safeRedirect = customerLandingAfterLogin(normalizeCustomerReturn(formData.get("callbackUrl")), await publicSiteOpenForRequest());
 
   /*
    * Marker za javno zaglavlje: samo „možda je prijavljen kupac", bez ikakvog
@@ -88,8 +90,10 @@ export async function customerSignInAction(
 export async function customerSignOutAction(formData?: FormData) {
   // Odjava zaboravlja i ovaj uređaj: bez toga bi ga sledeća poseta ponovo prijavila.
   await forgetThisDevice();
+  // Odjava gasi i sam token, ne samo kolačić (B8).
+  await revokeCurrentSession();
   await signOut({ redirect: false });
   (await cookies()).delete(CUSTOMER_MARKER_COOKIE);
   const back = normalizeCustomerReturn(formData?.get("returnTo") ?? null);
-  redirect(customerLandingAfterLogout(back));
+  redirect(customerLandingAfterLogout(back, await publicSiteOpenForRequest()));
 }

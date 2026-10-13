@@ -76,8 +76,17 @@ const EXPECTED = [
    * reči („ral” → „rallye”), isto pravilo po kome upit nalazi i „RAL”, a ne
    * substring slučajnost kakve su uklonjene gore.
    */
-  { query: "ral", count: 130 },
-  { query: "600 ml", count: 4 },
+  /*
+   * 130 → 131 (pregledano 2026-10-11): Cosmos Lac sync (5f12d67) dodaje „RAL 9003 Matt Signal
+   * White” — zaseban zapis od sjajnog „RAL CL 426 RAL 9003 Signal White” (druga završnica), ne duplikat.
+   */
+  { query: "ral", count: 131 },
+  /*
+   * `600 ml`: 4 → 0. Jedina pakovanja od 600 ml bila su Molotow (uklonjen iz kataloga). Bez
+   * pravog pogotka upit je kroz fuzzy (`600ml` ~ `400ml`) vraćao 689 drugih pakovanja; mera se
+   * sada ne traži fuzzy (lib/search/engine.mjs), pa je ispravan rezultat prazan.
+   */
+  { query: "600 ml", count: 0 },
   // `antichip`: ostaje 8. Alias grupa je razdvojena (antikorozivno ≠ zaštita od kamenčića),
   // pa R-M antikorozivni prajmeri više ne dobijaju lažan pogodak — vidi `lib/search/aliases.mjs`.
   { query: "antichip", count: 8 },
@@ -105,9 +114,14 @@ const EXPECTED = [
    * Clearcoar matt, Rapid air clear coat VOC, Silicone Remover, Silicone Remover
    * „Strawberry”, Universal Thinner). Svaka je proverena u datasetu: nosi red
    * varijante sa merom tačno „1 l”.
+   *
+   * 79 → 82 (pregledano 2026-10-11): Norbin sync (cb1a165) dodaje tri proizvoda čije je
+   * zvanično pakovanje 1 L — N55-015 1K Plastic Primer, N75-V21 Clear Hardener VOC i N85-021
+   * Thinner. „Clearcoar matt” je samo preimenovan u `carfit-clearcoat-matt` (84e8051), isti
+   * proizvod, bez promene broja.
    */
-  { query: "1l", count: 79 },
-  { query: "1 l", count: 79 },
+  { query: "1l", count: 82 },
+  { query: "1 l", count: 82 },
   /*
    * `3,5 l`: 1 → 10. Isto zastarevanje od Baslac kataloga (HEAD = 10, svih 10
    * su Baslac pakovanja od 3,5 L). Carsystem sync ovde ne dodaje ništa.
@@ -116,7 +130,13 @@ const EXPECTED = [
   { query: "3.5l", count: 10 },
   { query: "carmine", count: 2 },
   { query: "C 2E50", count: 1 },
-  { query: "satajet", count: 1 },
+  /*
+   * 1 → 31 (pregledano 2026-10-11): SATA sync (113b8ce i faza 2) uvodi ceo SATAjet asortiman.
+   * Redosled je ispravan: 17 pištolja SATAjet u nazivu prvi, zatim 2 nastavka „za SATAjet …”,
+   * pa 12 delova pribora kojima je SATAjet samo pojam kompatibilnosti (adam 2, HKU, QMR, čaše,
+   * zaštita vazdušne kape, setovi za čišćenje dizni…). Bez duplikata.
+   */
+  { query: "satajet", count: 31 },
 ];
 
 for (const testCase of EXPECTED) {
@@ -151,6 +171,14 @@ const MUST_INCLUDE = [
   { query: "75250", id: "befar-liquid-compound" },
   { query: "55401ADV", id: "befar-leo-plus-advance-velcro-compounding-pad" },
   { query: "93162", id: "befar-backing-pad" },
+  // „brusni papir”: podloga prema zvaničnom podnaslovu proizvođača (Paper abrasive) ili nazivu.
+  { query: "brusni papir", id: "carsystem-sanding-disc-p-25-ceramic" },
+  { query: "brusni papir", id: "carsystem-sanding-strips-p-25-ceramic" },
+  { query: "brusni papir", id: "carsystem-topline-wp-s" },
+  { query: "brusni papir", id: "carfit-gold-paper-disc" },
+  { query: "brusni papir", id: "carfit-wet-sanding-paper" },
+  { query: "brusni film", id: "carsystem-f19-brusni-diskovi" },
+  { query: "brusna mreza", id: "carsystem-tec-line-n20" },
   // Alias: Antigravel je antichip, pa ga upit „antichip" mora naći.
   { query: "antichip", id: "family:cosmos-lac-master-mechanic-antigravel-paintable" },
 ];
@@ -174,6 +202,12 @@ const MUST_EXCLUDE = [
   },
   // Pakovanje je osa varijacije porodice, ne njena osobina.
   { query: "600 ml", id: "family:cosmos-lac-molotow-burner" },
+  // Film, mreža i sunđer nisu papir, iako su brusni diskovi.
+  { query: "brusni papir", id: "carsystem-f19-brusni-diskovi" },
+  { query: "brusni papir", id: "carsystem-f23-brusni-diskovi" },
+  { query: "brusni papir", id: "carfit-red-film-abrasive-discs" },
+  { query: "brusni papir", id: "carfit-color-net-disc" },
+  { query: "brusni papir", id: "carsystem-proflex-callisto-150-mm" },
   // „mp-16**1 l**eaf" — substring, ne mera.
   { query: "1 l", id: "cosmos-lac-molotow-premium-mp-161-400-ml-mp-161-leaf-green" },
 ];

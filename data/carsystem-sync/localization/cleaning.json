@@ -30,15 +30,15 @@
     "benefits": [],
     "advice": null,
     "variants": {
-      "134.580": "1,000 otkidnih listova / 36 x 36 cm"
+      "134.580": "1.000 otkidnih listova / 36 x 36 cm"
     }
   },
   "cleaning/car-clean-double-white-paper-cleaning-cloth": {
     "sourceHash": "b9c6828f4def3394",
     "productType": "Papirna krpa za čišćenje",
     "subtype": "Papirna krpa za čišćenje",
-    "shortDescription": "Dvoslojna papirna krpa za čišćenje u perforiranoj rolni sa 1,500 listova.",
-    "longDescription": "Car Clean Double White je dvoslojna papirna krpa za čišćenje namenjena uobičajenim poslovima u karoserijskoj i lakirerskoj radionici. Isporučuje se u perforiranoj rolni sa 1,500 otkidnih listova.",
+    "shortDescription": "Dvoslojna papirna krpa za čišćenje u perforiranoj rolni sa 1.500 listova.",
+    "longDescription": "Car Clean Double White je dvoslojna papirna krpa za čišćenje namenjena uobičajenim poslovima u karoserijskoj i lakirerskoj radionici. Isporučuje se u perforiranoj rolni sa 1.500 otkidnih listova.",
     "purpose": "Uobičajeni poslovi čišćenja u radionici",
     "facts": [
       {
@@ -51,7 +51,7 @@
       },
       {
         "label": "Broj listova",
-        "value": "1,500 otkidnih listova"
+        "value": "1.500 otkidnih listova"
       }
     ],
     "applications": [
@@ -60,7 +60,7 @@
     "benefits": [],
     "advice": null,
     "variants": {
-      "141.253": "1,500 otkidnih listova / 38 x 24 cm"
+      "141.253": "1.500 otkidnih listova / 38 x 24 cm"
     }
   },
   "cleaning/car-clean-multi-cleaning-cloth": {
@@ -207,7 +207,7 @@
     "advice": null,
     "variants": {
       "134.578": "500 otkidnih listova / 36 x 36 cm",
-      "134.579": "1,000 otkidnih listova / 36 x 36 cm"
+      "134.579": "1.000 otkidnih listova / 36 x 36 cm"
     }
   },
   "cleaning/cleaning-wipes-cleaning-wipes": {

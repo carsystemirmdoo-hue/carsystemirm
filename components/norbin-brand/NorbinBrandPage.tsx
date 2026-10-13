@@ -90,10 +90,6 @@ function NorbinHero() {
                 <strong>5</strong>
                 <span>odnosa mešanja</span>
               </div>
-              <div>
-                <strong>0</strong>
-                <span>bez sistema boje</span>
-              </div>
             </div>
 
             <div className={styles.heroActions}>
@@ -113,9 +109,7 @@ function NorbinHero() {
             <span className={`${styles.heroRibbon} ${styles.heroRibbonBlue}`} aria-hidden="true" />
             <span className={`${styles.heroRibbon} ${styles.heroRibbonGold}`} aria-hidden="true" />
             <div className={styles.heroPhotoWedge}>
-              <div className={styles.heroPhotoWedgeEmpty} role="img" aria-label="Fotografija radionice još nije dostupna">
-                Fotografija u pripremi
-              </div>
+              <div className={styles.heroPhotoWedgeEmpty} aria-hidden="true" />
             </div>
           </div>
         </div>
@@ -209,8 +203,8 @@ function OdnosSection() {
           Svaki proizvod ima tačno propisanog partnera.
         </h2>
         <p className={styles.sectionLead}>
-          Pet odnosa mešanja pokrivaju ceo Norbin program — baza i
-          učvršđivač uvek idu u tačno propisanoj razmeri, prema tehničkom
+          Pet odnosa mešanja pokriva ceo Norbin program — baza i
+          učvršćivač uvek idu u tačno propisanoj razmeri, prema tehničkom
           listu.
         </p>
 
@@ -295,6 +289,10 @@ function GreyShadeSection() {
 }
 
 function OurProgramSection({ products }: { products: CarsystemProduct[] }) {
+  const hasPhoto = (product: CarsystemProduct) =>
+    Boolean(product.productImage && !product.productImage.src.includes("placeholder-product"));
+  const pictured = products.filter(hasPhoto);
+  const unpictured = products.filter((product) => !hasPhoto(product));
   return (
     <section
       id="nas-program"
@@ -307,51 +305,55 @@ function OurProgramSection({ products }: { products: CarsystemProduct[] }) {
           Šta zaista možete poručiti kod nas.
         </h2>
         <p className={styles.sectionLead}>
-          Puni EMEA program ima 13 proizvoda. U našoj ponudi je danas
-          potvrđen N15-020, u dva pakovanja — dostupnost ostalih artikala
-          potvrđujemo kroz upit.
+          Proizvođač u Norbin programu vodi 13 proizvoda; ispod su svi,
+          a N15-020 u oba pakovanja. U našoj ponudi je danas potvrđen
+          N15-020 — dostupnost ostalih artikala potvrđujemo kroz upit.
         </p>
 
-        <div className={styles.programLayout}>
+        {/* Kartica samo uz fotografiju; ostali artikli su lista — ne siva polja „NORBIN“. */}
+        {pictured.length > 0 ? (
           <div className={styles.stockedGrid}>
-            {products.map((product) => (
+            {pictured.map((product) => (
               <Link
                 className={styles.stockedCard}
                 href={productCanonicalHref(product)}
                 key={product.slug}
               >
                 <div className={styles.stockedMedia}>
-                  {product.productImage &&
-                  !product.productImage.src.includes("placeholder-product") ? (
-                    <Image
-                      src={product.productImage.src}
-                      alt={product.productImage.alt}
-                      fill
-                      sizes="(min-width: 64rem) 18vw, 42vw"
-                    />
-                  ) : (
-                    <div
-                      className={styles.stockedNoImage}
-                      role="img"
-                      aria-label={`Fotografija za ${product.name} još nije dostupna`}
-                    >
-                      <span className={styles.stockedNoImageMark}>NORBIN</span>
-                    </div>
-                  )}
+                  <Image
+                    src={product.productImage!.src}
+                    alt={product.productImage!.alt}
+                    fill
+                    sizes="(min-width: 64rem) 18vw, 42vw"
+                  />
                 </div>
                 <div className={styles.stockedCopy}>
-                  <strong>{product.sku}</strong>
+                  <strong>{product.publicCode ?? product.sku}</strong>
                   <small>{product.packages?.[0]?.label ?? product.name}</small>
                 </div>
               </Link>
             ))}
           </div>
+        ) : null}
+
+        <div className={styles.programLayout}>
+          <ul className={styles.stockedList} aria-label="Ostali Norbin artikli">
+            {unpictured.map((product) => (
+              <li key={product.slug}>
+                <Link href={productCanonicalHref(product)}>
+                  <strong>{product.publicCode ?? product.sku}</strong>
+                  <span>{product.name}</span>
+                  <small>{product.packages?.[0]?.label ?? ""}</small>
+                </Link>
+              </li>
+            ))}
+          </ul>
 
           <div className={styles.systemPanel}>
             <p>
-              Pun EMEA program ima 13 proizvoda u pet familija odnosa
-              mešanja. Dostupnost artikala van trenutne ponude potvrđuje se
-              kroz upit — ne prikazujemo ih kao proizvode sa strane sajta.
+              Norbin program obuhvata 13 proizvoda u pet familija odnosa
+              mešanja. Dostupnost artikala koji nisu u našoj trenutnoj ponudi
+              proveravamo na upit.
             </p>
             <p>
               <Link className={styles.buttonText} href="/kontakt?tema=proizvod&brend=norbin">
@@ -377,7 +379,7 @@ function TechnicalSection() {
       <div className={styles.container}>
         <p className={styles.sectionKicker}>Tehnički podaci</p>
         <h2 className={styles.sectionTitle} id="norbin-tech-title">
-          Vrednosti onako kako su odštampane.
+          Podaci iz tehničkih listova proizvođača.
         </h2>
 
         <div className={styles.techLayout}>
@@ -480,7 +482,7 @@ function OriginSection() {
           </div>
 
           <div className={styles.originMedia}>
-            <div className={styles.originMediaEmpty}>Fotografija u pripremi</div>
+            <div className={styles.originMediaEmpty} aria-hidden="true" />
           </div>
         </div>
       </div>

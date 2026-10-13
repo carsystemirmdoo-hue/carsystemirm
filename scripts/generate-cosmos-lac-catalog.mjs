@@ -1026,7 +1026,8 @@ async function main() {
       technicalCategory,
       useCase: technicalUseCases[technicalCategory] ?? null,
       image: publicRelative,
-      imageAlt: `${officialName}, zvanična Cosmos Lac ambalaža`,
+      // Alt opisuje proizvod; poreklo slike nije podatak za čitač ekrana.
+      imageAlt: officialName,
       visualMode: "color-on-hover",
       backgroundColor,
       foregroundTone: relativeLuminance(backgroundColor) > 0.48 ? "dark" : "light",

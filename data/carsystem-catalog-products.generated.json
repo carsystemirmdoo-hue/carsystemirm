@@ -497,7 +497,7 @@
         },
         {
           "articleNumber": "153.218",
-          "label": "Učvršćivač / 0.5 L",
+          "label": "Učvršćivač / 0,5 L",
           "manufacturerNote": null,
           "officialSpecification": "Hardener / 0.5 L",
           "salesPack": "1",
@@ -519,7 +519,7 @@
         },
         {
           "articleNumber": "153.208",
-          "label": "Učvršćivač / 2.5 L",
+          "label": "Učvršćivač / 2,5 L",
           "manufacturerNote": null,
           "officialSpecification": "Hardener / 2.5 L",
           "salesPack": "1",
@@ -710,7 +710,7 @@
             "description": "Zadržava svojstva pri izlaganju UV zračenju."
           }
         ],
-        "advice": "Napomena: ukupna debljina filma ne bi trebalo da pređe 180 μm, što odgovara najviše trima slojevima od približno 60 μm uz dizne veličine 1.6 mm. Ako se pređe 180 μm, punilac tokom nanošenja ili sušenja može dobiti mlečan ili zamućen izgled; taj optički efekat je privremen i nestaje nakon potpunog sušenja i naknadnog brušenja. Preporučuje se dosledno pridržavanje uputstva za nanošenje i propisanih debljina sloja."
+        "advice": "Napomena: ukupna debljina filma ne bi trebalo da pređe 180 μm, što odgovara najviše trima slojevima od približno 60 μm uz dizne veličine 1,6 mm. Ako se pređe 180 μm, punilac tokom nanošenja ili sušenja može dobiti mlečan ili zamućen izgled; taj optički efekat je privremen i nestaje nakon potpunog sušenja i naknadnog brušenja. Preporučuje se dosledno pridržavanje uputstva za nanošenje i propisanih debljina sloja."
       },
       "shade": null,
       "recommendedSlugs": []
@@ -742,7 +742,7 @@
       "variants": [
         {
           "articleNumber": "144.138",
-          "label": "A komponenta / 1.0 L",
+          "label": "A komponenta / 1,0 L",
           "manufacturerNote": null,
           "officialSpecification": "A-comp. / 1.0 L",
           "salesPack": "1",
@@ -753,7 +753,7 @@
         },
         {
           "articleNumber": "144.140",
-          "label": "Učvršćivač 420 standard / 0.5 L",
+          "label": "Učvršćivač 420 standard / 0,5 L",
           "manufacturerNote": null,
           "officialSpecification": "Hardener 420 standard / 0.5 L",
           "salesPack": "1",
@@ -764,7 +764,7 @@
         },
         {
           "articleNumber": "144.139",
-          "label": "Učvršćivač 421 brzi / 0.5 L",
+          "label": "Učvršćivač 421 brzi / 0,5 L",
           "manufacturerNote": null,
           "officialSpecification": "Hardener 421 fast / 0.5 L",
           "salesPack": "1",
@@ -775,7 +775,7 @@
         },
         {
           "articleNumber": "142.953",
-          "label": "A komponenta / 5.0 L",
+          "label": "A komponenta / 5,0 L",
           "manufacturerNote": null,
           "officialSpecification": "A-comp. / 5.0 L",
           "salesPack": "1",
@@ -786,7 +786,7 @@
         },
         {
           "articleNumber": "144.107",
-          "label": "Učvršćivač 420 standard / 2.5 L",
+          "label": "Učvršćivač 420 standard / 2,5 L",
           "manufacturerNote": null,
           "officialSpecification": "Hardener 420 standard / 2.5 L",
           "salesPack": "1",
@@ -797,7 +797,7 @@
         },
         {
           "articleNumber": "144.108",
-          "label": "Učvršćivač 421 brzi / 2.5 L",
+          "label": "Učvršćivač 421 brzi / 2,5 L",
           "manufacturerNote": null,
           "officialSpecification": "Hardener 421 fast / 2.5 L",
           "salesPack": "1",
@@ -882,7 +882,7 @@
       "variants": [
         {
           "articleNumber": "156.931",
-          "label": "A+B komponenta / 1.5 L",
+          "label": "A+B komponenta / 1,5 L",
           "manufacturerNote": null,
           "officialSpecification": "A+B comp. / 1.5 L",
           "salesPack": "1",
@@ -974,7 +974,7 @@
       "variants": [
         {
           "articleNumber": "160.417",
-          "label": "A+B komponenta / 1.5 L / standardni",
+          "label": "A+B komponenta / 1,5 L / standardni",
           "manufacturerNote": null,
           "officialSpecification": "A+B comp. / 1.5 L / standard",
           "salesPack": "1",
@@ -996,7 +996,7 @@
         },
         {
           "articleNumber": "160.419",
-          "label": "A komponenta / 5.0 L",
+          "label": "A komponenta / 5,0 L",
           "manufacturerNote": null,
           "officialSpecification": "A-comp. / 5.0 L",
           "salesPack": "1",
@@ -1247,7 +1247,7 @@
       "variants": [
         {
           "articleNumber": "153.223",
-          "label": "A+B komponenta / spori učvršćivač / 1.5 L",
+          "label": "A+B komponenta / spori učvršćivač / 1,5 L",
           "manufacturerNote": null,
           "officialSpecification": "A+B comp. / hardener slow / 1.5 L",
           "salesPack": "1",
@@ -1258,7 +1258,7 @@
         },
         {
           "articleNumber": "153.774",
-          "label": "A+B komponenta / standardni učvršćivač / 1.5 L",
+          "label": "A+B komponenta / standardni učvršćivač / 1,5 L",
           "manufacturerNote": null,
           "officialSpecification": "A+B comp. / hardener standard / 1.5 L",
           "salesPack": "1",
@@ -1269,7 +1269,7 @@
         },
         {
           "articleNumber": "151.909",
-          "label": "A komponenta / 5.0 L",
+          "label": "A komponenta / 5,0 L",
           "manufacturerNote": null,
           "officialSpecification": "A-comp. / 5.0 L",
           "salesPack": "1",
@@ -1280,7 +1280,7 @@
         },
         {
           "articleNumber": "151.910",
-          "label": "Standardni učvršćivač / 2.5 L",
+          "label": "Standardni učvršćivač / 2,5 L",
           "manufacturerNote": null,
           "officialSpecification": "Hardener standard / 2.5 L",
           "salesPack": "1",
@@ -1291,7 +1291,7 @@
         },
         {
           "articleNumber": "151.911",
-          "label": "Brzi učvršćivač / 2.5 L",
+          "label": "Brzi učvršćivač / 2,5 L",
           "manufacturerNote": null,
           "officialSpecification": "Hardener fast / 2.5 L",
           "salesPack": "1",
@@ -1383,7 +1383,7 @@
       "variants": [
         {
           "articleNumber": "148.983",
-          "label": "A komponenta / mat / 1.0 L",
+          "label": "A komponenta / mat / 1,0 L",
           "manufacturerNote": null,
           "officialSpecification": "A-comp. / matt / 1.0 L",
           "salesPack": "1",
@@ -1394,7 +1394,7 @@
         },
         {
           "articleNumber": "148.986",
-          "label": "A komponenta / svilenkasto mat / 1.0 L",
+          "label": "A komponenta / svilenkasto mat / 1,0 L",
           "manufacturerNote": null,
           "officialSpecification": "A-comp. / silk-matt / 1.0 L",
           "salesPack": "1",
@@ -1405,7 +1405,7 @@
         },
         {
           "articleNumber": "148.985",
-          "label": "Učvršćivač standardni / 0.5 L",
+          "label": "Učvršćivač standardni / 0,5 L",
           "manufacturerNote": null,
           "officialSpecification": "Hardener standard / 0.5 L",
           "salesPack": "1",
@@ -1416,7 +1416,7 @@
         },
         {
           "articleNumber": "148.984",
-          "label": "Učvršćivač brzi / 0.5 L",
+          "label": "Učvršćivač brzi / 0,5 L",
           "manufacturerNote": null,
           "officialSpecification": "Hardener fast / 0.5 L",
           "salesPack": "1",
@@ -1509,7 +1509,7 @@
         },
         {
           "articleNumber": "147.019",
-          "label": "Standardni učvršćivač / 2.5 L",
+          "label": "Standardni učvršćivač / 2,5 L",
           "manufacturerNote": null,
           "officialSpecification": "Hardener standard / 2.5 L",
           "salesPack": "1",
@@ -1520,7 +1520,7 @@
         },
         {
           "articleNumber": "147.862",
-          "label": "Brzi učvršćivač / 2.5 L",
+          "label": "Brzi učvršćivač / 2,5 L",
           "manufacturerNote": null,
           "officialSpecification": "Hardener fast / 2.5 L",
           "salesPack": "1",
@@ -1612,7 +1612,7 @@
       "variants": [
         {
           "articleNumber": "152.563",
-          "label": "A+B komponenta / 1.5 L",
+          "label": "A+B komponenta / 1,5 L",
           "manufacturerNote": null,
           "officialSpecification": "A+B comp. / 1.5 L",
           "salesPack": "1",
@@ -1623,7 +1623,7 @@
         },
         {
           "articleNumber": "151.899",
-          "label": "A komponenta / 5.0 L",
+          "label": "A komponenta / 5,0 L",
           "manufacturerNote": null,
           "officialSpecification": "A-comp. / 5.0 L",
           "salesPack": "1",
@@ -1634,7 +1634,7 @@
         },
         {
           "articleNumber": "151.901",
-          "label": "Učvršćivač / 2.5 L",
+          "label": "Učvršćivač / 2,5 L",
           "manufacturerNote": null,
           "officialSpecification": "Hardener / 2.5 L",
           "salesPack": "1",
@@ -1843,7 +1843,7 @@
       "variants": [
         {
           "articleNumber": "152.580",
-          "label": "A + B komponenta / siva / 1.25 L",
+          "label": "A + B komponenta / siva / 1,25 L",
           "manufacturerNote": null,
           "officialSpecification": "A + B comp. / grey / 1.25 L",
           "salesPack": "1",
@@ -1854,7 +1854,7 @@
         },
         {
           "articleNumber": "152.416",
-          "label": "A komponenta / bela / 3.6 L",
+          "label": "A komponenta / bela / 3,6 L",
           "manufacturerNote": null,
           "officialSpecification": "A-comp. / white / 3.6 L",
           "salesPack": "1",
@@ -1865,7 +1865,7 @@
         },
         {
           "articleNumber": "152.417",
-          "label": "A komponenta / siva / 3.6 L",
+          "label": "A komponenta / siva / 3,6 L",
           "manufacturerNote": null,
           "officialSpecification": "A-comp. / grey / 3.6 L",
           "salesPack": "1",
@@ -1876,7 +1876,7 @@
         },
         {
           "articleNumber": "152.418",
-          "label": "A komponenta / crna / 3.6 L",
+          "label": "A komponenta / crna / 3,6 L",
           "manufacturerNote": null,
           "officialSpecification": "A-comp. / black / 3.6 L",
           "salesPack": "1",
@@ -1887,7 +1887,7 @@
         },
         {
           "articleNumber": "152.419",
-          "label": "Učvršćivač / 0.9 L",
+          "label": "Učvršćivač / 0,9 L",
           "manufacturerNote": null,
           "officialSpecification": "Hardener / 0.9 L",
           "salesPack": "1",
@@ -1976,7 +1976,7 @@
       "variants": [
         {
           "articleNumber": "152.058",
-          "label": "A+B komponenta / svetlosiva / 1.2 L",
+          "label": "A+B komponenta / svetlosiva / 1,2 L",
           "manufacturerNote": null,
           "officialSpecification": "A+B comp. / light grey / 1.2 L",
           "salesPack": "1",
@@ -1987,7 +1987,7 @@
         },
         {
           "articleNumber": "152.057",
-          "label": "A komponenta / svetlosiva / 3.5 L",
+          "label": "A komponenta / svetlosiva / 3,5 L",
           "manufacturerNote": null,
           "officialSpecification": "A-comp. / light grey / 3.5 L",
           "salesPack": "1",
@@ -1998,7 +1998,7 @@
         },
         {
           "articleNumber": "147.682",
-          "label": "Učvršćivač / 0.7 L",
+          "label": "Učvršćivač / 0,7 L",
           "manufacturerNote": null,
           "officialSpecification": "Hardener / 0.7 L",
           "salesPack": "1",
@@ -2099,7 +2099,7 @@
       "variants": [
         {
           "articleNumber": "153.455",
-          "label": "A+B komponenta / siva / 1.05 L",
+          "label": "A+B komponenta / siva / 1,05 L",
           "manufacturerNote": null,
           "officialSpecification": "A+B-comp. / grey / 1.05 L",
           "salesPack": "1",
@@ -2110,7 +2110,7 @@
         },
         {
           "articleNumber": "153.456",
-          "label": "A komponenta / siva / 3.6 L",
+          "label": "A komponenta / siva / 3,6 L",
           "manufacturerNote": null,
           "officialSpecification": "A-comp. / grey / 3.6 L",
           "salesPack": "1",
@@ -2121,7 +2121,7 @@
         },
         {
           "articleNumber": "153.457",
-          "label": "Učvršćivač / 0.6 L",
+          "label": "Učvršćivač / 0,6 L",
           "manufacturerNote": null,
           "officialSpecification": "Hardener / 0.6 L",
           "salesPack": "1",
@@ -2313,7 +2313,7 @@
       "variants": [
         {
           "articleNumber": "144.541",
-          "label": "A+B komponenta / učvršćivač veoma brzi / bela / 1.25 L",
+          "label": "A+B komponenta / učvršćivač veoma brzi / bela / 1,25 L",
           "manufacturerNote": null,
           "officialSpecification": "A+B comp. / hardener very fast / white / 1.25 L",
           "salesPack": "1",
@@ -2324,7 +2324,7 @@
         },
         {
           "articleNumber": "147.432",
-          "label": "A+B komponenta / učvršćivač standardni / siva / 1.25 L",
+          "label": "A+B komponenta / učvršćivač standardni / siva / 1,25 L",
           "manufacturerNote": null,
           "officialSpecification": "A+B comp. / hardener standard / grey / 1.25 L",
           "salesPack": "1",
@@ -2335,7 +2335,7 @@
         },
         {
           "articleNumber": "144.539",
-          "label": "A+B komponenta / učvršćivač veoma brzi / siva / 1.25 L",
+          "label": "A+B komponenta / učvršćivač veoma brzi / siva / 1,25 L",
           "manufacturerNote": null,
           "officialSpecification": "A+B comp. / hardener very fast / grey / 1.25 L",
           "salesPack": "1",
@@ -2346,7 +2346,7 @@
         },
         {
           "articleNumber": "144.540",
-          "label": "A+B komponenta / učvršćivač veoma brzi / crna / 1.25 L",
+          "label": "A+B komponenta / učvršćivač veoma brzi / crna / 1,25 L",
           "manufacturerNote": null,
           "officialSpecification": "A+B comp. / hardener very fast / black / 1.25 L",
           "salesPack": "1",
@@ -2357,7 +2357,7 @@
         },
         {
           "articleNumber": "144.354",
-          "label": "A komponenta / bela / 3.6 L",
+          "label": "A komponenta / bela / 3,6 L",
           "manufacturerNote": null,
           "officialSpecification": "A-comp. / white / 3.6 L",
           "salesPack": "1",
@@ -2368,7 +2368,7 @@
         },
         {
           "articleNumber": "144.026",
-          "label": "A komponenta / siva / 3.6 L",
+          "label": "A komponenta / siva / 3,6 L",
           "manufacturerNote": null,
           "officialSpecification": "A-comp. / grey / 3.6 L",
           "salesPack": "1",
@@ -2379,7 +2379,7 @@
         },
         {
           "articleNumber": "144.353",
-          "label": "A komponenta / crna / 3.6 L",
+          "label": "A komponenta / crna / 3,6 L",
           "manufacturerNote": null,
           "officialSpecification": "A-comp. / black / 3.6 L",
           "salesPack": "1",
@@ -2390,7 +2390,7 @@
         },
         {
           "articleNumber": "144.977",
-          "label": "Učvršćivač VOC 541 / standardni / 0.9 L",
+          "label": "Učvršćivač VOC 541 / standardni / 0,9 L",
           "manufacturerNote": null,
           "officialSpecification": "Hardener VOC 541 / standard / 0.9 L",
           "salesPack": "1",
@@ -2401,7 +2401,7 @@
         },
         {
           "articleNumber": "144.027",
-          "label": "Učvršćivač veoma brzi / 0.9 L",
+          "label": "Učvršćivač veoma brzi / 0,9 L",
           "manufacturerNote": null,
           "officialSpecification": "Hadener very fast / 0.9 L",
           "salesPack": "1",
@@ -2412,7 +2412,7 @@
         },
         {
           "articleNumber": "153.493",
-          "label": "Učvršćivač VOC 541 CT / 0.9 L",
+          "label": "Učvršćivač VOC 541 CT / 0,9 L",
           "manufacturerNote": null,
           "officialSpecification": "Hardener VOC 541 CT / 0.9 L",
           "salesPack": "1",
@@ -3232,7 +3232,7 @@
       "variants": [
         {
           "articleNumber": "158.216",
-          "label": "A komponenta / bela / 3.6 L",
+          "label": "A komponenta / bela / 3,6 L",
           "manufacturerNote": null,
           "officialSpecification": "A-comp. / white / 3.6 L",
           "salesPack": "1",
@@ -3243,7 +3243,7 @@
         },
         {
           "articleNumber": "158.218",
-          "label": "A komponenta / siva / 3.6 L",
+          "label": "A komponenta / siva / 3,6 L",
           "manufacturerNote": null,
           "officialSpecification": "A-comp. / grey / 3.6 L",
           "salesPack": "1",
@@ -3254,7 +3254,7 @@
         },
         {
           "articleNumber": "158.219",
-          "label": "A komponenta / crna / 3.6 L",
+          "label": "A komponenta / crna / 3,6 L",
           "manufacturerNote": null,
           "officialSpecification": "A-comp. / black / 3.6 L",
           "salesPack": "1",
@@ -3265,7 +3265,7 @@
         },
         {
           "articleNumber": "158.220",
-          "label": "Učvršćivač / 0.9 L",
+          "label": "Učvršćivač / 0,9 L",
           "manufacturerNote": null,
           "officialSpecification": "Hardener / 0.9 L",
           "salesPack": "1",
@@ -3663,7 +3663,7 @@
       "variants": [
         {
           "articleNumber": "139.039",
-          "label": "9 x 16 mm / dužina 12.5 m",
+          "label": "9 x 16 mm / dužina 12,5 m",
           "manufacturerNote": null,
           "officialSpecification": "9 x 16 mm / 12.5 m length",
           "salesPack": "1",
@@ -3689,8 +3689,8 @@
       "content": {
         "productType": "Vazdušno crevo",
         "subtype": "Vazdušno crevo · komplet",
-        "shortDescription": "Antistatičko gumeno vazdušno crevo sa niplom i sigurnosnom spojnicom, dužine 12.5 m.",
-        "longDescription": "Air hose je antistatičko gumeno crevo sa niplom i sigurnosnom spojnicom, za dovod vazduha do pištolja za lakiranje i alata na komprimovani vazduh. Dimenzija creva je 9 x 16 mm, dužina 12.5 m, a maksimalni radni pritisak 12 bar. Unutrašnja cev je glatka EPDM u crnoj, a spoljašnja glatka EPDM u plavoj boji.",
+        "shortDescription": "Antistatičko gumeno vazdušno crevo sa niplom i sigurnosnom spojnicom, dužine 12,5 m.",
+        "longDescription": "Air hose je antistatičko gumeno crevo sa niplom i sigurnosnom spojnicom, za dovod vazduha do pištolja za lakiranje i alata na komprimovani vazduh. Dimenzija creva je 9 x 16 mm, dužina 12,5 m, a maksimalni radni pritisak 12 bar. Unutrašnja cev je glatka EPDM u crnoj, a spoljašnja glatka EPDM u plavoj boji.",
         "purpose": "Dovod vazduha za pištolje za lakiranje i pneumatske alate",
         "facts": [
           {
@@ -3703,7 +3703,7 @@
           },
           {
             "label": "Dužina",
-            "value": "12.5 m"
+            "value": "12,5 m"
           },
           {
             "label": "Maksimalni pritisak vazduha",
@@ -3852,7 +3852,7 @@
       "variants": [
         {
           "articleNumber": "148.524",
-          "label": "Limenka 1.8 kg sa učvršćivačem",
+          "label": "Limenka 1,8 kg sa učvršćivačem",
           "manufacturerNote": null,
           "officialSpecification": "1.8 kg tin incl. hardener",
           "salesPack": "1",
@@ -4029,7 +4029,7 @@
       "variants": [
         {
           "articleNumber": "149.612",
-          "label": "Limenka 1.8 kg sa učvršćivačem",
+          "label": "Limenka 1,8 kg sa učvršćivačem",
           "manufacturerNote": null,
           "officialSpecification": "1.8 kg tin incl. hardener",
           "salesPack": "1",
@@ -4925,7 +4925,7 @@
             "description": "Sa hrapavih površina uklanja se peračem pod visokim pritiskom."
           }
         ],
-        "advice": "Preporučuje se mlaznica veličine 1.8 - 2.2 mm."
+        "advice": "Preporučuje se mlaznica veličine 1,8–2,2 mm."
       },
       "shade": null,
       "recommendedSlugs": []
@@ -5049,7 +5049,7 @@
             "description": "Film je rastvorljiv u vodi."
           }
         ],
-        "advice": "Preporučuje se mlaznica veličine 1.8 - 2.2 mm."
+        "advice": "Preporučuje se mlaznica veličine 1,8–2,2 mm."
       },
       "shade": null,
       "recommendedSlugs": []
@@ -5154,7 +5154,7 @@
             "description": "Lako se uklanja."
           }
         ],
-        "advice": "Preporučuje se mlaznica veličine 2.2 - 2.5 mm."
+        "advice": "Preporučuje se mlaznica veličine 2,2–2,5 mm."
       },
       "shade": {
         "color": "#E6E3DD",
@@ -5351,7 +5351,7 @@
       "variants": [
         {
           "articleNumber": "147.447",
-          "label": "1.0 L",
+          "label": "1,0 L",
           "manufacturerNote": null,
           "officialSpecification": "1.0 L",
           "salesPack": "1",
@@ -6122,7 +6122,7 @@
       "variants": [
         {
           "articleNumber": "134.580",
-          "label": "1,000 otkidnih listova / 36 x 36 cm",
+          "label": "1.000 otkidnih listova / 36 x 36 cm",
           "manufacturerNote": null,
           "officialSpecification": "1,000 tear-offs / 36 x 36 cm",
           "salesPack": "2",
@@ -6208,7 +6208,7 @@
       "variants": [
         {
           "articleNumber": "141.253",
-          "label": "1,500 otkidnih listova / 38 x 24 cm",
+          "label": "1.500 otkidnih listova / 38 x 24 cm",
           "manufacturerNote": null,
           "officialSpecification": "1,500 tear-offs / 38 x 24 cm",
           "salesPack": "2",
@@ -6230,8 +6230,8 @@
       "content": {
         "productType": "Papirna krpa za čišćenje",
         "subtype": "Papirna krpa za čišćenje",
-        "shortDescription": "Dvoslojna papirna krpa za čišćenje u perforiranoj rolni sa 1,500 listova.",
-        "longDescription": "Car Clean Double White je dvoslojna papirna krpa za čišćenje namenjena uobičajenim poslovima u karoserijskoj i lakirerskoj radionici. Isporučuje se u perforiranoj rolni sa 1,500 otkidnih listova.",
+        "shortDescription": "Dvoslojna papirna krpa za čišćenje u perforiranoj rolni sa 1.500 listova.",
+        "longDescription": "Car Clean Double White je dvoslojna papirna krpa za čišćenje namenjena uobičajenim poslovima u karoserijskoj i lakirerskoj radionici. Isporučuje se u perforiranoj rolni sa 1.500 otkidnih listova.",
         "purpose": "Uobičajeni poslovi čišćenja u radionici",
         "facts": [
           {
@@ -6244,7 +6244,7 @@
           },
           {
             "label": "Broj listova",
-            "value": "1,500 otkidnih listova"
+            "value": "1.500 otkidnih listova"
           }
         ],
         "applications": [
@@ -6528,7 +6528,7 @@
         },
         {
           "articleNumber": "134.579",
-          "label": "1,000 otkidnih listova / 36 x 36 cm",
+          "label": "1.000 otkidnih listova / 36 x 36 cm",
           "manufacturerNote": null,
           "officialSpecification": "1,000 tear-offs / 36 x 36 cm",
           "salesPack": "1",
@@ -7041,7 +7041,7 @@
       "variants": [
         {
           "articleNumber": "148.018",
-          "label": "Limenka 0.5 kg sa učvršćivačem",
+          "label": "Limenka 0,5 kg sa učvršćivačem",
           "manufacturerNote": null,
           "officialSpecification": "0.5 kg tin incl. hardener",
           "salesPack": "1",
@@ -7151,7 +7151,7 @@
       "variants": [
         {
           "articleNumber": "148.019",
-          "label": "Limenka 0.820 kg sa učvršćivačem",
+          "label": "Limenka 0,820 kg sa učvršćivačem",
           "manufacturerNote": null,
           "officialSpecification": "0.820 kg tin incl. hardener",
           "salesPack": "1",
@@ -7262,7 +7262,7 @@
       "variants": [
         {
           "articleNumber": "148.234",
-          "label": "Limenka 1.0 l",
+          "label": "Limenka 1,0 l",
           "manufacturerNote": null,
           "officialSpecification": "1.0 l tin",
           "salesPack": "1",
@@ -7332,7 +7332,7 @@
       "variants": [
         {
           "articleNumber": "158.423",
-          "label": "A + B komponenta / 1.5 L",
+          "label": "A + B komponenta / 1,5 L",
           "manufacturerNote": null,
           "officialSpecification": "A + B comp. / 1.5 L",
           "salesPack": "1",
@@ -7354,7 +7354,7 @@
         },
         {
           "articleNumber": "157.451",
-          "label": "Učvršćivač / 2.5 L",
+          "label": "Učvršćivač / 2,5 L",
           "manufacturerNote": null,
           "officialSpecification": "Hardener / 2.5 L",
           "salesPack": "1",
@@ -7457,7 +7457,7 @@
       "variants": [
         {
           "articleNumber": "158.251",
-          "label": "A+B komponenta / 1.5 L",
+          "label": "A+B komponenta / 1,5 L",
           "manufacturerNote": null,
           "officialSpecification": "A+B comp. / 1.5 L",
           "salesPack": "1",
@@ -7479,7 +7479,7 @@
         },
         {
           "articleNumber": "158.250",
-          "label": "Učvršćivač / 2.5 L",
+          "label": "Učvršćivač / 2,5 L",
           "manufacturerNote": null,
           "officialSpecification": "Hardener / 2.5 L",
           "salesPack": "1",
@@ -8500,7 +8500,7 @@
         "productType": "Šolja",
         "subtype": "300 ml",
         "shortDescription": "Crna keramička Carsystem šolja zapremine oko 300 ml, u kartonu sa 6 komada.",
-        "longDescription": "Crna Carsystem šolja sa odštampanim logom izrađena je od keramike, spolja mat, a iznutra sjajna. Zapremina od oko 300 ml odgovara svim toplim napicima. Dimenzije su oko 8.5 cm visine i Ø 9.2 cm, a isporučuje se u kartonu sa 6 komada.",
+        "longDescription": "Crna Carsystem šolja sa odštampanim logom izrađena je od keramike, spolja mat, a iznutra sjajna. Zapremina od oko 300 ml odgovara svim toplim napicima. Dimenzije su oko 8,5 cm visine i Ø 9,2 cm, a isporučuje se u kartonu sa 6 komada.",
         "purpose": "Serviranje toplih napitaka",
         "facts": [
           {
@@ -8521,7 +8521,7 @@
           },
           {
             "label": "Dimenzije",
-            "value": "Oko 8.5 cm visine, Ø 9.2 cm"
+            "value": "Oko 8,5 cm visine, Ø 9,2 cm"
           },
           {
             "label": "Materijal",
@@ -8689,7 +8689,7 @@
           },
           {
             "label": "Baterija",
-            "value": "3.7V 2.6 Ah Li-Ion"
+            "value": "3,7V 2,6 Ah Li-Ion"
           },
           {
             "label": "Vreme punjenja",
@@ -9946,7 +9946,7 @@
       "variants": [
         {
           "articleNumber": "137.664",
-          "label": "0.385 L",
+          "label": "0,385 L",
           "manufacturerNote": null,
           "officialSpecification": "0.385 L",
           "salesPack": "1",
@@ -9957,7 +9957,7 @@
         },
         {
           "articleNumber": "137.665",
-          "label": "0.75 L",
+          "label": "0,75 L",
           "manufacturerNote": null,
           "officialSpecification": "0.75 L",
           "salesPack": "1",
@@ -9968,7 +9968,7 @@
         },
         {
           "articleNumber": "137.666",
-          "label": "1.4 L",
+          "label": "1,4 L",
           "manufacturerNote": null,
           "officialSpecification": "1.4 L",
           "salesPack": "1",
@@ -9979,7 +9979,7 @@
         },
         {
           "articleNumber": "137.667",
-          "label": "2.3 L",
+          "label": "2,3 L",
           "manufacturerNote": null,
           "officialSpecification": "2.3 L",
           "salesPack": "1",
@@ -10971,7 +10971,7 @@
       "variants": [
         {
           "articleNumber": "158.248",
-          "label": "A+B komponenta / 1.5 L",
+          "label": "A+B komponenta / 1,5 L",
           "manufacturerNote": null,
           "officialSpecification": "A+B comp. / 1.5 L",
           "salesPack": "1",
@@ -11076,7 +11076,7 @@
       "variants": [
         {
           "articleNumber": "127.976",
-          "label": "Limenka 2.0 kg sa učvršćivačem",
+          "label": "Limenka 2,0 kg sa učvršćivačem",
           "manufacturerNote": null,
           "officialSpecification": "2.0 kg tin incl. hardener",
           "salesPack": "1",
@@ -11170,7 +11170,7 @@
       "variants": [
         {
           "articleNumber": "146.708",
-          "label": "limenka 2.0 kg sa učvršćivačem",
+          "label": "limenka 2,0 kg sa učvršćivačem",
           "manufacturerNote": null,
           "officialSpecification": "2.0 kg tin incl. hardener",
           "salesPack": "1",
@@ -11898,7 +11898,7 @@
       "variants": [
         {
           "articleNumber": "138.443",
-          "label": "Limenka 1.4 kg sa učvršćivačem",
+          "label": "Limenka 1,4 kg sa učvršćivačem",
           "manufacturerNote": null,
           "officialSpecification": "1.4 kg tin incl. hardener",
           "salesPack": "1",
@@ -13344,7 +13344,7 @@
       "variants": [
         {
           "articleNumber": "143.388",
-          "label": "Sa podloškom / prečnik hoda 2.5 mm",
+          "label": "Sa podloškom / prečnik hoda 2,5 mm",
           "manufacturerNote": null,
           "officialSpecification": "Incl. back pad / 2.5 mm orbital diameter",
           "salesPack": "1",
@@ -13366,8 +13366,8 @@
       "content": {
         "productType": "Ekscentrična brusilica",
         "subtype": "Ekscentrična brusilica 75 mm, pneumatska",
-        "shortDescription": "Pneumatska ekscentrična brusilica 75 mm za rad jednom rukom, sa prečnikom hoda 2.5 mm.",
-        "longDescription": "Finish Sander RC 9332 je pneumatska ekscentrična brusilica za rad jednom rukom. Prečnik hoda iznosi 2.5 mm, a broj obrtaja se podešava do 10.000 o/min. Priključak za podlošku je unutrašnji navoj 5/16\", dok je priključak za vazdušno crevo unutrašnji navoj 1/4\".",
+        "shortDescription": "Pneumatska ekscentrična brusilica 75 mm za rad jednom rukom, sa prečnikom hoda 2,5 mm.",
+        "longDescription": "Finish Sander RC 9332 je pneumatska ekscentrična brusilica za rad jednom rukom. Prečnik hoda iznosi 2,5 mm, a broj obrtaja se podešava do 10.000 o/min. Priključak za podlošku je unutrašnji navoj 5/16\", dok je priključak za vazdušno crevo unutrašnji navoj 1/4\".",
         "purpose": "Pneumatsko ekscentrično brušenje jednom rukom",
         "facts": [
           {
@@ -13376,7 +13376,7 @@
           },
           {
             "label": "Hod",
-            "value": "Prečnik hoda 2.5 mm"
+            "value": "Prečnik hoda 2,5 mm"
           },
           {
             "label": "Broj obrtaja",
@@ -13725,7 +13725,7 @@
       "variants": [
         {
           "articleNumber": "134.796",
-          "label": "Limenka 1.0 kg sa učvršćivačem",
+          "label": "Limenka 1,0 kg sa učvršćivačem",
           "manufacturerNote": null,
           "officialSpecification": "1.0 kg tin incl. hardener",
           "salesPack": "1",
@@ -14041,7 +14041,7 @@
       "variants": [
         {
           "articleNumber": "130.854",
-          "label": "Limenka 1.0 kg sa učvršćivačem",
+          "label": "Limenka 1,0 kg sa učvršćivačem",
           "manufacturerNote": null,
           "officialSpecification": "1.0 kg tin incl. hardener",
           "salesPack": "1",
@@ -14052,7 +14052,7 @@
         },
         {
           "articleNumber": "127.974",
-          "label": "Limenka 1.8 kg sa učvršćivačem",
+          "label": "Limenka 1,8 kg sa učvršćivačem",
           "manufacturerNote": null,
           "officialSpecification": "1.8 kg tin incl. hardener",
           "salesPack": "1",
@@ -14146,7 +14146,7 @@
       "variants": [
         {
           "articleNumber": "144.808",
-          "label": "Limenka 1.8 kg sa učvršćivačem",
+          "label": "Limenka 1,8 kg sa učvršćivačem",
           "manufacturerNote": null,
           "officialSpecification": "1.8 kg tin incl. hardener",
           "salesPack": "1",
@@ -14237,7 +14237,7 @@
       "variants": [
         {
           "articleNumber": "125.421",
-          "label": "0.5 m²",
+          "label": "0,5 m²",
           "manufacturerNote": null,
           "officialSpecification": "0.5 m²",
           "salesPack": "1",
@@ -14248,7 +14248,7 @@
         },
         {
           "articleNumber": "125.422",
-          "label": "1.0 m²",
+          "label": "1,0 m²",
           "manufacturerNote": null,
           "officialSpecification": "1.0 m²",
           "salesPack": "1",
@@ -14329,7 +14329,7 @@
       "variants": [
         {
           "articleNumber": "125.423",
-          "label": "0.5 m²",
+          "label": "0,5 m²",
           "manufacturerNote": null,
           "officialSpecification": "0.5 m²",
           "salesPack": "1",
@@ -14340,7 +14340,7 @@
         },
         {
           "articleNumber": "125.424",
-          "label": "1.0 m²",
+          "label": "1,0 m²",
           "manufacturerNote": null,
           "officialSpecification": "1.0 m²",
           "salesPack": "1",
@@ -17428,7 +17428,7 @@
         },
         {
           "articleNumber": "126.058",
-          "label": "Crevo za zaštitu šupljina / 0.9 m",
+          "label": "Crevo za zaštitu šupljina / 0,9 m",
           "manufacturerNote": null,
           "officialSpecification": "0.9m / cavity protection tube",
           "salesPack": "1",
@@ -17537,7 +17537,7 @@
         },
         {
           "articleNumber": "142.279",
-          "label": "Set creva / 0.95 m",
+          "label": "Set creva / 0,95 m",
           "manufacturerNote": null,
           "officialSpecification": "Tube set / 0.95 m",
           "salesPack": "1",
@@ -18113,7 +18113,7 @@
           },
           {
             "label": "Baterija",
-            "value": "11.1V 4.4 Ah Li-Ion"
+            "value": "11,1V 4,4 Ah Li-Ion"
           },
           {
             "label": "Vreme punjenja",
@@ -18121,7 +18121,7 @@
           },
           {
             "label": "Vreme rada",
-            "value": "Zavisno od režima: 10 h / 5 h / 2.5 h"
+            "value": "Zavisno od režima: 10 h / 5 h / 2,5 h"
           },
           {
             "label": "Jačina svetla",
@@ -18145,7 +18145,7 @@
           },
           {
             "label": "Težina",
-            "value": "1.15 kg"
+            "value": "1,15 kg"
           },
           {
             "label": "Dimenzije",
@@ -18358,7 +18358,7 @@
             "description": "Vozilo se može bezbedno pomerati po radionici."
           }
         ],
-        "advice": "Preporučuje se nanošenje novim pištoljem za punilac. Dizna: 1.9 - 2.2 mm."
+        "advice": "Preporučuje se nanošenje novim pištoljem za punilac. Dizna: 1,9–2,2 mm."
       },
       "shade": {
         "color": "#741E2A",
@@ -18397,7 +18397,7 @@
       "variants": [
         {
           "articleNumber": "143.496",
-          "label": "Boca 1.04 kg sa učvršćivačem",
+          "label": "Boca 1,04 kg sa učvršćivačem",
           "manufacturerNote": null,
           "officialSpecification": "1.04 kg bottle incl. hardener",
           "salesPack": "1",
@@ -19726,7 +19726,7 @@
       "variants": [
         {
           "articleNumber": "130.852",
-          "label": "Limenka 1.0 kg sa učvršćivačem",
+          "label": "Limenka 1,0 kg sa učvršćivačem",
           "manufacturerNote": null,
           "officialSpecification": "1.0 kg tin incl. hardener",
           "salesPack": "1",
@@ -19737,7 +19737,7 @@
         },
         {
           "articleNumber": "127.911",
-          "label": "Limenka 2.0 kg sa učvršćivačem",
+          "label": "Limenka 2,0 kg sa učvršćivačem",
           "manufacturerNote": null,
           "officialSpecification": "2.0 kg tin incl. hardener",
           "salesPack": "1",
@@ -20774,7 +20774,7 @@
       "variants": [
         {
           "articleNumber": "144.752",
-          "label": "23 x 1.8 cm",
+          "label": "23 x 1,8 cm",
           "manufacturerNote": null,
           "officialSpecification": "23 x 1.8 cm",
           "salesPack": "100",
@@ -21704,7 +21704,7 @@
       "variants": [
         {
           "articleNumber": "130.857",
-          "label": "Limenka 1.0 kg sa učvršćivačem",
+          "label": "Limenka 1,0 kg sa učvršćivačem",
           "manufacturerNote": null,
           "officialSpecification": "1.0 kg tin incl. hardener",
           "salesPack": "1",
@@ -21715,7 +21715,7 @@
         },
         {
           "articleNumber": "127.977",
-          "label": "Limenka 2.0 kg sa učvršćivačem",
+          "label": "Limenka 2,0 kg sa učvršćivačem",
           "manufacturerNote": null,
           "officialSpecification": "2.0 kg tin incl. hardener",
           "salesPack": "1",
@@ -21726,7 +21726,7 @@
         },
         {
           "articleNumber": "134.155",
-          "label": "Kartuša 1.5 kg sa učvršćivačem",
+          "label": "Kartuša 1,5 kg sa učvršćivačem",
           "manufacturerNote": null,
           "officialSpecification": "1.5 kg cartridge incl. hardener",
           "salesPack": "1",
@@ -21737,7 +21737,7 @@
         },
         {
           "articleNumber": "132.214",
-          "label": "Kartuša 2.9 kg sa učvršćivačem",
+          "label": "Kartuša 2,9 kg sa učvršćivačem",
           "manufacturerNote": null,
           "officialSpecification": "2.9 kg cartridge incl. hardener",
           "salesPack": "1",
@@ -21748,7 +21748,7 @@
         },
         {
           "articleNumber": "128.145",
-          "label": "Kartuša 9.7 kg sa učvršćivačem",
+          "label": "Kartuša 9,7 kg sa učvršćivačem",
           "manufacturerNote": null,
           "officialSpecification": "9.7 kg cartridge incl. hardener",
           "salesPack": "2",
@@ -21845,7 +21845,7 @@
       "variants": [
         {
           "articleNumber": "159.755",
-          "label": "Limenka 1.3 kg sa učvršćivačem",
+          "label": "Limenka 1,3 kg sa učvršćivačem",
           "manufacturerNote": null,
           "officialSpecification": "1.3 kg tin incl. hardener",
           "salesPack": "1",
@@ -21971,7 +21971,7 @@
       "variants": [
         {
           "articleNumber": "159.923",
-          "label": "Limenka 1.3 kg sa učvršćivačem",
+          "label": "Limenka 1,3 kg sa učvršćivačem",
           "manufacturerNote": null,
           "officialSpecification": "1.3 kg tin incl. hardener",
           "salesPack": "1",
@@ -22297,7 +22297,7 @@
       "variants": [
         {
           "articleNumber": "157.622",
-          "label": "Limenka 1.6 kg sa učvršćivačem",
+          "label": "Limenka 1,6 kg sa učvršćivačem",
           "manufacturerNote": null,
           "officialSpecification": "1.6 kg tin incl. hardener",
           "salesPack": "1",
@@ -22409,7 +22409,7 @@
       "variants": [
         {
           "articleNumber": "146.707",
-          "label": "Limenka 1.65 kg sa učvršćivačem",
+          "label": "Limenka 1,65 kg sa učvršćivačem",
           "manufacturerNote": null,
           "officialSpecification": "1.65 kg tin incl. hardener",
           "salesPack": "1",
@@ -22511,7 +22511,7 @@
       "variants": [
         {
           "articleNumber": "158.116",
-          "label": "Limenka 1.3 kg sa učvršćivačem",
+          "label": "Limenka 1,3 kg sa učvršćivačem",
           "manufacturerNote": null,
           "officialSpecification": "1.3 kg tin incl. hardener",
           "salesPack": "1",
@@ -22623,7 +22623,7 @@
       "variants": [
         {
           "articleNumber": "152.357",
-          "label": "Limenka 1.0 kg sa učvršćivačem",
+          "label": "Limenka 1,0 kg sa učvršćivačem",
           "manufacturerNote": null,
           "officialSpecification": "1.0 kg tin incl. hardener",
           "salesPack": "1",
@@ -22634,7 +22634,7 @@
         },
         {
           "articleNumber": "152.978",
-          "label": "Kartuša 1.6 kg sa učvršćivačem",
+          "label": "Kartuša 1,6 kg sa učvršćivačem",
           "manufacturerNote": null,
           "officialSpecification": "1.6 kg cartridge incl. hardener",
           "salesPack": "1",
@@ -22739,7 +22739,7 @@
       "variants": [
         {
           "articleNumber": "158.233",
-          "label": "Limenka 1.3 kg sa učvršćivačem",
+          "label": "Limenka 1,3 kg sa učvršćivačem",
           "manufacturerNote": null,
           "officialSpecification": "1.3 kg tin incl. hardener",
           "salesPack": "1",
@@ -22840,7 +22840,7 @@
       "variants": [
         {
           "articleNumber": "156.543",
-          "label": "Limenka 1.75 kg sa učvršćivačem",
+          "label": "Limenka 1,75 kg sa učvršćivačem",
           "manufacturerNote": null,
           "officialSpecification": "1.75 kg tin incl. hardener",
           "salesPack": "1",
@@ -22945,7 +22945,7 @@
       "variants": [
         {
           "articleNumber": "141.503",
-          "label": "Limenka 1.3 kg sa učvršćivačem",
+          "label": "Limenka 1,3 kg sa učvršćivačem",
           "manufacturerNote": null,
           "officialSpecification": "1.3 kg tin incl. hardener",
           "salesPack": "1",
@@ -22956,7 +22956,7 @@
         },
         {
           "articleNumber": "142.155",
-          "label": "Kartuša 2.2 kg sa učvršćivačem",
+          "label": "Kartuša 2,2 kg sa učvršćivačem",
           "manufacturerNote": null,
           "officialSpecification": "2.2 kg cartridge incl. hardener",
           "salesPack": "1",
@@ -23053,7 +23053,7 @@
       "variants": [
         {
           "articleNumber": "144.649",
-          "label": "36 kom. po kartonu / 5.5 L",
+          "label": "36 kom. po kartonu / 5,5 L",
           "manufacturerNote": null,
           "officialSpecification": "36 pcs. per carton / 5.5 L",
           "salesPack": "1",
@@ -23064,7 +23064,7 @@
         },
         {
           "articleNumber": "145.315",
-          "label": "Poklopac / 5.5 L",
+          "label": "Poklopac / 5,5 L",
           "manufacturerNote": null,
           "officialSpecification": "Lid / 5.5 L",
           "salesPack": "1",
@@ -23370,7 +23370,7 @@
       "variants": [
         {
           "articleNumber": "138.451",
-          "label": "Limenka 1.6 kg sa učvršćivačem",
+          "label": "Limenka 1,6 kg sa učvršćivačem",
           "manufacturerNote": null,
           "officialSpecification": "1.6 kg tin incl. hardener",
           "salesPack": "1",
@@ -23471,7 +23471,7 @@
       "variants": [
         {
           "articleNumber": "140.795",
-          "label": "Limenka 1.5 kg sa učvršćivačem",
+          "label": "Limenka 1,5 kg sa učvršćivačem",
           "manufacturerNote": null,
           "officialSpecification": "1.5 kg tin incl. hardener",
           "salesPack": "1",
@@ -23568,7 +23568,7 @@
       "variants": [
         {
           "articleNumber": "137.206",
-          "label": "Limenka 2.0 kg sa učvršćivačem",
+          "label": "Limenka 2,0 kg sa učvršćivačem",
           "manufacturerNote": null,
           "officialSpecification": "2.0 kg tin incl. hardener",
           "salesPack": "1",
@@ -23848,7 +23848,7 @@
       "variants": [
         {
           "articleNumber": "153.284",
-          "label": "Limenka 1.8 kg sa učvršćivačem",
+          "label": "Limenka 1,8 kg sa učvršćivačem",
           "manufacturerNote": null,
           "officialSpecification": "1.8 kg tin incl. hardener",
           "salesPack": "1",
@@ -23953,7 +23953,7 @@
       "variants": [
         {
           "articleNumber": "151.945",
-          "label": "1.0 l",
+          "label": "1,0 l",
           "manufacturerNote": null,
           "officialSpecification": "1.0 l",
           "salesPack": "1",
@@ -24624,7 +24624,7 @@
         "productType": "Vibraciona brusilica",
         "subtype": "Akumulatorska vibraciona brusilica",
         "shortDescription": "Akumulatorska vibraciona brusilica sa hodom 3 mm, u kompletu sa dve baterije, punjačem i koferom.",
-        "longDescription": "CSH-CMS01 je kompaktna akumulatorska vibraciona brusilica sa 10.8 V 2.5 Ah Li-ion baterijom, koja radi do 40 minuta neprekidno, odnosno do 2 dana uz pauze, a puni se za 60 minuta. Motor bez četkica reguliše se u 6 stepeni, uz hod od 3 mm i brzinu 4.000 - 10.000 o/min. Komplet sadrži četiri podloške (2x PSA, 2x čičak), punjač i dodatnu bateriju, sve u koferu.",
+        "longDescription": "CSH-CMS01 je kompaktna akumulatorska vibraciona brusilica sa 10,8 V 2,5 Ah Li-ion baterijom, koja radi do 40 minuta neprekidno, odnosno do 2 dana uz pauze, a puni se za 60 minuta. Motor bez četkica reguliše se u 6 stepeni, uz hod od 3 mm i brzinu 4.000 - 10.000 o/min. Komplet sadrži četiri podloške (2x PSA, 2x čičak), punjač i dodatnu bateriju, sve u koferu.",
         "purpose": "Tačkasto brušenje i uklanjanje grešaka u laku",
         "facts": [
           {
@@ -24877,7 +24877,7 @@
         "productType": "Jakna",
         "subtype": "Veličine S – 3XL",
         "shortDescription": "Crna postavljena stretch jakna sa Carsystem štampom, dostupna u veličinama S – 3XL.",
-        "longDescription": "Carsystem postavljena stretch jakna u crnoj boji izrađena je od 100% poliamida, sa laganim uskim dijagonalnim kanalima i bočnim delovima od rastegljivog materijala za udobnost i sportski izgled. Bočni džepovi imaju rajsferšlus, a jakna je otporna na vodu i vetar. Namenjena je prelaznim sezonama i dostupna u šest veličina. Model na fotografiji visok je 1.85 m i nosi veličinu L.",
+        "longDescription": "Carsystem postavljena stretch jakna u crnoj boji izrađena je od 100% poliamida, sa laganim uskim dijagonalnim kanalima i bočnim delovima od rastegljivog materijala za udobnost i sportski izgled. Bočni džepovi imaju rajsferšlus, a jakna je otporna na vodu i vetar. Namenjena je prelaznim sezonama i dostupna u šest veličina. Model na fotografiji visok je 1,85 m i nosi veličinu L.",
         "purpose": "Nošenje u prelaznim sezonama",
         "facts": [
           {
@@ -26885,7 +26885,7 @@
       "variants": [
         {
           "articleNumber": "144.957",
-          "label": "100 kom. po kartonu / 0.5 L",
+          "label": "100 kom. po kartonu / 0,5 L",
           "manufacturerNote": null,
           "officialSpecification": "100 pcs. per carton / 0.5 L",
           "salesPack": "100",
@@ -26896,7 +26896,7 @@
         },
         {
           "articleNumber": "144.958",
-          "label": "100 kom. po kartonu / 1.0 L",
+          "label": "100 kom. po kartonu / 1,0 L",
           "manufacturerNote": null,
           "officialSpecification": "100 pcs. per carton / 1.0 L",
           "salesPack": "100",
@@ -26907,7 +26907,7 @@
         },
         {
           "articleNumber": "145.784",
-          "label": "100 kom. po kartonu / 1.8 L",
+          "label": "100 kom. po kartonu / 1,8 L",
           "manufacturerNote": null,
           "officialSpecification": "100 pcs. per carton / 1.8 L",
           "salesPack": "100",
@@ -27071,7 +27071,7 @@
       "variants": [
         {
           "articleNumber": "149.613",
-          "label": "Limenka 1.0 kg sa učvršćivačem",
+          "label": "Limenka 1,0 kg sa učvršćivačem",
           "manufacturerNote": null,
           "officialSpecification": "1.0 kg tin incl. hardener",
           "salesPack": "1",
@@ -27699,7 +27699,7 @@
       "variants": [
         {
           "articleNumber": "156.451",
-          "label": "5.0 kg",
+          "label": "5,0 kg",
           "manufacturerNote": null,
           "officialSpecification": "5.0 kg",
           "salesPack": "1",
@@ -27802,7 +27802,7 @@
       "variants": [
         {
           "articleNumber": "156.452",
-          "label": "5.0 kg",
+          "label": "5,0 kg",
           "manufacturerNote": null,
           "officialSpecification": "5.0 kg",
           "salesPack": "1",
@@ -29818,7 +29818,7 @@
       "variants": [
         {
           "articleNumber": "137.547",
-          "label": "1.3 kg",
+          "label": "1,3 kg",
           "manufacturerNote": null,
           "officialSpecification": "1.3 kg",
           "salesPack": "1",
@@ -34456,7 +34456,7 @@
             "description": "Štiti bateriju od pregrevanja."
           }
         ],
-        "advice": "Okvirna vremena punjenja: baterije 2.5 Ah – 50–60 minuta / baterije 5.0 Ah – 100–120 minuta."
+        "advice": "Okvirna vremena punjenja: baterije 2,5 Ah – 50–60 minuta / baterije 5,0 Ah – 100–120 minuta."
       },
       "shade": null,
       "recommendedSlugs": []
@@ -34577,7 +34577,7 @@
           },
           {
             "title": "Dodatno malo jezgro rolne",
-            "description": "Dodatno malo jezgro rolne (Ø ~2.5 cm) omogućava praktično rukovanje i štedi prostor."
+            "description": "Dodatno malo jezgro rolne (Ø ~2,5 cm) omogućava praktično rukovanje i štedi prostor."
           },
           {
             "title": "Dobra uočljivost",
@@ -35305,7 +35305,7 @@
     },
     {
       "slug": "carsystem-rupes-9-holder-bigfoot",
-      "name": "Rupes 9. Holder BigFoot",
+      "name": "RUPES Holder BigFoot",
       "sourceKey": "finish/rupes-9-holder-bigfoot-wall-racket",
       "sourceUrl": "https://www.carsystem.org/en/products/detail/finish/rupes-9-holder-bigfoot-wall-racket",
       "officialName": "Rupes 9. Holder BigFoot",
@@ -35330,7 +35330,7 @@
       "variants": [
         {
           "articleNumber": "158.134",
-          "label": "Crna / 32 x 20.5 cm",
+          "label": "Crna / 32 x 20,5 cm",
           "manufacturerNote": null,
           "officialSpecification": "Black / 32 x 20.5 cm",
           "salesPack": "1",
@@ -35840,7 +35840,7 @@
     },
     {
       "slug": "carsystem-rupes-ibrid-nano",
-      "name": "RUPES Ibrid Nano",
+      "name": "RUPES iBrid Nano",
       "sourceKey": "abrasives/rupes-ibrid-nano-battery-operated-mini-sanding-and-polishing-machine",
       "sourceUrl": "https://www.carsystem.org/en/products/detail/abrasives/rupes-ibrid-nano-battery-operated-mini-sanding-and-polishing-machine",
       "officialName": "RUPES Ibrid Nano",
@@ -35868,7 +35868,7 @@
       "variants": [
         {
           "articleNumber": "157.318",
-          "label": "HR81M / STB Ibrid Nano kratak vrat",
+          "label": "HR81M / STB iBrid Nano kratak vrat",
           "manufacturerNote": null,
           "officialSpecification": "HR81M / STB Ibrid Nano short neck",
           "salesPack": "1",
@@ -35879,7 +35879,7 @@
         },
         {
           "articleNumber": "157.319",
-          "label": "HR81ML / STB Ibrid Nano dugačak vrat",
+          "label": "HR81ML / STB iBrid Nano dugačak vrat",
           "manufacturerNote": null,
           "officialSpecification": "HR81ML / STB Ibrid Nano long neck",
           "salesPack": "1",
@@ -36098,7 +36098,7 @@
     },
     {
       "slug": "carsystem-rupes-ibrid-nano-q-maq",
-      "name": "RUPES Ibrid Nano Q-MAQ",
+      "name": "RUPES iBrid Nano Q-MAG",
       "sourceKey": "abrasives/rupes-ibrid-nano-q-maq-battery-operated-mini-sanding-and-polishing-machine",
       "sourceUrl": "https://www.carsystem.org/en/products/detail/abrasives/rupes-ibrid-nano-q-maq-battery-operated-mini-sanding-and-polishing-machine",
       "officialName": "RUPES Ibrid Nano Q-MAQ",
@@ -36126,7 +36126,7 @@
       "variants": [
         {
           "articleNumber": "157.320",
-          "label": "MAQ HQM83 / STB / Ibrid Nano Q-MAG",
+          "label": "MAQ HQM83 / STB / iBrid Nano Q-MAG",
           "manufacturerNote": null,
           "officialSpecification": "MAQ HQM83 / STB / Ibrid Nano Q-MAG",
           "salesPack": "1",
@@ -36280,7 +36280,7 @@
         "productType": "Mini polirka",
         "subtype": "Mašina za poliranje · akumulatorska",
         "shortDescription": "RUPES Bigfoot HLR75STB je akumulatorska mini orbitalna mašina za poliranje sa orbitom od 12 mm.",
-        "longDescription": "RUPES Bigfoot HLR75STB je akumulatorska mini mašina za poliranje sa orbitalnim kretanjem i prečnikom orbite od 12 mm. Baterija 18 V - 2.5 Ah ima LED prikaz, autonomiju od 35 - 45 min. i vreme punjenja od 35 min. Podloška je prečnika 75 mm, a broj obrtaja podesiv je do 5.500 o/min. U isporuci su mašina, dve punjive baterije i punjač.",
+        "longDescription": "RUPES Bigfoot HLR75STB je akumulatorska mini mašina za poliranje sa orbitalnim kretanjem i prečnikom orbite od 12 mm. Baterija 18 V - 2,5 Ah ima LED prikaz, autonomiju od 35 - 45 min. i vreme punjenja od 35 min. Podloška je prečnika 75 mm, a broj obrtaja podesiv je do 5.500 o/min. U isporuci su mašina, dve punjive baterije i punjač.",
         "purpose": "Orbitalno poliranje manjih površina",
         "facts": [
           {
@@ -36289,7 +36289,7 @@
           },
           {
             "label": "Baterija",
-            "value": "18 V - 2.5 Ah, sa LED prikazom"
+            "value": "18 V - 2,5 Ah, sa LED prikazom"
           },
           {
             "label": "Autonomija",
@@ -36325,7 +36325,7 @@
           },
           {
             "label": "Sadržaj isporuke",
-            "value": "2 x punjiva baterija 18 V - 2.5 Ah"
+            "value": "2 x punjiva baterija 18 V - 2,5 Ah"
           },
           {
             "label": "Sadržaj isporuke",
@@ -36393,7 +36393,7 @@
       "variants": [
         {
           "articleNumber": "157.330",
-          "label": "LD30 / prečnik orbite 1.5 mm",
+          "label": "LD30 / prečnik orbite 1,5 mm",
           "manufacturerNote": null,
           "officialSpecification": "LD30 / 1.5 mm orbital diameter",
           "salesPack": "1",
@@ -36415,8 +36415,8 @@
       "content": {
         "productType": "Ekscentrična brusilica",
         "subtype": "Mini ekscentrična brusilica · pneumatska",
-        "shortDescription": "Pneumatska mini ekscentrična brusilica sa prečnikom orbite 1.5 mm i podloškom od 30 mm.",
-        "longDescription": "RUPES LD30 je pneumatska mini ekscentrična brusilica sa prečnikom orbite 1.5 mm. Opremljena je čičak (Velcro®) podloškom prečnika 30 mm. Broj obrtaja je podesiv do 7,500 o/min.",
+        "shortDescription": "Pneumatska mini ekscentrična brusilica sa prečnikom orbite 1,5 mm i podloškom od 30 mm.",
+        "longDescription": "RUPES LD30 je pneumatska mini ekscentrična brusilica sa prečnikom orbite 1,5 mm. Opremljena je čičak (Velcro®) podloškom prečnika 30 mm. Broj obrtaja je podesiv do 7,500 o/min.",
         "purpose": "Brušenje manjih površina pneumatskom mini brusilicom",
         "facts": [
           {
@@ -36425,7 +36425,7 @@
           },
           {
             "label": "Prečnik orbite",
-            "value": "1.5 mm"
+            "value": "1,5 mm"
           },
           {
             "label": "Podloška",
@@ -36615,7 +36615,7 @@
       "variants": [
         {
           "articleNumber": "157.329",
-          "label": "SL42AES / orbita 4.8 mm",
+          "label": "SL42AES / orbita 4,8 mm",
           "manufacturerNote": null,
           "officialSpecification": "SL42AES / 4.8 mm orbital diameter",
           "salesPack": "1",
@@ -36638,7 +36638,7 @@
         "productType": "Vibraciona brusilica",
         "subtype": "Vibraciona brusilica · električna",
         "shortDescription": "Električna vibraciona brusilica za brusne trake dimenzija 70 x 400 mm.",
-        "longDescription": "Električna vibraciona brusilica za brusne trake dimenzija 70 x 400 mm. Orbita iznosi 4.8 mm, a broj obrtaja je podesiv do 7.000 o/min. Snaga motora je 550 W.",
+        "longDescription": "Električna vibraciona brusilica za brusne trake dimenzija 70 x 400 mm. Orbita iznosi 4,8 mm, a broj obrtaja je podesiv do 7.000 o/min. Snaga motora je 550 W.",
         "purpose": "Brušenje brusnim trakama 70 x 400 mm",
         "facts": [
           {
@@ -36647,7 +36647,7 @@
           },
           {
             "label": "Orbita",
-            "value": "4.8 mm"
+            "value": "4,8 mm"
           },
           {
             "label": "Dimenzija",
@@ -36722,7 +36722,7 @@
       "variants": [
         {
           "articleNumber": "157.337",
-          "label": "SLP41A / orbita 4.8 mm",
+          "label": "SLP41A / orbita 4,8 mm",
           "manufacturerNote": null,
           "officialSpecification": "SLP41A / 4.8 mm orbital diameter",
           "salesPack": "1",
@@ -36756,7 +36756,7 @@
         "productType": "Vibraciona brusilica",
         "subtype": "Vibraciona brusilica · pneumatska",
         "shortDescription": "Pneumatska vibraciona brusilica za brusne trake dimenzija 70 x 400 mm.",
-        "longDescription": "Pneumatska vibraciona brusilica za brusne trake dimenzija 70 x 400 mm. Orbita iznosi 4.8 mm, a broj obrtaja je podesiv do 10.000 o/min.",
+        "longDescription": "Pneumatska vibraciona brusilica za brusne trake dimenzija 70 x 400 mm. Orbita iznosi 4,8 mm, a broj obrtaja je podesiv do 10.000 o/min.",
         "purpose": "Brušenje brusnim trakama 70 x 400 mm",
         "facts": [
           {
@@ -36765,7 +36765,7 @@
           },
           {
             "label": "Orbita",
-            "value": "4.8 mm"
+            "value": "4,8 mm"
           },
           {
             "label": "Dimenzija",
@@ -41925,7 +41925,7 @@
       "variants": [
         {
           "articleNumber": "127.972",
-          "label": "Limenka 1.8 kg sa učvršćivačem",
+          "label": "Limenka 1,8 kg sa učvršćivačem",
           "manufacturerNote": null,
           "officialSpecification": "1.8 kg tin incl. hardener",
           "salesPack": "1",
@@ -41936,7 +41936,7 @@
         },
         {
           "articleNumber": "132.116",
-          "label": "Kartuša 2.6 kg sa učvršćivačem",
+          "label": "Kartuša 2,6 kg sa učvršćivačem",
           "manufacturerNote": null,
           "officialSpecification": "2.6 kg cartridge incl. hardener",
           "salesPack": "1",
@@ -42954,7 +42954,7 @@
       "variants": [
         {
           "articleNumber": "127.978",
-          "label": "Limenka 1.5 kg sa učvršćivačem",
+          "label": "Limenka 1,5 kg sa učvršćivačem",
           "manufacturerNote": null,
           "officialSpecification": "1.5 kg tin incl. hardener",
           "salesPack": "1",
@@ -43238,7 +43238,7 @@
       "variants": [
         {
           "articleNumber": "135.597",
-          "label": "Limenka 1.5 kg sa učvršćivačem",
+          "label": "Limenka 1,5 kg sa učvršćivačem",
           "manufacturerNote": null,
           "officialSpecification": "1.5 kg tin incl. hardener",
           "salesPack": "1",
@@ -43352,7 +43352,7 @@
       "variants": [
         {
           "articleNumber": "124.315",
-          "label": "Limenka 1.0 l",
+          "label": "Limenka 1,0 l",
           "manufacturerNote": null,
           "officialSpecification": "1.0 l tin",
           "salesPack": "1",
@@ -43379,7 +43379,7 @@
         "productType": "Razređivač",
         "subtype": "Razređivač",
         "shortDescription": "Razređivač za Carsystem Spray i Carsystem Spray Plus poliesterske gitove koji se nanose pištoljem.",
-        "longDescription": "Spray Thinner je razređivač namenjen poliesterskim gitovima za nanošenje pištoljem Carsystem Spray i Carsystem Spray Plus. Isporučuje se u limenci od 1.0 l.",
+        "longDescription": "Spray Thinner je razređivač namenjen poliesterskim gitovima za nanošenje pištoljem Carsystem Spray i Carsystem Spray Plus. Isporučuje se u limenci od 1,0 l.",
         "purpose": "Razređivanje poliesterskog gita za nanošenje pištoljem",
         "facts": [
           {
@@ -44575,7 +44575,7 @@
       "variants": [
         {
           "articleNumber": "138.587",
-          "label": "Limenka 0.9 kg sa učvršćivačem",
+          "label": "Limenka 0,9 kg sa učvršćivačem",
           "manufacturerNote": null,
           "officialSpecification": "0.9 kg tin incl. hardener",
           "salesPack": "1",
@@ -45450,7 +45450,7 @@
       "variants": [
         {
           "articleNumber": "151.947",
-          "label": "1.0 kg",
+          "label": "1,0 kg",
           "manufacturerNote": null,
           "officialSpecification": "1.0 kg",
           "salesPack": "1",
@@ -46426,7 +46426,7 @@
       "variants": [
         {
           "articleNumber": "148.505",
-          "label": "Crvena / 0.5 L",
+          "label": "Crvena / 0,5 L",
           "manufacturerNote": null,
           "officialSpecification": "Red / 0.5 L",
           "salesPack": "1",
@@ -46437,7 +46437,7 @@
         },
         {
           "articleNumber": "148.504",
-          "label": "Crna / 0.5 L",
+          "label": "Crna / 0,5 L",
           "manufacturerNote": null,
           "officialSpecification": "Black / 0.5 L",
           "salesPack": "1",
@@ -46465,7 +46465,7 @@
         "productType": "Pasta za nijansiranje",
         "subtype": "Pasta za nijansiranje",
         "shortDescription": "Pasta za nijansiranje Carsystem akrilnih punilaca, uz dodatak od najviše 1 - 5 %.",
-        "longDescription": "Tinting paste filler je pasta za nijansiranje akrilnih punilaca. Dodaje se u udelu od najviše 1 - 5 %, kako bi se punilac približio nijansi bazne boje. Dostupna je u crvenoj i crnoj varijanti od 0.5 L.",
+        "longDescription": "Tinting paste filler je pasta za nijansiranje akrilnih punilaca. Dodaje se u udelu od najviše 1 - 5 %, kako bi se punilac približio nijansi bazne boje. Dostupna je u crvenoj i crnoj varijanti od 0,5 L.",
         "purpose": "Nijansiranje akrilnih punilaca",
         "facts": [
           {
@@ -48500,7 +48500,7 @@
           },
           {
             "label": "Baterija",
-            "value": "3.7V 5,2 Ah Li-Ion"
+            "value": "3,7V 5,2 Ah Li-Ion"
           },
           {
             "label": "Vreme punjenja",
@@ -48616,7 +48616,7 @@
           },
           {
             "label": "Baterija",
-            "value": "3.7V 2.6 Ah Li-Ion"
+            "value": "3,7V 2,6 Ah Li-Ion"
           },
           {
             "label": "Vreme punjenja",

@@ -1,3 +1,4 @@
+import { abrasiveBackingTerms } from "@/lib/search/abrasive-backing.mjs";
 import { publicSkuOf } from "@/lib/catalog/public-code";
 import removedFromCustomerCatalog from "@/data/catalog/removed-from-customer-catalog.json";
 import suppliedImages from "@/data/catalog/image-supply/supplied-images.json";
@@ -170,6 +171,8 @@ export type ProductCatalogMetadata = {
   officialName: string;
   displayNameSr: string;
   cosmosCode: string | null;
+  /** Cosmos šifru deli više varijanti iste kartice — nije jedinstven `?varijanta=` ključ. */
+  cosmosCodeShared?: boolean;
   ralCode: string | null;
   colorName: string | null;
   finish: string | null;
@@ -289,6 +292,8 @@ export type CarsystemProduct = {
   brandSlug: string;
   programSlug: string;
   phaseSlug: RefinishPhaseSlug;
+  /** Dodatne faze u kojima se proizvod zvanično koristi (R-M komponente) — samo za filtere. */
+  secondaryPhaseSlugs?: RefinishPhaseSlug[];
   shortDescription: string;
   longDescription: string;
   sku: string;
@@ -516,9 +521,9 @@ export const brands: CarsystemBrand[] = [
     name: "Cosmos Lac",
     logo: "/brands/cosmos-spray.svg",
     description:
-      "Aerosolne boje, tehnički sprejevi i specijalizovane linije za automotive, industrijsku i dekorativnu primenu.",
+      "Aerosolne boje, tehnički sprejevi i specijalizovane linije za automobilsku, industrijsku i dekorativnu primenu.",
     overview:
-      "Cosmos Lac program povezuje RAL i akrilne nijanse, prajmere, lakove, automotive proizvode i specijalizovane linije kroz proverene šifre i varijante.",
+      "Cosmos Lac program povezuje RAL i akrilne nijanse, prajmere, lakove, proizvode za automobile i specijalizovane linije kroz proverene šifre i varijante.",
     programSlugs: ["aerosoli", "boje-i-lakovi", "priprema-povrsine", "potrosni-materijal"],
     catalogOrder: 5,
     presentation: {
@@ -536,7 +541,7 @@ export const brands: CarsystemBrand[] = [
     name: "Baslac",
     logo: "/brands/baslac.svg",
     description:
-      "Profesionalni automotive refinish sistem koji povezuje pripremu podloge, vodene i solventne boje, bezbojne lakove i digitalnu koloristiku.",
+      "Profesionalni refinish sistem za automobile koji povezuje pripremu podloge, vodene i solventne boje, bezbojne lakove i digitalnu koloristiku.",
     overview:
       "Baslac povezuje pripremu, boju, završni lak i pomoćne proizvode u pregledan sistem za radionice kojima su važni jednostavniji izbor i kontrolisan proces.",
     programSlugs: ["boje-i-lakovi", "poliranje"],
@@ -576,9 +581,9 @@ export const brands: CarsystemBrand[] = [
     name: "Befar",
     logo: "/brands/befar.svg",
     description:
-      "Program sunđera i pratećeg materijala za poliranje i završnu obradu u lakirnici.",
+      "Pene i sunđeri za poliranje, podloške, paste i brusni blokovi za završnu obradu u lakirnici.",
     overview:
-      "Befar u javnom katalogu pokriva sunđere za poliranje po boji, dimenziji i nameni, sa jasnim upitom za dostupnost.",
+      "Befar u našem katalogu: pene i sunđeri za poliranje po tvrdoći, dimenziji i nameni, uz podloške i prateći materijal; dostupnost potvrđujemo kroz upit.",
     programSlugs: ["poliranje"],
     catalogOrder: 6,
     presentation: {
@@ -603,7 +608,7 @@ export const brands: CarsystemBrand[] = [
     description:
       "RUPES proizvodi iz Carsystem programa — polirke, brusilice, usisivač i pribor za pripremu i završnu obradu.",
     overview:
-      "RUPES proizvodi koje vodi Carsystem katalog 2026/27: BigFoot polirke, iBrid Nano, Skorpio i orbitalne brusilice, usisivač S145 i prateći pribor. Ovo nije kompletan RUPES katalog.",
+      "RUPES proizvodi iz naše ponude: BigFoot polirke, iBrid Nano, Skorpio i orbitalne brusilice, usisivač S145 i prateći pribor.",
     programSlugs: ["oprema", "poliranje"],
     catalogOrder: 9,
     presentation: {
@@ -943,12 +948,6 @@ const legacyProducts: CarsystemProduct[] = [
         status: "placeholder",
         note: "Dokument se potvrđuje kroz upit",
       },
-      {
-        title: "Uputstvo za upotrebu",
-        kind: "PDF",
-        status: "disabled",
-        note: "Biće povezano sa zvaničnim dokumentom",
-      },
     ],
     relatedProductSlugs: [
       "rm-diamont-bazna-boja",
@@ -1009,12 +1008,6 @@ const legacyProducts: CarsystemProduct[] = [
         status: "placeholder",
         note: "Dokument se potvrđuje kroz upit",
       },
-      {
-        title: "Uputstvo za upotrebu",
-        kind: "PDF",
-        status: "disabled",
-        note: "U pripremi",
-      },
     ],
     relatedProductSlugs: [
       "carsystem-git-multi-green",
@@ -1065,12 +1058,6 @@ const legacyProducts: CarsystemProduct[] = [
         kind: "PDF",
         status: "placeholder",
         note: "Dokument se potvrđuje kroz upit",
-      },
-      {
-        title: "Tehnički list",
-        kind: "PDF",
-        status: "disabled",
-        note: "Dodaje se po proizvodnoj liniji",
       },
     ],
     relatedProductSlugs: [
@@ -1244,12 +1231,6 @@ const legacyProducts: CarsystemProduct[] = [
         status: "placeholder",
         note: "Dokument se potvrđuje kroz upit",
       },
-      {
-        title: "Uputstvo za upotrebu",
-        kind: "PDF",
-        status: "disabled",
-        note: "Dodaje se po artiklu",
-      },
     ],
     relatedProductSlugs: [
       "car-fit-prajmer",
@@ -1356,12 +1337,6 @@ const legacyProducts: CarsystemProduct[] = [
         status: "placeholder",
         note: "Dokument se potvrđuje kroz upit",
       },
-      {
-        title: "Bezbednosni list",
-        kind: "PDF",
-        status: "disabled",
-        note: "Biće povezano sa zvaničnim dokumentom",
-      },
     ],
     relatedProductSlugs: [
       "rm-diamont-bezbojni-lak",
@@ -1411,12 +1386,6 @@ const legacyProducts: CarsystemProduct[] = [
         status: "placeholder",
         note: "Dokument se potvrđuje kroz upit",
       },
-      {
-        title: "Uputstvo za upotrebu",
-        kind: "PDF",
-        status: "disabled",
-        note: "Dodaje se po proizvodnoj liniji",
-      },
     ],
     relatedProductSlugs: [
       "rm-diamont-bezbojni-lak",
@@ -1458,12 +1427,6 @@ const legacyProducts: CarsystemProduct[] = [
       { label: "Rok trajanja", value: "Prema deklaraciji na ambalaži" },
     ],
     documents: [
-      {
-        title: "Uputstvo za upotrebu",
-        kind: "PDF",
-        status: "disabled",
-        note: "Dodaje se po proizvodnoj liniji",
-      },
     ],
     relatedProductSlugs: [
       "car-fit-prajmer",
@@ -1516,7 +1479,7 @@ function tdsDocument(href: string): ProductDocument {
     kind: "PDF",
     href,
     status: "available",
-    note: "Dostupno iz dostavljenog TDS materijala.",
+    note: "Tehnički list proizvođača.",
   };
 }
 
@@ -1528,12 +1491,6 @@ function documentsWithTds(productName: string, href: string): ProductDocument[] 
       kind: "PDF",
       status: "placeholder",
       note: `Dostupno na upit za ${productName}.`,
-    },
-    {
-      title: "Uputstvo za upotrebu",
-      kind: "PDF",
-      status: "disabled",
-      note: "U pripremi za javni katalog.",
     },
   ];
 }
@@ -1552,19 +1509,13 @@ function documentsOnRequest(productName: string): ProductDocument[] {
       status: "placeholder",
       note: "Dostavlja se kada je primenljivo za potvrđen artikal.",
     },
-    {
-      title: "Uputstvo za upotrebu",
-      kind: "PDF",
-      status: "disabled",
-      note: "U pripremi za javni katalog.",
-    },
   ];
 }
 
 function createProduct(seed: ProductSeed): CarsystemProduct {
   const image = seed.productImage ?? {
     src: placeholderProductImage,
-    alt: `${seed.name}, ilustrativni prikaz proizvoda`,
+    alt: `${seed.name} — fotografija proizvoda nije dostupna`,
   };
 
   return {
@@ -1616,12 +1567,13 @@ const befarPadColors = [
 
 const befarPadSizes = [
   {
-    label: "25 mm x 150 mm",
+    // Befar zapis: prečnik × debljina (kao u šiframa, npr. 04403 „150 × 25 mm”).
+    label: "150 × 25 mm",
     slug: "25x150",
     detail: "Uska kontaktna površina",
   },
   {
-    label: "50 mm x 150 mm",
+    label: "150 × 50 mm",
     slug: "50x150",
     detail: "Šira kontaktna površina",
   },
@@ -1874,6 +1826,8 @@ const productRecords: CarsystemProduct[] = [
     longDescription:
       "Carsystem F19 brusni diskovi su deo abrazivnog programa za pripremu površine, od obrade gita do finije pripreme pre naredne faze.",
     sku: "CS-F19-DISC",
+    // Zvanični podnaslov (carsystem.org): „Film abrasive - 150 mm - 25 holes” — film, ne papir.
+    searchTerms: abrasiveBackingTerms("Film abrasive - 150 mm - 25 holes"),
     packages: [{ label: "P80-P800", detail: "Granulacije po izboru" }],
     purpose: "Međufazno brušenje i priprema za podlogu ili boju",
     badges: ["Abrazivi", "P80-P800", "Na upit"],
@@ -2081,24 +2035,23 @@ const productRecords: CarsystemProduct[] = [
           },
         ],
       },
+      // Zvanična F.23 stranica (recommendedProductUrls u data/carsystem-sync/raw/website-en.generated.json)
+      // preporučuje upravo ova dva zapisa: interface-pad-interface-pad-150-mm i excenter-back-pad-t19-back-pad-150-mm.
       compatibleProducts: {
-        reviewStatus: "needs_confirmation",
-        reviewerNote:
-          "Zvanična F.23 stranica preporučuje Interface Pad i Excenter Back Pad T.19; veza sa tim proizvodima u katalogu još nije potvrđena.",
+        reviewStatus: "confirmed",
         content: {
           title: "Koristi se zajedno sa",
-          description:
-            "Prikazuju se samo proizvodi čija je kompatibilnost potvrđena zvaničnim izvorom.",
+          description: "Pribor koji proizvođač preporučuje uz ovaj proizvod.",
           items: [
             {
               productSlug: "carsystem-interface-pad",
               note: "Zvanično preporučen uz F.23.",
-              reviewStatus: "needs_confirmation",
+              reviewStatus: "confirmed",
             },
             {
               productSlug: "carsystem-excenter-back-pad-t-19",
               note: "Zvanično preporučen uz F.23.",
-              reviewStatus: "needs_confirmation",
+              reviewStatus: "confirmed",
             },
           ],
         },
@@ -2303,12 +2256,6 @@ const productRecords: CarsystemProduct[] = [
         kind: "PDF",
         status: "placeholder",
         note: "Dostupno na upit za Baslac 60-20 razređivač.",
-      },
-      {
-        title: "Uputstvo za upotrebu",
-        kind: "PDF",
-        status: "disabled",
-        note: "U pripremi za javni katalog.",
       },
     ],
     specifications: [
@@ -2617,9 +2564,13 @@ export function toProductListingProduct(product: CarsystemProduct): CarsystemPro
     brandSlug: product.brandSlug,
     programSlug: product.programSlug,
     phaseSlug: product.phaseSlug,
+    ...(product.secondaryPhaseSlugs ? { secondaryPhaseSlugs: product.secondaryPhaseSlugs } : {}),
     shortDescription: product.shortDescription,
     longDescription: product.longDescription,
     sku: product.sku,
+    // Pravilo javne šifre (`publicSkuOf`, `publicCode`) mora da važi i u listing prikazima.
+    ...(product.skuIsInternalOnly ? { skuIsInternalOnly: true } : {}),
+    ...(product.publicCode ? { publicCode: product.publicCode } : {}),
     packages: product.packages,
     purpose: product.purpose,
     badges: product.badges,
@@ -2863,7 +2814,7 @@ function getFamilyVariantSelector(
             item.catalogMetadata?.volume ??
             item.name),
       optionValueIds: { [groupId]: item.variantId ?? item.slug },
-      sku: item.catalogMetadata?.cosmosCode ?? publicSkuOf(item) ?? undefined,
+      sku: item.catalogMetadata?.cosmosCode ?? item.publicCode ?? publicSkuOf(item) ?? undefined,
       package: getProductPackageLabel(item),
       status: getProductPublicStatus(item),
       slug: item.slug,
@@ -2927,7 +2878,7 @@ function getBefarVariantSelector(
         color: `color:${item.variantOptions?.color}`,
         size: `size:${item.variantOptions?.size}`,
       },
-      sku: item.sku,
+      sku: item.publicCode ?? publicSkuOf(item) ?? undefined,
       package: item.packages[0]?.label,
       dimension: item.variantOptions?.size,
       status: getProductPublicStatus(item),

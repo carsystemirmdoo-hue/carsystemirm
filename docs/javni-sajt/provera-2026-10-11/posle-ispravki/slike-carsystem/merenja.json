@@ -1,0 +1,830 @@
+[
+ {
+  "iou": 0.9995,
+  "dEmedian": 0.74,
+  "dE95": 3.17,
+  "black0": [
+   0.0,
+   0.0
+  ],
+  "white": [
+   0.0,
+   0.0
+  ],
+  "semi": [
+   0.246,
+   0.241
+  ],
+  "id": "JS-0670",
+  "slug": "carsystem-adapter-for-cps-paint-cup-systems",
+  "sha256": "008f35e2a0b9e154a19daf502ff18e9e275715462e790ce198f2da54e6a1cea0",
+  "bytes": 59590,
+  "originalUrl": "https://www.carsystem.org/fileadmin/products/images/158.063/cs-adapters-fuer-cps.webp",
+  "izvorFormat": "webp"
+ },
+ {
+  "iou": 0.9998,
+  "dEmedian": 23.5,
+  "dE95": 29.8,
+  "black0": [
+   0.003,
+   0.001
+  ],
+  "white": [
+   0.035,
+   0.088
+  ],
+  "semi": [
+   0.288,
+   0.286
+  ],
+  "id": "JS-0671",
+  "slug": "carsystem-anti-rust-putty",
+  "sha256": "c41b05b8bbc32989aa94265ecdf561ba0e6fadd3f4dc63337520085474ffe468",
+  "bytes": 171956,
+  "originalUrl": "https://www.carsystem.org/fileadmin/products/images/149.612/149.612-cs-anti-rust-putty-inkl-haerter-3D.png",
+  "izvorFormat": "png"
+ },
+ {
+  "iou": 0.998,
+  "dEmedian": 24.83,
+  "dE95": 30.33,
+  "black0": [
+   0.04,
+   0.005
+  ],
+  "white": [
+   0.001,
+   0.011
+  ],
+  "semi": [
+   0.313,
+   0.298
+  ],
+  "id": "JS-0672",
+  "slug": "carsystem-applicator",
+  "sha256": "14ab2436bc1258d567b6117b72b9d00964bfe3b68d24733753a286dfc66f208c",
+  "bytes": 166036,
+  "originalUrl": "https://www.carsystem.org/fileadmin/products/images/139.325/139325-cs-uniflex-glas-applikator.png",
+  "izvorFormat": "png"
+ },
+ {
+  "iou": 0.9993,
+  "dEmedian": 14.19,
+  "dE95": 28.37,
+  "black0": [
+   0.22,
+   0.074
+  ],
+  "white": [
+   0.001,
+   0.03
+  ],
+  "semi": [
+   0.325,
+   0.289
+  ],
+  "id": "JS-0673",
+  "slug": "carsystem-bumper-stand",
+  "sha256": "4e447a7c0ee5f43c774d649eba1ebf86e5881ba21c8158bb17197a251eeccc42",
+  "bytes": 113090,
+  "originalUrl": "https://www.carsystem.org/fileadmin/products/images/159.413/159.413-cs-bumper-stand.png",
+  "izvorFormat": "png"
+ },
+ {
+  "iou": 0.9998,
+  "dEmedian": 17.92,
+  "dE95": 23.27,
+  "black0": [
+   0.752,
+   0.35
+  ],
+  "white": [
+   0.0,
+   0.0
+  ],
+  "semi": [
+   0.054,
+   0.041
+  ],
+  "id": "JS-0674",
+  "slug": "carsystem-can-scraper",
+  "sha256": "2f22e239af0b0a4ed690549522fbb6c4eb0bde17f3ec3a61a7e316fa1e403879",
+  "bytes": 140308,
+  "originalUrl": "https://www.carsystem.org/fileadmin/products/images/159.672/159672-cs-can-scraper-set.png",
+  "izvorFormat": "png"
+ },
+ {
+  "iou": 0.9987,
+  "dEmedian": 22.03,
+  "dE95": 32.98,
+  "black0": [
+   0.001,
+   0.0
+  ],
+  "white": [
+   0.0,
+   0.001
+  ],
+  "semi": [
+   0.346,
+   0.341
+  ],
+  "id": "JS-0675",
+  "slug": "carsystem-crash-film",
+  "sha256": "6ed80eed625df145d587c2bc8051ff1f71389c2fea7b5a2b01a3506cb31adb87",
+  "bytes": 167066,
+  "originalUrl": "https://www.carsystem.org/fileadmin/products/images/160.381/160381-crash-film-75cmx60m.png",
+  "izvorFormat": "png"
+ },
+ {
+  "iou": 0.9999,
+  "dEmedian": 22.13,
+  "dE95": 28.48,
+  "black0": [
+   0.254,
+   0.003
+  ],
+  "white": [
+   0.0,
+   0.0
+  ],
+  "semi": [
+   0.017,
+   0.014
+  ],
+  "id": "JS-0676",
+  "slug": "carsystem-dispenser-for-5-kg-polish",
+  "sha256": "86b20055ea6c1e7907c77a4420af153c70316fbc60a59add05282b8c4502b0a7",
+  "bytes": 225466,
+  "originalUrl": "https://www.carsystem.org/fileadmin/products/images/156.460/156460-cs-dispenser-fuer-5kg-politur.png",
+  "izvorFormat": "png"
+ },
+ {
+  "iou": 0.9997,
+  "dEmedian": 1.5,
+  "dE95": 20.91,
+  "black0": [
+   0.0,
+   0.0
+  ],
+  "white": [
+   0.002,
+   0.018
+  ],
+  "semi": [
+   0.302,
+   0.301
+  ],
+  "id": "JS-0679",
+  "slug": "carsystem-fill-putty",
+  "sha256": "5dcf0e3b015ce5512193f62d22e3f7c67779accb6dae1297ace17baa4b97d55e",
+  "bytes": 164866,
+  "originalUrl": "https://www.carsystem.org/fileadmin/products/images/124.550/124552-cs-fuellspachtel-inkl-haerter-1_0-kg.webp",
+  "izvorFormat": "webp"
+ },
+ {
+  "iou": 1.0,
+  "dEmedian": 23.43,
+  "dE95": 33.15,
+  "black0": [
+   0.75,
+   0.154
+  ],
+  "white": [
+   0.0,
+   0.0
+  ],
+  "semi": [
+   0.02,
+   0.015
+  ],
+  "id": "JS-0680",
+  "slug": "carsystem-finish-foam-black-ah",
+  "sha256": "48a351dc5563a0071e3dd540a3768ec16f4f2f3daeb3c534083487a9f4136957",
+  "bytes": 148472,
+  "originalUrl": "https://www.carsystem.org/fileadmin/products/images/157.064/157064-065-finish-foam-black-ah-liegend.png",
+  "izvorFormat": "png"
+ },
+ {
+  "iou": 1.0,
+  "dEmedian": 24.47,
+  "dE95": 34.27,
+  "black0": [
+   0.759,
+   0.115
+  ],
+  "white": [
+   0.0,
+   0.0
+  ],
+  "semi": [
+   0.021,
+   0.016
+  ],
+  "id": "JS-0682",
+  "slug": "carsystem-finish-waffle-foam-black-ah",
+  "sha256": "fad200cdf070865c32def5c4e5e5d7f67900c61e04d7e6af1a8df299648a6788",
+  "bytes": 141610,
+  "originalUrl": "https://www.carsystem.org/fileadmin/products/images/157.066/157066-067-finish-waffle-foam-black-ah.png",
+  "izvorFormat": "png"
+ },
+ {
+  "iou": 0.9996,
+  "dEmedian": 15.46,
+  "dE95": 32.27,
+  "black0": [
+   0.003,
+   0.001
+  ],
+  "white": [
+   0.004,
+   0.059
+  ],
+  "semi": [
+   0.348,
+   0.346
+  ],
+  "id": "JS-0684",
+  "slug": "carsystem-glas",
+  "sha256": "7d9850ae1d37fe509dab6605fc4d90aebe6b2beb5ad4c5462a880c1b19201974",
+  "bytes": 173756,
+  "originalUrl": "https://www.carsystem.org/fileadmin/products/images/127.974/127.974-cs-glas-inkl-haerter-3D.png",
+  "izvorFormat": "png"
+ },
+ {
+  "iou": 1.0,
+  "dEmedian": 19.96,
+  "dE95": 23.34,
+  "black0": [
+   0.0,
+   0.0
+  ],
+  "white": [
+   0.0,
+   0.0
+  ],
+  "semi": [
+   0.0,
+   0.0
+  ],
+  "id": "JS-0685",
+  "slug": "carsystem-glass-fibre-fleece",
+  "sha256": "e27a2ce77773ebd42c0d3eebc9553e02c2b55dcc18d920593cef1519e2b00d97",
+  "bytes": 240494,
+  "originalUrl": "https://www.carsystem.org/fileadmin/products/images/125.421/125421-cs-glasvlies.png",
+  "izvorFormat": "png"
+ },
+ {
+  "iou": 0.9999,
+  "dEmedian": 1.93,
+  "dE95": 26.19,
+  "black0": [
+   0.0,
+   0.001
+  ],
+  "white": [
+   0.148,
+   0.211
+  ],
+  "semi": [
+   0.082,
+   0.077
+  ],
+  "id": "JS-0686",
+  "slug": "carsystem-ks-50-2",
+  "sha256": "e6ec89785637e70e93863f91478b213e1c04f31f47b4c9b232321638ddfea6a6",
+  "bytes": 197862,
+  "originalUrl": "https://www.carsystem.org/fileadmin/products/images/160.007/160007-cs-ks-50-2.webp",
+  "izvorFormat": "webp"
+ },
+ {
+  "iou": 1.0,
+  "dEmedian": 1.03,
+  "dE95": 3.16,
+  "black0": [
+   0.607,
+   0.609
+  ],
+  "white": [
+   0.0,
+   0.0
+  ],
+  "semi": [
+   0.052,
+   0.05
+  ],
+  "id": "JS-0687",
+  "slug": "carsystem-mixing-stick-fast",
+  "sha256": "b0057c7649901b403b0df64999db35b21cb4c82fd07153608fa87e43c0a191c9",
+  "bytes": 278144,
+  "originalUrl": "https://www.carsystem.org/fileadmin/products/images/159.834/159834-cs-mixing-stick-fast.webp",
+  "izvorFormat": "webp"
+ },
+ {
+  "iou": 0.9963,
+  "dEmedian": 2.59,
+  "dE95": 20.73,
+  "black0": [
+   0.0,
+   0.0
+  ],
+  "white": [
+   0.049,
+   0.087
+  ],
+  "semi": [
+   0.29,
+   0.287
+  ],
+  "id": "JS-0689",
+  "slug": "carsystem-multi-flow",
+  "sha256": "1ccdde4f7cd67f3c5dc3b880b5e47d3a2393ead4a2d281b7757037ef4f5b54af",
+  "bytes": 119474,
+  "originalUrl": "https://www.carsystem.org/fileadmin/products/images/160.378/160.378-multi-flow-970g.webp",
+  "izvorFormat": "webp"
+ },
+ {
+  "iou": 0.9994,
+  "dEmedian": 22.01,
+  "dE95": 31.55,
+  "black0": [
+   0.262,
+   0.0
+  ],
+  "white": [
+   0.0,
+   0.004
+  ],
+  "semi": [
+   0.146,
+   0.115
+  ],
+  "id": "JS-0690",
+  "slug": "carsystem-multi-stand",
+  "sha256": "350137b078247e6dedbbf0bea5dbf576b59e80f0abf1a2bbcb98d618973f677b",
+  "bytes": 124490,
+  "originalUrl": "https://www.carsystem.org/fileadmin/products/images/159.563/159.563-cs-multi-stand-drehlackierstaender.png",
+  "izvorFormat": "png"
+ },
+ {
+  "iou": 0.9998,
+  "dEmedian": 22.99,
+  "dE95": 33.69,
+  "black0": [
+   0.448,
+   0.037
+  ],
+  "white": [
+   0.0,
+   0.0
+  ],
+  "semi": [
+   0.045,
+   0.034
+  ],
+  "id": "JS-0691",
+  "slug": "carsystem-pad-saver",
+  "sha256": "0d770d7c31c91c91b865633cbd33be18bd3911917b2c316da57943416dc643f4",
+  "bytes": 455290,
+  "originalUrl": "https://www.carsystem.org/fileadmin/products/images/154.099/154099-cs-pad-saver-5er-box-single.png",
+  "izvorFormat": "png"
+ },
+ {
+  "iou": 0.9996,
+  "dEmedian": 1.6,
+  "dE95": 12.41,
+  "black0": [
+   0.001,
+   0.001
+  ],
+  "white": [
+   0.003,
+   0.011
+  ],
+  "semi": [
+   0.373,
+   0.37
+  ],
+  "id": "JS-0692",
+  "slug": "carsystem-paint-system-cps-3-0",
+  "sha256": "f3bc8d8f3ac36ce36966f309357f3e261c5a21fd9c752fa2247fb2453f0fc459",
+  "bytes": 259014,
+  "originalUrl": "https://www.carsystem.org/fileadmin/products/images/160.085/160085-160093-cs-cps-3.0-.webp",
+  "izvorFormat": "webp"
+ },
+ {
+  "iou": 0.9986,
+  "dEmedian": 28.38,
+  "dE95": 33.77,
+  "black0": [
+   0.025,
+   0.003
+  ],
+  "white": [
+   0.0,
+   0.002
+  ],
+  "semi": [
+   0.241,
+   0.192
+  ],
+  "id": "JS-0693",
+  "slug": "carsystem-paint-trolley",
+  "sha256": "8da35e5ac92e966e63920cad2798acac7a459241dffb59c0227f03cd7742f08d",
+  "bytes": 113794,
+  "originalUrl": "https://www.carsystem.org/fileadmin/products/images/138.848/154253-cs-drehlackierstaender-inkl-verlaengerung.png",
+  "izvorFormat": "png"
+ },
+ {
+  "iou": 0.9995,
+  "dEmedian": 29.47,
+  "dE95": 33.53,
+  "black0": [
+   0.085,
+   0.001
+  ],
+  "white": [
+   0.0,
+   0.0
+  ],
+  "semi": [
+   0.253,
+   0.21
+  ],
+  "id": "JS-0694",
+  "slug": "carsystem-paint-trolley-flexi-plus",
+  "sha256": "8d6ca79a8d0389212b278be02d40cfbba39e6aa5e818de05a53e45752a111ddf",
+  "bytes": 129310,
+  "originalUrl": "https://www.carsystem.org/fileadmin/products/images/152.596/152596-cs-lackierstaender-flexi-plus-inkl-verlaengerung.png",
+  "izvorFormat": "png"
+ },
+ {
+  "iou": 0.9996,
+  "dEmedian": 23.03,
+  "dE95": 31.51,
+  "black0": [
+   0.019,
+   0.0
+  ],
+  "white": [
+   0.0,
+   0.001
+  ],
+  "semi": [
+   0.164,
+   0.13
+  ],
+  "id": "JS-0695",
+  "slug": "carsystem-paper-trolley",
+  "sha256": "d740164030344feb5277dcb7e57cdcace3de53db70790c592b0c566ff20bd866",
+  "bytes": 206244,
+  "originalUrl": "https://www.carsystem.org/fileadmin/products/images/138.862/138862-cs-paper-trolley-3-fach-22-60-90.png",
+  "izvorFormat": "png"
+ },
+ {
+  "iou": 0.9995,
+  "dEmedian": 12.16,
+  "dE95": 32.2,
+  "black0": [
+   0.0,
+   0.0
+  ],
+  "white": [
+   0.0,
+   0.004
+  ],
+  "semi": [
+   0.315,
+   0.311
+  ],
+  "id": "JS-0696",
+  "slug": "carsystem-pdc-easy-paint",
+  "sha256": "79a17133a1ba0aa8e80543f6bdd3f9b81ef9720885522e2ca3e0a4359a7063bf",
+  "bytes": 140788,
+  "originalUrl": "https://www.carsystem.org/fileadmin/products/images/159.500/159500-cs-pdc-easy-paint.png",
+  "izvorFormat": "png"
+ },
+ {
+  "iou": 0.9996,
+  "dEmedian": 0.73,
+  "dE95": 1.81,
+  "black0": [
+   0.0,
+   0.0
+  ],
+  "white": [
+   0.064,
+   0.069
+  ],
+  "semi": [
+   0.216,
+   0.212
+  ],
+  "id": "JS-0697",
+  "slug": "carsystem-polishing-pad-x8000",
+  "sha256": "eb0fe7a08d2b9a2607d13fe2e7f335ce6289d46e0469d7494e6445b3300a1a71",
+  "bytes": 76494,
+  "originalUrl": "https://www.carsystem.org/fileadmin/products/images/160.452/160452-453-x8000-ah-anti-hologramm.webp",
+  "izvorFormat": "webp"
+ },
+ {
+  "iou": 0.9999,
+  "dEmedian": 16.91,
+  "dE95": 31.68,
+  "black0": [
+   0.0,
+   0.0
+  ],
+  "white": [
+   0.027,
+   0.039
+  ],
+  "semi": [
+   0.231,
+   0.229
+  ],
+  "id": "JS-0698",
+  "slug": "carsystem-polyester-repair-resin",
+  "sha256": "53e6615fb4337a9d34c352876fd3f0da523a10341745f423bd7aa0a775b53913",
+  "bytes": 165272,
+  "originalUrl": "https://www.carsystem.org/fileadmin/products/images/126.050/126.050-cs-poly-reparaturharz-inkl-haerter-1000g-3D.png",
+  "izvorFormat": "png"
+ },
+ {
+  "iou": 0.9998,
+  "dEmedian": 15.16,
+  "dE95": 33.29,
+  "black0": [
+   0.001,
+   0.0
+  ],
+  "white": [
+   0.033,
+   0.054
+  ],
+  "semi": [
+   0.369,
+   0.367
+  ],
+  "id": "JS-0699",
+  "slug": "carsystem-polyester-repair-set",
+  "sha256": "6d356aa9e2e5b6cad74f3ad359e6c66f34f02fcf734c9e32e729dadde5c3ade5",
+  "bytes": 157238,
+  "originalUrl": "https://www.carsystem.org/fileadmin/products/images/126.054/126.054-cs-polyester-reparaturset-800g-3D.png",
+  "izvorFormat": "png"
+ },
+ {
+  "iou": 1.0,
+  "dEmedian": 25.8,
+  "dE95": 27.38,
+  "black0": [
+   0.0,
+   0.0
+  ],
+  "white": [
+   0.0,
+   0.0
+  ],
+  "semi": [
+   0.008,
+   0.008
+  ],
+  "id": "JS-0700",
+  "slug": "carsystem-proflex-mercury",
+  "sha256": "c1ec7fcad34185402fadf3c4c2858d4f2dd5dca41ea5bbfb102c18034c090b23",
+  "bytes": 269398,
+  "originalUrl": "https://www.carsystem.org/fileadmin/products/images/153.460/153460-cs-proflex-mercury-29mmx35mm-p2000.png",
+  "izvorFormat": "png"
+ },
+ {
+  "iou": 1.0,
+  "dEmedian": 26.49,
+  "dE95": 29.28,
+  "black0": [
+   0.0,
+   0.0
+  ],
+  "white": [
+   0.0,
+   0.0
+  ],
+  "semi": [
+   0.007,
+   0.007
+  ],
+  "id": "JS-0701",
+  "slug": "carsystem-proflex-neptune",
+  "sha256": "8fa2eaa4e70d607d5237d8ec467c7b3252bd5e8f57e89be91bd825e48835deae",
+  "bytes": 474206,
+  "originalUrl": "https://www.carsystem.org/fileadmin/products/images/153.472/153474-cs-proflex-neptune-130x170mm-p1500.png",
+  "izvorFormat": "png"
+ },
+ {
+  "iou": 0.9995,
+  "dEmedian": 25.3,
+  "dE95": 31.49,
+  "black0": [
+   0.02,
+   0.001
+  ],
+  "white": [
+   0.181,
+   0.237
+  ],
+  "semi": [
+   0.088,
+   0.072
+  ],
+  "id": "JS-0702",
+  "slug": "carsystem-putty-dispenser",
+  "sha256": "cb6b7ed1d47953517d790b2e544b41181bd9b4b41fe0ad1f9a6c21042840ad45",
+  "bytes": 330210,
+  "originalUrl": "https://www.carsystem.org/fileadmin/products/images/123.840/123840-123859-dispenser-gruppe.png",
+  "izvorFormat": "png"
+ },
+ {
+  "iou": 1.0,
+  "dEmedian": 21.66,
+  "dE95": 26.69,
+  "black0": [
+   0.4,
+   0.002
+  ],
+  "white": [
+   0.0,
+   0.0
+  ],
+  "semi": [
+   0.024,
+   0.019
+  ],
+  "id": "JS-0703",
+  "slug": "carsystem-rubber-spreader-set",
+  "sha256": "31ce1b65e2b7d687f1ef6ee631c5089f81c3eff495d380013a7290d6f4096858",
+  "bytes": 104242,
+  "originalUrl": "https://www.carsystem.org/fileadmin/products/images/159.448/159.448-cs-gummi-spachtel-3er-set.png",
+  "izvorFormat": "png"
+ },
+ {
+  "iou": 0.9988,
+  "dEmedian": 18.34,
+  "dE95": 27.73,
+  "black0": [
+   0.002,
+   0.0
+  ],
+  "white": [
+   0.006,
+   0.058
+  ],
+  "semi": [
+   0.205,
+   0.203
+  ],
+  "id": "JS-0709",
+  "slug": "carsystem-soft-roll",
+  "sha256": "51c52189b298f5469cd192b4cc7a96040f51de9bb072a2e99b94e3ce8890bb0b",
+  "bytes": 137118,
+  "originalUrl": "https://www.carsystem.org/fileadmin/products/images/159.422/159422-430-cs-soft-roll-papierschleifmittel.png",
+  "izvorFormat": "png"
+ },
+ {
+  "iou": 1.0,
+  "dEmedian": 29.57,
+  "dE95": 33.28,
+  "black0": [
+   0.483,
+   0.028
+  ],
+  "white": [
+   0.0,
+   0.0
+  ],
+  "semi": [
+   0.011,
+   0.009
+  ],
+  "id": "JS-0710",
+  "slug": "carsystem-sound-deadening-panels",
+  "sha256": "e1f9aa114f42041a43c35dd3e6e59818050cf362ac9bbe56ae41905bddfbd1a1",
+  "bytes": 393218,
+  "originalUrl": "https://www.carsystem.org/fileadmin/products/images/126.055/126.055-134.139-140-cs-antidroehnenplatten-gruppe.png",
+  "izvorFormat": "png"
+ },
+ {
+  "iou": 0.9999,
+  "dEmedian": 20.19,
+  "dE95": 30.43,
+  "black0": [
+   0.004,
+   0.001
+  ],
+  "white": [
+   0.174,
+   0.248
+  ],
+  "semi": [
+   0.033,
+   0.03
+  ],
+  "id": "JS-0711",
+  "slug": "carsystem-spotblender-spray",
+  "sha256": "4eb0657ab95157168ed8f117a121c288550e718fa5071b360b9ce4cdf3cf7921",
+  "bytes": 250562,
+  "originalUrl": "https://www.carsystem.org/fileadmin/products/images/145.987/145987-cs-spotblender-spray-400ml-3D.png",
+  "izvorFormat": "png"
+ },
+ {
+  "iou": 1.0,
+  "dEmedian": 17.22,
+  "dE95": 28.96,
+  "black0": [
+   0.002,
+   0.001
+  ],
+  "white": [
+   0.0,
+   0.01
+  ],
+  "semi": [
+   0.134,
+   0.133
+  ],
+  "id": "JS-0712",
+  "slug": "carsystem-spraygun-cleaner",
+  "sha256": "243ba8c3fa1279f3cd00ab039029efc8c91bfa01d4e33edefb4da0c7b78b3540",
+  "bytes": 1130632,
+  "originalUrl": "https://www.carsystem.org/fileadmin/products/images/158.627/158627-spray-gun-cleaner.png",
+  "izvorFormat": "png"
+ },
+ {
+  "iou": 1.0,
+  "dEmedian": 18.99,
+  "dE95": 32.28,
+  "black0": [
+   0.497,
+   0.07
+  ],
+  "white": [
+   0.0,
+   0.0
+  ],
+  "semi": [
+   0.021,
+   0.016
+  ],
+  "id": "JS-0713",
+  "slug": "carsystem-staub-stop-water-black",
+  "sha256": "fc9b9dfa21d24c2bb63bc07c10db8be7d132f8257f650b7de9d035df47f5481a",
+  "bytes": 166412,
+  "originalUrl": "https://www.carsystem.org/fileadmin/products/images/158.033/158033-staub-stop-water-black-verpackung-tuecher.png",
+  "izvorFormat": "png"
+ },
+ {
+  "iou": 0.9987,
+  "dEmedian": 19.15,
+  "dE95": 33.13,
+  "black0": [
+   0.006,
+   0.006
+  ],
+  "white": [
+   0.0,
+   0.004
+  ],
+  "semi": [
+   0.286,
+   0.282
+  ],
+  "id": "JS-0714",
+  "slug": "carsystem-tec-line-stick",
+  "sha256": "d6a23f47d8ea6e62330940a91ff89faeab16341517bc228f9d402fa60ef2e0cd",
+  "bytes": 217676,
+  "originalUrl": "https://www.carsystem.org/fileadmin/products/images/152.554/152554-cs-sensor-pad-18mm-rot-150-pads_verpackung.png",
+  "izvorFormat": "png"
+ },
+ {
+  "iou": 1.0,
+  "dEmedian": 25.51,
+  "dE95": 37.75,
+  "black0": [
+   0.05,
+   0.006
+  ],
+  "white": [
+   0.0,
+   0.001
+  ],
+  "semi": [
+   0.011,
+   0.009
+  ],
+  "id": "JS-0715",
+  "slug": "carsystem-topline-wp-s",
+  "sha256": "86e028cbf38388b48d534c7dbac7af6ce5ec084cd01683eb5586789200b9d3fe",
+  "bytes": 856032,
+  "originalUrl": "https://www.carsystem.org/fileadmin/products/images/136.676/136676-691-cs-topline-wp-s-230x280mm.png",
+  "izvorFormat": "png"
+ }
+]

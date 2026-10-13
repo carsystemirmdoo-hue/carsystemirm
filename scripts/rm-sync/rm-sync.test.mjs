@@ -67,6 +67,19 @@ test("komponenta nasleđuje fazu proizvoda koji je koristi", () => {
   assert.equal(clearcoatHardener.phaseSlug, "lak");
 });
 
+test("komponenta više vrsta proizvoda dobija fazu većine (H 2A14: 7 lakova, 2 topcoat-a)", () => {
+  const byCode = new Map([
+    ...["C 1", "C 2", "C 3"].map((code) => [code, { role: "clearcoat" }]),
+    ["T 1", { role: "basecoat-topcoat" }],
+    ["P 1", { role: "undercoat" }],
+  ]);
+  const component = (usedBy) => resolveTaxonomy({ role: "hardener", kind: "component", introduction: [], tds: null, usedBy }, byCode, taxonomyRules);
+  assert.equal(component(["T 1", "C 1", "C 2", "C 3"]).phaseSlug, "lak");
+  // Nerešeno: ishod ne zavisi od redosleda u `usedBy`, nego od redosleda pravila.
+  assert.equal(component(["C 1", "P 1"]).rule, component(["P 1", "C 1"]).rule);
+  assert.equal(component(["P 1"]).phaseSlug, "podloga");
+});
+
 test("izvor: sistem je jedan zapis, a mixing baze nemaju karticu", { skip: !source && "nema source dataseta" }, () => {
   const systems = source.products.filter((product) => product.kind === "system");
   assert.ok(systems.length >= 8, "očekivano najmanje 8 sistema za nijansiranje");
@@ -113,4 +126,25 @@ test("dataset: zapisi nose zvaničnu oznaku, referencu na TDS i „Na upit” pa
   const withRelations = dataset.products.filter((product) => product.relations.length);
   assert.ok(withRelations.length > 0, "nijedan zapis nema sistemske odnose");
   for (const product of withRelations) for (const relation of product.relations) assert.ok(["USES_HARDENER", "USES_REDUCER", "USES_ADDITIVE"].includes(relation.relation));
+});
+
+test("komponenta se nalazi u filteru SVAKE faze u kojoj je zvanično koriste", { skip: !source && "nema source dataseta" }, async () => {
+  const { readFile } = await import("node:fs/promises");
+  const { matchesPhase } = await import("../../lib/catalog/phase-match.mjs");
+  const dataset = JSON.parse(await readFile(new URL("../../data/rm-catalog-products.generated.json", import.meta.url), "utf8"));
+  const byCode = new Map(source.products.map((product) => [product.code, product]));
+  const phaseOfRole = { clearcoat: "lak", undercoat: "podloga", "basecoat-topcoat": "boja" };
+  const records = [...Object.values(dataset.products), ...Object.values(dataset.enrichments)];
+  let checked = 0;
+  for (const record of records) {
+    const product = byCode.get(record.code);
+    if (product?.kind !== "component" || !record.taxonomy?.rule?.startsWith("component-")) continue;
+    const view = { phaseSlug: record.taxonomy.phaseSlug, secondaryPhaseSlugs: record.taxonomy.secondaryPhaseSlugs };
+    for (const code of product.usedBy) {
+      const phase = phaseOfRole[byCode.get(code)?.role];
+      if (phase) assert.ok(matchesPhase(view, phase), `${record.code}: koristi ga ${code}, a nije u filteru „${phase}”`);
+    }
+    checked += 1;
+  }
+  assert.ok(checked >= 12, `provereno samo ${checked} komponenti`);
 });

@@ -477,7 +477,7 @@ export const baslacFamilyPackshots: Record<
   // nijanse 45-W1010 (portal 12121), koji je prikazivao šifru koja nije izabrana.
   "line-45": {
     src: "/products/baslac/supplied/baslac__baslac-basecoat-45.webp",
-    alt: "Baslac Line 45 (45-W) Basecoat — primer ambalaže linije, bez šifre nijanse",
+    alt: "Baslac Line 45 (45-W) Basecoat, limenka linije",
     kind: "example",
   },
   "line-35": {

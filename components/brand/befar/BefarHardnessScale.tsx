@@ -127,7 +127,7 @@ export function BefarHardnessScale({ steps }: Props) {
       <div className={styles.hardnessIntro}>
         <div className={styles.container}>
           <p className={styles.sectionIndex}>
-            <span>03</span> Skala tvrdoće
+            <span>02</span> Skala tvrdoće
           </p>
           <h2 className={styles.sectionTitle} id="befar-hardness-title">
             {befarHardnessMeta.title}

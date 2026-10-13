@@ -124,7 +124,7 @@ export function BefarBrandPage({ brand, products }: Props) {
         >
           <div className={styles.container}>
             <p className={styles.sectionIndex}>
-              <span>02</span> Šta Befar pravi
+              <span>01</span> Šta Befar pravi
             </p>
             <h2 className={styles.sectionTitle} id="befar-material-title">
               Ne lak. Sloj koji lak dodiruje.
@@ -160,7 +160,7 @@ export function BefarBrandPage({ brand, products }: Props) {
         >
           <div className={styles.container}>
             <p className={styles.sectionIndex}>
-              <span>04</span> Geometrija
+              <span>03</span> Geometrija
             </p>
             <h2 className={styles.sectionTitle} id="befar-geometry-title">
               {befarGeometryMeta.title}
@@ -244,7 +244,7 @@ export function BefarBrandPage({ brand, products }: Props) {
           <div className={styles.container}>
             <div className={styles.sectionHeaderInline}>
               <p className={styles.sectionIndex}>
-                <span>05</span> Uparivanje
+                <span>04</span> Uparivanje
               </p>
               <h2 className={styles.sectionTitle} id="befar-pairing-title">
                 {befarPairingMeta.title}
@@ -264,7 +264,7 @@ export function BefarBrandPage({ brand, products }: Props) {
         >
           <div className={styles.container}>
             <p className={styles.sectionIndex}>
-              <span>06</span> Porodice
+              <span>05</span> Porodice
             </p>
             <h2 className={styles.sectionTitle} id="befar-families-title">
               {befarFamiliesMeta.title}
@@ -342,7 +342,7 @@ export function BefarBrandPage({ brand, products }: Props) {
           <div className={`${styles.container} ${styles.opencellInner}`}>
             <div className={styles.opencellCopy}>
               <p className={styles.sectionIndex}>
-                <span>07</span> {befarOpencell.kicker}
+                <span>06</span> {befarOpencell.kicker}
               </p>
               {/* Bez zvaničnog vektorskog logotipa — neutralan tekstualni label,
                   namerno nestilizovan da ne imitira izgubljeni wordmark. */}
@@ -430,7 +430,7 @@ export function BefarBrandPage({ brand, products }: Props) {
           <div className={styles.container}>
             <div className={styles.sectionHeaderInline}>
               <p className={styles.sectionIndex}>
-                <span>09</span> U radu
+                <span>07</span> U radu
               </p>
               <h2 className={styles.sectionTitle} id="befar-inuse-title">
                 {befarInUse.title}
@@ -467,7 +467,7 @@ export function BefarBrandPage({ brand, products }: Props) {
         >
           <div className={styles.container}>
             <p className={styles.sectionIndex}>
-              <span>10</span> Proizvodi
+              <span>08</span> Proizvodi
             </p>
             <h2 className={styles.sectionTitle} id="befar-products-title">
               {befarDiscoveryMeta.title}
@@ -541,7 +541,7 @@ export function BefarBrandPage({ brand, products }: Props) {
           <div className={`${styles.container} ${styles.closingInner}`}>
             <div className={styles.manufacturer}>
               <p className={styles.sectionIndex}>
-                <span>11</span> {befarManufacturer.title}
+                <span>09</span> {befarManufacturer.title}
               </p>
               <h2 className={styles.sectionTitle} id="befar-manufacturer-title">
                 Bursa, od 2002.

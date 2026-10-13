@@ -10,6 +10,7 @@ import { ProductGallery } from "@/components/product/ProductGallery";
 import { ProductInquiryCard } from "@/components/product/ProductInquiryCard";
 import { SplitContactCta } from "@/components/ui/SplitContactCta";
 import styles from "./ProductDetailPage.module.css";
+import { publicSkuOf } from "@/lib/catalog/public-code";
 
 export function ProductHero({
   product,
@@ -26,7 +27,7 @@ export function ProductHero({
   const factRows = [
     ["Program", program.name],
     ["Faza", phase?.name ?? product.phaseSlug],
-    ["Šifra", product.sku],
+    ["Šifra", product.publicCode ?? publicSkuOf(product)],
     ["Pakovanje", packageSummary],
     ["Namena", product.purpose],
     ["Brend", brand.name],

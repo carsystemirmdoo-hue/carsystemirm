@@ -12,6 +12,7 @@ import {
 import type { CarsystemProduct } from "@/lib/carsystem-data";
 import { carsystemUseCases } from "./carsystemBrandData";
 import styles from "./CarsystemBrandPage.module.css";
+import { programLabel } from "./programLabel";
 
 export function CarsystemUseCases({
   products,
@@ -162,7 +163,7 @@ function UseCaseProduct({ product }: { product: CarsystemProduct }) {
         )}
       </span>
       <span>
-        <small>{product.programSlug.replaceAll("-", " ")}</small>
+        <small>{programLabel(product.programSlug)}</small>
         <strong>{product.name}</strong>
       </span>
       <i aria-hidden="true">↗</i>

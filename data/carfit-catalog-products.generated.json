@@ -3481,7 +3481,7 @@
           },
           {
             "label": "Test slane magle (DIN50021)",
-            "value": "Ri 0 / 240 h / 50 µ"
+            "value": "Ri 0 / 240 h / 50 µm"
           },
           {
             "label": "Pakovanje",
@@ -9959,7 +9959,7 @@
       "variants": [
         {
           "articleNumber": "9-185-0060",
-          "label": "18 mm · debljina 88 µ",
+          "label": "18 mm · debljina 88 µm",
           "component": null,
           "componentRole": "main",
           "componentLabel": null,
@@ -15032,7 +15032,7 @@
           },
           {
             "label": "Test slane magle (DIN50021)",
-            "value": "Ri 0 / 240 h / 250 µ"
+            "value": "Ri 0 / 240 h / 250 µm"
           },
           {
             "label": "Pakovanje",

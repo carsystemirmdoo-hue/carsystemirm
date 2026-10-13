@@ -1831,7 +1831,7 @@
       "missingOfficialAsset": false,
       "relatedLegacySlug": null,
       "slug": "carsystem-rupes-ibrid-nano",
-      "name": "RUPES Ibrid Nano",
+      "name": "RUPES iBrid Nano",
       "taxonomy": {
         "category": "oprema",
         "programSlug": "oprema",
@@ -1863,7 +1863,7 @@
       "missingOfficialAsset": false,
       "relatedLegacySlug": null,
       "slug": "carsystem-rupes-ibrid-nano-q-maq",
-      "name": "RUPES Ibrid Nano Q-MAQ",
+      "name": "RUPES iBrid Nano Q-MAG",
       "taxonomy": {
         "category": "oprema",
         "programSlug": "oprema",
@@ -6958,7 +6958,7 @@
       "missingOfficialAsset": false,
       "relatedLegacySlug": null,
       "slug": "carsystem-rupes-9-holder-bigfoot",
-      "name": "Rupes 9. Holder BigFoot",
+      "name": "RUPES Holder BigFoot",
       "taxonomy": {
         "category": "pribor",
         "programSlug": "poliranje",

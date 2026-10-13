@@ -148,7 +148,7 @@ export function toProductVariantView(
     id: product.variantId ?? product.slug,
     slug: product.slug,
     name: product.name,
-    sku: product.catalogMetadata?.cosmosCode ?? publicSkuOf(product),
+    sku: product.catalogMetadata?.cosmosCode ?? product.publicCode ?? publicSkuOf(product),
     shadeLabel: resolveShadeLabel(product),
     ralLabel: resolveRalLabel(product),
     shortDescription: product.shortDescription,

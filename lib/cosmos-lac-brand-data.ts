@@ -221,7 +221,7 @@ const FAMILY_DEFINITIONS: FamilyDefinition[] = [
   {
     slug: "flame",
     name: "FLAME",
-    eyebrow: "GRAFIT I STREET ART",
+    eyebrow: "GRAFITI I STREET ART",
     // One family, three source lines — merged per specification §7.
     lines: ["Flame Orange", "Flame Blue", "Flame Booster"],
     query: "cosmos lac flame",

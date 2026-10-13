@@ -48,6 +48,7 @@ import {
   toProductVisualPresentation,
   type ProductVisualPresentation,
 } from "@/components/product/productVisualPresentation";
+import { variantCountLabel } from "@/lib/sr-plural";
 
 export type CatalogListingKind = "family" | "product" | "variant";
 
@@ -98,6 +99,8 @@ export type CatalogListingEntity = {
   brandSlug: string;
   programSlug: string;
   phaseSlug: RefinishPhaseSlug;
+  /** Dodatne faze za filter (R-M komponente sa više zvaničnih primena). */
+  secondaryPhaseSlugs?: RefinishPhaseSlug[];
   categorySlugs: string[];
   /** Everything the shared visual surface renders, pre-resolved. */
   presentation: ProductVisualPresentation;
@@ -228,6 +231,7 @@ function productEntity(
     brandSlug: product.brandSlug,
     programSlug: product.programSlug,
     phaseSlug: product.phaseSlug,
+    ...(product.secondaryPhaseSlugs ? { secondaryPhaseSlugs: product.secondaryPhaseSlugs } : {}),
     categorySlugs: category ? [category] : [],
     presentation: toProductVisualPresentation(product),
     productCode: productCodeOf(product),
@@ -274,14 +278,18 @@ function variantEntity(
 ): CatalogVariantEntity {
   const full = productEntity(product, "variant", family);
   const style = full.presentation.style as Record<string, string>;
+  const key = canonicalVariantKey(product);
 
   return {
     id: full.id,
     name: full.name,
     familySlug: family.slug,
     productCode: full.productCode,
-    // Samo kada zapis nema javnu šifru: adresa varijante ostaje ista kao ranije.
-    ...(full.productCode ? {} : { variantKey: canonicalVariantKey(product) }),
+    // Kada se ključ razlikuje od prikazane šifre: zapis bez javne šifre, ili deljena Cosmos šifra
+    // („01” za Primer Grey i White) — link mora nositi jedinstven ključ, ne prikazanu šifru.
+    ...(!full.productCode || (product.catalogMetadata?.cosmosCodeShared && key !== full.productCode)
+      ? { variantKey: key }
+      : {}),
     technicalLine: full.technicalLine,
     finish: full.finish,
     search: full.search,
@@ -317,7 +325,7 @@ function familyEntity(family: ProductFamily): CatalogListingEntity {
     categorySlugs: [...categories],
     presentation: toProductVisualPresentation(representative),
     productCode: family.line ?? representative.catalogMetadata?.line ?? family.brandName,
-    technicalLine: `${family.variants.length} varijanti`,
+    technicalLine: variantCountLabel(family.variants.length),
     badges: representative.badges,
     publicStatus: representative.publicStatus,
     stockStatus: representative.stockStatus,
@@ -424,6 +432,16 @@ export function getCatalogListingData(): CatalogListingData {
 
   cached = { canonical, variants };
   return cached;
+}
+
+/**
+ * Broj KARTICA kataloga (porodica = jedna kartica) za interne programe. Ovo je broj koji
+ * posetilac vidi u `/katalog?program=…`; zbir zapisa sa varijantama bio bi veći (npr. 876
+ * naspram 209) i ne bi se slagao sa katalogom.
+ */
+export function countCatalogCardsForProgramSlugs(programSlugs: readonly string[]): number {
+  const wanted = new Set(programSlugs);
+  return getCatalogListingData().canonical.filter((entity) => wanted.has(entity.programSlug)).length;
 }
 
 /**

@@ -81,7 +81,7 @@ export function CartDrawer() {
             Dostupnost, pakovanje i cenu potvrđujemo odgovorom na upit.
           </p>
           <div className={styles.footerActions}>
-            <Link className={styles.primary} href="/korpa" onClick={closeCart}>
+            <Link className={styles.primary} href="/portal/korpa" onClick={closeCart}>
               Otvorite listu
             </Link>
             {items.length > 0 ? (

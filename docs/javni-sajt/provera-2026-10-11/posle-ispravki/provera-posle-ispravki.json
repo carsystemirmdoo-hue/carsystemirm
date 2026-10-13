@@ -1,0 +1,90 @@
+{
+ "carfit_1440_min_opacity_kartica_0_40_110": [
+  1,
+  1,
+  1
+ ],
+ "carfit_390_min_opacity_kartica_0_40_110": [
+  1,
+  1,
+  1
+ ],
+ "tema_dark_/brendovi/norbin_1440_svetlih_blokova_pct": 0,
+ "tema_dark_/brendovi/norbin_390_svetlih_blokova_pct": 0,
+ "tema_dark_/brendovi/sata_1440_svetlih_blokova_pct": 0,
+ "tema_dark_/brendovi/sata_390_svetlih_blokova_pct": 0,
+ "tema_dark_/brendovi/rm_1440_svetlih_blokova_pct": 28,
+ "tema_dark_/brendovi/rm_390_svetlih_blokova_pct": 20,
+ "katalozi_ssr_pdf_linkova": 50,
+ "tekst_preostale_fraze": {
+  "/brendovi/carsystem": [],
+  "/brendovi/carfit": [],
+  "/brendovi/norbin": [],
+  "/brendovi/rm": [],
+  "/brendovi/baslac": [],
+  "/brendovi/cosmos-lac": [],
+  "/proizvodi/rm-pasta-190-1l": [],
+  "/proizvodi/h-2a14-topcure": [],
+  "/kategorije/bazne-boje": [],
+  "/program/boje-i-lakovi": [],
+  "/proizvodi/norbin-n75-020-hardener-fast": [],
+  "/proizvodi/carsystem-finish-back-pad-m-14": []
+ },
+ "tehnika": {
+  "/proizvodi/rm-a-2a54-blendingadd": [
+   "Mlaznica (mm): 1–1,2",
+   "VOC (IIB.e): 839 g/l · granica 840 g/l"
+  ],
+  "/proizvodi/norbin-n15-v20-clear-voc": [
+   "Odnos mešanja: 4:1",
+   "Viskozitet prskanja: 20-24 s na 20°C",
+   "Vreme upotrebe smeše: 1,5 h na 20°C",
+   "Mlaznica: 1,3-1,4",
+   "Sušenje: 20°C: 5 h do montaže · 60°C: 30 min · potpuna tvrdoća posle 24 h",
+   "Rok upotrebe: 24 meseca",
+   "VOC: 419 g/l",
+   "VOC: Sadržaj VOC ovog proizvoda je 419 g/l. Ne može se isključiti da proizvod sadrži čestice manje od 0,1 μm."
+  ],
+  "/proizvodi/grupa/norbin-n15-020": [
+   "Rok upotrebe: 24 meseca",
+   "Odnos mešanja: 2:1",
+   "Viskozitet prskanja: 16-18 s (na 20°C)",
+   "Vreme upotrebe smeše: 2 h (na 20°C)",
+   "Mlaznica: 1,3",
+   "Mlaznica: 1,3-1,4",
+   "Sušenje: 5 h do montaže (pri 20°C)",
+   "Sušenje: 30 min (na 60°C)",
+   "Sušenje: Potpuna tvrdoća: posle 24 h"
+  ],
+  "/proizvodi/2520-onyx-easy-blender": [
+   "Vreme upotrebe smeše: na 20°C 7 dana",
+   "Mlaznica: 1,4–1,5 mm",
+   "VOC: 419 g/l EU granica za kategoriju IIB.d: 420 g/l"
+  ],
+  "/proizvodi/baslac-40-440-2k-voc-clear": [
+   "Odnos mešanja: 2:1",
+   "Viskozitet prskanja: DIN 4: 20-22 s",
+   "Vreme upotrebe smeše: 2 h",
+   "Mlaznica: 1,3 mm",
+   "Sušenje: 20°C: učvršćivač 50-415 10 h, 50-420 16 h, 50-430 16 h · 60°C: učvršćivač 50-415 30 min, 50-420 40 min, 50-430 40 min · IC kratkotalasno: 8 min · IC srednjetalasno: 10-15 min",
+   "VOC: 419 g/l EU granica za ovaj proizvod: 420 g/l"
+  ],
+  "/proizvodi/baslac-40-450-universal-clear-voc": [
+   "Odnos mešanja: 2:1+10 %",
+   "Viskozitet prskanja: DIN 4: 20-22 s",
+   "Vreme upotrebe smeše: 2 h",
+   "Mlaznica: 1,3 mm",
+   "Sušenje: 20°C: učvršćivač 50-415 6 h, 50-420 10 h, 50-430 16 h · 60°C: učvršćivač 50-415 20 min, 50-420 30 min, 50-430 40 min · IC kratkotalasno: 8 min · IC srednjetalasno: 10-15 min",
+   "VOC: 419 g/l EU granica za ovaj proizvod: 420 g/l"
+  ]
+ },
+ "program_brojevi": [
+  307,
+  223,
+  217,
+  111,
+  309
+ ],
+ "katalog_hero": "5 | programa",
+ "rupes_linkova_u_zaglavlju_i_footeru": 0
+}

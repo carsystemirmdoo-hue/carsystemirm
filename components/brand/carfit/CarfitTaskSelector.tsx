@@ -200,13 +200,16 @@ export function CarfitTaskSelector({ tasks }: { tasks: CarfitTaskView[] }) {
           </div>
 
           <div className={styles.taskPanelCol}>
-            <div className={styles.taskMedia}>
-              <CarfitMedia
-                mark={activeTask.marker}
-                sizes="(min-width: 64rem) 30vw, (min-width: 48rem) 45vw, 92vw"
-                slot={activeTask.media}
-              />
-            </div>
+            {/* Bez fotografije zadatka polje se ne prikazuje — proizvodi slede odmah ispod. */}
+            {activeTask.media.src ? (
+              <div className={styles.taskMedia}>
+                <CarfitMedia
+                  mark={activeTask.marker}
+                  sizes="(min-width: 64rem) 30vw, (min-width: 48rem) 45vw, 92vw"
+                  slot={activeTask.media}
+                />
+              </div>
+            ) : null}
 
             {activeTask.products.length > 0 ? (
               <>

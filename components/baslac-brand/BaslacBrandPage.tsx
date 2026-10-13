@@ -411,8 +411,8 @@ function ColorWorkflow({
         </div>
         <p>
           Merni uređaj, baza formula, vaga i mixing radna stanica imaju jasno
-          mesto u istom toku. Refinity ovde predstavljamo kao digitalnu
-          platformu, ne kao fizički proizvod.
+          mesto u istom toku. Refinity je digitalna platforma, a ne proizvod
+          iz kataloga.
         </p>
       </header>
 
@@ -499,9 +499,8 @@ function CommercialSection({
         </h2>
         <p>
           Kamioni, dostavna vozila i autobusi traže sistem koji pokriva velike
-          površine i zadržava ujednačen sjaj. Ilustracija je zvanični baslac
-          render dostavnog vozila, a izbor sistema i procesa potvrđuje se sa
-          tehničkim savetnikom.
+          površine i zadržava ujednačen sjaj. Izbor sistema i procesa
+          potvrđuje se sa tehničkim savetnikom.
         </p>
         <ul>
           <li>30 Line CV program</li>
@@ -613,8 +612,8 @@ function BaslacFamilyPackshot({ system }: { system: BaslacSystemId }) {
       />
       <figcaption>
         {packshot.kind === "example"
-          ? "Primer ambalaže"
-          : "Zajednička ambalaža porodice"}
+          ? "Primer limenke linije"
+          : "Ista limenka za sve baze linije"}
       </figcaption>
     </figure>
   );
@@ -701,10 +700,10 @@ function BaslacSystemsAndProducts({
         <article className={styles.systemGroup}>
           <div className={styles.systemGroupHeader}>
             <div>
-              <h3>Proizvodi sa otvorenom stranicom</h3>
+              <h3>Izdvojeni proizvodi</h3>
               <p>
-                Artikli koji već imaju svoju stranicu sa tehničkim podacima i
-                dokumentacijom.
+                Proizvodi sa tehničkim podacima i dokumentacijom. Ceo baslac
+                program pogledajte u katalogu.
               </p>
             </div>
           </div>
@@ -741,7 +740,7 @@ function BaslacSystemsAndProducts({
       <div className={styles.catalogFooter}>
         <p>
           Ne vidite artikal koji Vam treba? Pošaljite oznaku sa etikete i
-          potvrđujemo pakovanje, dokumentaciju i dostupnost.
+          potvrdićemo pakovanje, dokumentaciju i dostupnost.
         </p>
         <Link className={styles.outlineButton} href={baslacCatalogHref()}>
           Svi Baslac proizvodi

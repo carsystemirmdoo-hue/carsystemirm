@@ -147,6 +147,13 @@
 }
 .message { margin: 0; color: var(--baslac-accent); font-family: var(--font-technical), monospace; font-size: 0.74rem; }
 .swatchNote { margin: 0; color: var(--baslac-muted); font-size: 0.78rem; line-height: 1.55; }
+.documents { display: grid; gap: 0.5rem; padding-top: 1rem; border-top: 1px solid var(--baslac-border); }
+.documents a {
+  display: grid; gap: 0.2rem; padding: 0.75rem 0.9rem;
+  border: 1px solid var(--baslac-border); color: inherit; font-weight: 700; font-size: 0.9rem; text-decoration: none;
+}
+.documents a:hover, .documents a:focus-visible { border-color: var(--baslac-accent); }
+.documents small { color: var(--baslac-muted); font-weight: 400; font-family: var(--font-technical), monospace; font-size: 0.64rem; letter-spacing: 0.06em; text-transform: uppercase; }
 .empty { grid-column: 1 / -1; padding: 1rem; color: var(--baslac-muted); font-size: 0.9rem; }
 
 /* Quick Add traka — ne prekriva sadržaj, ima svoju sigurnu zonu. */

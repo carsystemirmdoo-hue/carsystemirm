@@ -21,6 +21,8 @@
   --nb-green-text: #5c7700;
 
   --nb-white: #ffffff;
+  /* Površina strane; `--nb-white` ostaje bela za tekst na plavoj/tamnoj podlozi. */
+  --nb-surface: #ffffff;
   --nb-paper: #f6f8f9;
   --nb-line: #dde3e5;
   --nb-line-strong: #b9c4c8;
@@ -36,7 +38,7 @@
 
   min-height: 100vh;
   overflow-x: clip;
-  background: var(--nb-white);
+  background: var(--nb-surface);
   color: var(--nb-ink);
   font-family: var(--font-body), var(--font-geist-sans), system-ui, sans-serif;
 }
@@ -97,7 +99,7 @@
 .hero {
   position: relative;
   padding-block: clamp(2rem, 4vw, 3rem) 0;
-  background: var(--nb-white);
+  background: var(--nb-surface);
 }
 
 .breadcrumb {
@@ -241,7 +243,7 @@
    tekst na plavoj ispuni (1.6:1). Klasa zato ide kroz `.norbinPage`. */
 .norbinPage .buttonPrimary,
 .buttonPrimary {
-  background: var(--nb-blue-text);
+  background: var(--nb-button, var(--nb-blue-text));
   color: var(--nb-white);
 }
 
@@ -395,7 +397,7 @@
   display: grid;
   gap: 0.4rem;
   padding: 1.1rem 0.8rem;
-  background: var(--nb-white);
+  background: var(--nb-surface);
   text-align: center;
   text-decoration: none;
 }
@@ -517,7 +519,7 @@
   position: relative;
   z-index: 1;
   padding: 0.3rem 0.7rem;
-  background: var(--nb-white);
+  background: var(--nb-surface);
   color: var(--nb-ink);
   font-family: var(--font-technical), monospace;
   font-size: 1.05rem;
@@ -556,7 +558,7 @@
   gap: 0.5rem;
   min-height: 8rem;
   padding: 1.1rem;
-  background: var(--nb-white);
+  background: var(--nb-surface);
 }
 
 .processStepEmpty {
@@ -655,8 +657,43 @@
 
 .stockedGrid {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 1rem;
+  margin-top: clamp(2rem, 4vw, 3rem);
+}
+
+.stockedList {
+  margin: 0;
+  padding: 0;
+  border-top: 1px solid var(--nb-line);
+  list-style: none;
+}
+
+.stockedList a {
+  display: grid;
+  grid-template-columns: 7.5rem minmax(0, 1fr) auto;
+  gap: 1rem;
+  align-items: baseline;
+  padding: 0.85rem 0.2rem;
+  border-bottom: 1px solid var(--nb-line);
+  color: inherit;
+  text-decoration: none;
+}
+
+.stockedList strong {
+  font-family: var(--font-technical), monospace;
+  font-size: 0.9rem;
+}
+
+.stockedList small {
+  color: var(--nb-muted);
+  font-size: 0.75rem;
+}
+
+.stockedList a:hover span,
+.stockedList a:focus-visible span {
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
 }
 
 .stockedCard {
@@ -676,24 +713,7 @@
   padding: 12%;
 }
 
-.stockedNoImage {
-  position: absolute;
-  inset: 0;
-  display: grid;
-  place-items: center;
-  gap: 0.5rem;
-  /* Norbin stranica je svetla u obe teme: fiksna svetla studio površina, bez pruga. */
-  background: var(--surface-studio-fixed-light);
-}
 
-.stockedNoImageMark {
-  padding: 0.3rem 0.6rem;
-  border: 1px solid var(--nb-line-strong);
-  color: var(--nb-ink);
-  font-family: var(--font-display), sans-serif;
-  font-size: 0.62rem;
-  font-weight: 700;
-}
 
 .stockedCopy {
   padding: 0.9rem;
@@ -917,7 +937,15 @@
   }
 
   .stockedGrid {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .stockedList a {
+    grid-template-columns: 6rem minmax(0, 1fr);
+  }
+
+  .stockedList small {
+    grid-column: 2;
   }
 }
 
@@ -934,4 +962,29 @@
   .codeRow {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
+}
+
+/* ---------------------------------------------------------------- tamna tema */
+
+/*
+ * Strana je ranije ostajala bela i u tamnoj temi (zaglavlje tamno, sadržaj svetao).
+ * Menjaju se samo tokeni površina, teksta i linija; brend boje (plava, zlatna, zelena)
+ * ostaju, a za tekst se koriste svetlije varijante zbog kontrasta.
+ */
+:global(html[data-theme="dark"]) .norbinPage {
+  --nb-surface: #0f191e;
+  --nb-paper: #15232a;
+  --nb-ink: #e6eef1;
+  --nb-muted: #a3b2b9;
+  --nb-line: rgb(230 238 241 / 0.14);
+  --nb-line-strong: rgb(230 238 241 / 0.28);
+  --nb-blue-text: #5cc0ec;
+  --nb-green-text: #a9c94a;
+  --nb-deep: #0a1418;
+  /* Dugme zadržava tamniju plavu da bela slova imaju kontrast. */
+  --nb-button: #006594;
+  --brand-nav-surface: rgb(15 25 30 / 0.94);
+  --brand-nav-border: rgb(230 238 241 / 0.14);
+  --brand-nav-ink: #e6eef1;
+  --brand-nav-accent: #5cc0ec;
 }

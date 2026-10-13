@@ -1,5 +1,6 @@
 "use client";
 
+import { matchesPhase } from "@/lib/catalog/phase-match.mjs";
 import { useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { ManufacturerRail } from "@/components/brand/ManufacturerRail";
@@ -133,7 +134,9 @@ const catalogModules: CatalogModule[] = [
     label: "Potrošni materijal",
     detail: "Maskiranje i radionica",
     slug: "potrosni-materijal",
-    programSlugs: ["potrosni-materijal"],
+    // Isto kao javni program „Potrošni materijal” (lib/carsystem-data.ts, publicProgramGroups):
+    // aerosoli su deo tog programa, pa ih filter ne sme izostaviti.
+    programSlugs: ["potrosni-materijal", "aerosoli"],
   },
 ];
 
@@ -232,8 +235,11 @@ function toVariantEntity(record: ProductSearchRecord): CatalogVariantEntity | nu
     name: record.name,
     familySlug: record.familySlug,
     productCode: record.productCode ?? "",
-    // Zapis bez javne šifre (`publicSkuOf`): ključ varijante je već u adresi zapisa.
-    ...(record.productCode ? {} : { variantKey: variantKeyFromHref(record.href) }),
+    // Ključ varijante je u adresi zapisa; čuva se kada se razlikuje od prikazane šifre
+    // (zapis bez javne šifre ili deljena Cosmos šifra).
+    ...(record.productCode && variantKeyFromHref(record.href) === record.productCode
+      ? {}
+      : { variantKey: variantKeyFromHref(record.href) }),
     technicalLine: record.technicalLine ?? "",
     finish: record.card.finish,
     /*
@@ -715,7 +721,7 @@ export function CatalogExplorer({
       ) {
         return false;
       }
-      if (phaseSlug && product.phaseSlug !== phaseSlug) return false;
+      if (phaseSlug && !matchesPhase(product, phaseSlug)) return false;
       if (status === "na-upit" && !product.badges.includes("Na upit")) return false;
       if (rmSystem && product.rmMetadata?.system !== rmSystem) return false;
       if (rmSeries && product.rmMetadata?.series !== rmSeries) return false;

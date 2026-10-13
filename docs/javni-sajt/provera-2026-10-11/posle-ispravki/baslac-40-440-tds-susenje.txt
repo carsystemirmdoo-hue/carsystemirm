@@ -1,0 +1,10 @@
+Izvor: https://techinfo.baslac.com/en/40-440.pdf (preuzeto 2026-10-11), strana 2, odeljak Drying — doslovan izvod
+Drying
+Drying at 20°C 50-415: 10 h
+50-420: 16 h
+50-430: 16 h
+Drying at 60°C 50-415: 30 min
+50-420: 40 min
+50-430: 40 min
+Infrared (short wave) 8 min
+Infrared (medium wave) 10-15 min

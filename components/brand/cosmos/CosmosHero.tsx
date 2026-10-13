@@ -19,10 +19,11 @@ const ARC_SLOTS = [0, 1, 2, 3, 4, 5] as const;
 type Props = {
   cans: CosmosHeroCan[];
   variantCount: number;
-  familyCount: number;
+  /** Sve COSMOS linije u katalogu (ne samo sedam izdvojenih porodica). */
+  lineCount: number;
 };
 
-export function CosmosHero({ cans, variantCount, familyCount }: Props) {
+export function CosmosHero({ cans, variantCount, lineCount }: Props) {
   const heroRef = useRef<HTMLElement>(null);
   useScrollProgress(heroRef, { cssVariable: "--hero-progress", mode: "exit" });
   useHeroRotation(heroRef);
@@ -68,8 +69,8 @@ export function CosmosHero({ cans, variantCount, familyCount }: Props) {
           Boja koja stiže odmah.
         </h1>
         <p className={styles.body}>
-          {variantCount} verifikovanih varijanti iz {familyCount} COSMOS linija —
-          dostupnih kroz Carsystem partnersku mrežu.
+          {variantCount} nijansi i varijanti u {lineCount} Cosmos Lac linija —
+          dostupnih kroz partnersku mrežu Carsystem i R-M.
         </p>
         <div className={styles.heroCtas}>
           <Link className={styles.ctaPrimary} href="/prodavnice">
@@ -77,7 +78,7 @@ export function CosmosHero({ cans, variantCount, familyCount }: Props) {
             <span aria-hidden="true">→</span>
           </Link>
           <Link className={styles.ctaSecondary} href="/katalog?brend=cosmos-lac">
-            Pogledajte sve COSMOS proizvode
+            Pogledajte sve Cosmos Lac proizvode
           </Link>
         </div>
       </div>

@@ -31,6 +31,7 @@ import { useProductSearch } from "@/components/search/useProductSearch";
 import type { ProductSearchRecord } from "@/lib/search/buildSearchIndex";
 import type { ProductSearchResult } from "@/lib/search/productSearchClient";
 import styles from "./ProductSearchDialog.module.css";
+import { variantCountLabel } from "@/lib/sr-plural";
 
 const MAX_GROUPS = 8;
 const MAX_MEMBERS = 3;
@@ -138,7 +139,7 @@ function ResultLine({
         <span className={styles.rowKind}>{KIND_LABEL[record.kind]}</span>
         {memberTotal > 0 ? (
           <span className={styles.rowCount}>
-            {memberTotal} {memberTotal === 1 ? "varijanta" : "varijanti"}
+            {variantCountLabel(memberTotal)}
           </span>
         ) : null}
       </span>

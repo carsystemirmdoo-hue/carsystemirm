@@ -60,6 +60,23 @@ function realImage(product: CarsystemProduct) {
   return candidates.find((asset) => asset && asset.src !== GENERIC_PLACEHOLDER_IMAGE) ?? null;
 }
 
+/** Fotografije stvarnih proizvoda iz datih kategorija (bez ponavljanja), za polja bez scenske fotografije. */
+function categoryShots(categoryIds: string[], limit: number) {
+  const shots: { src: string; alt: string }[] = [];
+  const seen = new Set<string>();
+  for (const id of categoryIds) {
+    const category = getCarfitCategoryById(id);
+    if (!category) continue;
+    for (const product of resolveCarfitProducts(category, 24)) {
+      const image = realImage(product);
+      if (!image || seen.has(product.slug) || shots.length >= limit) continue;
+      seen.add(product.slug);
+      shots.push({ src: toDisplayImageSrc(image.src), alt: image.alt || product.name });
+    }
+  }
+  return shots;
+}
+
 function toProductView(product: CarsystemProduct): CarfitProductView {
   const image = realImage(product);
 
@@ -136,7 +153,10 @@ export function CarfitBrandPage({ brand }: { brand: CarsystemBrand }) {
       return total + (category ? resolveCarfitProducts(category, 99).length : 0);
     }, 0);
     const target = getCarfitCategoryById(family.categoryIds[0])?.catalogTarget ?? null;
-    return { ...family, count, target };
+    const shots = family.media.src
+      ? []
+      : categoryShots(family.categoryIds, family.span === "hero" || family.span === "wide" ? 3 : 1);
+    return { ...family, count, target, shots };
   });
 
   return (
@@ -219,7 +239,7 @@ export function CarfitBrandPage({ brand }: { brand: CarsystemBrand }) {
               <div className={styles.stage}>
                 <div className={`${styles.stageCell} ${styles.stageCellWide}`}>
                   <p className={styles.stageCode}>
-                    {heroProduct ? heroProduct.programName : carfitHero.media.id}
+                    {heroProduct?.programName ?? ""}
                   </p>
                   <div className={styles.stageMedia}>
                     {heroProduct?.image ? (
@@ -487,6 +507,7 @@ export function CarfitBrandPage({ brand }: { brand: CarsystemBrand }) {
 
                     <div className={styles.familyMedia}>
                       <CarfitMedia
+                        products={family.shots}
                         mark={family.code}
                         sizes="(min-width: 64rem) 24vw, (min-width: 40rem) 46vw, 92vw"
                         slot={family.media}
@@ -544,6 +565,7 @@ export function CarfitBrandPage({ brand }: { brand: CarsystemBrand }) {
 
               <div className={styles.storyMedia}>
                 <CarfitMedia
+                  products={carfitMaskingStory.media.src ? undefined : categoryShots(["maskiranje"], 3)}
                   mark="MASK"
                   sizes="(min-width: 48rem) 46vw, 92vw"
                   slot={carfitMaskingStory.media}
@@ -587,6 +609,7 @@ export function CarfitBrandPage({ brand }: { brand: CarsystemBrand }) {
 
               <div className={styles.storyMedia}>
                 <CarfitMedia
+                  products={carfitFinishStory.media.src ? undefined : categoryShots(["poliranje"], 3)}
                   mark="FINISH"
                   sizes="(min-width: 48rem) 46vw, 92vw"
                   slot={carfitFinishStory.media}
@@ -686,7 +709,7 @@ export function CarfitBrandPage({ brand }: { brand: CarsystemBrand }) {
                   Zvanični C.A.R.FIT katalog
                 </h2>
                 <p className={styles.sectionLead}>
-                  Kompletan program u jednom PDF-u — kitovi, punioci, klar lakovi, aerosoli i pribor.
+                  Kompletan program u jednom PDF-u — kitovi, punioci, bezbojni lakovi, aerosoli i pribor.
                 </p>
               </CarfitReveal>
 

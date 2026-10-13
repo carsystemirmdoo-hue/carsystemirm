@@ -16,6 +16,8 @@ import {
   absoluteSeoUrl,
   seoSiteConfig,
 } from "@/lib/seo/site-config";
+import { variantCountLabel } from "@/lib/sr-plural";
+import { presentTechnicalFacts } from "@/lib/technical-facts-display.mjs";
 
 export const siteConfig = seoSiteConfig;
 
@@ -263,11 +265,13 @@ function visibleProductFacts(product: CarsystemProduct) {
     ) {
       return [];
     }
-    return product.detail.technicalFacts.content.filter(
-      (fact) => fact.reviewStatus === "confirmed" && fact.label && fact.value,
+    return presentTechnicalFacts(
+      product.detail.technicalFacts.content.filter(
+        (fact) => fact.reviewStatus === "confirmed" && fact.label && fact.value,
+      ),
     );
   }
-  return product.specifications.filter((fact) => fact.label && fact.value);
+  return presentTechnicalFacts(product.specifications.filter((fact) => fact.label && fact.value));
 }
 
 /**
@@ -296,7 +300,7 @@ export function productGroupJsonLd(family: ProductFamily) {
     "@id": `${url}#productgroup`,
     url,
     name: family.name,
-    description: `${family.name} — ${family.variants.length} varijanti u Carsystem i R-M ponudi.`,
+    description: `${family.name} — ${variantCountLabel(family.variants.length)} u Carsystem i R-M ponudi.`,
     inLanguage: siteConfig.language,
     brand: {
       "@type": "Brand",
@@ -391,7 +395,7 @@ export function productRelationshipJsonLd({
   product: CarsystemProduct;
   compatibleProducts: CarsystemProduct[];
   similarProducts: CarsystemProduct[];
-  documents: { title: string; href: string }[];
+  documents: { title: string; href: string; language?: string }[];
 }) {
   const url = absoluteUrl(`/proizvodi/${product.slug}`);
   const toRef = (item: CarsystemProduct) => ({
@@ -419,7 +423,7 @@ export function productRelationshipJsonLd({
       name: document.title,
       url: absoluteUrl(document.href),
       encodingFormat: "application/pdf",
-      inLanguage: siteConfig.language,
+      ...(document.language ? { inLanguage: document.language } : {}),
     }));
   }
 

@@ -1,3 +1,4 @@
+import { countCatalogCardsForProgramSlugs } from "@/lib/catalog-listing";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { ProgramPage } from "@/components/program/ProgramPage";
@@ -40,9 +41,33 @@ export default async function ProgramRoute({ params }: ProgramRouteProps) {
   const program = getPublicProgramGroupBySlug(slug);
   if (!program) notFound();
 
-  const brands = program.brandSlugs
+  /*
+   * Brendovi i redosled proizvoda prate STVARNE proizvode programa. `program.brandSlugs` je spisak
+   * glavnih brendova programa: oni idu prvi (tim redom), ostali po broju proizvoda. Tako „Pištolji
+   * i oprema” počinje SATA pištoljima, a program ne navodi brend bez ijednog proizvoda.
+   */
+  const programProducts = getCarsystemProductsByPublicProgramSlug(program.slug);
+  const productCount = new Map<string, number>();
+  for (const product of programProducts) {
+    productCount.set(product.brandSlug, (productCount.get(product.brandSlug) ?? 0) + 1);
+  }
+  const brandRank = (brandSlug: string) => {
+    const listed = program.brandSlugs.indexOf(brandSlug);
+    return listed >= 0 ? listed : program.brandSlugs.length;
+  };
+  const orderedBrandSlugs = [...productCount.keys()].sort(
+    (first, second) =>
+      brandRank(first) - brandRank(second) ||
+      (productCount.get(second) ?? 0) - (productCount.get(first) ?? 0) ||
+      first.localeCompare(second),
+  );
+  const brands = orderedBrandSlugs
     .map((brandSlug) => getBrandReferenceBySlug(brandSlug))
     .filter((brand): brand is BrandReference => Boolean(brand));
+  const orderedProducts = [...programProducts].sort(
+    (first, second) =>
+      orderedBrandSlugs.indexOf(first.brandSlug) - orderedBrandSlugs.indexOf(second.brandSlug),
+  );
   const phases = program.phaseSlugs
     .map((phaseSlug) => getRefinishPhaseBySlug(phaseSlug))
     .filter((phase): phase is RefinishPhase => Boolean(phase));
@@ -68,10 +93,9 @@ export default async function ProgramRoute({ params }: ProgramRouteProps) {
         brands={brands}
         phaseBySlug={new Map(refinishPhases.map((phase) => [phase.slug, phase]))}
         phases={phases}
-        products={getCarsystemProductsByPublicProgramSlug(program.slug).map(
-          toProductListingProduct,
-        )}
+        products={orderedProducts.map(toProductListingProduct)}
         program={program}
+        catalogCardCount={countCatalogCardsForProgramSlugs(program.internalProgramSlugs)}
         programBySlug={new Map(programGroups.map((item) => [item.slug, item]))}
       />
     </>

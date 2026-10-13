@@ -28,8 +28,8 @@ export const norbinWhatItIs = [
 
 export const norbinWhatItIsNot = [
   "Bazna boja",
-  "Bezbojni lak u tonu (topcoat sistem boje)",
-  "Tinteri / mixing baza",
+  "Završni lak u boji (sistem boje)",
+  "Toneri i baze za mešanje",
   "Sopstveni sistem boje",
 ];
 
@@ -137,7 +137,7 @@ export const norbinFaq = [
   },
   {
     question: "Ima li Norbin baznu boju?",
-    answer: "Ne, u EMEA programu Norbin ne uključuje sistem baznih boja.",
+    answer: "Ne, Norbin program ne uključuje sistem baznih boja.",
   },
   {
     question: "Koja je razlika između N15-020 i N15-V20?",

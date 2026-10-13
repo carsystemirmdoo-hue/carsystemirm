@@ -1,3 +1,5 @@
+import { matchesPhase } from "@/lib/catalog/phase-match.mjs";
+import { srPlural } from "@/lib/sr-plural";
 import Image from "next/image";
 import Link from "next/link";
 import { Footer } from "@/components/layout/Footer";
@@ -121,7 +123,7 @@ function RmProcessFlow({ products }: { products: CarsystemProduct[] }) {
       <ol className={styles.processFlow}>
         {rmProcessSteps.map((step) => {
           const count = products.filter(
-            (product) => product.phaseSlug === step.phase,
+            (product) => matchesPhase(product, step.phase),
           ).length;
 
           return (
@@ -137,13 +139,23 @@ function RmProcessFlow({ products }: { products: CarsystemProduct[] }) {
                 </div>
               </div>
               <div className={styles.processFooter}>
-                <span>
-                  {count} {productCountLabel(count)}
-                </span>
-                <Link href={step.href} aria-label={`${step.title}, otvorite katalog`}>
-                  Otvorite fazu
-                  <span aria-hidden="true">↗</span>
-                </Link>
+                {count > 0 ? (
+                  <>
+                    <span>
+                      {count} {productCountLabel(count)}
+                    </span>
+                    <Link href={step.href} aria-label={`${step.title}, otvorite katalog`}>
+                      Otvorite fazu
+                      <span aria-hidden="true">↗</span>
+                    </Link>
+                  </>
+                ) : (
+                  // Faza bez R-M proizvoda u katalogu: bez brojača „0” i bez linka na prazan filter.
+                  <Link href="/kontakt?tema=proizvod&brend=rm" aria-label={`${step.title}, pošaljite upit`}>
+                    Pošaljite upit
+                    <span aria-hidden="true">↗</span>
+                  </Link>
+                )}
               </div>
             </li>
           );
@@ -696,7 +708,7 @@ function RmFinalCta() {
 }
 
 function productCountLabel(count: number) {
-  return count === 1 ? "proizvod" : "proizvoda";
+  return srPlural(count, "proizvod", "proizvoda", "proizvoda");
 }
 
 function getRmCategoryLabel(category: RmCategorySlug) {

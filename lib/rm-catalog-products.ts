@@ -44,6 +44,7 @@ type CatalogTaxonomy = {
   category: ProductCategorySlug;
   programSlug: string;
   phaseSlug: RefinishPhaseSlug;
+  secondaryPhaseSlugs?: RefinishPhaseSlug[];
   visualType: ProductVisualType;
   rule: string;
 };
@@ -273,6 +274,7 @@ function createCatalogProduct(entry: CatalogProductEntry): CarsystemProduct {
     brandSlug: "rm",
     programSlug: entry.taxonomy.programSlug,
     phaseSlug: entry.taxonomy.phaseSlug,
+    ...(entry.taxonomy.secondaryPhaseSlugs ? { secondaryPhaseSlugs: entry.taxonomy.secondaryPhaseSlugs } : {}),
     shortDescription: content.shortDescription,
     longDescription: content.longDescription,
     // Zvanična R-M oznaka — nije izmišljen placeholder.
@@ -289,7 +291,7 @@ function createCatalogProduct(entry: CatalogProductEntry): CarsystemProduct {
     stockManaged: false,
     productImage: entry.image
       ? { src: entry.image.src, alt: imageAlt }
-      : { src: PLACEHOLDER_PRODUCT_IMAGE, alt: `${entry.name}, ilustrativni prikaz proizvoda` },
+      : { src: PLACEHOLDER_PRODUCT_IMAGE, alt: `${entry.name} — fotografija proizvoda nije dostupna` },
     galleryImages: [],
     specifications: [
       { label: "Tip proizvoda", value: content.productType },
@@ -343,6 +345,7 @@ export function applyRmCatalogEnrichment(record: CarsystemProduct): CarsystemPro
     taxonomyCategory: enrichment.taxonomy.category,
     programSlug: enrichment.taxonomy.programSlug,
     phaseSlug: enrichment.taxonomy.phaseSlug,
+    ...(enrichment.taxonomy.secondaryPhaseSlugs ? { secondaryPhaseSlugs: enrichment.taxonomy.secondaryPhaseSlugs } : {}),
     searchTerms: [...new Set([...(record.searchTerms ?? []), ...searchTermsFor(enrichment)])],
     documents: hasTds
       ? existingDocuments

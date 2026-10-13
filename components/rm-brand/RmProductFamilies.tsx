@@ -31,8 +31,7 @@ export function RmProductFamilies({
           </h2>
         </div>
         <p>
-          Prikazujemo samo potvrđene fotografije iz kataloga. Gde zvanična
-          fotografija još nije dostupna, ostaje neutralno polje umesto izmišljene ambalaže.
+          Svaka grupa vodi na odgovarajuće R-M proizvode u katalogu.
         </p>
       </div>
 

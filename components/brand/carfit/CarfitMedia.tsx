@@ -12,19 +12,36 @@ export function CarfitMedia({
   className,
   mark,
   priority,
+  products,
   sizes,
   slot,
 }: {
   className?: string;
   mark: string;
   priority?: boolean;
+  /** Stvarni C.A.R.FIT proizvodi iz kataloga kada scenska fotografija još ne postoji. */
+  products?: { src: string; alt: string }[];
   sizes: string;
   slot: CarfitMediaSlot;
 }) {
+  if (!slot.src && products && products.length > 0) {
+    return (
+      <div
+        className={`${styles.mediaProducts} ${className ?? ""}`}
+        data-count={products.length}
+      >
+        {products.map((product) => (
+          <span key={product.src}>
+            <Image alt={product.alt} fill sizes={sizes} src={product.src} />
+          </span>
+        ))}
+      </div>
+    );
+  }
+
   if (!slot.src) {
     return (
       <div className={`${styles.mediaFallback} ${className ?? ""}`} aria-hidden="true">
-        <p className={styles.mediaFallbackCode}>{slot.id}</p>
         <p className={styles.mediaFallbackMark}>
           {mark}
           <span>.</span>

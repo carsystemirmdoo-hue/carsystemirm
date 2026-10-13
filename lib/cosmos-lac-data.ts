@@ -93,9 +93,23 @@ const syncOf = (record: CosmosLacGeneratedRecord): CosmosSyncEntry | undefined =
  * `REMOVED_FROM_CUSTOMER_CATALOG` (Molotow, 2026-09-21): zapis ostaje u Brand Kit datasetu kao istorijski podatak,
  * ali ne ulazi u runtime — nema kartice, varijante, pretrage ni sitemap adrese. Stare adrese preusmerava sync dataset.
  */
-const records = [...(generatedRecords as CosmosLacGeneratedRecord[]), ...syncProducts].filter(
-  (record) => syncOf(record)?.status !== "REMOVED_FROM_CUSTOMER_CATALOG",
-);
+/*
+ * Generator je za liniju „RAL” nazivu dodao prefiks linije ispred oznake „RAL 3002”, pa je pet
+ * zapisa glasilo „Cosmos Lac RAL RAL 3002 …”. Ispravlja se samo PRIKAZ (naziv, alt, SEO);
+ * slug, id i `?varijanta=` ključ ostaju, da se adrese ne pomere.
+ */
+const withoutDoubledRal = (text: string) => text.replace(/\bRAL RAL\b/g, "RAL");
+
+const records = [...(generatedRecords as CosmosLacGeneratedRecord[]), ...syncProducts]
+  .filter((record) => syncOf(record)?.status !== "REMOVED_FROM_CUSTOMER_CATALOG")
+  .map((record) => ({
+    ...record,
+    officialName: withoutDoubledRal(record.officialName),
+    displayNameSr: withoutDoubledRal(record.displayNameSr),
+    imageAlt: withoutDoubledRal(record.imageAlt),
+    seoTitle: withoutDoubledRal(record.seoTitle),
+    seoDescription: withoutDoubledRal(record.seoDescription),
+  }));
 
 const technicalCategoryLabels: Record<string, string> = {
   cleaner: "Čistač",
@@ -246,6 +260,21 @@ function badgesFor(record: CosmosLacGeneratedRecord) {
   ].filter((badge): badge is string => Boolean(badge));
 }
 
+/*
+ * Cosmos šifra koju proizvođač deli između više varijanti iste kartice (Master Mechanic „10”:
+ * pet RAL nijansi; „CL-304”: mat, polusjaj, sjaj). Takva šifra ne može biti `?varijanta=` ključ,
+ * pa varijanta tada nosi svoju jedinstvenu katalošku šifru (vidi lib/catalog/variant-key.ts).
+ */
+const sharedCosmosCodes = (() => {
+  const counts = new Map<string, number>();
+  for (const record of records) {
+    if (!record.cosmosCode) continue;
+    const key = `${syncOf(record)?.baseProductSlug ?? record.baseProductSlug}|${record.cosmosCode}`;
+    counts.set(key, (counts.get(key) ?? 0) + 1);
+  }
+  return new Set([...counts].filter(([, count]) => count > 1).map(([key]) => key));
+})();
+
 function toCarsystemProduct(record: CosmosLacGeneratedRecord): CarsystemProduct {
   const useCase =
     record.useCase ?? "Primena se potvrđuje prema zvaničnom tehničkom listu i konkretnoj podlozi.";
@@ -343,6 +372,9 @@ function toCarsystemProduct(record: CosmosLacGeneratedRecord): CarsystemProduct 
       officialName: record.officialName,
       displayNameSr: record.displayNameSr,
       cosmosCode: record.cosmosCode,
+      ...(record.cosmosCode && sharedCosmosCodes.has(`${baseProductSlug}|${record.cosmosCode}`)
+        ? { cosmosCodeShared: true }
+        : {}),
       ralCode: record.ralCode,
       colorName: record.colorName,
       finish: record.finish,

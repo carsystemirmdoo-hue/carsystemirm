@@ -73,11 +73,14 @@ export function CatalogStaticProductGrid({
   phases,
   entities,
   programs,
+  paginated = false,
 }: {
   brands: CarsystemBrand[];
   phases: RefinishPhase[];
   entities: CatalogListingEntity[];
   programs: ProgramGroup[];
+  /** `true` samo na /katalog i /katalog/strana/N, gde ispod liste postoje sledeće strane. */
+  paginated?: boolean;
 }) {
   const brandBySlug = new Map(brands.map((brand) => [brand.slug, brand]));
   const programBySlug = new Map(programs.map((program) => [program.slug, program]));
@@ -88,11 +91,12 @@ export function CatalogStaticProductGrid({
       <div className={styles.sectionHeader}>
         <div>
           <p className={styles.kicker}>Proizvodi</p>
-          <h2 id="catalog-products-title">Početak kataloga</h2>
+          <h2 id="catalog-products-title">{paginated ? "Proizvodi u katalogu" : "Proizvodi"}</h2>
         </div>
         <p>
-          Prvih {entities.length} proizvoda dostupno je i bez JavaScript-a.
-          Sledeće stranice kataloga povezane su ispod liste.
+          {paginated
+            ? "Sledeće stranice kataloga povezane su ispod liste."
+            : `Prikazano: ${entities.length}.`}
         </p>
       </div>
       <div className={styles.productGrid}>

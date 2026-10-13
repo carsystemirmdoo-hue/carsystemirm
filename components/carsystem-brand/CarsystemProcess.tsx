@@ -195,7 +195,7 @@ function ProcessDetails({
       </div>
 
       <div className={styles.processProducts}>
-        <p>Proizvodi iz lokalnog kataloga</p>
+        <p>Proizvodi iz kataloga</p>
         <div>
           {products.map((product) => (
             <Link href={`/proizvodi/${product.slug}`} key={product.slug}>

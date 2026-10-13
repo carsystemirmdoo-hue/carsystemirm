@@ -1,5 +1,6 @@
 import type { CarsystemProduct } from "@/lib/carsystem-data";
 import type { ProductTechnicalFact } from "@/types/product-detail";
+import { presentTechnicalFacts } from "@/lib/technical-facts-display.mjs";
 
 /**
  * Tehnički podaci JEDNOG proizvoda, spremni za prikaz.
@@ -17,11 +18,13 @@ export function getProductTechnicalFacts(product: CarsystemProduct): ProductTech
   const reviewedFacts = product.detail?.technicalFacts;
   if (product.detail) {
     return isConfirmed(reviewedFacts?.reviewStatus)
-      ? reviewedFacts?.content.filter((fact) => isConfirmed(fact.reviewStatus)) ?? []
+      ? presentTechnicalFacts(reviewedFacts?.content.filter((fact) => isConfirmed(fact.reviewStatus)) ?? [])
       : [];
   }
 
-  return product.specifications
-    .filter((fact) => fact.label && fact.value)
-    .map((fact) => ({ ...fact, reviewStatus: "confirmed" as const }));
+  return presentTechnicalFacts(
+    product.specifications
+      .filter((fact) => fact.label && fact.value)
+      .map((fact) => ({ ...fact, reviewStatus: "confirmed" as const })),
+  );
 }

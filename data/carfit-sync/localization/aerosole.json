@@ -542,7 +542,7 @@
       },
       {
         "label": "Test slane magle (DIN50021)",
-        "value": "Ri 0 / 240 h / 50 µ"
+        "value": "Ri 0 / 240 h / 50 µm"
       },
       {
         "label": "Pakovanje",
@@ -806,7 +806,7 @@
       },
       {
         "label": "Test slane magle (DIN50021)",
-        "value": "Ri 0 / 240 h / 250 µ"
+        "value": "Ri 0 / 240 h / 250 µm"
       },
       {
         "label": "Pakovanje",

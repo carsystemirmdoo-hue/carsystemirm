@@ -1,3 +1,4 @@
+import { abrasiveBackingTerms } from "@/lib/search/abrasive-backing.mjs";
 import catalogData from "@/data/carsystem-catalog-products.generated.json";
 import type {
   CarsystemProduct,
@@ -11,6 +12,7 @@ import type {
   ProductDetailDocument,
   ProductVariantSection,
 } from "@/types/product-detail";
+import { variantCountLabel } from "@/lib/sr-plural";
 
 /**
  * Carsystem proizvodi uvezeni iz zvaničnog kataloga i sa carsystem.org.
@@ -282,7 +284,7 @@ function summarizeVariants(entry: CatalogProductEntry) {
   const labels = entry.variants.map((variant) => variant.label);
   if (labels.length === 1) return labels[0];
   if (entry.variantColumn.key === "grit") return `${labels[0]}–${labels[labels.length - 1]}`;
-  return `${labels.length} varijanti`;
+  return variantCountLabel(labels.length);
 }
 
 function createCatalogProduct(entry: CatalogProductEntry, knownSlugs: Set<string>): CarsystemProduct {
@@ -343,7 +345,8 @@ function createCatalogProduct(entry: CatalogProductEntry, knownSlugs: Set<string
         ...(entry.legacyArticleNumbers ?? []).map((legacy) => ({
           label: "Prethodna šifra artikla",
           value: legacy.articleNumber,
-          detail: `Šifra iz kataloga proizvođača: ${legacy.source}.`,
+          // Izvor (katalog, strana PDF-a) je trag porekla za nas, ne podatak za kupca.
+          detail: "Ranija šifra istog artikla iz kataloga proizvođača.",
           reviewStatus: "confirmed" as const,
         })),
       ],
@@ -384,9 +387,12 @@ function createCatalogProduct(entry: CatalogProductEntry, knownSlugs: Set<string
         ? entry.leadArticleNumber
         : null,
     ...(manufacturer?.modelCode ? { publicCode: manufacturer.modelCode } : {}),
+    ...(abrasiveBackingTerms(entry.officialSubtitle).length && !manufacturer
+      ? { searchTerms: abrasiveBackingTerms(entry.officialSubtitle) }
+      : {}),
     ...(manufacturer
       ? {
-          searchTerms: manufacturerSearchTerms(entry, manufacturer),
+          searchTerms: [...manufacturerSearchTerms(entry, manufacturer), ...abrasiveBackingTerms(entry.officialSubtitle)],
           variantManufacturerCodes: [
             ...new Set(Object.values(manufacturer.articleModelCodes).flatMap((model) => [model.modelCode, ...model.aliases])),
           ],
@@ -406,7 +412,7 @@ function createCatalogProduct(entry: CatalogProductEntry, knownSlugs: Set<string
     stockManaged: false,
     productImage: entry.image
       ? { src: entry.image.src, alt: imageAlt }
-      : { src: PLACEHOLDER_PRODUCT_IMAGE, alt: `${entry.name}, ilustrativni prikaz proizvoda` },
+      : { src: PLACEHOLDER_PRODUCT_IMAGE, alt: `${entry.name} — fotografija proizvoda nije dostupna` },
     galleryImages: entry.gallery.map((image, index) => ({
       src: image.src,
       alt: `${entry.name}, dodatni prikaz ${index + 1}`,

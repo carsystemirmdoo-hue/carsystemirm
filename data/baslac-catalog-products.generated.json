@@ -956,8 +956,8 @@
         "flashOff": "3 min između slojeva",
         "sanding": null,
         "drying": [
-          "Drying at 20°C: 50-415: 10 h",
-          "Drying at 60°C: 50-415: 30 min",
+          "20°C: učvršćivač 50-415 10 h, 50-420 16 h, 50-430 16 h",
+          "60°C: učvršćivač 50-415 30 min, 50-420 40 min, 50-430 40 min",
           "Infrared (short wave): 8 min",
           "Infrared (medium wave): 10-15 min"
         ],
@@ -977,6 +977,28 @@
             "url": "https://techinfo.baslac.com/en/40-440.pdf",
             "page": 1,
             "section": "Application · Flash off at 20°C"
+          }
+        },
+        {
+          "field": "drying",
+          "original": "Drying at 20°C: 50-415: 10 h",
+          "value": "20°C: učvršćivač 50-415 10 h, 50-420 16 h, 50-430 16 h",
+          "kind": "parser-correction",
+          "tds": {
+            "url": "https://techinfo.baslac.com/en/40-440.pdf",
+            "page": 2,
+            "section": "Drying · vreme sušenja po učvršćivaču 50-415 / 50-420 / 50-430"
+          }
+        },
+        {
+          "field": "drying",
+          "original": "Drying at 60°C: 50-415: 30 min",
+          "value": "60°C: učvršćivač 50-415 30 min, 50-420 40 min, 50-430 40 min",
+          "kind": "parser-correction",
+          "tds": {
+            "url": "https://techinfo.baslac.com/en/40-440.pdf",
+            "page": 2,
+            "section": "Drying · vreme sušenja po učvršćivaču 50-415 / 50-420 / 50-430"
           }
         }
       ],
@@ -1161,8 +1183,8 @@
         "flashOff": "3 min između slojeva",
         "sanding": null,
         "drying": [
-          "Drying at 20°C: 50-415: 6 h",
-          "Drying at 60°C: 50-415: 20 min",
+          "20°C: učvršćivač 50-415 6 h, 50-420 10 h, 50-430 16 h",
+          "60°C: učvršćivač 50-415 20 min, 50-420 30 min, 50-430 40 min",
           "Infrared (short wave): 8 min",
           "Infrared (medium wave): 10-15 min"
         ],
@@ -1182,6 +1204,28 @@
             "url": "https://techinfo.baslac.com/en/40-450.pdf",
             "page": 1,
             "section": "Application · Flash off at 20°C"
+          }
+        },
+        {
+          "field": "drying",
+          "original": "Drying at 20°C: 50-415: 6 h",
+          "value": "20°C: učvršćivač 50-415 6 h, 50-420 10 h, 50-430 16 h",
+          "kind": "parser-correction",
+          "tds": {
+            "url": "https://techinfo.baslac.com/en/40-450.pdf",
+            "page": 2,
+            "section": "Drying · vreme sušenja po učvršćivaču 50-415 / 50-420 / 50-430"
+          }
+        },
+        {
+          "field": "drying",
+          "original": "Drying at 60°C: 50-415: 20 min",
+          "value": "60°C: učvršćivač 50-415 20 min, 50-420 30 min, 50-430 40 min",
+          "kind": "parser-correction",
+          "tds": {
+            "url": "https://techinfo.baslac.com/en/40-450.pdf",
+            "page": 2,
+            "section": "Drying · vreme sušenja po učvršćivaču 50-415 / 50-420 / 50-430"
           }
         }
       ],

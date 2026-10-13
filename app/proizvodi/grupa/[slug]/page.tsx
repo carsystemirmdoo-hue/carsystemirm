@@ -90,6 +90,7 @@ export default async function ProductFamilyRoute({ params }: FamilyRouteProps) {
               intro={baslacSystem.intro}
               system={baslacSystem.system}
               systemName={baslacSystem.name}
+              lineDocument={baslacSystem.lineDocument}
             />
           </main>
           <Footer />
@@ -171,6 +172,7 @@ export default async function ProductFamilyRoute({ params }: FamilyRouteProps) {
             intro={baslacSystem.intro}
             system={baslacSystem.system}
             systemName={baslacSystem.name}
+            lineDocument={baslacSystem.lineDocument}
           />
         ) : (
           <CatalogStaticProductGrid

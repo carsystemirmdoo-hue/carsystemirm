@@ -1,0 +1,140 @@
+{
+ "carfit_1440_min_opacity_kartica_0_40_110": [
+  0,
+  0,
+  0
+ ],
+ "carfit_390_min_opacity_kartica_0_40_110": [
+  0,
+  0,
+  0
+ ],
+ "tema_dark_/brendovi/norbin_1440_svetlih_blokova_pct": 48,
+ "tema_dark_/brendovi/norbin_390_svetlih_blokova_pct": 87,
+ "tema_dark_/brendovi/sata_1440_svetlih_blokova_pct": 35,
+ "tema_dark_/brendovi/sata_390_svetlih_blokova_pct": 54,
+ "tema_dark_/brendovi/rm_1440_svetlih_blokova_pct": 28,
+ "tema_dark_/brendovi/rm_390_svetlih_blokova_pct": 20,
+ "katalozi_ssr_pdf_linkova": 0,
+ "tekst_preostale_fraze": {
+  "/brendovi/carsystem": [
+   "javnih Carsystem zapisa",
+   "lokalnog kataloga",
+   "Lokalni javni katalog",
+   "postojeći lokalni zapisi",
+   "Opremljam",
+   "poliru"
+  ],
+  "/brendovi/carfit": [
+   "carfit-task-preparation",
+   "carfit-abrasives",
+   "carfit-masking-scene"
+  ],
+  "/brendovi/norbin": [
+   "bez sistema boje",
+   "učvršđivač",
+   "NORBIN-N15-020-5L",
+   "sa strane sajta",
+   "EMEA"
+  ],
+  "/brendovi/rm": [
+   "umesto izmišljene ambalaže",
+   "bez izmišljanja",
+   "Direktan ulaz u postojeći katalog"
+  ],
+  "/brendovi/baslac": [
+   "Pretražite javni katalog",
+   "Refinity ovde predstavljamo",
+   "Proizvodi sa otvorenom stranicom"
+  ],
+  "/brendovi/cosmos-lac": [
+   "GRAFIT I",
+   "primeri,",
+   "RAL RAL"
+  ],
+  "/proizvodi/rm-pasta-190-1l": [
+   "U pripremi za javni katalog"
+  ],
+  "/proizvodi/h-2a14-topcure": [
+   "dostavljeni zvanični R-M materijal"
+  ],
+  "/kategorije/bazne-boje": [
+   "dostupno je i bez JavaScript-a",
+   "Potvrđeni R-M proizvodi"
+  ],
+  "/program/boje-i-lakovi": [
+   "Aktivni brendovi vode na javne stranice"
+  ],
+  "/proizvodi/norbin-n75-020-hardener-fast": [],
+  "/proizvodi/carsystem-finish-back-pad-m-14": [
+   "PDF str. 72"
+  ]
+ },
+ "tehnika": {
+  "/proizvodi/rm-a-2a54-blendingadd": [
+   "Mlaznica (mm): 1–1,2",
+   "VOC (IIB.e): 839 g/l · granica 840 g/l",
+   "Mlaznica: 1 -1.2 mm",
+   "VOC: 839 g/l EU granica za kategoriju IIB.e: 840 g/l"
+  ],
+  "/proizvodi/norbin-n15-v20-clear-voc": [
+   "Odnos mešanja: 4:1",
+   "Viskozitet prskanja: 20-24 s na 20°C",
+   "Vreme upotrebe smeše: 1,5 h na 20°C",
+   "Mlaznica: 1,3-1,4",
+   "Sušenje: 20°C: 5 h do montaže · 60°C: 30 min · potpuna tvrdoća posle 24 h",
+   "Rok upotrebe: 24 meseca",
+   "VOC: 419 g/l",
+   "VOC: Sadržaj VOC ovog proizvoda je 419 g/l. Ne može se isključiti da proizvod sadrži čestice manje od 0,1 μm.",
+   "Rok upotrebe: 24 months",
+   "Viskozitet prskanja: 20-24 s (at 20°C)",
+   "Vreme upotrebe smeše: 1.5 h (at 20°C)",
+   "Mlaznica: 1.3",
+   "Mlaznica: 1.3-1.4",
+   "Sušenje: 5 h do montaže (pri 20°C)",
+   "Sušenje: 30 min (at 60°C)",
+   "Sušenje: Potpuna tvrdoća: posle 24 h"
+  ],
+  "/proizvodi/grupa/norbin-n15-020": [
+   "Rok upotrebe: 24 months",
+   "Odnos mešanja: 2:1",
+   "Viskozitet prskanja: 16-18 s (at 20°C)",
+   "Vreme upotrebe smeše: 2 h (at 20°C)",
+   "Mlaznica: 1.3",
+   "Mlaznica: 1.3-1.4",
+   "Sušenje: 5 h do montaže (pri 20°C)",
+   "Sušenje: 30 min (at 60°C)",
+   "Sušenje: Potpuna tvrdoća: posle 24 h"
+  ],
+  "/proizvodi/2520-onyx-easy-blender": [
+   "Vreme upotrebe smeše: na 20°C 7 days",
+   "Mlaznica: 1.4 -1.5 mm",
+   "VOC: 419 g/l EU granica za kategoriju IIB.d: 420 g/l"
+  ],
+  "/proizvodi/baslac-40-440-2k-voc-clear": [
+   "Odnos mešanja: 2:1",
+   "Viskozitet prskanja: DIN 4: 20-22 s",
+   "Vreme upotrebe smeše: 2 h",
+   "Mlaznica: 1.3 mm",
+   "Sušenje: 20°C: 50-415 · 60°C: 50-415 · IC kratkotalasno: 8 min · IC srednjetalasno: 10-15 min",
+   "VOC: 419 g/l EU granica za ovaj proizvod: 420 g/l"
+  ],
+  "/proizvodi/baslac-40-450-universal-clear-voc": [
+   "Odnos mešanja: 2:1+10 %",
+   "Viskozitet prskanja: DIN 4: 20-22 s",
+   "Vreme upotrebe smeše: 2 h",
+   "Mlaznica: 1.3 mm",
+   "Sušenje: 20°C: 50-415 · 60°C: 50-415 · IC kratkotalasno: 8 min · IC srednjetalasno: 10-15 min",
+   "VOC: 419 g/l EU granica za ovaj proizvod: 420 g/l"
+  ]
+ },
+ "program_brojevi": [
+  467,
+  241,
+  217,
+  111,
+  876
+ ],
+ "katalog_hero": "",
+ "rupes_linkova_u_zaglavlju_i_footeru": 0
+}

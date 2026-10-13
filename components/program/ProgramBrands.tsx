@@ -20,8 +20,7 @@ export function ProgramBrands({
         <p className={styles.sectionKicker}>Brendovi</p>
         <h2 id="program-brands-title">Brendovi povezani sa programom</h2>
         <p>
-          Aktivni brendovi vode na javne stranice sa programima, proizvodima i
-          upitom za tehnički izbor.
+          Brendovi povezani sa ovim programom.
         </p>
       </div>
 

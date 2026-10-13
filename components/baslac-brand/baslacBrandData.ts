@@ -200,7 +200,7 @@ export const baslacMedia: Record<BaslacMediaId, BaslacMediaDefinition> = {
       "/images/brands/baslac/commercial/baslac-commercial-vehicles.webp",
     width: 2400,
     height: 1575,
-    alt: "Zvanični baslac render dostavnog kamiona sa sandukom, obojenog u svetloplavu",
+    alt: "Dostavni kamion sa sandukom, obojen u svetloplavu",
     priority: "medium",
   },
 };
@@ -304,7 +304,7 @@ export const baslacRepairProcesses: BaslacRepairProcess[] = [
     description:
       "Povezan proces pripreme, podloge, bazne boje i univerzalnog bezbojnog laka za svakodnevni rad.",
     stages: ["Priprema", "Primer-filler", "35 ili 45 Line", "Universal clear"],
-    productGroups: ["20- serija", "35 / 45 Line", "40-40 / 440 / 450"],
+    productGroups: ["20- serija", "35 / 45 Line", "40-40 / 40-440 / 40-450"],
   },
   {
     id: "fast",

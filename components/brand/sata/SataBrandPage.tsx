@@ -1,3 +1,4 @@
+import { srPlural } from "@/lib/sr-plural";
 import Link from "next/link";
 import { BrandSectionNav } from "@/components/brand/BrandSectionNav";
 import { Footer } from "@/components/layout/Footer";
@@ -195,10 +196,9 @@ export function SataBrandPage({ brand, products }: Props) {
         </header>
 
         <p className={styles.scopeNotice} role="note">
-          <strong>Ovo je program proizvođača, ne naš lager.</strong> Prisustvo
-          proizvoda u našem online katalogu nije potvrda prodaje ni zaliha. Za
-          dostupnost, konfiguraciju i rok isporuke kontaktirajte Carsystem i R-M
-          — cene, zalihe i rokovi ovde nisu navedeni.
+          <strong>Pregled programa proizvođača.</strong> Dostupnost,
+          konfiguraciju i rok isporuke potvrđujemo na upit — cene, zalihe i
+          rokovi ovde nisu navedeni.
         </p>
 
         <div className={styles.familyGrid}>
@@ -389,7 +389,7 @@ export function SataBrandPage({ brand, products }: Props) {
         <header className={styles.sectionHead}>
           <p className={styles.eyebrow}>SATA u našem online katalogu</p>
           <h2 className={styles.sectionTitle} id="sata-kod-nas-title">
-            Šta je evidentirano u katalogu
+            SATA proizvodi u katalogu
           </h2>
         </header>
 
@@ -404,8 +404,8 @@ export function SataBrandPage({ brand, products }: Props) {
         */}
         <p className={styles.localLead}>
           {products.length > 0
-            ? `U našem online katalogu je evidentirano ${products.length === 1 ? "1 SATA proizvod" : `${products.length} SATA proizvoda`}. Evidencija nije izjava o prodaji, zalihama ni ceni — za dostupnost, konfiguraciju i rok isporuke kontaktirajte Carsystem i R-M.`
-            : "Trenutno evidentirano u našem online katalogu: nijedan SATA proizvod. Za dostupnost, konfiguraciju i rok isporuke kontaktirajte Carsystem i R-M."}
+            ? `U našem online katalogu je ${products.length} ${srPlural(products.length, "SATA proizvod", "SATA proizvoda", "SATA proizvoda")}. Prikaz u katalogu nije podatak o zalihama ni ceni — za dostupnost, konfiguraciju i rok isporuke kontaktirajte Carsystem i R-M.`
+            : "U našem online katalogu trenutno nema SATA proizvoda. Za dostupnost, konfiguraciju i rok isporuke kontaktirajte Carsystem i R-M."}
         </p>
         {products.length > 0 ? (
           <p className={styles.localCatalogLink}>
@@ -421,7 +421,7 @@ export function SataBrandPage({ brand, products }: Props) {
             <h3 className={styles.localCtaTitle}>Proverite dostupnost</h3>
             <p className={styles.localCtaBody}>
               Napišite koji materijal radite i kakav vazduh imate u radionici, pa
-              predlažemo oblast programa i konfiguraciju. Bez obaveze i bez
+              predložićemo oblast programa i konfiguraciju. Bez obaveze i bez
               javnih cena.
             </p>
           </div>

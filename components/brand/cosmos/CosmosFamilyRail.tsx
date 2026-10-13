@@ -6,6 +6,7 @@ import { useEffect, useRef, useState } from "react";
 import type { CosmosFamily } from "@/lib/cosmos-lac-brand-data";
 import styles from "./CosmosBrandPage.module.css";
 import { useMeasuredWidth, useScrollProgress } from "./useScrollProgress";
+import { variantCountLabel } from "@/lib/sr-plural";
 
 type Props = {
   families: CosmosFamily[];
@@ -95,7 +96,7 @@ export function CosmosFamilyRail({
 
   return (
     <section
-      aria-label="COSMOS LAC linije proizvoda"
+      aria-label="Cosmos Lac linije proizvoda"
       className={styles.rail}
       ref={sectionRef}
     >
@@ -141,9 +142,9 @@ export function CosmosFamilyRail({
             href={catalogueHref}
           >
             <p className={styles.eyebrow}>
-              +{otherVariants} varijanti u {otherLines} linija
+              +{variantCountLabel(otherVariants)} u {otherLines} linija
             </p>
-            <h3 className={styles.panelName}>Sve COSMOS linije</h3>
+            <h3 className={styles.panelName}>Sve Cosmos Lac linije</h3>
             <span className={styles.panelTerminalArrow} aria-hidden="true">
               ↗
             </span>

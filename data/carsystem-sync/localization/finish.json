@@ -1122,7 +1122,7 @@
     ],
     "advice": "Preporučuje se nanošenje uz Carsystem Wax Puck.",
     "variants": {
-      "151.945": "1.0 l"
+      "151.945": "1,0 l"
     }
   },
   "finish/orbital-sander-csh-cms01-kit-cordless-orbital-sander": {
@@ -1130,7 +1130,7 @@
     "productType": "Vibraciona brusilica",
     "subtype": "Akumulatorska vibraciona brusilica",
     "shortDescription": "Akumulatorska vibraciona brusilica sa hodom 3 mm, u kompletu sa dve baterije, punjačem i koferom.",
-    "longDescription": "CSH-CMS01 je kompaktna akumulatorska vibraciona brusilica sa 10.8 V 2.5 Ah Li-ion baterijom, koja radi do 40 minuta neprekidno, odnosno do 2 dana uz pauze, a puni se za 60 minuta. Motor bez četkica reguliše se u 6 stepeni, uz hod od 3 mm i brzinu 4.000 - 10.000 o/min. Komplet sadrži četiri podloške (2x PSA, 2x čičak), punjač i dodatnu bateriju, sve u koferu.",
+    "longDescription": "CSH-CMS01 je kompaktna akumulatorska vibraciona brusilica sa 10,8 V 2,5 Ah Li-ion baterijom, koja radi do 40 minuta neprekidno, odnosno do 2 dana uz pauze, a puni se za 60 minuta. Motor bez četkica reguliše se u 6 stepeni, uz hod od 3 mm i brzinu 4.000 - 10.000 o/min. Komplet sadrži četiri podloške (2x PSA, 2x čičak), punjač i dodatnu bateriju, sve u koferu.",
     "purpose": "Tačkasto brušenje i uklanjanje grešaka u laku",
     "facts": [
       {
@@ -1419,7 +1419,7 @@
     ],
     "advice": "Preporučuje se upotreba proizvoda Carsystem Lambwool Pad white S Edge ili Polish Foam Yellow.",
     "variants": {
-      "156.451": "5.0 kg"
+      "156.451": "5,0 kg"
     }
   },
   "finish/polish-fine-step-2-anti-hologram-polish": {
@@ -1471,7 +1471,7 @@
     ],
     "advice": "Preporučuje se upotreba proizvoda Carsystem Finish Waffle Foam Black.",
     "variants": {
-      "156.452": "5.0 kg"
+      "156.452": "5,0 kg"
     }
   },
   "finish/polish-foam-green-polishing-pad": {
@@ -1844,7 +1844,7 @@
         "description": "Štiti bateriju od pregrevanja."
       }
     ],
-    "advice": "Okvirna vremena punjenja: baterije 2.5 Ah – 50–60 minuta / baterije 5.0 Ah – 100–120 minuta.",
+    "advice": "Okvirna vremena punjenja: baterije 2,5 Ah – 50–60 minuta / baterije 5,0 Ah – 100–120 minuta.",
     "variants": {
       "159.064": "10,8 V / 55 W"
     }
@@ -2061,7 +2061,7 @@
     ],
     "advice": null,
     "variants": {
-      "158.134": "Crna / 32 x 20.5 cm"
+      "158.134": "Crna / 32 x 20,5 cm"
     }
   },
   "finish/rupes-angle-polishing-machine-lh76p-angle-polishing-machine-pneumatic": {
@@ -2101,7 +2101,7 @@
     "productType": "Mini polirka",
     "subtype": "Mašina za poliranje · akumulatorska",
     "shortDescription": "RUPES Bigfoot HLR75STB je akumulatorska mini orbitalna mašina za poliranje sa orbitom od 12 mm.",
-    "longDescription": "RUPES Bigfoot HLR75STB je akumulatorska mini mašina za poliranje sa orbitalnim kretanjem i prečnikom orbite od 12 mm. Baterija 18 V - 2.5 Ah ima LED prikaz, autonomiju od 35 - 45 min. i vreme punjenja od 35 min. Podloška je prečnika 75 mm, a broj obrtaja podesiv je do 5.500 o/min. U isporuci su mašina, dve punjive baterije i punjač.",
+    "longDescription": "RUPES Bigfoot HLR75STB je akumulatorska mini mašina za poliranje sa orbitalnim kretanjem i prečnikom orbite od 12 mm. Baterija 18 V - 2,5 Ah ima LED prikaz, autonomiju od 35 - 45 min. i vreme punjenja od 35 min. Podloška je prečnika 75 mm, a broj obrtaja podesiv je do 5.500 o/min. U isporuci su mašina, dve punjive baterije i punjač.",
     "purpose": "Orbitalno poliranje manjih površina",
     "facts": [
       {
@@ -2110,7 +2110,7 @@
       },
       {
         "label": "Baterija",
-        "value": "18 V - 2.5 Ah, sa LED prikazom"
+        "value": "18 V - 2,5 Ah, sa LED prikazom"
       },
       {
         "label": "Autonomija",
@@ -2146,7 +2146,7 @@
       },
       {
         "label": "Sadržaj isporuke",
-        "value": "2 x punjiva baterija 18 V - 2.5 Ah"
+        "value": "2 x punjiva baterija 18 V - 2,5 Ah"
       },
       {
         "label": "Sadržaj isporuke",

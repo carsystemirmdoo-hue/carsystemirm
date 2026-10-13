@@ -1,5 +1,6 @@
 "use client";
 
+import { matchesPhase, phasesOf } from "@/lib/catalog/phase-match.mjs";
 import { useEffect, useMemo, useState } from "react";
 import { EntityProductCard } from "@/components/brand-program/EntityProductCard";
 import { SearchableCombobox } from "@/components/ui/SearchableCombobox";
@@ -85,7 +86,7 @@ export function EntityProductFilters({
   }, [products, programs]);
 
   const visiblePhaseOptions = useMemo(() => {
-    const slugs = new Set(products.map((product) => product.phaseSlug));
+    const slugs = new Set(products.flatMap((product) => phasesOf(product)));
     return phases.filter((phase) => slugs.has(phase.slug));
   }, [phases, products]);
 
@@ -138,7 +139,7 @@ export function EntityProductFilters({
 
       if (effectiveBrand && product.brandSlug !== effectiveBrand) return false;
       if (effectiveProgram && product.programSlug !== effectiveProgram) return false;
-      if (phaseSlug && product.phaseSlug !== phaseSlug) return false;
+      if (phaseSlug && !matchesPhase(product, phaseSlug)) return false;
       if (typeTag && !product.badges.includes(typeTag)) return false;
       if (productLine && product.catalogMetadata?.line !== productLine) return false;
       if (

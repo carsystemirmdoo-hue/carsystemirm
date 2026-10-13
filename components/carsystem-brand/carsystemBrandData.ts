@@ -223,8 +223,8 @@ export const carsystemMetrics = [
   {
     id: "catalog",
     value: "catalog-count",
-    label: "javnih Carsystem zapisa",
-    detail: "Povezano sa postojećim katalogom",
+    label: "Carsystem proizvoda u katalogu",
+    detail: "Svaki sa stranicom i upitom",
   },
   {
     id: "phases",
@@ -235,7 +235,7 @@ export const carsystemMetrics = [
   {
     id: "programs",
     value: "program-count",
-    label: "zastupljene programske celine",
+    label: "programa u katalogu",
     detail: "Prema proizvodima u katalogu",
   },
   {
@@ -575,7 +575,7 @@ export const carsystemUseCases = [
   },
   {
     id: "workshop",
-    label: "Opremljam radionicu",
+    label: "Opremam radionicu",
     title: "Potrošni program koji prati dnevni ritam",
     description:
       "Zaštita, maskiranje i potvrđene abrazivne serije čine praktičnu osnovu radnog mesta.",
@@ -676,8 +676,8 @@ export const carsystemDocumentation = {
   resources: [
     {
       id: "catalog",
-      label: "Javni katalog",
-      description: "Carsystem proizvodi i postojeći lokalni zapisi.",
+      label: "Katalog",
+      description: "Svi Carsystem proizvodi iz naše ponude.",
       status: "Dostupno",
       href: carsystemCatalogHref(),
     },
@@ -690,7 +690,7 @@ export const carsystemDocumentation = {
     },
     {
       id: "sds",
-      label: "Sigurnosni listovi",
+      label: "Bezbednosni listovi",
       description: "Proveravaju se prema tačnom proizvodu i varijanti.",
       status: "Na upit",
       href: "/kontakt?tema=dokument&brend=carsystem&tip=sds",
@@ -773,7 +773,7 @@ export const carsystemFinishSystem = {
   accessory: {
     title: "Microfiber X300 Duo",
     description:
-      "Dvobojne mikrofiber krpe razdvajaju grubu i finu poliru u istom radnom procesu.",
+      "Dvobojne mikrofiber krpe razdvajaju grubo i fino poliranje u istom radnom procesu.",
   },
   cta: {
     href: carsystemCatalogHref({ program: "poliranje" }),

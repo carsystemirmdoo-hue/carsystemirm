@@ -330,7 +330,7 @@
     },
     {
       "sourceFolder": "EASY C 2P15",
-      "canonicalName": "EASY C 2P15",
+      "canonicalName": "C 2P15 EASY Finish-R",
       "productCode": "C 2P15",
       "imagePath": "/images/brands/rm/products/pioneer/rm-c-2p15-easy-finish-r.webp",
       "productPdfPath": "/documents/products/rm/c-2p15-easy-finish-r/rm-c-2p15-easy-finish-r-product-information.pdf",
@@ -616,7 +616,7 @@
     },
     {
       "sourceFolder": "ProtectTOP C 2A84",
-      "canonicalName": "ProtectTOP C 2A84",
+      "canonicalName": "C 2A84 ProtectTOP",
       "productCode": "C 2A84",
       "imagePath": "/images/brands/rm/products/advance/rm-c-2a84-protecttop.webp",
       "productPdfPath": "/documents/products/rm/c-2a84-protecttop/rm-c-2a84-protecttop-product-information.pdf",
@@ -800,10 +800,10 @@
         "technology": "waterborne"
       },
       "content": {
-        "benefit": "Vodeni dodatak za ONYX HD BLEND'ART popravke i transparentni predpremaz.",
+        "benefit": "Vodeni dodatak za ONYX HD BLEND'ART popravke i transparentni pretpremaz.",
         "context": "ONYX HD",
-        "purpose": "Vodeni dodatak za ONYX HD BLEND'ART popravke i transparentni predpremaz.",
-        "shortDescription": "Vodeni dodatak za ONYX HD BLEND'ART popravke i transparentni predpremaz.",
+        "purpose": "Vodeni dodatak za ONYX HD BLEND'ART popravke i transparentni pretpremaz.",
+        "shortDescription": "Vodeni dodatak za ONYX HD BLEND'ART popravke i transparentni pretpremaz.",
         "technicalReviewStatus": "confirmed"
       },
       "contentReview": {
@@ -1761,10 +1761,10 @@
     },
     {
       "slug": "c-2p15-easy-finish-r",
-      "canonicalName": "EASY C 2P15",
+      "canonicalName": "C 2P15 EASY Finish-R",
       "productCode": "C 2P15",
       "image": {
-        "alt": "EASY C 2P15, dostavljeni prikaz proizvoda",
+        "alt": "C 2P15 EASY Finish-R, dostavljeni prikaz proizvoda",
         "assetSource": "supplied-product-archive",
         "originalFilename": "C 2P15.png",
         "sourceSha256": "2461445904ce8839dabf02013293c858c95c345b808ee17591021ecbc7f6a213",
@@ -2833,10 +2833,10 @@
     },
     {
       "slug": "c-2a84-protecttop",
-      "canonicalName": "ProtectTOP C 2A84",
+      "canonicalName": "C 2A84 ProtectTOP",
       "productCode": "C 2A84",
       "image": {
-        "alt": "ProtectTOP C 2A84, dostavljeni prikaz proizvoda",
+        "alt": "C 2A84 ProtectTOP, dostavljeni prikaz proizvoda",
         "assetSource": "supplied-product-archive",
         "originalFilename": "C 2A84.png",
         "sourceSha256": "5a232e273bc0a9bb690bc1b1e133798ea3d06eff14ac49593b6c6e869d9794b2",

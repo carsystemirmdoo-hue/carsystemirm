@@ -750,7 +750,7 @@
     "advice": null,
     "variants": {
       "126.040": "Sa 2 dodatne usisne cevi / bez creva za zaštitu šupljina",
-      "126.058": "Crevo za zaštitu šupljina / 0.9 m",
+      "126.058": "Crevo za zaštitu šupljina / 0,9 m",
       "126.048": "Rezervne usisne cevi"
     }
   },
@@ -792,7 +792,7 @@
     "advice": null,
     "variants": {
       "157.032": "Pištolj za zaštitu podvozja",
-      "142.279": "Set creva / 0.95 m",
+      "142.279": "Set creva / 0,95 m",
       "147.956": "KS-Gun rezervna dizna",
       "158.017": "KS-Gun dizna"
     }

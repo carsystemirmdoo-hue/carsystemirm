@@ -20,7 +20,7 @@ export const seoCategoryLandings: SeoCategoryLanding[] = [
     description:
       "Pregled R-M bezbojnih lakova za završni sloj, sjaj i zaštitu u profesionalnom procesu lakiranja. Dokumentacija i dostupnost proveravaju se kroz upit.",
     intro:
-      "Bezbojni lak zatvara sistem boje i određuje završni izgled i zaštitu površine. Ovde su objedinjeni potvrđeni R-M proizvodi sa direktnim pristupom tehničkoj dokumentaciji.",
+      "Bezbojni lak zatvara sistem boje i određuje završni izgled i zaštitu površine. Ovde su objedinjeni R-M bezbojni lakovi sa tehničkom dokumentacijom.",
     rmCategories: ["clearcoat"],
   },
   {
@@ -31,7 +31,7 @@ export const seoCategoryLandings: SeoCategoryLanding[] = [
     description:
       "R-M prajmeri i punioci za pripremu stabilne podloge pre sistema boje, sa tehničkim listovima i upitom za lokalnu dostupnost.",
     intro:
-      "Pravilno izabrana podloga povezuje pripremu površine i sistem boje. Lista obuhvata R-M prajmere i punioce sa potvrđenom namenom i lokalnom dokumentacijom.",
+      "Pravilno izabrana podloga povezuje pripremu površine i sistem boje. Lista obuhvata R-M prajmere i punioce sa namenom i tehničkim listovima.",
     rmCategories: ["primer-filler"],
   },
   {
@@ -51,7 +51,7 @@ export const seoCategoryLandings: SeoCategoryLanding[] = [
     singularName: "sistemska komponenta",
     title: "Učvršćivači i razređivači za auto lakove",
     description:
-      "R-M učvršćivači i razređivači za potvrđene refinish sisteme. Kompatibilnost i odnos primene proverite u tehničkoj dokumentaciji.",
+      "R-M učvršćivači i razređivači za R-M sisteme boja i lakova. Kompatibilnost i odnos primene proverite u tehničkoj dokumentaciji.",
     intro:
       "Učvršćivači i razređivači su sistemske komponente. Izbor mora pratiti konkretan proizvod, uslove rada i parametre iz odgovarajućeg tehničkog lista.",
     rmCategories: ["hardener", "thinner"],

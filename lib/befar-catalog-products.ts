@@ -254,7 +254,7 @@ function createCatalogProduct(entry: CatalogProductEntry): CarsystemProduct {
     stockManaged: false,
     productImage: entry.image
       ? { src: entry.image.src, alt: imageAlt }
-      : { src: PLACEHOLDER_PRODUCT_IMAGE, alt: `${entry.name}, ilustrativni prikaz proizvoda` },
+      : { src: PLACEHOLDER_PRODUCT_IMAGE, alt: `${entry.name} — fotografija proizvoda nije dostupna` },
     galleryImages: entry.gallery.map((image, index) => ({
       src: image.src,
       alt: `${entry.name}, dodatni prikaz ${index + 1}`,

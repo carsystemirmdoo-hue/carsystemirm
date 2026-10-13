@@ -182,6 +182,36 @@ export const carsystemHero = {
   slogan: "It’s all about a good system.",
 } as const;
 
+/**
+ * Stvarni Carsystem proizvodi iz kataloga za mesto slike dok fotografija faze nema
+ * potvrđeno pravo upotrebe — umesto crteža. Namerno drugi proizvodi od lista faza,
+ * da se isti packshot ne ponavlja na stranici.
+ */
+export const carsystemMediaProductSlugs: Partial<Record<CarsystemMediaId, string[]>> = {
+  "hero-preparation": [
+    "carsystem-multi-flow",
+    "carsystem-sanding-block-198-2-0",
+    "carsystem-2k-filler-vario-plus",
+  ],
+  "hero-painting": [
+    "carsystem-2k-clear-voc-cc-26-eco-x-15-60",
+    "carsystem-paint-system-cps-3-0",
+    "carsystem-masking-film-green",
+  ],
+  "hero-finishing": [
+    "carsystem-compound-x1500-hc",
+    "carsystem-polish-x8000-ah",
+    "carsystem-polishing-pad-x8000",
+  ],
+};
+carsystemMediaProductSlugs["process-preparation"] = carsystemMediaProductSlugs["hero-preparation"];
+carsystemMediaProductSlugs["process-application"] = carsystemMediaProductSlugs["hero-painting"];
+carsystemMediaProductSlugs["process-finish"] = carsystemMediaProductSlugs["hero-finishing"];
+
+export type CarsystemMediaProducts = Partial<
+  Record<CarsystemMediaId, Array<{ src: string; alt: string; name: string }>>
+>;
+
 export const carsystemHeroSlides = [
   {
     id: "preparation",
@@ -600,6 +630,9 @@ export const carsystemProductOrder = [
   "carsystem-p23-brusni-diskovi",
   "carsystem-finish-serija",
   "carsystem-zastitno-odelo",
+  // Dopuna do dva puna reda (ranije 6 kartica u mreži od 4 = dva prazna siva polja).
+  "carsystem-uv-led-lamp",
+  "carsystem-master-tape-green",
 ] as const;
 
 /**

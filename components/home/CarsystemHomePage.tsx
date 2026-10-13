@@ -533,13 +533,13 @@ export function CarsystemHomePage() {
             </div>
             <figure className={styles.supportVisual}>
               <Image
-                src="/products/carsystem/carsystem-finish-serija.png"
-                alt="Carsystem Finish serija"
+                src="/products/carsystem/catalog/carsystem-paint-system-cps-3-0.webp"
+                alt="Carsystem CPS 3.0 — posude sa skalom odnosa mešanja"
                 width={660}
-                height={662}
+                height={726}
                 sizes="(max-width: 900px) 92vw, 38vw"
               />
-              <figcaption>Carsystem Finish serija</figcaption>
+              <figcaption>Posude sa skalom odnosa mešanja</figcaption>
             </figure>
           </div>
 

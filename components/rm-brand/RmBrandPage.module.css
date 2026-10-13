@@ -3152,6 +3152,58 @@
   min-width: 0;
 }
 
+/* Proizvodi bez potvrđene fotografije: lista veza preko cele širine postave. */
+.productFamilyTextList {
+  display: grid;
+  grid-column: 1 / -1;
+  gap: 0;
+  margin: 0;
+  padding: 0;
+  border-top: 1px solid var(--rm-line);
+  list-style: none;
+}
+
+.productFamilyTextList a {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 0.15rem 1rem;
+  padding: 0.95rem 0.2rem;
+  border-bottom: 1px solid var(--rm-line);
+  color: inherit;
+  text-decoration: none;
+}
+
+.productFamilyTextList small {
+  grid-column: 1;
+  color: var(--rm-muted);
+  font-family: var(--font-technical), monospace;
+  font-size: 0.68rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.productFamilyTextList strong {
+  grid-column: 1;
+  font-size: 1.05rem;
+}
+
+.productFamilyTextList span {
+  grid-column: 2;
+  grid-row: 1 / span 2;
+  align-self: center;
+  color: var(--rm-accent);
+}
+
+.productFamilyTextList a:hover strong,
+.productFamilyTextList a:focus-visible strong {
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+.productFamilyLineup[data-text-only] {
+  align-self: center;
+}
+
 @media (min-width: 50.0625rem) {
   .productFamilyLineup:has(> figure:only-child) {
     grid-template-columns: minmax(0, 22rem);

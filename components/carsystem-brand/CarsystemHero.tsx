@@ -16,6 +16,7 @@ import {
   carsystemHeroSlides,
   carsystemMedia,
   type CarsystemMediaAvailability,
+  type CarsystemMediaProducts,
 } from "./carsystemBrandData";
 import styles from "./CarsystemBrandPage.module.css";
 
@@ -24,8 +25,10 @@ const MIN_SWIPE_DISTANCE = 52;
 
 export function CarsystemHero({
   availability,
+  mediaProducts,
 }: {
   availability: CarsystemMediaAvailability;
+  mediaProducts: CarsystemMediaProducts;
 }) {
   const [activeIndex, setActiveIndex] = useState(0);
   const [manuallyPaused, setManuallyPaused] = useState(false);
@@ -179,6 +182,7 @@ export function CarsystemHero({
             key={activeMedia.id}
             media={activeMedia}
             priority={activeIndex === 0}
+            products={mediaProducts[activeMedia.id]}
             sizes="(min-width: 80rem) 55vw, (min-width: 48rem) 52vw, 100vw"
           />
           <svg

@@ -9,15 +9,18 @@ import {
   carsystemMedia,
   carsystemProcessPhases,
   type CarsystemMediaAvailability,
+  type CarsystemMediaProducts,
   type CarsystemProcessPhase,
 } from "./carsystemBrandData";
 import styles from "./CarsystemBrandPage.module.css";
 
 export function CarsystemProcess({
   availability,
+  mediaProducts,
   products,
 }: {
   availability: CarsystemMediaAvailability;
+  mediaProducts: CarsystemMediaProducts;
   products: CarsystemProduct[];
 }) {
   const [activeId, setActiveId] = useState<CarsystemProcessPhase["id"]>(
@@ -91,6 +94,7 @@ export function CarsystemProcess({
               availability={availability[activeMedia.id]}
               className={styles.processMedia}
               media={activeMedia}
+              products={mediaProducts[activeMedia.id]}
               sizes="(min-width: 80rem) 38vw, (min-width: 64rem) 42vw, 100vw"
             />
             <div className={styles.processProgress} aria-hidden="true">
@@ -144,6 +148,7 @@ export function CarsystemProcess({
                         availability={availability[media.id]}
                         className={styles.processMedia}
                         media={media}
+                        products={mediaProducts[media.id]}
                         sizes="100vw"
                       />
                       <ProcessDetails phase={phase} products={phaseProducts} />

@@ -16,8 +16,10 @@ import {
   carsystemDocumentation,
   carsystemFamilies,
   carsystemFinalCta,
+  carsystemMediaProductSlugs,
   carsystemMetrics,
   carsystemSectionNavItems,
+  type CarsystemMediaProducts,
 } from "./carsystemBrandData";
 import { getCarsystemMediaAvailability } from "./carsystemMedia.server";
 import styles from "./CarsystemBrandPage.module.css";
@@ -31,11 +33,29 @@ export function CarsystemBrandPage({
   const productBySlug = new Map(
     products.map((product) => [product.slug, product]),
   );
+  const mediaProducts: CarsystemMediaProducts = Object.fromEntries(
+    Object.entries(carsystemMediaProductSlugs).map(([mediaId, slugs]) => [
+      mediaId,
+      (slugs ?? [])
+        .map((slug) => productBySlug.get(slug))
+        .filter((product): product is CarsystemProduct => Boolean(product))
+        .filter(
+          (product) =>
+            product.productImage &&
+            !product.productImage.src.includes("placeholder-product"),
+        )
+        .map((product) => ({
+          src: product.productImage!.src,
+          alt: product.productImage!.alt,
+          name: product.name,
+        })),
+    ]),
+  );
 
   return (
     <CarsystemPageShell>
       <main>
-        <CarsystemHero availability={mediaAvailability} />
+        <CarsystemHero availability={mediaAvailability} mediaProducts={mediaProducts} />
         <BrandSectionNav
           ariaLabel="Brzi pristup Carsystem programu"
           items={[...carsystemSectionNavItems]}
@@ -43,6 +63,7 @@ export function CarsystemBrandPage({
         <Metrics products={products} />
         <CarsystemProcess
           availability={mediaAvailability}
+          mediaProducts={mediaProducts}
           products={products}
         />
         <Families productBySlug={productBySlug} />
@@ -311,10 +332,12 @@ function FinalCta({
 }: {
   productBySlug: Map<string, CarsystemProduct>;
 }) {
+  // Proizvodi koji se ne pojavljuju u ostalim blokovima stranice (ranije F.23,
+  // Multi Green i Finish — isti packshoti kao u sistemima i proizvodima).
   const visualProducts = [
-    "carsystem-f23-brusni-diskovi",
-    "carsystem-git-multi-green",
-    "carsystem-finish-serija",
+    "carsystem-tec-line-n20",
+    "carsystem-spraygun-cleaner",
+    "carsystem-colour-match-lamp",
   ]
     .map((slug) => productBySlug.get(slug))
     .filter((product): product is CarsystemProduct => Boolean(product));

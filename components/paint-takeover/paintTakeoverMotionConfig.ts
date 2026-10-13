@@ -71,11 +71,15 @@ export const TIMELINE = {
   surface: [0.05, 0.7] as const,
   /** Painterly background sloj, ide odmah iza površine da nema rupe. */
   background: [0.3, 0.76] as const,
-  /** Leva tekst zona — tek u pinovanom kadru. */
-  content: [0.62, 0.8] as const,
-  contentMobile: [0.58, 0.76] as const,
+  /**
+   * Leva tekst zona. Ranije [0.62, 0.80] (tek u pinovanom kadru): tamna
+   * površina je već od ~0.3 pokrivala ekran, pa se skrolovalo skoro ceo ekran
+   * kroz tamu bez teksta. Sada tekst ulazi dok scena još prilazi pinu.
+   */
+  content: [0.42, 0.6] as const,
+  contentMobile: [0.38, 0.56] as const,
   /** Kontrast ispod teksta — malo pre teksta. */
-  contrast: [0.58, 0.78] as const,
+  contrast: [0.38, 0.58] as const,
   /** Chapter signal koji nose header i sekcije ispod. */
   chapter: [0.08, 0.66] as const,
   /** Hero potezi: ceo staggerovani set staje u pinovani kadar. */

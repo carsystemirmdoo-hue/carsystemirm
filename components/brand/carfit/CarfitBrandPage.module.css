@@ -1750,6 +1750,10 @@
   .familyGrid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
+
+  .familyWide {
+    grid-column: 1 / -1;
+  }
 }
 
 @media (min-width: 48rem) {
@@ -1835,8 +1839,9 @@
     grid-row: span 1;
   }
 
+  /* Ceo red: sa „span 3“ u mreži od 4 ostajalo je jedno prazno sivo polje. */
   .familyWide {
-    grid-column: span 3;
+    grid-column: 1 / -1;
   }
 
   .familyUnit {

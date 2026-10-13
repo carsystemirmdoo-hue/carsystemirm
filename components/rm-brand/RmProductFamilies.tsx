@@ -5,7 +5,10 @@ import {
   type RmProductFamilyData,
   type RmProductImageSlotData,
 } from "@/components/rm-brand/rmBrandData";
-import { selectRmGroupProducts } from "@/components/rm-brand/rmBrandSelection";
+import {
+  hasCatalogImage,
+  selectRmGroupProducts,
+} from "@/components/rm-brand/rmBrandSelection";
 import type { CarsystemProduct } from "@/lib/carsystem-data";
 import type { RmBrandClassifications } from "@/lib/rm-brand-classification";
 import styles from "./RmBrandPage.module.css";
@@ -53,6 +56,14 @@ export function RmProductFamilies({
             familyProducts,
             classifications,
           );
+          // Prazno polje „Fotografija proizvoda“ izgleda kao nedovršen sajt:
+          // slika samo za zapise sa fotografijom iz kataloga, ostali su veze.
+          const pictured = visualItems.filter(
+            (item) => item.product && hasCatalogImage(item.product),
+          );
+          const unpictured = visualItems.filter(
+            (item) => !pictured.includes(item),
+          );
 
           return (
             <article id={`rm-family-${family.id}`} key={family.id}>
@@ -73,8 +84,9 @@ export function RmProductFamilies({
               <div
                 className={styles.productFamilyLineup}
                 aria-label={`Vizuelni prikaz grupe ${family.label}`}
+                data-text-only={pictured.length === 0 || undefined}
               >
-                {visualItems.map((item, itemIndex) => (
+                {pictured.map((item, itemIndex) => (
                   <RmProductImageSlot
                     asset={item.product?.productImage}
                     altText={item.product?.productImage?.alt}
@@ -100,6 +112,25 @@ export function RmProductFamilies({
                     system={item.system}
                   />
                 ))}
+                {unpictured.length > 0 ? (
+                  <ul className={styles.productFamilyTextList}>
+                    {unpictured.map((item) => (
+                      <li key={item.name}>
+                        <Link
+                          href={
+                            item.product
+                              ? `/proizvodi/${item.product.slug}`
+                              : family.href
+                          }
+                        >
+                          <small>{item.system}</small>
+                          <strong>{item.name}</strong>
+                          <span aria-hidden="true">↗</span>
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                ) : null}
               </div>
             </article>
           );

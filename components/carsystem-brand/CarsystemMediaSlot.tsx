@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useState, type CSSProperties } from "react";
 import type {
   CarsystemMediaAvailability,
@@ -12,6 +13,8 @@ type CarsystemMediaSlotProps = {
   className?: string;
   media: CarsystemMediaDefinition;
   priority?: boolean;
+  /** Packshoti iz kataloga za fazu kada fotografija ne postoji. */
+  products?: Array<{ src: string; alt: string; name: string }>;
   sizes?: string;
 };
 
@@ -24,6 +27,7 @@ export function CarsystemMediaSlot({
   className,
   media,
   priority = false,
+  products,
   sizes = "(min-width: 64rem) 52vw, 100vw",
 }: CarsystemMediaSlotProps) {
   const [failed, setFailed] = useState(false);
@@ -64,6 +68,19 @@ export function CarsystemMediaSlot({
             onError={() => setFailed(true)}
           />
         </picture>
+      ) : products && products.length >= 2 ? (
+        <div
+          className={styles.mediaProducts}
+          role="img"
+          aria-label={media.alt}
+          data-count={products.length}
+        >
+          {products.map((product) => (
+            <span key={product.src}>
+              <Image src={product.src} alt="" fill sizes="(min-width: 64rem) 16vw, 30vw" priority={priority} />
+            </span>
+          ))}
+        </div>
       ) : (
         <div
           className={styles.mediaFallback}

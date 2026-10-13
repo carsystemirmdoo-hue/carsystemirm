@@ -236,6 +236,45 @@
   object-fit: cover;
 }
 
+/*
+ * Proizvodi faze iz kataloga dok fotografija faze nema potvrđeno pravo.
+ * Studijska svetla podloga u obe teme: crne boce (Polish X8000) se na tamnoj
+ * podlozi gube, a isečci kataloga su pravljeni za svetlu.
+ */
+.mediaProducts {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  grid-template-columns: repeat(var(--cs-shots, 3), minmax(0, 1fr));
+  align-items: end;
+  gap: clamp(0.6rem, 2vw, 1.6rem);
+  padding: clamp(2.5rem, 7%, 4.5rem) clamp(1.2rem, 6%, 3.5rem) clamp(4.5rem, 16%, 7rem);
+  background:
+    radial-gradient(ellipse 70% 55% at 50% 78%, oklch(0.99 0.003 245), transparent 70%),
+    linear-gradient(180deg, oklch(0.955 0.008 245), oklch(0.91 0.012 245));
+}
+
+.mediaProducts[data-count="2"] {
+  --cs-shots: 2;
+}
+
+.mediaProducts > span {
+  position: relative;
+  height: 100%;
+  min-height: 0;
+}
+
+.mediaProducts img {
+  object-fit: contain;
+  object-position: 50% 100%;
+  filter: drop-shadow(0 18px 22px oklch(0.2 0.02 245 / 0.22));
+}
+
+/* Srednji proizvod je istaknut, bočni su niži — kompozicija, ne mreža. */
+.mediaProducts[data-count="3"] > span:nth-child(odd) {
+  height: 78%;
+}
+
 .mediaFallback {
   position: absolute;
   inset: 0;
@@ -1758,17 +1797,22 @@
   background: var(--cs-red);
 }
 
+/*
+ * Linije mreže nosi svaka kartica (outline), ne pozadina mreže: kada filter
+ * vrati broj kartica koji nije deljiv sa 4, ostatak reda ostaje prazan umesto
+ * sivog bloka u boji linija.
+ */
 .productGrid {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 1px;
-  border: 1px solid var(--cs-line);
-  background: var(--cs-line);
+  padding: 1px;
   animation: cs-product-filter 480ms var(--cs-ease) both;
 }
 
 .productCard {
   min-width: 0;
+  outline: 1px solid var(--cs-line);
   background: var(--cs-paper-strong);
 }
 
@@ -2279,33 +2323,29 @@
 .finalCtaVisual > span:not(.finalCtaLine) {
   position: absolute;
   z-index: 2;
+  bottom: 14%;
   display: block;
-  width: 42%;
-  height: 72%;
+  width: 30%;
+  height: 66%;
 }
 
+/* Tri uspravna proizvoda u redu na liniji procesa (priprema → lakiranje → kontrola). */
 .finalCtaVisual > span[data-index="0"] {
-  right: 37%;
-  bottom: 0;
-  transform: rotate(-8deg);
+  right: 66%;
 }
 
 .finalCtaVisual > span[data-index="1"] {
-  right: 0;
-  bottom: 9%;
-  width: 48%;
-  transform: rotate(5deg);
+  right: 34%;
+  height: 74%;
 }
 
 .finalCtaVisual > span[data-index="2"] {
-  top: 0;
-  right: 24%;
-  width: 38%;
-  transform: rotate(1deg);
+  right: 2%;
 }
 
 .finalCtaVisual img {
   object-fit: contain;
+  object-position: 50% 100%;
   filter: drop-shadow(0 2rem 2.2rem oklch(0.18 0.02 245 / 0.16));
 }
 

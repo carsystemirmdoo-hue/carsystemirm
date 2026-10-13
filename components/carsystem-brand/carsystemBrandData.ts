@@ -493,10 +493,8 @@ export const carsystemFamilies = [
     title: "Finish sistem",
     description:
       "Fino matiranje i korekcija površine pripremaju lak za ujednačen završni sjaj.",
-    productSlugs: [
-      "carsystem-finish-serija",
-      "carsystem-f23-brusni-diskovi",
-    ],
+    // Samo Finish serija: F.23 disk je već kartica 01 i proizvod u procesu.
+    productSlugs: ["carsystem-finish-serija"],
     href: carsystemCatalogHref({ program: "poliranje" }),
     ctaLabel: "Otvorite Finish program",
     layout: "wide",

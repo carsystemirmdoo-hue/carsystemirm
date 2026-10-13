@@ -165,6 +165,10 @@
   grid-template-columns: minmax(0, 1fr) minmax(280px, 0.42fr);
 }
 
+.brandHero[data-text-only] {
+  grid-template-columns: minmax(0, 1fr);
+}
+
 .brandHero .kicker {
   color: var(--entity-hero-accent);
 }

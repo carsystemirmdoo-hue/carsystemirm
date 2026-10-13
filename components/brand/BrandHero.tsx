@@ -8,24 +8,31 @@ import styles from "@/components/brand-program/BrandProgramPage.module.css";
 const PLACEHOLDER_IMAGE = "/images/products/placeholder-product.svg";
 
 /**
- * Do četiri proizvoda sa fotografijom iz kataloga, po jedan iz svakog programa pa
- * redom kataloga — zaglavlje pokazuje stvarnu ponudu umesto ploče sa nazivom brenda.
+ * Do četiri proizvoda sa fotografijom iz kataloga za zaglavlje: prvo oni čiji naziv
+ * pominje uvod brenda (redom pominjanja), zatim po jedan iz svakog programa, pa redom
+ * kataloga — zaglavlje pokazuje stvarnu ponudu umesto ploče sa nazivom brenda.
  */
-function heroProducts(products: CarsystemProduct[]) {
+function heroProducts(products: CarsystemProduct[], brandName: string, lead: string) {
   const pictured = products.filter(
     (product) => product.productImage?.src && product.productImage.src !== PLACEHOLDER_IMAGE,
   );
   const picked: CarsystemProduct[] = [];
-  const programs = new Set<string>();
+  const add = (product: CarsystemProduct | undefined) => {
+    if (product && picked.length < 4 && !picked.includes(product)) picked.push(product);
+  };
+  const tokens = lead.match(/\b(?=\w*[A-Z0-9])\w{4,}\b/g) ?? [];
+  for (const token of tokens) {
+    if (token.toLowerCase() === brandName.toLowerCase()) continue;
+    add(pictured.find((product) => new RegExp(`\\b${token}\\b`, "i").test(product.name)));
+  }
+  const programs = new Set(picked.map((product) => product.programSlug));
   for (const product of pictured) {
-    if (picked.length < 4 && !programs.has(product.programSlug)) {
-      picked.push(product);
+    if (!programs.has(product.programSlug)) {
+      add(product);
       programs.add(product.programSlug);
     }
   }
-  for (const product of pictured) {
-    if (picked.length < 4 && !picked.includes(product)) picked.push(product);
-  }
+  for (const product of pictured) add(product);
   return picked;
 }
 
@@ -38,8 +45,10 @@ export function BrandHero({
   programs: PublicProgramGroup[];
   products?: CarsystemProduct[];
 }) {
-  const showcase = heroProducts(products);
   const positioning = brand.overview ?? brand.description;
+  const showcase = heroProducts(products, brand.name, positioning);
+  // Bez logotipa i bez fotografija ploča bi nosila samo naziv brenda — tada je zaglavlje samo tekst.
+  const textOnly = showcase.length < 2 && !brand.logo;
 
   return (
     <>
@@ -63,7 +72,11 @@ export function BrandHero({
         </ol>
       </nav>
 
-      <section className={`${styles.hero} ${styles.brandHero}`} aria-labelledby="brand-title">
+      <section
+        className={`${styles.hero} ${styles.brandHero}`}
+        aria-labelledby="brand-title"
+        data-text-only={textOnly || undefined}
+      >
         <div className={styles.heroCopy}>
           <p className={styles.kicker}>{brand.presentation.heroKicker}</p>
           <h1 id="brand-title" className={styles.title}>
@@ -93,6 +106,7 @@ export function BrandHero({
           </div>
         </div>
 
+        {textOnly ? null : (
         <div className={styles.heroVisual}>
           {showcase.length >= 2 ? (
             <div className={styles.productStage} data-count={showcase.length}>
@@ -128,6 +142,7 @@ export function BrandHero({
           </div>
           )}
         </div>
+        )}
       </section>
     </>
   );

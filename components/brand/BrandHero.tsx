@@ -1,8 +1,33 @@
+import Image from "next/image";
 import Link from "next/link";
 import { BrandLogoMark } from "@/components/brand/BrandLogoMark";
 import type { CarsystemBrand, CarsystemProduct, PublicProgramGroup } from "@/lib/carsystem-data";
 import { toDisplayImageSrc } from "@/lib/productImageDisplay";
 import styles from "@/components/brand-program/BrandProgramPage.module.css";
+
+const PLACEHOLDER_IMAGE = "/images/products/placeholder-product.svg";
+
+/**
+ * Do četiri proizvoda sa fotografijom iz kataloga, po jedan iz svakog programa pa
+ * redom kataloga — zaglavlje pokazuje stvarnu ponudu umesto ploče sa nazivom brenda.
+ */
+function heroProducts(products: CarsystemProduct[]) {
+  const pictured = products.filter(
+    (product) => product.productImage?.src && product.productImage.src !== PLACEHOLDER_IMAGE,
+  );
+  const picked: CarsystemProduct[] = [];
+  const programs = new Set<string>();
+  for (const product of pictured) {
+    if (picked.length < 4 && !programs.has(product.programSlug)) {
+      picked.push(product);
+      programs.add(product.programSlug);
+    }
+  }
+  for (const product of pictured) {
+    if (picked.length < 4 && !picked.includes(product)) picked.push(product);
+  }
+  return picked;
+}
 
 export function BrandHero({
   brand,

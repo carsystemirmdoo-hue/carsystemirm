@@ -344,6 +344,73 @@
   object-fit: contain;
 }
 
+/* Zaglavlje brenda sa stvarnim proizvodima iz kataloga (2–4 fotografije). */
+.productStage {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  border: 1px solid color-mix(in srgb, var(--entity-hero-accent) 32%, var(--entity-hero-border));
+  border-radius: 18px;
+  background: var(--surface-studio-fixed-dark);
+  padding: clamp(12px, 2vw, 18px);
+}
+
+.productStage > a {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  aspect-ratio: 1;
+  border-radius: 12px;
+  background: oklch(0.985 0.004 250);
+  color: inherit;
+  text-decoration: none;
+}
+
+.productStage[data-count="3"] > a:first-child {
+  grid-row: span 2;
+  aspect-ratio: auto;
+}
+
+.productStage img {
+  object-fit: contain;
+  padding: 12%;
+  transition: transform 260ms ease;
+}
+
+.productStage > a > span {
+  position: absolute;
+  right: 8px;
+  bottom: 8px;
+  left: 8px;
+  overflow: hidden;
+  color: oklch(0.32 0.012 250);
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1.25;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.productStage > a:hover img,
+.productStage > a:focus-visible img {
+  transform: scale(1.04);
+}
+
+.productStageMeta {
+  grid-column: 1 / -1;
+  margin: 4px 0 0;
+  color: var(--entity-hero-muted);
+  font-size: 13px;
+  font-weight: 750;
+  text-align: center;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .productStage img {
+    transition: none;
+  }
+}
+
 .logoStageMeta {
   max-width: 28ch;
   margin: 0;

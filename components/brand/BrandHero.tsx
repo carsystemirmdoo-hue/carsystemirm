@@ -1,15 +1,19 @@
 import Link from "next/link";
 import { BrandLogoMark } from "@/components/brand/BrandLogoMark";
-import type { CarsystemBrand, PublicProgramGroup } from "@/lib/carsystem-data";
+import type { CarsystemBrand, CarsystemProduct, PublicProgramGroup } from "@/lib/carsystem-data";
+import { toDisplayImageSrc } from "@/lib/productImageDisplay";
 import styles from "@/components/brand-program/BrandProgramPage.module.css";
 
 export function BrandHero({
   brand,
   programs,
+  products = [],
 }: {
   brand: CarsystemBrand;
   programs: PublicProgramGroup[];
+  products?: CarsystemProduct[];
 }) {
+  const showcase = heroProducts(products);
   const positioning = brand.overview ?? brand.description;
 
   return (
@@ -65,6 +69,23 @@ export function BrandHero({
         </div>
 
         <div className={styles.heroVisual}>
+          {showcase.length >= 2 ? (
+            <div className={styles.productStage} data-count={showcase.length}>
+              {showcase.map((product) => (
+                <Link href={`/proizvodi/${product.slug}`} key={product.slug}>
+                  <Image
+                    src={toDisplayImageSrc(product.productImage!.src)}
+                    alt={product.productImage!.alt || product.name}
+                    fill
+                    sizes="(min-width: 64rem) 16vw, 44vw"
+                    priority
+                  />
+                  <span>{product.name}</span>
+                </Link>
+              ))}
+              <p className={styles.productStageMeta}>{brand.name} u ponudi Carsystem i R-M</p>
+            </div>
+          ) : (
           <div className={styles.logoStage}>
             <div className={styles.logoChip}>
               <BrandLogoMark
@@ -80,6 +101,7 @@ export function BrandHero({
             </div>
             <p className={styles.logoStageMeta}>Brend u ponudi Carsystem i R-M</p>
           </div>
+          )}
         </div>
       </section>
     </>

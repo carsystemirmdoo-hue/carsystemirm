@@ -46,7 +46,7 @@ export function BrandPage({
   return (
     <div className={styles.pageShell} style={brandStyle}>
       <main className={styles.main}>
-        <BrandHero brand={brand} programs={programsWithProducts} />
+        <BrandHero brand={brand} programs={programsWithProducts} products={products} />
         <BrandOverview brand={brand} products={products} programs={programsWithProducts} />
         <div className={styles.manufacturerRailSection}>
           <ManufacturerRail

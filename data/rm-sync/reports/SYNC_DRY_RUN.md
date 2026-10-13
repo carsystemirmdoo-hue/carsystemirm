@@ -8,7 +8,7 @@
 | SYSTEMS | 9 |
 | STANDALONE_COMPONENTS | 89 |
 | SYSTEM_COMPONENTS_WITHOUT_CARDS | 14 |
-| LEGACY_LOCAL_ONLY | 3 (rm-diamont-bezbojni-lak, rm-pasta-190-1l, rm-pasta-190-5l) |
+| LEGACY_LOCAL_ONLY | 8 (rm-diamont-bezbojni-lak, rm-paste-za-mesanje, rm-sc-850-thinner-medium, rm-h-9000-hardener-medium, rm-c-1450-startop-hs, rm-sm-09-special-mat-09, rm-c-1150-basic-clear, rm-h-1150-basic-hardener) |
 | DOCUMENTATION_GAPS | 2 (HB 015, HB 032) |
 | WEBSITE_ORPHANS | 1 (822-promotor-de-adherencia) |
 | NEW_PRODUCTS_TO_IMPORT | 159 |

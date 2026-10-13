@@ -127,6 +127,11 @@ export default async function RequestCatalogPage({ searchParams }: { searchParam
                     <td className="pn-c-actions" data-label="">
                       {a.pack ? (
                         <AddItem articleId={a.articleId} packLabel={a.pack.label} name={a.articleName} />
+                      ) : a.procurementOnly ? (
+                        <span className="pn-sub" style={{ maxWidth: 240, display: "inline-block" }}>
+                          <strong>Upit za nabavku.</strong> Trenutno nije u ponudi za direktno poručivanje; nabavku, cenu i rok potvrđuje kancelarija ili
+                          Vaš komercijalista.
+                        </span>
                       ) : (
                         <span className="pn-sub" style={{ maxWidth: 220, display: "inline-block" }}>
                           Ne poručuje se preko sajta dok pakovanje nije potvrđeno. Javite se komercijalisti ili kancelariji.

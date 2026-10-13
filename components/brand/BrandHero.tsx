@@ -1,9 +1,12 @@
 import Image from "next/image";
 import Link from "next/link";
+import { countOf } from "@/lib/ordering/plural.mjs";
 import { BrandLogoMark } from "@/components/brand/BrandLogoMark";
 import type { CarsystemBrand, CarsystemProduct, PublicProgramGroup } from "@/lib/carsystem-data";
 import { toDisplayImageSrc } from "@/lib/productImageDisplay";
 import styles from "@/components/brand-program/BrandProgramPage.module.css";
+
+const PROGRAM = ["program", "programa", "programa"] as const;
 
 const PLACEHOLDER_IMAGE = "/images/products/placeholder-product.svg";
 
@@ -86,7 +89,7 @@ export function BrandHero({
           <p className={styles.subtitle}>{brand.description}</p>
 
           <div className={styles.badgeRow} aria-label="Pregled brenda">
-            <span className={styles.badge}>{programs.length} programa</span>
+            <span className={styles.badge}>{countOf(programs.length, PROGRAM)}</span>
             <span className={styles.availabilityChip}>Dostupnost na upit</span>
           </div>
 

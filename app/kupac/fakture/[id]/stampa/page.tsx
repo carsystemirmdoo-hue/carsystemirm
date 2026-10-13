@@ -29,7 +29,7 @@ export default async function CustomerInvoicePrintPage({ params }: { params: Pro
   const margin = `Pregled podataka iz fakture ${docNo} — nije original dokumenta`;
   const pageCss = `@page { @bottom-left { content: ${JSON.stringify(margin)}; font: 8pt Arial, sans-serif; color: #333; } @bottom-right { content: "Strana " counter(page) " od " counter(pages); font: 8pt Arial, sans-serif; color: #333; } }
 .zp-table .c-sifra { width: 22mm; } .zp-table td.nw { white-space: normal; overflow-wrap: anywhere; }
-@media print { .acct-bar, header:has(.acct-bar-brand), .portal-customer-area .pn-account, .portal-customer-area nav, .portal-customer-area .portal-data-strip, .portal-customer-area [class*="data-strip"] { display: none !important; } .portal-customer-area, .portal-customer-area .portal-main { padding: 0 !important; margin: 0 !important; background: #fff !important; } }`;
+@media print { body:has(.zp-doc) header:not(.zp-doc header), body:has(.zp-doc) footer:not(.zp-doc footer), body:has(.zp-doc) nav:not(.zp-doc nav), .acct-bar, header:has(.acct-bar-brand), .portal-customer-area .pn-account, .portal-customer-area nav, .portal-customer-area .portal-data-strip, .portal-customer-area [class*="data-strip"] { display: none !important; } .portal-customer-area, .portal-customer-area .portal-main { padding: 0 !important; margin: 0 !important; background: #fff !important; } }`;
 
   return (
     <>

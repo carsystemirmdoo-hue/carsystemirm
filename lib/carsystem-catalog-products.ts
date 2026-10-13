@@ -1,5 +1,6 @@
 import { abrasiveBackingTerms } from "@/lib/search/abrasive-backing.mjs";
 import catalogData from "@/data/carsystem-catalog-products.generated.json";
+import removedVariantsData from "@/data/catalog/removed-variants.json";
 import type {
   CarsystemProduct,
   ProductDocument,
@@ -438,8 +439,27 @@ function createCatalogProduct(entry: CatalogProductEntry, knownSlugs: Set<string
  */
 const knownSlugs = new Set([...entries.map((entry) => entry.slug), ...Object.keys(enrichments)]);
 
+/** Varijante van programa (odluka vlasnika) se ne prikazuju; kartica zadržava ostale. */
+const removedVariants = new Map<string, Set<string>>();
+for (const record of removedVariantsData.records) {
+  if (!removedVariants.has(record.slug)) removedVariants.set(record.slug, new Set());
+  removedVariants.get(record.slug)!.add(record.variant);
+}
+
+function withoutRemovedVariants(entry: CatalogProductEntry): CatalogProductEntry {
+  const removed = removedVariants.get(entry.slug);
+  if (!removed) return entry;
+  const variants = entry.variants.filter((variant) => !removed.has(variant.articleNumber));
+  if (!variants.length || variants.length === entry.variants.length) return entry;
+  return {
+    ...entry,
+    variants,
+    leadArticleNumber: removed.has(entry.leadArticleNumber) ? variants[0].articleNumber : entry.leadArticleNumber,
+  };
+}
+
 export function getCarsystemCatalogProducts(): CarsystemProduct[] {
-  return entries.map((entry) => createCatalogProduct(entry, knownSlugs));
+  return entries.map((entry) => createCatalogProduct(withoutRemovedVariants(entry), knownSlugs));
 }
 
 /**

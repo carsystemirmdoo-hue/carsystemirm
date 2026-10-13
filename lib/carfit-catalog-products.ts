@@ -301,7 +301,7 @@ function createCatalogProduct(entry: CatalogProductEntry, knownSlugs: Set<string
         ...(entry.variants.length === 1
           ? [
               { label: "Šifra artikla", value: entry.leadArticleNumber, reviewStatus: "confirmed" as const },
-              { label: "Pakovanje", value: entry.variants[0].label, reviewStatus: "confirmed" as const },
+              { label: entry.variantColumn.key === "volume" ? "Pakovanje" : entry.variantColumn.label, value: entry.variants[0].label, reviewStatus: "confirmed" as const },
             ]
           : []),
         ...(entry.sharedArticles ?? []).map((shared) => ({
@@ -378,8 +378,50 @@ function createCatalogProduct(entry: CatalogProductEntry, knownSlugs: Set<string
 
 const knownSlugs = new Set([...entries.map((entry) => entry.slug), ...Object.keys(enrichments)]);
 
+/**
+ * Naša ponuda unutar zvanične porodice (odluka vlasnika): kartica prikazuje samo varijante koje
+ * prodajemo, uz napomenu o prodajnom pakovanju. Ostale zvanične šifre ostaju u podacima synca.
+ */
+const OWNER_OFFER: Record<string, { articleNumbers: string[]; subtype?: string; fact: { label: string; value: string } }> = {
+  // Odluka vlasnika 2026-10-13: C.A.R.FIT cediljke prodajemo samo u 190 µm; prodajno pakovanje je
+  // 250 cediljki, a fabrička kutija od 1.000 (4 × 250) nije naše pojedinačno pakovanje.
+  "carfit-disposable-paint-strainers": {
+    articleNumbers: ["7-850-0190"],
+    subtype: "cediljka za boju · papirna · 190 μm",
+    fact: { label: "Naša ponuda", value: "190 µm, pakovanje od 250 cediljki" },
+  },
+};
+
+/**
+ * Oznake redova dopunjene podacima sa etikete naše robe (zvanična oznaka reda ne navodi zapreminu).
+ * Ne menja šifru ni fabričko pakovanje iz izvora.
+ */
+const OWNER_VARIANT_LABELS: Record<string, Record<string, string>> = {
+  // Etikete 2026-10-13: 650 ml čvrsta posuda = 3-225-0002; ulošci 400 ml = 3-225-4190, 650 ml = 3-225-0190 (190 µm, 25 kom.).
+  "carfit-fast-paint-system": {
+    "3-225-0002": "Čvrsta čaša sa prstenom · 650 ml",
+    "3-225-4190": "Unutrašnje čaše 190 μm, 25 kom. · 400 ml",
+    "3-225-0190": "Unutrašnje čaše 190 μm, 25 kom. · 650 ml",
+  },
+};
+
+function withOwnerOffer(entry: CatalogProductEntry): CatalogProductEntry {
+  const labels = OWNER_VARIANT_LABELS[entry.slug];
+  if (labels) entry = { ...entry, variants: entry.variants.map((v) => (labels[v.articleNumber] ? { ...v, label: labels[v.articleNumber] } : v)) };
+  const offer = OWNER_OFFER[entry.slug];
+  if (!offer) return entry;
+  const variants = entry.variants.filter((variant) => offer.articleNumbers.includes(variant.articleNumber));
+  if (!variants.length) return entry;
+  return {
+    ...entry,
+    leadArticleNumber: variants[0].articleNumber,
+    variants,
+    content: { ...entry.content, subtype: offer.subtype ?? entry.content.subtype, facts: [...entry.content.facts, offer.fact] },
+  };
+}
+
 export function getCarfitCatalogProducts(): CarsystemProduct[] {
-  return entries.map((entry) => createCatalogProduct(entry, knownSlugs));
+  return entries.map((entry) => createCatalogProduct(withOwnerOffer(entry), knownSlugs));
 }
 
 /**

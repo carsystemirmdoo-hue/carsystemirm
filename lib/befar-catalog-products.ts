@@ -289,6 +289,36 @@ function createCatalogProduct(entry: CatalogProductEntry): CarsystemProduct {
   };
 }
 
+/**
+ * Varijante iz zvaničnog kataloga koje sync ne prikazuje (nisu na aktuelnom sajtu), a magacin ih je
+ * potvrdio etiketom. Podaci su samo iz kataloga; tvrdoća i slika se ne izmišljaju.
+ */
+const OWNER_CONFIRMED_VARIANTS: Record<string, { after: string; variant: CatalogVariant }[]> = {
+  // Etiketa 2026-10-13: običan plavi Befar sunđer 04405 (katalog 2024, str. 6: BLUE 04405 150 x 25 mm, 66 kom.).
+  "befar-velcro-polishing-pad": [
+    {
+      after: "04404",
+      variant: {
+        code: "04405", label: "Plava · 150 × 25 mm", searchLabel: "Plava · 150 × 25 mm", colour: "Blue", colourSr: "plava",
+        swatch: "#2E6CB4", size: "150x25mm", holes: null, hardnessStars: null, applyWith: null, boxQuantity: 66, image: null,
+        onWebsite: false, inCatalogue: true, cataloguePage: 6,
+      },
+    },
+  ],
+};
+
+function withOwnerConfirmedVariants(entry: CatalogProductEntry): CatalogProductEntry {
+  const extra = OWNER_CONFIRMED_VARIANTS[entry.slug];
+  if (!extra) return entry;
+  const variants = [...entry.variants];
+  for (const { after, variant } of extra) {
+    if (variants.some((v) => v.code === variant.code)) continue;
+    const at = variants.findIndex((v) => v.code === after);
+    variants.splice(at < 0 ? variants.length : at + 1, 0, variant);
+  }
+  return { ...entry, variants };
+}
+
 export function getBefarCatalogProducts(): CarsystemProduct[] {
-  return entries.map(createCatalogProduct);
+  return entries.map((entry) => createCatalogProduct(withOwnerConfirmedVariants(entry)));
 }

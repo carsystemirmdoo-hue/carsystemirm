@@ -1,0 +1,752 @@
+{
+  "_comment": [
+    "R-M mešne baze (toneri) koje firma prodaje — potvrda vlasnika 2026-10-12: vidljive u javnom katalogu i poručive za prijavljene kupce.",
+    "Prikazuje se samo OZNAKA sa etikete, linija i POTVRĐENO pakovanje. Zvanični naziv samo kada ga izvor potvrđuje (CRYSTAL BASE: rmpaint.com/gb/basecoat-lines + BASF lista).",
+    "Kodovi čiji identitet nije nađen ni u jednom zvaničnom izvoru NISU ovde (poručuju se kroz „Izbor robe”). BizniSoft šifre su privatne i nisu u repou."
+  ],
+  "decidedOn": "2026-10-12",
+  "cards": {
+    "rm-diamont-bazna-boja": [
+      {
+        "code": "BC 100",
+        "name": null,
+        "packs": [
+          "kanta 4 L"
+        ],
+        "status": "delimično",
+        "source": "https://www.coatingsmall.com/cap_data_docs/documentum/RM/Technical_Manuals/English/AD2526%20R-M%20English%20US%20Manual.pdf",
+        "sourceNote": "R-M Technical Manual (BASF US), str. 91 „R-M Carizzma Special Effect Powders“ (US Rev. 6/7/19): „BC100 Base Clear“; Diamont Basecoat Color + BC100"
+      },
+      {
+        "code": "BC 101",
+        "name": null,
+        "packs": [
+          "pakovanje 1 L"
+        ],
+        "status": "delimično",
+        "source": "https://refinish.basf.us/wp-content/uploads/2020/10/2020_Diamont_ENG.pdf",
+        "sourceNote": "„Diamont Tinting Base Characteristics“ (BASF US, maj 2020), str. 2–5"
+      },
+      {
+        "code": "BC 105",
+        "name": null,
+        "packs": [
+          "pakovanje 1 L"
+        ],
+        "status": "delimično",
+        "source": "https://refinish.basf.us/wp-content/uploads/2020/10/2020_Diamont_ENG.pdf",
+        "sourceNote": "„Diamont Tinting Base Characteristics“ (BASF US, maj 2020), str. 2–5"
+      },
+      {
+        "code": "BC 115",
+        "name": null,
+        "packs": [
+          "pakovanje 1 L"
+        ],
+        "status": "delimično",
+        "source": "https://refinish.basf.us/wp-content/uploads/2020/10/2020_Diamont_ENG.pdf",
+        "sourceNote": "„Diamont Tinting Base Characteristics“ (BASF US, maj 2020), str. 2–5"
+      },
+      {
+        "code": "BC 118",
+        "name": null,
+        "packs": [
+          "pakovanje 1 L"
+        ],
+        "status": "delimično",
+        "source": "https://refinish.basf.us/wp-content/uploads/2020/10/2020_Diamont_ENG.pdf",
+        "sourceNote": "„Diamont Tinting Base Characteristics“ (BASF US, maj 2020), str. 2–5"
+      },
+      {
+        "code": "BC 120",
+        "name": null,
+        "packs": [
+          "pakovanje 0,5 L"
+        ],
+        "status": "delimično",
+        "source": "https://refinish.basf.us/wp-content/uploads/2020/10/2020_Diamont_ENG.pdf",
+        "sourceNote": "„Diamont Tinting Base Characteristics“ (BASF US, maj 2020), str. 2–5"
+      },
+      {
+        "code": "BC 140",
+        "name": null,
+        "packs": [
+          "kanta 4 L"
+        ],
+        "status": "delimično",
+        "source": "https://refinish.basf.us/wp-content/uploads/2020/10/2020_Diamont_ENG.pdf",
+        "sourceNote": "„Diamont Tinting Base Characteristics“ (BASF US, maj 2020), str. 2–5"
+      },
+      {
+        "code": "BC 161",
+        "name": null,
+        "packs": [
+          "pakovanje 1 L"
+        ],
+        "status": "delimično",
+        "source": "https://refinish.basf.us/wp-content/uploads/2020/10/2020_Diamont_ENG.pdf",
+        "sourceNote": "„Diamont Tinting Base Characteristics“ (BASF US, maj 2020), str. 2–5"
+      },
+      {
+        "code": "BC 170",
+        "name": null,
+        "packs": [
+          "kanta 4 L"
+        ],
+        "status": "delimično",
+        "source": "https://refinish.basf.us/wp-content/uploads/2020/10/2020_Diamont_ENG.pdf",
+        "sourceNote": "„Diamont Tinting Base Characteristics“ (BASF US, maj 2020), str. 2–5"
+      },
+      {
+        "code": "BC 171",
+        "name": null,
+        "packs": [
+          "kanta 4 L"
+        ],
+        "status": "delimično",
+        "source": "https://refinish.basf.us/wp-content/uploads/2020/10/2020_Diamont_ENG.pdf",
+        "sourceNote": "„Diamont Tinting Base Characteristics“ (BASF US, maj 2020), str. 2–5"
+      },
+      {
+        "code": "BC 175",
+        "name": null,
+        "packs": [
+          "pakovanje 1 L"
+        ],
+        "status": "delimično",
+        "source": "https://refinish.basf.us/wp-content/uploads/2020/10/2020_Diamont_ENG.pdf",
+        "sourceNote": "„Diamont Tinting Base Characteristics“ (BASF US, maj 2020), str. 2–5"
+      },
+      {
+        "code": "BC 180",
+        "name": null,
+        "packs": [
+          "pakovanje 1 L"
+        ],
+        "status": "delimično",
+        "source": "https://refinish.basf.us/wp-content/uploads/2020/10/2020_Diamont_ENG.pdf",
+        "sourceNote": "„Diamont Tinting Base Characteristics“ (BASF US, maj 2020), str. 2–5"
+      },
+      {
+        "code": "BC 185",
+        "name": null,
+        "packs": [
+          "pakovanje 0,5 L"
+        ],
+        "status": "delimično",
+        "source": "https://refinish.basf.us/wp-content/uploads/2020/10/2020_Diamont_ENG.pdf",
+        "sourceNote": "„Diamont Tinting Base Characteristics“ (BASF US, maj 2020), str. 2–5"
+      },
+      {
+        "code": "BC 201",
+        "name": null,
+        "packs": [
+          "kanta 4 L"
+        ],
+        "status": "delimično",
+        "source": "https://refinish.basf.us/wp-content/uploads/2020/10/2020_Diamont_ENG.pdf",
+        "sourceNote": "„Diamont Tinting Base Characteristics“ (BASF US, maj 2020), str. 2–5"
+      },
+      {
+        "code": "BC 209",
+        "name": null,
+        "packs": [
+          "pakovanje 0,5 L"
+        ],
+        "status": "delimično",
+        "source": "https://refinish.basf.us/wp-content/uploads/2020/10/2020_Diamont_ENG.pdf",
+        "sourceNote": "„Diamont Tinting Base Characteristics“ (BASF US, maj 2020), str. 2–5"
+      },
+      {
+        "code": "BC 250",
+        "name": null,
+        "packs": [
+          "kanta 4 L"
+        ],
+        "status": "delimično",
+        "source": "https://refinish.basf.us/wp-content/uploads/2020/10/2020_Diamont_ENG.pdf",
+        "sourceNote": "„Diamont Tinting Base Characteristics“ (BASF US, maj 2020), str. 2–5"
+      },
+      {
+        "code": "BC 260",
+        "name": null,
+        "packs": [
+          "pakovanje 0,5 L"
+        ],
+        "status": "delimično",
+        "source": "https://refinish.basf.us/wp-content/uploads/2020/10/2020_Diamont_ENG.pdf",
+        "sourceNote": "„Diamont Tinting Base Characteristics“ (BASF US, maj 2020), str. 2–5"
+      },
+      {
+        "code": "BC 410",
+        "name": null,
+        "packs": [
+          "pakovanje 1 L"
+        ],
+        "status": "delimično",
+        "source": "https://refinish.basf.us/wp-content/uploads/2020/10/2020_Diamont_ENG.pdf",
+        "sourceNote": "„Diamont Tinting Base Characteristics“ (BASF US, maj 2020), str. 2–5"
+      },
+      {
+        "code": "BC 419",
+        "name": null,
+        "packs": [
+          "pakovanje 0,5 L"
+        ],
+        "status": "delimično",
+        "source": "https://refinish.basf.us/wp-content/uploads/2020/10/2020_Diamont_ENG.pdf",
+        "sourceNote": "„Diamont Tinting Base Characteristics“ (BASF US, maj 2020), str. 2–5"
+      },
+      {
+        "code": "BC 500",
+        "name": null,
+        "packs": [
+          "pakovanje 1 L"
+        ],
+        "status": "delimično",
+        "source": "https://refinish.basf.us/wp-content/uploads/2020/10/2020_Diamont_ENG.pdf",
+        "sourceNote": "„Diamont Tinting Base Characteristics“ (BASF US, maj 2020), str. 2–5"
+      },
+      {
+        "code": "BC 605",
+        "name": null,
+        "packs": [
+          "pakovanje 1 L"
+        ],
+        "status": "delimično",
+        "source": "https://refinish.basf.us/wp-content/uploads/2020/10/2020_Diamont_ENG.pdf",
+        "sourceNote": "„Diamont Tinting Base Characteristics“ (BASF US, maj 2020), str. 2–5"
+      },
+      {
+        "code": "BC 609",
+        "name": null,
+        "packs": [
+          "pakovanje 0,5 L"
+        ],
+        "status": "delimično",
+        "source": "https://refinish.basf.us/wp-content/uploads/2020/10/2020_Diamont_ENG.pdf",
+        "sourceNote": "„Diamont Tinting Base Characteristics“ (BASF US, maj 2020), str. 2–5"
+      },
+      {
+        "code": "BC 610",
+        "name": null,
+        "packs": [
+          "pakovanje 0,5 L"
+        ],
+        "status": "delimično",
+        "source": "https://refinish.basf.us/wp-content/uploads/2020/10/2020_Diamont_ENG.pdf",
+        "sourceNote": "„Diamont Tinting Base Characteristics“ (BASF US, maj 2020), str. 2–5"
+      },
+      {
+        "code": "BC 615",
+        "name": null,
+        "packs": [
+          "pakovanje 0,5 L"
+        ],
+        "status": "delimično",
+        "source": "https://refinish.basf.us/wp-content/uploads/2020/10/2020_Diamont_ENG.pdf",
+        "sourceNote": "„Diamont Tinting Base Characteristics“ (BASF US, maj 2020), str. 2–5"
+      },
+      {
+        "code": "BC 621",
+        "name": null,
+        "packs": [
+          "pakovanje 0,5 L"
+        ],
+        "status": "delimično",
+        "source": "https://refinish.basf.us/wp-content/uploads/2020/10/2020_Diamont_ENG.pdf",
+        "sourceNote": "„Diamont Tinting Base Characteristics“ (BASF US, maj 2020), str. 2–5"
+      },
+      {
+        "code": "BC 800",
+        "name": null,
+        "packs": [
+          "pakovanje 1 L"
+        ],
+        "status": "delimično",
+        "source": "https://refinish.basf.us/wp-content/uploads/2020/10/2020_Diamont_ENG.pdf",
+        "sourceNote": "„Diamont Tinting Base Characteristics“ (BASF US, maj 2020), str. 2–5"
+      },
+      {
+        "code": "BC 805",
+        "name": null,
+        "packs": [
+          "pakovanje 1 L"
+        ],
+        "status": "delimično",
+        "source": "https://refinish.basf.us/wp-content/uploads/2020/10/2020_Diamont_ENG.pdf",
+        "sourceNote": "„Diamont Tinting Base Characteristics“ (BASF US, maj 2020), str. 2–5"
+      },
+      {
+        "code": "BC 809",
+        "name": null,
+        "packs": [
+          "pakovanje 0,5 L"
+        ],
+        "status": "delimično",
+        "source": "https://refinish.basf.us/wp-content/uploads/2020/10/2020_Diamont_ENG.pdf",
+        "sourceNote": "„Diamont Tinting Base Characteristics“ (BASF US, maj 2020), str. 2–5"
+      },
+      {
+        "code": "BC 810",
+        "name": null,
+        "packs": [
+          "pakovanje 0,5 L"
+        ],
+        "status": "delimično",
+        "source": "https://refinish.basf.us/wp-content/uploads/2020/10/2020_Diamont_ENG.pdf",
+        "sourceNote": "„Diamont Tinting Base Characteristics“ (BASF US, maj 2020), str. 2–5"
+      },
+      {
+        "code": "BC 820",
+        "name": null,
+        "packs": [
+          "pakovanje 1 L"
+        ],
+        "status": "delimično",
+        "source": "https://refinish.basf.us/wp-content/uploads/2020/10/2020_Diamont_ENG.pdf",
+        "sourceNote": "„Diamont Tinting Base Characteristics“ (BASF US, maj 2020), str. 2–5"
+      },
+      {
+        "code": "BC 825",
+        "name": null,
+        "packs": [
+          "pakovanje 0,5 L"
+        ],
+        "status": "delimično",
+        "source": "https://refinish.basf.us/wp-content/uploads/2020/10/2020_Diamont_ENG.pdf",
+        "sourceNote": "„Diamont Tinting Base Characteristics“ (BASF US, maj 2020), str. 2–5"
+      },
+      {
+        "code": "BC 832",
+        "name": null,
+        "packs": [
+          "pakovanje 1 L"
+        ],
+        "status": "delimično",
+        "source": "https://refinish.basf.us/wp-content/uploads/2020/10/2020_Diamont_ENG.pdf",
+        "sourceNote": "„Diamont Tinting Base Characteristics“ (BASF US, maj 2020), str. 2–5"
+      },
+      {
+        "code": "BC 840",
+        "name": null,
+        "packs": [
+          "pakovanje 1 L"
+        ],
+        "status": "delimično",
+        "source": "https://refinish.basf.us/wp-content/uploads/2020/10/2020_Diamont_ENG.pdf",
+        "sourceNote": "„Diamont Tinting Base Characteristics“ (BASF US, maj 2020), str. 2–5"
+      },
+      {
+        "code": "BC 1190",
+        "name": null,
+        "packs": [
+          "pakovanje 0,5 L"
+        ],
+        "status": "delimično",
+        "source": "https://refinish.basf.us/wp-content/uploads/2020/10/2020_Diamont_ENG.pdf",
+        "sourceNote": "„Diamont Tinting Base Characteristics“ (BASF US, maj 2020), str. 2–5"
+      },
+      {
+        "code": "BC 1815",
+        "name": null,
+        "packs": [
+          "pakovanje 0,5 L"
+        ],
+        "status": "delimično",
+        "source": "https://refinish.basf.us/wp-content/uploads/2020/10/2020_Diamont_ENG.pdf",
+        "sourceNote": "„Diamont Tinting Base Characteristics“ (BASF US, maj 2020), str. 2–5"
+      }
+    ],
+    "rm-uno-hd": [
+      {
+        "code": "SC 10",
+        "name": null,
+        "packs": [
+          "kanta 4 L"
+        ],
+        "status": "delimično",
+        "source": "https://techinfo.rmpaint.com/en_UK/documents/pdf/tech_infos/SC_10_UNO_HD.pdf",
+        "sourceNote": "TDS „UNO HD SC 10 Direct-gloss topcoat“ 03/2023 str. 1–2; R-M Technical Manual (BASF US) str. 123: „SC10 Mixing Clear“"
+      }
+    ],
+    "rm-diamont-crystal-base": [
+      {
+        "code": "CB 10K",
+        "name": "Fine White Pearl 2",
+        "packs": [
+          "bočica 125 ml"
+        ],
+        "status": "potvrđeno izvorom",
+        "source": "https://refinish.basf.us/wp-content/uploads/2020/10/2020_Diamont_ENG.pdf",
+        "sourceNote": "„Diamont Tinting Base Characteristics“ (BASF US, maj 2020), str. 2–5; rmpaint.com/gb Basecoat Lines, sekcija „R-M Crystal bases“: „CRYSTAL BASE ... packaged in "
+      },
+      {
+        "code": "CB 12L",
+        "name": "Crystal Glass (Clear Sparkle)",
+        "packs": [
+          "bočica 125 ml"
+        ],
+        "status": "potvrđeno izvorom",
+        "source": "https://refinish.basf.us/wp-content/uploads/2020/10/2020_Diamont_ENG.pdf",
+        "sourceNote": "„Diamont Tinting Base Characteristics“ (BASF US, maj 2020), str. 2–5; rmpaint.com/gb Basecoat Lines, sekcija „R-M Crystal bases“: „CRYSTAL BASE ... packaged in "
+      },
+      {
+        "code": "CB 34M",
+        "name": "Violet Pearl",
+        "packs": [
+          "bočica 125 ml"
+        ],
+        "status": "potvrđeno izvorom",
+        "source": "https://refinish.basf.us/wp-content/uploads/2020/10/2020_Diamont_ENG.pdf",
+        "sourceNote": "„Diamont Tinting Base Characteristics“ (BASF US, maj 2020), str. 2–5; rmpaint.com/gb Basecoat Lines, sekcija „R-M Crystal bases“: „CRYSTAL BASE ... packaged in "
+      },
+      {
+        "code": "CB 38K",
+        "name": "Blackberry Pearl",
+        "packs": [
+          "bočica 125 ml"
+        ],
+        "status": "potvrđeno izvorom",
+        "source": "https://refinish.basf.us/wp-content/uploads/2020/10/2020_Diamont_ENG.pdf",
+        "sourceNote": "„Diamont Tinting Base Characteristics“ (BASF US, maj 2020), str. 2–5; rmpaint.com/gb Basecoat Lines, sekcija „R-M Crystal bases“: „CRYSTAL BASE ... packaged in "
+      },
+      {
+        "code": "CB 38L",
+        "name": "Ultra White",
+        "packs": [
+          "bočica 125 ml"
+        ],
+        "status": "potvrđeno izvorom",
+        "source": "https://refinish.basf.us/wp-content/uploads/2020/10/2020_Diamont_ENG.pdf",
+        "sourceNote": "„Diamont Tinting Base Characteristics“ (BASF US, maj 2020), str. 2–5; rmpaint.com/gb Basecoat Lines, sekcija „R-M Crystal bases“: „CRYSTAL BASE ... packaged in "
+      },
+      {
+        "code": "CB 45L",
+        "name": "Blue Green Pearl",
+        "packs": [
+          "bočica 125 ml"
+        ],
+        "status": "potvrđeno izvorom",
+        "source": "https://refinish.basf.us/wp-content/uploads/2020/10/2020_Diamont_ENG.pdf",
+        "sourceNote": "„Diamont Tinting Base Characteristics“ (BASF US, maj 2020), str. 2–5; rmpaint.com/gb Basecoat Lines, sekcija „R-M Crystal bases“: „CRYSTAL BASE ... packaged in "
+      },
+      {
+        "code": "CB 47M",
+        "name": "Crystal Blue",
+        "packs": [
+          "bočica 125 ml"
+        ],
+        "status": "potvrđeno izvorom",
+        "source": "https://refinish.basf.us/wp-content/uploads/2020/10/2020_Diamont_ENG.pdf",
+        "sourceNote": "„Diamont Tinting Base Characteristics“ (BASF US, maj 2020), str. 2–5; rmpaint.com/gb Basecoat Lines, sekcija „R-M Crystal bases“: „CRYSTAL BASE ... packaged in "
+      },
+      {
+        "code": "CB 54L",
+        "name": "Green Pearl",
+        "packs": [
+          "bočica 125 ml"
+        ],
+        "status": "potvrđeno izvorom",
+        "source": "https://refinish.basf.us/wp-content/uploads/2020/10/2020_Diamont_ENG.pdf",
+        "sourceNote": "„Diamont Tinting Base Characteristics“ (BASF US, maj 2020), str. 2–5; rmpaint.com/gb Basecoat Lines, sekcija „R-M Crystal bases“: „CRYSTAL BASE ... packaged in "
+      },
+      {
+        "code": "CB 56L",
+        "name": "Moss Green Pearl",
+        "packs": [
+          "bočica 125 ml"
+        ],
+        "status": "potvrđeno izvorom",
+        "source": "https://refinish.basf.us/wp-content/uploads/2020/10/2020_Diamont_ENG.pdf",
+        "sourceNote": "„Diamont Tinting Base Characteristics“ (BASF US, maj 2020), str. 2–5; rmpaint.com/gb Basecoat Lines, sekcija „R-M Crystal bases“: „CRYSTAL BASE ... packaged in "
+      },
+      {
+        "code": "CB 57M",
+        "name": "Crystal Green",
+        "packs": [
+          "bočica 125 ml"
+        ],
+        "status": "potvrđeno izvorom",
+        "source": "https://refinish.basf.us/wp-content/uploads/2020/10/2020_Diamont_ENG.pdf",
+        "sourceNote": "„Diamont Tinting Base Characteristics“ (BASF US, maj 2020), str. 2–5; rmpaint.com/gb Basecoat Lines, sekcija „R-M Crystal bases“: „CRYSTAL BASE ... packaged in "
+      },
+      {
+        "code": "CB 58M",
+        "name": "Red Green Pearl",
+        "packs": [
+          "bočica 125 ml"
+        ],
+        "status": "potvrđeno izvorom",
+        "source": "https://refinish.basf.us/wp-content/uploads/2020/10/2020_Diamont_ENG.pdf",
+        "sourceNote": "„Diamont Tinting Base Characteristics“ (BASF US, maj 2020), str. 2–5; rmpaint.com/gb Basecoat Lines, sekcija „R-M Crystal bases“: „CRYSTAL BASE ... packaged in "
+      },
+      {
+        "code": "CB 62L",
+        "name": "Crystal Gold",
+        "packs": [
+          "bočica 125 ml"
+        ],
+        "status": "potvrđeno izvorom",
+        "source": "https://refinish.basf.us/wp-content/uploads/2020/10/2020_Diamont_ENG.pdf",
+        "sourceNote": "„Diamont Tinting Base Characteristics“ (BASF US, maj 2020), str. 2–5; rmpaint.com/gb Basecoat Lines, sekcija „R-M Crystal bases“: „CRYSTAL BASE ... packaged in "
+      },
+      {
+        "code": "CB 63L",
+        "name": "Super Brass Pearl",
+        "packs": [
+          "bočica 125 ml"
+        ],
+        "status": "potvrđeno izvorom",
+        "source": "https://refinish.basf.us/wp-content/uploads/2020/10/2020_Diamont_ENG.pdf",
+        "sourceNote": "„Diamont Tinting Base Characteristics“ (BASF US, maj 2020), str. 2–5; rmpaint.com/gb Basecoat Lines, sekcija „R-M Crystal bases“: „CRYSTAL BASE ... packaged in "
+      },
+      {
+        "code": "CB 67V",
+        "name": "Gold Aluminum",
+        "packs": [
+          "bočica 125 ml"
+        ],
+        "status": "potvrđeno izvorom",
+        "source": "https://refinish.basf.us/wp-content/uploads/2020/10/2020_Diamont_ENG.pdf",
+        "sourceNote": "„Diamont Tinting Base Characteristics“ (BASF US, maj 2020), str. 2–5; rmpaint.com/gb Basecoat Lines, sekcija „R-M Crystal bases“: „CRYSTAL BASE ... packaged in "
+      },
+      {
+        "code": "CB 71V",
+        "name": "Rich Bronze",
+        "packs": [
+          "bočica 125 ml"
+        ],
+        "status": "potvrđeno izvorom",
+        "source": "https://refinish.basf.us/wp-content/uploads/2020/10/2020_Diamont_ENG.pdf",
+        "sourceNote": "„Diamont Tinting Base Characteristics“ (BASF US, maj 2020), str. 2–5; rmpaint.com/gb Basecoat Lines, sekcija „R-M Crystal bases“: „CRYSTAL BASE ... packaged in "
+      },
+      {
+        "code": "CB 74L",
+        "name": "Bright Copper Pearl",
+        "packs": [
+          "bočica 125 ml"
+        ],
+        "status": "potvrđeno izvorom",
+        "source": "https://refinish.basf.us/wp-content/uploads/2020/10/2020_Diamont_ENG.pdf",
+        "sourceNote": "„Diamont Tinting Base Characteristics“ (BASF US, maj 2020), str. 2–5; rmpaint.com/gb Basecoat Lines, sekcija „R-M Crystal bases“: „CRYSTAL BASE ... packaged in "
+      },
+      {
+        "code": "CB 85L",
+        "name": "Red Pearl",
+        "packs": [
+          "bočica 125 ml"
+        ],
+        "status": "potvrđeno izvorom",
+        "source": "https://refinish.basf.us/wp-content/uploads/2020/10/2020_Diamont_ENG.pdf",
+        "sourceNote": "„Diamont Tinting Base Characteristics“ (BASF US, maj 2020), str. 2–5; rmpaint.com/gb Basecoat Lines, sekcija „R-M Crystal bases“: „CRYSTAL BASE ... packaged in "
+      }
+    ],
+    "rm-paste-za-mesanje": [
+      {
+        "code": "SC 403",
+        "name": null,
+        "packs": [
+          "1 L"
+        ],
+        "status": "OWNER_CONFIRMED_LABEL",
+        "source": "etiketa (potvrda vlasnika 2026-10-13)",
+        "sourceNote": "Oznaka i pakovanje potvrđeni prema etiketi; linija i zvanični naziv nisu potvrđeni zvaničnim izvorom."
+      },
+      {
+        "code": "BC 111",
+        "name": null,
+        "packs": [
+          "1 L"
+        ],
+        "status": "OWNER_CONFIRMED_LABEL",
+        "source": "etiketa (potvrda vlasnika 2026-10-13)",
+        "sourceNote": "Oznaka i pakovanje potvrđeni prema etiketi; linija i zvanični naziv nisu potvrđeni zvaničnim izvorom."
+      },
+      {
+        "code": "BC 190",
+        "name": null,
+        "packs": [
+          "1 L",
+          "4 L"
+        ],
+        "status": "OWNER_CONFIRMED_LABEL",
+        "source": "etiketa (potvrda vlasnika 2026-10-13)",
+        "sourceNote": "Oznaka i pakovanje potvrđeni prema etiketi; linija i zvanični naziv nisu potvrđeni zvaničnim izvorom."
+      },
+      {
+        "code": "BC 196",
+        "name": null,
+        "packs": [
+          "0,5 L"
+        ],
+        "status": "OWNER_CONFIRMED_LABEL",
+        "source": "etiketa (potvrda vlasnika 2026-10-13)",
+        "sourceNote": "Oznaka i pakovanje potvrđeni prema etiketi; linija i zvanični naziv nisu potvrđeni zvaničnim izvorom."
+      },
+      {
+        "code": "BC 301",
+        "name": null,
+        "packs": [
+          "1 L"
+        ],
+        "status": "OWNER_CONFIRMED_LABEL",
+        "source": "etiketa (potvrda vlasnika 2026-10-13)",
+        "sourceNote": "Oznaka i pakovanje potvrđeni prema etiketi; linija i zvanični naziv nisu potvrđeni zvaničnim izvorom."
+      },
+      {
+        "code": "BC 404",
+        "name": null,
+        "packs": [
+          "1 L"
+        ],
+        "status": "OWNER_CONFIRMED_LABEL",
+        "source": "etiketa (potvrda vlasnika 2026-10-13)",
+        "sourceNote": "Oznaka i pakovanje potvrđeni prema etiketi; linija i zvanični naziv nisu potvrđeni zvaničnim izvorom."
+      },
+      {
+        "code": "BC 408",
+        "name": null,
+        "packs": [
+          "1 L"
+        ],
+        "status": "OWNER_CONFIRMED_LABEL",
+        "source": "etiketa (potvrda vlasnika 2026-10-13)",
+        "sourceNote": "Oznaka i pakovanje potvrđeni prema etiketi; linija i zvanični naziv nisu potvrđeni zvaničnim izvorom."
+      },
+      {
+        "code": "BC 475",
+        "name": null,
+        "packs": [
+          "1 L"
+        ],
+        "status": "OWNER_CONFIRMED_LABEL",
+        "source": "etiketa (potvrda vlasnika 2026-10-13)",
+        "sourceNote": "Oznaka i pakovanje potvrđeni prema etiketi; linija i zvanični naziv nisu potvrđeni zvaničnim izvorom."
+      },
+      {
+        "code": "BC 512",
+        "name": null,
+        "packs": [
+          "1 L"
+        ],
+        "status": "OWNER_CONFIRMED_LABEL",
+        "source": "etiketa (potvrda vlasnika 2026-10-13)",
+        "sourceNote": "Oznaka i pakovanje potvrđeni prema etiketi; linija i zvanični naziv nisu potvrđeni zvaničnim izvorom."
+      },
+      {
+        "code": "BC 601",
+        "name": null,
+        "packs": [
+          "1 L"
+        ],
+        "status": "OWNER_CONFIRMED_LABEL",
+        "source": "etiketa (potvrda vlasnika 2026-10-13)",
+        "sourceNote": "Oznaka i pakovanje potvrđeni prema etiketi; linija i zvanični naziv nisu potvrđeni zvaničnim izvorom."
+      },
+      {
+        "code": "BC 616",
+        "name": null,
+        "packs": [
+          "0,5 L"
+        ],
+        "status": "OWNER_CONFIRMED_LABEL",
+        "source": "etiketa (potvrda vlasnika 2026-10-13)",
+        "sourceNote": "Oznaka i pakovanje potvrđeni prema etiketi; linija i zvanični naziv nisu potvrđeni zvaničnim izvorom."
+      },
+      {
+        "code": "BC 617",
+        "name": null,
+        "packs": [
+          "0,5 L"
+        ],
+        "status": "OWNER_CONFIRMED_LABEL",
+        "source": "etiketa (potvrda vlasnika 2026-10-13)",
+        "sourceNote": "Oznaka i pakovanje potvrđeni prema etiketi; linija i zvanični naziv nisu potvrđeni zvaničnim izvorom."
+      },
+      {
+        "code": "BC 740",
+        "name": null,
+        "packs": [
+          "0,5 L"
+        ],
+        "status": "OWNER_CONFIRMED_LABEL",
+        "source": "etiketa (potvrda vlasnika 2026-10-13)",
+        "sourceNote": "Oznaka i pakovanje potvrđeni prema etiketi; linija i zvanični naziv nisu potvrđeni zvaničnim izvorom."
+      },
+      {
+        "code": "BC 816",
+        "name": null,
+        "packs": [
+          "1 L"
+        ],
+        "status": "OWNER_CONFIRMED_LABEL",
+        "source": "etiketa (potvrda vlasnika 2026-10-13)",
+        "sourceNote": "Oznaka i pakovanje potvrđeni prema etiketi; linija i zvanični naziv nisu potvrđeni zvaničnim izvorom."
+      },
+      {
+        "code": "BC 881",
+        "name": null,
+        "packs": [
+          "1 L"
+        ],
+        "status": "OWNER_CONFIRMED_LABEL",
+        "source": "etiketa (potvrda vlasnika 2026-10-13)",
+        "sourceNote": "Oznaka i pakovanje potvrđeni prema etiketi; linija i zvanični naziv nisu potvrđeni zvaničnim izvorom."
+      },
+      {
+        "code": "BC 1182",
+        "name": null,
+        "packs": [
+          "1 L"
+        ],
+        "status": "OWNER_CONFIRMED_LABEL",
+        "source": "etiketa (potvrda vlasnika 2026-10-13)",
+        "sourceNote": "Oznaka i pakovanje potvrđeni prema etiketi; linija i zvanični naziv nisu potvrđeni zvaničnim izvorom."
+      },
+      {
+        "code": "BC 1245",
+        "name": null,
+        "packs": [
+          "1 L"
+        ],
+        "status": "OWNER_CONFIRMED_LABEL",
+        "source": "etiketa (potvrda vlasnika 2026-10-13)",
+        "sourceNote": "Oznaka i pakovanje potvrđeni prema etiketi; linija i zvanični naziv nisu potvrđeni zvaničnim izvorom."
+      },
+      {
+        "code": "BC 1265",
+        "name": null,
+        "packs": [
+          "1 L"
+        ],
+        "status": "OWNER_CONFIRMED_LABEL",
+        "source": "etiketa (potvrda vlasnika 2026-10-13)",
+        "sourceNote": "Oznaka i pakovanje potvrđeni prema etiketi; linija i zvanični naziv nisu potvrđeni zvaničnim izvorom."
+      },
+      {
+        "code": "BC 7610",
+        "name": null,
+        "packs": [
+          "0,5 L"
+        ],
+        "status": "OWNER_CONFIRMED_LABEL",
+        "source": "etiketa (potvrda vlasnika 2026-10-13)",
+        "sourceNote": "Oznaka i pakovanje potvrđeni prema etiketi; linija i zvanični naziv nisu potvrđeni zvaničnim izvorom."
+      },
+      {
+        "code": "CB 48V",
+        "name": null,
+        "packs": [
+          "125 ml"
+        ],
+        "status": "OWNER_CONFIRMED_LABEL",
+        "source": "etiketa (potvrda vlasnika 2026-10-13)",
+        "sourceNote": "Oznaka i pakovanje potvrđeni prema etiketi; linija i zvanični naziv nisu potvrđeni zvaničnim izvorom."
+      }
+    ]
+  },
+  "notes": {
+    "rm-paste-za-mesanje": "Oznake i pakovanja prema etiketi pakovanja iz naše ponude. Linija i naziv nijanse nisu potvrđeni zvaničnim izvorom proizvođača, pa se ne navode."
+  }
+}

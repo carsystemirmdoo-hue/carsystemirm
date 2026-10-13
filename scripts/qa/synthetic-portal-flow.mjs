@@ -15,8 +15,9 @@ const postgres = (await import(ROOT + "/node_modules/postgres/src/index.js")).de
 const creds = JSON.parse(readFileSync(process.env.SYNTH_CREDS_FILE ?? process.env.HOME + "/.carsystem-secrets/revizija-sinteticki.json", "utf8"));
 const OUT = process.argv[2]; mkdirSync(OUT, { recursive: true });
 const STEP = process.argv[3] ?? "sve";
-const B = "http://127.0.0.1:3450";
-const sqlc = postgres("postgres://carsystem_qa@127.0.0.1:55436/carsystem_revizija_ui_qa", { max: 1, onnotice: () => {} });
+// Podrazumevano kao ranije; SYNTH_BASE_URL / SYNTH_DB_URL za zasebnu bazu i server (paralelna proba).
+const B = process.env.SYNTH_BASE_URL ?? "http://127.0.0.1:3450";
+const sqlc = postgres(process.env.SYNTH_DB_URL ?? "postgres://carsystem_qa@127.0.0.1:55436/carsystem_revizija_ui_qa", { max: 1, onnotice: () => {} });
 const desk = { viewport: { width: 1440, height: 1000 } };
 const phone = { viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true, deviceScaleFactor: 2 };
 const totp = (b32) => new OTPAuth.TOTP({ secret: OTPAuth.Secret.fromBase32(b32), digits: 6, period: 30, algorithm: "SHA1" }).generate();
@@ -435,10 +436,12 @@ try {
     const panel = k.locator('section[aria-labelledby="buy-panel-title"]');
     await panel.waitFor({ timeout: 60000 });
     const pt = await txt(panel);
-    check("upit: panel „Za Vašu firmu“ bez cene, sa formom upita", /SINT Auto Lak/i.test(pt) && /Zatražite cenu\/uslove/i.test(pt) && !/RSD \//.test(pt), pt.slice(0, 140));
+    // Od 0049: nepovezan proizvod nudi „Upit za nabavku“; povezan bez cene „Zatražite cenu/uslove“.
+    const upitDugme = /Pošaljite upit za nabavku/i.test(pt) ? "Pošaljite upit za nabavku" : "Zatražite cenu/uslove";
+    check("upit: panel „Za Vašu firmu“ bez cene, sa formom upita", /SINT Auto Lak/i.test(pt) && /Zatražite cenu\/uslove|Upit za nabavku/i.test(pt) && !/RSD \//.test(pt), pt.slice(0, 140));
     await panel.locator('input[type="number"]').fill("12");
     await panel.locator('input[type="text"]').fill("Sintetička provera — mesečna potrošnja");
-    await panel.getByRole("button", { name: "Zatražite cenu/uslove" }).click();
+    await panel.getByRole("button", { name: upitDugme }).click();
     await panel.locator('[role="status"]').waitFor({ timeout: 30000 });
     const potvrda = await txt(panel.locator('[role="status"]'));
     const broj = potvrda.match(/U-\d{4}-\d{5}/)?.[0] ?? "";
@@ -449,7 +452,7 @@ try {
     const t = await (await b.newContext(desk)).newPage(); await staff(t, "kancelarija");
     await go(t, "/portal/obavestenja");
     const ob = await txt(t.locator("main"));
-    check("upit: kancelarija vidi „Upit za cenu“ sa brojem i vezom", /Upit za cenu/.test(ob) && ob.includes(broj) && (await t.locator('a[href="/portal/zahtevi/uslovi"]').count()) > 0);
+    check("upit: kancelarija vidi „Upit za cenu“ sa brojem i vezom", /Upit za (cenu|nabavku)/.test(ob) && ob.includes(broj) && (await t.locator('a[href="/portal/zahtevi/uslovi"]').count()) > 0);
     await t.screenshot({ path: `${OUT}/p2-obavestenje-upit.png`, fullPage: true });
     await go(t, "/portal/zahtevi/uslovi");
     const red = t.locator("tr, li, article").filter({ hasText: broj }).first();
@@ -845,6 +848,216 @@ try {
     await t.screenshot({ path: `${OUT}/c-stampa.png`, fullPage: true });
     check("kontrolne: bez 5xx", errors.length === 0, errors.join(", "));
   }
+  if (STEP === "pribor") {
+    // Predlog poklopca uz izabranu posudu (0048, odluka vlasnika 2026-10-13). PRIBOR_PAROVI = privatni plan
+    // { parovi: [{ artikal, pribor }] }; prva dva para se proveravaju: jedan kroz „Izbor robe”, jedan kroz katalog
+    // (ako posuda ima karticu). Server mora imati ORDERING_COMPANION_STOCK=unknown-ok (izvor zaliha ne postoji).
+    const pairs = JSON.parse(readFileSync(process.env.PRIBOR_PAROVI, "utf8")).parovi;
+    const code = readFileSync(process.env.SYNTH_ENV_FILE ?? process.env.HOME + "/.carsystem-secrets/revizija-sinteticki.env", "utf8").match(/^SITE_ACCESS_PASSWORD=(.*)$/m)[1];
+    const ctx = await b.newContext(desk);
+    await ctx.request.post(`${B}/site-u-pripremi/access`, { form: { accessCode: code }, maxRedirects: 0 });
+    const k = await ctx.newPage();
+    const errors = []; k.on("response", (x) => { if (x.status() >= 500) errors.push(`${x.status()} ${new URL(x.url()).pathname}`); });
+    await customer(k);
+    const cartCodes = async () => (await sqlc`SELECT a.code, ci.pack_count AS n FROM customer_cart_items ci JOIN articles a ON a.id = ci.article_id WHERE ci.customer_id = ${A}`).map((r) => `${r.code}×${r.n}`).sort();
+    const aside = k.locator('aside[aria-label="Odgovarajući pribor"]');
+    const offers = await k.evaluate(async () => (await (await fetch("/api/kupac/ponude", { cache: "no-store" })).json()).offers);
+    for (const [i, pair] of pairs.slice(0, 6).entries()) {
+      await sqlc`DELETE FROM customer_cart_items WHERE customer_id = ${A}`;
+      const viaCatalog = offers.find((o) => o.articleCode === pair.artikal);
+      if (viaCatalog && i > 0) {
+        await go(k, `/proizvodi/${viaCatalog.slug}${viaCatalog.variantKey ? `?varijanta=${encodeURIComponent(viaCatalog.variantKey)}` : ""}`);
+        const panel = k.locator('section[aria-labelledby="buy-panel-title"]');
+        await panel.waitFor({ timeout: 30000 });
+        const radio = panel.locator(`input[type="radio"][value="${viaCatalog.articleId}"]`);
+        if (await radio.count()) { await radio.check(); await k.waitForTimeout(300); }
+        await panel.locator('input[inputmode="numeric"]').first().fill("2");
+        await panel.getByRole("button", { name: "Dodajte u korpu" }).click();
+      } else {
+        await go(k, `/kupac/naruci?q=${encodeURIComponent(pair.artikal)}`);
+        const row = k.locator("table.pn-table tbody tr", { hasText: pair.artikal }).first();
+        await row.locator("input").fill("2");
+        await row.getByRole("button", { name: "Dodajte u korpu" }).click();
+      }
+      await aside.waitFor({ timeout: 30000 });
+      const at = await txt(aside);
+      const before = await cartCodes();
+      check(`pribor ${pair.artikal} (${viaCatalog && i > 0 ? "katalog" : "Izbor robe"}): panel nudi poklopac ${pair.pribor}; u korpi samo posuda`, at.includes(pair.pribor) && /Ne dodaje se automatski/.test(at) && before.join() === `${pair.artikal}×2`, `${at.slice(0, 160)} | korpa ${before.join()}`);
+      await k.screenshot({ path: `${OUT}/p-${pair.artikal}.png` });
+      // „Kompatibilno“ nema predlog broja (prazno polje) — kupac upisuje broj; poklopac je predložen.
+      const qty = aside.locator("li").first().locator("input");
+      if (!(await qty.inputValue())) await qty.fill("2");
+      await aside.getByRole("button", { name: "Dodajte" }).first().click();
+      await k.waitForFunction(() => /(Poklopac|Artikal) je dodat u korpu/.test(document.body.innerText), null, { timeout: 30000 });
+      const after = await cartCodes();
+      check(`pribor ${pair.artikal}: posle klika korpa ima posudu i poklopac (2 + 2)`, after.join() === [`${pair.artikal}×2`, `${pair.pribor}×2`].sort().join(), after.join());
+    }
+    check("pribor: bez 5xx", errors.length === 0, errors.join(", "));
+  }
+  if (STEP === "herteri") {
+    // Predlog hertera (0048, odluka vlasnika 2026-10-13). HERTER_PROBA = privatni JSON
+    // [{ artikal, kanal: "katalog" | "izbor", paketa, opcije: { <šifra hertera>: <predlog broja pakovanja | null> }, dodaj: <šifra> }].
+    // Proverava: sve opcije iz tehničkog lista, nijedna unapred izabrana, predlog količine samo gde je dozvoljen,
+    // u korpi samo osnovni artikal do klika; zatim zahtev i štampa sa herterima. Server: ORDERING_COMPANION_STOCK=unknown-ok.
+    const cases = JSON.parse(readFileSync(process.env.HERTER_PROBA, "utf8"));
+    const code = readFileSync(process.env.SYNTH_ENV_FILE ?? process.env.HOME + "/.carsystem-secrets/revizija-sinteticki.env", "utf8").match(/^SITE_ACCESS_PASSWORD=(.*)$/m)[1];
+    const ctx = await b.newContext(desk);
+    await ctx.request.post(`${B}/site-u-pripremi/access`, { form: { accessCode: code }, maxRedirects: 0 });
+    const k = await ctx.newPage();
+    const errors = []; k.on("response", (x) => { if (x.status() >= 500) errors.push(`${x.status()} ${new URL(x.url()).pathname}`); });
+    await customer(k);
+    await sqlc`DELETE FROM customer_cart_items WHERE customer_id = ${A}`;
+    const cart = async () => Object.fromEntries((await sqlc`SELECT a.code, ci.pack_count AS n FROM customer_cart_items ci JOIN articles a ON a.id = ci.article_id WHERE ci.customer_id = ${A}`).map((r) => [r.code, r.n]));
+    const offers = await k.evaluate(async () => (await (await fetch("/api/kupac/ponude", { cache: "no-store" })).json()).offers);
+    const aside = k.locator('aside[aria-label="Odgovarajući pribor"]');
+    const expectCart = {};
+    for (const c of cases) {
+      const before = await cart();
+      if (c.kanal === "katalog") {
+        const o = offers.find((x) => x.articleCode === c.artikal);
+        if (!o) { check(`herteri ${c.artikal}: ponuda u katalogu postoji`, false, "nema ponude"); continue; }
+        await go(k, `/proizvodi/${o.slug}${o.variantKey ? `?varijanta=${encodeURIComponent(o.variantKey)}` : ""}`);
+        const panel = k.locator('section[aria-labelledby="buy-panel-title"]');
+        await panel.waitFor({ timeout: 30000 });
+        const radio = panel.locator(`input[type="radio"][value="${o.articleId}"]`);
+        if (await radio.count()) { await radio.check(); await k.waitForTimeout(300); }
+        await panel.locator('input[inputmode="numeric"]').first().fill(String(c.paketa));
+        await panel.getByRole("button", { name: "Dodajte u korpu" }).click();
+      } else {
+        await go(k, `/kupac/naruci?q=${encodeURIComponent(c.artikal)}`);
+        const row = k.locator("table.pn-table tbody tr", { hasText: c.artikal }).first();
+        await row.locator("input").fill(String(c.paketa));
+        await row.getByRole("button", { name: "Dodajte u korpu" }).click();
+      }
+      expectCart[c.artikal] = (expectCart[c.artikal] ?? 0) + c.paketa;
+      await aside.waitFor({ timeout: 30000 });
+      await k.waitForTimeout(300);
+      const at = await txt(aside);
+      const values = Object.fromEntries(await aside.locator("li").evaluateAll((lis) => lis.map((li) => [li.textContent.match(/šifra (\d{6})/)?.[1], li.querySelector("input")?.value ?? ""])));
+      const want = Object.entries(c.opcije);
+      const optsOk = want.every(([h, n]) => h in values && values[h] === (n === null ? "" : String(n))) && Object.keys(values).length === want.length;
+      const after = await cart();
+      const onlyBase = Object.keys(after).every((x) => x in before || x === c.artikal);
+      check(`herteri ${c.artikal} (${c.kanal}): ${want.length} opcija iz tehničkog lista, predlozi ${JSON.stringify(c.opcije)}, ništa automatski`, optsOk && onlyBase && /tehnički list/.test(at), `${JSON.stringify(values)} | ${at.slice(0, 200)}`);
+      await k.screenshot({ path: `${OUT}/h-${c.artikal}.png` });
+      if (c.dodaj) {
+        const li = aside.locator("li", { hasText: `šifra ${c.dodaj}` });
+        if (!(await li.locator("input").inputValue())) await li.locator("input").fill("1");
+        const n = Number(await li.locator("input").inputValue());
+        await li.getByRole("button", { name: "Dodajte" }).click();
+        await k.waitForFunction(() => /Herter je dodat/.test(document.body.innerText), null, { timeout: 30000 });
+        expectCart[c.dodaj] = (expectCart[c.dodaj] ?? 0) + n;
+        const now = await cart();
+        check(`herteri ${c.artikal}: posle klika u korpi ${c.dodaj} × ${n}`, now[c.dodaj] === expectCart[c.dodaj], JSON.stringify(now));
+      }
+      await aside.getByRole("button", { name: "Zatvorite predlog" }).click();
+    }
+    const final = await cart();
+    check("herteri: korpa = osnovni artikli + samo kliknuti herteri", JSON.stringify(Object.entries(final).sort()) === JSON.stringify(Object.entries(expectCart).sort()), JSON.stringify(final));
+    await korpa(k, "Avansno plaćanje");
+    await fillAndSend(k);
+    await k.waitForFunction(() => location.pathname.startsWith("/kupac/porudzbine/"), null, { timeout: 60000 });
+    const broj = (await txt(k.locator("main"))).match(/Z-\d{4}-\d+/)?.[0] ?? "";
+    const lines = await sqlc`SELECT l.article_code AS c, l.pack_count AS n, l.quantity::numeric AS q, l.pack_label AS lab, l.unit AS u FROM customer_order_lines l JOIN customer_orders o ON o.id = l.order_id WHERE o.request_number = ${broj}`;
+    check(`herteri: zahtev ${broj} sadrži sve stavke korpe sa brojem pakovanja`, lines.length === Object.keys(expectCart).length && lines.every((l) => expectCart[l.c] === l.n), JSON.stringify(lines));
+    const t = await (await b.newContext(desk)).newPage(); await staff(t, "kancelarija");
+    await go(t, "/portal/zahtevi");
+    const href = await t.locator('a[href^="/portal/zahtevi/"]').filter({ hasText: broj }).first().getAttribute("href");
+    await go(t, `${href}/stampa`);
+    const st = await txt(t.locator("body"));
+    const miss = lines.filter((l) => !st.includes(l.c) || !st.includes(`poručeno: ${l.n} × ${l.lab}`));
+    check("herteri: štampa — šifra i „poručeno: N × <pakovanje>“ za osnovu i herter", miss.length === 0, miss.map((l) => l.c).join(", "));
+    await t.screenshot({ path: `${OUT}/h-stampa.png`, fullPage: true });
+    check("herteri: bez 5xx", errors.length === 0, errors.join(", "));
+  }
+  if (STEP === "odluke") {
+    // Odluke vlasnika 2026-10-13. ODLUKE_PROBA = privatni JSON { upit: [šifra u Izboru robe], van: [šifra sa zvezdicom],
+    // upitKartica: slug bez ponude, preusmerenja: [[sa, na]], bezVarijante: [[slug, red]], redovi: [[slug, [oznake]]],
+    // tekst: [[slug, mora, ne_sme]] }.
+    const t0 = JSON.parse(readFileSync(process.env.ODLUKE_PROBA, "utf8"));
+    const code = readFileSync(process.env.SYNTH_ENV_FILE ?? process.env.HOME + "/.carsystem-secrets/revizija-sinteticki.env", "utf8").match(/^SITE_ACCESS_PASSWORD=(.*)$/m)[1];
+    const ctx = await b.newContext(desk);
+    await ctx.request.post(`${B}/site-u-pripremi/access`, { form: { accessCode: code }, maxRedirects: 0 });
+    const k = await ctx.newPage();
+    const errors = []; k.on("response", (x) => { if (x.status() >= 500) errors.push(`${x.status()} ${new URL(x.url()).pathname}`); });
+    await customer(k);
+    for (const c of t0.upit) {
+      await go(k, `/kupac/naruci?q=${encodeURIComponent(c)}`);
+      const row = k.locator("table.pn-table tbody tr", { hasText: c }).first();
+      const rt = await txt(row);
+      check(`odluke ${c}: Izbor robe — „Upit za nabavku“, bez dugmeta za korpu`, /Upit za nabavku/.test(rt) && (await row.getByRole("button", { name: "Dodajte u korpu" }).count()) === 0, rt.slice(0, 200));
+    }
+    for (const c of t0.van) {
+      await go(k, `/kupac/naruci?q=${encodeURIComponent(c)}`);
+      const n = await k.locator("table.pn-table tbody tr", { hasText: c }).count();
+      check(`odluke ${c}: artikal van programa se ne nudi u Izboru robe`, n === 0, String(n));
+    }
+    const offers = await k.evaluate(async () => (await (await fetch("/api/kupac/ponude", { cache: "no-store" })).json()).offers);
+    check("odluke: ponude kataloga bez artikala van programa i sa stanjem „inquiry“ za upit za nabavku", !offers.some((o) => t0.van.includes(o.articleCode)), "");
+    await go(k, `/proizvodi/${t0.upitKartica}`);
+    const panel = k.locator('section[aria-labelledby="buy-panel-title"]');
+    await panel.waitFor({ timeout: 30000 });
+    const pt = await txt(panel);
+    check(`odluke ${t0.upitKartica}: kartica bez ponude nudi „Upit za nabavku“, bez korpe`, /Upit za nabavku/.test(pt) && (await panel.getByRole("button", { name: "Dodajte u korpu" }).count()) === 0, pt.slice(0, 200));
+    const before = (await sqlc`SELECT count(*)::int AS n FROM customer_price_requests WHERE kind = 'procurement'`)[0].n;
+    await panel.getByRole("button", { name: "Pošaljite upit za nabavku" }).click();
+    await k.waitForFunction(() => /Zahtev U-\d{4}-\d+ je poslat/.test(document.body.innerText), null, { timeout: 30000 });
+    const after = (await sqlc`SELECT count(*)::int AS n FROM customer_price_requests WHERE kind = 'procurement'`)[0].n;
+    check(`odluke ${t0.upitKartica}: upit za nabavku zapisan kao vrsta „procurement“ (ne porudžbina, ne upit za cenu)`, after === before + 1, `${before} → ${after}`);
+    await k.screenshot({ path: `${OUT}/o-upit-nabavka.png` });
+    const anon = await (await b.newContext(desk)).newPage();
+    await anon.context().request.post(`${B}/site-u-pripremi/access`, { form: { accessCode: code }, maxRedirects: 0 });
+    for (const [from, to] of t0.preusmerenja) {
+      const r = await anon.context().request.get(`${B}${from}`, { maxRedirects: 0 });
+      check(`odluke: ${from} → ${to} (trajno preusmerenje)`, [301, 308].includes(r.status()) && (r.headers().location ?? "").endsWith(to), `${r.status()} ${r.headers().location}`);
+    }
+    for (const [slug, row] of t0.bezVarijante) {
+      const html = await (await anon.context().request.get(`${B}/proizvodi/${slug}`)).text();
+      check(`odluke: ${slug} bez varijante van programa ${row}`, !html.includes(row), "");
+    }
+    for (const [slug, ids] of t0.redovi) {
+      const html = await (await anon.context().request.get(`${B}/proizvodi/${slug}`)).text();
+      const missing = ids.filter((id) => !html.includes(id));
+      check(`odluke: ${slug} prikazuje svih ${ids.length} redova`, missing.length === 0, missing.join(", "));
+    }
+    for (const [slug, must, mustNot] of t0.tekst) {
+      await go(anon, `/proizvodi/${slug}`);
+      const body = await txt(anon.locator("main"));
+      check(`odluke: ${slug} prikazuje „${must}“${mustNot ? `, ne „${mustNot}“` : ""}`, body.includes(must) && (!mustNot || !body.includes(mustNot)), body.slice(0, 160));
+    }
+    check("odluke: bez 5xx", errors.length === 0, errors.join(", "));
+  }
+  if (STEP === "ponude-svi") {
+    // Svi artikli plana kroz /api/kupac/ponude (bez klikova): stanje „orderable”, potvrđeno pakovanje i
+    // oznaka, cena pakovanja = osnovna × 0,75 × pakovanje (sintetički rabat firme A, avans 25 %).
+    // Plan čita iz CONTROL_LINKS; pre koraka: seed-control-links + apply-confirmed-links --upis.
+    const plan = JSON.parse(readFileSync(process.env.CONTROL_LINKS, "utf8")).veze;
+    const code = readFileSync(process.env.SYNTH_ENV_FILE ?? process.env.HOME + "/.carsystem-secrets/revizija-sinteticki.env", "utf8").match(/^SITE_ACCESS_PASSWORD=(.*)$/m)[1];
+    const ctx = await b.newContext(desk);
+    await ctx.request.post(`${B}/site-u-pripremi/access`, { form: { accessCode: code }, maxRedirects: 0 });
+    const k = await ctx.newPage(); await customer(k);
+    const offers = await k.evaluate(async () => (await (await fetch("/api/kupac/ponude", { cache: "no-store" })).json()).offers);
+    const bad = [];
+    let checked = 0;
+    // Artikal bez kartice (samo pakovanje) nema ponudu kataloga — poručuje se kroz „Izbor robe” (korak kontrolne).
+    for (const v of plan.filter((x) => x.slug)) {
+      checked += 1;
+      const [row] = await sqlc`SELECT b.net_price::numeric AS base FROM article_base_prices b JOIN articles a ON a.id = b.article_id WHERE a.code = ${v.sifra} ORDER BY b.valid_from DESC LIMIT 1`;
+      const o = offers.find((x) => x.articleCode === v.sifra);
+      // Samo upit za nabavku (0049): ponuda postoji (veza), ali se ne poručuje.
+      const [inq] = await sqlc`SELECT 1 AS x FROM articles_procurement_only p JOIN articles a ON a.id = p.article_id WHERE a.code = ${v.sifra}`;
+      if (inq) { if (o?.state !== "inquiry" || o?.slug !== v.slug) bad.push(`${v.sifra}: očekivano „inquiry“, a ${o?.state}`); continue; }
+      if (!row) { if (o?.state !== "no_price") bad.push(`${v.sifra}: bez osnovne cene, a stanje ${o?.state}`); continue; }
+      const pack = o?.byOption.avans?.packAmounts?.net;
+      const linkOk = v.slug ? o?.slug === v.slug && (v.varijanta ? o?.variantKey === v.varijanta : true) : true;
+      // Veza bez upisanog pakovanja: za JM komad pravilo nudi 1 KOM („1 kom”); merna JM bez pakovanja se ne poručuje.
+      const want = v.pakovanje ?? (/^(KOM|KT)$/i.test(v.jm) ? 1 : null);
+      const label = v.pakovanje === null ? "1 kom" : v.oznaka;
+      const ok = o && want !== null && o.state === "orderable" && o.pack?.quantity === want && o.pack?.label === label && pack !== undefined && Math.abs(pack - Number(row.base) * 0.75 * want) <= 0.0051 && linkOk;
+      if (!ok) bad.push(`${v.sifra}: ${JSON.stringify({ state: o?.state, pack: o?.pack, slug: o?.slug, variantKey: o?.variantKey, net: pack })}`);
+    }
+    check(`ponude-svi: ${checked} artikala sa karticom (od ${plan.length}) — poručivo, pakovanje, oznaka, cena pakovanja i veza`, bad.length === 0, bad.slice(0, 8).join(" | "));
+  }
   if (STEP === "cediljke") {
     // Kancelarijska izmena količine za artikal čije pakovanje je deo KOM (paket 125 cediljki = 0,5 KOM):
     // korak je 0,5 KOM — 1,5 prolazi (3 paketa), 1,3 se odbija. Pre koraka: seed-control-links + apply sa 146958.
@@ -942,6 +1155,60 @@ try {
       kp = await txt(k.locator("[role=alert], .pn-error").first()).catch(() => "");
     }
     check("B9 lozinka kupca: posle 11 promašaja (prag 10) „Previše pokušaja“", /Previše pokušaja/.test(kp), kp);
+  }
+  if (STEP === "lager") {
+    // Ručni uvoz lagera (dok. 65): sintetički izveštaj istog rasporeda kao BizniSoft izvoz.
+    const XLSX = ROOT + "/fixtures/dev/biznisoft/lager/stanje-zaliha-sinteticki.xlsx";
+    const pre = (await sqlc`SELECT count(*)::int n FROM stock_imports`)[0].n;
+    const t = await (await b.newContext(desk)).newPage(); await staff(t, "kancelarija");
+    await go(t, "/portal/zalihe/uvoz");
+    check("lager: kancelarija vidi stranicu uvoza", /Uvoz lagera/.test(await txt(t.locator("h1").first())));
+    await t.setInputFiles('input[name="lager"]', XLSX);
+    await Promise.all([t.waitForURL(/\/portal\/zalihe\/uvoz\/[0-9a-f-]{36}/, { timeout: 60000 }), t.getByRole("button", { name: "Otpremite na pregled" }).click()]);
+    const body = await txt(t.locator("main"));
+    check("lager pregled: objekat 021 VELEPRODAJA", /021 VELEPRODAJA/.test(body));
+    check("lager pregled: datum stanja 05.09.2026 i datum štampe", /Stanje na dan 05[./] ?09[./] ?2026/.test(body) && /Datum štampe 05[./] ?09[./] ?2026/.test(body), body.slice(0, 400));
+    check("lager pregled: 10 stavki, zbir i strane provereni", /Prepoznato stavki 10/.test(body) && /zbir vrednosti = „Ukupno“/.test(body) && /strane 3\/3/.test(body));
+    check("lager pregled: nepovezane šifre i stavke bez JM/pakovanja prikazane", /Nepovezane šifre \(\d+\)/.test(body) && /bez potvrđene JM ili pakovanja/i.test(body));
+    check("lager pregled: bez cena", !/26\.?000|Nab\.Cena|VP Cena/.test(body));
+    await t.screenshot({ path: `${OUT}/lager-1-pregled.png`, fullPage: true });
+    await t.getByRole("checkbox", { name: /Pregledao sam izveštaj/ }).check();
+    await t.getByRole("button", { name: "Potvrdite lager" }).click();
+    await t.waitForURL(/ishod=potvrdjeno/, { timeout: 30000 });
+    await t.locator("[role=status]").filter({ hasText: "važeći snimak" }).first().waitFor({ timeout: 30000 });
+    check("lager: potvrda → važeći snimak", (await sqlc`SELECT count(*)::int n FROM stock_imports WHERE status = 'potvrdjeno'`)[0].n >= 1);
+    await go(t, "/portal/zalihe/uvoz");
+    await t.setInputFiles('input[name="lager"]', XLSX);
+    await Promise.all([t.waitForURL(/isti=1/, { timeout: 60000 }), t.getByRole("button", { name: "Otpremite na pregled" }).click()]);
+    check("lager: isti fajl ponovo → postojeći pregled, bez duplikata", (await sqlc`SELECT count(*)::int n FROM stock_imports`)[0].n === pre + 1);
+    await go(t, "/portal/zalihe/uvoz");
+    await t.setInputFiles('input[name="lager"]', { name: "pogresan.csv", mimeType: "text/csv", buffer: Buffer.from("nije lager;1;2\n") });
+    await Promise.all([t.waitForURL(/\/portal\/zalihe\/uvoz\/[0-9a-f-]{36}/, { timeout: 60000 }), t.getByRole("button", { name: "Otpremite na pregled" }).click()]);
+    const bad = await txt(t.locator("main"));
+    check("lager: pogrešan fajl → greška, bez dugmeta za potvrdu", /Greške koje blokiraju uvoz/.test(bad) && !(await t.getByRole("button", { name: "Potvrdite lager" }).count()));
+    await t.screenshot({ path: `${OUT}/lager-2-greska.png`, fullPage: true });
+    check("lager: kancelarija ima „Uvoz lagera“ u meniju", (await t.locator('a[href="/portal/zalihe/uvoz"]').count()) > 0);
+    const g = await (await b.newContext(desk)).newPage(); await staff(g, "vlasnik");
+    await go(g, "/portal/zalihe");
+    const zal = await txt(g.locator("main"));
+    check("zalihe (vlasnik): važeći snimak i isključen prikaz kupcima", /Stanje na dan 05[./] ?09[./] ?2026/.test(zal) && /Prag zastarelosti nije zadat/.test(zal), zal.slice(0, 300));
+    await g.screenshot({ path: `${OUT}/lager-3-zalihe.png`, fullPage: true });
+    // Telefon: ista stranica pregleda.
+    const tm = await (await b.newContext(phone)).newPage(); await staff(tm, "kancelarija");
+    const id = (await sqlc`SELECT id FROM stock_imports WHERE status = 'potvrdjeno' ORDER BY decided_at DESC LIMIT 1`)[0].id;
+    await go(tm, `/portal/zalihe/uvoz/${id}`);
+    const sw = await tm.evaluate(() => document.documentElement.scrollWidth - window.innerWidth);
+    check("lager pregled na telefonu: bez horizontalnog pomeranja strane", sw <= 1, `višak ${sw}px`);
+    await tm.screenshot({ path: `${OUT}/lager-4-telefon.png`, fullPage: true });
+    // Prava: magacioner (bez imports:write) i kupac nemaju pristup uploadu.
+    const m = await (await b.newContext(desk)).newPage(); await staff(m, "magacin");
+    const r = await m.goto(`${B}/portal/zalihe/uvoz`, { waitUntil: "load", timeout: 60000 });
+    check("lager: magacioner nema pristup uvozu (403)", r?.status() === 403 || /nemate pristup|zabranjen/i.test(await txt(m.locator("body"))), String(r?.status()));
+    const k = await (await b.newContext(desk)).newPage(); await customer(k);
+    const rk = await k.goto(`${B}/portal/zalihe/uvoz`, { waitUntil: "load", timeout: 60000 });
+    check("lager: kupac nema pristup uvozu", !/Uvoz lagera/.test(await txt(k.locator("body"))) && (rk?.status() !== 200 || new URL(k.url()).pathname !== "/portal/zalihe/uvoz"), `${rk?.status()} ${new URL(k.url()).pathname}`);
+    const api = await k.evaluate(async () => (await fetch("/api/kupac/ponude", { cache: "no-store" })).json());
+    check("kupac: ponude bez stanja dok je prikaz isključen", api.signedIn === true && (api.stock === null || api.stock === undefined), JSON.stringify(api.stock));
   }
 } catch (e) {
   check("skripta", false, String(e.message).split("\n").slice(0, 3).join(" | "));

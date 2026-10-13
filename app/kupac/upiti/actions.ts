@@ -14,7 +14,7 @@ export async function requestPriceAction(input: {
   articleCode: string | null;
   quantity: string;
   note: string;
-  kind: "no_price" | "special_terms";
+  kind: "no_price" | "special_terms" | "procurement";
   idempotencyKey: string;
 }): Promise<PriceRequestResult> {
   const session = await requireCustomerSession("/katalog");

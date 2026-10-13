@@ -80,8 +80,12 @@ test("1. sinhronizovani R-M zapisi su razvrstani na brend stranici", () => {
   }
 
   const uno = products.filter((product) => cls(product.slug)?.system === "uno-hd");
-  assert.equal(uno.length, 7);
-  assert.ok(uno.every((product) => syncedSlugs.has(product.slug)));
+  assert.equal(uno.filter((product) => syncedSlugs.has(product.slug)).length, 7);
+  // Ručne kartice (odluka vlasnika 2026-10-13): UNO HD razređivač i pasta za matiranje.
+  assert.deepEqual(
+    uno.filter((product) => !syncedSlugs.has(product.slug)).map((product) => product.slug).sort(),
+    ["rm-sc-850-thinner-medium", "rm-sm-09-special-mat-09"],
+  );
 
   // Blenderi sa „A” oznakom su aditivi (kao potvrđeni zapisi iz arhive), ne bazne boje.
   assert.equal(cls("rm-a-2530x-agilis-blender")?.category, "additive");
@@ -141,15 +145,21 @@ test("4. zapis bez kategorije ne ulazi ni u jednu grupu", () => {
   assert.deepEqual(selectRmGroupProducts({ limit: 3, members: [], pinnedSlugs: ["ne-postoji"] }), []);
 });
 
-test("5. CRYSTAL BASE bez aktivnog zapisa ne postaje proizvod za kupovinu", () => {
+test("5. CRYSTAL BASE je tačno jedna kartica sa potvrđenim bazama (odluka vlasnika 2026-10-12)", () => {
+  // Ranije: bez aktivnog zapisa nije bilo kartice. Vlasnik je 2026-10-12 potvrdio da se CRYSTAL BASE
+  // prodaje (bočica 125 ml = 1 KOM) i da mešne baze budu vidljive — jedna kartica, redovi iz
+  // `data/rm-sync/mixing-bases.json`, bez izmišljenih baza.
   const crystal = products.filter(
     (product) => cls(product.slug)?.system === "crystal-base" || /crystal/i.test(product.slug),
   );
-  assert.deepEqual(crystal.map((product) => product.slug), []);
-  assert.deepEqual(colorSystemProducts("crystal-base"), []);
-  assert.deepEqual(galleryProducts("crystal-base"), []);
-  // Sistem ostaje prikazan kao sistem (upit), bez kataloške kartice.
-  assert.ok(rmColorSystems.some((system) => system.system === "crystal-base" && !system.productSlugs));
+  assert.deepEqual(crystal.map((product) => product.slug), ["rm-diamont-crystal-base"]);
+  const rows = crystal[0].detail?.variants?.content.rows.map((row) => row.id) ?? [];
+  assert.equal(rows.length, 17);
+  assert.ok(rows.every((id) => /^CB \d+[A-Z]$/.test(id)), rows.join(", "));
+  // Odluka vlasnika 2026-10-13: CRYSTAL BASE ima karticu i povezan je sa R-M stranicom brenda.
+  assert.deepEqual(colorSystemProducts("crystal-base").map((product) => product.slug), ["rm-diamont-crystal-base"]);
+  assert.deepEqual(galleryProducts("crystal-base").map((product) => product.slug), ["rm-diamont-crystal-base"]);
+  assert.equal(crystal[0].rmMetadata?.system, "crystal-base");
 });
 
 test("6. katalog, pretraga, PDP i brend stranica dele identitet i sliku", () => {

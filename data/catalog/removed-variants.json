@@ -1,0 +1,19 @@
+{
+  "_comment": "Varijante (redovi kartice) uklonjene iz kataloga za kupce odlukom vlasnika, kada kartica ima i druge varijante u ponudi. Ključ je zvanična šifra proizvođača (red kartice). Primenjuje se u izgradnji kartica u vreme izvršavanja, pa ih sync ne vraća; izvorni sync dataset se ne menja. Cela kartica bez ijedne varijante u ponudi ide u removed-from-customer-catalog.json.",
+  "records": [
+    {
+      "slug": "carsystem-paint-system-cps-2-0",
+      "variant": "159.312",
+      "status": "BUSINESS_OUT_OF_PROGRAMME",
+      "decidedOn": "2026-10-13",
+      "reason": "Artikal više nije u našem programu (odluka vlasnika 2026-10-13)."
+    },
+    {
+      "slug": "carsystem-paint-system-cps-2-0",
+      "variant": "159.643",
+      "status": "BUSINESS_OUT_OF_PROGRAMME",
+      "decidedOn": "2026-10-13",
+      "reason": "Artikal više nije u našem programu (odluka vlasnika 2026-10-13)."
+    }
+  ]
+}

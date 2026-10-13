@@ -11,6 +11,13 @@ export type OffersPayload = {
   /** Odobrene opcije plaćanja kupca (bez odobrene: jedna „osnovni“). */
   options: { code: string | null; key: string; label: string; note: string | null }[];
   offers: CatalogRequestOffer[];
+  /** Stanje iz poslednjeg izvoza lagera — samo kada je prikaz uključen (dok. 65). */
+  stock?: {
+    headline: string;
+    imported: string;
+    note: string;
+    byArticle: Record<string, { state: "ima" | "nema"; text: string }>;
+  } | null;
   contacts: { reps: { name: string; email: string }[]; office: {
       phone: string | null;
       phoneHref: string | null;

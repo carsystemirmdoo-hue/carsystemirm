@@ -75,6 +75,14 @@ REVOKE DELETE, TRUNCATE ON price_list_imports FROM :runtime_role;
 --    Program artikla (0040): odluke se samo dodaju; važi poslednja.
 REVOKE UPDATE, DELETE, TRUNCATE ON article_programme_decisions FROM :runtime_role;
 GRANT SELECT, INSERT ON article_programme_decisions TO :runtime_role;
+-- 0049: odluke „samo upit za nabavku“ se samo dodaju.
+REVOKE UPDATE, DELETE, TRUNCATE ON article_offer_decisions FROM :runtime_role;
+GRANT SELECT, INSERT ON article_offer_decisions TO :runtime_role;
+-- 0050: pročitane stavke lagera se samo dodaju; otpremanje lagera se ne briše,
+--       a jedina izmena je jednokratna odluka (potvrda/odbacivanje), koju sužava okidač.
+REVOKE UPDATE, DELETE, TRUNCATE ON stock_import_lines FROM :runtime_role;
+GRANT SELECT, INSERT ON stock_import_lines TO :runtime_role;
+REVOKE DELETE, TRUNCATE ON stock_imports FROM :runtime_role;
 
 --    Poslovni status kupca (0042): odluke se samo dodaju; važi poslednja.
 REVOKE UPDATE, DELETE, TRUNCATE ON customer_commercial_status_decisions FROM :runtime_role;

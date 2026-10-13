@@ -65,8 +65,13 @@ export type BaslacBase = {
   /** Oznaka artikla, npr. `35-M214`. */
   code: string;
   name: string;
-  /** Zapremina u litrima; `null` kada nije potvrđena. */
+  /**
+   * Prikazana zapremina u litrima (naše prodajno pakovanje kada se razlikuje od zvaničnog);
+   * `null` kada nije potvrđena.
+   */
   volumeL: number | null;
+  /** Zapremina iz zvaničnog KLW kataloga kada naše pakovanje odstupa (`offerVolumeL`). */
+  officialVolumeL?: number | null;
   finish: BaslacFinish;
   /**
    * Orijentaciona boja za UI swatch. Nije tehnička vrednost nijanse i ne služi
@@ -98,20 +103,24 @@ function base(
   volumeL: number | null,
   finish: BaslacFinish,
   swatch: string,
-  extra: Partial<BaslacBase> = {},
+  extra: Partial<BaslacBase> & { offerVolumeL?: number } = {},
 ): BaslacBase {
+  // Naše pakovanje (potvrda vlasnika) ima prednost u prikazu da kupac ne vidi dve zapremine;
+  // zvanična zapremina ostaje zapisana, a ključ za spajanje sa programom se ne menja.
+  const { offerVolumeL, ...rest } = extra;
   return {
     system,
     code,
     name,
-    volumeL,
+    volumeL: offerVolumeL ?? volumeL,
+    ...(offerVolumeL !== undefined && offerVolumeL !== volumeL ? { officialVolumeL: volumeL } : {}),
     finish,
     swatch,
     inventoryKey: key(code, volumeL),
     productionStatus: "ACTIVE_CONFIRMED",
     rangeStatus: "NOT_IN_OUR_RANGE",
     statusSource: "baslac.de (KLW) katalog, 2026-08-22",
-    ...extra,
+    ...rest,
   };
 }
 
@@ -137,10 +146,11 @@ export const baslacLine35Bases: BaslacBase[] = [
   base("line-35", "35-M1340", "Red bright", 0.5, "solid", "#cf2b32", { supplierArticle: "53390069" }),
   base("line-35", "35-M1350", "Red dark", 1, "solid", "#8c1c25", { supplierArticle: "53222270" }),
   base("line-35", "35-M1360", "Red light", 0.5, "solid", "#d4555c", { supplierArticle: "53390175" }),
-  base("line-35", "35-M1370", "Red Blue", 0.5, "solid", "#a02744", { supplierArticle: "53402895" }),
+  // offerVolumeL: naše prodajno pakovanje (potvrda vlasnika 2026-10-13) odstupa od KLW zapremine.
+  base("line-35", "35-M1370", "Red Blue", 0.5, "solid", "#a02744", { offerVolumeL: 1, supplierArticle: "53402895" }),
   base("line-35", "35-M1390", "Pure Red", 0.5, "solid", "#c11a22", { supplierArticle: "50654257" }),
   base("line-35", "35-M1411", "Bluish violett", 1, "solid", "#772D6A", { supplierArticle: "50352431" }),
-  base("line-35", "35-M1420", "Purple Red", 1, "solid", "#7d2b56", { supplierArticle: "53222800" }),
+  base("line-35", "35-M1420", "Purple Red", 1, "solid", "#7d2b56", { offerVolumeL: 0.5, supplierArticle: "53222800" }),
   base("line-35", "35-M1430", "Red Purple", 1, "solid", "#94285f", { supplierArticle: "53222588" }),
   base("line-35", "35-M1511", "Blue", 1, "solid", "#1f4f9c", { supplierArticle: "52335846" }),
   base("line-35", "35-M1516", "Blue light", 0.5, "solid", "#4a80c4", { supplierArticle: "53404008" }),
@@ -198,7 +208,7 @@ export const baslacLine35Bases: BaslacBase[] = [
     productionStatus: "PHASE_OUT",
     statusSource: "baslac.de: Auslaufartikel",
   }),
-  base("line-35", "35-M391", "Pearl Silver Xirallic", 0.5, "xirallic", "#B1E0F6", {}),
+  base("line-35", "35-M391", "Pearl Silver Xirallic", 0.5, "xirallic", "#B1E0F6", { offerVolumeL: 1 }),
   base("line-35", "35-M590", "Pure Black", 1, "solid", "#17181a", {}),
   base("line-35", "35-M599", "Chrome", 0.5, "metallic", "#d8dcdf", {}),
 ];

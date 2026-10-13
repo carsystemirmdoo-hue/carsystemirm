@@ -328,16 +328,6 @@
       "redirect": "/brendovi/sata"
     },
     {
-      "slug": "carfit-disposable-paint-strainers",
-      "brand": "carfit",
-      "name": "Car Fit Disposable Paint Strainers",
-      "status": "BUSINESS_OUT_OF_PROGRAMME",
-      "source": "CARFIT_SYNC",
-      "reason": "Firma više ne radi filtere ni sita za boju i materijal ni od jednog brenda (uvozna ograničenja).",
-      "evidence": "Ceđenje boje i materijala na bazi organskih rastvarača.",
-      "redirect": "/brendovi/carfit"
-    },
-    {
       "slug": "carfit-scr-strainers",
       "brand": "carfit",
       "name": "Car Fit SCR strainers",
@@ -410,6 +400,50 @@
       "evidence": "Zvanični naziv: „Strainer holder for sieve 200 msh, for material filter SATAjet/Spray-Mix”.",
       "redirect": "/brendovi/sata",
       "removedWithParent": "sata-material-coupling-with-plug-in-nipple-and-material"
+    },
+    {
+      "slug": "carsystem-easy-mask",
+      "brand": "carsystem",
+      "name": "Carsystem Easy Mask",
+      "status": "BUSINESS_OUT_OF_PROGRAMME",
+      "source": "CARSYSTEM_SYNC",
+      "reason": "Obe varijante (151.181, 151.199) više nisu u našem programu (odluka vlasnika 2026-10-13: završna zvezdica u nazivu artikla = van programa).",
+      "evidence": "Carsystem sync zapis ostaje u data/carsystem-catalog-products.generated.json (provenance).",
+      "redirect": "/brendovi/carsystem",
+      "redirectNote": "Bez naslednika u ponudi."
+    },
+    {
+      "slug": "baslac-35-m1521",
+      "brand": "baslac",
+      "name": "Baslac 35-M1521",
+      "status": "BUSINESS_OUT_OF_PROGRAMME",
+      "source": "BASLAC_SYSTEM_SHADE",
+      "reason": "Jedini artikal ove nijanse više nije u našem programu (odluka vlasnika 2026-10-13). Vlasnik navodi 35-M1522 kao zamenu; zvanični izvor za 35-M1522 još nije pronađen, pa nova kartica nije napravljena.",
+      "evidence": "Nijansa ostaje u lib/baslac-systems.ts (KLW katalog); filtrira se samo javna kartica.",
+      "redirect": "/brendovi/baslac",
+      "redirectNote": "Brend baslac (bez tvrdnje o zameni)."
+    },
+    {
+      "slug": "rm-pasta-190-1l",
+      "brand": "rm",
+      "name": "R-M Pasta 190 1 L",
+      "status": "INVALID_MANUAL_RECORD",
+      "source": "MANUAL_RECORD",
+      "reason": "Netačan ručni zapis (opisan kao pasta za poliranje). Zamenjuje ga kartica „R-M paste za mešanje” sa BC 190 u 1 L i 4 L (potvrda vlasnika 2026-10-13).",
+      "evidence": "lib/carsystem-data.ts ručni zapis; kartica rm-paste-za-mesanje, red BC 190.",
+      "redirect": "/proizvodi/rm-paste-za-mesanje",
+      "redirectNote": "Ista oznaka BC 190."
+    },
+    {
+      "slug": "rm-pasta-190-5l",
+      "brand": "rm",
+      "name": "R-M Pasta 190 5 L",
+      "status": "INVALID_MANUAL_RECORD",
+      "source": "MANUAL_RECORD",
+      "reason": "Pakovanje 5 L ne postoji u našoj ponudi (BC 190 je 1 L i 4 L — potvrda vlasnika 2026-10-13); fotografija je nosila BC 605.",
+      "evidence": "lib/carsystem-data.ts ručni zapis.",
+      "redirect": "/proizvodi/rm-paste-za-mesanje",
+      "redirectNote": "BC 190 u 1 L i 4 L."
     }
   ],
   "keptExplicitly": {
@@ -482,6 +516,17 @@
         "reason": "Firma više ne radi filtere ni sita za boju i materijal ni od jednog brenda (uvozna ograničenja).",
         "evidence": "Filtriranje boje u gravitacionoj čaši pištolja.",
         "redirect": "/brendovi/carsystem"
+      },
+      {
+        "slug": "carfit-disposable-paint-strainers",
+        "brand": "carfit",
+        "name": "Car Fit Disposable Paint Strainers",
+        "status": "BUSINESS_OUT_OF_PROGRAMME",
+        "source": "CARFIT_SYNC",
+        "reason": "Firma više ne radi filtere ni sita za boju i materijal ni od jednog brenda (uvozna ograničenja).",
+        "evidence": "Ceđenje boje i materijala na bazi organskih rastvarača.",
+        "redirect": "/brendovi/carfit",
+        "restoreNote": "Vlasnik 2026-10-12 (PREGLED list D): 785019 CF cediljke 190 µ 250/1 — ceo paket 250 = 1 KOM; vratiti karticu i omogućiti poručivanje. Polovina paketa NIJE odobrena."
       }
     ]
   }

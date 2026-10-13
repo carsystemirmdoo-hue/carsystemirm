@@ -39,7 +39,8 @@ export const customerOrderStatus = pgEnum("customer_order_status", [
   "awaiting_customer",
 ]);
 export const priceRequestStatus = pgEnum("price_request_status", ["open", "in_progress", "answered", "closed"]);
-export const priceRequestKind = pgEnum("price_request_kind", ["no_price", "special_terms"]);
+/** 0049: `procurement` = upit za nabavku (proizvod koji trenutno ne prodajemo direktno). */
+export const priceRequestKind = pgEnum("price_request_kind", ["no_price", "special_terms", "procurement"]);
 
 export const priceLists = pgTable(
   "price_lists",
@@ -236,6 +237,34 @@ export const articlePackSizes = pgTable("article_pack_sizes", {
   fractionalOk: boolean("fractional_ok").notNull().default(false),
 });
 
+/**
+ * 0048: potvrđen pribor koji se prodaje odvojeno (posuda → poklopac, lak → herter iz tehničkog
+ * lista). Sajt ga samo predlaže, nikad ne dodaje sam; stanje zaliha se ne čuva (izvor ne postoji).
+ */
+export const articleCompanions = pgTable("article_companions", {
+  id: uuid("id").primaryKey().defaultRandom(),
+  articleId: uuid("article_id")
+    .notNull()
+    .references(() => articles.id, { onDelete: "restrict" }),
+  companionArticleId: uuid("companion_article_id")
+    .notNull()
+    .references(() => articles.id, { onDelete: "restrict" }),
+  kind: text("kind").notNull(),
+  evidence: text("evidence").notNull(),
+  confirmedBy: uuid("confirmed_by")
+    .notNull()
+    .references(() => users.id, { onDelete: "restrict" }),
+  confirmedAt: timestamp("confirmed_at", { withTimezone: true }).notNull().defaultNow(),
+  revokedAt: timestamp("revoked_at", { withTimezone: true }),
+  revokedReason: text("revoked_reason"),
+  optionLabel: text("option_label"),
+  sourceUrl: text("source_url"),
+  ratioBase: numeric("ratio_base", { precision: 8, scale: 3 }),
+  ratioCompanion: numeric("ratio_companion", { precision: 8, scale: 3 }),
+  /** `zapremina` | `masa` | null (izvor ne navodi osnovu → bez predloga količine). */
+  ratioBasis: text("ratio_basis"),
+});
+
 export const customerOrderEvents = pgTable(
   "customer_order_events",
   {
@@ -287,3 +316,21 @@ export const customerPriceRequests = pgTable(
     index("customer_price_requests_status_idx").on(table.status),
   ],
 );
+
+/**
+ * 0049: odluka da se artikal nudi samo kroz upit za nabavku (ne dodaje se u korpu).
+ * Zapisi se samo dodaju; važi poslednji po artiklu (`articles_procurement_only`).
+ */
+export const articleOfferDecisions = pgTable("article_offer_decisions", {
+  id: uuid("id").primaryKey().defaultRandom(),
+  articleId: uuid("article_id")
+    .notNull()
+    .references(() => articles.id, { onDelete: "restrict" }),
+  procurementOnly: boolean("procurement_only").notNull(),
+  reason: text("reason").notNull(),
+  sourceBatch: text("source_batch"),
+  decidedBy: uuid("decided_by")
+    .notNull()
+    .references(() => users.id, { onDelete: "restrict" }),
+  decidedAt: timestamp("decided_at", { withTimezone: true }).notNull().defaultNow(),
+});

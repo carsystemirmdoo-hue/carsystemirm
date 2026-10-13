@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Archivo, Geist, Geist_Mono, IBM_Plex_Mono, IBM_Plex_Sans } from "next/font/google";
 import { PublicSiteChrome } from "@/components/layout/PublicSiteChrome";
+import { CompanionPanel } from "@/components/ordering/CompanionPanel";
 import { publicSiteOpen } from "@/lib/site-mode";
 import { MotionSystem } from "@/components/motion/MotionSystem";
 import { SiteAccessHandoffScript } from "@/components/layout/SiteAccessHandoffScript";
@@ -112,6 +113,7 @@ export default function RootLayout({
       >
         <MotionSystem>
           <PublicSiteChrome publicSiteOpen={publicSiteOpen()}>{children}</PublicSiteChrome>
+          <CompanionPanel />
         </MotionSystem>
       </body>
     </html>

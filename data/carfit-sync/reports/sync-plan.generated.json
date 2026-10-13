@@ -9,12 +9,12 @@
     "CURRENT_ACTIVE_ARTICLE_NUMBERS": 357,
     "CATALOGUE_PRODUCTS": 82,
     "CATALOGUE_ARTICLE_NUMBERS": 294,
-    "LOCAL_PRODUCTS_BEFORE": 1,
-    "LOCAL_ARTICLE_NUMBERS_BEFORE": 0,
+    "LOCAL_PRODUCTS_BEFORE": 3,
+    "LOCAL_ARTICLE_NUMBERS_BEFORE": 6,
     "EXACT_MATCH": 0,
     "HIGH_CONFIDENCE_MATCH": 1,
     "PROBABLE_MATCH": 0,
-    "LEGACY_NOT_ON_CURRENT_WEBSITE": 0,
+    "LEGACY_NOT_ON_CURRENT_WEBSITE": 2,
     "LOCAL_ONLY_UNKNOWN": 0,
     "WEBSITE_AND_CATALOGUE": 88,
     "WEBSITE_ONLY": 35,
@@ -51,6 +51,26 @@
       "matchedArticleNumbers": [
         "1-201-0450"
       ]
+    },
+    {
+      "localSlug": "carfit-premium-soft-plus-putty",
+      "classification": "LEGACY_NOT_ON_CURRENT_WEBSITE",
+      "sourceKey": null,
+      "officialName": null,
+      "evidence": [
+        "šifre 2-253-1800, 2-253-4700 postoje samo u PDF katalogu"
+      ],
+      "autoApply": false
+    },
+    {
+      "localSlug": "carfit-nitrile-gloves-6-mil",
+      "classification": "LEGACY_NOT_ON_CURRENT_WEBSITE",
+      "sourceKey": null,
+      "officialName": null,
+      "evidence": [
+        "šifre 3-260-0450, 3-260-0350, 3-260-0550, 3-260-0650 postoje samo u PDF katalogu"
+      ],
+      "autoApply": false
     }
   ],
   "items": [

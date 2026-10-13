@@ -16,12 +16,12 @@ Generisano komandom `npm run carfit:sync:plan`. Ovaj korak ne menja katalog.
 | CURRENT_ACTIVE_ARTICLE_NUMBERS | 357 |
 | CATALOGUE_PRODUCTS | 82 |
 | CATALOGUE_ARTICLE_NUMBERS | 294 |
-| LOCAL_PRODUCTS_BEFORE | 1 |
-| LOCAL_ARTICLE_NUMBERS_BEFORE | 0 |
+| LOCAL_PRODUCTS_BEFORE | 3 |
+| LOCAL_ARTICLE_NUMBERS_BEFORE | 6 |
 | EXACT_MATCH | 0 |
 | HIGH_CONFIDENCE_MATCH | 1 |
 | PROBABLE_MATCH | 0 |
-| LEGACY_NOT_ON_CURRENT_WEBSITE | 0 |
+| LEGACY_NOT_ON_CURRENT_WEBSITE | 2 |
 | LOCAL_ONLY_UNKNOWN | 0 |
 | WEBSITE_AND_CATALOGUE | 88 |
 | WEBSITE_ONLY | 35 |
@@ -47,6 +47,8 @@ Generisano komandom `npm run carfit:sync:plan`. Ovaj korak ne menja katalog.
 | Naš zapis | Klasifikacija | Zvanični proizvod | Dokaz |
 | --- | --- | --- | --- |
 | `carfit-maskirna-folija-4x5m` | HIGH_CONFIDENCE_MATCH | Masking film 7mm with electrostatic effect | naša slika je bajt-identična zvaničnoj slici proizvoda; ručno pakovanje (4mx5m) = zvanična varijanta 1-201-0450 |
+| `carfit-premium-soft-plus-putty` | LEGACY_NOT_ON_CURRENT_WEBSITE | — | šifre 2-253-1800, 2-253-4700 postoje samo u PDF katalogu |
+| `carfit-nitrile-gloves-6-mil` | LEGACY_NOT_ON_CURRENT_WEBSITE | — | šifre 3-260-0450, 3-260-0350, 3-260-0550, 3-260-0650 postoje samo u PDF katalogu |
 
 ## Mapiranje kategorija
 

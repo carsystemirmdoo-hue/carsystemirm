@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useEffect, useMemo, useState, useTransition } from "react";
 import { addCatalogItemAction } from "@/app/kupac/naruci/actions";
+import { PICKED_EVENT } from "@/components/ordering/CompanionPanel";
 import { requestPriceAction } from "@/app/kupac/upiti/actions";
 import { useOptionalProductVariant } from "@/components/product/ProductVariantProvider";
 import type { CatalogRequestOffer } from "@/lib/ordering/request-service";
@@ -41,6 +42,7 @@ export function CustomerBuyPanel({ fallbackSlug, fallbackName }: { fallbackSlug:
     .sort((a, b) => a.articleName.localeCompare(b.articleName, "sr", { numeric: true }));
 
   if (!data) return null;
+  const procurement = here.length === 0 || here.every((o) => o.state === "inquiry");
 
   return (
     <section className={styles.panel} aria-labelledby="buy-panel-title">
@@ -60,15 +62,21 @@ export function CustomerBuyPanel({ fallbackSlug, fallbackName }: { fallbackSlug:
         <BuyForm key={`${slug}|${variantKey}`} data={data} offers={orderable} slug={slug} variantKey={variantKey} />
       ) : (
         <>
+          {/* Bez potvrđene ponude (nije povezano ili samo upit za nabavku) → upit za nabavku; inače upit za cenu. */}
           <p className={styles.note}>
-            {here.some((o) => o.state === "no_pack")
-              ? "Cena na upit: pakovanje (zapremina) ovog artikla još nije potvrđeno, pa se ne poručuje preko sajta."
-              : here.length > 0
-                ? "Cena na upit: za ovaj artikal Vaša cena još nije potvrđena."
-                : "Cena na upit: ovaj proizvod još nije povezan sa našim šifrarnikom."}{" "}
-            Pošaljite zahtev — javiće Vam se komercijalista ili kancelarija.
+            {procurement
+              ? "Ovaj proizvod trenutno nije u našoj ponudi za direktno poručivanje (nije na lageru ili ga nismo uvozili). Pošaljite upit za nabavku — kancelarija proverava nabavku, cenu i rok."
+              : here.some((o) => o.state === "no_pack")
+                ? "Cena na upit: pakovanje (zapremina) ovog artikla još nije potvrđeno, pa se ne poručuje preko sajta. Pošaljite zahtev — javiće Vam se komercijalista ili kancelarija."
+                : "Cena na upit: za ovaj artikal Vaša cena još nije potvrđena. Pošaljite zahtev — javiće Vam se komercijalista ili kancelarija."}
           </p>
-          <PriceRequest data={data} slug={slug} variantKey={variantKey} articleCode={here[0]?.articleCode ?? null} kind="no_price" />
+          <PriceRequest
+            data={data}
+            slug={slug}
+            variantKey={variantKey}
+            articleCode={here[0]?.articleCode ?? null}
+            kind={procurement ? "procurement" : "no_price"}
+          />
         </>
       )}
     </section>
@@ -99,7 +107,10 @@ function BuyForm({ data, offers, slug, variantKey }: { data: OffersPayload; offe
     start(async () => {
       const r = await addCatalogItemAction({ articleId: offer.articleId, packs: packs.trim() });
       setMsg(r.ok ? { ok: true, text: `Dodato u korpu (${r.count} ${r.count === 1 ? "stavka" : "stavke"}).` } : { ok: false, text: r.message });
-      if (r.ok) window.dispatchEvent(new CustomEvent("cs-korpa", { detail: { count: r.count } }));
+      if (r.ok) {
+        window.dispatchEvent(new CustomEvent("cs-korpa", { detail: { count: r.count } }));
+        window.dispatchEvent(new CustomEvent(PICKED_EVENT, { detail: { articleId: offer.articleId, packs: Number(packs.trim()) || 1 } }));
+      }
     });
 
   return (
@@ -130,6 +141,12 @@ function BuyForm({ data, offers, slug, variantKey }: { data: OffersPayload; offe
           );
         })}
       </fieldset>
+      {data.stock?.byArticle[offer.articleId] ? (
+        <p className={styles.stockNote} role="note">
+          <strong>{data.stock.byArticle[offer.articleId].text}</strong>
+          <small>{data.stock.headline} · {data.stock.imported}. {data.stock.note}</small>
+        </p>
+      ) : null}
 
       <dl className={styles.priceFacts} aria-label="Vaša cena pakovanja po opciji plaćanja">
         {prices.map(({ option, price }) =>
@@ -210,7 +227,7 @@ function PriceRequest({
   slug: string;
   variantKey: string | null;
   articleCode: string | null;
-  kind: "no_price" | "special_terms";
+  kind: "no_price" | "special_terms" | "procurement";
 }) {
   const [key] = useState(() => crypto.randomUUID());
   const [qty, setQty] = useState("1");
@@ -238,7 +255,7 @@ function PriceRequest({
   }
   return (
     <div className={styles.request}>
-      <h3>{kind === "special_terms" ? "Zatražite posebne uslove" : "Zatražite cenu/uslove"}</h3>
+      <h3>{kind === "special_terms" ? "Zatražite posebne uslove" : kind === "procurement" ? "Upit za nabavku" : "Zatražite cenu/uslove"}</h3>
       <div className={styles.row}>
         <label className={styles.qty}>
           <span>Količina</span>
@@ -250,7 +267,7 @@ function PriceRequest({
         </label>
       </div>
       <button type="button" className={styles.add} onClick={send} disabled={pending} aria-busy={pending}>
-        {pending ? "Šaljem…" : kind === "special_terms" ? "Pošaljite zahtev za uslove" : "Zatražite cenu/uslove"}
+        {pending ? "Šaljem…" : kind === "special_terms" ? "Pošaljite zahtev za uslove" : kind === "procurement" ? "Pošaljite upit za nabavku" : "Zatražite cenu/uslove"}
       </button>
       {error ? (
         <p className={styles.msg} data-ok="false" role="alert">

@@ -18,3 +18,4 @@ export * from "./ordering";
 export * from "./remember";
 export * from "./backup";
 export * from "./base-prices";
+export * from "./stock";

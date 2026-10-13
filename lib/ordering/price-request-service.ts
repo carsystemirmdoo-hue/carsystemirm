@@ -29,6 +29,7 @@ export const PRICE_REQUEST_STATUS_LABELS: Record<string, string> = {
 export const PRICE_REQUEST_KIND_LABELS: Record<string, string> = {
   no_price: "Cena nije određena",
   special_terms: "Posebni uslovi / rabat",
+  procurement: "Upit za nabavku",
 };
 
 export type PriceRequestResult =
@@ -52,7 +53,7 @@ export async function createPriceRequest(
   if (!customerId) throw new Error("Upit kupca bez customer_id se ne sme izvršiti.");
   const key = String(input.idempotencyKey ?? "");
   if (!/^[0-9a-f-]{36}$/i.test(key)) return { ok: false, message: "Neispravan zahtev." };
-  const kind = input.kind === "special_terms" ? "special_terms" : "no_price";
+  const kind = input.kind === "special_terms" || input.kind === "procurement" ? input.kind : "no_price";
 
   const product = getCarsystemProductBySlug(String(input.slug ?? "").slice(0, 200));
   if (!product) return { ok: false, message: "Proizvod ne postoji u katalogu." };

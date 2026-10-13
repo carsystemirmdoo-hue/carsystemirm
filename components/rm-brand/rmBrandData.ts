@@ -469,6 +469,7 @@ export const rmColorSystems: RmColorSystemData[] = [
   },
   {
     system: "crystal-base",
+    productSlugs: ["rm-diamont-crystal-base"],
     title: "CRYSTAL BASE",
     technology: "Specijalni efektni pigmenti",
     description:
@@ -697,6 +698,7 @@ export const rmGallerySystems: RmGallerySystemData[] = [
   {
     id: "crystal-base",
     kind: "system",
+    productSlugs: ["rm-diamont-crystal-base"],
     eyebrow: "Specijalni efekti",
     label: "CRYSTAL BASE",
     technology: "EFFECT PIGMENTS",
@@ -1117,6 +1119,7 @@ export const rmProductFamilies: RmProductFamilyData[] = [
     description:
       "Efektne komponente izdvojene kao posebna koloristička porodica unutar CRYSTAL BASE sistema.",
     tags: ["CRYSTAL BASE", "Efektni pigmenti", "Koloristika"],
+    productSlugs: ["rm-diamont-crystal-base"],
     visualCount: 2,
     slots: [
       {

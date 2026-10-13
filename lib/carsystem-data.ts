@@ -1,3 +1,4 @@
+import { RM_CRYSTAL_BASE_SLUG, RM_PASTE_SLUG, withRmMixingBases } from "@/lib/rm-mixing-bases";
 import { abrasiveBackingTerms } from "@/lib/search/abrasive-backing.mjs";
 import { publicSkuOf } from "@/lib/catalog/public-code";
 import removedFromCustomerCatalog from "@/data/catalog/removed-from-customer-catalog.json";
@@ -619,6 +620,28 @@ export const brands: CarsystemBrand[] = [
       accentOnDarkContrastColor: "#20242C",
       heroKicker: "RUPES proizvodi iz Carsystem programa",
       productsCtaLabel: "Pogledajte RUPES proizvode",
+      contactCtaLabel: "Kontaktirajte nas",
+    },
+  }),  defineCarsystemBrand({
+    slug: "yachtcare",
+    name: "Yachtcare",
+    /*
+     * Bez `logo`: odobren Yachtcare logo fajl ne postoji, pa se brend prikazuje tekstualno.
+     * Odluka vlasnika 2026-10-13: brend i kartica Epoxy Steelbond 125 g (identitet potvrđen u magacinu).
+     * Bez tvrdnji o statusu distribucije.
+     */
+    description: "Yachtcare proizvodi iz naše ponude — dvokomponentna epoksi masa za popravke.",
+    overview: "Yachtcare je brend proizvođača Vosschemie. U našoj ponudi je Epoxy Steelbond 125 g.",
+    programSlugs: ["priprema-povrsine"],
+    catalogOrder: 10,
+    presentation: {
+      // Neutralna paleta sajta: zvanična boja brenda nije verifikovana, pa se ne pretpostavlja.
+      accentColor: "#20242C",
+      accentContrastColor: "#F7F8FA",
+      accentOnDarkColor: "#F7F8FA",
+      accentOnDarkContrastColor: "#20242C",
+      heroKicker: "Yachtcare iz naše ponude",
+      productsCtaLabel: "Pogledajte Yachtcare proizvode",
       contactCtaLabel: "Kontaktirajte nas",
     },
   }),
@@ -2355,6 +2378,368 @@ const productRecords: CarsystemProduct[] = [
   // R-M asortiman sa info.rmpaint.com i rmpaint.com/en-int (`npm run rm:sync`). Postojećih 59
   // uvezenih zapisa (`rmImportedProducts`) se NE duplira — njih dopunjuje `applyRmCatalogEnrichment`.
   ...getRmCatalogProducts(),
+  // R-M CRYSTAL BASE: koncentrovane baze za specijalne efektne pigmente uz DIAMONT, u bočicama od 125 ml
+  // (rmpaint.com/gb „Basecoat Lines”). Odluka vlasnika 2026-10-12: vidljive i poručive; redovi su u
+  // `data/rm-sync/mixing-bases.json` (lib/rm-mixing-bases.ts).
+  createProduct({
+    slug: RM_CRYSTAL_BASE_SLUG,
+    name: "R-M DIAMONT CRYSTAL BASE",
+    brandSlug: "rm",
+    programSlug: "boje-i-lakovi",
+    phaseSlug: "boja",
+    shortDescription: "Koncentrovane baze za specijalne efektne pigmente, za DIAMONT sistem.",
+    longDescription:
+      "CRYSTAL BASE su R-M koncentrovane baze razvijene isključivo za specijalne efektne pigmente i pakovane u bočice od 125 ml. Koriste se uz DIAMONT bazni sistem; nijansa se meša po formuli.",
+    sku: "RM-CRYSTAL-BASE",
+    packages: [{ label: "bočica 125 ml" }],
+    purpose: "Specijalni efektni pigmenti u DIAMONT nijansama",
+    badges: ["Mešna baza", "DIAMONT", "125 ml"],
+    rmMetadata: { system: "crystal-base", series: null, category: "basecoat", technology: "solvent", finish: null },
+    specifications: [
+      { label: "Sistem", value: "DIAMONT" },
+      { label: "Pakovanje", value: "bočica 125 ml" },
+    ],
+    relatedProductSlugs: ["rm-diamont-bazna-boja"],
+  }),
+  // R-M paste za mešanje iz naše ponude: oznake i pakovanja potvrđeni prema etiketi (odluka vlasnika
+  // 2026-10-13). Linija i naziv nijanse nisu potvrđeni zvaničnim izvorom, pa se ne navode. Redovi su u
+  // `data/rm-sync/mixing-bases.json`; zamenjuje netačne ručne zapise „R-M Pasta 190 1 L / 5 L”.
+  createProduct({
+    slug: RM_PASTE_SLUG,
+    name: "R-M paste za mešanje",
+    brandSlug: "rm",
+    programSlug: "boje-i-lakovi",
+    phaseSlug: "boja",
+    shortDescription: "Paste za mešanje nijansi iz naše ponude, po oznaci sa etikete i potvrđenom pakovanju.",
+    longDescription:
+      "R-M paste za mešanje koje vodimo u ponudi, navedene po oznaci sa etikete pakovanja (npr. BC 190, SC 403, CB 48V) i potvrđenom pakovanju. Nijansa se meša po formuli. Linija i naziv nijanse nisu potvrđeni zvaničnim izvorom proizvođača, pa se ne navode; za izbor paste obratite se kancelariji.",
+    sku: "RM-PASTE",
+    // Jedan opisni zapis: pakovanje zavisi od oznake (red tabele), pa kartica ne sme da istakne jednu zapreminu.
+    packages: [{ label: "po oznaci: 0,5 L, 1 L, 4 L ili bočica 125 ml" }],
+    purpose: "Mešanje nijansi po formuli",
+    badges: ["Mešna pasta", "Po oznaci sa etikete"],
+    rmMetadata: { system: null, series: null, category: "basecoat", technology: null, finish: null },
+    specifications: [
+      { label: "Oznake", value: "po etiketi pakovanja (tabela varijanti)" },
+      { label: "Pakovanja", value: "0,5 L, 1 L, 4 L; CB 48V u bočici 125 ml" },
+    ],
+    relatedProductSlugs: ["rm-diamont-bazna-boja"],
+  }),
+  // C.A.R.FIT Premium Soft Plus: porodica postoji samo u zvaničnom katalogu 2026 (str. 7), ne i na
+  // carfitrepair.com, pa je sync ne uvozi (CATALOGUE_ONLY). Odluka vlasnika 2026-10-13: prodajemo 2-253-1800.
+  {
+    ...createProduct({
+      slug: "carfit-premium-soft-plus-putty",
+      name: "Car Fit Premium Soft Plus Putty",
+      brandSlug: "carfit",
+      programSlug: "priprema-povrsine",
+      phaseSlug: "priprema",
+      shortDescription: "Kit za popunjavanje i fino kitovanje, sa učvršćivačem; lako se brusi i brzo suši.",
+      longDescription:
+        "Car Fit Premium Soft Plus je kit za popunjavanje i fino kitovanje koji prijanja na čelični lim, aluminijum, kalajisane površine i stakloplastiku. Kratko vreme sušenja i lako brušenje su njegove dodatne osobine. Na pocinkovanim površinama prijanjanje se razvija tek posle približno jednog sata.",
+      sku: "2-253-1800",
+      packages: [{ label: "1,8 kg sa učvršćivačem" }, { label: "4,7 kg sa učvršćivačem" }],
+      purpose: "Popunjavanje i fino kitovanje",
+      badges: ["Kit", "Sa učvršćivačem"],
+      specifications: [
+        { label: "Tip", value: "Kit za popunjavanje i fino kitovanje" },
+        { label: "Podloge", value: "čelični lim, aluminijum, kalajisane površine, stakloplastika" },
+        { label: "Boja", value: "bež" },
+        { label: "Učvršćivač", value: "2–3 %", detail: "Katalog C.A.R.FIT 2026, str. 7" },
+        { label: "Vreme obrade na 20 °C", value: "3–4 min", detail: "Katalog C.A.R.FIT 2026, str. 7" },
+        { label: "Sušenje", value: "20 min na 20 °C · 5 min na 60 °C", detail: "Katalog C.A.R.FIT 2026, str. 7" },
+      ],
+      relatedProductSlugs: ["carfit-multi-soft-putty"],
+    }),
+    detail: {
+      reviewStatus: "confirmed",
+      variants: {
+        reviewStatus: "confirmed",
+        content: {
+          title: "Varijante i šifre artikala",
+          description: "Svaka varijanta ima zasebnu proizvođačku šifru. Dostupnost na domaćem tržištu proverava se kroz upit.",
+          columns: [
+            { key: "volume", label: "Pakovanje" },
+            { key: "article", label: "Šifra artikla" },
+            { key: "pack", label: "Fabričko pakovanje" },
+            { key: "status", label: "Javni status" },
+          ],
+          rows: [
+            { id: "2-253-1800", values: { volume: "1,8 kg sa učvršćivačem", article: "2-253-1800", pack: "6 kom.", status: "Na upit" }, reviewStatus: "confirmed" },
+            { id: "2-253-4700", values: { volume: "4,7 kg sa učvršćivačem", article: "2-253-4700", pack: "2 kom.", status: "Na upit" }, reviewStatus: "confirmed" },
+          ],
+          note: "Šifre i fabrička pakovanja: zvanični katalog C.A.R.FIT 2026, str. 7.",
+        },
+      },
+    },
+  },
+  // C.A.R.FIT nitril rukavice 6 MIL: linija postoji samo u zvaničnom katalogu 2026 (str. 74–75), ne i na
+  // carfitrepair.com, pa je sync ne uvozi. Odluka vlasnika 2026-10-13: prodajemo L i XL, kutija 100 rukavica.
+  {
+    ...createProduct({
+      slug: "carfit-nitrile-gloves-6-mil",
+      name: "Car Fit Nitrile Gloves 6 MIL",
+      brandSlug: "carfit",
+      programSlug: "potrosni-materijal",
+      phaseSlug: "priprema",
+      shortDescription: "Profesionalne nitril rukavice debljine 6 MIL, u kutiji od 100 komada.",
+      longDescription:
+        "Car Fit Nitrile Gloves 6 MIL su profesionalne nitril rukavice za radionicu, u veličinama M, L, XL i XXL. Pakuju se u kutije od 100 rukavica.",
+      sku: "3-260-0450",
+      packages: [{ label: "kutija 100 rukavica" }],
+      purpose: "Zaštita ruku u radionici",
+      badges: ["Rukavice", "6 MIL", "100 kom."],
+      specifications: [
+        { label: "Materijal", value: "nitril" },
+        { label: "Debljina", value: "6 MIL", detail: "Katalog C.A.R.FIT 2026, str. 74–75" },
+        { label: "Pakovanje", value: "kutija 100 rukavica", detail: "Katalog C.A.R.FIT 2026, str. 74–75" },
+      ],
+      relatedProductSlugs: ["carfit-professional-nitrile-gloves"],
+    }),
+    detail: {
+      reviewStatus: "confirmed",
+      variants: {
+        reviewStatus: "confirmed",
+        content: {
+          title: "Varijante i šifre artikala",
+          description: "Svaka veličina ima zasebnu proizvođačku šifru. Dostupnost na domaćem tržištu proverava se kroz upit.",
+          columns: [
+            { key: "size", label: "Veličina" },
+            { key: "article", label: "Šifra artikla" },
+            { key: "pack", label: "Pakovanje" },
+            { key: "status", label: "Javni status" },
+          ],
+          rows: [
+            { id: "3-260-0350", values: { size: "Veličina M", article: "3-260-0350", pack: "kutija 100 kom.", status: "Na upit" }, reviewStatus: "confirmed" },
+            { id: "3-260-0450", values: { size: "Veličina L", article: "3-260-0450", pack: "kutija 100 kom.", status: "Na upit" }, reviewStatus: "confirmed" },
+            { id: "3-260-0550", values: { size: "Veličina XL", article: "3-260-0550", pack: "kutija 100 kom.", status: "Na upit" }, reviewStatus: "confirmed" },
+            { id: "3-260-0650", values: { size: "Veličina XXL", article: "3-260-0650", pack: "kutija 100 kom.", status: "Na upit" }, reviewStatus: "confirmed" },
+          ],
+          note: "Šifre i pakovanje: zvanični katalog C.A.R.FIT 2026, str. 74–75.",
+        },
+      },
+    },
+  },
+  // Yachtcare Epoxy Steelbond 125 g (odluka vlasnika 2026-10-13: identitet potvrđen u magacinu, 1 KOM = 125 g).
+  // Podaci samo iz zvaničnog tehničkog lista „YC EPOXY STEELBOND“ (Vosschemie, v.2, 08/2017); bez slike (prava).
+  createProduct({
+    slug: "yachtcare-epoxy-steelbond-125g",
+    name: "Yachtcare Epoxy Steelbond 125 g",
+    brandSlug: "yachtcare",
+    programSlug: "priprema-povrsine",
+    phaseSlug: "priprema",
+    shortDescription: "Dvokomponentna epoksi masa bez rastvarača za popravke i lepljenje metala, drveta i drugih materijala.",
+    longDescription:
+      "Yachtcare Epoxy Steelbond je dvokomponentni materijal za popravke i lepljenje na bazi epoksidne smole, bez rastvarača. Koristi se za popunjavanje rupa i pukotina, spajanje i zaptivanje čelika, aluminijuma, olova, drveta i drugih materijala, za „hladno zavarivanje“, oblikovanje i izolaciju. Komponente se mešaju u celini pakovanja.",
+    sku: "YC-EPOXY-STEELBOND-125G",
+    packages: [{ label: "pakovanje 125 g" }],
+    purpose: "Popravke i lepljenje metala i drugih materijala",
+    badges: ["2K epoksi", "125 g"],
+    specifications: [
+      { label: "Tip", value: "dvokomponentna epoksi masa, bez rastvarača" },
+      { label: "Pakovanje", value: "125 g (osnova + učvršćivač)" },
+      { label: "Boja", value: "osnova sivo-metalna, učvršćivač crveno-braon" },
+      { label: "Vreme obrade na 20 °C", value: "oko 30 min" },
+      { label: "Temperaturni opseg", value: "−50 °C do +180 °C" },
+      { label: "Obrada posle", value: "oko 2 h na 20 °C (sloj 10 mm)" },
+    ],
+    relatedProductSlugs: [],
+  }),
+  // R-M proizvodi koje prodajemo, a nemaju stranicu na info.rmpaint.com (odluka vlasnika 2026-10-13: zasebne
+  // kartice). Podaci su samo iz zvaničnih tehničkih listova na techinfo.rmpaint.com; pakovanje je naše prodajno.
+  createProduct({
+    slug: "rm-sc-850-thinner-medium",
+    name: "R-M SC 850 THINNER",
+    brandSlug: "rm",
+    programSlug: "boje-i-lakovi",
+    phaseSlug: "boja",
+    shortDescription: "Srednji razređivač za UNO HD 2K pokrivni lak direktnog sjaja.",
+    longDescription:
+      "SC 850 je R-M razređivač srednje brzine. UNO HD tehnički list ga navodi kao razređivač za pripremu UNO HD pokrivnog laka (100 : 25 : 25 sa H 9000). Za male popravke i niske temperature tehnički list upućuje na brži SC 820, a za temperature iznad 25 °C i velike površine na sporiji SC 880.",
+    sku: "SC 850",
+    packages: [
+      { label: "1 L", detail: "Pakovanje u našoj ponudi; proizvođač ne objavljuje zvanične veličine pakovanja." },
+    ],
+    purpose: "Razređivanje UNO HD pokrivnog laka i ONYX INTERIOR (A 2610) sistema",
+    badges: ["Razređivač", "UNO HD", "1 L"],
+    rmMetadata: { system: "uno-hd", series: null, category: "thinner", technology: null, finish: null },
+    specifications: [
+      { label: "Oznaka", value: "SC 850" },
+      { label: "Vrsta", value: "Razređivač, srednji" },
+      { label: "Sistem", value: "UNO HD" },
+      { label: "Odnos mešanja (UNO HD)", value: "100 : 25 H 9000 : 25 SC 850 (vol.)", detail: "UNO HD TDS 08/2023; alternativa R 2200" },
+      { label: "Brži / sporiji razređivač", value: "SC 820 / SC 880", detail: "SC 10 UNO HD TDS 03/2023" },
+      { label: "Pakovanje", value: "1 L", detail: "Pakovanje u našoj ponudi; proizvođač ne objavljuje zvanične veličine pakovanja." },
+    ],
+    documents: [
+      { title: "Tehnički list — SC 850 Thinner, medium", kind: "PDF", href: "https://techinfo.rmpaint.com/en_UK/documents/pdf/tech_infos/SC_850_Thinner_medium.pdf", status: "available", note: "Zvanični tehnički list (techinfo.rmpaint.com), verzija 07/2022" },
+    ],
+    relatedProductSlugs: ["rm-uno-hd", "rm-h-9000-hardener-medium", "rm-sm-09-special-mat-09", "rm-a-2610-onyx-interior"],
+  }),
+  createProduct({
+    slug: "rm-h-9000-hardener-medium",
+    name: "R-M H 9000 HARDENER",
+    brandSlug: "rm",
+    programSlug: "boje-i-lakovi",
+    phaseSlug: "boja",
+    shortDescription: "Srednji učvršćivač za UNO HD pokrivni lak i STARTOP HS lak; dodatak za DIAMONT.",
+    longDescription:
+      "H 9000 je R-M učvršćivač srednje brzine. Tehnički listovi ga navode kao učvršćivač za UNO HD pokrivni lak (100 : 25 : 25) i STARTOP HS (C 1450) lak (4 : 1 : 1). DIAMONT tehnički list propisuje dodatak 5 % H 9000 baznoj boji kada je potreban film deblji od 35 µm, a D 121 ULTRA FLASH FLAKE DIAMOND ga navodi među komponentama.",
+    sku: "H 9000",
+    packages: [
+      { label: "1 L", detail: "Pakovanje u našoj ponudi; proizvođač ne objavljuje zvanične veličine pakovanja." },
+    ],
+    purpose: "Učvršćivanje UNO HD i STARTOP HS; dodatak DIAMONT baznoj boji za deblji film",
+    badges: ["Učvršćivač", "UNO HD", "STARTOP HS", "1 L"],
+    rmMetadata: { system: null, series: null, category: "hardener", technology: "2k", finish: null },
+    specifications: [
+      { label: "Oznaka", value: "H 9000" },
+      { label: "Vrsta", value: "Učvršćivač, srednji" },
+      { label: "UNO HD", value: "100 : 25 H 9000 : 25 SC 850 (vol.)", detail: "UNO HD TDS 08/2023" },
+      { label: "STARTOP HS (C 1450)", value: "100 : 25 H 9000 : 25 BC 020/BC 030 (vol.)", detail: "STARTOP HS TDS 12/2022" },
+      { label: "DIAMONT", value: "5 % H 9000 kada je film deblji od 35 µm", detail: "DIAMONT TDS 08/2023" },
+      { label: "Pakovanje", value: "1 L", detail: "Pakovanje u našoj ponudi; proizvođač ne objavljuje zvanične veličine pakovanja." },
+    ],
+    documents: [
+      { title: "Tehnički list — H 9000 Hardener, medium", kind: "PDF", href: "https://techinfo.rmpaint.com/en_UK/documents/pdf/tech_infos/H_9000_HARDENER.pdf", status: "available", note: "Zvanični tehnički list (techinfo.rmpaint.com), verzija 07/2022" },
+    ],
+    relatedProductSlugs: ["rm-uno-hd", "rm-c-1450-startop-hs", "rm-diamont-bazna-boja", "rm-d-121-ultra-flash-flake-diamond", "rm-sc-850-thinner-medium"],
+  }),
+  createProduct({
+    slug: "rm-c-1450-startop-hs",
+    name: "R-M STARTOP HS",
+    brandSlug: "rm",
+    programSlug: "boje-i-lakovi",
+    phaseSlug: "lak",
+    shortDescription: "Višenamenski MS bezbojni lak za DIAMONT i ONYX HD bazne boje, od pojedinačnih delova do celog vozila.",
+    longDescription:
+      "STARTOP HS (C 1450) je R-M višenamenski bezbojni lak srednjeg sadržaja suve materije (MS), namenjen za popravke od pojedinačnih delova do lakiranja celog vozila. Projektovan je za upotrebu preko DIAMONT i ONYX HD baznih boja. Meša se 4 : 1 : 1 sa učvršćivačem H 9000 i razređivačem BC 020 ili BC 030; vek upotrebe na 20 °C je 3 h.",
+    sku: "C 1450",
+    packages: [
+      { label: "1 L", detail: "Pakovanje u našoj ponudi; proizvođač ne objavljuje zvanične veličine pakovanja." },
+    ],
+    purpose: "Završni bezbojni lak preko DIAMONT i ONYX HD baznih boja",
+    badges: ["Bezbojni lak", "MS", "4:1:1", "1 L"],
+    rmMetadata: { system: null, series: null, category: "clearcoat", technology: "2k", finish: "gloss" },
+    specifications: [
+      { label: "Oznaka", value: "C 1450" },
+      { label: "Vrsta", value: "MS bezbojni lak" },
+      { label: "Za bazne boje", value: "DIAMONT, ONYX HD" },
+      { label: "Odnos mešanja", value: "4 : 1 : 1 — 100 C 1450 : 25 H 9000 : 25 BC 020/BC 030 (vol.)", detail: "po težini 100 : 27 : 22 g" },
+      { label: "Vek upotrebe na 20 °C", value: "3 h" },
+      { label: "Viskozitet", value: "DIN 4: 15–17 s · ISO 4: 28–34 s" },
+      { label: "Suva materija", value: "42 % ± 2" },
+      { label: "Mlaznica", value: "1,3 (HVLP) · 1,3–1,4 (kompatibilni)" },
+      { label: "Broj slojeva", value: "2" },
+      { label: "Debljina filma", value: "50–60 µm" },
+      { label: "Sušenje", value: "20 °C: 5 h (bez prašine posle 1 h, potpuno posle 24 h) · 60 °C: 30 min · IR kratki talas: 8 min" },
+      { label: "Rok trajanja", value: "36 meseci" },
+      { label: "Pakovanje", value: "1 L", detail: "Pakovanje u našoj ponudi; proizvođač ne objavljuje zvanične veličine pakovanja." },
+    ],
+    documents: [
+      { title: "Tehnički list — C 1450 STARTOP HS", kind: "PDF", href: "https://techinfo.rmpaint.com/en_UK/documents/pdf/tech_infos/STARTOP_HS.pdf", status: "available", note: "Zvanični tehnički list (techinfo.rmpaint.com), verzija 12/2022" },
+      { title: "Tehnički list — C 1450 STARTOP HS — varijanta SPECIAL MAT 09", kind: "PDF", href: "https://techinfo.rmpaint.com/en_UK/documents/pdf/tech_infos/C_1450_STARTOP_HS_Variant_SPECIAL_MAT_09.pdf", status: "available", note: "Zvanični tehnički list (techinfo.rmpaint.com), verzija 12/2022" },
+    ],
+    relatedProductSlugs: ["rm-h-9000-hardener-medium", "rm-bc-020-thinner", "rm-bc-030-thinner", "rm-diamont-bazna-boja", "rm-onyx-hd", "rm-sm-09-special-mat-09"],
+  }),
+  createProduct({
+    slug: "rm-sm-09-special-mat-09",
+    name: "R-M SPECIAL MAT 09",
+    brandSlug: "rm",
+    programSlug: "boje-i-lakovi",
+    phaseSlug: "lak",
+    shortDescription: "Pasta za matiranje R-M pokrivnih lakova za pune boje i bezbojnih lakova.",
+    longDescription:
+      "SPECIAL MAT 09 (SM 09) je R-M pasta za matiranje kojom se smanjuje stepen sjaja R-M pokrivnih lakova za pune boje i bezbojnih lakova. Dodaje se prema recepturi (moguće u kombinaciji sa MT 900) ili u željenoj meri pri matiranju sjajnog laka; zatim se dodaju učvršćivač i razređivač prema tehničkom listu laka koji se podešava. Ne koristi se u mešačkoj mašini, dobro se promeša pre upotrebe i skraćuje vek upotrebe laka.",
+    sku: "SM 09",
+    packages: [
+      { label: "1 L", detail: "Pakovanje u našoj ponudi; proizvođač ne objavljuje zvanične veličine pakovanja." },
+    ],
+    purpose: "Smanjenje sjaja pokrivnih i bezbojnih R-M lakova",
+    badges: ["Matiranje", "UNO HD", "Bezbojni lakovi", "1 L"],
+    rmMetadata: { system: "uno-hd", series: null, category: "additive", technology: null, finish: "matte" },
+    specifications: [
+      { label: "Oznaka", value: "SM 09" },
+      { label: "Vrsta", value: "Pasta za matiranje" },
+      { label: "Kompatibilnost", value: "svi R-M bezbojni lakovi; pokrivni lakovi UNO HD, UNO HD CP, UNO HD CP PLUS", detail: "C 1450 STARTOP HS variant SPECIAL MAT 09, 12/2022" },
+      { label: "Doziranje", value: "prema recepturi ili do željenog stepena mata; najviše 70 % težinski", detail: "maksimum 70 % iz TDS-a C 1450 variant SPECIAL MAT 09" },
+      { label: "Primer predmešavine (STARTOP HS)", value: "50 C 1450 : 50 SM 09 (vol.), zatim 100 : 25 H 9000 : 25 BC 020" },
+      { label: "VOC", value: "839 g/l (EU kategorija IIB.e, granica 840 g/l)" },
+      { label: "Suva materija", value: "31 % ± 2" },
+      { label: "Gustina", value: "0,94–1,04 g/cm³" },
+      { label: "Rok trajanja", value: "24 meseca", detail: "SPECIAL MAT 09 TDS 07/2022" },
+      { label: "Pakovanje", value: "1 L", detail: "Pakovanje u našoj ponudi; proizvođač ne objavljuje zvanične veličine pakovanja." },
+    ],
+    documents: [
+      { title: "Tehnički list — SM 09 SPECIAL MAT 09", kind: "PDF", href: "https://techinfo.rmpaint.com/en_UK/documents/pdf/tech_infos/SPECIAL_MAT_09.pdf", status: "available", note: "Zvanični tehnički list (techinfo.rmpaint.com), verzija 07/2022" },
+      { title: "Tehnički list — SM 09 UNO HD varijanta SPECIAL MAT 09", kind: "PDF", href: "https://techinfo.rmpaint.com/en_UK/documents/pdf/tech_infos/UNO_HD_Variant_SPECIAL_MAT_09.pdf", status: "available", note: "Zvanični tehnički list (techinfo.rmpaint.com), verzija 08/2023" },
+    ],
+    relatedProductSlugs: ["rm-uno-hd", "rm-c-1450-startop-hs", "rm-h-9000-hardener-medium", "rm-sc-850-thinner-medium"],
+  }),
+  createProduct({
+    slug: "rm-c-1150-basic-clear",
+    name: "R-M BASIC CLEAR",
+    brandSlug: "rm",
+    programSlug: "boje-i-lakovi",
+    phaseSlug: "lak",
+    shortDescription: "Bezbojni lak za sve procese reparaturnog lakiranja, preko vodenih i rastvaračkih baznih boja.",
+    longDescription:
+      "BASIC CLEAR (C 1150) je R-M bezbojni lak pogodan za sve procese reparaturnog lakiranja vozila, namenjen za nanošenje preko vodenih i rastvaračkih baznih boja. Meša se 2 : 1 sa učvršćivačem H 1150 BASIC HARDENER; vek upotrebe na 20 °C je 4 h.",
+    sku: "C 1150",
+    packages: [
+      { label: "1 L", detail: "Pakovanje u našoj ponudi; proizvođač ne objavljuje zvanične veličine pakovanja." },
+    ],
+    purpose: "Završni bezbojni lak preko vodenih i rastvaračkih baznih boja",
+    badges: ["Bezbojni lak", "2:1", "1 L"],
+    rmMetadata: { system: null, series: null, category: "clearcoat", technology: "2k", finish: "gloss" },
+    specifications: [
+      { label: "Oznaka", value: "C 1150" },
+      { label: "Vrsta", value: "Bezbojni lak" },
+      { label: "Za bazne boje", value: "vodene i rastvaračke" },
+      { label: "Odnos mešanja", value: "2 : 1 — 100 C 1150 : 50 H 1150 (vol.)" },
+      { label: "Vek upotrebe na 20 °C", value: "4 h" },
+      { label: "Viskozitet", value: "DIN 4: 14–16 s · ISO 4: 24–26 s" },
+      { label: "Suva materija", value: "40 % ± 2" },
+      { label: "Mlaznica", value: "1,3 (HVLP) · 1,3–1,4 (kompatibilni)" },
+      { label: "Broj slojeva", value: "2" },
+      { label: "Debljina filma", value: "50 µm" },
+      { label: "Sušenje", value: "60 °C: 30 min · IR kratki talas: 8 min" },
+      { label: "Rok trajanja", value: "60 meseci" },
+      { label: "Pakovanje", value: "1 L", detail: "Pakovanje u našoj ponudi; proizvođač ne objavljuje zvanične veličine pakovanja." },
+    ],
+    documents: [
+      { title: "Tehnički list — C 1150 BASIC CLEAR", kind: "PDF", href: "https://techinfo.rmpaint.com/en_UK/documents/pdf/tech_infos/BASIC_CLEAR.pdf", status: "available", note: "Zvanični tehnički list (techinfo.rmpaint.com), verzija 12/2022" },
+    ],
+    relatedProductSlugs: ["rm-h-1150-basic-hardener", "rm-diamont-bazna-boja", "rm-onyx-hd"],
+  }),
+  createProduct({
+    slug: "rm-h-1150-basic-hardener",
+    name: "R-M BASIC HARDENER",
+    brandSlug: "rm",
+    programSlug: "boje-i-lakovi",
+    phaseSlug: "lak",
+    shortDescription: "Učvršćivač za BASIC CLEAR (C 1150) i BASIC FILLER II CP (P 2130).",
+    longDescription:
+      "BASIC HARDENER (H 1150) je R-M učvršćivač koji se koristi u bezbojnom laku C 1150 BASIC CLEAR i punilu P 2130 BASIC FILLER II CP. Sa BASIC CLEAR se meša u odnosu 2 : 1 (100 delova laka : 50 delova učvršćivača).",
+    sku: "H 1150",
+    packages: [
+      { label: "0,5 L", detail: "Pakovanje u našoj ponudi; proizvođač ne objavljuje zvanične veličine pakovanja." },
+    ],
+    purpose: "Učvršćivač za BASIC CLEAR i BASIC FILLER II CP",
+    badges: ["Učvršćivač", "BASIC", "0,5 L"],
+    rmMetadata: { system: null, series: null, category: "hardener", technology: "2k", finish: null },
+    specifications: [
+      { label: "Oznaka", value: "H 1150" },
+      { label: "Vrsta", value: "Učvršćivač" },
+      { label: "Koristi se u", value: "C 1150 BASIC CLEAR, P 2130 BASIC FILLER II CP" },
+      { label: "Odnos sa C 1150", value: "100 C 1150 : 50 H 1150 (vol.)", detail: "BASIC CLEAR TDS 12/2022" },
+      { label: "Pakovanje", value: "0,5 L", detail: "Pakovanje u našoj ponudi; proizvođač ne objavljuje zvanične veličine pakovanja." },
+    ],
+    documents: [
+      { title: "Tehnički list — H 1150 BASIC HARDENER", kind: "PDF", href: "https://techinfo.rmpaint.com/en_UK/documents/pdf/tech_infos/H_1150_BASIC_HARDENER.pdf", status: "available", note: "Zvanični tehnički list (techinfo.rmpaint.com), verzija 08/2022" },
+    ],
+    relatedProductSlugs: ["rm-c-1150-basic-clear"],
+  }),
   ...befarPadProducts,
   ...cosmosLacProducts,
   archivedProduct("satajet-x-5500"),
@@ -2537,7 +2922,7 @@ export const products: CarsystemProduct[] = architecturedProducts.map((product) 
       : product.brandSlug === "carfit"
         ? applyCarfitCatalogEnrichment(product)
         : product.brandSlug === "rm"
-          ? applyRmCatalogEnrichment(product)
+          ? withRmMixingBases(applyRmCatalogEnrichment(product))
           : product.brandSlug === "norbin"
             ? applyNorbinSyncEnrichment(product)
             : product.brandSlug === "sata"

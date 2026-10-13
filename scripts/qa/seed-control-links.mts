@@ -38,6 +38,10 @@ for (const { sifra, proba_cena } of potvrde.veze) {
   n += 1;
   // Bez osnovne cene u snimku artikal ostaje „Cena na upit“ (ne izmišlja se).
   if (!p.osnovna) continue;
+  // Ponovljeno ubacivanje istog artikla (drugi skup) ne sme dodati drugi rabat: dva ista pravila su sukob → „na upit“.
+  const [seen] = await sql<{ n: number }[]>`
+    SELECT count(*)::int AS n FROM article_base_prices WHERE article_id = ${a.id} AND reason = 'kontrolna veza: osnovna cena iz snimka'`;
+  if (seen.n > 0) continue;
   await sql`INSERT INTO article_base_prices (article_id, net_price, vat_percent, valid_from, source, reason, created_by)
             VALUES (${a.id}, ${p.osnovna}, ${p.pdv ?? "20"}, '2026-01-01', 'rucno', 'kontrolna veza: osnovna cena iz snimka', ${owner})`;
   for (const [pct, cond] of [[20, null], [25, "avans"]] as const) {

@@ -3,7 +3,7 @@
  * oznaci statusa. Bez Reacta i bez baze — isto pravilo koriste panel kupovine
  * i oznaka statusa, pa ne smeju da se razilaze.
  *
- * @typedef {{ slug: string; variantKey: string | null; state: "orderable" | "no_price" | "no_pack" }} ViewOffer
+ * @typedef {{ slug: string; variantKey: string | null; state: "orderable" | "no_price" | "no_pack" | "inquiry" }} ViewOffer
  */
 
 /** @param {string | null | undefined} a @param {string | null | undefined} b */
@@ -26,5 +26,6 @@ export function offersForView(offers, slug, viewKeys) {
  */
 export function customerStatusLabel(here, orderingEnabled, publicStatus) {
   if (!here || !orderingEnabled || here.length === 0) return publicStatus;
-  return here.some((o) => o.state === "orderable") ? "Vaša cena potvrđena" : "Cena na upit";
+  if (here.some((o) => o.state === "orderable")) return "Vaša cena potvrđena";
+  return here.every((o) => o.state === "inquiry") ? "Upit za nabavku" : "Cena na upit";
 }

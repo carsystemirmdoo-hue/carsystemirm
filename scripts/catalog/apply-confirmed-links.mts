@@ -8,6 +8,9 @@
  * `slug: null` = samo potvrđeno pakovanje BEZ veze sa karticom (artikal bez kartice na sajtu, poručuje se kroz nalog).
  * Bez `--upis` samo proverava i ispisuje plan. Veza se upisuje kroz `decideMapping`
  * (isti put kao ekran Mapiranja: audit, istorija); pakovanje u `article_pack_sizes`.
+ * `--ispravi-oznaku "<razlog>"` menja SAMO tekst oznake već upisanog pakovanja (npr. „kutija 250” → „BOX — kutija
+ * 250”) kada se količina i JM tačno slažu sa planom; stara oznaka i razlog se dopisuju u dokaz. Drugačija količina
+ * ili JM se ovim ne menja (povratak `--povuci`, pa novi `--upis`).
  * `--povuci "<razlog>"` je povratak: veze iz plana koje su potvrđene na isti cilj prelaze u
  * `revoked` (kroz `decideMapping`, sa razlogom), a pakovanja iz plana se brišu.
  * Production baza (neon) se odbija bez `--production-odobreno` — upis tamo traži
@@ -19,9 +22,10 @@ import { sql } from "drizzle-orm";
 const [planPath, ...rest] = process.argv.slice(2);
 const arg = (k: string) => { const i = rest.indexOf(k); return i >= 0 ? rest[i + 1] : null; };
 const revokeReason = arg("--povuci");
-const write = rest.includes("--upis") || Boolean(revokeReason);
-if (rest.includes("--upis") && revokeReason) {
-  console.error("--upis i --povuci se ne kombinuju.");
+const labelReason = arg("--ispravi-oznaku");
+const write = rest.includes("--upis") || Boolean(revokeReason) || Boolean(labelReason);
+if ([rest.includes("--upis"), Boolean(revokeReason), Boolean(labelReason)].filter(Boolean).length > 1) {
+  console.error("--upis, --povuci i --ispravi-oznaku se ne kombinuju.");
   process.exit(1);
 }
 const by = arg("--potvrdio");
@@ -97,6 +101,31 @@ for (const v of plan.veze) {
 console.table(rows.map((r) => Object.fromEntries(Object.entries(r).filter(([k]) => !k.startsWith("_")))));
 const ready = rows.filter((r) => r._ok);
 console.log(`Spremno: ${ready.length} / ${rows.length}${write ? "" : " — samo plan (bez --upis ništa nije upisano)"}`);
+if (labelReason) {
+  if (labelReason.trim().length < 5) { console.error("Razlog ispravke: najmanje 5 znakova."); process.exit(1); }
+  let n = 0;
+  for (const v of plan.veze) {
+    if (v.pakovanje === null || !v.oznaka) continue;
+    const [ps] = [...(await db.execute<{ article_id: string; pack_quantity: string; unit: string; label: string }>(sql`
+      SELECT ps.article_id, ps.pack_quantity::text AS pack_quantity, ps.unit, ps.label
+        FROM article_pack_sizes ps JOIN articles a ON a.id = ps.article_id WHERE a.code = ${v.sifra}`))];
+    if (!ps) { console.log(`${v.sifra}: pakovanje nije upisano — preskočeno (koristite --upis).`); continue; }
+    if (Number(ps.pack_quantity) !== Number(v.pakovanje) || ps.unit !== v.jm.toUpperCase()) {
+      console.log(`${v.sifra}: ODBIJENO — upisano ${ps.pack_quantity} ${ps.unit}, plan ${v.pakovanje} ${v.jm}; količina se ne menja ovim režimom.`);
+      continue;
+    }
+    if (ps.label === v.oznaka) continue;
+    await db.execute(sql`
+      UPDATE article_pack_sizes
+         SET label = ${v.oznaka},
+             evidence = evidence || ${` · ${new Date().toISOString().slice(0, 10)} ispravka oznake („${ps.label}” → „${v.oznaka}”): ${labelReason.trim()} (${by})`}
+       WHERE article_id = ${ps.article_id}::uuid`);
+    console.log(`${v.sifra}: „${ps.label}” → „${v.oznaka}”`);
+    n += 1;
+  }
+  console.log(`Ispravljeno oznaka: ${n}.`);
+  process.exit(0);
+}
 if (revokeReason) {
   if (revokeReason.trim().length < 5) { console.error("Razlog povlačenja: najmanje 5 znakova."); process.exit(1); }
   let n = 0;

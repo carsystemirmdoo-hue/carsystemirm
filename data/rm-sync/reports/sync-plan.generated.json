@@ -15,8 +15,13 @@
     "SYSTEM_COMPONENTS_WITHOUT_CARDS": 14,
     "LEGACY_LOCAL_ONLY": [
       "rm-diamont-bezbojni-lak",
-      "rm-pasta-190-1l",
-      "rm-pasta-190-5l"
+      "rm-paste-za-mesanje",
+      "rm-sc-850-thinner-medium",
+      "rm-h-9000-hardener-medium",
+      "rm-c-1450-startop-hs",
+      "rm-sm-09-special-mat-09",
+      "rm-c-1150-basic-clear",
+      "rm-h-1150-basic-hardener"
     ],
     "DOCUMENTATION_GAPS": [
       "HB 015",

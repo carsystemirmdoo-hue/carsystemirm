@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useState, useTransition } from "react";
 import { countOf, STAVKA } from "@/lib/ordering/plural.mjs";
+import { PICKED_EVENT } from "@/components/ordering/CompanionPanel";
 import { addRequestItemAction } from "./actions";
 
 /** Broj pakovanja + „Dodajte u korpu“. Poruka o ishodu stoji uz red (čitač ekrana je čuje). */
@@ -32,6 +33,7 @@ export function AddItem({ articleId, packLabel, name }: { articleId: string; pac
           onClick={() =>
             start(async () => {
               const r = await addRequestItemAction({ articleId, packs: q.trim() });
+              if (r.ok) window.dispatchEvent(new CustomEvent(PICKED_EVENT, { detail: { articleId, packs: Number(q.trim()) || 1 } }));
               setMsg(
                 r.ok
                   ? { ok: true, text: `Dodato${r.linePacks !== undefined ? ` · u korpi ${r.linePacks} × ${packLabel}` : ""} · ukupno ${countOf(r.count, STAVKA)}` }

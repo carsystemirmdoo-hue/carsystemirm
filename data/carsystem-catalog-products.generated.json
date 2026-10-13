@@ -25773,10 +25773,14 @@
       "content": {
         "productType": "Cediljka za boju",
         "subtype": "Cediljka za boju",
-        "shortDescription": "Jednokratna cediljka sa finom najlonskom mrežicom koja iz boje izdvaja prašinu i nečistoće.",
+        "shortDescription": "BOX: dispenzer kutija sa 250 jednokratnih cediljki sa finom najlonskom mrežicom, u gustinama 125 µm i 190 µm.",
         "longDescription": "Paint Strainer je cediljka za boju za jednokratnu upotrebu, izrađena kao papirni levak sa preciznim najlonskim filterom. Fine mrežice zadržavaju sitne čestice prašine i nečistoće, pa se materijal nanosi ravnomerno i bez neželjenih nepravilnosti. Koristi se za filtriranje svih uobičajenih materijala za lakiranje, u varijantama od 125 µm i 190 µm.",
         "purpose": "Filtriranje materijala za lakiranje",
         "facts": [
+          {
+            "label": "Pakovanje",
+            "value": "BOX — dispenzer kutija sa 250 cediljki"
+          },
           {
             "label": "Tip",
             "value": "Jednokratna cediljka za boju"

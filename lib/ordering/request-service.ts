@@ -77,6 +77,8 @@ export type RequestLine = {
   pack: PackFacts | null;
   /** Zašto pakovanje nije potvrđeno (za kupca i kancelariju). */
   packProblem: string | null;
+  /** 0049: samo upit za nabavku (ne dodaje se u korpu). */
+  procurementOnly: boolean;
   /** Broj pakovanja koje je kupac izabrao. */
   packs: number | null;
   /** Obračunska količina u BizniSoft JM = packs × pack.quantity. */
@@ -111,9 +113,12 @@ export type RequestQuote = {
 const keyOf = (code: string | null) => code ?? "osnovni";
 
 type ArticleRow = {
-  id: string; code: string; name: string; unit: string | null; out: boolean; fractional: boolean;
+  id: string; code: string; name: string; unit: string | null; out: boolean; fractional: boolean; procurement: boolean;
   pack_quantity: string | null; pack_unit: string | null; pack_label: string | null; pack_fractional: boolean | null;
 };
+
+/** 0049: artikal koji trenutno ne prodajemo direktno — samo upit za nabavku, nikad korpa. */
+export const PROCUREMENT_ONLY = "Trenutno nije u ponudi za direktno poručivanje — pošaljite upit za nabavku.";
 
 /**
  * `packs`: broj pakovanja koje je kupac izabrao. `quantity` samo za stare stavke
@@ -134,6 +139,7 @@ async function priceLines(
     ids.length
       ? exec.execute<ArticleRow>(sql`
           SELECT a.id, a.code, a.name, a.unit, EXISTS (SELECT 1 FROM articles_out_of_programme o WHERE o.article_id = a.id) AS out,
+                 EXISTS (SELECT 1 FROM articles_procurement_only p WHERE p.article_id = a.id) AS procurement,
                  EXISTS (SELECT 1 FROM invoice_lines l WHERE l.article_id = a.id AND l.quantity <> trunc(l.quantity)) AS fractional,
                  ps.pack_quantity::text AS pack_quantity, ps.unit AS pack_unit, ps.label AS pack_label, ps.fractional_ok AS pack_fractional
             FROM articles a LEFT JOIN article_pack_sizes ps ON ps.article_id = a.id
@@ -162,8 +168,8 @@ async function priceLines(
       fractionalSales: a.fractional,
       confirmed: a.pack_quantity && a.pack_unit ? { packQuantity: a.pack_quantity, unit: a.pack_unit, label: a.pack_label ?? "", fractionalOk: Boolean(a.pack_fractional) } : null,
     });
-    const pack: PackFacts | null = rule.status === "pack" ? { quantity: rule.packQuantity, unit: rule.unit, label: rule.label } : null;
-    const packProblem = rule.status === "blocked" ? `Pakovanje nije potvrđeno: ${rule.reason}.` : null;
+    const pack: PackFacts | null = rule.status === "pack" && !a.procurement ? { quantity: rule.packQuantity, unit: rule.unit, label: rule.label } : null;
+    const packProblem = a.procurement ? PROCUREMENT_ONLY : rule.status === "blocked" ? `Pakovanje nije potvrđeno: ${rule.reason}.` : null;
     // Stara stavka (u JM, bez broja pakovanja): prevodi se samo kada se deli celim brojem.
     let packs = it.packs;
     if (packs === null && pack && it.quantity !== undefined) {
@@ -212,6 +218,7 @@ async function priceLines(
       packConfirmed: Boolean(pack),
       pack,
       packProblem,
+      procurementOnly: a.procurement,
       packs,
       quantity,
       packSummary: pack && packs !== null ? packSummary(packs, { packQuantity: pack.quantity, unit: pack.unit, label: pack.label }) : null,
@@ -254,9 +261,10 @@ export type CatalogRequestOffer = {
   byOption: Record<string, OptionPrice>;
   /**
    * `orderable` = potvrđeno pakovanje i bar jedna opcija sa cenom; `no_pack` = cena
-   * postoji, ali pakovanje nije potvrđeno (ne preračunava se — upit); `no_price` = na upit.
+   * postoji, ali pakovanje nije potvrđeno (ne preračunava se — upit); `no_price` = na upit;
+   * `inquiry` = trenutno ne prodajemo direktno — samo upit za nabavku (0049).
    */
-  state: "orderable" | "no_price" | "no_pack";
+  state: "orderable" | "no_price" | "no_pack" | "inquiry";
 };
 
 /**
@@ -305,7 +313,7 @@ export async function loadCatalogRequestOffers(customerId: string): Promise<{
       packProblem: l.packProblem,
       step: l.step,
       byOption: l.byOption,
-      state: !Object.values(l.byOption).some((p) => p.status === "cena") ? "no_price" : l.pack ? "orderable" : "no_pack",
+      state: l.procurementOnly ? "inquiry" : !Object.values(l.byOption).some((p) => p.status === "cena") ? "no_price" : l.pack ? "orderable" : "no_pack",
     });
   }
   return { enabled: true, reason: null, options: priced.options, offers };
@@ -423,11 +431,13 @@ async function cartCount(customerId: string, exec: Exec = getDb()) {
 
 /** Potvrđeno pakovanje artikla (isto pravilo kao obračun) — za upis u korpu. */
 async function packFor(exec: Exec, articleId: string) {
-  const [a] = [...(await exec.execute<{ unit: string | null; fractional: boolean; pack_quantity: string | null; pack_unit: string | null; pack_label: string | null; pack_fractional: boolean | null }>(sql`
+  const [a] = [...(await exec.execute<{ unit: string | null; fractional: boolean; procurement: boolean; pack_quantity: string | null; pack_unit: string | null; pack_label: string | null; pack_fractional: boolean | null }>(sql`
     SELECT a.unit, EXISTS (SELECT 1 FROM invoice_lines l WHERE l.article_id = a.id AND l.quantity <> trunc(l.quantity)) AS fractional,
+           EXISTS (SELECT 1 FROM articles_procurement_only p WHERE p.article_id = a.id) AS procurement,
            ps.pack_quantity::text AS pack_quantity, ps.unit AS pack_unit, ps.label AS pack_label, ps.fractional_ok AS pack_fractional
       FROM articles a LEFT JOIN article_pack_sizes ps ON ps.article_id = a.id WHERE a.id = ${articleId}::uuid`))];
   if (!a) return null;
+  if (a.procurement) return { status: "blocked" as const, reason: PROCUREMENT_ONLY };
   return orderPack({
     unit: a.unit,
     fractionalSales: a.fractional,
@@ -454,7 +464,7 @@ export async function addRequestItem(session: CustomerSession, input: { articleI
   const parsed = parsePacks(input.packs);
   if (!parsed.ok) return { ok: false, message: parsed.message };
   const pack = await packFor(db, input.articleId);
-  if (!pack || pack.status !== "pack") return { ok: false, message: NO_PACK };
+  if (!pack || pack.status !== "pack") return { ok: false, message: pack?.status === "blocked" && pack.reason === PROCUREMENT_ONLY ? PROCUREMENT_ONLY : NO_PACK };
   await db.execute(sql`
     INSERT INTO customer_cart_items (customer_id, article_id, quantity, pack_count, added_by)
     VALUES (${customerId}, ${input.articleId}::uuid, ${billingQuantity(parsed.packs, pack.packQuantity)}, ${parsed.packs}, ${session.accountId})
@@ -484,7 +494,7 @@ export async function setRequestPacks(session: CustomerSession, input: { article
   const parsed = parsePacks(input.packs);
   if (!parsed.ok) return { ok: false, message: parsed.message };
   const pack = await packFor(db, input.articleId);
-  if (!pack || pack.status !== "pack") return { ok: false, message: NO_PACK };
+  if (!pack || pack.status !== "pack") return { ok: false, message: pack?.status === "blocked" && pack.reason === PROCUREMENT_ONLY ? PROCUREMENT_ONLY : NO_PACK };
   await db.execute(sql`
     UPDATE customer_cart_items SET pack_count = ${parsed.packs}, quantity = ${billingQuantity(parsed.packs, pack.packQuantity)}, updated_at = now()
      WHERE customer_id = ${customerId} AND article_id = ${input.articleId}::uuid`);

@@ -19,6 +19,9 @@ const eslintConfig = [
       "out/**",
       "build/**",
       "next-env.d.ts",
+      // Jednokratni alati provere javnog sajta, sačuvani kao dokaz uz izveštaj
+      // (docs/javni-sajt). Nisu deo aplikacije ni build-a.
+      "docs/javni-sajt/provera-*/skripte/**",
     ],
   },
   ...compat.extends("next/core-web-vitals", "next/typescript"),

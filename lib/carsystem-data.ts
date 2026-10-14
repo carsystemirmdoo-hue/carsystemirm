@@ -356,6 +356,11 @@ export type CarsystemProduct = {
   searchTerms?: string[];
   stockManaged?: boolean;
   productImage: ProductImageAsset | null;
+  /**
+   * Kanonska adresa kartice, izračunata na serveru pre slanja liste klijentskoj komponenti
+   * (vidi `withListingHref`). Klijent je ne izvodi sam, jer bi za to morao da učita katalog.
+   */
+  listingHref?: string;
   visualIdentity?: ProductVisualIdentity;
   galleryImages: ProductImageAsset[];
   specifications: ProductSpecification[];

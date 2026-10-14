@@ -153,6 +153,7 @@ function ProductCategoryCard({
   return (
     <Link
       href={category.href}
+      prefetch={false}
       className={cx(styles.card, "cs-interactive-surface")}
       data-cursor="card"
       data-motion-surface

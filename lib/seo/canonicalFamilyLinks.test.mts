@@ -97,7 +97,6 @@ test("liste proizvoda ne grade adresu ručno iz sluga", () => {
     "components/product/ProductDetailPage.tsx",
     "components/product/RelatedProducts.tsx",
     "components/norbin-brand/NorbinBrandPage.tsx",
-    "components/brand-program/EntityProductCard.tsx",
     "components/brand/cosmos/CosmosBrandPage.tsx",
     "components/baslac-brand/BaslacBrandPage.tsx",
   ];
@@ -105,5 +104,16 @@ test("liste proizvoda ne grade adresu ručno iz sluga", () => {
     const source = readFileSync(new URL(`../../${file}`, import.meta.url), "utf8");
     assert.doesNotMatch(source, /[`"']\/proizvodi\/\$\{product\.slug\}/, file);
     assert.match(source, /productCanonicalHref\(/, file);
+  }
+});
+
+test("klijentska kartica liste dobija kanonsku adresu sa servera (withListingHref)", () => {
+  const read = (file: string) => readFileSync(new URL(`../../${file}`, import.meta.url), "utf8");
+  const card = read("components/brand-program/EntityProductCard.tsx");
+  assert.doesNotMatch(card, /\/proizvodi\/\$\{product\.slug\}/);
+  assert.match(card, /product\.listingHref/);
+  assert.match(read("lib/listing-href.ts"), /productCanonicalHref\(/);
+  for (const file of ["components/brand/BrandProducts.tsx", "components/program/ProgramProducts.tsx"]) {
+    assert.match(read(file), /withListingHref\(/, file);
   }
 });

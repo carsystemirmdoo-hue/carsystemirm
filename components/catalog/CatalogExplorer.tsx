@@ -2,7 +2,7 @@
 
 import { matchesPhase } from "@/lib/catalog/phase-match.mjs";
 import { useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { usePathname, useSearchParams } from "next/navigation";
 import { ManufacturerRail } from "@/components/brand/ManufacturerRail";
 import { CatalogFilters } from "@/components/catalog/CatalogFilters";
 import {
@@ -17,11 +17,11 @@ import {
   getProductCategory,
   isProductCategorySlug,
 } from "@/lib/product-taxonomy";
-import {
-  expandVariant,
-  type CatalogListingEntity,
-  type CatalogVariantEntity,
+import type {
+  CatalogListingEntity,
+  CatalogVariantEntity,
 } from "@/lib/catalog-listing";
+import { expandVariant } from "@/lib/catalog-variant-expand";
 import { useProductSearch } from "@/components/search/useProductSearch";
 import type { ProductSearchRecord } from "@/lib/search/buildSearchIndex";
 import {
@@ -31,10 +31,8 @@ import {
   type RmCategorySlug,
   type RmSeriesSlug,
   type RmSystemSlug,
-  type CarsystemBrand,
-  type ProgramGroup,
-  type RefinishPhase,
-} from "@/lib/carsystem-data";
+} from "@/lib/catalog-constants";
+import type { CarsystemBrand, ProgramGroup, RefinishPhase } from "@/lib/carsystem-data";
 import styles from "./CatalogPage.module.css";
 
 type CatalogModule = {
@@ -379,7 +377,6 @@ export function CatalogExplorer({
   );
 
   const pathname = usePathname();
-  const router = useRouter();
   const searchParams = useSearchParams();
   const searchParamsKey = searchParams.toString();
   const applyingUrlRef = useRef(false);
@@ -691,8 +688,17 @@ export function CatalogExplorer({
     if (nextSearch === searchParamsKey) return;
 
     lastWrittenSearchRef.current = nextSearch;
-    router.replace(nextSearch ? `${pathname}?${nextSearch}` : pathname, { scroll: false });
-  }, [currentUrlFilters, pathname, router, searchParamsKey]);
+    // Filter je već primenjen lokalno; URL se samo upisuje. `router.replace` bi za
+    // statičnu /katalog ponovo preuzeo ceo RSC payload (~1,6 MB) na svaki filter,
+    // a Next 15 sinhronizuje useSearchParams i sa history.replaceState. Stanje mora biti
+    // null: Next ne sinhronizuje poziv koji nosi njegovo interno stanje (__NA), pa bi
+    // kasniji klik na „/katalog” promenio URL bez poništavanja filtera.
+    window.history.replaceState(
+      null,
+      "",
+      nextSearch ? `${pathname}?${nextSearch}` : pathname,
+    );
+  }, [currentUrlFilters, pathname, searchParamsKey]);
 
   const filteredProducts = useMemo(() => {
     /*

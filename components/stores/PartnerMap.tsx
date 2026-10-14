@@ -1,10 +1,10 @@
 "use client";
 
-import maplibregl, {
-  type GeoJSONSource,
-  type LngLatBoundsLike,
-  type Map as MapLibreMap,
-  type Marker,
+import type {
+  GeoJSONSource,
+  LngLatBoundsLike,
+  Map as MapLibreMap,
+  Marker,
 } from "maplibre-gl";
 import "maplibre-gl/dist/maplibre-gl.css";
 import { useEffect, useMemo, useRef, useState } from "react";
@@ -18,6 +18,14 @@ import {
   observeSiteTheme,
   readSiteTheme,
 } from "@/components/map/carsystem-map-style";
+
+// maplibre-gl (~800 KB) se učitava tek kada se mapa inicijalizuje, ne sa stranicom.
+let maplibreLib: typeof import("maplibre-gl") | null = null;
+
+function maplibre() {
+  if (!maplibreLib) throw new Error("maplibre-gl nije učitan");
+  return maplibreLib;
+}
 import mapStyles from "@/components/map/CarsystemMap.module.css";
 import {
   getPartnerBounds,
@@ -168,11 +176,11 @@ export function PartnerMap({
                 activeMap.easeTo({ center: coordinates, zoom, duration: 450 });
               }
             });
-            marker = new maplibregl.Marker({ element }).setLngLat(coordinates);
+            marker = new (maplibre().Marker)({ element }).setLngLat(coordinates);
           } else {
             const store = storesById.get(String(props.id));
             if (!store) return;
-            marker = new maplibregl.Marker({ element: markerElement(store) }).setLngLat(
+            marker = new (maplibre().Marker)({ element: markerElement(store) }).setLngLat(
               coordinates,
             );
           }
@@ -221,7 +229,11 @@ export function PartnerMap({
 
     async function init() {
       try {
-        const style = await loadCarsystemMapStyle(readSiteTheme());
+        const [{ default: maplibregl }, style] = await Promise.all([
+          import("maplibre-gl"),
+          loadCarsystemMapStyle(readSiteTheme()),
+        ]);
+        maplibreLib = maplibregl;
         if (disposed || !containerRef.current) return;
 
         const bounds = getPartnerBounds(storesWithCoords);
@@ -236,7 +248,7 @@ export function PartnerMap({
         });
         mapRef.current = map;
 
-        map.addControl(new maplibregl.NavigationControl({ showCompass: false }), "top-right");
+        map.addControl(new (maplibre().NavigationControl)({ showCompass: false }), "top-right");
 
         if (bounds) {
           map.fitBounds(bounds as LngLatBoundsLike, { animate: false, padding: 56, maxZoom: 9 });
@@ -349,7 +361,7 @@ export function PartnerMap({
       const element = document.createElement("span");
       element.className = `${mapStyles.mapMarker} ${mapStyles.mapMarkerDimmed}`;
       element.setAttribute("aria-hidden", "true");
-      const marker = new maplibregl.Marker({ element })
+      const marker = new (maplibre().Marker)({ element })
         .setLngLat(markerCoordinates.get(store.id) ?? [store.longitude, store.latitude])
         .addTo(map);
       dimmed.set(id, marker);

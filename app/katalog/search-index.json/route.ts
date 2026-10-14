@@ -24,7 +24,13 @@ export const dynamic = "force-static";
 export function GET() {
   return Response.json(getProductSearchIndex(), {
     headers: {
-      "Cache-Control": "public, max-age=0, must-revalidate",
+      /*
+       * Indeks se menja samo novim deploy-em. Deset minuta svežine i dan „stale-while-revalidate”
+       * znače da se pri sledećoj stranici ili pretrazi ne preuzima ponovo (ranije: provera pri
+       * svakom otvaranju pretrage). Posle deploy-a pregledač još do deset minuta (i jednom posle toga,
+       * dok u pozadini proverava) koristi stari indeks; promenjene adrese pokrivaju preusmerenja.
+       */
+      "Cache-Control": "public, max-age=600, stale-while-revalidate=86400",
     },
   });
 }

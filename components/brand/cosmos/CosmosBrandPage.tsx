@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { CatalogProductCard } from "@/components/catalog/CatalogProductCard";
+import { CatalogProductCardFromProduct } from "@/components/catalog/CatalogProductCardFromProduct";
 import { DocumentCard } from "@/components/documents/DocumentCard";
 import { Footer } from "@/components/layout/Footer";
 import {
@@ -137,7 +137,7 @@ export function CosmosBrandPage({ brand, products }: Props) {
               const program = programBySlug.get(product.programSlug);
               if (!phase || !program) return null;
               return (
-                <CatalogProductCard
+                <CatalogProductCardFromProduct
                   brand={brand}
                   key={product.slug}
                   phase={phase}

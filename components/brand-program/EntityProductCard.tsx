@@ -1,16 +1,15 @@
 import Link from "next/link";
 import { formatMeasureSr } from "@/lib/measure-format.mjs";
 import { cardMetaParts } from "@/lib/card-meta";
-import {
-  getProductPublicStatus,
-  type CarsystemBrand,
-  type CarsystemProduct,
-  type ProgramGroup,
-  type RefinishPhase,
+import type {
+  CarsystemBrand,
+  CarsystemProduct,
+  ProgramGroup,
+  RefinishPhase,
 } from "@/lib/carsystem-data";
+import { getProductPublicStatus } from "@/lib/catalog-constants";
 import { ProductVisualSurface } from "@/components/product/ProductVisualSurface";
 import styles from "./BrandProgramPage.module.css";
-import { productCanonicalHref } from "@/lib/product-families";
 
 export function EntityProductCard({
   brand,
@@ -26,7 +25,10 @@ export function EntityProductCard({
   const image = product.productImage ?? product.galleryImages[0] ?? null;
   const packageSummary = formatMeasureSr(product.packages.map((item) => item.label).join(" / "));
   const publicStatus = getProductPublicStatus(product);
-  const productHref = productCanonicalHref(product);
+  // Kartica je klijentska; kanonsku adresu (productCanonicalHref) računa server
+  // kroz withListingHref, da katalog ne bi ušao u JS paket stranice.
+  if (!product.listingHref) throw new Error(`EntityProductCard: nedostaje listingHref za ${product.slug}`);
+  const productHref = product.listingHref;
   const inquiryHref = `/kontakt?tema=proizvod&proizvod=${product.slug}`;
 
   return (

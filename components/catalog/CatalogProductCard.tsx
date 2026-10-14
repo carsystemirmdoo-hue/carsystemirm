@@ -1,16 +1,13 @@
 import Link from "next/link";
 import { cardMetaParts } from "@/lib/card-meta";
 import { CustomerCardPrice } from "@/components/customer-buy/CustomerCardPrice";
-import {
-  type CarsystemBrand,
-  type CarsystemProduct,
-  type ProgramGroup,
-  type RefinishPhase,
+import type {
+  CarsystemBrand,
+  CarsystemProduct,
+  ProgramGroup,
+  RefinishPhase,
 } from "@/lib/carsystem-data";
-import {
-  toCatalogListingEntity,
-  type CatalogListingEntity,
-} from "@/lib/catalog-listing";
+import type { CatalogListingEntity } from "@/lib/catalog-listing";
 import { ProductVisualSurface } from "@/components/product/ProductVisualSurface";
 import { getBrandCardColor } from "@/lib/brand-card-colors";
 import type { CSSProperties, Ref } from "react";
@@ -33,11 +30,12 @@ export function CatalogProductCard({
   className?: string;
   contextLabel?: string;
   /**
-   * Canonical listing entity (catalog browse). When absent the card falls back
-   * to deriving one from `product`, which is how the locked surfaces — PDP
-   * related row, Cosmos brand page — keep calling it unchanged.
+   * Canonical listing entity. Uvek se računa na SERVERU: izvođenje iz `product` u ovoj
+   * komponenti uvlačilo je ceo katalog (lib/catalog-listing → lib/carsystem-data, ~6,7 MB
+   * JSON-a) u JavaScript pregledača na svakoj stranici. Serverski pozivaoci koji imaju samo
+   * proizvod koriste `CatalogProductCardFromProduct`.
    */
-  entity?: CatalogListingEntity;
+  entity: CatalogListingEntity;
   phase: RefinishPhase;
   preloadRef?: Ref<HTMLAnchorElement>;
   product?: CarsystemProduct;
@@ -53,7 +51,7 @@ export function CatalogProductCard({
    */
   catalogSystem?: boolean;
 }) {
-  const listing = entity ?? toCatalogListingEntity(product as CarsystemProduct);
+  const listing = entity;
   const isFamily = listing.kind === "family";
 
   /*

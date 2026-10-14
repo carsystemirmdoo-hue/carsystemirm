@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { EntityProductFilters } from "@/components/brand-program/EntityProductFilters";
+import { withListingHref } from "@/lib/listing-href";
 import type {
   CarsystemBrand,
   CarsystemProduct,
@@ -38,7 +39,7 @@ export function BrandProducts({
         fixedBrandSlug={brand.slug}
         idPrefix={`brand-${brand.slug}`}
         phases={Array.from(phaseBySlug.values())}
-        products={products}
+        products={withListingHref(products)}
         programs={Array.from(programBySlug.values())}
         showQuickPhaseFilters
       />

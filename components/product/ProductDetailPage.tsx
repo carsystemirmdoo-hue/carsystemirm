@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { cardMetaParts } from "@/lib/card-meta";
 import { getProductPlacement } from "@/lib/seo/product-breadcrumbs";
-import { CatalogProductCard } from "@/components/catalog/CatalogProductCard";
+import { CatalogProductCardFromProduct } from "@/components/catalog/CatalogProductCardFromProduct";
 import { Footer } from "@/components/layout/Footer";
 import { ProductIdentity } from "@/components/product/ProductIdentity";
 import { getProductTechnicalFacts } from "@/components/product/productTechnicalFactList";
@@ -287,7 +287,7 @@ function ProductJoinedRecommendations({
           if (!relationBrand || !relationProgram || !relationPhase) return null;
 
           return (
-            <CatalogProductCard
+            <CatalogProductCardFromProduct
               brand={relationBrand}
               className={styles.joinedProductCard}
               contextLabel={cardMetaParts([relationProgram.shortName, relationPhase.name]).join(" · ")}

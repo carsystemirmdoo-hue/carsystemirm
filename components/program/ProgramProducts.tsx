@@ -1,4 +1,5 @@
 import { EntityProductFilters } from "@/components/brand-program/EntityProductFilters";
+import { withListingHref } from "@/lib/listing-href";
 import type {
   CarsystemBrand,
   CarsystemProduct,
@@ -37,7 +38,7 @@ export function ProgramProducts({
         contextLabel="Program"
         idPrefix="program-products"
         phases={Array.from(phaseBySlug.values())}
-        products={products}
+        products={withListingHref(products)}
         programs={Array.from(programBySlug.values())}
       />
     </section>

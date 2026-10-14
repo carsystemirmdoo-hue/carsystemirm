@@ -36,14 +36,18 @@ const plexMono = IBM_Plex_Mono({
   display: "swap",
 });
 
+// Geist je samo rezervni font iza Plex/Archivo; preload bi ga preuzimao pre prvog
+// prikaza i na sporoj mreži usporavao CSS (izmereno: FCP /katalog, spori 4G).
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
+  preload: false,
 });
 
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
+  preload: false,
 });
 
 export const metadata: Metadata = {

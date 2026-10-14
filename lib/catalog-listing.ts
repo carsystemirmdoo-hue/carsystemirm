@@ -360,48 +360,7 @@ export type CatalogListingData = {
   variants: CatalogVariantEntity[];
 };
 
-/** Rebuilds a full listing entity from a variant plus its family. */
-export function expandVariant(
-  variant: CatalogVariantEntity,
-  family: CatalogListingEntity,
-): CatalogListingEntity {
-  return {
-    ...family,
-    kind: "variant",
-    id: variant.id,
-    // Varijanta vodi na canonical family PDP sa preselektovanom varijantom, a
-    // ne na zasebnu variant stranicu — korisnik nikada ne dolazi na generički
-    // group listing. `family.href` je već `familyPath`.
-    href: (variant.variantKey ?? variant.productCode)
-      ? `${family.href}?varijanta=${encodeURIComponent(variant.variantKey ?? variant.productCode)}`
-      : `/proizvodi/${variant.id}`,
-    name: variant.name,
-    productCode: variant.productCode,
-    shortCode: variant.productCode,
-    technicalLine: variant.technicalLine,
-    finish: variant.finish,
-    variantCount: 1,
-    search: variant.search,
-    presentation: {
-      ...family.presentation,
-      slug: variant.id,
-      name: variant.name,
-      sizeClass: variant.sizeClass,
-      quantityLabel: variant.quantityLabel,
-      volumeStatus: variant.volumeStatus,
-      style: {
-        "--product-visual-accent": variant.accent,
-        "--product-visual-complement": variant.accent,
-        "--product-visual-background-color": variant.accent,
-        "--product-active-color": variant.accent,
-      } as CatalogListingEntity["presentation"]["style"],
-      shade: variant.shade,
-      image: variant.imageSrc
-        ? { src: variant.imageSrc, alt: variant.imageAlt }
-        : null,
-    },
-  };
-}
+export { expandVariant } from "@/lib/catalog-variant-expand";
 
 let cached: CatalogListingData | undefined;
 

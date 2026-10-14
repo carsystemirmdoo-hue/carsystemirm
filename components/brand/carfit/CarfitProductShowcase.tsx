@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useMemo, useState } from "react";
-import { carfitProductFilters } from "@/lib/carfit-brand-data";
+import { carfitProductFilters } from "@/lib/carfit-filters";
 import type { CarfitProductView } from "./carfit-view";
 import styles from "./CarfitBrandPage.module.css";
 

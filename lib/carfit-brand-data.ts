@@ -590,13 +590,7 @@ export const carfitFinalCta = {
   secondaryCta: { href: `/kontakt?tema=proizvod&brend=${CARFIT_BRAND_SLUG}`, label: "Kontaktirajte nas" },
 };
 
-export const carfitProductFilters = [
-  { id: "sve", label: "Sve", phaseSlugs: null },
-  { id: "priprema", label: "Priprema", phaseSlugs: ["priprema"] as RefinishPhaseSlug[] },
-  { id: "podloga", label: "Podloga", phaseSlugs: ["podloga"] as RefinishPhaseSlug[] },
-  { id: "lakiranje", label: "Lakiranje", phaseSlugs: ["boja", "lak"] as RefinishPhaseSlug[] },
-  { id: "finish", label: "Završna obrada", phaseSlugs: ["poliranje"] as RefinishPhaseSlug[] },
-];
+export { carfitProductFilters } from "@/lib/carfit-filters";
 
 /** Svi Car Fit artikli koji trenutno postoje u centralnom katalogu. */
 export function getCarfitProducts() {

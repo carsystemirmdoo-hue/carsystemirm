@@ -129,7 +129,7 @@ export const carfitHero = {
     { id: "maskiranje", label: "Maskiranje", taskId: "maskiranje" },
     { id: "reparacija", label: "Reparacija", taskId: "reparacija" },
     { id: "lakiranje", label: "Lakiranje", taskId: "lakiranje" },
-    { id: "finish", label: "Finish", taskId: "zavrsna-obrada" },
+    { id: "finish", label: "Završna obrada", taskId: "zavrsna-obrada" },
   ],
   media: media(
     "carfit-hero-workbench",
@@ -243,7 +243,7 @@ export const carfitTasks: CarfitTask[] = [
     id: "priprema-povrsine",
     code: "01",
     label: "Pripremam površinu",
-    marker: "PREP",
+    marker: "Priprema",
     lead: "Sve počinje od podloge koja drži.",
     body:
       "Skidanje starog sloja, brušenje po gradaciji i odmašćivanje određuju koliko će ceo zahvat trajati. Ako se ovde preskoči korak, vidi se tek u laku.",
@@ -267,7 +267,7 @@ export const carfitTasks: CarfitTask[] = [
     id: "reparacija",
     code: "02",
     label: "Ispravljam oštećenje",
-    marker: "REPAIR",
+    marker: "Popravka",
     lead: "Geometrija se vraća pre nego što se boja i pomisli.",
     body:
       "Udubljenja, ivice i prelazi rešavaju se kitom u tankim slojevima i kontrolisanim brušenjem. Cilj je ravna površina koja ne traži korekciju kasnije.",
@@ -291,7 +291,7 @@ export const carfitTasks: CarfitTask[] = [
     id: "maskiranje",
     code: "03",
     label: "Maskiram vozilo",
-    marker: "MASK",
+    marker: "Maskiranje",
     lead: "Čista ivica se definiše pre prvog nanosa.",
     body:
       "Maskiranje odlučuje koliko će posla biti posle lakiranja. Folija štiti površinu, traka definiše ivicu, a dobro pripremljena zona skraćuje završnu obradu.",
@@ -315,7 +315,7 @@ export const carfitTasks: CarfitTask[] = [
     id: "podloga",
     code: "04",
     label: "Pripremam za lakiranje",
-    marker: "PRIME",
+    marker: "Podloga",
     lead: "Podloga odlučuje kako će boja da legne.",
     body:
       "Prajmer i filer izjednačavaju upijanje, izoluju podlogu i daju baznom sloju stabilan temelj. Bez toga se razlike u podlozi vide kroz završni sloj.",
@@ -339,7 +339,7 @@ export const carfitTasks: CarfitTask[] = [
     id: "lakiranje",
     code: "05",
     label: "Lakiram element",
-    marker: "APPLY",
+    marker: "Nanošenje",
     lead: "Završni sloj je ono što ostaje vidljivo.",
     body:
       "Bezbojni lak zatvara sistem, štiti bazni sloj i nosi sjaj. Izbor laka i razređivača prati temperaturu radionice i veličinu elementa koji se radi.",
@@ -362,8 +362,8 @@ export const carfitTasks: CarfitTask[] = [
   {
     id: "spot-repair",
     code: "06",
-    label: "Radim spot repair",
-    marker: "SPOT",
+    label: "Radim popravku manjih oštećenja (spot repair)",
+    marker: "Lokalna popravka",
     lead: "Mali zahvat, kompletan posao.",
     body:
       "Lokalna reparacija traži isti redosled kao i ceo element, samo u manjoj zoni. Prelaz mora da se izgubi, inače se popravka vidi iz svakog ugla.",
@@ -387,7 +387,7 @@ export const carfitTasks: CarfitTask[] = [
     id: "zavrsna-obrada",
     code: "07",
     label: "Završavam površinu",
-    marker: "FINISH",
+    marker: "Završna obrada",
     lead: "Poslednji sloj traži najmirniju ruku.",
     body:
       "Uklanjanje sitnih tragova, provera prelaza i priprema za poliranje. U ovoj fazi se ispravlja ono što bi inače ostalo trajno vidljivo.",
@@ -411,7 +411,7 @@ export const carfitTasks: CarfitTask[] = [
     id: "poliranje",
     code: "08",
     label: "Poliram vozilo",
-    marker: "POLISH",
+    marker: "Poliranje",
     lead: "Poslednjih pet procenata menja ceo rezultat.",
     body:
       "Poliranje je sistem: pasta, pad i krpa rade zajedno. Pogrešna kombinacija ostavlja hologram ili skida više nego što treba.",
@@ -437,7 +437,7 @@ export const carfitWorkbenchZones = [
   {
     id: "prep",
     code: "01",
-    title: "Prep",
+    title: "Priprema",
     lead: "Priprema površine",
     items: ["Abrazivi", "Odstranjivači silikona", "Maskiranje"],
     categoryIds: ["abrazivi", "priprema-ciscenje", "maskiranje"],
@@ -445,7 +445,7 @@ export const carfitWorkbenchZones = [
   {
     id: "repair",
     code: "02",
-    title: "Repair",
+    title: "Popravka",
     lead: "Reparacija i podloga",
     items: ["Kitovi", "Fileri i prajmeri", "Zaštitni materijali"],
     categoryIds: ["kitovi", "fileri-prajmeri", "zastita-lepkovi"],
@@ -453,7 +453,7 @@ export const carfitWorkbenchZones = [
   {
     id: "apply",
     code: "03",
-    title: "Apply",
+    title: "Nanošenje",
     lead: "Nanošenje materijala",
     items: ["Bezbojni lakovi", "Aerosoli", "Pribor za lakiranje"],
     categoryIds: ["bezbojni-lakovi", "aerosoli", "pribor"],
@@ -461,8 +461,8 @@ export const carfitWorkbenchZones = [
   {
     id: "finish",
     code: "04",
-    title: "Finish",
-    lead: "Završna obrada",
+    title: "Završna obrada",
+    lead: "Poliranje",
     items: ["Paste", "Padovi", "Krpe i pomoćna oprema"],
     categoryIds: ["poliranje", "pribor"],
   },
@@ -547,7 +547,7 @@ export const carfitMaskingStory = {
 };
 
 export const carfitFinishStory = {
-  eyebrow: "Finish",
+  eyebrow: "Završna obrada",
   title: "Poslednjih pet procenata menja ceo rezultat.",
   lead:
     "Poliranje se ne rešava jednom pastom. Kombinacija paste, pada i krpe određuje da li će površina imati dubinu ili tragove obrade.",
@@ -595,7 +595,7 @@ export const carfitProductFilters = [
   { id: "priprema", label: "Priprema", phaseSlugs: ["priprema"] as RefinishPhaseSlug[] },
   { id: "podloga", label: "Podloga", phaseSlugs: ["podloga"] as RefinishPhaseSlug[] },
   { id: "lakiranje", label: "Lakiranje", phaseSlugs: ["boja", "lak"] as RefinishPhaseSlug[] },
-  { id: "finish", label: "Finish", phaseSlugs: ["poliranje"] as RefinishPhaseSlug[] },
+  { id: "finish", label: "Završna obrada", phaseSlugs: ["poliranje"] as RefinishPhaseSlug[] },
 ];
 
 /** Svi Car Fit artikli koji trenutno postoje u centralnom katalogu. */

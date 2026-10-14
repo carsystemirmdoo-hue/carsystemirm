@@ -1043,13 +1043,8 @@ export function Header() {
           <CustomerAccountMenu />
           <Link
             href="/kontakt"
-            className={cx(
-              styles.contactCta,
-              "cs-magnetic-cta cs-theme-wipe-card",
-            )}
+            className={styles.contactCta}
             data-cursor="button"
-            data-motion-surface
-            data-motion="theme-wipe"
             onClick={() => closeDesktopMenu(false)}
           >
             <span>Kontakt</span>

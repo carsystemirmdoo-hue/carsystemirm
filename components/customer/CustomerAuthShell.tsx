@@ -8,7 +8,16 @@ export function CustomerAuthShell({ eyebrow = "Pristup za kupce", title, lead, c
     <main className="portal-root portal-customer-area pn-auth">
       <div className="pn pn-auth-card">
         <header style={{ display: "grid", gap: 4 }}>
-          <span className="pn-small pn-muted" style={{ fontWeight: 600 }}>
+          <span
+            className="pn-muted"
+            style={{
+              fontFamily: "var(--font-technical), monospace",
+              fontSize: "var(--ds-font-label)",
+              fontWeight: 500,
+              letterSpacing: "var(--ds-tracking-label)",
+              textTransform: "uppercase",
+            }}
+          >
             {eyebrow}
           </span>
           <h1 className="pn-title">{title}</h1>

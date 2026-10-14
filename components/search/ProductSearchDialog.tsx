@@ -107,10 +107,14 @@ function ResultLine({
     record.productCode && record.productCode.length <= 24 ? record.productCode : null;
 
   const meta = [
-    record.brandName,
-    code,
-    level === "member" ? record.quantityLabel ?? record.technicalLine : record.technicalLine,
-  ].filter((value): value is string => Boolean(value));
+    { value: record.brandName, isCode: false },
+    { value: code, isCode: true },
+    {
+      value:
+        level === "member" ? record.quantityLabel ?? record.technicalLine : record.technicalLine,
+      isCode: false,
+    },
+  ].filter((item): item is { value: string; isCode: boolean } => Boolean(item.value));
 
   return (
     <>
@@ -126,8 +130,10 @@ function ResultLine({
           {level === "member" && record.variantName ? record.variantName : record.name}
         </span>
         <span className={styles.rowMeta}>
-          {meta.map((value, position) => (
-            <span key={`${value}-${position}`}>{value}</span>
+          {meta.map(({ value, isCode }, position) => (
+            <span key={`${value}-${position}`} className={isCode ? styles.rowCode : undefined}>
+              {value}
+            </span>
           ))}
         </span>
       </span>

@@ -177,6 +177,7 @@ export function ProductStickyStage({
             />
           ) : (
             <span className={styles.heroProductFallback} aria-hidden="true">
+              <PendingVisualIcon />
               <small>Vizuel u pripremi</small>
               <strong>{brandName}</strong>
               <span>{activeVariant.name}</span>
@@ -274,6 +275,16 @@ function ZoomIcon({ zoomed }: { zoomed: boolean }) {
       <path d="M10.4 10.4 14 14" />
       <path d="M4.8 7h4.4" />
       {zoomed ? null : <path d="M7 4.8v4.4" />}
+    </svg>
+  );
+}
+
+/** Mirna linijska oznaka za proizvod bez fotografije (pakovanje u obrisu). */
+function PendingVisualIcon() {
+  return (
+    <svg viewBox="0 0 40 40" aria-hidden="true" focusable="false">
+      <rect x="11" y="9" width="18" height="25" rx="2" />
+      <path d="M15 5h10v4H15zM11 16h18M11 27h18" />
     </svg>
   );
 }

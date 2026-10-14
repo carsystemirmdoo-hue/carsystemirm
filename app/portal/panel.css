@@ -3,8 +3,8 @@
  *
  * Prefiks `pn-`. Boje isključivo kroz --p-* tokene iz portal.css (hex osnova,
  * oklch samo uz @supports), pa:
- *  - tamna tema kupca radi kroz `.dark .portal-customer-area` (iste promenljive);
- *  - interni portal ostaje svetao (nema `.dark` pravila za `.portal-root`).
+ *  - boje su tokeni sistema A (`--ds-c-*`); tamna tema kupca prati temu sajta;
+ *  - interni portal ostaje svetao (svetli opseg tokena u portal.css).
  * Bez color-mix, oklch i :has() u osnovnim pravilima — stariji pregledači
  * (npr. Chrome 109 na Windows 7/8.1) dobijaju ispravan, čitljiv prikaz.
  * ====================================================================== */
@@ -12,26 +12,28 @@
 .portal-root,
 .portal-login-root {
   --pn-gutter: 16px;
-  --pn-focus: #2c5da8;
-  --pn-focus-ring: rgba(44, 93, 168, 0.28);
-  --pn-primary: #1f242c;
-  --pn-primary-hover: #343b46;
-  --pn-primary-ink: #ffffff;
-  --pn-danger: #a51d22;
-  --pn-danger-line: #c4252b;
-  --pn-link: #2c5da8;
-  --pn-info-ink: #1d4380;
-  --pn-info-bg: #e7eef9;
-  --pn-info-mark: #2c5da8;
-  --pn-warn-ink: #6e4705;
-  --pn-warn-bg: #fbefd9;
-  --pn-warn-mark: #b07c1c;
-  --pn-ok-ink: #1d6339;
-  --pn-ok-bg: #e2f2e8;
-  --pn-bad-ink: #8f1a1e;
-  --pn-bad-bg: #f9e3e3;
-  --pn-row-hover: #f6f7f9;
-  --pn-input-bg: #ffffff;
+  /* Sistem A: uloge čitaju zajedničke tokene, pa tamna tema kupca (i svetla
+     radna površina internog portala) dolaze iz opsega tokena u portal.css. */
+  --pn-focus: var(--ds-c-focus);
+  --pn-focus-ring: var(--ds-c-accent-soft);
+  --pn-primary: var(--ds-c-accent);
+  --pn-primary-hover: var(--ds-c-accent-hover);
+  --pn-primary-ink: var(--ds-c-on-accent);
+  --pn-danger: var(--ds-c-err);
+  --pn-danger-line: var(--ds-c-err);
+  --pn-link: var(--ds-c-text);
+  --pn-info-ink: var(--ds-c-info);
+  --pn-info-bg: var(--ds-c-info-bg);
+  --pn-info-mark: var(--ds-c-info);
+  --pn-warn-ink: var(--ds-c-warn);
+  --pn-warn-bg: var(--ds-c-warn-bg);
+  --pn-warn-mark: var(--ds-c-warn);
+  --pn-ok-ink: var(--ds-c-ok);
+  --pn-ok-bg: var(--ds-c-ok-bg);
+  --pn-bad-ink: var(--ds-c-err);
+  --pn-bad-bg: var(--ds-c-err-bg);
+  --pn-row-hover: var(--ds-c-surface-2);
+  --pn-input-bg: var(--ds-c-surface);
   --pn-sticky-top: 0px;
 }
 .portal-root { --pn-sticky-top: 64px; }
@@ -39,29 +41,7 @@
 @media (min-width: 640px) { .portal-root, .portal-login-root { --pn-gutter: 24px; } }
 @media (min-width: 1200px) { .portal-root, .portal-login-root { --pn-gutter: 40px; } }
 
-.dark .portal-customer-area {
-  --pn-focus: #8db4ef;
-  --pn-focus-ring: rgba(141, 180, 239, 0.32);
-  --pn-primary: #eceef1;
-  --pn-primary-hover: #ffffff;
-  --pn-primary-ink: #14171c;
-  --pn-danger: #f08a8d;
-  --pn-danger-line: #e04a4f;
-  --pn-link: #8db4ef;
-  --pn-info-ink: #bcd3f5;
-  --pn-info-bg: #1d2a3d;
-  --pn-info-mark: #8db4ef;
-  --pn-warn-ink: #f2cf86;
-  --pn-warn-bg: #3a2e15;
-  --pn-warn-mark: #e0a83c;
-  --pn-ok-ink: #8fd9ac;
-  --pn-ok-bg: #173324;
-  --pn-bad-ink: #f3a5a8;
-  --pn-bad-bg: #3a1c1e;
-  --pn-row-hover: #1d2229;
-  --pn-input-bg: #11141a;
-  color-scheme: dark;
-}
+.dark .portal-customer-area { color-scheme: dark; }
 
 /* ---- Širina: kupčev deo koristi širinu ekrana kao i interni portal ---- */
 .portal-customer-area .portal-main {
@@ -78,12 +58,12 @@
 .pn > * { min-width: 0; margin: 0; }
 .portal-main > .pn + * { margin-top: 16px; }
 .pn :is(h1, h2, h3, p) { margin: 0; }
-.pn a:not(.pn-btn) { color: var(--pn-link); text-decoration: underline; text-underline-offset: 2px; }
-.pn a:not(.pn-btn):hover { text-decoration-thickness: 2px; }
+.pn a:not(.pn-btn) { color: var(--pn-link); text-decoration: underline; text-decoration-color: var(--ds-c-line-strong); text-decoration-thickness: 1px; text-underline-offset: 3px; }
+.pn a:not(.pn-btn):hover { text-decoration-color: currentColor; text-decoration-thickness: 2px; }
 .pn .pn-plain-link { text-decoration: none; }
 .pn :is(a, button, input, select, textarea, summary, [tabindex]):focus-visible,
 .pn-dialog :is(a, button, input, select, textarea):focus-visible {
-  outline: 3px solid var(--pn-focus);
+  outline: 2px solid var(--pn-focus);
   outline-offset: 2px;
 }
 .pn [id], .pn-dialog [id] { scroll-margin-top: calc(var(--pn-sticky-top) + 16px); }
@@ -97,20 +77,20 @@
 .pn-back a { display: inline-flex; align-items: center; min-height: 32px; }
 .pn-head { display: flex; flex-wrap: wrap; align-items: flex-start; justify-content: space-between; gap: 12px 24px; }
 .pn-head > div:first-child { display: grid; gap: 4px; min-width: 0; flex: 1 1 420px; }
-.pn-title { font-size: 22px; line-height: 28px; font-weight: 650; letter-spacing: -0.01em; overflow-wrap: anywhere; }
+.pn-title { font-size: 22px; line-height: 28px; font-weight: 600; letter-spacing: -0.01em; overflow-wrap: anywhere; }
 .pn-title small { font-size: 15px; font-weight: 500; color: var(--p-muted); letter-spacing: 0; }
 .pn-lead { font-size: 14px; color: var(--p-muted); max-width: 80ch; }
 .pn-head-actions { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
 .pn-title-row { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; }
 
 /* ---- Površine ---- */
-.pn-card { background: var(--p-surface); border: 1px solid var(--p-line); border-radius: 6px; padding: 16px; display: grid; gap: 12px; min-width: 0; }
+.pn-card { background: var(--p-surface); border: 1px solid var(--p-line); border-radius: 2px; padding: 16px; display: grid; gap: 12px; min-width: 0; }
 .pn-card > * { min-width: 0; }
 .pn-card-flush { padding: 0; gap: 0; overflow: hidden; overflow: clip; }
 .pn-card-h { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 4px 12px; }
 .pn-card-flush > .pn-card-h { padding: 12px 16px; border-bottom: 1px solid var(--p-line); }
-.pn-card-h h2, .pn-h2 { font-size: 17px; line-height: 24px; font-weight: 650; }
-.pn-card-h h3, .pn-h3 { font-size: 15px; line-height: 22px; font-weight: 650; }
+.pn-card-h h2, .pn-h2 { font-size: 17px; line-height: 24px; font-weight: 600; }
+.pn-card-h h3, .pn-h3 { font-size: 15px; line-height: 22px; font-weight: 600; }
 .pn-card-foot { padding: 10px 16px; border-top: 1px solid var(--p-line); font-size: 13px; color: var(--p-muted); }
 
 /* Detalj: sadržaj + bočna kolona (zbir, radnje). Ispod 1100 px bočna kolona ide ispod. */
@@ -123,22 +103,29 @@
 /* Radnja na potezu ide pre stavki i na užim ekranima (red u DOM-u = red čitanja). */
 .pn-form-width { max-width: 720px; }
 
-/* ---- Dugmad ---- */
+/* ---- Dugmad (sistem A: M 44 / S 36, ugao 2 px, Plex Sans 600 15 px) ---- */
 .pn-btn {
   display: inline-flex; align-items: center; justify-content: center; gap: 8px;
-  min-height: 44px; padding: 0 16px; border-radius: 4px;
-  border: 1px solid var(--p-line-strong); background: var(--p-surface-raised); color: var(--p-ink);
-  font: inherit; font-size: 15px; font-weight: 550; line-height: 1.2; text-align: center; text-decoration: none;
+  min-height: 44px; padding: 0 16px; border-radius: 2px;
+  border: 1px solid var(--ds-c-text); background: transparent; color: var(--ds-c-text);
+  font: inherit; font-family: var(--font-body), var(--font-geist-sans), system-ui, sans-serif;
+  font-size: 15px; font-weight: 600; line-height: 1.2; text-align: center; text-decoration: none;
   cursor: pointer; white-space: nowrap;
 }
-.pn-btn:hover:not(:disabled):not([aria-disabled="true"]) { border-color: var(--p-muted); background: var(--p-surface-subtle); }
-.pn-btn[data-variant="primary"] { background: var(--pn-primary); border-color: var(--pn-primary); color: var(--pn-primary-ink); font-weight: 650; }
+.pn-btn:hover:not(:disabled):not([aria-disabled="true"]) { border-color: var(--ds-c-text); background: var(--ds-c-surface-2); }
+.pn-btn[data-variant="primary"] { background: var(--pn-primary); border-color: var(--pn-primary); color: var(--pn-primary-ink); }
 .pn-btn[data-variant="primary"]:hover:not(:disabled):not([aria-disabled="true"]) { background: var(--pn-primary-hover); border-color: var(--pn-primary-hover); }
+.pn-btn[data-variant="primary"]:active:not(:disabled):not([aria-disabled="true"]) { background: var(--ds-c-accent-press); border-color: var(--ds-c-accent-press); }
 .pn-btn[data-variant="danger"] { background: transparent; border-color: var(--pn-danger-line); color: var(--pn-danger); }
 .pn-btn[data-variant="danger"]:hover:not(:disabled):not([aria-disabled="true"]) { background: var(--pn-bad-bg); border-color: var(--pn-danger-line); }
-.pn-btn[data-variant="quiet"] { border-color: transparent; background: transparent; color: var(--pn-link); text-decoration: underline; text-underline-offset: 2px; padding-inline: 8px; }
+.pn-btn[data-variant="quiet"] { border-color: transparent; background: transparent; color: var(--ds-c-text); text-decoration: underline; text-decoration-color: var(--ds-c-line-strong); text-underline-offset: 3px; padding-inline: 8px; }
+.pn-btn[data-variant="quiet"]:hover:not(:disabled):not([aria-disabled="true"]) { border-color: transparent; background: transparent; text-decoration-color: currentColor; text-decoration-thickness: 2px; }
 .pn-btn[data-size="sm"] { min-height: 36px; padding: 0 12px; font-size: 14px; }
-.pn-btn:disabled, .pn-btn[aria-disabled="true"] { cursor: not-allowed; background: var(--p-surface-subtle); border-color: var(--p-line); color: var(--p-muted); }
+/* `.portal-root button { font: inherit }` (portal.css) je specifičnije od `.pn-btn`;
+   bez ovoga <button> gubi Plex Sans 600 15 px, a veza (<a>) ga zadržava. */
+:is(.portal-root, .portal-login-root) button.pn-btn { font-family: var(--font-body), var(--font-geist-sans), system-ui, sans-serif; font-size: 15px; font-weight: 600; line-height: 1.2; }
+:is(.portal-root, .portal-login-root) button.pn-btn[data-size="sm"] { font-size: 14px; }
+.pn-btn:disabled, .pn-btn[aria-disabled="true"] { cursor: not-allowed; background: var(--ds-c-surface-2); border-color: var(--ds-c-line); color: var(--ds-c-text-3); }
 .pn-btn[aria-busy="true"] { cursor: progress; }
 .pn-btn[aria-busy="true"]::before {
   content: ""; width: 14px; height: 14px; border-radius: 50%;
@@ -161,21 +148,21 @@
 
 /* ---- Polja ---- */
 .pn-field { display: grid; gap: 6px; min-width: 0; }
-.pn-field > label, .pn-label { font-size: 14px; font-weight: 550; color: var(--p-ink); }
+.pn-field > label, .pn-label { font-size: 14px; font-weight: 600; color: var(--p-ink); }
 .pn-field > label small, .pn-label small { font-weight: 400; color: var(--p-muted); font-size: 13px; }
 .pn :is(.pn-input, .pn-field input:not([type="checkbox"]):not([type="radio"]):not([type="hidden"]), .pn-field select, .pn-field textarea),
 .pn-dialog :is(.pn-input, .pn-field textarea, .pn-field input:not([type="hidden"])) {
   width: 100%; min-height: 44px; box-sizing: border-box;
-  border: 1px solid var(--p-line-strong); border-radius: 4px;
+  border: 1px solid var(--ds-c-field); border-radius: 2px;
   background: var(--pn-input-bg); color: var(--p-ink);
   padding: 9px 12px; font: inherit; font-size: 15px; line-height: 1.4;
 }
 .pn-field textarea, .pn-dialog textarea { min-height: 76px; resize: vertical; }
-.pn :is(input, select, textarea):focus-visible, .pn-dialog :is(input, textarea):focus-visible { border-color: var(--pn-focus); outline: 3px solid var(--pn-focus-ring); outline-offset: 0; }
+.pn :is(input, select, textarea):focus-visible, .pn-dialog :is(input, textarea):focus-visible { border-color: var(--pn-focus); outline: 2px solid var(--pn-focus); outline-offset: 2px; }
 .pn :is(input, select, textarea)[aria-invalid="true"] { border-color: var(--pn-danger-line); }
 .pn-help { font-size: 13px; color: var(--p-muted); }
-.pn-error { display: flex; gap: 6px; align-items: flex-start; font-size: 13px; color: var(--pn-danger); font-weight: 550; }
-.pn-error::before { content: "!"; flex: none; display: inline-grid; place-items: center; width: 16px; height: 16px; margin-top: 1px; border-radius: 50%; background: var(--pn-danger); color: var(--p-surface); font-size: 11px; font-weight: 800; }
+.pn-error { display: flex; gap: 6px; align-items: flex-start; font-size: 13px; color: var(--pn-danger); font-weight: 500; }
+.pn-error::before { content: "!"; flex: none; display: inline-grid; place-items: center; width: 16px; height: 16px; margin-top: 1px; border-radius: 50%; background: var(--pn-danger); color: var(--p-surface); font-size: 12px; font-weight: 700; }
 .pn-fields { display: grid; gap: 14px; }
 @media (min-width: 900px) { .pn-fields-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); } .pn-fields-2 > .pn-span { grid-column: 1 / -1; } }
 .pn-qty { width: 96px !important; text-align: right; font-variant-numeric: tabular-nums; }
@@ -184,7 +171,7 @@
 /* ---- Status ---- */
 .pn-status {
   display: inline-flex; align-items: center; gap: 7px; width: fit-content; max-width: 100%;
-  padding: 3px 10px; border-radius: 3px; font-size: 13px; line-height: 18px; font-weight: 650;
+  padding: 3px 10px; border-radius: 2px; font-size: 13px; line-height: 18px; font-weight: 600;
   background: var(--p-surface-subtle); color: var(--p-ink); border: 1px solid transparent;
 }
 .pn-status::before { content: ""; flex: none; width: 8px; height: 8px; background: currentColor; }
@@ -206,13 +193,13 @@
 /* ---- Obaveštenja ---- */
 .pn-note {
   display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 4px 12px; align-items: start;
-  padding: 12px 16px; border-radius: 4px; font-size: 14px; line-height: 1.5;
+  padding: 12px 16px; border-radius: 2px; font-size: 14px; line-height: 1.5;
   background: var(--p-surface-subtle); color: var(--p-ink); border: 1px solid var(--p-line);
 }
 .pn-note > svg { width: 18px; height: 18px; margin-top: 1px; }
 .pn-note > :not(svg) { grid-column: 2; }
 .pn-note > :only-child { grid-column: 1 / -1; }
-.pn-note strong { font-weight: 650; }
+.pn-note strong { font-weight: 600; }
 .pn-note[data-tone="info"] { background: var(--pn-info-bg); color: var(--pn-info-ink); border-color: transparent; }
 .pn-note[data-tone="warning"] { background: var(--pn-warn-bg); color: var(--pn-warn-ink); border-color: transparent; }
 .pn-note[data-tone="success"] { background: var(--pn-ok-bg); color: var(--pn-ok-ink); border-color: transparent; }
@@ -224,10 +211,10 @@
 .pn-note a { color: inherit !important; font-weight: 600; }
 
 /* Akcija na potezu: istaknut blok, bez okvira oko cele strane. */
-.pn-turn-card { display: grid; gap: 10px; padding: 14px 16px; border-radius: 6px; background: var(--p-surface); border: 1px solid var(--p-line); box-shadow: inset 4px 0 0 var(--pn-warn-mark); }
+.pn-turn-card { display: grid; gap: 10px; padding: 14px 16px; border-radius: 2px; background: var(--p-surface); border: 1px solid var(--p-line); box-shadow: inset 4px 0 0 var(--pn-warn-mark); }
 .pn-turn-card[data-turn="office"] { box-shadow: inset 4px 0 0 var(--pn-info-mark); }
 .pn-turn-card[data-turn="none"] { box-shadow: none; }
-.pn-turn-card h2 { font-size: 16px; line-height: 22px; font-weight: 650; }
+.pn-turn-card h2 { font-size: 16px; line-height: 22px; font-weight: 600; }
 
 /* ---- Činjenice (kupac, plaćanje, kontakt) ---- */
 .pn-facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px 24px; margin: 0; }
@@ -240,9 +227,13 @@
 /* ---- Tabele ---- */
 .pn-table-wrap { min-width: 0; }
 .pn-table { width: 100%; border-collapse: collapse; font-size: 14px; line-height: 1.45; }
+/* Sistem A: u nalogu kupca ćelije 15 px (telefon 14 px), brojevi tabularni. */
+.portal-customer-area .pn-table { font-size: 15px; }
+@media (max-width: 719px) { .portal-customer-area .pn-table { font-size: 14px; } }
+.pn-table td { font-variant-numeric: tabular-nums; }
 .pn-table th, .pn-table td { padding: 10px 10px; text-align: left; vertical-align: top; border-bottom: 1px solid var(--p-line); }
 .pn-table thead th {
-  font-size: 13px; font-weight: 650; color: var(--p-muted); background: var(--p-surface-subtle);
+  font-size: 13px; font-weight: 600; color: var(--p-muted); background: var(--p-surface-subtle);
   border-bottom: 1px solid var(--p-line-strong); vertical-align: bottom; line-height: 1.3;
 }
 .pn-table tbody tr:last-child > * { border-bottom: 0; }
@@ -253,17 +244,17 @@
 .pn-table td.pn-r, .pn-table .pn-num { white-space: nowrap; font-variant-numeric: tabular-nums; }
 .pn-table .pn-c-code { white-space: nowrap; font-variant-numeric: tabular-nums; }
 .pn-table .pn-c-name { min-width: 220px; }
-.pn-table .pn-strong { font-weight: 650; }
+.pn-table .pn-strong { font-weight: 600; }
 .pn-table .pn-sub { display: block; font-size: 13px; color: var(--p-muted); font-weight: 400; white-space: normal; }
 .pn-table tbody tr[data-tone="warning"] > * { background: var(--pn-warn-bg); }
 .pn-table tbody tr[data-tone="removed"] > * { color: var(--p-muted); background: var(--p-surface-subtle); }
 .pn-table tbody tr[data-tone="removed"] .pn-c-name, .pn-table tbody tr[data-tone="removed"] .pn-c-code { text-decoration: line-through; }
 .pn-table tbody tr[data-tone="added"] > * { background: var(--pn-ok-bg); }
-.pn-table a.pn-row-link { color: inherit; text-decoration: none; font-weight: 650; }
+.pn-table a.pn-row-link { color: inherit; text-decoration: none; font-weight: 600; }
 .pn-table a.pn-row-link:hover { text-decoration: underline; }
 .pn-table tbody tr[data-href]:hover > * { background: var(--pn-row-hover); }
-.pn-onreq { display: inline-flex; align-items: center; gap: 6px; padding: 1px 8px; border: 1px dashed var(--p-line-strong); border-radius: 3px; font-size: 13px; font-weight: 650; white-space: nowrap; }
-.pn-tag { display: inline-block; margin-top: 4px; padding: 0 6px; border-radius: 3px; font-size: 12px; font-weight: 650; line-height: 18px; }
+.pn-onreq { display: inline-flex; align-items: center; gap: 6px; padding: 1px 8px; border: 1px dashed var(--p-line-strong); border-radius: 2px; font-size: 13px; font-weight: 600; white-space: nowrap; }
+.pn-tag { display: inline-block; margin-top: 4px; padding: 0 6px; border-radius: 2px; font-size: 12px; font-weight: 600; line-height: 18px; }
 .pn-tag[data-tone="warning"] { background: var(--pn-warn-bg); color: var(--pn-warn-ink); }
 .pn-tag[data-tone="danger"] { background: var(--pn-bad-bg); color: var(--pn-bad-ink); }
 .pn-tag[data-tone="success"] { background: var(--pn-ok-bg); color: var(--pn-ok-ink); }
@@ -302,7 +293,7 @@
   .pn-table-cards td.pn-c-name .pn-strong { font-size: 15px; }
   .pn-table-cards td.pn-c-code { display: block; text-align: left; color: var(--p-muted); font-size: 13px; }
   .pn-table-cards td.pn-c-code::before { content: none; }
-  .pn-table-cards td.pn-c-total { border-top: 1px solid var(--p-line); margin-top: 4px; padding-top: 6px; font-weight: 650; }
+  .pn-table-cards td.pn-c-total { border-top: 1px solid var(--p-line); margin-top: 4px; padding-top: 6px; font-weight: 600; }
   .pn-table-cards td.pn-c-actions { display: flex; justify-content: flex-end; }
   .pn-table-cards td .pn-sub { text-align: right; }
   .pn-table-cards tbody tr[data-tone] { border-radius: 0; }
@@ -313,30 +304,30 @@
 .pn-totals { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 6px 0; margin: 0; font-size: 14px; align-items: baseline; }
 .pn-totals dt { color: var(--p-muted); }
 .pn-totals dd { margin: 0; padding-left: 16px; text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
-.pn-totals .pn-grand { padding-top: 8px; border-top: 1px solid var(--p-line); font-weight: 650; color: var(--p-ink); }
+.pn-totals .pn-grand { padding-top: 8px; border-top: 1px solid var(--p-line); font-weight: 600; color: var(--p-ink); }
 .pn-totals dd.pn-grand { font-size: 18px; line-height: 1.3; }
 .pn-totals .pn-grand { align-self: stretch; }
 .pn-totals .pn-partial dt, .pn-totals .pn-partial dd { color: var(--p-ink); }
 .pn-totals-note { font-size: 13px; color: var(--p-muted); }
-.pn-unknown { font-size: 17px; font-weight: 650; }
+.pn-unknown { font-size: 17px; font-weight: 600; }
 
 /* ---- Opcije plaćanja (kupac) ---- */
 .pn-options { display: grid; gap: 10px; margin: 0; padding: 0; border: 0; min-width: 0; }
-.pn-options legend { font-size: 15px; font-weight: 650; padding: 0; margin-bottom: 8px; }
+.pn-options legend { font-size: 15px; font-weight: 600; padding: 0; margin-bottom: 8px; }
 .pn-option {
   display: grid; grid-template-columns: 20px minmax(0, 1fr); gap: 4px 10px; align-items: start;
-  padding: 12px 14px; border: 1px solid var(--p-line-strong); border-radius: 4px;
+  padding: 12px 14px; border: 1px solid var(--p-line-strong); border-radius: 2px;
   color: var(--p-ink) !important; text-decoration: none !important; background: var(--p-surface-raised);
 }
 .pn-option:hover { border-color: var(--p-muted); }
 .pn-option-mark { width: 18px; height: 18px; margin-top: 2px; border-radius: 50%; border: 2px solid var(--p-muted); display: grid; place-items: center; }
-.pn-option[aria-current="true"] { border: 2px solid var(--pn-focus); padding: 11px 13px; background: var(--pn-info-bg); }
-.pn-option[aria-current="true"] .pn-option-mark { border-color: var(--pn-focus); }
-.pn-option[aria-current="true"] .pn-option-mark::after { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--pn-focus); }
+.pn-option[aria-current="true"] { border: 2px solid var(--ds-c-accent); padding: 11px 13px; background: var(--ds-c-accent-soft); }
+.pn-option[aria-current="true"] .pn-option-mark { border-color: var(--ds-c-accent); }
+.pn-option[aria-current="true"] .pn-option-mark::after { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--ds-c-accent); }
 .pn-option-body { display: grid; gap: 2px; min-width: 0; }
 .pn-option-top { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 4px 10px; }
-.pn-option-label { font-weight: 650; }
-.pn-option-state { font-size: 12px; font-weight: 700; letter-spacing: 0.04em; color: var(--pn-focus); }
+.pn-option-label { font-weight: 600; }
+.pn-option-state { font-family: var(--font-technical), var(--font-geist-mono), monospace; font-size: 12px; font-weight: 500; letter-spacing: 0.08em; color: var(--ds-c-accent-text); }
 .pn-option-price { font-size: 15px; font-variant-numeric: tabular-nums; }
 .pn-option-note { font-size: 13px; color: var(--p-muted); }
 
@@ -349,20 +340,20 @@
 @media (max-width: 420px) { .pn-history li { grid-template-columns: minmax(0, 1fr); gap: 0; } }
 
 .pn-versions { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; font-size: 14px; }
-.pn-versions li { display: flex; flex-wrap: wrap; gap: 4px 10px; align-items: center; justify-content: space-between; padding: 8px 10px; border: 1px solid var(--p-line); border-radius: 4px; }
+.pn-versions li { display: flex; flex-wrap: wrap; gap: 4px 10px; align-items: center; justify-content: space-between; padding: 8px 10px; border: 1px solid var(--p-line); border-radius: 2px; }
 .pn-versions li[aria-current="true"] { border-color: var(--p-line-strong); background: var(--p-surface-subtle); }
-.pn-versions .pn-vname { font-weight: 650; font-variant-numeric: tabular-nums; }
+.pn-versions .pn-vname { font-weight: 600; font-variant-numeric: tabular-nums; }
 
 /* ---- Dijalog ---- */
 .pn-dialog {
   width: min(520px, calc(100vw - 32px)); max-height: calc(100vh - 32px); overflow: auto;
-  padding: 20px 22px; border: 1px solid var(--p-line-strong); border-radius: 6px;
+  padding: 20px 22px; border: 1px solid var(--p-line-strong); border-radius: var(--ds-overlay-radius);
   background: var(--p-surface); color: var(--p-ink); font-size: 15px; line-height: 1.5;
   box-shadow: 0 18px 50px rgba(0, 0, 0, 0.28);
 }
 .pn-dialog::backdrop { background: rgba(10, 13, 18, 0.5); }
 .pn-dialog form { display: grid; gap: 14px; margin: 0; }
-.pn-dialog h2 { margin: 0; font-size: 18px; line-height: 24px; font-weight: 650; }
+.pn-dialog h2 { margin: 0; font-size: 18px; line-height: 24px; font-weight: 600; }
 .pn-dialog p { margin: 0; }
 .dark .pn-dialog { color-scheme: dark; }
 
@@ -370,7 +361,7 @@
 .pn-live {
   position: sticky; bottom: 12px; z-index: 30;
   display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px 16px;
-  margin: 12px 0 0; padding: 12px 16px; border-radius: 6px;
+  margin: 12px 0 0; padding: 12px 16px; border-radius: var(--ds-overlay-radius);
   background: var(--pn-warn-bg); color: var(--pn-warn-ink); border: 1px solid var(--pn-warn-mark);
   font-size: 14px; box-shadow: 0 6px 18px rgba(0, 0, 0, 0.16);
 }
@@ -379,29 +370,42 @@
 /* ---- Kupčev okvir: firma, odjava i navigacija ---- */
 .pn-account { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 16px; padding-bottom: 4px; }
 .pn-account-name { display: grid; gap: 0; min-width: 0; }
-.pn-account-name strong { font-size: 15px; font-weight: 650; overflow-wrap: anywhere; }
+.pn-account-name strong { font-size: 15px; font-weight: 600; overflow-wrap: anywhere; }
 .pn-account-name span { font-size: 13px; color: var(--p-muted); overflow-wrap: anywhere; }
 .pn-account form { margin: 0; }
 .pn-tabs { position: relative; border-bottom: 1px solid var(--p-line); }
 .pn-tabs-scroll { display: flex; gap: 2px; overflow-x: auto; scrollbar-width: thin; }
 .pn-tabs a {
   display: inline-flex; align-items: center; gap: 6px; min-height: 44px; padding: 0 12px; flex: none;
-  color: var(--p-muted); font-size: 14px; font-weight: 550; text-decoration: none; white-space: nowrap;
+  color: var(--p-muted); font-size: 14px; font-weight: 500; text-decoration: none; white-space: nowrap;
   border-bottom: 3px solid transparent; margin-bottom: -1px;
 }
 .pn-tabs a:hover { color: var(--p-ink); }
-.pn-tabs a[aria-current="page"] { color: var(--p-ink); font-weight: 650; border-bottom-color: var(--p-red); }
-.pn-tabs a:focus-visible { outline: 3px solid var(--pn-focus); outline-offset: -3px; }
-.pn-count { display: inline-block; min-width: 20px; padding: 0 6px; border-radius: 3px; font-size: 12px; font-weight: 700; line-height: 18px; text-align: center; background: var(--pn-warn-bg); color: var(--pn-warn-ink); }
+.pn-tabs a[aria-current="page"] { color: var(--p-ink); font-weight: 600; border-bottom-color: var(--p-red); }
+.pn-tabs a:focus-visible { outline: 2px solid var(--pn-focus); outline-offset: -2px; }
+.pn-count { display: inline-block; min-width: 20px; padding: 0 6px; border-radius: 2px; font-size: 12px; font-weight: 700; line-height: 18px; text-align: center; background: var(--pn-warn-bg); color: var(--pn-warn-ink); }
 .pn-count[data-tone="neutral"] { background: var(--p-surface-subtle); color: var(--p-ink); }
-/* Senka na ivici kad meni ima još stavki (telefon) */
-.pn-tabs[data-overflow="end"]::after, .pn-tabs[data-overflow="both"]::after { content: ""; position: absolute; right: 0; top: 0; bottom: 1px; width: 28px; pointer-events: none; background: linear-gradient(to left, var(--p-bg), rgba(255, 255, 255, 0)); }
-.dark .portal-customer-area .pn-tabs[data-overflow="end"]::after, .dark .portal-customer-area .pn-tabs[data-overflow="both"]::after { background: linear-gradient(to left, var(--p-bg), rgba(0, 0, 0, 0)); }
+/* Meni ima još stavki (telefon): preliv na ivici + strelica, sa obe strane
+   prema smeru u kome ima još. Strelica je znak, ne kontrola (meni se pomera
+   prstom/točkićem), pa ne hvata klik. */
+.pn-tabs::before, .pn-tabs::after {
+  content: none; position: absolute; top: 0; bottom: 1px; z-index: 1; width: 52px; pointer-events: none;
+  display: flex; align-items: center; color: var(--ds-c-text); font-size: 22px; line-height: 1; font-weight: 400;
+}
+.pn-tabs[data-overflow="end"]::after, .pn-tabs[data-overflow="both"]::after {
+  content: "\203A"; right: 0; justify-content: flex-end; padding-right: 2px;
+  background: linear-gradient(to left, var(--p-bg) 55%, transparent);
+}
+.pn-tabs[data-overflow="start"]::before, .pn-tabs[data-overflow="both"]::before {
+  content: "\2039"; left: 0; justify-content: flex-start; padding-left: 2px;
+  background: linear-gradient(to right, var(--p-bg) 55%, transparent);
+}
+.pn-tabs-scroll { scroll-padding-inline: 48px; }
 
 /* ---- Sklopiv blok (izmenjen predlog) ---- */
 details > summary.pn-card-h { list-style: none; }
 details > summary.pn-card-h::-webkit-details-marker { display: none; }
-details > summary.pn-card-h:focus-visible { outline: 3px solid var(--pn-focus); outline-offset: -3px; }
+details > summary.pn-card-h:focus-visible { outline: 2px solid var(--pn-focus); outline-offset: -2px; }
 details:not([open]) > summary.pn-card-h { border-bottom: 0; }
 .pn-disclose-open { display: none; }
 details[open] > summary .pn-disclose-open { display: inline; }
@@ -418,17 +422,17 @@ details[open] > summary .pn-disclose-closed { display: none; }
 .pn-chips { display: flex; flex-wrap: wrap; gap: 6px; }
 .pn-chip {
   display: inline-flex; align-items: center; gap: 6px; min-height: 40px; padding: 0 12px;
-  border: 1px solid var(--p-line-strong); border-radius: 4px; background: var(--p-surface-raised);
-  color: var(--p-ink) !important; text-decoration: none !important; font-size: 14px; font-weight: 550; white-space: nowrap;
+  border: 1px solid var(--ds-c-line-strong); border-radius: 2px; background: var(--ds-c-surface);
+  color: var(--p-ink) !important; text-decoration: none !important; font-size: 14px; font-weight: 500; white-space: nowrap;
 }
-.pn-chip[aria-current="true"] { background: var(--pn-primary); border-color: var(--pn-primary); color: var(--pn-primary-ink) !important; font-weight: 650; }
+.pn-chip[aria-current="true"] { background: var(--ds-c-accent-soft); border: 2px solid var(--ds-c-accent); padding-inline: 11px; color: var(--ds-c-text) !important; font-weight: 600; }
 .pn-chip .pn-num { font-size: 13px; opacity: 0.85; }
 
 /* ---- Strane liste ---- */
 .pn-pages { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 10px 16px; border-top: 1px solid var(--p-line); font-size: 14px; }
 
 /* ---- Prijava i aktivacija (kupac) ---- */
-.portal-login-root .pn-field input { width: 100%; min-height: 44px; border: 1px solid var(--p-line-strong); border-radius: 4px; padding: 9px 12px; font: inherit; font-size: 15px; background: #fff; color: var(--p-ink); }
+.portal-login-root .pn-field input { width: 100%; min-height: 48px; border: 1px solid var(--ds-c-field); border-radius: 2px; padding: 9px 12px; font: inherit; font-size: 16px; background: var(--ds-c-surface); color: var(--p-ink); }
 
 /* ---- Štampa kancelarijskih ekrana: bez navigacije i dugmadi ---- */
 @media print {
@@ -440,9 +444,11 @@ details[open] > summary .pn-disclose-closed { display: none; }
 
 /* ---- Prijava, aktivacija i lozinka kupca ---- */
 .pn-auth { min-height: calc(100vh - 64px); display: grid; align-content: start; justify-items: center; gap: 16px; padding: clamp(24px, 6vh, 72px) 16px 48px; }
-.pn-auth-card { width: min(460px, 100%); padding: 24px; background: var(--p-surface); border: 1px solid var(--p-line); border-radius: 6px; gap: 18px; }
+.pn-auth-card { width: min(460px, 100%); padding: 24px; background: var(--p-surface); border: 1px solid var(--p-line); border-radius: 2px; gap: 18px; }
 .pn-auth-aside { width: min(460px, 100%); font-size: 14px; color: var(--p-muted); gap: 6px; }
 .pn-auth form { display: grid; gap: 16px; }
+/* Jedina radnja obrasca prijave: dugme L (52) pune širine. */
+.pn-auth form > .pn-btn[data-variant="primary"][type="submit"] { min-height: 52px; }
 .pn-check { display: grid; grid-template-columns: 22px minmax(0, 1fr); gap: 10px; align-items: start; font-size: 14px; cursor: pointer; }
-.pn-check input { width: 20px; height: 20px; margin: 1px 0 0; accent-color: var(--pn-focus); }
+.pn-check input { width: 20px; height: 20px; margin: 1px 0 0; accent-color: var(--ds-c-accent); }
 .pn-check small { display: block; color: var(--p-muted); font-size: 13px; }

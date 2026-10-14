@@ -106,17 +106,20 @@ export function CarsystemProducts({
         </p>
         <Link className={styles.primaryButton} href={carsystemCatalogHref()}>
           Pogledajte sve Carsystem proizvode
-          <span aria-hidden="true">↗</span>
+          <span aria-hidden="true">→</span>
         </Link>
       </div>
     </section>
   );
 }
 
-function ProductCard({
+export function ProductCard({
+  eyebrow,
   index,
   product,
 }: {
+  /** Oznaka iznad naziva; podrazumevano naziv programa. */
+  eyebrow?: string;
   index: string;
   product: CarsystemProduct;
 }) {
@@ -151,12 +154,12 @@ function ProductCard({
         </span>
 
         <span className={styles.productCardCopy}>
-          <span>{programLabel(product.programSlug)}</span>
+          <span>{eyebrow ?? programLabel(product.programSlug)}</span>
           <h3>{product.name}</h3>
           <p>{product.shortDescription}</p>
           <strong>
             Otvorite proizvod
-            <i aria-hidden="true">↗</i>
+            <i aria-hidden="true">→</i>
           </strong>
         </span>
       </Link>

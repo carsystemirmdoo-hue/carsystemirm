@@ -1,21 +1,27 @@
 .baslacPage {
-  --baslac-bg: #f2f4f2;
-  --baslac-surface: #fafbf9;
-  --baslac-surface-strong: #ffffff;
-  --baslac-ink: #18232a;
-  --baslac-muted: #56626a; /* 4.47:1 na svetlim karticama navigacije → ≥ 4.5:1 */
-  --baslac-border: rgb(24 35 42 / 0.13);
-  /* Ista baslac plava, za nijansu dublja: beli tekst na ispuni je sa #3f7ea6 bio 4.42:1. */
-  --baslac-accent: #3a769d;
+  /* Sistem A: neutralne boje su zajednički tokeni; plava ostaje identitet. */
+  --baslac-bg: var(--ds-c-bg);
+  --baslac-surface: var(--ds-c-surface);
+  --baslac-surface-strong: var(--ds-c-surface);
+  --baslac-ink: var(--ds-c-text);
+  --baslac-muted: var(--ds-c-text-2);
+  --baslac-border: var(--ds-c-line);
+  /* Baslac plava: identitet #21A0D2 samo za grafiku i logo; ispuna sa belim
+     tekstom i plavi tekst su #1A78A0 (svetla) / #4CB8E6 (tekst, tamna). */
+  --baslac-identity: #21a0d2;
+  --baslac-accent: #1a78a0;
+  --baslac-accent-hover: color-mix(in oklab, var(--baslac-accent) 86%, #000);
+  --baslac-accent-text: #1a78a0;
+  --baslac-accent-text-on-dark: #4cb8e6;
   --baslac-accent-ink: #ffffff;
-  --baslac-cyan: #cbe9e8;
+  --baslac-cyan: color-mix(in oklab, var(--baslac-identity) 16%, var(--ds-c-surface));
   --baslac-process-bg: #e9eeed;
   --baslac-process-ink: #17242b;
   --baslac-process-muted: #5a676a;
   --baslac-process-border: rgb(23 36 43 / 0.14);
-  --brand-nav-surface: rgb(250 251 249 / 0.94);
-  --brand-nav-border: rgb(24 35 42 / 0.11);
-  --brand-nav-ink: #18232a;
+  --brand-nav-surface: color-mix(in oklab, var(--ds-c-surface) 94%, transparent);
+  --brand-nav-border: var(--ds-c-line);
+  --brand-nav-ink: var(--ds-c-text);
   --brand-nav-accent: var(--baslac-accent);
   --brand-section-header-offset: 0px;
   --brand-section-nav-height: 3.75rem;
@@ -47,7 +53,7 @@
   --baslac-campaign-muted: rgb(233 243 246 / 0.74);
   --baslac-campaign-surface: #0b1418;
   --baslac-campaign-surface-deep: #060d10;
-  --baslac-campaign-cyan: #29a3dc;
+  --baslac-campaign-cyan: var(--baslac-identity);
   --baslac-campaign-gutter: clamp(1rem, 4vw, 4rem);
   /* Stabilna visina: identicna za oba slajda, bez layout shift-a. */
   --baslac-campaign-height: 44rem;
@@ -159,9 +165,9 @@
   margin: 0;
   color: var(--baslac-campaign-ink);
   font-family: var(--font-technical), monospace;
-  font-size: 0.7rem;
+  font-size: var(--ds-font-label);
   font-weight: 700;
-  letter-spacing: 0.16em;
+  letter-spacing: var(--ds-tracking-label);
   text-transform: uppercase;
 }
 
@@ -179,7 +185,7 @@
   font-family: var(--font-display), var(--font-geist-sans), system-ui, sans-serif;
   font-size: clamp(2.4rem, 3.7vw, 4.15rem);
   font-weight: 800;
-  letter-spacing: -0.04em;
+  letter-spacing: -0.02em;
   line-height: 1.02;
 }
 
@@ -199,15 +205,15 @@
   margin-top: clamp(1.5rem, 2.6vw, 2.3rem);
 }
 
+/* Primarno dugme u kampanji je ista Baslac ispuna (#1A78A0) sa belim tekstom. */
 .campaignActions .primaryButton {
-  background: var(--baslac-campaign-cyan);
-  color: #06171f;
+  background: var(--baslac-accent);
+  color: var(--baslac-accent-ink);
 }
 
-.campaignActions .primaryButton:hover,
-.campaignActions .primaryButton:focus-visible {
-  background: #4fbdef;
-  color: #06171f;
+.campaignActions .primaryButton:hover {
+  background: var(--baslac-accent-hover);
+  color: var(--baslac-accent-ink);
 }
 
 /* --- Vizuelni slojevi -------------------------------------------------- */
@@ -520,7 +526,7 @@
   background: transparent;
   color: rgb(244 248 249 / 0.58);
   font-family: var(--font-technical), monospace;
-  font-size: 0.6rem;
+  font-size: var(--ds-font-label);
   text-align: left;
   transition: color 180ms ease;
 }
@@ -537,15 +543,15 @@
 }
 
 .campaignPaginationLabel strong {
-  font-size: 0.68rem;
+  font-size: var(--ds-font-label);
   font-weight: 800;
-  letter-spacing: 0.08em;
+  letter-spacing: var(--ds-tracking-label);
 }
 
 .campaignPaginationLabel small {
   overflow: hidden;
-  font-size: 0.56rem;
-  letter-spacing: 0.08em;
+  font-size: var(--ds-font-label);
+  letter-spacing: var(--ds-tracking-label);
   text-overflow: ellipsis;
   white-space: nowrap;
 }
@@ -587,8 +593,8 @@
   margin-inline: auto;
   color: #9aa6a9; /* breadcrumb stoji na tamnom heru u obe teme (bilo 3.4:1 u svetloj) */
   font-family: var(--font-technical), monospace;
-  font-size: 0.7rem;
-  letter-spacing: 0.06em;
+  font-size: var(--ds-font-label);
+  letter-spacing: var(--ds-tracking-label);
   text-transform: uppercase;
 }
 
@@ -638,9 +644,8 @@
   color: var(--baslac-accent-ink);
 }
 
-.primaryButton:hover,
-.primaryButton:focus-visible {
-  background: #366e92;
+.primaryButton:hover {
+  background: var(--baslac-accent-hover);
 }
 
 .secondaryButton,
@@ -664,9 +669,9 @@
   margin: 0;
   overflow: hidden;
   aspect-ratio: var(--baslac-media-ratio);
-  border: 1px solid rgb(24 35 42 / 0.13);
-  background: #dde3e0;
-  color: #4f5c60;
+  border: 1px solid var(--ds-c-line);
+  background: var(--ds-c-surface-2);
+  color: var(--ds-c-text-2);
 }
 
 .mediaSlot picture,
@@ -688,8 +693,8 @@
   background: rgb(16 29 35 / 0.78);
   color: #f5f8f5;
   font-family: var(--font-technical), monospace;
-  font-size: 0.58rem;
-  letter-spacing: 0.06em;
+  font-size: var(--ds-font-label);
+  letter-spacing: var(--ds-tracking-label);
   text-transform: uppercase;
 }
 
@@ -701,12 +706,7 @@
   justify-items: center;
   gap: 0.7rem;
   padding: 1.25rem;
-  background:
-    repeating-linear-gradient(
-      135deg,
-      #dfe5e2 0 10px,
-      #e7ece9 10px 20px
-    );
+  background: var(--ds-c-surface-2);
   text-align: center;
 }
 
@@ -715,18 +715,18 @@
   border: 1px solid rgb(48 61 66 / 0.28);
   color: #303d42;
   font-family: var(--font-display), sans-serif;
-  font-size: 0.72rem;
+  font-size: var(--ds-font-label);
   font-weight: 700;
-  letter-spacing: 0.02em;
+  letter-spacing: var(--ds-tracking-label);
 }
 
 .mediaPlaceholder strong {
   max-width: 20rem;
   color: #566366;
   font-family: var(--font-technical), monospace;
-  font-size: 0.68rem;
+  font-size: var(--ds-font-label);
   font-weight: 500;
-  letter-spacing: 0.04em;
+  letter-spacing: var(--ds-tracking-label);
   text-transform: uppercase;
 }
 
@@ -740,9 +740,9 @@
   margin: 0 0 1rem;
   color: #56626a; /* 4.3:1 na svetlim sekcijama → ≥ 4.5:1 */
   font-family: var(--font-technical), monospace;
-  font-size: 0.66rem;
+  font-size: var(--ds-font-label);
   font-weight: 600;
-  letter-spacing: 0.14em;
+  letter-spacing: var(--ds-tracking-label);
   text-transform: uppercase;
 }
 
@@ -764,9 +764,9 @@
   margin: 0;
   font-family: var(--font-display), sans-serif;
   font-size: clamp(2.45rem, 4.65vw, 5rem);
-  font-weight: 650;
-  letter-spacing: -0.055em;
-  line-height: 0.98;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1;
   text-wrap: balance;
 }
 
@@ -915,8 +915,8 @@
   margin: 0 0 0.6rem;
   color: var(--baslac-process-muted);
   font-family: var(--font-technical), monospace;
-  font-size: 0.62rem;
-  letter-spacing: 0.11em;
+  font-size: var(--ds-font-label);
+  letter-spacing: var(--ds-tracking-label);
   text-transform: uppercase;
 }
 
@@ -924,7 +924,7 @@
   margin: 0;
   font-family: var(--font-display), sans-serif;
   font-size: clamp(1.7rem, 3vw, 2.65rem);
-  letter-spacing: -0.035em;
+  letter-spacing: -0.02em;
   line-height: 1;
 }
 
@@ -951,14 +951,14 @@
   align-items: center;
   gap: 0.45rem;
   border-top: 1px solid var(--baslac-process-border);
-  font-size: 0.73rem;
+  font-size: var(--ds-font-label);
   line-height: 1.35;
 }
 
 .repairRhythmDetail li span {
   color: var(--baslac-process-muted);
   font-family: var(--font-technical), monospace;
-  font-size: 0.58rem;
+  font-size: var(--ds-font-label);
 }
 
 .repairRhythmProducts {
@@ -979,7 +979,7 @@
   padding: 0.4rem 0.55rem;
   border: 1px solid currentColor;
   font-family: var(--font-technical), monospace;
-  font-size: 0.6rem;
+  font-size: var(--ds-font-label);
 }
 
 .repairRhythmDetail > a {
@@ -1023,9 +1023,9 @@
   color: var(--baslac-accent-text, var(--baslac-accent));
   font-family: var(--font-display), sans-serif;
   font-size: clamp(3.5rem, 6vw, 6.5rem);
-  font-weight: 750;
-  letter-spacing: -0.08em;
-  line-height: 0.85;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1;
 }
 
 .lineCopy {
@@ -1037,8 +1037,8 @@
   margin: 0 0 0.6rem;
   color: var(--baslac-muted);
   font-family: var(--font-technical), monospace;
-  font-size: 0.6rem;
-  letter-spacing: 0.08em;
+  font-size: var(--ds-font-label);
+  letter-spacing: var(--ds-tracking-label);
   text-transform: uppercase;
 }
 
@@ -1046,7 +1046,7 @@
   margin: 0;
   font-family: var(--font-display), sans-serif;
   font-size: 1.75rem;
-  letter-spacing: -0.035em;
+  letter-spacing: -0.02em;
 }
 
 .lineCopy h3 + p {
@@ -1075,7 +1075,7 @@
   padding-top: 1rem;
   border-top: 1px solid var(--baslac-border);
   color: var(--baslac-ink);
-  font-size: 0.7rem;
+  font-size: var(--ds-font-label);
   font-weight: 700;
   text-decoration: none;
 }
@@ -1093,7 +1093,7 @@
   margin: 0;
   font-family: var(--font-display), sans-serif;
   font-size: clamp(2rem, 3.7vw, 3.8rem);
-  letter-spacing: -0.05em;
+  letter-spacing: -0.02em;
   line-height: 1;
 }
 
@@ -1145,11 +1145,11 @@
 
 .processRail button span {
   font-family: var(--font-technical), monospace;
-  font-size: 0.61rem;
+  font-size: var(--ds-font-label);
 }
 
 .processRail button strong {
-  font-size: 0.72rem;
+  font-size: var(--ds-font-label);
 }
 
 .processRail button[data-active] {
@@ -1170,9 +1170,9 @@
   color: var(--baslac-accent-text, var(--baslac-accent));
   font-family: var(--font-display), sans-serif;
   font-size: clamp(5rem, 10vw, 10rem);
-  font-weight: 750;
-  letter-spacing: -0.09em;
-  line-height: 0.8;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1;
 }
 
 .processDetail > div > p:first-child,
@@ -1180,8 +1180,8 @@
   margin: 0 0 0.65rem;
   color: var(--baslac-muted);
   font-family: var(--font-technical), monospace;
-  font-size: 0.62rem;
-  letter-spacing: 0.09em;
+  font-size: var(--ds-font-label);
+  letter-spacing: var(--ds-tracking-label);
   text-transform: uppercase;
 }
 
@@ -1189,7 +1189,7 @@
   margin: 0;
   font-family: var(--font-display), sans-serif;
   font-size: clamp(2rem, 4vw, 3.7rem);
-  letter-spacing: -0.05em;
+  letter-spacing: -0.02em;
 }
 
 .processDetail h3 + p {
@@ -1206,7 +1206,7 @@
   padding-block: 0.7rem;
   border-bottom: 1px solid var(--baslac-border);
   font-family: var(--font-technical), monospace;
-  font-size: 0.72rem;
+  font-size: var(--ds-font-label);
 }
 
 .processGroups > a {
@@ -1246,7 +1246,7 @@
 .clearcoatMatrix article > div > p {
   margin: 0 0 0.4rem;
   color: var(--baslac-muted);
-  font-size: 0.68rem;
+  font-size: var(--ds-font-label);
 }
 
 .clearcoatMatrix h3 {
@@ -1254,7 +1254,7 @@
   color: var(--baslac-accent-text, var(--baslac-accent));
   font-family: var(--font-display), sans-serif;
   font-size: 2.25rem;
-  letter-spacing: -0.045em;
+  letter-spacing: -0.02em;
 }
 
 .clearcoatMatrix article > div > strong {
@@ -1273,20 +1273,20 @@
 .clearcoatMatrix dt {
   color: var(--baslac-muted);
   font-family: var(--font-technical), monospace;
-  font-size: 0.58rem;
-  letter-spacing: 0.08em;
+  font-size: var(--ds-font-label);
+  letter-spacing: var(--ds-tracking-label);
   text-transform: uppercase;
 }
 
 .clearcoatMatrix dd {
   margin: 0.45rem 0 0;
-  font-size: 0.72rem;
+  font-size: var(--ds-font-label);
   line-height: 1.45;
 }
 
 .clearcoatMatrix article > a {
   color: var(--baslac-ink);
-  font-size: 0.68rem;
+  font-size: var(--ds-font-label);
   font-weight: 700;
   line-height: 1.45;
   text-decoration: none;
@@ -1309,8 +1309,8 @@
 .clearcoatNote span {
   color: var(--baslac-muted);
   font-family: var(--font-technical), monospace;
-  font-size: 0.6rem;
-  letter-spacing: 0.1em;
+  font-size: var(--ds-font-label);
+  letter-spacing: var(--ds-tracking-label);
 }
 
 .clearcoatNote p {
@@ -1374,14 +1374,14 @@
 .primerStack article > div > p {
   color: var(--baslac-muted);
   font-family: var(--font-technical), monospace;
-  font-size: 0.6rem;
+  font-size: var(--ds-font-label);
 }
 
 .primerStack h3 {
   margin: 0.3rem 0 0;
   font-family: var(--font-display), sans-serif;
   font-size: 1.2rem;
-  letter-spacing: -0.025em;
+  letter-spacing: -0.02em;
 }
 
 .primerStack article > div > p,
@@ -1452,9 +1452,9 @@
 .greyShadePoster small {
   color: var(--baslac-process-muted);
   font-family: var(--font-technical), monospace;
-  font-size: 0.62rem;
+  font-size: var(--ds-font-label);
   text-transform: uppercase;
-  letter-spacing: 0.05em;
+  letter-spacing: var(--ds-tracking-label);
 }
 
 .colorSection {
@@ -1489,7 +1489,7 @@
 .colorTools article > span {
   color: var(--baslac-muted);
   font-family: var(--font-technical), monospace;
-  font-size: 0.6rem;
+  font-size: var(--ds-font-label);
 }
 
 .colorFlow strong {
@@ -1500,7 +1500,7 @@
 .colorFlow p {
   margin: 0.45rem 0 0;
   color: var(--baslac-muted);
-  font-size: 0.7rem;
+  font-size: var(--ds-font-label);
   line-height: 1.4;
 }
 
@@ -1524,7 +1524,7 @@
   margin: 2.5rem 0 0;
   font-family: var(--font-display), sans-serif;
   font-size: 1.65rem;
-  letter-spacing: -0.035em;
+  letter-spacing: -0.02em;
 }
 
 .colorTools p {
@@ -1603,7 +1603,7 @@
   margin: 0;
   font-family: var(--font-display), sans-serif;
   font-size: 1.65rem;
-  letter-spacing: -0.035em;
+  letter-spacing: -0.02em;
 }
 
 .supportList p {
@@ -1619,7 +1619,7 @@
   padding-top: 1rem;
   border-top: 1px solid var(--baslac-border);
   color: var(--baslac-ink);
-  font-size: 0.72rem;
+  font-size: var(--ds-font-label);
   font-weight: 700;
   text-decoration: none;
 }
@@ -1649,7 +1649,7 @@
   aspect-ratio: 1 / 0.92;
   overflow: hidden;
   border-bottom: 1px solid var(--baslac-border);
-  background: #e4e8e5;
+  background: var(--ds-c-scene-a);
 }
 
 .catalogImage img {
@@ -1689,7 +1689,7 @@
   margin: 0;
   color: var(--baslac-muted);
   font-family: var(--font-technical), monospace;
-  font-size: 0.6rem;
+  font-size: var(--ds-font-label);
 }
 
 .catalogCopy h3 {
@@ -1703,7 +1703,7 @@
   align-items: end;
   justify-content: space-between;
   align-self: end;
-  font-size: 0.7rem;
+  font-size: var(--ds-font-label);
   font-weight: 700;
 }
 
@@ -1752,20 +1752,21 @@
 }
 
 .finalCtaMark {
-  color: var(--baslac-accent-text, var(--baslac-accent));
+  /* Završni blok je uvek taman, pa broj koristi plavu za tamnu podlogu. */
+  color: var(--baslac-accent-text-on-dark);
   font-family: var(--font-display), sans-serif;
   font-size: clamp(5rem, 10vw, 10rem);
-  font-weight: 750;
-  letter-spacing: -0.09em;
-  line-height: 0.75;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1;
 }
 
 .finalCta > div > p {
   margin: 0 0 0.7rem;
   color: #b7c5c4;
   font-family: var(--font-technical), monospace;
-  font-size: 0.65rem;
-  letter-spacing: 0.08em;
+  font-size: var(--ds-font-label);
+  letter-spacing: var(--ds-tracking-label);
   text-transform: uppercase;
 }
 
@@ -1782,29 +1783,20 @@
 
 .finalCtaActions > a:not(.primaryButton) {
   color: #f4f8f4;
-  font-size: 0.74rem;
+  font-size: var(--ds-font-label);
   font-weight: 700;
   text-decoration: none;
 }
 
 :global(html[data-theme="dark"]) .baslacPage {
-  --baslac-bg: #11171a;
-  --baslac-surface: #171e21;
-  --baslac-surface-strong: #1b2326;
-  --baslac-ink: #edf2ee;
-  --baslac-muted: #a8b2b1;
-  --baslac-border: rgb(237 242 238 / 0.14);
-  --baslac-cyan: #183c3f;
+  /* Neutralne boje prate tokene (tamna tema dolazi iz .dark). */
+  --baslac-cyan: color-mix(in oklab, var(--baslac-identity) 22%, var(--ds-c-surface));
   /* Plava kao TEKST na tamnoj podlozi; ispune zadržavaju --baslac-accent. */
-  --baslac-accent-text: #72acd2;
-  --brand-nav-surface: rgb(17 23 26 / 0.94);
-  --brand-nav-border: rgb(237 242 238 / 0.12);
-  --brand-nav-ink: #edf2ee;
+  --baslac-accent-text: var(--baslac-accent-text-on-dark);
 }
 
 :global(html[data-theme="dark"]) .sectionKicker {
-  /* #657175 je na tamnoj podlozi davao 3.6:1. */
-  color: #97a5a8;
+  color: var(--ds-c-text-2);
 }
 
 /* Dve sekcije su svetle i u tamnoj temi — tu nadnaslov ostaje taman. */
@@ -1820,16 +1812,11 @@
 
 :global(html[data-theme="dark"]) .mediaSlot,
 :global(html[data-theme="dark"]) .catalogImage {
-  background: #202b2e;
+  background: var(--ds-c-surface-2);
 }
 
 :global(html[data-theme="dark"]) .mediaPlaceholder {
-  background:
-    repeating-linear-gradient(
-      135deg,
-      #202b2e 0 10px,
-      #26332f 10px 20px
-    );
+  background: var(--ds-c-surface-2);
 }
 
 :global(html[data-theme="dark"]) .mediaPlaceholderMark {
@@ -1964,14 +1951,14 @@
     --brand-section-nav-height: 3.35rem;
   }
   .breadcrumb {
-    font-size: 0.6rem;
+    font-size: var(--ds-font-label);
   }
   .mediaSlot {
     aspect-ratio: var(--baslac-media-mobile-ratio);
   }
 
   .mediaSlot figcaption {
-    font-size: 0.53rem;
+    font-size: var(--ds-font-label);
   }
 
   .mediaPlaceholder {
@@ -2402,8 +2389,8 @@
   border: 1px solid var(--baslac-border);
   color: var(--baslac-muted);
   font-family: var(--font-technical), monospace;
-  font-size: 0.68rem;
-  letter-spacing: 0.08em;
+  font-size: var(--ds-font-label);
+  letter-spacing: var(--ds-tracking-label);
   text-transform: uppercase;
 }
 
@@ -2434,8 +2421,8 @@
 .baseField label {
   color: var(--baslac-muted);
   font-family: var(--font-technical), monospace;
-  font-size: 0.66rem;
-  letter-spacing: 0.08em;
+  font-size: var(--ds-font-label);
+  letter-spacing: var(--ds-tracking-label);
   text-transform: uppercase;
 }
 
@@ -2463,8 +2450,8 @@
   margin: 0;
   color: var(--baslac-muted);
   font-family: var(--font-technical), monospace;
-  font-size: 0.7rem;
-  letter-spacing: 0.06em;
+  font-size: var(--ds-font-label);
+  letter-spacing: var(--ds-tracking-label);
 }
 
 .baseList {
@@ -2573,7 +2560,7 @@
   margin-left: auto;
   color: var(--baslac-muted);
   font-family: var(--font-technical), monospace;
-  font-size: 0.66rem;
+  font-size: var(--ds-font-label);
   text-align: right;
 }
 
@@ -2604,8 +2591,8 @@
   margin: 0 0 0.2rem;
   color: var(--baslac-muted);
   font-family: var(--font-technical), monospace;
-  font-size: 0.64rem;
-  letter-spacing: 0.1em;
+  font-size: var(--ds-font-label);
+  letter-spacing: var(--ds-tracking-label);
   text-transform: uppercase;
 }
 
@@ -2627,8 +2614,8 @@
   border: 1px solid var(--baslac-border);
   background: var(--baslac-surface-strong);
   font-family: var(--font-technical), monospace;
-  font-size: 0.7rem;
-  letter-spacing: 0.06em;
+  font-size: var(--ds-font-label);
+  letter-spacing: var(--ds-tracking-label);
   text-transform: uppercase;
 }
 
@@ -2690,8 +2677,8 @@
   margin: 0;
   color: var(--baslac-muted);
   font-family: var(--font-technical), monospace;
-  font-size: 0.66rem;
-  letter-spacing: 0.06em;
+  font-size: var(--ds-font-label);
+  letter-spacing: var(--ds-tracking-label);
   text-transform: uppercase;
 }
 
@@ -2744,7 +2731,7 @@
 
 .primerPackshots figcaption span {
   color: var(--baslac-muted);
-  font-size: 0.72rem;
+  font-size: var(--ds-font-label);
   line-height: 1.4;
 }
 
@@ -2755,7 +2742,7 @@
 }
 .quickAddBar span {
   color: var(--baslac-muted); font-family: var(--font-technical), monospace;
-  font-size: 0.7rem; letter-spacing: 0.06em; text-transform: uppercase;
+  font-size: var(--ds-font-label); letter-spacing: var(--ds-tracking-label); text-transform: uppercase;
 }
 .quickAddBar button {
   min-height: 2.6rem; padding: 0 1rem; border: 0;
@@ -2765,7 +2752,7 @@
 .quickAddBar button:disabled { opacity: 0.45; cursor: not-allowed; }
 .quickAddFeedback {
   margin: 0; color: var(--baslac-accent-text, var(--baslac-accent));
-  font-family: var(--font-technical), monospace; font-size: 0.72rem;
+  font-family: var(--font-technical), monospace; font-size: var(--ds-font-label);
 }
 .baseRow { display: flex; min-width: 0; align-items: center; gap: 0.4rem; }
 .basePick { display: grid; flex: none; place-items: center; }
@@ -2780,3 +2767,387 @@
 
 .systemGroupCopy { display: grid; align-content: start; gap: 1rem; justify-items: start; }
 .systemGroupCopy p { margin: 0; max-width: 34rem; color: var(--baslac-muted); font-size: 0.95rem; line-height: 1.6; }
+
+/* =========================================================================
+ * Sistem A — Baslac (data-ds="a" na <html>)
+ *
+ * Zadržano kao karakter brenda: kampanjski hero i završni blok (uvek tamni),
+ * svetle sekcije procesa (atmosfera), veliki brojevi linija i faza i krupni
+ * naslovi sekcija (kompozicija). Menjaju se oznake, dugmad, polja, kartice,
+ * veze i veličine teksta za čitanje.
+ * ========================================================================= */
+:global([data-ds="a"]) .baslacPage {
+  --brand-nav-accent: var(--baslac-accent);
+}
+
+/* Oznake: Plex Mono 500, 12 px, razmak 0,08 em, plava crtica. */
+:global([data-ds="a"]) .baslacPage .sectionKicker,
+:global([data-ds="a"]) .baslacPage .campaignEyebrow {
+  font-size: var(--ds-font-label);
+  font-weight: 500;
+  letter-spacing: var(--ds-tracking-label);
+}
+
+:global([data-ds="a"]) .baslacPage .sectionKicker {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--ds-c-text-2);
+}
+
+:global([data-ds="a"]) .baslacPage .sectionKicker::before {
+  width: 24px;
+  height: 2px;
+  flex: none;
+  background: var(--baslac-identity);
+  content: "";
+}
+
+:global([data-ds="a"]) .baslacPage .campaignEyebrow::before {
+  width: 24px;
+  height: 2px;
+}
+
+:global([data-ds="a"]) .baslacPage .breadcrumb,
+:global([data-ds="a"]) .baslacPage .mediaSlot figcaption,
+:global([data-ds="a"]) .baslacPage .lineCopy > p:first-child,
+:global([data-ds="a"]) .baslacPage .processDetail > div > p:first-child,
+:global([data-ds="a"]) .baslacPage .processGroups > p,
+:global([data-ds="a"]) .baslacPage .repairRhythmDetail > p:first-child,
+:global([data-ds="a"]) .baslacPage .repairRhythmProducts > p,
+:global([data-ds="a"]) .baslacPage .clearcoatMatrix dt,
+:global([data-ds="a"]) .baslacPage .clearcoatNote span,
+:global([data-ds="a"]) .baslacPage .finalCta > div > p,
+:global([data-ds="a"]) .baslacPage .systemGroupCount,
+:global([data-ds="a"]) .baslacPage .baseDetailKicker,
+:global([data-ds="a"]) .baslacPage .baseAvailability,
+:global([data-ds="a"]) .baslacPage .quickAddBar span,
+:global([data-ds="a"]) .baslacPage .familyPackshot figcaption,
+:global([data-ds="a"]) .baslacPage .familyPackshot p {
+  font-size: var(--ds-font-label);
+  font-weight: 500;
+  letter-spacing: var(--ds-tracking-label);
+}
+
+/* Naslovi: Archivo 700, razmak ≥ −0,02 em, prored ≥ 1,0. Veličina krupnih
+   naslova sekcija ostaje deo kompozicije brenda (najviše 88 px). */
+:global([data-ds="a"]) .baslacPage .sectionHeader h2,
+:global([data-ds="a"]) .baslacPage .positionStatement h2,
+:global([data-ds="a"]) .baslacPage .repairRhythmHeader h2,
+:global([data-ds="a"]) .baslacPage .primerIntro h2,
+:global([data-ds="a"]) .baslacPage .commercialCopy h2,
+:global([data-ds="a"]) .baslacPage .finalCta h2 {
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.02;
+}
+
+:global([data-ds="a"]) .baslacPage .repairRhythmHeader h2 {
+  font-size: clamp(2.65rem, 5.2vw, 5.5rem);
+}
+
+:global([data-ds="a"]) .baslacPage .processDetail h3,
+:global([data-ds="a"]) .baslacPage .line45FeatureCopy h3,
+:global([data-ds="a"]) .baslacPage .repairRhythmDetail h3,
+:global([data-ds="a"]) .baslacPage .clearcoatMatrix h3,
+:global([data-ds="a"]) .baslacPage .lineCopy h3,
+:global([data-ds="a"]) .baslacPage .colorTools h3,
+:global([data-ds="a"]) .baslacPage .supportList h3,
+:global([data-ds="a"]) .baslacPage .primerStack h3,
+:global([data-ds="a"]) .baslacPage .systemGroupHeader h3 {
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  line-height: 1.15;
+}
+
+/* Tekst za čitanje: najmanje 14 px (sporedni), napomene 13 px. */
+:global([data-ds="a"]) .baslacPage .lineCopy h3 + p,
+:global([data-ds="a"]) .baslacPage .positionFacts li,
+:global([data-ds="a"]) .baslacPage .repairRhythmDetail > h3 + p,
+:global([data-ds="a"]) .baslacPage .repairRhythmDetail li,
+:global([data-ds="a"]) .baslacPage .clearcoatMatrix article > div > strong,
+:global([data-ds="a"]) .baslacPage .clearcoatMatrix dd,
+:global([data-ds="a"]) .baslacPage .primerStack article > p,
+:global([data-ds="a"]) .baslacPage .colorFlow strong,
+:global([data-ds="a"]) .baslacPage .colorFlow p,
+:global([data-ds="a"]) .baslacPage .colorTools p,
+:global([data-ds="a"]) .baslacPage .commercialCopy li,
+:global([data-ds="a"]) .baslacPage .supportList p,
+:global([data-ds="a"]) .baslacPage .catalogFooter p,
+:global([data-ds="a"]) .baslacPage .greyShadeIntro p:last-child,
+:global([data-ds="a"]) .baslacPage .baseInfo small,
+:global([data-ds="a"]) .baslacPage .baseDetailMeta,
+:global([data-ds="a"]) .baslacPage .baseEmpty,
+:global([data-ds="a"]) .baslacPage .baseSwatchNote,
+:global([data-ds="a"]) .baslacPage .primerPackshots figcaption span,
+:global([data-ds="a"]) .baslacPage .processRail button strong,
+:global([data-ds="a"]) .baslacPage .clearcoatMatrix article > div > p {
+  font-size: var(--ds-font-small);
+  line-height: 1.5;
+}
+
+:global([data-ds="a"]) .baslacPage .clearcoatNote p {
+  font-size: var(--ds-font-legal);
+}
+
+:global([data-ds="a"]) .baslacPage .baseInfo strong,
+:global([data-ds="a"]) .baslacPage .primerPackshots figcaption strong {
+  font-size: var(--ds-font-code);
+  font-weight: 500;
+  letter-spacing: 0;
+}
+
+:global([data-ds="a"]) .baslacPage .catalogCopy h3 {
+  font-size: var(--ds-font-card-title);
+  font-weight: 600;
+}
+
+:global([data-ds="a"]) .baslacPage .mediaPlaceholderMark {
+  border-color: var(--ds-c-line-strong);
+  color: var(--ds-c-text);
+  font-size: var(--ds-font-small);
+}
+
+:global([data-ds="a"]) .baslacPage .mediaPlaceholder strong {
+  color: var(--ds-c-text-2);
+  font-size: var(--ds-font-label);
+  letter-spacing: var(--ds-tracking-label);
+  text-transform: none;
+}
+
+/* Dugmad: 44 px, ugao 2 px, Plex Sans 600 15 px, bez podizanja i senke. */
+:global([data-ds="a"]) .baslacPage .primaryButton,
+:global([data-ds="a"]) .baslacPage .secondaryButton,
+:global([data-ds="a"]) .baslacPage .outlineButton,
+:global([data-ds="a"]) .baslacPage .quickAddBar button {
+  min-height: var(--ds-ctl-h-m);
+  gap: 10px;
+  padding: 0 20px;
+  border-radius: var(--ds-ctl-radius);
+  font: var(--ds-ctl-font);
+  letter-spacing: 0;
+  box-shadow: none;
+  transform: none;
+  transition:
+    background-color 120ms ease,
+    border-color 120ms ease,
+    color 120ms ease;
+}
+
+:global([data-ds="a"]) .baslacPage .campaignActions .primaryButton,
+:global([data-ds="a"]) .baslacPage .campaignActions .secondaryButton,
+:global([data-ds="a"]) .baslacPage .campaignActions .outlineButton {
+  min-height: var(--ds-ctl-h-l);
+}
+
+:global([data-ds="a"]) .baslacPage .secondaryButton,
+:global([data-ds="a"]) .baslacPage .outlineButton {
+  border-color: var(--ds-c-text);
+  color: var(--ds-c-text);
+}
+
+:global([data-ds="a"]) .baslacPage .secondaryButton:hover,
+:global([data-ds="a"]) .baslacPage .outlineButton:hover {
+  border-color: var(--ds-c-text);
+  background: var(--ds-c-surface-2);
+}
+
+/* Na tamnoj kampanji i završnom bloku sekundarno dugme je beli okvir. */
+:global([data-ds="a"]) .baslacPage .campaignActions .secondaryButton,
+:global([data-ds="a"]) .baslacPage .campaignActions .outlineButton,
+:global([data-ds="a"]) .baslacPage .finalCta .secondaryButton,
+:global([data-ds="a"]) .baslacPage .finalCta .outlineButton {
+  border-color: #ffffff;
+  background: transparent;
+  color: #ffffff;
+}
+
+:global([data-ds="a"]) .baslacPage .quickAddBar button {
+  border: 0;
+  background: var(--baslac-accent);
+  color: var(--baslac-accent-ink);
+}
+
+:global([data-ds="a"]) .baslacPage .quickAddBar button:hover:not(:disabled) {
+  background: var(--baslac-accent-hover);
+}
+
+:global([data-ds="a"]) .baslacPage .quickAddBar button:disabled {
+  background: var(--ds-c-surface-2);
+  color: var(--ds-c-text-3);
+  opacity: 1;
+}
+
+:global([data-ds="a"]) .baslacPage .campaignArrows button {
+  border-radius: var(--ds-ctl-radius);
+  transition: background-color 120ms ease;
+}
+
+/* Tekstualne veze: Plex Sans 600 15 px; samostalne veze imaju podvlaku. */
+:global([data-ds="a"]) .baslacPage .linePanel > a,
+:global([data-ds="a"]) .baslacPage .processGroups > a,
+:global([data-ds="a"]) .baslacPage .clearcoatMatrix article > a,
+:global([data-ds="a"]) .baslacPage .supportList a,
+:global([data-ds="a"]) .baslacPage .primerIntro > a,
+:global([data-ds="a"]) .baslacPage .colorActions > a:not(.primaryButton),
+:global([data-ds="a"]) .baslacPage .repairRhythmDetail > a,
+:global([data-ds="a"]) .baslacPage .finalCtaActions > a:not(.primaryButton),
+:global([data-ds="a"]) .baslacPage .catalogCopy > span {
+  font-size: 0.9375rem;
+  font-weight: 600;
+  letter-spacing: 0;
+}
+
+:global([data-ds="a"]) .baslacPage .primerIntro > a,
+:global([data-ds="a"]) .baslacPage .colorActions > a:not(.primaryButton),
+:global([data-ds="a"]) .baslacPage .repairRhythmDetail > a,
+:global([data-ds="a"]) .baslacPage .finalCtaActions > a:not(.primaryButton) {
+  text-decoration: underline;
+  text-decoration-color: var(--ds-c-line-strong);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 4px;
+}
+
+:global([data-ds="a"]) .baslacPage .primerIntro > a:hover,
+:global([data-ds="a"]) .baslacPage .colorActions > a:not(.primaryButton):hover,
+:global([data-ds="a"]) .baslacPage .repairRhythmDetail > a:hover,
+:global([data-ds="a"]) .baslacPage .finalCtaActions > a:not(.primaryButton):hover {
+  text-decoration-color: currentColor;
+  text-decoration-thickness: 2px;
+}
+
+:global([data-ds="a"]) .baslacPage .finalCtaActions > a:not(.primaryButton) {
+  text-decoration-color: rgb(244 248 244 / 0.5);
+}
+
+/* Izbor (ritam popravke, faze procesa): Plex Sans 600 14 px; aktivno je
+   Baslac ispuna ili 2 px plava linija. */
+:global([data-ds="a"]) .baslacPage .repairRhythmSelector button {
+  font-size: var(--ds-font-small);
+}
+
+:global([data-ds="a"]) .baslacPage .processRail button[data-active] {
+  box-shadow: inset 0 -2px 0 var(--baslac-accent);
+}
+
+/* Čipovi/oznake u karticama: okvir 1 px, ugao 2 px. */
+:global([data-ds="a"]) .baslacPage .repairRhythmProducts span,
+:global([data-ds="a"]) .baslacPage .lineTags span,
+:global([data-ds="a"]) .baslacPage .line45FeatureFacts span,
+:global([data-ds="a"]) .baslacPage .systemGroupCount,
+:global([data-ds="a"]) .baslacPage .baseAvailability {
+  border-radius: var(--ds-ctl-radius);
+  font-size: var(--ds-font-label);
+}
+
+:global([data-ds="a"]) .baslacPage .lineTags span,
+:global([data-ds="a"]) .baslacPage .line45FeatureFacts span,
+:global([data-ds="a"]) .baslacPage .systemGroupCount,
+:global([data-ds="a"]) .baslacPage .baseAvailability {
+  border-color: var(--ds-c-line-strong);
+}
+
+/* Kartice i paneli: ugao 2 px, linija, bez senke. */
+:global([data-ds="a"]) .baslacPage .systemGroup,
+:global([data-ds="a"]) .baslacPage .familyPackshot,
+:global([data-ds="a"]) .baslacPage .quickAddBar,
+:global([data-ds="a"]) .baslacPage .baseDetail,
+:global([data-ds="a"]) .baslacPage .emptyCatalog,
+:global([data-ds="a"]) .baslacPage .mediaSlot {
+  border-radius: var(--ds-ctl-radius);
+  box-shadow: none;
+}
+
+:global([data-ds="a"]) .baslacPage .familyPackshot[data-kind="example"] img {
+  border-radius: var(--ds-ctl-radius);
+}
+
+/* Polja selektora baza: 48 px, okvir --ds-c-field, oznaka iznad. */
+:global([data-ds="a"]) .baslacPage .baseField label {
+  color: var(--ds-c-text);
+  font-family: var(--font-body), system-ui, sans-serif;
+  font-size: var(--ds-font-small);
+  font-weight: 600;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+:global([data-ds="a"]) .baslacPage .baseField input,
+:global([data-ds="a"]) .baslacPage .baseField select {
+  min-height: var(--ds-ctl-h-field);
+  padding: 0 12px;
+  border-color: var(--ds-c-field);
+  border-radius: var(--ds-ctl-radius);
+  background: var(--ds-c-surface);
+  font-size: var(--ds-font-body);
+}
+
+:global([data-ds="a"]) .baslacPage .baseQty {
+  min-height: var(--ds-ctl-h-s);
+  border-color: var(--ds-c-field);
+  border-radius: var(--ds-ctl-radius);
+  font-size: var(--ds-font-small);
+}
+
+:global([data-ds="a"]) .baslacPage .baseField input:focus-visible,
+:global([data-ds="a"]) .baslacPage .baseField select:focus-visible,
+:global([data-ds="a"]) .baslacPage .baseList button:focus-visible,
+:global([data-ds="a"]) .baslacPage .baseRow input:focus-visible {
+  outline: 2px solid var(--ds-c-focus);
+  outline-offset: 2px;
+}
+
+/* Lista baza: kartica 2 px; izabrano = 2 px Baslac plava + meka podloga. */
+:global([data-ds="a"]) .baslacPage .baseList button {
+  border-color: var(--ds-c-line);
+  border-radius: var(--ds-ctl-radius);
+  background: var(--ds-c-surface);
+  transition: border-color 120ms ease, background-color 120ms ease;
+}
+
+:global([data-ds="a"]) .baslacPage .baseList button:hover {
+  border-color: var(--ds-c-line-strong);
+}
+
+:global([data-ds="a"]) .baslacPage .baseList button[data-active] {
+  border-color: var(--baslac-accent);
+  background: color-mix(in oklab, var(--baslac-accent) 10%, var(--ds-c-surface));
+  box-shadow: inset 0 0 0 1px var(--baslac-accent);
+}
+
+:global([data-ds="a"]) .baslacPage .baseSwatch {
+  border-radius: var(--ds-ctl-radius);
+}
+
+:global([data-ds="a"]) .baslacPage .baseDetail {
+  border-color: var(--baslac-accent);
+  background: color-mix(in oklab, var(--baslac-accent) 8%, var(--ds-c-surface));
+}
+
+:global([data-ds="a"]) .baslacPage .baseDetail h4 {
+  font-weight: 700;
+}
+
+:global([data-ds="a"]) .baslacPage .baseMeta {
+  font-size: var(--ds-font-label);
+}
+
+/* Fokus svuda: 2 px --ds-c-focus, odmak 2 px. */
+:global([data-ds="a"]) .baslacPage a:focus-visible,
+:global([data-ds="a"]) .baslacPage button:focus-visible {
+  outline: 2px solid var(--ds-c-focus);
+  outline-offset: 2px;
+}
+
+:global([data-ds="a"]) .baslacPage .campaignStage a:focus-visible,
+:global([data-ds="a"]) .baslacPage .campaignStage button:focus-visible,
+:global([data-ds="a"]) .baslacPage .finalCta a:focus-visible {
+  outline-color: #ffffff;
+}
+
+/* Sekcije procesa imaju sopstvenu atmosferu (svetla, a tamna kada je sivi
+   prajmer aktivan) u obe teme, pa oznaka prati njihovu paletu. */
+:global([data-ds="a"]) .baslacPage .repairRhythm .sectionKicker,
+:global([data-ds="a"]) .baslacPage .greyShadeSection .sectionKicker {
+  color: var(--baslac-process-muted);
+}

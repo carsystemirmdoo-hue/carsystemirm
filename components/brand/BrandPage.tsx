@@ -44,7 +44,11 @@ export function BrandPage({
   );
 
   return (
-    <div className={styles.pageShell} style={brandStyle}>
+    <div
+      className={styles.pageShell}
+      style={brandStyle}
+      data-brand-neutral={brand.presentation.accentColor.toUpperCase() === "#20242C" ? "true" : undefined}
+    >
       <main className={styles.main}>
         <BrandHero brand={brand} programs={programsWithProducts} products={products} />
         <BrandOverview brand={brand} products={products} programs={programsWithProducts} />

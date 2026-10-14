@@ -30,25 +30,27 @@
   gap: 12px;
   color: var(--accent-text, var(--accent));
   font-family: var(--font-technical), var(--font-geist-mono), monospace;
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 0.2em;
+  font-size: var(--ds-font-label);
+  font-weight: 500;
+  letter-spacing: var(--ds-tracking-label);
   text-transform: uppercase;
 }
 
+/* Sistem A: crtica oznake 24 × 2 px. */
 .kicker::before {
   content: "";
-  width: 3px;
-  height: 16px;
+  width: 24px;
+  height: 2px;
+  flex: none;
   background: var(--accent);
 }
 
 .indexKicker {
   color: var(--muted-foreground);
   font-family: var(--font-technical), var(--font-geist-mono), monospace;
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 0.18em;
+  font-size: var(--ds-font-label);
+  font-weight: 500;
+  letter-spacing: var(--ds-tracking-label);
   text-transform: uppercase;
 }
 
@@ -70,18 +72,18 @@
   margin: 0;
   max-width: 14ch;
   font-family: var(--font-display), var(--font-geist-sans), system-ui, sans-serif;
-  font-size: clamp(40px, 6.4vw, 76px);
+  font-size: var(--ds-font-h1);
   font-weight: 800;
-  letter-spacing: -0.02em;
-  line-height: 0.98;
+  letter-spacing: var(--ds-tracking-h);
+  line-height: 1.05;
 }
 
 .subtitle {
   margin: 0;
   max-width: 44ch;
   color: var(--muted-foreground);
-  font-size: 16px;
-  line-height: 1.65;
+  font-size: var(--ds-font-lead);
+  line-height: 1.55;
 }
 
 /* entry reveals */
@@ -161,7 +163,7 @@
   bottom: 0;
   left: 0;
   z-index: 1;
-  width: 3px;
+  width: 2px;
   background: var(--accent);
   transform: scaleY(0);
   transform-origin: top center;
@@ -187,9 +189,9 @@
 .intentIndex {
   color: var(--muted-foreground);
   font-family: var(--font-technical), var(--font-geist-mono), monospace;
-  font-size: 13px;
-  font-weight: 600;
-  letter-spacing: 0.08em;
+  font-size: var(--ds-font-code);
+  font-weight: 500;
+  letter-spacing: 0.04em;
   transition: color 220ms var(--cs-ease-polish);
 }
 
@@ -200,9 +202,9 @@
 }
 
 .intentCopy strong {
-  font-size: 17px;
-  font-weight: 700;
-  letter-spacing: -0.01em;
+  font-size: var(--ds-font-card-title);
+  font-weight: 600;
+  letter-spacing: 0;
 }
 
 .intentCopy small {
@@ -250,7 +252,7 @@
 /* ---------- keyboard focus (related to the hover system, theme-safe) ---------- */
 
 .intentRow:focus-visible {
-  outline: 2px solid var(--accent);
+  outline: 2px solid var(--ds-c-focus);
   outline-offset: -2px;
   background: color-mix(in oklch, var(--accent), var(--surface) 94%);
 }
@@ -264,7 +266,11 @@
 .intentRowActive,
 .intentRow.intentRowActive:hover,
 .intentRow.intentRowActive[data-pointer-active="true"] {
-  background: var(--surface-muted);
+  background: var(--ds-c-accent-soft);
+}
+
+.intentRowActive .intentCopy strong {
+  font-weight: 700;
 }
 
 .intentRowActive .intentBar {
@@ -298,6 +304,7 @@
   gap: 18px;
   padding: 22px 24px;
   border: 1px solid var(--border);
+  border-radius: var(--ds-ctl-radius);
   background: var(--surface);
 }
 
@@ -311,7 +318,7 @@
 .contextCopy h2 {
   margin: 0;
   font-family: var(--font-display), var(--font-geist-sans), system-ui, sans-serif;
-  font-size: 22px;
+  font-size: var(--ds-font-h3);
   font-weight: 700;
   letter-spacing: -0.01em;
 }
@@ -353,22 +360,35 @@ a.primaryButton,
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
-  padding: 13px 24px;
+  gap: 10px;
+  min-height: var(--ds-ctl-h-m);
+  padding: 0 20px;
   border: 1px solid var(--accent);
+  border-radius: var(--ds-ctl-radius);
   background: var(--accent);
   color: var(--accent-foreground);
-  font-size: 14px;
-  font-weight: 700;
+  font: var(--ds-ctl-font);
   cursor: pointer;
   transition:
-    background 200ms var(--cs-ease-polish),
-    border-color 200ms var(--cs-ease-polish),
-    color 200ms var(--cs-ease-polish);
+    background-color 120ms ease,
+    border-color 120ms ease,
+    color 120ms ease;
 }
 
+.primaryButton:hover:not(:disabled) {
+  border-color: var(--ds-c-accent-hover);
+  background: var(--ds-c-accent-hover);
+}
+
+.primaryButton:active:not(:disabled) {
+  background: var(--ds-c-accent-press);
+}
+
+/* Nedostupno: --ds-c-surface-2, tekst --ds-c-text-3. */
 .primaryButton:disabled {
-  opacity: 0.65;
+  border-color: var(--ds-c-line);
+  background: var(--ds-c-surface-2);
+  color: var(--ds-c-text-3);
   cursor: default;
 }
 
@@ -376,21 +396,30 @@ a.primaryButton,
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
-  padding: 13px 22px;
-  border: 1px solid var(--border);
-  background: var(--surface);
+  gap: 10px;
+  min-height: var(--ds-ctl-h-m);
+  padding: 0 20px;
+  border: 1px solid var(--foreground);
+  border-radius: var(--ds-ctl-radius);
+  background: transparent;
   color: var(--foreground);
-  font-size: 14px;
-  font-weight: 600;
+  font: var(--ds-ctl-font);
   cursor: pointer;
   transition:
-    border-color 200ms var(--cs-ease-polish),
-    background 200ms var(--cs-ease-polish);
+    border-color 120ms ease,
+    background-color 120ms ease;
 }
 
 .secondaryButton:hover {
-  border-color: var(--foreground);
+  background: var(--ds-c-surface-2);
+}
+
+.primaryButton:focus-visible,
+.secondaryButton:focus-visible,
+.teaserAction:focus-visible,
+.directoryRow a:focus-visible {
+  outline: 2px solid var(--ds-c-focus);
+  outline-offset: 2px;
 }
 
 /* ---------- form section ---------- */
@@ -407,6 +436,7 @@ a.primaryButton,
   gap: 22px;
   padding: clamp(22px, 3vw, 34px);
   border: 1px solid var(--border);
+  border-radius: var(--ds-ctl-radius);
   background: var(--surface);
 }
 
@@ -420,7 +450,7 @@ a.primaryButton,
 .formHeader h2 {
   margin: 6px 0 8px;
   font-family: var(--font-display), var(--font-geist-sans), system-ui, sans-serif;
-  font-size: 24px;
+  font-size: var(--ds-font-h3);
   font-weight: 700;
   letter-spacing: -0.01em;
 }
@@ -435,12 +465,13 @@ a.primaryButton,
 .formHeader > span {
   flex: 0 0 auto;
   padding: 6px 10px;
-  border: 1px solid var(--border);
+  border: 1px solid var(--ds-c-line-strong);
+  border-radius: var(--ds-ctl-radius);
   color: var(--muted-foreground);
   font-family: var(--font-technical), var(--font-geist-mono), monospace;
-  font-size: 10px;
+  font-size: var(--ds-font-label);
   font-weight: 600;
-  letter-spacing: 0.14em;
+  letter-spacing: var(--ds-tracking-label);
   text-transform: uppercase;
   white-space: nowrap;
 }
@@ -457,25 +488,27 @@ a.primaryButton,
   min-width: 0;
 }
 
+/* Sistem A: oznaka iznad polja je Plex Sans 600 14 px, ne mono velikim slovima. */
 .field > label {
-  color: var(--muted-foreground);
-  font-family: var(--font-technical), var(--font-geist-mono), monospace;
-  font-size: 10.5px;
+  color: var(--foreground);
+  font-family: var(--font-body), system-ui, sans-serif;
+  font-size: var(--ds-font-small);
   font-weight: 600;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
+  letter-spacing: 0;
+  text-transform: none;
 }
 
 .field input,
 .field textarea {
   width: 100%;
-  padding: 12px 14px;
-  border: 1px solid var(--border);
-  border-radius: 0;
-  background: var(--background);
+  min-height: var(--ds-ctl-h-field);
+  padding: 11px 14px;
+  border: 1px solid var(--ds-c-field);
+  border-radius: var(--ds-ctl-radius);
+  background: var(--ds-c-surface);
   color: var(--foreground);
   font: inherit;
-  font-size: 14.5px;
+  font-size: var(--ds-font-body);
   transition:
     border-color 160ms ease,
     background 160ms ease;
@@ -486,20 +519,25 @@ a.primaryButton,
   min-height: 130px;
 }
 
+.field input::placeholder,
+.field textarea::placeholder {
+  color: var(--ds-c-text-3);
+}
+
 .field input:focus-visible,
 .field textarea:focus-visible {
-  outline: 2px solid var(--accent);
-  outline-offset: -1px;
+  outline: 2px solid var(--ds-c-focus);
+  outline-offset: 2px;
 }
 
 .field input[aria-invalid="true"],
 .field textarea[aria-invalid="true"] {
-  border-color: var(--accent);
+  border-color: var(--ds-c-err);
 }
 
 .fieldError {
-  color: var(--accent-text, var(--accent));
-  font-size: 12px;
+  color: var(--ds-c-err);
+  font-size: var(--ds-font-legal);
   font-weight: 600;
 }
 
@@ -520,7 +558,7 @@ a.primaryButton,
   margin: 0;
   max-width: 40ch;
   color: var(--muted-foreground);
-  font-size: 12px;
+  font-size: var(--ds-font-legal);
   line-height: 1.5;
 }
 
@@ -528,9 +566,10 @@ a.primaryButton,
   grid-column: 1 / -1;
   padding: 14px 16px;
   border: 1px solid var(--border);
-  border-left: 3px solid var(--accent);
+  border-left: 2px solid var(--accent);
+  border-radius: var(--ds-ctl-radius);
   background: var(--surface-muted);
-  font-size: 13.5px;
+  font-size: var(--ds-font-small);
   line-height: 1.55;
 }
 
@@ -553,6 +592,7 @@ a.primaryButton,
   gap: 14px;
   padding: 22px 24px;
   border: 1px solid var(--border);
+  border-radius: var(--ds-ctl-radius);
   background: var(--surface);
 }
 
@@ -573,9 +613,9 @@ a.primaryButton,
 .reviewPanel dt {
   color: var(--muted-foreground);
   font-family: var(--font-technical), var(--font-geist-mono), monospace;
-  font-size: 10.5px;
+  font-size: var(--ds-font-label);
   font-weight: 600;
-  letter-spacing: 0.12em;
+  letter-spacing: var(--ds-tracking-label);
   text-transform: uppercase;
   align-self: baseline;
   padding-top: 2px;
@@ -583,7 +623,7 @@ a.primaryButton,
 
 .reviewPanel dd {
   margin: 0;
-  font-size: 13.5px;
+  font-size: var(--ds-font-small);
   font-weight: 600;
   line-height: 1.5;
   overflow-wrap: anywhere;
@@ -597,6 +637,7 @@ a.primaryButton,
   gap: 10px;
   padding: 22px 24px;
   border: 1px solid var(--border);
+  border-radius: var(--ds-ctl-radius);
   background: var(--surface);
   overflow: hidden;
 }
@@ -604,7 +645,7 @@ a.primaryButton,
 .locatorTeaser h2 {
   margin: 0;
   font-family: var(--font-display), var(--font-geist-sans), system-ui, sans-serif;
-  font-size: 19px;
+  font-size: var(--ds-font-h3);
   font-weight: 700;
   letter-spacing: -0.01em;
 }
@@ -612,7 +653,7 @@ a.primaryButton,
 .locatorTeaser > p {
   margin: 0;
   color: var(--muted-foreground);
-  font-size: 13.5px;
+  font-size: var(--ds-font-small);
   line-height: 1.55;
 }
 
@@ -626,16 +667,17 @@ a.primaryButton,
   gap: 8px;
   justify-self: start;
   margin-top: 4px;
-  padding: 11px 18px;
-  border: 1px solid var(--border);
-  background: var(--background);
-  font-size: 13.5px;
-  font-weight: 700;
-  transition: border-color 200ms var(--cs-ease-polish);
+  min-height: var(--ds-ctl-h-m);
+  padding: 0 20px;
+  border: 1px solid var(--foreground);
+  border-radius: var(--ds-ctl-radius);
+  background: transparent;
+  font: var(--ds-ctl-font);
+  transition: background-color 120ms ease;
 }
 
 .teaserAction:hover {
-  border-color: var(--accent);
+  background: var(--ds-c-surface-2);
 }
 
 /* ---------- direct contact directory ---------- */
@@ -668,9 +710,9 @@ a.primaryButton,
 .directoryLabel {
   color: var(--muted-foreground);
   font-family: var(--font-technical), var(--font-geist-mono), monospace;
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 0.16em;
+  font-size: var(--ds-font-label);
+  font-weight: 500;
+  letter-spacing: var(--ds-tracking-label);
   text-transform: uppercase;
   padding-left: 12px;
 }
@@ -713,6 +755,7 @@ a.primaryButton,
   justify-items: start;
   padding: clamp(26px, 4vw, 44px);
   border: 1px solid var(--border);
+  border-radius: var(--ds-ctl-radius);
   background: var(--surface);
 }
 
@@ -720,9 +763,9 @@ a.primaryButton,
   margin: 0;
   max-width: 22ch;
   font-family: var(--font-display), var(--font-geist-sans), system-ui, sans-serif;
-  font-size: clamp(24px, 3vw, 34px);
-  font-weight: 800;
-  letter-spacing: -0.015em;
+  font-size: var(--ds-font-h2);
+  font-weight: 700;
+  letter-spacing: -0.01em;
   line-height: 1.1;
 }
 

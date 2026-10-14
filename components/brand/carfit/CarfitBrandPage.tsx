@@ -566,7 +566,7 @@ export function CarfitBrandPage({ brand }: { brand: CarsystemBrand }) {
               <div className={styles.storyMedia}>
                 <CarfitMedia
                   products={carfitMaskingStory.media.src ? undefined : categoryShots(["maskiranje"], 3)}
-                  mark="MASK"
+                  mark="Maskiranje"
                   sizes="(min-width: 48rem) 46vw, 92vw"
                   slot={carfitMaskingStory.media}
                 />
@@ -610,7 +610,7 @@ export function CarfitBrandPage({ brand }: { brand: CarsystemBrand }) {
               <div className={styles.storyMedia}>
                 <CarfitMedia
                   products={carfitFinishStory.media.src ? undefined : categoryShots(["poliranje"], 3)}
-                  mark="FINISH"
+                  mark="Završna obrada"
                   sizes="(min-width: 48rem) 46vw, 92vw"
                   slot={carfitFinishStory.media}
                 />

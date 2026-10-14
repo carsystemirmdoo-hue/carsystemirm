@@ -1,26 +1,29 @@
+/* Sistem A: lokalna paleta je vezana za zajedničke tokene (obe teme iz jednog
+   mesta); Carsystem crvena je brend akcenat iz tabele SISTEM_A.md. Grafitne
+   površine (--cs-dark*) su atmosfera brenda i ostaju fiksne. */
 .carsystemPage {
-  --cs-paper: oklch(0.975 0.006 245);
-  --cs-paper-strong: oklch(0.995 0.003 245);
-  --cs-paper-muted: oklch(0.942 0.01 245);
-  --cs-paper-cool: oklch(0.915 0.016 242);
-  --cs-ink: oklch(0.19 0.018 248);
-  --cs-ink-soft: oklch(0.42 0.022 248);
-  /* 0.6 je na svetlim panelima davalo 3.7:1 za 11 px tekst. */
-  --cs-ink-faint: oklch(0.5 0.018 248);
-  --cs-line: oklch(0.77 0.012 245 / 0.72);
-  --cs-line-strong: oklch(0.62 0.018 245 / 0.72);
-  --cs-red: oklch(0.56 0.22 28);
-  --cs-red-strong: oklch(0.49 0.205 28);
-  /* Crveni TEKST: na svetlim panelima dublji ton (≥ 4.5:1); tamne sekcije ga posvetljavaju. */
-  --cs-red-text: oklch(0.5 0.2 28);
-  --cs-red-soft: oklch(0.91 0.052 27);
+  --cs-paper: var(--ds-c-bg);
+  --cs-paper-strong: var(--ds-c-surface);
+  --cs-paper-muted: var(--ds-c-surface-2);
+  --cs-paper-cool: var(--ds-c-scene-b);
+  --cs-ink: var(--ds-c-text);
+  --cs-ink-soft: var(--ds-c-text-2);
+  --cs-ink-faint: var(--ds-c-text-3);
+  --cs-line: var(--ds-c-line);
+  --cs-line-strong: var(--ds-c-line-strong);
+  /* Carsystem ispuna (beli tekst) i crveni tekst: svetla #D10512, tamna #FF6B66. */
+  --cs-red: #e30613;
+  --cs-red-hover: color-mix(in oklch, #e30613 86%, black);
+  --cs-red-strong: #d10512;
+  --cs-red-text: #d10512;
+  --cs-red-soft: var(--ds-c-accent-soft);
   --cs-dark: oklch(0.145 0.02 245);
   --cs-dark-raised: oklch(0.19 0.022 245);
   --cs-dark-ink: oklch(0.95 0.008 245);
   --cs-dark-muted: oklch(0.72 0.018 245);
   --cs-ease: cubic-bezier(0.16, 1, 0.3, 1);
-  --brand-nav-surface: oklch(0.975 0.006 245 / 0.94);
-  --brand-nav-border: oklch(0.77 0.012 245 / 0.72);
+  --brand-nav-surface: color-mix(in oklch, var(--ds-c-bg) 94%, transparent);
+  --brand-nav-border: var(--ds-c-line);
   --brand-nav-ink: var(--cs-ink);
   --brand-nav-accent: var(--cs-red);
   position: relative;
@@ -35,8 +38,8 @@
 }
 
 .carsystemPage :where(a, button):focus-visible {
-  outline: 2px solid var(--cs-red);
-  outline-offset: 4px;
+  outline: 2px solid var(--ds-c-focus);
+  outline-offset: 2px;
 }
 
 .carsystemPage :where(h1, h2, h3, p) {
@@ -51,7 +54,7 @@
   text-wrap: pretty;
 }
 
-.carsystemPage :where(#overview, #process, #systems, #use-cases, #products, #documentation) {
+.carsystemPage :where(#overview, #process, #systems, #use-cases, #products, #rupes, #documentation) {
   scroll-margin-top: calc(
     var(--brand-section-header-offset, 0px) +
       var(--brand-section-nav-height, 3.75rem) + 1rem
@@ -96,95 +99,98 @@
 .sectionHeader h2,
 .workflowHeader h2,
 .documentationIntro h2 {
-  max-width: 17ch;
+  max-width: 22ch;
   font-family: var(--font-display), var(--font-geist-sans), sans-serif;
-  font-size: clamp(2.75rem, 6.1vw, 6.9rem);
-  font-weight: 800;
-  letter-spacing: -0.057em;
-  line-height: 0.91;
+  font-size: var(--ds-font-h2);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  line-height: 1.1;
 }
 
 .sectionHeader > p,
 .workflowHeader > p,
-.documentationIntro > p {
+.documentationIntro > p:not(.sectionKicker) {
   max-width: 60ch;
   color: var(--cs-ink-soft);
-  font-size: clamp(1rem, 1.35vw, 1.18rem);
-  line-height: 1.72;
+  font-size: var(--ds-font-lead);
+  line-height: 1.55;
 }
 
 .sectionKicker {
-  margin-block-end: 1.05rem !important;
-  color: var(--cs-red-strong);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-block-end: 1rem !important;
+  color: var(--cs-red-text);
   font-family: var(--font-technical), var(--font-geist-mono), monospace;
-  font-size: 0.72rem;
-  font-weight: 600;
-  letter-spacing: 0.13em;
+  font-size: var(--ds-font-label);
+  font-weight: 500;
+  letter-spacing: var(--ds-tracking-label);
+  line-height: 1.4;
   text-transform: uppercase;
+}
+
+.sectionKicker::before {
+  width: 24px;
+  height: 2px;
+  flex: none;
+  background: var(--cs-red);
+  content: "";
 }
 
 .primaryButton,
 .secondaryButton,
 .darkSecondaryButton {
   display: inline-flex;
-  min-height: 3.25rem;
+  min-height: var(--ds-ctl-h-l);
   align-items: center;
   justify-content: center;
   gap: 0.75rem;
-  padding: 0.78rem 1.25rem;
+  padding: 0.75rem 1.25rem;
   border: 1px solid transparent;
+  border-radius: var(--ds-ctl-radius);
   color: inherit;
-  font-size: 0.84rem;
-  font-weight: 700;
-  line-height: 1.2;
+  font: var(--ds-ctl-font);
   text-align: center;
   text-decoration: none;
   transition:
-    background-color 220ms var(--cs-ease),
-    border-color 220ms var(--cs-ease),
-    color 220ms var(--cs-ease),
-    transform 220ms var(--cs-ease);
+    background-color 180ms ease,
+    border-color 180ms ease,
+    color 180ms ease;
 }
 
+/* Primarno: Carsystem ispuna, beli tekst; bez podizanja i senke. */
 .primaryButton {
   border-color: var(--cs-red);
   background: var(--cs-red);
-  color: oklch(0.985 0.004 245);
+  color: var(--ds-c-on-accent);
 }
 
+/* Sekundarno: okvir boje teksta, providno; miš površina 2. */
 .secondaryButton {
-  border-color: var(--cs-line-strong);
-  background: color-mix(in oklch, var(--cs-paper-strong) 84%, transparent);
+  border-color: var(--cs-ink);
+  background: transparent;
   color: var(--cs-ink);
 }
 
-.primaryButton:hover,
-.primaryButton:focus-visible {
-  border-color: var(--cs-red-strong);
-  background: var(--cs-red-strong);
-  transform: translate3d(0, -2px, 0);
+.primaryButton:hover {
+  border-color: var(--cs-red-hover);
+  background: var(--cs-red-hover);
 }
 
-.secondaryButton:hover,
-.secondaryButton:focus-visible {
-  border-color: var(--cs-ink);
-  background: var(--cs-ink);
-  color: var(--cs-paper-strong);
-  transform: translate3d(0, -2px, 0);
+.secondaryButton:hover {
+  background: var(--ds-c-surface-2);
 }
 
+/* Na grafitnoj površini: beli okvir. */
 .darkSecondaryButton {
-  border-color: oklch(0.78 0.015 245 / 0.34);
+  border-color: var(--cs-dark-ink);
   background: transparent;
   color: var(--cs-dark-ink);
 }
 
-.darkSecondaryButton:hover,
-.darkSecondaryButton:focus-visible {
-  border-color: var(--cs-dark-ink);
-  background: var(--cs-dark-ink);
-  color: var(--cs-dark);
-  transform: translate3d(0, -2px, 0);
+.darkSecondaryButton:hover {
+  background: color-mix(in oklch, var(--cs-dark-ink) 12%, transparent);
 }
 
 .breadcrumb {
@@ -197,8 +203,8 @@
   gap: 0.65rem;
   color: var(--cs-ink-soft);
   font-family: var(--font-technical), var(--font-geist-mono), monospace;
-  font-size: 0.68rem;
-  letter-spacing: 0.06em;
+  font-size: var(--ds-font-label);
+  letter-spacing: 0.02em;
 }
 
 .breadcrumb a {
@@ -348,8 +354,8 @@
   background: var(--cs-dark);
   color: var(--cs-dark-ink);
   font-family: var(--font-technical), var(--font-geist-mono), monospace;
-  font-size: 0.58rem;
-  letter-spacing: 0.04em;
+  font-size: var(--ds-font-label);
+  letter-spacing: 0.02em;
   overflow-wrap: anywhere;
 }
 
@@ -362,19 +368,8 @@
     max(var(--ds-gutter, clamp(20px, 4vw, 56px)), calc((100% - var(--ds-container-max, 1208px)) / 2))
     clamp(1.5rem, 2.4vw, 2.4rem);
   border-bottom: 1px solid var(--cs-line);
-  background:
-    linear-gradient(
-      to right,
-      color-mix(in oklch, var(--cs-line) 48%, transparent) 1px,
-      transparent 1px
-    ),
-    linear-gradient(
-      to bottom,
-      color-mix(in oklch, var(--cs-line) 38%, transparent) 1px,
-      transparent 1px
-    ),
-    var(--cs-paper);
-  background-size: 8rem 8rem;
+  /* Sistem A: ravna površina, bez mreže. */
+  background: var(--cs-paper);
 }
 
 .hero::before {
@@ -416,12 +411,12 @@
 }
 
 .heroBrand > span:last-child {
-  max-width: 13rem;
+  max-width: 15rem;
   color: var(--cs-ink-soft);
   font-family: var(--font-technical), var(--font-geist-mono), monospace;
-  font-size: 0.67rem;
-  font-weight: 600;
-  letter-spacing: 0.12em;
+  font-size: var(--ds-font-label);
+  font-weight: 500;
+  letter-spacing: var(--ds-tracking-label);
   line-height: 1.45;
   text-transform: uppercase;
 }
@@ -432,6 +427,7 @@
   height: 3.35rem;
   place-items: center;
   border: 1px solid var(--cs-line);
+  border-radius: var(--ds-ctl-radius);
   background: var(--cs-paper-strong);
 }
 
@@ -447,22 +443,23 @@
 }
 
 .heroSlogan {
-  margin-block-end: 0.85rem !important;
-  color: var(--cs-red-strong);
+  margin-block-end: 1rem !important;
+  color: var(--cs-red-text);
   font-family: var(--font-technical), var(--font-geist-mono), monospace;
-  font-size: clamp(0.7rem, 0.9vw, 0.82rem);
-  font-weight: 600;
-  letter-spacing: 0.08em;
+  font-size: clamp(0.75rem, 0.9vw, 0.875rem);
+  font-weight: 500;
+  letter-spacing: 0.04em;
   animation: cs-slogan-reveal 700ms var(--cs-ease) 230ms both;
 }
 
 .heroMessage h1 {
   max-width: 12ch;
   font-family: var(--font-display), var(--font-geist-sans), sans-serif;
-  font-size: clamp(3.8rem, 6vw, 7.2rem);
-  font-weight: 850;
-  letter-spacing: -0.069em;
-  line-height: 0.84;
+  /* Kampanjski izuzetak sistema A: do 88 px, slova se ne dodiruju. */
+  font-size: clamp(3rem, 5.4vw, 5.5rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 0.98;
   animation: cs-title-reveal 900ms var(--cs-ease) 300ms both;
 }
 
@@ -470,8 +467,8 @@
   max-width: 60ch;
   margin-block-start: clamp(1.5rem, 2.4vw, 2.2rem) !important;
   color: var(--cs-ink-soft);
-  font-size: clamp(1rem, 1.35vw, 1.22rem);
-  line-height: 1.68;
+  font-size: var(--ds-font-lead);
+  line-height: 1.55;
   animation: cs-copy-reveal 760ms var(--cs-ease) 460ms both;
 }
 
@@ -498,21 +495,22 @@
 .heroActivePhase > span {
   color: var(--cs-red-text, var(--cs-red));
   font-family: var(--font-technical), var(--font-geist-mono), monospace;
-  font-size: 0.78rem;
-  font-weight: 600;
+  font-size: var(--ds-font-label);
+  font-weight: 500;
 }
 
 .heroActivePhase strong {
   display: block;
   font-family: var(--font-display), var(--font-geist-sans), sans-serif;
-  font-size: 1rem;
+  font-size: 1.0625rem;
+  font-weight: 700;
 }
 
 .heroActivePhase p {
   margin-block-start: 0.28rem !important;
   color: var(--cs-ink-soft);
-  font-size: 0.84rem;
-  line-height: 1.45;
+  font-size: var(--ds-font-small);
+  line-height: 1.5;
 }
 
 .heroVisual {
@@ -579,9 +577,17 @@
   gap: 1rem;
   color: oklch(0.96 0.006 245);
   font-family: var(--font-technical), var(--font-geist-mono), monospace;
-  font-size: 0.59rem;
-  font-weight: 600;
-  letter-spacing: 0.11em;
+  font-size: var(--ds-font-label);
+  font-weight: 500;
+  letter-spacing: var(--ds-tracking-label);
+  text-transform: uppercase;
+}
+
+/* Oznake leže na svetloj studijskoj sceni: grafitna pločica drži kontrast. */
+.heroVisualMeta > span {
+  padding: 0.3rem 0.5rem;
+  border-radius: var(--ds-ctl-radius);
+  background: color-mix(in oklch, var(--cs-dark) 78%, transparent);
 }
 
 .heroControls {
@@ -640,12 +646,12 @@
 .heroTabs button span {
   color: var(--cs-ink-faint);
   font-family: var(--font-technical), var(--font-geist-mono), monospace;
-  font-size: 0.68rem;
+  font-size: var(--ds-font-label);
 }
 
 .heroTabs button strong {
-  font-size: 0.76rem;
-  font-weight: 650;
+  font-size: var(--ds-font-small);
+  font-weight: 600;
 }
 
 .heroTabs button[data-active] {
@@ -684,13 +690,12 @@
   border-right: 1px solid var(--cs-line);
   color: var(--cs-ink-soft);
   font-family: var(--font-technical), var(--font-geist-mono), monospace;
-  font-size: 0.68rem;
+  font-size: var(--ds-font-label);
 }
 
-.heroTransport button:hover,
-.heroTransport button:focus-visible {
-  background: var(--cs-ink);
-  color: var(--cs-paper-strong);
+.heroTransport button:hover {
+  background: var(--ds-c-surface-2);
+  color: var(--cs-ink);
 }
 
 .heroTransport .heroPause {
@@ -698,8 +703,8 @@
   min-width: 5.4rem;
   padding-inline: 0.8rem;
   color: var(--cs-ink-soft);
-  font-size: 0.68rem;
-  font-weight: 650;
+  font-size: var(--ds-font-small);
+  font-weight: 600;
 }
 
 /* Metrics */
@@ -779,20 +784,21 @@
   font-family: var(--font-display), var(--font-geist-sans), sans-serif;
   font-size: clamp(1.65rem, 2.5vw, 2.7rem);
   font-weight: 800;
-  letter-spacing: -0.045em;
+  letter-spacing: -0.02em;
+  line-height: 1;
 }
 
 .metrics dt span {
   color: var(--cs-ink);
-  font-size: 0.78rem;
-  font-weight: 650;
+  font-size: var(--ds-font-small);
+  font-weight: 600;
   line-height: 1.35;
 }
 
 .metrics dd {
   margin: 0.35rem 0 0;
   color: var(--cs-ink-faint);
-  font-size: 0.68rem;
+  font-size: var(--ds-font-legal);
   line-height: 1.45;
 }
 
@@ -857,22 +863,23 @@
 .processTabs button > span {
   color: var(--cs-ink-faint);
   font-family: var(--font-technical), var(--font-geist-mono), monospace;
-  font-size: 0.72rem;
+  font-size: var(--ds-font-label);
 }
 
 .processTabs button > strong {
   padding-right: 1.5rem;
   font-family: var(--font-display), var(--font-geist-sans), sans-serif;
-  font-size: clamp(1.15rem, 1.7vw, 1.6rem);
-  font-weight: 720;
-  letter-spacing: -0.025em;
+  font-size: var(--ds-font-h3);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  line-height: 1.2;
 }
 
 .processTabs button > small {
   grid-column: 2;
   color: var(--cs-ink-faint);
-  font-size: 0.76rem;
-  line-height: 1.48;
+  font-size: var(--ds-font-small);
+  line-height: 1.5;
 }
 
 .processTabs button:hover,
@@ -927,7 +934,7 @@
   align-items: center;
   color: oklch(0.96 0.006 245);
   font-family: var(--font-technical), var(--font-geist-mono), monospace;
-  font-size: 0.61rem;
+  font-size: var(--ds-font-label);
 }
 
 .processProgress i {
@@ -953,28 +960,28 @@
 .processDetailsHeading > p,
 .processCategories > p,
 .processProducts > p {
-  color: var(--cs-red-strong);
+  color: var(--cs-red-text);
   font-family: var(--font-technical), var(--font-geist-mono), monospace;
-  font-size: 0.62rem;
-  font-weight: 600;
-  letter-spacing: 0.09em;
+  font-size: var(--ds-font-label);
+  font-weight: 500;
+  letter-spacing: var(--ds-tracking-label);
   text-transform: uppercase;
 }
 
 .processDetailsHeading h3 {
   margin-block-start: 0.65rem;
   font-family: var(--font-display), var(--font-geist-sans), sans-serif;
-  font-size: clamp(2rem, 3.6vw, 3.6rem);
-  font-weight: 780;
-  letter-spacing: -0.05em;
-  line-height: 0.96;
+  font-size: clamp(1.625rem, 1.2rem + 1.2vw, 2.25rem);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  line-height: 1.1;
 }
 
 .processDetailsHeading > span {
   display: block;
   margin-block-start: 1rem;
   color: var(--cs-ink-soft);
-  font-size: 0.9rem;
+  font-size: var(--ds-font-body);
   line-height: 1.6;
 }
 
@@ -998,10 +1005,11 @@
   align-items: center;
   gap: 0.55rem;
   padding: 0.45rem;
+  border-radius: var(--ds-ctl-radius);
   color: var(--cs-ink-soft);
-  font-size: 0.7rem;
-  font-weight: 650;
-  line-height: 1.2;
+  font-size: var(--ds-font-small);
+  font-weight: 600;
+  line-height: 1.25;
   text-decoration: none;
   transition:
     background-color 180ms ease,
@@ -1059,7 +1067,7 @@
   background: var(--cs-paper-muted);
   color: var(--cs-red-text, var(--cs-red));
   font-family: var(--font-display), var(--font-geist-sans), sans-serif;
-  font-size: 0.72rem;
+  font-size: var(--ds-font-label);
   font-weight: 800;
 }
 
@@ -1077,7 +1085,7 @@
   overflow: hidden;
   color: var(--cs-ink-faint);
   font-family: var(--font-technical), var(--font-geist-mono), monospace;
-  font-size: 0.55rem;
+  font-size: var(--ds-font-label);
   text-overflow: ellipsis;
   white-space: nowrap;
 }
@@ -1085,8 +1093,9 @@
 .processProducts strong {
   display: block;
   margin-block-start: 0.14rem;
-  font-size: 0.74rem;
-  line-height: 1.25;
+  font-size: var(--ds-font-small);
+  font-weight: 600;
+  line-height: 1.3;
 }
 
 .processProducts i {
@@ -1097,7 +1106,7 @@
 
 .processProducts a:hover i,
 .processProducts a:focus-visible i {
-  transform: translate3d(0.2rem, -0.2rem, 0);
+  transform: translate3d(0.2rem, 0, 0);
 }
 
 .processCta {
@@ -1110,8 +1119,7 @@
   padding-block-start: 1.1rem;
   border-top: 1px solid var(--cs-line-strong);
   color: var(--cs-ink);
-  font-size: 0.76rem;
-  font-weight: 700;
+  font: var(--ds-ctl-font);
   text-decoration: none;
 }
 
@@ -1122,7 +1130,7 @@
 
 .processCta:hover span,
 .processCta:focus-visible span {
-  transform: translate3d(0.22rem, -0.22rem, 0);
+  transform: translate3d(0.22rem, 0, 0);
 }
 
 .processAccordion {
@@ -1248,7 +1256,7 @@
 .workflowTrack article > div span {
   color: oklch(0.7 0.18 28);
   font-family: var(--font-technical), var(--font-geist-mono), monospace;
-  font-size: 0.65rem;
+  font-size: var(--ds-font-label);
   font-weight: 600;
 }
 
@@ -1256,8 +1264,8 @@
   margin-block-start: 0.65rem;
   font-family: var(--font-display), var(--font-geist-sans), sans-serif;
   font-size: clamp(1.25rem, 2vw, 1.9rem);
-  font-weight: 720;
-  letter-spacing: -0.03em;
+  font-weight: 700;
+  letter-spacing: -0.01em;
 }
 
 .workflowTrack article p {
@@ -1282,6 +1290,7 @@
   min-width: 0;
   overflow: hidden;
   border: 1px solid var(--cs-line);
+  border-radius: var(--ds-ctl-radius);
   background: var(--cs-paper-strong);
 }
 
@@ -1318,43 +1327,39 @@
 .familyCopy > span {
   color: var(--cs-red-text, var(--cs-red));
   font-family: var(--font-technical), var(--font-geist-mono), monospace;
-  font-size: 0.68rem;
-  font-weight: 600;
+  font-size: var(--ds-font-label);
+  font-weight: 500;
 }
 
 .familyCopy > p {
   margin-block-start: auto;
-  color: var(--cs-red-strong);
+  color: var(--cs-red-text);
   font-family: var(--font-technical), var(--font-geist-mono), monospace;
-  font-size: 0.62rem;
-  font-weight: 600;
-  letter-spacing: 0.1em;
+  font-size: var(--ds-font-label);
+  font-weight: 500;
+  letter-spacing: var(--ds-tracking-label);
   text-transform: uppercase;
-}
-
-.familyPanel[data-layout="featured"] .familyCopy > p {
-  color: oklch(0.7 0.18 28);
 }
 
 .familyCopy h3 {
   margin-block-start: 0.6rem;
   font-family: var(--font-display), var(--font-geist-sans), sans-serif;
-  font-size: clamp(2.2rem, 4.7vw, 5rem);
-  font-weight: 800;
-  letter-spacing: -0.06em;
-  line-height: 0.9;
+  font-size: var(--ds-font-h2);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  line-height: 1.1;
 }
 
 .familyPanel[data-layout="medium"] .familyCopy h3 {
-  font-size: clamp(1.7rem, 3vw, 2.85rem);
+  font-size: clamp(1.375rem, 1.1rem + 0.8vw, 1.75rem);
 }
 
 .familyCopy > strong {
   max-width: 48ch;
   margin-block-start: 0.9rem;
   color: var(--cs-ink-soft);
-  font-size: 0.82rem;
-  font-weight: 450;
+  font-size: var(--ds-font-small);
+  font-weight: 400;
   line-height: 1.55;
 }
 
@@ -1369,11 +1374,15 @@
   align-items: center;
   gap: 0.8rem;
   margin-block-start: 1.2rem;
-  border-bottom: 1px solid currentColor;
   color: inherit;
-  font-size: 0.72rem;
-  font-weight: 700;
-  text-decoration: none;
+  font: var(--ds-ctl-font);
+  text-decoration: underline 1px var(--ds-c-line-strong);
+  text-underline-offset: 0.3em;
+}
+
+.familyCopy a:hover {
+  text-decoration-color: currentColor;
+  text-decoration-thickness: 2px;
 }
 
 .familyCopy a i {
@@ -1384,7 +1393,7 @@
 
 .familyCopy a:hover i,
 .familyCopy a:focus-visible i {
-  transform: translate3d(0.22rem, -0.22rem, 0);
+  transform: translate3d(0.22rem, 0, 0);
 }
 
 .familyVisual {
@@ -1523,8 +1532,8 @@
   color: var(--cs-ink-soft);
   cursor: pointer;
   font: inherit;
-  font-size: 0.79rem;
-  font-weight: 620;
+  font-size: 0.9375rem;
+  font-weight: 600;
   text-align: left;
   transition:
     background-color 220ms var(--cs-ease),
@@ -1538,7 +1547,7 @@
 .useCaseTabs button span {
   color: var(--cs-ink-faint);
   font-family: var(--font-technical), var(--font-geist-mono), monospace;
-  font-size: 0.64rem;
+  font-size: var(--ds-font-label);
 }
 
 .useCaseTabs button i {
@@ -1577,23 +1586,23 @@
   animation: cs-use-case-switch 460ms var(--cs-ease) both;
 }
 
-.useCaseResultHeader > p {
-  color: var(--cs-red-strong);
+.useCaseResultHeader > p:first-child {
+  color: var(--cs-red-text);
   font-family: var(--font-technical), var(--font-geist-mono), monospace;
-  font-size: 0.64rem;
-  font-weight: 600;
-  letter-spacing: 0.09em;
+  font-size: var(--ds-font-label);
+  font-weight: 500;
+  letter-spacing: var(--ds-tracking-label);
   text-transform: uppercase;
 }
 
 .useCaseResultHeader h3 {
-  max-width: 18ch;
+  max-width: 22ch;
   margin-block-start: 0.75rem;
   font-family: var(--font-display), var(--font-geist-sans), sans-serif;
-  font-size: clamp(2.1rem, 4vw, 4.6rem);
-  font-weight: 800;
-  letter-spacing: -0.055em;
-  line-height: 0.94;
+  font-size: clamp(1.625rem, 1.2rem + 1.2vw, 2.25rem);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  line-height: 1.1;
 }
 
 .useCaseResultHeader > span {
@@ -1601,7 +1610,7 @@
   max-width: 56ch;
   margin-block-start: 1rem;
   color: var(--cs-ink-soft);
-  font-size: 0.9rem;
+  font-size: var(--ds-font-body);
   line-height: 1.6;
 }
 
@@ -1623,14 +1632,15 @@
 
 .useCaseSequence strong {
   padding: 0.42rem 0.6rem;
-  border: 1px solid var(--cs-line);
+  border: 1px solid var(--cs-line-strong);
+  border-radius: var(--ds-ctl-radius);
   color: var(--cs-ink-soft);
-  font-size: 0.64rem;
+  font-size: var(--ds-font-legal);
   font-weight: 600;
 }
 
 .useCaseSequence span {
-  color: var(--cs-red-strong);
+  color: var(--cs-red-text);
   font-size: 0.8rem;
 }
 
@@ -1638,7 +1648,7 @@
   max-width: 42ch;
   margin: 0.7rem 0 0;
   color: var(--cs-ink-faint);
-  font-size: 0.68rem;
+  font-size: var(--ds-font-legal);
   font-style: italic;
   line-height: 1.5;
 }
@@ -1658,17 +1668,14 @@
   align-items: center;
   padding: 0.55rem;
   border: 1px solid var(--cs-line);
+  border-radius: var(--ds-ctl-radius);
   color: var(--cs-ink);
   text-decoration: none;
-  transition:
-    border-color 180ms ease,
-    transform 240ms var(--cs-ease);
+  transition: border-color 180ms ease;
 }
 
-.useCaseProducts > a:hover,
-.useCaseProducts > a:focus-visible {
-  border-color: var(--cs-ink);
-  transform: translate3d(0, -3px, 0);
+.useCaseProducts > a:hover {
+  border-color: var(--cs-line-strong);
 }
 
 .useCaseProductImage {
@@ -1701,7 +1708,7 @@
   overflow: hidden;
   color: var(--cs-ink-faint);
   font-family: var(--font-technical), var(--font-geist-mono), monospace;
-  font-size: 0.5rem;
+  font-size: var(--ds-font-label);
   text-overflow: ellipsis;
   text-transform: uppercase;
   white-space: nowrap;
@@ -1711,7 +1718,8 @@
   display: -webkit-box;
   margin-block-start: 0.2rem;
   overflow: hidden;
-  font-size: 0.7rem;
+  font-size: var(--ds-font-small);
+  font-weight: 600;
   line-height: 1.3;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
@@ -1743,8 +1751,9 @@
   margin: 0 0 0.7rem;
   color: var(--cs-ink-faint);
   font-family: var(--font-technical), var(--font-geist-mono), monospace;
-  font-size: 0.62rem;
-  letter-spacing: 0.06em;
+  font-size: var(--ds-font-label);
+  font-weight: 500;
+  letter-spacing: var(--ds-tracking-label);
   text-transform: uppercase;
 }
 
@@ -1759,17 +1768,17 @@
 
 .rangeCoverage a {
   display: inline-block;
-  padding: 0.4rem 0.7rem;
-  border: 1px solid var(--cs-line);
+  padding: 0.45rem 0.75rem;
+  border: 1px solid var(--cs-line-strong);
+  border-radius: var(--ds-ctl-radius);
   color: var(--cs-ink-soft);
-  font-size: 0.72rem;
+  font-size: var(--ds-font-small);
   text-decoration: none;
 }
 
-.rangeCoverage a:hover,
-.rangeCoverage a:focus-visible {
-  border-color: var(--cs-red-strong);
-  color: var(--cs-red-strong);
+.rangeCoverage a:hover {
+  border-color: var(--cs-ink);
+  color: var(--cs-ink);
 }
 
 .productFilters {
@@ -1780,32 +1789,33 @@
 }
 
 .productFilters button {
-  min-height: 2.85rem;
+  min-height: var(--ds-ctl-h-m);
   padding: 0.55rem 0.9rem;
-  border: 1px solid var(--cs-line);
+  border: 1px solid var(--cs-line-strong);
+  border-radius: var(--ds-ctl-radius);
   background: transparent;
   color: var(--cs-ink-soft);
   cursor: pointer;
   font: inherit;
-  font-size: 0.72rem;
-  font-weight: 650;
+  font-size: var(--ds-font-small);
+  font-weight: 600;
   transition:
     background-color 180ms ease,
     border-color 180ms ease,
     color 180ms ease;
 }
 
-.productFilters button:hover,
-.productFilters button:focus-visible,
-.productFilters button[data-active] {
+.productFilters button:hover {
   border-color: var(--cs-ink);
-  background: var(--cs-ink);
-  color: var(--cs-paper-strong);
+  color: var(--cs-ink);
 }
 
+/* Izabrano: 2 px brend akcenat + mekana podloga (druga linija je senka, bez pomeranja). */
 .productFilters button[data-active] {
   border-color: var(--cs-red);
-  background: var(--cs-red);
+  background: var(--cs-red-soft);
+  box-shadow: inset 0 0 0 1px var(--cs-red);
+  color: var(--cs-ink);
 }
 
 /*
@@ -1822,9 +1832,16 @@
 }
 
 .productCard {
+  position: relative;
   min-width: 0;
   outline: 1px solid var(--cs-line);
   background: var(--cs-paper-strong);
+  transition: outline-color 180ms ease;
+}
+
+.productCard:hover {
+  z-index: 1;
+  outline-color: var(--cs-line-strong);
 }
 
 .productCard > a {
@@ -1850,7 +1867,6 @@
 .productCardVisual > img {
   object-fit: contain;
   padding: clamp(1.2rem, 2.5vw, 2.5rem);
-  transition: transform 520ms var(--cs-ease);
 }
 
 .productCardVisual > small {
@@ -1859,8 +1875,8 @@
   left: 0.85rem;
   color: var(--cs-red-text, var(--cs-red));
   font-family: var(--font-technical), var(--font-geist-mono), monospace;
-  font-size: 0.6rem;
-  font-weight: 600;
+  font-size: var(--ds-font-label);
+  font-weight: 500;
 }
 
 .productFallback {
@@ -1869,6 +1885,7 @@
   height: 50%;
   place-items: center;
   border: 1px solid var(--cs-line);
+  border-radius: var(--ds-ctl-radius);
   background: var(--cs-paper-strong);
 }
 
@@ -1885,27 +1902,27 @@
 }
 
 .productCardCopy > span {
-  color: var(--cs-red-strong);
+  color: var(--cs-red-text);
   font-family: var(--font-technical), var(--font-geist-mono), monospace;
-  font-size: 0.56rem;
-  font-weight: 600;
-  letter-spacing: 0.07em;
+  font-size: var(--ds-font-label);
+  font-weight: 500;
+  letter-spacing: var(--ds-tracking-label);
   text-transform: uppercase;
 }
 
 .productCardCopy h3 {
   margin-block-start: 0.55rem;
-  font-family: var(--font-display), var(--font-geist-sans), sans-serif;
-  font-size: clamp(1.05rem, 1.5vw, 1.35rem);
-  font-weight: 720;
-  letter-spacing: -0.025em;
-  line-height: 1.1;
+  font-family: var(--font-body), system-ui, sans-serif;
+  font-size: var(--ds-font-card-title);
+  font-weight: 600;
+  letter-spacing: 0;
+  line-height: 1.3;
 }
 
 .productCardCopy p {
   margin-block-start: 0.7rem;
   color: var(--cs-ink-soft);
-  font-size: 0.74rem;
+  font-size: var(--ds-font-small);
   line-height: 1.5;
 }
 
@@ -1917,7 +1934,8 @@
   margin-block-start: auto;
   padding-block-start: 1.2rem;
   color: var(--cs-ink);
-  font-size: 0.69rem;
+  font-size: var(--ds-font-small);
+  font-weight: 600;
 }
 
 .productCardCopy > strong i {
@@ -1926,14 +1944,9 @@
   transition: transform 220ms var(--cs-ease);
 }
 
-.productCard > a:hover .productCardVisual > img,
-.productCard > a:focus-visible .productCardVisual > img {
-  transform: scale(1.035) rotate(-1deg);
-}
-
 .productCard > a:hover .productCardCopy > strong i,
 .productCard > a:focus-visible .productCardCopy > strong i {
-  transform: translate3d(0.22rem, -0.22rem, 0);
+  transform: translate3d(0.22rem, 0, 0);
 }
 
 .productsFooter {
@@ -1949,8 +1962,29 @@
 .productsFooter p {
   max-width: 56ch;
   color: var(--cs-ink-soft);
-  font-size: 0.82rem;
+  font-size: var(--ds-font-small);
   line-height: 1.55;
+}
+
+/* RUPES u okviru Carsystem ponude */
+
+.rupesSection {
+  border-block-start: 1px solid var(--cs-line);
+}
+
+/* Četiri istaknuta: 2 × 2 umesto 3 + 1 kada mreža ima tri kolone. */
+@media (min-width: 30.01rem) and (max-width: 80rem) {
+  .rupesGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.rupesNote {
+  max-width: var(--ds-w-measure, 68ch);
+  margin-block: calc(clamp(2.75rem, 5vw, 5rem) * -0.5) clamp(1.75rem, 3vw, 2.5rem) !important;
+  color: var(--cs-ink-faint);
+  font-size: var(--ds-font-legal);
+  line-height: 1.5;
 }
 
 /* Document library (curated Carsystem catalogs/brochures rail) */
@@ -1993,40 +2027,41 @@
 
 .finishStep {
   border: 1px solid var(--cs-line);
-  border-radius: var(--ds-radius, 2px);
+  border-radius: var(--ds-ctl-radius);
   padding: clamp(1.25rem, 2.5vw, 2rem);
 }
 
 .finishStepIndex {
   display: block;
   font-family: var(--font-technical), var(--font-geist-mono), monospace;
-  font-size: 0.72rem;
-  font-weight: 600;
+  font-size: var(--ds-font-label);
+  font-weight: 500;
   color: var(--cs-ink-faint);
 }
 
 .finishStepLabel {
   margin-block-start: 0.5rem;
-  color: var(--cs-red-strong);
+  color: var(--cs-red-text);
   font-family: var(--font-technical), var(--font-geist-mono), monospace;
-  font-size: 0.7rem;
-  font-weight: 600;
-  letter-spacing: 0.1em;
+  font-size: var(--ds-font-label);
+  font-weight: 500;
+  letter-spacing: var(--ds-tracking-label);
   text-transform: uppercase;
 }
 
 .finishStep h3 {
   margin-block-start: 0.6rem;
   font-family: var(--font-display), var(--font-geist-sans), sans-serif;
-  font-size: 1.35rem;
-  font-weight: 800;
+  font-size: var(--ds-font-h3);
+  font-weight: 700;
+  line-height: 1.2;
 }
 
 .finishStep > p {
   margin-block-start: 0.6rem;
   color: var(--cs-ink-soft);
-  font-size: 0.92rem;
-  line-height: 1.55;
+  font-size: var(--ds-font-body);
+  line-height: 1.6;
 }
 
 .finishStepPads {
@@ -2039,11 +2074,11 @@
 }
 
 .finishStepPads li {
-  border: 1px solid var(--cs-line);
-  border-radius: var(--ds-radius, 2px);
+  border: 1px solid var(--cs-line-strong);
+  border-radius: var(--ds-ctl-radius);
   padding: 0.3rem 0.6rem;
   font-family: var(--font-technical), var(--font-geist-mono), monospace;
-  font-size: 0.68rem;
+  font-size: var(--ds-font-label);
   font-weight: 500;
   color: var(--cs-ink-soft);
 }
@@ -2057,7 +2092,7 @@
   padding-block-start: 1.5rem;
   border-block-start: 1px solid var(--cs-line);
   color: var(--cs-ink-soft);
-  font-size: 0.88rem;
+  font-size: var(--ds-font-small);
 }
 
 .finishAccessory strong {
@@ -2073,16 +2108,16 @@
 }
 
 .finishBrochureLink {
-  font-size: 0.85rem;
+  color: var(--cs-ink);
+  font-size: var(--ds-font-small);
   font-weight: 600;
-  color: var(--cs-ink-soft);
-  text-decoration: underline;
-  text-underline-offset: 3px;
+  text-decoration: underline 1px var(--ds-c-line-strong);
+  text-underline-offset: 0.3em;
 }
 
-.finishBrochureLink:hover,
-.finishBrochureLink:focus-visible {
-  color: var(--cs-ink);
+.finishBrochureLink:hover {
+  text-decoration-color: currentColor;
+  text-decoration-thickness: 2px;
 }
 
 /* Multi Changer spotlight */
@@ -2100,16 +2135,15 @@
 .multiChangerCard {
   display: block;
   border: 1px solid var(--cs-line);
-  border-radius: var(--ds-radius, 2px);
+  border-radius: var(--ds-ctl-radius);
   padding: clamp(1.25rem, 2.5vw, 2rem);
   color: inherit;
   text-decoration: none;
-  transition: border-color 220ms var(--cs-ease);
+  transition: border-color 180ms ease;
 }
 
-.multiChangerCard:hover,
-.multiChangerCard:focus-visible {
-  border-color: var(--cs-red);
+.multiChangerCard:hover {
+  border-color: var(--cs-line-strong);
 }
 
 .multiChangerSwatches {
@@ -2133,20 +2167,21 @@
 .multiChangerCard h3 {
   margin-block-start: 1rem;
   font-family: var(--font-display), var(--font-geist-sans), sans-serif;
-  font-size: 1.2rem;
-  font-weight: 800;
+  font-size: var(--ds-font-h3);
+  font-weight: 700;
+  line-height: 1.2;
 }
 
 .multiChangerCard > p {
   margin-block-start: 0.4rem;
   color: var(--cs-ink-soft);
-  font-size: 0.9rem;
+  font-size: var(--ds-font-body);
 }
 
 .multiChangerCard > p span {
   display: block;
   margin-block-start: 0.2rem;
-  font-size: 0.76rem;
+  font-size: var(--ds-font-legal);
   color: var(--cs-ink-faint);
 }
 
@@ -2154,7 +2189,7 @@
   display: inline-block;
   margin-block-start: 0.75rem;
   font-family: var(--font-technical), var(--font-geist-mono), monospace;
-  font-size: 0.68rem;
+  font-size: var(--ds-font-code);
   color: var(--cs-ink-faint);
 }
 
@@ -2167,14 +2202,8 @@
   gap: clamp(3rem, 7vw, 8rem);
   padding: clamp(5.5rem, 10vw, 10rem)
     max(var(--ds-gutter, clamp(20px, 4vw, 56px)), calc((100% - var(--ds-container-max, 1208px)) / 2));
-  background:
-    linear-gradient(
-      to right,
-      oklch(0.85 0.012 245 / 0.06) 1px,
-      transparent 1px
-    ),
-    var(--cs-dark);
-  background-size: 7rem 100%;
+  /* Grafitna atmosfera brenda ostaje; bez mrežastih linija (sistem A). */
+  background: var(--cs-dark);
   color: var(--cs-dark-ink);
 }
 
@@ -2183,11 +2212,10 @@
 }
 
 .documentationIntro h2 {
-  max-width: 10ch;
-  font-size: clamp(2.8rem, 5.2vw, 6rem);
+  max-width: 16ch;
 }
 
-.documentationIntro > p {
+.documentationIntro > p:not(.sectionKicker) {
   margin-block-start: 1.5rem;
   color: var(--cs-dark-muted);
 }
@@ -2207,30 +2235,30 @@
 }
 
 .documentationGrid article > span:first-child {
-  color: oklch(0.7 0.18 28);
+  color: var(--cs-red-text);
   font-family: var(--font-technical), var(--font-geist-mono), monospace;
-  font-size: 0.68rem;
-  font-weight: 600;
+  font-size: var(--ds-font-label);
+  font-weight: 500;
 }
 
 .documentationGrid h3 {
   font-family: var(--font-display), var(--font-geist-sans), sans-serif;
-  font-size: 1rem;
-  font-weight: 680;
+  font-size: 1.0625rem;
+  font-weight: 700;
 }
 
 .documentationGrid p {
   max-width: 50ch;
   margin-block-start: 0.35rem;
   color: var(--cs-dark-muted);
-  font-size: 0.72rem;
-  line-height: 1.45;
+  font-size: var(--ds-font-small);
+  line-height: 1.5;
 }
 
 .documentationGrid article > strong {
   color: var(--cs-dark-muted);
   font-family: var(--font-technical), var(--font-geist-mono), monospace;
-  font-size: 0.58rem;
+  font-size: var(--ds-font-label);
   font-weight: 500;
   text-align: right;
 }
@@ -2241,7 +2269,8 @@
   width: 2.8rem;
   height: 2.8rem;
   place-items: center;
-  border: 1px solid oklch(0.8 0.012 245 / 0.3);
+  border: 1px solid oklch(0.8 0.012 245 / 0.42);
+  border-radius: var(--ds-ctl-radius);
   color: var(--cs-dark-ink);
   font-style: normal;
   text-decoration: none;
@@ -2251,11 +2280,10 @@
     color 180ms ease;
 }
 
-.documentationGrid article > a:hover,
-.documentationGrid article > a:focus-visible {
+.documentationGrid article > a:hover {
   border-color: var(--cs-red);
   background: var(--cs-red);
-  color: oklch(0.985 0.004 245);
+  color: var(--ds-c-on-accent);
 }
 
 .documentationGrid article[data-disabled] {
@@ -2296,27 +2324,28 @@
 .finalCtaCopy > span {
   color: var(--cs-red-text, var(--cs-red));
   font-family: var(--font-technical), var(--font-geist-mono), monospace;
-  font-size: 0.68rem;
-  font-weight: 600;
-  letter-spacing: 0.1em;
+  font-size: var(--ds-font-label);
+  font-weight: 500;
+  letter-spacing: var(--ds-tracking-label);
+  text-transform: uppercase;
 }
 
 .finalCtaCopy h2 {
-  max-width: 11ch;
+  max-width: 16ch;
   margin-block-start: 1rem;
   font-family: var(--font-display), var(--font-geist-sans), sans-serif;
-  font-size: clamp(3rem, 6vw, 6.8rem);
-  font-weight: 820;
-  letter-spacing: -0.064em;
-  line-height: 0.88;
+  font-size: var(--ds-font-h2);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  line-height: 1.1;
 }
 
 .finalCtaCopy > p {
   max-width: 55ch;
   margin-block-start: 1.5rem;
   color: var(--cs-ink-soft);
-  font-size: 1rem;
-  line-height: 1.65;
+  font-size: var(--ds-font-lead);
+  line-height: 1.55;
 }
 
 .finalCtaCopy > div {
@@ -2487,42 +2516,17 @@
 }
 
 :global(html.dark) .carsystemPage {
-  --cs-paper: oklch(0.13 0.016 245);
-  --cs-paper-strong: oklch(0.17 0.018 245);
-  --cs-paper-muted: oklch(0.205 0.02 245);
-  --cs-paper-cool: oklch(0.24 0.022 245);
-  --cs-ink: oklch(0.94 0.008 245);
-  --cs-ink-soft: oklch(0.74 0.016 245);
-  --cs-ink-faint: oklch(0.67 0.016 245);
-  --cs-line: oklch(0.56 0.018 245 / 0.34);
-  --cs-line-strong: oklch(0.7 0.018 245 / 0.42);
-  --cs-red-soft: oklch(0.31 0.09 28);
-  /* --cs-red-strong je na ovoj stranici uglavnom TEKST (kicker, brojevi faza):
-     na tamnoj podlozi mora biti svetliji (bio je 2.9:1). Ispune ostaju --cs-red. */
-  --cs-red-strong: oklch(0.69 0.19 28);
-  /* Crveni TEKST (brojevi faza, aktivne oznake) na tamnoj podlozi: --cs-red je ispuna i davao je 3.5–3.7:1. */
-  --cs-red-text: oklch(0.69 0.19 28);
-  --brand-nav-surface: oklch(0.15 0.018 245 / 0.95);
-  --brand-nav-border: oklch(0.56 0.018 245 / 0.38);
-  --brand-nav-ink: var(--cs-ink);
+  /* Crveni TEKST na tamnoj podlozi (tabela brend akcenata: #FF6B66); ispune ostaju --cs-red. */
+  --cs-red-strong: #ff6b66;
+  --cs-red-text: #ff6b66;
 }
 
-/* Tamne sekcije (u obe teme): crveni tekst je svetliji. */
+/* Grafitne sekcije (u obe teme): crveni tekst je svetliji. */
 .workflowSection,
 .documentationSection,
 .familyPanel[data-layout="featured"] {
-  --cs-red-text: oklch(0.69 0.19 28);
-}
-
-:global(html.dark) .productFilters button[data-active] {
-  /* Aktivni filter: --cs-paper-strong je u tamnoj temi taman (tamno na crvenom, 3.7:1). */
-  color: oklch(0.985 0.004 245);
-}
-
-:global(html.dark) .primaryButton:hover,
-:global(html.dark) .primaryButton:focus-visible {
-  border-color: oklch(0.5 0.2 28);
-  background: oklch(0.5 0.2 28);
+  --cs-red-strong: #ff6b66;
+  --cs-red-text: #ff6b66;
 }
 
 :global(html.dark) .heroLogoPlate,
@@ -2564,7 +2568,7 @@
   }
 
   .heroMessage h1 {
-    font-size: clamp(3.65rem, 6.6vw, 6.5rem);
+    font-size: clamp(2.75rem, 5.6vw, 5rem);
   }
 
   .processDesktop {
@@ -2604,7 +2608,7 @@
   }
 
   .heroMessage h1 {
-    font-size: clamp(3.45rem, 7vw, 5.4rem);
+    font-size: clamp(2.5rem, 6vw, 4.25rem);
   }
 
   .heroMessage > p:last-child {
@@ -2724,7 +2728,7 @@
 }
 
 @media (max-width: 48rem) {
-  .carsystemPage :where(#overview, #process, #systems, #use-cases, #products, #documentation) {
+  .carsystemPage :where(#overview, #process, #systems, #use-cases, #products, #rupes, #documentation) {
     scroll-margin-top: calc(
       var(--brand-section-header-offset, 0px) +
         var(--brand-section-nav-height, 3.35rem) + 0.75rem
@@ -2739,13 +2743,6 @@
   .sectionHeader {
     display: block;
     margin-block-end: 2.5rem;
-  }
-
-  .sectionHeader h2,
-  .workflowHeader h2,
-  .documentationIntro h2 {
-    font-size: clamp(2.6rem, 12vw, 4.7rem);
-    line-height: 0.93;
   }
 
   .sectionHeader > p {
@@ -2765,7 +2762,6 @@
 
   .hero {
     padding: 4.3rem 1rem 1rem;
-    background-size: 5rem 5rem;
   }
 
   .heroGrid {
@@ -2785,7 +2781,7 @@
   }
 
   .heroBrand > span:last-child {
-    font-size: 0.6rem;
+    font-size: var(--ds-font-label);
   }
 
   .heroLogoPlate {
@@ -2802,9 +2798,9 @@
   }
 
   .heroMessage h1 {
-    max-width: 9ch;
-    font-size: clamp(3.45rem, 16.8vw, 6rem);
-    line-height: 0.86;
+    max-width: 11ch;
+    font-size: clamp(2.5rem, 11vw, 4.25rem);
+    line-height: 0.98;
   }
 
   .heroMessage > p:last-child {
@@ -2937,7 +2933,7 @@
     cursor: pointer;
     font: inherit;
     font-family: var(--font-display), var(--font-geist-sans), sans-serif;
-    font-size: 1.15rem;
+    font-size: var(--ds-font-h3);
     font-weight: 700;
     text-align: left;
   }
@@ -2945,7 +2941,7 @@
   .processAccordion h3 button > span {
     color: var(--cs-red-text, var(--cs-red));
     font-family: var(--font-technical), var(--font-geist-mono), monospace;
-    font-size: 0.68rem;
+    font-size: var(--ds-font-label);
   }
 
   .processAccordion h3 button > i {
@@ -3176,7 +3172,7 @@
   }
 
   .documentationIntro h2 {
-    max-width: 12ch;
+    max-width: 16ch;
   }
 
   .documentationGrid {
@@ -3202,7 +3198,7 @@
 
 @media (max-width: 30rem) {
   .heroMessage h1 {
-    font-size: clamp(3.15rem, 16.5vw, 4.75rem);
+    font-size: clamp(2.375rem, 11vw, 3.25rem);
   }
 
   .heroBrand > span:last-child {
@@ -3301,10 +3297,6 @@
     width: 100%;
   }
 
-  .finalCtaCopy h2 {
-    font-size: clamp(2.8rem, 14vw, 4.1rem);
-  }
-
   .finalCtaCopy > div {
     display: grid;
     grid-template-columns: 1fr;
@@ -3330,7 +3322,7 @@
   }
 
   .heroMessage h1 {
-    font-size: clamp(2.95rem, 16vw, 3.75rem);
+    font-size: 2.25rem;
   }
 
   .heroActivePhase {

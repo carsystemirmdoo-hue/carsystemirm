@@ -105,26 +105,26 @@ export default async function GuideRoute({ params }: GuideRouteProps) {
       />
       <main className="mx-auto w-full max-w-3xl px-4 py-16 sm:px-6">
         <SeoBreadcrumbs items={breadcrumbs} />
-        <h1 className="mt-6 font-[var(--font-display)] text-4xl font-black uppercase tracking-tight sm:text-5xl">
+        <h1 className="mt-6 font-[family-name:var(--font-display)] text-[length:var(--ds-font-h1)] font-extrabold leading-[1.05] tracking-[-0.02em]">
           {guide.title}
         </h1>
-        <p className="mt-5 text-lg leading-8 text-muted-foreground">{guide.summary}</p>
+        <p className="mt-5 text-[length:var(--ds-font-lead)] leading-[1.55] text-[color:var(--ds-c-text-2)]">{guide.summary}</p>
 
         {sections.map((section) => (
           <section key={section.heading} className="mt-10">
-            <h2 className="text-2xl font-bold tracking-tight">{section.heading}</h2>
-            <p className="mt-3 text-base leading-7">{section.body}</p>
+            <h2 className="font-[family-name:var(--font-display)] text-[length:var(--ds-font-h2)] font-bold leading-[1.1] tracking-[-0.01em]">{section.heading}</h2>
+            <p className="mt-3 text-base leading-[1.6]">{section.body}</p>
           </section>
         ))}
 
         {recommended.length ? (
           <section className="mt-12">
-            <h2 className="text-2xl font-bold tracking-tight">Preporučeni proizvodi</h2>
+            <h2 className="font-[family-name:var(--font-display)] text-[length:var(--ds-font-h2)] font-bold leading-[1.1] tracking-[-0.01em]">Preporučeni proizvodi</h2>
             <ul className="mt-4 space-y-2">
               {recommended.map((product) => (
                 <li key={product.slug}>
                   <Link
-                    className="underline underline-offset-4"
+                    className="underline decoration-[var(--ds-c-line-strong)] decoration-1 underline-offset-4 hover:decoration-current hover:decoration-2"
                     href={`/proizvodi/${product.slug}`}
                   >
                     {product.name}
@@ -137,8 +137,8 @@ export default async function GuideRoute({ params }: GuideRouteProps) {
 
         {guide.sources?.length ? (
           <section className="mt-12">
-            <h2 className="text-2xl font-bold tracking-tight">Izvori</h2>
-            <ul className="mt-4 space-y-2 text-sm text-muted-foreground">
+            <h2 className="font-[family-name:var(--font-display)] text-[length:var(--ds-font-h2)] font-bold leading-[1.1] tracking-[-0.01em]">Izvori</h2>
+            <ul className="mt-4 space-y-2 text-[length:var(--ds-font-legal)] text-[color:var(--ds-c-text-2)]">
               {guide.sources.map((source) => (
                 <li key={source.label}>
                   {source.label}

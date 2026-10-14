@@ -284,7 +284,7 @@ function HomeCampaignSlide({
             tabIndex={active ? 0 : -1}
           >
             {slide.primaryCta.label}
-            <span aria-hidden="true">↗</span>
+            <span aria-hidden="true">→</span>
           </Link>
         </div>
       </div>

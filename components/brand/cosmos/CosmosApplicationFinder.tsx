@@ -59,28 +59,28 @@ export function CosmosApplicationFinder({
         Šta farbate?
       </h2>
 
-      <ul
+      {/* Radio grupa nije lista: `<li>` pod `role="radiogroup"` je axe „listitem”. */}
+      <div
         aria-labelledby="cosmos-finder-title"
         className={styles.finderOptions}
         role="radiogroup"
       >
         {applications.map((application, index) => (
-          <li key={application.slug}>
-            <button
-              aria-checked={application.slug === active.slug}
-              className={styles.finderOption}
-              id={`${groupId}-${application.slug}`}
-              onClick={() => setActiveSlug(application.slug)}
-              onKeyDown={(event) => onKeyDown(event, index)}
-              role="radio"
-              tabIndex={application.slug === active.slug ? 0 : -1}
-              type="button"
-            >
-              {application.label}
-            </button>
-          </li>
+          <button
+            aria-checked={application.slug === active.slug}
+            className={styles.finderOption}
+            id={`${groupId}-${application.slug}`}
+            key={application.slug}
+            onClick={() => setActiveSlug(application.slug)}
+            onKeyDown={(event) => onKeyDown(event, index)}
+            role="radio"
+            tabIndex={application.slug === active.slug ? 0 : -1}
+            type="button"
+          >
+            {application.label}
+          </button>
         ))}
-      </ul>
+      </div>
 
       <div className={styles.finderResult}>
         <p className={styles.body}>{active.summary}</p>

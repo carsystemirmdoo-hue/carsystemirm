@@ -103,9 +103,9 @@
   gap: 0.75rem;
   margin: 0 0 1.25rem;
   font-family: var(--font-technical), var(--font-geist-mono), monospace;
-  font-size: 0.7rem;
-  font-weight: 600;
-  letter-spacing: 0.14em;
+  font-size: var(--ds-font-label);
+  font-weight: 500;
+  letter-spacing: var(--ds-tracking-label);
   text-transform: uppercase;
   color: var(--bf-text-muted);
 }
@@ -126,9 +126,9 @@
   font-family: var(--font-display), var(--font-geist-sans), sans-serif;
   font-size: clamp(1.9rem, 4.2vw, 3.6rem);
   font-weight: 800;
-  line-height: 1.02;
-  letter-spacing: -0.03em;
-  text-transform: uppercase;
+  line-height: 1.05;
+  letter-spacing: var(--ds-tracking-h);
+  text-transform: none;
 }
 
 .sectionLead {
@@ -177,27 +177,35 @@
   padding: 0.15rem 0.4rem;
   border: 1px solid var(--bf-line);
   font-family: var(--font-technical), var(--font-geist-mono), monospace;
-  font-size: 0.72rem;
+  font-size: var(--ds-font-label);
   font-weight: 600;
   letter-spacing: 0.04em;
   color: var(--bf-text);
   background: transparent;
+  border-radius: var(--ds-ctl-radius);
 }
 
-.inlineLink {
+.pageShell .inlineLink {
   display: inline-flex;
   align-items: center;
   gap: 0.4rem;
-  /* Tekstualni link, ali na dodir mora imati upotrebljivu površinu. Visina se
-     dobija paddingom, a linija ostaje uz sam tekst preko `box-shadow`. */
+  /* Tekstualni link (sistem A): podvlaka 1 px, na miš 2 px. Na dodir mora imati
+     upotrebljivu površinu, pa se visina dobija paddingom. */
   min-height: 2.75rem;
   padding-block: 0.5rem;
-  box-shadow: inset 0 -0.55rem 0 -0.5rem currentcolor;
-  font-family: var(--font-technical), var(--font-geist-mono), monospace;
-  font-size: 0.76rem;
+  font-family: var(--font-body), var(--font-geist-sans), system-ui, sans-serif;
+  font-size: 0.9375rem;
   font-weight: 600;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
+  letter-spacing: 0;
+  text-transform: none;
+  text-decoration-line: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.3em;
+  text-decoration-color: currentcolor;
+}
+
+.pageShell .inlineLink:hover {
+  text-decoration-thickness: 2px;
 }
 
 .buttonPrimary,
@@ -205,25 +213,28 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-height: 3rem;
-  padding: 0 1.6rem;
+  min-height: var(--ds-ctl-h-l);
+  padding: 0 1.5rem;
   border: 1px solid transparent;
-  font-family: var(--font-technical), var(--font-geist-mono), monospace;
-  font-size: 0.78rem;
+  font-family: var(--font-body), var(--font-geist-sans), system-ui, sans-serif;
+  font-size: 0.9375rem;
   font-weight: 600;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  transition: background 180ms var(--bf-ease), color 180ms var(--bf-ease);
+  letter-spacing: 0;
+  text-transform: none;
+  transition: background 180ms var(--bf-ease), color 180ms var(--bf-ease), border-color 180ms var(--bf-ease);
+  border-radius: var(--ds-ctl-radius);
 }
 
 .pageShell .buttonPrimary,
 .buttonPrimary {
-  background: var(--bf-red-fill); /* beli tekst ≥ 4.5:1 (sa #ea080b bilo 4.2:1) */
-  color: var(--bf-red-ink);
+  /* Befar akcent (sistem A) je grafit; primarno dugme stoji samo na grafitnoj
+     sekciji, pa je po pravilu „na boji” belo sa tamnim tekstom. */
+  background: #ffffff;
+  color: var(--bf-charcoal);
 }
 
 .buttonPrimary:hover {
-  background: color-mix(in srgb, var(--bf-red) 82%, black);
+  background: var(--bf-surface-deep);
 }
 
 .buttonSecondary {
@@ -264,8 +275,8 @@
 .breadcrumb {
   padding-block: 1rem 0.25rem;
   font-family: var(--font-technical), var(--font-geist-mono), monospace;
-  font-size: 0.7rem;
-  letter-spacing: 0.1em;
+  font-size: var(--ds-font-label);
+  letter-spacing: var(--ds-tracking-label);
   text-transform: uppercase;
   color: var(--bf-invert-faint);
 }
@@ -327,7 +338,7 @@
 
 .heroBackdropMeta {
   font-family: var(--font-technical), var(--font-geist-mono), monospace;
-  font-size: 0.72rem;
+  font-size: var(--ds-font-label);
   letter-spacing: 0.2em;
   text-transform: uppercase;
   color: rgb(244 243 240 / 0.18);
@@ -357,10 +368,10 @@
 .heroKicker {
   margin: 0;
   font-family: var(--font-technical), var(--font-geist-mono), monospace;
-  font-size: 0.72rem;
+  font-size: var(--ds-font-label);
   font-weight: 500;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  text-transform: none;
   color: var(--bf-invert-muted);
 }
 
@@ -370,8 +381,8 @@
   font-family: var(--font-display), var(--font-geist-sans), sans-serif;
   font-size: clamp(2.6rem, 7.4vw, 6.2rem);
   font-weight: 900;
-  line-height: 0.92;
-  letter-spacing: -0.045em;
+  line-height: 0.95;
+  letter-spacing: -0.03em;
   text-transform: uppercase;
 }
 
@@ -391,16 +402,18 @@
   min-height: 2.75rem;
   padding-block: 0.6rem;
   border-bottom: 1px solid var(--bf-invert-line-strong);
-  font-family: var(--font-technical), var(--font-geist-mono), monospace;
-  font-size: 0.76rem;
+  font-family: var(--font-body), var(--font-geist-sans), system-ui, sans-serif;
+  font-size: 0.9375rem;
   font-weight: 600;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
+  letter-spacing: 0;
+  text-transform: none;
   color: var(--bf-invert-text);
 }
 
 .heroCue:hover {
-  border-bottom-color: var(--bf-red);
+  border-bottom-color: var(--bf-invert-text);
+  text-decoration: underline 1px;
+  text-underline-offset: 0.3em;
 }
 
 /*
@@ -486,13 +499,13 @@
   font-family: var(--font-display), var(--font-geist-sans), sans-serif;
   font-size: clamp(1rem, 1.6vw, 1.3rem);
   font-weight: 800;
-  letter-spacing: -0.01em;
+  letter-spacing: 0;
   text-transform: uppercase;
 }
 
 .materialBody {
   margin: 0;
-  font-size: 0.94rem;
+  font-size: var(--ds-font-small);
   line-height: 1.55;
   color: var(--bf-text-muted);
 }
@@ -550,9 +563,9 @@
 .hardnessSpecLabel {
   margin: 0 0 0.75rem;
   font-family: var(--font-technical), var(--font-geist-mono), monospace;
-  font-size: 0.68rem;
-  font-weight: 600;
-  letter-spacing: 0.16em;
+  font-size: var(--ds-font-label);
+  font-weight: 500;
+  letter-spacing: var(--ds-tracking-label);
   text-transform: uppercase;
   color: var(--bf-invert-faint);
 }
@@ -576,7 +589,7 @@
   gap: 0.55rem;
   flex: 0 0 auto;
   min-width: 5.5rem;
-  min-height: 3.25rem;
+  min-height: var(--ds-ctl-h-m);
   padding: 0.6rem 0.7rem;
   border: 1px solid var(--bf-invert-line);
   background: transparent;
@@ -585,6 +598,7 @@
   scroll-snap-align: center;
   text-align: left;
   transition: border-color 160ms var(--bf-ease), background 160ms var(--bf-ease);
+  border-radius: var(--ds-ctl-radius);
 }
 
 .hardnessOption:hover {
@@ -592,8 +606,9 @@
 }
 
 .hardnessOption[data-active] {
-  border-color: var(--bf-red);
-  background: rgb(234 8 11 / 0.1);
+  border-color: var(--bf-invert-text);
+  background: rgb(244 243 240 / 0.1);
+  box-shadow: inset 0 0 0 1px var(--bf-invert-text);
 }
 
 .hardnessBar {
@@ -613,9 +628,9 @@
 
 .hardnessOptionName {
   font-family: var(--font-technical), var(--font-geist-mono), monospace;
-  font-size: 0.7rem;
+  font-size: var(--ds-font-label);
   font-weight: 600;
-  letter-spacing: 0.08em;
+  letter-spacing: var(--ds-tracking-label);
   text-transform: uppercase;
 }
 
@@ -630,7 +645,7 @@
 .hardnessLineNote {
   margin: 1rem 0 0;
   max-width: 40ch;
-  font-size: 0.8rem;
+  font-size: var(--ds-font-small);
   line-height: 1.5;
   color: var(--bf-invert-faint);
 }
@@ -695,10 +710,11 @@
 .hardnessObjectCaption {
   margin: 0;
   font-family: var(--font-technical), var(--font-geist-mono), monospace;
-  font-size: 0.7rem;
-  letter-spacing: 0.14em;
+  font-size: var(--ds-font-label);
+  letter-spacing: var(--ds-tracking-label);
   text-transform: uppercase;
   color: var(--bf-invert-faint);
+  font-weight: 500;
 }
 
 .hardnessSpec {
@@ -716,9 +732,10 @@
 
 .hardnessSpecStarsText {
   font-family: var(--font-technical), var(--font-geist-mono), monospace;
-  font-size: 0.72rem;
-  letter-spacing: 0.1em;
+  font-size: var(--ds-font-label);
+  letter-spacing: var(--ds-tracking-label);
   color: var(--bf-invert-muted);
+  font-weight: 500;
 }
 
 .hardnessSpecTitle {
@@ -726,7 +743,7 @@
   font-family: var(--font-display), var(--font-geist-sans), sans-serif;
   font-size: clamp(1.5rem, 2.6vw, 2.2rem);
   font-weight: 800;
-  letter-spacing: -0.02em;
+  letter-spacing: var(--ds-tracking-h);
   text-transform: uppercase;
 }
 
@@ -747,16 +764,16 @@
 .hardnessSpecList dt {
   margin-bottom: 0.35rem;
   font-family: var(--font-technical), var(--font-geist-mono), monospace;
-  font-size: 0.66rem;
-  font-weight: 600;
-  letter-spacing: 0.14em;
+  font-size: var(--ds-font-label);
+  font-weight: 500;
+  letter-spacing: var(--ds-tracking-label);
   text-transform: uppercase;
   color: var(--bf-invert-faint);
 }
 
 .hardnessSpecList dd {
   margin: 0;
-  font-size: 0.92rem;
+  font-size: 1rem;
   color: var(--bf-invert-text);
 }
 
@@ -773,7 +790,12 @@
   flex-wrap: wrap;
   align-items: center;
   gap: 0.5rem;
-  font-size: 0.82rem;
+  font-size: var(--ds-font-small);
+  color: var(--bf-invert-muted);
+}
+
+.hardness .hardnessFlag,
+.perfOrbital .hardnessFlag {
   color: var(--bf-invert-muted);
 }
 
@@ -784,20 +806,23 @@
 
 .hardnessAttachment {
   font-family: var(--font-technical), var(--font-geist-mono), monospace;
-  font-size: 0.66rem;
-  letter-spacing: 0.1em;
+  font-size: var(--ds-font-label);
+  letter-spacing: var(--ds-tracking-label);
   text-transform: uppercase;
   color: var(--bf-invert-faint);
+  font-weight: 500;
 }
 
 .hardnessFlag {
   padding: 0.1rem 0.35rem;
   border: 1px dashed var(--bf-invert-line-strong);
   font-family: var(--font-technical), var(--font-geist-mono), monospace;
-  font-size: 0.6rem;
-  letter-spacing: 0.1em;
+  font-size: var(--ds-font-label);
+  letter-spacing: var(--ds-tracking-label);
   text-transform: uppercase;
   color: var(--bf-text-faint); /* oznaka stoji na krem listi */
+  font-weight: 500;
+  border-radius: var(--ds-ctl-radius);
 }
 
 .hardnessNote {
@@ -805,7 +830,7 @@
   padding: 0.75rem 0.9rem;
   border-left: 2px solid var(--bf-red);
   max-width: 44ch;
-  font-size: 0.85rem;
+  font-size: var(--ds-font-small);
   line-height: 1.5;
   color: var(--bf-invert-muted);
   background: rgb(244 243 240 / 0.04);
@@ -843,8 +868,8 @@
   font-family: var(--font-display), var(--font-geist-sans), sans-serif;
   font-size: clamp(3.25rem, 6.2vw, 5.25rem);
   font-weight: 900;
-  line-height: 0.84;
-  letter-spacing: -0.055em;
+  line-height: 0.9;
+  letter-spacing: -0.03em;
   font-variant-numeric: tabular-nums;
 }
 
@@ -907,7 +932,7 @@
 
 .perfPurpose {
   margin: 0;
-  font-size: 0.9rem;
+  font-size: var(--ds-font-small);
   line-height: 1.55;
   color: var(--bf-text-muted);
 }
@@ -926,10 +951,11 @@
   align-items: center;
   gap: 0.35rem;
   font-family: var(--font-technical), var(--font-geist-mono), monospace;
-  font-size: 0.7rem;
-  letter-spacing: 0.06em;
+  font-size: var(--ds-font-label);
+  letter-spacing: var(--ds-tracking-label);
   text-transform: uppercase;
   color: var(--bf-text-muted);
+  font-weight: 500;
 }
 
 .perfOrbital {
@@ -960,8 +986,8 @@
   font-family: var(--font-display), var(--font-geist-sans), sans-serif;
   font-size: clamp(4rem, 10vw, 8rem);
   font-weight: 900;
-  line-height: 0.8;
-  letter-spacing: -0.05em;
+  line-height: 0.9;
+  letter-spacing: -0.03em;
   color: var(--bf-red);
 }
 
@@ -988,7 +1014,7 @@
   font-size: clamp(1.1rem, 2vw, 1.5rem);
   font-weight: 800;
   letter-spacing: -0.01em;
-  text-transform: uppercase;
+  text-transform: none;
 }
 
 .profilesList {
@@ -1022,15 +1048,15 @@
 .profileLabel {
   margin: 0;
   font-family: var(--font-technical), var(--font-geist-mono), monospace;
-  font-size: 0.74rem;
+  font-size: var(--ds-font-label);
   font-weight: 600;
-  letter-spacing: 0.12em;
+  letter-spacing: var(--ds-tracking-label);
   text-transform: uppercase;
 }
 
 .profileBody {
   margin: 0;
-  font-size: 0.86rem;
+  font-size: var(--ds-font-small);
   line-height: 1.5;
   color: var(--bf-text-muted);
 }
@@ -1038,9 +1064,10 @@
 .profileCodes {
   margin: 0;
   font-family: var(--font-technical), var(--font-geist-mono), monospace;
-  font-size: 0.68rem;
-  letter-spacing: 0.06em;
+  font-size: var(--ds-font-label);
+  letter-spacing: var(--ds-tracking-label);
   color: var(--bf-text-faint);
+  font-weight: 500;
 }
 
 /* =========================================================== 05 uparivanje */
@@ -1082,7 +1109,7 @@
   display: flex;
   align-items: baseline;
   gap: 0.4rem;
-  min-height: 3rem;
+  min-height: var(--ds-ctl-h-m);
   padding: 0.5rem 0.9rem;
   border: 1px solid var(--bf-line);
   background: transparent;
@@ -1090,6 +1117,8 @@
   cursor: pointer;
   font-family: var(--font-technical), var(--font-geist-mono), monospace;
   transition: border-color 160ms var(--bf-ease), background 160ms var(--bf-ease);
+  border-radius: var(--ds-ctl-radius);
+  border-color: var(--bf-text-faint);
 }
 
 .pairingButton:hover {
@@ -1097,8 +1126,9 @@
 }
 
 .pairingButton[data-active] {
-  border-color: var(--bf-red);
-  background: color-mix(in srgb, var(--bf-red) 8%, transparent);
+  border-color: var(--bf-text);
+  background: color-mix(in srgb, var(--bf-text) 8%, transparent);
+  box-shadow: inset 0 0 0 1px var(--bf-text);
 }
 
 .pairingButtonFoam {
@@ -1117,10 +1147,11 @@
 }
 
 .pairingButtonUnit {
-  font-size: 0.66rem;
-  letter-spacing: 0.1em;
+  font-size: var(--ds-font-label);
+  letter-spacing: var(--ds-tracking-label);
   text-transform: uppercase;
   color: var(--bf-text);
+  font-weight: 500;
 }
 
 .pairingFigure {
@@ -1164,9 +1195,9 @@
   padding: 0.1rem 0.4rem;
   background: var(--bf-surface-deep);
   font-family: var(--font-technical), var(--font-geist-mono), monospace;
-  font-size: 0.68rem;
+  font-size: var(--ds-font-label);
   font-weight: 600;
-  letter-spacing: 0.08em;
+  letter-spacing: var(--ds-tracking-label);
 }
 
 .pairingPlateRing .pairingRingLabel {
@@ -1175,7 +1206,7 @@
 
 .pairingCaption {
   margin: 0;
-  font-size: 0.88rem;
+  font-size: var(--ds-font-small);
   color: var(--bf-text-muted);
   text-align: center;
 }
@@ -1187,9 +1218,9 @@
 .pairingSpecLabel {
   margin: 0 0 0.75rem;
   font-family: var(--font-technical), var(--font-geist-mono), monospace;
-  font-size: 0.68rem;
-  font-weight: 600;
-  letter-spacing: 0.14em;
+  font-size: var(--ds-font-label);
+  font-weight: 500;
+  letter-spacing: var(--ds-tracking-label);
   text-transform: uppercase;
   color: var(--bf-text-faint);
 }
@@ -1206,14 +1237,16 @@
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  font-size: 0.85rem;
+  font-size: var(--ds-font-small);
   color: var(--bf-text-muted);
 }
 
 .pairingCodeSize {
   font-family: var(--font-technical), var(--font-geist-mono), monospace;
-  font-size: 0.68rem;
+  font-size: var(--ds-font-label);
   color: var(--bf-text-faint);
+  font-weight: 500;
+  letter-spacing: var(--ds-tracking-label);
 }
 
 .pairingEmpty,
@@ -1221,7 +1254,7 @@
 .pairingFootnote {
   margin: 0 0 0.75rem;
   max-width: 46ch;
-  font-size: 0.85rem;
+  font-size: var(--ds-font-small);
   line-height: 1.5;
   color: var(--bf-text-muted);
 }
@@ -1296,9 +1329,9 @@
 .familyKicker {
   margin: 0 0 0.4rem;
   font-family: var(--font-technical), var(--font-geist-mono), monospace;
-  font-size: 0.68rem;
-  font-weight: 600;
-  letter-spacing: 0.14em;
+  font-size: var(--ds-font-label);
+  font-weight: 500;
+  letter-spacing: var(--ds-tracking-label);
   text-transform: uppercase;
   color: var(--bf-invert-faint);
 }
@@ -1308,8 +1341,8 @@
   font-family: var(--font-display), var(--font-geist-sans), sans-serif;
   font-size: clamp(1.3rem, 2.6vw, 2rem);
   font-weight: 800;
-  letter-spacing: -0.02em;
-  text-transform: uppercase;
+  letter-spacing: var(--ds-tracking-h);
+  text-transform: none;
 }
 
 .familyCard[data-weight="dominant"] .familyName {
@@ -1340,9 +1373,9 @@
 
 .familySpecs dt {
   font-family: var(--font-technical), var(--font-geist-mono), monospace;
-  font-size: 0.68rem;
-  font-weight: 600;
-  letter-spacing: 0.1em;
+  font-size: var(--ds-font-label);
+  font-weight: 500;
+  letter-spacing: var(--ds-tracking-label);
   text-transform: uppercase;
   /* Sitna oznaka na grafitu: Befar crvena kao marker, tekst svetao (crveno je bilo 3.8:1). */
   color: var(--bf-invert-muted);
@@ -1352,7 +1385,7 @@
 
 .familySpecs dd {
   margin: 0;
-  font-size: 0.85rem;
+  font-size: var(--ds-font-small);
   color: var(--bf-invert-muted);
 }
 
@@ -1366,6 +1399,12 @@
   padding-block: var(--bf-section-y);
   background: var(--bf-ink);
   color: var(--bf-invert-text);
+}
+
+.opencell .sectionIndex {
+  /* Duža oznaka (rečenica): bez verzala. */
+  letter-spacing: 0.02em;
+  text-transform: none;
 }
 
 .opencell .sectionIndex,
@@ -1405,17 +1444,18 @@
 
 .opencellQuoteTranslation {
   color: var(--bf-invert-muted) !important;
-  font-size: 0.88rem !important;
+  font-size: var(--ds-font-small) !important;
 }
 
 .opencellQuote cite,
 .manufacturerQuote cite {
   font-family: var(--font-technical), var(--font-geist-mono), monospace;
-  font-size: 0.66rem;
+  font-size: var(--ds-font-label);
   font-style: normal;
-  letter-spacing: 0.12em;
+  letter-spacing: var(--ds-tracking-label);
   text-transform: uppercase;
   color: var(--bf-invert-faint);
+  font-weight: 500;
 }
 
 .opencellScale {
@@ -1438,33 +1478,34 @@
 .opencellSwatch {
   width: 0.9rem;
   height: 0.9rem;
-  box-shadow: inset 0 0 0 1px rgb(244 243 240 / 0.3);
+  outline: 1px solid rgb(244 243 240 / 0.3);
+  outline-offset: -1px;
 }
 
 .opencellScaleName {
   font-family: var(--font-technical), var(--font-geist-mono), monospace;
-  font-size: 0.72rem;
+  font-size: var(--ds-font-label);
   font-weight: 600;
-  letter-spacing: 0.08em;
+  letter-spacing: var(--ds-tracking-label);
   text-transform: uppercase;
 }
 
 .opencellScaleStars {
   color: #ff4f52; /* Befar crvena posvetljena za tekst na tamnom (bilo 4.3:1) */
-  font-size: 0.8rem;
+  font-size: var(--ds-font-small);
   letter-spacing: 0.1em;
 }
 
 .opencellScaleApply {
   grid-column: 2 / -1;
-  font-size: 0.8rem;
+  font-size: var(--ds-font-small);
   color: var(--bf-invert-faint);
 }
 
 .opencellDisclaimer {
   margin: 0 0 1.5rem;
   max-width: 46ch;
-  font-size: 0.8rem;
+  font-size: var(--ds-font-legal);
   line-height: 1.5;
   color: var(--bf-invert-faint);
 }
@@ -1533,10 +1574,11 @@
   padding: 0.5rem 0.75rem;
   background: rgb(11 10 16 / 0.72);
   font-family: var(--font-technical), var(--font-geist-mono), monospace;
-  font-size: 0.66rem;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
+  font-size: var(--ds-font-label);
+  letter-spacing: 0.02em;
+  text-transform: none;
   color: var(--bf-invert-text);
+  font-weight: 500;
 }
 
 /* =============================================================== 09 u radu */
@@ -1579,9 +1621,9 @@
 .useIndex {
   margin: 0;
   font-family: var(--font-technical), var(--font-geist-mono), monospace;
-  font-size: 0.7rem;
-  font-weight: 700;
-  letter-spacing: 0.16em;
+  font-size: var(--ds-font-label);
+  font-weight: 600;
+  letter-spacing: var(--ds-tracking-label);
   color: var(--bf-red-text-light); /* crveno na kremu: dublji ton (bilo 4.2:1) */
 }
 
@@ -1596,7 +1638,7 @@
 
 .useBody {
   margin: 0;
-  font-size: 0.9rem;
+  font-size: var(--ds-font-small);
   line-height: 1.55;
   color: var(--bf-text-muted);
 }
@@ -1609,11 +1651,9 @@
 }
 
 /*
- * Kartica proizvoda bez kartice.
- *
- * Fotografija je sama površina — studijska pozadina snimka je normalizovana pri
- * pripremi asseta, pa četiri kadra daju istu podlogu i ne treba im ni beli
- * plate, ni border, ni badge. Ostaje naziv, jedan parametar i dva linka.
+ * Kartica proizvoda: fotografija je gornja površina (studijska pozadina snimka
+ * je normalizovana pri pripremi asseta), ispod su naziv, jedan parametar i
+ * linkovi. Po sistemu A kartica ima liniju i ugao 2 px, bez senke.
  */
 .productGrid {
   display: grid;
@@ -1628,6 +1668,21 @@
   display: grid;
   gap: 0.6rem;
   align-content: start;
+  padding-bottom: 1rem;
+  border: 1px solid var(--bf-line);
+  border-radius: var(--ds-ctl-radius);
+  background: var(--bf-surface);
+  overflow: hidden;
+  transition: border-color 160ms var(--bf-ease);
+}
+
+.productCard:hover {
+  border-color: var(--bf-text-faint);
+}
+
+/* Kartica po sistemu A: linija i ugao 2 px; tekst se uvlači od ivice. */
+.productCard > :not(.productMedia) {
+  margin-inline: 1rem;
 }
 
 .productMedia {
@@ -1657,9 +1712,9 @@
   gap: 0.1rem;
   margin: 0;
   font-family: var(--font-technical), var(--font-geist-mono), monospace;
-  font-size: 0.68rem;
-  font-weight: 600;
-  letter-spacing: 0.14em;
+  font-size: var(--ds-font-label);
+  font-weight: 500;
+  letter-spacing: var(--ds-tracking-label);
   text-transform: uppercase;
   color: var(--bf-text-faint);
 }
@@ -1668,14 +1723,14 @@
   font-family: var(--font-display), var(--font-geist-sans), sans-serif;
   font-size: clamp(1.15rem, 1.8vw, 1.5rem);
   font-weight: 800;
-  letter-spacing: -0.02em;
-  text-transform: uppercase;
+  letter-spacing: var(--ds-tracking-h);
+  text-transform: none;
   color: var(--bf-text);
 }
 
 .productRole {
   margin: 0;
-  font-size: 0.86rem;
+  font-size: var(--ds-font-small);
   line-height: 1.45;
   color: var(--bf-text-muted);
 }
@@ -1693,19 +1748,22 @@
   display: inline-flex;
   align-items: center;
   gap: 0.35rem;
-  min-height: 2.5rem;
+  min-height: var(--ds-ctl-h-m);
   padding: 0 0.7rem;
   border: 1px solid var(--bf-line);
   font-family: var(--font-technical), var(--font-geist-mono), monospace;
-  font-size: 0.72rem;
+  font-size: var(--ds-font-label);
   font-weight: 600;
   letter-spacing: 0.06em;
   transition: border-color 160ms var(--bf-ease), color 160ms var(--bf-ease);
+  border-radius: var(--ds-ctl-radius);
+  border-color: var(--bf-text-faint);
 }
 
 .productVariants a:hover {
-  border-color: var(--bf-red);
-  color: var(--bf-red);
+  border-color: var(--bf-text);
+  color: var(--bf-text);
+  background: var(--bf-surface);
 }
 
 .discoveryFamilies {
@@ -1715,10 +1773,10 @@
 .discoveryFamiliesLabel {
   margin: 0 0 0.75rem;
   font-family: var(--font-technical), var(--font-geist-mono), monospace;
-  font-size: 0.68rem;
-  font-weight: 600;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
+  font-size: var(--ds-font-label);
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  text-transform: none;
   color: var(--bf-text-faint);
 }
 
@@ -1749,15 +1807,17 @@
 }
 
 .discoveryFamilies a:hover {
-  color: var(--bf-red);
+  color: var(--bf-text);
+  text-decoration: underline 2px;
+  text-underline-offset: 0.3em;
 }
 
 .discoveryFamilyDetail {
   font-family: var(--font-technical), var(--font-geist-mono), monospace;
-  font-size: 0.7rem;
+  font-size: var(--ds-font-label);
   font-weight: 500;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  text-transform: none;
   color: var(--bf-text-faint);
 }
 
@@ -1795,16 +1855,16 @@
 
 .manufacturerFacts dt {
   font-family: var(--font-technical), var(--font-geist-mono), monospace;
-  font-size: 0.68rem;
-  font-weight: 600;
-  letter-spacing: 0.1em;
+  font-size: var(--ds-font-label);
+  font-weight: 500;
+  letter-spacing: var(--ds-tracking-label);
   text-transform: uppercase;
   color: var(--bf-invert-faint);
 }
 
 .manufacturerFacts dd {
   margin: 0;
-  font-size: 0.9rem;
+  font-size: 1rem;
 }
 
 .manufacturerQuote {
@@ -1822,7 +1882,7 @@
 .manufacturerDisclaimer {
   margin: 0;
   max-width: 48ch;
-  font-size: 0.78rem;
+  font-size: var(--ds-font-legal);
   line-height: 1.5;
   color: var(--bf-invert-faint);
 }
@@ -1831,6 +1891,7 @@
   align-self: start;
   padding: clamp(1.25rem, 3vw, 2rem);
   border: 1px solid var(--bf-invert-line);
+  border-radius: var(--ds-ctl-radius);
 }
 
 .ctaTitle {
@@ -1838,8 +1899,8 @@
   font-family: var(--font-display), var(--font-geist-sans), sans-serif;
   font-size: clamp(1.2rem, 2.2vw, 1.6rem);
   font-weight: 800;
-  letter-spacing: -0.02em;
-  text-transform: uppercase;
+  letter-spacing: var(--ds-tracking-h);
+  text-transform: none;
 }
 
 .ctaActions {
@@ -2010,7 +2071,7 @@
   }
 
   .familyCard[data-weight="minor"] .familyText {
-    font-size: 0.88rem;
+    font-size: var(--ds-font-small);
   }
 
   .opencellInner {
@@ -2042,15 +2103,31 @@
     display: none;
   }
 
-  /* Na mobilnom oznaka pada iza logotipa i kickera, pa se stišava da čita kao
-     tekstura, a ne kao tekst koji se bori sa njima. */
-  .heroBackdropCode {
-    font-size: clamp(5rem, 30vw, 11rem);
-    color: rgb(244 243 240 / 0.055);
-  }
 
   /* Meta linija se na 375px seče na pola reči — na mobilnom je izostavljamo,
      isti podatak stoji u sekciji tvrdoće. */
+  .heroBackdropMeta {
+    display: none;
+  }
+}
+
+/* Jedna kolona (telefon, tablet): oznaka je ranije padala preko uvoda i veze
+   „Skala tvrdoće”. Sada stoji desno u redu logotipa, gde nema teksta, i ne
+   prelazi preko naslova ni uvoda. */
+@media (max-width: 63.99rem) {
+  .heroBackdrop {
+    inset-block: auto;
+    inset-inline: auto var(--bf-gutter);
+    top: calc(clamp(2.5rem, 6vw, 5rem) - 0.35rem);
+    align-content: start;
+    justify-items: end;
+  }
+
+  .heroBackdropCode {
+    font-size: clamp(3rem, 13vw, 6rem);
+    color: rgb(244 243 240 / 0.09);
+  }
+
   .heroBackdropMeta {
     display: none;
   }

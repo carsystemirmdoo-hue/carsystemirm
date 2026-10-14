@@ -1,15 +1,17 @@
+/* Ikona-dugme sistema A: 40 × 40, ugao 2 px, okvir jače linije. */
 .button {
-  position: relative; display: grid; width: 2.75rem; height: 2.75rem; place-items: center;
-  border: 1px solid var(--border, rgb(127 127 127 / 0.24)); border-radius: 999px;
+  position: relative; display: grid; width: 2.5rem; height: 2.5rem; place-items: center;
+  border: 1px solid var(--ds-c-line-strong); border-radius: var(--ds-ctl-radius);
   background: transparent; color: inherit; cursor: pointer;
 }
-.button:hover { border-color: currentColor; }
+.button:hover { border-color: currentColor; background: var(--ds-c-surface-2); }
 .button svg { display: block; }
-.button:focus-visible { outline: 2px solid var(--accent, #e0242c); outline-offset: 2px; }
+.button:focus-visible { outline: 2px solid var(--ds-c-focus); outline-offset: 2px; }
+/* Brojač je krug po značenju (značka); tekst ne ide ispod 12 px. */
 .badge {
   position: absolute;
-  box-sizing: border-box; top: -0.4rem; right: -0.4rem; min-width: 1.15rem; padding: 0 0.25rem;
-  border-radius: 999px; background: var(--accent, #e0242c); color: #fff;
-  font-family: var(--font-technical), monospace; font-size: 0.62rem; font-weight: 700;
-  line-height: 1.15rem; text-align: center;
+  box-sizing: border-box; top: -0.45rem; right: -0.45rem; min-width: 1.25rem; padding: 0 0.3rem;
+  border-radius: 999px; background: var(--ds-c-accent); color: var(--ds-c-on-accent);
+  font-family: var(--font-technical), monospace; font-size: var(--ds-font-label); font-weight: 500;
+  line-height: 1.25rem; text-align: center;
 }

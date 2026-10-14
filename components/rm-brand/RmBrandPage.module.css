@@ -1,22 +1,31 @@
 .rmPage {
-  --rm-red: oklch(0.57 0.235 28);
+  /* Sistem A: R-M zadržava identitet (crvena #E3000F kao ispuna i marker,
+     crveni tekst #D1000E / #FF6B66), a papir, mastilo i linije čitaju
+     zajedničke tokene. Grafit, kampanja i Refinity su fiksne tamne površine. */
+  --rm-red: #e3000f;
   --rm-red-deep: oklch(0.44 0.205 28);
   --rm-red-ink: oklch(0.985 0.004 25);
-  --rm-paper-base: oklch(0.985 0.004 250);
-  --rm-paper-soft-base: oklch(0.955 0.007 250);
-  --rm-ink-base: oklch(0.16 0.012 250);
-  --rm-muted-base: oklch(0.47 0.02 250);
-  --rm-line-base: oklch(0.84 0.012 250);
+  --rm-red-text: #d1000e;
+  --rm-red-text-on-dark: #ff6b66;
+  --rm-paper-base: var(--ds-c-bg);
+  --rm-paper-soft-base: var(--ds-c-surface);
+  --rm-ink-base: var(--ds-c-text);
+  --rm-muted-base: var(--ds-c-text-2);
+  --rm-line-base: var(--ds-c-line);
   --rm-graphite: oklch(0.16 0.018 248);
   --rm-graphite-deep: oklch(0.105 0.018 248);
   --rm-dark-ink: oklch(0.96 0.008 245);
-  --rm-dark-muted: oklch(0.73 0.025 245);
+  --rm-dark-muted: oklch(0.78 0.022 245);
   --rm-petrol: oklch(0.38 0.085 218);
   --rm-spectrum: oklch(0.78 0.16 206);
-  --rm-agilis-background: oklch(0.94 0.023 86);
+  /* AGILIS krem je kompozicija brenda u svetloj temi; tamna tema dobija
+     tamnu varijantu iste (tople) palete ispod. */
+  --rm-agilis-cream: oklch(0.94 0.023 86);
+  --rm-agilis-background: var(--rm-agilis-cream);
   --rm-agilis-surface: oklch(0.965 0.017 86);
   --rm-agilis-foreground: oklch(0.18 0.012 72);
-  --rm-agilis-muted: oklch(0.47 0.025 72);
+  --rm-agilis-muted: oklch(0.42 0.025 72);
+  --rm-agilis-line: oklch(0.76 0.025 78);
   --rm-page-background: var(--rm-paper-base);
   --rm-page-foreground: var(--rm-ink-base);
   --rm-muted-foreground: var(--rm-muted-base);
@@ -41,20 +50,24 @@
     border-color 320ms ease;
 }
 
+/* Tamna tema: papir/mastilo/linije već prate tokene; ovde samo crveni tekst
+   i tamna varijanta AGILIS palete (topla tamna površina umesto krema). */
 :global(.dark) .rmPage {
-  --rm-page-background: oklch(0.13 0.012 250);
-  --rm-section-surface: oklch(0.17 0.014 250);
-  --rm-page-foreground: oklch(0.96 0.007 250);
-  --rm-muted-foreground: oklch(0.72 0.02 250);
-  --rm-active-line: oklch(0.34 0.018 250);
+  --rm-red-text: var(--rm-red-text-on-dark);
+  --rm-agilis-background: color-mix(in oklch, var(--ds-c-surface) 94%, var(--rm-agilis-cream));
+  --rm-agilis-surface: color-mix(in oklch, var(--ds-c-surface-2) 92%, var(--rm-agilis-cream));
+  --rm-agilis-foreground: var(--ds-c-text);
+  --rm-agilis-muted: var(--ds-c-text-2);
+  --rm-agilis-line: var(--ds-c-line-strong);
 }
 
 .rmPage[data-atmosphere="refinity"] {
   --rm-page-background: oklch(0.115 0.025 238);
   --rm-page-foreground: oklch(0.95 0.01 225);
-  --rm-muted-foreground: oklch(0.72 0.035 220);
+  --rm-muted-foreground: oklch(0.76 0.035 220);
   --rm-section-surface: oklch(0.15 0.028 237);
   --rm-active-line: oklch(0.43 0.065 218 / 0.46);
+  --rm-red-text: var(--rm-red-text-on-dark);
   --rm-accent: var(--rm-spectrum);
 }
 
@@ -63,7 +76,7 @@
   --rm-page-foreground: var(--rm-agilis-foreground);
   --rm-muted-foreground: var(--rm-agilis-muted);
   --rm-section-surface: var(--rm-agilis-surface);
-  --rm-active-line: oklch(0.76 0.025 78);
+  --rm-active-line: var(--rm-agilis-line);
 }
 
 .rmPage a {
@@ -113,14 +126,20 @@
   touch-action: pan-y pinch-zoom;
 }
 
+/* Slajdovi se slažu u istu ćeliju mreže (ne apsolutno): pregledna visina raste
+   do najvišeg slajda, pa tekst nikad ne ulazi ispod kontrola karusela
+   (ranije preklapanje na tabletu 768–1100 px). */
 .campaignSlides {
-  position: absolute;
-  inset: 0;
+  position: relative;
+  display: grid;
+  min-height: inherit;
+  grid-template-columns: minmax(0, 1fr);
 }
 
 .campaignSlide {
-  position: absolute;
-  inset: 0;
+  position: relative;
+  grid-area: 1 / 1;
+  min-width: 0;
   display: flex;
   align-items: center;
   overflow: hidden;
@@ -517,19 +536,8 @@
   position: absolute;
   inset: 9% 2%;
   border: 1px solid oklch(0.78 0.16 206 / 0.26);
-  background:
-    linear-gradient(
-      90deg,
-      transparent 49.8%,
-      oklch(0.78 0.16 206 / 0.1) 50%,
-      transparent 50.2%
-    ),
-    linear-gradient(
-      transparent 49.8%,
-      oklch(0.78 0.16 206 / 0.08) 50%,
-      transparent 50.2%
-    );
-  background-size: 4rem 4rem;
+  /* Sistem A: bez mreže — blag preliv iste spektralne boje. */
+  background: linear-gradient(180deg, oklch(0.78 0.16 206 / 0.07), transparent 70%);
   content: "";
   transform: skewY(-5deg);
 }
@@ -789,9 +797,9 @@
 
 .campaignControls {
   position: absolute;
-  right: max(2rem, calc((100vw - 80rem) / 2));
+  right: max(var(--ds-gutter, clamp(20px, 4vw, 56px)), calc((100% - var(--ds-container-max, 1208px)) / 2));
   bottom: 2.4rem;
-  left: max(2rem, calc((100vw - 80rem) / 2));
+  left: max(var(--ds-gutter, clamp(20px, 4vw, 56px)), calc((100% - var(--ds-container-max, 1208px)) / 2));
   z-index: 7;
   display: grid;
   grid-template-columns: auto minmax(0, 1fr);
@@ -1177,6 +1185,14 @@
 }
 
 .agilisSection {
+  /* Sekcija je samostalna u obe teme: pločice, oznake i linije čitaju AGILIS
+     paletu (krem u svetloj, topla tamna površina u tamnoj temi), nezavisno od
+     toga da li je atmosfera stranice trenutno prebačena na AGILIS. */
+  --rm-paper: var(--rm-agilis-surface);
+  --rm-paper-soft: var(--rm-agilis-surface);
+  --rm-ink: var(--rm-agilis-foreground);
+  --rm-muted: var(--rm-agilis-muted);
+  --rm-line: var(--rm-agilis-line);
   position: relative;
   width: 100%;
   overflow-x: clip;
@@ -1189,11 +1205,10 @@
   );
 }
 
-/* Krem sekcija AGILIS je svetla u obe teme: oznaka ispod slota koja stoji direktno na
-   kremu mora biti tamna i ovde (u tamnoj temi je nasleđivala svetlosivi --rm-muted, 2.1:1).
-   Detalji slota imaju sopstvenu podlogu i zadržavaju --rm-muted. */
+/* Oznaka ispod slota stoji direktno na AGILIS površini: prigušena boja iste palete
+   (tamna na kremu, svetla na tamnoj varijanti). */
 .agilisSection .productImageSlot figcaption > small {
-  color: oklch(0.45 0.02 72);
+  color: var(--rm-agilis-muted);
 }
 
 .agilisSection::before {
@@ -1238,14 +1253,16 @@
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   align-content: start;
-  border-top: 1px solid oklch(0.26 0.02 250 / 0.22);
-  border-left: 1px solid oklch(0.26 0.02 250 / 0.22);
+  /* Mreža ne raste do visine fotografije (leva linija je visila ispod pločica). */
+  align-self: start;
+  border-top: 1px solid var(--rm-agilis-line);
+  border-left: 1px solid var(--rm-agilis-line);
 }
 
 .agilisBenefits article {
   min-height: 9.5rem;
-  border-right: 1px solid oklch(0.26 0.02 250 / 0.22);
-  border-bottom: 1px solid oklch(0.26 0.02 250 / 0.22);
+  border-right: 1px solid var(--rm-agilis-line);
+  border-bottom: 1px solid var(--rm-agilis-line);
   padding: 1rem;
 }
 
@@ -1381,7 +1398,7 @@
   justify-content: space-between;
   gap: 2rem;
   margin-top: 2rem;
-  border-top: 1px solid oklch(0.32 0.02 72 / 0.2);
+  border-top: 1px solid var(--rm-agilis-line);
   padding-top: 1.5rem;
 }
 
@@ -1467,19 +1484,8 @@
   position: absolute;
   inset: 14% 0;
   z-index: -1;
-  background:
-    linear-gradient(
-      90deg,
-      transparent 49.8%,
-      oklch(0.75 0.09 210 / 0.05) 50%,
-      transparent 50.2%
-    ),
-    linear-gradient(
-      transparent 49.8%,
-      oklch(0.75 0.09 210 / 0.04) 50%,
-      transparent 50.2%
-    );
-  background-size: 5rem 5rem;
+  /* Sistem A: bez mreže — blag spektralni preliv preko tamne zone. */
+  background: radial-gradient(ellipse 70% 60% at 50% 50%, oklch(0.75 0.09 210 / 0.06), transparent 70%);
   mask-image: linear-gradient(transparent, black 18% 82%, transparent);
   opacity: 0.5;
 }
@@ -1495,19 +1501,8 @@
 .refinitySection::before {
   position: absolute;
   inset: 0;
-  background:
-    linear-gradient(
-      90deg,
-      transparent 49.8%,
-      oklch(0.75 0.09 210 / 0.05) 50%,
-      transparent 50.2%
-    ),
-    linear-gradient(
-      transparent 49.8%,
-      oklch(0.75 0.09 210 / 0.04) 50%,
-      transparent 50.2%
-    );
-  background-size: 5rem 5rem;
+  /* Sistem A: bez mreže — ravna površina sa blagim prelivom odozgo. */
+  background: linear-gradient(180deg, oklch(0.75 0.09 210 / 0.04), transparent 45%);
   content: "";
   pointer-events: none;
   opacity: 0.65;
@@ -2151,19 +2146,9 @@
   inset: 0;
   display: grid;
   align-content: space-between;
-  background:
-    linear-gradient(
-      90deg,
-      transparent 49.5%,
-      var(--system-card-line) 50%,
-      transparent 50.5%
-    ),
-    linear-gradient(
-      transparent 49.5%,
-      var(--system-card-line) 50%,
-      transparent 50.5%
-    );
-  background-size: 1.4rem 1.4rem;
+  gap: 0.35rem;
+  /* Sistem A: bez mreže — ravna podloga pločice (roditelj nosi mešanu boju kartice). */
+  background: none;
   padding: 0.65rem;
   transition: transform 420ms var(--rm-ease-out);
 }
@@ -3223,15 +3208,24 @@
 }
 
 @media (hover: hover) and (pointer: fine) {
+  /* Sistem A: kontrole i kartice se ne podižu na prelaz mišem. */
   .rmPrimaryButton:hover,
+  .campaignSlide[data-theme="esense"] .rmPrimaryButton:hover {
+    background: var(--rm-red-deep);
+  }
+
   .rmSecondaryButton:hover,
-  .rmOutlineButton:hover,
-  .refinityPrimary:hover,
-  .refinitySecondary:hover,
-  .campaignArrows button:hover,
-  .quickAccessRail a:hover,
-  .productFilterRail button:hover {
-    transform: translateY(-2px);
+  .refinitySecondary:hover {
+    background: oklch(0.98 0.004 250 / 0.12);
+  }
+
+  .campaignSlide[data-theme="esense"] .rmSecondaryButton:hover,
+  .rmOutlineButton:hover {
+    background: var(--ds-c-surface-2);
+  }
+
+  .refinityPrimary:hover {
+    background: var(--rm-red-deep);
   }
 
   .campaignArrows button:hover {
@@ -3246,7 +3240,6 @@
   .processFlow > li:hover {
     z-index: 2;
     background: var(--rm-paper-soft);
-    transform: translateY(-0.35rem);
   }
 
   .processFlow > li:hover::before {
@@ -3279,17 +3272,11 @@
   .rmContactSecondary:hover {
     border-color: var(--rm-red);
     background: oklch(0.98 0.006 250 / 0.06);
-    transform: translateY(-2px);
-  }
-
-  .seriesLayout article:hover {
-    transform: translateY(-0.25rem);
   }
 
   .systemGalleryTabs button:hover:not([data-active]) {
     background: var(--rm-paper-soft);
     color: var(--rm-ink);
-    transform: translateX(0.2rem);
   }
 
   .productFamilyCopy > a:hover {
@@ -3303,17 +3290,8 @@
 }
 
 .rmPrimaryButton:active,
-.rmSecondaryButton:active,
-.rmOutlineButton:active,
-.refinityPrimary:active,
-.refinitySecondary:active,
-.campaignArrows button:active,
-.quickAccessRail a:active,
-.productFilterRail button:active,
-.processFooter a:active,
-.systemCardFooter a:active,
-.seriesLayout article > a:active {
-  transform: scale(0.97);
+.refinityPrimary:active {
+  background: var(--rm-red-deep);
 }
 
 @media (max-width: 70rem) {
@@ -3434,7 +3412,7 @@
     grid-template-columns: 1fr;
     grid-template-rows: auto minmax(0, 1fr);
     gap: 0.5rem;
-    padding: 3.6rem 1rem 7.4rem;
+    padding: 3.6rem 1rem 9rem;
   }
 
   .campaignSlide::after {
@@ -4170,5 +4148,442 @@
   to {
     opacity: 1;
     transform: translate3d(0, 0, 0);
+  }
+}
+
+/* ==========================================================================
+ * Sistem A — primena na /brendovi/rm
+ *
+ * R-M zadržava kampanju (fotografije, kose kompozicije, AGILIS krem u svetloj
+ * temi), crvenu #E3000F kao ispunu/marker i nazive sistema velikim slovima
+ * (AGILIS, ONYX HD, DIAMONT …) kao kampanjski izuzetak. Sve ostalo prati
+ * sistem: oznake ≥ 12 px (Plex Mono 500, 0,08 em), sekcijski naslovi po
+ * tokenima, dugmad 52/44 px sa uglom 2 px bez podizanja, kartice 2 px bez
+ * senke, vidljiv fokus.
+ * ========================================================================= */
+
+/* Fokus: 2 px, odmak 2 px, na svim vezama i dugmadima stranice. */
+.rmPage :is(a, button):focus-visible {
+  outline: 2px solid var(--ds-c-focus);
+  outline-offset: 2px;
+}
+
+/* --- Oznake (nadnaslov, meta, putanja) -------------------------------- */
+.rmKicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--rm-red-text);
+  font-family: var(--font-technical), var(--font-geist-mono), monospace;
+  font-size: var(--ds-font-label);
+  font-weight: 500;
+  letter-spacing: var(--ds-tracking-label);
+  line-height: 1.4;
+}
+
+.rmKicker::before {
+  width: 24px;
+  height: 2px;
+  flex: none;
+  background: var(--rm-red);
+  content: "";
+}
+
+/* Nadnaslovi su ranije imali levu crtu; crtica ispred teksta je sada marker. */
+.sectionHeading .rmKicker,
+.agilisHeader .rmKicker,
+.processIntro .rmKicker,
+.compatibleBrandsHeader .rmKicker,
+.partnershipPanel .rmKicker,
+.rmContactCopy .rmKicker {
+  border-left: 0;
+  padding-left: 0;
+  color: var(--rm-red-text);
+}
+
+/* Fiksne tamne površine (grafit, Refinity, kontakt) nose crveni tekst za tamnu podlogu. */
+.partnershipPanel,
+.rmContactBand,
+.refinityTransitionZone {
+  --rm-red-text: var(--rm-red-text-on-dark);
+}
+
+.refinityHeader .rmKicker {
+  color: var(--rm-spectrum);
+}
+
+.refinityHeader .rmKicker::before {
+  background: var(--rm-spectrum);
+}
+
+.campaignEyebrow {
+  font-size: var(--ds-font-label);
+  font-weight: 500;
+  letter-spacing: var(--ds-tracking-label);
+}
+
+.campaignEyebrow::before {
+  width: 24px;
+  height: 2px;
+}
+
+.campaignBreadcrumb {
+  font-size: var(--ds-font-label);
+  font-weight: 500;
+  color: oklch(0.97 0.006 250 / 0.86);
+}
+
+.campaignStage[data-active-slide="esense"] .campaignBreadcrumb {
+  color: oklch(0.18 0.018 106 / 0.86);
+}
+
+/* --- Kampanjski naslov (izuzetak): do 88 px, razmak ≥ −0,03 em, prored ≥ 0,95 */
+.campaignCopy :is(h1, h2) {
+  font-size: clamp(2.5rem, 4.65vw, 5.5rem);
+  letter-spacing: -0.03em;
+  line-height: 0.96;
+}
+
+@media (max-width: 70rem) {
+  .campaignCopy :is(h1, h2) {
+    font-size: clamp(2.75rem, 6vw, 4.5rem);
+  }
+}
+
+@media (max-width: 50rem) {
+  .campaignCopy :is(h1, h2) {
+    font-size: clamp(2.3rem, 9vw, 3.75rem);
+  }
+}
+
+/* --- Karusel: kontrole i oznake slajdova ------------------------------- */
+.campaignArrows button {
+  border-color: oklch(0.98 0.004 250 / 0.5);
+  border-radius: var(--ds-ctl-radius);
+}
+
+.campaignPagination button {
+  color: oklch(0.98 0.004 250 / 0.8);
+  font-size: var(--ds-font-label);
+}
+
+.campaignPaginationLabel strong,
+.campaignPaginationLabel small {
+  font-size: var(--ds-font-label);
+  font-weight: 500;
+  letter-spacing: var(--ds-tracking-label);
+}
+
+.campaignPaginationLabel strong {
+  font-weight: 600;
+}
+
+.campaignStage[data-active-slide="esense"] .campaignPagination button {
+  color: oklch(0.18 0.018 106 / 0.8);
+}
+
+/* --- Dugmad ------------------------------------------------------------ */
+.rmPrimaryButton,
+.rmSecondaryButton,
+.rmOutlineButton,
+.refinityPrimary,
+.refinitySecondary,
+.rmContactSecondary {
+  min-height: var(--ds-ctl-h-l);
+  gap: 0.75rem;
+  border-radius: var(--ds-ctl-radius);
+  padding: 0 1.25rem;
+  font: var(--ds-ctl-font);
+  box-shadow: none;
+  transition:
+    background-color 160ms ease,
+    border-color 160ms ease,
+    color 160ms ease;
+}
+
+/* Primarno = R-M ispuna (#E3000F, beli tekst 4,9:1). */
+.refinityPrimary {
+  border: 1px solid transparent;
+  background: var(--rm-red);
+}
+
+/* Sekundarno na fotografiji / tamnoj površini = beli okvir. */
+.campaignSlide[data-theme="agilis-performance"] .rmSecondaryButton,
+.campaignSlide[data-theme="agilis-color"] .rmSecondaryButton,
+.campaignSlide[data-theme="refinity"] .rmSecondaryButton,
+.refinitySecondary,
+.rmContactSecondary {
+  border: 1px solid var(--rm-dark-ink);
+  color: var(--rm-dark-ink);
+}
+
+/* Sekundarno na svetloj površini = okvir boje teksta. */
+.rmOutlineButton {
+  border-color: currentColor;
+  color: var(--rm-ink);
+}
+
+.contactActions > a {
+  min-height: var(--ds-ctl-h-l);
+}
+
+@media (max-width: 50rem) {
+  .rmPrimaryButton,
+  .rmSecondaryButton {
+    min-height: var(--ds-ctl-h-m);
+    padding: 0 1rem;
+    font: var(--ds-ctl-font);
+  }
+}
+
+/* Tekstualne veze: 14 px, Plex Sans 600, crvena podvlaka kao R-M marker. */
+.processFooter a,
+.systemCardFooter a,
+.seriesLayout article > a,
+.refinityTextLink,
+.editorialProofs article a,
+.productFamilyCopy > a,
+.productSlotLink {
+  font-size: var(--ds-font-small);
+  font-weight: 600;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 0.3em;
+}
+
+/* --- Brzi pristup (sidra sekcija) -------------------------------------- */
+.quickAccessRail a {
+  min-height: var(--ds-ctl-h-l);
+  font-size: var(--ds-font-small);
+  font-weight: 600;
+  color: var(--rm-ink);
+}
+
+.quickAccessRail a[data-dominant] {
+  color: var(--rm-red-ink);
+}
+
+/* --- Sekcijski naslovi po tokenima (H2: Archivo 700, −0,01 em, 1,1) ---- */
+.sectionHeading h2,
+.processIntro h2,
+.refinityHeader h2,
+.rmContactBand h2,
+.systemGallery .sectionHeading h2,
+.compatibleBrandsHeader h2,
+.editorialProofs h2,
+.refinityEditorial figcaption strong,
+.productFamilyCopy h3 {
+  font-family: var(--font-display), var(--font-geist-sans), system-ui, sans-serif;
+  font-size: var(--ds-font-h2);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  line-height: 1.1;
+}
+
+.sectionHeading h2,
+.processIntro h2,
+.refinityHeader h2 {
+  margin-top: 1rem;
+}
+
+.productFamilyCopy h3 {
+  max-width: 16ch;
+}
+
+.sectionHeading > p:last-child,
+.processIntro > p,
+.colorSystemsHeader > p,
+.systemGalleryIntro > p,
+.productFamiliesHeader > p,
+.agilisHeader > p,
+.refinityHeader > p {
+  font-size: var(--ds-font-lead);
+  line-height: 1.55;
+}
+
+/* Nazivi sistema velikim slovima — kampanjski izuzetak (≤ 88 px, ≥ −0,02 em, prored ≥ 0,95). */
+.agilisHeader h2 {
+  font-size: clamp(3.5rem, 9vw, 5.5rem);
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  line-height: 0.96;
+}
+
+.systemCardCopy h3,
+.systemGalleryPanelHeader h3,
+.seriesLayout h3 {
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
+
+.colorSystemsMosaic article[data-dominant] .systemCardCopy h3,
+.seriesLayout article[data-dominant] h3 {
+  font-size: clamp(3rem, 7vw, 5.5rem);
+}
+
+.systemCardCopy h3,
+.seriesLayout article:not([data-dominant]) h3 {
+  font-size: clamp(1.875rem, 3vw, 2.75rem);
+}
+
+.systemGalleryPanelHeader h3 {
+  font-size: clamp(2.5rem, 5vw, 5rem);
+}
+
+/* H3 bloka: Archivo 700, --ds-font-h3, prored ≥ 1,1. */
+.processCopy h3,
+.agilisBenefits article h3,
+.refinityAreas h3,
+.refinityFlow li strong {
+  font-family: var(--font-display), system-ui, sans-serif;
+  font-size: var(--ds-font-h3);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  line-height: 1.15;
+}
+
+.refinityFlow li strong {
+  font-size: var(--ds-font-card-title);
+}
+
+/* --- Proces ------------------------------------------------------------ */
+.processNumber,
+.processFooter > span,
+.refinityFlow li span,
+.refinityEditorial figcaption span,
+.seriesLayout article > div:first-child p,
+.seriesLayout article > div:first-child span,
+.systemGalleryPanelHeader > div > p,
+.productFamilyTextList small {
+  font-family: var(--font-technical), monospace;
+  font-size: var(--ds-font-label);
+  font-weight: 500;
+  letter-spacing: var(--ds-tracking-label);
+}
+
+.processCopy > p,
+.systemCardCopy > p,
+.systemGalleryPanelHeader > p {
+  font-size: var(--ds-font-small);
+  line-height: 1.6;
+}
+
+.agilisActions > p {
+  font-size: var(--ds-font-legal);
+}
+
+/* Grupe proizvoda kao čipovi: 13 px, okvir jače linije, ugao 2 px. */
+.processTags span,
+.productFamilyCopy small {
+  border-color: var(--rm-line);
+  border-radius: var(--ds-ctl-radius);
+  padding: 0.3rem 0.5rem;
+  color: var(--rm-muted);
+  font-size: var(--ds-font-legal);
+  font-weight: 500;
+}
+
+/* --- Sistemi boja (mozaik) --------------------------------------------- */
+.systemCardHeader p,
+.systemProcessPath li,
+.systemTechnicalSlot small,
+.systemCardFooter > div span {
+  font-size: var(--ds-font-label);
+  font-weight: 500;
+  letter-spacing: var(--ds-tracking-label);
+}
+
+/* Opis tehnologije je fraza („Provereni vodeni sistem”), ne kratka oznaka. */
+.systemCardHeader p {
+  text-transform: none;
+}
+
+.systemProcessPath {
+  row-gap: 0.35rem;
+}
+
+.systemProductVisuals figcaption {
+  font-size: var(--ds-font-label);
+  font-weight: 500;
+  line-height: 1.3;
+}
+
+.systemTechnicalSlot strong {
+  font-size: clamp(0.8125rem, 1vw, 0.9375rem);
+  line-height: 1.15;
+}
+
+.systemCardFooter > div strong {
+  font-size: var(--ds-font-small);
+}
+
+/* --- Galerija sistema (tabovi) ----------------------------------------- */
+.systemGalleryTabs button {
+  min-height: 5rem;
+  gap: 0.25rem 0.5rem;
+  grid-template-columns: 1.75rem minmax(0, 1fr);
+}
+
+.systemGalleryTabs button > span,
+.systemGalleryTabs small {
+  font-size: var(--ds-font-label);
+  font-weight: 500;
+  letter-spacing: var(--ds-tracking-label);
+}
+
+.systemGalleryTabs strong {
+  font-size: 0.9375rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.systemGalleryTabs small {
+  overflow-wrap: anywhere;
+}
+
+/* --- Kartica proizvoda: ugao 2 px, linija, bez senke ------------------- */
+.productImageSlotMedia,
+.systemProductVisuals figure > div,
+.systemGallerySupporting > article,
+.systemGalleryHeroProduct,
+.seriesLayout article:not([data-dominant]),
+.refinityAreas article,
+.refinityFlow li {
+  border-radius: var(--ds-ctl-radius);
+  box-shadow: none;
+}
+
+.productImagePlaceholder small,
+.productImageSlot figcaption > span,
+.productImageSlot figcaption > small,
+.productSlotDetails span {
+  font-size: var(--ds-font-label);
+  font-weight: 500;
+  letter-spacing: var(--ds-tracking-label);
+}
+
+.productSlotDetails span {
+  border-radius: var(--ds-ctl-radius);
+  letter-spacing: 0.04em;
+}
+
+.productImageSlot figcaption > strong {
+  font-family: var(--font-body), system-ui, sans-serif;
+  font-size: var(--ds-font-card-title);
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+.productImagePlaceholder strong {
+  line-height: 1.15;
+}
+
+.productSlotQuantityBadge {
+  font-size: var(--ds-font-label);
+}
+
+@media (max-width: 34rem) {
+  .campaignPaginationLabel strong {
+    font-size: var(--ds-font-label);
   }
 }

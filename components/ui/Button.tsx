@@ -3,15 +3,21 @@ import { cn } from "@/lib/utils";
 
 type Variant = "primary" | "secondary" | "ghost";
 
+/*
+ * Dugme sistema A: visina M 44 px, ugao 2 px, Plex Sans 600 15 px, bez
+ * podizanja, senke i „wipe” sloja na prelaz mišem. Primarno = ispuna akcenta,
+ * sekundarno = okvir boje teksta, providno.
+ */
 const VARIANT_CLASSES: Record<Variant, string> = {
-  primary: "cs-magnetic-cta cs-theme-wipe-card bg-accent text-accent-foreground",
+  primary:
+    "border !border-[var(--ds-c-accent)] bg-[var(--ds-c-accent)] !text-[var(--ds-c-on-accent)] hover:!border-[var(--ds-c-accent-hover)] hover:bg-[var(--ds-c-accent-hover)] active:!border-[var(--ds-c-accent-press)] active:bg-[var(--ds-c-accent-press)]",
   secondary:
-    "cs-interactive-surface border border-border bg-surface text-foreground hover:bg-surface-muted",
-  ghost: "cs-interactive-surface text-foreground hover:bg-surface-muted",
+    "border !border-[var(--ds-c-text)] bg-transparent text-[var(--ds-c-text)] hover:bg-[var(--ds-c-surface-2)]",
+  ghost: "border !border-transparent text-[var(--ds-c-text)] hover:bg-[var(--ds-c-surface-2)]",
 };
 
 const baseClasses =
-  "inline-flex items-center justify-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold transition-[background-color,color,border-color,box-shadow,transform] duration-200 ease-out";
+  "inline-flex min-h-[var(--ds-ctl-h-m)] items-center justify-center gap-2 rounded-[var(--ds-ctl-radius)] px-[1.125rem] font-[family-name:var(--font-body)] text-[0.9375rem] font-semibold leading-[1.2] no-underline transition-[background-color,color,border-color] duration-200 ease-out";
 
 export function Button({
   href,
@@ -30,8 +36,6 @@ export function Button({
       href={href}
       className={cn(baseClasses, VARIANT_CLASSES[variant], className)}
       data-cursor="button"
-      data-motion-surface
-      data-motion={variant === "primary" ? "theme-wipe" : undefined}
       {...rest}
     >
       <span className="inline-flex items-center gap-2">{children}</span>

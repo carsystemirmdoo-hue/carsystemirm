@@ -198,7 +198,7 @@ function ProcessSection() {
     >
       <header className={styles.sectionHeader}>
         <div>
-          <p className={styles.sectionKicker}>Kompletan repair proces</p>
+          <p className={styles.sectionKicker}>Kompletan proces popravke</p>
           <h2 id="baslac-process-title">Jedan sistem, osam povezanih faza.</h2>
         </div>
         <p>

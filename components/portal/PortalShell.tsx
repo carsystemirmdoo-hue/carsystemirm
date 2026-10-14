@@ -335,17 +335,9 @@ export function PortalShell({
 
           <div className="portal-topbar-actions">
             {/* Globalna pretraga stiže u fazi 2, zajedno sa uvozom faktura.
-                Do tada stoji izričito onemogućena, umesto da izgleda upotrebljivo. */}
-            <div
-              className="portal-search-trigger"
-              data-disabled="true"
-              aria-disabled="true"
-              title="Globalna pretraga još nije uključena"
-            >
-              <PortalIcon name="search" />
-              <span>Pretraga još nije uključena</span>
-            </div>
-
+                Do tada se polje ne prikazuje (sistem A, 2026-10-14): nedovršen
+                element u traci je izgledao kao kvar. Stil `.portal-search-trigger`
+                ostaje u portal.css za trenutak kada pretraga proradi. */}
             <Link
               href="/portal/obavestenja"
               className="portal-icon-button"

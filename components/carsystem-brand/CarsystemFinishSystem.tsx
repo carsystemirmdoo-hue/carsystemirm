@@ -44,7 +44,7 @@ export function CarsystemFinishSystem() {
       <div className={styles.finishActions}>
         <Link className={styles.secondaryButton} href={carsystemFinishSystem.cta.href}>
           {carsystemFinishSystem.cta.label}
-          <span aria-hidden="true">↗</span>
+          <span aria-hidden="true">→</span>
         </Link>
         {brochure ? (
           <a

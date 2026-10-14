@@ -1,34 +1,34 @@
 .pageShell {
   /* #e5322a je sa belim tekstom davao 4.36:1; #d42c24 je ista crvena, dovoljno duboka za ≥ 4.5:1. */
-  --entity-red: var(--brand-accent, #d42c24);
-  --entity-red-bright: var(--brand-accent, #d42c24);
-  --entity-accent-contrast: var(--brand-accent-contrast, #ffffff);
+  /* Sistem A: akcija je brend ispuna (ako je brend zadaje) ili --ds-c-accent. */
+  --entity-red: var(--brand-accent, var(--ds-c-accent));
+  --entity-red-bright: var(--brand-accent, var(--ds-c-accent-text));
+  --entity-accent-contrast: var(--brand-accent-contrast, var(--ds-c-on-accent));
   --entity-hero-accent: var(--brand-accent-on-dark, var(--entity-red));
   --entity-hero-accent-contrast: var(
     --brand-accent-on-dark-contrast,
     var(--entity-accent-contrast)
   );
-  --entity-red-tint: #fdecea;
+  --entity-red-tint: var(--ds-c-accent-soft);
   --entity-steel: oklch(0.55 0.075 245);
   --entity-hero-bg: oklch(0.145 0.018 250);
   --entity-hero-bg-strong: oklch(0.105 0.014 250);
   --entity-hero-ink: oklch(0.97 0.006 250);
   --entity-hero-muted: oklch(0.73 0.024 250);
   --entity-hero-border: oklch(0.96 0.006 250 / 0.13);
-  --entity-bg: #f4f5f7;
-  --entity-bg-soft: #eef0f3;
-  --entity-panel: #ffffff;
-  --entity-panel-strong: #f4f5f7;
-  --entity-ink: #14171c;
-  --entity-muted: #5c6470;
-  /* Sitni natpisi (9–11 px: „Pakovanje", „Status", šifre faza) — 0.62 je davalo 3.3:1 na beloj. */
-  --entity-faint: oklch(0.5 0.026 250);
-  --entity-border: #e2e5ea;
-  --entity-border-soft: oklch(0.3 0.02 250 / 0.09);
-  --entity-shadow: 0 10px 26px oklch(0.22 0.025 250 / 0.08);
+  --entity-bg: var(--ds-c-bg);
+  --entity-bg-soft: var(--ds-c-bg);
+  --entity-panel: var(--ds-c-surface);
+  --entity-panel-strong: var(--ds-c-surface-2);
+  --entity-ink: var(--ds-c-text);
+  --entity-muted: var(--ds-c-text-2);
+  --entity-faint: var(--ds-c-text-3);
+  --entity-border: var(--ds-c-line);
+  --entity-border-soft: var(--ds-c-line);
+  --entity-shadow: none;
   min-height: 100vh;
   overflow-x: clip;
-  background: linear-gradient(180deg, var(--entity-bg), var(--entity-bg-soft));
+  background: var(--entity-bg);
   color: var(--entity-ink);
   font-family: var(--font-body), var(--font-geist-sans), system-ui, sans-serif;
   text-rendering: optimizeLegibility;
@@ -36,21 +36,19 @@
 }
 
 :global(.dark) .pageShell {
-  /* Nivoi iz globalne tamne skale (app/globals.css → --dk-*). */
-  --entity-hero-bg: var(--dk-1);
-  --entity-hero-bg-strong: var(--dk-0);
-  --entity-hero-border: var(--dk-line);
-  --entity-red-tint: oklch(0.33 0.08 27 / 0.42);
-  --entity-bg: var(--dk-0);
-  --entity-bg-soft: oklch(0.13 0.008 255);
-  --entity-panel: var(--dk-1);
-  --entity-panel-strong: var(--dk-2);
-  --entity-ink: var(--foreground);
-  --entity-muted: var(--muted-foreground);
-  --entity-faint: var(--dk-text-faint);
-  --entity-border: var(--dk-line);
-  --entity-border-soft: oklch(0.94 0.008 255 / 0.07);
-  --entity-shadow: 0 28px 78px oklch(0.05 0.006 255 / 0.45);
+  /* Površine, tekst i linije prate tokene (.dark); hero je površina, ne crna ploča. */
+  --entity-hero-bg: var(--ds-c-surface);
+  --entity-hero-bg-strong: var(--ds-c-surface);
+  --entity-hero-border: var(--ds-c-line);
+  /* Tekst akcenta u tamnoj temi: svetla varijanta brenda (ispuna ostaje brend ispuna). */
+  --entity-red-bright: var(--brand-accent-on-dark, var(--ds-c-accent-text));
+}
+
+/* Neutralan brend (#20242C, npr. Yachtcare) bi u tamnoj temi bio tamno dugme na tamnoj
+   podlozi: tada ispuna postaje svetla varijanta brenda sa tamnim tekstom. */
+:global(.dark) .pageShell[data-brand-neutral="true"] {
+  --entity-red: var(--brand-accent-on-dark);
+  --entity-accent-contrast: var(--brand-accent-on-dark-contrast);
 }
 
 .pageShell a {
@@ -64,48 +62,43 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  font-weight: 900;
+  gap: 10px;
+  font: var(--ds-ctl-font);
   transition:
-    transform 220ms cubic-bezier(0.22, 1, 0.36, 1),
-    border-color 220ms cubic-bezier(0.22, 1, 0.36, 1),
-    background 220ms cubic-bezier(0.22, 1, 0.36, 1),
-    background-color 220ms cubic-bezier(0.22, 1, 0.36, 1),
-    box-shadow 220ms cubic-bezier(0.22, 1, 0.36, 1),
-    color 220ms cubic-bezier(0.22, 1, 0.36, 1);
+    border-color 120ms ease,
+    background-color 120ms ease,
+    color 120ms ease;
 }
 
 .primaryButton {
+  border: 1px solid transparent;
   background: var(--entity-red);
   color: var(--entity-accent-contrast) !important;
+}
+
+.primaryButton:hover {
+  background: color-mix(in oklab, var(--entity-red) 86%, var(--ds-c-text));
 }
 
 .primaryButton,
 .secondaryButton,
 .ghostButton {
-  min-height: 46px;
-  border-radius: 12px;
-  padding: 13px 16px;
-  font-size: 14px;
+  min-height: var(--ds-ctl-h-m);
+  border-radius: var(--ds-ctl-radius);
+  padding: 0 20px;
 }
 
-.secondaryButton {
-  border: 1px solid var(--entity-border);
-  background: var(--entity-panel);
-  color: var(--entity-ink);
-}
-
+/* Sekundarno: okvir boje teksta, providno; miš: --ds-c-surface-2. */
+.secondaryButton,
 .ghostButton {
-  border: 1px solid oklch(0.55 0.075 245 / 0.28);
-  background: oklch(0.55 0.075 245 / 0.12);
+  border: 1px solid var(--entity-ink);
+  background: transparent;
   color: var(--entity-ink);
 }
 
-.primaryButton:hover,
 .secondaryButton:hover,
-.ghostButton:hover,
-.programCard:hover,
-.brandCardActive:hover {
-  transform: translateY(-1px);
+.ghostButton:hover {
+  background: var(--ds-c-surface-2);
 }
 
 .main {
@@ -118,8 +111,8 @@
   max-width: 100%;
   margin-bottom: clamp(22px, 3vw, 34px);
   color: var(--entity-muted);
-  font-size: 13px;
-  font-weight: 650;
+  font-size: var(--ds-font-small);
+  font-weight: 500;
 }
 
 .breadcrumb ol {
@@ -139,7 +132,7 @@
 
 .breadcrumbCurrent {
   color: var(--entity-ink);
-  font-weight: 850;
+  font-weight: 600;
 }
 
 .hero {
@@ -151,13 +144,10 @@
   margin-bottom: clamp(48px, 7vw, 84px);
   overflow: hidden;
   border: 1px solid var(--entity-hero-border);
-  border-radius: 24px;
-  background:
-    linear-gradient(90deg, oklch(0.94 0.006 250 / 0.045) 1px, transparent 1px),
-    linear-gradient(180deg, oklch(0.94 0.006 250 / 0.035) 1px, transparent 1px),
-    linear-gradient(135deg, var(--entity-hero-bg), var(--entity-hero-bg-strong));
-  background-size: 36px 36px, 36px 36px, auto;
-  box-shadow: 0 28px 80px oklch(0.04 0.012 250 / 0.24);
+  border-radius: var(--ds-ctl-radius);
+  /* Sistem A: ravna površina, bez mreže i senke. */
+  background: var(--entity-hero-bg);
+  box-shadow: none;
   padding: clamp(24px, 5vw, 54px);
 }
 
@@ -180,11 +170,6 @@
 
 .programHero {
   grid-template-columns: minmax(0, 0.96fr) minmax(300px, 0.52fr);
-  background:
-    linear-gradient(90deg, oklch(0.94 0.006 250 / 0.052) 1px, transparent 1px),
-    linear-gradient(180deg, oklch(0.94 0.006 250 / 0.032) 1px, transparent 1px),
-    linear-gradient(145deg, oklch(0.16 0.02 245), var(--entity-hero-bg-strong));
-  background-size: 30px 30px, 30px 30px, auto;
 }
 
 .heroCopy {
@@ -197,9 +182,9 @@
   margin: 0;
   color: var(--entity-faint);
   font-family: var(--font-technical), var(--font-geist-mono), monospace;
-  font-size: 11px;
-  font-weight: 800;
-  letter-spacing: 0.18em;
+  font-size: var(--ds-font-label);
+  font-weight: 500;
+  letter-spacing: var(--ds-tracking-label);
   text-transform: uppercase;
 }
 
@@ -209,9 +194,9 @@
   color: var(--entity-ink);
   font-family: var(--font-display), var(--font-geist-sans), system-ui, sans-serif;
   font-size: 64px;
-  font-weight: 900;
+  font-weight: 800;
   letter-spacing: 0;
-  line-height: 0.94;
+  line-height: 1;
   text-transform: uppercase;
 }
 
@@ -225,7 +210,7 @@
   margin: 18px 0 0;
   color: var(--entity-hero-ink);
   font-size: clamp(20px, 2vw, 28px);
-  font-weight: 800;
+  font-weight: 600;
   line-height: 1.24;
 }
 
@@ -264,12 +249,12 @@
   min-height: 28px;
   align-items: center;
   border: 1px solid var(--entity-border);
-  border-radius: 999px;
+  border-radius: var(--ds-ctl-radius);
   background: color-mix(in srgb, var(--entity-panel-strong) 86%, transparent);
   color: var(--entity-muted);
   padding: 6px 10px;
-  font-size: 11.5px;
-  font-weight: 850;
+  font-size: var(--ds-font-label);
+  font-weight: 600;
 }
 
 .statusChip {
@@ -310,11 +295,11 @@
   min-height: 300px;
   place-items: center;
   border: 1px solid var(--entity-hero-border);
-  border-radius: 18px;
+  border-radius: var(--ds-ctl-radius);
   /* Hero je uvek taman: fiksna tamna studio površina, bez mreže. */
   background: var(--surface-studio-fixed-dark);
   padding: clamp(18px, 3vw, 28px);
-  box-shadow: inset 0 1px 0 oklch(0.95 0.006 250 / 0.08);
+  box-shadow: none;
 }
 
 .brandHero .logoStage {
@@ -335,10 +320,10 @@
   min-height: 178px;
   place-items: center;
   border: 1px solid oklch(0.86 0.016 250);
-  border-radius: 14px;
+  border-radius: var(--ds-ctl-radius);
   background: oklch(0.985 0.004 250);
   padding: 28px;
-  box-shadow: 0 18px 42px oklch(0.04 0.012 250 / 0.26);
+  box-shadow: none;
 }
 
 .logoImage {
@@ -354,7 +339,7 @@
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 10px;
   border: 1px solid color-mix(in srgb, var(--entity-hero-accent) 32%, var(--entity-hero-border));
-  border-radius: 18px;
+  border-radius: var(--ds-ctl-radius);
   background: var(--surface-studio-fixed-dark);
   padding: clamp(12px, 2vw, 18px);
 }
@@ -364,7 +349,7 @@
   display: block;
   overflow: hidden;
   aspect-ratio: 1;
-  border-radius: 12px;
+  border-radius: var(--ds-ctl-radius);
   background: oklch(0.985 0.004 250);
   color: inherit;
   text-decoration: none;
@@ -388,7 +373,7 @@
   left: 8px;
   overflow: hidden;
   color: oklch(0.32 0.012 250);
-  font-size: 11px;
+  font-size: var(--ds-font-label);
   font-weight: 700;
   line-height: 1.25;
   text-overflow: ellipsis;
@@ -405,7 +390,7 @@
   margin: 4px 0 0;
   color: var(--entity-hero-muted);
   font-size: 13px;
-  font-weight: 750;
+  font-weight: 700;
   text-align: center;
 }
 
@@ -420,7 +405,7 @@
   margin: 0;
   color: var(--entity-hero-muted);
   font-size: 13px;
-  font-weight: 750;
+  font-weight: 700;
   line-height: 1.5;
   text-align: center;
 }
@@ -432,11 +417,11 @@
   place-items: center;
   overflow: hidden;
   border: 1px solid var(--entity-hero-border);
-  border-radius: 18px;
+  border-radius: var(--ds-ctl-radius);
   background:
     linear-gradient(120deg, oklch(0.24 0.026 245 / 0.9), oklch(0.12 0.014 250 / 0.94));
   padding: clamp(20px, 3vw, 34px);
-  box-shadow: inset 0 1px 0 oklch(0.95 0.006 250 / 0.08);
+  box-shadow: none;
 }
 
 .programSignal {
@@ -446,7 +431,7 @@
   gap: 9px;
   width: min(100%, 320px);
   border: 1px solid var(--entity-hero-border);
-  border-radius: 16px;
+  border-radius: var(--ds-ctl-radius);
   background: oklch(0.11 0.014 250 / 0.74);
   padding: 24px;
 }
@@ -455,18 +440,18 @@
 .programSignal small {
   color: var(--entity-hero-muted);
   font-family: var(--font-technical), var(--font-geist-mono), monospace;
-  font-size: 11px;
-  font-weight: 800;
-  letter-spacing: 0.14em;
+  font-size: var(--ds-font-label);
+  font-weight: 500;
+  letter-spacing: var(--ds-tracking-label);
   text-transform: uppercase;
 }
 
 .programSignal strong {
   color: var(--entity-hero-ink);
   font-size: clamp(34px, 5vw, 56px);
-  font-weight: 950;
+  font-weight: 700;
   letter-spacing: 0;
-  line-height: 0.92;
+  line-height: 1;
   text-transform: uppercase;
 }
 
@@ -495,14 +480,14 @@
 .placeholderMark strong {
   color: var(--entity-ink);
   font-size: 26px;
-  font-weight: 900;
+  font-weight: 700;
 }
 
 .placeholderMark span {
   color: var(--entity-faint);
   font-family: var(--font-technical), var(--font-geist-mono), monospace;
-  font-size: 11px;
-  letter-spacing: 0.15em;
+  font-size: var(--ds-font-label);
+  letter-spacing: var(--ds-tracking-label);
   text-transform: uppercase;
 }
 
@@ -517,12 +502,8 @@
   align-items: end;
   overflow: hidden;
   border: 1px solid var(--entity-hero-border);
-  border-radius: 24px;
-  background:
-    linear-gradient(90deg, oklch(0.94 0.006 250 / 0.04) 1px, transparent 1px),
-    linear-gradient(180deg, oklch(0.94 0.006 250 / 0.03) 1px, transparent 1px),
-    linear-gradient(135deg, var(--entity-hero-bg), var(--entity-hero-bg-strong));
-  background-size: 34px 34px, 34px 34px, auto;
+  border-radius: var(--ds-ctl-radius);
+  background: var(--entity-hero-bg);
   padding: clamp(26px, 5vw, 56px);
 }
 
@@ -546,12 +527,12 @@
 
 .indexIntroMeta span {
   border: 1px solid var(--entity-hero-border);
-  border-radius: 12px;
+  border-radius: var(--ds-ctl-radius);
   background: oklch(0.2 0.018 250 / 0.56);
   color: var(--entity-hero-muted);
   padding: 13px 14px;
   font-size: 13px;
-  font-weight: 850;
+  font-weight: 600;
 }
 
 .sectionHeader {
@@ -568,7 +549,7 @@
   color: var(--entity-ink);
   font-family: var(--font-display), var(--font-geist-sans), system-ui, sans-serif;
   font-size: 36px;
-  font-weight: 900;
+  font-weight: 800;
   letter-spacing: 0;
   line-height: 1;
 }
@@ -588,9 +569,9 @@
 .guidance .sectionKicker {
   color: var(--entity-faint);
   font-family: var(--font-technical), var(--font-geist-mono), monospace;
-  font-size: 11px;
-  font-weight: 800;
-  letter-spacing: 0.18em;
+  font-size: var(--ds-font-label);
+  font-weight: 500;
+  letter-spacing: var(--ds-tracking-label);
   line-height: 1.2;
   text-transform: uppercase;
 }
@@ -607,7 +588,7 @@
   align-content: start;
   gap: 20px;
   border: 1px solid var(--entity-border);
-  border-radius: 14px;
+  border-radius: var(--ds-ctl-radius);
   background: var(--entity-panel);
   padding: clamp(20px, 3vw, 28px);
 }
@@ -638,7 +619,7 @@
 .guidance,
 .supportBand {
   border: 1px solid var(--entity-border);
-  border-radius: 18px;
+  border-radius: var(--ds-ctl-radius);
   background: color-mix(in srgb, var(--entity-panel) 88%, transparent);
 }
 
@@ -665,7 +646,7 @@
   min-height: 98px;
   align-content: center;
   border: 1px solid var(--entity-border);
-  border-radius: 15px;
+  border-radius: var(--ds-ctl-radius);
   background: var(--entity-panel);
   padding: 16px;
 }
@@ -673,16 +654,16 @@
 .fact span {
   color: var(--entity-faint);
   font-family: var(--font-technical), var(--font-geist-mono), monospace;
-  font-size: 10px;
-  font-weight: 800;
-  letter-spacing: 0.14em;
+  font-size: var(--ds-font-label);
+  font-weight: 500;
+  letter-spacing: var(--ds-tracking-label);
   text-transform: uppercase;
 }
 
 .fact strong {
   color: var(--entity-ink);
   font-size: 18px;
-  font-weight: 900;
+  font-weight: 700;
 }
 
 .programCardGrid,
@@ -706,7 +687,7 @@
 .productCard {
   min-width: 0;
   border: 1px solid var(--entity-border);
-  border-radius: 16px;
+  border-radius: var(--ds-ctl-radius);
   background: color-mix(in srgb, var(--entity-panel) 88%, transparent);
 }
 
@@ -730,7 +711,7 @@
   margin: 0;
   color: var(--entity-ink);
   font-size: 20px;
-  font-weight: 900;
+  font-weight: 700;
   line-height: 1.15;
 }
 
@@ -750,12 +731,12 @@
   min-height: 28px;
   display: inline-flex;
   align-items: center;
-  border-radius: 999px;
+  border-radius: var(--ds-ctl-radius);
   background: var(--entity-panel-strong);
   color: var(--entity-faint);
   padding: 6px 10px;
-  font-size: 11.5px;
-  font-weight: 800;
+  font-size: var(--ds-font-label);
+  font-weight: 600;
 }
 
 .programIndexCard {
@@ -770,19 +751,19 @@
 
 .programPhaseStrip span {
   border: 1px solid var(--entity-border);
-  border-radius: 999px;
+  border-radius: var(--ds-ctl-radius);
   background: var(--entity-panel);
   color: var(--entity-muted);
   padding: 6px 9px;
-  font-size: 11.5px;
-  font-weight: 850;
+  font-size: var(--ds-font-label);
+  font-weight: 600;
 }
 
 .productCard {
   display: flex;
   overflow: hidden;
   flex-direction: column;
-  border-radius: 16px;
+  border-radius: var(--ds-ctl-radius);
   background: var(--entity-panel);
   transition:
     border-color 160ms ease,
@@ -807,9 +788,9 @@
   margin: 0;
   color: var(--entity-muted);
   font-family: var(--font-technical), var(--font-geist-mono), monospace;
-  font-size: 10px;
-  font-weight: 850;
-  letter-spacing: 0.14em;
+  font-size: var(--ds-font-label);
+  font-weight: 500;
+  letter-spacing: var(--ds-tracking-label);
   text-transform: uppercase;
 }
 
@@ -817,7 +798,7 @@
   margin: 0;
   color: var(--entity-ink);
   font-size: 20px;
-  font-weight: 900;
+  font-weight: 700;
   line-height: 1.12;
 }
 
@@ -834,7 +815,7 @@
   gap: 0;
   overflow: hidden;
   border: 1px solid var(--entity-border);
-  border-radius: 10px;
+  border-radius: var(--ds-ctl-radius);
 }
 
 .productDataGrid span {
@@ -852,9 +833,9 @@
 .productDataGrid small {
   color: var(--entity-faint);
   font-family: var(--font-technical), var(--font-geist-mono), monospace;
-  font-size: 9px;
-  font-weight: 800;
-  letter-spacing: 0.14em;
+  font-size: var(--ds-font-label);
+  font-weight: 500;
+  letter-spacing: var(--ds-tracking-label);
   text-transform: uppercase;
 }
 
@@ -862,7 +843,7 @@
   overflow-wrap: anywhere;
   color: var(--entity-ink);
   font-size: 12.5px;
-  font-weight: 900;
+  font-weight: 700;
   line-height: 1.25;
 }
 
@@ -876,7 +857,7 @@
 
 .productActions .primaryButton {
   min-height: 40px;
-  border-radius: 9px;
+  border-radius: var(--ds-ctl-radius);
   padding-inline: 12px;
   font-size: 13px;
   text-align: center;
@@ -885,7 +866,7 @@
 .detailLink {
   color: var(--entity-ink);
   font-size: 13px;
-  font-weight: 900;
+  font-weight: 600;
   white-space: nowrap;
 }
 
@@ -897,7 +878,7 @@
   margin-bottom: 16px;
   color: var(--entity-muted);
   font-size: 13px;
-  font-weight: 850;
+  font-weight: 600;
 }
 
 .entityProductLayout {
@@ -919,9 +900,9 @@
   display: grid;
   gap: 14px;
   border: 1px solid var(--entity-border);
-  border-radius: 16px;
+  border-radius: var(--ds-ctl-radius);
   background: color-mix(in srgb, var(--entity-panel) 88%, transparent);
-  box-shadow: var(--entity-shadow);
+  box-shadow: none;
   padding: 16px;
   opacity: 1;
   transform: translateX(0);
@@ -945,7 +926,7 @@
   color: var(--entity-ink);
   font-family: var(--font-display), var(--font-geist-sans), system-ui, sans-serif;
   font-size: 22px;
-  font-weight: 900;
+  font-weight: 800;
   line-height: 1.05;
 }
 
@@ -965,7 +946,7 @@
   color: var(--entity-ink);
   cursor: pointer;
   font: inherit;
-  font-weight: 900;
+  font-weight: 600;
   transition:
     transform 160ms ease,
     border-color 160ms ease,
@@ -974,7 +955,7 @@
 
 .entityFilterActions button {
   min-height: 34px;
-  border-radius: 10px;
+  border-radius: var(--ds-ctl-radius);
   padding: 8px 10px;
   color: var(--entity-red-bright);
   font-size: 12px;
@@ -991,7 +972,7 @@
   display: none;
   width: 42px;
   min-height: 148px;
-  border-radius: 14px;
+  border-radius: var(--ds-ctl-radius);
   padding: 10px 0;
   writing-mode: vertical-rl;
 }
@@ -1005,14 +986,14 @@
   margin-top: 8px;
   color: var(--entity-muted);
   font-family: var(--font-technical), var(--font-geist-mono), monospace;
-  font-size: 10px;
-  letter-spacing: 0.14em;
+  font-size: var(--ds-font-label);
+  letter-spacing: var(--ds-tracking-label);
   text-transform: uppercase;
 }
 
 .entityFilterToggle {
   min-height: 42px;
-  border-radius: 12px;
+  border-radius: var(--ds-ctl-radius);
   padding: 10px 14px;
   font-size: 13px;
 }
@@ -1033,9 +1014,9 @@
 .entityField span {
   color: var(--entity-faint);
   font-family: var(--font-technical), var(--font-geist-mono), monospace;
-  font-size: 10px;
-  font-weight: 800;
-  letter-spacing: 0.14em;
+  font-size: var(--ds-font-label);
+  font-weight: 500;
+  letter-spacing: var(--ds-tracking-label);
   text-transform: uppercase;
 }
 
@@ -1043,12 +1024,12 @@
   width: 100%;
   min-height: 44px;
   border: 1px solid var(--entity-border);
-  border-radius: 12px;
+  border-radius: var(--ds-ctl-radius);
   background: var(--entity-panel);
   color: var(--entity-ink);
   font: inherit;
   font-size: 14px;
-  font-weight: 750;
+  font-weight: 700;
   outline: none;
 }
 
@@ -1080,9 +1061,9 @@
 .quickPhaseFilters > span {
   color: var(--entity-faint);
   font-family: var(--font-technical), var(--font-geist-mono), monospace;
-  font-size: 10px;
-  font-weight: 800;
-  letter-spacing: 0.14em;
+  font-size: var(--ds-font-label);
+  font-weight: 500;
+  letter-spacing: var(--ds-tracking-label);
   text-transform: uppercase;
 }
 
@@ -1095,13 +1076,13 @@
 .quickPhaseList button {
   min-height: 40px;
   border: 1px solid var(--entity-border);
-  border-radius: 999px;
+  border-radius: var(--ds-ctl-radius);
   background: var(--entity-panel);
   color: var(--entity-muted);
   padding: 9px 14px;
   font: inherit;
   font-size: 13px;
-  font-weight: 850;
+  font-weight: 600;
   cursor: pointer;
   transition:
     border-color 180ms var(--cs-ease-out),
@@ -1177,7 +1158,7 @@
   display: grid;
   gap: 10px;
   border: 1px solid var(--entity-border);
-  border-radius: 16px;
+  border-radius: var(--ds-ctl-radius);
   background: var(--entity-panel);
   padding: 24px;
 }
@@ -1197,7 +1178,7 @@
 .processSection,
 .guidanceSection,
 .gatewaySection {
-  border-radius: 18px;
+  border-radius: var(--ds-ctl-radius);
 }
 
 .phaseRail {
@@ -1215,7 +1196,7 @@
   gap: 10px;
   align-content: start;
   border: 1px solid var(--entity-border);
-  border-radius: 14px;
+  border-radius: var(--ds-ctl-radius);
   background: var(--entity-panel);
   padding: 16px;
   color: var(--entity-muted);
@@ -1236,12 +1217,12 @@
   align-items: center;
   justify-content: center;
   border: 1px solid var(--entity-border);
-  border-radius: 999px;
+  border-radius: var(--ds-ctl-radius);
   background: var(--entity-panel-strong);
   color: var(--entity-faint);
   font-family: var(--font-technical), var(--font-geist-mono), monospace;
-  font-size: 11px;
-  font-weight: 900;
+  font-size: var(--ds-font-label);
+  font-weight: 500;
 }
 
 .phaseRailItemActive .phaseStep {
@@ -1253,7 +1234,7 @@
 .phaseRailItem strong {
   color: var(--entity-ink);
   font-size: 18px;
-  font-weight: 900;
+  font-weight: 700;
   line-height: 1.1;
 }
 
@@ -1290,7 +1271,7 @@
   min-height: 142px;
   place-items: center;
   border: 1px solid var(--entity-border-soft);
-  border-radius: 14px;
+  border-radius: var(--ds-ctl-radius);
   background: var(--entity-panel-strong);
 }
 
@@ -1312,12 +1293,12 @@
 .brandPlaceholder strong {
   color: var(--entity-ink);
   font-size: 20px;
-  font-weight: 900;
+  font-weight: 700;
 }
 
 .brandPlaceholder span {
   font-size: 12px;
-  font-weight: 800;
+  font-weight: 600;
 }
 
 .brandCardFooter {
@@ -1327,7 +1308,7 @@
   gap: 12px;
   color: var(--entity-ink);
   font-size: 13px;
-  font-weight: 900;
+  font-weight: 600;
 }
 
 .guidance {
@@ -1472,7 +1453,7 @@
 
   .hero,
   .indexIntro {
-    border-radius: 18px;
+    border-radius: var(--ds-ctl-radius);
     padding: 22px;
   }
 
@@ -1531,4 +1512,342 @@
   .brandCardActive:hover {
     transform: none;
   }
+}
+
+/* =========================================================================
+ * Sistem A — generički brend šablon, /program, /brendovi (data-ds="a")
+ *
+ * Hero ostaje tamna ploča (atmosfera), ali ravna: bez mreže, senke i
+ * zaobljenja. Pilule, kartice, polja i dugmad prate sistem.
+ * ========================================================================= */
+.entityProductLayout[data-compact] {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+:global([data-ds="a"]) .pageShell .title {
+  font-size: var(--ds-font-h1);
+  font-weight: 800;
+  letter-spacing: var(--ds-tracking-h);
+  line-height: 1.05;
+  text-transform: none;
+}
+
+:global([data-ds="a"]) .pageShell .heroLead {
+  font-size: var(--ds-font-h3);
+  line-height: 1.35;
+}
+
+:global([data-ds="a"]) .pageShell .subtitle,
+:global([data-ds="a"]) .pageShell .indexIntroCopy p {
+  font-size: var(--ds-font-lead);
+  line-height: 1.55;
+}
+
+:global([data-ds="a"]) .pageShell .sectionHeader h2,
+:global([data-ds="a"]) .pageShell .supportBand h2,
+:global([data-ds="a"]) .pageShell .guidance h2 {
+  font-size: var(--ds-font-h2);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  line-height: 1.1;
+}
+
+:global([data-ds="a"]) .pageShell .sectionHeader p:not(.sectionKicker),
+:global([data-ds="a"]) .pageShell .supportBand p:not(.sectionKicker),
+:global([data-ds="a"]) .pageShell .guidance p:not(.sectionKicker),
+:global([data-ds="a"]) .pageShell .gatewayPanel > p {
+  font-size: var(--ds-font-body);
+  line-height: 1.6;
+}
+
+/* Oznake: Plex Mono 500 12 px + crtica akcenta za oznaku sekcije. */
+:global([data-ds="a"]) .pageShell .kicker,
+:global([data-ds="a"]) .pageShell .sectionKicker,
+:global([data-ds="a"]) .pageShell .cardKicker {
+  font-size: var(--ds-font-label);
+  font-weight: 500;
+  letter-spacing: var(--ds-tracking-label);
+}
+
+:global([data-ds="a"]) .pageShell .sectionHeader .sectionKicker,
+:global([data-ds="a"]) .pageShell .supportBand .sectionKicker,
+:global([data-ds="a"]) .pageShell .guidance .sectionKicker,
+:global([data-ds="a"]) .pageShell .indexIntroCopy .sectionKicker {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+:global([data-ds="a"]) .pageShell .sectionHeader .sectionKicker::before,
+:global([data-ds="a"]) .pageShell .supportBand .sectionKicker::before,
+:global([data-ds="a"]) .pageShell .guidance .sectionKicker::before,
+:global([data-ds="a"]) .pageShell .indexIntroCopy .sectionKicker::before {
+  width: 24px;
+  height: 2px;
+  flex: none;
+  background: var(--entity-red-bright);
+  content: "";
+}
+
+:global([data-ds="a"]) .pageShell .indexIntroCopy .sectionKicker::before {
+  background: var(--entity-hero-accent);
+}
+
+/* Čipovi i pilule: okvir 1 px, ugao 2 px, 13 px. */
+:global([data-ds="a"]) .pageShell .badge,
+:global([data-ds="a"]) .pageShell .phaseBadge,
+:global([data-ds="a"]) .pageShell .availabilityChip,
+:global([data-ds="a"]) .pageShell .programPills span,
+:global([data-ds="a"]) .pageShell .programPhaseStrip span {
+  min-height: 28px;
+  border: 1px solid var(--ds-c-line-strong);
+  background: transparent;
+  color: var(--entity-muted);
+  font-size: 0.8125rem;
+  font-weight: 500;
+}
+
+:global([data-ds="a"]) .pageShell .hero .badge,
+:global([data-ds="a"]) .pageShell .hero .availabilityChip {
+  border-color: var(--entity-hero-border);
+  color: var(--entity-hero-muted);
+}
+
+/* Na tamnoj ploči hero-a oznake i čip faze koriste svetle boje ploče. */
+:global([data-ds="a"]) .pageShell .hero:not(.brandHero) .kicker {
+  color: var(--entity-hero-muted);
+}
+
+:global([data-ds="a"]) .pageShell .hero .statusChip {
+  border-color: var(--entity-hero-accent);
+  color: var(--entity-hero-ink);
+}
+
+:global([data-ds="a"]) .pageShell .statusChip {
+  border-color: var(--entity-red-bright);
+  background: transparent;
+  font-size: 0.8125rem;
+  font-weight: 600;
+}
+
+:global([data-ds="a"]) .pageShell .indexIntroMeta span {
+  font-size: var(--ds-font-small);
+  font-weight: 500;
+  background: transparent;
+}
+
+/* Kartice i paneli: linija, bez senke, bez podizanja; miš → jača linija. */
+:global([data-ds="a"]) .pageShell .programCard,
+:global([data-ds="a"]) .pageShell .brandCard,
+:global([data-ds="a"]) .pageShell .productCard,
+:global([data-ds="a"]) .pageShell .overviewText,
+:global([data-ds="a"]) .pageShell .guidance,
+:global([data-ds="a"]) .pageShell .supportBand,
+:global([data-ds="a"]) .pageShell .gatewayPanel,
+:global([data-ds="a"]) .pageShell .fact,
+:global([data-ds="a"]) .pageShell .entityFilters,
+:global([data-ds="a"]) .pageShell .emptyState,
+:global([data-ds="a"]) .pageShell .phaseRailItem {
+  background: var(--ds-c-surface);
+  box-shadow: none;
+  transform: none;
+}
+
+:global([data-ds="a"]) .pageShell .programCard:hover,
+:global([data-ds="a"]) .pageShell .brandCardActive:hover,
+:global([data-ds="a"]) .pageShell .productCard:hover {
+  border-color: var(--ds-c-line-strong);
+  transform: none;
+}
+
+:global([data-ds="a"]) .pageShell .programCard h2,
+:global([data-ds="a"]) .pageShell .programCard h3,
+:global([data-ds="a"]) .pageShell .brandCard h2,
+:global([data-ds="a"]) .pageShell .brandCard h3 {
+  font-size: var(--ds-font-h3);
+  font-weight: 700;
+}
+
+:global([data-ds="a"]) .pageShell .productTitle {
+  font-size: var(--ds-font-card-title);
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+:global([data-ds="a"]) .pageShell .productPurpose,
+:global([data-ds="a"]) .pageShell .phaseRailItem p,
+:global([data-ds="a"]) .pageShell .entityMobileFilterBar,
+:global([data-ds="a"]) .pageShell .logoStageMeta,
+:global([data-ds="a"]) .pageShell .productStageMeta {
+  font-size: var(--ds-font-small);
+}
+
+:global([data-ds="a"]) .pageShell .productDataGrid strong {
+  font-size: var(--ds-font-small);
+  font-weight: 600;
+}
+
+:global([data-ds="a"]) .pageShell .fact strong,
+:global([data-ds="a"]) .pageShell .phaseRailItem strong,
+:global([data-ds="a"]) .pageShell .emptyState strong {
+  font-size: var(--ds-font-card-title);
+  font-weight: 600;
+}
+
+:global([data-ds="a"]) .pageShell .phaseRailItemActive {
+  border: 2px solid var(--entity-red-bright);
+  background: color-mix(in oklab, var(--entity-red-bright) 10%, var(--ds-c-surface));
+}
+
+/* Hero: logo i proizvodi na studio površini, bez senki. */
+:global([data-ds="a"]) .pageShell .logoChip {
+  border-color: var(--ds-c-line);
+  box-shadow: none;
+}
+
+:global([data-ds="a"]) .pageShell .programSignal strong {
+  font-size: var(--ds-font-h2);
+  letter-spacing: -0.01em;
+  text-transform: none;
+}
+
+/* Na tamnoj ploči hero-a: sekundarno je beli okvir. */
+:global([data-ds="a"]) .pageShell .hero .ghostButton {
+  border-color: var(--entity-hero-ink);
+  background: transparent;
+  color: var(--entity-hero-ink);
+}
+
+:global([data-ds="a"]) .pageShell .hero .ghostButton:hover {
+  background: rgb(255 255 255 / 0.08);
+}
+
+:global([data-ds="a"]) .pageShell .hero .secondaryButton {
+  border-color: var(--entity-hero-ink);
+  background: var(--entity-hero-ink);
+  color: var(--entity-hero-bg) !important;
+}
+
+:global([data-ds="a"]) .pageShell .productActions .primaryButton {
+  min-height: var(--ds-ctl-h-m);
+  padding-inline: 16px;
+  font: var(--ds-ctl-font);
+}
+
+/* Tekstualne veze: Plex Sans 600 15 px, podvlaka 1 px. */
+:global([data-ds="a"]) .pageShell .detailLink {
+  font-size: 0.9375rem;
+  font-weight: 600;
+  text-decoration: underline;
+  text-decoration-color: var(--ds-c-line-strong);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 4px;
+}
+
+:global([data-ds="a"]) .pageShell .detailLink:hover {
+  text-decoration-color: currentColor;
+  text-decoration-thickness: 2px;
+}
+
+:global([data-ds="a"]) .pageShell .brandCardFooter {
+  font-size: 0.9375rem;
+  font-weight: 600;
+}
+
+/* Filteri: polja 48 px, oznaka iznad (Plex Sans 600 14 px). */
+:global([data-ds="a"]) .pageShell .entityFiltersHeader h3 {
+  font-size: var(--ds-font-h3);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  line-height: 1.2;
+}
+
+:global([data-ds="a"]) .pageShell .entityField > span {
+  color: var(--ds-c-text);
+  font-family: var(--font-body), system-ui, sans-serif;
+  font-size: var(--ds-font-small);
+  font-weight: 600;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+:global([data-ds="a"]) .pageShell .entityField input {
+  min-height: var(--ds-ctl-h-field);
+  border-color: var(--ds-c-field);
+  background: var(--ds-c-surface);
+  font-size: var(--ds-font-body);
+  font-weight: 400;
+}
+
+:global([data-ds="a"]) .pageShell .entityField input::placeholder {
+  color: var(--ds-c-text-3);
+}
+
+:global([data-ds="a"]) .pageShell .entityField input:focus {
+  border-color: var(--ds-c-field);
+  box-shadow: none;
+  outline: 2px solid var(--ds-c-focus);
+  outline-offset: 2px;
+}
+
+:global([data-ds="a"]) .pageShell .entityFilterActions button {
+  min-height: var(--ds-ctl-h-s);
+  font-size: var(--ds-font-small);
+  font-weight: 600;
+}
+
+:global([data-ds="a"]) .pageShell .entityFilterActions button:last-child {
+  width: var(--ds-ctl-h-s);
+}
+
+:global([data-ds="a"]) .pageShell .entityFilterToggle {
+  min-height: var(--ds-ctl-h-m);
+  border-color: var(--entity-ink);
+  font: var(--ds-ctl-font);
+}
+
+:global([data-ds="a"]) .pageShell .entityFilterActions button:hover,
+:global([data-ds="a"]) .pageShell .entityFiltersExpand:hover,
+:global([data-ds="a"]) .pageShell .entityFilterToggle:hover {
+  border-color: var(--ds-c-line-strong);
+  background: var(--ds-c-surface-2);
+  transform: none;
+}
+
+/* Brzi filter po fazi: čip 36 px; izabrano = 2 px akcent + meka podloga. */
+:global([data-ds="a"]) .pageShell .quickPhaseFilters > span {
+  color: var(--ds-c-text);
+  font-family: var(--font-body), system-ui, sans-serif;
+  font-size: var(--ds-font-small);
+  font-weight: 600;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+:global([data-ds="a"]) .pageShell .quickPhaseList button {
+  min-height: var(--ds-ctl-h-s);
+  border: 1px solid var(--ds-c-line-strong);
+  padding: 0 14px;
+  color: var(--entity-ink);
+  font-size: var(--ds-font-small);
+  font-weight: 500;
+}
+
+:global([data-ds="a"]) .pageShell .quickPhaseList button:hover {
+  border-color: var(--entity-ink);
+}
+
+:global([data-ds="a"]) .pageShell .quickPhaseList button[data-active] {
+  border: 2px solid var(--entity-red-bright);
+  padding: 0 13px;
+  background: color-mix(in oklab, var(--entity-red-bright) 10%, var(--ds-c-surface));
+  color: var(--entity-ink);
+  font-weight: 600;
+}
+
+/* Fokus: 2 px --ds-c-focus, odmak 2 px. */
+:global([data-ds="a"]) .pageShell a:focus-visible,
+:global([data-ds="a"]) .pageShell button:focus-visible {
+  outline: 2px solid var(--ds-c-focus);
+  outline-offset: 2px;
 }

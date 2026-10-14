@@ -196,7 +196,7 @@ export function ProductVariantOptions({
           {activeVariant.package ? (
             <div>
               <dt>Pakovanje</dt>
-              <dd>{activeVariant.package}</dd>
+              <dd>{formatMeasureSr(activeVariant.package)}</dd>
             </div>
           ) : null}
           {activeVariant.status ? (
@@ -216,7 +216,8 @@ export function ProductVariantOptions({
         </Link>
       </div>
 
-      {section.note ? <p className={styles.optionNote}>{section.note}</p> : null}
+      {/* `section.note` je interna beleška o izvoru podataka (npr. „Oznake sa etiketa
+          pakovanja; zvanični nazivi: …"); podatak ostaje u katalogu, kupcu se ne prikazuje. */}
     </section>
   );
 }

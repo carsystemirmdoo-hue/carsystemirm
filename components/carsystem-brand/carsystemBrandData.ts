@@ -167,7 +167,7 @@ export const carsystemMedia: Record<
 };
 
 export const carsystemHero = {
-  eyebrow: "Professional refinish system",
+  eyebrow: "Profesionalni refinish sistem",
   title: "Ceo proces popravke. Jedan sistem.",
   description:
     "Od prvog brušenja do završnog sjaja, Carsystem povezuje materijale, alate, zaštitu i prateću opremu u jedan profesionalan radni proces.",
@@ -179,7 +179,7 @@ export const carsystemHero = {
     href: carsystemCatalogHref(),
     label: "Pogledajte Carsystem proizvode",
   },
-  slogan: "It’s all about a good system.",
+  slogan: "Sve počinje dobrim sistemom.",
 } as const;
 
 /**
@@ -242,6 +242,7 @@ export const carsystemSectionNavItems = [
   { label: "Sistemi", href: "#systems", sectionId: "systems" },
   { label: "Prema poslu", href: "#use-cases", sectionId: "use-cases" },
   { label: "Proizvodi", href: "#products", sectionId: "products" },
+  { label: "RUPES", href: "#rupes", sectionId: "rupes" },
   {
     label: "Dokumentacija",
     href: "#documentation",
@@ -490,13 +491,13 @@ export const carsystemFamilies = [
   {
     id: "finish",
     eyebrow: "Fina obrada",
-    title: "Finish sistem",
+    title: "Sistem za završnu obradu",
     description:
       "Fino matiranje i korekcija površine pripremaju lak za ujednačen završni sjaj.",
     // Samo Finish serija: F.23 disk je već kartica 01 i proizvod u procesu.
     productSlugs: ["carsystem-finish-serija"],
     href: carsystemCatalogHref({ program: "poliranje" }),
-    ctaLabel: "Otvorite Finish program",
+    ctaLabel: "Otvorite program za završnu obradu",
     layout: "wide",
   },
 ] as const;
@@ -778,14 +779,14 @@ export const carsystemDocumentation = {
  * step. See docs/CARSYSTEM_DOCUMENT_SOURCE_MAP.md for the source excerpt.
  */
 export const carsystemFinishSystem = {
-  title: "Finiš sistem koji sam sebe fino podešava",
+  title: "Završna obrada koja se sama fino podešava",
   description:
     "Polish X-Serie: Compound X1500 kombinuje grubo i fino poliranje u jednom prolazu, Polish X8000 uklanja holograme i zatvara sjaj.",
   steps: [
     {
       id: "compound-x1500",
       index: "01",
-      label: "Cut & Refine",
+      label: "Korekcija",
       title: "Compound X1500",
       description:
         "Vrlo visok cut u prvih 10 sekundi; nakon oko 15 sekundi poliranja zrno se usitni i ostavlja miran, sjajan trag — i na tamnim lakovima.",
@@ -794,7 +795,7 @@ export const carsystemFinishSystem = {
     {
       id: "polish-x8000",
       index: "02",
-      label: "Finish",
+      label: "Završni sjaj",
       title: "Polish X8000",
       description:
         "Mikroskopski sitno zrno uklanja holograme i fine ogrebotine, bez silikona — poslednji korak pre isporuke vozila.",

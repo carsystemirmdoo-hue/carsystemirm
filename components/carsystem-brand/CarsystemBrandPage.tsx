@@ -11,6 +11,7 @@ import { CarsystemMultiChanger } from "./CarsystemMultiChanger";
 import { CarsystemPageShell } from "./CarsystemPageShell";
 import { CarsystemProcess } from "./CarsystemProcess";
 import { CarsystemProducts } from "./CarsystemProducts";
+import { CarsystemRupesSection } from "./CarsystemRupesSection";
 import { CarsystemUseCases } from "./CarsystemUseCases";
 import {
   carsystemDocumentation,
@@ -26,8 +27,11 @@ import styles from "./CarsystemBrandPage.module.css";
 
 export function CarsystemBrandPage({
   products,
+  rupesProducts = [],
 }: {
   products: CarsystemProduct[];
+  /** RUPES artikli iz Carsystem programa (sekcija #rupes). */
+  rupesProducts?: CarsystemProduct[];
 }) {
   const mediaAvailability = getCarsystemMediaAvailability();
   const productBySlug = new Map(
@@ -69,6 +73,7 @@ export function CarsystemBrandPage({
         <Families productBySlug={productBySlug} />
         <CarsystemUseCases products={products} />
         <CarsystemProducts products={products} />
+        <CarsystemRupesSection products={rupesProducts} />
         <Documentation />
         <DocumentLibrary />
         <CarsystemFinishSystem />
@@ -167,7 +172,7 @@ function Families({
                 <strong>{family.description}</strong>
                 <Link href={family.href}>
                   {family.ctaLabel}
-                  <i aria-hidden="true">↗</i>
+                  <i aria-hidden="true">→</i>
                 </Link>
               </div>
 
@@ -257,7 +262,7 @@ function Documentation() {
               </a>
             ) : "href" in resource ? (
               <Link href={resource.href} aria-label={`${resource.label}: ${resource.status}`}>
-                ↗
+                →
               </Link>
             ) : (
               <span className={styles.disabledResource} aria-label="Nije još dostupno">
@@ -280,7 +285,7 @@ function Documentation() {
             key={action.href}
           >
             {action.label}
-            <span aria-hidden="true">↗</span>
+            <span aria-hidden="true">→</span>
           </Link>
         ))}
       </div>
@@ -320,7 +325,7 @@ function DocumentLibrary() {
       <div className={styles.documentLibraryActions}>
         <Link className={styles.secondaryButton} href="/katalozi?brend=carsystem">
           Svi Carsystem katalozi i dokumenti
-          <span aria-hidden="true">↗</span>
+          <span aria-hidden="true">→</span>
         </Link>
       </div>
     </section>
@@ -349,13 +354,13 @@ function FinalCta({
       data-cs-reveal
     >
       <div className={styles.finalCtaCopy}>
-        <span>END / START</span>
+        <span>Kraj / početak</span>
         <h2 id="carsystem-final-title">{carsystemFinalCta.title}</h2>
         <p>{carsystemFinalCta.description}</p>
         <div>
           <Link className={styles.primaryButton} href={carsystemFinalCta.primaryCta.href}>
             {carsystemFinalCta.primaryCta.label}
-            <span aria-hidden="true">↗</span>
+            <span aria-hidden="true">→</span>
           </Link>
           <Link
             className={styles.secondaryButton}

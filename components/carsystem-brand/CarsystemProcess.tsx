@@ -209,7 +209,7 @@ function ProcessDetails({
                 <small>{product.sku}</small>
                 <strong>{product.name}</strong>
               </span>
-              <i aria-hidden="true">↗</i>
+              <i aria-hidden="true">→</i>
             </Link>
           ))}
         </div>
@@ -217,7 +217,7 @@ function ProcessDetails({
 
       <Link className={styles.processCta} href={phase.cta.href}>
         {phase.cta.label}
-        <span aria-hidden="true">↗</span>
+        <span aria-hidden="true">→</span>
       </Link>
     </div>
   );

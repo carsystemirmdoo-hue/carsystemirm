@@ -160,64 +160,33 @@
   place-items: center;
 }
 
+/* Linijski piktogram (64 × 64, linija 1,5) kao maska u boji teksta. */
 .icon {
   display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  opacity: 0.82;
-  mix-blend-mode: multiply;
-  transform: translate3d(
-      var(--category-icon-offset-x, 0),
-      var(--category-icon-offset-y, 0),
-      0
-    )
-    scale(var(--category-icon-scale, 1));
-  transform-origin: var(--category-icon-origin, center);
+  width: 4.5rem;
+  height: 4.5rem;
+  background: currentColor;
+  -webkit-mask: var(--category-icon) center / contain no-repeat;
+  mask: var(--category-icon) center / contain no-repeat;
   user-select: none;
-}
-
-:global(.dark) .icon {
-  filter: invert(1);
-  mix-blend-mode: screen;
-}
-
-.revealPane .icon {
-  filter: invert(1);
-  mix-blend-mode: screen;
-  opacity: 1;
-}
-
-.icon[data-preserve-white-details] {
-  filter: none;
-  mix-blend-mode: normal;
-  opacity: 1;
-}
-
-:global(.dark) .icon[data-preserve-white-details] {
-  filter: brightness(1.55);
-  mix-blend-mode: normal;
-}
-
-.revealPane .icon[data-preserve-white-details] {
-  filter: brightness(1.2);
-  mix-blend-mode: normal;
-  opacity: 1;
 }
 
 .label {
   min-width: 0;
   color: currentColor;
-  font-size: 0.9rem;
-  font-weight: 750;
+  font-family: var(--font-body), system-ui, sans-serif;
+  font-size: 0.9375rem;
+  font-weight: 600;
   line-height: 1.25;
   text-align: center;
 }
 
+/* Fokus uvek otvara crveni sloj (handleFocus), pa je okvir fokusa u boji
+   teksta na tom sloju, uvučen da ga ne preseku susedne ćelije. */
 .card:focus-visible {
   z-index: 3;
-  outline: 2px solid var(--category-accent);
-  outline-offset: -3px;
+  outline: 2px solid var(--category-accent-ink);
+  outline-offset: -6px;
 }
 
 @media (min-width: 42rem) {

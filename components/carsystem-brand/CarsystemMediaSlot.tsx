@@ -117,22 +117,7 @@ function WorkshopSchematic({
           <stop offset="0" stopColor="currentColor" stopOpacity=".12" />
           <stop offset="1" stopColor="currentColor" stopOpacity=".02" />
         </linearGradient>
-        <pattern
-          id={`grid-${variant}`}
-          width="52"
-          height="52"
-          patternUnits="userSpaceOnUse"
-        >
-          <path
-            d="M52 0H0V52"
-            fill="none"
-            stroke="currentColor"
-            strokeOpacity=".1"
-            strokeWidth="1"
-          />
-        </pattern>
       </defs>
-      <rect width="960" height="640" fill={`url(#grid-${variant})`} />
       <path
         d="M0 462 280 350 960 424V640H0Z"
         fill={`url(#floor-${variant})`}

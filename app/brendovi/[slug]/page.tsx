@@ -123,7 +123,12 @@ export default async function BrandRoute({ params }: BrandRouteProps) {
           programs={programGroups}
         />
       ) : brand.slug === "carsystem" ? (
-        <CarsystemBrandPage products={products} />
+        <CarsystemBrandPage
+          products={products}
+          rupesProducts={getCarsystemProductsByBrandSlug("rupes").map(
+            toProductListingProduct,
+          )}
+        />
       ) : brand.slug === "baslac" ? (
         <BaslacBrandPage products={products} />
       ) : brand.slug === "norbin" ? (

@@ -1147,7 +1147,8 @@
 
 .productCard[data-card-variant="joined-row"] .productMetaLine,
 .productCard[data-card-variant="joined-row"] .productTechnicalLine {
-  font-size: 0.57rem;
+  /* Sistem A: oznake nikad ispod 12 px (ranije 0,57 rem ≈ 9 px u „Sličnim proizvodima”). */
+  font-size: var(--ds-font-label, 0.75rem);
 }
 
 .productCard[data-card-variant="joined-row"] .productTitleRow h3 {
@@ -1818,63 +1819,63 @@
   outline: 2px solid var(--ds-c-focus);
 }
 
-/* Kartica proizvoda */
-.catalogShell[data-ds="a"] .productCard {
+/* Kartica proizvoda — važi na svim stranicama koje je koriste (katalog, brendovi, PDP). */
+:global([data-ds="a"]) .productCard {
   border-color: var(--ds-c-line);
   border-radius: var(--ds-ctl-radius);
   background: var(--ds-c-surface);
   box-shadow: none;
 }
 
-.catalogShell[data-ds="a"] .productCard:hover {
+:global([data-ds="a"]) .productCard:hover {
   border-color: var(--ds-c-line-strong);
   box-shadow: none;
 }
 
-.catalogShell[data-ds="a"] .productCard:focus-visible {
+:global([data-ds="a"]) .productCard:focus-visible {
   outline: 2px solid var(--ds-c-focus);
   outline-offset: 2px;
 }
 
-.catalogShell[data-ds="a"] .productBody {
+:global([data-ds="a"]) .productBody {
   gap: 8px;
   padding: 16px 18px 18px;
 }
 
 /* Šifra: mono, boja teksta (crvena je ostavljena za akciju i izabrano). */
-.catalogShell[data-ds="a"] .productCode {
+:global([data-ds="a"]) .productCode {
   color: var(--ds-c-text-2);
   font-size: 0.8125rem;
   font-weight: 500;
   letter-spacing: 0;
 }
 
-.catalogShell[data-ds="a"] .productMetaLine {
+:global([data-ds="a"]) .productMetaLine {
   color: var(--ds-c-text-3);
   font-size: var(--ds-font-label);
   font-weight: 500;
   letter-spacing: var(--ds-tracking-label);
 }
 
-.catalogShell[data-ds="a"] .productTitleRow h3 {
+:global([data-ds="a"]) .productTitleRow h3 {
   font-size: var(--ds-font-card-title);
   font-weight: 600;
   line-height: 1.3;
 }
 
-.catalogShell[data-ds="a"] .productTitleArrow {
+:global([data-ds="a"]) .productTitleArrow {
   border-color: var(--ds-c-line-strong);
   border-radius: var(--ds-ctl-radius);
   color: var(--ds-c-text-2);
 }
 
-.catalogShell[data-ds="a"] .productCard:hover .productTitleArrow,
-.catalogShell[data-ds="a"] .productCard:focus-visible .productTitleArrow {
+:global([data-ds="a"]) .productCard:hover .productTitleArrow,
+:global([data-ds="a"]) .productCard:focus-visible .productTitleArrow {
   border-color: var(--ds-c-text);
   color: var(--ds-c-text);
 }
 
-.catalogShell[data-ds="a"] .productTechnicalLine {
+:global([data-ds="a"]) .productTechnicalLine {
   color: var(--ds-c-text-2);
   font-size: var(--ds-font-label);
   font-weight: 500;
@@ -1925,11 +1926,11 @@
 /* Telefon: dve kolone su uske (~170 px); naziv dobija četiri reda pre
    skraćivanja, a meta red manji razmak slova da ne prelazi u tri reda. */
 @media (max-width: 520px) {
-  .catalogShell[data-ds="a"] .productTitleRow h3 {
+  :global([data-ds="a"]) .productTitleRow h3 {
     -webkit-line-clamp: 4;
   }
 
-  .catalogShell[data-ds="a"] .productMetaLine {
+  :global([data-ds="a"]) .productMetaLine {
     letter-spacing: 0.04em;
   }
 }

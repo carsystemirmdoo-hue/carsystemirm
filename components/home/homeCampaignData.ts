@@ -94,7 +94,7 @@ export const homeCampaignSlides: HomeCampaignSlide[] = [
     title: "Boje, lakovi, priprema i oprema na jednom mestu.",
     description:
       "Distribucija boja, lakova, pripremnih materijala i opreme za lakirnice, uz tehničku podršku i partnersku mrežu u Srbiji i regionu.",
-    primaryCta: { href: "/prodavnice", label: "Pronađite prodavnicu" },
+    primaryCta: { href: "/prodavnice", label: "Pronađite najbližu prodavnicu" },
     controlLabel: "Carsystem",
     transitionFrom: "#0b0e12",
     transitionTo: "#3a0d10",

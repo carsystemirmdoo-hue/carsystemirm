@@ -54,41 +54,41 @@ const trustBrandLinks: Partial<Record<BrandKey, string>> = {
   carsystem: "/brendovi/carsystem",
   baslac: "/brendovi/baslac",
   norbin: "/brendovi/norbin",
-  sata: "/brendovi/sata",
-  carfit: "/brendovi/carfit",
   cosmosLac: "/brendovi/cosmos-lac",
   befar: "/brendovi/befar",
+  carfit: "/brendovi/carfit",
+  sata: "/brendovi/sata",
+  yachtcare: "/brendovi/yachtcare",
 };
 
+/*
+ * Stavke vode na obrazac tehničke podrške (sa temom), ne na članak, pa su
+ * formulisane kao pitanja za podršku i nemaju vreme čitanja.
+ */
 const educationItems = [
   {
     category: "Priprema",
-    title: "Priprema površine pre prajmera",
-    readTime: "4 min",
+    title: "Pitajte nas o pripremi površine pre prajmera",
     slug: "priprema-povrsine",
   },
   {
     category: "Boje",
-    title: "Izbor laka za završni sloj",
-    readTime: "5 min",
+    title: "Pitajte nas koji lak odgovara završnom sloju",
     slug: "izbor-laka",
   },
   {
     category: "Poliranje",
-    title: "Korekcija i završni sjaj",
-    readTime: "4 min",
+    title: "Pitajte nas o korekciji i završnom sjaju",
     slug: "poliranje-visoki-sjaj",
   },
   {
     category: "Problemi",
-    title: "Greške koje narušavaju finiš",
-    readTime: "6 min",
+    title: "Opišite nam grešku koja narušava finiš",
     slug: "greske-u-farbanju",
   },
   {
     category: "Proces",
-    title: "Redosled rada kroz refinish proces",
-    readTime: "7 min",
+    title: "Pitajte nas o redosledu rada kroz refinish proces",
     slug: "redosled-refinish-procesa",
   },
 ] as const;
@@ -346,10 +346,9 @@ export function CarsystemHomePage() {
               <button
                 ref={searchTriggerRef}
                 type="button"
-                className={`${styles.categorySearchLink} cs-interactive-surface`}
+                className={styles.categorySearchLink}
                 aria-haspopup="dialog"
                 data-cursor="button"
-                data-motion-surface
                 onClick={() => openSearch(searchTriggerRef.current)}
               >
                 <CategorySearchIcon />
@@ -445,11 +444,9 @@ export function CarsystemHomePage() {
             />
             <button
               type="button"
-              className={`${styles.locationButton} cs-magnetic-cta cs-theme-wipe-card`}
+              className={styles.locationButton}
               onClick={handleLocationRequest}
               data-cursor="button"
-              data-motion-surface
-              data-motion="theme-wipe"
             >
               <span className={styles.buttonIcon}>
                 <IconLocation />
@@ -602,7 +599,6 @@ export function CarsystemHomePage() {
                 <span className={styles.educationIndex}>{String(index + 1).padStart(2, "0")}</span>
                 <small>{item.category}</small>
                 <strong>{item.title}</strong>
-                <em>{item.readTime}</em>
                 <b aria-hidden="true">→</b>
               </Link>
             ))}
@@ -638,10 +634,10 @@ export function CarsystemHomePage() {
               </span>
             </div>
             <div className={styles.ctaRow}>
-              <a className={`${styles.primaryCta} cs-magnetic-cta cs-theme-wipe-card`} href="/kontakt" data-cursor="button" data-motion-surface data-motion="theme-wipe">
+              <a className={styles.primaryCta} href="/kontakt" data-cursor="button">
                 <span>Kontaktirajte veleprodaju</span>
               </a>
-              <a className={`${styles.secondaryCta} cs-interactive-surface`} href="/prodavnice" data-cursor="button" data-motion-surface>
+              <a className={styles.secondaryCta} href="/prodavnice" data-cursor="button">
                 Prodavnice u mreži
               </a>
             </div>
@@ -675,13 +671,13 @@ export function CarsystemHomePage() {
             za radionice i servise.
           </span>
           <div className={styles.finalActions}>
-            <a className={`${styles.primaryCta} ${styles.finalPrimaryCta} cs-magnetic-cta cs-theme-wipe-card`} href="/prodavnice" data-cursor="button" data-motion-surface data-motion="theme-wipe">
+            <a className={`${styles.primaryCta} ${styles.finalPrimaryCta}`} href="/prodavnice" data-cursor="button">
               <span>Prodavnice u mreži</span>
             </a>
-            <a className={`${styles.secondaryOnDark} cs-interactive-surface`} href="/katalog" data-cursor="button" data-motion-surface>
+            <a className={styles.secondaryOnDark} href="/katalog" data-cursor="button">
               Katalog proizvoda
             </a>
-            <a className={`${styles.secondaryOnDark} cs-interactive-surface`} href="/kontakt?tema=b2b" data-cursor="button" data-motion-surface>
+            <a className={styles.secondaryOnDark} href="/kontakt?tema=b2b" data-cursor="button">
               Upit za saradnju
             </a>
           </div>
@@ -729,7 +725,12 @@ function LocatorCard({
       <span className={styles.buttonIcon}>
         <IconLocation />
       </span>
-      <span className={styles.locatorTitle}>Pronađite prodavnicu u mreži</span>
+      <span className={styles.locatorTitle}>
+        <span className={styles.locatorTitleFull}>Pronađite najbližu prodavnicu</span>
+        <span className={styles.locatorTitleShort}>
+          Pronađite prodavnicu
+        </span>
+      </span>
       <small>{selectedStore ? getPartnerCityLabel(selectedStore) : "Mreža"}</small>
     </>
   );
@@ -758,11 +759,9 @@ function LocatorCard({
       <div className={styles.locatorBody} id={bodyId}>
         <button
           type="button"
-          className={`${styles.locationButton} cs-magnetic-cta cs-theme-wipe-card`}
+          className={styles.locationButton}
           onClick={onLocationRequest}
           data-cursor="button"
-          data-motion-surface
-          data-motion="theme-wipe"
         >
           <span className={styles.buttonIcon}>
             <IconLocation />

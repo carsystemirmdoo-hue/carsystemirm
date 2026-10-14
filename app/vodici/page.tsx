@@ -28,10 +28,10 @@ export default function GuidesIndexPage() {
   return (
     <>
       <main className="mx-auto w-full max-w-4xl px-4 py-24 sm:px-6">
-        <p className="text-sm font-semibold uppercase tracking-[0.16em] text-muted-foreground">
+        <p className="flex items-center gap-2.5 font-[family-name:var(--font-technical)] text-[length:var(--ds-font-label)] font-medium uppercase tracking-[var(--ds-tracking-label)] text-[color:var(--ds-c-accent-text)] before:h-0.5 before:w-6 before:flex-none before:bg-[var(--ds-c-accent)] before:content-['']">
           Vodiči
         </p>
-        <h1 className="mt-4 font-[var(--font-display)] text-4xl font-black uppercase tracking-tight sm:text-5xl">
+        <h1 className="mt-4 font-[family-name:var(--font-display)] text-[length:var(--ds-font-h1)] font-extrabold leading-[1.05] tracking-[-0.02em]">
           Vodiči za auto lakiranje
         </h1>
 
@@ -40,12 +40,12 @@ export default function GuidesIndexPage() {
             {published.map((guide) => (
               <li key={guide.slug}>
                 <Link
-                  className="text-xl font-semibold underline underline-offset-4"
+                  className="font-[family-name:var(--font-body)] text-[length:var(--ds-font-h3)] font-semibold underline decoration-[var(--ds-c-line-strong)] decoration-1 underline-offset-4 hover:decoration-current hover:decoration-2"
                   href={`/vodici/${guide.slug}`}
                 >
                   {guide.title}
                 </Link>
-                <p className="mt-2 text-base leading-7 text-muted-foreground">
+                <p className="mt-2 max-w-[68ch] text-base leading-[1.6] text-[color:var(--ds-c-text-2)]">
                   {guide.summary}
                 </p>
               </li>
@@ -53,24 +53,24 @@ export default function GuidesIndexPage() {
           </ul>
         ) : (
           <>
-            <p className="mt-5 max-w-2xl text-base leading-7 text-muted-foreground">
+            <p className="mt-5 max-w-[68ch] text-[length:var(--ds-font-lead)] leading-[1.55] text-[color:var(--ds-c-text-2)]">
               Vodiči su u pripremi. Objavljujemo ih tek nakon što ih pregleda i
               odobri Carsystem tehnički tim, pa na ovoj stranici nema
               nepotvrđenih tehničkih uputstava.
             </p>
-            <p className="mt-4 max-w-2xl text-base leading-7 text-muted-foreground">
+            <p className="mt-4 max-w-[68ch] text-base leading-[1.6] text-[color:var(--ds-c-text-2)]">
               Za konkretno pitanje o proizvodu ili procesu, obratite se našem
               timu ili pogledajte katalog.
             </p>
             <nav className="mt-8 flex flex-wrap gap-3" aria-label="Korisni linkovi">
               <Link
-                className="inline-flex min-h-11 items-center rounded-lg bg-foreground px-5 font-semibold text-background"
+                className="inline-flex min-h-[var(--ds-ctl-h-m)] items-center rounded-[var(--ds-ctl-radius)] bg-[var(--ds-c-accent)] px-5 text-[15px] font-semibold text-[color:var(--ds-c-on-accent)] transition-colors hover:bg-[var(--ds-c-accent-hover)]"
                 href="/kontakt"
               >
                 Kontakt
               </Link>
               <Link
-                className="inline-flex min-h-11 items-center rounded-lg border border-foreground/20 px-5 font-semibold"
+                className="inline-flex min-h-[var(--ds-ctl-h-m)] items-center rounded-[var(--ds-ctl-radius)] border border-[var(--ds-c-text)] px-5 text-[15px] font-semibold transition-colors hover:bg-[var(--ds-c-surface-2)]"
                 href="/katalog"
               >
                 Katalog

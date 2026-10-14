@@ -12,27 +12,31 @@
   --nb-green: #739600;
   --nb-logo-grey: #4d5357;
 
-  /* Sample-ovane vrednosti — sa zvaničnog materijala, nikad specifikacija */
-  --nb-ink: #204552;
+  /* Sample-ovane vrednosti — sa zvaničnog materijala, nikad specifikacija.
+     Tekst strane je token sistema A (ranije sample-ovano #204552). */
+  --nb-ink: var(--ds-c-text);
   --nb-hardener: #c23557;
 
-  /* Pristupačni derivati */
-  --nb-blue-text: #006594;
+  /* Pristupačni derivati. Sistem A: Norbin ispuna sa belim tekstom i plavi
+     tekst su #0076A9 (svetla); u tamnoj temi tekst je #3AA6DC. */
+  --nb-blue-text: #0076a9;
+  --nb-button: #0076a9;
   --nb-green-text: #5c7700;
 
   --nb-white: #ffffff;
-  /* Površina strane; `--nb-white` ostaje bela za tekst na plavoj/tamnoj podlozi. */
-  --nb-surface: #ffffff;
-  --nb-paper: #f6f8f9;
-  --nb-line: #dde3e5;
-  --nb-line-strong: #b9c4c8;
-  --nb-muted: #5b6670;
+  /* Neutralne površine, tekst i linije su zajednički tokeni sistema A;
+     `--nb-white` ostaje bela za tekst na plavoj/tamnoj podlozi. */
+  --nb-surface: var(--ds-c-surface);
+  --nb-paper: var(--ds-c-surface-2);
+  --nb-line: var(--ds-c-line);
+  --nb-line-strong: var(--ds-c-line-strong);
+  --nb-muted: var(--ds-c-text-2);
   --nb-deep: #10222b;
 
-  --brand-nav-surface: rgb(255 255 255 / 0.94);
-  --brand-nav-border: #dde3e5;
-  --brand-nav-ink: #204552;
-  --brand-nav-accent: #0082bb;
+  --brand-nav-surface: color-mix(in oklab, var(--ds-c-surface) 94%, transparent);
+  --brand-nav-border: var(--ds-c-line);
+  --brand-nav-ink: var(--ds-c-text);
+  --brand-nav-accent: var(--nb-button);
 
   --nb-ease: cubic-bezier(0.22, 1, 0.36, 1);
 
@@ -71,8 +75,8 @@
   margin: 0 0 0.6rem;
   color: var(--nb-muted);
   font-family: var(--font-technical), monospace;
-  font-size: 0.68rem;
-  letter-spacing: 0.08em;
+  font-size: var(--ds-font-label);
+  letter-spacing: var(--ds-tracking-label);
   text-transform: uppercase;
 }
 
@@ -109,8 +113,8 @@
   margin-bottom: clamp(1.5rem, 4vw, 3rem);
   color: var(--nb-muted);
   font-family: var(--font-technical), monospace;
-  font-size: 0.7rem;
-  letter-spacing: 0.05em;
+  font-size: var(--ds-font-label);
+  letter-spacing: var(--ds-tracking-label);
   text-transform: uppercase;
 }
 
@@ -157,17 +161,17 @@
 .heroIdentity span {
   color: var(--nb-muted);
   font-family: var(--font-technical), monospace;
-  font-size: 0.62rem;
-  letter-spacing: 0.04em;
+  font-size: var(--ds-font-label);
+  letter-spacing: var(--ds-tracking-label);
 }
 
 .heroKicker {
   margin: 0 0 0.8rem;
   color: var(--nb-blue-text);
   font-family: var(--font-technical), monospace;
-  font-size: 0.68rem;
+  font-size: var(--ds-font-label);
   font-weight: 600;
-  letter-spacing: 0.09em;
+  letter-spacing: var(--ds-tracking-label);
   text-transform: uppercase;
 }
 
@@ -177,7 +181,7 @@
   font-family: var(--font-display), sans-serif;
   font-size: clamp(2rem, 4.4vw, 3.6rem);
   font-weight: 800;
-  letter-spacing: -0.03em;
+  letter-spacing: -0.02em;
   line-height: 1.04;
 }
 
@@ -210,8 +214,8 @@
 .heroFacts span {
   color: var(--nb-muted);
   font-family: var(--font-technical), monospace;
-  font-size: 0.6rem;
-  letter-spacing: 0.03em;
+  font-size: var(--ds-font-label);
+  letter-spacing: var(--ds-tracking-label);
   text-transform: uppercase;
 }
 
@@ -243,13 +247,12 @@
    tekst na plavoj ispuni (1.6:1). Klasa zato ide kroz `.norbinPage`. */
 .norbinPage .buttonPrimary,
 .buttonPrimary {
-  background: var(--nb-button, var(--nb-blue-text));
+  background: var(--nb-button);
   color: var(--nb-white);
 }
 
-.buttonPrimary:hover,
-.buttonPrimary:focus-visible {
-  background: color-mix(in srgb, var(--nb-blue-text) 82%, black);
+.buttonPrimary:hover {
+  background: color-mix(in srgb, var(--nb-button) 84%, black);
 }
 
 .buttonSecondary {
@@ -320,8 +323,8 @@
   background: var(--nb-paper);
   color: var(--nb-muted);
   font-family: var(--font-technical), monospace;
-  font-size: 0.62rem;
-  letter-spacing: 0.05em;
+  font-size: var(--ds-font-label);
+  letter-spacing: var(--ds-tracking-label);
   text-align: center;
   text-transform: uppercase;
 }
@@ -411,7 +414,7 @@
 
 .codeChip span {
   color: var(--nb-muted);
-  font-size: 0.66rem;
+  font-size: var(--ds-font-label);
   line-height: 1.3;
 }
 
@@ -448,7 +451,7 @@
 .ratioBase small,
 .ratioPartners small {
   color: var(--nb-muted);
-  font-size: 0.72rem;
+  font-size: var(--ds-font-label);
 }
 
 .ratioPartners ul {
@@ -473,8 +476,8 @@
 
 .ratioStockedTag {
   font-family: var(--font-technical), monospace;
-  font-size: 0.56rem;
-  letter-spacing: 0.03em;
+  font-size: var(--ds-font-label);
+  letter-spacing: var(--ds-tracking-label);
   color: var(--nb-green-text);
   text-transform: uppercase;
 }
@@ -530,7 +533,7 @@
   grid-column: 1 / -1;
   margin: -0.4rem 0 0;
   color: var(--nb-muted);
-  font-size: 0.72rem;
+  font-size: var(--ds-font-label);
   font-style: italic;
 }
 
@@ -585,8 +588,8 @@
 .processStepEmpty p {
   color: var(--nb-muted);
   font-family: var(--font-technical), monospace;
-  font-size: 0.68rem;
-  letter-spacing: 0.03em;
+  font-size: var(--ds-font-label);
+  letter-spacing: var(--ds-tracking-label);
   text-transform: uppercase;
 }
 
@@ -637,7 +640,7 @@
 }
 
 .greyStops span {
-  font-size: 0.68rem;
+  font-size: var(--ds-font-label);
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -727,7 +730,7 @@
 
 .stockedCopy small {
   color: var(--nb-muted);
-  font-size: 0.7rem;
+  font-size: var(--ds-font-label);
 }
 
 .systemPanel {
@@ -822,7 +825,7 @@
   gap: 0.4rem;
   padding: 0.5rem 0.8rem;
   border: 1px solid var(--nb-line);
-  font-size: 0.74rem;
+  font-size: var(--ds-font-label);
   text-decoration: none;
 }
 
@@ -891,8 +894,8 @@
   place-items: center;
   color: rgb(255 255 255 / 0.72); /* 40 % bele = 3.5:1 */
   font-family: var(--font-technical), monospace;
-  font-size: 0.62rem;
-  letter-spacing: 0.05em;
+  font-size: var(--ds-font-label);
+  letter-spacing: var(--ds-tracking-label);
   text-transform: uppercase;
 }
 
@@ -972,19 +975,208 @@
  * ostaju, a za tekst se koriste svetlije varijante zbog kontrasta.
  */
 :global(html[data-theme="dark"]) .norbinPage {
-  --nb-surface: #0f191e;
-  --nb-paper: #15232a;
-  --nb-ink: #e6eef1;
-  --nb-muted: #a3b2b9;
-  --nb-line: rgb(230 238 241 / 0.14);
-  --nb-line-strong: rgb(230 238 241 / 0.28);
-  --nb-blue-text: #5cc0ec;
+  /* Površine, tekst i linije dolaze iz tokena (.dark). */
+  --nb-blue-text: #3aa6dc;
   --nb-green-text: #a9c94a;
+  /* Učvršćivač kao tekst: #c23557 je na tamnoj površini 3,3:1 → svetlija
+     nijansa iste boje (5,7:1). */
+  --nb-hardener: #e46b86;
   --nb-deep: #0a1418;
-  /* Dugme zadržava tamniju plavu da bela slova imaju kontrast. */
-  --nb-button: #006594;
-  --brand-nav-surface: rgb(15 25 30 / 0.94);
-  --brand-nav-border: rgb(230 238 241 / 0.14);
-  --brand-nav-ink: #e6eef1;
-  --brand-nav-accent: #5cc0ec;
+  /* Dugme zadržava Norbin ispunu da bela slova imaju kontrast. */
+  --nb-button: #0076a9;
+  --brand-nav-accent: var(--nb-blue-text);
+}
+
+/* =========================================================================
+ * Sistem A — Norbin (data-ds="a" na <html>)
+ *
+ * Zadržano kao karakter brenda: ukrštene trake (plava #0082BB, zlatna),
+ * tamni blok porekla, linije odnosa mešanja. Menjaju se oznake, dugmad,
+ * čipovi, kartice i veličine teksta za čitanje.
+ * ========================================================================= */
+
+/* Na tablet širinama ilustracija ide iznad naslova; ograničena visina drži
+   naslov u prvom ekranu (ranije je 4:5 zauzimala ceo prvi ekran na 1024 px). */
+@media (min-width: 48rem) and (max-width: 64rem) {
+  .heroCrossing {
+    height: clamp(15rem, 34vh, 22rem);
+    aspect-ratio: auto;
+  }
+}
+
+:global([data-ds="a"]) .norbinPage .sectionKicker,
+:global([data-ds="a"]) .norbinPage .heroKicker {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: var(--ds-font-label);
+  font-weight: 500;
+  letter-spacing: var(--ds-tracking-label);
+}
+
+:global([data-ds="a"]) .norbinPage .sectionKicker::before,
+:global([data-ds="a"]) .norbinPage .heroKicker::before {
+  width: 24px;
+  height: 2px;
+  flex: none;
+  background: var(--nb-blue);
+  content: "";
+}
+
+:global([data-ds="a"]) .norbinPage .heroTitle {
+  font-size: var(--ds-font-h1);
+  letter-spacing: var(--ds-tracking-h);
+  line-height: 1.05;
+}
+
+:global([data-ds="a"]) .norbinPage .sectionTitle {
+  font-size: var(--ds-font-h2);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  line-height: 1.1;
+}
+
+:global([data-ds="a"]) .norbinPage .heroLead,
+:global([data-ds="a"]) .norbinPage .sectionLead {
+  font-size: var(--ds-font-lead);
+  line-height: 1.55;
+}
+
+/* Tekst za čitanje: najmanje 14 px. */
+:global([data-ds="a"]) .norbinPage .programColumn li,
+:global([data-ds="a"]) .norbinPage .processStep p,
+:global([data-ds="a"]) .norbinPage .systemPanel p,
+:global([data-ds="a"]) .norbinPage .techNoData,
+:global([data-ds="a"]) .norbinPage .originGrid p,
+:global([data-ds="a"]) .norbinPage .codeChip span,
+:global([data-ds="a"]) .norbinPage .ratioBase small,
+:global([data-ds="a"]) .norbinPage .ratioPartners small,
+:global([data-ds="a"]) .norbinPage .stockedList small,
+:global([data-ds="a"]) .norbinPage .stockedCopy small,
+:global([data-ds="a"]) .norbinPage .greyStops span {
+  font-size: var(--ds-font-small);
+  line-height: 1.5;
+}
+
+:global([data-ds="a"]) .norbinPage .ratioNote {
+  font-size: var(--ds-font-legal);
+}
+
+/* Šifre: Plex Mono 500 14 px. */
+:global([data-ds="a"]) .norbinPage .ratioBase strong,
+:global([data-ds="a"]) .norbinPage .ratioPartners strong,
+:global([data-ds="a"]) .norbinPage .ratioPartners li,
+:global([data-ds="a"]) .norbinPage .greyStops strong,
+:global([data-ds="a"]) .norbinPage .stockedList strong,
+:global([data-ds="a"]) .norbinPage .stockedCopy strong,
+:global([data-ds="a"]) .norbinPage .techTable div,
+:global([data-ds="a"]) .norbinPage .techItem summary {
+  font-size: var(--ds-font-code);
+  font-weight: 500;
+}
+
+:global([data-ds="a"]) .norbinPage .docGroup h3 {
+  font-family: var(--font-body), system-ui, sans-serif;
+  font-size: var(--ds-font-small);
+  font-weight: 600;
+}
+
+:global([data-ds="a"]) .norbinPage .programColumn h3,
+:global([data-ds="a"]) .norbinPage .processStep h3 {
+  font-size: var(--ds-font-card-title);
+  font-weight: 700;
+}
+
+/* Dugmad: 44 px, ugao 2 px, Plex Sans 600 15 px. */
+:global([data-ds="a"]) .norbinPage .buttonPrimary,
+:global([data-ds="a"]) .norbinPage .buttonSecondary {
+  min-height: var(--ds-ctl-h-m);
+  padding: 0 20px;
+  border-radius: var(--ds-ctl-radius);
+  font: var(--ds-ctl-font);
+  transition: background-color 120ms ease, border-color 120ms ease;
+}
+
+:global([data-ds="a"]) .norbinPage .buttonSecondary {
+  border-color: var(--ds-c-text);
+}
+
+:global([data-ds="a"]) .norbinPage .buttonSecondary:hover {
+  border-color: var(--ds-c-text);
+  background: var(--ds-c-surface-2);
+}
+
+:global([data-ds="a"]) .norbinPage .originGrid .buttonSecondary {
+  border-color: var(--nb-white);
+  color: var(--nb-white);
+}
+
+:global([data-ds="a"]) .norbinPage .originGrid .buttonSecondary:hover {
+  background: rgb(255 255 255 / 0.08);
+}
+
+/* Tekstualna veza: podvlaka 1 px, na miš 2 px. */
+:global([data-ds="a"]) .norbinPage .buttonText {
+  font: var(--ds-ctl-font);
+  text-decoration: underline;
+  text-decoration-color: var(--ds-c-line-strong);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 4px;
+}
+
+:global([data-ds="a"]) .norbinPage .buttonText:hover {
+  text-decoration-color: currentColor;
+  text-decoration-thickness: 2px;
+}
+
+:global([data-ds="a"]) .norbinPage .originGrid .buttonText {
+  text-decoration-color: rgb(255 255 255 / 0.45);
+}
+
+/* Čipovi dokumenata: okvir 1 px --ds-c-line-strong, ugao 2 px, 14 px. */
+:global([data-ds="a"]) .norbinPage .docGroup a {
+  min-height: var(--ds-ctl-h-s);
+  border-color: var(--ds-c-line-strong);
+  border-radius: var(--ds-ctl-radius);
+  font-size: var(--ds-font-small);
+  font-weight: 500;
+}
+
+:global([data-ds="a"]) .norbinPage .docGroup a:hover {
+  border-color: var(--nb-button);
+  color: var(--nb-blue-text);
+}
+
+/* Kartice i paneli: ugao 2 px, linija, bez senke. */
+:global([data-ds="a"]) .norbinPage .stockedCard,
+:global([data-ds="a"]) .norbinPage .systemPanel,
+:global([data-ds="a"]) .norbinPage .codeRow,
+:global([data-ds="a"]) .norbinPage .processSpine,
+:global([data-ds="a"]) .norbinPage .heroCrossing {
+  border-radius: var(--ds-ctl-radius);
+  box-shadow: none;
+}
+
+:global([data-ds="a"]) .norbinPage .stockedCard {
+  transition: border-color 120ms ease;
+}
+
+:global([data-ds="a"]) .norbinPage .stockedCard:hover {
+  border-color: var(--ds-c-line-strong);
+}
+
+/* Izabrani sivi ton: tekst + 2 px Norbin linija. */
+:global([data-ds="a"]) .norbinPage .greyStops button[aria-checked="true"] {
+  box-shadow: inset 0 -2px 0 var(--nb-button);
+}
+
+:global([data-ds="a"]) .norbinPage a:focus-visible,
+:global([data-ds="a"]) .norbinPage button:focus-visible,
+:global([data-ds="a"]) .norbinPage summary:focus-visible {
+  outline: 2px solid var(--ds-c-focus);
+  outline-offset: 2px;
+}
+
+:global([data-ds="a"]) .norbinPage .originSection a:focus-visible {
+  outline-color: var(--nb-white);
 }

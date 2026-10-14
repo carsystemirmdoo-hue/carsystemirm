@@ -10,6 +10,7 @@ import type {
   ProgramGroup,
   RefinishPhase,
 } from "@/lib/carsystem-data";
+import { srPlural } from "@/lib/sr-plural";
 import styles from "./BrandProgramPage.module.css";
 
 type EntityProductFiltersProps = {
@@ -25,6 +26,8 @@ type EntityProductFiltersProps = {
 };
 
 const ENTITY_PAGE_SIZE = 48;
+// Do ovoliko proizvoda filteri nemaju svrhu, pa se ne prikazuju.
+const COMPACT_LIST_MAX = 3;
 
 function normalize(value: string) {
   return value
@@ -219,6 +222,9 @@ export function EntityProductFilters({
     Boolean(phaseSlug) || Boolean(typeTag) || Boolean(productLine) ||
     Boolean(technicalCategory) || Boolean(finish);
   const filtersId = `${idPrefix}-filters`;
+  // Kratka lista (npr. brend sa jednim proizvodom): bez panela filtera i brzog
+  // filtera po fazi — samo kartice proizvoda.
+  const compact = products.length <= COMPACT_LIST_MAX;
 
   if (products.length === 0) {
     return (
@@ -234,7 +240,7 @@ export function EntityProductFilters({
 
   return (
     <>
-      {showQuickPhaseFilters ? (
+      {showQuickPhaseFilters && !compact ? (
         <div className={styles.quickPhaseFilters}>
           <span id={`${idPrefix}-quick-phases-label`}>Brzi filter po fazi</span>
           <div
@@ -267,6 +273,7 @@ export function EntityProductFilters({
         </div>
       ) : null}
 
+      {compact ? null : (
       <div className={styles.entityMobileFilterBar}>
         <button
           className={styles.entityFilterToggle}
@@ -278,12 +285,15 @@ export function EntityProductFilters({
           Filteri
         </button>
       </div>
+      )}
 
       <div
         className={`${styles.entityProductLayout} ${
           desktopCollapsed ? styles.entityProductLayoutCollapsed : ""
         }`}
+        data-compact={compact || undefined}
       >
+        {compact ? null : (
         <div className={styles.entityFiltersSlot}>
           <aside
             id={filtersId}
@@ -491,10 +501,12 @@ export function EntityProductFilters({
             <small>Filteri</small>
           </button>
         </div>
+        )}
 
         <div className={styles.entityResults}>
           <p className="sr-only" role="status" aria-atomic="true" aria-live="polite">
-            Prikazano {visibleProducts.length} od {filteredProducts.length} proizvoda
+            {srPlural(visibleProducts.length, "Prikazan", "Prikazana", "Prikazano")}{" "}
+            {visibleProducts.length} od {filteredProducts.length} proizvoda
           </p>
 
           {filteredProducts.length > 0 ? (

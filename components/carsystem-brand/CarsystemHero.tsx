@@ -153,7 +153,7 @@ export function CarsystemHero({
           <div className={styles.heroActions}>
             <Link className={styles.primaryButton} href={carsystemHero.primaryCta.href}>
               {carsystemHero.primaryCta.label}
-              <span aria-hidden="true">↗</span>
+              <span aria-hidden="true">→</span>
             </Link>
             <Link
               className={styles.secondaryButton}
@@ -195,8 +195,8 @@ export function CarsystemHero({
             <circle cx="694" cy="115" r="6" />
           </svg>
           <div className={styles.heroVisualMeta} aria-hidden="true">
-            <span>WORKFLOW / {activeSlide.index}</span>
-            <span>REFINISH SYSTEM</span>
+            <span>Korak {activeSlide.index}</span>
+            <span>Refinish sistem</span>
           </div>
         </div>
       </div>

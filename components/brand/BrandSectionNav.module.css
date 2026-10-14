@@ -39,9 +39,10 @@
   /* 62 % je na svetlim brend navigacijama davalo 4.47:1. */
   color: color-mix(in oklab, currentColor 72%, transparent);
   font-family: var(--font-body), sans-serif;
-  font-size: 0.75rem;
+  /* Sistem A: stavke navigacije su tekst (14 px), ne oznake. */
+  font-size: var(--ds-font-small, 0.875rem);
   font-weight: 600;
-  letter-spacing: 0.025em;
+  letter-spacing: 0;
   text-decoration: none;
   white-space: nowrap;
   transition: color 180ms ease;
@@ -74,6 +75,11 @@
   transform: scaleX(1);
 }
 
+.rail a:focus-visible {
+  outline: 2px solid var(--ds-c-focus);
+  outline-offset: -2px;
+}
+
 @media (max-width: 48rem) {
   .rail {
     min-height: 3.35rem;
@@ -82,7 +88,6 @@
 
   .rail a {
     padding-inline: 0.72rem;
-    font-size: 0.7rem;
   }
 }
 

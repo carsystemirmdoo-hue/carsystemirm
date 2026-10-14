@@ -97,7 +97,7 @@ export function CarsystemUseCases({
             >
               <span>{String(index + 1).padStart(2, "0")}</span>
               {useCase.label}
-              <i aria-hidden="true">↗</i>
+              <i aria-hidden="true">→</i>
             </button>
           ))}
         </div>
@@ -137,7 +137,7 @@ export function CarsystemUseCases({
 
           <Link className={styles.primaryButton} href={activeUseCase.href}>
             Otvorite preporučene proizvode
-            <span aria-hidden="true">↗</span>
+            <span aria-hidden="true">→</span>
           </Link>
         </div>
       </div>
@@ -166,7 +166,7 @@ function UseCaseProduct({ product }: { product: CarsystemProduct }) {
         <small>{programLabel(product.programSlug)}</small>
         <strong>{product.name}</strong>
       </span>
-      <i aria-hidden="true">↗</i>
+      <i aria-hidden="true">→</i>
     </Link>
   );
 }

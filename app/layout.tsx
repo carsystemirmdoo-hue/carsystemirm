@@ -103,6 +103,8 @@ export default function RootLayout({
   return (
     <html
       lang="sr-Latn"
+      /* Sistem A (docs/design/SISTEM_A.md): zajednička pravila važe na celom sajtu. */
+      data-ds="a"
       data-scroll-behavior="smooth"
       data-route-transition="booting"
       className={`${archivo.variable} ${plexSans.variable} ${plexMono.variable} ${geistSans.variable} ${geistMono.variable} h-full antialiased`}

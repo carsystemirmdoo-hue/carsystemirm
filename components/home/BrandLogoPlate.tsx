@@ -13,7 +13,8 @@ export type BrandKey =
   | "carfit"
   | "cosmosLac"
   | "befar"
-  | "rupes";
+  | "rupes"
+  | "yachtcare";
 
 type BrandMonoLogo = {
   /**
@@ -42,49 +43,51 @@ export const brandLogos: Record<BrandKey, BrandLogo> = {
     src: "/brands/rm.svg",
     width: 140,
     height: 92,
-    mono: { src: "/brands/mono/rm.svg", aspect: 100 / 114.5, railHeight: 42 },
+    mono: { src: "/brands/mono/rm.svg", aspect: 100 / 114.5, railHeight: 34 },
   },
   carsystem: {
     name: "Carsystem",
     src: "/brands/carsystem.svg",
     width: 112,
     height: 112,
-    mono: { src: "/brands/mono/carsystem.svg", aspect: 1, railHeight: 40 },
+    // Znak je pun kvadrat sa izrezom slova: optički je teži od ostalih, pa je
+    // niži, da u traci ne bude jedini istaknut blok.
+    mono: { src: "/brands/mono/carsystem.svg", aspect: 1, railHeight: 26 },
   },
   baslac: {
     name: "Baslac",
     src: "/brands/baslac.svg",
     width: 150,
     height: 100,
-    mono: { src: "/brands/mono/baslac.svg", aspect: 100 / 67, railHeight: 36 },
+    mono: { src: "/brands/mono/baslac.svg", aspect: 100 / 67, railHeight: 30 },
   },
   norbin: {
     name: "Norbin",
     src: "/brands/norbin.svg",
     width: 170,
     height: 112,
-    mono: { src: "/brands/mono/norbin.svg", aspect: 188 / 68, railHeight: 34 },
+    mono: { src: "/brands/mono/norbin.svg", aspect: 188 / 68, railHeight: 28 },
   },
   sata: {
     name: "SATA",
     src: "/brands/sata.svg",
     width: 170,
     height: 78,
-    mono: { src: "/brands/mono/sata.svg", aspect: 500 / 172, railHeight: 28 },
+    mono: { src: "/brands/mono/sata.svg", aspect: 500 / 172, railHeight: 22 },
   },
   carfit: {
     name: "Car Fit",
     src: "/brands/carfit.svg",
     width: 180,
     height: 70,
-    mono: { src: "/brands/carfit.svg", aspect: 1989.2 / 328.3, railHeight: 17 },
+    mono: { src: "/brands/carfit.svg", aspect: 1989.2 / 328.3, railHeight: 15 },
   },
   cosmosLac: {
     name: "Cosmos Lac",
     src: "/brands/cosmos-spray.svg",
     width: 132,
     height: 132,
-    mono: { src: "/brands/cosmos-spray.svg", aspect: 131 / 100, railHeight: 40 },
+    mono: { src: "/brands/cosmos-spray.svg", aspect: 131 / 100, railHeight: 32 },
   },
   befar: {
     name: "Befar",
@@ -96,16 +99,29 @@ export const brandLogos: Record<BrandKey, BrandLogo> = {
     width: 132,
     height: 70,
   },
+  yachtcare: {
+    // Odobren logo fajl ne postoji: naziv se prikazuje tekstom, kao u meniju i futeru.
+    name: "Yachtcare",
+    width: 132,
+    height: 70,
+  },
 };
 
+/**
+ * Traka „Programski brendovi” prati listu brendova iz menija
+ * (components/layout/navigation-data.ts → BRAND_LINKS), istim redom.
+ * RUPES nije zaseban brend u meniju (deo je Carsystem ponude), pa ga ovde nema.
+ */
 export const trustBrandKeys: BrandKey[] = [
   "rm",
   "carsystem",
   "baslac",
   "norbin",
-  "sata",
-  "carfit",
   "cosmosLac",
+  "befar",
+  "carfit",
+  "sata",
+  "yachtcare",
 ];
 
 export function BrandLogoPlate({
@@ -124,6 +140,25 @@ export function BrandLogoPlate({
 }) {
   const brand = brandLogos[brandKey];
   const mono = tone === "mono" ? brand.mono : undefined;
+
+  // Jednobojna traka, brend bez jednobojnog znaka (Befar, Yachtcare): naziv
+  // tekstom u istoj boji, bez pločice „Brend u najavi”.
+  if (tone === "mono" && !mono) {
+    return (
+      <span
+        className={[
+          styles.brandLogoPlate,
+          variant === "rail" ? styles.brandRailLogo : "",
+          styles.brandLogoPlateMono,
+        ]
+          .filter(Boolean)
+          .join(" ")}
+      >
+        <span className={styles.brandLogoWordmark}>{brand.name}</span>
+      </span>
+    );
+  }
+
   const className = [
     styles.brandLogoPlate,
     variant === "header" ? styles.headerLogoPlate : "",

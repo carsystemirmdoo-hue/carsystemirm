@@ -7,25 +7,23 @@
  * pozadine i CTA ostaju providni. To je bio uzrok „nedovršenog" izgleda.
  */
 .pdp {
-  --baslac-ink: #18232a;
-  --baslac-muted: #5d686c;
-  --baslac-border: rgb(24 35 42 / 0.14);
-  --baslac-surface: #f6f8f7;
-  --baslac-surface-strong: #ffffff;
-  --baslac-accent: #1a73a0; /* beli tekst na dugmetu: #1d7fb0 = 4.47:1 */
+  /* Sistem A: neutralne boje su zajednički tokeni; plava je Baslac ispuna
+     (#1A78A0, beli tekst) i plavi tekst (#1A78A0 svetla / #4CB8E6 tamna). */
+  --baslac-ink: var(--ds-c-text);
+  --baslac-muted: var(--ds-c-text-2);
+  --baslac-border: var(--ds-c-line);
+  --baslac-surface: var(--ds-c-surface-2);
+  --baslac-surface-strong: var(--ds-c-surface);
+  --baslac-accent: #1a78a0;
+  --baslac-accent-hover: color-mix(in oklab, var(--baslac-accent) 86%, #000);
+  --baslac-accent-text: #1a78a0;
   --baslac-accent-ink: #ffffff;
-  --baslac-radius: 10px;
+  --baslac-radius: var(--ds-ctl-radius);
   color: var(--baslac-ink);
 }
 
 :global(html[data-theme="dark"]) .pdp {
-  --baslac-ink: #edf2ee;
-  --baslac-muted: #9fb0b5;
-  --baslac-border: rgb(237 242 238 / 0.16);
-  --baslac-surface: #16211f;
-  --baslac-surface-strong: #1b2724;
-  --baslac-accent: #3fa5d8;
-  --baslac-accent-ink: #06171f;
+  --baslac-accent-text: #4cb8e6;
 }
 
 /* Raspored prati postojeći Cosmos variant PDP: velika limenka levo,
@@ -50,33 +48,33 @@
 .lineExample figcaption { max-width: 18rem; color: var(--baslac-muted); font-size: 0.78rem; line-height: 1.45; text-align: center; }
 .stagePlaceholder { display: grid; gap: 0.6rem; justify-items: center; text-align: center; }
 .stagePlaceholder span {
-  color: var(--baslac-accent); font-family: var(--font-display), system-ui, sans-serif;
+  color: var(--baslac-accent-text); font-family: var(--font-display), system-ui, sans-serif;
   font-size: 2.2rem; font-weight: 800; opacity: 0.45;
 }
 .stagePlaceholder p { margin: 0; max-width: 16rem; color: var(--baslac-muted); font-size: 0.82rem; line-height: 1.5; }
 .stageMeta { position: absolute; top: 1rem; right: 1rem; left: 1rem; display: flex; justify-content: space-between; }
 .brandMark, .volumeMark {
   color: var(--baslac-muted); font-family: var(--font-technical), monospace;
-  font-size: 0.66rem; letter-spacing: 0.1em; text-transform: uppercase;
+  font-size: var(--ds-font-label); letter-spacing: var(--ds-tracking-label); text-transform: uppercase;
 }
 .volumeMark { color: var(--baslac-ink); font-weight: 700; }
 .stageNote { margin: 0; color: var(--baslac-muted); font-size: 0.78rem; line-height: 1.55; }
 
 .pickerColumn { display: grid; min-width: 0; gap: 1rem; }
 .pickerHeader h2 { margin: 0.15rem 0 0.5rem; font-size: clamp(1.4rem, 2.4vw, 1.9rem); font-weight: 800; letter-spacing: -0.02em; }
-.kicker { margin: 0; color: var(--baslac-muted); font-family: var(--font-technical), monospace; font-size: 0.66rem; letter-spacing: 0.12em; text-transform: uppercase; }
+.kicker { margin: 0; color: var(--baslac-muted); font-family: var(--font-technical), monospace; font-size: var(--ds-font-label); letter-spacing: var(--ds-tracking-label); text-transform: uppercase; }
 .intro { margin: 0; max-width: 46rem; color: var(--baslac-muted); font-size: 0.95rem; line-height: 1.6; }
 
 .filters { display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 1fr) minmax(0, 1fr); gap: 0.75rem; }
 @media (max-width: 48rem) { .filters { grid-template-columns: minmax(0, 1fr); } }
 .field { display: grid; min-width: 0; gap: 0.3rem; }
-.field label { color: var(--baslac-muted); font-family: var(--font-technical), monospace; font-size: 0.64rem; letter-spacing: 0.08em; text-transform: uppercase; }
+.field label { color: var(--baslac-muted); font-family: var(--font-technical), monospace; font-size: var(--ds-font-label); letter-spacing: var(--ds-tracking-label); text-transform: uppercase; }
 .field input, .field select {
   width: 100%; min-width: 0; min-height: 2.75rem; padding: 0.5rem 0.7rem;
   border: 1px solid var(--baslac-border); background: var(--baslac-surface-strong);
   color: inherit; font: inherit; font-size: 0.92rem;
 }
-.count { margin: 0; color: var(--baslac-muted); font-family: var(--font-technical), monospace; font-size: 0.7rem; }
+.count { margin: 0; color: var(--baslac-muted); font-family: var(--font-technical), monospace; font-size: var(--ds-font-label); }
 
 .grid {
   display: grid; max-height: 30rem; grid-template-columns: repeat(auto-fill, minmax(min(100%, 14rem), 1fr));
@@ -96,7 +94,7 @@
 .card[data-picked] { background: color-mix(in oklab, var(--baslac-accent) 10%, transparent); }
 .card:focus-visible, .pick input:focus-visible { outline: 2px solid var(--baslac-accent); outline-offset: 2px; }
 
-.swatch { flex: none; width: 1.9rem; height: 1.9rem; border: 1px solid rgb(24 35 42 / 0.25); border-radius: 3px; }
+.swatch { flex: none; width: 1.9rem; height: 1.9rem; border: 1px solid var(--ds-c-line-strong); border-radius: var(--ds-ctl-radius); }
 .swatch[data-finish="metallic"] { background-image: linear-gradient(115deg, rgb(255 255 255 / 0.55) 0 12%, transparent 12% 30%, rgb(255 255 255 / 0.35) 30% 42%, transparent 42%); }
 .swatch[data-finish="pearl"], .swatch[data-finish="xirallic"] { background-image: linear-gradient(135deg, rgb(255 255 255 / 0.6), rgb(255 255 255 / 0.1) 40%, rgb(140 190 255 / 0.35) 70%, rgb(255 220 240 / 0.45)); }
 .swatch[data-finish="transparent"] { opacity: 0.55; }
@@ -108,7 +106,7 @@
 .cardBody strong { font-family: var(--font-technical), monospace; font-size: 0.78rem; }
 /* Nazivi se ne odsecaju — prelamaju se u dva reda. */
 .cardName { overflow-wrap: anywhere; font-size: 0.8rem; line-height: 1.25; }
-.cardBody small { color: var(--baslac-muted); font-family: var(--font-technical), monospace; font-size: 0.63rem; }
+.cardBody small { color: var(--baslac-muted); font-family: var(--font-technical), monospace; font-size: var(--ds-font-label); }
 
 .pick { position: absolute; top: 0.5rem; right: 0.5rem; display: grid; place-items: center; }
 .pick input { position: absolute; width: 1.5rem; height: 1.5rem; margin: 0; cursor: pointer; opacity: 0; }
@@ -128,11 +126,11 @@
 .activeMeta { margin: 0; color: var(--baslac-muted); font-size: 0.85rem; }
 .availability {
   margin: 0.4rem 0 0; color: var(--baslac-muted);
-  font-family: var(--font-technical), monospace; font-size: 0.66rem; letter-spacing: 0.06em; text-transform: uppercase;
+  font-family: var(--font-technical), monospace; font-size: var(--ds-font-label); letter-spacing: var(--ds-tracking-label); text-transform: uppercase;
 }
 .activeActions { display: flex; align-items: flex-end; gap: 0.6rem; }
 .qtyField { display: grid; gap: 0.25rem; }
-.qtyField span { color: var(--baslac-muted); font-family: var(--font-technical), monospace; font-size: 0.62rem; text-transform: uppercase; }
+.qtyField span { color: var(--baslac-muted); font-family: var(--font-technical), monospace; font-size: var(--ds-font-label); text-transform: uppercase; }
 .qtyField input {
   width: 4.5rem; min-height: 2.75rem; padding: 0.3rem; border: 1px solid var(--baslac-border);
   background: var(--baslac-surface-strong); color: inherit; font: inherit; text-align: center;
@@ -145,7 +143,7 @@
   min-height: 2.75rem; padding: 0 0.9rem; border: 1px solid var(--baslac-border);
   background: transparent; color: inherit; cursor: pointer; font-size: 0.82rem;
 }
-.message { margin: 0; color: var(--baslac-accent); font-family: var(--font-technical), monospace; font-size: 0.74rem; }
+.message { margin: 0; color: var(--baslac-accent-text); font-family: var(--font-technical), monospace; font-size: var(--ds-font-label); }
 .swatchNote { margin: 0; color: var(--baslac-muted); font-size: 0.78rem; line-height: 1.55; }
 .documents { display: grid; gap: 0.5rem; padding-top: 1rem; border-top: 1px solid var(--baslac-border); }
 .documents a {
@@ -153,7 +151,7 @@
   border: 1px solid var(--baslac-border); color: inherit; font-weight: 700; font-size: 0.9rem; text-decoration: none;
 }
 .documents a:hover, .documents a:focus-visible { border-color: var(--baslac-accent); }
-.documents small { color: var(--baslac-muted); font-weight: 400; font-family: var(--font-technical), monospace; font-size: 0.64rem; letter-spacing: 0.06em; text-transform: uppercase; }
+.documents small { color: var(--baslac-muted); font-weight: 400; font-family: var(--font-technical), monospace; font-size: var(--ds-font-label); letter-spacing: var(--ds-tracking-label); text-transform: uppercase; }
 .empty { grid-column: 1 / -1; padding: 1rem; color: var(--baslac-muted); font-size: 0.9rem; }
 
 /* Quick Add traka — ne prekriva sadržaj, ima svoju sigurnu zonu. */
@@ -166,13 +164,13 @@
 }
 .quickAddList { display: flex; min-width: 0; flex-wrap: wrap; align-items: center; gap: 0.5rem; }
 .quickAddList strong { font-size: 1.1rem; }
-.quickAddList > span { color: var(--baslac-muted); font-family: var(--font-technical), monospace; font-size: 0.68rem; text-transform: uppercase; }
+.quickAddList > span { color: var(--baslac-muted); font-family: var(--font-technical), monospace; font-size: var(--ds-font-label); text-transform: uppercase; }
 .quickAddList ul { display: flex; max-width: 100%; flex-wrap: wrap; gap: 0.4rem; margin: 0; padding: 0; list-style: none; }
 .quickAddList li { display: flex; align-items: center; gap: 0.3rem; padding: 0.15rem 0.35rem; border: 1px solid var(--baslac-border); }
-.quickAddList li span { font-family: var(--font-technical), monospace; font-size: 0.68rem; }
+.quickAddList li span { font-family: var(--font-technical), monospace; font-size: var(--ds-font-label); }
 .quickAddList li input {
   width: 2.9rem; min-height: 1.9rem; padding: 0.1rem; border: 1px solid var(--baslac-border);
-  background: var(--baslac-surface-strong); color: inherit; font: inherit; font-size: 0.72rem; text-align: center;
+  background: var(--baslac-surface-strong); color: inherit; font: inherit; font-size: var(--ds-font-label); text-align: center;
 }
 .quickAddActions { display: flex; gap: 0.5rem; }
 
@@ -189,13 +187,13 @@
 /* --- Zaglavlje PDP-a ---------------------------------------------------- */
 .pageHeader { grid-column: 1 / -1; max-width: 52rem; margin-bottom: 0.5rem; }
 .eyebrow {
-  margin: 0 0 0.5rem; color: var(--baslac-accent);
-  font-family: var(--font-technical), monospace; font-size: 0.68rem;
-  letter-spacing: 0.14em; text-transform: uppercase;
+  margin: 0 0 0.5rem; color: var(--baslac-accent-text);
+  font-family: var(--font-technical), monospace; font-size: var(--ds-font-label);
+  letter-spacing: var(--ds-tracking-label); text-transform: uppercase;
 }
 .pageHeader h1 {
   margin: 0 0 0.6rem; font-size: clamp(1.9rem, 3.4vw, 2.9rem); font-weight: 800;
-  letter-spacing: -0.03em; line-height: 1.05;
+  letter-spacing: -0.02em; line-height: 1.05;
 }
 .lead { margin: 0; color: var(--baslac-muted); font-size: 1rem; line-height: 1.6; }
 
@@ -218,7 +216,7 @@
 .activeTick {
   position: absolute; right: 0.55rem; bottom: 0.55rem; display: grid;
   width: 1.15rem; height: 1.15rem; place-items: center; border-radius: 50%;
-  background: var(--baslac-accent); color: var(--baslac-accent-ink); font-size: 0.7rem;
+  background: var(--baslac-accent); color: var(--baslac-accent-ink); font-size: var(--ds-font-label);
 }
 
 /* Quick Add kontrola — jasna, sa ikonicom, dovoljno velika. */
@@ -228,7 +226,7 @@
   border: 1px solid var(--baslac-border); background: var(--baslac-surface-strong);
   color: var(--baslac-muted); cursor: pointer; transition: all 140ms ease;
 }
-.pickButton:hover { border-color: var(--baslac-accent); color: var(--baslac-accent); }
+.pickButton:hover { border-color: var(--baslac-accent); color: var(--baslac-accent-text); }
 .pickButton[data-picked] {
   border-color: var(--baslac-accent); background: var(--baslac-accent); color: var(--baslac-accent-ink);
 }
@@ -236,7 +234,7 @@
 
 /* --- Quantity stepper i CTA -------------------------------------------- */
 .stepper { display: grid; gap: 0.3rem; }
-.stepperLabel { color: var(--baslac-muted); font-family: var(--font-technical), monospace; font-size: 0.62rem; text-transform: uppercase; }
+.stepperLabel { color: var(--baslac-muted); font-family: var(--font-technical), monospace; font-size: var(--ds-font-label); text-transform: uppercase; }
 .stepperControls { display: flex; align-items: stretch; border: 1px solid var(--baslac-border); border-radius: 8px; overflow: hidden; }
 .stepperControls button {
   width: 2.5rem; border: 0; background: var(--baslac-surface-strong);
@@ -272,3 +270,196 @@
 .inquiryButton:hover { filter: brightness(1.08); }
 .inquiryButton:focus-visible { outline: 2px solid var(--baslac-accent); outline-offset: 3px; }
 .inquiryNote { margin: 0.5rem 0 0; max-width: 22rem; color: var(--baslac-muted); font-size: 0.78rem; line-height: 1.5; }
+
+/* =========================================================================
+ * Sistem A — Baslac PDP sistema boja
+ * ========================================================================= */
+:global([data-ds="a"]) .pdp .pageHeader h1 {
+  font-size: var(--ds-font-h1);
+  letter-spacing: var(--ds-tracking-h);
+  line-height: 1.05;
+}
+
+:global([data-ds="a"]) .pdp .pickerHeader h2 {
+  font-size: var(--ds-font-h3);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+:global([data-ds="a"]) .pdp .lead,
+:global([data-ds="a"]) .pdp .intro {
+  font-size: var(--ds-font-body);
+}
+
+:global([data-ds="a"]) .pdp .eyebrow,
+:global([data-ds="a"]) .pdp .kicker,
+:global([data-ds="a"]) .pdp .brandMark,
+:global([data-ds="a"]) .pdp .volumeMark,
+:global([data-ds="a"]) .pdp .count,
+:global([data-ds="a"]) .pdp .availability,
+:global([data-ds="a"]) .pdp .qtyField span,
+:global([data-ds="a"]) .pdp .stepperLabel,
+:global([data-ds="a"]) .pdp .quickAddList > span,
+:global([data-ds="a"]) .pdp .documents small {
+  font-size: var(--ds-font-label);
+  font-weight: 500;
+  letter-spacing: var(--ds-tracking-label);
+}
+
+/* Broj prikazanih baza je rečenica, ne oznaka: bez velikih slova. */
+:global([data-ds="a"]) .pdp .count {
+  color: var(--ds-c-text-2);
+  font-family: var(--font-body), system-ui, sans-serif;
+  font-size: var(--ds-font-small);
+  letter-spacing: 0;
+}
+
+:global([data-ds="a"]) .pdp .lineExample figcaption,
+:global([data-ds="a"]) .pdp .stagePlaceholder p,
+:global([data-ds="a"]) .pdp .stageNote,
+:global([data-ds="a"]) .pdp .activeMeta,
+:global([data-ds="a"]) .pdp .empty,
+:global([data-ds="a"]) .pdp .stagePlaceholder strong,
+:global([data-ds="a"]) .pdp .cardName {
+  font-size: var(--ds-font-small);
+}
+
+:global([data-ds="a"]) .pdp .swatchNote,
+:global([data-ds="a"]) .pdp .inquiryNote {
+  font-size: var(--ds-font-legal);
+}
+
+:global([data-ds="a"]) .pdp .cardBody strong {
+  font-size: var(--ds-font-code);
+  font-weight: 500;
+}
+
+:global([data-ds="a"]) .pdp .activeInfo h3 {
+  font-size: var(--ds-font-card-title);
+  font-weight: 600;
+}
+
+/* Polja: 48 px, okvir --ds-c-field, oznaka iznad (Plex Sans 600 14 px). */
+:global([data-ds="a"]) .pdp .field label {
+  color: var(--ds-c-text);
+  font-family: var(--font-body), system-ui, sans-serif;
+  font-size: var(--ds-font-small);
+  font-weight: 600;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+:global([data-ds="a"]) .pdp .field input,
+:global([data-ds="a"]) .pdp .field select {
+  min-height: var(--ds-ctl-h-field);
+  padding: 0 12px;
+  border-color: var(--ds-c-field);
+  border-radius: var(--ds-ctl-radius);
+  font-size: var(--ds-font-body);
+}
+
+:global([data-ds="a"]) .pdp .qtyField input,
+:global([data-ds="a"]) .pdp .stepperControls,
+:global([data-ds="a"]) .pdp .quickAddList li input {
+  border-color: var(--ds-c-field);
+  border-radius: var(--ds-ctl-radius);
+}
+
+:global([data-ds="a"]) .pdp .stepperControls input {
+  border-inline-color: var(--ds-c-field);
+}
+
+/* Kartice baza: 2 px ugao, linija; aktivna = 2 px plava, izabrana = meka plava. */
+:global([data-ds="a"]) .pdp .card {
+  border-color: var(--ds-c-line);
+  transition: border-color 120ms ease, background-color 120ms ease;
+}
+
+:global([data-ds="a"]) .pdp .card:hover {
+  border-color: var(--ds-c-line-strong);
+}
+
+:global([data-ds="a"]) .pdp .card[data-active] {
+  border-color: var(--baslac-accent);
+  box-shadow: inset 0 0 0 1px var(--baslac-accent);
+}
+
+:global([data-ds="a"]) .pdp .card[data-picked] {
+  background: color-mix(in oklab, var(--baslac-accent) 10%, var(--ds-c-surface));
+}
+
+:global([data-ds="a"]) .pdp .pickButton,
+:global([data-ds="a"]) .pdp .pick span,
+:global([data-ds="a"]) .pdp .stage,
+:global([data-ds="a"]) .pdp .documents a,
+:global([data-ds="a"]) .pdp .activePanel,
+:global([data-ds="a"]) .pdp .quickAddList li {
+  border-radius: var(--ds-ctl-radius);
+}
+
+:global([data-ds="a"]) .pdp .pickButton {
+  border-color: var(--ds-c-line-strong);
+  transition: border-color 120ms ease, background-color 120ms ease, color 120ms ease;
+}
+
+:global([data-ds="a"]) .pdp .activePanel {
+  background: color-mix(in oklab, var(--baslac-accent) 8%, var(--ds-c-surface));
+}
+
+:global([data-ds="a"]) .pdp .documents a {
+  font-size: var(--ds-font-card-title);
+  font-weight: 600;
+}
+
+:global([data-ds="a"]) .pdp .documents a:hover {
+  border-color: var(--ds-c-line-strong);
+}
+
+/* Quick Add traka plutajući je sloj: ugao 4 px, linija umesto senke. */
+:global([data-ds="a"]) .pdp .quickAdd {
+  border-radius: var(--ds-overlay-radius);
+  box-shadow: none;
+}
+
+/* Dugmad: Plex Sans 600 15 px, ugao 2 px, bez podizanja i filtera. */
+:global([data-ds="a"]) .pdp .addButton,
+:global([data-ds="a"]) .pdp .inquiryButton,
+:global([data-ds="a"]) .pdp .ghostButton {
+  min-height: var(--ds-ctl-h-m);
+  padding: 0 20px;
+  border-radius: var(--ds-ctl-radius);
+  font: var(--ds-ctl-font);
+  filter: none;
+  transform: none;
+  transition: background-color 120ms ease, border-color 120ms ease;
+}
+
+:global([data-ds="a"]) .pdp .addButton:hover:not(:disabled),
+:global([data-ds="a"]) .pdp .inquiryButton:hover {
+  background: var(--baslac-accent-hover);
+  filter: none;
+}
+
+:global([data-ds="a"]) .pdp .addButton:disabled {
+  background: var(--ds-c-surface-2);
+  color: var(--ds-c-text-3);
+  opacity: 1;
+}
+
+:global([data-ds="a"]) .pdp .ghostButton {
+  border-color: var(--ds-c-text);
+}
+
+:global([data-ds="a"]) .pdp .ghostButton:hover {
+  background: var(--ds-c-surface-2);
+}
+
+:global([data-ds="a"]) .pdp .card:focus-visible,
+:global([data-ds="a"]) .pdp .pick input:focus-visible,
+:global([data-ds="a"]) .pdp .pickButton:focus-visible,
+:global([data-ds="a"]) .pdp .inquiryButton:focus-visible,
+:global([data-ds="a"]) .pdp a:focus-visible,
+:global([data-ds="a"]) .pdp button:focus-visible {
+  outline: 2px solid var(--ds-c-focus);
+  outline-offset: 2px;
+}

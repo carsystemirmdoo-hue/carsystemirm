@@ -188,7 +188,7 @@ export function PaintTakeoverHomeSection({
           </p>
           <Link className={styles.primaryCta} href="/program">
             ISTRAŽITE SISTEME
-            <span aria-hidden="true">↗</span>
+            <span aria-hidden="true">→</span>
           </Link>
         </div>
       </div>

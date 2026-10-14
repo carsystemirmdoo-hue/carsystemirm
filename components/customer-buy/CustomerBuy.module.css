@@ -1,28 +1,21 @@
-/* Kupčeva kupovina na javnim stranama (PDP panel i cena na kartici). */
+/* Kupčeva kupovina na javnim stranama (PDP panel i cena na kartici).
+   Sistem A: boje iz zajedničkih tokena (obe teme), panel ugao 2 px bez senke,
+   polja 48 px sa okvirom --ds-c-field, izabrano pakovanje 2 px akcent + meka ispuna. */
 .panel {
-  --buy-ink: #14171c;
-  --buy-muted: #5c6470;
-  --buy-line: #e2e5ea;
-  --buy-bg: #ffffff;
-  --buy-soft: #f4f5f7;
-  --buy-red: #e5322a;
+  --buy-ink: var(--ds-c-text);
+  --buy-muted: var(--ds-c-text-2);
+  --buy-line: var(--ds-c-line);
+  --buy-bg: var(--ds-c-surface);
+  --buy-soft: var(--ds-c-surface-2);
+  --buy-red: var(--ds-c-accent-text);
   display: grid;
   gap: 0.75rem;
   margin-top: 1.25rem;
   padding: 1.1rem 1.2rem 1.2rem;
   border: 1px solid var(--buy-line);
-  border-radius: 14px;
+  border-radius: var(--ds-ctl-radius);
   background: var(--buy-bg);
   color: var(--buy-ink);
-  box-shadow: 0 10px 26px oklch(0.22 0.025 250 / 0.08);
-}
-
-:global(.dark) .panel {
-  --buy-ink: oklch(0.96 0.007 250);
-  --buy-muted: oklch(0.75 0.02 250);
-  --buy-line: oklch(0.93 0.01 250 / 0.16);
-  --buy-bg: oklch(0.17 0.014 250);
-  --buy-soft: oklch(0.21 0.016 250);
 }
 
 .panelHead {
@@ -34,47 +27,49 @@
 }
 
 .kicker {
-  color: var(--buy-red);
-  font-size: 0.72rem;
-  font-weight: 700;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
+  color: var(--ds-c-accent-text);
+  font-family: var(--font-technical), monospace;
+  font-size: var(--ds-font-label);
+  font-weight: 500;
+  letter-spacing: var(--ds-tracking-label);
 }
 
 .demo,
 .cardPrice em {
   padding: 0.1rem 0.5rem;
   border: 1px dashed currentColor;
-  border-radius: 999px;
-  color: oklch(0.55 0.075 245);
-  font-size: 0.64rem;
+  border-radius: var(--ds-ctl-radius);
+  color: var(--ds-c-info);
+  font-size: var(--ds-font-label);
   font-style: normal;
-  font-weight: 700;
-  letter-spacing: 0.08em;
+  font-weight: 500;
+  letter-spacing: var(--ds-tracking-label);
   text-transform: uppercase;
 }
 
 .panelTitle {
   margin: 0;
-  font-size: 1.05rem;
+  font-size: 1.125rem;
+  font-weight: 600;
   line-height: 1.3;
 }
 
 .panelTitle small {
   color: var(--buy-muted);
-  font-weight: 600;
+  font-size: var(--ds-font-small);
+  font-weight: 400;
 }
 
 .note,
 .fine {
   margin: 0;
   color: var(--buy-muted);
-  font-size: 0.86rem;
+  font-size: var(--ds-font-small);
   line-height: 1.5;
 }
 
 .fine {
-  font-size: 0.78rem;
+  font-size: var(--ds-font-legal);
 }
 
 .buy {
@@ -84,18 +79,19 @@
 
 .packs {
   display: grid;
-  gap: 0.4rem;
+  gap: 0.5rem;
   margin: 0;
   padding: 0;
   border: 0;
 }
 
 .packs legend {
-  margin-bottom: 0.35rem;
-  color: var(--buy-muted);
-  font-size: 0.72rem;
-  font-weight: 700;
-  letter-spacing: 0.06em;
+  margin-bottom: 0.4rem;
+  color: var(--ds-c-text-3);
+  font-family: var(--font-technical), monospace;
+  font-size: var(--ds-font-label);
+  font-weight: 500;
+  letter-spacing: var(--ds-tracking-label);
   text-transform: uppercase;
 }
 
@@ -104,15 +100,27 @@
   grid-template-columns: auto minmax(0, 1fr) auto;
   gap: 0.6rem;
   align-items: center;
+  min-height: var(--ds-ctl-h-l);
   padding: 0.6rem 0.75rem;
-  border: 1px solid var(--buy-line);
-  border-radius: 10px;
+  border: 1px solid var(--ds-c-line-strong);
+  border-radius: var(--ds-ctl-radius);
+  background: var(--buy-bg);
   cursor: pointer;
 }
 
+.pack input {
+  accent-color: var(--ds-c-accent);
+}
+
+.pack:has(input:focus-visible) {
+  outline: 2px solid var(--ds-c-focus);
+  outline-offset: 2px;
+}
+
 .pack[data-active] {
-  border-color: var(--buy-red);
-  background: color-mix(in srgb, var(--buy-red) 5%, var(--buy-bg));
+  border: 2px solid var(--ds-c-accent);
+  background: var(--ds-c-accent-soft);
+  padding: calc(0.6rem - 1px) calc(0.75rem - 1px);
 }
 
 .pack span {
@@ -121,27 +129,37 @@
   min-width: 0;
 }
 
+.pack strong {
+  font-size: 0.9375rem;
+  font-weight: 600;
+}
+
 .pack small,
 .packPrice small {
   color: var(--buy-muted);
-  font-size: 0.74rem;
+  font-size: var(--ds-font-label);
+}
+
+.pack small {
+  font-family: var(--font-technical), monospace;
 }
 
 .packPrice {
   text-align: right;
   font-variant-numeric: tabular-nums;
-  font-weight: 700;
+  font-weight: 600;
   white-space: nowrap;
 }
 
 .priceFacts {
   display: grid;
-  gap: 0.3rem;
+  gap: 0.4rem;
   margin: 0;
-  padding: 0.6rem 0.75rem;
-  border-radius: 10px;
+  padding: 0.75rem;
+  border: 1px solid var(--buy-line);
+  border-radius: var(--ds-ctl-radius);
   background: var(--buy-soft);
-  font-size: 0.84rem;
+  font-size: var(--ds-font-small);
 }
 
 .priceFacts div {
@@ -157,13 +175,17 @@
 .priceFacts dd {
   margin: 0;
   text-align: right;
-  font-weight: 650;
+  font-weight: 500;
   font-variant-numeric: tabular-nums;
+}
+
+.priceFacts dd strong {
+  font-weight: 600;
 }
 
 .row {
   display: grid;
-  grid-template-columns: 7rem minmax(0, 1fr);
+  grid-template-columns: 8rem minmax(0, 1fr);
   gap: 0.6rem;
   align-items: end;
 }
@@ -171,39 +193,66 @@
 .qty,
 .noteField {
   display: grid;
-  gap: 0.25rem;
-  color: var(--buy-muted);
-  font-size: 0.74rem;
-  font-weight: 650;
+  gap: 0.35rem;
+  color: var(--buy-ink);
+  font-size: var(--ds-font-small);
+  font-weight: 600;
 }
 
 .qty input,
 .noteField input {
   width: 100%;
-  min-height: 2.75rem;
-  padding: 0.4rem 0.6rem;
-  border: 1px solid var(--buy-line);
-  border-radius: 9px;
+  min-height: var(--ds-ctl-h-field);
+  padding: 0 0.75rem;
+  border: 1px solid var(--ds-c-field);
+  border-radius: var(--ds-ctl-radius);
   background: var(--buy-bg);
   color: var(--buy-ink);
   font: inherit;
-  font-size: 0.95rem;
+  font-size: 1rem;
+  font-weight: 400;
+}
+
+.qty input:focus-visible,
+.noteField input:focus-visible {
+  outline: 2px solid var(--ds-c-focus);
+  outline-offset: 2px;
+}
+
+.qty input:disabled,
+.noteField input:disabled {
+  background: var(--ds-c-surface-2);
+  color: var(--ds-c-text-3);
 }
 
 .add {
-  min-height: 2.75rem;
-  padding: 0 1rem;
+  min-height: var(--ds-ctl-h-field);
+  padding: 0 1.25rem;
   border: 0;
-  border-radius: 9px;
-  background: var(--buy-red);
-  color: #fff;
-  font: inherit;
-  font-weight: 700;
+  border-radius: var(--ds-ctl-radius);
+  background: var(--ds-c-accent);
+  color: var(--ds-c-on-accent);
+  font: var(--ds-ctl-font);
   cursor: pointer;
+  transition: background-color 160ms ease-out;
+}
+
+.add:hover {
+  background: var(--ds-c-accent-hover);
+}
+
+.add:active {
+  background: var(--ds-c-accent-press);
+}
+
+.add:focus-visible {
+  outline: 2px solid var(--ds-c-focus);
+  outline-offset: 2px;
 }
 
 .add:disabled {
-  opacity: 0.6;
+  background: var(--ds-c-surface-2);
+  color: var(--ds-c-text-3);
   cursor: progress;
 }
 
@@ -213,61 +262,83 @@
 
 .msg {
   margin: 0;
-  color: oklch(0.5 0.17 27);
-  font-size: 0.84rem;
+  color: var(--ds-c-err);
+  font-size: var(--ds-font-small);
 }
 
 .msg[data-ok="true"] {
-  color: oklch(0.42 0.1 150);
+  color: var(--ds-c-ok);
 }
 
 .msg a,
 .contacts a,
 .request a {
-  color: var(--buy-red);
-  font-weight: 650;
+  color: var(--buy-ink);
+  font-weight: 600;
+  text-decoration: underline;
+  text-decoration-color: var(--ds-c-line-strong);
+  text-underline-offset: 3px;
+}
+
+.msg a:hover,
+.contacts a:hover,
+.request a:hover {
+  text-decoration-color: currentColor;
+  text-decoration-thickness: 2px;
 }
 
 .link {
   justify-self: start;
+  min-height: var(--ds-ctl-h-s);
   padding: 0;
   border: 0;
   background: none;
-  color: var(--buy-red);
+  color: var(--buy-ink);
   font: inherit;
-  font-size: 0.84rem;
-  font-weight: 650;
+  font-size: var(--ds-font-small);
+  font-weight: 600;
   cursor: pointer;
   text-align: left;
+  text-decoration: underline;
+  text-decoration-color: var(--ds-c-line-strong);
+  text-underline-offset: 4px;
+}
+
+.link:hover {
+  text-decoration-color: currentColor;
+  text-decoration-thickness: 2px;
 }
 
 .request {
   display: grid;
   gap: 0.6rem;
-  padding: 0.8rem 0.9rem;
-  border: 1px dashed var(--buy-line);
-  border-radius: 10px;
+  padding: 0.9rem;
+  border: 1px solid var(--buy-line);
+  border-radius: var(--ds-ctl-radius);
+  background: var(--buy-soft);
 }
 
 .request[data-done] {
-  border-style: solid;
-  background: color-mix(in srgb, oklch(0.7 0.12 150) 10%, var(--buy-bg));
+  border-color: var(--ds-c-ok);
+  background: var(--ds-c-ok-bg);
 }
 
 .request h3 {
   margin: 0;
-  font-size: 0.92rem;
+  font-size: 1rem;
+  font-weight: 600;
 }
 
 .request p {
   margin: 0;
-  font-size: 0.86rem;
+  font-size: var(--ds-font-small);
+  line-height: 1.5;
 }
 
 .contacts {
   margin: 0;
   color: var(--buy-muted);
-  font-size: 0.8rem;
+  font-size: var(--ds-font-legal);
   line-height: 1.55;
 }
 
@@ -277,18 +348,19 @@
   gap: 0.25rem 0.4rem;
   align-items: baseline;
   margin-top: 0.35rem;
-  color: #5c6470;
-  font-size: 0.78rem;
+  color: var(--ds-c-text-2);
+  font-size: var(--ds-font-legal);
 }
 
 .cardPrice strong {
-  color: #e5322a;
-  font-size: 0.9rem;
+  color: var(--ds-c-text);
+  font-size: 0.9375rem;
+  font-weight: 600;
 }
 
 .cardPrice[data-state="request"] {
-  color: oklch(0.55 0.075 245);
-  font-weight: 650;
+  color: var(--ds-c-text-2);
+  font-weight: 500;
 }
 
 @media (max-width: 520px) {
@@ -299,16 +371,17 @@
 
 /* Cena po opciji plaćanja na kartici: svaka opcija u svom redu (dok. 61 K3). */
 .cardPrice > span { display: block; }
-.priceFacts dd small { display: block; color: inherit; opacity: 0.75; font-weight: 400; }
+.priceFacts dd small { display: block; color: var(--buy-muted); font-size: var(--ds-font-legal); font-weight: 400; }
 
 /* Stanje iz poslednjeg izvoza lagera (dok. 65) — prikazuje se samo kada je uključeno. */
 .stockNote {
   display: grid;
   gap: 0.2rem;
   margin: 0.5rem 0 0;
-  font-size: 0.875rem;
+  font-size: var(--ds-font-small);
 }
 
 .stockNote small {
   color: var(--buy-muted);
+  font-size: var(--ds-font-legal);
 }

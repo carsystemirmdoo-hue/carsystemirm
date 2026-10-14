@@ -20,6 +20,7 @@ import {
   resolveBaslacBase,
 } from "./baslacVariantState.mjs";
 import { CustomerBuyPanel } from "@/components/customer-buy/CustomerBuyPanel";
+import { srPlural } from "@/lib/sr-plural";
 import styles from "./BaslacSystemPdp.module.css";
 
 
@@ -246,7 +247,9 @@ export function BaslacSystemPdp({
         </div>
 
         <p className={styles.count} aria-live="polite">
-          Prikazano {visible.length} od {bases.length} baza
+          {srPlural(visible.length, "Prikazana", "Prikazane", "Prikazano")}{" "}
+          {visible.length} od {bases.length}{" "}
+          {srPlural(bases.length, "baze", "baze", "baza")}
         </p>
 
         <ul className={styles.grid}>

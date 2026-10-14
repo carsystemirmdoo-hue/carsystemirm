@@ -16,11 +16,14 @@
   /* Sekcije su preko cele širine (pozadina), a sadržaj počinje na liniji
      zajedničkog kontejnera — ranije je na 3440px stajao 60px od ivice. */
   --cl-gutter: max(var(--ds-gutter, clamp(20px, 4vw, 56px)), calc((100% - var(--ds-container-max, 1208px)) / 2));
-  --cl-display: clamp(56px, 5.2vw, 76px);
-  --cl-eyebrow: 13px;
+  /* Archivo 800 je širi od ranijeg (sabijenog) Geista: na 390 px reč
+     „PRODAVNICU” mora da stane u kolonu od 350 px. */
+  --cl-display: clamp(44px, 3.2vw + 36px, 76px);
+  --cl-eyebrow: var(--ds-font-label);
 
   background: var(--cl-paper);
   color: var(--cl-ink);
+  font-family: var(--font-body), var(--font-geist-sans), system-ui, sans-serif;
 }
 
 /*
@@ -39,22 +42,21 @@
 .display {
   font-size: var(--cl-display);
   font-weight: 800;
-  line-height: 0.92;
+  line-height: 0.95;
   letter-spacing: -0.015em;
   text-transform: uppercase;
-  transform: scaleX(0.93);
-  transform-origin: left center;
   margin: 0;
+  font-family: var(--font-display), var(--font-geist-sans), sans-serif;
 }
 
 .eyebrow {
   font-size: var(--cl-eyebrow);
-  font-weight: 600;
-  letter-spacing: 0.14em;
+  font-weight: 500;
+  letter-spacing: var(--ds-tracking-label);
   text-transform: uppercase;
   /* 0.62 je na zelenom panelu EASY MAX davao 3.66:1 (izmereno na pikselima). */
-  opacity: 0.8;
   margin: 0;
+  font-family: var(--font-technical), var(--font-geist-mono), monospace;
 }
 
 /*
@@ -63,8 +65,8 @@
  * whole document into horizontal overflow.
  */
 .body {
-  font-size: clamp(15px, 1.1vw, 16px);
-  line-height: 1.5;
+  font-size: var(--ds-font-body);
+  line-height: 1.6;
   max-width: min(46ch, 100%);
   margin: 0;
 }
@@ -273,14 +275,15 @@
   bottom: clamp(28px, 5vh, 56px);
   z-index: 2;
   margin: 0;
-  font-size: 12px;
-  font-weight: 600;
-  letter-spacing: 0.12em;
+  font-size: var(--ds-font-label);
+  font-weight: 500;
+  letter-spacing: var(--ds-tracking-label);
   text-transform: uppercase;
   color: var(--cl-chalk);
-  opacity: 0.42;
+  opacity: 0.72;
   pointer-events: none;
   transition: opacity 420ms ease;
+  font-family: var(--font-technical), var(--font-geist-mono), monospace;
 }
 
 .hero[data-hinted="done"] .heroHint,
@@ -328,22 +331,20 @@
   gap: 12px;
   min-height: 52px;
   padding: 0 28px;
-  border-radius: 999px;
-  background: var(--cl-chalk);
+  border-radius: var(--ds-ctl-radius);
+  background: #ffffff;
   color: var(--cl-ink);
-  font-size: 15px;
-  font-weight: 700;
-  letter-spacing: 0.02em;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  letter-spacing: 0;
   text-decoration: none;
-  transition:
-    transform 220ms cubic-bezier(0.16, 1, 0.3, 1),
-    background-color 220ms ease;
+  transition: background-color 220ms ease;
+  font-family: var(--font-body), var(--font-geist-sans), system-ui, sans-serif;
 }
 
 .ctaPrimary:hover,
 .ctaPrimary:focus-visible {
-  transform: translateY(-2px);
-  background: #ffffff;
+  background: var(--cl-chalk);
 }
 
 .ctaSecondary {
@@ -353,11 +354,14 @@
   border-bottom: 1px solid rgba(244, 247, 242, 0.4);
   padding-bottom: 3px;
   transition: border-color 220ms ease;
+  font-family: var(--font-body), var(--font-geist-sans), system-ui, sans-serif;
+  font-weight: 600;
 }
 
 .ctaSecondary:hover,
 .ctaSecondary:focus-visible {
   border-bottom-color: var(--cl-chalk);
+  box-shadow: 0 1px 0 var(--cl-chalk);
 }
 
 /* ---------------------------------------------------------------- 02 RAIL */
@@ -448,8 +452,8 @@
   line-height: 1;
   letter-spacing: -0.01em;
   text-transform: uppercase;
-  transform: scaleX(0.93);
   margin: 0;
+  font-family: var(--font-display), var(--font-geist-sans), sans-serif;
 }
 
 .panelCanWrap {
@@ -472,10 +476,10 @@
 }
 
 .panelCta {
-  font-size: 14px;
+  font-size: 0.9375rem;
   font-weight: 600;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
+  letter-spacing: 0;
+  text-transform: none;
   border-bottom: 1px solid currentColor;
   justify-self: center;
   padding-bottom: 3px;
@@ -484,6 +488,7 @@
   transition:
     opacity 260ms ease 80ms,
     transform 260ms ease 80ms;
+  font-family: var(--font-body), var(--font-geist-sans), system-ui, sans-serif;
 }
 
 .panel:hover .panelCta,
@@ -500,10 +505,15 @@
   gap: 14px;
 }
 
+.panelTerminal .eyebrow {
+  letter-spacing: 0.02em;
+  text-transform: none;
+}
+
 .panelTerminalArrow {
   width: 54px;
   height: 54px;
-  border-radius: 999px;
+  border-radius: var(--ds-ctl-radius);
   border: 1px solid var(--cl-hairline);
   display: grid;
   place-items: center;
@@ -547,7 +557,7 @@
   letter-spacing: -0.01em;
   text-transform: uppercase;
   white-space: nowrap;
-  transform: scaleX(0.93);
+  font-family: var(--font-display), var(--font-geist-sans), sans-serif;
 }
 
 .bandDot {
@@ -617,11 +627,11 @@
   position: relative;
   font-size: clamp(96px, 17vw, 240px);
   font-weight: 800;
-  line-height: 0.86;
+  line-height: 0.95;
   letter-spacing: -0.03em;
-  transform: scaleX(0.93);
   margin: 0;
   font-variant-numeric: tabular-nums;
+  font-family: var(--font-display), var(--font-geist-sans), sans-serif;
 }
 
 .rangeWord {
@@ -631,13 +641,15 @@
   line-height: 1;
   letter-spacing: -0.01em;
   text-transform: uppercase;
-  transform: scaleX(0.93);
   margin: 0;
+  font-family: var(--font-display), var(--font-geist-sans), sans-serif;
 }
 
 .rangeMeta {
   position: relative;
   margin-top: 6px;
+  text-transform: none;
+  letter-spacing: 0.02em;
 }
 
 /* --------------------------------------------------- 05 APPLICATION FINDER */
@@ -661,27 +673,29 @@
 }
 
 .finderOption {
-  min-height: 56px;
-  padding: 0 26px;
-  border-radius: 999px;
-  border: 1px solid rgba(11, 11, 12, 0.18);
+  min-height: var(--ds-ctl-h-m);
+  padding: 0 18px;
+  border-radius: var(--ds-ctl-radius);
+  border: 1px solid rgba(11, 11, 12, 0.32);
   background: transparent;
   color: var(--cl-ink);
-  font-size: 16px;
-  font-weight: 700;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  letter-spacing: 0;
+  text-transform: none;
   cursor: pointer;
   transition:
     background-color 220ms ease,
     color 220ms ease,
     border-color 220ms ease;
+  font-family: var(--font-body), var(--font-geist-sans), system-ui, sans-serif;
 }
 
 .finderOption[aria-checked="true"] {
-  background: var(--cl-ink);
-  color: var(--cl-paper);
+  background: rgba(11, 11, 12, 0.07);
+  color: var(--cl-ink);
   border-color: var(--cl-ink);
+  box-shadow: inset 0 0 0 1px var(--cl-ink);
 }
 
 .finderResult {
@@ -703,17 +717,17 @@
   display: grid;
   gap: 12px;
   padding: 22px;
-  border-radius: 16px;
+  border-radius: var(--ds-ctl-radius);
   background: #ffffff;
-  border: 1px solid rgba(11, 11, 12, 0.08);
+  border: 1px solid rgba(11, 11, 12, 0.14);
   text-decoration: none;
   color: inherit;
-  transition: transform 220ms cubic-bezier(0.16, 1, 0.3, 1);
+  transition: border-color 220ms ease;
 }
 
 .finderProduct:hover,
 .finderProduct:focus-visible {
-  transform: translateY(-3px);
+  border-color: rgba(11, 11, 12, 0.36);
 }
 
 .finderProduct img {
@@ -723,14 +737,14 @@
 }
 
 .finderProductName {
-  font-size: 14px;
+  font-size: var(--ds-font-card-title);
   font-weight: 600;
   line-height: 1.35;
 }
 
 .finderLink {
   font-size: 15px;
-  font-weight: 700;
+  font-weight: 600;
   color: var(--cl-ink);
   border-bottom: 1px solid currentColor;
   padding-bottom: 3px;
@@ -750,7 +764,7 @@
 .commerceCard {
   background: var(--cl-void);
   color: var(--cl-chalk);
-  border-radius: 20px;
+  border-radius: var(--ds-ctl-radius);
   padding: clamp(44px, 6vh, 72px) clamp(24px, 4vw, 56px);
   display: grid;
   grid-template-columns: minmax(0, 1fr);
@@ -767,6 +781,11 @@
   grid-template-columns: minmax(0, 1fr);
   gap: 14px;
   max-width: 760px;
+}
+
+.commerceHead .eyebrow {
+  text-transform: none;
+  letter-spacing: 0.02em;
 }
 
 .commerceHead .display {
@@ -787,9 +806,9 @@
 
 .commerceLink {
   font-size: 15px;
-  font-weight: 700;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
+  font-weight: 600;
+  letter-spacing: 0;
+  text-transform: none;
   color: var(--cl-chalk);
   border-bottom: 1px solid rgba(244, 247, 242, 0.45);
   padding-bottom: 4px;
@@ -848,9 +867,9 @@
 
 .documentsLink {
   font-size: 15px;
-  font-weight: 700;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
+  font-weight: 600;
+  letter-spacing: 0;
+  text-transform: none;
   color: var(--cl-ink);
   border-bottom: 1px solid rgba(11, 11, 12, 0.35);
   padding-bottom: 4px;
@@ -986,13 +1005,13 @@
     height: 520px;
     scroll-snap-align: center;
     border-right: none;
-    border-radius: 16px;
+    border-radius: var(--ds-ctl-radius);
     border: 1px solid var(--cl-hairline);
     padding: 34px 20px 30px;
   }
 
   .panel::before {
-    border-radius: 15px;
+    border-radius: 1px;
   }
 
   /* No hover on touch — the active panel carries the colour instead. */
@@ -1039,6 +1058,12 @@
 
   .heroContent {
     width: 100%;
+  }
+
+  /* Uputstvo za rotaciju je na 390 px padalo tik uz drugu vezu; ide gore desno. */
+  .heroHint {
+    top: 20px;
+    bottom: auto;
   }
 
   /*
@@ -1092,6 +1117,77 @@
 @media (min-width: 768px) {
   .railProgress {
     display: none;
+  }
+}
+
+/*
+ * Tablet (768–1100 px): luk limenki je bio preko celog kadra, pa je limenka
+ * „Fast Acrylic” prekrivala naslov. Ovde luk dobija sopstvenu traku iznad teksta
+ * (u toku dokumenta, ne apsolutno preko njega), pa se slika i naslov nikad ne
+ * preklapaju, bez obzira na visinu prozora. Visine limenki su u odnosu na traku.
+ */
+@media (min-width: 768px) and (max-width: 1100px) {
+  .hero {
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-end;
+  }
+
+  .heroArc {
+    position: relative;
+    inset: auto;
+    flex: 0 0 auto;
+    width: 100%;
+    height: clamp(340px, 46vw, 480px);
+    margin-top: clamp(24px, 4vw, 48px);
+  }
+
+  .heroCan[data-slot="0"] {
+    --can-parallax: 0px;
+    --can-height: 100%;
+    --can-left: 56%;
+    --can-bottom: -8%;
+  }
+
+  .heroCan[data-slot="1"] {
+    --can-parallax: 0px;
+    --can-height: 80%;
+    --can-left: 76%;
+    --can-bottom: 4%;
+  }
+
+  .heroCan[data-slot="2"] {
+    --can-parallax: 0px;
+    --can-height: 66%;
+    --can-left: 36%;
+    --can-bottom: 10%;
+  }
+
+  .heroCan[data-slot="3"] {
+    --can-parallax: 0px;
+    --can-height: 52%;
+    --can-left: 90%;
+    --can-bottom: 22%;
+  }
+
+  .heroCan[data-slot="4"] {
+    --can-parallax: 0px;
+    --can-height: 42%;
+    --can-left: 18%;
+    --can-bottom: 26%;
+  }
+
+  .heroCan[data-slot="5"] {
+    --can-parallax: 0px;
+    --can-height: 34%;
+    --can-left: 64%;
+    --can-bottom: 44%;
+  }
+
+  /* Uputstvo za rotaciju ide u ugao trake sa limenkama, ne preko dugmadi. */
+  .heroHint {
+    top: clamp(24px, 4vw, 48px);
+    bottom: auto;
   }
 }
 

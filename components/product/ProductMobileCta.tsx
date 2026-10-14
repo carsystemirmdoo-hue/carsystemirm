@@ -43,11 +43,9 @@ export function ProductMobileCta() {
         <span>Upit i savet za izbor proizvoda</span>
       </span>
       <Link
-        className={`${styles.mobileCtaButton} cs-magnetic-cta cs-theme-wipe-card`}
+        className={styles.mobileCtaButton}
         href={inquiryHref}
         data-cursor="button"
-        data-motion-surface
-        data-motion="theme-wipe"
         data-product-inquiry
       >
         <span>Pošaljite upit</span>

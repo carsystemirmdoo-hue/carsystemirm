@@ -38,27 +38,25 @@ export function Footer() {
   return (
     <FooterReveal>
       <footer
-        className="cs-animated-footer border-t border-border bg-surface text-foreground"
+        className="cs-animated-footer border-t !border-[var(--ds-c-line)] bg-[var(--ds-c-surface)] text-[var(--ds-c-text)]"
         data-motion-surface
       >
-        <span className="cs-footer-ambient" aria-hidden="true" />
         <div className="ds-container py-12 lg:py-16">
           <div className="grid gap-10 lg:grid-cols-[1.15fr_1.6fr_0.95fr] lg:gap-12">
             <section className="max-w-md" aria-label="Carsystem i R-M">
-              <p className="font-[var(--font-display)] text-xl font-black uppercase leading-none tracking-normal sm:text-2xl">
-                Carsystem <span className="text-accent">i R-M</span>
+              <p className="font-[family-name:var(--font-display)] text-xl font-extrabold uppercase leading-none tracking-normal sm:text-2xl">
+                Carsystem <span className="text-[var(--ds-c-accent-text)]">i R-M</span>
               </p>
-              <p className="mt-4 text-sm leading-6 text-muted-foreground">
+              <p className="mt-4 text-[0.9375rem] leading-[1.6] text-[var(--ds-c-text-2)]">
                 Profesionalni program za pripremu, farbanje, opremu i završnu
                 obradu vozila.
               </p>
               <div className="mt-6 flex flex-wrap items-start gap-3">
                 <SplitContactCta inquiryHref="/kontakt" />
                 <Link
-                  className="cs-interactive-surface inline-flex min-h-11 items-center justify-center rounded-lg border border-border bg-background px-4 text-sm font-extrabold !text-foreground transition-colors hover:bg-surface-muted"
+                  className="inline-flex min-h-[var(--ds-ctl-h-m)] items-center justify-center rounded-[var(--ds-ctl-radius)] border !border-[var(--ds-c-text)] bg-transparent px-[1.125rem] font-[family-name:var(--font-body)] text-[0.9375rem] font-semibold leading-[1.2] !text-[var(--ds-c-text)] no-underline transition-colors hover:bg-[var(--ds-c-surface-2)]"
                   href="/prodavnice"
                   data-cursor="button"
-                  data-motion-surface
                 >
                   Pronađite prodavnicu
                 </Link>
@@ -74,16 +72,16 @@ export function Footer() {
             <section aria-labelledby="footer-contact-title">
               <h2
                 id="footer-contact-title"
-                className="text-xs font-extrabold uppercase tracking-[0.16em] text-muted-foreground"
+                className="font-[family-name:var(--font-technical)] text-[length:var(--ds-font-label)] font-medium uppercase leading-[1.3] tracking-[var(--ds-tracking-label)] text-[var(--ds-c-text-2)]"
               >
                 Kontakt
               </h2>
-              <address className="mt-4 space-y-2 text-sm not-italic leading-6 text-muted-foreground">
-                <span className="block font-semibold text-foreground">{companyContact.name}</span>
+              <address className="mt-4 space-y-2 text-[0.9375rem] not-italic leading-6 text-[var(--ds-c-text-2)]">
+                <span className="block font-semibold text-[var(--ds-c-text)]">{companyContact.name}</span>
                 <span className="block">{companyContact.locationLabel}</span>
                 {companyContact.phone && companyContact.phoneHref ? (
                   <a
-                    className="cs-link-reveal block !text-muted-foreground transition-colors hover:!text-foreground"
+                    className="cs-link-reveal block !text-[var(--ds-c-text-2)] transition-colors hover:!text-[var(--ds-c-text)]"
                     href={companyContact.phoneHref}
                     data-cursor="link"
                   >
@@ -91,7 +89,7 @@ export function Footer() {
                   </a>
                 ) : null}
                 <a
-                  className="cs-link-reveal block !text-muted-foreground transition-colors hover:!text-foreground"
+                  className="cs-link-reveal block !text-[var(--ds-c-text-2)] transition-colors hover:!text-[var(--ds-c-text)]"
                   href={companyContact.emailHref}
                   data-cursor="link"
                 >
@@ -101,13 +99,13 @@ export function Footer() {
                   <span className="block">{companyContact.workingHours}</span>
                 ) : null}
               </address>
-              <p className="mt-4 max-w-xs text-sm leading-6 text-muted-foreground">
+              <p className="mt-4 max-w-xs text-[length:var(--ds-font-small)] leading-[1.5] text-[var(--ds-c-text-2)]">
                 {companyContact.editableNote}
               </p>
             </section>
           </div>
 
-          <div className="mt-10 flex flex-col gap-2 border-t border-border pt-5 text-xs text-muted-foreground sm:flex-row sm:items-center sm:justify-between">
+          <div className="mt-10 flex flex-col gap-2 border-t !border-[var(--ds-c-line)] pt-5 text-[length:var(--ds-font-legal)] leading-[1.5] text-[var(--ds-c-text-2)] sm:flex-row sm:items-center sm:justify-between">
             <p>
               © {new Date().getFullYear()} {companyContact.legalName} · PIB{" "}
               {companyContact.pib} · MB {companyContact.mb} ·{" "}
@@ -116,7 +114,7 @@ export function Footer() {
             <p>
               Dizajn i razvoj:{" "}
               <a
-                className="cs-link-reveal !text-muted-foreground transition-colors hover:!text-foreground"
+                className="cs-link-reveal !text-[var(--ds-c-text-2)] transition-colors hover:!text-[var(--ds-c-text)]"
                 href="https://studio-one.rs"
                 rel="noreferrer"
                 target="_blank"
@@ -141,7 +139,7 @@ function FooterColumn({
 }) {
   return (
     <nav aria-label={title}>
-      <h2 className="text-xs font-extrabold uppercase tracking-[0.16em] text-muted-foreground">
+      <h2 className="font-[family-name:var(--font-technical)] text-[length:var(--ds-font-label)] font-medium uppercase leading-[1.3] tracking-[var(--ds-tracking-label)] text-[var(--ds-c-text-2)]">
         {title}
       </h2>
       <ul className="mt-4 flex flex-col gap-2.5">
@@ -149,7 +147,7 @@ function FooterColumn({
           <li key={`${link.href}-${link.label}`}>
             <Link
               href={link.href}
-              className="cs-link-reveal text-sm font-medium !text-muted-foreground transition-colors hover:!text-foreground"
+              className="cs-link-reveal text-[0.9375rem] font-normal leading-[1.4] !text-[var(--ds-c-text-2)] transition-colors hover:!text-[var(--ds-c-text)]"
               data-cursor="link"
             >
               {link.label}

@@ -510,7 +510,12 @@ export function ProductVisualSurface({
             data-product-visual-placeholder
             aria-hidden="true"
           >
-            <span className={styles.placeholderMark} />
+            <span className={styles.placeholderMark}>
+              <svg viewBox="0 0 40 40" aria-hidden="true" focusable="false">
+                <rect x="11" y="9" width="18" height="25" rx="2" />
+                <path d="M15 5h10v4H15zM11 16h18M11 27h18" />
+              </svg>
+            </span>
             <small>Vizuel u pripremi</small>
             <strong>{brandName}</strong>
             <span>{resolved.name}</span>

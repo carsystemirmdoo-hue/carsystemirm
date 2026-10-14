@@ -149,11 +149,44 @@ export function applySerbianCorporateBoundaries(
   return style;
 }
 
+/* ---------- nazivi na latinici ---------- */
+
+/**
+ * Sajt je na srpskoj latinici, a Positron stil za mesta sa nelatiničnim
+ * imenom crta dva reda („Belgrade / Београд”). Svaka labela sa imenom
+ * dobija jedan naziv: srpska latinica ako je u tile-ovima, zatim OpenMapTiles
+ * latinična varijanta, pa izvorno ime. Labele koje ne prikazuju ime (npr.
+ * oznake puteva preko `ref`) ostaju nepromenjene.
+ */
+export const LATIN_NAME_TEXT_FIELD = [
+  "coalesce",
+  ["get", "name:sr-Latn"],
+  ["get", "name:latin"],
+  ["get", "name"],
+];
+
+function showsPlaceName(textField: unknown): boolean {
+  return JSON.stringify(textField ?? null).includes('"name');
+}
+
+export function applyLatinLabels(style: StyleSpecification): StyleSpecification {
+  for (const layer of style.layers) {
+    if (layer.type !== "symbol") continue;
+    const layout = layer.layout as Record<string, unknown> | undefined;
+    if (!layout || layout["text-field"] === undefined) continue;
+    if (!showsPlaceName(layout["text-field"])) continue;
+    layout["text-field"] = LATIN_NAME_TEXT_FIELD;
+  }
+
+  return style;
+}
+
 export function loadCarsystemMapStyle(theme: "light" | "dark") {
   if (!lightStylePromise) {
     lightStylePromise = fetchJsonWithRetry<StyleSpecification>(LIGHT_STYLE_URL)
       .then((style) => resolveSourceTileJson(style))
       .then((style) => applySerbianCorporateBoundaries(style))
+      .then((style) => applyLatinLabels(style))
       .catch((error) => {
         // Never cache a failed load; the next call should retry from scratch.
         lightStylePromise = null;

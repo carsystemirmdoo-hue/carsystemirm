@@ -229,21 +229,23 @@
 
 .eyebrow {
   margin: 0 0 clamp(18px, 2.2vw, 32px);
-  color: rgb(244 241 235 / 0.74);
+  color: rgb(244 241 235 / 0.82);
   font-family: var(--font-technical), var(--font-geist-mono), monospace;
-  font-size: clamp(9px, 0.7vw, 12px);
-  font-weight: 700;
-  letter-spacing: 0.3em;
+  font-size: var(--ds-font-label);
+  font-weight: 500;
+  letter-spacing: var(--ds-tracking-label);
   text-transform: uppercase;
 }
 
+/* Kampanjski izuzetak Sistema A: do 88 px, Archivo 900, verzal dozvoljen,
+   razmak −0,03 em, prored 0,95 — slova se ne dodiruju. */
 .copy h2 {
   margin: 0;
   font-family: var(--font-display), var(--font-geist-sans), sans-serif;
-  font-size: clamp(58px, 7vw, 126px);
-  font-weight: 880;
-  letter-spacing: -0.065em;
-  line-height: 0.85;
+  font-size: clamp(58px, 6vw, 88px);
+  font-weight: 900;
+  letter-spacing: -0.03em;
+  line-height: 0.95;
   text-transform: uppercase;
   text-wrap: balance;
 }
@@ -256,41 +258,39 @@
 .description {
   max-width: 50ch;
   margin: clamp(24px, 3vw, 42px) 0 0;
-  color: rgb(244 241 235 / 0.76);
-  font-size: clamp(14px, 1vw, 18px);
+  color: rgb(244 241 235 / 0.82);
+  font-size: var(--ds-font-lead);
   line-height: 1.55;
 }
 
+/* Dugme na fotografiji (Sistem A): beli okvir, 52 px, ugao 2 px,
+   Plex Sans 600 15 px; na miš bela ispuna. */
 .primaryCta {
   display: inline-flex;
-  min-height: 46px;
+  min-height: var(--ds-ctl-h-l);
   align-items: center;
-  gap: 28px;
+  gap: 12px;
   margin-top: clamp(24px, 2.8vw, 40px);
-  padding: 0 18px;
-  border: 1px solid rgb(244 241 235 / 0.54);
+  padding: 0 22px;
+  border: 1px solid #f4f1eb;
+  border-radius: var(--ds-ctl-radius);
   color: #f4f1eb;
-  font-family: var(--font-technical), var(--font-geist-mono), monospace;
-  font-size: 10px;
-  font-weight: 650;
-  letter-spacing: 0.12em;
+  font: var(--ds-ctl-font);
+  letter-spacing: 0.02em;
   text-decoration: none;
   transition:
-    color 180ms ease,
-    background-color 180ms ease,
-    border-color 180ms ease;
+    color 120ms ease,
+    background-color 120ms ease;
 }
 
-.primaryCta:hover,
-.primaryCta:focus-visible {
-  border-color: #f4f1eb;
+.primaryCta:hover {
   background: #f4f1eb;
   color: #14161e;
 }
 
 .primaryCta:focus-visible {
-  outline: 2px solid #00c8e8;
-  outline-offset: 3px;
+  outline: 2px solid #f4f1eb;
+  outline-offset: 2px;
 }
 
 @media (max-width: 720px) {
@@ -336,18 +336,17 @@
 
   .eyebrow {
     margin-bottom: 18px;
-    font-size: 9px;
   }
 
   .copy h2 {
-    font-size: clamp(36px, 10.2vw, 54px);
-    line-height: 0.87;
+    font-size: clamp(34px, 9.6vw, 54px);
+    line-height: 0.95;
   }
 
   .description {
     max-width: 33ch;
     margin-top: 22px;
-    font-size: 13px;
+    font-size: var(--ds-font-body);
   }
 
   .primaryCta {

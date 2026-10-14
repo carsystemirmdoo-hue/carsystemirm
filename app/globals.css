@@ -756,31 +756,10 @@ body {
   overflow: hidden;
 }
 
+/* Sistem A: bez mrežaste pozadine u podnožju. Element ostaje skriven za
+   slučaj keširanog HTML-a koji ga još sadrži. */
 .cs-footer-ambient {
-  position: absolute;
-  inset: -28% -12%;
-  z-index: 0;
-  background:
-    linear-gradient(118deg, transparent 10%, color-mix(in oklch, var(--cs-orb-core), transparent 88%) 38%, transparent 58%),
-    repeating-linear-gradient(
-      92deg,
-      color-mix(in oklch, var(--foreground), transparent 94%) 0 1px,
-      transparent 1px 36px
-    );
-  mask-image: linear-gradient(180deg, transparent, black 22%, black 72%, transparent);
-  opacity: 0.54;
-  pointer-events: none;
-  transform: translate3d(calc(var(--motion-shift-x, 0px) * 2), calc(var(--motion-shift-y, 0px) * 2), 0);
-  animation: cs-footer-ambient-drift 18s var(--cs-ease-in-out) infinite alternate;
-}
-
-.cs-footer-ambient::after {
-  position: absolute;
-  inset: 18% 4% 12%;
-  border-top: 1px solid color-mix(in oklch, var(--foreground), transparent 88%);
-  border-bottom: 1px solid color-mix(in oklch, var(--foreground), transparent 91%);
-  content: "";
-  opacity: 0.58;
+  display: none;
 }
 
 .cs-animated-footer > *:not(.cs-footer-ambient) {
@@ -2124,9 +2103,11 @@ html[data-route-transition="fallback"] .cs-route-transition-screen {
      menja se SAMO vrednost ovih tokena — komponente koje ih koriste (Phase 2)
      ne zahtevaju izmenu. */
   --ds-font-display: var(--font-display), var(--font-geist-sans), system-ui, sans-serif;
-  --ds-font-body: var(--font-body), var(--font-geist-sans), system-ui, sans-serif;
   --ds-font-technical: var(--font-technical), var(--font-geist-mono), monospace;
-  --ds-font-label: var(--font-technical), var(--font-geist-mono), monospace;
+  /* Porodice za tekst i oznake: `--ds-family-*`. Imena `--ds-font-body` i `--ds-font-label`
+     su u sistemu A VELIČINE (16 px i 12 px, blok „SISTEM A” niže). */
+  --ds-family-body: var(--font-body), var(--font-geist-sans), system-ui, sans-serif;
+  --ds-family-label: var(--font-technical), var(--font-geist-mono), monospace;
 
   /* --- Product scale primitive (vidi components/product/ProductStage) --- */
   --ds-badge-reserve: 40px;
@@ -2268,4 +2249,58 @@ html[data-route-transition="fallback"] .cs-route-transition-screen {
     --ds-c-surface: oklch(0.2115 0.0117 254.1);
     --ds-c-surface-2: oklch(0.2458 0.0153 256.8);
   }
+}
+
+/* Stare globalne promenljive (čitaju ih skoro svi moduli) vezane su za tokene
+   sistema A, pa se boje usklađuju na celom sajtu iz jednog mesta. Specifičnost
+   `:root[data-ds]` / `.dark[data-ds]` je veća od starih `:root` / `.dark` blokova,
+   uključujući njihove @supports kopije. */
+:root[data-ds="a"] {
+  --background: var(--ds-c-bg);
+  --foreground: var(--ds-c-text);
+  --surface: var(--ds-c-surface);
+  --surface-muted: var(--ds-c-surface-2);
+  --border: var(--ds-c-line);
+  --accent: var(--ds-c-accent);
+  --accent-text: var(--ds-c-accent-text);
+  --accent-foreground: var(--ds-c-on-accent);
+  --muted-foreground: var(--ds-c-text-2);
+  --ds-radius: var(--ds-ctl-radius);
+}
+
+:root.dark[data-ds="a"] {
+  --dk-0: var(--ds-c-bg);
+  --dk-1: var(--ds-c-surface);
+  --dk-2: var(--ds-c-surface-2);
+  --dk-3: #20262e;
+  --dk-line: var(--ds-c-line);
+  --dk-line-strong: var(--ds-c-line-strong);
+  --dk-text-faint: var(--ds-c-text-3);
+  --dk-focus: var(--ds-c-focus);
+}
+
+@supports (color: oklch(0 0 0)) {
+  :root.dark[data-ds="a"] {
+    --dk-3: oklch(0.2662 0.0173 255.7);
+  }
+}
+
+/* Osnovni fokus za sve što modul ne definiše drugačije. */
+:where([data-ds="a"]) :focus-visible {
+  outline: 2px solid var(--ds-c-focus);
+  outline-offset: 2px;
+}
+
+/* Sistem A: dugmad se ne pomeraju i ne podižu (ni „magnetno” za kursorom, ni na prelaz,
+   fokus ili pritisak) i nemaju sjaj koji prati kursor. Promena stanja je boja. */
+[data-ds="a"] .cs-magnetic-cta,
+[data-ds="a"] .cs-magnetic-cta[data-pointer-active="true"],
+[data-ds="a"] .cs-magnetic-cta:hover,
+[data-ds="a"] .cs-magnetic-cta:focus-visible,
+[data-ds="a"] .cs-magnetic-cta:active {
+  transform: none;
+}
+
+[data-ds="a"] .cs-magnetic-cta::before {
+  content: none;
 }

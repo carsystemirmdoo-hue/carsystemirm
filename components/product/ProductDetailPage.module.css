@@ -1,57 +1,29 @@
+/* Sistem A: lokalna paleta starijih PDP šablona vezana je za zajedničke tokene
+   (tokeni sami prelaze u tamnu temu, pa posebni .dark / svetli blokovi nisu potrebni). */
 .pageShell {
-  --product-red: oklch(0.58 0.22 27);
-  --product-red-bright: oklch(0.67 0.22 27);
-  --product-amber: oklch(0.74 0.11 76);
-  --product-steel: oklch(0.55 0.075 245);
-  --product-green: oklch(0.66 0.12 154);
-  --product-bg: oklch(0.13 0.014 250);
-  --product-bg-soft: oklch(0.095 0.012 250);
-  --product-panel: oklch(0.18 0.016 250 / 0.88);
-  --product-panel-strong: oklch(0.23 0.018 250 / 0.92);
-  --product-ink: oklch(0.96 0.007 250);
-  --product-muted: oklch(0.76 0.022 250);
-  --product-faint: oklch(0.62 0.02 250);
-  --product-border: oklch(0.93 0.01 250 / 0.16);
-  --product-border-soft: oklch(0.93 0.01 250 / 0.08);
-  --product-shadow: 0 20px 52px oklch(0.04 0.01 250 / 0.34);
-  --product-radius: 12px;
+  --product-red: var(--ds-c-accent);
+  --product-red-bright: var(--ds-c-accent-text);
+  --product-amber: var(--ds-c-warn);
+  --product-steel: var(--ds-c-info);
+  --product-green: var(--ds-c-ok);
+  --product-bg: var(--ds-c-bg);
+  --product-bg-soft: var(--ds-c-bg);
+  --product-panel: var(--ds-c-surface);
+  --product-panel-strong: var(--ds-c-surface-2);
+  --product-ink: var(--ds-c-text);
+  --product-muted: var(--ds-c-text-2);
+  --product-faint: var(--ds-c-text-3);
+  --product-border: var(--ds-c-line);
+  --product-border-soft: var(--ds-c-line);
+  --product-shadow: none;
+  --product-radius: var(--ds-ctl-radius);
   min-height: 100vh;
   overflow-x: clip;
-  background:
-    radial-gradient(circle at 88% 0%, oklch(0.58 0.16 27 / 0.14), transparent 28rem),
-    radial-gradient(circle at 8% 34%, oklch(0.55 0.075 245 / 0.13), transparent 24rem),
-    linear-gradient(180deg, var(--product-bg), var(--product-bg-soft));
+  background: var(--ds-c-bg);
   color: var(--product-ink);
   font-family: var(--font-body), var(--font-geist-sans), system-ui, sans-serif;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
-}
-
-:global(.dark) .pageShell {
-  /* Nivoi iz globalne tamne skale (app/globals.css → --dk-*). */
-  --product-bg: var(--dk-0);
-  --product-bg-soft: oklch(0.13 0.008 255);
-  --product-panel: var(--dk-1);
-  --product-panel-strong: var(--dk-2);
-  --product-ink: var(--foreground);
-  --product-muted: var(--muted-foreground);
-  --product-faint: var(--dk-text-faint);
-  --product-border: var(--dk-line);
-  --product-border-soft: oklch(0.94 0.008 255 / 0.07);
-  --product-shadow: 0 28px 78px oklch(0.05 0.006 255 / 0.5);
-}
-
-:global(html:not(.dark)) .pageShell {
-  --product-bg: oklch(0.94 0.01 250);
-  --product-bg-soft: oklch(0.88 0.014 250);
-  --product-panel: oklch(0.985 0.004 250 / 0.9);
-  --product-panel-strong: oklch(0.94 0.01 250 / 0.94);
-  --product-ink: oklch(0.18 0.018 250);
-  --product-muted: oklch(0.44 0.026 250);
-  --product-faint: oklch(0.5 0.026 250);
-  --product-border: oklch(0.3 0.02 250 / 0.14);
-  --product-border-soft: oklch(0.3 0.02 250 / 0.08);
-  --product-shadow: 0 22px 64px oklch(0.22 0.025 250 / 0.14);
 }
 
 .pageShell a {
@@ -92,15 +64,15 @@
   height: 42px;
   place-items: center;
   border: 1px solid var(--product-border);
-  border-radius: 12px;
+  border-radius: var(--ds-ctl-radius);
   background:
     linear-gradient(145deg, oklch(0.98 0.004 250 / 0.96), oklch(0.88 0.012 250 / 0.68));
-  color: oklch(0.56 0.22 27);
+  color: var(--ds-c-accent-text);
   font-family: var(--font-display), var(--font-geist-sans), system-ui, sans-serif;
   font-size: 14px;
-  font-weight: 900;
+  font-weight: 700;
   letter-spacing: 0;
-  box-shadow: 0 14px 30px oklch(0.2 0.02 250 / 0.12);
+  box-shadow: none;
 }
 
 .brandCopy {
@@ -123,7 +95,7 @@
 .brandCopy span {
   color: var(--product-faint);
   font-family: var(--font-technical), var(--font-geist-mono), monospace;
-  font-size: 10px;
+  font-size: var(--ds-font-label);
   letter-spacing: 0.14em;
   text-transform: uppercase;
 }
@@ -159,7 +131,7 @@
   align-items: center;
   justify-content: center;
   border: 1px solid var(--product-border);
-  border-radius: 11px;
+  border-radius: var(--ds-ctl-radius);
   background: color-mix(in srgb, var(--product-panel) 86%, transparent);
   color: var(--product-ink);
   padding: 10px 16px;
@@ -237,9 +209,9 @@
   overflow: hidden;
   place-items: center;
   border: 1px solid var(--product-border);
-  border-radius: var(--product-radius);
+  border-radius: var(--ds-ctl-radius);
   background: transparent;
-  box-shadow: 0 16px 40px oklch(0.04 0.01 250 / 0.16);
+  box-shadow: none;
 }
 
 .heroVisualSurface {
@@ -262,13 +234,13 @@
   max-width: calc(100% - 24px);
   overflow: hidden;
   border: 1px solid var(--product-border);
-  border-radius: 8px;
+  border-radius: var(--ds-ctl-radius);
   background: color-mix(in srgb, var(--product-panel) 94%, transparent);
   color: var(--product-ink);
   padding: 6px 9px;
   font-family: var(--font-technical), var(--font-geist-mono), monospace;
-  font-size: 10px;
-  font-weight: 900;
+  font-size: var(--ds-font-label);
+  font-weight: 700;
   letter-spacing: 0.08em;
   line-height: 1.15;
   text-overflow: ellipsis;
@@ -301,8 +273,7 @@
 }
 
 :global(.dark) .heroProductFallback {
-  border-color: var(--dk-line-strong);
-  background-color: var(--dk-2);
+  background: transparent;
   color: var(--muted-foreground);
 }
 
@@ -321,32 +292,31 @@
   align-content: center;
   justify-items: start;
   gap: 7px;
-  border: 1px solid oklch(0.2 0.012 250 / 0.14);
-  border-radius: 12px;
-  background-color: oklch(0.965 0.006 250);
-  color: oklch(0.38 0.016 250);
+  border: 0;
+  background: transparent;
+  color: var(--ds-c-text-2);
   padding: 18px;
 }
 
 .heroProductFallback small {
   font-family: var(--font-technical), var(--font-geist-mono), monospace;
-  font-size: 9px;
-  font-weight: 850;
+  font-size: var(--ds-font-label);
+  font-weight: 700;
   letter-spacing: 0.14em;
   text-transform: uppercase;
 }
 
 .heroProductFallback strong {
-  color: oklch(0.19 0.014 250);
+  color: var(--ds-c-text);
   font-size: 18px;
-  font-weight: 950;
+  font-weight: 700;
   line-height: 1;
 }
 
 .heroProductFallback span {
-  color: oklch(0.38 0.016 250);
+  color: var(--ds-c-text-2);
   font-size: 12px;
-  font-weight: 750;
+  font-weight: 700;
   line-height: 1.28;
 }
 
@@ -392,24 +362,20 @@
   min-height: clamp(250px, 28vw, 360px);
   align-content: center;
   gap: 10px;
-  border: 1px solid oklch(0.25 0.015 250 / 0.16);
-  border-radius: 14px;
-  background:
-    linear-gradient(to right, oklch(0.72 0.012 250 / 0.22) 1px, transparent 1px),
-    linear-gradient(to bottom, oklch(0.72 0.012 250 / 0.18) 1px, transparent 1px),
-    linear-gradient(180deg, oklch(0.93 0.006 250), oklch(0.78 0.012 250));
-  background-size: 28px 28px, 28px 28px, auto;
-  color: oklch(0.2 0.018 250);
+  border: 1px solid var(--ds-c-line);
+  border-radius: var(--ds-ctl-radius);
+  background: var(--surface-studio);
+  color: var(--ds-c-text);
   padding: clamp(22px, 4vw, 42px);
-  box-shadow: 0 18px 42px oklch(0.04 0.01 250 / 0.18);
+  box-shadow: none;
   text-align: center;
 }
 
 .productShotType,
 .productShot em {
-  color: oklch(0.42 0.02 250);
+  color: var(--ds-c-text-2);
   font-family: var(--font-technical), var(--font-geist-mono), monospace;
-  font-size: 11px;
+  font-size: var(--ds-font-label);
   font-style: normal;
   font-weight: 800;
   letter-spacing: 0.16em;
@@ -417,18 +383,18 @@
 }
 
 .productShot strong {
-  color: oklch(0.18 0.018 250);
+  color: var(--ds-c-text);
   font-size: clamp(24px, 4vw, 40px);
-  font-weight: 900;
+  font-weight: 700;
   text-transform: uppercase;
 }
 
 .productShot span:not(.productShotType) {
   max-width: 28ch;
   margin-inline: auto;
-  color: oklch(0.26 0.02 250);
+  color: var(--ds-c-text);
   font-size: clamp(16px, 2vw, 22px);
-  font-weight: 850;
+  font-weight: 700;
   line-height: 1.14;
 }
 
@@ -444,7 +410,7 @@
   min-height: 112px;
   overflow: hidden;
   border: 1px solid var(--product-border);
-  border-radius: 14px;
+  border-radius: var(--ds-ctl-radius);
   background:
     radial-gradient(circle at 50% 35%, oklch(0.78 0.03 250 / 0.42), transparent 7rem),
     var(--product-panel);
@@ -468,7 +434,7 @@
   place-items: center;
   color: var(--product-faint);
   font-family: var(--font-technical), var(--font-geist-mono), monospace;
-  font-size: 11px;
+  font-size: var(--ds-font-label);
   letter-spacing: 0.12em;
   text-transform: uppercase;
 }
@@ -496,7 +462,7 @@
   color: var(--product-muted);
   padding: 6px 10px;
   font-family: var(--font-technical), var(--font-geist-mono), monospace;
-  font-size: 10.5px;
+  font-size: var(--ds-font-label);
   font-weight: 800;
   letter-spacing: 0.1em;
   text-transform: uppercase;
@@ -508,7 +474,7 @@
   color: var(--product-ink);
   font-family: var(--font-display), var(--font-geist-sans), system-ui, sans-serif;
   font-size: clamp(38px, 4.1vw, 58px);
-  font-weight: 900;
+  font-weight: 700;
   letter-spacing: 0;
   line-height: 0.98;
   text-transform: uppercase;
@@ -558,7 +524,7 @@
   align-items: center;
   margin-top: 20px;
   border: 1px solid oklch(0.58 0.22 27 / 0.34);
-  border-radius: 10px;
+  border-radius: var(--ds-ctl-radius);
   background: oklch(0.58 0.22 27 / 0.11);
   color: var(--product-ink);
   padding: 9px 11px;
@@ -567,7 +533,7 @@
 .statusLine span {
   color: var(--product-faint);
   font-family: var(--font-technical), var(--font-geist-mono), monospace;
-  font-size: 10px;
+  font-size: var(--ds-font-label);
   font-weight: 800;
   letter-spacing: 0.14em;
   text-transform: uppercase;
@@ -576,7 +542,7 @@
 .statusLine strong {
   color: var(--product-red-bright);
   font-size: 14px;
-  font-weight: 900;
+  font-weight: 700;
 }
 
 .metaGrid {
@@ -586,7 +552,7 @@
   overflow: hidden;
   margin-top: 22px;
   border: 1px solid var(--product-border);
-  border-radius: 12px;
+  border-radius: var(--ds-ctl-radius);
 }
 
 .metaItem {
@@ -610,7 +576,7 @@
   margin-bottom: 7px;
   color: var(--product-faint);
   font-family: var(--font-technical), var(--font-geist-mono), monospace;
-  font-size: 10px;
+  font-size: var(--ds-font-label);
   font-weight: 700;
   letter-spacing: 0.16em;
   text-transform: uppercase;
@@ -637,10 +603,10 @@
   min-height: 48px;
   align-items: center;
   justify-content: center;
-  border-radius: 13px;
+  border-radius: var(--ds-ctl-radius);
   padding: 14px 18px;
   font-size: 14px;
-  font-weight: 900;
+  font-weight: 700;
   transition:
     transform 160ms ease,
     border-color 160ms ease,
@@ -670,7 +636,7 @@
 .relatedPrimaryAction:hover,
 .relatedDetailLink:hover,
 .documentAction:hover {
-  transform: translateY(-1px);
+  transform: none;
 }
 
 .contentStack {
@@ -686,7 +652,7 @@
 
 .inquiryCard {
   border: 1px solid var(--product-border);
-  border-radius: var(--product-radius);
+  border-radius: var(--ds-ctl-radius);
   background: color-mix(in srgb, var(--product-panel) 82%, transparent);
   padding: 18px;
 }
@@ -695,7 +661,7 @@
   margin: 0 0 10px;
   color: var(--product-faint);
   font-family: var(--font-technical), var(--font-geist-mono), monospace;
-  font-size: 10px;
+  font-size: var(--ds-font-label);
   font-weight: 800;
   letter-spacing: 0.16em;
   text-transform: uppercase;
@@ -706,7 +672,7 @@
   color: var(--product-ink);
   font-family: var(--font-display), var(--font-geist-sans), system-ui, sans-serif;
   font-size: 20px;
-  font-weight: 900;
+  font-weight: 700;
   letter-spacing: 0;
   line-height: 1.12;
 }
@@ -724,7 +690,7 @@
   overflow: hidden;
   margin: 16px 0 0;
   border: 1px solid var(--product-border-soft);
-  border-radius: 10px;
+  border-radius: var(--ds-ctl-radius);
 }
 
 .inquiryFacts div {
@@ -740,7 +706,7 @@
 .inquiryFacts dt {
   color: var(--product-faint);
   font-family: var(--font-technical), var(--font-geist-mono), monospace;
-  font-size: 9.5px;
+  font-size: var(--ds-font-label);
   font-weight: 800;
   letter-spacing: 0.14em;
   text-transform: uppercase;
@@ -750,12 +716,12 @@
   margin: 0;
   color: var(--product-ink);
   font-size: 13px;
-  font-weight: 850;
+  font-weight: 700;
 }
 
 .inquiryFacts a {
   color: var(--product-ink);
-  font-weight: 950;
+  font-weight: 700;
 }
 
 .inquiryActions {
@@ -765,44 +731,24 @@
 }
 
 .referenceZone {
-  --product-panel: oklch(0.93 0.012 250);
-  --product-panel-strong: oklch(0.88 0.014 250);
-  --product-reference-grid: oklch(0.46 0.012 250 / 0.12);
-  --product-reference-panel-grid: oklch(0.46 0.012 250 / 0.08);
-  --product-ink: oklch(0.2 0.018 250);
-  --product-muted: oklch(0.43 0.026 250);
-  --product-faint: oklch(0.56 0.026 250);
-  --product-border: oklch(0.28 0.02 250 / 0.16);
-  --product-border-soft: oklch(0.28 0.02 250 / 0.09);
+  --product-panel: var(--ds-c-surface);
+  --product-panel-strong: var(--ds-c-surface-2);
+  --product-ink: var(--ds-c-text);
+  --product-muted: var(--ds-c-text-2);
+  --product-faint: var(--ds-c-text-3);
+  --product-border: var(--ds-c-line);
+  --product-border-soft: var(--ds-c-line);
   margin-inline: calc(clamp(16px, 4vw, 48px) * -1);
-  border-top: 1px solid oklch(0.3 0.02 250 / 0.1);
-  border-radius: 18px 18px 0 0;
-  background:
-    linear-gradient(to right, var(--product-reference-grid) 1px, transparent 1px),
-    linear-gradient(to bottom, var(--product-reference-grid) 1px, transparent 1px),
-    radial-gradient(circle at 88% 0%, oklch(0.58 0.22 27 / 0.08), transparent 24rem),
-    linear-gradient(180deg, oklch(0.91 0.012 250), oklch(0.86 0.016 250));
-  background-size: 44px 44px, 44px 44px, auto;
+  border-top: 1px solid var(--ds-c-line);
+  border-radius: var(--ds-ctl-radius);
+  background: var(--ds-c-surface-2);
   color: var(--product-ink);
   padding: clamp(28px, 5vw, 60px) clamp(16px, 4vw, 48px) 0;
 }
 
 :global(.dark) .referenceZone {
-  --product-panel: var(--dk-1);
-  --product-panel-strong: var(--dk-2);
-  --product-reference-grid: oklch(0.8 0.01 255 / 0.07);
-  --product-reference-panel-grid: oklch(0.8 0.01 255 / 0.05);
-  --product-ink: var(--foreground);
-  --product-muted: var(--muted-foreground);
-  --product-faint: var(--dk-text-faint);
-  --product-border: var(--dk-line);
-  --product-border-soft: oklch(0.94 0.008 255 / 0.07);
-  border-top-color: var(--dk-line);
-  background:
-    linear-gradient(to right, var(--product-reference-grid) 1px, transparent 1px),
-    linear-gradient(to bottom, var(--product-reference-grid) 1px, transparent 1px),
-    radial-gradient(circle at 88% 0%, oklch(0.58 0.22 27 / 0.09), transparent 24rem),
-    linear-gradient(180deg, var(--dk-1), var(--dk-0));
+  border-top-color: var(--ds-c-line);
+  background: var(--ds-c-surface-2);
 }
 
 .referenceHeader {
@@ -823,7 +769,7 @@
   color: var(--product-ink);
   font-family: var(--font-display), var(--font-geist-sans), system-ui, sans-serif;
   font-size: clamp(28px, 3vw, 42px);
-  font-weight: 900;
+  font-weight: 700;
   letter-spacing: 0;
   line-height: 1.05;
 }
@@ -844,7 +790,7 @@
   margin: 0;
   color: var(--product-red-bright);
   font-family: var(--font-technical), var(--font-geist-mono), monospace;
-  font-size: 11px;
+  font-size: var(--ds-font-label);
   font-weight: 800;
   letter-spacing: 0.18em;
   text-transform: uppercase;
@@ -855,7 +801,7 @@
   color: var(--product-ink);
   font-family: var(--font-display), var(--font-geist-sans), system-ui, sans-serif;
   font-size: clamp(28px, 3vw, 42px);
-  font-weight: 900;
+  font-weight: 700;
   letter-spacing: 0;
   line-height: 1;
 }
@@ -873,12 +819,8 @@
   grid-template-columns: repeat(2, minmax(0, 1fr));
   overflow: hidden;
   border: 1px solid var(--product-border);
-  border-radius: 12px;
-  background:
-    linear-gradient(to right, var(--product-reference-panel-grid) 1px, transparent 1px),
-    linear-gradient(to bottom, var(--product-reference-panel-grid) 1px, transparent 1px),
-    var(--product-panel);
-  background-size: 28px 28px, 28px 28px, auto;
+  border-radius: var(--ds-ctl-radius);
+  background: var(--product-panel);
 }
 
 .referenceDetailGrid {
@@ -891,12 +833,8 @@
 .referenceCopyPanel,
 .referenceFactPanel {
   border: 1px solid var(--product-border);
-  border-radius: 12px;
-  background:
-    linear-gradient(to right, var(--product-reference-panel-grid) 1px, transparent 1px),
-    linear-gradient(to bottom, var(--product-reference-panel-grid) 1px, transparent 1px),
-    var(--product-panel);
-  background-size: 28px 28px, 28px 28px, auto;
+  border-radius: var(--ds-ctl-radius);
+  background: var(--product-panel);
 }
 
 .referenceCopyPanel {
@@ -909,7 +847,7 @@
 .referenceCopyPanel strong {
   color: var(--product-ink);
   font-size: 14px;
-  font-weight: 950;
+  font-weight: 700;
 }
 
 .referenceCopyPanel p {
@@ -945,8 +883,8 @@
   border-right: 1px solid var(--product-border-soft);
   color: var(--product-faint);
   font-family: var(--font-technical), var(--font-geist-mono), monospace;
-  font-size: 10px;
-  font-weight: 850;
+  font-size: var(--ds-font-label);
+  font-weight: 700;
   letter-spacing: 0.12em;
   text-transform: uppercase;
 }
@@ -955,7 +893,7 @@
   margin: 0;
   color: var(--product-ink);
   font-size: 14px;
-  font-weight: 850;
+  font-weight: 700;
   line-height: 1.35;
 }
 
@@ -984,8 +922,8 @@
   color: var(--product-muted);
   padding: 13px 12px;
   font-family: var(--font-technical), var(--font-geist-mono), monospace;
-  font-size: 10.5px;
-  font-weight: 850;
+  font-size: var(--ds-font-label);
+  font-weight: 700;
   letter-spacing: 0.12em;
   text-transform: uppercase;
 }
@@ -1001,7 +939,7 @@
 .specRow strong {
   color: var(--product-ink);
   font-size: 14.5px;
-  font-weight: 850;
+  font-weight: 700;
   line-height: 1.38;
 }
 
@@ -1016,11 +954,7 @@
 .phaseItem,
 .trustItem {
   border: 1px solid var(--product-border);
-  background:
-    linear-gradient(to right, var(--product-reference-panel-grid) 1px, transparent 1px),
-    linear-gradient(to bottom, var(--product-reference-panel-grid) 1px, transparent 1px),
-    var(--product-panel);
-  background-size: 28px 28px, 28px 28px, auto;
+  background: var(--product-panel);
 }
 
 .documentDisabled {
@@ -1031,12 +965,8 @@
   display: grid;
   overflow: hidden;
   border: 1px solid var(--product-border);
-  border-radius: 12px;
-  background:
-    linear-gradient(to right, var(--product-reference-panel-grid) 1px, transparent 1px),
-    linear-gradient(to bottom, var(--product-reference-panel-grid) 1px, transparent 1px),
-    var(--product-panel);
-  background-size: 28px 28px, 28px 28px, auto;
+  border-radius: var(--ds-ctl-radius);
+  background: var(--product-panel);
 }
 
 .documentRow {
@@ -1059,12 +989,12 @@
   min-height: 30px;
   align-items: center;
   justify-content: center;
-  border-radius: 8px;
+  border-radius: var(--ds-ctl-radius);
   background: oklch(0.55 0.075 245 / 0.12);
-  color: oklch(0.42 0.07 245);
+  color: var(--ds-c-text-2);
   padding: 6px 8px;
   font-family: var(--font-technical), var(--font-geist-mono), monospace;
-  font-size: 10px;
+  font-size: var(--ds-font-label);
   font-weight: 800;
   letter-spacing: 0.12em;
   text-transform: uppercase;
@@ -1078,7 +1008,7 @@
   margin: 0;
   color: var(--product-ink);
   font-size: 15px;
-  font-weight: 900;
+  font-weight: 700;
   line-height: 1.25;
 }
 
@@ -1092,7 +1022,7 @@
 .documentStatus {
   color: var(--product-muted);
   font-family: var(--font-technical), var(--font-geist-mono), monospace;
-  font-size: 11px;
+  font-size: var(--ds-font-label);
   font-weight: 800;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -1104,12 +1034,12 @@
   align-items: center;
   justify-content: center;
   border: 1px solid var(--product-border);
-  border-radius: 9px;
+  border-radius: var(--ds-ctl-radius);
   background: var(--product-panel-strong);
   color: var(--product-ink);
   padding: 9px 10px;
   font-size: 13px;
-  font-weight: 900;
+  font-weight: 700;
   transition:
     transform 160ms ease,
     border-color 160ms ease;
@@ -1120,12 +1050,12 @@
   min-height: 36px;
   align-items: center;
   justify-content: center;
-  border-radius: 9px;
+  border-radius: var(--ds-ctl-radius);
   background: var(--product-panel-strong);
   color: var(--product-faint);
   padding: 9px 10px;
   font-size: 13px;
-  font-weight: 850;
+  font-weight: 700;
 }
 
 .processRail {
@@ -1169,14 +1099,14 @@
   background: var(--product-panel-strong);
   color: var(--product-faint);
   font-family: var(--font-technical), var(--font-geist-mono), monospace;
-  font-size: 11px;
-  font-weight: 900;
+  font-size: var(--ds-font-label);
+  font-weight: 700;
 }
 
 .processRailItem strong {
   color: currentColor;
   font-size: 14px;
-  font-weight: 950;
+  font-weight: 700;
   line-height: 1.1;
 }
 
@@ -1196,7 +1126,7 @@
   border-color: oklch(0.58 0.22 27 / 0.44);
   background: var(--product-red);
   color: oklch(0.985 0.004 250);
-  box-shadow: 0 0 0 7px oklch(0.58 0.22 27 / 0.16);
+  box-shadow: none;
 }
 
 .processTrack {
@@ -1216,7 +1146,7 @@
   align-items: center;
   min-width: 0;
   overflow: hidden;
-  border-radius: 12px;
+  border-radius: var(--ds-ctl-radius);
   padding: 12px;
 }
 
@@ -1247,12 +1177,12 @@
   width: 30px;
   height: 30px;
   place-items: center;
-  border-radius: 9px;
+  border-radius: var(--ds-ctl-radius);
   background: var(--product-panel-strong);
   color: var(--product-faint);
   font-family: var(--font-technical), var(--font-geist-mono), monospace;
-  font-size: 11px;
-  font-weight: 900;
+  font-size: var(--ds-font-label);
+  font-weight: 700;
 }
 
 .phaseActive .phaseIndex {
@@ -1264,7 +1194,7 @@
   margin: 0;
   color: var(--product-ink);
   font-size: 15px;
-  font-weight: 900;
+  font-weight: 700;
 }
 
 .phaseDescription {
@@ -1289,7 +1219,7 @@
   display: grid;
   min-width: 0;
   overflow: hidden;
-  border-radius: 12px;
+  border-radius: var(--ds-ctl-radius);
   transition:
     border-color 160ms ease,
     background 160ms ease;
@@ -1311,7 +1241,7 @@
 .relatedMeta {
   color: var(--product-faint);
   font-family: var(--font-technical), var(--font-geist-mono), monospace;
-  font-size: 10px;
+  font-size: var(--ds-font-label);
   font-weight: 800;
   letter-spacing: 0.13em;
   text-transform: uppercase;
@@ -1321,7 +1251,7 @@
   margin: 0;
   color: var(--product-ink);
   font-size: 17px;
-  font-weight: 900;
+  font-weight: 700;
   line-height: 1.18;
 }
 
@@ -1345,7 +1275,7 @@
   grid-template-columns: 1fr;
   overflow: hidden;
   border: 1px solid var(--product-border-soft);
-  border-radius: 10px;
+  border-radius: var(--ds-ctl-radius);
 }
 
 .relatedDataGrid span {
@@ -1361,7 +1291,7 @@
 .relatedDataGrid small {
   color: var(--product-faint);
   font-family: var(--font-technical), var(--font-geist-mono), monospace;
-  font-size: 9px;
+  font-size: var(--ds-font-label);
   font-weight: 800;
   letter-spacing: 0.12em;
   text-transform: uppercase;
@@ -1370,7 +1300,7 @@
 .relatedDataGrid strong {
   color: var(--product-ink);
   font-size: 12.5px;
-  font-weight: 850;
+  font-weight: 700;
   line-height: 1.2;
 }
 
@@ -1387,19 +1317,19 @@
   min-height: 40px;
   align-items: center;
   justify-content: center;
-  border-radius: 10px;
+  border-radius: var(--ds-ctl-radius);
   background: var(--product-red);
   color: #fff !important;
   padding: 11px 13px;
   font-size: 13px;
-  font-weight: 900;
+  font-weight: 700;
   transition: transform 160ms ease;
 }
 
 .relatedDetailLink {
   color: var(--product-muted);
   font-size: 13px;
-  font-weight: 900;
+  font-weight: 700;
   transition:
     transform 160ms ease,
     color 160ms ease;
@@ -1421,11 +1351,11 @@
   min-width: 0;
   align-items: center;
   gap: 12px;
-  border-radius: 15px;
+  border-radius: var(--ds-ctl-radius);
   padding: 16px;
   color: var(--product-ink);
   font-size: 14px;
-  font-weight: 900;
+  font-weight: 700;
 }
 
 .trustIcon {
@@ -1434,14 +1364,17 @@
   width: 34px;
   height: 34px;
   place-items: center;
-  border-radius: 11px;
+  border-radius: var(--ds-ctl-radius);
   background: oklch(0.58 0.22 27 / 0.13);
   color: var(--product-red-bright);
   font-family: var(--font-technical), var(--font-geist-mono), monospace;
   font-size: 12px;
-  font-weight: 900;
+  font-weight: 700;
 }
 
+/* Mobilna CTA traka (živa na PDP-u). Renderuje se unutar `.pageShell` drugog
+   modula, pa ne čita `--product-*` promenljive ovog fajla — samo tokene sistema A.
+   Plutajući sloj: ugao 4 px, linija, bez senke; dugme M (44 px), ugao 2 px. */
 .mobileCta {
   position: fixed;
   right: 12px;
@@ -1452,12 +1385,11 @@
   align-items: center;
   justify-content: space-between;
   gap: 12px;
-  border: 1px solid var(--product-border);
-  border-radius: 16px;
-  background: color-mix(in srgb, var(--product-panel) 92%, transparent);
-  padding: 10px;
-  box-shadow: 0 18px 50px oklch(0.05 0.01 250 / 0.32);
-  backdrop-filter: blur(18px);
+  border: 1px solid var(--ds-c-line-strong);
+  border-radius: var(--ds-overlay-radius);
+  background: var(--ds-c-surface);
+  color: var(--ds-c-text);
+  padding: 8px 8px 8px 12px;
   transition:
     transform 220ms cubic-bezier(0.16, 1, 0.3, 1),
     opacity 180ms ease-out;
@@ -1479,40 +1411,49 @@
   display: grid;
   min-width: 0;
   gap: 2px;
-  padding-left: 4px;
 }
 
 .mobileCtaText strong {
   overflow: hidden;
-  color: var(--product-ink);
-  font-size: 13px;
-  font-weight: 900;
+  color: var(--ds-c-text);
+  font-size: var(--ds-font-small);
+  font-weight: 600;
+  line-height: 1.3;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 
 .mobileCtaText span {
-  color: var(--product-faint);
-  font-size: 12px;
-  font-weight: 700;
+  color: var(--ds-c-text-2);
+  font-size: var(--ds-font-label);
+  font-weight: 400;
+  line-height: 1.3;
 }
 
 .mobileCtaButton {
+  display: inline-flex;
   flex: 0 0 auto;
-  min-height: 42px;
-  border-radius: 12px;
-  background: var(--product-red);
-  color: #fff !important;
-  padding: 12px 14px;
-  font-size: 13px;
-  font-weight: 900;
-  transition:
-    transform 220ms cubic-bezier(0.22, 1, 0.36, 1),
-    background 220ms cubic-bezier(0.22, 1, 0.36, 1),
-    background-color 220ms cubic-bezier(0.22, 1, 0.36, 1),
-    border-color 220ms cubic-bezier(0.22, 1, 0.36, 1),
-    box-shadow 220ms cubic-bezier(0.22, 1, 0.36, 1),
-    color 220ms cubic-bezier(0.22, 1, 0.36, 1);
+  min-height: var(--ds-ctl-h-m);
+  align-items: center;
+  border-radius: var(--ds-ctl-radius);
+  background: var(--ds-c-accent);
+  color: var(--ds-c-on-accent) !important;
+  padding: 0 16px;
+  font: var(--ds-ctl-font);
+  transition: background-color 180ms ease-out;
+}
+
+.mobileCtaButton:hover {
+  background: var(--ds-c-accent-hover);
+}
+
+.mobileCtaButton:active {
+  background: var(--ds-c-accent-press);
+}
+
+.mobileCtaButton:focus-visible {
+  outline: 2px solid var(--ds-c-focus);
+  outline-offset: 2px;
 }
 
 @media (max-width: 1180px) {
@@ -1608,7 +1549,7 @@
 
   .stage {
     min-height: clamp(280px, 76vw, 360px);
-    border-radius: 16px;
+    border-radius: var(--ds-ctl-radius);
   }
 
   .heroVisualSurface {

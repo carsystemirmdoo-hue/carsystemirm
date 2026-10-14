@@ -73,6 +73,41 @@
   color-scheme: dark;
 }
 
+/*
+ * Sistem A: lokalna paleta početne vezana je za zajedničke tokene (obe teme).
+ * Izvozna scena (`.exportViewport`, društvene mreže) zadržava staru tamnu
+ * paletu, pa je pravilo ograničeno na stvarnu početnu stranu. `html` u
+ * selektoru drži specifičnost iznad `html:not(.dark) .home`.
+ */
+:global(html) .home:not(.exportViewport) {
+  --red: var(--ds-c-accent);
+  --red-bright: var(--ds-c-accent-text);
+  --red-deep: var(--ds-c-accent-press);
+  --red-grad: var(--ds-c-accent);
+  --bg: var(--ds-c-bg);
+  --bg2: var(--ds-c-surface);
+  --surface: var(--ds-c-surface);
+  --surface-strong: var(--ds-c-surface-2);
+  --border: var(--ds-c-line);
+  --border-soft: var(--ds-c-line);
+  --text: var(--ds-c-text);
+  --text2: var(--ds-c-text-2);
+  --text3: var(--ds-c-text-3);
+  --steel: var(--ds-c-text-2);
+  --steel-bright: var(--ds-c-text-2);
+  --card: var(--ds-c-surface);
+  --hero-base: var(--ds-c-bg);
+  --shadow: none;
+  --brand-pill-bg: none;
+  --brand-pill-border: transparent;
+  --brand-pill-shadow: none;
+}
+
+:global(html) .home:not(.exportViewport) :focus-visible {
+  outline: 2px solid var(--ds-c-focus);
+  outline-offset: 2px;
+}
+
 .home a {
   color: inherit;
   text-decoration: none;
@@ -165,10 +200,20 @@
 
 .primaryCta,
 .locationButton {
-  border: 0;
+  border: 1px solid transparent;
   background: var(--red-grad);
   color: #fff !important;
-  box-shadow: 0 14px 32px oklch(0.52 0.2 27 / 0.35);
+  box-shadow: none;
+}
+
+.primaryCta:hover,
+.locationButton:hover {
+  background: var(--ds-c-accent-hover);
+}
+
+.primaryCta:active,
+.locationButton:active {
+  background: var(--ds-c-accent-press);
 }
 
 .buttonIcon,
@@ -185,7 +230,7 @@
   width: 100%;
   height: 100%;
   stroke: currentColor;
-  stroke-width: 2.2;
+  stroke-width: 1.8;
   stroke-linecap: round;
   stroke-linejoin: round;
 }
@@ -200,22 +245,35 @@
   height: 8px;
   border-radius: 999px;
   background: var(--red);
-  box-shadow: 0 0 10px var(--red);
 }
 
+/* Oznaka sekcije: Plex Mono 12 px, 500, razmak 0,08 em, crvena crtica 24 × 2 px. */
 .sectionKicker {
-  color: var(--red-bright);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--ds-c-accent-text);
   font-family: var(--font-technical), monospace;
-  font-size: 11px;
-  letter-spacing: 0.22em;
+  font-size: var(--ds-font-label);
+  font-weight: 500;
+  letter-spacing: var(--ds-tracking-label);
+  line-height: 1.4;
   text-transform: uppercase;
+}
+
+.sectionKicker::before {
+  width: 24px;
+  height: 2px;
+  flex: none;
+  background: var(--ds-c-accent);
+  content: "";
 }
 
 .section h2,
 .sectionAlt h2,
 .finalContent h2 {
   font-family: var(--font-display), var(--font-geist-sans), system-ui, sans-serif;
-  letter-spacing: 0;
+  letter-spacing: -0.01em;
 }
 
 .ctaRow {
@@ -225,34 +283,44 @@
   margin-top: 30px;
 }
 
+/* Dugmad (Sistem A): visina 52/44, ugao 2 px, Plex Sans 600 15 px, bez
+   podizanja i senke na prelaz mišem. */
 .primaryCta,
 .secondaryCta,
 .secondaryOnDark,
 .locationButton {
   justify-content: center;
-  min-height: 48px;
-  border-radius: 13px;
-  font-size: 15px;
-  font-weight: 700;
+  min-height: var(--ds-ctl-h-l);
+  border-radius: var(--ds-ctl-radius);
+  font: var(--ds-ctl-font);
 }
 
 .primaryCta {
   gap: 10px;
-  padding: 15px 24px;
+  padding: 0 24px;
 }
 
 .secondaryCta {
-  padding: 14px 22px;
-  border: 1px solid var(--border);
-  background: var(--surface);
-  color: var(--text);
+  padding: 0 22px;
+  border: 1px solid var(--ds-c-text);
+  background: transparent;
+  color: var(--ds-c-text);
 }
 
+.secondaryCta:hover {
+  background: var(--ds-c-surface-2);
+}
+
+/* Na fotografiji: beli okvir, providna ispuna. */
 .secondaryOnDark {
-  padding: 14px 22px;
-  border: 1px solid oklch(0.98 0.004 255 / 0.22);
-  background: oklch(0.98 0.004 255 / 0.06);
-  color: oklch(0.94 0.008 255);
+  padding: 0 22px;
+  border: 1px solid #fff;
+  background: transparent;
+  color: #fff;
+}
+
+.secondaryOnDark:hover {
+  background: rgb(255 255 255 / 0.12);
 }
 
 .primaryCta,
@@ -261,19 +329,9 @@
 .locationButton,
 .educationCard {
   transition:
-    transform 220ms cubic-bezier(0.22, 1, 0.36, 1),
-    border-color 220ms cubic-bezier(0.22, 1, 0.36, 1),
-    background 220ms cubic-bezier(0.22, 1, 0.36, 1),
-    background-color 220ms cubic-bezier(0.22, 1, 0.36, 1),
-    box-shadow 220ms cubic-bezier(0.22, 1, 0.36, 1),
-    color 220ms cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.primaryCta:hover,
-.secondaryCta:hover,
-.secondaryOnDark:hover,
-.educationCard:hover {
-  transform: translateY(-3px);
+    border-color 120ms ease,
+    background-color 120ms ease,
+    color 120ms ease;
 }
 
 /*
@@ -284,10 +342,10 @@
   position: relative;
   width: 100%;
   overflow: hidden;
-  border: 1px solid var(--border);
-  border-radius: 14px;
-  background: var(--bg2);
-  box-shadow: var(--shadow);
+  border: 1px solid var(--ds-c-line);
+  border-radius: var(--ds-overlay-radius);
+  background: var(--ds-c-surface);
+  box-shadow: none;
   /* Kartica stoji u hero sekciji koja nosi svetlo kampanjsko mastilo. */
   color: var(--text);
 }
@@ -297,14 +355,18 @@
   display: flex;
   width: 100%;
   align-items: center;
-  gap: 8px;
+  flex-wrap: wrap;
+  gap: 2px 8px;
+  min-height: var(--ds-ctl-h-m);
   padding: 10px 12px;
   border: 0;
   border-bottom: 1px solid var(--border-soft);
   background: none;
   color: inherit;
-  font-size: 13px;
-  font-weight: 700;
+  font-family: var(--font-body), system-ui, sans-serif;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  line-height: 1.25;
   text-align: left;
 }
 
@@ -319,13 +381,33 @@
   flex: 1;
 }
 
+/* Kratka verzija naslova samo za veoma uzak prostor (≤ 359 px). */
+.locatorTitleShort {
+  display: none;
+}
+
+@media (max-width: 22.4375rem) {
+  .locatorTitleFull {
+    display: none;
+  }
+
+  .locatorTitleShort {
+    display: inline;
+  }
+}
+
+/* Grad stoji ispod naslova (ne pored njega), da naslov ostane u jednom redu
+   i u uskoj kartici preko fotografije. */
 .locatorHeader small,
 .locatorToggle small {
-  flex: none;
-  color: var(--text3);
+  flex: 0 0 100%;
+  order: 3;
+  padding-left: 26px;
+  color: var(--ds-c-text-2);
   font-family: var(--font-technical), monospace;
-  font-size: 9px;
-  letter-spacing: 0.14em;
+  font-size: var(--ds-font-label);
+  font-weight: 500;
+  letter-spacing: var(--ds-tracking-label);
   text-transform: uppercase;
 }
 
@@ -338,8 +420,8 @@
   width: 7px;
   height: 7px;
   margin-left: 2px;
-  border-right: 1.5px solid var(--text3);
-  border-bottom: 1.5px solid var(--text3);
+  border-right: 1.5px solid var(--ds-c-text-2);
+  border-bottom: 1.5px solid var(--ds-c-text-2);
   transform: translateY(-2px) rotate(45deg);
   transition: transform 160ms ease;
 }
@@ -350,8 +432,8 @@
 
 .locatorBody {
   display: grid;
-  gap: 9px;
-  padding: 12px 12px 13px;
+  gap: 10px;
+  padding: 12px;
 }
 
 /*
@@ -362,33 +444,32 @@
  */
 @media (min-width: 70.0625rem) {
   .locatorCard {
-    background: color-mix(in oklch, var(--bg2) 88%, transparent);
+    background: color-mix(in oklch, var(--ds-c-surface) 92%, transparent);
   }
 }
 
 .locatorBody .locationButton {
-  min-height: 42px;
-  border-radius: 11px;
-  font-size: 14px;
+  min-height: var(--ds-ctl-h-m);
 }
 
 .locatorBody .storePreview {
   gap: 9px;
-  padding: 9px 10px;
+  padding: 10px;
 }
 
-/* Tip lokacije u pregledu: tiha tehnička oznaka, kao i ranije u kartici. */
+/* Tip lokacije u pregledu: tiha tehnička oznaka. */
 .locatorBody .storePreview header small {
   margin-left: auto;
-  color: var(--text3);
+  color: var(--ds-c-text-2);
   font-family: var(--font-technical), monospace;
-  font-size: 9px;
-  letter-spacing: 0.14em;
+  font-size: var(--ds-font-label);
+  font-weight: 500;
+  letter-spacing: var(--ds-tracking-label);
   text-transform: uppercase;
 }
 
 .locatorBody .locatorStatus {
-  font-size: 11.5px;
+  font-size: var(--ds-font-legal);
 }
 
 /*
@@ -400,26 +481,26 @@
     width: max-content;
     max-width: 100%;
     margin-left: auto;
-    border-radius: 999px;
   }
 
   .locatorCard[data-open] {
     width: min(340px, calc(100vw - 2.5rem));
-    border-radius: 14px;
   }
 
   .locatorHeader,
   .locatorToggle {
     border-bottom: 0;
-    padding: 9px 14px 9px 12px;
-    font-size: 12.5px;
+    padding: 10px 14px 10px 12px;
   }
 
-  /* Pilula ostaje u jednom redu; duži naziv grada skraćuje naslov, ne lomi ga. */
+  /* Zatvoreno: samo pun, kratak naslov bez unapred izabranog grada, u jednom
+     redu. Grad se vidi tek u otvorenoj kartici (polje i pregled prodavnice). */
   .locatorCard:not([data-open]) .locatorTitle {
-    overflow: hidden;
-    text-overflow: ellipsis;
     white-space: nowrap;
+  }
+
+  .locatorCard:not([data-open]) .locatorToggle small {
+    display: none;
   }
 
   .locatorCard[data-open] .locatorToggle {
@@ -441,9 +522,9 @@
   display: flex;
   gap: 11px;
   padding: 12px;
-  border: 1px solid var(--border-soft);
-  border-radius: 11px;
-  background: var(--surface);
+  border: 1px solid var(--ds-c-line);
+  border-radius: var(--ds-ctl-radius);
+  background: var(--ds-c-surface);
 }
 
 .storePreviewList {
@@ -456,7 +537,7 @@
   overflow-y: auto;
   overscroll-behavior: contain;
   padding-right: 4px;
-  scrollbar-color: color-mix(in oklch, var(--text3), transparent 46%) transparent;
+  scrollbar-color: var(--ds-c-line-strong) transparent;
   scrollbar-width: thin;
 }
 
@@ -470,24 +551,39 @@
 
 .storePreviewList::-webkit-scrollbar-thumb {
   border-radius: 999px;
-  background: color-mix(in oklch, var(--text3), transparent 46%);
+  background: var(--ds-c-line-strong);
 }
 
 .storePreviewItem {
+  flex: none;
   overflow: hidden;
-  border: 1px solid var(--border-soft);
-  border-radius: 11px;
-  background: var(--surface);
+  border: 1px solid var(--ds-c-line);
+  border-radius: var(--ds-ctl-radius);
+  background: var(--ds-c-surface);
   transition:
-    border-color 180ms ease,
-    background-color 180ms ease,
-    box-shadow 180ms ease;
+    border-color 120ms ease,
+    background-color 120ms ease;
 }
 
-.storePreviewItem[data-active] {
-  border-color: color-mix(in oklch, var(--red), var(--border) 34%);
-  background: color-mix(in oklch, var(--surface-strong), var(--red) 6%);
-  box-shadow: 0 0 0 1px color-mix(in oklch, var(--red), transparent 82%);
+.storePreviewItem:hover {
+  border-color: var(--ds-c-line-strong);
+}
+
+/* Izabrana prodavnica: 2 px crveni okvir na mekoj podlozi (Sistem A).
+   Unutrašnji razmak se smanjuje za 1 px da sadržaj ne poskoči. */
+.storePreviewItem[data-active],
+.storePreviewItem[data-active]:hover {
+  border: 2px solid var(--ds-c-accent);
+  background: var(--ds-c-accent-soft);
+  box-shadow: none;
+}
+
+.storePreviewItem[data-active] .storePreviewSelect {
+  padding: 11px;
+}
+
+.storePreviewItem[data-active] .storePreviewPhone {
+  margin: 0 11px 10px 34px;
 }
 
 .storePreviewSelect {
@@ -498,8 +594,13 @@
   background: transparent;
   color: inherit;
   cursor: pointer;
+  font: inherit;
   padding: 12px;
   text-align: left;
+}
+
+.storePreviewSelect:focus-visible {
+  outline-offset: -4px;
 }
 
 .storePreviewContent {
@@ -517,37 +618,49 @@
 }
 
 .storePreviewHeading strong {
-  color: var(--text);
-  font-size: 13.5px;
+  color: var(--ds-c-text);
+  font-size: var(--ds-font-card-title);
+  font-weight: 600;
+  line-height: 1.3;
 }
 
 .storePreviewHeading small {
-  color: var(--red-bright);
+  flex: none;
+  color: var(--ds-c-text-2);
   font-family: var(--font-technical), monospace;
-  font-size: 9px;
-  line-height: 1.25;
+  font-size: var(--ds-font-label);
+  font-weight: 500;
+  letter-spacing: var(--ds-tracking-label);
+  line-height: 1.3;
   text-align: right;
+  text-transform: uppercase;
 }
 
 .storePreviewContent > span:not(.storePreviewHeading) {
-  color: var(--text3);
-  font-size: 11.5px;
-  line-height: 1.4;
+  color: var(--ds-c-text-2);
+  font-size: var(--ds-font-small);
+  line-height: 1.45;
 }
 
 .storePreviewPhone {
   display: block;
+  width: fit-content;
   margin: 0 12px 11px 35px;
-  color: var(--text2) !important;
+  color: var(--ds-c-text) !important;
   font-family: var(--font-technical), monospace;
-  font-size: 10.5px;
+  font-size: var(--ds-font-code);
+  font-weight: 500;
   line-height: 1.4;
   overflow-wrap: anywhere;
+  text-decoration: underline !important;
+  text-decoration-color: var(--ds-c-line-strong) !important;
+  text-underline-offset: 3px;
 }
 
 .storePreviewPhone:hover,
 .storePreviewPhone:focus-visible {
-  color: var(--red-bright) !important;
+  text-decoration-color: var(--ds-c-text) !important;
+  text-decoration-thickness: 2px;
 }
 
 .storePreview > div {
@@ -564,29 +677,43 @@
 }
 
 .storePreview strong {
-  color: var(--text);
-  font-size: 13.5px;
+  color: var(--ds-c-text);
+  font-size: var(--ds-font-card-title);
+  font-weight: 600;
+  line-height: 1.3;
 }
 
 .storePreview small {
-  color: var(--red-bright);
+  color: var(--ds-c-text-2);
   font-family: var(--font-technical), monospace;
+  font-size: var(--ds-font-label);
+  font-weight: 500;
+  letter-spacing: var(--ds-tracking-label);
+  text-transform: uppercase;
   white-space: nowrap;
 }
 
 .storePreview p,
-.storePreview span,
-.locatorStatus {
+.storePreview span {
   margin: 0;
-  color: var(--text3);
-  font-size: 12px;
+  color: var(--ds-c-text-2);
+  font-size: var(--ds-font-small);
   line-height: 1.45;
 }
 
+.locatorStatus {
+  margin: 0;
+  color: var(--ds-c-text-2);
+  font-size: var(--ds-font-legal);
+  line-height: 1.45;
+}
+
+/* Tačka statusa je krug po značenju; bez sjaja. */
 .availableDot {
-  margin-top: 5px;
-  background: oklch(0.68 0.17 145);
-  box-shadow: 0 0 8px oklch(0.68 0.17 145);
+  flex: none;
+  margin-top: 7px;
+  background: var(--ds-c-ok);
+  box-shadow: none;
 }
 
 .mobileLocator {
@@ -597,11 +724,12 @@
   left: 12px;
   z-index: 90;
   gap: 12px;
-  padding: 13px 16px;
-  border-radius: 14px;
-  background: var(--red-grad);
-  box-shadow: 0 16px 38px oklch(0.52 0.2 27 / 0.5);
-  color: #fff !important;
+  min-height: var(--ds-ctl-h-l);
+  padding: 10px 16px;
+  border-radius: var(--ds-overlay-radius);
+  background: var(--ds-c-accent);
+  box-shadow: none;
+  color: var(--ds-c-on-accent) !important;
   opacity: 0;
   pointer-events: none;
   transform: translate3d(0, calc(100% + 24px), 0);
@@ -629,12 +757,22 @@
   display: block;
 }
 
+.mobileLocator strong {
+  font: var(--ds-ctl-font);
+}
+
 .mobileLocator small {
   margin-top: 2px;
-  color: oklch(0.99 0.004 255 / 0.82);
+  color: var(--ds-c-on-accent);
   font-family: var(--font-technical), monospace;
-  font-size: 10.5px;
-  letter-spacing: 0.06em;
+  font-size: var(--ds-font-label);
+  font-weight: 500;
+  letter-spacing: 0.02em;
+}
+
+.mobileLocator:focus-visible {
+  outline: 2px solid var(--ds-c-focus);
+  outline-offset: 2px;
 }
 
 .trustStrip {
@@ -655,31 +793,47 @@
   flex: 0 0 auto;
   max-width: 170px;
   margin: 0;
-  color: var(--text2);
+  color: var(--ds-c-text-2);
   font-family: var(--font-technical), monospace;
-  font-size: 10px;
-  letter-spacing: 0.18em;
+  font-size: var(--ds-font-label);
+  font-weight: 500;
+  letter-spacing: var(--ds-tracking-label);
   line-height: 1.5;
   text-transform: uppercase;
 }
 
+/* Devet brendova iz menija staje u jedan red od 1024 px naviše; ispod toga
+   mreža 3 × 3 (bez skrivenog vodoravnog skrola). */
 .brandRail {
   display: flex;
   min-width: 0;
   flex: 1;
-  gap: 12px;
-  overflow-x: auto;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
   padding-block: 2px;
-  scrollbar-width: none;
+}
+
+@media (max-width: 74.9375rem) {
+  .trustInner {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .brandRail {
+    width: 100%;
+  }
 }
 
 .brandRailLink,
 .brandRailMonoLink,
 .brandRailStatic {
   display: grid;
-  flex: 0 0 auto;
+  flex: 1 1 0;
   min-width: 0;
-  border-radius: 14px;
+  max-width: 150px;
+  border-radius: var(--ds-ctl-radius);
 }
 
 /*
@@ -688,22 +842,17 @@
   fokus tastaturom nose diskretnu liniju u istoj boji, opacity ostaje 1.
 */
 .brandRailMonoLink {
-  color: var(--text2);
+  color: var(--ds-c-text-2);
   outline: none;
 }
 
-.brandRailMonoLink .brandLogoPlate {
-  transition: transform 180ms ease;
-}
-
-.brandRailMonoLink:hover .brandLogoPlate {
-  transform: translateY(-1px);
+.brandRailMonoLink:hover {
+  color: var(--ds-c-text);
 }
 
 .brandRailMonoLink:focus-visible {
-  /* `.home a { color: inherit }` nadjačava boju linka, zato eksplicitno `--text2`. */
-  outline: 1px solid var(--text2);
-  outline-offset: 3px;
+  outline: 2px solid var(--ds-c-focus);
+  outline-offset: 2px;
 }
 
 /* Složeni selektor: mora da nadjača `.brandLogoPlate` koji stoji niže u fajlu. */
@@ -711,7 +860,19 @@
   border-color: transparent;
   background: none;
   box-shadow: none;
-  color: var(--text2);
+  color: inherit;
+}
+
+/* Brend bez odobrenog jednobojnog znaka (Befar, Yachtcare): naziv u istoj
+   boji i optičkoj visini kao znakovi, bez pločice i bez oznake „u najavi”. */
+.brandLogoWordmark {
+  display: block;
+  font-family: var(--font-display), var(--font-geist-sans), system-ui, sans-serif;
+  font-size: 1.125rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  line-height: 1;
+  white-space: nowrap;
 }
 
 .brandLogoPlateMono::after {
@@ -775,10 +936,10 @@
 }
 
 .brandRailLogo {
-  width: clamp(118px, 9vw, 150px);
-  height: 62px;
+  width: 100%;
+  height: 56px;
   flex: 0 0 auto;
-  padding: 9px 14px;
+  padding: 8px 6px;
 }
 
 .headerLogoPlate {
@@ -881,10 +1042,10 @@
 }
 
 .categorySection {
-  --product-category-ink: var(--text);
-  --product-category-border: var(--border);
-  --product-category-accent: var(--red);
-  --product-category-accent-ink: oklch(0.99 0.003 255);
+  --product-category-ink: var(--ds-c-text);
+  --product-category-border: var(--ds-c-line);
+  --product-category-accent: var(--ds-c-accent);
+  --product-category-accent-ink: var(--ds-c-on-accent);
   border-block: 1px solid var(--border-soft);
   background: var(--bg2);
   padding-block: clamp(64px, 7vw, 104px);
@@ -909,19 +1070,20 @@
 
 .categorySectionHeader h2 {
   margin: 0 0 14px;
-  color: var(--text);
-  font-size: clamp(30px, 3.6vw, 48px);
-  font-weight: 800;
-  letter-spacing: -0.025em;
-  line-height: 1.04;
+  color: var(--ds-c-text);
+  font-family: var(--font-display), var(--font-geist-sans), system-ui, sans-serif;
+  font-size: var(--ds-font-h2);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  line-height: 1.1;
 }
 
 .categorySectionHeader p {
   max-width: 580px;
   margin: 0;
-  color: var(--text2);
-  font-size: 15.5px;
-  line-height: 1.62;
+  color: var(--ds-c-text-2);
+  font-size: var(--ds-font-lead);
+  line-height: 1.55;
 }
 
 .categorySectionActions {
@@ -934,37 +1096,35 @@
 }
 
 .categorySection .categoryCatalogCta {
-  min-height: 46px;
-  color: var(--accent-foreground);
+  min-height: var(--ds-ctl-h-m);
+  border-radius: var(--ds-ctl-radius);
+  color: var(--ds-c-on-accent);
+  font: var(--ds-ctl-font);
   white-space: nowrap;
 }
 
+/* Sekundarno dugme: okvir boje teksta, bez ispune. */
 .categorySearchLink {
   display: inline-flex;
-  min-height: 46px;
+  min-height: var(--ds-ctl-h-m);
   align-items: center;
   justify-content: center;
   gap: 9px;
-  border: 1px solid var(--border);
-  border-radius: 999px;
+  border: 1px solid var(--ds-c-text);
+  border-radius: var(--ds-ctl-radius);
   /* Kontrola je `button` (otvara panel pretrage), pa nosi i reset dugmeta. */
   background: transparent;
-  color: var(--text);
-  font-family: inherit;
-  font-size: 14px;
-  font-weight: 700;
-  padding: 0 18px;
+  color: var(--ds-c-text);
+  font: var(--ds-ctl-font);
+  padding: 0 20px;
   cursor: pointer;
-  transition:
-    border-color 190ms var(--cs-ease-polish),
-    background-color 190ms var(--cs-ease-polish),
-    color 190ms var(--cs-ease-polish);
+  transition: background-color 120ms ease;
 }
 
 .categorySearchLink svg {
   width: 17px;
   height: 17px;
-  color: var(--red-bright);
+  color: currentColor;
 }
 
 .categorySearchLink svg * {
@@ -974,10 +1134,8 @@
   stroke-linejoin: round;
 }
 
-.categorySearchLink:hover,
-.categorySearchLink:focus-visible {
-  border-color: color-mix(in oklch, var(--red) 58%, var(--border));
-  background: color-mix(in oklch, var(--red) 8%, transparent);
+.categorySearchLink:hover {
+  background: var(--ds-c-surface-2);
 }
 
 .sectionIntro,
@@ -1005,20 +1163,20 @@
 .section h2,
 .sectionAlt h2 {
   margin: 0 0 14px;
-  color: var(--text);
-  font-size: clamp(28px, 3.6vw, 46px);
-  font-weight: 800;
-  line-height: 1.04;
+  color: var(--ds-c-text);
+  font-size: var(--ds-font-h2);
+  font-weight: 700;
+  line-height: 1.1;
 }
 
 .sectionIntro p:last-child,
-.sectionHeader p,
+.sectionHeader p:not(.sectionKicker):not(.statContext),
 .sectionLead {
   max-width: 560px;
   margin: 0;
-  color: var(--text2);
-  font-size: 15.5px;
-  line-height: 1.62;
+  color: var(--ds-c-text-2);
+  font-size: var(--ds-font-lead);
+  line-height: 1.55;
 }
 
 .statPills {
@@ -1028,10 +1186,9 @@
   align-self: stretch;
   align-items: center;
   column-gap: clamp(24px, 4vw, 56px);
-  color: var(--text3);
+  color: var(--ds-c-text-2);
   font-family: var(--font-technical), monospace;
   text-align: center;
-  text-transform: uppercase;
 }
 
 .statPills > span {
@@ -1044,45 +1201,51 @@
 }
 
 .statPills > span > strong {
-  color: var(--text);
+  color: var(--ds-c-text);
   font-family: var(--font-display), var(--font-geist-sans), system-ui, sans-serif;
-  font-size: clamp(46px, 5.2vw, 72px);
-  font-weight: 900;
-  letter-spacing: 0;
-  line-height: 0.85;
+  font-size: clamp(44px, 4.6vw, 64px);
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  line-height: 1;
 }
 
 .statPills > span > small {
-  color: var(--text3);
-  font-size: 10px;
-  font-weight: 850;
-  letter-spacing: 0.13em;
+  color: var(--ds-c-text-2);
+  font-size: var(--ds-font-label);
+  font-weight: 500;
+  letter-spacing: var(--ds-tracking-label);
   line-height: 1.3;
+  text-transform: uppercase;
   text-wrap: balance;
 }
 
+/* Napomena o izvoru podataka: rečenica, ne verzal; jedan red na širokom
+   ekranu, dve stavke jedna ispod druge na uskom. */
 .statContext {
   display: flex;
   grid-column: 1 / -1;
-  align-items: center;
+  flex-wrap: wrap;
+  align-items: baseline;
   justify-content: center;
-  gap: 0.65em;
-  margin: -4px 0 0;
-  color: var(--text3);
-  font-size: 9.5px;
-  font-weight: 800;
-  letter-spacing: 0.14em;
-  line-height: 1.35;
+  gap: 4px 0.5em;
+  margin: 0;
+  color: var(--ds-c-text-2);
+  font-family: var(--font-body), system-ui, sans-serif;
+  font-size: var(--ds-font-legal);
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: 1.45;
+  text-align: center;
 }
 
 .statContext strong {
-  color: var(--text2);
-  font: inherit;
+  color: var(--ds-c-text);
+  font-weight: 600;
 }
 
 .statContext span::before {
-  margin-right: 0.65em;
-  color: var(--red-bright);
+  margin-right: 0.5em;
+  color: var(--ds-c-text-3);
   content: "·";
 }
 
@@ -1104,7 +1267,7 @@
 .contactPanel,
 .contactMap {
   border: 1px solid var(--border);
-  border-radius: 20px;
+  border-radius: var(--ds-ctl-radius);
   background: var(--card);
   box-shadow: var(--shadow);
 }
@@ -1135,20 +1298,6 @@
 /* Tamna tema: kartica prodavnice u lokatoru stoji na svetlijem, crvenkastom
    tonu (izabrana stavka + gradijent kartice). Adresa u --text3 je tu davala
    3.58:1, a tip lokacije u --red-bright 3.67:1. */
-:global(html.dark) .storePreviewItem .storePreviewContent > span:not(.storePreviewHeading) {
-  color: var(--text2);
-}
-
-:global(html.dark) .storePreviewItem .storePreviewHeading small {
-  color: oklch(0.76 0.15 27);
-}
-
-/* Svetla tema: tip lokacije u pregledu prodavnice je sitan crveni tekst na svetloplavoj
-   kartici — --red-bright (namenjen tamnoj podlozi) je tu davao 2.4:1. */
-:global(html:not(.dark)) .storePreview small,
-:global(html:not(.dark)) .storePreviewHeading small {
-  color: oklch(0.5 0.2 27);
-}
 
 :global(.dark) .locatorPanel {
   --cs-orb-core: oklch(0.68 0.22 27);
@@ -1158,12 +1307,12 @@
   --cs-orb-ring-strong: oklch(0.98 0.004 250 / 0.58);
 }
 
+/* Oznaka polja: Plex Sans 600 14 px iznad polja. */
 .fieldLabel {
-  color: var(--text3);
-  font-family: var(--font-technical), monospace;
-  font-size: 10.5px;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
+  color: var(--ds-c-text);
+  font-family: var(--font-body), system-ui, sans-serif;
+  font-size: var(--ds-font-small);
+  font-weight: 600;
 }
 
 .mapPanel,
@@ -1171,8 +1320,8 @@
   position: relative;
   overflow: hidden;
   min-height: 420px;
-  border-color: color-mix(in oklch, var(--border), var(--red) 18%);
-  background: var(--bg);
+  border-color: var(--ds-c-line);
+  background: var(--ds-c-surface);
 }
 
 .mapPanel {
@@ -1186,8 +1335,8 @@
    */
   border-width: 1px;
   border-style: solid;
-  border-radius: 20px;
-  box-shadow: var(--shadow);
+  border-radius: var(--ds-ctl-radius);
+  box-shadow: none;
 }
 
 .contactMap .contactMapCanvas {
@@ -1211,23 +1360,20 @@
   place-content: center;
   gap: 8px;
   padding: 24px;
-  background:
-    linear-gradient(var(--border-soft) 1px, transparent 1px),
-    linear-gradient(90deg, var(--border-soft) 1px, transparent 1px),
-    var(--bg);
-  background-size: 34px 34px;
-  color: var(--text);
+  /* Sistem A: ravna površina umesto mreže. */
+  background: var(--ds-c-surface-2);
+  color: var(--ds-c-text);
   text-align: center;
 }
 
 .homeMapFallback strong {
-  font-size: 15px;
-  font-weight: 850;
+  font-size: var(--ds-font-body);
+  font-weight: 600;
 }
 
 .homeMapFallback span {
-  color: var(--text3);
-  font-size: 13px;
+  color: var(--ds-c-text-2);
+  font-size: var(--ds-font-small);
   line-height: 1.45;
 }
 
@@ -2334,9 +2480,9 @@
   max-width: 860px;
   margin: 0;
   color: var(--support-ink);
-  font-size: clamp(32px, 3.45vw, 52px);
-  letter-spacing: -0.025em;
-  line-height: 0.98;
+  font-size: var(--ds-font-h2);
+  letter-spacing: -0.01em;
+  line-height: 1.1;
 }
 
 .supportStatement .sectionLead {
@@ -2345,7 +2491,7 @@
 }
 
 .supportContactCta {
-  --split-accent: #c2160f;
+  --split-accent: var(--ds-c-accent);
   --split-border: var(--lc-line);
   --split-ink: var(--support-ink);
   --split-panel: transparent;
@@ -2377,16 +2523,17 @@
 .supportMetricStrip small {
   color: var(--support-muted);
   font-family: var(--font-technical), monospace;
-  font-size: 10px;
-  letter-spacing: 0.16em;
+  font-size: var(--ds-font-label);
+  font-weight: 500;
+  letter-spacing: var(--ds-tracking-label);
   text-transform: uppercase;
 }
 
 .supportMetricStrip strong {
   overflow-wrap: anywhere;
   color: var(--support-ink);
-  font-size: clamp(15px, 1.4vw, 18px);
-  font-weight: 900;
+  font-size: var(--ds-font-card-title);
+  font-weight: 600;
 }
 
 .supportServiceGrid {
@@ -2413,22 +2560,24 @@
 }
 
 .supportServiceGrid article > span {
-  width: 30px;
-  height: 3px;
-  background: #c51e2a;
+  width: 24px;
+  height: 2px;
+  background: var(--ds-c-accent);
 }
 
 .supportServiceGrid strong {
   color: var(--support-ink);
   font-family: var(--font-display), sans-serif;
-  font-size: clamp(17px, 1.4vw, 20px);
-  font-weight: 900;
+  font-size: var(--ds-font-h3);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  line-height: 1.2;
 }
 
 .supportServiceGrid p {
   margin: 0;
   color: var(--support-muted);
-  font-size: 13.5px;
+  font-size: var(--ds-font-small);
   line-height: 1.55;
 }
 
@@ -2544,16 +2693,17 @@
   margin: 0;
   color: var(--text);
   font-family: var(--font-display), sans-serif;
-  font-size: clamp(34px, 5vw, 58px);
-  font-weight: 900;
-  line-height: 0.96;
-  text-transform: uppercase;
+  font-size: var(--ds-font-h2);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  line-height: 1.1;
+  text-transform: none;
 }
 
 .educationIntro p:not(.sectionKicker) {
   margin: 0;
-  color: var(--text3);
-  font-size: 15px;
+  color: var(--ds-c-text-2);
+  font-size: var(--ds-font-body);
   line-height: 1.6;
 }
 
@@ -2569,7 +2719,7 @@
 .educationIndexRow {
   position: relative;
   display: grid;
-  grid-template-columns: 78px minmax(78px, 0.32fr) minmax(0, 1fr) 66px 28px;
+  grid-template-columns: 64px minmax(96px, 0.28fr) minmax(0, 1fr) 28px;
   gap: 14px;
   align-items: center;
   min-width: 0;
@@ -2589,8 +2739,8 @@
   left: clamp(16px, 2.4vw, 24px);
   z-index: 0;
   height: 2px;
-  border-radius: 999px;
-  background: linear-gradient(90deg, var(--red-bright), oklch(0.82 0.045 250 / 0.86));
+  border-radius: 0;
+  background: var(--ds-c-accent);
   content: "";
   transform: scaleX(0);
   transform-origin: left center;
@@ -2609,7 +2759,11 @@
 .educationIndexRow[data-pointer-active="true"],
 .educationIndexRow:hover,
 .educationIndexRow:focus-visible {
-  background: color-mix(in oklch, var(--red), transparent 93%);
+  background: var(--ds-c-surface);
+}
+
+.educationIndexRow:focus-visible {
+  outline-offset: -2px;
 }
 
 .educationIndexRow[data-pointer-active="true"]::after,
@@ -2619,52 +2773,42 @@
 }
 
 .educationIndex {
-  color: var(--text3);
-  font-family: var(--font-display), sans-serif;
-  font-size: clamp(30px, 4vw, 48px);
-  font-weight: 900;
-  line-height: 0.9;
+  color: var(--ds-c-text-3);
+  font-family: var(--font-technical), monospace;
+  font-size: var(--ds-font-code);
+  font-weight: 500;
+  line-height: 1.2;
 }
 
 .educationIndexRow small {
-  color: var(--red-bright);
+  color: var(--ds-c-text-2);
   font-family: var(--font-technical), monospace;
-  font-size: 10px;
-  letter-spacing: 0.14em;
+  font-size: var(--ds-font-label);
+  font-weight: 500;
+  letter-spacing: var(--ds-tracking-label);
   text-transform: uppercase;
 }
 
 .educationIndexRow strong {
-  overflow: hidden;
   color: var(--text);
-  font-family: var(--font-display), sans-serif;
-  font-size: clamp(17px, 1.9vw, 23px);
-  line-height: 1.1;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-.educationIndexRow em {
-  color: var(--text3);
-  font-family: var(--font-technical), monospace;
-  font-size: 11px;
-  font-style: normal;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  font-family: var(--font-body), sans-serif;
+  font-size: var(--ds-font-card-title);
+  font-weight: 600;
+  line-height: 1.35;
+  text-wrap: pretty;
 }
 
 .educationIndexRow b {
-  color: var(--text3);
-  font-size: 21px;
+  color: var(--ds-c-text-2);
+  font-size: 1.125rem;
+  font-weight: 400;
   line-height: 1;
 }
 
 .textLink {
-  color: var(--steel-bright);
-  font-family: var(--font-technical), monospace;
-  font-size: 12px;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  color: var(--ds-c-text);
+  font-size: var(--ds-font-small);
+  font-weight: 600;
 }
 
 .contactGrid {
@@ -2684,24 +2828,36 @@
 .contactRows span {
   display: grid;
   gap: 3px;
-  color: var(--text2);
+  color: var(--ds-c-text-2);
+  font-size: var(--ds-font-body);
 }
 
 .contactRows a {
-  color: var(--text);
-  font-size: 17px;
-  font-weight: 900;
+  width: fit-content;
+  color: var(--ds-c-text);
+  font-size: 1.0625rem;
+  font-weight: 600;
+  text-decoration: underline !important;
+  text-decoration-color: var(--ds-c-line-strong) !important;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 4px;
+}
+
+.contactRows a:hover {
+  text-decoration-color: var(--ds-c-text) !important;
+  text-decoration-thickness: 2px;
 }
 
 .contactRows small {
-  color: var(--text3);
-  font-size: 12px;
+  color: var(--ds-c-text-2);
+  font-size: var(--ds-font-legal);
   line-height: 1.45;
 }
 
 .contactRows b {
-  color: var(--text);
-  font-size: 14.5px;
+  color: var(--ds-c-text);
+  font-size: var(--ds-font-small);
+  font-weight: 600;
 }
 
 .centerPin {
@@ -2758,26 +2914,34 @@
   margin: 0 0 18px;
   color: oklch(0.78 0.16 27);
   font-family: var(--font-technical), monospace;
-  font-size: 11px;
-  letter-spacing: 0.24em;
+  font-size: var(--ds-font-label);
+  font-weight: 500;
+  letter-spacing: var(--ds-tracking-label);
   text-transform: uppercase;
 }
 
+/* Uvek tamna površina sa fotografijom: naslov sekcije, rečenica (ne verzal). */
 .finalContent h2 {
   margin: 0 auto 18px;
-  font-size: clamp(32px, 5vw, 60px);
-  font-weight: 900;
-  line-height: 1.02;
-  text-transform: uppercase;
+  font-size: clamp(2rem, 1.3rem + 2.4vw, 3.25rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.05;
+  text-transform: none;
+  text-wrap: balance;
 }
 
 .finalContent > span {
   display: block;
   max-width: 590px;
   margin-inline: auto;
-  color: oklch(0.77 0.018 255);
-  font-size: clamp(15px, 1.6vw, 18px);
-  line-height: 1.6;
+  color: oklch(0.86 0.012 255);
+  font-size: var(--ds-font-lead);
+  line-height: 1.55;
+}
+
+.finalContent :focus-visible {
+  outline-color: #fff !important;
 }
 
 .finalActions {
@@ -2788,59 +2952,19 @@
   margin-top: 32px;
 }
 
+/* Na fotografiji: primarno dugme je belo sa tamnim tekstom (Sistem A). */
 .finalPrimaryCta {
-  --wipe-bg: oklch(0.965 0.006 255);
-  --wipe-fg: oklch(0.14 0.012 255);
+  border-color: #fff;
+  background: #fff;
+  color: #0e1114 !important;
 }
 
-:global(.dark) .finalPrimaryCta {
-  --wipe-bg: oklch(0.965 0.006 255);
-  --wipe-fg: oklch(0.14 0.012 255);
-}
-
-.finalPrimaryCta[data-pointer-active="true"],
-.finalPrimaryCta:hover,
-.finalPrimaryCta:focus-visible,
-.finalPrimaryCta:focus-within {
-  box-shadow: 0 10px 26px oklch(0.52 0.2 27 / 0.18);
-}
-
-.finalPrimaryCta:focus-visible {
-  outline: 2px solid oklch(0.99 0.003 255);
-  outline-offset: 4px;
+.finalPrimaryCta:hover {
+  background: #e7eaed;
 }
 
 .finalPrimaryCta:active {
-  --wipe-bg: oklch(0.9 0.008 255);
-  box-shadow: 0 7px 18px oklch(0.52 0.2 27 / 0.14);
-  color: var(--wipe-fg) !important;
-  transform: translate3d(var(--motion-shift-x), var(--motion-shift-y), 0) scale(0.985);
-}
-
-.finalPrimaryCta:active::after {
-  opacity: 1;
-  transform: translate3d(-50%, -50%, 0) scale(1);
-}
-
-.finalPrimaryCta:active span {
-  color: var(--wipe-fg) !important;
-}
-
-@media (hover: none), (pointer: coarse) {
-  .finalPrimaryCta:not(:active):not(:focus-visible) {
-    box-shadow: 0 14px 32px oklch(0.52 0.2 27 / 0.35);
-    color: #fff !important;
-    transform: none;
-  }
-
-  .finalPrimaryCta:not(:active):not(:focus-visible)::after {
-    opacity: 0;
-    transform: translate3d(-50%, -50%, 0) scale(0.16);
-  }
-
-  .finalPrimaryCta:not(:active):not(:focus-visible) span {
-    color: #fff !important;
-  }
+  background: #d5d9de;
 }
 
 @media (max-width: 860px) {
@@ -2878,11 +3002,16 @@
   }
 
   .brandRail {
+    display: grid;
     width: 100%;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 4px 12px;
   }
 
-  .brandRailLogo {
-    width: 136px;
+  .brandRailLink,
+  .brandRailMonoLink,
+  .brandRailStatic {
+    max-width: none;
   }
 
   .sectionHeader {
@@ -2978,16 +3107,13 @@
     font-size: clamp(38px, 14vw, 54px);
   }
 
-  .statPills > span > small {
-    font-size: 9px;
-    letter-spacing: 0.09em;
+  .statContext {
+    flex-direction: column;
+    align-items: center;
   }
 
-  .statContext {
-    gap: 0.5em;
-    margin-top: 0;
-    font-size: 8.5px;
-    letter-spacing: 0.1em;
+  .statContext span::before {
+    content: none;
   }
 
   .mapPanel,
@@ -3021,18 +3147,18 @@
   }
 
   .educationIndexRow {
-    grid-template-columns: 48px minmax(0, 1fr) 24px;
-    gap: 7px 12px;
+    grid-template-columns: 32px minmax(0, 1fr) 24px;
+    gap: 6px 12px;
     padding: 16px;
   }
 
   .educationIndex {
-    grid-row: 1 / span 3;
+    grid-row: 1 / span 2;
+    align-self: start;
   }
 
   .educationIndexRow small,
-  .educationIndexRow strong,
-  .educationIndexRow em {
+  .educationIndexRow strong {
     grid-column: 2;
   }
 
@@ -3042,16 +3168,11 @@
 
   .educationIndexRow strong {
     grid-row: 2;
-    white-space: normal;
-  }
-
-  .educationIndexRow em {
-    grid-row: 3;
   }
 
   .educationIndexRow b {
     grid-column: 3;
-    grid-row: 1 / span 3;
+    grid-row: 1 / span 2;
     align-self: center;
   }
 
@@ -3576,14 +3697,15 @@
  * zarobljena u uskoj koloni sadrzaja.
  */
 .chapterAfter {
-  --lc-surface: #f3f1ec;
-  --lc-surface-alt: #ece8dd;
-  --lc-panel: #eae6db;
-  --lc-ink: #15161a;
-  --lc-muted: #5b5d63;
-  /* #9a9c9f je davao 2.3:1 (nadnaslovi, trajanje vodiča). */
-  --lc-kicker: #686b70;
-  --lc-line: rgb(0 0 0 / 0.1);
+  /* Sistem A: površine i mastilo poglavlja vezani su za zajedničke tokene
+     (obe teme), umesto krem palete iz ranijeg dizajna. */
+  --lc-surface: var(--ds-c-bg);
+  --lc-surface-alt: var(--ds-c-surface-2);
+  --lc-panel: var(--ds-c-scene-b);
+  --lc-ink: var(--ds-c-text);
+  --lc-muted: var(--ds-c-text-2);
+  --lc-kicker: var(--ds-c-text-2);
+  --lc-line: var(--ds-c-line);
   position: relative;
   isolation: isolate;
   background-image: none;
@@ -3613,14 +3735,8 @@
  * povrsina umesto da svetle vrednosti probiju kroz tamnu temu.
  */
 :global(html.dark) .chapterAfter {
-  --lc-surface: #101218;
-  --lc-surface-alt: #0c0e13;
   /* Svetliji od povrsine: proizvod na slici je skoro crn i inace propadne. */
-  --lc-panel: #262a34;
-  --lc-ink: #f2f0ea;
-  --lc-muted: #a2a6ae;
-  --lc-kicker: #9296a0;
-  --lc-line: rgb(255 255 255 / 0.1);
+  --lc-panel: var(--ds-c-scene-a);
 }
 
 /*
@@ -3628,20 +3744,10 @@
  * 1:1 iz dizajna. Ovo je jedini element koji nosi prelaz — sekcije ispod su
  * ravne povrsine.
  */
+/* Prelaz iz uvek tamnog repa takeovera (#0a0b0e) u pozadinu stranice. */
 .chapterTransition {
   height: 150px;
-  background: linear-gradient(
-    180deg,
-    #0a0b0e 0%,
-    #171814 18%,
-    #5c5a4e 50%,
-    #dcd8cc 82%,
-    #f3f1ec 100%
-  );
-}
-
-:global(html.dark) .chapterTransition {
-  background: linear-gradient(180deg, #0a0b0e 0%, #0c0e13 46%, #101218 100%);
+  background: linear-gradient(180deg, #0a0b0e 0%, var(--ds-c-bg) 100%);
 }
 
 @media (max-width: 720px) {
@@ -3679,7 +3785,6 @@
   }
 
   .brandRail {
-    justify-content: space-between;
     gap: clamp(12px, 1vw, 24px);
   }
 
@@ -3687,11 +3792,6 @@
   .brandRailMonoLink,
   .brandRailStatic {
     max-width: 190px;
-    flex: 1 1 0;
-  }
-
-  .brandRailLogo {
-    width: 100%;
   }
 
   .categorySection,
@@ -3761,20 +3861,21 @@
   filter: drop-shadow(0 20px 26px rgb(0 0 0 / 0.14));
 }
 
+/* Natpis je rečenica (5 reči), pa nije u verzalu. */
 .supportVisual figcaption {
   position: absolute;
-  top: 20px;
-  left: 20px;
-  color: #64665b;
+  top: 16px;
+  left: 16px;
+  color: var(--ds-c-text-2);
   font-family: var(--font-technical), monospace;
-  font-size: 9.5px;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
+  font-size: var(--ds-font-label);
+  font-weight: 500;
+  letter-spacing: 0.02em;
 }
 
 :global(html.dark) .supportVisual figcaption {
-  /* --lc-kicker (#9296a0) je na sivoj sceni slike bio ispod 4.5:1. */
-  color: #c3c7cf;
+  /* Na svetlijoj sivoj sceni iza proizvoda (tamna tema). */
+  color: #eef0f3;
 }
 
 /*
@@ -3819,16 +3920,13 @@
  */
 .chapterAfter .educationIntro h2 {
   color: var(--lc-ink);
-  font-size: clamp(26px, 2.5vw, 34px);
-  line-height: 1.1;
   /* Dizajn ima recenicni slog, ne verzal. */
   text-transform: none;
 }
 
 .chapterAfter .educationIntro p:not(.sectionKicker) {
-  max-width: 34ch;
+  max-width: 40ch;
   color: var(--lc-muted);
-  font-size: 14.5px;
 }
 
 .chapterAfter .educationIndexRows {
@@ -3857,8 +3955,7 @@
   color: var(--lc-ink);
 }
 
-.chapterAfter .educationIndexRow small,
-.chapterAfter .educationIndexRow em {
+.chapterAfter .educationIndexRow small {
   color: var(--lc-kicker);
 }
 
@@ -3872,9 +3969,9 @@
 }
 
 .chapterAfter .contactMap {
-  border: 0;
-  border-radius: 0;
-  background: var(--lc-panel);
+  border: 1px solid var(--lc-line);
+  border-radius: var(--ds-ctl-radius);
+  background: var(--ds-c-surface-2);
 }
 
 .chapterAfter .contactRows {
@@ -3885,44 +3982,33 @@
   color: var(--lc-ink);
 }
 
-.chapterAfter .sectionKicker {
-  color: var(--lc-kicker);
-}
-
 /*
- * Dizajn: crveni link u recenicnom slogu sa strelicom, ne mono verzal.
- * Skupirano na Light Commerce poglavlje — isti .textLink se koristi drugde.
+ * Tekstualna veza (Sistem A): boja teksta, podvlaka 1 px, na miš 2 px;
+ * strelica → jer vodi na unutrašnju stranicu.
  */
 .chapterAfter .textLink {
   display: inline-flex;
+  width: fit-content;
   align-items: center;
   gap: 8px;
-  color: #c2160f;
+  color: var(--ds-c-text);
   font-family: var(--font-body), sans-serif;
-  font-size: 13.5px;
-  font-weight: 700;
+  font-size: var(--ds-font-small);
+  font-weight: 600;
   letter-spacing: 0;
+  text-decoration: underline !important;
+  text-decoration-color: var(--ds-c-line-strong) !important;
+  text-decoration-thickness: 1px;
   text-transform: none;
+  text-underline-offset: 4px;
 }
 
 .chapterAfter .textLink::after {
   content: "→";
   font-size: 14px;
-  transition: transform 220ms var(--cs-ease-polish);
 }
 
 .chapterAfter .textLink:hover {
-  color: #951009;
-}
-
-.chapterAfter .textLink:hover::after {
-  transform: translateX(3px);
-}
-
-:global(html.dark) .chapterAfter .textLink {
-  color: #ff6b62;
-}
-
-:global(html.dark) .chapterAfter .textLink:hover {
-  color: #ff9a94;
+  text-decoration-color: var(--ds-c-text) !important;
+  text-decoration-thickness: 2px;
 }

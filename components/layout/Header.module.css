@@ -47,9 +47,26 @@
     var(--border),
     rgb(244 241 235 / 0.2) var(--chapter-mix)
   );
+  /* Sistem A: jača linija kontrola i crveni tekst prate isti paint signal. */
+  --header-border-strong: color-mix(
+    in oklab,
+    var(--ds-c-line-strong),
+    rgb(244 241 235 / 0.36) var(--chapter-mix)
+  );
   --header-red: var(--accent);
+  --header-red-hover: var(--ds-c-accent-hover);
+  --header-red-text: color-mix(
+    in oklab,
+    var(--ds-c-accent-text),
+    #ff6b66 var(--chapter-mix)
+  );
   --header-red-ink: var(--accent-foreground);
   --header-red-soft: color-mix(in oklch, var(--accent) 11%, transparent);
+  --header-focus: color-mix(
+    in oklab,
+    var(--ds-c-focus),
+    #ff958a var(--chapter-mix)
+  );
   --header-hover: color-mix(
     in oklab,
     color-mix(in oklch, var(--surface-muted) 76%, transparent),
@@ -112,7 +129,10 @@
   --header-ink: oklch(0.95 0.01 225);
   --header-muted: oklch(0.72 0.03 225);
   --header-border: oklch(0.47 0.055 220 / 0.34);
+  --header-border-strong: oklch(0.6 0.05 220 / 0.6);
   --header-hover: oklch(0.76 0.08 212 / 0.08);
+  --header-red-text: #ff6b66;
+  --header-focus: #ff958a;
 }
 
 :global(html[data-rm-atmosphere="agilis"]) .header {
@@ -122,7 +142,10 @@
   --header-ink: oklch(0.18 0.012 72);
   --header-muted: oklch(0.47 0.025 72);
   --header-border: oklch(0.75 0.025 76 / 0.58);
+  --header-border-strong: oklch(0.6 0.03 76 / 0.8);
   --header-hover: oklch(0.86 0.035 78 / 0.62);
+  --header-red-text: var(--ds-c-accent-text);
+  --header-focus: var(--ds-c-focus);
 }
 
 .header[data-scroll-hidden],
@@ -292,9 +315,9 @@
   margin-left: clamp(0.65rem, 1.2vw, 1rem);
   color: var(--header-muted);
   font-family: var(--font-technical), monospace;
-  font-size: 0.64rem;
-  font-weight: 600;
-  letter-spacing: 0.12em;
+  font-size: var(--ds-font-label);
+  font-weight: 500;
+  letter-spacing: var(--ds-tracking-label);
   line-height: 1.45;
   text-transform: uppercase;
   white-space: nowrap;
@@ -352,13 +375,14 @@
   justify-content: center;
   gap: 0.4rem;
   border: 0;
-  border-radius: 0.5rem;
+  border-radius: var(--ds-ctl-radius);
   background: transparent;
   color: var(--header-muted);
   cursor: pointer;
   font: inherit;
-  font-size: 0.84rem;
-  font-weight: 650;
+  font-family: var(--font-body), system-ui, sans-serif;
+  font-size: 0.9375rem;
+  font-weight: 500;
   padding: 0 0.62rem;
   text-decoration: none;
   white-space: nowrap;
@@ -374,7 +398,7 @@
   bottom: 0.24rem;
   left: 0.62rem;
   height: 2px;
-  border-radius: 99px;
+  border-radius: 0;
   background: var(--header-red);
   content: "";
   opacity: 0;
@@ -401,8 +425,20 @@
 .navLink[data-active]::after,
 .navTrigger[data-active]::after,
 .navItem[data-open] .navTrigger::after {
-  opacity: 0.82;
+  opacity: 1;
   transform: scaleX(1);
+}
+
+/* Aktivna stavka: Plex Sans 600 + puna crvena linija 2 px. Prelaz mišem
+   samo pojačava boju teksta i pokazuje liniju. */
+.navLink[data-active],
+.navTrigger[data-active] {
+  font-weight: 600;
+}
+
+.navLink:hover:not([data-active])::after,
+.navTrigger:hover:not([data-active])::after {
+  opacity: 0.5;
 }
 
 .chevron {
@@ -439,12 +475,12 @@
 .mobileClose,
 .panelClose {
   display: inline-grid;
-  width: 2.65rem;
-  height: 2.65rem;
+  width: 2.5rem;
+  height: 2.5rem;
   flex: 0 0 auto;
   place-items: center;
-  border: 1px solid var(--header-border);
-  border-radius: 50%;
+  border: 1px solid var(--header-border-strong);
+  border-radius: var(--ds-ctl-radius);
   background: transparent;
   color: var(--header-ink);
   cursor: pointer;
@@ -452,8 +488,7 @@
   transition:
     background-color 190ms var(--header-ease),
     border-color 190ms var(--header-ease),
-    color 190ms var(--header-ease),
-    transform 190ms var(--header-ease);
+    color 190ms var(--header-ease);
 }
 
 .iconAction:hover,
@@ -461,13 +496,9 @@
 .mobileToggle:hover,
 .mobileClose:hover,
 .panelClose:hover {
-  border-color: color-mix(
-    in oklch,
-    var(--header-red) 42%,
-    var(--header-border)
-  );
+  border-color: var(--header-ink);
   background: var(--header-hover);
-  color: var(--header-red);
+  color: var(--header-ink);
 }
 
 .searchIcon {
@@ -492,27 +523,29 @@
 
 .contactCta {
   display: none;
-  min-height: 2.65rem;
+  min-height: var(--ds-ctl-h-m);
   align-items: center;
   justify-content: center;
   border: 1px solid var(--header-red);
-  border-radius: 0.5rem;
+  border-radius: var(--ds-ctl-radius);
   background: var(--header-red);
   color: var(--header-red-ink) !important;
-  font-size: 0.85rem;
-  font-weight: 800;
-  padding: 0 1rem;
+  font: var(--ds-ctl-font);
+  padding: 0 1.125rem;
   text-decoration: none;
   transition:
     background-color 190ms var(--header-ease),
-    box-shadow 190ms var(--header-ease),
-    transform 190ms var(--header-ease);
+    border-color 190ms var(--header-ease);
 }
 
 .contactCta:hover {
-  box-shadow: 0 0.65rem 1.5rem
-    color-mix(in oklch, var(--header-red) 24%, transparent);
-  transform: translateY(-1px);
+  border-color: var(--header-red-hover);
+  background: var(--header-red-hover);
+}
+
+.contactCta:active {
+  border-color: var(--ds-c-accent-press);
+  background: var(--ds-c-accent-press);
 }
 
 .mobileToggle {
@@ -698,7 +731,7 @@
   border: 1px solid
     color-mix(in oklch, var(--header-border) 86%, var(--header-ink) 14%);
   border-top-color: var(--header-border);
-  border-radius: 0 0 0.85rem 0.85rem;
+  border-radius: 0 0 var(--ds-overlay-radius) var(--ds-overlay-radius);
   background: var(--header-panel);
   box-shadow: var(--header-shadow);
   clip-path: inset(0 0 100% 0);
@@ -801,12 +834,12 @@
 .panelHeading p,
 .supportHeading p,
 .mobileKicker {
-  color: var(--header-red);
+  color: var(--header-red-text);
   font-family: var(--font-technical), var(--font-body), monospace;
-  font-size: 0.65rem;
-  font-weight: 650;
-  letter-spacing: 0.1em;
-  line-height: 1;
+  font-size: var(--ds-font-label);
+  font-weight: 500;
+  letter-spacing: var(--ds-tracking-label);
+  line-height: 1.2;
   text-transform: uppercase;
 }
 
@@ -814,19 +847,19 @@
 .supportHeading h2 {
   color: var(--header-ink);
   font-family: var(--font-display), var(--font-body), sans-serif;
-  font-size: clamp(1.1rem, 1.5vw, 1.35rem);
-  font-weight: 800;
-  letter-spacing: -0.02em;
-  line-height: 1.1;
+  font-size: var(--ds-font-h3);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  line-height: 1.15;
 }
 
 .panelHeading > div > span {
   grid-column: 1;
-  max-width: 44rem;
-  margin-top: 0.32rem;
+  max-width: var(--ds-w-measure);
+  margin-top: 0.375rem;
   color: var(--header-muted);
-  font-size: 0.82rem;
-  line-height: 1.45;
+  font-size: var(--ds-font-small);
+  line-height: 1.5;
 }
 
 .panelHeading > div[data-has-eyebrow] > span {
@@ -834,8 +867,8 @@
 }
 
 .panelClose {
-  width: 2.35rem;
-  height: 2.35rem;
+  width: 2.5rem;
+  height: 2.5rem;
 }
 
 .closeIcon {
@@ -889,13 +922,12 @@
   flex: 0 0 auto;
   place-items: center;
   border: 1px solid var(--header-border);
-  border-radius: 0.55rem;
+  border-radius: var(--ds-ctl-radius);
   background: var(--header-panel);
   color: var(--header-muted);
   transition:
     border-color 190ms var(--header-ease),
-    color 190ms var(--header-ease),
-    transform 190ms var(--header-ease);
+    color 190ms var(--header-ease);
 }
 
 .systemLinkIcon svg {
@@ -912,13 +944,8 @@
 
 .systemLink:hover .systemLinkIcon,
 .systemLink:focus-visible .systemLinkIcon {
-  border-color: color-mix(
-    in oklch,
-    var(--header-red) 38%,
-    var(--header-border)
-  );
-  color: var(--header-red);
-  transform: translateY(-1px);
+  border-color: var(--header-border-strong);
+  color: var(--header-ink);
 }
 
 .menuLinkCopy {
@@ -930,16 +957,16 @@
 .menuLinkCopy strong,
 .brandLinkCopy strong {
   color: var(--header-ink);
-  font-size: 0.88rem;
-  font-weight: 750;
-  line-height: 1.25;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  line-height: 1.3;
 }
 
 .menuLinkCopy > span,
 .brandLinkCopy > span {
   color: var(--header-muted);
-  font-size: 0.75rem;
-  line-height: 1.35;
+  font-size: var(--ds-font-small);
+  line-height: 1.45;
 }
 
 .arrowIcon {
@@ -994,27 +1021,27 @@
   gap: 0.75rem;
   overflow: hidden;
   border: 1px solid var(--header-border);
-  border-radius: 0.6rem;
-  background: color-mix(in oklch, var(--header-panel) 94%, var(--header-panel-muted));
+  border-radius: var(--ds-ctl-radius);
+  background: var(--header-panel);
   color: var(--header-ink);
   padding: 0.78rem;
   text-decoration: none;
   transition:
     background-color 190ms var(--header-ease),
-    border-color 190ms var(--header-ease),
-    transform 190ms var(--header-ease);
+    border-color 190ms var(--header-ease);
 }
 
 .brandLink:hover,
-.brandLink:focus-visible,
-.brandLink[data-active] {
-  border-color: color-mix(
-    in oklch,
-    var(--header-red) 35%,
-    var(--header-border)
-  );
+.brandLink:focus-visible {
+  border-color: var(--header-border-strong);
   background: var(--header-hover);
-  transform: translateY(-1px);
+}
+
+/* Izabrano: 2 px akcent + mekana podloga (sistem A). */
+.brandLink[data-active] {
+  border-color: var(--header-red);
+  background: var(--ds-c-accent-soft);
+  box-shadow: inset 0 0 0 1px var(--header-red);
 }
 
 .brandLogoFrame {
@@ -1024,9 +1051,21 @@
   place-items: center;
   overflow: hidden;
   border: 1px solid var(--header-border);
-  border-radius: 0.45rem;
+  border-radius: var(--ds-ctl-radius);
   background: oklch(0.97 0.005 255);
   padding: 0.42rem;
+}
+
+/* Pločica logotipa je svetla u obe teme, pa je i rezervni naziv uvek taman. */
+.brandLogoFrame > strong {
+  color: var(--ds-c-text);
+  font-size: var(--ds-font-small);
+  font-weight: 600;
+  text-align: center;
+}
+
+:global(.dark) .brandLogoFrame > strong {
+  color: var(--ds-c-on-inverse);
 }
 
 .brandLogo {
@@ -1063,11 +1102,10 @@
   min-height: 2rem;
   margin: 0 0 0.55rem;
   color: var(--header-muted);
-  font-size: 0.7rem;
-  font-weight: 750;
-  letter-spacing: 0.07em;
-  line-height: 1.35;
-  text-transform: uppercase;
+  font-size: var(--ds-font-small);
+  font-weight: 600;
+  letter-spacing: 0;
+  line-height: 1.4;
 }
 
 .systemGroup ul {
@@ -1088,7 +1126,7 @@
   align-items: center;
   gap: 0.72rem;
   overflow: hidden;
-  border-radius: 0.45rem;
+  border-radius: var(--ds-ctl-radius);
   color: var(--header-ink);
   padding: 0.65rem 0.72rem;
   text-decoration: none;
@@ -1113,7 +1151,6 @@
 .systemLink[data-active] .systemIndex {
   background: var(--header-red);
   box-shadow: 0 0 0 0.28rem var(--header-red-soft);
-  transform: scale(1.08);
 }
 
 .systemLinkIcon {
@@ -1150,17 +1187,16 @@
   text-decoration: none;
 }
 
+/* Sekundarno dugme sistema A: okvir boje teksta, providno; miš = površina 2. */
 .panelFooter a:not(.catalogCta),
 .panelFooter button {
-  min-height: 2.35rem;
-  border: 1px solid var(--header-border);
-  border-radius: 0.45rem;
+  min-height: var(--ds-ctl-h-m);
+  border: 1px solid var(--header-ink);
+  border-radius: var(--ds-ctl-radius);
   background: transparent;
   color: var(--header-ink);
-  font-family: inherit;
-  font-size: 0.8rem;
-  font-weight: 750;
-  padding: 0 0.8rem;
+  font: var(--ds-ctl-font);
+  padding: 0 1.125rem;
   cursor: pointer;
   transition:
     background-color 190ms var(--header-ease),
@@ -1168,32 +1204,41 @@
     color 190ms var(--header-ease);
 }
 
-.panelFooter button {
-  border-color: color-mix(
-    in oklch,
-    var(--header-red) 38%,
-    var(--header-border)
-  );
-}
-
 .panelFooter a:not(.catalogCta):hover,
 .panelFooter a:not(.catalogCta):focus-visible,
 .panelFooter button:hover,
 .panelFooter button:focus-visible {
   background: var(--header-hover);
-  border-color: var(--header-red);
+  border-color: var(--header-ink);
   color: var(--header-ink);
 }
 
+.panelFooter a:not(.catalogCta) .arrowIcon {
+  color: currentColor;
+}
+
+/* Primarno dugme sistema A: ispuna akcenta, beli tekst, bez podizanja. */
 .panelFooter .catalogCta {
-  min-height: 2.75rem;
+  min-height: var(--ds-ctl-h-m);
   border: 1px solid var(--header-red);
-  border-radius: 999px;
+  border-radius: var(--ds-ctl-radius);
   background: var(--header-red);
   color: var(--header-red-ink);
-  font-size: 0.875rem;
-  font-weight: 650;
-  padding: 0 1.25rem;
+  font: var(--ds-ctl-font);
+  padding: 0 1.125rem;
+  transition:
+    background-color 190ms var(--header-ease),
+    border-color 190ms var(--header-ease);
+}
+
+.panelFooter .catalogCta:hover {
+  border-color: var(--header-red-hover);
+  background: var(--header-red-hover);
+}
+
+.panelFooter .catalogCta:active {
+  border-color: var(--ds-c-accent-press);
+  background: var(--ds-c-accent-press);
 }
 
 .panelFooter .catalogCta .arrowIcon {
@@ -1210,9 +1255,9 @@
 }
 
 .panelFooter .searchIcon {
-  width: 0.95rem;
-  height: 0.95rem;
-  color: var(--header-red);
+  width: 1rem;
+  height: 1rem;
+  color: currentColor;
 }
 
 .supportPanel {
@@ -1226,7 +1271,7 @@
   border: 1px solid
     color-mix(in oklch, var(--header-border) 86%, var(--header-ink) 14%);
   border-top: 2px solid var(--header-red);
-  border-radius: 0 0 0.75rem 0.75rem;
+  border-radius: 0 0 var(--ds-overlay-radius) var(--ds-overlay-radius);
   background: var(--header-panel);
   box-shadow: var(--header-shadow);
   opacity: 0;
@@ -1288,8 +1333,13 @@
   --header-ink: var(--foreground);
   --header-muted: var(--muted-foreground);
   --header-border: var(--border);
+  --header-border-strong: var(--ds-c-line-strong);
+  --header-hover: var(--ds-c-surface-2);
   --header-red: var(--accent);
+  --header-red-hover: var(--ds-c-accent-hover);
+  --header-red-text: var(--ds-c-accent-text);
   --header-red-ink: var(--accent-foreground);
+  --header-focus: var(--ds-c-focus);
   position: fixed;
   z-index: 80;
   inset: 0;
@@ -1365,8 +1415,8 @@
 }
 
 .mobileClose {
-  width: 2.55rem;
-  height: 2.55rem;
+  width: 2.5rem;
+  height: 2.5rem;
 }
 
 .mobileScrollArea {
@@ -1402,8 +1452,9 @@
   color: var(--header-ink);
   cursor: pointer;
   font: inherit;
-  font-size: 1rem;
-  font-weight: 700;
+  font-family: var(--font-body), system-ui, sans-serif;
+  font-size: 1.0625rem;
+  font-weight: 600;
   padding: 0 0.15rem;
   text-align: left;
   text-decoration: none;
@@ -1411,7 +1462,7 @@
 
 .mobileGroup[data-active] .mobileGroupTrigger,
 .mobileLink[data-active] {
-  color: var(--header-red);
+  color: var(--header-red-text);
 }
 
 .mobileGroupIcon {
@@ -1421,8 +1472,8 @@
   height: 2.25rem;
   flex: 0 0 auto;
   place-items: center;
-  border: 1px solid var(--header-border);
-  border-radius: 50%;
+  border: 1px solid var(--header-border-strong);
+  border-radius: var(--ds-ctl-radius);
 }
 
 .mobileGroupIcon span {
@@ -1468,15 +1519,16 @@
 }
 
 .mobileGroupBody .mobileLink {
-  min-height: 2.85rem;
+  min-height: var(--ds-ctl-h-m);
   border-bottom: 0;
   color: var(--header-muted);
-  font-size: 0.86rem;
-  font-weight: 600;
+  font-size: var(--ds-font-body);
+  font-weight: 500;
 }
 
 .mobileGroupBody .mobileLink[data-active] {
-  color: var(--header-red);
+  color: var(--header-red-text);
+  font-weight: 600;
 }
 
 .mobileLink {
@@ -1488,14 +1540,15 @@
 }
 
 .mobilePrimaryLink {
-  font-size: 1rem;
-  font-weight: 700;
+  font-size: 1.0625rem;
+  font-weight: 600;
 }
 
+/* Dugmad mobilnog menija su pune širine (sistem A). */
 .mobileActions {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
-  gap: 0.55rem;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 0.5rem;
   border-top: 1px solid var(--header-border);
   padding-top: 0.85rem;
 }
@@ -1503,31 +1556,40 @@
 .mobileSearch,
 .mobileContact {
   display: inline-flex;
-  min-height: 3rem;
+  width: 100%;
+  min-height: var(--ds-ctl-h-m);
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  border: 1px solid var(--header-border);
-  border-radius: 0.5rem;
+  border: 1px solid var(--header-ink);
+  border-radius: var(--ds-ctl-radius);
   /* `.mobileSearch` je `button` (otvara panel), pa mu treba i reset dugmeta. */
   background: transparent;
   color: var(--header-ink);
-  font-family: inherit;
-  font-size: 0.82rem;
-  font-weight: 750;
-  padding: 0 0.85rem;
+  font: var(--ds-ctl-font);
+  padding: 0 1.125rem;
   cursor: pointer;
   text-decoration: none;
+  transition: background-color 190ms var(--header-ease), border-color 190ms var(--header-ease);
+}
+
+.mobileSearch:hover {
+  background: var(--header-hover);
 }
 
 .mobileSearch .searchIcon {
-  color: var(--header-red);
+  color: currentColor;
 }
 
 .mobileContact {
   border-color: var(--header-red);
   background: var(--header-red);
   color: var(--header-red-ink) !important;
+}
+
+.mobileContact:hover {
+  border-color: var(--header-red-hover);
+  background: var(--header-red-hover);
 }
 
 .mobileContact .arrowIcon {
@@ -1553,8 +1615,8 @@
 .mobileLink:focus-visible,
 .mobileSearch:focus-visible,
 .mobileContact:focus-visible {
-  outline: 2px solid var(--header-red);
-  outline-offset: 3px;
+  outline: 2px solid var(--header-focus);
+  outline-offset: 2px;
 }
 
 @keyframes headerEntrance {
@@ -1630,13 +1692,22 @@
     gap: 0.75rem;
   }
 
+  /* Navigacija je u sistemu A 15 px; uži razmak čuva prostor koji je
+     zaglavlje imalo sa ranijim 13 px tekstom. */
   .navLink,
   .navTrigger {
-    padding-inline: 0.48rem;
+    padding-inline: 0.4rem;
   }
 
   .contactCta {
     padding-inline: 0.75rem;
+  }
+}
+
+@media (max-width: 80rem) and (min-width: 73.01rem) {
+  .navLink,
+  .navTrigger {
+    padding-inline: 0.5rem;
   }
 }
 
@@ -1657,7 +1728,6 @@
 
   .brandLabel {
     margin-left: 0.6rem;
-    font-size: 0.58rem;
   }
 
   .iconAction,
@@ -1666,13 +1736,12 @@
   }
 
   .contactCta {
-    min-height: 2.45rem;
-    padding-inline: 0.75rem;
+    padding-inline: 0.875rem;
   }
 
   .mobileToggle {
-    width: 2.45rem;
-    height: 2.45rem;
+    width: 2.5rem;
+    height: 2.5rem;
   }
 
   .mobilePanel {

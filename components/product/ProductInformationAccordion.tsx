@@ -327,10 +327,11 @@ const documentKindLabel: Record<ProductDetailDocument["kind"], string> = {
   other: "Dokument",
 };
 
+/** Spoljna veza (PDF): ↗, po sistemu A. */
 function ArrowIcon() {
   return (
     <svg viewBox="0 0 16 16" aria-hidden="true">
-      <path d="M3 8h9M8.5 4.5 12 8l-3.5 3.5" />
+      <path d="M5 11 11 5M6 5h5v5" />
     </svg>
   );
 }

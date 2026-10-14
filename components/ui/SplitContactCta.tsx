@@ -25,12 +25,11 @@ export function SplitContactCta({
 
   return (
     <span
-      className={cx(styles.root, "cs-magnetic-cta cs-theme-wipe-card", className)}
+      className={cx(styles.root, className)}
       data-variant={variant}
       data-call={showCall ? undefined : "none"}
       data-cursor="button"
       data-motion-surface
-      data-motion="theme-wipe"
     >
       {showCall ? (
         <span className={styles.callSlot}>

@@ -369,14 +369,14 @@
   max-width: calc(100% - 24px);
   overflow: hidden;
   border: 1px solid var(--detail-border);
-  border-radius: 8px;
+  border-radius: var(--ds-ctl-radius);
   background: color-mix(in srgb, var(--detail-surface) 94%, transparent);
   color: var(--detail-ink);
-  padding: 6px 9px;
+  padding: 5px 8px;
   font-family: var(--font-technical), var(--font-geist-mono), monospace;
-  font-size: 10px;
-  font-weight: 900;
-  letter-spacing: 0.08em;
+  font-size: var(--ds-font-label);
+  font-weight: 500;
+  letter-spacing: var(--ds-tracking-label);
   line-height: 1.15;
   text-overflow: ellipsis;
   text-transform: uppercase;
@@ -390,9 +390,9 @@
   right: 12px;
   color: var(--detail-faint);
   font-family: var(--font-technical), var(--font-geist-mono), monospace;
-  font-size: 10px;
-  font-weight: 650;
-  letter-spacing: 0.12em;
+  font-size: var(--ds-font-label);
+  font-weight: 500;
+  letter-spacing: var(--ds-tracking-label);
   text-transform: uppercase;
 }
 
@@ -534,19 +534,6 @@
   filter: none;
 }
 
-:global(.dark) .heroProductFallback {
-  border-color: var(--dk-line-strong);
-  background-color: var(--dk-2);
-  color: var(--muted-foreground);
-}
-
-:global(.dark) .heroProductFallback strong {
-  color: var(--foreground);
-}
-
-:global(.dark) .heroProductFallback span {
-  color: var(--muted-foreground);
-}
 
 /*
  * V6B na PDP-u — opt-in uz `data-product-shadow-model="v6"` (samo Carsystem slike
@@ -614,11 +601,12 @@
   bottom: 10px;
   z-index: var(--layer-ui);
   display: grid;
-  width: 34px;
-  height: 34px;
+  width: 36px;
+  height: 36px;
   place-items: center;
   border: 1px solid var(--detail-border-strong);
-  border-radius: var(--ds-radius, 2px);
+  /* Plutajući sloj nad slikom: ugao 4 px (sistem A). */
+  border-radius: var(--ds-overlay-radius);
   background: color-mix(in srgb, var(--detail-surface) 92%, transparent);
   color: var(--detail-ink);
   cursor: pointer;
@@ -628,12 +616,12 @@
 }
 
 .zoomControl:hover {
-  border-color: color-mix(in oklch, var(--detail-red) 60%, var(--detail-border));
+  border-color: var(--ds-c-text-2);
   background: var(--detail-surface);
 }
 
 .zoomControl:focus-visible {
-  outline: 2px solid var(--detail-red);
+  outline: 2px solid var(--ds-c-focus);
   outline-offset: 2px;
 }
 
@@ -646,18 +634,28 @@
   stroke-linecap: round;
 }
 
+/* Proizvod bez fotografije: oznaka direktno na sceni (bez kartice u kartici),
+   mirna linijska ikona, tekst ≥ 12 px u bojama teksta teme. */
 .heroProductFallback {
   display: grid;
-  width: min(100%, 270px);
-  min-height: 72%;
+  width: min(100%, 280px);
   align-content: center;
-  justify-items: start;
-  gap: 7px;
-  border: 1px solid oklch(0.2 0.012 250 / 0.14);
-  border-radius: var(--ds-radius, 2px);
-  background-color: oklch(0.965 0.006 250);
-  color: oklch(0.38 0.016 250);
+  justify-items: center;
+  gap: 8px;
+  color: var(--ds-c-text-2);
   padding: 18px;
+  text-align: center;
+}
+
+.heroProductFallback svg {
+  width: 40px;
+  height: 40px;
+  margin-bottom: 6px;
+  fill: none;
+  stroke: var(--ds-c-text-3);
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.25;
 }
 
 .quantityBadge {
@@ -670,8 +668,8 @@
   padding: 5px 8px 6px;
   background: #000;
   color: #fff;
-  font-family: var(--ds-font-label, var(--font-technical), monospace);
-  font-size: 11px;
+  font-family: var(--font-technical), monospace;
+  font-size: var(--ds-font-label);
   font-weight: 500;
   line-height: 1;
   letter-spacing: 0.02em;
@@ -690,25 +688,26 @@
 }
 
 .heroProductFallback small {
+  color: var(--ds-c-text-2);
   font-family: var(--font-technical), var(--font-geist-mono), monospace;
-  font-size: 9px;
-  font-weight: 850;
-  letter-spacing: 0.14em;
+  font-size: var(--ds-font-label);
+  font-weight: 500;
+  letter-spacing: var(--ds-tracking-label);
   text-transform: uppercase;
 }
 
 .heroProductFallback strong {
-  color: oklch(0.19 0.014 250);
-  font-size: 18px;
-  font-weight: 950;
-  line-height: 1;
+  color: var(--ds-c-text);
+  font-size: 1.125rem;
+  font-weight: 600;
+  line-height: 1.2;
 }
 
 .heroProductFallback span {
-  color: oklch(0.38 0.016 250);
-  font-size: 12px;
-  font-weight: 750;
-  line-height: 1.28;
+  color: var(--ds-c-text-2);
+  font-size: var(--ds-font-small);
+  font-weight: 400;
+  line-height: 1.4;
 }
 
 .galleryThumbs {
@@ -723,13 +722,11 @@
   min-height: 112px;
   overflow: hidden;
   border: 1px solid var(--detail-border);
-  border-radius: 14px;
+  border-radius: var(--ds-ctl-radius);
   background: var(--detail-surface);
   color: inherit;
   cursor: pointer;
-  transition:
-    border-color 170ms var(--cs-ease-out),
-    transform 150ms var(--cs-ease-out);
+  transition: border-color 170ms var(--cs-ease-out);
 }
 
 .galleryThumb::after {
@@ -758,7 +755,7 @@
 }
 
 .galleryThumb:active {
-  transform: scale(0.97);
+  border-color: var(--ds-c-text-2);
 }
 
 .galleryThumbImage {
@@ -971,14 +968,14 @@
 .finalPrimaryAction:active,
 .finalSecondaryAction:active,
 .documentAction:active {
-  transform: scale(0.97);
+  transform: none;
 }
 
 .heroNotice {
   max-width: 34rem;
   margin: 1rem 0 0;
   color: var(--detail-faint);
-  font-size: 0.72rem;
+  font-size: var(--ds-font-legal);
   line-height: 1.55;
 }
 
@@ -1000,19 +997,20 @@
 }
 
 .quickFact span {
-  color: var(--detail-faint);
+  color: var(--ds-c-text-2);
   font-family: var(--font-technical), var(--font-geist-mono), monospace;
-  font-size: 0.64rem;
-  font-weight: 650;
-  letter-spacing: 0.12em;
+  font-size: var(--ds-font-label);
+  font-weight: 500;
+  letter-spacing: var(--ds-tracking-label);
   text-transform: uppercase;
 }
 
 .quickFact strong {
   font-family: var(--font-display), var(--font-geist-sans), sans-serif;
-  font-size: clamp(1.15rem, 2vw, 1.55rem);
-  font-weight: 750;
-  letter-spacing: -0.025em;
+  font-size: var(--ds-font-h3);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  line-height: 1.2;
 }
 
 .informationAccordion {
@@ -1036,7 +1034,7 @@
 .accordionButton {
   display: flex;
   width: 100%;
-  min-height: 5.25rem;
+  min-height: 4.5rem;
   cursor: pointer;
   align-items: center;
   justify-content: space-between;
@@ -1051,23 +1049,25 @@
 
 .accordionButton > span:first-child {
   font-family: var(--font-display), var(--font-geist-sans), sans-serif;
-  font-size: clamp(1.1rem, 1.7vw, 1.35rem);
-  font-weight: 760;
-  letter-spacing: -0.02em;
+  font-size: var(--ds-font-h3);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  line-height: 1.2;
 }
 
 .accordionButton:focus-visible {
-  outline: 2px solid color-mix(in oklch, var(--detail-red) 72%, transparent);
-  outline-offset: 4px;
+  outline: 2px solid var(--ds-c-focus);
+  outline-offset: 2px;
 }
 
 .accordionToggle {
   position: relative;
   flex: 0 0 auto;
-  width: 2.35rem;
-  height: 2.35rem;
-  border: 1px solid var(--detail-border-strong);
-  border-radius: 50%;
+  width: var(--ds-ctl-h-s);
+  height: var(--ds-ctl-h-s);
+  border: 1px solid var(--ds-c-line-strong);
+  border-radius: var(--ds-ctl-radius);
+  color: var(--ds-c-text);
   transition:
     border-color 180ms var(--cs-ease-out),
     transform 300ms cubic-bezier(0.22, 1, 0.36, 1);
@@ -1087,16 +1087,8 @@
 }
 
 .accordionButton[aria-expanded="true"] .accordionToggle {
-  border-color: color-mix(in oklch, var(--detail-red) 66%, var(--detail-border));
+  border-color: var(--ds-c-text);
   transform: rotate(180deg);
-}
-
-.accordionButton:active .accordionToggle {
-  transform: scale(0.94);
-}
-
-.accordionButton[aria-expanded="true"]:active .accordionToggle {
-  transform: rotate(180deg) scale(0.94);
 }
 
 .accordionPanel {
@@ -1146,30 +1138,30 @@
 .accordionIntro small {
   display: block;
   margin-bottom: 0.65rem;
-  color: var(--detail-red);
+  color: var(--ds-c-accent-text);
   font-family: var(--font-technical), var(--font-geist-mono), monospace;
-  font-size: 0.62rem;
-  font-weight: 650;
-  letter-spacing: 0.12em;
+  font-size: var(--ds-font-label);
+  font-weight: 500;
+  letter-spacing: var(--ds-tracking-label);
   text-transform: uppercase;
 }
 
 .accordionIntro h3 {
-  max-width: 24ch;
+  max-width: 28ch;
   margin: 0;
-  font-family: var(--font-display), var(--font-geist-sans), sans-serif;
-  font-size: clamp(1.25rem, 2.2vw, 1.8rem);
-  font-weight: 760;
-  letter-spacing: -0.025em;
-  line-height: 1.15;
+  font-family: var(--font-body), var(--font-geist-sans), sans-serif;
+  font-size: var(--ds-font-h3);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  line-height: 1.25;
 }
 
 .accordionIntro p {
-  max-width: 62ch;
-  margin: 0.9rem 0 0;
-  color: var(--detail-muted);
-  font-size: 0.92rem;
-  line-height: 1.7;
+  max-width: var(--ds-w-measure);
+  margin: 0.75rem 0 0;
+  color: var(--ds-c-text-2);
+  font-size: var(--ds-font-body);
+  line-height: 1.6;
 }
 
 .accordionProcessList,
@@ -1198,15 +1190,16 @@
 
 .accordionProcessList strong,
 .accordionBenefitList strong {
-  font-family: var(--font-display), var(--font-geist-sans), sans-serif;
-  font-size: 0.88rem;
-  font-weight: 720;
+  font-family: var(--font-body), var(--font-geist-sans), sans-serif;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  line-height: 1.35;
 }
 
 .accordionProcessList span,
 .accordionBenefitList span {
-  color: var(--detail-muted);
-  font-size: 0.76rem;
+  color: var(--ds-c-text-2);
+  font-size: var(--ds-font-small);
   line-height: 1.55;
 }
 
@@ -1224,8 +1217,8 @@
 
 .accordionFactList,
 .accordionSpecList {
-  margin: 1.75rem 0 0;
-  border-top: 1px solid var(--detail-border);
+  margin: 1.25rem 0 0;
+  border-top: 1px solid var(--ds-c-line-strong);
 }
 
 .accordionFactList > div,
@@ -1233,33 +1226,39 @@
   display: grid;
   grid-template-columns: minmax(8rem, 0.7fr) minmax(0, 1.3fr);
   gap: 1.25rem;
-  border-bottom: 1px solid var(--detail-border);
-  padding: 0.95rem 0;
+  align-items: baseline;
+  border-bottom: 1px solid var(--ds-c-line);
+  padding: 0.85rem 0;
 }
 
 .accordionFactList dt,
 .accordionSpecList dt {
-  color: var(--detail-faint);
-  font-family: var(--font-technical), var(--font-geist-mono), monospace;
-  font-size: 0.62rem;
-  letter-spacing: 0.09em;
-  text-transform: uppercase;
+  color: var(--ds-c-text-2);
+  font-family: var(--font-body), var(--font-geist-sans), sans-serif;
+  font-size: var(--ds-font-legal);
+  font-weight: 600;
+  line-height: 1.45;
 }
 
 .accordionFactList dd,
 .accordionSpecList dd {
   display: grid;
-  gap: 0.3rem;
+  gap: 0.25rem;
   margin: 0;
-  font-size: 0.82rem;
-  font-weight: 680;
+  color: var(--ds-c-text);
+  font-size: 0.9375rem;
+  font-weight: 500;
   line-height: 1.5;
 }
 
-.accordionSpecList dd span {
-  color: var(--detail-muted);
-  font-size: 0.74rem;
+.accordionSpecList dd strong {
   font-weight: 500;
+}
+
+.accordionSpecList dd span {
+  color: var(--ds-c-text-2);
+  font-size: var(--ds-font-small);
+  font-weight: 400;
 }
 
 .accordionDocumentList {
@@ -1268,23 +1267,26 @@
 
 .accordionDocumentList li {
   display: grid;
-  grid-template-columns: 3.7rem minmax(0, 1fr) auto;
+  grid-template-columns: 5rem minmax(0, 1fr) auto;
   gap: 1rem;
   align-items: center;
   border-bottom: 1px solid var(--detail-border);
-  padding: 1rem 0;
+  /* 4 px desno: fokus okvir dugmeta (offset 2 px) ne seče `overflow: hidden` panela. */
+  padding: 1rem 4px 1rem 0;
 }
 
 .accordionDocumentKind {
   display: grid;
-  min-height: 2.3rem;
+  min-height: 2.25rem;
   place-items: center;
-  border: 1px solid var(--detail-border-strong);
-  border-radius: 0.4rem;
-  color: var(--detail-red);
+  border: 1px solid var(--ds-c-line-strong);
+  border-radius: var(--ds-ctl-radius);
+  color: var(--ds-c-text);
   font-family: var(--font-technical), var(--font-geist-mono), monospace;
-  font-size: 0.58rem;
-  font-weight: 750;
+  font-size: var(--ds-font-label);
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  padding-inline: 4px;
 }
 
 .accordionDocumentCopy {
@@ -1294,29 +1296,36 @@
 }
 
 .accordionDocumentCopy strong {
-  font-family: var(--font-display), var(--font-geist-sans), sans-serif;
-  font-size: 0.86rem;
+  font-family: var(--font-body), var(--font-geist-sans), sans-serif;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  line-height: 1.35;
 }
 
 .accordionDocumentCopy small,
 .accordionDocumentStatus {
-  color: var(--detail-faint);
-  font-size: 0.68rem;
+  color: var(--ds-c-text-3);
+  font-size: var(--ds-font-legal);
 }
 
+/* PDF je spoljni dokument: sekundarno dugme M sa ↗. */
 .accordionDocumentList a {
   display: inline-flex;
-  min-height: 2.5rem;
+  min-height: var(--ds-ctl-h-m);
   align-items: center;
-  gap: 0.55rem;
-  border: 1px solid var(--detail-border-strong);
-  border-radius: 0.5rem;
-  padding: 0.65rem 0.8rem;
-  font-size: 0.72rem;
-  font-weight: 700;
-  transition:
-    border-color 180ms var(--cs-ease-out),
-    transform 150ms var(--cs-ease-out);
+  gap: 0.5rem;
+  border: 1px solid var(--ds-c-text);
+  border-radius: var(--ds-ctl-radius);
+  color: var(--ds-c-text);
+  padding: 0 1rem;
+  font: var(--ds-ctl-font);
+  white-space: nowrap;
+  transition: background-color 180ms var(--cs-ease-out);
+}
+
+.accordionDocumentList a:focus-visible {
+  outline: 2px solid var(--ds-c-focus);
+  outline-offset: 2px;
 }
 
 .accordionDocumentList a svg {
@@ -1330,7 +1339,7 @@
 }
 
 .accordionDocumentList a:active {
-  transform: scale(0.97);
+  background: var(--ds-c-line);
 }
 
 .optionSection {
@@ -1596,7 +1605,7 @@
   max-width: 58ch;
   margin: 1rem 0 0;
   color: var(--detail-faint);
-  font-size: 0.69rem;
+  font-size: var(--ds-font-legal);
   line-height: 1.6;
 }
 
@@ -1625,10 +1634,10 @@
   max-width: 18ch;
   margin: 0;
   font-family: var(--font-display), var(--font-geist-sans), sans-serif;
-  font-size: clamp(2.1rem, 4.4vw, 4.25rem);
-  font-weight: 800;
-  letter-spacing: -0.048em;
-  line-height: 0.98;
+  font-size: var(--ds-font-h2);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  line-height: 1.1;
   text-wrap: balance;
 }
 
@@ -1650,9 +1659,9 @@
 
 .variantTableFrame {
   overflow: hidden;
-  border: 1px solid var(--detail-border-strong);
-  border-radius: var(--detail-radius);
-  background: var(--detail-surface);
+  border: 1px solid var(--ds-c-line);
+  border-radius: var(--ds-ctl-radius);
+  background: var(--ds-c-surface);
 }
 
 .variantTable {
@@ -1661,40 +1670,40 @@
 }
 
 .variantTable th {
-  background: var(--detail-dark);
-  color: oklch(0.83 0.014 255);
-  font-family: var(--font-technical), var(--font-geist-mono), monospace;
-  font-size: 0.65rem;
-  font-weight: 550;
-  letter-spacing: 0.11em;
-  padding: 1rem 1.25rem;
+  border-bottom: 1px solid var(--ds-c-line-strong);
+  background: var(--ds-c-surface-2);
+  color: var(--ds-c-text-2);
+  font-family: var(--font-body), var(--font-geist-sans), sans-serif;
+  font-size: var(--ds-font-legal);
+  font-weight: 600;
+  padding: 0.75rem 1rem;
   text-align: left;
-  text-transform: uppercase;
 }
 
 .variantTable td {
-  border-top: 1px solid var(--detail-border);
-  color: var(--detail-muted);
-  font-size: 0.86rem;
-  padding: 1rem 1.25rem;
+  border-top: 1px solid var(--ds-c-line);
+  color: var(--ds-c-text-2);
+  font-size: var(--ds-font-small);
+  padding: 0.85rem 1rem;
 }
 
 .variantTable td:first-child,
 .variantTable td:nth-child(2) {
-  color: var(--detail-ink);
-  font-weight: 700;
+  color: var(--ds-c-text);
+  font-size: 0.9375rem;
+  font-weight: 500;
 }
 
 .variantTable td[data-column="status"] {
-  color: var(--detail-red);
-  font-weight: 700;
+  color: var(--ds-c-text);
+  font-weight: 500;
 }
 
 .sectionNote {
   max-width: 52rem;
   margin: 1rem 0 0;
   color: var(--detail-faint);
-  font-size: 0.72rem;
+  font-size: var(--ds-font-legal);
   line-height: 1.6;
 }
 
@@ -2023,14 +2032,14 @@ a.colorOptionContent:active {
 
 .documentKind {
   display: inline-grid;
-  min-height: 2.55rem;
+  min-height: 2.25rem;
   place-items: center;
-  border: 1px solid var(--detail-border-strong);
-  border-radius: 0.45rem;
-  color: var(--detail-red);
+  border: 1px solid var(--ds-c-line-strong);
+  border-radius: var(--ds-ctl-radius);
+  color: var(--ds-c-text);
   font-family: var(--font-technical), var(--font-geist-mono), monospace;
-  font-size: 0.65rem;
-  font-weight: 700;
+  font-size: var(--ds-font-label);
+  font-weight: 500;
 }
 
 .documentCopy h3 {
@@ -2042,14 +2051,14 @@ a.colorOptionContent:active {
 
 .documentCopy p {
   margin: 0.35rem 0 0;
-  color: var(--detail-faint);
-  font-size: 0.75rem;
+  color: var(--ds-c-text-3);
+  font-size: var(--ds-font-legal);
 }
 
 .documentAvailability {
-  color: var(--detail-muted);
-  font-size: 0.75rem;
-  font-weight: 650;
+  color: var(--ds-c-text-2);
+  font-size: var(--ds-font-legal);
+  font-weight: 500;
 }
 
 .documentAction,
@@ -2057,20 +2066,19 @@ a.colorOptionContent:active {
   display: inline-flex;
   align-items: center;
   justify-content: flex-start;
-  gap: 0.65rem;
-  color: var(--detail-ink);
-  font-size: 0.78rem;
-  font-weight: 700;
+  gap: 0.5rem;
+  color: var(--ds-c-text);
+  font-size: var(--ds-font-small);
+  font-weight: 600;
 }
 
 .documentAction {
-  min-height: 2.7rem;
-  border: 1px solid var(--detail-border-strong);
-  border-radius: 0.5rem;
-  padding: 0.7rem 0.9rem;
-  transition:
-    border-color 180ms var(--cs-ease-out),
-    transform 150ms var(--cs-ease-out);
+  min-height: var(--ds-ctl-h-m);
+  border: 1px solid var(--ds-c-text);
+  border-radius: var(--ds-ctl-radius);
+  padding: 0 1rem;
+  font: var(--ds-ctl-font);
+  transition: background-color 180ms var(--cs-ease-out);
 }
 
 .relationshipGrid {
@@ -2092,8 +2100,8 @@ a.colorOptionContent:active {
   gap: 0;
   overflow-x: auto;
   overflow-y: hidden;
-  border: 1px solid var(--detail-border-strong);
-  border-radius: var(--detail-radius);
+  border: 1px solid var(--ds-c-line);
+  border-radius: var(--ds-ctl-radius);
   overscroll-behavior-inline: contain;
   scroll-snap-type: x proximity;
   scrollbar-color: var(--detail-border-strong) transparent;
@@ -2105,15 +2113,20 @@ a.colorOptionContent:active {
 }
 
 .joinedProductCard:not(:last-child) {
-  border-right: 1px solid var(--detail-border-strong) !important;
+  border-right: 1px solid var(--ds-c-line) !important;
+}
+
+.joinedProductRow:focus-visible {
+  outline: 2px solid var(--ds-c-focus);
+  outline-offset: 2px;
 }
 
 .relationshipGrid article {
   min-width: 0;
   overflow: hidden;
-  border: 1px solid var(--detail-border-strong);
-  border-radius: var(--detail-radius);
-  background: var(--detail-surface);
+  border: 1px solid var(--ds-c-line);
+  border-radius: var(--ds-ctl-radius);
+  background: var(--ds-c-surface);
 }
 
 .relationshipVisual {
@@ -2128,31 +2141,38 @@ a.colorOptionContent:active {
 
 .relationshipCopy > p {
   margin: 0;
-  color: var(--detail-faint);
+  color: var(--ds-c-text-2);
   font-family: var(--font-technical), var(--font-geist-mono), monospace;
-  font-size: 0.62rem;
-  letter-spacing: 0.1em;
+  font-size: var(--ds-font-label);
+  font-weight: 500;
+  letter-spacing: var(--ds-tracking-label);
   text-transform: uppercase;
 }
 
 .relationshipCopy h3 {
-  margin: 0.65rem 0 0;
-  font-family: var(--font-display), var(--font-geist-sans), sans-serif;
-  font-size: clamp(1.2rem, 2vw, 1.65rem);
-  font-weight: 750;
-  letter-spacing: -0.025em;
+  margin: 0.6rem 0 0;
+  font-family: var(--font-body), var(--font-geist-sans), sans-serif;
+  font-size: var(--ds-font-card-title);
+  font-weight: 600;
+  line-height: 1.3;
 }
 
 .relationshipCopy > span {
   max-width: 34rem;
-  margin-top: 0.75rem;
-  color: var(--detail-muted);
-  font-size: 0.85rem;
+  margin-top: 0.6rem;
+  color: var(--ds-c-text-2);
+  font-size: var(--ds-font-small);
   line-height: 1.55;
 }
 
 .relationshipLink {
-  margin-top: 1.35rem;
+  justify-self: start;
+  min-height: var(--ds-ctl-h-s);
+  margin-top: 1rem;
+  text-decoration: underline;
+  text-decoration-color: var(--ds-c-line-strong);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 4px;
 }
 
 .finalCta {
@@ -2168,33 +2188,33 @@ a.colorOptionContent:active {
 }
 
 .finalCta p {
-  margin: 0 0 0.7rem;
+  margin: 0 0 0.75rem;
   font-family: var(--font-technical), var(--font-geist-mono), monospace;
-  font-size: 0.66rem;
-  font-weight: 650;
-  letter-spacing: 0.13em;
+  font-size: var(--ds-font-label);
+  font-weight: 500;
+  letter-spacing: var(--ds-tracking-label);
   text-transform: uppercase;
 }
 
 .finalCta h2 {
-  max-width: 17ch;
+  max-width: 20ch;
   margin: 0;
   font-family: var(--font-display), var(--font-geist-sans), sans-serif;
-  font-size: clamp(2.1rem, 4.5vw, 4.4rem);
-  font-weight: 820;
-  letter-spacing: -0.05em;
-  line-height: 0.96;
+  font-size: var(--ds-font-h2);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  line-height: 1.1;
   text-wrap: balance;
 }
 
 .finalCta div > span {
   display: block;
-  max-width: 45rem;
-  margin-top: 1.1rem;
+  max-width: var(--ds-w-measure);
+  margin-top: 1rem;
   /* 84 % bele na crvenoj ispuni je davalo 3.3–3.6:1 (obe teme). */
   color: oklch(0.97 0.008 30 / 0.95);
-  font-size: 0.95rem;
-  line-height: 1.65;
+  font-size: var(--ds-font-body);
+  line-height: 1.6;
 }
 
 /*
@@ -2213,9 +2233,12 @@ a.colorOptionContent:active {
 }
 
 @media (hover: hover) and (pointer: fine) {
-  .accordionButton:hover .accordionToggle,
+  .accordionButton:hover .accordionToggle {
+    border-color: var(--ds-c-text);
+  }
+
   .accordionDocumentList a:hover {
-    border-color: var(--detail-ink);
+    background: var(--ds-c-surface-2);
   }
 
   a.colorOptionContent:hover {
@@ -2227,25 +2250,26 @@ a.colorOptionContent:active {
     background: var(--detail-red-fill-hover, var(--detail-red-hover));
   }
 
-  .secondaryAction:hover,
-  .documentAction:hover {
+  .secondaryAction:hover {
     border-color: var(--detail-ink);
   }
 
-  .primaryAction:hover svg,
-  .finalPrimaryAction:hover svg,
-  .documentAction:hover svg,
-  .relationshipLink:hover svg {
-    transform: translateX(0.2rem);
+  .documentAction:hover {
+    background: var(--ds-c-surface-2);
   }
 
   .galleryThumb:hover {
-    border-color: var(--detail-border-strong);
+    border-color: var(--ds-c-line-strong);
   }
 
-  .relationshipCopy h3 a:hover,
+  .relationshipCopy h3 a:hover {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
   .relationshipLink:hover {
-    color: var(--detail-red);
+    text-decoration-color: var(--ds-c-text);
+    text-decoration-thickness: 2px;
   }
 
   .finalPrimaryAction:hover {
@@ -2437,7 +2461,7 @@ a.colorOptionContent:active {
   }
 
   .accordionDocumentList li {
-    grid-template-columns: 3.5rem minmax(0, 1fr);
+    grid-template-columns: 5rem minmax(0, 1fr);
   }
 
   .accordionDocumentList a,

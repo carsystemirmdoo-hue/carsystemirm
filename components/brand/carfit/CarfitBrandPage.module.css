@@ -61,9 +61,10 @@
 :global(.dark) .pageShell {
   /* Brand crvena `#e20613` na skoro crnoj podlozi pada ispod AA, pa se u tamnoj
      temi posvetljuje. Kanonska vrednost ostaje u svetloj temi i na logotipu. */
-  --cf-red: #ff3b30;
-  --cf-red-text: #ff3b30;
-  --cf-red-soft: color-mix(in srgb, #ff3b30 14%, transparent);
+  /* Crveni tekst u tamnoj temi po tabeli brend akcenata (sistem A). */
+  --cf-red: #ff6b66;
+  --cf-red-text: #ff6b66;
+  --cf-red-soft: color-mix(in srgb, #e20613 22%, transparent);
   --cf-gray: #8e8e8d;
   --cf-gray-soft: color-mix(in srgb, #a7a6a6 18%, transparent);
 
@@ -83,7 +84,7 @@
   --brand-nav-surface: rgb(15 15 17 / 0.94);
   --brand-nav-border: oklch(0.98 0.002 90 / 0.16);
   --brand-nav-ink: #f0f0ef;
-  --brand-nav-accent: #ff3b30;
+  --brand-nav-accent: #ff6b66;
 }
 
 .pageShell a {
@@ -107,9 +108,9 @@
 
 .technical {
   font-family: var(--font-technical), var(--font-geist-mono), monospace;
-  font-size: 0.6875rem;
+  font-size: var(--ds-font-label);
   font-weight: 500;
-  letter-spacing: 0.16em;
+  letter-spacing: var(--ds-tracking-label);
   text-transform: uppercase;
 }
 
@@ -121,7 +122,11 @@
   text-wrap: balance;
 }
 
-/* Workshop grid: tanke linije koje se provlače kroz sekcije. */
+/*
+ * Površina sekcije. Ranije je ovde bila mreža tankih linija („workshop grid”);
+ * sistem A ne dozvoljava mrežaste pozadine, pa sekcija dobija ravnu površinu sa
+ * blagim prelivom odozgo. Klase ostaju da TSX ne mora da se menja.
+ */
 .gridSkin {
   position: relative;
   isolation: isolate;
@@ -131,20 +136,17 @@
   position: absolute;
   z-index: -1;
   inset: 0;
-  background-image:
-    linear-gradient(to right, var(--cf-line) 1px, transparent 1px),
-    linear-gradient(to bottom, var(--cf-line) 1px, transparent 1px);
-  background-size: 5.5rem 5.5rem;
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--cf-steel) 70%, transparent) 0%,
+    transparent 55%
+  );
   content: "";
-  opacity: 0.55;
   pointer-events: none;
 }
 
 .gridSkinInvert::before {
-  background-image:
-    linear-gradient(to right, var(--cf-invert-line) 1px, transparent 1px),
-    linear-gradient(to bottom, var(--cf-invert-line) 1px, transparent 1px);
-  opacity: 1;
+  background: linear-gradient(180deg, rgb(255 255 255 / 0.05) 0%, transparent 60%);
 }
 
 .section {
@@ -188,9 +190,9 @@
   gap: 0.6rem;
   color: var(--cf-ink-muted);
   font-family: var(--font-technical), var(--font-geist-mono), monospace;
-  font-size: 0.6875rem;
+  font-size: var(--ds-font-label);
   font-weight: 600;
-  letter-spacing: 0.18em;
+  letter-spacing: var(--ds-tracking-label);
   text-transform: uppercase;
 }
 
@@ -220,18 +222,16 @@
   align-items: center;
   justify-content: center;
   gap: 0.6rem;
-  min-height: 2.875rem;
-  padding: 0.7rem 1.35rem;
+  min-height: var(--ds-ctl-h-m);
+  padding: 0 1.35rem;
   border: 1px solid transparent;
-  border-radius: 2px;
+  border-radius: var(--ds-ctl-radius);
   font-family: var(--font-body), var(--font-geist-sans), system-ui, sans-serif;
   font-size: 0.9375rem;
-  font-weight: 700;
-  transition:
-    background-color 180ms var(--cf-ease),
+  font-weight: 600;
+  transition: background-color 180ms var(--cf-ease),
     border-color 180ms var(--cf-ease),
-    color 180ms var(--cf-ease),
-    transform 180ms var(--cf-ease);
+    color 180ms var(--cf-ease);
 }
 
 .pageShell .btnPrimary,
@@ -241,7 +241,7 @@
 }
 
 /*
- * U tamnoj temi je --cf-red posvetljen za TEKST (#ff3b30), ali kao ispuna ispod
+ * U tamnoj temi je --cf-red posvetljen za TEKST (#ff6b66), ali kao ispuna ispod
  * belog teksta davao je 3.2:1. Dugme zato nosi zvaničnu #e20613 (4.9:1).
  */
 :global(.dark) .btnPrimary {
@@ -249,7 +249,6 @@
 }
 
 .btnPrimary:hover {
-  transform: translateY(-1px);
   background: color-mix(in srgb, var(--cf-red) 88%, #000);
 }
 
@@ -258,40 +257,37 @@
 }
 
 .btnSecondary {
-  border-color: var(--cf-line-strong);
+  border-color: var(--cf-ink);
   background: transparent;
   color: var(--cf-ink);
 }
 
 .btnSecondary:hover {
-  border-color: var(--cf-red);
-  color: var(--cf-red);
+  border-color: var(--cf-ink);
+  color: var(--cf-ink);
+  background: var(--cf-paper-off);
 }
 
 /* Monospace je rezervisan za tehničke oznake; akcije koriste body font. */
-.btnLink {
+.pageShell .btnLink {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
   min-height: 2.75rem;
   color: var(--cf-ink);
   font-family: var(--font-body), var(--font-geist-sans), system-ui, sans-serif;
-  font-size: 0.875rem;
-  font-weight: 700;
-  letter-spacing: 0.01em;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  letter-spacing: 0;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.3em;
+  text-decoration-color: var(--cf-line-strong);
 }
 
-.btnLink::after {
-  width: 0;
-  height: 1px;
-  background: var(--cf-red);
-  content: "";
-  transition: width 200ms var(--cf-ease);
-}
-
-.btnLink:hover::after,
-.btnLink:focus-visible::after {
-  width: 1.5rem;
+.pageShell .btnLink:hover {
+  text-decoration-color: currentColor;
+  text-decoration-thickness: 2px;
 }
 
 /* --------------------------------------------------------------- breadcrumb */
@@ -308,8 +304,8 @@
   gap: 0.5rem;
   padding-top: 1.35rem;
   font-family: var(--font-technical), var(--font-geist-mono), monospace;
-  font-size: 0.6875rem;
-  letter-spacing: 0.14em;
+  font-size: var(--ds-font-label);
+  letter-spacing: var(--ds-tracking-label);
   list-style: none;
   text-transform: uppercase;
 }
@@ -461,7 +457,7 @@
 .stageCode {
   composes: technical;
   color: var(--cf-invert-muted);
-  font-size: 0.625rem;
+  font-size: var(--ds-font-label);
 }
 
 .stageLabel {
@@ -473,7 +469,7 @@
 
 .stageNote {
   color: var(--cf-invert-muted);
-  font-size: 0.8125rem;
+  font-size: var(--ds-font-small);
   line-height: 1.45;
 }
 
@@ -511,9 +507,9 @@
   background: transparent;
   color: var(--cf-invert-muted);
   font-family: var(--font-technical), var(--font-geist-mono), monospace;
-  font-size: 0.625rem;
+  font-size: var(--ds-font-label);
   font-weight: 600;
-  letter-spacing: 0.12em;
+  letter-spacing: var(--ds-tracking-label);
   text-transform: uppercase;
   cursor: pointer;
   transition:
@@ -594,7 +590,7 @@
 .taskTabCode {
   composes: technical;
   color: var(--cf-ink-faint);
-  font-size: 0.625rem;
+  font-size: var(--ds-font-label);
 }
 
 .taskTabLabel {
@@ -608,8 +604,8 @@
   display: block;
   margin-top: 0.15rem;
   color: var(--cf-ink-faint);
-  font-size: 0.5625rem;
-  letter-spacing: 0.2em;
+  font-size: var(--ds-font-label);
+  letter-spacing: var(--ds-tracking-label);
 }
 
 .taskTab[aria-selected="true"] {
@@ -630,7 +626,7 @@
 
 .taskTab[aria-selected="true"] .taskTabCode,
 .taskTab[aria-selected="true"] .taskTabMarker {
-  color: var(--cf-red);
+  color: var(--cf-red-text);
 }
 
 .taskTab[aria-selected="true"] .taskTabLabel {
@@ -664,7 +660,7 @@
   background: transparent;
   color: var(--cf-ink-muted);
   font-family: inherit;
-  font-size: 0.875rem;
+  font-size: 0.9375rem;
   font-weight: 600;
   white-space: nowrap;
   cursor: pointer;
@@ -675,17 +671,18 @@
 }
 
 .taskChip .taskTabCode {
-  font-size: 0.5625rem;
+  font-size: var(--ds-font-label);
 }
 
 .taskChip[aria-selected="true"] {
   border-color: var(--cf-red);
   background: var(--cf-red-soft);
   color: var(--cf-ink);
+  box-shadow: inset 0 0 0 1px var(--cf-red);
 }
 
 .taskChip[aria-selected="true"] .taskTabCode {
-  color: var(--cf-red);
+  color: var(--cf-red-text);
 }
 
 .taskPanel {
@@ -710,7 +707,7 @@
 .taskPanelCode {
   composes: technical;
   color: var(--cf-red);
-  font-size: 0.625rem;
+  font-size: var(--ds-font-label);
 }
 
 .taskPanelTitle {
@@ -721,7 +718,7 @@
 .taskPanelBody {
   max-width: 40rem;
   color: var(--cf-ink-muted);
-  font-size: 0.9688rem;
+  font-size: var(--ds-font-body);
   line-height: 1.6;
 }
 
@@ -743,7 +740,7 @@
 .taskColTitle {
   composes: technical;
   color: var(--cf-ink-faint);
-  font-size: 0.625rem;
+  font-size: var(--ds-font-label);
 }
 
 .workflow {
@@ -769,7 +766,7 @@
   composes: technical;
   padding-top: 0.15rem;
   color: var(--cf-red);
-  font-size: 0.625rem;
+  font-size: var(--ds-font-label);
 }
 
 .workflowTitle {
@@ -782,7 +779,7 @@
   display: block;
   margin-top: 0.15rem;
   color: var(--cf-ink-muted);
-  font-size: 0.8438rem;
+  font-size: var(--ds-font-small);
   line-height: 1.5;
 }
 
@@ -801,7 +798,7 @@
   border-radius: 2px;
   color: var(--cf-ink-muted);
   font-family: var(--font-technical), var(--font-geist-mono), monospace;
-  font-size: 0.625rem;
+  font-size: var(--ds-font-label);
   letter-spacing: 0.1em;
   text-transform: uppercase;
 }
@@ -860,7 +857,7 @@
   display: block;
   margin-top: 0.2rem;
   color: var(--cf-ink-faint);
-  font-size: 0.5625rem;
+  font-size: var(--ds-font-label);
 }
 
 /* Kada task nema lokalne artikle: tehnički opis programa, bez tvrdnje o zalihama. */
@@ -880,7 +877,7 @@
 
 .scopeNoteBody {
   color: var(--cf-ink-muted);
-  font-size: 0.8438rem;
+  font-size: var(--ds-font-small);
   line-height: 1.5;
 }
 
@@ -949,7 +946,7 @@
 .mediaFallbackCode {
   composes: technical;
   color: var(--cf-ink-faint);
-  font-size: 0.625rem;
+  font-size: var(--ds-font-label);
 }
 
 .mediaFallbackMark {
@@ -997,7 +994,7 @@
   align-items: center;
   gap: 0.6rem;
   color: var(--cf-red);
-  font-size: 0.625rem;
+  font-size: var(--ds-font-label);
 }
 
 .zoneCode::after {
@@ -1068,7 +1065,7 @@
 .gradationCode {
   composes: technical;
   color: var(--cf-red-text, var(--cf-red));
-  font-size: 0.6875rem;
+  font-size: var(--ds-font-label);
   letter-spacing: 0.1em;
 }
 
@@ -1118,7 +1115,7 @@
 .gradationDiscLabel {
   composes: technical;
   color: var(--cf-invert-muted);
-  font-size: 0.5625rem;
+  font-size: var(--ds-font-label);
 }
 
 .gradationDiscValue {
@@ -1132,7 +1129,7 @@
   padding-left: 0.85rem;
   border-left: 2px solid var(--cf-line-strong);
   color: var(--cf-ink-faint);
-  font-size: 0.8125rem;
+  font-size: var(--ds-font-small);
   line-height: 1.55;
 }
 
@@ -1167,7 +1164,7 @@
 .familyCode {
   composes: technical;
   color: var(--cf-ink-faint);
-  font-size: 0.625rem;
+  font-size: var(--ds-font-label);
 }
 
 .familyName {
@@ -1212,7 +1209,7 @@
   align-items: center;
   gap: 0.45rem;
   color: var(--cf-red);
-  font-size: 0.625rem;
+  font-size: var(--ds-font-label);
 }
 
 .familyCount::before {
@@ -1256,7 +1253,7 @@
 .categoryCode {
   composes: technical;
   color: var(--cf-ink-faint);
-  font-size: 0.625rem;
+  font-size: var(--ds-font-label);
   transition: color 180ms var(--cf-ease);
 }
 
@@ -1270,7 +1267,7 @@
 .categoryNote {
   margin-top: 0.3rem;
   color: var(--cf-ink-muted);
-  font-size: 0.8125rem;
+  font-size: var(--ds-font-small);
   line-height: 1.45;
   transition: color 180ms var(--cf-ease);
 }
@@ -1285,7 +1282,7 @@
 .categoryCount {
   composes: technical;
   color: var(--cf-red);
-  font-size: 0.625rem;
+  font-size: var(--ds-font-label);
 }
 
 .categoryArrow {
@@ -1335,7 +1332,7 @@
   composes: technical;
   padding-top: 0.15rem;
   color: var(--cf-red-text, var(--cf-red));
-  font-size: 0.625rem;
+  font-size: var(--ds-font-label);
 }
 
 .calloutTitle {
@@ -1348,7 +1345,7 @@
   display: block;
   margin-top: 0.15rem;
   color: var(--cf-ink-muted);
-  font-size: 0.8438rem;
+  font-size: var(--ds-font-small);
   line-height: 1.5;
 }
 
@@ -1364,16 +1361,16 @@
 .productFilter {
   display: inline-flex;
   align-items: center;
-  min-height: 2.5rem;
+  min-height: var(--ds-ctl-h-s);
   padding: 0.45rem 0.9rem;
   border: 1px solid var(--cf-line-strong);
-  border-radius: 999px;
+  border-radius: var(--ds-ctl-radius);
   background: transparent;
   color: var(--cf-ink-muted);
   font-family: var(--font-body), var(--font-geist-sans), system-ui, sans-serif;
   font-size: 0.875rem;
   font-weight: 600;
-  letter-spacing: 0.01em;
+  letter-spacing: 0;
   cursor: pointer;
   transition:
     border-color 180ms var(--cf-ease),
@@ -1382,20 +1379,15 @@
 }
 
 .productFilter:hover:not(:disabled) {
-  border-color: var(--cf-red);
+  border-color: var(--cf-ink);
   color: var(--cf-ink);
 }
 
 .productFilter[aria-pressed="true"] {
   border-color: var(--cf-red);
-  background: var(--cf-red);
-  color: var(--cf-red-ink);
-}
-
-:global(.dark) .productFilter[aria-pressed="true"] {
-  /* Ispuna ispod belog teksta nosi zvaničnu #e20613 (posvetljena #ff3b30 = 3.5:1). */
-  border-color: #e20613;
-  background: #e20613;
+  background: var(--cf-red-soft);
+  color: var(--cf-ink);
+  box-shadow: inset 0 0 0 1px var(--cf-red);
 }
 
 .productFilter:disabled {
@@ -1463,7 +1455,7 @@
   align-items: center;
   gap: 0.5rem;
   color: var(--cf-ink-faint);
-  font-size: 0.5625rem;
+  font-size: var(--ds-font-label);
 }
 
 .productName {
@@ -1493,13 +1485,13 @@
   gap: 1rem;
   padding-block: 0.5rem;
   border-bottom: 1px solid var(--cf-line);
-  font-size: 0.8125rem;
+  font-size: var(--ds-font-small);
 }
 
 .productSpec dt {
   color: var(--cf-ink-faint);
   font-family: var(--font-technical), var(--font-geist-mono), monospace;
-  font-size: 0.625rem;
+  font-size: var(--ds-font-label);
   letter-spacing: 0.1em;
   text-transform: uppercase;
 }
@@ -1515,7 +1507,7 @@
   align-items: center;
   gap: 0.45rem;
   color: var(--cf-ink-muted);
-  font-size: 0.5625rem;
+  font-size: var(--ds-font-label);
 }
 
 .productStatus::before {
@@ -1566,7 +1558,7 @@
 .docCode {
   composes: technical;
   color: var(--cf-red);
-  font-size: 0.625rem;
+  font-size: var(--ds-font-label);
 }
 
 .docTitle {
@@ -1576,7 +1568,7 @@
 
 .docNote {
   color: var(--cf-ink-muted);
-  font-size: 0.8438rem;
+  font-size: var(--ds-font-small);
   line-height: 1.5;
 }
 
@@ -1589,7 +1581,10 @@
   --surface: var(--cf-paper);
   --surface-muted: var(--cf-steel);
   --muted-foreground: var(--cf-ink-muted);
-  --accent: var(--cf-red);
+  /* Ispuna dugmeta (beli tekst) je u obe teme zvanična C.A.R.FIT crvena;
+     posvetljena --cf-red je samo za tekst u tamnoj temi. */
+  --accent: #e20613;
+  --accent-text: var(--cf-red-text);
 }
 
 .katalogGrid {
@@ -1624,7 +1619,10 @@
 .storyMetaText {
   composes: technical;
   color: var(--cf-ink-faint);
-  font-size: 0.625rem;
+  font-size: var(--ds-font-label);
+  /* Duža rečenica: bez verzala (sistem A, velika slova do 4 reči). */
+  letter-spacing: 0.02em;
+  text-transform: none;
 }
 
 .storyTag {
@@ -1633,8 +1631,8 @@
   border: 1px solid var(--cf-red);
   border-radius: 2px;
   color: var(--cf-red);
-  font-size: 0.5625rem;
-  letter-spacing: 0.24em;
+  font-size: var(--ds-font-label);
+  letter-spacing: var(--ds-tracking-label);
 }
 
 /* ---------------------------------------------------------------- final cta */
@@ -1697,7 +1695,7 @@
 .finalCtaCellCode {
   composes: technical;
   color: var(--cf-red);
-  font-size: 0.5625rem;
+  font-size: var(--ds-font-label);
 }
 
 .finalCtaCellLabel {
@@ -1707,7 +1705,7 @@
 
 .finalCtaCellNote {
   color: var(--cf-invert-muted);
-  font-size: 0.8125rem;
+  font-size: var(--ds-font-small);
   line-height: 1.45;
 }
 
@@ -1905,10 +1903,6 @@
   .stageCellRow {
     flex-direction: column;
     align-items: flex-start;
-  }
-
-  .gridSkin::before {
-    background-size: 3.5rem 3.5rem;
   }
 
   .workflowItem {

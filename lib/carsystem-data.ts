@@ -210,34 +210,17 @@ export type ProductCatalogMetadata = {
   customerPackage?: string | null;
 };
 
-export const rmSystemSlugs = [
-  "agilis",
-  "onyx-hd",
-  "diamont",
-  "uno-hd",
-  "crystal-base",
-  "graphite-hd",
-] as const;
-
-export type RmSystemSlug = (typeof rmSystemSlugs)[number];
-
-export const rmSeriesSlugs = ["pioneer", "advance", "element"] as const;
-
-export type RmSeriesSlug = (typeof rmSeriesSlugs)[number];
-
-export const rmCategorySlugs = [
-  "basecoat",
-  "clearcoat",
-  "primer-filler",
-  "bodyfiller",
-  "hardener",
-  "thinner",
-  "additive",
-  "cleaner",
-  "polishing-compound",
-] as const;
-
-export type RmCategorySlug = (typeof rmCategorySlugs)[number];
+/* R-M oznake žive u `lib/catalog-constants.ts`: klijentske komponente ih uvoze odatle,
+   jer bi uvoz iz ovog modula u JavaScript pregledača uvukao ceo katalog (~6,7 MB JSON-a). */
+export {
+  rmCategorySlugs,
+  rmSeriesSlugs,
+  rmSystemSlugs,
+  type RmCategorySlug,
+  type RmSeriesSlug,
+  type RmSystemSlug,
+} from "@/lib/catalog-constants";
+import type { RmCategorySlug, RmSeriesSlug, RmSystemSlug } from "@/lib/catalog-constants";
 
 export type RmTechnologySlug =
   | "waterborne"
@@ -416,9 +399,8 @@ export type CarsystemProduct = {
   detail?: ProductDetailContent;
 };
 
-export function getProductPublicStatus(product: CarsystemProduct): ProductPublicStatus {
-  return product.publicStatus ?? "Na upit";
-}
+import { getProductPublicStatus } from "@/lib/catalog-constants";
+export { getProductPublicStatus };
 
 type CarsystemBrandSeed = Omit<CarsystemBrand, "routes">;
 
@@ -3393,9 +3375,9 @@ function hasPublishedImage(item: CarsystemProduct) {
 }
 
 /**
- * „Slični proizvodi”: najpre pregledane preporuke, pa dopuna po bliskosti — ista linija ili
- * sistem, ista kategorija, isti brend, isti program. Proizvod bez fotografije se ne preporučuje:
- * prazna kartica u preporuci ne pomaže izboru, a ističe nedostatke kataloga.
+ * „Slični proizvodi” su isključivo ručno pregledane preporuke (bez automatske dopune).
+ * Proizvod bez fotografije se ne preporučuje: prazna kartica u preporuci ne pomaže izboru,
+ * a ističe nedostatke kataloga.
  */
 export function getManualProductRecommendations(
   product: CarsystemProduct,
@@ -3421,27 +3403,7 @@ export function getManualProductRecommendations(
         all.findIndex((candidate) => candidate.slug === item.slug) === index,
     )
     .slice(0, limit);
-  if (chosen.length >= Math.min(limit, 4)) return chosen;
-
-  const taken = new Set([product.slug, ...chosen.map((item) => item.slug)]);
-  const line = product.catalogMetadata?.line ?? product.rmMetadata?.system;
-  const category = product.taxonomyCategory;
-  const fill = products
-    .filter((item) => !taken.has(item.slug) && hasPublishedImage(item))
-    .map((item) => {
-      let score = 0;
-      if (line && (item.catalogMetadata?.line ?? item.rmMetadata?.system) === line) score += 8;
-      if (category && item.taxonomyCategory === category) score += 4;
-      if (item.brandSlug === product.brandSlug) score += 3;
-      if (item.programSlug === product.programSlug) score += 2;
-      if (item.phaseSlug === product.phaseSlug) score += 1;
-      return { item, score };
-    })
-    .filter(({ score }) => score >= 5)
-    .sort((first, second) => second.score - first.score)
-    .map(({ item }) => item);
-
-  return [...chosen, ...fill].slice(0, Math.max(4, chosen.length));
+  return chosen;
 }
 
 function getReviewedRelationshipProducts(

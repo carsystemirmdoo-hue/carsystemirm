@@ -55,7 +55,8 @@ test("prvi R-M slajd ostaje jedini LCP kandidat", async () => {
 
   assert.match(
     source,
-    /fetchPriority=\{\s*slide\.id === "agilis-performance" \? "high" : "auto"\s*\}/,
+    // Ostali slajdovi „low”: učitavaju se naknadno i ne smeju se takmičiti sa prvim (ni sa pretragom).
+    /fetchPriority=\{\s*slide\.id === "agilis-performance" \? "high" : "low"\s*\}/,
   );
   assert.match(
     source,

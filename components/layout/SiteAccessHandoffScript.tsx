@@ -1,5 +1,4 @@
 import {
-  HOME_HERO_ASSETS,
   SITE_ACCESS_HANDOFF_MAX_AGE_MS,
   SITE_ACCESS_HANDOFF_STORAGE_KEY,
 } from "@/lib/site-access-handoff";
@@ -66,22 +65,6 @@ ${PORTAL_ROUTE_TRANSITION_RELEASE}
         document.documentElement.dataset.siteAccessHandoff = "covered";
       } else {
         window.sessionStorage.removeItem(storageKey);
-      }
-    }
-
-    if (isMaintenance || path === "/") {
-      var heroSource = document.documentElement.dataset.theme === "light"
-        ? ${JSON.stringify(HOME_HERO_ASSETS.light)}
-        : ${JSON.stringify(HOME_HERO_ASSETS.dark)};
-      if (!document.querySelector('link[data-cs-home-hero-preload]')) {
-        var preload = document.createElement("link");
-        preload.rel = "preload";
-        preload.as = "image";
-        preload.href = heroSource;
-        preload.fetchPriority = "high";
-        preload.setAttribute("imagesizes", "100vw");
-        preload.dataset.csHomeHeroPreload = "true";
-        document.head.appendChild(preload);
       }
     }
 

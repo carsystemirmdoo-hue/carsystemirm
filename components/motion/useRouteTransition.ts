@@ -9,7 +9,6 @@ import {
   readSiteAccessHandoff,
   SITE_ACCESS_HANDOFF_EVENT,
   SITE_ACCESS_HANDOFF_NAVIGATION_TIMEOUT_MS,
-  waitForActiveHomeHero,
 } from "@/lib/site-access-handoff";
 
 const COVER_DURATION = 420;
@@ -102,12 +101,10 @@ async function waitForCriticalRouteAssets() {
   );
   const fontsReady =
     "fonts" in document ? document.fonts.ready.then(() => undefined) : Promise.resolve();
-  const homeHeroReady =
-    window.location.pathname === "/" ? waitForActiveHomeHero() : Promise.resolve();
-
+  // Početna označava prvi slajd kampanje kao `data-route-critical`; ranija posebna čekanja
+  // na hero-*.png (1,7 MB, više nije prva slika početne) su uklonjena.
   await Promise.all([
     fontsReady,
-    homeHeroReady,
     ...criticalImages.map((image) => waitForImage(image)),
   ]);
 }

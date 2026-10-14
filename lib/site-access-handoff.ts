@@ -3,20 +3,9 @@ export const SITE_ACCESS_HANDOFF_EVENT = "carsystem:site-access-handoff";
 export const SITE_ACCESS_HANDOFF_MAX_AGE_MS = 20_000;
 export const SITE_ACCESS_HANDOFF_NAVIGATION_TIMEOUT_MS = 5_500;
 
-export const HOME_HERO_ASSETS = {
-  dark: "/images/home/hero-dark.png",
-  light: "/images/home/hero-light.png",
-} as const;
-
 type SiteAccessHandoff = {
   startedAt: number;
 };
-
-export function getActiveHomeHeroSource() {
-  return document.documentElement.dataset.theme === "light"
-    ? HOME_HERO_ASSETS.light
-    : HOME_HERO_ASSETS.dark;
-}
 
 export function beginSiteAccessHandoff() {
   const handoff: SiteAccessHandoff = { startedAt: Date.now() };
@@ -64,38 +53,3 @@ export function clearSiteAccessHandoff() {
   delete document.documentElement.dataset.siteAccessHandoff;
 }
 
-export function waitForActiveHomeHero() {
-  return new Promise<void>((resolve) => {
-    const image = new window.Image();
-    let settled = false;
-
-    const finish = () => {
-      if (settled) return;
-      settled = true;
-      image.onload = null;
-      image.onerror = null;
-      resolve();
-    };
-
-    image.decoding = "async";
-    image.fetchPriority = "high";
-    image.onload = () => {
-      if (typeof image.decode === "function") {
-        image.decode().then(finish, finish);
-        return;
-      }
-
-      finish();
-    };
-    image.onerror = finish;
-    image.src = getActiveHomeHeroSource();
-
-    if (image.complete) {
-      if (typeof image.decode === "function") {
-        image.decode().then(finish, finish);
-      } else {
-        finish();
-      }
-    }
-  });
-}

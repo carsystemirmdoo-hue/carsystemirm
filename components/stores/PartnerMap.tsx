@@ -331,13 +331,29 @@ export function PartnerMap({
       }
     }
 
-    init();
+    // Kao CompanyLocationMap: mapa (maplibre-gl, stil, fontovi, pločice ≈ 0,5 MB) se pokreće tek
+    // kada se približi ekranu. Na /prodavnice je odmah vidljiva; na početnoj je ispod prvog ekrana.
+    const shell = containerRef.current;
+    const observer = shell
+      ? new IntersectionObserver(
+          (entries) => {
+            if (entries.some((entry) => entry.isIntersecting)) {
+              observer?.disconnect();
+              init();
+            }
+          },
+          { rootMargin: "240px" },
+        )
+      : null;
+    if (shell && observer) observer.observe(shell);
+    else init();
 
     const clusterMarkers = clusterMarkersRef.current;
     const dimmedMarkers = dimmedMarkersRef.current;
 
     return () => {
       disposed = true;
+      observer?.disconnect();
       disconnectTheme?.();
       clusterMarkers.forEach((marker) => marker.remove());
       clusterMarkers.clear();

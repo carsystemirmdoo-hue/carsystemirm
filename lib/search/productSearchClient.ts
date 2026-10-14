@@ -20,6 +20,7 @@
  * bi ponovo povukao ceo indeks.
  */
 
+import { withSearchActivity } from "@/lib/search/searchActivity";
 import { buildSearchIndex, searchIndex } from "@/lib/search/engine.mjs";
 import { groupSearchHits } from "@/lib/search/grouping.mjs";
 import type { ProductSearchRecord } from "@/lib/search/buildSearchIndex";
@@ -224,10 +225,12 @@ function createInlineBackend(records: ProductSearchRecord[]) {
 
 async function loadIndex(): Promise<LoadedIndex> {
   requestCount += 1;
-  const response = await fetch(SEARCH_INDEX_URL);
-  if (!response.ok) throw new Error(`HTTP ${response.status}`);
-
-  const payload = (await response.json()) as { records: ProductSearchRecord[] };
+  // Korisnik čeka rezultat: visok prioritet i signal da naknadna učitavanja sačekaju.
+  const payload = await withSearchActivity(async () => {
+    const response = await fetch(SEARCH_INDEX_URL, { priority: "high" } as RequestInit);
+    if (!response.ok) throw new Error(`HTTP ${response.status}`);
+    return (await response.json()) as { records: ProductSearchRecord[] };
+  });
   const records = payload.records ?? [];
 
   const backend = createWorkerBackend(records) ?? createInlineBackend(records);

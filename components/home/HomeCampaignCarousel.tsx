@@ -326,7 +326,8 @@ function HomeCampaignVisual({
           width={slide.imageWidth}
           height={slide.imageHeight}
           decoding="async"
-          fetchPriority={priority ? "high" : "auto"}
+          fetchPriority={priority ? "high" : "low"}
+          data-route-critical={priority ? "true" : undefined}
           loading={priority ? "eager" : "lazy"}
           sizes={
             isArtwork

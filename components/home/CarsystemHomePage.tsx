@@ -305,6 +305,9 @@ export function CarsystemHomePage() {
                   aria-label={`Otvorite stranicu brenda ${brandName}`}
                   className={styles.brandRailMonoLink}
                   href={href}
+                  // Traka je odmah vidljiva: automatski prefetch bi preuzimao RSC svih brend
+                  // stranica (~280 KB) pri svakom otvaranju početne. Klik učitava stranicu.
+                  prefetch={false}
                   key={brandKey}
                 >
                   {logo}

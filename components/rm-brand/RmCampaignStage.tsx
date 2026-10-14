@@ -259,7 +259,7 @@ function RmCampaignVisualArtwork({ loadImage, slide }: { loadImage: boolean; sli
           height={900}
           decoding="async"
           fetchPriority={
-            slide.id === "agilis-performance" ? "high" : "auto"
+            slide.id === "agilis-performance" ? "high" : "low"
           }
           loading={slide.id === "agilis-performance" ? "eager" : "lazy"}
         />

@@ -159,6 +159,20 @@ const CATEGORY_BADGE: Record<ProductCategorySlug, string> = {
 /** Isti placeholder koji `createProduct` u `lib/carsystem-data.ts` daje zapisima bez slike. */
 const PLACEHOLDER_PRODUCT_IMAGE = "/images/products/placeholder-product.svg";
 
+/*
+ * Faza iz kategorije izvora koju dokumentacija ne potvrđuje (provera 2026-10-14). Carsystem ova
+ * četiri RUPES artikla vodi pod „Painting supplies” (katalog 2026/27, str. 148 i 208), pa je
+ * taksonomija dala „Boja”, ali opisi govore drugo: S145 je pokretni usisivač, KC28 kolica za
+ * usisivač, Carrier kolica „for polishes and abrasives”, ulje služi za pneumatske alate. Faza se
+ * zato ne prikazuje i ne filtrira (`phaseUnconfirmed`), dok je ne potvrdi tehnička dokumentacija.
+ */
+const UNCONFIRMED_PHASE_SLUGS = new Set([
+  "carsystem-rupes-vacuum-cleaner-s145",
+  "carsystem-rupes-workshop-carrier-kc28",
+  "carsystem-rupes-carrier",
+  "carsystem-rupes-cleaning-and-maintenance-oil",
+]);
+
 const packLabel = (variant: CatalogVariant) => (variant.salesPack ? `${variant.salesPack} kom.` : "Na upit");
 
 function variantSection(
@@ -373,6 +387,7 @@ function createCatalogProduct(entry: CatalogProductEntry, knownSlugs: Set<string
     brandSlug: manufacturer?.brandSlug ?? "carsystem",
     programSlug: entry.taxonomy.programSlug,
     phaseSlug: entry.taxonomy.phaseSlug,
+    ...(UNCONFIRMED_PHASE_SLUGS.has(entry.slug) ? { phaseUnconfirmed: true as const } : {}),
     shortDescription: content.shortDescription,
     longDescription: content.longDescription,
     // Vodeća šifra artikla — isto što i `itemprop="sku"` na zvaničnoj stranici.

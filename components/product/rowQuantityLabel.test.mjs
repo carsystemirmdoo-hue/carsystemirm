@@ -10,5 +10,8 @@ test("oznaka količine prati red tabele pakovanja", () => {
   assert.equal(rowQuantityLabel({ package: "1,0 l", label: "Limenka" }), "1 L");
   assert.equal(rowQuantityLabel({ label: "RX253A / orbita 3 mm" }), null);
   assert.equal(rowQuantityLabel({ label: "P80" }), null);
+  assert.equal(rowQuantityLabel({ label: "Limenka 1,000 g sa učvršćivačem" }), "1.000 g");
+  assert.equal(rowQuantityLabel({ label: "Limenka 1.000 g sa učvršćivačem" }), "1.000 g");
+  assert.equal(rowQuantityLabel({ label: "Limenka 0,820 kg sa učvršćivačem" }), "0,820 kg");
   assert.equal(rowQuantityLabel({ package: "limenka", label: "1.6 kg limenka sa učvršćivačem" }), "1,6 kg");
 });

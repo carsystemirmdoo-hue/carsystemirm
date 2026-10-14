@@ -102,6 +102,8 @@ export type CatalogListingEntity = {
   phaseSlug: RefinishPhaseSlug;
   /** Dodatne faze za filter (R-M komponente sa više zvaničnih primena). */
   secondaryPhaseSlugs?: RefinishPhaseSlug[];
+  /** Faza bez potvrde u dokumentaciji: ne prikazuje se i ne filtrira (vidi CarsystemProduct). */
+  phaseUnconfirmed?: true;
   categorySlugs: string[];
   /** Everything the shared visual surface renders, pre-resolved. */
   presentation: ProductVisualPresentation;
@@ -234,6 +236,7 @@ function productEntity(
     programSlug: product.programSlug,
     phaseSlug: product.phaseSlug,
     ...(product.secondaryPhaseSlugs ? { secondaryPhaseSlugs: product.secondaryPhaseSlugs } : {}),
+    ...(product.phaseUnconfirmed ? { phaseUnconfirmed: true as const } : {}),
     categorySlugs: category ? [category] : [],
     presentation: toProductVisualPresentation(product),
     productCode: productCodeOf(product),

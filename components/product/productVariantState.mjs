@@ -86,8 +86,13 @@ export function rowQuantityLabel(row) {
     .map((text) => ROW_QUANTITY.exec(String(text ?? "")))
     .find(Boolean);
   if (!match) return null;
+  const unit = match[2].toLowerCase();
+  // „1,000 g” / „1.000 g” su hiljade (gram i mililitar nemaju tri decimale); kod kg i l su decimale.
+  if ((unit === "g" || unit === "ml") && /^[1-9]\d{0,2}[.,]\d{3}$/.test(match[1])) {
+    return `${match[1].replace(",", ".")} ${ROW_UNIT_LABEL[unit]}`;
+  }
   const value = match[1].replace(".", ",").replace(/,0+$/, "");
-  return `${value} ${ROW_UNIT_LABEL[match[2].toLowerCase()]}`;
+  return `${value} ${ROW_UNIT_LABEL[unit]}`;
 }
 
 /**

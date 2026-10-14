@@ -54,7 +54,7 @@ export function EntityProductCard({
 
       <div className={styles.productBody}>
         <p className={styles.productMetaLine}>
-          {cardMetaParts([brand.name, program.shortName, phase.name]).join(" · ")}
+          {cardMetaParts([brand.name, program.shortName, product.phaseUnconfirmed ? undefined : phase.name]).join(" · ")}
         </p>
 
         <Link href={productHref}>

@@ -154,7 +154,7 @@ export function ProductDetailPage({
                 <div className={styles.heroTaxonomy}>
                   <Link href={brand.routes.landing}>{brand.name}</Link>
                   <Link href={placement.path}>{placement.name}</Link>
-                  {phase && phase.name !== placement.name ? <span>{phase.name}</span> : null}
+                  {phase && !product.phaseUnconfirmed && phase.name !== placement.name ? <span>{phase.name}</span> : null}
                 </div>
 
                 <ProductIdentity

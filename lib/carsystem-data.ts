@@ -1,3 +1,4 @@
+import { withSerbianMeasureDisplay } from "@/lib/serbian-measure-display";
 import { RM_CRYSTAL_BASE_SLUG, RM_PASTE_SLUG, withRmMixingBases } from "@/lib/rm-mixing-bases";
 import { abrasiveBackingTerms } from "@/lib/search/abrasive-backing.mjs";
 import { publicSkuOf } from "@/lib/catalog/public-code";
@@ -401,6 +402,12 @@ export type CarsystemProduct = {
   size?: ProductSize;
   /** Optional, reviewed content used by the canonical product-detail template. */
   detail?: ProductDetailContent;
+  /**
+   * Faza (`phaseSlug`) potiče samo iz kategorije izvora, a dokumentacija ne potvrđuje upotrebu u
+   * toj fazi. Faza se tada ne prikazuje i filter `?faza=` ne prikazuje proizvod; `phaseSlug` ostaje
+   * samo kao tehnički ključ (tipovi, rasporedi).
+   */
+  phaseUnconfirmed?: true;
 };
 
 import { getProductPublicStatus } from "@/lib/catalog-constants";
@@ -2926,7 +2933,9 @@ export const products: CarsystemProduct[] = architecturedProducts.map((product) 
 
 )
   .map(withoutRemovedReferences)
-  .map(withSuppliedImage);
+  .map(withSuppliedImage)
+  // Poslednji korak: decimalni zarez u srpskim opisima mera (samo prikaz, vidi modul).
+  .map(withSerbianMeasureDisplay);
 
 export function getAllCarsystemProducts() {
   return [...products];
@@ -2945,6 +2954,7 @@ export function toProductListingProduct(product: CarsystemProduct): CarsystemPro
     programSlug: product.programSlug,
     phaseSlug: product.phaseSlug,
     ...(product.secondaryPhaseSlugs ? { secondaryPhaseSlugs: product.secondaryPhaseSlugs } : {}),
+    ...(product.phaseUnconfirmed ? { phaseUnconfirmed: true as const } : {}),
     shortDescription: product.shortDescription,
     longDescription: product.longDescription,
     sku: product.sku,
@@ -3360,7 +3370,7 @@ export function getRelatedProducts(product: CarsystemProduct, limit = 4) {
       let score = 0;
       if (item.brandSlug === product.brandSlug) score += 3;
       if (item.programSlug === product.programSlug) score += 2;
-      if (item.phaseSlug === product.phaseSlug) score += 2;
+      if (!item.phaseUnconfirmed && !product.phaseUnconfirmed && item.phaseSlug === product.phaseSlug) score += 2;
       return { item, score };
     })
     .filter(({ score }) => score > 0)

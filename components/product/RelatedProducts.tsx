@@ -65,7 +65,7 @@ export function RelatedProducts({
               </Link>
               <div className={styles.relatedBody}>
                 <span className={styles.relatedMeta}>
-                  {cardMetaParts([brand?.name, program?.shortName, phase?.name]).join(" · ")}
+                  {cardMetaParts([brand?.name, program?.shortName, product.phaseUnconfirmed ? undefined : phase?.name]).join(" · ")}
                 </span>
                 <h3 className={styles.relatedName}>
                   <Link href={productHref}>{product.name}</Link>

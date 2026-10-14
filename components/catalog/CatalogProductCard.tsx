@@ -65,7 +65,7 @@ export function CatalogProductCard({
 
   const metaItems = listing.line
     ? [brand.name, listing.line]
-    : cardMetaParts([brand.name, program.shortName, phase.name]);
+    : cardMetaParts([brand.name, program.shortName, listing.phaseUnconfirmed ? undefined : phase.name]);
 
   /*
    * Roletna kartice na /katalog (`catalogSystem`) — dva pravila, jedno mesto:

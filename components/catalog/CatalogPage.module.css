@@ -1480,3 +1480,456 @@
     transform: none;
   }
 }
+
+/* ===========================================================================
+ * Sistem A — uzorak na /katalog (data-ds="a" na .catalogShell)
+ *
+ * Isti raspored; menjaju se boje (zajednički tokeni), tipografija, kontrole i
+ * kartice. Najmanji tekst je 12 px (oznake), sporedni 14 px, tekst 16 px.
+ * Velika slova samo za kratke oznake (do 4 reči). Uglovi 2 px, kartice se
+ * odvajaju linijom umesto senke, bez podizanja na prelaz mišem.
+ * ========================================================================= */
+.catalogShell[data-ds="a"] {
+  --catalog-red: var(--ds-c-accent);
+  --catalog-red-bright: var(--ds-c-accent-text);
+  --catalog-sort-active-text: var(--ds-c-accent-text);
+  --catalog-red-tint: var(--ds-c-accent-soft);
+  --catalog-bg: var(--ds-c-bg);
+  --catalog-bg-soft: var(--ds-c-bg);
+  --catalog-panel: var(--ds-c-surface);
+  --catalog-panel-strong: var(--ds-c-surface-2);
+  --catalog-ink: var(--ds-c-text);
+  --catalog-muted: var(--ds-c-text-2);
+  --catalog-faint: var(--ds-c-text-3);
+  --catalog-border: var(--ds-c-line);
+  --catalog-border-soft: var(--ds-c-line);
+  --catalog-shadow: none;
+}
+
+/* Oznake: Plex Mono 12 px, 500, razmak 0,08 em, crvena crtica 24 × 2 px. */
+.catalogShell[data-ds="a"] .kicker {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--ds-c-accent-text);
+  font-size: var(--ds-font-label);
+  font-weight: 500;
+  letter-spacing: var(--ds-tracking-label);
+}
+
+.catalogShell[data-ds="a"] .kicker::before {
+  content: "";
+  width: 24px;
+  height: 2px;
+  flex: none;
+  background: var(--ds-c-accent);
+}
+
+.catalogShell[data-ds="a"] .title {
+  font-size: var(--ds-font-h1);
+  font-weight: 800;
+  letter-spacing: var(--ds-tracking-h);
+  line-height: 1.05;
+  text-transform: none;
+}
+
+.catalogShell[data-ds="a"] .subtitle {
+  color: var(--ds-c-text-2);
+  font-size: var(--ds-font-lead);
+  line-height: 1.55;
+}
+
+.catalogShell[data-ds="a"] .heroTools,
+.catalogShell[data-ds="a"] .supportCta,
+.catalogShell[data-ds="a"] .emptyState,
+.catalogShell[data-ds="a"] .filters {
+  border-color: var(--ds-c-line);
+  border-radius: var(--ds-ctl-radius);
+  background: var(--ds-c-surface);
+  box-shadow: none;
+}
+
+.catalogShell[data-ds="a"] .searchLabel,
+.catalogShell[data-ds="a"] .filterField label {
+  color: var(--ds-c-text);
+  font-family: var(--font-body), system-ui, sans-serif;
+  font-size: var(--ds-font-small);
+  font-weight: 600;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+.catalogShell[data-ds="a"] .searchInput {
+  min-height: var(--ds-ctl-h-field);
+  border-color: var(--ds-c-field);
+  border-radius: var(--ds-ctl-radius);
+  background: var(--ds-c-surface);
+  font-size: var(--ds-font-body);
+  font-weight: 400;
+}
+
+.catalogShell[data-ds="a"] .searchInput::placeholder {
+  color: var(--ds-c-text-3);
+}
+
+.catalogShell[data-ds="a"] .searchInput:focus {
+  border-color: var(--ds-c-accent);
+  box-shadow: none;
+  outline: 2px solid var(--ds-c-focus);
+  outline-offset: 1px;
+}
+
+.catalogShell[data-ds="a"] .quickStats span,
+.catalogShell[data-ds="a"] .activeCategoryChip {
+  border: 1px solid var(--ds-c-line-strong);
+  border-radius: var(--ds-ctl-radius);
+  background: var(--ds-c-surface);
+  color: var(--ds-c-text-2);
+  font-size: 0.8125rem;
+  font-weight: 500;
+}
+
+/* Aktivna kategorija je izabrano stanje: 2 px ivica + mekana podloga. */
+.catalogShell[data-ds="a"] .activeCategoryChip {
+  min-height: var(--ds-ctl-h-s);
+  border: 2px solid var(--ds-c-accent);
+  background: var(--ds-c-accent-soft);
+  color: var(--ds-c-text);
+  font-size: var(--ds-font-small);
+  font-weight: 600;
+}
+
+.catalogShell[data-ds="a"] .activeCategoryChip:focus-visible {
+  outline: 2px solid var(--ds-c-focus);
+  outline-offset: 2px;
+}
+
+.catalogShell[data-ds="a"] .activeCategoryHint {
+  color: var(--ds-c-text-2);
+  font-size: var(--ds-font-small);
+}
+
+.catalogShell[data-ds="a"] .phaseTabs {
+  border-bottom-color: var(--ds-c-line);
+}
+
+.catalogShell[data-ds="a"] .phaseTab {
+  color: var(--ds-c-text-2);
+  font-size: 0.9375rem;
+  font-weight: 500;
+}
+
+.catalogShell[data-ds="a"] .phaseTab:hover,
+.catalogShell[data-ds="a"] .phaseTabActive {
+  color: var(--ds-c-text);
+}
+
+.catalogShell[data-ds="a"] .phaseTabActive {
+  font-weight: 600;
+}
+
+.catalogShell[data-ds="a"] .phaseTab span {
+  border-radius: 0;
+  background: var(--ds-c-accent);
+}
+
+.catalogShell[data-ds="a"] .phaseTab:focus-visible {
+  outline: 2px solid var(--ds-c-focus);
+  outline-offset: 2px;
+}
+
+.catalogShell[data-ds="a"] .sectionHeader h2,
+.catalogShell[data-ds="a"] .supportCta h2 {
+  font-size: var(--ds-font-h2);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  line-height: 1.1;
+}
+
+.catalogShell[data-ds="a"] .filtersHeader h2 {
+  font-size: var(--ds-font-h3);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  line-height: 1.2;
+}
+
+.catalogShell[data-ds="a"] .filtersStickyHeader {
+  border-bottom-color: var(--ds-c-line);
+  background: var(--ds-c-surface);
+}
+
+/* Dugmad: tri varijante (primarno, sekundarno, tekstualna veza). */
+.catalogShell[data-ds="a"] .primaryButton,
+.catalogShell[data-ds="a"] .secondaryButton,
+.catalogShell[data-ds="a"] .filterToggle {
+  min-height: var(--ds-ctl-h-m);
+  gap: 10px;
+  border-radius: var(--ds-ctl-radius);
+  padding: 0 20px;
+  font: var(--ds-ctl-font);
+  transition:
+    background-color 120ms ease,
+    border-color 120ms ease,
+    color 120ms ease;
+}
+
+.catalogShell[data-ds="a"] .primaryButton {
+  border: 1px solid transparent;
+  background: var(--ds-c-accent);
+  color: var(--ds-c-on-accent) !important;
+}
+
+.catalogShell[data-ds="a"] .primaryButton:hover {
+  background: var(--ds-c-accent-hover);
+}
+
+.catalogShell[data-ds="a"] .primaryButton:active {
+  background: var(--ds-c-accent-press);
+}
+
+.catalogShell[data-ds="a"] .secondaryButton,
+.catalogShell[data-ds="a"] .filterToggle {
+  border: 1px solid var(--ds-c-text);
+  background: transparent;
+  color: var(--ds-c-text);
+}
+
+.catalogShell[data-ds="a"] .secondaryButton:hover,
+.catalogShell[data-ds="a"] .filterToggle:hover {
+  background: var(--ds-c-surface-2);
+}
+
+.catalogShell[data-ds="a"] .secondaryButton:active,
+.catalogShell[data-ds="a"] .filterToggle:active {
+  background: var(--ds-c-line);
+}
+
+.catalogShell[data-ds="a"] .primaryButton:hover,
+.catalogShell[data-ds="a"] .secondaryButton:hover,
+.catalogShell[data-ds="a"] .filterToggle:hover {
+  transform: none;
+}
+
+.catalogShell[data-ds="a"] .primaryButton:focus-visible,
+.catalogShell[data-ds="a"] .secondaryButton:focus-visible,
+.catalogShell[data-ds="a"] .filterToggle:focus-visible {
+  outline: 2px solid var(--ds-c-focus);
+  outline-offset: 2px;
+}
+
+.catalogShell[data-ds="a"] .primaryButton:disabled,
+.catalogShell[data-ds="a"] .secondaryButton:disabled,
+.catalogShell[data-ds="a"] .filterToggle:disabled {
+  border-color: var(--ds-c-line);
+  background: var(--ds-c-surface-2);
+  color: var(--ds-c-text-3) !important;
+  cursor: not-allowed;
+}
+
+.catalogShell[data-ds="a"] .clearButton {
+  min-height: var(--ds-ctl-h-s);
+  border-radius: var(--ds-ctl-radius);
+  color: var(--ds-c-text);
+  font-size: var(--ds-font-small);
+  font-weight: 600;
+  text-decoration: underline;
+  text-decoration-color: var(--ds-c-line-strong);
+  text-underline-offset: 4px;
+}
+
+.catalogShell[data-ds="a"] .clearButton span {
+  color: var(--ds-c-accent-text);
+}
+
+.catalogShell[data-ds="a"] .clearButton:hover {
+  text-decoration-color: var(--ds-c-text);
+  text-decoration-thickness: 2px;
+}
+
+.catalogShell[data-ds="a"] .clearButton:focus-visible,
+.catalogShell[data-ds="a"] .desktopFilterCollapse:focus-visible,
+.catalogShell[data-ds="a"] .filtersExpandTab:focus-visible,
+.catalogShell[data-ds="a"] .mobileFilterClose:focus-visible {
+  outline: 2px solid var(--ds-c-focus);
+  outline-offset: 2px;
+}
+
+.catalogShell[data-ds="a"] .desktopFilterCollapse,
+.catalogShell[data-ds="a"] .mobileFilterClose,
+.catalogShell[data-ds="a"] .filtersExpandTab {
+  border-color: var(--ds-c-line-strong);
+  border-radius: var(--ds-ctl-radius);
+  background: var(--ds-c-surface);
+  font-weight: 600;
+}
+
+.catalogShell[data-ds="a"] .desktopFilterCollapse:hover,
+.catalogShell[data-ds="a"] .mobileFilterClose:hover,
+.catalogShell[data-ds="a"] .filtersExpandTab:hover {
+  border-color: var(--ds-c-text-2);
+  background: var(--ds-c-surface-2);
+  transform: none;
+}
+
+.catalogShell[data-ds="a"] .filtersExpandTab small,
+.catalogShell[data-ds="a"] .activeModule span {
+  color: var(--ds-c-text-3);
+  font-size: var(--ds-font-label);
+  font-weight: 500;
+  letter-spacing: var(--ds-tracking-label);
+}
+
+.catalogShell[data-ds="a"] .activeModule {
+  border: 2px solid var(--ds-c-accent);
+  border-radius: var(--ds-ctl-radius);
+  background: var(--ds-c-accent-soft);
+}
+
+/* Broj rezultata je rečenica, ne oznaka: bez velikih slova. */
+.catalogShell[data-ds="a"] .resultCount {
+  color: var(--ds-c-text-2);
+  font-family: var(--font-body), system-ui, sans-serif;
+  font-size: var(--ds-font-small);
+  font-weight: 500;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+.catalogShell[data-ds="a"] .sortTab {
+  min-height: var(--ds-ctl-h-s);
+  border-radius: var(--ds-ctl-radius);
+  color: var(--ds-c-text-2);
+  font-size: var(--ds-font-small);
+  font-weight: 500;
+}
+
+.catalogShell[data-ds="a"] .sortTab:hover {
+  color: var(--ds-c-text);
+}
+
+.catalogShell[data-ds="a"] .sortTabActive {
+  background: var(--ds-c-accent-soft);
+  color: var(--ds-c-text);
+  font-weight: 600;
+  box-shadow: inset 0 -2px 0 var(--ds-c-accent);
+}
+
+.catalogShell[data-ds="a"] .sortTab:focus-visible {
+  outline: 2px solid var(--ds-c-focus);
+}
+
+/* Kartica proizvoda */
+.catalogShell[data-ds="a"] .productCard {
+  border-color: var(--ds-c-line);
+  border-radius: var(--ds-ctl-radius);
+  background: var(--ds-c-surface);
+  box-shadow: none;
+}
+
+.catalogShell[data-ds="a"] .productCard:hover {
+  border-color: var(--ds-c-line-strong);
+  box-shadow: none;
+}
+
+.catalogShell[data-ds="a"] .productCard:focus-visible {
+  outline: 2px solid var(--ds-c-focus);
+  outline-offset: 2px;
+}
+
+.catalogShell[data-ds="a"] .productBody {
+  gap: 8px;
+  padding: 16px 18px 18px;
+}
+
+/* Šifra: mono, boja teksta (crvena je ostavljena za akciju i izabrano). */
+.catalogShell[data-ds="a"] .productCode {
+  color: var(--ds-c-text-2);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  letter-spacing: 0;
+}
+
+.catalogShell[data-ds="a"] .productMetaLine {
+  color: var(--ds-c-text-3);
+  font-size: var(--ds-font-label);
+  font-weight: 500;
+  letter-spacing: var(--ds-tracking-label);
+}
+
+.catalogShell[data-ds="a"] .productTitleRow h3 {
+  font-size: var(--ds-font-card-title);
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+.catalogShell[data-ds="a"] .productTitleArrow {
+  border-color: var(--ds-c-line-strong);
+  border-radius: var(--ds-ctl-radius);
+  color: var(--ds-c-text-2);
+}
+
+.catalogShell[data-ds="a"] .productCard:hover .productTitleArrow,
+.catalogShell[data-ds="a"] .productCard:focus-visible .productTitleArrow {
+  border-color: var(--ds-c-text);
+  color: var(--ds-c-text);
+}
+
+.catalogShell[data-ds="a"] .productTechnicalLine {
+  color: var(--ds-c-text-2);
+  font-size: var(--ds-font-label);
+  font-weight: 500;
+  letter-spacing: 0;
+}
+
+.catalogShell[data-ds="a"] .emptyState h3 {
+  font-family: var(--font-display), system-ui, sans-serif;
+  font-size: var(--ds-font-h3);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.catalogShell[data-ds="a"] .emptyStateHint,
+.catalogShell[data-ds="a"] .supportCta p {
+  color: var(--ds-c-text-2);
+  font-size: var(--ds-font-body);
+}
+
+/* „Pregled po tehničkoj nameni": naslov sekcije, ne natpis velikim slovima. */
+.catalogShell[data-ds="a"] .categoryLandingRail h2 {
+  font-size: var(--ds-font-h3);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  text-transform: none;
+}
+
+.catalogShell[data-ds="a"] .categoryLandingRail a {
+  border-color: var(--ds-c-line-strong);
+  border-radius: var(--ds-ctl-radius);
+  background: var(--ds-c-surface);
+  font-weight: 600;
+}
+
+.catalogShell[data-ds="a"] .categoryLandingRail a:hover,
+.catalogShell[data-ds="a"] .categoryLandingRail a:focus-visible {
+  border-color: var(--ds-c-text);
+}
+
+/* Veliki ekrani: kartica zadržava ~260–340 px; kolona se dodaje umesto da
+   kartica raste (na 2560 px kontejner je ~1740 px). */
+@media (min-width: 2200px) {
+  .catalogShell[data-ds="a"] .productGrid {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
+}
+
+/* Telefon: dve kolone su uske (~170 px); naziv dobija četiri reda pre
+   skraćivanja, a meta red manji razmak slova da ne prelazi u tri reda. */
+@media (max-width: 520px) {
+  .catalogShell[data-ds="a"] .productTitleRow h3 {
+    -webkit-line-clamp: 4;
+  }
+
+  .catalogShell[data-ds="a"] .productMetaLine {
+    letter-spacing: 0.04em;
+  }
+}

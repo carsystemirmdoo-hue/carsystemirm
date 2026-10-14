@@ -9,23 +9,29 @@ import { ThemeScript } from "@/components/layout/ThemeScript";
 import { siteConfig } from "@/lib/seo";
 import "./globals.css";
 
+/*
+ * `latin-ext` nosi č, ć, š, ž i đ. Bez njega u preload-u ova slova na sporoj mreži
+ * stižu ~1 s posle prvog prikaza (izmereno: /katalog, spori 4G, FCP 2,46 s, latin-ext
+ * 3,35–3,47 s), pa reči kratko mešaju dva fonta. Fajlovi se ionako preuzimaju na
+ * svakoj stranici na srpskom; preload ih samo ranije zakazuje.
+ */
 const archivo = Archivo({
   variable: "--font-display",
-  subsets: ["latin"],
+  subsets: ["latin", "latin-ext"],
   weight: ["500", "600", "700", "800", "900"],
   display: "swap",
 });
 
 const plexSans = IBM_Plex_Sans({
   variable: "--font-body",
-  subsets: ["latin"],
+  subsets: ["latin", "latin-ext"],
   weight: ["300", "400", "500", "600", "700"],
   display: "swap",
 });
 
 const plexMono = IBM_Plex_Mono({
   variable: "--font-technical",
-  subsets: ["latin"],
+  subsets: ["latin", "latin-ext"],
   weight: ["400", "500", "600"],
   display: "swap",
 });

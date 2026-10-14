@@ -382,3 +382,113 @@
     transition: none;
   }
 }
+
+/* ---------------------------------------------------------------------------
+ * Sistem A (uzorak): stranice označene sa data-ds="a". Polje iste visine,
+ * ugla i ivice kao ostala polja; ivica ≥ 3:1 prema površini, fokus 2 px.
+ * ------------------------------------------------------------------------- */
+:global([data-ds="a"]) .trigger {
+  min-height: var(--ds-ctl-h-field);
+  border-color: var(--ds-c-field);
+  border-radius: var(--ds-ctl-radius);
+  background: var(--ds-c-surface);
+  color: var(--ds-c-text);
+  padding: 0 12px 0 14px;
+  font-size: var(--ds-font-body);
+  font-weight: 400;
+}
+
+:global([data-ds="a"]) .trigger:hover:not(:disabled) {
+  border-color: var(--ds-c-text-2);
+}
+
+:global([data-ds="a"]) .trigger:focus-visible {
+  border-color: var(--ds-c-accent);
+  outline: 2px solid var(--ds-c-focus);
+  outline-offset: 1px;
+  box-shadow: none;
+}
+
+:global([data-ds="a"]) .trigger:disabled {
+  border-color: var(--ds-c-line);
+  background: var(--ds-c-surface-2);
+  color: var(--ds-c-text-3);
+  opacity: 1;
+}
+
+:global([data-ds="a"]) .triggerPlaceholder {
+  color: var(--ds-c-text-3);
+}
+
+:global([data-ds="a"]) .panel {
+  border-color: var(--ds-c-line-strong);
+  border-radius: var(--ds-overlay-radius);
+  background: var(--ds-c-surface);
+  color: var(--ds-c-text);
+}
+
+:global([data-ds="a"]) .searchWrap {
+  border-bottom-color: var(--ds-c-line);
+}
+
+:global([data-ds="a"]) .searchInput {
+  min-height: 40px;
+  border: 1px solid var(--ds-c-field);
+  border-radius: var(--ds-ctl-radius);
+  background: var(--ds-c-surface);
+  font-size: var(--ds-font-body);
+}
+
+:global([data-ds="a"]) .searchInput:focus-visible {
+  border-color: var(--ds-c-accent);
+  box-shadow: none;
+  outline: 2px solid var(--ds-c-focus);
+  outline-offset: 1px;
+}
+
+:global([data-ds="a"]) .searchInput::placeholder {
+  color: var(--ds-c-text-3);
+}
+
+:global([data-ds="a"]) .option {
+  border-radius: var(--ds-ctl-radius);
+  font-size: 0.9375rem;
+  font-weight: 400;
+}
+
+:global([data-ds="a"]) .option:hover,
+:global([data-ds="a"]) .option[data-active] {
+  background: var(--ds-c-surface-2);
+}
+
+:global([data-ds="a"]) .option[aria-selected="true"] {
+  background: var(--ds-c-accent-soft);
+  color: var(--ds-c-text);
+  font-weight: 600;
+  box-shadow: inset 2px 0 0 var(--ds-c-accent);
+}
+
+:global([data-ds="a"]) .option:focus-visible {
+  outline-color: var(--ds-c-focus);
+}
+
+:global([data-ds="a"]) .check {
+  border-radius: var(--ds-ctl-radius);
+  background: transparent;
+  color: var(--ds-c-accent-text);
+}
+
+:global([data-ds="a"]) .emptyState {
+  color: var(--ds-c-text-2);
+  font-size: var(--ds-font-small);
+}
+
+:global([data-ds="a"]) .closeButton {
+  border-color: var(--ds-c-line-strong);
+  border-radius: var(--ds-ctl-radius);
+  background: var(--ds-c-surface);
+}
+
+:global([data-ds="a"]) .closeButton:focus-visible {
+  outline-color: var(--ds-c-focus);
+}

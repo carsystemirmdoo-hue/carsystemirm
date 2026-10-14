@@ -2658,3 +2658,375 @@ a.colorOptionContent:active {
     animation: none;
   }
 }
+
+/* ===========================================================================
+ * Sistem A — uzorak na stranici proizvoda (data-ds="a" na .pageShell)
+ *
+ * Raspored, galerija i senke proizvoda ostaju (zaključan PDP). Menjaju se
+ * boje (zajednički tokeni), tipografija, dugmad i izbor pakovanja: pun naziv
+ * pakovanja u dva reda umesto skraćivanja, oznake 12 px, šifra u mono 14 px.
+ * ========================================================================= */
+.pageShell[data-ds="a"] {
+  --detail-bg: var(--ds-c-bg);
+  --detail-surface: var(--ds-c-surface);
+  --detail-surface-muted: var(--ds-c-surface-2);
+  --detail-ink: var(--ds-c-text);
+  --detail-muted: var(--ds-c-text-2);
+  --detail-faint: var(--ds-c-text-3);
+  --detail-border: var(--ds-c-line);
+  --detail-border-strong: var(--ds-c-line-strong);
+  --detail-red: var(--ds-c-accent-text);
+  --detail-red-hover: var(--ds-c-accent-hover);
+  --detail-red-fill: var(--ds-c-accent);
+  --detail-red-fill-hover: var(--ds-c-accent-hover);
+}
+
+.pageShell[data-ds="a"] .breadcrumb {
+  color: var(--ds-c-text-2);
+  font-size: var(--ds-font-small);
+  font-weight: 400;
+}
+
+.pageShell[data-ds="a"] .breadcrumb li:last-child {
+  font-weight: 600;
+}
+
+.pageShell[data-ds="a"] .heroTaxonomy a,
+.pageShell[data-ds="a"] .heroTaxonomy span {
+  border-color: var(--ds-c-line-strong);
+  border-radius: var(--ds-ctl-radius);
+  color: var(--ds-c-text-2);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  padding: 0.35rem 0.6rem;
+}
+
+.pageShell[data-ds="a"] .heroTaxonomy a {
+  color: var(--ds-c-text);
+}
+
+.pageShell[data-ds="a"] .heroKicker,
+.pageShell[data-ds="a"] .optionHeader > p {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--ds-c-accent-text);
+  font-size: var(--ds-font-label);
+  font-weight: 500;
+  letter-spacing: var(--ds-tracking-label);
+}
+
+.pageShell[data-ds="a"] .heroKicker::before,
+.pageShell[data-ds="a"] .optionHeader > p::before {
+  content: "";
+  width: 24px;
+  height: 2px;
+  flex: none;
+  background: var(--ds-c-accent);
+}
+
+.pageShell[data-ds="a"] .heroTitle {
+  max-width: 18ch;
+  font-size: var(--ds-font-h1);
+  font-weight: 800;
+  letter-spacing: var(--ds-tracking-h);
+  line-height: 1.05;
+}
+
+.pageShell[data-ds="a"] .heroSubtype {
+  font-size: var(--ds-font-h3);
+  font-weight: 600;
+}
+
+.pageShell[data-ds="a"] .heroLead {
+  max-width: var(--ds-w-measure);
+  color: var(--ds-c-text-2);
+  font-size: var(--ds-font-lead);
+  line-height: 1.55;
+}
+
+.pageShell[data-ds="a"] .heroReference small,
+.pageShell[data-ds="a"] .variantGroup legend,
+.pageShell[data-ds="a"] .activeVariantDeclaration small,
+.pageShell[data-ds="a"] .activeVariantDeclaration dt {
+  color: var(--ds-c-text-3);
+  font-size: var(--ds-font-label);
+  font-weight: 500;
+  letter-spacing: var(--ds-tracking-label);
+}
+
+.pageShell[data-ds="a"] .heroReference strong {
+  font-size: 0.9375rem;
+  font-weight: 500;
+}
+
+.pageShell[data-ds="a"] .heroReference [data-variant-sku] {
+  font-family: var(--font-technical), monospace;
+  font-size: var(--ds-font-code);
+  font-weight: 500;
+}
+
+/* „Na upit" je oznaka postupka, ne upozorenje: boja teksta umesto crvene. */
+.pageShell[data-ds="a"] .statusValue {
+  color: var(--ds-c-text);
+}
+
+.pageShell[data-ds="a"] .primaryAction,
+.pageShell[data-ds="a"] .secondaryAction,
+.pageShell[data-ds="a"] .finalPrimaryAction,
+.pageShell[data-ds="a"] .finalSecondaryAction {
+  min-height: var(--ds-ctl-h-l);
+  gap: 10px;
+  border-radius: var(--ds-ctl-radius);
+  padding: 0 24px;
+  font: var(--ds-ctl-font);
+  font-size: 1rem;
+}
+
+.pageShell[data-ds="a"] .primaryAction {
+  border-color: transparent;
+  background: var(--ds-c-accent);
+  color: var(--ds-c-on-accent);
+}
+
+.pageShell[data-ds="a"] .primaryAction:hover {
+  background: var(--ds-c-accent-hover);
+}
+
+.pageShell[data-ds="a"] .primaryAction:active {
+  background: var(--ds-c-accent-press);
+  transform: none;
+}
+
+.pageShell[data-ds="a"] .secondaryAction {
+  border-color: var(--ds-c-text);
+  background: transparent;
+  color: var(--ds-c-text);
+}
+
+.pageShell[data-ds="a"] .secondaryAction:hover {
+  background: var(--ds-c-surface-2);
+}
+
+.pageShell[data-ds="a"] .secondaryAction:active {
+  background: var(--ds-c-line);
+  transform: none;
+}
+
+.pageShell[data-ds="a"] .primaryAction:focus-visible,
+.pageShell[data-ds="a"] .secondaryAction:focus-visible,
+.pageShell[data-ds="a"] .finalPrimaryAction:focus-visible,
+.pageShell[data-ds="a"] .finalSecondaryAction:focus-visible,
+.pageShell[data-ds="a"] .zoomControl:focus-visible,
+.pageShell[data-ds="a"] .galleryThumb:focus-visible,
+.pageShell[data-ds="a"] .variantOptionControl:focus-visible {
+  outline: 2px solid var(--ds-c-focus);
+  outline-offset: 2px;
+}
+
+.pageShell[data-ds="a"] .heroNotice,
+.pageShell[data-ds="a"] .optionNote {
+  color: var(--ds-c-text-3);
+  font-size: var(--ds-font-legal);
+  line-height: 1.5;
+}
+
+.pageShell[data-ds="a"] .galleryThumb {
+  border-radius: var(--ds-ctl-radius);
+}
+
+.pageShell[data-ds="a"] .galleryThumb[data-active="true"] {
+  border: 2px solid var(--ds-c-accent);
+}
+
+.pageShell[data-ds="a"] .galleryThumb::after {
+  display: none;
+}
+
+.pageShell[data-ds="a"] .heroProductFallback small {
+  font-size: var(--ds-font-label);
+  font-weight: 500;
+  letter-spacing: var(--ds-tracking-label);
+}
+
+.pageShell[data-ds="a"] .heroProductFallback span {
+  font-size: var(--ds-font-small);
+  font-weight: 500;
+}
+
+.pageShell[data-ds="a"] .optionSection {
+  --family-accent: var(--ds-c-accent);
+  --family-accent-soft: var(--ds-c-accent-soft);
+  border-top-color: var(--ds-c-line);
+}
+
+.pageShell[data-ds="a"] .optionHeader h2 {
+  font-size: var(--ds-font-h3);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  line-height: 1.2;
+}
+
+.pageShell[data-ds="a"] .optionHeader > span {
+  color: var(--ds-c-text-2);
+  font-size: var(--ds-font-small);
+  line-height: 1.55;
+}
+
+/* Izbor pakovanja: pun naziv (do dva reda), ugao 2 px, izabrano = 2 px ivica. */
+.pageShell[data-ds="a"] .variantOptionList:not([data-option-kind="color"]) {
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 11.5rem), 1fr));
+}
+
+.pageShell[data-ds="a"] .variantOptionControl {
+  min-height: var(--ds-ctl-h-l);
+  border-color: var(--ds-c-line-strong);
+  border-radius: var(--ds-ctl-radius);
+  background: var(--ds-c-surface);
+  padding: 0.6rem 0.75rem;
+}
+
+.pageShell[data-ds="a"] .optionSection[data-option-shape="pill"] .variantOptionControl {
+  border-radius: var(--ds-ctl-radius);
+}
+
+.pageShell[data-ds="a"] .variantOptionControl[data-selected="true"] {
+  border: 2px solid var(--ds-c-accent);
+  background: var(--ds-c-accent-soft);
+  box-shadow: none;
+  padding: calc(0.6rem - 1px) calc(0.75rem - 1px);
+}
+
+.pageShell[data-ds="a"] .variantOptionControl:disabled {
+  border-color: var(--ds-c-line);
+  background: var(--ds-c-surface-2);
+  color: var(--ds-c-text-3);
+  opacity: 1;
+}
+
+.pageShell[data-ds="a"] .variantOptionControl:active {
+  transform: none;
+}
+
+.pageShell[data-ds="a"] .variantOptionCopy strong {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  font-family: var(--font-body), system-ui, sans-serif;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  line-height: 1.3;
+  white-space: normal;
+}
+
+.pageShell[data-ds="a"] .variantOptionControl[data-selected="true"] .variantOptionCopy strong {
+  font-weight: 600;
+}
+
+.pageShell[data-ds="a"] .variantOptionCopy small {
+  color: var(--ds-c-text-2);
+  font-family: var(--font-technical), monospace;
+  font-size: var(--ds-font-label);
+  line-height: 1.3;
+}
+
+.pageShell[data-ds="a"] .variantSelectedMark {
+  border-radius: var(--ds-ctl-radius);
+  color: var(--ds-c-accent-text);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .pageShell[data-ds="a"] .variantOptionControl:not(:disabled):hover {
+    border-color: var(--ds-c-text-2);
+    background: var(--ds-c-surface);
+  }
+
+  .pageShell[data-ds="a"] .variantOptionControl[data-selected="true"]:hover {
+    border-color: var(--ds-c-accent);
+    background: var(--ds-c-accent-soft);
+  }
+}
+
+.pageShell[data-ds="a"] .activeVariantDeclaration > div:first-child strong {
+  font-family: var(--font-body), system-ui, sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.pageShell[data-ds="a"] .activeVariantDeclaration dd {
+  font-size: 0.9375rem;
+  font-weight: 500;
+}
+
+.pageShell[data-ds="a"] .variantInquiryLink {
+  min-height: var(--ds-ctl-h-s);
+  color: var(--ds-c-text);
+  font-size: var(--ds-font-small);
+  font-weight: 600;
+  text-decoration: underline;
+  text-decoration-color: var(--ds-c-line-strong);
+  text-underline-offset: 4px;
+}
+
+.pageShell[data-ds="a"] .variantInquiryLink:hover {
+  text-decoration-color: var(--ds-c-text);
+  text-decoration-thickness: 2px;
+}
+
+.pageShell[data-ds="a"] .sectionHeading h2 {
+  font-size: var(--ds-font-h2);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  line-height: 1.1;
+}
+
+.pageShell[data-ds="a"] .sectionHeading p {
+  color: var(--ds-c-text-2);
+}
+
+/* Završni blok „Savet pre izbora" je obrnuta (crvena) površina: dugmad na
+   fotografiji/boji — belo primarno i beli okvir. U tamnoj temi podloga je
+   tamnija crvena (#b5142b), jer svetlija ispuna sa sitnim tekstom daje 4.49:1. */
+.pageShell[data-ds="a"] .finalCta {
+  border-radius: var(--ds-ctl-radius);
+  background: var(--ds-c-accent);
+}
+
+:global(.dark) .pageShell[data-ds="a"] .finalCta {
+  background: var(--ds-c-accent-press);
+}
+
+.pageShell[data-ds="a"] .finalPrimaryAction {
+  border-color: transparent;
+  background: #ffffff;
+  color: #111418;
+}
+
+.pageShell[data-ds="a"] .finalPrimaryAction:hover {
+  background: rgba(255, 255, 255, 0.9);
+}
+
+.pageShell[data-ds="a"] .finalPrimaryAction:active {
+  background: rgba(255, 255, 255, 0.8);
+  transform: none;
+}
+
+.pageShell[data-ds="a"] .finalSecondaryAction {
+  border-color: rgba(255, 255, 255, 0.85);
+  background: transparent;
+  color: #ffffff;
+}
+
+.pageShell[data-ds="a"] .finalSecondaryAction:hover {
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.pageShell[data-ds="a"] .finalSecondaryAction:active {
+  background: rgba(255, 255, 255, 0.2);
+  transform: none;
+}
+
+.pageShell[data-ds="a"] .finalPrimaryAction:focus-visible,
+.pageShell[data-ds="a"] .finalSecondaryAction:focus-visible {
+  outline-color: #ffffff;
+}

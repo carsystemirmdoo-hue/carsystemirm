@@ -133,7 +133,7 @@ export function ProductDetailPage({
       initialKey={initialVariantKey}
       variants={variantViews}
     >
-    <div className={styles.pageShell}>
+    <div className={styles.pageShell} data-ds="a">
       <main className={styles.pageMain}>
         <ProductBreadcrumb items={breadcrumbItems} />
 

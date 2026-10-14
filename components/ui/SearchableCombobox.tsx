@@ -380,7 +380,12 @@ export function SearchableCombobox({
 
       {mounted && open
         ? createPortal(
-            <div className={`${styles.layer} ${isMobile ? styles.layerMobile : ""}`}>
+            <div
+              className={`${styles.layer} ${isMobile ? styles.layerMobile : ""}`}
+              /* Sloj se crta u <body>, van stranice; nosi oznaku dizajn sistema
+                 stranice sa koje je otvoren, da izgleda kao i njen okidač. */
+              data-ds={triggerRef.current?.closest<HTMLElement>("[data-ds]")?.dataset.ds}
+            >
               {isMobile ? (
                 <div
                   aria-hidden="true"

@@ -2148,3 +2148,124 @@ html[data-route-transition="fallback"] .cs-route-transition-screen {
   width: min(var(--ds-container-max), 100% - (var(--ds-gutter) * 2));
   margin-inline: auto;
 }
+
+/* ============================================================================
+ * SISTEM A — zajednički tokeni (odluka vlasnika 2026-10-14, pravac A)
+ *
+ * Boje, tipografija, kontrole i širine po nameni. Vrednosti su proverene na
+ * stvarnim kombinacijama pozadina (WCAG: tekst ≥ 4.5:1, ivice polja, fokus i
+ * izabrano stanje ≥ 3:1). Primena je za sada ograničena na stranice označene
+ * sa `data-ds="a"` (katalog i stranica proizvoda kao uzorak); ostale stranice
+ * čitaju ove tokene tek kada se primena potvrdi.
+ * ========================================================================== */
+:root {
+  /* Boje — svetla tema */
+  --ds-c-bg: #f6f7f8;
+  --ds-c-surface: #ffffff;
+  --ds-c-surface-2: #eef0f2;
+  --ds-c-scene-a: #f3f4f6;
+  --ds-c-scene-b: #e7eaed;
+  --ds-c-text: #0e1114;
+  --ds-c-text-2: #4a505a;
+  --ds-c-text-3: #626873;
+  --ds-c-line: #dcdfe3;
+  --ds-c-line-strong: #b4b9c1;
+  --ds-c-field: #80868f;
+  --ds-c-accent: #c8102e;
+  --ds-c-accent-hover: #a50d26;
+  --ds-c-accent-press: #8a0b20;
+  --ds-c-accent-text: #b20e29;
+  --ds-c-accent-soft: #fbeaed;
+  --ds-c-on-accent: #ffffff;
+  --ds-c-focus: #c8102e;
+  --ds-c-inverse: #111418;
+  --ds-c-on-inverse: #f2f4f6;
+  --ds-c-info: #285e8c;
+  --ds-c-info-bg: #e7f0f8;
+  --ds-c-ok: #1e7a3c;
+  --ds-c-ok-bg: #e5f3ea;
+  --ds-c-warn: #9a5b00;
+  --ds-c-warn-bg: #fff1d9;
+  --ds-c-err: #b3261e;
+  --ds-c-err-bg: #fce8e6;
+
+  /* Tipografija. Archivo ostaje na širini 100 %: osa širine bi povećala font
+     sa 66 KB na 172 KB po stranici. Zbijenost naslova daje težina 800 i blag
+     negativan razmak, ne razmak ispod -0,02 em (slova se ne dodiruju). */
+  --ds-font-h1: clamp(2rem, 1.35rem + 1.9vw, 3rem);
+  --ds-font-h2: clamp(1.625rem, 1.3rem + 1vw, 2.25rem);
+  --ds-font-h3: clamp(1.1875rem, 1.1rem + 0.3vw, 1.375rem);
+  --ds-tracking-h: -0.02em;
+  --ds-font-lead: clamp(1.0625rem, 1rem + 0.2vw, 1.1875rem);
+  --ds-font-body: 1rem;
+  --ds-font-small: 0.875rem;
+  --ds-font-legal: 0.8125rem;
+  --ds-font-label: 0.75rem;
+  --ds-tracking-label: 0.08em;
+  --ds-font-code: 0.875rem;
+  --ds-font-card-title: clamp(0.9375rem, 0.88rem + 0.2vw, 1.0625rem);
+
+  /* Kontrole */
+  --ds-ctl-h-l: 52px;
+  --ds-ctl-h-m: 44px;
+  --ds-ctl-h-s: 36px;
+  --ds-ctl-h-field: 48px;
+  --ds-ctl-radius: 2px;
+  --ds-overlay-radius: 4px;
+  --ds-ctl-font: 600 0.9375rem/1.2 var(--font-body), system-ui, sans-serif;
+
+  /* Širine po nameni. Kičma stranice (zaglavlje, sekcije, katalog) ostaje
+     postojeći --ds-container-max; ovo su unutrašnje granice. */
+  --ds-w-measure: 68ch;
+  --ds-w-pdp-media: 760px;
+  --ds-w-pdp-info: 640px;
+}
+
+.dark {
+  --ds-c-bg: #0d1013;
+  --ds-c-surface: #15191e;
+  --ds-c-surface-2: #1c2128;
+  --ds-c-scene-a: #232830;
+  --ds-c-scene-b: #1a1e24;
+  --ds-c-text: #eef0f3;
+  --ds-c-text-2: #b4bac2;
+  --ds-c-text-3: #8f96a0;
+  --ds-c-line: #2a3038;
+  --ds-c-line-strong: #434a54;
+  --ds-c-field: #6e7682;
+  --ds-c-accent: #d21a33;
+  --ds-c-accent-hover: #e02a42;
+  --ds-c-accent-press: #b5142b;
+  --ds-c-accent-text: #ff6b66;
+  --ds-c-accent-soft: #3a1a1f;
+  --ds-c-on-accent: #ffffff;
+  --ds-c-focus: #ff958a;
+  --ds-c-inverse: #f2f4f6;
+  --ds-c-on-inverse: #111418;
+  --ds-c-info: #8dbbe6;
+  --ds-c-info-bg: #15263a;
+  --ds-c-ok: #5bc37f;
+  --ds-c-ok-bg: #12301d;
+  --ds-c-warn: #f2b65a;
+  --ds-c-warn-bg: #33270f;
+  --ds-c-err: #ff8a80;
+  --ds-c-err-bg: #3a1a1d;
+}
+
+/* Površine i u oklch sa eksplicitnim tonom: komponente ih mešaju sa
+   `transparent` u oklch prostoru (color-mix), a HEX siva tada u Chrome-u gubi
+   ton i prikazuje se crvenkasto. HEX iznad ostaje za pregledače bez CSS Color 4
+   (npr. Chromium 109 na starijim računarima). */
+@supports (color: oklch(0 0 0)) {
+  :root {
+    --ds-c-bg: oklch(0.9757 0.0017 247.8);
+    --ds-c-surface: oklch(1 0 247.8);
+    --ds-c-surface-2: oklch(0.9542 0.0034 247.9);
+  }
+
+  .dark {
+    --ds-c-bg: oklch(0.1711 0.0079 248.3);
+    --ds-c-surface: oklch(0.2115 0.0117 254.1);
+    --ds-c-surface-2: oklch(0.2458 0.0153 256.8);
+  }
+}

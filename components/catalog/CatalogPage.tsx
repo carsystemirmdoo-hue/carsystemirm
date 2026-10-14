@@ -33,7 +33,7 @@ export function CatalogPage({
   const totalPages = Math.ceil(canonical.length / CATALOG_BATCH_SIZE);
 
   return (
-    <div className={styles.catalogShell}>
+    <div className={styles.catalogShell} data-ds="a">
       <main className={styles.main}>
         {/* Javni programi (/program), ne interni programGroups koji služe filterima. */}
         <CatalogHero brandCount={brands.length} programCount={publicProgramGroups.length} />

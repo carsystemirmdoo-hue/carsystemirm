@@ -277,3 +277,85 @@
     transform: none;
   }
 }
+
+/* Sistem A (uzorak, data-ds="a"): ista kontrola kao čip/izabrano stanje. */
+:global([data-ds="a"]) .header h2 {
+  font-size: var(--ds-font-h3);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  line-height: 1.2;
+}
+
+:global([data-ds="a"]) .header > p {
+  color: var(--ds-c-text-2);
+  font-size: var(--ds-font-small);
+}
+
+:global([data-ds="a"]) .kicker {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--ds-c-accent-text);
+  font-size: var(--ds-font-label);
+  font-weight: 500;
+  letter-spacing: var(--ds-tracking-label);
+}
+
+:global([data-ds="a"]) .kicker::before {
+  content: "";
+  width: 24px;
+  height: 2px;
+  flex: none;
+  background: var(--ds-c-accent);
+}
+
+:global([data-ds="a"]) .control {
+  border-color: var(--ds-c-line);
+  border-radius: var(--ds-ctl-radius);
+  background: var(--ds-c-surface);
+  color: var(--ds-c-text-2);
+  font-size: 0.8125rem;
+  font-weight: 500;
+}
+
+:global([data-ds="a"]) .control::after {
+  display: none;
+}
+
+:global([data-ds="a"]) .control:hover {
+  border-color: var(--ds-c-line-strong);
+  background: var(--ds-c-surface);
+  color: var(--ds-c-text);
+  transform: none;
+}
+
+:global([data-ds="a"]) .control:focus-visible {
+  outline: 2px solid var(--ds-c-focus);
+  outline-offset: 2px;
+}
+
+:global([data-ds="a"]) .control[data-selected] {
+  border: 2px solid var(--ds-c-accent);
+  background: var(--ds-c-accent-soft);
+  color: var(--ds-c-text);
+  font-weight: 600;
+  padding: 9px 7px 8px;
+}
+
+:global([data-ds="a"]) .logoFrame {
+  border-radius: var(--ds-ctl-radius);
+}
+
+:global([data-ds="a"]) .allMark {
+  border-color: var(--ds-c-line-strong);
+  border-radius: var(--ds-ctl-radius);
+  background: var(--ds-c-surface-2);
+  font-size: var(--ds-font-label);
+  font-weight: 500;
+}
+
+:global([data-ds="a"]) .scrollHint {
+  color: var(--ds-c-text-2);
+  font-size: var(--ds-font-small);
+  font-weight: 500;
+}

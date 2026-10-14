@@ -101,7 +101,7 @@ export default async function CatalogPaginationRoute({
   ];
 
   return (
-    <div className={styles.catalogShell}>
+    <div className={styles.catalogShell} data-ds="a">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={jsonLd(breadcrumbJsonLd(breadcrumbs))}

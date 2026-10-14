@@ -48,6 +48,30 @@ const cityOptions = [
   ...cityEntries.map((entry) => ({ label: entry.city, value: entry.key })),
 ];
 const homeVisibleStoreIds = new Set(publicPartnerStores.map((store) => store.id));
+/** Widget u heroju nudi samo gradove; „Svi gradovi” ostaje u odeljku mreže. */
+const locatorCityOptions = cityOptions.filter((option) => option.value !== "");
+/*
+ * Izbor grada se pamti samo u ovom pregledaču (pogodnost, ne podatak). Bez izbora i bez
+ * sačuvanog izbora widget počinje sa „Izaberite grad”, bez unapred prikazane lokacije.
+ */
+const CITY_CHOICE_KEY = "cs-izabran-grad-prodavnica";
+
+function readSavedCity() {
+  try {
+    const key = window.localStorage.getItem(CITY_CHOICE_KEY);
+    return key && cityEntries.some((entry) => entry.key === key) ? key : null;
+  } catch {
+    return null;
+  }
+}
+
+function saveCity(key: string) {
+  try {
+    if (key) window.localStorage.setItem(CITY_CHOICE_KEY, key);
+  } catch {
+    /* bez skladišta izbor važi samo do napuštanja strane */
+  }
+}
 
 const trustBrandLinks: Partial<Record<BrandKey, string>> = {
   rm: "/brendovi/rm",
@@ -121,6 +145,9 @@ export function CarsystemHomePage() {
   const [selectedCity, setSelectedCity] = useState(defaultCity);
   const [selectedMapStoreId, setSelectedMapStoreId] = useState(defaultCityEntry?.id ?? "");
   const [networkMapFailed, setNetworkMapFailed] = useState(false);
+  // Da li je korisnik izabrao grad (lista, mapa, lokacija ili sačuvan izbor). Odeljak mreže
+  // zadržava svoj početni prikaz; widget i traka na telefonu prikazuju lokaciju tek posle izbora.
+  const [cityChosen, setCityChosen] = useState(false);
   const [locatorStatus, setLocatorStatus] = useState(
     cityEntries.length > 0
       ? "Izaberite grad ili koristite lokaciju."
@@ -200,7 +227,18 @@ export function CarsystemHomePage() {
     return () => root.removeAttribute("data-paint-wash-disabled");
   }, []);
 
+  useEffect(() => {
+    const saved = readSavedCity();
+    if (!saved) return;
+    const savedStores = publicPartnerStores.filter((store) => getPartnerCityKey(store) === saved);
+    setSelectedCity(saved);
+    setSelectedMapStoreId(savedStores[0]?.id ?? "");
+    setCityChosen(true);
+  }, []);
+
   function handleCityChange(cityKey: string) {
+    setCityChosen(true);
+    saveCity(cityKey);
     if (!cityKey) {
       setSelectedCity("");
       setSelectedMapStoreId("");
@@ -224,6 +262,8 @@ export function CarsystemHomePage() {
     if (!store) return;
 
     const city = getPartnerCityLabel(store);
+    setCityChosen(true);
+    saveCity(getPartnerCityKey(store));
     setSelectedCity(getPartnerCityKey(store));
     setSelectedMapStoreId(store.id);
     setLocatorStatus(`Prikazana je partnerska lokacija: ${store.name}, ${city}.`);
@@ -256,6 +296,8 @@ export function CarsystemHomePage() {
           return;
         }
 
+        setCityChosen(true);
+        saveCity(getPartnerCityKey(nearest.store));
         setSelectedCity(getPartnerCityKey(nearest.store));
         setSelectedMapStoreId(nearest.store.id);
         setLocatorStatus(
@@ -278,8 +320,8 @@ export function CarsystemHomePage() {
         headingPresentation="sr-only"
         aside={
           <LocatorCard
-            selectedStore={selectedStore}
-            selectedCity={selectedCity}
+            selectedStore={cityChosen && selectedCity ? selectedStore : undefined}
+            selectedCity={cityChosen ? selectedCity : ""}
             locatorStatus={locatorStatus}
             onCityChange={handleCityChange}
             onLocationRequest={handleLocationRequest}
@@ -381,9 +423,11 @@ export function CarsystemHomePage() {
         <span>
           <strong>Prodavnice u mreži</strong>
           <small>
-            {selectedStore
-              ? `${selectedStore.city} · ${getPartnerLocationTypeLabel(selectedStore)}`
-              : "Nema potvrđenih javnih lokacija"}
+            {publicPartnerStores.length === 0
+              ? "Nema potvrđenih javnih lokacija"
+              : cityChosen && selectedCity && selectedStore
+                ? `${selectedStore.city} · ${getPartnerLocationTypeLabel(selectedStore)}`
+                : "Izaberite grad"}
           </small>
         </span>
       </a>
@@ -764,7 +808,7 @@ function LocatorCard({
       <div className={styles.locatorBody} id={bodyId}>
         <button
           type="button"
-          className={styles.locationButton}
+          className={`${styles.locationButton} ${styles.locationButtonSecondary}`}
           onClick={onLocationRequest}
           data-cursor="button"
         >
@@ -778,13 +822,14 @@ function LocatorCard({
           disabled={cityEntries.length === 0}
           emptyMessage="Nema gradova koji odgovaraju pretrazi."
           onChange={onCityChange}
-          options={cityOptions}
+          options={locatorCityOptions}
           placeholder="Izaberite grad"
           searchPlaceholder="Pretražite grad"
           sheetTitle="Izaberite grad"
           value={selectedCity}
         />
-        <StorePreview store={selectedStore} />
+        {/* Bez izbora nema unapred prikazane lokacije; prazan pregled samo kada mreža nema lokacija. */}
+        {selectedStore || cityEntries.length === 0 ? <StorePreview store={selectedStore} /> : null}
         <p className={styles.locatorStatus}>{locatorStatus}</p>
       </div>
     </aside>

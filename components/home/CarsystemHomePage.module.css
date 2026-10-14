@@ -452,14 +452,28 @@
   min-height: var(--ds-ctl-h-m);
 }
 
+/* Widget: „Koristite svoju lokaciju” je sekundarno dugme (okvir boje teksta, providno). */
+.locationButtonSecondary {
+  border: 1px solid var(--ds-c-text);
+  background: transparent;
+  color: var(--ds-c-text) !important;
+}
+
+.locationButtonSecondary:hover {
+  background: var(--ds-c-surface-2);
+}
+
+.locationButtonSecondary:active {
+  background: var(--ds-c-line);
+}
+
 .locatorBody .storePreview {
   gap: 9px;
   padding: 10px;
 }
 
-/* Tip lokacije u pregledu: tiha tehnička oznaka. */
+/* Tip lokacije u pregledu: tiha tehnička oznaka, u svom redu. */
 .locatorBody .storePreview header small {
-  margin-left: auto;
   color: var(--ds-c-text-2);
   font-family: var(--font-technical), monospace;
   font-size: var(--ds-font-label);
@@ -668,10 +682,12 @@
   flex: 1;
 }
 
+/* Naziv prodavnice ima ceo red; tip lokacije („Prodajno mesto”) je zaseban red ispod. */
 .storePreview header {
   display: flex;
-  gap: 8px;
-  justify-content: space-between;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
   padding: 0;
   border: 0;
 }

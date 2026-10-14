@@ -1,5 +1,6 @@
 import { formatSerbianMeasureText } from "@/lib/measure-format.mjs";
 import { applyVerifiedThousands } from "@/lib/verified-thousands";
+import { maskUnverifiedQuantity } from "@/lib/unverified-quantities";
 import type { CarsystemProduct } from "@/lib/carsystem-data";
 
 /**
@@ -57,8 +58,10 @@ function formatDeep<T>(value: T, format: Format): T {
 }
 
 export function withSerbianMeasureDisplay(product: CarsystemProduct): CarsystemProduct {
-  // Potvrđene ispravke zapisa hiljada (lib/verified-thousands.ts) pa decimalni zarez.
-  const format: Format = (value) => formatSerbianMeasureText(applyVerifiedThousands(product.slug, value));
+  // Dvosmislene količine se sakrivaju (lib/unverified-quantities.ts), potvrđene hiljade
+  // ispravljaju (lib/verified-thousands.ts), pa se dodaje decimalni zarez.
+  const format: Format = (value) =>
+    formatSerbianMeasureText(applyVerifiedThousands(product.slug, maskUnverifiedQuantity(product.slug, value)));
   const text = (value: string | undefined) => (value === undefined ? value : format(value));
   const name = format(product.name);
   const next: CarsystemProduct = {
@@ -74,7 +77,10 @@ export function withSerbianMeasureDisplay(product: CarsystemProduct): CarsystemP
       : product.productImage,
     galleryImages: product.galleryImages.map((image) => ({ ...image, alt: format(image.alt) })),
     // Pakovanja: samo potvrđene hiljade (decimalni zarez dodaje prikaz, formatMeasureSr).
-    packages: product.packages.map((item) => ({ ...item, label: applyVerifiedThousands(product.slug, item.label) })),
+    packages: product.packages.map((item) => ({
+      ...item,
+      label: applyVerifiedThousands(product.slug, maskUnverifiedQuantity(product.slug, item.label)),
+    })),
     specifications: formatDeep(product.specifications, format),
     ...(product.family ? { family: formatDeep(product.family, format) } : {}),
     ...(product.detail ? { detail: formatDeep(product.detail, format) } : {}),

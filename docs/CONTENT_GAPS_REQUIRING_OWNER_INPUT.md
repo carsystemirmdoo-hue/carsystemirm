@@ -16,6 +16,7 @@ izvorom ili bezbednim pravilom projekta; dokazi i istorija pitanja su sačuvani.
 | `RESOLVED_BY_SAFE_PROJECT_POLICY` | GAP-003, 004 (`SAFE_DEFAULT_APPLIED`), 007, 008 |
 | `DEFERRED_NON_PUBLIC_DATA` | naknadna provera 82 neproverene lokacije (GAP-003) — `docs/locations/UNVERIFIED_LOCATIONS_FOLLOW_UP.md` |
 | `ADVISORY_REVIEW_RECOMMENDED` | GAP-006 (pravna revizija teksta saglasnosti); GAP-009 — novi nalaz parsiranja baslac 40-440/40-450 (sušenje bez vremena) čeka odobrenje |
+| `OPEN_OWNER_CONFIRMATION` | GAP-015 — Carsystem fini kit 124.126, količina „1,000 g” (kupcu sakrivena do provere) |
 
 Statusne oznake: `RESOLVED_BY_OWNER_CONFIRMATION` — direktna odluka ili potvrda
 firme; `RESOLVED_FROM_PUBLIC_SOURCES` — dva saglasna javna izvora ili zvaničan
@@ -483,3 +484,22 @@ netačnu ili nepotpunu tehničku vrednost. Provereno direktno u PDF-ovima proizv
 - Očekivani format odgovora: „da" / „ne".
 - Prvobitni predlog (istorija): „da".
 - Odluka i primena (2026-10-01): Odluka vlasnika (2026-10-01): glavni CTA je „Pronađite najbližu prodavnicu" — ažurirano u `CLAUDE.md` i u normativnim dokumentima `MASTER_REQUIREMENTS.md`, `UI_DESIGN_BRIEF.md`, `CLAUDE_DESIGN_PROMPT.md`; istorijski auditi u `docs/` zadržavaju originalne citate.
+
+## GAP-015 — Količina pakovanja finog kita 124.126
+
+**Status:** `OPEN_OWNER_CONFIRMATION` (otvoreno 2026-10-14, ne blokira objavu — vrednost je kupcu sakrivena).
+
+**Šta je nejasno:** Carsystem izvor (carsystem.org, EN) navodi „1,000 g tin incl. hardener”, a
+atribut artikla „1.000 g”. Na srpskom se „1,000 g” čita kao jedan gram, a izvor meša konvencije
+zapisa (npr. „2,523 kg cartridge” je decimala). Za ovaj artikal nema fotografije sa količinom u
+nazivu niti stavke u katalogu 2026/27, pa količina nije potvrđena. Za kit za popunjavanje 124.552
+i reparaturnu smolu 126.050 isti zapis je potvrđen fotografijama proizvođača (1,0 kg).
+
+**Šta kupac vidi do provere:** „Limenka sa učvršćivačem (veličina pakovanja se potvrđuje na upit)”
+u tabeli varijanti i tehničkim podacima; oznaka količine na slici se za ovaj red ne prikazuje.
+Pravilo: `lib/unverified-quantities.ts`; test: `lib/verified-thousands.test.mts`.
+
+**Potrebno:** potvrda količine (npr. sa etikete, fakture dobavljača ili od Carsystem-a). Posle
+potvrde vrednost se upisuje u `lib/verified-thousands.ts` sa dokazom, a unos u
+`lib/unverified-quantities.ts` briše.
+

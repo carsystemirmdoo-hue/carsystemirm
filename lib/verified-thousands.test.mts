@@ -20,3 +20,13 @@ test("prikaz proizvoda: potvrđene vrednosti promenjene, C.A.R.FIT decimale neta
   assert.match(all("carfit-cutting-compound"), /168,408 g\/l/);
   assert.match(all("carfit-finishing-compound"), /13,536% \(136,718 g\/l\)/);
 });
+
+test("fini kit 124.126: dvosmislena količina se kupcu ne prikazuje kao pakovanje", async () => {
+  const { unverifiedQuantities } = await import("@/lib/unverified-quantities");
+  const all = JSON.stringify(getCarsystemProductBySlug("carsystem-fine-putty"));
+  assert.doesNotMatch(all, /1[.,]000 g/);
+  assert.match(all, /veličina pakovanja se potvrđuje na upit/);
+  assert.equal(unverifiedQuantities["carsystem-fine-putty"].status, "otvoreno");
+  // Kit za popunjavanje (potvrđen fotografijom) ostaje 1.000 g.
+  assert.match(JSON.stringify(getCarsystemProductBySlug("carsystem-fill-putty")), /1\.000 g/);
+});

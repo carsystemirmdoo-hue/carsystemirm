@@ -1,4 +1,5 @@
 import { formatSerbianMeasureText } from "@/lib/measure-format.mjs";
+import { applyVerifiedThousands } from "@/lib/verified-thousands";
 import type { CarsystemProduct } from "@/lib/carsystem-data";
 
 /**
@@ -7,8 +8,9 @@ import type { CarsystemProduct } from "@/lib/carsystem-data";
  * Menjaju se samo tekstovi za prikaz (naziv, opisi, SEO, alt, tehnički podaci, vrednosti
  * redova tabele). Ne diraju se: zvanični nazivi proizvođača (`officialName`), tekst pod
  * navodnicima, engleski izvorni tekst (vidi `formatSerbianMeasureText`), šifre, adrese, slike,
- * ključevi varijanti i pakovanja (`packages`, iz njih se čita veličina; prikaz ih formatira sam).
+ * ključevi varijanti; u pakovanjima samo potvrđene hiljade (iz njih se čita veličina).
  * Izvorni naziv sa tačkom ostaje u `searchTerms`, pa pretraga „3.5 mm” i dalje nalazi proizvod.
+ * Engleski zapis hiljada se menja samo za potvrđene vrednosti (lib/verified-thousands.ts).
  */
 const SKIPPED_KEYS = new Set([
   "slug",
@@ -28,12 +30,14 @@ const SKIPPED_KEYS = new Set([
   "images",
 ]);
 
-function formatDeep<T>(value: T): T {
-  if (typeof value === "string") return formatSerbianMeasureText(value) as T;
+type Format = (text: string) => string;
+
+function formatDeep<T>(value: T, format: Format): T {
+  if (typeof value === "string") return format(value) as T;
   if (Array.isArray(value)) {
     let changed = false;
     const next = value.map((entry) => {
-      const formatted = formatDeep(entry);
+      const formatted = formatDeep(entry, format);
       if (formatted !== entry) changed = true;
       return formatted;
     });
@@ -43,7 +47,7 @@ function formatDeep<T>(value: T): T {
     let changed = false;
     const next: Record<string, unknown> = {};
     for (const [key, entry] of Object.entries(value)) {
-      const formatted = SKIPPED_KEYS.has(key) ? entry : formatDeep(entry);
+      const formatted = SKIPPED_KEYS.has(key) ? entry : formatDeep(entry, format);
       if (formatted !== entry) changed = true;
       next[key] = formatted;
     }
@@ -52,25 +56,28 @@ function formatDeep<T>(value: T): T {
   return value;
 }
 
-const text = (value: string | undefined) => (value === undefined ? value : formatSerbianMeasureText(value));
-
 export function withSerbianMeasureDisplay(product: CarsystemProduct): CarsystemProduct {
-  const name = formatSerbianMeasureText(product.name);
+  // Potvrđene ispravke zapisa hiljada (lib/verified-thousands.ts) pa decimalni zarez.
+  const format: Format = (value) => formatSerbianMeasureText(applyVerifiedThousands(product.slug, value));
+  const text = (value: string | undefined) => (value === undefined ? value : format(value));
+  const name = format(product.name);
   const next: CarsystemProduct = {
     ...product,
     name,
-    shortDescription: formatSerbianMeasureText(product.shortDescription),
-    longDescription: formatSerbianMeasureText(product.longDescription),
-    purpose: formatSerbianMeasureText(product.purpose),
+    shortDescription: format(product.shortDescription),
+    longDescription: format(product.longDescription),
+    purpose: format(product.purpose),
     seoTitle: text(product.seoTitle),
     seoDescription: text(product.seoDescription),
     productImage: product.productImage
-      ? { ...product.productImage, alt: formatSerbianMeasureText(product.productImage.alt) }
+      ? { ...product.productImage, alt: format(product.productImage.alt) }
       : product.productImage,
-    galleryImages: product.galleryImages.map((image) => ({ ...image, alt: formatSerbianMeasureText(image.alt) })),
-    specifications: formatDeep(product.specifications),
-    ...(product.family ? { family: formatDeep(product.family) } : {}),
-    ...(product.detail ? { detail: formatDeep(product.detail) } : {}),
+    galleryImages: product.galleryImages.map((image) => ({ ...image, alt: format(image.alt) })),
+    // Pakovanja: samo potvrđene hiljade (decimalni zarez dodaje prikaz, formatMeasureSr).
+    packages: product.packages.map((item) => ({ ...item, label: applyVerifiedThousands(product.slug, item.label) })),
+    specifications: formatDeep(product.specifications, format),
+    ...(product.family ? { family: formatDeep(product.family, format) } : {}),
+    ...(product.detail ? { detail: formatDeep(product.detail, format) } : {}),
   };
   if (name !== product.name) {
     next.searchTerms = [...(product.searchTerms ?? []), product.name];

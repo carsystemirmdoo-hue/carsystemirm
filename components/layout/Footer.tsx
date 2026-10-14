@@ -43,7 +43,7 @@ export function Footer() {
       >
         <div className="ds-container py-12 lg:py-16">
           <div className="grid gap-10 lg:grid-cols-[1.15fr_1.6fr_0.95fr] lg:gap-12">
-            <section className="max-w-md" aria-label="Carsystem i R-M">
+            <section className="max-w-md" aria-label="O kompaniji Carsystem i R-M">
               <p className="font-[family-name:var(--font-display)] text-xl font-extrabold uppercase leading-none tracking-normal sm:text-2xl">
                 Carsystem <span className="text-[var(--ds-c-accent-text)]">i R-M</span>
               </p>

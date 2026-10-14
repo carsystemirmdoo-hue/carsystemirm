@@ -87,10 +87,10 @@ export function rowQuantityLabel(row) {
     .find(Boolean);
   if (!match) return null;
   const unit = match[2].toLowerCase();
-  // „1,000 g” / „1.000 g” su hiljade (gram i mililitar nemaju tri decimale); kod kg i l su decimale.
-  if ((unit === "g" || unit === "ml") && /^[1-9]\d{0,2}[.,]\d{3}$/.test(match[1])) {
-    return `${match[1].replace(",", ".")} ${ROW_UNIT_LABEL[unit]}`;
-  }
+  // Oznaka reda je već u srpskom zapisu (withSerbianMeasureDisplay + lib/verified-thousands):
+  // tačka sa tri cifre je hiljadarski razmak („1.000 g”), zarez je decimala („0,820 kg”).
+  // Ništa se ne zaključuje iz jedinice.
+  if (/^[1-9]\d{0,2}\.\d{3}$/.test(match[1])) return `${match[1]} ${ROW_UNIT_LABEL[unit]}`;
   const value = match[1].replace(".", ",").replace(/,0+$/, "");
   return `${value} ${ROW_UNIT_LABEL[unit]}`;
 }

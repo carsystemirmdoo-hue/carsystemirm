@@ -27,7 +27,7 @@
   --brand-pill-bg: linear-gradient(180deg, oklch(0.98 0.004 255 / 0.92), oklch(0.91 0.012 255 / 0.82));
   --brand-pill-border: oklch(0.98 0.004 255 / 0.22);
   --brand-pill-shadow: 0 18px 42px oklch(0.04 0.01 255 / 0.24);
-  --home-refinish-image: url("/images/home/hero-dark.png");
+  --home-refinish-image: url("/images/home/hero-dark.webp");
   --container: 1320px;
   min-height: 100vh;
   overflow-x: clip;
@@ -60,7 +60,7 @@
   --brand-pill-bg: linear-gradient(180deg, oklch(0.99 0.004 255 / 0.78), oklch(0.94 0.01 255 / 0.56));
   --brand-pill-border: oklch(0.31 0.02 255 / 0.12);
   --brand-pill-shadow: 0 14px 32px oklch(0.24 0.024 255 / 0.1);
-  --home-refinish-image: url("/images/home/hero-light.png");
+  --home-refinish-image: url("/images/home/hero-light.webp");
   color-scheme: light;
 }
 

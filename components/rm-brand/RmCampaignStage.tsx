@@ -1,5 +1,6 @@
 "use client";
 
+import { useIdleReady } from "@/components/motion/useIdleReady";
 import Link from "next/link";
 import { useCallback, useRef, type CSSProperties } from "react";
 import { useBrandCampaignCarousel } from "@/components/motion/useBrandCampaignCarousel";
@@ -50,6 +51,7 @@ export function RmCampaignStage() {
    * Tranzicija koristi paletu odlazećeg i dolazećeg slajda, ne jednu globalnu
    * brend boju. Palete su statičke iz podataka — bez uzorkovanja slike.
    */
+  const idleReady = useIdleReady();
   const incoming = rmCampaignSlides[pendingIndex ?? activeIndex];
   const outgoing =
     transitionPhase === "covering" ? rmCampaignSlides[activeIndex] : incoming;
@@ -110,6 +112,7 @@ export function RmCampaignStage() {
               active={index === activeIndex}
               index={index}
               key={slide.id}
+              loadImage={index === 0 || idleReady || index === activeIndex || index === pendingIndex}
               slide={slide}
             />
           ))}
@@ -184,10 +187,12 @@ export function RmCampaignStage() {
 function RmCampaignSlide({
   active,
   index,
+  loadImage,
   slide,
 }: {
   active: boolean;
   index: number;
+  loadImage: boolean;
   slide: RmCampaignSlideData;
 }) {
   return (
@@ -232,12 +237,12 @@ function RmCampaignSlide({
         </div>
       </div>
 
-      <RmCampaignVisualArtwork slide={slide} />
+      <RmCampaignVisualArtwork loadImage={loadImage} slide={slide} />
     </article>
   );
 }
 
-function RmCampaignVisualArtwork({ slide }: { slide: RmCampaignSlideData }) {
+function RmCampaignVisualArtwork({ loadImage, slide }: { loadImage: boolean; slide: RmCampaignSlideData }) {
   return (
     <div
       className={`${styles.campaignVisual} ${styles.campaignVisualImage}`}
@@ -245,7 +250,7 @@ function RmCampaignVisualArtwork({ slide }: { slide: RmCampaignSlideData }) {
       role="img"
       aria-label={slide.imageAlt}
     >
-      <picture>
+      {loadImage ? <picture>
         <source media="(max-width: 50rem)" srcSet={slide.mobileImage} />
         <img
           src={slide.desktopImage}
@@ -258,7 +263,7 @@ function RmCampaignVisualArtwork({ slide }: { slide: RmCampaignSlideData }) {
           }
           loading={slide.id === "agilis-performance" ? "eager" : "lazy"}
         />
-      </picture>
+      </picture> : null}
     </div>
   );
 }

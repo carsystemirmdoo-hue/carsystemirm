@@ -1,5 +1,6 @@
 "use client";
 
+import { useIdleReady } from "@/components/motion/useIdleReady";
 import Link from "next/link";
 import {
   useCallback,
@@ -78,6 +79,7 @@ export function HomeCampaignCarousel({
    * Tranzicija koristi paletu odlazećeg i dolazećeg slajda, ne jednu globalnu
    * brend boju. Palete su statičke iz podataka — bez uzorkovanja slike.
    */
+  const idleReady = useIdleReady();
   const incoming = homeCampaignSlides[pendingIndex ?? activeIndex];
   const outgoing =
     transitionPhase === "covering" ? homeCampaignSlides[activeIndex] : incoming;
@@ -155,6 +157,7 @@ export function HomeCampaignCarousel({
               active={index === activeIndex}
               index={index}
               key={slide.id}
+              loadImage={index === 0 || idleReady || index === activeIndex || index === pendingIndex}
               slide={slide}
             />
           ))}
@@ -245,10 +248,12 @@ export function HomeCampaignCarousel({
 function HomeCampaignSlide({
   active,
   index,
+  loadImage,
   slide,
 }: {
   active: boolean;
   index: number;
+  loadImage: boolean;
   slide: HomeCampaignSlide;
 }) {
   return (
@@ -270,7 +275,7 @@ function HomeCampaignSlide({
         } as CSSProperties
       }
     >
-      <HomeCampaignVisual priority={index === 0} slide={slide} />
+      <HomeCampaignVisual loadImage={loadImage} priority={index === 0} slide={slide} />
 
       <div className={styles.campaignCopy}>
         <p className={styles.campaignEyebrow}>{slide.eyebrow}</p>
@@ -281,6 +286,7 @@ function HomeCampaignSlide({
           <Link
             className={styles.campaignPrimaryCta}
             href={slide.primaryCta.href}
+            prefetch={false}
             tabIndex={active ? 0 : -1}
           >
             {slide.primaryCta.label}
@@ -293,9 +299,11 @@ function HomeCampaignSlide({
 }
 
 function HomeCampaignVisual({
+  loadImage,
   priority,
   slide,
 }: {
+  loadImage: boolean;
   priority: boolean;
   slide: HomeCampaignSlide;
 }) {
@@ -308,7 +316,7 @@ function HomeCampaignVisual({
       role="img"
       aria-label={slide.imageAlt}
     >
-      <picture>
+      {loadImage ? <picture>
         {slide.mobileImage === slide.desktopImage ? null : (
           <source media={MOBILE_MEDIA_QUERY} srcSet={slide.mobileImage} />
         )}
@@ -326,7 +334,7 @@ function HomeCampaignVisual({
               : "100vw"
           }
         />
-      </picture>
+      </picture> : null}
     </div>
   );
 }

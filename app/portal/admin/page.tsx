@@ -6,6 +6,9 @@ import { systemSettings } from "@/db/schema";
 import { requireCapability } from "@/lib/authz/session";
 import { ThresholdSettings } from "@/features/portal/ThresholdSettings";
 
+
+export const metadata = { title: "Administracija" };
+
 export const dynamic = "force-dynamic";
 
 const DEFAULTS = { t70: 70, t90: 90, t100: 100, tDelay: 15 };

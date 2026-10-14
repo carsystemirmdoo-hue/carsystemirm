@@ -5,6 +5,9 @@ import { requireCapability } from "@/lib/authz/session";
 import { loadUnassignedCustomers } from "@/lib/partners/unassigned-service";
 import { belgradeDate } from "@/lib/recommendations/customerRhythm.mjs";
 
+
+export const metadata = { title: "Bez komercijaliste" };
+
 export const dynamic = "force-dynamic";
 
 const MONEY = new Intl.NumberFormat("sr-Latn-RS", { maximumFractionDigits: 0 });

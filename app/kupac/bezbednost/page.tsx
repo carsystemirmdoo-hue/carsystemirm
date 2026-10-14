@@ -6,6 +6,9 @@ import { dmyTime } from "@/lib/ordering/panelFormat.mjs";
 import { PasswordForm } from "./PasswordForm";
 import { ForgetDeviceButton, LogoutAllButton } from "./SecurityActions";
 
+
+export const metadata = { title: "Bezbednost naloga" };
+
 export const dynamic = "force-dynamic";
 
 /** Zapamćeni uređaji, odjava sa svih uređaja i promena lozinke — samo za sopstveni nalog. */

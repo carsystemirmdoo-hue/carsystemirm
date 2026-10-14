@@ -16,6 +16,9 @@ import { loadRecomputeStatus } from "@/lib/recommendations/auto-recompute";
 import { dmy, dmyTime } from "@/lib/ordering/panelFormat.mjs";
 import { loadDeviceReceipts } from "@/lib/import/device-receipts";
 
+
+export const metadata = { title: "Importi" };
+
 export const dynamic = "force-dynamic";
 /**
  * Server akcije otpremanja sa ove strane rade u funkciji ove rute.

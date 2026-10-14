@@ -1,6 +1,9 @@
 import { PageHeader } from "@/components/portal/PortalPrimitives";
 import { requireUser } from "@/lib/authz/session";
 
+
+export const metadata = { title: "Nemate pristup" };
+
 export const dynamic = "force-dynamic";
 
 /**

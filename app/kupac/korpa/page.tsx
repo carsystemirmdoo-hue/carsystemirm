@@ -11,6 +11,9 @@ import { publicSiteOpenForRequest } from "@/lib/site-access-request";
 import { LiveRefresh } from "@/components/ordering/LiveRefresh";
 import { customerCartStamp } from "@/lib/ordering/live-stamp";
 
+
+export const metadata = { title: "Korpa" };
+
 export const dynamic = "force-dynamic";
 
 /*

@@ -6,6 +6,9 @@ import { ScrollTable } from "@/components/ordering/ScrollTable";
 import { amount, dmy, percent } from "@/lib/ordering/panelFormat.mjs";
 import { AddItem } from "./AddItem";
 
+
+export const metadata = { title: "Izbor robe" };
+
 export const dynamic = "force-dynamic";
 
 /**

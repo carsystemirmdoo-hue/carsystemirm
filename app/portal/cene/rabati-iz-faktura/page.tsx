@@ -10,6 +10,9 @@ import { loadRebateEvidence, type RebateEvidenceItem } from "@/lib/pricing/rebat
 import { ProposeRebateButton } from "./ProposeRebateButton";
 import { countOf, STAVKA } from "@/lib/ordering/plural.mjs";
 
+
+export const metadata = { title: "Rabati iz faktura" };
+
 export const dynamic = "force-dynamic";
 
 /** Koliko stavki odeljka se prikazuje odmah; ostale su iza „Prikažite ostalih“. */

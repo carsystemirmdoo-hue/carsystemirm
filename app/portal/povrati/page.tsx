@@ -18,6 +18,9 @@ import {
 } from "@/lib/sales/queries";
 import { UNKNOWN_NEGATIVE_LABEL } from "@/lib/sales/totals.mjs";
 
+
+export const metadata = { title: "Povrati i minus fakture" };
+
 export const dynamic = "force-dynamic";
 
 const KIND_LABELS: Record<string, string> = {

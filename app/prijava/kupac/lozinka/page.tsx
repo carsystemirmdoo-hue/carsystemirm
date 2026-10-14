@@ -5,7 +5,7 @@ import "../../../portal/portal.css";
 import "../../../portal/panel.css";
 
 export const metadata: Metadata = {
-  title: "Zaboravljena lozinka · Carsystem i R-M",
+  title: "Zaboravljena lozinka",
   robots: { index: false, follow: false, noarchive: true },
 };
 

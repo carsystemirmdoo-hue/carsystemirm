@@ -9,6 +9,9 @@ import { listCustomerOrders } from "@/lib/ordering/ordering-service";
 import { orderingEnabledFor } from "@/lib/ordering/trial";
 import { dmy, dmyTime, money } from "@/lib/ordering/panelFormat.mjs";
 
+
+export const metadata = { title: "Pregled naloga" };
+
 export const dynamic = "force-dynamic";
 
 /*

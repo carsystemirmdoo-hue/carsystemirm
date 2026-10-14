@@ -5,6 +5,9 @@ import { requireCapability } from "@/lib/authz/session";
 import { dmy, dmyTime } from "@/lib/ordering/panelFormat.mjs";
 import { currentStockSnapshot, listStockImports } from "@/lib/stock/stock-import-service";
 
+
+export const metadata = { title: "Uvoz lagera" };
+
 export const dynamic = "force-dynamic";
 
 const STATUS: Record<string, { label: string; tone: "info" | "success" | "neutral" | "warning" | "danger" }> = {

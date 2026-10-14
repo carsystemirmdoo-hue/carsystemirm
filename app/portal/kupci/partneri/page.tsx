@@ -16,6 +16,9 @@ import {
 import { LinkPartnerForm, PlanApply, RepCodeForm, UploadForm } from "./RegistryForms";
 import { dmyTime } from "@/lib/ordering/panelFormat.mjs";
 
+
+export const metadata = { title: "Registar partnera" };
+
 export const dynamic = "force-dynamic";
 /**
  * Server akcije otpremanja sa ove strane rade u funkciji ove rute.

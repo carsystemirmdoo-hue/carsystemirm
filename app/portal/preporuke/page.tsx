@@ -29,6 +29,9 @@ import { activeRun, recentRuns } from "@/lib/recommendations/recompute";
 import { parseCustomerStatusFilter } from "@/lib/customers/customerStatus.mjs";
 import type { RecommendationConfidence, RecommendationStatus } from "@/db/schema";
 
+
+export const metadata = { title: "Preporuke" };
+
 export const dynamic = "force-dynamic";
 
 /**

@@ -12,6 +12,9 @@ import { loadDatasetInfo } from "@/lib/data-state/dataset";
 import { countOf } from "@/lib/ordering/plural.mjs";
 import { dmy, money } from "@/lib/ordering/panelFormat.mjs";
 
+
+export const metadata = { title: "Fakture" };
+
 export const dynamic = "force-dynamic";
 
 const FAKTURA = ["faktura", "fakture", "faktura"];

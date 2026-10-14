@@ -2,6 +2,9 @@ import { PhaseNotice } from "@/components/portal/PhaseNotice";
 import { PageHeader } from "@/components/portal/PortalPrimitives";
 import { requireCapability } from "@/lib/authz/session";
 
+
+export const metadata = { title: "Porudžbine" };
+
 export const dynamic = "force-dynamic";
 
 export default async function Page() {

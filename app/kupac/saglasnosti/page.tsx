@@ -9,7 +9,7 @@ import { ConsentControls } from "./ConsentControls";
 import { dmy, dmyTime } from "@/lib/ordering/panelFormat.mjs";
 
 export const metadata: Metadata = {
-  title: "Saglasnosti · Carsystem i R-M",
+  title: "Saglasnosti",
   robots: { index: false, follow: false, noarchive: true },
 };
 

@@ -17,6 +17,9 @@ import { AutoRecomputeStatus } from "@/components/portal/AutoRecomputeStatus";
 import { RecomputeButton } from "./RecomputeButton";
 import { dmyTime } from "@/lib/ordering/panelFormat.mjs";
 
+
+export const metadata = { title: "Za razgovor" };
+
 export const dynamic = "force-dynamic";
 
 const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;

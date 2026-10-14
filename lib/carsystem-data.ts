@@ -3386,6 +3386,17 @@ export function getRelatedProducts(product: CarsystemProduct, limit = 4) {
     .slice(0, limit);
 }
 
+/** Proizvod ima objavljenu fotografiju (ne „Vizuel u pripremi”). */
+function hasPublishedImage(item: CarsystemProduct) {
+  const src = item.productImage?.src ?? item.galleryImages[0]?.src;
+  return Boolean(src) && !src!.includes("placeholder-product");
+}
+
+/**
+ * „Slični proizvodi”: najpre pregledane preporuke, pa dopuna po bliskosti — ista linija ili
+ * sistem, ista kategorija, isti brend, isti program. Proizvod bez fotografije se ne preporučuje:
+ * prazna kartica u preporuci ne pomaže izboru, a ističe nedostatke kataloga.
+ */
 export function getManualProductRecommendations(
   product: CarsystemProduct,
   limit = 6,
@@ -3400,15 +3411,37 @@ export function getManualProductRecommendations(
     .map((recommendation) => recommendation.productId);
   const slugs = reviewed?.length ? reviewed : product.relatedProductSlugs;
 
-  return slugs
+  const chosen = slugs
     .map((slug) => getCarsystemProductBySlug(slug))
     .filter((item): item is CarsystemProduct => Boolean(item))
+    .filter(hasPublishedImage)
     .filter(
       (item, index, all) =>
         item.slug !== product.slug &&
         all.findIndex((candidate) => candidate.slug === item.slug) === index,
     )
     .slice(0, limit);
+  if (chosen.length >= Math.min(limit, 4)) return chosen;
+
+  const taken = new Set([product.slug, ...chosen.map((item) => item.slug)]);
+  const line = product.catalogMetadata?.line ?? product.rmMetadata?.system;
+  const category = product.taxonomyCategory;
+  const fill = products
+    .filter((item) => !taken.has(item.slug) && hasPublishedImage(item))
+    .map((item) => {
+      let score = 0;
+      if (line && (item.catalogMetadata?.line ?? item.rmMetadata?.system) === line) score += 8;
+      if (category && item.taxonomyCategory === category) score += 4;
+      if (item.brandSlug === product.brandSlug) score += 3;
+      if (item.programSlug === product.programSlug) score += 2;
+      if (item.phaseSlug === product.phaseSlug) score += 1;
+      return { item, score };
+    })
+    .filter(({ score }) => score >= 5)
+    .sort((first, second) => second.score - first.score)
+    .map(({ item }) => item);
+
+  return [...chosen, ...fill].slice(0, Math.max(4, chosen.length));
 }
 
 function getReviewedRelationshipProducts(

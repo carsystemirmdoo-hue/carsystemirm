@@ -8,6 +8,9 @@ import { AccountsAdmin } from "./AccountsAdmin";
 import { OutboxPanel } from "./OutboxPanel";
 import { listPendingOutbox } from "@/lib/customers/invitation-service";
 
+
+export const metadata = { title: "Nalozi kupaca" };
+
 export const dynamic = "force-dynamic";
 
 export default async function CustomerAccountsPage() {

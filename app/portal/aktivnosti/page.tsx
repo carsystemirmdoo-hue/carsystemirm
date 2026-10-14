@@ -6,6 +6,9 @@ import { requireCapability } from "@/lib/authz/session";
 import { dmyTime } from "@/lib/ordering/panelFormat.mjs";
 import { ORDER_STATUS_LABELS } from "@/lib/ordering/orderRules.mjs";
 
+
+export const metadata = { title: "Aktivnosti" };
+
 export const dynamic = "force-dynamic";
 
 const PAGE_SIZE = 100;

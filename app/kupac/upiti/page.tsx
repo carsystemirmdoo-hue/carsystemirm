@@ -10,6 +10,9 @@ import {
   PRICE_REQUEST_STATUS_LABELS,
 } from "@/lib/ordering/price-request-service";
 
+
+export const metadata = { title: "Upiti za cenu i uslove" };
+
 export const dynamic = "force-dynamic";
 
 const qfmt = new Intl.NumberFormat("sr-Latn-RS", { maximumFractionDigits: 3 });

@@ -74,7 +74,16 @@ export default async function ProductPage({ params }: ProductPageProps) {
   const breadcrumbItems = getProductBreadcrumbItems({ brand, product, program });
   const family = getFamilyForProduct(product);
   const compatibleProducts = getProductCompatibleProducts(product);
-  const similarProducts = getManualProductRecommendations(product);
+  // Najviše jedan predstavnik po porodici (npr. jedna nijansa jedne Cosmos linije), bez
+  // proizvoda iz porodice koju korisnik već gleda.
+  const seenFamilies = new Set(family ? [family.slug] : []);
+  const similarProducts = getManualProductRecommendations(product).filter((item) => {
+    const itemFamily = getFamilyForProduct(item);
+    if (!itemFamily) return true;
+    if (seenFamilies.has(itemFamily.slug)) return false;
+    seenFamilies.add(itemFamily.slug);
+    return true;
+  });
 
   // Only documents that are actually available and linked on the page.
   const availableDocuments = product.documents

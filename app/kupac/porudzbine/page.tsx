@@ -10,6 +10,9 @@ import { countOf, STAVKA } from "@/lib/ordering/plural.mjs";
 import { dmyTime, money } from "@/lib/ordering/panelFormat.mjs";
 import { orderStage } from "@/lib/ordering/statusView.mjs";
 
+
+export const metadata = { title: "Zahtevi i porudžbine" };
+
 export const dynamic = "force-dynamic";
 
 function Rows({ list }: { list: OrderListRow[] }) {

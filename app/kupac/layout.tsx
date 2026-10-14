@@ -12,7 +12,7 @@ import "../portal/portal.css";
 import "../portal/panel.css";
 
 export const metadata: Metadata = {
-  title: "Moj nalog · Carsystem i R-M",
+  title: { default: "Moj nalog", template: "%s · Moj nalog | Carsystem i R-M" },
   robots: { index: false, follow: false, noarchive: true },
 };
 

@@ -19,6 +19,9 @@ import {
 } from "@/lib/sales/queries";
 import { normalizeSalesFilter } from "@/lib/sales/filterInput.mjs";
 
+
+export const metadata = { title: "Analitika" };
+
 export const dynamic = "force-dynamic";
 
 const VIEWS: { key: GroupView; label: string }[] = [

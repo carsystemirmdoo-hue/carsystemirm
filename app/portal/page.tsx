@@ -18,6 +18,9 @@ import { BackupStatusPanel } from "@/features/portal/BackupStatusPanel";
 import { loadBackupStatus } from "@/lib/backup/status-service";
 import { dmy, dmyTime } from "@/lib/ordering/panelFormat.mjs";
 
+
+export const metadata = { title: "Početna" };
+
 export const dynamic = "force-dynamic";
 
 export default async function PortalHomePage() {

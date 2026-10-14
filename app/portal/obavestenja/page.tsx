@@ -8,6 +8,9 @@ import {
 import { NotificationList } from "./NotificationList";
 import { dmyTime } from "@/lib/ordering/panelFormat.mjs";
 
+
+export const metadata = { title: "Obaveštenja" };
+
 export const dynamic = "force-dynamic";
 
 export default async function NotificationsPage() {

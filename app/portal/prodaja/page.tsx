@@ -19,6 +19,9 @@ import {
 } from "@/lib/sales/queries";
 import { normalizeSalesFilter } from "@/lib/sales/filterInput.mjs";
 
+
+export const metadata = { title: "Prodaja" };
+
 export const dynamic = "force-dynamic";
 
 export default async function SalesPage({

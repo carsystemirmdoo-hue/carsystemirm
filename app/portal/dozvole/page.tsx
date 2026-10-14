@@ -5,6 +5,9 @@ import { userPermissions, users } from "@/db/schema";
 import { requireCapability } from "@/lib/authz/session";
 import { PermissionMatrix } from "@/features/portal/PermissionMatrix";
 
+
+export const metadata = { title: "Korisnici i dozvole" };
+
 export const dynamic = "force-dynamic";
 
 export default async function PermissionsPage() {

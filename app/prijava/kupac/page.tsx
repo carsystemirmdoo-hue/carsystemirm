@@ -10,7 +10,7 @@ import "../../portal/panel.css";
 import { publicSiteOpenForRequest } from "@/lib/site-access-request";
 
 export const metadata: Metadata = {
-  title: "Prijava kupca · Carsystem i R-M",
+  title: "Prijava kupca",
   robots: { index: false, follow: false, noarchive: true },
 };
 

@@ -6,6 +6,9 @@ import { requireCapability } from "@/lib/authz/session";
 import { dmy, dmyTime, quantity } from "@/lib/ordering/panelFormat.mjs";
 import { currentStockSnapshot, stockDisplayPolicy } from "@/lib/stock/stock-import-service";
 
+
+export const metadata = { title: "Zalihe" };
+
 export const dynamic = "force-dynamic";
 
 const day = (iso: string | null) => (iso ? dmy(new Date(`${iso}T12:00:00Z`)) : "—");

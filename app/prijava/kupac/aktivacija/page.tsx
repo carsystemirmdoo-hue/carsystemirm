@@ -5,7 +5,7 @@ import "../../../portal/portal.css";
 import "../../../portal/panel.css";
 
 export const metadata: Metadata = {
-  title: "Aktivacija naloga · Carsystem i R-M",
+  title: "Aktivacija naloga",
   robots: { index: false, follow: false, noarchive: true },
 };
 

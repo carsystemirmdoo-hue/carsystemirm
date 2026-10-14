@@ -18,6 +18,9 @@ import {
   PRICE_RULE_STATUS_TONES,
 } from "@/lib/portal/status-labels";
 
+
+export const metadata = { title: "Cene i rabati" };
+
 const CUSTOMER_SCOPE_LABELS: Record<string, string> = {
   customer: "jedan kupac",
   group: "grupa kupaca",

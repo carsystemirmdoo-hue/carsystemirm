@@ -13,6 +13,9 @@ import { dmyTime, money } from "@/lib/ordering/panelFormat.mjs";
 import { orderStage } from "@/lib/ordering/statusView.mjs";
 import { TrialPanel } from "./TrialPanel";
 
+
+export const metadata = { title: "Zahtevi kupaca" };
+
 export const dynamic = "force-dynamic";
 
 /** Filteri stanja (ista podela kao ranije grupe); uslovi su u SQL-u (`ORDER_STATES`). */

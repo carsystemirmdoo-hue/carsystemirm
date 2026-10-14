@@ -14,6 +14,9 @@ import { matchesStatusFilter, parseCustomerStatusFilter } from "@/lib/customers/
 import { filterCustomerList, parseCustomerListFilter } from "@/lib/customers/customerListFilter.mjs";
 import { listAssigneesByCustomer, listSalesReps } from "@/lib/partners/assignment-service";
 
+
+export const metadata = { title: "Kupci" };
+
 export const dynamic = "force-dynamic";
 
 export default async function CustomersPage({

@@ -8,7 +8,7 @@ import { optionLabel, optionNote } from "@/lib/pricing/paymentOptions.mjs";
 import { belgradeDate } from "@/lib/recommendations/customerRhythm.mjs";
 
 export const metadata: Metadata = {
-  title: "Podaci firme · Carsystem i R-M",
+  title: "Podaci firme",
   robots: { index: false, follow: false, noarchive: true },
 };
 

@@ -15,6 +15,7 @@ import { CARFIT_BRAND_SLUG } from "@/lib/carfit-brand-data";
 import { SATA_BRAND_SLUG, sataSeo } from "@/lib/sata-brand-data";
 import {
   getAllCarsystemBrands,
+  getListedCarsystemBrands,
   getCarsystemBrandBySlug,
   getCarsystemProductsByBrandSlug,
   getPublicProgramGroupsForBrand,
@@ -44,7 +45,9 @@ type BrandRouteProps = {
 export const dynamicParams = false;
 
 export function generateStaticParams() {
-  return getAllCarsystemBrands().map((brand) => ({ slug: brand.slug }));
+  // Brend ponuđen u okviru drugog (RUPES → Carsystem) nema svoju stranicu; stara adresa
+  // trajno vodi na sekciju tog brenda (`next.config.ts` → redirects).
+  return getListedCarsystemBrands().map((brand) => ({ slug: brand.slug }));
 }
 
 export async function generateMetadata({

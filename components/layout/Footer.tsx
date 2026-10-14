@@ -13,6 +13,7 @@ const catalogLinks = [
   { href: "/kategorije/bezbojni-lakovi", label: "Bezbojni lakovi" },
   { href: "/kategorije/prajmeri-i-punioci", label: "Prajmeri i punioci" },
   { href: "/kategorije/bazne-boje", label: "Bazne boje" },
+  { href: "/kategorije/ucvrscivaci-i-razredjivaci", label: "Učvršćivači i razređivači" },
 ];
 
 const brandLinks = [
@@ -24,13 +25,12 @@ const brandLinks = [
   { href: "/brendovi/carfit", label: "Car Fit" },
   { href: "/brendovi/cosmos-lac", label: "Cosmos Lac" },
   { href: "/brendovi/befar", label: "Befar" },
-  { href: "/brendovi/rupes", label: "RUPES" },
+  { href: "/brendovi/yachtcare", label: "Yachtcare" },
 ];
 
 const supportLinks = [
   { href: "/prodavnice", label: "Prodavnice" },
   { href: "/kontakt", label: "Kontakt" },
-  { href: "/kontakt", label: "Pošaljite upit" },
   { href: "/kontakt?tema=b2b", label: "B2B saradnja" },
 ];
 

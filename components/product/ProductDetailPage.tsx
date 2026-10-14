@@ -1,4 +1,6 @@
 import Link from "next/link";
+import { cardMetaParts } from "@/lib/card-meta";
+import { getProductPlacement } from "@/lib/seo/product-breadcrumbs";
 import { CatalogProductCard } from "@/components/catalog/CatalogProductCard";
 import { Footer } from "@/components/layout/Footer";
 import { ProductIdentity } from "@/components/product/ProductIdentity";
@@ -59,6 +61,7 @@ export function ProductDetailPage({
 }: ProductDetailPageProps & { variantSelectInPlace?: boolean }) {
   const detail = isConfirmed(product.detail?.reviewStatus) ? product.detail : undefined;
   const phase = getRefinishPhaseBySlug(product.phaseSlug);
+  const placement = getProductPlacement({ brand, product, program });
   const quickFacts = isConfirmed(detail?.quickFacts?.reviewStatus)
     ? detail?.quickFacts?.content.filter((item) => isConfirmed(item.reviewStatus)) ?? []
     : [];
@@ -150,12 +153,12 @@ export function ProductDetailPage({
               <div className={styles.heroCopy}>
                 <div className={styles.heroTaxonomy}>
                   <Link href={brand.routes.landing}>{brand.name}</Link>
-                  <span>{program.name}</span>
-                  {phase ? <span>{phase.name}</span> : null}
+                  <Link href={placement.path}>{placement.name}</Link>
+                  {phase && phase.name !== placement.name ? <span>{phase.name}</span> : null}
                 </div>
 
                 <ProductIdentity
-                  kicker={detail?.hero?.kicker}
+                  kicker={placementKicker(detail?.hero?.kicker, brand.name, placement.name)}
                   lead={detail?.hero?.lead}
                   subtype={detail?.hero?.subtype}
                 />
@@ -287,7 +290,7 @@ function ProductJoinedRecommendations({
             <CatalogProductCard
               brand={relationBrand}
               className={styles.joinedProductCard}
-              contextLabel={`${relationProgram.shortName} · ${relationPhase.name}`}
+              contextLabel={cardMetaParts([relationProgram.shortName, relationPhase.name]).join(" · ")}
               phase={relationPhase}
               product={product}
               program={relationProgram}
@@ -417,4 +420,15 @@ function ArrowIcon() {
       <path d="M3 8h9M8.5 4.5 12 8l-3.5 3.5" />
     </svg>
   );
+}
+
+/**
+ * Nadnaslov proizvoda: brend i isti naziv grupe kao u putanji. Srednji deo izvornog
+ * nadnaslova (serija ili linija, npr. „R-M · Pioneer · …”, „Befar · Leo · …”) se čuva;
+ * zamenjuje se samo poslednji deo, koji je ranije navodio drugu podelu kataloga.
+ */
+function placementKicker(kicker: string | undefined, brandName: string, placementName: string) {
+  const parts = (kicker ?? "").split(" · ").map((part) => part.trim()).filter(Boolean);
+  const middle = parts.length >= 3 ? parts.slice(1, -1) : [];
+  return cardMetaParts([brandName, ...middle, placementName]).join(" · ");
 }

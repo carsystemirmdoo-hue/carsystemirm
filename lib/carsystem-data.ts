@@ -1,4 +1,5 @@
 import { RM_CRYSTAL_BASE_SLUG, RM_PASTE_SLUG, withRmMixingBases } from "@/lib/rm-mixing-bases";
+import { formatMeasureSr } from "@/lib/measure-format.mjs";
 import { abrasiveBackingTerms } from "@/lib/search/abrasive-backing.mjs";
 import { publicSkuOf } from "@/lib/catalog/public-code";
 import removedFromCustomerCatalog from "@/data/catalog/removed-from-customer-catalog.json";
@@ -62,6 +63,12 @@ export type CarsystemBrand = {
    * i nazivi proizvoda i dalje koriste `name`.
    */
   wordmark?: string;
+  /**
+   * Program drugog proizvođača koji se nudi u okviru drugog brenda (RUPES u Carsystem
+   * programu). Takav brend ostaje proizvođač na proizvodima, ali nema svoju brend stranicu
+   * niti mesto u listama brendova; prikazuje se u okviru brenda `offeredWithin`.
+   */
+  offeredWithin?: string;
   catalogOrder: number;
   presentation: {
     accentColor: string;
@@ -611,6 +618,8 @@ export const brands: CarsystemBrand[] = [
     overview:
       "RUPES proizvodi iz naše ponude: BigFoot polirke, iBrid Nano, Skorpio i orbitalne brusilice, usisivač S145 i prateći pribor.",
     programSlugs: ["oprema", "poliranje"],
+    // Odluka vlasnika 2026-10-14: RUPES je deo Carsystem ponude (sekcija na /brendovi/carsystem#rupes).
+    offeredWithin: "carsystem",
     catalogOrder: 9,
     presentation: {
       // Neutralna paleta sajta: zvanična RUPES boja nije verifikovana, pa se ne pretpostavlja.
@@ -2985,6 +2994,15 @@ export function getAllCarsystemBrands() {
   );
 }
 
+/**
+ * Brendovi koji imaju svoju stranicu i mesto u listama (meni, podnožje, /brendovi, katalog,
+ * sitemap). Brend ponuđen u okviru drugog (`offeredWithin`) ostaje dostupan preko
+ * `getAllCarsystemBrands()` za oznake proizvođača na proizvodima.
+ */
+export function getListedCarsystemBrands() {
+  return getAllCarsystemBrands().filter((brand) => !brand.offeredWithin);
+}
+
 export function getAllPublicProgramGroups() {
   return [...publicProgramGroups];
 }
@@ -2996,11 +3014,11 @@ export function getAllPublicProgramGroups() {
  * `customerPackage` vraća tačno ono što je vraćalo i ranije, pa se nijedan drugi brend ne menja.
  */
 export function getProductPackageLabel(product: CarsystemProduct): string | undefined {
-  return (
+  const label =
     product.catalogMetadata?.customerPackage ??
     product.catalogMetadata?.volume ??
-    product.packages[0]?.label
-  );
+    product.packages[0]?.label;
+  return label ? formatMeasureSr(label) : label;
 }
 
 export function getCarsystemProductBySlug(slug: string) {

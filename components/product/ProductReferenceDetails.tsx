@@ -5,6 +5,7 @@ import {
   type CarsystemProduct,
   type ProgramGroup,
 } from "@/lib/carsystem-data";
+import { formatMeasureSr } from "@/lib/measure-format.mjs";
 import styles from "./ProductDetailPage.module.css";
 import { publicSkuOf } from "@/lib/catalog/public-code";
 
@@ -18,7 +19,7 @@ export function ProductReferenceDetails({
   program: ProgramGroup;
 }) {
   const phase = getRefinishPhaseBySlug(product.phaseSlug);
-  const packageSummary = product.packages.map((item) => item.label).join(" / ");
+  const packageSummary = formatMeasureSr(product.packages.map((item) => item.label).join(" / "));
   const rows = [
     ["Brend", brand.name],
     ["Program", program.name],

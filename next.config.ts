@@ -196,6 +196,16 @@ const nextConfig: NextConfig = {
        * `?varijanta=` vode na tu varijantu, a gola adresa na katalog sa naslednicima. Test
        * `scripts/cosmos-lac-sync/cosmos-lac-sync.test.mjs` čuva da nijedna stara adresa ne ostane bez odredišta.
        */
+      /*
+       * RUPES je deo Carsystem ponude (odluka vlasnika 2026-10-14): zasebna brend stranica više
+       * ne postoji, a stara adresa vodi na RUPES sekciju Carsystem stranice. Proizvodi zadržavaju
+       * svoje adrese (`/proizvodi/carsystem-rupes-*`) i proizvođača RUPES.
+       */
+      {
+        source: "/brendovi/rupes",
+        destination: "/brendovi/carsystem#rupes",
+        permanent: true,
+      },
       ...(cosmosLacSync.redirects as {
         source: string;
         destination: string;

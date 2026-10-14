@@ -8,10 +8,12 @@ import type {
 } from "@/lib/carsystem-data";
 import type { CatalogListingEntity } from "@/lib/catalog-listing";
 import styles from "./CatalogPage.module.css";
+import { srPlural } from "@/lib/sr-plural";
 
 export function CatalogProductGrid({
   brandBySlug,
   emptyStateNote,
+  emptyStateHint,
   gridRef,
   onReset,
   onSortChange,
@@ -35,6 +37,7 @@ export function CatalogProductGrid({
    * kategorija u koju nijedan artikal još nije klasifikovan to mora reći.
    */
   emptyStateNote?: string;
+  emptyStateHint?: string;
   gridRef: Ref<HTMLDivElement>;
   onReset: () => void;
   onSortChange: (value: string) => void;
@@ -63,7 +66,7 @@ export function CatalogProductGrid({
 }) {
   const resultLabel =
     shownCount === resultCount
-      ? `Prikazano ${resultCount} proizvoda`
+      ? `${srPlural(resultCount, "Prikazan", "Prikazana", "Prikazano")} ${resultCount} ${srPlural(resultCount, "proizvod", "proizvoda", "proizvoda")}`
       : `Prikazano ${shownCount} od ${resultCount} proizvoda`;
 
   return (
@@ -169,7 +172,7 @@ export function CatalogProductGrid({
             {emptyStateNote ?? "Za izabranu kombinaciju filtera trenutno nema proizvoda."}
           </h3>
           <p className={styles.emptyStateHint}>
-            Promenite filtere ili pošaljite upit našem timu za materijal koji Vam treba.
+            {emptyStateHint ?? "Promenite filtere ili pošaljite upit našem timu za materijal koji Vam treba."}
           </p>
           <button
             className={`${styles.primaryButton} cs-magnetic-cta cs-theme-wipe-card`}

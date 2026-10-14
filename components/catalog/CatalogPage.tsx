@@ -36,7 +36,7 @@ export function CatalogPage({
     <div className={styles.catalogShell} data-ds="a">
       <main className={styles.main}>
         {/* Javni programi (/program), ne interni programGroups koji služe filterima. */}
-        <CatalogHero brandCount={brands.length} programCount={publicProgramGroups.length} />
+        <CatalogHero brandCount={brands.filter((brand) => !brand.offeredWithin).length} programCount={publicProgramGroups.length} />
         {/* Prijavljeni kupac: sopstvena istorija. Anonimno: ništa, bez zahteva. */}
         <CatalogReorder />
         <CatalogCategoryLinks />

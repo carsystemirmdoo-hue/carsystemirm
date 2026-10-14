@@ -175,10 +175,11 @@ export const BRAND_LINKS: NavigationLink[] = [
     logo: "/brands/sata.svg",
   },
   {
-    // Bez logotipa: odobren RUPES logo fajl ne postoji (RUPES_IMAGE_RIGHTS_REVIEW).
-    href: "/brendovi/rupes",
-    title: "RUPES",
-    description: "Polirke, brusilice i pribor za završnu obradu.",
+    // Bez logotipa: odobren Yachtcare logo fajl ne postoji. RUPES nije zaseban brend u
+    // meniju — prikazan je u okviru Carsystem ponude (/brendovi/carsystem#rupes).
+    href: "/brendovi/yachtcare",
+    title: "Yachtcare",
+    description: "Dvokomponentna epoksi masa za popravke.",
   },
 ];
 

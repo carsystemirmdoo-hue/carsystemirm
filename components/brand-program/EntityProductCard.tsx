@@ -1,4 +1,6 @@
 import Link from "next/link";
+import { formatMeasureSr } from "@/lib/measure-format.mjs";
+import { cardMetaParts } from "@/lib/card-meta";
 import {
   getProductPublicStatus,
   type CarsystemBrand,
@@ -22,7 +24,7 @@ export function EntityProductCard({
   program: ProgramGroup;
 }) {
   const image = product.productImage ?? product.galleryImages[0] ?? null;
-  const packageSummary = product.packages.map((item) => item.label).join(" / ");
+  const packageSummary = formatMeasureSr(product.packages.map((item) => item.label).join(" / "));
   const publicStatus = getProductPublicStatus(product);
   const productHref = productCanonicalHref(product);
   const inquiryHref = `/kontakt?tema=proizvod&proizvod=${product.slug}`;
@@ -50,7 +52,7 @@ export function EntityProductCard({
 
       <div className={styles.productBody}>
         <p className={styles.productMetaLine}>
-          {brand.name} · {program.shortName} · {phase.name}
+          {cardMetaParts([brand.name, program.shortName, phase.name]).join(" · ")}
         </p>
 
         <Link href={productHref}>

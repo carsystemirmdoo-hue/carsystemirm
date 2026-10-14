@@ -1,6 +1,6 @@
 import type { MetadataRoute } from "next";
 import {
-  getAllCarsystemBrands,
+  getListedCarsystemBrands,
   getAllCarsystemProducts,
   getAllPublicProgramGroups,
 } from "@/lib/carsystem-data";
@@ -26,7 +26,7 @@ const staticRoutes = [
 ];
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const brandRoutes = getAllCarsystemBrands().map((brand) => `/brendovi/${brand.slug}`);
+  const brandRoutes = getListedCarsystemBrands().map((brand) => `/brendovi/${brand.slug}`);
   const programRoutes = getAllPublicProgramGroups().map((program) => `/program/${program.slug}`);
   const products = getAllCarsystemProducts();
 

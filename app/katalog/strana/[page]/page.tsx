@@ -120,7 +120,7 @@ export default async function CatalogPaginationRoute({
       <main className={styles.main}>
         <SeoBreadcrumbs items={breadcrumbs} />
         <CatalogHero
-          brandCount={brands.length}
+          brandCount={brands.filter((brand) => !brand.offeredWithin).length}
           programCount={programGroups.length}
           showSearch={false}
         />

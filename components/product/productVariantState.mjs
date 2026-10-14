@@ -74,6 +74,21 @@ export function findVariantByKey(variants, requested) {
 }
 
 /**
+ * Oznaka količine reda tabele („1.6 kg limenka sa učvršćivačem” → „1,6 kg”). Red bez
+ * prepoznatljive mere vraća null: bolje bez oznake na slici nego sa merom drugog pakovanja.
+ */
+const ROW_QUANTITY = /(\d+(?:[.,]\d+)?)\s*(ml|l|kg|g)(?![\p{L}\d])/iu;
+const ROW_UNIT_LABEL = { ml: "ml", l: "L", kg: "kg", g: "g" };
+
+export function rowQuantityLabel(row) {
+  const text = row?.package ?? row?.label ?? "";
+  const match = ROW_QUANTITY.exec(String(text));
+  if (!match) return null;
+  const value = match[1].replace(".", ",").replace(/,0+$/, "");
+  return `${value} ${ROW_UNIT_LABEL[match[2].toLowerCase()]}`;
+}
+
+/**
  * Pogledi za varijante koje su REDOVI jednog proizvoda.
  *
  * Katalog ima dva modela varijanti. Kod porodica (Cosmos Lac, Baslac) svaka
@@ -117,6 +132,8 @@ export function expandRowVariants(base, rows, resolveImage) {
       sku: row.sku ?? base.sku ?? null,
       shadeLabel: row.label ?? base.shadeLabel ?? null,
       status: row.status ?? base.status,
+      // Oznaka na slici prati izabrani red, a ne prvo pakovanje proizvoda.
+      quantityLabel: rowQuantityLabel(row),
       images: own
         ? [own, ...baseImages.filter((image) => image.src !== own.src)]
         : baseImages,

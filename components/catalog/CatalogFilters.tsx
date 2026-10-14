@@ -22,7 +22,6 @@ export function CatalogFilters({
   onRmCategoryChange,
   onRmSeriesChange,
   onRmSystemChange,
-  onStatusChange,
   onTypeChange,
   onProductLineChange,
   onTechnicalCategoryChange,
@@ -37,7 +36,6 @@ export function CatalogFilters({
   rmSeriesOptions,
   rmSystem,
   rmSystemOptions,
-  status,
   typeOptions,
   typeTag,
   productLine,
@@ -61,7 +59,6 @@ export function CatalogFilters({
   onRmCategoryChange: (value: string) => void;
   onRmSeriesChange: (value: string) => void;
   onRmSystemChange: (value: string) => void;
-  onStatusChange: (value: string) => void;
   onTypeChange: (value: string) => void;
   onProductLineChange: (value: string) => void;
   onTechnicalCategoryChange: (value: string) => void;
@@ -76,7 +73,6 @@ export function CatalogFilters({
   rmSeriesOptions: { label: string; value: string }[];
   rmSystem: string;
   rmSystemOptions: { label: string; value: string }[];
-  status: string;
   typeOptions: string[];
   typeTag: string;
   productLine: string;
@@ -206,23 +202,6 @@ export function CatalogFilters({
             searchPlaceholder="Pretražite fazu"
             sheetTitle="Izaberite fazu"
             value={phaseSlug}
-          />
-        </FilterField>
-
-        <FilterField label="Dostupnost" htmlFor="status-filter">
-          <SearchableCombobox
-            ariaLabel="Dostupnost"
-            emptyMessage="Nema statusa koji odgovaraju pretrazi."
-            id="status-filter"
-            onChange={onStatusChange}
-            options={[
-              { label: "Svi statusi", value: "" },
-              { label: "Na upit", value: "na-upit" },
-            ]}
-            placeholder="Svi statusi"
-            searchPlaceholder="Pretražite status"
-            sheetTitle="Izaberite dostupnost"
-            value={status}
           />
         </FilterField>
 

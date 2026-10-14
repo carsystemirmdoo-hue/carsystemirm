@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { formatMeasureSr } from "@/lib/measure-format.mjs";
 import {
   getProductPublicStatus,
   getRefinishPhaseBySlug,
@@ -22,7 +23,7 @@ export function ProductHero({
   brand: CarsystemBrand;
   program: ProgramGroup;
 }) {
-  const packageSummary = product.packages.map((item) => item.label).join(" / ");
+  const packageSummary = formatMeasureSr(product.packages.map((item) => item.label).join(" / "));
   const phase = getRefinishPhaseBySlug(product.phaseSlug);
   const publicStatus = getProductPublicStatus(product);
   const factRows = [

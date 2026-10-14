@@ -1,5 +1,6 @@
 "use client";
 
+import { formatMeasureSr } from "@/lib/measure-format.mjs";
 import Image from "next/image";
 import Link from "next/link";
 import { useMemo, type CSSProperties } from "react";
@@ -176,7 +177,7 @@ export function ProductVariantOptions({
         <div>
           <small>Aktivna varijanta</small>
           <strong>
-            {section.family.label} · {activeVariant.label}
+            {section.family.label} · {formatMeasureSr(activeVariant.label)}
           </strong>
         </div>
         <dl>
@@ -239,9 +240,9 @@ function VariantOptionContent({
         </span>
       ) : null}
       <span className={styles.variantOptionCopy}>
-        <strong>{option.label}</strong>
+        <strong>{formatMeasureSr(option.label)}</strong>
         {option.code ? <small>{option.code}</small> : null}
-        {option.detail ? <small>{option.detail}</small> : null}
+        {option.detail ? <small>{formatMeasureSr(option.detail)}</small> : null}
       </span>
       <span className={styles.variantSelectedMark} aria-hidden="true">
         {selected ? "✓" : ""}

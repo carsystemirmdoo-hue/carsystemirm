@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { cardMetaParts } from "@/lib/card-meta";
 import { CustomerCardPrice } from "@/components/customer-buy/CustomerCardPrice";
 import {
   type CarsystemBrand,
@@ -66,7 +67,7 @@ export function CatalogProductCard({
 
   const metaItems = listing.line
     ? [brand.name, listing.line]
-    : [brand.name, program.shortName, phase.name];
+    : cardMetaParts([brand.name, program.shortName, phase.name]);
 
   /*
    * Roletna kartice na /katalog (`catalogSystem`) — dva pravila, jedno mesto:

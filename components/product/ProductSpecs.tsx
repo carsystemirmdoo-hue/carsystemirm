@@ -1,4 +1,5 @@
 import type { CarsystemProduct } from "@/lib/carsystem-data";
+import { formatMeasureSr } from "@/lib/measure-format.mjs";
 import styles from "./ProductDetailPage.module.css";
 
 export function ProductSpecs({ product }: { product: CarsystemProduct }) {
@@ -24,8 +25,8 @@ export function ProductSpecs({ product }: { product: CarsystemProduct }) {
           <div className={styles.specRow} key={`${spec.label}-${spec.value}`}>
             <dt>{spec.label}</dt>
             <dd>
-              <strong>{spec.value}</strong>
-              {spec.detail && <span>{spec.detail}</span>}
+              <strong>{formatMeasureSr(spec.value)}</strong>
+              {spec.detail && <span>{formatMeasureSr(spec.detail)}</span>}
             </dd>
           </div>
         ))}

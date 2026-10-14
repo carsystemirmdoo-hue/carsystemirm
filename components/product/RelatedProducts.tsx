@@ -1,4 +1,6 @@
 import Link from "next/link";
+import { formatMeasureSr } from "@/lib/measure-format.mjs";
+import { cardMetaParts } from "@/lib/card-meta";
 import {
   getCarsystemBrandBySlug,
   getProductPublicStatus,
@@ -37,7 +39,7 @@ export function RelatedProducts({
           const image = product.productImage ?? product.galleryImages[0] ?? null;
           const productHref = productCanonicalHref(product);
           const inquiryHref = `/kontakt?tema=proizvod&proizvod=${product.slug}`;
-          const packageSummary = product.packages.map((item) => item.label).join(" / ");
+          const packageSummary = formatMeasureSr(product.packages.map((item) => item.label).join(" / "));
           const publicStatus = getProductPublicStatus(product);
 
           return (
@@ -63,7 +65,7 @@ export function RelatedProducts({
               </Link>
               <div className={styles.relatedBody}>
                 <span className={styles.relatedMeta}>
-                  {[brand?.name, program?.shortName, phase?.name].filter(Boolean).join(" / ")}
+                  {cardMetaParts([brand?.name, program?.shortName, phase?.name]).join(" · ")}
                 </span>
                 <h3 className={styles.relatedName}>
                   <Link href={productHref}>{product.name}</Link>

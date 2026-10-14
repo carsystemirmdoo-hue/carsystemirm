@@ -1,10 +1,11 @@
 import Link from "next/link";
+import { srPlural } from "@/lib/sr-plural";
 import { BrandLogoMark } from "@/components/brand/BrandLogoMark";
 import type { Metadata } from "next";
 import { Footer } from "@/components/layout/Footer";
 import { SeoBreadcrumbs } from "@/components/seo/SeoBreadcrumbs";
 import styles from "@/components/brand-program/BrandProgramPage.module.css";
-import { getAllCarsystemBrands, getPublicProgramGroupsForBrand } from "@/lib/carsystem-data";
+import { getListedCarsystemBrands, getPublicProgramGroupsForBrand } from "@/lib/carsystem-data";
 import {
   breadcrumbJsonLd,
   collectionPageJsonLd,
@@ -20,7 +21,7 @@ export const metadata: Metadata = pageMetadata({
 });
 
 export default function BrandsIndexPage() {
-  const brands = getAllCarsystemBrands();
+  const brands = getListedCarsystemBrands();
 
   return (
     <div className={styles.pageShell}>
@@ -99,7 +100,7 @@ export default function BrandsIndexPage() {
                     />
                   </span>
                   <span>
-                    <p className={styles.cardKicker}>{programs.length} programa</p>
+                    <p className={styles.cardKicker}>{programs.length} {srPlural(programs.length, "program", "programa", "programa")}</p>
                     <h2>{brand.name}</h2>
                   </span>
                   <p>{brand.description}</p>

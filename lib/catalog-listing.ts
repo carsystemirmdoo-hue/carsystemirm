@@ -27,6 +27,7 @@
  * and lands on the page that actually shows it.
  */
 
+import { formatMeasureSr } from "@/lib/measure-format.mjs";
 import { publicSkuOf } from "@/lib/catalog/public-code";
 import { canonicalVariantKey } from "@/lib/catalog/variant-key";
 import {
@@ -192,6 +193,7 @@ function technicalLineOf(product: CarsystemProduct) {
 
   return [packageSummary, metadata?.finish]
     .filter((value): value is string => Boolean(value))
+    .map(formatMeasureSr)
     .filter((value, index, values) => values.indexOf(value) === index)
     .slice(0, 3)
     .join(" · ");

@@ -339,7 +339,9 @@ export function CarsystemHomePage() {
               </p>
             </div>
             <div className={styles.categorySectionActions}>
-              <Button href="/katalog" className={styles.categoryCatalogCta}>
+              {/* Bez prefetch-a: RSC kataloga je najveći na sajtu, a ova veza stoji uz dugme
+                  pretrage — prefetch bi se takmičio sa indeksom pretrage. */}
+              <Button href="/katalog" className={styles.categoryCatalogCta} prefetch={false}>
                 Pogledajte ceo katalog
               </Button>
               {/*

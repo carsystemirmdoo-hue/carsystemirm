@@ -24,16 +24,20 @@ export function Button({
   variant = "primary",
   className,
   children,
+  prefetch,
   ...rest
 }: {
   href: string;
   variant?: Variant;
   className?: string;
   children: React.ReactNode;
+  /** Prosleđuje se `next/link`; `false` za veze ka teškim stranama (npr. /katalog). */
+  prefetch?: boolean;
 } & React.AnchorHTMLAttributes<HTMLAnchorElement>) {
   return (
     <Link
       href={href}
+      prefetch={prefetch}
       className={cn(baseClasses, VARIANT_CLASSES[variant], className)}
       data-cursor="button"
       {...rest}

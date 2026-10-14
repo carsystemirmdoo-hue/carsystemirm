@@ -36,6 +36,10 @@ import styles from "./StoresPage.module.css";
 
 const SOURCE_ID = "partner-locations";
 const PROBE_LAYER_ID = "partner-locations-probe";
+// Nevidljiv simbol na mestu svake oznake: zauzima prostor pri raspoređivanju natpisa
+// naselja (vidi applyMarkerAwareLabels), jer HTML oznake MapLibre ne vidi.
+const COLLISION_LAYER_ID = "partner-locations-collision";
+const COLLISION_IMAGE_ID = "partner-locations-collision-box";
 
 // Approved search/filter camera: same fitBounds animation is reused for both
 // the valid-result refit and the zero-result reset to Serbia coverage.
@@ -224,6 +228,23 @@ export function PartnerMap({
         type: "circle",
         source: SOURCE_ID,
         paint: { "circle-radius": 0, "circle-opacity": 0 },
+      });
+
+      if (!activeMap.hasImage(COLLISION_IMAGE_ID)) {
+        // 32 × 32 providnih piksela; veličina grupe (30 px) i pojedinačne oznake (~18 px).
+        activeMap.addImage(COLLISION_IMAGE_ID, { width: 32, height: 32, data: new Uint8Array(32 * 32 * 4) });
+      }
+      activeMap.addLayer({
+        id: COLLISION_LAYER_ID,
+        type: "symbol",
+        source: SOURCE_ID,
+        layout: {
+          "icon-image": COLLISION_IMAGE_ID,
+          "icon-size": ["case", ["has", "point_count"], 0.9, 0.55],
+          "icon-allow-overlap": true,
+          "icon-ignore-placement": false,
+        },
+        paint: { "icon-opacity": 0 },
       });
     }
 

@@ -1704,6 +1704,24 @@
   }
 }
 
+/*
+ * Natpis „Carsystem i R-M” uz logotip se sklanja kada mu meni ne ostavlja mesta: ispod 80rem
+ * (kontejner tada nema punih 1208 px) i kada je kupac prijavljen (korpa + „Moj nalog” zauzimaju
+ * ~190 px na svakoj širini). Logotip i naziv u <title>/podnožju ostaju; čitač ekrana i dalje
+ * dobija naziv iz veze logotipa.
+ */
+@media (min-width: 70rem) and (max-width: 80rem) {
+  .brandLabel {
+    display: none;
+  }
+}
+
+@media (min-width: 70rem) {
+  .shell:has([data-account="signed-in"]) .brandLabel {
+    display: none;
+  }
+}
+
 @media (max-width: 80rem) and (min-width: 73.01rem) {
   .navLink,
   .navTrigger {

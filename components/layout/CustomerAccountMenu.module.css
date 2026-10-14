@@ -72,6 +72,23 @@
 }
 .dot { width: 0.5rem; height: 0.5rem; flex: 0 0 auto; border-radius: 50%; background: var(--ds-c-ok); }
 .triggerText { font: inherit; }
+.triggerIcon { display: none; }
+/*
+ * Uski desktop (1120–1215 px): „Moj nalog” postaje ikonica sa tačkom prijave, da meni ne udari
+ * u akcije. Tekst ostaje u stablu pristupačnosti (vizuelno sakriven), a pun naziv daje title.
+ */
+@media (min-width: 70rem) and (max-width: 76rem) {
+  .trigger { gap: 0.35rem; padding-inline: 0.6rem; }
+  .triggerIcon { display: inline-flex; }
+  .triggerText {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+  }
+}
 .menu {
   position: absolute;
   top: calc(100% + 0.5rem);

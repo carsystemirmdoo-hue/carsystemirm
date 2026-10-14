@@ -22,7 +22,7 @@ const brandLinks = [
   { href: "/brendovi/baslac", label: "Baslac" },
   { href: "/brendovi/norbin", label: "Norbin" },
   { href: "/brendovi/sata", label: "SATA" },
-  { href: "/brendovi/carfit", label: "Car Fit" },
+  { href: "/brendovi/carfit", label: "C.A.R.FIT" },
   { href: "/brendovi/cosmos-lac", label: "Cosmos Lac" },
   { href: "/brendovi/befar", label: "Befar" },
   { href: "/brendovi/yachtcare", label: "Yachtcare" },

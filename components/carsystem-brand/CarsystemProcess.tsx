@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useId, useMemo, useState } from "react";
+import { useId, useMemo, useState, type CSSProperties } from "react";
 import type { CarsystemProduct } from "@/lib/carsystem-data";
 import { CarsystemMediaSlot } from "./CarsystemMediaSlot";
 import {
@@ -184,13 +184,12 @@ function ProcessDetails({
         <div>
           {phase.categories.map((category) => (
             <Link href={category.href} key={category.label}>
-              <span>
-                <Image
-                  src={category.icon}
-                  alt=""
-                  width={34}
-                  height={34}
-                  aria-hidden="true"
+              <span aria-hidden="true">
+                {/* Maska u boji teksta (kao na početnoj): SVG ima fiksnu tamnu liniju
+                    koja u tamnoj temi nestaje na tamnoj podlozi. */}
+                <i
+                  className={styles.processCategoryIcon}
+                  style={{ "--category-icon": `url("${category.icon}")` } as CSSProperties}
                 />
               </span>
               {category.label}

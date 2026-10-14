@@ -164,7 +164,7 @@ export const BRAND_LINKS: NavigationLink[] = [
   },
   {
     href: "/brendovi/carfit",
-    title: "Car Fit",
+    title: "C.A.R.FIT",
     description: "Materijali za pripremu i stabilnu podlogu.",
     logo: "/brands/carfit.svg",
   },

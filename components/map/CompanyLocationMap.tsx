@@ -112,7 +112,9 @@ export function CompanyLocationMap({
       aria-label={`Mapa: ${companyLocation.name}, ${companyLocation.city}`}
       className={`${styles.mapCanvasShell} ${className ?? ""}`}
       ref={shellRef}
-      role="img"
+      // „group”, ne „img”: mapa sadrži vezu i dugme za izvor podataka (OpenStreetMap),
+      // a „img” ne sme imati interaktivne potomke (axe nested-interactive).
+      role="group"
     >
       <div className={styles.mapCanvas} ref={canvasRef} />
       {status === "loading" || status === "idle" ? (

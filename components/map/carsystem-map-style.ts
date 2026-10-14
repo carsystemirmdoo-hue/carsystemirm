@@ -181,12 +181,36 @@ export function applyLatinLabels(style: StyleSpecification): StyleSpecification 
   return style;
 }
 
+/**
+ * Natpisi naselja (grad, prestonica, varoš) dobijaju više mogućih položaja oko tačke.
+ * Oznake prodavnica su HTML elementi koje MapLibre ne vidi pri raspoređivanju natpisa, pa
+ * PartnerMap ispod njih postavlja nevidljiv simbol (PARTNER_COLLISION_LAYER); natpis se tada
+ * pomera u stranu umesto da ostane pod oznakom („Beograd” ispod grupe prodavnica).
+ */
+const SETTLEMENT_LABEL_LAYERS = new Set(["label_city_capital", "label_city", "label_town"]);
+
+export function applyMarkerAwareLabels(style: StyleSpecification): StyleSpecification {
+  for (const layer of style.layers) {
+    if (layer.type !== "symbol" || !SETTLEMENT_LABEL_LAYERS.has(layer.id)) continue;
+    const layout = layer.layout as Record<string, unknown> | undefined;
+    if (!layout) continue;
+    delete layout["text-anchor"];
+    delete layout["text-offset"];
+    layout["text-variable-anchor"] = ["bottom", "top", "right", "left"];
+    // ~18 px: natpis staje pored grupe prodavnica (30 px) umesto da nestane.
+    layout["text-radial-offset"] = 1.3;
+    layout["text-justify"] = "auto";
+  }
+  return style;
+}
+
 export function loadCarsystemMapStyle(theme: "light" | "dark") {
   if (!lightStylePromise) {
     lightStylePromise = fetchJsonWithRetry<StyleSpecification>(LIGHT_STYLE_URL)
       .then((style) => resolveSourceTileJson(style))
       .then((style) => applySerbianCorporateBoundaries(style))
       .then((style) => applyLatinLabels(style))
+      .then((style) => applyMarkerAwareLabels(style))
       .catch((error) => {
         // Never cache a failed load; the next call should retry from scratch.
         lightStylePromise = null;

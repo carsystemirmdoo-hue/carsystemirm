@@ -135,7 +135,7 @@ export function CustomerAccountMenu({ variant = "desktop", onNavigate }: { varia
   }
 
   return (
-    <div className={styles.root} ref={rootRef}>
+    <div className={styles.root} ref={rootRef} data-account="signed-in">
       <Link href="/kupac/korpa" className={styles.cart} aria-label={state.cartCount ? `Korpa, ${state.cartCount} stavki` : "Korpa"}>
         <CartIcon />
         {state.cartCount ? <span className={styles.cartCount}>{state.cartCount}</span> : null}
@@ -146,8 +146,10 @@ export function CustomerAccountMenu({ variant = "desktop", onNavigate }: { varia
         aria-expanded={open}
         aria-controls={menuId}
         onClick={() => setOpen((v) => !v)}
+        title={`Moj nalog: ${state.company}`}
       >
         <span className={styles.dot} aria-hidden="true" />
+        <span className={styles.triggerIcon} aria-hidden="true"><UserIcon /></span>
         <span className={styles.triggerText}>Moj nalog</span>
         <span className={styles.srOnly}>: {state.company}</span>
       </button>

@@ -231,9 +231,11 @@ export function CarsystemHomePage() {
     const saved = readSavedCity();
     if (!saved) return;
     const savedStores = publicPartnerStores.filter((store) => getPartnerCityKey(store) === saved);
+    const savedCity = cityEntries.find((entry) => entry.key === saved)?.city ?? saved;
     setSelectedCity(saved);
     setSelectedMapStoreId(savedStores[0]?.id ?? "");
     setCityChosen(true);
+    setLocatorStatus(`Prikazan je Vaš ranije izabran grad: ${savedCity}.`);
   }, []);
 
   function handleCityChange(cityKey: string) {

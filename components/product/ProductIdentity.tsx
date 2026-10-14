@@ -3,6 +3,7 @@
 import { useProductVariant } from "@/components/product/ProductVariantProvider";
 import styles from "./ProductDetailExperience.module.css";
 import { CustomerStatus } from "@/components/customer-buy/CustomerStatus";
+import { formatMeasureSr } from "@/lib/measure-format.mjs";
 
 /**
  * Identitet proizvoda: naslov, uvod i referentni podaci.
@@ -50,10 +51,12 @@ export function ProductIdentity({
           <span>
             <small>{activeVariant.ralLabel ? "Nijansa" : "Izvedba"}</small>
             <strong data-variant-shade>
-              {activeVariant.ralLabel &&
-              activeVariant.ralLabel !== activeVariant.shadeLabel
-                ? `${activeVariant.shadeLabel} · ${activeVariant.ralLabel}`
-                : activeVariant.shadeLabel}
+              {formatMeasureSr(
+                activeVariant.ralLabel &&
+                  activeVariant.ralLabel !== activeVariant.shadeLabel
+                  ? `${activeVariant.shadeLabel} · ${activeVariant.ralLabel}`
+                  : activeVariant.shadeLabel,
+              )}
             </strong>
           </span>
         ) : null}

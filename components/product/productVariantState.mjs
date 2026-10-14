@@ -81,8 +81,10 @@ const ROW_QUANTITY = /(\d+(?:[.,]\d+)?)\s*(ml|l|kg|g)(?![\p{L}\d])/iu;
 const ROW_UNIT_LABEL = { ml: "ml", l: "L", kg: "kg", g: "g" };
 
 export function rowQuantityLabel(row) {
-  const text = row?.package ?? row?.label ?? "";
-  const match = ROW_QUANTITY.exec(String(text));
+  // Mera može biti u pakovanju ili samo u oznaci reda („limenka” / „1.6 kg limenka …”).
+  const match = [row?.package, row?.label]
+    .map((text) => ROW_QUANTITY.exec(String(text ?? "")))
+    .find(Boolean);
   if (!match) return null;
   const value = match[1].replace(".", ",").replace(/,0+$/, "");
   return `${value} ${ROW_UNIT_LABEL[match[2].toLowerCase()]}`;

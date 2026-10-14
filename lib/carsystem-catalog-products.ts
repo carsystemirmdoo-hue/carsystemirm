@@ -261,9 +261,7 @@ function manufacturerFacts(entry: CatalogProductEntry, manufacturer: CatalogManu
     {
       label: "Program",
       value: `${manufacturer.name} proizvodi iz Carsystem programa`,
-      detail: entry.inCatalogue
-        ? `Proizvod vodi ${carsystemCatalogMeta.catalogue}.`
-        : "Proizvod vodi carsystem.org; nije u štampanom katalogu 2026/27.",
+      // Izvor podatka (katalog 2026/27 ili carsystem.org) je interna evidencija, ne podatak za kupca.
       reviewStatus: "confirmed" as const,
     },
   ];

@@ -81,7 +81,8 @@ export function ManufacturerRail({
             </li>
           ) : null}
 
-          {brands.map((brand) => {
+          {/* Brend ponuđen u okviru drugog (RUPES → Carsystem) nema svoje mesto u traci. */}
+          {brands.filter((brand) => !brand.offeredWithin).map((brand) => {
             const selected = brand.slug === selectedSlug;
             const content = (
               <>

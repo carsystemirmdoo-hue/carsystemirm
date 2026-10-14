@@ -1,5 +1,4 @@
 import { RM_CRYSTAL_BASE_SLUG, RM_PASTE_SLUG, withRmMixingBases } from "@/lib/rm-mixing-bases";
-import { formatMeasureSr } from "@/lib/measure-format.mjs";
 import { abrasiveBackingTerms } from "@/lib/search/abrasive-backing.mjs";
 import { publicSkuOf } from "@/lib/catalog/public-code";
 import removedFromCustomerCatalog from "@/data/catalog/removed-from-customer-catalog.json";
@@ -2996,11 +2995,11 @@ export function getAllPublicProgramGroups() {
  * `customerPackage` vraća tačno ono što je vraćalo i ranije, pa se nijedan drugi brend ne menja.
  */
 export function getProductPackageLabel(product: CarsystemProduct): string | undefined {
-  const label =
+  return (
     product.catalogMetadata?.customerPackage ??
     product.catalogMetadata?.volume ??
-    product.packages[0]?.label;
-  return label ? formatMeasureSr(label) : label;
+    product.packages[0]?.label
+  );
 }
 
 export function getCarsystemProductBySlug(slug: string) {

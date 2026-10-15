@@ -1157,53 +1157,63 @@ try {
     check("B9 lozinka kupca: posle 11 promašaja (prag 10) „Previše pokušaja“", /Previše pokušaja/.test(kp), kp);
   }
   if (STEP === "lager") {
-    // Ručni uvoz lagera (dok. 65): sintetički izveštaj istog rasporeda kao BizniSoft izvoz.
+    // Ručni uvoz lagera (dok. 65): sintetički izveštaji oba rasporeda kao BizniSoft izvoz.
     const XLSX = ROOT + "/fixtures/dev/biznisoft/lager/stanje-zaliha-sinteticki.xlsx";
+    const XLSX_B = ROOT + "/fixtures/dev/biznisoft/lager/stanje-zaliha-artikla-sinteticki.xlsx";
     const pre = (await sqlc`SELECT count(*)::int n FROM stock_imports`)[0].n;
     const t = await (await b.newContext(desk)).newPage(); await staff(t, "kancelarija");
     await go(t, "/portal/zalihe/uvoz");
-    check("lager: kancelarija vidi stranicu uvoza", /Uvoz lagera/.test(await txt(t.locator("h1").first())));
-    await t.setInputFiles('input[name="lager"]', XLSX);
-    await Promise.all([t.waitForURL(/\/portal\/zalihe\/uvoz\/[0-9a-f-]{36}/, { timeout: 60000 }), t.getByRole("button", { name: "Otpremite na pregled" }).click()]);
+    check("lager: kancelarija vidi stranicu uvoza i korake", /Uvoz lagera/.test(await txt(t.locator("h1").first())) && (await t.locator(".lg-step").count()) === 3);
+    check("lager: izbor fajla na srpskom, dugme isključeno dok fajl nije izabran", /Izaberite izvoz lagera/.test(await txt(t.locator(".lg-drop"))) && (await t.getByRole("button", { name: "Proverite fajl" }).isDisabled()));
+    await t.screenshot({ path: `${OUT}/lager-0-uvoz.png`, fullPage: true });
+    await t.setInputFiles('input[name="lager"]', XLSX_B);
+    check("lager: izabran fajl se prikazuje imenom", /stanje-zaliha-artikla-sinteticki\.xlsx/.test(await txt(t.locator(".lg-drop"))));
+    await Promise.all([t.waitForURL(/\/portal\/zalihe\/uvoz\/[0-9a-f-]{36}/, { timeout: 60000 }), t.getByRole("button", { name: "Proverite fajl" }).click()]);
     const body = await txt(t.locator("main"));
-    check("lager pregled: objekat 021 VELEPRODAJA", /021 VELEPRODAJA/.test(body));
-    check("lager pregled: datum stanja 05.09.2026 i datum štampe", /Stanje na dan 05[./] ?09[./] ?2026/.test(body) && /Datum štampe 05[./] ?09[./] ?2026/.test(body), body.slice(0, 400));
-    check("lager pregled: 10 stavki, zbir i strane provereni", /Prepoznato stavki 10/.test(body) && /zbir vrednosti = „Ukupno“/.test(body) && /strane 3\/3/.test(body));
-    check("lager pregled: nepovezane šifre i stavke bez JM/pakovanja prikazane", /Nepovezane šifre \(\d+\)/.test(body) && /bez potvrđene JM ili pakovanja/i.test(body));
-    check("lager pregled: bez cena", !/26\.?000|Nab\.Cena|VP Cena/.test(body));
-    await t.screenshot({ path: `${OUT}/lager-1-pregled.png`, fullPage: true });
-    await t.getByRole("checkbox", { name: /Pregledao sam izveštaj/ }).check();
+    check("lager provera (raspored B): spreman za potvrdu", /Provera je prošla/.test(body), body.slice(0, 300));
+    check("lager provera: objekat, datum, stavke, potpunost", /021 VELEPRODAJA/.test(body) && /Stanje na dan 05[./] ?09[./] ?2026/.test(body) && /Stavki 10/.test(body) && /sve strane i zbir se slažu/.test(body));
+    check("lager provera: bez cena", !/26\.?000|5\.?200|Nab\.Cena|VP Cena/.test(body));
+    const top = await t.evaluate(() => { const h = document.querySelector("main h1"); const bar = document.querySelector(".portal-topbar"); return h && bar ? h.getBoundingClientRect().top - bar.getBoundingClientRect().bottom : -1; });
+    check("lager provera: naslov nije ispod gornje trake", top >= 0, `razmak ${top}px`);
+    await t.screenshot({ path: `${OUT}/lager-1-provera.png`, fullPage: true });
+    await t.getByRole("checkbox", { name: /Pregledao sam proveru/ }).check();
     await t.getByRole("button", { name: "Potvrdite lager" }).click();
     await t.waitForURL(/ishod=potvrdjeno/, { timeout: 30000 });
-    await t.locator("[role=status]").filter({ hasText: "važeći snimak" }).first().waitFor({ timeout: 30000 });
-    check("lager: potvrda → važeći snimak", (await sqlc`SELECT count(*)::int n FROM stock_imports WHERE status = 'potvrdjeno'`)[0].n >= 1);
+    check("lager: potvrda → važeće stanje", /ovo je važeće stanje/.test(await txt(t.locator("main"))));
+    await t.screenshot({ path: `${OUT}/lager-2-potvrdjeno.png`, fullPage: true });
+    await go(t, "/portal/zalihe/uvoz");
+    await t.setInputFiles('input[name="lager"]', XLSX_B);
+    await Promise.all([t.waitForURL(/isti=1/, { timeout: 60000 }), t.getByRole("button", { name: "Proverite fajl" }).click()]);
+    check("lager: isti fajl ponovo → postojeća provera, bez duplikata", (await sqlc`SELECT count(*)::int n FROM stock_imports`)[0].n === pre + 1);
     await go(t, "/portal/zalihe/uvoz");
     await t.setInputFiles('input[name="lager"]', XLSX);
-    await Promise.all([t.waitForURL(/isti=1/, { timeout: 60000 }), t.getByRole("button", { name: "Otpremite na pregled" }).click()]);
-    check("lager: isti fajl ponovo → postojeći pregled, bez duplikata", (await sqlc`SELECT count(*)::int n FROM stock_imports`)[0].n === pre + 1);
+    await Promise.all([t.waitForURL(/\/portal\/zalihe\/uvoz\/[0-9a-f-]{36}/, { timeout: 60000 }), t.getByRole("button", { name: "Proverite fajl" }).click()]);
+    check("lager: raspored A istog datuma — provera prolazi", /Provera je prošla/.test(await txt(t.locator("main"))));
     await go(t, "/portal/zalihe/uvoz");
     await t.setInputFiles('input[name="lager"]', { name: "pogresan.csv", mimeType: "text/csv", buffer: Buffer.from("nije lager;1;2\n") });
-    await Promise.all([t.waitForURL(/\/portal\/zalihe\/uvoz\/[0-9a-f-]{36}/, { timeout: 60000 }), t.getByRole("button", { name: "Otpremite na pregled" }).click()]);
+    await Promise.all([t.waitForURL(/\/portal\/zalihe\/uvoz\/[0-9a-f-]{36}/, { timeout: 60000 }), t.getByRole("button", { name: "Proverite fajl" }).click()]);
     const bad = await txt(t.locator("main"));
-    check("lager: pogrešan fajl → greška, bez dugmeta za potvrdu", /Greške koje blokiraju uvoz/.test(bad) && !(await t.getByRole("button", { name: "Potvrdite lager" }).count()));
-    await t.screenshot({ path: `${OUT}/lager-2-greska.png`, fullPage: true });
+    check("lager: pogrešan fajl → nije prošao proveru, bez dugmeta za potvrdu", /nije prošao proveru/.test(bad) && !(await t.getByRole("button", { name: "Potvrdite lager" }).count()));
+    await t.screenshot({ path: `${OUT}/lager-3-greska.png`, fullPage: true });
+    await go(t, "/portal/zalihe/uvoz");
+    check("lager: istorija sa statusima", /Istorija uvoza/.test(await txt(t.locator("main"))) && /važeći/.test(await txt(t.locator(".lg-history"))));
+    await t.screenshot({ path: `${OUT}/lager-4-istorija.png`, fullPage: true });
     check("lager: kancelarija ima „Uvoz lagera“ u meniju", (await t.locator('a[href="/portal/zalihe/uvoz"]').count()) > 0);
     const g = await (await b.newContext(desk)).newPage(); await staff(g, "vlasnik");
     await go(g, "/portal/zalihe");
     const zal = await txt(g.locator("main"));
     check("zalihe (vlasnik): važeći snimak i isključen prikaz kupcima", /Stanje na dan 05[./] ?09[./] ?2026/.test(zal) && /Prag zastarelosti nije zadat/.test(zal), zal.slice(0, 300));
-    await g.screenshot({ path: `${OUT}/lager-3-zalihe.png`, fullPage: true });
-    // Telefon: ista stranica pregleda.
+    // Telefon: stranice uvoza i provere bez horizontalnog pomeranja.
     const tm = await (await b.newContext(phone)).newPage(); await staff(tm, "kancelarija");
-    const id = (await sqlc`SELECT id FROM stock_imports WHERE status = 'potvrdjeno' ORDER BY decided_at DESC LIMIT 1`)[0].id;
-    await go(tm, `/portal/zalihe/uvoz/${id}`);
-    const sw = await tm.evaluate(() => document.documentElement.scrollWidth - window.innerWidth);
-    check("lager pregled na telefonu: bez horizontalnog pomeranja strane", sw <= 1, `višak ${sw}px`);
-    await tm.screenshot({ path: `${OUT}/lager-4-telefon.png`, fullPage: true });
-    // Prava: magacioner (bez imports:write) i kupac nemaju pristup uploadu.
+    for (const [name, path] of [["uvoz", "/portal/zalihe/uvoz"], ["provera", `/portal/zalihe/uvoz/${(await sqlc`SELECT id FROM stock_imports WHERE status = 'potvrdjeno' ORDER BY decided_at DESC LIMIT 1`)[0].id}`]]) {
+      await go(tm, path);
+      const sw = await tm.evaluate(() => document.documentElement.scrollWidth - window.innerWidth);
+      check(`lager ${name} na telefonu: bez horizontalnog pomeranja strane`, sw <= 1, `višak ${sw}px`);
+      await tm.screenshot({ path: `${OUT}/lager-telefon-${name}.png`, fullPage: true });
+    }
     const m = await (await b.newContext(desk)).newPage(); await staff(m, "magacin");
     const r = await m.goto(`${B}/portal/zalihe/uvoz`, { waitUntil: "load", timeout: 60000 });
-    check("lager: magacioner nema pristup uvozu (403)", r?.status() === 403 || /nemate pristup|zabranjen/i.test(await txt(m.locator("body"))), String(r?.status()));
+    check("lager: magacioner nema pristup uvozu (403)", r?.status() === 403 || /nemate (pristup|dozvolu)|zabranjen/i.test(await txt(m.locator("body"))), String(r?.status()));
     const k = await (await b.newContext(desk)).newPage(); await customer(k);
     const rk = await k.goto(`${B}/portal/zalihe/uvoz`, { waitUntil: "load", timeout: 60000 });
     check("lager: kupac nema pristup uvozu", !/Uvoz lagera/.test(await txt(k.locator("body"))) && (rk?.status() !== 200 || new URL(k.url()).pathname !== "/portal/zalihe/uvoz"), `${rk?.status()} ${new URL(k.url()).pathname}`);

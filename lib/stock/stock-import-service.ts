@@ -57,7 +57,16 @@ export type StockImportSummary = {
   control: Record<string, unknown>;
   sheet: string | null;
   stockFilter: string | null;
+  /** Stavke kod kojih se JM iz izveštaja razlikuje od potvrđene JM pakovanja (do 500). */
+  jmRazlike?: { sifra: string; izvestaj: string; potvrdjeno: string }[];
+  jmIzIzvestaja?: boolean;
 };
+
+/** JM razlika se pamti u sažetku otpremanja: tada nema broja pakovanja za tu stavku. */
+function jmMismatchCodes(summary: unknown): Set<string> {
+  const list = (summary as StockImportSummary | null)?.jmRazlike ?? [];
+  return new Set(list.map((x) => x.sifra));
+}
 
 /* =========================================================================
  * Veza sa artiklima (uvek iz potvrđenih tabela, u trenutku čitanja)
@@ -97,17 +106,37 @@ function summarize(lines: { sourceCode: string; codeKey: string | null; quantity
  * Otpremanje
  * ====================================================================== */
 
-export type StockUploadResult = { importId: string; duplicate: boolean; status: string };
+export type StockUploadResult = { importId: string; duplicate: boolean; status: string; failedWithOlderParser?: boolean };
 
 export async function uploadStockReport(actor: Actor, input: { fileName: string; bytes: Uint8Array }): Promise<StockUploadResult> {
   assertCanImport(actor);
   const file = readStockFile(input.bytes);
   const r = file.report;
   const db = getDb();
-  const [existing] = await db.select({ id: stockImports.id, status: stockImports.status }).from(stockImports).where(eq(stockImports.fileSha256, file.sha256)).limit(1);
-  if (existing) return { importId: existing.id, duplicate: true, status: existing.status };
+  const [existing] = await db
+    .select({ id: stockImports.id, status: stockImports.status, parserVersion: stockImports.parserVersion })
+    .from(stockImports)
+    .where(eq(stockImports.fileSha256, file.sha256))
+    .limit(1);
+  if (existing) {
+    // Isti fajl je jedinstven (SHA-256). Ako ga je ranije odbila STARIJA verzija čitača, nov
+    // pokušaj traži nov izvoz iz BizniSofta — stari zapis ostaje kao evidencija.
+    const failedWithOlderParser = existing.status === "neuspesno" && existing.parserVersion !== r.parser;
+    return { importId: existing.id, duplicate: true, status: existing.status, failedWithOlderParser };
+  }
 
   const ctx = r.ok ? await linkContext(db) : null;
+  // JM iz izveštaja (raspored B) samo PROVERAVA potvrđeno pakovanje — nikad ga ne zamenjuje.
+  const jmRazlike: { sifra: string; izvestaj: string; potvrdjeno: string }[] = [];
+  if (ctx) {
+    for (const l of r.lines) {
+      if (!l.unit) continue;
+      const link = linkLine(l, ctx.index, ctx.packs);
+      if (link.unit && link.unit !== l.unit) jmRazlike.push({ sifra: l.sourceCode, izvestaj: l.unit, potvrdjeno: link.unit });
+    }
+  }
+  const warnings = [...r.warnings];
+  if (jmRazlike.length) warnings.push({ code: "jm_razlikuje_od_potvrde", count: jmRazlike.length });
   const summary: StockImportSummary = {
     lines: r.lines.length,
     zeros: r.stats.zeros ?? 0,
@@ -120,6 +149,8 @@ export async function uploadStockReport(actor: Actor, input: { fileName: string;
     control: r.control,
     sheet: file.sheet,
     stockFilter: r.meta.stockFilter,
+    jmIzIzvestaja: r.lines.some((l) => Boolean(l.unit)),
+    jmRazlike: jmRazlike.slice(0, 500),
   };
   const status = r.ok ? "pregled" : "neuspesno";
 
@@ -138,7 +169,7 @@ export async function uploadStockReport(actor: Actor, input: { fileName: string;
         printedOn: r.meta.printedOn,
         lineCount: r.ok ? r.lines.length : 0,
         summary,
-        problems: { errors: r.errors.slice(0, 200), warnings: r.warnings.slice(0, 200) },
+        problems: { errors: r.errors.slice(0, 200), warnings: warnings.slice(0, 200) },
         status,
         uploadedBy: actor.id,
         decidedAt: status === "neuspesno" ? new Date() : null,
@@ -147,7 +178,7 @@ export async function uploadStockReport(actor: Actor, input: { fileName: string;
       .returning({ id: stockImports.id });
     if (!created) {
       const [other] = await tx.select({ id: stockImports.id, status: stockImports.status }).from(stockImports).where(eq(stockImports.fileSha256, file.sha256));
-      return { importId: other.id, duplicate: true, status: other.status };
+      return { importId: other.id, duplicate: true, status: other.status, failedWithOlderParser: false };
     }
     if (r.ok) {
       for (let i = 0; i < r.lines.length; i += 500) {
@@ -171,11 +202,11 @@ export async function uploadStockReport(actor: Actor, input: { fileName: string;
         entityType: ENTITY,
         entityId: created.id,
         entityLabel: `${safeName(input.fileName).slice(0, 120)}${r.meta.stockDate ? ` (stanje ${r.meta.stockDate})` : ""}`,
-        after: { sha256: file.sha256, status, lines: summary.lines, errors: r.errors.length, warnings: r.warnings.length, stockDate: r.meta.stockDate },
+        after: { sha256: file.sha256, status, lines: summary.lines, errors: r.errors.length, warnings: warnings.length, stockDate: r.meta.stockDate, parser: r.parser },
       },
       tx,
     );
-    return { importId: created.id, duplicate: false, status };
+    return { importId: created.id, duplicate: false, status, failedWithOlderParser: false };
   });
 }
 
@@ -211,10 +242,11 @@ export async function loadStockImport(id: string) {
   const [decider] = imp.imp.decidedBy ? await db.select({ name: users.name }).from(users).where(eq(users.id, imp.imp.decidedBy)) : [];
   const rows = await db.select().from(stockImportLines).where(eq(stockImportLines.importId, id)).orderBy(stockImportLines.lineNo);
   const ctx = await linkContext(db);
+  const jmBad = jmMismatchCodes(imp.imp.summary);
   const lines: StockLineView[] = rows.map((l) => {
     const quantity = l.quantity === null ? null : Number(l.quantity);
     const link = linkLine({ sourceCode: l.sourceCode, codeKey: l.codeKey }, ctx.index, ctx.packs);
-    const p = wholePacks({ quantity, link });
+    const p = jmBad.has(l.sourceCode) ? ({ status: "nema_broja", reason: "jm_razlika" } as const) : wholePacks({ quantity, link });
     return {
       lineNo: l.lineNo,
       sourceRow: l.sourceRow,
@@ -368,6 +400,8 @@ export async function customerStockFor(articleIds: string[], now = new Date()) {
   const arts = await db.select({ id: articles.id, code: articles.code }).from(articles).where(inArray(articles.id, articleIds));
   const ctx = await linkContext(db);
   const lines = await db.select().from(stockImportLines).where(eq(stockImportLines.importId, snapshot.id));
+  const [snapSummary] = await db.select({ summary: stockImports.summary }).from(stockImports).where(eq(stockImports.id, snapshot.id));
+  const jmBad = jmMismatchCodes(snapSummary?.summary ?? null);
   const byKey = new Map(lines.map((l) => [l.codeKey, l]));
   for (const a of arts) {
     const line = byKey.get(codeKey(a.code));
@@ -381,7 +415,7 @@ export async function customerStockFor(articleIds: string[], now = new Date()) {
       byArticle.set(a.id, { packs: null, reason: link.link === "sudar" ? "sudar_sifara" : "nepovezan", label: null });
       continue;
     }
-    const p = wholePacks({ quantity: line.quantity === null ? null : Number(line.quantity), link });
+    const p = jmBad.has(line.sourceCode) ? ({ status: "nema_broja", reason: "jm_razlika" } as const) : wholePacks({ quantity: line.quantity === null ? null : Number(line.quantity), link });
     byArticle.set(a.id, { packs: p.status === "ok" ? p.packs : null, reason: p.status === "ok" ? null : p.reason, label: link.pack?.label ?? null });
   }
   return { snapshot, byArticle };

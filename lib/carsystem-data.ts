@@ -2432,6 +2432,8 @@ const productRecords: CarsystemProduct[] = [
   {
     ...createProduct({
       slug: "carfit-premium-soft-plus-putty",
+      // Kategorija izričito (odluka vlasnika 2026-10-15): oznake i program je nisu davali.
+      taxonomyCategory: "kitovi",
       name: "Car Fit Premium Soft Plus Putty",
       brandSlug: "carfit",
       programSlug: "priprema-povrsine",
@@ -2480,6 +2482,8 @@ const productRecords: CarsystemProduct[] = [
   {
     ...createProduct({
       slug: "carfit-nitrile-gloves-6-mil",
+      // Kategorija izričito (odluka vlasnika 2026-10-15): oznake i program je nisu davali.
+      taxonomyCategory: "zastita",
       name: "Car Fit Nitrile Gloves 6 MIL",
       brandSlug: "carfit",
       programSlug: "potrosni-materijal",
@@ -2526,6 +2530,9 @@ const productRecords: CarsystemProduct[] = [
   // Podaci samo iz zvaničnog tehničkog lista „YC EPOXY STEELBOND“ (Vosschemie, v.2, 08/2017); bez slike (prava).
   createProduct({
     slug: "yachtcare-epoxy-steelbond-125g",
+    // Kitovi (odluka vlasnika 2026-10-15, prema tehničkom listu v.2 08/2017): „Reparatur- und
+    // Klebematerial”; prva namena je popunjavanje rupa i pukotina, „wie eine Spachtelmasse”.
+    taxonomyCategory: "kitovi",
     name: "Yachtcare Epoxy Steelbond 125 g",
     brandSlug: "yachtcare",
     programSlug: "priprema-povrsine",

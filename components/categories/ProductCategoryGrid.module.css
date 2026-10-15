@@ -183,10 +183,52 @@
 
 /* Fokus uvek otvara crveni sloj (handleFocus), pa je okvir fokusa u boji
    teksta na tom sloju, uvučen da ga ne preseku susedne ćelije. */
-.card:focus-visible {
+/*
+ * Fokus tastature: beli okvir uvučen 6 px, iznad crvenog sloja (kontrast prema crvenoj
+ * 5,9 : 1 svetla / 5,3 : 1 tamna), pa se razlikuje od prelaza mišem. Crta se pseudo-elementom
+ * jer kartica izoluje slojeve i crveni sloj (z-index 1–2) bi prekrio sopstveni `outline`.
+ * Opšti fokus početne (`html .home :focus-visible`, okvir u boji akcenta) se ovde gasi, jer se
+ * stapa sa crvenom karticom.
+ */
+.card:focus-visible,
+:global(html) .grid > li > .card:focus-visible {
   z-index: 3;
-  outline: 2px solid var(--category-accent-ink);
-  outline-offset: -6px;
+  outline: none;
+}
+
+.card:focus-visible::after {
+  position: absolute;
+  z-index: 4;
+  inset: 6px;
+  border: 2px solid var(--category-accent-ink);
+  content: "";
+  pointer-events: none;
+}
+
+/*
+ * Telefon (dve kolone, odluka vlasnika 2026-10-15): niže kartice i manja ikonica, da odeljak ne
+ * zauzima ~1.150 px. Naziv ostaje 15 px, a cela kartica (≈160 × 116 px) je površina za dodir.
+ */
+@media (max-width: 41.99rem) {
+  .grid[data-layout="homepage"] .card {
+    min-height: 7.25rem;
+  }
+
+  .grid[data-layout="homepage"] .content {
+    grid-template-rows: 3.5rem auto;
+    gap: 0.35rem;
+    padding: 0.5rem 0.6rem 0.65rem;
+  }
+
+  .grid[data-layout="homepage"] .iconZone {
+    width: 4.5rem;
+    height: 3.5rem;
+  }
+
+  .grid[data-layout="homepage"] .icon {
+    width: 3rem;
+    height: 3rem;
+  }
 }
 
 @media (min-width: 42rem) {

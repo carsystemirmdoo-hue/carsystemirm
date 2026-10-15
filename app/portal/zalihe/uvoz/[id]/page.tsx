@@ -3,7 +3,9 @@ import { notFound } from "next/navigation";
 import { Badge, PageHeader, PortalLinkButton, SectionHeader } from "@/components/portal/PortalPrimitives";
 import { StockConfirmForm, StockDiscardForm } from "@/features/portal/StockImportForms";
 import { StockImportSteps } from "@/features/portal/StockImportSteps";
-import { requireCapability } from "@/lib/authz/session";
+import { isMfaRecent, isSecondFactorSatisfied } from "@/lib/auth/session-assurance.mjs";
+import { reauthUrlFor } from "@/lib/authz/redirects.mjs";
+import { loadAuthenticatedSession, requireCapability } from "@/lib/authz/session";
 import { dmy, dmyTime, quantity } from "@/lib/ordering/panelFormat.mjs";
 import { stockProblemText } from "@/lib/stock/problemLabels.mjs";
 import { loadStockImport, type StockLineView } from "@/lib/stock/stock-import-service";
@@ -72,10 +74,13 @@ function Group({ title, count, tone, children, open = false }: { title: string; 
   );
 }
 
-export default async function StockImportReviewPage({ params, searchParams }: { params: Promise<{ id: string }>; searchParams: Promise<{ isti?: string; ishod?: string; raniji?: string }> }) {
-  await requireCapability("imports:write", "/portal/zalihe/uvoz");
+export default async function StockImportReviewPage({ params, searchParams }: { params: Promise<{ id: string }>; searchParams: Promise<{ isti?: string; ishod?: string; raniji?: string; identitet?: string }> }) {
   const { id } = await params;
-  const { isti, ishod, raniji } = await searchParams;
+  await requireCapability("imports:write", `/portal/zalihe/uvoz/${id}`);
+  const { isti, ishod, raniji, identitet } = await searchParams;
+  // Potvrda i odbacivanje traže drugi faktor u poslednjih 10 minuta; ovde se samo unapred kaže.
+  const session = await loadAuthenticatedSession();
+  const mfaFresh = Boolean(session && isSecondFactorSatisfied(session.assurance) && isMfaRecent(session.mfaVerifiedAt));
   const data = await loadStockImport(id);
   if (!data) notFound();
   const h = data.header;
@@ -127,6 +132,8 @@ export default async function StockImportReviewPage({ params, searchParams }: { 
         <p className="portal-permission-ok lg-status" role="status">Isti fajl je već otpremljen {dmyTime(h.uploadedAt)} — prikazana je postojeća provera.</p>
       ) : null}
       {ishod === "potvrdjeno" && h.status === "potvrdjeno" ? <p className="portal-permission-ok lg-status" role="status">Lager je potvrđen.</p> : null}
+      {ishod === "vec-odluceno" ? <p className="portal-permission-ok lg-status" role="status">O ovom fajlu je već odlučeno — prikazan je zapisani ishod. Ništa nije ponovljeno.</p> : null}
+      {identitet === "potvrdjen" && pending && mfaFresh ? <p className="portal-permission-ok lg-status" role="status">Identitet je potvrđen. Sada možete da potvrdite lager — potvrda važi 10 minuta.</p> : null}
       {ishod === "odbaceno" && h.status === "odbaceno" ? <p className="portal-permission-ok lg-status" role="status">Otpremanje je odbačeno; važeće stanje nije menjano.</p> : null}
 
       <section className="lg-outcome" data-tone={outcome.tone}>
@@ -157,6 +164,14 @@ export default async function StockImportReviewPage({ params, searchParams }: { 
         <section className="portal-panel">
           <SectionHeader title={canConfirm ? "Potvrda" : "Odluka"} />
           <div className="portal-panel-body">
+            {!mfaFresh ? (
+              <div className="lg-reauth" role="note">
+                <p>
+                  <strong>Pre odluke ponovo potvrdite identitet.</strong> Potvrda i odbacivanje traže lozinku i kod iz aplikacije u poslednjih 10 minuta. Posle toga vraćate se na ovaj uvoz; ništa nije izmenjeno.
+                </p>
+                <PortalLinkButton href={reauthUrlFor(`/portal/zalihe/uvoz/${h.id}?identitet=potvrdjen`)} variant="secondary">Potvrdite identitet</PortalLinkButton>
+              </div>
+            ) : null}
             {canConfirm && h.stockDate ? <StockConfirmForm importId={h.id} lines={h.lineCount} stockDate={h.stockDate} /> : null}
             <StockDiscardForm importId={h.id} />
           </div>

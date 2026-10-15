@@ -3,7 +3,7 @@
  *
  * Priprema: scripts/qa/seed-synthetic-portal.mts u bazu carsystem_revizija_ui_qa,
  * server iz .next-verify na 127.0.0.1:3450 (DATABASE_POOL_MAX=1 — najstrožije).
- *   node scripts/qa/synthetic-portal-flow.mjs <izlazni-folder> [sve|kupac|kancelarija|opseg|telefon|sajt]
+ *   node scripts/qa/synthetic-portal-flow.mjs <izlazni-folder> [sve|kupac|kancelarija|opseg|telefon|sajt|lager|lager-mfa]
  * Menja samo sintetičku bazu (privremena promena rabata za proveru nove potvrde).
  * Lozinke i TOTP tajne čita iz SYNTH_CREDS_FILE i ne ispisuje ih.
  */
@@ -1219,6 +1219,62 @@ try {
     check("lager: kupac nema pristup uvozu", !/Uvoz lagera/.test(await txt(k.locator("body"))) && (rk?.status() !== 200 || new URL(k.url()).pathname !== "/portal/zalihe/uvoz"), `${rk?.status()} ${new URL(k.url()).pathname}`);
     const api = await k.evaluate(async () => (await fetch("/api/kupac/ponude", { cache: "no-store" })).json());
     check("kupac: ponude bez stanja dok je prikaz isključen", api.signedIn === true && (api.stock === null || api.stock === undefined), JSON.stringify(api.stock));
+  }
+  if (STEP === "lager-mfa") {
+    // Potvrda lagera posle isteka potvrde drugog faktora (Production 15. 10. 2026): umesto
+    // „Nemate dozvolu" — ponovna potvrda identiteta, povratak na isti uvoz, jedna odluka.
+    const XLSX_B = ROOT + "/fixtures/dev/biznisoft/lager/stanje-zaliha-artikla-sinteticki.xlsx";
+    const t = await (await b.newContext(desk)).newPage(); await staff(t, "kancelarija");
+    const prijavljen = Date.now();
+    await go(t, "/portal/zalihe/uvoz");
+    await t.setInputFiles('input[name="lager"]', XLSX_B);
+    await Promise.all([t.waitForURL(/\/portal\/zalihe\/uvoz\/[0-9a-f-]{36}/, { timeout: 60000 }), t.getByRole("button", { name: "Proverite fajl" }).click()]);
+    const id = new URL(t.url()).pathname.split("/").pop();
+    check("lager-mfa: sveža prijava — bez upozorenja o potvrdi identiteta", !(await t.locator(".lg-reauth").count()));
+    // Stvarno isticanje: 10 minuta od prijave (bez prečica u kodu ili satu).
+    const ceka = prijavljen + 10 * 60_000 + 20_000 - Date.now();
+    log("čekam istek potvrde (s)", String(Math.round(ceka / 1000)));
+    await new Promise((r) => setTimeout(r, Math.max(0, ceka)));
+    await go(t, `/portal/zalihe/uvoz/${id}`);
+    check("lager-mfa: istekla potvrda — upozorenje i veza „Potvrdite identitet“", /Pre odluke ponovo potvrdite identitet/.test(await txt(t.locator("main"))) && (await t.getByRole("link", { name: "Potvrdite identitet" }).count()) === 1);
+    await t.screenshot({ path: `${OUT}/lager-mfa-1-istekla.png`, fullPage: true });
+    // Druga kartica drži isti obrazac — kasnije služi kao ponovljen klik.
+    const stara = await t.context().newPage();
+    await go(stara, `/portal/zalihe/uvoz/${id}`);
+    await t.getByRole("checkbox", { name: /Pregledao sam proveru/ }).check();
+    await Promise.all([t.waitForURL(/\/prijava\?/, { timeout: 30000 }), t.getByRole("button", { name: "Potvrdite lager" }).click()]);
+    const u = new URL(t.url());
+    const prijava = await txt(t.locator("main"));
+    check("lager-mfa: potvrda sa isteklom MFA → ponovna potvrda identiteta, ne zabrana", u.searchParams.get("potvrda") === "identitet" && /Potvrdite identitet/.test(prijava) && !/Nemate dozvolu/.test(prijava), t.url());
+    check("lager-mfa: povratak je isti uvoz", u.searchParams.get("callbackUrl") === `/portal/zalihe/uvoz/${id}?identitet=potvrdjen`);
+    check("lager-mfa: e-pošta popunjena i zaključana", (await t.inputValue("input[name=email]")) === creds.kancelarija.email && (await t.locator("input[name=email]").getAttribute("readonly")) !== null);
+    check("lager-mfa: ništa nije odlučeno pre ponovne potvrde", (await sqlc`SELECT status::text s FROM stock_imports WHERE id = ${id}`)[0].s === "pregled");
+    await t.screenshot({ path: `${OUT}/lager-mfa-2-potvrda-identiteta.png`, fullPage: true });
+    while (last.kancelarija === Math.floor(Date.now() / 30000) || Date.now() % 30000 > 25000) await new Promise((r) => setTimeout(r, 1000));
+    last.kancelarija = Math.floor(Date.now() / 30000);
+    await t.fill("input[name=password]", creds.kancelarija.password);
+    await t.fill("input[name=secondFactor]", totp(creds.kancelarija.totpBase32));
+    await Promise.all([t.waitForURL(/\/portal\/zalihe\/uvoz\/[0-9a-f-]{36}\?identitet=potvrdjen/, { timeout: 30000 }), t.getByRole("button", { name: "Potvrdite i nastavite" }).click()]);
+    const nazad = await txt(t.locator("main"));
+    check("lager-mfa: posle potvrde identiteta — isti uvoz, jasna poruka, bez upozorenja", new URL(t.url()).pathname === `/portal/zalihe/uvoz/${id}` && /Identitet je potvrđen/.test(nazad) && !(await t.locator(".lg-reauth").count()));
+    await t.getByRole("checkbox", { name: /Pregledao sam proveru/ }).check();
+    await Promise.all([t.waitForURL(/ishod=potvrdjeno/, { timeout: 30000 }), t.getByRole("button", { name: "Potvrdite lager" }).click()]);
+    check("lager-mfa: potvrda uspela — važeće stanje", /ovo je važeće stanje/.test(await txt(t.locator("main"))));
+    const prvi = (await sqlc`SELECT decided_at, decided_by FROM stock_imports WHERE id = ${id}`)[0];
+    await t.screenshot({ path: `${OUT}/lager-mfa-3-potvrdjeno.png`, fullPage: true });
+    // Ponovljen klik: stari obrazac iz druge kartice (sesija je sada sveža).
+    await stara.getByRole("checkbox", { name: /Pregledao sam proveru/ }).check();
+    await Promise.all([stara.waitForURL(/ishod=vec-odluceno/, { timeout: 30000 }), stara.getByRole("button", { name: "Potvrdite lager" }).click()]);
+    const drugi = (await sqlc`SELECT decided_at, decided_by FROM stock_imports WHERE id = ${id}`)[0];
+    const audit = (await sqlc`SELECT count(*)::int n FROM audit_log WHERE entity_type = 'Lager' AND entity_id = ${id} AND action ILIKE '%potvr%'`)[0].n;
+    check("lager-mfa: ponovljen klik — poruka o već zapisanoj odluci, bez promene i bez duplikata", /već odlučeno/.test(await txt(stara.locator("main"))) && +drugi.decided_at === +prvi.decided_at && audit === 1, `audit potvrda ${audit}`);
+    const r = await t.goto(`${B}/portal/zalihe/uvoz/${id}`, { waitUntil: "networkidle", timeout: 60000 });
+    check("lager-mfa: detalj posle potvrde se otvara (200)", r?.status() === 200 && /Potvrđeno/.test(await txt(t.locator("main"))), String(r?.status()));
+    const pon = await t.goto(`${B}/prijava?callbackUrl=${encodeURIComponent(`/portal/zalihe/uvoz/${id}`)}&potvrda=identitet`, { waitUntil: "networkidle", timeout: 60000 });
+    check("lager-mfa: sveža potvrda — prijava odmah vraća na uvoz", new URL(t.url()).pathname === `/portal/zalihe/uvoz/${id}`, `${pon?.status()} ${t.url()}`);
+    const k = await (await b.newContext(desk)).newPage(); await customer(k);
+    const api = await k.evaluate(async () => (await fetch("/api/kupac/ponude", { cache: "no-store" })).json());
+    check("lager-mfa: kupac i dalje bez stanja", api.signedIn === true && (api.stock === null || api.stock === undefined));
   }
 } catch (e) {
   check("skripta", false, String(e.message).split("\n").slice(0, 3).join(" | "));

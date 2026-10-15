@@ -8,10 +8,13 @@ import { CALLBACK_PARAM } from "@/lib/authz/redirects.mjs";
 
 const INITIAL: LoginState = { error: null };
 
-export function PortalLoginForm({ callbackUrl }: { callbackUrl: string }) {
+/** Ponovna potvrda identiteta prijavljenog korisnika (osetljiva radnja, istekla potvrda). */
+type Reauth = { email: string; hasSecondFactor: boolean };
+
+export function PortalLoginForm({ callbackUrl, reauth }: { callbackUrl: string; reauth?: Reauth }) {
   const [state, formAction, pending] = useActionState(signInAction, INITIAL);
   // Kontrolisano polje: posle neuspele prijave React prazni obrazac, a e-pošta treba da ostane.
-  const [email, setEmail] = useState("");
+  const [email, setEmail] = useState(reauth?.email ?? "");
   const secondFactorHintId = useId();
 
   return (
@@ -59,11 +62,34 @@ export function PortalLoginForm({ callbackUrl }: { callbackUrl: string }) {
             <strong>Carsystem i R-M</strong>
           </div>
 
-          <header>
-            <span>Ovlašćeni pristup</span>
-            <h2>Poslovni sistem</h2>
-            <p>Prijavite se službenim nalogom.</p>
-          </header>
+          {reauth ? (
+            <header>
+              <span>Osetljiva radnja</span>
+              <h2>Potvrdite identitet</h2>
+              <p>
+                Ova radnja traži lozinku i kod iz autentikator aplikacije unete u poslednjih 10 minuta. Posle potvrde vraćate se na isti ekran; ništa
+                nije izmenjeno.
+              </p>
+            </header>
+          ) : (
+            <header>
+              <span>Ovlašćeni pristup</span>
+              <h2>Poslovni sistem</h2>
+              <p>Prijavite se službenim nalogom.</p>
+            </header>
+          )}
+
+          {reauth && !reauth.hasSecondFactor ? (
+            <div className="portal-login-error" role="alert">
+              <PortalIcon name="warning" />
+              <span>
+                <strong>Nalog nema vezan drugi faktor</strong>
+                <small>
+                  Ova radnja je moguća tek kada vežete autentikator aplikaciju. <Link href="/portal/bezbednost/mfa">Vežite drugi faktor</Link>
+                </small>
+              </span>
+            </div>
+          ) : null}
 
           <input type="hidden" name={CALLBACK_PARAM} value={callbackUrl} />
 
@@ -76,6 +102,7 @@ export function PortalLoginForm({ callbackUrl }: { callbackUrl: string }) {
                 name="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
+                readOnly={Boolean(reauth)}
                 autoComplete="username"
                 required
                 maxLength={254}
@@ -123,7 +150,9 @@ export function PortalLoginForm({ callbackUrl }: { callbackUrl: string }) {
               />
             </div>
             <small id={secondFactorHintId} className="portal-login-hint">
-              Popunite samo ako je za Vaš nalog uključena dvofaktorska prijava.
+              {reauth
+                ? "Kod iz aplikacije (ili jedan rezervni kod) — obavezan za ovu radnju."
+                : "Popunite samo ako je za Vaš nalog uključena dvofaktorska prijava."}
             </small>
           </label>
 
@@ -147,8 +176,17 @@ export function PortalLoginForm({ callbackUrl }: { callbackUrl: string }) {
             ) : (
               <PortalIcon name="arrow" />
             )}
-            {pending ? "Provera pristupa…" : "Prijavite se"}
+            {pending ? "Provera pristupa…" : reauth ? "Potvrdite i nastavite" : "Prijavite se"}
           </button>
+
+          {reauth && callbackUrl ? (
+            <p className="portal-login-note">
+              <PortalIcon name="arrow" />
+              <span>
+                <Link href={callbackUrl}>Odustanite i vratite se</Link> — ništa nije izmenjeno.
+              </span>
+            </p>
+          ) : null}
 
           {/* Ikona i tekst su zasebne stavke u flex redu; bez omotača bi svaki
               odlomak teksta oko linka postao svoja kolona i poruka bi se

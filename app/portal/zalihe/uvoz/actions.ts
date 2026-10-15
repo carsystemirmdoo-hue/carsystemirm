@@ -3,7 +3,7 @@
 import { revalidatePath } from "next/cache";
 import { forbidden, redirect } from "next/navigation";
 import { can } from "@/lib/authz/permissions.mjs";
-import { requireCapability, requireRecentMfa } from "@/lib/authz/session";
+import { requireCapability, requireRecentMfaOrReauth } from "@/lib/authz/session";
 import { formatMegabytes } from "@/lib/import/upload-limits.mjs";
 import { MAX_STOCK_FILE_BYTES } from "@/lib/stock/readStockFile.mjs";
 import { confirmStockImport, discardStockImport, StockImportError, uploadStockReport } from "@/lib/stock/stock-import-service";
@@ -11,7 +11,9 @@ import { confirmStockImport, discardStockImport, StockImportError, uploadStockRe
 /*
  * Lager — serverske akcije (dok. 65). Svaka SAMA proverava `imports:write` (vlasnik i
  * kancelarija); skriveno dugme nije ovlašćenje. Otpremanje samo čita fajl i upisuje ga
- * za pregled. Potvrda i odbacivanje traže i SVEŽU potvrdu drugog faktora.
+ * za pregled. Potvrda i odbacivanje traže i SVEŽU potvrdu drugog faktora; kada je
+ * zastarela, korisnik ide na ponovnu potvrdu identiteta i vraća se na isti uvoz.
+ * Ponovljen klik posle odluke ne menja ništa: prikazuje se već zapisani ishod.
  */
 const PATH = "/portal/zalihe/uvoz";
 
@@ -22,7 +24,13 @@ function sameActor<T extends Parameters<typeof can>[0] & { id: string }>(actor: 
   return fresh;
 }
 
+/** Povratak posle ponovne potvrde identiteta: isti uvoz. */
+const decisionPath = (importId: string) => (UUID.test(importId) ? `${PATH}/${importId}?identitet=potvrdjen` : PATH);
+
+const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
 const message = (error: unknown) => (error instanceof StockImportError ? error.message : null);
+/** Odluka je već zapisana (npr. drugi klik): ništa se ne ponavlja, prikazuje se zapisani ishod. */
+const decided = (error: unknown) => error instanceof StockImportError && error.code === "odluceno";
 
 export async function uploadStockAction(_prev: StockImportActionState, formData: FormData): Promise<StockImportActionState> {
   const actor = await requireCapability("imports:write", PATH);
@@ -48,12 +56,15 @@ export async function uploadStockAction(_prev: StockImportActionState, formData:
 }
 
 export async function confirmStockAction(_prev: StockImportActionState, formData: FormData): Promise<StockImportActionState> {
-  const actor = sameActor(await requireCapability("imports:write", PATH), await requireRecentMfa());
   const importId = String(formData.get("importId") ?? "");
+  const back = decisionPath(importId);
+  // Svež drugi faktor istog korisnika sa istim pravom; inače ponovna potvrda sa povratkom na uvoz.
+  const actor = sameActor(await requireCapability("imports:write", back), await requireRecentMfaOrReauth(back));
   if (formData.get("potvrda") !== "da") return { error: "Potvrdite da ste pregledali izveštaj.", ok: null };
   try {
     await confirmStockImport(actor, { importId, note: String(formData.get("napomena") ?? "") });
   } catch (error) {
+    if (decided(error)) redirect(`${PATH}/${importId}?ishod=vec-odluceno`);
     const m = message(error);
     if (m) return { error: m, ok: null };
     throw error;
@@ -65,11 +76,14 @@ export async function confirmStockAction(_prev: StockImportActionState, formData
 }
 
 export async function discardStockAction(_prev: StockImportActionState, formData: FormData): Promise<StockImportActionState> {
-  const actor = sameActor(await requireCapability("imports:write", PATH), await requireRecentMfa());
   const importId = String(formData.get("importId") ?? "");
+  const back = decisionPath(importId);
+  // Svež drugi faktor istog korisnika sa istim pravom; inače ponovna potvrda sa povratkom na uvoz.
+  const actor = sameActor(await requireCapability("imports:write", back), await requireRecentMfaOrReauth(back));
   try {
     await discardStockImport(actor, { importId, note: String(formData.get("razlog") ?? "") });
   } catch (error) {
+    if (decided(error)) redirect(`${PATH}/${importId}?ishod=vec-odluceno`);
     const m = message(error);
     if (m) return { error: m, ok: null };
     throw error;

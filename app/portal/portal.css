@@ -10605,3 +10605,7 @@ html:has(.portal-customer-area) { scroll-padding-top: 104px; }
     grid-column: 2;
   }
 }
+
+/* Lager — ponovna potvrda identiteta pre odluke */
+.lg-reauth { display: flex; flex-wrap: wrap; gap: 10px 16px; align-items: center; justify-content: space-between; margin-bottom: 14px; padding: 10px 12px; border: 1px solid var(--p-line); border-left: 3px solid var(--p-amber); border-radius: 2px; background: var(--p-amber-soft); }
+.lg-reauth p { margin: 0; flex: 1 1 320px; color: var(--p-ink); font-size: 13px; line-height: 1.45; }

@@ -2,7 +2,9 @@ import type { Metadata } from "next";
 import { redirect } from "next/navigation";
 import { PortalLoginForm } from "@/features/portal/PortalLoginForm";
 import { landingRouteFor } from "@/lib/authz/permissions.mjs";
-import { resolvePostLoginTarget } from "@/lib/authz/redirects.mjs";
+import { isMfaRecent, isSecondFactorSatisfied } from "@/lib/auth/session-assurance.mjs";
+import { readMfaStatus } from "@/lib/auth/mfa-service";
+import { normalizeCallback, REAUTH_PARAM, REAUTH_VALUE, resolvePostLoginTarget } from "@/lib/authz/redirects.mjs";
 import {
   loadAuthenticatedSession,
   MFA_ENROLLMENT_ROUTE,
@@ -24,9 +26,10 @@ export const dynamic = "force-dynamic";
 export default async function LoginPage({
   searchParams,
 }: {
-  searchParams: Promise<{ callbackUrl?: string }>;
+  searchParams: Promise<{ callbackUrl?: string; [REAUTH_PARAM]?: string }>;
 }) {
-  const { callbackUrl } = await searchParams;
+  const params = await searchParams;
+  const { callbackUrl } = params;
   const session = await loadAuthenticatedSession();
 
   /*
@@ -36,6 +39,26 @@ export default async function LoginPage({
    * dobio istu ograničenu sesiju i vratio se ovde — petlja bez objašnjenja.
    */
   if (session?.enrollmentOnly) redirect(MFA_ENROLLMENT_ROUTE);
+
+  /*
+   * Ponovna potvrda identiteta: sesija važi, ali osetljiva radnja traži drugi
+   * faktor u poslednjih 10 minuta. Isti obrazac i isti `authorize` izdaju novu
+   * sesiju sa svežom potvrdom; povratak je na istu putanju (`callbackUrl`).
+   */
+  if (
+    session?.fullAccess &&
+    params[REAUTH_PARAM] === REAUTH_VALUE &&
+    !(isSecondFactorSatisfied(session.assurance) && isMfaRecent(session.mfaVerifiedAt))
+  ) {
+    const mfa = await readMfaStatus(session.fullAccess.id);
+    return (
+      <PortalLoginForm
+        // Povratna veza „Odustanite" prikazuje se samo za proverenu putanju unutar portala.
+        callbackUrl={normalizeCallback(callbackUrl) ?? ""}
+        reauth={{ email: session.fullAccess.email, hasSecondFactor: mfa.enabled }}
+      />
+    );
+  }
 
   if (session?.fullAccess) {
     redirect(

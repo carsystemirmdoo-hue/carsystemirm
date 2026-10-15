@@ -81,6 +81,10 @@ Greške blokiraju potvrdu; upozorenja ne blokiraju, ali su prikazana u pregledu.
 3. **Potvrda** (isto pravo + drugi faktor u poslednjih 10 minuta): jedna transakcija; *pregled* →
    *potvrđeno*. Važeći snimak = poslednje potvrđeno otpremanje. Stariji datum stanja od važećeg se ne može
    potvrditi. Neuspešno ili odbačeno otpremanje ne menja važeći snimak.
+   Kada je potvrda drugog faktora starija od 10 minuta, potvrda i odbacivanje ne završavaju ekranom
+   „Nemate dozvolu“, nego ponovnom potvrdom identiteta (`/prijava?…&potvrda=identitet`: lozinka + kod) sa
+   povratkom na isti uvoz. Pravo ostaje `imports:write` istog korisnika. Ponovljen klik posle odluke
+   ne menja ništa i prikazuje zapisani ishod (`?ishod=vec-odluceno`). (Ispravka 15. 10. 2026.)
 4. **Odbacivanje** sa razlogom.
 
 Stavke se samo dodaju; podaci otpremanja se ne menjaju; otpremanje se ne briše (okidači u 0050, prava u
@@ -156,8 +160,8 @@ veze, JM ili pakovanja — nema broja. Isključen prikaz ne čita tabele lagera.
 3. Portal → **Zalihe → Uvoz lagera** (`/portal/zalihe/uvoz`) → izaberite fajl → „Otpremite na pregled“.
 4. Proverite: objekat 021, datum stanja, broj stavki, kontrolu potpunosti (zeleno), greške (moraju biti
    0) i upozorenja.
-5. Ako je sve u redu: označite potvrdu → „Potvrdite lager“. Ako traži drugi faktor, odjavite se i
-   prijavite ponovo. Ako nije u redu: „Odbacite otpremanje“ sa razlogom i izvezite ponovo.
+5. Ako je sve u redu: označite potvrdu → „Potvrdite lager“. Ako je od prijave prošlo više od 10 minuta,
+   sistem traži lozinku i kod iz aplikacije i vraća Vas na isti uvoz — tada ponovo označite potvrdu. Ako nije u redu: „Odbacite otpremanje“ sa razlogom i izvezite ponovo.
 6. Isti fajl dva puta ne pravi duplikat. Stariji izvoz ne može zameniti noviji.
 
 ## 6. Aktivacija na Production-u

@@ -1,7 +1,7 @@
 import "server-only";
 import { forbidden, redirect } from "next/navigation";
 import { auth } from "@/auth";
-import { loginUrlFor } from "@/lib/authz/redirects.mjs";
+import { loginUrlFor, reauthUrlFor } from "@/lib/authz/redirects.mjs";
 import { canAccessCustomer } from "@/lib/authz/scope.mjs";
 import { isInternalSubject } from "@/lib/authz/customer-scope.mjs";
 import { isWithinAbsoluteLifetime } from "@/lib/auth/session-lifetime.mjs";
@@ -197,6 +197,23 @@ export async function requireRecentMfa(): Promise<PortalUser> {
   if (!session?.fullAccess) forbidden();
   if (!isSecondFactorSatisfied(session.assurance)) forbidden();
   if (!isMfaRecent(session.mfaVerifiedAt)) forbidden();
+  return session.fullAccess;
+}
+
+/**
+ * Kao `requireRecentMfa`, ali za radnju koju korisnik sam pokreće iz obrasca:
+ * kada je potvrda drugog faktora samo ZASTARELA (ili sesija još nema drugi
+ * faktor), korisnik ide na ponovnu potvrdu identiteta i vraća se na
+ * `returnPath` — umesto na ekran „Nemate dozvolu". Pravo na radnju se i
+ * dalje proverava posebno (`requireCapability` + isti korisnik).
+ */
+export async function requireRecentMfaOrReauth(returnPath: string): Promise<PortalUser> {
+  const session = await loadAuthenticatedSession();
+  if (!session) redirect(loginUrlFor(returnPath));
+  if (!session.fullAccess) forbidden();
+  if (!isSecondFactorSatisfied(session.assurance) || !isMfaRecent(session.mfaVerifiedAt)) {
+    redirect(reauthUrlFor(returnPath));
+  }
   return session.fullAccess;
 }
 

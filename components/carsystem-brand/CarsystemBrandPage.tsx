@@ -59,7 +59,7 @@ export function CarsystemBrandPage({
   return (
     <CarsystemPageShell>
       <main>
-        <CarsystemHero availability={mediaAvailability} mediaProducts={mediaProducts} />
+        <CarsystemHero />
         <BrandSectionNav
           ariaLabel="Brzi pristup Carsystem programu"
           items={[...carsystemSectionNavItems]}

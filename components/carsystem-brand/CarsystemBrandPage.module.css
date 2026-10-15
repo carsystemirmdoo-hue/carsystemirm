@@ -3390,3 +3390,141 @@
     transition: none;
   }
 }
+
+/* Uvodni blok sa fotografijom preko cele širine (odluka vlasnika 2026-10-15).
+   Fotografija je pozadina celog bloka; tekst stoji preko nje. Gradijent je samo
+   iza teksta (leva strana), desni deo fotografije — lakirer i radnja — ostaje
+   bez zatamnjenja. Boja gradijenta je površina teme, pa svetla tema dobija svetao
+   veo i taman tekst, a tamna taman veo i svetao tekst. */
+.hero[data-photo-hero] {
+  min-height: clamp(36rem, calc(84svh - 5.5rem), 50rem);
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.hero[data-photo-hero]::before {
+  display: none;
+}
+
+.heroPhoto {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  background: var(--cs-paper-muted);
+}
+
+.heroPhoto img {
+  object-fit: cover;
+  object-position: 68% 32%;
+}
+
+.heroScrim {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(
+    90deg,
+    color-mix(in oklch, var(--cs-paper) 90%, transparent) 0%,
+    color-mix(in oklch, var(--cs-paper) 82%, transparent)
+      calc(max(var(--ds-gutter, 56px), (100% - var(--ds-container-max, 1208px)) / 2) + 30rem),
+    color-mix(in oklch, var(--cs-paper) 0%, transparent)
+      calc(max(var(--ds-gutter, 56px), (100% - var(--ds-container-max, 1208px)) / 2) + 46rem)
+  );
+  pointer-events: none;
+}
+
+.hero[data-photo-hero] .breadcrumb {
+  z-index: 4;
+}
+
+.hero[data-photo-hero] .heroGrid {
+  z-index: 2;
+  display: flex;
+  min-height: clamp(30rem, calc(74svh - 5.5rem), 42rem);
+  align-items: center;
+}
+
+.hero[data-photo-hero] .heroCopy {
+  max-width: 40rem;
+}
+
+.hero[data-photo-hero] .heroMessage > p:last-child {
+  max-width: 34rem;
+  color: var(--cs-ink);
+}
+
+@media (max-width: 64rem) {
+  .hero[data-photo-hero] {
+    padding-inline: max(var(--ds-gutter, 1.5rem), 1.5rem);
+  }
+
+  .heroPhoto img {
+    object-position: 74% 30%;
+  }
+
+  .heroScrim {
+    background: linear-gradient(
+      90deg,
+      color-mix(in oklch, var(--cs-paper) 92%, transparent) 0%,
+      color-mix(in oklch, var(--cs-paper) 84%, transparent) 46%,
+      color-mix(in oklch, var(--cs-paper) 0%, transparent) 72%
+    );
+  }
+
+  .hero[data-photo-hero] .heroCopy {
+    max-width: 30rem;
+  }
+}
+
+/* Telefon: fotografija ostaje preko cele širine bloka, a kadar se pomera na
+   lakirera i pištolj. Tekst počinje u donjem delu, gde fotografija prelazi u
+   površinu stranice; gornji veo drži putanju stranice čitljivom. */
+@media (max-width: 48rem) {
+  .hero[data-photo-hero] {
+    --hero-photo-h: clamp(24rem, 112vw, 32rem);
+    min-height: auto;
+    padding: 0 1rem 1.5rem;
+  }
+
+  .heroPhoto {
+    inset: 0 0 auto;
+    height: var(--hero-photo-h);
+  }
+
+  .heroPhoto img {
+    object-position: 71% 0%;
+  }
+
+  .heroScrim {
+    inset: 0 0 auto;
+    height: var(--hero-photo-h);
+    background:
+      linear-gradient(
+        180deg,
+        color-mix(in oklch, var(--cs-paper) 90%, transparent) 0,
+        color-mix(in oklch, var(--cs-paper) 80%, transparent) 2.6rem,
+        color-mix(in oklch, var(--cs-paper) 0%, transparent) 4.5rem
+      ),
+      linear-gradient(
+        0deg,
+        var(--cs-paper) 0,
+        color-mix(in oklch, var(--cs-paper) 90%, transparent) 14%,
+        color-mix(in oklch, var(--cs-paper) 0%, transparent) 32%
+      );
+  }
+
+  .hero[data-photo-hero] .heroGrid {
+    display: block;
+    min-height: auto;
+    padding-block-start: calc(var(--hero-photo-h) - 2.5rem);
+  }
+
+  .hero[data-photo-hero] .heroCopy {
+    max-width: none;
+  }
+
+  .hero[data-photo-hero] .heroMessage {
+    margin-block-start: 1.75rem;
+  }
+}

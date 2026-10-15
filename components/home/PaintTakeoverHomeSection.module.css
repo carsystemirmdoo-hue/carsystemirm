@@ -209,9 +209,15 @@
 .copy {
   position: absolute;
   top: 51%;
-  left: clamp(24px, 5vw, 78px);
+  /* Leva ivica = zajednički kontejner početne (--ds-container-max + --ds-gutter). */
+  --copy-inset: max(
+    var(--ds-gutter, clamp(20px, 4vw, 56px)),
+    env(safe-area-inset-left),
+    (100% - var(--ds-container-max, 1208px)) / 2
+  );
+  left: var(--copy-inset);
   z-index: 6;
-  width: min(63vw, 1060px);
+  width: min(63vw, 1060px, 100% - var(--copy-inset) * 2);
   opacity: var(--content-opacity);
   transform: translate3d(0, var(--content-offset), 0);
 }
@@ -327,10 +333,8 @@
 
   .copy {
     top: 48%;
-    left: max(20px, env(safe-area-inset-left));
     width: calc(
-      100% - max(20px, env(safe-area-inset-left)) -
-        max(20px, env(safe-area-inset-right))
+      100% - var(--copy-inset) - max(var(--ds-gutter, 20px), env(safe-area-inset-right))
     );
   }
 

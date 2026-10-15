@@ -187,7 +187,7 @@ export function PaintTakeoverHomeSection({
             susreću u jednom potezu.
           </p>
           <Link className={styles.primaryCta} href="/program">
-            ISTRAŽITE SISTEME
+            Istražite sisteme
             <span aria-hidden="true">→</span>
           </Link>
         </div>

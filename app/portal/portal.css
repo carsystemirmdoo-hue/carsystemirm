@@ -10180,3 +10180,424 @@ html:has(.portal-customer-area) { scroll-padding-top: 104px; }
   font-weight: 500;
   letter-spacing: var(--ds-tracking-label);
 }
+
+/* ---- Uvoz lagera (dok. 65): izbor fajla → provera → potvrda ---- */
+.lg-steps {
+  display: flex;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.lg-step {
+  display: flex;
+  flex: 1 1 0;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+  padding: 10px 12px;
+  border: 1px solid var(--p-line);
+  border-radius: 6px;
+  background: var(--p-surface);
+  color: var(--p-muted);
+  font-size: 13px;
+  font-weight: 600;
+}
+.lg-step-mark {
+  display: inline-grid;
+  flex: 0 0 auto;
+  width: 24px;
+  height: 24px;
+  place-items: center;
+  border: 1px solid var(--p-line-strong);
+  border-radius: 50%;
+  font-size: 12px;
+}
+.lg-step-label {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.lg-step[data-state="current"] {
+  border-color: var(--p-ink);
+  color: var(--p-ink);
+}
+.lg-step[data-state="current"] .lg-step-mark {
+  border-color: var(--p-ink);
+  background: var(--p-ink);
+  color: var(--p-surface);
+}
+.lg-step[data-state="done"] .lg-step-mark {
+  border-color: var(--p-green);
+  background: var(--p-green-soft);
+  color: var(--p-green);
+}
+.lg-step[data-state="failed"] {
+  border-color: var(--p-red);
+  color: var(--p-red-dark);
+}
+.lg-step[data-state="failed"] .lg-step-mark {
+  border-color: var(--p-red);
+  background: var(--p-red-soft);
+  color: var(--p-red-dark);
+}
+
+.lg-layout {
+  display: grid;
+  gap: 16px;
+  grid-template-columns: minmax(0, 2fr) minmax(260px, 1fr);
+  align-items: start;
+}
+.lg-upload {
+  display: grid;
+  gap: 14px;
+}
+.lg-drop {
+  position: relative;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 14px;
+  min-height: 112px;
+  padding: 18px;
+  border: 1px dashed var(--p-line-strong);
+  border-radius: 6px;
+  background: var(--p-surface-subtle);
+  cursor: pointer;
+  transition: border-color 0.15s, background-color 0.15s;
+}
+.lg-drop:hover,
+.lg-drop[data-over="true"] {
+  border-color: var(--p-ink);
+  background: var(--p-surface-raised);
+}
+.lg-drop[data-has-file="true"] {
+  border-style: solid;
+  background: var(--p-surface-raised);
+}
+.lg-drop:has(.lg-file-input:focus-visible) {
+  outline: 3px solid var(--pn-focus, #2c5da8);
+  outline-offset: 2px;
+}
+/* Native polje ostaje u formi i u fokusu tastature; vidljiv je srpski prikaz. */
+.lg-file-input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+.lg-drop-icon {
+  display: inline-grid;
+  width: 44px;
+  height: 44px;
+  place-items: center;
+  border: 1px solid var(--p-line);
+  border-radius: 6px;
+  background: var(--p-surface);
+  color: var(--p-ink);
+}
+.lg-drop-text {
+  display: grid;
+  gap: 3px;
+  min-width: 0;
+}
+.lg-drop-text strong {
+  overflow: hidden;
+  color: var(--p-ink);
+  font-size: 15px;
+  font-weight: 650;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.lg-drop-text small {
+  color: var(--p-muted);
+  font-size: 13px;
+}
+.lg-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px 14px;
+}
+.lg-hint {
+  color: var(--p-muted);
+  font-size: 13px;
+}
+.lg-status {
+  margin: 0;
+}
+.lg-upload .lg-status,
+.lg-decision .lg-status,
+.lg-discard-form .lg-status {
+  margin: 0;
+}
+.lg-facts {
+  display: grid;
+  gap: 10px;
+  margin: 0;
+}
+.lg-facts div {
+  display: grid;
+  gap: 2px;
+}
+.lg-facts dt {
+  color: var(--p-muted);
+  font-size: 12px;
+  font-weight: 600;
+}
+.lg-facts dd {
+  margin: 0;
+  color: var(--p-ink);
+  font-size: 14px;
+  overflow-wrap: anywhere;
+}
+.lg-empty {
+  margin: 0;
+  color: var(--p-muted);
+  font-size: 14px;
+}
+.lg-howto {
+  display: grid;
+  gap: 6px;
+  margin: 16px 0 0;
+  padding: 14px 0 0 18px;
+  border-top: 1px solid var(--p-line);
+  color: var(--p-muted);
+  font-size: 13px;
+  line-height: 1.45;
+}
+.lg-history .lg-file-cell {
+  max-width: 280px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.lg-sub {
+  display: block;
+  color: var(--p-muted);
+  font-size: 12px;
+}
+
+.lg-outcome {
+  display: grid;
+  gap: 2px;
+  padding: 14px 16px;
+  border: 1px solid var(--p-line);
+  border-left-width: 4px;
+  border-radius: 6px;
+  background: var(--p-surface);
+}
+.lg-outcome strong {
+  color: var(--p-ink);
+  font-size: 16px;
+  font-weight: 650;
+}
+.lg-outcome span {
+  color: var(--p-muted);
+  font-size: 14px;
+}
+.lg-outcome[data-tone="success"] { border-left-color: var(--p-green); }
+.lg-outcome[data-tone="danger"] { border-left-color: var(--p-red); background: var(--p-red-soft); }
+.lg-outcome[data-tone="warning"] { border-left-color: var(--p-amber); background: var(--p-amber-soft); }
+.lg-outcome[data-tone="neutral"] { border-left-color: var(--p-line-strong); }
+
+.lg-summary {
+  display: grid;
+  gap: 1px;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  overflow: hidden;
+  border: 1px solid var(--p-line);
+  border-radius: 6px;
+  background: var(--p-line);
+}
+.lg-summary > div {
+  display: grid;
+  gap: 4px;
+  align-content: start;
+  padding: 12px 14px;
+  background: var(--p-surface);
+}
+.lg-summary span {
+  color: var(--p-muted);
+  font-size: 12px;
+  font-weight: 600;
+}
+.lg-summary strong {
+  color: var(--p-ink);
+  font-size: 16px;
+  font-weight: 650;
+  overflow-wrap: anywhere;
+}
+.lg-list {
+  display: grid;
+  gap: 6px;
+  margin: 0;
+  padding-left: 34px;
+  font-size: 14px;
+  line-height: 1.45;
+}
+.lg-decision {
+  display: grid;
+  gap: 14px;
+  max-width: 720px;
+}
+.lg-check {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  color: var(--p-ink);
+  font-size: 14px;
+  line-height: 1.45;
+}
+.lg-check input {
+  flex: 0 0 auto;
+  width: 18px;
+  height: 18px;
+  margin-top: 1px;
+}
+.lg-note {
+  max-width: 420px;
+}
+.lg-discard {
+  margin-top: 16px;
+  padding-top: 12px;
+  border-top: 1px solid var(--p-line);
+}
+.lg-discard summary {
+  width: fit-content;
+  color: var(--p-muted);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.lg-discard-form {
+  display: grid;
+  gap: 10px;
+  max-width: 420px;
+  margin-top: 12px;
+}
+.lg-discard-form > button {
+  justify-self: start;
+}
+.lg-groups {
+  display: grid;
+  gap: 10px;
+}
+.lg-group {
+  min-width: 0;
+  border: 1px solid var(--p-line);
+  border-radius: 6px;
+  background: var(--p-surface);
+}
+.lg-group[data-accent="danger"] {
+  border-color: var(--p-red);
+}
+.lg-group[data-accent="warning"] {
+  border-color: var(--p-amber);
+}
+.lg-group > summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 13px 16px;
+  color: var(--p-ink);
+  font-size: 15px;
+  font-weight: 650;
+  cursor: pointer;
+  list-style: none;
+}
+.lg-group > summary::-webkit-details-marker {
+  display: none;
+}
+.lg-group > summary::after {
+  content: "▾";
+  color: var(--p-muted);
+  transition: transform 0.15s;
+}
+.lg-group[open] > summary {
+  border-bottom: 1px solid var(--p-line);
+}
+.lg-group[open] > summary::after {
+  transform: rotate(180deg);
+}
+.lg-group > summary > span:first-child {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+.lg-count {
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: var(--p-surface-subtle);
+  color: var(--p-muted);
+  font-size: 12px;
+  font-weight: 650;
+}
+.lg-group-note {
+  margin: 0;
+  padding: 12px 16px 4px;
+  color: var(--p-muted);
+  font-size: 13px;
+}
+
+@media (max-width: 900px) {
+  .lg-layout {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .lg-summary {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (max-width: 560px) {
+  .lg-step {
+    justify-content: center;
+    padding: 8px 6px;
+  }
+  .lg-step-label {
+    font-size: 12px;
+  }
+  .lg-drop {
+    grid-template-columns: auto minmax(0, 1fr);
+  }
+  .lg-drop-button {
+    grid-column: 1 / -1;
+    justify-self: start;
+  }
+  /* Istorija na telefonu: svaki uvoz kao kartica sa oznakama polja. */
+  .lg-history thead {
+    display: none;
+  }
+  .lg-history,
+  .lg-history tbody,
+  .lg-history tr,
+  .lg-history td {
+    display: block;
+    width: 100%;
+  }
+  .lg-history tr {
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--p-line);
+  }
+  .lg-history td {
+    display: grid;
+    grid-template-columns: 110px minmax(0, 1fr);
+    gap: 8px;
+    padding: 3px 0;
+    border: 0;
+    text-align: left;
+  }
+  .lg-history td::before {
+    content: attr(data-label);
+    color: var(--p-muted);
+    font-size: 12px;
+    font-weight: 600;
+  }
+  .lg-history .lg-file-cell {
+    max-width: none;
+  }
+  .lg-history .lg-sub {
+    grid-column: 2;
+  }
+}

@@ -160,3 +160,38 @@ test("prikaz kupcu: isključen bez obe brave i praga; uključen daje cela pakova
   assert.deepEqual(r.byArticle.get(ids["777777"]), { packs: null, reason: "nije_u_izvozu", label: null }, "izostavljen artikal nije nula");
   delete process.env.STOCK_CUSTOMER_DISPLAY;
 });
+
+const XLSX_B = readFileSync(new URL("../../fixtures/dev/biznisoft/lager/stanje-zaliha-artikla-sinteticki.xlsx", import.meta.url));
+
+test("raspored B (JM u izveštaju): JM različita od potvrđenog pakovanja → nema broja pakovanja, upozorenje", async (t) => {
+  if (guard(t)) return;
+  const svc = await import("@/lib/stock/stock-import-service");
+  // Izveštaj vodi 900008 u LIT, a potvrđeno pakovanje je „1 kom“ u KOM.
+  const [a] = await db.sql<{ id: string }[]>`INSERT INTO articles (code, name, unit) VALUES ('900008', 'SINT ČISTAČ', 'LIT') RETURNING id`;
+  ids["900008"] = a.id;
+  await db.sql`INSERT INTO article_pack_sizes (article_id, pack_quantity, unit, label, evidence, confirmed_by) VALUES (${a.id}, 1, 'KOM', '1 kom', 'sintetička potvrda', ${owner.id})`;
+  const up = await svc.uploadStockReport(asUser(office), { fileName: "artikla.xlsx", bytes: XLSX_B });
+  assert.equal(up.status, "pregled");
+  const v = await svc.loadStockImport(up.importId);
+  assert.ok(v);
+  const by = new Map(v.lines.map((l) => [l.sourceCode, l]));
+  assert.deepEqual([by.get("900008")?.packs, by.get("900008")?.packReason], [null, "jm_razlika"]);
+  assert.deepEqual([by.get("900001")?.packs, by.get("900001")?.packReason], [2, null], "LIT = LIT: 12 L / 5 L = 2");
+  const warnings = (v.header.problems as { warnings: { code: string; count?: number }[] }).warnings;
+  assert.deepEqual(warnings.find((w) => w.code === "jm_razlikuje_od_potvrde"), { code: "jm_razlikuje_od_potvrde", count: 1 });
+  assert.equal(v.header.parserVersion, "biznisoft-stanje-zaliha/2");
+});
+
+test("isti fajl koji je ranije odbila starija verzija čitača: postojeći zapis + uputstvo za nov izvoz", async (t) => {
+  if (guard(t)) return;
+  const svc = await import("@/lib/stock/stock-import-service");
+  const bytes = csvWithDate("07.09.2026");
+  const { createHash } = await import("node:crypto");
+  const sha = createHash("sha256").update(bytes).digest("hex");
+  await db.sql`INSERT INTO stock_imports (file_sha256, file_name, file_bytes, file_format, parser_version, line_count, status, uploaded_by, decided_at)
+    VALUES (${sha}, 'stari-pokusaj.csv', ${bytes.length}, 'csv', 'biznisoft-stanje-zaliha/1', 0, 'neuspesno', ${office.id}, now())`;
+  const up = await svc.uploadStockReport(asUser(office), { fileName: "isti.csv", bytes });
+  assert.deepEqual([up.duplicate, up.status, up.failedWithOlderParser], [true, "neuspesno", true]);
+  const [{ n }] = await db.sql<{ n: number }[]>`SELECT count(*)::int AS n FROM stock_imports WHERE file_sha256 = ${sha}`;
+  assert.equal(n, 1, "nema duplikata");
+});

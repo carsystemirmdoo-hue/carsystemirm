@@ -1,6 +1,6 @@
 # 65 — Ručni uvoz lagera iz BizniSofta (021 VELEPRODAJA)
 
-Status (13. 10. 2026): **implementirano i testirano lokalno; na Production-u nije aktivno.**
+Status (15. 10. 2026): **uvoz radi na Production-u za vlasnika i kancelariju (migracija 0050 primenjena 13. 10.); prikaz kupcima isključen.** Prvi stvaran uvoz (15. 10.) otkrio je drugi raspored izveštaja — vidi §1a.
 Prva faza je ručni uvoz izvoza, bez BizniSoft WebService licence i bez veze sa bazom BizniSofta
 (istraživanje WebService-a: dok. 64, lokalna grana). Automatsko preuzimanje izvoza iz foldera preko
 Windows konektora je sledeća faza.
@@ -9,7 +9,7 @@ Windows konektora je sledeća faza.
 |---|---|
 | Parser izveštaja „Stanje zaliha“ (XLSX i CSV) | implementirano, jedinični testovi; stvaran primer od 24.08.2026 pročitan bez grešaka (brojevi u privatnoj evidenciji) |
 | Otpremanje, pregled, potvrda, odbacivanje, evidencija (`/portal/zalihe/uvoz`) | implementirano; integracioni testovi i provera u pregledaču nad sintetičkom bazom |
-| Migracija 0050 (`stock_imports`, `stock_import_lines`) | proverena na izolovanoj test bazi; **nije primenjena na Production** |
+| Migracija 0050 (`stock_imports`, `stock_import_lines`) | primenjena na Production 13. 10. 2026 |
 | Prikaz kupcima („Stanje prema poslednjem izvozu…“) | pripremljen, **isključen** (dve brave, prag zastarelosti nije zadat) |
 | Automatsko preuzimanje preko konektora | sledeća faza |
 
@@ -32,12 +32,33 @@ separator `;`, tab ili `,`.
 **Čuva se samo:** izvorna šifra (tekst, kakva je u fajlu), ključ za vezu, naziv i izvorna količina.
 **Ne čuva se:** nabavna cena, vrednosti, VP cena, % RuC, originalni fajl (samo SHA-256 i veličina).
 
+### 1a. Dva rasporeda istog programa (od 15. 10. 2026)
+
+| | A — „STANJE ZALIHA“ (primer 24.08.2026) | B — „STANJE ZALIHA ARTIKLA“ (prvi stvaran uvoz 15.10.2026) |
+|---|---|---|
+| Kolone | Šifra · Naziv robe · Stopa · Količina · Nab.Cena · Nab.Vred · VP Cena · VP Vred. · %RuC | Šifra · **GR.** · Naziv robe · **JM** · Količina · Cena · Vrednost |
+| Zaglavlje strane | ponavlja se samo zaglavlje tabele | ponavljaju se i firma, adresa i naslov na svakoj strani |
+| Filteri | svaki u svojoj ćeliji | u jednoj ćeliji, razdvojeni sa „·“ |
+| Zbirni red | dve vrednosti (nabavna, VP) | jedna vrednost |
+
+Uzrok neuspeha 15.10.: parser je granice kolona računao samo iz naslova koje koristi, pa je raspon
+„Šifre“ (A–E) obuhvatio i kolonu „GR.“ („00“) — svaki red je imao dve vrednosti u rasponu šifre i
+odbačen je kao neprepoznat (1.909). Ispravka (parser `/2`): granica je SVAKI naslov u zaglavlju tabele;
+redovi zaglavlja izveštaja koji se ponove između strana prepoznaju se po sadržaju; kontrola zbira radi
+za jednu ili dve kolone vrednosti; filteri se čitaju i iz delova razdvojenih sa „·“. Prag za
+neprepoznate redove nije menjan. JM iz rasporeda B se ne koristi kao izvor — samo kao provera: ako se
+razlikuje od potvrđenog pakovanja, za tu stavku nema broja pakovanja i diže se upozorenje.
+
+Isti fajl je jedinstven (SHA-256): fajl koji je odbila starija verzija čitača ostaje zapisan kao
+*neuspešno*, a ponovno otpremanje istog fajla prikazuje uputstvo da se izveštaj ponovo izveze iz
+BizniSofta (nov izvoz je nov fajl).
+
 ## 2. Pravila
 
 | Tema | Pravilo |
 |---|---|
 | Šifra | Tekst; vodeće nule se čuvaju kada postoje. Excel ih gubi (šifra je broj) → veza ide preko ključa bez vodećih nula, i samo kada je jednoznačna. Dve šifre u fajlu sa istim ključem = greška; dve šifre u portalu sa istim ključem = „sudar“, veza se ne pravi. |
-| JM | Izveštaj nema kolonu JM. JM se **ne zaključuje iz naziva**; merodavna je samo potvrđena prodajna jedinica (`article_pack_sizes`, 0047). |
+| JM | Raspored A nema kolonu JM, raspored B ima. JM se **ne zaključuje iz naziva**; merodavna je samo potvrđena prodajna jedinica (`article_pack_sizes`, 0047). JM iz izveštaja služi samo kao provera: razlika → nema broja pakovanja + upozorenje. |
 | Cela pakovanja | ⌊izvorna količina ÷ potvrđena količina pakovanja⌋, samo uz potvrđenu vezu artikla, JM i pakovanje. Inače nema broja. |
 | Brojevi | XLSX broj je broj. Tekst: decimalni zarez ili tačka; „1.234“ / „1,234“ se tumači samo kada je separator za ceo fajl utvrđen iz nedvosmislenih vrednosti, inače greška. Mešani separatori = greška. |
 | Prazna količina | Nije nula (`NULL`, upozorenje). |
@@ -65,6 +86,40 @@ Greške blokiraju potvrdu; upozorenja ne blokiraju, ali su prikazana u pregledu.
 Stavke se samo dodaju; podaci otpremanja se ne menjaju; otpremanje se ne briše (okidači u 0050, prava u
 `db/provisioning/runtime-role.sql`). Svaki korak ima red u `audit_log`.
 
+## 3a. Čuvanje podataka i prostor
+
+**Šta se čuva i gde** (Postgres baza portala, Neon; ne Vercel):
+- `stock_imports` — jedan red po otpremanju: ime fajla, veličina, SHA-256, format, verzija parsera,
+  objekat, datum stanja i štampe, sažetak (brojevi, kontrola, JM razlike), greške i upozorenja (kodovi,
+  bez cena), ko je i kada otpremio i odlučio;
+- `stock_import_lines` — šifra, ključ, naziv i izvorna količina po stavci, samo za fajl koji je prošao
+  proveru;
+- `audit_log` — trag otpremanja, potvrde i odbacivanja.
+
+**Originalni fajl se ne čuva nigde** — ni u bazi, ni na Vercel-u, ni u repozitorijumu. Server ga čita u
+memoriji tokom otpremanja; ostaju samo SHA-256 i veličina. Cene, vrednosti i marže iz izveštaja ne
+napuštaju parser.
+
+**Neuspešan pokušaj (15.10., Production):** jedan red u `stock_imports` (status *neuspešno*, 0 stavki,
+sažetak 568 B, problemi 353 B), bez ijedne stavke i bez fajla.
+
+**Izmereno** (lokalno, posle `VACUUM`, stvaran izvoz 15.10. = 1.810 stavki): `stock_import_lines`
+≈ 330 B po stavci (podaci ≈ 130 B, tri indeksa ≈ 200 B) → **≈ 0,6 MB po uvozu**; zaglavlje otpremanja
+1–2 KB. Na Production-u posle neuspešnog pokušaja: obe tabele 112 kB; cela baza 92 MB.
+
+**Procena godišnjeg rasta** (≈ 250 radnih dana, ≈ 1.800 stavki): jedan uvoz dnevno ≈ 150 MB/god;
+dva uvoza dnevno ≈ 300 MB/god. Neon Free plan ima 1 GB po projektu (podignuto sa 0,5 GB; proveriti u
+Neon konzoli). Veličina baze se ne meša sa Vercel Deployment Storage-om (izlaz builda, drugi limit).
+
+**Pravila čuvanja danas: nema.** Stavke i otpremanja se samo dodaju (okidači u 0050, runtime nalog nema
+DELETE); ništa se ne briše automatski.
+
+**Predlog roka čuvanja** (nije primenjen; brisanje ide kao poseban postupak vlasnikom baze):
+- stavke otpremanja *odbačeno*, *neuspešno* i nepotvrđenog *pregled* starijih od 30 dana — brisati;
+- stavke potvrđenih snimaka — čuvati 90 dana u celini, a posle toga samo poslednji snimak u mesecu;
+- zapisi `stock_imports` (bez stavki) i `audit_log` — čuvati trajno (evidencija ko/kada/ishod).
+Uz jedan uvoz dnevno to drži lager na ≈ 40 MB + ≈ 7 MB godišnje.
+
 ## 4. Prikaz kupcima — isključen
 
 Kupac vidi stanje tek kada su otključane **obe brave**:
@@ -79,7 +134,7 @@ celog pakovanja“), zatim „Stanje prema poslednjem izvozu: dd.mm.gggg.“ (sa
 vreme), odvojeno „Uvezeno dd.mm.gggg. u hh:mm“ i „Raspoloživost potvrđuje kancelarija.“ Bez potvrđene
 veze, JM ili pakovanja — nema broja. Isključen prikaz ne čita tabele lagera.
 
-## 5. Uputstvo za kancelariju
+## 5. Uputstvo za kancelariju (koraci na strani: izbor fajla → provera → potvrda)
 
 1. U BizniSoftu otvorite izveštaj **„Stanje zaliha“**: poslovni objekat **021 VELEPRODAJA**, „Na dan“ =
    dan za koji šaljete stanje.
@@ -91,15 +146,14 @@ veze, JM ili pakovanja — nema broja. Isključen prikaz ne čita tabele lagera.
    prijavite ponovo. Ako nije u redu: „Odbacite otpremanje“ sa razlogom i izvezite ponovo.
 6. Isti fajl dva puta ne pravi duplikat. Stariji izvoz ne može zameniti noviji.
 
-## 6. Aktivacija na Production-u (nije urađeno u ovom koraku)
+## 6. Aktivacija na Production-u
 
-1. Migracije **0045–0050 redom** po postupku dok. 59 (vlasnik baze, sveža kopija pre, snimak pre/posle).
-   Redosled je obavezan: Drizzle primenjuje samo migracije novije od poslednje primenjene.
-2. Objava koda koji sadrži 0045–0050 (do tada se ovaj kod ne sme objaviti na Production — dok. 59 §2:
-   bez 0045 niko ne može da se prijavi).
-3. Prvi stvaran izvoz: otpremanje i pregled na Production-u, poređenje sa BizniSoftom, potvrda.
-4. Odluka vlasnika o pragu zastarelosti i prikazu; tek tada `STOCK_CUSTOMER_DISPLAY=1` i podešavanje
+1. ✅ Migracije 0045–0050 (13. 10. 2026, posle proverene kopije baze) i objava koda.
+2. ⏳ Prvi stvaran izvoz: otpremanje i provera na Production-u, poređenje sa BizniSoftom, potvrda
+   (15. 10. odbijen zbog rasporeda B — ispravljeno parserom `/2`; potreban nov izvoz, §1a).
+3. ⏳ Odluka vlasnika o pragu zastarelosti i prikazu; tek tada `STOCK_CUSTOMER_DISPLAY=1` i podešavanje
    (`enabled`, `maxAgeDays`).
+4. ⏳ Odluka o roku čuvanja (§3a).
 
 ## 7. Provere
 

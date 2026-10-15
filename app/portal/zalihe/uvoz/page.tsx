@@ -1,8 +1,9 @@
 import Link from "next/link";
-import { Badge, PageHeader, SectionHeader } from "@/components/portal/PortalPrimitives";
+import { Badge, PageHeader, PortalLinkButton, SectionHeader } from "@/components/portal/PortalPrimitives";
 import { StockUploadForm } from "@/features/portal/StockImportForms";
+import { StockImportSteps } from "@/features/portal/StockImportSteps";
 import { requireCapability } from "@/lib/authz/session";
-import { dmy, dmyTime } from "@/lib/ordering/panelFormat.mjs";
+import { dmy, dmyTime, quantity } from "@/lib/ordering/panelFormat.mjs";
 import { currentStockSnapshot, listStockImports } from "@/lib/stock/stock-import-service";
 
 
@@ -11,10 +12,10 @@ export const metadata = { title: "Uvoz lagera" };
 export const dynamic = "force-dynamic";
 
 const STATUS: Record<string, { label: string; tone: "info" | "success" | "neutral" | "warning" | "danger" }> = {
-  pregled: { label: "čeka pregled", tone: "info" },
+  pregled: { label: "čeka potvrdu", tone: "info" },
   potvrdjeno: { label: "potvrđeno", tone: "success" },
   odbaceno: { label: "odbačeno", tone: "neutral" },
-  neuspesno: { label: "neuspešno", tone: "danger" },
+  neuspesno: { label: "nije prošlo proveru", tone: "danger" },
 };
 const day = (iso: string | null) => (iso ? dmy(new Date(`${iso}T12:00:00Z`)) : "—");
 
@@ -28,47 +29,64 @@ export default async function StockImportPage() {
       <PageHeader
         eyebrow="Logistika"
         title="Uvoz lagera"
-        description="Izvoz izveštaja „Stanje zaliha“ iz BizniSofta za 021 VELEPRODAJA. Otpremanje samo priprema pregled; važeći snimak se menja tek kada potvrdite."
-        meta={
-          <span>
-            Važeći snimak:{" "}
-            {current ? (
-              <>stanje na dan {day(current.stockDate)} · potvrđeno {current.confirmedAt ? dmyTime(current.confirmedAt) : "—"} · <Link href={`/portal/zalihe/uvoz/${current.id}`}>pregled</Link></>
-            ) : (
-              "još nema"
-            )}
-          </span>
-        }
+        description="Izveštaj o stanju zaliha iz BizniSofta za 021 VELEPRODAJA."
+        actions={current ? <PortalLinkButton href={`/portal/zalihe/uvoz/${current.id}`} variant="ghost">Važeći snimak</PortalLinkButton> : undefined}
       />
 
-      <section className="portal-panel">
-        <SectionHeader title="Novi izvoz" description="XLSX ili CSV, onakav kakav BizniSoft izveze — bez brisanja praznih kolona, zaglavlja ili strana." />
-        <StockUploadForm />
-      </section>
+      <StockImportSteps current={1} />
+
+      <div className="lg-layout">
+        <section className="portal-panel lg-main">
+          <SectionHeader title="Izaberite fajl" description="Izvoz otpremite onakav kakav ga BizniSoft napravi — bez sređivanja u Excel-u." />
+          <div className="portal-panel-body">
+            <StockUploadForm />
+          </div>
+        </section>
+
+        <aside className="portal-panel lg-side" aria-label="Važeće stanje">
+          <SectionHeader title="Važeće stanje" />
+          <div className="portal-panel-body">
+            {current ? (
+              <dl className="lg-facts">
+                <div><dt>Stanje na dan</dt><dd>{day(current.stockDate)}</dd></div>
+                <div><dt>Potvrđeno</dt><dd>{current.confirmedAt ? dmyTime(current.confirmedAt) : "—"}</dd></div>
+                <div><dt>Stavki</dt><dd>{quantity(current.lineCount)}</dd></div>
+              </dl>
+            ) : (
+              <p className="lg-empty">Još nema potvrđenog lagera.</p>
+            )}
+            <ol className="lg-howto">
+              <li>U BizniSoftu izvezite izveštaj o stanju zaliha za objekat 021 VELEPRODAJA.</li>
+              <li>Izaberite fajl i pokrenite proveru.</li>
+              <li>Pregledajte rezultat i potvrdite lager.</li>
+            </ol>
+          </div>
+        </aside>
+      </div>
 
       <section className="portal-panel">
-        <SectionHeader title="Otpremanja" description="Svako otpremanje ostaje u evidenciji: ko je otpremio, kada, šta je pročitano i kakva je odluka." />
+        <SectionHeader title="Istorija uvoza" description="Svako otpremanje ostaje zabeleženo: ko, kada i sa kojim ishodom." />
         {imports.length === 0 ? (
-          <p className="portal-empty">Još nijedan lager nije otpremljen.</p>
+          <p className="lg-empty portal-panel-body">Još nijedan lager nije otpremljen.</p>
         ) : (
           <div className="portal-table-wrap">
-            <table className="portal-table">
+            <table className="portal-table lg-history">
               <thead>
-                <tr><th>Fajl</th><th>Objekat</th><th>Stanje na dan</th><th>Datum štampe</th><th className="portal-table-number">Stavki</th><th>Status</th><th>Otpremio</th><th>Odluka</th></tr>
+                <tr><th>Stanje na dan</th><th>Fajl</th><th>Status</th><th className="portal-table-number">Stavki</th><th>Otpremio</th></tr>
               </thead>
               <tbody>
                 {imports.map((i) => {
                   const st = STATUS[i.status] ?? STATUS.pregled;
                   return (
                     <tr key={i.id}>
-                      <td><Link href={`/portal/zalihe/uvoz/${i.id}`}>{i.fileName}</Link></td>
-                      <td>{i.warehouseCode ? `${i.warehouseCode} ${i.warehouseName ?? ""}` : "—"}</td>
-                      <td>{day(i.stockDate)}</td>
-                      <td>{day(i.printedOn)}</td>
-                      <td className="portal-table-number">{i.lineCount}</td>
-                      <td><Badge tone={st.tone}>{st.label}</Badge>{current?.id === i.id ? <> <Badge tone="success">važeći</Badge></> : null}</td>
-                      <td>{i.uploaderName ?? "—"} · {dmyTime(i.uploadedAt)}</td>
-                      <td>{i.decidedAt && i.status !== "neuspesno" ? dmyTime(i.decidedAt) : "—"}</td>
+                      <td data-label="Stanje na dan">{day(i.stockDate)}</td>
+                      <td className="lg-file-cell" data-label="Fajl"><Link href={`/portal/zalihe/uvoz/${i.id}`}>{i.fileName}</Link></td>
+                      <td data-label="Status">
+                        <Badge tone={st.tone}>{st.label}</Badge>
+                        {current?.id === i.id ? <> <Badge tone="success">važeći</Badge></> : null}
+                      </td>
+                      <td className="portal-table-number" data-label="Stavki">{quantity(i.lineCount)}</td>
+                      <td data-label="Otpremio">{i.uploaderName ?? "—"}<small className="lg-sub">{dmyTime(i.uploadedAt)}</small></td>
                     </tr>
                   );
                 })}

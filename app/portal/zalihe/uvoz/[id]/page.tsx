@@ -1,7 +1,8 @@
-import Link from "next/link";
+import type { ReactNode } from "react";
 import { notFound } from "next/navigation";
-import { Badge, Metric, PageHeader, SectionHeader } from "@/components/portal/PortalPrimitives";
+import { Badge, PageHeader, PortalLinkButton, SectionHeader } from "@/components/portal/PortalPrimitives";
 import { StockConfirmForm, StockDiscardForm } from "@/features/portal/StockImportForms";
+import { StockImportSteps } from "@/features/portal/StockImportSteps";
 import { requireCapability } from "@/lib/authz/session";
 import { dmy, dmyTime, quantity } from "@/lib/ordering/panelFormat.mjs";
 import { stockProblemText } from "@/lib/stock/problemLabels.mjs";
@@ -14,23 +15,27 @@ const Q = new Intl.NumberFormat("sr-Latn-RS", { maximumFractionDigits: 3 });
 const qty = (v: number | null) => (v === null ? "prazno" : Q.format(v));
 const MAX_ROWS = 300;
 const REASON: Record<string, string> = {
-  pakovanje_nepotvrdjeno: "JM i pakovanje nisu potvrđeni",
+  pakovanje_nepotvrdjeno: "pakovanje nije potvrđeno",
   prazna_kolicina: "prazna količina",
   negativna_kolicina: "negativna količina",
   nepovezan: "šifra ne postoji u portalu",
-  sudar_sifara: "sudar šifara u portalu",
+  sudar_sifara: "sudar šifara",
+  jm_razlika: "JM iz izveštaja ≠ potvrđena JM",
 };
 type Problem = { code: string; row?: number; detail?: string; count?: number };
-type Summary = { lines: number; zeros: number; negative: number; decimals: number; emptyQuantity: number; repeatedHeaders?: number; footerRows?: number; control?: Record<string, unknown>; sheet?: string | null; stockFilter?: string | null };
+type Summary = { lines: number; zeros: number; negative: number; decimals: number; emptyQuantity: number; control?: Record<string, unknown>; sheet?: string | null; stockFilter?: string | null; jmIzIzvestaja?: boolean };
 
 function LineTable({ rows, showPacks = false }: { rows: StockLineView[]; showPacks?: boolean }) {
-  if (!rows.length) return <p className="portal-empty">Nema.</p>;
+  if (!rows.length) return <p className="lg-empty portal-panel-body">Nema.</p>;
   return (
     <>
       <div className="portal-table-wrap">
-        <table className="portal-table">
+        <table className="portal-table lg-lines">
           <thead>
-            <tr><th>Šifra u izvozu</th><th>Naziv</th><th className="portal-table-number">Količina (izvorna)</th><th>Artikal u portalu</th>{showPacks ? <><th>Potvrđena JM / pakovanje</th><th className="portal-table-number">Celih pakovanja</th></> : null}<th className="portal-table-number">Red</th></tr>
+            <tr>
+              <th>Šifra</th><th>Naziv</th><th className="portal-table-number">Količina</th><th>Artikal u portalu</th>
+              {showPacks ? <><th>Pakovanje</th><th className="portal-table-number">Celih pakovanja</th></> : null}
+            </tr>
           </thead>
           <tbody>
             {rows.slice(0, MAX_ROWS).map((l) => (
@@ -38,28 +43,39 @@ function LineTable({ rows, showPacks = false }: { rows: StockLineView[]; showPac
                 <td>{l.sourceCode}</td>
                 <td>{l.name}</td>
                 <td className="portal-table-number">{qty(l.quantity)}{l.quantity !== null && l.quantity < 0 ? <> <Badge tone="danger">negativno</Badge></> : null}</td>
-                <td>{l.articleCode ?? "—"}{l.articleCode && !l.exactCode ? <> <Badge tone="neutral">bez vodećih nula</Badge></> : null}</td>
+                <td>{l.articleCode ?? "—"}</td>
                 {showPacks ? (
                   <>
-                    <td>{l.unit ? `${l.unit} · ${l.packLabel}` : "—"}</td>
+                    <td>{l.unit ? `${l.packLabel} (${l.unit})` : "—"}</td>
                     <td className="portal-table-number">{l.packs ?? (l.packReason ? REASON[l.packReason] ?? l.packReason : "—")}</td>
                   </>
                 ) : null}
-                <td className="portal-table-number">{l.sourceRow}</td>
               </tr>
             ))}
           </tbody>
         </table>
       </div>
-      {rows.length > MAX_ROWS ? <p className="portal-empty">Prikazano prvih {MAX_ROWS} od {rows.length}.</p> : null}
+      {rows.length > MAX_ROWS ? <p className="lg-empty portal-panel-body">Prikazano prvih {MAX_ROWS} od {quantity(rows.length)}.</p> : null}
     </>
   );
 }
 
-export default async function StockImportReviewPage({ params, searchParams }: { params: Promise<{ id: string }>; searchParams: Promise<{ isti?: string; ishod?: string }> }) {
+function Group({ title, count, tone, children, open = false }: { title: string; count: number; tone?: "danger" | "warning"; children: ReactNode; open?: boolean }) {
+  return (
+    <details className="lg-group" data-accent={tone} open={open}>
+      <summary>
+        <span>{title}</span>
+        <span className="lg-count">{quantity(count)}</span>
+      </summary>
+      {children}
+    </details>
+  );
+}
+
+export default async function StockImportReviewPage({ params, searchParams }: { params: Promise<{ id: string }>; searchParams: Promise<{ isti?: string; ishod?: string; raniji?: string }> }) {
   await requireCapability("imports:write", "/portal/zalihe/uvoz");
   const { id } = await params;
-  const { isti, ishod } = await searchParams;
+  const { isti, ishod, raniji } = await searchParams;
   const data = await loadStockImport(id);
   if (!data) notFound();
   const h = data.header;
@@ -67,116 +83,137 @@ export default async function StockImportReviewPage({ params, searchParams }: { 
   const errors = problems.errors ?? [];
   const warnings = problems.warnings ?? [];
   const s = (h.summary as Summary) ?? { lines: 0, zeros: 0, negative: 0, decimals: 0, emptyQuantity: 0 };
-  const control = (s.control ?? {}) as { totalsMatch?: boolean | null; pagesComplete?: boolean | null; pagesDeclared?: number | null; rowValueMismatches?: number | null };
+  const control = (s.control ?? {}) as { totalsMatch?: boolean | null; pagesComplete?: boolean | null; pagesDeclared?: number | null };
   const linked = data.lines.filter((l) => l.link === "povezan");
   const unlinked = data.lines.filter((l) => l.link === "nepovezan");
   const collisions = data.lines.filter((l) => l.link === "sudar");
-  const packMissing = linked.filter((l) => !l.unit);
-  const withPacks = linked.filter((l) => l.unit);
-  const negative = data.lines.filter((l) => l.quantity !== null && l.quantity < 0);
-  const empty = data.lines.filter((l) => l.quantity === null);
+  const withPacks = linked.filter((l) => l.unit && l.packReason !== "jm_razlika");
+  const noPack = linked.filter((l) => !l.unit || l.packReason === "jm_razlika");
+  const anomalies = data.lines.filter((l) => l.quantity === null || l.quantity < 0);
   const older = data.current && h.stockDate && data.current.stockDate && h.stockDate < data.current.stockDate;
   const isCurrent = data.current?.id === h.id;
+  const pending = h.status === "pregled";
+  const canConfirm = pending && !errors.length && !older && Boolean(h.stockDate);
+
+  const outcome =
+    h.status === "potvrdjeno"
+      ? { tone: "success", title: isCurrent ? "Potvrđeno — ovo je važeće stanje" : "Potvrđeno", text: `Potvrdio ${data.deciderName ?? "—"}, ${h.decidedAt ? dmyTime(h.decidedAt) : "—"}.` }
+      : h.status === "odbaceno"
+        ? { tone: "neutral", title: "Odbačeno", text: h.decisionNote ? `Razlog: ${h.decisionNote}` : "Važeće stanje nije menjano." }
+        : h.status === "neuspesno"
+          ? { tone: "danger", title: "Fajl nije prošao proveru", text: "Ništa nije promenjeno. Ispravite izvoz i otpremite novi fajl." }
+          : older
+            ? { tone: "warning", title: "Stariji od važećeg stanja", text: `Važeće stanje je od ${day(data.current?.stockDate ?? null)}; stariji izvoz ga ne može zameniti.` }
+            : errors.length
+              ? { tone: "danger", title: "Fajl ima greške", text: "Ne može se potvrditi. Važeće stanje ostaje nepromenjeno." }
+              : { tone: "success", title: "Provera je prošla — fajl je spreman za potvrdu", text: "Pregledajte sažetak i potvrdite lager." };
 
   return (
     <>
       <PageHeader
         eyebrow="Uvoz lagera"
-        title={h.fileName}
-        description="Pregled pre potvrde. Ništa od ovoga još nije važeće stanje — postaje tek posle Vaše potvrde."
-        meta={<span><Link href="/portal/zalihe/uvoz">← Sva otpremanja</Link> · otpremio {data.uploaderName ?? "—"} · {dmyTime(h.uploadedAt)}</span>}
+        title={`Stanje na dan ${day(h.stockDate)}`}
+        description={h.fileName}
+        actions={<PortalLinkButton href="/portal/zalihe/uvoz" variant="ghost">Svi uvozi</PortalLinkButton>}
       />
-      {ishod === "potvrdjeno" && h.status === "potvrdjeno" ? (
-        <p className="portal-permission-ok" role="status">Potvrđeno: ovo je sada važeći snimak zaliha (stanje na dan {day(h.stockDate)}).</p>
-      ) : null}
-      {ishod === "odbaceno" && h.status === "odbaceno" ? (
-        <p className="portal-permission-ok" role="status">Otpremanje je odbačeno; važeći snimak nije menjan.</p>
-      ) : null}
-      {isti ? (
-        <p className="portal-permission-ok" role="status">Isti fajl je već otpremljen {dmyTime(h.uploadedAt)} — nov unos nije napravljen. Prikazano je postojeće otpremanje.</p>
-      ) : null}
 
-      <section className="portal-panel">
-        <SectionHeader title="Šta izveštaj sadrži" description="Pročitano iz sadržaja fajla; ništa se ne pretpostavlja iz naziva fajla." />
-        <dl className="pl-facts">
-          <div><dt>Poslovni objekat</dt><dd>{h.warehouseCode ? `${h.warehouseCode} ${h.warehouseName ?? ""}` : "—"}</dd></div>
-          <div><dt>Stanje na dan</dt><dd>{day(h.stockDate)} — datum STANJA iz izveštaja; vreme izvoza izveštaj ne navodi</dd></div>
-          <div><dt>Datum štampe</dt><dd>{day(h.printedOn)}</dd></div>
-          <div><dt>Otpremljeno</dt><dd>{dmyTime(h.uploadedAt)}</dd></div>
-          <div><dt>Format</dt><dd>{h.fileFormat.toUpperCase()}{s.sheet ? ` · list „${s.sheet}“` : ""}{s.stockFilter ? ` · filter „${s.stockFilter}“` : ""}</dd></div>
-          <div><dt>Prepoznato stavki</dt><dd>{quantity(s.lines)} (nula {s.zeros}, decimalnih {s.decimals}, praznih {s.emptyQuantity}, negativnih {s.negative})</dd></div>
-          <div><dt>Kontrola potpunosti</dt><dd>
-            {control.totalsMatch === true ? <Badge tone="success">zbir vrednosti = „Ukupno“</Badge> : control.totalsMatch === false ? <Badge tone="danger">zbir se ne slaže</Badge> : <Badge tone="warning">zbir nije proveren</Badge>}{" "}
-            {control.pagesComplete === true ? <Badge tone="success">strane {control.pagesDeclared}/{control.pagesDeclared}</Badge> : control.pagesComplete === false ? <Badge tone="danger">nedostaju strane</Badge> : null}
-          </dd></div>
-          <div><dt>Jedinica mere</dt><dd>Izveštaj je ne sadrži i ne zaključuje se iz naziva — koristi se samo potvrđena JM i pakovanje iz portala</dd></div>
-          <div><dt>Ne čuva se</dt><dd>nabavna cena, vrednosti, VP cena i % RuC</dd></div>
-          <div><dt>Status</dt><dd>{h.status}{isCurrent ? " · važeći snimak" : ""}{h.decidedAt && h.status !== "neuspesno" ? ` · ${data.deciderName ?? "—"} · ${dmyTime(h.decidedAt)}` : ""}{h.decisionNote ? ` — ${h.decisionNote}` : ""}</dd></div>
-        </dl>
+      <StockImportSteps current={pending ? (canConfirm ? 3 : 2) : h.status === "potvrdjeno" ? 3 : 2} done={h.status === "potvrdjeno"} failed={h.status === "neuspesno" || (pending && !canConfirm)} />
+
+      {raniji ? (
+        <p className="portal-login-error lg-status" role="alert">
+          Ovaj isti fajl je ranije odbijen starijom verzijom provere. Izvezite izveštaj ponovo iz BizniSofta i otpremite novi fajl — on će biti proveren ispravljenom verzijom.
+        </p>
+      ) : isti ? (
+        <p className="portal-permission-ok lg-status" role="status">Isti fajl je već otpremljen {dmyTime(h.uploadedAt)} — prikazana je postojeća provera.</p>
+      ) : null}
+      {ishod === "potvrdjeno" && h.status === "potvrdjeno" ? <p className="portal-permission-ok lg-status" role="status">Lager je potvrđen.</p> : null}
+      {ishod === "odbaceno" && h.status === "odbaceno" ? <p className="portal-permission-ok lg-status" role="status">Otpremanje je odbačeno; važeće stanje nije menjano.</p> : null}
+
+      <section className="lg-outcome" data-tone={outcome.tone}>
+        <strong>{outcome.title}</strong>
+        <span>{outcome.text}</span>
+      </section>
+
+      <section className="lg-summary" aria-label="Sažetak">
+        <div><span>Objekat</span><strong>{h.warehouseCode ? `${h.warehouseCode} ${h.warehouseName ?? ""}` : "—"}</strong></div>
+        <div><span>Stanje na dan</span><strong>{day(h.stockDate)}</strong></div>
+        <div><span>Stavki</span><strong>{quantity(h.lineCount || s.lines)}</strong></div>
+        <div>
+          <span>Potpunost</span>
+          <strong>
+            {control.totalsMatch === true && control.pagesComplete !== false ? <Badge tone="success">sve strane i zbir se slažu</Badge> : control.totalsMatch === false || control.pagesComplete === false ? <Badge tone="danger">nepotpun fajl</Badge> : <Badge tone="warning">nije provereno</Badge>}
+          </strong>
+        </div>
       </section>
 
       {errors.length ? (
         <section className="portal-panel" data-accent="danger">
-          <SectionHeader title={`Greške koje blokiraju uvoz (${errors.length})`} description="Fajl se ne može potvrditi. Važeći snimak ostaje nepromenjen." />
-          <ul>{errors.slice(0, 50).map((p, i) => <li key={i}>{stockProblemText(p)}</li>)}</ul>
+          <SectionHeader title="Šta treba ispraviti" />
+          <ul className="lg-list portal-panel-body">{errors.slice(0, 50).map((p, i) => <li key={i}>{stockProblemText(p)}</li>)}</ul>
+        </section>
+      ) : null}
+
+      {pending ? (
+        <section className="portal-panel">
+          <SectionHeader title={canConfirm ? "Potvrda" : "Odluka"} />
+          <div className="portal-panel-body">
+            {canConfirm && h.stockDate ? <StockConfirmForm importId={h.id} lines={h.lineCount} stockDate={h.stockDate} /> : null}
+            <StockDiscardForm importId={h.id} />
+          </div>
         </section>
       ) : null}
 
       {warnings.length ? (
         <section className="portal-panel" data-accent="warning">
-          <SectionHeader title={`Upozorenja (${warnings.length})`} description="Ne blokiraju uvoz, ali ih pogledajte pre potvrde." />
-          <ul>{warnings.map((p, i) => <li key={i}>{stockProblemText(p)}</li>)}</ul>
+          <SectionHeader title="Za proveru" description="Ne sprečavaju potvrdu." />
+          <ul className="lg-list portal-panel-body">{warnings.map((p, i) => <li key={i}>{stockProblemText(p)}</li>)}</ul>
         </section>
       ) : null}
 
       {data.lines.length ? (
-        <>
-          <section className="portal-metrics">
-            <Metric label="Povezano sa artiklom" value={quantity(linked.length)} tone="success" context={`od toga preko šifre bez vodećih nula: ${linked.filter((l) => !l.exactCode).length}`} />
-            <Metric label="Sa potvrđenom JM i pakovanjem" value={quantity(withPacks.length)} tone={withPacks.length ? "success" : "neutral"} context="samo za njih postoji broj celih pakovanja" />
-            <Metric label="Bez potvrđene JM / pakovanja" value={quantity(packMissing.length)} tone={packMissing.length ? "warning" : "neutral"} context="izvorna količina se čuva, broj pakovanja ne postoji" />
-            <Metric label="Nepovezano · sudari" value={`${quantity(unlinked.length)} · ${quantity(collisions.length)}`} tone={collisions.length ? "danger" : unlinked.length ? "warning" : "neutral"} context="šifra ne postoji u portalu · dve šifre u portalu daju isti ključ" />
-          </section>
-
-          {collisions.length ? (
-            <section className="portal-panel" data-accent="danger">
-              <SectionHeader title={`Sudari šifara (${collisions.length})`} description="Šifra iz izvoza odgovara dvema šiframa u portalu kada se zanemare vodeće nule. Veza se ne pravi." />
-              <LineTable rows={collisions} />
-            </section>
-          ) : null}
-
-          {negative.length || empty.length ? (
-            <section className="portal-panel" data-accent="warning">
-              <SectionHeader title={`Negativne i prazne količine (${negative.length + empty.length})`} description="Sačuvane su kao nalaz. Kupcu se nikad ne prikazuju; prazna količina nije nula." />
-              <LineTable rows={[...negative, ...empty]} />
-            </section>
-          ) : null}
-
-          <section className="portal-panel">
-            <SectionHeader title={`Povezano, sa potvrđenom JM i pakovanjem (${withPacks.length})`} description="Broj CELIH pakovanja iz izvorne količine (naniže). To je stanje iz izvoza, ne garantovana raspoloživost." />
+        <div className="lg-groups">
+          <Group title="Sa potvrđenim pakovanjem" count={withPacks.length}>
+            <p className="lg-group-note">Broj celih pakovanja iz izvorne količine. To je stanje iz izvoza, ne garantovana raspoloživost.</p>
             <LineTable rows={withPacks} showPacks />
-          </section>
-
-          <section className="portal-panel">
-            <SectionHeader title={`Povezano, bez potvrđene JM ili pakovanja (${packMissing.length})`} description="Izvorna količina se čuva; broj komada ili pakovanja se ne izračunava dok JM i pakovanje ne potvrdi čovek." />
-            <LineTable rows={packMissing} />
-          </section>
-
-          <section className="portal-panel">
-            <SectionHeader title={`Nepovezane šifre (${unlinked.length})`} description="Šifra iz izvoza ne postoji u portalu (artikal još nije fakturisan ili je star). Prisustvo u lageru ne vraća artikal u katalog." />
+          </Group>
+          <Group title="Bez potvrđenog pakovanja ili sa razlikom u JM" count={noPack.length}>
+            <p className="lg-group-note">Količina se čuva, ali broj pakovanja se ne računa dok pakovanje ne potvrdi čovek.</p>
+            <LineTable rows={noPack} showPacks />
+          </Group>
+          <Group title="Šifre kojih nema u portalu" count={unlinked.length}>
+            <p className="lg-group-note">Artikal još nije fakturisan ili je star. Prisustvo u lageru ne vraća artikal u katalog.</p>
             <LineTable rows={unlinked} />
-          </section>
-        </>
+          </Group>
+          {collisions.length ? (
+            <Group title="Sudari šifara" count={collisions.length} tone="danger" open>
+              <p className="lg-group-note">Šifra odgovara dvema šiframa u portalu kada se zanemare vodeće nule — veza se ne pravi.</p>
+              <LineTable rows={collisions} />
+            </Group>
+          ) : null}
+          {anomalies.length ? (
+            <Group title="Prazne i negativne količine" count={anomalies.length} tone="warning">
+              <p className="lg-group-note">Čuvaju se kao nalaz; kupcima se nikad ne prikazuju. Prazna količina nije nula.</p>
+              <LineTable rows={anomalies} />
+            </Group>
+          ) : null}
+        </div>
       ) : null}
 
-      {h.status === "pregled" ? (
-        <section className="portal-panel">
-          <SectionHeader title="Odluka" description="Potvrda menja važeći snimak zaliha u jednom koraku. Odbacivanje ga ne menja." />
-          {older ? <p className="portal-login-error" role="alert">Važeći snimak je od {day(data.current?.stockDate ?? null)}; ovaj izveštaj je stariji i ne može ga zameniti.</p> : null}
-          {!errors.length && !older && h.stockDate ? <StockConfirmForm importId={h.id} lines={h.lineCount} stockDate={h.stockDate} /> : null}
-          <StockDiscardForm importId={h.id} />
-        </section>
-      ) : null}
+      <details className="lg-group">
+        <summary><span>Tehnički detalji</span></summary>
+        <dl className="lg-facts portal-panel-body">
+          <div><dt>Fajl</dt><dd>{h.fileName} · {h.fileFormat.toUpperCase()}{s.sheet ? ` · list „${s.sheet}“` : ""}</dd></div>
+          <div><dt>Otpremio</dt><dd>{data.uploaderName ?? "—"} · {dmyTime(h.uploadedAt)}</dd></div>
+          <div><dt>Datum štampe</dt><dd>{day(h.printedOn)}</dd></div>
+          <div><dt>Vreme izvoza</dt><dd>izveštaj ga ne navodi</dd></div>
+          <div><dt>Filter stanja</dt><dd>{s.stockFilter ?? "—"}</dd></div>
+          <div><dt>Prepoznato</dt><dd>{quantity(s.lines)} stavki · nula {s.zeros} · decimalnih {s.decimals} · praznih {s.emptyQuantity} · negativnih {s.negative}</dd></div>
+          <div><dt>Povezano</dt><dd>{quantity(linked.length)} sa artiklom ({linked.filter((l) => !l.exactCode).length} preko šifre bez vodećih nula)</dd></div>
+          <div><dt>Jedinica mere</dt><dd>{s.jmIzIzvestaja ? "iz izveštaja — samo provera potvrđenog pakovanja" : "izveštaj je nema"}; ne zaključuje se iz naziva</dd></div>
+          <div><dt>Ne čuva se</dt><dd>originalni fajl, cene, vrednosti i marže</dd></div>
+          <div><dt>Verzija provere</dt><dd>{h.parserVersion}</dd></div>
+        </dl>
+      </details>
     </>
   );
 }

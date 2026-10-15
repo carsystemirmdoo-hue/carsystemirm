@@ -91,3 +91,59 @@ with open(os.path.join(OUT, "stanje-zaliha-sinteticki.csv"), "w", encoding="cp12
                 out.append(str(v))
         w.writerow(out)
 print("ok", ws.max_row, "redova")
+
+# --- Raspored B: „STANJE ZALIHA ARTIKLA" (Šifra · GR. · Naziv robe · JM · Količina · Cena · Vrednost),
+# zaglavlje izveštaja ponovljeno na svakoj strani, filteri u jednoj ćeliji sa „·", jedan zbir.
+B_ROWS = [
+    (900001, "SINT BAZA SREBRNA 1 L", "LIT", 12, 1300),
+    (900002, "SINT LAK HS 5 L", "LIT", 7.5, 5200),
+    (900003, "SINT HERTER 2,5 L", "LIT", 2.5, 1950),
+    (900004, "SINT KIT 1 KG", "KOM", 0, 1000),
+    (900005, "SINT BRUSNI DISK P120", "KOM", 230, 30),
+    (900006, "SINT TRAKA 19 MM", "KOM", 48, 210),
+    (12, "SINT STARA ŠIFRA BEZ NULA", "KOM", 3, 130),
+    (900008, "SINT ČISTAČ ĐAK ŽUTI", "LIT", 1.25, 780),
+    (900009, "SINT RUKAVICE NITRIL", "KOM", 4, 1200),
+    (900010, "SINT PIŠTOLJ", "KOM", 1, 26000),
+]
+wb2 = openpyxl.Workbook()
+w2 = wb2.active
+w2.title = "Page1"
+
+
+def b_report_header(r):
+    w2[f"A{r}"], w2[f"R{r}"] = "CAR SYSTEM SINT", "Datum štampe: 05.09.2026"
+    w2[f"A{r + 1}"] = "SINT ULICA 1 · 00000 SINT MESTO"
+    w2[f"A{r + 2}"] = "STANJE ZALIHA ARTIKLA"
+
+
+def b_table_header(r):
+    for col, txt in (("A", "Šifra"), ("C", "GR."), ("F", "Naziv robe"), ("J", "JM"), ("L", "Količina"), ("P", "Cena"), ("V", "Vrednost")):
+        w2[f"{col}{r}"] = txt
+
+
+b_report_header(1)
+w2["A7"], w2["E7"], w2["H7"], w2["M7"] = "Na dan:", "05.09.2026", "Sortiranje:", "Po šifri, rastući"
+w2["E8"] = "Vrsta cene: Veleprodajna · Stanje artikala: Svi artikli, uključujući stanje 0 · Vrsta artikla: Trgovačka roba, Proizvodi · Definisana jedinica mere"
+w2["A9"], w2["E9"] = "Filteri:", "Poslovni objekti: 021 VELEPRODAJA"
+b_table_header(11)
+r = 12
+b_pages = (len(B_ROWS) + PER_PAGE - 1) // PER_PAGE
+b_sum = 0
+for i, (code, name, jm, qty, price) in enumerate(B_ROWS):
+    if i and i % PER_PAGE == 0:
+        w2[f"A{r}"], w2[f"N{r}"] = f"Strana {i // PER_PAGE} od {b_pages}", "BizniSoft Poslovni Programi - www.biznisoft.com"
+        w2.row_breaks.append(Break(id=r))
+        r += 2
+        b_report_header(r)
+        r += 7
+        b_table_header(r)
+        r += 1
+    w2[f"A{r}"], w2[f"C{r}"], w2[f"F{r}"], w2[f"J{r}"], w2[f"L{r}"] = code, "00", name, jm, qty
+    w2[f"P{r}"], w2[f"V{r}"] = price, round(qty * price, 2)
+    b_sum += qty * price
+    r += 2  # prazan red između stavki, kao u izvozu
+w2[f"A{r}"], w2[f"T{r}"] = "Ukupno stanje zaliha na dan:", f"{b_sum:.2f}"
+w2[f"A{r + 2}"], w2[f"N{r + 2}"] = f"Strana {b_pages} od {b_pages}", "BizniSoft Poslovni Programi - www.biznisoft.com"
+wb2.save(os.path.join(OUT, "stanje-zaliha-artikla-sinteticki.xlsx"))
+print("ok B", w2.max_row, "redova")

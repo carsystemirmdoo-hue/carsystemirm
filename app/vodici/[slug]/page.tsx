@@ -5,6 +5,7 @@ import { Footer } from "@/components/layout/Footer";
 import { SeoBreadcrumbs } from "@/components/seo/SeoBreadcrumbs";
 import { SavetiBody, SavetiLead } from "@/components/saveti/SavetiBody";
 import { SavetiCard } from "@/components/saveti/SavetiCards";
+import { SavetiNacrtTraka } from "@/components/saveti/SavetiNacrtTraka";
 import styles from "@/components/saveti/Saveti.module.css";
 import { getAllCarsystemBrands, getCarsystemProductBySlug } from "@/lib/carsystem-data";
 import { getProductFamilyBySlug } from "@/lib/product-families";
@@ -14,6 +15,7 @@ import {
   getRelatedSaveti,
   publicSlugSet,
   savetiNow,
+  savetiNacrtPregled,
   toSazetak,
   type SavetiClanak,
 } from "@/lib/saveti";
@@ -52,6 +54,7 @@ export async function generateMetadata({ params }: RouteProps): Promise<Metadata
     path: `/vodici/${clanak.slug}`,
     type: "article",
     imageAlt: clanak.naslov,
+    index: !savetiNacrtPregled(),
   });
   return {
     ...base,
@@ -151,6 +154,7 @@ export default async function SavetRoute({ params }: RouteProps) {
       <script type="application/ld+json" dangerouslySetInnerHTML={jsonLd(breadcrumbJsonLd(breadcrumbs))} />
       <script type="application/ld+json" dangerouslySetInnerHTML={jsonLd(articleNode)} />
       <main className={styles.pageWithCrumbs}>
+        <SavetiNacrtTraka />
         <SeoBreadcrumbs items={breadcrumbs} />
         <div className={styles.container}>
           <div className={styles.articleLayout}>

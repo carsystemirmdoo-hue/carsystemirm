@@ -96,7 +96,7 @@ export function CustomerAccountMenu({ variant = "desktop", onNavigate }: { varia
       </Link>
     ) : (
       // Kompaktno, kao pretraga: puna reč bi sabila glavnu navigaciju.
-      <Link href={href} className={styles.login} onClick={toLogin} aria-label="Prijava za kupce" title="Prijava za kupce">
+      <Link href={href} className={styles.login} onClick={toLogin} aria-label="Prijava za kupce" title="Prijava za kupce" data-account="signed-out">
         <UserIcon />
       </Link>
     );

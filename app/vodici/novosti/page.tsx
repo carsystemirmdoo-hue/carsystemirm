@@ -3,8 +3,9 @@ import Link from "next/link";
 import { Footer } from "@/components/layout/Footer";
 import { SeoBreadcrumbs } from "@/components/seo/SeoBreadcrumbs";
 import { SavetiNewsItem } from "@/components/saveti/SavetiCards";
+import { SavetiNacrtTraka } from "@/components/saveti/SavetiNacrtTraka";
 import styles from "@/components/saveti/Saveti.module.css";
-import { getPublicNovosti, getPublicSaveti, toSazetak } from "@/lib/saveti";
+import { getPublicNovosti, getPublicSaveti, savetiNacrtPregled, toSazetak } from "@/lib/saveti";
 import { breadcrumbJsonLd, collectionPageJsonLd, jsonLd, pageMetadata } from "@/lib/seo";
 
 /** Novosti proizvođača — ista kapija i isti ISR kao ostatak rubrike. */
@@ -20,7 +21,7 @@ export async function generateMetadata(): Promise<Metadata> {
     title: TITLE,
     description: DESCRIPTION,
     path: "/vodici/novosti",
-    index: news.length > 0,
+    index: news.length > 0 && !savetiNacrtPregled(),
     imageAlt: "Novosti proizvođača — Carsystem i R-M",
   });
 }
@@ -52,6 +53,7 @@ export default function NovostiPage() {
         </>
       ) : null}
       <main className={styles.pageWithCrumbs}>
+        <SavetiNacrtTraka />
         <SeoBreadcrumbs items={breadcrumbs} />
         <div className={styles.container}>
           <header className={styles.hero}>

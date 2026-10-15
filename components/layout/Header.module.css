@@ -1722,6 +1722,13 @@
   }
 }
 
+/* Uz stavku „Saveti i vodiči” i ikonu prijave meni do ~1470 px ne ostavlja mesta natpisu. */
+@media (min-width: 70rem) and (max-width: 92rem) {
+  .shell:has([data-account="signed-out"]) .brandLabel {
+    display: none;
+  }
+}
+
 @media (max-width: 80rem) and (min-width: 73.01rem) {
   .navLink,
   .navTrigger {

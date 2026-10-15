@@ -142,7 +142,36 @@ function toPublic(zapis: SavetiZapis, publishedAt: Date): SavetiClanak {
   return { ...zapis, datumObjave, datumIzmene: effectiveModifiedAt(zapis, datumObjave) };
 }
 
+/**
+ * Lokalni pregled nacrta za vlasnika (`SAVETI_NACRT_PREGLED=1`, npr. dev server).
+ * Prikazuje tehnički i jezički proverene, a još NEODOBRENE tekstove sa oznakom
+ * „Nacrt“ i bez indeksiranja. Kao i `SAVETI_SAT`, na Vercel deploymentu se
+ * zanemaruje, pa promenljiva okruženja ne može da objavi neodobren tekst.
+ */
+export function savetiNacrtPregled(): boolean {
+  return process.env.SAVETI_NACRT_PREGLED === "1" && !process.env.VERCEL;
+}
+
+function isNacrtZaPregled(zapis: SavetiZapis): boolean {
+  return (
+    zapis.imaTekst &&
+    !zapis.povucen &&
+    zapis.status.tehnickaProvera === "provereno" &&
+    zapis.status.jezickaProvera === "provereno"
+  );
+}
+
+function nacrtDatum(zapis: SavetiZapis): Date {
+  return new Date(`${zapis.poslednjaProvera ?? "2026-10-08"}T09:00:00+02:00`);
+}
+
 export function getPublicSaveti(now = savetiNow()): SavetiClanak[] {
+  if (savetiNacrtPregled()) {
+    return zapisi
+      .filter(isNacrtZaPregled)
+      .map((zapis) => toPublic(zapis, nacrtDatum(zapis)))
+      .sort((a, b) => a.id.localeCompare(b.id));
+  }
   return zapisi
     .map((zapis) => ({ zapis, state: articlePublicationState(zapis, schedule, now, slotIndex) }))
     .filter(({ state }) => state.stanje === JAVNO_STANJE)
@@ -153,6 +182,7 @@ export function getPublicSaveti(now = savetiNow()): SavetiClanak[] {
 export function getPublicSavetBySlug(slug: string, now = savetiNow()): SavetiClanak | undefined {
   const zapis = zapisi.find((item) => item.slug === slug);
   if (!zapis) return undefined;
+  if (savetiNacrtPregled()) return isNacrtZaPregled(zapis) ? toPublic(zapis, nacrtDatum(zapis)) : undefined;
   const state = articlePublicationState(zapis, schedule, now, slotIndex);
   return state.stanje === JAVNO_STANJE ? toPublic(zapis, state.objavljeno as Date) : undefined;
 }

@@ -145,6 +145,8 @@ export function Header() {
     pathname === "/prodavnice" || pathname.startsWith("/prodavnice/");
   const katalozActive =
     pathname === "/katalozi" || pathname.startsWith("/katalozi/");
+  const savetiActive =
+    pathname === "/vodici" || pathname.startsWith("/vodici/");
   const supportActive = pathname === "/kontakt";
 
   const revealHeader = useCallback((animate: boolean) => {
@@ -987,6 +989,18 @@ export function Header() {
               </Link>
             </li>
 
+            <li className={styles.navItem}>
+              <Link
+                href="/vodici"
+                className={styles.navLink}
+                aria-current={savetiActive ? "page" : undefined}
+                data-active={savetiActive || undefined}
+                onClick={() => closeDesktopMenu(false)}
+              >
+                Saveti i vodiči
+              </Link>
+            </li>
+
             <HeaderDisclosure
               menuKey="podrska"
               label="Podrška"
@@ -1193,6 +1207,13 @@ export function Header() {
                   href="/katalozi"
                   label="Katalozi"
                   active={katalozActive}
+                  primary
+                  onNavigate={closeMobileForNavigation}
+                />
+                <MobileMenuLink
+                  href="/vodici"
+                  label="Saveti i vodiči"
+                  active={savetiActive}
                   primary
                   onNavigate={closeMobileForNavigation}
                 />

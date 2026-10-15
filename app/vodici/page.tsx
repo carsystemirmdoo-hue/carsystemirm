@@ -3,8 +3,9 @@ import Link from "next/link";
 import { Footer } from "@/components/layout/Footer";
 import { SavetiNewsItem } from "@/components/saveti/SavetiCards";
 import { SavetiExplorer } from "@/components/saveti/SavetiExplorer";
+import { SavetiNacrtTraka } from "@/components/saveti/SavetiNacrtTraka";
 import styles from "@/components/saveti/Saveti.module.css";
-import { getPublicKategorije, getPublicNovosti, getPublicSaveti, toSazetak } from "@/lib/saveti";
+import { getPublicKategorije, getPublicNovosti, getPublicSaveti, savetiNacrtPregled, toSazetak } from "@/lib/saveti";
 import { breadcrumbJsonLd, collectionPageJsonLd, jsonLd, pageMetadata } from "@/lib/seo";
 
 /**
@@ -29,7 +30,7 @@ export async function generateMetadata(): Promise<Metadata> {
     title: TITLE,
     description: DESCRIPTION,
     path: "/vodici",
-    index: published.length > 0,
+    index: published.length > 0 && !savetiNacrtPregled(),
     imageAlt: "Carsystem i R-M saveti i vodiči",
   });
 }
@@ -63,6 +64,7 @@ export default function SavetiIndexPage() {
         </>
       ) : null}
       <main className={styles.page}>
+        <SavetiNacrtTraka />
         <div className={styles.container}>
           <header className={styles.hero}>
             <p className={styles.eyebrow}>Stručna biblioteka</p>

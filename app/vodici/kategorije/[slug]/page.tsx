@@ -3,8 +3,9 @@ import { notFound } from "next/navigation";
 import { Footer } from "@/components/layout/Footer";
 import { SeoBreadcrumbs } from "@/components/seo/SeoBreadcrumbs";
 import { SavetiCard } from "@/components/saveti/SavetiCards";
+import { SavetiNacrtTraka } from "@/components/saveti/SavetiNacrtTraka";
 import styles from "@/components/saveti/Saveti.module.css";
-import { getPublicSaveti, MIN_CLANAKA_ZA_INDEKS_KATEGORIJE, toSazetak } from "@/lib/saveti";
+import { getPublicSaveti, MIN_CLANAKA_ZA_INDEKS_KATEGORIJE, savetiNacrtPregled, toSazetak } from "@/lib/saveti";
 import { getSavetiKategorija, SAVETI_KATEGORIJE } from "@/lib/saveti/kategorije.mjs";
 import { breadcrumbJsonLd, collectionPageJsonLd, jsonLd, pageMetadata } from "@/lib/seo";
 
@@ -37,7 +38,7 @@ export async function generateMetadata({ params }: RouteProps): Promise<Metadata
     title: `${kategorija.naziv} — saveti i vodiči`,
     description: kategorija.opis,
     path: `/vodici/kategorije/${slug}`,
-    index: articles.length >= MIN_CLANAKA_ZA_INDEKS_KATEGORIJE,
+    index: articles.length >= MIN_CLANAKA_ZA_INDEKS_KATEGORIJE && !savetiNacrtPregled(),
     imageAlt: kategorija.naziv,
   });
 }
@@ -76,6 +77,7 @@ export default async function KategorijaPage({ params }: RouteProps) {
         )}
       />
       <main className={styles.pageWithCrumbs}>
+        <SavetiNacrtTraka />
         <SeoBreadcrumbs items={breadcrumbs} />
         <div className={styles.container}>
           <header className={styles.hero}>

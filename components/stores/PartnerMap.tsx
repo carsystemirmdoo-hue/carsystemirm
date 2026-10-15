@@ -266,6 +266,8 @@ export function PartnerMap({
           zoom: 6,
           attributionControl: { compact: true },
           cooperativeGestures,
+          // Jedinstveno ime regiona platna (podrazumevano „Map”, isto kao mapa centrale).
+          locale: { "Map.Title": "Mapa partnerske mreže" },
         });
         mapRef.current = map;
 

@@ -60,6 +60,8 @@ export function CompanyLocationMap({
           zoom,
           interactive: false,
           attributionControl: { compact: true },
+          // MapLibre daje platnu region „Map”; dve mape na početnoj moraju imati različita imena.
+          locale: { "Map.Title": `Mapa: ${companyLocation.name}, ${companyLocation.city}` },
         });
         mapRef.current = map;
 

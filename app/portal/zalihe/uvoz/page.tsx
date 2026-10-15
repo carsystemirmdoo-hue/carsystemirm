@@ -65,7 +65,10 @@ export default async function StockImportPage() {
       </div>
 
       <section className="portal-panel">
-        <SectionHeader title="Istorija uvoza" description="Svako otpremanje ostaje zabeleženo: ko, kada i sa kojim ishodom." />
+        <SectionHeader
+          title="Istorija uvoza"
+          description="Svako otpremanje ostaje zabeleženo: ko, kada i sa kojim ishodom. Detaljne stavke čuvaju se samo za poslednja dva potvrđena lagera; nepotvrđene i odbačene posle 7 dana."
+        />
         {imports.length === 0 ? (
           <p className="lg-empty portal-panel-body">Još nijedan lager nije otpremljen.</p>
         ) : (
@@ -84,6 +87,7 @@ export default async function StockImportPage() {
                       <td data-label="Status">
                         <Badge tone={st.tone}>{st.label}</Badge>
                         {current?.id === i.id ? <> <Badge tone="success">važeći</Badge></> : null}
+                        {i.linesPurgedAt ? <small className="lg-sub">stavke uklonjene po pravilu čuvanja</small> : null}
                       </td>
                       <td className="portal-table-number" data-label="Stavki">{quantity(i.lineCount)}</td>
                       <td data-label="Otpremio">{i.uploaderName ?? "—"}<small className="lg-sub">{dmyTime(i.uploadedAt)}</small></td>

@@ -103,6 +103,27 @@ function summarize(lines: { sourceCode: string; codeKey: string | null; quantity
 }
 
 /* =========================================================================
+ * Pravilo čuvanja (0051): detaljne stavke samo za dva poslednja potvrđena snimka
+ * ====================================================================== */
+
+type TxLike = Pick<ReturnType<typeof getDb>, "execute">;
+
+/** Isti ključ drži i `stock_import_retention()` — potvrde i čišćenja idu jedno za drugim. */
+async function lockRetention(tx: TxLike) {
+  await tx.execute(sql`SELECT pg_advisory_xact_lock(hashtext('stock_imports_retention'))`);
+}
+
+/**
+ * Ograničen postupak u bazi (SECURITY DEFINER): briše stavke starijih potvrđenih snimaka i
+ * nepotvrđenih/odbačenih otpremanja starijih od 7 dana. Aplikacija nema opšte pravo brisanja.
+ */
+async function applyRetention(tx: TxLike) {
+  const rows = await tx.execute<{ purged_imports: number; purged_lines: number }>(sql`SELECT purged_imports, purged_lines FROM stock_import_retention()`);
+  const r = [...rows][0];
+  return { purgedImports: Number(r?.purged_imports ?? 0), purgedLines: Number(r?.purged_lines ?? 0) };
+}
+
+/* =========================================================================
  * Otpremanje
  * ====================================================================== */
 
@@ -206,6 +227,8 @@ export async function uploadStockReport(actor: Actor, input: { fileName: string;
       },
       tx,
     );
+    // Rok od 7 dana za nepotvrđena/odbačena; dva poslednja potvrđena snimka se ne diraju.
+    await applyRetention(tx);
     return { importId: created.id, duplicate: false, status, failedWithOlderParser: false };
   });
 }
@@ -280,6 +303,8 @@ export async function listStockImports(limit = 50) {
       uploaderName: users.name,
       warehouseCode: stockImports.warehouseCode,
       warehouseName: stockImports.warehouseName,
+      linesPurgedAt: stockImports.linesPurgedAt,
+      linesPurgedReason: stockImports.linesPurgedReason,
     })
     .from(stockImports)
     .leftJoin(users, eq(users.id, stockImports.uploadedBy))
@@ -306,12 +331,15 @@ export async function confirmStockImport(actor: Actor, input: { importId: string
   assertCanImport(actor);
   const note = input.note?.trim().slice(0, 500) || null;
   return getDb().transaction(async (tx) => {
-    const locked = await tx.execute<{ id: string; status: string; stock_date: string | null; problems: { errors?: Problem[] }; file_name: string; line_count: number }>(sql`
-      SELECT id, status::text AS status, stock_date::text AS stock_date, problems, file_name, line_count
+    // Paralelne potvrde se izvršavaju jedna za drugom (isto zaključavanje kao čišćenje).
+    await lockRetention(tx);
+    const locked = await tx.execute<{ id: string; status: string; stock_date: string | null; problems: { errors?: Problem[] }; file_name: string; line_count: number; purged: boolean }>(sql`
+      SELECT id, status::text AS status, stock_date::text AS stock_date, problems, file_name, line_count, lines_purged_at IS NOT NULL AS purged
         FROM stock_imports WHERE id = ${input.importId}::uuid FOR UPDATE`);
     const imp = [...locked][0];
     if (!imp) throw new StockImportError("nema", "Otpremanje ne postoji.");
     if (imp.status !== "pregled") throw new StockImportError("odluceno", "O ovom otpremanju je već odlučeno.");
+    if (imp.purged) throw new StockImportError("uklonjeno", "Stavke ovog otpremanja su uklonjene po pravilu čuvanja (starije od 7 dana). Otpremite nov izvoz.");
     if ((imp.problems?.errors ?? []).length) throw new StockImportError("greske", "Fajl ima greške koje blokiraju uvoz.");
     // Snimak sa starijim datumom stanja ne sme da zameni noviji važeći snimak.
     const cur = await tx.execute<{ stock_date: string }>(sql`
@@ -327,6 +355,8 @@ export async function confirmStockImport(actor: Actor, input: { importId: string
       .where(and(eq(stockImports.id, input.importId), eq(stockImports.status, "pregled")))
       .returning({ id: stockImports.id });
     if (!updated.length) throw new StockImportError("odluceno", "O ovom otpremanju je već odlučeno.");
+    // Atomski sa potvrdom: ostaju stavke ovog i prethodnog potvrđenog snimka.
+    const retention = await applyRetention(tx);
     await recordAudit(
       {
         actor: { id: actor.id, name: actor.name, role: actor.role },
@@ -334,12 +364,12 @@ export async function confirmStockImport(actor: Actor, input: { importId: string
         entityType: ENTITY,
         entityId: input.importId,
         entityLabel: `${imp.file_name.slice(0, 120)} — stanje ${imp.stock_date}`,
-        after: { stockDate: imp.stock_date, lines: imp.line_count, previousStockDate: currentDate },
+        after: { stockDate: imp.stock_date, lines: imp.line_count, previousStockDate: currentDate, retention },
         reason: note,
       },
       tx,
     );
-    return { stockDate: imp.stock_date };
+    return { stockDate: imp.stock_date, retention };
   });
 }
 
@@ -365,6 +395,7 @@ export async function discardStockImport(actor: Actor, input: { importId: string
       },
       tx,
     );
+    await applyRetention(tx);
   });
 }
 

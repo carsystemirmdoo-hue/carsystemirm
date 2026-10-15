@@ -358,6 +358,13 @@
       "when": 1792764000000,
       "tag": "0050_stock_imports",
       "breakpoints": true
+    },
+    {
+      "idx": 51,
+      "version": "7",
+      "when": 1792850400000,
+      "tag": "0051_stock_retention",
+      "breakpoints": true
     }
   ]
 }

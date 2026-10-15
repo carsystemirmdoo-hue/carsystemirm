@@ -33,6 +33,9 @@ export const stockImports = pgTable(
     decidedBy: uuid("decided_by").references(() => users.id, { onDelete: "restrict" }),
     decidedAt: timestamp("decided_at", { withTimezone: true }),
     decisionNote: text("decision_note"),
+    /** Pravilo čuvanja (0051): stavke uklonjene; zapis otpremanja ostaje. */
+    linesPurgedAt: timestamp("lines_purged_at", { withTimezone: true }),
+    linesPurgedReason: text("lines_purged_reason"),
   },
   (t) => [
     unique("stock_imports_sha_key").on(t.fileSha256),

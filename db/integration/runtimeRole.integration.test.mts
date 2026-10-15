@@ -148,3 +148,25 @@ test("pod ulogom: čitanje radi, brisanje traga revizije je odbijeno", async (t)
     await tx.unsafe("SELECT count(*) FROM audit_log");
   });
 });
+
+test("pravilo čuvanja lagera (0051): samo ograničen postupak, bez opšteg brisanja", async (t) => {
+  if (guard(t)) return;
+  const [p] = await db.sql<{ exec: boolean; pub: boolean; del: boolean }[]>`
+    SELECT has_function_privilege(${role}, 'stock_import_retention()', 'EXECUTE') AS exec,
+           has_function_privilege('public', 'stock_import_retention()', 'EXECUTE') AS pub,
+           has_table_privilege(${role}, 'public.stock_import_lines', 'DELETE') AS del`;
+  assert.deepEqual(p, { exec: true, pub: false, del: false });
+  await db.sql.begin(async (tx) => {
+    await tx.unsafe(`SET LOCAL ROLE "${role}"`);
+    // Postupak radi pod aplikacionom ulogom (prazna tabela → ništa za brisanje).
+    const [r] = await tx.unsafe("SELECT purged_imports, purged_lines FROM stock_import_retention()");
+    assert.deepEqual([Number(r.purged_imports), Number(r.purged_lines)], [0, 0]);
+    await assert.rejects(
+      tx.savepoint((sp) => sp.unsafe("DELETE FROM stock_import_lines WHERE false")),
+      (error: { code?: string }) => {
+        assert.equal(error.code, "42501");
+        return true;
+      },
+    );
+  });
+});

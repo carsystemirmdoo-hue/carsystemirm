@@ -93,7 +93,7 @@ export default async function StockImportReviewPage({ params, searchParams }: { 
   const older = data.current && h.stockDate && data.current.stockDate && h.stockDate < data.current.stockDate;
   const isCurrent = data.current?.id === h.id;
   const pending = h.status === "pregled";
-  const canConfirm = pending && !errors.length && !older && Boolean(h.stockDate);
+  const canConfirm = pending && !errors.length && !older && Boolean(h.stockDate) && !h.linesPurgedAt;
 
   const outcome =
     h.status === "potvrdjeno"
@@ -170,6 +170,18 @@ export default async function StockImportReviewPage({ params, searchParams }: { 
         </section>
       ) : null}
 
+      {h.linesPurgedAt ? (
+        <section className="lg-outcome" data-tone="neutral">
+          <strong>Detaljne stavke su uklonjene po pravilu čuvanja</strong>
+          <span>
+            {h.linesPurgedReason === "starija_od_dva_potvrdjena"
+              ? "Čuvaju se samo poslednja dva potvrđena lagera."
+              : "Nepotvrđena i odbačena otpremanja čuvaju stavke 7 dana."}{" "}
+            Sačuvani su datum stanja, ko je uvezao i potvrdio, ishod, broj stavki i otisak fajla ({dmyTime(h.linesPurgedAt)}).
+          </span>
+        </section>
+      ) : null}
+
       {data.lines.length ? (
         <div className="lg-groups">
           <Group title="Sa potvrđenim pakovanjem" count={withPacks.length}>
@@ -212,6 +224,7 @@ export default async function StockImportReviewPage({ params, searchParams }: { 
           <div><dt>Jedinica mere</dt><dd>{s.jmIzIzvestaja ? "iz izveštaja — samo provera potvrđenog pakovanja" : "izveštaj je nema"}; ne zaključuje se iz naziva</dd></div>
           <div><dt>Ne čuva se</dt><dd>originalni fajl, cene, vrednosti i marže</dd></div>
           <div><dt>Verzija provere</dt><dd>{h.parserVersion}</dd></div>
+          <div><dt>Otisak fajla (SHA-256)</dt><dd className="lg-mono">{h.fileSha256}</dd></div>
         </dl>
       </details>
     </>

@@ -83,6 +83,13 @@ GRANT SELECT, INSERT ON article_offer_decisions TO :runtime_role;
 REVOKE UPDATE, DELETE, TRUNCATE ON stock_import_lines FROM :runtime_role;
 GRANT SELECT, INSERT ON stock_import_lines TO :runtime_role;
 REVOKE DELETE, TRUNCATE ON stock_imports FROM :runtime_role;
+-- 0051: čišćenje starijih stavki lagera SAMO kroz ograničen postupak (bez opšteg DELETE).
+DO $$
+BEGIN
+  IF to_regprocedure('stock_import_retention()') IS NOT NULL THEN
+    EXECUTE format('GRANT EXECUTE ON FUNCTION stock_import_retention() TO %I', current_setting('my.runtime_role'));
+  END IF;
+END $$;
 
 --    Poslovni status kupca (0042): odluke se samo dodaju; važi poslednja.
 REVOKE UPDATE, DELETE, TRUNCATE ON customer_commercial_status_decisions FROM :runtime_role;

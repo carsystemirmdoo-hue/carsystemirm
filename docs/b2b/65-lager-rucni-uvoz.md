@@ -111,14 +111,28 @@ sažetak 568 B, problemi 353 B), bez ijedne stavke i bez fajla.
 dva uvoza dnevno ≈ 300 MB/god. Neon Free plan ima 1 GB po projektu (podignuto sa 0,5 GB; proveriti u
 Neon konzoli). Veličina baze se ne meša sa Vercel Deployment Storage-om (izlaz builda, drugi limit).
 
-**Pravila čuvanja danas: nema.** Stavke i otpremanja se samo dodaju (okidači u 0050, runtime nalog nema
-DELETE); ništa se ne briše automatski.
+**Pravilo čuvanja (usvojeno 15. 10. 2026, migracija 0051):**
+- detaljne stavke se čuvaju **samo za poslednja dva uspešno potvrđena snimka** — ne po kalendaru,
+  nego po potvrdama: tek kada se potvrdi novi snimak, stavke trećeg najnovijeg se brišu;
+- nov upload, neuspela provera, nepotvrđen ili odbačen fajl ne mogu obrisati nijedan od ta dva
+  snimka (pravilo se računa samo nad potvrđenima; neuspešni pokušaji ne zauzimaju mesto);
+- provereni, ali nepotvrđeni i odbačeni uvozi gube stavke **7 dana** posle otpremanja; takav uvoz
+  se posle toga ne može potvrditi (otpremiti nov izvoz);
+- za starije uvoze ostaje mala evidencija u `stock_imports`: datum stanja, ko je uvezao i potvrdio,
+  ishod, broj stavki, otisak fajla (SHA-256), sažetak bez liste artikala, uz oznaku
+  `lines_purged_at` / `lines_purged_reason`; `audit_log` ostaje ceo. Istorija označava „stavke
+  uklonjene po pravilu čuvanja“;
+- mesečne kopije lagera se u aplikaciji ne čuvaju.
 
-**Predlog roka čuvanja** (nije primenjen; brisanje ide kao poseban postupak vlasnikom baze):
-- stavke otpremanja *odbačeno*, *neuspešno* i nepotvrđenog *pregled* starijih od 30 dana — brisati;
-- stavke potvrđenih snimaka — čuvati 90 dana u celini, a posle toga samo poslednji snimak u mesecu;
-- zapisi `stock_imports` (bez stavki) i `audit_log` — čuvati trajno (evidencija ko/kada/ishod).
-Uz jedan uvoz dnevno to drži lager na ≈ 40 MB + ≈ 7 MB godišnje.
+**Kako se briše:** ograničen postupak `stock_import_retention()` (SECURITY DEFINER, bez parametara,
+fiksan `search_path`). Aplikacioni nalog ima samo EXECUTE na njemu — i dalje nema DELETE nad
+stavkama ni pravo da upiše oznaku čišćenja; okidači to dozvoljavaju samo vlasniku tabele. Potvrda
+novog snimka i čišćenje su u jednoj transakciji pod istim savetodavnim zaključavanjem, pa se
+paralelne potvrde izvršavaju jedna za drugom. Postupak se poziva pri potvrdi, otpremanju i
+odbacivanju. Stavke nemaju drugih veza (nijedna tabela ih ne referencira); važeći snimak za
+prikaz je uvek među dva sačuvana.
+
+Uz jedan uvoz dnevno lager tako zauzima ≈ 1,2 MB stavki + ≈ 1–2 KB po zapisu otpremanja.
 
 ## 4. Prikaz kupcima — isključen
 
@@ -153,7 +167,7 @@ veze, JM ili pakovanja — nema broja. Isključen prikaz ne čita tabele lagera.
    (15. 10. odbijen zbog rasporeda B — ispravljeno parserom `/2`; potreban nov izvoz, §1a).
 3. ⏳ Odluka vlasnika o pragu zastarelosti i prikazu; tek tada `STOCK_CUSTOMER_DISPLAY=1` i podešavanje
    (`enabled`, `maxAgeDays`).
-4. ⏳ Odluka o roku čuvanja (§3a).
+4. ✅ Pravilo čuvanja (§3a, 0051).
 
 ## 7. Provere
 

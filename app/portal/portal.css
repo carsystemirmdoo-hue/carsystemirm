@@ -10353,6 +10353,10 @@ html:has(.portal-customer-area) { scroll-padding-top: 104px; }
   font-size: 14px;
   overflow-wrap: anywhere;
 }
+.lg-facts dd.lg-mono {
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-size: 12px;
+}
 .lg-empty {
   margin: 0;
   color: var(--p-muted);

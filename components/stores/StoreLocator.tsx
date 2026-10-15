@@ -6,6 +6,8 @@ import { toTelHref } from "@/lib/company-contact";
 import { findNearestPartnerStore } from "@/lib/nearest-store";
 import {
   getLocationTypeOptions,
+  getPartnerCityKey,
+  getPartnerCityLabel,
   getPartnerLocationStats,
   getPartnerLocationTypeLabel,
   hasPartnerCoordinates,
@@ -83,6 +85,26 @@ export function StoreLocator({ stores }: { stores: PartnerStore[] }) {
   const [hoveredId, setHoveredId] = useState("");
   const [mapFailed, setMapFailed] = useState(false);
   const [locatorStatus, setLocatorStatus] = useState("");
+  // Tačan filter po gradu iz `?grad=<ključ>` (veza „Sve lokacije (N)” sa početne): isti ključ
+  // grada kao na početnoj, pa broj na vezi odgovara broju lokacija ovde.
+  const [cityFilter, setCityFilter] = useState("");
+
+  useEffect(() => {
+    const key = new URLSearchParams(window.location.search).get("grad");
+    if (key && stores.some((store) => getPartnerCityKey(store) === key)) setCityFilter(key);
+  }, [stores]);
+
+  const cityFilterLabel = useMemo(() => {
+    const store = cityFilter ? stores.find((item) => getPartnerCityKey(item) === cityFilter) : undefined;
+    return store ? getPartnerCityLabel(store) : "";
+  }, [cityFilter, stores]);
+
+  function clearCityFilter() {
+    setCityFilter("");
+    const url = new URL(window.location.href);
+    url.searchParams.delete("grad");
+    window.history.replaceState(null, "", `${url.pathname}${url.search}${url.hash}`);
+  }
 
   const typeOptions = useMemo(() => getLocationTypeOptions(stores), [stores]);
   const stats = useMemo(() => getPartnerLocationStats(stores), [stores]);
@@ -92,6 +114,7 @@ export function StoreLocator({ stores }: { stores: PartnerStore[] }) {
     const normalizedQuery = normalize(query.trim());
 
     return stores.filter((store) => {
+      if (cityFilter && getPartnerCityKey(store) !== cityFilter) return false;
       if (typeFilter && !hasPartnerLocationType(store, typeFilter)) return false;
       if (!normalizedQuery) return true;
 
@@ -104,7 +127,7 @@ export function StoreLocator({ stores }: { stores: PartnerStore[] }) {
         normalize(field).includes(normalizedQuery),
       );
     });
-  }, [query, stores, typeFilter]);
+  }, [cityFilter, query, stores, typeFilter]);
 
   const visibleIds = useMemo(
     () => new Set(filteredStores.map((store) => store.id)),
@@ -174,6 +197,7 @@ export function StoreLocator({ stores }: { stores: PartnerStore[] }) {
 
         setQuery("");
         setTypeFilter("");
+        clearCityFilter();
         setSelectedId(nearest.store.id);
         scrollResultIntoView(nearest.store.id);
         setLocatorStatus(
@@ -260,6 +284,17 @@ export function StoreLocator({ stores }: { stores: PartnerStore[] }) {
               </button>
             ))}
           </div>
+        ) : null}
+
+        {cityFilter ? (
+          <button
+            aria-label={`Uklonite filter grada: ${cityFilterLabel}`}
+            className={`${styles.typeChip} ${styles.typeChipActive}`}
+            onClick={clearCityFilter}
+            type="button"
+          >
+            Grad: {cityFilterLabel} <span aria-hidden="true">×</span>
+          </button>
         ) : null}
 
         <button className={styles.locateButton} onClick={handleLocationRequest} type="button">

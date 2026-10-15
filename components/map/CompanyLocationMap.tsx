@@ -3,6 +3,7 @@
 import "maplibre-gl/dist/maplibre-gl.css";
 import { useEffect, useRef, useState } from "react";
 import { companyLocation } from "@/lib/company-contact";
+import { collapseAttributionOnSmallMap, MAP_ATTRIBUTION_LOCALE } from "@/components/map/map-attribution";
 import {
   loadCarsystemMapStyle,
   observeSiteTheme,
@@ -38,6 +39,7 @@ export function CompanyLocationMap({
 
     let disposed = false;
     let disconnectTheme: (() => void) | null = null;
+    let stopAttribution: (() => void) | null = null;
 
     async function init() {
       setStatus("loading");
@@ -61,9 +63,14 @@ export function CompanyLocationMap({
           interactive: false,
           attributionControl: { compact: true },
           // MapLibre daje platnu region „Map”; dve mape na početnoj moraju imati različita imena.
-          locale: { "Map.Title": `Mapa: ${companyLocation.name}, ${companyLocation.city}` },
+          locale: {
+            "Map.Title": `Mapa: ${companyLocation.name}, ${companyLocation.city}`,
+            ...MAP_ATTRIBUTION_LOCALE,
+          },
         });
         mapRef.current = map;
+        // Natpis izvora je vidljiv od kreiranja mape; pet sekundi se računa od tog trenutka.
+        stopAttribution = collapseAttributionOnSmallMap(map);
 
         const element = document.createElement("span");
         element.className = `${styles.mapMarker} ${styles.mapMarkerCompany}`;
@@ -104,6 +111,7 @@ export function CompanyLocationMap({
       disposed = true;
       observer.disconnect();
       disconnectTheme?.();
+      stopAttribution?.();
       mapRef.current?.remove();
       mapRef.current = null;
     };

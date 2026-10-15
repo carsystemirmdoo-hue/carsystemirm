@@ -18,6 +18,7 @@ import {
   observeSiteTheme,
   readSiteTheme,
 } from "@/components/map/carsystem-map-style";
+import { collapseAttributionOnSmallMap, MAP_ATTRIBUTION_LOCALE } from "@/components/map/map-attribution";
 
 // maplibre-gl (~800 KB) se učitava tek kada se mapa inicijalizuje, ne sa stranicom.
 let maplibreLib: typeof import("maplibre-gl") | null = null;
@@ -113,6 +114,7 @@ export function PartnerMap({
     let disposed = false;
     let map: MapLibreMap | null = null;
     let disconnectTheme: (() => void) | null = null;
+    let stopAttribution: (() => void) | null = null;
     const storesById = new globalThis.Map(storesWithCoords.map((store) => [store.id, store]));
 
     function markerElement(store: PartnerStore) {
@@ -267,9 +269,11 @@ export function PartnerMap({
           attributionControl: { compact: true },
           cooperativeGestures,
           // Jedinstveno ime regiona platna (podrazumevano „Map”, isto kao mapa centrale).
-          locale: { "Map.Title": "Mapa partnerske mreže" },
+          locale: { "Map.Title": "Mapa partnerske mreže", ...MAP_ATTRIBUTION_LOCALE },
         });
         mapRef.current = map;
+        // Natpis izvora je vidljiv od kreiranja mape; pet sekundi se računa od tog trenutka.
+        stopAttribution = collapseAttributionOnSmallMap(map);
 
         map.addControl(new (maplibre().NavigationControl)({ showCompass: false }), "top-right");
 
@@ -357,6 +361,7 @@ export function PartnerMap({
       disposed = true;
       observer?.disconnect();
       disconnectTheme?.();
+      stopAttribution?.();
       clusterMarkers.forEach((marker) => marker.remove());
       clusterMarkers.clear();
       dimmedMarkers.forEach((marker) => marker.remove());

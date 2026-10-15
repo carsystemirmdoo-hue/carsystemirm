@@ -311,8 +311,15 @@ export function CarsystemHomePage() {
           )}. Dostupnost proizvoda potvrđuje se kroz upit.`,
         );
       },
-      () => {
-        setLocatorStatus("Lokacija nije odobrena. Izaberite grad ručno iz liste.");
+      (error) => {
+        // Ručni izbor grada ostaje dostupan u svakom slučaju; poruka kaže šta se desilo.
+        setLocatorStatus(
+          error.code === error.PERMISSION_DENIED
+            ? "Pristup lokaciji nije odobren. Izaberite grad iz liste."
+            : error.code === error.TIMEOUT
+              ? "Određivanje lokacije traje predugo. Pokušajte ponovo ili izaberite grad iz liste."
+              : "Uređaj trenutno ne može da odredi lokaciju. Izaberite grad iz liste.",
+        );
       },
       { enableHighAccuracy: false, timeout: 8000, maximumAge: 300000 },
     );
@@ -320,6 +327,11 @@ export function CarsystemHomePage() {
 
   return (
     <main className={styles.home}>
+      {/* Jedna najava statusa lokatora za čitače ekrana (vidljiv tekst je i u widgetu i u
+          odeljku mreže, pa bi dva živa regiona istu poruku pročitala dvaput). */}
+      <p className="sr-only" role="status" aria-live="polite">
+        {locatorStatus}
+      </p>
       <HomeSectionRail />
       <HomeCampaignCarousel
         headingPresentation="sr-only"
@@ -498,7 +510,7 @@ export function CarsystemHomePage() {
             />
             <button
               type="button"
-              className={styles.locationButton}
+              className={`${styles.locationButton} ${styles.locationButtonSecondary}`}
               onClick={handleLocationRequest}
               data-cursor="button"
             >
@@ -509,6 +521,7 @@ export function CarsystemHomePage() {
             </button>
             <p className={styles.locatorStatus}>{locatorStatus}</p>
             <StorePreviewList
+              cityKey={cityChosen ? selectedCity : ""}
               onSelect={handleMapStoreSelect}
               selectedId={selectedMapStoreId}
               stores={selectedStores}
@@ -877,54 +890,75 @@ function StorePreview({ store }: { store?: PartnerStore }) {
   );
 }
 
+/** Na telefonu se vide prve tri lokacije; ostale vodi veza ka /prodavnice. */
+const PHONE_VISIBLE_STORES = 3;
+
 function StorePreviewList({
+  cityKey,
   onSelect,
   selectedId,
   stores,
 }: {
+  cityKey: string;
   onSelect: (storeId: string) => void;
   selectedId: string;
   stores: PartnerStore[];
 }) {
   if (stores.length === 0) return <StorePreview />;
 
-  return (
-    <div className={styles.storePreviewList} aria-label={selectedId ? "Lokacije u izabranom gradu" : "Lokacije u mreži"}>
-      {stores.map((store) => {
-        const isActive = store.id === selectedId;
+  // Broj uz vezu = broj lokacija na odredištu: /prodavnice?grad=<ključ> filtrira istim
+  // ključem grada (getPartnerCityKey), a /prodavnice bez grada prikazuje sve javne lokacije.
+  const moreHref = cityKey ? `/prodavnice?grad=${encodeURIComponent(cityKey)}` : "/prodavnice";
 
-        return (
-          <article
-            className={styles.storePreviewItem}
-            data-active={isActive || undefined}
-            key={store.id}
-          >
-            <button
-              aria-pressed={isActive}
-              className={styles.storePreviewSelect}
-              onClick={() => onSelect(store.id)}
-              type="button"
+  return (
+    <>
+      <div className={styles.storePreviewList} aria-label={selectedId ? "Lokacije u izabranom gradu" : "Lokacije u mreži"}>
+        {stores.map((store) => {
+          const isActive = store.id === selectedId;
+
+          return (
+            <article
+              className={styles.storePreviewItem}
+              data-active={isActive || undefined}
+              key={store.id}
             >
-              <span className={styles.availableDot} aria-hidden="true" />
-              <span className={styles.storePreviewContent}>
-                <span className={styles.storePreviewHeading}>
-                  <strong>{store.name}</strong>
-                  <small>{getPartnerLocationTypeLabel(store)}</small>
+              <button
+                aria-pressed={isActive}
+                className={styles.storePreviewSelect}
+                onClick={() => onSelect(store.id)}
+                type="button"
+              >
+                <span className={styles.availableDot} aria-hidden="true" />
+                <span className={styles.storePreviewContent}>
+                  <span className={styles.storePreviewHeading}>
+                    <strong>{store.name}</strong>
+                    <small>{getPartnerLocationTypeLabel(store)}</small>
+                  </span>
+                  <span>{store.address}</span>
+                  <span>
+                    {getPartnerCityLabel(store)} · {getPartnerLocationTypeLabel(store)}
+                  </span>
                 </span>
-                <span>{store.address}</span>
-                <span>
-                  {getPartnerCityLabel(store)} · {getPartnerLocationTypeLabel(store)}
-                </span>
-              </span>
-            </button>
-            {store.phone ? (
-              <a className={styles.storePreviewPhone} href={phoneHref(store.phone)}>
-                {store.phone}
-              </a>
-            ) : null}
-          </article>
-        );
-      })}
-    </div>
+              </button>
+              {store.phone ? (
+                <a
+                  aria-label={`Pozovite ${store.name}: ${store.phone}`}
+                  className={styles.storePreviewPhone}
+                  href={phoneHref(store.phone)}
+                >
+                  {store.phone}
+                </a>
+              ) : null}
+            </article>
+          );
+        })}
+      </div>
+      {stores.length > PHONE_VISIBLE_STORES ? (
+        <a className={styles.storePreviewMore} href={moreHref}>
+          Sve lokacije ({stores.length})
+          <span aria-hidden="true">→</span>
+        </a>
+      ) : null}
+    </>
   );
 }

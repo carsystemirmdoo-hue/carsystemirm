@@ -909,6 +909,13 @@
   transform: scaleX(1);
 }
 
+/* Zvaničan znak u boji (npr. Befar): dimenzije zadaje komponenta, proporcija ostaje. */
+.brandLogoRailImage {
+  display: block;
+  max-width: 100%;
+  object-fit: contain;
+}
+
 .brandLogoMonoMark {
   display: block;
   width: 100%;

@@ -27,6 +27,11 @@ type BrandMonoLogo = {
   aspect: number;
   /** Optička visina u traci brendova, u px, posle uklanjanja praznog prostora. */
   railHeight: number;
+  /**
+   * `image`: zvaničan znak nema jednobojnu verziju sa providnim izrezima (npr. Befar je beli
+   * znak na punom crvenom polju), pa se prikazuje kakav jeste, bez maske i bez izmena.
+   */
+  kind?: "mask" | "image";
 };
 
 type BrandLogo = {
@@ -50,9 +55,10 @@ export const brandLogos: Record<BrandKey, BrandLogo> = {
     src: "/brands/carsystem.svg",
     width: 112,
     height: 112,
-    // Znak je pun kvadrat sa izrezom slova: optički je teži od ostalih, pa je
-    // niži, da u traci ne bude jedini istaknut blok.
-    mono: { src: "/brands/mono/carsystem.svg", aspect: 1, railHeight: 26 },
+    // Pun kvadrat sa izrezom slova. Na 26 px natpis „CAR SYSTEM” nije bio čitljiv i znak je bio
+    // najslabiji u nizu. Odluka vlasnika 2026-10-15: polazište 34 px, optički usklađeno na 32 px
+    // (pun kvadrat je teži od R-M obrisa iste visine; 32 px izjednačava ga sa SATA i Befar poljem).
+    mono: { src: "/brands/mono/carsystem.svg", aspect: 1, railHeight: 32 },
   },
   baslac: {
     name: "Baslac",
@@ -76,11 +82,13 @@ export const brandLogos: Record<BrandKey, BrandLogo> = {
     mono: { src: "/brands/mono/sata.svg", aspect: 500 / 172, railHeight: 22 },
   },
   carfit: {
-    name: "Car Fit",
+    name: "C.A.R.FIT",
     src: "/brands/carfit.svg",
     width: 180,
     height: 70,
-    mono: { src: "/brands/carfit.svg", aspect: 1989.2 / 328.3, railHeight: 15 },
+    // Zvanični znak uvek nosi i podnaslov „Rebel Flair” (carfitrepair.com nema varijantu bez
+    // njega, provera 2026-10-15); znak se ne skraćuje, samo optički izjednačava.
+    mono: { src: "/brands/carfit.svg", aspect: 1989.2 / 328.3, railHeight: 17 },
   },
   cosmosLac: {
     name: "Cosmos Lac",
@@ -93,6 +101,9 @@ export const brandLogos: Record<BrandKey, BrandLogo> = {
     name: "Befar",
     width: 132,
     height: 70,
+    // Odobren logotip sa stranice Befar (lib/befar-brand-data.ts). Beli znak na punom crvenom
+    // polju bez providnih delova: u traci se prikazuje kakav jeste, u visini SATA znaka.
+    mono: { src: "/brands/befar/brand/befar-logo-white-on-red.png", aspect: 635 / 192, railHeight: 22, kind: "image" },
   },
   rupes: {
     name: "RUPES",
@@ -141,7 +152,7 @@ export function BrandLogoPlate({
   const brand = brandLogos[brandKey];
   const mono = tone === "mono" ? brand.mono : undefined;
 
-  // Jednobojna traka, brend bez jednobojnog znaka (Befar, Yachtcare): naziv
+  // Jednobojna traka, brend bez odobrenog znaka (Yachtcare): naziv
   // tekstom u istoj boji, bez pločice „Brend u najavi”.
   if (tone === "mono" && !mono) {
     return (
@@ -168,6 +179,21 @@ export function BrandLogoPlate({
   ]
     .filter(Boolean)
     .join(" ");
+
+  if (mono?.kind === "image") {
+    return (
+      <span className={className}>
+        <Image
+          src={mono.src}
+          alt={brand.name}
+          width={Math.round(mono.railHeight * mono.aspect)}
+          height={mono.railHeight}
+          className={styles.brandLogoRailImage}
+          style={{ height: mono.railHeight, width: "auto" }}
+        />
+      </span>
+    );
+  }
 
   if (mono) {
     const monoStyle = {

@@ -41,8 +41,8 @@ import { PaintTakeoverHomeSection } from "./PaintTakeoverHomeSection";
 
 const publicPartnerStores = getPublicPartnerStores();
 const cityEntries = getCityDisplayEntries(publicPartnerStores);
-const defaultCityEntry = cityEntries[0];
-const defaultCity = defaultCityEntry?.key ?? "";
+/** Vrednost koja ne odgovara nijednoj opciji, pa lista prikazuje „Izaberite grad”. */
+const NO_CITY_CHOICE = "__bez-izbora__";
 const cityOptions = [
   { label: "Svi gradovi", value: "" },
   ...cityEntries.map((entry) => ({ label: entry.city, value: entry.key })),
@@ -67,7 +67,9 @@ function readSavedCity() {
 
 function saveCity(key: string) {
   try {
+    // „Svi gradovi” (prazan ključ) briše sačuvani grad, pa se pri sledećoj poseti ne vraća stari izbor.
     if (key) window.localStorage.setItem(CITY_CHOICE_KEY, key);
+    else window.localStorage.removeItem(CITY_CHOICE_KEY);
   } catch {
     /* bez skladišta izbor važi samo do napuštanja strane */
   }
@@ -142,11 +144,12 @@ function formatDistanceKm(distanceKm: number) {
 export function CarsystemHomePage() {
   const { openSearch } = useProductSearchDialog();
   const searchTriggerRef = useRef<HTMLButtonElement>(null);
-  const [selectedCity, setSelectedCity] = useState(defaultCity);
-  const [selectedMapStoreId, setSelectedMapStoreId] = useState(defaultCityEntry?.id ?? "");
+  // Bez izbora: sve lokacije, bez unapred izabrane prodavnice (ni u widgetu ni u odeljku mreže).
+  const [selectedCity, setSelectedCity] = useState("");
+  const [selectedMapStoreId, setSelectedMapStoreId] = useState("");
   const [networkMapFailed, setNetworkMapFailed] = useState(false);
-  // Da li je korisnik izabrao grad (lista, mapa, lokacija ili sačuvan izbor). Odeljak mreže
-  // zadržava svoj početni prikaz; widget i traka na telefonu prikazuju lokaciju tek posle izbora.
+  // Da li je korisnik izabrao grad (lista, mapa, lokacija ili sačuvan izbor). Widget, traka na
+  // telefonu i odeljak mreže dele isti izbor; bez njega nijedan ne ističe prodavnicu.
   const [cityChosen, setCityChosen] = useState(false);
   const [locatorStatus, setLocatorStatus] = useState(
     cityEntries.length > 0
@@ -171,8 +174,8 @@ export function CarsystemHomePage() {
   const selectedStore = useMemo(
     () =>
       selectedStores.find((store) => store.id === selectedMapStoreId) ??
-      selectedStores[0],
-    [selectedMapStoreId, selectedStores],
+      (cityChosen && selectedCity ? selectedStores[0] : undefined),
+    [cityChosen, selectedCity, selectedMapStoreId, selectedStores],
   );
 
   useEffect(() => {
@@ -322,7 +325,7 @@ export function CarsystemHomePage() {
         headingPresentation="sr-only"
         aside={
           <LocatorCard
-            selectedStore={cityChosen && selectedCity ? selectedStore : undefined}
+            selectedStore={selectedStore}
             selectedCity={cityChosen ? selectedCity : ""}
             locatorStatus={locatorStatus}
             onCityChange={handleCityChange}
@@ -427,7 +430,7 @@ export function CarsystemHomePage() {
           <small>
             {publicPartnerStores.length === 0
               ? "Nema potvrđenih javnih lokacija"
-              : cityChosen && selectedCity && selectedStore
+              : selectedStore
                 ? `${selectedStore.city} · ${getPartnerLocationTypeLabel(selectedStore)}`
                 : "Izaberite grad"}
           </small>
@@ -491,7 +494,7 @@ export function CarsystemHomePage() {
               placeholder="Izaberite grad"
               searchPlaceholder="Pretražite grad"
               sheetTitle="Izaberite grad"
-              value={selectedCity}
+              value={cityChosen ? selectedCity : NO_CITY_CHOICE}
             />
             <button
               type="button"
@@ -782,7 +785,8 @@ function LocatorCard({
           Pronađite prodavnicu
         </span>
       </span>
-      <small>{selectedStore ? getPartnerCityLabel(selectedStore) : "Mreža"}</small>
+      {/* Bez izbora nema oznake ispod naslova (ranije „Mreža”). */}
+      {selectedStore ? <small>{getPartnerCityLabel(selectedStore)}</small> : null}
     </>
   );
 
@@ -885,7 +889,7 @@ function StorePreviewList({
   if (stores.length === 0) return <StorePreview />;
 
   return (
-    <div className={styles.storePreviewList} aria-label="Lokacije u izabranom gradu">
+    <div className={styles.storePreviewList} aria-label={selectedId ? "Lokacije u izabranom gradu" : "Lokacije u mreži"}>
       {stores.map((store) => {
         const isActive = store.id === selectedId;
 

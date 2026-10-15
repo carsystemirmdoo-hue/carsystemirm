@@ -74,10 +74,10 @@
 .triggerText { font: inherit; }
 .triggerIcon { display: none; }
 /*
- * Uski desktop (1120–1215 px): „Moj nalog” postaje ikonica sa tačkom prijave, da meni ne udari
+ * Uski desktop (1120–1280 px; do 80rem od kada meni ima i „Saveti i vodiči”): „Moj nalog” postaje ikonica sa tačkom prijave, da meni ne udari
  * u akcije. Tekst ostaje u stablu pristupačnosti (vizuelno sakriven), a pun naziv daje title.
  */
-@media (min-width: 70rem) and (max-width: 76rem) {
+@media (min-width: 70rem) and (max-width: 80rem) {
   .trigger { gap: 0.35rem; padding-inline: 0.6rem; }
   .triggerIcon { display: inline-flex; }
   .triggerText {

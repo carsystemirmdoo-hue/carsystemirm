@@ -16,8 +16,8 @@ Napomena: repozitorijum je javan, pa je i izvorni fajl javno dostupan.
 
 | Verzija | Vizuel | Poreklo | Status |
 | --- | --- | --- | --- |
-| f0aa8d83 (Production) | Linijske ilustracije, 12 SVG | Commit 9191beb5 (2026-07-23). U fajlu piše „Vectorized from the supplied reference image“, dakle vektorizovano iz dostavljene referentne slike. Sačuvano u `public/icons/categories/prethodni-2026-10/`. | Prethodni skup, sačuvan za poređenje i eventualni povratak. |
-| Sistem A (c87f9905 →) | Ikonice 64×64, potez 1,5 | Nacrtane u redizajnu, pod istim imenima u `public/icons/categories/` | Nije konačan skup. |
+| f0aa8d83 (Production) | Linijske ilustracije, 12 SVG | Commit 9191beb5 (2026-07-23). U fajlu piše „Vectorized from the supplied reference image“, dakle vektorizovano iz dostavljene referentne slike. Ponovo u upotrebi u `public/icons/categories/` (odluka vlasnika 2026-10-15). „Abrazivi“ je nova linijska ilustracija (dva brusna diska, bez bele ispune — radi i kao maska) umesto punog tamnog diska. | Izabran kao važeći komplet 2026-10-15. |
+| Sistem A (c87f9905 →) | Ikonice 64×64, potez 1,5 | Nacrtane u redizajnu; sada u `public/icons/categories/sistem-a-2026-10/` | Nije izabran za kategorije. Ostaje samo u malim pločicama sekcije procesa Carsystem stranice (otvorena stavka, bez novih zamena). |
 
 Kategorije nemaju fotografije. Na Carsystem stranici fotografije faza i dalje koriste isti rezervni
 prikaz sa packshotima u sekciji procesa (`#process`). Izuzetak je uvodni blok.

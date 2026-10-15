@@ -48,10 +48,9 @@ export const PRODUCT_CATEGORIES: ProductCategoryLink[] = [
     label: "Abrazivi",
     slug: "abrazivi",
     href: "/katalog?kategorija=abrazivi",
+    // Linijska ilustracija diskova (2026-10-15) umesto punog tamnog diska.
     icon: "/icons/categories/abrazivi.svg",
-    iconScale: 3.25,
-    iconOrigin: "46.5% 38.5%",
-    preserveWhiteDetails: true,
+    iconScale: 1.12,
   },
   {
     label: "Kitovi",

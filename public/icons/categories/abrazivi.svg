@@ -1,5 +1,66 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64" fill="none" stroke="#2b3038" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-<title>Abrazivi</title>
-<circle cx="32" cy="32" r="24"/><circle cx="32" cy="32" r="3.5"/>
-<circle cx="42.0" cy="32.0" r="1.3"/><circle cx="37.0" cy="40.7" r="1.3"/><circle cx="27.0" cy="40.7" r="1.3"/><circle cx="22.0" cy="32.0" r="1.3"/><circle cx="27.0" cy="23.3" r="1.3"/><circle cx="37.0" cy="23.3" r="1.3"/><circle cx="48.2" cy="37.3" r="1.3"/><circle cx="42.0" cy="45.8" r="1.3"/><circle cx="32.0" cy="49.0" r="1.3"/><circle cx="22.0" cy="45.8" r="1.3"/><circle cx="15.8" cy="37.3" r="1.3"/><circle cx="15.8" cy="26.7" r="1.3"/><circle cx="22.0" cy="18.2" r="1.3"/><circle cx="32.0" cy="15.0" r="1.3"/><circle cx="42.0" cy="18.2" r="1.3"/><circle cx="48.2" cy="26.7" r="1.3"/>
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1254" height="1254" viewBox="0 0 1254 1254">
+  <title>Abrazivi — brusni diskovi, linijska ilustracija</title>
+  <desc>Dva brusna diska sa rupama za usisavanje prašine; linijski crtež u stilu ostalih ilustracija kategorija (2026-10-15). Bez bele ispune: zadnji disk je odsečen maskom, pa crtež radi i kao CSS maska.</desc>
+  <defs>
+    <mask id="iza-prednjeg" maskUnits="userSpaceOnUse" x="0" y="0" width="1254" height="1254">
+      <rect width="1254" height="1254" fill="#fff"/>
+      <path transform="rotate(-14 520 600)" d="M 220 600 L 220 626 A 300 250 0 0 0 820 626 L 820 600 A 300 250 0 0 0 220 600 Z" fill="#000" stroke="#000" stroke-width="22"/>
+    </mask>
+  </defs>
+  <g stroke="#111" fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M 170 930 C 430 884 780 874 1090 905" stroke-width="7" mask="url(#iza-prednjeg)"/>
+    <path d="M 290 962 C 520 940 720 938 900 950" stroke-width="5" stroke-dasharray="2 22"/>
+    <g mask="url(#iza-prednjeg)">
+    <g transform="rotate(0 760 820)">
+    <path d="M 470 820 L 470 842 A 290 96 0 0 0 1050 842 L 1050 820" stroke-width="11"/>
+    <ellipse cx="760" cy="820" rx="290" ry="96" stroke-width="11"/>
+    <ellipse cx="760" cy="820" rx="270" ry="89" stroke-width="5.0" stroke-dasharray="1 26"/>
+    <ellipse cx="760.0" cy="820.0" rx="15.0" ry="5.0" stroke-width="7.7"/>
+    <ellipse cx="872.1" cy="829.9" rx="15.0" ry="5.0" stroke-width="7.7"/>
+    <ellipse cx="790.2" cy="857.1" rx="15.0" ry="5.0" stroke-width="7.7"/>
+    <ellipse cx="678.1" cy="847.2" rx="15.0" ry="5.0" stroke-width="7.7"/>
+    <ellipse cx="647.9" cy="810.1" rx="15.0" ry="5.0" stroke-width="7.7"/>
+    <ellipse cx="729.8" cy="782.9" rx="15.0" ry="5.0" stroke-width="7.7"/>
+    <ellipse cx="841.9" cy="792.8" rx="15.0" ry="5.0" stroke-width="7.7"/>
+    <ellipse cx="968.8" cy="820.0" rx="15.0" ry="5.0" stroke-width="7.7"/>
+    <ellipse cx="940.8" cy="854.6" rx="15.0" ry="5.0" stroke-width="7.7"/>
+    <ellipse cx="864.4" cy="879.9" rx="15.0" ry="5.0" stroke-width="7.7"/>
+    <ellipse cx="760.0" cy="889.1" rx="15.0" ry="5.0" stroke-width="7.7"/>
+    <ellipse cx="655.6" cy="879.9" rx="15.0" ry="5.0" stroke-width="7.7"/>
+    <ellipse cx="579.2" cy="854.6" rx="15.0" ry="5.0" stroke-width="7.7"/>
+    <ellipse cx="551.2" cy="820.0" rx="15.0" ry="5.0" stroke-width="7.7"/>
+    <ellipse cx="579.2" cy="785.4" rx="15.0" ry="5.0" stroke-width="7.7"/>
+    <ellipse cx="655.6" cy="760.1" rx="15.0" ry="5.0" stroke-width="7.7"/>
+    <ellipse cx="760.0" cy="750.9" rx="15.0" ry="5.0" stroke-width="7.7"/>
+    <ellipse cx="864.4" cy="760.1" rx="15.0" ry="5.0" stroke-width="7.7"/>
+    <ellipse cx="940.8" cy="785.4" rx="15.0" ry="5.0" stroke-width="7.7"/>
+    </g>
+    </g>
+    <g transform="rotate(-14 520 600)">
+    <path d="M 220 600 L 220 626 A 300 250 0 0 0 820 626 L 820 600" stroke-width="12"/>
+    <ellipse cx="520" cy="600" rx="300" ry="250" stroke-width="12"/>
+    <ellipse cx="520" cy="600" rx="279" ry="232" stroke-width="5.4" stroke-dasharray="1 29"/>
+    <ellipse cx="520.0" cy="600.0" rx="19.0" ry="15.8" stroke-width="8.4"/>
+    <ellipse cx="636.0" cy="625.7" rx="19.0" ry="15.8" stroke-width="8.4"/>
+    <ellipse cx="551.3" cy="696.5" rx="19.0" ry="15.8" stroke-width="8.4"/>
+    <ellipse cx="435.3" cy="670.8" rx="19.0" ry="15.8" stroke-width="8.4"/>
+    <ellipse cx="404.0" cy="574.3" rx="19.0" ry="15.8" stroke-width="8.4"/>
+    <ellipse cx="488.7" cy="503.5" rx="19.0" ry="15.8" stroke-width="8.4"/>
+    <ellipse cx="604.7" cy="529.2" rx="19.0" ry="15.8" stroke-width="8.4"/>
+    <ellipse cx="736.0" cy="600.0" rx="19.0" ry="15.8" stroke-width="8.4"/>
+    <ellipse cx="707.1" cy="690.0" rx="19.0" ry="15.8" stroke-width="8.4"/>
+    <ellipse cx="628.0" cy="755.9" rx="19.0" ry="15.8" stroke-width="8.4"/>
+    <ellipse cx="520.0" cy="780.0" rx="19.0" ry="15.8" stroke-width="8.4"/>
+    <ellipse cx="412.0" cy="755.9" rx="19.0" ry="15.8" stroke-width="8.4"/>
+    <ellipse cx="332.9" cy="690.0" rx="19.0" ry="15.8" stroke-width="8.4"/>
+    <ellipse cx="304.0" cy="600.0" rx="19.0" ry="15.8" stroke-width="8.4"/>
+    <ellipse cx="332.9" cy="510.0" rx="19.0" ry="15.8" stroke-width="8.4"/>
+    <ellipse cx="412.0" cy="444.1" rx="19.0" ry="15.8" stroke-width="8.4"/>
+    <ellipse cx="520.0" cy="420.0" rx="19.0" ry="15.8" stroke-width="8.4"/>
+    <ellipse cx="628.0" cy="444.1" rx="19.0" ry="15.8" stroke-width="8.4"/>
+    <ellipse cx="707.1" cy="510.0" rx="19.0" ry="15.8" stroke-width="8.4"/>
+    </g>
+    <path d="M 1040 850 l 10 -5 M 1072 878 l 8 -3 M 1010 872 l 6 -4 M 196 900 l 9 -4 M 232 878 l 6 -3" stroke-width="6"/>
+  </g>
 </svg>

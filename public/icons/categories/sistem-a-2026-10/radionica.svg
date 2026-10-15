@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64" fill="none" stroke="#2b3038" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+<title>Radionica</title>
+<path d="M4 57h56"/>
+<path d="M7 57V20L32 9l25 11v37"/>
+<path d="M14 57V27h36v30"/>
+<path d="M19 22h26"/>
+<path d="M18 49h28"/>
+<path d="M20 49v-4.5l4.5-5h15l4.5 5V49"/>
+<path d="M27 39.5V36h10v3.5"/>
+<circle cx="25" cy="50.5" r="2.2"/><circle cx="39" cy="50.5" r="2.2"/>
+</svg>

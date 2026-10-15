@@ -1722,8 +1722,11 @@
   }
 }
 
-/* Uz stavku „Saveti i vodiči” i ikonu prijave meni do ~1470 px ne ostavlja mesta natpisu. */
-@media (min-width: 70rem) and (max-width: 92rem) {
+/*
+ * Uz stavku „Saveti i vodiči” i ikonu prijave meni ne ostavlja mesta natpisu dok kontejner ne
+ * poraste iznad 1208 px (72vw > ~1240 px, tj. od ~108rem); merenje 2026-10-15.
+ */
+@media (min-width: 70rem) and (max-width: 108rem) {
   .shell:has([data-account="signed-out"]) .brandLabel {
     display: none;
   }
@@ -1733,6 +1736,21 @@
   .navLink,
   .navTrigger {
     padding-inline: 0.5rem;
+  }
+}
+
+/*
+ * Prijavljen kupac na uskom desktopu (1120–1280 px): korpa i nalog zauzimaju ~90 px više od
+ * ikone prijave, pa meni dobija 14 px tekst i uži razmak, da ne pređe preko logotipa ni pretrage.
+ */
+@media (min-width: 70rem) and (max-width: 80rem) {
+  .shell:has([data-account="signed-in"]) {
+    gap: 0.5rem;
+  }
+
+  .shell:has([data-account="signed-in"]) :is(.navLink, .navTrigger) {
+    padding-inline: 0.32rem;
+    font-size: 0.875rem;
   }
 }
 

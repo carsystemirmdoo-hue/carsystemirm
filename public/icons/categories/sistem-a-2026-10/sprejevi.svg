@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64" fill="none" stroke="#2b3038" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+<title>Sprejevi</title>
+<path d="M22 24c0-4.5 4-8 10-8s10 3.5 10 8v31a3 3 0 0 1-3 3H25a3 3 0 0 1-3-3z"/>
+<path d="M28 16v-4h8v4"/><path d="M27 12V7h10v5"/><path d="M37 9h3"/>
+<path d="M22 32h20M22 48h20"/>
+<path d="M45 8h.01M49 5h.01M49 11h.01M53 8h.01M53 3h.01M53 13h.01M57 6h.01M57 10h.01"/>
+</svg>

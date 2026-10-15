@@ -313,22 +313,22 @@ export const carsystemProcessPhases: CarsystemProcessPhase[] = [
     categories: [
       {
         label: "Abrazivi",
-        icon: "/icons/categories/abrazivi.svg",
+        icon: "/icons/categories/sistem-a-2026-10/abrazivi.svg",
         href: carsystemCatalogHref({ program: "abrazivi" }),
       },
       {
         label: "Kitovi",
-        icon: "/icons/categories/kitovi.svg",
+        icon: "/icons/categories/sistem-a-2026-10/kitovi.svg",
         href: carsystemCatalogHref({ query: "git" }),
       },
       {
         label: "Priprema površine",
-        icon: "/icons/categories/pribor.svg",
+        icon: "/icons/categories/sistem-a-2026-10/pribor.svg",
         href: carsystemCatalogHref({ program: "priprema-povrsine" }),
       },
       {
         label: "Maskiranje",
-        icon: "/icons/categories/maskiranje.svg",
+        icon: "/icons/categories/sistem-a-2026-10/maskiranje.svg",
         href: carsystemCatalogHref({ query: "maskir" }),
       },
     ],
@@ -353,22 +353,22 @@ export const carsystemProcessPhases: CarsystemProcessPhase[] = [
     categories: [
       {
         label: "Maskiranje",
-        icon: "/icons/categories/maskiranje.svg",
+        icon: "/icons/categories/sistem-a-2026-10/maskiranje.svg",
         href: carsystemCatalogHref({ query: "maskir" }),
       },
       {
         label: "Lepkovi i zaptivanje",
-        icon: "/icons/categories/lepkovi.svg",
+        icon: "/icons/categories/sistem-a-2026-10/lepkovi.svg",
         href: carsystemCatalogHref({ query: "lepljenje" }),
       },
       {
         label: "Lakirerski pribor",
-        icon: "/icons/categories/pribor.svg",
+        icon: "/icons/categories/sistem-a-2026-10/pribor.svg",
         href: carsystemCatalogHref({ program: "potrosni-materijal" }),
       },
       {
         label: "Zaštita radnika",
-        icon: "/icons/categories/zastita.svg",
+        icon: "/icons/categories/sistem-a-2026-10/zastita.svg",
         href: carsystemCatalogHref({ query: "zaštit" }),
       },
     ],
@@ -393,22 +393,22 @@ export const carsystemProcessPhases: CarsystemProcessPhase[] = [
     categories: [
       {
         label: "Završna obrada",
-        icon: "/icons/categories/poliranje.svg",
+        icon: "/icons/categories/sistem-a-2026-10/poliranje.svg",
         href: carsystemCatalogHref({ program: "poliranje" }),
       },
       {
         label: "Poliranje",
-        icon: "/icons/categories/poliranje.svg",
+        icon: "/icons/categories/sistem-a-2026-10/poliranje.svg",
         href: carsystemCatalogHref({ query: "polir" }),
       },
       {
         label: "Čišćenje",
-        icon: "/icons/categories/ciscenje.svg",
+        icon: "/icons/categories/sistem-a-2026-10/ciscenje.svg",
         href: carsystemCatalogHref({ query: "čišćenje" }),
       },
       {
         label: "Lična zaštita",
-        icon: "/icons/categories/zastita.svg",
+        icon: "/icons/categories/sistem-a-2026-10/zastita.svg",
         href: carsystemCatalogHref({ query: "zaštit" }),
       },
     ],

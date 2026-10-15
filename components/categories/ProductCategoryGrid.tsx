@@ -1,5 +1,6 @@
 "use client";
 
+/* eslint-disable @next/next/no-img-element -- Category artwork is supplied as approved SVG files. */
 import Link from "next/link";
 import {
   type CSSProperties,
@@ -189,17 +190,28 @@ function ProductCategoryContent({
     <span className={styles.content}>
       <span className={styles.iconZone} aria-hidden="true">
         {/*
-         * Piktogram je linijski SVG istog kadra za sve kategorije; crta se kao
-         * CSS maska u `currentColor`, pa prati boju teksta u obe teme i belu
-         * boju u crvenom sloju na prelaz mišem (bez invert filtera).
+         * Detaljna linijska ilustracija (odluka vlasnika 2026-10-15: prethodni komplet).
+         * U tamnoj temi i u crvenom sloju se invertuje, kao u ranijem izgledu.
          */}
         {category.icon ? (
-          <span
+          <img
+            src={category.icon}
+            alt=""
+            width="104"
+            height="92"
             className={styles.icon}
+            decoding="async"
+            draggable="false"
             style={
               {
-                "--category-icon": `url("${category.icon}")`,
+                "--category-icon-scale": category.iconScale ?? 1,
+                "--category-icon-origin": category.iconOrigin ?? "center",
+                "--category-icon-offset-x": `${category.iconOffsetX ?? 0}px`,
+                "--category-icon-offset-y": `${category.iconOffsetY ?? 0}px`,
               } as CSSProperties
+            }
+            data-preserve-white-details={
+              category.preserveWhiteDetails || undefined
             }
           />
         ) : null}

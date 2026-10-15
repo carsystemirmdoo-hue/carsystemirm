@@ -3,7 +3,7 @@
  *
  * Priprema: scripts/qa/seed-synthetic-portal.mts u bazu carsystem_revizija_ui_qa,
  * server iz .next-verify na 127.0.0.1:3450 (DATABASE_POOL_MAX=1 — najstrožije).
- *   node scripts/qa/synthetic-portal-flow.mjs <izlazni-folder> [sve|kupac|kancelarija|opseg|telefon|sajt|lager|lager-mfa]
+ *   node scripts/qa/synthetic-portal-flow.mjs <izlazni-folder> [sve|kupac|kancelarija|opseg|telefon|sajt|lager|lager-mfa|lager-kupci]
  * Menja samo sintetičku bazu (privremena promena rabata za proveru nove potvrde).
  * Lozinke i TOTP tajne čita iz SYNTH_CREDS_FILE i ne ispisuje ih.
  */
@@ -533,7 +533,7 @@ try {
     await a.page.waitForFunction(() => location.search.includes("152.416") || document.body.innerText.includes("152.416"), null, { timeout: 15000 }).catch(() => {});
     const st416 = await statusOf(a.page);
     const pn416 = await panelText(a.page);
-    check("sajt: druga varijanta na istoj strani — status „Na upit“, panel bez cene", /^Na upit$/i.test(st416) && /nije povezan/.test(pn416) && !pn416.includes("1.800,00"), `${st416} · ${pn416.slice(0, 90)}`);
+    check("sajt: druga varijanta na istoj strani — status „Na upit“, panel bez cene", /^Na upit$/i.test(st416) && /nije u našoj ponudi za direktno poručivanje|Pošaljite upit za nabavku/i.test(pn416) && !pn416.includes("1.800,00"), `${st416} · ${pn416.slice(0, 90)}`);
     await a.page.locator("button, a, label").filter({ hasText: "152.580" }).first().click();
     await a.page.waitForTimeout(800);
     check("sajt: povratak na varijantu sa cenom — status ponovo „Vaša cena potvrđena“", /Vaša cena potvrđena/i.test(await statusOf(a.page)) && (await panelText(a.page)).includes("1.800,00"));
@@ -581,7 +581,7 @@ try {
     await go(a.page, `${VOC}?varijanta=144.539`);
     const pUn = await panelText(a.page);
     check("sajt: status nepovezane varijante = javni „Na upit“", /^Na upit$/i.test(await statusOf(a.page)), await statusOf(a.page));
-    check("sajt: nepovezana varijanta → „Cena na upit … nije povezan“", /nije povezan/.test(pUn) && !/Dodajte u korpu/.test(pUn), pUn.slice(0, 160));
+    check("sajt: nepovezana varijanta → upit za nabavku, bez dodavanja u korpu", /nije u našoj ponudi za direktno poručivanje|Pošaljite upit za nabavku/i.test(pUn) && !/Dodajte u korpu/.test(pUn), pUn.slice(0, 160));
     await a.page.screenshot({ path: `${OUT}/s4-A-na-upit.png` });
 
     // 5. „Poručite ponovo“ u katalogu puni ISTU korpu.
@@ -717,7 +717,7 @@ try {
     const hp = await k.locator("a", { hasText: /\/2/ }).first().getAttribute("href");
     await go(k, hp);
     const kp = await txt(k.locator("main"));
-    const c04row = await txt(k.locator("tr", { hasText: "SINT ANTISILIKON 5L" }).first());
+    const c04row = await txt(k.locator("tr", { hasText: "SINT-C04" }).first());
     check("kupac: predlog pokazuje novu količinu 7 LIT i izuzetak, ne „2 × kanta 5 L“", /Izuzetak: nije ceo broj pakovanja \(kanta 5 L\)/i.test(c04row) && /7 LIT/.test(c04row) && !/2 × kanta 5 L/.test(c04row) && /Količina 10 → 7/.test(c04row), c04row.slice(0, 200));
     check("kupac: ostale stavke predloga ostaju u celim pakovanjima", /Potvrdite predlog/.test(kp));
     await k.screenshot({ path: `${OUT}/s14-kupac-predlog-izuzetak.png`, fullPage: true });
@@ -1202,7 +1202,7 @@ try {
     const g = await (await b.newContext(desk)).newPage(); await staff(g, "vlasnik");
     await go(g, "/portal/zalihe");
     const zal = await txt(g.locator("main"));
-    check("zalihe (vlasnik): važeći snimak i isključen prikaz kupcima", /Stanje na dan 05[./] ?09[./] ?2026/.test(zal) && /Prag zastarelosti nije zadat/.test(zal), zal.slice(0, 300));
+    check("zalihe (vlasnik): važeći snimak i isključen prikaz kupcima", /Stanje na dan 05[./] ?09[./] ?2026/.test(zal) && /Prikaz isključen/i.test(zal), zal.slice(0, 300));
     // Telefon: stranice uvoza i provere bez horizontalnog pomeranja.
     const tm = await (await b.newContext(phone)).newPage(); await staff(tm, "kancelarija");
     for (const [name, path] of [["uvoz", "/portal/zalihe/uvoz"], ["provera", `/portal/zalihe/uvoz/${(await sqlc`SELECT id FROM stock_imports WHERE status = 'potvrdjeno' ORDER BY decided_at DESC LIMIT 1`)[0].id}`]]) {
@@ -1275,6 +1275,106 @@ try {
     const k = await (await b.newContext(desk)).newPage(); await customer(k);
     const api = await k.evaluate(async () => (await fetch("/api/kupac/ponude", { cache: "no-store" })).json());
     check("lager-mfa: kupac i dalje bez stanja", api.signedIn === true && (api.stock === null || api.stock === undefined));
+  }
+  if (STEP === "lager-kupci") {
+    // Lager prijavljenim kupcima (dok. 65 §4) — server MORA raditi sa MAINTENANCE_MODE=true:
+    // kupac bez koda sajta vidi katalog; neprijavljen posetilac i API ne dobijaju ništa.
+    const XLSX_B = ROOT + "/fixtures/dev/biznisoft/lager/stanje-zaliha-artikla-sinteticki.xlsx";
+    const today = new Intl.DateTimeFormat("en-CA", { timeZone: "Europe/Belgrade" }).format(new Date());
+    const dmyToday = `${today.slice(8, 10)}.${today.slice(5, 7)}.${today.slice(0, 4)}`;
+    const csv = new TextDecoder("windows-1250").decode(readFileSync(ROOT + "/fixtures/dev/biznisoft/lager/stanje-zaliha-sinteticki.csv"));
+    const todayCsv = Buffer.from(Uint8Array.from(csv.replace(/(Na dan:;+)05\.09\.2026/, `$1${dmyToday}`).replace("Datum štampe: 05.09.2026", `Datum štampe: ${dmyToday}`), (ch) => {
+      const m = { "Š": 0x8a, "š": 0x9a, "Č": 0xc8, "č": 0xe8, "Ć": 0xc6, "ć": 0xe6, "Ž": 0x8e, "ž": 0x9e, "Đ": 0xd0, "đ": 0xf0 }[ch];
+      return m ?? ch.charCodeAt(0);
+    }));
+    const anon = await (await b.newContext(desk)).newPage();
+    const ra = await anon.goto(`${B}/proizvodi/baslac-70-10-silicone-remover-for-oil-silicone-and-grease`, { waitUntil: "load", timeout: 120000 });
+    check("lager-kupci: neprijavljen posetilac i dalje ide na „sajt u pripremi“", new URL(anon.url()).pathname === "/site-u-pripremi", `${ra?.status()} ${new URL(anon.url()).pathname}`);
+    const apiAnon = await anon.request.get(`${B}/api/kupac/ponude`);
+    const apiAnonBody = await apiAnon.text();
+    check("lager-kupci: API bez sesije → 401, bez stanja i ponuda", apiAnon.status() === 401 && !/stock|offers|Na stanju/.test(apiAnonBody), `${apiAnon.status()} ${apiAnonBody.slice(0, 80)}`);
+
+    // Kancelarija: snimak 05.09. (zastareo), vlasnik uključuje prikaz.
+    const t = await (await b.newContext(desk)).newPage(); await staff(t, "kancelarija");
+    await go(t, "/portal/zalihe/uvoz");
+    await t.setInputFiles('input[name="lager"]', XLSX_B);
+    await Promise.all([t.waitForURL(/\/portal\/zalihe\/uvoz\/[0-9a-f-]{36}/, { timeout: 60000 }), t.getByRole("button", { name: "Proverite fajl" }).click()]);
+    await t.getByRole("checkbox", { name: /Pregledao sam proveru/ }).check();
+    await Promise.all([t.waitForURL(/ishod=potvrdjeno/, { timeout: 30000 }), t.getByRole("button", { name: "Potvrdite lager" }).click()]);
+    const g = await (await b.newContext(desk)).newPage(); await staff(g, "vlasnik");
+    await go(g, "/portal/zalihe");
+    check("lager-kupci: vlasnik vidi prikaz isključen i dugme za uključivanje", /Prikaz isključen/i.test((await txt(g.locator("main"))).replace(/\s+/g, " ")) || (await g.getByRole("button", { name: "Uključite prikaz kupcima" }).count()) === 1);
+    await g.fill('input[name="razlog"]', "sintetička proba prikaza");
+    await g.getByRole("button", { name: "Uključite prikaz kupcima" }).click();
+    await g.locator('.lg-toggle [role="status"]').waitFor({ timeout: 30000 });
+    const set = (await sqlc`SELECT value FROM system_settings WHERE key = 'stock.customerDisplay'`)[0]?.value;
+    const aud = (await sqlc`SELECT count(*)::int n FROM audit_log WHERE action = 'Prikaz lagera kupcima'`)[0].n;
+    check("lager-kupci: uključeno (24 h) sa audit zapisom", set?.enabled === true && set?.maxAgeHours === 24 && aud === 1, JSON.stringify(set));
+    await g.screenshot({ path: `${OUT}/lager-kupci-0-zalihe-vlasnik.png`, fullPage: true });
+
+    const kctx = await b.newContext(desk);
+    const k = await kctx.newPage();
+    await go(k, `/prijava/kupac?callbackUrl=${encodeURIComponent("/proizvodi/baslac-70-10-silicone-remover-for-oil-silicone-and-grease")}`);
+    await k.fill("input[name=email]", creds.kupac.email);
+    await k.fill("input[name=password]", creds.kupac.password);
+    await Promise.all([k.waitForURL((u) => !u.pathname.startsWith("/prijava"), { timeout: 60000 }), k.keyboard.press("Enter")]);
+    check("lager-kupci: kupac posle prijave ostaje na strani proizvoda, bez koda sajta", new URL(k.url()).pathname === "/proizvodi/baslac-70-10-silicone-remover-for-oil-silicone-and-grease", k.url());
+    const panel = k.locator('section[aria-labelledby="buy-panel-title"]');
+    await panel.waitFor({ timeout: 60000 });
+    await k.locator('section[aria-label="Stanje na lageru"]').waitFor({ timeout: 30000 });
+    const stale = await txt(k.locator('section[aria-label="Stanje na lageru"]'));
+    check("lager-kupci: zastareo snimak → „potrebna je provera“, bez brojeva", /Potrebna je provera raspoloživosti/.test(stale) && !/Na stanju prema izvozu/.test(stale) && /Raspoloživost potvrđuje kancelarija/.test(stale), stale);
+
+    // Današnji izvoz (samo datum) → svež. Dodatni sintetički redovi pokrivaju nulu, minus i ostatak.
+    await go(t, "/portal/zalihe/uvoz");
+    await t.setInputFiles('input[name="lager"]', { name: "danas.csv", mimeType: "text/csv", buffer: todayCsv });
+    await Promise.all([t.waitForURL(/\/portal\/zalihe\/uvoz\/[0-9a-f-]{36}/, { timeout: 60000 }), t.getByRole("button", { name: "Proverite fajl" }).click()]);
+    const todayId = new URL(t.url()).pathname.split("/").pop();
+    await sqlc`INSERT INTO stock_import_lines (import_id, line_no, source_row, source_code, code_key, name, quantity) VALUES
+      (${todayId}, 901, 901, 'SINT-C03', 'SINT-C03', 'SINT ANTISILIKON 1L', 3),
+      (${todayId}, 902, 902, 'SINT-C04', 'SINT-C04', 'SINT ANTISILIKON 5L', 12.5),
+      (${todayId}, 903, 903, 'SINT-C07', 'SINT-C07', 'SINT HERTER NORMAL 0,5L', 0),
+      (${todayId}, 904, 904, 'SINT-C06', 'SINT-C06', 'SINT LAK VOC 4L', -2)`;
+    await t.reload({ waitUntil: "networkidle" });
+    await t.getByRole("checkbox", { name: /Pregledao sam proveru/ }).check();
+    await Promise.all([t.waitForURL(/ishod=potvrdjeno/, { timeout: 30000 }), t.getByRole("button", { name: "Potvrdite lager" }).click()]);
+    // Pravilo čuvanja: dva potvrđena snimka zadržavaju stavke.
+    const kept = (await sqlc`SELECT count(*)::int n FROM stock_imports WHERE status = 'potvrdjeno' AND lines_purged_at IS NULL`)[0].n;
+    check("lager-kupci: oba potvrđena snimka zadržavaju stavke (pravilo čuvanja)", kept === 2, String(kept));
+
+    const kp = await kctx.newPage();
+    await kp.goto(`${B}/proizvodi/baslac-70-10-silicone-remover-for-oil-silicone-and-grease`, { waitUntil: "networkidle", timeout: 120000 });
+    await kp.locator('section[aria-label="Stanje na lageru"]').waitFor({ timeout: 30000 });
+    const fresh = await txt(kp.locator('section[aria-label="Stanje na lageru"]'));
+    check("lager-kupci: svež snimak — 3 × limenka 1 L i 2 × kanta 5 L (12,5 L naniže)", /Na stanju prema izvozu: 3 × limenka 1 L/.test(fresh) && /Na stanju prema izvozu: 2 × kanta 5 L/.test(fresh), fresh);
+    check("lager-kupci: datum stanja bez vremena uvoza; napomena kancelarije", fresh.includes(`na dan ${dmyToday}.`) && /Raspoloživost potvrđuje kancelarija/.test(fresh) && !/Uvezeno/.test(fresh), fresh);
+    await kp.screenshot({ path: `${OUT}/lager-kupci-1-proizvod.png`, fullPage: true });
+    const api = await kp.evaluate(async () => (await fetch("/api/kupac/ponude", { cache: "no-store" })).json());
+    const offerBy = Object.fromEntries(api.offers.map((o) => [o.articleCode, o.articleId]));
+    const line = (code) => api.stock?.byArticle?.[offerBy[code]];
+    check("lager-kupci: nula → „nema na stanju“, bez broja", line("SINT-C07")?.state === "nema" && !/\d/.test(line("SINT-C07")?.text ?? "x"), JSON.stringify(line("SINT-C07")));
+    check("lager-kupci: negativno stanje → „Raspoloživost na upit“ (bez minusa)", line("SINT-C06")?.state === "upit" && !Object.values(api.stock.byArticle).some((v) => /-\s*\d/.test(v.text)), JSON.stringify(line("SINT-C06")));
+    check("lager-kupci: šifra van izvoza → „na upit“, ne nula", line("SINT-C05")?.state === "upit", JSON.stringify(line("SINT-C05")));
+    check("lager-kupci: 900001 (1 kom) → 12 kom", line("900001")?.text === "Na stanju prema izvozu: 12 kom", JSON.stringify(line("900001")));
+    check("lager-kupci: API kupcu bez izvornih količina, nabavnih cena i internih naziva lagera", !/quantity|Nab|1000|SINT STARA|codeKey|sourceCode/.test(JSON.stringify(api.stock)));
+    // Telefon: blok stanja bez horizontalnog pomeranja.
+    const tm = await (await b.newContext(phone)).newPage();
+    await go(tm, `/prijava/kupac?callbackUrl=${encodeURIComponent("/proizvodi/baslac-70-10-silicone-remover-for-oil-silicone-and-grease")}`);
+    await tm.fill("input[name=email]", creds.kupac.email);
+    await tm.fill("input[name=password]", creds.kupac.password);
+    await Promise.all([tm.waitForURL((u) => !u.pathname.startsWith("/prijava"), { timeout: 60000 }), tm.keyboard.press("Enter")]);
+    await tm.locator('section[aria-label="Stanje na lageru"]').waitFor({ timeout: 30000 });
+    await tm.locator('section[aria-label="Stanje na lageru"]').scrollIntoViewIfNeeded();
+    const sw = await tm.evaluate(() => document.documentElement.scrollWidth - window.innerWidth);
+    check("lager-kupci telefon: bez horizontalnog pomeranja", sw <= 1, `višak ${sw}px`);
+    await tm.screenshot({ path: `${OUT}/lager-kupci-2-telefon.png`, fullPage: false });
+    // Isključivanje: vlasnik jednim klikom; kupac više ne vidi stanje.
+    await go(g, "/portal/zalihe");
+    await g.fill('input[name="razlog"]', "sintetička proba isključivanja");
+    await g.getByRole("button", { name: "Isključite prikaz kupcima" }).click();
+    await g.locator('.lg-toggle [role="status"]').waitFor({ timeout: 30000 });
+    const off = await kp.evaluate(async () => (await fetch("/api/kupac/ponude", { cache: "no-store" })).json());
+    check("lager-kupci: posle isključivanja kupac nema stanje", off.signedIn === true && off.stock === null, JSON.stringify(off.stock));
   }
 } catch (e) {
   check("skripta", false, String(e.message).split("\n").slice(0, 3).join(" | "));

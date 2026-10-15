@@ -23,6 +23,7 @@ import {
   isInternalDemoRoute,
 } from "./lib/internal-demo-routes.mjs";
 import { brandAliasSearch } from "./lib/legacy-query-aliases.mjs";
+import { SUBJECT_CUSTOMER } from "./lib/authz/customer-scope.mjs";
 
 const MAINTENANCE_ROUTE = "/site-u-pripremi";
 const SITE_ACCESS_ROUTE = "/site-u-pripremi/access";
@@ -212,10 +213,17 @@ export default withAuth(async function middleware(request) {
     return privateRedirect(new URL(target, request.nextUrl.origin));
   }
 
-  return handleSiteRouting(request);
+  /*
+   * Prijavljeni KUPAC vidi katalog i stranice proizvoda i dok je javni sajt „u pripremi“
+   * (odluka vlasnika 15. 10. 2026) — bez koda sajta. Neprijavljeni posetioci i dalje idu na
+   * „sajt u pripremi“. Ovde se proverava samo potpisan token; čiji je nalog i sme li da vidi
+   * cene i stanje odlučuje server (`getCustomerSession`) pri svakom zahtevu.
+   */
+  const signedInCustomer = Boolean(request.auth?.user?.id) && request.auth?.user?.subject === SUBJECT_CUSTOMER;
+  return handleSiteRouting(request, signedInCustomer);
 });
 
-async function handleSiteRouting(request: NextRequest) {
+async function handleSiteRouting(request: NextRequest, signedInCustomer = false) {
   const { pathname } = request.nextUrl;
   // Interne demo strane ne postoje na Production/Preview deploymentu (404),
   // nezavisno od režima održavanja i pristupnog koda.
@@ -241,7 +249,7 @@ async function handleSiteRouting(request: NextRequest) {
     return NextResponse.redirect(canonicalQuery, 308);
   }
   const maintenanceEnabled = isMaintenanceEnabled();
-  const hasAccess = await hasSiteAccess(request);
+  const hasAccess = signedInCustomer || (await hasSiteAccess(request));
 
   if (isPreviewRoute(pathname)) {
     return redirectTo(request, maintenanceEnabled && !hasAccess ? MAINTENANCE_ROUTE : "/");

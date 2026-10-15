@@ -39,12 +39,12 @@ export async function uploadStockAction(_prev: StockImportActionState, formData:
   if (file.size > MAX_STOCK_FILE_BYTES) return { error: `Fajl je veći od ${formatMegabytes(MAX_STOCK_FILE_BYTES)}.`, ok: null };
   let importId: string;
   let duplicate = false;
-  let olderParser = false;
+  let recheck = false;
   try {
     const result = await uploadStockReport(actor, { fileName: file.name, bytes: new Uint8Array(await file.arrayBuffer()) });
     importId = result.importId;
     duplicate = result.duplicate;
-    olderParser = Boolean(result.failedWithOlderParser);
+    recheck = Boolean(result.recheckOf);
   } catch (error) {
     const m = message(error);
     if (m) return { error: `Lager nije prihvaćen: ${m}`, ok: null };
@@ -52,7 +52,7 @@ export async function uploadStockAction(_prev: StockImportActionState, formData:
     return { error: "Otpremanje nije uspelo. Ništa nije upisano; pokušajte ponovo.", ok: null };
   }
   revalidatePath(PATH);
-  redirect(`${PATH}/${importId}${olderParser ? "?isti=1&raniji=1" : duplicate ? "?isti=1" : ""}`);
+  redirect(`${PATH}/${importId}${recheck ? "?ponovo=1" : duplicate ? "?isti=1" : ""}`);
 }
 
 export async function confirmStockAction(_prev: StockImportActionState, formData: FormData): Promise<StockImportActionState> {

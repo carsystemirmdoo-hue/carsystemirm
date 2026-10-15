@@ -1,6 +1,12 @@
 # 62 — Objava: kupovina preko sajta, cela pakovanja i prvi skup veza (jedan postupak)
 
-Status: **pripremljeno, ništa nije primenjeno na Production.** Jedno odobrenje vlasnika pokriva
+Status (15. 10. 2026): **koraci 0–7 izvršeni ranijim objavama; koraci 8–10 izvršeni 15. 10.** po
+odobrenju vlasnika: odobreni skupovi 1–15 objedinjeni u jedan plan (jedna konačna odluka po šifri, svi
+izvori uz zapis: potvrda vlasnika, pravilo vlasnika, kancelarija, etiketa), odluke artikala, pribor i
+ispravke oznaka — posle proverene kopije i probe na izolovanoj kopiji Production baze; upis
+pakovanja i pribora sada ima i audit zapis. Brojevi su u privatnom zapisu prenosa.
+
+Prvobitni status: pripremljeno, ništa nije primenjeno na Production. Jedno odobrenje vlasnika pokriva
 ceo postupak ispod; postupak se **zaustavlja** čim neka provera padne ili stanje odstupa od
 pripremljenog (§3).
 

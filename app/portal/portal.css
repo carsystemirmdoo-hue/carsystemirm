@@ -10609,3 +10609,6 @@ html:has(.portal-customer-area) { scroll-padding-top: 104px; }
 /* Lager — ponovna potvrda identiteta pre odluke */
 .lg-reauth { display: flex; flex-wrap: wrap; gap: 10px 16px; align-items: center; justify-content: space-between; margin-bottom: 14px; padding: 10px 12px; border: 1px solid var(--p-line); border-left: 3px solid var(--p-amber); border-radius: 2px; background: var(--p-amber-soft); }
 .lg-reauth p { margin: 0; flex: 1 1 320px; color: var(--p-ink); font-size: 13px; line-height: 1.45; }
+
+/* Zalihe — prekidač prikaza kupcima */
+.lg-toggle { display: grid; gap: 10px; margin-top: 14px; padding-top: 14px; border-top: 1px solid var(--p-line); }

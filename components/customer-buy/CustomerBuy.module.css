@@ -374,14 +374,56 @@
 .priceFacts dd small { display: block; color: var(--buy-muted); font-size: var(--ds-font-legal); font-weight: 400; }
 
 /* Stanje iz poslednjeg izvoza lagera (dok. 65) — prikazuje se samo kada je uključeno. */
-.stockNote {
+.stock {
   display: grid;
-  gap: 0.2rem;
-  margin: 0.5rem 0 0;
+  gap: 0.35rem;
+  margin: 0.25rem 0 0.75rem;
+  padding: 0.6rem 0.75rem;
+  border-left: 3px solid var(--buy-line, currentColor);
+  background: var(--buy-soft, transparent);
   font-size: var(--ds-font-small);
 }
 
-.stockNote small {
+.stock[data-state="zastareo"] {
+  border-left-color: var(--ds-c-warn, #b7791f);
+}
+
+.stockList {
+  display: grid;
+  gap: 0.2rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.stockList li {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.15rem 0.5rem;
+  align-items: baseline;
+}
+
+.stockList li[data-state="ima"] strong {
+  color: var(--ds-c-ok, inherit);
+}
+
+.stockList li[data-state="upit"] strong,
+.stockList li[data-state="nema"] strong {
+  font-weight: 500;
+}
+
+.stockPack {
+  min-width: 6.5rem;
+  color: var(--buy-muted);
+}
+
+.stockLead {
+  margin: 0;
+  font-weight: 500;
+}
+
+.stockCaption {
+  margin: 0;
   color: var(--buy-muted);
   font-size: var(--ds-font-legal);
 }

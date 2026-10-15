@@ -1,4 +1,5 @@
-import { date, index, integer, jsonb, numeric, pgEnum, pgTable, primaryKey, text, timestamp, unique, uuid } from "drizzle-orm/pg-core";
+import { sql } from "drizzle-orm";
+import { date, index, integer, jsonb, numeric, pgEnum, pgTable, primaryKey, text, timestamp, unique, uniqueIndex, uuid } from "drizzle-orm/pg-core";
 import { users } from "./users";
 
 /*
@@ -38,7 +39,9 @@ export const stockImports = pgTable(
     linesPurgedReason: text("lines_purged_reason"),
   },
   (t) => [
-    unique("stock_imports_sha_key").on(t.fileSha256),
+    // 0052: isti fajl + ista verzija čitača jednom; najviše jedan zapis koji nije „neuspešno“.
+    unique("stock_imports_sha_parser_key").on(t.fileSha256, t.parserVersion),
+    uniqueIndex("stock_imports_sha_live_key").on(t.fileSha256).where(sql`${t.status} <> 'neuspesno'`),
     index("stock_imports_status_idx").on(t.status, t.decidedAt),
     index("stock_imports_uploaded_idx").on(t.uploadedAt),
   ],

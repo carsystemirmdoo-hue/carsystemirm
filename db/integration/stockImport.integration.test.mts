@@ -140,25 +140,30 @@ test("potvrda → važeći snimak; neuspešan fajl ga ne menja; stariji datum ne
   assert.equal(n, 2, "prethodni snimak ostaje u istoriji");
 });
 
-test("prikaz kupcu: isključen bez obe brave i praga; uključen daje cela pakovanja samo uz potvrdu", async (t) => {
+test("prikaz kupcu: prekidač vlasnika i prag 24 h od vremena stanja; broj samo uz potvrdu, ostalo na upit", async (t) => {
   if (guard(t)) return;
   const svc = await import("@/lib/stock/stock-import-service");
   const all = [ids["900001"], ids["000012"], ids["777777"]];
-  const now = new Date("2026-09-07T10:00:00Z");
+  // Važeći snimak ima samo datum 06.09.2026 → važi od 05.09. 22:00 UTC (ponoć u Beogradu) 24 h.
+  const fresh = new Date("2026-09-06T10:00:00Z");
   delete process.env.STOCK_CUSTOMER_DISPLAY;
-  assert.equal((await svc.customerStockFor(all, now)).byArticle.size, 0);
-  process.env.STOCK_CUSTOMER_DISPLAY = "1";
-  assert.equal((await svc.customerStockFor(all, now)).byArticle.size, 0, "bez podešavanja vlasnika");
+  assert.deepEqual(await svc.customerStockFor(all, fresh), { state: "iskljuceno" }, "bez podešavanja vlasnika");
   await db.sql`INSERT INTO system_settings (key, value) VALUES ('stock.customerDisplay', ${db.sql.json({ enabled: true })})`;
-  assert.equal((await svc.customerStockFor(all, now)).byArticle.size, 0, "bez praga zastarelosti");
-  await db.sql`UPDATE system_settings SET value = ${db.sql.json({ enabled: true, maxAgeDays: 0 })} WHERE key = 'stock.customerDisplay'`;
-  assert.equal((await svc.customerStockFor(all, now)).byArticle.size, 0, "snimak od 06.09. je star za prag 0 dana");
-  await db.sql`UPDATE system_settings SET value = ${db.sql.json({ enabled: true, maxAgeDays: 3 })} WHERE key = 'stock.customerDisplay'`;
-  const r = await svc.customerStockFor(all, now);
-  assert.deepEqual(r.byArticle.get(ids["900001"]), { packs: 2, reason: null, label: "5 L" });
-  assert.deepEqual(r.byArticle.get(ids["000012"]), { packs: null, reason: "pakovanje_nepotvrdjeno", label: null });
-  assert.deepEqual(r.byArticle.get(ids["777777"]), { packs: null, reason: "nije_u_izvozu", label: null }, "izostavljen artikal nije nula");
+  assert.deepEqual(await svc.customerStockFor(all, fresh), { state: "iskljuceno" }, "bez praga");
+  await db.sql`UPDATE system_settings SET value = ${db.sql.json({ enabled: true, maxAgeHours: 24 })} WHERE key = 'stock.customerDisplay'`;
+  const r = await svc.customerStockFor(all, fresh);
+  assert.equal(r.state, "svez");
+  if (r.state !== "svez") return;
+  assert.equal(r.validUntil.toISOString(), "2026-09-06T22:00:00.000Z");
+  assert.deepEqual(r.byArticle.get(ids["900001"]), { state: "ima", text: "Na stanju prema izvozu: 2 × 5 L" }, "12 L / 5 L = 2 cela pakovanja");
+  assert.deepEqual(r.byArticle.get(ids["000012"]), { state: "upit", text: "Raspoloživost na upit" }, "bez potvrđenog pakovanja");
+  assert.deepEqual(r.byArticle.get(ids["777777"]), { state: "upit", text: "Raspoloživost na upit" }, "izostavljen artikal nije nula");
+  assert.deepEqual(await svc.customerStockFor(all, new Date("2026-09-06T22:00:00Z")), { state: "zastareo", stockDate: "2026-09-06" }, "posle 24 h bez brojeva");
+  process.env.STOCK_CUSTOMER_DISPLAY = "0";
+  assert.deepEqual(await svc.customerStockFor(all, fresh), { state: "iskljuceno" }, "hitno isključenje u okruženju");
   delete process.env.STOCK_CUSTOMER_DISPLAY;
+  await db.sql`UPDATE system_settings SET value = ${db.sql.json({ enabled: false, maxAgeHours: 24 })} WHERE key = 'stock.customerDisplay'`;
+  assert.deepEqual(await svc.customerStockFor(all, fresh), { state: "iskljuceno" }, "isključeno podešavanjem");
 });
 
 const XLSX_B = readFileSync(new URL("../../fixtures/dev/biznisoft/lager/stanje-zaliha-artikla-sinteticki.xlsx", import.meta.url));
@@ -182,16 +187,25 @@ test("raspored B (JM u izveštaju): JM različita od potvrđenog pakovanja → n
   assert.equal(v.header.parserVersion, "biznisoft-stanje-zaliha/2");
 });
 
-test("isti fajl koji je ranije odbila starija verzija čitača: postojeći zapis + uputstvo za nov izvoz", async (t) => {
+test("isti fajl koji je ranije odbila starija verzija čitača: nova provera, stari pokušaj ostaje, bez duplikata", async (t) => {
   if (guard(t)) return;
   const svc = await import("@/lib/stock/stock-import-service");
   const bytes = csvWithDate("07.09.2026");
   const { createHash } = await import("node:crypto");
   const sha = createHash("sha256").update(bytes).digest("hex");
-  await db.sql`INSERT INTO stock_imports (file_sha256, file_name, file_bytes, file_format, parser_version, line_count, status, uploaded_by, decided_at)
-    VALUES (${sha}, 'stari-pokusaj.csv', ${bytes.length}, 'csv', 'biznisoft-stanje-zaliha/1', 0, 'neuspesno', ${office.id}, now())`;
+  const [old] = await db.sql<{ id: string }[]>`INSERT INTO stock_imports (file_sha256, file_name, file_bytes, file_format, parser_version, line_count, status, uploaded_by, decided_at)
+    VALUES (${sha}, 'stari-pokusaj.csv', ${bytes.length}, 'csv', 'biznisoft-stanje-zaliha/1', 0, 'neuspesno', ${office.id}, now()) RETURNING id`;
   const up = await svc.uploadStockReport(asUser(office), { fileName: "isti.csv", bytes });
-  assert.deepEqual([up.duplicate, up.status, up.failedWithOlderParser], [true, "neuspesno", true]);
-  const [{ n }] = await db.sql<{ n: number }[]>`SELECT count(*)::int AS n FROM stock_imports WHERE file_sha256 = ${sha}`;
-  assert.equal(n, 1, "nema duplikata");
+  assert.deepEqual([up.duplicate, up.status, up.recheckOf], [false, "pregled", old.id]);
+  const again = await svc.uploadStockReport(asUser(office), { fileName: "isti-opet.csv", bytes });
+  assert.deepEqual([again.duplicate, again.importId], [true, up.importId], "ponovljen upload = ista nova provera");
+  const rows = await db.sql<{ status: string; parser_version: string }[]>`SELECT status::text AS status, parser_version FROM stock_imports WHERE file_sha256 = ${sha} ORDER BY uploaded_at`;
+  assert.deepEqual(rows.map((r) => [r.status, r.parser_version]), [["neuspesno", "biznisoft-stanje-zaliha/1"], ["pregled", "biznisoft-stanje-zaliha/2"]], "istorija pokušaja");
+  // Baza: isti fajl ne može imati dva zapisa koji nisu „neuspešno“ (nema duplih snimaka).
+  await assert.rejects(
+    db.sql`INSERT INTO stock_imports (file_sha256, file_name, file_bytes, file_format, parser_version, line_count, status, uploaded_by)
+      VALUES (${sha}, 'dupli.csv', ${bytes.length}, 'csv', 'biznisoft-stanje-zaliha/3', 0, 'pregled', ${office.id})`,
+    (e: { code?: string }) => e.code === "23505",
+  );
+  await svc.discardStockImport(asUser(office), { importId: up.importId, note: "proba ponovne provere" });
 });

@@ -1,4 +1,4 @@
-import { publicSiteOpenForRequest } from "@/lib/site-access-request";
+import { siteOpenForCustomer } from "@/lib/site-access-request";
 import Link from "next/link";
 import { dmyTime } from "@/lib/ordering/panelFormat.mjs";
 import { requireCustomerSession } from "@/lib/authz/customer-session";
@@ -19,7 +19,7 @@ const qfmt = new Intl.NumberFormat("sr-Latn-RS", { maximumFractionDigits: 3 });
 
 /** Upiti za cenu i posebne uslove firme iz sesije, sa odgovorom kancelarije/komercijaliste. */
 export default async function CustomerPriceRequestsPage() {
-  const siteOpen = await publicSiteOpenForRequest();
+  const siteOpen = await siteOpenForCustomer();
   const session = await requireCustomerSession("/kupac/upiti");
   const [rows, contacts] = await Promise.all([
     listCustomerPriceRequests(session.customerId),

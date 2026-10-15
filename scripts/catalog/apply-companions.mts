@@ -31,6 +31,7 @@ if (write && /neon\.tech|neon\.build/.test(url) && !rest.includes("--production-
 if (!write) process.env.DATABASE_POOL_MAX = "1";
 
 const { getDb } = await import("@/db/client");
+const { AUDIT_ACTIONS, recordAudit } = await import("@/lib/audit/record");
 
 type Pair = {
   artikal: string; pribor: string; vrsta: string; dokaz: string;
@@ -46,7 +47,7 @@ if (!write) {
 }
 const [{ has }] = [...(await db.execute<{ has: boolean }>(sql`SELECT to_regclass('public.article_companions') IS NOT NULL AS has`))];
 if (!has) console.log("UPOZORENJE: migracija 0048 (article_companions) nije primenjena na ovoj bazi — parovi se ne mogu upisati.");
-const [actor] = by ? [...(await db.execute<{ id: string }>(sql`SELECT id FROM users WHERE lower(email) = lower(${by}) AND active`))] : [];
+const [actor] = by ? [...(await db.execute<{ id: string; name: string; role: string }>(sql`SELECT id, name, role::text AS role FROM users WHERE lower(email) = lower(${by}) AND active`))] : [];
 if (write && !actor) { console.error(`Nema aktivnog zaposlenog ${by}.`); process.exit(1); }
 
 const byCode = async (code: string) =>
@@ -79,10 +80,26 @@ console.log(`Spremno: ${rows.filter((r) => r._ok).length} / ${rows.length}${writ
 if (write) {
   for (const r of ready) {
     const p = r._p as Pair;
-    await db.execute(sql`
-      INSERT INTO article_companions (article_id, companion_article_id, kind, evidence, confirmed_by, option_label, source_url, ratio_base, ratio_companion, ratio_basis)
-      VALUES (${r._a as string}::uuid, ${r._c as string}::uuid, ${p.vrsta}, ${`${p.dokaz} (${plan.izvor ?? "potvrda vlasnika"})`.slice(0, 500)}, ${actor.id}::uuid,
-              ${p.opcija ?? null}, ${p.izvor_url ?? null}, ${p.odnos?.osnova ?? null}, ${p.odnos?.pribor ?? null}, ${p.odnos?.baza ?? null})`);
+    // Par i njegov audit u istoj transakciji.
+    await db.transaction(async (tx) => {
+      await tx.execute(sql`
+        INSERT INTO article_companions (article_id, companion_article_id, kind, evidence, confirmed_by, option_label, source_url, ratio_base, ratio_companion, ratio_basis)
+        VALUES (${r._a as string}::uuid, ${r._c as string}::uuid, ${p.vrsta}, ${`${p.dokaz} (${plan.izvor ?? "potvrda vlasnika"})`.slice(0, 500)}, ${actor.id}::uuid,
+                ${p.opcija ?? null}, ${p.izvor_url ?? null}, ${p.odnos?.osnova ?? null}, ${p.odnos?.pribor ?? null}, ${p.odnos?.baza ?? null})`);
+      await recordAudit(
+        {
+          actor: { id: actor.id, name: actor.name, role: actor.role as never },
+          action: AUDIT_ACTIONS.companionConfirmed,
+          entityType: "Artikal",
+          entityId: r._a as string,
+          entityLabel: `${p.artikal} → ${p.pribor} (${p.vrsta})`,
+          before: null,
+          after: { pribor: p.pribor, vrsta: p.vrsta, opcija: p.opcija ?? null, odnos: p.odnos ?? null, izvorUrl: p.izvor_url ?? null },
+          reason: `${p.dokaz} (${plan.izvor ?? "potvrda vlasnika"})`.slice(0, 1000),
+        },
+        tx as never,
+      );
+    });
   }
   console.log(`Upisano: ${ready.length}.`);
 }

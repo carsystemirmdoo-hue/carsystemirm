@@ -4,6 +4,8 @@ import { Badge, PageHeader, SectionHeader } from "@/components/portal/PortalPrim
 import { can } from "@/lib/authz/permissions.mjs";
 import { requireCapability } from "@/lib/authz/session";
 import { dmy, dmyTime, quantity } from "@/lib/ordering/panelFormat.mjs";
+import { StockDisplayToggle } from "@/features/portal/StockDisplayToggle";
+import { customerDisplayDecision } from "@/lib/stock/displayPolicy.mjs";
 import { currentStockSnapshot, stockDisplayPolicy } from "@/lib/stock/stock-import-service";
 
 
@@ -17,7 +19,14 @@ export default async function Page() {
   const user = await requireCapability("view:zalihe", "/portal/zalihe");
   const [current, policy] = await Promise.all([currentStockSnapshot(), stockDisplayPolicy()]);
   const canImport = can(user, "imports:write");
-  const envOn = process.env.STOCK_CUSTOMER_DISPLAY === "1";
+  const envOff = process.env.STOCK_CUSTOMER_DISPLAY === "0";
+  const canToggle = can(user, "settings:manage");
+  const decision = customerDisplayDecision({
+    env: process.env,
+    policy: { enabled: true, maxAgeHours: policy.maxAgeHours ?? 24 },
+    snapshot: current?.stockDate ? { stockDate: current.stockDate } : null,
+    now: new Date(),
+  });
 
   return (
     <>
@@ -43,12 +52,29 @@ export default async function Page() {
       </section>
 
       <section className="portal-panel">
-        <SectionHeader title="Prikaz kupcima" description="Prijavljeni kupci vide stanje tek kada se uključe obe brave i zada prag zastarelosti." />
-        <dl className="pl-facts">
-          <div><dt>Okruženje</dt><dd>{envOn ? <Badge tone="warning">dozvoljeno</Badge> : <Badge tone="neutral">isključeno</Badge>}</dd></div>
-          <div><dt>Podešavanje vlasnika</dt><dd>{policy.enabled ? <Badge tone="warning">uključeno</Badge> : <Badge tone="neutral">isključeno</Badge>}</dd></div>
-          <div><dt>Prag zastarelosti</dt><dd>{policy.maxAgeDays === null ? "nije zadat — bez praga nema prikaza" : `${policy.maxAgeDays} dana od datuma stanja`}</dd></div>
-        </dl>
+        <SectionHeader
+          title="Prikaz kupcima"
+          description="Svi prijavljeni kupci vide stanje iz važećeg snimka: broj celih pakovanja samo za proizvode sa potvrđenom vezom i pakovanjem, ostalo „Raspoloživost na upit“. Napomena kupcu: raspoloživost potvrđuje kancelarija."
+        />
+        <div className="portal-panel-body">
+          <dl className="pl-facts">
+            <div><dt>Prikaz</dt><dd>{envOff ? <Badge tone="danger">isključen u okruženju</Badge> : policy.enabled ? <Badge tone="success">uključen</Badge> : <Badge tone="neutral">isključen</Badge>}</dd></div>
+            <div><dt>Prag svežine</dt><dd>{policy.maxAgeHours ?? 24} h od vremena stanja (izvoz ima samo datum → od početka tog dana)</dd></div>
+            <div>
+              <dt>Važeći snimak za kupce</dt>
+              <dd>
+                {!current
+                  ? "nema potvrđenog snimka — kupci ne vide stanje"
+                  : decision.show
+                    ? `brojevi vidljivi do ${dmyTime(decision.validUntil)}`
+                    : decision.reason === "zastareo_snimak"
+                      ? "stariji od praga — kupci vide „potrebna je provera raspoloživosti“; otpremite i potvrdite današnji izvoz"
+                      : "—"}
+              </dd>
+            </div>
+          </dl>
+          {canToggle && !envOff ? <StockDisplayToggle enabled={policy.enabled} /> : null}
+        </div>
       </section>
 
       <PhaseNotice

@@ -5,7 +5,8 @@ import { articlePackSizes, articles, stockImportLines, stockImports, systemSetti
 import { AUDIT_ACTIONS, recordAudit } from "@/lib/audit/record";
 import { can } from "@/lib/authz/permissions.mjs";
 import type { PortalUser } from "@/lib/authz/user-repository";
-import { customerDisplayDecision, normalizeDisplayPolicy, STOCK_DISPLAY_SETTING } from "@/lib/stock/displayPolicy.mjs";
+import { customerDisplayDecision, customerStockLine, normalizeDisplayPolicy, STOCK_DISPLAY_SETTING } from "@/lib/stock/displayPolicy.mjs";
+import { isSinglePiece } from "@/lib/ordering/packRule.mjs";
 import { readStockFile } from "@/lib/stock/readStockFile.mjs";
 import { buildArticleIndex, codeKey, linkLine, wholePacks } from "@/lib/stock/stockLink.mjs";
 
@@ -127,24 +128,23 @@ async function applyRetention(tx: TxLike) {
  * Otpremanje
  * ====================================================================== */
 
-export type StockUploadResult = { importId: string; duplicate: boolean; status: string; failedWithOlderParser?: boolean };
+export type StockUploadResult = { importId: string; duplicate: boolean; status: string; recheckOf?: string | null };
 
 export async function uploadStockReport(actor: Actor, input: { fileName: string; bytes: Uint8Array }): Promise<StockUploadResult> {
   assertCanImport(actor);
   const file = readStockFile(input.bytes);
   const r = file.report;
   const db = getDb();
-  const [existing] = await db
-    .select({ id: stockImports.id, status: stockImports.status, parserVersion: stockImports.parserVersion })
+  const earlier = await db
+    .select({ id: stockImports.id, status: stockImports.status, parserVersion: stockImports.parserVersion, uploadedAt: stockImports.uploadedAt })
     .from(stockImports)
     .where(eq(stockImports.fileSha256, file.sha256))
-    .limit(1);
-  if (existing) {
-    // Isti fajl je jedinstven (SHA-256). Ako ga je ranije odbila STARIJA verzija čitača, nov
-    // pokušaj traži nov izvoz iz BizniSofta — stari zapis ostaje kao evidencija.
-    const failedWithOlderParser = existing.status === "neuspesno" && existing.parserVersion !== r.parser;
-    return { importId: existing.id, duplicate: true, status: existing.status, failedWithOlderParser };
-  }
+    .orderBy(desc(stockImports.uploadedAt));
+  // Isti fajl (SHA-256) sa istom verzijom čitača, ili zapis koji je prošao proveru → postojeći zapis.
+  const same = earlier.find((e) => e.parserVersion === r.parser) ?? earlier.find((e) => e.status !== "neuspesno");
+  if (same) return { importId: same.id, duplicate: true, status: same.status };
+  // Ostaje: isti fajl je ranije pao na STARIJOJ verziji čitača → nova provera, stari pokušaj ostaje u istoriji (0052).
+  const recheckOf = earlier[0]?.id ?? null;
 
   const ctx = r.ok ? await linkContext(db) : null;
   // JM iz izveštaja (raspored B) samo PROVERAVA potvrđeno pakovanje — nikad ga ne zamenjuje.
@@ -195,11 +195,17 @@ export async function uploadStockReport(actor: Actor, input: { fileName: string;
         uploadedBy: actor.id,
         decidedAt: status === "neuspesno" ? new Date() : null,
       })
-      .onConflictDoNothing({ target: stockImports.fileSha256 })
+      .onConflictDoNothing()
       .returning({ id: stockImports.id });
     if (!created) {
-      const [other] = await tx.select({ id: stockImports.id, status: stockImports.status }).from(stockImports).where(eq(stockImports.fileSha256, file.sha256));
-      return { importId: other.id, duplicate: true, status: other.status, failedWithOlderParser: false };
+      // Paralelan upload istog fajla: pobedio je drugi zahtev — prikazuje se njegov zapis.
+      const [other] = await tx
+        .select({ id: stockImports.id, status: stockImports.status })
+        .from(stockImports)
+        .where(eq(stockImports.fileSha256, file.sha256))
+        .orderBy(desc(stockImports.uploadedAt))
+        .limit(1);
+      return { importId: other.id, duplicate: true, status: other.status };
     }
     if (r.ok) {
       for (let i = 0; i < r.lines.length; i += 500) {
@@ -223,13 +229,13 @@ export async function uploadStockReport(actor: Actor, input: { fileName: string;
         entityType: ENTITY,
         entityId: created.id,
         entityLabel: `${safeName(input.fileName).slice(0, 120)}${r.meta.stockDate ? ` (stanje ${r.meta.stockDate})` : ""}`,
-        after: { sha256: file.sha256, status, lines: summary.lines, errors: r.errors.length, warnings: warnings.length, stockDate: r.meta.stockDate, parser: r.parser },
+        after: { sha256: file.sha256, status, lines: summary.lines, errors: r.errors.length, warnings: warnings.length, stockDate: r.meta.stockDate, parser: r.parser, ponovnaProveraZa: recheckOf },
       },
       tx,
     );
     // Rok od 7 dana za nepotvrđena/odbačena; dva poslednja potvrđena snimka se ne diraju.
     await applyRetention(tx);
-    return { importId: created.id, duplicate: false, status, failedWithOlderParser: false };
+    return { importId: created.id, duplicate: false, status, recheckOf };
   });
 }
 
@@ -400,7 +406,7 @@ export async function discardStockImport(actor: Actor, input: { importId: string
 }
 
 /* =========================================================================
- * Prikaz kupcu (pripremljeno, isključeno)
+ * Prikaz kupcu (dok. 65 §4) — prekidač vlasnika, prag svežine od vremena stanja
  * ====================================================================== */
 
 export async function stockDisplayPolicy() {
@@ -408,46 +414,66 @@ export async function stockDisplayPolicy() {
   return normalizeDisplayPolicy(row?.value ?? null);
 }
 
+export type CustomerStockLine = { state: "ima" | "nema" | "upit"; text: string };
+export type CustomerStock =
+  | { state: "iskljuceno" }
+  | { state: "zastareo"; stockDate: string }
+  | { state: "svez"; stockDate: string; validUntil: Date; byArticle: Map<string, CustomerStockLine> };
+
 /**
- * Stanje iz poslednjeg izvoza za artikle (po id-ju) — vraća prazno kada je prikaz isključen.
- * Broj pakovanja samo uz potvrđenu vezu, JM i pakovanje.
+ * Šta prijavljeni kupac vidi o stanju za date artikle (po id-ju).
+ *
+ * - isključeno (prekidač, nema snimka, nema praga) → ništa se ne prikazuje i ne čitaju se stavke;
+ * - snimak stariji od praga → samo „potrebna je provera“, bez brojeva;
+ * - svež snimak → broj celih pakovanja samo uz potvrđenu vezu šifre, JM i pakovanje; sve ostalo
+ *   (izostavljena šifra, sudar, nepotvrđeno pakovanje, razlika JM, negativno ili prazno stanje)
+ *   je „Raspoloživost na upit“. Izostavljena šifra nije nula.
  */
-export async function customerStockFor(articleIds: string[], now = new Date()) {
-  const empty = { snapshot: null, byArticle: new Map<string, { packs: number | null; reason: string | null; label: string | null }>() };
-  // Prva brava pre ijednog upita: isključen prikaz ne čita tabele lagera.
-  if (!articleIds.length || process.env.STOCK_CUSTOMER_DISPLAY !== "1") return empty;
+export async function customerStockFor(articleIds: string[], now = new Date()): Promise<CustomerStock> {
+  if (!articleIds.length || process.env.STOCK_CUSTOMER_DISPLAY === "0") return { state: "iskljuceno" };
   const db = getDb();
-  const snapshot = await currentStockSnapshot();
   const [policyRow] = await db.select({ value: systemSettings.value }).from(systemSettings).where(eq(systemSettings.key, STOCK_DISPLAY_SETTING)).limit(1);
-  const today = new Intl.DateTimeFormat("en-CA", { timeZone: "Europe/Belgrade" }).format(now);
+  if (!normalizeDisplayPolicy(policyRow?.value ?? null).enabled) return { state: "iskljuceno" };
+  const snapshot = await currentStockSnapshot();
   const decision = customerDisplayDecision({
     env: process.env,
     policy: policyRow?.value ?? null,
-    snapshot: snapshot?.stockDate && snapshot.confirmedAt ? { stockDate: snapshot.stockDate, confirmedAt: snapshot.confirmedAt.toISOString() } : null,
-    today,
+    snapshot: snapshot?.stockDate ? { stockDate: snapshot.stockDate } : null,
+    now,
   });
-  const byArticle = new Map<string, { packs: number | null; reason: string | null; label: string | null }>();
-  if (!decision.show || !snapshot) return { snapshot: null, byArticle };
-  const arts = await db.select({ id: articles.id, code: articles.code }).from(articles).where(inArray(articles.id, articleIds));
+  if (!decision.show) return decision.reason === "zastareo_snimak" && snapshot?.stockDate ? { state: "zastareo", stockDate: snapshot.stockDate } : { state: "iskljuceno" };
+  if (!snapshot?.stockDate) return { state: "iskljuceno" };
+  const arts = await db.select({ id: articles.id, code: articles.code, unit: articles.unit }).from(articles).where(inArray(articles.id, articleIds));
   const ctx = await linkContext(db);
-  const lines = await db.select().from(stockImportLines).where(eq(stockImportLines.importId, snapshot.id));
+  const keys = [...new Set(arts.map((a) => codeKey(a.code)).filter((k): k is string => k !== null))];
+  const lines = keys.length
+    ? await db.select().from(stockImportLines).where(and(eq(stockImportLines.importId, snapshot.id), inArray(stockImportLines.codeKey, keys)))
+    : [];
   const [snapSummary] = await db.select({ summary: stockImports.summary }).from(stockImports).where(eq(stockImports.id, snapshot.id));
   const jmBad = jmMismatchCodes(snapSummary?.summary ?? null);
-  const byKey = new Map(lines.map((l) => [l.codeKey, l]));
+  // Dva reda izvoza sa istim ključem šifre (npr. „91“ i „091“) su nejasni → bez broja.
+  const keyCount = new Map<string | null, number>();
+  for (const l of lines) keyCount.set(l.codeKey, (keyCount.get(l.codeKey) ?? 0) + 1);
+  const byKey = new Map(lines.filter((l) => keyCount.get(l.codeKey) === 1).map((l) => [l.codeKey, l]));
+  const byArticle = new Map<string, CustomerStockLine>();
   for (const a of arts) {
     const line = byKey.get(codeKey(a.code));
-    if (!line) {
-      // Izostavljen artikal nije „nula" — nepoznato.
-      byArticle.set(a.id, { packs: null, reason: "nije_u_izvozu", label: null });
-      continue;
-    }
-    const link = linkLine({ sourceCode: line.sourceCode, codeKey: line.codeKey }, ctx.index, ctx.packs);
-    if (link.articleId !== a.id) {
-      byArticle.set(a.id, { packs: null, reason: link.link === "sudar" ? "sudar_sifara" : "nepovezan", label: null });
-      continue;
-    }
-    const p = jmBad.has(line.sourceCode) ? ({ status: "nema_broja", reason: "jm_razlika" } as const) : wholePacks({ quantity: line.quantity === null ? null : Number(line.quantity), link });
-    byArticle.set(a.id, { packs: p.status === "ok" ? p.packs : null, reason: p.status === "ok" ? null : p.reason, label: link.pack?.label ?? null });
+    const link = line ? linkLine({ sourceCode: line.sourceCode, codeKey: line.codeKey }, ctx.index, ctx.packs) : null;
+    const packs =
+      !line || !link || link.articleId !== a.id
+        ? ({ status: "nema_broja", reason: !line ? "nije_u_izvozu" : "nepovezan" } as const)
+        : jmBad.has(line.sourceCode)
+          ? ({ status: "nema_broja", reason: "jm_razlika" } as const)
+          : wholePacks({ quantity: line.quantity === null ? null : Number(line.quantity), link });
+    const pack = link?.pack ?? null;
+    byArticle.set(
+      a.id,
+      customerStockLine(packs, {
+        label: pack?.label ?? null,
+        unit: link?.unit ?? a.unit,
+        single: pack ? isSinglePiece({ quantity: pack.packQuantity, label: pack.label }, link?.unit ?? a.unit) : false,
+      }),
+    );
   }
-  return { snapshot, byArticle };
+  return { state: "svez", stockDate: snapshot.stockDate, validUntil: decision.validUntil, byArticle };
 }

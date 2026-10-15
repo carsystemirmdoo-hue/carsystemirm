@@ -7,7 +7,7 @@ import { isRememberEnabled } from "@/lib/auth/rememberRules.mjs";
 import { CustomerLoginForm } from "./CustomerLoginForm";
 import "../../portal/portal.css";
 import "../../portal/panel.css";
-import { publicSiteOpenForRequest } from "@/lib/site-access-request";
+import { siteOpenForCustomer } from "@/lib/site-access-request";
 
 export const metadata: Metadata = {
   title: "Prijava kupca",
@@ -34,7 +34,7 @@ export default async function CustomerLoginPage({
   const session = await getCustomerSession();
 
   if (session) {
-    redirect(customerLandingAfterLogin(normalizeCustomerReturn(callbackUrl), await publicSiteOpenForRequest()));
+    redirect(customerLandingAfterLogin(normalizeCustomerReturn(callbackUrl), await siteOpenForCustomer()));
   }
 
   return <CustomerLoginForm callbackUrl={callbackUrl ?? ""} rememberAvailable={isRememberEnabled()} notice={notice} />;

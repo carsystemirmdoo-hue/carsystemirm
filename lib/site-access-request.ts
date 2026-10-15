@@ -13,3 +13,13 @@ export async function publicSiteOpenForRequest(): Promise<boolean> {
   const token = (await cookies()).get(SITE_ACCESS_COOKIE_NAME)?.value;
   return isValidSiteAccessToken(token);
 }
+
+/**
+ * Javni sajt za PRIJAVLJENOG kupca (ili kupca koji se upravo prijavljuje): uvek otvoren.
+ * Odluka vlasnika 15. 10. 2026 — middleware propušta kupčevu sesiju i dok je sajt „u
+ * pripremi“, pa kupac posle prijave ide na stranu sa koje je došao, a nalog nudi katalog.
+ * Neprijavljeni posetioci i dalje zavise od `publicSiteOpenForRequest`.
+ */
+export async function siteOpenForCustomer(): Promise<boolean> {
+  return true;
+}

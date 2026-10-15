@@ -49,9 +49,9 @@ za jednu ili dve kolone vrednosti; filteri se čitaju i iz delova razdvojenih sa
 neprepoznate redove nije menjan. JM iz rasporeda B se ne koristi kao izvor — samo kao provera: ako se
 razlikuje od potvrđenog pakovanja, za tu stavku nema broja pakovanja i diže se upozorenje.
 
-Isti fajl je jedinstven (SHA-256): fajl koji je odbila starija verzija čitača ostaje zapisan kao
-*neuspešno*, a ponovno otpremanje istog fajla prikazuje uputstvo da se izveštaj ponovo izveze iz
-BizniSofta (nov izvoz je nov fajl).
+Isti fajl (SHA-256) sa istom verzijom čitača ima jedan zapis. Fajl koji je odbila STARIJA verzija
+čitača može se ponovo otpremiti: dobija novu proveru (nov zapis), a neuspešan pokušaj ostaje u istoriji
+(0052). Isti fajl nikad nema dva zapisa koji nisu „neuspešno“ — nema duplih snimaka.
 
 ## 2. Pravila
 
@@ -138,19 +138,35 @@ prikaz je uvek među dva sačuvana.
 
 Uz jedan uvoz dnevno lager tako zauzima ≈ 1,2 MB stavki + ≈ 1–2 KB po zapisu otpremanja.
 
-## 4. Prikaz kupcima — isključen
+## 4. Prikaz kupcima — svim prijavljenim kupcima (odluka vlasnika 15. 10. 2026)
 
-Kupac vidi stanje tek kada su otključane **obe brave**:
+**Prekidač:** `system_settings['stock.customerDisplay']` = `{ "enabled": true, "maxAgeHours": 24 }`.
+Vlasnik ga uključuje i isključuje u Portalu → **Zalihe → Prikaz kupcima** (razlog izmene, kod iz
+aplikacije u poslednjih 10 minuta, audit „Prikaz lagera kupcima“). Hitno isključenje za ceo deployment:
+promenljiva okruženja `STOCK_CUSTOMER_DISPLAY=0` (bez nje odlučuje podešavanje).
 
-1. okruženje: `STOCK_CUSTOMER_DISPLAY=1`;
-2. podešavanje vlasnika `system_settings['stock.customerDisplay']`:
-   `{ "enabled": true, "maxAgeDays": N }` — prag zastarelosti u danima od **datuma stanja**.
-   Prag nema podrazumevanu vrednost; ranije predloženi 75 min / 18 h nisu usvojeni.
+**Svežina:** 24 h od **vremena stanja**. Izvoz BizniSofta ima samo datum („Na dan“), pa se računa od
+početka tog dana po Europe/Belgrade — snimak „na dan 15.10.“ važi do 16.10. u 00:00. Vreme otpremanja
+ili potvrde nije vreme stanja. Posle praga kupac ne vidi brojeve, nego „Potrebna je provera
+raspoloživosti“.
 
-Kada je uključeno, panel kupovine prikazuje za izabrano pakovanje: „Prema izvozu: N × 5 L“ (ili „nema
-celog pakovanja“), zatim „Stanje prema poslednjem izvozu: dd.mm.gggg.“ (samo datum, jer izvor nema
-vreme), odvojeno „Uvezeno dd.mm.gggg. u hh:mm“ i „Raspoloživost potvrđuje kancelarija.“ Bez potvrđene
-veze, JM ili pakovanja — nema broja. Isključen prikaz ne čita tabele lagera.
+**Šta kupac vidi** (blok „Stanje na lageru“ u panelu „Za Vašu firmu“, nezavisno od toga da li je
+poručivanje uključeno), po pakovanju izabrane varijante:
+- „Na stanju prema izvozu: N × <pakovanje>“ (ili „N kom“) — samo uz potvrđenu vezu šifre sa
+  kataloškom varijantom, potvrđenu JM i potvrđeno pakovanje (`article_pack_sizes`); cela pakovanja,
+  naniže;
+- „Prema izvozu: nema celog pakovanja na stanju“ — kada je stanje manje od jednog pakovanja;
+- „Raspoloživost na upit“ — za sve ostalo: šifra van izvoza (nije nula), sudar šifara, nepotvrđeno
+  pakovanje, razlika JM, prazno ili **negativno** izvorno stanje (negativno vidi samo administracija);
+- ispod: „Stanje prema izvozu na dan dd.mm.gggg.“ i „Raspoloživost potvrđuje kancelarija.“
+
+Kupac ne dobija izvorne količine, interne nazive iz lagera, nabavne cene, marže ni tuđe podatke
+(`/api/kupac/ponude` bez kupčeve sesije = 401). Stanje iz izvoza nije garantovana slobodna količina:
+rezervacije nisu poznate i ne računaju se.
+
+**Održavanje sajta:** dok je javni sajt „u pripremi“, prijavljen kupac (potpisan token, `subject =
+customer`) vidi katalog i strane proizvoda bez koda sajta; neprijavljeni posetioci i dalje idu na „sajt
+u pripremi“. Kupac se prijavljuje na `/prijava/kupac` i posle prijave vraća na stranu sa koje je došao.
 
 ## 5. Uputstvo za kancelariju (koraci na strani: izbor fajla → provera → potvrda)
 
@@ -163,14 +179,17 @@ veze, JM ili pakovanja — nema broja. Isključen prikaz ne čita tabele lagera.
 5. Ako je sve u redu: označite potvrdu → „Potvrdite lager“. Ako je od prijave prošlo više od 10 minuta,
    sistem traži lozinku i kod iz aplikacije i vraća Vas na isti uvoz — tada ponovo označite potvrdu. Ako nije u redu: „Odbacite otpremanje“ sa razlogom i izvezite ponovo.
 6. Isti fajl dva puta ne pravi duplikat. Stariji izvoz ne može zameniti noviji.
+7. Kupci vide brojeve samo za dan stanja (do ponoći): za prikaz u toku dana otpremite i potvrdite
+   izvoz tog dana.
 
 ## 6. Aktivacija na Production-u
 
 1. ✅ Migracije 0045–0050 (13. 10. 2026, posle proverene kopije baze) i objava koda.
 2. ⏳ Prvi stvaran izvoz: otpremanje i provera na Production-u, poređenje sa BizniSoftom, potvrda
    (15. 10. odbijen zbog rasporeda B — ispravljeno parserom `/2`; potreban nov izvoz, §1a).
-3. ⏳ Odluka vlasnika o pragu zastarelosti i prikazu; tek tada `STOCK_CUSTOMER_DISPLAY=1` i podešavanje
-   (`enabled`, `maxAgeDays`).
+3. ✅ Odluka vlasnika (15. 10.): prikaz svim prijavljenim kupcima, prag 24 h od vremena stanja (§4);
+   prenos potvrđenih veza i pakovanja na Production (dok. 62, objedinjeni skupovi 1–15).
+5. ✅ Ponovna provera istog fajla novijom verzijom čitača (0052, §1a).
 4. ✅ Pravilo čuvanja (§3a, 0051).
 
 ## 7. Provere

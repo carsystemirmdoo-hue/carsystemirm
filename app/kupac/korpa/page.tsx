@@ -7,7 +7,7 @@ import { CartForm, type CartView } from "./CartForm";
 import { loadRequestQuote } from "@/lib/ordering/request-service";
 import { orderingEnabledFor } from "@/lib/ordering/trial";
 import { RequestCartForm, type RequestCartView } from "./RequestCartForm";
-import { publicSiteOpenForRequest } from "@/lib/site-access-request";
+import { siteOpenForCustomer } from "@/lib/site-access-request";
 import { LiveRefresh } from "@/components/ordering/LiveRefresh";
 import { customerCartStamp } from "@/lib/ordering/live-stamp";
 
@@ -22,7 +22,7 @@ export const dynamic = "force-dynamic";
  * pravi pri svakom prikazu, pa ponovljen klik na isto dugme ne pravi drugi zahtev.
  */
 export default async function CustomerCartPage({ searchParams }: { searchParams: Promise<{ opcija?: string }> }) {
-  const siteOpen = await publicSiteOpenForRequest();
+  const siteOpen = await siteOpenForCustomer();
   const session = await requireCustomerSession("/kupac/korpa");
   if ((await orderingEnabledFor(session.customerId))) {
     const { opcija } = await searchParams;

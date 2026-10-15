@@ -45,6 +45,7 @@ const { getDb } = await import("@/db/client");
 const { decideMapping } = await import("@/lib/commercial/mapping-service");
 const { catalogOfferFacts } = await import("@/lib/ordering/ordering-service");
 const { orderPack } = await import("@/lib/ordering/packRule.mjs");
+const { AUDIT_ACTIONS, recordAudit } = await import("@/lib/audit/record");
 
 /** `deo_kom`: izričit izuzetak vlasnika — pakovanje je deo jednog KOM (npr. 0,5). */
 type Link = { sifra: string; slug: string | null; varijanta: string | null; jm: string; pakovanje: number | null; oznaka?: string; izvor?: string; deo_kom?: boolean };
@@ -151,10 +152,28 @@ if (write) {
       );
     }
     if (v.pakovanje !== null) {
-      await db.execute(sql`
-        INSERT INTO article_pack_sizes (article_id, pack_quantity, unit, label, evidence, confirmed_by, fractional_ok)
-        VALUES (${r._id as string}::uuid, ${v.pakovanje}, ${v.jm.toUpperCase()}, ${v.oznaka ?? `${v.pakovanje} ${v.jm}`}, ${v.izvor ?? plan.izvor ?? "potvrda vlasnika"}, ${actor.id}::uuid, ${Boolean(v.deo_kom)})
-        ON CONFLICT (article_id) DO NOTHING`);
+      // Pakovanje i njegov audit u istoj transakciji; već upisano pakovanje se ne dira (ponovljeno pokretanje).
+      await db.transaction(async (tx) => {
+        const inserted = [...(await tx.execute<{ article_id: string }>(sql`
+          INSERT INTO article_pack_sizes (article_id, pack_quantity, unit, label, evidence, confirmed_by, fractional_ok)
+          VALUES (${r._id as string}::uuid, ${v.pakovanje}, ${v.jm.toUpperCase()}, ${v.oznaka ?? `${v.pakovanje} ${v.jm}`}, ${v.izvor ?? plan.izvor ?? "potvrda vlasnika"}, ${actor.id}::uuid, ${Boolean(v.deo_kom)})
+          ON CONFLICT (article_id) DO NOTHING
+          RETURNING article_id`))];
+        if (!inserted.length) return;
+        await recordAudit(
+          {
+            actor: { id: actor.id, name: actor.name, role: actor.role as never },
+            action: AUDIT_ACTIONS.packSizeConfirmed,
+            entityType: "Artikal",
+            entityId: r._id as string,
+            entityLabel: `${v.sifra} ${String(r.naziv)}`.slice(0, 200),
+            before: null,
+            after: { pakovanje: v.pakovanje, jm: v.jm.toUpperCase(), oznaka: v.oznaka ?? null, deoKom: Boolean(v.deo_kom) },
+            reason: `${v.izvor ?? plan.izvor ?? "Potvrda vlasnika"}`.slice(0, 1000),
+          },
+          tx as never,
+        );
+      });
     }
   }
   console.log(`Upisano: ${ready.length}.`);

@@ -11,7 +11,7 @@ import { issueRememberToken } from "@/lib/auth/remember-tokens";
 import { findCustomerAccountByEmail } from "@/lib/customers/account-service";
 import { normalizeCustomerReturn } from "@/lib/authz/redirects.mjs";
 import { customerLandingAfterLogin, customerLandingAfterLogout } from "@/lib/authz/customer-landing";
-import { publicSiteOpenForRequest } from "@/lib/site-access-request";
+import { siteOpenForCustomer } from "@/lib/site-access-request";
 
 /** Ista poruka za svaki neuspeh — iz odgovora se ne sme zaključiti da li nalog postoji. */
 /** Vidi `components/layout/CustomerAccountMenu.tsx`. */
@@ -38,7 +38,7 @@ export async function customerSignInAction(
    * bez nje na početnu. `/portal`, prijava i API su izričito zabranjeni —
    * vidi `normalizeCustomerReturn`.
    */
-  const safeRedirect = customerLandingAfterLogin(normalizeCustomerReturn(formData.get("callbackUrl")), await publicSiteOpenForRequest());
+  const safeRedirect = customerLandingAfterLogin(normalizeCustomerReturn(formData.get("callbackUrl")), await siteOpenForCustomer());
 
   /*
    * Marker za javno zaglavlje: samo „možda je prijavljen kupac", bez ikakvog
@@ -95,5 +95,5 @@ export async function customerSignOutAction(formData?: FormData) {
   await signOut({ redirect: false });
   (await cookies()).delete(CUSTOMER_MARKER_COOKIE);
   const back = normalizeCustomerReturn(formData?.get("returnTo") ?? null);
-  redirect(customerLandingAfterLogout(back, await publicSiteOpenForRequest()));
+  redirect(customerLandingAfterLogout(back, await siteOpenForCustomer()));
 }

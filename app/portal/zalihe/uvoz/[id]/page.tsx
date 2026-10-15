@@ -74,10 +74,10 @@ function Group({ title, count, tone, children, open = false }: { title: string; 
   );
 }
 
-export default async function StockImportReviewPage({ params, searchParams }: { params: Promise<{ id: string }>; searchParams: Promise<{ isti?: string; ishod?: string; raniji?: string; identitet?: string }> }) {
+export default async function StockImportReviewPage({ params, searchParams }: { params: Promise<{ id: string }>; searchParams: Promise<{ isti?: string; ishod?: string; ponovo?: string; identitet?: string }> }) {
   const { id } = await params;
   await requireCapability("imports:write", `/portal/zalihe/uvoz/${id}`);
-  const { isti, ishod, raniji, identitet } = await searchParams;
+  const { isti, ishod, ponovo, identitet } = await searchParams;
   // Potvrda i odbacivanje traže drugi faktor u poslednjih 10 minuta; ovde se samo unapred kaže.
   const session = await loadAuthenticatedSession();
   const mfaFresh = Boolean(session && isSecondFactorSatisfied(session.assurance) && isMfaRecent(session.mfaVerifiedAt));
@@ -124,9 +124,9 @@ export default async function StockImportReviewPage({ params, searchParams }: { 
 
       <StockImportSteps current={pending ? (canConfirm ? 3 : 2) : h.status === "potvrdjeno" ? 3 : 2} done={h.status === "potvrdjeno"} failed={h.status === "neuspesno" || (pending && !canConfirm)} />
 
-      {raniji ? (
-        <p className="portal-login-error lg-status" role="alert">
-          Ovaj isti fajl je ranije odbijen starijom verzijom provere. Izvezite izveštaj ponovo iz BizniSofta i otpremite novi fajl — on će biti proveren ispravljenom verzijom.
+      {ponovo ? (
+        <p className="portal-permission-ok lg-status" role="status">
+          Isti fajl je ranije pao na starijoj verziji provere. Ovo je nova provera ispravljenom verzijom; raniji pokušaj ostaje u istoriji uvoza.
         </p>
       ) : isti ? (
         <p className="portal-permission-ok lg-status" role="status">Isti fajl je već otpremljen {dmyTime(h.uploadedAt)} — prikazana je postojeća provera.</p>

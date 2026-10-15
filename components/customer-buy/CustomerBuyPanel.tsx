@@ -18,8 +18,9 @@ import styles from "./CustomerBuy.module.css";
  *
  * Varijanta se čita iz istog konteksta kao selektor, pa panel uvek prati
  * izabranu varijantu. Pakovanje je BizniSoft artikal vezan za tu varijantu;
- * cena je kupčeva (cenovnik + rabat), bez PDV-a, sa stopom PDV-a. Lager se ne
- * prikazuje: izvor ne postoji. Bez cene ili rabata → „Zatraži cenu/uslove".
+ * cena je kupčeva (cenovnik + rabat), bez PDV-a, sa stopom PDV-a. Stanje iz
+ * poslednjeg potvrđenog izvoza lagera ide u poseban blok, nezavisno od toga da li je
+ * poručivanje uključeno (dok. 65 §4). Bez cene ili rabata → „Zatraži cenu/uslove".
  */
 export function CustomerBuyPanel({ fallbackSlug, fallbackName }: { fallbackSlug: string; fallbackName: string }) {
   const data = useCustomerOffers();
@@ -53,6 +54,7 @@ export function CustomerBuyPanel({ fallbackSlug, fallbackName }: { fallbackSlug:
         {name}
         {variantLabel ? <small> · {variantLabel}</small> : null}
       </h2>
+      <StockBlock data={data} offers={here} />
       {!data.ordering.enabled ? (
         <>
           <p className={styles.note}>{data.ordering.reason ?? "Poručivanje preko sajta još nije uključeno."} Cenu i uslove možete zatražiti ovde.</p>
@@ -79,6 +81,41 @@ export function CustomerBuyPanel({ fallbackSlug, fallbackName }: { fallbackSlug:
           />
         </>
       )}
+    </section>
+  );
+}
+
+/**
+ * Stanje po pakovanju ove varijante. Broj samo za potvrđeno pakovanje iz svežeg snimka;
+ * inače „Raspoloživost na upit“. Zastareo snimak → samo poruka o proveri, bez brojeva.
+ */
+function StockBlock({ data, offers }: { data: OffersPayload; offers: CatalogRequestOffer[] }) {
+  const stock = data.stock;
+  if (!stock || offers.length === 0) return null;
+  const rows = offers
+    .filter((o) => o.state !== "inquiry")
+    .sort((a, b) => a.articleName.localeCompare(b.articleName, "sr", { numeric: true }));
+  return (
+    <section className={styles.stock} data-state={stock.state} aria-label="Stanje na lageru">
+      {stock.state === "svez" && rows.length > 0 ? (
+        <ul className={styles.stockList}>
+          {rows.map((o) => {
+            const line = stock.byArticle[o.articleId] ?? { state: "upit" as const, text: "Raspoloživost na upit" };
+            const label = o.pack ? (isSinglePiece(o.pack, o.unit) ? `1 ${unitLabel(o.unit)}` : o.pack.label) : null;
+            return (
+              <li key={o.articleId} data-state={line.state}>
+                {rows.length > 1 && label ? <span className={styles.stockPack}>{label}</span> : null}
+                <strong>{line.text}</strong>
+              </li>
+            );
+          })}
+        </ul>
+      ) : stock.state === "svez" ? (
+        <p className={styles.stockLead}>Raspoloživost na upit</p>
+      ) : null}
+      <p className={styles.stockCaption}>
+        {stock.headline} {stock.note}
+      </p>
     </section>
   );
 }
@@ -141,12 +178,6 @@ function BuyForm({ data, offers, slug, variantKey }: { data: OffersPayload; offe
           );
         })}
       </fieldset>
-      {data.stock?.byArticle[offer.articleId] ? (
-        <p className={styles.stockNote} role="note">
-          <strong>{data.stock.byArticle[offer.articleId].text}</strong>
-          <small>{data.stock.headline} · {data.stock.imported}. {data.stock.note}</small>
-        </p>
-      ) : null}
 
       <dl className={styles.priceFacts} aria-label="Vaša cena pakovanja po opciji plaćanja">
         {prices.map(({ option, price }) =>

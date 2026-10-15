@@ -1,0 +1,776 @@
+/*
+ * Rubrika „Saveti i vodiči“ — na postojećim --ds-* tokenima, pa prati svetlu i
+ * tamnu temu bez sopstvenih boja. Crveni tekst ide kroz --accent-text (na
+ * tamnoj temi je svetlija nijansa zbog kontrasta).
+ */
+
+.page {
+  padding-block: var(--ds-space-major, 96px) var(--ds-space-section, 96px);
+}
+
+.pageWithCrumbs {
+  padding-block: var(--ds-space-l, 40px) var(--ds-space-section, 96px);
+}
+
+.pageWithCrumbs > nav {
+  margin-bottom: 20px;
+}
+
+/* Putanja poravnata sa sadržajem rubrike (ista širina i ivica kao .container). */
+.pageWithCrumbs > nav > ol {
+  width: min(var(--ds-container-max), 100% - (var(--ds-gutter) * 2));
+  padding-inline: 0;
+}
+
+.container {
+  width: min(var(--ds-container-max), 100% - (var(--ds-gutter) * 2));
+  margin-inline: auto;
+}
+
+.eyebrow {
+  font-family: var(--ds-font-label);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted-foreground);
+}
+
+.eyebrow a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.eyebrow a:hover {
+  color: var(--foreground);
+}
+
+.title {
+  margin-top: 14px;
+  font-family: var(--ds-font-display);
+  font-weight: 800;
+  font-size: clamp(30px, 4.6vw, 52px);
+  line-height: 1.06;
+  letter-spacing: -0.015em;
+  text-wrap: balance;
+}
+
+.intro {
+  margin-top: 16px;
+  max-width: 64ch;
+  font-size: 16px;
+  line-height: 1.65;
+  color: var(--muted-foreground);
+}
+
+.hero {
+  padding-block-end: var(--ds-space-l, 40px);
+  border-bottom: var(--ds-line-width-hairline) solid var(--ds-line-color-structural);
+  margin-bottom: var(--ds-space-2xl, 56px);
+}
+
+.sectionHeading {
+  font-family: var(--ds-font-display);
+  font-weight: 700;
+  font-size: clamp(19px, 2.1vw, 24px);
+  letter-spacing: -0.01em;
+}
+
+.sectionHead {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 18px;
+}
+
+.sectionLink {
+  font-family: var(--ds-font-label);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--accent-text, var(--accent));
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.sectionLink:hover {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.section + .section {
+  margin-top: var(--ds-space-2xl, 56px);
+}
+
+/* ---------- Kartice ---------- */
+
+.grid {
+  display: grid;
+  gap: 14px;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr));
+}
+
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 20px 20px 18px;
+  border: var(--ds-line-width-hairline) solid var(--ds-line-color-structural);
+  border-radius: var(--ds-radius);
+  background: var(--ds-surface-card);
+  transition: border-color var(--ds-duration-2) var(--ds-ease-out);
+}
+
+.card:hover,
+.card:focus-within {
+  border-color: var(--ds-line-color-accent);
+}
+
+.cardMeta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 12px;
+  font-family: var(--ds-font-label);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted-foreground);
+}
+
+.cardTitle {
+  font-family: var(--ds-font-display);
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 1.25;
+  letter-spacing: -0.005em;
+}
+
+.cardTitle a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Cela kartica je klikabilna kroz link naslova. */
+.cardTitle a::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+}
+
+.cardTitle a:focus-visible {
+  outline: none;
+}
+
+.card:has(.cardTitle a:focus-visible) {
+  outline: 2px solid var(--ds-line-color-accent);
+  outline-offset: 2px;
+}
+
+.cardText {
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--muted-foreground);
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 8px;
+  border: var(--ds-line-width-hairline) solid var(--ds-line-color-ui);
+  border-radius: var(--ds-radius);
+  font-family: var(--ds-font-label);
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--foreground);
+}
+
+.badge[data-tone="accent"] {
+  border-color: var(--ds-line-color-accent);
+  color: var(--accent-text, var(--accent));
+}
+
+/* ---------- Novosti ---------- */
+
+.newsList {
+  display: grid;
+  gap: 0;
+  border-top: var(--ds-line-width-hairline) solid var(--ds-line-color-structural);
+}
+
+.newsItem {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 6px;
+  padding-block: 18px;
+  border-bottom: var(--ds-line-width-hairline) solid var(--ds-line-color-structural);
+}
+
+@media (min-width: 768px) {
+  .newsItem {
+    grid-template-columns: 180px 1fr;
+    gap: 24px;
+  }
+}
+
+.newsDate {
+  font-family: var(--ds-font-label);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--muted-foreground);
+}
+
+/* ---------- Kategorije ---------- */
+
+.categoryGrid {
+  display: grid;
+  gap: 10px;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 240px), 1fr));
+}
+
+.categoryLink {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  min-height: 48px;
+  padding: 14px 16px;
+  border: var(--ds-line-width-hairline) solid var(--ds-line-color-structural);
+  border-radius: var(--ds-radius);
+  background: var(--ds-surface-card);
+  color: var(--foreground);
+  font-weight: 600;
+  font-size: 15px;
+  text-decoration: none;
+  transition: border-color var(--ds-duration-2) var(--ds-ease-out);
+}
+
+.categoryLink:hover,
+.categoryLink:focus-visible {
+  border-color: var(--ds-line-color-accent);
+}
+
+.categoryCount {
+  font-family: var(--ds-font-label);
+  font-size: 12px;
+  color: var(--muted-foreground);
+}
+
+/* ---------- Filter ---------- */
+
+.filters {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-bottom: 22px;
+}
+
+.search {
+  width: 100%;
+  max-width: 420px;
+  min-height: 44px;
+  padding: 0 14px;
+  border: var(--ds-line-width-hairline) solid var(--ds-line-color-ui);
+  border-radius: var(--ds-radius);
+  background: var(--ds-surface-card);
+  color: var(--foreground);
+  font-size: 15px;
+}
+
+.search:focus-visible {
+  outline: 2px solid var(--ds-line-color-accent);
+  outline-offset: 1px;
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.chip {
+  min-height: 36px;
+  padding: 0 12px;
+  border: var(--ds-line-width-hairline) solid var(--ds-line-color-structural);
+  border-radius: var(--ds-radius);
+  background: var(--ds-surface-card);
+  color: var(--foreground);
+  font-family: var(--ds-font-label);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+}
+
+.chip:hover {
+  border-color: var(--ds-line-color-accent);
+}
+
+.chip[aria-pressed="true"] {
+  background: var(--foreground);
+  border-color: var(--foreground);
+  color: var(--background);
+}
+
+.chip:focus-visible {
+  outline: 2px solid var(--ds-line-color-accent);
+  outline-offset: 2px;
+}
+
+.empty {
+  padding: 28px 0;
+  color: var(--muted-foreground);
+}
+
+/* ---------- Članak ---------- */
+
+.articleLayout {
+  display: grid;
+  gap: 40px;
+}
+
+@media (min-width: 1100px) {
+  .articleLayout {
+    grid-template-columns: minmax(0, 1fr) 260px;
+    gap: 64px;
+  }
+}
+
+.articleMain {
+  min-width: 0;
+  max-width: 760px;
+}
+
+.articleHeader {
+  padding-bottom: 28px;
+  border-bottom: var(--ds-line-width-hairline) solid var(--ds-line-color-structural);
+  margin-bottom: 32px;
+}
+
+.badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 18px;
+}
+
+.facts {
+  display: grid;
+  gap: 4px 20px;
+  grid-template-columns: max-content 1fr;
+  margin-top: 22px;
+  font-size: 13.5px;
+}
+
+.facts dt {
+  font-family: var(--ds-font-label);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted-foreground);
+  padding-top: 2px;
+}
+
+.facts dd {
+  margin: 0;
+  color: var(--foreground);
+}
+
+.lead {
+  margin-top: 22px;
+  font-size: clamp(17px, 1.6vw, 19px);
+  line-height: 1.6;
+  color: var(--foreground);
+}
+
+.aside {
+  display: none;
+}
+
+@media (min-width: 1100px) {
+  .aside {
+    display: block;
+  }
+
+  .asideInner {
+    position: sticky;
+    top: 112px;
+  }
+}
+
+.toc {
+  border-left: var(--ds-line-width-hairline) solid var(--ds-line-color-structural);
+  padding-left: 16px;
+}
+
+.toc ol {
+  list-style: none;
+  margin: 12px 0 0;
+  padding: 0;
+  display: grid;
+  gap: 8px;
+}
+
+.toc a {
+  color: var(--muted-foreground);
+  font-size: 13.5px;
+  line-height: 1.4;
+  text-decoration: none;
+}
+
+.toc a:hover {
+  color: var(--foreground);
+}
+
+.tocMobile {
+  margin-bottom: 28px;
+  border: var(--ds-line-width-hairline) solid var(--ds-line-color-structural);
+  border-radius: var(--ds-radius);
+  background: var(--ds-surface-card);
+}
+
+.tocMobile summary {
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+  font-family: var(--ds-font-label);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.tocMobile ol {
+  margin: 0;
+  padding: 0 16px 14px 34px;
+  display: grid;
+  gap: 8px;
+  font-size: 14.5px;
+}
+
+.tocMobile a {
+  color: var(--foreground);
+  text-decoration: none;
+}
+
+@media (min-width: 1100px) {
+  .tocMobile {
+    display: none;
+  }
+}
+
+/* ---------- Telo ---------- */
+
+.prose {
+  font-family: var(--ds-font-body);
+  font-size: 16.5px;
+  line-height: 1.75;
+  color: var(--foreground);
+}
+
+.prose > * + * {
+  margin-top: 1.05em;
+}
+
+.prose h2 {
+  margin-top: 2.1em;
+  font-family: var(--ds-font-display);
+  font-weight: 700;
+  font-size: clamp(21px, 2.3vw, 26px);
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+  scroll-margin-top: 110px;
+}
+
+.prose h3 {
+  margin-top: 1.7em;
+  font-family: var(--ds-font-display);
+  font-weight: 700;
+  font-size: 18.5px;
+  line-height: 1.3;
+  scroll-margin-top: 110px;
+}
+
+.prose h2 + *,
+.prose h3 + * {
+  margin-top: 0.6em;
+}
+
+.prose ul,
+.prose ol {
+  padding-left: 1.3em;
+}
+
+.prose ul {
+  list-style: disc;
+}
+
+.prose ol {
+  list-style: decimal;
+}
+
+.prose li + li {
+  margin-top: 0.45em;
+}
+
+.prose li::marker {
+  color: var(--muted-foreground);
+}
+
+.link {
+  color: var(--accent-text, var(--accent));
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+
+.link:hover {
+  text-decoration-thickness: 2px;
+}
+
+.code {
+  font-family: var(--ds-font-technical);
+  font-size: 0.88em;
+  padding: 1px 5px;
+  border-radius: var(--ds-radius);
+  background: var(--ds-surface-stage);
+}
+
+.cite {
+  font-family: var(--ds-font-label);
+  font-size: 0.68em;
+  line-height: 0;
+  margin-left: 1px;
+}
+
+.cite a {
+  color: var(--accent-text, var(--accent));
+  text-decoration: none;
+  padding: 0 1px;
+}
+
+.cite a:hover {
+  text-decoration: underline;
+}
+
+.tableWrap {
+  overflow-x: auto;
+  border: var(--ds-line-width-hairline) solid var(--ds-line-color-structural);
+  border-radius: var(--ds-radius);
+}
+
+.tableWrap:focus-visible {
+  outline: 2px solid var(--ds-line-color-accent);
+}
+
+.tableWrap table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14.5px;
+  line-height: 1.5;
+}
+
+.tableWrap th,
+.tableWrap td {
+  padding: 10px 14px;
+  text-align: left;
+  vertical-align: top;
+  border-bottom: var(--ds-line-width-hairline) solid var(--ds-line-color-structural);
+}
+
+.tableWrap th {
+  font-family: var(--ds-font-label);
+  font-size: 11.5px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--muted-foreground);
+  background: var(--ds-surface-stage);
+}
+
+.tableWrap tr:last-child td {
+  border-bottom: 0;
+}
+
+.callout {
+  padding: 16px 18px;
+  border-left: var(--ds-line-width-accent) solid var(--ds-line-color-ui);
+  background: var(--ds-surface-stage);
+  border-radius: var(--ds-radius);
+}
+
+.callout[data-kind="upozorenje"] {
+  border-left-color: var(--ds-line-color-accent);
+}
+
+.callout p + p {
+  margin-top: 0.6em;
+}
+
+.calloutLabel {
+  font-family: var(--ds-font-label);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted-foreground);
+}
+
+.callout[data-kind="upozorenje"] .calloutLabel {
+  color: var(--accent-text, var(--accent));
+}
+
+/* ---------- Dodaci članka ---------- */
+
+.block {
+  margin-top: 48px;
+  padding-top: 28px;
+  border-top: var(--ds-line-width-hairline) solid var(--ds-line-color-structural);
+}
+
+.blockHeading {
+  font-family: var(--ds-font-display);
+  font-weight: 700;
+  font-size: 20px;
+  letter-spacing: -0.01em;
+  margin-bottom: 16px;
+}
+
+.sources {
+  display: grid;
+  gap: 10px;
+  padding-left: 1.6em;
+  list-style: decimal;
+  font-size: 14px;
+  line-height: 1.55;
+  color: var(--muted-foreground);
+}
+
+.sources li {
+  scroll-margin-top: 110px;
+}
+
+.sources li:target {
+  color: var(--foreground);
+}
+
+.sources a {
+  color: var(--foreground);
+  overflow-wrap: anywhere;
+}
+
+.products {
+  display: grid;
+  gap: 10px;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 240px), 1fr));
+}
+
+.product {
+  position: relative;
+  display: grid;
+  gap: 4px;
+  padding: 14px 16px;
+  border: var(--ds-line-width-hairline) solid var(--ds-line-color-structural);
+  border-radius: var(--ds-radius);
+  background: var(--ds-surface-card);
+}
+
+.product:hover,
+.product:focus-within {
+  border-color: var(--ds-line-color-accent);
+}
+
+.productBrand {
+  font-family: var(--ds-font-label);
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted-foreground);
+}
+
+.productName {
+  font-weight: 600;
+  font-size: 15px;
+  line-height: 1.35;
+}
+
+.productName a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.productName a::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+}
+
+.note {
+  font-size: 13.5px;
+  line-height: 1.6;
+  color: var(--muted-foreground);
+}
+
+.ctaRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.ctaPrimary,
+.ctaSecondary {
+  display: inline-flex;
+  align-items: center;
+  min-height: 46px;
+  padding: 0 20px;
+  border-radius: var(--ds-radius);
+  font-weight: 600;
+  font-size: 15px;
+  text-decoration: none;
+}
+
+.ctaPrimary {
+  background: var(--accent);
+  color: var(--accent-foreground);
+}
+
+.ctaSecondary {
+  border: var(--ds-line-width-hairline) solid var(--ds-line-color-ui);
+  color: var(--foreground);
+}
+
+.ctaPrimary:focus-visible,
+.ctaSecondary:focus-visible {
+  outline: 2px solid var(--ds-line-color-accent);
+  outline-offset: 2px;
+}
+
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card,
+  .categoryLink {
+    transition: none;
+  }
+}

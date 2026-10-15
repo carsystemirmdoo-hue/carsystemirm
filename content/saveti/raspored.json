@@ -1,0 +1,934 @@
+{
+  "podesavanja": {
+    "aktivan": false,
+    "pocetakPretpostavljen": true,
+    "pocetniDatum": "2026-11-02",
+    "vremeObjave": "09:00",
+    "vremenskaZona": "Europe/Belgrade",
+    "razmakDana": 3,
+    "pauzaOd": null,
+    "napomena": "Probni kalendar. Početni datum 2026-11-02 u 09:00 je pretpostavka urednika, ne odluka firme. Aktivacija: postaviti pravi pocetniDatum i aktivan: true (vidi docs/saveti/README.md)."
+  },
+  "termini": [
+    {
+      "redniBroj": 0,
+      "datum": "2026-11-02",
+      "clanak": "SV-0005"
+    },
+    {
+      "redniBroj": 1,
+      "datum": "2026-11-05",
+      "clanak": "SV-0006"
+    },
+    {
+      "redniBroj": 2,
+      "datum": "2026-11-08",
+      "clanak": "SV-0009"
+    },
+    {
+      "redniBroj": 3,
+      "datum": "2026-11-11",
+      "clanak": "SV-0001"
+    },
+    {
+      "redniBroj": 4,
+      "datum": "2026-11-14",
+      "clanak": "SV-0007"
+    },
+    {
+      "redniBroj": 5,
+      "datum": "2026-11-17",
+      "clanak": "SV-0004"
+    },
+    {
+      "redniBroj": 6,
+      "datum": "2026-11-20",
+      "clanak": "SV-0008"
+    },
+    {
+      "redniBroj": 7,
+      "datum": "2026-11-23",
+      "clanak": "SV-0003"
+    },
+    {
+      "redniBroj": 8,
+      "datum": "2026-11-26",
+      "clanak": "SV-0002"
+    },
+    {
+      "redniBroj": 9,
+      "datum": "2026-11-29",
+      "clanak": "SV-0010"
+    },
+    {
+      "redniBroj": 10,
+      "datum": "2026-12-02",
+      "clanak": "SV-0023"
+    },
+    {
+      "redniBroj": 11,
+      "datum": "2026-12-05",
+      "clanak": "SV-0041"
+    },
+    {
+      "redniBroj": 12,
+      "datum": "2026-12-08",
+      "clanak": "SV-0051"
+    },
+    {
+      "redniBroj": 13,
+      "datum": "2026-12-11",
+      "clanak": "SV-0067"
+    },
+    {
+      "redniBroj": 14,
+      "datum": "2026-12-14",
+      "clanak": "SV-0082"
+    },
+    {
+      "redniBroj": 15,
+      "datum": "2026-12-17",
+      "clanak": "SV-0097"
+    },
+    {
+      "redniBroj": 16,
+      "datum": "2026-12-20",
+      "clanak": "SV-0108"
+    },
+    {
+      "redniBroj": 17,
+      "datum": "2026-12-23",
+      "clanak": "SV-0116"
+    },
+    {
+      "redniBroj": 18,
+      "datum": "2026-12-26",
+      "clanak": "SV-0129"
+    },
+    {
+      "redniBroj": 19,
+      "datum": "2026-12-29",
+      "clanak": "SV-0144"
+    },
+    {
+      "redniBroj": 20,
+      "datum": "2027-01-01",
+      "clanak": "SV-0152"
+    },
+    {
+      "redniBroj": 21,
+      "datum": "2027-01-04",
+      "clanak": "SV-0173"
+    },
+    {
+      "redniBroj": 22,
+      "datum": "2027-01-07",
+      "clanak": "SV-0187"
+    },
+    {
+      "redniBroj": 23,
+      "datum": "2027-01-10",
+      "clanak": "SV-0194"
+    },
+    {
+      "redniBroj": 24,
+      "datum": "2027-01-13",
+      "clanak": "SV-0203"
+    },
+    {
+      "redniBroj": 25,
+      "datum": "2027-01-16",
+      "clanak": "SV-0211"
+    },
+    {
+      "redniBroj": 26,
+      "datum": "2027-01-19",
+      "clanak": "SV-0011"
+    },
+    {
+      "redniBroj": 27,
+      "datum": "2027-01-22",
+      "clanak": "SV-0042"
+    },
+    {
+      "redniBroj": 28,
+      "datum": "2027-01-25",
+      "clanak": "SV-0052"
+    },
+    {
+      "redniBroj": 29,
+      "datum": "2027-01-28",
+      "clanak": "SV-0068"
+    },
+    {
+      "redniBroj": 30,
+      "datum": "2027-01-31",
+      "clanak": "SV-0083"
+    },
+    {
+      "redniBroj": 31,
+      "datum": "2027-02-03",
+      "clanak": "SV-0098"
+    },
+    {
+      "redniBroj": 32,
+      "datum": "2027-02-06",
+      "clanak": "SV-0109"
+    },
+    {
+      "redniBroj": 33,
+      "datum": "2027-02-09",
+      "clanak": "SV-0117"
+    },
+    {
+      "redniBroj": 34,
+      "datum": "2027-02-12",
+      "clanak": "SV-0130"
+    },
+    {
+      "redniBroj": 35,
+      "datum": "2027-02-15",
+      "clanak": "SV-0145"
+    },
+    {
+      "redniBroj": 36,
+      "datum": "2027-02-18",
+      "clanak": "SV-0153"
+    },
+    {
+      "redniBroj": 37,
+      "datum": "2027-02-21",
+      "clanak": "SV-0174"
+    },
+    {
+      "redniBroj": 38,
+      "datum": "2027-02-24",
+      "clanak": "SV-0195"
+    },
+    {
+      "redniBroj": 39,
+      "datum": "2027-02-27",
+      "clanak": "SV-0204"
+    },
+    {
+      "redniBroj": 40,
+      "datum": "2027-03-02",
+      "clanak": "SV-0212"
+    },
+    {
+      "redniBroj": 41,
+      "datum": "2027-03-05",
+      "clanak": "SV-0025"
+    },
+    {
+      "redniBroj": 42,
+      "datum": "2027-03-08",
+      "clanak": "SV-0053"
+    },
+    {
+      "redniBroj": 43,
+      "datum": "2027-03-11",
+      "clanak": "SV-0069"
+    },
+    {
+      "redniBroj": 44,
+      "datum": "2027-03-14",
+      "clanak": "SV-0084"
+    },
+    {
+      "redniBroj": 45,
+      "datum": "2027-03-17",
+      "clanak": "SV-0099"
+    },
+    {
+      "redniBroj": 46,
+      "datum": "2027-03-20",
+      "clanak": "SV-0110"
+    },
+    {
+      "redniBroj": 47,
+      "datum": "2027-03-23",
+      "clanak": "SV-0118"
+    },
+    {
+      "redniBroj": 48,
+      "datum": "2027-03-26",
+      "clanak": "SV-0131"
+    },
+    {
+      "redniBroj": 49,
+      "datum": "2027-03-29",
+      "clanak": "SV-0146"
+    },
+    {
+      "redniBroj": 50,
+      "datum": "2027-04-01",
+      "clanak": "SV-0154"
+    },
+    {
+      "redniBroj": 51,
+      "datum": "2027-04-04",
+      "clanak": "SV-0175"
+    },
+    {
+      "redniBroj": 52,
+      "datum": "2027-04-07",
+      "clanak": "SV-0205"
+    },
+    {
+      "redniBroj": 53,
+      "datum": "2027-04-10",
+      "clanak": "SV-0213"
+    },
+    {
+      "redniBroj": 54,
+      "datum": "2027-04-13",
+      "clanak": "SV-0013"
+    },
+    {
+      "redniBroj": 55,
+      "datum": "2027-04-16",
+      "clanak": "SV-0026"
+    },
+    {
+      "redniBroj": 56,
+      "datum": "2027-04-19",
+      "clanak": "SV-0044"
+    },
+    {
+      "redniBroj": 57,
+      "datum": "2027-04-22",
+      "clanak": "SV-0054"
+    },
+    {
+      "redniBroj": 58,
+      "datum": "2027-04-25",
+      "clanak": "SV-0070"
+    },
+    {
+      "redniBroj": 59,
+      "datum": "2027-04-28",
+      "clanak": "SV-0100"
+    },
+    {
+      "redniBroj": 60,
+      "datum": "2027-05-01",
+      "clanak": "SV-0119"
+    },
+    {
+      "redniBroj": 61,
+      "datum": "2027-05-04",
+      "clanak": "SV-0132"
+    },
+    {
+      "redniBroj": 62,
+      "datum": "2027-05-07",
+      "clanak": "SV-0147"
+    },
+    {
+      "redniBroj": 63,
+      "datum": "2027-05-10",
+      "clanak": "SV-0155"
+    },
+    {
+      "redniBroj": 64,
+      "datum": "2027-05-13",
+      "clanak": "SV-0176"
+    },
+    {
+      "redniBroj": 65,
+      "datum": "2027-05-16",
+      "clanak": "SV-0197"
+    },
+    {
+      "redniBroj": 66,
+      "datum": "2027-05-19",
+      "clanak": "SV-0206"
+    },
+    {
+      "redniBroj": 67,
+      "datum": "2027-05-22",
+      "clanak": "SV-0214"
+    },
+    {
+      "redniBroj": 68,
+      "datum": "2027-05-25",
+      "clanak": "SV-0014"
+    },
+    {
+      "redniBroj": 69,
+      "datum": "2027-05-28",
+      "clanak": "SV-0027"
+    },
+    {
+      "redniBroj": 70,
+      "datum": "2027-05-31",
+      "clanak": "SV-0045"
+    },
+    {
+      "redniBroj": 71,
+      "datum": "2027-06-03",
+      "clanak": "SV-0055"
+    },
+    {
+      "redniBroj": 72,
+      "datum": "2027-06-06",
+      "clanak": "SV-0071"
+    },
+    {
+      "redniBroj": 73,
+      "datum": "2027-06-09",
+      "clanak": "SV-0086"
+    },
+    {
+      "redniBroj": 74,
+      "datum": "2027-06-12",
+      "clanak": "SV-0120"
+    },
+    {
+      "redniBroj": 75,
+      "datum": "2027-06-15",
+      "clanak": "SV-0148"
+    },
+    {
+      "redniBroj": 76,
+      "datum": "2027-06-18",
+      "clanak": "SV-0177"
+    },
+    {
+      "redniBroj": 77,
+      "datum": "2027-06-21",
+      "clanak": "SV-0207"
+    },
+    {
+      "redniBroj": 78,
+      "datum": "2027-06-24",
+      "clanak": "SV-0215"
+    },
+    {
+      "redniBroj": 79,
+      "datum": "2027-06-27",
+      "clanak": "SV-0015"
+    },
+    {
+      "redniBroj": 80,
+      "datum": "2027-06-30",
+      "clanak": "SV-0028"
+    },
+    {
+      "redniBroj": 81,
+      "datum": "2027-07-03",
+      "clanak": "SV-0046"
+    },
+    {
+      "redniBroj": 82,
+      "datum": "2027-07-06",
+      "clanak": "SV-0072"
+    },
+    {
+      "redniBroj": 83,
+      "datum": "2027-07-09",
+      "clanak": "SV-0087"
+    },
+    {
+      "redniBroj": 84,
+      "datum": "2027-07-12",
+      "clanak": "SV-0102"
+    },
+    {
+      "redniBroj": 85,
+      "datum": "2027-07-15",
+      "clanak": "SV-0113"
+    },
+    {
+      "redniBroj": 86,
+      "datum": "2027-07-18",
+      "clanak": "SV-0121"
+    },
+    {
+      "redniBroj": 87,
+      "datum": "2027-07-21",
+      "clanak": "SV-0134"
+    },
+    {
+      "redniBroj": 88,
+      "datum": "2027-07-24",
+      "clanak": "SV-0149"
+    },
+    {
+      "redniBroj": 89,
+      "datum": "2027-07-27",
+      "clanak": "SV-0178"
+    },
+    {
+      "redniBroj": 90,
+      "datum": "2027-07-30",
+      "clanak": "SV-0199"
+    },
+    {
+      "redniBroj": 91,
+      "datum": "2027-08-02",
+      "clanak": "SV-0216"
+    },
+    {
+      "redniBroj": 92,
+      "datum": "2027-08-05",
+      "clanak": "SV-0016"
+    },
+    {
+      "redniBroj": 93,
+      "datum": "2027-08-08",
+      "clanak": "SV-0029"
+    },
+    {
+      "redniBroj": 94,
+      "datum": "2027-08-11",
+      "clanak": "SV-0047"
+    },
+    {
+      "redniBroj": 95,
+      "datum": "2027-08-14",
+      "clanak": "SV-0057"
+    },
+    {
+      "redniBroj": 96,
+      "datum": "2027-08-17",
+      "clanak": "SV-0073"
+    },
+    {
+      "redniBroj": 97,
+      "datum": "2027-08-20",
+      "clanak": "SV-0103"
+    },
+    {
+      "redniBroj": 98,
+      "datum": "2027-08-23",
+      "clanak": "SV-0114"
+    },
+    {
+      "redniBroj": 99,
+      "datum": "2027-08-26",
+      "clanak": "SV-0122"
+    },
+    {
+      "redniBroj": 100,
+      "datum": "2027-08-29",
+      "clanak": "SV-0135"
+    },
+    {
+      "redniBroj": 101,
+      "datum": "2027-09-01",
+      "clanak": "SV-0150"
+    },
+    {
+      "redniBroj": 102,
+      "datum": "2027-09-04",
+      "clanak": "SV-0158"
+    },
+    {
+      "redniBroj": 103,
+      "datum": "2027-09-07",
+      "clanak": "SV-0179"
+    },
+    {
+      "redniBroj": 104,
+      "datum": "2027-09-10",
+      "clanak": "SV-0193"
+    },
+    {
+      "redniBroj": 105,
+      "datum": "2027-09-13",
+      "clanak": "SV-0200"
+    },
+    {
+      "redniBroj": 106,
+      "datum": "2027-09-16",
+      "clanak": "SV-0209"
+    },
+    {
+      "redniBroj": 107,
+      "datum": "2027-09-19",
+      "clanak": "SV-0217"
+    },
+    {
+      "redniBroj": 108,
+      "datum": "2027-09-22",
+      "clanak": "SV-0017"
+    },
+    {
+      "redniBroj": 109,
+      "datum": "2027-09-25",
+      "clanak": "SV-0030"
+    },
+    {
+      "redniBroj": 110,
+      "datum": "2027-09-28",
+      "clanak": "SV-0048"
+    },
+    {
+      "redniBroj": 111,
+      "datum": "2027-10-01",
+      "clanak": "SV-0058"
+    },
+    {
+      "redniBroj": 112,
+      "datum": "2027-10-04",
+      "clanak": "SV-0074"
+    },
+    {
+      "redniBroj": 113,
+      "datum": "2027-10-07",
+      "clanak": "SV-0089"
+    },
+    {
+      "redniBroj": 114,
+      "datum": "2027-10-10",
+      "clanak": "SV-0104"
+    },
+    {
+      "redniBroj": 115,
+      "datum": "2027-10-13",
+      "clanak": "SV-0115"
+    },
+    {
+      "redniBroj": 116,
+      "datum": "2027-10-16",
+      "clanak": "SV-0136"
+    },
+    {
+      "redniBroj": 117,
+      "datum": "2027-10-19",
+      "clanak": "SV-0180"
+    },
+    {
+      "redniBroj": 118,
+      "datum": "2027-10-22",
+      "clanak": "SV-0218"
+    },
+    {
+      "redniBroj": 119,
+      "datum": "2027-10-25",
+      "clanak": "SV-0018"
+    },
+    {
+      "redniBroj": 120,
+      "datum": "2027-10-28",
+      "clanak": "SV-0031"
+    },
+    {
+      "redniBroj": 121,
+      "datum": "2027-10-31",
+      "clanak": "SV-0111"
+    },
+    {
+      "redniBroj": 122,
+      "datum": "2027-11-03",
+      "clanak": "SV-0049"
+    },
+    {
+      "redniBroj": 123,
+      "datum": "2027-11-06",
+      "clanak": "SV-0059"
+    },
+    {
+      "redniBroj": 124,
+      "datum": "2027-11-09",
+      "clanak": "SV-0075"
+    },
+    {
+      "redniBroj": 125,
+      "datum": "2027-11-12",
+      "clanak": "SV-0090"
+    },
+    {
+      "redniBroj": 126,
+      "datum": "2027-11-15",
+      "clanak": "SV-0124"
+    },
+    {
+      "redniBroj": 127,
+      "datum": "2027-11-18",
+      "clanak": "SV-0137"
+    },
+    {
+      "redniBroj": 128,
+      "datum": "2027-11-21",
+      "clanak": "SV-0160"
+    },
+    {
+      "redniBroj": 129,
+      "datum": "2027-11-24",
+      "clanak": "SV-0181"
+    },
+    {
+      "redniBroj": 130,
+      "datum": "2027-11-27",
+      "clanak": "SV-0019"
+    },
+    {
+      "redniBroj": 131,
+      "datum": "2027-11-30",
+      "clanak": "SV-0032"
+    },
+    {
+      "redniBroj": 132,
+      "datum": "2027-12-03",
+      "clanak": "SV-0050"
+    },
+    {
+      "redniBroj": 133,
+      "datum": "2027-12-06",
+      "clanak": "SV-0060"
+    },
+    {
+      "redniBroj": 134,
+      "datum": "2027-12-09",
+      "clanak": "SV-0076"
+    },
+    {
+      "redniBroj": 135,
+      "datum": "2027-12-12",
+      "clanak": "SV-0091"
+    },
+    {
+      "redniBroj": 136,
+      "datum": "2027-12-15",
+      "clanak": "SV-0106"
+    },
+    {
+      "redniBroj": 137,
+      "datum": "2027-12-18",
+      "clanak": "SV-0125"
+    },
+    {
+      "redniBroj": 138,
+      "datum": "2027-12-21",
+      "clanak": "SV-0138"
+    },
+    {
+      "redniBroj": 139,
+      "datum": "2027-12-24",
+      "clanak": "SV-0161"
+    },
+    {
+      "redniBroj": 140,
+      "datum": "2027-12-27",
+      "clanak": "SV-0182"
+    },
+    {
+      "redniBroj": 141,
+      "datum": "2027-12-30",
+      "clanak": "SV-0220"
+    },
+    {
+      "redniBroj": 142,
+      "datum": "2028-01-02",
+      "clanak": "SV-0020"
+    },
+    {
+      "redniBroj": 143,
+      "datum": "2028-01-05",
+      "clanak": "SV-0061"
+    },
+    {
+      "redniBroj": 144,
+      "datum": "2028-01-08",
+      "clanak": "SV-0092"
+    },
+    {
+      "redniBroj": 145,
+      "datum": "2028-01-11",
+      "clanak": "SV-0139"
+    },
+    {
+      "redniBroj": 146,
+      "datum": "2028-01-14",
+      "clanak": "SV-0183"
+    },
+    {
+      "redniBroj": 147,
+      "datum": "2028-01-17",
+      "clanak": "SV-0221"
+    },
+    {
+      "redniBroj": 148,
+      "datum": "2028-01-20",
+      "clanak": "SV-0034"
+    },
+    {
+      "redniBroj": 149,
+      "datum": "2028-01-23",
+      "clanak": "SV-0062"
+    },
+    {
+      "redniBroj": 150,
+      "datum": "2028-01-26",
+      "clanak": "SV-0093"
+    },
+    {
+      "redniBroj": 151,
+      "datum": "2028-01-29",
+      "clanak": "SV-0127"
+    },
+    {
+      "redniBroj": 152,
+      "datum": "2028-02-01",
+      "clanak": "SV-0140"
+    },
+    {
+      "redniBroj": 153,
+      "datum": "2028-02-04",
+      "clanak": "SV-0163"
+    },
+    {
+      "redniBroj": 154,
+      "datum": "2028-02-07",
+      "clanak": "SV-0184"
+    },
+    {
+      "redniBroj": 155,
+      "datum": "2028-02-10",
+      "clanak": "SV-0222"
+    },
+    {
+      "redniBroj": 156,
+      "datum": "2028-02-13",
+      "clanak": "SV-0022"
+    },
+    {
+      "redniBroj": 157,
+      "datum": "2028-02-16",
+      "clanak": "SV-0035"
+    },
+    {
+      "redniBroj": 158,
+      "datum": "2028-02-19",
+      "clanak": "SV-0079"
+    },
+    {
+      "redniBroj": 159,
+      "datum": "2028-02-22",
+      "clanak": "SV-0094"
+    },
+    {
+      "redniBroj": 160,
+      "datum": "2028-02-25",
+      "clanak": "SV-0128"
+    },
+    {
+      "redniBroj": 161,
+      "datum": "2028-02-28",
+      "clanak": "SV-0141"
+    },
+    {
+      "redniBroj": 162,
+      "datum": "2028-03-02",
+      "clanak": "SV-0164"
+    },
+    {
+      "redniBroj": 163,
+      "datum": "2028-03-05",
+      "clanak": "SV-0185"
+    },
+    {
+      "redniBroj": 164,
+      "datum": "2028-03-08",
+      "clanak": "SV-0223"
+    },
+    {
+      "redniBroj": 165,
+      "datum": "2028-03-11",
+      "clanak": "SV-0064"
+    },
+    {
+      "redniBroj": 166,
+      "datum": "2028-03-14",
+      "clanak": "SV-0080"
+    },
+    {
+      "redniBroj": 167,
+      "datum": "2028-03-17",
+      "clanak": "SV-0142"
+    },
+    {
+      "redniBroj": 168,
+      "datum": "2028-03-20",
+      "clanak": "SV-0165"
+    },
+    {
+      "redniBroj": 169,
+      "datum": "2028-03-23",
+      "clanak": "SV-0224"
+    },
+    {
+      "redniBroj": 170,
+      "datum": "2028-03-26",
+      "clanak": "SV-0065"
+    },
+    {
+      "redniBroj": 171,
+      "datum": "2028-03-29",
+      "clanak": "SV-0081"
+    },
+    {
+      "redniBroj": 172,
+      "datum": "2028-04-01",
+      "clanak": "SV-0096"
+    },
+    {
+      "redniBroj": 173,
+      "datum": "2028-04-04",
+      "clanak": "SV-0143"
+    },
+    {
+      "redniBroj": 174,
+      "datum": "2028-04-07",
+      "clanak": "SV-0166"
+    },
+    {
+      "redniBroj": 175,
+      "datum": "2028-04-10",
+      "clanak": "SV-0038"
+    },
+    {
+      "redniBroj": 176,
+      "datum": "2028-04-13",
+      "clanak": "SV-0066"
+    },
+    {
+      "redniBroj": 177,
+      "datum": "2028-04-16",
+      "clanak": "SV-0167"
+    },
+    {
+      "redniBroj": 178,
+      "datum": "2028-04-19",
+      "clanak": "SV-0039"
+    },
+    {
+      "redniBroj": 179,
+      "datum": "2028-04-22",
+      "clanak": "SV-0168"
+    },
+    {
+      "redniBroj": 180,
+      "datum": "2028-04-25",
+      "clanak": "SV-0040"
+    },
+    {
+      "redniBroj": 181,
+      "datum": "2028-04-28",
+      "clanak": "SV-0169"
+    },
+    {
+      "redniBroj": 182,
+      "datum": "2028-05-01",
+      "clanak": "SV-0170"
+    },
+    {
+      "redniBroj": 183,
+      "datum": "2028-05-04",
+      "clanak": "SV-0171"
+    }
+  ]
+}

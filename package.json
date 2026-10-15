@@ -257,7 +257,7 @@
     "test:content-copy": "tsx --test --tsconfig db/integration/tsconfig.test.json lib/content-qa/contentCopyGuard.test.mjs lib/content-qa/companyContact.test.mts lib/content-qa/pdpCustomerCopy.test.mts lib/content-qa/releaseRegression.test.mts",
     "test:commercial": "node --test lib/commercial/*.test.mjs",
     "test:customer-isolation": "node --test lib/authz/customerIsolation.test.mjs lib/customers/reorderRules.test.mjs",
-    "test:ordering": "node --test lib/ordering/*.test.mjs",
+    "test:ordering": "node --test lib/ordering/*.test.mjs components/customer-buy/*.test.mjs",
     "test:private-caching": "node --test lib/security/*.test.mjs",
     "test:partners": "node --test lib/partners/*.test.mjs lib/import/xlsx/*.test.mjs lib/customers/contactVerification.test.mjs lib/customers/customerStatus.test.mjs app/portal/kupci/[id]/actions.test.mjs",
     "partners:report": "node scripts/partners/partner-registry-report.mjs",

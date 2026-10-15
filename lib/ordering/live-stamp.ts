@@ -60,8 +60,10 @@ export async function customerCartStamp(customerId: string): Promise<string> {
   if (!customerId) throw new Error("Upit kupca bez customer_id se ne sme izvršiti.");
   const [r] = [...(await getDb().execute<{ s: string }>(sql`
     SELECT md5(
-      (SELECT count(*)::text || '|' || coalesce(max(updated_at)::text, '') || '|' || coalesce(string_agg(article_id::text || ':' || quantity::text, ',' ORDER BY article_id), '')
+      (SELECT count(*)::text || '|' || coalesce(max(updated_at)::text, '') || '|' || coalesce(string_agg(article_id::text || ':' || quantity::text || ':' || coalesce(pack_count::text, ''), ',' ORDER BY article_id), '')
          FROM customer_cart_items WHERE customer_id = ${customerId}::uuid)
+      || '#' || (SELECT coalesce(string_agg(ps.article_id::text || ':' || ps.pack_quantity::text || ps.unit, ',' ORDER BY ps.article_id), '')
+         FROM article_pack_sizes ps JOIN customer_cart_items c ON c.article_id = ps.article_id WHERE c.customer_id = ${customerId}::uuid)
       || '#' || (SELECT count(*)::text || '|' || coalesce(string_agg(id::text || ':' || status, ',' ORDER BY id), '')
          FROM customer_payment_options WHERE customer_id = ${customerId}::uuid)
       || '#' || (SELECT count(*)::text || '|' || coalesce(max(coalesce(decided_at, proposed_at))::text, '')

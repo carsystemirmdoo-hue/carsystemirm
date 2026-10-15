@@ -8,13 +8,14 @@ import { can } from "@/lib/authz/permissions.mjs";
 import type { PortalUser } from "@/lib/authz/user-repository";
 import { isPreparedForPortal } from "@/lib/customers/commercial-status.mjs";
 import { resolveLedgerScope } from "@/lib/ledger/effective-sales";
-import { formatRequestNumber, lineAmounts, MAX_LINE_QUANTITY, orderTotals, parseQuantity, quantityProblem, quoteKey, transitionProblem } from "@/lib/ordering/orderRules.mjs";
+import { formatRequestNumber, lineAmounts, orderTotals, quantityProblem, quoteKey, transitionProblem } from "@/lib/ordering/orderRules.mjs";
 import { customerPrices } from "@/lib/pricing/customer-price-service";
 import { approvedPaymentOptions } from "@/lib/pricing/payment-option-service";
 import { optionLabel, optionNote } from "@/lib/pricing/paymentOptions.mjs";
 import { belgradeDate } from "@/lib/recommendations/customerRhythm.mjs";
 import { orderingEnabledFor } from "@/lib/ordering/trial";
-import { staleVersionProblem } from "@/lib/ordering/ordering-service";
+import { billingQuantity, MAX_PACKS, orderPack, packSummary, parsePacks } from "@/lib/ordering/packRule.mjs";
+import { catalogOfferFacts, staleVersionProblem } from "@/lib/ordering/ordering-service";
 
 /** Radnja nad zastarelom verzijom zahteva — nosi važeću verziju za ponudu korisniku. */
 export class StaleVersionError extends Error {
@@ -44,11 +45,25 @@ export function requestOrderingEnabled() {
   return process.env.CUSTOMER_ORDERING === "cenovnik";
 }
 
-const PIECES = ["KOM", "KT"];
-const stepFor = (unit: string | null) => (PIECES.includes(String(unit ?? "").toUpperCase()) ? 1 : 0.1);
+/** Kupac bira BROJ celih pakovanja (packRule.mjs); korak je uvek 1 pakovanje. */
+const PACK_STEP = 1;
+/** Kancelarija u izmenjenom predlogu unosi količinu u JM (kao pre 0047). */
+const officeStep = (unit: string) => (["KOM", "KT"].includes(unit) ? 1 : 0.1);
+
+export type PackFacts = { quantity: number; unit: string; label: string };
 
 export type OptionPrice =
-  | { status: "cena"; listPrice: number; discountPercent: number; netPrice: number; vatPercent: number; basis: string }
+  | {
+      status: "cena";
+      listPrice: number;
+      discountPercent: number;
+      /** Cena po BizniSoft JM (npr. po litru) — tako je vodi cenovnik. */
+      netPrice: number;
+      vatPercent: number;
+      basis: string;
+      /** Cena JEDNOG potvrđenog pakovanja (isti `lineAmounts` kao stavka); null bez potvrđenog pakovanja. */
+      packAmounts: { net: number; vat: number; gross: number } | null;
+    }
   | { status: "na_upit"; reason: string; message: string };
 
 export type RequestLine = {
@@ -58,7 +73,16 @@ export type RequestLine = {
   unit: string;
   packLabel: string;
   packConfirmed: boolean;
+  /** Potvrđeno pakovanje (količina u JM) ili null — tada se artikal ne poručuje preko sajta. */
+  pack: PackFacts | null;
+  /** Zašto pakovanje nije potvrđeno (za kupca i kancelariju). */
+  packProblem: string | null;
+  /** Broj pakovanja koje je kupac izabrao. */
+  packs: number | null;
+  /** Obračunska količina u BizniSoft JM = packs × pack.quantity. */
   quantity: number;
+  /** „2 × limenka 5 L = 10 LIT“ */
+  packSummary: string | null;
   step: number;
   quantityProblem: string | null;
   problem: string | null;
@@ -86,15 +110,35 @@ export type RequestQuote = {
 
 const keyOf = (code: string | null) => code ?? "osnovni";
 
-async function priceLines(exec: Exec, customerId: string, items: { articleId: string; quantity: number }[], option: string | null, today: string) {
+type ArticleRow = {
+  id: string; code: string; name: string; unit: string | null; out: boolean; fractional: boolean;
+  pack_quantity: string | null; pack_unit: string | null; pack_label: string | null; pack_fractional: boolean | null;
+};
+
+/**
+ * `packs`: broj pakovanja koje je kupac izabrao. `quantity` samo za stare stavke
+ * korpe (pre 0047, u JM): prevodi se u pakovanja kada se deli celim brojem.
+ */
+async function priceLines(
+  exec: Exec,
+  customerId: string,
+  items: { articleId: string; packs: number | null; quantity?: number }[],
+  option: string | null,
+  today: string,
+  /** Kancelarija (izmenjen predlog) radi u JM iz BizniSofta: pakovanje je podatak, ne uslov. */
+  mode: "customer" | "office" = "customer",
+) {
   const ids = items.map((i) => i.articleId);
   const [opts, arts, vats] = await Promise.all([
     approvedPaymentOptions(customerId, today, exec),
     ids.length
-      ? exec.execute<{ id: string; code: string; name: string; unit: string | null; out: boolean }>(sql`
-          SELECT a.id, a.code, a.name, a.unit, EXISTS (SELECT 1 FROM articles_out_of_programme o WHERE o.article_id = a.id) AS out
-            FROM articles a WHERE a.id IN (${sql.join(ids.map((i) => sql`${i}::uuid`), sql`, `)})`)
-      : Promise.resolve([] as { id: string; code: string; name: string; unit: string | null; out: boolean }[]),
+      ? exec.execute<ArticleRow>(sql`
+          SELECT a.id, a.code, a.name, a.unit, EXISTS (SELECT 1 FROM articles_out_of_programme o WHERE o.article_id = a.id) AS out,
+                 EXISTS (SELECT 1 FROM invoice_lines l WHERE l.article_id = a.id AND l.quantity <> trunc(l.quantity)) AS fractional,
+                 ps.pack_quantity::text AS pack_quantity, ps.unit AS pack_unit, ps.label AS pack_label, ps.fractional_ok AS pack_fractional
+            FROM articles a LEFT JOIN article_pack_sizes ps ON ps.article_id = a.id
+           WHERE a.id IN (${sql.join(ids.map((i) => sql`${i}::uuid`), sql`, `)})`)
+      : Promise.resolve([] as ArticleRow[]),
     ids.length
       ? exec.execute<{ article_id: string; vat: string }>(sql`
           SELECT DISTINCT ON (article_id) article_id, vat_percent::text AS vat FROM article_base_prices
@@ -112,37 +156,65 @@ async function priceLines(exec: Exec, customerId: string, items: { articleId: st
   const lines: RequestLine[] = items.map((it) => {
     const a = byId.get(it.articleId)!;
     const unit = (a.unit ?? "").toUpperCase() || "JM";
-    const step = stepFor(unit);
+    const step = PACK_STEP;
+    const rule = orderPack({
+      unit: a.unit,
+      fractionalSales: a.fractional,
+      confirmed: a.pack_quantity && a.pack_unit ? { packQuantity: a.pack_quantity, unit: a.pack_unit, label: a.pack_label ?? "", fractionalOk: Boolean(a.pack_fractional) } : null,
+    });
+    const pack: PackFacts | null = rule.status === "pack" ? { quantity: rule.packQuantity, unit: rule.unit, label: rule.label } : null;
+    const packProblem = rule.status === "blocked" ? `Pakovanje nije potvrđeno: ${rule.reason}.` : null;
+    // Stara stavka (u JM, bez broja pakovanja): prevodi se samo kada se deli celim brojem.
+    let packs = it.packs;
+    if (packs === null && pack && it.quantity !== undefined) {
+      const n = Math.round((it.quantity / pack.quantity) * 1000) / 1000;
+      packs = Number.isInteger(n) && n >= 1 ? n : null;
+    }
+    const quantity = pack && packs !== null ? billingQuantity(packs, pack.quantity) : (it.quantity ?? 0);
     const byOption: Record<string, OptionPrice> = {};
-    let pack: { confirmed: boolean; label: string } = { confirmed: false, label: `JM: ${unit}` };
     for (const c of codes) {
       const p = perOption.get(keyOf(c))!.get(it.articleId);
       if (p && p.status === "cena" && p.baseCents !== null && vat.has(it.articleId)) {
-        byOption[keyOf(c)] = {
-          status: "cena",
+        const priced = {
           listPrice: p.baseCents / 100,
           discountPercent: p.discountPercent ?? 0,
           netPrice: p.netCents / 100,
           vatPercent: vat.get(it.articleId)!,
-          basis: `${p.basis} · ${optionLabel(c)}`,
         };
-        if (p.pack && p.pack.status === "cena_pakovanja") pack = { confirmed: true, label: `${p.pack.packQuantity} ${p.pack.unit}` };
+        byOption[keyOf(c)] = {
+          status: "cena",
+          ...priced,
+          basis: `${p.basis} · ${optionLabel(c)}`,
+          packAmounts: pack ? lineAmounts({ quantity: pack.quantity, ...priced }) : null,
+        };
       } else {
         const reason = p && "reason" in p ? String(p.reason) : "nema_cene";
         byOption[keyOf(c)] = { status: "na_upit", reason, message: p && "message" in p ? p.message : "Cena na upit." };
       }
     }
-    const qp = quantityProblem(it.quantity, { minQuantity: step, quantityStep: step });
+    // Kancelarija: korak je JM (KOM = 1), osim kada je potvrđeno pakovanje deo jednog KOM (tada korak = pakovanje).
+    const oStep = pack && !Number.isInteger(pack.quantity) ? pack.quantity : officeStep(unit);
+    const qp = mode === "office"
+      ? quantityProblem(quantity, { minQuantity: oStep, quantityStep: oStep })
+      : !pack
+      ? null
+      : packs === null
+        ? `Količina ${String(quantity).replace(".", ",")} ${unit} nije ceo broj pakovanja (${pack.label}) — unesite broj pakovanja.`
+        : quantityProblem(packs, { minQuantity: 1, quantityStep: 1 });
     const sel = byOption[keyOf(selected)];
-    const problem = a.out ? "Artikal nije u aktuelnoj ponudi." : null;
+    const problem = a.out ? "Artikal nije u aktuelnoj ponudi." : mode === "office" ? null : packProblem;
     return {
       articleId: a.id,
       articleCode: a.code,
       articleName: a.name,
       unit,
-      packLabel: pack.label,
-      packConfirmed: pack.confirmed,
-      quantity: it.quantity,
+      packLabel: pack ? pack.label : `JM: ${unit}`,
+      packConfirmed: Boolean(pack),
+      pack,
+      packProblem,
+      packs,
+      quantity,
+      packSummary: pack && packs !== null ? packSummary(packs, { packQuantity: pack.quantity, unit: pack.unit, label: pack.label }) : null,
       step,
       quantityProblem: qp,
       problem,
@@ -150,11 +222,115 @@ async function priceLines(exec: Exec, customerId: string, items: { articleId: st
       selected: sel,
       amounts:
         sel.status === "cena" && !qp && !problem
-          ? lineAmounts({ quantity: it.quantity, netPrice: sel.netPrice, vatPercent: sel.vatPercent, listPrice: sel.listPrice, discountPercent: sel.discountPercent })
+          ? lineAmounts({ quantity, netPrice: sel.netPrice, vatPercent: sel.vatPercent, listPrice: sel.listPrice, discountPercent: sel.discountPercent })
           : null,
     };
   });
   return { options, selected, lines };
+}
+
+/* ---------------------------------------------------------------------------
+ * Ponude javnog kataloga — ISTI obračun kao korpa i slanje (dok. 61 K2)
+ * ------------------------------------------------------------------------ */
+
+export type CatalogRequestOffer = {
+  articleId: string;
+  articleCode: string;
+  /** BizniSoft naziv — u njemu je i zapremina pakovanja (npr. „… 5L“). */
+  articleName: string;
+  slug: string;
+  variantKey: string | null;
+  variantLabel: string | null;
+  cardKeys: string[];
+  catalogName: string;
+  /** BizniSoft jedinica mere: cena važi za nju (npr. LIT = po litru). */
+  unit: string;
+  /** Potvrđeno pojedinačno pakovanje (količina u JM); bez njega nema poručivanja preko sajta. */
+  pack: PackFacts | null;
+  packProblem: string | null;
+  /** Korak: 1 pakovanje. */
+  step: number;
+  /** Cena po svakoj ODOBRENOJ opciji plaćanja kupca (ključ = šifra opcije ili „osnovni“). */
+  byOption: Record<string, OptionPrice>;
+  /**
+   * `orderable` = potvrđeno pakovanje i bar jedna opcija sa cenom; `no_pack` = cena
+   * postoji, ali pakovanje nije potvrđeno (ne preračunava se — upit); `no_price` = na upit.
+   */
+  state: "orderable" | "no_price" | "no_pack";
+};
+
+/**
+ * Sve POTVRĐENE veze artikal → katalog, sa cenom ovog kupca po odobrenim
+ * opcijama plaćanja. Isti `priceLines` kao korpa i slanje — nema drugog
+ * obračuna. Bez potvrđene veze artikal se ne nudi (katalog nudi upit); bez
+ * cene ili sa nepotvrđenim rabatom → „na upit“, nikad nula ni demo cena.
+ * Kupac isključivo iz sesije pozivaoca; rezultat se ne kešira.
+ */
+export async function loadCatalogRequestOffers(customerId: string): Promise<{
+  enabled: boolean;
+  reason: string | null;
+  options: { code: string | null; key: string; label: string; note: string | null }[];
+  offers: CatalogRequestOffer[];
+}> {
+  if (!customerId) throw new Error("Upit kupca bez customer_id se ne sme izvršiti.");
+  const db = getDb();
+  if (!(await orderingEnabledFor(customerId, db))) {
+    return { enabled: false, reason: "Poručivanje preko sajta još nije uključeno za Vašu firmu.", options: [], offers: [] };
+  }
+  const rows = [...(await db.execute<{ id: string; slug: string; variant: string | null }>(sql`
+    SELECT a.id, m.catalog_product_slug AS slug, m.catalog_variant_id AS variant
+      FROM article_catalog_mappings m JOIN articles a ON a.id = m.article_id
+     WHERE m.status = 'mapped' AND m.catalog_product_slug IS NOT NULL
+       AND NOT EXISTS (SELECT 1 FROM articles_out_of_programme o WHERE o.article_id = a.id)`))];
+  if (!rows.length) return { enabled: true, reason: null, options: [], offers: [] };
+  const today = belgradeDate(new Date());
+  const priced = await priceLines(db, customerId, rows.map((r) => ({ articleId: r.id, packs: 1 })), null, today);
+  const byId = new Map(rows.map((r) => [r.id, r]));
+  const offers: CatalogRequestOffer[] = [];
+  for (const l of priced.lines) {
+    const r = byId.get(l.articleId)!;
+    const facts = catalogOfferFacts(r.slug, r.variant);
+    if (!facts.productExists || !facts.link) continue;
+    offers.push({
+      articleId: l.articleId,
+      articleCode: l.articleCode,
+      articleName: l.articleName,
+      slug: facts.link.slug,
+      variantKey: facts.link.variantKey,
+      variantLabel: facts.link.variantLabel,
+      cardKeys: facts.cardKeys,
+      catalogName: facts.link.name,
+      unit: l.unit,
+      pack: l.pack,
+      packProblem: l.packProblem,
+      step: l.step,
+      byOption: l.byOption,
+      state: !Object.values(l.byOption).some((p) => p.status === "cena") ? "no_price" : l.pack ? "orderable" : "no_pack",
+    });
+  }
+  return { enabled: true, reason: null, options: priced.options, offers };
+}
+
+/**
+ * Cene kupca za zadate artikle (isti `priceLines`) — za „Poručite ponovo“, koji
+ * puni istu korpu i za artikle bez kataloške veze (kupac ih zna sa fakture).
+ */
+export async function loadArticleRequestPrices(customerId: string, articleIds: string[]) {
+  if (!customerId) throw new Error("Upit kupca bez customer_id se ne sme izvršiti.");
+  const ids = [...new Set(articleIds.filter(isUuid))];
+  const db = getDb();
+  if (!ids.length || !(await orderingEnabledFor(customerId, db))) return { enabled: ids.length ? false : true, options: [], lines: new Map<string, RequestLine>() };
+  const priced = await priceLines(db, customerId, ids.map((articleId) => ({ articleId, packs: 1 })), null, belgradeDate(new Date()));
+  return { enabled: true, options: priced.options, lines: new Map(priced.lines.map((l) => [l.articleId, l])) };
+}
+
+/** Dodavanje iz javnog kataloga: artikal mora imati POTVRĐENU vezu (dok. 61 K4). */
+export async function addCatalogItem(session: CustomerSession, input: { articleId: string; packs: unknown }): Promise<RequestCartChange> {
+  if (!isUuid(input.articleId)) return { ok: false, message: "Neispravan artikal." };
+  const [m] = [...(await getDb().execute<{ ok: boolean }>(sql`
+    SELECT true AS ok FROM article_catalog_mappings WHERE article_id = ${input.articleId}::uuid AND status = 'mapped' LIMIT 1`))];
+  if (!m) return { ok: false, message: "Ovaj artikal još nije povezan sa katalogom — zatražite cenu/uslove." };
+  return addRequestItem(session, input);
 }
 
 function fingerprintOf(option: string | null, lines: RequestLine[]) {
@@ -167,9 +343,9 @@ export async function loadRequestQuote(customerId: string, option: string | null
   if (!customerId) throw new Error("Upit kupca bez customer_id se ne sme izvršiti.");
   const today = belgradeDate(new Date());
   const enabled = await orderingEnabledFor(customerId, exec);
-  const cart = [...(await exec.execute<{ article_id: string; quantity: string; source_order_id: string | null }>(sql`
-    SELECT article_id, quantity::text AS quantity, source_order_id FROM customer_cart_items WHERE customer_id = ${customerId} ORDER BY created_at, article_id`))];
-  const priced = await priceLines(exec, customerId, cart.map((c) => ({ articleId: c.article_id, quantity: Number(c.quantity) })), option, today);
+  const cart = [...(await exec.execute<{ article_id: string; quantity: string; pack_count: number | null; source_order_id: string | null }>(sql`
+    SELECT article_id, quantity::text AS quantity, pack_count, source_order_id FROM customer_cart_items WHERE customer_id = ${customerId} ORDER BY created_at, article_id`))];
+  const priced = await priceLines(exec, customerId, cart.map((c) => ({ articleId: c.article_id, packs: c.pack_count, quantity: Number(c.quantity) })), option, today);
   const sources = [...new Set(cart.map((c) => c.source_order_id).filter((x): x is string => Boolean(x)))];
   let correcting: RequestQuote["correcting"] = null;
   if (sources.length === 1) {
@@ -234,60 +410,84 @@ export async function listRequestArticles(customerId: string, query: string | nu
      ORDER BY bought DESC, last_on DESC NULLS LAST, a.code
      LIMIT ${limit}`);
   const today = belgradeDate(new Date());
-  const priced = await priceLines(getDb(), customerId, rows.map((r) => ({ articleId: r.id, quantity: stepFor(r.unit) })), null, today);
+  const priced = await priceLines(getDb(), customerId, rows.map((r) => ({ articleId: r.id, packs: 1 })), null, today);
   return { options: priced.options, articles: priced.lines.map((l, i) => ({ ...l, bought: rows[i].bought, lastOn: rows[i].last_on })) };
 }
 
-export type RequestCartChange = { ok: true; count: number; lineQuantity?: number } | { ok: false; message: string };
+export type RequestCartChange = { ok: true; count: number; linePacks?: number } | { ok: false; message: string };
 
 async function cartCount(customerId: string, exec: Exec = getDb()) {
   const [{ n }] = [...(await exec.execute<{ n: number }>(sql`SELECT count(*)::int AS n FROM customer_cart_items WHERE customer_id = ${customerId}`))];
   return n;
 }
 
-export async function addRequestItem(session: CustomerSession, input: { articleId: string; quantity: unknown }): Promise<RequestCartChange> {
+/** Potvrđeno pakovanje artikla (isto pravilo kao obračun) — za upis u korpu. */
+async function packFor(exec: Exec, articleId: string) {
+  const [a] = [...(await exec.execute<{ unit: string | null; fractional: boolean; pack_quantity: string | null; pack_unit: string | null; pack_label: string | null; pack_fractional: boolean | null }>(sql`
+    SELECT a.unit, EXISTS (SELECT 1 FROM invoice_lines l WHERE l.article_id = a.id AND l.quantity <> trunc(l.quantity)) AS fractional,
+           ps.pack_quantity::text AS pack_quantity, ps.unit AS pack_unit, ps.label AS pack_label, ps.fractional_ok AS pack_fractional
+      FROM articles a LEFT JOIN article_pack_sizes ps ON ps.article_id = a.id WHERE a.id = ${articleId}::uuid`))];
+  if (!a) return null;
+  return orderPack({
+    unit: a.unit,
+    fractionalSales: a.fractional,
+    confirmed: a.pack_quantity && a.pack_unit ? { packQuantity: a.pack_quantity, unit: a.pack_unit, label: a.pack_label ?? "", fractionalOk: Boolean(a.pack_fractional) } : null,
+  });
+}
+
+const NO_PACK = "Ovaj artikal se za sada ne poručuje preko sajta: pakovanje (zapremina) nije potvrđeno. Pošaljite upit — kancelarija potvrđuje pakovanje i cenu.";
+
+/** Dodavanje u korpu: kupac bira BROJ celih pakovanja; obračunska količina = broj × potvrđeno pakovanje. */
+export async function addRequestItem(session: CustomerSession, input: { articleId: string; packs: unknown }): Promise<RequestCartChange> {
   const customerId = session.customerId;
   if (!customerId) throw new Error("Upit kupca bez customer_id se ne sme izvršiti.");
   if (!(await orderingEnabledFor(customerId))) return { ok: false, message: "Poručivanje preko sajta još nije uključeno." };
   if (!/^[0-9a-f-]{36}$/.test(input.articleId)) return { ok: false, message: "Neispravan artikal." };
   const db = getDb();
-  const [a] = [...(await db.execute<{ unit: string | null; out: boolean; ok: boolean }>(sql`
-    SELECT a.unit, EXISTS (SELECT 1 FROM articles_out_of_programme o WHERE o.article_id = a.id) AS out,
+  const [a] = [...(await db.execute<{ out: boolean; ok: boolean }>(sql`
+    SELECT EXISTS (SELECT 1 FROM articles_out_of_programme o WHERE o.article_id = a.id) AS out,
            (EXISTS (SELECT 1 FROM article_base_prices b WHERE b.article_id = a.id)
             OR EXISTS (SELECT 1 FROM invoice_lines l JOIN invoices i ON i.id = l.invoice_id WHERE l.article_id = a.id AND i.customer_id = ${customerId}::uuid)) AS ok
       FROM articles a WHERE a.id = ${input.articleId}::uuid`))];
   if (!a || !a.ok) return { ok: false, message: "Artikal nije dostupan za zahtev." };
   if (a.out) return { ok: false, message: "Artikal nije u aktuelnoj ponudi." };
-  const step = stepFor(a.unit);
-  const qp = quantityProblem(input.quantity, { minQuantity: step, quantityStep: step });
-  if (qp) return { ok: false, message: qp };
+  const parsed = parsePacks(input.packs);
+  if (!parsed.ok) return { ok: false, message: parsed.message };
+  const pack = await packFor(db, input.articleId);
+  if (!pack || pack.status !== "pack") return { ok: false, message: NO_PACK };
   await db.execute(sql`
-    INSERT INTO customer_cart_items (customer_id, article_id, quantity, added_by)
-    VALUES (${customerId}, ${input.articleId}::uuid, ${parseQuantity(input.quantity)}, ${session.accountId})
+    INSERT INTO customer_cart_items (customer_id, article_id, quantity, pack_count, added_by)
+    VALUES (${customerId}, ${input.articleId}::uuid, ${billingQuantity(parsed.packs, pack.packQuantity)}, ${parsed.packs}, ${session.accountId})
     ON CONFLICT (customer_id, article_id)
-    DO UPDATE SET quantity = LEAST(customer_cart_items.quantity + EXCLUDED.quantity, ${MAX_LINE_QUANTITY}), updated_at = now()`);
-  const [line] = [...(await db.execute<{ q: string }>(sql`SELECT quantity::text AS q FROM customer_cart_items WHERE customer_id = ${customerId} AND article_id = ${input.articleId}::uuid`))];
-  return { ok: true, count: await cartCount(customerId, db), lineQuantity: line ? Number(line.q) : undefined };
+    DO UPDATE SET pack_count = LEAST(COALESCE(customer_cart_items.pack_count, 0) + EXCLUDED.pack_count, ${MAX_PACKS}),
+                  quantity = LEAST(COALESCE(customer_cart_items.pack_count, 0) + EXCLUDED.pack_count, ${MAX_PACKS}) * ${pack.packQuantity}::numeric,
+                  updated_at = now()`);
+  const [line] = [...(await db.execute<{ n: number }>(sql`SELECT pack_count AS n FROM customer_cart_items WHERE customer_id = ${customerId} AND article_id = ${input.articleId}::uuid`))];
+  return { ok: true, count: await cartCount(customerId, db), linePacks: line?.n ?? undefined };
 }
 
-export async function setRequestQuantity(session: CustomerSession, input: { articleId: string; quantity: unknown }): Promise<RequestCartChange> {
+/** Promena broja pakovanja u korpi; 0 ili prazno uklanja stavku. */
+export async function setRequestPacks(session: CustomerSession, input: { articleId: string; packs: unknown }): Promise<RequestCartChange> {
   const customerId = session.customerId;
   if (!customerId) throw new Error("Upit kupca bez customer_id se ne sme izvršiti.");
   // Isti uslovi kao dodavanje: loš ID je poruka, ne greška baze; isključena proba ne menja korpu (B7).
   if (!isUuid(input.articleId)) return { ok: false, message: "Stavka nije u korpi." };
   if (!(await orderingEnabledFor(customerId))) return { ok: false, message: "Poručivanje preko naloga nije uključeno za Vašu firmu." };
   const db = getDb();
-  if (String(input.quantity ?? "").trim() === "" || Number(input.quantity) === 0) {
+  if (String(input.packs ?? "").trim() === "" || String(input.packs).trim() === "0") {
     await db.execute(sql`DELETE FROM customer_cart_items WHERE customer_id = ${customerId} AND article_id = ${input.articleId}::uuid`);
     return { ok: true, count: await cartCount(customerId, db) };
   }
-  const [a] = [...(await db.execute<{ unit: string | null }>(sql`
-    SELECT a.unit FROM customer_cart_items c JOIN articles a ON a.id = c.article_id WHERE c.customer_id = ${customerId} AND c.article_id = ${input.articleId}::uuid`))];
-  if (!a) return { ok: false, message: "Stavka nije u korpi." };
-  const step = stepFor(a.unit);
-  const qp = quantityProblem(input.quantity, { minQuantity: step, quantityStep: step });
-  if (qp) return { ok: false, message: qp };
-  await db.execute(sql`UPDATE customer_cart_items SET quantity = ${parseQuantity(input.quantity)}, updated_at = now() WHERE customer_id = ${customerId} AND article_id = ${input.articleId}::uuid`);
+  const [inCart] = [...(await db.execute<{ ok: boolean }>(sql`
+    SELECT true AS ok FROM customer_cart_items WHERE customer_id = ${customerId} AND article_id = ${input.articleId}::uuid`))];
+  if (!inCart) return { ok: false, message: "Stavka nije u korpi." };
+  const parsed = parsePacks(input.packs);
+  if (!parsed.ok) return { ok: false, message: parsed.message };
+  const pack = await packFor(db, input.articleId);
+  if (!pack || pack.status !== "pack") return { ok: false, message: NO_PACK };
+  await db.execute(sql`
+    UPDATE customer_cart_items SET pack_count = ${parsed.packs}, quantity = ${billingQuantity(parsed.packs, pack.packQuantity)}, updated_at = now()
+     WHERE customer_id = ${customerId} AND article_id = ${input.articleId}::uuid`);
   return { ok: true, count: await cartCount(customerId, db) };
 }
 
@@ -324,19 +524,25 @@ async function insertLines(tx: Tx, orderId: string, lines: RequestLine[]) {
     const p = l.selected!;
     if (p.status === "cena") {
       await tx.execute(sql`
-        INSERT INTO customer_order_lines (order_id, line_number, article_id, article_code, article_name, unit, pack_label, pack_confirmed, quantity,
+        INSERT INTO customer_order_lines (order_id, line_number, article_id, article_code, article_name, catalog_product_slug, catalog_variant_id, unit, pack_label, pack_confirmed, pack_count, pack_quantity, quantity,
           list_price, discount_percent, net_price, vat_percent, line_net, line_vat, line_gross, price_basis, price_status)
-        VALUES (${orderId}, ${n}, ${l.articleId}, ${l.articleCode}, ${l.articleName}, ${l.unit}, ${l.packLabel}, ${l.packConfirmed}, ${l.quantity},
+        VALUES (${orderId}, ${n}, ${l.articleId}, ${l.articleCode}, ${l.articleName}, ${mappedSlug(l.articleId)}, ${mappedVariant(l.articleId)}, ${l.unit}, ${l.packLabel}, ${l.packConfirmed}, ${l.pack ? l.packs : null}, ${l.pack ? l.pack.quantity : null}, ${l.quantity},
           ${p.listPrice}, ${p.discountPercent}, ${p.netPrice}, ${p.vatPercent}, ${l.amounts!.net}, ${l.amounts!.vat}, ${l.amounts!.gross}, ${p.basis}, 'cena')`);
     } else {
       await tx.execute(sql`
-        INSERT INTO customer_order_lines (order_id, line_number, article_id, article_code, article_name, unit, pack_label, pack_confirmed, quantity,
+        INSERT INTO customer_order_lines (order_id, line_number, article_id, article_code, article_name, catalog_product_slug, catalog_variant_id, unit, pack_label, pack_confirmed, pack_count, pack_quantity, quantity,
           list_price, discount_percent, net_price, vat_percent, line_net, line_vat, line_gross, price_basis, price_status, on_request_reason)
-        VALUES (${orderId}, ${n}, ${l.articleId}, ${l.articleCode}, ${l.articleName}, ${l.unit}, ${l.packLabel}, ${l.packConfirmed}, ${l.quantity},
+        VALUES (${orderId}, ${n}, ${l.articleId}, ${l.articleCode}, ${l.articleName}, ${mappedSlug(l.articleId)}, ${mappedVariant(l.articleId)}, ${l.unit}, ${l.packLabel}, ${l.packConfirmed}, ${l.pack ? l.packs : null}, ${l.pack ? l.pack.quantity : null}, ${l.quantity},
           NULL, NULL, NULL, NULL, NULL, NULL, NULL, ${"cena na upit"}, 'na_upit', ${ON_REQUEST_NOTE[p.reason] ?? "cenu potvrđuje kancelarija"})`);
     }
   }
 }
+
+/** Potvrđena kataloška veza artikla u trenutku slanja — kancelarija vidi proizvod i varijantu. */
+const mappedSlug = (articleId: string) =>
+  sql`(SELECT catalog_product_slug FROM article_catalog_mappings WHERE article_id = ${articleId} AND status = 'mapped')`;
+const mappedVariant = (articleId: string) =>
+  sql`(SELECT catalog_variant_id FROM article_catalog_mappings WHERE article_id = ${articleId} AND status = 'mapped')`;
 
 /**
  * Slanje zahteva. Server: opcija mora biti odobrena tom kupcu i važiti danas;
@@ -451,7 +657,7 @@ export async function proposeOrderRevision(viewer: PortalUser, orderId: string, 
     const today = belgradeDate(new Date());
     const approved = await approvedPaymentOptions(o.customer_id, today, tx);
     if (o.payment_option && !approved.includes(o.payment_option)) throw new Error("Opcija plaćanja iz zahteva više nije odobrena — dogovorite novu sa kupcem.");
-    const priced = await priceLines(tx, o.customer_id, items, o.payment_option, today);
+    const priced = await priceLines(tx, o.customer_id, items.map((i) => ({ ...i, packs: null })), o.payment_option, today, "office");
     const bad = priced.lines.filter((l) => l.problem || l.quantityProblem);
     if (bad.length) throw new Error(bad.map((l) => `${l.articleCode}: ${l.problem ?? l.quantityProblem}`).join("; "));
     const valid = priced.lines.filter((l) => l.amounts);
@@ -520,7 +726,7 @@ export async function searchRevisionArticles(viewer: PortalUser, orderId: string
 export async function previewOrderRevision(viewer: PortalUser, orderId: string, items: { articleId: string; quantity: number }[]) {
   const o = await revisableOrder(viewer, orderId);
   const today = belgradeDate(new Date());
-  const priced = await priceLines(getDb(), o.customer_id, items.filter((i) => i.quantity > 0), o.payment_option, today);
+  const priced = await priceLines(getDb(), o.customer_id, items.filter((i) => i.quantity > 0).map((i) => ({ ...i, packs: null })), o.payment_option, today, "office");
   const lines = priced.lines.map((l) => ({
     code: l.articleCode,
     problem: l.problem ?? l.quantityProblem,
@@ -533,6 +739,13 @@ export async function previewOrderRevision(viewer: PortalUser, orderId: string, 
     vat: l.amounts?.vat ?? null,
     gross: l.amounts?.gross ?? null,
     note: l.selected?.status === "na_upit" ? ON_REQUEST_NOTE[l.selected.reason] ?? "cenu potvrđuje kancelarija" : null,
+    /** Pakovanje: obračun celih pakovanja, ili izuzetak koji će kupac videti. */
+    packNote: !l.pack
+      ? null
+      : l.packs === null
+        ? `Izuzetak: ${String(l.quantity).replace(".", ",")} ${l.unit} nije ceo broj pakovanja (${l.pack.label}) — kupac vidi izuzetak.`
+        : l.packSummary,
+    packException: Boolean(l.pack && l.packs === null),
   }));
   const gross = lines.reduce((sum, l) => sum + (l.gross ?? 0), 0);
   const net = lines.reduce((sum, l) => sum + (l.net ?? 0), 0);

@@ -11,14 +11,15 @@ const isCustomerPath = (p: string) => p === CUSTOMER_HOME_ROUTE || p.startsWith(
  * `/site-u-pripremi` sa obrascem „pristupni kod“; kupac koji tamo upiše lozinku
  * naloga dobija `?access=invalid`. Zato se tada i javna povratna adresa menja u `/kupac`.
  */
-export function customerLandingAfterLogin(back: string | null): string {
+export function customerLandingAfterLogin(back: string | null, siteOpen = !isEnabled(process.env.MAINTENANCE_MODE)): string {
   if (!back) return CUSTOMER_HOME_ROUTE;
-  if (isEnabled(process.env.MAINTENANCE_MODE) && !isCustomerPath(back)) return CUSTOMER_HOME_ROUTE;
+  // `siteOpen`: sajt nije u pripremi ili posetilac ima kod za otključavanje — tada se vraća na javnu stranu.
+  if (!siteOpen && !isCustomerPath(back)) return CUSTOMER_HOME_ROUTE;
   return back;
 }
 
 /** Posle odjave: javna strana sa koje je došao, a dok je sajt u pripremi — prijava kupca. */
-export function customerLandingAfterLogout(back: string | null): string {
-  if (isEnabled(process.env.MAINTENANCE_MODE)) return `${CUSTOMER_LOGIN_ROUTE}?poruka=odjava`;
+export function customerLandingAfterLogout(back: string | null, siteOpen = !isEnabled(process.env.MAINTENANCE_MODE)): string {
+  if (!siteOpen) return `${CUSTOMER_LOGIN_ROUTE}?poruka=odjava`;
   return back && !isCustomerPath(back) ? back : "/";
 }

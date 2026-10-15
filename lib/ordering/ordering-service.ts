@@ -134,6 +134,20 @@ export type CatalogLink = {
   variantLabel: string | null;
 };
 
+/**
+ * Kataloški podaci veze (proizvod, varijanta-red, kartice na kojima se nudi) za
+ * zajedničke ponude kataloga (`loadCatalogRequestOffers`, dok. 61 K2).
+ */
+export function catalogOfferFacts(slug: string | null, variantId: string | null) {
+  const facts = catalogFacts(slug, variantId);
+  const product = slug ? getCarsystemProductBySlug(slug) : null;
+  const family = product ? getFamilyForProduct(product) : null;
+  return {
+    ...facts,
+    cardKeys: product ? [product.slug, ...(family ? [`family:${family.slug}`] : [])] : [],
+  };
+}
+
 function catalogFacts(slug: string | null, variantId: string | null) {
   const product = slug ? getCarsystemProductBySlug(slug) : null;
   if (!product) return { productExists: false, rowVariantKeys: [] as string[], link: null as CatalogLink | null };
@@ -682,6 +696,7 @@ export type OrderDetail = OrderListRow & {
     catalogName: string | null; unit: string; packLabel: string; packConfirmed: boolean; quantity: number; listPrice: number | null; discountPercent: number | null;
     netPrice: number | null; vatPercent: number | null; lineNet: number | null; lineVat: number | null; lineGross: number | null; priceBasis: string;
     priceStatus: "cena" | "na_upit"; onRequestReason: string | null;
+    packCount: number | null; packQuantity: number | null;
   }[];
   events: { at: Date; fromStatus: string | null; toStatus: string | null; kind: string; actor: string; staff: boolean; reason: string | null }[];
 };
@@ -729,7 +744,8 @@ async function loadOrder(where: SQL): Promise<OrderDetail | null> {
     db.execute<Record<string, string>>(sql`
       SELECT line_number::text, article_id, article_code, article_name, catalog_product_slug, catalog_variant_id, catalog_name,
              unit, pack_label, quantity::text, list_price::text, discount_percent::text, net_price::text, vat_percent::text,
-             line_net::text, line_vat::text, line_gross::text, price_basis, price_status, on_request_reason, pack_confirmed::text
+             line_net::text, line_vat::text, line_gross::text, price_basis, price_status, on_request_reason, pack_confirmed::text,
+             pack_count::text, pack_quantity::text
         FROM customer_order_lines WHERE order_id = ${head.id} ORDER BY customer_order_lines.line_number`),
     db.execute<{ created_at: Date; from_status: string | null; to_status: string | null; kind: string; actor_name: string; staff: boolean; reason: string | null }>(sql`
       SELECT created_at, from_status::text AS from_status, to_status::text AS to_status, kind, actor_name,
@@ -772,6 +788,9 @@ async function loadOrder(where: SQL): Promise<OrderDetail | null> {
       discountPercent: num(l.discount_percent), netPrice: num(l.net_price), vatPercent: num(l.vat_percent),
       lineNet: num(l.line_net), lineVat: num(l.line_vat), lineGross: num(l.line_gross), priceBasis: l.price_basis,
       priceStatus: (l.price_status === "na_upit" ? "na_upit" : "cena") as "cena" | "na_upit", onRequestReason: l.on_request_reason,
+      /** 0047: broj celih pakovanja koje je kupac poručio i količina pakovanja u JM (null = stari zahtev ili kancelarijski unos u JM). */
+      packCount: l.pack_count === null ? null : Number(l.pack_count),
+      packQuantity: num(l.pack_quantity),
     })),
     events: [...events].map((e) => ({
       at: new Date(e.created_at), fromStatus: e.from_status, toStatus: e.to_status, kind: e.kind,
@@ -989,11 +1008,11 @@ export async function returnOrderToCart(session: CustomerSession, orderId: strin
       VALUES (${o.id}, ${o.status}::customer_order_status, 'superseded', 'status', ${session.accountId}, ${session.name},
               'Stavke vraćene u korpu radi ispravke')`);
     await tx.execute(sql`
-      INSERT INTO customer_cart_items (customer_id, article_id, quantity, added_by, source_order_id)
-      SELECT ${customerId}, article_id, quantity, ${session.accountId}, ${o.id}
+      INSERT INTO customer_cart_items (customer_id, article_id, quantity, pack_count, added_by, source_order_id)
+      SELECT ${customerId}, article_id, quantity, pack_count, ${session.accountId}, ${o.id}
         FROM customer_order_lines WHERE order_id = ${o.id}
       ON CONFLICT (customer_id, article_id)
-      DO UPDATE SET quantity = EXCLUDED.quantity, source_order_id = EXCLUDED.source_order_id, updated_at = now()`);
+      DO UPDATE SET quantity = EXCLUDED.quantity, pack_count = EXCLUDED.pack_count, source_order_id = EXCLUDED.source_order_id, updated_at = now()`);
     return { ok: true as const, changed: true };
   });
 }

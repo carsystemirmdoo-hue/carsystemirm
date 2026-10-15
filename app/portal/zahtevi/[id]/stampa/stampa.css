@@ -32,10 +32,12 @@
 .zp-table .nw { white-space: nowrap; font-variant-numeric: tabular-nums; }
 .zp-table .b { font-weight: 700; }
 .zp-table .zp-name { overflow-wrap: break-word; word-break: normal; }
+/* Šifra je identifikator: nikad ne ulazi u susednu kolonu — duža šifra se lomi unutar svoje ćelije. */
+.zp-table .zp-code { font-variant-numeric: tabular-nums; overflow-wrap: anywhere; word-break: break-all; }
 .zp-sub { display: block; font-size: 8.5pt; color: #444; }
-/* Širine kolona: zbir 190 mm (A4 − margine 10 mm). Iznos do 99.999.999,99 staje u 10 pt; naziv dobija ostatak (~55 mm). */
+/* Širine kolona: zbir 190 mm (A4 − margine 10 mm). Iznos do 99.999.999,99 staje u 10 pt; naziv dobija ostatak (~52 mm). */
 .zp-table .c-rb { width: 8mm; }
-.zp-table .c-sifra { width: 14mm; }
+.zp-table .c-sifra { width: 17mm; }
 .zp-table .c-jm { width: 12mm; }
 .zp-table .c-kol { width: 14mm; }
 .zp-table .c-osn { width: 23mm; }

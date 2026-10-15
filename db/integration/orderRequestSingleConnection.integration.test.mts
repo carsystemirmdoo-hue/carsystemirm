@@ -57,6 +57,8 @@ before(async () => {
     const [a] = await db.sql<{ id: string }[]>`INSERT INTO articles (code, name, unit, brand) VALUES (${code(k)}, ${`QA ${k}`}, ${unit}, 'QAJV') RETURNING id`;
     art[k] = a.id;
     await db.sql`INSERT INTO article_base_prices (article_id, net_price, vat_percent, valid_from, source, reason, created_by) VALUES (${a.id}, ${price}, '20', '2026-01-01', 'rucno', 'QA osnovna cena', ${ids.owner})`;
+    // 0047: LIT se poručuje u celim pakovanjima — potvrđeno pakovanje 1 L.
+    if (unit === "LIT") await db.sql`INSERT INTO article_pack_sizes (article_id, pack_quantity, unit, label, evidence, confirmed_by) VALUES (${a.id}, '1', 'LIT', 'limenka 1 L', 'QA', ${ids.owner})`;
   }
   const { precedenceLevelFor, scopeKeyFor } = await import("@/lib/pricing/precedence.mjs");
   const s = { customerScope: "customer", customerId, productScope: "brand", brand: "QAJV", paymentCondition: null };
@@ -90,7 +92,7 @@ after(async () => {
     await db.sql`DELETE FROM notifications WHERE kind = 'customer_order_submitted' AND entity_id IN (SELECT id::text FROM customer_orders WHERE customer_id = ${customerId})`;
     await db.sql`DELETE FROM customer_orders WHERE customer_id = ${customerId}`;
     await db.sql`DELETE FROM price_rules WHERE customer_id = ${customerId}`;
-    await db.sql`TRUNCATE customer_payment_options, article_base_prices`;
+    await db.sql`TRUNCATE customer_payment_options, article_base_prices, article_pack_sizes`;
     await db.sql`DELETE FROM system_settings WHERE key = 'ordering.trial'`;
     await db.sql`DELETE FROM customer_message_outbox WHERE customer_user_id IN (SELECT id FROM customer_users WHERE customer_id = ${customerId})`;
     await db.sql`DELETE FROM customer_account_tokens WHERE customer_user_id IN (SELECT id FROM customer_users WHERE customer_id = ${customerId})`;
@@ -122,8 +124,8 @@ test("jedna veza: korpa, promenjena cena, slanje, izmenjen predlog i potvrda kup
   const s = await import("@/lib/ordering/request-service");
   const { loadPortalUser } = await import("@/lib/authz/user-repository");
 
-  assert.equal((await inTime("dodavanje L1", s.addRequestItem(session(), { articleId: art.L1, quantity: "4" }))).ok, true);
-  assert.equal((await inTime("dodavanje K1", s.addRequestItem(session(), { articleId: art.K1, quantity: "2" }))).ok, true);
+  assert.equal((await inTime("dodavanje L1", s.addRequestItem(session(), { articleId: art.L1, packs: "4" }))).ok, true);
+  assert.equal((await inTime("dodavanje K1", s.addRequestItem(session(), { articleId: art.K1, packs: "2" }))).ok, true);
   const q = await inTime("obračun korpe", s.loadRequestQuote(customerId, "odlozeno_30"));
   assert.equal(q.totals.net, 4 * 700 + 2 * 350);
 

@@ -5,7 +5,7 @@ import { AccountTabs } from "@/components/customer/AccountTabs";
 import { DataStrip } from "@/components/portal/DataStrip";
 import { getCustomerSession } from "@/lib/authz/customer-session";
 import { loadDatasetInfo } from "@/lib/data-state/dataset";
-import { publicSiteOpen } from "@/lib/site-mode";
+import { publicSiteOpenForRequest } from "@/lib/site-access-request";
 import { orderingEnabledFor } from "@/lib/ordering/trial";
 import { countCustomerOrdersAwaiting } from "@/lib/ordering/ordering-service";
 import "../portal/portal.css";
@@ -28,6 +28,7 @@ export const dynamic = "force-dynamic";
  * Firma i odjava su u jednom tankom redu; naslov strane (h1) daje svaka strana.
  */
 export default async function CustomerAccountLayout({ children }: { children: React.ReactNode }) {
+  const siteOpen = await publicSiteOpenForRequest();
   const [session, dataset] = await Promise.all([getCustomerSession(), loadDatasetInfo()]);
   if (!session) return <>{children}</>;
   const [ordering, awaiting] = await Promise.all([orderingEnabledFor(session.customerId), countCustomerOrdersAwaiting(session.customerId)]);
@@ -41,7 +42,7 @@ export default async function CustomerAccountLayout({ children }: { children: Re
             <span>Prijavljeni ste kao {session.name}. Nalog vidi isključivo podatke ove firme.</span>
           </div>
           <div className="pn-inline">
-            {publicSiteOpen() ? (
+            {siteOpen ? (
               <Link href="/katalog" className="pn-btn" data-size="sm">
                 Nazad na katalog
               </Link>

@@ -15,7 +15,7 @@ import {
   type SubmitResult,
   type TransitionResult,
 } from "@/lib/ordering/ordering-service";
-import { answerOrderRevision, setRequestQuantity, submitOrderRequest, type RequestSubmitResult } from "@/lib/ordering/request-service";
+import { answerOrderRevision, setRequestPacks, submitOrderRequest, type RequestSubmitResult } from "@/lib/ordering/request-service";
 
 /*
  * Kupčeve akcije nad korpom i zahtevima.
@@ -92,9 +92,9 @@ export async function confirmPasswordAction(password: string): Promise<{ ok: boo
  * Zahtev iz stvarnog cenovnika (CUSTOMER_ORDERING=cenovnik, 0044)
  * ------------------------------------------------------------------------ */
 
-export async function setRequestQuantityAction(input: { articleId: string; quantity: string }) {
+export async function setRequestPacksAction(input: { articleId: string; packs: string }) {
   const session = await requireCustomerSession("/kupac/korpa");
-  const r = await setRequestQuantity(session, input);
+  const r = await setRequestPacks(session, input);
   revalidatePath("/kupac/korpa");
   return r;
 }

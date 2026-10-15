@@ -11,6 +11,7 @@ import type {
   ProductVariantSelectorSection,
 } from "@/types/product-detail";
 import styles from "./ProductDetailExperience.module.css";
+import { CustomerStatus } from "@/components/customer-buy/CustomerStatus";
 
 type FamilyStyle = CSSProperties & {
   "--family-accent"?: string;
@@ -200,7 +201,7 @@ export function ProductVariantOptions({
           {activeVariant.status ? (
             <div>
               <dt>Status</dt>
-              <dd>{activeVariant.status}</dd>
+              <dd><CustomerStatus publicStatus={activeVariant.status} fallbackSlug={activeVariant.slug ?? currentSlug} /></dd>
             </div>
           ) : null}
         </dl>

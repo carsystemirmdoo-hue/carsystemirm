@@ -11,6 +11,7 @@ const TABS = [
   { href: "/kupac/korpa", label: "Korpa", ordering: true },
   { href: "/kupac/porudzbine", label: "Zahtevi i porudžbine", awaiting: true },
   { href: "/kupac/upiti", label: "Upiti" },
+  { href: "/kupac/firma", label: "Podaci firme" },
   { href: "/kupac/saglasnosti", label: "Saglasnosti" },
   { href: "/kupac/bezbednost", label: "Bezbednost" },
 ];

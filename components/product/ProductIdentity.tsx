@@ -2,6 +2,7 @@
 
 import { useProductVariant } from "@/components/product/ProductVariantProvider";
 import styles from "./ProductDetailExperience.module.css";
+import { CustomerStatus } from "@/components/customer-buy/CustomerStatus";
 
 /**
  * Identitet proizvoda: naslov, uvod i referentni podaci.
@@ -58,7 +59,7 @@ export function ProductIdentity({
         ) : null}
         <span>
           <small>Status</small>
-          <strong className={styles.statusValue}>{activeVariant.status}</strong>
+          <strong className={styles.statusValue}><CustomerStatus publicStatus={activeVariant.status} fallbackSlug={activeVariant.slug} /></strong>
         </span>
       </div>
     </>

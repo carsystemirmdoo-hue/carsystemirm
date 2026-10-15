@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useCallback, useEffect, useId, useMemo, useState } from "react";
 import {
   baslacAssetSlot,
+  baslacBaseSlug,
   baslacFinishLabels,
   baslacLineExamplePackshot,
   baslacMatchesQuery,
@@ -18,6 +19,7 @@ import {
   baslacVariantQueryValue,
   resolveBaslacBase,
 } from "./baslacVariantState.mjs";
+import { CustomerBuyPanel } from "@/components/customer-buy/CustomerBuyPanel";
 import styles from "./BaslacSystemPdp.module.css";
 
 
@@ -314,6 +316,8 @@ export function BaslacSystemPdp({
             </div>
           </div>
         ) : null}
+        {/* Prijavljeni kupac: ista kupovina kao na strani proizvoda (potvrđena veza baze, cena, pakovanje). */}
+        {active ? <CustomerBuyPanel key={active.code} fallbackSlug={baslacBaseSlug(active)} fallbackName={`${active.code} · ${active.name}`} /> : null}
 
 
         <p className={styles.swatchNote}>

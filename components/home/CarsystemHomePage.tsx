@@ -531,6 +531,7 @@ export function CarsystemHomePage() {
           <div
             className={styles.mapPanel}
             data-map-wrapper=""
+            role="group"
             aria-label="Mapa partnerske mreže"
           >
             {publicPartnerStores.length > 0 && !networkMapFailed ? (

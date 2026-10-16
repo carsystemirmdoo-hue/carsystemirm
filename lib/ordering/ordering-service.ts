@@ -237,7 +237,7 @@ async function loadArticleRows(exec: Exec, list: PriceListInfo | null, where: SQ
            m.status::text AS mapping_status, m.catalog_product_slug AS slug, m.catalog_variant_id AS variant,
            pli.unit, pli.pack_label, pli.net_price::text AS list_price, pli.vat_percent::text AS vat_percent,
            pli.min_quantity::text AS min_quantity, pli.quantity_step::text AS quantity_step,
-           EXISTS (SELECT 1 FROM articles_out_of_programme o WHERE o.article_id = a.id) AS out_of_programme
+           (EXISTS (SELECT 1 FROM articles_out_of_programme o WHERE o.article_id = a.id) OR EXISTS (SELECT 1 FROM internal_equipment e WHERE e.code_key = regexp_replace(a.code, '^0+(?=[0-9])', ''))) AS out_of_programme
       FROM articles a
       LEFT JOIN article_catalog_mappings m
              ON m.article_id = a.id AND m.status NOT IN ('rejected', 'revoked')

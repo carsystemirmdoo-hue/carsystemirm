@@ -9,9 +9,9 @@ import { loadCartCount } from "@/lib/ordering/ordering-service";
  * ne pretvara katalog u dinamičke strane. Vraća samo ono što zaglavlje
  * prikazuje — naziv firme i ime — i nikad se ne kešira.
  *
- * `loginLink`: da li neprijavljen posetilac vidi „Prijava za kupce". Podrazumevano
- * NE (`NEXT_PUBLIC_CUSTOMER_LOGIN_LINK`, build podešavanje), dok kupčevi nalozi
- * ne budu pušteni.
+ * `loginLink`: da li neprijavljen posetilac vidi „Prijava za kupce" i u zaglavlju (i u
+ * meniju na telefonu, gde traka iznad zaglavlja odlazi pri skrolu). Podrazumevano DA, od
+ * puštanja kupčevih naloga; `NEXT_PUBLIC_CUSTOMER_LOGIN_LINK=0` je hitno isključenje.
  */
 export const dynamic = "force-dynamic";
 
@@ -26,7 +26,7 @@ export async function GET() {
   const cartCount = session ? await loadCartCount(session.customerId).catch(() => 0) : 0;
   const body = session
     ? { signedIn: true, company: session.customerName, name: session.name, cartCount }
-    : { signedIn: false, loginLink: process.env.NEXT_PUBLIC_CUSTOMER_LOGIN_LINK === "1" };
+    : { signedIn: false, loginLink: process.env.NEXT_PUBLIC_CUSTOMER_LOGIN_LINK !== "0" };
   return Response.json(body, {
     headers: { "Cache-Control": "no-store, private", Vary: "Cookie" },
   });

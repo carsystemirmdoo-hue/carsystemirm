@@ -1424,7 +1424,7 @@ try {
     await g.locator('.lg-toggle [role="status"]').waitFor({ timeout: 30000 });
     const off = await kp.evaluate(async () => (await fetch("/api/kupac/ponude", { cache: "no-store" })).json());
     check("lager-kupci: posle isključivanja kupac nema stanje", off.signedIn === true && off.stock === null, JSON.stringify(off.stock));
-    // Ulazi za prijavu: vidljivi tokom održavanja, na računaru i telefonu; prijavljen → „Moj nalog“ / „Poslovni portal“.
+    // Ulazi za prijavu: vidljivi tokom održavanja, na računaru i telefonu; prijavljen kupac → „Moj nalog“ + „Odjavite se“; „Za zaposlene“ uvek.
     for (const [label, ctxOpts] of [["računar", desk], ["telefon", phone]]) {
       const p = await (await b.newContext(ctxOpts)).newPage();
       await go(p, "/site-u-pripremi");
@@ -1435,10 +1435,11 @@ try {
       await p.screenshot({ path: `${OUT}/prijava-traka-${label}.png` });
     }
     const signedNav = await kp.getByRole("navigation", { name: "Prijava" }).innerText();
-    check("prijava: prijavljen kupac vidi „Moj nalog“ u traci", /Moj nalog/.test(signedNav) && !/Prijava kupca/.test(signedNav), signedNav);
+    check("prijava: prijavljen kupac vidi „Moj nalog“ i „Odjavite se“ u traci", /Moj nalog/.test(signedNav) && /Odjavite se/.test(signedNav) && !/Prijava kupca/.test(signedNav), signedNav);
     await go(g, "/site-u-pripremi");
     const staffNav = await g.getByRole("navigation", { name: "Prijava" }).innerText().catch(() => "");
-    check("prijava: prijavljen zaposleni vidi „Poslovni portal“", /Poslovni portal/.test(staffNav) && !/Za zaposlene/.test(staffNav), staffNav);
+    const staffHref = await g.getByRole("navigation", { name: "Prijava" }).getByRole("link", { name: "Za zaposlene" }).getAttribute("href").catch(() => null);
+    check("prijava: „Za zaposlene“ uvek vidljivo; prijavljenog zaposlenog vodi u portal", /Za zaposlene/.test(staffNav) && staffHref === "/portal", `${staffNav} ${staffHref}`);
   }
   if (STEP === "posude") {
     // Obavezan par (0056): blanko posuda → poklopac u ISTOM broju; sprovodi server, kupac ne zaobilazi.

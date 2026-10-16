@@ -144,7 +144,7 @@ async function priceLines(
     approvedPaymentOptions(customerId, today, exec),
     ids.length
       ? exec.execute<ArticleRow>(sql`
-          SELECT a.id, a.code, a.name, (SELECT sn.name FROM article_sales_names sn WHERE sn.article_id = a.id) AS sales_name, a.unit, EXISTS (SELECT 1 FROM articles_out_of_programme o WHERE o.article_id = a.id) AS out,
+          SELECT a.id, a.code, a.name, (SELECT sn.name FROM article_sales_names sn WHERE sn.article_id = a.id) AS sales_name, a.unit, (EXISTS (SELECT 1 FROM articles_out_of_programme o WHERE o.article_id = a.id) OR EXISTS (SELECT 1 FROM internal_equipment e WHERE e.code_key = regexp_replace(a.code, '^0+(?=[0-9])', ''))) AS out,
                  EXISTS (SELECT 1 FROM articles_procurement_only p WHERE p.article_id = a.id) AS procurement,
                  EXISTS (SELECT 1 FROM invoice_lines l WHERE l.article_id = a.id AND l.quantity <> trunc(l.quantity)) AS fractional,
                  ps.pack_quantity::text AS pack_quantity, ps.unit AS pack_unit, ps.label AS pack_label, ps.fractional_ok AS pack_fractional
@@ -296,9 +296,8 @@ export async function loadCatalogRequestOffers(customerId: string): Promise<{
     SELECT a.id, m.catalog_product_slug AS slug, m.catalog_variant_id AS variant
       FROM article_catalog_mappings m JOIN articles a ON a.id = m.article_id
      WHERE m.status = 'mapped' AND m.catalog_product_slug IS NOT NULL
-       AND NOT EXISTS (SELECT 1 FROM articles_out_of_programme o WHERE o.article_id = a.id)
-       -- Oprema koja se izdaje na revers (0054) se ne nudi na prodaju.
-       AND NOT EXISTS (SELECT 1 FROM internal_equipment e WHERE e.code_key = regexp_replace(a.code, '^0+(?=[0-9])', ''))`))];
+       AND NOT (EXISTS (SELECT 1 FROM articles_out_of_programme o WHERE o.article_id = a.id) OR EXISTS (SELECT 1 FROM internal_equipment e WHERE e.code_key = regexp_replace(a.code, '^0+(?=[0-9])', '')))
+       -- Oprema koja se izdaje na revers (0054) se ne nudi na prodaju.`))];
   if (!rows.length) return { enabled: true, reason: null, options: [], offers: [] };
   const today = belgradeDate(new Date());
   const priced = await priceLines(db, customerId, rows.map((r) => ({ articleId: r.id, packs: 1 })), null, today);
@@ -423,7 +422,7 @@ export async function listRequestArticles(customerId: string, query: string | nu
            EXISTS (SELECT 1 FROM invoice_lines l JOIN invoices i ON i.id = l.invoice_id WHERE l.article_id = a.id AND i.customer_id = ${customerId}::uuid) AS bought,
            (SELECT max(i.issued_on)::text FROM invoice_lines l JOIN invoices i ON i.id = l.invoice_id WHERE l.article_id = a.id AND i.customer_id = ${customerId}::uuid) AS last_on
       FROM articles a
-     WHERE NOT EXISTS (SELECT 1 FROM articles_out_of_programme o WHERE o.article_id = a.id)
+     WHERE NOT (EXISTS (SELECT 1 FROM articles_out_of_programme o WHERE o.article_id = a.id) OR EXISTS (SELECT 1 FROM internal_equipment e WHERE e.code_key = regexp_replace(a.code, '^0+(?=[0-9])', '')))
        AND (EXISTS (SELECT 1 FROM article_base_prices b WHERE b.article_id = a.id)
             OR EXISTS (SELECT 1 FROM invoice_lines l JOIN invoices i ON i.id = l.invoice_id WHERE l.article_id = a.id AND i.customer_id = ${customerId}::uuid))
        AND ${q ? foldedMatch([sql`a.code`, sql`a.name`], q) : sql`EXISTS (SELECT 1 FROM invoice_lines l JOIN invoices i ON i.id = l.invoice_id WHERE l.article_id = a.id AND i.customer_id = ${customerId}::uuid)`}
@@ -467,7 +466,7 @@ export async function addRequestItem(session: CustomerSession, input: { articleI
   if (!/^[0-9a-f-]{36}$/.test(input.articleId)) return { ok: false, message: "Neispravan artikal." };
   const db = getDb();
   const [a] = [...(await db.execute<{ out: boolean; ok: boolean }>(sql`
-    SELECT EXISTS (SELECT 1 FROM articles_out_of_programme o WHERE o.article_id = a.id) AS out,
+    SELECT (EXISTS (SELECT 1 FROM articles_out_of_programme o WHERE o.article_id = a.id) OR EXISTS (SELECT 1 FROM internal_equipment e WHERE e.code_key = regexp_replace(a.code, '^0+(?=[0-9])', ''))) AS out,
            (EXISTS (SELECT 1 FROM article_base_prices b WHERE b.article_id = a.id)
             OR EXISTS (SELECT 1 FROM invoice_lines l JOIN invoices i ON i.id = l.invoice_id WHERE l.article_id = a.id AND i.customer_id = ${customerId}::uuid)) AS ok
       FROM articles a WHERE a.id = ${input.articleId}::uuid`))];
@@ -775,7 +774,7 @@ export async function searchRevisionArticles(viewer: PortalUser, orderId: string
   const rows = await getDb().execute<{ code: string; name: string; unit: string | null }>(sql`
     SELECT a.code, a.name, a.unit FROM articles a
      WHERE ${foldedMatch([sql`a.code`, sql`a.name`], q)}
-       AND NOT EXISTS (SELECT 1 FROM articles_out_of_programme o WHERE o.article_id = a.id)
+       AND NOT (EXISTS (SELECT 1 FROM articles_out_of_programme o WHERE o.article_id = a.id) OR EXISTS (SELECT 1 FROM internal_equipment e WHERE e.code_key = regexp_replace(a.code, '^0+(?=[0-9])', '')))
      ORDER BY (a.code = ${q}) DESC, a.name LIMIT 12`);
   return [...rows].map((r) => ({ code: r.code, name: r.name, unit: r.unit ?? "" }));
 }

@@ -36,6 +36,17 @@
   white-space: nowrap;
 }
 
+.form {
+  display: contents;
+}
+
+button.link {
+  border: 0;
+  background: none;
+  cursor: pointer;
+  font: inherit;
+}
+
 .link:hover,
 .link:focus-visible {
   text-decoration: underline;
@@ -60,7 +71,11 @@
 
 @media (max-width: 40rem) {
   .inner {
-    justify-content: space-between;
+    justify-content: flex-end;
     padding: 0 0.5rem;
+  }
+
+  .link {
+    min-height: 2.75rem; /* dodir na telefonu */
   }
 }

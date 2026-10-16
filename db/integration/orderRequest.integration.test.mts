@@ -479,3 +479,26 @@ test("JM KOM sa „0,5L“ u nazivu: pakovanje je 1 komad, cena se ne množi sa 
     await db.sql`DELETE FROM article_catalog_mappings WHERE article_id = ${a.id}`;
   }
 });
+
+test("oprema na revers (0054): nije u izboru robe, ne dodaje se u korpu, ni u izmenjenom predlogu", async (t) => {
+  if (guard(t)) return;
+  const s = await svc();
+  const [a] = await db.sql<{ id: string }[]>`INSERT INTO articles (code, name, unit, brand) VALUES (${code("EQ")}, 'QA E-FINDER OPREMA', 'KOM', 'BASLAC') RETURNING id`;
+  await db.sql`INSERT INTO article_base_prices (article_id, net_price, vat_percent, valid_from, source, reason, created_by) VALUES (${a.id}, '1000.00', '20', '2026-01-01', 'rucno', 'QA osnovna', ${ids.owner})`;
+  await db.sql`INSERT INTO article_pack_sizes (article_id, pack_quantity, unit, label, evidence, confirmed_by) VALUES (${a.id}, '1', 'KOM', '1 kom', 'QA', ${ids.owner})`;
+  assert.equal((await s.listRequestArticles(customerId, "E-FINDER")).articles.length, 1, "pre klasifikacije je u ponudi");
+  await db.sql`INSERT INTO internal_equipment (code, code_key, name, unit, evidence, decided_by) VALUES (${code("EQ")}, ${code("EQ")}, 'QA E-FINDER OPREMA', 'KOM', 'QA oprema', ${ids.owner})`;
+  try {
+    assert.equal((await s.listRequestArticles(customerId, "E-FINDER")).articles.length, 0);
+    const r = await s.addRequestItem(session(), { articleId: a.id, packs: "1" });
+    assert.equal(r.ok, false);
+    assert.match((r as { message: string }).message, /nije u aktuelnoj ponudi/);
+    const [o] = await db.sql<{ id: string }[]>`SELECT id FROM customer_orders WHERE customer_id = ${customerId} AND status IN ('submitted','under_review','changes_requested') LIMIT 1`;
+    if (o) assert.deepEqual(await s.searchRevisionArticles(await user("tamara"), o.id, "E-FINDER"), []);
+  } finally {
+    await db.sql`ALTER TABLE internal_equipment DISABLE TRIGGER USER`;
+    await db.sql`DELETE FROM internal_equipment WHERE code = ${code("EQ")}`;
+    await db.sql`ALTER TABLE internal_equipment ENABLE TRIGGER USER`;
+    // Cena i pakovanje se brišu u after() (TRUNCATE); osnovna cena se samo dodaje.
+  }
+});

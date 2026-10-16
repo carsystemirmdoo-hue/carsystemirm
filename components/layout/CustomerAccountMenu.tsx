@@ -35,7 +35,7 @@ export function CustomerAccountMenu({ variant = "desktop", onNavigate }: { varia
      * posetioci ne prave nijedan dodatan zahtev, a javne strane ostaju statične.
      */
     if (!/(?:^|;\s*)cs_kupac=1/.test(document.cookie)) {
-      setState({ signedIn: false, loginLink: process.env.NEXT_PUBLIC_CUSTOMER_LOGIN_LINK === "1" });
+      setState({ signedIn: false, loginLink: process.env.NEXT_PUBLIC_CUSTOMER_LOGIN_LINK !== "0" });
       return;
     }
     const load = () =>

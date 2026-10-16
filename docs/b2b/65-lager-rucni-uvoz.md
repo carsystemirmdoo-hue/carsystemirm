@@ -53,7 +53,18 @@ Isti fajl (SHA-256) sa istom verzijom čitača ima jedan zapis. Fajl koji je odb
 čitača može se ponovo otpremiti: dobija novu proveru (nov zapis), a neuspešan pokušaj ostaje u istoriji
 (0052). Isti fajl nikad nema dva zapisa koji nisu „neuspešno“ — nema duplih snimaka.
 
-### 1b. PDF „Zbirni pregled po artiklima“ (od 15. 10. 2026)
+### 1b. PDF: „Stanje zaliha artikla“ (od 16. 10.) i „Zbirni pregled po artiklima“ (od 15. 10. 2026)
+
+**„STANJE ZALIHA ARTIKLA“ (PDF)** — isti izveštaj kao XLSX raspored B: Šifra · GR. · Naziv robe · JM ·
+Količina · Cena · Vrednost, „Na dan“, uključujući stanje 0. Parser `biznisoft-pdf/2`: šifra je tekst
+na x kolone „Šifra“ (GR. je zaseban tekst i nikad ne ulazi u šifru), naziv = svi delovi između
+kolone naziva i JM, JM samo iz kolone JM, brojevi po DESNOJ ivici između zaglavlja (cena se ne čita
+kao količina). Kontrola: „Strana N od M“, zbir Vrednosti = „Ukupno stanje zaliha na dan“, količina ×
+cena ≈ vrednost po redu. Cena i vrednost se ne čuvaju. Stvaran izvoz 16. 10. 2026: 34 strane, 1.810
+stavki (626 nula), zbir se slaže, 0 odstupanja po redu, 1 stavka bez JM; isti skup šifara i iste JM
+kao XLSX od 15. 10. Fajl odbijen verzijom `biznisoft-zbirni-pregled-pdf/1` ponovo se proverava (0052).
+
+**„ZBIRNI PREGLED PO ARTIKLIMA“ (PDF)**
 
 Tekstualni PDF iz BizniSofta „ZBIRNI PREGLED PO ARTIKLIMA“ (Period `01.01.gggg-dd.mm.gggg`, filter
 „Poslovni objekti: 021 VELEPRODAJA“) prihvata se istim tokom (izbor fajla → provera → potvrda).

@@ -1202,6 +1202,11 @@ try {
     await Promise.all([t.waitForURL(/\/portal\/zalihe\/uvoz\/[0-9a-f-]{36}/, { timeout: 60000 }), t.getByRole("button", { name: "Proverite fajl" }).click()]);
     const pdfCount = (await sqlc`SELECT count(*)::int n FROM stock_imports WHERE status IN ('pregled', 'potvrdjeno') AND stock_date = '2026-09-05'`)[0].n;
     check("lager: PDF istog stanja prepoznat kao isti sadržaj; jedan važeći snimak", /isti=sadrzaj/.test(t.url()) && pdfCount === 1, `${t.url()} · ${pdfCount}`);
+    // PDF „STANJE ZALIHA ARTIKLA“ (raspored stvarnog izvoza 16. 10.) istog stanja → isti sadržaj.
+    await go(t, "/portal/zalihe/uvoz");
+    await t.setInputFiles('input[name="lager"]', ROOT + "/fixtures/dev/biznisoft/lager/stanje-zaliha-artikla-sinteticki.pdf");
+    await Promise.all([t.waitForURL(/\/portal\/zalihe\/uvoz\/[0-9a-f-]{36}/, { timeout: 60000 }), t.getByRole("button", { name: "Proverite fajl" }).click()]);
+    check("lager: PDF „Stanje zaliha artikla“ istog stanja → isti sadržaj, bez drugog snimka", /isti=sadrzaj/.test(t.url()), t.url());
     // Šifre su tekst u tabeli: kanonska šifra iz šifarnika, vrednost iz fajla odvojeno.
     const codeCells = await t.locator("code.lg-code").allInnerTexts();
     check("lager: šifre prikazane kao tekst, bez separatora hiljada", codeCells.length > 0 && codeCells.every((c) => !/^\d{1,3}(\.\d{3})+$/.test(c)), codeCells.slice(0, 5).join(" "));

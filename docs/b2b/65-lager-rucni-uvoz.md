@@ -194,7 +194,8 @@ ili potvrde nije vreme stanja. Posle praga kupac ne vidi brojeve, nego „Potreb
 raspoloživosti“.
 
 **Šta kupac vidi** (blok „Stanje na lageru“ u panelu „Za Vašu firmu“, nezavisno od toga da li je
-poručivanje uključeno), po pakovanju izabrane varijante:
+poručivanje uključeno — stvarni kupci ga još nemaju; spisak artikala za prikaz je
+`loadCatalogStockItems`, bez cena, šifara i internih naziva), po pakovanju izabrane varijante:
 - „Na stanju prema izvozu: N × <pakovanje>“ (ili „N kom“) — samo uz potvrđenu vezu šifre sa
   kataloškom varijantom, potvrđenu JM i potvrđeno pakovanje (`article_pack_sizes`); cela pakovanja,
   naniže;
@@ -210,6 +211,16 @@ rezervacije nisu poznate i ne računaju se.
 **Održavanje sajta:** dok je javni sajt „u pripremi“, prijavljen kupac (potpisan token, `subject =
 customer`) vidi katalog i strane proizvoda bez koda sajta; neprijavljeni posetioci i dalje idu na „sajt
 u pripremi“. Kupac se prijavljuje na `/prijava/kupac` i posle prijave vraća na stranu sa koje je došao.
+
+## 4a. Oprema koja se izdaje na revers (0054; potvrda vlasnika 16. 10. 2026)
+
+Mešači (npr. 000119 MESAC FIL-BLCA2028/6) su oprema: ne prodaju se i nemaju prodajno pakovanje.
+Vode se u `internal_equipment` po BizniSoft šifri (tekst), sa nazivom i JM kada postoji (bez JM =
+podatak za dopunu, ne nagađa se). Klasifikacija nije „van programa“ i ne briše istoriju; izuzima
+šifru iz prodajne ponude, kupčevog prikaza stanja i spiska nerešenih pakovanja, a u pregledu uvoza
+lagera ima svoju grupu „Oprema — izdaje se na revers“. Upis: `scripts/catalog/apply-equipment.mts`
+(privatni plan, audit „Oprema — izdaje se na revers“). Kome je oprema izdata vodi se prema reversima.
+Potrošni pribor za mešanje (čaše, poklopci, štapići, lenjiri) NIJE oprema po ovom pravilu.
 
 ## 5. Uputstvo za kancelariju (koraci na strani: izbor fajla → provera → potvrda)
 

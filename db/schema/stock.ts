@@ -68,3 +68,19 @@ export const stockImportLines = pgTable(
     index("stock_import_lines_key_idx").on(t.importId, t.codeKey),
   ],
 );
+
+/**
+ * Interna evidencija opreme (0054): BizniSoft šifra (tekst) → „Oprema — izdaje se na revers“.
+ * Ne prodaje se i nema prodajno pakovanje; nije „van programa“. Brisanje nije dozvoljeno (okidač).
+ */
+export const internalEquipment = pgTable("internal_equipment", {
+  code: text("code").primaryKey(),
+  codeKey: text("code_key").notNull().unique("internal_equipment_key_unique"),
+  name: text("name").notNull(),
+  unit: text("unit"),
+  classification: text("classification").notNull().default("oprema_revers"),
+  evidence: text("evidence").notNull(),
+  note: text("note"),
+  decidedBy: uuid("decided_by").notNull().references(() => users.id, { onDelete: "restrict" }),
+  decidedAt: timestamp("decided_at", { withTimezone: true }).notNull().defaultNow(),
+});

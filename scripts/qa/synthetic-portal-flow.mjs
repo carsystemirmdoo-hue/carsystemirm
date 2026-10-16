@@ -1375,7 +1375,7 @@ try {
     check("lager-kupci: datum stanja bez vremena uvoza; napomena kancelarije", fresh.includes(`na dan ${dmyToday}.`) && /Raspoloživost potvrđuje kancelarija/.test(fresh) && !/Uvezeno/.test(fresh), fresh);
     await kp.screenshot({ path: `${OUT}/lager-kupci-1-proizvod.png`, fullPage: true });
     const api = await kp.evaluate(async () => (await fetch("/api/kupac/ponude", { cache: "no-store" })).json());
-    const offerBy = Object.fromEntries(api.offers.map((o) => [o.articleCode, o.articleId]));
+    const offerBy = Object.fromEntries((await sqlc`SELECT code, id::text AS id FROM articles WHERE code IN ('SINT-C03', 'SINT-C04', 'SINT-C05', 'SINT-C06', 'SINT-C07', '900001')`).map((r) => [r.code, r.id]));
     const line = (code) => api.stock?.byArticle?.[offerBy[code]];
     check("lager-kupci: nula → „nema na stanju“, bez broja", line("SINT-C07")?.state === "nema" && !/\d/.test(line("SINT-C07")?.text ?? "x"), JSON.stringify(line("SINT-C07")));
     check("lager-kupci: negativno stanje → „Raspoloživost na upit“ (bez minusa)", line("SINT-C06")?.state === "upit" && !Object.values(api.stock.byArticle).some((v) => /-\s*\d/.test(v.text)), JSON.stringify(line("SINT-C06")));
@@ -1393,6 +1393,22 @@ try {
     const sw = await tm.evaluate(() => document.documentElement.scrollWidth - window.innerWidth);
     check("lager-kupci telefon: bez horizontalnog pomeranja", sw <= 1, `višak ${sw}px`);
     await tm.screenshot({ path: `${OUT}/lager-kupci-2-telefon.png`, fullPage: false });
+    // Stvarni kupci nemaju uključeno poručivanje (samo proba): stanje mora da se vidi i tada.
+    await sqlc`UPDATE system_settings SET value = ${sqlc.json({ customerIds: [] })} WHERE key = 'ordering.trial'`;
+    const noOrder = await kctx.newPage();
+    await noOrder.goto(`${B}/proizvodi/baslac-70-10-silicone-remover-for-oil-silicone-and-grease`, { waitUntil: WAIT, timeout: 120000 });
+    await noOrder.locator('section[aria-label="Stanje na lageru"]').waitFor({ timeout: 30000 });
+    const noOrderText = await txt(noOrder.locator('section[aria-label="Stanje na lageru"]'));
+    const noOrderApi = await noOrder.evaluate(async () => (await fetch("/api/kupac/ponude", { cache: "no-store" })).json());
+    check("lager-kupci: kupac BEZ uključenog poručivanja vidi stanje (3 × limenka 1 L, 2 × kanta 5 L)", noOrderApi.ordering?.enabled === false && /3 × limenka 1 L/.test(noOrderText) && /2 × kanta 5 L/.test(noOrderText), noOrderText);
+    check("lager-kupci: API stanja bez cena, šifara i internih naziva", !/articleCode|articleName|byOption|netPrice/.test(JSON.stringify(noOrderApi.stock)));
+    await noOrder.screenshot({ path: `${OUT}/lager-kupci-3-bez-porucivanja.png`, fullPage: true });
+    // Oprema na revers (0054): mešač sa vezom ne ulazi u kupčev prikaz.
+    const c03 = offerBy["SINT-C03"];
+    await sqlc`INSERT INTO internal_equipment (code, code_key, name, unit, evidence, decided_by)
+               VALUES ('SINT-C03', 'SINT-C03', 'SINT MEŠAČ (proba)', 'KOM', 'sintetička proba opreme', (SELECT id FROM users WHERE role = 'gazda' LIMIT 1))`;
+    const eqApi = await noOrder.evaluate(async () => (await fetch("/api/kupac/ponude", { cache: "no-store" })).json());
+    check("lager-kupci: oprema (revers) nije u kupčevom prikazu stanja", !eqApi.stock.items.some((i) => i.articleId === c03) && !(c03 in eqApi.stock.byArticle), String(eqApi.stock.items.length));
     // Isključivanje: vlasnik jednim klikom; kupac više ne vidi stanje.
     await go(g, "/portal/zalihe");
     await g.fill('input[name="razlog"]', "sintetička proba isključivanja");

@@ -16,6 +16,8 @@ export type OffersPayload = {
     state: "svez" | "zastareo";
     headline: string;
     note: string;
+    /** Artikli sa potvrđenom vezom (nezavisno od poručivanja): pakovanje za prikaz, bez cene i šifre. */
+    items: { articleId: string; slug: string; variantKey: string | null; label: string; order: number }[];
     byArticle: Record<string, { state: "ima" | "nema" | "upit"; text: string }>;
   } | null;
   contacts: { reps: { name: string; email: string }[]; office: {

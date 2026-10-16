@@ -289,7 +289,9 @@ export async function loadCatalogRequestOffers(customerId: string): Promise<{
     SELECT a.id, m.catalog_product_slug AS slug, m.catalog_variant_id AS variant
       FROM article_catalog_mappings m JOIN articles a ON a.id = m.article_id
      WHERE m.status = 'mapped' AND m.catalog_product_slug IS NOT NULL
-       AND NOT EXISTS (SELECT 1 FROM articles_out_of_programme o WHERE o.article_id = a.id)`))];
+       AND NOT EXISTS (SELECT 1 FROM articles_out_of_programme o WHERE o.article_id = a.id)
+       -- Oprema koja se izdaje na revers (0054) se ne nudi na prodaju.
+       AND NOT EXISTS (SELECT 1 FROM internal_equipment e WHERE e.code_key = regexp_replace(a.code, '^0+(?=[0-9])', ''))`))];
   if (!rows.length) return { enabled: true, reason: null, options: [], offers: [] };
   const today = belgradeDate(new Date());
   const priced = await priceLines(db, customerId, rows.map((r) => ({ articleId: r.id, packs: 1 })), null, today);

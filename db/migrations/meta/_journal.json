@@ -379,6 +379,13 @@
       "when": 1793023200000,
       "tag": "0053_stock_pdf_content",
       "breakpoints": true
+    },
+    {
+      "idx": 54,
+      "version": "7",
+      "when": 1793109600000,
+      "tag": "0054_internal_equipment",
+      "breakpoints": true
     }
   ]
 }

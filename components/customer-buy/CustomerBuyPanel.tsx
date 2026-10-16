@@ -54,7 +54,7 @@ export function CustomerBuyPanel({ fallbackSlug, fallbackName }: { fallbackSlug:
         {name}
         {variantLabel ? <small> · {variantLabel}</small> : null}
       </h2>
-      <StockBlock data={data} offers={here} />
+      <StockBlock data={data} slug={slug} viewKeys={viewKeys} />
       {!data.ordering.enabled ? (
         <>
           <p className={styles.note}>{data.ordering.reason ?? "Poručivanje preko sajta još nije uključeno."} Cenu i uslove možete zatražiti ovde.</p>
@@ -89,29 +89,26 @@ export function CustomerBuyPanel({ fallbackSlug, fallbackName }: { fallbackSlug:
  * Stanje po pakovanju ove varijante. Broj samo za potvrđeno pakovanje iz svežeg snimka;
  * inače „Raspoloživost na upit“. Zastareo snimak → samo poruka o proveri, bez brojeva.
  */
-function StockBlock({ data, offers }: { data: OffersPayload; offers: CatalogRequestOffer[] }) {
+function StockBlock({ data, slug, viewKeys }: { data: OffersPayload; slug: string; viewKeys: string[] }) {
   const stock = data.stock;
-  if (!stock || offers.length === 0) return null;
-  const rows = offers
-    .filter((o) => o.state !== "inquiry")
-    .sort((a, b) => a.articleName.localeCompare(b.articleName, "sr", { numeric: true }));
+  if (!stock) return null;
+  // Isto pravilo kao ponude (veza bez varijante = ceo proizvod), ali nezavisno od poručivanja.
+  const rows = offersForView(stock.items.map((i) => ({ ...i, state: "orderable" as const })), slug, viewKeys).sort((a, b) => a.order - b.order);
+  if (rows.length === 0) return null;
   return (
     <section className={styles.stock} data-state={stock.state} aria-label="Stanje na lageru">
-      {stock.state === "svez" && rows.length > 0 ? (
+      {stock.state === "svez" ? (
         <ul className={styles.stockList}>
           {rows.map((o) => {
             const line = stock.byArticle[o.articleId] ?? { state: "upit" as const, text: "Raspoloživost na upit" };
-            const label = o.pack ? (isSinglePiece(o.pack, o.unit) ? `1 ${unitLabel(o.unit)}` : o.pack.label) : null;
             return (
               <li key={o.articleId} data-state={line.state}>
-                {rows.length > 1 && label ? <span className={styles.stockPack}>{label}</span> : null}
+                {rows.length > 1 && o.label ? <span className={styles.stockPack}>{o.label}</span> : null}
                 <strong>{line.text}</strong>
               </li>
             );
           })}
         </ul>
-      ) : stock.state === "svez" ? (
-        <p className={styles.stockLead}>Raspoloživost na upit</p>
       ) : null}
       <p className={styles.stockCaption}>
         {stock.headline} {stock.note}

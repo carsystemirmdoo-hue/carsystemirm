@@ -95,8 +95,9 @@ export default async function StockImportReviewPage({ params, searchParams }: { 
   const warnings = problems.warnings ?? [];
   const s = (h.summary as Summary) ?? { lines: 0, zeros: 0, negative: 0, decimals: 0, emptyQuantity: 0 };
   const control = (s.control ?? {}) as { totalsMatch?: boolean | null; pagesComplete?: boolean | null; pagesDeclared?: number | null };
-  const linked = data.lines.filter((l) => l.link === "povezan");
-  const unlinked = data.lines.filter((l) => l.link === "nepovezan");
+  const equipment = data.lines.filter((l) => l.equipment);
+  const linked = data.lines.filter((l) => l.link === "povezan" && !l.equipment);
+  const unlinked = data.lines.filter((l) => l.link === "nepovezan" && !l.equipment);
   const collisions = data.lines.filter((l) => l.link === "sudar");
   const withPacks = linked.filter((l) => l.unit && l.packReason !== "jm_razlika");
   const noPack = linked.filter((l) => !l.unit || l.packReason === "jm_razlika");
@@ -226,6 +227,12 @@ export default async function StockImportReviewPage({ params, searchParams }: { 
             <p className="lg-group-note">Količina se čuva, ali broj pakovanja se ne računa dok pakovanje ne potvrdi čovek.</p>
             <LineTable rows={noPack} showPacks />
           </Group>
+          {equipment.length ? (
+            <Group title="Oprema — izdaje se na revers" count={equipment.length}>
+              <p className="lg-group-note">Mešači i druga oprema po potvrdi vlasnika: ne prodaju se i nemaju prodajno pakovanje; količina se čuva. Kome je oprema izdata vodi se prema reversima.</p>
+              <LineTable rows={equipment} />
+            </Group>
+          ) : null}
           <Group title="Šifre kojih nema u portalu" count={unlinked.length}>
             <p className="lg-group-note">Artikal još nije fakturisan ili je star. Prisustvo u lageru ne vraća artikal u katalog.</p>
             <LineTable rows={unlinked} />

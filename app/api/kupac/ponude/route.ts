@@ -3,7 +3,7 @@ import { getCustomerSession } from "@/lib/authz/customer-session";
 import { loadCustomerContacts } from "@/lib/ordering/ordering-service";
 import { loadCatalogRequestOffers } from "@/lib/ordering/request-service";
 import { customerStockCaption, STALE_CAPTION } from "@/lib/stock/displayPolicy.mjs";
-import { customerStockFor } from "@/lib/stock/stock-import-service";
+import { customerStockFor, loadCatalogStockItems } from "@/lib/stock/stock-import-service";
 
 /**
  * Ponude prijavljenog kupca za kartice kataloga i stranice proizvoda.
@@ -24,17 +24,20 @@ export async function GET() {
   if (!session) return Response.json({ signedIn: false }, { status: 401, headers: NO_STORE });
   // ISTI obračun kao korpa i slanje (dok. 61 K2): osnovna cena + odobreni rabat po opciji plaćanja.
   const [catalog, contacts] = await Promise.all([loadCatalogRequestOffers(session.customerId), loadCustomerContacts(session.customerId)]);
-  const stockData = await customerStockFor(catalog.offers.map((o) => o.articleId));
+  // Stanje ne zavisi od toga da li je kupcu uključeno poručivanje (stvarni kupci ga još nemaju).
+  const stockItems = await loadCatalogStockItems();
+  const stockData = await customerStockFor(stockItems.map((i) => i.articleId));
   // Samo kupac sa sesijom: datum stanja, tekst po artiklu; bez šifara, izvornih količina i tuđih podataka.
   const stock =
     stockData.state === "svez"
       ? {
           state: "svez" as const,
           ...customerStockCaption({ stockDate: stockData.stockDate }),
+          items: stockItems.filter((i) => stockData.byArticle.has(i.articleId)),
           byArticle: Object.fromEntries(stockData.byArticle),
         }
       : stockData.state === "zastareo"
-        ? { state: "zastareo" as const, ...STALE_CAPTION, byArticle: {} }
+        ? { state: "zastareo" as const, ...STALE_CAPTION, items: stockItems, byArticle: {} }
         : null;
   return Response.json(
     {

@@ -3,12 +3,13 @@ import { notFound } from "next/navigation";
 import { Badge, PageHeader, PortalLinkButton, SectionHeader } from "@/components/portal/PortalPrimitives";
 import { StockConfirmForm, StockDiscardForm } from "@/features/portal/StockImportForms";
 import { StockImportSteps } from "@/features/portal/StockImportSteps";
-import { isMfaRecent, isSecondFactorSatisfied } from "@/lib/auth/session-assurance.mjs";
+import { isSecondFactorSatisfied } from "@/lib/auth/session-assurance.mjs";
 import { reauthUrlFor } from "@/lib/authz/redirects.mjs";
 import { loadAuthenticatedSession, requireCapability } from "@/lib/authz/session";
 import { dmy, dmyTime, quantity } from "@/lib/ordering/panelFormat.mjs";
 import { stockProblemText } from "@/lib/stock/problemLabels.mjs";
-import { loadStockImport, type StockLineView } from "@/lib/stock/stock-import-service";
+import { customerDisplayDecision } from "@/lib/stock/displayPolicy.mjs";
+import { loadStockImport, stockDisplayPolicy, type StockLineView } from "@/lib/stock/stock-import-service";
 
 export const dynamic = "force-dynamic";
 
@@ -82,9 +83,10 @@ export default async function StockImportReviewPage({ params, searchParams }: { 
   const { id } = await params;
   await requireCapability("imports:write", `/portal/zalihe/uvoz/${id}`);
   const { isti, ishod, ponovo, identitet } = await searchParams;
-  // Potvrda i odbacivanje traže drugi faktor u poslednjih 10 minuta; ovde se samo unapred kaže.
+  // Potvrda i odbacivanje prihvataju drugi faktor iz ove radne sesije (8 h / ponoć); ovde se samo unapred kaže.
   const session = await loadAuthenticatedSession();
-  const mfaFresh = Boolean(session && isSecondFactorSatisfied(session.assurance) && isMfaRecent(session.mfaVerifiedAt));
+  const mfaFresh = Boolean(session && isSecondFactorSatisfied(session.assurance));
+  const policy = await stockDisplayPolicy();
   const data = await loadStockImport(id);
   if (!data) notFound();
   const h = data.header;
@@ -104,9 +106,18 @@ export default async function StockImportReviewPage({ params, searchParams }: { 
   const pending = h.status === "pregled";
   const canConfirm = pending && !errors.length && !older && Boolean(h.stockDate) && !h.linesPurgedAt;
 
+  // Šta kupci vide: samo VAŽEĆE potvrđeno stanje, uz uključen prikaz i dok je sveže (dok. 65 §4).
+  const visibility = (() => {
+    if (h.status !== "potvrdjeno") return "Dok ne potvrdite, kupci ne vide ništa iz ovog fajla.";
+    if (!isCurrent) return "Ovo nije važeće stanje — kupci ga ne vide.";
+    if (process.env.STOCK_CUSTOMER_DISPLAY === "0" || !policy.enabled) return "Prikaz kupcima je isključen — stanje vide samo zaposleni.";
+    const d = h.stockDate ? customerDisplayDecision({ env: process.env, policy: { enabled: true, maxAgeHours: policy.maxAgeHours ?? 24 }, snapshot: { stockDate: h.stockDate }, now: new Date() }) : null;
+    if (d?.show) return `Prijavljeni kupci vide ovo stanje do ${dmyTime(d.validUntil)}: broj samo za proizvode sa potvrđenom vezom i pakovanjem, ostalo „Raspoloživost na upit“.`;
+    return "Stanje je starije od 24 sata — kupci vide „Potrebna je provera raspoloživosti“, bez brojeva.";
+  })();
   const outcome =
     h.status === "potvrdjeno"
-      ? { tone: "success", title: isCurrent ? "Potvrđeno — ovo je važeće stanje" : "Potvrđeno", text: `Potvrdio ${data.deciderName ?? "—"}, ${h.decidedAt ? dmyTime(h.decidedAt) : "—"}.` }
+      ? { tone: "success", title: isCurrent ? "Potvrđeno — ovo je važeće stanje" : "Potvrđeno", text: `Potvrdio ${data.deciderName ?? "—"}, ${h.decidedAt ? dmyTime(h.decidedAt) : "—"}. ${visibility}` }
       : h.status === "odbaceno"
         ? { tone: "neutral", title: "Odbačeno", text: h.decisionNote ? `Razlog: ${h.decisionNote}` : "Važeće stanje nije menjano." }
         : h.status === "neuspesno"
@@ -141,7 +152,7 @@ export default async function StockImportReviewPage({ params, searchParams }: { 
       ) : null}
       {ishod === "potvrdjeno" && h.status === "potvrdjeno" ? <p className="portal-permission-ok lg-status" role="status">Lager je potvrđen.</p> : null}
       {ishod === "vec-odluceno" ? <p className="portal-permission-ok lg-status" role="status">O ovom fajlu je već odlučeno — prikazan je zapisani ishod. Ništa nije ponovljeno.</p> : null}
-      {identitet === "potvrdjen" && pending && mfaFresh ? <p className="portal-permission-ok lg-status" role="status">Identitet je potvrđen. Sada možete da potvrdite lager — potvrda važi 10 minuta.</p> : null}
+      {identitet === "potvrdjen" && pending && mfaFresh ? <p className="portal-permission-ok lg-status" role="status">Identitet je potvrđen. Sada možete da potvrdite lager.</p> : null}
       {ishod === "odbaceno" && h.status === "odbaceno" ? <p className="portal-permission-ok lg-status" role="status">Otpremanje je odbačeno; važeće stanje nije menjano.</p> : null}
 
       <section className="lg-outcome" data-tone={outcome.tone}>
@@ -175,12 +186,12 @@ export default async function StockImportReviewPage({ params, searchParams }: { 
             {!mfaFresh ? (
               <div className="lg-reauth" role="note">
                 <p>
-                  <strong>Pre odluke ponovo potvrdite identitet.</strong> Potvrda i odbacivanje traže lozinku i kod iz aplikacije u poslednjih 10 minuta. Posle toga vraćate se na ovaj uvoz; ništa nije izmenjeno.
+                  <strong>Pre odluke potvrdite identitet.</strong> Ova prijava nije potvrđena kodom iz aplikacije. Potvrda i odbacivanje traže prijavu lozinkom i kodom (važi za celu radnu sesiju, do 8 sati, najkasnije do ponoći). Posle toga vraćate se na ovaj uvoz; ništa nije izmenjeno.
                 </p>
                 <PortalLinkButton href={reauthUrlFor(`/portal/zalihe/uvoz/${h.id}?identitet=potvrdjen`)} variant="secondary">Potvrdite identitet</PortalLinkButton>
               </div>
             ) : null}
-            {canConfirm && h.stockDate ? <StockConfirmForm importId={h.id} lines={h.lineCount} stockDate={h.stockDate} /> : null}
+            {canConfirm && h.stockDate ? <StockConfirmForm importId={h.id} lines={h.lineCount} stockDate={h.stockDate} customerDisplay={policy.enabled} /> : null}
             <StockDiscardForm importId={h.id} />
           </div>
         </section>

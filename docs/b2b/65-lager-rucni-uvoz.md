@@ -121,10 +121,13 @@ Greške blokiraju potvrdu; upozorenja ne blokiraju, ali su prikazana u pregledu.
 3. **Potvrda** (isto pravo + drugi faktor u poslednjih 10 minuta): jedna transakcija; *pregled* →
    *potvrđeno*. Važeći snimak = poslednje potvrđeno otpremanje. Stariji datum stanja od važećeg se ne može
    potvrditi. Neuspešno ili odbačeno otpremanje ne menja važeći snimak.
-   Kada je potvrda drugog faktora starija od 10 minuta, potvrda i odbacivanje ne završavaju ekranom
-   „Nemate dozvolu“, nego ponovnom potvrdom identiteta (`/prijava?…&potvrda=identitet`: lozinka + kod) sa
-   povratkom na isti uvoz. Pravo ostaje `imports:write` istog korisnika. Ponovljen klik posle odluke
-   ne menja ništa i prikazuje zapisani ishod (`?ishod=vec-odluceno`). (Ispravka 15. 10. 2026.)
+   **Radna sesija (politika vlasnika 16. 10. 2026):** zaposleni se ujutru prijavljuje lozinkom i
+   drugim faktorom; sesija važi najviše 8 sati od prijave ili do ponoći (Europe/Belgrade), šta prvo
+   nastupi, i aktivnost je ne produžava. Uvoz, potvrda i odbacivanje lagera prihvataju drugi faktor
+   iz te sesije — bez novog koda na svakih 10 minuta. Sesija bez drugog faktora ide na potvrdu
+   identiteta, istekla sesija na prijavu; povratak je uvek na isti uvoz, ništa se ne gubi. Ponovljen
+   klik posle odluke ne menja ništa (`?ishod=vec-odluceno`). Promena lozinke, MFA, dodela prava i
+   prekidač prikaza kupcima i dalje traže kod unet u poslednjih 10 minuta. Kupčeve sesije se ne menjaju.
 4. **Odbacivanje** sa razlogom.
 
 Stavke se samo dodaju; podaci otpremanja se ne menjaju; otpremanje se ne briše (okidači u 0050, prava u
@@ -216,8 +219,8 @@ u pripremi“. Kupac se prijavljuje na `/prijava/kupac` i posle prijave vraća n
 3. Portal → **Zalihe → Uvoz lagera** (`/portal/zalihe/uvoz`) → izaberite fajl → „Otpremite na pregled“.
 4. Proverite: objekat 021, datum stanja, broj stavki, kontrolu potpunosti (zeleno), greške (moraju biti
    0) i upozorenja.
-5. Ako je sve u redu: označite potvrdu → „Potvrdite lager“. Ako je od prijave prošlo više od 10 minuta,
-   sistem traži lozinku i kod iz aplikacije i vraća Vas na isti uvoz — tada ponovo označite potvrdu. Ako nije u redu: „Odbacite otpremanje“ sa razlogom i izvezite ponovo.
+5. Ako je sve u redu: označite potvrdu → „Potvrdite lager“. Važi jutarnja prijava sa kodom (do 8 sati,
+   najkasnije do ponoći); posle isteka sistem traži novu prijavu i vraća Vas na isti uvoz. Ako nije u redu: „Odbacite otpremanje“ sa razlogom i izvezite ponovo.
 6. Isti fajl dva puta ne pravi duplikat. Stariji izvoz ne može zameniti noviji.
 7. Kupci vide brojeve samo za dan stanja (do ponoći): za prikaz u toku dana otpremite i potvrdite
    izvoz tog dana.

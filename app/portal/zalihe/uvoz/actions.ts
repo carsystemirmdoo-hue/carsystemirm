@@ -3,7 +3,7 @@
 import { revalidatePath } from "next/cache";
 import { forbidden, redirect } from "next/navigation";
 import { can } from "@/lib/authz/permissions.mjs";
-import { requireCapability, requireRecentMfaOrReauth } from "@/lib/authz/session";
+import { requireCapability, requireSessionMfaOrReauth } from "@/lib/authz/session";
 import { formatMegabytes } from "@/lib/import/upload-limits.mjs";
 import { MAX_STOCK_FILE_BYTES } from "@/lib/stock/readStockFile.mjs";
 import { confirmStockImport, discardStockImport, StockImportError, uploadStockReport } from "@/lib/stock/stock-import-service";
@@ -11,8 +11,9 @@ import { confirmStockImport, discardStockImport, StockImportError, uploadStockRe
 /*
  * Lager — serverske akcije (dok. 65). Svaka SAMA proverava `imports:write` (vlasnik i
  * kancelarija); skriveno dugme nije ovlašćenje. Otpremanje samo čita fajl i upisuje ga
- * za pregled. Potvrda i odbacivanje traže i SVEŽU potvrdu drugog faktora; kada je
- * zastarela, korisnik ide na ponovnu potvrdu identiteta i vraća se na isti uvoz.
+ * za pregled. Potvrda i odbacivanje traže drugi faktor iz ove radne sesije (prijava
+ * lozinkom i kodom, važi do 8 h / ponoći); bez njega ili posle isteka sesije korisnik ide
+ * na prijavu, odnosno potvrdu identiteta, i vraća se na isti uvoz.
  * Ponovljen klik posle odluke ne menja ništa: prikazuje se već zapisani ishod.
  */
 const PATH = "/portal/zalihe/uvoz";
@@ -60,8 +61,8 @@ export async function uploadStockAction(_prev: StockImportActionState, formData:
 export async function confirmStockAction(_prev: StockImportActionState, formData: FormData): Promise<StockImportActionState> {
   const importId = String(formData.get("importId") ?? "");
   const back = decisionPath(importId);
-  // Svež drugi faktor istog korisnika sa istim pravom; inače ponovna potvrda sa povratkom na uvoz.
-  const actor = sameActor(await requireCapability("imports:write", back), await requireRecentMfaOrReauth(back));
+  // Drugi faktor iz radne sesije istog korisnika sa istim pravom; inače prijava/potvrda sa povratkom na uvoz.
+  const actor = sameActor(await requireCapability("imports:write", back), await requireSessionMfaOrReauth(back));
   if (formData.get("potvrda") !== "da") return { error: "Potvrdite da ste pregledali izveštaj.", ok: null };
   try {
     await confirmStockImport(actor, { importId, note: String(formData.get("napomena") ?? "") });
@@ -80,8 +81,8 @@ export async function confirmStockAction(_prev: StockImportActionState, formData
 export async function discardStockAction(_prev: StockImportActionState, formData: FormData): Promise<StockImportActionState> {
   const importId = String(formData.get("importId") ?? "");
   const back = decisionPath(importId);
-  // Svež drugi faktor istog korisnika sa istim pravom; inače ponovna potvrda sa povratkom na uvoz.
-  const actor = sameActor(await requireCapability("imports:write", back), await requireRecentMfaOrReauth(back));
+  // Drugi faktor iz radne sesije istog korisnika sa istim pravom; inače prijava/potvrda sa povratkom na uvoz.
+  const actor = sameActor(await requireCapability("imports:write", back), await requireSessionMfaOrReauth(back));
   try {
     await discardStockImport(actor, { importId, note: String(formData.get("razlog") ?? "") });
   } catch (error) {

@@ -100,7 +100,7 @@ export function StockUploadForm() {
 }
 
 /** Korak 3 — potvrda. Traži izričitu potvrdu i svež drugi faktor. */
-export function StockConfirmForm({ importId, lines, stockDate }: { importId: string; lines: number; stockDate: string }) {
+export function StockConfirmForm({ importId, lines, stockDate, customerDisplay }: { importId: string; lines: number; stockDate: string; customerDisplay: boolean }) {
   const [state, action, pending] = useActionState(confirmStockAction, INITIAL);
   return (
     <form action={action} className="lg-decision">
@@ -119,7 +119,12 @@ export function StockConfirmForm({ importId, lines, stockDate }: { importId: str
         <button type="submit" className="portal-button" data-variant="primary" disabled={pending}>
           {pending ? "Potvrđujem…" : "Potvrdite lager"}
         </button>
-        <span className="lg-hint">Traži prijavu sa drugim faktorom u poslednjih 10 minuta. Kupci ovo stanje ne vide.</span>
+        <span className="lg-hint">
+          Dok ne potvrdite, kupci ne vide ništa iz ovog fajla.{" "}
+          {customerDisplay
+            ? "Posle potvrde prijavljeni kupci vide stanje (broj samo za proizvode sa potvrđenom vezom i pakovanjem) do ponoći dana stanja."
+            : "Prikaz kupcima je isključen — potvrđeno stanje vide samo zaposleni."}
+        </span>
       </div>
       <Status state={state} />
     </form>

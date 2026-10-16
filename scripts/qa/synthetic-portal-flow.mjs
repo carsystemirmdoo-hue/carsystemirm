@@ -26,13 +26,8 @@ const log = (k, v) => console.log(`${k}: ${typeof v === "string" ? v : JSON.stri
 const check = (name, ok, detail = "") => { results.push({ name, ok }); console.log(`${ok ? "PROLAZ" : "PAD   "} ${name}${detail ? " :: " + detail : ""}`); };
 const txt = async (loc) => (await loc.innerText()).replace(/\s+/g, " ").trim();
 const last = {};
-// SYNTH_WAIT=load: kada pozadinsko unapred učitavanje ostane otvoreno (npr. /vodici posle promene dana), „networkidle“ se ne dostiže.
-const WAIT = process.env.SYNTH_WAIT === "load" ? "load" : "networkidle";
-const go = async (p, path) => {
-  const r = await p.goto(`${B}${path}`, { waitUntil: WAIT, timeout: 120000 });
-  if (WAIT === "load") await p.waitForTimeout(1500);
-  return r;
-};
+const WAIT = "networkidle";
+const go = (p, path) => p.goto(`${B}${path}`, { waitUntil: WAIT, timeout: 120000 });
 async function staff(page, who) {
   while (last[who] === Math.floor(Date.now() / 30000)) await new Promise((r) => setTimeout(r, 1000));
   last[who] = Math.floor(Date.now() / 30000);
@@ -93,6 +88,24 @@ async function confirmDialog(page, openLabel, reasonText) {
 }
 const A = creds.ids.A;
 const b = await chromium.launch({ channel: "chrome" }).catch(() => chromium.launch());
+// Bez HTTP keša pregledača u svakoj strani. `next start` šalje ISR stranama (/vodici, link u
+// zaglavlju) „s-maxage=3600, stale-while-revalidate=…“, koje Vercel pregledaču zamenjuje sa
+// „public, max-age=0, must-revalidate“. Sa SWR zaglavljem Chrome ponovni prefetch u novom
+// dokumentu služi iz keša i pokreće pozadinsku revalidaciju čiji kraj CDP nikad ne javi, pa
+// „networkidle“ ne dolazi. Bez keša nema ni tog puta — kao na Production-u, gde SWR ne stiže do pregledača.
+const bezKesa = async (page) => {
+  const s = await page.context().newCDPSession(page);
+  await s.send("Network.enable");
+  await s.send("Network.setCacheDisabled", { cacheDisabled: true });
+};
+const newContext = b.newContext.bind(b);
+b.newContext = async (opts) => {
+  const ctx = await newContext(opts);
+  const newPage = ctx.newPage.bind(ctx);
+  ctx.newPage = async () => { const p = await newPage(); await bezKesa(p); return p; };
+  ctx.on("page", (p) => { p.opener().then((o) => o && bezKesa(p)).catch(() => {}); });
+  return ctx;
+};
 try {
   if (STEP === "sve" || STEP === "kupac") {
     const k = await (await b.newContext(desk)).newPage();

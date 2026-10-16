@@ -19,7 +19,6 @@ import {
   percentString,
   periodText,
   planReplacement,
-  priceFromRabat,
   validatePeriod,
   withNewArticleDefault,
 } from "@/lib/pricing/rebateSheet.mjs";
@@ -627,4 +626,3 @@ export async function setNoticeRead(user: Viewer, id: string, read: boolean) {
      WHERE id = ${id}::bigint AND recipient_user_id = ${user.id}::uuid`);
 }
 
-export { priceFromRabat };

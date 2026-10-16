@@ -607,7 +607,12 @@ export async function listMyNotices(user: Viewer): Promise<RebateNotice[]> {
       FROM rebate_change_notices n JOIN customers c ON c.id = n.customer_id JOIN users u ON u.id = n.actor_user_id
      WHERE n.recipient_user_id = ${user.id}::uuid
      ORDER BY n.created_at DESC`);
-  return [...rows].map((r) => ({ id: r.id, customerId: r.customer_id, customer: r.customer, actor: r.actor, createdAt: r.created, expires: r.expires, period: r.period, note: r.note, read: r.read_at !== null, items: r.items }));
+  return [...rows].map((r) => ({ id: r.id, customerId: r.customer_id, customer: r.customer, actor: r.actor, createdAt: r.created, expires: r.expires, period: r.period, note: r.note, read: r.read_at !== null, items: parseItems(r.items) }));
+}
+
+function parseItems(v: unknown): RebateNotice["items"] {
+  const x = typeof v === "string" ? (() => { try { return JSON.parse(v); } catch { return []; } })() : v;
+  return Array.isArray(x) ? x : [];
 }
 
 export async function countMyUnreadNotices(user: Viewer): Promise<number> {

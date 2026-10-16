@@ -31,7 +31,7 @@
 
 .ck-tools { display: flex; flex-wrap: wrap; gap: 10px 12px; align-items: center; }
 .ck-tools form { display: flex; gap: 8px; flex: 0 1 380px; }
-.ck-tools input[type="search"] { flex: 1; min-width: 0; }
+.ck-tools input[type="search"] { flex: 1; min-width: 0; min-height: 40px; padding: 0 12px; border: 1px solid #9aa1a9; border-radius: 2px; background: #fff; font: inherit; font-size: 15px; color: var(--p-ink); }
 .ck-chips { display: flex; flex-wrap: wrap; gap: 6px; }
 .ck-chip {
   display: inline-flex; align-items: center; gap: 6px; min-height: 36px; padding: 0 14px;
@@ -80,7 +80,7 @@
 .ck-val-r { color: var(--p-muted); font-size: 15px; }
 .ck-val-c { font-weight: 700; font-size: 17px; }
 .ck-st { display: grid; gap: 4px; justify-items: start; }
-.ck-tag { display: inline-block; padding: 2px 8px; border-radius: 2px; font-size: 13px; font-weight: 600; white-space: nowrap; }
+.ck-tag { display: inline-block; padding: 2px 8px; border-radius: 2px; font-size: 13px; line-height: 18px; font-weight: 600; white-space: normal; }
 .ck-tag[data-tone="warning"] { background: var(--pn-warn-bg); color: var(--pn-warn-ink); }
 .ck-tag[data-tone="danger"] { background: var(--pn-bad-bg); color: var(--pn-bad-ink); }
 .ck-tag[data-tone="changed"] { background: #fff6d6; color: #5a3b00; }

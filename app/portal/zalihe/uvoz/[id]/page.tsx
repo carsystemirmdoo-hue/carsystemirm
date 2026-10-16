@@ -26,7 +26,7 @@ const REASON: Record<string, string> = {
   jm_razlika: "JM iz izveštaja ≠ potvrđena JM",
 };
 type Problem = { code: string; row?: number; detail?: string; count?: number };
-type Summary = { lines: number; zeros: number; negative: number; decimals: number; emptyQuantity: number; control?: Record<string, unknown>; sheet?: string | null; stockFilter?: string | null; jmIzIzvestaja?: boolean };
+type Summary = { packConfirmed?: number; lines: number; zeros: number; negative: number; decimals: number; emptyQuantity: number; control?: Record<string, unknown>; sheet?: string | null; stockFilter?: string | null; jmIzIzvestaja?: boolean };
 
 function LineTable({ rows, showPacks = false }: { rows: StockLineView[]; showPacks?: boolean }) {
   if (!rows.length) return <p className="lg-empty portal-panel-body">Nema.</p>;
@@ -262,6 +262,13 @@ export default async function StockImportReviewPage({ params, searchParams }: { 
           <div><dt>Filter stanja</dt><dd>{s.stockFilter ?? "—"}</dd></div>
           <div><dt>Prepoznato</dt><dd>{quantity(s.lines)} stavki · nula {s.zeros} · decimalnih {s.decimals} · praznih {s.emptyQuantity} · negativnih {s.negative}</dd></div>
           <div><dt>Povezano</dt><dd>{quantity(linked.length)} sa artiklom ({linked.filter((l) => !l.exactCode).length} preko šifre bez vodećih nula)</dd></div>
+          <div>
+            <dt>Analiza</dt>
+            <dd>
+              Grupe su izračunate sada, po trenutnim vezama, pakovanjima i evidenciji opreme — količine, datum i status uvoza se ne menjaju.
+              {typeof s.packConfirmed === "number" ? ` Pri otpremanju: ${quantity(s.packConfirmed)} sa potvrđenim pakovanjem.` : ""}
+            </dd>
+          </div>
           <div><dt>Jedinica mere</dt><dd>{s.jmIzIzvestaja ? "iz izveštaja — samo provera potvrđenog pakovanja" : "izveštaj je nema"}; ne zaključuje se iz naziva</dd></div>
           <div><dt>Ne čuva se</dt><dd>originalni fajl, cene, vrednosti i marže</dd></div>
           <div><dt>Verzija provere</dt><dd>{h.parserVersion}</dd></div>

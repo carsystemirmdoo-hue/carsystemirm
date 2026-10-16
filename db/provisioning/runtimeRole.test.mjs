@@ -29,7 +29,7 @@ const statements = script
  *  - otpremanje cenovnika: jednokratna odluka, podaci fajla se ne menjaju (0038).
  * DELETE im se i dalje oduzima.
  */
-const REVOCATION_ONLY = new Set(["customer_contact_verifications", "invoice_reversals", "price_list_imports", "customer_payment_options", "stock_imports", "internal_equipment"]);
+const REVOCATION_ONLY = new Set(["customer_contact_verifications", "invoice_reversals", "price_list_imports", "customer_payment_options", "stock_imports", "internal_equipment", "article_sales_names", "article_sellout"]);
 
 function guardedTables() {
   /** @type {Map<string, Set<string>>} */

@@ -48,7 +48,8 @@ const { orderPack } = await import("@/lib/ordering/packRule.mjs");
 const { AUDIT_ACTIONS, recordAudit } = await import("@/lib/audit/record");
 
 /** `deo_kom`: izričit izuzetak vlasnika — pakovanje je deo jednog KOM (npr. 0,5). */
-type Link = { sifra: string; slug: string | null; varijanta: string | null; jm: string; pakovanje: number | null; oznaka?: string; izvor?: string; deo_kom?: boolean };
+/** `jm_izvor`: izvorna JM portala koja se, po izričitoj potvrdi vlasnika, razlikuje od prodajne `jm` (izvor se ne menja). */
+type Link = { sifra: string; slug: string | null; varijanta: string | null; jm: string; pakovanje: number | null; oznaka?: string; izvor?: string; deo_kom?: boolean; jm_izvor?: string };
 const plan = JSON.parse(readFileSync(planPath, "utf8")) as { izvor?: string; veze: Link[] };
 const db = getDb();
 if (!write) {
@@ -82,7 +83,8 @@ for (const v of plan.veze) {
   const problems: string[] = [];
   if (!a) problems.push("artikal ne postoji u bazi");
   else {
-    if (String(a.unit ?? "").toUpperCase() !== v.jm.toUpperCase()) problems.push(`JM u bazi ${a.unit} ≠ ${v.jm}`);
+    const unitOk = String(a.unit ?? "").toUpperCase() === v.jm.toUpperCase() || (v.jm_izvor && String(a.unit ?? "").toUpperCase() === v.jm_izvor.toUpperCase());
+    if (!unitOk) problems.push(`JM u bazi ${a.unit} ≠ ${v.jm}`);
     if (a.out) problems.push("artikal je van programa");
     if (!packOnly && a.status === "mapped" && (a.slug !== v.slug || (a.variant ?? null) !== (v.varijanta ?? null))) problems.push(`već potvrđena DRUGA veza (${a.slug}${a.variant ? ` · ${a.variant}` : ""})`);
     if (a.status === "conflict") problems.push("veza je u statusu sukob");

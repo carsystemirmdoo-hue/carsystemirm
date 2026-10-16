@@ -1393,6 +1393,14 @@ try {
     const sw = await tm.evaluate(() => document.documentElement.scrollWidth - window.innerWidth);
     check("lager-kupci telefon: bez horizontalnog pomeranja", sw <= 1, `višak ${sw}px`);
     await tm.screenshot({ path: `${OUT}/lager-kupci-2-telefon.png`, fullPage: false });
+    // Prodajni naziv (0055): kupac vidi ispravljen naziv, izvorni BizniSoft naziv ostaje u bazi.
+    await sqlc`INSERT INTO article_sales_names (article_id, name, evidence, decided_by)
+               VALUES ((SELECT id FROM articles WHERE code = 'SINT-C03'), 'SINT antisilikon (prodajni naziv)', 'sintetička proba prodajnog naziva', (SELECT id FROM users WHERE role = 'gazda' LIMIT 1))`;
+    const nar = await kctx.newPage();
+    await nar.goto(`${B}/kupac/naruci?q=SINT-C03`, { waitUntil: WAIT, timeout: 120000 });
+    const narText = await txt(nar.locator("main"));
+    const izvorni = (await sqlc`SELECT name FROM articles WHERE code = 'SINT-C03'`)[0].name;
+    check("lager-kupci: prodajni naziv u „Izboru robe“, izvorni naziv sačuvan u bazi", /SINT antisilikon \(prodajni naziv\)/.test(narText) && izvorni === "SINT ANTISILIKON 1L", narText.slice(0, 160));
     // Stvarni kupci nemaju uključeno poručivanje (samo proba): stanje mora da se vidi i tada.
     await sqlc`UPDATE system_settings SET value = ${sqlc.json({ customerIds: [] })} WHERE key = 'ordering.trial'`;
     const noOrder = await kctx.newPage();

@@ -379,6 +379,23 @@ export async function confirmStockImport(actor: Actor, input: { importId: string
       .where(and(eq(stockImports.id, input.importId), eq(stockImports.status, "pregled")))
       .returning({ id: stockImports.id });
     if (!updated.length) throw new StockImportError("odluceno", "O ovom otpremanju je već odlučeno.");
+    // Prodaja do rasprodaje (0055): potvrđeno stanje 0 (ili manje) trajno povlači artikal iz ponude.
+    const soldOut = [...(await tx.execute<{ article_id: string; code: string }>(sql`
+      UPDATE article_sellout s
+         SET ended_at = now(), ended_import_id = ${input.importId}::uuid
+        FROM articles a
+       WHERE s.article_id = a.id AND s.ended_at IS NULL
+         AND EXISTS (SELECT 1 FROM stock_import_lines l
+                      WHERE l.import_id = ${input.importId}::uuid
+                        AND l.code_key = regexp_replace(a.code, '^0+(?=[0-9])', '')
+                        AND l.quantity IS NOT NULL AND l.quantity <= 0)
+      RETURNING s.article_id, a.code`))];
+    for (const r of soldOut) {
+      await tx.execute(sql`
+        INSERT INTO article_programme_decisions (article_id, in_programme, reason, source_batch, decided_by)
+        SELECT ${r.article_id}::uuid, false, ${`Rasprodato: potvrđen lager ${imp.stock_date} pokazuje stanje 0 (prodaja do isteka zalihe)`}, ${`rasprodaja-${input.importId.slice(0, 8)}`}, ${actor.id}::uuid
+         WHERE NOT EXISTS (SELECT 1 FROM articles_out_of_programme o WHERE o.article_id = ${r.article_id}::uuid)`);
+    }
     // Atomski sa potvrdom: ostaju stavke ovog i prethodnog potvrđenog snimka.
     const retention = await applyRetention(tx);
     await recordAudit(
@@ -388,7 +405,7 @@ export async function confirmStockImport(actor: Actor, input: { importId: string
         entityType: ENTITY,
         entityId: input.importId,
         entityLabel: `${imp.file_name.slice(0, 120)} — stanje ${imp.stock_date}`,
-        after: { stockDate: imp.stock_date, lines: imp.line_count, previousStockDate: currentDate, retention },
+        after: { stockDate: imp.stock_date, lines: imp.line_count, previousStockDate: currentDate, retention, rasprodato: soldOut.map((r) => r.code) },
         reason: note,
       },
       tx,

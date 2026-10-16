@@ -5,7 +5,10 @@
  *   DATABASE_URL=<baza> npx tsx --tsconfig db/integration/tsconfig.test.json \
  *     scripts/catalog/apply-article-decisions.mts <plan.json> [--potvrdio <email> --upis]
  *
- * Plan (PRIVATAN, van repoa): { izvor, van_programa: [{ sifra, razlog? }], samo_upit: [{ sifra, razlog }] }.
+ * Plan (PRIVATAN, van repoa): { izvor, van_programa: [{ sifra, razlog? }], samo_upit: [{ sifra, razlog }],
+ *   prodajni_naziv?: [{ sifra, naziv, izvor }], rasprodaja?: [{ sifra, izvor }] }.
+ * `prodajni_naziv` (0055): naziv za kupca; izvorni BizniSoft naziv ostaje. `rasprodaja` (0055): artikal se
+ * prodaje do isteka zalihe — potvrda lagera sa stanjem 0 ga trajno povlači iz ponude.
  * Bez `--upis` samo proverava (sesija samo za čitanje). Šifra koje nema u bazi se prijavljuje i preskače.
  * Production baza (neon) se odbija bez `--production-odobreno`.
  */
@@ -28,7 +31,9 @@ const { setArticleProgramme } = await import("@/lib/pricing/article-programme-se
 const { setArticleProcurementOnly } = await import("@/lib/ordering/article-offer-service");
 
 type Item = { sifra: string; razlog?: string };
-const plan = JSON.parse(readFileSync(planPath, "utf8")) as { izvor: string; van_programa?: Item[]; samo_upit?: Item[] };
+type Name = { sifra: string; naziv: string; izvor: string };
+type Sellout = { sifra: string; izvor: string };
+const plan = JSON.parse(readFileSync(planPath, "utf8")) as { izvor: string; van_programa?: Item[]; samo_upit?: Item[]; prodajni_naziv?: Name[]; rasprodaja?: Sellout[] };
 const db = getDb();
 if (!write) await db.execute(sql`SET SESSION CHARACTERISTICS AS TRANSACTION READ ONLY`);
 const ids = async (items: Item[]) => {
@@ -49,5 +54,37 @@ if (write) {
   console.log(`Van programa — upisano ${a.changed}, već upisano ${a.unchanged}.`);
   const b = await setArticleProcurementOnly(actor as never, { articleIds: only.found.map((f) => f.id), procurementOnly: true, reason: plan.izvor.slice(0, 480) });
   console.log(`Samo upit za nabavku — upisano ${b.changed}, već upisano ${b.unchanged}.`);
+  const { AUDIT_ACTIONS, recordAudit } = await import("@/lib/audit/record");
+  let names = 0;
+  for (const n of plan.prodajni_naziv ?? []) {
+    const [art] = [...(await db.execute<{ id: string; name: string }>(sql`SELECT id, name FROM articles WHERE code = ${n.sifra}`))];
+    if (!art) { console.log(`${n.sifra}: nema u bazi — prodajni naziv preskočen`); continue; }
+    await db.transaction(async (tx) => {
+      const [prev] = [...(await tx.execute<{ name: string }>(sql`SELECT name FROM article_sales_names WHERE article_id = ${art.id}::uuid`))];
+      if (prev?.name === n.naziv) return;
+      await tx.execute(sql`
+        INSERT INTO article_sales_names (article_id, name, evidence, decided_by) VALUES (${art.id}::uuid, ${n.naziv}, ${n.izvor.slice(0, 1000)}, ${actor.id}::uuid)
+        ON CONFLICT (article_id) DO UPDATE SET name = EXCLUDED.name, evidence = EXCLUDED.evidence, decided_by = EXCLUDED.decided_by, decided_at = now()`);
+      await recordAudit({ actor: { id: actor.id, name: actor.name, role: actor.role as never }, action: AUDIT_ACTIONS.articleSalesNameSet, entityType: "Artikal", entityId: art.id,
+        entityLabel: `${n.sifra} ${art.name}`.slice(0, 200), before: { prodajniNaziv: prev?.name ?? null, izvorniNaziv: art.name }, after: { prodajniNaziv: n.naziv }, reason: n.izvor.slice(0, 1000) }, tx as never);
+      names++;
+    });
+  }
+  console.log(`Prodajni nazivi — upisano ${names}.`);
+  let sellouts = 0;
+  for (const r of plan.rasprodaja ?? []) {
+    const [art] = [...(await db.execute<{ id: string; name: string }>(sql`SELECT id, name FROM articles WHERE code = ${r.sifra}`))];
+    if (!art) { console.log(`${r.sifra}: nema u bazi — rasprodaja preskočena`); continue; }
+    await db.transaction(async (tx) => {
+      const ins = [...(await tx.execute<{ article_id: string }>(sql`
+        INSERT INTO article_sellout (article_id, evidence, decided_by) VALUES (${art.id}::uuid, ${r.izvor.slice(0, 1000)}, ${actor.id}::uuid)
+        ON CONFLICT (article_id) DO NOTHING RETURNING article_id`))];
+      if (!ins.length) return;
+      await recordAudit({ actor: { id: actor.id, name: actor.name, role: actor.role as never }, action: AUDIT_ACTIONS.articleSelloutSet, entityType: "Artikal", entityId: art.id,
+        entityLabel: `${r.sifra} ${art.name}`.slice(0, 200), before: null, after: { rasprodaja: true }, reason: r.izvor.slice(0, 1000) }, tx as never);
+      sellouts++;
+    });
+  }
+  console.log(`Prodaja do rasprodaje — upisano ${sellouts}.`);
 }
 process.exit(0);

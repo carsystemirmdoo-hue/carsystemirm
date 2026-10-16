@@ -386,6 +386,13 @@
       "when": 1793109600000,
       "tag": "0054_internal_equipment",
       "breakpoints": true
+    },
+    {
+      "idx": 55,
+      "version": "7",
+      "when": 1793196000000,
+      "tag": "0055_article_sales_names_sellout",
+      "breakpoints": true
     }
   ]
 }

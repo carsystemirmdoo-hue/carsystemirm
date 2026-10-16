@@ -84,3 +84,22 @@ export const internalEquipment = pgTable("internal_equipment", {
   decidedBy: uuid("decided_by").notNull().references(() => users.id, { onDelete: "restrict" }),
   decidedAt: timestamp("decided_at", { withTimezone: true }).notNull().defaultNow(),
 });
+
+/** 0055: naziv za kupca (izvorni BizniSoft naziv u `articles.name` ostaje). */
+export const articleSalesNames = pgTable("article_sales_names", {
+  articleId: uuid("article_id").primaryKey(),
+  name: text("name").notNull(),
+  evidence: text("evidence").notNull(),
+  decidedBy: uuid("decided_by").notNull().references(() => users.id, { onDelete: "restrict" }),
+  decidedAt: timestamp("decided_at", { withTimezone: true }).notNull().defaultNow(),
+});
+
+/** 0055: prodaja do rasprodaje — potvrđen lager sa stanjem 0 trajno povlači artikal iz ponude. */
+export const articleSellout = pgTable("article_sellout", {
+  articleId: uuid("article_id").primaryKey(),
+  evidence: text("evidence").notNull(),
+  decidedBy: uuid("decided_by").notNull().references(() => users.id, { onDelete: "restrict" }),
+  decidedAt: timestamp("decided_at", { withTimezone: true }).notNull().defaultNow(),
+  endedAt: timestamp("ended_at", { withTimezone: true }),
+  endedImportId: uuid("ended_import_id"),
+});

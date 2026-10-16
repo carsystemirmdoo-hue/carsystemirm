@@ -69,7 +69,10 @@ export type OptionPrice =
 export type RequestLine = {
   articleId: string;
   articleCode: string;
+  /** Izvorni BizniSoft naziv (kancelarija, istorija). */
   articleName: string;
+  /** Naziv za kupca kada izvorni ne sme da se prikaže (0055); inače null. */
+  salesName: string | null;
   unit: string;
   packLabel: string;
   packConfirmed: boolean;
@@ -113,7 +116,7 @@ export type RequestQuote = {
 const keyOf = (code: string | null) => code ?? "osnovni";
 
 type ArticleRow = {
-  id: string; code: string; name: string; unit: string | null; out: boolean; fractional: boolean; procurement: boolean;
+  id: string; code: string; name: string; sales_name: string | null; unit: string | null; out: boolean; fractional: boolean; procurement: boolean;
   pack_quantity: string | null; pack_unit: string | null; pack_label: string | null; pack_fractional: boolean | null;
 };
 
@@ -138,7 +141,7 @@ async function priceLines(
     approvedPaymentOptions(customerId, today, exec),
     ids.length
       ? exec.execute<ArticleRow>(sql`
-          SELECT a.id, a.code, a.name, a.unit, EXISTS (SELECT 1 FROM articles_out_of_programme o WHERE o.article_id = a.id) AS out,
+          SELECT a.id, a.code, a.name, (SELECT sn.name FROM article_sales_names sn WHERE sn.article_id = a.id) AS sales_name, a.unit, EXISTS (SELECT 1 FROM articles_out_of_programme o WHERE o.article_id = a.id) AS out,
                  EXISTS (SELECT 1 FROM articles_procurement_only p WHERE p.article_id = a.id) AS procurement,
                  EXISTS (SELECT 1 FROM invoice_lines l WHERE l.article_id = a.id AND l.quantity <> trunc(l.quantity)) AS fractional,
                  ps.pack_quantity::text AS pack_quantity, ps.unit AS pack_unit, ps.label AS pack_label, ps.fractional_ok AS pack_fractional
@@ -213,6 +216,7 @@ async function priceLines(
       articleId: a.id,
       articleCode: a.code,
       articleName: a.name,
+      salesName: a.sales_name,
       unit,
       packLabel: pack ? pack.label : `JM: ${unit}`,
       packConfirmed: Boolean(pack),
@@ -536,15 +540,15 @@ async function insertLines(tx: Tx, orderId: string, lines: RequestLine[]) {
     const p = l.selected!;
     if (p.status === "cena") {
       await tx.execute(sql`
-        INSERT INTO customer_order_lines (order_id, line_number, article_id, article_code, article_name, catalog_product_slug, catalog_variant_id, unit, pack_label, pack_confirmed, pack_count, pack_quantity, quantity,
+        INSERT INTO customer_order_lines (order_id, line_number, article_id, article_code, article_name, catalog_name, catalog_product_slug, catalog_variant_id, unit, pack_label, pack_confirmed, pack_count, pack_quantity, quantity,
           list_price, discount_percent, net_price, vat_percent, line_net, line_vat, line_gross, price_basis, price_status)
-        VALUES (${orderId}, ${n}, ${l.articleId}, ${l.articleCode}, ${l.articleName}, ${mappedSlug(l.articleId)}, ${mappedVariant(l.articleId)}, ${l.unit}, ${l.packLabel}, ${l.packConfirmed}, ${l.pack ? l.packs : null}, ${l.pack ? l.pack.quantity : null}, ${l.quantity},
+        VALUES (${orderId}, ${n}, ${l.articleId}, ${l.articleCode}, ${l.articleName}, ${l.salesName}, ${mappedSlug(l.articleId)}, ${mappedVariant(l.articleId)}, ${l.unit}, ${l.packLabel}, ${l.packConfirmed}, ${l.pack ? l.packs : null}, ${l.pack ? l.pack.quantity : null}, ${l.quantity},
           ${p.listPrice}, ${p.discountPercent}, ${p.netPrice}, ${p.vatPercent}, ${l.amounts!.net}, ${l.amounts!.vat}, ${l.amounts!.gross}, ${p.basis}, 'cena')`);
     } else {
       await tx.execute(sql`
-        INSERT INTO customer_order_lines (order_id, line_number, article_id, article_code, article_name, catalog_product_slug, catalog_variant_id, unit, pack_label, pack_confirmed, pack_count, pack_quantity, quantity,
+        INSERT INTO customer_order_lines (order_id, line_number, article_id, article_code, article_name, catalog_name, catalog_product_slug, catalog_variant_id, unit, pack_label, pack_confirmed, pack_count, pack_quantity, quantity,
           list_price, discount_percent, net_price, vat_percent, line_net, line_vat, line_gross, price_basis, price_status, on_request_reason)
-        VALUES (${orderId}, ${n}, ${l.articleId}, ${l.articleCode}, ${l.articleName}, ${mappedSlug(l.articleId)}, ${mappedVariant(l.articleId)}, ${l.unit}, ${l.packLabel}, ${l.packConfirmed}, ${l.pack ? l.packs : null}, ${l.pack ? l.pack.quantity : null}, ${l.quantity},
+        VALUES (${orderId}, ${n}, ${l.articleId}, ${l.articleCode}, ${l.articleName}, ${l.salesName}, ${mappedSlug(l.articleId)}, ${mappedVariant(l.articleId)}, ${l.unit}, ${l.packLabel}, ${l.packConfirmed}, ${l.pack ? l.packs : null}, ${l.pack ? l.pack.quantity : null}, ${l.quantity},
           NULL, NULL, NULL, NULL, NULL, NULL, NULL, ${"cena na upit"}, 'na_upit', ${ON_REQUEST_NOTE[p.reason] ?? "cenu potvrđuje kancelarija"})`);
     }
   }

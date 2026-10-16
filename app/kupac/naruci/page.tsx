@@ -96,7 +96,7 @@ export default async function RequestCatalogPage({ searchParams }: { searchParam
                   <tr key={a.articleId}>
                     <td className="pn-c-code">{a.articleCode}</td>
                     <td className="pn-c-name">
-                      <span className="pn-strong">{a.articleName}</span>
+                      <span className="pn-strong">{a.salesName ?? a.articleName}</span>
                       <span className="pn-sub">
                         {a.pack ? `Pakovanje: ${a.pack.label}` : `JM: ${a.unit}`}
                         {a.lastOn ? ` · poslednja kupovina ${dmy(a.lastOn)}` : ""}
@@ -129,7 +129,7 @@ export default async function RequestCatalogPage({ searchParams }: { searchParam
                     })}
                     <td className="pn-c-actions" data-label="">
                       {a.pack ? (
-                        <AddItem articleId={a.articleId} packLabel={a.pack.label} name={a.articleName} />
+                        <AddItem articleId={a.articleId} packLabel={a.pack.label} name={a.salesName ?? a.articleName} />
                       ) : a.procurementOnly ? (
                         <span className="pn-sub" style={{ maxWidth: 240, display: "inline-block" }}>
                           <strong>Upit za nabavku.</strong> Trenutno nije u ponudi za direktno poručivanje; nabavku, cenu i rok potvrđuje kancelarija ili

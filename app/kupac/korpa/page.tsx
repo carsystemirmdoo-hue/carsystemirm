@@ -39,7 +39,7 @@ export default async function CustomerCartPage({ searchParams }: { searchParams:
       onRequest: q.onRequest,
       correcting: q.correcting?.requestNumber ?? null,
       lines: q.lines.map((l) => ({
-        articleId: l.articleId, articleCode: l.articleCode, articleName: l.articleName, unit: l.unit, packLabel: l.packLabel, packConfirmed: l.packConfirmed,
+        articleId: l.articleId, articleCode: l.articleCode, articleName: l.salesName ?? l.articleName, unit: l.unit, packLabel: l.packLabel, packConfirmed: l.packConfirmed,
         quantity: l.quantity, step: l.step, problem: l.problem, quantityProblem: l.quantityProblem, amounts: l.amounts,
         packs: l.packs, pack: l.pack ? { label: l.pack.label, quantity: l.pack.quantity } : null,
         prices: q.options.map((o) => {

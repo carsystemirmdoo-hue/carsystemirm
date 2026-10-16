@@ -55,7 +55,8 @@ before(async () => {
 async function resetStock() {
   await db.sql`ALTER TABLE stock_import_lines DISABLE TRIGGER USER`;
   await db.sql`ALTER TABLE stock_imports DISABLE TRIGGER USER`;
-  await db.sql`TRUNCATE stock_import_lines, stock_imports`;
+  // article_sellout.ended_import_id → stock_imports (0055): prazni se zajedno (samo test baza).
+  await db.sql`TRUNCATE stock_import_lines, stock_imports, article_sellout`;
   await db.sql`ALTER TABLE stock_import_lines ENABLE TRIGGER USER`;
   await db.sql`ALTER TABLE stock_imports ENABLE TRIGGER USER`;
 }
@@ -237,4 +238,31 @@ test("PDF i XLSX istog stanja: isti sadržaj se ne upisuje dvaput; posle odbaciv
   const again = await svc.uploadStockReport(asUser(office), { fileName: "isti-dan.xlsx", bytes: XLSX });
   assert.deepEqual([again.duplicate, again.status], [false, "pregled"], "posle odbacivanja PDF-a XLSX dobija proveru");
   await svc.discardStockImport(asUser(office), { importId: again.importId, note: "kraj probe formata" });
+});
+
+test("prodaja do rasprodaje (0055): potvrđen lager sa stanjem 0 trajno povlači artikal; stanje > 0 ga ostavlja u ponudi", async (t) => {
+  if (guard(t)) return;
+  const svc = await import("@/lib/stock/stock-import-service");
+  await resetStock();
+  // 900004 je u sintetičkom izvozu sa stanjem 0, 900001 sa 12.
+  const made = await db.sql<{ id: string; code: string }[]>`INSERT INTO articles (code, name, unit) VALUES ('900004', 'SINT KIT 1 KG', 'KOM'), ('900001x', 'SINT NEMA U IZVOZU', 'KOM') RETURNING id, code`;
+  const kit = made.find((m) => m.code === "900004")!.id;
+  await db.sql`INSERT INTO article_sellout (article_id, evidence, decided_by) VALUES (${kit}, 'sintetička proba rasprodaje', ${owner.id}), (${ids["900001"]}, 'sintetička proba rasprodaje', ${owner.id})`;
+  const up = await svc.uploadStockReport(asUser(office), { fileName: "rasprodaja.csv", bytes: csvWithDate("08.09.2026") });
+  await svc.confirmStockImport(asUser(office), { importId: up.importId });
+  const out = await db.sql<{ article_id: string }[]>`SELECT article_id FROM articles_out_of_programme WHERE article_id IN (${kit}, ${ids["900001"]})`;
+  assert.deepEqual(out.map((o) => o.article_id), [kit], "samo artikal sa potvrđenim stanjem 0");
+  const [s] = await db.sql<{ ended: boolean; imp: string }[]>`SELECT ended_at IS NOT NULL AS ended, ended_import_id::text AS imp FROM article_sellout WHERE article_id = ${kit}`;
+  assert.deepEqual([s.ended, s.imp], [true, up.importId]);
+  const [d] = await db.sql<{ reason: string; by: string }[]>`SELECT reason, decided_by::text AS by FROM article_programme_decisions WHERE article_id = ${kit} ORDER BY decided_at DESC LIMIT 1`;
+  assert.match(d.reason, /Rasprodato/);
+  assert.equal(d.by, office.id, "povlačenje beleži ko je potvrdio lager");
+  await assert.rejects(db.sql`DELETE FROM article_sellout WHERE article_id = ${kit}`, (e: { code?: string }) => e.code === "42501");
+  await db.sql`ALTER TABLE article_sellout DISABLE TRIGGER USER`;
+  await db.sql`DELETE FROM article_sellout WHERE article_id IN (${kit}, ${ids["900001"]})`;
+  await db.sql`ALTER TABLE article_sellout ENABLE TRIGGER USER`;
+  await db.sql`ALTER TABLE article_programme_decisions DISABLE TRIGGER USER`;
+  await db.sql`DELETE FROM article_programme_decisions WHERE article_id = ${kit}`;
+  await db.sql`ALTER TABLE article_programme_decisions ENABLE TRIGGER USER`;
+  await db.sql`DELETE FROM articles WHERE id IN (${kit}, ${made.find((m) => m.code === "900001x")!.id})`;
 });

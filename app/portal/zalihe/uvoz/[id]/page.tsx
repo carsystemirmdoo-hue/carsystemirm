@@ -35,17 +35,21 @@ function LineTable({ rows, showPacks = false }: { rows: StockLineView[]; showPac
         <table className="portal-table lg-lines">
           <thead>
             <tr>
-              <th>Šifra</th><th>Naziv</th><th className="portal-table-number">Količina</th><th>Artikal u portalu</th>
+              <th>Šifra (BizniSoft)</th><th>Naziv</th><th className="portal-table-number">Količina</th><th>U šifarniku portala</th>
               {showPacks ? <><th>Pakovanje</th><th className="portal-table-number">Celih pakovanja</th></> : null}
             </tr>
           </thead>
           <tbody>
             {rows.slice(0, MAX_ROWS).map((l) => (
               <tr key={l.lineNo}>
-                <td>{l.sourceCode}</td>
+                {/* Šifra je TEKST: kanonska iz šifarnika portala (sa vodećim nulama); vrednost iz fajla odvojeno. */}
+                <td className="lg-code-cell">
+                  <code className="lg-code">{l.articleCode ?? l.sourceCode}</code>
+                  {l.articleCode && l.articleCode !== l.sourceCode ? <small className="lg-sub">u fajlu: {l.sourceCode}</small> : null}
+                </td>
                 <td>{l.name}</td>
                 <td className="portal-table-number">{qty(l.quantity)}{l.quantity !== null && l.quantity < 0 ? <> <Badge tone="danger">negativno</Badge></> : null}</td>
-                <td>{l.articleCode ?? "—"}</td>
+                <td>{l.articleCode ? "da" : l.link === "sudar" ? <Badge tone="danger">sudar šifara</Badge> : <Badge tone="neutral">nije u šifarniku</Badge>}</td>
                 {showPacks ? (
                   <>
                     <td>{l.unit ? `${l.packLabel} (${l.unit})` : "—"}</td>
@@ -127,6 +131,10 @@ export default async function StockImportReviewPage({ params, searchParams }: { 
       {ponovo ? (
         <p className="portal-permission-ok lg-status" role="status">
           Isti fajl je ranije pao na starijoj verziji provere. Ovo je nova provera ispravljenom verzijom; raniji pokušaj ostaje u istoriji uvoza.
+        </p>
+      ) : isti === "sadrzaj" ? (
+        <p className="portal-permission-ok lg-status" role="status">
+          Isti sadržaj (objekat, datum stanja i stavke) već je otpremljen u drugom fajlu — prikazana je postojeća provera. Drugi snimak se ne pravi.
         </p>
       ) : isti ? (
         <p className="portal-permission-ok lg-status" role="status">Isti fajl je već otpremljen {dmyTime(h.uploadedAt)} — prikazana je postojeća provera.</p>

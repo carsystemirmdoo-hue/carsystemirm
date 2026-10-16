@@ -7,7 +7,8 @@ import { can } from "@/lib/authz/permissions.mjs";
 import type { PortalUser } from "@/lib/authz/user-repository";
 import { customerDisplayDecision, customerStockLine, normalizeDisplayPolicy, STOCK_DISPLAY_SETTING } from "@/lib/stock/displayPolicy.mjs";
 import { isSinglePiece } from "@/lib/ordering/packRule.mjs";
-import { readStockFile } from "@/lib/stock/readStockFile.mjs";
+import { readStockFileAsync } from "@/lib/stock/readStockFile.mjs";
+import { stockContentFingerprint } from "@/lib/stock/contentFingerprint.mjs";
 import { buildArticleIndex, codeKey, linkLine, wholePacks } from "@/lib/stock/stockLink.mjs";
 
 /**
@@ -128,11 +129,11 @@ async function applyRetention(tx: TxLike) {
  * Otpremanje
  * ====================================================================== */
 
-export type StockUploadResult = { importId: string; duplicate: boolean; status: string; recheckOf?: string | null };
+export type StockUploadResult = { importId: string; duplicate: boolean; status: string; recheckOf?: string | null; sameContent?: boolean };
 
 export async function uploadStockReport(actor: Actor, input: { fileName: string; bytes: Uint8Array }): Promise<StockUploadResult> {
   assertCanImport(actor);
-  const file = readStockFile(input.bytes);
+  const file = await readStockFileAsync(input.bytes);
   const r = file.report;
   const db = getDb();
   const earlier = await db
@@ -145,6 +146,16 @@ export async function uploadStockReport(actor: Actor, input: { fileName: string;
   if (same) return { importId: same.id, duplicate: true, status: same.status };
   // Ostaje: isti fajl je ranije pao na STARIJOJ verziji čitača → nova provera, stari pokušaj ostaje u istoriji (0052).
   const recheckOf = earlier[0]?.id ?? null;
+  // Isti SADRŽAJ u drugom fajlu (npr. PDF i XLSX istog stanja, 0053) → postojeći zapis, bez drugog snimka.
+  const contentSha256 = r.ok ? stockContentFingerprint(r.meta, r.lines) : null;
+  if (contentSha256) {
+    const [twin] = await db
+      .select({ id: stockImports.id, status: stockImports.status })
+      .from(stockImports)
+      .where(and(eq(stockImports.contentSha256, contentSha256), inArray(stockImports.status, ["pregled", "potvrdjeno"])))
+      .limit(1);
+    if (twin) return { importId: twin.id, duplicate: true, status: twin.status, sameContent: true };
+  }
 
   const ctx = r.ok ? await linkContext(db) : null;
   // JM iz izveštaja (raspored B) samo PROVERAVA potvrđeno pakovanje — nikad ga ne zamenjuje.
@@ -180,6 +191,7 @@ export async function uploadStockReport(actor: Actor, input: { fileName: string;
       .insert(stockImports)
       .values({
         fileSha256: file.sha256,
+        contentSha256,
         fileName: safeName(input.fileName),
         fileBytes: file.bytes,
         fileFormat: file.format,
@@ -198,14 +210,14 @@ export async function uploadStockReport(actor: Actor, input: { fileName: string;
       .onConflictDoNothing()
       .returning({ id: stockImports.id });
     if (!created) {
-      // Paralelan upload istog fajla: pobedio je drugi zahtev — prikazuje se njegov zapis.
+      // Paralelan upload istog fajla ili sadržaja: pobedio je drugi zahtev — prikazuje se njegov zapis.
       const [other] = await tx
         .select({ id: stockImports.id, status: stockImports.status })
         .from(stockImports)
-        .where(eq(stockImports.fileSha256, file.sha256))
+        .where(contentSha256 ? sql`${stockImports.fileSha256} = ${file.sha256} OR ${stockImports.contentSha256} = ${contentSha256}` : eq(stockImports.fileSha256, file.sha256))
         .orderBy(desc(stockImports.uploadedAt))
         .limit(1);
-      return { importId: other.id, duplicate: true, status: other.status };
+      return { importId: other.id, duplicate: true, status: other.status, sameContent: Boolean(contentSha256) };
     }
     if (r.ok) {
       for (let i = 0; i < r.lines.length; i += 500) {

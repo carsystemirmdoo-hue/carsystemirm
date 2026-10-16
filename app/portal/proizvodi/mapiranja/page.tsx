@@ -61,8 +61,8 @@ export default async function ArticleMappingsPage({
     <>
       <PageHeader
         eyebrow="Logistika"
-        title="Mapiranja artikala"
-        description="Veza BizniSoft artikla i kataloškog proizvoda pravi se po TAČNOJ internoj šifri, nikad po nazivu. Samo POTVRĐENA veza na tačan proizvod i varijantu, uz stavku aktivnog cenovnika, čini artikal poručivim. Predlog nikad nije poručiv."
+        title="Povezivanje artikala"
+        description="Veza BizniSoft artikla (interna šifra) i tačne kataloške varijante pravi se po TAČNOJ šifri, nikad po nazivu. Prodajno pakovanje i JM potvrđuju se posebno. Samo POTVRĐENA veza na tačan proizvod i varijantu, uz stavku aktivnog cenovnika, čini artikal poručivim. Predlog nikad nije poručiv."
         meta={
           <>
             {STATUSES.map((status) => (

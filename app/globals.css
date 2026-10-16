@@ -2304,3 +2304,14 @@ html[data-route-transition="fallback"] .cs-route-transition-screen {
 [data-ds="a"] .cs-magnetic-cta::before {
   content: none;
 }
+
+/* Sajt u pripremi: ulazi „Prijava kupca“ / „Za zaposlene“ (AccountEntryStrip) */
+.coming-soon .coming-soon-entries {
+  position: relative;
+  z-index: 5;
+  margin: 0 0 1rem;
+}
+.coming-soon .coming-soon-entries nav {
+  border: 1px solid rgb(255 255 255 / 14%);
+  border-radius: 2px;
+}

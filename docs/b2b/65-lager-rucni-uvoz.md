@@ -53,6 +53,35 @@ Isti fajl (SHA-256) sa istom verzijom čitača ima jedan zapis. Fajl koji je odb
 čitača može se ponovo otpremiti: dobija novu proveru (nov zapis), a neuspešan pokušaj ostaje u istoriji
 (0052). Isti fajl nikad nema dva zapisa koji nisu „neuspešno“ — nema duplih snimaka.
 
+### 1b. PDF „Zbirni pregled po artiklima“ (od 15. 10. 2026)
+
+Tekstualni PDF iz BizniSofta „ZBIRNI PREGLED PO ARTIKLIMA“ (Period `01.01.gggg-dd.mm.gggg`, filter
+„Poslovni objekti: 021 VELEPRODAJA“) prihvata se istim tokom (izbor fajla → provera → potvrda).
+Parser `biznisoft-zbirni-pregled-pdf/1` (`lib/stock/stockReportPdf.mjs`, čita ga `unpdf` lokalno):
+
+- šifra se čita kao **tekst** sa vodećim nulama (`000007`); naziv; kolona **Stanje** = stanje na
+  poslednji dan perioda (datum stanja); JM ovaj izveštaj nema;
+- Ulaz i Izlaz služe samo kontroli (ulaz − izlaz = stanje po redu; zbirovi iz „ZBIRNI PODACI“);
+  Duguje/Potražuje/Saldo se ne čuvaju;
+- kolone se određuju po zaglavlju svake strane; broj van svoje kolone, „Prethodno stanje“ ≠ 0,
+  strana koja nedostaje („Strana N od M“), zbir koji ne odgovara, PDF bez teksta (skeniran — OCR nije
+  podržan) i drugi raspored PDF-a se **odbijaju** sa porukom (uputstvo: tekstualni PDF ili XLSX);
+- izveštaj navodi samo artikle sa prometom u periodu — izostavljen artikal je **nepoznat**, ne nula.
+
+Poređenje sa stvarnim izvozom 15. 10. 2026 (privatno): PDF 1.269 artikala = XLSX iste količine za svih
+1.269 (0 razlika), zbirovi = kontrolni; XLSX dodatno ima 541 artikal sa stanjem 0.
+
+**Isti sadržaj, drugi format (0053):** otisak sadržaja = objekat + datum stanja + stavke sa stanjem ≠ 0.
+PDF i XLSX istog stanja imaju isti otisak; drugi fajl istog sadržaja otvara postojeći zapis („Isti
+sadržaj…“), pa nema dva istovetna snimka. Različit sadržaj se ne spaja. Posle odbacivanja jednog
+formata drugi može dobiti proveru.
+
+**Šifre:** Excel čuva šifru kao broj (`004405` → `4405`): to je gubitak pri izvozu, ne greška čitanja.
+U tabeli uvoza prikazuje se kanonska šifra iz šifarnika portala kao tekst (sa vodećim nulama), a vrednost
+iz fajla odvojeno („u fajlu: 4405“); veza preko ključa bez vodećih nula samo kada postoji tačno jedan
+kandidat (sudar blokira). Tačke i zarezi se ne uklanjaju iz tekstualnih šifara i ništa se ne dopunjuje
+naslepo na šest cifara. Kataloška (proizvođačka) šifra je u „Povezivanje artikala“ posebna kolona.
+
 ## 2. Pravila
 
 | Tema | Pravilo |

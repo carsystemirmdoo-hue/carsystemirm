@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import type { CSSProperties } from "react";
 import { ComingSoonProgress } from "@/app/ComingSoonProgress";
+import { AccountEntryStrip } from "@/components/layout/AccountEntryStrip";
 import { SiteAccessForm } from "@/components/site-access/SiteAccessForm";
 import {
   getLocalSiteAccessPassword,
@@ -114,6 +115,10 @@ export default async function SiteInPreparationPage({
       </div>
 
       <div className="content-shell">
+        {/* Kupci i zaposleni ulaze i dok je sajt u pripremi; javni sajt ostaje zatvoren. */}
+        <div className="coming-soon-entries">
+          <AccountEntryStrip tone="dark" />
+        </div>
         <header className="brand-header reveal reveal-1">
           <span className="brand-mark" aria-label="Carsystem i R-M">
             <span className="brand-symbol" aria-hidden="true">

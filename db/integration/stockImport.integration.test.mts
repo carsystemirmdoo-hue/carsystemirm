@@ -51,13 +51,18 @@ before(async () => {
     VALUES (${ids["900001"]}, 5, 'LIT', '5 L', 'sintetička potvrda', ${owner.id})`;
 });
 
+/** Prazne tabele lagera (samo test baza; okidači čuvaju istoriju u radu aplikacije). */
+async function resetStock() {
+  await db.sql`ALTER TABLE stock_import_lines DISABLE TRIGGER USER`;
+  await db.sql`ALTER TABLE stock_imports DISABLE TRIGGER USER`;
+  await db.sql`TRUNCATE stock_import_lines, stock_imports`;
+  await db.sql`ALTER TABLE stock_import_lines ENABLE TRIGGER USER`;
+  await db.sql`ALTER TABLE stock_imports ENABLE TRIGGER USER`;
+}
+
 after(async () => {
   if (!reason && db) {
-    await db.sql`ALTER TABLE stock_import_lines DISABLE TRIGGER USER`;
-    await db.sql`ALTER TABLE stock_imports DISABLE TRIGGER USER`;
-    await db.sql`TRUNCATE stock_import_lines, stock_imports`;
-    await db.sql`ALTER TABLE stock_import_lines ENABLE TRIGGER USER`;
-    await db.sql`ALTER TABLE stock_imports ENABLE TRIGGER USER`;
+    await resetStock();
     await db.sql`DELETE FROM system_settings WHERE key = 'stock.customerDisplay'`;
     await db.sql`DELETE FROM article_pack_sizes WHERE article_id = ANY(${Object.values(ids)}::uuid[])`;
     await db.sql`DELETE FROM articles WHERE id = ANY(${Object.values(ids)}::uuid[])`;
@@ -171,6 +176,8 @@ const XLSX_B = readFileSync(new URL("../../fixtures/dev/biznisoft/lager/stanje-z
 test("raspored B (JM u izveštaju): JM različita od potvrđenog pakovanja → nema broja pakovanja, upozorenje", async (t) => {
   if (guard(t)) return;
   const svc = await import("@/lib/stock/stock-import-service");
+  // Isti sadržaj kao ranije potvrđeni raspored A bi dao postojeći snimak (0053) — ovde se proverava JM rasporeda B.
+  await resetStock();
   // Izveštaj vodi 900008 u LIT, a potvrđeno pakovanje je „1 kom“ u KOM.
   const [a] = await db.sql<{ id: string }[]>`INSERT INTO articles (code, name, unit) VALUES ('900008', 'SINT ČISTAČ', 'LIT') RETURNING id`;
   ids["900008"] = a.id;
@@ -208,4 +215,26 @@ test("isti fajl koji je ranije odbila starija verzija čitača: nova provera, st
     (e: { code?: string }) => e.code === "23505",
   );
   await svc.discardStockImport(asUser(office), { importId: up.importId, note: "proba ponovne provere" });
+});
+
+test("PDF i XLSX istog stanja: isti sadržaj se ne upisuje dvaput; posle odbacivanja može drugi format", async (t) => {
+  if (guard(t)) return;
+  const svc = await import("@/lib/stock/stock-import-service");
+  const PDF = readFileSync(new URL("../../fixtures/dev/biznisoft/lager/zbirni-pregled-sinteticki.pdf", import.meta.url));
+  // Čista polazna tačka za ovaj datum stanja (05.09.2026): ranije potvrđeni snimci istog sadržaja ostaju.
+  const live = await db.sql<{ id: string; status: string }[]>`SELECT id, status::text AS status FROM stock_imports WHERE stock_date = '2026-09-05' AND status IN ('pregled', 'potvrdjeno')`;
+  const pdf = await svc.uploadStockReport(asUser(office), { fileName: "zbirni.pdf", bytes: PDF });
+  if (live.length) {
+    assert.deepEqual([pdf.duplicate, pdf.sameContent, pdf.importId], [true, true, live[0].id], "isti sadržaj kao postojeći snimak");
+    return;
+  }
+  assert.deepEqual([pdf.duplicate, pdf.status], [false, "pregled"]);
+  const xlsx = await svc.uploadStockReport(asUser(office), { fileName: "isti-dan.xlsx", bytes: XLSX });
+  assert.deepEqual([xlsx.duplicate, xlsx.sameContent, xlsx.importId], [true, true, pdf.importId], "XLSX istog stanja → postojeći PDF zapis");
+  const [{ fmt }] = await db.sql<{ fmt: string }[]>`SELECT file_format AS fmt FROM stock_imports WHERE id = ${pdf.importId}`;
+  assert.equal(fmt, "pdf");
+  await svc.discardStockImport(asUser(office), { importId: pdf.importId, note: "proba drugog formata" });
+  const again = await svc.uploadStockReport(asUser(office), { fileName: "isti-dan.xlsx", bytes: XLSX });
+  assert.deepEqual([again.duplicate, again.status], [false, "pregled"], "posle odbacivanja PDF-a XLSX dobija proveru");
+  await svc.discardStockImport(asUser(office), { importId: again.importId, note: "kraj probe formata" });
 });

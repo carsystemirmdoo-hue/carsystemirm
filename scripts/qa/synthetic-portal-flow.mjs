@@ -26,7 +26,13 @@ const log = (k, v) => console.log(`${k}: ${typeof v === "string" ? v : JSON.stri
 const check = (name, ok, detail = "") => { results.push({ name, ok }); console.log(`${ok ? "PROLAZ" : "PAD   "} ${name}${detail ? " :: " + detail : ""}`); };
 const txt = async (loc) => (await loc.innerText()).replace(/\s+/g, " ").trim();
 const last = {};
-const go = (p, path) => p.goto(`${B}${path}`, { waitUntil: "networkidle", timeout: 120000 });
+// SYNTH_WAIT=load: kada pozadinsko unapred učitavanje ostane otvoreno (npr. /vodici posle promene dana), „networkidle“ se ne dostiže.
+const WAIT = process.env.SYNTH_WAIT === "load" ? "load" : "networkidle";
+const go = async (p, path) => {
+  const r = await p.goto(`${B}${path}`, { waitUntil: WAIT, timeout: 120000 });
+  if (WAIT === "load") await p.waitForTimeout(1500);
+  return r;
+};
 async function staff(page, who) {
   while (last[who] === Math.floor(Date.now() / 30000)) await new Promise((r) => setTimeout(r, 1000));
   last[who] = Math.floor(Date.now() / 30000);
@@ -70,7 +76,7 @@ async function korpa(k, pick) {
   await go(k, "/kupac/korpa");
   await k.locator("a.pn-option", { hasText: pick }).click();
   await k.waitForFunction(() => location.search.includes("opcija="), null, { timeout: 30000 });
-  await k.waitForLoadState("networkidle");
+  await k.waitForLoadState(WAIT);
 }
 async function fillAndSend(k) {
   await k.locator("#korpa-napomena").fill("Sintetička proba — isporuka do petka.");
@@ -83,7 +89,7 @@ async function confirmDialog(page, openLabel, reasonText) {
   const dlg = page.locator("dialog[open], [role=dialog]").last();
   if (reasonText) await dlg.locator("textarea, input[type=text]").first().fill(reasonText);
   await dlg.getByRole("button", { name: openLabel.replace("…", "") }).click();
-  await page.waitForLoadState("networkidle"); await page.waitForTimeout(1500);
+  await page.waitForLoadState(WAIT); await page.waitForTimeout(1500);
 }
 const A = creds.ids.A;
 const b = await chromium.launch({ channel: "chrome" }).catch(() => chromium.launch());
@@ -125,7 +131,7 @@ try {
     await korpa(k, "Odloženo");
     const zbirOd = await txt(k.locator("main"));
     check("kupac: zbir odloženo = 3.760,00 (4×700 + 2×480)", zbirOd.includes("3.760,00"), (zbirOd.match(/Osnovica[^A-Z]{0,40}/) ?? [""])[0]);
-    await k.reload({ waitUntil: "networkidle" });
+    await k.reload({ waitUntil: WAIT });
     check("kupac: osvežavanje korpe čuva stavke i opciju", (await k.locator("table.pn-table tbody tr").count()) === 3 && (await txt(k.locator("main"))).includes("3.760,00"));
     // Promena rabata posle prikaza → nova potvrda
     await korpa(k, "Avansno plaćanje");
@@ -141,7 +147,7 @@ try {
     await korpa(k, "Avansno plaćanje");
     await fillAndSend(k);
     await k.waitForFunction(() => location.pathname.startsWith("/kupac/porudzbine/"), null, { timeout: 60000 });
-    await k.waitForLoadState("networkidle");
+    await k.waitForLoadState(WAIT);
     const posl = await txt(k.locator("main"));
     check("kupac: zahtev poslat, vidi se detalj", /Z-\d{4}-\d+/.test(posl), posl.match(/Z-\d{4}-\d+/)?.[0] ?? "");
     await k.screenshot({ path: `${OUT}/k4-poslato.png`, fullPage: true });
@@ -166,7 +172,7 @@ try {
     await go(t, href);
     if (await t.getByRole("button", { name: "Preuzmite u obradu" }).count()) {
       await t.getByRole("button", { name: "Preuzmite u obradu" }).click();
-      await t.waitForLoadState("networkidle"); await t.waitForTimeout(1500);
+      await t.waitForLoadState(WAIT); await t.waitForTimeout(1500);
     }
     const potvrdaBlok = (await txt(t.locator("main"))).includes("Potvrda nije moguća dok ima stavki bez cene");
     check("kancelarija: potvrda blokirana dok postoji stavka na upit", potvrdaBlok);
@@ -181,7 +187,7 @@ try {
     const zbirPredloga = await txt(form.locator("text=Zbir predloga").locator("xpath=.."));
     check("kancelarija: provera cena predloga daje zbir 3.560,00", zbirPredloga.includes("3.560,00"), zbirPredloga.slice(0, 120));
     await form.getByRole("button", { name: /Pošaljite izmenjen predlog/ }).click();
-    await t.waitForTimeout(2500); await t.waitForLoadState("networkidle");
+    await t.waitForTimeout(2500); await t.waitForLoadState(WAIT);
     const nastao = (await sqlc`SELECT count(*)::int n FROM customer_orders WHERE status = 'awaiting_customer'`)[0].n;
     check("kancelarija: izmenjen predlog poslat kupcu", nastao === 1, `${nastao} predlog čeka kupca`);
     await t.screenshot({ path: `${OUT}/t2b-predlog.png`, fullPage: true });
@@ -191,14 +197,14 @@ try {
     const h2 = await k.locator("a", { hasText: /\/2/ }).first().getAttribute("href");
     await go(k, h2);
     await k.getByRole("button", { name: "Potvrdite predlog" }).click();
-    await k.waitForLoadState("networkidle"); await k.waitForTimeout(1500);
+    await k.waitForLoadState(WAIT); await k.waitForTimeout(1500);
     await k.screenshot({ path: `${OUT}/k5-prihvaceno.png`, fullPage: true });
     // Kancelarija: preuzmi, potvrdi, broj iz BizniSofta
     await go(t, "/portal/zahtevi");
     const h3 = await t.locator('a[href^="/portal/zahtevi/"]').filter({ hasText: /\/2/ }).first().getAttribute("href");
     await go(t, h3);
     if (await t.getByRole("button", { name: "Preuzmite u obradu" }).count()) {
-      await t.getByRole("button", { name: "Preuzmite u obradu" }).click(); await t.waitForLoadState("networkidle"); await t.waitForTimeout(1500);
+      await t.getByRole("button", { name: "Preuzmite u obradu" }).click(); await t.waitForLoadState(WAIT); await t.waitForTimeout(1500);
     }
     await confirmDialog(t, "Potvrdite porudžbinu…");
     const posle = await txt(t.locator("main"));
@@ -207,7 +213,7 @@ try {
     if (await bs.count()) {
       await bs.fill("SINT-PRED-0001");
       await bs.locator("xpath=ancestor::form").getByRole("button").last().click();
-      await t.waitForLoadState("networkidle"); await t.waitForTimeout(1500);
+      await t.waitForLoadState(WAIT); await t.waitForTimeout(1500);
       check("kancelarija: upisan broj dokumenta iz BizniSofta", (await txt(t.locator("main"))).includes("SINT-PRED-0001"));
     } else check("kancelarija: polje za broj iz BizniSofta postoji", false);
     await t.screenshot({ path: `${OUT}/t3-potvrdjeno.png`, fullPage: true });
@@ -320,7 +326,7 @@ try {
     await go(k, href);
     await k.getByRole("link", { name: "Pregled za štampu" }).click();
     await k.waitForURL((u) => u.pathname.endsWith("/stampa"), { timeout: 30000 });
-    await k.waitForLoadState("networkidle");
+    await k.waitForLoadState(WAIT);
     const doc = await txt(k.locator("article.zp-doc"));
     check("B6: pregled nosi oznaku „nije original“ i stavke sa iznosima", /NIJE ORIGINAL DOKUMENTA/.test(doc) && /SINT-RN-000\d/.test(doc) && /Ukupno/.test(doc), doc.slice(0, 120));
     await k.emulateMedia({ media: "print" });
@@ -345,7 +351,7 @@ try {
     await t.screenshot({ path: `${OUT}/c1-kartica-kancelarija.png`, fullPage: true });
     await t.locator(`a[href="/portal/prodaja?kupac=${A}"]`).click();
     await t.waitForURL((u) => u.pathname === "/portal/prodaja", { timeout: 30000 });
-    await t.waitForLoadState("networkidle");
+    await t.waitForLoadState(WAIT);
     check("B4 veza na prodaju vodi na filtrirane fakture kupca", /SINT-RN-000/.test(await txt(t.locator("main"))));
     const p = await (await b.newContext(desk)).newPage(); await staff(p, "petar");
     await go(p, `/portal/kupci/${A}`);
@@ -360,9 +366,9 @@ try {
     await g.locator('select[name="komercijalista"]').selectOption({ label: "SINT Petar Komercijalista" });
     await g.locator("form.portal-inline-form button[type=submit]").click();
     await g.waitForURL((u) => u.searchParams.has("komercijalista"), { timeout: 30000 });
-    await g.waitForLoadState("networkidle");
+    await g.waitForLoadState(WAIT);
     check("B5: filter Petar → samo njegove firme (A i D)", JSON.stringify(await rows()) === JSON.stringify(["SINT Auto Lak d.o.o.", "SINT Lakirnica D"]), (await rows()).join(" | "));
-    await g.reload({ waitUntil: "networkidle" });
+    await g.reload({ waitUntil: WAIT });
     check("B5: filter preživljava osvežavanje", (await rows()).length === 2 && (await g.locator('select[name="komercijalista"]').inputValue()) === creds.ids.petar);
     await go(g, "/portal/kupci?komercijalista=bez");
     check("B5: „Bez komercijaliste“ → firma C", JSON.stringify(await rows()) === JSON.stringify(["SINT Farbara C"]), (await rows()).join(" | "));
@@ -391,7 +397,7 @@ try {
     await g.waitForFunction(() => /Za ručnu predaju \(0\)/.test(document.querySelector("#outbox-naslov")?.textContent ?? ""), null, { timeout: 30000 });
     const st = (await sqlc`SELECT status::text AS s, handed_over_by IS NOT NULL AS ko FROM customer_message_outbox WHERE customer_user_id = ${accB}`)[0];
     check("B10: označeno predatim (status i ko)", st.s === "handed_over" && st.ko, JSON.stringify(st));
-    await g.reload({ waitUntil: "networkidle" });
+    await g.reload({ waitUntil: WAIT });
     check("B10: posle osvežavanja spisak je prazan", /Za ručnu predaju \(0\)/.test(await txt(g.locator("section", { has: g.locator("#outbox-naslov") }))));
     const j = await (await b.newContext(desk)).newPage(); await staff(j, "jovan");
     await sqlc`INSERT INTO customer_message_outbox (customer_user_id, kind) VALUES (${creds.ids.kupacA}, 'invitation')`;
@@ -416,7 +422,7 @@ try {
     await k.fill('input[name="password"]', lozinka);
     await k.fill('input[name="confirm"]', lozinka);
     await k.locator('button[type="submit"]').click();
-    await k.waitForLoadState("networkidle"); await k.waitForTimeout(2000);
+    await k.waitForLoadState(WAIT); await k.waitForTimeout(2000);
     const st = (await sqlc`SELECT status::text AS s FROM customer_users WHERE email = 'sint-proba-2@revizija.test'`)[0]?.s;
     check("B11: aktivacija završena (nalog aktivan) bez zaglavljivanja", st === "active", `${st} · ${new URL(k.url()).pathname}`);
   }
@@ -458,12 +464,12 @@ try {
     const red = t.locator("tr, li, article").filter({ hasText: broj }).first();
     if (await red.getByRole("button", { name: /Preuzmite/ }).count()) {
       await red.getByRole("button", { name: /Preuzmite/ }).click();
-      await t.waitForLoadState("networkidle"); await t.waitForTimeout(1500);
+      await t.waitForLoadState(WAIT); await t.waitForTimeout(1500);
     }
     const red2 = t.locator("tr, li, article").filter({ hasText: broj }).first();
     await red2.locator("textarea").fill("Sintetički odgovor: cena 1.234,00 bez PDV-a; javite se za količinu.");
     await red2.getByRole("button", { name: /Pošaljite|Odgovorite|Sačuvajte/ }).first().click();
-    await t.waitForLoadState("networkidle"); await t.waitForTimeout(1500);
+    await t.waitForLoadState(WAIT); await t.waitForTimeout(1500);
     const st = (await sqlc`SELECT status::text AS s, answer IS NOT NULL AS a FROM customer_price_requests WHERE request_number = ${broj}`)[0];
     check("upit: kancelarija je odgovorila (status i odgovor u bazi)", Boolean(st?.a), JSON.stringify(st));
     await go(k, "/kupac/upiti");
@@ -499,7 +505,7 @@ try {
       await p.fill("input[name=email]", c.email);
       await p.fill("input[name=password]", c.password);
       await Promise.all([p.waitForURL((u) => u.pathname !== "/prijava/kupac", { timeout: 60000 }), p.keyboard.press("Enter")]);
-      await p.waitForLoadState("networkidle");
+      await p.waitForLoadState(WAIT);
     }
     // Status u identitetu varijante (ProductIdentity: <small>Status</small><strong>…</strong>).
     const statusOf = async (p) => { await p.waitForTimeout(600); return txt(p.locator('xpath=//*[normalize-space(text())="Status"]/following-sibling::*[1]').first()); };
@@ -599,7 +605,7 @@ try {
     await go(a.page, FILLER);
     await a.page.getByRole("button", { name: /Moj nalog/ }).click();
     await a.page.getByRole("menuitem", { name: "Odjavite se" }).click();
-    await a.page.waitForLoadState("networkidle"); await a.page.waitForTimeout(1500);
+    await a.page.waitForLoadState(WAIT); await a.page.waitForTimeout(1500);
     check("sajt: odjava vraća na isti proizvod, panel nestaje", pathOf(a.page) === FILLER && (await panelOf(a.page).count()) === 0, pathOf(a.page));
     const posle = await a.ctx.request.get(`${B}/api/kupac/ponude`);
     const posleBody = await posle.text();
@@ -669,7 +675,7 @@ try {
     await korpa(k, "Avansno plaćanje");
     await fillAndSend(k);
     await k.waitForFunction(() => location.pathname.startsWith("/kupac/porudzbine/"), null, { timeout: 60000 });
-    await k.waitForLoadState("networkidle");
+    await k.waitForLoadState(WAIT);
     const broj = (await txt(k.locator("main"))).match(/Z-\d{4}-\d+/)?.[0] ?? "";
     check("sajt: zahtev poslat iz korpe napunjene sa sajta", Boolean(broj), broj);
     const red = await sqlc`SELECT l.article_code, l.quantity::text q, l.pack_count n, l.pack_quantity::text pq, l.net_price::text p, l.catalog_product_slug s, l.catalog_variant_id v FROM customer_order_lines l JOIN customer_orders o ON o.id = l.order_id WHERE o.customer_id = ${A} ORDER BY l.article_code`.catch((e) => [{ greska: e.message }]);
@@ -700,7 +706,7 @@ try {
     await go(t, href);
     if (await t.getByRole("button", { name: "Preuzmite u obradu" }).count()) {
       await t.getByRole("button", { name: "Preuzmite u obradu" }).click();
-      await t.waitForLoadState("networkidle"); await t.waitForTimeout(1500);
+      await t.waitForLoadState(WAIT); await t.waitForTimeout(1500);
     }
     await t.locator("details#izmena > summary").click();
     const form = t.locator("details#izmena");
@@ -712,7 +718,7 @@ try {
     check("kancelarija: predlog upozorava „Izuzetak: 7 LIT nije ceo broj pakovanja (kanta 5 L)“", /Izuzetak: 7 LIT nije ceo broj pakovanja \(kanta 5 L\)/.test(fz), "");
     await t.screenshot({ path: `${OUT}/s13-kancelarija-izuzetak.png`, fullPage: true });
     await form.getByRole("button", { name: /Pošaljite izmenjen predlog/ }).click();
-    await t.waitForTimeout(2500); await t.waitForLoadState("networkidle");
+    await t.waitForTimeout(2500); await t.waitForLoadState(WAIT);
     await go(k, "/kupac/porudzbine");
     const hp = await k.locator("a", { hasText: /\/2/ }).first().getAttribute("href");
     await go(k, hp);
@@ -1080,7 +1086,7 @@ try {
     await go(t, "/portal/zahtevi");
     const href = await t.locator('a[href^="/portal/zahtevi/"]').filter({ hasText: broj }).first().getAttribute("href");
     await go(t, href);
-    if (await t.getByRole("button", { name: "Preuzmite u obradu" }).count()) { await t.getByRole("button", { name: "Preuzmite u obradu" }).click(); await t.waitForLoadState("networkidle"); await t.waitForTimeout(1500); }
+    if (await t.getByRole("button", { name: "Preuzmite u obradu" }).count()) { await t.getByRole("button", { name: "Preuzmite u obradu" }).click(); await t.waitForLoadState(WAIT); await t.waitForTimeout(1500); }
     await t.locator("details#izmena > summary").click();
     const form = t.locator("details#izmena");
     const qty = form.locator('input[aria-label^="Količina, 146958"]');
@@ -1096,7 +1102,7 @@ try {
     const okText = await txt(form);
     check("cediljke: kancelarija 1,5 KOM prolazi — „3 × paket 125 cediljki = 1,5 KOM“", /3 × paket 125 cediljki = 1,5 KOM/.test(okText), "");
     await form.getByRole("button", { name: /Pošaljite izmenjen predlog/ }).click();
-    await t.waitForTimeout(2500); await t.waitForLoadState("networkidle");
+    await t.waitForTimeout(2500); await t.waitForLoadState(WAIT);
     const [l1] = await sqlc`SELECT l.quantity::text q, l.pack_count n, l.pack_quantity::text pq FROM customer_order_lines l JOIN customer_orders o ON o.id = l.order_id WHERE o.request_number = ${broj + "/2"}`;
     check("cediljke: predlog upisan kao 1,5 KOM = 3 paketa", l1?.q === "1.500" && l1?.n === 3 && l1?.pq === "0.500", JSON.stringify(l1));
     await t.screenshot({ path: `${OUT}/cediljke-predlog.png`, fullPage: true });
@@ -1188,7 +1194,17 @@ try {
     await go(t, "/portal/zalihe/uvoz");
     await t.setInputFiles('input[name="lager"]', XLSX);
     await Promise.all([t.waitForURL(/\/portal\/zalihe\/uvoz\/[0-9a-f-]{36}/, { timeout: 60000 }), t.getByRole("button", { name: "Proverite fajl" }).click()]);
-    check("lager: raspored A istog datuma — provera prolazi", /Provera je prošla/.test(await txt(t.locator("main"))));
+    check("lager: raspored A istog sadržaja (drugi fajl) → postojeći snimak, bez drugog snimka", /Isti sadržaj/.test(await txt(t.locator("main"))) && /isti=sadrzaj/.test(t.url()), t.url());
+    // PDF „Zbirni pregled po artiklima“ istog stanja: isti tok, isti sadržaj → postojeći snimak.
+    await go(t, "/portal/zalihe/uvoz");
+    check("lager: izbor fajla navodi PDF, XLSX i CSV", /PDF, XLSX ili CSV/.test(await txt(t.locator(".lg-drop"))));
+    await t.setInputFiles('input[name="lager"]', ROOT + "/fixtures/dev/biznisoft/lager/zbirni-pregled-sinteticki.pdf");
+    await Promise.all([t.waitForURL(/\/portal\/zalihe\/uvoz\/[0-9a-f-]{36}/, { timeout: 60000 }), t.getByRole("button", { name: "Proverite fajl" }).click()]);
+    const pdfCount = (await sqlc`SELECT count(*)::int n FROM stock_imports WHERE status IN ('pregled', 'potvrdjeno') AND stock_date = '2026-09-05'`)[0].n;
+    check("lager: PDF istog stanja prepoznat kao isti sadržaj; jedan važeći snimak", /isti=sadrzaj/.test(t.url()) && pdfCount === 1, `${t.url()} · ${pdfCount}`);
+    // Šifre su tekst u tabeli: kanonska šifra iz šifarnika, vrednost iz fajla odvojeno.
+    const codeCells = await t.locator("code.lg-code").allInnerTexts();
+    check("lager: šifre prikazane kao tekst, bez separatora hiljada", codeCells.length > 0 && codeCells.every((c) => !/^\d{1,3}(\.\d{3})+$/.test(c)), codeCells.slice(0, 5).join(" "));
     await go(t, "/portal/zalihe/uvoz");
     await t.setInputFiles('input[name="lager"]', { name: "pogresan.csv", mimeType: "text/csv", buffer: Buffer.from("nije lager;1;2\n") });
     await Promise.all([t.waitForURL(/\/portal\/zalihe\/uvoz\/[0-9a-f-]{36}/, { timeout: 60000 }), t.getByRole("button", { name: "Proverite fajl" }).click()]);
@@ -1268,9 +1284,9 @@ try {
     const drugi = (await sqlc`SELECT decided_at, decided_by FROM stock_imports WHERE id = ${id}`)[0];
     const audit = (await sqlc`SELECT count(*)::int n FROM audit_log WHERE entity_type = 'Lager' AND entity_id = ${id} AND action ILIKE '%potvr%'`)[0].n;
     check("lager-mfa: ponovljen klik — poruka o već zapisanoj odluci, bez promene i bez duplikata", /već odlučeno/.test(await txt(stara.locator("main"))) && +drugi.decided_at === +prvi.decided_at && audit === 1, `audit potvrda ${audit}`);
-    const r = await t.goto(`${B}/portal/zalihe/uvoz/${id}`, { waitUntil: "networkidle", timeout: 60000 });
+    const r = await t.goto(`${B}/portal/zalihe/uvoz/${id}`, { waitUntil: WAIT, timeout: 60000 });
     check("lager-mfa: detalj posle potvrde se otvara (200)", r?.status() === 200 && /Potvrđeno/.test(await txt(t.locator("main"))), String(r?.status()));
-    const pon = await t.goto(`${B}/prijava?callbackUrl=${encodeURIComponent(`/portal/zalihe/uvoz/${id}`)}&potvrda=identitet`, { waitUntil: "networkidle", timeout: 60000 });
+    const pon = await t.goto(`${B}/prijava?callbackUrl=${encodeURIComponent(`/portal/zalihe/uvoz/${id}`)}&potvrda=identitet`, { waitUntil: WAIT, timeout: 60000 });
     check("lager-mfa: sveža potvrda — prijava odmah vraća na uvoz", new URL(t.url()).pathname === `/portal/zalihe/uvoz/${id}`, `${pon?.status()} ${t.url()}`);
     const k = await (await b.newContext(desk)).newPage(); await customer(k);
     const api = await k.evaluate(async () => (await fetch("/api/kupac/ponude", { cache: "no-store" })).json());
@@ -1335,7 +1351,7 @@ try {
       (${todayId}, 902, 902, 'SINT-C04', 'SINT-C04', 'SINT ANTISILIKON 5L', 12.5),
       (${todayId}, 903, 903, 'SINT-C07', 'SINT-C07', 'SINT HERTER NORMAL 0,5L', 0),
       (${todayId}, 904, 904, 'SINT-C06', 'SINT-C06', 'SINT LAK VOC 4L', -2)`;
-    await t.reload({ waitUntil: "networkidle" });
+    await t.reload({ waitUntil: WAIT });
     await t.getByRole("checkbox", { name: /Pregledao sam proveru/ }).check();
     await Promise.all([t.waitForURL(/ishod=potvrdjeno/, { timeout: 30000 }), t.getByRole("button", { name: "Potvrdite lager" }).click()]);
     // Pravilo čuvanja: dva potvrđena snimka zadržavaju stavke.
@@ -1343,7 +1359,7 @@ try {
     check("lager-kupci: oba potvrđena snimka zadržavaju stavke (pravilo čuvanja)", kept === 2, String(kept));
 
     const kp = await kctx.newPage();
-    await kp.goto(`${B}/proizvodi/baslac-70-10-silicone-remover-for-oil-silicone-and-grease`, { waitUntil: "networkidle", timeout: 120000 });
+    await kp.goto(`${B}/proizvodi/baslac-70-10-silicone-remover-for-oil-silicone-and-grease`, { waitUntil: WAIT, timeout: 120000 });
     await kp.locator('section[aria-label="Stanje na lageru"]').waitFor({ timeout: 30000 });
     const fresh = await txt(kp.locator('section[aria-label="Stanje na lageru"]'));
     check("lager-kupci: svež snimak — 3 × limenka 1 L i 2 × kanta 5 L (12,5 L naniže)", /Na stanju prema izvozu: 3 × limenka 1 L/.test(fresh) && /Na stanju prema izvozu: 2 × kanta 5 L/.test(fresh), fresh);
@@ -1375,6 +1391,21 @@ try {
     await g.locator('.lg-toggle [role="status"]').waitFor({ timeout: 30000 });
     const off = await kp.evaluate(async () => (await fetch("/api/kupac/ponude", { cache: "no-store" })).json());
     check("lager-kupci: posle isključivanja kupac nema stanje", off.signedIn === true && off.stock === null, JSON.stringify(off.stock));
+    // Ulazi za prijavu: vidljivi tokom održavanja, na računaru i telefonu; prijavljen → „Moj nalog“ / „Poslovni portal“.
+    for (const [label, ctxOpts] of [["računar", desk], ["telefon", phone]]) {
+      const p = await (await b.newContext(ctxOpts)).newPage();
+      await go(p, "/site-u-pripremi");
+      const nav = p.getByRole("navigation", { name: "Prijava" });
+      const ok = (await nav.getByRole("link", { name: "Prijava kupca" }).isVisible()) && (await nav.getByRole("link", { name: "Za zaposlene" }).isVisible());
+      const hrefs = [await nav.getByRole("link", { name: "Prijava kupca" }).getAttribute("href"), await nav.getByRole("link", { name: "Za zaposlene" }).getAttribute("href")];
+      check(`prijava (${label}): „Prijava kupca“ i „Za zaposlene“ na strani „sajt u pripremi“`, ok && hrefs[0]?.startsWith("/prijava/kupac") && hrefs[1] === "/prijava", hrefs.join(" "));
+      await p.screenshot({ path: `${OUT}/prijava-traka-${label}.png` });
+    }
+    const signedNav = await kp.getByRole("navigation", { name: "Prijava" }).innerText();
+    check("prijava: prijavljen kupac vidi „Moj nalog“ u traci", /Moj nalog/.test(signedNav) && !/Prijava kupca/.test(signedNav), signedNav);
+    await go(g, "/site-u-pripremi");
+    const staffNav = await g.getByRole("navigation", { name: "Prijava" }).innerText().catch(() => "");
+    check("prijava: prijavljen zaposleni vidi „Poslovni portal“", /Poslovni portal/.test(staffNav) && !/Za zaposlene/.test(staffNav), staffNav);
   }
 } catch (e) {
   check("skripta", false, String(e.message).split("\n").slice(0, 3).join(" | "));

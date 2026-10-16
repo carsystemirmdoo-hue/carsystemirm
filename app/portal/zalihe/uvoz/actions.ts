@@ -35,16 +35,18 @@ const decided = (error: unknown) => error instanceof StockImportError && error.c
 export async function uploadStockAction(_prev: StockImportActionState, formData: FormData): Promise<StockImportActionState> {
   const actor = await requireCapability("imports:write", PATH);
   const file = formData.get("lager");
-  if (!(file instanceof File) || file.size === 0) return { error: "Izaberite XLSX ili CSV izvoz lagera.", ok: null };
+  if (!(file instanceof File) || file.size === 0) return { error: "Izaberite PDF, XLSX ili CSV izvoz lagera.", ok: null };
   if (file.size > MAX_STOCK_FILE_BYTES) return { error: `Fajl je veći od ${formatMegabytes(MAX_STOCK_FILE_BYTES)}.`, ok: null };
   let importId: string;
   let duplicate = false;
   let recheck = false;
+  let sameContent = false;
   try {
     const result = await uploadStockReport(actor, { fileName: file.name, bytes: new Uint8Array(await file.arrayBuffer()) });
     importId = result.importId;
     duplicate = result.duplicate;
     recheck = Boolean(result.recheckOf);
+    sameContent = Boolean(result.sameContent);
   } catch (error) {
     const m = message(error);
     if (m) return { error: `Lager nije prihvaćen: ${m}`, ok: null };
@@ -52,7 +54,7 @@ export async function uploadStockAction(_prev: StockImportActionState, formData:
     return { error: "Otpremanje nije uspelo. Ništa nije upisano; pokušajte ponovo.", ok: null };
   }
   revalidatePath(PATH);
-  redirect(`${PATH}/${importId}${recheck ? "?ponovo=1" : duplicate ? "?isti=1" : ""}`);
+  redirect(`${PATH}/${importId}${recheck ? "?ponovo=1" : sameContent ? "?isti=sadrzaj" : duplicate ? "?isti=1" : ""}`);
 }
 
 export async function confirmStockAction(_prev: StockImportActionState, formData: FormData): Promise<StockImportActionState> {

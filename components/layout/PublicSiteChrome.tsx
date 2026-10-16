@@ -2,6 +2,7 @@
 
 import type { ReactNode } from "react";
 import { usePathname } from "next/navigation";
+import { AccountEntryStrip } from "@/components/layout/AccountEntryStrip";
 import { AccountOnlyHeader } from "@/components/layout/AccountOnlyHeader";
 import { Header } from "@/components/layout/Header";
 import { ProductSearchProvider } from "@/components/search/ProductSearchProvider";
@@ -20,6 +21,7 @@ export function PublicSiteChrome({ children, publicSiteOpen = true }: { children
   if (!publicSiteOpen && (pathname.startsWith("/kupac") || pathname.startsWith("/prijava"))) {
     return (
       <>
+        <AccountEntryStrip />
         <AccountOnlyHeader />
         {children}
       </>
@@ -33,6 +35,7 @@ export function PublicSiteChrome({ children, publicSiteOpen = true }: { children
    */
   return (
     <ProductSearchProvider>
+      <AccountEntryStrip />
       <Header />
       {children}
     </ProductSearchProvider>

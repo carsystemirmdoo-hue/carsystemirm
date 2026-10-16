@@ -37,11 +37,14 @@ export const stockImports = pgTable(
     /** Pravilo čuvanja (0051): stavke uklonjene; zapis otpremanja ostaje. */
     linesPurgedAt: timestamp("lines_purged_at", { withTimezone: true }),
     linesPurgedReason: text("lines_purged_reason"),
+    /** 0053: otisak normalizovanog sadržaja (magacin, datum stanja, stavke ≠ 0) — isti za PDF i XLSX. */
+    contentSha256: text("content_sha256"),
   },
   (t) => [
     // 0052: isti fajl + ista verzija čitača jednom; najviše jedan zapis koji nije „neuspešno“.
     unique("stock_imports_sha_parser_key").on(t.fileSha256, t.parserVersion),
     uniqueIndex("stock_imports_sha_live_key").on(t.fileSha256).where(sql`${t.status} <> 'neuspesno'`),
+    uniqueIndex("stock_imports_content_live_key").on(t.contentSha256).where(sql`${t.contentSha256} IS NOT NULL AND ${t.status} IN ('pregled', 'potvrdjeno')`),
     index("stock_imports_status_idx").on(t.status, t.decidedAt),
     index("stock_imports_uploaded_idx").on(t.uploadedAt),
   ],

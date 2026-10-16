@@ -372,6 +372,13 @@
       "when": 1792936800000,
       "tag": "0052_stock_recheck",
       "breakpoints": true
+    },
+    {
+      "idx": 53,
+      "version": "7",
+      "when": 1793023200000,
+      "tag": "0053_stock_pdf_content",
+      "breakpoints": true
     }
   ]
 }

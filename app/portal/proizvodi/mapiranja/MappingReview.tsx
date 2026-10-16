@@ -83,7 +83,8 @@ export function MappingReview({
         <table className="portal-table">
           <thead>
             <tr>
-              <th scope="col">Šifra artikla</th>
+              <th scope="col">Šifra (BizniSoft)</th>
+              <th scope="col">Šifra proizvođača</th>
               <th scope="col">Naziv</th>
               <th scope="col">Brend / grupa</th>
               <th scope="col">Kataloški proizvod</th>
@@ -96,8 +97,10 @@ export function MappingReview({
             {rows.map((row) => (
               <tr key={row.articleId}>
                 <td>
-                  <strong>{row.articleCode}</strong>
+                  {/* Interna šifra je tekst iz šifarnika (vodeće nule ostaju), ne broj. */}
+                  <code className="lg-code">{row.articleCode}</code>
                 </td>
+                <td>{row.status === "mapped" && row.catalogVariantId ? <code className="lg-code">{row.catalogVariantId}</code> : "—"}</td>
                 <td>{row.articleName}</td>
                 <td>
                   {row.brand ?? "—"}

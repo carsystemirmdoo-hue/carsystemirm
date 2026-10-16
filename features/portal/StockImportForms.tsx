@@ -5,7 +5,7 @@ import { confirmStockAction, discardStockAction, uploadStockAction, type StockIm
 
 const INITIAL: StockImportActionState = { error: null, ok: null };
 const MAX_BYTES = 4 * 1024 * 1024;
-const ACCEPT = ".xlsx,.csv,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,text/csv";
+const ACCEPT = ".pdf,.xlsx,.csv,application/pdf,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,text/csv";
 
 function Status({ state }: { state: StockImportActionState }) {
   if (state.error) return <p className="portal-login-error lg-status" role="alert">{state.error}</p>;
@@ -79,7 +79,7 @@ export function StockUploadForm() {
           ) : (
             <>
               <strong>Izaberite izvoz lagera</strong>
-              <small>XLSX ili CSV iz BizniSofta, do 4 MB — ili prevucite fajl ovde</small>
+              <small>PDF, XLSX ili CSV iz BizniSofta, do 4 MB — ili prevucite fajl ovde</small>
             </>
           )}
         </span>

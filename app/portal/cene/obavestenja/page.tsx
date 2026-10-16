@@ -15,7 +15,7 @@ export const dynamic = "force-dynamic";
 export default async function RebateNoticesPage() {
   const user = await requireCapability("rebates:edit", "/portal/cene/obavestenja");
   const notices = await listMyNotices(user);
-  const lead = user.role === "gazda" ? "Izmene rabata koje su sačuvali komercijalisti." : "Izmene rabata koje je gazda sačuvao za Vaše kupce.";
+  const lead = user.role === "gazda" ? "Izmene rabata koje su sačuvali komercijalisti." : "Izmene rabata koje je vlasnik sačuvao za Vaše kupce.";
 
   return (
     <div className="pn">

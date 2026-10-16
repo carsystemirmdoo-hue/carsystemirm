@@ -356,7 +356,7 @@ export function RebateSheetClient(props: {
                         <div className="ck-st">
                           {status ? <span className="ck-tag" data-tone={status.tone}>{status.t}</span> : null}
                           <button type="button" className="ck-link" aria-expanded={isOpen} onClick={() => setOpen((p) => ({ ...p, [row.articleId]: !p[row.articleId] }))}>
-                            {isOpen ? "Sakrij detalje" : "Detalji"}
+                            {isOpen ? "Sakrijte detalje" : "Detalji"}
                           </button>
                         </div>
                       </td>
@@ -503,7 +503,7 @@ export function RebateSheetClient(props: {
                       ? `Akcijski rabat važi ${dmy(from)}–${dmy(to)}. Redovni rabat se pamti i posle akcije se sam vraća, na tada važeću VP cenu.`
                       : "Upišite period akcije."}{" "}
                 <span className="pn-muted">
-                  {props.role === "komercijalista" ? "Obaveštenje dobija gazda." : props.reps.length ? `Obaveštenje dobija ${props.reps.join(", ")}.` : "Kupac nema dodeljenog komercijalistu — obaveštenje ne ide nikome."} Kupac ne dobija obaveštenje.
+                  {props.role === "komercijalista" ? "Obaveštenje dobija vlasnik." : props.reps.length ? `Obaveštenje dobija ${props.reps.join(", ")}.` : "Kupac nema dodeljenog komercijalistu — obaveštenje ne ide nikome."} Kupac ne dobija obaveštenje.
                 </span>
               </p>
               {needsReplace ? (
@@ -544,7 +544,7 @@ export function RebateSheetClient(props: {
           </div>
         </div>
       ) : (
-        <div className="ck-readonly"><strong>Samo pregled.</strong> {isOffice ? "Rabate menja komercijalista kupca ili gazda." : "Vaša uloga vidi dogovorene rabate i cene, ali ih ne menja."}</div>
+        <div className="ck-readonly"><strong>Samo pregled.</strong> {isOffice ? "Rabate menja komercijalista kupca ili vlasnik." : "Vaša uloga vidi dogovorene rabate i cene, ali ih ne menja."}</div>
       )}
     </>
   );

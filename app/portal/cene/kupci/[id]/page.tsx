@@ -27,7 +27,7 @@ export default async function RebateSheetPage({ params, searchParams }: { params
   const page = Number(sp.strana) > 0 ? Math.floor(Number(sp.strana)) : 1;
   let sheet;
   try {
-    sheet = await loadRebateSheet(user, id, { q, filter, page });
+    sheet = await loadRebateSheet(user, id, { search: q, filter, page });
   } catch (error) {
     if (error instanceof RebateSheetError && error.code === "forbidden") forbidden();
     if (error instanceof RebateSheetError && error.code === "nema") notFound();
@@ -87,7 +87,7 @@ export default async function RebateSheetPage({ params, searchParams }: { params
           <input type="search" name="q" defaultValue={q} placeholder="Pronađite artikal — naziv ili šifra" aria-label="Pronađite artikal" autoComplete="off" />
           <button type="submit" className="pn-btn" data-size="sm">Pronađite</button>
         </form>
-        <nav className="ck-chips" aria-label="Prikaži">
+        <nav className="ck-chips" aria-label="Prikaz">
           {SHEET_FILTERS.map((f) => (
             <Link key={f} href={href({ prikaz: f === "svi" ? null : f, strana: null })} className="ck-chip" aria-current={filter === f ? "true" : undefined} data-guard="izmene">
               {FILTER_LABEL[f]} <span className="pn-num">{sheet.counts[f]}</span>

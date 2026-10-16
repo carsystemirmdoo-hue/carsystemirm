@@ -53,7 +53,6 @@ export const SHEET_PAGE_SIZE = 60;
 export const SHEET_FILTERS = ["svi", "posebni", "akcije", "nepotvrdjeno", "novi"] as const;
 export type SheetFilter = (typeof SHEET_FILTERS)[number];
 
-const ISO = /^\d{4}-\d{2}-\d{2}$/;
 const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
 
 /** Današnji dan u Beogradu (YYYY-MM-DD). */
@@ -244,8 +243,8 @@ export async function listRebateCustomers(user: Viewer, query: string, limit = 8
   const db = getDb();
   const all = seesAll(user);
   const assigned = all ? null : await loadAssignedCustomerIds(user.id);
-  const q = query.trim().slice(0, 80);
-  const like = `%${q.replace(/[\\%_]/g, (m) => `\\${m}`)}%`;
+  const needle = query.trim().slice(0, 80);
+  const like = `%${needle.replace(/[\\%_]/g, (m) => `\\${m}`)}%`;
   const scope = assigned === null ? sql`true` : assigned.length ? sql`c.id IN (${sql.join(assigned.map((id) => sql`${id}::uuid`), sql`, `)})` : sql`false`;
   const rows = await db.execute<{ id: string; name: string; pib: string; city: string | null; reps: string[] | null; total: number }>(sql`
     SELECT c.id, c.name, c.pib, c.city,
@@ -254,7 +253,7 @@ export async function listRebateCustomers(user: Viewer, query: string, limit = 8
            count(*) OVER ()::int AS total
       FROM customers c
      WHERE c.active AND ${scope}
-       AND (${q} = '' OR c.name ILIKE ${like} OR c.pib ILIKE ${like} OR coalesce(c.city, '') ILIKE ${like})
+       AND (${needle} = '' OR c.name ILIKE ${like} OR c.pib ILIKE ${like} OR coalesce(c.city, '') ILIKE ${like})
      ORDER BY c.name
      LIMIT ${limit}`);
   const list = [...rows];
@@ -314,7 +313,7 @@ export type RebateSheet = {
 export async function loadRebateSheet(
   user: Viewer,
   customerId: string,
-  opts: { q?: string; filter?: SheetFilter; page?: number; articleIds?: string[] } = {},
+  opts: { search?: string; filter?: SheetFilter; page?: number; articleIds?: string[] } = {},
 ): Promise<RebateSheet> {
   if (!UUID.test(customerId)) throw new RebateSheetError("nema", "Kupac ne postoji.");
   const db = getDb();
@@ -377,8 +376,8 @@ export async function loadRebateSheet(
     nepotvrdjeno: (r) => r.cells.some((c) => c.status === "na_upit"),
     novi: (r) => r.cells.some((c) => c.newArticleDefault),
   };
-  const q = (opts.q ?? "").trim().toLowerCase();
-  const searched = q ? all.filter((r) => r.code.toLowerCase().includes(q) || r.name.toLowerCase().includes(q)) : all;
+  const needle = (opts.search ?? "").trim().toLowerCase();
+  const searched = needle ? all.filter((r) => r.code.toLowerCase().includes(needle) || r.name.toLowerCase().includes(needle)) : all;
   const counts = Object.fromEntries(SHEET_FILTERS.map((f) => [f, searched.filter(test[f]).length])) as Record<SheetFilter, number>;
   const filter = opts.filter && SHEET_FILTERS.includes(opts.filter) ? opts.filter : "svi";
   const filtered = searched.filter(test[filter]);
@@ -567,7 +566,7 @@ export async function saveRebateChanges(actor: Viewer, input: SaveInput, now = n
     );
     const recipientsNote =
       actor.role === "komercijalista"
-        ? "Gazda je dobio obaveštenje."
+        ? "Vlasnik je dobio obaveštenje."
         : recipients.length
           ? "Obaveštenje je poslato dodeljenom komercijalisti."
           : "Kupac nema dodeljenog komercijalistu — obaveštenje nije poslato nikome.";

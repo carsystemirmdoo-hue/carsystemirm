@@ -44,7 +44,7 @@ function assertOwner(actor: Actor) {
 /** Uvoz VP cenovnika (0057): gazda i kancelarija. Ručna izmena pojedinačne osnovne cene ostaje samo gazdi. */
 function assertImporter(actor: Actor) {
   if (!can(actor as PortalUser, "pricelist:import") && !can(actor as PortalUser, "pricelist:manage")) {
-    throw new PriceListError("forbidden", "Uvoz VP cenovnika rade gazda i kancelarija.");
+    throw new PriceListError("forbidden", "Uvoz VP cenovnika rade vlasnik i kancelarija.");
   }
 }
 

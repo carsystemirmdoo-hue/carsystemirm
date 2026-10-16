@@ -278,7 +278,7 @@ export function ImportDecisionForm(props: {
         <ul className="pn-small" style={{ margin: 0, paddingLeft: 18, display: "grid", gap: 3 }}>
           <li><b>Rabati kupaca se ne menjaju</b> — ni redovni, ni akcijski, ni rabat koji se vraća posle akcije. Cene kupaca se od datuma važenja računaju iz nove VP cene.</li>
           <li>Do dana pre datuma važenja važi stara VP cena.</li>
-          <li>Novi artikli dobijaju podrazumevani rabat 30 % za avans i odloženo, dok komercijalista ili gazda ne upiše dogovor; postojeći izričiti dogovori se ne prepisuju.</li>
+          <li>Novi artikli dobijaju podrazumevani rabat 30 % za avans i odloženo, dok komercijalista ili vlasnik ne upiše dogovor; postojeći izričiti dogovori se ne prepisuju.</li>
           <li>Uvoz se beleži (ko, kada, fajl, broj redova). Obaveštenja o rabatima se ne šalju, jer se rabati ne menjaju.</li>
         </ul>
         <div className="pn-fields" style={{ gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", alignItems: "end" }}>

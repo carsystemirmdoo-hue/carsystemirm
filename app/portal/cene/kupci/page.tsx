@@ -16,7 +16,7 @@ export default async function RebateCustomersPage({ searchParams }: { searchPara
   const { rows, total, seesAll } = await listRebateCustomers(user, query);
   const lead =
     user.role === "komercijalista"
-      ? "Vaši kupci: menjate i čuvate rabate za avans i odloženo. Gazda dobija obaveštenje."
+      ? "Vaši kupci: menjate i čuvate rabate za avans i odloženo. Vlasnik dobija obaveštenje."
       : user.role === "gazda"
         ? "Svi kupci. Menjate i čuvate rabate; dodeljeni komercijalista dobija obaveštenje."
         : "Dogovoreni rabati i cene kupaca — samo pregled.";

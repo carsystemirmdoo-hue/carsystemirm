@@ -19,8 +19,8 @@ import { ACTIVE_RULE_STATUSES } from "@/lib/pricing/evaluation-service";
  *  - rabati kupaca (`price_rules`) i istorijske fakture se ne diraju;
  *  - konačna cena se izračunava iz osnovne cene i rabata na dati dan.
  *
- * Svaka radnja sama proverava `pricelist:manage` (samo gazda). Skriveno dugme
- * nije ovlašćenje; akcija u `app/` dodaje svežu MFA potvrdu za upis.
+ * Uvoz (otpremanje, pregled, primena, odbacivanje) proverava `pricelist:import` (gazda i kancelarija);
+ * ručna izmena osnovne cene `pricelist:manage` (samo gazda). Skriveno dugme nije ovlašćenje; akcija u `app/` dodaje svežu MFA potvrdu za upis.
  */
 
 export class PriceListError extends Error {
@@ -41,6 +41,13 @@ function assertOwner(actor: Actor) {
   }
 }
 
+/** Uvoz VP cenovnika (0057): gazda i kancelarija. Ručna izmena pojedinačne osnovne cene ostaje samo gazdi. */
+function assertImporter(actor: Actor) {
+  if (!can(actor as PortalUser, "pricelist:import") && !can(actor as PortalUser, "pricelist:manage")) {
+    throw new PriceListError("forbidden", "Uvoz VP cenovnika rade gazda i kancelarija.");
+  }
+}
+
 const ENTITY = "Cenovnik";
 const ISO = /^\d{4}-\d{2}-\d{2}$/;
 const toCents = (v: string | number) => Math.round(Number(v) * 100);
@@ -53,7 +60,7 @@ export type UploadResult = { importId: string; duplicate: boolean; rows: number;
 
 /** PDF → pročitan izveštaj → upis za pregled. Strukturna greška baca PriceListError (ništa se ne upisuje). */
 export async function uploadPriceList(actor: Actor, input: { fileName: string; bytes: Uint8Array }): Promise<UploadResult> {
-  assertOwner(actor);
+  assertImporter(actor);
   let report;
   try {
     report = await readStockPriceReport(input.bytes);
@@ -69,7 +76,7 @@ type ParsedReport = Awaited<ReturnType<typeof readStockPriceReport>>;
 
 /** Upis već pročitanog izveštaja (odvojeno radi testova). Isti SHA-256 vraća postojeće otpremanje. */
 export async function recordPriceListReport(actor: Actor, input: { fileName: string; report: ParsedReport }): Promise<UploadResult> {
-  assertOwner(actor);
+  assertImporter(actor);
   const r = input.report;
   const db = getDb();
   const [existing] = await db
@@ -199,7 +206,7 @@ export function checksAllowApply(checks: unknown) {
  * osnovna cena kao informacija (nije izvor cene).
  */
 export async function loadPriceListReview(actor: Actor, importId: string, onDate?: string) {
-  assertOwner(actor);
+  assertImporter(actor);
   const db = getDb();
   const [imp] = await db
     .select()
@@ -231,7 +238,7 @@ export async function loadPriceListReview(actor: Actor, importId: string, onDate
  * poslednjom fakturom. Samo čitanje; ništa se ne upisuje.
  */
 export async function trialPriceCalculation(actor: Actor, importId: string, onDate: string, limit = 25) {
-  assertOwner(actor);
+  assertImporter(actor);
   if (!ISO.test(onDate)) throw new PriceListError("datum", "Neispravan datum.");
   const db = getDb();
   const [rows, byCode] = await Promise.all([importRows(importId), articlesByCode()]);
@@ -250,7 +257,7 @@ export async function trialPriceCalculation(actor: Actor, importId: string, onDa
       SELECT id, customer_scope::text AS "customerScope", product_scope::text AS "productScope", value_kind::text AS "valueKind",
              customer_id AS "customerId", customer_group_id AS "customerGroupId", article_id AS "articleId", product_group AS "productGroup", brand,
              discount_percent::text AS "discountPercent", net_price::text AS "netPrice", effective_from::text AS "effectiveFrom",
-             effective_to::text AS "effectiveTo", status::text AS status
+             effective_to::text AS "effectiveTo", status::text AS status, payment_condition AS "paymentCondition", rule_kind AS "ruleKind"
         FROM price_rules WHERE status::text IN (${statuses})`),
     db.execute<{ customer_id: string; group_id: string }>(sql`SELECT customer_id, group_id FROM customer_group_members`),
     db.execute<{ id: string; product_group: string | null; brand: string | null }>(sql`SELECT id, product_group, brand FROM articles`),
@@ -326,7 +333,7 @@ export async function applyPriceList(
   actor: Actor,
   input: { importId: string; validFrom: string; confirmedUnclearCodes: string[]; note?: string | null },
 ) {
-  assertOwner(actor);
+  assertImporter(actor);
   if (!ISO.test(input.validFrom)) throw new PriceListError("datum", "Izaberite datum početka važenja.");
   const today = new Date().toISOString().slice(0, 10);
   const maxAhead = new Date(Date.now() + 366 * 86400000).toISOString().slice(0, 10);
@@ -385,7 +392,7 @@ export async function applyPriceList(
 }
 
 export async function discardPriceList(actor: Actor, input: { importId: string; note: string }) {
-  assertOwner(actor);
+  assertImporter(actor);
   const note = input.note.trim();
   if (note.length < 5) throw new PriceListError("razlog", "Upišite razlog odbacivanja (bar 5 znakova).");
   return getDb().transaction(async (tx) => {

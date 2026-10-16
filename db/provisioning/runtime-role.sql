@@ -90,6 +90,10 @@ REVOKE DELETE, TRUNCATE ON article_sales_names FROM :runtime_role;
 REVOKE DELETE, TRUNCATE ON article_sellout FROM :runtime_role;
 -- 0056: obavezan par se ne briše; povlačenje je jednokratni UPDATE revoked_at (sužava okidač).
 REVOKE DELETE, TRUNCATE ON article_required_pairs FROM :runtime_role;
+-- 0057: podrazumevani rabat novog artikla i izričita veza šifre iz cenovnika se samo dodaju.
+--       Obaveštenja o izmeni rabata (rebate_change_notices) zadržavaju UPDATE (pročitano) i DELETE (brišu se posle 10 dana).
+REVOKE UPDATE, DELETE, TRUNCATE ON article_new_defaults, article_code_aliases FROM :runtime_role;
+GRANT SELECT, INSERT ON article_new_defaults, article_code_aliases TO :runtime_role;
 -- 0051: čišćenje starijih stavki lagera SAMO kroz ograničen postupak (bez opšteg DELETE).
 DO $$
 BEGIN

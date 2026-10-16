@@ -83,20 +83,20 @@ export function CustomerAccountMenu({ variant = "desktop", onNavigate }: { varia
 
   if (!state.signedIn) {
     if (!state.loginLink) return null;
-    const href = `/prijava/kupac?callbackUrl=${encodeURIComponent(pathname || "/")}`;
+    const href = `/prijava?callbackUrl=${encodeURIComponent(pathname || "/")}`;
     // Varijanta se bira bez promene putanje — adresa za povratak se čita tek pri kliku.
     const toLogin = (e: React.MouseEvent) => {
       e.preventDefault();
       onNavigate?.();
-      router.push(`/prijava/kupac?callbackUrl=${encodeURIComponent(here(pathname))}`);
+      router.push(`/prijava?callbackUrl=${encodeURIComponent(here(pathname))}`);
     };
     return variant === "mobile" ? (
       <Link href={href} className={styles.mobileLink} onClick={toLogin}>
-        Prijava za kupce
+        Prijava
       </Link>
     ) : (
       // Kompaktno, kao pretraga: puna reč bi sabila glavnu navigaciju.
-      <Link href={href} className={styles.login} onClick={toLogin} aria-label="Prijava za kupce" title="Prijava za kupce" data-account="signed-out">
+      <Link href={href} className={styles.login} onClick={toLogin} aria-label="Prijava (kupci i zaposleni)" title="Prijava" data-account="signed-out">
         <UserIcon />
       </Link>
     );

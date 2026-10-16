@@ -32,13 +32,17 @@ async function staff(page, who) {
   while (last[who] === Math.floor(Date.now() / 30000)) await new Promise((r) => setTimeout(r, 1000));
   last[who] = Math.floor(Date.now() / 30000);
   const c = creds[who];
-  await go(page, "/prijava");
+  // Zajednički ekran prijave: kartica „Zaposleni“, pa dva koraka (lozinka → kod).
+  await go(page, "/prijava?za=zaposleni");
   await page.fill("input[name=email]", c.email);
   await page.fill("input[name=password]", c.password);
   for (let attempt = 1; attempt <= 2; attempt++) {
     // Kod tek posle početka novog prozora: kod sa granice može isteći dok putuje.
     while (Date.now() % 30000 > 25000) await new Promise((r) => setTimeout(r, 500));
-    await page.fill("input[name=password]", c.password);
+    if (!(await page.locator("input[name=secondFactor]").isVisible())) {
+      await page.fill("input[name=password]", c.password);
+      await page.getByRole("button", { name: "Nastavite" }).click();
+    }
     await page.fill("input[name=secondFactor]", totp(c.totpBase32));
     await page.keyboard.press("Enter");
     try {
@@ -111,7 +115,7 @@ try {
     const k = await (await b.newContext(desk)).newPage();
     const errors = []; k.on("response", (r) => { if (r.status() >= 500) errors.push(`${r.status()} ${new URL(r.url()).pathname}`); });
     await customer(k);
-    check("kupac: prijava vodi na /kupac", new URL(k.url()).pathname.startsWith("/kupac"), new URL(k.url()).pathname);
+    check("kupac: prijava bez povratne strane vodi na početnu („Moj nalog“ ostaje u zaglavlju)", new URL(k.url()).pathname === "/", new URL(k.url()).pathname);
     await go(k, "/kupac/fakture");
     const fakt = await k.locator("a[href^='/kupac/fakture/']").count();
     check("kupac: spisak faktura (2 sintetičke)", fakt >= 2, `${fakt} veza`);
@@ -514,15 +518,15 @@ try {
     const panelOf = (p) => p.locator('section[aria-labelledby="buy-panel-title"]');
     async function panelText(p) { const pn = panelOf(p); await pn.waitFor({ timeout: 60000 }); await p.waitForTimeout(800); return txt(pn); }
     async function loginForm(p, c) {
-      await p.waitForURL((u) => u.pathname === "/prijava/kupac", { timeout: 60000 });
+      await p.waitForURL((u) => u.pathname === "/prijava", { timeout: 60000 });
       await p.fill("input[name=email]", c.email);
       await p.fill("input[name=password]", c.password);
-      await Promise.all([p.waitForURL((u) => u.pathname !== "/prijava/kupac", { timeout: 60000 }), p.keyboard.press("Enter")]);
+      await Promise.all([p.waitForURL((u) => u.pathname !== "/prijava", { timeout: 60000 }), p.keyboard.press("Enter")]);
       await p.waitForLoadState(WAIT);
     }
     // Status u identitetu varijante (ProductIdentity: <small>Status</small><strong>…</strong>).
     const statusOf = async (p) => { await p.waitForTimeout(600); return txt(p.locator('xpath=//*[normalize-space(text())="Status"]/following-sibling::*[1]').first()); };
-    const loginIcon = (p) => p.locator('header a[aria-label="Prijava za kupce"]').first();
+    const loginIcon = (p) => p.locator('header a[data-account="signed-out"]').first();
     const pathOf = (p) => { const u = new URL(p.url()); return decodeURIComponent(u.pathname + u.search); };
     async function cartRows(id) { return sqlc`SELECT a.code, ci.quantity::text AS q, ci.pack_count AS n FROM customer_cart_items ci JOIN articles a ON a.id = ci.article_id WHERE ci.customer_id = ${id} ORDER BY a.code`; }
 
@@ -603,16 +607,17 @@ try {
     check("sajt: nepovezana varijanta → upit za nabavku, bez dodavanja u korpu", /nije u našoj ponudi za direktno poručivanje|Pošaljite upit za nabavku/i.test(pUn) && !/Dodajte u korpu/.test(pUn), pUn.slice(0, 160));
     await a.page.screenshot({ path: `${OUT}/s4-A-na-upit.png` });
 
-    // 5. „Poručite ponovo“ u katalogu puni ISTU korpu.
+    // 5. „Za Vas“ (kartice iz potvrđenih kupovina) u katalogu puni ISTU korpu.
     await go(a.page, "/katalog");
-    const re = a.page.locator('section[aria-labelledby="reorder-title"]');
+    const re = a.page.locator('section[aria-labelledby="licno-naslov"]');
     await re.waitFor({ timeout: 60000 });
-    const item = re.locator("li", { hasText: "SINTETICKI ARTIKAL 1" }).first();
+    for (const more of await re.getByRole("button", { name: /Prikažite još/ }).all()) await more.click();
+    const item = re.locator("li").filter({ has: a.page.locator('a[href*="carsystem-2k-voc-filler-540"]') }).first();
     await item.locator('input[type="number"]').fill("1");
     await item.getByRole("button", { name: "Dodajte u korpu" }).click();
     await item.locator('[role="status"]').waitFor({ timeout: 30000 });
     await a.page.screenshot({ path: `${OUT}/s5-A-poructe-ponovo.png` });
-    check("sajt: „Poručite ponovo“ i katalog — ista korpa (C01 2 kom, C04 2 kante = 10 LIT, 900001 1)", JSON.stringify(await cartRows(A)) === JSON.stringify([{ code: "900001", q: "1.000", n: 1 }, { code: "SINT-C01", q: "2.000", n: 2 }, { code: "SINT-C04", q: "10.000", n: 2 }]), JSON.stringify(await cartRows(A)));
+    check("sajt: „Za Vas“ i katalog — ista korpa (C01 2 kom, C04 2 kante = 10 LIT, 900001 1)", JSON.stringify(await cartRows(A)) === JSON.stringify([{ code: "900001", q: "1.000", n: 1 }, { code: "SINT-C01", q: "2.000", n: 2 }, { code: "SINT-C04", q: "10.000", n: 2 }]), JSON.stringify(await cartRows(A)));
 
     // 6. Odjava sa proizvoda → ista strana, bez cena; ponovna prijava iz kataloga → katalog; korpa ostaje.
     await go(a.page, FILLER);
@@ -655,7 +660,7 @@ try {
     const ph = await win(phone);
     await go(ph.page, FILLER);
     await ph.page.getByRole("button", { name: "Otvorite meni" }).click();
-    await ph.page.getByRole("link", { name: "Prijava za kupce" }).click();
+    await ph.page.getByRole("link", { name: "Prijava", exact: true }).click();
     await loginForm(ph.page, creds.kupacD);
     check("sajt (telefon): prijava iz menija vraća na proizvod", pathOf(ph.page) === FILLER, pathOf(ph.page));
     const pPh = await panelText(ph.page);
@@ -749,27 +754,28 @@ try {
       await t.screenshot({ path: `${OUT}/s15-stampa-izuzetak.png`, fullPage: true });
     }
 
-    // 12. „Poručite ponovo“: uobičajeno 7 LIT, pakovanje kanta 5 L → bez predloga, objašnjenje, ručni unos celog broja.
+    // 12. „Za Vas“: uobičajeno 7 LIT, pakovanje kanta 5 L → bez predloga, objašnjenje, ručni unos celog broja.
     await go(k, "/katalog");
-    const reo = k.locator('section[aria-labelledby="reorder-title"]');
+    const reo = k.locator('section[aria-labelledby="licno-naslov"]');
     await reo.waitFor({ timeout: 60000 });
-    const reoLi = reo.locator("li", { hasText: "SINT-C04" }).first();
+    for (const more of await reo.getByRole("button", { name: /Prikažite još/ }).all()) await more.click();
+    const reoLi = reo.locator("li", { hasText: "kanta 5 L" }).filter({ has: k.locator('a[href*="baslac-70-10-silicone-remover"]') }).first();
     await reoLi.scrollIntoViewIfNeeded();
     const reoT = await txt(reoLi);
     const val = await reoLi.locator('input[type="number"]').inputValue();
-    check("Poručite ponovo: 7 LIT nije ceo broj kanti — polje prazno, bez tihog zaokruživanja", val === "", `vrednost „${val}“`);
-    check("Poručite ponovo: objašnjenje „Uobičajeno ste kupovali 7 LIT, a pakovanje je kanta 5 L — nije ceo broj pakovanja“", /Uobičajeno ste kupovali 7 LIT, a pakovanje je kanta 5 L — to nije ceo broj pakovanja/.test(reoT), reoT.slice(0, 220));
+    check("Za Vas: 7 LIT nije ceo broj kanti — polje prazno, bez tihog zaokruživanja", val === "", `vrednost „${val}“`);
+    check("Za Vas: objašnjenje „Uobičajeno ste kupovali 7 LIT, a pakovanje je kanta 5 L — nije ceo broj pakovanja“", /Uobičajeno ste kupovali 7 LIT, a pakovanje je kanta 5 L — to nije ceo broj pakovanja/.test(reoT), reoT.slice(0, 220));
     const before = await cartRows(A);
     await reoLi.getByRole("button", { name: "Dodajte u korpu" }).click();
     await reoLi.locator('[role="status"]').waitFor({ timeout: 30000 });
     const emptyMsg = await txt(reoLi.locator('[role="status"]'));
-    check("Poručite ponovo: prazno polje se ne šalje kao predlog — traži ceo broj pakovanja", /ceo broj pakovanja/.test(emptyMsg) && JSON.stringify(await cartRows(A)) === JSON.stringify(before), emptyMsg);
+    check("Za Vas: prazno polje se ne šalje kao predlog — traži ceo broj pakovanja", /ceo broj pakovanja/.test(emptyMsg) && JSON.stringify(await cartRows(A)) === JSON.stringify(before), emptyMsg);
     await k.screenshot({ path: `${OUT}/s16-poruci-ponovo-nedeljivo.png`, fullPage: false });
     await reoLi.locator('input[type="number"]').fill("1");
     await reoLi.getByRole("button", { name: "Dodajte u korpu" }).click();
     await k.waitForTimeout(1500);
     const reoCart = (await cartRows(A)).find((r) => r.code === "SINT-C04");
-    check("Poručite ponovo: ručno 1 kanta = 5 LIT u korpi", reoCart?.n === 1 && reoCart?.q === "5.000", JSON.stringify(reoCart));
+    check("Za Vas: ručno 1 kanta = 5 LIT u korpi", reoCart?.n === 1 && reoCart?.q === "5.000", JSON.stringify(reoCart));
 
     // 13. Baslac „0,5L“ sa JM KOM: pakovanje = 1 komad (limenka 0,5 L), cena po komadu se NE množi sa 0,5.
     await go(k, "/proizvodi/baslac-50-420-2k-clear-hardener-normal-voc");
@@ -1424,22 +1430,21 @@ try {
     await g.locator('.lg-toggle [role="status"]').waitFor({ timeout: 30000 });
     const off = await kp.evaluate(async () => (await fetch("/api/kupac/ponude", { cache: "no-store" })).json());
     check("lager-kupci: posle isključivanja kupac nema stanje", off.signedIn === true && off.stock === null, JSON.stringify(off.stock));
-    // Ulazi za prijavu: vidljivi tokom održavanja, na računaru i telefonu; prijavljen kupac → „Moj nalog“ + „Odjavite se“; „Za zaposlene“ uvek.
+    // Ulaz za prijavu tokom održavanja: jedno dugme „Prijava“ (zajednički ekran), bez zasebnog reda.
     for (const [label, ctxOpts] of [["računar", desk], ["telefon", phone]]) {
       const p = await (await b.newContext(ctxOpts)).newPage();
       await go(p, "/site-u-pripremi");
-      const nav = p.getByRole("navigation", { name: "Prijava" });
-      const ok = (await nav.getByRole("link", { name: "Prijava kupca" }).isVisible()) && (await nav.getByRole("link", { name: "Za zaposlene" }).isVisible());
-      const hrefs = [await nav.getByRole("link", { name: "Prijava kupca" }).getAttribute("href"), await nav.getByRole("link", { name: "Za zaposlene" }).getAttribute("href")];
-      check(`prijava (${label}): „Prijava kupca“ i „Za zaposlene“ na strani „sajt u pripremi“`, ok && hrefs[0]?.startsWith("/prijava/kupac") && hrefs[1] === "/prijava", hrefs.join(" "));
-      await p.screenshot({ path: `${OUT}/prijava-traka-${label}.png` });
+      const link = p.getByRole("link", { name: "Prijava", exact: true });
+      check(`prijava (${label}): „Prijava“ na strani „sajt u pripremi“ vodi na zajednički ekran`, (await link.isVisible()) && (await link.getAttribute("href")) === "/prijava" && (await p.getByRole("navigation", { name: "Prijava" }).count()) === 0);
+      await link.click();
+      await p.waitForURL((u) => u.pathname === "/prijava", { timeout: 30000 });
+      const tabs = await p.getByRole("tab").allInnerTexts();
+      check(`prijava (${label}): zajednički ekran — kartice „Kupac“ i „Zaposleni“`, tabs.join("|") === "Kupac|Zaposleni", tabs.join("|"));
+      await p.screenshot({ path: `${OUT}/prijava-zajednicka-${label}.png` });
     }
-    const signedNav = await kp.getByRole("navigation", { name: "Prijava" }).innerText();
-    check("prijava: prijavljen kupac vidi „Moj nalog“ i „Odjavite se“ u traci", /Moj nalog/.test(signedNav) && /Odjavite se/.test(signedNav) && !/Prijava kupca/.test(signedNav), signedNav);
-    await go(g, "/site-u-pripremi");
-    const staffNav = await g.getByRole("navigation", { name: "Prijava" }).innerText().catch(() => "");
-    const staffHref = await g.getByRole("navigation", { name: "Prijava" }).getByRole("link", { name: "Za zaposlene" }).getAttribute("href").catch(() => null);
-    check("prijava: „Za zaposlene“ uvek vidljivo; prijavljenog zaposlenog vodi u portal", /Za zaposlene/.test(staffNav) && staffHref === "/portal", `${staffNav} ${staffHref}`);
+    await go(kp, "/katalog");
+    const menuBtn = kp.getByRole("button", { name: /Moj nalog/ });
+    check("prijava: prijavljen kupac ima „Moj nalog“ u zaglavlju, bez zasebnog reda iznad", (await menuBtn.isVisible()) && (await kp.getByRole("navigation", { name: "Prijava" }).count()) === 0);
   }
   if (STEP === "posude") {
     // Obavezan par (0056): blanko posuda → poklopac u ISTOM broju; sprovodi server, kupac ne zaobilazi.

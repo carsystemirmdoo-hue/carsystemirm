@@ -1,6 +1,6 @@
 import { Suspense } from "react";
 import { CatalogExplorer } from "@/components/catalog/CatalogExplorer";
-import { CatalogReorder } from "@/components/catalog/CatalogReorder";
+import { CatalogForYou } from "@/components/catalog/CatalogForYou";
 import {
   CatalogCategoryLinks,
   CatalogHero,
@@ -38,7 +38,7 @@ export function CatalogPage({
         {/* Javni programi (/program), ne interni programGroups koji služe filterima. */}
         <CatalogHero brandCount={brands.filter((brand) => !brand.offeredWithin).length} programCount={publicProgramGroups.length} />
         {/* Prijavljeni kupac: sopstvena istorija. Anonimno: ništa, bez zahteva. */}
-        <CatalogReorder />
+        <CatalogForYou />
         <CatalogCategoryLinks />
         <Suspense
           fallback={

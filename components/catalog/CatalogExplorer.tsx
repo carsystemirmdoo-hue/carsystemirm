@@ -1,7 +1,9 @@
 "use client";
 
 import { matchesPhase } from "@/lib/catalog/phase-match.mjs";
-import { useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
+import { FOR_YOU_EVENT, type ForYouRanking } from "@/components/catalog/CatalogForYou";
+import { personalOrder } from "@/lib/customers/forYouRules.mjs";
 import { usePathname, useSearchParams } from "next/navigation";
 import { ManufacturerRail } from "@/components/brand/ManufacturerRail";
 import { CatalogFilters } from "@/components/catalog/CatalogFilters";
@@ -66,8 +68,11 @@ const catalogSortOptions = [
   { slug: "", label: "Preporučeno" },
   { slug: "naziv-az", label: "Naziv A–Z" },
 ] as const;
+/** Lični redosled prijavljenog kupca (CatalogForYou → `cs-licno`); nudi se samo kada postoji. */
+const PERSONAL_SORT = { slug: "licno", label: "Preporučeno za Vas" } as const;
+const MANUAL_SORT_KEY = "cs-katalog-sort-rucno";
 const catalogSortSlugs: Set<string> = new Set(
-  catalogSortOptions.map((option) => option.slug),
+  [...catalogSortOptions.map((option) => option.slug), PERSONAL_SORT.slug],
 );
 
 const rmSystemLabels: Record<RmSystemSlug, string> = {
@@ -409,7 +414,27 @@ export function CatalogExplorer({
   const [rmSystem, setRmSystem] = useState(urlFilters.rmSystem);
   const [rmSeries, setRmSeries] = useState(urlFilters.rmSeries);
   const [rmCategory, setRmCategory] = useState(urlFilters.rmCategory);
-  const [sortSlug, setSortSlug] = useState(urlFilters.sortSlug);
+  const [sortSlug, setSortSlugState] = useState(urlFilters.sortSlug);
+  const [personal, setPersonal] = useState<ForYouRanking | null>(null);
+  // Ručni izbor sortiranja ima prednost nad ličnim redosledom (i posle povratka na katalog u istoj sesiji).
+  const [manualSort, setManualSort] = useState(Boolean(urlFilters.sortSlug));
+  const setSortSlug = useCallback((value: string) => {
+    setSortSlugState(value);
+    setManualSort(true);
+    try {
+      window.sessionStorage.setItem(MANUAL_SORT_KEY, "1");
+    } catch {}
+  }, []);
+  useEffect(() => {
+    try {
+      if (window.sessionStorage.getItem(MANUAL_SORT_KEY) === "1") setManualSort(true);
+    } catch {}
+    const take = (r: ForYouRanking | undefined) => r && setPersonal(r.purchased.length ? r : null);
+    take(window.__csZaVas);
+    const on = (e: Event) => take((e as CustomEvent<ForYouRanking>).detail);
+    window.addEventListener(FOR_YOU_EVENT, on);
+    return () => window.removeEventListener(FOR_YOU_EVENT, on);
+  }, []);
   const [typeTag, setTypeTag] = useState("");
   const [productLine, setProductLine] = useState("");
   const [technicalCategory, setTechnicalCategory] = useState("");
@@ -669,7 +694,7 @@ export function CatalogExplorer({
     setRmSystem(urlFilters.rmSystem);
     setRmSeries(urlFilters.rmSeries);
     setRmCategory(urlFilters.rmCategory);
-    setSortSlug(urlFilters.sortSlug);
+    setSortSlugState(urlFilters.sortSlug);
     setActiveModule(urlFilters.activeModule);
     setTypeTag("");
     setProductLine("");
@@ -768,8 +793,21 @@ export function CatalogExplorer({
     finish,
   ]);
 
+  /*
+   * Lični redosled („Preporučeno za Vas“): podrazumevan za prijavljenog kupca sa dovoljno istorije,
+   * osim kada je kupac sam izabrao sortiranje. Uz pretragu prvo važi relevantnost upitu.
+   */
+  const effectiveSort =
+    sortSlug === PERSONAL_SORT.slug && (!personal || searchEnabled)
+      ? ""
+      : sortSlug || (!manualSort && personal?.enoughHistory && !searchEnabled ? PERSONAL_SORT.slug : "");
+
   const sortedProducts = useMemo(() => {
-    if (sortSlug === "naziv-az") {
+    if (effectiveSort === PERSONAL_SORT.slug && personal && !searchEnabled) {
+      const byId = new Map(filteredProducts.map((p) => [p.id, p]));
+      return personalOrder(filteredProducts.map((p) => p.id), personal.purchased, personal.related).order.map((id) => byId.get(id)!);
+    }
+    if (effectiveSort === "naziv-az") {
       return [...filteredProducts].sort((first, second) =>
         first.name.localeCompare(second.name, "sr-Latn"),
       );
@@ -781,7 +819,7 @@ export function CatalogExplorer({
      * poništilo rangiranje zbog kog pretraga i postoji.
      */
     return filteredProducts;
-  }, [filteredProducts, sortSlug]);
+  }, [effectiveSort, filteredProducts, personal, searchEnabled]);
 
   paginationKeyRef.current = paginationKey;
   filteredProductsLengthRef.current = sortedProducts.length;
@@ -1170,6 +1208,7 @@ export function CatalogExplorer({
           desktopFiltersCollapsed ? styles.catalogLayoutCollapsed : ""
         }`}
         aria-label="Katalog proizvoda"
+        id="katalog-proizvodi"
       >
         <div className={styles.filtersSlot}>
           <CatalogFilters
@@ -1214,6 +1253,7 @@ export function CatalogExplorer({
             technicalCategoryOptions={technicalCategoryOptions}
             finish={finish}
             finishOptions={finishOptions}
+            resultCount={sortedProducts.length}
           />
           <button
             className={`${styles.filtersExpandTab} cs-interactive-surface`}
@@ -1260,8 +1300,8 @@ export function CatalogExplorer({
           programBySlug={programBySlug}
           resultCount={sortedProducts.length}
           shownCount={visibleProducts.length}
-          sortOptions={catalogSortOptions}
-          sortSlug={sortSlug}
+          sortOptions={personal ? [PERSONAL_SORT, ...catalogSortOptions] : catalogSortOptions}
+          sortSlug={effectiveSort}
         />
       </section>
 

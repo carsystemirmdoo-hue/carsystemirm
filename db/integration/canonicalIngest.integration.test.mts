@@ -479,6 +479,12 @@ test("nijedna API ruta ne postoji van izričito dozvoljenog spiska", async (t) =
      */
     "kupac/poruci-ponovo/route.ts",
     /*
+     * „Za Vas“ (kartice i lični redosled kataloga). Kupac isključivo iz sesije, bez parametara,
+     * samo čitanje, no-store; demo podaci samo za izdvojenog test kupca.
+     * Izolacija: forYou.integration.test.mts.
+     */
+    "kupac/licno/route.ts",
+    /*
      * F8: ponude prijavljenog kupca za kartice i stranice proizvoda. Kupac
      * isključivo iz sesije, bez parametara, samo čitanje, no-store; bez lagera.
      */

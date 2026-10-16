@@ -209,18 +209,18 @@ test("stavka na upit blokira potvrdu; posle odbijenog predloga novi dobija slede
   await db.sql`UPDATE articles SET name = 'CS NOVI ARTIKAL BEZ PRAVILA' WHERE id = ${art.N1}`;
 });
 
-test("odredište kupca posle prijave i odjave zavisi od režima „sajt u pripremi“", async () => {
+test("odredište kupca posle prijave: proverena povratna strana, inače početna; odjava zavisi od „sajt u pripremi“", async () => {
   const { customerLandingAfterLogin, customerLandingAfterLogout } = await import("@/lib/authz/customer-landing");
   const prev = process.env.MAINTENANCE_MODE;
   try {
-    process.env.MAINTENANCE_MODE = "1";
-    assert.equal(customerLandingAfterLogin(null), "/kupac");
-    assert.equal(customerLandingAfterLogin("/katalog"), "/kupac", "javna strana bi vodila na /site-u-pripremi");
+    // Prijavljen kupac vidi javni sajt i dok je „u pripremi“ (middleware propušta njegovu sesiju).
+    assert.equal(customerLandingAfterLogin(null), "/");
+    assert.equal(customerLandingAfterLogin("/katalog"), "/katalog");
     assert.equal(customerLandingAfterLogin("/kupac/korpa"), "/kupac/korpa");
+    assert.equal(customerLandingAfterLogin("/site-u-pripremi"), "/");
+    process.env.MAINTENANCE_MODE = "1";
     assert.equal(customerLandingAfterLogout("/katalog"), "/prijava/kupac?poruka=odjava");
     process.env.MAINTENANCE_MODE = "0";
-    assert.equal(customerLandingAfterLogin(null), "/kupac");
-    assert.equal(customerLandingAfterLogin("/katalog"), "/katalog");
     assert.equal(customerLandingAfterLogout("/katalog"), "/katalog");
     assert.equal(customerLandingAfterLogout("/kupac/korpa"), "/");
   } finally {

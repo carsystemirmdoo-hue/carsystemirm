@@ -2305,13 +2305,23 @@ html[data-route-transition="fallback"] .cs-route-transition-screen {
   content: none;
 }
 
-/* Sajt u pripremi: ulazi „Prijava kupca“ / „Za zaposlene“ (AccountEntryStrip) */
-.coming-soon .coming-soon-entries {
+/* Sajt u pripremi: ulaz „Prijava“ (zajednički ekran za kupce i zaposlene) */
+.coming-soon .coming-soon-login {
   position: relative;
   z-index: 5;
-  margin: 0 0 1rem;
-}
-.coming-soon .coming-soon-entries nav {
-  border: 1px solid rgb(255 255 255 / 14%);
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.5rem;
+  padding: 0 1rem;
+  border: 1px solid rgb(255 255 255 / 22%);
   border-radius: 2px;
+  color: #fff;
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-decoration: none;
+}
+.coming-soon .coming-soon-login:hover,
+.coming-soon .coming-soon-login:focus-visible {
+  border-color: rgb(255 255 255 / 55%);
+  background: rgb(255 255 255 / 6%);
 }

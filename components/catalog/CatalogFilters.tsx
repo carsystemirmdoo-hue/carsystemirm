@@ -1,4 +1,4 @@
-import type { ReactNode } from "react";
+import { useEffect, useState, type ReactNode } from "react";
 import type {
   CarsystemBrand,
   ProgramGroup,
@@ -44,6 +44,7 @@ export function CatalogFilters({
   technicalCategoryOptions,
   finish,
   finishOptions,
+  resultCount,
 }: {
   activeModuleLabel: string;
   brands: CarsystemBrand[];
@@ -81,6 +82,8 @@ export function CatalogFilters({
   technicalCategoryOptions: string[];
   finish: string;
   finishOptions: string[];
+  /** Broj proizvoda za trenutne filtere — za dugme „Prikažite …“ u panelu na telefonu. */
+  resultCount: number;
 }) {
   function clearAndRestoreFocus() {
     onClear();
@@ -97,10 +100,13 @@ export function CatalogFilters({
     >
       <div className={styles.filtersStickyHeader}>
         <div className={styles.filtersHeader}>
-          <div className={styles.filtersHeaderCopy}>
-            <p className={styles.kicker}>Filteri</p>
-            <h2>Precizirajte katalog</h2>
-          </div>
+          <h2>Filteri</h2>
+          {hasActiveFilters ? (
+            <button className={styles.clearButton} type="button" data-cursor="button" onClick={clearAndRestoreFocus}>
+              <span aria-hidden="true">×</span>
+              Resetujte
+            </button>
+          ) : null}
           <div className={styles.filtersHeaderActions}>
             <button
               className={`${styles.desktopFilterCollapse} cs-interactive-surface`}
@@ -125,20 +131,6 @@ export function CatalogFilters({
               <span aria-hidden="true">×</span>
             </button>
           </div>
-        </div>
-
-        <div className={styles.filtersResetSlot}>
-          {hasActiveFilters && (
-            <button
-              className={styles.clearButton}
-              type="button"
-              data-cursor="button"
-              onClick={clearAndRestoreFocus}
-            >
-              <span aria-hidden="true">×</span>
-              Resetujte filtere
-            </button>
-          )}
         </div>
       </div>
 
@@ -260,6 +252,14 @@ export function CatalogFilters({
           </>
         )}
 
+        <SecondaryFilters
+          active={[
+            productLine,
+            technicalCategory ? formatTechnicalCategory(technicalCategory) : "",
+            finish,
+            typeTag,
+          ].filter(Boolean)}
+        >
         {productLineOptions.length > 0 && (
           <FilterField label="Linija proizvoda" htmlFor="product-line-filter">
             <SearchableCombobox
@@ -336,8 +336,46 @@ export function CatalogFilters({
             value={typeTag}
           />
         </FilterField>
+        </SecondaryFilters>
+      </div>
+
+      {/* Telefon: panel preko ekrana — primena (zatvaranje) i reset uvek na dnu, bez skrolovanja. */}
+      <div className={styles.mobileFilterFooter}>
+        <button className={styles.mobileFilterReset} type="button" onClick={clearAndRestoreFocus} disabled={!hasActiveFilters}>
+          Resetujte
+        </button>
+        <button className={styles.mobileFilterApply} type="button" onClick={onMobileClose}>
+          Prikažite {resultCount} {resultCount % 10 === 1 && resultCount % 100 !== 11 ? "proizvod" : "proizvoda"}
+        </button>
       </div>
     </aside>
+  );
+}
+
+/**
+ * Sporedni filteri: na dovoljno visokom ekranu stoje odmah (bez unutrašnjeg skrolovanja), a na
+ * nižem su pod „Još filtera“. Aktivni izbori se vide u samom naslovu i grupa se tada otvara —
+ * izabran filter nikad nije sakriven. Na telefonu (panel preko ekrana) uvek su otvoreni.
+ */
+function SecondaryFilters({ active, children }: { active: string[]; children: ReactNode }) {
+  const [roomy, setRoomy] = useState(true);
+  const [open, setOpen] = useState(false);
+  useEffect(() => {
+    const mq = window.matchMedia("(min-height: 860px), (max-width: 900px)");
+    const sync = () => setRoomy(mq.matches);
+    sync();
+    mq.addEventListener("change", sync);
+    return () => mq.removeEventListener("change", sync);
+  }, []);
+  if (roomy) return <>{children}</>;
+  return (
+    <details className={styles.moreFilters} open={open || active.length > 0} onToggle={(e) => setOpen((e.target as HTMLDetailsElement).open)}>
+      <summary>
+        <span>Još filtera</span>
+        {active.length ? <span className={styles.moreFiltersActive}>{active.join(" · ")}</span> : null}
+      </summary>
+      <div className={styles.moreFiltersBody}>{children}</div>
+    </details>
   );
 }
 

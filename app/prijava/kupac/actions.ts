@@ -38,7 +38,7 @@ export async function customerSignInAction(
    * bez nje na početnu. `/portal`, prijava i API su izričito zabranjeni —
    * vidi `normalizeCustomerReturn`.
    */
-  const safeRedirect = customerLandingAfterLogin(normalizeCustomerReturn(formData.get("callbackUrl")), await siteOpenForCustomer());
+  const safeRedirect = customerLandingAfterLogin(normalizeCustomerReturn(formData.get("callbackUrl")));
 
   /*
    * Marker za javno zaglavlje: samo „možda je prijavljen kupac", bez ikakvog

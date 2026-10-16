@@ -1,18 +1,23 @@
 import type { Metadata } from "next";
 import { redirect } from "next/navigation";
+import { LoginStart, type LoginAudience } from "@/components/auth/LoginStart";
 import { PortalLoginForm } from "@/features/portal/PortalLoginForm";
+import { getCustomerSession } from "@/lib/authz/customer-session";
+import { customerLandingAfterLogin } from "@/lib/authz/customer-landing";
+import { isRememberEnabled } from "@/lib/auth/rememberRules.mjs";
 import { landingRouteFor } from "@/lib/authz/permissions.mjs";
 import { isMfaRecent, isSecondFactorSatisfied } from "@/lib/auth/session-assurance.mjs";
 import { readMfaStatus } from "@/lib/auth/mfa-service";
-import { normalizeCallback, REAUTH_PARAM, REAUTH_VALUE, resolvePostLoginTarget } from "@/lib/authz/redirects.mjs";
+import { normalizeCallback, normalizeCustomerReturn, REAUTH_PARAM, REAUTH_VALUE, resolvePostLoginTarget } from "@/lib/authz/redirects.mjs";
 import {
   loadAuthenticatedSession,
   MFA_ENROLLMENT_ROUTE,
 } from "@/lib/authz/session";
 import "../portal/portal.css";
+import "../portal/panel.css";
 
 export const metadata: Metadata = {
-  title: "Prijava · Poslovni sistem",
+  title: "Prijava",
   robots: { index: false, follow: false, noarchive: true },
 };
 
@@ -26,7 +31,7 @@ export const dynamic = "force-dynamic";
 export default async function LoginPage({
   searchParams,
 }: {
-  searchParams: Promise<{ callbackUrl?: string; [REAUTH_PARAM]?: string }>;
+  searchParams: Promise<{ callbackUrl?: string; za?: string; poruka?: string; [REAUTH_PARAM]?: string }>;
 }) {
   const params = await searchParams;
   const { callbackUrl } = params;
@@ -66,5 +71,23 @@ export default async function LoginPage({
     );
   }
 
-  return <PortalLoginForm callbackUrl={callbackUrl ?? ""} />;
+  /*
+   * Zajednički početni ekran (kupac / zaposleni). Kartica se bira izričito (`za`), a bez nje po
+   * povratnoj adresi: portal → zaposleni, sve ostalo → kupac.
+   */
+  const audience: LoginAudience =
+    params.za === "zaposleni" || params.za === "kupac" ? params.za : normalizeCallback(callbackUrl) ? "zaposleni" : "kupac";
+  if (audience === "kupac" && (await getCustomerSession())) {
+    redirect(customerLandingAfterLogin(normalizeCustomerReturn(callbackUrl)));
+  }
+  // Samo poznati kodovi; slobodan tekst iz adrese se nikad ne prikazuje.
+  const notice =
+    params.poruka === "odjava-svi"
+      ? "Odjavljeni ste sa svih uređaja."
+      : params.poruka === "lozinka"
+        ? "Lozinka je promenjena. Prijavite se novom lozinkom — ostali uređaji su odjavljeni."
+        : params.poruka === "odjava"
+          ? "Odjavljeni ste."
+          : null;
+  return <LoginStart initial={audience} callbackUrl={callbackUrl ?? ""} rememberAvailable={isRememberEnabled()} notice={notice} />;
 }

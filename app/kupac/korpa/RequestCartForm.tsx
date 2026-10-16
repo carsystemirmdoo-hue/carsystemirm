@@ -26,6 +26,8 @@ export type RequestCartView = {
     quantity: number; step: number; problem: string | null; quantityProblem: string | null;
     /** Broj celih pakovanja koje je kupac izabrao i potvrđeno pakovanje (null = ne poručuje se preko sajta). */
     packs: number | null; pack: { label: string; quantity: number } | null;
+    /** 0056: obavezan poklopac — broj određuje server (= broj posuda), bez ručne izmene i uklanjanja. */
+    pairedWith: string[] | null;
     prices: { key: string; label: string; status: "cena" | "na_upit"; netPrice: number | null; listPrice: number | null; discountPercent: number | null; packNet: number | null }[];
     amounts: { net: number; vat: number; gross: number } | null;
   }[];
@@ -280,9 +282,14 @@ export function RequestCartForm({ view }: { view: RequestCartView }) {
                           <span className="pn-strong">{l.articleName}</span>
                           {l.pack && !isSinglePiece(l.pack, l.unit) ? <span className="pn-sub">Pakovanje: {l.pack.label}</span> : null}
                           {l.problem ? <span className="pn-error">{l.problem}</span> : null}
+                          {l.pairedWith ? <span className="pn-sub">Obavezan poklopac uz: {l.pairedWith.join(", ")} — isti broj komada kao posude.</span> : null}
                         </td>
                         <td className="pn-r" data-label="Pakovanja">
-                          {l.pack ? (
+                          {l.pack && l.pairedWith ? (
+                            <span className="pn-num pn-strong" aria-label={`Broj komada određen brojem posuda: ${fmtQty(l.quantity)} ${l.unit}`}>
+                              {fmtQty(l.quantity)} {l.unit}
+                            </span>
+                          ) : l.pack ? (
                           <span className="pn-inline" style={{ justifyContent: "flex-end", flexWrap: "nowrap" }}>
                             <input
                               key={`${l.articleId}-${l.packs}`}
@@ -353,6 +360,7 @@ export function RequestCartForm({ view }: { view: RequestCartView }) {
                           {l.amounts ? amount(l.amounts.gross) : <span className="pn-muted" style={{ fontWeight: 400 }}>nije utvrđen</span>}
                         </td>
                         <td className="pn-c-actions">
+                          {l.pairedWith ? <span className="pn-muted pn-small">uz posudu</span> : (
                           <button
                             type="button"
                             className="pn-btn"
@@ -373,6 +381,7 @@ export function RequestCartForm({ view }: { view: RequestCartView }) {
                           >
                             {busy === `x-${l.articleId}` ? "Uklanja se…" : "Uklonite"}
                           </button>
+                          )}
                         </td>
                       </tr>
                     );

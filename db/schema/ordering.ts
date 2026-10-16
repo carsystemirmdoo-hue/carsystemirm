@@ -265,6 +265,26 @@ export const articleCompanions = pgTable("article_companions", {
   ratioBasis: text("ratio_basis"),
 });
 
+/**
+ * 0056: obavezan par u jednakoj količini (blanko posuda → poklopac). Za razliku od pribora gore,
+ * server ga sprovodi: korpa usklađuje poklopac sa posudama, a slanje se odbija ako par nije jednak.
+ */
+export const articleRequiredPairs = pgTable("article_required_pairs", {
+  articleId: uuid("article_id")
+    .notNull()
+    .references(() => articles.id, { onDelete: "restrict" }),
+  companionArticleId: uuid("companion_article_id")
+    .notNull()
+    .references(() => articles.id, { onDelete: "restrict" }),
+  evidence: text("evidence").notNull(),
+  decidedBy: uuid("decided_by")
+    .notNull()
+    .references(() => users.id, { onDelete: "restrict" }),
+  decidedAt: timestamp("decided_at", { withTimezone: true }).notNull().defaultNow(),
+  revokedAt: timestamp("revoked_at", { withTimezone: true }),
+  revokedReason: text("revoked_reason"),
+});
+
 export const customerOrderEvents = pgTable(
   "customer_order_events",
   {

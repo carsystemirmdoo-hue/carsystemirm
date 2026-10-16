@@ -3,7 +3,7 @@
  *
  * Priprema: scripts/qa/seed-synthetic-portal.mts u bazu carsystem_revizija_ui_qa,
  * server iz .next-verify na 127.0.0.1:3450 (DATABASE_POOL_MAX=1 — najstrožije).
- *   node scripts/qa/synthetic-portal-flow.mjs <izlazni-folder> [sve|kupac|kancelarija|opseg|telefon|sajt|lager|lager-mfa|lager-kupci]
+ *   node scripts/qa/synthetic-portal-flow.mjs <izlazni-folder> [sve|kupac|kancelarija|opseg|telefon|sajt|lager|lager-mfa|lager-kupci|posude]
  * Menja samo sintetičku bazu (privremena promena rabata za proveru nove potvrde).
  * Lozinke i TOTP tajne čita iz SYNTH_CREDS_FILE i ne ispisuje ih.
  */
@@ -1439,6 +1439,83 @@ try {
     await go(g, "/site-u-pripremi");
     const staffNav = await g.getByRole("navigation", { name: "Prijava" }).innerText().catch(() => "");
     check("prijava: prijavljen zaposleni vidi „Poslovni portal“", /Poslovni portal/.test(staffNav) && !/Za zaposlene/.test(staffNav), staffNav);
+  }
+  if (STEP === "posude") {
+    // Obavezan par (0056): blanko posuda → poklopac u ISTOM broju; sprovodi server, kupac ne zaobilazi.
+    const owner = (await sqlc`SELECT id FROM users WHERE role = 'gazda' LIMIT 1`)[0].id;
+    const pa = {};
+    for (const [code, name, price] of [["SINT-POS1", "SINT POSUDA BLANKO 1 L", "120.00"], ["SINT-POS1S", "SINT POSUDA BLANKO 1 L STARA SIFRA", "120.00"], ["SINT-POK1", "SINT POKLOPAC ZA POSUDU 1 L", "30.00"]]) {
+      const [a] = await sqlc`INSERT INTO articles (code, name, unit, brand) VALUES (${code}, ${name}, 'KOM', 'SINT') RETURNING id`;
+      pa[code] = a.id;
+      await sqlc`INSERT INTO article_base_prices (article_id, net_price, vat_percent, valid_from, source, reason, created_by) VALUES (${a.id}, ${price}, '20', '2026-01-01', 'rucno', 'sintetička proba para', ${owner})`;
+      await sqlc`INSERT INTO article_pack_sizes (article_id, pack_quantity, unit, label, evidence, confirmed_by) VALUES (${a.id}, 1, 'KOM', '1 kom', 'sintetička proba para', ${owner})`;
+    }
+    for (const pos of ["SINT-POS1", "SINT-POS1S"]) {
+      await sqlc`INSERT INTO article_companions (article_id, companion_article_id, kind, evidence, confirmed_by) VALUES (${pa[pos]}, ${pa["SINT-POK1"]}, 'poklopac', 'sintetička proba para', ${owner})`;
+      await sqlc`INSERT INTO article_required_pairs (article_id, companion_article_id, evidence, decided_by) VALUES (${pa[pos]}, ${pa["SINT-POK1"]}, 'sintetička proba obaveznog para', ${owner})`;
+    }
+    await sqlc`DELETE FROM customer_cart_items WHERE customer_id = ${A}`;
+    const k = await (await b.newContext(desk)).newPage();
+    await bezKesa(k);
+    await customer(k);
+    const lid = async () => (await sqlc`SELECT quantity::float8 q FROM customer_cart_items WHERE customer_id = ${A} AND article_id = ${pa["SINT-POK1"]}`)[0]?.q ?? 0;
+    const ordersBefore = (await sqlc`SELECT count(*)::int n FROM customer_orders WHERE customer_id = ${A}`)[0].n;
+    // 1. Poklopac sam ne ulazi u korpu.
+    const solo = await add(k, "SINT-POK1", "2");
+    check("posude: poklopac se ne dodaje sam", !/dodat/i.test(solo) && (await lid()) === 0, solo);
+    // 2. Posuda dodaje isti broj poklopaca; druga šifra iste posude sabira se u isti poklopac.
+    log("dodaj posudu", await add(k, "SINT-POS1", "2"));
+    check("posude: 2 posude → 2 poklopca (dodato samo)", (await lid()) === 2, String(await lid()));
+    log("dodaj staru šifru", await add(k, "SINT-POS1S", "1"));
+    check("posude: stara + nova šifra iste posude → 3 poklopca", (await lid()) === 3, String(await lid()));
+    // 3. Korpa: poklopac bez polja i bez „Uklonite“, uz objašnjenje.
+    await korpa(k, "Avansno plaćanje");
+    const row = k.locator("table.pn-table tbody tr", { hasText: "SINT POKLOPAC ZA POSUDU 1 L" });
+    check("posude: red poklopca bez polja za broj i bez „Uklonite“", (await row.locator("input").count()) === 0 && (await row.getByRole("button", { name: /Uklonite/ }).count()) === 0, await txt(row));
+    check("posude: red poklopca objašnjava pravilo", /Obavezan poklopac uz: .*isti broj komada kao posude/.test(await txt(row)), await txt(row));
+    await k.screenshot({ path: `${OUT}/posude-1-korpa.png`, fullPage: true });
+    // 4. Promena broja posuda u korpi → poklopci prate.
+    const posRow = k.locator("table.pn-table tbody tr", { hasText: "SINT POSUDA BLANKO 1 L STARA SIFRA" });
+    await posRow.locator("input").fill("4");
+    await posRow.locator("input").press("Tab");
+    await k.waitForFunction(async () => true, null, { timeout: 1000 }).catch(() => {});
+    for (let i = 0; i < 30 && (await lid()) !== 6; i++) await k.waitForTimeout(500);
+    check("posude: promena posude 1 → 4 u korpi → 6 poklopaca", (await lid()) === 6, String(await lid()));
+    // 5. Zaobilaženje mimo korpe: poklopac smanjen u bazi → slanje blokirano na serveru (i dugme isključeno).
+    await sqlc`UPDATE customer_cart_items SET quantity = 2, pack_count = 2 WHERE customer_id = ${A} AND article_id = ${pa["SINT-POK1"]}`;
+    await korpa(k, "Avansno plaćanje");
+    const main = await txt(k.locator("main"));
+    check("posude: nejednak par → blokada sa razlogom", /SINT POKLOPAC ZA POSUDU 1 L: broj poklopaca mora biti jednak broju posuda \(6\), a sada je 2/.test(main), main.slice(0, 300));
+    check("posude: dugme za slanje isključeno", await k.getByRole("button", { name: "Pošaljite zahtev za porudžbinu" }).isDisabled());
+    await k.screenshot({ path: `${OUT}/posude-2-blokada.png`, fullPage: true });
+    // Direktan poziv serverske akcije (kao da je dugme uključeno u starom prikazu): server odbija.
+    await k.evaluate(() => { const btn = [...document.querySelectorAll("button")].find((x) => x.textContent.includes("Pošaljite zahtev za porudžbinu")); if (btn) btn.disabled = false; });
+    await k.locator("#korpa-adresa").fill("SINT magacin 1").catch(() => {});
+    await k.locator("#korpa-telefon").fill("060 000 0000").catch(() => {});
+    await k.getByRole("button", { name: "Pošaljite zahtev za porudžbinu" }).click({ force: true }).catch(() => {});
+    await k.waitForTimeout(3000);
+    const ordersMid = (await sqlc`SELECT count(*)::int n FROM customer_orders WHERE customer_id = ${A}`)[0].n;
+    check("posude: server ne upisuje zahtev sa nejednakim parom", ordersMid === ordersBefore, `${ordersBefore} → ${ordersMid}`);
+    // 6. Sledeća promena posude usklađuje poklopac; slanje prolazi sa jednakim parom.
+    await korpa(k, "Avansno plaćanje");
+    const posRow2 = k.locator("table.pn-table tbody tr", { hasText: "SINT POSUDA BLANKO 1 L STARA SIFRA" });
+    await posRow2.locator("input").fill("1");
+    await posRow2.locator("input").press("Tab");
+    for (let i = 0; i < 30 && (await lid()) !== 3; i++) await k.waitForTimeout(500);
+    check("posude: posle promene posude poklopac ponovo = 3", (await lid()) === 3, String(await lid()));
+    await korpa(k, "Avansno plaćanje");
+    await fillAndSend(k);
+    await k.waitForURL(/\/kupac\/porudzbine\/[0-9a-f-]{36}/, { timeout: 60000 }).catch(() => {});
+    const [ord] = await sqlc`SELECT id FROM customer_orders WHERE customer_id = ${A} ORDER BY submitted_at DESC NULLS LAST LIMIT 1`;
+    const lines = Object.fromEntries((await sqlc`SELECT article_code, quantity::float8 q FROM customer_order_lines WHERE order_id = ${ord.id}`).map((l) => [l.article_code, l.q]));
+    check("posude: poslat zahtev ima jednak par (2 + 1 posuda = 3 poklopca)", lines["SINT-POS1"] === 2 && lines["SINT-POS1S"] === 1 && lines["SINT-POK1"] === 3, JSON.stringify(lines));
+    await k.screenshot({ path: `${OUT}/posude-3-poslato.png`, fullPage: true });
+    // 7. Uklanjanje posude uklanja i poklopac.
+    log("ponovo posuda", await add(k, "SINT-POS1", "2"));
+    await korpa(k, "Avansno plaćanje");
+    await k.locator("table.pn-table tbody tr", { hasText: "SINT POSUDA BLANKO 1 L" }).filter({ hasNotText: "STARA" }).filter({ hasNotText: "POKLOPAC" }).getByRole("button", { name: /Uklonite/ }).click();
+    for (let i = 0; i < 30 && (await lid()) !== 0; i++) await k.waitForTimeout(500);
+    check("posude: uklonjena posuda → nema ni poklopca", (await lid()) === 0, String(await lid()));
   }
 } catch (e) {
   check("skripta", false, String(e.message).split("\n").slice(0, 3).join(" | "));

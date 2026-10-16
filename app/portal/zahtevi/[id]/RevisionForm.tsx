@@ -93,6 +93,8 @@ export function RevisionForm({
       ? "Prvo proverite cene — dugme za slanje se uključuje posle provere."
       : blocked
         ? "Neke stavke imaju problem (označeno u tabeli). Ispravite količinu ili uklonite stavku, pa ponovo proverite cene."
+        : preview.pairProblems.length
+          ? `Posude i poklopci moraju biti u istom broju: ${preview.pairProblems.join(" ")}`
         : reason.trim().length < 5
           ? "Upišite razlog izmene za kupca (najmanje 5 znakova)."
           : null;

@@ -1,6 +1,7 @@
 import "server-only";
 import { createHash } from "node:crypto";
 import { sql, type SQL } from "drizzle-orm";
+import { lidEditProblem, RequiredPairError, requiredPairBlockers, syncRequiredPairs } from "@/lib/ordering/required-pairs";
 import { getDb, type Database } from "@/db/client";
 import type { CustomerSession } from "@/lib/authz/customer-session";
 import type { PortalUser } from "@/lib/authz/user-repository";
@@ -389,6 +390,7 @@ export async function loadCartQuote(customerId: string, exec: Exec = getDb()): P
     ...(mode.enabled ? [] : [mode.reason]),
     ...lines.filter((l) => l.problem && l.problem.code !== "ordering_off").map((l) => `${l.articleName}: ${l.problem!.message}`),
     ...lines.filter((l) => l.quantityProblem).map((l) => `${l.articleName}: ${l.quantityProblem}`),
+    ...(await requiredPairBlockers(exec, lines.map((l) => ({ articleId: l.articleId, quantity: l.quantity })))),
   ];
   return {
     mode,
@@ -419,16 +421,18 @@ export async function addToCart(session: CustomerSession, input: { articleCode: 
   if (qp) return { ok: false, message: qp };
   const q = parseQuantity(input.quantity);
   const db = getDb();
-  const [row] = [
-    ...(await db.execute<{ quantity: string }>(sql`
+  // 0056: poklopac obaveznog para ide sam uz posudu; ručno dodavanje se odbija.
+  const lid = await lidEditProblem(db, customerId, offer.articleId, Number.NaN);
+  if (lid) return { ok: false, message: lid };
+  const failed = await pairedCartChange(customerId, session.accountId, async (tx) => {
+    await tx.execute(sql`
       INSERT INTO customer_cart_items (customer_id, article_id, quantity, added_by)
       VALUES (${customerId}, ${offer.articleId}, ${q}, ${session.accountId})
       ON CONFLICT (customer_id, article_id)
       DO UPDATE SET quantity = LEAST(customer_cart_items.quantity + EXCLUDED.quantity, ${MAX_LINE_QUANTITY}),
-                    updated_at = now()
-      RETURNING quantity::text AS quantity`)),
-  ];
-  void row;
+                    updated_at = now()`);
+  });
+  if (failed) return { ok: false, message: failed };
   return { ok: true, count: await cartCount(customerId, db) };
 }
 
@@ -437,8 +441,14 @@ export async function setCartQuantity(session: CustomerSession, input: { article
   const customerId = session.customerId;
   if (!customerId) throw new Error("Upit kupca bez customer_id se ne sme izvršiti.");
   const db = getDb();
+  if (!/^[0-9a-f-]{36}$/i.test(String(input.articleId))) return { ok: false, message: "Stavka nije u korpi." };
   if (String(input.quantity ?? "").trim() === "" || Number(input.quantity) === 0) {
-    await db.execute(sql`DELETE FROM customer_cart_items WHERE customer_id = ${customerId} AND article_id = ${input.articleId}::uuid`);
+    const lid = await lidEditProblem(db, customerId, input.articleId, null);
+    if (lid) return { ok: false, message: lid };
+    const failed = await pairedCartChange(customerId, session.accountId, async (tx) => {
+      await tx.execute(sql`DELETE FROM customer_cart_items WHERE customer_id = ${customerId} AND article_id = ${input.articleId}::uuid`);
+    });
+    if (failed) return { ok: false, message: failed };
     return { ok: true, count: await cartCount(customerId, db) };
   }
   const quote = await loadCartQuote(customerId, db);
@@ -446,10 +456,30 @@ export async function setCartQuantity(session: CustomerSession, input: { article
   if (!line) return { ok: false, message: "Stavka nije u korpi." };
   const qp = quantityProblem(input.quantity, line.price ?? {});
   if (qp) return { ok: false, message: qp };
-  await db.execute(sql`
-    UPDATE customer_cart_items SET quantity = ${parseQuantity(input.quantity)}, updated_at = now()
-     WHERE customer_id = ${customerId} AND article_id = ${input.articleId}::uuid`);
+  const lid = await lidEditProblem(db, customerId, input.articleId, parseQuantity(input.quantity));
+  if (lid) return { ok: false, message: lid };
+  const failed = await pairedCartChange(customerId, session.accountId, async (tx) => {
+    await tx.execute(sql`
+      UPDATE customer_cart_items SET quantity = ${parseQuantity(input.quantity)}, updated_at = now()
+       WHERE customer_id = ${customerId} AND article_id = ${input.articleId}::uuid`);
+  });
+  if (failed) return { ok: false, message: failed };
   return { ok: true, count: await cartCount(customerId, db) };
+}
+
+/** Promena korpe + usklađivanje obaveznih parova (0056) u jednoj transakciji, pod bravom firme. */
+async function pairedCartChange(customerId: string, accountId: string | null, change: (tx: Tx) => Promise<void>): Promise<string | null> {
+  try {
+    await getDb().transaction(async (tx) => {
+      await tx.execute(sql`SELECT id FROM customers WHERE id = ${customerId} FOR UPDATE`);
+      await change(tx);
+      await syncRequiredPairs(tx, customerId, accountId);
+    });
+    return null;
+  } catch (e) {
+    if (e instanceof RequiredPairError) return e.message;
+    throw e;
+  }
 }
 
 export async function removeFromCart(session: CustomerSession, articleId: string): Promise<CartChange> {

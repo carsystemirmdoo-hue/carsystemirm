@@ -88,6 +88,8 @@ REVOKE DELETE, TRUNCATE ON internal_equipment FROM :runtime_role;
 -- 0055: prodajni nazivi i rasprodaje se ne brišu (izmena naziva i jednokratni završetak rasprodaje ostaju).
 REVOKE DELETE, TRUNCATE ON article_sales_names FROM :runtime_role;
 REVOKE DELETE, TRUNCATE ON article_sellout FROM :runtime_role;
+-- 0056: obavezan par se ne briše; povlačenje je jednokratni UPDATE revoked_at (sužava okidač).
+REVOKE DELETE, TRUNCATE ON article_required_pairs FROM :runtime_role;
 -- 0051: čišćenje starijih stavki lagera SAMO kroz ograničen postupak (bez opšteg DELETE).
 DO $$
 BEGIN

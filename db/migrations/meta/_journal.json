@@ -393,6 +393,13 @@
       "when": 1793196000000,
       "tag": "0055_article_sales_names_sellout",
       "breakpoints": true
+    },
+    {
+      "idx": 56,
+      "version": "7",
+      "when": 1793282400000,
+      "tag": "0056_article_required_pairs",
+      "breakpoints": true
     }
   ]
 }

@@ -26,6 +26,7 @@ export class StaleVersionError extends Error {
 import { foldedMatch } from "@/lib/ordering/search-fold";
 import { isUuid } from "@/lib/sales/filterInput.mjs";
 import { notifyOrderSubmitted } from "@/lib/ordering/order-notifications";
+import { lidEditProblem, RequiredPairError, requiredPairBlockers, requiredPairView, syncRequiredPairs } from "@/lib/ordering/required-pairs";
 
 /**
  * Zahtev za porudžbinu iz STVARNOG cenovnika (0044):
@@ -111,6 +112,8 @@ export type RequestQuote = {
   canSubmit: boolean;
   blockers: string[];
   correcting: { orderId: string; requestNumber: string } | null;
+  /** 0056: poklopci obaveznog para → nazivi posuda; broj im određuje server, kupac ga ne menja. */
+  pairedLids: Record<string, string[]>;
 };
 
 const keyOf = (code: string | null) => code ?? "osnovni";
@@ -374,7 +377,9 @@ export async function loadRequestQuote(customerId: string, option: string | null
     ...(cart.length ? [] : ["Korpa je prazna."]),
     ...priced.lines.filter((l) => l.problem).map((l) => `${l.articleName}: ${l.problem}`),
     ...priced.lines.filter((l) => l.quantityProblem).map((l) => `${l.articleName}: ${l.quantityProblem}`),
+    ...(await requiredPairBlockers(exec, priced.lines.map((l) => ({ articleId: l.articleId, quantity: l.quantity })))),
   ];
+  const pairedLids = Object.fromEntries(await requiredPairView(exec, priced.lines.map((l) => l.articleId)));
   return {
     enabled,
     reason: enabled ? null : "Poručivanje preko sajta još nije uključeno.",
@@ -402,6 +407,7 @@ export async function loadRequestQuote(customerId: string, option: string | null
     canSubmit: blockers.length === 0,
     blockers,
     correcting,
+    pairedLids,
   };
 }
 
@@ -471,13 +477,19 @@ export async function addRequestItem(session: CustomerSession, input: { articleI
   if (!parsed.ok) return { ok: false, message: parsed.message };
   const pack = await packFor(db, input.articleId);
   if (!pack || pack.status !== "pack") return { ok: false, message: pack?.status === "blocked" && pack.reason === PROCUREMENT_ONLY ? PROCUREMENT_ONLY : NO_PACK };
-  await db.execute(sql`
-    INSERT INTO customer_cart_items (customer_id, article_id, quantity, pack_count, added_by)
-    VALUES (${customerId}, ${input.articleId}::uuid, ${billingQuantity(parsed.packs, pack.packQuantity)}, ${parsed.packs}, ${session.accountId})
-    ON CONFLICT (customer_id, article_id)
-    DO UPDATE SET pack_count = LEAST(COALESCE(customer_cart_items.pack_count, 0) + EXCLUDED.pack_count, ${MAX_PACKS}),
-                  quantity = LEAST(COALESCE(customer_cart_items.pack_count, 0) + EXCLUDED.pack_count, ${MAX_PACKS}) * ${pack.packQuantity}::numeric,
-                  updated_at = now()`);
+  // 0056: poklopac obaveznog para ne dodaje se ručno — ide sam, uz posudu.
+  const lid = await lidEditProblem(db, customerId, input.articleId, Number.NaN);
+  if (lid) return { ok: false, message: lid };
+  const failed = await pairedCartChange(customerId, session.accountId, async (tx) => {
+    await tx.execute(sql`
+      INSERT INTO customer_cart_items (customer_id, article_id, quantity, pack_count, added_by)
+      VALUES (${customerId}, ${input.articleId}::uuid, ${billingQuantity(parsed.packs, pack.packQuantity)}, ${parsed.packs}, ${session.accountId})
+      ON CONFLICT (customer_id, article_id)
+      DO UPDATE SET pack_count = LEAST(COALESCE(customer_cart_items.pack_count, 0) + EXCLUDED.pack_count, ${MAX_PACKS}),
+                    quantity = LEAST(COALESCE(customer_cart_items.pack_count, 0) + EXCLUDED.pack_count, ${MAX_PACKS}) * ${pack.packQuantity}::numeric,
+                    updated_at = now()`);
+  });
+  if (failed) return { ok: false, message: failed };
   const [line] = [...(await db.execute<{ n: number }>(sql`SELECT pack_count AS n FROM customer_cart_items WHERE customer_id = ${customerId} AND article_id = ${input.articleId}::uuid`))];
   return { ok: true, count: await cartCount(customerId, db), linePacks: line?.n ?? undefined };
 }
@@ -491,7 +503,12 @@ export async function setRequestPacks(session: CustomerSession, input: { article
   if (!(await orderingEnabledFor(customerId))) return { ok: false, message: "Poručivanje preko naloga nije uključeno za Vašu firmu." };
   const db = getDb();
   if (String(input.packs ?? "").trim() === "" || String(input.packs).trim() === "0") {
-    await db.execute(sql`DELETE FROM customer_cart_items WHERE customer_id = ${customerId} AND article_id = ${input.articleId}::uuid`);
+    const lid = await lidEditProblem(db, customerId, input.articleId, null);
+    if (lid) return { ok: false, message: lid };
+    const failed = await pairedCartChange(customerId, session.accountId, async (tx) => {
+      await tx.execute(sql`DELETE FROM customer_cart_items WHERE customer_id = ${customerId} AND article_id = ${input.articleId}::uuid`);
+    });
+    if (failed) return { ok: false, message: failed };
     return { ok: true, count: await cartCount(customerId, db) };
   }
   const [inCart] = [...(await db.execute<{ ok: boolean }>(sql`
@@ -501,10 +518,33 @@ export async function setRequestPacks(session: CustomerSession, input: { article
   if (!parsed.ok) return { ok: false, message: parsed.message };
   const pack = await packFor(db, input.articleId);
   if (!pack || pack.status !== "pack") return { ok: false, message: pack?.status === "blocked" && pack.reason === PROCUREMENT_ONLY ? PROCUREMENT_ONLY : NO_PACK };
-  await db.execute(sql`
-    UPDATE customer_cart_items SET pack_count = ${parsed.packs}, quantity = ${billingQuantity(parsed.packs, pack.packQuantity)}, updated_at = now()
-     WHERE customer_id = ${customerId} AND article_id = ${input.articleId}::uuid`);
+  const lid = await lidEditProblem(db, customerId, input.articleId, billingQuantity(parsed.packs, pack.packQuantity));
+  if (lid) return { ok: false, message: lid };
+  const failed = await pairedCartChange(customerId, session.accountId, async (tx) => {
+    await tx.execute(sql`
+      UPDATE customer_cart_items SET pack_count = ${parsed.packs}, quantity = ${billingQuantity(parsed.packs, pack.packQuantity)}, updated_at = now()
+       WHERE customer_id = ${customerId} AND article_id = ${input.articleId}::uuid`);
+  });
+  if (failed) return { ok: false, message: failed };
   return { ok: true, count: await cartCount(customerId, db) };
+}
+
+/**
+ * Promena korpe + usklađivanje obaveznih parova (0056) u jednoj transakciji, pod bravom firme
+ * (isti red kao slanje). Vraća poruku ako par ne može da se ispuni — tada se ništa ne menja.
+ */
+async function pairedCartChange(customerId: string, accountId: string | null, change: (tx: Tx) => Promise<void>): Promise<string | null> {
+  try {
+    await getDb().transaction(async (tx) => {
+      await tx.execute(sql`SELECT id FROM customers WHERE id = ${customerId} FOR UPDATE`);
+      await change(tx);
+      await syncRequiredPairs(tx, customerId, accountId);
+    });
+    return null;
+  } catch (e) {
+    if (e instanceof RequiredPairError) return e.message;
+    throw e;
+  }
 }
 
 /* ---------------------------------------------------------------------------
@@ -676,6 +716,8 @@ export async function proposeOrderRevision(viewer: PortalUser, orderId: string, 
     const priced = await priceLines(tx, o.customer_id, items.map((i) => ({ ...i, packs: null })), o.payment_option, today, "office");
     const bad = priced.lines.filter((l) => l.problem || l.quantityProblem);
     if (bad.length) throw new Error(bad.map((l) => `${l.articleCode}: ${l.problem ?? l.quantityProblem}`).join("; "));
+    const pairs = await requiredPairBlockers(tx, priced.lines.map((l) => ({ articleId: l.articleId, quantity: l.quantity })));
+    if (pairs.length) throw new Error(pairs.join("; "));
     const valid = priced.lines.filter((l) => l.amounts);
     const totals = orderTotals(valid.map((l) => ({ quantity: l.quantity, netPrice: (l.selected as { netPrice: number }).netPrice, vatPercent: (l.selected as { vatPercent: number }).vatPercent, listPrice: (l.selected as { listPrice: number }).listPrice, discountPercent: (l.selected as { discountPercent: number }).discountPercent })));
     // Original: u obradu (ako nije) pa „potrebna izmena“ sa razlogom — ostaje netaknut.
@@ -768,6 +810,8 @@ export async function previewOrderRevision(viewer: PortalUser, orderId: string, 
   const vat = lines.reduce((sum, l) => sum + (l.vat ?? 0), 0);
   return {
     lines,
+    /** 0056: isto pravilo kao pri upisu predloga — predlog se ne sme poslati dok nije prazno. */
+    pairProblems: await requiredPairBlockers(getDb(), priced.lines.map((l) => ({ articleId: l.articleId, quantity: l.quantity }))),
     gross: Math.round(gross * 100) / 100,
     net: Math.round(net * 100) / 100,
     vat: Math.round(vat * 100) / 100,

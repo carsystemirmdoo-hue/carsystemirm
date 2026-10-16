@@ -42,6 +42,7 @@ export default async function CustomerCartPage({ searchParams }: { searchParams:
         articleId: l.articleId, articleCode: l.articleCode, articleName: l.salesName ?? l.articleName, unit: l.unit, packLabel: l.packLabel, packConfirmed: l.packConfirmed,
         quantity: l.quantity, step: l.step, problem: l.problem, quantityProblem: l.quantityProblem, amounts: l.amounts,
         packs: l.packs, pack: l.pack ? { label: l.pack.label, quantity: l.pack.quantity } : null,
+        pairedWith: q.pairedLids[l.articleId] ?? null,
         prices: q.options.map((o) => {
           const p = l.byOption[o.key];
           return {

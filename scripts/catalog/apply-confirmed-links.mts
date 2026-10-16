@@ -9,7 +9,7 @@
  * Bez `--upis` samo proverava i ispisuje plan. Veza se upisuje kroz `decideMapping`
  * (isti put kao ekran Mapiranja: audit, istorija); pakovanje u `article_pack_sizes`.
  * `--ispravi-oznaku "<razlog>"` menja SAMO tekst oznake već upisanog pakovanja (npr. „kutija 250” → „BOX — kutija
- * 250”) kada se količina i JM tačno slažu sa planom; stara oznaka i razlog se dopisuju u dokaz. Drugačija količina
+ * 250”) kada se količina i JM tačno slažu sa planom; stara oznaka i razlog se dopisuju u dokaz, uz audit. Drugačija količina
  * ili JM se ovim ne menja (povratak `--povuci`, pa novi `--upis`).
  * `--povuci "<razlog>"` je povratak: veze iz plana koje su potvrđene na isti cilj prelaze u
  * `revoked` (kroz `decideMapping`, sa razlogom), a pakovanja iz plana se brišu.
@@ -118,11 +118,27 @@ if (labelReason) {
       continue;
     }
     if (ps.label === v.oznaka) continue;
-    await db.execute(sql`
-      UPDATE article_pack_sizes
-         SET label = ${v.oznaka},
-             evidence = evidence || ${` · ${new Date().toISOString().slice(0, 10)} ispravka oznake („${ps.label}” → „${v.oznaka}”): ${labelReason.trim()} (${by})`}
-       WHERE article_id = ${ps.article_id}::uuid`);
+    // Oznaka i audit u istoj transakciji; ponovljeno pokretanje ne menja ništa (oznaka je već nova).
+    await db.transaction(async (tx) => {
+      await tx.execute(sql`
+        UPDATE article_pack_sizes
+           SET label = ${v.oznaka},
+               evidence = evidence || ${` · ${new Date().toISOString().slice(0, 10)} ispravka oznake („${ps.label}” → „${v.oznaka}”): ${labelReason.trim()} (${by})`}
+         WHERE article_id = ${ps.article_id}::uuid`);
+      await recordAudit(
+        {
+          actor: { id: actor.id, name: actor.name, role: actor.role as never },
+          action: AUDIT_ACTIONS.packLabelCorrected,
+          entityType: "Artikal",
+          entityId: ps.article_id,
+          entityLabel: v.sifra,
+          before: { oznaka: ps.label },
+          after: { oznaka: v.oznaka, pakovanje: `${ps.pack_quantity} ${ps.unit}` },
+          reason: `${labelReason.trim()}${v.izvor ? ` (${v.izvor})` : ""}`.slice(0, 1000),
+        },
+        tx as never,
+      );
+    });
     console.log(`${v.sifra}: „${ps.label}” → „${v.oznaka}”`);
     n += 1;
   }

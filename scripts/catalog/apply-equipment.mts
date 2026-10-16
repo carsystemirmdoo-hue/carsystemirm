@@ -6,7 +6,8 @@
  *
  * Plan (PRIVATAN): { izvor, oprema: [{ sifra, naziv, jm: string | null, napomena? }] } — šifra TAČNO kako je
  * u BizniSoftu (tekst, vodeće nule). JM se ne izmišlja: null = podatak za dopunu. Bez `--upis` samo proverava
- * (sesija samo za čitanje). Već upisana šifra se ne menja. Svaki upis ima audit u istoj transakciji.
+ * (sesija samo za čitanje). Već upisana šifra se ne menja, osim DOPUNE JM: prazna (NULL) JM dobija potvrđenu
+ * vrednost iz plana; upisana JM se nikad ne prepisuje. Svaki upis ima audit u istoj transakciji.
  */
 import { readFileSync } from "node:fs";
 import { sql } from "drizzle-orm";
@@ -38,18 +39,21 @@ for (const v of plan.oprema) {
   const problems: string[] = [];
   if (!/^[0-9A-Za-z][0-9A-Za-z./-]{0,39}$/.test(v.sifra)) problems.push("šifra nije ispravna");
   if (v.jm !== null && !/^[A-ZČĆŠŽĐ]{1,5}$/.test(v.jm)) problems.push(`JM „${v.jm}“ nije ispravna`);
-  const [existing] = [...(await db.execute<{ code: string }>(sql`SELECT code FROM internal_equipment WHERE code_key = ${key}`))];
+  const [existing] = [...(await db.execute<{ code: string; unit: string | null }>(sql`SELECT code, unit FROM internal_equipment WHERE code_key = ${key}`))];
+  const fillUnit = Boolean(existing && existing.unit === null && v.jm);
+  if (existing && existing.unit !== null && v.jm !== null && existing.unit !== v.jm) problems.push(`upisana JM je ${existing.unit} — ne prepisuje se`);
   const [art] = [...(await db.execute<{ code: string; mapped: boolean; pack: boolean }>(sql`
     SELECT a.code,
            EXISTS (SELECT 1 FROM article_catalog_mappings m WHERE m.article_id = a.id AND m.status = 'mapped') AS mapped,
            EXISTS (SELECT 1 FROM article_pack_sizes p WHERE p.article_id = a.id) AS pack
       FROM articles a WHERE regexp_replace(a.code, '^0+(?=[0-9])', '') = ${key}`))];
   if (art?.pack) problems.push("artikal ima potvrđeno prodajno pakovanje — proveriti pre klasifikacije");
-  rows.push({ sifra: v.sifra, naziv: v.naziv, jm: v.jm ?? "(dopuniti)", u_portalu: art ? (art.mapped ? "da, sa vezom" : "da") : "ne", stanje: problems.length ? `ODBIJENO: ${problems.join("; ")}` : existing ? "već upisano" : "spremno", _ok: !problems.length, _new: !existing, _v: v, _key: key });
+  rows.push({ sifra: v.sifra, naziv: v.naziv, jm: v.jm ?? "(dopuniti)", u_portalu: art ? (art.mapped ? "da, sa vezom" : "da") : "ne", stanje: problems.length ? `ODBIJENO: ${problems.join("; ")}` : fillUnit ? `dopuna JM → ${v.jm}` : existing ? "već upisano" : "spremno", _ok: !problems.length, _new: !existing, _fill: fillUnit, _v: v, _key: key });
 }
 console.table(rows.map((r) => Object.fromEntries(Object.entries(r).filter(([k]) => !k.startsWith("_")))));
 const ready = rows.filter((r) => r._ok && r._new);
-console.log(`Spremno: ${rows.filter((r) => r._ok).length} / ${rows.length}, novih ${ready.length}${write ? "" : " — samo plan"}`);
+const fills = rows.filter((r) => r._ok && r._fill);
+console.log(`Spremno: ${rows.filter((r) => r._ok).length} / ${rows.length}, novih ${ready.length}, dopuna JM ${fills.length}${write ? "" : " — samo plan"}`);
 if (write) {
   for (const r of ready) {
     const v = r._v as Item;
@@ -74,6 +78,28 @@ if (write) {
       );
     });
   }
-  console.log(`Upisano: ${ready.length}.`);
+  for (const r of fills) {
+    const v = r._v as Item;
+    await db.transaction(async (tx) => {
+      // Samo prazna JM; ponovljeno pokretanje ne menja ništa (WHERE unit IS NULL).
+      const upd = [...(await tx.execute<{ code: string }>(sql`
+        UPDATE internal_equipment SET unit = ${v.jm} WHERE code_key = ${r._key as string} AND unit IS NULL RETURNING code`))];
+      if (!upd.length) return;
+      await recordAudit(
+        {
+          actor: { id: actor.id, name: actor.name, role: actor.role as never },
+          action: AUDIT_ACTIONS.equipmentUnitSet,
+          entityType: "Oprema",
+          entityId: upd[0].code,
+          entityLabel: `${upd[0].code} ${v.naziv}`.slice(0, 200),
+          before: { jm: null },
+          after: { jm: v.jm },
+          reason: (v.napomena ? `${plan.izvor} — ${v.napomena}` : plan.izvor).slice(0, 1000),
+        },
+        tx as never,
+      );
+    });
+  }
+  console.log(`Upisano: ${ready.length}, dopunjena JM: ${fills.length}.`);
 }
 process.exit(0);

@@ -7,9 +7,15 @@
       <rect width="1254" height="1254" fill="#fff"/>
       <path transform="rotate(-14 520 600)" d="M 220 600 L 220 626 A 300 250 0 0 0 820 626 L 820 600 A 300 250 0 0 0 220 600 Z" fill="#000" stroke="#000" stroke-width="22"/>
     </mask>
+    <!-- Linija tla ide samo iza diskova: ne sme da preseca zadnji disk između dve šmirgle (2026-10-17). -->
+    <mask id="iza-diskova" maskUnits="userSpaceOnUse" x="0" y="0" width="1254" height="1254">
+      <rect width="1254" height="1254" fill="#fff"/>
+      <path transform="rotate(-14 520 600)" d="M 220 600 L 220 626 A 300 250 0 0 0 820 626 L 820 600 A 300 250 0 0 0 220 600 Z" fill="#000" stroke="#000" stroke-width="22"/>
+      <path d="M 470 820 L 470 842 A 290 96 0 0 0 1050 842 L 1050 820 A 290 96 0 0 0 470 820 Z" fill="#000" stroke="#000" stroke-width="22"/>
+    </mask>
   </defs>
   <g stroke="#111" fill="none" stroke-linecap="round" stroke-linejoin="round">
-    <path d="M 170 930 C 430 884 780 874 1090 905" stroke-width="7" mask="url(#iza-prednjeg)"/>
+    <path d="M 170 930 C 430 884 780 874 1090 905" stroke-width="7" mask="url(#iza-diskova)"/>
     <path d="M 290 962 C 520 940 720 938 900 950" stroke-width="5" stroke-dasharray="2 22"/>
     <g mask="url(#iza-prednjeg)">
     <g transform="rotate(0 760 820)">

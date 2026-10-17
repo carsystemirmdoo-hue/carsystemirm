@@ -1,5 +1,6 @@
 "use client";
 
+import { getPrimaryLocationCategory } from "@/lib/partner-stores";
 import type {
   GeoJSONSource,
   LngLatBoundsLike,
@@ -121,6 +122,8 @@ export function PartnerMap({
       const element = document.createElement("button");
       element.type = "button";
       element.className = mapStyles.mapMarker;
+      // Oblik markera nosi grupu: Gde kupiti / Servisi i lakirnice / Ostali partneri.
+      element.dataset.category = getPrimaryLocationCategory(store);
       element.setAttribute("aria-label", `Izaberite lokaciju ${store.name}, ${store.city}`);
       element.addEventListener("click", (event) => {
         event.stopPropagation();
@@ -404,6 +407,7 @@ export function PartnerMap({
       if (!store) return;
       const element = document.createElement("span");
       element.className = `${mapStyles.mapMarker} ${mapStyles.mapMarkerDimmed}`;
+      element.dataset.category = getPrimaryLocationCategory(store);
       element.setAttribute("aria-hidden", "true");
       const marker = new (maplibre().Marker)({ element })
         .setLngLat(markerCoordinates.get(store.id) ?? [store.longitude, store.latitude])

@@ -28,8 +28,8 @@ type BrandMonoLogo = {
   /** Optička visina u traci brendova, u px, posle uklanjanja praznog prostora. */
   railHeight: number;
   /**
-   * `image`: zvaničan znak nema jednobojnu verziju sa providnim izrezima (npr. Befar je beli
-   * znak na punom crvenom polju), pa se prikazuje kakav jeste, bez maske i bez izmena.
+   * `image`: zvaničan znak nema jednobojnu verziju sa providnim izrezima, pa se prikazuje
+   * kakav jeste, bez maske i bez izmena.
    */
   kind?: "mask" | "image";
 };
@@ -99,11 +99,13 @@ export const brandLogos: Record<BrandKey, BrandLogo> = {
   },
   befar: {
     name: "Befar",
+    src: "/brands/befar.svg",
     width: 132,
     height: 70,
-    // Odobren logotip sa stranice Befar (lib/befar-brand-data.ts). Beli znak na punom crvenom
-    // polju bez providnih delova: u traci se prikazuje kakav jeste, u visini SATA znaka.
-    mono: { src: "/brands/befar/brand/befar-logo-white-on-red.png", aspect: 635 / 192, railHeight: 22, kind: "image" },
+    // Traka je jednobojna kao ostali znakovi (odluka vlasnika 2026-10-17): maska iz istog
+    // vernog vektora (scripts/trace-befar-logo.py) — puno polje u boji trake, izrezana
+    // slova i lice. Meni i Befar stranica zadržavaju crveno-beli znak. Visina = SATA.
+    mono: { src: "/brands/mono/befar.svg", aspect: 635 / 192, railHeight: 22 },
   },
   rupes: {
     name: "RUPES",
@@ -120,7 +122,8 @@ export const brandLogos: Record<BrandKey, BrandLogo> = {
 
 /**
  * Traka „Programski brendovi” prati listu brendova iz menija
- * (components/layout/navigation-data.ts → BRAND_LINKS), istim redom.
+ * (components/layout/navigation-data.ts → BRAND_LINKS), istim redom, plus Yachtcare,
+ * koji je 2026-10-17 izostavljen samo iz menija „Brendovi”.
  * RUPES nije zaseban brend u meniju (deo je Carsystem ponude), pa ga ovde nema.
  */
 export const trustBrandKeys: BrandKey[] = [

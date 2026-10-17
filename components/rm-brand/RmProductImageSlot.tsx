@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import type { CSSProperties } from "react";
 import type { CarsystemProduct, ProductImageAsset } from "@/lib/carsystem-data";
+import type { ProductContentFit } from "@/lib/product-image-metrics";
 import {
   resolveProductVolume,
   resolveQuantityLabel,
@@ -16,6 +17,7 @@ export function RmProductImageSlot({
   altText,
   aspectRatio = "4 / 5",
   asset,
+  contentFit,
   group,
   href,
   feature,
@@ -29,6 +31,12 @@ export function RmProductImageSlot({
   altText?: string;
   aspectRatio?: string;
   asset?: ProductImageAsset | null;
+  /**
+   * Izmereni okvir proizvoda na platnu (serverski `getProductContentFit`). Kada
+   * postoji, kartica uklapa sam proizvod u zajedničku oblast, a ne prazno
+   * platno — ambalaže u redu su optički iste veličine, bez rastezanja.
+   */
+  contentFit?: ProductContentFit | null;
   feature?: string;
   group: string;
   href?: string;
@@ -59,7 +67,31 @@ export function RmProductImageSlot({
         data-product-size-class={hasApprovedAsset ? sizeClass : undefined}
         data-has-quantity-badge={quantityLabel ? "true" : undefined}
       >
-        {hasApprovedAsset && asset ? (
+        {hasApprovedAsset && asset && contentFit ? (
+          <span
+            className={styles.productImageFitArea}
+            style={
+              {
+                "--fit-aspect": contentFit.aspect,
+                "--fit-fx": contentFit.fx,
+                "--fit-fy": contentFit.fy,
+                "--fit-ox": contentFit.ox,
+                "--fit-oy": contentFit.oy,
+              } as CSSProperties
+            }
+          >
+            <span className={styles.productImageFitBox}>
+              <Image
+                src={toDisplayImageSrc(asset.src)}
+                alt={altText || asset.alt}
+                width={contentFit.w}
+                height={contentFit.h}
+                priority={priority}
+                sizes={sizes}
+              />
+            </span>
+          </span>
+        ) : hasApprovedAsset && asset ? (
           <Image
             src={toDisplayImageSrc(asset.src)}
             alt={altText || asset.alt}

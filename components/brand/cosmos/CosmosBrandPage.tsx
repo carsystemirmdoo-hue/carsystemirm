@@ -118,7 +118,11 @@ export function CosmosBrandPage({ brand, products }: Props) {
         06 — commercial boundary. Full-bleed becomes an inset card: this is the
         point where the brand experience ends and Carsystem commerce begins.
       */}
-      <section aria-labelledby="cosmos-commerce-title" className={styles.commerce}>
+      <section
+        aria-labelledby="cosmos-commerce-title"
+        className={styles.commerce}
+        data-frame-theme="dark"
+      >
         <div className={styles.commerceCard}>
           <div className={styles.commerceHead}>
             <p className={styles.eyebrow}>Cosmos Lac u Carsystem i R-M programu</p>

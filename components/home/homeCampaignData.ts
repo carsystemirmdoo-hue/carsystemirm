@@ -38,6 +38,11 @@ export type HomeCampaignSlide = {
   /** Kontrast teksta je fiksiran po slajdu, ne izveden iz slike. */
   textTheme: "on-dark";
   gradientDirection: "to-right" | "none";
+  /**
+   * `light` — svetla fotografija (bela kabina): gradijent iza teksta je jači i
+   * duži, da opis ne stoji preko sivog prelaza.
+   */
+  photoTone?: "light";
   /** Dominantna boja pozadine — sprečava beli blink pre dekodiranja slike. */
   backgroundColor: string;
   accentColor: string;
@@ -76,17 +81,20 @@ export const homeCampaignSlides: HomeCampaignSlide[] = [
       "/images/home/campaign/carsystem-home-campaign-brand-desktop.webp",
     mobileImage:
       "/images/home/campaign/carsystem-home-campaign-brand-mobile.webp",
+    // Fotografija sa Carsystem brend stranice (dostavio vlasnik); derivate pravi
+    // scripts/build-home-campaign-assets.py bez skaliranja motiva.
     imageAlt:
-      "Lakirer u zaštitnoj opremi nanosi boju na karoserijski panel u profesionalnoj lakirnici",
-    imageWidth: 1672,
-    imageHeight: 941,
-    mobileImageWidth: 1255,
-    mobileImageHeight: 941,
-    focalPointDesktop: "60% 45%",
-    focalPointMobile: "62% 42%",
+      "Lakirer u Carsystem zaštitnom odelu i polumaski nanosi boju pištoljem na crveni deo karoserije",
+    imageWidth: 1920,
+    imageHeight: 920,
+    mobileImageWidth: 1227,
+    mobileImageHeight: 920,
+    focalPointDesktop: "70% 30%",
+    focalPointMobile: "60% 30%",
     textAlign: "left",
     textTheme: "on-dark",
     gradientDirection: "to-right",
+    photoTone: "light",
     backgroundColor: "#0b0e12",
     accentColor: "#e0242c",
     eyebrow: "Carsystem i R-M · Inđija, Srbija",

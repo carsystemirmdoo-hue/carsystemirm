@@ -10,11 +10,13 @@ import {
   validatePublicLocations,
   writeFileAtomic,
 } from "./lib/location-import-utils.mjs";
+import { applyLocationDecisions } from "./lib/location-decisions.mjs";
 
 const projectRoot = process.cwd();
 const baselinePath = path.resolve(projectRoot, "data/public-location-overrides.json");
 const reviewPath = path.resolve(projectRoot, "data/internal/location-import-review.csv");
 const outputPath = path.resolve(projectRoot, "data/store-locations.json");
+const decisionsPath = path.resolve(projectRoot, "data/public-location-decisions.json");
 
 function isTrue(value) {
   return String(value).trim().toLocaleLowerCase("sr-Latn") === "true";
@@ -209,11 +211,15 @@ for (const entry of previewEntries) {
   mergedIntoBaseline += 1;
 }
 
-const publicLocations = [...baseline, ...newLocations].sort(
+const sortedLocations = [...baseline, ...newLocations].sort(
   (left, right) =>
     left.city.localeCompare(right.city, "sr-Latn") ||
     left.name.localeCompare(right.name, "sr-Latn"),
 );
+
+// Odluke revizije (2026-10-17) se primenjuju posle svakog generisanja.
+const decisions = JSON.parse(await fs.readFile(decisionsPath, "utf8"));
+const { locations: publicLocations } = applyLocationDecisions(sortedLocations, decisions);
 
 const validation = validatePublicLocations(publicLocations);
 await writeFileAtomic(outputPath, `${JSON.stringify(publicLocations, null, 2)}\n`);

@@ -1,7 +1,3 @@
-"use client";
-
-import { useEffect, useRef, useState } from "react";
-import { usePrefersReducedMotion } from "@/components/motion/usePrefersReducedMotion";
 import styles from "./BaslacBrandPage.module.css";
 
 const greyShadeBases = [
@@ -11,29 +7,12 @@ const greyShadeBases = [
 ];
 
 export function BaslacGreyShade() {
-  const rootRef = useRef<HTMLElement>(null);
-  const [active, setActive] = useState(false);
-  const reducedMotion = usePrefersReducedMotion();
-
-  useEffect(() => {
-    const root = rootRef.current;
-    if (!root) return;
-
-    const observer = new IntersectionObserver(
-      ([entry]) => setActive(entry.isIntersecting),
-      { threshold: 0.5 },
-    );
-    observer.observe(root);
-
-    return () => observer.disconnect();
-  }, []);
-
+  // Blok postaje taman zajedno sa okvirom sajta (components/theme/FrameThemeController).
   return (
     <section
-      ref={rootRef}
       id="grey-shade"
       className={`${styles.section} ${styles.greyShadeSection}`}
-      data-active={!reducedMotion && active ? "true" : undefined}
+      data-frame-theme="dark"
       aria-labelledby="baslac-grey-shade-title"
     >
       <div className={styles.greyShadeIntro}>

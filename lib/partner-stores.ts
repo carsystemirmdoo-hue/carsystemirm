@@ -18,14 +18,76 @@ export function getAllPartnerStores() {
 }
 
 /**
- * Javni lokator prikazuje isključivo proverene lokacije (odluka vlasnika
- * 2026-10-01, docs/CONTENT_GAPS_REQUIRING_OWNER_INPUT.md GAP-003). Zapisi sa
- * statusom `pending` su BEX kontakti za isporuku: ostaju u izvoru radi kasnije
- * provere (docs/locations/UNVERIFIED_LOCATIONS_FOLLOW_UP.md), ali se ne
- * predstavljaju kao prodavnice ni partneri.
+ * Javni lokator prikazuje potvrđene (`verified`) i revidirane (`reviewed`)
+ * lokacije. GAP-003 (2026-10-01) je ograničio prikaz na 9 potvrđenih; revizija
+ * 2026-10-17 (data/public-location-decisions.json) vraća poslovne lokacije iz
+ * BEX adresara za koje postoji javni dokaz. Zapisi `pending` ostaju u izvoru,
+ * ali se ne prikazuju.
  */
 export function isPubliclyListedStore(store: PartnerStore) {
-  return store.isPublic && store.verificationStatus === "verified";
+  return (
+    store.isPublic &&
+    (store.verificationStatus === "verified" || store.verificationStatus === "reviewed")
+  );
+}
+
+/**
+ * Javne grupe lokatora:
+ *  - `kupovina` — „Gde kupiti“: prodavnice dostupne krajnjim kupcima;
+ *  - `servis` — „Servisi i lakirnice“: poslovne lokacije koje pružaju usluge;
+ *  - `partner` — ostali poslovni partneri koje firma odluči da javno prikaže.
+ * Prodavnica sa servisom pripada i kupovini i servisima.
+ */
+export type PublicLocationCategory = "kupovina" | "servis" | "partner";
+
+export const PUBLIC_LOCATION_CATEGORIES: PublicLocationCategory[] = [
+  "kupovina",
+  "servis",
+  "partner",
+];
+
+export function getPublicLocationCategories(store: PartnerStore): PublicLocationCategory[] {
+  switch (store.type) {
+    case "store":
+      return ["kupovina"];
+    case "service":
+      return ["servis"];
+    case "store_and_service":
+      return ["kupovina", "servis"];
+    default:
+      return ["partner"];
+  }
+}
+
+/** Glavna grupa (za oblik markera i oznaku kartice). */
+export function getPrimaryLocationCategory(store: PartnerStore): PublicLocationCategory {
+  return getPublicLocationCategories(store)[0];
+}
+
+export function getLocationCategoryLabel(category: PublicLocationCategory) {
+  const labels: Record<PublicLocationCategory, string> = {
+    kupovina: "Gde kupiti",
+    partner: "Ostali poslovni partneri",
+    servis: "Servisi i lakirnice",
+  };
+  return labels[category];
+}
+
+export function hasLocationCategory(store: PartnerStore, category: PublicLocationCategory) {
+  return getPublicLocationCategories(store).includes(category);
+}
+
+export function getLocationCategoryOptions(stores: PartnerStore[]) {
+  return PUBLIC_LOCATION_CATEGORIES.map((category) => ({
+    count: stores.filter((store) => hasLocationCategory(store, category)).length,
+    label: getLocationCategoryLabel(category),
+    value: category,
+  })).filter((option) => option.count > 0);
+}
+
+/** Lokacije gde krajnji kupac može da kupi; najbliža prodavnica se traži među njima. */
+export function getPurchaseLocations(stores: PartnerStore[]) {
+  return stores.filter((store) => hasLocationCategory(store, "kupovina"));
 }
 
 export function getPublicPartnerStores() {
@@ -58,10 +120,10 @@ export function getPartnerCityKey(store: PartnerStore) {
 
 export function getLocationTypeLabel(type: PartnerLocationType) {
   const labels: Record<PartnerLocationType, string> = {
-    partner: "Partnerska lokacija",
-    service: "Servis",
-    store: "Prodajno mesto",
-    store_and_service: "Prodajno mesto i servis",
+    partner: "Poslovni partner",
+    service: "Servis i lakirnica",
+    store: "Prodavnica",
+    store_and_service: "Prodavnica i servis",
     unknown: "Lokacija",
     warehouse: "Magacin",
   };

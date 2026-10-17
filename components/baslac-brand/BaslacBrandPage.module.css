@@ -1396,6 +1396,9 @@
 }
 
 .greyShadeSection {
+  /* Blok ima sopstvenu (tamnu) površinu, pa tekst i uzorci dobijaju unutrašnji
+     razmak od ivice; ranije su stajali priljubljeni uz levu ivicu (2026-10-17). */
+  padding-inline: clamp(1.25rem, 5vw, 4.5rem);
   border-top: 1px solid var(--baslac-process-border);
   background: var(--baslac-process-bg);
   color: var(--baslac-process-ink);
@@ -1404,7 +1407,10 @@
     color 420ms ease;
 }
 
-.greyShadeSection[data-active="true"] {
+/* Tamni izgled bloka je vezan za efektivnu tamnu temu: u svetloj temi je
+   pali zajednički okidač okvira (data-frame-theme), pa blok, header i
+   navigacija menjaju temu u istom trenutku (2026-10-17). */
+:global(html.dark) .greyShadeSection {
   --baslac-process-bg: #10242d;
   --baslac-process-ink: #f3f8f4;
   --baslac-process-muted: #b9c9c9;
@@ -1799,9 +1805,8 @@
   color: var(--ds-c-text-2);
 }
 
-/* Dve sekcije su svetle i u tamnoj temi — tu nadnaslov ostaje taman. */
-:global(html[data-theme="dark"]) .repairRhythm .sectionKicker,
-:global(html[data-theme="dark"]) .greyShadeSection .sectionKicker {
+/* Ritam popravke je svetao i u tamnoj temi — tu nadnaslov ostaje taman. */
+:global(html[data-theme="dark"]) .repairRhythm .sectionKicker {
   color: #56626a;
 }
 

@@ -434,8 +434,10 @@ export function productRelationshipJsonLd({
 }
 
 export function localBusinessJsonLd(stores: PartnerStore[]) {
+  // Samo prodavnice i servisi su lokalni poslovi za posetioce; ostali poslovni
+  // partneri ostaju na mapi, ali bez LocalBusiness zapisa.
   const verifiedStores = stores.filter(
-    (store) => isPubliclyListedStore(store),
+    (store) => isPubliclyListedStore(store) && store.type !== "partner",
   );
   const pageUrl = absoluteUrl("/prodavnice");
 
@@ -446,14 +448,19 @@ export function localBusinessJsonLd(stores: PartnerStore[]) {
         "@type": "CollectionPage",
         "@id": `${pageUrl}#webpage`,
         url: pageUrl,
-        name: "Prodajna i partnerska mreža",
+        name: "Gde kupiti i servisi",
         inLanguage: siteConfig.language,
         isPartOf: {
           "@id": `${absoluteUrl("/")}#website`,
         },
       },
       ...verifiedStores.map((store) => ({
-        "@type": store.type === "store" ? "Store" : "LocalBusiness",
+        "@type":
+          store.type === "store" || store.type === "store_and_service"
+            ? "Store"
+            : store.type === "service"
+              ? "AutoRepair"
+              : "LocalBusiness",
         "@id": `${pageUrl}#${store.id}`,
         name: store.name,
         url: `${pageUrl}#${store.id}`,

@@ -38,6 +38,11 @@ import type {
   RefinishPhase,
   RmCategorySlug,
 } from "@/lib/carsystem-data";
+import {
+  getProductContentFits,
+  type ProductContentFit,
+} from "@/lib/product-image-metrics";
+import { toDisplayImageSrc } from "@/lib/productImageDisplay";
 import styles from "./RmBrandPage.module.css";
 
 export function RmBrandPage({
@@ -49,6 +54,11 @@ export function RmBrandPage({
   programs: ProgramGroup[];
 }) {
   const classifications = getRmBrandClassifications(products);
+  // Izmereni okviri proizvoda za kartice (serverski manifest, samo brojevi).
+  const contentFits = getProductContentFits(
+    products.map((product) => product.productImage?.src),
+    toDisplayImageSrc,
+  );
 
   return (
     <RmAtmosphereShell>
@@ -58,12 +68,18 @@ export function RmBrandPage({
         <RmProcessFlow products={products} />
         <RmProductSystemGallery
           classifications={classifications}
+          contentFits={contentFits}
           products={products}
         />
-        <RmAgilisFeature classifications={classifications} products={products} />
+        <RmAgilisFeature
+          classifications={classifications}
+          contentFits={contentFits}
+          products={products}
+        />
         <div
           className={styles.refinityTransitionZone}
           data-rm-atmosphere-zone="refinity"
+          data-frame-theme="dark"
         >
           <span className={styles.refinityTransitionGrid} aria-hidden="true" />
           <RmRefinitySection />
@@ -71,7 +87,11 @@ export function RmBrandPage({
         <RmProductSeries products={products} />
         <RmColorSystems classifications={classifications} products={products} />
         <RmCompatibleBrands />
-        <RmProductFamilies classifications={classifications} products={products} />
+        <RmProductFamilies
+          classifications={classifications}
+          contentFits={contentFits}
+          products={products}
+        />
         <RmEditorialProofs />
         <RmFinalCta />
       </main>
@@ -167,9 +187,11 @@ function RmProcessFlow({ products }: { products: CarsystemProduct[] }) {
 
 function RmAgilisFeature({
   classifications,
+  contentFits,
   products,
 }: {
   classifications: RmBrandClassifications;
+  contentFits: Record<string, ProductContentFit>;
   products: CarsystemProduct[];
 }) {
   const agilisProducts = rmAgilisFeatureProductSlugs
@@ -251,6 +273,7 @@ function RmAgilisFeature({
           <RmProductImageSlot
             asset={item.asset}
             aspectRatio="4 / 5"
+            contentFit={item.asset?.src ? contentFits[item.asset.src] : null}
             feature={item.feature}
             group={item.group}
             href={item.href}

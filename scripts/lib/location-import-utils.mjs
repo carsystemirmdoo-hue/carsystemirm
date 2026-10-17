@@ -939,7 +939,7 @@ export function validatePublicLocations(locations) {
     if (!PUBLIC_LOCATION_TYPES.has(location.type)) {
       throw new Error(`Public location ${location.id} has an invalid type: ${location.type}`);
     }
-    if (!new Set(["verified", "pending"]).has(location.verificationStatus)) {
+    if (!new Set(["verified", "reviewed", "pending"]).has(location.verificationStatus)) {
       throw new Error(`Public location ${location.id} has an invalid verification status.`);
     }
     if (location.isPublic !== true) {

@@ -2678,15 +2678,26 @@
   border: 1px solid var(--rm-line);
 }
 
+/*
+ * Navigacija sistema (2026-10-17). Ranije: 9 jednakih kolona, broj u
+ * sopstvenoj koloni od 1.75rem i `overflow-wrap: anywhere` na oznaci — na
+ * kontejneru od ~1000 px tekstu je ostajalo ~75 px, pa se „WATERBORNE“ (82 px)
+ * lomio usred reči. Sada: broj stoji iznad naziva, kolone prate sadržaj
+ * (kraći sistemi su uži, duži dobijaju više mesta), a reči se ne lome.
+ * Na užim ekranima isti niz postaje kontrolisana horizontalna traka.
+ */
 .systemGalleryTabs {
   display: grid;
-  grid-template-columns: repeat(9, minmax(0, 1fr));
+  grid-template-columns: repeat(9, minmax(min-content, auto));
+  overflow-x: auto;
   background: var(--rm-paper);
+  scrollbar-width: thin;
 }
 
 .systemGalleryTabs button {
   display: grid;
-  grid-template-columns: 1.4rem minmax(0, 1fr);
+  grid-template-columns: minmax(0, 1fr);
+  align-content: start;
   gap: 0.16rem 0.4rem;
   min-height: 4.7rem;
   border: 0;
@@ -2707,7 +2718,7 @@
 }
 
 .systemGalleryTabs button > span {
-  grid-row: 1 / 3;
+  justify-self: start;
   color: inherit;
   box-shadow: inset 0 -0.16em 0 var(--rm-red);
   font-family: var(--font-technical), monospace;
@@ -2719,6 +2730,8 @@
   font-family: var(--font-display), system-ui, sans-serif;
   font-size: 0.88rem;
   letter-spacing: -0.02em;
+  /* Naziv sistema je kratak i ostaje u jednom redu. */
+  white-space: nowrap;
 }
 
 .systemGalleryTabs small {
@@ -2812,8 +2825,16 @@
   padding: 0.75rem;
 }
 
+/*
+ * Zajednička pravila kartice proizvoda (2026-10-17): ista oblast fotografije,
+ * ista unutrašnja margina ambalaže, zajednička osnovna linija (dno oblasti),
+ * nazivi i podaci počinju na istoj visini, a veza je na dnu kartice — u istoj
+ * liniji sa susednim karticama, jer kartice u redu imaju istu visinu.
+ */
 .productImageSlot {
   display: grid;
+  grid-template-rows: auto 1fr;
+  height: 100%;
   min-width: 0;
   gap: 0.75rem;
   margin: 0;
@@ -2827,41 +2848,56 @@
   background: var(--rm-paper);
 }
 
+/*
+ * Ranije je klasa zapremine (S 17 % … XL 4 %) davala ambalaži različitu
+ * unutrašnju marginu, pa su limenke i boce u istom redu izgledale nasumično
+ * veće ili manje. Sada sve dele istu marginu i stoje na zajedničkoj osnovnoj
+ * liniji (dno), uz `contain` — slika se nikad ne rasteže.
+ */
 .productImageSlotMedia > img {
   object-fit: contain;
-  padding: 7%;
+  object-position: 50% 100%;
+  padding: 10% 10% 9%;
 }
 
-.productImageSlotMedia[data-product-size-class="S"] > img {
-  padding: 17%;
+.productImageSlotMedia[data-has-quantity-badge="true"] > img {
+  padding-bottom: calc(9% + 2rem);
 }
 
-.productImageSlotMedia[data-product-size-class="M"] > img {
-  padding: 12%;
+/*
+ * Sa izmerenim okvirom (data/product-image-metrics.generated.json) uklapa se
+ * sam proizvod, ne platno: fajlovi imaju vrlo različit prazan prostor (medijana
+ * ~39 % širine platna), pa bi `contain` nad platnom ostavio limenke sitnim, a
+ * kanistere krupnim. Okvir sadržaja dobija najveću veličinu koja staje u
+ * zajedničku oblast, a platno se pomera tako da okvir pada tačno na njega.
+ */
+.productImageFitArea {
+  position: absolute;
+  inset: 12% 14% 9%;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  container-type: size;
 }
 
-.productImageSlotMedia[data-product-size-class="L"] > img {
-  padding: 8%;
+.productImageSlotMedia[data-has-quantity-badge="true"] .productImageFitArea {
+  bottom: calc(9% + 2rem);
 }
 
-.productImageSlotMedia[data-product-size-class="XL"] > img {
-  padding: 4%;
+.productImageFitBox {
+  position: relative;
+  display: block;
+  width: min(100cqw, 100cqh * var(--fit-aspect));
+  height: min(100cqh, 100cqw / var(--fit-aspect));
 }
 
-.productImageSlotMedia[data-has-quantity-badge="true"][data-product-size-class="S"] > img {
-  padding-bottom: calc(17% + 2rem);
-}
-
-.productImageSlotMedia[data-has-quantity-badge="true"][data-product-size-class="M"] > img {
-  padding-bottom: calc(12% + 2rem);
-}
-
-.productImageSlotMedia[data-has-quantity-badge="true"][data-product-size-class="L"] > img {
-  padding-bottom: calc(8% + 2rem);
-}
-
-.productImageSlotMedia[data-has-quantity-badge="true"][data-product-size-class="XL"] > img {
-  padding-bottom: calc(4% + 2rem);
+.productImageFitBox > img {
+  position: absolute;
+  top: calc(var(--fit-oy) / var(--fit-fy) * -100%);
+  left: calc(var(--fit-ox) / var(--fit-fx) * -100%);
+  width: calc(100% / var(--fit-fx));
+  max-width: none;
+  height: calc(100% / var(--fit-fy));
 }
 
 .productSlotQuantityBadge {
@@ -2926,7 +2962,6 @@
   font-family: var(--font-display), system-ui, sans-serif;
   font-size: 1rem;
   font-weight: 900;
-  clip-path: polygon(10% 0, 100% 0, 90% 100%, 0 100%);
 }
 
 .productImagePlaceholder > div {
@@ -2954,7 +2989,10 @@
 }
 
 .productImageSlot figcaption {
-  display: grid;
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  align-items: flex-start;
   gap: 0.22rem;
 }
 
@@ -2992,9 +3030,12 @@
 .productSlotLink {
   display: inline-flex;
   align-items: center;
+  align-self: stretch;
   justify-content: space-between;
   gap: 0.6rem;
-  margin-top: 0.25rem;
+  /* Veza je uvek na dnu kartice, u istoj liniji sa susednim karticama. */
+  margin-top: auto;
+  padding-top: 0.5rem;
   color: inherit !important;
   text-decoration: underline;
   text-decoration-color: var(--rm-red);
@@ -3128,7 +3169,8 @@
 .productFamilyLineup {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  align-items: end;
+  /* Kartice u redu imaju istu visinu; ranije `end` je pomerao fotografije. */
+  align-items: stretch;
   gap: 0.8rem;
   min-width: 0;
 }
@@ -3199,7 +3241,7 @@
   }
 
   .productFamilyLineup:has(> figure:nth-child(3):last-child) {
-    grid-template-columns: 1.25fr 1fr 1fr;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
   .productFamilyLineup:has(> figure:nth-child(4):last-child) {
@@ -3373,16 +3415,23 @@
     grid-template-columns: minmax(0, 1fr);
   }
 
+  /* Ispod 70rem devet sistema ne staje u red bez lomljenja: kontrolisana
+     horizontalna traka, svaka stavka u svojoj prirodnoj širini, u jednom redu. */
   .systemGalleryTabs {
-    grid-template-columns: repeat(5, minmax(0, 1fr));
+    display: flex;
+    max-width: 100%;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scroll-snap-type: x proximity;
   }
 
-  .systemGalleryTabs button:nth-child(5n) {
-    border-right: 0;
+  .systemGalleryTabs button {
+    flex: 0 0 auto;
+    scroll-snap-align: start;
   }
 
-  .systemGalleryTabs button:nth-child(n + 6) {
-    border-top: 1px solid var(--rm-line);
+  .systemGalleryTabs small {
+    white-space: nowrap;
   }
 
   .systemGalleryComposition {
@@ -3869,16 +3918,12 @@
     max-width: 100%;
     overflow-x: auto;
     overscroll-behavior-x: contain;
-    scrollbar-width: none;
-  }
-
-  .systemGalleryTabs::-webkit-scrollbar {
-    display: none;
   }
 
   .systemGalleryTabs button {
     min-height: 5rem;
-    flex: 0 0 10rem;
+    flex: 0 0 auto;
+    min-width: 8.5rem;
     border-right: 1px solid var(--rm-line);
     border-top: 0;
   }
@@ -3930,7 +3975,7 @@
     display: grid;
     width: auto;
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    align-items: start;
+    align-items: stretch;
     overflow: visible;
   }
 
@@ -4520,8 +4565,9 @@
 /* --- Galerija sistema (tabovi) ----------------------------------------- */
 .systemGalleryTabs button {
   min-height: 5rem;
-  gap: 0.25rem 0.5rem;
-  grid-template-columns: 1.75rem minmax(0, 1fr);
+  gap: 0.3rem;
+  grid-template-columns: minmax(0, 1fr);
+  padding: 0.75rem 0.8rem;
 }
 
 .systemGalleryTabs button > span,
@@ -4537,8 +4583,11 @@
   letter-spacing: -0.01em;
 }
 
+/* Oznaka se prelama samo između reči, nikad usred reči. */
 .systemGalleryTabs small {
-  overflow-wrap: anywhere;
+  overflow-wrap: normal;
+  word-break: normal;
+  hyphens: manual;
 }
 
 /* --- Kartica proizvoda: ugao 2 px, linija, bez senke ------------------- */

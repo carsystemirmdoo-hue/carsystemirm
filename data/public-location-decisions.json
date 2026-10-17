@@ -1,0 +1,302 @@
+{
+  "reviewedAt": "2026-10-17",
+  "note": "Revizija BEX lokacija: reviewed = poslovna lokacija sa dokazom (aktivan kupac + registrovana delatnost + poslovna adresa). Obrazloženja i sporni zapisi su van repozitorijuma.",
+  "decisions": [
+    {
+      "id": "preview-antonijev-pancevo",
+      "status": "reviewed",
+      "type": "service",
+      "name": "Antonijev",
+      "address": "Ive Kurjačkog 24, Pančevo",
+      "city": "Pančevo"
+    },
+    {
+      "id": "preview-as-zmijanjac-sopot",
+      "status": "reviewed",
+      "type": "service",
+      "name": "Auto servis Zmijanjac",
+      "address": "Milosava Vlajića 49, Sopot",
+      "city": "Sopot"
+    },
+    {
+      "id": "preview-auto-centar-pejic-doo-kikinda",
+      "status": "reviewed",
+      "type": "service",
+      "name": "Auto centar Pejić",
+      "address": "Kraljevića Marka 179, Kikinda",
+      "city": "Kikinda"
+    },
+    {
+      "id": "preview-auto-centar-saja-novi-pazar",
+      "status": "reviewed",
+      "type": "service",
+      "name": "Auto centar Saja",
+      "address": "Ćamila Sijarića 3, Novi Pazar",
+      "city": "Novi Pazar"
+    },
+    {
+      "id": "preview-auto-kolor-gornji-milanovac",
+      "status": "reviewed",
+      "type": "store",
+      "name": "Auto Kolor",
+      "address": "Miodraga Radovanovića Korčagina 2, Gornji Milanovac",
+      "city": "Gornji Milanovac"
+    },
+    {
+      "id": "preview-auto-servis-tomasik-kovacica",
+      "status": "reviewed",
+      "type": "service",
+      "name": "Auto servis Tomašik",
+      "address": "Šafarikova 8, Kovačica",
+      "city": "Kovačica"
+    },
+    {
+      "id": "preview-autobill-palic",
+      "status": "reviewed",
+      "type": "service",
+      "name": "AutoBill",
+      "address": "Josipa Kolumba 4, Palić",
+      "city": "Palić"
+    },
+    {
+      "id": "preview-autolak-centar-mumdzic-novi-pazar",
+      "status": "reviewed",
+      "type": "service",
+      "name": "Autolak centar Mumdžić",
+      "address": "Borski kej 7, Novi Pazar",
+      "city": "Novi Pazar"
+    },
+    {
+      "id": "preview-bel-kolor-bela-crkva",
+      "status": "reviewed",
+      "type": "store",
+      "name": "Bel Kolor",
+      "address": "Sonje Marinković 2, Bela Crkva",
+      "city": "Bela Crkva"
+    },
+    {
+      "id": "preview-bmc-boja-mix-pozarevac",
+      "status": "reviewed",
+      "type": "store",
+      "name": "BMC Boja Mix",
+      "address": "Ratarska 88, Požarevac",
+      "city": "Požarevac"
+    },
+    {
+      "id": "preview-bnp-marinkovic-vrcin",
+      "status": "reviewed",
+      "type": "store",
+      "name": "BNP Marinković",
+      "address": "Beogradska 62, Vrčin",
+      "city": "Vrčin"
+    },
+    {
+      "id": "preview-bojaton-d-o-o-sabac",
+      "status": "reviewed",
+      "type": "store",
+      "name": "Bojaton",
+      "address": "Borivoja Milivojevića 8, Šabac",
+      "city": "Šabac"
+    },
+    {
+      "id": "preview-cikaric-d-o-o-pozega",
+      "status": "reviewed",
+      "type": "store",
+      "name": "Čikarić",
+      "address": "Kneza Miloša 62, Požega",
+      "city": "Požega"
+    },
+    {
+      "id": "preview-color-gms-arilje",
+      "status": "reviewed",
+      "type": "store",
+      "name": "Color GMS",
+      "address": "Heroja Šoše 9, Arilje",
+      "city": "Arilje"
+    },
+    {
+      "id": "preview-color-system-krusevac",
+      "status": "reviewed",
+      "type": "store",
+      "name": "Color System",
+      "address": "Dostojevskog 50, Kruševac",
+      "city": "Kruševac"
+    },
+    {
+      "id": "preview-colorex-026-smederevo",
+      "status": "reviewed",
+      "type": "store",
+      "name": "Colorex 026",
+      "address": "Knez Mihajlova 86, Smederevo",
+      "city": "Smederevo"
+    },
+    {
+      "id": "preview-duga-commerce-paracin",
+      "status": "reviewed",
+      "type": "store",
+      "name": "Duga Commerce",
+      "address": "Vožda Karađorđa 88, Paraćin",
+      "city": "Paraćin"
+    },
+    {
+      "id": "preview-feromont-m-krusevac",
+      "status": "reviewed",
+      "type": "store",
+      "name": "Feromont-M",
+      "address": "Jug Bogdanova 17, Kruševac",
+      "city": "Kruševac"
+    },
+    {
+      "id": "preview-gloss-smederevo",
+      "status": "reviewed",
+      "type": "store",
+      "name": "Gloss",
+      "address": "16. oktobra 55, Smederevo",
+      "city": "Smederevo"
+    },
+    {
+      "id": "preview-happy-colors-nis-medijana",
+      "status": "reviewed",
+      "type": "store",
+      "name": "Happy Colours",
+      "address": "Cara Dušana 82, Niš",
+      "city": "Niš"
+    },
+    {
+      "id": "preview-ino-gmd-ton-borca",
+      "status": "reviewed",
+      "type": "store",
+      "name": "Ino GMD Ton",
+      "address": "JNA 95, Borča",
+      "city": "Beograd"
+    },
+    {
+      "id": "preview-master-mix-doo-beograd-cukarica",
+      "status": "reviewed",
+      "type": "store",
+      "name": "Master Mix",
+      "address": "Ilije Đuričića 30, Beograd (Čukarica)",
+      "city": "Beograd"
+    },
+    {
+      "id": "preview-mateja-023-zrenjanin",
+      "status": "reviewed",
+      "type": "store",
+      "name": "Mateja 023",
+      "address": "Radnička 3, Zrenjanin",
+      "city": "Zrenjanin"
+    },
+    {
+      "id": "preview-metal-boja-leskovac",
+      "status": "reviewed",
+      "type": "store",
+      "name": "Metal Boja",
+      "address": "Bulevar Nikole Pašića 60, Leskovac",
+      "city": "Leskovac"
+    },
+    {
+      "id": "preview-modena-beograd-palilula",
+      "status": "reviewed",
+      "type": "service",
+      "name": "Modena Color",
+      "address": "VIII Sutjeska 50/P, Beograd (Palilula)",
+      "city": "Beograd"
+    },
+    {
+      "id": "preview-mondust-metalik-kragujevac-pivara",
+      "status": "reviewed",
+      "type": "store",
+      "name": "Mondust Metalik",
+      "address": "Dragoslava Srejovića 33, Kragujevac",
+      "city": "Kragujevac"
+    },
+    {
+      "id": "preview-ptp-moler-valjevo",
+      "status": "reviewed",
+      "type": "store",
+      "name": "PTP Moler",
+      "address": "Doktora Pantića 132, Valjevo",
+      "city": "Valjevo"
+    },
+    {
+      "id": "preview-sara-beograd-zemun",
+      "status": "reviewed",
+      "type": "store",
+      "name": "Šara",
+      "address": "Vase Lazarevića 1, Zemun",
+      "city": "Beograd"
+    },
+    {
+      "id": "preview-stanisic-zrenjanin",
+      "status": "reviewed",
+      "type": "store",
+      "name": "Auto boje Stanišić",
+      "address": "Bačka 4, Zrenjanin",
+      "city": "Zrenjanin"
+    },
+    {
+      "id": "preview-stojiljkovic-od-bor",
+      "status": "reviewed",
+      "type": "store",
+      "name": "Stojiljković",
+      "address": "Nikole Pašića 14, Bor",
+      "city": "Bor"
+    },
+    {
+      "id": "preview-t-m-color-kragujevac-centar",
+      "status": "reviewed",
+      "type": "store",
+      "name": "T&M Color",
+      "address": "Kneza Mihaila 190, Kragujevac",
+      "city": "Kragujevac"
+    },
+    {
+      "id": "preview-tinta-boje-pozega",
+      "status": "reviewed",
+      "type": "store",
+      "name": "Tinta boje",
+      "address": "Nemanjina 10, Požega",
+      "city": "Požega"
+    },
+    {
+      "id": "preview-toma-kladovo",
+      "status": "reviewed",
+      "type": "service",
+      "name": "Autoservis Toma",
+      "address": "Obilićeva 26, Kladovo",
+      "city": "Kladovo"
+    },
+    {
+      "id": "preview-trijumf-kolor-kraljevo",
+      "status": "reviewed",
+      "type": "store",
+      "name": "Trijumf Kolor",
+      "address": "Cara Lazara 83, Kraljevo",
+      "city": "Kraljevo"
+    },
+    {
+      "id": "preview-autounion-gornji-matejevac",
+      "mergeInto": "preview-autounion-d-o-o-nis-palilula"
+    },
+    {
+      "id": "preview-bnp-vrcin",
+      "mergeInto": "preview-bnp-marinkovic-vrcin"
+    },
+    {
+      "id": "preview-spektar-mb-sremska-mitrovica",
+      "mergeInto": "spektar-mb-sremska-mitrovica"
+    },
+    {
+      "id": "preview-tim-color-kragujevac-centar",
+      "mergeInto": "preview-t-m-color-kragujevac-centar"
+    },
+    {
+      "id": "preview-vm-tim-maki-nis-crveni-krst",
+      "mergeInto": "vmtim-maki-nis"
+    },
+    {
+      "id": "preview-vukonjanski-zrenjanin",
+      "mergeInto": "vukonjanski-zrenjanin"
+    }
+  ]
+}

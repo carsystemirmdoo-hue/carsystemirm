@@ -5,15 +5,18 @@ import { PartnerMap } from "@/components/stores/PartnerMap";
 import { toTelHref } from "@/lib/company-contact";
 import { findNearestPartnerStore } from "@/lib/nearest-store";
 import {
-  getLocationTypeOptions,
+  getLocationCategoryLabel,
+  getLocationCategoryOptions,
   getPartnerCityKey,
   getPartnerCityLabel,
   getPartnerLocationStats,
   getPartnerLocationTypeLabel,
+  getPrimaryLocationCategory,
+  getPurchaseLocations,
+  hasLocationCategory,
   hasPartnerCoordinates,
-  hasPartnerLocationType,
-  type PartnerLocationType,
   type PartnerStore,
+  type PublicLocationCategory,
 } from "@/lib/partner-stores";
 import styles from "./StoresPage.module.css";
 
@@ -80,7 +83,7 @@ export function StoreLocator({ stores }: { stores: PartnerStore[] }) {
   const hasPublicStores = stores.length > 0;
 
   const [query, setQuery] = useState("");
-  const [typeFilter, setTypeFilter] = useState<PartnerLocationType | "">("");
+  const [typeFilter, setTypeFilter] = useState<PublicLocationCategory | "">("");
   const [selectedId, setSelectedId] = useState("");
   const [hoveredId, setHoveredId] = useState("");
   const [mapFailed, setMapFailed] = useState(false);
@@ -106,7 +109,7 @@ export function StoreLocator({ stores }: { stores: PartnerStore[] }) {
     window.history.replaceState(null, "", `${url.pathname}${url.search}${url.hash}`);
   }
 
-  const typeOptions = useMemo(() => getLocationTypeOptions(stores), [stores]);
+  const typeOptions = useMemo(() => getLocationCategoryOptions(stores), [stores]);
   const stats = useMemo(() => getPartnerLocationStats(stores), [stores]);
   const mappableStores = useMemo(() => stores.filter(hasPartnerCoordinates), [stores]);
 
@@ -115,7 +118,7 @@ export function StoreLocator({ stores }: { stores: PartnerStore[] }) {
 
     return stores.filter((store) => {
       if (cityFilter && getPartnerCityKey(store) !== cityFilter) return false;
-      if (typeFilter && !hasPartnerLocationType(store, typeFilter)) return false;
+      if (typeFilter && !hasLocationCategory(store, typeFilter)) return false;
       if (!normalizedQuery) return true;
 
       return [
@@ -185,10 +188,12 @@ export function StoreLocator({ stores }: { stores: PartnerStore[] }) {
 
     navigator.geolocation.getCurrentPosition(
       (position) => {
-        const nearest = findNearestPartnerStore(stores, {
-          lat: position.coords.latitude,
-          lng: position.coords.longitude,
-        });
+        // „Najbliža prodavnica“ se traži među lokacijama „Gde kupiti“; ostale
+        // grupe samo ako prodavnica sa koordinatama ne postoji.
+        const origin = { lat: position.coords.latitude, lng: position.coords.longitude };
+        const nearest =
+          findNearestPartnerStore(getPurchaseLocations(stores), origin) ??
+          findNearestPartnerStore(stores, origin);
 
         if (!nearest) {
           setLocatorStatus("Koordinate trenutno nisu dostupne za poređenje. Koristite pretragu.");
@@ -230,11 +235,11 @@ export function StoreLocator({ stores }: { stores: PartnerStore[] }) {
         <p className={`${styles.kicker} ${styles.heroEyebrow}`}>Lokator mreže</p>
         <div className={styles.heroGrid}>
           <h1 className={`${styles.title} ${styles.titleReveal}`} id="stores-title">
-            Prodajna i partnerska mreža
+            Gde kupiti i servisi
           </h1>
           <p className={`${styles.subtitle} ${styles.subtitleReveal}`}>
             {hasPublicStores
-              ? `${stats.locationCount} lokacija na mapi u ${stats.cityCount} ${cityWord(stats.cityCount)}. Poslovni kontakti bez preciznijeg tipa označeni su kao partnerske lokacije.`
+              ? `${stats.locationCount} lokacija na mapi u ${stats.cityCount} ${cityWord(stats.cityCount)}. Prodavnice za kupovinu i servisi sa lakirnicama označeni su posebno.`
               : "Lokator trenutno nema objavljenih poslovnih lokacija."}
           </p>
         </div>
@@ -257,7 +262,7 @@ export function StoreLocator({ stores }: { stores: PartnerStore[] }) {
         </div>
 
         {typeOptions.length > 1 ? (
-          <div className={styles.typeChips} role="group" aria-label="Tip lokacije">
+          <div className={styles.typeChips} role="group" aria-label="Vrsta lokacije">
             <button
               aria-pressed={typeFilter === ""}
               className={`${styles.typeChip} ${typeFilter === "" ? styles.typeChipActive : ""}`}
@@ -272,6 +277,7 @@ export function StoreLocator({ stores }: { stores: PartnerStore[] }) {
                 className={`${styles.typeChip} ${
                   typeFilter === option.value ? styles.typeChipActive : ""
                 }`}
+                data-category={option.value}
                 key={option.value}
                 onClick={() =>
                   setTypeFilter((current) =>
@@ -280,7 +286,9 @@ export function StoreLocator({ stores }: { stores: PartnerStore[] }) {
                 }
                 type="button"
               >
+                <i aria-hidden="true" className={styles.categoryMark} data-category={option.value} />
                 {option.label}
+                <span className={styles.typeChipCount}>{option.count}</span>
               </button>
             ))}
           </div>
@@ -320,9 +328,20 @@ export function StoreLocator({ stores }: { stores: PartnerStore[] }) {
                 stores={stores}
                 visibleIds={visibleIds}
               />
+              {typeOptions.length > 1 ? (
+                <ul className={styles.mapLegend} aria-label="Oznake na mapi">
+                  {typeOptions.map((option) => (
+                    <li key={option.value}>
+                      <i aria-hidden="true" className={styles.categoryMark} data-category={option.value} />
+                      {option.label}
+                    </li>
+                  ))}
+                </ul>
+              ) : null}
               {selectedStore ? (
                 <div className={styles.selectedSummary} data-selected-summary>
                   <p className={styles.summaryKicker}>
+                    {getLocationCategoryLabel(getPrimaryLocationCategory(selectedStore))} ·{" "}
                     {getPartnerLocationTypeLabel(selectedStore)} · {selectedStore.city}
                   </p>
                   <strong>{selectedStore.name}</strong>
@@ -377,6 +396,7 @@ export function StoreLocator({ stores }: { stores: PartnerStore[] }) {
                   className={`${styles.resultItem} ${
                     isSelected ? styles.resultItemSelected : ""
                   } cs-interactive-surface`}
+                  data-category={getPrimaryLocationCategory(store)}
                   data-motion-surface
                   key={store.id}
                   onBlur={(event) => {
@@ -403,6 +423,10 @@ export function StoreLocator({ stores }: { stores: PartnerStore[] }) {
                     onClick={() => handleSelectFromList(store.id)}
                     type="button"
                   >
+                    <span className={styles.resultCategory} data-category={getPrimaryLocationCategory(store)}>
+                      <i aria-hidden="true" className={styles.categoryMark} data-category={getPrimaryLocationCategory(store)} />
+                      {getLocationCategoryLabel(getPrimaryLocationCategory(store))}
+                    </span>
                     <span className={styles.resultKicker}>
                       <span>
                         {getPartnerLocationTypeLabel(store)} · {store.city}
@@ -460,7 +484,7 @@ export function StoreLocator({ stores }: { stores: PartnerStore[] }) {
               </strong>
               <p>
                 {hasPublicStores
-                  ? "Proverite unos ili resetujte filter tipa lokacije."
+                  ? "Proverite unos ili resetujte filter vrste lokacije."
                   : "Neodobreni kandidati su zadržani samo u internom review fajlu."}
               </p>
               <button

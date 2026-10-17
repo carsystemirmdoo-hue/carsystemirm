@@ -173,14 +173,10 @@ export const BRAND_LINKS: NavigationLink[] = [
     description: "Oprema za precizno i ponovljivo nanošenje.",
     logo: "/brands/sata.svg",
   },
-  {
-    // Bez logotipa: odobren Yachtcare logo fajl ne postoji. RUPES nije zaseban brend u
-    // meniju — prikazan je u okviru Carsystem ponude (/brendovi/carsystem#rupes).
-    href: "/brendovi/yachtcare",
-    title: "Yachtcare",
-    description: "Dvokomponentna epoksi masa za popravke.",
-  },
 ];
+// Yachtcare nije u meniju (odluka vlasnika 2026-10-17): osam brendova daje dva puna reda.
+// Stranica /brendovi/yachtcare i proizvodi ostaju. RUPES nije zaseban brend u meniju —
+// prikazan je u okviru Carsystem ponude (/brendovi/carsystem#rupes).
 
 export const SYSTEM_GROUPS: NavigationGroup[] = [
   {

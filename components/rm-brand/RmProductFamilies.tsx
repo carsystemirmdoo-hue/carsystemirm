@@ -10,14 +10,17 @@ import {
   selectRmGroupProducts,
 } from "@/components/rm-brand/rmBrandSelection";
 import type { CarsystemProduct } from "@/lib/carsystem-data";
+import type { ProductContentFit } from "@/lib/product-image-metrics";
 import type { RmBrandClassifications } from "@/lib/rm-brand-classification";
 import styles from "./RmBrandPage.module.css";
 
 export function RmProductFamilies({
   classifications,
+  contentFits,
   products,
 }: {
   classifications: RmBrandClassifications;
+  contentFits: Record<string, ProductContentFit>;
   products: CarsystemProduct[];
 }) {
   return (
@@ -90,7 +93,12 @@ export function RmProductFamilies({
                   <RmProductImageSlot
                     asset={item.product?.productImage}
                     altText={item.product?.productImage?.alt}
-                    aspectRatio={itemIndex === 0 ? "5 / 6" : "4 / 5"}
+                    aspectRatio="4 / 5"
+                    contentFit={
+                      item.product?.productImage?.src
+                        ? contentFits[item.product.productImage.src]
+                        : null
+                    }
                     feature={
                       (item.product
                         ? classifications[item.product.slug]?.technology

@@ -225,6 +225,17 @@
   pointer-events: none;
 }
 
+/* Svetla fotografija: puna podloga iza celog bloka teksta, prelaz tek posle njega. */
+.campaignSlide[data-photo-tone="light"][data-gradient="to-right"] .campaignVisual::before {
+  background: linear-gradient(
+    92deg,
+    var(--home-campaign-background) 0 24%,
+    rgb(5 9 12 / 0.92) 40%,
+    rgb(5 9 12 / 0.62) 50%,
+    transparent 66%
+  );
+}
+
 /* Donji scrim drži kontrole čitljivim nad svetlim delovima fotografije. */
 .campaignVisual[data-visual="photo"]::after {
   position: absolute;
@@ -467,6 +478,16 @@
       transparent 72%
     );
   }
+
+  .campaignSlide[data-photo-tone="light"][data-gradient="to-right"] .campaignVisual::before {
+    background: linear-gradient(
+      92deg,
+      var(--home-campaign-background) 0 30%,
+      rgb(5 9 12 / 0.92) 50%,
+      rgb(5 9 12 / 0.6) 62%,
+      transparent 78%
+    );
+  }
 }
 
 @media (max-width: 53.75rem) {
@@ -532,7 +553,8 @@
   }
 
   /* Bez teksta preko fotografije na mobilnom — samo stapanje ka dnu. */
-  .campaignSlide[data-gradient="to-right"] .campaignVisual::before {
+  .campaignSlide[data-gradient="to-right"] .campaignVisual::before,
+  .campaignSlide[data-photo-tone="light"][data-gradient="to-right"] .campaignVisual::before {
     background: linear-gradient(
       180deg,
       transparent 58%,

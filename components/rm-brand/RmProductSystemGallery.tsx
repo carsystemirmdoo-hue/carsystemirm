@@ -10,6 +10,7 @@ import {
 } from "@/components/rm-brand/rmBrandData";
 import { selectRmGroupProducts } from "@/components/rm-brand/rmBrandSelection";
 import type { CarsystemProduct } from "@/lib/carsystem-data";
+import type { ProductContentFit } from "@/lib/product-image-metrics";
 import type { RmBrandClassifications } from "@/lib/rm-brand-classification";
 import styles from "./RmBrandPage.module.css";
 
@@ -30,12 +31,17 @@ const categoryLabels = {
 
 export function RmProductSystemGallery({
   classifications,
+  contentFits,
   products,
 }: {
   classifications: RmBrandClassifications;
+  /** Izmereni okviri proizvoda po putanji slike (računa server). */
+  contentFits: Record<string, ProductContentFit>;
   products: CarsystemProduct[];
 }) {
   const [activeId, setActiveId] = useState(rmGallerySystems[0].id);
+  const fitFor = (product?: CarsystemProduct) =>
+    product?.productImage?.src ? contentFits[product.productImage.src] : null;
   const activeIndex = rmGallerySystems.findIndex((item) => item.id === activeId);
   const activeSystem = rmGallerySystems[Math.max(activeIndex, 0)];
 
@@ -125,6 +131,7 @@ export function RmProductSystemGallery({
             <article className={styles.systemGalleryHeroProduct}>
               <RmProductImageSlot
                 asset={centralItem.product?.productImage}
+                contentFit={fitFor(centralItem.product)}
                 altText={centralItem.product?.productImage?.alt}
                 aspectRatio="5 / 6"
                 feature={getItemTechnology(centralItem, activeSystem)}
@@ -146,6 +153,7 @@ export function RmProductSystemGallery({
                 <article key={`${item.name}-${index}`}>
                   <RmProductImageSlot
                     asset={item.product?.productImage}
+                    contentFit={fitFor(item.product)}
                     altText={item.product?.productImage?.alt}
                     aspectRatio="4 / 5"
                     feature={getItemTechnology(item, activeSystem)}

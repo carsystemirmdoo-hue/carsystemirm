@@ -85,12 +85,12 @@ try {
     check("uvoz: 11.700,00 ÷ 5 = 2.340,00 po JM", body.includes("2.340,00"));
     check("uvoz: neispravan red izdvojen", /Neispravni redovi[\s\S]*SINT-U25/.test(body));
     check("uvoz: nova šifra u koraku 4", body.includes("SINT-NOVO9"));
-    check("uvoz: provera šifre (3 od 3 interne)", /Provera šifre:\s*3 od 3 šifara postoji kao naša interna šifra/.test(body));
+    check("uvoz: provera šifre (2 od 3 su naše interne)", /Provera šifre:\s*2 od 3 šifara postoji kao naša interna šifra/.test(body));
     // Fajl dobavljača: slučajno poklapanje sa internom šifrom NIJE veza — red ostaje nerešen.
     await go(p, "/portal/cene/uvoz");
     await p.setInputFiles("#uvoz-fajl", { name: "sint-dobavljac.csv", mimeType: "text/csv", buffer: Buffer.from(`Sifra;Naziv;VP\nSINT-L05;Lak 5L;2.400,00\nDOB-1;Disk;40,00\n`) });
     await p.getByText("šifra dobavljača", { exact: true }).click();
-    await p.getByLabel("Dobavljač").fill("SINT Dobavljač A");
+    await p.locator("#uvoz-dobavljac").fill("SINT Dobavljač A");
     await p.getByText("jedinici mere (l, kg, kom)").click();
     await Promise.all([p.waitForURL(/\/portal\/cene\/uvoz\/[0-9a-f-]{36}/, { timeout: 60000 }), p.getByRole("button", { name: /Dalje: prepoznavanje/ }).click()]);
     const dob = await p.locator("main").innerText();

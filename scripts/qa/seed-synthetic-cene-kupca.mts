@@ -24,12 +24,12 @@ const ids = creds.ids;
 const sql = postgres(process.env.TEST_DATABASE_URL as string, { max: 1, onnotice: () => {} });
 const today = new Intl.DateTimeFormat("en-CA", { timeZone: "Europe/Belgrade" }).format(new Date());
 
-async function rule(customerId: string, scope: { productScope: "article" | "all"; articleId?: string }, pct: number, cond: string | null, opts: { from?: string; to?: string | null; kind?: "redovni" | "akcija"; by?: string } = {}) {
+async function rule(customerId: string, scope: { productScope: "article" | "all" | "brand"; articleId?: string; brand?: string }, pct: number, cond: string | null, opts: { from?: string; to?: string | null; kind?: "redovni" | "akcija"; by?: string } = {}) {
   const s = { customerScope: "customer", customerId, ...scope, paymentCondition: cond };
   await sql`
-    INSERT INTO price_rules (customer_scope, customer_id, product_scope, article_id, precedence_level, scope_key, value_kind, discount_percent,
+    INSERT INTO price_rules (customer_scope, customer_id, product_scope, article_id, brand, precedence_level, scope_key, value_kind, discount_percent,
                              effective_from, effective_to, status, reason, proposed_by, proposed_at, decided_by, decided_at, biznisoft_entry_required, payment_condition, rule_kind)
-    VALUES ('customer', ${customerId}, ${scope.productScope}, ${scope.articleId ?? null}, ${precedenceLevelFor(s)}, ${scopeKeyFor(s)}, 'discount_percent', ${pct},
+    VALUES ('customer', ${customerId}, ${scope.productScope}, ${scope.articleId ?? null}, ${scope.brand ?? null}, ${precedenceLevelFor(s)}, ${scopeKeyFor(s)}, 'discount_percent', ${pct},
             ${opts.from ?? "2026-01-01"}, ${opts.to ?? null}, 'approved_pending_biznisoft', 'sintetički dogovor', ${opts.by ?? ids.vlasnik}, now(), ${opts.by ?? ids.vlasnik}, now(), false, ${cond}, ${opts.kind ?? "redovni"})`;
 }
 
@@ -75,6 +75,9 @@ for (const [c, odl, av] of [[A, 18, 23], [B, 22, 26], [C, 10, 14]] as const) {
   await rule(c, { productScope: "all" }, odl, "odlozeno_30");
   await rule(c, { productScope: "all" }, av, "avans");
 }
+// Osnovni seed ima BASLAC-like rabat za proizvođača SINTLAK bez uslova (30 %) i uz avans (35 %); dodaje se i
+// odloženo (30 %), da opcija odloženo ne ostane „na upit“ zbog šireg pravila opcije (0043).
+await rule(A, { productScope: "brand", brand: "SINTLAK" }, 30, "odlozeno_30");
 await rule(A, { productScope: "article", articleId: art["SINT-K18"] }, 24, "odlozeno_30", { from: "2026-09-21", by: ids.petar });
 await rule(A, { productScope: "article", articleId: art["SINT-K18"] }, 29, "avans", { from: "2026-09-21", by: ids.petar });
 await rule(A, { productScope: "article", articleId: art["SINT-T19"] }, 24, "odlozeno_30", { from: "2026-09-21" });
@@ -82,6 +85,20 @@ await rule(A, { productScope: "article", articleId: art["SINT-T19"] }, 29, "odlo
 await rule(A, { productScope: "article", articleId: art["SINT-D24"] }, 28, "odlozeno_30", { from: "2026-01-01" });
 await rule(A, { productScope: "article", articleId: art["SINT-D24"] }, 33, "odlozeno_30", { from: addDays(today, 20), to: addDays(today, 50), kind: "akcija" });
 await rule(A, { productScope: "article", articleId: nov.id }, 27, "avans", { from: today, by: ids.petar });
+
+// Usklađivanje sa opcijama plaćanja (0043): dogovor bez uslova za artikal/proizvođača dobija i izričite vrednosti
+// za odloženo i avans, inače šire pravilo opcije (osnovni rabat) šalje opciju „na upit“ (izuzetak za pregled).
+const unconditional = await sql<{ product_scope: string; article_id: string | null; brand: string | null; d: string }[]>`
+  SELECT product_scope::text, article_id, brand, discount_percent::text AS d FROM price_rules
+   WHERE customer_id = ${A} AND payment_condition IS NULL AND product_scope IN ('article', 'brand') AND status = 'approved_pending_biznisoft'`;
+for (const u of unconditional) {
+  for (const cond of ["odlozeno_30", "avans"]) {
+    const scope = u.product_scope === "article" ? { productScope: "article" as const, articleId: u.article_id as string } : { productScope: "brand" as const, brand: u.brand as string };
+    const [{ n }] = await sql<{ n: number }[]>`SELECT count(*)::int AS n FROM price_rules WHERE customer_id = ${A} AND payment_condition = ${cond}
+      AND product_scope = ${u.product_scope} AND article_id IS NOT DISTINCT FROM ${u.article_id} AND brand IS NOT DISTINCT FROM ${u.brand}`;
+    if (!n) await rule(A, scope, cond === "avans" ? Math.min(100, Number(u.d) + 5) : Number(u.d), cond);
+  }
+}
 
 const items = (before: string, after: string, name: string, code: string, option: string) => sql.json([{ code, name, option, before, after }]);
 await sql`INSERT INTO rebate_change_notices (recipient_user_id, actor_user_id, customer_id, source_batch, period, items, note)

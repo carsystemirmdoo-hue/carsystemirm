@@ -23,20 +23,30 @@ test bazi.
 | Obaveštenja se brišu posle 10 dana (pri čitanju i pri čuvanju); tabela nema vezu ka pravilima, pa brisanje ne dira rabate ni akcije | `purgeOldNotices` |
 | Uvoz menja samo VP cene; rabati se ne prepisuju; prepoznavanje samo po šifri (naziv je upozorenje); duplikati i neispravni redovi se ne primenjuju | `prepareTablePriceList`, `classifyPriceRows` |
 | Cena po pakovanju se deli potvrđenom količinom JM u pakovanju; artikal bez potvrđenog pakovanja ide u neispravne redove | `buildTableRows` |
-| Izričita veza šifre iz cenovnika sa postojećim artiklom se pamti i važi za sledeće uvoze | `article_code_aliases` |
-
-Šifra artikla je jedinstvena u portalu (`articles.code`), pa je izbor dobavljača iz prototipa nepotreban: ista šifra
-ne može pripadati dvama artiklima, a drugačija šifra se povezuje samo izričito.
+| Uvoz tabele traži izbor: u koloni je **naša interna šifra** ili **šifra dobavljača** (+ naziv dobavljača). Šifra dobavljača se povezuje SAMO preko potvrđene veze tog dobavljača; bez nje red ostaje nerešen — ni po internoj šifri, ni po nazivu. Nov artikal uz šifru dobavljača traži našu internu šifru. Pregled pokazuje koliko šifara iz fajla postoji kao naša interna šifra (upozorenje kada izbor verovatno nije tačan) | `supplier_article_codes`, `scopeOf`, `codeCheck` |
+| Interne šifre: nepoznata šifra je nov artikal ili se preskače; povezivanja nema | `applyNewArticleDecisions` |
+| Tri decimale: pre čuvanja „Pamti se rabat“ i „Cena koja će važiti“ (uz datum); ako tačna cena ne postoji, jasno „pamti se X %, važiće Y“; posle čuvanja i učitavanja ista cena, i u korpi | `evaluateEdit`, test „tri decimale“ |
 
 ## 2. Migracija 0057 (`db/migrations/0057_customer_rebate_sheet.sql`, povratak u `db/rollback/`)
 
 - `price_rules.rule_kind` (`redovni` | `akcija`; akcija mora imati kraj);
-- `article_new_defaults`, `article_code_aliases` (samo dodavanje; uloga aplikacije bez UPDATE/DELETE);
+- `article_new_defaults`, `supplier_article_codes` (samo dodavanje; uloga aplikacije bez UPDATE/DELETE);
 - `rebate_change_notices` (UPDATE za „pročitano“, DELETE za brisanje posle 10 dana);
-- `price_list_imports`: `source_format`, `price_unit`, `column_map`, `decisions`; `price_list_import_rows`:
+- `price_list_imports`: `source_format`, `price_unit`, `column_map`, `decisions`, `code_kind`, `supplier_key`,
+  `supplier_name`; `price_list_import_rows`:
   `raw_price`, `file_unit`, `file_pack`.
 
 Pre povratka migracije pravila tipa „akcija“ treba opozvati — posle povratka bi postala redovna pravila u sukobu.
+
+## 2a. Brisanje obaveštenja posle 10 dana
+
+- Fizičko brisanje: `DELETE FROM rebate_change_notices WHERE created_at < now() - 10 dana` (`purgeOldNotices`).
+- Pokreće se (1) dnevno, zakazanim zadatkom **Vercel Cron** (`vercel.json` → `crons`, 03:15 UTC) na ruti
+  `/api/cron/obavestenja-rabata`, i (2) usput pri svakom čitanju i čuvanju. Lista ionako prikazuje samo obaveštenja
+  mlađa od 10 dana.
+- Ruta traži `Authorization: Bearer $CRON_SECRET` (Vercel ga šalje sam); bez podešene tajne odbija (503). Pre objave
+  na hostingu: u Vercel projektu za Production dodati promenljivu `CRON_SECRET` (nasumičnih ≥ 32 znaka). Hobby plan
+  dozvoljava dnevne zadatke bez troška.
 
 ## 3. Ekrani
 

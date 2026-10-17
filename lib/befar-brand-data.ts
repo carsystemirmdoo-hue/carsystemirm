@@ -79,7 +79,7 @@ export const befarHero = {
       uklonjena jer je preklapala lead pasus. */
   backdropCode: "04402",
   logo: {
-    src: "/brands/befar/brand/befar-logo-white-on-red.png",
+    src: "/brands/befar.svg",
     alt: "Befar",
     width: 635,
     height: 192,

@@ -3809,6 +3809,11 @@
   background: linear-gradient(180deg, #0a0b0e 0%, var(--ds-c-bg) 100%);
 }
 
+/* U tamnoj temi je takeover svetao (suprotna tema), pa prelaz kreće od papira. */
+:global(html.dark) .chapterTransition {
+  background: linear-gradient(180deg, #f1eee8 0%, var(--ds-c-bg) 100%);
+}
+
 @media (max-width: 720px) {
   .chapterTransition {
     height: 90px;
@@ -3932,20 +3937,14 @@
   letter-spacing: 0.02em;
 }
 
-:global(html.dark) .supportVisual figcaption {
-  /* Na svetlijoj sivoj sceni iza proizvoda (tamna tema). */
-  color: #eef0f3;
-}
-
 /*
- * Tamna tema: disk serije je taman (≈ rgb 39,35,31) na tamnoj ploči, pa se
- * silueta gubila. Odvaja ga meko svetlo IZA proizvoda — bez obrisa i bez
- * filtera na samoj slici — i tamna, a ne crna-na-crnoj, senka.
+ * Tamna tema: mirna ravna površina scene, kao u svetloj temi (2026-10-17).
+ * Ranije je ovde bio sivi radijalni gradijent sa svetlim oreolom, uveden za
+ * raniji tamni disk serije; sadašnja slika (CPS 3.0, providna PNG/WebP
+ * pozadina) je svetla i jasno se odvaja i bez oreola.
  */
 :global(html.dark) .supportVisual {
-  background:
-    radial-gradient(closest-side at 50% 52%, oklch(0.56 0.01 255) 0%, oklch(0.46 0.012 255) 62%, oklch(0.33 0.014 255) 100%),
-    oklch(0.3 0.014 255);
+  background: var(--ds-c-scene-a);
 }
 
 :global(html.dark) .supportVisual img {

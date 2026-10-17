@@ -147,4 +147,42 @@ export function getProductContentFitStyle(
   } as CSSProperties;
 }
 
+/**
+ * Okvir sadržaja za kartice koje se crtaju i u klijentskim komponentama
+ * (R-M galerija). Samo brojevi, pa se bezbedno prosleđuju kao prop.
+ */
+export type ProductContentFit = {
+  w: number;
+  h: number;
+  aspect: number;
+  fx: number;
+  fy: number;
+  ox: number;
+  oy: number;
+};
+
+export function getProductContentFit(
+  src: string | null | undefined,
+): ProductContentFit | null {
+  const metrics = getProductImageMetrics(src);
+  if (!metrics || metrics.boxSource !== "alpha") return null;
+  const { w, h, aspect, fx, fy, ox, oy } = metrics;
+  if (!(fx > 0 && fy > 0 && aspect > 0)) return null;
+  return { w, h, aspect, fx, fy, ox, oy };
+}
+
+/** Okviri sadržaja po putanji slike za skup proizvoda (ključ = izvorna putanja). */
+export function getProductContentFits(
+  sources: (string | null | undefined)[],
+  toDisplaySrc: (src: string) => string,
+): Record<string, ProductContentFit> {
+  const fits: Record<string, ProductContentFit> = {};
+  for (const src of sources) {
+    if (!src || fits[src]) continue;
+    const fit = getProductContentFit(toDisplaySrc(src));
+    if (fit) fits[src] = fit;
+  }
+  return fits;
+}
+
 export const productImageMetricsCounts = (manifest as unknown as ManifestShape).counts;

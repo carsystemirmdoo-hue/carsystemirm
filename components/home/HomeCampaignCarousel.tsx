@@ -263,6 +263,7 @@ function HomeCampaignSlide({
       aria-label={`${index + 1} od ${homeCampaignSlides.length}`}
       data-active={active || undefined}
       data-gradient={slide.gradientDirection}
+      data-photo-tone={slide.photoTone}
       data-text-theme={slide.textTheme}
       data-visual={slide.visual}
       style={

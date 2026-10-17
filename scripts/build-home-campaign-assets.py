@@ -5,9 +5,11 @@ Deterministicki: iz istih izvora uvek proizvodi identicne izlaze. Ne
 rekonstruise, ne generise i ne retusira motiv — samo isecanje originalnih
 piksela i enkodovanje u WebP.
 
-Carsystem slajd koristi odobrenu homepage hero fotografiju
-(`public/images/home/hero-dark.png`, 1672x941), koja je i dalje u upotrebi za
-route-transition handoff i zato se ne menja ni brise.
+Carsystem slajd koristi fotografiju lakirera sa Carsystem brend stranice
+(`public/images/brands/carsystem/hero/CS-Lackieranzug-Explorer-Startbanner-2-min.jpg`,
+1920x920, dostavio vlasnik 2026-10-15). Ranija generisana fotografija
+(`public/images/home/hero-dark.png`) vise nije izvor slajda (odluka vlasnika
+2026-10-17); ostaje samo za route-transition handoff.
 
   python3 scripts/build-home-campaign-assets.py [--check]
 """
@@ -26,11 +28,15 @@ except ImportError:  # pragma: no cover
 ROOT = Path(__file__).resolve().parents[1]
 OUTPUT_DIR = ROOT / "public/images/home/campaign"
 
-CARSYSTEM_SOURCE = ROOT / "public/images/home/hero-dark.png"
+CARSYSTEM_SOURCE = (
+    ROOT / "public/images/brands/carsystem/hero/CS-Lackieranzug-Explorer-Startbanner-2-min.jpg"
+)
 
-# Mobilni kadar prati postojecu R-M campaign konvenciju (4:3) i poravnat je uz
-# desnu ivicu, tako da lakirer i panel — glavni motiv — ostanu u kadru.
+# Mobilni kadar prati postojecu R-M campaign konvenciju (4:3). Lakirer stoji
+# izmedju ~52 % i ~86 % sirine, a pistolj oko 44 %; kadar pocinje kod 27 %
+# sirine, tako da pistolj, maska i lakirer ostanu u kadru bez skaliranja motiva.
 MOBILE_ASPECT = (4, 3)
+MOBILE_LEFT_RATIO = 0.27
 
 
 def build_carsystem(check: bool) -> list[tuple[Path, tuple[int, int]]]:
@@ -48,8 +54,8 @@ def build_carsystem(check: bool) -> list[tuple[Path, tuple[int, int]]]:
         crop_width = round(crop_height * MOBILE_ASPECT[0] / MOBILE_ASPECT[1])
         if crop_width > image.width:
             raise SystemExit("Mobilni kadar izlazi izvan originalne sirine.")
-        crop_left = image.width - crop_width
-        mobile_image = image.crop((crop_left, 0, image.width, crop_height))
+        crop_left = min(round(image.width * MOBILE_LEFT_RATIO), image.width - crop_width)
+        mobile_image = image.crop((crop_left, 0, crop_left + crop_width, crop_height))
 
     mobile = OUTPUT_DIR / "carsystem-home-campaign-brand-mobile.webp"
     if not check:

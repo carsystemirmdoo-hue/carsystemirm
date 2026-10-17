@@ -8,6 +8,10 @@
    * luminansi bliska završnom stanju, pa je silazak monoton.
    */
   --takeover-canvas: #14161f;
+  /* Mastilo i kontrastni sloj bloka; svetla varijanta ih menja kao celinu. */
+  --takeover-ink: #f4f1eb;
+  --takeover-ink-muted: rgb(244 241 235 / 0.82);
+  --takeover-contrast-rgb: 5 7 12;
   --surface-offset: -32svh;
   --artwork-offset: 18svh;
   --background-opacity: 0;
@@ -36,22 +40,30 @@
   height: 155svh;
   overflow: clip;
   background: var(--return-surface);
-  color: #f4f1eb;
+  color: var(--takeover-ink);
   isolation: isolate;
 }
 
 /*
- * Dark tema: okolna stranica je već tamna, pa promena same svetline ne bi
- * bila primetna (izmereno: 11.2 → 10.4 kroz ceo ulazak). Zato takeover u dark
- * temi menja ton i zasićenje — duboka šljiva/indigo osnova sa jačim bloom-om,
- * umesto još jednog neutralnog crnog bloka.
+ * Blok je uvek u suprotnoj temi od sajta (odluka vlasnika 2026-10-17): na
+ * svetlom sajtu taman, na tamnom sajtu svetao. Ranije je tamna tema dobijala
+ * tamnu šljivu (#1d0f2e), pa se blok nije izdvajao od okoline.
  *
- * Podloga je pomerena dublje u šljivu (#1d0f2e) i dobija chapter bloom kroz
- * colorWash, pa je razlika u odnosu na #070910 okoline hue + chroma, a ne samo
- * svetlina koju dark tema ionako ne bi prenela.
+ * Svetla varijanta menja celinu, ne samo boju slova: papirna podloga, ista
+ * painterly pozadina preneta u svetlo (invert + hue-rotate 180° čuva nijanse
+ * poteza, a obrće svetlinu), svetao kontrastni sloj iza teksta, tamno mastilo
+ * i tamni CTA. Potezi u prvom planu ostaju isti.
  */
 :global(html.dark) .section {
-  --takeover-canvas: #1d0f2e;
+  --takeover-canvas: #f1eee8;
+  --takeover-ink: #14161e;
+  --takeover-ink-muted: rgb(20 22 30 / 0.78);
+  --takeover-contrast-rgb: 241 238 232;
+  color: var(--takeover-ink);
+}
+
+:global(html.dark) .backgroundArtwork {
+  filter: invert(1) hue-rotate(180deg) saturate(0.85) contrast(0.78) brightness(1.06);
 }
 
 /*
@@ -163,13 +175,13 @@
   background:
     radial-gradient(
       ellipse at 16% 63%,
-      rgb(5 7 12 / calc(var(--contrast-opacity) * 0.86)) 0 23%,
-      rgb(5 7 12 / calc(var(--contrast-opacity) * 0.56)) 36%,
+      rgb(var(--takeover-contrast-rgb) / calc(var(--contrast-opacity) * 0.86)) 0 23%,
+      rgb(var(--takeover-contrast-rgb) / calc(var(--contrast-opacity) * 0.56)) 36%,
       transparent 66%
     ),
     linear-gradient(
       90deg,
-      rgb(5 7 12 / calc(var(--contrast-opacity) * 0.62)),
+      rgb(var(--takeover-contrast-rgb) / calc(var(--contrast-opacity) * 0.62)),
       transparent 57%
     );
   transform: translate3d(0, var(--artwork-offset), 0);
@@ -182,23 +194,11 @@
 }
 
 /*
- * U dark temi wash prestaje da bude zatamnjenje (podloga je već tamna) i
- * postaje bloom: topli magenta u zoni sudara poteza i hladni cyan u gornjem
- * desnom uglu. Time se poglavlje razlikuje po boji, a ne po svetlini.
- * Opacity i dalje vozi isti monotoni --color-wash-opacity, pa nema treperenja.
+ * U svetloj varijanti (tamna tema sajta) wash nije zatamnjenje nego blag,
+ * miran ton papira: isti monotoni --color-wash-opacity, bez treperenja.
  */
 :global(html.dark) .colorWash {
-  background:
-    radial-gradient(
-      ellipse 62% 54% at 62% 58%,
-      rgb(239 11 130 / 0.16),
-      transparent 68%
-    ),
-    radial-gradient(
-      ellipse 48% 44% at 88% 12%,
-      rgb(0 185 215 / 0.11),
-      transparent 70%
-    );
+  background: rgb(241 238 232 / 0.1);
 }
 
 .section[data-wash-disabled="true"] .contentContrast,
@@ -235,7 +235,7 @@
 
 .eyebrow {
   margin: 0 0 clamp(18px, 2.2vw, 32px);
-  color: rgb(244 241 235 / 0.82);
+  color: var(--takeover-ink-muted);
   font-family: var(--font-technical), var(--font-geist-mono), monospace;
   font-size: var(--ds-font-label);
   font-weight: 500;
@@ -264,7 +264,7 @@
 .description {
   max-width: 50ch;
   margin: clamp(24px, 3vw, 42px) 0 0;
-  color: rgb(244 241 235 / 0.82);
+  color: var(--takeover-ink-muted);
   font-size: var(--ds-font-lead);
   line-height: 1.55;
 }
@@ -278,9 +278,9 @@
   gap: 12px;
   margin-top: clamp(24px, 2.8vw, 40px);
   padding: 0 22px;
-  border: 1px solid #f4f1eb;
+  border: 1px solid var(--takeover-ink);
   border-radius: var(--ds-ctl-radius);
-  color: #f4f1eb;
+  color: var(--takeover-ink);
   font: var(--ds-ctl-font);
   letter-spacing: 0.02em;
   text-decoration: none;
@@ -290,12 +290,12 @@
 }
 
 .primaryCta:hover {
-  background: #f4f1eb;
-  color: #14161e;
+  background: var(--takeover-ink);
+  color: var(--takeover-canvas);
 }
 
 .primaryCta:focus-visible {
-  outline: 2px solid #f4f1eb;
+  outline: 2px solid var(--takeover-ink);
   outline-offset: 2px;
 }
 
@@ -319,14 +319,14 @@
     background:
       radial-gradient(
         ellipse at 30% 61%,
-        rgb(5 7 12 / calc(var(--contrast-opacity) * 0.9)) 0 24%,
-        rgb(5 7 12 / calc(var(--contrast-opacity) * 0.62)) 42%,
+        rgb(var(--takeover-contrast-rgb) / calc(var(--contrast-opacity) * 0.9)) 0 24%,
+        rgb(var(--takeover-contrast-rgb) / calc(var(--contrast-opacity) * 0.62)) 42%,
         transparent 74%
       ),
       linear-gradient(
         90deg,
-        rgb(5 7 12 / calc(var(--contrast-opacity) * 0.7)) 0%,
-        rgb(5 7 12 / calc(var(--contrast-opacity) * 0.42)) 78%,
+        rgb(var(--takeover-contrast-rgb) / calc(var(--contrast-opacity) * 0.7)) 0%,
+        rgb(var(--takeover-contrast-rgb) / calc(var(--contrast-opacity) * 0.42)) 78%,
         transparent 112%
       );
   }

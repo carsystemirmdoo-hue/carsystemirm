@@ -287,31 +287,32 @@ body {
   );
 }
 
+/* U tamnoj temi je takeover svetao blok, pa prsten kursora tokom poglavlja ide ka mastilu. */
 :root.dark {
   --cs-orb-core: color-mix(
     in oklab,
     oklch(0.68 0.22 27),
-    #ff4ca5 var(--chapter-mix)
+    #e0127e var(--chapter-mix)
   );
   --cs-orb-core-glow: color-mix(
     in oklab,
     oklch(0.62 0.22 27 / 0.48),
-    rgb(255 76 165 / 0.5) var(--chapter-mix)
+    rgb(224 18 126 / 0.4) var(--chapter-mix)
   );
   --cs-orb-halo: color-mix(
     in oklab,
     oklch(0.98 0.004 250 / 0.075),
-    rgb(244 241 235 / 0.11) var(--chapter-mix)
+    rgb(20 22 30 / 0.08) var(--chapter-mix)
   );
   --cs-orb-ring: color-mix(
     in oklab,
     oklch(0.98 0.004 250 / 0.34),
-    rgb(244 241 235 / 0.48) var(--chapter-mix)
+    rgb(20 22 30 / 0.4) var(--chapter-mix)
   );
   --cs-orb-ring-strong: color-mix(
     in oklab,
     oklch(0.98 0.004 250 / 0.58),
-    rgb(244 241 235 / 0.72) var(--chapter-mix)
+    rgb(20 22 30 / 0.64) var(--chapter-mix)
   );
 }
 

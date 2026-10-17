@@ -78,6 +78,8 @@ export function BaslacHero() {
     <section
       ref={stageRef}
       className={styles.campaignStage}
+      // Hero je taman u obe teme: okvir sajta (header, meniji) ga prati.
+      data-frame-theme="dark"
       aria-label="Baslac kampanjski baneri"
       aria-roledescription="carousel"
       data-active-slide={activeSlide.id}

@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Footer } from "@/components/layout/Footer";
+import { FrameThemeBoot } from "@/components/theme/FrameThemeBoot";
 import {
   carfitAbrasiveStory,
   carfitCategories,
@@ -172,6 +173,8 @@ export function CarfitBrandPage({ brand }: { brand: CarsystemBrand }) {
         {/* ---------------------------------------------------------- hero */}
         <section
           className={`${styles.hero} ${styles.gridSkin} ${styles.gridSkinInvert} ${styles.anchor}`}
+          // Hero je uvek grafitni: okvir sajta (header, meniji) ga prati.
+          data-frame-theme="dark"
           id="pregled"
           aria-labelledby="carfit-title"
         >
@@ -303,6 +306,7 @@ export function CarfitBrandPage({ brand }: { brand: CarsystemBrand }) {
             </div>
           </div>
         </section>
+        <FrameThemeBoot />
 
         <BrandSectionNav
           ariaLabel="Brzi pristup Car Fit programu"

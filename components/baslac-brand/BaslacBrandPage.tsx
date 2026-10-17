@@ -11,6 +11,7 @@ import {
   type BaslacSystemId,
 } from "@/lib/baslac-systems";
 import { BaslacGreyShade } from "./BaslacGreyShade";
+import { FrameThemeBoot } from "@/components/theme/FrameThemeBoot";
 import { BaslacHero } from "./BaslacHero";
 import { BaslacMediaSlot } from "./BaslacMediaSlot";
 import { BaslacPageShell } from "./BaslacPageShell";
@@ -42,6 +43,7 @@ export function BaslacBrandPage({
     <BaslacPageShell>
       <main>
         <BaslacHero />
+        <FrameThemeBoot />
         <BrandSectionNav
           ariaLabel="Brzi pristup Baslac programu"
           items={baslacSectionNavItems}

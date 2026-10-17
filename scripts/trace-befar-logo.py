@@ -24,6 +24,7 @@ from PIL import Image
 ROOT = Path(__file__).resolve().parents[1]
 SOURCE = ROOT / "public/brands/befar/brand/befar-logo-white-on-red.png"
 TARGET = ROOT / "public/brands/befar.svg"
+MONO_TARGET = ROOT / "public/brands/mono/befar.svg"
 SCALE = 8
 RED = "#E30613"  # dominantna boja polja u originalu (227, 6, 19)
 
@@ -73,7 +74,20 @@ def main() -> int:
         f'<g transform="{transform}"><path fill="{RED}" d="{" ".join(outer)}"/>'
         f'<path fill="#FFFFFF" d="{" ".join(glyph)}"/></g>\n</svg>\n'
     )
+    # Jednobojna maska za traku brendova: puno polje, izrezana slova (currentColor).
+    vw, vh = width * SCALE, height * SCALE
+    MONO_TARGET.write_text(
+        f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {vw} {vh}" width="{width}" height="{height}">\n'
+        "<!-- Jednobojna maska Befar znaka za traku brendova: polje je puno, slova i lice su\n"
+        "     izrezani. Ista geometrija kao public/brands/befar.svg (prepis zvaničnog PNG-a);\n"
+        "     boju daje currentColor trake. Generiše scripts/trace-befar-logo.py. -->\n"
+        f'<defs><mask id="befar-mono" maskUnits="userSpaceOnUse" x="0" y="0" width="{vw}" height="{vh}">\n'
+        f'<g transform="{transform}"><path fill="#fff" d="{" ".join(outer)}"/>'
+        f'<path fill="#000" d="{" ".join(glyph)}"/></g>\n'
+        f'</mask></defs>\n<rect width="{vw}" height="{vh}" fill="#000" mask="url(#befar-mono)"/>\n</svg>\n'
+    )
     print(f"{TARGET.relative_to(ROOT)}  {width}x{height}")
+    print(f"{MONO_TARGET.relative_to(ROOT)}  {width}x{height}")
     return 0
 
 

@@ -462,8 +462,17 @@
   list-style: none;
 }
 
+/* Učvršćivači i razređivači stoje uz zajedničku desnu ivicu u svim redovima;
+   šifra, opis i oznaka dostupnosti ostaju u istom redu (2026-10-17). */
+.ratioPartners {
+  justify-items: end;
+  text-align: right;
+}
+
 .ratioPartners li {
   display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
   align-items: center;
   gap: 0.4rem;
   font-family: var(--font-technical), monospace;
@@ -929,6 +938,15 @@
     grid-template-columns: 1fr;
     gap: 0.6rem;
     text-align: center;
+  }
+
+  .ratioPartners {
+    justify-items: center;
+    text-align: center;
+  }
+
+  .ratioPartners li {
+    justify-content: center;
   }
 
   .ratioCrossing {

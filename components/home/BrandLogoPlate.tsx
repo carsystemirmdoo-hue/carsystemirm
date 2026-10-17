@@ -28,8 +28,8 @@ type BrandMonoLogo = {
   /** Optička visina u traci brendova, u px, posle uklanjanja praznog prostora. */
   railHeight: number;
   /**
-   * `image`: zvaničan znak nema jednobojnu verziju sa providnim izrezima (npr. Befar je beli
-   * znak na punom crvenom polju), pa se prikazuje kakav jeste, bez maske i bez izmena.
+   * `image`: zvaničan znak nema jednobojnu verziju sa providnim izrezima, pa se prikazuje
+   * kakav jeste, bez maske i bez izmena.
    */
   kind?: "mask" | "image";
 };
@@ -102,10 +102,10 @@ export const brandLogos: Record<BrandKey, BrandLogo> = {
     src: "/brands/befar.svg",
     width: 132,
     height: 70,
-    // Vektorski prepis odobrenog znaka (scripts/trace-befar-logo.py): beli znak na punom
-    // crvenom polju, tačno dve boje. Isti fajl koriste meni i Befar stranica. Bez providnih
-    // izreza, pa se u traci prikazuje kakav jeste, u visini SATA znaka.
-    mono: { src: "/brands/befar.svg", aspect: 635 / 192, railHeight: 22, kind: "image" },
+    // Traka je jednobojna kao ostali znakovi (odluka vlasnika 2026-10-17): maska iz istog
+    // vernog vektora (scripts/trace-befar-logo.py) — puno polje u boji trake, izrezana
+    // slova i lice. Meni i Befar stranica zadržavaju crveno-beli znak. Visina = SATA.
+    mono: { src: "/brands/mono/befar.svg", aspect: 635 / 192, railHeight: 22 },
   },
   rupes: {
     name: "RUPES",

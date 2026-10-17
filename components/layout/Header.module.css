@@ -1,83 +1,31 @@
 .header {
   --header-height: 5.5rem;
   /*
-   * Paint takeover: header se boji interpolacijom po kontinualnom
-   * --paint-chapter signalu koji postavlja usePaintTakeoverMotion. Ranije je
-   * ovo bio diskretni attribute swap sa 220ms tranzicijom — pošto je ta
-   * tranzicija bila vremenska, a sve ostalo vezano za skrol, header je pri
-   * bržem skrolu "sevao" nezavisno od ostatka kadra. Sada je i on čista
-   * funkcija pozicije skrola, pa flash nije moguć.
-   *
-   * Vlasništvo nad signalom je geometrijsko: 1 dok probe linija ispod ovog
-   * sticky Headera stoji unutar sekcije takeovera, 0 pre i posle nje. Header
-   * zato nema sopstveni theme state koji bi mogao da ostane zaglavljen — ni
-   * pri izlasku nadole, ni pri povratku nagore, ni posle route promene.
+   * Boje headera prate EFEKTIVNU temu sajta (2026-10-17). Istaknute sekcije
+   * (`data-frame-theme`, components/theme/FrameThemeController.tsx) privremeno
+   * menjaju temu celog okvira, pa header, navigacija brenda i otvoreni meniji
+   * dobijaju iste tokene kao stranica ispod njih. Ranije je header jedini mešao
+   * boje po --paint-chapter signalu početne strane, dok su meniji i ostale
+   * stranice ostajali u drugoj temi.
    */
-  --chapter: clamp(0, var(--paint-chapter, 0), 1);
-  --chapter-mix: calc(var(--chapter) * 100%);
-  --paint-header-surface: color-mix(
-    in oklab,
-    color-mix(in oklch, var(--surface) 97%, transparent),
-    rgb(9 11 19 / 0.9) var(--chapter-mix)
-  );
-  --paint-header-foreground: color-mix(
-    in oklab,
-    var(--foreground),
-    #f4f1eb var(--chapter-mix)
-  );
+  --paint-header-surface: color-mix(in oklch, var(--surface) 97%, transparent);
+  --paint-header-foreground: var(--foreground);
   --header-shell: var(--paint-header-surface);
-  --header-panel: color-mix(
-    in oklab,
-    var(--surface),
-    #0d0f18 var(--chapter-mix)
-  );
-  --header-panel-muted: color-mix(
-    in oklab,
-    var(--surface-muted),
-    #171a25 var(--chapter-mix)
-  );
+  --header-panel: var(--surface);
+  --header-panel-muted: var(--surface-muted);
   --header-ink: var(--paint-header-foreground);
-  --header-muted: color-mix(
-    in oklab,
-    var(--muted-foreground),
-    rgb(244 241 235 / 0.66) var(--chapter-mix)
-  );
-  --header-border: color-mix(
-    in oklab,
-    var(--border),
-    rgb(244 241 235 / 0.2) var(--chapter-mix)
-  );
-  /* Sistem A: jača linija kontrola i crveni tekst prate isti paint signal. */
-  --header-border-strong: color-mix(
-    in oklab,
-    var(--ds-c-line-strong),
-    rgb(244 241 235 / 0.36) var(--chapter-mix)
-  );
+  --header-muted: var(--muted-foreground);
+  --header-border: var(--border);
+  /* Sistem A: jača linija kontrola i crveni tekst. */
+  --header-border-strong: var(--ds-c-line-strong);
   --header-red: var(--accent);
   --header-red-hover: var(--ds-c-accent-hover);
-  --header-red-text: color-mix(
-    in oklab,
-    var(--ds-c-accent-text),
-    #ff6b66 var(--chapter-mix)
-  );
+  --header-red-text: var(--ds-c-accent-text);
   --header-red-ink: var(--accent-foreground);
   --header-red-soft: color-mix(in oklch, var(--accent) 11%, transparent);
-  --header-focus: color-mix(
-    in oklab,
-    var(--ds-c-focus),
-    #ff958a var(--chapter-mix)
-  );
-  --header-hover: color-mix(
-    in oklab,
-    color-mix(in oklch, var(--surface-muted) 76%, transparent),
-    rgb(244 241 235 / 0.08) var(--chapter-mix)
-  );
-  --header-shadow: 0 1.5rem 4.5rem
-    color-mix(
-      in oklab,
-      oklch(0.12 0.016 255 / 0.16),
-      rgb(0 0 0 / 0.42) var(--chapter-mix)
-    );
+  --header-focus: var(--ds-c-focus);
+  --header-hover: color-mix(in oklch, var(--surface-muted) 76%, transparent);
+  --header-shadow: 0 1.5rem 4.5rem oklch(0.12 0.016 255 / 0.16);
   --header-ease: cubic-bezier(0.16, 1, 0.3, 1);
   position: sticky;
   top: 0;
@@ -88,64 +36,29 @@
   background: var(--header-shell);
   color: var(--header-ink);
   font-family: var(--font-body), var(--font-geist-sans), system-ui, sans-serif;
-  /* Boje su direktna funkcija --paint-chapter scroll signala. Vremenska
-     tranzicija bi na svakom frame-u jurila prethodnu vrednost i kasnila za
-     takeoverom, zato ovde animiramo samo hide/show transform. */
-  transition: transform 280ms var(--header-ease);
+  /* Promena teme okvira je kratka i ista za header i stranicu, bez kašnjenja. */
+  transition:
+    transform 280ms var(--header-ease),
+    background-color 200ms ease,
+    border-color 200ms ease,
+    color 200ms ease;
   will-change: transform;
 }
 
 /*
- * Tamna tema: ista formula, ali providnost se meša u `oklab`.
+ * Tamna tema: providnost se meša u `oklab`.
  *
  * `color-mix(in oklch, <tamna neutralna> 97%, transparent)` gubi nijansu
  * (transparent nema hue, a hroma tamne neutralne je ~0), pa je rezultat
- * ispadao topao/crvenkast (oklab a≈+0.006, b≈0) — header je bio braon iznad
- * hladne grafitne strane. U svetloj temi je površina bela i efekat se ne vidi,
- * zato se ovo pravilo ne primenjuje van `.dark`.
+ * ispadao topao/crvenkast — header je bio braon iznad hladne grafitne strane.
  */
 :global(.dark) .header {
-  /*
-   * Paint takeover je u tamnoj temi svetao blok (suprotna tema od sajta, odluka
-   * vlasnika 2026-10-17), pa header tokom poglavlja ide ka papirnoj površini i
-   * tamnom mastilu, istim kontinualnim signalom.
-   */
-  --paint-header-surface: color-mix(
-    in oklab,
-    color-mix(in oklab, var(--dk-1) 94%, transparent),
-    rgb(241 238 232 / 0.94) var(--chapter-mix)
-  );
-  --paint-header-foreground: color-mix(
-    in oklab,
-    var(--foreground),
-    #14161e var(--chapter-mix)
-  );
-  --header-hover: color-mix(
-    in oklab,
-    color-mix(in oklab, var(--dk-3) 80%, transparent),
-    rgb(20 22 30 / 0.06) var(--chapter-mix)
-  );
-  --header-panel: color-mix(in oklab, var(--dk-1), #f4f1eb var(--chapter-mix));
-  --header-panel-muted: color-mix(in oklab, var(--dk-2), #e7e3db var(--chapter-mix));
-  --header-muted: color-mix(
-    in oklab,
-    var(--muted-foreground),
-    rgb(20 22 30 / 0.7) var(--chapter-mix)
-  );
-  --header-border: color-mix(in oklab, var(--dk-line), rgb(20 22 30 / 0.16) var(--chapter-mix));
-  --header-border-strong: color-mix(
-    in oklab,
-    var(--ds-c-line-strong),
-    rgb(20 22 30 / 0.34) var(--chapter-mix)
-  );
-  --header-red-text: color-mix(
-    in oklab,
-    var(--ds-c-accent-text),
-    #b3121b var(--chapter-mix)
-  );
-  --header-focus: color-mix(in oklab, var(--ds-c-focus), #b3121b var(--chapter-mix));
-  --header-shadow: 0 1.5rem 4.5rem
-    color-mix(in oklab, oklch(0.05 0.006 255 / 0.5), rgb(20 22 30 / 0.14) var(--chapter-mix));
+  --paint-header-surface: color-mix(in oklab, var(--dk-1) 94%, transparent);
+  --header-hover: color-mix(in oklab, var(--dk-3) 80%, transparent);
+  --header-panel: var(--dk-1);
+  --header-panel-muted: var(--dk-2);
+  --header-border: var(--dk-line);
+  --header-shadow: 0 1.5rem 4.5rem oklch(0.05 0.006 255 / 0.5);
 }
 
 :global(html[data-rm-atmosphere="refinity"]) .header {
@@ -1064,10 +977,13 @@
 }
 
 /* Izabrano: 2 px akcent + mekana podloga (sistem A). */
+/* Podloga se meša iz palete headera (ne iz tokena stranice), pa tekst i
+   podloga uvek pripadaju istoj temi, i u R-M atmosferi. */
 .brandLink[data-active] {
   border-color: var(--header-red);
-  background: var(--ds-c-accent-soft);
+  background: color-mix(in oklab, var(--header-panel) 88%, var(--header-red));
   box-shadow: inset 0 0 0 1px var(--header-red);
+  color: var(--header-ink);
 }
 
 .brandLogoFrame {

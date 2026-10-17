@@ -3810,7 +3810,7 @@
 }
 
 /* U tamnoj temi je takeover svetao (suprotna tema), pa prelaz kreće od papira. */
-:global(html.dark) .chapterTransition {
+:global(html[data-theme-preference="dark"]) .chapterTransition {
   background: linear-gradient(180deg, #f1eee8 0%, var(--ds-c-bg) 100%);
 }
 

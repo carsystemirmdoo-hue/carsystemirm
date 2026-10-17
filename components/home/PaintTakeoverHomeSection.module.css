@@ -54,7 +54,7 @@
  * poteza, a obrće svetlinu), svetao kontrastni sloj iza teksta, tamno mastilo
  * i tamni CTA. Potezi u prvom planu ostaju isti.
  */
-:global(html.dark) .section {
+:global(html[data-theme-preference="dark"]) .section {
   --takeover-canvas: #f1eee8;
   --takeover-ink: #14161e;
   --takeover-ink-muted: rgb(20 22 30 / 0.78);
@@ -62,7 +62,7 @@
   color: var(--takeover-ink);
 }
 
-:global(html.dark) .backgroundArtwork {
+:global(html[data-theme-preference="dark"]) .backgroundArtwork {
   filter: invert(1) hue-rotate(180deg) saturate(0.85) contrast(0.78) brightness(1.06);
 }
 
@@ -197,7 +197,7 @@
  * U svetloj varijanti (tamna tema sajta) wash nije zatamnjenje nego blag,
  * miran ton papira: isti monotoni --color-wash-opacity, bez treperenja.
  */
-:global(html.dark) .colorWash {
+:global(html[data-theme-preference="dark"]) .colorWash {
   background: rgb(241 238 232 / 0.1);
 }
 

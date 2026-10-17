@@ -38,18 +38,8 @@ export function CarsystemHero() {
 
       <div className={styles.heroGrid}>
         <div className={styles.heroCopy}>
-          <div className={styles.heroBrand}>
-            <span className={styles.heroLogoPlate}>
-              <Image
-                src="/brands/carsystem.svg"
-                alt="Carsystem"
-                width={160}
-                height={72}
-                priority
-              />
-            </span>
-            <span>{carsystemHero.eyebrow}</span>
-          </div>
+          {/* Logotip je u headeru; ovde ostaje samo prateći natpis (2026-10-17). */}
+          <p className={styles.heroBrand}>{carsystemHero.eyebrow}</p>
 
           <div className={styles.heroMessage}>
             <p className={styles.heroSlogan}>{carsystemHero.slogan}</p>

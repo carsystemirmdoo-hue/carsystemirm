@@ -2,11 +2,17 @@
 
 import { useEffect, useState } from "react";
 import { useMotionTransition } from "@/components/motion/MotionConfigProvider";
+import {
+  applyEffectiveTheme,
+  readThemePreference,
+  setThemePreference,
+  THEME_PREFERENCE_EVENT,
+  THEME_STORAGE_KEY,
+} from "@/components/theme/frameTheme";
 
-const THEME_STORAGE_KEY = "theme";
-
+// Prekidač prikazuje i menja izbor korisnika, ne privremenu temu aktivne sekcije.
 function readCurrentTheme() {
-  return document.documentElement.classList.contains("dark") ? "dark" : "light";
+  return readThemePreference();
 }
 
 export function ThemeToggle() {
@@ -20,22 +26,28 @@ export function ThemeToggle() {
       if (event.key !== THEME_STORAGE_KEY) return;
       if (event.newValue === "light" || event.newValue === "dark") {
         setIsDark(event.newValue === "dark");
+        document.documentElement.dataset.themePreference = event.newValue;
+        applyEffectiveTheme();
       }
     }
 
+    function handlePreference() {
+      setIsDark(readCurrentTheme() === "dark");
+    }
+
     window.addEventListener("storage", handleStorage);
-    return () => window.removeEventListener("storage", handleStorage);
+    window.addEventListener(THEME_PREFERENCE_EVENT, handlePreference);
+    return () => {
+      window.removeEventListener("storage", handleStorage);
+      window.removeEventListener(THEME_PREFERENCE_EVENT, handlePreference);
+    };
   }, []);
 
   function applyTheme(next: boolean) {
     setIsDark(next);
-    document.documentElement.classList.toggle("dark", next);
-    document.documentElement.dataset.theme = next ? "dark" : "light";
-    try {
-      localStorage.setItem(THEME_STORAGE_KEY, next ? "dark" : "light");
-    } catch {
-      // localStorage unavailable, theme just won't persist.
-    }
+    // Kontroler okvira posle ovoga ponovo računa privremenu temu sekcije.
+    setThemePreference(next ? "dark" : "light");
+    applyEffectiveTheme();
   }
 
   function toggle() {

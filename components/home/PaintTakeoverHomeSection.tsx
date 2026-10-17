@@ -95,6 +95,8 @@ export function PaintTakeoverHomeSection({
       ref={sectionRef}
       id="paint-takeover"
       className={styles.section}
+      // Suprotna tema od izbora korisnika: okvir sajta (header, meniji) je prati.
+      data-frame-theme="inverse"
       data-paint-debug-layout={debugEnabled ? "true" : undefined}
       data-wash-disabled={washDisabled ? "true" : undefined}
       aria-labelledby="paint-takeover-home-title"

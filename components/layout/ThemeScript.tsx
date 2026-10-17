@@ -10,6 +10,9 @@ const THEME_SCRIPT = `
     var theme = stored === "light" || stored === "dark"
       ? stored
       : (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+    // Trajni izbor korisnika; efektivnu temu (.dark, data-theme) privremeno
+    // menjaju istaknute sekcije (components/theme/frameTheme.ts).
+    document.documentElement.dataset.themePreference = theme;
     document.documentElement.dataset.theme = theme;
     if (theme === "dark") document.documentElement.classList.add("dark");
     else document.documentElement.classList.remove("dark");

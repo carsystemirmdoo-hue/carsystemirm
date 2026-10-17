@@ -228,6 +228,7 @@ function Documentation() {
     <section
       id="documentation"
       className={styles.documentationSection}
+      data-frame-theme="dark"
       aria-labelledby="carsystem-documentation-title"
       data-cs-reveal
     >

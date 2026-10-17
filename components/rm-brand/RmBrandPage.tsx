@@ -79,6 +79,7 @@ export function RmBrandPage({
         <div
           className={styles.refinityTransitionZone}
           data-rm-atmosphere-zone="refinity"
+          data-frame-theme="dark"
         >
           <span className={styles.refinityTransitionGrid} aria-hidden="true" />
           <RmRefinitySection />

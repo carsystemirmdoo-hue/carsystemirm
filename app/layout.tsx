@@ -6,6 +6,7 @@ import { publicSiteOpen } from "@/lib/site-mode";
 import { MotionSystem } from "@/components/motion/MotionSystem";
 import { SiteAccessHandoffScript } from "@/components/layout/SiteAccessHandoffScript";
 import { ThemeScript } from "@/components/layout/ThemeScript";
+import { FrameThemeController } from "@/components/theme/FrameThemeController";
 import { siteConfig } from "@/lib/seo";
 import "./globals.css";
 
@@ -124,6 +125,7 @@ export default function RootLayout({
         suppressHydrationWarning
       >
         <MotionSystem>
+          <FrameThemeController />
           <PublicSiteChrome publicSiteOpen={publicSiteOpen()}>{children}</PublicSiteChrome>
           <CompanionPanel />
         </MotionSystem>

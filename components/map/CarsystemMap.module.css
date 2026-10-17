@@ -232,6 +232,19 @@
   outline-offset: 2px;
 }
 
+/* Grupe lokatora: servis = prazan romb, ostali partneri = manji krug. */
+.mapMarker[data-category="servis"]::before {
+  border: 2px solid var(--ds-c-text);
+  background: var(--ds-c-bg);
+}
+
+.mapMarker[data-category="partner"]::before {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--ds-c-text-2);
+}
+
 .mapMarkerSelected::before {
   width: 14px;
   height: 14px;

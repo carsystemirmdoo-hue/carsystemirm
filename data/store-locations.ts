@@ -16,7 +16,12 @@ export type PublicLocation = {
   latitude?: number;
   longitude?: number;
   type: PublicLocationType;
-  verificationStatus: "verified" | "pending";
+  /**
+   * verified — potvrđeno sa firmom (telefon, radno vreme); reviewed — poslovna
+   * lokacija potvrđena javnim izvorima u reviziji i odobrena za prikaz;
+   * pending — nije javno.
+   */
+  verificationStatus: "verified" | "reviewed" | "pending";
   coordinateStatus: "verified" | "geocoded_preview" | "approximate" | "unavailable";
   isPublic: boolean;
   alternativeNames?: string[];

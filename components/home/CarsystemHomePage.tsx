@@ -33,6 +33,7 @@ import {
   getPartnerCityKey,
   getPartnerLocationTypeLabel,
   getPublicPartnerStores,
+  getPurchaseLocations,
   type PartnerStore,
 } from "@/lib/partner-stores";
 import { getCityDisplayEntries } from "@/components/stores/store-locator-display";
@@ -289,10 +290,11 @@ export function CarsystemHomePage() {
 
     navigator.geolocation.getCurrentPosition(
       (position) => {
-        const nearest = findNearestPartnerStore(publicPartnerStores, {
-          lat: position.coords.latitude,
-          lng: position.coords.longitude,
-        });
+        // Najbliža prodavnica: prvo „Gde kupiti“, ostale grupe samo kao rezerva.
+        const origin = { lat: position.coords.latitude, lng: position.coords.longitude };
+        const nearest =
+          findNearestPartnerStore(getPurchaseLocations(publicPartnerStores), origin) ??
+          findNearestPartnerStore(publicPartnerStores, origin);
 
         if (!nearest) {
           setLocatorStatus(

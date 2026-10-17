@@ -80,6 +80,9 @@ type TableExtras = {
   sourceFormat: "tabela";
   priceUnit: "jm" | "pak";
   columnMap: Record<string, unknown>;
+  codeKind: "interna" | "dobavljac";
+  supplierKey: string | null;
+  supplierName: string | null;
   rows: { rawCents: number; fileUnit: string | null; filePack: string | null }[];
 };
 
@@ -111,7 +114,9 @@ export async function recordPriceListReport(actor: Actor, input: { fileName: str
         checks: r.checks,
         problems: r.problems,
         uploadedBy: actor.id,
-        ...(input.table ? { sourceFormat: input.table.sourceFormat, priceUnit: input.table.priceUnit, columnMap: input.table.columnMap } : {}),
+        ...(input.table
+          ? { sourceFormat: input.table.sourceFormat, priceUnit: input.table.priceUnit, columnMap: input.table.columnMap, codeKind: input.table.codeKind, supplierKey: input.table.supplierKey, supplierName: input.table.supplierName }
+          : {}),
       })
       .onConflictDoNothing({ target: priceListImports.fileSha256 })
       .returning({ id: priceListImports.id });
@@ -168,14 +173,43 @@ export async function effectiveBasePriceCents(onDate: string, q: Queryable = get
   return new Map([...rows].map((r) => [r.article_id, toCents(r.net_price)]));
 }
 
-async function articlesByCode(q: Queryable = getDb()) {
-  // Izričita veza šifre iz cenovnika sa postojećim artiklom (0057) važi kao šifra tog artikla.
-  const rows = await q.execute<{ id: string; code: string; name: string; unit: string | null }>(sql`
-    SELECT id, code, name, unit FROM articles
-    UNION ALL
-    SELECT a.id, al.code, a.name, a.unit FROM article_code_aliases al JOIN articles a ON a.id = al.article_id
-     WHERE NOT EXISTS (SELECT 1 FROM articles x WHERE x.code = al.code)`);
+/** Šta je šifra u fajlu (0057): naša interna šifra ili šifra dobavljača (uz POTVRĐENU vezu po dobavljaču). */
+export type CodeScope = { codeKind: "interna" } | { codeKind: "dobavljac"; supplierKey: string };
+
+async function articlesByCode(q: Queryable = getDb(), scope: CodeScope = { codeKind: "interna" }) {
+  // Šifra dobavljača se povezuje SAMO preko potvrđene veze tog dobavljača — nikad preko interne šifre ni naziva.
+  const rows =
+    scope.codeKind === "interna"
+      ? await q.execute<{ id: string; code: string; name: string; unit: string | null }>(sql`SELECT id, code, name, unit FROM articles`)
+      : await q.execute<{ id: string; code: string; name: string; unit: string | null }>(sql`
+          SELECT a.id, s.supplier_code AS code, a.name, a.unit
+            FROM supplier_article_codes s JOIN articles a ON a.id = s.article_id
+           WHERE s.supplier_key = ${scope.supplierKey}`);
   return new Map([...rows].map((a) => [a.code, a]));
+}
+
+function scopeOf(imp: { code_kind?: string | null; supplier_key?: string | null; codeKind?: string | null; supplierKey?: string | null }): CodeScope {
+  const kind = imp.code_kind ?? imp.codeKind;
+  const key = imp.supplier_key ?? imp.supplierKey;
+  return kind === "dobavljac" && key ? { codeKind: "dobavljac", supplierKey: key } : { codeKind: "interna" };
+}
+
+/** Napomena za neprepoznat red zavisi od vrste šifre u fajlu. */
+function withScopeNotes<T extends { status: string; note: string | null }>(rows: T[], scope: CodeScope): T[] {
+  if (scope.codeKind !== "dobavljac") return rows;
+  return rows.map((r) => (r.status === "nepovezano" ? { ...r, note: "šifra dobavljača nije povezana sa našim artiklom — veza nije potvrđena; red ostaje nerešen" } : r));
+}
+
+/** Ključ dobavljača iz naziva: mala slova, bez dijakritika i suvišnih razmaka. */
+export function supplierKeyOf(name: string) {
+  return name.trim().toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/đ/g, "dj").replace(/[^a-z0-9 ._-]+/g, " ").replace(/\s+/g, " ").trim().slice(0, 80);
+}
+
+/** Dobavljači sa bar jednom potvrđenom vezom šifre (za izbor u uvozu). */
+export async function listSuppliers() {
+  const rows = await getDb().execute<{ key: string; name: string; n: number }>(sql`
+    SELECT supplier_key AS key, max(supplier_name) AS name, count(*)::int AS n FROM supplier_article_codes GROUP BY supplier_key ORDER BY 2`);
+  return [...rows];
 }
 
 async function importRows(importId: string, q: Queryable = getDb()) {
@@ -243,8 +277,11 @@ export async function loadPriceListReview(actor: Actor, importId: string, onDate
     .limit(1);
   if (!imp) return null;
   const date = onDate && ISO.test(onDate) ? onDate : imp.validFrom ?? new Date().toISOString().slice(0, 10);
-  const [rows, byCode, current] = await Promise.all([importRows(importId), articlesByCode(), effectiveBasePriceCents(date)]);
-  const classified = classifyPriceRows(rows, byCode, current);
+  const scope = scopeOf(imp);
+  const [rows, byCode, current, internal] = await Promise.all([importRows(importId), articlesByCode(db, scope), effectiveBasePriceCents(date), articlesByCode(db)]);
+  const classified = withScopeNotes(classifyPriceRows(rows, byCode, current), scope);
+  // Provera šta fajl stvarno nosi: koliko šifara iz fajla postoji kao NAŠA interna šifra.
+  const codeCheck = { total: rows.length, internalHits: rows.filter((r) => internal.has(r.code)).length, linkedHits: scope.codeKind === "dobavljac" ? rows.filter((r) => byCode.has(r.code)).length : null };
   const lastInvoiced = await db.execute<{ article_id: string; unit_price: string; issued_on: string }>(sql`
     SELECT DISTINCT ON (l.article_id) l.article_id, l.unit_price::text AS unit_price, i.issued_on::text AS issued_on
       FROM invoice_lines l JOIN invoices i ON i.id = l.invoice_id
@@ -259,6 +296,7 @@ export async function loadPriceListReview(actor: Actor, importId: string, onDate
     onDate: date,
     canApply: imp.status === "pregled" && checksAllowApply(imp.checks),
     summary: summarizeClassification(classified),
+    codeCheck,
     rows: classified.map((r) => ({ ...r, lastInvoiced: r.articleId ? lastByArticle.get(r.articleId) ?? null : null, packQuantity: r.articleId ? packQty.get(r.articleId) ?? null : null })),
     productGroups: [...groupRows].map((g) => g.g),
   };
@@ -273,7 +311,8 @@ export async function trialPriceCalculation(actor: Actor, importId: string, onDa
   assertImporter(actor);
   if (!ISO.test(onDate)) throw new PriceListError("datum", "Neispravan datum.");
   const db = getDb();
-  const [rows, byCode] = await Promise.all([importRows(importId), articlesByCode()]);
+  const [impRow] = [...(await db.execute<{ code_kind: string; supplier_key: string | null }>(sql`SELECT code_kind, supplier_key FROM price_list_imports WHERE id = ${importId}::uuid`))];
+  const [rows, byCode] = await Promise.all([importRows(importId), articlesByCode(db, scopeOf(impRow ?? {}))]);
   const vpByArticle = new Map<string, number>();
   const articleInfo = new Map<string, { code: string; name: string }>();
   for (const r of rows) {
@@ -373,8 +412,8 @@ export async function applyPriceList(
   const note = input.note?.trim().slice(0, 500) || null;
 
   return getDb().transaction(async (tx) => {
-    const locked = await tx.execute<{ id: string; status: string; report_date: string; checks: unknown; file_name: string; price_unit: string | null }>(sql`
-      SELECT id, status::text AS status, report_date::text AS report_date, checks, file_name, price_unit
+    const locked = await tx.execute<{ id: string; status: string; report_date: string; checks: unknown; file_name: string; price_unit: string | null; code_kind: string; supplier_key: string | null; supplier_name: string | null }>(sql`
+      SELECT id, status::text AS status, report_date::text AS report_date, checks, file_name, price_unit, code_kind, supplier_key, supplier_name
         FROM price_list_imports WHERE id = ${input.importId}::uuid FOR UPDATE`);
     const imp = [...locked][0];
     if (!imp) throw new PriceListError("nema", "Otpremanje ne postoji.");
@@ -383,7 +422,8 @@ export async function applyPriceList(
     if (input.validFrom < imp.report_date) {
       throw new PriceListError("datum", `Datum važenja ne može biti pre datuma stanja izveštaja (${imp.report_date}).`);
     }
-    const [rows, byCode, current] = await Promise.all([importRows(input.importId, tx), articlesByCode(tx), effectiveBasePriceCents(input.validFrom, tx)]);
+    const scope = scopeOf(imp);
+    const [rows, byCode, current] = await Promise.all([importRows(input.importId, tx), articlesByCode(tx, scope), effectiveBasePriceCents(input.validFrom, tx)]);
     const classified = classifyPriceRows(rows, byCode, current);
     const toApply = rowsToApply(classified, new Set(input.confirmedUnclearCodes));
     // Novi i izričito povezani artikli (0057) — samo za redove bez artikla, samo uz izričitu odluku.
@@ -391,7 +431,9 @@ export async function applyPriceList(
       importId: input.importId,
       fileName: imp.file_name,
       validFrom: input.validFrom,
-      priceUnit: (imp as { price_unit?: string | null }).price_unit ?? null,
+      priceUnit: imp.price_unit ?? null,
+      scope,
+      supplierName: imp.supplier_name,
       unmatched: classified.filter((r) => r.status === "nepovezano") as { code: string; name: string; vatPercent: number; vpPriceCents: number; rawCents?: number | null }[],
       decisions: input.newArticles ?? [],
     });
@@ -437,22 +479,41 @@ export async function applyPriceList(
  * ====================================================================== */
 
 export type NewArticleDecision =
-  | { code: string; mode: "novi"; name: string; unit: string; packLabel: string; packQuantity: string; productGroup?: string | null }
+  /** Nov artikal. Uz šifru dobavljača obavezna je i NAŠA interna šifra (ne izmišlja se iz šifre dobavljača). */
+  | { code: string; mode: "novi"; name: string; unit: string; packLabel: string; packQuantity: string; productGroup?: string | null; internalCode?: string | null }
+  /** Samo uz šifru dobavljača: izričita potvrda da je red naš postojeći artikal (interna šifra). */
   | { code: string; mode: "povezi"; articleCode: string }
   | { code: string; mode: "preskoci" };
 
 type Tx = Parameters<Parameters<ReturnType<typeof getDb>["transaction"]>[0]>[0];
 const UNITS = new Set(["l", "kg", "kom", "m", "par", "set", "kut", "pak", "rol"]);
+const INTERNAL_CODE = /^[0-9A-Za-z./_-]{1,32}$/;
 
 async function applyNewArticleDecisions(
   tx: Tx,
   actor: Actor,
-  input: { importId: string; fileName: string; validFrom: string; priceUnit: string | null; unmatched: { code: string; name: string; vatPercent: number; vpPriceCents: number; rawCents?: number | null }[]; decisions: NewArticleDecision[] },
+  input: {
+    importId: string;
+    fileName: string;
+    validFrom: string;
+    priceUnit: string | null;
+    scope: CodeScope;
+    supplierName: string | null;
+    unmatched: { code: string; name: string; vatPercent: number; vpPriceCents: number; rawCents?: number | null }[];
+    decisions: NewArticleDecision[];
+  },
 ) {
-  const out: { code: string; mode: "novi" | "povezi"; articleId: string; vpCents: number }[] = [];
+  const out: { code: string; mode: "novi" | "povezi"; articleId: string; internalCode: string; vpCents: number }[] = [];
   const byCode = new Map(input.unmatched.map((r) => [r.code, r]));
   const { parseQuantity, perUnitCents } = await import("@/lib/pricing/tablePriceList.mjs");
   const { NEW_ARTICLE_DEFAULT_PERCENT } = await import("@/lib/pricing/rebateSheet.mjs");
+  const supplier = input.scope.codeKind === "dobavljac" ? input.scope.supplierKey : null;
+  const link = async (supplierCode: string, articleId: string) => {
+    if (!supplier) return;
+    await tx.execute(sql`
+      INSERT INTO supplier_article_codes (supplier_key, supplier_name, supplier_code, article_id, import_id, created_by)
+      VALUES (${supplier}, ${input.supplierName ?? supplier}, ${supplierCode}, ${articleId}::uuid, ${input.importId}::uuid, ${actor.id}::uuid)`);
+  };
   for (const d of input.decisions) {
     if (d.mode === "preskoci") continue;
     const row = byCode.get(d.code);
@@ -463,6 +524,8 @@ async function applyNewArticleDecisions(
       const unit = d.unit.trim().toLowerCase();
       const label = d.packLabel.trim();
       const qty = parseQuantity(d.packQuantity);
+      const internalCode = supplier ? (d.internalCode ?? "").trim() : d.code;
+      if (!INTERNAL_CODE.test(internalCode)) throw new PriceListError("novi", `${d.code}: upišite našu internu šifru novog artikla (šifra dobavljača nije interna šifra).`);
       if (name.length < 3 || name.length > 200) throw new PriceListError("novi", `${d.code}: upišite naziv artikla (3–200 znakova).`);
       if (!UNITS.has(unit)) throw new PriceListError("novi", `${d.code}: izaberite jedinicu mere.`);
       if (label.length < 2 || label.length > 80) throw new PriceListError("novi", `${d.code}: upišite pakovanje (npr. limenka 0,5 l).`);
@@ -470,10 +533,10 @@ async function applyNewArticleDecisions(
       const vpCents = input.priceUnit === "pak" ? perUnitCents(raw, qty) : raw;
       if (!(vpCents > 0)) throw new PriceListError("novi", `${d.code}: VP cena po JM nije ispravna.`);
       const inserted = await tx.execute<{ id: string }>(sql`
-        INSERT INTO articles (code, name, unit, product_group) VALUES (${d.code}, ${name}, ${unit}, ${d.productGroup?.trim() || null})
+        INSERT INTO articles (code, name, unit, product_group) VALUES (${internalCode}, ${name}, ${unit}, ${d.productGroup?.trim() || null})
         ON CONFLICT (code) DO NOTHING RETURNING id`);
       const art = [...inserted][0];
-      if (!art) throw new PriceListError("novi", `Artikal sa šifrom ${d.code} je u međuvremenu dodat — osvežite pregled.`);
+      if (!art) throw new PriceListError("novi", `Interna šifra ${internalCode} već postoji — izaberite „Povežite sa našim artiklom“ ili drugu šifru.`);
       await tx.execute(sql`
         INSERT INTO article_pack_sizes (article_id, pack_quantity, unit, label, evidence, confirmed_by)
         VALUES (${art.id}::uuid, ${String(qty)}, ${unit}, ${label}, ${`Uvoz VP cenovnika: ${input.fileName.slice(0, 120)}`}, ${actor.id}::uuid)`);
@@ -483,29 +546,30 @@ async function applyNewArticleDecisions(
       await tx.execute(sql`
         INSERT INTO article_new_defaults (article_id, discount_percent, import_id, created_by)
         VALUES (${art.id}::uuid, ${String(NEW_ARTICLE_DEFAULT_PERCENT)}, ${input.importId}::uuid, ${actor.id}::uuid)`);
+      await link(d.code, art.id);
       await recordAudit(
         {
           actor: { id: actor.id, name: actor.name, role: actor.role },
           action: AUDIT_ACTIONS.priceListArticleCreated,
           entityType: "Artikal",
           entityId: art.id,
-          entityLabel: `${d.code} ${name}`,
-          after: { code: d.code, name, unit, pack: label, packQuantity: qty, vpCents, defaultRebate: NEW_ARTICLE_DEFAULT_PERCENT, importId: input.importId },
+          entityLabel: `${internalCode} ${name}`,
+          after: { code: internalCode, supplier, supplierCode: supplier ? d.code : null, name, unit, pack: label, packQuantity: qty, vpCents, defaultRebate: NEW_ARTICLE_DEFAULT_PERCENT, importId: input.importId },
         },
         tx,
       );
-      out.push({ code: d.code, mode: "novi", articleId: art.id, vpCents });
+      out.push({ code: d.code, mode: "novi", articleId: art.id, internalCode, vpCents });
       continue;
     }
+    if (!supplier) throw new PriceListError("povezi", `${d.code}: u fajlu sa našim internim šiframa nema povezivanja — nepoznata interna šifra je nov artikal ili se preskače.`);
     const targetRows = await tx.execute<{ id: string; pack_qty: string | null }>(sql`
       SELECT a.id, ps.pack_quantity::text AS pack_qty FROM articles a LEFT JOIN article_pack_sizes ps ON ps.article_id = a.id WHERE a.code = ${d.articleCode.trim()}`);
     const target = [...targetRows][0];
-    if (!target) throw new PriceListError("povezi", `${d.code}: ne postoji artikal sa šifrom „${d.articleCode}“.`);
+    if (!target) throw new PriceListError("povezi", `${d.code}: ne postoji naš artikal sa internom šifrom „${d.articleCode}“.`);
     const qty = target.pack_qty === null ? null : Number(target.pack_qty);
     if (input.priceUnit === "pak" && !qty) throw new PriceListError("povezi", `${d.code}: artikal ${d.articleCode} nema potvrđenu količinu pakovanja — cena po pakovanju se ne može preračunati.`);
     const vpCents = input.priceUnit === "pak" && qty ? perUnitCents(raw, qty) : raw;
-    await tx.execute(sql`
-      INSERT INTO article_code_aliases (code, article_id, import_id, created_by) VALUES (${d.code}, ${target.id}::uuid, ${input.importId}::uuid, ${actor.id}::uuid)`);
+    await link(d.code, target.id);
     await tx.execute(sql`
       INSERT INTO article_base_prices (article_id, net_price, vat_percent, valid_from, source, import_id, created_by)
       VALUES (${target.id}::uuid, ${centsToDecimal(vpCents)}, ${String(row.vatPercent)}, ${input.validFrom}::date, 'cenovnik', ${input.importId}::uuid, ${actor.id}::uuid)
@@ -516,12 +580,12 @@ async function applyNewArticleDecisions(
         action: AUDIT_ACTIONS.priceListCodeLinked,
         entityType: "Artikal",
         entityId: target.id,
-        entityLabel: `${d.code} → ${d.articleCode}`,
-        after: { code: d.code, articleCode: d.articleCode, vpCents, importId: input.importId },
+        entityLabel: `${input.supplierName ?? supplier}: ${d.code} → ${d.articleCode}`,
+        after: { supplier, supplierCode: d.code, articleCode: d.articleCode, vpCents, importId: input.importId },
       },
       tx,
     );
-    out.push({ code: d.code, mode: "povezi", articleId: target.id, vpCents });
+    out.push({ code: d.code, mode: "povezi", articleId: target.id, internalCode: d.articleCode.trim(), vpCents });
   }
   return out;
 }
@@ -532,7 +596,15 @@ async function applyNewArticleDecisions(
 
 export async function prepareTablePriceList(
   actor: Actor,
-  input: { fileName: string; bytes: Uint8Array; map: { header: boolean; code: number; price: number; name: number | null; unit: number | null; pack: number | null }; priceUnit: "jm" | "pak" },
+  input: {
+    fileName: string;
+    bytes: Uint8Array;
+    map: { header: boolean; code: number; price: number; name: number | null; unit: number | null; pack: number | null };
+    priceUnit: "jm" | "pak";
+    /** Šta je u koloni šifre: naša interna šifra ili šifra dobavljača (obavezan naziv dobavljača). */
+    codeKind: "interna" | "dobavljac";
+    supplierName?: string | null;
+  },
 ): Promise<UploadResult> {
   assertImporter(actor);
   const { buildTableRows, parseCsv, readXlsx, TABLE_PARSER, TableFormatError } = await import("@/lib/pricing/tablePriceList.mjs");
@@ -546,13 +618,24 @@ export async function prepareTablePriceList(
     if (error instanceof TableFormatError) throw new PriceListError(`format_${(error as { code?: string }).code}`, error.message);
     throw new PriceListError("format", "Fajl se ne može pročitati kao CSV ili XLSX.");
   }
+  if (input.codeKind !== "interna" && input.codeKind !== "dobavljac") throw new PriceListError("sifra", "Izaberite šta je u koloni šifre: naša interna šifra ili šifra dobavljača.");
+  const supplierName = (input.supplierName ?? "").trim().slice(0, 120);
+  const supplierKey = input.codeKind === "dobavljac" ? supplierKeyOf(supplierName) : null;
+  if (input.codeKind === "dobavljac" && (!supplierKey || supplierName.length < 2)) throw new PriceListError("dobavljac", "Upišite naziv dobavljača čije su šifre u fajlu.");
   const db = getDb();
-  const known = await db.execute<{ code: string; qty: string | null; vat: string | null }>(sql`
+  // Pakovanje i PDV poznatih artikala — po internoj šifri ili po POTVRĐENOJ šifri ovog dobavljača.
+  const known = await db.execute<{ code: string; qty: string | null; vat: string | null }>(
+    input.codeKind === "interna"
+      ? sql`
     SELECT a.code, ps.pack_quantity::text AS qty,
            (SELECT b.vat_percent::text FROM article_base_prices b WHERE b.article_id = a.id ORDER BY b.valid_from DESC, b.created_at DESC LIMIT 1) AS vat
-      FROM articles a LEFT JOIN article_pack_sizes ps ON ps.article_id = a.id
-    UNION ALL
-    SELECT al.code, ps.pack_quantity::text, NULL FROM article_code_aliases al LEFT JOIN article_pack_sizes ps ON ps.article_id = al.article_id`);
+      FROM articles a LEFT JOIN article_pack_sizes ps ON ps.article_id = a.id`
+      : sql`
+    SELECT s.supplier_code AS code, ps.pack_quantity::text AS qty,
+           (SELECT b.vat_percent::text FROM article_base_prices b WHERE b.article_id = s.article_id ORDER BY b.valid_from DESC, b.created_at DESC LIMIT 1) AS vat
+      FROM supplier_article_codes s LEFT JOIN article_pack_sizes ps ON ps.article_id = s.article_id
+     WHERE s.supplier_key = ${supplierKey}`,
+  );
   const packQtyByCode = new Map<string, number>();
   const vatByCode = new Map<string, number>();
   for (const k of known) {
@@ -566,7 +649,7 @@ export async function prepareTablePriceList(
     if (error instanceof TableFormatError) throw new PriceListError(`format_${(error as { code?: string }).code}`, error.message);
     throw error;
   }
-  const sha256 = createHash("sha256").update(input.bytes).update(JSON.stringify({ map: input.map, unit: input.priceUnit })).digest("hex");
+  const sha256 = createHash("sha256").update(input.bytes).update(JSON.stringify({ map: input.map, unit: input.priceUnit, codeKind: input.codeKind, supplierKey })).digest("hex");
   const today = new Date().toISOString().slice(0, 10);
   const report = {
     sha256,
@@ -579,7 +662,7 @@ export async function prepareTablePriceList(
   return recordPriceListReport(actor, {
     fileName: input.fileName,
     report,
-    table: { sourceFormat: "tabela", priceUnit: input.priceUnit, columnMap: input.map, rows: built.rows.map((r) => ({ rawCents: r.rawCents, fileUnit: r.fileUnit, filePack: r.filePack })) },
+    table: { sourceFormat: "tabela", priceUnit: input.priceUnit, columnMap: input.map, codeKind: input.codeKind, supplierKey, supplierName: supplierKey ? supplierName : null, rows: built.rows.map((r) => ({ rawCents: r.rawCents, fileUnit: r.fileUnit, filePack: r.filePack })) },
   });
 }
 

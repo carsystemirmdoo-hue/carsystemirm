@@ -7,8 +7,9 @@
  *  - `article_new_defaults`: nov artikal iz uvoza VP cenovnika dobija podrazumevani rabat (30 %) za sve
  *    opcije plaćanja, dok ovlašćena osoba ne upiše dogovor za artikal. Izričiti dogovori za artikal se ne
  *    prepisuju — podrazumevani rabat važi samo kada pravilo za sam artikal ne postoji.
- *  - `article_code_aliases`: izričito povezivanje šifre iz cenovnika sa postojećim artiklom (bez
- *    povezivanja po sličnosti naziva).
+ *  - `supplier_article_codes`: POTVRĐENA veza šifre dobavljača sa našim artiklom (interna šifra), po
+ *    dobavljaču. Jedinstvenost interne šifre ne povezuje cenovnik dobavljača: red sa šifrom dobavljača bez
+ *    potvrđene veze ostaje nerešen; nema povezivanja po sličnosti naziva.
  *  - `rebate_change_notices`: interno obaveštenje o izmeni rabata — izmena komercijaliste ide gazdi,
  *    gazdina dodeljenom komercijalisti. Kupac ga nikad ne dobija. Briše se posle 10 dana; brisanje ne
  *    dodiruje pravila cena (nema veze ka `price_rules`).
@@ -30,12 +31,15 @@ CREATE TABLE IF NOT EXISTS "article_new_defaults" (
   "created_at" timestamp with time zone NOT NULL DEFAULT now()
 );
 --> statement-breakpoint
-CREATE TABLE IF NOT EXISTS "article_code_aliases" (
-  "code" text PRIMARY KEY CHECK (length(btrim("code")) BETWEEN 1 AND 64),
+CREATE TABLE IF NOT EXISTS "supplier_article_codes" (
+  "supplier_key" text NOT NULL CHECK ("supplier_key" ~ '^[a-z0-9][a-z0-9 ._-]{0,79}$'),
+  "supplier_name" text NOT NULL CHECK (length(btrim("supplier_name")) BETWEEN 2 AND 120),
+  "supplier_code" text NOT NULL CHECK (length(btrim("supplier_code")) BETWEEN 1 AND 64),
   "article_id" uuid NOT NULL REFERENCES "articles"("id") ON DELETE RESTRICT,
   "import_id" uuid REFERENCES "price_list_imports"("id") ON DELETE RESTRICT,
   "created_by" uuid NOT NULL REFERENCES "users"("id") ON DELETE RESTRICT,
-  "created_at" timestamp with time zone NOT NULL DEFAULT now()
+  "created_at" timestamp with time zone NOT NULL DEFAULT now(),
+  CONSTRAINT "supplier_article_codes_pkey" PRIMARY KEY ("supplier_key", "supplier_code")
 );
 --> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "rebate_change_notices" (
@@ -64,10 +68,19 @@ ALTER TABLE "price_list_imports" ADD COLUMN IF NOT EXISTS "column_map" jsonb;
 --> statement-breakpoint
 ALTER TABLE "price_list_imports" ADD COLUMN IF NOT EXISTS "decisions" jsonb;
 --> statement-breakpoint
+ALTER TABLE "price_list_imports" ADD COLUMN IF NOT EXISTS "code_kind" text NOT NULL DEFAULT 'interna';
+--> statement-breakpoint
+ALTER TABLE "price_list_imports" ADD COLUMN IF NOT EXISTS "supplier_key" text;
+--> statement-breakpoint
+ALTER TABLE "price_list_imports" ADD COLUMN IF NOT EXISTS "supplier_name" text;
+--> statement-breakpoint
 ALTER TABLE "price_list_imports" DROP CONSTRAINT IF EXISTS "price_list_imports_format_check";
 --> statement-breakpoint
 ALTER TABLE "price_list_imports" ADD CONSTRAINT "price_list_imports_format_check" CHECK (
   "source_format" IN ('biznisoft_pdf', 'tabela') AND ("price_unit" IS NULL OR "price_unit" IN ('jm', 'pak'))
+  AND "code_kind" IN ('interna', 'dobavljac')
+  AND ("code_kind" = 'interna' OR ("supplier_key" IS NOT NULL AND "supplier_name" IS NOT NULL))
+  AND ("source_format" = 'tabela' OR "code_kind" = 'interna')
 );
 --> statement-breakpoint
 ALTER TABLE "price_list_import_rows" ADD COLUMN IF NOT EXISTS "raw_price" numeric(14, 2);

@@ -25,7 +25,7 @@ const guard = (t: { skip: (m?: string) => void }) => {
   return false;
 };
 
-const APPEND_ONLY = ["audit_log", "customer_contact_consents", "sync_command_events", "sync_device_cycles", "article_base_prices", "price_list_import_rows", "article_programme_decisions", "customer_commercial_status_decisions", "article_offer_decisions", "stock_import_lines", "article_new_defaults", "article_code_aliases"];
+const APPEND_ONLY = ["audit_log", "customer_contact_consents", "sync_command_events", "sync_device_cycles", "article_base_prices", "price_list_import_rows", "article_programme_decisions", "customer_commercial_status_decisions", "article_offer_decisions", "stock_import_lines", "article_new_defaults", "supplier_article_codes"];
 /** Ograničena izmena (opoziv 0028, prelaz stanja storna 0033, odluka o cenovniku 0038): UPDATE ostaje, DELETE ne. */
 const REVOCATION_ONLY = ["customer_contact_verifications", "invoice_reversals", "price_list_imports", "customer_payment_options", "stock_imports", "internal_equipment", "article_sales_names", "article_sellout", "article_required_pairs"];
 /** Samo čitanje (0036): evidenciju kopija upisuje posebna uloga, nikad aplikacija. */

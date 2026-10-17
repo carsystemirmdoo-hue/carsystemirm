@@ -28,13 +28,15 @@ const GUESS: [keyof Cols, RegExp][] = [
 type Cols = { code: string; price: string; name: string; unit: string; pack: string };
 
 /** Korak 1–2: fajl, kolone i jedinica cene. Pregled se čita u pregledaču; server ponovo čita ceo fajl. */
-export function TableImportForm() {
+export function TableImportForm({ suppliers }: { suppliers: { key: string; name: string; n: number }[] }) {
   const [state, action, pending] = useActionState(prepareTableAction, INITIAL);
   const [table, setTable] = useState<string[][] | null>(null);
   const [readErr, setReadErr] = useState<string | null>(null);
   const [header, setHeader] = useState(true);
   const [cols, setCols] = useState<Cols>({ code: "", price: "", name: "", unit: "", pack: "" });
   const [unit, setUnit] = useState<"" | "jm" | "pak">("");
+  const [codeKind, setCodeKind] = useState<"" | "interna" | "dobavljac">("");
+  const [supplier, setSupplier] = useState("");
 
   const onFile = async (f: File | null) => {
     setTable(null);
@@ -98,6 +100,31 @@ export function TableImportForm() {
               </div>
             ))}
           </div>
+          <fieldset className="pn-card" style={{ borderColor: codeKind ? "var(--p-line)" : "var(--pn-warn-mark)", borderWidth: 2 }}>
+            <legend style={{ fontWeight: 600, padding: "0 6px" }}>Šifra u fajlu je — obavezan izbor</legend>
+            <div className="ck-chips" role="radiogroup" aria-label="Vrsta šifre">
+              <label className="ck-chip" aria-pressed={codeKind === "interna"}>
+                <input type="radio" name="vrstaSifre" value="interna" checked={codeKind === "interna"} onChange={() => setCodeKind("interna")} className="pn-sr" /> naša interna šifra (BizniSoft)
+              </label>
+              <label className="ck-chip" aria-pressed={codeKind === "dobavljac"}>
+                <input type="radio" name="vrstaSifre" value="dobavljac" checked={codeKind === "dobavljac"} onChange={() => setCodeKind("dobavljac")} className="pn-sr" /> šifra dobavljača
+              </label>
+            </div>
+            {codeKind === "dobavljac" ? (
+              <div className="pn-field" style={{ maxWidth: 420 }}>
+                <label htmlFor="uvoz-dobavljac">Dobavljač</label>
+                <input id="uvoz-dobavljac" name="dobavljac" list="uvoz-dobavljaci" required minLength={2} maxLength={120} value={supplier} onChange={(e) => setSupplier(e.target.value)} placeholder="naziv dobavljača" />
+                <datalist id="uvoz-dobavljaci">{suppliers.map((x) => <option key={x.key} value={x.name}>{`${x.n} potvrđenih šifara`}</option>)}</datalist>
+              </div>
+            ) : null}
+            <p className="pn-small" style={{ margin: 0 }}>
+              {codeKind === "dobavljac"
+                ? "Šifra dobavljača se povezuje SAMO preko veze koju je neko već potvrdio za ovog dobavljača. Red bez potvrđene veze ostaje nerešen — ni po internoj šifri, ni po nazivu."
+                : codeKind === "interna"
+                  ? "Šifra iz fajla se poredi sa našim internim šiframa. Pregled pokazuje koliko šifara iz fajla zaista postoji kod nas."
+                  : "Izaberite vrstu šifre."}
+            </p>
+          </fieldset>
           <fieldset className="pn-card" style={{ borderColor: unit ? "var(--p-line)" : "var(--pn-warn-mark)", borderWidth: 2 }}>
             <legend style={{ fontWeight: 600, padding: "0 6px" }}>Cena u fajlu je po — obavezan izbor</legend>
             <div className="ck-chips" role="radiogroup" aria-label="Jedinica cene">
@@ -137,7 +164,7 @@ export function TableImportForm() {
         </>
       ) : null}
       <div className="pn-actions" style={{ justifyContent: "flex-end" }}>
-        <button type="submit" className="pn-btn" data-variant="primary" disabled={pending || !table || !unit || cols.code === "" || cols.price === ""} aria-busy={pending || undefined}>
+        <button type="submit" className="pn-btn" data-variant="primary" disabled={pending || !table || !unit || !codeKind || (codeKind === "dobavljac" && supplier.trim().length < 2) || cols.code === "" || cols.price === ""} aria-busy={pending || undefined}>
           {pending ? "Čitam fajl…" : "Dalje: prepoznavanje po šifri"}
         </button>
       </div>
@@ -169,6 +196,7 @@ export type NewRow = { code: string; name: string; raw: string; perPack: boolean
 /** Korak 4–5: novi i neprepoznati, nejasne stavke, datum važenja i potvrda. */
 export function ImportDecisionForm(props: {
   importId: string;
+  supplierMode: boolean;
   reportDate: string;
   defaultDate: string;
   newRows: NewRow[];
@@ -193,8 +221,11 @@ export function ImportDecisionForm(props: {
         <div className="pn-card-h"><h2>4. Novi i neprepoznati artikli ({props.newRows.length})</h2></div>
         {props.newRows.length === 0 ? <p className="pn-muted">Nema neprepoznatih šifara.</p> : null}
         <p className="pn-small pn-muted" style={{ margin: 0 }}>
-          Za svaki red izaberite: <b>nov artikal</b> (uz JM i pakovanje; dobija podrazumevani rabat 30 % za avans i odloženo), <b>izričito povezivanje</b> sa postojećom šifrom ili
-          preskakanje. Portal ne predlaže artikle po sličnosti naziva.
+          {props.supplierMode ? (
+            <>Šifre dobavljača bez potvrđene veze. Za svaki red: <b>potvrdite vezu</b> sa našim artiklom (internom šifrom), unesite <b>nov artikal</b> sa našom internom šifrom (dobija rabat 30 % za avans i odloženo) ili ga <b>ostavite nerešenim</b> — tada se VP cena ne menja. Portal ne povezuje po nazivu.</>
+          ) : (
+            <>Interne šifre koje ne postoje u portalu. Za svaki red: <b>nov artikal</b> (uz JM i pakovanje; dobija rabat 30 % za avans i odloženo) ili preskakanje. Portal ne predlaže artikle po sličnosti naziva.</>
+          )}
         </p>
         {props.newRows.map((r) => {
           const mode = modes[r.code] ?? "preskoci";
@@ -206,11 +237,16 @@ export function ImportDecisionForm(props: {
               <input type="hidden" name="noviKod" value={r.code} />
               <div className="ck-chips" role="radiogroup" aria-label={`Odluka za ${r.code}`}>
                 {(
-                  [
-                    ["novi", "Nov artikal"],
-                    ["povezi", "Povežite sa postojećom šifrom"],
-                    ["preskoci", "Preskočite red"],
-                  ] as const
+                  props.supplierMode
+                    ? ([
+                        ["povezi", "Povežite sa našim artiklom"],
+                        ["novi", "Nov artikal"],
+                        ["preskoci", "Ostavite nerešeno"],
+                      ] as const)
+                    : ([
+                        ["novi", "Nov artikal"],
+                        ["preskoci", "Preskočite red"],
+                      ] as const)
                 ).map(([m, l]) => (
                   <label key={m} className="ck-chip" aria-pressed={mode === m}>
                     <input type="radio" className="pn-sr" name={`odluka:${r.code}`} value={m} checked={mode === m} onChange={() => setModes((p) => ({ ...p, [r.code]: m }))} /> {l}
@@ -219,6 +255,9 @@ export function ImportDecisionForm(props: {
               </div>
               {mode === "novi" ? (
                 <div className="pn-fields" style={{ gridTemplateColumns: "repeat(auto-fit, minmax(170px, 1fr))" }}>
+                  {props.supplierMode ? (
+                    <div className="pn-field"><label htmlFor={`i-${r.code}`}>Naša interna šifra</label><input id={`i-${r.code}`} name={`interna:${r.code}`} required pattern="[0-9A-Za-z./_\-]{1,32}" /></div>
+                  ) : null}
                   <div className="pn-field"><label htmlFor={`n-${r.code}`}>Naziv u portalu</label><input id={`n-${r.code}`} name={`naziv:${r.code}`} defaultValue={r.name} required /></div>
                   <div className="pn-field">
                     <label htmlFor={`g-${r.code}`}>Grupa (opciono)</label>
@@ -241,9 +280,9 @@ export function ImportDecisionForm(props: {
               ) : null}
               {mode === "povezi" ? (
                 <div className="pn-field" style={{ maxWidth: 320 }}>
-                  <label htmlFor={`v-${r.code}`}>Tačna šifra postojećeg artikla</label>
+                  <label htmlFor={`v-${r.code}`}>Naša interna šifra tog artikla</label>
                   <input id={`v-${r.code}`} name={`veza:${r.code}`} required pattern="[0-9A-Za-z./_\-]{1,32}" />
-                  <span className="pn-help">Veza se pamti i važi i za sledeće uvoze.</span>
+                  <span className="pn-help">Ovim potvrđujete da je šifra dobavljača {r.code} naš artikal. Veza se pamti za ovog dobavljača i važi za sledeće uvoze.</span>
                 </div>
               ) : null}
             </fieldset>

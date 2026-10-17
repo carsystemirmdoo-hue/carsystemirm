@@ -379,7 +379,7 @@ export function RebateSheetClient(props: {
                                   {c.isPromo ? <li data-tone="promo">{promoLine(c, o)}</li> : null}
                                   {c.upcoming.map((u, ui) => (
                                     <li key={ui} data-tone="next">
-                                      {o.short}: {u.kind === "akcija" ? `zakazana akcija ${pct(u.rabat)} · ${dmy(u.from)}–${dmy(u.to)}` : `od ${dmy(u.from)} rabat ${pct(u.rabat)}`}
+                                      {o.short}: {u.kind === "akcija" ? `zakazana akcija ${pct(u.rabat)} · ${dmy(u.from)}–${dmy(u.to)}` : `od ${dmy(u.from)} rabat ${pct(u.rabat)}`} · cena tada {money(u.priceCents)}
                                     </li>
                                   ))}
                                 </Fragment>
@@ -445,13 +445,13 @@ export function RebateSheetClient(props: {
                       <th>Artikal</th>
                       <th>Plaćanje</th>
                       <th className="pn-r">Sada</th>
-                      <th className="pn-r">Čuva se rabat</th>
-                      <th className="pn-r">Cena iz rabata</th>
+                      <th className="pn-r">Pamti se rabat</th>
+                      <th className="pn-r">Cena koja će važiti{period !== "sada" && effFrom ? ` od ${dmy(effFrom)}` : ""}</th>
                       <th>Napomena</th>
                     </tr>
                   </thead>
                   <tbody>
-                    {reviewRows.map(({ k, row, option, cell, ev }) => (
+                    {reviewRows.map(({ k, row, option, cell, ev, e }) => (
                       <tr key={k}>
                         <td data-label="Artikal"><strong>{row?.name}</strong> <span className="pn-sub pn-num">{row?.code}</span></td>
                         <td data-label="Plaćanje">{option?.short}</td>
@@ -459,7 +459,15 @@ export function RebateSheetClient(props: {
                         <td data-label="Čuva se rabat" className="pn-r pn-strong">{ev?.ok ? pct(ev.percent) : "—"}</td>
                         <td data-label="Cena iz rabata" className="pn-r pn-strong">{ev?.ok ? money(ev.priceCents ?? null) : "—"}</td>
                         <td data-label="Napomena" style={{ color: ev && !ev.ok ? "var(--pn-danger)" : ev && ev.ok && !ev.exact ? "var(--pn-warn-ink)" : "var(--pn-ok-ink)" }}>
-                          {!ev ? "" : !ev.ok ? ev.error : !ev.exact ? `Uneta cena se ne može tačno dobiti; najbliža iz rabata ${money(ev.priceCents ?? null)}` : "U redu"}
+                          {!ev
+                            ? ""
+                            : !ev.ok
+                              ? ev.error
+                              : !ev.exact
+                                ? `Uneta cena ${money(ev.typedCents ?? null)} ne može se tačno dobiti rabatom sa 3 decimale — pamti se ${pct(ev.percent)}, važiće ${money(ev.priceCents ?? null)}`
+                                : e.field === "c"
+                                  ? `Rabat izračunat iz unete cene; važiće tačno ${money(ev.priceCents ?? null)}`
+                                  : "U redu"}
                           {ev?.ok && period === "akcija" && cell ? ` · posle akcije važi redovni ${pct(cell.isPromo ? cell.regularRabat : cell.rabat)}` : ""}
                           {ev?.ok && period !== "akcija" && cell?.isPromo ? ` · akcija traje do ${dmy(cell.promoTo)}, novi redovni rabat važi posle nje` : ""}
                         </td>

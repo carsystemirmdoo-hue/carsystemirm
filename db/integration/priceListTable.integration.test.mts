@@ -43,7 +43,7 @@ after(async () => {
   if (!reason && db) {
     await db.sql`DELETE FROM price_rules WHERE customer_id = ${customerId}`;
     await db.sql`DELETE FROM customers WHERE id = ${customerId}`;
-    await db.sql`TRUNCATE article_new_defaults, article_code_aliases, article_base_prices, price_list_import_rows, price_list_imports`;
+    await db.sql`TRUNCATE article_new_defaults, supplier_article_codes, article_base_prices, price_list_import_rows, price_list_imports`;
     await db.sql`DELETE FROM article_pack_sizes WHERE article_id IN (SELECT id FROM articles WHERE code LIKE ${`T${RUN}%`})`;
     await db.sql`DELETE FROM audit_log WHERE entity_type = 'Artikal' AND entity_label LIKE ${`T${RUN}%`}`.catch(() => undefined);
     await db.sql`DELETE FROM articles WHERE code LIKE ${`T${RUN}%`}`;
@@ -55,7 +55,7 @@ after(async () => {
 const user = async (k: string) => (await (await import("@/lib/authz/user-repository")).loadPortalUser(ids[k]))!;
 const csv = (lines: string[]) => new TextEncoder().encode(lines.join("\n"));
 
-test("tabela po pakovanju: preračun, neispravni redovi, nov artikal 30 %, veza šifre; rabati isti", async (t) => {
+test("interna šifra, po pakovanju: preračun, neispravni redovi, nov artikal 30 %; nepoznata šifra se ne povezuje; rabati isti", async (t) => {
   if (guard(t)) return;
   const svc = await import("@/lib/pricing/price-list-service");
   const map = { header: true, code: 0, price: 2, name: 1, unit: null, pack: null };
@@ -65,67 +65,108 @@ test("tabela po pakovanju: preračun, neispravni redovi, nov artikal 30 %, veza 
     `${code("CRNA")};Bazna crna 1L;4.473,00`,
     `${code("BEZPAK")};Punilac 3L;10.158,00`,
     `${code("NOVI")};Bazna plava perla 0,5L;3.480,00`,
-    `${code("ALIAS")};Disk P400 novi kod;4.000,00`,
+    `${code("NEPOZ")};Disk P400 (sličan naziv postojećem);4.000,00`,
     `${code("LOSE")};Folija;12a`,
   ]);
-  await assert.rejects(async () => svc.prepareTablePriceList(await user("rep"), { fileName: "c.csv", bytes: file, map, priceUnit: "pak" }), (e: { code?: string }) => e.code === "forbidden");
-  const up = await svc.prepareTablePriceList(await user("tamara"), { fileName: "cenovnik.csv", bytes: file, map, priceUnit: "pak" });
+  await assert.rejects(async () => svc.prepareTablePriceList(await user("rep"), { fileName: "c.csv", bytes: file, map, priceUnit: "pak", codeKind: "interna" }), (e: { code?: string }) => e.code === "forbidden");
+  const up = await svc.prepareTablePriceList(await user("tamara"), { fileName: "cenovnik.csv", bytes: file, map, priceUnit: "pak", codeKind: "interna" });
   const review = (await svc.loadPriceListReview(await user("tamara"), up.importId))!;
   const by = new Map(review.rows.map((r) => [r.code, r]));
   assert.equal(by.get(code("LAK5"))!.vpPriceCents, 229000, "11.450,00 ÷ 5 l");
   assert.equal(by.get(code("CRNA"))!.vpPriceCents, 447300);
   assert.equal(by.get(code("NOVI"))!.status, "nepovezano");
+  assert.equal(by.get(code("NEPOZ"))!.status, "nepovezano", "bez povezivanja po sličnosti naziva");
   assert.equal(by.has(code("BEZPAK")), false, "bez potvrđenog pakovanja — neispravan red");
+  assert.deepEqual(review.codeCheck, { total: 4, internalHits: 2, linkedHits: null });
   const problems = review.import.problems as { code: string; reason: string }[];
   assert.deepEqual(problems.map((p) => p.code).sort(), [code("BEZPAK"), code("LOSE")].sort());
+  await assert.rejects(
+    async () => svc.applyPriceList(await user("tamara"), { importId: up.importId, validFrom: new Date().toISOString().slice(0, 10), confirmedUnclearCodes: [], newArticles: [{ code: code("NEPOZ"), mode: "povezi", articleCode: code("STARI") }] }),
+    (e: { code?: string }) => e.code === "povezi",
+    "uz interne šifre nema povezivanja",
+  );
 
   const before = await db.sql<{ n: number }[]>`SELECT count(*)::int AS n FROM price_rules WHERE customer_id = ${customerId}`;
   const r = await svc.applyPriceList(await user("tamara"), {
     importId: up.importId,
     validFrom: new Date().toISOString().slice(0, 10),
     confirmedUnclearCodes: [code("CRNA")],
-    newArticles: [
-      { code: code("NOVI"), mode: "novi", name: "QA Bazna boja vodena, plava perla", unit: "l", packLabel: "limenka 0,5 l", packQuantity: "0,5" },
-      { code: code("ALIAS"), mode: "povezi", articleCode: code("STARI") },
-    ],
+    newArticles: [{ code: code("NOVI"), mode: "novi", name: "QA Bazna boja vodena, plava perla", unit: "l", packLabel: "limenka 0,5 l", packQuantity: "0,5" }],
   });
   assert.equal(r.created, 1);
-  assert.equal(r.linked, 1);
-  const [nov] = await db.sql<{ id: string; unit: string }[]>`SELECT id, unit FROM articles WHERE code = ${code("NOVI")}`;
+  const [nov] = await db.sql<{ id: string }[]>`SELECT id FROM articles WHERE code = ${code("NOVI")}`;
   const [bp] = await db.sql<{ p: string }[]>`SELECT net_price::text AS p FROM article_base_prices WHERE article_id = ${nov.id}`;
   assert.equal(bp.p, "6960.00", "3.480,00 ÷ 0,5 l");
   const [def] = await db.sql<{ d: string }[]>`SELECT discount_percent::text AS d FROM article_new_defaults WHERE article_id = ${nov.id}`;
   assert.equal(Number(def.d), 30);
-  const [alias] = await db.sql<{ p: string }[]>`SELECT net_price::text AS p FROM article_base_prices WHERE article_id = ${art.STARI} AND import_id = ${up.importId}`;
-  assert.equal(alias.p, "40.00", "4.000,00 ÷ 100 kom (povezani artikal)");
+  const [{ n: stari }] = await db.sql<{ n: number }[]>`SELECT count(*)::int AS n FROM article_base_prices WHERE article_id = ${art.STARI} AND import_id = ${up.importId}`;
+  assert.equal(stari, 0, "nerešen red ne menja VP nijednog artikla");
   const after = await db.sql<{ n: number }[]>`SELECT count(*)::int AS n FROM price_rules WHERE customer_id = ${customerId}`;
   assert.equal(after[0].n, before[0].n, "uvoz ne menja nijedno pravilo rabata");
 
-  // Kupac sa osnovnim rabatom 18 %: nov artikal dobija 30 %, postojeći 18 % na novu VP.
   const { customerPricesByOption } = await import("@/lib/pricing/customer-price-service");
   const prices = (await customerPricesByOption(customerId, [nov.id, art.LAK5], new Date().toISOString().slice(0, 10))).options[0].prices;
   const pn = prices.get(nov.id)!;
   const pl = prices.get(art.LAK5)!;
   assert.deepEqual(pn.status === "cena" ? [pn.discountPercent, pn.netCents] : null, [30, 487200]);
   assert.deepEqual(pl.status === "cena" ? [pl.discountPercent, pl.netCents] : null, [18, 187780], "2.290,00 × 0,82");
-
-  // Sledeći uvoz: veza šifre se pamti.
-  const next = await svc.prepareTablePriceList(await user("owner"), { fileName: "cenovnik-2.csv", bytes: csv(["Sifra;Naziv;VP", `${code("ALIAS")};Disk P400;4.200,00`]), map, priceUnit: "pak" });
-  const rv = (await svc.loadPriceListReview(await user("owner"), next.importId))!;
-  assert.equal(rv.rows[0].articleId, art.STARI);
-  assert.equal(rv.rows[0].vpPriceCents, 4200);
 });
 
-test("tabela po JM: bez preračuna; isti fajl i isti izbor ne pravi duplikat", async (t) => {
+test("šifra dobavljača: bez potvrđene veze red ostaje nerešen (ni po internoj šifri, ni po nazivu); potvrđena veza važi za sledeći uvoz", async (t) => {
+  if (guard(t)) return;
+  const svc = await import("@/lib/pricing/price-list-service");
+  const map = { header: true, code: 0, price: 2, name: 1, unit: null, pack: null };
+  await assert.rejects(async () => svc.prepareTablePriceList(await user("owner"), { fileName: "d.csv", bytes: csv(["Sifra;Naziv;VP", "X;Y;1,00"]), map, priceUnit: "jm", codeKind: "dobavljac", supplierName: "" }), (e: { code?: string }) => e.code === "dobavljac");
+  // Šifra dobavljača se slučajno poklapa sa našom internom šifrom CRNA — to nije veza.
+  const file = csv(["Sifra;Naziv;VP pak.", `${code("CRNA")};Bazna crna 1L;4.500,00`, `D-${RUN}-77;QA STARI DISK P400;4.100,00`, `D-${RUN}-88;Lak 5L dobavljača;11.900,00`]);
+  const up = await svc.prepareTablePriceList(await user("owner"), { fileName: "dobavljac.csv", bytes: file, map, priceUnit: "pak", codeKind: "dobavljac", supplierName: "QA Dobavljač Š" });
+  const rv = (await svc.loadPriceListReview(await user("owner"), up.importId))!;
+  assert.ok(rv.rows.every((r) => r.status === "nepovezano"), JSON.stringify(rv.rows.map((r) => [r.code, r.status])));
+  assert.match(rv.rows[0].note ?? "", /veza nije potvrđena/);
+  assert.deepEqual(rv.codeCheck, { total: 3, internalHits: 1, linkedHits: 0 });
+  await assert.rejects(
+    async () => svc.applyPriceList(await user("owner"), { importId: up.importId, validFrom: new Date().toISOString().slice(0, 10), confirmedUnclearCodes: [], newArticles: [{ code: `D-${RUN}-88`, mode: "novi", name: "QA LAK DOBAVLJAČA", unit: "l", packLabel: "kanta 5 l", packQuantity: "5" }] }),
+    /internu šifru/,
+    "nov artikal uz šifru dobavljača traži našu internu šifru",
+  );
+  const r = await svc.applyPriceList(await user("owner"), {
+    importId: up.importId,
+    validFrom: new Date().toISOString().slice(0, 10),
+    confirmedUnclearCodes: [],
+    newArticles: [
+      { code: `D-${RUN}-77`, mode: "povezi", articleCode: code("STARI") },
+      { code: `D-${RUN}-88`, mode: "novi", name: "QA LAK DOBAVLJAČA", unit: "l", packLabel: "kanta 5 l", packQuantity: "5", internalCode: code("NOVI2") },
+      { code: code("CRNA"), mode: "preskoci" },
+    ],
+  });
+  assert.equal(r.linked, 1);
+  assert.equal(r.created, 1);
+  const [{ p: crna }] = await db.sql<{ p: string }[]>`SELECT net_price::text AS p FROM article_base_prices WHERE article_id = ${art.CRNA} ORDER BY created_at DESC LIMIT 1`;
+  assert.notEqual(crna, "4500.00", "nerešen red ne menja VP artikla sa istom internom šifrom");
+  const [stari] = await db.sql<{ p: string }[]>`SELECT net_price::text AS p FROM article_base_prices WHERE article_id = ${art.STARI} AND import_id = ${up.importId}`;
+  assert.equal(stari.p, "41.00", "4.100,00 ÷ 100 kom");
+  const links = await db.sql<{ supplier_code: string }[]>`SELECT supplier_code FROM supplier_article_codes WHERE supplier_key = 'qa dobavljac s' ORDER BY 1`;
+  assert.deepEqual(links.map((l) => l.supplier_code), [`D-${RUN}-77`, `D-${RUN}-88`]);
+  // Sledeći uvoz istog dobavljača: veza važi; drugi dobavljač sa istom šifrom — nerešeno.
+  const next = await svc.prepareTablePriceList(await user("tamara"), { fileName: "dobavljac-2.csv", bytes: csv(["Sifra;Naziv;VP", `D-${RUN}-77;Disk;4.200,00`]), map, priceUnit: "pak", codeKind: "dobavljac", supplierName: "QA Dobavljac S" });
+  const rv2 = (await svc.loadPriceListReview(await user("tamara"), next.importId))!;
+  assert.equal(rv2.rows[0].articleId, art.STARI);
+  assert.equal(rv2.rows[0].vpPriceCents, 4200);
+  const other = await svc.prepareTablePriceList(await user("tamara"), { fileName: "drugi.csv", bytes: csv(["Sifra;Naziv;VP", `D-${RUN}-77;Disk;4.200,00`]), map, priceUnit: "pak", codeKind: "dobavljac", supplierName: "QA Drugi dobavljač" });
+  const rv3 = (await svc.loadPriceListReview(await user("tamara"), other.importId))!;
+  assert.equal(rv3.rows[0].status, "nepovezano", "veza važi samo za dobavljača za koga je potvrđena");
+});
+
+test("interna šifra po JM: bez preračuna; isti fajl i isti izbor ne pravi duplikat", async (t) => {
   if (guard(t)) return;
   const svc = await import("@/lib/pricing/price-list-service");
   const bytes = csv(["Sifra,Cena", `${code("CRNA")},4500.00`]);
   const map = { header: true, code: 0, price: 1, name: null, unit: null, pack: null };
-  const a = await svc.prepareTablePriceList(await user("owner"), { fileName: "jm.csv", bytes, map, priceUnit: "jm" });
-  const b = await svc.prepareTablePriceList(await user("owner"), { fileName: "jm.csv", bytes, map, priceUnit: "jm" });
+  const a = await svc.prepareTablePriceList(await user("owner"), { fileName: "jm.csv", bytes, map, priceUnit: "jm", codeKind: "interna" });
+  const b = await svc.prepareTablePriceList(await user("owner"), { fileName: "jm.csv", bytes, map, priceUnit: "jm", codeKind: "interna" });
   assert.equal(b.duplicate, true);
   assert.equal(a.importId, b.importId);
   const rv = (await svc.loadPriceListReview(await user("owner"), a.importId))!;
   assert.equal(rv.rows[0].vpPriceCents, 450000);
-  await assert.rejects(async () => svc.prepareTablePriceList(await user("owner"), { fileName: "x.csv", bytes, map, priceUnit: "kom" as never }), /po JM ili po pakovanju/);
+  await assert.rejects(async () => svc.prepareTablePriceList(await user("owner"), { fileName: "x.csv", bytes, map, priceUnit: "kom" as never, codeKind: "interna" }), /po JM ili po pakovanju/);
 });

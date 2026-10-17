@@ -19,6 +19,7 @@ import {
   percentString,
   periodText,
   planReplacement,
+  priceFromRabat,
   validatePeriod,
   withNewArticleDefault,
 } from "@/lib/pricing/rebateSheet.mjs";
@@ -185,7 +186,7 @@ export type SheetCell = {
   promoTo: string | null;
   regularRabat: number | null;
   afterPromo: { day: string; rabat: number | null; priceCents: number | null } | null;
-  upcoming: { kind: string; rabat: number | null; from: string; to: string | null }[];
+  upcoming: { kind: string; rabat: number | null; from: string; to: string | null; priceCents: number | null }[];
   savedBy: string | null;
   savedAt: string | null;
   validFrom: string | null;
@@ -224,7 +225,7 @@ function evaluateCell(rules: Rule[], art: ArticleMeta, customerId: string, group
     afterPromo,
     upcoming: scopeRules
       .sort((a, b) => (a.effectiveFrom < b.effectiveFrom ? -1 : 1))
-      .map((r) => ({ kind: r.ruleKind, rabat: r.discountPercent === null ? null : Number(r.discountPercent), from: r.effectiveFrom, to: r.effectiveTo })),
+      .map((r) => ({ kind: r.ruleKind, rabat: r.discountPercent === null ? null : Number(r.discountPercent), from: r.effectiveFrom, to: r.effectiveTo, priceCents: priceFromRabat(baseAt(history, art.id, r.effectiveFrom), r.discountPercent === null ? null : Number(r.discountPercent)) })),
     savedBy: w?.savedBy ?? null,
     savedAt: w?.savedAt ?? null,
     validFrom: w?.effectiveFrom ?? null,
@@ -578,8 +579,10 @@ export async function saveRebateChanges(actor: Viewer, input: SaveInput, now = n
  * Obaveštenja o izmeni rabata
  * ====================================================================== */
 
-export async function purgeOldNotices(q: Queryable = getDb()) {
-  await q.execute(sql`DELETE FROM rebate_change_notices WHERE created_at < now() - make_interval(days => ${NOTICE_RETENTION_DAYS})`);
+/** Fizičko brisanje obaveštenja starijih od 10 dana; vraća broj obrisanih. Pravila cena se ne diraju. */
+export async function purgeOldNotices(q: Queryable = getDb()): Promise<number> {
+  const rows = await q.execute<{ id: string }>(sql`DELETE FROM rebate_change_notices WHERE created_at < now() - make_interval(days => ${NOTICE_RETENTION_DAYS}) RETURNING id::text`);
+  return rows.length;
 }
 
 export type RebateNotice = {

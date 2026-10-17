@@ -58,7 +58,7 @@ before(async () => {
 
 after(async () => {
   if (!reason && db) {
-    await db.sql`TRUNCATE article_new_defaults, article_code_aliases, article_base_prices, price_list_import_rows, price_list_imports`;
+    await db.sql`TRUNCATE article_new_defaults, supplier_article_codes, article_base_prices, price_list_import_rows, price_list_imports`;
     await db.sql`DELETE FROM articles WHERE code LIKE ${`9${run}%`}`;
     await cleanupQa(db);
   }
@@ -76,7 +76,7 @@ test("uvoz: gazda i kancelarija (0057); ručnu izmenu osnovne cene i dalje samo 
   const r = await svc.recordPriceListReport(asUser(office), { fileName: "c.pdf", report: rep });
   assert.equal(r.duplicate, false, "kancelarija (Tamara) otprema cenovnik");
   await svc.discardPriceList(asUser(office), { importId: r.importId, note: "proba prava kancelarije" });
-  await db.sql`TRUNCATE article_new_defaults, article_code_aliases, article_base_prices, price_list_import_rows, price_list_imports`;
+  await db.sql`TRUNCATE article_new_defaults, supplier_article_codes, article_base_prices, price_list_import_rows, price_list_imports`;
 });
 
 test("otpremanje → pregled → primena; isti fajl bez duplikata; nejasno samo uz potvrdu", async (t) => {

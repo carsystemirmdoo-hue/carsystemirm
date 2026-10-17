@@ -30,6 +30,8 @@ export async function prepareTableAction(_prev: ImportState, formData: FormData)
   if (file.size > MAX_UPLOAD_FILE_BYTES) return { error: `Fajl je veći od ${formatMegabytes(MAX_UPLOAD_FILE_BYTES)}.`, ok: null };
   const unit = formData.get("jedinica");
   if (unit !== "jm" && unit !== "pak") return { error: "Izaberite da li je cena u fajlu po jedinici mere ili po pakovanju.", ok: null };
+  const codeKind = formData.get("vrstaSifre");
+  if (codeKind !== "interna" && codeKind !== "dobavljac") return { error: "Izaberite šta je u koloni šifre: naša interna šifra ili šifra dobavljača.", ok: null };
   const code = col(formData.get("kolSifra"));
   const price = col(formData.get("kolCena"));
   if (code === null || price === null) return { error: "Izaberite kolonu sa šifrom i kolonu sa novom VP cenom.", ok: null };
@@ -41,6 +43,8 @@ export async function prepareTableAction(_prev: ImportState, formData: FormData)
       bytes: new Uint8Array(await file.arrayBuffer()),
       map: { header: formData.get("zaglavlje") === "da", code, price, name: col(formData.get("kolNaziv")), unit: col(formData.get("kolJm")), pack: col(formData.get("kolPak")) },
       priceUnit: unit,
+      codeKind,
+      supplierName: String(formData.get("dobavljac") ?? ""),
     });
     importId = r.importId;
     duplicate = r.duplicate;
@@ -93,6 +97,7 @@ export async function applyImportAction(_prev: ImportState, formData: FormData):
         packLabel: String(formData.get(`pak:${c}`) ?? ""),
         packQuantity: String(formData.get(`kol:${c}`) ?? ""),
         productGroup: String(formData.get(`grupa:${c}`) ?? "") || null,
+        internalCode: String(formData.get(`interna:${c}`) ?? "").trim() || null,
       });
     } else if (mode === "povezi") {
       newArticles.push({ code: c, mode: "povezi", articleCode: String(formData.get(`veza:${c}`) ?? "").trim() });

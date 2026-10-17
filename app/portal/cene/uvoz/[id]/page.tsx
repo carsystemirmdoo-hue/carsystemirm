@@ -35,7 +35,9 @@ export default async function PriceImportReviewPage({ params, searchParams }: { 
   if (!/^[0-9a-f-]{36}$/i.test(id)) notFound();
   const review = await loadPriceListReview(user, id);
   if (!review) notFound();
-  const imp = review.import as typeof review.import & { sourceFormat: string; priceUnit: string | null; problems: unknown };
+  const imp = review.import as typeof review.import & { sourceFormat: string; priceUnit: string | null; problems: unknown; codeKind: string; supplierName: string | null };
+  const supplierMode = imp.codeKind === "dobavljac";
+  const cc = review.codeCheck;
   const group: Group = (GROUPS.map((g) => g[0]) as readonly string[]).includes(sp.grupa ?? "") ? (sp.grupa as Group) : "sve";
   const rows = review.rows as (typeof review.rows[number] & { rawCents?: number | null; filePack?: string | null; fileUnit?: string | null; lineNo?: number })[];
   const inGroup = (r: (typeof rows)[number]) =>
@@ -65,7 +67,8 @@ export default async function PriceImportReviewPage({ params, searchParams }: { 
         <div>
           <h1 className="pn-title">{imp.fileName}</h1>
           <p className="pn-lead">
-            {imp.sourceFormat === "tabela" ? `Tabela · cena u fajlu po ${perPack ? "pakovanju (preračunato na JM)" : "jedinici mere"}` : `BizniSoft PDF · stanje ${dmy(imp.reportDate)}`} · {rows.length} redova
+            {imp.sourceFormat === "tabela" ? `Tabela · cena u fajlu po ${perPack ? "pakovanju (preračunato na JM)" : "jedinici mere"}` : `BizniSoft PDF · stanje ${dmy(imp.reportDate)}`} ·{" "}
+            {supplierMode ? `šifre dobavljača „${imp.supplierName}“` : "naše interne šifre"} · {rows.length} redova
             {imp.status === "primenjeno" ? ` · primenjeno, važi od ${dmy(imp.validFrom)}` : imp.status === "odbaceno" ? " · odbačeno" : " · čeka potvrdu"}
           </p>
         </div>
@@ -76,6 +79,14 @@ export default async function PriceImportReviewPage({ params, searchParams }: { 
         ))}
       </ol>
       {sp.isti ? <p className="pn-note" data-tone="info"><span>Isti fajl sa istim izborom kolona je već otpremljen — otvoren je postojeći pregled.</span></p> : null}
+      <div className="pn-note" data-tone={(supplierMode ? cc.internalHits > 0 && (cc.linkedHits ?? 0) < cc.internalHits : cc.total > 0 && cc.internalHits < cc.total / 2) ? "warning" : "info"}>
+        <span>
+          <strong>Provera šifre:</strong>{" "}
+          {supplierMode
+            ? `${cc.linkedHits ?? 0} od ${cc.total} šifara ima potvrđenu vezu za ovog dobavljača; ostale ostaju nerešene dok ih neko izričito ne poveže.${cc.internalHits > 0 ? ` ${cc.internalHits} šifara se slučajno poklapa sa našim internim šiframa — to NIJE veza; ako fajl ipak sadrži naše interne šifre, odbacite uvoz i izaberite „naša interna šifra“.` : ""}`
+            : `${cc.internalHits} od ${cc.total} šifara postoji kao naša interna šifra.${cc.total > 0 && cc.internalHits < cc.total / 2 ? " Manje od polovine — fajl verovatno sadrži šifre dobavljača; odbacite uvoz i izaberite „šifra dobavljača“." : ""}`}
+        </span>
+      </div>
       {unitSuspects.length ? (
         <div className="pn-note" data-tone="warning" role="alert">
           <span>
@@ -164,6 +175,7 @@ export default async function PriceImportReviewPage({ params, searchParams }: { 
         <>
           <ImportDecisionForm
             importId={id}
+            supplierMode={supplierMode}
             reportDate={imp.reportDate}
             defaultDate={defaultDate}
             newRows={rows.filter((r) => r.status === "nepovezano").map((r) => ({ code: r.code, name: r.name, raw: money(r.rawCents ?? r.vpPriceCents), perPack }))}

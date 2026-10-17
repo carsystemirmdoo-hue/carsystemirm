@@ -77,6 +77,7 @@ try {
     check("kancelarija: otvara uvoz VP cenovnika", await p.getByRole("heading", { name: "Uvoz VP cenovnika" }).isVisible());
     const csv = `Sifra;Naziv;VP pak.\nSINT-L05;Lak 5L;11.700,00\nSINT-T19;Traka;250,00\nSINT-NOVO9;Nova bazna 0,5L;3.600,00\nSINT-U25;Ucvrscivac;12a\n`;
     await p.setInputFiles("#uvoz-fajl", { name: "sint-cenovnik.csv", mimeType: "text/csv", buffer: Buffer.from(csv) });
+    await p.getByText("naša interna šifra (BizniSoft)").click();
     await p.getByText("pakovanju — deli se").click();
     await p.screenshot({ path: `${SHOTS}/5-uvoz-kolone.png`, fullPage: true });
     await Promise.all([p.waitForURL(/\/portal\/cene\/uvoz\/[0-9a-f-]{36}/, { timeout: 60000 }), p.getByRole("button", { name: /Dalje: prepoznavanje/ }).click()]);
@@ -84,6 +85,17 @@ try {
     check("uvoz: 11.700,00 ÷ 5 = 2.340,00 po JM", body.includes("2.340,00"));
     check("uvoz: neispravan red izdvojen", /Neispravni redovi[\s\S]*SINT-U25/.test(body));
     check("uvoz: nova šifra u koraku 4", body.includes("SINT-NOVO9"));
+    check("uvoz: provera šifre (3 od 3 interne)", /Provera šifre:\s*3 od 3 šifara postoji kao naša interna šifra/.test(body));
+    // Fajl dobavljača: slučajno poklapanje sa internom šifrom NIJE veza — red ostaje nerešen.
+    await go(p, "/portal/cene/uvoz");
+    await p.setInputFiles("#uvoz-fajl", { name: "sint-dobavljac.csv", mimeType: "text/csv", buffer: Buffer.from(`Sifra;Naziv;VP\nSINT-L05;Lak 5L;2.400,00\nDOB-1;Disk;40,00\n`) });
+    await p.getByText("šifra dobavljača", { exact: true }).click();
+    await p.getByLabel("Dobavljač").fill("SINT Dobavljač A");
+    await p.getByText("jedinici mere (l, kg, kom)").click();
+    await Promise.all([p.waitForURL(/\/portal\/cene\/uvoz\/[0-9a-f-]{36}/, { timeout: 60000 }), p.getByRole("button", { name: /Dalje: prepoznavanje/ }).click()]);
+    const dob = await p.locator("main").innerText();
+    check("uvoz dobavljača: bez potvrđene veze sve nerešeno (i šifra jednaka internoj)", (dob.match(/Neprepoznata šifra — korak 4/g) ?? []).length === 2 && /veza nije potvrđena/.test(dob));
+    await p.screenshot({ path: `${SHOTS}/6b-uvoz-dobavljac.png`, fullPage: true });
     await p.screenshot({ path: `${SHOTS}/6-uvoz-pregled.png`, fullPage: true });
     await c.close();
   }
@@ -119,11 +131,31 @@ try {
     await p.screenshot({ path: `${SHOTS}/2-komercijalista-uredjivanje.png` });
     await p.getByRole("button", { name: /Sačuvajte izmene \(2\)/ }).click();
     await p.screenshot({ path: `${SHOTS}/3-pregled-pre-cuvanja.png`, fullPage: true });
+    const reviewPrice = (await p.locator(".ck-bar table tbody tr").first().locator("td").nth(4).innerText()).trim();
     await p.getByRole("button", { name: /Potvrdite i sačuvajte/ }).click();
     await p.locator('[role="status"]').filter({ hasText: "Sačuvano" }).waitFor({ timeout: 30000 });
     check("čuvanje: poruka i obaveštenje vlasniku", (await p.locator('[role="status"]').filter({ hasText: "Sačuvano" }).innerText()).includes("Vlasnik je dobio obaveštenje"));
     const [rule] = await sqlc`SELECT discount_percent::text AS d, net_price, biznisoft_entry_required AS b FROM price_rules WHERE customer_id = ${A} AND payment_condition = 'odlozeno_30' AND article_id = (SELECT id FROM articles WHERE code = 'SINT-L01') AND status <> 'revoked' ORDER BY created_at DESC LIMIT 1`;
     check(`baza: sačuvan rabat ${target}, ne cena, samo portal`, Number(rule.d) === target && rule.net_price === null && rule.b === false);
+    await go(p, `/portal/cene/kupci/${A}?q=SINT-L01`);
+    const after = await p.locator('input[aria-label^="Odloženo plaćanje — 30 dana: cena"]').first().inputValue();
+    check(`posle učitavanja ista cena kao u pregledu (${reviewPrice})`, after === reviewPrice, after);
+    // Cena bez tačnog rabata sa 3 decimale: pregled pokazuje rabat koji se pamti i cenu koja važi; posle čuvanja ista.
+    const av2 = p.locator('input[aria-label^="Avansno plaćanje: cena"]').first();
+    const want = (await av2.inputValue()) === "1.499,99" ? "1.400,00" : "1.500,00";
+    await av2.fill(want);
+    await p.getByRole("button", { name: /Sačuvajte izmene \(1\)/ }).click();
+    const row = p.locator(".ck-bar table tbody tr").first();
+    const kept = (await row.locator("td").nth(3).innerText()).trim();
+    const willBe = (await row.locator("td").nth(4).innerText()).trim();
+    const noteTxt = (await row.locator("td").nth(5).innerText()).trim();
+    await p.screenshot({ path: `${SHOTS}/3b-tri-decimale.png`, fullPage: true });
+    await p.getByRole("button", { name: /Potvrdite i sačuvajte/ }).click();
+    await p.locator('[role="status"]').filter({ hasText: "Sačuvano" }).waitFor({ timeout: 30000 });
+    await go(p, `/portal/cene/kupci/${A}?q=SINT-L01`);
+    const reloadedR = await p.locator('input[aria-label^="Avansno plaćanje: rabat"]').first().inputValue();
+    const reloadedC = await p.locator('input[aria-label^="Avansno plaćanje: cena"]').first().inputValue();
+    check(`tri decimale: pregled „${kept} / ${willBe}“ = posle učitavanja „${reloadedR} % / ${reloadedC}“`, kept === `${reloadedR} %` && willBe === reloadedC, noteTxt);
     // Akcija koja se preklapa sa postojećom (SINT-T19, odloženo)
     await go(p, `/portal/cene/kupci/${A}?q=SINT-T19`);
     await p.locator('input[aria-label^="Odloženo plaćanje — 30 dana: rabat"]').first().fill("35");

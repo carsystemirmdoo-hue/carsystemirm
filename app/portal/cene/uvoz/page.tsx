@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { requireCapability } from "@/lib/authz/session";
-import { listPriceListImports } from "@/lib/pricing/price-list-service";
+import { listPriceListImports, listSuppliers } from "@/lib/pricing/price-list-service";
 import { dmy } from "../kupci/format";
 import { PdfImportForm, TableImportForm } from "./ImportForms";
 import "../kupci/cene-kupca.css";
@@ -17,7 +17,7 @@ const STATUS: Record<string, { label: string; tone: "info" | "success" | "neutra
 /** Uvoz VP cenovnika: gazda i kancelarija. Menja samo osnovne cene; rabati kupaca ostaju isti. */
 export default async function PriceImportPage() {
   await requireCapability("pricelist:import", "/portal/cene/uvoz");
-  const imports = await listPriceListImports();
+  const [imports, suppliers] = await Promise.all([listPriceListImports(), listSuppliers()]);
   return (
     <div className="pn">
       <div className="pn-head">
@@ -34,7 +34,7 @@ export default async function PriceImportPage() {
           <li key={s}><span className="ck-chip" aria-current={i < 2 ? "true" : undefined}>{s}</span></li>
         ))}
       </ol>
-      <TableImportForm />
+      <TableImportForm suppliers={suppliers} />
       <PdfImportForm />
       <section className="pn-card pn-card-flush">
         <div className="pn-card-h"><h2>Uvozi</h2></div>

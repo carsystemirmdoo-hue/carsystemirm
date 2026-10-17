@@ -281,3 +281,47 @@ test("obaveštenja: komercijalista → gazde; gazda → dodeljeni komercijalista
   assert.equal(cell(s, art.LAK, "odlozeno_30").rabat, 25, "pravilo ostaje posle brisanja obaveštenja");
   assert.equal(cell(s, art.LAK, "avans").rabat, 30);
 });
+
+test("tri decimale: uneta cena bez tačnog rabata — pamti se rabat sa 3 decimale, a posle učitavanja važi ista prikazana cena", async (t) => {
+  if (guard(t)) return;
+  const { saveRebateChanges, loadRebateSheet } = await svc();
+  const { evaluateEdit } = await import("@/lib/pricing/rebateSheet.mjs");
+  // VP 2.360,00: cena 1.500,00 traži rabat 36,440677… — sa 3 decimale tačna cena ne postoji (važi 1.499,99).
+  const preview = evaluateEdit({ field: "c", value: "1.500,00" }, 236000);
+  assert.ok(preview.ok && !preview.exact, JSON.stringify(preview));
+  const r = await saveRebateChanges(await user("rep"), { customerId: cust.a, items: [{ articleId: art.LAK, option: "avans", field: "c", value: "1.500,00" }], period: { kind: "sada" }, replaceConfirmed: false });
+  const [rule] = await db.sql<{ d: string }[]>`SELECT discount_percent::text AS d FROM price_rules WHERE source_batch = ${r.batch}`;
+  assert.equal(Number(rule.d), preview.ok ? preview.percent : NaN, "u bazi je rabat iz pregleda");
+  const reloaded = cell(await loadRebateSheet(await user("rep"), cust.a), art.LAK, "avans");
+  assert.equal(reloaded.priceCents, preview.ok ? preview.priceCents : NaN, "posle učitavanja ista cena kao u pregledu");
+  assert.equal(reloaded.rabat, preview.ok ? preview.percent : NaN);
+  const { customerPricesByOption } = await import("@/lib/pricing/customer-price-service");
+  const cart = (await customerPricesByOption(cust.a, [art.LAK], TODAY)).options.find((o) => o.code === "avans")!.prices.get(art.LAK)!;
+  assert.equal(cart.status === "cena" ? cart.netCents : null, reloaded.priceCents, "ista cena i u korpi/kancelariji");
+});
+
+test("dnevni zadatak (Vercel Cron) fizički briše obaveštenja starija od 10 dana; traži CRON_SECRET; pravila ostaju", async (t) => {
+  if (guard(t)) return;
+  const { GET } = await import("@/app/api/cron/obavestenja-rabata/route");
+  const { saveRebateChanges } = await svc();
+  await saveRebateChanges(await user("rep"), { customerId: cust.a, items: [{ articleId: art.TRAKA, option: "avans", field: "r", value: "31" }], period: { kind: "sada" }, replaceConfirmed: false });
+  await db.sql`UPDATE rebate_change_notices SET created_at = now() - interval '10 days 1 hour' WHERE customer_id = ${cust.a}`;
+  const [{ rules }] = await db.sql<{ rules: number }[]>`SELECT count(*)::int AS rules FROM price_rules WHERE customer_id = ${cust.a}`;
+  const old = process.env.CRON_SECRET;
+  try {
+    delete process.env.CRON_SECRET;
+    assert.equal((await GET(new Request("http://x/api/cron/obavestenja-rabata"))).status, 503, "bez tajne zadatak se ne izvršava");
+    process.env.CRON_SECRET = "qa-cron-tajna-1234567890";
+    assert.equal((await GET(new Request("http://x/api/cron/obavestenja-rabata"))).status, 401);
+    const ok = await GET(new Request("http://x/api/cron/obavestenja-rabata", { headers: { authorization: "Bearer qa-cron-tajna-1234567890" } }));
+    assert.equal(ok.status, 200);
+    assert.ok(((await ok.json()) as { deleted: number }).deleted >= 1);
+  } finally {
+    if (old === undefined) delete process.env.CRON_SECRET;
+    else process.env.CRON_SECRET = old;
+  }
+  const [{ n }] = await db.sql<{ n: number }[]>`SELECT count(*)::int AS n FROM rebate_change_notices WHERE customer_id = ${cust.a}`;
+  assert.equal(n, 0, "fizički obrisano");
+  const [{ after }] = await db.sql<{ after: number }[]>`SELECT count(*)::int AS after FROM price_rules WHERE customer_id = ${cust.a}`;
+  assert.equal(after, rules, "pravila cena netaknuta");
+});

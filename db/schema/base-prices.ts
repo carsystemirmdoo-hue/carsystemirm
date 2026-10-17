@@ -45,6 +45,10 @@ export const priceListImports = pgTable(
     columnMap: jsonb("column_map"),
     /** 0057: odluke o novim i izričito povezanim artiklima pri primeni. */
     decisions: jsonb("decisions"),
+    /** 0057: šifra u fajlu je naša interna („interna“) ili dobavljačeva („dobavljac“, uz ključ i naziv dobavljača). */
+    codeKind: text("code_kind").notNull().default("interna"),
+    supplierKey: text("supplier_key"),
+    supplierName: text("supplier_name"),
   },
   (t) => [unique("price_list_imports_sha_key").on(t.fileSha256), index("price_list_imports_status_idx").on(t.status, t.uploadedAt)],
 );

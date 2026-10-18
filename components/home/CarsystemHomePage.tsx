@@ -18,24 +18,26 @@ import { SearchableCombobox } from "@/components/ui/SearchableCombobox";
 import { CounterUp } from "@/components/ui/CounterUp";
 import { CompanyLocationMap } from "@/components/map/CompanyLocationMap";
 import { PartnerMap } from "@/components/stores/PartnerMap";
-import {
-  BrandLogoPlate,
-  brandLogos,
-  type BrandKey,
-  trustBrandKeys,
-} from "./BrandLogoPlate";
+import { type BrandKey, trustBrandKeys } from "./BrandLogoPlate";
+import { BrandMarquee } from "./BrandMarquee";
 import { HomeCampaignCarousel } from "./HomeCampaignCarousel";
 import { HomeSectionRail } from "./HomeSectionRail";
 import { companyContact, toTelHref } from "@/lib/company-contact";
-import { findNearestPartnerStore } from "@/lib/nearest-store";
+import { type GeoPoint } from "@/lib/nearest-store";
 import {
   getPartnerCityLabel,
   getPartnerCityKey,
   getPartnerLocationTypeLabel,
   getPublicPartnerStores,
-  getPurchaseLocations,
+  hasLocationCategory,
   type PartnerStore,
 } from "@/lib/partner-stores";
+import {
+  distanceKindLabel,
+  formatDistanceKm,
+  rankStoresByDistance,
+  type RankedStore,
+} from "@/lib/store-distance";
 import { getCityDisplayEntries } from "@/components/stores/store-locator-display";
 import styles from "./CarsystemHomePage.module.css";
 import { PaintTakeoverHomeSection } from "./PaintTakeoverHomeSection";
@@ -138,10 +140,6 @@ function CategorySearchIcon() {
   );
 }
 
-function formatDistanceKm(distanceKm: number) {
-  return `${Math.max(1, Math.round(distanceKm))} km`;
-}
-
 export function CarsystemHomePage() {
   const { openSearch } = useProductSearchDialog();
   const searchTriggerRef = useRef<HTMLButtonElement>(null);
@@ -158,6 +156,10 @@ export function CarsystemHomePage() {
       : "Potvrđene javne lokacije još nisu unete u lokator.",
   );
   const [showMobileLocator, setShowMobileLocator] = useState(false);
+  // „Sve lokacije — po udaljenosti“: postoji tek kada korisnik pokrene geolokaciju.
+  // Lokacija se ne šalje nikome; udaljenost se računa u pregledaču.
+  const [origin, setOrigin] = useState<GeoPoint | null>(null);
+  const [locating, setLocating] = useState(false);
   const [paintDiagnostics, setPaintDiagnostics] = useState({
     debug: false,
     washDisabled: false,
@@ -171,6 +173,19 @@ export function CarsystemHomePage() {
           )
         : publicPartnerStores,
     [selectedCity],
+  );
+  // Lista u odeljku mreže: isti javni skup kao mapa i broj; po udaljenosti kada je
+  // lokacija poznata, inače izvorni redosled. Grad je zaseban filter.
+  const rankedStores = useMemo<RankedStore[]>(
+    () =>
+      origin
+        ? rankStoresByDistance(selectedStores, origin)
+        : selectedStores.map((store) => ({ store, distanceKm: null, kind: "air" as const })),
+    [origin, selectedStores],
+  );
+  const distanceById = useMemo(
+    () => new Map(rankedStores.map((item) => [item.store.id, item.distanceKm])),
+    [rankedStores],
   );
   const selectedStore = useMemo(
     () =>
@@ -263,16 +278,33 @@ export function CarsystemHomePage() {
     );
   }
 
+  // Izbor kartice ili markera samo ističe lokaciju; ne filtrira listu na jedan grad.
   function handleMapStoreSelect(storeId: string) {
     const store = publicPartnerStores.find((item) => item.id === storeId);
     if (!store) return;
 
-    const city = getPartnerCityLabel(store);
-    setCityChosen(true);
-    saveCity(getPartnerCityKey(store));
-    setSelectedCity(getPartnerCityKey(store));
+    const distance = distanceById.get(store.id);
     setSelectedMapStoreId(store.id);
-    setLocatorStatus(`Prikazana je partnerska lokacija: ${store.name}, ${city}.`);
+    setLocatorStatus(
+      `Istaknuta je lokacija ${store.name}, ${getPartnerCityLabel(store)}${
+        typeof distance === "number"
+          ? ` — oko ${formatDistanceKm(distance)} ${distanceKindLabel("air")}`
+          : ""
+      }.`,
+    );
+    document
+      .getElementById(`lokacija-${store.id}`)
+      ?.scrollIntoView({ block: "nearest", behavior: "smooth" });
+  }
+
+  function showAllLocations() {
+    setSelectedCity("");
+    setCityChosen(Boolean(origin));
+    setLocatorStatus(
+      origin
+        ? `Prikazane su sve lokacije (${publicPartnerStores.length}), od najbliže.`
+        : `Prikazano je svih ${publicPartnerStores.length} lokacija u mreži.`,
+    );
   }
 
   function handleLocationRequest() {
@@ -286,34 +318,40 @@ export function CarsystemHomePage() {
       return;
     }
 
-    setLocatorStatus("Tražimo najbližu dostupnu tačku u partnerskoj mreži...");
+    setLocating(true);
+    setLocatorStatus("Određujemo Vašu lokaciju…");
+    const slow = window.setTimeout(() => {
+      setLocatorStatus("Određivanje lokacije traje duže nego obično. Grad možete izabrati i ručno.");
+    }, 4000);
 
     navigator.geolocation.getCurrentPosition(
       (position) => {
-        // Najbliža prodavnica: prvo „Gde kupiti“, ostale grupe samo kao rezerva.
-        const origin = { lat: position.coords.latitude, lng: position.coords.longitude };
-        const nearest =
-          findNearestPartnerStore(getPurchaseLocations(publicPartnerStores), origin) ??
-          findNearestPartnerStore(publicPartnerStores, origin);
+        window.clearTimeout(slow);
+        setLocating(false);
+        const point = { lat: position.coords.latitude, lng: position.coords.longitude };
+        // Režim „Sve lokacije — po udaljenosti“: bez filtera grada, svih N lokacija.
+        const ranked = rankStoresByDistance(publicPartnerStores, point);
+        const nearestPurchase =
+          ranked.find((item) => item.distanceKm !== null && hasLocationCategory(item.store, "kupovina")) ??
+          ranked.find((item) => item.distanceKm !== null);
 
-        if (!nearest) {
-          setLocatorStatus(
-            "Trenutno ne možemo da uporedimo lokacije. Izaberite grad ručno iz liste.",
-          );
-          return;
-        }
-
+        setOrigin(point);
+        setSelectedCity("");
         setCityChosen(true);
-        saveCity(getPartnerCityKey(nearest.store));
-        setSelectedCity(getPartnerCityKey(nearest.store));
-        setSelectedMapStoreId(nearest.store.id);
+        setSelectedMapStoreId(nearestPurchase?.store.id ?? "");
         setLocatorStatus(
-          `Najbliža dostupna tačka: ${nearest.store.city}, oko ${formatDistanceKm(
-            nearest.distanceKm,
-          )}. Dostupnost proizvoda potvrđuje se kroz upit.`,
+          nearestPurchase && nearestPurchase.distanceKm !== null
+            ? `Sve lokacije (${publicPartnerStores.length}) su poređane od najbliže, ${distanceKindLabel(
+                "air",
+              )}. Najbliža prodavnica: ${nearestPurchase.store.name}, ${getPartnerCityLabel(
+                nearestPurchase.store,
+              )} — oko ${formatDistanceKm(nearestPurchase.distanceKm)}.`
+            : "Lokacije trenutno nemaju koordinate za poređenje. Izaberite grad iz liste.",
         );
       },
       (error) => {
+        window.clearTimeout(slow);
+        setLocating(false);
         // Ručni izbor grada ostaje dostupan u svakom slučaju; poruka kaže šta se desilo.
         setLocatorStatus(
           error.code === error.PERMISSION_DENIED
@@ -323,7 +361,7 @@ export function CarsystemHomePage() {
               : "Uređaj trenutno ne može da odredi lokaciju. Izaberite grad iz liste.",
         );
       },
-      { enableHighAccuracy: false, timeout: 8000, maximumAge: 300000 },
+      { enableHighAccuracy: false, timeout: 12000, maximumAge: 300000 },
     );
   }
 
@@ -339,6 +377,9 @@ export function CarsystemHomePage() {
         headingPresentation="sr-only"
         aside={
           <LocatorCard
+            selectedDistanceKm={selectedStore ? (distanceById.get(selectedStore.id) ?? null) : null}
+            showAllByDistance={Boolean(origin)}
+            locating={locating}
             selectedStore={selectedStore}
             selectedCity={cityChosen ? selectedCity : ""}
             locatorStatus={locatorStatus}
@@ -348,38 +389,9 @@ export function CarsystemHomePage() {
         }
       />
 
-      <section className={styles.trustStrip} aria-labelledby="brand-strip-title">
+      <section className={styles.trustStrip} aria-label="Programski brendovi">
         <div className={styles.trustInner}>
-          <p id="brand-strip-title" className={styles.trustLabel}>
-            Programski brendovi
-          </p>
-          <div className={styles.brandRail} aria-label="Brendovi">
-            {trustBrandKeys.map((brandKey) => {
-              const href = trustBrandLinks[brandKey];
-              const logo = (
-                <BrandLogoPlate brandKey={brandKey} tone="mono" variant="rail" />
-              );
-              const brandName = brandLogos[brandKey].name;
-
-              return href ? (
-                <Link
-                  aria-label={`Otvorite stranicu brenda ${brandName}`}
-                  className={styles.brandRailMonoLink}
-                  href={href}
-                  // Traka je odmah vidljiva: automatski prefetch bi preuzimao RSC svih brend
-                  // stranica (~280 KB) pri svakom otvaranju početne. Klik učitava stranicu.
-                  prefetch={false}
-                  key={brandKey}
-                >
-                  {logo}
-                </Link>
-              ) : (
-                <span className={styles.brandRailStatic} key={brandKey}>
-                  {logo}
-                </span>
-              );
-            })}
-          </div>
+          <BrandMarquee brandKeys={trustBrandKeys} links={trustBrandLinks} />
         </div>
       </section>
 
@@ -412,7 +424,8 @@ export function CarsystemHomePage() {
               <button
                 ref={searchTriggerRef}
                 type="button"
-                className={styles.categorySearchLink}
+                className={`${styles.categorySearchLink} cs-cta`}
+                data-cta-on="theme"
                 aria-haspopup="dialog"
                 data-cursor="button"
                 onClick={() => openSearch(searchTriggerRef.current)}
@@ -488,7 +501,9 @@ export function CarsystemHomePage() {
             </span>
             <p className={styles.statContext}>
               <strong>Provereni podaci</strong>
-              <span>Objavljuju se samo odobrene javne lokacije</span>
+              <span>
+                Objavljuju se samo odobrene javne lokacije.
+              </span>
             </p>
           </div>
         </div>
@@ -514,19 +529,26 @@ export function CarsystemHomePage() {
               type="button"
               className={`${styles.locationButton} ${styles.locationButtonSecondary}`}
               onClick={handleLocationRequest}
+              aria-busy={locating || undefined}
               data-cursor="button"
             >
               <span className={styles.buttonIcon}>
                 <IconLocation />
               </span>
-              <span>Koristite svoju lokaciju</span>
+              <span>{locating ? "Određujemo lokaciju…" : "Koristite svoju lokaciju"}</span>
             </button>
             <p className={styles.locatorStatus}>{locatorStatus}</p>
             <StorePreviewList
+              byDistance={Boolean(origin)}
               cityKey={cityChosen ? selectedCity : ""}
+              cityLabel={
+                selectedCity ? (cityEntries.find((entry) => entry.key === selectedCity)?.city ?? "") : ""
+              }
               onSelect={handleMapStoreSelect}
+              onShowAll={showAllLocations}
+              rankedStores={rankedStores}
               selectedId={selectedMapStoreId}
-              stores={selectedStores}
+              totalCount={publicPartnerStores.length}
             />
           </div>
 
@@ -545,7 +567,9 @@ export function CarsystemHomePage() {
                 onError={() => setNetworkMapFailed(true)}
                 onReady={() => setNetworkMapFailed(false)}
                 onSelect={handleMapStoreSelect}
+                origin={origin}
                 selectedId={selectedMapStoreId}
+                selectedZoom={10}
                 stores={publicPartnerStores}
                 visibleIds={homeVisibleStoreIds}
               />
@@ -577,7 +601,6 @@ export function CarsystemHomePage() {
         jedan namenski gradijentni pojas iz dizajna, umesto ranijeg chapter
         tinta koji je bojio sve sekcije ispod.
       */}
-      <div className={styles.chapterTransition} aria-hidden="true" />
 
       <section
         className={`${styles.section} ${styles.supportChapter} ${styles.chapterAfter}`}
@@ -704,10 +727,10 @@ export function CarsystemHomePage() {
               </span>
             </div>
             <div className={styles.ctaRow}>
-              <a className={styles.primaryCta} href="/kontakt" data-cursor="button">
+              <a className={`${styles.primaryCta} cs-cta`} data-cta-on="theme" href="/kontakt" data-cursor="button">
                 <span>Kontaktirajte veleprodaju</span>
               </a>
-              <a className={styles.secondaryCta} href="/prodavnice" data-cursor="button">
+              <a className={`${styles.secondaryCta} cs-cta`} data-cta-on="theme" href="/prodavnice" data-cursor="button">
                 Prodavnice u mreži
               </a>
             </div>
@@ -741,13 +764,18 @@ export function CarsystemHomePage() {
             za radionice i servise.
           </span>
           <div className={styles.finalActions}>
-            <a className={`${styles.primaryCta} ${styles.finalPrimaryCta}`} href="/prodavnice" data-cursor="button">
+            <a
+              className={`${styles.primaryCta} ${styles.finalPrimaryCta} cs-cta`}
+              data-cta-fill="red"
+              href="/prodavnice"
+              data-cursor="button"
+            >
               <span>Prodavnice u mreži</span>
             </a>
-            <a className={styles.secondaryOnDark} href="/katalog" data-cursor="button">
+            <a className={`${styles.secondaryOnDark} cs-cta`} data-cta-on="dark" href="/katalog" data-cursor="button">
               Katalog proizvoda
             </a>
-            <a className={styles.secondaryOnDark} href="/kontakt?tema=b2b" data-cursor="button">
+            <a className={`${styles.secondaryOnDark} cs-cta`} data-cta-on="dark" href="/kontakt?tema=b2b" data-cursor="button">
               Upit za saradnju
             </a>
           </div>
@@ -761,12 +789,18 @@ export function CarsystemHomePage() {
 const LOCATOR_COMPACT_QUERY = "(max-width: 53.75rem)";
 
 function LocatorCard({
+  locating,
+  selectedDistanceKm,
+  showAllByDistance,
   selectedStore,
   selectedCity,
   locatorStatus,
   onCityChange,
   onLocationRequest,
 }: {
+  locating: boolean;
+  selectedDistanceKm: number | null;
+  showAllByDistance: boolean;
   selectedStore?: PartnerStore;
   selectedCity: string;
   locatorStatus: string;
@@ -832,12 +866,13 @@ function LocatorCard({
           type="button"
           className={`${styles.locationButton} ${styles.locationButtonSecondary}`}
           onClick={onLocationRequest}
+          aria-busy={locating || undefined}
           data-cursor="button"
         >
           <span className={styles.buttonIcon}>
             <IconLocation />
           </span>
-          <span>Koristite svoju lokaciju</span>
+          <span>{locating ? "Određujemo lokaciju…" : "Koristite svoju lokaciju"}</span>
         </button>
         <SearchableCombobox
           ariaLabel="Izaberite grad"
@@ -851,8 +886,16 @@ function LocatorCard({
           value={selectedCity}
         />
         {/* Bez izbora nema unapred prikazane lokacije; prazan pregled samo kada mreža nema lokacija. */}
-        {selectedStore || cityEntries.length === 0 ? <StorePreview store={selectedStore} /> : null}
+        {selectedStore || cityEntries.length === 0 ? (
+          <StorePreview distanceKm={selectedDistanceKm} store={selectedStore} />
+        ) : null}
         <p className={styles.locatorStatus}>{locatorStatus}</p>
+        {showAllByDistance ? (
+          <a className={styles.locatorAllLink} href="#prodavnice-mreza">
+            Sve lokacije po udaljenosti
+            <span aria-hidden="true">↓</span>
+          </a>
+        ) : null}
       </div>
     </aside>
   );
@@ -862,7 +905,13 @@ function phoneHref(phone: string) {
   return toTelHref(phone) ?? undefined;
 }
 
-function StorePreview({ store }: { store?: PartnerStore }) {
+function StorePreview({
+  distanceKm = null,
+  store,
+}: {
+  distanceKm?: number | null;
+  store?: PartnerStore;
+}) {
   if (!store) {
     return (
       <article className={styles.storePreview}>
@@ -888,26 +937,76 @@ function StorePreview({ store }: { store?: PartnerStore }) {
         </header>
         <p>{store.address}</p>
         <span>{getPartnerCityLabel(store)}</span>
+        {distanceKm !== null ? (
+          <span className={styles.storeDistance}>
+            ≈ {formatDistanceKm(distanceKm)} <small>{distanceKindLabel("air")}</small>
+          </span>
+        ) : null}
       </div>
     </article>
   );
 }
 
-/** Na telefonu se vide prve tri lokacije; ostale vodi veza ka /prodavnice. */
-const PHONE_VISIBLE_STORES = 3;
-
 function StorePreviewList({
+  byDistance,
   cityKey,
+  cityLabel,
   onSelect,
+  onShowAll,
+  rankedStores,
   selectedId,
-  stores,
+  totalCount,
 }: {
+  byDistance: boolean;
   cityKey: string;
+  cityLabel: string;
   onSelect: (storeId: string) => void;
+  onShowAll: () => void;
+  rankedStores: RankedStore[];
   selectedId: string;
-  stores: PartnerStore[];
+  totalCount: number;
 }) {
-  if (stores.length === 0) return <StorePreview />;
+  if (rankedStores.length === 0) return <StorePreview />;
+  return (
+    <StorePreviewListBody
+      byDistance={byDistance}
+      cityKey={cityKey}
+      cityLabel={cityLabel}
+      key={`${cityKey}-${byDistance}`}
+      onSelect={onSelect}
+      onShowAll={onShowAll}
+      rankedStores={rankedStores}
+      selectedId={selectedId}
+      totalCount={totalCount}
+    />
+  );
+}
+
+/** Telefon: bez skrola unutar skrola (odluka 2026-10-15) — prve tri, pa „Prikažite još“ po deset. */
+const PHONE_FIRST_STORES = 3;
+const PHONE_MORE_STEP = 10;
+
+function StorePreviewListBody({
+  byDistance,
+  cityKey,
+  cityLabel,
+  onSelect,
+  onShowAll,
+  rankedStores,
+  selectedId,
+  totalCount,
+}: {
+  byDistance: boolean;
+  cityKey: string;
+  cityLabel: string;
+  onSelect: (storeId: string) => void;
+  onShowAll: () => void;
+  rankedStores: RankedStore[];
+  selectedId: string;
+  totalCount: number;
+}) {
+  const [phoneLimit, setPhoneLimit] = useState(PHONE_FIRST_STORES);
+  const phoneRemaining = rankedStores.length - phoneLimit;
 
   // Broj uz vezu = broj lokacija na odredištu: /prodavnice?grad=<ključ> filtrira istim
   // ključem grada (getPartnerCityKey), a /prodavnice bez grada prikazuje sve javne lokacije.
@@ -915,15 +1014,35 @@ function StorePreviewList({
 
   return (
     <>
-      <div className={styles.storePreviewList} aria-label={selectedId ? "Lokacije u izabranom gradu" : "Lokacije u mreži"}>
-        {stores.map((store) => {
+      <div className={styles.storeListHeader}>
+        <span>
+          {byDistance ? "Po udaljenosti" : "Lokacije"} · prikazano {rankedStores.length} od {totalCount}
+          {cityLabel ? ` · ${cityLabel}` : ""}
+        </span>
+        {cityLabel ? (
+          <button className={styles.storeListReset} onClick={onShowAll} type="button">
+            Sve lokacije
+          </button>
+        ) : null}
+      </div>
+      {/* Cela lista je dostupna, ali u sopstvenom okviru, pa početna ne raste sa brojem lokacija. */}
+      <div
+        className={styles.storePreviewList}
+        aria-label={byDistance ? "Lokacije poređane po udaljenosti" : "Lokacije u mreži"}
+        role="list"
+        tabIndex={0}
+      >
+        {rankedStores.map(({ store, distanceKm, kind }, index) => {
           const isActive = store.id === selectedId;
 
           return (
             <article
               className={styles.storePreviewItem}
               data-active={isActive || undefined}
+              data-phone-hidden={index >= phoneLimit || undefined}
+              id={`lokacija-${store.id}`}
               key={store.id}
+              role="listitem"
             >
               <button
                 aria-pressed={isActive}
@@ -941,6 +1060,15 @@ function StorePreviewList({
                   <span>
                     {getPartnerCityLabel(store)} · {getPartnerLocationTypeLabel(store)}
                   </span>
+                  {distanceKm !== null ? (
+                    <span className={styles.storeDistance}>
+                      ≈ {formatDistanceKm(distanceKm)} <small>{distanceKindLabel(kind)}</small>
+                    </span>
+                  ) : byDistance ? (
+                    <span className={styles.storeDistance}>
+                      <small>udaljenost nije dostupna</small>
+                    </span>
+                  ) : null}
                 </span>
               </button>
               {store.phone ? (
@@ -956,12 +1084,19 @@ function StorePreviewList({
           );
         })}
       </div>
-      {stores.length > PHONE_VISIBLE_STORES ? (
-        <a className={styles.storePreviewMore} href={moreHref}>
-          Sve lokacije ({stores.length})
-          <span aria-hidden="true">→</span>
-        </a>
+      {phoneRemaining > 0 ? (
+        <button
+          className={styles.storePreviewShowMore}
+          onClick={() => setPhoneLimit((limit) => limit + PHONE_MORE_STEP)}
+          type="button"
+        >
+          Prikažite još {Math.min(PHONE_MORE_STEP, phoneRemaining)} (ukupno {rankedStores.length})
+        </button>
       ) : null}
+      <a className={styles.storePreviewMore} href={moreHref}>
+        {cityKey ? `Sve lokacije u gradu (${rankedStores.length})` : `Lokator prodavnica (${totalCount})`}
+        <span aria-hidden="true">→</span>
+      </a>
     </>
   );
 }

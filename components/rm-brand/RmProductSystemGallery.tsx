@@ -173,14 +173,16 @@ export function RmProductSystemGallery({
           <footer className={styles.systemGalleryFooter}>
             <div>
               <Link
-                className={styles.rmOutlineButton}
+                className={`${styles.rmOutlineButton} cs-cta`}
+                data-cta-on="theme"
                 href={activeSystem.catalogHref}
               >
                 Filtrirani katalog
                 <span aria-hidden="true">↗</span>
               </Link>
               <Link
-                className={styles.rmPrimaryButton}
+                className={`${styles.rmPrimaryButton} cs-cta`}
+                data-cta-on="theme"
                 href={activeSystem.inquiryHref}
               >
                 Pošaljite upit

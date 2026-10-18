@@ -872,9 +872,19 @@ export function Header() {
               <MegaMenuFrame
                 id={brandPanelId}
                 label="Brendovi"
-                eyebrow="Aktivni program"
-                title="Brendovi u Carsystem ekosistemu"
-                description="Direktan pristup postojećim brand stranicama, povezanim programima i proizvodima."
+                compact
+                title="Brendovi u ponudi"
+                description=""
+                headerAction={
+                  <Link
+                    className={styles.panelHeaderLink}
+                    href="/brendovi"
+                    onClick={() => closeDesktopMenu(false)}
+                  >
+                    Svi brendovi
+                    <ArrowIcon />
+                  </Link>
+                }
                 state={desktopMenuState}
                 layerRef={desktopLayerRef}
                 panelRef={desktopPanelRef}
@@ -883,22 +893,28 @@ export function Header() {
                 onHoverEnter={keepDesktopHoverOpen}
                 onHoverLeave={handleDesktopPanelLeave}
               >
-                <ul className={styles.brandGrid} aria-label="Brendovi">
-                  {BRAND_LINKS.map((brand) => (
-                    <li key={brand.href}>
-                      <BrandMenuLink
-                        brand={brand}
-                        active={isMenuLinkActive(brand.href, pathname)}
-                        onNavigate={() => closeDesktopMenu(false)}
-                      />
-                    </li>
-                  ))}
-                </ul>
-                <div className={styles.panelFooter}>
-                  <Link href="/brendovi" onClick={() => closeDesktopMenu(false)}>
-                    Pogledajte sve brendove
-                    <ArrowIcon />
-                  </Link>
+                <div className={styles.brandGallery}>
+                  <ul className={styles.brandGrid} aria-label="Brendovi">
+                    {BRAND_LINKS.map((brand) => (
+                      <li key={brand.href}>
+                        <BrandMenuLink
+                          brand={brand}
+                          active={isMenuLinkActive(brand.href, pathname)}
+                          onNavigate={() => closeDesktopMenu(false)}
+                        />
+                      </li>
+                    ))}
+                  </ul>
+                  <div className={styles.brandGalleryFoot}>
+                    <Link
+                      className={styles.brandLocatorLink}
+                      href="/prodavnice"
+                      onClick={() => closeDesktopMenu(false)}
+                    >
+                      Pronađite najbližu prodavnicu
+                      <ArrowIcon />
+                    </Link>
+                  </div>
                 </div>
               </MegaMenuFrame>
             </HeaderDisclosure>
@@ -1057,7 +1073,8 @@ export function Header() {
           <CustomerAccountMenu />
           <Link
             href="/kontakt"
-            className={styles.contactCta}
+            className={`${styles.contactCta} cs-cta`}
+            data-cta-on="theme"
             data-cursor="button"
             onClick={() => closeDesktopMenu(false)}
           >
@@ -1160,15 +1177,19 @@ export function Header() {
                       active={pathname === "/brendovi"}
                       onNavigate={closeMobileForNavigation}
                     />
-                    {BRAND_LINKS.map((link) => (
-                      <MobileMenuLink
-                        key={link.href}
-                        href={link.href}
-                        label={link.title}
-                        active={isMenuLinkActive(link.href, pathname)}
-                        onNavigate={closeMobileForNavigation}
-                      />
-                    ))}
+                    <li className={styles.mobileBrandItem}>
+                      <ul className={styles.mobileBrandGrid} aria-label="Brendovi">
+                        {BRAND_LINKS.map((link) => (
+                          <li key={link.href}>
+                            <BrandMenuLink
+                              brand={link}
+                              active={isMenuLinkActive(link.href, pathname)}
+                              onNavigate={closeMobileForNavigation}
+                            />
+                          </li>
+                        ))}
+                      </ul>
+                    </li>
                   </MobileAccordion>
                 </li>
                 <li>
@@ -1324,7 +1345,9 @@ function HeaderDisclosure({
 function MegaMenuFrame({
   id,
   label,
+  compact = false,
   eyebrow,
+  headerAction,
   title,
   description,
   state,
@@ -1338,7 +1361,10 @@ function MegaMenuFrame({
 }: {
   id: string;
   label: string;
+  /** Kompaktan panel (meni brendova): samo naslov, veza i zatvaranje, bez opisa. */
+  compact?: boolean;
   eyebrow?: string;
+  headerAction?: ReactNode;
   title: string;
   description: string;
   state: DesktopMenuState;
@@ -1381,6 +1407,7 @@ function MegaMenuFrame({
         ref={panelRef}
         id={id}
         className={styles.megaPanel}
+        data-compact={compact || undefined}
         data-menu-surface="true"
         aria-labelledby={`${id}-trigger`}
         onPointerEnter={onHoverEnter}
@@ -1390,8 +1417,9 @@ function MegaMenuFrame({
           <div data-has-eyebrow={eyebrow ? true : undefined}>
             {eyebrow ? <p>{eyebrow}</p> : null}
             <h2>{title}</h2>
-            <span>{description}</span>
+            {description ? <span>{description}</span> : null}
           </div>
+          {headerAction}
           <button
             type="button"
             className={styles.panelClose}
@@ -1490,6 +1518,12 @@ function SupportMenu({
   );
 }
 
+/*
+ * Stavka menija brendova — predlog A „galerija logotipa“ (izbor vlasnika
+ * 2026-10-18): veliki logotip bez pločice i okvira, polja razdvaja samo tanka
+ * linija mreže, kratak naziv ispod. Visina znaka je optički ujednačena
+ * (`menuGallery`); u tamnoj temi se prikazuje jednobojna verzija prebojena u belo.
+ */
 function BrandMenuLink({
   brand,
   active,
@@ -1499,6 +1533,9 @@ function BrandMenuLink({
   active: boolean;
   onNavigate: () => void;
 }) {
+  const gallery = brand.menuGallery;
+  const height = gallery?.height ?? brand.menuLogoHeight ?? 40;
+  const monoHeight = gallery?.monoHeight ?? height;
   return (
     <Link
       href={brand.href}
@@ -1507,23 +1544,38 @@ function BrandMenuLink({
       data-active={active || undefined}
       onClick={onNavigate}
     >
-      <span className={styles.brandLogoFrame}>
+      <span className={styles.brandLinkArrow} aria-hidden="true">
+        <svg viewBox="0 0 16 16" fill="none">
+          <path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" />
+        </svg>
+      </span>
+      <span className={styles.brandLogoFrame} aria-hidden="true">
         {brand.logo ? (
-          <Image
-            src={brand.logo}
-            alt={`${brand.title} logo`}
-            width={126}
-            height={58}
-            className={styles.brandLogo}
-          />
+          <>
+            <Image
+              src={brand.logo}
+              alt=""
+              width={200}
+              height={height}
+              className={styles.brandLogo}
+              data-logo-tone="color"
+              style={{ height, width: "auto" }}
+            />
+            <Image
+              src={gallery?.monoSrc ?? brand.logo}
+              alt=""
+              width={200}
+              height={monoHeight}
+              className={styles.brandLogo}
+              data-logo-tone="mono"
+              style={{ height: monoHeight, width: "auto" }}
+            />
+          </>
         ) : (
           <strong>{brand.title}</strong>
         )}
       </span>
-      <span className={styles.brandLinkCopy}>
-        <strong>{brand.title}</strong>
-        <span>{brand.description}</span>
-      </span>
+      <span className={styles.brandLinkName}>{brand.title}</span>
     </Link>
   );
 }

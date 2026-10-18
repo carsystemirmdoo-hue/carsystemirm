@@ -1,10 +1,11 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useState, useTransition } from "react";
+import { useCallback, useEffect, useRef, useState, useTransition } from "react";
 import { addRequestItemAction } from "@/app/kupac/naruci/actions";
 import { ensureCustomerSession, hasCustomerMarker } from "@/components/customer-buy/customerSession";
 import type { ForYou, ForYouCard } from "@/lib/customers/for-you";
+import { compactPrice } from "@/lib/pricing/compactPrice.mjs";
 import styles from "./CatalogForYou.module.css";
 
 export type ForYouRanking = ForYou["ranking"] & { enoughHistory: boolean };
@@ -53,12 +54,21 @@ export function CatalogForYou() {
       </p>
     );
   }
+  const cards = [...data.refill, ...data.frequent];
+  // Ista napomena o raspoloživosti na svakoj kartici → jednom, u zaglavlju.
+  const sharedStock = cards.length > 0 && cards.every((c) => c.stock?.state === "zastareo") ? cards[0].stock!.text : null;
   return (
     <section className={styles.root} aria-labelledby="licno-naslov">
       <header className={styles.head}>
         <h2 id="licno-naslov">Za Vas</h2>
-        {data.demo ? <span className={styles.demo}>{data.demoLabel ?? "Demo podaci"} · demo cene</span> : null}
-        {data.demo ? <p className={styles.headNote}>Prikaz za proveru: istorija i cene su sintetičke. U korpi važi cena iz cenovnika.</p> : null}
+        {data.demo ? <span className={styles.demo}>{data.demoLabel ?? "Demo podaci"}</span> : null}
+        {data.demo || sharedStock ? (
+          <p className={styles.headNote}>
+            {data.demo ? "Istorija kupovina je sintetička; cene su iz demo rabata i iste su kao u korpi." : null}
+            {data.demo && sharedStock ? " " : null}
+            {sharedStock}
+          </p>
+        ) : null}
         {!data.demo ? (
           <Link href="/kupac/fakture" className={styles.headLink}>
             Fakture →
@@ -66,44 +76,86 @@ export function CatalogForYou() {
         ) : null}
       </header>
       {data.refill.length ? (
-        <Group title="Vreme je za dopunu" note="Prema ritmu Vaših ranijih kupovina." cards={data.refill} />
+        <Rail id="licno-dopuna" title="Vreme je za dopunu" note="Prema ritmu Vaših ranijih kupovina" cards={data.refill} hideStock={Boolean(sharedStock)} />
       ) : null}
-      <Group title="Najčešće kupujete" cards={data.frequent} />
+      <Rail id="licno-najcesce" title="Najčešće kupujete" cards={data.frequent} hideStock={Boolean(sharedStock)} />
     </section>
   );
 }
 
-const INITIAL_CARDS = 4;
-
-function Group({ title, note, cards }: { title: string; note?: string; cards: ForYouCard[] }) {
-  // Kratko na prvi pogled (i na telefonu); ostatak na zahtev, bez skrivanja kontrola.
-  const [all, setAll] = useState(false);
-  const shown = all ? cards : cards.slice(0, INITIAL_CARDS);
+/**
+ * Ručni karusel: strelice + prevlačenje (izvorni horizontalni skrol sa „snap“), bez automatskog
+ * pomeranja. Strelice pomeraju za vidljivu širinu; na krajevima su onemogućene.
+ */
+function Rail({ id, title, note, cards, hideStock }: { id: string; title: string; note?: string; cards: ForYouCard[]; hideStock: boolean }) {
+  const track = useRef<HTMLUListElement>(null);
+  const [edges, setEdges] = useState({ start: true, end: true });
+  const update = useCallback(() => {
+    const el = track.current;
+    if (!el) return;
+    setEdges({ start: el.scrollLeft <= 2, end: el.scrollLeft + el.clientWidth >= el.scrollWidth - 2 });
+  }, []);
+  useEffect(() => {
+    const el = track.current;
+    if (!el) return;
+    update();
+    el.addEventListener("scroll", update, { passive: true });
+    const ro = new ResizeObserver(update);
+    ro.observe(el);
+    return () => {
+      el.removeEventListener("scroll", update);
+      ro.disconnect();
+    };
+  }, [update]);
+  const move = (dir: 1 | -1) => {
+    const el = track.current;
+    if (!el) return;
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    el.scrollBy({ left: dir * Math.max(el.clientWidth * 0.9, 200), behavior: reduce ? "auto" : "smooth" });
+  };
   return (
     <div className={styles.group}>
-      <h3 className={styles.groupTitle}>
-        {title}
-        {note ? <small>{note}</small> : null}
-      </h3>
-      <ul className={styles.list}>
-        {shown.map((c) => (
-          <Card key={`${title}-${c.articleId}`} card={c} />
+      <div className={styles.groupHead}>
+        <h3 className={styles.groupTitle} id={`${id}-naslov`}>
+          {title}
+          {note ? <small>{note}</small> : null}
+        </h3>
+        {edges.start && edges.end ? null : (
+          <div className={styles.railNav}>
+            <button type="button" onClick={() => move(-1)} disabled={edges.start} aria-controls={id} aria-label={`Prethodni proizvodi: ${title}`}>
+              <span aria-hidden="true">←</span>
+            </button>
+            <button type="button" onClick={() => move(1)} disabled={edges.end} aria-controls={id} aria-label={`Sledeći proizvodi: ${title}`}>
+              <span aria-hidden="true">→</span>
+            </button>
+          </div>
+        )}
+      </div>
+      <ul className={styles.list} id={id} ref={track} aria-labelledby={`${id}-naslov`}>
+        {cards.map((c) => (
+          <Card key={`${id}-${c.articleId}`} card={c} hideStock={hideStock} />
         ))}
       </ul>
-      {cards.length > INITIAL_CARDS ? (
-        <button type="button" className={styles.more} onClick={() => setAll((v) => !v)} aria-expanded={all}>
-          {all ? "Prikažite manje" : `Prikažite još ${cards.length - INITIAL_CARDS}`}
-        </button>
-      ) : null}
     </div>
   );
 }
 
-const money = new Intl.NumberFormat("sr-Latn-RS", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 const unitText = (u: string) => (u === "LIT" ? "L" : u === "KOM" ? "kom" : u === "KG" ? "kg" : u.toLowerCase());
 
-function Card({ card }: { card: ForYouCard }) {
+function priceView(card: ForYouCard) {
   const p = card.price;
+  if (!p) return null;
+  // Celo pakovanje kada je potvrđeno za sve opcije; inače cena po JM, jasno označena.
+  const byPack = !p.single && p.byOption.every((o) => o.packNet !== null);
+  return compactPrice(
+    p.byOption.map((o) => ({ code: o.code, net: byPack ? o.packNet! : o.unitNet })),
+    { pack: byPack ? card.packLabel : `po ${unitText(p.unit)}` },
+  );
+}
+
+function Card({ card, hideStock }: { card: ForYouCard; hideStock: boolean }) {
+  const view = priceView(card);
+  const packText = card.packLabel && card.packLabel !== "1 kom" ? card.packLabel : null;
   return (
     <li className={styles.card}>
       <Link href={card.href} className={styles.media} tabIndex={-1} aria-hidden="true">
@@ -118,30 +170,19 @@ function Card({ card }: { card: ForYouCard }) {
         <h4 className={styles.name}>
           <Link href={card.href}>{card.name}</Link>
         </h4>
-        {card.variantLabel || card.packLabel ? (
-          <p className={styles.meta}>{[card.variantLabel, card.packLabel && card.packLabel !== "1 kom" ? card.packLabel : null].filter(Boolean).join(" · ")}</p>
-        ) : null}
+        <p className={styles.meta}>{[card.variantLabel, view ? null : packText].filter(Boolean).join(" · ") || "\u00a0"}</p>
         {card.reason ? <p className={styles.reason}>{card.reason}</p> : null}
-        {p ? (
-          <div className={styles.price}>
-            {p.kind === "demo" ? <span className={styles.demoTag}>Demo cena</span> : null}
-            <p>
-              {p.packNet !== null && !p.single ? (
-                <>
-                  <strong>{money.format(p.packNet)} RSD</strong> <span>/ pakovanje</span>
-                </>
-              ) : (
-                <>
-                  <strong>{money.format(p.unitNet)} RSD</strong> <span>/ {unitText(p.unit)}</span>
-                </>
-              )}
-            </p>
-            <p className={styles.vat}>
-              {p.perUnit && !p.single ? `${money.format(p.unitNet)} RSD / ${unitText(p.unit)} · ` : ""}bez PDV-a{p.optionLabel ? ` · ${p.optionLabel}` : ""}
-            </p>
-          </div>
-        ) : null}
-        {card.stock ? (
+        <div className={styles.price}>
+          {view ? (
+            <>
+              <strong>{view.amounts}</strong>
+              <span>{view.detail}</span>
+            </>
+          ) : (
+            <span>Cena na upit</span>
+          )}
+        </div>
+        {card.stock && !hideStock ? (
           <p className={styles.stock} data-state={card.stock.state}>
             {card.stock.text}
           </p>

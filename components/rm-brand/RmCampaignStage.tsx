@@ -220,7 +220,8 @@ function RmCampaignSlide({
         <p className={styles.campaignDescription}>{slide.description}</p>
         <div className={styles.campaignActions}>
           <Link
-            className={styles.rmPrimaryButton}
+            className={`${styles.rmPrimaryButton} cs-cta`}
+            data-cta-on={slide.theme === "esense" ? "light" : "dark"}
             href={slide.primaryCta.href}
             tabIndex={active ? 0 : -1}
           >
@@ -228,7 +229,8 @@ function RmCampaignSlide({
             <span aria-hidden="true">↗</span>
           </Link>
           <Link
-            className={styles.rmSecondaryButton}
+            className={`${styles.rmSecondaryButton} cs-cta`}
+            data-cta-on={slide.theme === "esense" ? "light" : "dark"}
             href={slide.secondaryCta.href}
             tabIndex={active ? 0 : -1}
           >

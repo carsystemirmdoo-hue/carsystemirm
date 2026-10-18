@@ -8,7 +8,9 @@
  *   status "reviewed" — poslovna lokacija sa javnim dokazom, prikazuje se;
  *   mergeInto          — duplikat: zapis se uklanja, naziv postaje alternativni
  *                        naziv ciljne lokacije;
- *   status "pending"   — ostaje u izvoru, ne prikazuje se (sporno ili odbijeno).
+ *   status "pending"   — ostaje u izvoru, ne prikazuje se (sporno, čeka potvrdu);
+ *   status "excluded"  — nije poslovna lokacija za javnu mrežu (naše sedište,
+ *                        nepovezana delatnost): uklanja se iz javnog fajla.
  */
 import { PUBLIC_LOCATION_TYPES } from "./location-import-utils.mjs";
 
@@ -25,16 +27,20 @@ export function applyLocationDecisions(locations, decisionsFile) {
   const decisions = decisionsFile?.decisions ?? [];
   const byId = new Map(locations.map((location) => [location.id, { ...location }]));
   const seen = new Set();
-  const summary = { reviewed: 0, merged: 0, pending: 0 };
+  const summary = { reviewed: 0, merged: 0, pending: 0, excluded: 0 };
 
   for (const decision of decisions) {
     if (seen.has(decision.id)) throw new Error(`Duplicate location decision: ${decision.id}`);
     seen.add(decision.id);
     const location = byId.get(decision.id);
     if (!location) {
-      // Već spojen duplikat (ponovna primena na generisan fajl) je u redu.
+      // Već spojen ili isključen zapis (ponovna primena na generisan fajl) je u redu.
       if (decision.mergeInto && byId.has(decision.mergeInto)) {
         summary.merged += 1;
+        continue;
+      }
+      if (decision.status === "excluded") {
+        summary.excluded += 1;
         continue;
       }
       throw new Error(`Location decision for unknown id: ${decision.id}`);
@@ -54,6 +60,15 @@ export function applyLocationDecisions(locations, decisionsFile) {
       if (unique.length > 0) target.alternativeNames = unique;
       byId.delete(decision.id);
       summary.merged += 1;
+      continue;
+    }
+
+    if (decision.status === "excluded") {
+      if (location.verificationStatus === "verified") {
+        throw new Error(`Verified location ${decision.id} cannot be excluded by a review decision.`);
+      }
+      byId.delete(decision.id);
+      summary.excluded += 1;
       continue;
     }
 

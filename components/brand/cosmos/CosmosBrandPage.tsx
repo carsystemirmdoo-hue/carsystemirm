@@ -207,11 +207,11 @@ export function CosmosBrandPage({ brand, products }: Props) {
           Proverite dostupnost Cosmos Lac programa kod najbližeg partnera.
         </p>
         <div className={styles.heroCtas}>
-          <Link className={styles.ctaPrimary} href="/prodavnice">
+          <Link className={`${styles.ctaPrimary} cs-cta`} data-cta-on="dark" href="/prodavnice">
             Pronađite prodavnicu
             <span aria-hidden="true">→</span>
           </Link>
-          <Link className={styles.ctaSecondary} href="/kontakt">
+          <Link className={`${styles.ctaSecondary} cs-cta`} data-cta-on="dark" href="/kontakt">
             Kontaktirajte tehničku podršku
           </Link>
         </div>

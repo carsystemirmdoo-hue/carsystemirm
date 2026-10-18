@@ -135,7 +135,7 @@ export function CarsystemUseCases({
             ))}
           </div>
 
-          <Link className={styles.primaryButton} href={activeUseCase.href}>
+          <Link className={`${styles.primaryButton} cs-cta`} data-cta-on="theme" href={activeUseCase.href}>
             Otvorite preporučene proizvode
             <span aria-hidden="true">→</span>
           </Link>

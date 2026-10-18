@@ -214,7 +214,7 @@ function ProcessDetails({
         </div>
       </div>
 
-      <Link className={styles.processCta} href={phase.cta.href}>
+      <Link className={`${styles.processCta} cs-cta`} data-cta-on="theme" href={phase.cta.href}>
         {phase.cta.label}
         <span aria-hidden="true">→</span>
       </Link>

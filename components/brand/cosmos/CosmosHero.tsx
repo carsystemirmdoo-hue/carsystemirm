@@ -73,11 +73,11 @@ export function CosmosHero({ cans, variantCount, lineCount }: Props) {
           dostupnih kroz partnersku mrežu Carsystem i R-M.
         </p>
         <div className={styles.heroCtas}>
-          <Link className={styles.ctaPrimary} href="/prodavnice">
+          <Link className={`${styles.ctaPrimary} cs-cta`} data-cta-on="dark" href="/prodavnice">
             Pronađite najbližu prodavnicu
             <span aria-hidden="true">→</span>
           </Link>
-          <Link className={styles.ctaSecondary} href="/katalog?brend=cosmos-lac">
+          <Link className={`${styles.ctaSecondary} cs-cta`} data-cta-on="dark" href="/katalog?brend=cosmos-lac">
             Pogledajte sve Cosmos Lac proizvode
           </Link>
         </div>

@@ -4,6 +4,8 @@ import Link from "next/link";
 import { BrandLogoMark } from "@/components/brand/BrandLogoMark";
 import { useEffect, useRef } from "react";
 import type { CarsystemBrand } from "@/lib/carsystem-data";
+import { BRAND_LINKS } from "@/components/layout/navigation-data";
+import type { CSSProperties } from "react";
 import styles from "./ManufacturerRail.module.css";
 
 type ManufacturerRailProps = {
@@ -21,6 +23,18 @@ type ManufacturerRailProps = {
       mode: "links";
       onSelect?: never;
     }
+);
+
+/*
+ * Optički ujednačena visina znaka: iste srazmere kao meni brendova (`menuLogoHeight`,
+ * najviši znak 62 px), svedene na visinu trake (40 px). Širina je i dalje ograničena.
+ */
+const RAIL_LOGO_MAX = 40;
+const MENU_LOGO_MAX = 62;
+const railLogoHeight = new Map(
+  BRAND_LINKS.flatMap((link) =>
+    link.menuLogoHeight ? [[link.href.split("/").pop() ?? "", Math.round((link.menuLogoHeight / MENU_LOGO_MAX) * RAIL_LOGO_MAX)] as const] : [],
+  ),
 );
 
 export function ManufacturerRail({
@@ -74,7 +88,12 @@ export function ManufacturerRail({
                 onClick={() => onSelect("")}
               >
                 <span className={styles.allMark} aria-hidden="true">
-                  Sve
+                  <svg width="18" height="18" viewBox="0 0 18 18" fill="currentColor">
+                    <rect x="1" y="1" width="7" height="7" />
+                    <rect x="10" y="1" width="7" height="7" />
+                    <rect x="1" y="10" width="7" height="7" />
+                    <rect x="10" y="10" width="7" height="7" />
+                  </svg>
                 </span>
                 <span>Svi</span>
               </button>
@@ -86,7 +105,10 @@ export function ManufacturerRail({
             const selected = brand.slug === selectedSlug;
             const content = (
               <>
-                <span className={styles.logoFrame}>
+                <span
+                  className={styles.logoFrame}
+                  style={railLogoHeight.has(brand.slug) ? ({ "--rail-logo-h": `${railLogoHeight.get(brand.slug)}px` } as CSSProperties) : undefined}
+                >
                   <BrandLogoMark
                     brand={brand}
                     className={styles.logo}

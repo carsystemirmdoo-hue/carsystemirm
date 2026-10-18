@@ -19,7 +19,7 @@ import { customerStockFor } from "@/lib/stock/stock-import-service";
  *  - stvaran kupac: SAMO njegove potvrđene kupovine (`recommendation_input_lines`, isti izvor kao
  *    profil kupca);
  *  - demo kupac (system_settings `customer.demo`, npr. Posterium/PROBA): izolovana sintetička
- *    istorija i demo cene iz tog podešavanja. Ne upisuje se u fakture, cenovnik ni izveštaje, ne
+ *    istorija iz tog podešavanja; cene iz pravila cena tog kupca (isti obračun kao korpa). Ne upisuje se u fakture, cenovnik ni izveštaje, ne
  *    meša se sa stvarnim podacima, i vidi je samo taj kupac (bira se po kupcu iz sesije).
  * Uvek: samo POTVRĐENA veza sa katalogom; bez opreme i artikala van programa.
  */
@@ -30,8 +30,8 @@ type DemoProfile = {
   label?: string;
   /** Sintetičke kupovine, relativno na danas (`daysAgo`), da demo ostane aktuelan. */
   events: { code: string; daysAgo: number; doc: string; qty: number }[];
-  /** Demo cena bez PDV-a po JM artikla (npr. po litru ili komadu). */
-  prices: Record<string, number>;
+  /** Zastarelo: ranije demo cene po JM. Cene se sada računaju kao u korpi (pravila cena kupca). */
+  prices?: Record<string, number>;
 };
 type DemoSetting = { profiles?: Record<string, DemoProfile> };
 
@@ -43,8 +43,12 @@ export type ForYouCard = {
   image: { src: string; alt: string } | null;
   variantLabel: string | null;
   packLabel: string | null;
+  /**
+   * Cena iz ISTOG obračuna kao korpa, za svaku odobrenu opciju plaćanja (odloženo, avans…),
+   * za celo potvrđeno pakovanje kada postoji. `kind: "demo"` samo označava demo kupca.
+   */
   price:
-    | { kind: "cena" | "demo"; packNet: number | null; unitNet: number; unit: string; single: boolean; perUnit: boolean; optionLabel: string | null }
+    | { kind: "cena" | "demo"; unit: string; single: boolean; perUnit: boolean; byOption: { code: string | null; packNet: number | null; unitNet: number }[] }
     | null;
   stock: { state: "ima" | "nema" | "upit"; text: string } | { state: "zastareo"; text: string } | null;
   orderable: boolean;
@@ -162,13 +166,12 @@ export async function loadForYou(customerId: string, now = new Date()): Promise<
   const shownIds = [...new Set([...frequent.slice(0, FREQUENT_LIMIT).map((s) => s.articleId), ...refill.map((r) => r.articleId)])];
 
   const ordering = await orderingEnabledFor(customerId);
-  // Stvarne cene (isti obračun kao korpa) samo uz pravo poručivanja; demo kupac ih koristi samo
-  // za odluku „može u korpu“ — prikazuje se demo cena.
+  // Cene iz istog obračuna kao korpa (samo uz pravo poručivanja), i za demo kupca: demo rabati
+  // tog kupca su obična pravila cena, pa „Za Vas“, kartica kataloga i korpa pokazuju isto.
   const [realPriced, stock] = await Promise.all([
     ordering ? loadArticleRequestPrices(customerId, shownIds) : Promise.resolve(null),
     customerStockFor(shownIds, now),
   ]);
-  const priced = demo ? null : realPriced;
 
   const card = (articleId: string, reason: string | null): ForYouCard => {
     const a = facts.get(articleId)!;
@@ -177,18 +180,13 @@ export async function loadForYou(customerId: string, now = new Date()): Promise<
     const unit = a.pack_unit ?? a.unit ?? "KOM";
     const single = packQty !== null ? isSinglePiece({ quantity: packQty, label: a.pack_label ?? "" }, unit) : true;
     let price: ForYouCard["price"] = null;
-    if (demo) {
-      const unitNet = demo.prices?.[a.code];
-      if (typeof unitNet === "number" && unitNet > 0) {
-        price = { kind: "demo", unitNet, packNet: packQty ? Math.round(unitNet * packQty * 100) / 100 : null, unit, single, perUnit: packQty !== null && packQty !== 1, optionLabel: null };
-      }
-    } else if (priced) {
-      const line = priced.lines.get(articleId);
-      const opt = priced.options.find((o) => line?.byOption[o.key]?.status === "cena");
-      const p2 = opt ? line?.byOption[opt.key] : null;
-      if (line && opt && p2 && p2.status === "cena") {
-        price = { kind: "cena", unitNet: p2.netPrice, packNet: p2.packAmounts?.net ?? null, unit: line.unit, single, perUnit: packQty !== null && packQty !== 1, optionLabel: priced.options.length > 1 ? opt.label : null };
-      }
+    const line = realPriced?.lines.get(articleId);
+    if (line) {
+      const byOption = realPriced!.options.flatMap((o) => {
+        const p2 = line.byOption[o.key];
+        return p2 && p2.status === "cena" ? [{ code: o.code, packNet: p2.packAmounts?.net ?? null, unitNet: p2.netPrice }] : [];
+      });
+      if (byOption.length) price = { kind: demo ? "demo" : "cena", unit: line.unit, single, perUnit: packQty !== null && packQty !== 1, byOption };
     }
     const realLine = realPriced?.lines.get(articleId);
     // Uobičajena količina (po kupovini, u JM) → broj CELIH pakovanja; bez tihog zaokruživanja.

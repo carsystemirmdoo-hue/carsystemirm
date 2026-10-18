@@ -25,6 +25,7 @@ export function Button({
   className,
   children,
   prefetch,
+  ctaOn = "theme",
   ...rest
 }: {
   href: string;
@@ -33,12 +34,15 @@ export function Button({
   children: React.ReactNode;
   /** Prosleđuje se `next/link`; `false` za veze ka teškim stranama (npr. /katalog). */
   prefetch?: boolean;
+  /** Podloga ispod dugmeta za zajednički CTA efekat (globals.css `.cs-cta`). */
+  ctaOn?: "light" | "dark" | "theme";
 } & React.AnchorHTMLAttributes<HTMLAnchorElement>) {
   return (
     <Link
       href={href}
       prefetch={prefetch}
-      className={cn(baseClasses, VARIANT_CLASSES[variant], className)}
+      className={cn(baseClasses, VARIANT_CLASSES[variant], "cs-cta", className)}
+      data-cta-on={ctaOn}
       data-cursor="button"
       {...rest}
     >

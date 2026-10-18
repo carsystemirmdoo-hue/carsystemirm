@@ -546,7 +546,8 @@
   grid-auto-rows: max-content;
   align-content: start;
   min-height: 0;
-  max-height: 250px;
+  /* Cela lista javnih lokacija u sopstvenom okviru; strana ne raste. */
+  max-height: 360px;
   gap: 8px;
   overflow-y: auto;
   overscroll-behavior: contain;
@@ -559,14 +560,65 @@
   width: 6px;
 }
 
-/* Veza ka /prodavnice postoji samo na telefonu, gde lista nema unutrašnje skrolovanje. */
-.storePreviewMore {
+/* Zaglavlje liste: šta je prikazano i povratak na sve lokacije posle filtera grada. */
+.storeListHeader {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px 12px;
+  color: var(--ds-c-text-2);
+  font-family: var(--font-technical), monospace;
+  font-size: var(--ds-font-label);
+  letter-spacing: var(--ds-tracking-label);
+  text-transform: uppercase;
+}
+
+.storeListReset {
+  min-height: 32px;
+  padding: 0 12px;
+  border: 1px solid var(--ds-c-line-strong);
+  border-radius: var(--ds-ctl-radius);
+  background: transparent;
+  color: var(--ds-c-text);
+  cursor: pointer;
+  font: inherit;
+}
+
+.storeListReset:focus-visible {
+  outline: 2px solid var(--ds-c-focus);
+  outline-offset: 2px;
+}
+
+/* Udaljenost uz svaku lokaciju; vrsta (vazdušnom linijom) je uvek uz broj. */
+.storeDistance {
+  color: var(--ds-c-text);
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+}
+
+.storeDistance small {
+  color: var(--ds-c-text-2);
+  font-weight: 400;
+}
+
+.locatorAllLink {
+  color: var(--ds-c-text);
+  font-size: var(--ds-font-small);
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* Veza ka /prodavnice i „Prikažite još“ postoje samo na telefonu, gde lista nema unutrašnje skrolovanje. */
+.storePreviewMore,
+.storePreviewShowMore {
   display: none;
 }
 
 /*
  * Telefon (odluka vlasnika 2026-10-15): bez skrolovanja unutar skrolovanja stranice. Vide se
- * prve tri lokacije po postojećem redosledu, a ostale vodi veza „Sve lokacije (N)”.
+ * prve tri lokacije, „Prikažite još“ dodaje po deset (2026-10-18), a veza vodi na lokator.
  */
 @media (max-width: 47.99rem) {
   .storePreviewList {
@@ -575,8 +627,21 @@
     padding-right: 0;
   }
 
-  .storePreviewList > article:nth-child(n + 4) {
+  .storePreviewList > article[data-phone-hidden] {
     display: none;
+  }
+
+  .storePreviewShowMore {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 44px;
+    border: 1px solid var(--ds-c-line-strong);
+    border-radius: var(--ds-ctl-radius);
+    background: transparent;
+    color: var(--ds-c-text);
+    font: var(--ds-ctl-font);
+    cursor: pointer;
   }
 
   .storePreviewMore {
@@ -1102,12 +1167,18 @@
 
 .categorySection {
   --product-category-ink: var(--ds-c-text);
-  --product-category-border: var(--ds-c-line);
+  /* Neutralna siva bez plavičastog tona (2026-10-18); samo unutrašnje linije. */
+  --product-category-border: rgb(18 18 20 / 0.11);
+  --product-category-surface: var(--bg2);
   --product-category-accent: var(--ds-c-accent);
   --product-category-accent-ink: var(--ds-c-on-accent);
   border-block: 1px solid var(--border-soft);
   background: var(--bg2);
   padding-block: clamp(64px, 7vw, 104px);
+}
+
+:global(html.dark) .categorySection {
+  --product-category-border: rgb(255 255 255 / 0.085);
 }
 
 .categorySectionInner {
@@ -3746,10 +3817,8 @@
  *
  * Ranije su sekcije ispod takeovera nosile tamni chapter tint vozen iz
  * --paint-chapter, da bi se osecalo "novo poglavlje". Novi dizajn to resava
- * drugacije i namerno: posle tamnog repa takeovera ide izdvojen gradijentni
- * pojas (.chapterTransition), pa se stranica vraca u svetlu komercijalnu zonu.
- * Prelaz je i dalje rezisiran, ali kroz eksplicitan hand-off umesto kroz tint
- * koji je bojio ceo donji deo stranice.
+ * drugacije: tema okvira (components/theme) vraća stranicu u temu korisnika
+ * kada takeover napusti sredinu ekrana.
  *
  * Tokeni su preuzeti direktno iz dizajna. Full-bleed ide kroz pseudo-sloj, ne
  * kroz background shorthand, da na sirokim ekranima povrsina ne ostane
@@ -3803,28 +3872,9 @@
  * 1:1 iz dizajna. Ovo je jedini element koji nosi prelaz — sekcije ispod su
  * ravne povrsine.
  */
-/* Prelaz iz uvek tamnog repa takeovera (#0a0b0e) u pozadinu stranice. */
-.chapterTransition {
-  height: 150px;
-  background: linear-gradient(180deg, #0a0b0e 0%, var(--ds-c-bg) 100%);
-}
-
-/* U tamnoj temi je takeover svetao (suprotna tema), pa prelaz kreće od papira. */
-:global(html[data-theme-preference="dark"]) .chapterTransition {
-  background: linear-gradient(180deg, #f1eee8 0%, var(--ds-c-bg) 100%);
-}
-
-@media (max-width: 720px) {
-  .chapterTransition {
-    height: 90px;
-  }
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .chapterTransition {
-    will-change: auto;
-  }
-}
+/* Široki gradijentni pojas posle takeovera (150 px, tamno → svetlo) je uklonjen
+   2026-10-18: tema okvira sada menja stranicu u trenutku izlaska iz bloka, pa je
+   pojas ostajao kao siva traka između sekcija. */
 
 /*
  * Laptop ostaje referentna kompozicija. Iznad 1600px sadržaj raste
@@ -4069,4 +4119,127 @@
 .chapterAfter .textLink:hover {
   text-decoration-color: var(--ds-c-text) !important;
   text-decoration-thickness: 2px;
+}
+
+/* ---------- Traka logotipa: kruženje (2026-10-18) ----------
+   Ista visina bloka kao ranije (padding .trustInner); natpis je uklonjen. Dve
+   kopije liste, svaka sa istim razmakom na kraju, pa pomeraj od −50 % ne skače. */
+.marquee {
+  position: relative;
+  display: flex;
+  width: 100%;
+  min-width: 0;
+  align-items: center;
+  gap: 12px;
+}
+
+.marqueeViewport {
+  min-width: 0;
+  flex: 1;
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+}
+
+.marqueeTrack {
+  display: flex;
+  width: max-content;
+  animation: brandMarquee 48s linear infinite;
+}
+
+.marquee:hover .marqueeTrack,
+.marquee:focus-within .marqueeTrack,
+.marquee[data-paused] .marqueeTrack {
+  animation-play-state: paused;
+}
+
+@keyframes brandMarquee {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+.marqueeList {
+  display: flex;
+  align-items: center;
+  gap: clamp(40px, 5vw, 72px);
+  margin: 0;
+  padding: 0 clamp(40px, 5vw, 72px) 0 0;
+  list-style: none;
+}
+
+.marqueeItem {
+  display: flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Znakovi malo veći nego u ranijoj traci; proporcija iz BrandLogoPlate ostaje. */
+.marquee .brandRailMonoLink,
+.marquee .brandRailStatic {
+  max-width: none;
+  flex: none;
+}
+
+.marquee .brandLogoMonoMark {
+  width: calc(var(--mono-h) * var(--mono-aspect) * 1.2);
+  max-width: none;
+  height: calc(var(--mono-h) * 1.2);
+}
+
+.marquee .brandLogoWordmark {
+  font-size: 1.35rem;
+}
+
+.marqueePause {
+  display: grid;
+  width: 36px;
+  height: 36px;
+  flex: none;
+  place-items: center;
+  border: 1px solid var(--ds-c-line);
+  border-radius: var(--ds-ctl-radius);
+  background: transparent;
+  color: var(--ds-c-text-2);
+  cursor: pointer;
+  font-size: 11px;
+}
+
+.marqueePause:hover {
+  color: var(--ds-c-text);
+}
+
+.marqueePause:focus-visible {
+  outline: 2px solid var(--ds-c-focus);
+  outline-offset: 2px;
+}
+
+/* Smanjeno kretanje: mirna, centrirana traka bez kopije i bez dugmeta za pauzu. */
+@media (prefers-reduced-motion: reduce) {
+  .marqueeViewport {
+    -webkit-mask-image: none;
+    mask-image: none;
+  }
+
+  .marqueeTrack {
+    width: 100%;
+    justify-content: center;
+    animation: none;
+  }
+
+  .marqueeList {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 16px 40px;
+    padding: 0;
+  }
+
+  .marqueeList[aria-hidden],
+  .marqueePause {
+    display: none;
+  }
 }

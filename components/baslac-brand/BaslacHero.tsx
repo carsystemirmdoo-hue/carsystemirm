@@ -246,7 +246,7 @@ function BaslacCampaignSlide({
         <p className={styles.campaignDescription}>{slide.description}</p>
         <div className={styles.campaignActions}>
           <Link
-            className={styles.primaryButton}
+            className={`${styles.primaryButton} cs-cta`} data-cta-on="dark"
             href={slide.primaryCta.href}
             tabIndex={active ? 0 : -1}
           >

@@ -20,6 +20,16 @@
 
 .grid[data-layout="homepage"] {
   grid-template-columns: repeat(2, minmax(0, 1fr));
+  /* Linije samo između kategorija (razmak od 1 px u boji linije), bez teškog
+     spoljnog okvira tabele (2026-10-18). Svi redovi su puni (12 kategorija). */
+  gap: 1px;
+  border: 0;
+  background: var(--category-border);
+}
+
+.grid[data-layout="homepage"] > li {
+  border: 0;
+  background: var(--product-category-surface, var(--background));
 }
 
 .grid > li {

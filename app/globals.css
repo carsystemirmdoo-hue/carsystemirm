@@ -2303,3 +2303,91 @@ html[data-route-transition="fallback"] .cs-route-transition-screen {
   border-color: rgb(255 255 255 / 55%);
   background: rgb(255 255 255 / 6%);
 }
+
+/* Promena teme okvira (components/theme/frameTheme.ts): samo u trenutku promene
+   boje se kratko pretapaju na svim površinama (stranica, header, meniji), pa
+   nema naglog fleša. Atribut postoji ~320 ms, zatim važe uobičajeni prelazi. */
+html[data-frame-switching],
+html[data-frame-switching] *,
+html[data-frame-switching] *::before,
+html[data-frame-switching] *::after {
+  transition-property: background-color, color, border-color, fill, stroke, box-shadow !important;
+  transition-duration: 240ms !important;
+  transition-timing-function: ease !important;
+}
+
+/*
+ * Javni CTA (2026-10-18): popunjavanje pozadine sleva nadesno pri hover-u i
+ * fokusu tastaturom (~300 ms). Podloga je EKSPLICITNA, ne pogađa se iz roditelja:
+ *   data-cta-on="light"  — svetla podloga: crna ispuna, beli tekst;
+ *   data-cta-on="dark"   — tamna podloga ili fotografija: bela ispuna, crni tekst;
+ *   data-cta-on="theme"  — površina prati temu (efektivnu, uklj. temu okvira);
+ *   data-cta-fill="red"  — izuzetak: crvena ispuna, beli tekst.
+ * Ne koristi se za tabove, filtere, kontrole mape ni dugmad portala.
+ */
+.cs-cta {
+  --cta-fill: #0b0b0d;
+  --cta-ink: #ffffff;
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  transition:
+    color 300ms ease,
+    border-color 300ms ease;
+}
+
+.cs-cta::before {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: var(--cta-fill);
+  content: "";
+  pointer-events: none;
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 300ms cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.cs-cta:hover::before,
+.cs-cta:focus-visible::before {
+  transform: scaleX(1);
+}
+
+.cs-cta:hover,
+.cs-cta:focus-visible {
+  border-color: var(--cta-fill) !important;
+  color: var(--cta-ink) !important;
+}
+
+.cs-cta:is(:hover, :focus-visible) :where(span, svg, small, strong) {
+  color: inherit !important;
+}
+
+.cs-cta:focus-visible {
+  outline: 2px solid var(--ds-c-focus);
+  outline-offset: 3px;
+}
+
+[data-cta-on="light"],
+[data-cta-on="theme"] {
+  --cta-fill: #0b0b0d;
+  --cta-ink: #ffffff;
+}
+
+[data-cta-on="dark"],
+html.dark [data-cta-on="theme"] {
+  --cta-fill: #ffffff;
+  --cta-ink: #0b0b0d;
+}
+
+[data-cta-fill="red"] {
+  --cta-fill: var(--ds-c-accent);
+  --cta-ink: #ffffff;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cs-cta,
+  .cs-cta::before {
+    transition: none;
+  }
+}

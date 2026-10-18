@@ -270,21 +270,6 @@
     "longitude": 20.457684
   },
   {
-    "id": "preview-morsad-d-o-o-bozurnja",
-    "name": "MORSAD d.o.o.",
-    "address": "BOZURNJA. PUT ZA METERIZE 36",
-    "city": "BOZURNJA",
-    "type": "partner",
-    "verificationStatus": "pending",
-    "coordinateStatus": "approximate",
-    "isPublic": true,
-    "latitude": 44.2224142,
-    "longitude": 20.7092285,
-    "alternativeNames": [
-      "Morsad"
-    ]
-  },
-  {
     "id": "preview-pr-proka-cuprija",
     "name": "PR PROKA",
     "address": "CUPRIJA. CARA LAZARA 0",
@@ -331,18 +316,6 @@
     "isPublic": true,
     "latitude": 44.2321011,
     "longitude": 20.7431745
-  },
-  {
-    "id": "preview-car-system-i-r-m-d-o-o-indjija-indjija",
-    "name": "Car system I R-M d.o.o. Indjija",
-    "address": "INĐIJA. IVE ANDRICA 3",
-    "city": "INĐIJA",
-    "type": "partner",
-    "verificationStatus": "pending",
-    "coordinateStatus": "geocoded_preview",
-    "isPublic": true,
-    "latitude": 45.0496189,
-    "longitude": 20.0654391
   },
   {
     "id": "preview-tehnohem-mix-ivanjica",
@@ -676,18 +649,6 @@
     "workingHours": "Pozovite za radno vreme",
     "notes": "Prodajno mesto za auto boje i lakove u Novom Sadu.",
     "coordinateStatus": "verified"
-  },
-  {
-    "id": "preview-ap-sasa-bozic-obrenovac",
-    "name": "AP SASA BOZIC",
-    "address": "OBRENOVAC. BELOPOLJSKA 5",
-    "city": "OBRENOVAC",
-    "type": "partner",
-    "verificationStatus": "pending",
-    "coordinateStatus": "geocoded_preview",
-    "isPublic": true,
-    "latitude": 44.6505223,
-    "longitude": 20.1954859
   },
   {
     "id": "preview-max-color-bt-pakasnica",

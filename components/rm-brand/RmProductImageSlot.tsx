@@ -133,12 +133,15 @@ export function RmProductImageSlot({
         <span>{system}</span>
         <strong>{productName}</strong>
         <small>{group}</small>
-        {(role || feature) && (
+        {/*
+          Promo kartica: naziv (sa šifrom), grupa i najviše jedna kratka osobina, bez oznaka
+          „Uloga:“/„Osobina:“. Uloga se ne ponavlja kada je ista kao grupa; podaci ostaju u modelu.
+        */}
+        {feature || (role && role !== group) ? (
           <div className={styles.productSlotDetails}>
-            {role && <span>Uloga: {role}</span>}
-            {feature && <span>Osobina: {feature}</span>}
+            <span>{feature ?? role}</span>
           </div>
-        )}
+        ) : null}
         {href && (
           <Link className={styles.productSlotLink} href={href}>
             Otvorite proizvod ili grupu

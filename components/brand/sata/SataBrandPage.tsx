@@ -85,11 +85,11 @@ export function SataBrandPage({ brand, products }: Props) {
             </p>
 
             <div className={styles.heroActions}>
-              <Link className={styles.ctaPrimary} href="#program">
+              <Link className={`${styles.ctaPrimary} cs-cta`} data-cta-on="dark" href="#program">
                 Pogledajte program
                 <span aria-hidden="true">→</span>
               </Link>
-              <Link className={styles.ctaSecondary} href={brand.routes.contact}>
+              <Link className={`${styles.ctaSecondary} cs-cta`} data-cta-on="dark" href={brand.routes.contact}>
                 Pošaljite upit za izbor opreme
               </Link>
             </div>
@@ -409,7 +409,7 @@ export function SataBrandPage({ brand, products }: Props) {
         </p>
         {products.length > 0 ? (
           <p className={styles.localCatalogLink}>
-            <Link className={styles.ctaSecondary} href="/katalog?brend=sata">
+            <Link className={`${styles.ctaSecondary} cs-cta`} data-cta-on="theme" href="/katalog?brend=sata">
               Pogledajte SATA proizvode u katalogu
               <span aria-hidden="true">→</span>
             </Link>
@@ -426,11 +426,11 @@ export function SataBrandPage({ brand, products }: Props) {
             </p>
           </div>
           <div className={styles.localCtaActions}>
-            <Link className={styles.ctaPrimary} href={brand.routes.contact}>
+            <Link className={`${styles.ctaPrimary} cs-cta`} data-cta-on="theme" href={brand.routes.contact}>
               Pošaljite upit
               <span aria-hidden="true">→</span>
             </Link>
-            <Link className={styles.ctaSecondary} href="/prodavnice">
+            <Link className={`${styles.ctaSecondary} cs-cta`} data-cta-on="theme" href="/prodavnice">
               Pronađite najbližu prodavnicu
             </Link>
           </div>

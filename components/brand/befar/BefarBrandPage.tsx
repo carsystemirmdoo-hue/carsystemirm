@@ -379,7 +379,7 @@ export function BefarBrandPage({ brand, products }: Props) {
               </ul>
 
               <p className={styles.opencellDisclaimer}>{befarOpencell.disclaimer}</p>
-              <Link className={styles.buttonSecondary} href={befarOpencell.cta.href}>
+              <Link className={`${styles.buttonSecondary} cs-cta`} data-cta-on="dark" href={befarOpencell.cta.href}>
                 {befarOpencell.cta.label}
               </Link>
             </div>
@@ -530,7 +530,7 @@ export function BefarBrandPage({ brand, products }: Props) {
               </ul>
             </div>
 
-            <Link className={styles.buttonSecondary} href={befarDiscoveryMeta.catalogHref}>
+            <Link className={`${styles.buttonSecondary} cs-cta`} data-cta-on="light" href={befarDiscoveryMeta.catalogHref}>
               {befarDiscoveryMeta.catalogLabel}
             </Link>
           </div>
@@ -575,11 +575,12 @@ export function BefarBrandPage({ brand, products }: Props) {
                   <Link
                     className={
                       action.tone === "primary"
-                        ? styles.buttonPrimary
+                        ? `${styles.buttonPrimary} cs-cta`
                         : action.tone === "secondary"
-                          ? styles.buttonSecondary
+                          ? `${styles.buttonSecondary} cs-cta`
                           : styles.inlineLink
                     }
+                    data-cta-on={action.tone === "tertiary" ? undefined : "dark"}
                     href={action.href}
                     key={action.href}
                   >

@@ -93,10 +93,10 @@ function NorbinHero() {
             </div>
 
             <div className={styles.heroActions}>
-              <Link className={styles.buttonPrimary} href="/prodavnice">
+              <Link className={`${styles.buttonPrimary} cs-cta`} data-cta-on="theme" href="/prodavnice">
                 Pronađite najbližu prodavnicu
               </Link>
-              <Link className={styles.buttonSecondary} href="/katalog?brend=norbin">
+              <Link className={`${styles.buttonSecondary} cs-cta`} data-cta-on="theme" href="/katalog?brend=norbin">
                 Pogledajte Norbin proizvode
               </Link>
               <Link className={styles.buttonText} href="/kontakt?tema=proizvod&brend=norbin">
@@ -472,7 +472,7 @@ function OriginSection() {
             </p>
 
             <div className={styles.heroActions}>
-              <Link className={styles.buttonPrimary} href="/prodavnice">
+              <Link className={`${styles.buttonPrimary} cs-cta`} data-cta-on="dark" href="/prodavnice">
                 Pronađite najbližu prodavnicu
               </Link>
               <Link className={styles.buttonText} href="/kontakt?tema=proizvod&brend=norbin">

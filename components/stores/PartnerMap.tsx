@@ -59,7 +59,9 @@ export function PartnerMap({
   onError,
   onReady,
   onSelect,
+  origin = null,
   selectedId,
+  selectedZoom = SELECTED_ZOOM,
   stores,
   visibleIds,
 }: {
@@ -70,7 +72,11 @@ export function PartnerMap({
   onError: () => void;
   onReady: () => void;
   onSelect: (storeId: string) => void;
+  /** Korisnikova lokacija posle „Koristite svoju lokaciju“: marker „Vi“ i kadar sa najbližima. */
+  origin?: { lat: number; lng: number } | null;
   selectedId: string;
+  /** Zum pri izboru lokacije; na početnoj je pregledan, da ostale lokacije ostanu vidljive. */
+  selectedZoom?: number;
   stores: PartnerStore[];
   visibleIds: Set<string>;
 }) {
@@ -479,14 +485,50 @@ export function PartnerMap({
     if (!store) return;
 
     const center = markerCoordinates.get(store.id) ?? [store.longitude, store.latitude];
-    const zoom = Math.max(map.getZoom(), SELECTED_ZOOM);
+    const zoom = Math.max(map.getZoom(), selectedZoom);
 
     if (prefersReducedMotion) {
       map.jumpTo({ center, zoom });
     } else {
       map.easeTo({ center, zoom, duration: 500 });
     }
-  }, [markerCoordinates, prefersReducedMotion, selectedId, status, storesWithCoords]);
+  }, [markerCoordinates, prefersReducedMotion, selectedId, selectedZoom, status, storesWithCoords]);
+
+  /* ---------- korisnikova lokacija → marker „Vi“ + kadar sa najbližim lokacijama ---------- */
+
+  useEffect(() => {
+    const map = mapRef.current;
+    if (!map || status !== "ready" || !origin) return;
+
+    const element = document.createElement("span");
+    element.className = mapStyles.mapMarkerOrigin;
+    element.setAttribute("aria-hidden", "true");
+    element.title = "Vaša lokacija";
+    const marker = new (maplibre().Marker)({ element }).setLngLat([origin.lng, origin.lat]).addTo(map);
+
+    // Kadar: korisnik + pet najbližih lokacija, da se vidi okolina, ne samo jedna tačka.
+    const nearest = storesWithCoords
+      .map((store) => ({
+        store,
+        d: (store.latitude - origin.lat) ** 2 + ((store.longitude - origin.lng) * Math.cos((origin.lat * Math.PI) / 180)) ** 2,
+      }))
+      .sort((a, b) => a.d - b.d)
+      .slice(0, 5);
+    const lngs = [origin.lng, ...nearest.map((item) => item.store.longitude)];
+    const lats = [origin.lat, ...nearest.map((item) => item.store.latitude)];
+    map.fitBounds(
+      [
+        [Math.min(...lngs), Math.min(...lats)],
+        [Math.max(...lngs), Math.max(...lats)],
+      ] as LngLatBoundsLike,
+      { padding: 56, maxZoom: 11, duration: prefersReducedMotion ? 0 : 600 },
+    );
+    lastCameraTargetRef.current = selectedIdRef.current;
+
+    return () => {
+      marker.remove();
+    };
+  }, [origin, prefersReducedMotion, status, storesWithCoords]);
 
   return (
     <div className={`${mapStyles.mapCanvasShell} ${className}`}>

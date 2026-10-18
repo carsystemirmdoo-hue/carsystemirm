@@ -457,7 +457,7 @@ function ColorWorkflow({
 
       <div className={styles.colorActions}>
         <Link
-          className={styles.primaryButton}
+          className={`${styles.primaryButton} cs-cta`} data-cta-on="theme"
           href="/kontakt?tema=podrska&brend=baslac&oblast=koloristika"
         >
           Pošaljite šifru boje
@@ -510,7 +510,7 @@ function CommercialSection({
           <li>Tehnička potvrda sistema pre primene</li>
         </ul>
         <Link
-          className={styles.primaryButton}
+          className={`${styles.primaryButton} cs-cta`} data-cta-on="theme"
           href="/kontakt?tema=proizvod&brend=baslac&program=30-line-cv"
         >
           Razgovarajte sa tehničkim savetnikom
@@ -687,7 +687,7 @@ function BaslacSystemsAndProducts({
                 stranici sistema.
               </p>
               <Link
-                className={styles.primaryButton}
+                className={`${styles.primaryButton} cs-cta`} data-cta-on="theme"
                 href={`/proizvodi/grupa/baslac-${group.selector}`}
               >
                 Otvorite {group.title.split(" — ")[0]}
@@ -744,7 +744,7 @@ function BaslacSystemsAndProducts({
           Ne vidite artikal koji Vam treba? Pošaljite oznaku sa etikete i
           potvrdićemo pakovanje, dokumentaciju i dostupnost.
         </p>
-        <Link className={styles.outlineButton} href={baslacCatalogHref()}>
+        <Link className={`${styles.outlineButton} cs-cta`} data-cta-on="theme" href={baslacCatalogHref()}>
           Svi Baslac proizvodi
           <span aria-hidden="true">↗</span>
         </Link>
@@ -782,7 +782,7 @@ function DocumentLibrary() {
       </div>
 
       <div className={styles.catalogFooter}>
-        <Link className={styles.outlineButton} href="/katalozi?brend=baslac">
+        <Link className={`${styles.outlineButton} cs-cta`} data-cta-on="theme" href="/katalozi?brend=baslac">
           Svi baslac dokumenti
           <span aria-hidden="true">↗</span>
         </Link>
@@ -805,7 +805,7 @@ function FinalCta() {
       </div>
       <div className={styles.finalCtaActions}>
         <Link
-          className={styles.primaryButton}
+          className={`${styles.primaryButton} cs-cta`} data-cta-on="dark"
           href="/kontakt?tema=proizvod&brend=baslac"
         >
           Zatražite preporuku sistema

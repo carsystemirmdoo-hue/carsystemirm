@@ -359,3 +359,88 @@
   font-size: var(--ds-font-small);
   font-weight: 500;
 }
+
+/*
+ * Kompaktan birač (2026-10-18): logotip bez ugnježdenog okvira, naziv ispod, ista
+ * visina svih kontrola. Kada stavke ne staju u red, traka se ručno skroluje (i na
+ * računaru) umesto da se kontrole sabiju i odseku znak.
+ */
+:global([data-ds="a"]) .viewport {
+  overflow-x: auto;
+  overscroll-behavior-inline: contain;
+  scroll-snap-type: inline proximity;
+  scrollbar-width: thin;
+  padding-bottom: 6px;
+}
+
+:global([data-ds="a"]) .list {
+  gap: 6px;
+}
+
+:global([data-ds="a"]) .item {
+  flex: 1 0 116px;
+  scroll-snap-align: start;
+}
+
+:global([data-ds="a"]) .control {
+  min-height: 76px;
+  grid-template-rows: 40px auto;
+  gap: 6px;
+  padding: 8px 6px 7px;
+  font-size: 0.75rem;
+}
+
+:global([data-ds="a"]) .control[data-selected] {
+  padding: 7px 5px 6px;
+}
+
+:global([data-ds="a"]) .logoFrame {
+  width: 100%;
+  height: 40px;
+  border: 0;
+  background: transparent;
+  padding: 0 4px;
+}
+
+:global([data-ds="a"]) .logo {
+  width: min(100%, 88px);
+}
+
+/* Tamna tema: logotipi su crtani za svetlu podlogu — jedna utišana pločica, bez ivice. */
+:global(.dark [data-ds="a"]) .logoFrame,
+:global(.dark) :global([data-ds="a"]) .logoFrame {
+  border-radius: var(--ds-ctl-radius);
+  background: oklch(0.93 0.004 255);
+}
+
+:global([data-ds="a"]) .allMark {
+  width: auto;
+  height: 30px;
+  padding: 0 10px;
+  border: 0;
+  background: var(--ds-c-surface-2);
+}
+
+@media (max-width: 900px) {
+  :global([data-ds="a"]) .item {
+    width: 108px;
+    flex: 0 0 108px;
+  }
+}
+
+:global([data-ds="a"]) .logo {
+  height: var(--rail-logo-h, 32px);
+}
+
+:global([data-ds="a"]) .item {
+  flex-basis: 104px;
+}
+
+/* Brend bez crteža logotipa (tekstualni znak) ne sme da pređe pločicu. */
+:global([data-ds="a"]) .logoFrame [data-brand-wordmark] {
+  max-width: 100%;
+  overflow: hidden;
+  font-size: 0.8125rem;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

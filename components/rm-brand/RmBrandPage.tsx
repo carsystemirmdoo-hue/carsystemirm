@@ -230,6 +230,9 @@ function RmAgilisFeature({
       className={`${styles.rmSection} ${styles.agilisSection}`}
       aria-labelledby="agilis-title"
       data-rm-atmosphere-zone="agilis"
+      /* Krem AGILIS je svetla zona okvira u obe teme: sekcija, zaglavlje i podnavigacija
+         menjaju se zajedno, i posle povratka skrolom, vezom ili dugmetom Nazad. */
+      data-frame-theme="light"
     >
       <div className={styles.agilisHeader}>
         <div>

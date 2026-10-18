@@ -4636,3 +4636,102 @@
     font-size: var(--ds-font-label);
   }
 }
+
+/*
+ * AGILIS komponente (2026-10-18): četiri kompaktne kartice u redu već na računaru pri 100 %
+ * zumu (ranije tek od 1880 px, pa je 1440 px dobijao 2×2 kartice višlje od ekrana). Visina
+ * slike je ograničena i ne zavisi od izvornog fajla; nazivi, osobina i veza su poravnati.
+ */
+@media (min-width: 64rem) {
+  .agilisProductGrid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+.agilisProductGrid .productImageSlotMedia {
+  aspect-ratio: auto;
+  height: clamp(11rem, 16vw, 15.5rem);
+}
+
+.agilisProductGrid .productImageSlot figcaption > strong {
+  min-height: 2.2em;
+}
+
+/*
+ * Refinity → procesne tehnologije (2026-10-18). Razmak je bio zbir tri sloja: padding
+ * prelazne zone (do 11rem), padding Refinity sekcije (do 8rem) i gornji padding sledeće
+ * sekcije. Pozadina zone se na ivicama prelivala u providno, pa je na svetloj strani
+ * ostajao sivi pojas iznad „Procesne tehnologije“. Zona je sada puna tamna površina;
+ * prelaz svetlo↔tamno nosi tema okvira (data-frame-theme), bez dodatnog pojasa.
+ */
+.refinityTransitionZone {
+  background: var(--rm-graphite-deep);
+  padding-block: clamp(1.5rem, 3vw, 3rem);
+}
+
+.refinityTransitionZone .refinitySection {
+  padding-block: clamp(2.5rem, 5vw, 5rem);
+}
+
+/*
+ * Pioneer (2026-10-18): pravougaona kartica bez kose desne ivice (ostali dijagonalni
+ * motivi stranice ostaju). Isti unutrašnji razmak kao susedne kartice serije, a veza je
+ * uvek na dnu, poravnata sa tekstom.
+ */
+.seriesLayout article[data-dominant] {
+  clip-path: none;
+  grid-template-rows: auto 1fr auto auto;
+  align-content: stretch;
+  padding: clamp(1.5rem, 3vw, 2.5rem);
+}
+
+.seriesLayout article[data-dominant] > p {
+  margin: 1rem 0 1.5rem;
+}
+
+.seriesLayout article[data-dominant] > a {
+  position: relative;
+  z-index: 2;
+  justify-self: start;
+}
+
+/*
+ * eSense i Partnerstva (2026-10-18): pozadina i fotografija od ivice do ivice ekrana,
+ * tekst poravnat sa ivicom glavnog sadržaja (kontejner), čitljive širine i širi naslovni
+ * stubac. Spoljni razmak teksta = polovina viška ekrana preko kontejnera (procenat se
+ * računa od širine polovine članka, zato `100% − kontejner/2`).
+ */
+.editorialProofs {
+  width: 100%;
+  max-width: none;
+  margin-inline: 0;
+}
+
+@media (min-width: 64rem) {
+  .editorialProofs article {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    min-height: clamp(30rem, 38vw, 40rem);
+  }
+
+  .editorialProofs .esensePanel > div:not(.editorialProofImage) {
+    padding-inline: clamp(2rem, 4vw, 4.5rem) max(var(--ds-gutter, 20px), calc(100% - var(--ds-container-max, 1208px) / 2));
+  }
+
+  .editorialProofs .partnershipPanel > div:not(.editorialProofImage) {
+    padding-inline: max(var(--ds-gutter, 20px), calc(100% - var(--ds-container-max, 1208px) / 2)) clamp(2rem, 4vw, 4.5rem);
+  }
+}
+
+.editorialProofs h2 {
+  max-width: 18ch;
+}
+
+.editorialProofs article > div:not(.editorialProofImage) > p:last-of-type {
+  max-width: 34rem;
+}
+
+@media (max-width: 63.99rem) {
+  .editorialProofs article > div:not(.editorialProofImage) {
+    padding-inline: var(--ds-gutter, 20px);
+  }
+}

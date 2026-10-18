@@ -33,6 +33,6 @@ if (check) {
   await writeFileAtomic(locationsPath, output);
   const listed = next.filter((location) => location.verificationStatus !== "pending").length;
   console.log(
-    `Odluke primenjene: ${summary.reviewed} revidirano, ${summary.merged} spojeno kao duplikat, ${summary.pending} ostaje nejavno; javno ukupno ${listed} od ${next.length}.`,
+    `Odluke primenjene: ${summary.reviewed} revidirano, ${summary.merged} spojeno kao duplikat, ${summary.excluded} isključeno; javno ${listed}, čeka potvrdu ${next.length - listed}.`,
   );
 }

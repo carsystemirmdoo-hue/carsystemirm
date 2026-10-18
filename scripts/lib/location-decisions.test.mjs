@@ -55,3 +55,11 @@ test("javni fajl odluka ne nosi obrazloženja ni interne podatke", () => {
     assert.doesNotMatch(JSON.stringify(decision), /\b0\d{2}[ /-]?\d{3}/, `${decision.id}: telefon`);
   }
 });
+
+test("isključen zapis se uklanja iz javnog fajla, a potvrđen ne može da se isključi", () => {
+  const { locations } = applyLocationDecisions(base, { decisions: [{ id: "c", status: "excluded" }] });
+  assert.equal(locations.some((item) => item.id === "c"), false);
+  const again = applyLocationDecisions(locations, { decisions: [{ id: "c", status: "excluded" }] }).locations;
+  assert.deepEqual(again, locations);
+  assert.throws(() => applyLocationDecisions(base, { decisions: [{ id: "v", status: "excluded" }] }));
+});

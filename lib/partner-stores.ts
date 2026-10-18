@@ -94,6 +94,14 @@ export function getPublicPartnerStores() {
   return partnerStores.filter(isPubliclyListedStore);
 }
 
+/**
+ * Broj zapisa koji čekaju poslovnu potvrdu (`pending`). Nisu javni; početna
+ * prikazuje samo broj, da bude jasno da javna mreža nije konačna.
+ */
+export function getPendingPartnerStoreCount() {
+  return partnerStores.filter((store) => store.verificationStatus === "pending").length;
+}
+
 export function hasPartnerCoordinates(
   store: PartnerStore,
 ): store is MappablePartnerStore {

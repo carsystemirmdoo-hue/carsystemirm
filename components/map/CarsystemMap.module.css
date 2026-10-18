@@ -270,6 +270,18 @@
   transition: opacity 220ms ease;
 }
 
+/* Korisnikova lokacija (početna, posle „Koristite svoju lokaciju“): krug sa prstenom. */
+.mapMarkerOrigin {
+  display: block;
+  width: 16px;
+  height: 16px;
+  border: 3px solid var(--ds-c-bg);
+  border-radius: 50%;
+  background: var(--ds-c-focus, #2563eb);
+  box-shadow: 0 0 0 6px color-mix(in oklab, var(--ds-c-focus, #2563eb) 22%, transparent);
+  pointer-events: none;
+}
+
 /* Static single-location (company) marker: accent fill, no interaction. */
 .mapMarkerCompany {
   cursor: default;

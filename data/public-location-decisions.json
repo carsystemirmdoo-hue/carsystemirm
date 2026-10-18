@@ -1,6 +1,6 @@
 {
   "reviewedAt": "2026-10-17",
-  "note": "Revizija BEX lokacija: reviewed = poslovna lokacija sa dokazom (aktivan kupac + registrovana delatnost + poslovna adresa). Obrazloženja i sporni zapisi su van repozitorijuma.",
+  "note": "Revizija BEX lokacija: reviewed = poslovna lokacija sa dokazom; excluded = nije lokacija javne mreže (sedište, nepovezana delatnost); bez odluke = čeka poslovnu potvrdu. Obrazloženja su van repozitorijuma.",
   "decisions": [
     {
       "id": "preview-antonijev-pancevo",
@@ -297,6 +297,18 @@
     {
       "id": "preview-vukonjanski-zrenjanin",
       "mergeInto": "vukonjanski-zrenjanin"
+    },
+    {
+      "id": "preview-car-system-i-r-m-d-o-o-indjija-indjija",
+      "status": "excluded"
+    },
+    {
+      "id": "preview-morsad-d-o-o-bozurnja",
+      "status": "excluded"
+    },
+    {
+      "id": "preview-ap-sasa-bozic-obrenovac",
+      "status": "excluded"
     }
   ]
 }

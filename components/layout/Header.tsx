@@ -872,9 +872,19 @@ export function Header() {
               <MegaMenuFrame
                 id={brandPanelId}
                 label="Brendovi"
-                eyebrow="Aktivni program"
-                title="Brendovi u Carsystem ekosistemu"
-                description="Direktan pristup postojećim brand stranicama, povezanim programima i proizvodima."
+                compact
+                title="Brendovi"
+                description=""
+                headerAction={
+                  <Link
+                    className={styles.panelHeaderLink}
+                    href="/brendovi"
+                    onClick={() => closeDesktopMenu(false)}
+                  >
+                    Svi brendovi
+                    <ArrowIcon />
+                  </Link>
+                }
                 state={desktopMenuState}
                 layerRef={desktopLayerRef}
                 panelRef={desktopPanelRef}
@@ -894,12 +904,6 @@ export function Header() {
                     </li>
                   ))}
                 </ul>
-                <div className={styles.panelFooter}>
-                  <Link href="/brendovi" onClick={() => closeDesktopMenu(false)}>
-                    Pogledajte sve brendove
-                    <ArrowIcon />
-                  </Link>
-                </div>
               </MegaMenuFrame>
             </HeaderDisclosure>
 
@@ -1057,7 +1061,8 @@ export function Header() {
           <CustomerAccountMenu />
           <Link
             href="/kontakt"
-            className={styles.contactCta}
+            className={`${styles.contactCta} cs-cta`}
+            data-cta-on="theme"
             data-cursor="button"
             onClick={() => closeDesktopMenu(false)}
           >
@@ -1324,7 +1329,9 @@ function HeaderDisclosure({
 function MegaMenuFrame({
   id,
   label,
+  compact = false,
   eyebrow,
+  headerAction,
   title,
   description,
   state,
@@ -1338,7 +1345,10 @@ function MegaMenuFrame({
 }: {
   id: string;
   label: string;
+  /** Kompaktan panel (meni brendova): samo naslov, veza i zatvaranje, bez opisa. */
+  compact?: boolean;
   eyebrow?: string;
+  headerAction?: ReactNode;
   title: string;
   description: string;
   state: DesktopMenuState;
@@ -1381,6 +1391,7 @@ function MegaMenuFrame({
         ref={panelRef}
         id={id}
         className={styles.megaPanel}
+        data-compact={compact || undefined}
         data-menu-surface="true"
         aria-labelledby={`${id}-trigger`}
         onPointerEnter={onHoverEnter}
@@ -1390,8 +1401,9 @@ function MegaMenuFrame({
           <div data-has-eyebrow={eyebrow ? true : undefined}>
             {eyebrow ? <p>{eyebrow}</p> : null}
             <h2>{title}</h2>
-            <span>{description}</span>
+            {description ? <span>{description}</span> : null}
           </div>
+          {headerAction}
           <button
             type="button"
             className={styles.panelClose}
@@ -1490,6 +1502,11 @@ function SupportMenu({
   );
 }
 
+/*
+ * Stavka menija brendova (2026-10-18): mirno svetlo polje za logotip bez okvira,
+ * optički ujednačena visina znaka (navigation-data `menuLogoHeight`) i kratak
+ * naziv. Opis brenda ostaje na stranici /brendovi.
+ */
 function BrandMenuLink({
   brand,
   active,
@@ -1507,23 +1524,21 @@ function BrandMenuLink({
       data-active={active || undefined}
       onClick={onNavigate}
     >
-      <span className={styles.brandLogoFrame}>
+      <span className={styles.brandLogoFrame} aria-hidden="true">
         {brand.logo ? (
           <Image
             src={brand.logo}
-            alt={`${brand.title} logo`}
-            width={126}
-            height={58}
+            alt=""
+            width={160}
+            height={brand.menuLogoHeight ?? 40}
             className={styles.brandLogo}
+            style={{ height: brand.menuLogoHeight ?? 40, width: "auto" }}
           />
         ) : (
           <strong>{brand.title}</strong>
         )}
       </span>
-      <span className={styles.brandLinkCopy}>
-        <strong>{brand.title}</strong>
-        <span>{brand.description}</span>
-      </span>
+      <span className={styles.brandLinkName}>{brand.title}</span>
     </Link>
   );
 }

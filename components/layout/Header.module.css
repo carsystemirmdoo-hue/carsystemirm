@@ -893,16 +893,14 @@
   gap: 0.22rem;
 }
 
-.menuLinkCopy strong,
-.brandLinkCopy strong {
+.menuLinkCopy strong {
   color: var(--header-ink);
   font-size: 0.9375rem;
   font-weight: 600;
   line-height: 1.3;
 }
 
-.menuLinkCopy > span,
-.brandLinkCopy > span {
+.menuLinkCopy > span {
   color: var(--header-muted);
   font-size: var(--ds-font-small);
   line-height: 1.45;
@@ -945,57 +943,51 @@
   }
 }
 
+/*
+ * Meni brendova (2026-10-18): kompaktna mreža 4 × 2 bez okvira oko kartica.
+ * Svaki brend = mirno svetlo polje sa optički ujednačenim logotipom + kratak
+ * naziv. Hover: blago tamnije polje; aktivno: crvena linija ispod polja i
+ * naziv u akcentu (paleta headera, pa prati i temu okvira).
+ */
 .brandGrid {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 0.55rem;
+  gap: 0.75rem 1rem;
 }
 
 .brandLink {
   position: relative;
   display: grid;
-  min-height: 7.6rem;
-  grid-template-columns: 5.25rem minmax(0, 1fr);
-  align-items: center;
-  gap: 0.75rem;
-  overflow: hidden;
-  border: 1px solid var(--header-border);
-  border-radius: var(--ds-ctl-radius);
-  background: var(--header-panel);
+  gap: 0.5rem;
   color: var(--header-ink);
-  padding: 0.78rem;
+  padding-bottom: 0.45rem;
   text-decoration: none;
-  transition:
-    background-color 190ms var(--header-ease),
-    border-color 190ms var(--header-ease);
 }
 
-.brandLink:hover,
-.brandLink:focus-visible {
-  border-color: var(--header-border-strong);
-  background: var(--header-hover);
+.brandLink::before {
+  right: 0;
+  left: 0;
 }
 
-/* Izabrano: 2 px akcent + mekana podloga (sistem A). */
-/* Podloga se meša iz palete headera (ne iz tokena stranice), pa tekst i
-   podloga uvek pripadaju istoj temi, i u R-M atmosferi. */
-.brandLink[data-active] {
-  border-color: var(--header-red);
-  background: color-mix(in oklab, var(--header-panel) 88%, var(--header-red));
-  box-shadow: inset 0 0 0 1px var(--header-red);
-  color: var(--header-ink);
+.brandLink:hover .brandLogoFrame,
+.brandLink:focus-visible .brandLogoFrame {
+  background: oklch(0.93 0.005 255);
+}
+
+.brandLink[data-active] .brandLinkName {
+  color: var(--header-red-text);
 }
 
 .brandLogoFrame {
   display: grid;
-  width: 5.25rem;
-  height: 3.65rem;
+  height: 5.5rem;
   place-items: center;
   overflow: hidden;
-  border: 1px solid var(--header-border);
   border-radius: var(--ds-ctl-radius);
-  background: oklch(0.97 0.005 255);
-  padding: 0.42rem;
+  /* Svetlo polje u obe teme: zvanični logotipi imaju svetle pločice i obojene delove. */
+  background: oklch(0.965 0.004 255);
+  padding: 0.4rem 0.9rem;
+  transition: background-color 180ms var(--header-ease);
 }
 
 /* Pločica logotipa je svetla u obe teme, pa je i rezervni naziv uvek taman. */
@@ -1013,16 +1005,59 @@
 .brandLogo {
   display: block;
   width: auto;
-  height: auto;
-  max-width: 4.2rem;
-  max-height: 2.5rem;
+  max-width: 100%;
   object-fit: contain;
 }
 
-.brandLinkCopy {
-  display: grid;
-  min-width: 0;
-  gap: 0.22rem;
+.brandLinkName {
+  color: inherit;
+  font-size: var(--ds-font-small);
+  font-weight: 600;
+  line-height: 1.25;
+}
+
+/* Kompaktan panel: naslov, „Svi brendovi“ i zatvaranje u jednom redu. */
+.megaPanel[data-compact] {
+  gap: 0.9rem;
+  padding: 0.95rem 1.1rem 1.05rem;
+}
+
+.megaPanel[data-compact] .panelHeading {
+  align-items: center;
+  gap: 1rem;
+  padding-bottom: 0.7rem;
+}
+
+.megaPanel[data-compact] .panelHeading > div {
+  margin-right: auto;
+}
+
+.megaPanel[data-compact] .panelHeading h2 {
+  font-size: var(--ds-font-small);
+  letter-spacing: var(--ds-tracking-label);
+  text-transform: uppercase;
+}
+
+.panelHeaderLink {
+  display: inline-flex;
+  min-height: 2.5rem;
+  align-items: center;
+  gap: 0.45rem;
+  color: var(--header-ink);
+  font-size: var(--ds-font-small);
+  font-weight: 600;
+  text-decoration: underline;
+  text-decoration-color: var(--header-border-strong);
+  text-underline-offset: 0.3em;
+}
+
+.panelHeaderLink:hover {
+  text-decoration-color: var(--header-red);
+}
+
+.panelHeaderLink:focus-visible {
+  outline: 2px solid var(--header-focus);
+  outline-offset: 2px;
 }
 
 .systemGrid {

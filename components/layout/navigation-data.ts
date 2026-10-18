@@ -17,6 +17,12 @@ export type NavigationLink = {
   description: string;
   icon?: HeaderIconName;
   logo?: string;
+  /**
+   * Optička visina logotipa u meniju brendova (px). Logotipi imaju vrlo različite
+   * proporcije (R-M i Carsystem su skoro kvadratni, C.A.R.FIT i SATA široki), pa
+   * ista visina daje vrlo različitu prividnu veličinu.
+   */
+  menuLogoHeight?: number;
 };
 
 export type ProductCategoryLink = {
@@ -130,48 +136,56 @@ export const BRAND_LINKS: NavigationLink[] = [
     title: "R-M",
     description: "Profesionalni sistemi bojenja i refinish program.",
     logo: "/brands/rm.svg",
+    menuLogoHeight: 62,
   },
   {
     href: "/brendovi/carsystem",
     title: "Carsystem",
     description: "Priprema, obrada i materijal za radionicu.",
     logo: "/brands/carsystem.svg",
+    menuLogoHeight: 48,
   },
   {
     href: "/brendovi/baslac",
     title: "Baslac",
     description: "Pregledan sistem boja, lakova i pratećih materijala.",
     logo: "/brands/baslac.svg",
+    menuLogoHeight: 58,
   },
   {
     href: "/brendovi/norbin",
     title: "Norbin",
     description: "Bezbojni lakovi, punioci i učvršćivači.",
     logo: "/brands/norbin.svg",
+    menuLogoHeight: 52,
   },
   {
     href: "/brendovi/cosmos-lac",
     title: "Cosmos Lac",
     description: "Aerosolne boje, sprejevi i specijalizovane linije.",
     logo: "/brands/cosmos-spray.svg",
+    menuLogoHeight: 48,
   },
   {
     href: "/brendovi/befar",
     title: "Befar",
     description: "Sunđeri i materijal za završnu obradu.",
     logo: "/brands/befar.svg",
+    menuLogoHeight: 30,
   },
   {
     href: "/brendovi/carfit",
     title: "C.A.R.FIT",
     description: "Materijali za pripremu i stabilnu podlogu.",
     logo: "/brands/carfit.svg",
+    menuLogoHeight: 24,
   },
   {
     href: "/brendovi/sata",
     title: "SATA",
     description: "Oprema za precizno i ponovljivo nanošenje.",
     logo: "/brands/sata.svg",
+    menuLogoHeight: 30,
   },
 ];
 // Yachtcare nije u meniju (odluka vlasnika 2026-10-17): osam brendova daje dva puna reda.

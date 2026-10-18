@@ -33,12 +33,12 @@ export function SplitContactCta({
     >
       {showCall ? (
         <span className={styles.callSlot}>
-          <a className={styles.callAction} href={phoneHref ?? undefined}>
+          <a className={`${styles.callAction} cs-cta`} data-cta-on="theme" href={phoneHref ?? undefined}>
             {callLabel}
           </a>
         </span>
       ) : null}
-      <Link className={styles.inquiryAction} href={inquiryHref}>
+      <Link className={`${styles.inquiryAction} cs-cta`} data-cta-on="theme" href={inquiryHref}>
         {inquiryLabel}
       </Link>
     </span>

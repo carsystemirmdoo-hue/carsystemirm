@@ -162,13 +162,25 @@ export function PaintTakeoverHomeSection({
                 />
               </mask>
             </defs>
-            <image
-              href="/art/paint-takeover/paint-takeover-hero-strokes-final.svg"
-              width="1920"
-              height="1080"
-              mask="url(#home-paint-artwork-reveal)"
-              preserveAspectRatio="xMidYMid slice"
-            />
+            {/* Ista kompozicija u dve varijante: tamna podloga (beli potezi) i
+                svetla podloga (isti potezi, beli prebojeni u tamno mastilo —
+                scripts/build-paint-takeover-light.py). Vidljiva je jedna. */}
+            <g mask="url(#home-paint-artwork-reveal)">
+              <image
+                className={styles.strokesOnDark}
+                href="/art/paint-takeover/paint-takeover-hero-strokes-final.svg"
+                width="1920"
+                height="1080"
+                preserveAspectRatio="xMidYMid slice"
+              />
+              <image
+                className={styles.strokesOnLight}
+                href="/art/paint-takeover/paint-takeover-hero-strokes-light.svg"
+                width="1920"
+                height="1080"
+                preserveAspectRatio="xMidYMid slice"
+              />
+            </g>
           </svg>
         </div>
         <div className={styles.contentContrast} aria-hidden="true" />
@@ -188,7 +200,8 @@ export function PaintTakeoverHomeSection({
             Sistem završne obrade u kome se priprema, preciznost i karakter
             susreću u jednom potezu.
           </p>
-          <Link className={styles.primaryCta} href="/program">
+          {/* Tema okvira tokom bloka = izgled bloka, pa „theme“ daje tačan kontrast. */}
+          <Link className={`${styles.primaryCta} cs-cta`} data-cta-on="theme" href="/program">
             Istražite sisteme
             <span aria-hidden="true">→</span>
           </Link>

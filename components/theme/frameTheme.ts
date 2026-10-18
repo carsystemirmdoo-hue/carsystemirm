@@ -49,10 +49,33 @@ export function applyEffectiveTheme() {
   if (html.dataset.theme !== effective) html.dataset.theme = effective;
 }
 
-export function setFrameTheme(theme: SiteTheme | null) {
+let switchTimer: number | undefined;
+
+/**
+ * Menja privremenu temu okvira. Sa `animate` se boje (pozadina, tekst, obrubi)
+ * kratko pretapaju (~240 ms, `html[data-frame-switching]` u globals.css)
+ * umesto naglog fleša. Bez snimaka slojeva (View Transitions su davale
+ * dvostruku sliku pri brzom skrolu). Uz smanjeno kretanje promena je neposredna.
+ */
+export function setFrameTheme(theme: SiteTheme | null, options: { animate?: boolean } = {}) {
   const html = root();
   const current = html.dataset.frameTheme ?? null;
   if (current === theme) return;
+
+  const effectiveBefore = html.classList.contains("dark");
+  const effectiveAfter = (theme ?? readThemePreference()) === "dark";
+  if (
+    options.animate &&
+    effectiveBefore !== effectiveAfter &&
+    !window.matchMedia("(prefers-reduced-motion: reduce)").matches
+  ) {
+    html.dataset.frameSwitching = "";
+    window.clearTimeout(switchTimer);
+    switchTimer = window.setTimeout(() => {
+      delete html.dataset.frameSwitching;
+    }, 320);
+  }
+
   if (theme) html.dataset.frameTheme = theme;
   else delete html.dataset.frameTheme;
   applyEffectiveTheme();

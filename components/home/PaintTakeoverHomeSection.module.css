@@ -62,8 +62,62 @@
   color: var(--takeover-ink);
 }
 
+/* Svetla varijanta nema tamnu painterly fotografiju (ranije invertovana, pa
+   isprana): kompoziciju nose obojeni potezi na papirnoj podlozi. */
 :global(html[data-theme-preference="dark"]) .backgroundArtwork {
-  filter: invert(1) hue-rotate(180deg) saturate(0.85) contrast(0.78) brightness(1.06);
+  display: none;
+}
+
+.strokesOnLight {
+  display: none;
+}
+
+:global(html[data-theme-preference="dark"]) .strokesOnDark {
+  display: none;
+}
+
+:global(html[data-theme-preference="dark"]) .strokesOnLight {
+  display: inline;
+}
+
+/*
+ * Diskretno kretanje kada je kompozicija otkrivena (2026-10-18). Ranije je
+ * jedino kretanje bilo otkrivanje poteza vezano za skrol, pa je posle toga
+ * scena bila statična. Pomera se ceo sloj svojstvom `translate` (kompozitor,
+ * bez ponovnog crtanja SVG-a), sporo i u suprotnim smerovima za pozadinu i
+ * poteze; van prikaza i uz smanjeno kretanje animacija stoji.
+ */
+.heroArtwork > svg {
+  animation: takeoverDriftStrokes 16s ease-in-out infinite alternate;
+  animation-play-state: paused;
+}
+
+.backgroundArtwork {
+  animation: takeoverDriftBackground 23s ease-in-out infinite alternate;
+  animation-play-state: paused;
+}
+
+.section[data-motion-active="true"] .heroArtwork > svg,
+.section[data-motion-active="true"] .backgroundArtwork {
+  animation-play-state: running;
+}
+
+@keyframes takeoverDriftStrokes {
+  from {
+    translate: -0.9% 0.5%;
+  }
+  to {
+    translate: 0.9% -0.7%;
+  }
+}
+
+@keyframes takeoverDriftBackground {
+  from {
+    translate: 0.8% -0.4%;
+  }
+  to {
+    translate: -0.8% 0.6%;
+  }
 }
 
 /*
@@ -198,7 +252,16 @@
  * miran ton papira: isti monotoni --color-wash-opacity, bez treperenja.
  */
 :global(html[data-theme-preference="dark"]) .colorWash {
-  background: rgb(241 238 232 / 0.1);
+  background: none;
+}
+
+/* Svetla varijanta: papirni sloj samo iza teksta, ne preko cele kompozicije. */
+:global(html[data-theme-preference="dark"]) .contentContrast {
+  background: radial-gradient(
+    ellipse 46% 40% at 22% 66%,
+    rgb(var(--takeover-contrast-rgb) / calc(var(--contrast-opacity) * 0.78)) 0 40%,
+    transparent 100%
+  );
 }
 
 .section[data-wash-disabled="true"] .contentContrast,
@@ -289,15 +352,7 @@
     background-color 120ms ease;
 }
 
-.primaryCta:hover {
-  background: var(--takeover-ink);
-  color: var(--takeover-canvas);
-}
-
-.primaryCta:focus-visible {
-  outline: 2px solid var(--takeover-ink);
-  outline-offset: 2px;
-}
+/* Hover i fokus: zajedničko CTA popunjavanje (globals.css `.cs-cta`). */
 
 @media (max-width: 720px) {
   .stickyViewport {
@@ -360,11 +415,26 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .heroArtwork > svg,
+  .backgroundArtwork {
+    animation: none;
+  }
+
   .takeoverSurface,
   .backgroundArtwork,
   .heroArtwork,
   .copy,
   .colorWash {
     will-change: auto;
+  }
+}
+
+@media (max-width: 720px) {
+  :global(html[data-theme-preference="dark"]) .contentContrast {
+    background: radial-gradient(
+      ellipse 90% 44% at 32% 60%,
+      rgb(var(--takeover-contrast-rgb) / calc(var(--contrast-opacity) * 0.8)) 0 45%,
+      transparent 100%
+    );
   }
 }

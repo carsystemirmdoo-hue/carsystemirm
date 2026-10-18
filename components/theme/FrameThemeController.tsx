@@ -11,10 +11,14 @@ import {
   type FrameThemeRequest,
 } from "./frameTheme";
 
-/** Sekcija je aktivna kada preseca liniju na 42 % visine ekrana (isto kao R-M atmosfera). */
-const PROBE_RATIO = 0.42;
-/** Aktivna sekcija ostaje aktivna dok je linija u pojasu ±6 % — bez treperenja na ivici. */
-const HOLD_RATIO = 0.06;
+/**
+ * Sekcija postaje aktivna kada preseče sredinu ekrana, a ostaje aktivna dok je
+ * sredina u pojasu ±18 % visine ekrana oko nje (2026-10-18). Ranije je pojas
+ * bio ±6 % oko linije na 42 %: običan pokret trackpad-a na kraju bloka „Boja
+ * nije sloj“ (~50 px) je preokretao temu cele stranice tamo-amo.
+ */
+const PROBE_RATIO = 0.5;
+const HOLD_RATIO = 0.18;
 
 /**
  * Jedan kontroler za ceo sajt: istaknute sekcije sa `data-frame-theme`
@@ -51,9 +55,14 @@ export function FrameThemeController() {
       apply(active);
     }
 
+    let ready = false;
+
     function apply(zone: HTMLElement | null) {
       const request = zone?.dataset.frameTheme as FrameThemeRequest | undefined;
-      setFrameTheme(resolveFrameTheme(request, readThemePreference()));
+      // Prvi prolaz na stranici (direktan link, povratak) bez pretapanja.
+      setFrameTheme(resolveFrameTheme(request, readThemePreference()), {
+        animate: ready,
+      });
     }
 
     function schedule() {
@@ -68,6 +77,7 @@ export function FrameThemeController() {
     // Nova stranica počinje bez privremene teme; prvi prolaz odmah (direktan link na sekciju).
     setFrameTheme(null);
     sync();
+    ready = true;
     const late = window.setTimeout(schedule, 400);
 
     window.addEventListener("scroll", schedule, { passive: true });

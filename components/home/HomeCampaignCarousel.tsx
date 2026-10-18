@@ -285,7 +285,9 @@ function HomeCampaignSlide({
         <p className={styles.campaignDescription}>{slide.description}</p>
         <div className={styles.campaignActions}>
           <Link
-            className={styles.campaignPrimaryCta}
+            // Uvek preko fotografije: eksplicitno tamna podloga.
+            className={`${styles.campaignPrimaryCta} cs-cta`}
+            data-cta-on="dark"
             href={slide.primaryCta.href}
             prefetch={false}
             tabIndex={active ? 0 : -1}

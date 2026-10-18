@@ -294,14 +294,16 @@ function RmAgilisFeature({
         </p>
         <div>
           <Link
-            className={styles.rmOutlineButton}
+            className={`${styles.rmOutlineButton} cs-cta`}
+            data-cta-on="theme"
             href={rmCatalogHref({ system: "agilis" })}
           >
             Svi AGILIS proizvodi
             <span aria-hidden="true">↗</span>
           </Link>
           <Link
-            className={styles.rmPrimaryButton}
+            className={`${styles.rmPrimaryButton} cs-cta`}
+            data-cta-on="theme"
             href="/kontakt?tema=proizvod&brend=rm&sistem=agilis"
           >
             Pošaljite upit
@@ -366,12 +368,17 @@ function RmRefinitySection() {
       </div>
 
       <div className={styles.refinityActions}>
-        <Link className={styles.refinityPrimary} href="#refinity-tools">
+        <Link
+          className={`${styles.refinityPrimary} cs-cta`}
+          data-cta-on="dark"
+          href="#refinity-tools"
+        >
           Saznajte više
           <span aria-hidden="true">↓</span>
         </Link>
         <Link
-          className={styles.refinitySecondary}
+          className={`${styles.refinitySecondary} cs-cta`}
+          data-cta-on="dark"
           href="/kontakt?tema=podrska&brend=rm&oblast=refinity"
         >
           Razgovarajte sa našim timom
@@ -714,12 +721,17 @@ function RmFinalCta() {
         </p>
       </div>
       <div className={styles.contactActions}>
-        <Link className={styles.rmPrimaryButton} href={rmCatalogHref()}>
+        <Link
+          className={`${styles.rmPrimaryButton} cs-cta`}
+          data-cta-on="dark"
+          href={rmCatalogHref()}
+        >
           Svi R-M proizvodi
           <span aria-hidden="true">↗</span>
         </Link>
         <Link
-          className={styles.rmContactSecondary}
+          className={`${styles.rmContactSecondary} cs-cta`}
+          data-cta-on="dark"
           href="/kontakt?tema=proizvod&brend=rm"
         >
           Pošaljite upit

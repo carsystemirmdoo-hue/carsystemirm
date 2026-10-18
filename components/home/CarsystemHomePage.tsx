@@ -28,7 +28,6 @@ import {
   getPartnerCityLabel,
   getPartnerCityKey,
   getPartnerLocationTypeLabel,
-  getPendingPartnerStoreCount,
   getPublicPartnerStores,
   hasLocationCategory,
   type PartnerStore,
@@ -44,8 +43,6 @@ import styles from "./CarsystemHomePage.module.css";
 import { PaintTakeoverHomeSection } from "./PaintTakeoverHomeSection";
 
 const publicPartnerStores = getPublicPartnerStores();
-/** Zapisi koji čekaju poslovnu potvrdu (nisu javni; prikazuje se samo broj). */
-const pendingStoreCount = getPendingPartnerStoreCount();
 const cityEntries = getCityDisplayEntries(publicPartnerStores);
 /** Vrednost koja ne odgovara nijednoj opciji, pa lista prikazuje „Izaberite grad”. */
 const NO_CITY_CHOICE = "__bez-izbora__";
@@ -505,10 +502,7 @@ export function CarsystemHomePage() {
             <p className={styles.statContext}>
               <strong>Provereni podaci</strong>
               <span>
-                Objavljuju se samo odobrene javne lokacije
-                {pendingStoreCount > 0
-                  ? ` · još ${pendingStoreCount} ${pendingStoreCount % 10 >= 2 && pendingStoreCount % 10 <= 4 && (pendingStoreCount % 100 < 12 || pendingStoreCount % 100 > 14) ? "lokacije čekaju" : "lokacija čeka"} poslovnu potvrdu`
-                  : ""}
+                Objavljuju se samo odobrene javne lokacije.
               </span>
             </p>
           </div>
@@ -1031,7 +1025,7 @@ function StorePreviewListBody({
           </button>
         ) : null}
       </div>
-      {/* Cela lista je dostupna, ali u sopstvenom okviru, pa početna ne raste za 43 kartice. */}
+      {/* Cela lista je dostupna, ali u sopstvenom okviru, pa početna ne raste sa brojem lokacija. */}
       <div
         className={styles.storePreviewList}
         aria-label={byDistance ? "Lokacije poređane po udaljenosti" : "Lokacije u mreži"}

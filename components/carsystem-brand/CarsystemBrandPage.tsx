@@ -324,7 +324,7 @@ function DocumentLibrary() {
       </div>
 
       <div className={styles.documentLibraryActions}>
-        <Link className={styles.secondaryButton} href="/katalozi?brend=carsystem">
+        <Link className={`${styles.secondaryButton} cs-cta`} data-cta-on="theme" href="/katalozi?brend=carsystem">
           Svi Carsystem katalozi i dokumenti
           <span aria-hidden="true">→</span>
         </Link>
@@ -359,12 +359,12 @@ function FinalCta({
         <h2 id="carsystem-final-title">{carsystemFinalCta.title}</h2>
         <p>{carsystemFinalCta.description}</p>
         <div>
-          <Link className={styles.primaryButton} href={carsystemFinalCta.primaryCta.href}>
+          <Link className={`${styles.primaryButton} cs-cta`} data-cta-on="theme" href={carsystemFinalCta.primaryCta.href}>
             {carsystemFinalCta.primaryCta.label}
             <span aria-hidden="true">→</span>
           </Link>
           <Link
-            className={styles.secondaryButton}
+            className={`${styles.secondaryButton} cs-cta`} data-cta-on="theme"
             href={carsystemFinalCta.secondaryCta.href}
           >
             {carsystemFinalCta.secondaryCta.label}

@@ -42,7 +42,7 @@ export function CarsystemFinishSystem() {
       </div>
 
       <div className={styles.finishActions}>
-        <Link className={styles.secondaryButton} href={carsystemFinishSystem.cta.href}>
+        <Link className={`${styles.secondaryButton} cs-cta`} data-cta-on="theme" href={carsystemFinishSystem.cta.href}>
           {carsystemFinishSystem.cta.label}
           <span aria-hidden="true">→</span>
         </Link>

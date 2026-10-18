@@ -95,8 +95,8 @@ export function getPublicPartnerStores() {
 }
 
 /**
- * Broj zapisa koji čekaju poslovnu potvrdu (`pending`). Nisu javni; početna
- * prikazuje samo broj, da bude jasno da javna mreža nije konačna.
+ * Broj zapisa koji čekaju poslovnu potvrdu (`pending`). Samo za interne
+ * izveštaje — ne prikazuje se u javnom interfejsu.
  */
 export function getPendingPartnerStoreCount() {
   return partnerStores.filter((store) => store.verificationStatus === "pending").length;

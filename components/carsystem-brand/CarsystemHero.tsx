@@ -48,12 +48,12 @@ export function CarsystemHero() {
           </div>
 
           <div className={styles.heroActions}>
-            <Link className={styles.primaryButton} href={carsystemHero.primaryCta.href}>
+            <Link className={`${styles.primaryButton} cs-cta`} data-cta-on="theme" href={carsystemHero.primaryCta.href}>
               {carsystemHero.primaryCta.label}
               <span aria-hidden="true">→</span>
             </Link>
             <Link
-              className={styles.secondaryButton}
+              className={`${styles.secondaryButton} cs-cta`} data-cta-on="theme"
               href={carsystemHero.secondaryCta.href}
             >
               {carsystemHero.secondaryCta.label}

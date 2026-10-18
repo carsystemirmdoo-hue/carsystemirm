@@ -88,7 +88,7 @@ export function CarsystemRupesSection({
         <p>
           Cene i stanje na lageru nisu javni — proveravaju se kroz upit.
         </p>
-        <Link className={styles.secondaryButton} href="/katalog?brend=rupes">
+        <Link className={`${styles.secondaryButton} cs-cta`} data-cta-on="theme" href="/katalog?brend=rupes">
           Svi RUPES proizvodi ({products.length})
           <span aria-hidden="true">→</span>
         </Link>

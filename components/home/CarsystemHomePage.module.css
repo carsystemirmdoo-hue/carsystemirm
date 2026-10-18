@@ -546,7 +546,7 @@
   grid-auto-rows: max-content;
   align-content: start;
   min-height: 0;
-  /* Cela lista (do 43 lokacije) u sopstvenom okviru; strana ne raste. */
+  /* Cela lista javnih lokacija u sopstvenom okviru; strana ne raste. */
   max-height: 360px;
   gap: 8px;
   overflow-y: auto;

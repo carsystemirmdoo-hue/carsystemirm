@@ -224,13 +224,13 @@ export function CarfitBrandPage({ brand }: { brand: CarsystemBrand }) {
 
               <div className={styles.heroActions}>
                 <a
-                  className={`${styles.btn} ${styles.btnPrimary}`}
+                  className={`${styles.btn} ${styles.btnPrimary} cs-cta`} data-cta-on="dark"
                   href={carfitHero.primaryCta.href}
                 >
                   {carfitHero.primaryCta.label}
                 </a>
                 <a
-                  className={`${styles.btn} ${styles.btnSecondary}`}
+                  className={`${styles.btn} ${styles.btnSecondary} cs-cta`} data-cta-on="dark"
                   href={carfitHero.secondaryCta.href}
                 >
                   {carfitHero.secondaryCta.label}
@@ -650,7 +650,7 @@ export function CarfitBrandPage({ brand }: { brand: CarsystemBrand }) {
                   odgovarajuću kategoriju kataloga.
                 </p>
                 <Link
-                  className={`${styles.btn} ${styles.btnSecondary}`}
+                  className={`${styles.btn} ${styles.btnSecondary} cs-cta`} data-cta-on="theme"
                   href={carfitFinalCta.primaryCta.href}
                 >
                   Pogledajte sve {brand.name} proizvode
@@ -691,7 +691,7 @@ export function CarfitBrandPage({ brand }: { brand: CarsystemBrand }) {
                 online, dostavljamo ga na upit.
               </p>
               <Link
-                className={`${styles.btn} ${styles.btnSecondary}`}
+                className={`${styles.btn} ${styles.btnSecondary} cs-cta`} data-cta-on="theme"
                 href={carfitFinalCta.secondaryCta.href}
               >
                 Zatražite dokumentaciju
@@ -724,7 +724,7 @@ export function CarfitBrandPage({ brand }: { brand: CarsystemBrand }) {
               </CarfitReveal>
 
               <div className={styles.showcaseFoot}>
-                <Link className={`${styles.btn} ${styles.btnSecondary}`} href="/katalozi?brend=carfit">
+                <Link className={`${styles.btn} ${styles.btnSecondary} cs-cta`} data-cta-on="theme" href="/katalozi?brend=carfit">
                   Svi C.A.R.FIT dokumenti
                 </Link>
               </div>
@@ -765,13 +765,13 @@ export function CarfitBrandPage({ brand }: { brand: CarsystemBrand }) {
               <p className={styles.finalCtaBody}>{carfitFinalCta.body}</p>
               <div className={styles.finalCtaActions}>
                 <Link
-                  className={`${styles.btn} ${styles.btnPrimary}`}
+                  className={`${styles.btn} ${styles.btnPrimary} cs-cta`} data-cta-on="dark"
                   href={carfitFinalCta.primaryCta.href}
                 >
                   {carfitFinalCta.primaryCta.label}
                 </Link>
                 <Link
-                  className={`${styles.btn} ${styles.btnSecondary}`}
+                  className={`${styles.btn} ${styles.btnSecondary} cs-cta`} data-cta-on="dark"
                   href={carfitFinalCta.secondaryCta.href}
                 >
                   {carfitFinalCta.secondaryCta.label}

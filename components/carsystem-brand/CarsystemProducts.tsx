@@ -104,7 +104,7 @@ export function CarsystemProducts({
           Ne vidite artikal koji Vam treba? Pošaljite naziv ili šifru i
           proverićemo dostupnost.
         </p>
-        <Link className={styles.primaryButton} href={carsystemCatalogHref()}>
+        <Link className={`${styles.primaryButton} cs-cta`} data-cta-on="theme" href={carsystemCatalogHref()}>
           Pogledajte sve Carsystem proizvode
           <span aria-hidden="true">→</span>
         </Link>

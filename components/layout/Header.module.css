@@ -827,7 +827,6 @@
   background: var(--header-hover);
 }
 
-.brandLink::before,
 .systemLink::before {
   position: absolute;
   right: 0.72rem;
@@ -844,9 +843,6 @@
     transform 190ms var(--header-ease);
 }
 
-.brandLink:hover::before,
-.brandLink:focus-visible::before,
-.brandLink[data-active]::before,
 .systemLink:hover::before,
 .systemLink:focus-visible::before,
 .systemLink[data-active]::before {
@@ -944,76 +940,238 @@
 }
 
 /*
- * Meni brendova (2026-10-18): kompaktna mreža 4 × 2 bez okvira oko kartica.
- * Svaki brend = mirno svetlo polje sa optički ujednačenim logotipom + kratak
- * naziv. Hover: blago tamnije polje; aktivno: crvena linija ispod polja i
- * naziv u akcentu (paleta headera, pa prati i temu okvira).
+ * Meni brendova — predlog A „galerija logotipa“ (izbor vlasnika 2026-10-18).
+ * Mreža 4 × 2 bez kartica i okvira: polja razdvajaju samo unutrašnje linije.
+ * Logotip stoji direktno na površini panela; svetla tema = originalne boje,
+ * tamna (i Refinity) = jednobojna verzija prebojena u belo. Hover/fokus:
+ * blago zatamnjeno polje + strelica; aktivan brend: crvena crta i naziv u akcentu.
  */
+.brandGallery {
+  display: grid;
+}
+
 .brandGrid {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 0.75rem 1rem;
+}
+
+.brandGrid > li {
+  min-width: 0;
+  border-right: 1px solid var(--header-border);
+  border-bottom: 1px solid var(--header-border);
+}
+
+.brandGrid > li:nth-child(4n) {
+  border-right: 0;
+}
+
+.brandGrid > li:nth-child(n + 5) {
+  border-bottom: 0;
 }
 
 .brandLink {
   position: relative;
-  display: grid;
-  gap: 0.5rem;
-  color: var(--header-ink);
-  padding-bottom: 0.45rem;
+  display: flex;
+  height: 11rem;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: var(--header-muted);
   text-decoration: none;
+  transition: background-color 160ms var(--header-ease);
 }
 
-.brandLink::before {
-  right: 0;
-  left: 0;
+.brandLink::after {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 3rem;
+  height: 3px;
+  margin-left: -1.5rem;
+  background: var(--header-red);
+  content: "";
+  opacity: 0;
 }
 
-.brandLink:hover .brandLogoFrame,
-.brandLink:focus-visible .brandLogoFrame {
-  background: oklch(0.93 0.005 255);
+.brandLink[data-active]::after {
+  opacity: 1;
+}
+
+.brandLink:focus-visible {
+  background: var(--header-hover);
+  color: var(--header-ink);
+}
+
+/* Hover samo za pravi pokazivač: na dodiru bi polje ostalo „zalepljeno“. */
+@media (hover: hover) and (pointer: fine) {
+  .brandLink:hover {
+    background: var(--header-hover);
+    color: var(--header-ink);
+  }
+
+  .brandLink:hover .brandLinkArrow {
+    opacity: 1;
+  }
+}
+
+.brandGrid .brandLink:focus-visible {
+  outline-offset: -3px;
 }
 
 .brandLink[data-active] .brandLinkName {
   color: var(--header-red-text);
+  font-weight: 600;
+}
+
+.brandLinkArrow {
+  position: absolute;
+  top: 1rem;
+  right: 1.15rem;
+  display: block;
+  width: 1rem;
+  height: 1rem;
+  color: var(--header-red-text);
+  opacity: 0;
+  transition: opacity 160ms var(--header-ease);
+}
+
+.brandLinkArrow svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.brandLinkArrow path {
+  stroke: currentColor;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.brandLink:focus-visible .brandLinkArrow {
+  opacity: 1;
 }
 
 .brandLogoFrame {
-  display: grid;
-  height: 5.5rem;
-  place-items: center;
-  overflow: hidden;
-  border-radius: var(--ds-ctl-radius);
-  /* Svetlo polje u obe teme: zvanični logotipi imaju svetle pločice i obojene delove. */
-  background: oklch(0.965 0.004 255);
-  padding: 0.4rem 0.9rem;
-  transition: background-color 180ms var(--header-ease);
+  display: flex;
+  height: 6rem;
+  align-items: center;
+  justify-content: center;
 }
 
-/* Pločica logotipa je svetla u obe teme, pa je i rezervni naziv uvek taman. */
 .brandLogoFrame > strong {
-  color: var(--ds-c-text);
+  color: var(--header-ink);
   font-size: var(--ds-font-small);
   font-weight: 600;
   text-align: center;
 }
 
-:global(.dark) .brandLogoFrame > strong {
-  color: var(--ds-c-on-inverse);
-}
-
 .brandLogo {
   display: block;
   width: auto;
-  max-width: 100%;
+  max-width: 12.5rem;
   object-fit: contain;
 }
 
+.brandLogo[data-logo-tone="mono"] {
+  display: none;
+  filter: brightness(0) invert(1);
+}
+
+:global(.dark) .brandLogo[data-logo-tone="color"],
+:global(html[data-rm-atmosphere="refinity"]) .brandLogo[data-logo-tone="color"] {
+  display: none;
+}
+
+:global(.dark) .brandLogo[data-logo-tone="mono"],
+:global(html[data-rm-atmosphere="refinity"]) .brandLogo[data-logo-tone="mono"] {
+  display: block;
+}
+
 .brandLinkName {
+  margin-top: 1rem;
   color: inherit;
   font-size: var(--ds-font-small);
-  font-weight: 600;
+  font-weight: 500;
   line-height: 1.25;
+}
+
+.brandGalleryFoot {
+  display: flex;
+  min-height: 3.4rem;
+  align-items: center;
+  justify-content: flex-end;
+  margin-top: 0.2rem;
+  border-top: 1px solid var(--header-border);
+}
+
+.brandLocatorLink {
+  display: inline-flex;
+  min-height: 2.75rem;
+  align-items: center;
+  gap: 0.45rem;
+  color: var(--header-red-text);
+  font-size: var(--ds-font-small);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.brandLocatorLink:hover {
+  text-decoration: underline;
+  text-underline-offset: 0.3em;
+}
+
+.brandLocatorLink:focus-visible {
+  outline: 2px solid var(--header-focus);
+  outline-offset: 2px;
+}
+
+/* Ista galerija u mobilnom meniju: 2 kolone na telefonu, 4 od 34rem. */
+.mobileBrandItem {
+  padding: 0.35rem 0 0.6rem;
+}
+
+.mobileBrandGrid {
+  display: grid;
+  margin: 0;
+  padding: 0;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  border-top: 1px solid var(--header-border);
+  border-left: 1px solid var(--header-border);
+  list-style: none;
+}
+
+.mobileBrandGrid > li {
+  min-width: 0;
+  border-right: 1px solid var(--header-border);
+  border-bottom: 1px solid var(--header-border);
+}
+
+.mobileBrandGrid .brandLink {
+  height: 7.25rem;
+}
+
+.mobileBrandGrid .brandLogoFrame {
+  height: 3.6rem;
+  transform: scale(0.62);
+}
+
+.mobileBrandGrid .brandLinkName {
+  margin-top: 0.35rem;
+}
+
+.mobileBrandGrid .brandLinkArrow {
+  display: none;
+}
+
+.mobileBrandGrid .brandLink:focus-visible {
+  outline-offset: -3px;
+}
+
+@media (min-width: 34rem) {
+  .mobileBrandGrid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
 }
 
 /* Kompaktan panel: naslov, „Svi brendovi“ i zatvaranje u jednom redu. */

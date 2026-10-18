@@ -23,6 +23,13 @@ export type NavigationLink = {
    * ista visina daje vrlo različitu prividnu veličinu.
    */
   menuLogoHeight?: number;
+  /**
+   * Galerija u meniju brendova (predlog A, 2026-10-18): visine su izračunate
+   * za istu optičku površinu znaka (pune pločice R-M/Carsystem/SATA/Befar dobijaju
+   * manje, tanki C.A.R.FIT više). U tamnoj temi se prikazuje `monoSrc` (ili isti
+   * logotip) prebojen u belo, zato ima svoju visinu.
+   */
+  menuGallery?: { height: number; monoSrc?: string; monoHeight: number };
 };
 
 export type ProductCategoryLink = {
@@ -137,6 +144,7 @@ export const BRAND_LINKS: NavigationLink[] = [
     description: "Profesionalni sistemi bojenja i refinish program.",
     logo: "/brands/rm.svg",
     menuLogoHeight: 62,
+    menuGallery: { height: 87, monoSrc: "/brands/mono/rm.svg", monoHeight: 81 },
   },
   {
     href: "/brendovi/carsystem",
@@ -144,6 +152,7 @@ export const BRAND_LINKS: NavigationLink[] = [
     description: "Priprema, obrada i materijal za radionicu.",
     logo: "/brands/carsystem.svg",
     menuLogoHeight: 48,
+    menuGallery: { height: 59, monoSrc: "/brands/mono/carsystem.svg", monoHeight: 59 },
   },
   {
     href: "/brendovi/baslac",
@@ -151,6 +160,7 @@ export const BRAND_LINKS: NavigationLink[] = [
     description: "Pregledan sistem boja, lakova i pratećih materijala.",
     logo: "/brands/baslac.svg",
     menuLogoHeight: 58,
+    menuGallery: { height: 67, monoSrc: "/brands/mono/baslac.svg", monoHeight: 60 },
   },
   {
     href: "/brendovi/norbin",
@@ -158,6 +168,7 @@ export const BRAND_LINKS: NavigationLink[] = [
     description: "Bezbojni lakovi, punioci i učvršćivači.",
     logo: "/brands/norbin.svg",
     menuLogoHeight: 52,
+    menuGallery: { height: 57, monoSrc: "/brands/mono/norbin.svg", monoHeight: 44 },
   },
   {
     href: "/brendovi/cosmos-lac",
@@ -165,6 +176,7 @@ export const BRAND_LINKS: NavigationLink[] = [
     description: "Aerosolne boje, sprejevi i specijalizovane linije.",
     logo: "/brands/cosmos-spray.svg",
     menuLogoHeight: 48,
+    menuGallery: { height: 58, monoHeight: 58 },
   },
   {
     href: "/brendovi/befar",
@@ -172,6 +184,7 @@ export const BRAND_LINKS: NavigationLink[] = [
     description: "Sunđeri i materijal za završnu obradu.",
     logo: "/brands/befar.svg",
     menuLogoHeight: 30,
+    menuGallery: { height: 35, monoSrc: "/brands/mono/befar.svg", monoHeight: 35 },
   },
   {
     href: "/brendovi/carfit",
@@ -179,6 +192,7 @@ export const BRAND_LINKS: NavigationLink[] = [
     description: "Materijali za pripremu i stabilnu podlogu.",
     logo: "/brands/carfit.svg",
     menuLogoHeight: 24,
+    menuGallery: { height: 33, monoHeight: 33 },
   },
   {
     href: "/brendovi/sata",
@@ -186,6 +200,7 @@ export const BRAND_LINKS: NavigationLink[] = [
     description: "Oprema za precizno i ponovljivo nanošenje.",
     logo: "/brands/sata.svg",
     menuLogoHeight: 30,
+    menuGallery: { height: 35, monoSrc: "/brands/mono/sata.svg", monoHeight: 35 },
   },
 ];
 // Yachtcare nije u meniju (odluka vlasnika 2026-10-17): osam brendova daje dva puna reda.

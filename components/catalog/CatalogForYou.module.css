@@ -152,7 +152,14 @@
   overflow: hidden;
 }
 
+/* Ista zona za svaku sliku: ceo proizvod, bez sečenja i razvlačenja, nezavisno od izvornog fajla. */
+.media {
+  position: relative;
+}
+
 .media img {
+  position: absolute;
+  inset: 0;
   width: 100%;
   height: 100%;
   object-fit: contain;

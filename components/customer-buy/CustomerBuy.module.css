@@ -343,19 +343,23 @@
 }
 
 .cardPrice {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.25rem 0.4rem;
-  align-items: baseline;
+  display: grid;
+  gap: 0.1rem;
   margin-top: 0.35rem;
   color: var(--ds-c-text-2);
   font-size: var(--ds-font-legal);
+  line-height: 1.35;
 }
 
 .cardPrice strong {
   color: var(--ds-c-text);
   font-size: 0.9375rem;
   font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.cardPrice small {
+  font-size: inherit;
 }
 
 .cardPrice[data-state="request"] {

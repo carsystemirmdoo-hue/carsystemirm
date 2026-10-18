@@ -1939,10 +1939,13 @@
  * Kompaktan panel filtera (2026-10-16): kratko zaglavlje u jednom redu, niža polja (40 px na
  * računaru, 44 px na dodir), manji razmaci. Širina prati širinu ekrana; sporedni filteri na
  * nižem ekranu idu pod „Još filtera“ (CatalogFilters → SecondaryFilters).
+ * Samo računar: bez ograničenja je pravilo na telefonu davalo filterima kolonu od 244 px.
  */
-.catalogLayout {
-  grid-template-columns: clamp(244px, 19vw, 300px) minmax(0, 1fr);
-  gap: clamp(18px, 2vw, 28px);
+@media (min-width: 901px) {
+  .catalogLayout {
+    grid-template-columns: clamp(244px, 19vw, 300px) minmax(0, 1fr);
+    gap: clamp(18px, 2vw, 28px);
+  }
 }
 
 .catalogShell[data-ds="a"] .filters {
@@ -2118,4 +2121,62 @@
     background: var(--ds-c-accent, var(--catalog-red));
     color: var(--ds-c-on-accent, #fff);
   }
+}
+
+/*
+ * Raspored kartica prema stanju filtera (2026-10-18). Pravilo kompaktnog panela iznad
+ * (`.catalogLayout`, ista specifičnost, kasnije u fajlu) poništavalo je sklopljenu kolonu,
+ * pa je posle sklapanja ostajala prazna kolona široka kao panel. Ovde je sklopljeno stanje
+ * ponovo izričito, a broj kolona prati stanje: otvoreni filteri → 3, sklopljeni → 4.
+ */
+@media (min-width: 901px) {
+  .catalogLayout.catalogLayoutCollapsed {
+    grid-template-columns: 44px minmax(0, 1fr);
+    gap: 16px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .catalogLayoutCollapsed .productGrid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1880px) {
+  .catalogLayoutCollapsed .productGrid {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 901px) and (max-width: 1199px) {
+  .productGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .catalogLayoutCollapsed .productGrid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+/* Kompaktna kontrola za vraćanje filtera: uska traka visine sadržaja, ne stub od 320 px. */
+@media (min-width: 901px) {
+  .catalogShell .catalogLayoutCollapsed .filtersExpandTab {
+    width: 44px;
+    min-width: 44px;
+    min-height: 0;
+    gap: 10px;
+    padding: 14px 0;
+  }
+}
+
+/*
+ * Kartica je grid sa jednom kolonom; bez `minmax(0, 1fr)` je dugačak tehnički red (nowrap)
+ * širio karticu i zonu slike preko kolone mreže (npr. 482 px u koloni od 288 px).
+ */
+.productCard {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.productBody {
+  min-width: 0;
 }

@@ -714,7 +714,16 @@
   display: grid;
   top: var(--product-optical-y);
   left: 50%;
-  width: calc(var(--product-fit-w) / var(--product-content-fill-x));
+  /*
+   * Gornja granica (2026-10-18): platno sme da pređe površinu najviše 15 %. Pogrešna metrika
+   * (sadržaj izmeren manji nego što jeste) inače uvećava platno i seče proizvod; sa granicom
+   * je proizvod u najgorem slučaju manji, ali ceo.
+   */
+  width: min(
+    calc(var(--product-fit-w) / var(--product-content-fill-x)),
+    115cqw,
+    calc(115cqh * var(--product-canvas-aspect))
+  );
   aspect-ratio: var(--product-canvas-aspect);
   place-items: center;
   transform:

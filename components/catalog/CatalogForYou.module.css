@@ -30,8 +30,7 @@
   font-weight: 600;
 }
 
-.demo,
-.demoTag {
+.demo {
   display: inline-block;
   border: 1px dashed currentColor;
   border-radius: 2px;
@@ -41,11 +40,6 @@
   letter-spacing: 0.04em;
   padding: 2px 6px;
   text-transform: uppercase;
-}
-
-.demoTag {
-  justify-self: start;
-  font-size: 0.6875rem;
 }
 
 .headNote {
@@ -77,33 +71,73 @@
   font-weight: 400;
 }
 
-.list {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(min(100%, 210px), 1fr));
+.groupHead {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
   gap: 12px;
-  margin: 0;
-  padding: 0;
-  list-style: none;
 }
 
-.more {
-  justify-self: start;
-  min-height: 40px;
+.railNav {
+  display: flex;
+  flex: none;
+  gap: 6px;
+}
+
+.railNav button {
+  display: grid;
+  width: 40px;
+  height: 40px;
+  place-items: center;
   border: 1px solid var(--ds-c-line-strong, var(--catalog-border));
   border-radius: var(--ds-ctl-radius, 2px);
-  background: transparent;
+  background: var(--ds-c-surface, transparent);
   color: var(--ds-c-text, var(--catalog-ink));
   font: inherit;
-  font-size: 0.875rem;
-  font-weight: 600;
-  padding: 0 14px;
+  font-size: 1rem;
   cursor: pointer;
+}
+
+.railNav button:hover:not(:disabled) {
+  border-color: var(--ds-c-text, var(--catalog-ink));
+}
+
+.railNav button:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+
+.railNav button:focus-visible {
+  outline: 2px solid var(--ds-c-focus);
+  outline-offset: 2px;
+}
+
+/* Ručni karusel: izvorni horizontalni skrol (prevlačenje prstom, točkić, Shift+točkić), „snap“ po kartici. */
+.list {
+  --rail-card: clamp(204px, 22%, 248px);
+  display: grid;
+  grid-auto-columns: var(--rail-card);
+  grid-auto-flow: column;
+  gap: 12px;
+  margin: 0;
+  padding: 0 0 6px;
+  list-style: none;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x mandatory;
+  scroll-padding-inline: 0;
+  scrollbar-width: thin;
+}
+
+.list > li {
+  scroll-snap-align: start;
 }
 
 .card {
   display: grid;
   grid-template-rows: auto 1fr;
   min-width: 0;
+  height: 100%;
   border: 1px solid var(--ds-c-line, var(--catalog-border));
   border-radius: var(--ds-ctl-radius, 2px);
   background: var(--ds-c-surface, var(--catalog-panel));
@@ -112,7 +146,7 @@
 .media {
   display: grid;
   place-items: center;
-  aspect-ratio: 4 / 3;
+  height: 148px;
   border-bottom: 1px solid var(--ds-c-line, var(--catalog-border));
   background: var(--ds-c-surface-2, transparent);
   overflow: hidden;
@@ -122,7 +156,7 @@
   width: 100%;
   height: 100%;
   object-fit: contain;
-  padding: 10px;
+  padding: 12px;
 }
 
 .noImage {
@@ -131,17 +165,22 @@
 }
 
 .body {
-  display: grid;
-  align-content: start;
-  gap: 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
   padding: 10px 12px 12px;
 }
 
 .name {
+  display: -webkit-box;
+  min-height: calc(2 * 1.3em);
   margin: 0;
+  overflow: hidden;
   font-size: 0.9375rem;
   font-weight: 650;
   line-height: 1.3;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
 }
 
 .name a {
@@ -164,8 +203,15 @@
   line-height: 1.4;
 }
 
+.meta {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
 .reason {
   color: var(--ds-c-text, var(--catalog-ink));
+  font-size: 0.75rem;
 }
 
 .price {
@@ -176,17 +222,15 @@
   line-height: 1.4;
 }
 
-.price p {
-  margin: 0;
+.price strong {
+  font-size: 0.9375rem;
+  font-weight: 650;
+  font-variant-numeric: tabular-nums;
 }
 
-.price span,
-.vat {
+.price span {
   color: var(--ds-c-text-2, var(--catalog-muted));
-}
-
-.vat {
-  font-size: 0.8125rem;
+  font-size: 0.75rem;
 }
 
 .stock {
@@ -208,12 +252,13 @@
 .order {
   display: grid;
   gap: 6px;
-  margin-top: 4px;
+  margin-top: auto;
+  padding-top: 4px;
 }
 
 .orderRow {
   display: grid;
-  grid-template-columns: 64px 1fr;
+  grid-template-columns: 58px 1fr;
   gap: 6px;
 }
 
@@ -270,17 +315,10 @@
 
 @media (max-width: 520px) {
   .list {
-    grid-template-columns: 1fr;
-  }
-
-  .card {
-    grid-template-columns: 112px minmax(0, 1fr);
-    grid-template-rows: none;
+    --rail-card: 76%;
   }
 
   .media {
-    aspect-ratio: auto;
-    border-right: 1px solid var(--ds-c-line, var(--catalog-border));
-    border-bottom: 0;
+    height: 128px;
   }
 }

@@ -17,6 +17,8 @@ import {
 import {
   loadCarsystemMapStyle,
   observeSiteTheme,
+  startMapWhenNear,
+  swapCarsystemMapTheme,
   readSiteTheme,
 } from "@/components/map/carsystem-map-style";
 import { collapseAttributionOnSmallMap, MAP_ATTRIBUTION_LOCALE } from "@/components/map/map-attribution";
@@ -332,7 +334,7 @@ export function PartnerMap({
           const activeMap = mapRef.current;
           if (!activeMap) return;
           try {
-            activeMap.setStyle(await loadCarsystemMapStyle(theme), { diff: false });
+            await swapCarsystemMapTheme(activeMap, theme);
           } catch (error) {
             console.error("PartnerMap theme swap failed", error);
           }
@@ -349,26 +351,15 @@ export function PartnerMap({
     // Kao CompanyLocationMap: mapa (maplibre-gl, stil, fontovi, pločice ≈ 0,5 MB) se pokreće tek
     // kada se približi ekranu. Na /prodavnice je odmah vidljiva; na početnoj je ispod prvog ekrana.
     const shell = containerRef.current;
-    const observer = shell
-      ? new IntersectionObserver(
-          (entries) => {
-            if (entries.some((entry) => entry.isIntersecting)) {
-              observer?.disconnect();
-              init();
-            }
-          },
-          { rootMargin: "240px" },
-        )
-      : null;
-    if (shell && observer) observer.observe(shell);
-    else init();
+    const stopWaiting = shell ? startMapWhenNear(shell, () => void init()) : null;
+    if (!shell) void init();
 
     const clusterMarkers = clusterMarkersRef.current;
     const dimmedMarkers = dimmedMarkersRef.current;
 
     return () => {
       disposed = true;
-      observer?.disconnect();
+      stopWaiting?.();
       disconnectTheme?.();
       stopAttribution?.();
       clusterMarkers.forEach((marker) => marker.remove());

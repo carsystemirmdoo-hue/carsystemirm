@@ -7,6 +7,8 @@ import { collapseAttributionOnSmallMap, MAP_ATTRIBUTION_LOCALE } from "@/compone
 import {
   loadCarsystemMapStyle,
   observeSiteTheme,
+  startMapWhenNear,
+  swapCarsystemMapTheme,
   readSiteTheme,
 } from "./carsystem-map-style";
 import styles from "./CarsystemMap.module.css";
@@ -85,7 +87,7 @@ export function CompanyLocationMap({
           const activeMap = mapRef.current;
           if (!activeMap) return;
           try {
-            activeMap.setStyle(await loadCarsystemMapStyle(theme), { diff: false });
+            await swapCarsystemMapTheme(activeMap, theme);
           } catch (error) {
             console.error("CompanyLocationMap theme swap failed", error);
           }
@@ -96,20 +98,11 @@ export function CompanyLocationMap({
       }
     }
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        if (entries.some((entry) => entry.isIntersecting)) {
-          observer.disconnect();
-          init();
-        }
-      },
-      { rootMargin: "240px" },
-    );
-    observer.observe(shell);
+    const stopWaiting = startMapWhenNear(shell, () => void init());
 
     return () => {
       disposed = true;
-      observer.disconnect();
+      stopWaiting();
       disconnectTheme?.();
       stopAttribution?.();
       mapRef.current?.remove();

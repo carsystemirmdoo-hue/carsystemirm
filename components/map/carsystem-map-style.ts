@@ -14,18 +14,132 @@ export function readSiteTheme(): "light" | "dark" {
 }
 
 /**
- * Watches the site theme class on <html> and reports changes. Returns a
+ * Watches the site theme class on <html> and reports real changes. Returns a
  * disconnect function. Used by map components to swap map styles in step
  * with the existing ThemeToggle/ThemeScript system.
+ *
+ * 2026-10-19: the frame theme controller toggles `.dark` while the page
+ * scrolls past highlighted sections, and other code touches `class` on <html>
+ * as well. Every mutation used to trigger a full `setStyle` (all tiles dropped
+ * and re-fetched, a blank map for several frames). Now only an actual theme
+ * change is reported, and only once it has been stable for `settleMs`, so a
+ * quick back-and-forth across a section edge costs nothing.
  */
-export function observeSiteTheme(onChange: (theme: "light" | "dark") => void) {
-  const observer = new MutationObserver(() => onChange(readSiteTheme()));
+export function observeSiteTheme(
+  onChange: (theme: "light" | "dark") => void,
+  { settleMs = 180 }: { settleMs?: number } = {},
+) {
+  let reported = readSiteTheme();
+  let timer: number | undefined;
+  const observer = new MutationObserver(() => {
+    window.clearTimeout(timer);
+    timer = window.setTimeout(() => {
+      const next = readSiteTheme();
+      if (next === reported) return;
+      reported = next;
+      onChange(next);
+    }, settleMs);
+  });
   observer.observe(document.documentElement, {
     attributes: true,
     attributeFilter: ["class"],
   });
 
-  return () => observer.disconnect();
+  return () => {
+    window.clearTimeout(timer);
+    observer.disconnect();
+  };
+}
+
+type IdleWindow = Window & {
+  requestIdleCallback?: (callback: () => void, options?: { timeout: number }) => number;
+  cancelIdleCallback?: (handle: number) => void;
+};
+
+/**
+ * Pokreće mapu kada se približi ekranu, ali u neaktivnom trenutku pregledača
+ * (2026-10-19). Ranije se pravila tačno kada uđe u pojas od 240 px — usred
+ * skrola, pa je parsiranje maplibre-gl i prvi stil davao jedan zadatak od
+ * ~420 ms (zamrznut kadar) baš pri prolasku kroz blok „Boja nije sloj“.
+ * Sada se modul zagreva posle učitavanja stranice, a mapa nastaje u pauzi,
+ * dovoljno pre nego što stigne na ekran. Vraća funkciju za otkazivanje.
+ */
+export function startMapWhenNear(element: Element, start: () => void) {
+  const idleWindow = window as IdleWindow;
+  let idleHandle: number | undefined;
+  let timeoutHandle: number | undefined;
+  let started = false;
+
+  const runIdle = (task: () => void, timeout: number) => {
+    if (idleWindow.requestIdleCallback) idleHandle = idleWindow.requestIdleCallback(task, { timeout });
+    else timeoutHandle = window.setTimeout(task, 1);
+  };
+
+  const begin = () => {
+    if (started) return;
+    started = true;
+    observer.disconnect();
+    runIdle(start, 700);
+  };
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      if (entries.some((entry) => entry.isIntersecting)) begin();
+    },
+    { rootMargin: "1200px 0px" },
+  );
+  observer.observe(element);
+
+  // Zagrevanje modula (mreža + parsiranje) bez pravljenja mape.
+  runIdle(() => {
+    void import("maplibre-gl");
+  }, 4000);
+
+  return () => {
+    observer.disconnect();
+    if (idleHandle !== undefined) idleWindow.cancelIdleCallback?.(idleHandle);
+    if (timeoutHandle !== undefined) window.clearTimeout(timeoutHandle);
+  };
+}
+
+type ThemeSwappableMap = {
+  setStyle: (
+    style: StyleSpecification,
+    options?: {
+      diff?: boolean;
+      transformStyle?: (
+        previous: StyleSpecification | undefined,
+        next: StyleSpecification,
+      ) => StyleSpecification;
+    },
+  ) => unknown;
+};
+
+/**
+ * Swaps the light/dark map style in place. Both variants share the same
+ * vector sources, so a diffed `setStyle` only changes paint properties and
+ * keeps the loaded tiles (no blank map). Runtime sources/layers the page added
+ * on top of the base style (partner points, clusters) are carried over.
+ */
+export async function swapCarsystemMapTheme(map: ThemeSwappableMap, theme: "light" | "dark") {
+  const next = await loadCarsystemMapStyle(theme);
+  const baseSourceIds = new Set(Object.keys(next.sources ?? {}));
+  const baseLayerIds = new Set((next.layers ?? []).map((layer) => layer.id));
+  map.setStyle(next, {
+    diff: true,
+    transformStyle: (previous, incoming) => {
+      if (!previous) return incoming;
+      const runtimeSources = Object.fromEntries(
+        Object.entries(previous.sources ?? {}).filter(([id]) => !baseSourceIds.has(id)),
+      );
+      const runtimeLayers = (previous.layers ?? []).filter((layer) => !baseLayerIds.has(layer.id));
+      return {
+        ...incoming,
+        sources: { ...incoming.sources, ...runtimeSources },
+        layers: [...incoming.layers, ...runtimeLayers],
+      };
+    },
+  });
 }
 
 let lightStylePromise: Promise<StyleSpecification> | null = null;

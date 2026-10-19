@@ -6,7 +6,6 @@ import {
   carfitAbrasiveStory,
   carfitCategories,
   carfitDocumentation,
-  carfitFamilies,
   carfitFinalCta,
   carfitFinishStory,
   carfitHero,
@@ -26,10 +25,8 @@ import {
   type CarsystemBrand,
   type CarsystemProduct,
 } from "@/lib/carsystem-data";
-import { CarfitHeroMarkers } from "./CarfitHeroMarkers";
 import { BrandSectionNav } from "@/components/brand/BrandSectionNav";
 import { CarfitMedia } from "./CarfitMedia";
-import { CarfitProductShowcase } from "./CarfitProductShowcase";
 import { CarfitReveal } from "./CarfitReveal";
 import { CarfitTaskSelector } from "./CarfitTaskSelector";
 import type { CarfitProductView, CarfitTaskView } from "./carfit-view";
@@ -37,6 +34,7 @@ import { DocumentCard } from "@/components/documents/DocumentCard";
 import { getFeaturedDocuments } from "@/lib/documents";
 import styles from "./CarfitBrandPage.module.css";
 import { toDisplayImageSrc } from "@/lib/productImageDisplay";
+import { getCarfitAbrasives } from "@/lib/carfit-abrasives";
 
 /** Stabilna referenca — `BrandSectionNav` je drži u zavisnostima efekta. */
 const carfitSectionNavItems = carfitNav.map((item) => ({
@@ -136,29 +134,42 @@ function buildTaskViews(): CarfitTaskView[] {
   });
 }
 
+/* Reprezentativni izbor (2026-10-19): po jedan proizvod iz svake grupe programa. */
+const REPRESENTATIVE = [
+  { slug: "carfit-silicone-remover-strawberry", group: "Čišćenje" },
+  { slug: "carfit-purple-ceramic-film", group: "Abrazivi" },
+  { slug: "carfit-multi-soft-putty", group: "Kitovi" },
+  { slug: "carfit-perfect-filler-4-1-grey", group: "Punioci" },
+  { slug: "carfit-masking-film-with-electrostatic-effect", group: "Maskiranje" },
+  { slug: "carfit-cover-tape-water-resistant-up-to-120c", group: "Trake" },
+  { slug: "carfit-2k-hs-perfect-clear", group: "Bezbojni lak" },
+  { slug: "carfit-universal-polishing-compound", group: "Poliranje" },
+] as const;
+
+/* Logaritamska skala granulacije P40 → P2000 za prikaz raspona abraziva. */
+const GRIT_MIN = 40;
+const GRIT_MAX = 2000;
+const GRIT_TICKS = [40, 80, 180, 400, 800, 2000] as const;
+function gritPosition(grit: number) {
+  return (Math.log(grit / GRIT_MIN) / Math.log(GRIT_MAX / GRIT_MIN)) * 100;
+}
+
 export function CarfitBrandPage({ brand }: { brand: CarsystemBrand }) {
   const wordmark = brand.wordmark ?? brand.name;
   const products = getCarfitProducts();
   const productViews = products.map(toProductView);
   const taskViews = buildTaskViews();
-  const heroProduct = productViews.find((product) => product.image) ?? null;
+  const abrasives = getCarfitAbrasives();
+  const viewBySlug = new Map(productViews.map((view) => [view.slug, view]));
+  const representative = REPRESENTATIVE.flatMap(({ slug, group }) => {
+    const product = viewBySlug.get(slug);
+    return product ? [{ product, group }] : [];
+  });
 
   const categoryViews = carfitCategories.map((category) => ({
     ...category,
     count: resolveCarfitProducts(category, 99).length,
   }));
-
-  const familyViews = carfitFamilies.map((family) => {
-    const count = family.categoryIds.reduce((total, id) => {
-      const category = getCarfitCategoryById(id);
-      return total + (category ? resolveCarfitProducts(category, 99).length : 0);
-    }, 0);
-    const target = getCarfitCategoryById(family.categoryIds[0])?.catalogTarget ?? null;
-    const shots = family.media.src
-      ? []
-      : categoryShots(family.categoryIds, family.span === "hero" || family.span === "wide" ? 3 : 1);
-    return { ...family, count, target, shots };
-  });
 
   return (
     // `data-brand-page` uključuje stranicu u zajednički sistem sticky offseta
@@ -202,106 +213,44 @@ export function CarfitBrandPage({ brand }: { brand: CarsystemBrand }) {
             </div>
           </nav>
 
-          <div className={`${styles.container} ${styles.heroInner}`}>
-            <div className={styles.heroCopy}>
-              <p className={styles.heroBrandMark}>
-                <Image
-                  alt={`${wordmark} logo`}
-                  className={styles.heroLogo}
-                  height={329}
-                  priority
-                  // `logo` je opciono na tipu brenda; Car Fit ga uvek ima.
-                  src={brand.logo ?? "/brands/carfit.svg"}
-                  width={1989}
-                />
-              </p>
+          {/* Uvodni blok (2026-10-19): zvanična C.A.R.FIT fotografija već nosi logo
+              i proizvode, pa se preko nje ništa ne postavlja; tekst i akcije su ispod. */}
+          <div className={`${styles.container} ${styles.heroPhotoWrap}`}>
+            <div className={styles.heroPhoto}>
+              <Image
+                alt={`${wordmark} REBEL FLAIR — logo i asortiman: lakovi, punioci, trake, papir i brusni diskovi`}
+                fill
+                priority
+                sizes="(min-width: 80rem) 1208px, 100vw"
+                src="/images/brands/carfit/hero/carfit-rebel-flair-asortiman-3155x1329.jpg"
+              />
+            </div>
+          </div>
+
+          <div className={`${styles.container} ${styles.heroBelow}`}>
+            <div>
               <p className={styles.heroEyebrow}>{carfitHero.eyebrow}</p>
               <h1 className={styles.heroTitle} id="carfit-title">
                 {carfitHero.title}
               </h1>
-              <p className={styles.heroLead}>{carfitHero.lead}</p>
-              <p className={styles.heroSecondary}>{carfitHero.secondary}</p>
-
-              <div className={styles.heroActions}>
-                <a
-                  className={`${styles.btn} ${styles.btnPrimary} cs-cta`} data-cta-on="dark"
-                  href={carfitHero.primaryCta.href}
-                >
-                  {carfitHero.primaryCta.label}
-                </a>
-                <a
-                  className={`${styles.btn} ${styles.btnSecondary} cs-cta`} data-cta-on="dark"
-                  href={carfitHero.secondaryCta.href}
-                >
-                  {carfitHero.secondaryCta.label}
-                </a>
-              </div>
             </div>
-
-            <div className={styles.heroStage}>
-              <div className={styles.stage}>
-                <div className={`${styles.stageCell} ${styles.stageCellWide}`}>
-                  <p className={styles.stageCode}>
-                    {heroProduct?.programName ?? ""}
-                  </p>
-                  <div className={styles.stageMedia}>
-                    {heroProduct?.image ? (
-                      <Image
-                        alt={heroProduct.image.alt}
-                        className={styles.stageImage}
-                        height={900}
-                        priority
-                        sizes="(min-width: 64rem) 36vw, 88vw"
-                        src={heroProduct.image.src}
-                        width={900}
-                      />
-                    ) : (
-                      <CarfitMedia
-                        mark={wordmark}
-                        priority
-                        sizes="(min-width: 64rem) 36vw, 88vw"
-                        slot={carfitHero.media}
-                      />
-                    )}
-                  </div>
-                  {/*
-                    Namerno bez naziva/varijante artikla: hero koristi fotografiju
-                    kao brend materijal, a konkretna varijanta se tvrdi tek na
-                    stranici proizvoda gde je podatak proveren.
-                  */}
-                  <div>
-                    <p className={styles.stageLabel}>Maskiranje</p>
-                    <p className={styles.stageNote}>
-                      Zaštita površina i definisanje zone rada pre lakiranja.
-                    </p>
-                  </div>
-                </div>
-
-                <div className={`${styles.stageCell} ${styles.stageCellSide}`}>
-                  <p className={styles.stageCode}>Program</p>
-                  <div>
-                    {/* Wordmark već stoji u hero lockupu — ovde ide sadržaj, ne ponavljanje. */}
-                    <p className={styles.stageLabel}>Ceo radni tok</p>
-                    <p className={styles.stageNote}>
-                      Priprema, reparacija, lakiranje i završna obrada u jednom programu.
-                    </p>
-                  </div>
-                </div>
-
-                <div className={`${styles.stageCell} ${styles.stageCellStrip}`}>
-                  <p className={styles.stageCode}>Oblasti</p>
-                  <p className={styles.stageLabel}>{carfitCategories.length}</p>
-                </div>
-
-                <div className={`${styles.stageCell} ${styles.stageCellStrip}`}>
-                  <p className={styles.stageCode}>Poslovi</p>
-                  <p className={styles.stageLabel}>{carfitTasks.length}</p>
-                </div>
-
-                <div className={`${styles.stageCell} ${styles.stageCellRow}`}>
-                  <p className={styles.stageCode}>Faze</p>
-                  <CarfitHeroMarkers markers={carfitHero.markers} />
-                </div>
+            <div className={styles.heroBelowAside}>
+              <p className={styles.heroLead}>{carfitHero.lead}</p>
+              <div className={styles.heroActions}>
+                <Link
+                  className={`${styles.btn} ${styles.btnPrimary} cs-cta`}
+                  data-cta-on="dark"
+                  href={carfitFinalCta.primaryCta.href}
+                >
+                  Pogledajte ceo {brand.name} asortiman
+                </Link>
+                <a
+                  className={`${styles.btn} ${styles.btnSecondary} cs-cta`}
+                  data-cta-on="dark"
+                  href="#poslovi"
+                >
+                  Izbor po poslu
+                </a>
               </div>
             </div>
           </div>
@@ -397,46 +346,10 @@ export function CarfitBrandPage({ brand }: { brand: CarsystemBrand }) {
           </div>
         </section>
 
-        {/* ---------------------------------------------- workbench zones */}
+        {/* ------------------------------------------------------ abrazivi */}
         <section
-          className={`${styles.section} ${styles.sectionOff} ${styles.gridSkin} ${styles.anchor}`}
-          id="program"
-          aria-labelledby="carfit-workbench-title"
-        >
-          <div className={styles.container}>
-            <CarfitReveal className={styles.sectionHead}>
-              <p className={styles.sectionKicker}>Workbench</p>
-              <h2 className={styles.sectionTitle} id="carfit-workbench-title">
-                Jedan radni sto. Više poslova.
-              </h2>
-              <p className={styles.sectionLead}>
-                Program je organizovan po zonama rada, onako kako se materijal stvarno uzima sa
-                police — od pripreme do završne obrade.
-              </p>
-            </CarfitReveal>
-
-            <CarfitReveal className={styles.zoneGrid} delay={60}>
-              {carfitWorkbenchZones.map((zone) => (
-                <article className={styles.zone} key={zone.id}>
-                  <p className={styles.zoneCode}>{zone.code}</p>
-                  <div>
-                    <h3 className={styles.zoneTitle}>{zone.title}</h3>
-                    <p className={styles.zoneLead}>{zone.lead}</p>
-                  </div>
-                  <ul className={styles.zoneItems}>
-                    {zone.items.map((item) => (
-                      <li key={item}>{item}</li>
-                    ))}
-                  </ul>
-                </article>
-              ))}
-            </CarfitReveal>
-          </div>
-        </section>
-
-        {/* -------------------------------------------- abrasive gradation */}
-        <section
-          className={`${styles.section} ${styles.sectionSteel} ${styles.gridSkin}`}
+          className={`${styles.section} ${styles.sectionSteel} ${styles.anchor}`}
+          id="abrazivi"
           aria-labelledby="carfit-gradation-title"
         >
           <div className={styles.container}>
@@ -445,98 +358,66 @@ export function CarfitBrandPage({ brand }: { brand: CarsystemBrand }) {
               <h2 className={styles.sectionTitle} id="carfit-gradation-title">
                 {carfitAbrasiveStory.title}
               </h2>
-              <p className={styles.sectionLead}>{carfitAbrasiveStory.lead}</p>
-            </CarfitReveal>
-
-            <CarfitReveal className={styles.gradationLayout} delay={60}>
-              <ol className={styles.gradationSteps}>
-                {carfitAbrasiveStory.steps.map((step) => (
-                  <li className={styles.gradationStep} key={step.code}>
-                    <span className={styles.gradationCode}>{step.code}</span>
-                    <span>
-                      <span className={styles.gradationTitle}>{step.title}</span>
-                      <span className={styles.gradationNote}>{step.note}</span>
-                    </span>
-                  </li>
-                ))}
-              </ol>
-
-              <div className={styles.gradationDisc} aria-hidden="true">
-                <div className={styles.gradationDiscInner}>
-                  <p className={styles.gradationDiscLabel}>Gradacija</p>
-                  <p className={styles.gradationDiscValue}>P80 → P2000</p>
-                </div>
-              </div>
-            </CarfitReveal>
-
-            <p className={styles.footnote}>{carfitAbrasiveStory.note}</p>
-          </div>
-        </section>
-
-        {/* -------------------------------------------------- family grid */}
-        <section
-          className={`${styles.section} ${styles.sectionPaper}`}
-          aria-labelledby="carfit-families-title"
-        >
-          <div className={styles.container}>
-            <CarfitReveal className={styles.sectionHead}>
-              <p className={styles.sectionKicker}>Porodice</p>
-              <h2 className={styles.sectionTitle} id="carfit-families-title">
-                Proizvodi napravljeni za posao koji imaju.
-              </h2>
               <p className={styles.sectionLead}>
-                Svaka porodica pokriva jednu jasnu ulogu u procesu. Gde već imamo artikle u
-                katalogu, modul vodi direktno na njih.
+                Svaki C.A.R.FIT abraziv ima svoj raspon granulacije i namenu. Skala ispod
+                prikazuje zvanične raspone iz tabela proizvođača — od grubog zahvata do
+                mokrog brušenja pre poliranja.
               </p>
             </CarfitReveal>
 
-            <CarfitReveal className={styles.familyGrid} delay={60}>
-              {familyViews.map((family) => {
-                const spanClass =
-                  family.span === "hero"
-                    ? styles.familyHero
-                    : family.span === "tall"
-                      ? styles.familyTall
-                      : family.span === "wide"
-                        ? styles.familyWide
-                        : styles.familyUnit;
-
-                return (
-                  <article className={`${styles.family} ${spanClass}`} key={family.id}>
-                    <header className={styles.familyHead}>
-                      <p className={styles.familyCode}>{family.code}</p>
-                      <h3 className={styles.familyName}>{family.name}</h3>
-                      <p className={styles.familyClaim}>{family.claim}</p>
-                    </header>
-
-                    <div className={styles.familyMedia}>
-                      <CarfitMedia
-                        products={family.shots}
-                        mark={family.code}
-                        sizes="(min-width: 64rem) 24vw, (min-width: 40rem) 46vw, 92vw"
-                        slot={family.media}
-                      />
-                    </div>
-
-                    <div className={styles.familyFoot}>
-                      {family.count > 0 ? (
-                        <span className={styles.familyCount}>
-                          {family.count} u našem katalogu
+            <CarfitReveal delay={60}>
+              <ol className={styles.abrasiveList}>
+                {abrasives.map((abrasive) => (
+                  <li className={styles.abrasive} key={abrasive.slug}>
+                    <Link className={styles.abrasiveLink} href={`/proizvodi/${abrasive.slug}`}>
+                      <span className={styles.abrasiveImage}>
+                        {abrasive.image ? (
+                          <Image
+                            alt=""
+                            fill
+                            sizes="(min-width: 64rem) 9rem, 6rem"
+                            src={toDisplayImageSrc(abrasive.image)}
+                          />
+                        ) : null}
+                      </span>
+                      <span className={styles.abrasiveCopy}>
+                        <span className={styles.abrasiveName}>{abrasive.name}</span>
+                        <span className={styles.abrasiveSubtype}>{abrasive.subtype}</span>
+                        <span className={styles.abrasivePurpose}>{abrasive.purpose}</span>
+                      </span>
+                      <span className={styles.abrasiveRange}>
+                        <span className={styles.abrasiveRangeLabel}>
+                          P{abrasive.gritMin} – P{abrasive.gritMax}
+                          <small>{abrasive.gritCount} granulacija</small>
                         </span>
-                      ) : (
-                        <span />
-                      )}
-                      {family.target ? (
-                        <Link className={styles.btnLink} href={family.target.href}>
-                          Katalog
-                          <span aria-hidden="true">→</span>
-                        </Link>
-                      ) : null}
-                    </div>
-                  </article>
-                );
-              })}
+                        <span className={styles.abrasiveScale} aria-hidden="true">
+                          <span
+                            className={styles.abrasiveScaleBar}
+                            style={{
+                              left: `${gritPosition(abrasive.gritMin)}%`,
+                              right: `${100 - gritPosition(abrasive.gritMax)}%`,
+                            }}
+                          />
+                        </span>
+                      </span>
+                    </Link>
+                  </li>
+                ))}
+              </ol>
+              <div className={styles.abrasiveAxis} aria-hidden="true">
+                {GRIT_TICKS.map((tick) => (
+                  <span key={tick} style={{ left: `${gritPosition(tick)}%` }}>
+                    P{tick}
+                  </span>
+                ))}
+              </div>
             </CarfitReveal>
+
+            <p className={styles.footnote}>
+              Rasponi i namena su iz zvaničnih tabela i opisa proizvoda na carfitrepair.com.
+              Proizvođač ne objavljuje preporuku koja granulacija ide u koji korak — izbor
+              za konkretan posao potvrđujemo kroz upit.
+            </p>
           </div>
         </section>
 
@@ -633,27 +514,52 @@ export function CarfitBrandPage({ brand }: { brand: CarsystemBrand }) {
             <CarfitReveal className={styles.sectionHead}>
               <p className={styles.sectionKicker}>Katalog</p>
               <h2 className={styles.sectionTitle} id="carfit-products-title">
-                {brand.name} proizvodi dostupni kod nas
+                Po jedan proizvod iz svake grupe.
               </h2>
               <p className={styles.sectionLead}>
-                Artikli koji trenutno postoje u našem katalogu. Dostupnost i tehnički izbor
+                Reprezentativan izbor za upoznavanje programa. Dostupnost i tehnički izbor
                 potvrđuje tim Carsystem i R-M kroz upit.
               </p>
             </CarfitReveal>
 
             <CarfitReveal delay={60}>
-              <CarfitProductShowcase products={productViews} />
+              <ul className={styles.repGrid}>
+                {representative.map(({ product, group }) => (
+                  <li key={product.slug}>
+                    <Link className={styles.repCard} href={product.href}>
+                      <span className={styles.repImage}>
+                        {product.image ? (
+                          <Image
+                            alt={product.image.alt}
+                            fill
+                            sizes="(min-width: 64rem) 22vw, (min-width: 40rem) 44vw, 90vw"
+                            src={product.image.src}
+                          />
+                        ) : null}
+                      </span>
+                      <span className={styles.repGroup}>{group}</span>
+                      <span className={styles.repName}>{product.name.replace(/^Car Fit\s+/i, "")}</span>
+                      <span className={styles.repMore}>
+                        Otvorite proizvod <span aria-hidden="true">→</span>
+                      </span>
+                    </Link>
+                  </li>
+                ))}
+              </ul>
 
               <div className={styles.showcaseFoot}>
                 <p className={styles.footnote}>
-                  Katalog se dopunjava. Poslovi bez direktno povezanog {brand.name} artikla vode na
-                  odgovarajuću kategoriju kataloga.
+                  Ovo je izbor po grupama. Ceo {brand.name} asortiman ({productViews.length}{" "}
+                  proizvoda) je u katalogu, već filtriran na {brand.name}.
                 </p>
                 <Link
-                  className={`${styles.btn} ${styles.btnSecondary} cs-cta`} data-cta-on="theme"
+                  className={`${styles.btn} ${styles.btnPrimary} cs-cta`}
+                  data-cta-on="theme"
+                  data-cta-fill="red"
                   href={carfitFinalCta.primaryCta.href}
                 >
-                  Pogledajte sve {brand.name} proizvode
+                  Pogledajte ceo asortiman u katalogu
+                  <span aria-hidden="true">→</span>
                 </Link>
               </div>
             </CarfitReveal>

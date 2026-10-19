@@ -2176,3 +2176,121 @@
     transform: none;
   }
 }
+
+/* =========================================================================
+ * Uvodni blok sa dve fotografije (2026-10-19)
+ * ========================================================================= */
+.heroSplit {
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  gap: clamp(2rem, 4vw, 4rem);
+  align-items: center;
+}
+
+.heroTitleCompact {
+  font-size: clamp(2.4rem, 4.6vw, 4.4rem);
+  line-height: 0.98;
+}
+
+.heroActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.9rem 1.5rem;
+  align-items: center;
+  margin-top: 0.5rem;
+}
+
+.hero .heroPrimaryCta {
+  display: inline-flex;
+  min-height: 3.1rem;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0 1.4rem;
+  border: 1px solid #ffffff;
+  border-radius: var(--ds-ctl-radius);
+  background: #ffffff;
+  color: #0b0b0d;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.hero .heroSecondaryCta {
+  color: var(--bf-invert-text);
+  font-weight: 600;
+  text-decoration: underline;
+  text-decoration-color: rgb(244 243 240 / 0.45);
+  text-underline-offset: 0.35em;
+}
+
+.heroSecondaryCta:hover,
+.heroSecondaryCta:focus-visible {
+  text-decoration-color: currentColor;
+}
+
+.heroPrimaryCta:focus-visible,
+.heroSecondaryCta:focus-visible {
+  outline: 2px solid #ffffff;
+  outline-offset: 3px;
+}
+
+.heroPhotos {
+  position: relative;
+  padding-bottom: clamp(3rem, 7vw, 5.5rem);
+}
+
+.heroPhotoMain,
+.heroPhotoInset {
+  position: relative;
+  margin: 0;
+  overflow: hidden;
+  border-radius: var(--ds-ctl-radius);
+}
+
+.heroPhotoMain {
+  aspect-ratio: 4 / 3;
+}
+
+.heroPhotoMain img {
+  object-fit: cover;
+  object-position: 34% 50%;
+}
+
+/* Sunđeri: preklopljena kartica dole levo, u celini (format 2,1 : 1). */
+.heroPhotoInset {
+  position: absolute;
+  bottom: 0;
+  left: clamp(-3rem, -4vw, -1rem);
+  width: 52%;
+  aspect-ratio: 1703 / 804;
+  border: 1px solid rgb(244 243 240 / 0.16);
+  box-shadow: 0 1.5rem 3rem -1rem rgb(0 0 0 / 0.65);
+}
+
+.heroPhotoInset img {
+  object-fit: cover;
+}
+
+@media (max-width: 64rem) {
+  .heroSplit {
+    grid-template-columns: 1fr;
+  }
+
+  .heroPhotos {
+    padding-bottom: 0;
+  }
+
+  .heroPhotoMain {
+    aspect-ratio: 4 / 3;
+  }
+
+  .heroPhotoMain img {
+    object-position: 38% 45%;
+  }
+
+  .heroPhotoInset {
+    position: relative;
+    left: auto;
+    width: 100%;
+    margin-top: 0.75rem;
+    box-shadow: none;
+  }
+}

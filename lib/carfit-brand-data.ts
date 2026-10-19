@@ -143,7 +143,7 @@ export const carfitNav: CarfitNavItem[] = [
   { id: "pregled", label: "Pregled" },
   { id: "kategorije", label: "Kategorije" },
   { id: "poslovi", label: "Poslovi" },
-  { id: "program", label: "Program" },
+  { id: "abrazivi", label: "Abrazivi" },
   { id: "proizvodi", label: "Proizvodi" },
   { id: "dokumentacija", label: "Dokumentacija" },
 ];

@@ -27,7 +27,7 @@ type Exec = Database | Tx;
 const hash = (raw: string) => createHash("sha256").update(raw).digest("hex");
 const newRaw = () => randomBytes(32).toString("base64url");
 
-/** Izdaje token za nalog posle prijave LOZINKOM. Porodica traje 30 dana. */
+/** Izdaje token za nalog posle prijave LOZINKOM. Važi 30 dana od poslednjeg korišćenja (rotacija pomera rok). */
 export async function issueRememberToken(accountId: string, userAgent: string | null, now = new Date()) {
   const db = getDb();
   const raw = newRaw();
@@ -111,19 +111,21 @@ export async function redeemRememberToken(raw: string | null | undefined, now = 
 
     const nextRaw = newRaw();
     const grant = newRaw();
+    // Rok se računa od poslednjeg korišćenja: svaka obnova daje novih 30 dana.
+    const nextExpiresAt = new Date(now.getTime() + REMEMBER_MS);
     const [next] = [
       ...(await tx.execute<{ id: string }>(sql`
         INSERT INTO customer_remember_tokens (account_id, family_id, token_hash, session_version, device_label, expires_at,
                                               last_used_at, grant_hash, grant_expires_at)
         VALUES (${row!.account_id}, ${row!.family_id}, ${hash(nextRaw)}, ${row!.session_version}, ${row!.device_label},
-                ${new Date(row!.expires_at).toISOString()}::timestamptz, now(), ${hash(grant)},
+                ${nextExpiresAt.toISOString()}::timestamptz, now(), ${hash(grant)},
                 ${new Date(now.getTime() + GRANT_TTL_MS).toISOString()}::timestamptz)
         RETURNING id`)),
     ];
     await tx.execute(sql`
       UPDATE customer_remember_tokens SET revoked_at = now(), revoked_reason = 'rotated', replaced_by = ${next.id}, grant_hash = NULL
        WHERE id = ${row!.id}`);
-    return { ok: true as const, raw: nextRaw, grant, expiresAt: new Date(row!.expires_at), accountId: row!.account_id };
+    return { ok: true as const, raw: nextRaw, grant, expiresAt: nextExpiresAt, accountId: row!.account_id };
   });
 }
 

@@ -111,10 +111,10 @@ function CustomerForm({ callbackUrl, rememberAvailable }: { callbackUrl: string;
       </div>
       {rememberAvailable ? (
         <label className="pn-check">
-          <input type="checkbox" name="remember" value="on" />
+          <input type="checkbox" name="remember" value="on" defaultChecked />
           <span>
-            <strong>Zapamti me na ovom uređaju 30 dana</strong>
-            <small>Ne uključujte na zajedničkom računaru. Slanje zahteva i dalje traži lozinku.</small>
+            <strong>Zapamtite me na ovom uređaju</strong>
+            <small>Ostajete prijavljeni 30 dana od poslednjeg korišćenja. Isključite na zajedničkom računaru. Slanje zahteva i dalje traži lozinku.</small>
           </span>
         </label>
       ) : null}

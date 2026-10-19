@@ -62,3 +62,13 @@ najduže 30 dana od prijave lozinkom.
 - Da li je 30 dana prihvatljivo za kupce koji dele računar u radionici (predlog: tekst
   pored polja „Ne uključujte na zajedničkom računaru").
 - Da li porudžbina uvek traži lozinku (strože) ili samo iz obnovljene sesije (predlog).
+
+## Uključeno za kupce (2026-10-19)
+
+Odluka vlasnika: trajna prijava kupaca je uključena.
+
+- „Zapamtite me na ovom uređaju“ je **unapred uključeno** u obe forme prijave kupca (`/prijava?za=kupac`, `/prijava/kupac`); kupac ga isključuje na zajedničkom računaru.
+- Rok je **30 dana od poslednjeg korišćenja**: svaka obnova (rotacija tokena) pomera `expires_at` na +30 dana. Uređaj nekorišćen 30 dana traži lozinku.
+- Zastavica `CUSTOMER_REMEMBER_ME` se više ne čita (na Production-u je bila `0`). Hitno isključenje: `CUSTOMER_REMEMBER_DISABLED=1`.
+- Nepromenjeno: token samo kao SHA-256 u bazi, sirovi token samo u `HttpOnly`, `SameSite=Lax` kolačiću (`__Host-` na HTTPS), rotacija i otkrivanje ponovne upotrebe, najviše 5 uređaja, JWT 8 h, slanje zahteva iz obnovljene sesije traži lozinku. Odjava gasi sesiju (`sid`) i token uređaja; promena lozinke, opoziv pristupa i „odjava sa svih uređaja“ povećavaju `session_version` i gase sve uređaje. Zaposleni: bez promene (8 h / ponoć, drugi faktor).
+- Provera u pregledaču (sintetička baza, 33 + 4 koraka): zatvaranje/otvaranje pregledača, istek i obnova, ručna odjava i kopija kolačića posle odjave, prelazak kupac A → D (bez podataka A), promena lozinke i opoziv pristupa na drugom uređaju, prijava uz uključen „sajt u pripremi“ bez pristupnog koda.

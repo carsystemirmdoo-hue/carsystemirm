@@ -61,14 +61,29 @@ const UA = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 C
 const activeCount = async () =>
   (await db.sql<{ n: number }[]>`SELECT count(*)::int n FROM customer_remember_tokens WHERE account_id = ${accountId} AND revoked_at IS NULL`)[0].n;
 
-test("obnova rotira token; dozvola važi jednom; porodica ne produžava rok", async (t) => {
+test("obnova rotira token; dozvola važi jednom; rok je 30 dana od poslednjeg korišćenja", async (t) => {
   if (guard(t)) return;
-  const { raw, expiresAt } = await tok.issueRememberToken(accountId, UA);
-  const r = await tok.redeemRememberToken(raw);
+  const issuedAt = new Date();
+  const { raw, expiresAt } = await tok.issueRememberToken(accountId, UA, issuedAt);
+  // Kupac se vraća posle 20 dana: obnova važi i pomera rok na 30 dana od tog dana.
+  const later = new Date(issuedAt.getTime() + 20 * 24 * 3600 * 1000);
+  const rLater = await tok.redeemRememberToken(raw, later);
+  assert.ok(rLater.ok);
+  if (!rLater.ok) return;
+  assert.ok(rLater.expiresAt.getTime() > expiresAt.getTime(), "rok se pomera na 30 dana od obnove");
+  assert.equal(rLater.expiresAt.getTime(), later.getTime() + 30 * 24 * 3600 * 1000);
+  // Posle još 25 dana (ukupno 45 od prijave) i dalje važi — računa se od poslednjeg korišćenja.
+  const muchLater = new Date(later.getTime() + 25 * 24 * 3600 * 1000);
+  const rMuchLater = await tok.redeemRememberToken(rLater.raw, muchLater);
+  assert.ok(rMuchLater.ok, "45 dana od prijave, 25 od poslednjeg korišćenja: važi");
+  if (!rMuchLater.ok) return;
+  await tok.revokeRememberTokenByRaw(rMuchLater.raw);
+
+  const { raw: raw2 } = await tok.issueRememberToken(accountId, UA);
+  const r = await tok.redeemRememberToken(raw2);
   assert.ok(r.ok);
   if (!r.ok) return;
-  assert.notEqual(r.raw, raw, "nov token");
-  assert.equal(r.expiresAt.getTime(), expiresAt.getTime(), "rotacija ne produžava 30 dana");
+  assert.notEqual(r.raw, raw2, "nov token");
   const acc = await tok.consumeRememberGrant(r.grant);
   assert.equal(acc?.id, accountId);
   assert.equal(await tok.consumeRememberGrant(r.grant), null, "dozvola se troši samo jednom");
@@ -148,7 +163,7 @@ test("isključen nalog: obnova odbijena, a ni zaostala dozvola ne izdaje sesiju"
   await db.sql`UPDATE customer_users SET status = 'active' WHERE id = ${accountId}`;
 });
 
-test("najviše 5 uređaja; porodica istekla posle 30 dana", async (t) => {
+test("najviše 5 uređaja; uređaj nekorišćen 30 dana ističe", async (t) => {
   if (guard(t)) return;
   await db.sql`UPDATE customer_remember_tokens SET revoked_at = now(), revoked_reason = 'logout' WHERE account_id = ${accountId} AND revoked_at IS NULL`;
   const raws: string[] = [];

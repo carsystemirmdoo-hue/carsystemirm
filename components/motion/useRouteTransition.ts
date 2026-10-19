@@ -11,10 +11,17 @@ import {
   SITE_ACCESS_HANDOFF_NAVIGATION_TIMEOUT_MS,
 } from "@/lib/site-access-handoff";
 
-const COVER_DURATION = 420;
+/*
+ * Trajanja prelaza (2026-10-19, merenje navigacije iz menija brendova): od
+ * ~1,05 s od klika do vidljive strane samo ~80 ms je bilo učitavanje rute
+ * (prefetch), a ~940 ms koreografija — 420 ms prekrivanja PRE `router.push` i
+ * 460 + 140 ms otkrivanja. Isti izgled zavese, kraći put: ~0,65 s ukupno.
+ * Vrednosti moraju odgovarati animacijama cs-route-cover/-reveal u globals.css.
+ */
+const COVER_DURATION = 220;
 const HOLD_DURATION = 80;
-const REVEAL_DURATION = 460;
-const VISUAL_EVENT_GRACE = 140;
+const REVEAL_DURATION = 320;
+const VISUAL_EVENT_GRACE = 80;
 const ROUTE_FALLBACK_DURATION = 5_500;
 
 type TransitionKind =

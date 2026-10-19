@@ -113,19 +113,20 @@ export function CarsystemUseCases({
             <p>Preporučeni tok</p>
             <h3>{activeUseCase.title}</h3>
             <span>{activeUseCase.description}</span>
-            <ol className={styles.useCaseSequence} aria-label="Redosled kategorija za ovaj posao">
-              {activeUseCase.categories.map((category, index) => (
-                <li key={category}>
-                  <strong>{category}</strong>
-                  {index < activeUseCase.categories.length - 1 ? (
+            <ol className={styles.useCaseSequence} aria-label="Koraci ovog posla">
+              {activeUseCase.steps.map((step, index) => (
+                <li key={step}>
+                  <strong>{step}</strong>
+                  {index < activeUseCase.steps.length - 1 ? (
                     <span aria-hidden="true">→</span>
                   ) : null}
                 </li>
               ))}
             </ol>
             <p className={styles.useCaseSequenceNote}>
-              Redosled kategorija, ne obavezna kompatibilnost tačno određenih
-              artikala — konačan izbor potvrđuje se prema tehničkom listu.
+              {activeUseCase.confirmedSystem
+                ? "Kombinaciju preporučuje proizvođač (za tamne boje); pakovanje i postupak potvrđuju se prema tehničkom listu."
+                : "Po jedan proizvod za svaki korak, izabran po nameni — nije potvrđen sistem proizvođača; postupak se potvrđuje prema tehničkom listu."}
             </p>
           </div>
 

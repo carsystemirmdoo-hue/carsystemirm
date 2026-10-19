@@ -68,8 +68,8 @@ export const norbinRatios: NorbinRatioRow[] = [
   },
   {
     base: "N15-V25",
-    baseLabel: "2K bezbojni lak, VOC",
-    ratio: "3:1",
+    baseLabel: "2K bezbojni lak, VOC, brzi",
+    ratio: "3:1:1",
     partners: [
       { code: "N75-V21", label: "učvršćivač", stocked: false },
       { code: "N85-021", label: "razređivač", stocked: false },
@@ -77,7 +77,7 @@ export const norbinRatios: NorbinRatioRow[] = [
   },
   {
     base: "N55-V20",
-    baseLabel: "Primer filler, tamno sivi",
+    baseLabel: "2K primer filler, sivi",
     ratio: "5:1:1",
     partners: [
       { code: "N75-020", label: "učvršćivač", stocked: false },
@@ -87,10 +87,13 @@ export const norbinRatios: NorbinRatioRow[] = [
   },
   {
     base: "N55-V29",
-    baseLabel: "Primer filler, sivo-crni",
-    ratio: "5:1",
-    partners: [{ code: "N75-020", label: "učvršćivač", stocked: false }],
-    note: "Proizvođačev opseg — mi vodimo učvršćivač N75-020, ne i sam filler.",
+    baseLabel: "2K primer filler, crni",
+    ratio: "5:1:1",
+    partners: [
+      { code: "N75-020", label: "učvršćivač", stocked: false },
+      { code: "N85-025 / N85-021", label: "razređivač", stocked: false },
+    ],
+    note: "Engleski tehnički list (10/2022) navodi razređivač N85-025, a turski (12/2022) N85-021 — šifru potvrđujemo pre porudžbine.",
   },
 ];
 

@@ -109,11 +109,18 @@ export const CHAPTER_VARIABLE = "--paint-chapter";
  */
 export function createChromeOwnership({ root, enabled = true }) {
   let current = null;
+  let chapter = null;
 
   return {
     /** @param {{chapter: number, owned: boolean, phase: string}} chrome */
     sync(chrome) {
-      root.style.setProperty(CHAPTER_VARIABLE, chrome.chapter.toFixed(4));
+      // Upis na <html> ponovo računa stil celog dokumenta (nasleđena promenljiva),
+      // pa se upisuje samo kada se vrednost zaista promeni (2026-10-19).
+      const nextChapter = chrome.chapter.toFixed(4);
+      if (nextChapter !== chapter) {
+        chapter = nextChapter;
+        root.style.setProperty(CHAPTER_VARIABLE, nextChapter);
+      }
       if (!enabled) return;
 
       const next = chrome.owned ? chrome.phase : null;
@@ -124,6 +131,7 @@ export function createChromeOwnership({ root, enabled = true }) {
     },
     clear() {
       current = null;
+      chapter = null;
       root.removeAttribute(ACTIVE_ATTRIBUTE);
       root.style.removeProperty(CHAPTER_VARIABLE);
     },

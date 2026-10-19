@@ -342,9 +342,12 @@
   font-family: var(--font-body), var(--font-geist-sans), system-ui, sans-serif;
 }
 
-.ctaPrimary:hover,
+/* Hover/fokus nosi zajedničko .cs-cta pravilo (2026-10-19): bela dugmad na tamnom
+   herou dobijaju crvenu ispunu sa belim tekstom (data-cta-fill="red"); ranija
+   promena bele u kredu se nije videla. */
 .ctaPrimary:focus-visible {
-  background: var(--cl-chalk);
+  outline: 2px solid #ffffff;
+  outline-offset: 3px;
 }
 
 .ctaSecondary {
@@ -802,9 +805,21 @@
   margin: 0;
 }
 
+/*
+ * Kartice „Šta farbate?“ (2026-10-19): sve tri iste visine u redu, ista zona
+ * slike (proizvod ceo, bez rastezanja), naziv poravnat ispod nje sa mestom za
+ * tri reda. Animacija promene kategorije (finderStage) je netaknuta.
+ */
+.finderProducts > li {
+  display: flex;
+}
+
 .finderProduct {
   display: grid;
-  gap: 12px;
+  flex: 1 1 auto;
+  grid-template-rows: 160px minmax(calc(3 * 1.35em), auto);
+  align-content: start;
+  gap: 16px;
   padding: 22px;
   border-radius: var(--ds-ctl-radius);
   background: #ffffff;
@@ -820,9 +835,9 @@
 }
 
 .finderProduct img {
-  height: 150px;
-  width: auto;
-  justify-self: center;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 }
 
 .finderProductName {

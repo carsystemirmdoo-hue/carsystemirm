@@ -937,7 +937,7 @@ html[data-site-access-handoff="covered"] .cs-route-transition[data-phase="idle"]
 }
 
 .cs-route-transition[data-phase="closing"] .cs-route-transition-screen {
-  animation: cs-route-cover 420ms var(--cs-ease-wipe) forwards;
+  animation: cs-route-cover 220ms var(--cs-ease-wipe) forwards;
 }
 
 html[data-site-access-handoff="starting"]
@@ -960,7 +960,7 @@ html[data-route-transition="navigating"] .cs-route-transition-screen {
 }
 
 .cs-route-transition[data-phase="opening"] .cs-route-transition-screen {
-  animation: cs-route-reveal 460ms var(--cs-ease-wipe) forwards;
+  animation: cs-route-reveal 320ms var(--cs-ease-wipe) forwards;
 }
 
 html[data-route-transition="fallback"] .cs-route-transition {
@@ -2304,15 +2304,17 @@ html[data-route-transition="fallback"] .cs-route-transition-screen {
   background: rgb(255 255 255 / 6%);
 }
 
-/* Promena teme okvira (components/theme/frameTheme.ts): samo u trenutku promene
-   boje se kratko pretapaju na svim površinama (stranica, header, meniji), pa
-   nema naglog fleša. Atribut postoji ~320 ms, zatim važe uobičajeni prelazi. */
+/* Promena teme okvira (components/theme/frameTheme.ts): u trenutku promene se
+   kratko pretapaju samo VELIKE površine — stranica, header, sekcije i njihovi
+   paneli do četvrtog nivoa, footer — po principu R-M atmosfere (jedan omotač
+   pretapa pozadinu, sadržaj prati). Ranije je pravilo važilo za `*`: ~1.100
+   elemenata je istovremeno animiralo boje, rekalkulacija stila je trajala do
+   ~420 ms po promeni (zamrznuti kadrovi, skok umesto pretapanja) i usput je
+   gasila transform prelaze unutar animacija. Atribut postoji ~320 ms. */
 html[data-frame-switching],
-html[data-frame-switching] *,
-html[data-frame-switching] *::before,
-html[data-frame-switching] *::after {
-  transition-property: background-color, color, border-color, fill, stroke, box-shadow !important;
-  transition-duration: 240ms !important;
+html[data-frame-switching] :is(body, header, footer, main, main > *, main > * > *, main > * > * > *, main > * > * > * > *) {
+  transition-property: background-color, color, border-color !important;
+  transition-duration: 260ms !important;
   transition-timing-function: ease !important;
 }
 

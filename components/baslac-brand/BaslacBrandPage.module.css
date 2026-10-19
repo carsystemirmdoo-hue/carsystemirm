@@ -1399,6 +1399,8 @@
   /* Blok ima sopstvenu (tamnu) površinu, pa tekst i uzorci dobijaju unutrašnji
      razmak od ivice; ranije su stajali priljubljeni uz levu ivicu (2026-10-17). */
   padding-inline: clamp(1.25rem, 5vw, 4.5rem);
+  /* Sadržaj puni blok; ranije ~9rem praznine iznad i ispod tri uzorka (2026-10-19). */
+  padding-block: clamp(3rem, 6vw, 5rem);
   border-top: 1px solid var(--baslac-process-border);
   background: var(--baslac-process-bg);
   color: var(--baslac-process-ink);
@@ -1428,39 +1430,208 @@
   line-height: 1.65;
 }
 
-.greyShadePoster {
-  display: flex;
-  gap: 1.5rem;
-  margin: 2.5rem 0 0;
+/* Skala sivih nijansi (2026-10-19): pet nivoa sa udelom baza sa postera. */
+.greyShadeScale {
+  margin: clamp(2rem, 4vw, 3rem) 0 0;
+}
+
+.greyShadeScale ol {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 1px;
+  margin: 0;
   padding: 0;
+  border: 1px solid var(--baslac-process-border);
+  background: var(--baslac-process-border);
   list-style: none;
 }
 
-.greyShadePoster li {
+.greyShadeScale li {
   display: grid;
-  gap: 0.5rem;
-  justify-items: center;
-  text-align: center;
+  gap: 0.6rem;
+  align-content: start;
+  background: var(--baslac-process-bg);
+  padding: 0 0 1rem;
 }
 
 .greyShadeSwatch {
   display: block;
-  width: 3.5rem;
-  height: 3.5rem;
+  height: clamp(4.5rem, 9vw, 7rem);
+}
+
+.greyShadeScale li > strong,
+.greyShadeScale li > small,
+.greyShadeRecipeBar {
+  margin-inline: clamp(0.75rem, 1.5vw, 1.1rem);
+}
+
+.greyShadeScale li > strong {
+  font-family: var(--font-display), sans-serif;
+  font-size: 1rem;
+}
+
+.greyShadeRecipeBar {
+  display: flex;
+  height: 0.5rem;
+  overflow: hidden;
   border: 1px solid var(--baslac-process-border);
 }
 
-.greyShadePoster strong {
-  font-family: var(--font-display), sans-serif;
-  font-size: 0.95rem;
+.greyShadeRecipeBar > span + span {
+  border-left: 1px solid var(--baslac-process-border);
 }
 
-.greyShadePoster small {
+.greyShadeScale li > small {
   color: var(--baslac-process-muted);
   font-family: var(--font-technical), monospace;
   font-size: var(--ds-font-label);
-  text-transform: uppercase;
-  letter-spacing: var(--ds-tracking-label);
+  letter-spacing: 0.02em;
+}
+
+.greyShadeScale figcaption {
+  margin-top: 0.85rem;
+  color: var(--baslac-process-muted);
+  font-size: var(--ds-font-small);
+}
+
+.greyShadeScale a,
+.greyShadeSources a,
+.greyShadePosterLink {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-color: var(--baslac-accent-text-on-dark);
+  text-underline-offset: 0.25em;
+}
+
+.greyShadeDetails {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr);
+  gap: clamp(1.5rem, 4vw, 3.5rem);
+  align-items: start;
+  margin-top: clamp(2rem, 4vw, 3rem);
+}
+
+.greyShadeProducts {
+  display: grid;
+  gap: 1px;
+  margin: 0;
+  padding: 0;
+  border: 1px solid var(--baslac-process-border);
+  background: var(--baslac-process-border);
+  list-style: none;
+}
+
+.greyShadeProducts a {
+  display: grid;
+  grid-template-columns: 4.5rem minmax(0, 1fr);
+  gap: 1rem;
+  align-items: center;
+  background: var(--baslac-process-bg);
+  color: inherit;
+  padding: 0.75rem 1rem;
+  text-decoration: none;
+  transition: background-color 180ms ease;
+}
+
+.greyShadeProducts a:hover,
+.greyShadeProducts a:focus-visible {
+  background: color-mix(in oklab, var(--baslac-process-bg) 88%, var(--baslac-process-ink));
+}
+
+.greyShadeProducts a:focus-visible {
+  outline: 2px solid var(--baslac-accent-text-on-dark);
+  outline-offset: -2px;
+}
+
+.greyShadeProductImage {
+  position: relative;
+  display: block;
+  height: 4.5rem;
+}
+
+.greyShadeProductImage img {
+  object-fit: contain;
+}
+
+.greyShadeProducts a > span:last-child {
+  display: grid;
+  gap: 0.15rem;
+}
+
+.greyShadeProducts strong {
+  font-family: var(--font-display), sans-serif;
+  font-size: 1.05rem;
+}
+
+.greyShadeProducts small {
+  color: var(--baslac-process-muted);
+  font-size: var(--ds-font-small);
+}
+
+.greyShadeHardener h3 {
+  margin: 0 0 0.75rem;
+  font-size: 1.1rem;
+}
+
+.greyShadeHardener p {
+  margin: 0 0 0.75rem;
+  color: var(--baslac-process-muted);
+  font-size: 0.92rem;
+  line-height: 1.6;
+}
+
+.greyShadeHardener p strong {
+  color: var(--baslac-process-ink);
+}
+
+.greyShadeActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem 1.5rem;
+  align-items: center;
+  margin-top: 1.25rem;
+}
+
+.greyShadePosterLink {
+  font-size: var(--ds-font-small);
+  font-weight: 600;
+}
+
+@media (max-width: 48rem) {
+  .greyShadeScale ol {
+    grid-template-columns: 1fr;
+  }
+
+  .greyShadeScale li {
+    grid-template-columns: 3.5rem minmax(0, 1fr);
+    grid-template-areas:
+      "swatch name"
+      "swatch bar"
+      "swatch recipe";
+    column-gap: 0.9rem;
+    row-gap: 0.35rem;
+    padding: 0.6rem 0.75rem 0.6rem 0;
+  }
+
+  .greyShadeSwatch {
+    grid-area: swatch;
+    height: auto;
+    min-height: 3.5rem;
+  }
+
+  .greyShadeScale li > strong { grid-area: name; }
+  .greyShadeRecipeBar { grid-area: bar; }
+  .greyShadeScale li > small { grid-area: recipe; }
+
+  .greyShadeScale li > strong,
+  .greyShadeScale li > small,
+  .greyShadeRecipeBar {
+    margin-inline: 0;
+  }
+
+  .greyShadeDetails {
+    grid-template-columns: 1fr;
+  }
 }
 
 .colorSection {

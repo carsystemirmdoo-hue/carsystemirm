@@ -22,6 +22,7 @@ import {
   carsystemSectionNavItems,
   type CarsystemMediaProducts,
 } from "./carsystemBrandData";
+import { getCarsystemOfficialCategoryBySlug } from "@/lib/carsystem-catalog-products";
 import { getCarsystemMediaAvailability } from "./carsystemMedia.server";
 import styles from "./CarsystemBrandPage.module.css";
 
@@ -72,7 +73,10 @@ export function CarsystemBrandPage({
         />
         <Families productBySlug={productBySlug} />
         <CarsystemUseCases products={products} />
-        <CarsystemProducts products={products} />
+        <CarsystemProducts
+          products={products}
+          officialCategoryBySlug={getCarsystemOfficialCategoryBySlug()}
+        />
         <CarsystemRupesSection products={rupesProducts} />
         <Documentation />
         <DocumentLibrary />

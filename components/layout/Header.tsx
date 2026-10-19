@@ -106,6 +106,13 @@ export function Header() {
   const mobileHistoryEntryRef = useRef(false);
   const openMenuRef = useRef<HeaderMenuKey | null>(null);
   const desktopHoverOpenTimerRef = useRef<number | null>(null);
+  /*
+   * Da li je trenutno otvoren meni otvoren prelaskom miša (2026-10-19). Klik koji
+   * stigne odmah posle hover otvaranja ranije je radio kao prekidač i zatvarao
+   * panel, a miš na dugmetu ga je zatim ponovo otvarao: otvori → nestane → vrati.
+   * Sada prvi klik na tako otvoren meni samo ga „zakači“ kao otvoren.
+   */
+  const desktopOpenedByHoverRef = useRef(false);
   const desktopHoverCloseTimerRef = useRef<number | null>(null);
   const desktopSwitchFrameRef = useRef<number | null>(null);
   const desktopOpenFrameRef = useRef<number | null>(null);
@@ -525,6 +532,7 @@ export function Header() {
     const shouldRestoreFocus = restoreDesktopFocusRef.current;
     restoreDesktopFocusRef.current = false;
     openMenuRef.current = null;
+    desktopOpenedByHoverRef.current = false;
     setDesktopMenuPhase("closed");
     setOpenMenu(null);
     setDesktopMenuSwitching(false);
@@ -624,9 +632,14 @@ export function Header() {
       openMenuRef.current === menu &&
       desktopMenuStateRef.current !== "closing"
     ) {
+      if (desktopOpenedByHoverRef.current) {
+        desktopOpenedByHoverRef.current = false;
+        return;
+      }
       closeDesktopMenu(false);
       return;
     }
+    desktopOpenedByHoverRef.current = false;
     openDesktopMenu(menu);
   }
 
@@ -648,6 +661,7 @@ export function Header() {
         return;
       }
       if (openMenuRef.current !== menu) {
+        desktopOpenedByHoverRef.current = true;
         setDesktopMenuSwitching(true);
         openDesktopMenu(menu);
         finishDesktopMenuSwitch();
@@ -658,6 +672,7 @@ export function Header() {
     clearDesktopHoverOpenTimer();
     desktopHoverOpenTimerRef.current = window.setTimeout(() => {
       desktopHoverOpenTimerRef.current = null;
+      desktopOpenedByHoverRef.current = true;
       openDesktopMenu(menu);
     }, DESKTOP_HOVER_OPEN_DELAY_MS);
   }
@@ -715,6 +730,7 @@ export function Header() {
   ) {
     if (event.key === "ArrowDown") {
       event.preventDefault();
+      desktopOpenedByHoverRef.current = false;
       openDesktopMenu(menu, true);
       return;
     }

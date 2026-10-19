@@ -25,7 +25,6 @@ import {
   befarPerforations,
 } from "@/lib/befar-brand-data";
 import { BefarHardnessScale } from "./BefarHardnessScale";
-import { BefarHeroObject } from "./BefarHeroObject";
 import { BefarPairingDiagram } from "./BefarPairingDiagram";
 import { BefarPerforationDisc } from "./BefarPerforationDisc";
 import styles from "./BefarBrandPage.module.css";
@@ -75,14 +74,11 @@ export function BefarBrandPage({ brand, products }: Props) {
             </div>
           </nav>
 
-          <div className={`${styles.container} ${styles.heroInner}`}>
-            {/* Samo šifra. Meta linija je uklonjena jer je na desktopu padala
-                preko drugog reda lead pasusa — tekst preko teksta. Isti podatak
-                stoji u sekciji tvrdoće, uz proizvod. */}
-            <div className={styles.heroBackdrop} aria-hidden="true">
-              <span className={styles.heroBackdropCode}>{befarHero.backdropCode}</span>
-            </div>
-
+          {/* Uvodni blok (2026-10-19): dve fotografije sa zvaničnog Befar sajta —
+              brisanje laka na crvenom automobilu kao glavni kadar i Open Cell
+              sunđeri kao preklopljena kartica. Tekst je na tamnoj površini, ne
+              preko fotografije. */}
+          <div className={`${styles.container} ${styles.heroInner} ${styles.heroSplit}`}>
             <div className={styles.heroCopy}>
               <Image
                 alt={befarHero.logo.alt}
@@ -95,7 +91,7 @@ export function BefarBrandPage({ brand, products }: Props) {
               <p className={styles.heroKicker}>{befarHero.kicker}</p>
               {/* Razmak posle svake linije osim zadnje — bez njega `textContent`
                   h1-a je „Preciznona tačkikontakta.“ i takav ide u pristupačno ime. */}
-              <h1 className={styles.heroTitle} id="befar-hero-title">
+              <h1 className={`${styles.heroTitle} ${styles.heroTitleCompact}`} id="befar-hero-title">
                 {befarHero.titleLines.map((line, index) => (
                   <span key={line}>
                     {line}
@@ -104,13 +100,41 @@ export function BefarBrandPage({ brand, products }: Props) {
                 ))}
               </h1>
               <p className={styles.heroLead}>{befarHero.lead}</p>
-              <a className={styles.heroCue} href="#tvrdoca">
-                {befarHero.scrollCue}
-                <span aria-hidden="true">↓</span>
-              </a>
+              <div className={styles.heroActions}>
+                <Link
+                  className={`${styles.heroPrimaryCta} cs-cta`}
+                  data-cta-on="dark"
+                  data-cta-fill="red"
+                  href="/prodavnice"
+                >
+                  Pronađite najbližu prodavnicu
+                  <span aria-hidden="true">→</span>
+                </Link>
+                <Link className={styles.heroSecondaryCta} href="/katalog?brend=befar">
+                  Pogledajte Befar proizvode
+                </Link>
+              </div>
             </div>
 
-            <BefarHeroObject />
+            <div className={styles.heroPhotos}>
+              <figure className={styles.heroPhotoMain}>
+                <Image
+                  alt="Brisanje ispoliranog laka mikrofiber krpom oko fara crvenog automobila"
+                  fill
+                  priority
+                  sizes="(min-width: 64rem) 56vw, 100vw"
+                  src="/images/brands/befar/hero/befar-brisanje-crveni-automobil-2940x1388.avif"
+                />
+              </figure>
+              <figure className={styles.heroPhotoInset}>
+                <Image
+                  alt="Befar Open Cell sunđeri za poliranje u više tvrdoća"
+                  fill
+                  sizes="(min-width: 64rem) 28vw, 100vw"
+                  src="/images/brands/befar/hero/befar-opencell-sundjeri-1703x804.avif"
+                />
+              </figure>
+            </div>
           </div>
         </section>
 

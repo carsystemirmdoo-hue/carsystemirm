@@ -1914,3 +1914,295 @@
     gap: 0.35rem;
   }
 }
+
+/* =========================================================================
+ * Dorada 2026-10-19 — usklađivanje sa ostalim brend stranicama
+ * ========================================================================= */
+
+/* Isti ritam kao Carsystem/Norbin: šire sekcije, bez dekorativnog gradijenta. */
+.section {
+  padding-block: clamp(4.5rem, 8vw, 7.5rem);
+}
+
+.gridSkin::before {
+  display: none;
+}
+
+.sectionTitle {
+  font-size: var(--ds-font-h2, clamp(1.9rem, 3.4vw, 2.9rem));
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.sectionLead {
+  font-size: var(--ds-font-lead, 1.125rem);
+}
+
+/* Hero: zvanična fotografija u celini (logo i proizvodi su deo kadra). */
+.heroPhotoWrap {
+  padding-top: clamp(0.75rem, 2vw, 1.5rem);
+}
+
+.heroPhoto {
+  position: relative;
+  aspect-ratio: 3155 / 1329;
+  overflow: hidden;
+  border-radius: var(--ds-ctl-radius);
+  background: #0d0d0d;
+}
+
+.heroPhoto img {
+  object-fit: cover;
+  object-position: 50% 50%;
+}
+
+.heroBelow {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: clamp(1.5rem, 4vw, 4rem);
+  align-items: end;
+  padding-top: clamp(2rem, 4vw, 3rem);
+  padding-bottom: clamp(3rem, 6vw, 4.5rem);
+}
+
+.heroBelow .heroTitle {
+  margin-top: 0.85rem;
+  font-size: clamp(2rem, 3.6vw, 3.2rem);
+}
+
+.heroBelowAside {
+  display: grid;
+  gap: 1.25rem;
+}
+
+/* Abrazivi: stvarni proizvodi + zvaničan raspon granulacije na zajedničkoj skali. */
+.abrasiveList {
+  display: grid;
+  gap: 1px;
+  margin: 0;
+  padding: 0;
+  border: 1px solid var(--cf-line);
+  background: var(--cf-line);
+  list-style: none;
+}
+
+.abrasiveLink {
+  display: grid;
+  grid-template-columns: 7rem minmax(0, 1.1fr) minmax(0, 1fr);
+  gap: clamp(1rem, 2.5vw, 2rem);
+  align-items: center;
+  padding: 1rem clamp(1rem, 2vw, 1.5rem);
+  background: var(--cf-paper);
+  color: var(--cf-ink);
+  text-decoration: none;
+  transition: background-color 160ms ease;
+}
+
+.abrasiveLink:hover,
+.abrasiveLink:focus-visible {
+  background: var(--cf-paper-off);
+}
+
+.abrasiveLink:focus-visible {
+  outline: 2px solid var(--cf-ink);
+  outline-offset: -2px;
+}
+
+.abrasiveImage {
+  position: relative;
+  display: block;
+  aspect-ratio: 1;
+  border-radius: var(--ds-ctl-radius);
+  background: var(--surface-studio, #f1f2f4);
+}
+
+.abrasiveImage img {
+  object-fit: contain;
+  padding: 8%;
+}
+
+.abrasiveCopy {
+  display: grid;
+  gap: 0.25rem;
+}
+
+.abrasiveName {
+  font-weight: 700;
+  font-size: 1.05rem;
+}
+
+.abrasiveSubtype {
+  color: var(--cf-ink-muted);
+  font-family: var(--font-technical), var(--font-geist-mono), monospace;
+  font-size: var(--ds-font-label);
+}
+
+.abrasivePurpose {
+  color: var(--cf-ink-muted);
+  font-size: var(--ds-font-small);
+  line-height: 1.5;
+}
+
+.abrasiveRange {
+  display: grid;
+  gap: 0.6rem;
+}
+
+.abrasiveRangeLabel {
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
+  font-family: var(--font-technical), var(--font-geist-mono), monospace;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--cf-red-text, var(--cf-red));
+}
+
+.abrasiveRangeLabel small {
+  color: var(--cf-ink-faint);
+  font-size: var(--ds-font-label);
+  font-weight: 500;
+}
+
+.abrasiveScale {
+  position: relative;
+  display: block;
+  height: 0.55rem;
+  border-radius: 999px;
+  background: color-mix(in oklab, var(--cf-ink) 10%, transparent);
+}
+
+.abrasiveScaleBar {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--cf-red), color-mix(in oklab, var(--cf-red) 45%, #fff));
+}
+
+/* Osa skale poravnata sa kolonom raspona (treća kolona reda). */
+.abrasiveAxis {
+  position: relative;
+  height: 1.5rem;
+  margin-top: 0.5rem;
+  margin-left: calc(clamp(1rem, 2vw, 1.5rem) + 7rem + clamp(1rem, 2.5vw, 2rem) + (100% - 7rem - 2 * clamp(1rem, 2.5vw, 2rem) - 2 * clamp(1rem, 2vw, 1.5rem)) * 1.1 / 2.1 + clamp(1rem, 2.5vw, 2rem));
+  margin-right: clamp(1rem, 2vw, 1.5rem);
+}
+
+.abrasiveAxis span {
+  position: absolute;
+  transform: translateX(-50%);
+  color: var(--cf-ink-faint);
+  font-family: var(--font-technical), var(--font-geist-mono), monospace;
+  font-size: 0.7rem;
+  white-space: nowrap;
+}
+
+/* Reprezentativni proizvodi: 4 × 2, ista zona slike i poravnati nazivi. */
+.repGrid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1px;
+  margin: 0;
+  padding: 0;
+  border: 1px solid var(--cf-line);
+  background: var(--cf-line);
+  list-style: none;
+}
+
+.repGrid > li {
+  display: flex;
+}
+
+.repCard {
+  display: grid;
+  flex: 1 1 auto;
+  grid-template-rows: auto auto minmax(calc(2 * 1.3em), auto) auto;
+  gap: 0.5rem;
+  padding: 1rem 1rem 1.25rem;
+  background: var(--cf-paper);
+  color: var(--cf-ink);
+  text-decoration: none;
+  transition: background-color 160ms ease;
+}
+
+.repCard:hover,
+.repCard:focus-visible {
+  background: var(--cf-paper-off);
+}
+
+.repCard:focus-visible {
+  outline: 2px solid var(--cf-ink);
+  outline-offset: -2px;
+}
+
+.repImage {
+  position: relative;
+  display: block;
+  aspect-ratio: 1;
+  margin-bottom: 0.5rem;
+  border-radius: var(--ds-ctl-radius);
+  background: var(--surface-studio, #f1f2f4);
+}
+
+.repImage img {
+  object-fit: contain;
+  padding: 10%;
+}
+
+.repGroup {
+  color: var(--cf-red-text, var(--cf-red));
+  font-family: var(--font-technical), var(--font-geist-mono), monospace;
+  font-size: var(--ds-font-label);
+  letter-spacing: var(--ds-tracking-label);
+  text-transform: uppercase;
+}
+
+.repName {
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+.repMore {
+  align-self: end;
+  font-size: var(--ds-font-small);
+  font-weight: 600;
+}
+
+@media (max-width: 64rem) {
+  .heroBelow {
+    grid-template-columns: 1fr;
+    align-items: start;
+  }
+
+  .repGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .abrasiveLink {
+    grid-template-columns: 5rem minmax(0, 1fr);
+  }
+
+  .abrasiveRange {
+    grid-column: 1 / -1;
+  }
+
+  .abrasiveAxis {
+    display: none;
+  }
+}
+
+@media (max-width: 40rem) {
+  /* Telefon: kadar 4:3 iz sredine — logo i središnja grupa proizvoda ostaju. */
+  .heroPhoto {
+    aspect-ratio: 4 / 3;
+  }
+
+  .heroPhotoWrap {
+    padding-inline: 0;
+  }
+
+  .heroPhoto {
+    border-radius: 0;
+  }
+}

@@ -471,6 +471,36 @@ function withoutRemovedVariants(entry: CatalogProductEntry): CatalogProductEntry
   };
 }
 
+/**
+ * Zvanična carsystem.org kategorija po slug-u zapisa (filteri na /brendovi/carsystem).
+ * Ručni zapis koji uvezeni zapis navodi kao `relatedLegacySlug` dobija kategoriju tog zapisa.
+ */
+export function getCarsystemOfficialCategoryBySlug(): Record<string, string> {
+  const categoryBySlug: Record<string, string> = {};
+  for (const entry of entries) {
+    if (!entry.officialCategory) continue;
+    categoryBySlug[entry.slug] = entry.officialCategory;
+  }
+  for (const entry of entries) {
+    if (entry.officialCategory && entry.relatedLegacySlug && !categoryBySlug[entry.relatedLegacySlug]) {
+      categoryBySlug[entry.relatedLegacySlug] = entry.officialCategory;
+    }
+  }
+  // Ručni zapisi bez uvezenog para (pet starijih kartica): kategorija po nameni zapisa.
+  for (const [slug, category] of Object.entries(MANUAL_RECORD_CATEGORY)) {
+    categoryBySlug[slug] ??= category;
+  }
+  return categoryBySlug;
+}
+
+const MANUAL_RECORD_CATEGORY: Record<string, string> = {
+  "carsystem-git-multi-green": "Putties",
+  "carsystem-git-elastic-weiss": "Putties",
+  "carsystem-f19-brusni-diskovi": "Abrasives",
+  "carsystem-f23-brusni-diskovi": "Abrasives",
+  "carsystem-finish-serija": "Finish",
+};
+
 export function getCarsystemCatalogProducts(): CarsystemProduct[] {
   return entries.map((entry) => createCatalogProduct(withoutRemovedVariants(entry), knownSlugs));
 }

@@ -502,33 +502,43 @@ export const carsystemFamilies = [
   },
 ] as const;
 
+/*
+ * „Šta danas radite u radionici?“ (2026-10-19): po tri proizvoda za svaki
+ * zadatak, izabrana po nameni, fazi i podlozi iz zvaničnih carsystem.org
+ * stranica i kataloga 2026/27 (pregled sa izvorima:
+ * docs/carsystem/prema-poslu-2026-10-19.md). `steps` su koraci zadatka redom
+ * kartica. `confirmedSystem` je true samo kada izvor proizvođača izričito
+ * imenuje ostale proizvode iz trojke; inače su kartice reprezentativni
+ * proizvodi za korake, ne potvrđen kompatibilan sistem.
+ */
 export const carsystemUseCases = [
   {
     id: "new-part",
     label: "Pripremam novi deo",
-    title: "Stabilna osnova pre prvog sloja",
+    title: "Čist, otprašen deo pod prvim punilom",
     description:
-      "Izbor granulacije i kontrolisana priprema usklađuju površinu sa materijalom koji sledi.",
-    categories: ["Abrazivi", "Priprema površine", "Zaštita"],
+      "Novi metalni deo sa fabričkim prajmerom: odmašćivanje, otprašivanje i punilo mokro-na-mokro bez brušenja prajmera.",
+    steps: ["Odmašćivanje", "Otprašivanje", "Punilo"],
+    confirmedSystem: false,
     productSlugs: [
-      "carsystem-f23-brusni-diskovi",
-      "carsystem-f19-brusni-diskovi",
-      "carsystem-zastitno-odelo",
+      "carsystem-silicone-remover-mild",
+      "carsystem-staub-stop-super-wave",
+      "carsystem-af-21-x-pert",
     ],
-    href: carsystemCatalogHref({ phase: "priprema" }),
+    href: carsystemCatalogHref({ phase: "podloga" }),
   },
   {
     id: "dent",
     label: "Popravljam udubljenje",
-    title: "Ravnanje, brušenje, kontrola",
+    title: "Kit, brušenje i kontrola površine",
     description:
-      "Git i odgovarajući abraziv vode od popunjavanja neravnine do stabilne površine.",
-    categories: ["Kitovi", "Abrazivi", "Priprema površine"],
+      "Udubljenje se popunjava kitom, brusi od grube ka finoj granulaciji i proverava kontrolnim prahom pre punila.",
+    steps: ["Kitovanje", "Brušenje kita", "Kontrola brušenja"],
+    confirmedSystem: false,
     productSlugs: [
       "carsystem-git-multi-green",
-      "carsystem-git-elastic-weiss",
-      "carsystem-p19-brusni-diskovi",
       "carsystem-f23-brusni-diskovi",
+      "carsystem-dry-coat-2-0",
     ],
     href: carsystemCatalogHref({ program: "priprema-povrsine" }),
   },
@@ -537,85 +547,90 @@ export const carsystemUseCases = [
     label: "Maskiram vozilo",
     title: "Čiste granice i zaštićena radna zona",
     description:
-      "Potrošni materijal i zaštita pomažu da zona popravke ostane precizno definisana.",
-    categories: ["Maskiranje", "Potrošni materijal", "Zaštita"],
+      "Folija pokriva vozilo, traka drži ivice maske, a sunđerasta traka zatvara procepe vrata i haube.",
+    steps: ["Pokrivanje folijom", "Traka za ivice", "Zatvaranje procepa"],
+    confirmedSystem: false,
     productSlugs: [
-      "carsystem-zastitno-odelo",
-      "carsystem-f19-brusni-diskovi",
-      "carsystem-p19-brusni-diskovi",
+      "carsystem-masking-film-green",
+      "carsystem-master-tape-green",
+      "carsystem-foam-tape-t-soft",
     ],
     href: carsystemCatalogHref({ program: "potrosni-materijal" }),
   },
   {
     id: "single-panel",
     label: "Lakiram pojedinačni element",
-    title: "Kompaktan proces bez preskakanja pripreme",
+    title: "Mala popravka, isti redosled",
     description:
-      "Priprema ivice, maskiranje i zaštita povezuju malu popravku sa kontrolisanom aplikacijom.",
-    categories: ["Priprema", "Maskiranje", "Zaštita"],
+      "Matiranje i odmašćivanje elementa i prelazne zone, otprašivanje baze i brzi bezbojni lak za mali i srednji posao.",
+    steps: ["Matiranje i odmašćivanje", "Otprašivanje baze", "Bezbojni lak"],
+    confirmedSystem: false,
     productSlugs: [
-      "carsystem-f19-brusni-diskovi",
-      "carsystem-zastitno-odelo",
-      "carsystem-f23-brusni-diskovi",
+      "carsystem-prep-scuff",
+      "carsystem-staub-stop-water",
+      "carsystem-cc-21-x-press-five",
     ],
-    href: carsystemCatalogHref({ phase: "priprema" }),
+    href: carsystemCatalogHref({ phase: "lak" }),
   },
   {
     id: "full-paint",
     label: "Radim kompletno lakiranje",
-    title: "Uredna priprema za veliku radnu zonu",
+    title: "Ujednačena priprema velike površine",
     description:
-      "Kod većih površina ritam brušenja, maskiranja i zaštite mora ostati dosledan kroz ceo posao.",
-    categories: ["Abrazivi", "Maskiranje", "Zaštita"],
+      "Mašinsko matiranje velikih površina, zaštita točkova i bezbojni lak namenjen i lakiranju celog vozila.",
+    steps: ["Matiranje", "Maskiranje točkova", "Bezbojni lak"],
+    confirmedSystem: false,
     productSlugs: [
-      "carsystem-p19-brusni-diskovi",
-      "carsystem-zastitno-odelo",
-      "carsystem-f19-brusni-diskovi",
+      "carsystem-sanding-fleece-v-19-disc",
+      "carsystem-wheel-cover",
+      "carsystem-cc-20-x-pert",
     ],
-    href: carsystemCatalogHref({ program: "potrosni-materijal" }),
+    href: carsystemCatalogHref({ phase: "lak" }),
   },
   {
     id: "paint-defects",
     label: "Uklanjam greške u laku",
-    title: "Kontrolisana korekcija bez grubih prelaza",
+    title: "Lokalna korekcija bez grubih prelaza",
     description:
-      "Fina granulacija i završna obrada vode od lokalne nepravilnosti do ujednačene površine.",
-    categories: ["Fina obrada", "Abrazivi", "Poliranje"],
+      "Uključak ili curenje se lokalno skida, mesto se mokro izravnava finom granulacijom, a tragovi brušenja uklanjaju pastom.",
+    steps: ["Skidanje greške", "Mokro izravnavanje", "Abrazivna pasta"],
+    confirmedSystem: false,
     productSlugs: [
-      "carsystem-finish-serija",
-      "carsystem-f23-brusni-diskovi",
-      "carsystem-f19-brusni-diskovi",
+      "carsystem-proflex-pluto",
+      "carsystem-proflex-jupiter-soft-h2o-77-mm",
+      "carsystem-compound-x1500-hc",
     ],
     href: carsystemCatalogHref({ program: "poliranje" }),
   },
   {
     id: "polish",
     label: "Poliram vozilo",
-    title: "Od fine korekcije do završnog sjaja",
+    title: "Od abrazivne paste do završnog sjaja",
     description:
-      "Završna serija i polirni program prate stanje laka i željeni nivo korekcije.",
-    categories: ["Fina obrada", "Poliranje", "Čišćenje"],
+      "Abrazivna pasta sa jastučićem koji proizvođač za nju preporučuje, zatim završni korak protiv holograma na tamnim bojama.",
+    steps: ["Abrazivna pasta", "Polirni jastučić", "Završna pasta"],
+    confirmedSystem: true,
     productSlugs: [
-      "carsystem-finish-serija",
-      "carsystem-f23-brusni-diskovi",
-      "carsystem-f19-brusni-diskovi",
+      "carsystem-polish-c-07-cut",
+      "carsystem-polish-foam-yellow",
+      "carsystem-polish-c-30-finish",
     ],
     href: carsystemCatalogHref({ program: "poliranje" }),
   },
   {
     id: "workshop",
     label: "Opremam radionicu",
-    title: "Potrošni program koji prati dnevni ritam",
+    title: "Oprema koja prati ceo tok rada",
     description:
-      "Zaštita, maskiranje i potvrđene abrazivne serije čine praktičnu osnovu radnog mesta.",
-    categories: ["Zaštita", "Maskiranje", "Abrazivi"],
+      "Stalak za papir za maskiranje, držač delova za kitovanje, lakiranje i poliranje, i čaše za tačno mešanje materijala.",
+    steps: ["Maskiranje", "Držanje delova", "Mešanje"],
+    confirmedSystem: false,
     productSlugs: [
-      "carsystem-zastitno-odelo",
-      "carsystem-p19-brusni-diskovi",
-      "carsystem-f19-brusni-diskovi",
-      "carsystem-f23-brusni-diskovi",
+      "carsystem-paper-trolley",
+      "carsystem-multi-stand",
+      "carsystem-multi-mix-cup",
     ],
-    href: carsystemCatalogHref(),
+    href: carsystemCatalogHref({ program: "oprema" }),
   },
 ] as const;
 
@@ -635,70 +650,24 @@ export const carsystemProductOrder = [
 ] as const;
 
 /**
- * Realna kategorijska širina Carsystem asortimana (10 kategorija, prema
- * zvaničnoj carsystem.org taksonomiji) — informativni prikaz obima programa,
- * ne filter vezan za lokalno uvezenih 9 SKU. Svaka kategorija vodi na opšti
- * filtrirani katalog dok ne postoje potvrđeni lokalni zapisi po kategoriji.
+ * Filteri proizvoda (2026-10-19): deset grupa iz reda „Carsystem asortiman
+ * pokriva“ su sada sami filteri. Svaka je vezana za ZVANIČNU kategoriju sa
+ * carsystem.org (`officialCategory` u data/carsystem-catalog-products.generated.json),
+ * pa uključuje sve artikle te kategorije, ne ručno izabran podskup. Raniji drugi
+ * red (Sve / Priprema / Reparacija / Lakiranje / Završna obrada / Zaštita) je
+ * uklonjen jer je duplirao ovu kontrolu.
  */
-export const carsystemRangeCategories = [
-  "Brušenje",
-  "Kitovanje",
-  "Maskiranje",
-  "Lakiranje",
-  "Završna obrada",
-  "Lepljenje i premazi",
-  "Čišćenje",
-  "Zaštita na radu",
-  "Pribor za lakiranje",
-  "Promotivni materijal",
-] as const;
-
-export const carsystemProductFilters = [
-  {
-    id: "all",
-    label: "Sve",
-    productSlugs: carsystemProductOrder,
-  },
-  {
-    id: "preparation",
-    label: "Priprema",
-    productSlugs: [
-      "carsystem-f23-brusni-diskovi",
-      "carsystem-p19-brusni-diskovi",
-      "carsystem-f19-brusni-diskovi",
-      "carsystem-p23-brusni-diskovi",
-    ],
-  },
-  {
-    id: "repair",
-    label: "Reparacija",
-    productSlugs: [
-      "carsystem-git-multi-green",
-      "carsystem-git-elastic-weiss",
-      "carsystem-soft-plus-git",
-    ],
-  },
-  {
-    id: "painting",
-    label: "Lakiranje",
-    productSlugs: [
-      "carsystem-zastitno-odelo",
-      "carsystem-f19-brusni-diskovi",
-    ],
-  },
-  {
-    id: "finish",
-    label: "Završna obrada",
-    productSlugs: [
-      "carsystem-finish-serija",
-      "carsystem-f23-brusni-diskovi",
-    ],
-  },
-  {
-    id: "protection",
-    label: "Zaštita",
-    productSlugs: ["carsystem-zastitno-odelo"],
-  },
+export const carsystemRangeFilters = [
+  { id: "brusenje", label: "Brušenje", officialCategory: "Abrasives" },
+  { id: "kitovanje", label: "Kitovanje", officialCategory: "Putties" },
+  { id: "maskiranje", label: "Maskiranje", officialCategory: "Masking" },
+  { id: "lakiranje", label: "Lakiranje", officialCategory: "Painting" },
+  { id: "zavrsna-obrada", label: "Završna obrada", officialCategory: "Finish" },
+  { id: "lepljenje-i-premazi", label: "Lepljenje i premazi", officialCategory: "Bonding & Sealing" },
+  { id: "ciscenje", label: "Čišćenje", officialCategory: "Cleaning" },
+  { id: "zastita-na-radu", label: "Zaštita na radu", officialCategory: "Personal Safety" },
+  { id: "pribor-za-lakiranje", label: "Pribor za lakiranje", officialCategory: "Painting supplies" },
+  { id: "promotivni-materijal", label: "Promotivni materijal", officialCategory: "Merchandising Materials" },
 ] as const;
 
 export const carsystemDocumentation = {

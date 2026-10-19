@@ -1198,3 +1198,369 @@
 :global([data-ds="a"]) .norbinPage .originSection a:focus-visible {
   outline-color: var(--nb-white);
 }
+
+/* =========================================================================
+ * Dorada 2026-10-19
+ * ========================================================================= */
+
+/* Hero: dostavljeni baner u desnoj koloni; kadar drži ukrštanje traka i lice. */
+.heroBanner {
+  position: relative;
+  aspect-ratio: 16 / 11;
+  overflow: hidden;
+  border: 1px solid var(--nb-line);
+  background: #ffffff;
+}
+
+.heroBanner img {
+  object-fit: cover;
+  object-position: 62% 70%;
+}
+
+/* „Naš program“: redovi su dugmad izbora, pregled je u panelu fiksne visine. */
+.stockedList button {
+  display: grid;
+  width: 100%;
+  grid-template-columns: 7.5rem minmax(0, 1fr) auto;
+  gap: 1rem;
+  align-items: baseline;
+  padding: 0.85rem 0.6rem;
+  border: 0;
+  border-bottom: 1px solid var(--nb-line);
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+  font: inherit;
+  text-align: left;
+  transition: background-color 160ms ease;
+}
+
+.stockedList button strong {
+  font-family: var(--font-technical), monospace;
+  font-size: 0.9rem;
+}
+
+.stockedList button small {
+  color: var(--nb-muted);
+  font-size: 0.75rem;
+}
+
+.stockedList button:hover,
+.stockedList button[data-active] {
+  background: var(--nb-paper);
+}
+
+.stockedList button[data-active] {
+  box-shadow: inset 3px 0 0 var(--nb-blue);
+}
+
+.stockedList button:focus-visible {
+  outline: 2px solid var(--nb-blue-text);
+  outline-offset: -2px;
+}
+
+.programLayout .systemPanel {
+  position: sticky;
+  top: calc(var(--brand-section-header-offset, 0px) + var(--brand-section-nav-height, 3.75rem) + 1.5rem);
+  display: grid;
+  grid-template-rows: 15rem auto 1fr;
+  gap: 1.25rem;
+  align-self: start;
+  min-height: 30rem;
+}
+
+.previewMedia {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--nb-line);
+  background: var(--nb-surface);
+}
+
+.previewMedia img {
+  object-fit: contain;
+  padding: 8%;
+  opacity: 0;
+  transition: opacity 180ms ease;
+}
+
+.previewMedia img[data-visible] {
+  opacity: 1;
+}
+
+.previewNoImage {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-content: center;
+  gap: 0.4rem;
+  padding: 1.5rem;
+  color: var(--nb-muted);
+  text-align: center;
+}
+
+.previewNoImage strong {
+  color: var(--nb-ink);
+  font-family: var(--font-technical), monospace;
+  font-size: 1.6rem;
+}
+
+.previewNoImage span {
+  font-size: var(--ds-font-small);
+}
+
+.previewCopy {
+  display: grid;
+  gap: 0.35rem;
+  align-content: start;
+}
+
+.norbinPage .programLayout .systemPanel .previewCopy p {
+  margin: 0;
+}
+
+.norbinPage .programLayout .systemPanel .previewCode {
+  color: var(--nb-blue-text);
+  font-family: var(--font-technical), monospace;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.norbinPage .programLayout .systemPanel .previewName {
+  color: var(--nb-ink);
+  font-size: 1.05rem;
+  font-weight: 600;
+  line-height: 1.35;
+}
+
+.norbinPage .programLayout .systemPanel .previewNote {
+  align-self: end;
+  margin: 0;
+  padding-top: 1rem;
+  border-top: 1px solid var(--nb-line);
+  font-size: var(--ds-font-small);
+}
+
+.previewNote a {
+  color: var(--nb-blue-text);
+  font-weight: 600;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .previewMedia img,
+  .stockedList button {
+    transition: none;
+  }
+}
+
+/* Tehnički podaci: jedna matrica (podatak × proizvod), na telefonu horizontalni skrol. */
+.techTableWrap + .techNoData {
+  margin-top: 1rem;
+}
+
+.techTableWrap {
+  margin-top: clamp(1.5rem, 3vw, 2.25rem);
+  overflow-x: auto;
+  border: 1px solid var(--nb-line);
+}
+
+.techTableWrap:focus-visible {
+  outline: 2px solid var(--nb-blue-text);
+  outline-offset: 2px;
+}
+
+.techMatrix {
+  width: 100%;
+  min-width: 56rem;
+  border-collapse: collapse;
+  font-size: 0.8rem;
+  line-height: 1.45;
+}
+
+.techMatrix th,
+.techMatrix td {
+  padding: 0.6rem 0.75rem;
+  border-bottom: 1px solid var(--nb-line);
+  text-align: left;
+  vertical-align: top;
+}
+
+.techMatrix thead th {
+  background: var(--nb-paper);
+  font-weight: 600;
+}
+
+.techMatrix thead th strong {
+  display: block;
+  font-family: var(--font-technical), monospace;
+  font-size: 0.82rem;
+}
+
+.techMatrix thead th span {
+  display: block;
+  color: var(--nb-muted);
+  font-size: 0.72rem;
+  font-weight: 400;
+}
+
+.techMatrix tbody th {
+  position: sticky;
+  left: 0;
+  background: var(--nb-surface);
+  color: var(--nb-muted);
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.techMatrix thead th:first-child {
+  position: sticky;
+  left: 0;
+  z-index: 1;
+}
+
+.techMatrix td a {
+  color: var(--nb-blue-text);
+  white-space: nowrap;
+}
+
+.techMatrix tbody tr:last-child > * {
+  border-bottom: 0;
+}
+
+/* Dokumentacija: tabela proizvod → TDS → SDS. */
+.docTableWrap {
+  margin-top: clamp(1.5rem, 3vw, 2.25rem);
+  border: 1px solid var(--nb-line);
+}
+
+.docTable {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.85rem;
+}
+
+.docTable th,
+.docTable td {
+  padding: 0.7rem 0.9rem;
+  border-bottom: 1px solid var(--nb-line);
+  text-align: left;
+  vertical-align: middle;
+}
+
+.docTable thead th {
+  background: var(--nb-paper);
+  color: var(--nb-muted);
+  font-size: var(--ds-font-label);
+  font-weight: 600;
+  letter-spacing: var(--ds-tracking-label);
+  text-transform: uppercase;
+}
+
+.docTable tbody th strong {
+  display: inline-block;
+  min-width: 5.5rem;
+  font-family: var(--font-technical), monospace;
+}
+
+.docTable tbody th span {
+  color: var(--nb-muted);
+  font-weight: 400;
+}
+
+.docTable tbody tr:last-child > * {
+  border-bottom: 0;
+}
+
+.docLink {
+  display: inline-grid;
+  gap: 0.1rem;
+  color: var(--nb-blue-text);
+  text-decoration: none;
+}
+
+.docLink span {
+  font-weight: 600;
+}
+
+.docLink small {
+  color: var(--nb-muted);
+  font-size: 0.72rem;
+}
+
+.docLink:hover span,
+.docLink:focus-visible span {
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+.docMissing {
+  color: var(--nb-muted);
+  font-size: 0.8rem;
+}
+
+/* Poreklo: pravougaona fotografija bez kose ivice. */
+.originGrid .originMedia {
+  margin: 0;
+  aspect-ratio: 1254 / 1157;
+  clip-path: none;
+  overflow: hidden;
+  border: 1px solid rgb(255 255 255 / 0.16);
+  background: rgb(255 255 255 / 0.06);
+}
+
+.originGrid .originMedia img {
+  object-fit: cover;
+}
+
+@media (max-width: 64rem) {
+  .heroBanner {
+    aspect-ratio: 4 / 3;
+  }
+
+  .heroBanner img {
+    object-position: 78% 78%;
+  }
+
+  .programLayout .systemPanel {
+    position: static;
+    grid-template-rows: 12rem auto auto;
+    min-height: 0;
+  }
+
+  .stockedList button {
+    grid-template-columns: 6rem minmax(0, 1fr);
+  }
+
+  .stockedList button small {
+    grid-column: 2;
+  }
+}
+
+@media (max-width: 40rem) {
+  .docTable thead {
+    display: none;
+  }
+
+  .docTable,
+  .docTable tbody,
+  .docTable tr,
+  .docTable th,
+  .docTable td {
+    display: block;
+  }
+
+  .docTable tbody tr {
+    padding: 0.75rem 0.9rem;
+    border-bottom: 1px solid var(--nb-line);
+  }
+
+  .docTable tbody th,
+  .docTable tbody td {
+    padding: 0.2rem 0;
+    border: 0;
+  }
+
+  .docTable tbody td {
+    display: inline-block;
+    margin-right: 1.25rem;
+  }
+}

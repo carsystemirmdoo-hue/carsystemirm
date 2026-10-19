@@ -4,6 +4,8 @@ import { BrandSectionNav } from "@/components/brand/BrandSectionNav";
 import { Footer } from "@/components/layout/Footer";
 import type { CarsystemProduct } from "@/lib/carsystem-data";
 import { NorbinGreyShade } from "./NorbinGreyShade";
+import { NorbinProgramExplorer, type NorbinProgramItem } from "./NorbinProgramExplorer";
+import { norbinTechnicalProducts, type NorbinDocument } from "./norbinTechnicalData";
 import { NorbinRatioRow } from "./NorbinRatioRow";
 import {
   norbinCodeFamilies,
@@ -105,12 +107,15 @@ function NorbinHero() {
             </div>
           </div>
 
-          <div className={styles.heroCrossing}>
-            <span className={`${styles.heroRibbon} ${styles.heroRibbonBlue}`} aria-hidden="true" />
-            <span className={`${styles.heroRibbon} ${styles.heroRibbonGold}`} aria-hidden="true" />
-            <div className={styles.heroPhotoWedge}>
-              <div className={styles.heroPhotoWedgeEmpty} aria-hidden="true" />
-            </div>
+          {/* Baner brenda (dostavio vlasnik 2026-10-19): trake i fotografija desno, tekst levo na podlozi stranice. */}
+          <div className={styles.heroBanner}>
+            <Image
+              src="/images/brands/norbin/hero/norbin-index-banner-1920-v1.jpg"
+              alt="Norbin trake brenda i lakirer koji proverava završni sloj na vozilu"
+              fill
+              priority
+              sizes="(min-width: 64rem) 52vw, 100vw"
+            />
           </div>
         </div>
       </div>
@@ -289,10 +294,21 @@ function GreyShadeSection() {
 }
 
 function OurProgramSection({ products }: { products: CarsystemProduct[] }) {
-  const hasPhoto = (product: CarsystemProduct) =>
-    Boolean(product.productImage && !product.productImage.src.includes("placeholder-product"));
-  const pictured = products.filter(hasPhoto);
-  const unpictured = products.filter((product) => !hasPhoto(product));
+  const items: NorbinProgramItem[] = products.map((product) => {
+    const image =
+      product.productImage && !product.productImage.src.includes("placeholder-product")
+        ? { src: product.productImage.src, alt: product.productImage.alt }
+        : null;
+    return {
+      slug: product.slug,
+      code: product.publicCode ?? product.sku,
+      name: product.name,
+      packages: (product.packages ?? []).map((pkg) => pkg.label).filter(Boolean),
+      href: productCanonicalHref(product),
+      image,
+    };
+  });
+
   return (
     <section
       id="nas-program"
@@ -305,70 +321,38 @@ function OurProgramSection({ products }: { products: CarsystemProduct[] }) {
           Šta zaista možete poručiti kod nas.
         </h2>
         <p className={styles.sectionLead}>
-          Proizvođač u Norbin programu vodi 13 proizvoda; ispod su svi,
-          a N15-020 u oba pakovanja. U našoj ponudi je danas potvrđen
-          N15-020 — dostupnost ostalih artikala potvrđujemo kroz upit.
+          Pređite mišem, tasterom Tab ili dodirom preko reda — desno je
+          pregled proizvoda sa šifrom, pakovanjem i vezom.
         </p>
 
-        {/* Kartica samo uz fotografiju; ostali artikli su lista — ne siva polja „NORBIN“. */}
-        {pictured.length > 0 ? (
-          <div className={styles.stockedGrid}>
-            {pictured.map((product) => (
-              <Link
-                className={styles.stockedCard}
-                href={productCanonicalHref(product)}
-                key={product.slug}
-              >
-                <div className={styles.stockedMedia}>
-                  <Image
-                    src={product.productImage!.src}
-                    alt={product.productImage!.alt}
-                    fill
-                    sizes="(min-width: 64rem) 18vw, 42vw"
-                  />
-                </div>
-                <div className={styles.stockedCopy}>
-                  <strong>{product.publicCode ?? product.sku}</strong>
-                  <small>{product.packages?.[0]?.label ?? product.name}</small>
-                </div>
-              </Link>
-            ))}
-          </div>
-        ) : null}
-
-        <div className={styles.programLayout}>
-          <ul className={styles.stockedList} aria-label="Ostali Norbin artikli">
-            {unpictured.map((product) => (
-              <li key={product.slug}>
-                <Link href={productCanonicalHref(product)}>
-                  <strong>{product.publicCode ?? product.sku}</strong>
-                  <span>{product.name}</span>
-                  <small>{product.packages?.[0]?.label ?? ""}</small>
-                </Link>
-              </li>
-            ))}
-          </ul>
-
-          <div className={styles.systemPanel}>
-            <p>
-              Norbin program obuhvata 13 proizvoda u pet familija odnosa
-              mešanja. Dostupnost artikala koji nisu u našoj trenutnoj ponudi
-              proveravamo na upit.
-            </p>
-            <p>
-              <Link className={styles.buttonText} href="/kontakt?tema=proizvod&brend=norbin">
-                Pošaljite upit za drugi Norbin artikal →
-              </Link>
-            </p>
-          </div>
-        </div>
+        <NorbinProgramExplorer items={items} />
       </div>
     </section>
   );
 }
 
+const TECH_FIELDS = [
+  "Odnos mešanja",
+  "Učvršćivač",
+  "Razređivač",
+  "Vreme upotrebe (20 °C)",
+  "Broj slojeva",
+  "Debljina suvog filma",
+  "Sušenje 20 °C",
+  "Sušenje 60 °C",
+  "Brušenje",
+  "VOC",
+] as const;
+
 function TechnicalSection() {
-  const withTds = norbinRatios.map((row) => row.base);
+  // Pune tehničke listove imaju lakovi, punila, prajmer i kit; ostali imaju kratke listove.
+  const detailed = norbinTechnicalProducts.filter((product) =>
+    product.rows.some((row) => row.label === "Odnos mešanja"),
+  );
+  const shortSheets = norbinTechnicalProducts.filter((product) => !detailed.includes(product));
+  const fields = TECH_FIELDS.filter((field) =>
+    detailed.some((product) => product.rows.some((row) => row.label === field)),
+  );
 
   return (
     <section
@@ -381,39 +365,86 @@ function TechnicalSection() {
         <h2 className={styles.sectionTitle} id="norbin-tech-title">
           Podaci iz tehničkih listova proizvođača.
         </h2>
+        <p className={styles.sectionLead}>
+          Vrednosti su prepisane iz aktuelnih tehničkih listova sa
+          norbin-paint.com; polje koje list ne navodi ostaje prazno (—).
+          Postupak uvek potvrdite u listu za tačan proizvod.
+        </p>
 
-        <div className={styles.techLayout}>
-          {withTds.map((code) => (
-            <details className={styles.techItem} key={code}>
-              <summary>{code}</summary>
-              <dl className={styles.techTable}>
-                <div>
-                  <dt>Šifra</dt>
-                  <dd>{code}</dd>
-                </div>
-                <div>
-                  <dt>Odnos mešanja</dt>
-                  <dd>
-                    {norbinRatios.find((row) => row.base === code)?.ratio}
-                  </dd>
-                </div>
-              </dl>
-            </details>
-          ))}
-          <p className={styles.techNoData}>
-            Za ostale proizvode u programu proizvođač ne objavljuje poseban
-            tehnički list — podaci se nalaze u listu proizvoda sa kojim se
-            mešaju (pogledajte odeljak Odnos, iznad).
-          </p>
+        <div className={styles.techTableWrap} role="region" aria-label="Tabela tehničkih podataka" tabIndex={0}>
+          <table className={styles.techMatrix}>
+            <thead>
+              <tr>
+                <th scope="col">Podatak</th>
+                {detailed.map((product) => (
+                  <th scope="col" key={product.code}>
+                    <strong>{product.code}</strong>
+                    <span>{product.name.replace(/^NORBIN\s+/i, "")}</span>
+                  </th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              {fields.map((field) => (
+                <tr key={field}>
+                  <th scope="row">{field}</th>
+                  {detailed.map((product) => {
+                    const row = product.rows.find((item) => item.label === field);
+                    return <td key={product.code}>{row ? row.value : "—"}</td>;
+                  })}
+                </tr>
+              ))}
+              <tr>
+                <th scope="row">Izvor</th>
+                {detailed.map((product) => (
+                  <td key={product.code}>
+                    {product.tds ? (
+                      <a href={product.tds.url} target="_blank" rel="noopener noreferrer">
+                        TDS {product.tds.version ?? ""} ↗
+                      </a>
+                    ) : (
+                      "—"
+                    )}
+                  </td>
+                ))}
+              </tr>
+            </tbody>
+          </table>
         </div>
+
+        <p className={styles.techNoData}>
+          Za učvršćivače, razređivač i silikon-čistač (
+          {shortSheets.map((product) => product.code).join(", ")}) proizvođač
+          objavljuje samo kratke listove na turskom jeziku, sa namenom,
+          uslovima skladištenja i rokom trajanja; odnos mešanja je u listu
+          proizvoda sa kojim se mešaju (odeljak Odnos, iznad).
+        </p>
       </div>
     </section>
   );
 }
 
-function DocumentationSection() {
-  const groups = norbinRatios.map((row) => row.base);
+function DocumentLink({ label, document }: { label: string; document: NorbinDocument | null }) {
+  if (!document) {
+    return (
+      <span className={styles.docMissing}>
+        Nije dostupan ·{" "}
+        <Link href="/kontakt?tema=dokumentacija&brend=norbin">upit</Link>
+      </span>
+    );
+  }
+  return (
+    <a className={styles.docLink} href={document.url} target="_blank" rel="noopener noreferrer">
+      <span>{label} ↗</span>
+      <small>
+        {document.language}
+        {document.version ? ` · ${document.version}` : ""}
+      </small>
+    </a>
+  );
+}
 
+function DocumentationSection() {
   return (
     <section
       id="dokumentacija"
@@ -425,25 +456,37 @@ function DocumentationSection() {
         <h2 className={styles.sectionTitle} id="norbin-docs-title">
           Tehnički i bezbednosni listovi.
         </h2>
+        <p className={styles.sectionLead}>
+          Svaki link vodi na PDF proizvođača za tačan proizvod. Dokumenti na
+          srpskom jeziku nisu objavljeni.
+        </p>
 
-        <div className={styles.docGroups}>
-          {groups.map((code) => (
-            <div className={styles.docGroup} key={code}>
-              <h3>{code}</h3>
-              <ul>
-                <li>
-                  <a href="https://www.norbin-paint.com/" target="_blank" rel="noreferrer">
-                    Tehnički list ↗
-                  </a>
-                </li>
-                <li>
-                  <a href="https://www.norbin-paint.com/" target="_blank" rel="noreferrer">
-                    Bezbednosni list ↗
-                  </a>
-                </li>
-              </ul>
-            </div>
-          ))}
+        <div className={styles.docTableWrap}>
+          <table className={styles.docTable}>
+            <thead>
+              <tr>
+                <th scope="col">Proizvod</th>
+                <th scope="col">Tehnički list</th>
+                <th scope="col">Bezbednosni list</th>
+              </tr>
+            </thead>
+            <tbody>
+              {norbinTechnicalProducts.map((product) => (
+                <tr key={product.code}>
+                  <th scope="row">
+                    <strong>{product.code}</strong>
+                    <span>{product.name.replace(/^NORBIN\s+/i, "")}</span>
+                  </th>
+                  <td data-label="Tehnički list">
+                    <DocumentLink label="Tehnički list" document={product.tds} />
+                  </td>
+                  <td data-label="Bezbednosni list">
+                    <DocumentLink label="Bezbednosni list" document={product.sds} />
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
       </div>
     </section>
@@ -481,9 +524,16 @@ function OriginSection() {
             </div>
           </div>
 
-          <div className={styles.originMedia}>
-            <div className={styles.originMediaEmpty} aria-hidden="true" />
-          </div>
+          {/* Ambijentalna fotografija brenda (dostavio vlasnik 2026-10-19), ne prikaz
+              tačne šifre ili svojstava proizvoda. Original: review-assets/supplied/norbin-2026-10-19. */}
+          <figure className={styles.originMedia}>
+            <Image
+              src="/images/brands/norbin/origin/norbin-paint-hardener-cans-1254x1157.png"
+              alt="Limenke Norbin laka i učvršćivača u kutiji"
+              fill
+              sizes="(min-width: 64rem) 40vw, 100vw"
+            />
+          </figure>
         </div>
       </div>
     </section>

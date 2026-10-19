@@ -199,7 +199,7 @@ export default withAuth(async function middleware(request) {
      * koja pri neuspehu briše kolačić, pa petlje nema.
      */
     if (
-      process.env.CUSTOMER_REMEMBER_ME === "1" &&
+      process.env.CUSTOMER_REMEMBER_DISABLED !== "1" &&
       (request.cookies.has("cs_remember") || request.cookies.has("__Host-cs_remember"))
     ) {
       const resume = back

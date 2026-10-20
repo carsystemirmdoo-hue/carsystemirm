@@ -486,3 +486,8 @@
   color: inherit; font-size: 0.9rem; font-weight: 600;
   text-decoration: underline; text-decoration-color: color-mix(in oklab, currentColor 40%, transparent); text-underline-offset: 0.3em;
 }
+/* Kvačica izabrane baze gore desno (uz šifru), da red pakovanja i završnice
+   ima punu širinu kartice i ne skraćuje se („Metallic“, „Converter“). */
+.card { padding-right: 0.7rem; }
+.cardBody strong { padding-right: 1.6rem; }
+.activeTick { top: 0.55rem; bottom: auto; }

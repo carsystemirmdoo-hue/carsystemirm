@@ -1,7 +1,8 @@
 "use client";
 
 import { matchesPhase } from "@/lib/catalog/phase-match.mjs";
-import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
+import { orderPaintCategory } from "@/lib/catalog/paint-priority.mjs";
+import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState, type ReactNode } from "react";
 import { FOR_YOU_EVENT, type ForYouRanking } from "@/components/catalog/CatalogForYou";
 import { personalOrder } from "@/lib/customers/forYouRules.mjs";
 import { usePathname, useSearchParams } from "next/navigation";
@@ -363,9 +364,16 @@ export function CatalogExplorer({
   brands,
   programs,
   phases,
+  categoryLinks,
 }: {
   /** Family + standalone entities — what browse lists. */
   canonical: CatalogListingEntity[];
+  /**
+   * Blok „Glavne kategorije“ (R-M stranice po tehničkoj nameni). Prikazuje se
+   * samo dok kategorija nije izabrana i dok filteri ne isključuju R-M — inače
+   * je stajao iznad, npr. abraziva, i pokazivao boje i lakove (2026-10-20).
+   */
+  categoryLinks?: ReactNode;
   brands: CarsystemBrand[];
   programs: ProgramGroup[];
   phases: RefinishPhase[];
@@ -725,17 +733,13 @@ export function CatalogExplorer({
     );
   }, [currentUrlFilters, pathname, searchParamsKey]);
 
-  const filteredProducts = useMemo(() => {
-    /*
-     * Bez upita katalog prikazuje canonical entitete: 41 porodicu i 117
-     * samostalnih proizvoda, u kuriranom redosledu.
-     *
-     * Sa upitom, redosled dolazi iz engine-a — rangiranje je „Preporučeno" kada
-     * postoji pretraga. Varijante tada ulaze u listu, pa konkretan SKU, nijansa
-     * ili pakovanje i dalje vode na svoju stranicu, dok browse i dalje ne
-     * prikazuje istu porodicu desetinama puta.
-     */
-    const pool = searchEnabled
+  /*
+   * Skup iz kog filteri biraju: canonical entiteti bez upita, rangirani zapisi
+   * engine-a sa upitom (varijante ulaze u listu, pa konkretan SKU, nijansa ili
+   * pakovanje vode na svoju stranicu).
+   */
+  const searchPool = useMemo(() => {
+    return searchEnabled
       ? (searchResult?.records ?? [])
           .map((record) => {
             if (record.kind === "variant") {
@@ -748,8 +752,11 @@ export function CatalogExplorer({
           .filter((entity): entity is CatalogListingEntity => entity !== null)
       : canonical;
 
-    return pool.filter((product) => {
-      if (brandSlug && !brandMatches(brandSlug, product.brandSlug)) return false;
+  }, [canonical, canonicalById, familyById, searchEnabled, searchResult]);
+
+  /** Svi aktivni filteri osim proizvođača — od njih zavisi i izbor proizvođača. */
+  const matchesNonBrandFilters = useCallback(
+    (product: CatalogListingEntity) => {
       if (categorySlug && !product.categorySlugs.includes(categorySlug)) return false;
       if (programSlug && product.programSlug !== programSlug) return false;
       if (
@@ -769,29 +776,61 @@ export function CatalogExplorer({
         return false;
       }
       if (finish && product.finish !== finish) return false;
-
       return true;
-    });
-  }, [
-    activeModuleConfig,
-    brandMatches,
-    brandSlug,
-    canonical,
-    canonicalById,
-    categorySlug,
-    familyById,
-    phaseSlug,
-    programSlug,
-    rmCategory,
-    rmSeries,
-    rmSystem,
-    searchEnabled,
-    searchResult,
-    typeTag,
-    productLine,
-    technicalCategory,
-    finish,
-  ]);
+    },
+    [
+      activeModuleConfig,
+      categorySlug,
+      finish,
+      phaseSlug,
+      productLine,
+      programSlug,
+      rmCategory,
+      rmSeries,
+      rmSystem,
+      technicalCategory,
+      typeTag,
+    ],
+  );
+
+  const nonBrandMatches = useMemo(
+    () => searchPool.filter(matchesNonBrandFilters),
+    [matchesNonBrandFilters, searchPool],
+  );
+
+  /*
+   * Proizvođači koji imaju bar jedan rezultat za aktivnu kategoriju, pretragu i
+   * ostale filtere (2026-10-20). Računa se nad CELIM skupom, ne nad učitanom
+   * stranom, i bez izabranog proizvođača — da korisnik može da pređe na drugog.
+   * Brend ponuđen u okviru drugog (RUPES → Carsystem) računa se matičnom.
+   */
+  const availableBrandSlugs = useMemo(() => {
+    const available = new Set<string>();
+    for (const product of nonBrandMatches) {
+      available.add(product.brandSlug);
+      const parent = brandBySlug.get(product.brandSlug)?.offeredWithin;
+      if (parent) available.add(parent);
+    }
+    return available;
+  }, [brandBySlug, nonBrandMatches]);
+
+  /** Traka i filter proizvođača: samo oni sa rezultatima, uz izabranog (da ostane vidljiv). */
+  const railBrands = useMemo(
+    () =>
+      listedBrands.filter(
+        (brand) => availableBrandSlugs.has(brand.slug) || brand.slug === parentBrandSlug,
+      ),
+    [availableBrandSlugs, listedBrands, parentBrandSlug],
+  );
+  const selectedBrandUnavailable = Boolean(parentBrandSlug) && !availableBrandSlugs.has(parentBrandSlug);
+
+  const filteredProducts = useMemo(
+    () =>
+      brandSlug
+        ? nonBrandMatches.filter((product) => brandMatches(brandSlug, product.brandSlug))
+        : nonBrandMatches,
+    [brandMatches, brandSlug, nonBrandMatches],
+  );
 
   /*
    * Lični redosled („Preporučeno za Vas“): podrazumevan za prijavljenog kupca sa dovoljno istorije,
@@ -817,9 +856,13 @@ export function CatalogExplorer({
      * relevantnost pri pretrazi. Oba stižu već poređana (podaci, pa engine), pa
      * se ovde namerno ne re-sortira — svako dodatno sortiranje bi upravo
      * poništilo rangiranje zbog kog pretraga i postoji.
+     *
+     * Izuzetak (2026-10-20): u „Boje i lakovi“ bez pretrage ključni sistemi
+     * idu na početak (R-M izvedbe, kristal baze, Baslac sistemi, pa lakovi).
      */
+    if (!searchEnabled && categorySlug === "boje") return orderPaintCategory(filteredProducts);
     return filteredProducts;
-  }, [effectiveSort, filteredProducts, personal, searchEnabled]);
+  }, [categorySlug, effectiveSort, filteredProducts, personal, searchEnabled]);
 
   paginationKeyRef.current = paginationKey;
   filteredProductsLengthRef.current = sortedProducts.length;
@@ -1110,12 +1153,20 @@ export function CatalogExplorer({
     Boolean(finish) ||
     Boolean(activeModule);
 
+  const showCategoryLinks =
+    Boolean(categoryLinks) &&
+    !categorySlug &&
+    !query.trim() &&
+    (!parentBrandSlug || parentBrandSlug === "rm") &&
+    availableBrandSlugs.has("rm");
+
   return (
     <>
+      {showCategoryLinks ? categoryLinks : null}
       <div className={styles.manufacturerRail}>
         <ManufacturerRail
-          brands={listedBrands}
-          description="Izbor proizvođača zadržava aktivnu fazu, kategoriju, pretragu i ostale kompatibilne filtere."
+          brands={railBrands}
+          description="Prikazani su proizvođači koji imaju proizvode za aktivnu fazu, kategoriju, pretragu i ostale filtere."
           id="catalog-manufacturers"
           mode="filter"
           selectedSlug={parentBrandSlug}
@@ -1166,6 +1217,30 @@ export function CatalogExplorer({
         </section>
       ) : null}
 
+      {/*
+        Izabran proizvođač nema rezultata posle promene kategorije, faze ili
+        pretrage (npr. R-M u abrazivima): umesto praznog rezultata bez objašnjenja
+        kažemo zašto i nudimo povratak na sve proizvođače.
+      */}
+      {selectedBrandUnavailable ? (
+        <section className={styles.activeCategoryBar} aria-label="Proizvođač bez rezultata" role="status">
+          <button
+            className={`${styles.activeCategoryChip} cs-interactive-surface`}
+            type="button"
+            data-cursor="button"
+            data-motion-surface
+            onClick={() => selectBrand("")}
+          >
+            <span>Prikažite sve proizvođače</span>
+            <span aria-hidden="true">×</span>
+          </button>
+          <p className={styles.activeCategoryHint}>
+            {brandBySlug.get(parentBrandSlug)?.name ?? "Izabrani proizvođač"} nema proizvoda
+            {activeCategory ? ` u kategoriji „${activeCategory.label}“` : " za izabrane filtere"}.
+          </p>
+        </section>
+      ) : null}
+
       <section className={styles.phaseRail} aria-label="Faze refinish procesa">
         <div className={styles.phaseTabs}>
           {phaseTabs.map((phaseTab) => {
@@ -1213,7 +1288,7 @@ export function CatalogExplorer({
         <div className={styles.filtersSlot}>
           <CatalogFilters
             activeModuleLabel={activeModuleConfig?.label ?? ""}
-            brands={listedBrands}
+            brands={railBrands}
             brandSlug={parentBrandSlug}
             filtersOpen={filtersOpen}
             hasActiveFilters={hasActiveFilters}

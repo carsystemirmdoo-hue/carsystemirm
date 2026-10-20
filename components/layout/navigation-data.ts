@@ -51,7 +51,7 @@ export type NavigationGroup = {
 
 export const PRODUCT_CATEGORIES: ProductCategoryLink[] = [
   {
-    label: "Boje",
+    label: "Boje i lakovi",
     slug: "boje",
     href: "/katalog?kategorija=boje",
     icon: "/icons/categories/boje.svg",

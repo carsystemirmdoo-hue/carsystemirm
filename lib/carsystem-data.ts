@@ -663,7 +663,7 @@ export const programGroups: ProgramGroup[] = [
   {
     slug: "boje-i-lakovi",
     name: "Boje i lakovi",
-    shortName: "Boje",
+    shortName: "Boje i lakovi",
     description:
       "Bazne boje, bezbojni lakovi i sistemi za završni sloj u profesionalnom refinish procesu.",
   },
@@ -748,7 +748,7 @@ export const publicProgramGroups: PublicProgramGroup[] = [
   {
     slug: "boje-i-lakovi",
     name: "Boje i lakovi",
-    shortName: "Boje",
+    shortName: "Boje i lakovi",
     description:
       "Sistemi bojenja, bazne boje i završni lakovi za profesionalni refinish rezultat.",
     badges: ["Bazni sloj", "Lak", "Nijansiranje"],

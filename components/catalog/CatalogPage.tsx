@@ -39,10 +39,10 @@ export function CatalogPage({
         <CatalogHero brandCount={brands.filter((brand) => !brand.offeredWithin).length} programCount={publicProgramGroups.length} />
         {/* Prijavljeni kupac: sopstvena istorija. Anonimno: ništa, bez zahteva. */}
         <CatalogForYou />
-        <CatalogCategoryLinks />
         <Suspense
           fallback={
             <>
+              <CatalogCategoryLinks />
               <CatalogStaticProductGrid
                 brands={brands}
                 entities={firstPageProducts}
@@ -59,6 +59,7 @@ export function CatalogPage({
             brands={brands}
             programs={programs}
             phases={phases}
+            categoryLinks={<CatalogCategoryLinks />}
           />
         </Suspense>
       </main>

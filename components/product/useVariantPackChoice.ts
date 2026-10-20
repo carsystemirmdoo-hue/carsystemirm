@@ -7,11 +7,16 @@ import {
   buildPackIndex,
   packSlug,
 } from "@/components/product/variantPacks.mjs";
+import { VARIANT_QUERY_PARAM } from "@/components/product/productVariantState.mjs";
 
 type PackIndex = ReturnType<typeof buildPackIndex>;
 
 /**
  * Izbor pakovanja na PDP-u porodice (2026-10-20).
+ *
+ * Ulaz bez `?varijanta=` i `?pakovanje=` (kartica porodice u katalogu, meni,
+ * brend stranica) nema svoju zapreminu, pa počinje od „Sva pakovanja“ u
+ * grupama; ulaz sa izabranom bazom prati zapreminu te baze.
  *
  * Drži SAMO izbor zapremine („4 L“, „Sva pakovanja“), ne aktivnu varijantu —
  * aktivna varijanta i dalje živi u `ProductVariantProvider`. Podrazumevano je
@@ -26,7 +31,7 @@ export function useVariantPackChoice(
   const packIndex: PackIndex = useMemo(() => buildPackIndex(variants), [variants]);
   const hasPackChoice = groupCount === 1 && packIndex.packs.length > 1;
   const activePacks = packIndex.packsByVariant.get(activeVariantId) ?? [];
-  const [packChoice, setPackChoice] = useState<string | null>(null);
+  const [packChoice, setPackChoice] = useState<string | null>(ALL_PACKS);
 
   const currentPack =
     packChoice === ALL_PACKS
@@ -38,11 +43,12 @@ export function useVariantPackChoice(
   useEffect(() => {
     if (!hasPackChoice) return;
     const apply = () => {
-      const requested = new URLSearchParams(window.location.search).get(PACK_QUERY_PARAM);
+      const params = new URLSearchParams(window.location.search);
+      const requested = params.get(PACK_QUERY_PARAM);
       if (requested === ALL_PACKS) setPackChoice(ALL_PACKS);
       else {
         const match = packIndex.packs.find((pack) => pack.slug === requested);
-        setPackChoice(match ? match.label : null);
+        setPackChoice(match ? match.label : params.has(VARIANT_QUERY_PARAM) ? null : ALL_PACKS);
       }
     };
     apply();

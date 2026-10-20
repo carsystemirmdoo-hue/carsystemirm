@@ -11,6 +11,7 @@ import { CustomerBuyPanel } from "@/components/customer-buy/CustomerBuyPanel";
 import { ProductInquiryLink } from "@/components/product/ProductInquiryLink";
 import { ProductMobileCta } from "@/components/product/ProductMobileCta";
 import { ProductStickyStage } from "@/components/product/ProductStickyStage";
+import { ProductSystemNavigation } from "@/components/product/ProductSystemNavigation";
 import { ProductVariantOptions } from "@/components/product/ProductVariantOptions";
 import { ProductVariantProvider } from "@/components/product/ProductVariantProvider";
 import { ProductVisualSurface } from "@/components/product/ProductVisualSurface";
@@ -167,6 +168,9 @@ export function ProductDetailPage({
                   subtype={detail?.hero?.subtype}
                 />
 
+                {/* Prezentacija sistema: veza na izbor odmah ispod naslova; kartica izbora: posle izbora. */}
+                {variantSelector ? null : <ProductSystemNavigation slug={product.slug} />}
+
                 {variantSelector ? (
                   <ProductVariantOptions
                     selectInPlace={variantSelectInPlace}
@@ -174,6 +178,8 @@ export function ProductDetailPage({
                     section={variantSelector}
                   />
                 ) : null}
+
+                {variantSelector ? <ProductSystemNavigation slug={product.slug} /> : null}
 
                 <div className={styles.heroActions}>
                   <ProductInquiryLink

@@ -64,11 +64,10 @@ export function BaslacSystemPdp({
    * kartice sa koje je korisnik došao); „sva“ = sve zapremine u grupama.
    * Izbor se čuva u `?pakovanje=` zamenom adrese, bez novog koraka istorije.
    */
-  const [volumeChoice, setVolumeChoice] = useState<string | null>(null);
+  const [volumeChoice, setVolumeChoice] = useState<string | null>(ALL_PACKS);
 
   const searchId = useId();
   const finishId = useId();
-  const volumeId = useId();
 
   const finishes = useMemo(
     () => Array.from(new Set(bases.map((item) => item.finish))).sort(),
@@ -85,6 +84,15 @@ export function BaslacSystemPdp({
       ).sort((a, b) => a - b),
     [bases],
   );
+
+  const volumeCounts = useMemo(() => {
+    const counts = new Map<string, number>();
+    for (const item of bases) {
+      if (item.volumeL === null) continue;
+      counts.set(String(item.volumeL), (counts.get(String(item.volumeL)) ?? 0) + 1);
+    }
+    return counts;
+  }, [bases]);
 
   const active = bases.find((item) => item.code === activeCode) ?? bases[0] ?? null;
   const volume =
@@ -155,7 +163,20 @@ export function BaslacSystemPdp({
       if (resolved) setActiveCode(resolved.code);
       const requestedPack = new URLSearchParams(window.location.search).get(PACK_QUERY_PARAM);
       const packVolume = volumes.find((value) => packSlug(volumeText(value)) === requestedPack);
-      setVolumeChoice(requestedPack === ALL_PACKS ? ALL_PACKS : packVolume != null ? String(packVolume) : null);
+      /*
+       * Ulaz bez `?varijanta=` i bez `?pakovanje=` (kartica porodice u katalogu, meni,
+       * brend stranica) nema svoju zapreminu: prikazuju se SVA pakovanja u grupama.
+       * Ulaz sa baze (pretraga, kartica zapremine) prati zapreminu te baze.
+       */
+      setVolumeChoice(
+        requestedPack === ALL_PACKS
+          ? ALL_PACKS
+          : packVolume != null
+            ? String(packVolume)
+            : requested
+              ? null
+              : ALL_PACKS,
+      );
     };
     apply();
     window.addEventListener("popstate", apply);
@@ -282,26 +303,37 @@ export function BaslacSystemPdp({
               ]}
             />
           </div>
-          <div className={styles.field}>
-            <label htmlFor={volumeId}>Pakovanje</label>
-            <SearchableCombobox
-              id={volumeId}
-              ariaLabel="Pakovanje"
-              emptyMessage="Nema pakovanja"
-              placeholder="Sva pakovanja"
-              searchable={false}
-              value={volume}
-              onChange={chooseVolume}
-              options={[
-                ...volumes.map((value) => ({
-                  value: String(value),
-                  label: `${volumeText(value)}${value === 0.1 ? " · koncentrat" : ""}`,
-                })),
-                { value: ALL_PACKS, label: "Sva pakovanja" },
-              ]}
-            />
-          </div>
         </div>
+
+        {volumes.length > 1 ? (
+          <div className={styles.packSwitch} role="group" aria-label="Pakovanje">
+            <span className={styles.packSwitchLabel}>Pakovanje</span>
+            <div className={styles.packSwitchOptions}>
+              {volumes.map((value) => (
+                <button
+                  type="button"
+                  key={value}
+                  aria-pressed={volume === String(value)}
+                  data-selected={volume === String(value) || undefined}
+                  onClick={() => chooseVolume(String(value))}
+                >
+                  {volumeText(value)}
+                  {value === 0.1 ? <span className={styles.packSwitchNote}>koncentrat</span> : null}
+                  <small>{volumeCounts.get(String(value)) ?? 0}</small>
+                </button>
+              ))}
+              <button
+                type="button"
+                aria-pressed={volume === ALL_PACKS}
+                data-selected={volume === ALL_PACKS || undefined}
+                onClick={() => chooseVolume(ALL_PACKS)}
+              >
+                Sva pakovanja
+                <small>{bases.length}</small>
+              </button>
+            </div>
+          </div>
+        ) : null}
 
         <p className={styles.count} aria-live="polite">
           {srPlural(visible.length, "Prikazana", "Prikazane", "Prikazano")}{" "}
@@ -331,7 +363,11 @@ export function BaslacSystemPdp({
                       className={styles.card}
                       data-active={isActive || undefined}
                       aria-pressed={isActive}
-                      onClick={() => selectVariant(item.code)}
+                      onClick={() => {
+                        selectVariant(item.code);
+                        // „Sva pakovanja“ ostaje i posle izbora baze i povratka „Nazad“.
+                        if (volume === ALL_PACKS) chooseVolume(ALL_PACKS);
+                      }}
                     >
                       <span
                         className={styles.swatch}

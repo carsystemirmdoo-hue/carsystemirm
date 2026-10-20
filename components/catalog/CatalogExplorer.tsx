@@ -1,7 +1,7 @@
 "use client";
 
 import { matchesPhase } from "@/lib/catalog/phase-match.mjs";
-import { orderPaintCategory } from "@/lib/catalog/paint-priority.mjs";
+import { orderPaintCategory, pinPaintSystems } from "@/lib/catalog/paint-priority.mjs";
 import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState, type ReactNode } from "react";
 import { FOR_YOU_EVENT, type ForYouRanking } from "@/components/catalog/CatalogForYou";
 import { personalOrder } from "@/lib/customers/forYouRules.mjs";
@@ -862,7 +862,9 @@ export function CatalogExplorer({
   const sortedProducts = useMemo(() => {
     if (effectiveSort === PERSONAL_SORT.slug && personal && !searchEnabled) {
       const byId = new Map(filteredProducts.map((p) => [p.id, p]));
-      return personalOrder(filteredProducts.map((p) => p.id), personal.purchased, personal.related).order.map((id) => byId.get(id)!);
+      const ordered = personalOrder(filteredProducts.map((p) => p.id), personal.purchased, personal.related).order.map((id) => byId.get(id)!);
+      // „Boje i lakovi“: kartice izbora sistema boja ostaju prve i uz lični redosled (2026-10-20).
+      return categorySlug === "boje" ? pinPaintSystems(ordered) : ordered;
     }
     if (effectiveSort === "naziv-az") {
       return [...filteredProducts].sort((first, second) =>

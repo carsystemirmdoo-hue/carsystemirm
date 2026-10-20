@@ -195,7 +195,18 @@ function searchTermsFor(entry: { code: string | null; officialName: string; seri
   ];
 }
 
-function createCatalogProduct(entry: CatalogProductEntry): CarsystemProduct {
+/**
+ * Prikazni nazivi kada zvaničan naziv sam ne razlikuje karticu od srodne (2026-10-20).
+ * `rm-diamont` je na info.rmpaint.com „DIAMONT“ sa oznakom „DIAMONT var CV“ (metalik i
+ * uni varijanta za komercijalna vozila) — bez oznake se mešao sa izborom DIAMONT baza.
+ */
+const DISPLAY_NAMES: Record<string, string> = {
+  "rm-diamont": "R-M DIAMONT var CV",
+};
+
+function createCatalogProduct(sourceEntry: CatalogProductEntry): CarsystemProduct {
+  const displayName = DISPLAY_NAMES[sourceEntry.slug];
+  const entry = displayName ? { ...sourceEntry, name: displayName } : sourceEntry;
   const { content } = entry;
   const imageAlt = `${entry.name}, ${content.productType.toLocaleLowerCase("sr-Latn")}`;
   const badges = [content.productType, ...(entry.series ? [entry.series] : []), ...(entry.line && entry.line !== entry.series ? [entry.line] : []), "Na upit"];

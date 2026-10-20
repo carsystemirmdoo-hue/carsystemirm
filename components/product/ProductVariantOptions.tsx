@@ -84,7 +84,7 @@ export function ProductVariantOptions({
    * varijanta nema odgovarajući zapis, izbor se ne menja — bolje nego tiho
    * odvesti korisnika na pogrešan proizvod.
    */
-  function chooseVariant(candidate: ProductCommercialVariant) {
+  function chooseVariant(candidate: ProductCommercialVariant, keepAllPacks = true) {
     const view =
       findVariant(candidate.id) ??
       findVariant(candidate.sku) ??
@@ -92,6 +92,9 @@ export function ProductVariantOptions({
     // Izbor unutar porodice menja prikaz i adresu, ali NE dodaje korak istorije
     // (2026-10-20): posle deset pregledanih boja jedan „Nazad“ vraća na katalog.
     if (view) selectVariant(view, false);
+    // „Sva pakovanja“ ostaje i posle izbora baze (i posle povratka „Nazad“ na ovu stranu).
+    // Ne kada izbor dolazi iz promene zapremine (`keepAllPacks = false`): tada je zapremina već izabrana.
+    if (view && keepAllPacks && hasPackChoice && currentPack === ALL_PACKS) choosePack(ALL_PACKS);
   }
 
   /*
@@ -113,7 +116,7 @@ export function ProductVariantOptions({
     const first = section.variants.find((variant) =>
       (packIndex.packsByVariant.get(variant.id) ?? []).includes(label),
     );
-    if (first) chooseVariant(first);
+    if (first) chooseVariant(first, false);
   }
 
   return (

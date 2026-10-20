@@ -153,15 +153,17 @@ export function expandRowVariants(base, rows, resolveImage) {
 
     /*
      * Red bez fotografije svoje zapremine prikazuje sliku proizvoda. Ako je ta
-     * slika druge (ili nepotvrđene) zapremine, ne sme se predstaviti kao
-     * izabrano pakovanje: oznaka količine se skriva i dodaje se napomena.
+     * slika druge (ili nepotvrđene) zapremine — `imageQuantityLabel` — ne sme se
+     * predstaviti kao izabrano pakovanje: oznaka količine se skriva i dodaje se
+     * napomena.
      */
     let imageNote = null;
     let quantityLabel = quantity;
-    if (!own && base.hasSprayBackdrop && quantity && baseImages.length > 0 && base.quantityLabel !== quantity) {
-      imageNote = base.quantityLabel
-        ? `Reprezentativna ambalaža ${base.quantityLabel}. Izabrano pakovanje: ${quantity}.`
-        : `Reprezentativna ambalaža linije. Izabrano pakovanje: ${quantity}.`;
+    const imageQuantity = base.imageQuantityLabel ?? null;
+    if (!own && base.hasSprayBackdrop && quantity && baseImages.length > 0 && imageQuantity !== quantity) {
+      imageNote = imageQuantity
+        ? `Reprezentativna ambalaža ${imageQuantity}. Izabrano pakovanje: ${quantity}.`
+        : `Reprezentativna ambalaža linije; zapremina na slici nije potvrđena. Izabrano pakovanje: ${quantity}.`;
       quantityLabel = null;
     } else if (own && imageRow !== row) {
       imageNote = `Reprezentativna ambalaža ${quantity}; etiketa izabrane baze se razlikuje.`;

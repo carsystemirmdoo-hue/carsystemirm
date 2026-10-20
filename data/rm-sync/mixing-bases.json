@@ -748,5 +748,13 @@
   },
   "notes": {
     "rm-paste-za-mesanje": "Oznake i pakovanja prema etiketi pakovanja iz naše ponude. Linija i naziv nijanse nisu potvrđeni zvaničnim izvorom proizvođača, pa se ne navode."
+  },
+  "productImages": {
+    "_comment": "Zapremina koju prikazuje fotografija kartice (2026-10-20). Samo kada se vidi na samoj fotografiji; bez upisa zapremina slike nije potvrđena i strana to kaže.",
+    "rm-diamont-bazna-boja": {
+      "code": "BC 100",
+      "pack": "4 L",
+      "evidence": "Fotografija /products/rm/rm-diamont-bazna-boja.webp nosi etiketu „DIAMONT BC 100“; BC 100 je u ponudi samo kao kanta 4 L (cards.rm-diamont-bazna-boja)."
+    }
   }
 }

@@ -21,7 +21,8 @@ test("baza bez fotografije svoje zapremine dobija napomenu, ne pogrešnu oznaku"
     id: "rm-x",
     slug: "rm-x",
     hasSprayBackdrop: true,
-    quantityLabel: "4 L",
+    quantityLabel: "0,5 L",
+    imageQuantityLabel: "4 L",
     images: [{ src: "/products/rm/rm-x.webp" }],
   };
   const rows = [
@@ -33,6 +34,9 @@ test("baza bez fotografije svoje zapremine dobija napomenu, ne pogrešnu oznaku"
   assert.equal(four.quantityLabel, "4 L");
   assert.equal(one.quantityLabel, null);
   assert.match(one.imageNote, /Reprezentativna ambalaža 4 L\. Izabrano pakovanje: 1 L\./);
+  const [unknown] = expandRowVariants({ ...base, imageQuantityLabel: null }, rows, (src) => ({ src }));
+  assert.match(unknown.imageNote, /zapremina na slici nije potvrđena\. Izabrano pakovanje: 4 L\./);
+  assert.equal(unknown.quantityLabel, null);
 });
 
 test("boje: jedna reprezentativna fotografija po zapremini", () => {

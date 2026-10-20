@@ -11,7 +11,11 @@ import type { ProductVariantSection } from "@/types/product-detail";
  * identiteta nisu ovde — ne dobijaju javni red, poručuju se kroz „Izbor robe”.
  */
 type MixingBaseRow = { code: string; name: string | null; packs: string[]; status: string; source: string; sourceNote: string };
-const data = mixingBases as { cards: Record<string, MixingBaseRow[]>; notes?: Record<string, string> };
+const data = mixingBases as {
+  cards: Record<string, MixingBaseRow[]>;
+  notes?: Record<string, string>;
+  productImages?: Record<string, { code: string; pack: string } | string>;
+};
 const cards = data.cards;
 const notes: Record<string, string> = data.notes ?? {};
 
@@ -55,4 +59,13 @@ export function withRmMixingBases(product: CarsystemProduct): CarsystemProduct {
     ...product,
     detail: { reviewStatus: "confirmed", ...product.detail, variants: { reviewStatus: "confirmed", content: section } },
   };
+}
+
+/**
+ * Zapremina koju prikazuje fotografija kartice (npr. „4 L“ za DIAMONT BC 100), kada je vidljiva
+ * na samoj fotografiji. `null` znači da zapremina slike nije potvrđena (2026-10-20).
+ */
+export function rmProductImagePack(slug: string): string | null {
+  const entry = data.productImages?.[slug];
+  return entry && typeof entry === "object" ? entry.pack : null;
 }

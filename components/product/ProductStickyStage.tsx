@@ -219,6 +219,14 @@ export function ProductStickyStage({
         ) : null}
       </div>
 
+      {/* Reprezentativna ambalaža (2026-10-20): slika nije tačno izabrano
+          pakovanje — to se kaže rečima, umesto pogrešne oznake na slici. */}
+      {activeVariant.imageNote && shownImage ? (
+        <p className={styles.stageImageNote} aria-live="polite">
+          {activeVariant.imageNote}
+        </p>
+      ) : null}
+
       {images.length > 1 ? (
         <div className={styles.galleryThumbs} aria-label="Izaberite prikaz proizvoda">
           {images.map((image, index) => {

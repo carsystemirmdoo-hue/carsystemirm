@@ -35,6 +35,7 @@ import type {
   ProductTechnicalFact,
 } from "@/types/product-detail";
 import type { SeoBreadcrumbItem } from "@/components/seo/SeoBreadcrumbs";
+import { BackToResults } from "@/components/product/BackToResults";
 import styles from "./ProductDetailExperience.module.css";
 
 type ProductDetailPageProps = {
@@ -138,7 +139,10 @@ export function ProductDetailPage({
     >
     <div className={styles.pageShell} data-ds="a">
       <main className={styles.pageMain}>
-        <ProductBreadcrumb items={breadcrumbItems} />
+        <div className={styles.breadcrumbRow}>
+          <ProductBreadcrumb items={breadcrumbItems} />
+          <BackToResults className={styles.backToResults} />
+        </div>
 
         <div className={styles.narrativeGrid}>
           <div className={styles.stickyRail}>

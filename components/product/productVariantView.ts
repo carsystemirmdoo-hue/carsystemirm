@@ -93,6 +93,11 @@ export type ProductVariantView = {
   hasSprayBackdrop: boolean;
   sizeClass: ProductSizeClass;
   quantityLabel: string | null;
+  /**
+   * Napomena uz sliku kada je prikazana reprezentativna ambalaža (druga ili
+   * nepotvrđena zapremina, ili zajednička slika zapremine) — 2026-10-20.
+   */
+  imageNote?: string | null;
   volumeStatus: ProductVolumeStatus;
   puttyTrace: PuttyMaterialTraceConfig | null;
 };

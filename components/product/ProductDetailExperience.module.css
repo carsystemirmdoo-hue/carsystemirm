@@ -3058,3 +3058,174 @@ a.colorOptionContent:active {
 .pageShell[data-ds="a"] .finalSecondaryAction:focus-visible {
   outline-color: #ffffff;
 }
+
+/* =========================================================================
+ * Izbor pakovanja i jednake kockice varijanti (2026-10-20)
+ * ========================================================================= */
+
+/* Sve kockice u mreži iste visine: duži naziv (do dva reda) ne menja visinu
+   pojedinačne kartice, šifre i pakovanje ostaju poravnati. */
+.variantOptionList {
+  grid-auto-rows: 1fr;
+}
+
+.variantOptionList > .variantOptionControl {
+  height: 100%;
+}
+
+.variantOptionList[data-equal-tiles] .variantOptionControl {
+  min-height: 5rem;
+  align-items: start;
+}
+
+.variantOptionPack {
+  font-family: var(--font-technical), var(--font-geist-mono), monospace;
+}
+
+.packSwitch {
+  display: grid;
+  gap: 0.55rem;
+  margin: 0 0 1.25rem;
+}
+
+.packSwitchLabel {
+  color: var(--detail-faint);
+  font-family: var(--font-technical), var(--font-geist-mono), monospace;
+  font-size: 0.61rem;
+  font-weight: 700;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+}
+
+.packSwitchOptions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+}
+
+.packSwitchOptions button {
+  display: inline-flex;
+  min-height: 2.75rem;
+  align-items: center;
+  gap: 0.5rem;
+  border: 1px solid var(--detail-border-strong);
+  border-radius: 0.5rem;
+  background: var(--detail-surface);
+  color: var(--detail-ink);
+  cursor: pointer;
+  font: inherit;
+  font-size: 0.9rem;
+  font-weight: 600;
+  padding: 0 0.9rem;
+}
+
+.packSwitchOptions button small {
+  color: var(--detail-faint);
+  font-family: var(--font-technical), var(--font-geist-mono), monospace;
+  font-size: 0.72rem;
+  font-weight: 500;
+}
+
+.packSwitchOptions button[data-selected="true"] {
+  border-color: var(--family-accent, currentColor);
+  background: var(--family-accent-soft, transparent);
+  box-shadow: inset 0 0 0 1px var(--family-accent, currentColor);
+}
+
+.packSwitchOptions button:focus-visible {
+  outline: 2px solid var(--family-accent, currentColor);
+  outline-offset: 2px;
+}
+
+/* „Sva pakovanja“: naslov zapremine, kartice, razdelnik. */
+.packGroup + .packGroup {
+  margin-top: 1.25rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--detail-border-strong);
+}
+
+.packGroupTitle {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  margin: 0 0 0.65rem;
+  font-family: var(--font-display), var(--font-geist-sans), sans-serif;
+  font-size: 1.05rem;
+  font-weight: 700;
+}
+
+.packGroupTitle small {
+  color: var(--detail-faint);
+  font-family: var(--font-technical), var(--font-geist-mono), monospace;
+  font-size: 0.72rem;
+  font-weight: 500;
+}
+
+.pageShell[data-ds="a"] .packSwitchOptions button {
+  border-color: var(--ds-c-line-strong);
+  border-radius: var(--ds-ctl-radius);
+  background: var(--ds-c-surface);
+  color: var(--ds-c-text);
+}
+
+.pageShell[data-ds="a"] .packSwitchOptions button[data-selected="true"] {
+  border: 2px solid var(--ds-c-accent);
+  background: var(--ds-c-accent-soft);
+  box-shadow: none;
+  padding: 0 calc(0.9rem - 1px);
+}
+
+.pageShell[data-ds="a"] .packSwitchOptions button:focus-visible {
+  outline-color: var(--ds-c-focus);
+}
+
+.pageShell[data-ds="a"] .packGroup + .packGroup {
+  border-top-color: var(--ds-c-line);
+}
+
+.pageShell[data-ds="a"] .packSwitchLabel {
+  color: var(--ds-c-text-2);
+}
+
+.stageImageNote {
+  margin: 0.65rem 0 0;
+  color: var(--detail-faint);
+  font-size: 0.8rem;
+  line-height: 1.45;
+}
+
+.pageShell[data-ds="a"] .stageImageNote {
+  color: var(--ds-c-text-2);
+  font-size: var(--ds-font-small);
+}
+
+.breadcrumbRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem 1.5rem;
+  margin-bottom: clamp(1.5rem, 3vw, 2.8rem);
+}
+
+.breadcrumbRow .breadcrumb {
+  margin-bottom: 0;
+}
+
+.backToResults {
+  display: inline-flex;
+  min-height: 2.75rem;
+  align-items: center;
+  gap: 0.4rem;
+  color: inherit;
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-decoration: underline;
+  text-decoration-color: color-mix(in oklab, currentColor 40%, transparent);
+  text-underline-offset: 0.3em;
+}
+
+.backToResults:hover,
+.backToResults:focus-visible {
+  text-decoration-color: currentColor;
+}

@@ -20,6 +20,9 @@ import {
   resolveBaslacBase,
 } from "./baslacVariantState.mjs";
 import { CustomerBuyPanel } from "@/components/customer-buy/CustomerBuyPanel";
+import { SearchableCombobox } from "@/components/ui/SearchableCombobox";
+import { BackToResults } from "@/components/product/BackToResults";
+import { ALL_PACKS, PACK_QUERY_PARAM, packSlug } from "@/components/product/variantPacks.mjs";
 import { srPlural } from "@/lib/sr-plural";
 import styles from "./BaslacSystemPdp.module.css";
 
@@ -56,7 +59,12 @@ export function BaslacSystemPdp({
   const [activeCode, setActiveCode] = useState(bases[0]?.code ?? "");
   const [query, setQuery] = useState("");
   const [finish, setFinish] = useState<BaslacFinish | "all">("all");
-  const [volume, setVolume] = useState("all");
+  /*
+   * Zapremina (2026-10-20): `null` = prati aktivnu bazu (iz `?varijanta=` ili
+   * kartice sa koje je korisnik došao); „sva“ = sve zapremine u grupama.
+   * Izbor se čuva u `?pakovanje=` zamenom adrese, bez novog koraka istorije.
+   */
+  const [volumeChoice, setVolumeChoice] = useState<string | null>(null);
 
   const searchId = useId();
   const finishId = useId();
@@ -78,22 +86,45 @@ export function BaslacSystemPdp({
     [bases],
   );
 
+  const active = bases.find((item) => item.code === activeCode) ?? bases[0] ?? null;
+  const volume =
+    volumeChoice ?? (active?.volumeL != null && volumes.length > 1 ? String(active.volumeL) : ALL_PACKS);
+
   const visible = useMemo(
     () =>
       bases.filter(
         (item) =>
           baslacMatchesQuery(item, query) &&
           (finish === "all" || item.finish === finish) &&
-          (volume === "all" || String(item.volumeL) === volume),
+          (volume === ALL_PACKS || String(item.volumeL) === volume),
       ),
     [bases, query, finish, volume],
   );
 
-  const active = bases.find((item) => item.code === activeCode) ?? bases[0] ?? null;
+  /** „Sva pakovanja“: grupe po zapremini, od najveće, samo one koje postoje. */
+  const visibleGroups = useMemo(() => {
+    if (volume !== ALL_PACKS) return [{ key: volume, label: null as string | null, items: visible }];
+    const byVolume = new Map<string, BaslacBase[]>();
+    for (const item of visible) {
+      const key = item.volumeL === null ? "upit" : String(item.volumeL);
+      byVolume.set(key, [...(byVolume.get(key) ?? []), item]);
+    }
+    return [...byVolume.entries()]
+      .sort(([a], [b]) => (b === "upit" ? -1 : a === "upit" ? 1 : Number(b) - Number(a)))
+      .map(([key, items]) => ({
+        key,
+        label: key === "upit" ? "Pakovanje na upit" : volumeText(Number(key)),
+        items,
+      }));
+  }, [visible, volume]);
 
-  /** Izbor varijante menja URL bez reloada; Back/Forward prati izbor. */
+  /**
+   * Izbor baze menja URL bez reloada i BEZ novog koraka istorije (2026-10-20):
+   * posle pregledanih deset baza jedan „Nazad“ vraća na prethodnu stranicu.
+   * Direktan link `?varijanta=` i dalje otvara izabranu bazu.
+   */
   const selectVariant = useCallback(
-    (code: string, push = true) => {
+    (code: string, push = false) => {
       setActiveCode(code);
       const url = new URL(window.location.href);
       const value = baslacVariantQueryValue(
@@ -122,11 +153,32 @@ export function BaslacSystemPdp({
       );
       const resolved = resolveBaslacBase(bases, requested, bases[0]?.code);
       if (resolved) setActiveCode(resolved.code);
+      const requestedPack = new URLSearchParams(window.location.search).get(PACK_QUERY_PARAM);
+      const packVolume = volumes.find((value) => packSlug(volumeText(value)) === requestedPack);
+      setVolumeChoice(requestedPack === ALL_PACKS ? ALL_PACKS : packVolume != null ? String(packVolume) : null);
     };
     apply();
     window.addEventListener("popstate", apply);
     return () => window.removeEventListener("popstate", apply);
-  }, [bases]);
+  }, [bases, volumes]);
+
+  function chooseVolume(next: string) {
+    setVolumeChoice(next);
+    const url = new URL(window.location.href);
+    const value = next === ALL_PACKS ? ALL_PACKS : packSlug(volumeText(Number(next)));
+    url.searchParams.set(PACK_QUERY_PARAM, value);
+    window.history.replaceState({ [PACK_QUERY_PARAM]: value }, "", url);
+    // Zapremina i izabrana baza moraju se poklapati.
+    if (next !== ALL_PACKS && String(active?.volumeL) !== next) {
+      const first = bases.find(
+        (item) =>
+          String(item.volumeL) === next &&
+          baslacMatchesQuery(item, query) &&
+          (finish === "all" || item.finish === finish),
+      ) ?? bases.find((item) => String(item.volumeL) === next);
+      if (first) selectVariant(first.code);
+    }
+  }
 
   const packshot = packshotFor(active, system);
   /*
@@ -139,6 +191,7 @@ export function BaslacSystemPdp({
   return (
     <div className={styles.pdp}>
       <header className={styles.pageHeader}>
+        <BackToResults className={styles.backToResults} />
         <p className={styles.eyebrow}>Baslac sistem boja</p>
         <h1>{familyName}</h1>
         <p className={styles.lead}>{intro}</p>
@@ -215,34 +268,38 @@ export function BaslacSystemPdp({
           </div>
           <div className={styles.field}>
             <label htmlFor={finishId}>Završnica</label>
-            <select
+            <SearchableCombobox
               id={finishId}
+              ariaLabel="Završnica"
+              emptyMessage="Nema završnica"
+              placeholder="Sve završnice"
+              searchable={false}
               value={finish}
-              onChange={(event) => setFinish(event.target.value as BaslacFinish | "all")}
-            >
-              <option value="all">Sve završnice</option>
-              {finishes.map((value) => (
-                <option key={value} value={value}>
-                  {baslacFinishLabels[value]}
-                </option>
-              ))}
-            </select>
+              onChange={(next) => setFinish(next as BaslacFinish | "all")}
+              options={[
+                { value: "all", label: "Sve završnice" },
+                ...finishes.map((value) => ({ value, label: baslacFinishLabels[value] })),
+              ]}
+            />
           </div>
           <div className={styles.field}>
             <label htmlFor={volumeId}>Pakovanje</label>
-            <select
+            <SearchableCombobox
               id={volumeId}
+              ariaLabel="Pakovanje"
+              emptyMessage="Nema pakovanja"
+              placeholder="Sva pakovanja"
+              searchable={false}
               value={volume}
-              onChange={(event) => setVolume(event.target.value)}
-            >
-              <option value="all">Sva pakovanja</option>
-              {volumes.map((value) => (
-                <option key={value} value={String(value)}>
-                  {volumeText(value)}
-                  {value === 0.1 ? " · koncentrat" : ""}
-                </option>
-              ))}
-            </select>
+              onChange={chooseVolume}
+              options={[
+                ...volumes.map((value) => ({
+                  value: String(value),
+                  label: `${volumeText(value)}${value === 0.1 ? " · koncentrat" : ""}`,
+                })),
+                { value: ALL_PACKS, label: "Sva pakovanja" },
+              ]}
+            />
           </div>
         </div>
 
@@ -252,46 +309,58 @@ export function BaslacSystemPdp({
           {srPlural(bases.length, "baze", "baze", "baza")}
         </p>
 
-        <ul className={styles.grid}>
-          {visible.map((item) => {
-            const isActive = item.code === active?.code;
-            return (
-              <li key={item.code}>
-                <button
-                  type="button"
-                  className={styles.card}
-                  data-active={isActive || undefined}
-                  aria-pressed={isActive}
-                  onClick={() => selectVariant(item.code)}
-                >
-                  <span
-                    className={styles.swatch}
-                    data-finish={item.finish}
-                    style={{ background: item.swatch }}
-                    aria-hidden="true"
-                  />
-                  <span className={styles.cardBody}>
-                    <strong>{item.code}</strong>
-                    <span className={styles.cardName}>{item.name}</span>
-                    <small>
-                      {volumeText(item.volumeL)} · {baslacFinishLabels[item.finish]}
-                    </small>
-                  </span>
-                  {isActive ? (
-                    <span className={styles.activeTick} aria-hidden="true">
-                      ✓
-                    </span>
-                  ) : null}
-                </button>
-              </li>
-            );
-          })}
-          {visible.length === 0 ? (
-            <li className={styles.empty}>
-              Nema baza koje odgovaraju izabranim filterima.
-            </li>
-          ) : null}
-        </ul>
+        {visibleGroups.map((group) => (
+          <section
+            className={styles.volumeGroup}
+            key={group.key}
+            aria-label={group.label ? `Pakovanje ${group.label}` : undefined}
+          >
+            {group.label ? (
+              <h3 className={styles.volumeGroupTitle}>
+                {group.label}
+                <small>{group.items.length}</small>
+              </h3>
+            ) : null}
+            <ul className={styles.grid}>
+              {group.items.map((item) => {
+                const isActive = item.code === active?.code;
+                return (
+                  <li key={item.code}>
+                    <button
+                      type="button"
+                      className={styles.card}
+                      data-active={isActive || undefined}
+                      aria-pressed={isActive}
+                      onClick={() => selectVariant(item.code)}
+                    >
+                      <span
+                        className={styles.swatch}
+                        data-finish={item.finish}
+                        style={{ background: item.swatch }}
+                        aria-hidden="true"
+                      />
+                      <span className={styles.cardBody}>
+                        <strong>{item.code}</strong>
+                        <span className={styles.cardName}>{item.name}</span>
+                        <small>
+                          {volumeText(item.volumeL)} · {baslacFinishLabels[item.finish]}
+                        </small>
+                      </span>
+                      {isActive ? (
+                        <span className={styles.activeTick} aria-hidden="true">
+                          ✓
+                        </span>
+                      ) : null}
+                    </button>
+                  </li>
+                );
+              })}
+            </ul>
+          </section>
+        ))}
+        {visible.length === 0 ? (
+          <p className={styles.empty}>Nema baza koje odgovaraju izabranim filterima.</p>
+        ) : null}
 
         {active ? (
           <div className={styles.activePanel}>

@@ -178,6 +178,8 @@ function readStoredFiltersCollapsed(): boolean {
  * kombinaciju filtera/sort-a.
  */
 const CATALOG_SESSION_STORAGE_KEY = "carsystem:catalog:session-state";
+/** Poslednja adresa kataloga (sa filterima) — čita je `BackToResults` na strani proizvoda. */
+const CATALOG_RETURN_STORAGE_KEY = "carsystem:catalog:return";
 
 type StoredCatalogSession = {
   paginationKey: string;
@@ -732,6 +734,22 @@ export function CatalogExplorer({
       nextSearch ? `${pathname}?${nextSearch}` : pathname,
     );
   }, [currentUrlFilters, pathname, searchParamsKey]);
+
+  /*
+   * Povratak na rezultate (2026-10-20): strana proizvoda nudi „Nazad na
+   * rezultate“ na poslednju adresu kataloga sa svim filterima; broj učitanih
+   * kartica i skrol obnavlja postojeći session zapis (CATALOG_SESSION_STORAGE_KEY).
+   */
+  useEffect(() => {
+    try {
+      window.sessionStorage.setItem(
+        CATALOG_RETURN_STORAGE_KEY,
+        `${window.location.pathname}${window.location.search}`,
+      );
+    } catch {
+      // sessionStorage nedostupan — strana proizvoda nudi ceo katalog.
+    }
+  }, [currentUrlFilters, searchParamsKey]);
 
   /*
    * Skup iz kog filteri biraju: canonical entiteti bez upita, rangirani zapisi

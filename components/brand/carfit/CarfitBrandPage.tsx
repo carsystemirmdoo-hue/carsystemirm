@@ -146,14 +146,6 @@ const REPRESENTATIVE = [
   { slug: "carfit-universal-polishing-compound", group: "Poliranje" },
 ] as const;
 
-/* Logaritamska skala granulacije P40 → P2000 za prikaz raspona abraziva. */
-const GRIT_MIN = 40;
-const GRIT_MAX = 2000;
-const GRIT_TICKS = [40, 80, 180, 400, 800, 2000] as const;
-function gritPosition(grit: number) {
-  return (Math.log(grit / GRIT_MIN) / Math.log(GRIT_MAX / GRIT_MIN)) * 100;
-}
-
 export function CarfitBrandPage({ brand }: { brand: CarsystemBrand }) {
   const wordmark = brand.wordmark ?? brand.name;
   const products = getCarfitProducts();
@@ -207,21 +199,22 @@ export function CarfitBrandPage({ brand }: { brand: CarsystemBrand }) {
                   </span>
                 </li>
                 <li className={styles.breadcrumbCurrent} aria-current="page">
-                  {brand.name}
+                  {wordmark}
                 </li>
               </ol>
             </div>
           </nav>
 
-          {/* Uvodni blok (2026-10-19): zvanična C.A.R.FIT fotografija već nosi logo
-              i proizvode, pa se preko nje ništa ne postavlja; tekst i akcije su ispod. */}
-          <div className={`${styles.container} ${styles.heroPhotoWrap}`}>
+          {/* Uvodni blok: zvanična C.A.R.FIT fotografija već nosi logo i proizvode,
+              pa se preko nje ništa ne postavlja; tekst i akcije su ispod. Od
+              2026-10-20 ide preko cele širine ekrana (bez containera). */}
+          <div className={styles.heroPhotoWrap}>
             <div className={styles.heroPhoto}>
               <Image
                 alt={`${wordmark} REBEL FLAIR — logo i asortiman: lakovi, punioci, trake, papir i brusni diskovi`}
                 fill
                 priority
-                sizes="(min-width: 80rem) 1208px, 100vw"
+                sizes="100vw"
                 src="/images/brands/carfit/hero/carfit-rebel-flair-asortiman-3155x1329.jpg"
               />
             </div>
@@ -242,7 +235,7 @@ export function CarfitBrandPage({ brand }: { brand: CarsystemBrand }) {
                   data-cta-on="dark"
                   href={carfitFinalCta.primaryCta.href}
                 >
-                  Pogledajte ceo {brand.name} asortiman
+                  Pogledajte sve C.A.R.FIT proizvode
                 </Link>
                 <a
                   className={`${styles.btn} ${styles.btnSecondary} cs-cta`}
@@ -258,7 +251,7 @@ export function CarfitBrandPage({ brand }: { brand: CarsystemBrand }) {
         <FrameThemeBoot />
 
         <BrandSectionNav
-          ariaLabel="Brzi pristup Car Fit programu"
+          ariaLabel="Brzi pristup C.A.R.FIT programu"
           items={carfitSectionNavItems}
         />
 
@@ -276,7 +269,7 @@ export function CarfitBrandPage({ brand }: { brand: CarsystemBrand }) {
               </h2>
               <p className={styles.sectionLead}>
                 Ako već znate šta tražite, uđite direktno kroz kategoriju — stvarna organizacija
-                celog Car Fit programa. Pregled vodi na naš katalog sa odgovarajućim filterom.
+                celog C.A.R.FIT programa. Pregled vodi na naš katalog sa odgovarajućim filterom.
               </p>
             </CarfitReveal>
 
@@ -335,7 +328,7 @@ export function CarfitBrandPage({ brand }: { brand: CarsystemBrand }) {
                 Radionica ne radi po kategorijama. Radi po zadacima.
               </h2>
               <p className={styles.sectionLead}>
-                Zato {brand.name} program ne predstavljamo samo kao listu proizvoda. Počinjemo od
+                Zato C.A.R.FIT program ne predstavljamo samo kao listu proizvoda. Počinjemo od
                 posla koji treba završiti.
               </p>
             </CarfitReveal>
@@ -353,71 +346,75 @@ export function CarfitBrandPage({ brand }: { brand: CarsystemBrand }) {
           aria-labelledby="carfit-gradation-title"
         >
           <div className={styles.container}>
-            <CarfitReveal className={styles.sectionHead}>
-              <p className={styles.sectionKicker}>{carfitAbrasiveStory.eyebrow}</p>
-              <h2 className={styles.sectionTitle} id="carfit-gradation-title">
-                {carfitAbrasiveStory.title}
-              </h2>
-              <p className={styles.sectionLead}>
-                Svaki C.A.R.FIT abraziv ima svoj raspon granulacije i namenu. Skala ispod
-                prikazuje zvanične raspone iz tabela proizvođača — od grubog zahvata do
-                mokrog brušenja pre poliranja.
-              </p>
-            </CarfitReveal>
+            {/* Blok gradacije (2026-10-20): umesto skale ide stvarna fotografija
+                brušenja iz zvaničnog C.A.R.FIT kataloga 2026 (uvodna strana
+                poglavlja Abrasives). Rasponi su po proizvodu, iz tabela
+                varijanti na carfitrepair.com — nisu opšta preporuka. */}
+            <div className={styles.abrasiveLayout}>
+              <figure className={styles.abrasivePhoto}>
+                <Image
+                  alt="Ručno brušenje panela brusnim blokom u radionici, ruke u nitrilnim rukavicama"
+                  fill
+                  sizes="(min-width: 64rem) 40vw, 100vw"
+                  src="/images/brands/carfit/primena/carfit-brusenje-blokom-983x1435.jpg"
+                />
+                <figcaption>Fotografija: C.A.R.FIT katalog 2026</figcaption>
+              </figure>
 
-            <CarfitReveal delay={60}>
-              <ol className={styles.abrasiveList}>
-                {abrasives.map((abrasive) => (
-                  <li className={styles.abrasive} key={abrasive.slug}>
-                    <Link className={styles.abrasiveLink} href={`/proizvodi/${abrasive.slug}`}>
-                      <span className={styles.abrasiveImage}>
-                        {abrasive.image ? (
-                          <Image
-                            alt=""
-                            fill
-                            sizes="(min-width: 64rem) 9rem, 6rem"
-                            src={toDisplayImageSrc(abrasive.image)}
-                          />
-                        ) : null}
-                      </span>
-                      <span className={styles.abrasiveCopy}>
-                        <span className={styles.abrasiveName}>{abrasive.name}</span>
-                        <span className={styles.abrasiveSubtype}>{abrasive.subtype}</span>
-                        <span className={styles.abrasivePurpose}>{abrasive.purpose}</span>
-                      </span>
-                      <span className={styles.abrasiveRange}>
+              <div className={styles.abrasiveBody}>
+                <CarfitReveal className={styles.sectionHead}>
+                  <p className={styles.sectionKicker}>{carfitAbrasiveStory.eyebrow}</p>
+                  <h2 className={styles.sectionTitle} id="carfit-gradation-title">
+                    {carfitAbrasiveStory.title}
+                  </h2>
+                  <p className={styles.sectionLead}>
+                    Pet C.A.R.FIT abraziva iz našeg programa, svaki sa svojom namenom.
+                    Uz svaki je raspon granulacija u kojem ga proizvođač nudi.
+                  </p>
+                </CarfitReveal>
+
+                <ol className={styles.abrasiveList}>
+                  {abrasives.map((abrasive) => (
+                    <li className={styles.abrasive} key={abrasive.slug}>
+                      <Link className={styles.abrasiveLink} href={`/proizvodi/${abrasive.slug}`}>
+                        <span className={styles.abrasiveImage}>
+                          {abrasive.image ? (
+                            <Image
+                              alt=""
+                              fill
+                              sizes="4.5rem"
+                              src={toDisplayImageSrc(abrasive.image)}
+                            />
+                          ) : null}
+                        </span>
+                        <span className={styles.abrasiveCopy}>
+                          <span className={styles.abrasiveName}>{abrasive.name}</span>
+                          <span className={styles.abrasiveSubtype}>{abrasive.subtype}</span>
+                          <span className={styles.abrasivePurpose}>{abrasive.purpose}</span>
+                        </span>
                         <span className={styles.abrasiveRangeLabel}>
                           P{abrasive.gritMin} – P{abrasive.gritMax}
                           <small>{abrasive.gritCount} granulacija</small>
                         </span>
-                        <span className={styles.abrasiveScale} aria-hidden="true">
-                          <span
-                            className={styles.abrasiveScaleBar}
-                            style={{
-                              left: `${gritPosition(abrasive.gritMin)}%`,
-                              right: `${100 - gritPosition(abrasive.gritMax)}%`,
-                            }}
-                          />
-                        </span>
-                      </span>
-                    </Link>
-                  </li>
-                ))}
-              </ol>
-              <div className={styles.abrasiveAxis} aria-hidden="true">
-                {GRIT_TICKS.map((tick) => (
-                  <span key={tick} style={{ left: `${gritPosition(tick)}%` }}>
-                    P{tick}
-                  </span>
-                ))}
-              </div>
-            </CarfitReveal>
+                      </Link>
+                    </li>
+                  ))}
+                </ol>
 
-            <p className={styles.footnote}>
-              Rasponi i namena su iz zvaničnih tabela i opisa proizvoda na carfitrepair.com.
-              Proizvođač ne objavljuje preporuku koja granulacija ide u koji korak — izbor
-              za konkretan posao potvrđujemo kroz upit.
-            </p>
+                <p className={styles.footnote}>
+                  Raspon je ono što proizvođač nudi za taj proizvod (tabele varijanti na
+                  carfitrepair.com), ne preporuka za korak. Proizvođač ne objavljuje koja
+                  granulacija ide u koji korak — izbor za konkretan posao potvrđujemo kroz
+                  upit.
+                </p>
+                <Link
+                  className={`${styles.btn} ${styles.btnSecondary} cs-cta`}
+                  href="/katalog?brend=carfit&program=priprema-i-abrazivi"
+                >
+                  C.A.R.FIT priprema i abrazivi u katalogu
+                </Link>
+              </div>
+            </div>
           </div>
         </section>
 
@@ -549,8 +546,8 @@ export function CarfitBrandPage({ brand }: { brand: CarsystemBrand }) {
 
               <div className={styles.showcaseFoot}>
                 <p className={styles.footnote}>
-                  Ovo je izbor po grupama. Ceo {brand.name} asortiman ({productViews.length}{" "}
-                  proizvoda) je u katalogu, već filtriran na {brand.name}.
+                  Ovo je izbor po grupama. Ceo C.A.R.FIT asortiman ({productViews.length}{" "}
+                  proizvoda) je u katalogu, već filtriran na C.A.R.FIT.
                 </p>
                 <Link
                   className={`${styles.btn} ${styles.btnPrimary} cs-cta`}
@@ -558,7 +555,7 @@ export function CarfitBrandPage({ brand }: { brand: CarsystemBrand }) {
                   data-cta-fill="red"
                   href={carfitFinalCta.primaryCta.href}
                 >
-                  Pogledajte ceo asortiman u katalogu
+                  Pogledajte sve C.A.R.FIT proizvode
                   <span aria-hidden="true">→</span>
                 </Link>
               </div>

@@ -120,9 +120,9 @@ export const carfitHero = {
   eyebrow: "Profesionalni refinish materijal",
   title: "Sve što svakodnevni posao traži.",
   lead:
-    "Od maskiranja i pripreme površine do bezbojnog laka i završnog poliranja — Car Fit donosi praktične proizvode za poslove koji se svakodnevno ponavljaju u radionici.",
+    "Od maskiranja i pripreme površine do bezbojnog laka i završnog poliranja — C.A.R.FIT donosi praktične proizvode za poslove koji se svakodnevno ponavljaju u radionici.",
   secondary: "Pravi proizvod. Pravi korak. Bez komplikovanja.",
-  primaryCta: { href: "#poslovi", label: "Istražite Car Fit program" },
+  primaryCta: { href: "#poslovi", label: "Istražite C.A.R.FIT program" },
   secondaryCta: { href: "#proizvodi", label: "Pogledajte proizvode" },
   markers: [
     { id: "priprema", label: "Priprema", taskId: "priprema-povrsine" },
@@ -133,7 +133,7 @@ export const carfitHero = {
   ],
   media: media(
     "carfit-hero-workbench",
-    "Car Fit materijali pripremljeni na radnom stolu u lakirerskoj radionici",
+    "C.A.R.FIT materijali pripremljeni na radnom stolu u lakirerskoj radionici",
     2400,
     1600,
   ),
@@ -174,7 +174,7 @@ export const carfitCategories: CarfitCategory[] = [
     note: "Podloga, izolacija i prijanjanje",
     preferredProductSlugs: ["car-fit-prajmer"],
     match: { programSlugs: ["priprema-povrsine"], phaseSlugs: ["podloga"] },
-    catalogTarget: brandTarget("priprema-i-abrazivi", "Car Fit podloga u katalogu"),
+    catalogTarget: brandTarget("priprema-i-abrazivi", "C.A.R.FIT podloga u katalogu"),
   },
   {
     id: "maskiranje",
@@ -183,7 +183,7 @@ export const carfitCategories: CarfitCategory[] = [
     note: "Folije, trake i zaštita zone",
     preferredProductSlugs: ["carfit-maskirna-folija-4x5m", "carfit-maskirna-folija-4x150m"],
     match: { programSlugs: ["potrosni-materijal"], phaseSlugs: ["priprema"] },
-    catalogTarget: brandTarget("potrosni-materijal", "Car Fit maskiranje u katalogu"),
+    catalogTarget: brandTarget("potrosni-materijal", "C.A.R.FIT maskiranje u katalogu"),
   },
   {
     id: "bezbojni-lakovi",
@@ -327,7 +327,7 @@ export const carfitTasks: CarfitTask[] = [
     categoryIds: ["fileri-prajmeri", "abrazivi"],
     preferredProductSlugs: ["car-fit-prajmer"],
     match: { programSlugs: ["priprema-povrsine"], phaseSlugs: ["podloga"] },
-    catalogTarget: brandTarget("priprema-i-abrazivi", "Pogledajte Car Fit podlogu"),
+    catalogTarget: brandTarget("priprema-i-abrazivi", "Pogledajte C.A.R.FIT podlogu"),
     media: media(
       "carfit-task-priming",
       "Nanošenje prajmera na pripremljenu površinu vozila",
@@ -477,7 +477,7 @@ export const carfitFamilies: CarfitFamily[] = [
       "Gradacija koja vodi od grubog zahvata do površine spremne za podlogu, bez preskakanja koraka.",
     categoryIds: ["abrazivi"],
     span: "hero",
-    media: media("carfit-abrasives", "Car Fit brusni disk, prikaz abrazivnog programa", 1600, 1600),
+    media: media("carfit-abrasives", "C.A.R.FIT brusni disk, prikaz abrazivnog programa", 1600, 1600),
   },
   {
     id: "kitovi",
@@ -486,7 +486,7 @@ export const carfitFamilies: CarfitFamily[] = [
     claim: "Poliesterski kitovi za izravnavanje nepravilnosti pre podloge.",
     categoryIds: ["kitovi"],
     span: "tall",
-    media: media("carfit-putties", "Car Fit kit u pakovanju", 1200, 1200),
+    media: media("carfit-putties", "C.A.R.FIT kit u pakovanju", 1200, 1200),
   },
   {
     id: "maskiranje",
@@ -495,7 +495,7 @@ export const carfitFamilies: CarfitFamily[] = [
     claim: "Folije i trake koje definišu zonu rada i čuvaju ivicu.",
     categoryIds: ["maskiranje"],
     span: "unit",
-    media: media("carfit-masking", "Car Fit maskirna folija", 1200, 1200),
+    media: media("carfit-masking", "C.A.R.FIT maskirna folija", 1200, 1200),
   },
   {
     id: "bezbojni-lakovi",
@@ -504,7 +504,7 @@ export const carfitFamilies: CarfitFamily[] = [
     claim: "Završni sloj koji nosi sjaj i štiti bazu.",
     categoryIds: ["bezbojni-lakovi"],
     span: "unit",
-    media: media("carfit-clearcoat", "Car Fit bezbojni lak u pakovanju", 1200, 1200),
+    media: media("carfit-clearcoat", "C.A.R.FIT bezbojni lak u pakovanju", 1200, 1200),
   },
   {
     id: "poliranje",
@@ -513,24 +513,19 @@ export const carfitFamilies: CarfitFamily[] = [
     claim: "Pasta, pad i krpa kao jedan sistem za završnu korekciju.",
     categoryIds: ["poliranje"],
     span: "wide",
-    media: media("carfit-polishing", "Car Fit program za poliranje", 1600, 900),
+    media: media("carfit-polishing", "C.A.R.FIT program za poliranje", 1600, 900),
   },
 ];
 
+/*
+ * Blok gradacije (2026-10-20): ostaju samo naslov i nadnaslov. Opšta skala
+ * „P80–P180 skidanje … P1000–P2000 finiš“ je uklonjena — nije iz C.A.R.FIT
+ * dokumentacije, a stranica je prikazivala kao pravilo. Rasponi idu po
+ * proizvodu iz lib/carfit-abrasives.ts.
+ */
 export const carfitAbrasiveStory = {
   eyebrow: "Gradacija",
   title: "Od grubog zahvata do kontrolisane površine.",
-  lead:
-    "Brušenje nije jedan korak nego niz. Svaka gradacija skida tragove prethodne, a poslednja odlučuje kako će podloga primiti materijal.",
-  steps: [
-    { code: "P80 – P180", title: "Skidanje", note: "Uklanjanje starog sloja i grubo oblikovanje" },
-    { code: "P240 – P400", title: "Oblikovanje", note: "Izravnavanje kita i priprema prelaza" },
-    { code: "P500 – P800", title: "Podloga", note: "Priprema pre prajmera i filera" },
-    { code: "P1000 – P2000", title: "Finiš", note: "Matiranje i priprema pre poliranja" },
-  ],
-  note:
-    "Prikazane gradacije opisuju uobičajen redosled brušenja u refinish procesu. Tačan raspon zrna zavisi od proizvoda i podloge — proverite tehnički list ili pošaljite upit.",
-  media: media("carfit-abrasive-disc", "Brusni disk, detalj abrazivne površine", 1400, 1400),
 };
 
 export const carfitMaskingStory = {
@@ -543,7 +538,14 @@ export const carfitMaskingStory = {
     { code: "02", title: "Maskirna traka", note: "Oštra ivica na prelazu" },
     { code: "03", title: "Zaštita zone", note: "Pristup i prelazi pripremljeni pre lakiranja" },
   ],
-  media: media("carfit-masking-scene", "Maskirano vozilo pripremljeno za lakiranje", 2000, 1100),
+  /* Fotografija: C.A.R.FIT katalog 2026, uvodna strana poglavlja Masking. */
+  media: media(
+    "carfit-masking-scene",
+    "Lepljenje žute maskirne trake uz ivicu zone na tamnom panelu",
+    983,
+    1435,
+    "/images/brands/carfit/primena/carfit-maskirna-traka-983x1435.jpg",
+  ),
 };
 
 export const carfitFinishStory = {
@@ -557,14 +559,21 @@ export const carfitFinishStory = {
     { code: "03", title: "Krpa", note: "Uklanjanje ostatka bez novih tragova" },
     { code: "04", title: "Kontrola", note: "Provera površine pod usmerenim svetlom" },
   ],
-  media: media("carfit-finish-scene", "Poliranje završnog sloja laka na vozilu", 2000, 1100),
+  /* Fotografija: C.A.R.FIT katalog 2026, uvodna strana poglavlja Polishing. */
+  media: media(
+    "carfit-finish-scene",
+    "Nanošenje C.A.R.FIT paste za poliranje na žuti pad orbitalne mašine",
+    983,
+    1435,
+    "/images/brands/carfit/primena/carfit-poliranje-983x1435.jpg",
+  ),
 };
 
 export const carfitStory = {
   eyebrow: "Brend",
   title: "Napravljeno da prati stvaran rad.",
   body:
-    "Radionica ne traži komplikovaniju policu. Traži proizvod koji je jasan, dostupan i odgovara poslu koji je pred njom. Car Fit program razvijen je upravo oko takvih svakodnevnih potreba profesionalne reparacije.",
+    "Radionica ne traži komplikovaniju policu. Traži proizvod koji je jasan, dostupan i odgovara poslu koji je pred njom. C.A.R.FIT program razvijen je upravo oko takvih svakodnevnih potreba profesionalne reparacije.",
   meta: "C.A.R.FIT · brand of August Handel GmbH",
   tag: "REBEL FLAIR",
 };
@@ -585,8 +594,8 @@ export const carfitDocumentation = {
 export const carfitFinalCta = {
   title: "Posao je jednostavniji kada je pravi proizvod pri ruci.",
   body:
-    "Istražite Car Fit program dostupan kroz Carsystem i R-M i pronađite materijale za sledeći posao u radionici.",
-  primaryCta: { href: CATALOG_BRAND, label: "Pogledajte Car Fit proizvode" },
+    "Istražite C.A.R.FIT program dostupan kroz Carsystem i R-M i pronađite materijale za sledeći posao u radionici.",
+  primaryCta: { href: CATALOG_BRAND, label: "Pogledajte C.A.R.FIT proizvode" },
   secondaryCta: { href: `/kontakt?tema=proizvod&brend=${CARFIT_BRAND_SLUG}`, label: "Kontaktirajte nas" },
 };
 

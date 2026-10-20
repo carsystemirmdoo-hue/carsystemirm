@@ -30,7 +30,7 @@
     "test:public-code": "tsx --test --tsconfig db/integration/tsconfig.test.json lib/catalog/public-code.test.mts",
     "test:search": "node --test lib/search/*.test.mjs",
     "test:search-rules": "node --test lib/search/engine.test.mjs lib/search/normalize.test.mjs lib/search/grouping.test.mjs lib/search/abrasive-backing.test.mjs",
-    "test:category-coverage": "tsx --test --tsconfig db/integration/tsconfig.test.json lib/catalog/category-coverage.test.mts",
+    "test:category-coverage": "tsx --test --tsconfig db/integration/tsconfig.test.json lib/catalog/category-coverage.test.mts lib/catalog/categoryOverrides.test.mts",
     "test:measures": "tsx --test --tsconfig db/integration/tsconfig.test.json lib/verified-thousands.test.mts",
     "test:seo-canonical": "tsx --test --tsconfig db/integration/tsconfig.test.json lib/seo/canonicalFamilyLinks.test.mts lib/seo/placeholderSocialImage.test.mts lib/seo/productTitles.test.mts",
     "search:benchmark": "node --expose-gc scripts/benchmark-search-asset.mjs",

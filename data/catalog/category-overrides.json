@@ -1,0 +1,395 @@
+{
+  "_comment": [
+    "Ispravke javne kategorije po artiklu (2026-10-20, provera kategorije „Abrazivi“).",
+    "Primenjuje se u lib/carsystem-data.ts posle uvoza; izvorni sync podaci se ne menjaju.",
+    "Pravila: abrazivi = brusni materijali + podloške, međupodloške i blokovi za brušenje + kontrolni materijali i paste za matiranje (kao Carsystem „Schleifen“); poliranje = paste, sunđeri, krzna, krpe i podloške polirke (kao Carsystem „Finish“)."
+  ],
+  "decidedOn": "2026-10-20",
+  "records": [
+    {
+      "slug": "carsystem-excenter-back-pad-multi-m",
+      "category": "abrazivi",
+      "from": "pribor",
+      "role": "podloška brusilice 150 mm (Back pad)",
+      "reason": "Proizvođač ga vodi u kategoriji brušenja; uloga je nošenje ili vođenje abraziva pri brušenju.",
+      "source": "https://www.carsystem.org/produkte/kategorie/schleifen (93 artikla, 12 strana, 2026-10-20); officialCategory „Abrasives“ u data/carsystem-catalog-products.generated.json"
+    },
+    {
+      "slug": "carsystem-excenter-back-pad-t-19",
+      "category": "abrazivi",
+      "from": "pribor",
+      "role": "podloška brusilice 150 mm (Back pad)",
+      "reason": "Proizvođač ga vodi u kategoriji brušenja; uloga je nošenje ili vođenje abraziva pri brušenju.",
+      "source": "https://www.carsystem.org/produkte/kategorie/schleifen (93 artikla, 12 strana, 2026-10-20); officialCategory „Abrasives“ u data/carsystem-catalog-products.generated.json"
+    },
+    {
+      "slug": "carsystem-finish-sander-back-pad",
+      "category": "abrazivi",
+      "from": "pribor",
+      "role": "podloška brusilice 77 mm (Back pad)",
+      "reason": "Proizvođač ga vodi u kategoriji brušenja; uloga je nošenje ili vođenje abraziva pri brušenju.",
+      "source": "https://www.carsystem.org/produkte/kategorie/schleifen (93 artikla, 12 strana, 2026-10-20); officialCategory „Abrasives“ u data/carsystem-catalog-products.generated.json"
+    },
+    {
+      "slug": "carsystem-mini-back-pad",
+      "category": "abrazivi",
+      "from": "pribor",
+      "role": "podloška mini brusilice (Stützteller)",
+      "reason": "Proizvođač ga vodi u kategoriji brušenja; uloga je nošenje ili vođenje abraziva pri brušenju.",
+      "source": "https://www.carsystem.org/produkte/kategorie/schleifen (93 artikla, 12 strana, 2026-10-20); officialCategory „Abrasives“ u data/carsystem-catalog-products.generated.json"
+    },
+    {
+      "slug": "carsystem-proflex-back-pad-psa",
+      "category": "abrazivi",
+      "from": "pribor",
+      "role": "podloška 30 mm za ProFlex abrazive",
+      "reason": "Proizvođač ga vodi u kategoriji brušenja; uloga je nošenje ili vođenje abraziva pri brušenju.",
+      "source": "https://www.carsystem.org/produkte/kategorie/schleifen (93 artikla, 12 strana, 2026-10-20); officialCategory „Abrasives“ u data/carsystem-catalog-products.generated.json"
+    },
+    {
+      "slug": "carsystem-rupes-back-pad",
+      "category": "abrazivi",
+      "from": "pribor",
+      "role": "RUPES podloška brusilice 150 mm",
+      "reason": "Proizvođač ga vodi u kategoriji brušenja; uloga je nošenje ili vođenje abraziva pri brušenju.",
+      "source": "https://www.carsystem.org/produkte/kategorie/schleifen (93 artikla, 12 strana, 2026-10-20); officialCategory „Abrasives“ u data/carsystem-catalog-products.generated.json"
+    },
+    {
+      "slug": "carsystem-interface-pad",
+      "category": "abrazivi",
+      "from": "pribor",
+      "role": "međupodloška 150 mm za brusne diskove",
+      "reason": "Proizvođač ga vodi u kategoriji brušenja; uloga je nošenje ili vođenje abraziva pri brušenju.",
+      "source": "https://www.carsystem.org/produkte/kategorie/schleifen (93 artikla, 12 strana, 2026-10-20); officialCategory „Abrasives“ u data/carsystem-catalog-products.generated.json"
+    },
+    {
+      "slug": "carsystem-soft-interface-pad",
+      "category": "abrazivi",
+      "from": "pribor",
+      "role": "meka međupodloška 150 mm",
+      "reason": "Proizvođač ga vodi u kategoriji brušenja; uloga je nošenje ili vođenje abraziva pri brušenju.",
+      "source": "https://www.carsystem.org/produkte/kategorie/schleifen (93 artikla, 12 strana, 2026-10-20); officialCategory „Abrasives“ u data/carsystem-catalog-products.generated.json"
+    },
+    {
+      "slug": "carsystem-grip-to-stick-interface-pad",
+      "category": "abrazivi",
+      "from": "pribor",
+      "role": "međupodloška Ø 30 mm",
+      "reason": "Proizvođač ga vodi u kategoriji brušenja; uloga je nošenje ili vođenje abraziva pri brušenju.",
+      "source": "https://www.carsystem.org/produkte/kategorie/schleifen (93 artikla, 12 strana, 2026-10-20); officialCategory „Abrasives“ u data/carsystem-catalog-products.generated.json"
+    },
+    {
+      "slug": "carsystem-pad-saver",
+      "category": "abrazivi",
+      "from": "pribor",
+      "role": "međupodloška – zaštita podloške",
+      "reason": "Proizvođač ga vodi u kategoriji brušenja; uloga je nošenje ili vođenje abraziva pri brušenju.",
+      "source": "https://www.carsystem.org/produkte/kategorie/schleifen (93 artikla, 12 strana, 2026-10-20); officialCategory „Abrasives“ u data/carsystem-catalog-products.generated.json"
+    },
+    {
+      "slug": "carsystem-proflex-interface-pad-150-mm-15-holes",
+      "category": "abrazivi",
+      "from": "pribor",
+      "role": "ProFlex međupodloška 150 mm",
+      "reason": "Proizvođač ga vodi u kategoriji brušenja; uloga je nošenje ili vođenje abraziva pri brušenju.",
+      "source": "https://www.carsystem.org/produkte/kategorie/schleifen (93 artikla, 12 strana, 2026-10-20); officialCategory „Abrasives“ u data/carsystem-catalog-products.generated.json"
+    },
+    {
+      "slug": "carsystem-proflex-interface-pad-30-mm",
+      "category": "abrazivi",
+      "from": "pribor",
+      "role": "ProFlex međupodloška 30 mm",
+      "reason": "Proizvođač ga vodi u kategoriji brušenja; uloga je nošenje ili vođenje abraziva pri brušenju.",
+      "source": "https://www.carsystem.org/produkte/kategorie/schleifen (93 artikla, 12 strana, 2026-10-20); officialCategory „Abrasives“ u data/carsystem-catalog-products.generated.json"
+    },
+    {
+      "slug": "carsystem-proflex-interface-pad-75-mm",
+      "category": "abrazivi",
+      "from": "pribor",
+      "role": "ProFlex međupodloška 75 mm",
+      "reason": "Proizvođač ga vodi u kategoriji brušenja; uloga je nošenje ili vođenje abraziva pri brušenju.",
+      "source": "https://www.carsystem.org/produkte/kategorie/schleifen (93 artikla, 12 strana, 2026-10-20); officialCategory „Abrasives“ u data/carsystem-catalog-products.generated.json"
+    },
+    {
+      "slug": "carsystem-proflex-interface-pad-finish-150-mm-15-holes",
+      "category": "abrazivi",
+      "from": "pribor",
+      "role": "ProFlex Finish međupodloška 150 mm",
+      "reason": "Proizvođač ga vodi u kategoriji brušenja; uloga je nošenje ili vođenje abraziva pri brušenju.",
+      "source": "https://www.carsystem.org/produkte/kategorie/schleifen (93 artikla, 12 strana, 2026-10-20); officialCategory „Abrasives“ u data/carsystem-catalog-products.generated.json"
+    },
+    {
+      "slug": "carsystem-proflex-interface-pad-finish-75-mm",
+      "category": "abrazivi",
+      "from": "pribor",
+      "role": "ProFlex Finish međupodloška 75 mm",
+      "reason": "Proizvođač ga vodi u kategoriji brušenja; uloga je nošenje ili vođenje abraziva pri brušenju.",
+      "source": "https://www.carsystem.org/produkte/kategorie/schleifen (93 artikla, 12 strana, 2026-10-20); officialCategory „Abrasives“ u data/carsystem-catalog-products.generated.json"
+    },
+    {
+      "slug": "carsystem-fine-block",
+      "category": "abrazivi",
+      "from": "pribor",
+      "role": "blok za fino brušenje",
+      "reason": "Proizvođač ga vodi u kategoriji brušenja; uloga je nošenje ili vođenje abraziva pri brušenju.",
+      "source": "https://www.carsystem.org/produkte/kategorie/schleifen (93 artikla, 12 strana, 2026-10-20); officialCategory „Abrasives“ u data/carsystem-catalog-products.generated.json"
+    },
+    {
+      "slug": "carsystem-proflex-mercury-sanding-block",
+      "category": "abrazivi",
+      "from": "pribor",
+      "role": "brusni blok za ProFlex Mercury",
+      "reason": "Proizvođač ga vodi u kategoriji brušenja; uloga je nošenje ili vođenje abraziva pri brušenju.",
+      "source": "https://www.carsystem.org/produkte/kategorie/schleifen (93 artikla, 12 strana, 2026-10-20); officialCategory „Abrasives“ u data/carsystem-catalog-products.generated.json"
+    },
+    {
+      "slug": "carsystem-proflex-pluto-sanding-block",
+      "category": "abrazivi",
+      "from": "pribor",
+      "role": "brusni blok za ProFlex Pluto",
+      "reason": "Proizvođač ga vodi u kategoriji brušenja; uloga je nošenje ili vođenje abraziva pri brušenju.",
+      "source": "https://www.carsystem.org/produkte/kategorie/schleifen (93 artikla, 12 strana, 2026-10-20); officialCategory „Abrasives“ u data/carsystem-catalog-products.generated.json"
+    },
+    {
+      "slug": "carsystem-sanding-block-100-2-0",
+      "category": "abrazivi",
+      "from": "pribor",
+      "role": "ručni brusni blok (čičak)",
+      "reason": "Proizvođač ga vodi u kategoriji brušenja; uloga je nošenje ili vođenje abraziva pri brušenju.",
+      "source": "https://www.carsystem.org/produkte/kategorie/schleifen (93 artikla, 12 strana, 2026-10-20); officialCategory „Abrasives“ u data/carsystem-catalog-products.generated.json"
+    },
+    {
+      "slug": "carsystem-sanding-block-198-2-0",
+      "category": "abrazivi",
+      "from": "pribor",
+      "role": "ručni brusni blok (čičak)",
+      "reason": "Proizvođač ga vodi u kategoriji brušenja; uloga je nošenje ili vođenje abraziva pri brušenju.",
+      "source": "https://www.carsystem.org/produkte/kategorie/schleifen (93 artikla, 12 strana, 2026-10-20); officialCategory „Abrasives“ u data/carsystem-catalog-products.generated.json"
+    },
+    {
+      "slug": "carsystem-sanding-block-198-kit",
+      "category": "abrazivi",
+      "from": "pribor",
+      "role": "set ručnih brusnih blokova",
+      "reason": "Proizvođač ga vodi u kategoriji brušenja; uloga je nošenje ili vođenje abraziva pri brušenju.",
+      "source": "https://www.carsystem.org/produkte/kategorie/schleifen (93 artikla, 12 strana, 2026-10-20); officialCategory „Abrasives“ u data/carsystem-catalog-products.generated.json"
+    },
+    {
+      "slug": "carsystem-sanding-block-300-100",
+      "category": "abrazivi",
+      "from": "pribor",
+      "role": "ručni brusni blok (čičak)",
+      "reason": "Proizvođač ga vodi u kategoriji brušenja; uloga je nošenje ili vođenje abraziva pri brušenju.",
+      "source": "https://www.carsystem.org/produkte/kategorie/schleifen (93 artikla, 12 strana, 2026-10-20); officialCategory „Abrasives“ u data/carsystem-catalog-products.generated.json"
+    },
+    {
+      "slug": "carsystem-sanding-block-400-2-0",
+      "category": "abrazivi",
+      "from": "pribor",
+      "role": "ručni brusni blok 400 2.0",
+      "reason": "Proizvođač ga vodi u kategoriji brušenja; uloga je nošenje ili vođenje abraziva pri brušenju.",
+      "source": "https://www.carsystem.org/produkte/kategorie/schleifen (93 artikla, 12 strana, 2026-10-20); officialCategory „Abrasives“ u data/carsystem-catalog-products.generated.json"
+    },
+    {
+      "slug": "carsystem-sanding-block-400-grip-flex",
+      "category": "abrazivi",
+      "from": "pribor",
+      "role": "ručni brusni blok (čičak)",
+      "reason": "Proizvođač ga vodi u kategoriji brušenja; uloga je nošenje ili vođenje abraziva pri brušenju.",
+      "source": "https://www.carsystem.org/produkte/kategorie/schleifen (93 artikla, 12 strana, 2026-10-20); officialCategory „Abrasives“ u data/carsystem-catalog-products.generated.json"
+    },
+    {
+      "slug": "carsystem-sanding-block-disc-kit-150",
+      "category": "abrazivi",
+      "from": "pribor",
+      "role": "set ručnih blokova za diskove 150 mm",
+      "reason": "Proizvođač ga vodi u kategoriji brušenja; uloga je nošenje ili vođenje abraziva pri brušenju.",
+      "source": "https://www.carsystem.org/produkte/kategorie/schleifen (93 artikla, 12 strana, 2026-10-20); officialCategory „Abrasives“ u data/carsystem-catalog-products.generated.json"
+    },
+    {
+      "slug": "carsystem-sanding-block-grip",
+      "category": "abrazivi",
+      "from": "pribor",
+      "role": "ručni brusni blok (čičak)",
+      "reason": "Proizvođač ga vodi u kategoriji brušenja; uloga je nošenje ili vođenje abraziva pri brušenju.",
+      "source": "https://www.carsystem.org/produkte/kategorie/schleifen (93 artikla, 12 strana, 2026-10-20); officialCategory „Abrasives“ u data/carsystem-catalog-products.generated.json"
+    },
+    {
+      "slug": "carsystem-sanding-block-grip-box",
+      "category": "abrazivi",
+      "from": "pribor",
+      "role": "ručni brusni blokovi (čičak)",
+      "reason": "Proizvođač ga vodi u kategoriji brušenja; uloga je nošenje ili vođenje abraziva pri brušenju.",
+      "source": "https://www.carsystem.org/produkte/kategorie/schleifen (93 artikla, 12 strana, 2026-10-20); officialCategory „Abrasives“ u data/carsystem-catalog-products.generated.json"
+    },
+    {
+      "slug": "carsystem-sanding-block-hard",
+      "category": "abrazivi",
+      "from": "pribor",
+      "role": "tvrdi ručni brusni blok",
+      "reason": "Proizvođač ga vodi u kategoriji brušenja; uloga je nošenje ili vođenje abraziva pri brušenju.",
+      "source": "https://www.carsystem.org/produkte/kategorie/schleifen (93 artikla, 12 strana, 2026-10-20); officialCategory „Abrasives“ u data/carsystem-catalog-products.generated.json"
+    },
+    {
+      "slug": "carsystem-prep-brush",
+      "category": "abrazivi",
+      "from": "pribor",
+      "role": "specijalna četka za Prep & Scuff (matiranje)",
+      "reason": "Proizvođač ga vodi u kategoriji brušenja; uloga je nošenje ili vođenje abraziva pri brušenju.",
+      "source": "https://www.carsystem.org/produkte/kategorie/schleifen (93 artikla, 12 strana, 2026-10-20); officialCategory „Abrasives“ u data/carsystem-catalog-products.generated.json"
+    },
+    {
+      "slug": "carsystem-finish-back-pad",
+      "category": "poliranje",
+      "from": "pribor",
+      "role": "podloška polirke (Finish back pad)",
+      "reason": "Podloška polirke — nosi sunđer ili krzno pri poliranju, proizvođač je vodi u završnoj obradi.",
+      "source": "https://www.carsystem.org/produkte/kategorie/finish (59 artikala, 8 strana, 2026-10-20); officialCategory „Finish“"
+    },
+    {
+      "slug": "carsystem-finish-back-pad-m-14",
+      "category": "poliranje",
+      "from": "pribor",
+      "role": "podloška polirke M-14",
+      "reason": "Podloška polirke — nosi sunđer ili krzno pri poliranju, proizvođač je vodi u završnoj obradi.",
+      "source": "https://www.carsystem.org/produkte/kategorie/finish (59 artikala, 8 strana, 2026-10-20); officialCategory „Finish“"
+    },
+    {
+      "slug": "carsystem-polishing-back-pad",
+      "category": "poliranje",
+      "from": "pribor",
+      "role": "podloška polirke",
+      "reason": "Podloška polirke — nosi sunđer ili krzno pri poliranju, proizvođač je vodi u završnoj obradi.",
+      "source": "https://www.carsystem.org/produkte/kategorie/finish (59 artikala, 8 strana, 2026-10-20); officialCategory „Finish“"
+    },
+    {
+      "slug": "befar-backing-pad",
+      "category": "abrazivi",
+      "from": "pribor",
+      "role": "međupodloška 150 mm za brusni disk",
+      "reason": "Proizvođač ga vodi u grupi za brušenje; uloga je oslonac ili nošenje abraziva.",
+      "source": "Befar katalog: grupa „Sanding Pad Group“ (officialCategories u data/befar-catalog-products.generated.json)"
+    },
+    {
+      "slug": "befar-sanding-block-hard-red",
+      "category": "abrazivi",
+      "from": "pribor",
+      "role": "ručni brusni blok",
+      "reason": "Proizvođač ga vodi u grupi za brušenje; uloga je oslonac ili nošenje abraziva.",
+      "source": "Befar katalog: grupa „Sanding Pad Group“ (officialCategories u data/befar-catalog-products.generated.json)"
+    },
+    {
+      "slug": "befar-sanding-block-soft-orange",
+      "category": "abrazivi",
+      "from": "pribor",
+      "role": "ručni brusni blok",
+      "reason": "Proizvođač ga vodi u grupi za brušenje; uloga je oslonac ili nošenje abraziva.",
+      "source": "Befar katalog: grupa „Sanding Pad Group“ (officialCategories u data/befar-catalog-products.generated.json)"
+    },
+    {
+      "slug": "befar-sanding-pad",
+      "category": "abrazivi",
+      "from": "pribor",
+      "role": "podloška pneumatske brusilice 150 mm",
+      "reason": "Proizvođač ga vodi u grupi za brušenje; uloga je oslonac ili nošenje abraziva.",
+      "source": "Befar katalog: grupa „Sanding Pad Group“ (officialCategories u data/befar-catalog-products.generated.json)"
+    },
+    {
+      "slug": "befar-turkuaz-sanding-block-blue",
+      "category": "abrazivi",
+      "from": "pribor",
+      "role": "ručni brusni blok",
+      "reason": "Proizvođač ga vodi u grupi za brušenje; uloga je oslonac ili nošenje abraziva.",
+      "source": "Befar katalog: grupa „Sanding Pad Group“ (officialCategories u data/befar-catalog-products.generated.json)"
+    },
+    {
+      "slug": "befar-hard-velcro-backing-pad",
+      "category": "poliranje",
+      "from": "pribor",
+      "role": "podloška (tanjir) polirke, Hard",
+      "reason": "Nosi čičak sunđer ili krzno na polirki — deo programa za poliranje.",
+      "source": "Befar katalog: grupa „Backing Pad Group“ (podloške polirke)"
+    },
+    {
+      "slug": "befar-medium-hard-velcro-backing-pad",
+      "category": "poliranje",
+      "from": "pribor",
+      "role": "podloška (tanjir) polirke, Medium Hard",
+      "reason": "Nosi čičak sunđer ili krzno na polirki — deo programa za poliranje.",
+      "source": "Befar katalog: grupa „Backing Pad Group“ (podloške polirke)"
+    },
+    {
+      "slug": "befar-soft-velcro-backing-pad",
+      "category": "poliranje",
+      "from": "pribor",
+      "role": "podloška (tanjir) polirke, Soft",
+      "reason": "Nosi čičak sunđer ili krzno na polirki — deo programa za poliranje.",
+      "source": "Befar katalog: grupa „Backing Pad Group“ (podloške polirke)"
+    },
+    {
+      "slug": "befar-sandwich-velcro-backing-pad",
+      "category": "poliranje",
+      "from": "pribor",
+      "role": "podloška (tanjir) polirke, Sandwich",
+      "reason": "Nosi čičak sunđer ili krzno na polirki — deo programa za poliranje.",
+      "source": "Befar katalog: grupa „Backing Pad Group“ (podloške polirke)"
+    },
+    {
+      "slug": "befar-plate-type-felt-backing-pad",
+      "category": "poliranje",
+      "from": "pribor",
+      "role": "podloška za filc na polirki",
+      "reason": "Nosi čičak sunđer ili krzno na polirki — deo programa za poliranje.",
+      "source": "Befar katalog: grupa „Backing Pad Group“ (podloške polirke)"
+    },
+    {
+      "slug": "befar-leo-detailing-backing-pad",
+      "category": "poliranje",
+      "from": "pribor",
+      "role": "podloška polirke za detailing",
+      "reason": "Nosi čičak sunđer ili krzno na polirki — deo programa za poliranje.",
+      "source": "Befar katalog: grupa „Backing Pad Group“ (podloške polirke)"
+    },
+    {
+      "slug": "carfit-flat-sanding-block",
+      "category": "abrazivi",
+      "from": "pribor",
+      "role": "ravan ručni brusni blok",
+      "reason": "Proizvođač ga vodi među abrazivima; uloga je ručno brušenje sa brusnim papirom ili diskom.",
+      "source": "carfitrepair.com: kategorija „Abrasives and sanding“ (officialCategory u data/carfit-catalog-products.generated.json)"
+    },
+    {
+      "slug": "carfit-hand-sanding-block",
+      "category": "abrazivi",
+      "from": "pribor",
+      "role": "ručni blok za diskove 150 mm",
+      "reason": "Proizvođač ga vodi među abrazivima; uloga je ručno brušenje sa brusnim papirom ili diskom.",
+      "source": "carfitrepair.com: kategorija „Abrasives and sanding“ (officialCategory u data/carfit-catalog-products.generated.json)"
+    },
+    {
+      "slug": "carfit-semi-round-sanding-block",
+      "category": "abrazivi",
+      "from": "pribor",
+      "role": "poluokrugli ručni brusni blok",
+      "reason": "Proizvođač ga vodi među abrazivima; uloga je ručno brušenje sa brusnim papirom ili diskom.",
+      "source": "carfitrepair.com: kategorija „Abrasives and sanding“ (officialCategory u data/carfit-catalog-products.generated.json)"
+    },
+    {
+      "slug": "carfit-rubber-sanding-block",
+      "category": "abrazivi",
+      "from": "pribor",
+      "role": "gumeni ručni brusni blok",
+      "reason": "Proizvođač ga vodi među abrazivima; uloga je ručno brušenje sa brusnim papirom ili diskom.",
+      "source": "carfitrepair.com: kategorija „Abrasives and sanding“ (officialCategory u data/carfit-catalog-products.generated.json)"
+    },
+    {
+      "slug": "carfit-manual-polishing-and-sanding-pad",
+      "category": "abrazivi",
+      "from": "pribor",
+      "role": "ručni pad za diskove 150 mm (brušenje i poliranje)",
+      "reason": "Proizvođač ga vodi među abrazivima; uloga je ručno brušenje sa brusnim papirom ili diskom.",
+      "source": "carfitrepair.com: kategorija „Abrasives and sanding“ (officialCategory u data/carfit-catalog-products.generated.json)",
+      "ambiguity": "Proizvođač ga opisuje i za ručno poliranje; zadržan uz brušenje prema kategoriji proizvođača."
+    }
+  ]
+}

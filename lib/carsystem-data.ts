@@ -3,6 +3,7 @@ import { RM_CRYSTAL_BASE_SLUG, RM_PASTE_SLUG, withRmMixingBases } from "@/lib/rm
 import { abrasiveBackingTerms } from "@/lib/search/abrasive-backing.mjs";
 import { publicSkuOf } from "@/lib/catalog/public-code";
 import removedFromCustomerCatalog from "@/data/catalog/removed-from-customer-catalog.json";
+import categoryOverrides from "@/data/catalog/category-overrides.json";
 import suppliedImages from "@/data/catalog/image-supply/supplied-images.json";
 import { suppliedImageAllowed } from "@/lib/supplied-image-rights.mjs";
 import { cosmosLacProducts } from "@/lib/cosmos-lac-data";
@@ -2909,6 +2910,22 @@ function withSuppliedImage(product: CarsystemProduct): CarsystemProduct {
   };
 }
 
+/**
+ * Ispravke javne kategorije po artiklu (2026-10-20) — data/catalog/category-overrides.json.
+ * Svaka ispravka nosi razlog i izvor (kategorija proizvođača); sync podaci ostaju netaknuti.
+ */
+const categoryOverrideBySlug = new Map(
+  (categoryOverrides.records as { slug: string; category: string }[]).map((record) => [
+    record.slug,
+    record.category,
+  ]),
+);
+
+function withCategoryOverride(product: CarsystemProduct): CarsystemProduct {
+  const category = categoryOverrideBySlug.get(product.slug);
+  return category ? { ...product, taxonomyCategory: category } : product;
+}
+
 const architecturedProducts = productRecords
   .filter((product) => !removedSlugs.has(product.slug))
   .map(withCatalogArchitecture);
@@ -2940,6 +2957,7 @@ export const products: CarsystemProduct[] = architecturedProducts.map((product) 
 
 )
   .map(withoutRemovedReferences)
+  .map(withCategoryOverride)
   .map(withSuppliedImage)
   // Poslednji korak: decimalni zarez u srpskim opisima mera (samo prikaz, vidi modul).
   .map(withSerbianMeasureDisplay);

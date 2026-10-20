@@ -3114,6 +3114,7 @@ function getReviewedDetailVariantSelector(
           label: row.values[primaryColumn.key] || row.id,
           code: row.values.article,
           swatch: row.swatch,
+          swatchFinish: row.swatchFinish,
           image: row.image,
         })),
       },

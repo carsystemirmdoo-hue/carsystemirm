@@ -3235,3 +3235,50 @@ a.colorOptionContent:active {
 .backToResults:focus-visible {
   text-decoration-color: currentColor;
 }
+
+/* =========================================================================
+ * Uzorci R-M baza (2026-10-20): kvadratić kao kod Baslac izbora. Boja je
+ * porodica iz zvanične R-M tabele, obrazac pokazuje vrstu efekta. Šrafiran
+ * neutralan kvadratić = proizvođač za tu šifru ne objavljuje podatak o boji.
+ * ========================================================================= */
+.variantOptionVisual[data-finish] {
+  width: 1.9rem;
+  height: 1.9rem;
+  border-radius: 2px;
+  background-color: var(--variant-swatch, transparent);
+}
+
+.variantOptionVisual[data-finish="metallic"] {
+  background-image: linear-gradient(115deg, rgb(255 255 255 / 0.55) 0 12%, transparent 12% 30%, rgb(255 255 255 / 0.35) 30% 42%, transparent 42%);
+}
+
+.variantOptionVisual[data-finish="pearl"] {
+  background-image: linear-gradient(135deg, rgb(255 255 255 / 0.6), rgb(255 255 255 / 0.1) 40%, rgb(140 190 255 / 0.35) 70%, rgb(255 220 240 / 0.45));
+}
+
+.variantOptionVisual[data-finish="crystal"] {
+  background-image:
+    radial-gradient(circle at 25% 30%, rgb(255 255 255 / 0.9) 0 1px, transparent 1.5px),
+    radial-gradient(circle at 70% 60%, rgb(255 255 255 / 0.85) 0 1px, transparent 1.5px),
+    radial-gradient(circle at 45% 80%, rgb(255 255 255 / 0.8) 0 1px, transparent 1.5px),
+    linear-gradient(135deg, rgb(255 255 255 / 0.45), transparent 55%);
+}
+
+.variantOptionVisual[data-finish="transparent"] {
+  background-image: linear-gradient(135deg, transparent 0 50%, rgb(255 255 255 / 0.55) 50%);
+}
+
+.variantOptionVisual[data-finish="clear"] {
+  background-color: transparent;
+  background-image:
+    linear-gradient(45deg, rgb(120 120 120 / 0.18) 25%, transparent 25% 75%, rgb(120 120 120 / 0.18) 75%),
+    linear-gradient(45deg, rgb(120 120 120 / 0.18) 25%, transparent 25% 75%, rgb(120 120 120 / 0.18) 75%);
+  background-position: 0 0, 4px 4px;
+  background-size: 8px 8px;
+}
+
+.variantOptionVisual[data-finish="neutral"] {
+  background-color: transparent;
+  background-image: repeating-linear-gradient(45deg, rgb(120 120 120 / 0.28) 0 2px, transparent 2px 6px);
+  border-style: dashed;
+}

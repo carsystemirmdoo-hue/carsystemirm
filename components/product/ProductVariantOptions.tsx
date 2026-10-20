@@ -331,8 +331,13 @@ function VariantOptionContent({
 
   return (
     <>
-      {option.swatch || option.image ? (
-        <span className={styles.variantOptionVisual} style={swatchStyle} aria-hidden="true">
+      {option.swatch || option.image || option.swatchFinish ? (
+        <span
+          className={styles.variantOptionVisual}
+          style={swatchStyle}
+          data-finish={option.swatchFinish}
+          aria-hidden="true"
+        >
           {option.image ? <Image src={option.image} alt="" fill sizes="3rem" /> : null}
         </span>
       ) : null}

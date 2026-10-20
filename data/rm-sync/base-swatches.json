@@ -1,0 +1,618 @@
+{
+  "_comment": [
+    "Orijentacioni uzorci R-M mešnih baza (2026-10-20).",
+    "R-M ne objavljuje fotografisane uzorke po šifri baze (proveren rmpaint.com, techinfo.rmpaint.com i BASF refinish). Zato se uzorak gradi iz zvaničnog podatka vezanog za tačnu šifru: kolona „Color“ i naziv/ljuspice/pokrivnost iz tabele „Diamont Tinting Base Characteristics“.",
+    "family = zvanična porodica boje iz tabele; finish = vrsta prikaza (solid, transparent, metallic, pearl, crystal, clear) iz naziva, veličine ljuspica i pokrivnosti; neutral = nema pouzdanog podatka.",
+    "Paleta po porodici je orijentaciona i ista za sve baze iste porodice — ne predstavlja tačnu nijansu baze ni završnu boju na vozilu."
+  ],
+  "sources": {
+    "diamont-table": {
+      "title": "Diamont Chromatic Color Wheel / Diamont Tinting Base Characteristics (BASF Refinish US, 2020)",
+      "url": "https://refinish.basf.us/wp-content/uploads/2020/10/2020_Diamont_ENG.pdf",
+      "pages": "2–5 (tabela), 1 (hromatski točak)",
+      "accessed": "2026-10-20"
+    },
+    "tech-manual": {
+      "title": "R-M Technical Manual (BASF US) AD2526",
+      "url": "https://www.coatingsmall.com/cap_data_docs/documentum/RM/Technical_Manuals/English/AD2526%20R-M%20English%20US%20Manual.pdf",
+      "accessed": "2026-10-12"
+    }
+  },
+  "palette": {
+    "Clear": "transparent",
+    "White": "#efeee9",
+    "Silver": "#b8bdc2",
+    "Black": "#1a1b1d",
+    "Red": "#b3242c",
+    "Blue": "#264a9c",
+    "Green": "#2b7a4b",
+    "Yellow": "#e3be2c",
+    "Orange": "#de7323",
+    "Gold": "#c49b45",
+    "Copper": "#b0603a",
+    "Violet": "#5b358a"
+  },
+  "cards": {
+    "rm-diamont-bazna-boja": "diamont-table",
+    "rm-diamont-crystal-base": "diamont-table"
+  },
+  "codes": {
+    "BC 80T": {
+      "name": "Vibrant Red",
+      "family": "Red",
+      "finish": "transparent",
+      "hiding": "Transparent",
+      "page": 2
+    },
+    "BC 101": {
+      "name": "Flop Control",
+      "family": null,
+      "finish": "neutral",
+      "hiding": "",
+      "page": 2,
+      "note": "Kontrola flopa — nema sopstvenu boju (tabela: „Adding BC101 makes aluminums, micas & crystal bases appear coarser with a lighter flop“)."
+    },
+    "BC 105": {
+      "name": "White Tint",
+      "family": "White",
+      "finish": "solid",
+      "hiding": "Opaque",
+      "page": 2
+    },
+    "BC 106": {
+      "name": "Satin White Mica",
+      "family": "White",
+      "finish": "pearl",
+      "hiding": "Semi-Transparent",
+      "page": 2
+    },
+    "BC 110": {
+      "name": "White Pearl",
+      "family": "White",
+      "finish": "pearl",
+      "hiding": "Semi-Transparent",
+      "page": 2
+    },
+    "BC 115": {
+      "name": "Russet Pearl",
+      "family": "Red",
+      "finish": "pearl",
+      "hiding": "Semi-Transparent",
+      "page": 2
+    },
+    "BC 116": {
+      "name": "Super Russet Mica",
+      "family": "Red",
+      "finish": "pearl",
+      "hiding": "Semi-Transparent",
+      "page": 2
+    },
+    "BC 118": {
+      "name": "Blue Pearl",
+      "family": "Blue",
+      "finish": "pearl",
+      "hiding": "Semi-Transparent",
+      "page": 2
+    },
+    "BC 120": {
+      "name": "Fine Aluminum",
+      "family": "Silver",
+      "finish": "metallic",
+      "hiding": "Opaque",
+      "page": 2
+    },
+    "BC 140": {
+      "name": "Medium Fine Aluminum",
+      "family": "Silver",
+      "finish": "metallic",
+      "hiding": "Opaque",
+      "page": 2
+    },
+    "BC 161": {
+      "name": "Medium Round Flake",
+      "family": "Silver",
+      "finish": "metallic",
+      "hiding": "Opaque",
+      "page": 2
+    },
+    "BC 170": {
+      "name": "Medium Aluminum",
+      "family": "Silver",
+      "finish": "metallic",
+      "hiding": "Opaque",
+      "page": 2
+    },
+    "BC 171": {
+      "name": "Medium Aluminum",
+      "family": "Silver",
+      "finish": "metallic",
+      "hiding": "Opaque",
+      "page": 2
+    },
+    "BC 175": {
+      "name": "Medium Starflake Aluminum",
+      "family": "Silver",
+      "finish": "metallic",
+      "hiding": "Opaque",
+      "page": 2
+    },
+    "BC 180": {
+      "name": "Coarse Aluminum",
+      "family": "Silver",
+      "finish": "metallic",
+      "hiding": "Opaque",
+      "page": 2
+    },
+    "BC 185": {
+      "name": "Coarse Starflake Aluminum",
+      "family": "Silver",
+      "finish": "metallic",
+      "hiding": "Opaque",
+      "page": 2
+    },
+    "BC 1190": {
+      "name": "Crystal White",
+      "family": "White",
+      "finish": "crystal",
+      "hiding": "Semi-Transparent",
+      "page": 2
+    },
+    "BC 1815": {
+      "name": "Crystal Red",
+      "family": "Red",
+      "finish": "crystal",
+      "hiding": "Semi-Transparent",
+      "page": 2
+    },
+    "BC 194": {
+      "name": "White",
+      "family": "White",
+      "finish": "solid",
+      "hiding": "Opaque",
+      "page": 2
+    },
+    "BC 195": {
+      "name": "Transparent White",
+      "family": "White",
+      "finish": "solid",
+      "hiding": "Semi-Transparent",
+      "page": 2
+    },
+    "BC 200": {
+      "name": "Black",
+      "family": "Black",
+      "finish": "solid",
+      "hiding": "Opaque",
+      "page": 2
+    },
+    "BC 201": {
+      "name": "Deep Black",
+      "family": "Black",
+      "finish": "solid",
+      "hiding": "Opaque",
+      "page": 2
+    },
+    "BC 209": {
+      "name": "Black Tint",
+      "family": "Black",
+      "finish": "solid",
+      "hiding": "Opaque",
+      "page": 3
+    },
+    "BC 250": {
+      "name": "Blue Black",
+      "family": "Black",
+      "finish": "solid",
+      "hiding": "Opaque",
+      "page": 3
+    },
+    "BC 259": {
+      "name": "Black Tint",
+      "family": "Black",
+      "finish": "transparent",
+      "hiding": "Transparent",
+      "page": 3
+    },
+    "BC 260": {
+      "name": "Satin Black",
+      "family": "Black",
+      "finish": "solid",
+      "hiding": "Opaque",
+      "page": 3
+    },
+    "BC 300": {
+      "name": "Carbazole Violet",
+      "family": "Violet",
+      "finish": "transparent",
+      "hiding": "Transparent",
+      "page": 3
+    },
+    "BC 400": {
+      "name": "Red Blue",
+      "family": "Blue",
+      "finish": "transparent",
+      "hiding": "Transparent",
+      "page": 3
+    },
+    "BC 405": {
+      "name": "Phthalo Blue",
+      "family": "Blue",
+      "finish": "transparent",
+      "hiding": "Transparent",
+      "page": 3
+    },
+    "BC 407": {
+      "name": "Phthalo Blue II",
+      "family": "Blue",
+      "finish": "transparent",
+      "hiding": "Transparent",
+      "page": 3
+    },
+    "BC 410": {
+      "name": "Green Blue",
+      "family": "Blue",
+      "finish": "transparent",
+      "hiding": "Transparent",
+      "page": 3
+    },
+    "BC 419": {
+      "name": "Helio Blue Tint II",
+      "family": "Blue",
+      "finish": "transparent",
+      "hiding": "Transparent",
+      "page": 3
+    },
+    "BC 471": {
+      "name": "Violet Blue II",
+      "family": "Blue",
+      "finish": "transparent",
+      "hiding": "Transparent",
+      "page": 3
+    },
+    "BC 500": {
+      "name": "Blue Green",
+      "family": "Green",
+      "finish": "transparent",
+      "hiding": "Transparent",
+      "page": 3
+    },
+    "BC 510": {
+      "name": "Yellow Green",
+      "family": "Green",
+      "finish": "transparent",
+      "hiding": "Transparent",
+      "page": 3
+    },
+    "BC 600": {
+      "name": "Gold",
+      "family": "Yellow",
+      "finish": "transparent",
+      "hiding": "Transparent",
+      "page": 3
+    },
+    "BC 605": {
+      "name": "Yellow Oxide",
+      "family": "Yellow",
+      "finish": "solid",
+      "hiding": "Opaque",
+      "page": 3
+    },
+    "BC 609": {
+      "name": "Iron Yellow Tint",
+      "family": "Yellow",
+      "finish": "transparent",
+      "hiding": "Transparent",
+      "page": 3
+    },
+    "BC 610": {
+      "name": "Green Gold",
+      "family": "Yellow",
+      "finish": "transparent",
+      "hiding": "Transparent",
+      "page": 3
+    },
+    "BC 615": {
+      "name": "Light Yellow",
+      "family": "Yellow",
+      "finish": "solid",
+      "hiding": "Opaque",
+      "page": 3
+    },
+    "BC 621": {
+      "name": "Yellow Gold",
+      "family": "Yellow",
+      "finish": "transparent",
+      "hiding": "Transparent",
+      "page": 3
+    },
+    "BC 655": {
+      "name": "Organic Yellow",
+      "family": "Yellow",
+      "finish": "solid",
+      "hiding": "Opaque",
+      "page": 3
+    },
+    "BC 670": {
+      "name": "Bright Orange Yellow",
+      "family": "Yellow",
+      "finish": "solid",
+      "hiding": "Opaque",
+      "page": 3
+    },
+    "BC 710": {
+      "name": "Bright Orange",
+      "family": "Orange",
+      "finish": "solid",
+      "hiding": "Opaque",
+      "page": 3
+    },
+    "BC 800": {
+      "name": "Red Gold",
+      "family": "Red",
+      "finish": "transparent",
+      "hiding": "Transparent",
+      "page": 3
+    },
+    "BC 805": {
+      "name": "Red Oxide",
+      "family": "Red",
+      "finish": "solid",
+      "hiding": "Opaque",
+      "page": 4
+    },
+    "BC 809": {
+      "name": "Red Oxide",
+      "family": "Red",
+      "finish": "transparent",
+      "hiding": "Transparent",
+      "page": 4
+    },
+    "BC 810": {
+      "name": "Light Red",
+      "family": "Orange",
+      "finish": "transparent",
+      "hiding": "Transparent",
+      "page": 4
+    },
+    "BC 815": {
+      "name": "Bright Red",
+      "family": "Red",
+      "finish": "solid",
+      "hiding": "Opaque",
+      "page": 4
+    },
+    "BC 820": {
+      "name": "Maroon",
+      "family": "Red",
+      "finish": "transparent",
+      "hiding": "Transparent",
+      "page": 4
+    },
+    "BC 821": {
+      "name": "Dark Maroon",
+      "family": "Red",
+      "finish": "transparent",
+      "hiding": "Transparent",
+      "page": 4
+    },
+    "BC 825": {
+      "name": "Light Maroon",
+      "family": "Red",
+      "finish": "transparent",
+      "hiding": "Transparent",
+      "page": 4
+    },
+    "BC 832": {
+      "name": "Red",
+      "family": "Red",
+      "finish": "transparent",
+      "hiding": "Transparent",
+      "page": 4
+    },
+    "BC 838": {
+      "name": "Magenta",
+      "family": "Red",
+      "finish": "transparent",
+      "hiding": "Transparent",
+      "page": 4
+    },
+    "BC 840": {
+      "name": "Red Violet",
+      "family": "Red",
+      "finish": "transparent",
+      "hiding": "Transparent",
+      "page": 4
+    },
+    "BC 880": {
+      "name": "Violet",
+      "family": "Violet",
+      "finish": "transparent",
+      "hiding": "Transparent",
+      "page": 4
+    },
+    "CB 10K": {
+      "name": "Fine White Pearl 2",
+      "family": "White",
+      "finish": "pearl",
+      "hiding": "Semi-Transparent",
+      "page": 4
+    },
+    "CB 12L": {
+      "name": "Crystal Glass",
+      "family": "Clear",
+      "finish": "clear",
+      "hiding": "Transparent",
+      "page": 4
+    },
+    "CB 34M": {
+      "name": "Violet Pearl",
+      "family": "Violet",
+      "finish": "pearl",
+      "hiding": "Semi-Transparent",
+      "page": 4
+    },
+    "CB 35L": {
+      "name": "Ultra Violet",
+      "family": "Violet",
+      "finish": "pearl",
+      "hiding": "Semi-Transparent",
+      "page": 4
+    },
+    "CB 38K": {
+      "name": "Blackberry Pearl",
+      "family": "Red",
+      "finish": "pearl",
+      "hiding": "Semi-Transparent",
+      "page": 4
+    },
+    "CB 38L": {
+      "name": "Ultra White",
+      "family": "Green",
+      "finish": "pearl",
+      "hiding": "Semi-Transparent",
+      "page": 4
+    },
+    "CB 44L": {
+      "name": "Bright Blue",
+      "family": "Blue",
+      "finish": "pearl",
+      "hiding": "Semi-Transparent",
+      "page": 4
+    },
+    "CB 45L": {
+      "name": "Blue Green Pearl",
+      "family": "Green",
+      "finish": "pearl",
+      "hiding": "Semi-Transparent",
+      "page": 4
+    },
+    "CB 46K": {
+      "name": "Fine Blue Pearl",
+      "family": "Blue",
+      "finish": "pearl",
+      "hiding": "Semi-Transparent",
+      "page": 4
+    },
+    "CB 47M": {
+      "name": "Crystal Blue",
+      "family": "Blue",
+      "finish": "crystal",
+      "hiding": "Semi-Transparent",
+      "page": 5
+    },
+    "CB 54L": {
+      "name": "Green Pearl",
+      "family": "Green",
+      "finish": "pearl",
+      "hiding": "Semi-Transparent",
+      "page": 5
+    },
+    "CB 56L": {
+      "name": "Moss Green Pearl",
+      "family": "Green",
+      "finish": "pearl",
+      "hiding": "Semi-Transparent",
+      "page": 5
+    },
+    "CB 57M": {
+      "name": "Crystal Green",
+      "family": "Green",
+      "finish": "crystal",
+      "hiding": "Semi-Transparent",
+      "page": 5
+    },
+    "CB 58M": {
+      "name": "Red Green Pearl",
+      "family": "Green",
+      "finish": "pearl",
+      "hiding": "Semi-Transparent",
+      "page": 5
+    },
+    "CB 62L": {
+      "name": "Crystal Gold",
+      "family": "Gold",
+      "finish": "crystal",
+      "hiding": "Semi-Transparent",
+      "page": 5
+    },
+    "CB 63L": {
+      "name": "Super Brass Pearl",
+      "family": "Gold",
+      "finish": "pearl",
+      "hiding": "Semi-Transparent",
+      "page": 5
+    },
+    "CB 64L": {
+      "name": "Yellow Pearl",
+      "family": "Gold",
+      "finish": "pearl",
+      "hiding": "Semi-Transparent",
+      "page": 5
+    },
+    "CB 66V": {
+      "name": "Gold Aluminum",
+      "family": "Gold",
+      "finish": "metallic",
+      "hiding": "Semi-Opaque",
+      "page": 5
+    },
+    "CB 67V": {
+      "name": "Gold Aluminum",
+      "family": "Gold",
+      "finish": "metallic",
+      "hiding": "Semi-Opaque",
+      "page": 5
+    },
+    "CB 71V": {
+      "name": "Rich Bronze",
+      "family": "Orange",
+      "finish": "pearl",
+      "hiding": "Semi-Opaque",
+      "page": 5
+    },
+    "CB 73L": {
+      "name": "Crystal Copper",
+      "family": "Copper",
+      "finish": "crystal",
+      "hiding": "Semi-Transparent",
+      "page": 5
+    },
+    "CB 74L": {
+      "name": "Bright Copper Pearl",
+      "family": "Copper",
+      "finish": "pearl",
+      "hiding": "Semi-Transparent",
+      "page": 5
+    },
+    "CB 75K": {
+      "name": "Orange Pearl",
+      "family": "Orange",
+      "finish": "pearl",
+      "hiding": "Semi-Transparent",
+      "page": 5
+    },
+    "CB 85L": {
+      "name": "Red Pearl",
+      "family": "Red",
+      "finish": "pearl",
+      "hiding": "Semi-Transparent",
+      "page": 5
+    },
+    "CB 87L": {
+      "name": "Flash Copper Pearl",
+      "family": "Copper",
+      "finish": "pearl",
+      "hiding": "Semi-Transparent",
+      "page": 5
+    },
+    "BC 100": {
+      "name": "Base Clear",
+      "family": "Clear",
+      "finish": "clear",
+      "hiding": "Transparent",
+      "page": null,
+      "source": "tech-manual",
+      "note": "R-M Technical Manual (BASF US), str. 91: „BC100 Base Clear“."
+    }
+  }
+}

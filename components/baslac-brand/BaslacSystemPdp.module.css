@@ -491,3 +491,6 @@
 .card { padding-right: 0.7rem; }
 .cardBody strong { padding-right: 1.6rem; }
 .activeTick { top: 0.55rem; bottom: auto; }
+/* Telefon: uske kartice u dve kolone — red pakovanja i završnice se prelama
+   umesto da se skraćuje („Trans…“); sve kartice u mreži ostaju iste visine. */
+@media (max-width: 40rem) { .cardBody small { white-space: normal; overflow: visible; } }

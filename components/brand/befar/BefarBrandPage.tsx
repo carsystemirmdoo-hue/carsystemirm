@@ -18,7 +18,6 @@ import {
   befarManufacturer,
   befarMaterialGroups,
   befarNav,
-  befarObjectDetail,
   befarOpencell,
   befarOrbitalPerforation,
   befarPairingMeta,
@@ -74,20 +73,13 @@ export function BefarBrandPage({ brand, products }: Props) {
             </div>
           </nav>
 
-          {/* Uvodni blok (2026-10-19): dve fotografije sa zvaničnog Befar sajta —
-              brisanje laka na crvenom automobilu kao glavni kadar i Open Cell
-              sunđeri kao preklopljena kartica. Tekst je na tamnoj površini, ne
-              preko fotografije. */}
-          <div className={`${styles.container} ${styles.heroInner} ${styles.heroSplit}`}>
-            <div className={styles.heroCopy}>
-              <Image
-                alt={befarHero.logo.alt}
-                className={styles.heroLogo}
-                height={befarHero.logo.height}
-                priority
-                src={befarHero.logo.src}
-                width={befarHero.logo.width}
-              />
+          {/* Uvodni blok (2026-10-20): tekst je u svom tamnom pojasu, a obe
+              fotografije sa zvaničnog Befar sajta idu ispod njega preko cele
+              širine ekrana — svaka kao zaseban kadar, bez rotacije i bez teksta
+              preko ruke, fara ili sunđera. Logo brenda se ne ponavlja: ime je u
+              putanji, kickeru i naslovu stranice. */}
+          <div className={`${styles.container} ${styles.heroIntro}`}>
+            <div className={styles.heroIntroHead}>
               <p className={styles.heroKicker}>{befarHero.kicker}</p>
               {/* Razmak posle svake linije osim zadnje — bez njega `textContent`
                   h1-a je „Preciznona tačkikontakta.“ i takav ide u pristupačno ime. */}
@@ -99,6 +91,8 @@ export function BefarBrandPage({ brand, products }: Props) {
                   </span>
                 ))}
               </h1>
+            </div>
+            <div className={styles.heroIntroBody}>
               <p className={styles.heroLead}>{befarHero.lead}</p>
               <div className={styles.heroActions}>
                 <Link
@@ -115,27 +109,28 @@ export function BefarBrandPage({ brand, products }: Props) {
                 </Link>
               </div>
             </div>
-
-            <div className={styles.heroPhotos}>
-              <figure className={styles.heroPhotoMain}>
-                <Image
-                  alt="Brisanje ispoliranog laka mikrofiber krpom oko fara crvenog automobila"
-                  fill
-                  priority
-                  sizes="(min-width: 64rem) 56vw, 100vw"
-                  src="/images/brands/befar/hero/befar-brisanje-crveni-automobil-2940x1388.avif"
-                />
-              </figure>
-              <figure className={styles.heroPhotoInset}>
-                <Image
-                  alt="Befar Open Cell sunđeri za poliranje u više tvrdoća"
-                  fill
-                  sizes="(min-width: 64rem) 28vw, 100vw"
-                  src="/images/brands/befar/hero/befar-opencell-sundjeri-1703x804.avif"
-                />
-              </figure>
-            </div>
           </div>
+
+          <figure className={`${styles.heroBleed} ${styles.heroBleedCar}`}>
+            <Image
+              alt="Brisanje ispoliranog laka mikrofiber krpom oko fara crvenog automobila"
+              fill
+              priority
+              sizes="100vw"
+              src="/images/brands/befar/hero/befar-brisanje-crveni-automobil-2940x1388.avif"
+            />
+          </figure>
+          <figure className={`${styles.heroBleed} ${styles.heroBleedPads}`}>
+            <Image
+              alt="Befar Opencell pene za poliranje u više tvrdoća, naslagane na crnoj podlozi"
+              fill
+              sizes="100vw"
+              src="/images/brands/befar/hero/befar-opencell-sundjeri-1703x804.avif"
+            />
+            <figcaption className={styles.heroBleedCaption}>
+              Befar Opencell · linija proizvođača, nije u našoj stalnoj ponudi
+            </figcaption>
+          </figure>
         </section>
 
         <BrandSectionNav ariaLabel="Befar sekcije" items={befarSectionNavItems} />
@@ -147,9 +142,7 @@ export function BefarBrandPage({ brand, products }: Props) {
           id="materijal"
         >
           <div className={styles.container}>
-            <p className={styles.sectionIndex}>
-              <span>01</span> Šta Befar pravi
-            </p>
+            <p className={styles.sectionIndex}>Šta Befar pravi</p>
             <h2 className={styles.sectionTitle} id="befar-material-title">
               Ne lak. Sloj koji lak dodiruje.
             </h2>
@@ -183,9 +176,7 @@ export function BefarBrandPage({ brand, products }: Props) {
           id="geometrija"
         >
           <div className={styles.container}>
-            <p className={styles.sectionIndex}>
-              <span>03</span> Geometrija
-            </p>
+            <p className={styles.sectionIndex}>Geometrija</p>
             <h2 className={styles.sectionTitle} id="befar-geometry-title">
               {befarGeometryMeta.title}
             </h2>
@@ -267,9 +258,7 @@ export function BefarBrandPage({ brand, products }: Props) {
         >
           <div className={styles.container}>
             <div className={styles.sectionHeaderInline}>
-              <p className={styles.sectionIndex}>
-                <span>04</span> Uparivanje
-              </p>
+              <p className={styles.sectionIndex}>Uparivanje</p>
               <h2 className={styles.sectionTitle} id="befar-pairing-title">
                 {befarPairingMeta.title}
               </h2>
@@ -287,9 +276,7 @@ export function BefarBrandPage({ brand, products }: Props) {
           id="porodice"
         >
           <div className={styles.container}>
-            <p className={styles.sectionIndex}>
-              <span>05</span> Porodice
-            </p>
+            <p className={styles.sectionIndex}>Porodice</p>
             <h2 className={styles.sectionTitle} id="befar-families-title">
               {befarFamiliesMeta.title}
             </h2>
@@ -320,21 +307,22 @@ export function BefarBrandPage({ brand, products }: Props) {
                       src={family.image.src}
                       width={family.image.width}
                     />
-                  </div>
-                  <div className={styles.familyBody}>
-                    <p className={styles.familyKicker}>{family.kicker}</p>
                     {/* Leo je jedina podlinija sa potvrđenim logotipom i sopstvenom
-                        bojom — dobija identitet unutar kartice, ne novu sekciju. */}
+                        bojom. Logo sedi u zoni fotografije, da ne dodaje red u
+                        tekstu i ne pomera naslov u odnosu na susednu karticu. */}
                     {family.logo ? (
                       <Image
                         alt={family.logo.alt}
                         className={styles.familyLogo}
                         height={family.logo.height}
-                        sizes="120px"
+                        sizes="128px"
                         src={family.logo.src}
                         width={family.logo.width}
                       />
                     ) : null}
+                  </div>
+                  <div className={styles.familyBody}>
+                    <p className={styles.familyKicker}>{family.kicker}</p>
                     <h3 className={styles.familyName}>{family.name}</h3>
                     <p className={styles.familyText}>{family.body}</p>
                     <dl className={styles.familySpecs}>
@@ -365,9 +353,7 @@ export function BefarBrandPage({ brand, products }: Props) {
         >
           <div className={`${styles.container} ${styles.opencellInner}`}>
             <div className={styles.opencellCopy}>
-              <p className={styles.sectionIndex}>
-                <span>06</span> {befarOpencell.kicker}
-              </p>
+              <p className={styles.sectionIndex}>{befarOpencell.kicker}</p>
               {/* Bez zvaničnog vektorskog logotipa — neutralan tekstualni label,
                   namerno nestilizovan da ne imitira izgubljeni wordmark. */}
               <p className={styles.opencellLabel}>{befarOpencell.label}</p>
@@ -420,31 +406,6 @@ export function BefarBrandPage({ brand, products }: Props) {
           </div>
         </section>
 
-        {/* ========================================================= 08 detalj */}
-        <section
-          aria-labelledby="befar-detail-title"
-          className={`${styles.detail} ${styles.anchor}`}
-          id="detalj"
-        >
-          <h2 className={styles.srOnly} id="befar-detail-title">
-            {befarObjectDetail.title}
-          </h2>
-          <div className={styles.detailStrip}>
-            {befarObjectDetail.frames.map((frame) => (
-              <figure className={styles.detailFrame} key={frame.id}>
-                <Image
-                  alt={frame.image.alt}
-                  height={frame.image.height}
-                  sizes="(min-width: 64rem) 46vw, 88vw"
-                  src={frame.image.src}
-                  width={frame.image.width}
-                />
-                <figcaption>{frame.caption}</figcaption>
-              </figure>
-            ))}
-          </div>
-        </section>
-
         {/* ========================================================== 09 u radu */}
         <section
           aria-labelledby="befar-inuse-title"
@@ -453,9 +414,7 @@ export function BefarBrandPage({ brand, products }: Props) {
         >
           <div className={styles.container}>
             <div className={styles.sectionHeaderInline}>
-              <p className={styles.sectionIndex}>
-                <span>07</span> U radu
-              </p>
+              <p className={styles.sectionIndex}>U radu</p>
               <h2 className={styles.sectionTitle} id="befar-inuse-title">
                 {befarInUse.title}
               </h2>
@@ -490,9 +449,7 @@ export function BefarBrandPage({ brand, products }: Props) {
           id="proizvodi"
         >
           <div className={styles.container}>
-            <p className={styles.sectionIndex}>
-              <span>08</span> Proizvodi
-            </p>
+            <p className={styles.sectionIndex}>Proizvodi</p>
             <h2 className={styles.sectionTitle} id="befar-products-title">
               {befarDiscoveryMeta.title}
             </h2>
@@ -564,9 +521,7 @@ export function BefarBrandPage({ brand, products }: Props) {
         <section aria-labelledby="befar-manufacturer-title" className={styles.closing}>
           <div className={`${styles.container} ${styles.closingInner}`}>
             <div className={styles.manufacturer}>
-              <p className={styles.sectionIndex}>
-                <span>09</span> {befarManufacturer.title}
-              </p>
+              <p className={styles.sectionIndex}>{befarManufacturer.title}</p>
               <h2 className={styles.sectionTitle} id="befar-manufacturer-title">
                 Bursa, od 2002.
               </h2>

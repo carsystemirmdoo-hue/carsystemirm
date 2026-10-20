@@ -36,6 +36,8 @@ export type ProductVariantRow = Reviewable<{
   slug?: string;
   image?: string;
   swatch?: string;
+  /** Vrsta prikaza uzorka (solid, transparent, metallic, pearl, crystal, clear, neutral). */
+  swatchFinish?: string;
   isActive?: boolean;
 }>;
 
@@ -141,6 +143,8 @@ export type ProductVariantOption = {
   label: string;
   code?: string;
   swatch?: string;
+  /** Vrsta prikaza uzorka; `neutral` = nema pouzdanog uzorka. */
+  swatchFinish?: string;
   image?: string;
   detail?: string;
 };

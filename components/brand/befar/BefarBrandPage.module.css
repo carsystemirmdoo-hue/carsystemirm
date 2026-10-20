@@ -96,7 +96,8 @@
 
 /* -------------------------------------------------------------- primitives */
 
-/* Broj sekcije u crvenom bloku — preuzeto sa Befarovog kataloškog taba. */
+/* Nadnaslov sekcije. Redni brojevi (crveni blok „01“…) uklonjeni su
+   2026-10-20 — ostaje samo naziv, sa crvenom crtom kao Befar markerom. */
 .sectionIndex {
   display: flex;
   align-items: center;
@@ -110,14 +111,11 @@
   color: var(--bf-text-muted);
 }
 
-.sectionIndex > span:first-child {
-  display: inline-grid;
-  place-items: center;
-  min-width: 2rem;
-  padding: 0.2rem 0.4rem;
+.sectionIndex::before {
+  content: "";
+  width: 1.5rem;
+  height: 2px;
   background: var(--bf-red);
-  color: var(--bf-red-ink);
-  font-weight: 700;
 }
 
 .sectionTitle {
@@ -303,68 +301,6 @@
   color: var(--bf-invert-text);
 }
 
-/* Ogromna tehnička oznaka u pozadini — deo kompozicije, ne dekoracija.
-   Sedi unutar containera da je gutter drži u kadru; ranije je bila vezana za
-   sekciju i isticala se van viewporta. */
-/*
- * Ghost šifra sedi u koloni sa tekstom, iza naslova.
- *
- * Dok je objekat bio krug, oznaka je bila desno i disk ju je pokrivao. Sada je
- * desna strana puna, neprozirna ploča, pa desno poravnanje znači da se oznaka ne
- * vidi uopšte. Levo, iza teških belih verzala, čita se kao vodeni znak i pravi
- * odnos: broj iza tipografije, materijal desno.
- */
-.heroBackdrop {
-  position: absolute;
-  inset-inline-start: var(--bf-gutter);
-  inset-block: 0;
-  display: grid;
-  align-content: center;
-  justify-items: start;
-  gap: 0.35rem;
-  pointer-events: none;
-  user-select: none;
-  white-space: nowrap;
-}
-
-.heroBackdropCode {
-  font-family: var(--font-display), var(--font-geist-sans), sans-serif;
-  font-size: clamp(4.5rem, 13vw, 11.5rem);
-  font-weight: 900;
-  line-height: 0.82;
-  letter-spacing: -0.06em;
-  color: rgb(244 243 240 / 0.09);
-}
-
-.heroBackdropMeta {
-  font-family: var(--font-technical), var(--font-geist-mono), monospace;
-  font-size: var(--ds-font-label);
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: rgb(244 243 240 / 0.18);
-}
-
-.heroInner {
-  position: relative;
-  display: grid;
-  gap: clamp(2rem, 5vw, 4rem);
-  padding-block: clamp(2.5rem, 6vw, 5rem) clamp(3rem, 7vw, 6rem);
-  align-items: center;
-}
-
-.heroCopy {
-  position: relative;
-  z-index: 1;
-  display: grid;
-  justify-items: start;
-  gap: 1.25rem;
-}
-
-.heroLogo {
-  width: clamp(7.5rem, 12vw, 10.5rem);
-  height: auto;
-}
-
 .heroKicker {
   margin: 0;
   font-family: var(--font-technical), var(--font-geist-mono), monospace;
@@ -392,73 +328,6 @@
   font-size: clamp(1rem, 1.4vw, 1.2rem);
   line-height: 1.6;
   color: var(--bf-invert-muted);
-}
-
-.heroCue {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.6rem;
-  margin-top: 0.5rem;
-  min-height: 2.75rem;
-  padding-block: 0.6rem;
-  border-bottom: 1px solid var(--bf-invert-line-strong);
-  font-family: var(--font-body), var(--font-geist-sans), system-ui, sans-serif;
-  font-size: 0.9375rem;
-  font-weight: 600;
-  letter-spacing: 0;
-  text-transform: none;
-  color: var(--bf-invert-text);
-}
-
-.heroCue:hover {
-  border-bottom-color: var(--bf-invert-text);
-  text-decoration: underline 1px;
-  text-underline-offset: 0.3em;
-}
-
-/*
- * Objekat je strukturna ploča, ne maskirana fotografija.
- *
- * Prva verzija je fotografiju rotirala kao pravougaonik — videli su se uglovi i
- * čitalo se kao nakošen packshot. Druga je bila krug, ali je i to bila „slika
- * maskirana u krug“, a sadržaj (naslagane ivice pene) ne čita se kao jedan disk.
- *
- * Rešenje: ploča je fiksna i beži van desne i donje ivice sekcije, pa nema
- * lebdećeg okvira — ostaju samo gornja i leva ivica, oštre i namerne, kao i
- * ostale ravni u sistemu. Rotira se SLIKA unutar isečene ploče, pa se materijal
- * pomera a ploča stoji. Nikada se ne vidi ivica fotografije.
- */
-.heroObject {
-  position: relative;
-  z-index: 1;
-  overflow: hidden;
-  background: #000000;
-  /*
-   * Beži do stvarne ivice viewporta, ne samo do ivice containera: container ima
-   * `max-width`, pa sam negativni gutter ostavlja prazninu na širokim ekranima.
-   * Drugi član oduzima i polovinu razlike između viewporta i max-width-a.
-   */
-  margin-inline-end: calc(
-    var(--bf-gutter) * -1 - max(0px, (100vw - var(--bf-max)) / 2)
-  );
-  margin-block-end: calc(var(--bf-section-y) * -0.5);
-  aspect-ratio: 5 / 4;
-  /* Ploča ide do ivice prozora pa raste sa širinom: na 2560px je bila
-     1416×1135, viša od ekrana. Na 1440×900 je ~641px i granica je ne dira;
-     iznad nje slika ostaje „cover“ u nižem kadru. */
-  max-height: min(46rem, 78vh);
-}
-
-.heroObjectImage {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-  /* Uvećanje pokriva uglove dok se slika rotira unutar isečene ploče. */
-  transform: scale(1.1) rotate(var(--befar-hero-rotate, 0deg))
-    translateY(var(--befar-hero-lift, 0px));
-  transition: transform 120ms linear;
-  will-change: transform;
 }
 
 /* ============================================================ 02 materijal */
@@ -1313,9 +1182,19 @@
 /* Podlinija sa sopstvenim identitetom: logo + njena boja na spec labelama.
    Ostaje isti stil kartice — menja se samo akcent. */
 .familyLogo {
+  position: absolute;
+  z-index: 1;
+  inset-inline-start: 0.85rem;
+  inset-block-end: 0.85rem;
   width: 7.5rem;
   height: auto;
-  margin: 0 0 0.75rem;
+  box-shadow: 0 0.5rem 1.25rem -0.5rem rgb(0 0 0 / 0.45);
+}
+
+.familyMedia img.familyLogo {
+  width: 7.5rem;
+  height: auto;
+  object-fit: contain;
 }
 
 .familyCard[data-accent] .familySpecs dt {
@@ -1357,15 +1236,19 @@
   color: var(--bf-invert-muted);
 }
 
+/* Oznake (dt) u svim redovima iste kartice dele širinu kolone, pa vrednosti
+   počinju na istoj liniji i kad je jedna oznaka duža („Međupodloške“). */
 .familySpecs {
   display: grid;
-  gap: 0.5rem;
+  grid-template-columns: minmax(5.5rem, max-content) minmax(0, 1fr);
+  gap: 0.5rem 0;
   margin: 0 0 1rem;
 }
 
 .familySpecs > div {
   display: grid;
-  grid-template-columns: minmax(5.5rem, auto) 1fr;
+  grid-column: 1 / -1;
+  grid-template-columns: subgrid;
   gap: 0.75rem;
   padding-bottom: 0.4rem;
   border-bottom: 1px solid var(--bf-invert-line);
@@ -1525,60 +1408,6 @@
 
 .opencell .buttonSecondary {
   color: var(--bf-invert-text);
-}
-
-/* =============================================================== 08 detalj */
-
-.detail {
-  background: var(--bf-ink);
-  color: var(--bf-invert-text);
-}
-
-/* Vizuelna pauza: kadrovi moraju biti veliki. U mreži 4×1 na 1280px svaki je
-   ispadao 320×240 i sekcija je bila traka od ~240px, a ne makro trenutak. */
-.detailStrip {
-  display: grid;
-  gap: 2px;
-  grid-template-columns: minmax(0, 1fr);
-  /* Traka je preko cele širine; na 2560px su kvadrati bili 852px. Iznad 1720px
-     traka se centrira na tamnoj podlozi sekcije. */
-  max-width: 1720px;
-  margin-inline: auto;
-}
-
-.detailFrame {
-  position: relative;
-  margin: 0;
-  aspect-ratio: 4 / 3;
-  overflow: hidden;
-  background: var(--bf-charcoal);
-}
-
-.detailFrame img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-  transform: scale(1.01);
-  transition: transform 600ms var(--bf-ease);
-}
-
-.detailFrame:hover img {
-  transform: scale(1.045);
-}
-
-.detailFrame figcaption {
-  position: absolute;
-  inset-inline-start: 0;
-  inset-block-end: 0;
-  padding: 0.5rem 0.75rem;
-  background: rgb(11 10 16 / 0.72);
-  font-family: var(--font-technical), var(--font-geist-mono), monospace;
-  font-size: var(--ds-font-label);
-  letter-spacing: 0.02em;
-  text-transform: none;
-  color: var(--bf-invert-text);
-  font-weight: 500;
 }
 
 /* =============================================================== 09 u radu */
@@ -1925,37 +1754,13 @@
     grid-template-columns: repeat(4, minmax(0, 1fr));
   }
 
-  .heroBackdrop {
-    inset-block-start: 18%;
-  }
-
   .perfOrbital {
     grid-template-columns: auto 1fr;
   }
 
-  /*
-   * Macro material study, ne galerija: jedan dominantan kadar preko cele širine,
-   * pa tri tiša u nizu. Četiri jednaka kadra su se čitala kao foto galerija.
-   */
-  .detailStrip {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
-
-  .detailFrame {
-    aspect-ratio: 1;
-  }
-
-  .detailFrame:first-child {
-    grid-column: 1 / -1;
-    aspect-ratio: 21 / 8;
-  }
 }
 
 @media (min-width: 64rem) {
-  .heroInner {
-    grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
-    min-height: min(84vh, 46rem);
-  }
 
   .hardnessGrid {
     grid-template-columns: minmax(11rem, 0.7fr) minmax(0, 1.5fr) minmax(17rem, 1fr);
@@ -2074,6 +1879,35 @@
     font-size: var(--ds-font-small);
   }
 
+  /*
+   * Poravnanje susednih kartica (2026-10-20): kartice u istom redu dele redove
+   * mreže (subgrid), pa zona fotografije, nadnaslov, naslov, tekst i
+   * specifikacije počinju na istoj visini i kad je tekst jedne kartice duži.
+   * Razmak između redova kartica nosi `padding-bottom`, ne `row-gap` mreže,
+   * jer bi se `row-gap` ubacio i između redova unutar kartice.
+   */
+  .familyGrid {
+    row-gap: 0;
+  }
+
+  .familyCard {
+    padding-bottom: clamp(2.5rem, 5vw, 4.5rem);
+  }
+
+  .familyCard:not([data-weight="dominant"]) {
+    grid-row: span 5;
+    grid-template-rows: subgrid;
+    row-gap: 0;
+  }
+
+  .familyCard:not([data-weight="dominant"]) .familyBody {
+    display: contents;
+  }
+
+  .familyCard:not([data-weight="dominant"]) .familyMedia {
+    margin-bottom: 1rem;
+  }
+
   .opencellInner {
     grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr);
   }
@@ -2096,50 +1930,9 @@
   }
 }
 
-/* Na uskim ekranima makro prikaz gubi smisao ako je premali — dva kadra od
-   četiri se skrivaju, ostala dva ostaju u punoj širini. */
-@media (max-width: 47.99rem) {
-  .detailFrame:nth-child(n + 3) {
-    display: none;
-  }
-
-
-  /* Meta linija se na 375px seče na pola reči — na mobilnom je izostavljamo,
-     isti podatak stoji u sekciji tvrdoće. */
-  .heroBackdropMeta {
-    display: none;
-  }
-}
-
-/* Jedna kolona (telefon, tablet): oznaka je ranije padala preko uvoda i veze
-   „Skala tvrdoće”. Sada stoji desno u redu logotipa, gde nema teksta, i ne
-   prelazi preko naslova ni uvoda. */
-@media (max-width: 63.99rem) {
-  .heroBackdrop {
-    inset-block: auto;
-    inset-inline: auto var(--bf-gutter);
-    top: calc(clamp(2.5rem, 6vw, 5rem) - 0.35rem);
-    align-content: start;
-    justify-items: end;
-  }
-
-  .heroBackdropCode {
-    font-size: clamp(3rem, 13vw, 6rem);
-    color: rgb(244 243 240 / 0.09);
-  }
-
-  .heroBackdropMeta {
-    display: none;
-  }
-}
-
 /* ========================================================== reduced motion */
 
 @media (prefers-reduced-motion: reduce) {
-  .heroObjectImage {
-    transform: scale(1.02);
-    transition: none;
-  }
 
   .hardnessObjectLayer,
   .hardnessObjectLayer[data-active] {
@@ -2155,7 +1948,6 @@
 
   .pairingFoamRing,
   .pairingPlateRing,
-  .detailFrame img,
   .productCard,
   .buttonPrimary,
   .buttonSecondary,
@@ -2164,31 +1956,120 @@
     transition: none;
   }
 
-  .detailFrame img {
-    transform: none;
-  }
-
-  .detailFrame:hover img {
-    transform: none;
-  }
-
   .productCard:hover {
     transform: none;
   }
 }
 
 /* =========================================================================
- * Uvodni blok sa dve fotografije (2026-10-19)
+ * Uvodni blok (2026-10-20): tekstualni pojas + dve fotografije od ivice do
+ * ivice. Tekst nikad ne leži preko fotografije, pa ruka, far i sunđeri ostaju
+ * čisti; svaka fotografija ima sopstveni isečak za telefon.
  * ========================================================================= */
-.heroSplit {
-  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
-  gap: clamp(2rem, 4vw, 4rem);
-  align-items: center;
+.heroIntro {
+  display: grid;
+  gap: 1.5rem;
+  padding-block: clamp(1.75rem, 4vw, 3rem) clamp(2rem, 4.5vw, 3.5rem);
+}
+
+.heroIntroHead,
+.heroIntroBody {
+  display: grid;
+  justify-items: start;
+  gap: 1.1rem;
 }
 
 .heroTitleCompact {
-  font-size: clamp(2.4rem, 4.6vw, 4.4rem);
-  line-height: 0.98;
+  font-size: clamp(2.4rem, 5.4vw, 5rem);
+  line-height: 0.96;
+}
+
+.heroBleed {
+  position: relative;
+  margin: 0;
+  width: 100%;
+  overflow: hidden;
+  background: var(--bf-ink);
+}
+
+.heroBleed img {
+  object-fit: cover;
+}
+
+/* Fotografija je 2940 × 1388 (2,12 : 1). Na širokom ekranu ide skoro u celini;
+   visina je ograničena da kadar ne pojede ceo prvi ekran posle teksta. */
+.heroBleedCar {
+  aspect-ratio: 2940 / 1388;
+  max-height: min(78vh, 52rem);
+}
+
+.heroBleedCar img {
+  object-position: 50% 42%;
+}
+
+.heroBleedPads {
+  aspect-ratio: 1703 / 804;
+  max-height: min(72vh, 46rem);
+}
+
+.heroBleedPads img {
+  object-position: 50% 60%;
+}
+
+/* Između dva kadra ostaje tanka linija pozadine — dva zasebna vizuala, ne kolaž. */
+.heroBleed + .heroBleed {
+  border-top: 2px solid var(--bf-charcoal);
+}
+
+.heroBleedCaption {
+  position: absolute;
+  inset-inline-end: var(--bf-gutter);
+  inset-block-end: 1rem;
+  padding: 0.4rem 0.65rem;
+  background: rgb(11 10 16 / 0.72);
+  font-family: var(--font-technical), var(--font-geist-mono), monospace;
+  font-size: var(--ds-font-label);
+  letter-spacing: 0.02em;
+  color: var(--bf-invert-muted);
+}
+
+@media (min-width: 64rem) {
+  .heroIntro {
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+    align-items: end;
+    gap: clamp(2rem, 5vw, 5rem);
+  }
+
+  .heroIntroBody {
+    padding-bottom: 0.4rem;
+  }
+}
+
+/* Telefon: uži kadrovi bez razvlačenja. Automobil 1 : 1 drži i ruku sa krpom
+   i far (oko 47 % širine izvornika), sunđeri 4 : 3 na naslaganim diskovima. */
+@media (max-width: 47.99rem) {
+  .heroBleedCar {
+    aspect-ratio: 1 / 1;
+    max-height: none;
+  }
+
+  .heroBleedCar img {
+    object-position: 46% 50%;
+  }
+
+  .heroBleedPads {
+    aspect-ratio: 4 / 3;
+    max-height: none;
+  }
+
+  .heroBleedPads img {
+    object-position: 48% 70%;
+  }
+
+  .heroBleedCaption {
+    inset-inline: var(--bf-gutter) auto;
+    inset-block-end: 0.75rem;
+  }
 }
 
 .heroActions {
@@ -2232,65 +2113,3 @@
   outline-offset: 3px;
 }
 
-.heroPhotos {
-  position: relative;
-  padding-bottom: clamp(3rem, 7vw, 5.5rem);
-}
-
-.heroPhotoMain,
-.heroPhotoInset {
-  position: relative;
-  margin: 0;
-  overflow: hidden;
-  border-radius: var(--ds-ctl-radius);
-}
-
-.heroPhotoMain {
-  aspect-ratio: 4 / 3;
-}
-
-.heroPhotoMain img {
-  object-fit: cover;
-  object-position: 34% 50%;
-}
-
-/* Sunđeri: preklopljena kartica dole levo, u celini (format 2,1 : 1). */
-.heroPhotoInset {
-  position: absolute;
-  bottom: 0;
-  left: clamp(-3rem, -4vw, -1rem);
-  width: 52%;
-  aspect-ratio: 1703 / 804;
-  border: 1px solid rgb(244 243 240 / 0.16);
-  box-shadow: 0 1.5rem 3rem -1rem rgb(0 0 0 / 0.65);
-}
-
-.heroPhotoInset img {
-  object-fit: cover;
-}
-
-@media (max-width: 64rem) {
-  .heroSplit {
-    grid-template-columns: 1fr;
-  }
-
-  .heroPhotos {
-    padding-bottom: 0;
-  }
-
-  .heroPhotoMain {
-    aspect-ratio: 4 / 3;
-  }
-
-  .heroPhotoMain img {
-    object-position: 38% 45%;
-  }
-
-  .heroPhotoInset {
-    position: relative;
-    left: auto;
-    width: 100%;
-    margin-top: 0.75rem;
-    box-shadow: none;
-  }
-}

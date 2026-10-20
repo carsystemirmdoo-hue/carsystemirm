@@ -463,3 +463,34 @@
   outline: 2px solid var(--ds-c-focus);
   outline-offset: 2px;
 }
+
+/* --- Zapremine i jednake kartice (2026-10-20) --------------------------- */
+/* Grupe po zapremini teku kroz stranicu; unutrašnji skrol po grupi bi sakrio
+   naslove zapremina. */
+.grid { max-height: none; overflow: visible; grid-auto-rows: 1fr; }
+.grid > li { display: grid; }
+/* Sve kartice iste visine: šifra, naziv (do dva reda) i pakovanje su
+   poravnati; red pakovanja/završnice se ne prelama. */
+.card { height: 100%; }
+.cardBody small { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+.volumeGroup + .volumeGroup { margin-top: 0.4rem; padding-top: 1rem; border-top: 1px solid var(--baslac-border); }
+.volumeGroupTitle {
+  display: flex; align-items: baseline; gap: 0.5rem; margin: 0 0 0.6rem;
+  font-size: 1.05rem; font-weight: 800;
+}
+.volumeGroupTitle small { color: var(--baslac-muted); font-family: var(--font-technical), monospace; font-size: var(--ds-font-label); font-weight: 500; }
+
+.backToResults {
+  display: inline-flex; min-height: 2.75rem; align-items: center; gap: 0.4rem; margin-bottom: 0.25rem;
+  color: inherit; font-size: 0.9rem; font-weight: 600;
+  text-decoration: underline; text-decoration-color: color-mix(in oklab, currentColor 40%, transparent); text-underline-offset: 0.3em;
+}
+/* Kvačica izabrane baze gore desno (uz šifru), da red pakovanja i završnice
+   ima punu širinu kartice i ne skraćuje se („Metallic“, „Converter“). */
+.card { padding-right: 0.7rem; }
+.cardBody strong { padding-right: 1.6rem; }
+.activeTick { top: 0.55rem; bottom: auto; }
+/* Telefon: uske kartice u dve kolone — red pakovanja i završnice se prelama
+   umesto da se skraćuje („Trans…“); sve kartice u mreži ostaju iste visine. */
+@media (max-width: 40rem) { .cardBody small { white-space: normal; overflow: visible; } }

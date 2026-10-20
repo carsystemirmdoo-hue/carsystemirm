@@ -98,3 +98,6 @@ connector/dist/
 
 # Slike bez potvrđenog prava objave: izvor je review-assets/pending-rights/, kopija u public/ nastaje samo za lokalni/Preview build
 public/products/*/pending-rights/
+
+# Lokalni kandidati za pregled (bez potvrđenih prava) — nikad u repo.
+/public/_lokalno/

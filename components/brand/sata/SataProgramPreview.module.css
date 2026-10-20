@@ -1,0 +1,714 @@
+/*
+ * SATA predlog stranice (2026-10-20). Isti vizuelni jezik kao postojeća SATA
+ * stranica (SATA plava kao vlasništvo, linije umesto senki, radijus 2 px), uz
+ * velike fotografije i obe teme sajta preko --ds-c-* tokena.
+ */
+
+.page {
+  --sata-blue: #0a4a8f;
+  --sata-blue-text: #0a4a8f;
+  --sata-void: #071624;
+  --sata-chalk: #e8eef4;
+  --sata-muted-dark: rgb(232 238 244 / 0.7);
+  --sata-line-dark: rgb(232 238 244 / 0.16);
+  --sata-gutter: var(--ds-gutter, clamp(20px, 4vw, 56px));
+  --sata-shell: min(100%, calc(var(--ds-container-max, 1208px) + var(--sata-gutter) * 2));
+
+  --brand-nav-accent: var(--sata-blue);
+
+  background: var(--ds-c-bg);
+  color: var(--ds-c-text);
+  font-family: var(--font-body), system-ui, sans-serif;
+  overflow-x: clip;
+}
+
+:global(.dark) .page {
+  --sata-blue-text: #6fb0ec;
+}
+
+.previewNotice {
+  width: var(--sata-shell);
+  margin: 1rem auto 0;
+  padding: 0.7rem var(--sata-gutter);
+  border-left: 3px solid var(--sata-blue);
+  background: var(--ds-c-surface-2);
+  font-size: var(--ds-font-small);
+}
+
+.breadcrumb {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  width: var(--sata-shell);
+  margin: 0 auto;
+  padding: 1rem var(--sata-gutter);
+  color: var(--ds-c-text-2);
+  font-family: var(--font-technical), ui-monospace, monospace;
+  font-size: var(--ds-font-label);
+  letter-spacing: var(--ds-tracking-label);
+  text-transform: uppercase;
+}
+
+.breadcrumb a {
+  text-decoration: none;
+}
+
+.eyebrow,
+.kicker {
+  margin: 0;
+  color: var(--sata-blue-text);
+  font-family: var(--font-technical), ui-monospace, monospace;
+  font-size: var(--ds-font-label);
+  font-weight: 500;
+  letter-spacing: var(--ds-tracking-label);
+  text-transform: uppercase;
+}
+
+/* ------------------------------------------------------------------ uvod */
+
+.hero {
+  display: grid;
+  background: var(--sata-void);
+  color: var(--sata-chalk);
+}
+
+.hero .eyebrow {
+  color: #8ec3f2;
+}
+
+.heroCopy {
+  display: grid;
+  align-content: center;
+  justify-items: start;
+  gap: 1.1rem;
+  padding: clamp(2.5rem, 6vw, 5rem) var(--sata-gutter);
+}
+
+.heroTitle {
+  margin: 0;
+  font-family: var(--font-display), system-ui, sans-serif;
+  font-size: clamp(3.5rem, 11vw, 8rem);
+  font-weight: 800;
+  line-height: 0.86;
+  letter-spacing: -0.03em;
+}
+
+.heroLead {
+  max-width: 44ch;
+  margin: 0;
+  font-size: clamp(1.05rem, 1.6vw, 1.3rem);
+  line-height: 1.45;
+  color: var(--sata-muted-dark);
+}
+
+.heroMedia {
+  position: relative;
+  min-height: 20rem;
+  overflow: hidden;
+}
+
+.heroMedia img {
+  object-fit: cover;
+}
+
+.heroImageDesktop {
+  display: none;
+}
+
+.heroImageMobile {
+  object-position: 50% 40%;
+}
+
+.heroFallback {
+  display: grid;
+  height: 100%;
+  place-items: center;
+  padding: 2rem;
+  border-left: 1px solid var(--sata-line-dark);
+}
+
+/* Telefon: kadar 4:5 sa šakom i pištoljem (kandidat 02). */
+.hero[data-media] .heroMedia {
+  aspect-ratio: 4 / 5;
+}
+
+@media (min-width: 64rem) {
+  .hero {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    /* Tekst ostaje poravnat sa kontejnerom sajta, fotografija ide do desne ivice. */
+    padding-left: max(0px, calc((100vw - var(--ds-container-max, 1208px)) / 2 - var(--sata-gutter)));
+  }
+
+  .heroMedia {
+    min-height: min(78vh, 46rem);
+  }
+
+  .hero[data-media] .heroMedia {
+    aspect-ratio: auto;
+  }
+
+  .heroImageDesktop {
+    display: block;
+    object-position: 46% 52%;
+  }
+
+  .heroImageMobile {
+    display: none;
+  }
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 0.5rem;
+}
+
+.ctaPrimary,
+.ctaSecondary,
+.ctaSecondaryLight {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-height: var(--ds-ctl-h-m, 2.75rem);
+  padding: 0 1.25rem;
+  border: 1px solid transparent;
+  border-radius: var(--ds-ctl-radius);
+  font-size: 0.9375rem;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.ctaPrimary {
+  background: #e2001a;
+  color: #ffffff;
+}
+
+.ctaSecondary {
+  border-color: currentColor;
+  color: inherit;
+}
+
+.ctaSecondaryLight {
+  border-color: var(--ds-c-text);
+  color: var(--ds-c-text);
+}
+
+/* Široka traka jet X između uvoda i pištolja (kandidat 03, 1920 × 420). */
+.band {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1920 / 420;
+  min-height: 9rem;
+  background: #000;
+}
+
+.band img {
+  object-fit: cover;
+  object-position: 70% 50%;
+}
+
+/* ---------------------------------------------------------------- sekcije */
+
+.section {
+  width: var(--sata-shell);
+  margin: 0 auto;
+  padding: clamp(3rem, 7vw, 5.5rem) var(--sata-gutter);
+}
+
+.section + .section {
+  border-top: 1px solid var(--ds-c-line);
+}
+
+.sectionDark {
+  width: 100%;
+  padding-inline: max(var(--sata-gutter), calc((100vw - var(--ds-container-max, 1208px)) / 2));
+  background: var(--sata-void);
+  color: var(--sata-chalk);
+}
+
+.sectionDark .eyebrow {
+  color: #8ec3f2;
+}
+
+.sectionDark .sectionLead {
+  color: var(--sata-muted-dark);
+}
+
+.sectionHead {
+  display: grid;
+  gap: 0.75rem;
+  max-width: 46rem;
+  margin-bottom: clamp(1.75rem, 4vw, 2.75rem);
+}
+
+.sectionTitle {
+  margin: 0;
+  font-family: var(--font-display), system-ui, sans-serif;
+  font-size: var(--ds-font-h2, clamp(1.75rem, 3.4vw, 2.75rem));
+  font-weight: 700;
+  line-height: 1.08;
+  letter-spacing: -0.01em;
+}
+
+.sectionLead {
+  margin: 0;
+  max-width: 60ch;
+  color: var(--ds-c-text-2);
+  font-size: var(--ds-font-lead, 1.125rem);
+  line-height: 1.55;
+}
+
+.sectionFoot {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin: clamp(1.5rem, 3vw, 2.25rem) 0 0;
+}
+
+/* --------------------------------------------------- pištolji po poslu */
+
+.gunGroups {
+  display: grid;
+  gap: 1px;
+  border: 1px solid var(--ds-c-line);
+  background: var(--ds-c-line);
+}
+
+.gunGroup {
+  display: grid;
+  gap: 1.25rem;
+  padding: clamp(1rem, 2vw, 1.5rem);
+  background: var(--ds-c-surface);
+}
+
+.gunMedia {
+  position: relative;
+  aspect-ratio: 1;
+  overflow: hidden;
+  background: linear-gradient(180deg, #eef1f4, #dfe4ea);
+}
+
+:global(.dark) .gunMedia {
+  background: linear-gradient(180deg, #e9edf1, #d6dce3);
+}
+
+.gunMedia img {
+  object-fit: contain;
+  padding: 6%;
+}
+
+
+.gunCopy {
+  display: grid;
+  align-content: start;
+  gap: 0.6rem;
+}
+
+.gunTitle {
+  margin: 0;
+  font-family: var(--font-display), system-ui, sans-serif;
+  font-size: clamp(1.3rem, 2.2vw, 1.75rem);
+  font-weight: 700;
+}
+
+.gunBody {
+  margin: 0;
+  color: var(--ds-c-text-2);
+  line-height: 1.55;
+}
+
+@media (min-width: 48rem) {
+  .gunGroups {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  /* Prva grupa (završni sloj) je široka: velika fotografija levo, tekst desno. */
+  .gunGroup[data-lead] {
+    grid-column: 1 / -1;
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+    align-items: center;
+  }
+
+  .gunGroup:not([data-lead]) {
+    grid-template-columns: minmax(0, 0.8fr) minmax(0, 1fr);
+    align-items: start;
+  }
+
+  /* Grupa bez fotografije: samo tekst, bez praznog polja. */
+  .gunGroup[data-no-media] {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (min-width: 64rem) {
+  .gunGroup[data-lead] .gunTitle {
+    font-size: clamp(1.8rem, 3vw, 2.6rem);
+  }
+}
+
+.productLinks {
+  display: grid;
+  gap: 0;
+  margin: 0.4rem 0 0;
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid var(--ds-c-line);
+}
+
+.productLinks li {
+  border-bottom: 1px solid var(--ds-c-line);
+}
+
+.productLinks a {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  min-height: 2.75rem;
+  align-items: center;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.productLinks a:hover span:first-child,
+.productLinks a:focus-visible span:first-child {
+  text-decoration: underline;
+  text-underline-offset: 0.25em;
+}
+
+.productLinks a span:last-child {
+  color: var(--sata-blue-text);
+}
+
+/* ------------------------------------------------------------ tehnologija */
+
+.techGrid {
+  display: grid;
+  gap: clamp(1.5rem, 4vw, 3rem);
+  align-items: start;
+}
+
+@media (min-width: 64rem) {
+  .techGrid {
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+  }
+
+  .steps {
+    grid-column: 1 / -1;
+  }
+}
+
+.techTable {
+  width: 100%;
+  border-collapse: collapse;
+  font-variant-numeric: tabular-nums;
+}
+
+.techTable th,
+.techTable td {
+  padding: 0.85rem 0.75rem;
+  border-bottom: 1px solid var(--sata-line-dark);
+  text-align: left;
+}
+
+.techTable thead th {
+  color: #8ec3f2;
+  font-family: var(--font-technical), ui-monospace, monospace;
+  font-size: var(--ds-font-label);
+  font-weight: 500;
+  text-transform: uppercase;
+}
+
+.techTable tbody th {
+  color: var(--sata-muted-dark);
+  font-weight: 500;
+}
+
+.techTable td {
+  font-family: var(--font-technical), ui-monospace, monospace;
+  font-size: 1.05rem;
+}
+
+.fans {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.fans figure {
+  display: grid;
+  grid-template-rows: 9rem auto;
+  gap: 0.6rem;
+  margin: 0;
+  padding: 1rem;
+  border: 1px solid var(--sata-line-dark);
+}
+
+.fans figcaption {
+  color: var(--sata-muted-dark);
+  font-size: var(--ds-font-small);
+  line-height: 1.45;
+}
+
+.fans strong {
+  display: block;
+  color: var(--sata-chalk);
+}
+
+.steps {
+  display: grid;
+  gap: 1px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border: 1px solid var(--sata-line-dark);
+  background: var(--sata-line-dark);
+}
+
+.steps li {
+  display: grid;
+  gap: 0.25rem;
+  padding: 1rem 1.1rem;
+  background: var(--sata-void);
+}
+
+.steps span {
+  color: #8ec3f2;
+  font-family: var(--font-technical), ui-monospace, monospace;
+  font-size: var(--ds-font-label);
+}
+
+.steps small {
+  color: var(--sata-muted-dark);
+  font-size: var(--ds-font-small);
+}
+
+@media (min-width: 48rem) {
+  .steps {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+/* -------------------------------------------------------------- dizne R-M */
+
+.tableWrap {
+  overflow-x: auto;
+  border: 1px solid var(--ds-c-line);
+}
+
+.nozzleTable {
+  width: 100%;
+  min-width: 44rem;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+
+.nozzleTable th,
+.nozzleTable td {
+  padding: 0.8rem 0.9rem;
+  border-bottom: 1px solid var(--ds-c-line);
+  text-align: left;
+  vertical-align: top;
+}
+
+.nozzleTable thead th {
+  background: var(--ds-c-surface-2);
+  font-family: var(--font-technical), ui-monospace, monospace;
+  font-size: var(--ds-font-label);
+  font-weight: 500;
+  text-transform: uppercase;
+}
+
+.nozzleTable tbody th a {
+  color: var(--sata-blue-text);
+  font-weight: 600;
+}
+
+.nozzleTable td {
+  font-family: var(--font-technical), ui-monospace, monospace;
+  font-size: 0.85rem;
+}
+
+.note {
+  max-width: 70ch;
+  margin: 1rem 0 0;
+  color: var(--ds-c-text-2);
+  font-size: var(--ds-font-small);
+  line-height: 1.55;
+}
+
+.note a {
+  color: var(--sata-blue-text);
+}
+
+/* ---------------------------------------------------------- merenje */
+
+@media (min-width: 64rem) {
+  .sectionSplit {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: clamp(2rem, 5vw, 4rem);
+    align-items: start;
+  }
+
+  .sectionSplit .sectionHead {
+    margin-bottom: 0;
+  }
+}
+
+/* ------------------------------------------------- čaše / čišćenje (foto) */
+
+.photoSection {
+  display: grid;
+  gap: clamp(1.75rem, 4vw, 3rem);
+}
+
+@media (min-width: 64rem) {
+  .photoSection {
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+    align-items: center;
+  }
+
+  .sectionReverse .photoPair {
+    order: 2;
+  }
+}
+
+.photoPair {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1px;
+  border: 1px solid var(--ds-c-line);
+  background: var(--ds-c-line);
+}
+
+.photoPair figure {
+  position: relative;
+  display: grid;
+  margin: 0;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  background: linear-gradient(180deg, #eef1f4, #dfe4ea);
+}
+
+.photoPair img {
+  object-fit: contain;
+  padding: 4%;
+}
+
+.photoPair figcaption {
+  position: absolute;
+  inset: auto auto 0 0;
+  padding: 0.35rem 0.6rem;
+  background: rgb(7 22 36 / 0.82);
+  color: #ffffff;
+  font-family: var(--font-technical), ui-monospace, monospace;
+  font-size: var(--ds-font-label);
+}
+
+/* Bez fotografija: par se svodi na nisku traku sa nazivima. */
+.photoPair:not([data-media]) figure {
+  aspect-ratio: auto;
+  min-height: 6rem;
+}
+
+.photoCopy {
+  display: grid;
+  gap: 0.9rem;
+}
+
+.facts {
+  display: grid;
+  gap: 0.35rem;
+  margin: 0.25rem 0 0;
+  padding: 0;
+  list-style: none;
+  font-family: var(--font-technical), ui-monospace, monospace;
+  font-size: 0.85rem;
+}
+
+.facts li::before {
+  content: "— ";
+  color: var(--sata-blue-text);
+}
+
+/* ----------------------------------------------------------------- pribor */
+
+.workshopGrid .productLinks {
+  border-top: 0;
+}
+
+@media (min-width: 48rem) {
+  .workshopGrid .productLinks {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: 2rem;
+  }
+
+  .workshopGrid .productLinks li:nth-child(-n + 2) {
+    border-top: 1px solid var(--ds-c-line);
+  }
+}
+
+/* -------------------------------------------------------------- dokumenti */
+
+.docList {
+  display: grid;
+  gap: 1px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border: 1px solid var(--ds-c-line);
+  background: var(--ds-c-line);
+}
+
+.docList a {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 0.2rem 1rem;
+  padding: 1rem 1.1rem;
+  background: var(--ds-c-surface);
+  text-decoration: none;
+}
+
+.docList strong {
+  font-weight: 600;
+}
+
+.docList span:nth-child(2) {
+  grid-column: 1;
+  color: var(--ds-c-text-2);
+  font-size: var(--ds-font-small);
+}
+
+.docList span:last-child {
+  grid-row: 1 / span 2;
+  grid-column: 2;
+  align-self: center;
+  color: var(--sata-blue-text);
+}
+
+/* ------------------------------------------------------------ završni CTA */
+
+.final {
+  display: grid;
+  gap: 1rem;
+  justify-items: start;
+  width: 100%;
+  padding-inline: max(var(--sata-gutter), calc((100vw - var(--ds-container-max, 1208px)) / 2));
+  background: var(--sata-void);
+  color: var(--sata-chalk);
+}
+
+.final .sectionLead {
+  color: var(--sata-muted-dark);
+}
+
+.fans figure svg {
+  width: 100%;
+  height: 9rem;
+}
+
+.heroFallback svg {
+  width: min(100%, 18rem);
+  height: auto;
+}

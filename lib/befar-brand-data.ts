@@ -54,7 +54,6 @@ export const befarNav: BefarNavItem[] = [
   { id: "geometrija", label: "Geometrija" },
   { id: "uparivanje", label: "Uparivanje" },
   { id: "porodice", label: "Porodice" },
-  { id: "detalj", label: "Detalj" },
   { id: "u-radu", label: "U radu" },
   { id: "proizvodi", label: "Proizvodi" },
 ];
@@ -661,11 +660,13 @@ export const befarOpencell = {
     { colorName: "Žuta", stars: 3, swatch: "#E8C21C", applyWith: "Kremasta ili tečna pasta" },
     { colorName: "Crvena", stars: 4, swatch: "#D2342B", applyWith: "Kremasta ili tečna pasta" },
   ],
+  /* Isti kadar naslaganih pena (crna podloga, crveni talas) od 2026-10-20 je
+     druga fotografija uvoda — ovde ide makro iste linije da se slika ne ponovi. */
   image: {
-    src: "/brands/befar/hero/befar-opencell-stack-dark.webp",
-    alt: "Opencell pene za poliranje na crnoj podlozi, crna, crvena, zelena i žuta",
-    width: 1920,
-    height: 804,
+    src: "/brands/befar/products/befar-opencell-foam-macro.webp",
+    alt: "Opencell pene za poliranje izbliza: žuta, crna, crvena i zelena, vidljiva struktura pene",
+    width: 2000,
+    height: 1333,
   },
   cta: { label: "Pitajte za Opencell", href: "/kontakt" },
   disclaimer:
@@ -749,8 +750,10 @@ export const befarInUse = {
       label: "Sjaj",
       body: "Mekša pena i politura ujednačavaju površinu i podižu sjaj.",
       image: {
-        src: "/brands/befar/hero/befar-porsche-headlight-detail.webp",
-        alt: "Ruka u rukavici mikrofiber krpom obrađuje površinu oko fara crvenog automobila",
+        /* Kadar sa farom i krpom je od 2026-10-20 glavna fotografija uvoda;
+           ovde ide širi kadar istog automobila da se slika ne ponovi. */
+        src: "/brands/befar/hero/befar-porsche-front-gloss.webp",
+        alt: "Ispoliran crveni automobil sa mikrofiber krpom na haubi, odsjaj svetla na laku",
         width: 2560,
         height: 1707,
       },

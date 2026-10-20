@@ -37,7 +37,12 @@ type SearchableComboboxProps = {
   onChange: (value: string) => void;
   options: ComboboxOption[];
   placeholder: string;
-  searchPlaceholder: string;
+  searchPlaceholder?: string;
+  /**
+   * `false` za kratke liste (završnica, pakovanje): bez polja za pretragu,
+   * fokus ide na samu listu, strelice/Enter/Escape/Home/End rade isto.
+   */
+  searchable?: boolean;
   sheetTitle?: string;
   value: string;
 };
@@ -67,7 +72,8 @@ export function SearchableCombobox({
   onChange,
   options,
   placeholder,
-  searchPlaceholder,
+  searchPlaceholder = "Pretražite",
+  searchable = true,
   sheetTitle = ariaLabel,
   value,
 }: SearchableComboboxProps) {
@@ -78,6 +84,7 @@ export function SearchableCombobox({
   const triggerRef = useRef<HTMLButtonElement>(null);
   const panelRef = useRef<HTMLDivElement>(null);
   const searchRef = useRef<HTMLInputElement>(null);
+  const listRef = useRef<HTMLDivElement>(null);
   const [mounted, setMounted] = useState(false);
   const [open, setOpen] = useState(false);
   const [query, setQuery] = useState("");
@@ -182,7 +189,7 @@ export function SearchableCombobox({
 
     updatePanelPosition();
     const focusFrame = window.requestAnimationFrame(() => {
-      searchRef.current?.focus({ preventScroll: true });
+      (searchRef.current ?? listRef.current)?.focus({ preventScroll: true });
     });
 
     function handleViewportChange(event?: Event) {
@@ -317,7 +324,17 @@ export function SearchableCombobox({
     }
   }
 
-  function handleSearchKeyDown(event: KeyboardEvent<HTMLInputElement>) {
+  function handleSearchKeyDown(event: KeyboardEvent<HTMLElement>) {
+    if (!searchable && (event.key === "Home" || event.key === "End")) {
+      event.preventDefault();
+      setActiveIndex(event.key === "Home" ? 0 : Math.max(0, filteredOptions.length - 1));
+      return;
+    }
+    if (!searchable && event.key === " " && activeOption) {
+      event.preventDefault();
+      selectOption(activeOption);
+      return;
+    }
     if (event.key === "ArrowDown") {
       event.preventDefault();
       moveActive(1);
@@ -357,7 +374,7 @@ export function SearchableCombobox({
       <button
         aria-activedescendant={open ? activeOptionId : undefined}
         aria-controls={listboxId}
-        aria-describedby={open ? statusId : undefined}
+        aria-describedby={open && searchable ? statusId : undefined}
         aria-expanded={open}
         aria-haspopup="listbox"
         aria-label={ariaLabel}
@@ -412,37 +429,48 @@ export function SearchableCombobox({
                     <span aria-hidden="true">×</span>
                   </button>
                 </div>
-                <div className={styles.searchWrap}>
-                  <svg aria-hidden="true" className={styles.searchIcon} viewBox="0 0 20 20">
-                    <circle cx="8.75" cy="8.75" r="5.75" />
-                    <path d="m13 13 4 4" />
-                  </svg>
-                  <input
-                    aria-activedescendant={activeOptionId}
-                    aria-controls={listboxId}
-                    aria-describedby={statusId}
-                    aria-label={searchPlaceholder}
-                    autoComplete="off"
-                    className={styles.searchInput}
-                    onChange={(event) => {
-                      setQuery(event.target.value);
-                      setActiveIndex(0);
-                    }}
-                    onKeyDown={handleSearchKeyDown}
-                    placeholder={searchPlaceholder}
-                    ref={searchRef}
-                    role="searchbox"
-                    type="search"
-                    value={query}
-                  />
-                  <span aria-live="polite" className={styles.srOnly} id={statusId}>
-                    {filteredOptions.length === 1
-                      ? "1 rezultat"
-                      : `${filteredOptions.length} rezultata`}
-                  </span>
-                </div>
+                {searchable ? (
+                  <div className={styles.searchWrap}>
+                    <svg aria-hidden="true" className={styles.searchIcon} viewBox="0 0 20 20">
+                      <circle cx="8.75" cy="8.75" r="5.75" />
+                      <path d="m13 13 4 4" />
+                    </svg>
+                    <input
+                      aria-activedescendant={activeOptionId}
+                      aria-controls={listboxId}
+                      aria-describedby={statusId}
+                      aria-label={searchPlaceholder}
+                      autoComplete="off"
+                      className={styles.searchInput}
+                      onChange={(event) => {
+                        setQuery(event.target.value);
+                        setActiveIndex(0);
+                      }}
+                      onKeyDown={handleSearchKeyDown}
+                      placeholder={searchPlaceholder}
+                      ref={searchRef}
+                      role="searchbox"
+                      type="search"
+                      value={query}
+                    />
+                    <span aria-live="polite" className={styles.srOnly} id={statusId}>
+                      {filteredOptions.length === 1
+                        ? "1 rezultat"
+                        : `${filteredOptions.length} rezultata`}
+                    </span>
+                  </div>
+                ) : null}
 
-                <div aria-label={ariaLabel} className={styles.list} id={listboxId} role="listbox">
+                <div
+                  aria-activedescendant={searchable ? undefined : activeOptionId}
+                  aria-label={ariaLabel}
+                  className={styles.list}
+                  id={listboxId}
+                  onKeyDown={searchable ? undefined : handleSearchKeyDown}
+                  ref={listRef}
+                  role="listbox"
+                  tabIndex={searchable ? undefined : -1}
+                >
                   {filteredOptions.length > 0 ? (
                     filteredOptions.map((option, index) => {
                       const originalIndex = options.findIndex(

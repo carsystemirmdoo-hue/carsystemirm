@@ -129,40 +129,10 @@
 
 .heroGrid {
   display: grid;
-  grid-template-columns: minmax(20rem, 0.96fr) minmax(24rem, 1.04fr);
-  align-items: center;
+  grid-template-columns: minmax(20rem, 1.05fr) minmax(24rem, 0.95fr);
+  align-items: start;
   gap: clamp(2rem, 5vw, 4rem);
-  padding-bottom: clamp(3rem, 6vw, 5rem);
-}
-
-.heroIdentity {
-  display: flex;
-  align-items: center;
-  gap: 0.7rem;
-  margin-bottom: 1.5rem;
-}
-
-.heroIdentity img {
-  width: auto;
-  height: 1.9rem;
-}
-
-.heroIdentity div {
-  display: grid;
-  gap: 0.1rem;
-}
-
-.heroIdentity strong {
-  font-family: var(--font-display), sans-serif;
-  font-size: 1rem;
-  letter-spacing: 0.01em;
-}
-
-.heroIdentity span {
-  color: var(--nb-muted);
-  font-family: var(--font-technical), monospace;
-  font-size: var(--ds-font-label);
-  letter-spacing: var(--ds-tracking-label);
+  padding-bottom: clamp(2.25rem, 4.5vw, 3.5rem);
 }
 
 .heroKicker {
@@ -725,8 +695,6 @@
   padding: 12%;
 }
 
-
-
 .stockedCopy {
   padding: 0.9rem;
 }
@@ -1203,18 +1171,22 @@
  * Dorada 2026-10-19
  * ========================================================================= */
 
-/* Hero: dostavljeni baner u desnoj koloni; kadar drži ukrštanje traka i lice. */
+/* Hero (2026-10-20): dostavljeni baner od ivice do ivice ispod teksta. Visina
+   je ograničena; višak se seče odozgo (bela površina), pa čovek, automobil i
+   ukrštanje traka ostaju u kadru. */
 .heroBanner {
   position: relative;
-  aspect-ratio: 16 / 11;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  max-height: min(80vh, 54rem);
   overflow: hidden;
-  border: 1px solid var(--nb-line);
+  border-block: 1px solid var(--nb-line);
   background: #ffffff;
 }
 
 .heroBanner img {
   object-fit: cover;
-  object-position: 62% 70%;
+  object-position: 50% 78%;
 }
 
 /* „Naš program“: redovi su dugmad izbora, pregled je u panelu fiksne visine. */
@@ -1353,12 +1325,41 @@
 }
 
 /* Tehnički podaci: jedna matrica (podatak × proizvod), na telefonu horizontalni skrol. */
-.techTableWrap + .techNoData {
+.techTableBlock + .techNoData {
   margin-top: 1rem;
 }
 
-.techTableWrap {
+/*
+ * Tehnička tabela (2026-10-20): blok drži lepljivu kopiju zaglavlja (vidi
+ * NorbinTechTable.tsx) i telo sa horizontalnim skrolom. Kopija se lepi ispod
+ * globalnog headera + lokalne navigacije i staje na kraju bloka. Obe tabele
+ * imaju iste fiksne širine kolona, pa se kolone poklapaju do piksela.
+ */
+.techTableBlock {
+  /* 11 + 7 × 9 rem = 74 rem: na 1440 px tabela staje u kontejner bez skrola. */
+  --tech-label: 11rem;
+  --tech-col-min: 9rem;
   margin-top: clamp(1.5rem, 3vw, 2.25rem);
+}
+
+.techStickyHead {
+  position: sticky;
+  top: calc(var(--brand-section-header-offset, 0px) + var(--brand-section-nav-height, 0px));
+  z-index: 4;
+  overflow-x: auto;
+  overflow-y: hidden;
+  border: 1px solid var(--nb-line);
+  border-bottom: 0;
+  background: var(--nb-paper);
+  scrollbar-width: none;
+}
+
+.techStickyHead::-webkit-scrollbar {
+  display: none;
+}
+
+.techTableWrap {
+  position: relative;
   overflow-x: auto;
   border: 1px solid var(--nb-line);
 }
@@ -1370,10 +1371,15 @@
 
 .techMatrix {
   width: 100%;
-  min-width: 56rem;
+  min-width: calc(var(--tech-label) + var(--tech-cols, 7) * var(--tech-col-min));
+  table-layout: fixed;
   border-collapse: collapse;
   font-size: 0.8rem;
   line-height: 1.45;
+}
+
+.techColLabel {
+  width: var(--tech-label);
 }
 
 .techMatrix th,
@@ -1405,16 +1411,28 @@
 .techMatrix tbody th {
   position: sticky;
   left: 0;
+  z-index: 1;
   background: var(--nb-surface);
   color: var(--nb-muted);
   font-weight: 500;
   white-space: nowrap;
 }
 
+/* Ugaona ćelija: zamrznuta levo i u kopiji zaglavlja, iznad ćelija koje
+   prolaze ispod nje pri horizontalnom skrolu. */
 .techMatrix thead th:first-child {
   position: sticky;
   left: 0;
-  z-index: 1;
+  z-index: 2;
+}
+
+/* Ivica zamrznute kolone: linija + kratka senka (border se kod lepljivih ćelija
+   u `border-collapse` tabeli ne pomera sa ćelijom, senka da). */
+.techMatrix thead th:first-child,
+.techMatrix tbody th {
+  box-shadow:
+    inset -1px 0 0 var(--nb-line),
+    6px 0 8px -6px rgb(0 0 0 / 0.22);
 }
 
 .techMatrix td a {
@@ -1512,12 +1530,15 @@
 }
 
 @media (max-width: 64rem) {
+  /* Telefon/tablet: isečak 4 : 3 desno-dole — lice, ruka sa krpom i
+     automobil, uz žutu traku koja ulazi u kadar. */
   .heroBanner {
     aspect-ratio: 4 / 3;
+    max-height: none;
   }
 
   .heroBanner img {
-    object-position: 78% 78%;
+    object-position: 74% 82%;
   }
 
   .programLayout .systemPanel {
@@ -1536,6 +1557,23 @@
 }
 
 @media (max-width: 40rem) {
+  /* Telefon: uža zamrznuta prva kolona (oznake se prelamaju) i kolone
+     proizvoda od 8,5 rem — tabela se skroluje horizontalno, ugaona ćelija i
+     oznake ostaju vidljive. */
+  .techTableBlock {
+    --tech-label: 7.5rem;
+    --tech-col-min: 8.5rem;
+  }
+
+  .techMatrix tbody th {
+    white-space: normal;
+  }
+
+  .techMatrix th,
+  .techMatrix td {
+    padding: 0.55rem 0.6rem;
+  }
+
   .docTable thead {
     display: none;
   }

@@ -14,7 +14,8 @@
   background: oklch(0.985 0.004 255);
   color: oklch(0.19 0.014 255);
   cursor: pointer;
-  padding: 0 12px 0 14px;
+  /* Strelica 16 px od desne ivice; tekst se skraćuje pre nje (gap), nikad ispod nje. */
+  padding: 0 16px 0 14px;
   font: inherit;
   font-size: 14px;
   font-weight: 720;
@@ -393,7 +394,7 @@
   border-radius: var(--ds-ctl-radius);
   background: var(--ds-c-surface);
   color: var(--ds-c-text);
-  padding: 0 12px 0 14px;
+  padding: 0 16px 0 14px;
   font-size: var(--ds-font-body);
   font-weight: 400;
 }
@@ -491,4 +492,10 @@
 
 :global([data-ds="a"]) .closeButton:focus-visible {
   outline-color: var(--ds-c-focus);
+}
+
+/* Lista bez pretrage nosi fokus sama; aktivna stavka je istaknuta, pa okvir
+   cele liste nije potreban. */
+.list:focus {
+  outline: none;
 }

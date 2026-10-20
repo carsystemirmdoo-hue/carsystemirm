@@ -1299,14 +1299,23 @@
   align-items: center;
 }
 
+/* Od 2026-10-20 priče nose uspravne fotografije iz zvaničnog kataloga; na
+   telefonu kadar 4 : 3, na širem ekranu 4 : 5 uz tekst. */
 .storyMedia {
   position: relative;
-  aspect-ratio: 16 / 9;
+  aspect-ratio: 4 / 3;
   overflow: hidden;
   border: 1px solid var(--cf-line);
 }
 
+@media (min-width: 48rem) {
+  .storyMedia {
+    aspect-ratio: 4 / 5;
+  }
+}
+
 .storyMedia img {
+  object-position: 50% 65%;
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -1938,22 +1947,25 @@
   font-size: var(--ds-font-lead, 1.125rem);
 }
 
-/* Hero: zvanična fotografija u celini (logo i proizvodi su deo kadra). */
+/* Hero (2026-10-20): zvanična fotografija preko cele širine ekrana, od ivice do
+   ivice. Logo i proizvodi su deo kadra, pa preko nje nema teksta. Visina je
+   ograničena na velikim ekranima; isečak čuva logo gore i proizvode u sredini. */
 .heroPhotoWrap {
   padding-top: clamp(0.75rem, 2vw, 1.5rem);
 }
 
 .heroPhoto {
   position: relative;
+  width: 100%;
   aspect-ratio: 3155 / 1329;
+  max-height: min(82vh, 56rem);
   overflow: hidden;
-  border-radius: var(--ds-ctl-radius);
   background: #0d0d0d;
 }
 
 .heroPhoto img {
   object-fit: cover;
-  object-position: 50% 50%;
+  object-position: 50% 48%;
 }
 
 .heroBelow {
@@ -1975,8 +1987,55 @@
   gap: 1.25rem;
 }
 
-/* Abrazivi: stvarni proizvodi + zvaničan raspon granulacije na zajedničkoj skali. */
+/* Abrazivi (2026-10-20): fotografija brušenja iz zvaničnog kataloga + pet
+   proizvoda sa rasponom granulacija u kojem ih proizvođač nudi. */
+.abrasiveLayout {
+  display: grid;
+  gap: clamp(1.75rem, 4vw, 3.5rem);
+  align-items: start;
+}
+
+.abrasivePhoto {
+  position: relative;
+  margin: 0;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  border: 1px solid var(--cf-line);
+  background: #111;
+}
+
+.abrasivePhoto img {
+  object-fit: cover;
+  object-position: 50% 72%;
+}
+
+.abrasivePhoto figcaption {
+  position: absolute;
+  inset-inline-start: 0;
+  inset-block-end: 0;
+  padding: 0.35rem 0.6rem;
+  background: rgb(10 10 12 / 0.7);
+  color: rgb(255 255 255 / 0.78);
+  font-family: var(--font-technical), var(--font-geist-mono), monospace;
+  font-size: var(--ds-font-label);
+}
+
+.abrasiveBody {
+  display: grid;
+  gap: 1.5rem;
+  justify-items: start;
+}
+
+.abrasiveBody .sectionHead {
+  margin-bottom: 0;
+}
+
+.abrasiveBody .footnote {
+  margin: 0;
+}
+
 .abrasiveList {
+  width: 100%;
   display: grid;
   gap: 1px;
   margin: 0;
@@ -1988,10 +2047,10 @@
 
 .abrasiveLink {
   display: grid;
-  grid-template-columns: 7rem minmax(0, 1.1fr) minmax(0, 1fr);
-  gap: clamp(1rem, 2.5vw, 2rem);
+  grid-template-columns: 4.5rem minmax(0, 1fr) auto;
+  gap: clamp(0.85rem, 2vw, 1.5rem);
   align-items: center;
-  padding: 1rem clamp(1rem, 2vw, 1.5rem);
+  padding: 0.85rem clamp(0.85rem, 1.6vw, 1.25rem);
   background: var(--cf-paper);
   color: var(--cf-ink);
   text-decoration: none;
@@ -2028,7 +2087,7 @@
 
 .abrasiveName {
   font-weight: 700;
-  font-size: 1.05rem;
+  font-size: 1rem;
 }
 
 .abrasiveSubtype {
@@ -2043,15 +2102,12 @@
   line-height: 1.5;
 }
 
-.abrasiveRange {
-  display: grid;
-  gap: 0.6rem;
-}
-
 .abrasiveRangeLabel {
-  display: flex;
-  align-items: baseline;
-  gap: 0.75rem;
+  display: grid;
+  justify-items: end;
+  gap: 0.2rem;
+  text-align: right;
+  white-space: nowrap;
   font-family: var(--font-technical), var(--font-geist-mono), monospace;
   font-size: 0.95rem;
   font-weight: 600;
@@ -2062,40 +2118,6 @@
   color: var(--cf-ink-faint);
   font-size: var(--ds-font-label);
   font-weight: 500;
-}
-
-.abrasiveScale {
-  position: relative;
-  display: block;
-  height: 0.55rem;
-  border-radius: 999px;
-  background: color-mix(in oklab, var(--cf-ink) 10%, transparent);
-}
-
-.abrasiveScaleBar {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  border-radius: 999px;
-  background: linear-gradient(90deg, var(--cf-red), color-mix(in oklab, var(--cf-red) 45%, #fff));
-}
-
-/* Osa skale poravnata sa kolonom raspona (treća kolona reda). */
-.abrasiveAxis {
-  position: relative;
-  height: 1.5rem;
-  margin-top: 0.5rem;
-  margin-left: calc(clamp(1rem, 2vw, 1.5rem) + 7rem + clamp(1rem, 2.5vw, 2rem) + (100% - 7rem - 2 * clamp(1rem, 2.5vw, 2rem) - 2 * clamp(1rem, 2vw, 1.5rem)) * 1.1 / 2.1 + clamp(1rem, 2.5vw, 2rem));
-  margin-right: clamp(1rem, 2vw, 1.5rem);
-}
-
-.abrasiveAxis span {
-  position: absolute;
-  transform: translateX(-50%);
-  color: var(--cf-ink-faint);
-  font-family: var(--font-technical), var(--font-geist-mono), monospace;
-  font-size: 0.7rem;
-  white-space: nowrap;
 }
 
 /* Reprezentativni proizvodi: 4 × 2, ista zona slike i poravnati nazivi. */
@@ -2179,30 +2201,48 @@
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  .abrasiveLink {
-    grid-template-columns: 5rem minmax(0, 1fr);
+}
+
+@media (min-width: 64rem) {
+  .abrasiveLayout {
+    grid-template-columns: minmax(0, 0.82fr) minmax(0, 1.18fr);
   }
 
-  .abrasiveRange {
-    grid-column: 1 / -1;
+  /* Uspravan kadar ostaje u celini i prati listu dok se ona čita. */
+  .abrasivePhoto {
+    position: sticky;
+    top: calc(var(--brand-section-header-offset, 4.5rem) + var(--brand-section-nav-height, 3.5rem) + 1.5rem);
+    aspect-ratio: 983 / 1435;
+    max-height: calc(100vh - 10rem);
   }
 
-  .abrasiveAxis {
-    display: none;
+  .abrasivePhoto img {
+    object-position: 50% 60%;
   }
 }
 
 @media (max-width: 40rem) {
-  /* Telefon: kadar 4:3 iz sredine — logo i središnja grupa proizvoda ostaju. */
+  /* Telefon: kadar 4:3 iz sredine — logo i središnja grupa proizvoda ostaju
+     (proizvodi zauzimaju oko 17–90 % širine izvornika, logo je u sredini). */
   .heroPhoto {
     aspect-ratio: 4 / 3;
   }
 
-  .heroPhotoWrap {
-    padding-inline: 0;
+  .heroPhoto img {
+    object-position: 50% 62%;
   }
 
-  .heroPhoto {
-    border-radius: 0;
+  .abrasiveLink {
+    grid-template-columns: 3.75rem minmax(0, 1fr);
+  }
+
+  .abrasiveRangeLabel {
+    grid-column: 2;
+    justify-items: start;
+    text-align: left;
+    grid-auto-flow: column;
+    justify-content: start;
+    align-items: baseline;
+    gap: 0.6rem;
   }
 }

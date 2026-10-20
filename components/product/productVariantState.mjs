@@ -122,6 +122,23 @@ export function expandRowVariants(base, rows, resolveImage) {
   const list = (rows ?? []).filter((row) => row && !row.slug);
   if (list.length < 2) return [base];
 
+  /*
+   * Boje i baze (2026-10-20): jedna reprezentativna ambalaža po zapremini.
+   * Kod proizvoda sa sprejem (boje) redovi iste zapremine dele PRVU sopstvenu
+   * fotografiju te zapremine, umesto da se menjaju skoro iste limenke za
+   * svaku bazu. Druge vrste redova (npr. pene različitih boja) zadržavaju
+   * svoju sliku.
+   */
+  const representativeByQuantity = new Map();
+  if (base.hasSprayBackdrop) {
+    for (const row of list) {
+      const quantity = rowQuantityLabel(row);
+      if (quantity && row.image && !representativeByQuantity.has(quantity)) {
+        representativeByQuantity.set(quantity, row);
+      }
+    }
+  }
+
   const usedKeys = new Set();
   return list.map((row) => {
     // Ključ je šifra artikla (`?varijanta=159.995`). Ako je dva reda dele,
@@ -130,7 +147,27 @@ export function expandRowVariants(base, rows, resolveImage) {
     usedKeys.add(preferred.toLowerCase());
 
     const baseImages = base.images ?? [];
-    const own = row.image ? resolveImage(row.image, row) : null;
+    const quantity = rowQuantityLabel(row);
+    const imageRow = (quantity && representativeByQuantity.get(quantity)) || (row.image ? row : null);
+    const own = imageRow ? resolveImage(imageRow.image, imageRow) : null;
+
+    /*
+     * Red bez fotografije svoje zapremine prikazuje sliku proizvoda. Ako je ta
+     * slika druge (ili nepotvrđene) zapremine — `imageQuantityLabel` — ne sme se
+     * predstaviti kao izabrano pakovanje: oznaka količine se skriva i dodaje se
+     * napomena.
+     */
+    let imageNote = null;
+    let quantityLabel = quantity;
+    const imageQuantity = base.imageQuantityLabel ?? null;
+    if (!own && base.hasSprayBackdrop && quantity && baseImages.length > 0 && imageQuantity !== quantity) {
+      imageNote = imageQuantity
+        ? `Reprezentativna ambalaža ${imageQuantity}. Izabrano pakovanje: ${quantity}.`
+        : `Reprezentativna ambalaža linije; zapremina na slici nije potvrđena. Izabrano pakovanje: ${quantity}.`;
+      quantityLabel = null;
+    } else if (own && imageRow !== row) {
+      imageNote = `Reprezentativna ambalaža ${quantity}; etiketa izabrane baze se razlikuje.`;
+    }
 
     return {
       ...base,
@@ -140,7 +177,8 @@ export function expandRowVariants(base, rows, resolveImage) {
       shadeLabel: row.label ?? base.shadeLabel ?? null,
       status: row.status ?? base.status,
       // Oznaka na slici prati izabrani red, a ne prvo pakovanje proizvoda.
-      quantityLabel: rowQuantityLabel(row),
+      quantityLabel,
+      imageNote,
       images: own
         ? [own, ...baseImages.filter((image) => image.src !== own.src)]
         : baseImages,

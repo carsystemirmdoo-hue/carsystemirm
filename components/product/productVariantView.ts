@@ -11,6 +11,7 @@ import {
   type ProductStageImage,
 } from "@/components/product/productStageImages";
 import { expandRowVariants } from "@/components/product/productVariantState.mjs";
+import { rmProductImagePack } from "@/lib/rm-mixing-bases";
 import {
   getProductVisualPreset,
   getProductVisualStyle,
@@ -93,6 +94,16 @@ export type ProductVariantView = {
   hasSprayBackdrop: boolean;
   sizeClass: ProductSizeClass;
   quantityLabel: string | null;
+  /**
+   * Napomena uz sliku kada je prikazana reprezentativna ambalaža (druga ili
+   * nepotvrđena zapremina, ili zajednička slika zapremine) — 2026-10-20.
+   */
+  imageNote?: string | null;
+  /**
+   * Zapremina koju prikazuje glavna fotografija proizvoda, kada je potvrđena
+   * (vidi `rmProductImagePack`); `null` = nepotvrđena.
+   */
+  imageQuantityLabel?: string | null;
   volumeStatus: ProductVolumeStatus;
   puttyTrace: PuttyMaterialTraceConfig | null;
 };
@@ -169,6 +180,7 @@ export function toProductVariantView(
     hasSprayBackdrop: shouldRenderProductHeroSpray(product),
     sizeClass: resolveSizeClass(size),
     quantityLabel: resolveQuantityLabel(size),
+    imageQuantityLabel: rmProductImagePack(product.slug),
     volumeStatus: size.volumeStatus,
     puttyTrace: getPuttyMaterialTrace(product.slug) ?? null,
   };

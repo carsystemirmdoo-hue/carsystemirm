@@ -444,6 +444,127 @@
       "evidence": "lib/carsystem-data.ts ručni zapis.",
       "redirect": "/proizvodi/rm-paste-za-mesanje",
       "redirectNote": "BC 190 u 1 L i 4 L."
+    },
+    {
+      "slug": "carsystem-cap-black",
+      "brand": "carsystem",
+      "name": "Carsystem Cap Black",
+      "status": "BUSINESS_OUT_OF_PROGRAMME",
+      "source": "CARSYSTEM_SYNC",
+      "reason": "Carsystem lifestyle/promotivna odeća — firma ne drži clothing/lifestyle program (odluka vlasnika 2026-10-20). Nije radna ni zaštitna oprema: kapa (onesize), „svakodnevno nošenje i zaklon od sunca“.",
+      "evidence": "carsystem.org kategorija „Merchandising Materials“ (officialCategory u data/carsystem-catalog-products.generated.json), artikal 158.927.",
+      "redirect": "/brendovi/carsystem",
+      "redirectNote": "Stari URL vodi trajnim preusmerenjem (308) na Carsystem brend stranu; interni podaci i istorija dokumenata ostaju."
+    },
+    {
+      "slug": "carsystem-cap-camouflage",
+      "brand": "carsystem",
+      "name": "Carsystem Cap camouflage",
+      "status": "BUSINESS_OUT_OF_PROGRAMME",
+      "source": "CARSYSTEM_SYNC",
+      "reason": "Carsystem lifestyle/promotivna odeća — firma ne drži clothing/lifestyle program (odluka vlasnika 2026-10-20). Nije radna ni zaštitna oprema: maskirna kapa (onesize), „svakodnevno nošenje“.",
+      "evidence": "carsystem.org kategorija „Merchandising Materials“ (officialCategory u data/carsystem-catalog-products.generated.json), artikal 160.493.",
+      "redirect": "/brendovi/carsystem",
+      "redirectNote": "Stari URL vodi trajnim preusmerenjem (308) na Carsystem brend stranu; interni podaci i istorija dokumenata ostaju."
+    },
+    {
+      "slug": "carsystem-padded-jacket-black-2025",
+      "brand": "carsystem",
+      "name": "Carsystem Padded Jacket Black 2025",
+      "status": "BUSINESS_OUT_OF_PROGRAMME",
+      "source": "CARSYSTEM_SYNC",
+      "reason": "Carsystem lifestyle/promotivna odeća — firma ne drži clothing/lifestyle program (odluka vlasnika 2026-10-20). Nije radna ni zaštitna oprema: postavljena jakna S–3XL, „nošenje u prelaznim sezonama“.",
+      "evidence": "carsystem.org kategorija „Merchandising Materials“ (officialCategory u data/carsystem-catalog-products.generated.json), artikal 160.037.",
+      "redirect": "/brendovi/carsystem",
+      "redirectNote": "Stari URL vodi trajnim preusmerenjem (308) na Carsystem brend stranu; interni podaci i istorija dokumenata ostaju."
+    },
+    {
+      "slug": "carsystem-padded-vest-black",
+      "brand": "carsystem",
+      "name": "Carsystem Padded Vest Black",
+      "status": "BUSINESS_OUT_OF_PROGRAMME",
+      "source": "CARSYSTEM_SYNC",
+      "reason": "Carsystem lifestyle/promotivna odeća — firma ne drži clothing/lifestyle program (odluka vlasnika 2026-10-20). Nije radna ni zaštitna oprema: postavljen prsluk S–3XL, „u radionici i van nje“ — nije zaštitna oprema.",
+      "evidence": "carsystem.org kategorija „Merchandising Materials“ (officialCategory u data/carsystem-catalog-products.generated.json), artikal 159.288.",
+      "redirect": "/brendovi/carsystem",
+      "redirectNote": "Stari URL vodi trajnim preusmerenjem (308) na Carsystem brend stranu; interni podaci i istorija dokumenata ostaju."
+    },
+    {
+      "slug": "carsystem-padded-vest-black-2025",
+      "brand": "carsystem",
+      "name": "Carsystem Padded Vest Black 2025",
+      "status": "BUSINESS_OUT_OF_PROGRAMME",
+      "source": "CARSYSTEM_SYNC",
+      "reason": "Carsystem lifestyle/promotivna odeća — firma ne drži clothing/lifestyle program (odluka vlasnika 2026-10-20). Nije radna ni zaštitna oprema: postavljen prsluk S–3XL, „u radionici i van nje“ — nije zaštitna oprema.",
+      "evidence": "carsystem.org kategorija „Merchandising Materials“ (officialCategory u data/carsystem-catalog-products.generated.json), artikal 160.027.",
+      "redirect": "/brendovi/carsystem",
+      "redirectNote": "Stari URL vodi trajnim preusmerenjem (308) na Carsystem brend stranu; interni podaci i istorija dokumenata ostaju."
+    },
+    {
+      "slug": "carsystem-socks-carsystem-black-white",
+      "brand": "carsystem",
+      "name": "Carsystem Socks CARSYSTEM black & white",
+      "status": "BUSINESS_OUT_OF_PROGRAMME",
+      "source": "CARSYSTEM_SYNC",
+      "reason": "Carsystem lifestyle/promotivna odeća — firma ne drži clothing/lifestyle program (odluka vlasnika 2026-10-20). Nije radna ni zaštitna oprema: čarape sa logom, „na poslu, u slobodno vreme i pri sportu“.",
+      "evidence": "carsystem.org kategorija „Merchandising Materials“ (officialCategory u data/carsystem-catalog-products.generated.json), artikal 160.540.",
+      "redirect": "/brendovi/carsystem",
+      "redirectNote": "Stari URL vodi trajnim preusmerenjem (308) na Carsystem brend stranu; interni podaci i istorija dokumenata ostaju."
+    },
+    {
+      "slug": "carsystem-socks-carsystem-red-white",
+      "brand": "carsystem",
+      "name": "Carsystem Socks CARSYSTEM red & white",
+      "status": "BUSINESS_OUT_OF_PROGRAMME",
+      "source": "CARSYSTEM_SYNC",
+      "reason": "Carsystem lifestyle/promotivna odeća — firma ne drži clothing/lifestyle program (odluka vlasnika 2026-10-20). Nije radna ni zaštitna oprema: čarape sa logom, „na poslu, u slobodno vreme i pri sportu“.",
+      "evidence": "carsystem.org kategorija „Merchandising Materials“ (officialCategory u data/carsystem-catalog-products.generated.json), artikal 159.837.",
+      "redirect": "/brendovi/carsystem",
+      "redirectNote": "Stari URL vodi trajnim preusmerenjem (308) na Carsystem brend stranu; interni podaci i istorija dokumenata ostaju."
+    },
+    {
+      "slug": "carsystem-sweatshirt-black-teamcarsystem",
+      "brand": "carsystem",
+      "name": "Carsystem Sweatshirt Black #teamCARSYSTEM",
+      "status": "BUSINESS_OUT_OF_PROGRAMME",
+      "source": "CARSYSTEM_SYNC",
+      "reason": "Carsystem lifestyle/promotivna odeća — firma ne drži clothing/lifestyle program (odluka vlasnika 2026-10-20). Nije radna ni zaštitna oprema: duks #teamCARSYSTEM S–3XL.",
+      "evidence": "carsystem.org kategorija „Merchandising Materials“ (officialCategory u data/carsystem-catalog-products.generated.json), artikal 160.325.",
+      "redirect": "/brendovi/carsystem",
+      "redirectNote": "Stari URL vodi trajnim preusmerenjem (308) na Carsystem brend stranu; interni podaci i istorija dokumenata ostaju."
+    },
+    {
+      "slug": "carsystem-sweatshirt-grey-teamcarsystem",
+      "brand": "carsystem",
+      "name": "Carsystem Sweatshirt Grey #TeamCARSYSTEM",
+      "status": "BUSINESS_OUT_OF_PROGRAMME",
+      "source": "CARSYSTEM_SYNC",
+      "reason": "Carsystem lifestyle/promotivna odeća — firma ne drži clothing/lifestyle program (odluka vlasnika 2026-10-20). Nije radna ni zaštitna oprema: duks #TeamCARSYSTEM S–3XL.",
+      "evidence": "carsystem.org kategorija „Merchandising Materials“ (officialCategory u data/carsystem-catalog-products.generated.json), artikal 159.864.",
+      "redirect": "/brendovi/carsystem",
+      "redirectNote": "Stari URL vodi trajnim preusmerenjem (308) na Carsystem brend stranu; interni podaci i istorija dokumenata ostaju."
+    },
+    {
+      "slug": "carsystem-t-shirt-black-teamcarsystem",
+      "brand": "carsystem",
+      "name": "Carsystem T-Shirt Black #teamCARSYSTEM",
+      "status": "BUSINESS_OUT_OF_PROGRAMME",
+      "source": "CARSYSTEM_SYNC",
+      "reason": "Carsystem lifestyle/promotivna odeća — firma ne drži clothing/lifestyle program (odluka vlasnika 2026-10-20). Nije radna ni zaštitna oprema: pamučna majica #teamCARSYSTEM S–XXL.",
+      "evidence": "carsystem.org kategorija „Merchandising Materials“ (officialCategory u data/carsystem-catalog-products.generated.json), artikal 159.827.",
+      "redirect": "/brendovi/carsystem",
+      "redirectNote": "Stari URL vodi trajnim preusmerenjem (308) na Carsystem brend stranu; interni podaci i istorija dokumenata ostaju."
+    },
+    {
+      "slug": "carsystem-zip-hoodie-black",
+      "brand": "carsystem",
+      "name": "Carsystem Zip-Hoodie black",
+      "status": "BUSINESS_OUT_OF_PROGRAMME",
+      "source": "CARSYSTEM_SYNC",
+      "reason": "Carsystem lifestyle/promotivna odeća — firma ne drži clothing/lifestyle program (odluka vlasnika 2026-10-20). Nije radna ni zaštitna oprema: duks sa rajsferšlusom S–3XL.",
+      "evidence": "carsystem.org kategorija „Merchandising Materials“ (officialCategory u data/carsystem-catalog-products.generated.json), artikal 158.084.",
+      "redirect": "/brendovi/carsystem",
+      "redirectNote": "Stari URL vodi trajnim preusmerenjem (308) na Carsystem brend stranu; interni podaci i istorija dokumenata ostaju."
     }
   ],
   "keptExplicitly": {
@@ -455,7 +576,15 @@
       "sata-suit-standard-men",
       "sata-suit-grey",
       "sata-suit-space",
-      "carsystem-zastitno-odelo"
+      "carsystem-zastitno-odelo",
+      "carsystem-30-years-ltd-coverall-jacket",
+      "carsystem-classic-coverall-jacket-anthracite",
+      "carsystem-classic-coverall-pants",
+      "carsystem-coverall-2-0",
+      "carsystem-coverall-black-suit",
+      "carsystem-explorer-ltd-2-piece-coverall",
+      "carsystem-paint-overall-blue",
+      "carsystem-bodyshirt-black"
     ],
     "maskingProducts": [
       "carfit-maskirna-folija-4x5m",

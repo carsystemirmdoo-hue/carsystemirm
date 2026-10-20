@@ -4,6 +4,7 @@ import { BrandSectionNav } from "@/components/brand/BrandSectionNav";
 import { Footer } from "@/components/layout/Footer";
 import type { CarsystemProduct } from "@/lib/carsystem-data";
 import { NorbinGreyShade } from "./NorbinGreyShade";
+import { NorbinTechTable } from "./NorbinTechTable";
 import { NorbinProgramExplorer, type NorbinProgramItem } from "./NorbinProgramExplorer";
 import { norbinTechnicalProducts, type NorbinDocument } from "./norbinTechnicalData";
 import { NorbinRatioRow } from "./NorbinRatioRow";
@@ -63,20 +64,18 @@ function NorbinHero() {
           <strong>Norbin</strong>
         </nav>
 
+        {/* Uvod (2026-10-20): tekst u svom pojasu, baner brenda ispod njega preko
+            cele širine ekrana. Zaseban Norbin logo iznad naslova je uklonjen —
+            ime brenda nose putanja, nadnaslov i prva rečenica. */}
         <div className={styles.heroGrid}>
           <div>
-            <div className={styles.heroIdentity}>
-              <Image src="/brands/norbin.svg" alt="Norbin" width={120} height={40} priority />
-              <div>
-                <strong>NORBIN</strong>
-                <span>Surventis refinish porodica</span>
-              </div>
-            </div>
-
-            <p className={styles.heroKicker}>Pomoćni program za lakirnicu</p>
+            <p className={styles.heroKicker}>Norbin · pomoćni program za lakirnicu</p>
             <h1 className={styles.heroTitle} id="norbin-hero-title">
               Kratak program koji radi u odnosima.
             </h1>
+          </div>
+
+          <div>
             <p className={styles.heroLead}>
               Norbin nije sistem boje — to ostaje Vaš postojeći izbor. Norbin
               je kratak, zatvoren program lakova, punilaca i učvršćivača koji
@@ -106,18 +105,20 @@ function NorbinHero() {
               </Link>
             </div>
           </div>
-
-          {/* Baner brenda (dostavio vlasnik 2026-10-19): trake i fotografija desno, tekst levo na podlozi stranice. */}
-          <div className={styles.heroBanner}>
-            <Image
-              src="/images/brands/norbin/hero/norbin-index-banner-1920-v1.jpg"
-              alt="Norbin trake brenda i lakirer koji proverava završni sloj na vozilu"
-              fill
-              priority
-              sizes="(min-width: 64rem) 52vw, 100vw"
-            />
-          </div>
         </div>
+      </div>
+
+      {/* Baner brenda (dostavio vlasnik 2026-10-19), od ivice do ivice. Na
+          širokom ekranu ostaje skoro ceo kadar; isečak čuva čoveka, automobil i
+          ukrštanje plave i žute trake. */}
+      <div className={styles.heroBanner}>
+        <Image
+          src="/images/brands/norbin/hero/norbin-index-banner-1920-v1.jpg"
+          alt="Norbin trake brenda i lakirer koji proverava završni sloj na vozilu"
+          fill
+          priority
+          sizes="100vw"
+        />
       </div>
     </section>
   );
@@ -371,46 +372,17 @@ function TechnicalSection() {
           Postupak uvek potvrdite u listu za tačan proizvod.
         </p>
 
-        <div className={styles.techTableWrap} role="region" aria-label="Tabela tehničkih podataka" tabIndex={0}>
-          <table className={styles.techMatrix}>
-            <thead>
-              <tr>
-                <th scope="col">Podatak</th>
-                {detailed.map((product) => (
-                  <th scope="col" key={product.code}>
-                    <strong>{product.code}</strong>
-                    <span>{product.name.replace(/^NORBIN\s+/i, "")}</span>
-                  </th>
-                ))}
-              </tr>
-            </thead>
-            <tbody>
-              {fields.map((field) => (
-                <tr key={field}>
-                  <th scope="row">{field}</th>
-                  {detailed.map((product) => {
-                    const row = product.rows.find((item) => item.label === field);
-                    return <td key={product.code}>{row ? row.value : "—"}</td>;
-                  })}
-                </tr>
-              ))}
-              <tr>
-                <th scope="row">Izvor</th>
-                {detailed.map((product) => (
-                  <td key={product.code}>
-                    {product.tds ? (
-                      <a href={product.tds.url} target="_blank" rel="noopener noreferrer">
-                        TDS {product.tds.version ?? ""} ↗
-                      </a>
-                    ) : (
-                      "—"
-                    )}
-                  </td>
-                ))}
-              </tr>
-            </tbody>
-          </table>
-        </div>
+        <NorbinTechTable
+          fields={fields}
+          columns={detailed.map((product) => ({
+            code: product.code,
+            name: product.name.replace(/^NORBIN\s+/i, ""),
+            values: Object.fromEntries(
+              [...product.rows].reverse().map((row) => [row.label, row.value]),
+            ),
+            tds: product.tds ? { url: product.tds.url, version: product.tds.version ?? null } : null,
+          }))}
+        />
 
         <p className={styles.techNoData}>
           Za učvršćivače, razređivač i silikon-čistač (

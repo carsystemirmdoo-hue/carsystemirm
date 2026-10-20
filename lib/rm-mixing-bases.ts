@@ -1,4 +1,5 @@
 import mixingBases from "@/data/rm-sync/mixing-bases.json";
+import baseSwatches from "@/data/rm-sync/base-swatches.json";
 import type { CarsystemProduct } from "@/lib/carsystem-data";
 import type { ProductVariantSection } from "@/types/product-detail";
 
@@ -11,7 +12,11 @@ import type { ProductVariantSection } from "@/types/product-detail";
  * identiteta nisu ovde — ne dobijaju javni red, poručuju se kroz „Izbor robe”.
  */
 type MixingBaseRow = { code: string; name: string | null; packs: string[]; status: string; source: string; sourceNote: string };
-const data = mixingBases as { cards: Record<string, MixingBaseRow[]>; notes?: Record<string, string> };
+const data = mixingBases as {
+  cards: Record<string, MixingBaseRow[]>;
+  notes?: Record<string, string>;
+  productImages?: Record<string, { code: string; pack: string } | string>;
+};
 const cards = data.cards;
 const notes: Record<string, string> = data.notes ?? {};
 
@@ -19,13 +24,34 @@ export const RM_CRYSTAL_BASE_SLUG = "rm-diamont-crystal-base";
 /** Paste iz naše ponude potvrđene po etiketi (odluka vlasnika 2026-10-13), bez potvrđene linije. */
 export const RM_PASTE_SLUG = "rm-paste-za-mesanje";
 
+type SwatchData = {
+  palette: Record<string, string>;
+  cards: Record<string, string>;
+  codes: Record<string, { family: string | null; finish: string }>;
+};
+const swatches = baseSwatches as unknown as SwatchData;
+
+/**
+ * Orijentacioni uzorak baze (2026-10-20) iz zvanične tabele „Diamont Tinting Base
+ * Characteristics“ — porodica boje i vrsta prikaza vezani za TAČNU šifru. Kartica bez
+ * potvrđene linije (paste) i šifra bez podatka dobijaju neutralan prikaz.
+ */
+export function rmBaseSwatch(slug: string, code: string): { swatch?: string; swatchFinish: string } {
+  if (!swatches.cards[slug]) return { swatchFinish: "neutral" };
+  const entry = swatches.codes[code];
+  if (!entry || !entry.family || entry.finish === "neutral") return { swatchFinish: "neutral" };
+  return { swatch: swatches.palette[entry.family], swatchFinish: entry.finish };
+}
+
+export const RM_SWATCH_NOTE =
+  "Kvadratić je orijentacioni prikaz baze/pigmenta prema zvaničnoj R-M tabeli baza (porodica boje i efekat), a ne garantovana završna nijansa na vozilu. Šrafiran kvadratić: za tu šifru nema pouzdanog podatka o boji u zvaničnoj tabeli.";
+
 export function rmMixingBaseSection(slug: string): ProductVariantSection | null {
   const rows = cards[slug];
   if (!rows?.length) return null;
   return {
     title: "Mešne baze u ponudi",
-    description:
-      "Baze koje vodimo, po oznaci sa etikete i potvrđenom pakovanju. Nijansa se meša po formuli; dostupnost potvrđujemo kroz upit.",
+    description: `Baze koje vodimo, po oznaci sa etikete i potvrđenom pakovanju. Nijansa se meša po formuli; dostupnost potvrđujemo kroz upit. ${RM_SWATCH_NOTE}`,
     // Ključ `shade`: oznaka baze je ono po čemu se varijanta bira (getPrimaryVariantColumn), a ne pakovanje.
     columns: [
       { key: "shade", label: "Baza" },
@@ -34,6 +60,7 @@ export function rmMixingBaseSection(slug: string): ProductVariantSection | null 
     ],
     rows: rows.map((row) => ({
       id: row.code,
+      ...rmBaseSwatch(slug, row.code),
       values: {
         shade: row.name ? `${row.code} — ${row.name}` : row.code,
         pack: row.packs.join(" · "),
@@ -55,4 +82,13 @@ export function withRmMixingBases(product: CarsystemProduct): CarsystemProduct {
     ...product,
     detail: { reviewStatus: "confirmed", ...product.detail, variants: { reviewStatus: "confirmed", content: section } },
   };
+}
+
+/**
+ * Zapremina koju prikazuje fotografija kartice (npr. „4 L“ za DIAMONT BC 100), kada je vidljiva
+ * na samoj fotografiji. `null` znači da zapremina slike nije potvrđena (2026-10-20).
+ */
+export function rmProductImagePack(slug: string): string | null {
+  const entry = data.productImages?.[slug];
+  return entry && typeof entry === "object" ? entry.pack : null;
 }

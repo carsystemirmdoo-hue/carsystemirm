@@ -1,6 +1,14 @@
 .backdrop {
   --spray-default-scale: 1.06;
-  --spray-scale: var(--product-stage-spray-scale, var(--spray-default-scale));
+  /*
+   * Veličina ambalaže (2026-10-20): sprej prati klasu veličine proizvoda
+   * (`--product-stage-spray-size`, S…XL na `.stickyStage`), da bočica od 125 ml
+   * ne stoji ispred ogromnog traga, a limenka od 4 L ne prekrije ceo trag.
+   */
+  --spray-scale: calc(
+    var(--product-stage-spray-scale, var(--spray-default-scale)) *
+      var(--product-stage-spray-size, 1)
+  );
   --spray-opacity: 1;
   --spray-offset-x: var(--product-stage-spray-offset-x, 0px);
   --spray-offset-y: var(--product-stage-spray-offset-y, 4px);

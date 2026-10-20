@@ -28,3 +28,11 @@ test("članstvo u liniji je iz zvaničnog polja, ne iz sličnog naziva", () => {
   assert.ok(uno.links.some((link) => link.slug === "rm-sc-t2a204-mat-black"));
   assert.match(uno.note ?? "", /SC 10/);
 });
+
+test("R-M kartice sa istim zvaničnim nazivom razlikuju se zvaničnom oznakom", async () => {
+  const { getRmCatalogProducts } = await import("./rm-catalog-products");
+  const names = getRmCatalogProducts().map((product) => product.name);
+  assert.equal(new Set(names).size, names.length, "nijedan R-M naslov se ne ponavlja");
+  assert.ok(names.includes("R-M Pure black SC T2A203") && names.includes("R-M Pure black SC T2P203"));
+  assert.ok(names.includes("R-M GHD THINNER GV 300"));
+});

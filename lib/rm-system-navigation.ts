@@ -1,6 +1,7 @@
 import catalog from "@/data/rm-catalog-products.generated.json";
 import mixingBases from "@/data/rm-sync/mixing-bases.json";
 import { RM_CRYSTAL_BASE_SLUG, RM_PASTE_SLUG } from "@/lib/rm-mixing-bases";
+import { rmDisplayName } from "@/lib/rm-catalog-products";
 
 /**
  * Navigacija R-M linije (2026-10-20): prezentacija sistema i kartice za IZBOR artikala
@@ -41,9 +42,6 @@ export type RmSystemNavigation = {
   links: RmSystemLink[];
 };
 
-/** Isti prikazni nazivi kao u `lib/rm-catalog-products.ts`. */
-const DISPLAY_NAMES: Record<string, string> = { "rm-diamont": "R-M DIAMONT var CV" };
-
 function packVolume(pack: string) {
   return pack.match(/\d+(?:,\d+)?\s*(?:L|ml)\b/)?.[0] ?? pack;
 }
@@ -73,7 +71,7 @@ function lineLinks(line: string): RmSystemLink[] {
       return {
         slug: entry.slug,
         href: `/proizvodi/${entry.slug}`,
-        label: DISPLAY_NAMES[entry.slug] ?? entry.name,
+        label: rmDisplayName(entry),
         note: entry.code && entry.kind !== "system" ? `${entry.code} · ${kindNote}` : kindNote,
       };
     });

@@ -22,7 +22,13 @@ import { getProductSearchIndex } from "@/lib/search/buildSearchIndex";
 import { productGroupJsonLd, productJsonLd } from "@/lib/seo";
 import { buildProductMetadata } from "@/lib/seo/metadata-builders";
 
-const INTERNAL = ["rm-uno-hd", "baslac-basecoat-35", "baslac-basecoat-45", "baslac-topcoat-30", "baslac-topcoat-30-cv"];
+const INTERNAL = [
+  "rm-uno-hd",
+  // R-M kartice izbora baza (2026-10-20): ranije su nosile izmišljene oznake (RM-DIA-BASE, …).
+  "rm-diamont-bazna-boja",
+  "rm-diamont-crystal-base",
+  "rm-paste-za-mesanje",
+  "baslac-basecoat-35", "baslac-basecoat-45", "baslac-topcoat-30", "baslac-topcoat-30-cv"];
 const BASLAC_SYSTEMS = INTERNAL.filter((slug) => slug.startsWith("baslac-"));
 
 const all = getAllCarsystemProducts();
@@ -42,16 +48,18 @@ const metaDescription = (slug: string) => {
   return String(buildProductMetadata({ brand: getCarsystemBrandBySlug(product.brandSlug)!, product }).description);
 };
 
-test("samo pet sistemskih zapisa bez zvanične šifre nosi oznaku, i to iz adaptera", () => {
+test("samo sistemski zapisi bez zvanične šifre nosi oznaku, i to iz adaptera", () => {
   assert.deepEqual(all.filter((product) => product.skuIsInternalOnly).map((product) => product.slug).sort(), [...INTERNAL].sort());
   for (const slug of INTERNAL) {
     const product = bySlug(slug);
     assert.equal(product.sku, slug, "sku ostaje interni ključ");
-    assert.ok(!product.manufacturerCode, `${slug} nema zvaničnu šifru`);
+    // `rm-diamont-bazna-boja` iz R-M dopune nosi naziv LINIJE („DIAMONT“), ne šifru artikla.
+    if (slug === "rm-diamont-bazna-boja") assert.equal(product.manufacturerCode, "DIAMONT");
+    else assert.ok(!product.manufacturerCode, `${slug} nema zvaničnu šifru`);
   }
 });
 
-test("1–2. rm-uno-hd i četiri Baslac sistema se nigde ne prikazuju kao šifra", () => {
+test("1–2. R-M kartice sistema/izbora i četiri Baslac sistema se nigde ne prikazuju kao šifra", () => {
   for (const slug of INTERNAL) {
     const product = bySlug(slug);
     assert.equal(publicSkuOf(product), null);

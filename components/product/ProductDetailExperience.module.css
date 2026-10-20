@@ -991,7 +991,8 @@
 
 .quickFacts {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  /* Kolona po činjenici (2026-10-20): tri činjenice ne dele četiri uske kolone. */
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 9rem), 1fr));
   margin-top: clamp(2.5rem, 4vw, 3.75rem);
   border-block: 1px solid var(--detail-border-strong);
 }
@@ -1015,9 +1016,17 @@
   text-transform: uppercase;
 }
 
+.quickFact {
+  min-width: 0;
+}
+
 .quickFact strong {
+  min-width: 0;
+  /* Duga vrednost („bazna boja za komercijalna vozila“) se prelama u svojoj koloni. */
+  overflow-wrap: anywhere;
+  hyphens: auto;
   font-family: var(--font-display), var(--font-geist-sans), sans-serif;
-  font-size: var(--ds-font-h3);
+  font-size: clamp(1.05rem, 1.35vw, var(--ds-font-h3));
   font-weight: 700;
   letter-spacing: -0.01em;
   line-height: 1.2;
@@ -3281,4 +3290,88 @@ a.colorOptionContent:active {
   background-color: transparent;
   background-image: repeating-linear-gradient(45deg, rgb(120 120 120 / 0.28) 0 2px, transparent 2px 6px);
   border-style: dashed;
+}
+
+/* =========================================================================
+ * Navigacija R-M linije (2026-10-20): prezentacija sistema ↔ kartice izbora.
+ * ========================================================================= */
+.systemNav {
+  display: grid;
+  gap: 0.6rem;
+  margin: 1.25rem 0 1.5rem;
+  padding: 0.9rem 1rem 1rem;
+  border: 1px solid var(--detail-border-strong);
+  border-radius: 0.5rem;
+  background: var(--detail-surface);
+}
+
+.systemNavTitle {
+  margin: 0;
+  color: var(--detail-faint);
+  font-family: var(--font-technical), var(--font-geist-mono), monospace;
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+}
+
+.systemNavList {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 13rem), 1fr));
+  gap: 0.45rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.systemNavList > li {
+  min-width: 0;
+}
+
+.systemNavLink {
+  display: grid;
+  height: 100%;
+  min-height: 2.75rem;
+  align-content: start;
+  gap: 0.2rem;
+  padding: 0.55rem 0.7rem;
+  border: 1px solid var(--detail-border);
+  border-radius: 0.4rem;
+  color: var(--detail-ink);
+  text-decoration: none;
+}
+
+.systemNavLink strong {
+  overflow-wrap: anywhere;
+  font-size: 0.9rem;
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+.systemNavLink small {
+  overflow-wrap: anywhere;
+  color: var(--detail-faint);
+  font-size: 0.78rem;
+  line-height: 1.35;
+}
+
+.systemNavLink[data-selection="true"] strong::after {
+  content: " →";
+}
+
+.systemNavLink:hover,
+.systemNavLink:focus-visible {
+  border-color: var(--detail-ink);
+}
+
+.systemNavLink[aria-current="page"] {
+  border-color: var(--family-accent, var(--detail-ink));
+  box-shadow: inset 0 0 0 1px var(--family-accent, var(--detail-ink));
+}
+
+.systemNavNote {
+  margin: 0;
+  color: var(--detail-faint);
+  font-size: 0.8rem;
+  line-height: 1.45;
 }

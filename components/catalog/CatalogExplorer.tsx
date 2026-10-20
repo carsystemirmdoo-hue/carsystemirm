@@ -1,7 +1,7 @@
 "use client";
 
 import { matchesPhase } from "@/lib/catalog/phase-match.mjs";
-import { orderPaintCategory } from "@/lib/catalog/paint-priority.mjs";
+import { orderPaintCategory, pinPaintSystems } from "@/lib/catalog/paint-priority.mjs";
 import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState, type ReactNode } from "react";
 import { FOR_YOU_EVENT, type ForYouRanking } from "@/components/catalog/CatalogForYou";
 import { personalOrder } from "@/lib/customers/forYouRules.mjs";
@@ -495,6 +495,13 @@ export function CatalogExplorer({
   productGridElementRef.current = productGridElement;
   /** Skrol koji Back-restauracija još nije mogla da primeni (lista se lenjo puni). */
   const pendingRestoreScrollYRef = useRef<number | null>(null);
+  /*
+   * Povratak „Nazad“ za prijavljenog kupca (2026-10-20): skrol se vraća na mount-u, a lični
+   * redosled i blok „Za Vas“ stižu posle toga i preslažu kartice iznad — kliknuta kartica je
+   * završavala ~1.000 px iznad ekrana. Kada stigne lični redosled, vraćanje se ponavlja, osim
+   * ako je korisnik u međuvremenu sam skrolovao.
+   */
+  const restoredScrollYRef = useRef<number | null>(null);
   const [loadSentinelElement, setLoadSentinelElement] = useState<HTMLDivElement | null>(null);
   const [preloadTriggerElement, setPreloadTriggerElement] =
     useState<HTMLAnchorElement | null>(null);
@@ -862,7 +869,9 @@ export function CatalogExplorer({
   const sortedProducts = useMemo(() => {
     if (effectiveSort === PERSONAL_SORT.slug && personal && !searchEnabled) {
       const byId = new Map(filteredProducts.map((p) => [p.id, p]));
-      return personalOrder(filteredProducts.map((p) => p.id), personal.purchased, personal.related).order.map((id) => byId.get(id)!);
+      const ordered = personalOrder(filteredProducts.map((p) => p.id), personal.purchased, personal.related).order.map((id) => byId.get(id)!);
+      // „Boje i lakovi“: kartice izbora sistema boja ostaju prve i uz lični redosled (2026-10-20).
+      return categorySlug === "boje" ? pinPaintSystems(ordered) : ordered;
     }
     if (effectiveSort === "naziv-az") {
       return [...filteredProducts].sort((first, second) =>
@@ -932,6 +941,14 @@ export function CatalogExplorer({
        * mount/cleanup bi uhvatio scrollY usred te animacije i presnimio ga.
        */
       window.scrollTo({ top: stored.scrollY, left: 0, behavior: "instant" });
+      restoredScrollYRef.current = stored.scrollY;
+      const forgetRestore = () => {
+        restoredScrollYRef.current = null;
+      };
+      for (const type of ["wheel", "touchstart", "keydown", "pointerdown"] as const) {
+        window.addEventListener(type, forgetRestore, { once: true, passive: true });
+      }
+      window.setTimeout(forgetRestore, 8000);
       /*
        * Sa upitom (`?q=`) lista dolazi iz lenjo učitanog indeksa: na mount-u je
        * mreža još prazna i scrollTo se klampuje na kratak dokument. Pozicija
@@ -1028,6 +1045,26 @@ export function CatalogExplorer({
    * popuni ili dok se rezultati ne potroše.
    */
   const visibleProductCount = visibleProducts.length;
+
+  useLayoutEffect(() => {
+    const target = restoredScrollYRef.current;
+    if (!personal || target === null) return;
+    const reapply = () => {
+      if (restoredScrollYRef.current === null) return;
+      window.scrollTo({ top: target, left: 0, behavior: "instant" });
+    };
+    reapply();
+    // „Za Vas“ se iscrtava u istom talasu; još jedan kadar posle njega.
+    const frame = window.requestAnimationFrame(() => window.requestAnimationFrame(reapply));
+    const settle = window.setTimeout(() => {
+      reapply();
+      restoredScrollYRef.current = null;
+    }, 600);
+    return () => {
+      window.cancelAnimationFrame(frame);
+      window.clearTimeout(settle);
+    };
+  }, [personal]);
 
   useLayoutEffect(() => {
     const target = pendingRestoreScrollYRef.current;

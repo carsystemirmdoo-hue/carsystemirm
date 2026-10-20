@@ -247,7 +247,7 @@
     "test:baslac-variant": "node --test components/baslac-brand/baslacVariantState.test.mjs",
     "baslac:campaign-assets": "python3 scripts/build-baslac-campaign-assets.py",
     "test:rm-carousel": "tsx --test components/rm-brand/rmCampaignAutoplay.test.mjs",
-    "test:rm-brand": "node --test lib/rmBrandClassification.test.mjs && tsx --test --tsconfig db/integration/tsconfig.test.json lib/rmBaseSwatches.test.mts components/rm-brand/rmBrandLinkage.test.mts lib/catalog/ownerDecisions20261013.test.mts",
+    "test:rm-brand": "node --test lib/rmBrandClassification.test.mjs && tsx --test --tsconfig db/integration/tsconfig.test.json lib/rmBaseSwatches.test.mts lib/rmSystemNavigation.test.mts components/rm-brand/rmBrandLinkage.test.mts lib/catalog/ownerDecisions20261013.test.mts",
     "test:carousel-consumers": "node --test components/motion/brandCampaignConsumers.test.mjs",
     "test:home-campaign": "tsx --test components/home/homeCampaign.test.mjs",
     "home:campaign-assets": "python3 scripts/build-home-campaign-assets.py",

@@ -195,7 +195,35 @@ function searchTermsFor(entry: { code: string | null; officialName: string; seri
   ];
 }
 
-function createCatalogProduct(entry: CatalogProductEntry): CarsystemProduct {
+/**
+ * Prikazni nazivi kada zvaničan naziv sam ne razlikuje karticu od srodne (2026-10-20).
+ * `rm-diamont` je na info.rmpaint.com „DIAMONT“ sa oznakom „DIAMONT var CV“ (metalik i
+ * uni varijanta za komercijalna vozila) — bez oznake se mešao sa izborom DIAMONT baza.
+ */
+const DISPLAY_NAMES: Record<string, string> = {
+  "rm-diamont": "R-M DIAMONT var CV",
+};
+
+/**
+ * Zvanični naziv koji deli više R-M kartica (npr. „R-M GHD THINNER“ za GV 100/200/300/400,
+ * „R-M Pure black“ za SC T2A203 i SC T2P203) dobija zvaničnu oznaku, da se kartice u katalogu
+ * i naslovi stranica razlikuju (2026-10-20). Oznaka je sa info.rmpaint.com, ne izmišljena.
+ */
+const sharedNames = (() => {
+  const counts = new Map<string, number>();
+  for (const entry of entries) counts.set(entry.name, (counts.get(entry.name) ?? 0) + 1);
+  return new Set([...counts].filter(([, count]) => count > 1).map(([name]) => name));
+})();
+
+export function rmDisplayName(entry: Pick<CatalogProductEntry, "slug" | "name" | "code">) {
+  if (DISPLAY_NAMES[entry.slug]) return DISPLAY_NAMES[entry.slug];
+  if (sharedNames.has(entry.name) && entry.code && !entry.name.includes(entry.code)) return `${entry.name} ${entry.code}`;
+  return entry.name;
+}
+
+function createCatalogProduct(sourceEntry: CatalogProductEntry): CarsystemProduct {
+  const displayName = rmDisplayName(sourceEntry) === sourceEntry.name ? null : rmDisplayName(sourceEntry);
+  const entry = displayName ? { ...sourceEntry, name: displayName } : sourceEntry;
   const { content } = entry;
   const imageAlt = `${entry.name}, ${content.productType.toLocaleLowerCase("sr-Latn")}`;
   const badges = [content.productType, ...(entry.series ? [entry.series] : []), ...(entry.line && entry.line !== entry.series ? [entry.line] : []), "Na upit"];

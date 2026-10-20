@@ -853,12 +853,11 @@ const legacyProducts: CarsystemProduct[] = [
       "Bazna boja za profesionalno usklađivanje nijanse u refinish procesu.",
     longDescription:
       "DIAMONT je pozicioniran kao bazni sistem za radionice koje traže pregledan radni tok, stabilnu reprodukciju nijanse i tehničku podršku pri izboru formule. Stranica prikazuje ključne informacije za upit i povezivanje sa zvaničnim tehničkim listovima.",
-    sku: "RM-DIA-BASE",
-    packages: [
-      { label: "0.5 L", detail: "Toneri i pomoćni materijali" },
-      { label: "1 L" },
-      { label: "3.5 L" },
-    ],
+    sku: "rm-diamont-bazna-boja",
+    // Oznaka zapisa, ne R-M šifra: kupcu se ne prikazuje (šifre su u redovima baza).
+    skuIsInternalOnly: true,
+    // Zapremine iz potvrđenih redova baza (`data/rm-sync/mixing-bases.json`), ne stari „3.5 L“.
+    packages: [{ label: "4 L" }, { label: "1 L" }, { label: "0,5 L" }],
     purpose: "Usklađivanje nijanse i bazni sloj pre bezbojnog laka",
     badges: ["Bazna boja", "R-M sistem", "Na upit"],
     rmMetadata: {
@@ -2393,7 +2392,8 @@ const productRecords: CarsystemProduct[] = [
     shortDescription: "Koncentrovane baze za specijalne efektne pigmente, za DIAMONT sistem.",
     longDescription:
       "CRYSTAL BASE su R-M koncentrovane baze razvijene isključivo za specijalne efektne pigmente i pakovane u bočice od 125 ml. Koriste se uz DIAMONT bazni sistem; nijansa se meša po formuli.",
-    sku: "RM-CRYSTAL-BASE",
+    sku: RM_CRYSTAL_BASE_SLUG,
+    skuIsInternalOnly: true,
     packages: [{ label: "bočica 125 ml" }],
     purpose: "Specijalni efektni pigmenti u DIAMONT nijansama",
     badges: ["Mešna baza", "DIAMONT", "125 ml"],
@@ -2416,7 +2416,8 @@ const productRecords: CarsystemProduct[] = [
     shortDescription: "Paste za mešanje nijansi iz naše ponude, po oznaci sa etikete i potvrđenom pakovanju.",
     longDescription:
       "R-M paste za mešanje koje vodimo u ponudi, navedene po oznaci sa etikete pakovanja (npr. BC 190, SC 403, CB 48V) i potvrđenom pakovanju. Nijansa se meša po formuli. Linija i naziv nijanse nisu potvrđeni zvaničnim izvorom proizvođača, pa se ne navode; za izbor paste obratite se kancelariji.",
-    sku: "RM-PASTE",
+    sku: RM_PASTE_SLUG,
+    skuIsInternalOnly: true,
     // Jedan opisni zapis: pakovanje zavisi od oznake (red tabele), pa kartica ne sme da istakne jednu zapreminu.
     packages: [{ label: "po oznaci: 0,5 L, 1 L, 4 L ili bočica 125 ml" }],
     purpose: "Mešanje nijansi po formuli",

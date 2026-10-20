@@ -163,21 +163,27 @@
 .stickyStage[data-product-size-class="S"] {
   --product-envelope-w: 58cqw;
   --product-envelope-h: 74cqh;
+  /* Sprej srazmeran ambalaži (2026-10-20): isti odnos traga i proizvoda za sve
+     veličine, trag viri oko ambalaže umesto da je nadvisi ili nestane iza nje. */
+  --product-stage-spray-size: 0.8;
 }
 
 .stickyStage[data-product-size-class="M"] {
   --product-envelope-w: 66cqw;
   --product-envelope-h: 80cqh;
+  --product-stage-spray-size: 0.9;
 }
 
 .stickyStage[data-product-size-class="L"] {
   --product-envelope-w: 74cqw;
   --product-envelope-h: 86cqh;
+  --product-stage-spray-size: 1;
 }
 
 .stickyStage[data-product-size-class="XL"] {
   --product-envelope-w: 82cqw;
   --product-envelope-h: 92cqh;
+  --product-stage-spray-size: 1.08;
 }
 
 .stickyStage[data-product-stage-spray="true"] {

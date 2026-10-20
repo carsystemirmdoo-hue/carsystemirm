@@ -256,10 +256,12 @@ test("spray is category-gated behind color products and stays out of catalog sur
     /leadingEdge|strokeZone|topZone|middleZone|bottomZone|mask-image|clip-path:\s*inset|scaleX\(/,
   );
   assert.match(styles, /--spray-default-scale:\s*1\.06/);
+  // 2026-10-20: skala spreja = skala scene × klasa veličine ambalaže (S…XL).
   assert.match(
     styles,
-    /--spray-scale:\s*var\(--product-stage-spray-scale, var\(--spray-default-scale\)\)/,
+    /--spray-scale:\s*calc\(\s*var\(--product-stage-spray-scale, var\(--spray-default-scale\)\)\s*\*\s*var\(--product-stage-spray-size, 1\)\s*\)/,
   );
+  assert.match(detailStyles, /data-product-size-class="S"\][\s\S]*?--product-stage-spray-size:\s*0\.8;/);
   assert.match(styles, /--spray-opacity:\s*1/);
   assert.match(
     styles,

@@ -42,8 +42,21 @@ neki nestane iz kataloga:
 
 Rukavice ostaju (zaštitna oprema).
 
-## Otvoreno pitanje
+## Promotivni artikli koji nisu odeća — nepromenjeni, čekaju odluku
 
-Ostali artikli iz „Merchandising Materials“ koji nisu odeća (šolja, upaljač,
-olovka, USB, zastava, otirač, nalepnica, nož) nisu dirani. Odluka o njima
-čeka vlasnika.
+Ostalih 8 artikala iz Carsystem „Merchandising Materials“ nije odeća i nije
+menjano. Ostaju u javnom katalogu do odluke vlasnika.
+
+| Šifra (Carsystem) | Naziv | Kategorija kod nas | Namena (zvaničan opis) |
+|---|---|---|---|
+| 158.829 | Carsystem car sticker plain (4 formata) | Radionica | logo nalepnica za unutra i spolja |
+| 157.219 | Carsystem Coffee Cup Black (300 ml) | Radionica | šolja za tople napitke |
+| 156.281 | Carsystem Cutter Knife black (140 mm) | Pribor | nož za precizno sečenje |
+| 158.622 | Carsystem Doormat logo black (50 × 75 i 90 × 60 cm) | Radionica | otirač sa logom |
+| 137.325 | Carsystem Hoist flag (120 × 300 cm) | Radionica | zastava za jarbol |
+| 148.281 | Carsystem Lighter black | Radionica | upaljač |
+| 156.540 | Carsystem Pen Trinity Gum black | Radionica | hemijska olovka |
+| 158.871 | Carsystem USB-Stick (64 GB) | Radionica | USB memorija |
+
+Napomena: nož (Cutter Knife) je alat, pa verovatno ostaje i ako se ostali
+promotivni artikli uklone.

@@ -44,6 +44,18 @@ fotografija.
 | S12 | brošura „Cleaning Systems“, https://www.sata.com/media/e5/e1/71/1772186609/EN-SATA-Brochure-Cleaning-Systems-3911-220829-3.pdf?ts=1772187894 | clean RCS, multi clean 2 |
 | S13 | https://www.sata.com/en/service/downloads/ | centar za preuzimanje |
 
+## SATAjet 5000 B, 1500 B i 3000 B — postojeće stanje
+
+Odluka (2026-10-20): sva tri modela ostaju kao do sada. Ne ističu se u novoj
+prezentaciji i nigde se ne tvrdi da su na lageru.
+
+- **5000 B:** proizvođač ga gasi (katalog 2025: „discontinued“, ostaju dizne i
+  delovi). Kartica ostaje sa javnim statusom „Na upit“.
+- **1500 B i 3000 B:** nema ih na aktuelnoj listi pištolja ni u katalogu 2025.
+  Kartice ostaju „Na upit“.
+- „Na upit“ nije potvrda dostupnosti: kancelarija je proverava pri upitu.
+- Predlog stranice (`SataProgramPreview`) ih ne pominje.
+
 ## Pravila sadržaja
 
 - Prikazuju se samo proizvodi vidljivi u našem katalogu (svaki slug proveren).

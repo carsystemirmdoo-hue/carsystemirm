@@ -3300,14 +3300,14 @@ a.colorOptionContent:active {
   gap: 0.6rem;
   margin: 1.25rem 0 1.5rem;
   padding: 0.9rem 1rem 1rem;
-  border: 1px solid var(--detail-border-strong);
+  border: 1px solid var(--detail-border-strong, var(--ds-c-line-strong));
   border-radius: 0.5rem;
-  background: var(--detail-surface);
+  background: var(--detail-surface, var(--ds-c-surface));
 }
 
 .systemNavTitle {
   margin: 0;
-  color: var(--detail-faint);
+  color: var(--detail-faint, var(--ds-c-text-2));
   font-family: var(--font-technical), var(--font-geist-mono), monospace;
   font-size: 0.66rem;
   font-weight: 700;
@@ -3335,9 +3335,9 @@ a.colorOptionContent:active {
   align-content: start;
   gap: 0.2rem;
   padding: 0.55rem 0.7rem;
-  border: 1px solid var(--detail-border);
+  border: 1px solid var(--detail-border, var(--ds-c-line));
   border-radius: 0.4rem;
-  color: var(--detail-ink);
+  color: var(--detail-ink, var(--ds-c-text));
   text-decoration: none;
 }
 
@@ -3350,7 +3350,7 @@ a.colorOptionContent:active {
 
 .systemNavLink small {
   overflow-wrap: anywhere;
-  color: var(--detail-faint);
+  color: var(--detail-faint, var(--ds-c-text-2));
   font-size: 0.78rem;
   line-height: 1.35;
 }
@@ -3361,17 +3361,45 @@ a.colorOptionContent:active {
 
 .systemNavLink:hover,
 .systemNavLink:focus-visible {
-  border-color: var(--detail-ink);
+  border-color: var(--detail-ink, var(--ds-c-text));
 }
 
 .systemNavLink[aria-current="page"] {
-  border-color: var(--family-accent, var(--detail-ink));
-  box-shadow: inset 0 0 0 1px var(--family-accent, var(--detail-ink));
+  border-color: var(--family-accent, var(--detail-ink, var(--ds-c-text)));
+  box-shadow: inset 0 0 0 1px var(--family-accent, var(--detail-ink, var(--ds-c-text)));
 }
 
 .systemNavNote {
   margin: 0;
-  color: var(--detail-faint);
+  color: var(--detail-faint, var(--ds-c-text-2));
   font-size: 0.8rem;
   line-height: 1.45;
+}
+
+.systemNavGroup {
+  display: grid;
+  gap: 0.4rem;
+}
+
+.systemNavGroupTitle {
+  margin: 0.25rem 0 0;
+  color: var(--detail-ink, var(--ds-c-text));
+  font-size: 0.82rem;
+  font-weight: 700;
+}
+
+/* Pomoćni proizvodi: tiši izgled, da ne liče na izbor baze. */
+.systemNavList[data-group="auxiliary"] .systemNavLink {
+  border-style: dashed;
+}
+
+.systemNavPresentation {
+  margin: 0;
+  font-size: 0.85rem;
+}
+
+.systemNavPresentation a {
+  color: var(--detail-ink, var(--ds-c-text));
+  text-decoration: underline;
+  text-underline-offset: 0.25em;
 }

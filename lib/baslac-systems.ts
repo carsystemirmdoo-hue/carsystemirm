@@ -51,7 +51,9 @@ export type BaslacFinish =
   | "xirallic"
   | "converter"
   | "additive"
-  | "technical";
+  | "technical"
+  /** Šifra je potvrđena, ali izvor ne objavljuje naziv nijanse ni efekat (2026-10-21). */
+  | "unknown";
 
 export type BaslacSystemId = "line-45" | "line-35" | "line-30" | "line-30-cv";
 
@@ -211,6 +213,24 @@ export const baslacLine35Bases: BaslacBase[] = [
   base("line-35", "35-M391", "Pearl Silver Xirallic", 0.5, "xirallic", "#B1E0F6", { offerVolumeL: 1 }),
   base("line-35", "35-M590", "Pure Black", 1, "solid", "#17181a", {}),
   base("line-35", "35-M599", "Chrome", 0.5, "metallic", "#d8dcdf", {}),
+  /*
+   * Dopuna 2026-10-21: artikli iz našeg šifarnika (aktivni, na stanju) koje sajt nije
+   * prikazivao, a zvanični izvor potvrđuje ŠIFRU. Naziv nijanse se ne izmišlja: gde ga izvor
+   * ne objavljuje, kartica kaže „Naziv nije objavljen“, a kvadratić je neutralan.
+   */
+  base("line-35", "35-M00", "Basecoat (mešna komponenta sistema)", 3.5, "technical", "#c9ccd1", {
+    rangeStatus: "IN_OUR_RANGE",
+    statusSource: "baslac.com: „35-M00 35- Basecoat“, aktuelna mešna komponenta (TDS techinfo.baslac.com/en/35-M00.pdf)",
+  }),
+  base("line-35", "35-M05", "Basecoat (naziv nije objavljen)", 3.5, "unknown", "#c9ccd1", {
+    rangeStatus: "IN_OUR_RANGE",
+    supplierArticle: "53232870",
+    statusSource: "Surventis Brand Portal (baslac), packshot 12152 „Baslac_3_5L_35-M05_53232870“; etiketa: „35-M05 Basecoat“",
+  }),
+  base("line-35", "35-M351", "Naziv nije objavljen", 1, "unknown", "#c9ccd1", {
+    rangeStatus: "IN_OUR_RANGE",
+    statusSource: "baslac Tinting Chart basecoat 35 (AD6270BE, 03/2021, Surventis 23796): „M351“",
+  }),
 ];
 
 /* -------------------------------------------------------------------------
@@ -391,6 +411,35 @@ export const baslacLine45Bases: BaslacBase[] = [
   base("line-45", "49-W488", "Basecoat AU Pearl Copper Coarse", 0.1, "pearl", "#a06a38", {
     statusSource: "baslac.de (KLW) katalog, strana 2/2, 2026-08-22 — 49-W serija koncentrata",
   }),
+  // Dopuna 2026-10-21: 49-W koncentrati iz našeg šifarnika (aktivni, na stanju); šifra potvrđena, naziv nije objavljen.
+  base("line-45", "49-W455", "Naziv nije objavljen", 0.1, "unknown", "#c9ccd1", {
+    rangeStatus: "IN_OUR_RANGE",
+    statusSource: "baslac Tinting Chart (AD6270BE, 03/2021, Surventis 23796): „49-W455“",
+  }),
+  base("line-45", "49-W460", "Naziv nije objavljen", 0.1, "unknown", "#c9ccd1", {
+    rangeStatus: "IN_OUR_RANGE",
+    statusSource: "baslac Tinting Chart (AD6270BE, 03/2021, Surventis 23796): „49-W460“",
+  }),
+  base("line-45", "49-W463", "Naziv nije objavljen", 0.1, "unknown", "#c9ccd1", {
+    rangeStatus: "IN_OUR_RANGE",
+    statusSource: "Surventis Brand Portal (baslac): packshot „baslac 0,1L 49-W463 …“ i Tinting Chart 03/2021",
+  }),
+  base("line-45", "49-W466", "Naziv nije objavljen", 0.1, "unknown", "#c9ccd1", {
+    rangeStatus: "IN_OUR_RANGE",
+    statusSource: "Surventis Brand Portal (baslac): packshot „baslac 0,1L 49-W466 …“",
+  }),
+  base("line-45", "49-W553", "Naziv nije objavljen", 0.1, "unknown", "#c9ccd1", {
+    rangeStatus: "IN_OUR_RANGE",
+    statusSource: "baslac Tinting Chart (AD6270BE, 03/2021, Surventis 23796): „49-W553“",
+  }),
+  base("line-45", "49-W554", "Naziv nije objavljen", 0.1, "unknown", "#c9ccd1", {
+    rangeStatus: "IN_OUR_RANGE",
+    statusSource: "baslac Tinting Chart (AD6270BE, 03/2021, Surventis 23796): „49-W554“",
+  }),
+  base("line-45", "49-W580", "Naziv nije objavljen", 0.1, "unknown", "#c9ccd1", {
+    rangeStatus: "IN_OUR_RANGE",
+    statusSource: "baslac Tinting Chart (AD6270BE, 03/2021, Surventis 23796): „49-W580“",
+  }),
 ];
 
 export const baslacAllBases: BaslacBase[] = [
@@ -457,6 +506,7 @@ export const baslacFinishLabels: Record<BaslacFinish, string> = {
   converter: "Converter",
   additive: "Aditiv",
   technical: "Tehnički",
+  unknown: "Bez podatka",
 };
 
 export const baslacSystemLabels: Record<BaslacSystemId, string> = {
@@ -526,19 +576,27 @@ export type BaslacAssetSlot = {
   src: string | null;
   /** Očekivani naziv fajla kada slot bude popunjen. */
   expectedFilename: string;
+  /**
+   * Šifra baze koja se vidi na etiketi reprezentativne fotografije (2026-10-21). Baslac portal
+   * za 1 L / 0,5 L / 5 L / 0,1 L ima samo fotografije sa šifrom jedne baze; koristi se jedna
+   * fotografija po sistemu i zapremini, a strana kaže koja je baza na fotografiji.
+   */
+  shownCode?: string;
+  /** Surventis Brand Portal asset (hub 54), izvor fotografije. */
+  portalAssetId?: number;
 };
 
 const ASSET_SLOTS: BaslacAssetSlot[] = [
   { slotId: "line-30:3.5l", system: "line-30", volumeL: 3.5, src: "/products/baslac/baslac--line-30-3.5l-family-packshot.webp", expectedFilename: "baslac--line-30-3.5l-family-packshot.png" },
-  { slotId: "line-30:1l", system: "line-30", volumeL: 1, src: null, expectedFilename: "baslac--line-30-1l-family-packshot.png" },
+  { slotId: "line-30:1l", system: "line-30", volumeL: 1, src: "/products/baslac/baslac--line-30-1l-representative.webp", shownCode: "30-S110", portalAssetId: 12114, expectedFilename: "baslac--line-30-1l-family-packshot.png" },
   { slotId: "line-30-cv:3.5l", system: "line-30-cv", volumeL: 3.5, src: "/products/baslac/baslac--line-30-3.5l-family-packshot.webp", expectedFilename: "baslac--line-30-3.5l-family-packshot.png" },
   { slotId: "line-35:3.5l", system: "line-35", volumeL: 3.5, src: "/products/baslac/baslac--line-35-3.5l-family-packshot.webp", expectedFilename: "baslac--line-35-3.5l-family-packshot.png" },
-  { slotId: "line-35:1l", system: "line-35", volumeL: 1, src: null, expectedFilename: "baslac--line-35-1l-family-packshot.png" },
-  { slotId: "line-35:0.5l", system: "line-35", volumeL: 0.5, src: null, expectedFilename: "baslac--line-35-0.5l-family-packshot.png" },
-  { slotId: "line-45:5l", system: "line-45", volumeL: 5, src: null, expectedFilename: "baslac--line-45-5l-family-packshot.png" },
-  { slotId: "line-45:1l", system: "line-45", volumeL: 1, src: null, expectedFilename: "baslac--line-45-1l-family-packshot.png" },
-  { slotId: "line-45:0.5l", system: "line-45", volumeL: 0.5, src: null, expectedFilename: "baslac--line-45-0.5l-family-packshot.png" },
-  { slotId: "line-45:0.1l", system: "line-45", volumeL: 0.1, src: null, expectedFilename: "baslac--line-45-0.1l-concentrate-packshot.png" },
+  { slotId: "line-35:1l", system: "line-35", volumeL: 1, src: "/products/baslac/baslac--line-35-1l-representative.webp", shownCode: "35-M1020", portalAssetId: 12115, expectedFilename: "baslac--line-35-1l-family-packshot.png" },
+  { slotId: "line-35:0.5l", system: "line-35", volumeL: 0.5, src: "/products/baslac/baslac--line-35-0.5l-representative.webp", shownCode: "35-M1120", portalAssetId: 12092, expectedFilename: "baslac--line-35-0.5l-family-packshot.png" },
+  { slotId: "line-45:5l", system: "line-45", volumeL: 5, src: "/products/baslac/baslac--line-45-5l-representative.webp", shownCode: "45-W00", portalAssetId: 12081, expectedFilename: "baslac--line-45-5l-family-packshot.png" },
+  { slotId: "line-45:1l", system: "line-45", volumeL: 1, src: "/products/baslac/baslac--line-45-1l-representative.webp", shownCode: "45-W1010", portalAssetId: 12121, expectedFilename: "baslac--line-45-1l-family-packshot.png" },
+  { slotId: "line-45:0.5l", system: "line-45", volumeL: 0.5, src: "/products/baslac/baslac--line-45-0.5l-representative.webp", shownCode: "45-W1020", portalAssetId: 12094, expectedFilename: "baslac--line-45-0.5l-family-packshot.png" },
+  { slotId: "line-45:0.1l", system: "line-45", volumeL: 0.1, src: "/products/baslac/baslac--line-45-0.1l-representative.webp", shownCode: "45-W1390", portalAssetId: 12088, expectedFilename: "baslac--line-45-0.1l-concentrate-packshot.png" },
 ];
 
 export function baslacAssetSlot(

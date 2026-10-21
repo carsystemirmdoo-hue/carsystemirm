@@ -49,7 +49,11 @@ import {
   toProductVisualPresentation,
   type ProductVisualPresentation,
 } from "@/components/product/productVisualPresentation";
-import { variantCountLabel } from "@/lib/sr-plural";
+import { srPlural, variantCountLabel } from "@/lib/sr-plural";
+import { baslacSystemFamilies } from "@/lib/baslac-catalog-products";
+import { baslacAssetSlot, baslacPublicBases, type BaslacSystemId } from "@/lib/baslac-systems";
+import { getRmFamilyConfig, rmFamilyPackshots, rmFamilyVolumes } from "@/lib/rm-family-bases";
+import { packSlug } from "@/components/product/variantPacks.mjs";
 
 export type CatalogListingKind = "family" | "product" | "variant";
 
@@ -353,12 +357,111 @@ function familyEntity(family: ProductFamily): CatalogListingEntity {
 }
 
 /* -------------------------------------------------------------------------- */
+/* Kartice po seriji i zapremini (2026-10-21)                                 */
+/* -------------------------------------------------------------------------- */
+
+type SeriesVolume = { label: string; count: number; image: { src: string; alt: string } | null };
+
+/**
+ * Jedna ulazna kartica po potvrđenoj zapremini serije: istaknuta serija i zapremina, fotografija
+ * te zapremine i direktan ulaz u izbor baza (`?pakovanje=`). Ne duplira artikle, šifre, lager ni
+ * cene — vodi na istu porodicu, samo sa izabranom zapreminom.
+ */
+function seriesVolumeEntities(
+  anchor: CatalogListingEntity,
+  representative: CarsystemProduct,
+  seriesName: string,
+  basePath: string,
+  volumes: SeriesVolume[],
+): CatalogListingEntity[] {
+  return volumes.map((volume) => {
+    const pack = packSlug(volume.label);
+    const product: CarsystemProduct = {
+      ...representative,
+      name: `${seriesName} — ${volume.label}`,
+      packages: [{ label: volume.label }],
+      ...(volume.image ? { productImage: volume.image, galleryImages: [] } : {}),
+    };
+    return {
+      ...anchor,
+      id: `${anchor.id}@${pack}`,
+      href: `${basePath}?pakovanje=${pack}`,
+      name: `${seriesName} — ${volume.label}`,
+      presentation: toProductVisualPresentation(product, volume.image),
+      technicalLine: `${volume.label} · ${volume.count} ${srPlural(volume.count, "baza", "baze", "baza")}`,
+      variantCount: volume.count,
+      search: searchTokens([anchor.search, volume.label, volume.label.replace(/\s+/g, "")]),
+    };
+  });
+}
+
+function baslacSeriesVolumes(system: BaslacSystemId): SeriesVolume[] {
+  const counts = new Map<number, number>();
+  for (const base of baslacPublicBases(system)) {
+    if (base.volumeL !== null) counts.set(base.volumeL, (counts.get(base.volumeL) ?? 0) + 1);
+  }
+  return [...counts]
+    .sort((a, b) => a[0] - b[0])
+    .map(([litres, count]) => {
+      const label = `${String(litres).replace(".", ",")} L`;
+      const slot = baslacAssetSlot(system, litres);
+      return {
+        label,
+        count,
+        image: slot?.src
+          ? { src: slot.src, alt: `Baslac ${system.replace("line-", "Line ")} ambalaža ${label}${slot.shownCode ? ` (na fotografiji baza ${slot.shownCode})` : ""}` }
+          : null,
+      };
+    });
+}
+
+/** Serija → kartice po zapremini, ili `null` kada se kartica ne deli. */
+function seriesSplit(entity: CatalogListingEntity, product: CarsystemProduct): CatalogListingEntity[] | null {
+  const familySlug = entity.kind === "family" ? entity.familySlug : null;
+  const baslac = familySlug ? baslacSystemFamilies.find((entry) => entry.baseProductSlug === familySlug) : null;
+  if (baslac) {
+    const volumes = baslacSeriesVolumes(baslac.system);
+    return volumes.length > 1 ? seriesVolumeEntities(entity, product, entity.name, entity.href, volumes) : null;
+  }
+  const rm = entity.kind === "product" ? getRmFamilyConfig(product.slug) : null;
+  // Samo serije sa potvrđenim sistemom; paste bez potvrđene linije ostaju jedna kartica.
+  if (rm?.system) {
+    const packshots = rmFamilyPackshots(rm);
+    const volumes = rmFamilyVolumes(rm).map((volume) => ({
+      label: volume.label,
+      count: volume.count,
+      image: packshots[String(volume.litres)] ?? null,
+    }));
+    return seriesVolumeEntities(entity, product, rm.seriesName, entity.href, volumes);
+  }
+  return null;
+}
+
+/** Id kartice kataloga za proizvod: kartica zapremine kada je serija podeljena (za lični redosled). */
+export function catalogEntityIdForProduct(product: CarsystemProduct): string | null {
+  const data = getCatalogListingData();
+  const family = getFamilyForProduct(product);
+  const anchorId = family ? `family:${family.slug}` : product.slug;
+  if (data.canonical.some((entity) => entity.id === anchorId)) return anchorId;
+  if (!data.anchors.some((entity) => entity.id === anchorId)) return null;
+  // Podeljena serija: kartica zapremine proizvoda, a kada se ne zna (red R-M kartice) — prva.
+  const volume = product.packages[0]?.label ?? "";
+  const cards = data.canonical.filter((entity) => entity.id.startsWith(`${anchorId}@`));
+  return cards.find((entity) => entity.id === `${anchorId}@${packSlug(volume)}`)?.id ?? cards[0]?.id ?? null;
+}
+
+/* -------------------------------------------------------------------------- */
 /* Public builders                                                            */
 /* -------------------------------------------------------------------------- */
 
 export type CatalogListingData = {
   /** Family + standalone entities: what browse shows. */
   canonical: CatalogListingEntity[];
+  /**
+   * Porodice koje su u pregledu zamenjene karticama po zapremini (2026-10-21). Ne prikazuju se,
+   * ali ostaju sidro za varijante pretrage (`expandVariant`) i za lični redosled.
+   */
+  anchors: CatalogListingEntity[];
   /** Variants of multi-variant families: only ever shown for a text query. */
   variants: CatalogVariantEntity[];
 };
@@ -371,8 +474,18 @@ export function getCatalogListingData(): CatalogListingData {
   if (cached) return cached;
 
   const canonical: CatalogListingEntity[] = [];
+  const anchors: CatalogListingEntity[] = [];
   const variants: CatalogVariantEntity[] = [];
   const seenFamilies = new Set<string>();
+  const pushEntity = (entity: CatalogListingEntity, product: CarsystemProduct) => {
+    const split = seriesSplit(entity, product);
+    if (!split) {
+      canonical.push(entity);
+      return;
+    }
+    anchors.push(entity);
+    canonical.push(...split);
+  };
 
   /*
    * One pass in catalogue order. A family takes the slot of its FIRST variant,
@@ -384,17 +497,17 @@ export function getCatalogListingData(): CatalogListingData {
     const family = getFamilyForProduct(product);
 
     if (!family) {
-      canonical.push(productEntity(product, "product"));
+      pushEntity(productEntity(product, "product"), product);
       continue;
     }
 
     variants.push(variantEntity(product, family));
     if (seenFamilies.has(family.slug)) continue;
     seenFamilies.add(family.slug);
-    canonical.push(familyEntity(family));
+    pushEntity(familyEntity(family), family.representative);
   }
 
-  cached = { canonical, variants };
+  cached = { canonical, anchors, variants };
   return cached;
 }
 

@@ -37,6 +37,8 @@ import type {
 } from "@/types/product-detail";
 import type { SeoBreadcrumbItem } from "@/components/seo/SeoBreadcrumbs";
 import { BackToResults } from "@/components/product/BackToResults";
+import { RmFamilyPdp } from "@/components/product/family/RmFamilyPdp";
+import { getRmFamilyConfig } from "@/lib/rm-family-bases";
 import styles from "./ProductDetailExperience.module.css";
 
 type ProductDetailPageProps = {
@@ -61,6 +63,11 @@ export function ProductDetailPage({
   breadcrumbItems,
   variantSelectInPlace = false,
 }: ProductDetailPageProps & { variantSelectInPlace?: boolean }) {
+  // R-M porodice baza (DIAMONT, CRYSTAL BASE, paste): isti izbor kao Baslac (2026-10-21).
+  const rmFamily = getRmFamilyConfig(product.slug);
+  if (rmFamily) {
+    return <RmFamilyPdp product={product} config={rmFamily} breadcrumbItems={breadcrumbItems} />;
+  }
   const detail = isConfirmed(product.detail?.reviewStatus) ? product.detail : undefined;
   const phase = getRefinishPhaseBySlug(product.phaseSlug);
   const placement = getProductPlacement({ brand, product, program });
@@ -102,25 +109,7 @@ export function ProductDetailPage({
    * Manifest metrika slika (~300 KB) ostaje na serveru; klijent dobija samo
    * nekoliko stringova po varijanti.
    */
-  const family = getFamilyForProduct(product);
-  const selectorProducts = (variantSelector?.variants ?? [])
-    .map((variant) => (variant.slug ? getCarsystemProductBySlug(variant.slug) : null))
-    .filter((entry): entry is CarsystemProduct => Boolean(entry));
-  const variantProducts =
-    selectorProducts.length > 0 ? selectorProducts : [product];
-  /*
-   * Varijante koje su REDOVI ovog proizvoda (tabela šifara: granulacije,
-   * pakovanja, boje) nemaju svoj slug, pa iz njih ne nastaje nijedan proizvod.
-   * Bez sopstvenog pogleda klik na takav red nije imao šta da izabere.
-   */
-  const rowVariants =
-    selectorProducts.length > 0 ? [] : (variantSelector?.variants ?? []);
-  const variantViews = toProductVariantViews(
-    variantProducts,
-    family?.slug ?? null,
-    rowVariants,
-  );
-  const initialVariantKey = productVariantKey(product);
+  const { variantViews, initialVariantKey } = buildProductVariantViews(product, variantSelector);
 
   /*
    * Format panela se računa JEDNOM, iz reprezentativne varijante, i ostaje
@@ -441,4 +430,34 @@ function placementKicker(kicker: string | undefined, brandName: string, placemen
   const parts = (kicker ?? "").split(" · ").map((part) => part.trim()).filter(Boolean);
   const middle = parts.length >= 3 ? parts.slice(1, -1) : [];
   return cardMetaParts([brandName, ...middle, placementName]).join(" · ");
+}
+
+/**
+ * Varijante proizvoda za `ProductVariantProvider`, razrešene na serveru (deli ih i R-M izbor
+ * porodice baza, `RmFamilyPdp`).
+ */
+export function buildProductVariantViews(
+  product: CarsystemProduct,
+  variantSelector = getProductVariantSelector(product),
+) {
+  const family = getFamilyForProduct(product);
+  const selectorProducts = (variantSelector?.variants ?? [])
+    .map((variant) => (variant.slug ? getCarsystemProductBySlug(variant.slug) : null))
+    .filter((entry): entry is CarsystemProduct => Boolean(entry));
+  const variantProducts =
+    selectorProducts.length > 0 ? selectorProducts : [product];
+  /*
+   * Varijante koje su REDOVI ovog proizvoda (tabela šifara: granulacije,
+   * pakovanja, boje) nemaju svoj slug, pa iz njih ne nastaje nijedan proizvod.
+   * Bez sopstvenog pogleda klik na takav red nije imao šta da izabere.
+   */
+  const rowVariants =
+    selectorProducts.length > 0 ? [] : (variantSelector?.variants ?? []);
+  const variantViews = toProductVariantViews(
+    variantProducts,
+    family?.slug ?? null,
+    rowVariants,
+  );
+  const initialVariantKey = productVariantKey(product);
+  return { variantViews, initialVariantKey };
 }

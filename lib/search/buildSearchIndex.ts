@@ -430,7 +430,7 @@ export function getProductSearchIndex(): ProductSearchIndexPayload {
    * formule kao katalog kartica, umesto da se ovde izvode drugi put.
    */
   const familyEntityById = new Map(
-    canonical
+    [...canonical, ...getCatalogListingData().anchors]
       .filter((entity) => entity.kind === "family")
       .map((entity) => [entity.id, entity]),
   );

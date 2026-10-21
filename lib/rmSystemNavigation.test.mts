@@ -36,3 +36,21 @@ test("R-M kartice sa istim zvaničnim nazivom razlikuju se zvaničnom oznakom", 
   assert.ok(names.includes("R-M Pure black SC T2A203") && names.includes("R-M Pure black SC T2P203"));
   assert.ok(names.includes("R-M GHD THINNER GV 300"));
 });
+
+test("ONYX HD blok: baze i boje odvojene od pomoćnih proizvoda; prezentacija nije izbor", () => {
+  const onyx = getRmSystemNavigation("rm-onyx-hd")!;
+  const group = (slug: string) => onyx.links.find((link) => link.slug === slug)?.group;
+  assert.equal(group("rm-db-403-onyx-hd-deep-black"), "products", "vodorazrediva bazna boja nije razređivač");
+  assert.equal(group("rm-hb-10s-gleam-silver-onyx-hd"), "products");
+  assert.equal(group("rm-a-2610-onyx-interior"), "auxiliary");
+  assert.equal(group("rm-onyx-blender-plus"), "auxiliary");
+  assert.equal(group("rm-onyx-hd-tropical"), "presentation");
+  assert.match(onyx.links.find((link) => link.slug === "rm-hb-002-onyx-hd")!.note, /druga formulacija, za komercijalna vozila \(CV\)/);
+  // DIAMONT: izbor baza po zapremini vodi direktno na tu zapreminu.
+  const diamont = getRmSystemNavigation("rm-diamont")!.links.filter((link) => link.group === "selection" && link.href.includes("rm-diamont-bazna-boja"));
+  assert.deepEqual(diamont.map((link) => link.href), [
+    "/proizvodi/rm-diamont-bazna-boja?pakovanje=0-5-l",
+    "/proizvodi/rm-diamont-bazna-boja?pakovanje=1-l",
+    "/proizvodi/rm-diamont-bazna-boja?pakovanje=4-l",
+  ]);
+});

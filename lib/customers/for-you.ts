@@ -1,7 +1,7 @@
 import "server-only";
 import { sql } from "drizzle-orm";
 import { getDb } from "@/db/client";
-import { getCatalogListingData } from "@/lib/catalog-listing";
+import { catalogEntityIdForProduct, getCatalogListingData } from "@/lib/catalog-listing";
 import { getCarsystemProductBySlug, getProductVariantSelector } from "@/lib/carsystem-data";
 import { resolveVariant, usualQuantity } from "@/lib/customers/reorderRules.mjs";
 import { articleStats, enoughHistory, frequentOrder, refillCandidates } from "@/lib/customers/forYouRules.mjs";
@@ -129,8 +129,8 @@ async function offeredArticles(ids: string[]): Promise<Map<string, ArticleFacts>
 function entityIdOf(slug: string) {
   const product = getCarsystemProductBySlug(slug);
   if (!product) return null;
-  const family = getFamilyForProduct(product);
-  return family ? `family:${family.slug}` : product.slug;
+  // Kartica kataloga (i kartica zapremine kada je serija podeljena, 2026-10-21).
+  return catalogEntityIdForProduct(product) ?? product.slug;
 }
 
 function present(a: ArticleFacts) {

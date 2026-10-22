@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import styles from "./BaslacBrandPage.module.css";
+import styles from "./BaslacBrandPage.styles";
 
 /*
  * Sive nijanse 20-24 / 20-34 / 20-94 (2026-10-19).

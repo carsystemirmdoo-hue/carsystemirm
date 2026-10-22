@@ -10,7 +10,7 @@
  * dekorativni (`aria-hidden`) jer podatak koji nose postoji i u tekstu pored njih.
  */
 
-import styles from "./SataBrandPage.module.css";
+import styles from "./SataBrandPage.styles";
 
 /**
  * Oblik mlaza za `I` i `O` mlaznicu.

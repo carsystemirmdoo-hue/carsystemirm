@@ -23,7 +23,7 @@ import { CosmosBand } from "./CosmosBand";
 import { CosmosFamilyRail } from "./CosmosFamilyRail";
 import { CosmosHero } from "./CosmosHero";
 import { CosmosRange } from "./CosmosRange";
-import styles from "./CosmosBrandPage.module.css";
+import styles from "./CosmosBrandPage.styles";
 import { toDisplayImageSrc } from "@/lib/productImageDisplay";
 import { productCanonicalHref } from "@/lib/product-families";
 

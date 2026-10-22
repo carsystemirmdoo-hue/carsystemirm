@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRef } from "react";
 import type { CosmosHeroCan } from "@/lib/cosmos-lac-brand-data";
-import styles from "./CosmosBrandPage.module.css";
+import styles from "./CosmosBrandPage.styles";
 import { useHeroRotation } from "./useHeroRotation";
 import { useScrollProgress } from "./useScrollProgress";
 

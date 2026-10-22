@@ -4,7 +4,7 @@ import { Footer } from "@/components/layout/Footer";
 import { SavetiNewsItem } from "@/components/saveti/SavetiCards";
 import { SavetiExplorer } from "@/components/saveti/SavetiExplorer";
 import { SavetiNacrtTraka } from "@/components/saveti/SavetiNacrtTraka";
-import styles from "@/components/saveti/Saveti.module.css";
+import styles from "@/components/saveti/Saveti.styles";
 import { getPublicKategorije, getPublicNovosti, getPublicSaveti, savetiNacrtPregled, toSazetak } from "@/lib/saveti";
 import { breadcrumbJsonLd, collectionPageJsonLd, jsonLd, pageMetadata } from "@/lib/seo";
 

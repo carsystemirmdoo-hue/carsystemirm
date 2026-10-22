@@ -1051,250 +1051,6 @@
   }
 }
 
-/* ------------------------------------------------------------ BREAKPOINTS */
-
-@media (max-width: 1279px) {
-  .rail {
-    --rail-visible: 3;
-    --rail-panel-h: 500px;
-  }
-}
-
-@media (max-width: 1023px) {
-  .rail {
-    --rail-panel-h: 460px;
-  }
-  .panelCan {
-    height: 180px;
-  }
-  .finderProducts,
-  .commerceGrid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-}
-
-/* Below 768 the rail stops pinning and becomes a native snap carousel.
-   Seven families then cost one fixed screen instead of seven. */
-@media (max-width: 767px) {
-  .rail {
-    height: auto;
-    padding: 8px 0 4px;
-  }
-
-  .railSticky {
-    position: static;
-    height: auto;
-    overflow: visible;
-  }
-
-  .railTrack {
-    width: auto;
-    transform: none;
-    overflow-x: auto;
-    overflow-y: hidden;
-    scroll-snap-type: x mandatory;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
-    padding: 0 12px;
-    gap: 12px;
-  }
-
-  .railTrack::-webkit-scrollbar {
-    display: none;
-  }
-
-  .panel {
-    flex: 0 0 78vw;
-    width: 78vw;
-    height: 520px;
-    scroll-snap-align: center;
-    border-right: none;
-    border-radius: var(--ds-ctl-radius);
-    border: 1px solid var(--cl-hairline);
-    padding: 34px 20px 30px;
-  }
-
-  .panel::before {
-    border-radius: 1px;
-  }
-
-  /* No hover on touch — the active panel carries the colour instead. */
-  .panelCta {
-    opacity: 1;
-    transform: none;
-  }
-
-  .panelCan {
-    height: 190px;
-  }
-
-  .railProgress {
-    display: flex;
-    gap: 6px;
-    justify-content: center;
-    padding: 18px 0 4px;
-  }
-
-  .railProgressSegment {
-    height: 3px;
-    width: 26px;
-    border-radius: 2px;
-    background: rgba(244, 247, 242, 0.22);
-    transition: background-color 300ms ease;
-  }
-
-  .railProgressSegment[data-active="true"] {
-    background: var(--segment-accent, var(--cl-chalk));
-  }
-
-  .finderProducts {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  /*
-   * The shared Carsystem product card clips its own product names when squeezed
-   * into a half-width column at this size. It is a shared component, so give it
-   * the width it was designed for rather than restyling its internals.
-   */
-  .commerceGrid {
-    grid-template-columns: minmax(0, 1fr);
-  }
-
-  .heroContent {
-    width: 100%;
-  }
-
-  /* Uputstvo za rotaciju je na 390 px padalo tik uz drugu vezu; ide gore desno. */
-  .heroHint {
-    top: 20px;
-    bottom: auto;
-  }
-
-  /*
-   * Mobile is not the desktop arc scaled down. The copy block occupies the
-   * lower half of a 390px frame, so a sweeping arc would run straight through
-   * the headline. Three cans only, lifted into the upper half, with the lead
-   * can still clearly dominant.
-   */
-  .heroCan[data-slot="0"] {
-    --can-height: 255px;
-    --can-left: 62%;
-    --can-bottom: 62%;
-    --can-rotate: -6deg;
-    --can-parallax: 110px;
-  }
-
-  .heroCan[data-slot="1"] {
-    --can-height: 175px;
-    --can-left: 24%;
-    --can-bottom: 68%;
-    --can-rotate: 8deg;
-    --can-brightness: 0.7;
-    --can-parallax: 140px;
-  }
-
-  .heroCan[data-slot="2"] {
-    --can-height: 135px;
-    --can-left: 88%;
-    --can-bottom: 73%;
-    --can-rotate: -12deg;
-    --can-brightness: 0.5;
-    --can-parallax: 165px;
-  }
-
-  /* Four onwards would only add noise at this width. */
-  .heroCan[data-slot="3"],
-  .heroCan[data-slot="4"],
-  .heroCan[data-slot="5"] {
-    display: none;
-  }
-
-  .heroGlow {
-    background: radial-gradient(
-      64% 26% at 58% 30%,
-      color-mix(in srgb, var(--hero-accent, #e63616) 70%, transparent) 0%,
-      transparent 72%
-    );
-  }
-}
-
-@media (min-width: 768px) {
-  .railProgress {
-    display: none;
-  }
-}
-
-/*
- * Tablet (768–1100 px): luk limenki je bio preko celog kadra, pa je limenka
- * „Fast Acrylic” prekrivala naslov. Ovde luk dobija sopstvenu traku iznad teksta
- * (u toku dokumenta, ne apsolutno preko njega), pa se slika i naslov nikad ne
- * preklapaju, bez obzira na visinu prozora. Visine limenki su u odnosu na traku.
- */
-@media (min-width: 768px) and (max-width: 1100px) {
-  .hero {
-    flex-direction: column;
-    align-items: stretch;
-    justify-content: flex-end;
-  }
-
-  .heroArc {
-    position: relative;
-    inset: auto;
-    flex: 0 0 auto;
-    width: 100%;
-    height: clamp(340px, 46vw, 480px);
-    margin-top: clamp(24px, 4vw, 48px);
-  }
-
-  .heroCan[data-slot="0"] {
-    --can-parallax: 0px;
-    --can-height: 100%;
-    --can-left: 56%;
-    --can-bottom: -8%;
-  }
-
-  .heroCan[data-slot="1"] {
-    --can-parallax: 0px;
-    --can-height: 80%;
-    --can-left: 76%;
-    --can-bottom: 4%;
-  }
-
-  .heroCan[data-slot="2"] {
-    --can-parallax: 0px;
-    --can-height: 66%;
-    --can-left: 36%;
-    --can-bottom: 10%;
-  }
-
-  .heroCan[data-slot="3"] {
-    --can-parallax: 0px;
-    --can-height: 52%;
-    --can-left: 90%;
-    --can-bottom: 22%;
-  }
-
-  .heroCan[data-slot="4"] {
-    --can-parallax: 0px;
-    --can-height: 42%;
-    --can-left: 18%;
-    --can-bottom: 26%;
-  }
-
-  .heroCan[data-slot="5"] {
-    --can-parallax: 0px;
-    --can-height: 34%;
-    --can-left: 64%;
-    --can-bottom: 44%;
-  }
-
-  /* Uputstvo za rotaciju ide u ugao trake sa limenkama, ne preko dugmadi. */
-  .heroHint {
-    top: clamp(24px, 4vw, 48px);
-    bottom: auto;
-  }
-}
-
 /* --------------------------------------------------------- REDUCED MOTION */
 
 /*
@@ -1321,17 +1077,17 @@
     transform: none;
   }
 
-  .rail {
+  .rail.rail.rail {
     height: auto;
   }
 
-  .railSticky {
+  .railSticky.railSticky.railSticky {
     position: static;
     height: auto;
     overflow: visible;
   }
 
-  .railTrack {
+  .railTrack.railTrack.railTrack {
     width: auto;
     transform: none;
     overflow-x: auto;
@@ -1340,7 +1096,7 @@
     padding: 0 12px;
   }
 
-  .panel {
+  .panel.panel.panel {
     flex: 0 0 min(78vw, 360px);
     width: min(78vw, 360px);
     height: 500px;
@@ -1356,7 +1112,7 @@
     transition-duration: 1ms;
   }
 
-  .panelCta {
+  .panelCta.panelCta.panelCta {
     opacity: 1;
     transform: none;
   }

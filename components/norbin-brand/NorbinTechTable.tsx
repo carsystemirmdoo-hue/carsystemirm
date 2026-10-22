@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState, type CSSProperties, type ReactNode } from "react";
-import styles from "./NorbinBrandPage.module.css";
+import styles from "./NorbinBrandPage.styles";
 
 export type NorbinTechColumn = {
   code: string;

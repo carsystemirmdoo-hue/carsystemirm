@@ -20,6 +20,20 @@ from __future__ import annotations
 import argparse, re, sys
 from pathlib import Path
 
+
+def split_selectors(prelude):
+    """Deli listu selektora samo po zarezima na najvišem nivou (ne unutar :is()/:where())."""
+    out, depth, cur = [], 0, ""
+    for ch in prelude:
+        if ch in "([": depth += 1
+        elif ch in ")]": depth -= 1
+        if ch == "," and depth == 0:
+            out.append(cur); cur = ""
+        else:
+            cur += ch
+    out.append(cur)
+    return [s.strip() for s in out if s.strip()]
+
 def parse(css: str):
     out, i, n = [], 0, len(css)
     def skip(i):
@@ -75,6 +89,7 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("file"); ap.add_argument("--breakpoint", type=float, required=True)
     ap.add_argument("--check", action="store_true")
+    ap.add_argument("--force", action="store_true", help="podeli i uz sukobe redosleda; posle obavezno winner-check.py --fix")
     a = ap.parse_args()
     path = Path(a.file); css = path.read_text()
     bp = a.breakpoint
@@ -104,7 +119,7 @@ def main():
     if a.check:
         print(f"zajedničkih blokova: {len(base)}, mobilnih: {len(mobile)}, desktop: {len(desktop)}")
         sys.exit(1 if conflicts else 0)
-    if conflicts: sys.exit("Prvo reši sukobe redosleda (--check).")
+    if conflicts and not a.force: sys.exit("Prvo reši sukobe redosleda (--check) ili --force pa winner-check.py --fix.")
     stem = path.name.replace(".module.css", "")
     head = lambda kind, rule: f"/*\n * {kind} raspored za {stem} ({rule}). Uređuje se nezavisno; zajednički izgled je u\n * {stem}.module.css, a komponente koriste {stem}.styles.ts (2026-10-22).\n */\n\n"
     path.write_text("".join(base).lstrip() + "\n")

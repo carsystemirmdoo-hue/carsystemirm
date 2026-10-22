@@ -4,7 +4,7 @@ import { Footer } from "@/components/layout/Footer";
 import { SeoBreadcrumbs } from "@/components/seo/SeoBreadcrumbs";
 import { SavetiCard } from "@/components/saveti/SavetiCards";
 import { SavetiNacrtTraka } from "@/components/saveti/SavetiNacrtTraka";
-import styles from "@/components/saveti/Saveti.module.css";
+import styles from "@/components/saveti/Saveti.styles";
 import { getPublicSaveti, MIN_CLANAKA_ZA_INDEKS_KATEGORIJE, savetiNacrtPregled, toSazetak } from "@/lib/saveti";
 import { getSavetiKategorija, SAVETI_KATEGORIJE } from "@/lib/saveti/kategorije.mjs";
 import { breadcrumbJsonLd, collectionPageJsonLd, jsonLd, pageMetadata } from "@/lib/seo";

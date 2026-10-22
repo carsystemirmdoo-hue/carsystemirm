@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, type ReactNode } from "react";
 import { usePrefersReducedMotion } from "@/components/motion/usePrefersReducedMotion";
-import styles from "./CarsystemBrandPage.module.css";
+import styles from "./CarsystemBrandPage.styles";
 
 export function CarsystemPageShell({ children }: { children: ReactNode }) {
   const rootRef = useRef<HTMLDivElement>(null);

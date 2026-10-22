@@ -1,0 +1,207 @@
+/*
+ * DESKTOP raspored za BefarBrandPage (od 1024px). Uređuje se nezavisno; zajednički izgled je u
+ * BefarBrandPage.module.css, a komponente koriste BefarBrandPage.styles.ts (2026-10-22).
+ *
+ * Prva klasa svakog selektora je udvostručena (specifičnost +1): raspored ne zavisi od
+ * redosleda učitavanja CSS delova (scripts/css/bump-responsive.py).
+ */
+
+@media (min-width: 64rem) {
+  .sectionHeaderInline.sectionHeaderInline {
+    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1fr);
+  }
+
+  .sectionHeaderInline.sectionHeaderInline .sectionIndex {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (min-width: 1024px) {
+  .materialGrid.materialGrid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .perfOrbital.perfOrbital {
+    grid-template-columns: auto 1fr;
+  }
+}
+
+@media (min-width: 64rem) {
+
+  .hardnessGrid.hardnessGrid {
+    grid-template-columns: minmax(11rem, 0.7fr) minmax(0, 1.5fr) minmax(17rem, 1fr);
+    align-items: center;
+  }
+
+  /* Skala postaje vertikalna lista, bez horizontalnog scrolla. */
+  .hardnessOptions.hardnessOptions {
+    flex-direction: column;
+    overflow: visible;
+    scroll-snap-type: none;
+    margin-inline: 0;
+    padding-inline: 0;
+    padding-bottom: 0;
+    gap: 0.4rem;
+  }
+
+  .hardnessOption.hardnessOption {
+    flex-direction: row;
+    align-items: center;
+    gap: 0.75rem;
+    min-width: 0;
+    width: 100%;
+  }
+
+  .hardnessBar.hardnessBar {
+    width: 0.45rem;
+    height: 2.1rem;
+    flex: 0 0 auto;
+  }
+
+  /* Sticky scena: markeri daju visinu tracku, stage stoji u sredini. */
+  .hardnessTrack.hardnessTrack {
+    --befar-step-height: 80vh;
+    height: calc(5 * var(--befar-step-height));
+    padding-block: 0;
+  }
+
+  .hardnessMarkers.hardnessMarkers {
+    display: flex;
+    position: absolute;
+    inset: 0;
+    flex-direction: column;
+  }
+
+  .hardnessMarker.hardnessMarker {
+    flex: 1 1 0;
+  }
+
+  .hardnessStage.hardnessStage {
+    position: sticky;
+    top: calc(
+      var(--brand-section-header-offset, 0px) + var(--brand-section-nav-height, 0px)
+    );
+    display: grid;
+    align-items: center;
+    height: calc(
+      100vh - var(--brand-section-header-offset, 0px) - var(--brand-section-nav-height, 0px)
+    );
+  }
+
+  .hardnessSpec.hardnessSpec {
+    border-top: none;
+    border-left: 1px solid var(--bf-invert-line);
+    padding-top: 0;
+    padding-left: clamp(1.25rem, 2vw, 2rem);
+  }
+
+  .pairingLayout.pairingLayout {
+    grid-template-columns: minmax(9rem, 0.6fr) minmax(0, 1.2fr) minmax(14rem, 0.9fr);
+  }
+
+  .pairingControls.pairingControls {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  /*
+   * Editorial ritam, ne masonry: jedan dominantan trenutak preko cele širine,
+   * dva sekundarna u paru, tri tiša u nizu. Razlika ide kroz površinu, skalu i
+   * whitespace — svih šest kartica koriste isti stil.
+   */
+  .familyGrid.familyGrid {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    row-gap: clamp(2.5rem, 5vw, 4.5rem);
+  }
+
+  .familyCard.familyCard {
+    grid-column: span 2;
+  }
+
+  .familyCard.familyCard[data-weight="dominant"] {
+    grid-column: 1 / -1;
+    grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
+    gap: clamp(1.5rem, 3vw, 3rem);
+    align-items: center;
+    padding-top: 1.5rem;
+    border-top-width: 2px;
+    border-top-color: var(--bf-red);
+  }
+
+  .familyCard.familyCard[data-weight="major"] {
+    grid-column: span 3;
+  }
+
+  .familyCard.familyCard[data-weight="minor"] {
+    grid-column: span 2;
+  }
+
+  /* Tiše kartice dobijaju manju sliku i uži tekst da se hijerarhija čita. */
+  .familyCard.familyCard[data-weight="minor"] .familyMedia {
+    aspect-ratio: 3 / 2;
+  }
+
+  .familyCard.familyCard[data-weight="minor"] .familyText {
+    font-size: var(--ds-font-small);
+  }
+
+  /*
+   * Poravnanje susednih kartica (2026-10-20): kartice u istom redu dele redove
+   * mreže (subgrid), pa zona fotografije, nadnaslov, naslov, tekst i
+   * specifikacije počinju na istoj visini i kad je tekst jedne kartice duži.
+   * Razmak između redova kartica nosi `padding-bottom`, ne `row-gap` mreže,
+   * jer bi se `row-gap` ubacio i između redova unutar kartice.
+   */
+  .familyGrid.familyGrid {
+    row-gap: 0;
+  }
+
+  .familyCard.familyCard {
+    padding-bottom: clamp(2.5rem, 5vw, 4.5rem);
+  }
+
+  .familyCard.familyCard:not([data-weight="dominant"]) {
+    grid-row: span 5;
+    grid-template-rows: subgrid;
+    row-gap: 0;
+  }
+
+  .familyCard.familyCard:not([data-weight="dominant"]) .familyBody {
+    display: contents;
+  }
+
+  .familyCard.familyCard:not([data-weight="dominant"]) .familyMedia {
+    margin-bottom: 1rem;
+  }
+
+  .opencellInner.opencellInner {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr);
+  }
+
+  .closingInner.closingInner {
+    grid-template-columns: minmax(0, 1.35fr) minmax(18rem, 0.75fr);
+  }
+
+  .ctaActions.ctaActions .buttonPrimary,
+  .ctaActions.ctaActions .buttonSecondary {
+    width: auto;
+  }
+}
+
+@media (min-width: 1024px) {
+  .productGrid.productGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 64rem) {
+  .heroIntro.heroIntro {
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+    align-items: end;
+    gap: clamp(2rem, 5vw, 5rem);
+  }
+
+  .heroIntroBody.heroIntroBody {
+    padding-bottom: 0.4rem;
+  }
+}

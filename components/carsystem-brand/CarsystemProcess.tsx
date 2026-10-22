@@ -12,7 +12,7 @@ import {
   type CarsystemMediaProducts,
   type CarsystemProcessPhase,
 } from "./carsystemBrandData";
-import styles from "./CarsystemBrandPage.module.css";
+import styles from "./CarsystemBrandPage.styles";
 
 export function CarsystemProcess({
   availability,

@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useCallback, useEffect, useId, useRef, useState } from "react";
 import { usePrefersReducedMotion } from "@/components/motion/usePrefersReducedMotion";
 import type { CosmosApplication } from "@/lib/cosmos-lac-brand-data";
-import styles from "./CosmosBrandPage.module.css";
+import styles from "./CosmosBrandPage.styles";
 
 export type FinderProduct = {
   slug: string;

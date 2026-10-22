@@ -2,7 +2,7 @@
 
 import { useState, type KeyboardEvent } from "react";
 import { norbinGreyShades } from "./norbinBrandData";
-import styles from "./NorbinBrandPage.module.css";
+import styles from "./NorbinBrandPage.styles";
 
 export function NorbinGreyShade() {
   const [activeIndex, setActiveIndex] = useState(0);

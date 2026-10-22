@@ -12,7 +12,7 @@ import {
 import type { CarsystemProduct } from "@/lib/carsystem-data";
 import type { ProductContentFit } from "@/lib/product-image-metrics";
 import type { RmBrandClassifications } from "@/lib/rm-brand-classification";
-import styles from "./RmBrandPage.module.css";
+import styles from "./RmBrandPage.styles";
 
 export function RmProductFamilies({
   classifications,

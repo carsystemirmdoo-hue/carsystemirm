@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { befarPairingMeta, befarPairings } from "@/lib/befar-brand-data";
-import styles from "./BefarBrandPage.module.css";
+import styles from "./BefarBrandPage.styles";
 
 /** Najveći prečnik u setu služi kao referenca za relativnu skalu krugova. */
 const MAX_DIAMETER = Math.max(...befarPairings.map((pairing) => pairing.foam));

@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { carsystemHero } from "./carsystemBrandData";
-import styles from "./CarsystemBrandPage.module.css";
+import styles from "./CarsystemBrandPage.styles";
 
 /**
  * Uvodni blok Carsystem stranice: fotografija preko cele širine bloka, a naslov, uvod i

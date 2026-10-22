@@ -8,7 +8,7 @@ import {
   rmCampaignSlides,
   type RmCampaignSlideData,
 } from "@/components/rm-brand/rmBrandData";
-import styles from "./RmBrandPage.module.css";
+import styles from "./RmBrandPage.styles";
 
 const progressLabels = ["AGILIS", "COLOR", "REFINITY", "eSENSE"];
 

@@ -32,7 +32,7 @@ import {
   SUPPORT_LINKS,
   SYSTEM_GROUPS,
 } from "@/components/layout/navigation-data";
-import styles from "./Header.module.css";
+import styles from "./Header.styles";
 import { ArrowIcon, BrandMenuLink, SearchIcon, isMenuLinkActive } from "./HeaderParts";
 import { HeaderMobileMenu } from "./HeaderMobileMenu";
 

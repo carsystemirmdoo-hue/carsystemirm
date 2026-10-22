@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import type { CosmosFamily } from "@/lib/cosmos-lac-brand-data";
-import styles from "./CosmosBrandPage.module.css";
+import styles from "./CosmosBrandPage.styles";
 import { useMeasuredWidth, useScrollProgress } from "./useScrollProgress";
 import { variantCountLabel } from "@/lib/sr-plural";
 

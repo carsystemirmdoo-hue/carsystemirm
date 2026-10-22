@@ -13,6 +13,20 @@ sys.path.insert(0, __file__.rsplit("/", 1)[0])
 from importlib.machinery import SourceFileLoader
 split = SourceFileLoader("split", __file__.rsplit("/", 1)[0] + "/split-responsive.py").load_module()
 
+
+def split_selectors(prelude):
+    """Deli listu selektora samo po zarezima na najvišem nivou (ne unutar :is()/:where())."""
+    out, depth, cur = [], 0, ""
+    for ch in prelude:
+        if ch in "([": depth += 1
+        elif ch in ")]": depth -= 1
+        if ch == "," and depth == 0:
+            out.append(cur); cur = ""
+        else:
+            cur += ch
+    out.append(cur)
+    return [s.strip() for s in out if s.strip()]
+
 def bump_selector(sel: str) -> str:
     if "/*bumped*/" in sel: return sel
     m = re.search(r"\.([A-Za-z_][\w-]*)", sel)
@@ -27,7 +41,7 @@ def bump_block(css: str) -> str:
         elif prelude.startswith("@"):
             out.append(f"{lead}{prelude} {{{body}}}")
         else:
-            sels = ",".join(bump_selector(s) for s in prelude.split(","))
+            sels = ", ".join(bump_selector(s) for s in split_selectors(prelude))
             out.append(f"{lead}{sels} {{{body}}}")
     return "".join(out)
 

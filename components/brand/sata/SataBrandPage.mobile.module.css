@@ -1,0 +1,50 @@
+/*
+ * MOBILNI raspored za SataBrandPage (do 1023px). Uređuje se nezavisno; zajednički izgled je u
+ * SataBrandPage.module.css, a komponente koriste SataBrandPage.styles.ts (2026-10-22).
+ *
+ * Prva klasa svakog selektora je udvostručena (specifičnost +1): raspored ne zavisi od
+ * redosleda učitavanja CSS delova (scripts/css/bump-responsive.py).
+ */
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .argumentList.argumentList {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .chain.chain {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .familyGrid.familyGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 960px) and (max-width: 1023px) {
+  .techGrid.techGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .nozzleGrid.nozzleGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .selectorMeta.selectorMeta {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: clamp(0.85rem, 2vw, 1.75rem);
+  }
+}
+
+@media (min-width: 960px) and (max-width: 1023px) {
+  .serviceGrid.serviceGrid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}

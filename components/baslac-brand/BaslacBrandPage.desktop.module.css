@@ -1,0 +1,65 @@
+/*
+ * DESKTOP raspored za BaslacBrandPage (od 1024px). Uređuje se nezavisno; zajednički izgled je u
+ * BaslacBrandPage.module.css, a komponente koriste BaslacBrandPage.styles.ts (2026-10-22).
+ *
+ * Prva klasa svakog selektora je udvostručena (specifičnost +1): raspored ne zavisi od
+ * redosleda učitavanja CSS delova (scripts/css/bump-responsive.py).
+ */
+
+@media (min-width: 1024px) and (max-width: 1120px) {
+  .linesGrid.linesGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .linePanel.linePanel {
+    min-height: 24rem;
+  }
+
+  .processRail.processRail {
+    grid-template-columns: repeat(8, 8.5rem);
+  }
+
+  .processDetail.processDetail {
+    grid-template-columns: minmax(7rem, 0.28fr) minmax(16rem, 0.72fr) minmax(18rem, 0.9fr);
+  }
+
+  .clearcoatMatrix.clearcoatMatrix article {
+    grid-template-columns: minmax(14rem, 0.9fr) minmax(18rem, 1fr);
+  }
+
+  .clearcoatMatrix.clearcoatMatrix article > a {
+    grid-column: 1 / -1;
+  }
+
+  .catalogGrid.catalogGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1024px) and (max-width: 1120px) {
+  .campaignStage.campaignStage {
+    --baslac-campaign-height: 41rem;
+  }
+
+  .campaignCopy.campaignCopy {
+    width: min(56%, 30rem);
+  }
+
+  .campaignVisual.campaignVisual.campaignVisual[data-visual="artwork"] {
+    width: min(42%, 22rem);
+  }
+
+  /*
+   * Sto je viewport uzi, to je kadar fotografije tesnji, pa zona citljivosti
+   * mora dalje udesno. Krajnja desna zastava ostaje netaknuta.
+   */
+  .campaignVisual.campaignVisual.campaignVisual.campaignVisual[data-visual="photo"]::before {
+    background: linear-gradient(
+      92deg,
+      var(--baslac-campaign-surface-deep) 0 18%,
+      rgb(6 13 16 / 0.88) 38%,
+      rgb(6 13 16 / 0.5) 54%,
+      transparent 68%
+    );
+  }
+}

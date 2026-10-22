@@ -20,7 +20,7 @@ import {
   SataPressureTrace,
   SataSprayFan,
 } from "./SataDiagrams";
-import styles from "./SataBrandPage.module.css";
+import styles from "./SataBrandPage.styles";
 
 type Props = {
   brand: CarsystemBrand;

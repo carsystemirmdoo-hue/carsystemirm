@@ -1,7 +1,7 @@
 import Link from "next/link";
 import type { CarsystemProduct } from "@/lib/carsystem-data";
 import { ProductCard } from "./CarsystemProducts";
-import styles from "./CarsystemBrandPage.module.css";
+import styles from "./CarsystemBrandPage.styles";
 
 /**
  * RUPES u okviru Carsystem ponude (odluka vlasnika 2026-10-14): proizvođač je

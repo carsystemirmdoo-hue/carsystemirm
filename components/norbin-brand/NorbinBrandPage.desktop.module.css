@@ -1,0 +1,101 @@
+/*
+ * DESKTOP raspored za NorbinBrandPage (od 1024px). Uređuje se nezavisno; zajednički izgled je u
+ * NorbinBrandPage.module.css, a komponente koriste NorbinBrandPage.styles.ts (2026-10-22).
+ *
+ * Prva klasa svakog selektora je udvostručena (specifičnost +1): raspored ne zavisi od
+ * redosleda učitavanja CSS delova (scripts/css/bump-responsive.py).
+ */
+
+@media (min-width: 1024px) and (max-width: 1024px) {
+  .heroGrid.heroGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .heroCrossing.heroCrossing {
+    order: -1;
+    aspect-ratio: 4 / 5;
+  }
+
+  .programGrid.programGrid,
+  .programLayout.programLayout,
+  .originGrid.originGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .programRule.programRule {
+    height: 1px;
+  }
+
+  .codeRow.codeRow {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .ratioRow.ratioRow {
+    grid-template-columns: 1fr;
+    gap: 0.6rem;
+    text-align: center;
+  }
+
+  .ratioPartners.ratioPartners {
+    justify-items: center;
+    text-align: center;
+  }
+
+  .ratioPartners.ratioPartners li {
+    justify-content: center;
+  }
+
+  .ratioCrossing.ratioCrossing {
+    height: 2.6rem;
+  }
+
+  .processSpine.processSpine {
+    grid-template-columns: 1fr;
+  }
+
+  .stockedGrid.stockedGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .stockedList.stockedList a {
+    grid-template-columns: 6rem minmax(0, 1fr);
+  }
+
+  .stockedList.stockedList small {
+    grid-column: 2;
+  }
+}
+
+@media (min-width: 1024px) and (max-width: 1024px) {
+  .heroCrossing.heroCrossing {
+    height: clamp(15rem, 34vh, 22rem);
+    aspect-ratio: auto;
+  }
+}
+
+@media (min-width: 1024px) and (max-width: 1024px) {
+  /* Telefon/tablet: isečak 4 : 3 desno-dole — lice, ruka sa krpom i
+     automobil, uz žutu traku koja ulazi u kadar. */
+  .heroBanner.heroBanner {
+    aspect-ratio: 4 / 3;
+    max-height: none;
+  }
+
+  .heroBanner.heroBanner img {
+    object-position: 74% 82%;
+  }
+
+  .programLayout.programLayout .systemPanel {
+    position: static;
+    grid-template-rows: 12rem auto auto;
+    min-height: 0;
+  }
+
+  .stockedList.stockedList button {
+    grid-template-columns: 6rem minmax(0, 1fr);
+  }
+
+  .stockedList.stockedList button small {
+    grid-column: 2;
+  }
+}

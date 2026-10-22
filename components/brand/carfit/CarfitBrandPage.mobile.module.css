@@ -1,0 +1,138 @@
+/*
+ * MOBILNI raspored za CarfitBrandPage (do 1023px). Uređuje se nezavisno; zajednički izgled je u
+ * CarfitBrandPage.module.css, a komponente koriste CarfitBrandPage.styles.ts (2026-10-22).
+ *
+ * Prva klasa svakog selektora je udvostručena (specifičnost +1): raspored ne zavisi od
+ * redosleda učitavanja CSS delova (scripts/css/bump-responsive.py).
+ */
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .storyMedia.storyMedia {
+    aspect-ratio: 4 / 5;
+  }
+}
+
+@media (min-width: 640px) and (max-width: 1023px) {
+  .zoneGrid.zoneGrid,
+  .docGrid.docGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .categoryBoard.categoryBoard {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .familyGrid.familyGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .familyWide.familyWide {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .heroInner.heroInner {
+    padding-block: clamp(3.5rem, 6vw, 6rem);
+  }
+
+  .productShowcase.productShowcase {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .productCardLead.productCardLead {
+    grid-column: span 2;
+  }
+
+  .productShowcase.productShowcase[data-count="2"] .productCardLead {
+    grid-column: span 1;
+  }
+
+  .storyRow.storyRow {
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+  }
+
+  .storyRowReverse.storyRowReverse .storyMedia {
+    order: -1;
+  }
+}
+
+@media (max-width: 63.9375rem) {
+  .taskPanelHead.taskPanelHead {
+    padding: 1.15rem;
+    padding-bottom: 0;
+  }
+
+  /* Ispod desktop širine workbench prelazi na dve kolone, bez praznih polja. */
+  .stage.stage {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .stageCellWide.stageCellWide,
+  .stageCellSide.stageCellSide,
+  .stageCellRow.stageCellRow {
+    grid-column: 1 / 3;
+    grid-row: auto;
+  }
+
+  .stageCellStrip.stageCellStrip {
+    grid-column: span 1;
+  }
+}
+
+@media (max-width: 37.5rem) {
+  .pageShell.pageShell {
+    --cf-nav-offset: 4.25rem;
+  }
+
+  .stageCellRow.stageCellRow {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .workflowItem.workflowItem {
+    grid-template-columns: 2.25rem minmax(0, 1fr);
+  }
+
+  .gradationStep.gradationStep {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0.35rem;
+  }
+}
+
+@media (max-width: 1023px) {
+  .heroBelow.heroBelow {
+    grid-template-columns: 1fr;
+    align-items: start;
+  }
+
+  .repGrid.repGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 40rem) {
+  /* Telefon: kadar 4:3 iz sredine — logo i središnja grupa proizvoda ostaju
+     (proizvodi zauzimaju oko 17–90 % širine izvornika, logo je u sredini). */
+  .heroPhoto.heroPhoto {
+    aspect-ratio: 4 / 3;
+  }
+
+  .heroPhoto.heroPhoto img {
+    object-position: 50% 62%;
+  }
+
+  .abrasiveLink.abrasiveLink {
+    grid-template-columns: 3.75rem minmax(0, 1fr);
+  }
+
+  .abrasiveRangeLabel.abrasiveRangeLabel {
+    grid-column: 2;
+    justify-items: start;
+    text-align: left;
+    grid-auto-flow: column;
+    justify-content: start;
+    align-items: baseline;
+    gap: 0.6rem;
+  }
+}

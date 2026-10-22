@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { CounterUp } from "@/components/ui/CounterUp";
 import type { CosmosHeroCan } from "@/lib/cosmos-lac-brand-data";
-import styles from "./CosmosBrandPage.module.css";
+import styles from "./CosmosBrandPage.styles";
 
 type Props = {
   variants: number;

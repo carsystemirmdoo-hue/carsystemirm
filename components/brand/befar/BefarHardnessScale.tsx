@@ -8,7 +8,7 @@ import {
   befarHardnessMeta,
   type BefarHardnessStep,
 } from "@/lib/befar-brand-data";
-import styles from "./BefarBrandPage.module.css";
+import styles from "./BefarBrandPage.styles";
 
 type Props = { steps: BefarHardnessStep[] };
 

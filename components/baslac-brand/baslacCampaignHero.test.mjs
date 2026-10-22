@@ -4,7 +4,13 @@ import test from "node:test";
 
 const heroUrl = new URL("./BaslacHero.tsx", import.meta.url);
 const dataUrl = new URL("./baslacBrandData.ts", import.meta.url);
-const cssUrl = new URL("./BaslacBrandPage.module.css", import.meta.url);
+// Od 2026-10-22 raspored je podeljen (zajednički + .desktop + .mobile) i pravila rasporeda imaju
+// ponovljenu klasu radi specifičnosti; za proveru sadržaja se ponavljanje svodi na jednu klasu.
+const readCss = async () =>
+  (await Promise.all(["./BaslacBrandPage.module.css", "./BaslacBrandPage.desktop.module.css", "./BaslacBrandPage.mobile.module.css"]
+    .map((file) => readFile(new URL(file, import.meta.url), "utf8"))))
+    .join("\n")
+    .replace(/(\.[A-Za-z_][\w-]*)(?:\1)+(?![\w-])/g, "$1");
 const publicDir = new URL("../../public/", import.meta.url);
 
 test("Baslac hero koristi deljeni carousel hook, bez paralelnog sistema", async () => {
@@ -74,7 +80,7 @@ test("izvedeni kampanjski asseti postoje u public folderu", async () => {
 });
 
 test("hero visina je stabilna izmedju slajdova", async () => {
-  const css = await readFile(cssUrl, "utf8");
+  const css = await readCss();
 
   // Visina dolazi iz jedne promenljive, nezavisne od aktivnog slajda.
   assert.match(css, /--baslac-campaign-height: 44rem;/);
@@ -112,7 +118,7 @@ test("sezonski slajd dolazi iz centralne konfiguracije, iza prvog brend slajda",
 });
 
 test("sezonski vizual ne zauzima zonu teksta i prati mobilni raspored", async () => {
-  const css = await readFile(cssUrl, "utf8");
+  const css = await readCss();
 
   assert.match(
     css,

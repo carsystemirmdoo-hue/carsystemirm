@@ -2,7 +2,7 @@ import Link from "next/link";
 import type { SavetiSazetak } from "@/lib/saveti";
 import { SAVETI_TIPOVI } from "@/lib/saveti/kategorije.mjs";
 import { formatSerbianDate } from "@/lib/saveti/vreme.mjs";
-import styles from "./Saveti.module.css";
+import styles from "./Saveti.styles";
 
 export function SavetiCard({ clanak, showCategory = true }: { clanak: SavetiSazetak; showCategory?: boolean }) {
   const tip = (SAVETI_TIPOVI as Record<string, string>)[clanak.tip] ?? clanak.tip;

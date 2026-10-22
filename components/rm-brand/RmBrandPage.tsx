@@ -43,7 +43,7 @@ import {
   type ProductContentFit,
 } from "@/lib/product-image-metrics";
 import { toDisplayImageSrc } from "@/lib/productImageDisplay";
-import styles from "./RmBrandPage.module.css";
+import styles from "./RmBrandPage.styles";
 
 export function RmBrandPage({
   products,

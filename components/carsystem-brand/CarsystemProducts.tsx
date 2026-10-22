@@ -9,7 +9,7 @@ import {
   carsystemProductOrder,
   carsystemRangeFilters,
 } from "./carsystemBrandData";
-import styles from "./CarsystemBrandPage.module.css";
+import styles from "./CarsystemBrandPage.styles";
 import { programLabel } from "./programLabel";
 
 type ProductFilterId = "all" | (typeof carsystemRangeFilters)[number]["id"];

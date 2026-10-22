@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { useState } from "react";
 import type { RmRefinityFlowStep } from "./rmBrandData";
-import styles from "./RmBrandPage.module.css";
+import styles from "./RmBrandPage.styles";
 
 /**
  * Fotografija koraka Refinity toka. Ako se ne učita, pločica ostaje samo sa

@@ -212,13 +212,6 @@
   border-bottom: var(--ds-line-width-hairline) solid var(--ds-line-color-structural);
 }
 
-@media (min-width: 768px) {
-  .newsItem {
-    grid-template-columns: 180px 1fr;
-    gap: 24px;
-  }
-}
-
 .newsDate {
   font-family: var(--ds-font-label);
   font-size: 12px;
@@ -336,13 +329,6 @@
   gap: 40px;
 }
 
-@media (min-width: 1100px) {
-  .articleLayout {
-    grid-template-columns: minmax(0, 1fr) 260px;
-    gap: 64px;
-  }
-}
-
 .articleMain {
   min-width: 0;
   max-width: 760px;
@@ -393,17 +379,6 @@
 
 .aside {
   display: none;
-}
-
-@media (min-width: 1100px) {
-  .aside {
-    display: block;
-  }
-
-  .asideInner {
-    position: sticky;
-    top: 112px;
-  }
 }
 
 .toc {
@@ -461,12 +436,6 @@
 .tocMobile a {
   color: var(--foreground);
   text-decoration: none;
-}
-
-@media (min-width: 1100px) {
-  .tocMobile {
-    display: none;
-  }
 }
 
 /* ---------- Telo ---------- */

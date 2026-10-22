@@ -3,7 +3,7 @@
 import { useMemo, useState } from "react";
 import type { SavetiSazetak } from "@/lib/saveti";
 import { SavetiCard } from "./SavetiCards";
-import styles from "./Saveti.module.css";
+import styles from "./Saveti.styles";
 
 function normalize(text: string) {
   return text

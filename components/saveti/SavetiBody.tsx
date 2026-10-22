@@ -1,7 +1,7 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
 import type { SavetiBlock, SavetiInline } from "@/lib/saveti";
-import styles from "./Saveti.module.css";
+import styles from "./Saveti.styles";
 
 type RenderContext = {
   /** Redni broj izvora po id-u (1, 2, …) — redosled iz frontmatter-a. */

@@ -1,0 +1,485 @@
+/*
+ * MOBILNI raspored za BaslacBrandPage (do 1023px). Uređuje se nezavisno; zajednički izgled je u
+ * BaslacBrandPage.module.css, a komponente koriste BaslacBrandPage.styles.ts (2026-10-22).
+ *
+ * Prva klasa svakog selektora je udvostručena (specifičnost +1): raspored ne zavisi od
+ * redosleda učitavanja CSS delova (scripts/css/bump-responsive.py).
+ */
+
+@media (max-width: 48rem) {
+  .greyShadeScale.greyShadeScale ol {
+    grid-template-columns: 1fr;
+  }
+
+  .greyShadeScale.greyShadeScale li {
+    grid-template-columns: 3.5rem minmax(0, 1fr);
+    grid-template-areas:
+      "swatch name"
+      "swatch bar"
+      "swatch recipe";
+    column-gap: 0.9rem;
+    row-gap: 0.35rem;
+    padding: 0.6rem 0.75rem 0.6rem 0;
+  }
+
+  .greyShadeSwatch.greyShadeSwatch {
+    grid-area: swatch;
+    height: auto;
+    min-height: 3.5rem;
+  }
+
+  .greyShadeScale.greyShadeScale li > strong { grid-area: name; }
+  .greyShadeRecipeBar.greyShadeRecipeBar { grid-area: bar; }
+  .greyShadeScale.greyShadeScale li > small { grid-area: recipe; }
+
+  .greyShadeScale.greyShadeScale li > strong,
+  .greyShadeScale.greyShadeScale li > small,
+  .greyShadeRecipeBar.greyShadeRecipeBar {
+    margin-inline: 0;
+  }
+
+  .greyShadeDetails.greyShadeDetails {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 1023px) {
+  .linesGrid.linesGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .linePanel.linePanel {
+    min-height: 24rem;
+  }
+
+  .processRail.processRail {
+    grid-template-columns: repeat(8, 8.5rem);
+  }
+
+  .processDetail.processDetail {
+    grid-template-columns: minmax(7rem, 0.28fr) minmax(16rem, 0.72fr) minmax(18rem, 0.9fr);
+  }
+
+  .clearcoatMatrix.clearcoatMatrix article {
+    grid-template-columns: minmax(14rem, 0.9fr) minmax(18rem, 1fr);
+  }
+
+  .clearcoatMatrix.clearcoatMatrix article > a {
+    grid-column: 1 / -1;
+  }
+
+  .catalogGrid.catalogGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 54rem) {
+
+  .sectionHeader.sectionHeader,
+  .repairRhythmHeader.repairRhythmHeader,
+  .positionSection.positionSection {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .positionBody.positionBody {
+    max-width: 40rem;
+    justify-self: end;
+  }
+
+  .repairRhythmGrid.repairRhythmGrid {
+    /* `minmax(0, …)`: kolona ne sme da se raširi na min-content panela. */
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .repairRhythmPanel.repairRhythmPanel {
+    max-width: 46rem;
+  }
+
+  .line45Feature.line45Feature,
+  .commercialSection.commercialSection {
+    grid-template-columns: 1fr;
+  }
+
+  .line45FeatureCopy.line45FeatureCopy,
+  .commercialCopy.commercialCopy {
+    max-width: 42rem;
+  }
+
+  .processDetail.processDetail {
+    grid-template-columns: 7rem minmax(0, 1fr);
+  }
+
+  .processGroups.processGroups {
+    grid-column: 2;
+  }
+
+  .primerSection.primerSection {
+    grid-template-columns: 1fr;
+  }
+
+  .primerIntro.primerIntro {
+    position: static;
+  }
+
+  .primerMedia.primerMedia,
+  .primerStack.primerStack {
+    grid-column: auto;
+  }
+
+  .colorFlow.colorFlow {
+    grid-template-columns: repeat(5, 11rem);
+    overflow-x: auto;
+  }
+
+  .colorTools.colorTools {
+    grid-template-columns: 1fr;
+  }
+
+  .colorTools.colorTools article {
+    min-height: 9rem;
+  }
+
+  .colorTools.colorTools h3 {
+    margin-top: 1.5rem;
+  }
+
+  .supportList.supportList {
+    grid-template-columns: 1fr;
+  }
+
+  .supportList.supportList article {
+    min-height: 14rem;
+  }
+
+  .finalCta.finalCta {
+    grid-template-columns: 6rem 1fr;
+  }
+
+  .finalCtaActions.finalCtaActions {
+    grid-column: 2;
+  }
+}
+
+@media (max-width: 36rem) {
+  .baslacPage.baslacPage {
+    --brand-section-nav-height: 3.35rem;
+  }
+  .breadcrumb.breadcrumb {
+    font-size: var(--ds-font-label);
+  }
+  .mediaSlot.mediaSlot {
+    aspect-ratio: var(--baslac-media-mobile-ratio);
+  }
+
+  .mediaSlot.mediaSlot figcaption {
+    font-size: var(--ds-font-label);
+  }
+
+  .mediaPlaceholder.mediaPlaceholder {
+    gap: 0.45rem;
+  }
+
+  .section.section {
+    width: calc(100% - 2rem);
+    padding-block: 4.75rem;
+  }
+
+  .sectionHeader.sectionHeader {
+    margin-bottom: 2.5rem;
+  }
+
+  .sectionHeader.sectionHeader h2,
+  .positionStatement.positionStatement h2,
+  .repairRhythmHeader.repairRhythmHeader h2,
+  .primerIntro.primerIntro h2,
+  .commercialCopy.commercialCopy h2 {
+    font-size: clamp(2.35rem, 11vw, 3.35rem);
+  }
+
+  .repairRhythm.repairRhythm {
+    width: 100%;
+    padding-inline: 1rem;
+  }
+
+  .repairRhythmHeader.repairRhythmHeader h2 {
+    font-size: clamp(2.65rem, 13vw, 4rem);
+  }
+
+  .repairRhythmSelector.repairRhythmSelector {
+    display: flex;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .repairRhythmSelector.repairRhythmSelector::-webkit-scrollbar {
+    display: none;
+  }
+
+  .repairRhythmSelector.repairRhythmSelector button {
+    flex: 0 0 9.25rem;
+    border-top: 1px solid var(--baslac-process-border);
+  }
+
+  .repairRhythmSelector.repairRhythmSelector button:nth-child(2n) {
+    border-right: 1px solid var(--baslac-process-border);
+  }
+
+  .repairRhythmDetail.repairRhythmDetail > h3 + p {
+    min-height: 6.8rem;
+  }
+
+  .linesGrid.linesGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .linePanel.linePanel {
+    min-height: 22rem;
+  }
+
+  .processDetail.processDetail {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    padding: 1.5rem;
+  }
+
+  .processDetailNumber.processDetailNumber {
+    font-size: 5.5rem;
+  }
+
+  .processGroups.processGroups {
+    grid-column: auto;
+  }
+
+  .clearcoatMatrix.clearcoatMatrix article {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    padding-block: 1.5rem;
+  }
+
+  .clearcoatMatrix.clearcoatMatrix dl {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+  }
+
+  .clearcoatNote.clearcoatNote {
+    grid-template-columns: 1fr;
+    gap: 0.65rem;
+  }
+
+  .primerStack.primerStack article {
+    grid-template-columns: 1fr;
+    gap: 0.8rem;
+    padding-block: 1rem;
+  }
+
+  .catalogGrid.catalogGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .catalogFooter.catalogFooter {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .catalogFooter.catalogFooter .outlineButton {
+    width: 100%;
+  }
+
+  .finalCta.finalCta {
+    grid-template-columns: 1fr;
+    padding-inline: 1rem;
+  }
+
+  .finalCtaMark.finalCtaMark {
+    font-size: 5rem;
+  }
+
+  .finalCta.finalCta h2 {
+    font-size: 2.45rem;
+  }
+
+  .finalCtaActions.finalCtaActions {
+    grid-column: auto;
+  }
+}
+
+@media (max-width: 1023px) {
+  .campaignStage.campaignStage {
+    --baslac-campaign-height: 41rem;
+  }
+
+  .campaignCopy.campaignCopy {
+    width: min(56%, 30rem);
+  }
+
+  .campaignVisual.campaignVisual.campaignVisual[data-visual="artwork"] {
+    width: min(42%, 22rem);
+  }
+
+  /*
+   * Sto je viewport uzi, to je kadar fotografije tesnji, pa zona citljivosti
+   * mora dalje udesno. Krajnja desna zastava ostaje netaknuta.
+   */
+  .campaignVisual.campaignVisual.campaignVisual.campaignVisual[data-visual="photo"]::before {
+    background: linear-gradient(
+      92deg,
+      var(--baslac-campaign-surface-deep) 0 18%,
+      rgb(6 13 16 / 0.88) 38%,
+      rgb(6 13 16 / 0.5) 54%,
+      transparent 68%
+    );
+  }
+}
+
+@media (max-width: 50rem) {
+  .campaignStage.campaignStage {
+    --baslac-campaign-height: 52rem;
+  }
+
+  .campaignBreadcrumb.campaignBreadcrumb {
+    width: calc(100% - (var(--baslac-campaign-gutter) * 2));
+  }
+
+  .campaignSlide.campaignSlide {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: auto minmax(0, 1fr);
+    align-items: start;
+    gap: clamp(1.1rem, 4vw, 1.8rem);
+    padding: 3.2rem var(--baslac-campaign-gutter) 7.6rem;
+  }
+
+  .campaignCopy.campaignCopy {
+    width: auto;
+    max-width: none;
+    grid-row: 2;
+    align-self: start;
+  }
+
+  /*
+   * Vizual ide u gornju zonu, a tekst u donju sigurnu zonu istog hero bloka.
+   * Ista `aspect-ratio` za oba slajda cuva stabilnu visinu heroja.
+   */
+  .campaignVisual.campaignVisual,
+  .campaignVisual.campaignVisual.campaignVisual[data-visual="artwork"],
+  .campaignVisual.campaignVisual.campaignVisual[data-visual="seasonal"],
+  .campaignVisual.campaignVisual.campaignVisual.campaignVisual[data-visual="seasonal"][data-has-image] {
+    position: relative;
+    inset: auto;
+    z-index: 1;
+    width: 100%;
+    /*
+     * Ista, sirinom vodjena ali ogranicena visina za oba slajda: hero ostaje
+     * stabilan, a na tabletu vizual ne pojede prostor namenjen tekstu.
+     */
+    height: min(74vw, 20rem);
+    grid-row: 1;
+    padding: 0;
+  }
+
+  .campaignVisual.campaignVisual[data-visual="artwork"] img {
+    object-position: right center;
+  }
+
+  .campaignVisual.campaignVisual.campaignVisual.campaignVisual[data-season="winter"]::after {
+    left: 50%;
+    width: min(13rem, 52vw);
+  }
+
+  .campaignVisual.campaignVisual.campaignVisual.campaignVisual[data-season="spring"]::after {
+    left: 50%;
+    width: min(9.5rem, 38vw);
+  }
+
+  .campaignVisual.campaignVisual.campaignVisual.campaignVisual[data-visual="seasonal"]::before {
+    mask-image: radial-gradient(circle at 50% 50%, #000 0 30%, transparent 62%);
+  }
+
+  .campaignVisual.campaignVisual.campaignVisual.campaignVisual[data-visual="seasonal"][data-has-image] {
+    padding-block: 0.75rem;
+  }
+
+  .campaignVisual.campaignVisual[data-visual="seasonal"][data-has-image] picture {
+    inset: 0.75rem 0;
+  }
+
+  .campaignVisual.campaignVisual[data-visual="photo"] picture,
+  .campaignVisual.campaignVisual[data-visual="photo"] img {
+    position: absolute;
+    inset: 0;
+  }
+
+  .campaignVisual.campaignVisual[data-visual="photo"] img {
+    /* Cuva vrhove zastava kada je okvir siri od art-directed kadra. */
+    object-position: center 20%;
+  }
+
+  /* Bez teksta preko fotografije na mobilnom — samo blago stapanje ka dnu. */
+  .campaignVisual.campaignVisual.campaignVisual.campaignVisual[data-visual="photo"]::before {
+    background: linear-gradient(
+      180deg,
+      transparent 62%,
+      rgb(6 13 16 / 0.55) 88%,
+      var(--baslac-campaign-surface-deep) 100%
+    );
+  }
+
+  .campaignTitle.campaignTitle {
+    max-width: 18ch;
+    margin-top: 0.9rem;
+    font-size: clamp(2rem, 8.4vw, 2.9rem);
+  }
+
+  .campaignDescription.campaignDescription {
+    margin-top: 0.9rem;
+    font-size: 0.94rem;
+    line-height: 1.55;
+  }
+
+  .campaignActions.campaignActions {
+    margin-top: 1.3rem;
+  }
+}
+
+@media (max-width: 36rem) {
+  .campaignStage.campaignStage {
+    --baslac-campaign-height: 50rem;
+  }
+
+  .campaignTitle.campaignTitle {
+    font-size: clamp(1.85rem, 8vw, 2.4rem);
+  }
+
+  .campaignDescription.campaignDescription {
+    display: -webkit-box;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 4;
+  }
+
+  .campaignActions.campaignActions a {
+    width: 100%;
+  }
+
+  .campaignArrows.campaignArrows button {
+    width: 2.75rem;
+    height: 2.75rem;
+  }
+
+  .campaignPaginationLabel.campaignPaginationLabel small {
+    display: none;
+  }
+}
+
+@media (max-width: 48rem) {
+  .baseFilters.baseFilters {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 60rem) {
+  .systemGroupBody.systemGroupBody {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

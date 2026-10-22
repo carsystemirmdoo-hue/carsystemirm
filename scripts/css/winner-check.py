@@ -15,6 +15,20 @@ fc_src = open(__file__.rsplit("/", 1)[0] + "/flip-check.py").read().split('fix =
 ns = {"__file__": __file__.rsplit("/", 1)[0] + "/flip-check.py"}; exec(fc_src, ns)
 spec, target = ns["spec"], ns["target"]
 
+
+def split_selectors(prelude):
+    """Deli listu selektora samo po zarezima na najvišem nivou (ne unutar :is()/:where())."""
+    out, depth, cur = [], 0, ""
+    for ch in prelude:
+        if ch in "([": depth += 1
+        elif ch in ")]": depth -= 1
+        if ch == "," and depth == 0:
+            out.append(cur); cur = ""
+        else:
+            cur += ch
+    out.append(cur)
+    return [s.strip() for s in out if s.strip()]
+
 def flat(css, media=""):
     out = []
     for _, prelude, body in split.parse(css):
@@ -22,15 +36,40 @@ def flat(css, media=""):
             out += flat(body, prelude)
         elif not prelude.startswith("@"):
             props = {d.split(":", 1)[0].strip() for d in body.split(";") if ":" in d}
-            for sel in prelude.split(","): out.append((sel.strip(), props, media))
+            for sel in split_selectors(prelude): out.append((sel.strip(), props, media))
+    return out
+
+def rules_with_pos(css):
+    """Pravila (media, prelude, početak tela, kraj tela) sa pozicijama; komentari se preskaču."""
+    out, stack, i, start = [], [], 0, 0
+    while i < len(css):
+        if css.startswith("/*", i):
+            i = css.index("*/", i) + 2; start = i; continue
+        ch = css[i]
+        if ch == "{":
+            stack.append((css[start:i].strip(), i + 1)); start = i + 1
+        elif ch == "}":
+            prelude, body_start = stack.pop()
+            if not prelude.startswith("@"):
+                media = " ".join(p for p, _ in stack if p.startswith("@media") or p.startswith("@supports"))
+                out.append((media, prelude, body_start, i))
+            start = i + 1
+        elif ch == ";" and not stack:
+            start = i + 1
+        i += 1
     return out
 
 norm = lambda s: re.sub(r"\.([\w-]+)(?:\.\1)+", r".\1", re.sub(r"\s+", " ", s))
 FIX = "--fix" in sys.argv
 sys.argv = [a for a in sys.argv if a != "--fix"]
 orig = flat(open(sys.argv[1]).read())
+# Svako pojavljivanje selektora (po upitu) ima svoju poziciju: isti selektor se često ponavlja kasnije
+# u fajlu (npr. tokenski blok na kraju), a to kasnije pravilo je ono koje je pobeđivalo.
+# Podela samo vadi media blokove, pa k-to pojavljivanje u zajedničkom fajlu odgovara k-tom
+# pojavljivanju van media u originalu.
 pos = {}
-for i, (s, p, m) in enumerate(orig): pos.setdefault((norm(s), m), i)
+for i, (s, p, m) in enumerate(orig):
+    pos.setdefault((norm(s), re.sub(r"\s+", "", m)), []).append(i)
 media_pos = {}
 for i, (s, p, m) in enumerate(orig):
     if m: media_pos.setdefault(norm(s), []).append((m, i))
@@ -47,33 +86,112 @@ def apply(path, sel):
     open(path, "w").write(css)
     return n
 
-base = [(s, p, m) for s, p, m in flat(open(sys.argv[2]).read())]
+def granica(paths):
+    """Granica podele: najmanji min-width desktop fajla − 1px (inače najveći max-width mobilnog)."""
+    mins = [split.px(v) for p in paths if ".desktop." in p for v in re.findall(r"min-width:\s*([\d.]+(?:px|rem|em))", open(p).read())]
+    if mins: return min(mins) - 1
+    return max(split.px(v) for p in paths for v in re.findall(r"max-width:\s*([\d.]+(?:px|rem|em))", open(p).read()))
+BP = granica(sys.argv[3:])
+
+base, seen = [], {}
+for s, p, m in flat(open(sys.argv[2]).read()):
+    k = seen[(norm(s), m)] = seen.get((norm(s), m), -1) + 1
+    occ = pos.get((norm(s), re.sub(r"\s+", "", m)), [])
+    base.append((s, p, m, occ[k] if k < len(occ) else None))
 issues = 0
+unmatched = []
+rules_of = {}
+dead = {}  # (fajl, pravilo) → {svojstvo: {selektori}}
 to_fix = []
 for path in sys.argv[3:]:
-    for s, props, media in flat(open(path).read()):
-        cands = media_pos.get(norm(s), [])
-        exact = [i for m, i in cands if media_key(m) == media_key(media)]
-        pm = exact[0] if exact else (cands[0][1] if cands else None)
-        if pm is None: continue
+    # Podela prepisuje upit (npr. `max-width: 70rem` → `(min-width: 1024px) and (max-width:
+    # 1120px)`), ali čuva redosled media pravila. Zato se k-to pojavljivanje selektora u fajlu
+    # rasporeda vezuje za k-to originalno pravilo istog selektora koje je palo u taj fajl.
+    text = open(path).read()
+    kind = 0 if ".mobile." in path else 1
+    lane = {}
+    for i, (os_, op, om) in enumerate(orig):
+        if not om or not om.startswith("@media"): continue
+        c = split.classify(om, BP)
+        if c and c[kind]: lane.setdefault(norm(os_), []).append(i)
+    seen_m = {}
+    entries = []
+    for rid, (media, prelude, b0, b1) in enumerate(rules_with_pos(text)):
+        props = {d.split(":", 1)[0].strip() for d in text[b0:b1].split(";") if ":" in d}
+        for sel in split_selectors(prelude): entries.append((rid, prelude, sel, props, media))
+    rules_of[path] = rules_with_pos(text)
+    for rid, prelude, s, props, media in entries:
+        k = seen_m[norm(s)] = seen_m.get(norm(s), -1) + 1
+        occ = lane.get(norm(s), [])
+        pm = occ[k] if k < len(occ) else None
+        if pm is None:
+            unmatched.append(f"{path.rsplit('/',1)[-1]}: {s}")
+            continue
         o_m = spec(norm(s)); n_m = spec(s)
-        for bs, bp, bmed in base:
+        for bs, bp, bmed, pb in base:
             common = props & bp
-            if not common or target(norm(bs)) != target(norm(s)) or bmed: continue
-            pb = pos.get((norm(bs), ""))
+            # Zajednička pravila u upitima koji nisu širina (smanjen pokret, hover, pointer)
+            # važe istovremeno sa rasporedom, pa se i ona porede. Štampa se preskače.
+            if not common or target(norm(bs)) != target(norm(s)) or "print" in bmed: continue
             if pb is None: continue
+            # Ista lista selektora u rasporedu sadrži i baš taj zajednički selektor: element
+            # dobija vrednost rasporeda preko njega, pa ovaj par ne odlučuje ishod.
+            if norm(bs) != norm(s) and norm(bs) in {norm(x) for x in split_selectors(prelude)}: continue
             o_b = spec(norm(bs)); n_b = spec(bs)
             before = "raspored" if (o_m > o_b or (o_m == o_b and pm > pb)) else "zajednički"
             after = "raspored" if n_m > n_b else "zajednički" if n_b > n_m else "nesigurno"
             if before != after:
                 issues += 1
                 print(f"{path.rsplit('/',1)[-1]} {media}: {s!r} vs {bs!r} [{', '.join(sorted(common))}] — ranije: {before}, sada: {after}")
-                to_fix.append((sys.argv[2], bs) if before == "zajednički" else (path, s))
+                if before == "raspored":
+                    to_fix.append(("bump", path, s, None))
+                elif bmed or norm(bs) != norm(s):
+                    # Zajedničko pravilo pod uslovom (upit pokreta/hover-a, :first-child, roditelj)
+                    # je pobeđivalo samo za deo elemenata: pojačava se baš ono, u svom upitu.
+                    to_fix.append(("bump-media", sys.argv[2], bs, bmed))
+                else:
+                    # isti selektor bez uslova je pobeđivao: deklaracija u rasporedu je mrtva
+                    for prop in common:
+                        dead.setdefault((path, rid), {}).setdefault(prop, set()).add(s)
+if unmatched:
+    print(f"NEVEZANO sa originalom ({len(unmatched)}):", *unmatched[:20], sep="\n  ")
 print(f"{issues} promena")
-if FIX and to_fix:
+def remove_dead(path, items):
+    """Uklanja mrtve deklaracije; pravilo sa listom selektora menja se samo ako su svi mrtvi."""
+    css = open(path).read(); rules = rules_of[path]; manual = []
+    for rid in sorted(items, reverse=True):  # od kraja, da pozicije ostanu tačne
+        media, prelude, b0, b1 = rules[rid]
+        sels = set(split_selectors(prelude))
+        drop = {prop for prop, ss in items[rid].items() if ss >= sels}
+        manual += [f"{prelude} [{prop}]" for prop, ss in items[rid].items() if not ss >= sels]
+        if not drop: continue
+        decls = re.findall(r"[^;]*;|[^;]+$", css[b0:b1])
+        kept = [d for d in decls if ":" not in d or d.split(":", 1)[0].strip() not in drop]
+        body = "".join(kept)
+        css = css[:b0] + (body if body.strip() else "\n  ") + css[b1:]
+        print(f"  uklonjeno u {path.rsplit('/',1)[-1]} {media}: {prelude} [{', '.join(sorted(drop))}]")
+    open(path, "w").write(css)
+    for m in manual: print(f"  RUČNO (lista selektora): {m}")
+
+def bump_in_media(path, sel, media):
+    """Pojačava selektor za dva stepena samo unutar datog upita u zajedničkom fajlu."""
+    css = open(path).read()
+    for med, prelude, b0, b1 in sorted(rules_with_pos(css), key=lambda r: -r[2]):
+        if re.sub(r"\s+", "", med) != re.sub(r"\s+", "", media) or sel not in split_selectors(prelude): continue
+        p0 = css.rfind(prelude, 0, b0)
+        new_prelude = ", ".join(bump(bump(x)) if x == sel else x for x in split_selectors(prelude))
+        css = css[:p0] + new_prelude + css[p0 + len(prelude):]
+    open(path, "w").write(css)
+    print(f"  pojačano u upitu {media}: {sel}")
+
+if FIX and (to_fix or dead):
     done = set()
-    for path, sel in to_fix:
-        if (path, sel) in done: continue
-        done.add((path, sel))
-        print(f"  pojačano ({apply(path, sel)}×) u {path.rsplit('/',1)[-1]}: {sel}")
+    for kind, path, sel, media in to_fix:
+        if (kind, path, sel, media) in done: continue
+        done.add((kind, path, sel, media))
+        if kind == "bump": print(f"  pojačano ({apply(path, sel)}×) u {path.rsplit('/',1)[-1]}: {sel}")
+        else: bump_in_media(path, sel, media)
+    by_path = {}
+    for (path, rid), props in dead.items(): by_path.setdefault(path, {})[rid] = props
+    for path, items in by_path.items(): remove_dead(path, items)
     sys.exit(3)

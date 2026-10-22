@@ -26,7 +26,7 @@ import {
   baslacSystemLines,
   type BaslacMediaAvailability,
 } from "./baslacBrandData";
-import styles from "./BaslacBrandPage.module.css";
+import styles from "./BaslacBrandPage.styles";
 import { productCanonicalHref } from "@/lib/product-families";
 
 export function BaslacBrandPage({

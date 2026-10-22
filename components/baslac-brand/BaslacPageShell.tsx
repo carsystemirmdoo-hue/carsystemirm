@@ -2,7 +2,7 @@
 
 import type { ReactNode } from "react";
 import { usePrefersReducedMotion } from "@/components/motion/usePrefersReducedMotion";
-import styles from "./BaslacBrandPage.module.css";
+import styles from "./BaslacBrandPage.styles";
 
 export function BaslacPageShell({ children }: { children: ReactNode }) {
   const reducedMotion = usePrefersReducedMotion();

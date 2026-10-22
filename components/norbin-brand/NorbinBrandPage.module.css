@@ -468,8 +468,8 @@
   height: 3.4rem;
 }
 
-.ratioCrossing::before,
-.ratioCrossing::after {
+.ratioCrossing.ratioCrossing::before,
+.ratioCrossing.ratioCrossing::after {
   position: absolute;
   top: 50%;
   height: 2px;
@@ -479,13 +479,13 @@
   transition: transform 480ms var(--nb-ease);
 }
 
-.ratioCrossing::before {
+.ratioCrossing.ratioCrossing::before {
   left: 0;
   width: 44%;
   background: var(--nb-blue);
 }
 
-.ratioCrossing::after {
+.ratioCrossing.ratioCrossing::after {
   right: 0;
   left: 56%;
   width: 44%;
@@ -517,8 +517,8 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .ratioCrossing::before,
-  .ratioCrossing::after {
+  .ratioCrossing.ratioCrossing::before,
+  .ratioCrossing.ratioCrossing::after {
     transition: none;
     transform: scaleX(1);
   }
@@ -876,83 +876,6 @@
   text-transform: uppercase;
 }
 
-/* ===================== RESPONSIVE ===================== */
-
-@media (max-width: 64rem) {
-  .heroGrid {
-    grid-template-columns: 1fr;
-  }
-
-  .heroCrossing {
-    order: -1;
-    aspect-ratio: 4 / 5;
-  }
-
-  .programGrid,
-  .programLayout,
-  .originGrid {
-    grid-template-columns: 1fr;
-  }
-
-  .programRule {
-    height: 1px;
-  }
-
-  .codeRow {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  .ratioRow {
-    grid-template-columns: 1fr;
-    gap: 0.6rem;
-    text-align: center;
-  }
-
-  .ratioPartners {
-    justify-items: center;
-    text-align: center;
-  }
-
-  .ratioPartners li {
-    justify-content: center;
-  }
-
-  .ratioCrossing {
-    height: 2.6rem;
-  }
-
-  .processSpine {
-    grid-template-columns: 1fr;
-  }
-
-  .stockedGrid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  .stockedList a {
-    grid-template-columns: 6rem minmax(0, 1fr);
-  }
-
-  .stockedList small {
-    grid-column: 2;
-  }
-}
-
-@media (max-width: 30rem) {
-  .heroFacts {
-    overflow-x: auto;
-  }
-
-  .heroActions {
-    flex-direction: column;
-    align-items: stretch;
-  }
-
-  .codeRow {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-}
-
 /* ---------------------------------------------------------------- tamna tema */
 
 /*
@@ -971,23 +894,6 @@
   /* Dugme zadržava Norbin ispunu da bela slova imaju kontrast. */
   --nb-button: #0076a9;
   --brand-nav-accent: var(--nb-blue-text);
-}
-
-/* =========================================================================
- * Sistem A — Norbin (data-ds="a" na <html>)
- *
- * Zadržano kao karakter brenda: ukrštene trake (plava #0082BB, zlatna),
- * tamni blok porekla, linije odnosa mešanja. Menjaju se oznake, dugmad,
- * čipovi, kartice i veličine teksta za čitanje.
- * ========================================================================= */
-
-/* Na tablet širinama ilustracija ide iznad naslova; ograničena visina drži
-   naslov u prvom ekranu (ranije je 4:5 zauzimala ceo prvi ekran na 1024 px). */
-@media (min-width: 48rem) and (max-width: 64rem) {
-  .heroCrossing {
-    height: clamp(15rem, 34vh, 22rem);
-    aspect-ratio: auto;
-  }
 }
 
 :global([data-ds="a"]) .norbinPage .sectionKicker,
@@ -1527,78 +1433,4 @@
 
 .originGrid .originMedia img {
   object-fit: cover;
-}
-
-@media (max-width: 64rem) {
-  /* Telefon/tablet: isečak 4 : 3 desno-dole — lice, ruka sa krpom i
-     automobil, uz žutu traku koja ulazi u kadar. */
-  .heroBanner {
-    aspect-ratio: 4 / 3;
-    max-height: none;
-  }
-
-  .heroBanner img {
-    object-position: 74% 82%;
-  }
-
-  .programLayout .systemPanel {
-    position: static;
-    grid-template-rows: 12rem auto auto;
-    min-height: 0;
-  }
-
-  .stockedList button {
-    grid-template-columns: 6rem minmax(0, 1fr);
-  }
-
-  .stockedList button small {
-    grid-column: 2;
-  }
-}
-
-@media (max-width: 40rem) {
-  /* Telefon: uža zamrznuta prva kolona (oznake se prelamaju) i kolone
-     proizvoda od 8,5 rem — tabela se skroluje horizontalno, ugaona ćelija i
-     oznake ostaju vidljive. */
-  .techTableBlock {
-    --tech-label: 7.5rem;
-    --tech-col-min: 8.5rem;
-  }
-
-  .techMatrix tbody th {
-    white-space: normal;
-  }
-
-  .techMatrix th,
-  .techMatrix td {
-    padding: 0.55rem 0.6rem;
-  }
-
-  .docTable thead {
-    display: none;
-  }
-
-  .docTable,
-  .docTable tbody,
-  .docTable tr,
-  .docTable th,
-  .docTable td {
-    display: block;
-  }
-
-  .docTable tbody tr {
-    padding: 0.75rem 0.9rem;
-    border-bottom: 1px solid var(--nb-line);
-  }
-
-  .docTable tbody th,
-  .docTable tbody td {
-    padding: 0.2rem 0;
-    border: 0;
-  }
-
-  .docTable tbody td {
-    display: inline-block;
-    margin-right: 1.25rem;
-  }
 }

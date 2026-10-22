@@ -2,6 +2,8 @@ import catalog from "@/data/rm-catalog-products.generated.json";
 import mixingBases from "@/data/rm-sync/mixing-bases.json";
 import { RM_CRYSTAL_BASE_SLUG, RM_PASTE_SLUG } from "@/lib/rm-mixing-bases";
 import { rmDisplayName } from "@/lib/rm-catalog-products";
+import { getRmFamilyConfig, rmFamilyVolumes } from "@/lib/rm-family-bases";
+import { packSlug } from "@/components/product/variantPacks.mjs";
 
 /**
  * Navigacija R-M linije (2026-10-20): prezentacija sistema i kartice za IZBOR artikala
@@ -33,6 +35,11 @@ export type RmSystemLink = {
   note: string;
   /** Kartica sa izborom baza po zapremini. */
   selection?: boolean;
+  /**
+   * Grupa u bloku (2026-10-21): izbor baza, boje i baze linije, pomoćni proizvodi (aditivi,
+   * blenderi) i prezentacija sistema — da korisnik vidi šta bira.
+   */
+  group: "selection" | "products" | "auxiliary" | "presentation";
 };
 
 export type RmSystemNavigation = {
@@ -62,24 +69,44 @@ export function rmSelectionPackSummary(slug: string) {
     .join(" · ");
 }
 
+// „vodorazrediva bazna boja“ je boja, ne razređivač: traži se reč razređivač/učvršćivač.
+const AUXILIARY = /aditiv|blender|razre(?:đ|dj)iva[čc]|u[čc]vr[šs][ćc]iva[čc]|stapanj|aktivator/i;
+const COMMERCIAL_VEHICLES = /komercijalna vozila/i;
+
 function lineLinks(line: string): RmSystemLink[] {
   return entries
     .filter((entry) => entry.line === line)
     .sort((a, b) => Number(b.kind === "system") - Number(a.kind === "system"))
     .map((entry) => {
-      const kindNote = entry.kind === "system" ? "prezentacija sistema" : entry.content.productType;
-      return {
-        slug: entry.slug,
-        href: `/proizvodi/${entry.slug}`,
-        label: rmDisplayName(entry),
-        note: entry.code && entry.kind !== "system" ? `${entry.code} · ${kindNote}` : kindNote,
-      };
+      const type = entry.content.productType;
+      const group: RmSystemLink["group"] =
+        entry.kind === "system" ? "presentation" : AUXILIARY.test(type) ? "auxiliary" : "products";
+      // CV izvedbe su druga formulacija za komercijalna vozila, ne zamena za baze sistema.
+      const note = COMMERCIAL_VEHICLES.test(type)
+        ? `${entry.code} · druga formulacija, za komercijalna vozila (CV)`
+        : entry.code && entry.kind !== "system"
+          ? `${entry.code} · ${type}`
+          : type;
+      return { slug: entry.slug, href: `/proizvodi/${entry.slug}`, label: rmDisplayName(entry), note, group };
     });
 }
 
-function selectionLink(slug: string, label: string, note: string): RmSystemLink {
-  const summary = rmSelectionPackSummary(slug);
-  return { slug, href: `/proizvodi/${slug}`, label, note: summary ? `${note} · ${summary}` : note, selection: true };
+/** Ulaz u izbor baza po zapremini: „R-M DIAMONT — 1 L · 15 baza“ vodi direktno na tu zapreminu. */
+function selectionLinks(slug: string, label: string): RmSystemLink[] {
+  const config = getRmFamilyConfig(slug);
+  const volumes = config ? rmFamilyVolumes(config) : [];
+  if (!config?.system || volumes.length === 0) {
+    return [{ slug, href: `/proizvodi/${slug}`, label, note: "linija nije potvrđena · izbor po oznaci sa etikete", selection: true, group: "selection" }];
+  }
+  return volumes.map((volume, index) => ({
+    // Prva kartica nosi slug zbog pripadnosti bloku; sve vode na istu porodicu sa izabranom zapreminom.
+    slug: index === 0 ? slug : `${slug}@${volume.label}`,
+    href: `/proizvodi/${slug}?pakovanje=${packSlug(volume.label)}`,
+    label: `${config.seriesName} — ${volume.label}`,
+    note: `${volume.count} ${volume.count === 1 ? "baza" : volume.count < 5 ? "baze" : "baza"}`,
+    selection: true,
+    group: "selection" as const,
+  }));
 }
 
 function buildNavigations(): RmSystemNavigation[] {
@@ -87,11 +114,10 @@ function buildNavigations(): RmSystemNavigation[] {
     {
       line: "DIAMONT",
       title: "R-M DIAMONT u katalogu",
-      note: "Izbor baza je na kartici „DIAMONT bazna boja“; ostale kartice su posebni proizvodi linije.",
       links: [
-        selectionLink("rm-diamont-bazna-boja", "R-M DIAMONT bazna boja", "izbor baza po zapremini"),
-        selectionLink(RM_CRYSTAL_BASE_SLUG, "R-M DIAMONT CRYSTAL BASE", "efektne baze"),
-        selectionLink(RM_PASTE_SLUG, "R-M paste za mešanje", "po oznaci sa etikete, linija nije potvrđena"),
+        ...selectionLinks("rm-diamont-bazna-boja", "R-M DIAMONT bazna boja"),
+        ...selectionLinks(RM_CRYSTAL_BASE_SLUG, "R-M DIAMONT CRYSTAL BASE"),
+        ...selectionLinks(RM_PASTE_SLUG, "R-M paste za mešanje"),
         ...lineLinks("DIAMONT"),
       ],
     },

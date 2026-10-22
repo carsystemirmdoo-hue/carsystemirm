@@ -38,10 +38,12 @@ const search = new Map(
   (getProductSearchIndex().records as { id: string; kind: string; href: string; productCode?: string }[]).map((record) => [record.id, record]),
 );
 function listingEntityOf(slug: string) {
-  const canonical = listing.canonical.find((entity) => entity.id === slug);
+  // 2026-10-21: podeljene serije su u `anchors` (pregled ima kartice po zapremini).
+  const all = [...listing.canonical, ...listing.anchors];
+  const canonical = all.find((entity) => entity.id === slug);
   if (canonical) return canonical;
   const variant = listing.variants.find((entity) => entity.id === slug)!;
-  return expandVariant(variant, listing.canonical.find((entity) => entity.id === `family:${variant.familySlug}`)!);
+  return expandVariant(variant, all.find((entity) => entity.id === `family:${variant.familySlug}`)!);
 }
 const metaDescription = (slug: string) => {
   const product = bySlug(slug);
@@ -152,7 +154,7 @@ test("3b. katalog klijent iz zapisa pretrage vraća istu adresu varijante", asyn
   assert.match(source, /variantKey: variantKeyFromHref\(record\.href\)/);
   for (const slug of BASLAC_SYSTEMS) {
     const record = search.get(slug)!;
-    const family = listing.canonical.find((entity) => entity.id === `family:${getFamilyForProduct(bySlug(slug))!.slug}`)!;
+    const family = [...listing.canonical, ...listing.anchors].find((entity) => entity.id === `family:${getFamilyForProduct(bySlug(slug))!.slug}`)!;
     const key = new URL(record.href, "https://katalog.local").searchParams.get("varijanta")!;
     const rebuilt = expandVariant({ ...listing.variants.find((variant) => variant.id === slug)!, productCode: "", variantKey: key }, family);
     assert.equal(rebuilt.href, record.href);

@@ -18,7 +18,7 @@ export const metadata: Metadata = pageMetadata({
 });
 
 export default function KatalogPage() {
-  const { canonical } = getCatalogListingData();
+  const { canonical, anchors } = getCatalogListingData();
   return (
     <>
       <script
@@ -34,6 +34,7 @@ export default function KatalogPage() {
       />
       <CatalogPage
         canonical={withProductFitModel(canonical)}
+        anchors={withProductFitModel(anchors)}
         brands={getAllCarsystemBrands()}
         programs={programGroups}
         phases={refinishPhases}

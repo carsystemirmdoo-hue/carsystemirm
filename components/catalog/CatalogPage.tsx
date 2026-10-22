@@ -20,11 +20,14 @@ import styles from "./CatalogPage.module.css";
 
 export function CatalogPage({
   canonical,
+  anchors = [],
   brands,
   programs,
   phases,
 }: {
   canonical: CatalogListingEntity[];
+  /** Porodice zamenjene karticama po zapremini — sidro za varijante pretrage. */
+  anchors?: CatalogListingEntity[];
   brands: CarsystemBrand[];
   programs: ProgramGroup[];
   phases: RefinishPhase[];
@@ -56,6 +59,7 @@ export function CatalogPage({
         >
           <CatalogExplorer
             canonical={canonical}
+            anchors={anchors}
             brands={brands}
             programs={programs}
             phases={phases}

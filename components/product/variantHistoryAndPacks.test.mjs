@@ -8,9 +8,11 @@ const read = (path) => readFile(new URL(path, import.meta.url), "utf8");
 test("izbor varijante ne dodaje korak istorije (jedan „Nazad“ vraća na katalog)", async () => {
   const options = await read("./ProductVariantOptions.tsx");
   assert.match(options, /selectVariant\(view, false\)/);
-  const baslac = await read("../baslac-brand/BaslacSystemPdp.tsx");
-  assert.match(baslac, /\(code: string, push = false\)/);
-  assert.doesNotMatch(baslac, /selectVariant\([^)]*,\s*true\)/);
+  // Zajednički izbor porodice (Baslac i R-M, 2026-10-21): samo zamena adrese, i u kontekst modu.
+  const family = await read("./family/FamilyBasePdp.tsx");
+  assert.doesNotMatch(family, /pushState/);
+  assert.match(family, /variantContext\.selectVariant\(view, false\)/);
+  assert.doesNotMatch(family, /selectVariant\([^)]*,\s*true\)/);
   const packs = await read("./useVariantPackChoice.ts");
   assert.doesNotMatch(packs, /pushState/);
 });

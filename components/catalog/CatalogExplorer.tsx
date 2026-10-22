@@ -363,6 +363,7 @@ function buildCatalogSearch(filters: CatalogUrlFilters, currentSearch = "") {
 
 export function CatalogExplorer({
   canonical,
+  anchors = [],
   brands,
   programs,
   phases,
@@ -370,6 +371,8 @@ export function CatalogExplorer({
 }: {
   /** Family + standalone entities — what browse lists. */
   canonical: CatalogListingEntity[];
+  /** Porodice zamenjene karticama po zapremini (2026-10-21): sidro za varijante pretrage. */
+  anchors?: CatalogListingEntity[];
   /**
    * Blok „Glavne kategorije“ (R-M stranice po tehničkoj nameni). Prikazuje se
    * samo dok kategorija nije izabrana i dok filteri ne isključuju R-M — inače
@@ -383,8 +386,8 @@ export function CatalogExplorer({
   /** Facets are derived from the browse population, not from every variant. */
   const facetSource = canonical;
   const familyById = useMemo(
-    () => new Map(canonical.filter((e) => e.kind === "family").map((e) => [e.id, e])),
-    [canonical],
+    () => new Map([...canonical, ...anchors].filter((e) => e.kind === "family").map((e) => [e.id, e])),
+    [anchors, canonical],
   );
   const canonicalById = useMemo(
     () => new Map(canonical.map((entity) => [entity.id, entity])),

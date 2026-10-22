@@ -111,8 +111,9 @@ export const baslacSystemFamilies: BaslacFamilyDefinition[] = [
     seoTitle: "Baslac Line 30 CV za komercijalna vozila | Carsystem i R-M",
     seoDescription:
       "Baslac Line 30 CV je direct-gloss program za kamione, autobuse i druge velike transportne površine.",
+    // 2026-10-21: zašto je CV odvojen od Line 30 — zaseban sistem, ne druga primena istih baza.
     intro:
-      "Direct-gloss program za velike transportne površine — kamione, autobuse i prikolice.",
+      "Direct-gloss program za velike transportne površine — kamione, autobuse i prikolice. Zaseban sistem, ne varijanta Topcoat 30: ima svoju mešnu komponentu 30-S01 i CV učvršćivače (51-515, 51-520, 51-530). U našoj ponudi je potvrđena komponenta 30-S01; baze Topcoat 30 se ne predstavljaju kao zamenljive sa CV sistemom.",
     lineDocument: {
       href: "/documents/products/baslac/30_Line_CV.pdf",
       title: "30 Line CV Topcoat",

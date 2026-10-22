@@ -13,7 +13,7 @@ import {
   PUTTY_MATERIAL_TRACE_STAGE_ASPECT,
 } from "@/lib/putty-material-trace";
 import fit from "./ProductImageFit.generated.module.css";
-import styles from "./ProductDetailExperience.module.css";
+import styles from "./ProductDetailExperience.styles";
 
 /**
  * The PDP product stage.

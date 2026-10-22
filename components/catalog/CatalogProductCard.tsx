@@ -11,7 +11,7 @@ import type { CatalogListingEntity } from "@/lib/catalog-listing";
 import { ProductVisualSurface } from "@/components/product/ProductVisualSurface";
 import { getBrandCardColor } from "@/lib/brand-card-colors";
 import type { CSSProperties, Ref } from "react";
-import styles from "./CatalogPage.module.css";
+import styles from "./CatalogPage.styles";
 import { variantCountLabel } from "@/lib/sr-plural";
 
 export function CatalogProductCard({

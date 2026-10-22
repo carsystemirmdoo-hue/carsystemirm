@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { getRmSystemNavigation, type RmSystemLink } from "@/lib/rm-system-navigation";
-import styles from "./ProductDetailExperience.module.css";
+import styles from "./ProductDetailExperience.styles";
 
 const GROUP_TITLES: Record<Exclude<RmSystemLink["group"], "presentation">, string> = {
   selection: "Izbor baza po pakovanju",

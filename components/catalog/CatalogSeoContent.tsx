@@ -9,7 +9,7 @@ import type {
 } from "@/lib/carsystem-data";
 import type { CatalogListingEntity } from "@/lib/catalog-listing";
 import { seoCategoryLandings } from "@/lib/seo/category-landings";
-import styles from "./CatalogPage.module.css";
+import styles from "./CatalogPage.styles";
 
 export function CatalogHero({
   brandCount,

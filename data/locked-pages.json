@@ -1,0 +1,4 @@
+{
+  "_comment": "Evidencija zaključanih stranica (2026-10-22). Stranice bira VLASNIK; agent ih ne dodaje sam i ne menja dostupnost posetiocima. Referentni snimci su van javnog repozitorijuma (LOCK_SNAPSHOT_DIR, podrazumevano ~/Carsystem/zakljucane-stranice); ovde su samo putanje i sha256 otisci. Vidi docs/ZAKLJUCANE_STRANICE.md.",
+  "pages": []
+}

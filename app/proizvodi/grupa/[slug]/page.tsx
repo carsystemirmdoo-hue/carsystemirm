@@ -27,7 +27,7 @@ import { buildProductFamilyMetadata } from "@/lib/seo/metadata-builders";
 import { BaslacSystemPdp } from "@/components/baslac-brand/BaslacSystemPdp";
 import { ProductDetailPage } from "@/components/product/ProductDetailPage";
 import { baslacSystemFamilies } from "@/lib/baslac-catalog-products";
-import styles from "@/components/catalog/CatalogPage.module.css";
+import styles from "@/components/catalog/CatalogPage.styles";
 
 type FamilyRouteProps = {
   params: Promise<{ slug: string }>;

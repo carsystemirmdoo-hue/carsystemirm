@@ -7,7 +7,7 @@ import type {
   ProductImageAsset,
 } from "@/lib/carsystem-data";
 import { ProductVisualSurface } from "@/components/product/ProductVisualSurface";
-import catalogStyles from "@/components/catalog/CatalogPage.module.css";
+import catalogStyles from "@/components/catalog/CatalogPage.styles";
 import styles from "./ProductSurfaceRevealShowcase.module.css";
 
 export type ProductSurfaceShowcaseCard = {

@@ -16,7 +16,7 @@ import type {
   RefinishPhase,
 } from "@/lib/carsystem-data";
 import type { CatalogListingEntity } from "@/lib/catalog-listing";
-import styles from "./CatalogPage.module.css";
+import styles from "./CatalogPage.styles";
 
 export function CatalogPage({
   canonical,

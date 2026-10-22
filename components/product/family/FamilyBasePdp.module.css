@@ -37,23 +37,23 @@
   --fam-accent-ink: var(--ds-c-on-accent);
 }
 
-/* Raspored prati postojeći Cosmos variant PDP: velika limenka levo,
-   sve varijante odmah desno, bez međustranice. */
+/* Raspored (kolone, sticky fotografija, broj kolona kartica) je u
+   FamilyBasePdp.desktop.module.css i FamilyBasePdp.mobile.module.css (2026-10-22),
+   da se mobilni raspored uređuje nezavisno. Ovde ostaje zajednički izgled. */
 .pdp {
   display: grid;
-  grid-template-columns: minmax(0, 22rem) minmax(0, 1fr);
   align-items: start;
   gap: clamp(1.5rem, 4vw, 3.5rem);
 }
 
-.stageColumn { position: sticky; top: 6rem; display: grid; gap: 0.75rem; }
+.stageColumn { display: grid; gap: 0.75rem; }
 
 .stage {
-  position: relative; display: grid; min-height: 26rem; place-items: center;
+  position: relative; display: grid; place-items: center;
   padding: 1.5rem; border: 1px solid var(--fam-border);
   background: var(--fam-surface-strong);
 }
-.stage img { width: auto; max-width: 100%; max-height: 24rem; height: auto; object-fit: contain; }
+.stage img { width: auto; max-width: 100%; height: auto; object-fit: contain; }
 .stage[data-pending] { border-style: dashed; }
 .lineExample { display: grid; gap: 0.75rem; justify-items: center; margin: 0; }
 .lineExample figcaption { max-width: 18rem; color: var(--fam-muted); font-size: 0.78rem; line-height: 1.45; text-align: center; }
@@ -76,8 +76,7 @@
 .kicker { margin: 0; color: var(--fam-muted); font-family: var(--font-technical), monospace; font-size: var(--ds-font-label); letter-spacing: var(--ds-tracking-label); text-transform: uppercase; }
 .intro { margin: 0; max-width: 46rem; color: var(--fam-muted); font-size: 0.95rem; line-height: 1.6; }
 
-.filters { display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 1fr); gap: 0.75rem; }
-@media (max-width: 48rem) { .filters { grid-template-columns: minmax(0, 1fr); } }
+.filters { display: grid; gap: 0.75rem; }
 .field { display: grid; min-width: 0; gap: 0.3rem; }
 .field label { color: var(--fam-muted); font-family: var(--font-technical), monospace; font-size: var(--ds-font-label); letter-spacing: var(--ds-tracking-label); text-transform: uppercase; }
 .field input, .field select {
@@ -88,7 +87,7 @@
 .count { margin: 0; color: var(--fam-muted); font-family: var(--font-technical), monospace; font-size: var(--ds-font-label); }
 
 .grid {
-  display: grid; max-height: 30rem; grid-template-columns: repeat(auto-fill, minmax(min(100%, 14rem), 1fr));
+  display: grid;
   gap: 0.5rem; margin: 0; padding: 0.15rem; overflow-y: auto; list-style: none; overscroll-behavior: contain;
 }
 .grid > li { position: relative; min-width: 0; }
@@ -185,15 +184,6 @@
 }
 .quickAddActions { display: flex; gap: 0.5rem; }
 
-@media (max-width: 60rem) {
-  .pdp { grid-template-columns: minmax(0, 1fr); }
-  .stageColumn { position: static; }
-  .stage { min-height: 18rem; }
-  .stage img { max-height: 16rem; }
-  .grid { max-height: none; grid-template-columns: repeat(auto-fill, minmax(min(100%, 10.5rem), 1fr)); }
-  /* Quick Add traka ne sme da prekrije poslednje kartice ni CTA. */
-  .pickerColumn { padding-bottom: 1rem; }
-}
 
 /* --- Zaglavlje PDP-a ---------------------------------------------------- */
 .pageHeader { grid-column: 1 / -1; max-width: 52rem; margin-bottom: 0.5rem; }
@@ -209,10 +199,7 @@
 .lead { margin: 0; color: var(--fam-muted); font-size: 1rem; line-height: 1.6; }
 
 /* --- Kartice baza ------------------------------------------------------- */
-.grid { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0.6rem; }
-@media (max-width: 82rem) { .grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
-@media (max-width: 60rem) { .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-@media (max-width: 26rem) { .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.grid { gap: 0.6rem; }
 
 .card {
   position: relative; display: grid; min-height: 6.5rem; align-content: start;
@@ -502,9 +489,6 @@
 .card { padding-right: 0.7rem; }
 .cardBody strong { padding-right: 1.6rem; }
 .activeTick { top: 0.55rem; bottom: auto; }
-/* Telefon: uske kartice u dve kolone — red pakovanja i završnice se prelama
-   umesto da se skraćuje („Trans…“); sve kartice u mreži ostaju iste visine. */
-@media (max-width: 40rem) { .cardBody small { white-space: normal; overflow: visible; } }
 
 /* Zapremine (2026-10-20): vidljive kartice umesto padajućeg menija, sa brojem
    baza po zapremini. Isti oblik kao izbor pakovanja na R-M porodicama. */

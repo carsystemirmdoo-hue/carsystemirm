@@ -1,0 +1,371 @@
+/*
+ * MOBILNI raspored za ProductDetailExperience (do 1023px). Uređuje se nezavisno; zajednički izgled je u
+ * ProductDetailExperience.module.css, a komponente koriste ProductDetailExperience.styles.ts (2026-10-22).
+ *
+ * Prva klasa svakog selektora je udvostručena (specifičnost +1): raspored ne zavisi od
+ * redosleda učitavanja CSS delova (scripts/css/bump-responsive.py).
+ */
+
+@media (max-width: 1023px) {
+  .stickyStage.stickyStage[data-product-stage-spray="true"] {
+    /*
+     * Samo skala se menja po breakpointu. Optička osa je procenat stage-a i
+     * skalira se sama; raniji `-5px` je ovde ponovo uvodio pomeraj ulevo i
+     * gazio izmerenu kalibraciju.
+     */
+    --product-stage-spray-scale: 1.05;
+  }
+}
+
+@media (max-width: 1023px) {
+  .heroTitle.heroTitle {
+    max-width: 14ch;
+    font-size: clamp(3rem, 6.5vw, 5rem);
+  }
+
+  .technology.technology {
+    grid-template-columns: minmax(0, 1fr);
+    align-items: start;
+  }
+
+  .technologyFacts.technologyFacts {
+    max-width: 42rem;
+  }
+
+  .finalCta.finalCta {
+    grid-template-columns: minmax(0, 1fr);
+    align-items: start;
+  }
+}
+
+@media (max-width: 55.99rem) {
+  .narrativeGrid.narrativeGrid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: clamp(2.5rem, 7vw, 4rem);
+  }
+
+  .stickyRail.stickyRail {
+    position: static;
+    width: min(100%, 48rem);
+  }
+
+  .hero.hero {
+    min-height: auto;
+  }
+
+  .heroCopy.heroCopy {
+    max-width: 48rem;
+  }
+}
+
+@media (max-width: 47.99rem) {
+  .pageMain.pageMain {
+    width: calc(100% - (var(--ds-gutter, clamp(20px, 4vw, 56px)) * 2));
+    padding-top: 1rem;
+  }
+
+  .breadcrumb.breadcrumb {
+    overflow: hidden;
+    margin-bottom: 1.2rem;
+    font-size: 0.7rem;
+  }
+
+  .breadcrumb.breadcrumb ol {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    padding-bottom: 0.3rem;
+    scrollbar-width: none;
+  }
+
+  .breadcrumb.breadcrumb ol::-webkit-scrollbar {
+    display: none;
+  }
+
+  .breadcrumb.breadcrumb li {
+    flex: 0 0 auto;
+  }
+
+  .breadcrumb.breadcrumb li:last-child {
+    max-width: 14rem;
+  }
+
+  /*
+   * One column: the stage is no longer competing with a narrative column for
+   * width, so a squarer frame keeps the product large without pushing the copy
+   * a full screen down. The envelope ladder is unchanged — it is a percentage
+   * of the stage, so it scales with the phone instead of needing px ceilings.
+   */
+  .stickyStage.stickyStage {
+    --product-stage-aspect: 1 / 1;
+    --product-stage-max-height: 62svh;
+  }
+
+  .stickyStage.stickyStage[data-product-stage-spray="true"] {
+    --product-stage-spray-scale: 1.02;
+  }
+
+  .galleryThumbs.galleryThumbs {
+    gap: 8px;
+  }
+
+  .galleryThumb.galleryThumb {
+    min-height: 86px;
+  }
+
+  .heroCopy.heroCopy {
+    padding: 0;
+  }
+
+  .heroTaxonomy.heroTaxonomy {
+    margin-bottom: 1.6rem;
+  }
+
+  .heroTitle.heroTitle {
+    max-width: 13ch;
+    font-size: clamp(2.8rem, 13.5vw, 4.25rem);
+    line-height: 0.92;
+  }
+
+  .heroSubtype.heroSubtype {
+    font-size: 1rem;
+  }
+
+  .heroReference.heroReference {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .heroReference.heroReference > span + span {
+    border-top: 1px solid var(--detail-border);
+    border-left: 0;
+    padding-left: 0;
+  }
+
+  .heroActions.heroActions > a {
+    width: 100%;
+  }
+
+  .quickFacts.quickFacts {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    margin-top: 4rem;
+  }
+
+  .quickFact.quickFact:nth-child(odd) {
+    border-left: 0;
+  }
+
+  .quickFact.quickFact:nth-child(n + 3) {
+    border-top: 1px solid var(--detail-border);
+  }
+
+  .informationAccordion.informationAccordion {
+    margin-top: 3rem;
+  }
+
+  .accordionButton.accordionButton {
+    min-height: 4.6rem;
+  }
+
+  .accordionPanelContent.accordionPanelContent {
+    padding-bottom: 2rem;
+  }
+
+  .accordionProcessList.accordionProcessList {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .accordionProcessList.accordionProcessList li + li {
+    border-top: 1px solid var(--detail-border);
+    border-left: 0;
+  }
+
+  .accordionBenefitList.accordionBenefitList li,
+  .accordionFactList.accordionFactList > div,
+  .accordionSpecList.accordionSpecList > div {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0.45rem;
+  }
+
+  .accordionDocumentList.accordionDocumentList li {
+    grid-template-columns: 5rem minmax(0, 1fr);
+  }
+
+  .accordionDocumentList.accordionDocumentList a,
+  .accordionDocumentStatus.accordionDocumentStatus {
+    grid-column: 2;
+    justify-self: start;
+  }
+
+  .optionSection.optionSection {
+    margin-top: 1.65rem;
+  }
+
+  .variantOptionList.variantOptionList {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  /* +1 više od zajedničkog pravila za boje (koje je pojačano jer pobeđuje opšte mobilno). */
+  .variantOptionList.variantOptionList.variantOptionList[data-option-kind="color"] {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .variantOptionControl.variantOptionControl {
+    min-height: 4.35rem;
+    padding: 0.6rem;
+  }
+
+  .joinedProductRow.joinedProductRow {
+    grid-auto-columns: minmax(220px, 72vw);
+  }
+
+  .joinedProductCard.joinedProductCard {
+    min-width: 0;
+  }
+
+  .section.section,
+  .processSection.processSection,
+  .technology.technology {
+    margin-top: 5rem;
+  }
+
+  .sectionHeading.sectionHeading h2,
+  .technologyCopy.technologyCopy h2 {
+    font-size: clamp(2rem, 10vw, 3rem);
+  }
+
+  .variantTableFrame.variantTableFrame {
+    overflow: visible;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+  }
+
+  .variantTable.variantTable,
+  .variantTable.variantTable tbody,
+  .variantTable.variantTable tr,
+  .variantTable.variantTable td {
+    display: block;
+    width: 100%;
+  }
+
+  .variantTable.variantTable thead {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+
+  .variantTable.variantTable tbody {
+    display: grid;
+    gap: 0.75rem;
+  }
+
+  .variantTable.variantTable tr {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    overflow: hidden;
+    border: 1px solid var(--detail-border-strong);
+    border-radius: 0.7rem;
+    background: var(--detail-surface);
+  }
+
+  .variantTable.variantTable td {
+    display: grid;
+    gap: 0.3rem;
+    border-top: 0;
+    padding: 0.9rem;
+  }
+
+  .variantTable.variantTable td:nth-child(even) {
+    border-left: 1px solid var(--detail-border);
+  }
+
+  .variantTable.variantTable td:nth-child(n + 3) {
+    border-top: 1px solid var(--detail-border);
+  }
+
+  .variantTable.variantTable td::before {
+    color: var(--detail-faint);
+    content: attr(data-label);
+    font-family: var(--font-technical), var(--font-geist-mono), monospace;
+    font-size: 0.58rem;
+    font-weight: 550;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .benefitList.benefitList,
+  .specList.specList,
+  .relationshipGrid.relationshipGrid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .benefitList.benefitList li,
+  .benefitList.benefitList.benefitList li:nth-child(even) {
+    border-left: 0;
+    padding: 1.5rem 0;
+  }
+
+  .processSection.processSection {
+    padding: 1.5rem;
+  }
+
+  .processStages.processStages {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 1.3rem;
+  }
+
+  .processStages.processStages::before {
+    top: 1.35rem;
+    right: auto;
+    bottom: 1.35rem;
+    left: 1.35rem;
+    width: 1px;
+    height: auto;
+  }
+
+  .processStages.processStages li {
+    grid-template-columns: 2.7rem minmax(0, 1fr);
+    justify-items: start;
+    gap: 1rem;
+    align-items: center;
+    padding: 0;
+    text-align: left;
+  }
+
+  .processStages.processStages li > div {
+    text-align: left;
+  }
+
+  .technologyFacts.technologyFacts > div,
+  .specList.specList > div,
+  .specList.specList.specList > div:nth-child(even) {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0.45rem;
+    border-left: 0;
+    padding: 1.1rem 0;
+  }
+
+  .documentRow.documentRow {
+    grid-template-columns: 4.2rem minmax(0, 1fr);
+    gap: 0.85rem 1rem;
+  }
+
+  .documentAvailability.documentAvailability {
+    grid-column: 2;
+  }
+
+  .documentAction.documentAction {
+    grid-column: 1 / -1;
+  }
+
+  .finalCta.finalCta {
+    padding: 1.5rem;
+  }
+
+  .finalCtaActions.finalCtaActions > a {
+    width: 100%;
+  }
+}

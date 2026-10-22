@@ -21,7 +21,7 @@ import {
   seoCategoryLandings,
 } from "@/lib/seo/category-landings";
 import { buildCategoryMetadata } from "@/lib/seo/metadata-builders";
-import styles from "@/components/catalog/CatalogPage.module.css";
+import styles from "@/components/catalog/CatalogPage.styles";
 
 type CategoryRouteProps = {
   params: Promise<{ slug: string }>;

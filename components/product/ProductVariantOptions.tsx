@@ -13,7 +13,7 @@ import type {
   ProductVariantOption,
   ProductVariantSelectorSection,
 } from "@/types/product-detail";
-import styles from "./ProductDetailExperience.module.css";
+import styles from "./ProductDetailExperience.styles";
 import { CustomerStatus } from "@/components/customer-buy/CustomerStatus";
 
 type FamilyStyle = CSSProperties & {

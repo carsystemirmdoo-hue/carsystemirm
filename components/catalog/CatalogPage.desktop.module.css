@@ -1,0 +1,140 @@
+/*
+ * DESKTOP raspored za CatalogPage (od 901px). Uređuje se nezavisno; zajednički izgled je u
+ * CatalogPage.module.css, a komponente koriste CatalogPage.styles.ts (2026-10-22).
+ *
+ * Prva klasa svakog selektora je udvostručena (specifičnost +1): raspored ne zavisi od
+ * redosleda učitavanja CSS delova (scripts/css/bump-responsive.py).
+ */
+
+@media (min-width: 1200px) {
+  /*
+   * auto-fit je ranije puštao rezultate da preuzmu širinu kad sidebar
+   * nestane i tako doda 4. kolonu (istorijski poznat problem). Fiksan
+   * broj kolona po širini viewporta drži isti broj kartica bez obzira na
+   * stanje sidebar-a — kartice se samo šire kad sidebar kolabira.
+   */
+  .productGrid.productGrid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1880px) {
+  .productGrid.productGrid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 2700px) {
+  .productGrid.productGrid {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 3200px) {
+  .productGrid.productGrid {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 901px) {
+  .catalogLayout.catalogLayout {
+    transition:
+      grid-template-columns 220ms ease,
+      gap 220ms ease;
+  }
+
+  .catalogLayoutCollapsed.catalogLayoutCollapsed {
+    grid-template-columns: 56px minmax(0, 1fr);
+    gap: 18px;
+  }
+
+  .desktopFilterCollapse.desktopFilterCollapse {
+    display: inline-flex;
+  }
+
+  .catalogLayoutCollapsed.catalogLayoutCollapsed .filters {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 280px;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateX(-10px);
+    visibility: hidden;
+  }
+
+  .catalogLayoutCollapsed.catalogLayoutCollapsed .filtersExpandTab {
+    position: sticky;
+    top: var(--catalog-header-offset);
+    display: inline-flex;
+  }
+}
+
+@media (min-width: 901px) and (max-width: 1180px) {
+  .topbarInner.topbarInner,
+  .main.main {
+    padding-inline: var(--ds-gutter, clamp(20px, 4vw, 56px));
+  }
+
+  .hero.hero {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .catalogLayout.catalogLayout {
+    grid-template-columns: 260px minmax(0, 1fr);
+    gap: 22px;
+  }
+}
+
+@media (min-width: 2200px) {
+  .catalogShell.catalogShell[data-ds="a"] .productGrid {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 901px) {
+  .catalogLayout.catalogLayout {
+    grid-template-columns: clamp(244px, 19vw, 300px) minmax(0, 1fr);
+    gap: clamp(18px, 2vw, 28px);
+  }
+}
+
+@media (min-width: 901px) {
+  .catalogLayout.catalogLayout.catalogLayoutCollapsed {
+    grid-template-columns: 44px minmax(0, 1fr);
+    gap: 16px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .catalogLayoutCollapsed.catalogLayoutCollapsed .productGrid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1880px) {
+  .catalogLayoutCollapsed.catalogLayoutCollapsed .productGrid {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 901px) and (max-width: 1199px) {
+  .productGrid.productGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .catalogLayoutCollapsed.catalogLayoutCollapsed .productGrid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 901px) {
+  .catalogShell.catalogShell .catalogLayoutCollapsed .filtersExpandTab {
+    width: 44px;
+    min-width: 44px;
+    min-height: 0;
+    gap: 10px;
+    padding: 14px 0;
+  }
+}

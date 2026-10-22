@@ -1,0 +1,442 @@
+/*
+ * MOBILNI meni headera (panel preko cele strane, 2026-10-22). Uređuje se
+ * nezavisno od desktop menija (Header.module.css). Pomoćni delovi koje deli sa
+ * desktopom (logo brenda, strelica, ikonica pretrage) ciljaju se preko
+ * `data-hdr` atributa, jer njihove klase pripadaju Header.module.css.
+ */
+
+.mobileSectionList,
+.mobileGroupBody ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.mobileClose {
+  display: inline-grid;
+  width: 2.5rem;
+  height: 2.5rem;
+  flex: 0 0 auto;
+  place-items: center;
+  border: 1px solid var(--header-border-strong);
+  border-radius: var(--ds-ctl-radius);
+  background: transparent;
+  color: var(--header-ink);
+  cursor: pointer;
+  text-decoration: none;
+  transition:
+    background-color 190ms var(--header-ease),
+    border-color 190ms var(--header-ease),
+    color 190ms var(--header-ease);
+}
+
+.mobileClose:hover {
+  border-color: var(--header-ink);
+  background: var(--header-hover);
+  color: var(--header-ink);
+}
+
+.mobileClose span {
+  position: absolute;
+  display: block;
+  width: 1.05rem;
+  height: 1.5px;
+  border-radius: 99px;
+  background: currentColor;
+  transition: transform 190ms var(--header-ease);
+}
+
+.mobileClose span:first-child {
+  transform: rotate(45deg);
+}
+
+.mobileClose span:last-child {
+  transform: rotate(-45deg);
+}
+
+.mobileKicker {
+  color: var(--header-red-text);
+  font-family: var(--font-technical), var(--font-body), monospace;
+  font-size: var(--ds-font-label);
+  font-weight: 500;
+  letter-spacing: var(--ds-tracking-label);
+  line-height: 1.2;
+  text-transform: uppercase;
+}
+
+.mobileLink:focus-visible [data-hdr="arrow-icon"] {
+  opacity: 1;
+  transform: translateX(0.1rem);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .mobileLink:hover [data-hdr="arrow-icon"] {
+    opacity: 1;
+    transform: translateX(0.1rem);
+  }
+}
+
+.mobileBrandItem {
+  padding: 0.35rem 0 0.6rem;
+}
+
+.mobileBrandGrid {
+  display: grid;
+  margin: 0;
+  padding: 0;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  border-top: 1px solid var(--header-border);
+  border-left: 1px solid var(--header-border);
+  list-style: none;
+}
+
+.mobileBrandGrid > li {
+  min-width: 0;
+  border-right: 1px solid var(--header-border);
+  border-bottom: 1px solid var(--header-border);
+}
+
+.mobileBrandGrid [data-hdr="brand-link"] {
+  height: 7.25rem;
+}
+
+.mobileBrandGrid [data-hdr="brand-logo-frame"] {
+  height: 3.6rem;
+  transform: scale(0.62);
+}
+
+.mobileBrandGrid [data-hdr="brand-link-name"] {
+  margin-top: 0.35rem;
+}
+
+.mobileBrandGrid [data-hdr="brand-link-arrow"] {
+  display: none;
+}
+
+.mobileBrandGrid [data-hdr="brand-link"]:focus-visible {
+  outline-offset: -3px;
+}
+
+@media (min-width: 34rem) {
+  .mobileBrandGrid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+.mobileLayer {
+  /*
+   * Portaled to document.body (fix za containing-block bug: .header ima
+   * transform-baziranu entrance/scroll-hide animaciju, pa position:fixed
+   * potomci uzimaju header-ov box kao containing block umesto viewporta —
+   * inset:0 se tada svodi na header-ovu visinu, ne ceo ekran). Van header
+   * DOM podstabla, --header-* custom properties definisane na .header vise
+   * se ne nasleđuju, zato se ovde ponavljaju sa stabilnim baznim tokenima
+   * (bez paint-chapter interpolacije i R-M atmosphere override-a — modal
+   * preko celog ekrana ne treba da prati prolazno skrol/atmosphere bojenje
+   * header chrome-a).
+   */
+  --header-ease: cubic-bezier(0.16, 1, 0.3, 1);
+  --header-panel: var(--surface);
+  --header-ink: var(--foreground);
+  --header-muted: var(--muted-foreground);
+  --header-border: var(--border);
+  --header-border-strong: var(--ds-c-line-strong);
+  --header-hover: var(--ds-c-surface-2);
+  --header-red: var(--accent);
+  --header-red-hover: var(--ds-c-accent-hover);
+  --header-red-text: var(--ds-c-accent-text);
+  --header-red-ink: var(--accent-foreground);
+  --header-focus: var(--ds-c-focus);
+  position: fixed;
+  z-index: 80;
+  inset: 0;
+  display: flex;
+  justify-content: flex-end;
+  overflow: hidden;
+}
+
+.mobileScrim {
+  position: absolute;
+  inset: 0;
+  border: 0;
+  background: oklch(0.09 0.012 255 / 0.62);
+  opacity: 0;
+  animation: backdropIn 200ms var(--header-ease) forwards;
+}
+
+.mobilePanel {
+  position: relative;
+  display: grid;
+  width: min(31rem, 100%);
+  height: 100dvh;
+  grid-template-rows: auto minmax(0, 1fr) auto;
+  overflow: hidden;
+  border-left: 1px solid var(--header-border);
+  background: var(--header-panel);
+  box-shadow: -1.5rem 0 4.5rem oklch(0.08 0.012 255 / 0.34);
+  padding:
+    max(0.8rem, env(safe-area-inset-top))
+    max(1rem, env(safe-area-inset-right))
+    max(0.9rem, env(safe-area-inset-bottom))
+    max(1rem, env(safe-area-inset-left));
+  animation: mobilePanelIn 220ms var(--header-ease) both;
+}
+
+.mobilePanelHeader {
+  display: flex;
+  min-height: 3.5rem;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  border-bottom: 1px solid var(--header-border);
+  padding-bottom: 0.75rem;
+}
+
+.mobilePanelBrand {
+  display: inline-flex;
+  min-width: 0;
+  align-items: center;
+  color: var(--header-ink);
+  font-family: var(--font-display), var(--font-body), sans-serif;
+  font-size: 0.86rem;
+  font-weight: 750;
+  text-decoration: none;
+}
+
+.mobilePanelLogo {
+  display: grid;
+  width: 3.25rem;
+  height: 3.25rem;
+  flex: 0 0 auto;
+  place-items: center;
+  overflow: hidden;
+  background: #e30613;
+  padding: 0.15rem;
+}
+
+.mobilePanelLogo img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.mobileClose {
+  width: 2.5rem;
+  height: 2.5rem;
+}
+
+.mobileScrollArea {
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: 1.15rem 0 1rem;
+  scrollbar-width: thin;
+}
+
+.mobileKicker {
+  margin: 0 0 0.8rem;
+}
+
+.mobileSectionList {
+  display: grid;
+  gap: 0.25rem;
+}
+
+.mobileGroup {
+  border-bottom: 1px solid var(--header-border);
+}
+
+.mobileGroupTrigger,
+.mobileLink {
+  display: flex;
+  width: 100%;
+  min-height: 3.75rem;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  border: 0;
+  background: transparent;
+  color: var(--header-ink);
+  cursor: pointer;
+  font: inherit;
+  font-family: var(--font-body), system-ui, sans-serif;
+  font-size: 1.0625rem;
+  font-weight: 600;
+  padding: 0 0.15rem;
+  text-align: left;
+  text-decoration: none;
+}
+
+.mobileGroup[data-active] .mobileGroupTrigger,
+.mobileLink[data-active] {
+  color: var(--header-red-text);
+}
+
+.mobileGroupIcon {
+  position: relative;
+  display: grid;
+  width: 2.25rem;
+  height: 2.25rem;
+  flex: 0 0 auto;
+  place-items: center;
+  border: 1px solid var(--header-border-strong);
+  border-radius: var(--ds-ctl-radius);
+}
+
+.mobileGroupIcon span {
+  position: absolute;
+  width: 0.75rem;
+  height: 1px;
+  background: currentColor;
+  transition: transform 200ms var(--header-ease);
+}
+
+.mobileGroupIcon span:last-child {
+  transform: rotate(90deg);
+}
+
+.mobileGroupTrigger[aria-expanded="true"] .mobileGroupIcon span:last-child {
+  transform: rotate(0);
+}
+
+.mobileGroupBody {
+  display: grid;
+  grid-template-rows: 0fr;
+  opacity: 0;
+  transition:
+    grid-template-rows 210ms var(--header-ease),
+    opacity 170ms ease;
+}
+
+.mobileGroupBody[data-open] {
+  grid-template-rows: 1fr;
+  opacity: 1;
+}
+
+.mobileGroupBody > ul {
+  display: grid;
+  min-height: 0;
+  gap: 0.08rem;
+  overflow: hidden;
+  padding: 0 0 0.55rem 0.85rem;
+}
+
+.mobileGroupBody li {
+  min-width: 0;
+}
+
+.mobileGroupBody .mobileLink {
+  min-height: var(--ds-ctl-h-m);
+  border-bottom: 0;
+  color: var(--header-muted);
+  font-size: var(--ds-font-body);
+  font-weight: 500;
+}
+
+.mobileGroupBody .mobileLink[data-active] {
+  color: var(--header-red-text);
+  font-weight: 600;
+}
+
+.mobileLink {
+  border-bottom: 1px solid var(--header-border);
+}
+
+.mobileLink [data-hdr="arrow-icon"] {
+  opacity: 0.58;
+}
+
+.mobilePrimaryLink {
+  font-size: 1.0625rem;
+  font-weight: 600;
+}
+
+.mobileActions {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 0.5rem;
+  border-top: 1px solid var(--header-border);
+  padding-top: 0.85rem;
+}
+
+.mobileSearch,
+.mobileContact {
+  display: inline-flex;
+  width: 100%;
+  min-height: var(--ds-ctl-h-m);
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border: 1px solid var(--header-ink);
+  border-radius: var(--ds-ctl-radius);
+  /* `.mobileSearch` je `button` (otvara panel), pa mu treba i reset dugmeta. */
+  background: transparent;
+  color: var(--header-ink);
+  font: var(--ds-ctl-font);
+  padding: 0 1.125rem;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background-color 190ms var(--header-ease), border-color 190ms var(--header-ease);
+}
+
+.mobileSearch:hover {
+  background: var(--header-hover);
+}
+
+.mobileSearch [data-hdr="search-icon"] {
+  color: currentColor;
+}
+
+.mobileContact {
+  border-color: var(--header-red);
+  background: var(--header-red);
+  color: var(--header-red-ink) !important;
+}
+
+.mobileContact:hover {
+  border-color: var(--header-red-hover);
+  background: var(--header-red-hover);
+}
+
+.mobileContact [data-hdr="arrow-icon"] {
+  color: currentColor;
+  opacity: 1;
+}
+
+.mobileClose:focus-visible,
+.mobilePanelBrand:focus-visible,
+.mobileGroupTrigger:focus-visible,
+.mobileLink:focus-visible,
+.mobileSearch:focus-visible,
+.mobileContact:focus-visible {
+  outline: 2px solid var(--header-focus);
+  outline-offset: 2px;
+}
+
+@media (max-width: 40rem) {
+  .mobilePanel {
+    width: 100%;
+    border-left: 0;
+  }
+  .mobileActions {
+    grid-template-columns: 1fr;
+  }
+}
+
+@keyframes backdropIn {
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes mobilePanelIn {
+  from {
+    opacity: 0;
+    transform: translateX(1.5rem);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}

@@ -11,7 +11,11 @@ import { ALL_PACKS, PACK_QUERY_PARAM, packSlug } from "@/components/product/vari
 import { VARIANT_QUERY_PARAM } from "@/components/product/productVariantState.mjs";
 import { srPlural } from "@/lib/sr-plural";
 import type { FamilyBase, FamilyPackshot } from "./familyBaseTypes";
-import styles from "./FamilyBasePdp.module.css";
+// Raspored po širini (2026-10-22): desktop i telefon se uređuju u odvojenim fajlovima;
+// FamilyBasePdp.styles spaja klase sva tri fajla pod istim imenom.
+import styles from "./FamilyBasePdp.styles";
+
+const layout = (name: "pdp" | "stageColumn" | "stage" | "filters" | "grid" | "pickerColumn" | "cardBody") => styles[name];
 
 /**
  * Zajednički izbor porodice baza (2026-10-21). Baslac je uzor; R-M porodice koriste istu
@@ -178,7 +182,7 @@ export function FamilyBasePdp({
   const stageImage = packshot ?? fallbackPackshot ?? null;
 
   return (
-    <div className={styles.pdp} data-brand={brand}>
+    <div className={layout("pdp")} data-brand={brand}>
       <header className={styles.pageHeader}>
         <BackToResults className={styles.backToResults} />
         <p className={styles.eyebrow}>{eyebrow}</p>
@@ -187,8 +191,8 @@ export function FamilyBasePdp({
       </header>
 
       {/* Leva strana — stabilna fotografija; prati sistem i zapreminu IZABRANE baze. */}
-      <div className={styles.stageColumn}>
-        <div className={styles.stage} data-pending={stageImage ? undefined : "true"} data-example={!packshot && stageImage ? "line" : undefined}>
+      <div className={layout("stageColumn")}>
+        <div className={layout("stage")} data-pending={stageImage ? undefined : "true"} data-example={!packshot && stageImage ? "line" : undefined}>
           {stageImage ? (
             <figure className={styles.lineExample}>
               <Image
@@ -219,13 +223,13 @@ export function FamilyBasePdp({
       </div>
 
       {/* Desna strana — sve baze odmah, bez međukoraka. */}
-      <div className={styles.pickerColumn}>
+      <div className={layout("pickerColumn")}>
         <header className={styles.pickerHeader}>
           <p className={styles.kicker}>{systemName}</p>
           <h2>Dostupne baze</h2>
         </header>
 
-        <div className={styles.filters}>
+        <div className={layout("filters")}>
           <div className={styles.field}>
             <label htmlFor={searchId}>Pretraga po šifri ili nazivu</label>
             <input
@@ -294,7 +298,7 @@ export function FamilyBasePdp({
                 <small>{group.items.length}</small>
               </h3>
             ) : null}
-            <ul className={styles.grid}>
+            <ul className={layout("grid")}>
               {group.items.map((item) => {
                 const isActive = item.code === active?.code;
                 return (
@@ -316,7 +320,7 @@ export function FamilyBasePdp({
                         style={item.swatch ? { backgroundColor: item.swatch } : undefined}
                         aria-hidden="true"
                       />
-                      <span className={styles.cardBody}>
+                      <span className={layout("cardBody")}>
                         <strong>{item.code}</strong>
                         {item.name ? <span className={styles.cardName}>{item.name}</span> : null}
                         <small>

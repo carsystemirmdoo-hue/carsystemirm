@@ -214,11 +214,11 @@
  * tuned. Matching the frame to the shape is the only fix that does not either
  * crop the product or let it burst its panel.
  */
-.stickyStage[data-stage-format="square"] {
+.stickyStage.stickyStage[data-stage-format="square"] {
   --product-stage-aspect: 1 / 1;
 }
 
-.stickyStage[data-stage-format="landscape"] {
+.stickyStage.stickyStage[data-stage-format="landscape"] {
   --product-stage-aspect: 4 / 3;
 }
 
@@ -1003,7 +1003,7 @@
   padding: clamp(1.25rem, 2.4vw, 2rem);
 }
 
-.quickFact + .quickFact {
+.quickFact.quickFact + .quickFact {
   border-left: 1px solid var(--detail-border);
 }
 
@@ -1428,7 +1428,7 @@
   gap: 0.55rem;
 }
 
-.variantOptionList[data-option-kind="color"] {
+.variantOptionList.variantOptionList[data-option-kind="color"] {
   grid-template-columns: repeat(4, minmax(0, 1fr));
 }
 
@@ -1740,7 +1740,7 @@
   padding: clamp(1.5rem, 3vw, 2.5rem) clamp(0rem, 2.5vw, 2.4rem) clamp(1.5rem, 3vw, 2.5rem) 0;
 }
 
-.benefitList li:nth-child(even) {
+.benefitList.benefitList li:nth-child(even) {
   border-left: 1px solid var(--detail-border-strong);
   padding-right: 0;
   padding-left: clamp(1.5rem, 3vw, 2.5rem);
@@ -1932,7 +1932,7 @@
   padding: 1.35rem clamp(0rem, 2.5vw, 2rem) 1.35rem 0;
 }
 
-.specList > div:nth-child(even) {
+.specList.specList > div:nth-child(even) {
   border-left: 1px solid var(--detail-border-strong);
   padding-right: 0;
   padding-left: clamp(1.35rem, 2.5vw, 2rem);
@@ -2300,369 +2300,6 @@ a.colorOptionContent:active {
   }
 }
 
-@media (max-width: 1023px) {
-  .stickyStage[data-product-stage-spray="true"] {
-    /*
-     * Samo skala se menja po breakpointu. Optička osa je procenat stage-a i
-     * skalira se sama; raniji `-5px` je ovde ponovo uvodio pomeraj ulevo i
-     * gazio izmerenu kalibraciju.
-     */
-    --product-stage-spray-scale: 1.05;
-  }
-}
-
-@media (max-width: 68rem) {
-  .heroTitle {
-    max-width: 14ch;
-    font-size: clamp(3rem, 6.5vw, 5rem);
-  }
-
-  .technology {
-    grid-template-columns: minmax(0, 1fr);
-    align-items: start;
-  }
-
-  .technologyFacts {
-    max-width: 42rem;
-  }
-
-  .finalCta {
-    grid-template-columns: minmax(0, 1fr);
-    align-items: start;
-  }
-}
-
-@media (max-width: 55.99rem) {
-  .narrativeGrid {
-    grid-template-columns: minmax(0, 1fr);
-    gap: clamp(2.5rem, 7vw, 4rem);
-  }
-
-  .stickyRail {
-    position: static;
-    width: min(100%, 48rem);
-  }
-
-  .hero {
-    min-height: auto;
-  }
-
-  .heroCopy {
-    max-width: 48rem;
-  }
-}
-
-@media (max-width: 47.99rem) {
-  .pageMain {
-    width: calc(100% - (var(--ds-gutter, clamp(20px, 4vw, 56px)) * 2));
-    padding-top: 1rem;
-  }
-
-  .breadcrumb {
-    overflow: hidden;
-    margin-bottom: 1.2rem;
-    font-size: 0.7rem;
-  }
-
-  .breadcrumb ol {
-    flex-wrap: nowrap;
-    overflow-x: auto;
-    padding-bottom: 0.3rem;
-    scrollbar-width: none;
-  }
-
-  .breadcrumb ol::-webkit-scrollbar {
-    display: none;
-  }
-
-  .breadcrumb li {
-    flex: 0 0 auto;
-  }
-
-  .breadcrumb li:last-child {
-    max-width: 14rem;
-  }
-
-  /*
-   * One column: the stage is no longer competing with a narrative column for
-   * width, so a squarer frame keeps the product large without pushing the copy
-   * a full screen down. The envelope ladder is unchanged — it is a percentage
-   * of the stage, so it scales with the phone instead of needing px ceilings.
-   */
-  .stickyStage {
-    --product-stage-aspect: 1 / 1;
-    --product-stage-max-height: 62svh;
-  }
-
-  .stickyStage[data-product-stage-spray="true"] {
-    --product-stage-spray-scale: 1.02;
-  }
-
-  .galleryThumbs {
-    gap: 8px;
-  }
-
-  .galleryThumb {
-    min-height: 86px;
-  }
-
-  .heroCopy {
-    padding: 0;
-  }
-
-  .heroTaxonomy {
-    margin-bottom: 1.6rem;
-  }
-
-  .heroTitle {
-    max-width: 13ch;
-    font-size: clamp(2.8rem, 13.5vw, 4.25rem);
-    line-height: 0.92;
-  }
-
-  .heroSubtype {
-    font-size: 1rem;
-  }
-
-  .heroReference {
-    grid-template-columns: minmax(0, 1fr);
-  }
-
-  .heroReference > span + span {
-    border-top: 1px solid var(--detail-border);
-    border-left: 0;
-    padding-left: 0;
-  }
-
-  .heroActions > a {
-    width: 100%;
-  }
-
-  .quickFacts {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    margin-top: 4rem;
-  }
-
-  .quickFact:nth-child(odd) {
-    border-left: 0;
-  }
-
-  .quickFact:nth-child(n + 3) {
-    border-top: 1px solid var(--detail-border);
-  }
-
-  .informationAccordion {
-    margin-top: 3rem;
-  }
-
-  .accordionButton {
-    min-height: 4.6rem;
-  }
-
-  .accordionPanelContent {
-    padding-bottom: 2rem;
-  }
-
-  .accordionProcessList {
-    grid-template-columns: minmax(0, 1fr);
-  }
-
-  .accordionProcessList li + li {
-    border-top: 1px solid var(--detail-border);
-    border-left: 0;
-  }
-
-  .accordionBenefitList li,
-  .accordionFactList > div,
-  .accordionSpecList > div {
-    grid-template-columns: minmax(0, 1fr);
-    gap: 0.45rem;
-  }
-
-  .accordionDocumentList li {
-    grid-template-columns: 5rem minmax(0, 1fr);
-  }
-
-  .accordionDocumentList a,
-  .accordionDocumentStatus {
-    grid-column: 2;
-    justify-self: start;
-  }
-
-  .optionSection {
-    margin-top: 1.65rem;
-  }
-
-  .variantOptionList {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  .variantOptionList[data-option-kind="color"] {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  .variantOptionControl {
-    min-height: 4.35rem;
-    padding: 0.6rem;
-  }
-
-  .joinedProductRow {
-    grid-auto-columns: minmax(220px, 72vw);
-  }
-
-  .joinedProductCard {
-    min-width: 0;
-  }
-
-  .section,
-  .processSection,
-  .technology {
-    margin-top: 5rem;
-  }
-
-  .sectionHeading h2,
-  .technologyCopy h2 {
-    font-size: clamp(2rem, 10vw, 3rem);
-  }
-
-  .variantTableFrame {
-    overflow: visible;
-    border: 0;
-    border-radius: 0;
-    background: transparent;
-  }
-
-  .variantTable,
-  .variantTable tbody,
-  .variantTable tr,
-  .variantTable td {
-    display: block;
-    width: 100%;
-  }
-
-  .variantTable thead {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    overflow: hidden;
-    clip: rect(0 0 0 0);
-    clip-path: inset(50%);
-    white-space: nowrap;
-  }
-
-  .variantTable tbody {
-    display: grid;
-    gap: 0.75rem;
-  }
-
-  .variantTable tr {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    overflow: hidden;
-    border: 1px solid var(--detail-border-strong);
-    border-radius: 0.7rem;
-    background: var(--detail-surface);
-  }
-
-  .variantTable td {
-    display: grid;
-    gap: 0.3rem;
-    border-top: 0;
-    padding: 0.9rem;
-  }
-
-  .variantTable td:nth-child(even) {
-    border-left: 1px solid var(--detail-border);
-  }
-
-  .variantTable td:nth-child(n + 3) {
-    border-top: 1px solid var(--detail-border);
-  }
-
-  .variantTable td::before {
-    color: var(--detail-faint);
-    content: attr(data-label);
-    font-family: var(--font-technical), var(--font-geist-mono), monospace;
-    font-size: 0.58rem;
-    font-weight: 550;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-  }
-
-  .benefitList,
-  .specList,
-  .relationshipGrid {
-    grid-template-columns: minmax(0, 1fr);
-  }
-
-  .benefitList li,
-  .benefitList li:nth-child(even) {
-    border-left: 0;
-    padding: 1.5rem 0;
-  }
-
-  .processSection {
-    padding: 1.5rem;
-  }
-
-  .processStages {
-    grid-template-columns: minmax(0, 1fr);
-    gap: 1.3rem;
-  }
-
-  .processStages::before {
-    top: 1.35rem;
-    right: auto;
-    bottom: 1.35rem;
-    left: 1.35rem;
-    width: 1px;
-    height: auto;
-  }
-
-  .processStages li {
-    grid-template-columns: 2.7rem minmax(0, 1fr);
-    justify-items: start;
-    gap: 1rem;
-    align-items: center;
-    padding: 0;
-    text-align: left;
-  }
-
-  .processStages li > div {
-    text-align: left;
-  }
-
-  .technologyFacts > div,
-  .specList > div,
-  .specList > div:nth-child(even) {
-    grid-template-columns: minmax(0, 1fr);
-    gap: 0.45rem;
-    border-left: 0;
-    padding: 1.1rem 0;
-  }
-
-  .documentRow {
-    grid-template-columns: 4.2rem minmax(0, 1fr);
-    gap: 0.85rem 1rem;
-  }
-
-  .documentAvailability {
-    grid-column: 2;
-  }
-
-  .documentAction {
-    grid-column: 1 / -1;
-  }
-
-  .finalCta {
-    padding: 1.5rem;
-  }
-
-  .finalCtaActions > a {
-    width: 100%;
-  }
-}
-
 @media (prefers-reduced-motion: reduce) {
   .accordionToggle,
   .accordionDocumentList a,
@@ -2917,7 +2554,7 @@ a.colorOptionContent:active {
 }
 
 /* Izbor pakovanja: pun naziv (do dva reda), ugao 2 px, izabrano = 2 px ivica. */
-.pageShell[data-ds="a"] .variantOptionList:not([data-option-kind="color"]) {
+.pageShell.pageShell[data-ds="a"] .variantOptionList:not([data-option-kind="color"]) {
   grid-template-columns: repeat(auto-fill, minmax(min(100%, 11.5rem), 1fr));
 }
 
@@ -3223,7 +2860,7 @@ a.colorOptionContent:active {
   margin-bottom: clamp(1.5rem, 3vw, 2.8rem);
 }
 
-.breadcrumbRow .breadcrumb {
+.breadcrumbRow.breadcrumbRow .breadcrumb {
   margin-bottom: 0;
 }
 

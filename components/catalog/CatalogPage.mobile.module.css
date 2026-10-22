@@ -1,0 +1,300 @@
+/*
+ * MOBILNI raspored za CatalogPage (do 900px). Uređuje se nezavisno; zajednički izgled je u
+ * CatalogPage.module.css, a komponente koriste CatalogPage.styles.ts (2026-10-22).
+ *
+ * Prva klasa svakog selektora je udvostručena (specifičnost +1): raspored ne zavisi od
+ * redosleda učitavanja CSS delova (scripts/css/bump-responsive.py).
+ */
+
+@media (max-width: 520px) {
+  .productCard.productCard[data-card-system="b"]
+    [data-product-visual-real-image="false"]
+    > span:has(> [data-product-visual-placeholder]) {
+    /* 66 % visine, optički centar na 44 %: donja ivica ostaje iznad oznake
+       zapremine (bottom 10 px + ~22 px), gornja ispod oznake brenda. */
+    --product-optical-y: 44%;
+    height: 66%;
+    min-height: 0;
+  }
+
+  .productCard.productCard[data-card-system="b"] [data-product-visual-placeholder] {
+    min-height: 0;
+    max-height: 100%;
+    gap: 3px;
+    padding: 8px 10px;
+    overflow: hidden;
+  }
+
+  .productCard.productCard[data-card-system="b"] [data-product-visual-placeholder] > span:first-child {
+    width: 28px;
+    height: 16px;
+  }
+
+  .productCard.productCard[data-card-system="b"] [data-product-visual-placeholder] strong {
+    font-size: 15px;
+  }
+
+  .productCard.productCard[data-card-system="b"] [data-product-visual-placeholder] > span:last-child {
+    display: -webkit-box;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    font-size: 10.5px;
+    line-height: 1.25;
+  }
+}
+
+@media (max-width: 900px) {
+  .topbarInner.topbarInner,
+  .main.main {
+    padding-inline: var(--ds-gutter, clamp(20px, 4vw, 56px));
+  }
+
+  .hero.hero {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .catalogLayout.catalogLayout {
+    grid-template-columns: 260px minmax(0, 1fr);
+    gap: 22px;
+  }
+}
+
+@media (max-width: 900px) {
+  .navLinks.navLinks {
+    display: none;
+  }
+
+  .topbarCta.topbarCta {
+    display: none;
+  }
+
+  .title.title {
+    font-size: 52px;
+  }
+
+  .mobileFilterBar.mobileFilterBar {
+    display: flex;
+  }
+
+  .catalogLayout.catalogLayout {
+    grid-template-columns: 1fr;
+  }
+
+  .filtersSlot.filtersSlot {
+    position: static;
+    max-height: none;
+    min-height: 0;
+  }
+
+  .filters.filters {
+    position: fixed;
+    right: 16px;
+    bottom: 16px;
+    left: 16px;
+    z-index: 80;
+    max-height: calc(100vh - 112px);
+    max-height: calc(100dvh - 112px);
+    opacity: 0;
+    box-shadow: 0 24px 80px oklch(0.04 0.01 250 / 0.34);
+    pointer-events: none;
+    transform: translateY(calc(100% + 28px));
+    visibility: hidden;
+  }
+
+  .filtersStickyHeader.filtersStickyHeader {
+    padding: 16px 16px 10px;
+  }
+
+  .filtersScrollableBody.filtersScrollableBody {
+    padding: 14px 16px calc(28px + env(safe-area-inset-bottom));
+    scroll-padding-block: 12px calc(28px + env(safe-area-inset-bottom));
+  }
+
+  .filtersOpen.filtersOpen {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+    visibility: visible;
+  }
+
+  .mobileFilterClose.mobileFilterClose {
+    display: inline-flex;
+  }
+}
+
+@media (max-width: 640px) {
+  .topbarInner.topbarInner {
+    gap: 10px;
+    padding: 14px var(--ds-gutter, clamp(20px, 4vw, 56px));
+  }
+
+  .brandCopy.brandCopy span {
+    display: none;
+  }
+
+  .main.main {
+    padding: 24px var(--ds-gutter, clamp(20px, 4vw, 56px)) 78px;
+  }
+
+  .hero.hero {
+    margin-bottom: 28px;
+  }
+
+  .manufacturerRail.manufacturerRail {
+    margin-bottom: 26px;
+  }
+
+  .title.title {
+    font-size: 40px;
+    line-height: 0.98;
+  }
+
+  .subtitle.subtitle {
+    font-size: 16px;
+  }
+
+  .heroTools.heroTools,
+  .supportCta.supportCta {
+    border-radius: 16px;
+    padding: 16px;
+  }
+
+  .filters.filters {
+    border-radius: 16px;
+  }
+
+  .quickStats.quickStats span {
+    font-size: 11.5px;
+  }
+
+  .sectionHeader.sectionHeader {
+    align-items: start;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .sectionHeader.sectionHeader h2,
+  .supportCta.supportCta h2 {
+    font-size: 28px;
+  }
+
+  .productGrid.productGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+  }
+
+  .productTitleRow.productTitleRow h3 {
+    font-size: 20px;
+  }
+
+  .productBody.productBody {
+    min-height: 145px;
+    padding: 15px 16px 17px;
+  }
+
+  .supportCta.supportCta {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .supportActions.supportActions {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  .catalogPagination.catalogPagination {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .categoryLandingRail.categoryLandingRail {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .categoryLandingRail.categoryLandingRail nav {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 380px) {
+  .title.title {
+    font-size: 36px;
+  }
+
+  .brandCopy.brandCopy strong {
+    max-width: 160px;
+  }
+
+  .primaryButton.primaryButton,
+  .secondaryButton.secondaryButton,
+  .filterToggle.filterToggle {
+    padding-inline: 12px;
+  }
+}
+
+@media (max-width: 520px) {
+  :global([data-ds="a"]) .productTitleRow.productTitleRow h3 {
+    -webkit-line-clamp: 4;
+  }
+
+  :global([data-ds="a"]) .productMetaLine.productMetaLine {
+    letter-spacing: 0.04em;
+  }
+}
+
+@media (max-width: 900px) {
+  .catalogShell.catalogShell[data-ds="a"] .filters {
+    --ds-ctl-h-field: 44px;
+    top: 72px;
+    max-height: none;
+  }
+
+  .catalogShell.catalogShell[data-ds="a"] .filtersStickyHeader {
+    padding: 12px 12px 10px 16px;
+  }
+
+  .catalogShell.catalogShell[data-ds="a"] .filtersScrollableBody {
+    padding: 12px 16px 16px;
+  }
+
+  .mobileFilterFooter.mobileFilterFooter {
+    display: grid;
+    flex: 0 0 auto;
+    grid-template-columns: auto 1fr;
+    gap: 10px;
+    border-top: 1px solid var(--ds-c-line, var(--catalog-border-soft));
+    background: var(--ds-c-surface, var(--catalog-panel));
+    padding: 10px 16px calc(10px + env(safe-area-inset-bottom));
+  }
+
+  .mobileFilterReset.mobileFilterReset,
+  .mobileFilterApply.mobileFilterApply {
+    min-height: 44px;
+    border-radius: var(--ds-ctl-radius, 2px);
+    padding: 0 16px;
+    font: inherit;
+    font-size: 0.9375rem;
+    font-weight: 600;
+    cursor: pointer;
+  }
+
+  .mobileFilterReset.mobileFilterReset {
+    border: 1px solid var(--ds-c-line-strong, var(--catalog-border));
+    background: transparent;
+    color: var(--ds-c-text, var(--catalog-ink));
+  }
+
+  .mobileFilterReset.mobileFilterReset:disabled {
+    opacity: 0.45;
+    cursor: default;
+  }
+
+  .mobileFilterApply.mobileFilterApply {
+    border: 1px solid transparent;
+    background: var(--ds-c-accent, var(--catalog-red));
+    color: var(--ds-c-on-accent, #fff);
+  }
+}

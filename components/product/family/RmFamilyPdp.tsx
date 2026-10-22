@@ -8,8 +8,8 @@ import { RmFamilyPicker } from "@/components/product/family/RmFamilyPicker";
 import type { CarsystemProduct } from "@/lib/carsystem-data";
 import { rmFamilyBases, rmFamilyPackshots, type RmFamilyConfig } from "@/lib/rm-family-bases";
 import { RM_SWATCH_NOTE } from "@/lib/rm-mixing-bases";
-import catalogStyles from "@/components/catalog/CatalogPage.module.css";
-import styles from "./FamilyBasePdp.module.css";
+import catalogStyles from "@/components/catalog/CatalogPage.styles";
+import styles from "./FamilyBasePdp.styles";
 
 /**
  * R-M porodica baza u istom rasporedu kao Baslac (2026-10-21). Izbor reda ide kroz

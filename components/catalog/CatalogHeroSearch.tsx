@@ -1,7 +1,7 @@
 "use client";
 
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import styles from "./CatalogPage.module.css";
+import styles from "./CatalogPage.styles";
 
 export function CatalogHeroSearch() {
   const pathname = usePathname();

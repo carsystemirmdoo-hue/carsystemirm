@@ -11,13 +11,11 @@ import { ALL_PACKS, PACK_QUERY_PARAM, packSlug } from "@/components/product/vari
 import { VARIANT_QUERY_PARAM } from "@/components/product/productVariantState.mjs";
 import { srPlural } from "@/lib/sr-plural";
 import type { FamilyBase, FamilyPackshot } from "./familyBaseTypes";
-import styles from "./FamilyBasePdp.module.css";
-// Raspored po širini (2026-10-22): desktop i telefon se uređuju u odvojenim fajlovima.
-import desktop from "./FamilyBasePdp.desktop.module.css";
-import mobile from "./FamilyBasePdp.mobile.module.css";
+// Raspored po širini (2026-10-22): desktop i telefon se uređuju u odvojenim fajlovima;
+// FamilyBasePdp.styles spaja klase sva tri fajla pod istim imenom.
+import styles from "./FamilyBasePdp.styles";
 
-const layout = (name: "pdp" | "stageColumn" | "stage" | "filters" | "grid" | "pickerColumn" | "cardBody") =>
-  [styles[name], desktop[name], mobile[name]].filter(Boolean).join(" ");
+const layout = (name: "pdp" | "stageColumn" | "stage" | "filters" | "grid" | "pickerColumn" | "cardBody") => styles[name];
 
 /**
  * Zajednički izbor porodice baza (2026-10-21). Baslac je uzor; R-M porodice koriste istu

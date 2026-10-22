@@ -36,7 +36,7 @@ import {
   type RmSystemSlug,
 } from "@/lib/catalog-constants";
 import type { CarsystemBrand, ProgramGroup, RefinishPhase } from "@/lib/carsystem-data";
-import styles from "./CatalogPage.module.css";
+import styles from "./CatalogPage.styles";
 
 type CatalogModule = {
   key: string;

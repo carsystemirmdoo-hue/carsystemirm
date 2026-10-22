@@ -2,17 +2,20 @@
  * DESKTOP raspored izbora porodice baza (R-M i Baslac), širine iznad 60rem.
  * Menja se nezavisno od telefona (FamilyBasePdp.mobile.module.css); zajednički
  * izgled (boje, tipografija, kartice) je u FamilyBasePdp.module.css.
+ *
+ * Prva klasa svakog selektora je udvostručena (specifičnost +1): raspored ne zavisi od
+ * redosleda učitavanja CSS delova (scripts/css/bump-responsive.py).
  */
 @media (min-width: 60.0625rem) {
   /* Velika limenka levo, sve baze odmah desno, bez međustranice. */
-  .pdp { grid-template-columns: minmax(0, 22rem) minmax(0, 1fr); }
-  .stageColumn { position: sticky; top: 6rem; }
-  .stage { min-height: 26rem; }
-  .stage img { max-height: 24rem; }
-  .filters { grid-template-columns: minmax(0, 2fr) minmax(0, 1fr); }
-  .grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .pdp.pdp { grid-template-columns: minmax(0, 22rem) minmax(0, 1fr); }
+  .stageColumn.stageColumn { position: sticky; top: 6rem; }
+  .stage.stage { min-height: 26rem; }
+  .stage.stage img { max-height: 24rem; }
+  .filters.filters { grid-template-columns: minmax(0, 2fr) minmax(0, 1fr); }
+  .grid.grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
 }
 
 @media (min-width: 60.0625rem) and (max-width: 82rem) {
-  .grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .grid.grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 }

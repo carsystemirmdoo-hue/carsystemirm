@@ -21,7 +21,7 @@ import {
   jsonLd,
   pageMetadata,
 } from "@/lib/seo";
-import styles from "@/components/catalog/CatalogPage.module.css";
+import styles from "@/components/catalog/CatalogPage.styles";
 
 type CatalogPaginationRouteProps = {
   params: Promise<{ page: string }>;

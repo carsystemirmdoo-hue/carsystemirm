@@ -20,7 +20,10 @@ const surfaceStyles = readFileSync(
   new URL("../product/ProductVisualSurface.module.css", import.meta.url),
   "utf8",
 );
-const catalogStyles = readFileSync(new URL("./CatalogPage.module.css", import.meta.url), "utf8");
+// Od 2026-10-22 raspored kataloga je podeljen na zajednički, desktop i mobilni fajl.
+const catalogStyles = ["./CatalogPage.module.css", "./CatalogPage.desktop.module.css", "./CatalogPage.mobile.module.css"]
+  .map((file) => readFileSync(new URL(file, import.meta.url), "utf8"))
+  .join("\n");
 
 test("neutral visualMode i dalje gasi colorReveal van kataloga (PDP, brend stranice)", () => {
   assert.match(

@@ -7,7 +7,7 @@ import type {
   RefinishPhaseSlug,
 } from "@/lib/carsystem-data";
 import type { CatalogListingEntity } from "@/lib/catalog-listing";
-import styles from "./CatalogPage.module.css";
+import styles from "./CatalogPage.styles";
 import { srPlural } from "@/lib/sr-plural";
 
 export function CatalogProductGrid({

@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { SplitContactCta } from "@/components/ui/SplitContactCta";
-import styles from "./CatalogPage.module.css";
+import styles from "./CatalogPage.styles";
 
 export function CatalogSupportCta() {
   return (

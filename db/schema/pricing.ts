@@ -185,6 +185,8 @@ export const priceRules = pgTable(
     /** Predlog koji MENJA važeće pravilo istog opsega; pri odobrenju se staro zatvara. Migracija 0041. */
     /** Opcija plaćanja (0043): NULL = osnovni uslov; inače šifra opcije (avans, odlozeno_N) — važi samo uz tu izabranu odobrenu opciju. */
     paymentCondition: text("payment_condition"),
+    /** 0057: „redovni“ ili privremena „akcija“ (akcija pobeđuje redovni istog opsega dok važi). */
+    ruleKind: text("rule_kind").notNull().default("redovni"),
     replacesRuleId: uuid("replaces_rule_id").references((): AnyPgColumn => priceRules.id, { onDelete: "restrict" }),
     proposedBy: uuid("proposed_by").references(() => users.id, {
       onDelete: "restrict",

@@ -440,6 +440,11 @@ test("nijedna API ruta ne postoji van izričito dozvoljenog spiska", async (t) =
    */
   const DOZVOLJENE = [
     "auth/[...nextauth]/route.ts",
+    /*
+     * 0057: dnevni zakazani zadatak (Vercel Cron) koji briše interna obaveštenja o rabatima starija od
+     * 10 dana. Bez `CRON_SECRET` odbija (503), sa pogrešnom tajnom 401; ne prima parametre.
+     */
+    "cron/obavestenja-rabata/route.ts",
     "portal/izvoz/route.ts",
     "portal/podesavanja/navigacija/route.ts",
     // P2: prijem sa uređaja, iza feature gate-a koji je podrazumevano isključen.

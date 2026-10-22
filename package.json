@@ -270,7 +270,7 @@
     "test:partners": "node --test lib/partners/*.test.mjs lib/import/xlsx/*.test.mjs lib/customers/contactVerification.test.mjs lib/customers/customerStatus.test.mjs app/portal/kupci/[id]/actions.test.mjs",
     "partners:report": "node scripts/partners/partner-registry-report.mjs",
     "test:stock": "node --test lib/stock/*.test.mjs",
-    "test:pricing": "node --test lib/pricing/*.test.mjs",
+    "test:pricing": "node --test lib/pricing/*.test.mjs lib/cron/*.test.mjs",
     "test:consent": "node --test lib/customers/*.test.mjs",
     "test:pdf": "node --test lib/pdf/*.test.mjs",
     "test:readiness": "node --test lib/readiness/*.test.mjs",

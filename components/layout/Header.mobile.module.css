@@ -1,0 +1,46 @@
+/*
+ * MOBILNI raspored za Header (do 1119px). Uređuje se nezavisno; zajednički izgled je u
+ * Header.module.css, a komponente koriste Header.styles.ts (2026-10-22).
+ *
+ * Prva klasa svakog selektora je udvostručena (specifičnost +1): raspored ne zavisi od
+ * redosleda učitavanja CSS delova (scripts/css/bump-responsive.py).
+ */
+
+@media (min-width: 544px) and (max-width: 1119px) {
+  .contactCta.contactCta {
+    display: inline-flex;
+  }
+}
+
+@media (max-width: 40rem) {
+  .header.header {
+    --header-height: 4.5rem;
+  }
+
+  .shell.shell {
+    width: calc(100% - (var(--ds-gutter, clamp(20px, 4vw, 56px)) * 2));
+    gap: 0.55rem;
+  }
+
+  .brandSymbol.brandSymbol {
+    width: 4.75rem;
+    height: 100%;
+  }
+
+  .brandLabel.brandLabel {
+    margin-left: 0.6rem;
+  }
+
+  .iconAction.iconAction, .themeSlot.themeSlot :global(button) {
+    display: none;
+  }
+
+  .contactCta.contactCta {
+    padding-inline: 0.875rem;
+  }
+
+  .mobileToggle.mobileToggle {
+    width: 2.5rem;
+    height: 2.5rem;
+  }
+}

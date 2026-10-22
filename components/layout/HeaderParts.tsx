@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import type { NavigationLink } from "@/components/layout/navigation-data";
-import styles from "./Header.module.css";
+import styles from "./Header.styles";
 import { isPathActive } from "./headerPaths";
 
 /*

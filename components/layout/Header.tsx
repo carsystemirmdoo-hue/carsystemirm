@@ -434,6 +434,22 @@ export function Header() {
     return () => window.removeEventListener("popstate", handlePopState);
   }, []);
 
+  /*
+   * Prelazak na desktop širinu (rotacija tableta, promena prozora) dok je mobilni meni otvoren:
+   * dugme menija tada nestaje (Header.module.css, 70rem), pa se meni zatvara — inače bi skrol
+   * strane ostao zaključan bez načina da se meni zatvori (2026-10-22).
+   */
+  useEffect(() => {
+    if (!mobileOpen) return;
+    const desktop = window.matchMedia("(min-width: 70rem)");
+    const onChange = () => {
+      if (desktop.matches) closeMobileNav();
+    };
+    desktop.addEventListener("change", onChange);
+    return () => desktop.removeEventListener("change", onChange);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [mobileOpen]);
+
   useEffect(() => {
     if (!mobileOpen) return;
 

@@ -31,7 +31,7 @@ Cilj je da se raspored na telefonu može uređivati nezavisno od desktopa. Zajed
 Provera prolazi 23/23, u obe teme, na nizu uspravno → položeno → tablet → desktop → telefon:
 - izabrana baza, zapremina, fotografija i adresa ostaju iste;
 - filter kataloga i broj rezultata ostaju isti, bez horizontalnog prelivanja;
-- mobilni meni otvoren pa desktop širina: meni se zatvara i skrol se otključava (`6ddaa70d` → ispravka headera);
+- mobilni meni otvoren pa desktop širina: meni se zatvara i skrol se otključava (commit „fix(header): mobilni meni se zatvara pri prelasku na desktop širinu“);
 - korpa: artikal dodat na telefonu (položeno) vidi se na desktopu kao tačan artikal i pakovanje.
 
 ## Provera posle svakog izdvajanja

@@ -1,7 +1,7 @@
 "use client";
 
 import { useProductVariant } from "@/components/product/ProductVariantProvider";
-import styles from "./ProductDetailExperience.module.css";
+import styles from "./ProductDetailExperience.styles";
 import { CustomerStatus } from "@/components/customer-buy/CustomerStatus";
 import { formatMeasureSr } from "@/lib/measure-format.mjs";
 

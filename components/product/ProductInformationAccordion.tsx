@@ -18,7 +18,7 @@ import type {
   ProductTechnology,
 } from "@/types/product-detail";
 import { useOptionalProductVariant } from "@/components/product/ProductVariantProvider";
-import styles from "./ProductDetailExperience.module.css";
+import styles from "./ProductDetailExperience.styles";
 
 type ProductInformationAccordionProps = {
   benefits: ProductBenefit[];

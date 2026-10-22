@@ -39,7 +39,7 @@ import type { SeoBreadcrumbItem } from "@/components/seo/SeoBreadcrumbs";
 import { BackToResults } from "@/components/product/BackToResults";
 import { RmFamilyPdp } from "@/components/product/family/RmFamilyPdp";
 import { getRmFamilyConfig } from "@/lib/rm-family-bases";
-import styles from "./ProductDetailExperience.module.css";
+import styles from "./ProductDetailExperience.styles";
 
 type ProductDetailPageProps = {
   product: CarsystemProduct;

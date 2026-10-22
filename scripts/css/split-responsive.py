@@ -13,7 +13,8 @@
   bi media pravilo dobilo prednost) — takva mesta se rešavaju ručno pre podele.
 - Komponente koriste `<ime>.styles.ts`, koji spaja klase sva tri fajla pod istim imenom.
 - Posle podele OBAVEZNO: `scripts/css/bump-responsive.py` nad .desktop/.mobile fajlovima
-  (Next ne garantuje redosled CSS delova; raspored mora da pobedi bez obzira na redosled).
+  (Next ne garantuje redosled CSS delova; raspored mora da pobedi bez obzira na redosled),
+  pa `scripts/css/winner-check.py <original> <zajednički> <mobilni> <desktop> --fix` do 0 promena.
 """
 from __future__ import annotations
 import argparse, re, sys

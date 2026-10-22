@@ -6,6 +6,11 @@ const pageUrl = new URL("./ProductDetailPage.tsx", import.meta.url);
 const accordionUrl = new URL("./ProductInformationAccordion.tsx", import.meta.url);
 const stageUrl = new URL("./ProductStickyStage.tsx", import.meta.url);
 const stylesUrl = new URL("./ProductDetailExperience.module.css", import.meta.url);
+// Od 2026-10-22 raspored PDP-a je podeljen: zajednički + desktop (od 1024px) + mobilni (do 1023px).
+const stylesMobileUrl = new URL("./ProductDetailExperience.mobile.module.css", import.meta.url);
+const stylesDesktopUrl = new URL("./ProductDetailExperience.desktop.module.css", import.meta.url);
+const readStyles = async () =>
+  (await Promise.all([stylesUrl, stylesDesktopUrl, stylesMobileUrl].map((url) => readFile(url, "utf8")))).join("\n");
 const variantsUrl = new URL("./ProductVariantOptions.tsx", import.meta.url);
 const dataUrl = new URL("../../lib/carsystem-data.ts", import.meta.url);
 const routeUrl = new URL("../../app/proizvodi/[slug]/page.tsx", import.meta.url);
@@ -45,7 +50,7 @@ test("variant selector follows the declaration while accordion stays in the stic
 test("accordion uses stable controlled buttons and a pre-measured expansion well", async () => {
   const [accordion, styles, globals] = await Promise.all([
     readFile(accordionUrl, "utf8"),
-    readFile(stylesUrl, "utf8"),
+    readStyles(),
     readFile(globalsUrl, "utf8"),
   ]);
 
@@ -103,7 +108,7 @@ test("joined recommendations are manual, full-width and separate from compatibil
     readFile(pageUrl, "utf8"),
     readFile(routeUrl, "utf8"),
     readFile(dataUrl, "utf8"),
-    readFile(stylesUrl, "utf8"),
+    readStyles(),
   ]);
 
   assert.match(page, /title="Slični proizvodi"/);
@@ -155,7 +160,7 @@ test("header keeps only the Carsystem mark in desktop and mobile brand zones", a
 test("stage sizing and sticky boundary retain the approved narrative layout", async () => {
   const [stage, styles] = await Promise.all([
     readFile(stageUrl, "utf8"),
-    readFile(stylesUrl, "utf8"),
+    readStyles(),
   ]);
 
   // Vizuelni preset se razrešava na serveru i stiže kroz aktivnu varijantu, pa
@@ -171,6 +176,7 @@ test("stage sizing and sticky boundary retain the approved narrative layout", as
   assert.match(styles, /\.stickyRail\s*\{[\s\S]*position:\s*sticky[\s\S]*top:\s*6\.5rem/);
   assert.match(
     styles,
-    /@media \(max-width: 55\.99rem\)[\s\S]*\.stickyRail\s*\{[\s\S]*position:\s*static/,
+    // Pravila rasporeda imaju udvostručenu prvu klasu (scripts/css/bump-responsive.py).
+    /@media \(max-width: 55\.99rem\)[\s\S]*\.stickyRail(?:\.stickyRail)?\s*\{[\s\S]*position:\s*static/,
   );
 });

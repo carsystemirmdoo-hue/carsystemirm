@@ -1,0 +1,28 @@
+/*
+ * DESKTOP raspored za ProductDetailExperience (od 1024px). Uređuje se nezavisno; zajednički izgled je u
+ * ProductDetailExperience.module.css, a komponente koriste ProductDetailExperience.styles.ts (2026-10-22).
+ *
+ * Prva klasa svakog selektora je udvostručena (specifičnost +1): raspored ne zavisi od
+ * redosleda učitavanja CSS delova (scripts/css/bump-responsive.py).
+ */
+
+@media (min-width: 1024px) and (max-width: 1088px) {
+  .heroTitle.heroTitle {
+    max-width: 14ch;
+    font-size: clamp(3rem, 6.5vw, 5rem);
+  }
+
+  .technology.technology {
+    grid-template-columns: minmax(0, 1fr);
+    align-items: start;
+  }
+
+  .technologyFacts.technologyFacts {
+    max-width: 42rem;
+  }
+
+  .finalCta.finalCta {
+    grid-template-columns: minmax(0, 1fr);
+    align-items: start;
+  }
+}

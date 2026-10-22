@@ -8,6 +8,20 @@ import re, sys
 from importlib.machinery import SourceFileLoader
 split = SourceFileLoader("split", __file__.rsplit("/", 1)[0] + "/split-responsive.py").load_module()
 
+
+def split_selectors(prelude):
+    """Deli listu selektora samo po zarezima na najvišem nivou (ne unutar :is()/:where())."""
+    out, depth, cur = [], 0, ""
+    for ch in prelude:
+        if ch in "([": depth += 1
+        elif ch in ")]": depth -= 1
+        if ch == "," and depth == 0:
+            out.append(cur); cur = ""
+        else:
+            cur += ch
+    out.append(cur)
+    return [s.strip() for s in out if s.strip()]
+
 def spec(sel: str):
     s = re.sub(r":global\(([^)]*)\)", r"\1", sel)
     s = re.sub(r"::?[a-z-]+\(", "(", s)  # funkcionalne pseudo-klase tretiraj kao 1
@@ -22,7 +36,7 @@ def rules(css, media=""):
             yield from rules(body, prelude)
         elif not prelude.startswith("@"):
             props = {d.split(":", 1)[0].strip() for d in body.split(";") if ":" in d}
-            for sel in prelude.split(","):
+            for sel in split_selectors(prelude):
                 yield sel.strip(), props, media
 
 def target(sel):

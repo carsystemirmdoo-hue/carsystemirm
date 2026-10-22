@@ -1,7 +1,6 @@
 "use client";
 
 /* eslint-disable @next/next/no-img-element -- Approved brand and category assets are static public SVG files. */
-import Image from "next/image";
 import Link from "next/link";
 import { CustomerAccountMenu } from "./CustomerAccountMenu";
 import { usePathname } from "next/navigation";
@@ -34,6 +33,8 @@ import {
   SYSTEM_GROUPS,
 } from "@/components/layout/navigation-data";
 import styles from "./Header.module.css";
+import { ArrowIcon, BrandMenuLink, SearchIcon, isMenuLinkActive } from "./HeaderParts";
+import { HeaderMobileMenu } from "./HeaderMobileMenu";
 
 const DESKTOP_MENU_KEYS: HeaderMenuKey[] = [
   "proizvodi",
@@ -57,19 +58,9 @@ function publicPathname(pathname: string) {
   return pathname.length > 1 ? pathname.replace(/\/$/, "") : pathname;
 }
 
-function isPathActive(href: string, pathname: string) {
-  const hrefPath = href.split(/[?#]/)[0] || "/";
-  if (hrefPath === "/") return pathname === "/";
-  if (hrefPath === "/katalog") {
-    return pathname === "/katalog" || pathname.startsWith("/proizvodi/");
-  }
-  return pathname === hrefPath || pathname.startsWith(`${hrefPath}/`);
-}
 
-function isMenuLinkActive(href: string, pathname: string) {
-  if (href.includes("?") || href.includes("#")) return false;
-  return isPathActive(href, pathname);
-}
+
+
 
 function getFocusableElements(container: HTMLElement | null) {
   if (!container) return [];
@@ -1112,185 +1103,31 @@ export function Header() {
       </div>
 
       {mobileLayerMounted && mobileOpen && createPortal(
-        <div className={styles.mobileLayer}>
-          <button
-            type="button"
-            className={styles.mobileScrim}
-            aria-label="Zatvorite meni"
-            tabIndex={-1}
-            onClick={closeMobileNav}
-          />
-          <section
-            ref={mobilePanelRef}
-            id={mobilePanelId}
-            className={styles.mobilePanel}
-            role="dialog"
-            aria-modal="true"
-            aria-label="Glavni meni"
-          >
-            <div className={styles.mobilePanelHeader}>
-              <Link
-                href="/"
-                replace
-                className={styles.mobilePanelBrand}
-                onClick={closeMobileForNavigation}
-              >
-                <span className={styles.mobilePanelLogo}>
-                  <img
-                    src="/brands/carsystem.svg"
-                    alt=""
-                    width="595"
-                    height="595"
-                    decoding="async"
-                  />
-                </span>
-              </Link>
-              <button
-                ref={mobileCloseRef}
-                type="button"
-                className={styles.mobileClose}
-                aria-label="Zatvorite meni"
-                onClick={closeMobileNav}
-              >
-                <span />
-                <span />
-              </button>
-            </div>
-
-            <nav className={styles.mobileScrollArea} aria-label="Mobilna navigacija">
-              <p className={styles.mobileKicker}>Navigacija</p>
-              <ul className={styles.mobileSectionList}>
-                <li>
-                  <MobileAccordion
-                    id={mobileProductId}
-                    label="Proizvodi"
-                    active={productActive}
-                    open={mobileSection === "proizvodi"}
-                    onToggle={() => toggleMobileSection("proizvodi")}
-                  >
-                    {PRODUCT_CATEGORIES.map((category) => (
-                      <MobileMenuLink
-                        key={category.slug}
-                        href={category.href}
-                        label={category.label}
-                        active={isMenuLinkActive(category.href, pathname)}
-                        onNavigate={closeMobileForNavigation}
-                      />
-                    ))}
-                  </MobileAccordion>
-                </li>
-                <li>
-                  <MobileAccordion
-                    id={mobileBrandId}
-                    label="Brendovi"
-                    active={brandActive}
-                    open={mobileSection === "brendovi"}
-                    onToggle={() => toggleMobileSection("brendovi")}
-                  >
-                    <MobileMenuLink
-                      href="/brendovi"
-                      label="Svi brendovi"
-                      active={pathname === "/brendovi"}
-                      onNavigate={closeMobileForNavigation}
-                    />
-                    <li className={styles.mobileBrandItem}>
-                      <ul className={styles.mobileBrandGrid} aria-label="Brendovi">
-                        {BRAND_LINKS.map((link) => (
-                          <li key={link.href}>
-                            <BrandMenuLink
-                              brand={link}
-                              active={isMenuLinkActive(link.href, pathname)}
-                              onNavigate={closeMobileForNavigation}
-                            />
-                          </li>
-                        ))}
-                      </ul>
-                    </li>
-                  </MobileAccordion>
-                </li>
-                <li>
-                  <MobileAccordion
-                    id={mobileSystemId}
-                    label="Sistemi i programi"
-                    active={systemActive}
-                    open={mobileSection === "sistemi"}
-                    onToggle={() => toggleMobileSection("sistemi")}
-                  >
-                    <MobileMenuLink
-                      href="/program"
-                      label="Svi programi"
-                      active={pathname === "/program"}
-                      onNavigate={closeMobileForNavigation}
-                    />
-                    {SYSTEM_GROUPS.flatMap((group) => group.links).map((link) => (
-                      <MobileMenuLink
-                        key={`${link.href}-${link.title}`}
-                        href={link.href}
-                        label={link.title}
-                        active={isMenuLinkActive(link.href, pathname)}
-                        onNavigate={closeMobileForNavigation}
-                      />
-                    ))}
-                  </MobileAccordion>
-                </li>
-                <MobileMenuLink
-                  href="/prodavnice"
-                  label="Prodavnice"
-                  active={storeActive}
-                  primary
-                  onNavigate={closeMobileForNavigation}
-                />
-                <MobileMenuLink
-                  href="/katalozi"
-                  label="Katalozi"
-                  active={katalozActive}
-                  primary
-                  onNavigate={closeMobileForNavigation}
-                />
-                <MobileMenuLink
-                  href="/vodici"
-                  label="Saveti i vodiči"
-                  active={savetiActive}
-                  primary
-                  onNavigate={closeMobileForNavigation}
-                />
-                <MobileMenuLink
-                  href="/kontakt?tema=tehnicka-podrska"
-                  label="Podrška"
-                  active={supportActive}
-                  primary
-                  onNavigate={closeMobileForNavigation}
-                />
-              </ul>
-            </nav>
-
-            <div className={styles.mobileActions}>
-              <button
-                type="button"
-                className={styles.mobileSearch}
-                aria-haspopup="dialog"
-                onClick={() => {
-                  handoffFocusRef.current = true;
-                  closeMobileNav();
-                  openSearch(mobileToggleRef.current);
-                }}
-              >
-                <SearchIcon />
-                Pretražite proizvode
-              </button>
-              <CustomerAccountMenu variant="mobile" onNavigate={closeMobileForNavigation} />
-              <Link
-                href="/kontakt"
-                replace
-                className={styles.mobileContact}
-                onClick={closeMobileForNavigation}
-              >
-                Kontakt
-                <ArrowIcon />
-              </Link>
-            </div>
-          </section>
-        </div>,
+        <HeaderMobileMenu
+          panelId={mobilePanelId}
+          panelRef={mobilePanelRef}
+          closeRef={mobileCloseRef}
+          sectionIds={{ proizvodi: mobileProductId, brendovi: mobileBrandId, sistemi: mobileSystemId }}
+          openSection={mobileSection}
+          onToggleSection={toggleMobileSection}
+          onClose={closeMobileNav}
+          onNavigate={closeMobileForNavigation}
+          onSearch={() => {
+            handoffFocusRef.current = true;
+            closeMobileNav();
+            openSearch(mobileToggleRef.current);
+          }}
+          pathname={pathname}
+          active={{
+            product: productActive,
+            brand: brandActive,
+            system: systemActive,
+            store: storeActive,
+            katalozi: katalozActive,
+            saveti: savetiActive,
+            support: supportActive,
+          }}
+        />,
         document.body,
       )}
     </header>
@@ -1540,62 +1377,6 @@ function SupportMenu({
  * linija mreže, kratak naziv ispod. Visina znaka je optički ujednačena
  * (`menuGallery`); u tamnoj temi se prikazuje jednobojna verzija prebojena u belo.
  */
-function BrandMenuLink({
-  brand,
-  active,
-  onNavigate,
-}: {
-  brand: NavigationLink;
-  active: boolean;
-  onNavigate: () => void;
-}) {
-  const gallery = brand.menuGallery;
-  const height = gallery?.height ?? brand.menuLogoHeight ?? 40;
-  const monoHeight = gallery?.monoHeight ?? height;
-  return (
-    <Link
-      href={brand.href}
-      className={styles.brandLink}
-      aria-current={active ? "page" : undefined}
-      data-active={active || undefined}
-      onClick={onNavigate}
-    >
-      <span className={styles.brandLinkArrow} aria-hidden="true">
-        <svg viewBox="0 0 16 16" fill="none">
-          <path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" />
-        </svg>
-      </span>
-      <span className={styles.brandLogoFrame} aria-hidden="true">
-        {brand.logo ? (
-          <>
-            <Image
-              src={brand.logo}
-              alt=""
-              width={200}
-              height={height}
-              className={styles.brandLogo}
-              data-logo-tone="color"
-              style={{ height, width: "auto" }}
-            />
-            <Image
-              src={gallery?.monoSrc ?? brand.logo}
-              alt=""
-              width={200}
-              height={monoHeight}
-              className={styles.brandLogo}
-              data-logo-tone="mono"
-              style={{ height: monoHeight, width: "auto" }}
-            />
-          </>
-        ) : (
-          <strong>{brand.title}</strong>
-        )}
-      </span>
-      <span className={styles.brandLinkName}>{brand.title}</span>
-    </Link>
-  );
-}
-
 function SystemMenuLink({
   link,
   active,
@@ -1626,79 +1407,6 @@ function SystemMenuLink({
       </span>
       <ArrowIcon />
     </Link>
-  );
-}
-
-function MobileAccordion({
-  id,
-  label,
-  active,
-  open,
-  onToggle,
-  children,
-}: {
-  id: string;
-  label: string;
-  active: boolean;
-  open: boolean;
-  onToggle: () => void;
-  children: ReactNode;
-}) {
-  return (
-    <section className={styles.mobileGroup} data-active={active || undefined}>
-      <button
-        type="button"
-        className={styles.mobileGroupTrigger}
-        aria-expanded={open}
-        aria-controls={id}
-        onClick={onToggle}
-      >
-        <span>{label}</span>
-        <span className={styles.mobileGroupIcon} aria-hidden="true">
-          <span />
-          <span />
-        </span>
-      </button>
-      <div
-        id={id}
-        className={styles.mobileGroupBody}
-        data-open={open || undefined}
-        aria-hidden={!open}
-        inert={!open ? true : undefined}
-      >
-        <ul>{children}</ul>
-      </div>
-    </section>
-  );
-}
-
-function MobileMenuLink({
-  href,
-  label,
-  active,
-  primary = false,
-  onNavigate,
-}: {
-  href: string;
-  label: string;
-  active: boolean;
-  primary?: boolean;
-  onNavigate: () => void;
-}) {
-  return (
-    <li>
-      <Link
-        href={href}
-        replace
-        className={cx(styles.mobileLink, primary && styles.mobilePrimaryLink)}
-        aria-current={active ? "page" : undefined}
-        data-active={active || undefined}
-        onClick={onNavigate}
-      >
-        <span>{label}</span>
-        <ArrowIcon />
-      </Link>
-    </li>
   );
 }
 
@@ -1791,33 +1499,6 @@ function ChevronIcon() {
       fill="none"
     >
       <path d="M1.5 1.75 6 6.25l4.5-4.5" />
-    </svg>
-  );
-}
-
-function SearchIcon() {
-  return (
-    <svg
-      className={styles.searchIcon}
-      aria-hidden="true"
-      viewBox="0 0 24 24"
-      fill="none"
-    >
-      <circle cx="10.8" cy="10.8" r="5.8" />
-      <path d="m15.2 15.2 4.3 4.3" />
-    </svg>
-  );
-}
-
-function ArrowIcon() {
-  return (
-    <svg
-      className={styles.arrowIcon}
-      aria-hidden="true"
-      viewBox="0 0 18 18"
-      fill="none"
-    >
-      <path d="M3.5 9h10M10 5.5 13.5 9 10 12.5" />
     </svg>
   );
 }

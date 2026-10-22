@@ -12,6 +12,8 @@ const routeUrl = new URL("../../app/proizvodi/[slug]/page.tsx", import.meta.url)
 const typesUrl = new URL("../../types/product-detail.ts", import.meta.url);
 const globalsUrl = new URL("../../app/globals.css", import.meta.url);
 const headerUrl = new URL("../layout/Header.tsx", import.meta.url);
+// Mobilni meni headera je u svom fajlu od 2026-10-22.
+const headerMobileUrl = new URL("../layout/HeaderMobileMenu.tsx", import.meta.url);
 
 test("variant selector follows the declaration while accordion stays in the sticky narrative", async () => {
   const page = await readFile(pageUrl, "utf8");
@@ -141,11 +143,13 @@ test("family, commercial variant, catalog strategy and recommendation models are
 
 test("header keeps only the Carsystem mark in desktop and mobile brand zones", async () => {
   const header = await readFile(headerUrl, "utf8");
+  const headerMobile = await readFile(headerMobileUrl, "utf8");
 
   assert.doesNotMatch(header, />R-M Inđija</);
+  assert.doesNotMatch(headerMobile, />R-M Inđija</);
   assert.match(header, /aria-label="Carsystem početna"/);
   assert.match(header, /className=\{styles\.brandSymbol\}/);
-  assert.match(header, /className=\{styles\.mobilePanelLogo\}/);
+  assert.match(headerMobile, /className=\{styles\.mobilePanelLogo\}/);
 });
 
 test("stage sizing and sticky boundary retain the approved narrative layout", async () => {

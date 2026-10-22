@@ -316,6 +316,8 @@ test("javni PDP nema nijednu cart kontrolu", async () => {
     read("../../app/proizvodi/grupa/[slug]/page.tsx"),
     read("../../app/layout.tsx"),
     read("../layout/Header.tsx"),
+    read("../layout/HeaderMobileMenu.tsx"),
+    read("../layout/HeaderParts.tsx"),
   ]);
 
   for (const source of sources) {

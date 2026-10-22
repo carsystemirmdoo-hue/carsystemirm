@@ -271,9 +271,7 @@
 .desktopNavList,
 .brandGrid,
 .systemGroup ul,
-.supportLinks,
-.mobileSectionList,
-.mobileGroupBody ul {
+.supportLinks {
   margin: 0;
   padding: 0;
   list-style: none;
@@ -411,7 +409,6 @@
 .iconAction,
 .themeSlot :global(button),
 .mobileToggle,
-.mobileClose,
 .panelClose {
   display: inline-grid;
   width: 2.5rem;
@@ -433,7 +430,6 @@
 .iconAction:hover,
 .themeSlot :global(button:hover),
 .mobileToggle:hover,
-.mobileClose:hover,
 .panelClose:hover {
   border-color: var(--header-ink);
   background: var(--header-hover);
@@ -491,8 +487,7 @@
   position: relative;
 }
 
-.mobileToggle span,
-.mobileClose span {
+.mobileToggle span {
   position: absolute;
   display: block;
   width: 1.05rem;
@@ -510,13 +505,11 @@
   transform: translateY(0.2rem);
 }
 
-.mobileToggle[aria-expanded="true"] span:first-child,
-.mobileClose span:first-child {
+.mobileToggle[aria-expanded="true"] span:first-child {
   transform: rotate(45deg);
 }
 
-.mobileToggle[aria-expanded="true"] span:last-child,
-.mobileClose span:last-child {
+.mobileToggle[aria-expanded="true"] span:last-child {
   transform: rotate(-45deg);
 }
 
@@ -771,8 +764,7 @@
 }
 
 .panelHeading p,
-.supportHeading p,
-.mobileKicker {
+.supportHeading p {
   color: var(--header-red-text);
   font-family: var(--font-technical), var(--font-body), monospace;
   font-size: var(--ds-font-label);
@@ -926,18 +918,11 @@
 .systemLink:hover .arrowIcon,
 .systemLink:focus-visible .arrowIcon,
 .panelFooter a:hover .arrowIcon,
-.panelFooter a:focus-visible .arrowIcon,
-.mobileLink:focus-visible .arrowIcon {
+.panelFooter a:focus-visible .arrowIcon {
   opacity: 1;
   transform: translateX(0.1rem);
 }
 
-@media (hover: hover) and (pointer: fine) {
-  .mobileLink:hover .arrowIcon {
-    opacity: 1;
-    transform: translateX(0.1rem);
-  }
-}
 
 /*
  * Meni brendova — predlog A „galerija logotipa“ (izbor vlasnika 2026-10-18).
@@ -1127,52 +1112,15 @@
 }
 
 /* Ista galerija u mobilnom meniju: 2 kolone na telefonu, 4 od 34rem. */
-.mobileBrandItem {
-  padding: 0.35rem 0 0.6rem;
-}
 
-.mobileBrandGrid {
-  display: grid;
-  margin: 0;
-  padding: 0;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  border-top: 1px solid var(--header-border);
-  border-left: 1px solid var(--header-border);
-  list-style: none;
-}
 
-.mobileBrandGrid > li {
-  min-width: 0;
-  border-right: 1px solid var(--header-border);
-  border-bottom: 1px solid var(--header-border);
-}
 
-.mobileBrandGrid .brandLink {
-  height: 7.25rem;
-}
 
-.mobileBrandGrid .brandLogoFrame {
-  height: 3.6rem;
-  transform: scale(0.62);
-}
 
-.mobileBrandGrid .brandLinkName {
-  margin-top: 0.35rem;
-}
 
-.mobileBrandGrid .brandLinkArrow {
-  display: none;
-}
 
-.mobileBrandGrid .brandLink:focus-visible {
-  outline-offset: -3px;
-}
 
-@media (min-width: 34rem) {
-  .mobileBrandGrid {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-  }
-}
+
 
 /* Kompaktan panel: naslov, „Svi brendovi“ i zatvaranje u jednom redu. */
 .megaPanel[data-compact] {
@@ -1451,286 +1399,41 @@
   min-height: 4.3rem;
 }
 
-.mobileLayer {
-  /*
-   * Portaled to document.body (fix za containing-block bug: .header ima
-   * transform-baziranu entrance/scroll-hide animaciju, pa position:fixed
-   * potomci uzimaju header-ov box kao containing block umesto viewporta —
-   * inset:0 se tada svodi na header-ovu visinu, ne ceo ekran). Van header
-   * DOM podstabla, --header-* custom properties definisane na .header vise
-   * se ne nasleđuju, zato se ovde ponavljaju sa stabilnim baznim tokenima
-   * (bez paint-chapter interpolacije i R-M atmosphere override-a — modal
-   * preko celog ekrana ne treba da prati prolazno skrol/atmosphere bojenje
-   * header chrome-a).
-   */
-  --header-ease: cubic-bezier(0.16, 1, 0.3, 1);
-  --header-panel: var(--surface);
-  --header-ink: var(--foreground);
-  --header-muted: var(--muted-foreground);
-  --header-border: var(--border);
-  --header-border-strong: var(--ds-c-line-strong);
-  --header-hover: var(--ds-c-surface-2);
-  --header-red: var(--accent);
-  --header-red-hover: var(--ds-c-accent-hover);
-  --header-red-text: var(--ds-c-accent-text);
-  --header-red-ink: var(--accent-foreground);
-  --header-focus: var(--ds-c-focus);
-  position: fixed;
-  z-index: 80;
-  inset: 0;
-  display: flex;
-  justify-content: flex-end;
-  overflow: hidden;
-}
 
-.mobileScrim {
-  position: absolute;
-  inset: 0;
-  border: 0;
-  background: oklch(0.09 0.012 255 / 0.62);
-  opacity: 0;
-  animation: backdropIn 200ms var(--header-ease) forwards;
-}
 
-.mobilePanel {
-  position: relative;
-  display: grid;
-  width: min(31rem, 100%);
-  height: 100dvh;
-  grid-template-rows: auto minmax(0, 1fr) auto;
-  overflow: hidden;
-  border-left: 1px solid var(--header-border);
-  background: var(--header-panel);
-  box-shadow: -1.5rem 0 4.5rem oklch(0.08 0.012 255 / 0.34);
-  padding:
-    max(0.8rem, env(safe-area-inset-top))
-    max(1rem, env(safe-area-inset-right))
-    max(0.9rem, env(safe-area-inset-bottom))
-    max(1rem, env(safe-area-inset-left));
-  animation: mobilePanelIn 220ms var(--header-ease) both;
-}
 
-.mobilePanelHeader {
-  display: flex;
-  min-height: 3.5rem;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
-  border-bottom: 1px solid var(--header-border);
-  padding-bottom: 0.75rem;
-}
 
-.mobilePanelBrand {
-  display: inline-flex;
-  min-width: 0;
-  align-items: center;
-  color: var(--header-ink);
-  font-family: var(--font-display), var(--font-body), sans-serif;
-  font-size: 0.86rem;
-  font-weight: 750;
-  text-decoration: none;
-}
 
-.mobilePanelLogo {
-  display: grid;
-  width: 3.25rem;
-  height: 3.25rem;
-  flex: 0 0 auto;
-  place-items: center;
-  overflow: hidden;
-  background: #e30613;
-  padding: 0.15rem;
-}
 
-.mobilePanelLogo img {
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-}
 
-.mobileClose {
-  width: 2.5rem;
-  height: 2.5rem;
-}
 
-.mobileScrollArea {
-  overflow-y: auto;
-  overscroll-behavior: contain;
-  padding: 1.15rem 0 1rem;
-  scrollbar-width: thin;
-}
 
-.mobileKicker {
-  margin: 0 0 0.8rem;
-}
 
-.mobileSectionList {
-  display: grid;
-  gap: 0.25rem;
-}
 
-.mobileGroup {
-  border-bottom: 1px solid var(--header-border);
-}
 
-.mobileGroupTrigger,
-.mobileLink {
-  display: flex;
-  width: 100%;
-  min-height: 3.75rem;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
-  border: 0;
-  background: transparent;
-  color: var(--header-ink);
-  cursor: pointer;
-  font: inherit;
-  font-family: var(--font-body), system-ui, sans-serif;
-  font-size: 1.0625rem;
-  font-weight: 600;
-  padding: 0 0.15rem;
-  text-align: left;
-  text-decoration: none;
-}
 
-.mobileGroup[data-active] .mobileGroupTrigger,
-.mobileLink[data-active] {
-  color: var(--header-red-text);
-}
 
-.mobileGroupIcon {
-  position: relative;
-  display: grid;
-  width: 2.25rem;
-  height: 2.25rem;
-  flex: 0 0 auto;
-  place-items: center;
-  border: 1px solid var(--header-border-strong);
-  border-radius: var(--ds-ctl-radius);
-}
 
-.mobileGroupIcon span {
-  position: absolute;
-  width: 0.75rem;
-  height: 1px;
-  background: currentColor;
-  transition: transform 200ms var(--header-ease);
-}
 
-.mobileGroupIcon span:last-child {
-  transform: rotate(90deg);
-}
 
-.mobileGroupTrigger[aria-expanded="true"] .mobileGroupIcon span:last-child {
-  transform: rotate(0);
-}
 
-.mobileGroupBody {
-  display: grid;
-  grid-template-rows: 0fr;
-  opacity: 0;
-  transition:
-    grid-template-rows 210ms var(--header-ease),
-    opacity 170ms ease;
-}
 
-.mobileGroupBody[data-open] {
-  grid-template-rows: 1fr;
-  opacity: 1;
-}
 
-.mobileGroupBody > ul {
-  display: grid;
-  min-height: 0;
-  gap: 0.08rem;
-  overflow: hidden;
-  padding: 0 0 0.55rem 0.85rem;
-}
 
-.mobileGroupBody li {
-  min-width: 0;
-}
 
-.mobileGroupBody .mobileLink {
-  min-height: var(--ds-ctl-h-m);
-  border-bottom: 0;
-  color: var(--header-muted);
-  font-size: var(--ds-font-body);
-  font-weight: 500;
-}
 
-.mobileGroupBody .mobileLink[data-active] {
-  color: var(--header-red-text);
-  font-weight: 600;
-}
 
-.mobileLink {
-  border-bottom: 1px solid var(--header-border);
-}
 
-.mobileLink .arrowIcon {
-  opacity: 0.58;
-}
 
-.mobilePrimaryLink {
-  font-size: 1.0625rem;
-  font-weight: 600;
-}
 
 /* Dugmad mobilnog menija su pune širine (sistem A). */
-.mobileActions {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr);
-  gap: 0.5rem;
-  border-top: 1px solid var(--header-border);
-  padding-top: 0.85rem;
-}
 
-.mobileSearch,
-.mobileContact {
-  display: inline-flex;
-  width: 100%;
-  min-height: var(--ds-ctl-h-m);
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  border: 1px solid var(--header-ink);
-  border-radius: var(--ds-ctl-radius);
-  /* `.mobileSearch` je `button` (otvara panel), pa mu treba i reset dugmeta. */
-  background: transparent;
-  color: var(--header-ink);
-  font: var(--ds-ctl-font);
-  padding: 0 1.125rem;
-  cursor: pointer;
-  text-decoration: none;
-  transition: background-color 190ms var(--header-ease), border-color 190ms var(--header-ease);
-}
 
-.mobileSearch:hover {
-  background: var(--header-hover);
-}
 
-.mobileSearch .searchIcon {
-  color: currentColor;
-}
 
-.mobileContact {
-  border-color: var(--header-red);
-  background: var(--header-red);
-  color: var(--header-red-ink) !important;
-}
 
-.mobileContact:hover {
-  border-color: var(--header-red-hover);
-  background: var(--header-red-hover);
-}
 
-.mobileContact .arrowIcon {
-  color: currentColor;
-  opacity: 1;
-}
+
 
 .brandMark:focus-visible,
 .navLink:focus-visible,
@@ -1743,13 +1446,7 @@
 .panelClose:focus-visible,
 .brandLink:focus-visible,
 .systemLink:focus-visible,
-.panelFooter a:focus-visible,
-.mobileClose:focus-visible,
-.mobilePanelBrand:focus-visible,
-.mobileGroupTrigger:focus-visible,
-.mobileLink:focus-visible,
-.mobileSearch:focus-visible,
-.mobileContact:focus-visible {
+.panelFooter a:focus-visible {
   outline: 2px solid var(--header-focus);
   outline-offset: 2px;
 }
@@ -1788,24 +1485,6 @@
   }
 }
 
-@keyframes backdropIn {
-  to {
-    opacity: 1;
-  }
-}
-
-@keyframes mobilePanelIn {
-  from {
-    opacity: 0;
-    transform: translateX(1.5rem);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
 @media (min-width: 34rem) {
   .contactCta {
     display: inline-flex;
@@ -1830,7 +1509,7 @@
   /* Navigacija je u sistemu A 15 px; uži razmak čuva prostor koji je
      zaglavlje imalo sa ranijim 13 px tekstom. */
   .navLink,
-  .navTrigger {
+.navTrigger {
     padding-inline: 0.4rem;
   }
 
@@ -1869,7 +1548,7 @@
 
 @media (max-width: 80rem) and (min-width: 73.01rem) {
   .navLink,
-  .navTrigger {
+.navTrigger {
     padding-inline: 0.5rem;
   }
 }
@@ -1883,7 +1562,8 @@
     gap: 0.5rem;
   }
 
-  .shell:has([data-account="signed-in"]) :is(.navLink, .navTrigger) {
+  .shell:has([data-account="signed-in"]) :is(.navLink,
+.navTrigger) {
     padding-inline: 0.32rem;
     font-size: 0.875rem;
   }
@@ -1909,7 +1589,7 @@
   }
 
   .iconAction,
-  .themeSlot :global(button) {
+.themeSlot :global(button) {
     display: none;
   }
 
@@ -1921,22 +1601,13 @@
     width: 2.5rem;
     height: 2.5rem;
   }
-
-  .mobilePanel {
-    width: 100%;
-    border-left: 0;
-  }
-
-  .mobileActions {
-    grid-template-columns: 1fr;
-  }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .header,
-  .header *,
-  .header *::before,
-  .header *::after {
+.header *,
+.header *::before,
+.header *::after {
     scroll-behavior: auto;
     transition-duration: 0.001ms !important;
     animation-duration: 0.001ms !important;
@@ -1944,10 +1615,10 @@
   }
 
   .header,
-  .header[data-entrance-state="pending"],
-  .header[data-entrance-state="pending"] .brandMark,
-  .header[data-entrance-state="pending"] .desktopNavList > .navItem,
-  .header[data-entrance-state="pending"] .actions {
+.header[data-entrance-state="pending"],
+.header[data-entrance-state="pending"] .brandMark,
+.header[data-entrance-state="pending"] .desktopNavList > .navItem,
+.header[data-entrance-state="pending"] .actions {
     opacity: 1;
     transform: none;
   }
@@ -1961,25 +1632,25 @@
   }
 
   .megaLayer .megaBackdrop,
-  .megaLayer .megaPanel,
-  .megaLayer .panelHeading,
-  .megaLayer .panelContent > *,
-  .megaLayer .supportPanel {
+.megaLayer .megaPanel,
+.megaLayer .panelHeading,
+.megaLayer .panelContent > *,
+.megaLayer .supportPanel {
     transition: none !important;
   }
 
   .megaLayer[data-state="opening"] .megaPanel,
-  .megaLayer[data-state="open"] .megaPanel,
-  .megaLayer[data-state="closing"] .megaPanel {
+.megaLayer[data-state="open"] .megaPanel,
+.megaLayer[data-state="closing"] .megaPanel {
     clip-path: none;
   }
 
   .megaLayer[data-state="opening"] .panelHeading,
-  .megaLayer[data-state="open"] .panelHeading,
-  .megaLayer[data-state="opening"] .panelContent > *,
-  .megaLayer[data-state="open"] .panelContent > *,
-  .megaLayer[data-state="opening"] .supportPanel,
-  .megaLayer[data-state="open"] .supportPanel {
+.megaLayer[data-state="open"] .panelHeading,
+.megaLayer[data-state="opening"] .panelContent > *,
+.megaLayer[data-state="open"] .panelContent > *,
+.megaLayer[data-state="opening"] .supportPanel,
+.megaLayer[data-state="open"] .supportPanel {
     opacity: 1;
     transform: none;
   }

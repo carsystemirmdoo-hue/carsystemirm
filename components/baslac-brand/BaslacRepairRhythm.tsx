@@ -9,7 +9,7 @@ import {
   baslacRepairProcesses,
   type BaslacMediaAvailability,
 } from "./baslacBrandData";
-import styles from "./BaslacBrandPage.module.css";
+import styles from "./BaslacBrandPage.styles";
 
 export function BaslacRepairRhythm({
   availability,

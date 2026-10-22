@@ -1,0 +1,179 @@
+/*
+ * DESKTOP raspored za CarfitBrandPage (od 1024px). Uređuje se nezavisno; zajednički izgled je u
+ * CarfitBrandPage.module.css, a komponente koriste CarfitBrandPage.styles.ts (2026-10-22).
+ *
+ * Prva klasa svakog selektora je udvostručena (specifičnost +1): raspored ne zavisi od
+ * redosleda učitavanja CSS delova (scripts/css/bump-responsive.py).
+ */
+
+@media (min-width: 1024px) {
+  .storyMedia.storyMedia {
+    aspect-ratio: 4 / 5;
+  }
+}
+
+@media (min-width: 1024px) {
+  .zoneGrid.zoneGrid,
+  .docGrid.docGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .categoryBoard.categoryBoard {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .familyGrid.familyGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .familyWide.familyWide {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (min-width: 1024px) {
+  .heroInner.heroInner {
+    padding-block: clamp(3.5rem, 6vw, 6rem);
+  }
+
+  .productShowcase.productShowcase {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .productCardLead.productCardLead {
+    grid-column: span 2;
+  }
+
+  .productShowcase.productShowcase[data-count="2"] .productCardLead {
+    grid-column: span 1;
+  }
+
+  .storyRow.storyRow {
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+  }
+
+  .storyRowReverse.storyRowReverse .storyMedia {
+    order: -1;
+  }
+}
+
+@media (min-width: 64rem) {
+  .pageShell.pageShell {
+    --cf-nav-offset: 4.35rem;
+  }
+
+  .heroInner.heroInner {
+    grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr);
+  }
+
+  .taskLayout.taskLayout {
+    grid-template-columns: minmax(15rem, 20rem) minmax(0, 1fr);
+    align-items: start;
+  }
+
+  .taskList.taskList {
+    display: block;
+  }
+
+  .taskStrip.taskStrip {
+    display: none;
+  }
+
+  .taskPanelGrid.taskPanelGrid {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  }
+
+  .zoneGrid.zoneGrid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .docGrid.docGrid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .categoryBoard.categoryBoard {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
+
+  .gradationLayout.gradationLayout {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 0.85fr);
+  }
+
+  .familyGrid.familyGrid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-auto-rows: minmax(13rem, auto);
+  }
+
+  .familyHero.familyHero {
+    grid-column: span 2;
+    grid-row: span 2;
+  }
+
+  .familyTall.familyTall {
+    grid-column: span 2;
+    grid-row: span 1;
+  }
+
+  /* Ceo red: sa „span 3“ u mreži od 4 ostajalo je jedno prazno sivo polje. */
+  .familyWide.familyWide {
+    grid-column: 1 / -1;
+  }
+
+  .familyUnit.familyUnit {
+    grid-column: span 1;
+  }
+
+  .productShowcase.productShowcase {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-auto-rows: minmax(0, 1fr);
+  }
+
+  .productCardLead.productCardLead {
+    grid-column: span 2;
+    grid-row: span 2;
+  }
+
+  /* Jedan ili dva artikla ne smeju ostaviti prazno polje u mreži. */
+  .productShowcase.productShowcase[data-count="1"] .productCardLead {
+    grid-column: span 3;
+    grid-row: span 1;
+  }
+
+  .productShowcase.productShowcase[data-count="2"] .productCardLead {
+    grid-column: span 2;
+    grid-row: span 1;
+  }
+
+  .finalCtaInner.finalCtaInner {
+    grid-template-columns: minmax(0, 1fr) minmax(18rem, 24rem);
+  }
+}
+
+@media (min-width: 1024px) and (max-width: 1024px) {
+  .heroBelow.heroBelow {
+    grid-template-columns: 1fr;
+    align-items: start;
+  }
+
+  .repGrid.repGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 64rem) {
+  .abrasiveLayout.abrasiveLayout {
+    grid-template-columns: minmax(0, 0.82fr) minmax(0, 1.18fr);
+  }
+
+  /* Uspravan kadar ostaje u celini i prati listu dok se ona čita. */
+  .abrasivePhoto.abrasivePhoto {
+    position: sticky;
+    top: calc(var(--brand-section-header-offset, 4.5rem) + var(--brand-section-nav-height, 3.5rem) + 1.5rem);
+    aspect-ratio: 983 / 1435;
+    max-height: calc(100vh - 10rem);
+  }
+
+  .abrasivePhoto.abrasivePhoto img {
+    object-position: 50% 60%;
+  }
+}

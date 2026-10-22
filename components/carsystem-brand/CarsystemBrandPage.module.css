@@ -753,11 +753,11 @@
   border-right: 1px solid var(--cs-line);
 }
 
-.metrics dl > div:first-child {
+.metrics.metrics dl > div:first-child {
   padding-left: 0;
 }
 
-.metrics dl > div:last-child {
+.metrics.metrics dl > div:last-child {
   padding-right: 0;
   border-right: 0;
 }
@@ -829,7 +829,7 @@
     color 280ms var(--cs-ease);
 }
 
-.processTabs button:last-child {
+.processTabs.processTabs button:last-child {
   border-bottom: 0;
 }
 
@@ -1195,7 +1195,7 @@
   padding-left: 0;
 }
 
-.workflowTrack article:last-child {
+.workflowTrack.workflowTrack article:last-child {
   padding-right: 0;
   border-right: 0;
 }
@@ -1428,7 +1428,7 @@
   height: 75%;
 }
 
-.familyPanel[data-layout="medium"] .familyVisual > span[data-product-index="1"] {
+.familyPanel.familyPanel[data-layout="medium"] .familyVisual > span[data-product-index="1"] {
   right: 14%;
   bottom: -20%;
   width: 43%;
@@ -1452,7 +1452,7 @@
   height: 92%;
 }
 
-.familyPanel[data-layout="wide"] .familyVisual > span[data-product-index="1"] {
+.familyPanel.familyPanel[data-layout="wide"] .familyVisual > span[data-product-index="1"] {
   right: 43%;
   width: 37%;
   opacity: 0.84;
@@ -1532,7 +1532,7 @@
     color 220ms var(--cs-ease);
 }
 
-.useCaseTabs button:last-child {
+.useCaseTabs.useCaseTabs button:last-child {
   border-bottom: 0;
 }
 
@@ -1965,13 +1965,6 @@
   padding-block-start: clamp(3.5rem, 6vw, 5.5rem);
 }
 
-/* Četiri istaknuta: 2 × 2 umesto 3 + 1 kada mreža ima tri kolone. */
-@media (min-width: 30.01rem) and (max-width: 80rem) {
-  .rupesGrid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-}
-
 .rupesNote {
   max-width: var(--ds-w-measure, 68ch);
   margin-block: calc(clamp(2.75rem, 5vw, 5rem) * -0.5) clamp(1.75rem, 3vw, 2.5rem) !important;
@@ -2207,16 +2200,6 @@
  */
 .documentationIntro {
   align-self: start;
-}
-
-@media (min-width: 64rem) and (min-height: 40rem) {
-  .documentationIntro {
-    position: sticky;
-    top: calc(
-      var(--brand-section-header-offset, 0px) +
-        var(--brand-section-nav-height, 3.75rem) + 2rem
-    );
-  }
 }
 
 .documentationIntro h2 {
@@ -2568,779 +2551,6 @@
   --cs-dark-raised: oklch(0.135 0.018 245);
 }
 
-@media (max-width: 80rem) {
-  .heroGrid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: clamp(1.8rem, 3.2vw, 3.6rem);
-  }
-
-  .heroMessage h1 {
-    font-size: clamp(2.75rem, 5.6vw, 5rem);
-  }
-
-  .processDesktop {
-    grid-template-columns: minmax(15rem, 0.3fr) minmax(0, 1fr);
-  }
-
-  .processWorkspace {
-    grid-template-columns: minmax(0, 1fr) minmax(18rem, 0.8fr);
-  }
-
-  .processCategories > div {
-    grid-template-columns: 1fr;
-  }
-
-  .useCaseProducts {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  .productGrid {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
-}
-
-@media (max-width: 64rem) {
-  .section {
-    width: min(calc(100% - 3rem), 94rem);
-  }
-
-  .hero {
-    min-height: auto;
-    padding-inline: 1.5rem;
-  }
-
-  .heroGrid {
-    min-height: 42rem;
-    grid-template-columns: minmax(20rem, 0.94fr) minmax(25rem, 1.06fr);
-  }
-
-  .heroMessage h1 {
-    font-size: clamp(2.5rem, 6vw, 4.25rem);
-  }
-
-  .heroMessage > p:last-child {
-    font-size: 1rem;
-  }
-
-  .heroMedia {
-    min-height: 34rem;
-  }
-
-  .metrics {
-    width: min(calc(100% - 3rem), 94rem);
-  }
-
-  .sectionHeader {
-    grid-template-columns: minmax(0, 1fr) minmax(16rem, 0.52fr);
-    gap: 2rem;
-  }
-
-  .processDesktop {
-    display: block;
-  }
-
-  .processTabs {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    border-right: 0;
-    border-bottom: 1px solid var(--cs-line-strong);
-  }
-
-  .processTabs button {
-    min-height: 8.5rem;
-    border-right: 1px solid var(--cs-line);
-    border-bottom: 0;
-  }
-
-  .processTabs button:last-child {
-    border-right: 0;
-  }
-
-  .processTabs button > small {
-    display: none;
-  }
-
-  .processWorkspace {
-    min-height: 37rem;
-    grid-template-columns: minmax(0, 1fr) minmax(18rem, 0.78fr);
-  }
-
-  .processMedia {
-    min-height: 33rem;
-  }
-
-  .processDetails {
-    padding: 1.5rem;
-  }
-
-  .processProducts a:nth-child(n + 3) {
-    display: none;
-  }
-
-  .workflowSection,
-  .useCasesSection,
-  .documentationSection {
-    padding-inline: 1.5rem;
-  }
-
-  .workflowTrack article > div:last-child {
-    padding-inline: 0.3rem;
-  }
-
-  .workflowTrack article > div:last-child::before {
-    left: 0.3rem;
-  }
-
-  .familyPanel[data-layout="featured"] {
-    grid-column: span 8;
-  }
-
-  .familyPanel[data-layout="medium"] {
-    grid-column: span 4;
-  }
-
-  .familyPanel[data-layout="medium"] .familyCopy {
-    width: 74%;
-  }
-
-  .familyPanel[data-layout="medium"] .familyVisual > span {
-    opacity: 0.74;
-  }
-
-  .useCasesLayout {
-    grid-template-columns: minmax(15rem, 0.32fr) minmax(0, 1fr);
-  }
-
-  .useCaseProducts {
-    grid-template-columns: 1fr;
-  }
-
-  .useCaseProducts > a:nth-child(n + 4) {
-    display: none;
-  }
-
-  .documentationSection {
-    grid-template-columns: minmax(16rem, 0.48fr) minmax(0, 1fr);
-    gap: 3rem;
-  }
-
-  .documentationActions {
-    margin-block-start: -2.2rem;
-  }
-
-  .finalCta {
-    width: min(calc(100% - 3rem), 94rem);
-    grid-template-columns: minmax(20rem, 0.92fr) minmax(24rem, 1.08fr);
-  }
-}
-
-@media (max-width: 48rem) {
-  .carsystemPage :where(#overview, #process, #systems, #use-cases, #products, #rupes, #documentation) {
-    scroll-margin-top: calc(
-      var(--brand-section-header-offset, 0px) +
-        var(--brand-section-nav-height, 3.35rem) + 0.75rem
-    );
-  }
-
-  .section {
-    width: min(calc(100% - 2rem), 94rem);
-    padding-block: clamp(4.75rem, 17vw, 7rem);
-  }
-
-  .sectionHeader {
-    display: block;
-    margin-block-end: 2.5rem;
-  }
-
-  .sectionHeader > p {
-    margin-block-start: 1.4rem;
-  }
-
-  .finishSteps,
-  .multiChangerGrid,
-  .documentLibraryGrid {
-    grid-template-columns: 1fr;
-  }
-
-  .breadcrumb {
-    top: 1rem;
-    left: 1rem;
-  }
-
-  .hero {
-    padding: 4.3rem 1rem 1rem;
-  }
-
-  .heroGrid {
-    display: flex;
-    min-height: auto;
-    flex-direction: column;
-    gap: 2.5rem;
-    align-items: stretch;
-  }
-
-  .heroCopy {
-    max-width: none;
-  }
-
-  .heroBrand {
-    gap: 0.7rem;
-  }
-
-  .heroMessage {
-    margin-block-start: 1.4rem;
-  }
-
-  .heroMessage h1 {
-    max-width: 11ch;
-    font-size: clamp(2.5rem, 11vw, 4.25rem);
-    line-height: 0.98;
-  }
-
-  .heroMessage > p:last-child {
-    max-width: 38rem;
-    line-height: 1.6;
-  }
-
-  .heroActions {
-    display: grid;
-    width: 100%;
-    grid-template-columns: 1fr;
-  }
-
-  .heroActions a {
-    width: 100%;
-  }
-
-  .heroActivePhase {
-    margin-block-start: 2.2rem;
-  }
-
-  .heroVisual {
-    width: calc(100% + 2rem);
-    margin-inline: -1rem;
-  }
-
-  .heroMedia {
-    min-height: 27rem;
-    aspect-ratio: 4 / 5;
-    clip-path: none;
-  }
-
-  .heroMedia::before {
-    background: linear-gradient(
-      0deg,
-      color-mix(in oklch, var(--cs-dark) 34%, transparent),
-      transparent 42%
-    );
-  }
-
-  .heroProcessLine {
-    right: 4%;
-    bottom: 4%;
-    width: 92%;
-  }
-
-  .heroControls {
-    display: block;
-    margin-block-start: 0.8rem;
-  }
-
-  .heroTabs {
-    overflow-x: auto;
-    grid-template-columns: repeat(3, minmax(12rem, 1fr));
-    overscroll-behavior-inline: contain;
-    scrollbar-width: none;
-  }
-
-  .heroTabs::-webkit-scrollbar {
-    display: none;
-  }
-
-  .heroTabs button {
-    min-height: 3.8rem;
-  }
-
-  .heroTransport {
-    justify-content: flex-end;
-    margin-block-start: 0.65rem;
-  }
-
-  .metrics {
-    width: min(calc(100% - 2rem), 94rem);
-    padding-block: 2.4rem 3.4rem;
-  }
-
-  .metrics dl {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    row-gap: 1.6rem;
-  }
-
-  .metrics dl > div {
-    padding-inline: 0;
-    padding-right: 1rem;
-    border-right: 0;
-  }
-
-  .metrics dl > div:nth-child(even) {
-    padding-right: 0;
-    padding-left: 1rem;
-    border-left: 1px solid var(--cs-line);
-  }
-
-  .processSection {
-    padding-block-start: 5rem;
-  }
-
-  .processDesktop {
-    display: none;
-  }
-
-  .processAccordion {
-    display: block;
-    border-block: 1px solid var(--cs-line-strong);
-  }
-
-  .processAccordion article {
-    border-bottom: 1px solid var(--cs-line);
-  }
-
-  .processAccordion article:last-child {
-    border-bottom: 0;
-  }
-
-  .processAccordion h3 {
-    margin: 0;
-  }
-
-  .processAccordion h3 button {
-    display: grid;
-    width: 100%;
-    min-height: 4.7rem;
-    grid-template-columns: 2.4rem 1fr auto;
-    gap: 0.75rem;
-    align-items: center;
-    padding: 0.8rem 0.5rem;
-    border: 0;
-    background: transparent;
-    color: var(--cs-ink);
-    cursor: pointer;
-    font: inherit;
-    font-family: var(--font-display), var(--font-geist-sans), sans-serif;
-    font-size: var(--ds-font-h3);
-    font-weight: 700;
-    text-align: left;
-  }
-
-  .processAccordion h3 button > span {
-    color: var(--cs-red-text, var(--cs-red));
-    font-family: var(--font-technical), var(--font-geist-mono), monospace;
-    font-size: var(--ds-font-label);
-  }
-
-  .processAccordion h3 button > i {
-    color: var(--cs-red-text, var(--cs-red));
-    font-family: var(--font-body), sans-serif;
-    font-style: normal;
-  }
-
-  .processAccordionPanel {
-    display: grid;
-    grid-template-rows: 0fr;
-    transition: grid-template-rows 520ms var(--cs-ease);
-  }
-
-  .processAccordionPanel[data-open] {
-    grid-template-rows: 1fr;
-  }
-
-  .processAccordionPanel > div {
-    min-height: 0;
-    overflow: hidden;
-  }
-
-  .processAccordionPanel .processMedia {
-    height: auto;
-    min-height: 0;
-    aspect-ratio: 4 / 3;
-  }
-
-  .processAccordionPanel .processDetails {
-    padding: 1.4rem 0.5rem 2rem;
-  }
-
-  .processAccordionPanel .processCategories > div {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  .processAccordionPanel .processProducts a:nth-child(n + 3) {
-    display: grid;
-  }
-
-  .processAccordionPanel .processCta {
-    margin-block-start: 1.7rem;
-  }
-
-  .workflowSection {
-    padding-inline: 1rem;
-  }
-
-  .workflowHeader {
-    display: block;
-    margin-block-end: 3rem;
-  }
-
-  .workflowHeader > p {
-    margin-block-start: 1.5rem;
-  }
-
-  .workflowTrack {
-    display: block;
-  }
-
-  .workflowLine {
-    top: 0;
-    right: auto;
-    bottom: 0;
-    left: 0.37rem;
-    width: 3px;
-    height: auto;
-    transform: scaleY(0);
-    transform-origin: top;
-  }
-
-  .workflowSection[data-cs-visible] .workflowLine {
-    transform: scaleY(1);
-  }
-
-  .workflowTrack article {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr);
-    padding: 0 0 2.3rem 1.8rem;
-    border-right: 0;
-  }
-
-  .workflowTrack article:last-child {
-    padding-bottom: 0;
-  }
-
-  .workflowTrack article > div:last-child {
-    padding: 1rem 0 0;
-  }
-
-  .workflowTrack article > div:last-child::before {
-    top: -0.4rem;
-    left: -1.8rem;
-  }
-
-  .workflowMedia {
-    aspect-ratio: 4 / 3;
-  }
-
-  .familiesGrid {
-    display: block;
-  }
-
-  .familyPanel {
-    margin-block-end: 0.85rem;
-  }
-
-  .familyPanel:last-child {
-    margin-block-end: 0;
-  }
-
-  .familyPanel[data-layout="featured"],
-  .familyPanel[data-layout="medium"],
-  .familyPanel[data-layout="wide"] {
-    min-height: 31rem;
-    grid-template-columns: 1fr;
-  }
-
-  .familyPanel[data-layout="featured"] .familyCopy,
-  .familyPanel[data-layout="medium"] .familyCopy,
-  .familyPanel[data-layout="wide"] .familyCopy {
-    width: 72%;
-  }
-
-  .familyPanel[data-layout="wide"] .familyVisual {
-    left: 0;
-  }
-
-  .familyPanel[data-layout="featured"] .familyVisual > span,
-  .familyPanel[data-layout="medium"] .familyVisual > span,
-  .familyPanel[data-layout="wide"] .familyVisual > span {
-    right: -8%;
-    bottom: -3%;
-    width: 58%;
-    height: 66%;
-  }
-
-  .familyPanel[data-layout="medium"] .familyVisual > span[data-product-index="1"],
-  .familyPanel[data-layout="wide"] .familyVisual > span[data-product-index="1"] {
-    right: 19%;
-    bottom: -12%;
-    width: 46%;
-    height: 58%;
-  }
-
-  .familyPanel[data-layout="wide"]::after {
-    background: linear-gradient(
-      90deg,
-      var(--cs-paper-muted) 0%,
-      color-mix(in oklch, var(--cs-paper-muted) 86%, transparent) 52%,
-      transparent 82%
-    );
-  }
-
-  .useCasesSection {
-    padding-inline: 1rem;
-  }
-
-  .useCasesLayout {
-    display: block;
-    border-top: 0;
-  }
-
-  .useCaseTabs {
-    display: flex;
-    overflow-x: auto;
-    border: 0;
-    border-block: 1px solid var(--cs-line-strong);
-    overscroll-behavior-inline: contain;
-    scrollbar-width: none;
-  }
-
-  .useCaseTabs::-webkit-scrollbar {
-    display: none;
-  }
-
-  .useCaseTabs button {
-    min-width: 13rem;
-    min-height: 4.3rem;
-    border-right: 1px solid var(--cs-line);
-    border-bottom: 0;
-  }
-
-  .useCaseResult {
-    min-height: auto;
-    padding: 1.5rem 0;
-    background: transparent;
-  }
-
-  .useCaseProducts {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  .useCaseProducts > a:nth-child(n + 4) {
-    display: grid;
-  }
-
-  .useCaseResult > .primaryButton {
-    margin-block-start: 0;
-  }
-
-  .productGrid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  .productCard > a {
-    min-height: 28rem;
-  }
-
-  .productCardVisual {
-    min-height: 17rem;
-    flex-basis: 17rem;
-  }
-
-  .productsFooter {
-    display: block;
-  }
-
-  .productsFooter .primaryButton {
-    margin-block-start: 1.5rem;
-  }
-
-  .documentationSection {
-    display: block;
-    padding: clamp(5rem, 16vw, 7rem) 1rem;
-  }
-
-  .documentationIntro h2 {
-    max-width: 16ch;
-  }
-
-  .documentationGrid {
-    margin-block-start: 3rem;
-  }
-
-  .documentationActions {
-    margin-block-start: 2rem;
-  }
-
-  .finalCta {
-    display: block;
-    width: min(calc(100% - 2rem), 94rem);
-    min-height: 0;
-    padding-block: 5rem;
-  }
-
-  .finalCtaVisual {
-    min-height: 26rem;
-    margin-block-start: 2.5rem;
-  }
-}
-
-@media (max-width: 30rem) {
-  .heroMessage h1 {
-    font-size: clamp(2.375rem, 11vw, 3.25rem);
-  }
-
-  .heroBrand > span:last-child {
-    max-width: 9rem;
-  }
-
-  .heroMedia {
-    min-height: 24rem;
-  }
-
-  .heroTabs {
-    grid-template-columns: repeat(3, minmax(10.5rem, 1fr));
-  }
-
-  .metrics dt {
-    display: block;
-  }
-
-  .metrics dt span {
-    display: block;
-    margin-block-start: 0.15rem;
-  }
-
-  .processAccordionPanel .processCategories > div {
-    grid-template-columns: 1fr;
-  }
-
-  .familyPanel[data-layout="featured"],
-  .familyPanel[data-layout="medium"],
-  .familyPanel[data-layout="wide"] {
-    min-height: 29rem;
-  }
-
-  .familyPanel[data-layout="featured"] .familyCopy,
-  .familyPanel[data-layout="medium"] .familyCopy,
-  .familyPanel[data-layout="wide"] .familyCopy {
-    width: 82%;
-  }
-
-  .useCaseProducts {
-    grid-template-columns: 1fr;
-  }
-
-  .productFilters {
-    overflow-x: auto;
-    flex-wrap: nowrap;
-    padding-block-end: 0.35rem;
-    overscroll-behavior-inline: contain;
-    scrollbar-width: none;
-  }
-
-  .productFilters::-webkit-scrollbar {
-    display: none;
-  }
-
-  .productFilters button {
-    flex: 0 0 auto;
-  }
-
-  .productGrid {
-    grid-template-columns: 1fr;
-  }
-
-  .productCard > a {
-    min-height: 0;
-  }
-
-  .productCardVisual {
-    min-height: 20rem;
-    flex-basis: 20rem;
-  }
-
-  .documentationGrid article {
-    grid-template-columns: 2rem 1fr 2.8rem;
-    gap: 0.7rem;
-  }
-
-  .documentationGrid article > strong {
-    grid-column: 2;
-    grid-row: 2;
-    text-align: left;
-  }
-
-  .documentationGrid article > a,
-  .documentationGrid article > .disabledResource {
-    grid-column: 3;
-    grid-row: 1 / span 2;
-  }
-
-  .documentationActions {
-    display: grid;
-    grid-template-columns: 1fr;
-  }
-
-  .documentationActions a {
-    width: 100%;
-  }
-
-  .finalCtaCopy > div {
-    display: grid;
-    grid-template-columns: 1fr;
-  }
-
-  .finalCtaCopy a {
-    width: 100%;
-  }
-
-  .finalCtaVisual {
-    min-height: 22rem;
-  }
-}
-
-@media (max-width: 23.5rem) {
-  .hero {
-    padding-inline: 0.75rem;
-  }
-
-  .heroVisual {
-    width: calc(100% + 1.5rem);
-    margin-inline: -0.75rem;
-  }
-
-  .heroMessage h1 {
-    font-size: 2.25rem;
-  }
-
-  .heroActivePhase {
-    grid-template-columns: 2rem 1fr;
-    gap: 0.65rem;
-  }
-
-  .section,
-  .metrics,
-  .finalCta {
-    width: min(calc(100% - 1.5rem), 94rem);
-  }
-
-  .workflowSection,
-  .useCasesSection,
-  .documentationSection {
-    padding-inline: 0.75rem;
-  }
-
-  .familyCopy {
-    padding: 1.25rem;
-  }
-}
-
 @media (prefers-reduced-motion: reduce) {
   .carsystemPage [data-cs-reveal],
   .carsystemPage [data-cs-reveal][data-cs-visible],
@@ -3371,13 +2581,13 @@
     animation: none;
   }
 
-  .workflowLine,
-  .workflowSection[data-cs-visible] .workflowLine {
+  .workflowLine.workflowLine.workflowLine,
+  .workflowSection.workflowSection.workflowSection[data-cs-visible] .workflowLine {
     transform: none;
     transition: none;
   }
 
-  .processAccordionPanel {
+  .processAccordionPanel.processAccordionPanel.processAccordionPanel {
     transition: none;
   }
 }
@@ -3387,7 +2597,7 @@
    iza teksta (leva strana), desni deo fotografije — lakirer i radnja — ostaje
    bez zatamnjenja. Boja gradijenta je površina teme, pa svetla tema dobija svetao
    veo i taman tekst, a tamna taman veo i svetao tekst. */
-.hero[data-photo-hero] {
+.hero.hero[data-photo-hero] {
   min-height: clamp(36rem, calc(84svh - 5.5rem), 50rem);
   overflow: hidden;
   isolation: isolate;
@@ -3443,79 +2653,4 @@
 .hero[data-photo-hero] .heroMessage > p:last-child {
   max-width: 34rem;
   color: var(--cs-ink);
-}
-
-@media (max-width: 64rem) {
-  .hero[data-photo-hero] {
-    padding-inline: max(var(--ds-gutter, 1.5rem), 1.5rem);
-  }
-
-  .heroPhoto img {
-    object-position: 74% 30%;
-  }
-
-  .heroScrim {
-    background: linear-gradient(
-      90deg,
-      color-mix(in oklch, var(--cs-paper) 92%, transparent) 0%,
-      color-mix(in oklch, var(--cs-paper) 84%, transparent) 46%,
-      color-mix(in oklch, var(--cs-paper) 0%, transparent) 72%
-    );
-  }
-
-  .hero[data-photo-hero] .heroCopy {
-    max-width: 30rem;
-  }
-}
-
-/* Telefon: fotografija ostaje preko cele širine bloka, a kadar se pomera na
-   lakirera i pištolj. Tekst počinje u donjem delu, gde fotografija prelazi u
-   površinu stranice; gornji veo drži putanju stranice čitljivom. */
-@media (max-width: 48rem) {
-  .hero[data-photo-hero] {
-    --hero-photo-h: clamp(24rem, 112vw, 32rem);
-    min-height: auto;
-    padding: 0 1rem 1.5rem;
-  }
-
-  .heroPhoto {
-    inset: 0 0 auto;
-    height: var(--hero-photo-h);
-  }
-
-  .heroPhoto img {
-    object-position: 71% 0%;
-  }
-
-  .heroScrim {
-    inset: 0 0 auto;
-    height: var(--hero-photo-h);
-    background:
-      linear-gradient(
-        180deg,
-        color-mix(in oklch, var(--cs-paper) 90%, transparent) 0,
-        color-mix(in oklch, var(--cs-paper) 80%, transparent) 2.6rem,
-        color-mix(in oklch, var(--cs-paper) 0%, transparent) 4.5rem
-      ),
-      linear-gradient(
-        0deg,
-        var(--cs-paper) 0,
-        color-mix(in oklch, var(--cs-paper) 90%, transparent) 14%,
-        color-mix(in oklch, var(--cs-paper) 0%, transparent) 32%
-      );
-  }
-
-  .hero[data-photo-hero] .heroGrid {
-    display: block;
-    min-height: auto;
-    padding-block-start: calc(var(--hero-photo-h) - 2.5rem);
-  }
-
-  .hero[data-photo-hero] .heroCopy {
-    max-width: none;
-  }
-
-  .hero[data-photo-hero] .heroMessage {
-    margin-block-start: 1.75rem;
-  }
 }

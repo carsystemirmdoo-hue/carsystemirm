@@ -1099,7 +1099,7 @@
     transform 220ms var(--rm-ease-out);
 }
 
-.processFlow > li:first-child {
+.processFlow.processFlow.processFlow > li:first-child {
   border-left: 1px solid var(--rm-line);
 }
 
@@ -1383,13 +1383,6 @@
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 1rem;
   margin-top: clamp(2.5rem, 4vw, 4rem);
-}
-
-/* Široki ekrani: četiri pakovanja u jednom redu umesto 2×2 kartica višlje od ekrana. */
-@media (min-width: 1880px) {
-  .agilisProductGrid {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-  }
 }
 
 .agilisActions {
@@ -1681,7 +1674,7 @@
     transform 680ms var(--rm-ease-out);
 }
 
-.refinityFlow li:last-child {
+.refinityFlow.refinityFlow.refinityFlow li:last-child {
   border-right: 1px solid oklch(0.92 0.02 230 / 0.14);
 }
 
@@ -2297,7 +2290,7 @@
   padding-inline: 0.6rem;
 }
 
-.compatibleBrandGroup figure::after {
+.compatibleBrandGroup.compatibleBrandGroup.compatibleBrandGroup figure::after {
   position: absolute;
   top: 20%;
   right: calc(clamp(2.4rem, 6vw, 5.8rem) * -0.5);
@@ -2626,7 +2619,7 @@
   gap: 0.75rem;
 }
 
-.contactActions > a {
+.contactActions.contactActions.contactActions > a {
   width: 100%;
   min-height: 3.5rem;
 }
@@ -2717,7 +2710,7 @@
     transform 180ms var(--rm-ease-out);
 }
 
-.systemGalleryTabs button:last-child {
+.systemGalleryTabs.systemGalleryTabs.systemGalleryTabs button:last-child {
   border-right: 0;
 }
 
@@ -3235,24 +3228,6 @@
   align-self: center;
 }
 
-@media (min-width: 50.0625rem) {
-  .productFamilyLineup:has(> figure:only-child) {
-    grid-template-columns: minmax(0, 22rem);
-  }
-
-  .productFamilyLineup:has(> figure:nth-child(2):last-child) {
-    grid-template-columns: 1fr 1fr;
-  }
-
-  .productFamilyLineup:has(> figure:nth-child(3):last-child) {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
-
-  .productFamilyLineup:has(> figure:nth-child(4):last-child) {
-    grid-template-columns: 1fr 1fr;
-  }
-}
-
 @media (hover: hover) and (pointer: fine) {
   /* Sistem A: kontrole i kartice se ne podižu na prelaz mišem. */
   .rmPrimaryButton:hover,
@@ -3338,736 +3313,6 @@
 .rmPrimaryButton:active,
 .refinityPrimary:active {
   background: var(--rm-red-deep);
-}
-
-@media (max-width: 70rem) {
-  .campaignSlide {
-    grid-template-columns: minmax(0, 0.78fr) minmax(26rem, 1.22fr);
-  }
-
-  .campaignCopy :is(h1, h2) {
-    font-size: clamp(3rem, 6vw, 5.2rem);
-  }
-
-  .processFlow {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
-
-  .processFlow > li {
-    min-height: 27rem;
-    border-top: 0;
-    border-left: 1px solid var(--rm-line);
-  }
-
-  .processFlow > li:nth-child(-n + 3) {
-    border-top: 1px solid var(--rm-line);
-  }
-
-  .processFlow > li:nth-child(4),
-  .processFlow > li:nth-child(5) {
-    border-top: 0;
-  }
-
-  .rmProductGrid {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
-
-  .colorSystemsMosaic {
-    grid-template-columns: repeat(6, minmax(0, 1fr));
-  }
-
-  .colorSystemsMosaic article:nth-child(1) {
-    min-height: 42rem;
-    grid-column: 1 / 7;
-    grid-row: auto;
-  }
-
-  .colorSystemsMosaic article:nth-child(2) {
-    grid-column: 1 / 4;
-    grid-row: auto;
-  }
-
-  .colorSystemsMosaic article:nth-child(3) {
-    grid-column: 4 / 7;
-    grid-row: auto;
-  }
-
-  .colorSystemsMosaic article:nth-child(4) {
-    grid-column: 1 / 3;
-    grid-row: auto;
-  }
-
-  .colorSystemsMosaic article:nth-child(5) {
-    grid-column: 3 / 5;
-    grid-row: auto;
-  }
-
-  .colorSystemsMosaic article:nth-child(6) {
-    grid-column: 5 / 7;
-    grid-row: auto;
-  }
-
-  .rmContactBand {
-    grid-template-columns: minmax(0, 1.3fr) minmax(17rem, 0.7fr);
-  }
-
-  .contactActions {
-    grid-column: 2;
-  }
-
-  .systemGalleryLayout {
-    grid-template-columns: minmax(0, 1fr);
-  }
-
-  /* Ispod 70rem devet sistema ne staje u red bez lomljenja: kontrolisana
-     horizontalna traka, svaka stavka u svojoj prirodnoj širini, u jednom redu. */
-  .systemGalleryTabs {
-    display: flex;
-    max-width: 100%;
-    overflow-x: auto;
-    overscroll-behavior-x: contain;
-    scroll-snap-type: x proximity;
-  }
-
-  .systemGalleryTabs button {
-    flex: 0 0 auto;
-    scroll-snap-align: start;
-  }
-
-  .systemGalleryTabs small {
-    white-space: nowrap;
-  }
-
-  .systemGalleryComposition {
-    grid-template-columns: minmax(13rem, 0.58fr) minmax(0, 1.42fr);
-  }
-
-  .systemGallerySupporting {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  .productFamilyList > article {
-    gap: 2.5rem;
-  }
-}
-
-@media (max-width: 50rem) {
-  .campaignViewport {
-    min-height: max(calc(100svh - 4.5rem), 54rem);
-  }
-
-  .campaignBreadcrumb {
-    width: calc(100% - 2rem);
-  }
-
-  .campaignSlide {
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: auto minmax(0, 1fr);
-    gap: 0.5rem;
-    padding: 3.6rem 1rem 9rem;
-  }
-
-  .campaignSlide::after {
-    right: 17%;
-  }
-
-  .campaignCopy {
-    width: auto;
-    grid-column: 1;
-    grid-row: 2;
-    align-self: start;
-  }
-
-  .campaignVisual,
-  .campaignSlide[data-content-align="right"] .campaignVisual {
-    position: relative;
-    inset: auto;
-    grid-column: 1;
-    grid-row: 1;
-  }
-
-  .campaignSlide[data-content-align="right"] .campaignCopy {
-    grid-column: 1;
-    grid-row: 2;
-  }
-
-  .campaignCopy :is(h1, h2) {
-    max-width: 13ch;
-    margin-top: 1rem;
-    font-size: clamp(2.55rem, 11vw, 4.4rem);
-  }
-
-  .campaignDescription {
-    max-width: 34rem;
-    margin-top: 1rem;
-    font-size: 0.93rem;
-    line-height: 1.5;
-  }
-
-  .campaignActions {
-    margin-top: 1.25rem;
-  }
-
-  .rmPrimaryButton,
-  .rmSecondaryButton {
-    min-height: 2.8rem;
-    padding: 0.7rem 0.85rem;
-    font-size: 0.74rem;
-  }
-
-  .campaignVisual {
-    min-height: 0;
-    aspect-ratio: 4 / 3;
-  }
-
-  .campaignVisualImage {
-    min-height: 0;
-    margin-right: 0;
-    clip-path: polygon(3% 0, 100% 0, 97% 100%, 0 100%);
-  }
-
-  .campaignVisualImage img {
-    object-position: var(--rm-image-position-mobile, 50% 50%);
-    transform: scale(var(--rm-image-scale-mobile, 1));
-  }
-
-  .campaignVisualImage::before {
-    background:
-      linear-gradient(90deg, var(--rm-visual-edge), transparent 14%),
-      linear-gradient(0deg, var(--rm-visual-edge), transparent 28%);
-  }
-
-  .agilisVisual {
-    min-height: 12rem;
-  }
-
-  .agilisBrandPlate {
-    width: min(58%, 18rem);
-    min-height: 7rem;
-    gap: 0.5rem;
-    padding: 1rem 1.3rem;
-  }
-
-  .agilisBrandPlate span {
-    font-size: 1rem;
-  }
-
-  .agilisVisual > p {
-    max-width: 14rem;
-    font-size: 0.48rem;
-  }
-
-  .refinityVisual {
-    min-height: 12rem;
-  }
-
-  .refinityFormula {
-    width: min(58%, 18rem);
-    padding: 1.2rem;
-  }
-
-  .refinityFormula strong {
-    font-size: 2rem;
-  }
-
-  .refinityNodes span {
-    width: 2.8rem;
-    height: 2.8rem;
-    font-size: 0.45rem;
-  }
-
-  .pioneerVisual,
-  .programVisual {
-    min-height: 12rem;
-  }
-
-  .pioneerDisc {
-    width: min(42%, 11rem);
-  }
-
-  .pioneerDisc strong {
-    font-size: 3.4rem;
-  }
-
-  .pioneerSteps {
-    top: 5%;
-    right: 4%;
-  }
-
-  .pioneerSteps span {
-    min-width: 6rem;
-    padding: 0.4rem;
-    font-size: 0.48rem;
-  }
-
-  .programProductStack {
-    width: min(82%, 25rem);
-    height: 12rem;
-    margin-inline: auto;
-  }
-
-  .programProductStack img {
-    object-position: var(--rm-image-position-mobile, 50% 50%);
-  }
-
-  .programProductStack > span {
-    width: 34%;
-  }
-
-  .programVisualLabel {
-    top: 0;
-    font-size: 0.48rem;
-  }
-
-  .campaignControls {
-    right: 1rem;
-    bottom: 0.85rem;
-    left: 1rem;
-    grid-template-columns: 1fr;
-    gap: 0.55rem 0.8rem;
-  }
-
-  .campaignArrows {
-    grid-column: 1;
-    grid-row: 1;
-    justify-self: start;
-  }
-
-  .campaignPagination {
-    grid-column: 1;
-    grid-row: 2;
-    gap: 0.38rem;
-  }
-
-  .campaignPagination button {
-    min-height: 2.65rem;
-    gap: 0.42rem;
-  }
-
-  .campaignPaginationLabel {
-    gap: 0.3rem;
-  }
-
-  .campaignPaginationLabel small {
-    font-size: 0.47rem;
-  }
-
-  .quickAccess {
-    top: 5.5rem;
-  }
-
-  .quickAccessRail {
-    padding-right: 3rem;
-  }
-
-  .quickAccessRail a {
-    min-height: 3.8rem;
-    padding: 0.7rem 0.9rem;
-  }
-
-  .rmSection {
-    padding-block: clamp(4.5rem, 14vw, 7rem);
-  }
-
-  .processIntro,
-  .agilisHeader,
-  .refinityHeader,
-  .colorSystemsHeader,
-  .systemGalleryIntro,
-  .productFamiliesHeader {
-    grid-template-columns: 1fr;
-  }
-
-  .processFlow {
-    grid-template-columns: 1fr;
-  }
-
-  .processFlow > li {
-    min-height: auto;
-    gap: 2.5rem;
-    border-top: 0 !important;
-  }
-
-  .processFlow > li:first-child {
-    border-top: 1px solid var(--rm-line) !important;
-  }
-
-  .processCopy > p {
-    min-height: auto;
-  }
-
-  .agilisHeader {
-    gap: 2rem;
-  }
-
-  .agilisHeader h2 {
-    font-size: clamp(4.5rem, 22vw, 8rem);
-  }
-
-  .agilisLayout {
-    grid-template-columns: 1fr;
-  }
-
-  .agilisTechnicalVisual {
-    min-height: 27rem;
-  }
-
-  .agilisAvailability {
-    grid-template-columns: 1fr;
-    align-items: start;
-  }
-
-  .agilisActions {
-    align-items: stretch;
-    flex-direction: column;
-  }
-
-  .agilisActions > div {
-    display: grid;
-    grid-template-columns: 1fr;
-  }
-
-  .refinityAmbient {
-    top: 8%;
-    width: 100%;
-  }
-
-  .refinityTransitionZone {
-    padding-block: 3.5rem;
-  }
-
-  .refinityTransitionZone::after {
-    right: -46%;
-    width: 95%;
-  }
-
-  .refinityHeader {
-    gap: 1.5rem;
-  }
-
-  .refinityFlow {
-    grid-template-columns: 1fr;
-  }
-
-  .refinityFlow::before {
-    top: 0;
-    bottom: 0;
-    left: 2.8rem;
-    width: 1px;
-    height: auto;
-  }
-
-  .refinityFlow li {
-    min-height: 5.6rem;
-    grid-template-columns: 2.5rem 1fr;
-    align-items: center;
-    gap: 1rem;
-    border-right: 1px solid oklch(0.92 0.02 230 / 0.14);
-    border-bottom: 0;
-  }
-
-  .refinityFlow li:last-child {
-    border-bottom: 1px solid oklch(0.92 0.02 230 / 0.14);
-  }
-
-  /* Na mobilnom je korak red: broj, naziv, pa mala fotografija desno. */
-  .refinityFlow li {
-    grid-template-columns: 2.5rem 1fr 4.5rem;
-  }
-
-  .refinityFlowMedia {
-    grid-row: 1;
-    grid-column: 3;
-    width: 4.5rem;
-    margin: -0.4rem 0;
-  }
-
-  .refinityAreas {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  .refinityTextLink {
-    width: 100%;
-    margin-left: 0;
-    margin-top: 0.5rem;
-  }
-
-  .seriesLayout {
-    grid-template-columns: 1fr;
-    grid-template-rows: auto;
-  }
-
-  .seriesLayout article[data-dominant] {
-    grid-row: auto;
-    min-height: 28rem;
-  }
-
-  .colorSystemsMosaic {
-    grid-template-columns: 1fr;
-    clip-path: none;
-  }
-
-  .colorSystemsMosaic article:nth-child(n) {
-    min-height: 0;
-    grid-column: 1;
-    grid-row: auto;
-    clip-path: none;
-  }
-
-  .colorSystemsMosaic article[data-dominant] .systemCardCopy h3 {
-    font-size: clamp(4rem, 19vw, 7rem);
-  }
-
-  .systemProductVisuals,
-  .colorSystemsMosaic article[data-dominant] .systemProductVisuals {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
-
-  .colorSystemsMosaic article[data-dominant]
-    .systemProductVisuals
-    figure:last-child {
-    display: none;
-  }
-
-  .systemCardFooter {
-    align-items: stretch;
-    flex-direction: column;
-  }
-
-  .compatibleBrandsHeader {
-    grid-template-columns: 1fr;
-  }
-
-  .compatibleBrandsHeader .rmKicker {
-    grid-column: auto;
-  }
-
-  .compatibleBrandGroup figure {
-    width: 8.8rem;
-    min-height: 5.5rem;
-  }
-
-  .refinityEditorial {
-    min-height: 21rem;
-  }
-
-  .editorialProofs article {
-    min-height: 0;
-    grid-template-columns: 1fr;
-  }
-
-  .editorialProofImage,
-  .partnershipPanel .editorialProofImage {
-    min-height: clamp(18rem, 66vw, 28rem);
-    grid-column: 1;
-    grid-row: 1;
-  }
-
-  .editorialProofImage::after,
-  .partnershipPanel .editorialProofImage::after {
-    background: linear-gradient(0deg, var(--rm-paper-soft), transparent 48%);
-  }
-
-  .partnershipPanel .editorialProofImage::after {
-    background: linear-gradient(0deg, var(--rm-graphite), transparent 48%);
-  }
-
-  .editorialProofs article > div:not(.editorialProofImage) {
-    grid-column: 1;
-    grid-row: 2;
-  }
-
-  .rmProductGrid,
-  .agilisProductGrid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  .productPreviewFooter,
-  .productEmptyState {
-    align-items: stretch;
-  }
-
-  .productPreviewFooter {
-    flex-direction: column;
-  }
-
-  .productPreviewFooter .rmOutlineButton {
-    width: 100%;
-  }
-
-  .productEmptyState {
-    grid-template-columns: auto minmax(0, 1fr);
-  }
-
-  .productEmptyState > a {
-    grid-column: 2;
-  }
-
-  .rmContactBand {
-    grid-template-columns: 1fr;
-    clip-path: polygon(1.5rem 0, 100% 0, 100% calc(100% - 1.5rem), calc(100% - 1.5rem) 100%, 0 100%);
-  }
-
-  .contactActions {
-    grid-column: auto;
-  }
-
-  .systemGalleryLayout {
-    grid-template-columns: 1fr;
-  }
-
-  .systemGalleryTabs {
-    display: flex;
-    max-width: 100%;
-    overflow-x: auto;
-    overscroll-behavior-x: contain;
-  }
-
-  .systemGalleryTabs button {
-    min-height: 5rem;
-    flex: 0 0 auto;
-    min-width: 8.5rem;
-    border-right: 1px solid var(--rm-line);
-    border-top: 0;
-  }
-
-  .systemGalleryTabs button:last-child {
-    border-right: 0;
-  }
-
-  .systemGalleryPanelHeader,
-  .systemGalleryComposition {
-    grid-template-columns: 1fr;
-  }
-
-  .systemGallerySupporting {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  .systemGallerySupporting > article {
-    min-width: 0;
-  }
-
-  .systemGalleryFooter {
-    align-items: stretch;
-    flex-direction: column;
-  }
-
-  .systemGalleryFooter > div {
-    display: grid;
-    grid-template-columns: 1fr;
-  }
-
-  .systemGalleryFooter a {
-    width: 100%;
-  }
-
-  .productFamilyList > article,
-  .productFamilyList > article:nth-child(even) {
-    grid-template-columns: 1fr;
-    min-height: 0;
-  }
-
-  .productFamilyList > article:nth-child(even) .productFamilyCopy,
-  .productFamilyList > article:nth-child(even) .productFamilyLineup {
-    grid-column: auto;
-    grid-row: auto;
-  }
-
-  .productFamilyLineup {
-    display: grid;
-    width: auto;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    align-items: stretch;
-    overflow: visible;
-  }
-
-  .productFamilyLineup > figure,
-  .productFamilyLineup > figure:first-child {
-    min-width: 0;
-  }
-}
-
-@media (max-width: 34rem) {
-  .campaignViewport {
-    min-height: calc(100svh - 4.5rem);
-  }
-
-  .campaignSlide {
-    grid-template-rows: minmax(9rem, 0.34fr) minmax(0, 0.66fr);
-  }
-
-  .campaignCopy :is(h1, h2) {
-    font-size: clamp(2.3rem, 10.8vw, 3.4rem);
-  }
-
-  .campaignActions {
-    align-items: stretch;
-  }
-
-  .campaignActions a {
-    width: 100%;
-  }
-
-  .campaignDescription {
-    display: -webkit-box;
-    overflow: hidden;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 3;
-  }
-
-  .campaignArrows button {
-    width: 2.75rem;
-    height: 2.75rem;
-  }
-
-  .campaignPaginationLabel small {
-    display: none;
-  }
-
-  .campaignPaginationLabel strong {
-    font-size: 0.6rem;
-  }
-
-  .agilisBenefits,
-  .refinityAreas,
-  .rmProductGrid {
-    grid-template-columns: 1fr;
-  }
-
-  .agilisBenefits article {
-    min-height: 8.5rem;
-  }
-
-  .productEmptyState {
-    grid-template-columns: 1fr;
-  }
-
-  .productEmptyState > a {
-    grid-column: auto;
-  }
-
-  .productPreviewFooter p {
-    align-items: center;
-  }
-
-  .systemGalleryPanel {
-    padding: 0.8rem;
-  }
-
-  .systemGalleryPanelHeader {
-    gap: 1rem;
-  }
-
-  .systemGalleryPanelHeader h3 {
-    font-size: clamp(2.4rem, 15vw, 4rem);
-  }
-
-  .productFamilyCopy h3 {
-    font-size: clamp(2.5rem, 15vw, 4.2rem);
-  }
-
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -4293,18 +3538,6 @@
   line-height: 0.96;
 }
 
-@media (max-width: 70rem) {
-  .campaignCopy :is(h1, h2) {
-    font-size: clamp(2.75rem, 6vw, 4.5rem);
-  }
-}
-
-@media (max-width: 50rem) {
-  .campaignCopy :is(h1, h2) {
-    font-size: clamp(2.3rem, 9vw, 3.75rem);
-  }
-}
-
 /* --- Karusel: kontrole i oznake slajdova ------------------------------- */
 .campaignArrows button {
   border-color: oklch(0.98 0.004 250 / 0.5);
@@ -4372,17 +3605,10 @@
   color: var(--rm-ink);
 }
 
-.contactActions > a {
+/* Pojačano (2026-10-22): u originalu je ovo pravilo pobeđivalo mobilni `.rmPrimaryButton`;
+   posle podele je mobilno pravilo jače, pa ovo mora da bude još jače. */
+.contactActions.contactActions.contactActions > a {
   min-height: var(--ds-ctl-h-l);
-}
-
-@media (max-width: 50rem) {
-  .rmPrimaryButton,
-  .rmSecondaryButton {
-    min-height: var(--ds-ctl-h-m);
-    padding: 0 1rem;
-    font: var(--ds-ctl-font);
-  }
 }
 
 /* Tekstualne veze: 14 px, Plex Sans 600, crvena podvlaka kao R-M marker. */
@@ -4635,23 +3861,6 @@
   font-size: var(--ds-font-label);
 }
 
-@media (max-width: 34rem) {
-  .campaignPaginationLabel strong {
-    font-size: var(--ds-font-label);
-  }
-}
-
-/*
- * AGILIS komponente (2026-10-18): četiri kompaktne kartice u redu već na računaru pri 100 %
- * zumu (ranije tek od 1880 px, pa je 1440 px dobijao 2×2 kartice višlje od ekrana). Visina
- * slike je ograničena i ne zavisi od izvornog fajla; nazivi, osobina i veza su poravnati.
- */
-@media (min-width: 64rem) {
-  .agilisProductGrid {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-  }
-}
-
 .agilisProductGrid .productImageSlotMedia {
   aspect-ratio: auto;
   height: clamp(11rem, 16vw, 15.5rem);
@@ -4711,31 +3920,10 @@
   margin-inline: 0;
 }
 
-@media (min-width: 64rem) {
-  .editorialProofs article {
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-    min-height: clamp(30rem, 38vw, 40rem);
-  }
-
-  .editorialProofs .esensePanel > div:not(.editorialProofImage) {
-    padding-inline: clamp(2rem, 4vw, 4.5rem) max(var(--ds-gutter, 20px), calc(100% - var(--ds-container-max, 1208px) / 2));
-  }
-
-  .editorialProofs .partnershipPanel > div:not(.editorialProofImage) {
-    padding-inline: max(var(--ds-gutter, 20px), calc(100% - var(--ds-container-max, 1208px) / 2)) clamp(2rem, 4vw, 4.5rem);
-  }
-}
-
 .editorialProofs h2 {
   max-width: 18ch;
 }
 
 .editorialProofs article > div:not(.editorialProofImage) > p:last-of-type {
   max-width: 34rem;
-}
-
-@media (max-width: 63.99rem) {
-  .editorialProofs article > div:not(.editorialProofImage) {
-    padding-inline: var(--ds-gutter, 20px);
-  }
 }

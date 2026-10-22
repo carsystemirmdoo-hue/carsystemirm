@@ -1,0 +1,163 @@
+/*
+ * MOBILNI raspored za NorbinBrandPage (do 1023px). Uređuje se nezavisno; zajednički izgled je u
+ * NorbinBrandPage.module.css, a komponente koriste NorbinBrandPage.styles.ts (2026-10-22).
+ *
+ * Prva klasa svakog selektora je udvostručena (specifičnost +1): raspored ne zavisi od
+ * redosleda učitavanja CSS delova (scripts/css/bump-responsive.py).
+ */
+
+@media (max-width: 1023px) {
+  .heroGrid.heroGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .heroCrossing.heroCrossing {
+    order: -1;
+    aspect-ratio: 4 / 5;
+  }
+
+  .programGrid.programGrid,
+  .programLayout.programLayout,
+  .originGrid.originGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .programRule.programRule {
+    height: 1px;
+  }
+
+  .codeRow.codeRow {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .ratioRow.ratioRow {
+    grid-template-columns: 1fr;
+    gap: 0.6rem;
+    text-align: center;
+  }
+
+  .ratioPartners.ratioPartners {
+    justify-items: center;
+    text-align: center;
+  }
+
+  .ratioPartners.ratioPartners li {
+    justify-content: center;
+  }
+
+  .ratioCrossing.ratioCrossing {
+    height: 2.6rem;
+  }
+
+  .processSpine.processSpine {
+    grid-template-columns: 1fr;
+  }
+
+  .stockedGrid.stockedGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .stockedList.stockedList a {
+    grid-template-columns: 6rem minmax(0, 1fr);
+  }
+
+  .stockedList.stockedList small {
+    grid-column: 2;
+  }
+}
+
+@media (max-width: 30rem) {
+  .heroFacts.heroFacts {
+    overflow-x: auto;
+  }
+
+  .heroActions.heroActions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .codeRow.codeRow {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .heroCrossing.heroCrossing {
+    height: clamp(15rem, 34vh, 22rem);
+    aspect-ratio: auto;
+  }
+}
+
+@media (max-width: 1023px) {
+  /* Telefon/tablet: isečak 4 : 3 desno-dole — lice, ruka sa krpom i
+     automobil, uz žutu traku koja ulazi u kadar. */
+  .heroBanner.heroBanner {
+    aspect-ratio: 4 / 3;
+    max-height: none;
+  }
+
+  .heroBanner.heroBanner img {
+    object-position: 74% 82%;
+  }
+
+  .programLayout.programLayout .systemPanel {
+    position: static;
+    grid-template-rows: 12rem auto auto;
+    min-height: 0;
+  }
+
+  .stockedList.stockedList button {
+    grid-template-columns: 6rem minmax(0, 1fr);
+  }
+
+  .stockedList.stockedList button small {
+    grid-column: 2;
+  }
+}
+
+@media (max-width: 40rem) {
+  /* Telefon: uža zamrznuta prva kolona (oznake se prelamaju) i kolone
+     proizvoda od 8,5 rem — tabela se skroluje horizontalno, ugaona ćelija i
+     oznake ostaju vidljive. */
+  .techTableBlock.techTableBlock {
+    --tech-label: 7.5rem;
+    --tech-col-min: 8.5rem;
+  }
+
+  .techMatrix.techMatrix tbody th {
+    white-space: normal;
+  }
+
+  .techMatrix.techMatrix th,
+  .techMatrix.techMatrix td {
+    padding: 0.55rem 0.6rem;
+  }
+
+  .docTable.docTable thead {
+    display: none;
+  }
+
+  .docTable.docTable,
+  .docTable.docTable tbody,
+  .docTable.docTable tr,
+  .docTable.docTable th,
+  .docTable.docTable td {
+    display: block;
+  }
+
+  .docTable.docTable tbody tr {
+    padding: 0.75rem 0.9rem;
+    border-bottom: 1px solid var(--nb-line);
+  }
+
+  .docTable.docTable tbody th,
+  .docTable.docTable tbody td {
+    padding: 0.2rem 0;
+    border: 0;
+  }
+
+  .docTable.docTable tbody td {
+    display: inline-block;
+    margin-right: 1.25rem;
+  }
+}

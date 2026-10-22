@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { getDocumentById } from "@/lib/documents";
 import { carsystemFinishSystem } from "./carsystemBrandData";
-import styles from "./CarsystemBrandPage.module.css";
+import styles from "./CarsystemBrandPage.styles";
 
 export function CarsystemFinishSystem() {
   const brochure = getDocumentById(carsystemFinishSystem.documentId);

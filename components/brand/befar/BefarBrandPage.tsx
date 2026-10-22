@@ -26,7 +26,7 @@ import {
 import { BefarHardnessScale } from "./BefarHardnessScale";
 import { BefarPairingDiagram } from "./BefarPairingDiagram";
 import { BefarPerforationDisc } from "./BefarPerforationDisc";
-import styles from "./BefarBrandPage.module.css";
+import styles from "./BefarBrandPage.styles";
 
 /** Stabilna referenca — `BrandSectionNav` je drži u zavisnostima efekta. */
 const befarSectionNavItems = befarNav.map((item) => ({

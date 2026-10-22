@@ -11,7 +11,7 @@ import {
   type BaslacSeasonalSlide,
 } from "./baslacBrandData";
 import { withBaslacSeasonalSlide } from "./baslacSeasonal";
-import styles from "./BaslacBrandPage.module.css";
+import styles from "./BaslacBrandPage.styles";
 
 const MOBILE_MEDIA_QUERY = "(max-width: 50rem)";
 

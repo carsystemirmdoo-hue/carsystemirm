@@ -6,7 +6,7 @@ import type {
   CarsystemMediaAvailability,
   CarsystemMediaDefinition,
 } from "./carsystemBrandData";
-import styles from "./CarsystemBrandPage.module.css";
+import styles from "./CarsystemBrandPage.styles";
 
 type CarsystemMediaSlotProps = {
   availability: CarsystemMediaAvailability[CarsystemMediaDefinition["id"]];

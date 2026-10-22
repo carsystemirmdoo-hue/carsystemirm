@@ -1,0 +1,212 @@
+/*
+ * DESKTOP raspored za CarsystemBrandPage (od 1024px). Uređuje se nezavisno; zajednički izgled je u
+ * CarsystemBrandPage.module.css, a komponente koriste CarsystemBrandPage.styles.ts (2026-10-22).
+ *
+ * Prva klasa svakog selektora je udvostručena (specifičnost +1): raspored ne zavisi od
+ * redosleda učitavanja CSS delova (scripts/css/bump-responsive.py).
+ */
+
+@media (min-width: 1024px) and (max-width: 1280px) {
+  .rupesGrid.rupesGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 64rem) and (min-height: 40rem) {
+  .documentationIntro.documentationIntro {
+    position: sticky;
+    top: calc(
+      var(--brand-section-header-offset, 0px) +
+        var(--brand-section-nav-height, 3.75rem) + 2rem
+    );
+  }
+}
+
+@media (min-width: 1024px) and (max-width: 1280px) {
+  .heroGrid.heroGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: clamp(1.8rem, 3.2vw, 3.6rem);
+  }
+
+  .heroMessage.heroMessage h1 {
+    font-size: clamp(2.75rem, 5.6vw, 5rem);
+  }
+
+  .processDesktop.processDesktop {
+    grid-template-columns: minmax(15rem, 0.3fr) minmax(0, 1fr);
+  }
+
+  .processWorkspace.processWorkspace {
+    grid-template-columns: minmax(0, 1fr) minmax(18rem, 0.8fr);
+  }
+
+  .processCategories.processCategories > div {
+    grid-template-columns: 1fr;
+  }
+
+  .useCaseProducts.useCaseProducts {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .productGrid.productGrid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1024px) and (max-width: 1024px) {
+  .section.section {
+    width: min(calc(100% - 3rem), 94rem);
+  }
+
+  .hero.hero {
+    min-height: auto;
+    padding-inline: 1.5rem;
+  }
+
+  .heroGrid.heroGrid {
+    min-height: 42rem;
+    grid-template-columns: minmax(20rem, 0.94fr) minmax(25rem, 1.06fr);
+  }
+
+  .heroMessage.heroMessage h1 {
+    font-size: clamp(2.5rem, 6vw, 4.25rem);
+  }
+
+  .heroMessage.heroMessage > p:last-child {
+    font-size: 1rem;
+  }
+
+  .heroMedia.heroMedia {
+    min-height: 34rem;
+  }
+
+  .metrics.metrics {
+    width: min(calc(100% - 3rem), 94rem);
+  }
+
+  .sectionHeader.sectionHeader {
+    grid-template-columns: minmax(0, 1fr) minmax(16rem, 0.52fr);
+    gap: 2rem;
+  }
+
+  .processDesktop.processDesktop {
+    display: block;
+  }
+
+  .processTabs.processTabs {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    border-right: 0;
+    border-bottom: 1px solid var(--cs-line-strong);
+  }
+
+  .processTabs.processTabs button {
+    min-height: 8.5rem;
+    border-right: 1px solid var(--cs-line);
+    border-bottom: 0;
+  }
+
+  .processTabs.processTabs button:last-child {
+    border-right: 0;
+  }
+
+  .processTabs.processTabs button > small {
+    display: none;
+  }
+
+  .processWorkspace.processWorkspace {
+    min-height: 37rem;
+    grid-template-columns: minmax(0, 1fr) minmax(18rem, 0.78fr);
+  }
+
+  .processMedia.processMedia {
+    min-height: 33rem;
+  }
+
+  .processDetails.processDetails {
+    padding: 1.5rem;
+  }
+
+  .processProducts.processProducts a:nth-child(n + 3) {
+    display: none;
+  }
+
+  .workflowSection.workflowSection,
+  .useCasesSection.useCasesSection,
+  .documentationSection.documentationSection {
+    padding-inline: 1.5rem;
+  }
+
+  .workflowTrack.workflowTrack article > div:last-child {
+    padding-inline: 0.3rem;
+  }
+
+  .workflowTrack.workflowTrack article > div:last-child::before {
+    left: 0.3rem;
+  }
+
+  .familyPanel.familyPanel[data-layout="featured"] {
+    grid-column: span 8;
+  }
+
+  .familyPanel.familyPanel[data-layout="medium"] {
+    grid-column: span 4;
+  }
+
+  .familyPanel.familyPanel[data-layout="medium"] .familyCopy {
+    width: 74%;
+  }
+
+  .familyPanel.familyPanel[data-layout="medium"] .familyVisual > span {
+    opacity: 0.74;
+  }
+
+  .useCasesLayout.useCasesLayout {
+    grid-template-columns: minmax(15rem, 0.32fr) minmax(0, 1fr);
+  }
+
+  .useCaseProducts.useCaseProducts {
+    grid-template-columns: 1fr;
+  }
+
+  .useCaseProducts.useCaseProducts > a:nth-child(n + 4) {
+    display: none;
+  }
+
+  .documentationSection.documentationSection {
+    grid-template-columns: minmax(16rem, 0.48fr) minmax(0, 1fr);
+    gap: 3rem;
+  }
+
+  .documentationActions.documentationActions {
+    margin-block-start: -2.2rem;
+  }
+
+  .finalCta.finalCta {
+    width: min(calc(100% - 3rem), 94rem);
+    grid-template-columns: minmax(20rem, 0.92fr) minmax(24rem, 1.08fr);
+  }
+}
+
+@media (min-width: 1024px) and (max-width: 1024px) {
+  .hero.hero[data-photo-hero] {
+    padding-inline: max(var(--ds-gutter, 1.5rem), 1.5rem);
+  }
+
+  .heroPhoto.heroPhoto img {
+    object-position: 74% 30%;
+  }
+
+  .heroScrim.heroScrim {
+    background: linear-gradient(
+      90deg,
+      color-mix(in oklch, var(--cs-paper) 92%, transparent) 0%,
+      color-mix(in oklch, var(--cs-paper) 84%, transparent) 46%,
+      color-mix(in oklch, var(--cs-paper) 0%, transparent) 72%
+    );
+  }
+
+  .hero.hero[data-photo-hero] .heroCopy {
+    max-width: 30rem;
+  }
+}

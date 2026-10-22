@@ -5,7 +5,7 @@ import type {
   BaslacMediaDefinition,
   BaslacMediaAvailability,
 } from "./baslacBrandData";
-import styles from "./BaslacBrandPage.module.css";
+import styles from "./BaslacBrandPage.styles";
 
 type BaslacMediaSlotProps = {
   availability: BaslacMediaAvailability[BaslacMediaDefinition["id"]];

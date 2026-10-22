@@ -166,13 +166,6 @@
   padding-inline: var(--sata-gutter);
 }
 
-@media (min-width: 64rem) {
-  .heroGrid {
-    grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
-    align-items: start;
-  }
-}
-
 .heroCopy {
   display: flex;
   flex-direction: column;
@@ -460,18 +453,6 @@
   list-style: none;
 }
 
-@media (min-width: 48rem) {
-  .argumentList {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-}
-
-@media (min-width: 80rem) {
-  .argumentList {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-  }
-}
-
 .argument {
   display: flex;
   flex-direction: column;
@@ -527,18 +508,6 @@
   border: 1px solid var(--sata-line-dark);
   background: var(--sata-line-dark);
   list-style: none;
-}
-
-@media (min-width: 48rem) {
-  .chain {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-}
-
-@media (min-width: 80rem) {
-  .chain {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
 }
 
 .chainStage {
@@ -667,18 +636,6 @@
   background: var(--sata-line);
 }
 
-@media (min-width: 48rem) {
-  .familyGrid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-}
-
-@media (min-width: 80rem) {
-  .familyGrid {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
-}
-
 .familyGroup {
   display: flex;
   flex-direction: column;
@@ -752,12 +709,6 @@
 .techGrid {
   display: grid;
   gap: clamp(1rem, 2.5vw, 1.75rem);
-}
-
-@media (min-width: 60rem) {
-  .techGrid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
 }
 
 .techColumn {
@@ -897,12 +848,6 @@
   margin-top: clamp(1.25rem, 3vw, 2rem);
 }
 
-@media (min-width: 48rem) {
-  .nozzleGrid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-}
-
 .nozzle {
   display: grid;
   grid-template-columns: 5.25rem minmax(0, 1fr);
@@ -989,14 +934,6 @@
   background: var(--sata-paper-raised);
 }
 
-@media (min-width: 64rem) {
-  .selectorRow {
-    grid-template-columns: minmax(0, 0.9fr) minmax(0, 2.1fr);
-    gap: clamp(1rem, 3vw, 2.5rem);
-    align-items: start;
-  }
-}
-
 .selectorTask {
   margin: 0;
   font-family: var(--font-display), system-ui, sans-serif;
@@ -1010,13 +947,6 @@
   gap: 0.75rem;
   margin: 0;
   min-width: 0;
-}
-
-@media (min-width: 48rem) {
-  .selectorMeta {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: clamp(0.85rem, 2vw, 1.75rem);
-  }
 }
 
 .selectorMeta > div {
@@ -1046,12 +976,6 @@
   gap: 1px;
   border: 1px solid var(--sata-line);
   background: var(--sata-line);
-}
-
-@media (min-width: 60rem) {
-  .serviceGrid {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
 }
 
 .serviceCard {
@@ -1135,12 +1059,6 @@
   align-items: start;
 }
 
-@media (min-width: 64rem) {
-  .localBody {
-    grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
-  }
-}
-
 .localGrid {
   display: grid;
   gap: clamp(1rem, 2vw, 1.5rem);
@@ -1203,13 +1121,6 @@
   border-top: 3px solid var(--sata-blue);
   border-radius: var(--sata-radius);
   background: var(--sata-paper-raised);
-}
-
-@media (min-width: 64rem) {
-  .localCta {
-    grid-template-columns: minmax(0, 1.4fr) minmax(0, 0.6fr);
-    align-items: center;
-  }
 }
 
 .localCtaTitle {
@@ -1317,5 +1228,3 @@
   --sata-blue: #5aa6e8;
   --brand-nav-surface: rgb(11 18 25 / 0.94);
 }
-
-

@@ -24,7 +24,7 @@ import {
 } from "./carsystemBrandData";
 import { getCarsystemOfficialCategoryBySlug } from "@/lib/carsystem-catalog-products";
 import { getCarsystemMediaAvailability } from "./carsystemMedia.server";
-import styles from "./CarsystemBrandPage.module.css";
+import styles from "./CarsystemBrandPage.styles";
 
 export function CarsystemBrandPage({
   products,

@@ -17,7 +17,7 @@ import {
   norbinWhatItIs,
   norbinWhatItIsNot,
 } from "./norbinBrandData";
-import styles from "./NorbinBrandPage.module.css";
+import styles from "./NorbinBrandPage.styles";
 import { productCanonicalHref } from "@/lib/product-families";
 
 export function NorbinBrandPage({

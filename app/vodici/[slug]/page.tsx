@@ -6,7 +6,7 @@ import { SeoBreadcrumbs } from "@/components/seo/SeoBreadcrumbs";
 import { SavetiBody, SavetiLead } from "@/components/saveti/SavetiBody";
 import { SavetiCard } from "@/components/saveti/SavetiCards";
 import { SavetiNacrtTraka } from "@/components/saveti/SavetiNacrtTraka";
-import styles from "@/components/saveti/Saveti.module.css";
+import styles from "@/components/saveti/Saveti.styles";
 import { getAllCarsystemBrands, getCarsystemProductBySlug } from "@/lib/carsystem-data";
 import { getProductFamilyBySlug } from "@/lib/product-families";
 import {

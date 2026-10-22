@@ -1,5 +1,5 @@
 import { savetiNacrtPregled } from "@/lib/saveti";
-import styles from "./Saveti.module.css";
+import styles from "./Saveti.styles";
 
 /**
  * Oznaka lokalnog pregleda nacrta. Prikazuje se samo kada je uključen

@@ -64,6 +64,15 @@
   text-decoration: none;
 }
 
+/*
+ * Traka sekcija (BrandSectionNav) je na Befaru bela: `.pageShell a` i `.rail a` imaju istu
+ * specifičnost, pa je ishod zavisio od redosleda CSS delova (2026-10-22). Ovo pravilo ga
+ * čini nezavisnim od redosleda; hover i aktivna stavka i dalje koriste currentColor.
+ */
+.pageShell nav[aria-label="Befar sekcije"] a {
+  color: inherit;
+}
+
 .main {
   display: block;
 }
@@ -158,16 +167,6 @@
 .sectionHeaderInline .sectionTitle {
   font-size: clamp(1.5rem, 2.8vw, 2.4rem);
   max-width: 26ch;
-}
-
-@media (min-width: 64rem) {
-  .sectionHeaderInline {
-    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1fr);
-  }
-
-  .sectionHeaderInline .sectionIndex {
-    grid-column: 1 / -1;
-  }
 }
 
 .codeChip {
@@ -1747,189 +1746,6 @@
   color: var(--bf-invert-muted);
 }
 
-/* ============================================================= responsive */
-
-@media (min-width: 48rem) {
-  .materialGrid {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-  }
-
-  .perfOrbital {
-    grid-template-columns: auto 1fr;
-  }
-
-}
-
-@media (min-width: 64rem) {
-
-  .hardnessGrid {
-    grid-template-columns: minmax(11rem, 0.7fr) minmax(0, 1.5fr) minmax(17rem, 1fr);
-    align-items: center;
-  }
-
-  /* Skala postaje vertikalna lista, bez horizontalnog scrolla. */
-  .hardnessOptions {
-    flex-direction: column;
-    overflow: visible;
-    scroll-snap-type: none;
-    margin-inline: 0;
-    padding-inline: 0;
-    padding-bottom: 0;
-    gap: 0.4rem;
-  }
-
-  .hardnessOption {
-    flex-direction: row;
-    align-items: center;
-    gap: 0.75rem;
-    min-width: 0;
-    width: 100%;
-  }
-
-  .hardnessBar {
-    width: 0.45rem;
-    height: 2.1rem;
-    flex: 0 0 auto;
-  }
-
-  /* Sticky scena: markeri daju visinu tracku, stage stoji u sredini. */
-  .hardnessTrack {
-    --befar-step-height: 80vh;
-    height: calc(5 * var(--befar-step-height));
-    padding-block: 0;
-  }
-
-  .hardnessMarkers {
-    display: flex;
-    position: absolute;
-    inset: 0;
-    flex-direction: column;
-  }
-
-  .hardnessMarker {
-    flex: 1 1 0;
-  }
-
-  .hardnessStage {
-    position: sticky;
-    top: calc(
-      var(--brand-section-header-offset, 0px) + var(--brand-section-nav-height, 0px)
-    );
-    display: grid;
-    align-items: center;
-    height: calc(
-      100vh - var(--brand-section-header-offset, 0px) - var(--brand-section-nav-height, 0px)
-    );
-  }
-
-  .hardnessSpec {
-    border-top: none;
-    border-left: 1px solid var(--bf-invert-line);
-    padding-top: 0;
-    padding-left: clamp(1.25rem, 2vw, 2rem);
-  }
-
-  .pairingLayout {
-    grid-template-columns: minmax(9rem, 0.6fr) minmax(0, 1.2fr) minmax(14rem, 0.9fr);
-  }
-
-  .pairingControls {
-    flex-direction: column;
-    align-items: stretch;
-  }
-
-  /*
-   * Editorial ritam, ne masonry: jedan dominantan trenutak preko cele širine,
-   * dva sekundarna u paru, tri tiša u nizu. Razlika ide kroz površinu, skalu i
-   * whitespace — svih šest kartica koriste isti stil.
-   */
-  .familyGrid {
-    grid-template-columns: repeat(6, minmax(0, 1fr));
-    row-gap: clamp(2.5rem, 5vw, 4.5rem);
-  }
-
-  .familyCard {
-    grid-column: span 2;
-  }
-
-  .familyCard[data-weight="dominant"] {
-    grid-column: 1 / -1;
-    grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
-    gap: clamp(1.5rem, 3vw, 3rem);
-    align-items: center;
-    padding-top: 1.5rem;
-    border-top-width: 2px;
-    border-top-color: var(--bf-red);
-  }
-
-  .familyCard[data-weight="major"] {
-    grid-column: span 3;
-  }
-
-  .familyCard[data-weight="minor"] {
-    grid-column: span 2;
-  }
-
-  /* Tiše kartice dobijaju manju sliku i uži tekst da se hijerarhija čita. */
-  .familyCard[data-weight="minor"] .familyMedia {
-    aspect-ratio: 3 / 2;
-  }
-
-  .familyCard[data-weight="minor"] .familyText {
-    font-size: var(--ds-font-small);
-  }
-
-  /*
-   * Poravnanje susednih kartica (2026-10-20): kartice u istom redu dele redove
-   * mreže (subgrid), pa zona fotografije, nadnaslov, naslov, tekst i
-   * specifikacije počinju na istoj visini i kad je tekst jedne kartice duži.
-   * Razmak između redova kartica nosi `padding-bottom`, ne `row-gap` mreže,
-   * jer bi se `row-gap` ubacio i između redova unutar kartice.
-   */
-  .familyGrid {
-    row-gap: 0;
-  }
-
-  .familyCard {
-    padding-bottom: clamp(2.5rem, 5vw, 4.5rem);
-  }
-
-  .familyCard:not([data-weight="dominant"]) {
-    grid-row: span 5;
-    grid-template-rows: subgrid;
-    row-gap: 0;
-  }
-
-  .familyCard:not([data-weight="dominant"]) .familyBody {
-    display: contents;
-  }
-
-  .familyCard:not([data-weight="dominant"]) .familyMedia {
-    margin-bottom: 1rem;
-  }
-
-  .opencellInner {
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr);
-  }
-
-  .closingInner {
-    grid-template-columns: minmax(0, 1.35fr) minmax(18rem, 0.75fr);
-  }
-
-  .ctaActions .buttonPrimary,
-  .ctaActions .buttonSecondary {
-    width: auto;
-  }
-}
-
-/* Četiri kartice u 2 × 2: na 1920px četiri u redu daju 284px i proizvod se čita
-   kao thumbnail. U dve kolone kadar je ~600px i proizvod je krupan. */
-@media (min-width: 48rem) {
-  .productGrid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-}
-
 /* ========================================================== reduced motion */
 
 @media (prefers-reduced-motion: reduce) {
@@ -2033,45 +1849,6 @@
   color: var(--bf-invert-muted);
 }
 
-@media (min-width: 64rem) {
-  .heroIntro {
-    grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
-    align-items: end;
-    gap: clamp(2rem, 5vw, 5rem);
-  }
-
-  .heroIntroBody {
-    padding-bottom: 0.4rem;
-  }
-}
-
-/* Telefon: uži kadrovi bez razvlačenja. Automobil 1 : 1 drži i ruku sa krpom
-   i far (oko 47 % širine izvornika), sunđeri 4 : 3 na naslaganim diskovima. */
-@media (max-width: 47.99rem) {
-  .heroBleedCar {
-    aspect-ratio: 1 / 1;
-    max-height: none;
-  }
-
-  .heroBleedCar img {
-    object-position: 46% 50%;
-  }
-
-  .heroBleedPads {
-    aspect-ratio: 4 / 3;
-    max-height: none;
-  }
-
-  .heroBleedPads img {
-    object-position: 48% 70%;
-  }
-
-  .heroBleedCaption {
-    inset-inline: var(--bf-gutter) auto;
-    inset-block-end: 0.75rem;
-  }
-}
-
 .heroActions {
   display: flex;
   flex-wrap: wrap;
@@ -2112,4 +1889,3 @@
   outline: 2px solid #ffffff;
   outline-offset: 3px;
 }
-

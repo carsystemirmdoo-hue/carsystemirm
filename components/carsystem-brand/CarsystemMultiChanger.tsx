@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { getDocumentById } from "@/lib/documents";
 import { carsystemMultiChanger } from "./carsystemBrandData";
-import styles from "./CarsystemBrandPage.module.css";
+import styles from "./CarsystemBrandPage.styles";
 
 const swatchColors: Record<string, string> = {
   Plava: "#2f5fa8",

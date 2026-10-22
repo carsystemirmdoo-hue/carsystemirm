@@ -32,7 +32,7 @@ import { CarfitTaskSelector } from "./CarfitTaskSelector";
 import type { CarfitProductView, CarfitTaskView } from "./carfit-view";
 import { DocumentCard } from "@/components/documents/DocumentCard";
 import { getFeaturedDocuments } from "@/lib/documents";
-import styles from "./CarfitBrandPage.module.css";
+import styles from "./CarfitBrandPage.styles";
 import { toDisplayImageSrc } from "@/lib/productImageDisplay";
 import { getCarfitAbrasives } from "@/lib/carfit-abrasives";
 

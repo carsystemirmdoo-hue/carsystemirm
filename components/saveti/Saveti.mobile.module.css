@@ -1,0 +1,14 @@
+/*
+ * MOBILNI raspored za Saveti (do 1023px). Uređuje se nezavisno; zajednički izgled je u
+ * Saveti.module.css, a komponente koriste Saveti.styles.ts (2026-10-22).
+ *
+ * Prva klasa svakog selektora je udvostručena (specifičnost +1): raspored ne zavisi od
+ * redosleda učitavanja CSS delova (scripts/css/bump-responsive.py).
+ */
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .newsItem.newsItem {
+    grid-template-columns: 180px 1fr;
+    gap: 24px;
+  }
+}

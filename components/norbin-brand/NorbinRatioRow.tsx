@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { usePrefersReducedMotion } from "@/components/motion/usePrefersReducedMotion";
 import type { NorbinRatioRow as NorbinRatioRowData } from "./norbinBrandData";
-import styles from "./NorbinBrandPage.module.css";
+import styles from "./NorbinBrandPage.styles";
 
 export function NorbinRatioRow({ row }: { row: NorbinRatioRowData }) {
   const rootRef = useRef<HTMLLIElement>(null);

@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { CarfitMedia } from "./CarfitMedia";
 import type { CarfitTaskView } from "./carfit-view";
-import styles from "./CarfitBrandPage.module.css";
+import styles from "./CarfitBrandPage.styles";
 
 /**
  * Centralna interakcija stranice: izbor posla → materijal za taj posao.

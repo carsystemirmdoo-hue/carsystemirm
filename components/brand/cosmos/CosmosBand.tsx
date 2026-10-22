@@ -1,5 +1,5 @@
 import { Fragment } from "react";
-import styles from "./CosmosBrandPage.module.css";
+import styles from "./CosmosBrandPage.styles";
 
 type Props = {
   items: string[];

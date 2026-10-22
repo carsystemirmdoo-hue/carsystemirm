@@ -6,7 +6,7 @@ import {
   useState,
   type ReactNode,
 } from "react";
-import styles from "./RmBrandPage.module.css";
+import styles from "./RmBrandPage.styles";
 
 type RmPageTheme = "default" | "agilis" | "refinity";
 

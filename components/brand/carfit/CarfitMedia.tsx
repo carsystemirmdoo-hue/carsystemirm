@@ -1,6 +1,6 @@
 import Image from "next/image";
 import type { CarfitMediaSlot } from "@/lib/carfit-brand-data";
-import styles from "./CarfitBrandPage.module.css";
+import styles from "./CarfitBrandPage.styles";
 
 /**
  * Media slot: fotografija ako postoji, inače tehnički modul.

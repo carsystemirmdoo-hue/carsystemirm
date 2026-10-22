@@ -8,7 +8,7 @@ import {
   resolveQuantityLabel,
   resolveSizeClass,
 } from "@/lib/product-scale";
-import styles from "./RmBrandPage.module.css";
+import styles from "./RmBrandPage.styles";
 import { toDisplayImageSrc } from "@/lib/productImageDisplay";
 
 const PLACEHOLDER_ASSET = "/images/products/placeholder-product.svg";

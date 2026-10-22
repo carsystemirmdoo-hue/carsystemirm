@@ -11,7 +11,7 @@ import {
 } from "react";
 import type { CarsystemProduct } from "@/lib/carsystem-data";
 import { carsystemUseCases } from "./carsystemBrandData";
-import styles from "./CarsystemBrandPage.module.css";
+import styles from "./CarsystemBrandPage.styles";
 import { programLabel } from "./programLabel";
 
 export function CarsystemUseCases({

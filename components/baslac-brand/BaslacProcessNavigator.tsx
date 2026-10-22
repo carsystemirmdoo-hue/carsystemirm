@@ -6,7 +6,7 @@ import {
   baslacCatalogHref,
   baslacProcessSteps,
 } from "./baslacBrandData";
-import styles from "./BaslacBrandPage.module.css";
+import styles from "./BaslacBrandPage.styles";
 
 export function BaslacProcessNavigator() {
   const [activeId, setActiveId] = useState(baslacProcessSteps[0].id);

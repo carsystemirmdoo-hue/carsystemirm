@@ -15,6 +15,7 @@ import type {
 } from "@/types/product-detail";
 import styles from "./ProductDetailExperience.styles";
 import { CustomerStatus } from "@/components/customer-buy/CustomerStatus";
+import { toDisplayImageSrc } from "@/lib/productImageDisplay";
 
 type FamilyStyle = CSSProperties & {
   "--family-accent"?: string;
@@ -341,7 +342,7 @@ function VariantOptionContent({
           data-finish={option.swatchFinish}
           aria-hidden="true"
         >
-          {option.image ? <Image src={option.image} alt="" fill sizes="3rem" /> : null}
+          {option.image ? <Image src={toDisplayImageSrc(option.image)} alt="" fill sizes="3rem" /> : null}
         </span>
       ) : null}
       <span className={styles.variantOptionCopy}>

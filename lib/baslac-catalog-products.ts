@@ -17,6 +17,7 @@
 import syncData from "@/data/baslac-catalog-products.generated.json";
 import type { CarsystemProduct } from "@/lib/carsystem-data";
 import {
+  baslacAssetSlot,
   baslacBaseSlug,
   baslacAllBases,
   baslacFinishLabels,
@@ -122,23 +123,15 @@ export const baslacSystemFamilies: BaslacFamilyDefinition[] = [
   },
 ];
 
-/** Family packshot po sistemu i zapremini; `null` znači kontrolisan placeholder. */
-const FAMILY_PACKSHOTS: Record<string, string | null> = {
-  "line-30:3.5": "/products/baslac/baslac--line-30-3.5l-family-packshot.webp",
-  "line-30:1": null,
-  "line-30-cv:3.5": "/products/baslac/baslac--line-30-3.5l-family-packshot.webp",
-  "line-35:3.5": "/products/baslac/baslac--line-35-3.5l-family-packshot.webp",
-  "line-35:1": null,
-  "line-35:0.5": null,
-  "line-45:5": null,
-  "line-45:1": null,
-  "line-45:0.5": null,
-  "line-45:0.1": null,
-};
-
-function packshotFor(base: BaslacBase): string | null {
-  const key = `${base.system}:${base.volumeL ?? "na"}`;
-  return FAMILY_PACKSHOTS[key] ?? null;
+/**
+ * Family packshot po sistemu i zapremini — isti slot koji prikazuju sistemska strana i kartica
+ * kataloga po zapremini (`baslacAssetSlot`). Ranije je ovde stajala zasebna, zastarela tabela, pa su
+ * baze 1 L / 0,5 L u pretrazi i u prijavljenom prikazu dobijale placeholder iako fotografija
+ * zapremine postoji. `null` i dalje znači kontrolisan placeholder (nema slike te zapremine).
+ */
+function packshotFor(base: BaslacBase): { src: string; shownCode?: string } | null {
+  const slot = baslacAssetSlot(base.system, base.volumeL);
+  return slot?.src ? { src: slot.src, shownCode: slot.shownCode } : null;
 }
 
 function volumeLabel(volumeL: number | null): string {
@@ -174,9 +167,9 @@ function toCatalogProduct(
     purpose: `Izrada nijanse u sistemu ${family.line}`,
     badges: [family.line, finishLabel, volume, "Na upit"],
     productImage: {
-      src: packshot ?? PLACEHOLDER,
+      src: packshot?.src ?? PLACEHOLDER,
       alt: packshot
-        ? `Baslac ${family.line} ambalaža ${volume}`
+        ? `Baslac ${family.line} ambalaža ${volume}${packshot.shownCode ? ` (na etiketi primer baze ${packshot.shownCode})` : ""}`
         : `${fullName} — fotografija u pripremi`,
     },
     galleryImages: [],
@@ -505,10 +498,11 @@ export const baslacSyncMeta = syncData.meta;
  * porodice ne bi nazadovala na placeholder.
  */
 const SYSTEM_PACKSHOTS: Record<string, string | null> = {
-  "line-30": FAMILY_PACKSHOTS["line-30:3.5"],
-  "line-30-cv": FAMILY_PACKSHOTS["line-30-cv:3.5"],
-  "line-35": FAMILY_PACKSHOTS["line-35:3.5"],
-  "line-45": FAMILY_PACKSHOTS["line-45:5"],
+  "line-30": "/products/baslac/baslac--line-30-3.5l-family-packshot.webp",
+  "line-30-cv": "/products/baslac/baslac--line-30-3.5l-family-packshot.webp",
+  "line-35": "/products/baslac/baslac--line-35-3.5l-family-packshot.webp",
+  // Zapis sistema Line 45 dobija generičku 45-W limenku iz `supplied-images.json` (FAMILY).
+  "line-45": null,
 };
 
 const CATEGORY_BADGE: Record<string, string> = {

@@ -2403,6 +2403,12 @@ const productRecords: CarsystemProduct[] = [
       { label: "Pakovanje", value: "bočica 125 ml" },
     ],
     relatedProductSlugs: ["rm-diamont-bazna-boja"],
+    // Ista generička bočica sistema koju prikazuje izbor baze (data/catalog/family-packshots.json,
+    // Surventis 30817). Bez nje kartica, brend stranica i prijavljeni prikaz su davali placeholder.
+    productImage: {
+      src: "/products/rm/system/rm-crystal-base-125ml.webp",
+      alt: "R-M DIAMONT CRYSTAL BASE, bočica 125 ml — generička ambalaža sistema bez šifre nijanse",
+    },
   }),
   // R-M paste za mešanje iz naše ponude: oznake i pakovanja potvrđeni prema etiketi (odluka vlasnika
   // 2026-10-13). Linija i naziv nijanse nisu potvrđeni zvaničnim izvorom, pa se ne navode. Redovi su u

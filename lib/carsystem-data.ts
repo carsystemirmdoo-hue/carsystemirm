@@ -2832,6 +2832,8 @@ type SuppliedImageEntry = {
   path: string;
   sourceBasis: SuppliedImageSourceBasis;
   rightsBasis?: string;
+  /** Naziv dostavljenog izvora; sufiks „__1l” kaže u kojoj je zapremini fotografisan. */
+  sourceFile?: string;
   /** Opis konkretne slike; bez njega ostaje alt zapisa. */
   alt?: string;
 };
@@ -2887,12 +2889,26 @@ function withoutRemovedReferences(product: CarsystemProduct): CarsystemProduct {
   };
 }
 
+/**
+ * Porodični packshot koji je fotografisan u jednoj zapremini (naziv izvora „…__1l.png”) ne sme da
+ * zameni fotografiju DRUGE zapremine koju zapis već ima (slot sistemske strane, 2026-10-23).
+ * Zapis bez slike (placeholder) ga i dalje dobija.
+ */
+function sharedFitsVolume(shared: { sourceFile?: string }, product: CarsystemProduct): boolean {
+  const match = /__(\d+(?:[.,]\d+)?)l\.(?:png|jpe?g|webp)$/i.exec(shared.sourceFile ?? "");
+  if (!match) return true;
+  if (!product.productImage?.src || /placeholder/i.test(product.productImage.src)) return true;
+  const sharedLitres = Number(match[1].replace(",", "."));
+  const volume = /([\d.,]+)\s*l\b/i.exec(String(product.catalogMetadata?.volume ?? product.packages?.[0]?.label ?? ""));
+  return !volume || Number(volume[1].replace(",", ".")) === sharedLitres;
+}
+
 function withSuppliedImage(product: CarsystemProduct): CarsystemProduct {
   const shared = suppliedFamilyPackshot.get(product.catalogMetadata?.baseProductSlug ?? "");
   const own =
     suppliedByRecord.get(product.slug) ??
     // Zapis koji deli porodični packshot dobija sliku serije; zapis sa sopstvenom slikom se ne dira.
-    (shared && product.visualIdentity?.packshotKind === "family" ? shared : undefined);
+    (shared && product.visualIdentity?.packshotKind === "family" && sharedFitsVolume(shared, product) ? shared : undefined);
   const rows = product.detail?.variants?.content.rows ?? [];
   const rowEntries = rows.map((row) => suppliedByRow.get(`${product.slug} ${row.id}`));
   if (!own && !rowEntries.some(Boolean)) return product;

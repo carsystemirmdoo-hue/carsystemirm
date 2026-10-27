@@ -1,6 +1,6 @@
 {
   "_comment": "Zapisi uklonjeni iz customer-facing kataloga odlukom vlasnika 2026-09-22. Ovo NIJE tvrdnja da je proizvod ukinut kod proizvođača: `status` kaže tačno na osnovu čega je uklonjen. Provenance se čuva — sync datasetima se ne dira nijedan zapis, a ručni zapisi bez izvora se brišu iz kataloga (soft-plus-git se vraća u legacy bazen `lib/carsystem-data.ts`). Fajl je jedini izvor istine za: filtriranje runtime kataloga (`lib/carsystem-data.ts`), 308 preusmerenja (`next.config.ts`) i regresioni test (`lib/catalog/removedFromCustomerCatalog.test.mjs`).",
-  "decidedOn": "2026-09-22 (prva odluka), 2026-09-23 (filteri i respiratorni program)",
+  "decidedOn": "2026-09-22 (prva odluka), 2026-09-23 (filteri i respiratorni program), 2026-10-27 (Befar Turkuaz Static Foil)",
   "statuses": {
     "BUSINESS_OUT_OF_PROGRAMME": "Firma proizvod više ne drži u programu. Nije dokaz da ga proizvođač više ne pravi.",
     "INVALID_MANUAL_RECORD": "Ručni zapis bez potvrđenog identiteta kod proizvođača — nije postojao kao artikal."
@@ -565,6 +565,16 @@
       "evidence": "carsystem.org kategorija „Merchandising Materials“ (officialCategory u data/carsystem-catalog-products.generated.json), artikal 158.084.",
       "redirect": "/brendovi/carsystem",
       "redirectNote": "Stari URL vodi trajnim preusmerenjem (308) na Carsystem brend stranu; interni podaci i istorija dokumenata ostaju."
+    },
+    {
+      "slug": "befar-turkuaz-static-foil",
+      "brand": "befar",
+      "name": "Befar Turkuaz Static Foil",
+      "status": "BUSINESS_OUT_OF_PROGRAMME",
+      "source": "BEFAR_SYNC",
+      "reason": "Odluka vlasnika 2026-10-27: proizvod se uklanja iz javne ponude, pretrage, preporuka i nove kupovine.",
+      "evidence": "Befar sync: officialName \"Turkuaz Static Fail\", linija Turkuaz (4 varijante). Zapis ostaje u data/befar-catalog-products.generated.json kao istorijski podatak.",
+      "redirect": "/brendovi/befar"
     }
   ],
   "keptExplicitly": {

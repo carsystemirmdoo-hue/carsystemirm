@@ -24,6 +24,9 @@ import {
 } from "./productVariantState.mjs";
 
 const read = (relative) => readFile(new URL(relative, import.meta.url), "utf8");
+// Pogled varijante crta pregledan derivat za prikaz (lib/productImageDisplay.ts), ako postoji.
+const displayMap = JSON.parse(await read("../../data/catalog/image-remaster/display-map.json")).images;
+const drawn = (src) => displayMap[src] ?? src;
 
 const stage = (src) => ({ src, alt: "", contrastMode: "neutral" });
 const BASE = {
@@ -144,7 +147,7 @@ test("stvarni katalog: svaki red svake tabele šifara ima svoj pogled i svoju š
       assert.equal(view.sku, row.sku ?? view.sku, `${product.slug}: pogrešna šifra za red ${row.id}`);
       assert.equal(view.name, product.name);
       if (row.image) {
-        assert.equal(view.images[0].src, row.image, `${product.slug}: slika varijante ${row.id} nije prva`);
+        assert.equal(view.images[0].src, drawn(row.image), `${product.slug}: slika varijante ${row.id} nije prva`);
         withOwnImage += 1;
       }
       // Oznaka reda nikada nije javni status („Na upit / Na upit”).

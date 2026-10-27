@@ -10,6 +10,7 @@ import { useOptionalProductVariant } from "@/components/product/ProductVariantPr
 import { ALL_PACKS, PACK_QUERY_PARAM, packSlug } from "@/components/product/variantPacks.mjs";
 import { VARIANT_QUERY_PARAM } from "@/components/product/productVariantState.mjs";
 import { srPlural } from "@/lib/sr-plural";
+import { toDisplayImageSrc } from "@/lib/productImageDisplay";
 import type { FamilyBase, FamilyPackshot } from "./familyBaseTypes";
 // Raspored po širini (2026-10-22): desktop i telefon se uređuju u odvojenim fajlovima;
 // FamilyBasePdp.styles spaja klase sva tri fajla pod istim imenom.
@@ -197,7 +198,7 @@ export function FamilyBasePdp({
             <figure className={styles.lineExample}>
               <Image
                 key={stageImage.src}
-                src={stageImage.src}
+                src={toDisplayImageSrc(stageImage.src)}
                 alt={stageImage.alt}
                 width={520}
                 height={680}

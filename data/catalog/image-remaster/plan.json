@@ -291,28 +291,6 @@
       "repairedSha256": "062c5422fa70dc8b19a6fbefdb7abe1eb0392a60679d3832af155d1d71422eaf"
     },
     {
-      "src": "/products/carsystem/catalog/carsystem-crash-film.webp",
-      "brand": "carsystem",
-      "products": [
-        "carsystem-crash-film"
-      ],
-      "operations": [
-        {
-          "op": "shadow-premultiply"
-        }
-      ],
-      "reason": "zvanični original (originalUrl, carsystem.org) umesto _processed_ derivata ≈ original^2.2 (tamniji, zgnječena crna, širi poluprovidni rub); ICC→sRGB, premultiplied resize na istu veličinu, bez tonske korekcije; zatim pregledana operacija: svetlosiva poluprovidna senka komponovana za beli papir svetli na tamnoj sceni; prepisana kao crna sa α·(255−g)/255 — identično na beloj podlozi",
-      "originalSha256": "793045bc060fe506ced3bafd656b64907e1cc03c70f32b7603552b5246d2adb6",
-      "repairedSha256": "1d405de9c84ac3dd2f4fae133b6e83273785fbd7f734e0119b39ac5750ecf79d",
-      "source": {
-        "kind": "official-original",
-        "url": "https://www.carsystem.org/fileadmin/products/images/160.381/160381-crash-film-75cmx60m.png",
-        "sha256": "63420d6e4c02239ca101c201ec2ea476b35989be128416298f6f62301dc159ce",
-        "cacheFile": "carsystem-crash-film.png",
-        "finding": "JS-0675"
-      }
-    },
-    {
       "src": "/products/carsystem/catalog/carsystem-dispenser-for-5-kg-polish.webp",
       "brand": "carsystem",
       "products": [
@@ -470,28 +448,6 @@
       "reason": "svetlosiva poluprovidna senka komponovana za beli papir svetli na tamnoj sceni; prepisana kao crna sa α·(255−g)/255 — identično na beloj podlozi",
       "originalSha256": "250833f208c62d2369d01b7bd63500f2773c63d9d6ea0dd9ebc3dfd90492514e",
       "repairedSha256": "3fb40a17db8ac93f500d03035f382e75489108bf52748285f19704790e2e293f"
-    },
-    {
-      "src": "/products/carsystem/catalog/carsystem-glas.webp",
-      "brand": "carsystem",
-      "products": [
-        "carsystem-glas"
-      ],
-      "operations": [
-        {
-          "op": "shadow-premultiply"
-        }
-      ],
-      "reason": "zvanični original (originalUrl, carsystem.org) umesto _processed_ derivata ≈ original^2.2 (tamniji, zgnječena crna, širi poluprovidni rub); ICC→sRGB, premultiplied resize na istu veličinu, bez tonske korekcije; zatim pregledana operacija: svetlosiva poluprovidna senka komponovana za beli papir svetli na tamnoj sceni; prepisana kao crna sa α·(255−g)/255 — identično na beloj podlozi",
-      "originalSha256": "07282ca6be1ce9ad8b59bc1c822decc0f827ae1d17cc698e7a36784756efd966",
-      "repairedSha256": "f9b96da1c4e60a1b1f0a2776d77ea8dea926ebdfc948d0fb92e622a6458541ca",
-      "source": {
-        "kind": "official-original",
-        "url": "https://www.carsystem.org/fileadmin/products/images/127.974/127.974-cs-glas-inkl-haerter-3D.png",
-        "sha256": "a0c45f39a962d4f5631e66b05e86b1cbbbb457735a54f31d66419961698d6e31",
-        "cacheFile": "carsystem-glas.png",
-        "finding": "JS-0684"
-      }
     },
     {
       "src": "/products/carsystem/catalog/carsystem-glass-fibre-fleece.webp",
@@ -743,42 +699,6 @@
       "repairedSha256": "e6666ecadd3034330f4adba3ffb3ed808e5a19d37f6ce15a12df142de5883114"
     },
     {
-      "src": "/products/carsystem/catalog/carsystem-orbital-sander-csh-cms01-kit.webp",
-      "brand": "carsystem",
-      "products": [
-        "carsystem-orbital-sander-csh-cms01-kit"
-      ],
-      "operations": [
-        {
-          "op": "clear-edge-frame",
-          "params": {
-            "width": 2
-          }
-        }
-      ],
-      "reason": "1–2 px poluprovidan beli okvir na ivici platna (postoji i u originalu proizvođača) crta pravougaonik na tamnoj sceni",
-      "originalSha256": "653af93d506c23542982bf920309fddf5888c68ecae6e99cf6dbc4e0081157ea",
-      "repairedSha256": "e9c53c6126ed1d81de42f20bc1a646c136c2d563a4db3db6f482fe12224316d4"
-    },
-    {
-      "src": "/products/carsystem/catalog/carsystem-pad-saver.webp",
-      "brand": "carsystem",
-      "products": [
-        "carsystem-pad-saver"
-      ],
-      "source": {
-        "kind": "official-original",
-        "url": "https://www.carsystem.org/fileadmin/products/images/154.099/154099-cs-pad-saver-5er-box-single.png",
-        "sha256": "777f421f786a13dc617d2f8c72f204cd38dfc11507b0a9054e911273521a695c",
-        "cacheFile": "carsystem-pad-saver.png",
-        "finding": "JS-0691"
-      },
-      "operations": [],
-      "reason": "zvanični original (originalUrl, carsystem.org) umesto _processed_ derivata ≈ original^2.2 (tamniji, zgnječena crna, širi poluprovidni rub); ICC→sRGB, premultiplied resize na istu veličinu, bez tonske korekcije",
-      "originalSha256": "80a239a54ebb73bedd769d7e7f53c28f6261b3c8774abd34e4ee2e2dbc851dec",
-      "repairedSha256": "0d770d7c31c91c91b865633cbd33be18bd3911917b2c316da57943416dc643f4"
-    },
-    {
       "src": "/products/carsystem/catalog/carsystem-paint-trolley-flexi-plus.webp",
       "brand": "carsystem",
       "products": [
@@ -889,42 +809,6 @@
       "reason": "svetao rub (ostatak bele pozadine) uz tamnu ivicu proizvoda — potvrđeno uvećanjem 4×",
       "originalSha256": "57819cfe76d8e1fecb06a79ffdba740911fef6c40142f27e0af512ecb36e3946",
       "repairedSha256": "e65e58accad42c9a9f1aadc4f8126aee7ae3faca5957112732029de5c3510213"
-    },
-    {
-      "src": "/products/carsystem/catalog/carsystem-polishing-pad-x1500-2.webp",
-      "brand": "carsystem",
-      "products": [
-        "carsystem-polishing-pad-x1500"
-      ],
-      "operations": [
-        {
-          "op": "shadow-premultiply",
-          "params": {
-            "maxChroma": 40
-          }
-        }
-      ],
-      "reason": "svetlosiva poluprovidna senka komponovana za beli papir svetli na tamnoj sceni; prepisana kao crna sa α·(255−g)/255 — identično na beloj podlozi",
-      "originalSha256": "76a84a4e06613e5fd6f03a131ce69ad32f470ecc994d3e348dc22e4186dbaa9c",
-      "repairedSha256": "839af950f97d563ba1a966113e3262dea9a1f4ca41948514cbeca188049c17f0"
-    },
-    {
-      "src": "/products/carsystem/catalog/carsystem-polishing-pad-x8000-2.webp",
-      "brand": "carsystem",
-      "products": [
-        "carsystem-polishing-pad-x8000"
-      ],
-      "operations": [
-        {
-          "op": "shadow-premultiply",
-          "params": {
-            "maxChroma": 40
-          }
-        }
-      ],
-      "reason": "svetlosiva poluprovidna senka komponovana za beli papir svetli na tamnoj sceni; prepisana kao crna sa α·(255−g)/255 — identično na beloj podlozi",
-      "originalSha256": "97517dc8ebc7079d9bc5d365458d7fee583063e5fc641cc1344ba1516c325319",
-      "repairedSha256": "57e12dc6d3fbb85cdc773fcd426b3d908335b30f4029342329372a3dd8a45b93"
     },
     {
       "src": "/products/carsystem/catalog/carsystem-polishing-pad-x8000.webp",
@@ -1076,24 +960,6 @@
       "repairedSha256": "ff4f955595e3b2d395bbf7845a49059d9149205ac005f4b5b8ef4c65e2721562"
     },
     {
-      "src": "/products/carsystem/catalog/carsystem-rubber-spreader-set.webp",
-      "brand": "carsystem",
-      "products": [
-        "carsystem-rubber-spreader-set"
-      ],
-      "source": {
-        "kind": "official-original",
-        "url": "https://www.carsystem.org/fileadmin/products/images/159.448/159.448-cs-gummi-spachtel-3er-set.png",
-        "sha256": "01019125cdc50b650a240c7b1be387db03f6180761ad12105501173e012eebad",
-        "cacheFile": "carsystem-rubber-spreader-set.png",
-        "finding": "JS-0703"
-      },
-      "operations": [],
-      "reason": "zvanični original (originalUrl, carsystem.org) umesto _processed_ derivata ≈ original^2.2 (tamniji, zgnječena crna, širi poluprovidni rub); ICC→sRGB, premultiplied resize na istu veličinu, bez tonske korekcije",
-      "originalSha256": "c6ee8837c43ad3b02a0104981a67dd9012dc81dd20ecd6f1ecf01c4a637673a0",
-      "repairedSha256": "31ce1b65e2b7d687f1ef6ee631c5089f81c3eff495d380013a7290d6f4096858"
-    },
-    {
       "src": "/products/carsystem/catalog/carsystem-rupes-orbital-sander-slp41a.webp",
       "brand": "rupes",
       "products": [
@@ -1190,42 +1056,6 @@
       "repairedSha256": "36422a03ab4720377db20594f80c0d7ecaaea27510dc8880adac4fa0f5af773b"
     },
     {
-      "src": "/products/carsystem/catalog/carsystem-soft-roll.webp",
-      "brand": "carsystem",
-      "products": [
-        "carsystem-soft-roll"
-      ],
-      "source": {
-        "kind": "official-original",
-        "url": "https://www.carsystem.org/fileadmin/products/images/159.422/159422-430-cs-soft-roll-papierschleifmittel.png",
-        "sha256": "0808e9b326942c8117e693b1f9611eebd6ed2af76641eb682d3fc814746376bb",
-        "cacheFile": "carsystem-soft-roll.png",
-        "finding": "JS-0709"
-      },
-      "operations": [],
-      "reason": "zvanični original (originalUrl, carsystem.org) umesto _processed_ derivata ≈ original^2.2 (tamniji, zgnječena crna, širi poluprovidni rub); ICC→sRGB, premultiplied resize na istu veličinu, bez tonske korekcije",
-      "originalSha256": "35251cf67283f92902b2e29c9162d3a196d2aca442c5302106af20d6547c3673",
-      "repairedSha256": "51c52189b298f5469cd192b4cc7a96040f51de9bb072a2e99b94e3ce8890bb0b"
-    },
-    {
-      "src": "/products/carsystem/catalog/carsystem-sound-deadening-panels.webp",
-      "brand": "carsystem",
-      "products": [
-        "carsystem-sound-deadening-panels"
-      ],
-      "source": {
-        "kind": "official-original",
-        "url": "https://www.carsystem.org/fileadmin/products/images/126.055/126.055-134.139-140-cs-antidroehnenplatten-gruppe.png",
-        "sha256": "87ef060c37c5b9b36890be7ef45df8d4d2255fd95b18d4281d9222859fe97137",
-        "cacheFile": "carsystem-sound-deadening-panels.png",
-        "finding": "JS-0710"
-      },
-      "operations": [],
-      "reason": "zvanični original (originalUrl, carsystem.org) umesto _processed_ derivata ≈ original^2.2 (tamniji, zgnječena crna, širi poluprovidni rub); ICC→sRGB, premultiplied resize na istu veličinu, bez tonske korekcije",
-      "originalSha256": "b26e3c00e6605e979c85e9b7117dd2136c034a3a1d021f1fccccf7a8b8250cf2",
-      "repairedSha256": "e1f9aa114f42041a43c35dd3e6e59818050cf362ac9bbe56ae41905bddfbd1a1"
-    },
-    {
       "src": "/products/carsystem/catalog/carsystem-spare-battery-5-0ah.webp",
       "brand": "carsystem",
       "products": [
@@ -1275,75 +1105,6 @@
       "reason": "zvanični original (originalUrl, carsystem.org) umesto _processed_ derivata ≈ original^2.2 (tamniji, zgnječena crna, širi poluprovidni rub); ICC→sRGB, premultiplied resize na istu veličinu, bez tonske korekcije",
       "originalSha256": "ceb5926565a5348864bdc43b7cadc09bde0a880f553d5d52053829ef9ef3dad0",
       "repairedSha256": "243ba8c3fa1279f3cd00ab039029efc8c91bfa01d4e33edefb4da0c7b78b3540"
-    },
-    {
-      "src": "/products/carsystem/catalog/carsystem-staub-stop-water-black.webp",
-      "brand": "carsystem",
-      "products": [
-        "carsystem-staub-stop-water-black"
-      ],
-      "source": {
-        "kind": "official-original",
-        "url": "https://www.carsystem.org/fileadmin/products/images/158.033/158033-staub-stop-water-black-verpackung-tuecher.png",
-        "sha256": "d80c89b86ee38704c1cc638d1896c91de5acbdbe42bb6ae8043890833d60f049",
-        "cacheFile": "carsystem-staub-stop-water-black.png",
-        "finding": "JS-0713"
-      },
-      "operations": [],
-      "reason": "zvanični original (originalUrl, carsystem.org) umesto _processed_ derivata ≈ original^2.2 (tamniji, zgnječena crna, širi poluprovidni rub); ICC→sRGB, premultiplied resize na istu veličinu, bez tonske korekcije",
-      "originalSha256": "6de2dc7ee21d006a63fce8fd836408245e38871c6a2a0a8bb2c2f0bfc8d68c29",
-      "repairedSha256": "fc9b9dfa21d24c2bb63bc07c10db8be7d132f8257f650b7de9d035df47f5481a"
-    },
-    {
-      "src": "/products/carsystem/catalog/carsystem-tape-off-disc-premium-2.webp",
-      "brand": "carsystem",
-      "products": [
-        "carsystem-tape-off-disc-premium"
-      ],
-      "operations": [
-        {
-          "op": "shadow-premultiply"
-        }
-      ],
-      "reason": "svetlosiva poluprovidna senka komponovana za beli papir svetli na tamnoj sceni; prepisana kao crna sa α·(255−g)/255 — identično na beloj podlozi",
-      "originalSha256": "1555351c08c1593e4a80a44dd44b8ff2006ab9bb087acca6993a3116646a970c",
-      "repairedSha256": "6bb3512b420e19271e453e33da17a6bbd1b258ddae8eef8ff5984cb88237f7a6"
-    },
-    {
-      "src": "/products/carsystem/catalog/carsystem-tec-line-stick.webp",
-      "brand": "carsystem",
-      "products": [
-        "carsystem-tec-line-stick"
-      ],
-      "source": {
-        "kind": "official-original",
-        "url": "https://www.carsystem.org/fileadmin/products/images/152.554/152554-cs-sensor-pad-18mm-rot-150-pads_verpackung.png",
-        "sha256": "36286451267293eaef1e89ac73f8429ae0866eb8fd2a6ca33baa15384c250153",
-        "cacheFile": "carsystem-tec-line-stick.png",
-        "finding": "JS-0714"
-      },
-      "operations": [],
-      "reason": "zvanični original (originalUrl, carsystem.org) umesto _processed_ derivata ≈ original^2.2 (tamniji, zgnječena crna, širi poluprovidni rub); ICC→sRGB, premultiplied resize na istu veličinu, bez tonske korekcije",
-      "originalSha256": "cf305ba6d49c9a94ac75c3967af1589d0238584f818bad538d36044f3f94b76d",
-      "repairedSha256": "d6a23f47d8ea6e62330940a91ff89faeab16341517bc228f9d402fa60ef2e0cd"
-    },
-    {
-      "src": "/products/carsystem/catalog/carsystem-topline-wp-s.webp",
-      "brand": "carsystem",
-      "products": [
-        "carsystem-topline-wp-s"
-      ],
-      "source": {
-        "kind": "official-original",
-        "url": "https://www.carsystem.org/fileadmin/products/images/136.676/136676-691-cs-topline-wp-s-230x280mm.png",
-        "sha256": "71af3ef3d78b3cba40882d6e818648b26c33143929307cb614302e4519b0d9f2",
-        "cacheFile": "carsystem-topline-wp-s.png",
-        "finding": "JS-0715"
-      },
-      "operations": [],
-      "reason": "zvanični original (originalUrl, carsystem.org) umesto _processed_ derivata ≈ original^2.2 (tamniji, zgnječena crna, širi poluprovidni rub); ICC→sRGB, premultiplied resize na istu veličinu, bez tonske korekcije",
-      "originalSha256": "519c0eda2ecb276849bc0922c64478c9a47391db394a6cbb3bdd51aa36809f3f",
-      "repairedSha256": "86e028cbf38388b48d534c7dbac7af6ce5ec084cd01683eb5586789200b9d3fe"
     },
     {
       "src": "/products/carsystem/catalog/carsystem-uv-filler-spray.webp",

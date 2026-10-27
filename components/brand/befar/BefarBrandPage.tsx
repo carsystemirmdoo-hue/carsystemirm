@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { BrandSectionNav } from "@/components/brand/BrandSectionNav";
 import { Footer } from "@/components/layout/Footer";
+import { toDisplayImageSrc } from "@/lib/productImageDisplay";
 import type { CarsystemBrand, CarsystemProduct } from "@/lib/carsystem-data";
 import {
   befarCta,
@@ -154,7 +155,7 @@ export function BefarBrandPage({ brand, products }: Props) {
                       alt={group.image.alt}
                       height={group.image.height}
                       sizes="(min-width: 64rem) 22vw, 44vw"
-                      src={group.image.src}
+                      src={toDisplayImageSrc(group.image.src)}
                       width={group.image.width}
                     />
                   </div>
@@ -228,7 +229,7 @@ export function BefarBrandPage({ brand, products }: Props) {
                   alt={befarGeometryMeta.anchorImage.alt}
                   height={befarGeometryMeta.anchorImage.height}
                   sizes="(min-width: 64rem) 32vw, 90vw"
-                  src={befarGeometryMeta.anchorImage.src}
+                  src={toDisplayImageSrc(befarGeometryMeta.anchorImage.src)}
                   width={befarGeometryMeta.anchorImage.width}
                 />
               </div>
@@ -304,7 +305,7 @@ export function BefarBrandPage({ brand, products }: Props) {
                           ? "(min-width: 64rem) 52vw, 92vw"
                           : "(min-width: 64rem) 30vw, 92vw"
                       }
-                      src={family.image.src}
+                      src={toDisplayImageSrc(family.image.src)}
                       width={family.image.width}
                     />
                     {/* Leo je jedina podlinija sa potvrđenim logotipom i sopstvenom
@@ -399,7 +400,7 @@ export function BefarBrandPage({ brand, products }: Props) {
                 alt={befarOpencell.image.alt}
                 height={befarOpencell.image.height}
                 sizes="(min-width: 64rem) 46vw, 92vw"
-                src={befarOpencell.image.src}
+                src={toDisplayImageSrc(befarOpencell.image.src)}
                 width={befarOpencell.image.width}
               />
             </div>
@@ -429,7 +430,7 @@ export function BefarBrandPage({ brand, products }: Props) {
                       alt={step.image.alt}
                       height={step.image.height}
                       sizes="(min-width: 64rem) 30vw, 92vw"
-                      src={step.image.src}
+                      src={toDisplayImageSrc(step.image.src)}
                       width={step.image.width}
                     />
                   </div>
@@ -469,7 +470,7 @@ export function BefarBrandPage({ brand, products }: Props) {
                         alt={group.image.alt}
                         height={group.image.height}
                         sizes="(min-width: 80rem) 22vw, (min-width: 48rem) 44vw, 88vw"
-                        src={group.image.src}
+                        src={toDisplayImageSrc(group.image.src)}
                         width={group.image.width}
                       />
                     </div>

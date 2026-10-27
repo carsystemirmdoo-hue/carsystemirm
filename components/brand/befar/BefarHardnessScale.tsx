@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useCallback, useEffect, useId, useRef, useState } from "react";
+import { toDisplayImageSrc } from "@/lib/productImageDisplay";
 import {
   befarAttachmentLabels,
   befarHardnessMeta,
@@ -220,7 +221,7 @@ export function BefarHardnessScale({ steps }: Props) {
                       className={styles.hardnessObjectImage}
                       height={step.image.height}
                       sizes="(min-width: 64rem) 40vw, 86vw"
-                      src={step.image.src}
+                      src={toDisplayImageSrc(step.image.src)}
                       width={step.image.width}
                     />
                   </div>

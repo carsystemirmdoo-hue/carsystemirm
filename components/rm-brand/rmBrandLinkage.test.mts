@@ -19,6 +19,7 @@ import { getCarsystemProductBySlug, getCarsystemProductsByBrandSlug } from "@/li
 import { getRmBrandClassifications } from "@/lib/rm-brand-classification";
 import { toCatalogListingEntity } from "@/lib/catalog-listing";
 import { getProductSearchIndex } from "@/lib/search/buildSearchIndex";
+import { toDisplayImageSrc } from "@/lib/productImageDisplay";
 import catalogData from "@/data/rm-catalog-products.generated.json";
 import supplied from "@/data/catalog/image-supply/supplied-images.json";
 
@@ -186,9 +187,9 @@ test("6. katalog, pretraga, PDP i brend stranica dele identitet i sliku", () => 
     assert.equal(listing.href, `/proizvodi/${product.slug}`);
     assert.equal(listing.presentation.image?.src, product.productImage?.src, product.slug);
 
-    // Pretraga ne nosi placeholder; prava slika je ista putanja.
+    // Pretraga ne nosi placeholder; prava slika je ista putanja (ili njen pregledan derivat za prikaz).
     const record = search.get(product.slug);
-    if (record && hasCatalogImage(product)) assert.equal(record.imageSrc, product.productImage?.src, product.slug);
+    if (record && hasCatalogImage(product)) assert.equal(record.imageSrc, toDisplayImageSrc(product.productImage!.src), product.slug);
     if (record && !hasCatalogImage(product)) assert.ok(!record.imageSrc || record.imageSrc === product.productImage?.src, product.slug);
   }
 

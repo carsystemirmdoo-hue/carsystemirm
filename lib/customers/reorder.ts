@@ -17,6 +17,7 @@ import {
   resolveVariant,
   usualQuantity,
 } from "@/lib/customers/reorderRules.mjs";
+import { toDisplayImageSrc } from "@/lib/productImageDisplay";
 
 /**
  * Stavka „Poručite ponovo" — tačno ono što kupac vidi, ništa više.
@@ -75,7 +76,7 @@ export type ReorderList = {
 
 function imageOf(src: string | null | undefined, alt: string) {
   if (!src || /placeholder/i.test(src)) return null;
-  return { src, alt };
+  return { src: toDisplayImageSrc(src), alt };
 }
 
 function orderFields(

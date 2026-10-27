@@ -11,6 +11,7 @@ import { isSinglePiece, suggestedPacks } from "@/lib/ordering/packRule.mjs";
 import { getFamilyForProduct, variantRedirectTarget } from "@/lib/product-families";
 import { belgradeDate } from "@/lib/recommendations/customerRhythm.mjs";
 import { customerStockFor } from "@/lib/stock/stock-import-service";
+import { toDisplayImageSrc } from "@/lib/productImageDisplay";
 
 /*
  * „Za Vas“ — kartice („Najčešće kupujete“, „Vreme je za dopunu“) i lični redosled kataloga.
@@ -133,7 +134,8 @@ function entityIdOf(slug: string) {
   return catalogEntityIdForProduct(product) ?? product.slug;
 }
 
-function present(a: ArticleFacts) {
+/** Izvezeno samo radi provere slike (bez DB); ponašanje je isto kao ranije. */
+export function present(a: Pick<ArticleFacts, "slug" | "variant">) {
   const product = getCarsystemProductBySlug(a.slug)!;
   const selector = getProductVariantSelector(product);
   const variant = resolveVariant(a.variant, selector?.variants ?? []);
@@ -144,7 +146,8 @@ function present(a: ArticleFacts) {
   return {
     name: product.name,
     href: variant ? `/proizvodi/${product.slug}?varijanta=${encodeURIComponent(variant.key)}` : (variantRedirectTarget(product) ?? `/proizvodi/${product.slug}`),
-    image: src ? { src, alt: product.productImage?.alt ?? product.name } : null,
+    // Isti prikazni derivat kao kartica kataloga (popravljena ivica/senka), ne sirovi original.
+    image: src ? { src: toDisplayImageSrc(src), alt: product.productImage?.alt ?? product.name } : null,
     variantLabel: variant?.label ?? null,
   };
 }

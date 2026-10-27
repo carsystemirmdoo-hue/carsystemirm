@@ -617,6 +617,15 @@
   --product-content-offset-y: 0.0379;
 }
 
+.fit[data-product-fit="/products/baslac/baslac--line-30-1l-representative.webp"] {
+  --product-canvas-aspect: 0.7692;
+  --product-content-aspect: 0.7692;
+  --product-content-fill-x: 1;
+  --product-content-fill-y: 1;
+  --product-content-offset-x: 0;
+  --product-content-offset-y: 0;
+}
+
 .fit[data-product-fit="/products/baslac/baslac--line-30-3.5l-family-packshot.webp"] {
   --product-canvas-aspect: 0.7655;
   --product-content-aspect: 0.7333;
@@ -626,6 +635,24 @@
   --product-content-offset-y: 0.0112;
 }
 
+.fit[data-product-fit="/products/baslac/baslac--line-35-0.5l-representative.webp"] {
+  --product-canvas-aspect: 1.2565;
+  --product-content-aspect: 1.2571;
+  --product-content-fill-x: 0.9983;
+  --product-content-fill-y: 0.9979;
+  --product-content-offset-x: 0.0008;
+  --product-content-offset-y: 0.001;
+}
+
+.fit[data-product-fit="/products/baslac/baslac--line-35-1l-representative.webp"] {
+  --product-canvas-aspect: 0.7692;
+  --product-content-aspect: 0.7692;
+  --product-content-fill-x: 1;
+  --product-content-fill-y: 1;
+  --product-content-offset-x: 0;
+  --product-content-offset-y: 0;
+}
+
 .fit[data-product-fit="/products/baslac/baslac--line-35-3.5l-family-packshot.webp"] {
   --product-canvas-aspect: 0.7281;
   --product-content-aspect: 0.7057;
@@ -633,6 +660,24 @@
   --product-content-fill-y: 0.9238;
   --product-content-offset-x: 0.0523;
   --product-content-offset-y: 0.0381;
+}
+
+.fit[data-product-fit="/products/baslac/baslac--line-45-0.1l-representative.webp"] {
+  --product-canvas-aspect: 0.3783;
+  --product-content-aspect: 0.3783;
+  --product-content-fill-x: 1;
+  --product-content-fill-y: 1;
+  --product-content-offset-x: 0;
+  --product-content-offset-y: 0;
+}
+
+.fit[data-product-fit="/products/baslac/baslac--line-45-0.5l-representative.webp"] {
+  --product-canvas-aspect: 1.2565;
+  --product-content-aspect: 1.2571;
+  --product-content-fill-x: 0.9983;
+  --product-content-fill-y: 0.9979;
+  --product-content-offset-x: 0.0008;
+  --product-content-offset-y: 0.001;
 }
 
 .fit[data-product-fit="/products/baslac/baslac--line-45-1l-example-packshot.webp"] {
@@ -646,6 +691,24 @@
   --product-image-dark-contact: 0;
   --product-image-dark-plate: #ffffff;
   --product-image-dark-mask: linear-gradient(90deg, transparent, #000 4%, #000 96%, transparent), linear-gradient(180deg, transparent, #000 4%, #000 96%, transparent);
+}
+
+.fit[data-product-fit="/products/baslac/baslac--line-45-1l-representative.webp"] {
+  --product-canvas-aspect: 0.7692;
+  --product-content-aspect: 0.7692;
+  --product-content-fill-x: 1;
+  --product-content-fill-y: 1;
+  --product-content-offset-x: 0;
+  --product-content-offset-y: 0;
+}
+
+.fit[data-product-fit="/products/baslac/baslac--line-45-5l-representative.webp"] {
+  --product-canvas-aspect: 0.625;
+  --product-content-aspect: 0.6242;
+  --product-content-fill-x: 0.9987;
+  --product-content-fill-y: 1;
+  --product-content-offset-x: 0;
+  --product-content-offset-y: 0;
 }
 
 .fit[data-product-fit="/products/baslac/baslac-30-s510-s-serija.webp"] {
@@ -19855,6 +19918,51 @@
   --product-content-offset-y: 0.045;
 }
 
+.fit[data-product-fit="/products/rm/system/rm-crystal-base-125ml.webp"] {
+  --product-canvas-aspect: 0.3942;
+  --product-content-aspect: 0.3942;
+  --product-content-fill-x: 1;
+  --product-content-fill-y: 1;
+  --product-content-offset-x: 0;
+  --product-content-offset-y: 0;
+}
+
+.fit[data-product-fit="/products/rm/system/rm-diamont-0-5l.webp"] {
+  --product-canvas-aspect: 1.2572;
+  --product-content-aspect: 1.256;
+  --product-content-fill-x: 0.9991;
+  --product-content-fill-y: 1;
+  --product-content-offset-x: 0.0009;
+  --product-content-offset-y: 0;
+}
+
+.fit[data-product-fit="/products/rm/system/rm-diamont-1l.webp"] {
+  --product-canvas-aspect: 0.7692;
+  --product-content-aspect: 0.7692;
+  --product-content-fill-x: 1;
+  --product-content-fill-y: 1;
+  --product-content-offset-x: 0;
+  --product-content-offset-y: 0;
+}
+
+.fit[data-product-fit="/products/rm/system/rm-diamont-4l.webp"] {
+  --product-canvas-aspect: 0.7342;
+  --product-content-aspect: 0.7342;
+  --product-content-fill-x: 1;
+  --product-content-fill-y: 1;
+  --product-content-offset-x: 0;
+  --product-content-offset-y: 0;
+}
+
+.fit[data-product-fit="/products/rm/system/rm-uno-hd-4l.webp"] {
+  --product-canvas-aspect: 0.7342;
+  --product-content-aspect: 0.7342;
+  --product-content-fill-x: 1;
+  --product-content-fill-y: 1;
+  --product-content-offset-x: 0;
+  --product-content-offset-y: 0;
+}
+
 .fit[data-product-fit="/products/sata/supplied/sata__satajet-1500-b.webp"] {
   --product-canvas-aspect: 1;
   --product-content-aspect: 0.5481;
@@ -19873,6 +19981,1302 @@
   --product-content-offset-y: 0.0152;
 }
 
+.fit[data-product-fit="/remastered/brands/befar/details/befar-backing-plate-printed-label.webp"] {
+  --product-canvas-aspect: 0.6665;
+  --product-content-aspect: 1.0383;
+  --product-content-fill-x: 0.5281;
+  --product-content-fill-y: 0.339;
+  --product-content-offset-x: 0.1995;
+  --product-content-offset-y: 0.3;
+}
+
+.fit[data-product-fit="/remastered/brands/befar/details/befar-hub-foam-macro.webp"] {
+  --product-canvas-aspect: 1.5432;
+  --product-content-aspect: 2.0716;
+  --product-content-fill-x: 0.8245;
+  --product-content-fill-y: 0.6142;
+  --product-content-offset-x: 0.0895;
+  --product-content-offset-y: 0.2477;
+}
+
+.fit[data-product-fit="/remastered/brands/befar/details/befar-interface-pad-6hole-angled.webp"] {
+  --product-canvas-aspect: 1.5385;
+  --product-content-aspect: 2.2704;
+  --product-content-fill-x: 0.655;
+  --product-content-fill-y: 0.4438;
+  --product-content-offset-x: 0.184;
+  --product-content-offset-y: 0.2646;
+}
+
+.fit[data-product-fit="/remastered/brands/befar/details/befar-leo-yellow-pad-face.webp"] {
+  --product-canvas-aspect: 1.1001;
+  --product-content-aspect: 0.9558;
+  --product-content-fill-x: 0.5405;
+  --product-content-fill-y: 0.6221;
+  --product-content-offset-x: 0.265;
+  --product-content-offset-y: 0.1799;
+}
+
+.fit[data-product-fit="/remastered/brands/befar/details/befar-pad-profile-stem.webp"] {
+  --product-canvas-aspect: 1.462;
+  --product-content-aspect: 2.7762;
+  --product-content-fill-x: 0.8065;
+  --product-content-fill-y: 0.4247;
+  --product-content-offset-x: 0.107;
+  --product-content-offset-y: 0.3194;
+}
+
+.fit[data-product-fit="/remastered/brands/befar/details/befar-velcro-hook-edge-macro.webp"] {
+  --product-canvas-aspect: 1.638;
+  --product-content-aspect: 3.8132;
+  --product-content-fill-x: 0.8065;
+  --product-content-fill-y: 0.3464;
+  --product-content-offset-x: 0.1045;
+  --product-content-offset-y: 0.2695;
+}
+
+.fit[data-product-fit="/remastered/brands/befar/hardness/befar-foam-04401-white.webp"] {
+  --product-canvas-aspect: 1.4995;
+  --product-content-aspect: 1.8532;
+  --product-content-fill-x: 0.8363;
+  --product-content-fill-y: 0.6767;
+  --product-content-offset-x: 0.0938;
+  --product-content-offset-y: 0.1284;
+}
+
+.fit[data-product-fit="/remastered/brands/befar/hardness/befar-foam-04402-orange.webp"] {
+  --product-canvas-aspect: 1.4995;
+  --product-content-aspect: 2.076;
+  --product-content-fill-x: 0.9044;
+  --product-content-fill-y: 0.6532;
+  --product-content-offset-x: 0.0606;
+  --product-content-offset-y: 0.1781;
+}
+
+.fit[data-product-fit="/remastered/brands/befar/hardness/befar-foam-04403-black.webp"] {
+  --product-canvas-aspect: 1.4995;
+  --product-content-aspect: 2;
+  --product-content-fill-x: 0.8812;
+  --product-content-fill-y: 0.6607;
+  --product-content-offset-x: 0.0775;
+  --product-content-offset-y: 0.1724;
+}
+
+.fit[data-product-fit="/remastered/brands/befar/hardness/befar-foam-04404-yellow.webp"] {
+  --product-canvas-aspect: 1.4995;
+  --product-content-aspect: 2.2876;
+  --product-content-fill-x: 0.885;
+  --product-content-fill-y: 0.5801;
+  --product-content-offset-x: 0.0563;
+  --product-content-offset-y: 0.1575;
+}
+
+.fit[data-product-fit="/remastered/brands/befar/hardness/befar-foam-04405-blue.webp"] {
+  --product-canvas-aspect: 1.4995;
+  --product-content-aspect: 2.2754;
+  --product-content-fill-x: 0.9087;
+  --product-content-fill-y: 0.5989;
+  --product-content-offset-x: 0.0362;
+  --product-content-offset-y: 0.1584;
+}
+
+.fit[data-product-fit="/remastered/brands/befar/hardness/befar-pad-family-row.webp"] {
+  --product-canvas-aspect: 1.0262;
+  --product-content-aspect: 2.5033;
+  --product-content-fill-x: 0.95;
+  --product-content-fill-y: 0.3894;
+  --product-content-offset-x: 0.031;
+  --product-content-offset-y: 0.2724;
+}
+
+.fit[data-product-fit="/remastered/brands/befar/products/befar-backing-plate-diameters.webp"] {
+  --product-canvas-aspect: 1.5004;
+  --product-content-aspect: 1.3845;
+  --product-content-fill-x: 0.6085;
+  --product-content-fill-y: 0.6594;
+  --product-content-offset-x: 0.3285;
+  --product-content-offset-y: 0.1763;
+}
+
+.fit[data-product-fit="/remastered/brands/befar/products/befar-chem-75-liquid-compound.webp"] {
+  --product-canvas-aspect: 1.4995;
+  --product-content-aspect: 0.8657;
+  --product-content-fill-x: 0.4794;
+  --product-content-fill-y: 0.8304;
+  --product-content-offset-x: 0.2737;
+  --product-content-offset-y: 0.119;
+}
+
+.fit[data-product-fit="/remastered/brands/befar/products/befar-nonwoven-abrasive-grey.webp"] {
+  --product-canvas-aspect: 1.4995;
+  --product-content-aspect: 1.2631;
+  --product-content-fill-x: 0.6931;
+  --product-content-fill-y: 0.8229;
+  --product-content-offset-x: 0.1013;
+  --product-content-offset-y: 0.1181;
+}
+
+.fit[data-product-fit="/remastered/brands/befar/products/befar-plus-pad-pair.webp"] {
+  --product-canvas-aspect: 1.0417;
+  --product-content-aspect: 1.4165;
+  --product-content-fill-x: 0.852;
+  --product-content-fill-y: 0.6266;
+  --product-content-offset-x: 0.074;
+  --product-content-offset-y: 0.187;
+}
+
+.fit[data-product-fit="/remastered/brands/befar/products/befar-sanding-blocks-orange-soft.webp"] {
+  --product-canvas-aspect: 1.4995;
+  --product-content-aspect: 1.3906;
+  --product-content-fill-x: 0.5719;
+  --product-content-fill-y: 0.6167;
+  --product-content-offset-x: 0.2069;
+  --product-content-offset-y: 0.2999;
+}
+
+.fit[data-product-fit="/remastered/brands/befar/products/befar-sanding-blocks-red-hard.webp"] {
+  --product-canvas-aspect: 1.4995;
+  --product-content-aspect: 1.4274;
+  --product-content-fill-x: 0.5656;
+  --product-content-fill-y: 0.5942;
+  --product-content-offset-x: 0.2075;
+  --product-content-offset-y: 0.2474;
+}
+
+.fit[data-product-fit="/remastered/images/brands/baslac/clearcoats/baslac-clearcoat-range-mobile.webp"] {
+  --product-canvas-aspect: 1.0526;
+  --product-content-aspect: 0.9688;
+  --product-content-fill-x: 0.7375;
+  --product-content-fill-y: 0.8013;
+  --product-content-offset-x: 0.1313;
+  --product-content-offset-y: 0.0993;
+}
+
+.fit[data-product-fit="/remastered/images/brands/baslac/clearcoats/baslac-clearcoat-range.webp"] {
+  --product-canvas-aspect: 2.6667;
+  --product-content-aspect: 3.9735;
+  --product-content-fill-x: 0.9;
+  --product-content-fill-y: 0.604;
+  --product-content-offset-x: 0.05;
+  --product-content-offset-y: 0.1973;
+}
+
+.fit[data-product-fit="/remastered/images/brands/baslac/systems/baslac-45-line-system.webp"] {
+  --product-canvas-aspect: 1.3333;
+  --product-content-aspect: 1.6257;
+  --product-content-fill-x: 0.86;
+  --product-content-fill-y: 0.7053;
+  --product-content-offset-x: 0.07;
+  --product-content-offset-y: 0.1473;
+}
+
+.fit[data-product-fit="/remastered/products/baslac/baslac--line-35-0.5l-representative.webp"] {
+  --product-canvas-aspect: 0.8337;
+  --product-content-aspect: 1.2587;
+  --product-content-fill-x: 0.7294;
+  --product-content-fill-y: 0.4831;
+  --product-content-offset-x: 0.1619;
+  --product-content-offset-y: 0.2381;
+}
+
+.fit[data-product-fit="/remastered/products/baslac/baslac--line-45-0.5l-representative.webp"] {
+  --product-canvas-aspect: 0.8337;
+  --product-content-aspect: 1.2587;
+  --product-content-fill-x: 0.7294;
+  --product-content-fill-y: 0.4831;
+  --product-content-offset-x: 0.1619;
+  --product-content-offset-y: 0.2381;
+}
+
+.fit[data-product-fit="/remastered/products/baslac/catalog/baslac-12-20-bodyfiller-universal.webp"] {
+  --product-canvas-aspect: 1.5028;
+  --product-content-aspect: 1.9158;
+  --product-content-fill-x: 0.344;
+  --product-content-fill-y: 0.2699;
+  --product-content-offset-x: 0.3289;
+  --product-content-offset-y: 0.3707;
+}
+
+.fit[data-product-fit="/remastered/products/baslac/catalog/baslac-21-10-1k-plastic-primer.webp"] {
+  --product-canvas-aspect: 1.5028;
+  --product-content-aspect: 0.5939;
+  --product-content-fill-x: 0.2571;
+  --product-content-fill-y: 0.6506;
+  --product-content-offset-x: 0.3724;
+  --product-content-offset-y: 0.1747;
+}
+
+.fit[data-product-fit="/remastered/products/baslac/catalog/baslac-40-10-2k-panel-clear.webp"] {
+  --product-canvas-aspect: 1.2;
+  --product-content-aspect: 0.5092;
+  --product-content-fill-x: 0.3908;
+  --product-content-fill-y: 0.921;
+  --product-content-offset-x: 0.3133;
+  --product-content-offset-y: 0.028;
+}
+
+.fit[data-product-fit="/remastered/products/baslac/catalog/baslac-40-40-2k-universal-clear.webp"] {
+  --product-canvas-aspect: 1.2;
+  --product-content-aspect: 0.5092;
+  --product-content-fill-x: 0.3908;
+  --product-content-fill-y: 0.921;
+  --product-content-offset-x: 0.3133;
+  --product-content-offset-y: 0.028;
+}
+
+.fit[data-product-fit="/remastered/products/baslac/catalog/baslac-40-440-2k-voc-clear.webp"] {
+  --product-canvas-aspect: 1.2;
+  --product-content-aspect: 0.5092;
+  --product-content-fill-x: 0.3908;
+  --product-content-fill-y: 0.921;
+  --product-content-offset-x: 0.3133;
+  --product-content-offset-y: 0.028;
+}
+
+.fit[data-product-fit="/remastered/products/baslac/catalog/baslac-40-450-universal-clear-voc.webp"] {
+  --product-canvas-aspect: 1.2;
+  --product-content-aspect: 0.5092;
+  --product-content-fill-x: 0.3908;
+  --product-content-fill-y: 0.921;
+  --product-content-offset-x: 0.3133;
+  --product-content-offset-y: 0.028;
+}
+
+.fit[data-product-fit="/remastered/products/baslac/catalog/baslac-40-510-ambient-clear.webp"] {
+  --product-canvas-aspect: 1.1994;
+  --product-content-aspect: 0.9619;
+  --product-content-fill-x: 0.5044;
+  --product-content-fill-y: 0.6289;
+  --product-content-offset-x: 0.2275;
+  --product-content-offset-y: 0.1709;
+}
+
+.fit[data-product-fit="/remastered/products/baslac/catalog/baslac-50-15-2k-hardener-fast.webp"] {
+  --product-canvas-aspect: 1.5028;
+  --product-content-aspect: 1.0405;
+  --product-content-fill-x: 0.6068;
+  --product-content-fill-y: 0.8764;
+  --product-content-offset-x: 0.2155;
+  --product-content-offset-y: 0.0582;
+}
+
+.fit[data-product-fit="/remastered/products/baslac/catalog/baslac-70-20-cleaner-plastic.webp"] {
+  --product-canvas-aspect: 1.5028;
+  --product-content-aspect: 0.5939;
+  --product-content-fill-x: 0.2571;
+  --product-content-fill-y: 0.6506;
+  --product-content-offset-x: 0.3724;
+  --product-content-offset-y: 0.1747;
+}
+
+.fit[data-product-fit="/remastered/products/baslac/catalog/baslac-80-10-additive-flex.webp"] {
+  --product-canvas-aspect: 1.5028;
+  --product-content-aspect: 0.5939;
+  --product-content-fill-x: 0.2571;
+  --product-content-fill-y: 0.6506;
+  --product-content-offset-x: 0.3724;
+  --product-content-offset-y: 0.1747;
+}
+
+.fit[data-product-fit="/remastered/products/baslac/catalog/baslac-80-20-additive-mat.webp"] {
+  --product-canvas-aspect: 1.5028;
+  --product-content-aspect: 0.768;
+  --product-content-fill-x: 0.3223;
+  --product-content-fill-y: 0.6307;
+  --product-content-offset-x: 0.3403;
+  --product-content-offset-y: 0.1747;
+}
+
+.fit[data-product-fit="/remastered/products/baslac/supplied/baslac__baslac-20-24-2k-primerfiller-grey-4l.webp"] {
+  --product-canvas-aspect: 0.7544;
+  --product-content-aspect: 0.734;
+  --product-content-fill-x: 0.9006;
+  --product-content-fill-y: 0.9256;
+  --product-content-offset-x: 0.0497;
+  --product-content-offset-y: 0.0375;
+}
+
+.fit[data-product-fit="/remastered/products/baslac/supplied/baslac__baslac-20-94-2k-primerfiller-black-1l.webp"] {
+  --product-canvas-aspect: 0.7881;
+  --product-content-aspect: 0.7704;
+  --product-content-fill-x: 0.9048;
+  --product-content-fill-y: 0.9256;
+  --product-content-offset-x: 0.0476;
+  --product-content-offset-y: 0.0375;
+}
+
+.fit[data-product-fit="/remastered/products/baslac/supplied/baslac__baslac-21-11-2k-plastic-primer-voc-1l.webp"] {
+  --product-canvas-aspect: 0.7881;
+  --product-content-aspect: 0.7704;
+  --product-content-fill-x: 0.9048;
+  --product-content-fill-y: 0.9256;
+  --product-content-offset-x: 0.0476;
+  --product-content-offset-y: 0.0375;
+}
+
+.fit[data-product-fit="/remastered/products/baslac/supplied/baslac__baslac-21-20-plastic-primer-400ml.webp"] {
+  --product-canvas-aspect: 0.3781;
+  --product-content-aspect: 0.3243;
+  --product-content-fill-x: 0.7941;
+  --product-content-fill-y: 0.9259;
+  --product-content-offset-x: 0.1005;
+  --product-content-offset-y: 0.0371;
+}
+
+.fit[data-product-fit="/remastered/products/baslac/supplied/baslac__baslac-27-10-2k-washprimer-1l.webp"] {
+  --product-canvas-aspect: 0.7881;
+  --product-content-aspect: 0.7704;
+  --product-content-fill-x: 0.9048;
+  --product-content-fill-y: 0.9256;
+  --product-content-offset-x: 0.0476;
+  --product-content-offset-y: 0.0375;
+}
+
+.fit[data-product-fit="/remastered/products/baslac/supplied/baslac__baslac-45-w10.webp"] {
+  --product-canvas-aspect: 0.3869;
+  --product-content-aspect: 0.3383;
+  --product-content-fill-x: 0.8094;
+  --product-content-fill-y: 0.9256;
+  --product-content-offset-x: 0.0953;
+  --product-content-offset-y: 0.0375;
+}
+
+.fit[data-product-fit="/remastered/products/baslac/supplied/baslac__baslac-50-10-2k-primerfiller-hardener-extra-fast.webp"] {
+  --product-canvas-aspect: 0.625;
+  --product-content-aspect: 0.5924;
+  --product-content-fill-x: 0.878;
+  --product-content-fill-y: 0.9263;
+  --product-content-offset-x: 0.061;
+  --product-content-offset-y: 0.0369;
+}
+
+.fit[data-product-fit="/remastered/products/baslac/supplied/baslac__baslac-50-30-2k-hardener-slow.webp"] {
+  --product-canvas-aspect: 0.625;
+  --product-content-aspect: 0.5924;
+  --product-content-fill-x: 0.878;
+  --product-content-fill-y: 0.9263;
+  --product-content-offset-x: 0.061;
+  --product-content-offset-y: 0.0369;
+}
+
+.fit[data-product-fit="/remastered/products/baslac/supplied/baslac__baslac-50-415-2k-clear-hardener-fast-voc.webp"] {
+  --product-canvas-aspect: 0.9688;
+  --product-content-aspect: 0.9615;
+  --product-content-fill-x: 0.9187;
+  --product-content-fill-y: 0.9256;
+  --product-content-offset-x: 0.04;
+  --product-content-offset-y: 0.0369;
+}
+
+.fit[data-product-fit="/remastered/products/baslac/supplied/baslac__baslac-50-420-2k-clear-hardener-normal-voc.webp"] {
+  --product-canvas-aspect: 0.9688;
+  --product-content-aspect: 0.9615;
+  --product-content-fill-x: 0.9187;
+  --product-content-fill-y: 0.9256;
+  --product-content-offset-x: 0.04;
+  --product-content-offset-y: 0.0369;
+}
+
+.fit[data-product-fit="/remastered/products/baslac/supplied/baslac__baslac-50-430-2k-clear-hardener-slow-voc.webp"] {
+  --product-canvas-aspect: 0.9688;
+  --product-content-aspect: 0.9615;
+  --product-content-fill-x: 0.9187;
+  --product-content-fill-y: 0.9256;
+  --product-content-offset-x: 0.04;
+  --product-content-offset-y: 0.0369;
+}
+
+.fit[data-product-fit="/remastered/products/baslac/supplied/baslac__baslac-50-45-2k-activator.webp"] {
+  --product-canvas-aspect: 0.9087;
+  --product-content-aspect: 0.8993;
+  --product-content-fill-x: 0.9154;
+  --product-content-fill-y: 0.925;
+  --product-content-offset-x: 0.042;
+  --product-content-offset-y: 0.0375;
+}
+
+.fit[data-product-fit="/remastered/products/baslac/supplied/baslac__baslac-50-510-ambient-clear-hardener.webp"] {
+  --product-canvas-aspect: 0.9087;
+  --product-content-aspect: 0.9001;
+  --product-content-fill-x: 0.9168;
+  --product-content-fill-y: 0.9256;
+  --product-content-offset-x: 0.0413;
+  --product-content-offset-y: 0.0369;
+}
+
+.fit[data-product-fit="/remastered/products/baslac/supplied/baslac__baslac-51-515-2k-hardener-cv-fast.webp"] {
+  --product-canvas-aspect: 0.9688;
+  --product-content-aspect: 0.9615;
+  --product-content-fill-x: 0.9187;
+  --product-content-fill-y: 0.9256;
+  --product-content-offset-x: 0.04;
+  --product-content-offset-y: 0.0369;
+}
+
+.fit[data-product-fit="/remastered/products/baslac/supplied/baslac__baslac-51-520-2k-hardener-cv-normal.webp"] {
+  --product-canvas-aspect: 0.9688;
+  --product-content-aspect: 0.9615;
+  --product-content-fill-x: 0.9187;
+  --product-content-fill-y: 0.9256;
+  --product-content-offset-x: 0.04;
+  --product-content-offset-y: 0.0369;
+}
+
+.fit[data-product-fit="/remastered/products/baslac/supplied/baslac__baslac-51-530-2k-hardener-cv-slow.webp"] {
+  --product-canvas-aspect: 0.9688;
+  --product-content-aspect: 0.9615;
+  --product-content-fill-x: 0.9187;
+  --product-content-fill-y: 0.9256;
+  --product-content-offset-x: 0.04;
+  --product-content-offset-y: 0.0369;
+}
+
+.fit[data-product-fit="/remastered/products/baslac/supplied/baslac__baslac-55-10-ep-hardener.webp"] {
+  --product-canvas-aspect: 0.625;
+  --product-content-aspect: 0.5931;
+  --product-content-fill-x: 0.879;
+  --product-content-fill-y: 0.9263;
+  --product-content-offset-x: 0.06;
+  --product-content-offset-y: 0.0369;
+}
+
+.fit[data-product-fit="/remastered/products/baslac/supplied/baslac__baslac-56-20-bodyfiller-hardener.webp"] {
+  --product-canvas-aspect: 0.3819;
+  --product-content-aspect: 0.3322;
+  --product-content-fill-x: 0.8036;
+  --product-content-fill-y: 0.9237;
+  --product-content-offset-x: 0.0982;
+  --product-content-offset-y: 0.0381;
+}
+
+.fit[data-product-fit="/remastered/products/baslac/supplied/baslac__baslac-57-10-additive-washprimer.webp"] {
+  --product-canvas-aspect: 0.3869;
+  --product-content-aspect: 0.3383;
+  --product-content-fill-x: 0.8094;
+  --product-content-fill-y: 0.9256;
+  --product-content-offset-x: 0.0953;
+  --product-content-offset-y: 0.0375;
+}
+
+.fit[data-product-fit="/remastered/products/baslac/supplied/baslac__baslac-57-30-additive-washprimer-slow.webp"] {
+  --product-canvas-aspect: 0.4969;
+  --product-content-aspect: 0.4541;
+  --product-content-fill-x: 0.8465;
+  --product-content-fill-y: 0.9263;
+  --product-content-offset-x: 0.078;
+  --product-content-offset-y: 0.0369;
+}
+
+.fit[data-product-fit="/remastered/products/baslac/supplied/baslac__baslac-60-05-speeding-reducer.webp"] {
+  --product-canvas-aspect: 0.625;
+  --product-content-aspect: 0.5931;
+  --product-content-fill-x: 0.879;
+  --product-content-fill-y: 0.9263;
+  --product-content-offset-x: 0.06;
+  --product-content-offset-y: 0.0369;
+}
+
+.fit[data-product-fit="/remastered/products/baslac/supplied/baslac__baslac-60-10-reducer-universal-fast.webp"] {
+  --product-canvas-aspect: 0.5456;
+  --product-content-aspect: 0.5085;
+  --product-content-fill-x: 0.8614;
+  --product-content-fill-y: 0.9244;
+  --product-content-offset-x: 0.0699;
+  --product-content-offset-y: 0.0381;
+}
+
+.fit[data-product-fit="/remastered/products/baslac/supplied/baslac__baslac-60-20-razredjivac.webp"] {
+  --product-canvas-aspect: 0.5456;
+  --product-content-aspect: 0.5085;
+  --product-content-fill-x: 0.8614;
+  --product-content-fill-y: 0.9244;
+  --product-content-offset-x: 0.0699;
+  --product-content-offset-y: 0.0381;
+}
+
+.fit[data-product-fit="/remastered/products/baslac/supplied/baslac__baslac-60-30-reducer-universal-slow.webp"] {
+  --product-canvas-aspect: 0.5456;
+  --product-content-aspect: 0.5085;
+  --product-content-fill-x: 0.8614;
+  --product-content-fill-y: 0.9244;
+  --product-content-offset-x: 0.0699;
+  --product-content-offset-y: 0.0381;
+}
+
+.fit[data-product-fit="/remastered/products/baslac/supplied/baslac__baslac-60-40-reducer-universal-extra-slow.webp"] {
+  --product-canvas-aspect: 0.625;
+  --product-content-aspect: 0.5924;
+  --product-content-fill-x: 0.878;
+  --product-content-fill-y: 0.9263;
+  --product-content-offset-x: 0.061;
+  --product-content-offset-y: 0.0369;
+}
+
+.fit[data-product-fit="/remastered/products/baslac/supplied/baslac__baslac-65-10-blending-reducer.webp"] {
+  --product-canvas-aspect: 0.625;
+  --product-content-aspect: 0.5924;
+  --product-content-fill-x: 0.878;
+  --product-content-fill-y: 0.9263;
+  --product-content-offset-x: 0.061;
+  --product-content-offset-y: 0.0369;
+}
+
+.fit[data-product-fit="/remastered/products/baslac/supplied/baslac__baslac-70-10-silicone-remover-for-oil-silicone-and-grease.webp"] {
+  --product-canvas-aspect: 0.625;
+  --product-content-aspect: 0.5924;
+  --product-content-fill-x: 0.878;
+  --product-content-fill-y: 0.9263;
+  --product-content-offset-x: 0.061;
+  --product-content-offset-y: 0.0369;
+}
+
+.fit[data-product-fit="/remastered/products/baslac/supplied/baslac__baslac-70-45-cleaner.webp"] {
+  --product-canvas-aspect: 0.6531;
+  --product-content-aspect: 0.6248;
+  --product-content-fill-x: 0.8861;
+  --product-content-fill-y: 0.9263;
+  --product-content-offset-x: 0.0565;
+  --product-content-offset-y: 0.0369;
+}
+
+.fit[data-product-fit="/remastered/products/baslac/supplied/baslac__baslac-81-30-additive-chassis.webp"] {
+  --product-canvas-aspect: 0.7544;
+  --product-content-aspect: 0.7331;
+  --product-content-fill-x: 0.8989;
+  --product-content-fill-y: 0.925;
+  --product-content-offset-x: 0.0505;
+  --product-content-offset-y: 0.0375;
+}
+
+.fit[data-product-fit="/remastered/products/befar/catalog/befar-anti-hologram-2.webp"] {
+  --product-canvas-aspect: 1.4995;
+  --product-content-aspect: 0.8531;
+  --product-content-fill-x: 0.4756;
+  --product-content-fill-y: 0.836;
+  --product-content-offset-x: 0.2769;
+  --product-content-offset-y: 0.1172;
+}
+
+.fit[data-product-fit="/remastered/products/befar/catalog/befar-anti-hologram.webp"] {
+  --product-canvas-aspect: 0.9087;
+  --product-content-aspect: 0.8609;
+  --product-content-fill-x: 0.8047;
+  --product-content-fill-y: 0.8494;
+  --product-content-offset-x: 0.1114;
+  --product-content-offset-y: 0.1075;
+}
+
+.fit[data-product-fit="/remastered/products/befar/catalog/befar-auto-polish-2.webp"] {
+  --product-canvas-aspect: 1.4995;
+  --product-content-aspect: 0.8427;
+  --product-content-fill-x: 0.4756;
+  --product-content-fill-y: 0.8463;
+  --product-content-offset-x: 0.2737;
+  --product-content-offset-y: 0.1078;
+}
+
+.fit[data-product-fit="/remastered/products/befar/catalog/befar-auto-polish.webp"] {
+  --product-canvas-aspect: 0.9181;
+  --product-content-aspect: 0.8473;
+  --product-content-fill-x: 0.7556;
+  --product-content-fill-y: 0.8187;
+  --product-content-offset-x: 0.1069;
+  --product-content-offset-y: 0.1025;
+}
+
+.fit[data-product-fit="/remastered/products/befar/catalog/befar-backing-pad-3.webp"] {
+  --product-canvas-aspect: 1.5385;
+  --product-content-aspect: 2.2755;
+  --product-content-fill-x: 0.6556;
+  --product-content-fill-y: 0.4433;
+  --product-content-offset-x: 0.1837;
+  --product-content-offset-y: 0.2644;
+}
+
+.fit[data-product-fit="/remastered/products/befar/catalog/befar-backing-pad.webp"] {
+  --product-canvas-aspect: 1.3582;
+  --product-content-aspect: 2.3361;
+  --product-content-fill-x: 0.7037;
+  --product-content-fill-y: 0.4092;
+  --product-content-offset-x: 0.1363;
+  --product-content-offset-y: 0.2581;
+}
+
+.fit[data-product-fit="/remastered/products/befar/catalog/befar-carved-velcro-polishing-pad-4.webp"] {
+  --product-canvas-aspect: 1.5009;
+  --product-content-aspect: 1.5721;
+  --product-content-fill-x: 0.4363;
+  --product-content-fill-y: 0.4165;
+  --product-content-offset-x: 0.2731;
+  --product-content-offset-y: 0.3321;
+}
+
+.fit[data-product-fit="/remastered/products/befar/catalog/befar-drill-type-headlight-cleaning-pad-2.webp"] {
+  --product-canvas-aspect: 0.6663;
+  --product-content-aspect: 0.9528;
+  --product-content-fill-x: 0.53;
+  --product-content-fill-y: 0.3706;
+  --product-content-offset-x: 0.1979;
+  --product-content-offset-y: 0.2794;
+}
+
+.fit[data-product-fit="/remastered/products/befar/catalog/befar-ellipse-corrugated-polishing-compounding-pad-2.webp"] {
+  --product-canvas-aspect: 1.4995;
+  --product-content-aspect: 1.4005;
+  --product-content-fill-x: 0.3738;
+  --product-content-fill-y: 0.4002;
+  --product-content-offset-x: 0.3063;
+  --product-content-offset-y: 0.537;
+}
+
+.fit[data-product-fit="/remastered/products/befar/catalog/befar-ellipse-corrugated-polishing-compounding-pad-3.webp"] {
+  --product-canvas-aspect: 1.4995;
+  --product-content-aspect: 1.4055;
+  --product-content-fill-x: 0.3812;
+  --product-content-fill-y: 0.4067;
+  --product-content-offset-x: 0.2981;
+  --product-content-offset-y: 0.5323;
+}
+
+.fit[data-product-fit="/remastered/products/befar/catalog/befar-ellipse-corrugated-polishing-compounding-pad-5.webp"] {
+  --product-canvas-aspect: 1.4995;
+  --product-content-aspect: 1.4209;
+  --product-content-fill-x: 0.3819;
+  --product-content-fill-y: 0.403;
+  --product-content-offset-x: 0.3013;
+  --product-content-offset-y: 0.523;
+}
+
+.fit[data-product-fit="/remastered/products/befar/catalog/befar-ellipse-corrugated-polishing-compounding-pad.webp"] {
+  --product-canvas-aspect: 1.4995;
+  --product-content-aspect: 1.2595;
+  --product-content-fill-x: 0.6431;
+  --product-content-fill-y: 0.7657;
+  --product-content-offset-x: 0.1781;
+  --product-content-offset-y: 0.1012;
+}
+
+.fit[data-product-fit="/remastered/products/befar/catalog/befar-hard-velcro-backing-pad-2.webp"] {
+  --product-canvas-aspect: 1.5009;
+  --product-content-aspect: 2.3487;
+  --product-content-fill-x: 0.8294;
+  --product-content-fill-y: 0.53;
+  --product-content-offset-x: 0.06;
+  --product-content-offset-y: 0.2974;
+}
+
+.fit[data-product-fit="/remastered/products/befar/catalog/befar-hard-velcro-backing-pad.webp"] {
+  --product-canvas-aspect: 1.5009;
+  --product-content-aspect: 1.3841;
+  --product-content-fill-x: 0.6081;
+  --product-content-fill-y: 0.6595;
+  --product-content-offset-x: 0.3287;
+  --product-content-offset-y: 0.1764;
+}
+
+.fit[data-product-fit="/remastered/products/befar/catalog/befar-headlight-cleaning-set-2.webp"] {
+  --product-canvas-aspect: 1.4995;
+  --product-content-aspect: 1.1157;
+  --product-content-fill-x: 0.5181;
+  --product-content-fill-y: 0.6963;
+  --product-content-offset-x: 0.2256;
+  --product-content-offset-y: 0.2015;
+}
+
+.fit[data-product-fit="/remastered/products/befar/catalog/befar-headlight-cleaning-set.webp"] {
+  --product-canvas-aspect: 1.5009;
+  --product-content-aspect: 1.2914;
+  --product-content-fill-x: 0.7506;
+  --product-content-fill-y: 0.8724;
+  --product-content-offset-x: 0.0831;
+  --product-content-offset-y: 0.075;
+}
+
+.fit[data-product-fit="/remastered/products/befar/catalog/befar-leo-ceramic-application-block.webp"] {
+  --product-canvas-aspect: 1.4995;
+  --product-content-aspect: 4.3495;
+  --product-content-fill-x: 0.8944;
+  --product-content-fill-y: 0.3083;
+  --product-content-offset-x: 0.0531;
+  --product-content-offset-y: 0.4096;
+}
+
+.fit[data-product-fit="/remastered/products/befar/catalog/befar-leo-compound-polish-set-2.webp"] {
+  --product-canvas-aspect: 0.8131;
+  --product-content-aspect: 0.8231;
+  --product-content-fill-x: 0.565;
+  --product-content-fill-y: 0.5581;
+  --product-content-offset-x: 0.186;
+  --product-content-offset-y: 0.2281;
+}
+
+.fit[data-product-fit="/remastered/products/befar/catalog/befar-leo-compound-polish-set-3.webp"] {
+  --product-canvas-aspect: 0.7662;
+  --product-content-aspect: 0.8865;
+  --product-content-fill-x: 0.752;
+  --product-content-fill-y: 0.65;
+  --product-content-offset-x: 0.1101;
+  --product-content-offset-y: 0.135;
+}
+
+.fit[data-product-fit="/remastered/products/befar/catalog/befar-leo-detailing-backing-pad-2.webp"] {
+  --product-canvas-aspect: 1.4829;
+  --product-content-aspect: 3.0299;
+  --product-content-fill-x: 0.7594;
+  --product-content-fill-y: 0.3716;
+  --product-content-offset-x: 0.1062;
+  --product-content-offset-y: 0.3197;
+}
+
+.fit[data-product-fit="/remastered/products/befar/catalog/befar-leo-detailing-backing-pad-3.webp"] {
+  --product-canvas-aspect: 0.9513;
+  --product-content-aspect: 1.201;
+  --product-content-fill-x: 0.6163;
+  --product-content-fill-y: 0.4881;
+  --product-content-offset-x: 0.2306;
+  --product-content-offset-y: 0.3769;
+}
+
+.fit[data-product-fit="/remastered/products/befar/catalog/befar-leo-detailing-backing-pad.webp"] {
+  --product-canvas-aspect: 0.7812;
+  --product-content-aspect: 1.1143;
+  --product-content-fill-x: 0.6472;
+  --product-content-fill-y: 0.4537;
+  --product-content-offset-x: 0.2176;
+  --product-content-offset-y: 0.2981;
+}
+
+.fit[data-product-fit="/remastered/products/befar/catalog/befar-leo-hamburger-pad-2.webp"] {
+  --product-canvas-aspect: 1.5009;
+  --product-content-aspect: 1.7324;
+  --product-content-fill-x: 0.785;
+  --product-content-fill-y: 0.6801;
+  --product-content-offset-x: 0.1338;
+  --product-content-offset-y: 0.1004;
+}
+
+.fit[data-product-fit="/remastered/products/befar/catalog/befar-leo-premium-advance-velcro-compounding-pad-2.webp"] {
+  --product-canvas-aspect: 1.5009;
+  --product-content-aspect: 1.4848;
+  --product-content-fill-x: 0.7963;
+  --product-content-fill-y: 0.8049;
+  --product-content-offset-x: 0.0963;
+  --product-content-offset-y: 0.1304;
+}
+
+.fit[data-product-fit="/remastered/products/befar/catalog/befar-leo-premium-advance-with-applicator-compounding-pad.webp"] {
+  --product-canvas-aspect: 1.0899;
+  --product-content-aspect: 1.6101;
+  --product-content-fill-x: 0.8544;
+  --product-content-fill-y: 0.5783;
+  --product-content-offset-x: 0.0663;
+  --product-content-offset-y: 0.2466;
+}
+
+.fit[data-product-fit="/remastered/products/befar/catalog/befar-leo-premium-compounding-pad.webp"] {
+  --product-canvas-aspect: 1.5009;
+  --product-content-aspect: 1.3121;
+  --product-content-fill-x: 0.6044;
+  --product-content-fill-y: 0.6914;
+  --product-content-offset-x: 0.1562;
+  --product-content-offset-y: 0.1492;
+}
+
+.fit[data-product-fit="/remastered/products/befar/catalog/befar-liquid-compound-2.webp"] {
+  --product-canvas-aspect: 1.4995;
+  --product-content-aspect: 0.8631;
+  --product-content-fill-x: 0.4806;
+  --product-content-fill-y: 0.8351;
+  --product-content-offset-x: 0.2731;
+  --product-content-offset-y: 0.1181;
+}
+
+.fit[data-product-fit="/remastered/products/befar/catalog/befar-liquid-compound.webp"] {
+  --product-canvas-aspect: 0.9087;
+  --product-content-aspect: 0.8548;
+  --product-content-fill-x: 0.8019;
+  --product-content-fill-y: 0.8525;
+  --product-content-offset-x: 0.1073;
+  --product-content-offset-y: 0.0988;
+}
+
+.fit[data-product-fit="/remastered/products/befar/catalog/befar-medium-hard-velcro-backing-pad-2.webp"] {
+  --product-canvas-aspect: 1.5009;
+  --product-content-aspect: 2.5245;
+  --product-content-fill-x: 0.9025;
+  --product-content-fill-y: 0.5366;
+  --product-content-offset-x: 0.0544;
+  --product-content-offset-y: 0.2036;
+}
+
+.fit[data-product-fit="/remastered/products/befar/catalog/befar-medium-hard-velcro-backing-pad.webp"] {
+  --product-canvas-aspect: 1.5009;
+  --product-content-aspect: 1.3591;
+  --product-content-fill-x: 0.5725;
+  --product-content-fill-y: 0.6323;
+  --product-content-offset-x: 0.2131;
+  --product-content-offset-y: 0.1932;
+}
+
+.fit[data-product-fit="/remastered/products/befar/catalog/befar-microfiber-cloths-2.webp"] {
+  --product-canvas-aspect: 0.6663;
+  --product-content-aspect: 1.35;
+  --product-content-fill-x: 0.9371;
+  --product-content-fill-y: 0.4625;
+  --product-content-offset-x: 0.0291;
+  --product-content-offset-y: 0.4656;
+}
+
+.fit[data-product-fit="/remastered/products/befar/catalog/befar-microfiber-cloths-3.webp"] {
+  --product-canvas-aspect: 0.6663;
+  --product-content-aspect: 0.9915;
+  --product-content-fill-x: 0.7674;
+  --product-content-fill-y: 0.5156;
+  --product-content-offset-x: 0.1051;
+  --product-content-offset-y: 0.1888;
+}
+
+.fit[data-product-fit="/remastered/products/befar/catalog/befar-microfiber-cloths.webp"] {
+  --product-canvas-aspect: 0.6663;
+  --product-content-aspect: 1.2942;
+  --product-content-fill-x: 0.8171;
+  --product-content-fill-y: 0.4206;
+  --product-content-offset-x: 0.0854;
+  --product-content-offset-y: 0.3819;
+}
+
+.fit[data-product-fit="/remastered/products/befar/catalog/befar-non-woven-abrasive-2.webp"] {
+  --product-canvas-aspect: 1.5009;
+  --product-content-aspect: 1.2642;
+  --product-content-fill-x: 0.6937;
+  --product-content-fill-y: 0.8236;
+  --product-content-offset-x: 0.1013;
+  --product-content-offset-y: 0.1182;
+}
+
+.fit[data-product-fit="/remastered/products/befar/catalog/befar-non-woven-abrasive.webp"] {
+  --product-canvas-aspect: 1.5009;
+  --product-content-aspect: 1.2166;
+  --product-content-fill-x: 0.6669;
+  --product-content-fill-y: 0.8227;
+  --product-content-offset-x: 0.1794;
+  --product-content-offset-y: 0.1182;
+}
+
+.fit[data-product-fit="/remastered/products/befar/catalog/befar-paint-protector-2.webp"] {
+  --product-canvas-aspect: 1.4995;
+  --product-content-aspect: 0.8567;
+  --product-content-fill-x: 0.4819;
+  --product-content-fill-y: 0.8435;
+  --product-content-offset-x: 0.27;
+  --product-content-offset-y: 0.1078;
+}
+
+.fit[data-product-fit="/remastered/products/befar/catalog/befar-paint-protector.webp"] {
+  --product-canvas-aspect: 1.4995;
+  --product-content-aspect: 0.8414;
+  --product-content-fill-x: 0.4675;
+  --product-content-fill-y: 0.8332;
+  --product-content-offset-x: 0.2387;
+  --product-content-offset-y: 0.1059;
+}
+
+.fit[data-product-fit="/remastered/products/befar/catalog/befar-plastic-putty-applicator.webp"] {
+  --product-canvas-aspect: 1.4981;
+  --product-content-aspect: 2.1978;
+  --product-content-fill-x: 0.8681;
+  --product-content-fill-y: 0.5918;
+  --product-content-offset-x: 0.0925;
+  --product-content-offset-y: 0.3464;
+}
+
+.fit[data-product-fit="/remastered/products/befar/catalog/befar-plate-type-felt-backing-pad.webp"] {
+  --product-canvas-aspect: 0.6663;
+  --product-content-aspect: 0.7058;
+  --product-content-fill-x: 0.6144;
+  --product-content-fill-y: 0.58;
+  --product-content-offset-x: 0.1942;
+  --product-content-offset-y: 0.2331;
+}
+
+.fit[data-product-fit="/remastered/products/befar/catalog/befar-plus-with-applicator-compounding-pad-10.webp"] {
+  --product-canvas-aspect: 1.5009;
+  --product-content-aspect: 1.3484;
+  --product-content-fill-x: 0.3725;
+  --product-content-fill-y: 0.4146;
+  --product-content-offset-x: 0.3125;
+  --product-content-offset-y: 0.5328;
+}
+
+.fit[data-product-fit="/remastered/products/befar/catalog/befar-plus-with-applicator-compounding-pad.webp"] {
+  --product-canvas-aspect: 1.448;
+  --product-content-aspect: 1.8529;
+  --product-content-fill-x: 0.7481;
+  --product-content-fill-y: 0.5846;
+  --product-content-offset-x: 0.1462;
+  --product-content-offset-y: 0.2;
+}
+
+.fit[data-product-fit="/remastered/products/befar/catalog/befar-sanding-block-hard-red.webp"] {
+  --product-canvas-aspect: 1.2579;
+  --product-content-aspect: 1.4254;
+  --product-content-fill-x: 0.6744;
+  --product-content-fill-y: 0.5951;
+  --product-content-offset-x: 0.1512;
+  --product-content-offset-y: 0.2469;
+}
+
+.fit[data-product-fit="/remastered/products/befar/catalog/befar-sanding-block-soft-orange.webp"] {
+  --product-canvas-aspect: 1.2569;
+  --product-content-aspect: 1.3915;
+  --product-content-fill-x: 0.7531;
+  --product-content-fill-y: 0.6803;
+  --product-content-offset-x: 0.1131;
+  --product-content-offset-y: 0.2278;
+}
+
+.fit[data-product-fit="/remastered/products/befar/catalog/befar-sanding-pad-2.webp"] {
+  --product-canvas-aspect: 1.5009;
+  --product-content-aspect: 1.374;
+  --product-content-fill-x: 0.535;
+  --product-content-fill-y: 0.5844;
+  --product-content-offset-x: 0.2244;
+  --product-content-offset-y: 0.2101;
+}
+
+.fit[data-product-fit="/remastered/products/befar/catalog/befar-sanding-pad.webp"] {
+  --product-canvas-aspect: 0.6663;
+  --product-content-aspect: 1.0407;
+  --product-content-fill-x: 0.5281;
+  --product-content-fill-y: 0.3381;
+  --product-content-offset-x: 0.1998;
+  --product-content-offset-y: 0.3006;
+}
+
+.fit[data-product-fit="/remastered/products/befar/catalog/befar-sandwich-velcro-backing-pad-2.webp"] {
+  --product-canvas-aspect: 1.4625;
+  --product-content-aspect: 2.7785;
+  --product-content-fill-x: 0.8075;
+  --product-content-fill-y: 0.425;
+  --product-content-offset-x: 0.1062;
+  --product-content-offset-y: 0.3199;
+}
+
+.fit[data-product-fit="/remastered/products/befar/catalog/befar-sandwich-velcro-backing-pad.webp"] {
+  --product-canvas-aspect: 0.8381;
+  --product-content-aspect: 1.5725;
+  --product-content-fill-x: 0.7763;
+  --product-content-fill-y: 0.4138;
+  --product-content-offset-x: 0.1096;
+  --product-content-offset-y: 0.31;
+}
+
+.fit[data-product-fit="/remastered/products/befar/catalog/befar-soft-velcro-backing-pad-2.webp"] {
+  --product-canvas-aspect: 1.5444;
+  --product-content-aspect: 2.0706;
+  --product-content-fill-x: 0.8244;
+  --product-content-fill-y: 0.6149;
+  --product-content-offset-x: 0.0894;
+  --product-content-offset-y: 0.2471;
+}
+
+.fit[data-product-fit="/remastered/products/befar/catalog/befar-soft-velcro-backing-pad.webp"] {
+  --product-canvas-aspect: 1.5009;
+  --product-content-aspect: 2.236;
+  --product-content-fill-x: 0.8231;
+  --product-content-fill-y: 0.5525;
+  --product-content-offset-x: 0.0956;
+  --product-content-offset-y: 0.2242;
+}
+
+.fit[data-product-fit="/remastered/products/befar/catalog/befar-static-foil.webp"] {
+  --product-canvas-aspect: 1.5123;
+  --product-content-aspect: 1.059;
+  --product-content-fill-x: 0.6394;
+  --product-content-fill-y: 0.913;
+  --product-content-offset-x: 0.1638;
+  --product-content-offset-y: 0.0378;
+}
+
+.fit[data-product-fit="/remastered/products/befar/catalog/befar-tack-cloth.webp"] {
+  --product-canvas-aspect: 1.4953;
+  --product-content-aspect: 1.5;
+  --product-content-fill-x: 0.8756;
+  --product-content-fill-y: 0.8729;
+  --product-content-offset-x: 0.025;
+  --product-content-offset-y: 0.0907;
+}
+
+.fit[data-product-fit="/remastered/products/befar/catalog/befar-turkuaz-compound.webp"] {
+  --product-canvas-aspect: 0.9744;
+  --product-content-aspect: 0.7991;
+  --product-content-fill-x: 0.694;
+  --product-content-fill-y: 0.8462;
+  --product-content-offset-x: 0.1539;
+  --product-content-offset-y: 0.085;
+}
+
+.fit[data-product-fit="/remastered/products/befar/catalog/befar-turkuaz-sanding-block-blue.webp"] {
+  --product-canvas-aspect: 1.2579;
+  --product-content-aspect: 1.397;
+  --product-content-fill-x: 0.8862;
+  --product-content-fill-y: 0.798;
+  --product-content-offset-x: 0.0856;
+  --product-content-offset-y: 0.0967;
+}
+
+.fit[data-product-fit="/remastered/products/befar/catalog/befar-turkuaz-with-applicator-compounding-pad.webp"] {
+  --product-canvas-aspect: 0.9906;
+  --product-content-aspect: 1.2044;
+  --product-content-fill-x: 0.8959;
+  --product-content-fill-y: 0.7369;
+  --product-content-offset-x: 0.0442;
+  --product-content-offset-y: 0.1588;
+}
+
+.fit[data-product-fit="/remastered/products/befar/catalog/befar-velcro-polishing-pad-3.webp"] {
+  --product-canvas-aspect: 1.3245;
+  --product-content-aspect: 1.3923;
+  --product-content-fill-x: 0.6344;
+  --product-content-fill-y: 0.6035;
+  --product-content-offset-x: 0.15;
+  --product-content-offset-y: 0.1879;
+}
+
+.fit[data-product-fit="/remastered/products/befar/supplied/befar__befar-carved-velcro-polishing-pad__05801.webp"] {
+  --product-canvas-aspect: 1;
+  --product-content-aspect: 1.3692;
+  --product-content-fill-x: 0.8517;
+  --product-content-fill-y: 0.622;
+  --product-content-offset-x: 0.0742;
+  --product-content-offset-y: 0.2305;
+}
+
+.fit[data-product-fit="/remastered/products/befar/supplied/befar__befar-velcro-polishing-pad__44807.webp"] {
+  --product-canvas-aspect: 1.2105;
+  --product-content-aspect: 1.457;
+  --product-content-fill-x: 0.8848;
+  --product-content-fill-y: 0.7351;
+  --product-content-offset-x: 0.0717;
+  --product-content-offset-y: 0.157;
+}
+
+.fit[data-product-fit="/remastered/products/befar/supplied/befar__befar-waffle-velcro-polishing-pad__04503.webp"] {
+  --product-canvas-aspect: 1;
+  --product-content-aspect: 1.8563;
+  --product-content-fill-x: 0.9681;
+  --product-content-fill-y: 0.5215;
+  --product-content-offset-x: 0.0175;
+  --product-content-offset-y: 0.2337;
+}
+
+.fit[data-product-fit="/remastered/products/befar/supplied/befar__befar-waffle-velcro-polishing-pad__448061.webp"] {
+  --product-canvas-aspect: 1;
+  --product-content-aspect: 1.8678;
+  --product-content-fill-x: 0.9801;
+  --product-content-fill-y: 0.5247;
+  --product-content-offset-x: 0.0159;
+  --product-content-offset-y: 0.2305;
+}
+
+.fit[data-product-fit="/remastered/products/carfit/catalog/carfit-1k-etch-primer-spray.webp"] {
+  --product-canvas-aspect: 1;
+  --product-content-aspect: 0.3393;
+  --product-content-fill-x: 0.324;
+  --product-content-fill-y: 0.955;
+  --product-content-offset-x: 0.338;
+  --product-content-offset-y: 0.026;
+}
+
+.fit[data-product-fit="/remastered/products/carfit/catalog/carfit-1k-hi-build-primer-filler-spray.webp"] {
+  --product-canvas-aspect: 1;
+  --product-content-aspect: 0.9525;
+  --product-content-fill-x: 0.883;
+  --product-content-fill-y: 0.927;
+  --product-content-offset-x: 0.059;
+  --product-content-offset-y: 0.04;
+}
+
+.fit[data-product-fit="/remastered/products/carfit/catalog/carfit-1k-plastic-primer-spray.webp"] {
+  --product-canvas-aspect: 1;
+  --product-content-aspect: 0.3412;
+  --product-content-fill-x: 0.32;
+  --product-content-fill-y: 0.938;
+  --product-content-offset-x: 0.34;
+  --product-content-offset-y: 0.037;
+}
+
+.fit[data-product-fit="/remastered/products/carfit/catalog/carfit-2k-epoxy-primer-1-1.webp"] {
+  --product-canvas-aspect: 1;
+  --product-content-aspect: 0.8497;
+  --product-content-fill-x: 0.718;
+  --product-content-fill-y: 0.845;
+  --product-content-offset-x: 0.141;
+  --product-content-offset-y: 0.122;
+}
+
+.fit[data-product-fit="/remastered/products/carfit/catalog/carfit-2k-fast-air-primer-filler-3-1.webp"] {
+  --product-canvas-aspect: 1;
+  --product-content-aspect: 1.085;
+  --product-content-fill-x: 0.919;
+  --product-content-fill-y: 0.847;
+  --product-content-offset-x: 0.04;
+  --product-content-offset-y: 0.11;
+}
+
+.fit[data-product-fit="/remastered/products/carfit/catalog/carfit-2k-hs-acryl-primer-filler-4-1.webp"] {
+  --product-canvas-aspect: 1;
+  --product-content-aspect: 1.065;
+  --product-content-fill-x: 0.918;
+  --product-content-fill-y: 0.862;
+  --product-content-offset-x: 0.043;
+  --product-content-offset-y: 0.1;
+}
+
+.fit[data-product-fit="/remastered/products/carfit/catalog/carfit-2k-hs-scratch-resistent-clearcoat-2-1.webp"] {
+  --product-canvas-aspect: 1;
+  --product-content-aspect: 0.638;
+  --product-content-fill-x: 0.601;
+  --product-content-fill-y: 0.942;
+  --product-content-offset-x: 0.188;
+  --product-content-offset-y: 0.042;
+}
+
+.fit[data-product-fit="/remastered/products/carfit/catalog/carfit-2k-uhs-low-voc-clearcoat.webp"] {
+  --product-canvas-aspect: 1;
+  --product-content-aspect: 0.5888;
+  --product-content-fill-x: 0.57;
+  --product-content-fill-y: 0.968;
+  --product-content-offset-x: 0.204;
+  --product-content-offset-y: 0.021;
+}
+
+.fit[data-product-fit="/remastered/products/carfit/catalog/carfit-2k-us-filler-4-1.webp"] {
+  --product-canvas-aspect: 1;
+  --product-content-aspect: 1.0578;
+  --product-content-fill-x: 0.879;
+  --product-content-fill-y: 0.831;
+  --product-content-offset-x: 0.061;
+  --product-content-offset-y: 0.104;
+}
+
+.fit[data-product-fit="/remastered/products/carfit/catalog/carfit-2k-washprimer-2-1.webp"] {
+  --product-canvas-aspect: 1;
+  --product-content-aspect: 1.0335;
+  --product-content-fill-x: 0.926;
+  --product-content-fill-y: 0.896;
+  --product-content-offset-x: 0.025;
+  --product-content-offset-y: 0.063;
+}
+
+.fit[data-product-fit="/remastered/products/carfit/catalog/carfit-black-paint-spray.webp"] {
+  --product-canvas-aspect: 1;
+  --product-content-aspect: 0.341;
+  --product-content-fill-x: 0.313;
+  --product-content-fill-y: 0.918;
+  --product-content-offset-x: 0.35;
+  --product-content-offset-y: 0.041;
+}
+
+.fit[data-product-fit="/remastered/products/carfit/catalog/carfit-blending-tape.webp"] {
+  --product-canvas-aspect: 1;
+  --product-content-aspect: 1.6453;
+  --product-content-fill-x: 0.719;
+  --product-content-fill-y: 0.437;
+  --product-content-offset-x: 0.141;
+  --product-content-offset-y: 0.073;
+}
+
+.fit[data-product-fit="/remastered/products/carfit/catalog/carfit-car-clean-multi-2.webp"] {
+  --product-canvas-aspect: 1.2003;
+  --product-content-aspect: 1.1976;
+  --product-content-fill-x: 0.7425;
+  --product-content-fill-y: 0.7442;
+  --product-content-offset-x: 0.1187;
+  --product-content-offset-y: 0.1358;
+}
+
+.fit[data-product-fit="/remastered/products/carfit/catalog/carfit-carbon-putty.webp"] {
+  --product-canvas-aspect: 1;
+  --product-content-aspect: 1.2005;
+  --product-content-fill-x: 0.892;
+  --product-content-fill-y: 0.743;
+  --product-content-offset-x: 0.053;
+  --product-content-offset-y: 0.145;
+}
+
+.fit[data-product-fit="/remastered/products/carfit/catalog/carfit-cavity-preservation-spray.webp"] {
+  --product-canvas-aspect: 1;
+  --product-content-aspect: 0.2651;
+  --product-content-fill-x: 0.254;
+  --product-content-fill-y: 0.958;
+  --product-content-offset-x: 0.373;
+  --product-content-offset-y: 0.025;
+}
+
+.fit[data-product-fit="/remastered/products/carfit/catalog/carfit-clearcoar-matt.webp"] {
+  --product-canvas-aspect: 1;
+  --product-content-aspect: 0.7201;
+  --product-content-fill-x: 0.674;
+  --product-content-fill-y: 0.936;
+  --product-content-offset-x: 0.155;
+  --product-content-offset-y: 0.035;
+}
+
+.fit[data-product-fit="/remastered/products/carfit/catalog/carfit-cover-tape-up-to-80c.webp"] {
+  --product-canvas-aspect: 1;
+  --product-content-aspect: 1.4574;
+  --product-content-fill-x: 0.9349;
+  --product-content-fill-y: 0.6415;
+  --product-content-offset-x: 0.0274;
+  --product-content-offset-y: 0.1943;
+}
+
+.fit[data-product-fit="/remastered/products/carfit/catalog/carfit-disposable-seat-covers.webp"] {
+  --product-canvas-aspect: 1;
+  --product-content-aspect: 0.6649;
+  --product-content-fill-x: 0.494;
+  --product-content-fill-y: 0.743;
+  --product-content-offset-x: 0.231;
+  --product-content-offset-y: 0.119;
+}
+
+.fit[data-product-fit="/remastered/products/carfit/catalog/carfit-fade-out-thinner-spray.webp"] {
+  --product-canvas-aspect: 1;
+  --product-content-aspect: 0.3411;
+  --product-content-fill-x: 0.323;
+  --product-content-fill-y: 0.947;
+  --product-content-offset-x: 0.338;
+  --product-content-offset-y: 0.034;
+}
+
+.fit[data-product-fit="/remastered/products/carfit/catalog/carfit-fillable-spray-can.webp"] {
+  --product-canvas-aspect: 1;
+  --product-content-aspect: 0.3416;
+  --product-content-fill-x: 0.304;
+  --product-content-fill-y: 0.89;
+  --product-content-offset-x: 0.337;
+  --product-content-offset-y: 0.069;
+}
+
+.fit[data-product-fit="/remastered/products/carfit/catalog/carfit-finishing-compound.webp"] {
+  --product-canvas-aspect: 1;
+  --product-content-aspect: 0.3263;
+  --product-content-fill-x: 0.308;
+  --product-content-fill-y: 0.944;
+  --product-content-offset-x: 0.346;
+  --product-content-offset-y: 0.028;
+}
+
+.fit[data-product-fit="/remastered/products/carfit/catalog/carfit-folding-paint-stand-premium-2.webp"] {
+  --product-canvas-aspect: 1.2744;
+  --product-content-aspect: 1.2879;
+  --product-content-fill-x: 0.9693;
+  --product-content-fill-y: 0.9592;
+  --product-content-offset-x: 0.0187;
+  --product-content-offset-y: 0.0119;
+}
+
 .fit[data-product-fit="/remastered/products/carfit/catalog/carfit-folding-paint-stand-premium.webp"] {
   --product-canvas-aspect: 1;
   --product-content-aspect: 0.8934;
@@ -19880,6 +21284,177 @@
   --product-content-fill-y: 0.891;
   --product-content-offset-x: 0.103;
   --product-content-offset-y: 0.076;
+}
+
+.fit[data-product-fit="/remastered/products/carfit/catalog/carfit-glas-plus-putty.webp"] {
+  --product-canvas-aspect: 1;
+  --product-content-aspect: 1.0543;
+  --product-content-fill-x: 0.951;
+  --product-content-fill-y: 0.902;
+  --product-content-offset-x: 0.024;
+  --product-content-offset-y: 0.049;
+}
+
+.fit[data-product-fit="/remastered/products/carfit/catalog/carfit-gun-cleaner.webp"] {
+  --product-canvas-aspect: 1;
+  --product-content-aspect: 0.6957;
+  --product-content-fill-x: 0.64;
+  --product-content-fill-y: 0.92;
+  --product-content-offset-x: 0.2;
+  --product-content-offset-y: 0.037;
+}
+
+.fit[data-product-fit="/remastered/products/carfit/catalog/carfit-high-gloss-clearcoat-spray.webp"] {
+  --product-canvas-aspect: 1;
+  --product-content-aspect: 0.3416;
+  --product-content-fill-x: 0.304;
+  --product-content-fill-y: 0.89;
+  --product-content-offset-x: 0.348;
+  --product-content-offset-y: 0.07;
+}
+
+.fit[data-product-fit="/remastered/products/carfit/catalog/carfit-interface-pads.webp"] {
+  --product-canvas-aspect: 1;
+  --product-content-aspect: 1.9699;
+  --product-content-fill-x: 0.981;
+  --product-content-fill-y: 0.498;
+  --product-content-offset-x: 0.004;
+  --product-content-offset-y: 0.284;
+}
+
+.fit[data-product-fit="/remastered/products/carfit/catalog/carfit-logo-tape.webp"] {
+  --product-canvas-aspect: 1;
+  --product-content-aspect: 0.3292;
+  --product-content-fill-x: 0.316;
+  --product-content-fill-y: 0.96;
+  --product-content-offset-x: 0.346;
+  --product-content-offset-y: 0.025;
+}
+
+.fit[data-product-fit="/remastered/products/carfit/catalog/carfit-manual-polishing-and-sanding-pad.webp"] {
+  --product-canvas-aspect: 1;
+  --product-content-aspect: 1.507;
+  --product-content-fill-x: 0.969;
+  --product-content-fill-y: 0.643;
+  --product-content-offset-x: 0.015;
+  --product-content-offset-y: 0.219;
+}
+
+.fit[data-product-fit="/remastered/products/carfit/catalog/carfit-microfiber-cleaning-cloth.webp"] {
+  --product-canvas-aspect: 1;
+  --product-content-aspect: 1.0913;
+  --product-content-fill-x: 0.861;
+  --product-content-fill-y: 0.789;
+  --product-content-offset-x: 0.058;
+  --product-content-offset-y: 0.105;
+}
+
+.fit[data-product-fit="/remastered/products/carfit/catalog/carfit-mobile-masking-paper-dispenser.webp"] {
+  --product-canvas-aspect: 1;
+  --product-content-aspect: 1.0164;
+  --product-content-fill-x: 0.807;
+  --product-content-fill-y: 0.794;
+  --product-content-offset-x: 0.096;
+  --product-content-offset-y: 0.133;
+}
+
+.fit[data-product-fit="/remastered/products/carfit/catalog/carfit-multi-putty.webp"] {
+  --product-canvas-aspect: 1;
+  --product-content-aspect: 1.2334;
+  --product-content-fill-x: 0.872;
+  --product-content-fill-y: 0.707;
+  --product-content-offset-x: 0.064;
+  --product-content-offset-y: 0.172;
+}
+
+.fit[data-product-fit="/remastered/products/carfit/catalog/carfit-parking-sensor-masking-disc.webp"] {
+  --product-canvas-aspect: 1;
+  --product-content-aspect: 0.61;
+  --product-content-fill-x: 0.5651;
+  --product-content-fill-y: 0.9264;
+  --product-content-offset-x: 0.3255;
+  --product-content-offset-y: 0.0462;
+}
+
+.fit[data-product-fit="/remastered/products/carfit/catalog/carfit-perfect-filler-4-1-grey.webp"] {
+  --product-canvas-aspect: 1;
+  --product-content-aspect: 0.5067;
+  --product-content-fill-x: 0.49;
+  --product-content-fill-y: 0.967;
+  --product-content-offset-x: 0.256;
+  --product-content-offset-y: 0.019;
+}
+
+.fit[data-product-fit="/remastered/products/carfit/catalog/carfit-plastic-primer.webp"] {
+  --product-canvas-aspect: 1;
+  --product-content-aspect: 0.6896;
+  --product-content-fill-x: 0.622;
+  --product-content-fill-y: 0.902;
+  --product-content-offset-x: 0.189;
+  --product-content-offset-y: 0.055;
+}
+
+.fit[data-product-fit="/remastered/products/carfit/catalog/carfit-plastic-putty.webp"] {
+  --product-canvas-aspect: 1;
+  --product-content-aspect: 1.1324;
+  --product-content-fill-x: 0.847;
+  --product-content-fill-y: 0.748;
+  --product-content-offset-x: 0.076;
+  --product-content-offset-y: 0.159;
+}
+
+.fit[data-product-fit="/remastered/products/carfit/catalog/carfit-plastic-repair-kit.webp"] {
+  --product-canvas-aspect: 1;
+  --product-content-aspect: 0.5234;
+  --product-content-fill-x: 0.469;
+  --product-content-fill-y: 0.896;
+  --product-content-offset-x: 0.265;
+  --product-content-offset-y: 0.053;
+}
+
+.fit[data-product-fit="/remastered/products/carfit/catalog/carfit-polyethylene-car-cover.webp"] {
+  --product-canvas-aspect: 1;
+  --product-content-aspect: 1.9809;
+  --product-content-fill-x: 0.935;
+  --product-content-fill-y: 0.472;
+  --product-content-offset-x: 0.033;
+  --product-content-offset-y: 0.264;
+}
+
+.fit[data-product-fit="/remastered/products/carfit/catalog/carfit-pretaped-masking-film.webp"] {
+  --product-canvas-aspect: 1;
+  --product-content-aspect: 0.4134;
+  --product-content-fill-x: 0.389;
+  --product-content-fill-y: 0.941;
+  --product-content-offset-x: 0.305;
+  --product-content-offset-y: 0.024;
+}
+
+.fit[data-product-fit="/remastered/products/carfit/catalog/carfit-pu-adhesive-and-sealant.webp"] {
+  --product-canvas-aspect: 1;
+  --product-content-aspect: 0.7817;
+  --product-content-fill-x: 0.727;
+  --product-content-fill-y: 0.93;
+  --product-content-offset-x: 0.098;
+  --product-content-offset-y: 0.036;
+}
+
+.fit[data-product-fit="/remastered/products/carfit/catalog/carfit-rapid-air-clear-coat-voc.webp"] {
+  --product-canvas-aspect: 1;
+  --product-content-aspect: 0.6051;
+  --product-content-fill-x: 0.541;
+  --product-content-fill-y: 0.894;
+  --product-content-offset-x: 0.229;
+  --product-content-offset-y: 0.074;
+}
+
+.fit[data-product-fit="/remastered/products/carfit/catalog/carfit-rotating-paint-stand.webp"] {
+  --product-canvas-aspect: 1;
+  --product-content-aspect: 1.2865;
+  --product-content-fill-x: 0.934;
+  --product-content-fill-y: 0.726;
+  --product-content-offset-x: 0.03;
+  --product-content-offset-y: 0.154;
 }
 
 .fit[data-product-fit="/remastered/products/carfit/catalog/carfit-rubber-sanding-block.webp"] {
@@ -19891,6 +21466,51 @@
   --product-content-offset-y: 0.238;
 }
 
+.fit[data-product-fit="/remastered/products/carfit/catalog/carfit-sanding-control-kit-and-sanding-powder.webp"] {
+  --product-canvas-aspect: 1;
+  --product-content-aspect: 1.0324;
+  --product-content-fill-x: 0.828;
+  --product-content-fill-y: 0.802;
+  --product-content-offset-x: 0.086;
+  --product-content-offset-y: 0.102;
+}
+
+.fit[data-product-fit="/remastered/products/carfit/catalog/carfit-silicone-remover.webp"] {
+  --product-canvas-aspect: 1;
+  --product-content-aspect: 0.6309;
+  --product-content-fill-x: 0.593;
+  --product-content-fill-y: 0.94;
+  --product-content-offset-x: 0.186;
+  --product-content-offset-y: 0.032;
+}
+
+.fit[data-product-fit="/remastered/products/carfit/catalog/carfit-silver-wheel-spray.webp"] {
+  --product-canvas-aspect: 1;
+  --product-content-aspect: 0.3422;
+  --product-content-fill-x: 0.321;
+  --product-content-fill-y: 0.938;
+  --product-content-offset-x: 0.352;
+  --product-content-offset-y: 0.033;
+}
+
+.fit[data-product-fit="/remastered/products/carfit/catalog/carfit-soft-interface-pads-micro.webp"] {
+  --product-canvas-aspect: 1;
+  --product-content-aspect: 1.3175;
+  --product-content-fill-x: 0.942;
+  --product-content-fill-y: 0.715;
+  --product-content-offset-x: 0.024;
+  --product-content-offset-y: 0.161;
+}
+
+.fit[data-product-fit="/remastered/products/carfit/catalog/carfit-soft-plus-putty.webp"] {
+  --product-canvas-aspect: 1;
+  --product-content-aspect: 1.0519;
+  --product-content-fill-x: 0.953;
+  --product-content-fill-y: 0.906;
+  --product-content-offset-x: 0.024;
+  --product-content-offset-y: 0.047;
+}
+
 .fit[data-product-fit="/remastered/products/carfit/catalog/carfit-stirring-sticks.webp"] {
   --product-canvas-aspect: 1;
   --product-content-aspect: 6.5068;
@@ -19898,6 +21518,105 @@
   --product-content-fill-y: 0.146;
   --product-content-offset-x: 0.025;
   --product-content-offset-y: 0.427;
+}
+
+.fit[data-product-fit="/remastered/products/carfit/catalog/carfit-stone-chip-protection-spray.webp"] {
+  --product-canvas-aspect: 1;
+  --product-content-aspect: 0.7186;
+  --product-content-fill-x: 0.659;
+  --product-content-fill-y: 0.917;
+  --product-content-offset-x: 0.18;
+  --product-content-offset-y: 0.048;
+}
+
+.fit[data-product-fit="/remastered/products/carfit/catalog/carfit-stone-chip-protection.webp"] {
+  --product-canvas-aspect: 1;
+  --product-content-aspect: 0.3533;
+  --product-content-fill-x: 0.33;
+  --product-content-fill-y: 0.934;
+  --product-content-offset-x: 0.335;
+  --product-content-offset-y: 0.037;
+}
+
+.fit[data-product-fit="/remastered/products/carfit/catalog/carfit-tack-cloth-super-wave.webp"] {
+  --product-canvas-aspect: 1;
+  --product-content-aspect: 0.7603;
+  --product-content-fill-x: 0.685;
+  --product-content-fill-y: 0.901;
+  --product-content-offset-x: 0.172;
+  --product-content-offset-y: 0.042;
+}
+
+.fit[data-product-fit="/remastered/products/carfit/catalog/carfit-tack-cloth.webp"] {
+  --product-canvas-aspect: 1;
+  --product-content-aspect: 0.921;
+  --product-content-fill-x: 0.758;
+  --product-content-fill-y: 0.823;
+  --product-content-offset-x: 0.121;
+  --product-content-offset-y: 0.089;
+}
+
+.fit[data-product-fit="/remastered/products/carfit/catalog/carfit-tack-coating-for-spray-booth.webp"] {
+  --product-canvas-aspect: 1;
+  --product-content-aspect: 0.6817;
+  --product-content-fill-x: 0.651;
+  --product-content-fill-y: 0.955;
+  --product-content-offset-x: 0.209;
+  --product-content-offset-y: 0.021;
+}
+
+.fit[data-product-fit="/remastered/products/carfit/catalog/carfit-texture-paint-spray.webp"] {
+  --product-canvas-aspect: 1;
+  --product-content-aspect: 0.3421;
+  --product-content-fill-x: 0.324;
+  --product-content-fill-y: 0.947;
+  --product-content-offset-x: 0.338;
+  --product-content-offset-y: 0.027;
+}
+
+.fit[data-product-fit="/remastered/products/carfit/catalog/carfit-thermo-paint-spray-650c.webp"] {
+  --product-canvas-aspect: 1;
+  --product-content-aspect: 0.3421;
+  --product-content-fill-x: 0.324;
+  --product-content-fill-y: 0.947;
+  --product-content-offset-x: 0.338;
+  --product-content-offset-y: 0.03;
+}
+
+.fit[data-product-fit="/remastered/products/carfit/catalog/carfit-underbody-protection-bitumen-spray.webp"] {
+  --product-canvas-aspect: 1;
+  --product-content-aspect: 0.2889;
+  --product-content-fill-x: 0.273;
+  --product-content-fill-y: 0.945;
+  --product-content-offset-x: 0.364;
+  --product-content-offset-y: 0.03;
+}
+
+.fit[data-product-fit="/remastered/products/carfit/catalog/carfit-universal-thinner.webp"] {
+  --product-canvas-aspect: 1;
+  --product-content-aspect: 0.6387;
+  --product-content-fill-x: 0.594;
+  --product-content-fill-y: 0.93;
+  --product-content-offset-x: 0.211;
+  --product-content-offset-y: 0.037;
+}
+
+.fit[data-product-fit="/remastered/products/carfit/catalog/carfit-windglass-glue-black.webp"] {
+  --product-canvas-aspect: 1;
+  --product-content-aspect: 0.3611;
+  --product-content-fill-x: 0.329;
+  --product-content-fill-y: 0.911;
+  --product-content-offset-x: 0.271;
+  --product-content-offset-y: 0.056;
+}
+
+.fit[data-product-fit="/remastered/products/carfit/catalog/carfit-zinc-spray.webp"] {
+  --product-canvas-aspect: 1;
+  --product-content-aspect: 0.3435;
+  --product-content-fill-x: 0.326;
+  --product-content-fill-y: 0.949;
+  --product-content-offset-x: 0.338;
+  --product-content-offset-y: 0.025;
 }
 
 .fit[data-product-fit="/remastered/products/carsystem/carsystem-git-elastic-weiss.png"] {
@@ -19918,6 +21637,24 @@
   --product-content-offset-y: 0.1227;
 }
 
+.fit[data-product-fit="/remastered/products/carsystem/catalog/carsystem-2k-clear-voc-speed-plus-2.webp"] {
+  --product-canvas-aspect: 0.865;
+  --product-content-aspect: 0.8415;
+  --product-content-fill-x: 0.9091;
+  --product-content-fill-y: 0.9345;
+  --product-content-offset-x: 0.05;
+  --product-content-offset-y: 0.0315;
+}
+
+.fit[data-product-fit="/remastered/products/carsystem/catalog/carsystem-2k-clear-voc-speed-plus-3.webp"] {
+  --product-canvas-aspect: 0.5116;
+  --product-content-aspect: 0.4085;
+  --product-content-fill-x: 0.7606;
+  --product-content-fill-y: 0.9527;
+  --product-content-offset-x: 0.1242;
+  --product-content-offset-y: 0.0248;
+}
+
 .fit[data-product-fit="/remastered/products/carsystem/catalog/carsystem-2k-high-speed-klarlack.webp"] {
   --product-canvas-aspect: 0.479;
   --product-content-aspect: 0.3272;
@@ -19936,6 +21673,15 @@
   --product-content-offset-y: 0.0804;
 }
 
+.fit[data-product-fit="/remastered/products/carsystem/catalog/carsystem-af-25-primer-wet-on-wet-2.webp"] {
+  --product-canvas-aspect: 0.631;
+  --product-content-aspect: 0.3817;
+  --product-content-fill-x: 0.5303;
+  --product-content-fill-y: 0.8767;
+  --product-content-offset-x: 0.2409;
+  --product-content-offset-y: 0.0937;
+}
+
 .fit[data-product-fit="/remastered/products/carsystem/catalog/carsystem-alu-spezial.webp"] {
   --product-canvas-aspect: 1.6256;
   --product-content-aspect: 1.7592;
@@ -19947,20 +21693,38 @@
 
 .fit[data-product-fit="/remastered/products/carsystem/catalog/carsystem-anti-rust-putty.webp"] {
   --product-canvas-aspect: 1.6256;
-  --product-content-aspect: 1.84;
-  --product-content-fill-x: 0.8364;
+  --product-content-aspect: 1.8133;
+  --product-content-fill-x: 0.8242;
   --product-content-fill-y: 0.7389;
-  --product-content-offset-x: 0.0576;
+  --product-content-offset-x: 0.0697;
   --product-content-offset-y: 0.1207;
 }
 
 .fit[data-product-fit="/remastered/products/carsystem/catalog/carsystem-applicator.webp"] {
   --product-canvas-aspect: 0.8128;
-  --product-content-aspect: 0.6895;
-  --product-content-fill-x: 0.7636;
-  --product-content-fill-y: 0.9002;
-  --product-content-offset-x: 0.1333;
+  --product-content-aspect: 0.6896;
+  --product-content-fill-x: 0.7606;
+  --product-content-fill-y: 0.8966;
+  --product-content-offset-x: 0.1348;
   --product-content-offset-y: 0.0357;
+}
+
+.fit[data-product-fit="/remastered/products/carsystem/catalog/carsystem-booth-mask-2.webp"] {
+  --product-canvas-aspect: 1;
+  --product-content-aspect: 0.9495;
+  --product-content-fill-x: 0.7409;
+  --product-content-fill-y: 0.7803;
+  --product-content-offset-x: 0.1197;
+  --product-content-offset-y: 0.1197;
+}
+
+.fit[data-product-fit="/remastered/products/carsystem/catalog/carsystem-booth-mask-stick-2.webp"] {
+  --product-canvas-aspect: 0.7059;
+  --product-content-aspect: 0.6723;
+  --product-content-fill-x: 0.8424;
+  --product-content-fill-y: 0.8845;
+  --product-content-offset-x: 0.0697;
+  --product-content-offset-y: 0.0503;
 }
 
 .fit[data-product-fit="/remastered/products/carsystem/catalog/carsystem-bumper-stand.webp"] {
@@ -19981,6 +21745,33 @@
   --product-content-offset-y: 0.0123;
 }
 
+.fit[data-product-fit="/remastered/products/carsystem/catalog/carsystem-can-scraper.webp"] {
+  --product-canvas-aspect: 1;
+  --product-content-aspect: 0.9629;
+  --product-content-fill-x: 0.747;
+  --product-content-fill-y: 0.7758;
+  --product-content-offset-x: 0.1106;
+  --product-content-offset-y: 0.0955;
+}
+
+.fit[data-product-fit="/remastered/products/carsystem/catalog/carsystem-car-mop-white-2.webp"] {
+  --product-canvas-aspect: 1.162;
+  --product-content-aspect: 1.2008;
+  --product-content-fill-x: 0.9424;
+  --product-content-fill-y: 0.912;
+  --product-content-offset-x: 0.0424;
+  --product-content-offset-y: 0.0405;
+}
+
+.fit[data-product-fit="/remastered/products/carsystem/catalog/carsystem-cc-20-x-pert-2.webp"] {
+  --product-canvas-aspect: 0.55;
+  --product-content-aspect: 0.5082;
+  --product-content-fill-x: 0.8924;
+  --product-content-fill-y: 0.9658;
+  --product-content-offset-x: 0.05;
+  --product-content-offset-y: 0.0175;
+}
+
 .fit[data-product-fit="/remastered/products/carsystem/catalog/carsystem-classic-coverall-pants.webp"] {
   --product-canvas-aspect: 0.5263;
   --product-content-aspect: 0.7966;
@@ -19988,6 +21779,15 @@
   --product-content-fill-y: 0.6156;
   --product-content-offset-x: 0.0333;
   --product-content-offset-y: 0.2743;
+}
+
+.fit[data-product-fit="/remastered/products/carsystem/catalog/carsystem-classicline-soft-pad.webp"] {
+  --product-canvas-aspect: 1.4765;
+  --product-content-aspect: 1.527;
+  --product-content-fill-x: 0.9;
+  --product-content-fill-y: 0.8702;
+  --product-content-offset-x: 0.0606;
+  --product-content-offset-y: 0.0559;
 }
 
 .fit[data-product-fit="/remastered/products/carsystem/catalog/carsystem-clear-coat-spray.webp"] {
@@ -20017,13 +21817,85 @@
   --product-content-offset-y: 0.0339;
 }
 
+.fit[data-product-fit="/remastered/products/carsystem/catalog/carsystem-crash-film-2.webp"] {
+  --product-canvas-aspect: 1;
+  --product-content-aspect: 0.9444;
+  --product-content-fill-x: 0.8485;
+  --product-content-fill-y: 0.8985;
+  --product-content-offset-x: 0.0742;
+  --product-content-offset-y: 0.0455;
+}
+
 .fit[data-product-fit="/remastered/products/carsystem/catalog/carsystem-crash-film.webp"] {
   --product-canvas-aspect: 1.25;
-  --product-content-aspect: 1.1879;
-  --product-content-fill-x: 0.8909;
-  --product-content-fill-y: 0.9375;
+  --product-content-aspect: 1.1864;
+  --product-content-fill-x: 0.8512;
+  --product-content-fill-y: 0.8969;
+  --product-content-offset-x: 0.0819;
+  --product-content-offset-y: 0.0305;
+}
+
+.fit[data-product-fit="/remastered/products/carsystem/catalog/carsystem-cutter-knife-black-2.webp"] {
+  --product-canvas-aspect: 1;
+  --product-content-aspect: 3.1232;
+  --product-content-fill-x: 0.9606;
+  --product-content-fill-y: 0.3076;
+  --product-content-offset-x: 0.0167;
+  --product-content-offset-y: 0.3288;
+}
+
+.fit[data-product-fit="/remastered/products/carsystem/catalog/carsystem-dispenser-for-5-kg-polish.webp"] {
+  --product-canvas-aspect: 0.3912;
+  --product-content-aspect: 0.3323;
+  --product-content-fill-x: 0.8091;
+  --product-content-fill-y: 0.9526;
+  --product-content-offset-x: 0.1167;
+  --product-content-offset-y: 0.0255;
+}
+
+.fit[data-product-fit="/remastered/products/carsystem/catalog/carsystem-double-sanding-soft-pad-2.webp"] {
+  --product-canvas-aspect: 1.3608;
+  --product-content-aspect: 1.3601;
+  --product-content-fill-x: 0.95;
+  --product-content-fill-y: 0.9505;
+  --product-content-offset-x: 0.0242;
+  --product-content-offset-y: 0.0227;
+}
+
+.fit[data-product-fit="/remastered/products/carsystem/catalog/carsystem-dry-coat-2-0-2.webp"] {
+  --product-canvas-aspect: 1.0543;
+  --product-content-aspect: 1.0136;
+  --product-content-fill-x: 0.903;
+  --product-content-fill-y: 0.9393;
+  --product-content-offset-x: 0.0288;
+  --product-content-offset-y: 0.016;
+}
+
+.fit[data-product-fit="/remastered/products/carsystem/catalog/carsystem-dry-coat-2-0-3.webp"] {
+  --product-canvas-aspect: 1.8182;
+  --product-content-aspect: 1.7751;
+  --product-content-fill-x: 0.8848;
+  --product-content-fill-y: 0.9063;
+  --product-content-offset-x: 0.0576;
+  --product-content-offset-y: 0.0413;
+}
+
+.fit[data-product-fit="/remastered/products/carsystem/catalog/carsystem-easy-clean-box.webp"] {
+  --product-canvas-aspect: 0.9538;
+  --product-content-aspect: 0.9186;
+  --product-content-fill-x: 0.8894;
+  --product-content-fill-y: 0.9234;
   --product-content-offset-x: 0.0545;
-  --product-content-offset-y: 0.0303;
+  --product-content-offset-y: 0.0318;
+}
+
+.fit[data-product-fit="/remastered/products/carsystem/catalog/carsystem-easy-mask-ii-3.webp"] {
+  --product-canvas-aspect: 1.5034;
+  --product-content-aspect: 1.5188;
+  --product-content-fill-x: 0.7939;
+  --product-content-fill-y: 0.7859;
+  --product-content-offset-x: 0.2061;
+  --product-content-offset-y: 0.0866;
 }
 
 .fit[data-product-fit="/remastered/products/carsystem/catalog/carsystem-ef-21-ep-filler.webp"] {
@@ -20071,6 +21943,114 @@
   --product-content-offset-y: 0.1546;
 }
 
+.fit[data-product-fit="/remastered/products/carsystem/catalog/carsystem-finish-foam-black-ah.webp"] {
+  --product-canvas-aspect: 2.082;
+  --product-content-aspect: 2.2562;
+  --product-content-fill-x: 0.9606;
+  --product-content-fill-y: 0.8864;
+  --product-content-offset-x: 0.0227;
+  --product-content-offset-y: 0.0568;
+}
+
+.fit[data-product-fit="/remastered/products/carsystem/catalog/carsystem-finish-foam-orange-2.webp"] {
+  --product-canvas-aspect: 1.0248;
+  --product-content-aspect: 1;
+  --product-content-fill-x: 0.9076;
+  --product-content-fill-y: 0.9301;
+  --product-content-offset-x: 0.0439;
+  --product-content-offset-y: 0.0233;
+}
+
+.fit[data-product-fit="/remastered/products/carsystem/catalog/carsystem-finish-foam-orange-3.webp"] {
+  --product-canvas-aspect: 0.8365;
+  --product-content-aspect: 0.8535;
+  --product-content-fill-x: 0.9182;
+  --product-content-fill-y: 0.8999;
+  --product-content-offset-x: 0.0394;
+  --product-content-offset-y: 0.0558;
+}
+
+.fit[data-product-fit="/remastered/products/carsystem/catalog/carsystem-finish-foam-white-ah-3.webp"] {
+  --product-canvas-aspect: 0.951;
+  --product-content-aspect: 0.944;
+  --product-content-fill-x: 0.8682;
+  --product-content-fill-y: 0.8746;
+  --product-content-offset-x: 0.0606;
+  --product-content-offset-y: 0.0591;
+}
+
+.fit[data-product-fit="/remastered/products/carsystem/catalog/carsystem-finish-quadra-pad-c-10-2.webp"] {
+  --product-canvas-aspect: 1.0909;
+  --product-content-aspect: 1.0634;
+  --product-content-fill-x: 0.8894;
+  --product-content-fill-y: 0.9124;
+  --product-content-offset-x: 0.047;
+  --product-content-offset-y: 0.0331;
+}
+
+.fit[data-product-fit="/remastered/products/carsystem/catalog/carsystem-finish-quadra-pad-c-10-3.webp"] {
+  --product-canvas-aspect: 0.9167;
+  --product-content-aspect: 0.9269;
+  --product-content-fill-x: 0.903;
+  --product-content-fill-y: 0.8931;
+  --product-content-offset-x: 0.047;
+  --product-content-offset-y: 0.0514;
+}
+
+.fit[data-product-fit="/remastered/products/carsystem/catalog/carsystem-finish-sandwich-pad-c-30-2.webp"] {
+  --product-canvas-aspect: 1.25;
+  --product-content-aspect: 1.2166;
+  --product-content-fill-x: 0.9106;
+  --product-content-fill-y: 0.9356;
+  --product-content-offset-x: 0.0515;
+  --product-content-offset-y: 0.036;
+}
+
+.fit[data-product-fit="/remastered/products/carsystem/catalog/carsystem-finish-sandwich-pad-c-30-3.webp"] {
+  --product-canvas-aspect: 0.873;
+  --product-content-aspect: 0.8949;
+  --product-content-fill-x: 0.903;
+  --product-content-fill-y: 0.881;
+  --product-content-offset-x: 0.0455;
+  --product-content-offset-y: 0.0622;
+}
+
+.fit[data-product-fit="/remastered/products/carsystem/catalog/carsystem-finish-waffle-foam-black-ah.webp"] {
+  --product-canvas-aspect: 2.0061;
+  --product-content-aspect: 2.4039;
+  --product-content-fill-x: 0.9288;
+  --product-content-fill-y: 0.7751;
+  --product-content-offset-x: 0.0303;
+  --product-content-offset-y: 0.1125;
+}
+
+.fit[data-product-fit="/remastered/products/carsystem/catalog/carsystem-finish-waffle-pad-orange-2.webp"] {
+  --product-canvas-aspect: 0.9985;
+  --product-content-aspect: 0.9474;
+  --product-content-fill-x: 0.8455;
+  --product-content-fill-y: 0.8911;
+  --product-content-offset-x: 0.0667;
+  --product-content-offset-y: 0.0484;
+}
+
+.fit[data-product-fit="/remastered/products/carsystem/catalog/carsystem-finish-waffle-pad-orange-3.webp"] {
+  --product-canvas-aspect: 0.8919;
+  --product-content-aspect: 0.9073;
+  --product-content-fill-x: 0.9197;
+  --product-content-fill-y: 0.9041;
+  --product-content-offset-x: 0.0545;
+  --product-content-offset-y: 0.0365;
+}
+
+.fit[data-product-fit="/remastered/products/carsystem/catalog/carsystem-foam-tape-2.webp"] {
+  --product-canvas-aspect: 1;
+  --product-content-aspect: 1.059;
+  --product-content-fill-x: 0.7076;
+  --product-content-fill-y: 0.6682;
+  --product-content-offset-x: 0.2045;
+  --product-content-offset-y: 0.1409;
+}
+
 .fit[data-product-fit="/remastered/products/carsystem/catalog/carsystem-git-multi-green.webp"] {
   --product-canvas-aspect: 1.6256;
   --product-content-aspect: 1.7625;
@@ -20090,12 +22070,24 @@
 }
 
 .fit[data-product-fit="/remastered/products/carsystem/catalog/carsystem-glas.webp"] {
-  --product-canvas-aspect: 1.6256;
-  --product-content-aspect: 2.0635;
-  --product-content-fill-x: 0.9348;
-  --product-content-fill-y: 0.7365;
-  --product-content-offset-x: 0.0485;
-  --product-content-offset-y: 0.1232;
+  --product-canvas-aspect: 1.625;
+  --product-content-aspect: 1.6553;
+  --product-content-fill-x: 0.7462;
+  --product-content-fill-y: 0.7325;
+  --product-content-offset-x: 0.1231;
+  --product-content-offset-y: 0.125;
+}
+
+.fit[data-product-fit="/remastered/products/carsystem/catalog/carsystem-glass-fibre-fleece.webp"] {
+  --product-canvas-aspect: 1;
+  --product-content-aspect: 1.0015;
+  --product-content-fill-x: 1;
+  --product-content-fill-y: 0.9985;
+  --product-content-offset-x: 0;
+  --product-content-offset-y: 0;
+  --product-image-dark-filter: none;
+  --product-image-dark-contact: 0;
+  --product-image-dark-frame: 0 0 0 1px oklch(0.94 0.008 255 / 0.12);
 }
 
 .fit[data-product-fit="/remastered/products/carsystem/catalog/carsystem-glass-fibre-mat.webp"] {
@@ -20116,6 +22108,33 @@
   --product-content-offset-y: 0.0151;
 }
 
+.fit[data-product-fit="/remastered/products/carsystem/catalog/carsystem-ks-50-2.webp"] {
+  --product-canvas-aspect: 1;
+  --product-content-aspect: 0.7631;
+  --product-content-fill-x: 0.5375;
+  --product-content-fill-y: 0.7044;
+  --product-content-offset-x: 0.215;
+  --product-content-offset-y: 0.1469;
+}
+
+.fit[data-product-fit="/remastered/products/carsystem/catalog/carsystem-ks-500-2.webp"] {
+  --product-canvas-aspect: 0.7491;
+  --product-content-aspect: 0.304;
+  --product-content-fill-x: 0.3455;
+  --product-content-fill-y: 0.8513;
+  --product-content-offset-x: 0.3273;
+  --product-content-offset-y: 0.076;
+}
+
+.fit[data-product-fit="/remastered/products/carsystem/catalog/carsystem-latex-hand-i-premium-2.webp"] {
+  --product-canvas-aspect: 1.5827;
+  --product-content-aspect: 1.6041;
+  --product-content-fill-x: 0.9576;
+  --product-content-fill-y: 0.9448;
+  --product-content-offset-x: 0.0227;
+  --product-content-offset-y: 0.0288;
+}
+
 .fit[data-product-fit="/remastered/products/carsystem/catalog/carsystem-metallic.webp"] {
   --product-canvas-aspect: 1.6256;
   --product-content-aspect: 1.7726;
@@ -20123,6 +22142,42 @@
   --product-content-fill-y: 0.7365;
   --product-content-offset-x: 0.0682;
   --product-content-offset-y: 0.1232;
+}
+
+.fit[data-product-fit="/remastered/products/carsystem/catalog/carsystem-microfiber-x300-duo-2.webp"] {
+  --product-canvas-aspect: 1;
+  --product-content-aspect: 0.9884;
+  --product-content-fill-x: 0.9;
+  --product-content-fill-y: 0.9106;
+  --product-content-offset-x: 0.0591;
+  --product-content-offset-y: 0.0439;
+}
+
+.fit[data-product-fit="/remastered/products/carsystem/catalog/carsystem-microfiber-x300-duo.webp"] {
+  --product-canvas-aspect: 1.0394;
+  --product-content-aspect: 1.1824;
+  --product-content-fill-x: 0.7955;
+  --product-content-fill-y: 0.6992;
+  --product-content-offset-x: 0.1212;
+  --product-content-offset-y: 0.1213;
+}
+
+.fit[data-product-fit="/remastered/products/carsystem/catalog/carsystem-multi-black-rapid.webp"] {
+  --product-canvas-aspect: 1.6137;
+  --product-content-aspect: 1.655;
+  --product-content-fill-x: 0.647;
+  --product-content-fill-y: 0.6308;
+  --product-content-offset-x: 0.1742;
+  --product-content-offset-y: 0.1711;
+}
+
+.fit[data-product-fit="/remastered/products/carsystem/catalog/carsystem-multi-green-changer.webp"] {
+  --product-canvas-aspect: 1.6256;
+  --product-content-aspect: 1.6875;
+  --product-content-fill-x: 0.7364;
+  --product-content-fill-y: 0.7094;
+  --product-content-offset-x: 0.1242;
+  --product-content-offset-y: 0.133;
 }
 
 .fit[data-product-fit="/remastered/products/carsystem/catalog/carsystem-multi-green-glas-light.webp"] {
@@ -20179,6 +22234,15 @@
   --product-content-offset-y: 0.1232;
 }
 
+.fit[data-product-fit="/remastered/products/carsystem/catalog/carsystem-multi-mix-lids-2.webp"] {
+  --product-canvas-aspect: 1.5103;
+  --product-content-aspect: 1.5442;
+  --product-content-fill-x: 0.9803;
+  --product-content-fill-y: 0.9588;
+  --product-content-offset-x: 0.0121;
+  --product-content-offset-y: 0.0206;
+}
+
 .fit[data-product-fit="/remastered/products/carsystem/catalog/carsystem-multi-plus.webp"] {
   --product-canvas-aspect: 1.6256;
   --product-content-aspect: 1.7726;
@@ -20204,6 +22268,15 @@
   --product-content-fill-y: 0.7365;
   --product-content-offset-x: 0.0697;
   --product-content-offset-y: 0.1232;
+}
+
+.fit[data-product-fit="/remastered/products/carsystem/catalog/carsystem-multi-stand.webp"] {
+  --product-canvas-aspect: 0.6477;
+  --product-content-aspect: 0.5777;
+  --product-content-fill-x: 0.7939;
+  --product-content-fill-y: 0.8901;
+  --product-content-offset-x: 0.1212;
+  --product-content-offset-y: 0.055;
 }
 
 .fit[data-product-fit="/remastered/products/carsystem/catalog/carsystem-multi-super-flex.webp"] {
@@ -20233,6 +22306,15 @@
   --product-content-offset-y: 0.0266;
 }
 
+.fit[data-product-fit="/remastered/products/carsystem/catalog/carsystem-pad-saver.webp"] {
+  --product-canvas-aspect: 1.0277;
+  --product-content-aspect: 1;
+  --product-content-fill-x: 0.924;
+  --product-content-fill-y: 0.9496;
+  --product-content-offset-x: 0.041;
+  --product-content-offset-y: 0.0236;
+}
+
 .fit[data-product-fit="/remastered/products/carsystem/catalog/carsystem-paint-trolley-flexi-plus.webp"] {
   --product-canvas-aspect: 0.9538;
   --product-content-aspect: 0.9437;
@@ -20240,6 +22322,33 @@
   --product-content-fill-y: 0.9494;
   --product-content-offset-x: 0.0258;
   --product-content-offset-y: 0.0332;
+}
+
+.fit[data-product-fit="/remastered/products/carsystem/catalog/carsystem-paint-trolley.webp"] {
+  --product-canvas-aspect: 1.1263;
+  --product-content-aspect: 1.128;
+  --product-content-fill-x: 0.9879;
+  --product-content-fill-y: 0.9863;
+  --product-content-offset-x: 0.0091;
+  --product-content-offset-y: 0.0051;
+}
+
+.fit[data-product-fit="/remastered/products/carsystem/catalog/carsystem-paper-trolley.webp"] {
+  --product-canvas-aspect: 1.0476;
+  --product-content-aspect: 1.0446;
+  --product-content-fill-x: 0.9939;
+  --product-content-fill-y: 0.9968;
+  --product-content-offset-x: 0.0015;
+  --product-content-offset-y: 0;
+}
+
+.fit[data-product-fit="/remastered/products/carsystem/catalog/carsystem-pdc-easy-paint.webp"] {
+  --product-canvas-aspect: 1.3636;
+  --product-content-aspect: 1.5111;
+  --product-content-fill-x: 0.9273;
+  --product-content-fill-y: 0.8368;
+  --product-content-offset-x: 0.0409;
+  --product-content-offset-y: 0.0661;
 }
 
 .fit[data-product-fit="/remastered/products/carsystem/catalog/carsystem-plastic-pro.webp"] {
@@ -20260,21 +22369,39 @@
   --product-content-offset-y: 0.0156;
 }
 
+.fit[data-product-fit="/remastered/products/carsystem/catalog/carsystem-polish-x8000-ah.webp"] {
+  --product-canvas-aspect: 0.6735;
+  --product-content-aspect: 0.3286;
+  --product-content-fill-x: 0.4576;
+  --product-content-fill-y: 0.9378;
+  --product-content-offset-x: 0.2636;
+  --product-content-offset-y: 0.0276;
+}
+
+.fit[data-product-fit="/remastered/products/carsystem/catalog/carsystem-polishing-back-pad.webp"] {
+  --product-canvas-aspect: 1;
+  --product-content-aspect: 1;
+  --product-content-fill-x: 0.9621;
+  --product-content-fill-y: 0.9621;
+  --product-content-offset-x: 0.0212;
+  --product-content-offset-y: 0.0197;
+}
+
 .fit[data-product-fit="/remastered/products/carsystem/catalog/carsystem-polishing-pad-x1500-2.webp"] {
   --product-canvas-aspect: 2.1854;
-  --product-content-aspect: 2.2373;
-  --product-content-fill-x: 1;
-  --product-content-fill-y: 0.9768;
-  --product-content-offset-x: 0;
+  --product-content-aspect: 2.1736;
+  --product-content-fill-x: 0.9485;
+  --product-content-fill-y: 0.9536;
+  --product-content-offset-x: 0.0227;
   --product-content-offset-y: 0.0166;
 }
 
 .fit[data-product-fit="/remastered/products/carsystem/catalog/carsystem-polishing-pad-x8000-2.webp"] {
   --product-canvas-aspect: 1.7507;
-  --product-content-aspect: 2.0632;
-  --product-content-fill-x: 0.8409;
-  --product-content-fill-y: 0.7135;
-  --product-content-offset-x: 0.0682;
+  --product-content-aspect: 2.0075;
+  --product-content-fill-x: 0.8061;
+  --product-content-fill-y: 0.7029;
+  --product-content-offset-x: 0.0667;
   --product-content-offset-y: 0.1406;
 }
 
@@ -20285,6 +22412,60 @@
   --product-content-fill-y: 0.6159;
   --product-content-offset-x: 0.0803;
   --product-content-offset-y: 0.2152;
+}
+
+.fit[data-product-fit="/remastered/products/carsystem/catalog/carsystem-polyester-repair-resin.webp"] {
+  --product-canvas-aspect: 0.8158;
+  --product-content-aspect: 0.5994;
+  --product-content-fill-x: 0.603;
+  --product-content-fill-y: 0.8208;
+  --product-content-offset-x: 0.1682;
+  --product-content-offset-y: 0.0977;
+}
+
+.fit[data-product-fit="/remastered/products/carsystem/catalog/carsystem-polyester-repair-set.webp"] {
+  --product-canvas-aspect: 1.0296;
+  --product-content-aspect: 0.8423;
+  --product-content-fill-x: 0.7364;
+  --product-content-fill-y: 0.9002;
+  --product-content-offset-x: 0.2091;
+  --product-content-offset-y: 0.0686;
+}
+
+.fit[data-product-fit="/remastered/products/carsystem/catalog/carsystem-proflex-callisto-150-mm-3.webp"] {
+  --product-canvas-aspect: 1;
+  --product-content-aspect: 1.287;
+  --product-content-fill-x: 0.8697;
+  --product-content-fill-y: 0.6758;
+  --product-content-offset-x: 0.0652;
+  --product-content-offset-y: 0.1636;
+}
+
+.fit[data-product-fit="/remastered/products/carsystem/catalog/carsystem-proflex-hydra-75-mm.webp"] {
+  --product-canvas-aspect: 1;
+  --product-content-aspect: 1.0021;
+  --product-content-fill-x: 0.7258;
+  --product-content-fill-y: 0.7242;
+  --product-content-offset-x: 0.1348;
+  --product-content-offset-y: 0.15;
+}
+
+.fit[data-product-fit="/remastered/products/carsystem/catalog/carsystem-proflex-interface-pad-150-mm-15-holes-2.webp"] {
+  --product-canvas-aspect: 1;
+  --product-content-aspect: 1.0591;
+  --product-content-fill-x: 0.9227;
+  --product-content-fill-y: 0.8712;
+  --product-content-offset-x: 0.0409;
+  --product-content-offset-y: 0.0712;
+}
+
+.fit[data-product-fit="/remastered/products/carsystem/catalog/carsystem-proflex-interface-pad-75-mm-2.webp"] {
+  --product-canvas-aspect: 1;
+  --product-content-aspect: 1.0016;
+  --product-content-fill-x: 0.9424;
+  --product-content-fill-y: 0.9409;
+  --product-content-offset-x: 0.0455;
+  --product-content-offset-y: 0.0379;
 }
 
 .fit[data-product-fit="/remastered/products/carsystem/catalog/carsystem-proflex-mercury.webp"] {
@@ -20305,6 +22486,42 @@
   --product-content-offset-y: 0;
 }
 
+.fit[data-product-fit="/remastered/products/carsystem/catalog/carsystem-proflex-pluto.webp"] {
+  --product-canvas-aspect: 2.2148;
+  --product-content-aspect: 2.4821;
+  --product-content-fill-x: 0.9439;
+  --product-content-fill-y: 0.8423;
+  --product-content-offset-x: 0.0303;
+  --product-content-offset-y: 0.0872;
+}
+
+.fit[data-product-fit="/remastered/products/carsystem/catalog/carsystem-proflex-styx-2.webp"] {
+  --product-canvas-aspect: 1.3387;
+  --product-content-aspect: 1.4171;
+  --product-content-fill-x: 0.7773;
+  --product-content-fill-y: 0.7343;
+  --product-content-offset-x: 0.0818;
+  --product-content-offset-y: 0.1643;
+}
+
+.fit[data-product-fit="/remastered/products/carsystem/catalog/carsystem-proflex-styx.webp"] {
+  --product-canvas-aspect: 1.6418;
+  --product-content-aspect: 2.0849;
+  --product-content-fill-x: 0.8561;
+  --product-content-fill-y: 0.6741;
+  --product-content-offset-x: 0.0621;
+  --product-content-offset-y: 0.1667;
+}
+
+.fit[data-product-fit="/remastered/products/carsystem/catalog/carsystem-putty-dispenser.webp"] {
+  --product-canvas-aspect: 0.5401;
+  --product-content-aspect: 0.5551;
+  --product-content-fill-x: 1;
+  --product-content-fill-y: 0.973;
+  --product-content-offset-x: 0;
+  --product-content-offset-y: 0.027;
+}
+
 .fit[data-product-fit="/remastered/products/carsystem/catalog/carsystem-rallye-spray-premium-black-glossy.webp"] {
   --product-canvas-aspect: 0.479;
   --product-content-aspect: 0.327;
@@ -20321,6 +22538,60 @@
   --product-content-fill-y: 0.9158;
   --product-content-offset-x: 0.1894;
   --product-content-offset-y: 0.0392;
+}
+
+.fit[data-product-fit="/remastered/products/carsystem/catalog/carsystem-rotary-polisher-csh-crp01-kit-2.webp"] {
+  --product-canvas-aspect: 1;
+  --product-content-aspect: 1.0072;
+  --product-content-fill-x: 0.847;
+  --product-content-fill-y: 0.8409;
+  --product-content-offset-x: 0.0591;
+  --product-content-offset-y: 0.0773;
+}
+
+.fit[data-product-fit="/remastered/products/carsystem/catalog/carsystem-rotary-polisher-csh-crp01-kit-3.webp"] {
+  --product-canvas-aspect: 1;
+  --product-content-aspect: 0.547;
+  --product-content-fill-x: 0.4758;
+  --product-content-fill-y: 0.8697;
+  --product-content-offset-x: 0.2197;
+  --product-content-offset-y: 0.0561;
+}
+
+.fit[data-product-fit="/remastered/products/carsystem/catalog/carsystem-rubber-spreader-set.webp"] {
+  --product-canvas-aspect: 1.6754;
+  --product-content-aspect: 1.817;
+  --product-content-fill-x: 0.9619;
+  --product-content-fill-y: 0.8869;
+  --product-content-offset-x: 0.0119;
+  --product-content-offset-y: 0.0953;
+}
+
+.fit[data-product-fit="/remastered/products/carsystem/catalog/carsystem-rupes-9-holder-bigfoot-2.webp"] {
+  --product-canvas-aspect: 0.9735;
+  --product-content-aspect: 0.9952;
+  --product-content-fill-x: 0.9364;
+  --product-content-fill-y: 0.9159;
+  --product-content-offset-x: 0.05;
+  --product-content-offset-y: 0.0369;
+}
+
+.fit[data-product-fit="/remastered/products/carsystem/catalog/carsystem-rupes-ibrid-nano-2.webp"] {
+  --product-canvas-aspect: 1;
+  --product-content-aspect: 0.8308;
+  --product-content-fill-x: 0.6545;
+  --product-content-fill-y: 0.7879;
+  --product-content-offset-x: 0.1561;
+  --product-content-offset-y: 0.1379;
+}
+
+.fit[data-product-fit="/remastered/products/carsystem/catalog/carsystem-rupes-mini-polishing-machine-hlr75stb-2.webp"] {
+  --product-canvas-aspect: 1.5;
+  --product-content-aspect: 1.6166;
+  --product-content-fill-x: 0.4727;
+  --product-content-fill-y: 0.4386;
+  --product-content-offset-x: 0.2727;
+  --product-content-offset-y: 0.2545;
 }
 
 .fit[data-product-fit="/remastered/products/carsystem/catalog/carsystem-rupes-orbital-sander-slp41a.webp"] {
@@ -20368,6 +22639,69 @@
   --product-content-offset-y: 0.0619;
 }
 
+.fit[data-product-fit="/remastered/products/carsystem/catalog/carsystem-sanding-block-hard.webp"] {
+  --product-canvas-aspect: 2.2297;
+  --product-content-aspect: 2.2578;
+  --product-content-fill-x: 0.8758;
+  --product-content-fill-y: 0.8649;
+  --product-content-offset-x: 0.0621;
+  --product-content-offset-y: 0.0709;
+}
+
+.fit[data-product-fit="/remastered/products/carsystem/catalog/carsystem-sanding-disc-f-19-soft.webp"] {
+  --product-canvas-aspect: 0.997;
+  --product-content-aspect: 1;
+  --product-content-fill-x: 0.9652;
+  --product-content-fill-y: 0.9622;
+  --product-content-offset-x: 0.0136;
+  --product-content-offset-y: 0.0227;
+}
+
+.fit[data-product-fit="/remastered/products/carsystem/catalog/carsystem-sanding-strips-f-23-ceramic.webp"] {
+  --product-canvas-aspect: 0.9925;
+  --product-content-aspect: 0.9735;
+  --product-content-fill-x: 0.8364;
+  --product-content-fill-y: 0.8526;
+  --product-content-offset-x: 0.0758;
+  --product-content-offset-y: 0.0812;
+}
+
+.fit[data-product-fit="/remastered/products/carsystem/catalog/carsystem-soft-roll.webp"] {
+  --product-canvas-aspect: 1.0884;
+  --product-content-aspect: 0.7761;
+  --product-content-fill-x: 0.5569;
+  --product-content-fill-y: 0.781;
+  --product-content-offset-x: 0.2281;
+  --product-content-offset-y: 0.0898;
+}
+
+.fit[data-product-fit="/remastered/products/carsystem/catalog/carsystem-sound-deadening-panels-2.webp"] {
+  --product-canvas-aspect: 1.1935;
+  --product-content-aspect: 1.2019;
+  --product-content-fill-x: 0.9742;
+  --product-content-fill-y: 0.9675;
+  --product-content-offset-x: 0.0136;
+  --product-content-offset-y: 0.0181;
+}
+
+.fit[data-product-fit="/remastered/products/carsystem/catalog/carsystem-sound-deadening-panels-3.webp"] {
+  --product-canvas-aspect: 1.1744;
+  --product-content-aspect: 1.1944;
+  --product-content-fill-x: 0.9773;
+  --product-content-fill-y: 0.9609;
+  --product-content-offset-x: 0.0121;
+  --product-content-offset-y: 0.0178;
+}
+
+.fit[data-product-fit="/remastered/products/carsystem/catalog/carsystem-sound-deadening-panels.webp"] {
+  --product-canvas-aspect: 1.4109;
+  --product-content-aspect: 1.4241;
+  --product-content-fill-x: 0.9738;
+  --product-content-fill-y: 0.9647;
+  --product-content-offset-x: 0.0125;
+  --product-content-offset-y: 0.0168;
+}
+
 .fit[data-product-fit="/remastered/products/carsystem/catalog/carsystem-spare-battery-5-0ah.webp"] {
   --product-canvas-aspect: 0.8753;
   --product-content-aspect: 0.9014;
@@ -20377,13 +22711,94 @@
   --product-content-offset-y: 0.0544;
 }
 
+.fit[data-product-fit="/remastered/products/carsystem/catalog/carsystem-spotblender-spray.webp"] {
+  --product-canvas-aspect: 0.5882;
+  --product-content-aspect: 0.3721;
+  --product-content-fill-x: 0.5576;
+  --product-content-fill-y: 0.8815;
+  --product-content-offset-x: 0.1924;
+  --product-content-offset-y: 0.0561;
+}
+
+.fit[data-product-fit="/remastered/products/carsystem/catalog/carsystem-spraygun-cleaner.webp"] {
+  --product-canvas-aspect: 0.3507;
+  --product-content-aspect: 0.3224;
+  --product-content-fill-x: 0.897;
+  --product-content-fill-y: 0.9756;
+  --product-content-offset-x: 0.0561;
+  --product-content-offset-y: 0.0133;
+}
+
+.fit[data-product-fit="/remastered/products/carsystem/catalog/carsystem-staub-stop-water-black-2.webp"] {
+  --product-canvas-aspect: 1.236;
+  --product-content-aspect: 1.2215;
+  --product-content-fill-x: 0.9106;
+  --product-content-fill-y: 0.9213;
+  --product-content-offset-x: 0.0515;
+  --product-content-offset-y: 0.0337;
+}
+
+.fit[data-product-fit="/remastered/products/carsystem/catalog/carsystem-staub-stop-water-black.webp"] {
+  --product-canvas-aspect: 1.2355;
+  --product-content-aspect: 1.2188;
+  --product-content-fill-x: 0.9087;
+  --product-content-fill-y: 0.9212;
+  --product-content-offset-x: 0.0525;
+  --product-content-offset-y: 0.034;
+}
+
+.fit[data-product-fit="/remastered/products/carsystem/catalog/carsystem-stripping-disc.webp"] {
+  --product-canvas-aspect: 1.0046;
+  --product-content-aspect: 1.0092;
+  --product-content-fill-x: 0.9955;
+  --product-content-fill-y: 0.9909;
+  --product-content-offset-x: 0.0015;
+  --product-content-offset-y: 0.0046;
+}
+
 .fit[data-product-fit="/remastered/products/carsystem/catalog/carsystem-tape-off-disc-premium-2.webp"] {
   --product-canvas-aspect: 1;
-  --product-content-aspect: 1.1142;
-  --product-content-fill-x: 0.9015;
-  --product-content-fill-y: 0.8091;
-  --product-content-offset-x: 0.0394;
-  --product-content-offset-y: 0.1076;
+  --product-content-aspect: 1.1537;
+  --product-content-fill-x: 0.8985;
+  --product-content-fill-y: 0.7788;
+  --product-content-offset-x: 0.0409;
+  --product-content-offset-y: 0.1091;
+}
+
+.fit[data-product-fit="/remastered/products/carsystem/catalog/carsystem-tec-line-stick.webp"] {
+  --product-canvas-aspect: 1.1212;
+  --product-content-aspect: 1.1084;
+  --product-content-fill-x: 0.9269;
+  --product-content-fill-y: 0.9376;
+  --product-content-offset-x: 0.0156;
+  --product-content-offset-y: 0.0477;
+}
+
+.fit[data-product-fit="/remastered/products/carsystem/catalog/carsystem-topline-soft-pad.webp"] {
+  --product-canvas-aspect: 1.4831;
+  --product-content-aspect: 1.5269;
+  --product-content-fill-x: 0.9045;
+  --product-content-fill-y: 0.8787;
+  --product-content-offset-x: 0.0424;
+  --product-content-offset-y: 0.0494;
+}
+
+.fit[data-product-fit="/remastered/products/carsystem/catalog/carsystem-topline-wp-s.webp"] {
+  --product-canvas-aspect: 0.829;
+  --product-content-aspect: 0.8262;
+  --product-content-fill-x: 0.9807;
+  --product-content-fill-y: 0.984;
+  --product-content-offset-x: 0.0097;
+  --product-content-offset-y: 0.008;
+}
+
+.fit[data-product-fit="/remastered/products/carsystem/catalog/carsystem-uniflex-ms.webp"] {
+  --product-canvas-aspect: 0.5168;
+  --product-content-aspect: 0.2877;
+  --product-content-fill-x: 0.4803;
+  --product-content-fill-y: 0.863;
+  --product-content-offset-x: 0.3273;
+  --product-content-offset-y: 0.0775;
 }
 
 .fit[data-product-fit="/remastered/products/carsystem/catalog/carsystem-uv-filler-spray.webp"] {
@@ -20393,6 +22808,15 @@
   --product-content-fill-y: 0.9151;
   --product-content-offset-x: 0.1894;
   --product-content-offset-y: 0.0392;
+}
+
+.fit[data-product-fit="/remastered/products/carsystem/catalog/carsystem-wax-puck.webp"] {
+  --product-canvas-aspect: 1.913;
+  --product-content-aspect: 2.0127;
+  --product-content-fill-x: 0.9606;
+  --product-content-fill-y: 0.913;
+  --product-content-offset-x: 0.0227;
+  --product-content-offset-y: 0.0551;
 }
 
 .fit[data-product-fit="/remastered/products/carsystem/catalog/carsystem-x-stand-classic.webp"] {
@@ -20411,6 +22835,24 @@
   --product-content-fill-y: 1;
   --product-content-offset-x: 0;
   --product-content-offset-y: 0;
+}
+
+.fit[data-product-fit="/remastered/products/cosmos-lac/flame-blue/cosmos-lac-flame-blue-fb-906-400-ml-flame-blue-fb-906-gold.webp"] {
+  --product-canvas-aspect: 1;
+  --product-content-aspect: 0.3295;
+  --product-content-fill-x: 0.2487;
+  --product-content-fill-y: 0.755;
+  --product-content-offset-x: 0.375;
+  --product-content-offset-y: 0.11;
+}
+
+.fit[data-product-fit="/remastered/products/cosmos-lac/flame-blue/cosmos-lac-flame-blue-fb-908-400-ml-flame-blue-fb-908-copper.webp"] {
+  --product-canvas-aspect: 1;
+  --product-content-aspect: 0.3295;
+  --product-content-fill-x: 0.2487;
+  --product-content-fill-y: 0.755;
+  --product-content-offset-x: 0.375;
+  --product-content-offset-y: 0.11;
 }
 
 .fit[data-product-fit="/remastered/products/cosmos-lac/putties/cosmos-lac-putties-iron-filler.webp"] {
@@ -20440,6 +22882,42 @@
   --product-content-offset-y: 0.4625;
 }
 
+.fit[data-product-fit="/remastered/products/rm/catalog/rm-agilis.webp"] {
+  --product-canvas-aspect: 1.935;
+  --product-content-aspect: 2.1145;
+  --product-content-fill-x: 0.907;
+  --product-content-fill-y: 0.83;
+  --product-content-offset-x: 0.0491;
+  --product-content-offset-y: 0.085;
+}
+
+.fit[data-product-fit="/remastered/products/rm/catalog/rm-c-2p52-easy-air-finish-r.webp"] {
+  --product-canvas-aspect: 1.2;
+  --product-content-aspect: 0.5089;
+  --product-content-fill-x: 0.3906;
+  --product-content-fill-y: 0.921;
+  --product-content-offset-x: 0.3137;
+  --product-content-offset-y: 0.0277;
+}
+
+.fit[data-product-fit="/remastered/products/rm/catalog/rm-c-2p65-intense-finish-r.webp"] {
+  --product-canvas-aspect: 1.2;
+  --product-content-aspect: 0.5089;
+  --product-content-fill-x: 0.3906;
+  --product-content-fill-y: 0.921;
+  --product-content-offset-x: 0.3137;
+  --product-content-offset-y: 0.0277;
+}
+
+.fit[data-product-fit="/remastered/products/rm/catalog/rm-diamont.webp"] {
+  --product-canvas-aspect: 1.2594;
+  --product-content-aspect: 1.0531;
+  --product-content-fill-x: 0.4744;
+  --product-content-fill-y: 0.5673;
+  --product-content-offset-x: 0.2692;
+  --product-content-offset-y: 0.2508;
+}
+
 .fit[data-product-fit="/remastered/products/rm/rm-pasta-190-1l.webp"] {
   --product-canvas-aspect: 1;
   --product-content-aspect: 0.7167;
@@ -20456,6 +22934,24 @@
   --product-content-fill-y: 0.9167;
   --product-content-offset-x: 0.1733;
   --product-content-offset-y: 0.0433;
+}
+
+.fit[data-product-fit="/remastered/products/rm/system/rm-crystal-base-125ml.webp"] {
+  --product-canvas-aspect: 1;
+  --product-content-aspect: 0.3933;
+  --product-content-fill-x: 0.3456;
+  --product-content-fill-y: 0.8788;
+  --product-content-offset-x: 0.3394;
+  --product-content-offset-y: 0.0688;
+}
+
+.fit[data-product-fit="/remastered/products/rm/system/rm-diamont-0-5l.webp"] {
+  --product-canvas-aspect: 1;
+  --product-content-aspect: 1.2587;
+  --product-content-fill-x: 0.6081;
+  --product-content-fill-y: 0.4831;
+  --product-content-offset-x: 0.2181;
+  --product-content-offset-y: 0.2381;
 }
 
 /*
@@ -21628,10 +24124,10 @@
 }
 
 .fit[data-product-fit="/remastered/products/carsystem/catalog/carsystem-applicator.webp"][data-product-fit-model="v6"] {
-  --product-content-aspect: 0.6885;
-  --product-content-fill-x: 0.75;
-  --product-content-fill-y: 0.8855;
-  --product-content-offset-x: 0.1409;
+  --product-content-aspect: 0.6889;
+  --product-content-fill-x: 0.7515;
+  --product-content-fill-y: 0.8867;
+  --product-content-offset-x: 0.1394;
   --product-content-offset-y: 0.0357;
 }
 
@@ -21641,14 +24137,6 @@
   --product-content-fill-y: 0.555;
   --product-content-offset-x: 0.0348;
   --product-content-offset-y: 0.3349;
-}
-
-.fit[data-product-fit="/remastered/products/carsystem/catalog/carsystem-crash-film.webp"][data-product-fit-model="v6"] {
-  --product-content-aspect: 1.2406;
-  --product-content-fill-x: 0.8515;
-  --product-content-fill-y: 0.858;
-  --product-content-offset-x: 0.0818;
-  --product-content-offset-y: 0.0303;
 }
 
 .fit[data-product-fit="/remastered/products/carsystem/catalog/carsystem-elastic-beige.webp"][data-product-fit-model="v6"] {
@@ -21696,14 +24184,6 @@
   --product-content-fill-x: 0.747;
   --product-content-fill-y: 0.734;
   --product-content-offset-x: 0.1242;
-  --product-content-offset-y: 0.1256;
-}
-
-.fit[data-product-fit="/remastered/products/carsystem/catalog/carsystem-glas.webp"][data-product-fit-model="v6"] {
-  --product-content-aspect: 1.6544;
-  --product-content-fill-x: 0.747;
-  --product-content-fill-y: 0.734;
-  --product-content-offset-x: 0.1227;
   --product-content-offset-y: 0.1256;
 }
 
@@ -21803,28 +24283,28 @@
   --product-content-offset-y: 0.1256;
 }
 
+.fit[data-product-fit="/remastered/products/carsystem/catalog/carsystem-paint-trolley.webp"][data-product-fit-model="v6"] {
+  --product-content-aspect: 1.1107;
+  --product-content-fill-x: 0.9727;
+  --product-content-fill-y: 0.9863;
+  --product-content-offset-x: 0.0106;
+  --product-content-offset-y: 0.0051;
+}
+
+.fit[data-product-fit="/remastered/products/carsystem/catalog/carsystem-pdc-easy-paint.webp"][data-product-fit-model="v6"] {
+  --product-content-aspect: 1.733;
+  --product-content-fill-x: 0.9242;
+  --product-content-fill-y: 0.7273;
+  --product-content-offset-x: 0.0424;
+  --product-content-offset-y: 0.0682;
+}
+
 .fit[data-product-fit="/remastered/products/carsystem/catalog/carsystem-plastic-pro.webp"][data-product-fit-model="v6"] {
   --product-content-aspect: 1.6544;
   --product-content-fill-x: 0.747;
   --product-content-fill-y: 0.734;
   --product-content-offset-x: 0.1379;
   --product-content-offset-y: 0.1256;
-}
-
-.fit[data-product-fit="/remastered/products/carsystem/catalog/carsystem-polishing-pad-x1500-2.webp"][data-product-fit-model="v6"] {
-  --product-content-aspect: 2.1834;
-  --product-content-fill-x: 0.9561;
-  --product-content-fill-y: 0.957;
-  --product-content-offset-x: 0.0182;
-  --product-content-offset-y: 0.0166;
-}
-
-.fit[data-product-fit="/remastered/products/carsystem/catalog/carsystem-polishing-pad-x8000-2.webp"][data-product-fit-model="v6"] {
-  --product-content-aspect: 2.0038;
-  --product-content-fill-x: 0.8045;
-  --product-content-fill-y: 0.7029;
-  --product-content-offset-x: 0.0682;
-  --product-content-offset-y: 0.1406;
 }
 
 .fit[data-product-fit="/remastered/products/carsystem/catalog/carsystem-polishing-pad-x8000.webp"][data-product-fit-model="v6"] {
@@ -21835,10 +24315,34 @@
   --product-content-offset-y: 0.2152;
 }
 
-.fit[data-product-fit="/remastered/products/carsystem/catalog/carsystem-tape-off-disc-premium-2.webp"][data-product-fit-model="v6"] {
-  --product-content-aspect: 1.1531;
-  --product-content-fill-x: 0.9015;
-  --product-content-fill-y: 0.7818;
-  --product-content-offset-x: 0.0394;
-  --product-content-offset-y: 0.1076;
+.fit[data-product-fit="/remastered/products/carsystem/catalog/carsystem-polyester-repair-resin.webp"][data-product-fit-model="v6"] {
+  --product-content-aspect: 0.553;
+  --product-content-fill-x: 0.553;
+  --product-content-fill-y: 0.8158;
+  --product-content-offset-x: 0.2182;
+  --product-content-offset-y: 0.0989;
+}
+
+.fit[data-product-fit="/remastered/products/carsystem/catalog/carsystem-polyester-repair-set.webp"][data-product-fit-model="v6"] {
+  --product-content-aspect: 0.8582;
+  --product-content-fill-x: 0.7333;
+  --product-content-fill-y: 0.8799;
+  --product-content-offset-x: 0.2121;
+  --product-content-offset-y: 0.0702;
+}
+
+.fit[data-product-fit="/remastered/products/carsystem/catalog/carsystem-spotblender-spray.webp"][data-product-fit-model="v6"] {
+  --product-content-aspect: 0.3303;
+  --product-content-fill-x: 0.4939;
+  --product-content-fill-y: 0.8797;
+  --product-content-offset-x: 0.2561;
+  --product-content-offset-y: 0.0561;
+}
+
+.fit[data-product-fit="/remastered/products/carsystem/catalog/carsystem-tec-line-stick.webp"][data-product-fit-model="v6"] {
+  --product-content-aspect: 1.1574;
+  --product-content-fill-x: 0.8319;
+  --product-content-fill-y: 0.8059;
+  --product-content-offset-x: 0.11;
+  --product-content-offset-y: 0.0477;
 }

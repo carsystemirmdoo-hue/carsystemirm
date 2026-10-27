@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, type CSSProperties } from "react";
+import { toDisplayImageSrc } from "@/lib/productImageDisplay";
 import type {
   BaslacMediaDefinition,
   BaslacMediaAvailability,
@@ -44,10 +45,10 @@ export function BaslacMediaSlot({
           {hasMobileAsset ? (
             // Ista prelomna tačka kao `--baslac-media-mobile-ratio` u CSS-u,
             // da mobilni kadar nikad ne stoji u desktop proporciji okvira.
-            <source media="(max-width: 36rem)" srcSet={media.mobileSrc} />
+            <source media="(max-width: 36rem)" srcSet={media.mobileSrc ? toDisplayImageSrc(media.mobileSrc) : undefined} />
           ) : null}
           <img
-            src={media.desktopSrc}
+            src={media.desktopSrc ? toDisplayImageSrc(media.desktopSrc) : undefined}
             alt={media.alt}
             width={media.width}
             height={media.height}

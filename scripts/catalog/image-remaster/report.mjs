@@ -1,11 +1,11 @@
 /**
  * Writes `data/catalog/image-remaster/DERIVATIVES.md`: every reviewed display
- * derivative, its untouched original, the operations applied and EVERY active
- * product (and role) that draws it. Read-only over the catalogue runtime.
+ * derivative, its untouched original, the operations applied (or, for a reviewed
+ * replacement, its basis) and EVERY active product (and role) that draws it. Read-only over the catalogue runtime.
  *
  *   node scripts/catalog/image-remaster/report.mjs [--check]
  */
-import { readFileSync, writeFileSync } from "node:fs";
+import { existsSync, readFileSync, writeFileSync } from "node:fs";
 import path from "node:path";
 
 import { loadCatalogRuntime } from "../../lib/catalog-runtime.mjs";
@@ -13,6 +13,8 @@ import { loadCatalogRuntime } from "../../lib/catalog-runtime.mjs";
 const ROOT = process.cwd();
 const OUT = path.join(ROOT, "data/catalog/image-remaster/DERIVATIVES.md");
 const plan = JSON.parse(readFileSync(path.join(ROOT, "data/catalog/image-remaster/plan.json"), "utf8"));
+const replacementsPath = path.join(ROOT, "data/catalog/image-remaster/reviewed-replacements.json");
+const replacements = existsSync(replacementsPath) ? JSON.parse(readFileSync(replacementsPath, "utf8")).images : [];
 const map = JSON.parse(readFileSync(path.join(ROOT, "data/catalog/image-remaster/display-map.json"), "utf8")).images;
 const data = loadCatalogRuntime().requireModule("lib/carsystem-data.ts");
 
@@ -72,6 +74,19 @@ plan.images.forEach((entry, index) => {
     `| ${index + 1} | \`${map[entry.src] ?? "— nije mapiran"}\` | \`${entry.src}\` | ${entry.operations.map((step) => LABEL[step.op]).join("; ")} | ${who} |`,
   );
 });
+lines.push(
+  "",
+  "## Pregledane zamene (`reviewed-replacements.json`)",
+  "",
+  `Ručno obrađeni i pojedinačno odobreni derivati (kontrola slika, završni pregled vlasnika). Fajlova: **${replacements.length}**, mapiranih: **${replacements.filter((entry) => map[entry.src]).length}**.`,
+  "",
+  "| # | derivat | original | osnova | proizvodi (uloga) |",
+  "| --- | --- | --- | --- | --- |",
+);
+replacements.forEach((entry, index) => {
+  const who = (users.get(entry.src) ?? []).map((user) => `\`${user.slug}\` (${user.role})`).join(", ") || "— (van kartica proizvoda: brend/sistemska strana)";
+  lines.push(`| ${index + 1} | \`${map[entry.src] ?? "— nije mapiran"}\` | \`${entry.src}\` | ${entry.basis || "—"}${entry.supersedes ? ` (umesto: ${entry.supersedes.join(" + ")})` : ""} | ${who} |`);
+});
 const text = lines.join("\n") + "\n";
 if (process.argv.includes("--check")) {
   const current = readFileSync(OUT, "utf8");
@@ -82,5 +97,5 @@ if (process.argv.includes("--check")) {
   console.log("DERIVATIVES.md ok");
 } else {
   writeFileSync(OUT, text);
-  console.log(`wrote ${path.relative(ROOT, OUT)}: ${plan.images.length} derivata`);
+  console.log(`wrote ${path.relative(ROOT, OUT)}: ${plan.images.length} derivata + ${replacements.length} pregledanih zamena`);
 }

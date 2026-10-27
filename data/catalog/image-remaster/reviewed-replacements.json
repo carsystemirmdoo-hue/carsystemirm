@@ -1,0 +1,2380 @@
+{
+  "schemaVersion": 1,
+  "note": "Pregledane zamene za prikaz (kontrola slika 2026-10-23 → završni pregled vlasnika 2026-10-27). Derivat je ručno obrađen i pregledan na beloj, tamnoj i šahovskoj podlozi, 1:1 i u stvarnom prikazu na sajtu; ne može se ponovo izračunati iz originala, pa ga --check proverava po replacementSha256. Original u public/ se ne menja (sinhronizacije brendova ga koriste kao dokaz identiteta). `supersedes` = operacije iz plan.json koje je zamena preuzela.",
+  "basis": {
+    "K1": "krug 1",
+    "K2": "krug 2",
+    "K3": "krug 3",
+    "K4": "krug 4",
+    "nova": "nova obrada izvora",
+    "boja": "maska po boji pozadine",
+    "izvor": "izvor sa providnom pozadinom"
+  },
+  "images": [
+    {
+      "src": "/brands/befar/details/befar-backing-plate-printed-label.webp",
+      "originalSha256": "30bf058daf11eeb9c618df9debcb45c8e1158491d8888d3f499220c45ab98a1e",
+      "replacementSha256": "ab3a8c5be388c75ac103277bee3e96b8568fd437a2505c00dbef15f8c328ad09",
+      "width": 1333,
+      "height": 2000,
+      "basis": "K1",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/brands/befar/details/befar-hub-foam-macro.webp",
+      "originalSha256": "3f85313aee1ee649a7430b06c9bf0f6fc7e3eb667ed677a06765ac0b59d52c58",
+      "replacementSha256": "c1f7dcbb4d7c34747e7e7ee01435d38258d259a915d5d948b04dff4a80a12ceb",
+      "width": 2000,
+      "height": 1296,
+      "basis": "K1",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/brands/befar/details/befar-interface-pad-6hole-angled.webp",
+      "originalSha256": "4b2cac9d775e85df9c92910890ca2810eac5c3402bd6a2cfcc64f5af0e305d63",
+      "replacementSha256": "5c04c43e057a505dfd079c30579b8313b14ba9d3ccc11db144958453d43b38b9",
+      "width": 2000,
+      "height": 1300,
+      "basis": "nova",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/brands/befar/details/befar-leo-yellow-pad-face.webp",
+      "originalSha256": "ea2d217213670afc2e2895fce004ede0201717e221156b03babd7319acc81598",
+      "replacementSha256": "94a2b72ec3d8072485f76431973b4fd9b89918c4792b3df3dae4f501bdfb47e8",
+      "width": 2000,
+      "height": 1818,
+      "basis": "K1",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/brands/befar/details/befar-pad-profile-stem.webp",
+      "originalSha256": "df491cf2392b4530f3745a1209842f841f000adfc4bcb3746dcc627da8d325b5",
+      "replacementSha256": "6b22b5e16f746bf3a6c460cd6db3aba8f789d078212332e80665b3fa6822163e",
+      "width": 2000,
+      "height": 1368,
+      "basis": "K1",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/brands/befar/details/befar-velcro-hook-edge-macro.webp",
+      "originalSha256": "729243f72fc384633613edb3af612d69bc9981163704a0c0c92c8c99bf4300f6",
+      "replacementSha256": "82dbe59d60c9ca46bf9d469aca512c28691606541e58987f6a4081214bba68e7",
+      "width": 2000,
+      "height": 1221,
+      "basis": "nova",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/brands/befar/hardness/befar-foam-04401-white.webp",
+      "originalSha256": "3bc3f8f219b299e52d7f6c78a2b4cc505fb36377918cd68b84c07139a5330569",
+      "replacementSha256": "3b1ca560f719c61563a25f1ce4a9aab3d84e6f766ab48b3c2e17537b82edcbe0",
+      "width": 1600,
+      "height": 1067,
+      "basis": "K1",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/brands/befar/hardness/befar-foam-04402-orange.webp",
+      "originalSha256": "6b28cd7101554adf506cb35447621f6cf81f0995d2d7dc0f0ad576023f6111bc",
+      "replacementSha256": "2df0edbd4d0da109defeaa3a3f21b4a1346d8b3d68550924becae57dcdb9477e",
+      "width": 1600,
+      "height": 1067,
+      "basis": "K1",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/brands/befar/hardness/befar-foam-04403-black.webp",
+      "originalSha256": "f1e61ffcca9a0b829ccb23586f0436a385636396c55c0c3a7979dddd23875f6c",
+      "replacementSha256": "57ff6b105a59dd037e571794802cee02fc9ad2031b2588d63affe580a5ddd3cc",
+      "width": 1600,
+      "height": 1067,
+      "basis": "K1",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/brands/befar/hardness/befar-foam-04404-yellow.webp",
+      "originalSha256": "c276dbf81b38b0dece666d1b50e99cd25dc7195ef1789d5335c3420250406164",
+      "replacementSha256": "a696ff25f800d84fe897a8795f5cd6075a738dd70a6d3026542f6083fa83aa1e",
+      "width": 1600,
+      "height": 1067,
+      "basis": "K1",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/brands/befar/hardness/befar-foam-04405-blue.webp",
+      "originalSha256": "374eb1f13bf17c59ad4a06be3bd445fb77fafb2964b69a8e34e63b7d64114e5d",
+      "replacementSha256": "75ae38cfa1bc5d77fbfbcfbe6bec6116f457a988edcae8209dfc1b5befc3b120",
+      "width": 1600,
+      "height": 1067,
+      "basis": "K1",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/brands/befar/hardness/befar-pad-family-row.webp",
+      "originalSha256": "84243e3ded7d3367bc3d57ad845205382bea093d7603ccf6dbf1a361f145eccc",
+      "replacementSha256": "c155e69cdb082b76c136008fe16eb5afd8a229b382991cfac74f65aaaa8bcbc5",
+      "width": 2000,
+      "height": 1949,
+      "basis": "K1",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/brands/befar/products/befar-backing-plate-diameters.webp",
+      "originalSha256": "131f753f3f2da9b01c4ff684239f342a8b9d58f0e51076f8b74fcd3f056ec21c",
+      "replacementSha256": "daefd16ec3a4c5ae32d42aaac795370a6df95533f01876c77a70809f2464628a",
+      "width": 2000,
+      "height": 1333,
+      "basis": "nova",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/brands/befar/products/befar-chem-75-liquid-compound.webp",
+      "originalSha256": "75f13f6fdb3f8da166cc57ce89c12690dc0a7fd2f3192f36feec46e65b21f7f3",
+      "replacementSha256": "df4112d6a9cd40dbb0d15a60a99acef1d1495bd2716c7ed4102080c836353ba7",
+      "width": 1600,
+      "height": 1067,
+      "basis": "K2",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/brands/befar/products/befar-nonwoven-abrasive-grey.webp",
+      "originalSha256": "aa63a50962e41db4531a7c898700d3d06dc2170554e8d8febff4327d9216911d",
+      "replacementSha256": "fe691d536205e711fe1ea44ad8ab52b46cf1cf7993be526017c16fd98013af3b",
+      "width": 1600,
+      "height": 1067,
+      "basis": "nova",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/brands/befar/products/befar-plus-pad-pair.webp",
+      "originalSha256": "8f8a4b5f6182d6b8ebf39d07d6854cb7fe4e1ec43f94b9a3b88a4eaf3311e731",
+      "replacementSha256": "2e53ff365ed61b8fbbb62a47419a006221b4004962094a617aac43fa0b2391cb",
+      "width": 2000,
+      "height": 1920,
+      "basis": "K1",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/brands/befar/products/befar-sanding-blocks-orange-soft.webp",
+      "originalSha256": "d674a46a2cad867d9061fc3494289f7c04940d7ee3413aebebb63f8ed1be176f",
+      "replacementSha256": "7d964e9aa5ae2f6e497a7eaa7b38c2625a15fa424fbe33453f018f3944621a92",
+      "width": 1600,
+      "height": 1067,
+      "basis": "K1",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/brands/befar/products/befar-sanding-blocks-red-hard.webp",
+      "originalSha256": "17a5416a38d64d540b279ebfca1d7f4762cddc2727afdfd13c682297a170a20b",
+      "replacementSha256": "7813f030e9ab588ef2d0d4d72e334b353b743101035a541150184c0deefb4ae0",
+      "width": 1600,
+      "height": 1067,
+      "basis": "K1",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/images/brands/baslac/clearcoats/baslac-clearcoat-range-mobile.webp",
+      "originalSha256": "5578ae1f5cec22871718726b27106ea6a8b3e87e63881425c50db95aed751a89",
+      "replacementSha256": "94d8c36b8a8cbfd51229e5b3deb462a4cc444088ade05913b547b0af9a88c8d3",
+      "width": 1600,
+      "height": 1520,
+      "basis": "K1",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/images/brands/baslac/clearcoats/baslac-clearcoat-range.webp",
+      "originalSha256": "a5c91e38b93eca7b53d16bb66f67d84c449d1bbdd8f1eef1a55cb0602e2227e4",
+      "replacementSha256": "7ae0b283f44e4d480cbcaf5288339a486b7c1668f7f70987cc88289e1d4f7c78",
+      "width": 2000,
+      "height": 750,
+      "basis": "K1",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/images/brands/baslac/systems/baslac-45-line-system.webp",
+      "originalSha256": "4dfaa8d3e14828c93900639bc283065f34386923d4f1991eeef431ab2fb0f279",
+      "replacementSha256": "57400942103690db425ad8dbafe9229a489b7fe47396f00f0c29bd7889c3ec68",
+      "width": 2000,
+      "height": 1500,
+      "basis": "K1",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/products/baslac/baslac--line-35-0.5l-representative.webp",
+      "originalSha256": "df17ecb672a417c17bfd73ad297a2ad0f166493ad03e8d04dbf860a5d1e82edb",
+      "replacementSha256": "3e92bdc357e7fdbfdff45a68951625dfce925af803bd39fd0017bbc7bdc7a342",
+      "width": 1334,
+      "height": 1600,
+      "basis": "K1",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/products/baslac/baslac--line-45-0.5l-representative.webp",
+      "originalSha256": "f7513a099ed1077fc011d7cceb40064d89771d92a0ba364686dcc952632b6749",
+      "replacementSha256": "5fdc7fb1f120fc6088119ab1071aa8c4ebfe5c271e285a453b21d3cbab1f4156",
+      "width": 1334,
+      "height": 1600,
+      "basis": "K1",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/products/baslac/catalog/baslac-12-20-bodyfiller-universal.webp",
+      "originalSha256": "01c6b37f5441288dcd5e6692537f97bcffe8d5aa186d0e7be274c4d49971b78d",
+      "replacementSha256": "d0ce36d0842610cf84d4ba40318686b9a78914185574824f48e87f7170395ef6",
+      "width": 1058,
+      "height": 704,
+      "basis": "K3",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/products/baslac/catalog/baslac-21-10-1k-plastic-primer.webp",
+      "originalSha256": "38d509251347e0eb99c7aae66c254743d514a1403b0ef063b1062b42f32b2e2f",
+      "replacementSha256": "b3416baeb1665ec059bb1d137f514f09a1d29742985cbe2cb321f47d37b222d9",
+      "width": 1058,
+      "height": 704,
+      "basis": "K1",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/products/baslac/catalog/baslac-40-10-2k-panel-clear.webp",
+      "originalSha256": "d4061d66065098f4af07ca233e0e81b92b27652cd405e5379048cbf4833844c0",
+      "replacementSha256": "25a3dec6659c7446d3f5221a8290ff51cddac0feeee05ae019c6bb4820f5e9a7",
+      "width": 1200,
+      "height": 1000,
+      "basis": "K1",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/products/baslac/catalog/baslac-40-40-2k-universal-clear.webp",
+      "originalSha256": "4bb05553f3cdc002b4b87150ecaae7ab8f6a8c6e158b99ab940b09e19ee02f49",
+      "replacementSha256": "4e5d59cb7e3d5e6925db1a771a2be7a6b31c5f9a35ed96d41f4f0e9ff3211fb2",
+      "width": 1200,
+      "height": 1000,
+      "basis": "K1",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/products/baslac/catalog/baslac-40-440-2k-voc-clear.webp",
+      "originalSha256": "32b3c36a574d50ad4791480dbbcb2511c3d5c35ae1134bc8fcf2c71b23fa62a0",
+      "replacementSha256": "99fedf4d3de82d03a842d96a3aa4a28009576f343b1ae0261b942c1a6a810b25",
+      "width": 1200,
+      "height": 1000,
+      "basis": "K1",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/products/baslac/catalog/baslac-40-450-universal-clear-voc.webp",
+      "originalSha256": "406898e187251e74d960b3be2734801cc4537da24500598296eda25f5409e0ec",
+      "replacementSha256": "6774e9a7adf3712205dc18020ce1b63d023a12a559145dcd0840514c87fcef9f",
+      "width": 1200,
+      "height": 1000,
+      "basis": "K1",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/products/baslac/catalog/baslac-40-510-ambient-clear.webp",
+      "originalSha256": "1e4f46cd738c3ff4b0a40fcc92e1ae00554d04610095a6f6490ce5f14c73d415",
+      "replacementSha256": "65e14e7323902ea8ee9c632cc852c177e6b94cbad0f9a57665d272756abd0180",
+      "width": 1600,
+      "height": 1334,
+      "basis": "K1",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/products/baslac/catalog/baslac-50-15-2k-hardener-fast.webp",
+      "originalSha256": "ce7239d2de435a024bd484be8d73255f4322e330f7e3f71a918d3cb20e50619d",
+      "replacementSha256": "800ed8082635a861b897d448970850a0dc6e96dc18c99bd80a2b1cf6aedf0640",
+      "width": 1058,
+      "height": 704,
+      "basis": "K2",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/products/baslac/catalog/baslac-70-20-cleaner-plastic.webp",
+      "originalSha256": "fee04b8078e741439b20aa2387d3ad9f3097c72806a46d05d4927e9244bb00e9",
+      "replacementSha256": "888140aff8b8538f62a658af29587e5b3cd4d8424f7f8a5aca364e3bd8fee406",
+      "width": 1058,
+      "height": 704,
+      "basis": "K1",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/products/baslac/catalog/baslac-80-10-additive-flex.webp",
+      "originalSha256": "33f89c9172bd3b51ea538b19e2ded0968b5cdb7b7aa3dcb7721ca865c270aced",
+      "replacementSha256": "803656478b53a1228b9f38a8ae229d2b3bc86598659bbca4ffd66b2362bf5df3",
+      "width": 1058,
+      "height": 704,
+      "basis": "K1",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/products/baslac/catalog/baslac-80-20-additive-mat.webp",
+      "originalSha256": "80c8aa192c29c803710877b6f9c5f38c49567dfe92f9e3b302344516b9e3fc4f",
+      "replacementSha256": "5f53fdd985dd43d25dc46aa1d6df2310471a090bd3705789b8940b5400bacf01",
+      "width": 1058,
+      "height": 704,
+      "basis": "K3",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/products/baslac/supplied/baslac__baslac-20-24-2k-primerfiller-grey-4l.webp",
+      "originalSha256": "e5929e390417df9a4e07059920110da5d4ad9b6d95c239a57e440a62049a51b6",
+      "replacementSha256": "57412c50758bad8b6f092e209b16e3aae28b2f7ae6e9487ec5728d44b3661e36",
+      "width": 1207,
+      "height": 1600,
+      "basis": "K1",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/products/baslac/supplied/baslac__baslac-20-94-2k-primerfiller-black-1l.webp",
+      "originalSha256": "8b271059093e1c422b4785ee7479587c6a392103830717cf7c33dc17e6caf421",
+      "replacementSha256": "dbbf749cca65ec4f70e7aaca9cabf55f200f494c62955e64da81775d3dd7029d",
+      "width": 1261,
+      "height": 1600,
+      "basis": "K1",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/products/baslac/supplied/baslac__baslac-21-11-2k-plastic-primer-voc-1l.webp",
+      "originalSha256": "20d088f25b6d00b2587fe1b941b68fea14c685bd4c4e9f00857a225db2d7b12c",
+      "replacementSha256": "bdfcdad0b6c723237934f1758a0cba4704e0f541702bd10182d5cf17bd5c8f9e",
+      "width": 1261,
+      "height": 1600,
+      "basis": "K1",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/products/baslac/supplied/baslac__baslac-21-20-plastic-primer-400ml.webp",
+      "originalSha256": "ef4ab3f3d92ac4e86172cd8428ebfca67b0487d78cf36a4cabcda928eae4d2ca",
+      "replacementSha256": "ccd791400fa5935f5509b2575d6db07d3dfa6adb24e20413b2570c16be4671a5",
+      "width": 408,
+      "height": 1079,
+      "basis": "K1",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/products/baslac/supplied/baslac__baslac-27-10-2k-washprimer-1l.webp",
+      "originalSha256": "8925b7b8522fd28e9a7918d463376c8f3db5f3f2055abf5c6d553fb8910b0dbc",
+      "replacementSha256": "47a8f969c49f91f5cc8b74b9bdd33f3b4ec6b4f84840e4fbbe879e2269356527",
+      "width": 1261,
+      "height": 1600,
+      "basis": "K1",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/products/baslac/supplied/baslac__baslac-45-w10.webp",
+      "originalSha256": "5e74b77289671233a8dd1c71acd0602334bf9037c73a3592386cc35c1ea28b62",
+      "replacementSha256": "e7c59f624cf5a7794cc2ea7b332495080434deb12ed1f53d1e7d7fd25c3d229c",
+      "width": 619,
+      "height": 1600,
+      "basis": "K1",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/products/baslac/supplied/baslac__baslac-50-10-2k-primerfiller-hardener-extra-fast.webp",
+      "originalSha256": "a25ad669d0b4cfb9d1121b94d504666f158c003ee5372166bf914be2e99f9b04",
+      "replacementSha256": "24662a9b96ecbc134b2bd2739f55d194d183bedfe61bb46d1d09cf0ca512008f",
+      "width": 1000,
+      "height": 1600,
+      "basis": "K1",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/products/baslac/supplied/baslac__baslac-50-30-2k-hardener-slow.webp",
+      "originalSha256": "b6ff7a75d17a560302a735047ced90ed7f67fd76c1b0f482ff198ed87e718133",
+      "replacementSha256": "2e123b981c5d40fb44ef9bcf555afd3c921e927ea7b2f8bcb3083c2539788d41",
+      "width": 1000,
+      "height": 1600,
+      "basis": "K1",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/products/baslac/supplied/baslac__baslac-50-415-2k-clear-hardener-fast-voc.webp",
+      "originalSha256": "0fd92d4239922e25ed9d9563a509d29a7a5025d58d56699df41787e54e46467f",
+      "replacementSha256": "0a6eab74010fea7c5cdb97ad0c540ca7ffcea66e780fbc6a1f98ff441b28ad98",
+      "width": 1550,
+      "height": 1600,
+      "basis": "K1",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/products/baslac/supplied/baslac__baslac-50-420-2k-clear-hardener-normal-voc.webp",
+      "originalSha256": "2461eaf8f710d44b0d201c2dca5c598ed05d7d036eea24613ac9219460450e8b",
+      "replacementSha256": "c73e1d77de89db21d3532ceea772c87c90c14bdc3adad47ed1506d78650964e9",
+      "width": 1550,
+      "height": 1600,
+      "basis": "K1",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/products/baslac/supplied/baslac__baslac-50-430-2k-clear-hardener-slow-voc.webp",
+      "originalSha256": "cb305048a8c7b51374978ff32c140a9c3bb2aa95b8010dae8ff4f804f459a106",
+      "replacementSha256": "39bec7571136bee0fe9777909526b27bc984af2edc811ae3f0543ced173533fb",
+      "width": 1550,
+      "height": 1600,
+      "basis": "K1",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/products/baslac/supplied/baslac__baslac-50-45-2k-activator.webp",
+      "originalSha256": "7e874b8c406d535a414353bb35e89f6925b2032244ca4a44f8d6e22801831c21",
+      "replacementSha256": "6692dad029afc9263cbf88dcf20b84b93654fc9f5bb4c23819bd6c292df63c9f",
+      "width": 1454,
+      "height": 1600,
+      "basis": "K1",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/products/baslac/supplied/baslac__baslac-50-510-ambient-clear-hardener.webp",
+      "originalSha256": "288f4fc9da196975260047aed2bcaa569598240023911d853b82c8a22b3513ab",
+      "replacementSha256": "7b87d6bc090c9238a04c15516a81836daf7cc7f169a4def86fe662a909414b14",
+      "width": 1454,
+      "height": 1600,
+      "basis": "K1",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/products/baslac/supplied/baslac__baslac-51-515-2k-hardener-cv-fast.webp",
+      "originalSha256": "eb4902d6e558d049636cafc3504b1571997edd6889457e0cbd5bf4dd95c60070",
+      "replacementSha256": "ab4043e6ea93b88c36502372d0916ed99690ddec6a68b11c2b2b9eb27e6f2579",
+      "width": 1550,
+      "height": 1600,
+      "basis": "K1",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/products/baslac/supplied/baslac__baslac-51-520-2k-hardener-cv-normal.webp",
+      "originalSha256": "24863c2170cde9c29fc804cbfff1ff4829b3df7e4297f99718552e8c12eb9209",
+      "replacementSha256": "df634c0a40f60a35960c495f9da264e560becfe2dabfdcc0aae86e8dddc8b9c2",
+      "width": 1550,
+      "height": 1600,
+      "basis": "K1",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/products/baslac/supplied/baslac__baslac-51-530-2k-hardener-cv-slow.webp",
+      "originalSha256": "e598c6d5981c9bf369f8c6870b3453ec48d3f4ccd617c6de358f3585a743cd5f",
+      "replacementSha256": "261d1aebba2d04d6d80502932df21fe14c1e8b9558a92045b28b10981a9f0c67",
+      "width": 1550,
+      "height": 1600,
+      "basis": "K1",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/products/baslac/supplied/baslac__baslac-55-10-ep-hardener.webp",
+      "originalSha256": "8b9048bd647571b2d808e49dacb135a47c1242d761c4967edfa936d5a89fb5f5",
+      "replacementSha256": "cee84d4a0fe16e02cb6369529085ca4508613b7ea340a6b163c58b0b258fbd9b",
+      "width": 1000,
+      "height": 1600,
+      "basis": "K1",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/products/baslac/supplied/baslac__baslac-56-20-bodyfiller-hardener.webp",
+      "originalSha256": "7d024219927e274b675b345aaf62acbb1fc638e37055e86269e8efb3c11a029c",
+      "replacementSha256": "d14f848243c8f4e77ca6a86b09d5e5c7b64dbf26c3ffb0ab47611edd2b2a41eb",
+      "width": 611,
+      "height": 1600,
+      "basis": "K1",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/products/baslac/supplied/baslac__baslac-57-10-additive-washprimer.webp",
+      "originalSha256": "44f10e818d3978d770a7004133ce89eefe9e8dff78c7e05b2903208779c817e6",
+      "replacementSha256": "909b8c18488c1da819a39d0351fb20bd54365b4a8298582066cac304ce876a32",
+      "width": 619,
+      "height": 1600,
+      "basis": "K1",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/products/baslac/supplied/baslac__baslac-57-30-additive-washprimer-slow.webp",
+      "originalSha256": "44a46c825bc78de389a58a9d06d4cb2fb5614b7d3d086eb2040ed13e275705f6",
+      "replacementSha256": "d94943964c67663406e916dd9abca35406169e2079c4d4f1b38261c52e04bed0",
+      "width": 795,
+      "height": 1600,
+      "basis": "K1",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/products/baslac/supplied/baslac__baslac-60-05-speeding-reducer.webp",
+      "originalSha256": "6ac72815557af0e250f33b4dc8c794c01776b02635d7d97e04c7f0e1421286c2",
+      "replacementSha256": "b127fff7bf599cc3ffe1cccf7f9d986e83b31b4b5503b3aadc0e3ab1aaf851a7",
+      "width": 1000,
+      "height": 1600,
+      "basis": "K1",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/products/baslac/supplied/baslac__baslac-60-10-reducer-universal-fast.webp",
+      "originalSha256": "e870e8e813ba4c871fb16037dbd7dafc7d63271787e27014f809ae16c3595ed9",
+      "replacementSha256": "005190644be2262c80e10b08d1c3ceaef99983638359b9589363f363ad4e8f1a",
+      "width": 873,
+      "height": 1600,
+      "basis": "K2",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/products/baslac/supplied/baslac__baslac-60-20-razredjivac.webp",
+      "originalSha256": "8c1bc3c6b792ff3d7d43ecf246c4928a475ff2a0b524ed8cb058683a08fd15f0",
+      "replacementSha256": "45c35b3c03ad2fc4da2d3cdd615d98d06cdc458f4c97be5ca0ff53f3005ac04a",
+      "width": 873,
+      "height": 1600,
+      "basis": "K2",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/products/baslac/supplied/baslac__baslac-60-30-reducer-universal-slow.webp",
+      "originalSha256": "968a6135c57327207ca8d483905366942298defb7e1e8f1057eaee60dc0b4857",
+      "replacementSha256": "420865ad5ff1c431b8ed28de827073713205e49cbd81725a9e8d739e87cb23cc",
+      "width": 873,
+      "height": 1600,
+      "basis": "K2",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/products/baslac/supplied/baslac__baslac-60-40-reducer-universal-extra-slow.webp",
+      "originalSha256": "100ca816566dbe24331566fe1354edd760d1732b03ea30d738f99eac690ed0df",
+      "replacementSha256": "7b5f1f5cb389d0e2ec6c993f7cc35e799f2593d9b9ba37ce45b0e189500b1b8f",
+      "width": 1000,
+      "height": 1600,
+      "basis": "K1",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/products/baslac/supplied/baslac__baslac-65-10-blending-reducer.webp",
+      "originalSha256": "219b224052378bbe7ea1f329a636ff0a1ecf7baae22f52883fcbf5e017a67739",
+      "replacementSha256": "94e0f3635d57fe6420506e7400745da142994ec941a8ff57b2211294f2336111",
+      "width": 1000,
+      "height": 1600,
+      "basis": "K1",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/products/baslac/supplied/baslac__baslac-70-10-silicone-remover-for-oil-silicone-and-grease.webp",
+      "originalSha256": "b7dde7d5ca42b737dc8b705015a3c1acb83e811674b1929abb201341487a1c3a",
+      "replacementSha256": "a7da5b06e3f9d735abc87ba67880f9e00f5915534ed7f23494fc514f795e2c56",
+      "width": 1000,
+      "height": 1600,
+      "basis": "K1",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/products/baslac/supplied/baslac__baslac-70-45-cleaner.webp",
+      "originalSha256": "c367efcdd49ac09d204efa1a0ef51ab0360bde914840f0c4773a9dc96c6a0a23",
+      "replacementSha256": "68ce1c7fb0c98bc5dba3c072948b72155b8f96a59f8f634f280bbd8db41c7c15",
+      "width": 1045,
+      "height": 1600,
+      "basis": "K2",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/products/baslac/supplied/baslac__baslac-81-30-additive-chassis.webp",
+      "originalSha256": "5515e3d31fd479f1d6c9e6811af244df3ff39fe24db0ddecdd94807b01202c7f",
+      "replacementSha256": "f0ad081c460f3882348f971722b36778759dcb38e6b6edc4138222394e50b0b0",
+      "width": 1207,
+      "height": 1600,
+      "basis": "K2",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/products/befar/catalog/befar-anti-hologram-2.webp",
+      "originalSha256": "f0b4cca1bac42f843fa778e10a6aed0b799f11da69e9ab41ff0f201d33f58fec",
+      "replacementSha256": "d27ed20c24c41cceeb4cf0d6d54141a44d809c50f9744328cf0fe0bad614ba0c",
+      "width": 1600,
+      "height": 1067,
+      "basis": "K2",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/products/befar/catalog/befar-anti-hologram.webp",
+      "originalSha256": "295c8103e2c7cb11a7925a1c077b876f27e658624a267aae749e12f789c642b8",
+      "replacementSha256": "fc578d2cb42ea5ff6cd7357dd90094cdcf081164d7777d44805b19f44d482136",
+      "width": 1454,
+      "height": 1600,
+      "basis": "K2",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/products/befar/catalog/befar-auto-polish-2.webp",
+      "originalSha256": "0c6d11f140849a5f4039d60f2ed6957036714a9effaeac62e7978bccab4358d8",
+      "replacementSha256": "a259763fd1dba4ac25308fba7cc22ce868549786bacbd8de10f61d5edd27f501",
+      "width": 1600,
+      "height": 1067,
+      "basis": "K2",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/products/befar/catalog/befar-auto-polish.webp",
+      "originalSha256": "643cded68e441751d09c123b369288b3a7b66d745c70b44f2fd3ec9bd80348a3",
+      "replacementSha256": "555f73dfa0490f261eae9f54d0c747d17141268f4ed109faa67b0b904bfd92f6",
+      "width": 1469,
+      "height": 1600,
+      "basis": "K2",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/products/befar/catalog/befar-backing-pad-3.webp",
+      "originalSha256": "6c05ed436a50a0b068a58c57cd05c14c3b0a5d3f84a30fb5b00f14543655a6d0",
+      "replacementSha256": "a5ffc897e755668d2ec06a6ee98d845920b356dfa9fa9e17a8707dccf36e2c24",
+      "width": 1600,
+      "height": 1040,
+      "basis": "nova",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/products/befar/catalog/befar-backing-pad.webp",
+      "originalSha256": "db818e29169ad355ddd8a415bd67d37729386803a2ec0e496738d8fa3f47a534",
+      "replacementSha256": "f6d9a591931c17eaf71fe325c3c99597b7d01b9fdbbb9c3520d45c7ec8466789",
+      "width": 1600,
+      "height": 1178,
+      "basis": "nova",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/products/befar/catalog/befar-carved-velcro-polishing-pad-4.webp",
+      "originalSha256": "67cbe9a0a1023bb7bf097372c4004f73958e2cca9fc902b7629591481619457f",
+      "replacementSha256": "e6a4c22ea8e2c5cfd10844832a00dd842380f2500c422c09c15368e0dd8ee01c",
+      "width": 1600,
+      "height": 1066,
+      "basis": "K4",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/products/befar/catalog/befar-drill-type-headlight-cleaning-pad-2.webp",
+      "originalSha256": "a8a64fd5497794104dab2c84e4d4d998274846d133fb323c733aa0a1b2c76b21",
+      "replacementSha256": "15eb55b3006a80151037552a8abf862556bfc3b61ffbf065a779ab500a1ba281",
+      "width": 1066,
+      "height": 1600,
+      "basis": "K1",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/products/befar/catalog/befar-ellipse-corrugated-polishing-compounding-pad-2.webp",
+      "originalSha256": "afaa90f0666273970d40dc62c7abcd61de91c1f9bfd5b542d3e1b0bfc0d31a64",
+      "replacementSha256": "ee92388bfa52e97ad06ffc34ed83995114ae727bb4026a480c0bc223bff9d9ae",
+      "width": 1600,
+      "height": 1067,
+      "basis": "K2",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/products/befar/catalog/befar-ellipse-corrugated-polishing-compounding-pad-3.webp",
+      "originalSha256": "7607c846e6c026a3cf31d1b47422c6ae22ef70330cb035a15d2d2d72910d052a",
+      "replacementSha256": "a3b9adab83a7032ea62976770331df2e2b1c260c84b1a1bada7a76bc3f542207",
+      "width": 1600,
+      "height": 1067,
+      "basis": "K2",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/products/befar/catalog/befar-ellipse-corrugated-polishing-compounding-pad-5.webp",
+      "originalSha256": "7a50ee473a3b5ebe6bf68fbda2957d245261e45098f489b03289c61d44603e97",
+      "replacementSha256": "01efa27ffe3414ef1815c020c69ffbb7b899cb1a45f97d737a911b8a1f25b399",
+      "width": 1600,
+      "height": 1067,
+      "basis": "K2",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/products/befar/catalog/befar-ellipse-corrugated-polishing-compounding-pad.webp",
+      "originalSha256": "96dfa4f3c3d7bd4740602f74ab9bbbf989a6097a4853468dbfc897dce44fe593",
+      "replacementSha256": "2241ebba8204bc6cf20b422f0c35093e51c842705159b65b8e77e8a517f5b278",
+      "width": 1600,
+      "height": 1067,
+      "basis": "K2",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/products/befar/catalog/befar-hard-velcro-backing-pad-2.webp",
+      "originalSha256": "e8d7297c0a01112a477fd3a2263dd91760fd4304121bca90e7cfa1803d6a284b",
+      "replacementSha256": "eeb86a4a67e222ee28c67a59ce1775e3f45e50923b281c107d5f2d1830a0a28e",
+      "width": 1600,
+      "height": 1066,
+      "basis": "K1",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/products/befar/catalog/befar-hard-velcro-backing-pad.webp",
+      "originalSha256": "46df01da09545d4b8aff86a55df33c4c8bd66186f438c224079b594060a2dfd7",
+      "replacementSha256": "742ae5adb12666ed2e80d882c1e3dde4c7c761f0a4cb9fd35001f793583f7b93",
+      "width": 1600,
+      "height": 1066,
+      "basis": "nova",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/products/befar/catalog/befar-headlight-cleaning-set-2.webp",
+      "originalSha256": "eccd8dccd71185b55387b01f6fa741f58ccd5d31e5b0ff91a47f3f6e9d7efd14",
+      "replacementSha256": "0811aea1c4e7931ab9cb0635201a150a935740c0be9f7d3aab2effb731a453d0",
+      "width": 1600,
+      "height": 1067,
+      "basis": "K2",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/products/befar/catalog/befar-headlight-cleaning-set.webp",
+      "originalSha256": "1e4883b23568782e1975d7523b0c0a3c00bed63b49cf764c8bf357f4dd09871e",
+      "replacementSha256": "740b48ae7c86f4f4a97b62f8693bbabe0a4fa2fa5f3a98df5a4efb7f0ba0371f",
+      "width": 1600,
+      "height": 1066,
+      "basis": "K2",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/products/befar/catalog/befar-leo-ceramic-application-block.webp",
+      "originalSha256": "f5b87011b3bcc1aaf275462a05e3fb290cbec5b29dc9220b2ffb253d4200b347",
+      "replacementSha256": "817dd696c4f216e0d2220481eb87480ba922b4a9237f962e7ddac8bb9a5d6874",
+      "width": 1600,
+      "height": 1067,
+      "basis": "nova",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/products/befar/catalog/befar-leo-compound-polish-set-2.webp",
+      "originalSha256": "59084824349b83c44bae739cfec3dca9f03f6032ad6b2ba817f9f4076354df87",
+      "replacementSha256": "c696b31f20a7b60789944c9793cb10ea6b4908b911f4f97d685c2ead2097a789",
+      "width": 1301,
+      "height": 1600,
+      "basis": "K2",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/products/befar/catalog/befar-leo-compound-polish-set-3.webp",
+      "originalSha256": "dc31cf553237ba344cdb4caa7dadd514ed07fb6a43a0b02ea105859b5a7b8425",
+      "replacementSha256": "293a181c7f62ad2a6974d48a3cfcdf7760a13a77ca6a3386891c52654b56024a",
+      "width": 1226,
+      "height": 1600,
+      "basis": "K2",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/products/befar/catalog/befar-leo-detailing-backing-pad-2.webp",
+      "originalSha256": "f1ff0bdf3414f7baa3d0845124cae66f099d4e10d51404c7a534e94f328ddaa5",
+      "replacementSha256": "6ca999f06157a0dbc918b3b462e1629a9982f03aa363b3ed7305e68e4aa18ab7",
+      "width": 1600,
+      "height": 1079,
+      "basis": "nova",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/products/befar/catalog/befar-leo-detailing-backing-pad-3.webp",
+      "originalSha256": "cae9c39cc863a26ef84aba192bf0f0ecce69d26af24aa491454e62ada8aead45",
+      "replacementSha256": "972d5b35006951d0643f71c1aa6bc36ad43f86224e03e2addb8772b7faefb9c9",
+      "width": 1522,
+      "height": 1600,
+      "basis": "K1",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/products/befar/catalog/befar-leo-detailing-backing-pad.webp",
+      "originalSha256": "70a5d29c61c2df173a97a9141802d5ffb71f59d6d627e95ab02710bff3b1fd25",
+      "replacementSha256": "15e3aa1230c1e81626ee0f35c44cccbb6cf9a8a62e260b78aa06d40065c1ca52",
+      "width": 1250,
+      "height": 1600,
+      "basis": "K1",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/products/befar/catalog/befar-leo-hamburger-pad-2.webp",
+      "originalSha256": "bc90f6252e7147e129a6bed5651b019198dc6673650e531ee7ddbaabd80b0f43",
+      "replacementSha256": "41ddb5ad1c6b974449bf1f8f35a0db36fbd2e1e1c4ab79528668e4beaafaff9c",
+      "width": 1600,
+      "height": 1066,
+      "basis": "K1",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/products/befar/catalog/befar-leo-premium-advance-velcro-compounding-pad-2.webp",
+      "originalSha256": "303a6b9fc97636ed496a4e6023180cf4344684b6ed4930e72022f05ddfe0119c",
+      "replacementSha256": "5e5078142bfd096e5287a063695c47ce819c4352c4fcb632b98166b5acded2cb",
+      "width": 1600,
+      "height": 1066,
+      "basis": "K1",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/products/befar/catalog/befar-leo-premium-advance-with-applicator-compounding-pad.webp",
+      "originalSha256": "099ee6bb2b7e1243891ec3d062f682e1f423b93e720efaa9f8b462bf78dcf5f7",
+      "replacementSha256": "8b257e4098acc9b3dd6f26b93a8eda46bc3266f8a88871108d23f0ede5221ce3",
+      "width": 1600,
+      "height": 1468,
+      "basis": "K1",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/products/befar/catalog/befar-leo-premium-compounding-pad.webp",
+      "originalSha256": "75efbae4da6584a536be9b2bd7bcd838a1a9ecdb5129fefbd3cdfe2a65822c43",
+      "replacementSha256": "ecb4dad24d45ee795f03cc1072f424862edecf6f578ae9acdea242cdfcc0d762",
+      "width": 1600,
+      "height": 1066,
+      "basis": "K1",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/products/befar/catalog/befar-liquid-compound-2.webp",
+      "originalSha256": "7ea081f572c506c92d339b5b302cee07b49bc1fc9e772b79b799a47fde900ec1",
+      "replacementSha256": "c418a7900ac6e19817872ed63e103ba9f44b44199ba5ec3f44349bf3c1c17448",
+      "width": 1600,
+      "height": 1067,
+      "basis": "K2",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/products/befar/catalog/befar-liquid-compound.webp",
+      "originalSha256": "9ce703e9da713685e020cf353e210432681aadd40e013a228e487c324497bbfd",
+      "replacementSha256": "7a2cd5b417dd4680f60bdb7614eaf43a6b640ac55327790f52ed96b86d13a217",
+      "width": 1454,
+      "height": 1600,
+      "basis": "K2",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/products/befar/catalog/befar-medium-hard-velcro-backing-pad-2.webp",
+      "originalSha256": "0b74f36bb9545fb14b6a1e200440a911945467709c70371786176189265e1a99",
+      "replacementSha256": "247152c0dcf6a1a721fc91b2a0ed9db9ebc3a16a761fc4452dc16545087ffaf3",
+      "width": 1600,
+      "height": 1066,
+      "basis": "K1",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/products/befar/catalog/befar-medium-hard-velcro-backing-pad.webp",
+      "originalSha256": "0679feccab6fe58a42fdafc665e716f295cdd7550e0680c76531aa44c9781a69",
+      "replacementSha256": "21b11508a2c0856ab5a716108a271e904ef3b057ab95e08947ed1896725cf8af",
+      "width": 1600,
+      "height": 1066,
+      "basis": "K1",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/products/befar/catalog/befar-microfiber-cloths-2.webp",
+      "originalSha256": "5ecf8fadd6fc4f5bbfd7609495a998627e841fd42e1ed6b522b5ff0f744d290e",
+      "replacementSha256": "34740a46efc7bcbca301e801400163693e39c1f48f26cbcf9d09d721b66ddd3d",
+      "width": 1066,
+      "height": 1600,
+      "basis": "K1",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/products/befar/catalog/befar-microfiber-cloths-3.webp",
+      "originalSha256": "038708ca7e9282f5690766a893ffce61f6ad957a4dac96a6261c8c44c24fa745",
+      "replacementSha256": "cbc30bd462690e5340c6a829ed5354932b6115c971d411e6e8ab2c14b76b86b7",
+      "width": 1066,
+      "height": 1600,
+      "basis": "K1",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/products/befar/catalog/befar-microfiber-cloths.webp",
+      "originalSha256": "190f8e46ae767baf02f804ea7091ec7a6e87936ca96dc830153c347f50e57800",
+      "replacementSha256": "41999661b15ba46cec67c934944d7ef5ec6694c6e1b4d45b45162aa24bfba9f9",
+      "width": 1066,
+      "height": 1600,
+      "basis": "K1",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/products/befar/catalog/befar-non-woven-abrasive-2.webp",
+      "originalSha256": "21354de4227970be383ab622d8279c5799ff0f003625e90a12d46210faa3ced5",
+      "replacementSha256": "bda25dee3ba2ddfd83b4c0803a3129046bf05e660edb7f552fdbca665df2c9bc",
+      "width": 1600,
+      "height": 1066,
+      "basis": "nova",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/products/befar/catalog/befar-non-woven-abrasive.webp",
+      "originalSha256": "d504c5fd2272b828ea2999d2cbfd41d399bfc7dd4d827ec4bb6fdc5cd988418c",
+      "replacementSha256": "19ddd3bc9b52dafe4570d44e49ffee84e42657b15dea2a77dac291b99a664c13",
+      "width": 1600,
+      "height": 1066,
+      "basis": "K1",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/products/befar/catalog/befar-paint-protector-2.webp",
+      "originalSha256": "8c165a1cf6b88cdbfe45527e6d7553ec2042b20aca35ff4b33b986b5c5391cb9",
+      "replacementSha256": "f82dd3d0f9f74be9cc438c9b5303f7fe0f3e2b756f2f2063bb731418a03949cc",
+      "width": 1600,
+      "height": 1067,
+      "basis": "K2",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/products/befar/catalog/befar-paint-protector.webp",
+      "originalSha256": "64ebc3e2d3bfc07f0099e5374032d871d3f81b2856eb272dca74bde1e33bf5ad",
+      "replacementSha256": "69c45e439ccef4bc643257a887b08d1c192ce80a0377380eae26e270f0ee8955",
+      "width": 1600,
+      "height": 1067,
+      "basis": "K2",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/products/befar/catalog/befar-plastic-putty-applicator.webp",
+      "originalSha256": "aa3560bf66aeb28007003a079418b40994ddefec87fe1da276aca26e2aad5c46",
+      "replacementSha256": "3082f2957abe991f3fb96fb144df5de5d1ba1abccda99e7ee36169bcc2f0ed8d",
+      "width": 1600,
+      "height": 1068,
+      "basis": "nova",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/products/befar/catalog/befar-plate-type-felt-backing-pad.webp",
+      "originalSha256": "66353bde9f5d0140da497419cc1b66ad5823a55b44decd5068ad77e0953f0843",
+      "replacementSha256": "fc7de11618a03b5df5a50c93ed8cca78091619a7dda5e10e78824eaad1d25d0a",
+      "width": 1066,
+      "height": 1600,
+      "basis": "K1",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/products/befar/catalog/befar-plus-with-applicator-compounding-pad-10.webp",
+      "originalSha256": "dc8beef587b009bac3d286eccf49e65f9813670f1ad5a37106f8a48c8797fd39",
+      "replacementSha256": "bb5be156017bcd7af3b00545413965e9e8454f12801011bc1545df9943ac1887",
+      "width": 1600,
+      "height": 1066,
+      "basis": "K1",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/products/befar/catalog/befar-plus-with-applicator-compounding-pad.webp",
+      "originalSha256": "ed67446776e32f4e8e2fcf2dcc1411d8e021c61159e054d1a4da8a762121a3d0",
+      "replacementSha256": "61265a84672487f3654d85b19a3d71f24b0bf3cae65a05ae1990afece13c9fe5",
+      "width": 1600,
+      "height": 1105,
+      "basis": "K1",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/products/befar/catalog/befar-sanding-block-hard-red.webp",
+      "originalSha256": "c8d76e270f33d69068dbc28d5fd9332b46bff4f5a55bc30b34c46be451b8398e",
+      "replacementSha256": "5bf31bad0e3dbfcd9a97ba5fcf184194e7ff5e1ad27e5fe526281f76247d4535",
+      "width": 1600,
+      "height": 1272,
+      "basis": "K1",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/products/befar/catalog/befar-sanding-block-soft-orange.webp",
+      "originalSha256": "381dca8f1cb5955410d328aee3502c4ffe846db5fcce8b764892e417ebca3780",
+      "replacementSha256": "388b0ea378ca06d92d121a1f431580e6d660bb43f4310c1b9edb3d3208a5d17a",
+      "width": 1600,
+      "height": 1273,
+      "basis": "K1",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/products/befar/catalog/befar-sanding-pad-2.webp",
+      "originalSha256": "f61d6f7e41e0dcddc82b38eda227d03577f57f9796935ac34aa41bd7c194f1f3",
+      "replacementSha256": "a47b6024b9bb76d9e199e6a62747fb61e3fccb0b36d79a3c7b8f3ea301af0941",
+      "width": 1600,
+      "height": 1066,
+      "basis": "nova",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/products/befar/catalog/befar-sanding-pad.webp",
+      "originalSha256": "38576e2221898a9a4c50122d290582cee93b231e10d9c0d0cdb2b5230e5549b0",
+      "replacementSha256": "78ab3307da9adc46eb7514fb184fbb1c4274f649642189eddce440aaa5923cc6",
+      "width": 1066,
+      "height": 1600,
+      "basis": "K1",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/products/befar/catalog/befar-sandwich-velcro-backing-pad-2.webp",
+      "originalSha256": "a98df6d4a7608efc7c7344a49469af8360e550e24ea376486bc954fb1fa80c1a",
+      "replacementSha256": "77a8951df199774efd835931acf791e777eb4ae54b726f0cf0b62f45a8a2e881",
+      "width": 1600,
+      "height": 1094,
+      "basis": "K1",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/products/befar/catalog/befar-sandwich-velcro-backing-pad.webp",
+      "originalSha256": "57231ddd40bf082885a41d55e511960f29166395f22a79fb1d1b5f0bce59377b",
+      "replacementSha256": "d2b76ebdd0f06999c43707fa6c4e7eaa0ca3315cf23cd6ad043793ad9a778177",
+      "width": 1341,
+      "height": 1600,
+      "basis": "K1",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/products/befar/catalog/befar-soft-velcro-backing-pad-2.webp",
+      "originalSha256": "6439cfb055df190c500b5bdd4ffb84934d6a510fec443f871e025dd930242660",
+      "replacementSha256": "0f0eccb90acdd28b3d13434b96a5fcdc36a21623036ab83801941e3e2a3bcb62",
+      "width": 1600,
+      "height": 1036,
+      "basis": "K1",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/products/befar/catalog/befar-soft-velcro-backing-pad.webp",
+      "originalSha256": "76a172d41b014ca53b1c20c51629bf098a2e864b3e011d791d38d6737f2e8839",
+      "replacementSha256": "0cb7e2a436df843c9a091c6215f0a5e1d4515af9117da770b3e25c88daf17d0c",
+      "width": 1600,
+      "height": 1066,
+      "basis": "boja",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/products/befar/catalog/befar-static-foil.webp",
+      "originalSha256": "a28e63bab858dba45dba7a7a9e64c536138cd88d61295fc6c8179928c1fbc3b1",
+      "replacementSha256": "1f4f714e4b8a22d77403fdfe524b42a951243bf3f63435fb20db54764784e824",
+      "width": 1600,
+      "height": 1058,
+      "basis": "K1",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/products/befar/catalog/befar-tack-cloth.webp",
+      "originalSha256": "3dc2561b3c25530b82a2e8cc31af6c05b03e7884edf55d02caa059574513fc49",
+      "replacementSha256": "f68c5661c6f4a655be7956db503d16bdac7c17c3e7a8a1b2dbbc5d16115b9ee3",
+      "width": 1600,
+      "height": 1070,
+      "basis": "K1",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/products/befar/catalog/befar-turkuaz-compound.webp",
+      "originalSha256": "8094335c13de114b4b68b950b0588af1c9933e3d80c3c81c9ad0c70aee3d325d",
+      "replacementSha256": "e1631a8a899d8df9721c03c5902998f6db1f5e81d3be2ba670bcf2157516030e",
+      "width": 1559,
+      "height": 1600,
+      "basis": "K2",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/products/befar/catalog/befar-turkuaz-sanding-block-blue.webp",
+      "originalSha256": "aa93d42152bedcbef855c37263899c1d773735c9c2a616a8fd347e32859f6769",
+      "replacementSha256": "ba8fbbab182c3bdd01dd0c027ec2dfd041daaedd7fc92645ec4ee09461a477e0",
+      "width": 1600,
+      "height": 1272,
+      "basis": "K1",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/products/befar/catalog/befar-turkuaz-with-applicator-compounding-pad.webp",
+      "originalSha256": "e070bc0347397cf770199a7721d918bc095c2e284a5d8b045f523bf2c8cd10d5",
+      "replacementSha256": "26aa37c672c98467ec329b2df0a5394faa9dd95529d8d412d1e4b23341b8f56c",
+      "width": 1585,
+      "height": 1600,
+      "basis": "K1",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/products/befar/catalog/befar-velcro-polishing-pad-3.webp",
+      "originalSha256": "3453da5b878f79ac1704b33ab762b2a2b0fa342a64ad68b60f84b016e9e21ac9",
+      "replacementSha256": "0176d21e406fb41b13d51209840bbc23d34b888017d29448f87a2f5df67c6f5d",
+      "width": 1600,
+      "height": 1208,
+      "basis": "K1",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/products/befar/supplied/befar__befar-carved-velcro-polishing-pad__05801.webp",
+      "originalSha256": "5c809f00eed5bdd3d256efa457de758b363b9cda42255cc20edea1d704106e32",
+      "replacementSha256": "398b2f6cca198a394cd2058742d50342ccda53d4758d78b1503c654c4b691e8b",
+      "width": 1254,
+      "height": 1254,
+      "basis": "K1",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/products/befar/supplied/befar__befar-velcro-polishing-pad__44807.webp",
+      "originalSha256": "a5e9f2a1b72833a8ad519b3764b92670cc8df8366be52f376059887595107428",
+      "replacementSha256": "3c26385904461288fb978f5efb0937407a0197b9d8c9a3e8177d656f47f95fb3",
+      "width": 1380,
+      "height": 1140,
+      "basis": "K1",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/products/befar/supplied/befar__befar-waffle-velcro-polishing-pad__04503.webp",
+      "originalSha256": "dc507991407ee25efd795ff611e94385df91aef9a8d81a066c6da018313c5519",
+      "replacementSha256": "39bde643508d8f4cc0715f569dc4141375d554d7a738a420f53f3436eb649a24",
+      "width": 1254,
+      "height": 1254,
+      "basis": "K1",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/products/befar/supplied/befar__befar-waffle-velcro-polishing-pad__448061.webp",
+      "originalSha256": "fd1c2648f516243ed963623c3e16db3e3f889ec91084e1eda16a1b5a8450151b",
+      "replacementSha256": "aa5a533cebac601c01c7eb82159f84693faae5927c9271fe417f7ce0c79aaa71",
+      "width": 1254,
+      "height": 1254,
+      "basis": "K1",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/products/carfit/catalog/carfit-1k-etch-primer-spray.webp",
+      "originalSha256": "d9ec376b0a74cc1517187636dd915ea9872d725c755bcc250068313aef06cf99",
+      "replacementSha256": "f4cf06e2ece9f22a51cd5b9954788488dfd65752321dac754b90d85a392360a0",
+      "width": 1000,
+      "height": 1000,
+      "basis": "K1",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/products/carfit/catalog/carfit-1k-hi-build-primer-filler-spray.webp",
+      "originalSha256": "0e6c318a1880156ec9f4b38661d98cc7557e61bfdb8afdb61564596fb5b2fe82",
+      "replacementSha256": "cfe7fd64afddce5cb64094625800737eba10021db51af8fb379ce0a370afb5be",
+      "width": 1000,
+      "height": 1000,
+      "basis": "K1",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/products/carfit/catalog/carfit-1k-plastic-primer-spray.webp",
+      "originalSha256": "4c1baa924ec71a7dbad2ac6620385ca3d509e858d531613390d6295ef82afa1a",
+      "replacementSha256": "ea8894fd922d1c1fa266c3b53876e0d151bf59a2ae9c0bec9d62014c2eb3135f",
+      "width": 1000,
+      "height": 1000,
+      "basis": "K1",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/products/carfit/catalog/carfit-2k-epoxy-primer-1-1.webp",
+      "originalSha256": "db234b685bf5f4f847642b7c777ef22cbaca4245f2916428b0e9c8f29a1fb931",
+      "replacementSha256": "e1c363fd0c52987bdcbba0ea05cf1c38b300aaa15ecc46597cb78c2f58bd96be",
+      "width": 1000,
+      "height": 1000,
+      "basis": "nova",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/products/carfit/catalog/carfit-2k-fast-air-primer-filler-3-1.webp",
+      "originalSha256": "03c51b4ffe924259f73d8cd2df394b87e3fcb4038dff3742822ecfa4a7a72728",
+      "replacementSha256": "cf9de7439a66e45dc7c41b3fef0e9255f1521d606bbb10bf6df330443c711920",
+      "width": 1000,
+      "height": 1000,
+      "basis": "K4",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/products/carfit/catalog/carfit-2k-hs-acryl-primer-filler-4-1.webp",
+      "originalSha256": "35e6081baaae02658a6cb4a83c98b92db6084ba0d0de5dc28799447a756b9663",
+      "replacementSha256": "19d17673f77e34accdaf180ce87ad6665e3238bf146951cb540ecdbb4d7cd402",
+      "width": 1000,
+      "height": 1000,
+      "basis": "K1",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/products/carfit/catalog/carfit-2k-hs-scratch-resistent-clearcoat-2-1.webp",
+      "originalSha256": "41899b0ed4c171d40892fea3b8f71cf805ed7883a5e7015f5e367cdcccd5d82d",
+      "replacementSha256": "89757fc65955c55cbbf7f571dee52d0b6221a162bdcafb15ff7d742f6db40256",
+      "width": 1000,
+      "height": 1000,
+      "basis": "K1",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/products/carfit/catalog/carfit-2k-uhs-low-voc-clearcoat.webp",
+      "originalSha256": "10b3e8ac3f4576a8dcf2c6b18477faecf9334c2ed806fc7447542bb9b8db006b",
+      "replacementSha256": "ead63eaf8d9a9a7f470229054d26c9f63bc7b1cc2c26f5459b9782349500e568",
+      "width": 1000,
+      "height": 1000,
+      "basis": "K2",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/products/carfit/catalog/carfit-2k-us-filler-4-1.webp",
+      "originalSha256": "3bf773b8dc19c7553671ec8691d154acc4862f5b434f8c23043d1f640f8a492a",
+      "replacementSha256": "ad0d7707ad82ad3e5cb678f211407344c0362dbd72873cbe9e6a02e9c727a2aa",
+      "width": 1000,
+      "height": 1000,
+      "basis": "K1",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/products/carfit/catalog/carfit-2k-washprimer-2-1.webp",
+      "originalSha256": "6b56d45d1aacad618132f52356555aaa60602a4c5da5190270483208a13e264c",
+      "replacementSha256": "971d2e7b44fcce1f9bc2869ac1657d9a91e73585cccbc4c00f31d86a41f72570",
+      "width": 1000,
+      "height": 1000,
+      "basis": "K1",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/products/carfit/catalog/carfit-black-paint-spray.webp",
+      "originalSha256": "72f0ef850d06f21cdfcc18c5d022ca4c93aeee4a25870d8507be6afe16ab9aa3",
+      "replacementSha256": "4aa063d5cfe19069e5901672b4d5d66342f7cb46d1deb56f5110930109b56cbc",
+      "width": 1000,
+      "height": 1000,
+      "basis": "K1",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/products/carfit/catalog/carfit-blending-tape.webp",
+      "originalSha256": "c78cb2458b768cb73efe76b9f634b2f63ae5771a0da348514972291e09107100",
+      "replacementSha256": "644ee6fdab75efe3a7c31af69f422fa2be9b2406aac90fefed39c5a20e2426fa",
+      "width": 1000,
+      "height": 1000,
+      "basis": "nova",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/products/carfit/catalog/carfit-car-clean-multi-2.webp",
+      "originalSha256": "1494a492719a0ba10c5da3e2624df8efc48b236d02000fb9d41fc06dd2728b0a",
+      "replacementSha256": "45f297363a790db12a4fcfac2da1c1c348ff0a256e6a83e28d97272af0e82807",
+      "width": 1600,
+      "height": 1333,
+      "basis": "K1",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/products/carfit/catalog/carfit-carbon-putty.webp",
+      "originalSha256": "4c6b2464a0276cbb85b0214e209dbcc46e3c412dc9447646159dd4dea4e474fd",
+      "replacementSha256": "6bfaf47b08433fa45560b0918efa66ce172f20d0f7b00c5f59f6ef91e4bd1135",
+      "width": 1000,
+      "height": 1000,
+      "basis": "K2",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/products/carfit/catalog/carfit-cavity-preservation-spray.webp",
+      "originalSha256": "6381ab6e958accd56ed7eb88af7ede36dda64efe4fb387f3dffb06fea19f5339",
+      "replacementSha256": "9da59db5dded5455957f7874cd6564bb80ab65ff15755748e9c3cda0a7d6ce6d",
+      "width": 1000,
+      "height": 1000,
+      "basis": "K1",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/products/carfit/catalog/carfit-clearcoar-matt.webp",
+      "originalSha256": "d6c449fdf8f17eb0a27e7bfeb4ced0a30008ebe9769553309d30db04756f2a22",
+      "replacementSha256": "17255e6ff6bb1839581edcb924bb6f9c4f82535cf8bf80516bfe83dda2b85e27",
+      "width": 1000,
+      "height": 1000,
+      "basis": "K1",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/products/carfit/catalog/carfit-cover-tape-up-to-80c.webp",
+      "originalSha256": "f9484c11a15f13ffdd3796edc4747bd6e18dfeb8ad4b4adff83893e3de80763d",
+      "replacementSha256": "2f4be77cb108f1440a56c940bb794f861d17865b4e406826c9c9dfeb58fa6727",
+      "width": 1060,
+      "height": 1060,
+      "basis": "K1",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/products/carfit/catalog/carfit-disposable-seat-covers.webp",
+      "originalSha256": "d102fd1d50e4a03d2c1f1ab168fcd69a86631d1bef89dfa048d03a2f529bfb98",
+      "replacementSha256": "bf962d8a0ee43567d7f51ee3d7c2c78738fd1f33447cbcd4f2b1470c33f80680",
+      "width": 1000,
+      "height": 1000,
+      "basis": "K1",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/products/carfit/catalog/carfit-fade-out-thinner-spray.webp",
+      "originalSha256": "d1671cb9762d6944104b35462a6e2714ab154c89aff060f8177fcdccee3706fc",
+      "replacementSha256": "c109b05636113860179680fa606809b3f22838fc13cd1f0606c8c7fc525c198d",
+      "width": 1000,
+      "height": 1000,
+      "basis": "K1",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/products/carfit/catalog/carfit-fillable-spray-can.webp",
+      "originalSha256": "2092337d0b289776a1ef9aa510ede5e50a777cf482ea2a65d67f77aa03f562a2",
+      "replacementSha256": "a26d2d3dc33e1749f7b6561792446a786a9c2c8cc3c4ae2eff6b7c151a5895ed",
+      "width": 1000,
+      "height": 1000,
+      "basis": "K1",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/products/carfit/catalog/carfit-finishing-compound.webp",
+      "originalSha256": "eebdf3e739b8766d9911c6bee98f92a981010926b113e19cc48d094aa842aa0e",
+      "replacementSha256": "58583a7d6ddc91ceac18f88c436654b9b0ee2d3704c0c9debda293ef1c35349d",
+      "width": 1000,
+      "height": 1000,
+      "basis": "K1",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/products/carfit/catalog/carfit-folding-paint-stand-premium-2.webp",
+      "originalSha256": "60faeebf7ed4e6dcc37405a89b27e9e2e3238a64983ebf6022fca68fdda03f7c",
+      "replacementSha256": "f4f9d8a5fdc89637ad40c56568d663e1e6040c0adbd8fc59eeb12af836236613",
+      "width": 1500,
+      "height": 1177,
+      "basis": "K1",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/products/carfit/catalog/carfit-glas-plus-putty.webp",
+      "originalSha256": "c4678843c7b515df6166ca55b892d2e75382d4c393a39001ac852bb6755f1ba7",
+      "replacementSha256": "9b46d80ff6aa46742995b3d12a13ee6045b28b6da7bbef4adb29ee8bd59243f2",
+      "width": 1000,
+      "height": 1000,
+      "basis": "K2",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/products/carfit/catalog/carfit-gun-cleaner.webp",
+      "originalSha256": "99b414d1660c136ba618cf1291934ee5d8cc661ec17a1edee246e47faa3384e1",
+      "replacementSha256": "f5f264f4bb0d36d5181d74dc56bbb68fd05be96c9fe9cad6c9b97820b01edc4f",
+      "width": 1000,
+      "height": 1000,
+      "basis": "K1",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/products/carfit/catalog/carfit-high-gloss-clearcoat-spray.webp",
+      "originalSha256": "3f31aeba77b227d23677170e435812477954f1b163da94737d311636b0f80f36",
+      "replacementSha256": "1375c68fd2c7ac13b271c0509eb233e5b3be00b1c426f781780afa08e35cdb2f",
+      "width": 1000,
+      "height": 1000,
+      "basis": "K1",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/products/carfit/catalog/carfit-interface-pads.webp",
+      "originalSha256": "8d5033ec7e890a7be85cb10092dae839b6e9f0bd499c728ff9634b5a2eb5b3ca",
+      "replacementSha256": "256f7c606af62f0730afa5cbc9927fb913eea0fe50a314a7954c6146bcf890a8",
+      "width": 1000,
+      "height": 1000,
+      "basis": "K1",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/products/carfit/catalog/carfit-logo-tape.webp",
+      "originalSha256": "c29dadf8621fe50f1cdb6e6f910e1dfb1712a0ddb29f2dd00296954aeff54a40",
+      "replacementSha256": "6f9c009400d7a87601767318f3550fdc593de69b2c325b6bdfdbeb21124c56ff",
+      "width": 1000,
+      "height": 1000,
+      "basis": "K3",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/products/carfit/catalog/carfit-manual-polishing-and-sanding-pad.webp",
+      "originalSha256": "34e1a5bd128bb3863df5bd3e03a55f831113fd453a7acea574404c3bca2167d4",
+      "replacementSha256": "3b1bc2037746c448f9b3de7d1bc2f226a6c6a52b7320aeade7b0223a0129c11b",
+      "width": 1000,
+      "height": 1000,
+      "basis": "nova",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/products/carfit/catalog/carfit-microfiber-cleaning-cloth.webp",
+      "originalSha256": "fabae8cec7063486da29095d24668342e457d335232340c0fdfbfde9d3c14f9b",
+      "replacementSha256": "5d76716b246de1236aa0b77b236360aeba3bfa80d1b1f2da12906df91b31d2b7",
+      "width": 1000,
+      "height": 1000,
+      "basis": "K1",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/products/carfit/catalog/carfit-mobile-masking-paper-dispenser.webp",
+      "originalSha256": "a8179f18d6c19cb1c658e8a6738e337599a23dd0a5a6b6c45fcd512fa03ee174",
+      "replacementSha256": "5d84ce0b832a92e8f7ea7972566dd4091634a3b5a092c39d6c811257af67ea7b",
+      "width": 1000,
+      "height": 1000,
+      "basis": "K1",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/products/carfit/catalog/carfit-multi-putty.webp",
+      "originalSha256": "2d83f301d416b74406ce2929239b5599dfd05d823580e53df49673bb365794d3",
+      "replacementSha256": "cb8bb0f2ade6f5032bc5457d100259c55b9db07523dd3d2031932fdf60a25c5b",
+      "width": 1000,
+      "height": 1000,
+      "basis": "K2",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/products/carfit/catalog/carfit-parking-sensor-masking-disc.webp",
+      "originalSha256": "285d923850280f29e817f06029ecdb16ba05fa8ecb324fb909f089f11431dc1f",
+      "replacementSha256": "0566498670bc8668507f4d612d4ecaa5266dcc96dc8ef064a0501d362d96d14a",
+      "width": 1060,
+      "height": 1060,
+      "basis": "K1",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/products/carfit/catalog/carfit-perfect-filler-4-1-grey.webp",
+      "originalSha256": "fd22b9df712808cd988d906e4182b09a7497468da13ca1de897f54f32b405218",
+      "replacementSha256": "570d41d93e5dfafdb470c406e09d72cbe7fe16d27c213f8bb4ef743e070a8fdc",
+      "width": 1000,
+      "height": 1000,
+      "basis": "K2",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/products/carfit/catalog/carfit-plastic-primer.webp",
+      "originalSha256": "7973ede34e64d4c2fb8eea6d69880214cdb71da30a55da57513d6ab095d23713",
+      "replacementSha256": "50753a135aa808f1c98b6193394d22ed7e2c33e2dae53bc7a950601c37d191e8",
+      "width": 1000,
+      "height": 1000,
+      "basis": "K3",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/products/carfit/catalog/carfit-plastic-putty.webp",
+      "originalSha256": "41de53899a9391d928569af81897dd72d495a079c445a6ff83fad52b48cc1d38",
+      "replacementSha256": "fde6b93d17d9f10dd44082e4745f1e1bbcc3716c82e2cd8fd48ad2c08ef6a3fa",
+      "width": 1000,
+      "height": 1000,
+      "basis": "K2",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/products/carfit/catalog/carfit-plastic-repair-kit.webp",
+      "originalSha256": "df08cf35a2ecfe188a948a108252e82ce381d436def0be23dc03c086a707dc66",
+      "replacementSha256": "09cfcd5be28088d73f8f1f7f8e4a7fcdb1dc6947e95718a610871857538fca15",
+      "width": 1000,
+      "height": 1000,
+      "basis": "K2",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/products/carfit/catalog/carfit-polyethylene-car-cover.webp",
+      "originalSha256": "1ffb4db732cf23e27b0ede93dbdb71c03b4eb71f0da958d6d04ed9a599525623",
+      "replacementSha256": "56640fa7b579e06f5c0409541c2f74d685e6be83729d96dfaf0fcbf6c1ef467c",
+      "width": 1000,
+      "height": 1000,
+      "basis": "K1",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/products/carfit/catalog/carfit-pretaped-masking-film.webp",
+      "originalSha256": "e7b7a5bb8b7a54b66391981693b778214f9712f03db952622b265f371d10c647",
+      "replacementSha256": "92e1534e13234c0141f72d1be4f2a114032f76f4297ae9d307adb8de5cb03727",
+      "width": 1000,
+      "height": 1000,
+      "basis": "boja",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/products/carfit/catalog/carfit-pu-adhesive-and-sealant.webp",
+      "originalSha256": "2d7473a620ccf6a8ba81f1d090e6a0883502a0e080e1578c17b5a0a11046e633",
+      "replacementSha256": "9d0d7d513d14d7e5abb01b740f65e590729440e061eb6813e3aa2a920853235b",
+      "width": 1000,
+      "height": 1000,
+      "basis": "K1",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/products/carfit/catalog/carfit-rapid-air-clear-coat-voc.webp",
+      "originalSha256": "37a291b81ad16f4b8a2b11e0d8096e166b7b05be9c584719bdd7a96036dafb16",
+      "replacementSha256": "4f8bccb00437a777007dfc42233526d68508ccd0babc45374bdc1fc07d3c1252",
+      "width": 1000,
+      "height": 1000,
+      "basis": "K1",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/products/carfit/catalog/carfit-rotating-paint-stand.webp",
+      "originalSha256": "ff146581d4e10188229aba5a29ff17b82ede2dfaaae96cd0b614c082f0d41aa7",
+      "replacementSha256": "1d4cc2be85a78eb540c487328196d4970c8290343fcd5bc95a1293ab27216211",
+      "width": 1000,
+      "height": 1000,
+      "basis": "nova",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/products/carfit/catalog/carfit-sanding-control-kit-and-sanding-powder.webp",
+      "originalSha256": "d437f815ee5b06f5a88a5cd45d858b263d6ed3cc949f9524dade156f071c1c39",
+      "replacementSha256": "f93db1a509d0fd65350236319f9cfa1e88a2d0f4cfe0518bc5fe23ba88a471b1",
+      "width": 1000,
+      "height": 1000,
+      "basis": "K2",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/products/carfit/catalog/carfit-silicone-remover.webp",
+      "originalSha256": "983360f3267b7ce5a0a15380865fe2e2d6438feb108872fa7fc4aa2a17cec99a",
+      "replacementSha256": "3d9a3dca16ca6866866fbee502617d74ddc23172a02c7f1676a3e24dbbbcd803",
+      "width": 1000,
+      "height": 1000,
+      "basis": "K3",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/products/carfit/catalog/carfit-silver-wheel-spray.webp",
+      "originalSha256": "ce3af6b2b219b3b27df8ebee70c9d5e2bf637e83b791449c918b627cda09ca09",
+      "replacementSha256": "e2534de9f7e6c102b0211d3f8bbdf0360b47377e2750b2ff8a6ccd1ea95a7626",
+      "width": 1000,
+      "height": 1000,
+      "basis": "K2",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/products/carfit/catalog/carfit-soft-interface-pads-micro.webp",
+      "originalSha256": "17963a7f8e3fbb15716e84198a0269297e6f77d65023beff1073975446dabfe4",
+      "replacementSha256": "80f561ca39674507a6fc2df857f2d33095182b2bfa522df06c4c67dcc3fe9697",
+      "width": 1000,
+      "height": 1000,
+      "basis": "K1",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/products/carfit/catalog/carfit-soft-plus-putty.webp",
+      "originalSha256": "e80406261cc916f62b760c5eb3963323344b6a25fe7735995ce215b332b642f5",
+      "replacementSha256": "9e6db9bccefb3b45d5be576dfcc8990a9a578ba99d465b367a09b8dfe0d1a4fd",
+      "width": 1000,
+      "height": 1000,
+      "basis": "K2",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/products/carfit/catalog/carfit-stone-chip-protection-spray.webp",
+      "originalSha256": "3d87e0ea8b0277c8722d5c89e60aae15c4f327c18a73fa7f1e79277f4bf41bb5",
+      "replacementSha256": "3d3655c0fa06f01f5a0d7d80db0c82ef24261ed773648164f1c2e75cc3dbfc44",
+      "width": 1000,
+      "height": 1000,
+      "basis": "K2",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/products/carfit/catalog/carfit-stone-chip-protection.webp",
+      "originalSha256": "c48f630b9f5f349c134201f00f622746be75a24f2c56da8d4c35c4b5895e7eee",
+      "replacementSha256": "7f546239076993069dfc2474a603af0d0de995978110dacf428b4c0adabbb6f5",
+      "width": 1000,
+      "height": 1000,
+      "basis": "K3",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/products/carfit/catalog/carfit-tack-cloth-super-wave.webp",
+      "originalSha256": "444900429a703b203719d80d9fd65a6847f5bc45a74b7524be061c4bd3141c75",
+      "replacementSha256": "0e816cd9669e21263cddbf1aa5fbb7d9dfe9e73f586acdc7338cd549f9166561",
+      "width": 1000,
+      "height": 1000,
+      "basis": "K1",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/products/carfit/catalog/carfit-tack-cloth.webp",
+      "originalSha256": "7247d80d19cd0a9c4fca2b270a9300f21c994df36d01725809d44180fcc5c3f8",
+      "replacementSha256": "a705724293de441d296eb91caca5808f73e2b18559add65cb3f7cb0e84acf5db",
+      "width": 1000,
+      "height": 1000,
+      "basis": "K1",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/products/carfit/catalog/carfit-tack-coating-for-spray-booth.webp",
+      "originalSha256": "0d50a4432d481fdbb060eeff8a0af8083ad4234d5931c89f3d485ba450b825f7",
+      "replacementSha256": "5c2dc24deac5c93749f5684990182a06a0f8fcc57b1dd7dd285acba82f5e9205",
+      "width": 1000,
+      "height": 1000,
+      "basis": "K1",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/products/carfit/catalog/carfit-texture-paint-spray.webp",
+      "originalSha256": "dda46ba74c4b2ac0c86ef6651b5dc3f89511c604cae7f9f5133f24b99d691fe4",
+      "replacementSha256": "c43bccda4d82e747aa7d6ada76c3ca68ab17b0d219db78d3f9bcd3c9a9d9d451",
+      "width": 1000,
+      "height": 1000,
+      "basis": "K1",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/products/carfit/catalog/carfit-thermo-paint-spray-650c.webp",
+      "originalSha256": "c180fa1a2f38f811b03efffef2a62d860831b3e669ea546b20fb0ba7554de9dc",
+      "replacementSha256": "b2ee4404cbc1d1e5d91e0d788fc72751561bf9d6f6cc5467092435009d52969f",
+      "width": 1000,
+      "height": 1000,
+      "basis": "K1",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/products/carfit/catalog/carfit-underbody-protection-bitumen-spray.webp",
+      "originalSha256": "509fd010673896a6770fad1c29cb2ad52ef632a52939e9f8fb5f8f5d1cd58b02",
+      "replacementSha256": "f27d8fa8a1e2947617118331dab141494b16211838ba45ab320eb2d54519e46d",
+      "width": 1000,
+      "height": 1000,
+      "basis": "K1",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/products/carfit/catalog/carfit-universal-thinner.webp",
+      "originalSha256": "2e30a19f092596b32a94f0b5861f756b1203d1c09391df55b3d5d88eb188b4f6",
+      "replacementSha256": "ac2a368474c565c816a03d6eea01ae870e4efeee9cf56803ee038f509d1e2ac4",
+      "width": 1000,
+      "height": 1000,
+      "basis": "K1",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/products/carfit/catalog/carfit-windglass-glue-black.webp",
+      "originalSha256": "13c5330c2d8cd59425048857871807c577cb7b11a2f6cd46c8ed51eebcc9539a",
+      "replacementSha256": "38f0d0c36696599d135cff976afcda45156e0fa386ccb5191f06c4176e237043",
+      "width": 1000,
+      "height": 1000,
+      "basis": "K1",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/products/carfit/catalog/carfit-zinc-spray.webp",
+      "originalSha256": "40fe4693c0c13e9acf9ba6810113522d81475606c4050cd8de3bcff18c8cf10b",
+      "replacementSha256": "36759018c68f9f08a88e90e0d5cce866ef05b03bac6bd7654c8caed3819b7498",
+      "width": 1000,
+      "height": 1000,
+      "basis": "K1",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/products/carsystem/catalog/carsystem-2k-clear-voc-speed-plus-2.webp",
+      "originalSha256": "9a64bc2f5ef37e9af51e3a441a96faaa11550a2647ccbf6c9b5226ec949b2ac7",
+      "replacementSha256": "4000adf941f2749991be7ab7f19a3a80775cd9a326a3cd12a3991c8d2a40201b",
+      "width": 660,
+      "height": 763,
+      "basis": "K1",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/products/carsystem/catalog/carsystem-2k-clear-voc-speed-plus-3.webp",
+      "originalSha256": "445a86bc93726bad8886870e269e3dfcb413c072d2b7cd385dbc0b6f6bdd170b",
+      "replacementSha256": "c84718a859425459c6ae21d90a095465b567c57e8a1b036b7cab49973d8eeea2",
+      "width": 660,
+      "height": 1290,
+      "basis": "K1",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/products/carsystem/catalog/carsystem-af-25-primer-wet-on-wet-2.webp",
+      "originalSha256": "0c834e22de5dd339618fd2938b7a55e5c0db901b9cb4b7b0b5146a0308204e58",
+      "replacementSha256": "3d1baa87852d1dd3e746f2315094e2d570e6bfbc390a0b6f664cc806e0c7d2db",
+      "width": 660,
+      "height": 1046,
+      "basis": "K1",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/products/carsystem/catalog/carsystem-booth-mask-2.webp",
+      "originalSha256": "78a0ce62af5e1bc1ebfb8dbe44e8f48b5c005c96c1d350cc3ad034484482c020",
+      "replacementSha256": "1282ef6da99b7286784ed0d6b3a620940f193d8e2f4ffd8c53a650ca669996bc",
+      "width": 660,
+      "height": 660,
+      "basis": "K1",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/products/carsystem/catalog/carsystem-booth-mask-stick-2.webp",
+      "originalSha256": "4d8e258ea5d38adffa1d88cb312ff93da9f85eed35d2055cade8167b6345020a",
+      "replacementSha256": "90aa8a7eed18c3451ce8e8a3b0d0d4c1f643ea16048a99b4ac9efab93df91dc2",
+      "width": 660,
+      "height": 935,
+      "basis": "K1",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/products/carsystem/catalog/carsystem-car-mop-white-2.webp",
+      "originalSha256": "aa615fbcccf3ae46567fd3f422dbdcff1fd089ca8641da094c8b3bf90179112b",
+      "replacementSha256": "69dc7c6f37594b26ae62022b17d8f55919bae7bfd03e5fdd8e66da0cc9d88fb7",
+      "width": 660,
+      "height": 568,
+      "basis": "K1",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/products/carsystem/catalog/carsystem-cc-20-x-pert-2.webp",
+      "originalSha256": "92a79ae2420d783513b536730bc7719e0025f447cfe72d58645559510f09a848",
+      "replacementSha256": "0add0694eeee42e88c9f1c40c963eab1ae9e870f999bc90abbec48faac464bd8",
+      "width": 660,
+      "height": 1200,
+      "basis": "K1",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/products/carsystem/catalog/carsystem-classicline-soft-pad.webp",
+      "originalSha256": "d3c04511190c72f8eede2e3a1b9de705c43e03f2b64b5cd07255200f4ddd399e",
+      "replacementSha256": "794910ad0b1b09755c2ad7628faa3ae24a447e661481cc5055d5b38a9ac5ea88",
+      "width": 660,
+      "height": 447,
+      "basis": "izvor",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/products/carsystem/catalog/carsystem-crash-film-2.webp",
+      "originalSha256": "a0bf4b7058056b831047d66ee7aeb8dfeaba8998ec4b12bdb18cf782bf3cdab5",
+      "replacementSha256": "ab7f97ea505019efcd0664986e3b7a99e053baa692980d5a1400a5d21396dee3",
+      "width": 660,
+      "height": 660,
+      "basis": "K1",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/products/carsystem/catalog/carsystem-crash-film.webp",
+      "originalSha256": "793045bc060fe506ced3bafd656b64907e1cc03c70f32b7603552b5246d2adb6",
+      "replacementSha256": "b8d219ea026c5c657fda9cc7c688b9d957224c14ad7e2d87a6973dc91e004fd0",
+      "width": 1600,
+      "height": 1280,
+      "basis": "K1",
+      "approvedOn": "2026-10-27",
+      "supersedes": [
+        "shadow-premultiply"
+      ]
+    },
+    {
+      "src": "/products/carsystem/catalog/carsystem-cutter-knife-black-2.webp",
+      "originalSha256": "3ead5c65e99da11f4e923f20a925050fee1d3dc70234fe914804665bbaf7cff4",
+      "replacementSha256": "d211b52a8658fdd2648d21288684770f3994281f7416f1517f05113b087097f6",
+      "width": 660,
+      "height": 660,
+      "basis": "K1",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/products/carsystem/catalog/carsystem-double-sanding-soft-pad-2.webp",
+      "originalSha256": "ece9805b35ea0cc9a060f19ae4cf8ded8fb6ccd5d2ebca982414006e816d324c",
+      "replacementSha256": "1f96982da124ab92175a6096beb4054973ec18b5b4de211c676f56fa4ace7f81",
+      "width": 660,
+      "height": 485,
+      "basis": "K1",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/products/carsystem/catalog/carsystem-dry-coat-2-0-2.webp",
+      "originalSha256": "3ffb93ef4dfeefc222e612bafb93ed044215e6f75cf7e90367c4b17bcf204798",
+      "replacementSha256": "2b97587635934a25ca47d3dc12e8bc4cdcaf41e20ed7c66a8521bdfad792ecec",
+      "width": 660,
+      "height": 626,
+      "basis": "K1",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/products/carsystem/catalog/carsystem-dry-coat-2-0-3.webp",
+      "originalSha256": "8fcff6bc3ab3221e9644ec577476b94c158b65efe691c3eaffcdbeea45da6995",
+      "replacementSha256": "f424a11786c63123bacbfe75749da3ea6c9edc96a7dd86f525b95329abd4f207",
+      "width": 660,
+      "height": 363,
+      "basis": "K1",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/products/carsystem/catalog/carsystem-easy-clean-box.webp",
+      "originalSha256": "9a37065d1ed3790f1e5456664598a66a138c3b0f8db46fda73224f6f2d90a14f",
+      "replacementSha256": "a3ac8fb1776c34afc2700b2e9e0ea72e80e2d5d0c35bfa01b647ddcb74d77bc7",
+      "width": 660,
+      "height": 692,
+      "basis": "K1",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/products/carsystem/catalog/carsystem-easy-mask-ii-3.webp",
+      "originalSha256": "75a71c4b62950ad1712494b07e89c0664af24d243f864687bdb1061fb71b957b",
+      "replacementSha256": "c88d9bc0112e6044c72f1531a0eef059c130f8137320c2343d26f39dc8b2892e",
+      "width": 660,
+      "height": 439,
+      "basis": "nova",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/products/carsystem/catalog/carsystem-finish-foam-orange-2.webp",
+      "originalSha256": "8aeec5816b11614d1033ea53dae23d8a315e9674eea97a3789aeb192288f2048",
+      "replacementSha256": "5850ff28a3c69daca77248bc4ccc8da2eb7066a7eb20a557d809cd4acfe52f85",
+      "width": 660,
+      "height": 644,
+      "basis": "K1",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/products/carsystem/catalog/carsystem-finish-foam-orange-3.webp",
+      "originalSha256": "9324d5a2f45327400d23a7d0be6af57289b1b3a2a6b2a500df64bfb2e161a135",
+      "replacementSha256": "35979d7899b7a681c853a4170b6dc52ea0b8e7c7a6f670a629f8e4ff28da455f",
+      "width": 660,
+      "height": 789,
+      "basis": "K1",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/products/carsystem/catalog/carsystem-finish-foam-white-ah-3.webp",
+      "originalSha256": "c4a709b3114e5d1989a936a48853ad26660d9cde9a3df1b949859ad5304be2f4",
+      "replacementSha256": "a8ccb975d272382774eeefd2abbd595bb9ec761e8ed74f6bf1f7bb35d0966495",
+      "width": 660,
+      "height": 694,
+      "basis": "K1",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/products/carsystem/catalog/carsystem-finish-quadra-pad-c-10-2.webp",
+      "originalSha256": "847f997ea074af5101d84f7bf23ef0ea2c16d8f91570f42c8560cb82dd9d4482",
+      "replacementSha256": "44decc6a82067a60488253767e02ba61bd781f98df2ea80600ffb862433a33ea",
+      "width": 660,
+      "height": 605,
+      "basis": "K1",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/products/carsystem/catalog/carsystem-finish-quadra-pad-c-10-3.webp",
+      "originalSha256": "3883156f5c37d1d0db22a98cbeafdf70b0b2d43e19ab3506147b07d8a9dfae79",
+      "replacementSha256": "29e4355accce329a35c51192617e816327f8d661f07ac3f5eaefa1c1fc762a35",
+      "width": 660,
+      "height": 720,
+      "basis": "K1",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/products/carsystem/catalog/carsystem-finish-sandwich-pad-c-30-2.webp",
+      "originalSha256": "77770918acaaa5b75aa938c5b53f2f894311f92d18d760a460585c5880056602",
+      "replacementSha256": "7d3bacd7d0970b572a9f39818c7625bbaab3e3ecd4e80fe987f53e5e9f13e8fb",
+      "width": 660,
+      "height": 528,
+      "basis": "K1",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/products/carsystem/catalog/carsystem-finish-sandwich-pad-c-30-3.webp",
+      "originalSha256": "024ede5a68ba5537e7f2b6ab6480fbb1c12834ef3c10c5bed437b5e0db70a83c",
+      "replacementSha256": "4f01ee7c57b93c2e328060b5a372503cf7efdc2160f19d9ec3257439ab7b6b65",
+      "width": 660,
+      "height": 756,
+      "basis": "K1",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/products/carsystem/catalog/carsystem-finish-waffle-pad-orange-2.webp",
+      "originalSha256": "97f6c53814e11d7d7602d298966e3965b8eb361a5bbadb9668e2a3e879eab2b9",
+      "replacementSha256": "ad29ee909bbdc8c2aca4e3344932db6d19fe0c446108cea84853e606144cd442",
+      "width": 660,
+      "height": 661,
+      "basis": "K1",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/products/carsystem/catalog/carsystem-finish-waffle-pad-orange-3.webp",
+      "originalSha256": "4c5d5f5a8c9e99e9c52dbd7ce009571a3fc901f332241b5b198681fc59124042",
+      "replacementSha256": "f2f0d6144066a88ddd9c7b3bc80b6a7f2e0f6bd994e184f1f02c19cc9c006ea2",
+      "width": 660,
+      "height": 740,
+      "basis": "K1",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/products/carsystem/catalog/carsystem-foam-tape-2.webp",
+      "originalSha256": "bd1e2ebffcc05081ca9d18d14d5ae569fd036370e85cc0fca57efbea7e6bc596",
+      "replacementSha256": "4dd9c12d705f1dee73d4cece4ee518521974d2119b4039e9f7b9069a4e2c2d64",
+      "width": 660,
+      "height": 660,
+      "basis": "K1",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/products/carsystem/catalog/carsystem-glas.webp",
+      "originalSha256": "07282ca6be1ce9ad8b59bc1c822decc0f827ae1d17cc698e7a36784756efd966",
+      "replacementSha256": "184dc88088a5328162875f3105690373aecc8237ec7eeb198871f49c4157322a",
+      "width": 1300,
+      "height": 800,
+      "basis": "K1",
+      "approvedOn": "2026-10-27",
+      "supersedes": [
+        "shadow-premultiply"
+      ]
+    },
+    {
+      "src": "/products/carsystem/catalog/carsystem-ks-50-2.webp",
+      "originalSha256": "0a3649efbc0be6dda37bb475265a1bb56a70f5ea25f5afbab44422f4a2c0f21c",
+      "replacementSha256": "3d8875575d77cdb71392c881e52a75c6235e6c0edd417f750e29125d110469b6",
+      "width": 1600,
+      "height": 1600,
+      "basis": "K3",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/products/carsystem/catalog/carsystem-ks-500-2.webp",
+      "originalSha256": "98e4c01a14aee413839bfab6252efd947488f84ea6319b3ae1d1a1ff914f3b16",
+      "replacementSha256": "5d4890c5ac02a3d5d52a8199a6ccb31670eff7ec60397248f065fcaa816a86a9",
+      "width": 660,
+      "height": 881,
+      "basis": "K1",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/products/carsystem/catalog/carsystem-latex-hand-i-premium-2.webp",
+      "originalSha256": "612467856e9d6556acb9665cf0287be53f25eba3aa912d5c8d05be8acce38556",
+      "replacementSha256": "2dfd802768faa2d204255ae9cc5e7c598a3a7dec6d16cf3d7e90070b58913fe8",
+      "width": 660,
+      "height": 417,
+      "basis": "K1",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/products/carsystem/catalog/carsystem-microfiber-x300-duo-2.webp",
+      "originalSha256": "3a06ee9a81b15eee7fd8dd429dd486cd994923f03c9903d469fb82ff4d933209",
+      "replacementSha256": "7cf6500b4d9e192e00824f4a0da349e9781b00cc4144e5a5f4772f240a5cb109",
+      "width": 660,
+      "height": 660,
+      "basis": "K1",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/products/carsystem/catalog/carsystem-microfiber-x300-duo.webp",
+      "originalSha256": "b7edd601a0ee7f2ead8bc8a2c3450aa29501dd50fac0de15282000a0e0a437b8",
+      "replacementSha256": "9fabd3d9daabebf83266e5216a868b1bf8567dd3f0087e6654ba98db8ff5f622",
+      "width": 660,
+      "height": 635,
+      "basis": "K1",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/products/carsystem/catalog/carsystem-multi-black-rapid.webp",
+      "originalSha256": "6be3f6b2130f5a5658bdfba223de2bdd2aca71277329143485e5bb3e3be526b6",
+      "replacementSha256": "eac176a5a4c0b79f81c7d145e715d7c8040cd444ccec937eaf949d1e9d7155ec",
+      "width": 660,
+      "height": 409,
+      "basis": "K1",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/products/carsystem/catalog/carsystem-multi-green-changer.webp",
+      "originalSha256": "e1c43431ba29872709363c834b3f6e685f919c03617717307b12e24925ea6634",
+      "replacementSha256": "50e99275aa1711f2064f0f30d5df9f80a76b2ddeb352b3e5584e4c2ccd94acbf",
+      "width": 660,
+      "height": 406,
+      "basis": "K1",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/products/carsystem/catalog/carsystem-multi-mix-lids-2.webp",
+      "originalSha256": "09edbecee8ce234f0ed79d8f92069ef1de9bec376b29860264e5407b078e69fe",
+      "replacementSha256": "3a5041e3d1e355e6ac8069497c31c9254742e4a351f3bfbe7ddbd1d174e920b4",
+      "width": 660,
+      "height": 437,
+      "basis": "K1",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/products/carsystem/catalog/carsystem-orbital-sander-csh-cms01-kit.webp",
+      "originalSha256": "653af93d506c23542982bf920309fddf5888c68ecae6e99cf6dbc4e0081157ea",
+      "replacementSha256": "fa1c059c245fedd5065190f70537af1449585ae5f637de9093889e66e4adc288",
+      "width": 660,
+      "height": 527,
+      "basis": "izvor",
+      "approvedOn": "2026-10-27",
+      "supersedes": [
+        "clear-edge-frame"
+      ]
+    },
+    {
+      "src": "/products/carsystem/catalog/carsystem-pad-saver.webp",
+      "originalSha256": "80a239a54ebb73bedd769d7e7f53c28f6261b3c8774abd34e4ee2e2dbc851dec",
+      "replacementSha256": "d6c5fe610248fb9cf72332e9a426e5363607c1c1ea55c2461290c9703facd336",
+      "width": 1000,
+      "height": 973,
+      "basis": "izvor",
+      "approvedOn": "2026-10-27",
+      "supersedes": []
+    },
+    {
+      "src": "/products/carsystem/catalog/carsystem-polish-x8000-ah.webp",
+      "originalSha256": "17f68a4c96e34a9b8ce52451f9a85bf366cfb3cf6105bf59cc8d3def206cbe30",
+      "replacementSha256": "f0df7eb36f0acd4a48981029e076e3a12388e6a0a1cdc55f939d9d3ca5ed5df4",
+      "width": 660,
+      "height": 980,
+      "basis": "K1",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/products/carsystem/catalog/carsystem-polishing-back-pad.webp",
+      "originalSha256": "ee8bdbf7582164b0085c05e92dfd1d81200f6361ee97471a4932fb8632e96de3",
+      "replacementSha256": "3867ef8054c6670bd2f473210bf9421cf695686a94a7770a2017b18b9cb9de6a",
+      "width": 660,
+      "height": 660,
+      "basis": "K1",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/products/carsystem/catalog/carsystem-polishing-pad-x1500-2.webp",
+      "originalSha256": "76a84a4e06613e5fd6f03a131ce69ad32f470ecc994d3e348dc22e4186dbaa9c",
+      "replacementSha256": "45750654a5f2b0afb0db1c52ae229479e2bedf188f81160b1ecfd2b0847a103b",
+      "width": 660,
+      "height": 302,
+      "basis": "K1",
+      "approvedOn": "2026-10-27",
+      "supersedes": [
+        "shadow-premultiply"
+      ]
+    },
+    {
+      "src": "/products/carsystem/catalog/carsystem-polishing-pad-x8000-2.webp",
+      "originalSha256": "97517dc8ebc7079d9bc5d365458d7fee583063e5fc641cc1344ba1516c325319",
+      "replacementSha256": "5d1b04cad6eeca26901d952f51440841478ea66813e254c407cf32347c769a8f",
+      "width": 660,
+      "height": 377,
+      "basis": "izvor",
+      "approvedOn": "2026-10-27",
+      "supersedes": [
+        "shadow-premultiply"
+      ]
+    },
+    {
+      "src": "/products/carsystem/catalog/carsystem-proflex-callisto-150-mm-3.webp",
+      "originalSha256": "3603ce9bdc19d515bdded65fcc8a691cdab6aa5b6f5c4afb622df7e59c6c861b",
+      "replacementSha256": "1319f79e4b73aefa019a343aae8a1492082b8446c9203790c8868234482fc2b7",
+      "width": 660,
+      "height": 660,
+      "basis": "K1",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/products/carsystem/catalog/carsystem-proflex-hydra-75-mm.webp",
+      "originalSha256": "4de9cd9c595137056cc3ba3bac44ed9e2ba1452d60cbd74014de734f7eee1373",
+      "replacementSha256": "e7a43d96dfb6ae35124ee6970b065506cae6c0f50fe085ffcd5ae7b20be3194f",
+      "width": 660,
+      "height": 660,
+      "basis": "K1",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/products/carsystem/catalog/carsystem-proflex-interface-pad-150-mm-15-holes-2.webp",
+      "originalSha256": "64e24c7aa3f3ce06af7f83172b1b1d56b70038bd65680a528edc52a37ec291a7",
+      "replacementSha256": "a90c8a9fdf011c28f66d0bf8a071f4fbf33f06423fa68e8b479960c8329421e0",
+      "width": 660,
+      "height": 660,
+      "basis": "nova",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/products/carsystem/catalog/carsystem-proflex-interface-pad-75-mm-2.webp",
+      "originalSha256": "4539071dfcc55d9da1a09f17e66c3a2275cc8b30ccd011cda350b2ad4869d82d",
+      "replacementSha256": "44f745ae212850fba2a47c8901dd7d6e68d669d70d3b256892d9057e61230a4f",
+      "width": 660,
+      "height": 660,
+      "basis": "K1",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/products/carsystem/catalog/carsystem-proflex-pluto.webp",
+      "originalSha256": "77454587e761e7ce7d44d435cceb5375d2a744bda0aae856e598213a1e534094",
+      "replacementSha256": "c67f4d67292ac6fec54fabeffbf8db608eb8e4a0ad45cee0a610548596874abb",
+      "width": 660,
+      "height": 298,
+      "basis": "izvor",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/products/carsystem/catalog/carsystem-proflex-styx-2.webp",
+      "originalSha256": "0851c891b065b3ea0cb249a3be79ef74eac09c875b3293d93d5d4cf73134015c",
+      "replacementSha256": "a6a15c09a8e99dae66e46c57c7981f1b13307266bd35666b27a0b806dab858d7",
+      "width": 660,
+      "height": 493,
+      "basis": "K1",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/products/carsystem/catalog/carsystem-proflex-styx.webp",
+      "originalSha256": "8dd2444d5b8d030f02f95de9e04142ca76e38074450d9feff0c98be3b9e6bb24",
+      "replacementSha256": "019f129edcb0002512107deb0151058e02873c215822a0ed8c762baddc5add7a",
+      "width": 660,
+      "height": 402,
+      "basis": "izvor",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/products/carsystem/catalog/carsystem-rotary-polisher-csh-crp01-kit-2.webp",
+      "originalSha256": "e0b40448384a64cba9a853fb0373a0242247a431cd71b34926cef4f26931da83",
+      "replacementSha256": "b568f02745fe2f7cf52526aec00be52343c670d172e44d931b5121a7429ad626",
+      "width": 660,
+      "height": 660,
+      "basis": "K1",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/products/carsystem/catalog/carsystem-rotary-polisher-csh-crp01-kit-3.webp",
+      "originalSha256": "7352501d52091527e2c053e78cf1b44f7e74b609f7842493fbade93d7557b5e1",
+      "replacementSha256": "990987efae5d8a1f7a59c84b28aaf79dcdb5cd683ced19f25354116996c24a01",
+      "width": 660,
+      "height": 660,
+      "basis": "K1",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/products/carsystem/catalog/carsystem-rubber-spreader-set.webp",
+      "originalSha256": "c6ee8837c43ad3b02a0104981a67dd9012dc81dd20ecd6f1ecf01c4a637673a0",
+      "replacementSha256": "4a2d3a9f9670ee9932f016446b1aa27425e5650214b548f18b65bba8db817840",
+      "width": 1600,
+      "height": 955,
+      "basis": "izvor",
+      "approvedOn": "2026-10-27",
+      "supersedes": []
+    },
+    {
+      "src": "/products/carsystem/catalog/carsystem-rupes-9-holder-bigfoot-2.webp",
+      "originalSha256": "4ccf5c1f24aaf720b2185d9437f75d2b595d0def2340b23da1f1f44d48bd10f2",
+      "replacementSha256": "5e16fba7b414602af89e5a1817053a523829d21d77668024dcdf46badc5a3f4f",
+      "width": 660,
+      "height": 678,
+      "basis": "K1",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/products/carsystem/catalog/carsystem-rupes-ibrid-nano-2.webp",
+      "originalSha256": "6b610dd094235f634ef8ad2e2c3f67252e9d0c6a2656aaa5699570af2a676b84",
+      "replacementSha256": "0d5b2e812011f670eb8786747d36a1c4313011c0a1e8f3c6d6c2e6f97e3577a1",
+      "width": 660,
+      "height": 660,
+      "basis": "K1",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/products/carsystem/catalog/carsystem-rupes-mini-polishing-machine-hlr75stb-2.webp",
+      "originalSha256": "d54edabe905abaea58706c0802c08f27e879cafb7431c82cd49d2788951b688b",
+      "replacementSha256": "b6fb13ba4ed5b6378e720b5016bf3607cdda1e27e591c1bf267f256dea46049a",
+      "width": 660,
+      "height": 440,
+      "basis": "K1",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/products/carsystem/catalog/carsystem-sanding-block-hard.webp",
+      "originalSha256": "e455e1bd402c201f9270f9e5aaf2f7ab6567c4f1184a53836dbfd004cd5db54c",
+      "replacementSha256": "db3cbd5ab960f91df12b67ac5c0210802b83801ab1c5036f21d706b370c59449",
+      "width": 660,
+      "height": 296,
+      "basis": "izvor",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/products/carsystem/catalog/carsystem-sanding-disc-f-19-soft.webp",
+      "originalSha256": "ad7229efd3a43cef2d73400da16df1d264d1fbd85eab26afc70dd5de5194fc72",
+      "replacementSha256": "81c666184613a0f252d7c1a310ed4303bcb4816ada2ce9fadb898fa92adb5a2e",
+      "width": 660,
+      "height": 662,
+      "basis": "izvor",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/products/carsystem/catalog/carsystem-sanding-strips-f-23-ceramic.webp",
+      "originalSha256": "1d347c894c7a771c8a350d4a6757a020196a24fc426a20ab0ebf1f493860803b",
+      "replacementSha256": "a9ea47b380d40e60b0154590b7037f231495619bc9cfbefe6e13abf37ad9f031",
+      "width": 660,
+      "height": 665,
+      "basis": "izvor",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/products/carsystem/catalog/carsystem-soft-roll.webp",
+      "originalSha256": "35251cf67283f92902b2e29c9162d3a196d2aca442c5302106af20d6547c3673",
+      "replacementSha256": "e831e0047da48d25ba7150ae1081f274ab7ac6666553c18dfeb1ef0771dc041d",
+      "width": 1600,
+      "height": 1470,
+      "basis": "izvor",
+      "approvedOn": "2026-10-27",
+      "supersedes": []
+    },
+    {
+      "src": "/products/carsystem/catalog/carsystem-sound-deadening-panels-2.webp",
+      "originalSha256": "b4d919cc3ab60d1a6d681d7497367f4a0ad80e67f05fb8c74014fe9c81ec7bc2",
+      "replacementSha256": "e792f9662bad28d7406c45729be19229f393522de66f23e69cf46cb9545abcf6",
+      "width": 660,
+      "height": 553,
+      "basis": "K1",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/products/carsystem/catalog/carsystem-sound-deadening-panels-3.webp",
+      "originalSha256": "a9eafcaec89ef8b05b55bec90178119bbbd0b396e73e37a1541ec83a9b941920",
+      "replacementSha256": "db7bda6ccc6677634cd75722abf465773b89c98023c4392f78b784496430a694",
+      "width": 660,
+      "height": 562,
+      "basis": "K1",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/products/carsystem/catalog/carsystem-sound-deadening-panels.webp",
+      "originalSha256": "b26e3c00e6605e979c85e9b7117dd2136c034a3a1d021f1fccccf7a8b8250cf2",
+      "replacementSha256": "e657676e0e94037621a8372c7556a0070133ebc7279fb6ed1ad8f52758dcd161",
+      "width": 1600,
+      "height": 1134,
+      "basis": "izvor",
+      "approvedOn": "2026-10-27",
+      "supersedes": []
+    },
+    {
+      "src": "/products/carsystem/catalog/carsystem-staub-stop-water-black-2.webp",
+      "originalSha256": "e5694cb533205d6d07818e41bc01508a836989b0a6651829ff2205fc950c7626",
+      "replacementSha256": "8fd8c5dcc4343ccd5477bf6266ea9ade2b1ad832e2b1a2bb26f45f2c0944e730",
+      "width": 660,
+      "height": 534,
+      "basis": "K1",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/products/carsystem/catalog/carsystem-staub-stop-water-black.webp",
+      "originalSha256": "6de2dc7ee21d006a63fce8fd836408245e38871c6a2a0a8bb2c2f0bfc8d68c29",
+      "replacementSha256": "107a4c7a4da4e84280d62de4c98cb7ac305600ff7576bda8b9585101489ae324",
+      "width": 1600,
+      "height": 1295,
+      "basis": "izvor",
+      "approvedOn": "2026-10-27",
+      "supersedes": []
+    },
+    {
+      "src": "/products/carsystem/catalog/carsystem-stripping-disc.webp",
+      "originalSha256": "b1e1d4814af8d943f6a9587dca68ecec33e561e9673af5f13f4c6b0a8721eee7",
+      "replacementSha256": "12fefdf566db6afa1b3dd4b6d7b89174bb503f3582805b7d572b37b9a4e0ea14",
+      "width": 660,
+      "height": 657,
+      "basis": "izvor",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/products/carsystem/catalog/carsystem-tape-off-disc-premium-2.webp",
+      "originalSha256": "1555351c08c1593e4a80a44dd44b8ff2006ab9bb087acca6993a3116646a970c",
+      "replacementSha256": "a5367dc5f3bd9d6f522fef9ba8392f442154916a35f1642af654644acbfc2cef",
+      "width": 660,
+      "height": 660,
+      "basis": "K1",
+      "approvedOn": "2026-10-27",
+      "supersedes": [
+        "shadow-premultiply"
+      ]
+    },
+    {
+      "src": "/products/carsystem/catalog/carsystem-tec-line-stick.webp",
+      "originalSha256": "cf305ba6d49c9a94ac75c3967af1589d0238584f818bad538d36044f3f94b76d",
+      "replacementSha256": "eaa996b826fe43ff92238d75ee1f9711cf52c75ca1dabc84fbf8e060980e2439",
+      "width": 1600,
+      "height": 1427,
+      "basis": "izvor",
+      "approvedOn": "2026-10-27",
+      "supersedes": []
+    },
+    {
+      "src": "/products/carsystem/catalog/carsystem-topline-soft-pad.webp",
+      "originalSha256": "fcd39ada5ef6d9b9f7993f223ca9095c7d99ce3a68e992dc7d34c2fdb03d2f25",
+      "replacementSha256": "4c36b4cc42e6c1cb198c6905ae14105c1e51bf97a43ceb7adcd4878cdf086e27",
+      "width": 660,
+      "height": 445,
+      "basis": "izvor",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/products/carsystem/catalog/carsystem-topline-wp-s.webp",
+      "originalSha256": "519c0eda2ecb276849bc0922c64478c9a47391db394a6cbb3bdd51aa36809f3f",
+      "replacementSha256": "6027216348ee008a2f7c089a4004de449c89c9619db1b573e368f6accda0a0d3",
+      "width": 829,
+      "height": 1000,
+      "basis": "izvor",
+      "approvedOn": "2026-10-27",
+      "supersedes": []
+    },
+    {
+      "src": "/products/carsystem/catalog/carsystem-uniflex-ms.webp",
+      "originalSha256": "470804a2e98cd970c1e5b406fb0c4f9f944afec4bc515cb497bbece2bae3dd13",
+      "replacementSha256": "b69d228ab5c6989080bbb374718b5d56fb82edf7e492ecf300aac987c76a3c7d",
+      "width": 660,
+      "height": 1277,
+      "basis": "K1",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/products/carsystem/catalog/carsystem-wax-puck.webp",
+      "originalSha256": "38fd1d959b640bba041c4b284c155cfda40576ce6eb3a034e780d73914221319",
+      "replacementSha256": "caa4e9cdefd025f3baf5f6d8b7ecd5a5e8fe81e3922f2edbdc53182ff5c94067",
+      "width": 660,
+      "height": 345,
+      "basis": "izvor",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/products/cosmos-lac/flame-blue/cosmos-lac-flame-blue-fb-906-400-ml-flame-blue-fb-906-gold.webp",
+      "originalSha256": "acc78ffa3067a184c0a60e0c6752003ed1f85c7a83f857dc0202478cd464dc2b",
+      "replacementSha256": "ebeae0a3f25a56119eb221788b7ed689b1064197e8d2d2a9e449a31fb4a3eddd",
+      "width": 800,
+      "height": 800,
+      "basis": "izvor",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/products/cosmos-lac/flame-blue/cosmos-lac-flame-blue-fb-908-400-ml-flame-blue-fb-908-copper.webp",
+      "originalSha256": "65626934138b36fa402379774434870dd5dfc69761cbc215e55f489ddabccd57",
+      "replacementSha256": "4d41bca6bcfcf00422e3ac452d3d89d705b2f8971763af7980e0052e37a53d36",
+      "width": 800,
+      "height": 800,
+      "basis": "izvor",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/products/norbin/pending-rights/norbin__norbin-n15-v20-clear-voc.webp",
+      "originalSha256": "a56a263a7d7332aeb3bffc159707735886ef2df283c361cbf084f4bc4ff70673",
+      "replacementSha256": "61f32feec8ca018e7e03e97cd66ceea5e5c524541edee2a21dcc3d58e368e72d",
+      "width": 867,
+      "height": 1590,
+      "basis": "K3",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/products/norbin/pending-rights/norbin__norbin-n75-021-hardener-normal.webp",
+      "originalSha256": "949412d196c46aedc7330c1a8f17f829cf5dbd85af82a1ec36c20f9b0b1b4912",
+      "replacementSha256": "2415e41ce9c47434d4bbbceb539454e3b97089c0a4f4f25e34e76afb22767c6b",
+      "width": 1162,
+      "height": 1224,
+      "basis": "K1",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/products/norbin/pending-rights/norbin__norbin-n75-v21-clear-hardener-voc.webp",
+      "originalSha256": "a15e806ac3cf8dedd6e3933018a8046fd9d6a43f71d6a7903c7f4dc8d2c89579",
+      "replacementSha256": "64608bd6bbe09e9bef256727b6d3fcd1ad25112368b286d797f1f2ed73f8c8d6",
+      "width": 997,
+      "height": 1600,
+      "basis": "K1",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/products/rm/catalog/rm-agilis.webp",
+      "originalSha256": "80143f5fd3a6c8caee5718e82b5bd04e949c989e7619a2e67cf9a4022889c331",
+      "replacementSha256": "0271085e484cc73940efda090bf395a4790baca41dc45a53eae83db6b28e26f0",
+      "width": 387,
+      "height": 200,
+      "basis": "izvor",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/products/rm/catalog/rm-c-2p52-easy-air-finish-r.webp",
+      "originalSha256": "ba67ac74e53eb631734419500f8c0209d934c933ff1601834dac7542592ffc28",
+      "replacementSha256": "f3dd1053628af6594e48a6822b6de61ce9ed9e7b37510bf87ed4c7809b7850cd",
+      "width": 1170,
+      "height": 975,
+      "basis": "K1",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/products/rm/catalog/rm-c-2p65-intense-finish-r.webp",
+      "originalSha256": "7ec525abe1c364542014065d008f90c9273ebf7509517a46d7aa4bcbf895cd87",
+      "replacementSha256": "1eea960657655cdb753d8673e0ffb26e9a66f5ff45b55cecc0938a3b7bc29425",
+      "width": 1170,
+      "height": 975,
+      "basis": "K1",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/products/rm/catalog/rm-diamont.webp",
+      "originalSha256": "70534db8b4c5f3ed0d88430bdfbd166ca6791120b75d72011e9a1e3ae234cb17",
+      "replacementSha256": "002f83da245b278b704df0d740d4ce412c0e85ef7df7b199a89c5c7de645bb9b",
+      "width": 1170,
+      "height": 929,
+      "basis": "K1",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/products/rm/system/rm-crystal-base-125ml.webp",
+      "originalSha256": "34f24c5a4e96764ff352f13488ee392fff41c7dca29f166148aaf8a42d791956",
+      "replacementSha256": "29055b526492f09449a52547907f8e8facc82318a444f2bb1b4333ae84370cdc",
+      "width": 1600,
+      "height": 1600,
+      "basis": "K1",
+      "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/products/rm/system/rm-diamont-0-5l.webp",
+      "originalSha256": "d981399b6a82a7802c619320f4ad535b362d8ce249a8b31162d5ee30975915c2",
+      "replacementSha256": "6dccde94b42f5fb6ce15cc86a464da1a570c1c55338837e3375cb0a25567fe4c",
+      "width": 1600,
+      "height": 1600,
+      "basis": "K1",
+      "approvedOn": "2026-10-27"
+    }
+  ]
+}

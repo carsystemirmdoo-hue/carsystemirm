@@ -27,6 +27,7 @@ import {
 import { evaluatePricing } from "@/lib/pricing/precedence.mjs";
 import { getFamilyForProduct, variantRedirectTarget } from "@/lib/product-families";
 import { belgradeDate } from "@/lib/recommendations/customerRhythm.mjs";
+import { toDisplayImageSrc } from "@/lib/productImageDisplay";
 
 /**
  * Poručivanje kupca: korpa firme → zahtev → prijem u kancelariji → porudžbina.
@@ -168,7 +169,7 @@ function catalogFacts(slug: string | null, variantId: string | null) {
       href: key
         ? `/proizvodi/${product.slug}?varijanta=${encodeURIComponent(key)}`
         : (variantRedirectTarget(product) ?? `/proizvodi/${product.slug}`),
-      image: src && !/placeholder/i.test(src) ? { src, alt: product.productImage?.alt ?? product.name } : null,
+      image: src && !/placeholder/i.test(src) ? { src: toDisplayImageSrc(src), alt: product.productImage?.alt ?? product.name } : null,
       variantKey: key,
       variantLabel: row ? (row.label ?? key) : null,
     } satisfies CatalogLink,

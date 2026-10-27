@@ -33,6 +33,10 @@ import {
 import { getFamilyForProduct, type ProductFamily } from "@/lib/product-families";
 import type { ProductSizeClass, ProductVolumeStatus } from "@/lib/product-scale";
 import { isMeasureToken, tokenize } from "@/lib/search/normalize.mjs";
+import { toDisplayImageSrc } from "@/lib/productImageDisplay";
+
+/** Brza pretraga crta isti prikazni derivat kao kartica kataloga. */
+const displaySrc = (src?: string) => (src ? toDisplayImageSrc(src) : src);
 
 /** Verzija sheme asseta. Menja se kad se promeni oblik zapisa. */
 export const SEARCH_INDEX_SCHEMA_VERSION = 1;
@@ -290,7 +294,7 @@ function familyRecord(
     // linija programa je ono što korisnik zaista kuca.
     technicalLine: entity.line,
     familySlug: entity.familySlug,
-    imageSrc: entity.presentation.image?.src,
+    imageSrc: displaySrc(entity.presentation.image?.src),
     terms: nonEmpty([
       ...extraTerms([entity.line, entity.technicalCategory, entity.finish], derived),
       ...sharedVariantTokens(family, derived),
@@ -322,7 +326,7 @@ function standaloneRecord(
     categorySlugs: entity.categorySlugs.length ? entity.categorySlugs : undefined,
     technicalLine: entity.technicalLine || undefined,
     quantityLabel: entity.presentation.quantityLabel ?? undefined,
-    imageSrc: entity.presentation.image?.src,
+    imageSrc: displaySrc(entity.presentation.image?.src),
     terms: product ? nonEmpty(productTerms(product, derived)) : undefined,
     codes: product ? nonEmpty(productCodes(product)) : undefined,
   };
@@ -357,7 +361,7 @@ function variantRecord(
     familySlug: family.slug,
     familyName: family.name,
     variantName: variantNameOf(entity.name, family.name),
-    imageSrc: entity.presentation.image?.src,
+    imageSrc: displaySrc(entity.presentation.image?.src),
     terms: nonEmpty(productTerms(product, derived)),
     codes: nonEmpty(productCodes(product)),
     card: {

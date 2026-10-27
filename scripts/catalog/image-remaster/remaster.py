@@ -47,6 +47,12 @@ original is the reference. Originals are not in git (≈150 MB); they live in th
 (`CARSYSTEM_ORIGINALS`, default ~/Carsystem/radno/slike-za-pronalazenje/preuzeto/
 carsystem-originali/original). Without the cache `--check` verifies the derivative against
 `repairedSha256` instead of recomputing it.
+
+Reviewed replacements (2026-10-27, `reviewed-replacements.json`): a derivative that was
+hand-processed and approved image by image by the owner (product-photo control package).
+It cannot be recomputed from the original, so it is checked by `replacementSha256`, and it
+is mapped only while the original still has `originalSha256` — a new upstream original
+drops it exactly like a plan entry. A src is either in plan.json or here, never in both.
 """
 
 from __future__ import annotations
@@ -66,6 +72,7 @@ ROOT = Path(__file__).resolve().parents[3]
 PUBLIC = ROOT / "public"
 PLAN = ROOT / "data/catalog/image-remaster/plan.json"
 DISPLAY_MAP = ROOT / "data/catalog/image-remaster/display-map.json"
+REPLACEMENTS = ROOT / "data/catalog/image-remaster/reviewed-replacements.json"
 DERIVATIVE_ROOT = "/remastered"
 OPERATIONS = ("shadow-premultiply", "clear-edge-frame", "antialias-mask", "defringe")
 ORIGINALS_CACHE = Path(
@@ -196,6 +203,26 @@ APPLY = {
 
 def load_plan() -> dict:
     return json.loads(PLAN.read_text("utf8"))
+
+
+def load_replacements() -> list[dict]:
+    return json.loads(REPLACEMENTS.read_text("utf8"))["images"] if REPLACEMENTS.exists() else []
+
+
+def replacement_problems(entry: dict, mapped: dict[str, str] | None) -> tuple[bool, list[str]]:
+    """(mappable, problems) for a reviewed replacement; `mapped` None = called from --apply."""
+    path = PUBLIC / entry["src"].lstrip("/")
+    derivative = PUBLIC / derivative_href(entry["src"]).lstrip("/")
+    if sha256(read_bytes(path)) != entry["originalSha256"]:
+        stale = mapped is not None and entry["src"] in mapped
+        return False, [f"{entry['src']}: original changed upstream but replacement is still mapped — run --apply"] if stale else []
+    if not derivative.exists():
+        return False, [f"{entry['src']}: reviewed replacement missing"]
+    if sha256(read_bytes(derivative)) != entry["replacementSha256"]:
+        return False, [f"{entry['src']}: replacement differs from the reviewed replacementSha256"]
+    if mapped is not None and mapped.get(entry["src"]) != derivative_href(entry["src"]):
+        return False, [f"{entry['src']}: reviewed replacement is not in display-map.json"]
+    return True, []
 
 
 def official_original(entry: dict) -> bytes | None:
@@ -333,6 +360,18 @@ def apply() -> int:
             written += 1
         entry["repairedSha256"] = sha256(result)
         entries[entry["src"]] = derivative_href(entry["src"])
+    for entry in load_replacements():
+        if entry["src"] in entries:
+            print(f"FAIL {entry['src']}: listed in plan.json and reviewed-replacements.json", file=sys.stderr)
+            return 1
+        mappable, problems = replacement_problems(entry, None)
+        if problems:
+            print("FAIL", problems[0], file=sys.stderr)
+            return 1
+        if mappable:
+            entries[entry["src"]] = derivative_href(entry["src"])
+        else:
+            print(f"DROP {entry['src']}: original changed since review — replacement not mapped", file=sys.stderr)
     PLAN.write_text(json.dumps(plan, indent=2, ensure_ascii=False) + "\n", "utf8")
     write_map(entries)
     print(f"{len(entries)} display derivative(s), {written} written")
@@ -366,6 +405,11 @@ def check() -> int:
             elif read_bytes(derivative) != expected:
                 problems.append(f"{entry['src']}: derivative not reproducible from the original")
     planned = {entry["src"] for entry in load_plan()["images"]}
+    for entry in load_replacements():
+        if entry["src"] in planned:
+            problems.append(f"{entry['src']}: listed in plan.json and reviewed-replacements.json")
+        problems.extend(replacement_problems(entry, mapped)[1])
+        planned.add(entry["src"])
     for src in mapped:
         if src not in planned:
             problems.append(f"{src}: mapped without a reviewed plan entry")

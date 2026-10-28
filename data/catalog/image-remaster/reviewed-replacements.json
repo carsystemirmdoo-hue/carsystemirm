@@ -1056,6 +1056,24 @@
       ]
     },
     {
+      "src": "/products/befar/catalog/befar-leo-plus-air-lines-orbital-velcro-compounding-pad.webp",
+      "originalSha256": "d375271a754fb80338bc5928e0daacfbdb3cefc0d3e100cd9c9e96ae781b1af3",
+      "replacementSha256": "ae531153d3b659455688588bacc36ceda3af64b02bd560ead60c2e7983134a84",
+      "width": 1233,
+      "height": 917,
+      "basis": "krug 8 (Befar dorada) — objavljeno uz poznat nedostatak: ivice",
+      "approvedOn": "2026-10-28"
+    },
+    {
+      "src": "/products/befar/catalog/befar-leo-plus-air-lines-with-16-holes-orbital-velcro-compounding-pad.webp",
+      "originalSha256": "6a67354f1f7b60d345c1a768edc16267c9ad21250e131aa3741548707caf02ba",
+      "replacementSha256": "da15debb3e9af74f1abc3acb53298d4bcd739d5ca9f2fe74381815b1a773b64e",
+      "width": 1305,
+      "height": 916,
+      "basis": "krug 8 (Befar dorada) — objavljeno uz poznat nedostatak: ivice",
+      "approvedOn": "2026-10-28"
+    },
+    {
       "src": "/products/befar/catalog/befar-leo-premium-advance-velcro-compounding-pad-2.webp",
       "originalSha256": "303a6b9fc97636ed496a4e6023180cf4344684b6ed4930e72022f05ddfe0119c",
       "replacementSha256": "5e5078142bfd096e5287a063695c47ce819c4352c4fcb632b98166b5acded2cb",
@@ -1245,6 +1263,15 @@
       "approvedOn": "2026-10-27"
     },
     {
+      "src": "/products/befar/catalog/befar-plus-hand-compounding-pad.webp",
+      "originalSha256": "d9a158fb23545dc0e54ea14fb0df73edce198bb468919cd598304771a9a33ac7",
+      "replacementSha256": "bb494b5013864dfbd0a453e6c125e8b77380ad45fa77b0e477720eef19242eaa",
+      "width": 1337,
+      "height": 1150,
+      "basis": "krug 8 (Befar dorada) — objavljeno uz poznat nedostatak: ivice",
+      "approvedOn": "2026-10-28"
+    },
+    {
       "src": "/products/befar/catalog/befar-plus-velcro-polishing-pad-3.webp",
       "originalSha256": "bf8e7032bba17c724ec7b7549fc03e4dbc3dbb2d49157d37ffc662391ed81a33",
       "replacementSha256": "38a56e967c0bcab4f12a71c53b0ce51633d2cb32f0ff3eadae879dd90efe3127",
@@ -1305,6 +1332,24 @@
       ]
     },
     {
+      "src": "/products/befar/catalog/befar-plus-velcro-polishing-pad.webp",
+      "originalSha256": "189ccac193bf1cd7321b2c02e9b75b0e2abdfdda78e5c31351038920fcdf6258",
+      "replacementSha256": "bf43864928e719f8755244b07fcb8603dbb66061712d2a199188e0576675856e",
+      "width": 1305,
+      "height": 914,
+      "basis": "krug 8 (Befar dorada) — objavljeno uz poznat nedostatak: ivice",
+      "approvedOn": "2026-10-28"
+    },
+    {
+      "src": "/products/befar/catalog/befar-plus-wax-pad-conical-pad.webp",
+      "originalSha256": "059a750f9127cd7815bac1e5a41be459c10a004503d90c7354b9e001e3469542",
+      "replacementSha256": "7d217b61653146dc9d9783969f06e5129b6e3aee667c6686199e6256acd9052b",
+      "width": 1600,
+      "height": 743,
+      "basis": "krug 8 (Befar dorada) — objavljeno uz poznat nedostatak: ivice",
+      "approvedOn": "2026-10-28"
+    },
+    {
       "src": "/products/befar/catalog/befar-plus-with-applicator-compounding-pad-10.webp",
       "originalSha256": "dc8beef587b009bac3d286eccf49e65f9813670f1ad5a37106f8a48c8797fd39",
       "replacementSha256": "bb5be156017bcd7af3b00545413965e9e8454f12801011bc1545df9943ac1887",
@@ -1312,6 +1357,15 @@
       "height": 1066,
       "basis": "K1",
       "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/products/befar/catalog/befar-plus-with-applicator-compounding-pad-2.webp",
+      "originalSha256": "e50d65bdd90ca71ae8e6738c9d94fad5f4f93923966739f23d441e5cc8ce4dfa",
+      "replacementSha256": "491dac4199f56ced18d9eecd2cd5c26719133aba5f3e939601ddc600736de7f8",
+      "width": 1319,
+      "height": 884,
+      "basis": "krug 8 (Befar dorada)",
+      "approvedOn": "2026-10-28"
     },
     {
       "src": "/products/befar/catalog/befar-plus-with-applicator-compounding-pad-3.webp",
@@ -1573,6 +1627,15 @@
         1131,
         1025
       ]
+    },
+    {
+      "src": "/products/befar/catalog/befar-velcro-polishing-pad-2.webp",
+      "originalSha256": "033ded1e78ed4f3def3927399502b88029e0ee5f069b8a9048308462dc216c9b",
+      "replacementSha256": "6851b24d3a33d264140df0453eaf2c3f13d7d21bcb6fe1aeaf2c2600d7db7d91",
+      "width": 919,
+      "height": 574,
+      "basis": "krug 8 (Befar dorada)",
+      "approvedOn": "2026-10-28"
     },
     {
       "src": "/products/befar/catalog/befar-velcro-polishing-pad-3.webp",

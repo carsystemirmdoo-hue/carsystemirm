@@ -811,6 +811,42 @@
       "repairedSha256": "e65e58accad42c9a9f1aadc4f8126aee7ae3faca5957112732029de5c3510213"
     },
     {
+      "src": "/products/carsystem/catalog/carsystem-polishing-pad-x1500-2.webp",
+      "brand": "carsystem",
+      "products": [
+        "carsystem-polishing-pad-x1500"
+      ],
+      "operations": [
+        {
+          "op": "shadow-premultiply",
+          "params": {
+            "maxChroma": 40
+          }
+        }
+      ],
+      "reason": "svetlosiva poluprovidna senka komponovana za beli papir svetli na tamnoj sceni; prepisana kao crna sa α·(255−g)/255 — identično na beloj podlozi",
+      "originalSha256": "76a84a4e06613e5fd6f03a131ce69ad32f470ecc994d3e348dc22e4186dbaa9c",
+      "repairedSha256": "839af950f97d563ba1a966113e3262dea9a1f4ca41948514cbeca188049c17f0"
+    },
+    {
+      "src": "/products/carsystem/catalog/carsystem-polishing-pad-x8000-2.webp",
+      "brand": "carsystem",
+      "products": [
+        "carsystem-polishing-pad-x8000"
+      ],
+      "operations": [
+        {
+          "op": "shadow-premultiply",
+          "params": {
+            "maxChroma": 40
+          }
+        }
+      ],
+      "reason": "svetlosiva poluprovidna senka komponovana za beli papir svetli na tamnoj sceni; prepisana kao crna sa α·(255−g)/255 — identično na beloj podlozi",
+      "originalSha256": "97517dc8ebc7079d9bc5d365458d7fee583063e5fc641cc1344ba1516c325319",
+      "repairedSha256": "57e12dc6d3fbb85cdc773fcd426b3d908335b30f4029342329372a3dd8a45b93"
+    },
+    {
       "src": "/products/carsystem/catalog/carsystem-polishing-pad-x8000.webp",
       "brand": "carsystem",
       "products": [

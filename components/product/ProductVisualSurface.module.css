@@ -707,7 +707,7 @@
   --product-envelope-h: 84cqh;
   --product-fit-w: min(
     var(--product-envelope-w),
-    calc(var(--product-envelope-h) * var(--product-content-aspect))
+    calc(min(var(--product-envelope-h), var(--product-envelope-h-cap, 100cqh)) * var(--product-content-aspect))
   );
   position: absolute;
   z-index: 3;
@@ -1211,6 +1211,31 @@
     max-width: calc(100% - 20px);
     top: 10px;
     left: 10px;
+  }
+}
+
+/*
+ * Uska površina (kartica u dve kolone na telefonu, ~170 px): oznaka brenda zauzima četvrtinu
+ * visine i ležala je preko vrha proizvoda (2026-10-28: 772 od 984 kartica na 390 px).
+ * Ispod oznake se rezerviše traka: visina obvojnice se ograničava na prostor ispod nje, a
+ * optički centar se spušta na sredinu tog prostora. Oznaka je zbijenija. Širi prikazi
+ * (računar, tablet, PDP) ne ulaze u ovaj upit i ostaju nepromenjeni. Mora stajati posle
+ * `@media (max-width: 520px)`, koji takođe postavlja položaj oznake.
+ */
+@container (max-width: 260px) {
+  .brandMark {
+    top: 8px;
+    left: 8px;
+    max-width: calc(100% - 16px);
+    padding: 3px 6px;
+    font-size: 0.6875rem;
+  }
+
+  .objectWrap {
+    --product-mark-band: 34px;
+    --product-floor-band: 6px;
+    --product-envelope-h-cap: calc(100cqh - var(--product-mark-band) - var(--product-floor-band));
+    --product-optical-y: calc((var(--product-mark-band) + 100cqh - var(--product-floor-band)) / 2);
   }
 }
 

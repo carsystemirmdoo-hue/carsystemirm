@@ -236,11 +236,11 @@
     {
       "src": "/products/baslac/catalog/baslac-12-20-bodyfiller-universal.webp",
       "originalSha256": "01c6b37f5441288dcd5e6692537f97bcffe8d5aa186d0e7be274c4d49971b78d",
-      "replacementSha256": "d0ce36d0842610cf84d4ba40318686b9a78914185574824f48e87f7170395ef6",
-      "width": 1058,
-      "height": 704,
-      "basis": "K3",
-      "approvedOn": "2026-10-27"
+      "replacementSha256": "ce276143e3f4ed889457dcacd7bb3d11652c8699d52a384e9497a59e86d29707",
+      "width": 408,
+      "height": 234,
+      "basis": "K3 — uokvireno 2026-10-29 (prevelika margina)",
+      "approvedOn": "2026-10-29"
     },
     {
       "src": "/products/baslac/catalog/baslac-21-10-1k-plastic-primer.webp",
@@ -695,11 +695,11 @@
     {
       "src": "/products/befar/catalog/befar-carved-velcro-polishing-pad-4.webp",
       "originalSha256": "67cbe9a0a1023bb7bf097372c4004f73958e2cca9fc902b7629591481619457f",
-      "replacementSha256": "e6a4c22ea8e2c5cfd10844832a00dd842380f2500c422c09c15368e0dd8ee01c",
-      "width": 1600,
-      "height": 1066,
-      "basis": "K4",
-      "approvedOn": "2026-10-27"
+      "replacementSha256": "3c9e2f09a0c7b6da58c2982728a279a25f543e9208e6a61de427b0d92d5091f4",
+      "width": 782,
+      "height": 528,
+      "basis": "K4 — uokvireno 2026-10-29 (prevelika margina)",
+      "approvedOn": "2026-10-29"
     },
     {
       "src": "/products/befar/catalog/befar-carved-velcro-polishing-pad-5.webp",
@@ -730,6 +730,15 @@
         1758,
         1268
       ]
+    },
+    {
+      "src": "/products/befar/catalog/befar-cream-compound-2.webp",
+      "originalSha256": "903e5b3f5ef638f5c15edb58a52f948931d107e78b768902c97548341d083426",
+      "replacementSha256": "403c8f7c4b0bbc40a362ae8c759f85e82b26ea237f89f395bd3ee67f680b234b",
+      "width": 500,
+      "height": 564,
+      "basis": "krug 7 (Befar dorada) — odobreno 29.10.",
+      "approvedOn": "2026-10-29"
     },
     {
       "src": "/products/befar/catalog/befar-cream-compound-3.webp",
@@ -803,20 +812,20 @@
     {
       "src": "/products/befar/catalog/befar-ellipse-corrugated-polishing-compounding-pad-2.webp",
       "originalSha256": "afaa90f0666273970d40dc62c7abcd61de91c1f9bfd5b542d3e1b0bfc0d31a64",
-      "replacementSha256": "ee92388bfa52e97ad06ffc34ed83995114ae727bb4026a480c0bc223bff9d9ae",
-      "width": 1600,
-      "height": 1067,
-      "basis": "K2",
-      "approvedOn": "2026-10-27"
+      "replacementSha256": "012add9933caa186af52b5c6e202f68d93982fb5c68dbe7d760c512cb5f04c74",
+      "width": 675,
+      "height": 503,
+      "basis": "K2 — uokvireno 2026-10-29 (prevelika margina)",
+      "approvedOn": "2026-10-29"
     },
     {
       "src": "/products/befar/catalog/befar-ellipse-corrugated-polishing-compounding-pad-3.webp",
       "originalSha256": "7607c846e6c026a3cf31d1b47422c6ae22ef70330cb035a15d2d2d72910d052a",
-      "replacementSha256": "a3b9adab83a7032ea62976770331df2e2b1c260c84b1a1bada7a76bc3f542207",
-      "width": 1600,
-      "height": 1067,
-      "basis": "K2",
-      "approvedOn": "2026-10-27"
+      "replacementSha256": "d3aafcfb43f1905db681b096b69d5f3ce05a87ebb25249c637b666585af35c79",
+      "width": 688,
+      "height": 512,
+      "basis": "K2 — uokvireno 2026-10-29 (prevelika margina)",
+      "approvedOn": "2026-10-29"
     },
     {
       "src": "/products/befar/catalog/befar-ellipse-corrugated-polishing-compounding-pad-4.webp",
@@ -836,11 +845,11 @@
     {
       "src": "/products/befar/catalog/befar-ellipse-corrugated-polishing-compounding-pad-5.webp",
       "originalSha256": "7a50ee473a3b5ebe6bf68fbda2957d245261e45098f489b03289c61d44603e97",
-      "replacementSha256": "01efa27ffe3414ef1815c020c69ffbb7b899cb1a45f97d737a911b8a1f25b399",
-      "width": 1600,
-      "height": 1067,
-      "basis": "K2",
-      "approvedOn": "2026-10-27"
+      "replacementSha256": "a57c45275be6e203acdfd71bee39a2534376336f00ae0decc4dd09d1284bdd44",
+      "width": 689,
+      "height": 508,
+      "basis": "K2 — uokvireno 2026-10-29 (prevelika margina)",
+      "approvedOn": "2026-10-29"
     },
     {
       "src": "/products/befar/catalog/befar-ellipse-corrugated-polishing-compounding-pad.webp",
@@ -850,6 +859,15 @@
       "height": 1067,
       "basis": "K2",
       "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/products/befar/catalog/befar-extra-cream-compound-2.webp",
+      "originalSha256": "b1d0405b8091e1bf9144611fff8476e8e1d5092e1010ab96238041aa139766f9",
+      "replacementSha256": "b9d2152855000590763ed54777112e93db6888199f6c1fb9de677a1f32f3383e",
+      "width": 720,
+      "height": 636,
+      "basis": "krug 7 (Befar dorada) — odobreno 29.10.",
+      "approvedOn": "2026-10-29"
     },
     {
       "src": "/products/befar/catalog/befar-extra-cream-compound-3.webp",
@@ -1122,6 +1140,24 @@
       ]
     },
     {
+      "src": "/products/befar/catalog/befar-leo-premium-air-lines-velcro-compounding-pad.webp",
+      "originalSha256": "4aa5cd9e2b40d05fdf8299f1568fbcaebba1e87c1523cee2641878f33690704b",
+      "replacementSha256": "a718dbbc2650cd1fabc33bb11d111fee6c72cf7485d8e14d32a34965c6ddabdb",
+      "width": 916,
+      "height": 648,
+      "basis": "krug 7 (Befar dorada) — odobreno 29.10.",
+      "approvedOn": "2026-10-29"
+    },
+    {
+      "src": "/products/befar/catalog/befar-leo-premium-compounding-pad-2.webp",
+      "originalSha256": "7c4458f6bc0187882c2999421fd78c05741c311ca0cbdea6b3546b073ac1696f",
+      "replacementSha256": "c1b778a452d65aff33abb1197d06e2aae60570ebb8f4dd9356508e3d64ad3c91",
+      "width": 1206,
+      "height": 817,
+      "basis": "krug 7 (Befar dorada) — odobreno 29.10.",
+      "approvedOn": "2026-10-29"
+    },
+    {
       "src": "/products/befar/catalog/befar-leo-premium-compounding-pad.webp",
       "originalSha256": "75efbae4da6584a536be9b2bd7bcd838a1a9ecdb5129fefbd3cdfe2a65822c43",
       "replacementSha256": "ecb4dad24d45ee795f03cc1072f424862edecf6f578ae9acdea242cdfcc0d762",
@@ -1302,6 +1338,15 @@
       ]
     },
     {
+      "src": "/products/befar/catalog/befar-plus-velcro-polishing-pad-5.webp",
+      "originalSha256": "cd680a4b66477513895a1157a69a5b37576df677630383606d59ffc8f1095426",
+      "replacementSha256": "b632a8620a2f4df5f2cb045eb086fea02985415986d8e4ec10404f4aeee5176d",
+      "width": 623,
+      "height": 432,
+      "basis": "krug 7 (Befar dorada) — odobreno 29.10.",
+      "approvedOn": "2026-10-29"
+    },
+    {
       "src": "/products/befar/catalog/befar-plus-velcro-polishing-pad-6.webp",
       "originalSha256": "18930524485bbf94e067554d80a57621e1851b48ca7d42b4326053b8ca33a313",
       "replacementSha256": "da85b0a1fa5debee04c0cd2b8d8d0d58a18609857c3b4cf8249f447a1583841d",
@@ -1352,11 +1397,11 @@
     {
       "src": "/products/befar/catalog/befar-plus-with-applicator-compounding-pad-10.webp",
       "originalSha256": "dc8beef587b009bac3d286eccf49e65f9813670f1ad5a37106f8a48c8797fd39",
-      "replacementSha256": "bb5be156017bcd7af3b00545413965e9e8454f12801011bc1545df9943ac1887",
-      "width": 1600,
-      "height": 1066,
-      "basis": "K1",
-      "approvedOn": "2026-10-27"
+      "replacementSha256": "8092b578f72721b5b89db239a2880ffcaf25565083fbac2efb1b630e37e7033e",
+      "width": 668,
+      "height": 514,
+      "basis": "K1 — uokvireno 2026-10-29 (prevelika margina)",
+      "approvedOn": "2026-10-29"
     },
     {
       "src": "/products/befar/catalog/befar-plus-with-applicator-compounding-pad-2.webp",
@@ -1381,6 +1426,33 @@
         1253,
         1060
       ]
+    },
+    {
+      "src": "/products/befar/catalog/befar-plus-with-applicator-compounding-pad-4.webp",
+      "originalSha256": "f3232d2c2f642f3c121e4c280cb18eb961785b57c434283fefb5d032663c382e",
+      "replacementSha256": "d994c7ab5217e6064365a45f4638ba654fe6b4a14e4867658344d31b1684f790",
+      "width": 1039,
+      "height": 630,
+      "basis": "krug 7 (Befar dorada) — odobreno 29.10.",
+      "approvedOn": "2026-10-29"
+    },
+    {
+      "src": "/products/befar/catalog/befar-plus-with-applicator-compounding-pad-5.webp",
+      "originalSha256": "c07c73d73717240b342ba851ae7ba9237b4176413fa8fef0bb6b044d72b27467",
+      "replacementSha256": "f7226b29ebc075ce93abe7fc3258eddd3217731760dba63b96b201bff1b935ee",
+      "width": 1039,
+      "height": 632,
+      "basis": "krug 7 (Befar dorada) — odobreno 29.10.",
+      "approvedOn": "2026-10-29"
+    },
+    {
+      "src": "/products/befar/catalog/befar-plus-with-applicator-compounding-pad-6.webp",
+      "originalSha256": "4dc39c6f052f0da1f32f575332204eaff56f9271370f78349c5a87df7f856b41",
+      "replacementSha256": "52bef2bc68a46b340abcbd21c45f32a891ce887ce4c340541234d24f568a6a0e",
+      "width": 1028,
+      "height": 637,
+      "basis": "krug 7 (Befar dorada) — odobreno 29.10.",
+      "approvedOn": "2026-10-29"
     },
     {
       "src": "/products/befar/catalog/befar-plus-with-applicator-compounding-pad-7.webp",
@@ -1435,6 +1507,15 @@
       "height": 1105,
       "basis": "K1",
       "approvedOn": "2026-10-27"
+    },
+    {
+      "src": "/products/befar/catalog/befar-polishing-sponge-with-applicator-2.webp",
+      "originalSha256": "e3f5942236971f2750d073e15eab5b9eb369385454a836530a81dd447037fbda",
+      "replacementSha256": "44c8ae708508f31a4c2314d4e3ce9a656429b7662c89202a871523d502460edb",
+      "width": 650,
+      "height": 503,
+      "basis": "krug 7 (Befar dorada) — odobreno 29.10.",
+      "approvedOn": "2026-10-29"
     },
     {
       "src": "/products/befar/catalog/befar-polishing-sponge-with-applicator-3.webp",
@@ -1675,6 +1756,15 @@
         1149,
         911
       ]
+    },
+    {
+      "src": "/products/befar/catalog/befar-velcro-polishing-pad-6.webp",
+      "originalSha256": "e5b8897ff48f488c58e594b137abb8d6fceee86490c6e3cef1169da7b18d33a5",
+      "replacementSha256": "d07d3a148f19f1c35520fb442f8504e178d02a2b8ede0607a74c971da8b45214",
+      "width": 560,
+      "height": 413,
+      "basis": "krug 7 (Befar dorada) — odobreno 29.10.",
+      "approvedOn": "2026-10-29"
     },
     {
       "src": "/products/befar/catalog/befar-velcro-polishing-pad-7.webp",
@@ -1992,15 +2082,6 @@
       "approvedOn": "2026-10-27"
     },
     {
-      "src": "/products/carfit/catalog/carfit-blending-tape.webp",
-      "originalSha256": "c78cb2458b768cb73efe76b9f634b2f63ae5771a0da348514972291e09107100",
-      "replacementSha256": "644ee6fdab75efe3a7c31af69f422fa2be9b2406aac90fefed39c5a20e2426fa",
-      "width": 1000,
-      "height": 1000,
-      "basis": "nova",
-      "approvedOn": "2026-10-27"
-    },
-    {
       "src": "/products/carfit/catalog/carfit-car-clean-multi-2.webp",
       "originalSha256": "1494a492719a0ba10c5da3e2624df8efc48b236d02000fb9d41fc06dd2728b0a",
       "replacementSha256": "45f297363a790db12a4fcfac2da1c1c348ff0a256e6a83e28d97272af0e82807",
@@ -2037,15 +2118,6 @@
       "approvedOn": "2026-10-27"
     },
     {
-      "src": "/products/carfit/catalog/carfit-cover-tape-up-to-80c.webp",
-      "originalSha256": "f9484c11a15f13ffdd3796edc4747bd6e18dfeb8ad4b4adff83893e3de80763d",
-      "replacementSha256": "2f4be77cb108f1440a56c940bb794f861d17865b4e406826c9c9dfeb58fa6727",
-      "width": 1060,
-      "height": 1060,
-      "basis": "K1",
-      "approvedOn": "2026-10-27"
-    },
-    {
       "src": "/products/carfit/catalog/carfit-disposable-seat-covers.webp",
       "originalSha256": "d102fd1d50e4a03d2c1f1ab168fcd69a86631d1bef89dfa048d03a2f529bfb98",
       "replacementSha256": "bf962d8a0ee43567d7f51ee3d7c2c78738fd1f33447cbcd4f2b1470c33f80680",
@@ -2078,15 +2150,6 @@
       "replacementSha256": "58583a7d6ddc91ceac18f88c436654b9b0ee2d3704c0c9debda293ef1c35349d",
       "width": 1000,
       "height": 1000,
-      "basis": "K1",
-      "approvedOn": "2026-10-27"
-    },
-    {
-      "src": "/products/carfit/catalog/carfit-folding-paint-stand-premium-2.webp",
-      "originalSha256": "60faeebf7ed4e6dcc37405a89b27e9e2e3238a64983ebf6022fca68fdda03f7c",
-      "replacementSha256": "f4f9d8a5fdc89637ad40c56568d663e1e6040c0adbd8fc59eeb12af836236613",
-      "width": 1500,
-      "height": 1177,
       "basis": "K1",
       "approvedOn": "2026-10-27"
     },
@@ -2282,11 +2345,11 @@
     {
       "src": "/products/carfit/catalog/carfit-silver-wheel-spray.webp",
       "originalSha256": "ce3af6b2b219b3b27df8ebee70c9d5e2bf637e83b791449c918b627cda09ca09",
-      "replacementSha256": "e2534de9f7e6c102b0211d3f8bbdf0360b47377e2750b2ff8a6ccd1ea95a7626",
-      "width": 1000,
+      "replacementSha256": "2116876cf10d37be85102415fe60eb1223d4a52bc7bf57b96a134dc936f52ff8",
+      "width": 432,
       "height": 1000,
-      "basis": "K2",
-      "approvedOn": "2026-10-27"
+      "basis": "K3 — izbor vlasnika 29.10. (umesto K2)",
+      "approvedOn": "2026-10-29"
     },
     {
       "src": "/products/carfit/catalog/carfit-soft-interface-pads-micro.webp",
@@ -2309,11 +2372,11 @@
     {
       "src": "/products/carfit/catalog/carfit-stone-chip-protection-spray.webp",
       "originalSha256": "3d87e0ea8b0277c8722d5c89e60aae15c4f327c18a73fa7f1e79277f4bf41bb5",
-      "replacementSha256": "3d3655c0fa06f01f5a0d7d80db0c82ef24261ed773648164f1c2e75cc3dbfc44",
-      "width": 1000,
+      "replacementSha256": "e3952c499508ce5b0301da22ac9fc167520fd4e2a6e73470189a57629ec57ffb",
+      "width": 767,
       "height": 1000,
-      "basis": "K2",
-      "approvedOn": "2026-10-27"
+      "basis": "K3 — izbor vlasnika 29.10. (umesto K2)",
+      "approvedOn": "2026-10-29"
     },
     {
       "src": "/products/carfit/catalog/carfit-stone-chip-protection.webp",
@@ -2700,24 +2763,6 @@
       "approvedOn": "2026-10-27"
     },
     {
-      "src": "/products/carsystem/catalog/carsystem-multi-black-rapid.webp",
-      "originalSha256": "6be3f6b2130f5a5658bdfba223de2bdd2aca71277329143485e5bb3e3be526b6",
-      "replacementSha256": "eac176a5a4c0b79f81c7d145e715d7c8040cd444ccec937eaf949d1e9d7155ec",
-      "width": 660,
-      "height": 409,
-      "basis": "K1",
-      "approvedOn": "2026-10-27"
-    },
-    {
-      "src": "/products/carsystem/catalog/carsystem-multi-green-changer.webp",
-      "originalSha256": "e1c43431ba29872709363c834b3f6e685f919c03617717307b12e24925ea6634",
-      "replacementSha256": "50e99275aa1711f2064f0f30d5df9f80a76b2ddeb352b3e5584e4c2ccd94acbf",
-      "width": 660,
-      "height": 406,
-      "basis": "K1",
-      "approvedOn": "2026-10-27"
-    },
-    {
       "src": "/products/carsystem/catalog/carsystem-multi-mix-lids-2.webp",
       "originalSha256": "09edbecee8ce234f0ed79d8f92069ef1de9bec376b29860264e5407b078e69fe",
       "replacementSha256": "3a5041e3d1e355e6ac8069497c31c9254742e4a351f3bfbe7ddbd1d174e920b4",
@@ -2765,30 +2810,6 @@
       "height": 660,
       "basis": "K1",
       "approvedOn": "2026-10-27"
-    },
-    {
-      "src": "/products/carsystem/catalog/carsystem-polishing-pad-x1500-2.webp",
-      "originalSha256": "76a84a4e06613e5fd6f03a131ce69ad32f470ecc994d3e348dc22e4186dbaa9c",
-      "replacementSha256": "45750654a5f2b0afb0db1c52ae229479e2bedf188f81160b1ecfd2b0847a103b",
-      "width": 660,
-      "height": 302,
-      "basis": "K1",
-      "approvedOn": "2026-10-27",
-      "supersedes": [
-        "shadow-premultiply"
-      ]
-    },
-    {
-      "src": "/products/carsystem/catalog/carsystem-polishing-pad-x8000-2.webp",
-      "originalSha256": "97517dc8ebc7079d9bc5d365458d7fee583063e5fc641cc1344ba1516c325319",
-      "replacementSha256": "5d1b04cad6eeca26901d952f51440841478ea66813e254c407cf32347c769a8f",
-      "width": 660,
-      "height": 377,
-      "basis": "izvor",
-      "approvedOn": "2026-10-27",
-      "supersedes": [
-        "shadow-premultiply"
-      ]
     },
     {
       "src": "/products/carsystem/catalog/carsystem-proflex-callisto-150-mm-3.webp",
@@ -2902,11 +2923,11 @@
     {
       "src": "/products/carsystem/catalog/carsystem-rupes-mini-polishing-machine-hlr75stb-2.webp",
       "originalSha256": "d54edabe905abaea58706c0802c08f27e879cafb7431c82cd49d2788951b688b",
-      "replacementSha256": "b6fb13ba4ed5b6378e720b5016bf3607cdda1e27e591c1bf267f256dea46049a",
-      "width": 660,
-      "height": 440,
-      "basis": "K1",
-      "approvedOn": "2026-10-27"
+      "replacementSha256": "786a3e86797a7d4543d9f949e6ed6659caede5f154502bdf7571f8baf5cd2716",
+      "width": 350,
+      "height": 231,
+      "basis": "K1 — uokvireno 2026-10-29 (prevelika margina)",
+      "approvedOn": "2026-10-29"
     },
     {
       "src": "/products/carsystem/catalog/carsystem-sanding-block-hard.webp",
@@ -3142,22 +3163,31 @@
       "approvedOn": "2026-10-27"
     },
     {
+      "src": "/products/rm/rm-diamont-bazna-boja.webp",
+      "originalSha256": "5ddfe863a4489c180b7bafcfc0fc4dfd88b18523f1b3ddf99d08a51a058bacf2",
+      "replacementSha256": "656f1a7f80fa3ccd9d774fcfb1c45ad029476af9a26388056c3e52aa6e9543ea",
+      "width": 881,
+      "height": 1200,
+      "basis": "K1 — „prethodna verzija iz poređenja“, izbor vlasnika 29.10.",
+      "approvedOn": "2026-10-29"
+    },
+    {
       "src": "/products/rm/system/rm-crystal-base-125ml.webp",
       "originalSha256": "34f24c5a4e96764ff352f13488ee392fff41c7dca29f166148aaf8a42d791956",
-      "replacementSha256": "29055b526492f09449a52547907f8e8facc82318a444f2bb1b4333ae84370cdc",
-      "width": 1600,
+      "replacementSha256": "f4fbe6c580243db8133cd4c5372efcd1ea992bcc5dd42e062c99db7e4dca14d1",
+      "width": 735,
       "height": 1600,
-      "basis": "K1",
-      "approvedOn": "2026-10-27"
+      "basis": "K1 — „prethodna verzija iz poređenja“, izbor vlasnika 29.10.",
+      "approvedOn": "2026-10-29"
     },
     {
       "src": "/products/rm/system/rm-diamont-0-5l.webp",
       "originalSha256": "d981399b6a82a7802c619320f4ad535b362d8ce249a8b31162d5ee30975915c2",
-      "replacementSha256": "6dccde94b42f5fb6ce15cc86a464da1a570c1c55338837e3375cb0a25567fe4c",
-      "width": 1600,
-      "height": 1600,
-      "basis": "K1",
-      "approvedOn": "2026-10-27"
+      "replacementSha256": "75e1e8a7d6d7f8623f19a6749bf66f380e55115f33b26ca5edeb0e24e0c964ff",
+      "width": 1227,
+      "height": 1003,
+      "basis": "K1 — „prethodna verzija iz poređenja“, izbor vlasnika 29.10.",
+      "approvedOn": "2026-10-29"
     }
   ]
 }

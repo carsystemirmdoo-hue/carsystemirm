@@ -302,8 +302,12 @@
   opacity: 1;
 }
 
+/*
+ * Tamna tema nema radijalno svetlo iza proizvoda ni za tamne proizvode: vlasnik ga je
+ * odbio kao oreol (2026-10-30). Odvajanje nosi senka ispod proizvoda.
+ */
 :global(.dark) .stage[data-product-contrast="dark-product"] .stageHalo {
-  --product-halo-color: oklch(0.78 0.014 250 / 0.24);
+  opacity: 0;
 }
 
 /*
@@ -2723,6 +2727,23 @@ a.colorOptionContent:active {
 
 .variantOptionList > .variantOptionControl {
   height: 100%;
+}
+
+/* Lista sa skrolom ima max-height: 1fr bi stisnuo svaki red na visinu okvira podeljenu brojem
+   redova (52 px) i sekao krug boje i naziv (2026-10-30). Red je najmanje 5rem, svi isti. */
+.variantOptionList[data-option-count="many"] {
+  grid-auto-rows: minmax(5rem, auto);
+}
+
+/* Kod boja oznaka izbora ne uzima kolonu: stoji u uglu, a naziv i RAL oznaka dobijaju širinu. */
+.variantOptionList[data-option-kind="color"] > .variantOptionControl {
+  grid-template-columns: auto minmax(0, 1fr);
+}
+
+.variantOptionList[data-option-kind="color"] .variantSelectedMark {
+  position: absolute;
+  top: 0.35rem;
+  right: 0.35rem;
 }
 
 .variantOptionList[data-equal-tiles] .variantOptionControl {

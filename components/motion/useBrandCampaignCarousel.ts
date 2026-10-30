@@ -124,6 +124,12 @@ export function useBrandCampaignCarousel({
   const sectionIsVisibleRef = useRef(true);
   const pendingIndexRef = useRef<number | null>(null);
   const progressRef = useRef(0);
+  /*
+   * Proteklo vreme aktivnog slajda. Pauza (skriven tab, fokus, skrol van
+   * ekrana, dugme pauze) zamrzava napredak, a nastavak ide od iste tačke;
+   * nula samo kada se slajd zaista promeni.
+   */
+  const slideElapsedRef = useRef({ index: 0, ms: 0 });
   const progressFillRefs = useRef<Array<HTMLElement | null>>([]);
   const pendingRequestRef = useRef(false);
   const requestTokenRef = useRef(0);
@@ -210,7 +216,6 @@ export function useBrandCampaignCarousel({
     updatePauseReason("manual-hold", false);
     clearTransitionFallback();
     setPendingIndex(null);
-    paintProgress(0, activeIndexRef.current);
 
     if (transitionPhaseRef.current === "idle") {
       updatePauseReason("transition", false);
@@ -220,7 +225,6 @@ export function useBrandCampaignCarousel({
     updateTransitionPhase("idle");
   }, [
     clearTransitionFallback,
-    paintProgress,
     updatePauseReason,
     updateTransitionPhase,
   ]);
@@ -520,7 +524,14 @@ export function useBrandCampaignCarousel({
     clearProgressFrame();
 
     const scheduledIndex = activeIndexRef.current;
-    paintProgress(0, scheduledIndex);
+    if (slideElapsedRef.current.index !== scheduledIndex) {
+      slideElapsedRef.current = { index: scheduledIndex, ms: 0 };
+    }
+    const elapsedBefore = Math.min(
+      slideElapsedRef.current.ms,
+      autoplayIntervalMs,
+    );
+    paintProgress(elapsedBefore / autoplayIntervalMs, scheduledIndex);
     if (!shouldAutoplay) return;
 
     if (manualHoldDelayRef.current > 0) {
@@ -534,7 +545,14 @@ export function useBrandCampaignCarousel({
       return clearAutoplayTimer;
     }
 
-    const startedAt = Date.now();
+    const startedAt = Date.now() - elapsedBefore;
+    const rememberElapsed = () => {
+      if (slideElapsedRef.current.index !== scheduledIndex) return;
+      slideElapsedRef.current.ms = Math.min(
+        Date.now() - startedAt,
+        autoplayIntervalMs,
+      );
+    };
     const updateProgress = () => {
       if (autoplayTimerRef.current === null) {
         progressFrameRef.current = null;
@@ -554,6 +572,7 @@ export function useBrandCampaignCarousel({
     autoplayTimerRef.current = setTimeout(() => {
       autoplayTimerRef.current = null;
       clearProgressFrame();
+      rememberElapsed();
       paintProgress(1, scheduledIndex);
 
       if (
@@ -570,9 +589,10 @@ export function useBrandCampaignCarousel({
       }
 
       void requestSlide(activeIndexRef.current + 1, false, "next");
-    }, autoplayIntervalMs);
+    }, autoplayIntervalMs - elapsedBefore);
 
     return () => {
+      if (autoplayTimerRef.current !== null) rememberElapsed();
       clearAutoplayTimer();
       clearProgressFrame();
     };

@@ -83,6 +83,14 @@ PALETTE_LEVELS = 1 << PALETTE_BITS
 MIN_CLUSTER_SHARE = 0.06
 MAX_PALETTE_ENTRIES = 3
 
+# Coarse palette (3 bits per channel) for "does this product contain a large area
+# of colour X": a moulded red pad with shading splits into many 5-bit buckets and
+# never reaches MIN_CLUSTER_SHARE, but lands in one or two 3-bit buckets. Used by
+# the /katalog roller colour rule (lib/catalogRollerColor.mjs), 2026-10-30.
+COARSE_BITS = 3
+COARSE_MIN_SHARE = 0.05
+COARSE_MAX_ENTRIES = 4
+
 # --- V6 subject fit + official-shadow model (Carsystem only) ------------------
 #
 # `box` above is the bounding box of everything with alpha > 24. Official
@@ -208,16 +216,23 @@ def relative_luminance(rgb: np.ndarray) -> np.ndarray:
     return linear @ np.array([0.2126, 0.7152, 0.0722])
 
 
-def sample_palette(rgb: np.ndarray, mask: np.ndarray) -> list[dict[str, object]]:
+def sample_palette(
+    rgb: np.ndarray,
+    mask: np.ndarray,
+    bits: int = PALETTE_BITS,
+    min_share: float = MIN_CLUSTER_SHARE,
+    max_entries: int = MAX_PALETTE_ENTRIES,
+) -> list[dict[str, object]]:
     """Largest-area colour clusters of the product itself."""
     pixels = rgb[mask]
     if pixels.size == 0:
         return []
 
-    shift = 8 - PALETTE_BITS
+    shift = 8 - bits
+    levels = 1 << bits
     keys = (
-        (pixels[:, 0] >> shift).astype(np.int32) * PALETTE_LEVELS * PALETTE_LEVELS
-        + (pixels[:, 1] >> shift).astype(np.int32) * PALETTE_LEVELS
+        (pixels[:, 0] >> shift).astype(np.int32) * levels * levels
+        + (pixels[:, 1] >> shift).astype(np.int32) * levels
         + (pixels[:, 2] >> shift).astype(np.int32)
     )
     unique, counts = np.unique(keys, return_counts=True)
@@ -225,9 +240,9 @@ def sample_palette(rgb: np.ndarray, mask: np.ndarray) -> list[dict[str, object]]
 
     total = float(len(keys))
     palette: list[dict[str, object]] = []
-    for index in order[: MAX_PALETTE_ENTRIES * 4]:
+    for index in order[: max_entries * 4]:
         share = float(counts[index]) / total
-        if share < MIN_CLUSTER_SHARE:
+        if share < min_share:
             break
         bucket = keys == unique[index]
         mean = pixels[bucket].mean(axis=0)
@@ -237,7 +252,7 @@ def sample_palette(rgb: np.ndarray, mask: np.ndarray) -> list[dict[str, object]]
                 "share": round(share, 4),
             }
         )
-        if len(palette) == MAX_PALETTE_ENTRIES:
+        if len(palette) == max_entries:
             break
     return palette
 
@@ -417,6 +432,7 @@ def measure(path: Path, href: str | None = None) -> dict[str, object] | None:
         "tone": tone,
         "boxSource": mask_source,
         "palette": sample_palette(rgb, mask),
+        "coarse": sample_palette(rgb, mask, COARSE_BITS, COARSE_MIN_SHARE, COARSE_MAX_ENTRIES),
         **_subject_fields(rgba, href, [left, top, box_width, box_height], mask_source),
     }
     if backdrop is not None:

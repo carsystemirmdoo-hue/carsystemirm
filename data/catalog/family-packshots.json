@@ -66,7 +66,7 @@
       "system": "Line 35",
       "volume": "1 L",
       "src": "/products/baslac/baslac--line-35-1l-representative.webp",
-      "shownCode": "35-M1020",
+      "shownCode": null,
       "portalAssetId": 12115,
       "portalFile": "baslac_1L_35-M1020_53220998.jpeg",
       "width": 923,
@@ -76,14 +76,15 @@
       "boxFillRatio": 0.9648,
       "nearWhiteInsideProduct": 0.4034,
       "productMedianLuminance": 213.0,
-      "mode": "cut-out"
+      "mode": "cut-out",
+      "labelRetouch": "2026-10-30: šifra i naziv nijanse uklonjeni, ostaje oznaka serije"
     },
     {
       "brand": "baslac",
       "system": "Line 35",
       "volume": "0,5 L",
       "src": "/products/baslac/baslac--line-35-0.5l-representative.webp",
-      "shownCode": "35-M1120",
+      "shownCode": null,
       "portalAssetId": 12092,
       "portalFile": "baslac_0_5L_35-M1120_53377349.jpeg",
       "width": 1200,
@@ -93,14 +94,15 @@
       "boxFillRatio": 0.9608,
       "nearWhiteInsideProduct": 0.4685,
       "productMedianLuminance": 234.0,
-      "mode": "cut-out"
+      "mode": "cut-out",
+      "labelRetouch": "2026-10-30: šifra i naziv nijanse uklonjeni, ostaje oznaka serije"
     },
     {
       "brand": "baslac",
       "system": "Line 30",
       "volume": "1 L",
       "src": "/products/baslac/baslac--line-30-1l-representative.webp",
-      "shownCode": "30-S110",
+      "shownCode": null,
       "portalAssetId": 12114,
       "portalFile": "baslac_1L_30-S110_50493089.jpeg",
       "width": 923,
@@ -110,14 +112,15 @@
       "boxFillRatio": 0.9648,
       "nearWhiteInsideProduct": 0.4078,
       "productMedianLuminance": 218.0,
-      "mode": "cut-out"
+      "mode": "cut-out",
+      "labelRetouch": "2026-10-30: šifra i naziv nijanse uklonjeni, ostaje oznaka serije"
     },
     {
       "brand": "baslac",
       "system": "Line 45",
       "volume": "5 L",
       "src": "/products/baslac/baslac--line-45-5l-representative.webp",
-      "shownCode": "45-W00",
+      "shownCode": null,
       "portalAssetId": 12081,
       "portalFile": "baslac 5L 45-W00 50393402.jpeg",
       "width": 750,
@@ -127,14 +130,15 @@
       "boxFillRatio": 0.9123,
       "nearWhiteInsideProduct": 0.466,
       "productMedianLuminance": 241.0,
-      "mode": "cut-out"
+      "mode": "cut-out",
+      "labelRetouch": "2026-10-30: šifra i naziv nijanse uklonjeni, ostaje oznaka serije"
     },
     {
       "brand": "baslac",
       "system": "Line 45",
       "volume": "1 L",
       "src": "/products/baslac/baslac--line-45-1l-representative.webp",
-      "shownCode": "45-W1010",
+      "shownCode": null,
       "portalAssetId": 12121,
       "portalFile": "Baslac_1L_45-W1010_50389480.jpeg",
       "width": 923,
@@ -144,14 +148,15 @@
       "boxFillRatio": 0.9648,
       "nearWhiteInsideProduct": 0.4076,
       "productMedianLuminance": 222.3,
-      "mode": "cut-out"
+      "mode": "cut-out",
+      "labelRetouch": "2026-10-30: šifra i naziv nijanse uklonjeni, ostaje oznaka serije"
     },
     {
       "brand": "baslac",
       "system": "Line 45",
       "volume": "0,5 L",
       "src": "/products/baslac/baslac--line-45-0.5l-representative.webp",
-      "shownCode": "45-W1020",
+      "shownCode": null,
       "portalAssetId": 12094,
       "portalFile": "baslac_0_5L_45-W1020_50390264.jpeg",
       "width": 1200,
@@ -161,14 +166,15 @@
       "boxFillRatio": 0.9608,
       "nearWhiteInsideProduct": 0.4665,
       "productMedianLuminance": 234.0,
-      "mode": "cut-out"
+      "mode": "cut-out",
+      "labelRetouch": "2026-10-30: šifra i naziv nijanse uklonjeni, ostaje oznaka serije"
     },
     {
       "brand": "baslac",
       "system": "Line 45",
       "volume": "0,1 L",
       "src": "/products/baslac/baslac--line-45-0.1l-representative.webp",
-      "shownCode": "45-W1390",
+      "shownCode": null,
       "portalAssetId": 12088,
       "portalFile": "baslac 100ml 45-W1390 50562135.jpeg",
       "width": 454,
@@ -178,7 +184,8 @@
       "boxFillRatio": 0.7845,
       "nearWhiteInsideProduct": 0.3778,
       "productMedianLuminance": 221.3,
-      "mode": "cut-out"
+      "mode": "cut-out",
+      "labelRetouch": "2026-10-30: šifra i naziv nijanse uklonjeni, ostaje oznaka serije"
     }
   ]
 }

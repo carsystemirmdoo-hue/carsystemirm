@@ -26,3 +26,35 @@
     align-items: start;
   }
 }
+
+/* Boje (sprejevi i ostale porodice sa nijansama): kolona dovoljno široka za ceo naziv u dva reda,
+   bez „Daff… Yell…”. Na uobičajenoj širini panela daje 3 kolone (2026-10-30). */
+@media (min-width: 1024px) {
+  .variantOptionList.variantOptionList.variantOptionList[data-option-kind="color"] {
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 10.5rem), 1fr));
+  }
+}
+
+/*
+ * Sprej u uspravnom kadru (2026-10-30). Trag je položen (SVG 3:2), pa u kadru 5:6 jedinična skala
+ * daje trag visok samo 0,495 visine kadra; klasa S (0,8) ga je spuštala na ~60 % visine limenke
+ * spreja od 400 ml. Cilj: trag = 0,85 × visina omotača ambalaže (S 74 %, M 80 %, L 86 %, XL 92 %),
+ * tj. size = 0,85 · omotač / 0,495 / 1,12. Položeni i kvadratni kadrovi ostaju na lestvici klasa.
+ */
+@media (min-width: 1024px) {
+  .stickyStage.stickyStage[data-stage-format="portrait"][data-product-size-class="S"] {
+    --product-stage-spray-size: 1.13;
+  }
+
+  .stickyStage.stickyStage[data-stage-format="portrait"][data-product-size-class="M"] {
+    --product-stage-spray-size: 1.23;
+  }
+
+  .stickyStage.stickyStage[data-stage-format="portrait"][data-product-size-class="L"] {
+    --product-stage-spray-size: 1.32;
+  }
+
+  .stickyStage.stickyStage[data-stage-format="portrait"][data-product-size-class="XL"] {
+    --product-stage-spray-size: 1.41;
+  }
+}

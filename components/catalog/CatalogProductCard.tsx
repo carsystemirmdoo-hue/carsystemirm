@@ -79,6 +79,8 @@ export function CatalogProductCard({
    *      merena, izvedena ili orijentacioni prikaz potvrđene imenovane boje —
    *      vidi `getProductShadeSource`), inače boja brenda
    *      (`lib/brand-card-colors.ts`), inače postojeći akcenat preseta.
+   *      Izuzetak (2026-10-30): abrazivi i trake nose `rollerColor` — boju brenda
+   *      ili kontrastnu neutralnu, da proizvod ne nestane u roletni svoje boje.
    *
    * Nijansa se ovde upisuje u CSS promenljive kartice zato što `style` iz
    * prezentacije nosi PDP akcente (brend/faza), a PDP je zaključan — kartica
@@ -88,7 +90,7 @@ export function CatalogProductCard({
    * zadržavaju netaknutu prezentaciju.
    */
   const cardColor = catalogSystem
-    ? (listing.presentation.shade ?? getBrandCardColor(brand))
+    ? (listing.rollerColor ?? listing.presentation.shade ?? getBrandCardColor(brand))
     : null;
   const presentation = catalogSystem
     ? {

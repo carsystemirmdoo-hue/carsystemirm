@@ -246,28 +246,6 @@
   opacity: 0.46;
 }
 
-.check {
-  display: inline-grid;
-  width: 22px;
-  height: 22px;
-  flex: 0 0 auto;
-  place-items: center;
-  border-radius: 999px;
-  background: oklch(0.61 0.21 27 / 0.1);
-  color: oklch(0.53 0.2 27);
-  font-size: 13px;
-}
-
-:global(.dark) .check {
-  background: oklch(0.61 0.21 27 / 0.17);
-  color: oklch(0.75 0.15 27);
-}
-
-.check:empty,
-:global(.dark) .check:empty {
-  background: transparent;
-}
-
 .emptyState {
   display: grid;
   min-height: 120px;
@@ -471,12 +449,6 @@
 
 :global([data-ds="a"]) .option:focus-visible {
   outline-color: var(--ds-c-focus);
-}
-
-:global([data-ds="a"]) .check {
-  border-radius: var(--ds-ctl-radius);
-  background: transparent;
-  color: var(--ds-c-accent-text);
 }
 
 :global([data-ds="a"]) .emptyState {

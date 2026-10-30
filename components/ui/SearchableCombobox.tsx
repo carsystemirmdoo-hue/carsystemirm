@@ -89,6 +89,8 @@ export function SearchableCombobox({
   const [open, setOpen] = useState(false);
   const [query, setQuery] = useState("");
   const [activeIndex, setActiveIndex] = useState(0);
+  const activeFromPointerRef = useRef(false);
+  const lastPointerRef = useRef<{ x: number; y: number } | null>(null);
   const [isMobile, setIsMobile] = useState(false);
   const [panelPosition, setPanelPosition] = useState<PanelPosition>({
     left: 12,
@@ -167,6 +169,8 @@ export function SearchableCombobox({
       const selectedIndex = options.findIndex((option) => option.value === value);
       setQuery("");
       setActiveIndex(preferredIndex ?? Math.max(0, selectedIndex));
+      lastPointerRef.current = null;
+      activeFromPointerRef.current = false;
       setOpen(true);
     },
     [disabled, options, value],
@@ -257,8 +261,18 @@ export function SearchableCombobox({
     setActiveIndex((current) => Math.min(current, filteredOptions.length - 1));
   }, [filteredOptions, open]);
 
+  /*
+   * Lista se pomera do aktivne opcije samo kada je aktivnu opciju izabrala
+   * tastatura ili otvaranje. Kod miša je opcija već pod kursorom, a Chrome
+   * tokom animiranog skrola točkićem šalje mousemove: `scrollIntoView` bi
+   * tada prekidao skrol, pa točkić „ne radi" (2026-10-30).
+   */
   useEffect(() => {
     if (!open || !activeOptionId) return;
+    if (activeFromPointerRef.current) {
+      activeFromPointerRef.current = false;
+      return;
+    }
     document.getElementById(activeOptionId)?.scrollIntoView({ block: "nearest" });
   }, [activeOptionId, open]);
 
@@ -487,15 +501,22 @@ export function SearchableCombobox({
                           key={option.value}
                           onClick={() => selectOption(option)}
                           onMouseDown={(event) => event.preventDefault()}
-                          onMouseMove={() => setActiveIndex(index)}
+                          onMouseMove={(event) => {
+                            // Chrome šalje mousemove i kada se sadržaj pomeri ispod mirnog
+                            // kursora (skrol točkićem, otvaranje liste). To nije pokret miša.
+                            const last = lastPointerRef.current;
+                            lastPointerRef.current = { x: event.clientX, y: event.clientY };
+                            if (!last || (last.x === event.clientX && last.y === event.clientY)) return;
+                            if (index === activeIndex) return;
+                            activeFromPointerRef.current = true;
+                            setActiveIndex(index);
+                          }}
                           role="option"
                           tabIndex={-1}
                           type="button"
                         >
+                          {/* Izabrana opcija se vidi po crvenoj senci reda, bez kvačice (2026-10-30). */}
                           <span>{option.label}</span>
-                          <span aria-hidden="true" className={styles.check}>
-                            {isSelected ? "✓" : ""}
-                          </span>
                         </button>
                       );
                     })

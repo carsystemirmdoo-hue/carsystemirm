@@ -134,7 +134,7 @@ test("timer je nezavisan od progress rAF petlje", async () => {
   // Promenu slajda pokrece setTimeout deadline, ne requestAnimationFrame.
   assert.match(
     source,
-    /autoplayTimerRef\.current = setTimeout\([\s\S]*?void requestSlide\(activeIndexRef\.current \+ 1, false, "next"\);[\s\S]*?\}, autoplayIntervalMs\)/,
+    /autoplayTimerRef\.current = setTimeout\([\s\S]*?void requestSlide\(activeIndexRef\.current \+ 1, false, "next"\);[\s\S]*?\}, autoplayIntervalMs - elapsedBefore\)/,
   );
   // rAF samo crta progress i nikada ne menja indeks.
   const rafBlock = source.slice(

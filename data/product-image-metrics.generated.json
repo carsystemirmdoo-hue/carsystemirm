@@ -3095,25 +3095,25 @@
       "palette": [
         {
           "hex": "#ffffff",
-          "share": 0.3902
+          "share": 0.3891
         }
       ],
       "coarse": [
         {
           "hex": "#fbfbfb",
-          "share": 0.4833
+          "share": 0.4826
         },
         {
-          "hex": "#0390cf",
-          "share": 0.0794
+          "hex": "#0390ce",
+          "share": 0.0772
         },
         {
           "hex": "#d0d0d0",
-          "share": 0.0771
+          "share": 0.0768
         },
         {
-          "hex": "#141310",
-          "share": 0.0514
+          "hex": "#131310",
+          "share": 0.051
         }
       ]
     },
@@ -3175,17 +3175,17 @@
       "palette": [
         {
           "hex": "#ffffff",
-          "share": 0.4548
+          "share": 0.4539
         }
       ],
       "coarse": [
         {
           "hex": "#fcfcfc",
-          "share": 0.5318
+          "share": 0.5321
         },
         {
           "hex": "#d0d0d0",
-          "share": 0.0618
+          "share": 0.0622
         }
       ]
     },
@@ -3209,21 +3209,21 @@
       "palette": [
         {
           "hex": "#ffffff",
-          "share": 0.3887
+          "share": 0.3875
         }
       ],
       "coarse": [
         {
           "hex": "#fbfbfb",
-          "share": 0.4804
+          "share": 0.4798
         },
         {
           "hex": "#d0d0d0",
-          "share": 0.0773
+          "share": 0.0769
         },
         {
           "hex": "#131210",
-          "share": 0.0541
+          "share": 0.054
         }
       ]
     },
@@ -3241,27 +3241,27 @@
       "ox": 0.0523,
       "oy": 0.0381,
       "aspect": 0.7057,
-      "luminance": 0.8691,
+      "luminance": 0.8667,
       "tone": "very-light",
       "boxSource": "alpha",
       "palette": [
         {
           "hex": "#fdfdfd",
-          "share": 0.4331
+          "share": 0.4319
         }
       ],
       "coarse": [
         {
           "hex": "#f9fafa",
-          "share": 0.5727
+          "share": 0.5731
         },
         {
           "hex": "#d2d2d3",
-          "share": 0.0576
+          "share": 0.0572
         },
         {
           "hex": "#0a0a0a",
-          "share": 0.057
+          "share": 0.0568
         }
       ]
     },
@@ -3323,21 +3323,17 @@
       "palette": [
         {
           "hex": "#ffffff",
-          "share": 0.4548
+          "share": 0.454
         }
       ],
       "coarse": [
         {
           "hex": "#fcfcfc",
-          "share": 0.5337
+          "share": 0.534
         },
         {
           "hex": "#d0d0d0",
-          "share": 0.0627
-        },
-        {
-          "hex": "#b0b0b0",
-          "share": 0.05
+          "share": 0.0632
         }
       ]
     },
@@ -3399,25 +3395,25 @@
       "palette": [
         {
           "hex": "#ffffff",
-          "share": 0.3889
+          "share": 0.3877
         }
       ],
       "coarse": [
         {
           "hex": "#fbfbfb",
-          "share": 0.4817
+          "share": 0.481
         },
         {
           "hex": "#d0d1d1",
-          "share": 0.0781
+          "share": 0.078
         },
         {
           "hex": "#6cb5ca",
-          "share": 0.068
+          "share": 0.0673
         },
         {
           "hex": "#131310",
-          "share": 0.0527
+          "share": 0.0525
         }
       ]
     },

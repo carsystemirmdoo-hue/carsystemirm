@@ -1,0 +1,89 @@
+/* Raspored do 900 px (telefon i uži tablet). Prva klasa je udvostručena (vidi docs/MOBILNI_DESKTOP_RASPORED.md). */
+
+@media (max-width: 900px) {
+  /* Podmeni se pomera vodoravno unutar sebe; strana ne dobija bočno pomeranje. */
+  .subnav.subnav {
+    margin-inline: calc(-1 * var(--ds-gutter, 16px));
+    padding-inline: var(--ds-gutter, 16px);
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scrollbar-width: none;
+  }
+
+  .subnav.subnav::-webkit-scrollbar {
+    display: none;
+  }
+
+  .subnavList.subnavList {
+    width: max-content;
+  }
+
+  .actions.actions > * {
+    flex: 1 1 100%;
+  }
+
+  .jobList.jobList {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .jobButton.jobButton {
+    min-height: 64px;
+    padding: 12px;
+  }
+
+  .jobButtonDesc.jobButtonDesc {
+    display: none;
+  }
+
+  .jobPanel.jobPanel {
+    padding: 16px;
+  }
+
+  .choiceOptions.choiceOptions {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  }
+
+  .step.step {
+    grid-template-columns: 30px minmax(0, 1fr);
+    gap: 4px 10px;
+  }
+
+  .step.step::before {
+    width: 26px;
+    height: 26px;
+  }
+
+  .tabList.tabList {
+    margin-inline: calc(-1 * var(--ds-gutter, 16px));
+    padding-inline: var(--ds-gutter, 16px);
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .tab.tab {
+    flex: 0 0 auto;
+  }
+
+  .tabHint.tabHint {
+    display: none;
+  }
+
+  .tabPanel.tabPanel {
+    padding: 16px;
+  }
+
+  .counters.counters {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .problem.problem summary {
+    padding: 12px 14px;
+  }
+}
+
+@media (max-width: 380px) {
+  .jobList.jobList {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

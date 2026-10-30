@@ -577,9 +577,9 @@ export type BaslacAssetSlot = {
   /** Očekivani naziv fajla kada slot bude popunjen. */
   expectedFilename: string;
   /**
-   * Šifra baze koja se vidi na etiketi reprezentativne fotografije (2026-10-21). Baslac portal
-   * za 1 L / 0,5 L / 5 L / 0,1 L ima samo fotografije sa šifrom jedne baze; koristi se jedna
-   * fotografija po sistemu i zapremini, a strana kaže koja je baza na fotografiji.
+   * Šifra baze koja se vidi na etiketi reprezentativne fotografije, kada je ima. Od 2026-10-30
+   * fotografije 1 L / 0,5 L / 5 L / 0,1 L su retuširane na oznaku serije (35-M, 45-W, 30-S),
+   * kao 3,5 L limenka, pa nijedan slot ne nosi šifru. Polje ostaje za buduće fotografije sa šifrom.
    */
   shownCode?: string;
   /** Surventis Brand Portal asset (hub 54), izvor fotografije. */
@@ -588,15 +588,15 @@ export type BaslacAssetSlot = {
 
 const ASSET_SLOTS: BaslacAssetSlot[] = [
   { slotId: "line-30:3.5l", system: "line-30", volumeL: 3.5, src: "/products/baslac/baslac--line-30-3.5l-family-packshot.webp", expectedFilename: "baslac--line-30-3.5l-family-packshot.png" },
-  { slotId: "line-30:1l", system: "line-30", volumeL: 1, src: "/products/baslac/baslac--line-30-1l-representative.webp", shownCode: "30-S110", portalAssetId: 12114, expectedFilename: "baslac--line-30-1l-family-packshot.png" },
+  { slotId: "line-30:1l", system: "line-30", volumeL: 1, src: "/products/baslac/baslac--line-30-1l-representative.webp", portalAssetId: 12114, expectedFilename: "baslac--line-30-1l-family-packshot.png" },
   { slotId: "line-30-cv:3.5l", system: "line-30-cv", volumeL: 3.5, src: "/products/baslac/baslac--line-30-3.5l-family-packshot.webp", expectedFilename: "baslac--line-30-3.5l-family-packshot.png" },
   { slotId: "line-35:3.5l", system: "line-35", volumeL: 3.5, src: "/products/baslac/baslac--line-35-3.5l-family-packshot.webp", expectedFilename: "baslac--line-35-3.5l-family-packshot.png" },
-  { slotId: "line-35:1l", system: "line-35", volumeL: 1, src: "/products/baslac/baslac--line-35-1l-representative.webp", shownCode: "35-M1020", portalAssetId: 12115, expectedFilename: "baslac--line-35-1l-family-packshot.png" },
-  { slotId: "line-35:0.5l", system: "line-35", volumeL: 0.5, src: "/products/baslac/baslac--line-35-0.5l-representative.webp", shownCode: "35-M1120", portalAssetId: 12092, expectedFilename: "baslac--line-35-0.5l-family-packshot.png" },
-  { slotId: "line-45:5l", system: "line-45", volumeL: 5, src: "/products/baslac/baslac--line-45-5l-representative.webp", shownCode: "45-W00", portalAssetId: 12081, expectedFilename: "baslac--line-45-5l-family-packshot.png" },
-  { slotId: "line-45:1l", system: "line-45", volumeL: 1, src: "/products/baslac/baslac--line-45-1l-representative.webp", shownCode: "45-W1010", portalAssetId: 12121, expectedFilename: "baslac--line-45-1l-family-packshot.png" },
-  { slotId: "line-45:0.5l", system: "line-45", volumeL: 0.5, src: "/products/baslac/baslac--line-45-0.5l-representative.webp", shownCode: "45-W1020", portalAssetId: 12094, expectedFilename: "baslac--line-45-0.5l-family-packshot.png" },
-  { slotId: "line-45:0.1l", system: "line-45", volumeL: 0.1, src: "/products/baslac/baslac--line-45-0.1l-representative.webp", shownCode: "45-W1390", portalAssetId: 12088, expectedFilename: "baslac--line-45-0.1l-concentrate-packshot.png" },
+  { slotId: "line-35:1l", system: "line-35", volumeL: 1, src: "/products/baslac/baslac--line-35-1l-representative.webp", portalAssetId: 12115, expectedFilename: "baslac--line-35-1l-family-packshot.png" },
+  { slotId: "line-35:0.5l", system: "line-35", volumeL: 0.5, src: "/products/baslac/baslac--line-35-0.5l-representative.webp", portalAssetId: 12092, expectedFilename: "baslac--line-35-0.5l-family-packshot.png" },
+  { slotId: "line-45:5l", system: "line-45", volumeL: 5, src: "/products/baslac/baslac--line-45-5l-representative.webp", portalAssetId: 12081, expectedFilename: "baslac--line-45-5l-family-packshot.png" },
+  { slotId: "line-45:1l", system: "line-45", volumeL: 1, src: "/products/baslac/baslac--line-45-1l-representative.webp", portalAssetId: 12121, expectedFilename: "baslac--line-45-1l-family-packshot.png" },
+  { slotId: "line-45:0.5l", system: "line-45", volumeL: 0.5, src: "/products/baslac/baslac--line-45-0.5l-representative.webp", portalAssetId: 12094, expectedFilename: "baslac--line-45-0.5l-family-packshot.png" },
+  { slotId: "line-45:0.1l", system: "line-45", volumeL: 0.1, src: "/products/baslac/baslac--line-45-0.1l-representative.webp", portalAssetId: 12088, expectedFilename: "baslac--line-45-0.1l-concentrate-packshot.png" },
 ];
 
 export function baslacAssetSlot(

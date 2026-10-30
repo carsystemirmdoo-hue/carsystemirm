@@ -2,7 +2,7 @@
 
 Zaključana stranica je stranica čiji odobreni dizajn i raspored se više ne menjaju bez dogovora sa vlasnikom. Sadržaj, podaci, cene i slike se i dalje menjaju. Zaključavanje ne menja dostupnost stranice posetiocima.
 
-**Stranice bira vlasnik.** Agent ne dodaje stranice sam. Spisak je trenutno prazan i popunjava se tek kada vlasnik navede stranice.
+**Stranice bira vlasnik.** Agent ne dodaje stranice sam. Spisak se popunjava samo kada vlasnik navede stranicu (prva: početna, 2026-10-30).
 
 ## Kako se vodi evidencija
 
@@ -36,7 +36,7 @@ Novi snimci se porede sa referentnim.
 
 | Stranica | Ruta | Zaključano | Odobrio | Referentni snimci | Status |
 |---|---|---|---|---|---|
-| — | — | — | — | — | čeka izbor vlasnika |
+| Početna | `/` | 2026-10-30 | vlasnik (Mile), posle dorade hero brojača i izbora grada | `~/Carsystem/zakljucane-stranice/pocetna/2026-10-30/` (desktop i telefon, svetla i tamna) | zaključano |
 
 ## Odnos prema `docs/PAGE_LOCK_STATUS.md`
 

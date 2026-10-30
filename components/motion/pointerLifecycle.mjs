@@ -21,6 +21,8 @@
  * implementacija. `pointerLifecycle.ts` je tipizovan omotač.
  */
 
+const POINTER_CAPTURE = { capture: true, passive: true };
+
 const hubs = new WeakMap();
 
 /** Razlozi za povratak u neutralno stanje. */
@@ -141,13 +143,16 @@ function createHub(env) {
     scheduleRefresh();
   }
 
-  env.document.addEventListener("pointermove", handlePointerMove, {
-    passive: true,
-  });
-  env.document.addEventListener("pointerover", handlePointerOver, {
-    passive: true,
-  });
-  env.document.addEventListener("pointerout", handlePointerOut);
+  /*
+   * Kretanje se sluša u fazi hvatanja (capture). Komponente zaustavljaju
+   * propagaciju (kartica lokatora u hero-u, da swipe ne promeni slajd), a
+   * React-ov `stopPropagation` zaustavlja i pravi događaj; u fazi mehurića
+   * kursor tada nije video pokrete i kružić je ostajao na ivici kartice i
+   * padajućeg menija (2026-10-30).
+   */
+  env.document.addEventListener("pointermove", handlePointerMove, POINTER_CAPTURE);
+  env.document.addEventListener("pointerover", handlePointerOver, POINTER_CAPTURE);
+  env.document.addEventListener("pointerout", handlePointerOut, true);
   env.document.addEventListener("pointercancel", handlePointerCancel, {
     passive: true,
   });
@@ -165,9 +170,9 @@ function createHub(env) {
     hasFrame: () => frame !== 0,
     lastPoint: () => lastPoint,
     teardown() {
-      env.document.removeEventListener("pointermove", handlePointerMove);
-      env.document.removeEventListener("pointerover", handlePointerOver);
-      env.document.removeEventListener("pointerout", handlePointerOut);
+      env.document.removeEventListener("pointermove", handlePointerMove, true);
+      env.document.removeEventListener("pointerover", handlePointerOver, true);
+      env.document.removeEventListener("pointerout", handlePointerOut, true);
       env.document.removeEventListener("pointercancel", handlePointerCancel);
       env.document.removeEventListener("pointerleave", handlePointerLeave);
       env.document.removeEventListener(

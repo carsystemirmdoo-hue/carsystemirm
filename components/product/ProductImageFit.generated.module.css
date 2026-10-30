@@ -20179,6 +20179,15 @@
   --product-content-offset-y: 0.1473;
 }
 
+.fit[data-product-fit="/remastered/images/brands/rm/products/agilis/rm-p-2p81-race-wet-fill-r-white.webp"] {
+  --product-canvas-aspect: 1.3333;
+  --product-content-aspect: 0.9586;
+  --product-content-fill-x: 0.4194;
+  --product-content-fill-y: 0.5833;
+  --product-content-offset-x: 0.2944;
+  --product-content-offset-y: 0.2017;
+}
+
 .fit[data-product-fit="/remastered/products/baslac/baslac--line-35-0.5l-representative.webp"] {
   --product-canvas-aspect: 0.8337;
   --product-content-aspect: 1.2587;
@@ -21675,18 +21684,18 @@
 
 .fit[data-product-fit="/remastered/products/carfit/catalog/carfit-1k-hi-build-primer-filler-spray.webp"] {
   --product-canvas-aspect: 1;
-  --product-content-aspect: 0.9525;
-  --product-content-fill-x: 0.883;
-  --product-content-fill-y: 0.927;
-  --product-content-offset-x: 0.059;
-  --product-content-offset-y: 0.04;
+  --product-content-aspect: 0.9504;
+  --product-content-fill-x: 0.882;
+  --product-content-fill-y: 0.928;
+  --product-content-offset-x: 0.06;
+  --product-content-offset-y: 0.039;
 }
 
 .fit[data-product-fit="/remastered/products/carfit/catalog/carfit-1k-plastic-primer-spray.webp"] {
   --product-canvas-aspect: 1;
-  --product-content-aspect: 0.3412;
-  --product-content-fill-x: 0.32;
-  --product-content-fill-y: 0.938;
+  --product-content-aspect: 0.3415;
+  --product-content-fill-x: 0.321;
+  --product-content-fill-y: 0.94;
   --product-content-offset-x: 0.34;
   --product-content-offset-y: 0.037;
 }
@@ -21729,28 +21738,28 @@
 
 .fit[data-product-fit="/remastered/products/carfit/catalog/carfit-2k-uhs-low-voc-clearcoat.webp"] {
   --product-canvas-aspect: 1;
-  --product-content-aspect: 0.5888;
+  --product-content-aspect: 0.5882;
   --product-content-fill-x: 0.57;
-  --product-content-fill-y: 0.968;
+  --product-content-fill-y: 0.969;
   --product-content-offset-x: 0.204;
-  --product-content-offset-y: 0.021;
+  --product-content-offset-y: 0.02;
 }
 
 .fit[data-product-fit="/remastered/products/carfit/catalog/carfit-2k-us-filler-4-1.webp"] {
   --product-canvas-aspect: 1;
-  --product-content-aspect: 1.0578;
+  --product-content-aspect: 1.0565;
   --product-content-fill-x: 0.879;
-  --product-content-fill-y: 0.831;
+  --product-content-fill-y: 0.832;
   --product-content-offset-x: 0.061;
   --product-content-offset-y: 0.104;
 }
 
 .fit[data-product-fit="/remastered/products/carfit/catalog/carfit-2k-washprimer-2-1.webp"] {
   --product-canvas-aspect: 1;
-  --product-content-aspect: 1.0335;
-  --product-content-fill-x: 0.926;
-  --product-content-fill-y: 0.896;
-  --product-content-offset-x: 0.025;
+  --product-content-aspect: 1.0267;
+  --product-content-fill-x: 0.923;
+  --product-content-fill-y: 0.899;
+  --product-content-offset-x: 0.024;
   --product-content-offset-y: 0.063;
 }
 
@@ -21774,11 +21783,11 @@
 
 .fit[data-product-fit="/remastered/products/carfit/catalog/carfit-carbon-putty.webp"] {
   --product-canvas-aspect: 1;
-  --product-content-aspect: 1.2005;
+  --product-content-aspect: 1.2038;
   --product-content-fill-x: 0.892;
-  --product-content-fill-y: 0.743;
+  --product-content-fill-y: 0.741;
   --product-content-offset-x: 0.053;
-  --product-content-offset-y: 0.145;
+  --product-content-offset-y: 0.147;
 }
 
 .fit[data-product-fit="/remastered/products/carfit/catalog/carfit-cavity-preservation-spray.webp"] {
@@ -21801,10 +21810,10 @@
 
 .fit[data-product-fit="/remastered/products/carfit/catalog/carfit-disposable-seat-covers.webp"] {
   --product-canvas-aspect: 1;
-  --product-content-aspect: 0.6649;
-  --product-content-fill-x: 0.494;
+  --product-content-aspect: 0.7133;
+  --product-content-fill-x: 0.53;
   --product-content-fill-y: 0.743;
-  --product-content-offset-x: 0.231;
+  --product-content-offset-x: 0.258;
   --product-content-offset-y: 0.119;
 }
 
@@ -21846,11 +21855,11 @@
 
 .fit[data-product-fit="/remastered/products/carfit/catalog/carfit-glas-plus-putty.webp"] {
   --product-canvas-aspect: 1;
-  --product-content-aspect: 1.0543;
+  --product-content-aspect: 1.0532;
   --product-content-fill-x: 0.951;
-  --product-content-fill-y: 0.902;
+  --product-content-fill-y: 0.903;
   --product-content-offset-x: 0.024;
-  --product-content-offset-y: 0.049;
+  --product-content-offset-y: 0.048;
 }
 
 .fit[data-product-fit="/remastered/products/carfit/catalog/carfit-gun-cleaner.webp"] {
@@ -21927,29 +21936,29 @@
 
 .fit[data-product-fit="/remastered/products/carfit/catalog/carfit-parking-sensor-masking-disc.webp"] {
   --product-canvas-aspect: 1;
-  --product-content-aspect: 0.61;
-  --product-content-fill-x: 0.5651;
-  --product-content-fill-y: 0.9264;
-  --product-content-offset-x: 0.3255;
-  --product-content-offset-y: 0.0462;
+  --product-content-aspect: 0.6111;
+  --product-content-fill-x: 0.584;
+  --product-content-fill-y: 0.9557;
+  --product-content-offset-x: 0.3142;
+  --product-content-offset-y: 0.0189;
 }
 
 .fit[data-product-fit="/remastered/products/carfit/catalog/carfit-perfect-filler-4-1-grey.webp"] {
   --product-canvas-aspect: 1;
-  --product-content-aspect: 0.5067;
+  --product-content-aspect: 0.5072;
   --product-content-fill-x: 0.49;
-  --product-content-fill-y: 0.967;
-  --product-content-offset-x: 0.256;
-  --product-content-offset-y: 0.019;
+  --product-content-fill-y: 0.966;
+  --product-content-offset-x: 0.255;
+  --product-content-offset-y: 0.02;
 }
 
 .fit[data-product-fit="/remastered/products/carfit/catalog/carfit-plastic-primer.webp"] {
   --product-canvas-aspect: 1;
-  --product-content-aspect: 0.6896;
+  --product-content-aspect: 0.6873;
   --product-content-fill-x: 0.622;
-  --product-content-fill-y: 0.902;
+  --product-content-fill-y: 0.905;
   --product-content-offset-x: 0.189;
-  --product-content-offset-y: 0.055;
+  --product-content-offset-y: 0.052;
 }
 
 .fit[data-product-fit="/remastered/products/carfit/catalog/carfit-plastic-putty.webp"] {
@@ -21963,26 +21972,26 @@
 
 .fit[data-product-fit="/remastered/products/carfit/catalog/carfit-plastic-repair-kit.webp"] {
   --product-canvas-aspect: 1;
-  --product-content-aspect: 0.5234;
+  --product-content-aspect: 0.524;
   --product-content-fill-x: 0.469;
-  --product-content-fill-y: 0.896;
-  --product-content-offset-x: 0.265;
-  --product-content-offset-y: 0.053;
+  --product-content-fill-y: 0.895;
+  --product-content-offset-x: 0.264;
+  --product-content-offset-y: 0.054;
 }
 
 .fit[data-product-fit="/remastered/products/carfit/catalog/carfit-polyethylene-car-cover.webp"] {
   --product-canvas-aspect: 1;
-  --product-content-aspect: 1.9809;
+  --product-content-aspect: 1.9767;
   --product-content-fill-x: 0.935;
-  --product-content-fill-y: 0.472;
+  --product-content-fill-y: 0.473;
   --product-content-offset-x: 0.033;
   --product-content-offset-y: 0.264;
 }
 
 .fit[data-product-fit="/remastered/products/carfit/catalog/carfit-pretaped-masking-film.webp"] {
   --product-canvas-aspect: 1;
-  --product-content-aspect: 0.4134;
-  --product-content-fill-x: 0.389;
+  --product-content-aspect: 0.4123;
+  --product-content-fill-x: 0.388;
   --product-content-fill-y: 0.941;
   --product-content-offset-x: 0.305;
   --product-content-offset-y: 0.024;
@@ -21999,20 +22008,20 @@
 
 .fit[data-product-fit="/remastered/products/carfit/catalog/carfit-rapid-air-clear-coat-voc.webp"] {
   --product-canvas-aspect: 1;
-  --product-content-aspect: 0.6051;
+  --product-content-aspect: 0.6058;
   --product-content-fill-x: 0.541;
-  --product-content-fill-y: 0.894;
+  --product-content-fill-y: 0.893;
   --product-content-offset-x: 0.229;
-  --product-content-offset-y: 0.074;
+  --product-content-offset-y: 0.075;
 }
 
 .fit[data-product-fit="/remastered/products/carfit/catalog/carfit-rotating-paint-stand.webp"] {
   --product-canvas-aspect: 1;
-  --product-content-aspect: 1.2865;
+  --product-content-aspect: 1.2883;
   --product-content-fill-x: 0.934;
-  --product-content-fill-y: 0.726;
+  --product-content-fill-y: 0.725;
   --product-content-offset-x: 0.03;
-  --product-content-offset-y: 0.154;
+  --product-content-offset-y: 0.155;
 }
 
 .fit[data-product-fit="/remastered/products/carfit/catalog/carfit-rubber-sanding-block.webp"] {
@@ -22098,11 +22107,11 @@
 
 .fit[data-product-fit="/remastered/products/carfit/catalog/carfit-tack-cloth-super-wave.webp"] {
   --product-canvas-aspect: 1;
-  --product-content-aspect: 0.7603;
-  --product-content-fill-x: 0.685;
-  --product-content-fill-y: 0.901;
+  --product-content-aspect: 0.7597;
+  --product-content-fill-x: 0.686;
+  --product-content-fill-y: 0.903;
   --product-content-offset-x: 0.172;
-  --product-content-offset-y: 0.042;
+  --product-content-offset-y: 0.041;
 }
 
 .fit[data-product-fit="/remastered/products/carfit/catalog/carfit-tack-cloth.webp"] {
@@ -22116,10 +22125,10 @@
 
 .fit[data-product-fit="/remastered/products/carfit/catalog/carfit-tack-coating-for-spray-booth.webp"] {
   --product-canvas-aspect: 1;
-  --product-content-aspect: 0.6817;
-  --product-content-fill-x: 0.651;
+  --product-content-aspect: 0.689;
+  --product-content-fill-x: 0.658;
   --product-content-fill-y: 0.955;
-  --product-content-offset-x: 0.209;
+  --product-content-offset-x: 0.203;
   --product-content-offset-y: 0.021;
 }
 
@@ -22233,11 +22242,11 @@
 
 .fit[data-product-fit="/remastered/products/carsystem/catalog/carsystem-af-25-primer-wet-on-wet-2.webp"] {
   --product-canvas-aspect: 0.631;
-  --product-content-aspect: 0.3817;
+  --product-content-aspect: 0.3834;
   --product-content-fill-x: 0.5303;
-  --product-content-fill-y: 0.8767;
+  --product-content-fill-y: 0.8728;
   --product-content-offset-x: 0.2409;
-  --product-content-offset-y: 0.0937;
+  --product-content-offset-y: 0.0975;
 }
 
 .fit[data-product-fit="/remastered/products/carsystem/catalog/carsystem-alu-spezial.webp"] {
@@ -22278,11 +22287,11 @@
 
 .fit[data-product-fit="/remastered/products/carsystem/catalog/carsystem-booth-mask-stick-2.webp"] {
   --product-canvas-aspect: 0.7059;
-  --product-content-aspect: 0.6723;
+  --product-content-aspect: 0.6731;
   --product-content-fill-x: 0.8424;
-  --product-content-fill-y: 0.8845;
+  --product-content-fill-y: 0.8834;
   --product-content-offset-x: 0.0697;
-  --product-content-offset-y: 0.0503;
+  --product-content-offset-y: 0.0513;
 }
 
 .fit[data-product-fit="/remastered/products/carsystem/catalog/carsystem-bumper-stand.webp"] {
@@ -22386,9 +22395,9 @@
 
 .fit[data-product-fit="/remastered/products/carsystem/catalog/carsystem-crash-film.webp"] {
   --product-canvas-aspect: 1.25;
-  --product-content-aspect: 1.1864;
+  --product-content-aspect: 1.245;
   --product-content-fill-x: 0.8512;
-  --product-content-fill-y: 0.8969;
+  --product-content-fill-y: 0.8547;
   --product-content-offset-x: 0.0819;
   --product-content-offset-y: 0.0305;
 }
@@ -22781,6 +22790,15 @@
   --product-content-fill-y: 0.9588;
   --product-content-offset-x: 0.0121;
   --product-content-offset-y: 0.0206;
+}
+
+.fit[data-product-fit="/remastered/products/carsystem/catalog/carsystem-multi-mix-lids-3.webp"] {
+  --product-canvas-aspect: 1.0784;
+  --product-content-aspect: 1.0952;
+  --product-content-fill-x: 0.9591;
+  --product-content-fill-y: 0.9444;
+  --product-content-offset-x: 0.0227;
+  --product-content-offset-y: 0.0278;
 }
 
 .fit[data-product-fit="/remastered/products/carsystem/catalog/carsystem-multi-plus.webp"] {
@@ -23208,11 +23226,11 @@
 
 .fit[data-product-fit="/remastered/products/carsystem/catalog/carsystem-soft-roll.webp"] {
   --product-canvas-aspect: 1.0884;
-  --product-content-aspect: 0.7761;
-  --product-content-fill-x: 0.5569;
-  --product-content-fill-y: 0.781;
-  --product-content-offset-x: 0.2281;
-  --product-content-offset-y: 0.0898;
+  --product-content-aspect: 0.7757;
+  --product-content-fill-x: 0.5556;
+  --product-content-fill-y: 0.7796;
+  --product-content-offset-x: 0.2288;
+  --product-content-offset-y: 0.0905;
 }
 
 .fit[data-product-fit="/remastered/products/carsystem/catalog/carsystem-sound-deadening-panels-2.webp"] {
@@ -23451,11 +23469,11 @@
 
 .fit[data-product-fit="/remastered/products/rm/catalog/rm-diamont.webp"] {
   --product-canvas-aspect: 1.2594;
-  --product-content-aspect: 1.0531;
-  --product-content-fill-x: 0.4744;
-  --product-content-fill-y: 0.5673;
-  --product-content-offset-x: 0.2692;
-  --product-content-offset-y: 0.2508;
+  --product-content-aspect: 1.053;
+  --product-content-fill-x: 0.4752;
+  --product-content-fill-y: 0.5684;
+  --product-content-offset-x: 0.2684;
+  --product-content-offset-y: 0.2497;
 }
 
 .fit[data-product-fit="/remastered/products/rm/rm-diamont-bazna-boja.webp"] {
@@ -24790,6 +24808,14 @@
   --product-content-fill-y: 0.734;
   --product-content-offset-x: 0.1242;
   --product-content-offset-y: 0.1256;
+}
+
+.fit[data-product-fit="/remastered/products/carsystem/catalog/carsystem-multi-mix-lids-3.webp"][data-product-fit-model="v6"] {
+  --product-content-aspect: 1.2665;
+  --product-content-fill-x: 0.9576;
+  --product-content-fill-y: 0.8154;
+  --product-content-offset-x: 0.0227;
+  --product-content-offset-y: 0.0408;
 }
 
 .fit[data-product-fit="/remastered/products/carsystem/catalog/carsystem-multi-plus.webp"][data-product-fit-model="v6"] {

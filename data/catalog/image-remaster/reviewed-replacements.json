@@ -216,6 +216,15 @@
       "approvedOn": "2026-10-27"
     },
     {
+      "src": "/images/brands/rm/products/agilis/rm-p-2p81-race-wet-fill-r-white.webp",
+      "originalSha256": "b19b1b88a4c832c899026d2f90a2acb8bf6492e568582109babb0066a2d78e6f",
+      "replacementSha256": "a4cbddb0fdef6cd5d17ea4f1ade7cd7afcd8d85313a0888551dc890f3c4d0c1a",
+      "width": 1600,
+      "height": 1200,
+      "basis": "K9 — završna dorada, vizuelno i za objavu odobrena 2026-10-30",
+      "approvedOn": "2026-10-30"
+    },
+    {
       "src": "/products/baslac/baslac--line-35-0.5l-representative.webp",
       "originalSha256": "df17ecb672a417c17bfd73ad297a2ad0f166493ad03e8d04dbf860a5d1e82edb",
       "replacementSha256": "3e92bdc357e7fdbfdff45a68951625dfce925af803bd39fd0017bbc7bdc7a342",
@@ -1994,20 +2003,20 @@
     {
       "src": "/products/carfit/catalog/carfit-1k-hi-build-primer-filler-spray.webp",
       "originalSha256": "0e6c318a1880156ec9f4b38661d98cc7557e61bfdb8afdb61564596fb5b2fe82",
-      "replacementSha256": "cfe7fd64afddce5cb64094625800737eba10021db51af8fb379ce0a370afb5be",
+      "replacementSha256": "91a58158c7b598a0a6629ebadc569a7fb8389ab79cbf96c7debc491cedfe9c44",
       "width": 1000,
       "height": 1000,
-      "basis": "K1",
-      "approvedOn": "2026-10-27"
+      "basis": "Codex — završna dorada, vizuelno i za objavu odobrena 2026-10-30",
+      "approvedOn": "2026-10-30"
     },
     {
       "src": "/products/carfit/catalog/carfit-1k-plastic-primer-spray.webp",
       "originalSha256": "4c1baa924ec71a7dbad2ac6620385ca3d509e858d531613390d6295ef82afa1a",
-      "replacementSha256": "ea8894fd922d1c1fa266c3b53876e0d151bf59a2ae9c0bec9d62014c2eb3135f",
+      "replacementSha256": "54c7eb2930523f545770e1abdecd7f35d528fada2f88277e7886d2f3375a51e3",
       "width": 1000,
       "height": 1000,
-      "basis": "K1",
-      "approvedOn": "2026-10-27"
+      "basis": "Codex — završna dorada, vizuelno i za objavu odobrena 2026-10-30",
+      "approvedOn": "2026-10-30"
     },
     {
       "src": "/products/carfit/catalog/carfit-2k-epoxy-primer-1-1.webp",
@@ -2030,47 +2039,47 @@
     {
       "src": "/products/carfit/catalog/carfit-2k-hs-acryl-primer-filler-4-1.webp",
       "originalSha256": "35e6081baaae02658a6cb4a83c98b92db6084ba0d0de5dc28799447a756b9663",
-      "replacementSha256": "19d17673f77e34accdaf180ce87ad6665e3238bf146951cb540ecdbb4d7cd402",
+      "replacementSha256": "541610ae0b25c6494e295ba623d2466150493d89e907075261524c17fa6dc224",
       "width": 1000,
       "height": 1000,
-      "basis": "K1",
-      "approvedOn": "2026-10-27"
+      "basis": "Codex — završna dorada, vizuelno i za objavu odobrena 2026-10-30",
+      "approvedOn": "2026-10-30"
     },
     {
       "src": "/products/carfit/catalog/carfit-2k-hs-scratch-resistent-clearcoat-2-1.webp",
       "originalSha256": "41899b0ed4c171d40892fea3b8f71cf805ed7883a5e7015f5e367cdcccd5d82d",
-      "replacementSha256": "89757fc65955c55cbbf7f571dee52d0b6221a162bdcafb15ff7d742f6db40256",
+      "replacementSha256": "7bcf5a45aeb14870af102cb8249f014b09e58eb3595e70ebf70e9a01245b0eba",
       "width": 1000,
       "height": 1000,
-      "basis": "K1",
-      "approvedOn": "2026-10-27"
+      "basis": "K9 — završna dorada, vizuelno i za objavu odobrena 2026-10-30",
+      "approvedOn": "2026-10-30"
     },
     {
       "src": "/products/carfit/catalog/carfit-2k-uhs-low-voc-clearcoat.webp",
       "originalSha256": "10b3e8ac3f4576a8dcf2c6b18477faecf9334c2ed806fc7447542bb9b8db006b",
-      "replacementSha256": "ead63eaf8d9a9a7f470229054d26c9f63bc7b1cc2c26f5459b9782349500e568",
+      "replacementSha256": "3623fd28669482e1ff8ef8342559166c4db09ac4035498b059dffcf0ab46c4cf",
       "width": 1000,
       "height": 1000,
-      "basis": "K2",
-      "approvedOn": "2026-10-27"
+      "basis": "Codex — završna dorada, vizuelno i za objavu odobrena 2026-10-30",
+      "approvedOn": "2026-10-30"
     },
     {
       "src": "/products/carfit/catalog/carfit-2k-us-filler-4-1.webp",
       "originalSha256": "3bf773b8dc19c7553671ec8691d154acc4862f5b434f8c23043d1f640f8a492a",
-      "replacementSha256": "ad0d7707ad82ad3e5cb678f211407344c0362dbd72873cbe9e6a02e9c727a2aa",
+      "replacementSha256": "3c954dc20ccc27eb937b977a9e10966e60fe18cfea2174b96232a5e496d94ee6",
       "width": 1000,
       "height": 1000,
-      "basis": "K1",
-      "approvedOn": "2026-10-27"
+      "basis": "K9 — završna dorada, vizuelno i za objavu odobrena 2026-10-30",
+      "approvedOn": "2026-10-30"
     },
     {
       "src": "/products/carfit/catalog/carfit-2k-washprimer-2-1.webp",
       "originalSha256": "6b56d45d1aacad618132f52356555aaa60602a4c5da5190270483208a13e264c",
-      "replacementSha256": "971d2e7b44fcce1f9bc2869ac1657d9a91e73585cccbc4c00f31d86a41f72570",
+      "replacementSha256": "4d3361df5416bd887e7075a2e621f90ea7cdb2c980dbe4fecd5d55cf4ab23406",
       "width": 1000,
       "height": 1000,
-      "basis": "K1",
-      "approvedOn": "2026-10-27"
+      "basis": "Codex — završna dorada, vizuelno i za objavu odobrena 2026-10-30",
+      "approvedOn": "2026-10-30"
     },
     {
       "src": "/products/carfit/catalog/carfit-black-paint-spray.webp",
@@ -2093,11 +2102,11 @@
     {
       "src": "/products/carfit/catalog/carfit-carbon-putty.webp",
       "originalSha256": "4c6b2464a0276cbb85b0214e209dbcc46e3c412dc9447646159dd4dea4e474fd",
-      "replacementSha256": "6bfaf47b08433fa45560b0918efa66ce172f20d0f7b00c5f59f6ef91e4bd1135",
+      "replacementSha256": "5afcfe5af62008476bf5feca991ed7df2ef6a1519f7063f1a7590d47f572b6af",
       "width": 1000,
       "height": 1000,
-      "basis": "K2",
-      "approvedOn": "2026-10-27"
+      "basis": "K9 — završna dorada, vizuelno i za objavu odobrena 2026-10-30",
+      "approvedOn": "2026-10-30"
     },
     {
       "src": "/products/carfit/catalog/carfit-cavity-preservation-spray.webp",
@@ -2120,11 +2129,11 @@
     {
       "src": "/products/carfit/catalog/carfit-disposable-seat-covers.webp",
       "originalSha256": "d102fd1d50e4a03d2c1f1ab168fcd69a86631d1bef89dfa048d03a2f529bfb98",
-      "replacementSha256": "bf962d8a0ee43567d7f51ee3d7c2c78738fd1f33447cbcd4f2b1470c33f80680",
+      "replacementSha256": "fcd8b7c20f8f1187860a63025b257707979b8c99ba53071eba50b00ab8efabdd",
       "width": 1000,
       "height": 1000,
-      "basis": "K1",
-      "approvedOn": "2026-10-27"
+      "basis": "K9 — završna dorada, vizuelno i za objavu odobrena 2026-10-30",
+      "approvedOn": "2026-10-30"
     },
     {
       "src": "/products/carfit/catalog/carfit-fade-out-thinner-spray.webp",
@@ -2156,11 +2165,11 @@
     {
       "src": "/products/carfit/catalog/carfit-glas-plus-putty.webp",
       "originalSha256": "c4678843c7b515df6166ca55b892d2e75382d4c393a39001ac852bb6755f1ba7",
-      "replacementSha256": "9b46d80ff6aa46742995b3d12a13ee6045b28b6da7bbef4adb29ee8bd59243f2",
+      "replacementSha256": "b1ea293dd03c48b67ede6f8256a2e9dee7a8e1769889e4a99eeed87e77b62302",
       "width": 1000,
       "height": 1000,
-      "basis": "K2",
-      "approvedOn": "2026-10-27"
+      "basis": "K9 — završna dorada, vizuelno i za objavu odobrena 2026-10-30",
+      "approvedOn": "2026-10-30"
     },
     {
       "src": "/products/carfit/catalog/carfit-gun-cleaner.webp",
@@ -2183,11 +2192,11 @@
     {
       "src": "/products/carfit/catalog/carfit-interface-pads.webp",
       "originalSha256": "8d5033ec7e890a7be85cb10092dae839b6e9f0bd499c728ff9634b5a2eb5b3ca",
-      "replacementSha256": "256f7c606af62f0730afa5cbc9927fb913eea0fe50a314a7954c6146bcf890a8",
+      "replacementSha256": "1f6f926a694bece65f33a59cb1875fbecac5d82dd2e376f9df3b38ea1d233b5c",
       "width": 1000,
       "height": 1000,
-      "basis": "K1",
-      "approvedOn": "2026-10-27"
+      "basis": "K9 — završna dorada, vizuelno i za objavu odobrena 2026-10-30",
+      "approvedOn": "2026-10-30"
     },
     {
       "src": "/products/carfit/catalog/carfit-logo-tape.webp",
@@ -2228,101 +2237,101 @@
     {
       "src": "/products/carfit/catalog/carfit-multi-putty.webp",
       "originalSha256": "2d83f301d416b74406ce2929239b5599dfd05d823580e53df49673bb365794d3",
-      "replacementSha256": "cb8bb0f2ade6f5032bc5457d100259c55b9db07523dd3d2031932fdf60a25c5b",
+      "replacementSha256": "4601814d6545c6265753b67f059218dd08e48736ecc652e6c8ba22ef5766610c",
       "width": 1000,
       "height": 1000,
-      "basis": "K2",
-      "approvedOn": "2026-10-27"
+      "basis": "K9 — završna dorada, vizuelno i za objavu odobrena 2026-10-30",
+      "approvedOn": "2026-10-30"
     },
     {
       "src": "/products/carfit/catalog/carfit-parking-sensor-masking-disc.webp",
       "originalSha256": "285d923850280f29e817f06029ecdb16ba05fa8ecb324fb909f089f11431dc1f",
-      "replacementSha256": "0566498670bc8668507f4d612d4ecaa5266dcc96dc8ef064a0501d362d96d14a",
+      "replacementSha256": "af7c9e63ea84dbd849eed03ee34c1f239cb7b254ee771669e83762e06cff6c39",
       "width": 1060,
       "height": 1060,
-      "basis": "K1",
-      "approvedOn": "2026-10-27"
+      "basis": "K9 — završna dorada, vizuelno i za objavu odobrena 2026-10-30",
+      "approvedOn": "2026-10-30"
     },
     {
       "src": "/products/carfit/catalog/carfit-perfect-filler-4-1-grey.webp",
       "originalSha256": "fd22b9df712808cd988d906e4182b09a7497468da13ca1de897f54f32b405218",
-      "replacementSha256": "570d41d93e5dfafdb470c406e09d72cbe7fe16d27c213f8bb4ef743e070a8fdc",
+      "replacementSha256": "cd614b719fd47211464052acdc4792eb932863b936a18eeece3b62d4c119061b",
       "width": 1000,
       "height": 1000,
-      "basis": "K2",
-      "approvedOn": "2026-10-27"
+      "basis": "K9 — završna dorada, vizuelno i za objavu odobrena 2026-10-30",
+      "approvedOn": "2026-10-30"
     },
     {
       "src": "/products/carfit/catalog/carfit-plastic-primer.webp",
       "originalSha256": "7973ede34e64d4c2fb8eea6d69880214cdb71da30a55da57513d6ab095d23713",
-      "replacementSha256": "50753a135aa808f1c98b6193394d22ed7e2c33e2dae53bc7a950601c37d191e8",
+      "replacementSha256": "e67de337b1bd8df7922219606a42fda05815ae2a5b2b6510513f744b58f1e2bb",
       "width": 1000,
       "height": 1000,
-      "basis": "K3",
-      "approvedOn": "2026-10-27"
+      "basis": "K9 — završna dorada, vizuelno i za objavu odobrena 2026-10-30",
+      "approvedOn": "2026-10-30"
     },
     {
       "src": "/products/carfit/catalog/carfit-plastic-putty.webp",
       "originalSha256": "41de53899a9391d928569af81897dd72d495a079c445a6ff83fad52b48cc1d38",
-      "replacementSha256": "fde6b93d17d9f10dd44082e4745f1e1bbcc3716c82e2cd8fd48ad2c08ef6a3fa",
+      "replacementSha256": "bd23fcc0518b4cdb283fe8b31e6a50ca67c096234f58197d5568dcb7288312b9",
       "width": 1000,
       "height": 1000,
-      "basis": "K2",
-      "approvedOn": "2026-10-27"
+      "basis": "K9 — završna dorada, vizuelno i za objavu odobrena 2026-10-30",
+      "approvedOn": "2026-10-30"
     },
     {
       "src": "/products/carfit/catalog/carfit-plastic-repair-kit.webp",
       "originalSha256": "df08cf35a2ecfe188a948a108252e82ce381d436def0be23dc03c086a707dc66",
-      "replacementSha256": "09cfcd5be28088d73f8f1f7f8e4a7fcdb1dc6947e95718a610871857538fca15",
+      "replacementSha256": "7ae0c6d4123ac56118ab059522c95c845f3a8a74d0041cc58635726b1f95e850",
       "width": 1000,
       "height": 1000,
-      "basis": "K2",
-      "approvedOn": "2026-10-27"
+      "basis": "K9 — završna dorada, vizuelno i za objavu odobrena 2026-10-30",
+      "approvedOn": "2026-10-30"
     },
     {
       "src": "/products/carfit/catalog/carfit-polyethylene-car-cover.webp",
       "originalSha256": "1ffb4db732cf23e27b0ede93dbdb71c03b4eb71f0da958d6d04ed9a599525623",
-      "replacementSha256": "56640fa7b579e06f5c0409541c2f74d685e6be83729d96dfaf0fcbf6c1ef467c",
+      "replacementSha256": "e786edde759c39fdf04841d3f8476a875c0e90f7276e6ea7e9bf2ed2216b97a5",
       "width": 1000,
       "height": 1000,
-      "basis": "K1",
-      "approvedOn": "2026-10-27"
+      "basis": "K9 — završna dorada, vizuelno i za objavu odobrena 2026-10-30",
+      "approvedOn": "2026-10-30"
     },
     {
       "src": "/products/carfit/catalog/carfit-pretaped-masking-film.webp",
       "originalSha256": "e7b7a5bb8b7a54b66391981693b778214f9712f03db952622b265f371d10c647",
-      "replacementSha256": "92e1534e13234c0141f72d1be4f2a114032f76f4297ae9d307adb8de5cb03727",
+      "replacementSha256": "8fdf5df675e820f923ef0c039b3416ec16aa457eaba108333a1ac1f3fae9c620",
       "width": 1000,
       "height": 1000,
-      "basis": "boja",
-      "approvedOn": "2026-10-27"
+      "basis": "K9 — završna dorada, vizuelno i za objavu odobrena 2026-10-30",
+      "approvedOn": "2026-10-30"
     },
     {
       "src": "/products/carfit/catalog/carfit-pu-adhesive-and-sealant.webp",
       "originalSha256": "2d7473a620ccf6a8ba81f1d090e6a0883502a0e080e1578c17b5a0a11046e633",
-      "replacementSha256": "9d0d7d513d14d7e5abb01b740f65e590729440e061eb6813e3aa2a920853235b",
+      "replacementSha256": "b0e4c8bc8e4141c50e9db3c5eb99358f5183f9bf8367c7fbde2b8782fb0c3ddc",
       "width": 1000,
       "height": 1000,
-      "basis": "K1",
-      "approvedOn": "2026-10-27"
+      "basis": "K9 — završna dorada, vizuelno i za objavu odobrena 2026-10-30",
+      "approvedOn": "2026-10-30"
     },
     {
       "src": "/products/carfit/catalog/carfit-rapid-air-clear-coat-voc.webp",
       "originalSha256": "37a291b81ad16f4b8a2b11e0d8096e166b7b05be9c584719bdd7a96036dafb16",
-      "replacementSha256": "4f8bccb00437a777007dfc42233526d68508ccd0babc45374bdc1fc07d3c1252",
+      "replacementSha256": "bc463e81d7a9b5a49a1614bf2133d4b738417ffe05bd89b5a083d8f539f36e3e",
       "width": 1000,
       "height": 1000,
-      "basis": "K1",
-      "approvedOn": "2026-10-27"
+      "basis": "K9 — završna dorada, vizuelno i za objavu odobrena 2026-10-30",
+      "approvedOn": "2026-10-30"
     },
     {
       "src": "/products/carfit/catalog/carfit-rotating-paint-stand.webp",
       "originalSha256": "ff146581d4e10188229aba5a29ff17b82ede2dfaaae96cd0b614c082f0d41aa7",
-      "replacementSha256": "1d4cc2be85a78eb540c487328196d4970c8290343fcd5bc95a1293ab27216211",
+      "replacementSha256": "fdfd557ebf32307f5c2fb9e2c13260871c467fc1cbebbf57d22c03034fc513b3",
       "width": 1000,
       "height": 1000,
-      "basis": "nova",
-      "approvedOn": "2026-10-27"
+      "basis": "K9 — završna dorada, vizuelno i za objavu odobrena 2026-10-30",
+      "approvedOn": "2026-10-30"
     },
     {
       "src": "/products/carfit/catalog/carfit-sanding-control-kit-and-sanding-powder.webp",
@@ -2390,11 +2399,11 @@
     {
       "src": "/products/carfit/catalog/carfit-tack-cloth-super-wave.webp",
       "originalSha256": "444900429a703b203719d80d9fd65a6847f5bc45a74b7524be061c4bd3141c75",
-      "replacementSha256": "0e816cd9669e21263cddbf1aa5fbb7d9dfe9e73f586acdc7338cd549f9166561",
+      "replacementSha256": "0398d440d00f46e0f03d49e87fd4a596a607a192c9df4d73ff627ffe7902259d",
       "width": 1000,
       "height": 1000,
-      "basis": "K1",
-      "approvedOn": "2026-10-27"
+      "basis": "K9 — završna dorada, vizuelno i za objavu odobrena 2026-10-30",
+      "approvedOn": "2026-10-30"
     },
     {
       "src": "/products/carfit/catalog/carfit-tack-cloth.webp",
@@ -2408,11 +2417,11 @@
     {
       "src": "/products/carfit/catalog/carfit-tack-coating-for-spray-booth.webp",
       "originalSha256": "0d50a4432d481fdbb060eeff8a0af8083ad4234d5931c89f3d485ba450b825f7",
-      "replacementSha256": "5c2dc24deac5c93749f5684990182a06a0f8fcc57b1dd7dd285acba82f5e9205",
+      "replacementSha256": "19a972d0bb9b4a50399c784c115d8ae2c7cae5afd8c9f349bb18d26a980f813a",
       "width": 1000,
       "height": 1000,
-      "basis": "K1",
-      "approvedOn": "2026-10-27"
+      "basis": "K9 — završna dorada, vizuelno i za objavu odobrena 2026-10-30",
+      "approvedOn": "2026-10-30"
     },
     {
       "src": "/products/carfit/catalog/carfit-texture-paint-spray.webp",
@@ -2453,11 +2462,11 @@
     {
       "src": "/products/carfit/catalog/carfit-windglass-glue-black.webp",
       "originalSha256": "13c5330c2d8cd59425048857871807c577cb7b11a2f6cd46c8ed51eebcc9539a",
-      "replacementSha256": "38f0d0c36696599d135cff976afcda45156e0fa386ccb5191f06c4176e237043",
+      "replacementSha256": "88bb3ede8c029d453820a54498f38c5d9d6f907828516d7e45867fa2616036cb",
       "width": 1000,
       "height": 1000,
-      "basis": "K1",
-      "approvedOn": "2026-10-27"
+      "basis": "K9 — završna dorada, vizuelno i za objavu odobrena 2026-10-30",
+      "approvedOn": "2026-10-30"
     },
     {
       "src": "/products/carfit/catalog/carfit-zinc-spray.webp",
@@ -2489,29 +2498,29 @@
     {
       "src": "/products/carsystem/catalog/carsystem-af-25-primer-wet-on-wet-2.webp",
       "originalSha256": "0c834e22de5dd339618fd2938b7a55e5c0db901b9cb4b7b0b5146a0308204e58",
-      "replacementSha256": "3d1baa87852d1dd3e746f2315094e2d570e6bfbc390a0b6f664cc806e0c7d2db",
+      "replacementSha256": "623a96a1b1f7e35e43bad36d4b89a0db63b87bf066938bb71076a1416adf7e2b",
       "width": 660,
       "height": 1046,
-      "basis": "K1",
-      "approvedOn": "2026-10-27"
+      "basis": "K9 — završna dorada, vizuelno i za objavu odobrena 2026-10-30",
+      "approvedOn": "2026-10-30"
     },
     {
       "src": "/products/carsystem/catalog/carsystem-booth-mask-2.webp",
       "originalSha256": "78a0ce62af5e1bc1ebfb8dbe44e8f48b5c005c96c1d350cc3ad034484482c020",
-      "replacementSha256": "1282ef6da99b7286784ed0d6b3a620940f193d8e2f4ffd8c53a650ca669996bc",
+      "replacementSha256": "963dcd2a1142c0ddf995d5c5757a75aca1933f9abc55f65a19cf307de16ce69d",
       "width": 660,
       "height": 660,
-      "basis": "K1",
-      "approvedOn": "2026-10-27"
+      "basis": "K9 — završna dorada, vizuelno i za objavu odobrena 2026-10-30",
+      "approvedOn": "2026-10-30"
     },
     {
       "src": "/products/carsystem/catalog/carsystem-booth-mask-stick-2.webp",
       "originalSha256": "4d8e258ea5d38adffa1d88cb312ff93da9f85eed35d2055cade8167b6345020a",
-      "replacementSha256": "90aa8a7eed18c3451ce8e8a3b0d0d4c1f643ea16048a99b4ac9efab93df91dc2",
+      "replacementSha256": "8bd10e3cea6f028be49a07d1e2e1e4554a5b3d6d1a4d37054d61b5c6d996f0e5",
       "width": 660,
       "height": 935,
-      "basis": "K1",
-      "approvedOn": "2026-10-27"
+      "basis": "K9 — završna dorada, vizuelno i za objavu odobrena 2026-10-30",
+      "approvedOn": "2026-10-30"
     },
     {
       "src": "/products/carsystem/catalog/carsystem-car-mop-white-2.webp",
@@ -2552,11 +2561,11 @@
     {
       "src": "/products/carsystem/catalog/carsystem-crash-film.webp",
       "originalSha256": "793045bc060fe506ced3bafd656b64907e1cc03c70f32b7603552b5246d2adb6",
-      "replacementSha256": "b8d219ea026c5c657fda9cc7c688b9d957224c14ad7e2d87a6973dc91e004fd0",
+      "replacementSha256": "843188d4a2f8c134e5f7916a81afa779c120f9c2617a1fccdc8ac0c169f2d296",
       "width": 1600,
       "height": 1280,
-      "basis": "K1",
-      "approvedOn": "2026-10-27",
+      "basis": "K9 — završna dorada, vizuelno i za objavu odobrena 2026-10-30",
+      "approvedOn": "2026-10-30",
       "supersedes": [
         "shadow-premultiply"
       ]
@@ -2772,6 +2781,15 @@
       "approvedOn": "2026-10-27"
     },
     {
+      "src": "/products/carsystem/catalog/carsystem-multi-mix-lids-3.webp",
+      "originalSha256": "5d1de7b35fc213dc44cf41063db7e2d86fe5950b4d41c35eebc2d597a285d9bd",
+      "replacementSha256": "48322ce414ea24900c8d297eab3008ba46d15d094ef53ca1ab4f97c8ba2feb7f",
+      "width": 660,
+      "height": 612,
+      "basis": "Codex — završna dorada, vizuelno i za objavu odobrena 2026-10-30",
+      "approvedOn": "2026-10-30"
+    },
+    {
       "src": "/products/carsystem/catalog/carsystem-orbital-sander-csh-cms01-kit.webp",
       "originalSha256": "653af93d506c23542982bf920309fddf5888c68ecae6e99cf6dbc4e0081157ea",
       "replacementSha256": "fa1c059c245fedd5065190f70537af1449585ae5f637de9093889e66e4adc288",
@@ -2877,11 +2895,11 @@
     {
       "src": "/products/carsystem/catalog/carsystem-rotary-polisher-csh-crp01-kit-2.webp",
       "originalSha256": "e0b40448384a64cba9a853fb0373a0242247a431cd71b34926cef4f26931da83",
-      "replacementSha256": "b568f02745fe2f7cf52526aec00be52343c670d172e44d931b5121a7429ad626",
+      "replacementSha256": "fb2352a08d8546c5eb7d85eaaa956fa5d5e074cee1a0bb98220d5eb8106aa92c",
       "width": 660,
       "height": 660,
-      "basis": "K1",
-      "approvedOn": "2026-10-27"
+      "basis": "K9 — završna dorada, vizuelno i za objavu odobrena 2026-10-30",
+      "approvedOn": "2026-10-30"
     },
     {
       "src": "/products/carsystem/catalog/carsystem-rotary-polisher-csh-crp01-kit-3.webp",
@@ -2959,12 +2977,11 @@
     {
       "src": "/products/carsystem/catalog/carsystem-soft-roll.webp",
       "originalSha256": "35251cf67283f92902b2e29c9162d3a196d2aca442c5302106af20d6547c3673",
-      "replacementSha256": "e831e0047da48d25ba7150ae1081f274ab7ac6666553c18dfeb1ef0771dc041d",
+      "replacementSha256": "26f180617099a0969b0d93f7521dd8231cbcf6a2f92e3a6d87fc7852f511c30d",
       "width": 1600,
       "height": 1470,
-      "basis": "izvor",
-      "approvedOn": "2026-10-27",
-      "supersedes": []
+      "basis": "K9 — završna dorada, vizuelno i za objavu odobrena 2026-10-30",
+      "approvedOn": "2026-10-30"
     },
     {
       "src": "/products/carsystem/catalog/carsystem-sound-deadening-panels-2.webp",
@@ -3156,11 +3173,11 @@
     {
       "src": "/products/rm/catalog/rm-diamont.webp",
       "originalSha256": "70534db8b4c5f3ed0d88430bdfbd166ca6791120b75d72011e9a1e3ae234cb17",
-      "replacementSha256": "002f83da245b278b704df0d740d4ce412c0e85ef7df7b199a89c5c7de645bb9b",
+      "replacementSha256": "ace16a473c3b0721faed47010009164a20077fe40f74a6590fd5bf40e69259fa",
       "width": 1170,
       "height": 929,
-      "basis": "K1",
-      "approvedOn": "2026-10-27"
+      "basis": "K9 — završna dorada, vizuelno i za objavu odobrena 2026-10-30",
+      "approvedOn": "2026-10-30"
     },
     {
       "src": "/products/rm/rm-diamont-bazna-boja.webp",

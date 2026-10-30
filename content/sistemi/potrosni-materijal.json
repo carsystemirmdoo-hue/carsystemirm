@@ -1,0 +1,817 @@
+{
+  "program": "potrosni-materijal",
+  "jobs": [
+    {
+      "id": "maskiranje",
+      "label": "Maskiranje dela",
+      "desc": "Trake, papir i redosled",
+      "title": "Maskiranje dela pre lakiranja",
+      "lead": "Maskira se na čistoj i suvoj površini, od skrivenih mesta ka velikim površinama: prvo zazori i gumice, zatim velike površine, a na kraju traka tačno uz granicu zone koja se lakira. Svaki materijal ima granicu temperature i vremena iz svog tehničkog lista.",
+      "choice": {
+        "question": "Šta maskirate",
+        "options": [
+          {
+            "id": "deo",
+            "label": "Ceo deo",
+            "note": "Standardni redosled: zazori, gumice, velike površine, traka uz granicu."
+          },
+          {
+            "id": "otvori",
+            "label": "Otvori i mekana ivica"
+          },
+          {
+            "id": "gumice",
+            "label": "Gumice, lajsne, staklo"
+          }
+        ]
+      },
+      "steps": [
+        {
+          "id": "cisto",
+          "title": "Operite i osušite",
+          "what": "Traku i foliju postavljajte samo na čistu i suvu površinu.",
+          "detail": "Carsystem to izričito navodi za foliju Easy Mask II; traka na prašnjavoj ili vlažnoj površini lošije drži.",
+          "material": "Sredstvo za pranje, krpa",
+          "guides": [
+            "osnove-maskiranja"
+          ]
+        },
+        {
+          "id": "traka",
+          "title": "Izaberite traku prema sušenju",
+          "what": "Otpornost trake na toplotu iz tehničkog lista treba da bude iznad najviše temperature objekta u ciklusu sušenja, za trajanje tog ciklusa.",
+          "detail": "Trake iz istog programa se jako razlikuju: od 80 °C do 155 °C. Kada list ne navodi trajanje, a ciklus je dug ili se ponavlja, pitajte proizvođača.",
+          "material": "Traka čija granica pokriva ciklus sušenja",
+          "scale": true,
+          "products": [
+            "carsystem-master-tape-ii",
+            "carsystem-master-tape-green",
+            "carsystem-top-tape"
+          ],
+          "sources": [
+            {
+              "doc": "cs-katalog-2026",
+              "strana": 41
+            }
+          ],
+          "guides": [
+            "trake-za-maskiranje-i-temperatura"
+          ]
+        },
+        {
+          "id": "zazori",
+          "title": "Zatvorite zazore",
+          "what": "Zazore vrata, haube i poklopca prtljažnika zatvorite penastom trakom, da magla boje ne uđe u unutrašnjost.",
+          "detail": "Carsystem Foam Tape je prema tehničkom listu namenjen upravo pokrivanju tih otvora.",
+          "material": "Penasta traka",
+          "pod": {
+            "otvori": {
+              "title": "Mekana ivica na otvoru",
+              "what": "Penastu traku postavite u zazor, malo uvučeno od spoljne ivice dela, pa vrata ili haubu pažljivo zatvorite bez gnječenja trake.",
+              "detail": "Magla boje postepeno bledi na penastom delu umesto da se zaustavi na oštroj liniji. Carsystem za Foam Tape i T-Soft navodi da sprečavaju tvrde ivice boje kod otvora; obe trake do 80 °C.",
+              "products": [
+                "carsystem-foam-tape",
+                "carsystem-foam-tape-t-soft",
+                "carfit-blending-tape"
+              ],
+              "sources": [
+                {
+                  "doc": "cs-foam-tape-tds",
+                  "strana": 1
+                }
+              ]
+            }
+          },
+          "products": [
+            "carsystem-foam-tape",
+            "carsystem-foam-tape-t-soft"
+          ],
+          "guides": [
+            "osnove-maskiranja"
+          ]
+        },
+        {
+          "id": "gumice",
+          "title": "Gumice, lajsne i svetla",
+          "what": "Gumice podignite trakom za podizanje, a lajsne i plastiku oblepite tankom savitljivom trakom.",
+          "detail": "Ivica nove boje tako ostaje ispod gumice umesto na njenoj površini. Pre toga proverite da li proizvođač vozila preporučuje demontažu dela.",
+          "material": "Traka za podizanje gumica, tanka krep traka",
+          "pod": {
+            "gumice": {
+              "what": "Traku za podizanje otkinite po perforaciji i plastični deo uredno podvucite ispod ivice gumice, ravnomerno celom dužinom. Lajsne, hrom i plastiku oblepite tankom trakom.",
+              "detail": "Za WR-Lifting Tape Premium Carsystem preporučuje rad iznad 5 °C. Slim Tape katalog opisuje kao „poslednju traku“ pred lakiranje, za plastične delove i gumene zaptivke.",
+              "products": [
+                "carsystem-wr-lifting-tape-premium",
+                "carsystem-wr-lifting-tape",
+                "carsystem-slim-tape",
+                "carsystem-auto-mask"
+              ],
+              "sources": [
+                {
+                  "doc": "cs-wr-lifting-premium-tds",
+                  "strana": 1
+                }
+              ]
+            }
+          },
+          "products": [
+            "carsystem-wr-lifting-tape-premium",
+            "carsystem-slim-tape"
+          ],
+          "guides": [
+            "maskiranje-gumica-i-lajsni"
+          ]
+        },
+        {
+          "id": "ivica",
+          "title": "Traka uz granicu, papir uz traku",
+          "what": "Uz samu granicu zone lakiranja postavite traku, a uz nju papir ili foliju sa trakom.",
+          "detail": "Papir se lako savija u ravnu liniju i traka na njemu dobro drži. Masking Paper Master II je kraft papir od 40 g/m², otporan na vodu i rastvarače, sa barijerom bez PFAS.",
+          "material": "Krep traka, maskirni papir",
+          "products": [
+            "carsystem-master-tape-ii",
+            "carsystem-masking-paper-master-ii"
+          ],
+          "sources": [
+            {
+              "doc": "cs-paper-master-ii-tds",
+              "strana": 1
+            }
+          ],
+          "guides": [
+            "papir-ili-folija-za-maskiranje"
+          ]
+        },
+        {
+          "id": "ostatak",
+          "title": "Pokrijte ostatak vozila",
+          "what": "Kada se lakira jedan deo, ostatak vozila pokrijte folijom, felne i unutrašnjost navlakama.",
+          "detail": "Magla boje se nosi strujom vazduha i može da padne i na površine daleko od dela koji se lakira.",
+          "material": "Folija, navlake",
+          "products": [
+            "carsystem-easy-mask-ii"
+          ],
+          "guides": [
+            "zastita-od-preprasivanja"
+          ]
+        },
+        {
+          "id": "provera",
+          "title": "Proverite ivice pre boje",
+          "what": "Pre nanošenja boje proverite da nijedna ivica trake ili folije nije odignuta.",
+          "detail": "Odignuta ivica propušta maglu boje i ostavlja neravnu liniju.",
+          "material": "Pregled pod svetlom",
+          "guides": [
+            "osnove-maskiranja"
+          ]
+        },
+        {
+          "id": "skidanje",
+          "title": "Skinite traku na vreme",
+          "what": "Traku skinite posle sušenja, kako navodi njen list, i ne ostavljajte je na vozilu duže nego što proizvođač dozvoljava.",
+          "detail": "Master Tape II se čisto skida kada vozilo izađe iz kabine; za traku na Auto Mask foliji list navodi čisto skidanje do dva dana, za Red Tape do tri dana. Kapica Tec Line Stick skida se dok je boja još tečna.",
+          "material": "Traka iz tehničkog lista",
+          "products": [
+            "carsystem-tec-line-stick"
+          ],
+          "guides": [
+            "skidanje-trake-posle-lakiranja"
+          ]
+        }
+      ],
+      "products": [
+        "carsystem-master-tape-ii",
+        "carsystem-master-tape-green",
+        "carsystem-top-tape",
+        "carsystem-foam-tape",
+        "carsystem-foam-tape-t-soft",
+        "carsystem-wr-lifting-tape-premium",
+        "carsystem-slim-tape",
+        "carsystem-masking-paper-master-ii"
+      ],
+      "guides": [
+        "osnove-maskiranja",
+        "trake-za-maskiranje-i-temperatura",
+        "mekana-ivica-pri-maskiranju",
+        "maskiranje-gumica-i-lajsni",
+        "papir-ili-folija-za-maskiranje",
+        "skidanje-trake-posle-lakiranja"
+      ]
+    },
+    {
+      "id": "zastita",
+      "label": "Zaštita od preprašivanja",
+      "desc": "Folija, navlake, kapice",
+      "title": "Zaštita vozila od preprašivanja",
+      "lead": "Kada se lakira samo jedan deo, ostatak vozila se pokrije u celini: folija preko celog automobila, zatvoreni zazori, pokrivene felne i unutrašnjost, a oko zone popravke papir i traka.",
+      "choice": {
+        "question": "Uslovi",
+        "options": [
+          {
+            "id": "jedan",
+            "label": "Suvo vozilo",
+            "note": "Folija preko celog vozila, navlake i kapice."
+          },
+          {
+            "id": "vlaga",
+            "label": "Vozilo nije potpuno suvo"
+          }
+        ]
+      },
+      "steps": [
+        {
+          "id": "pranje",
+          "title": "Operite i osušite vozilo",
+          "what": "Foliju postavljajte na čisto i suvo vozilo.",
+          "detail": "Carsystem za Easy Mask II navodi da se ne nanosi na mokru ili prljavu površinu.",
+          "material": "Sredstvo za pranje",
+          "pod": {
+            "vlaga": {
+              "title": "Vozilo nije potpuno suvo",
+              "what": "Ako posle pranja na vozilu ostaje vlaga, koristite foliju namenjenu vozilima sa zaostalom vlagom.",
+              "detail": "Carsystem Masking Film blue (13 µm, do 110 °C) namenjen je vozilima sa zaostalom vlagom i sprečava mrlje; zelena folija (11 µm) nije pogodna za zaostalu vlagu.",
+              "products": [
+                "carsystem-masking-film-blue",
+                "carsystem-masking-film-green"
+              ],
+              "sources": [
+                {
+                  "doc": "cs-katalog-2026",
+                  "strana": 43
+                }
+              ]
+            }
+          },
+          "guides": [
+            "zastita-od-preprasivanja"
+          ]
+        },
+        {
+          "id": "zazori",
+          "title": "Zatvorite zazore",
+          "what": "Pre folije zatvorite zazore vrata, haube i prtljažnika penastom trakom.",
+          "detail": "Penasta traka štiti unutrašnjost od magle boje.",
+          "material": "Penasta traka",
+          "products": [
+            "carsystem-foam-tape"
+          ],
+          "guides": [
+            "mekana-ivica-pri-maskiranju"
+          ]
+        },
+        {
+          "id": "folija",
+          "title": "Prevucite foliju preko celog vozila",
+          "what": "Foliju prevucite preko celog vozila. Pri premeštanju je ne vucite čvrsto preko laka, nego je podignite.",
+          "detail": "Prema katalogu, jako statičko naelektrisanje folije sprečava da magla boje uđe ispod nje. Za Easy Mask II Carsystem preporučuje da se folija malo podigne i talasastim pokretom uvuče vazduh ispod nje.",
+          "material": "Folija u roli",
+          "products": [
+            "carsystem-easy-mask-ii",
+            "carsystem-masking-film-green"
+          ],
+          "guides": [
+            "papir-ili-folija-za-maskiranje"
+          ]
+        },
+        {
+          "id": "otvor",
+          "title": "Isecite otvor oko dela",
+          "what": "Isecite otvor oko dela koji se lakira i ivicu folije zalepite trakom uz papir ili uz granicu popravke.",
+          "detail": "Ivica folije mora biti zalepljena da magla boje ne uđe ispod.",
+          "material": "Krep traka, papir",
+          "products": [
+            "carsystem-master-tape-ii",
+            "carsystem-masking-paper-master-ii"
+          ],
+          "guides": [
+            "osnove-maskiranja"
+          ]
+        },
+        {
+          "id": "felne",
+          "title": "Felne, gume i unutrašnjost",
+          "what": "Felne i gume pokrijte navlakama, a ako vrata ili prozori ostaju otvoreni, zaštitite i unutrašnjost.",
+          "detail": "Carsystem Wheel Cover štiti felne i gume od prašine i magle boje; All In One Covers je set navlaka za sedište, pod, volan, ručicu menjača i ručnu kočnicu.",
+          "material": "Navlake",
+          "products": [
+            "carsystem-wheel-cover",
+            "carsystem-all-in-one-covers"
+          ],
+          "guides": [
+            "zastita-od-preprasivanja"
+          ]
+        },
+        {
+          "id": "senzori",
+          "title": "Senzori i bravice",
+          "what": "Senzore parkiranja i bravice zatvorite kapicama.",
+          "detail": "Carsystem za Tec Line Stick navodi zaštitu pri brušenju, lakiranju i poliranju; kapica se skida dok je boja još tečna.",
+          "material": "Kapice za senzore",
+          "products": [
+            "carsystem-tec-line-stick"
+          ],
+          "guides": [
+            "skidanje-trake-posle-lakiranja"
+          ]
+        }
+      ],
+      "products": [
+        "carsystem-masking-film-blue",
+        "carsystem-foam-tape",
+        "carsystem-easy-mask-ii",
+        "carsystem-masking-film-green",
+        "carsystem-liquid-masking",
+        "carsystem-wheel-cover",
+        "carsystem-all-in-one-covers",
+        "carsystem-tec-line-stick"
+      ],
+      "guides": [
+        "zastita-od-preprasivanja",
+        "papir-ili-folija-za-maskiranje",
+        "osnove-maskiranja",
+        "mekana-ivica-pri-maskiranju"
+      ]
+    },
+    {
+      "id": "ciscenje",
+      "label": "Čišćenje i odmašćivanje",
+      "desc": "Pranje, odmašćivač, krpa",
+      "title": "Čišćenje i odmašćivanje pre lakiranja",
+      "lead": "Odmašćivač se bira prema fazi rada i podlozi, a ne samo prema tome da li je vodeni ili rastvarački. Pranje i odmašćivanje nisu isti korak, a krpa za prašinu ide poslednja, na suvu i odmašćenu površinu.",
+      "choice": {
+        "question": "Faza rada",
+        "options": [
+          {
+            "id": "prvi",
+            "label": "Pre kita i punioca",
+            "note": "Prvo čišćenje jako zaprljane površine."
+          },
+          {
+            "id": "baza",
+            "label": "Pre bazne boje i laka"
+          },
+          {
+            "id": "plastika",
+            "label": "Plastični deo"
+          }
+        ]
+      },
+      "steps": [
+        {
+          "id": "pranje",
+          "title": "Operite deo",
+          "what": "Operite deo, isperite i osušite.",
+          "detail": "Deterdžent je koristan za pranje, ali pranje i odmašćivanje nisu isti korak.",
+          "material": "Sredstvo za pranje, voda",
+          "guides": [
+            "kucna-sredstva-umesto-odmascivaca"
+          ]
+        },
+        {
+          "id": "izbor",
+          "title": "Izaberite odmašćivač prema fazi",
+          "what": "Za prvo čišćenje jako zaprljane površine, pre kita i punioca, koristi se odmašćivač za prvi korak.",
+          "detail": "R-M PK 1P10 (rastvarački, VOC 840 g/l) namenjuje prvom koraku pre kita i punioca, ali ne na podlogama osetljivim na rastvarače; PK 2P10 (vodeni, 186 g/l) prvom koraku, pre i posle brušenja.",
+          "material": "Odmašćivač za prvi korak",
+          "pod": {
+            "baza": {
+              "title": "Odmašćivač pred baznu boju i lak",
+              "what": "Neposredno pre bazne boje, boje sa direktnim sjajem i laka koristite odmašćivač namenjen toj fazi.",
+              "detail": "R-M PRE Clean-R PK 2P20 (vodeni, VOC 198 g/l) namenjen je koraku pre bazne boje, boje sa direktnim sjajem i laka; baslac 70-45 koraku pre punioca i bazne boje 45 linije.",
+              "products": [
+                "rm-pk-2p20-pre-clean-r",
+                "carsystem-silicone-remover-water-2-0"
+              ],
+              "sources": [
+                {
+                  "doc": "rm-pk2p20-tds",
+                  "strana": 1
+                }
+              ]
+            },
+            "plastika": {
+              "title": "Antistatički odmašćivač za plastiku",
+              "what": "Plastični deo pre bazne boje čistite sredstvom za koje proizvođač navodi antistatičko dejstvo.",
+              "detail": "Plastika se trljanjem naelektriše i privlači prašinu. Antistatičko dejstvo navode R-M MULTI Clean-R, baslac 70-45 i Carsystem Silicone Remover Water 2.0 i Mild.",
+              "products": [
+                "rm-pk-2p10-multi-clean-r",
+                "carsystem-silicone-remover-water-2-0",
+                "carsystem-silicone-remover-mild"
+              ]
+            }
+          },
+          "products": [
+            "rm-pk-1p10-silicone-remov-r",
+            "rm-pk-2p10-multi-clean-r"
+          ],
+          "sources": [
+            {
+              "doc": "rm-pk1p10-tds",
+              "strana": 1
+            },
+            {
+              "doc": "rm-pk2p10-tds",
+              "strana": 1
+            }
+          ],
+          "guides": [
+            "odmascivac-za-vodene-i-rastvaracke-sisteme"
+          ]
+        },
+        {
+          "id": "kucna",
+          "title": "Ne zamenjujte ga kućnim sredstvima",
+          "what": "Ne koristite alkohol, deterdžent ili nitro razređivač umesto odmašćivača.",
+          "detail": "Za njih nema podataka šta uklanjaju i na kojim podlogama smeju; nitro razređivač je jak rastvarač i može da omekša osetljive podloge.",
+          "material": "—",
+          "guides": [
+            "kucna-sredstva-umesto-odmascivaca"
+          ]
+        },
+        {
+          "id": "nanosenje",
+          "title": "Nanesite pa obrišite",
+          "what": "Odmašćivač nanesite jednom čistom krpom, a drugom obrišite pre nego što se osuši.",
+          "detail": "baslac tako opisuje rad sa sredstvom za plastiku 70-20: nanosi se na ceo deo i ne sme da se osuši na površini.",
+          "material": "Dve čiste krpe koje ne puštaju vlakna",
+          "guides": [
+            "odmascivanje-pre-lakiranja"
+          ]
+        },
+        {
+          "id": "krpa",
+          "title": "Krpa za prašinu na kraju",
+          "what": "Neposredno pre nanošenja, na suvu, odmašćenu i maskiranu površinu, pređite krpom za prašinu laganim potezima, bez pritiska.",
+          "detail": "Krpa skuplja suvu prašinu i vlakna, ali ne odmašćuje. Carsystem Staub Stop je za sve vrste boja, a Staub Stop Water za rad sa vodenim bojama.",
+          "material": "Krpa za prašinu",
+          "only": [
+            "baza",
+            "plastika"
+          ],
+          "products": [
+            "carsystem-staub-stop",
+            "carsystem-staub-stop-water"
+          ],
+          "guides": [
+            "krpa-za-prasinu-pre-lakiranja"
+          ]
+        }
+      ],
+      "products": [
+        "rm-pk-1p10-silicone-remov-r",
+        "rm-pk-2p10-multi-clean-r",
+        "rm-pk-2p20-pre-clean-r",
+        "carsystem-silicone-remover-water-2-0",
+        "carsystem-silicone-remover-mild",
+        "carsystem-staub-stop",
+        "carsystem-staub-stop-water"
+      ],
+      "guides": [
+        "odmascivac-za-vodene-i-rastvaracke-sisteme",
+        "odmascivanje-pre-lakiranja",
+        "krpa-za-prasinu-pre-lakiranja",
+        "staticki-elektricitet-na-plastici",
+        "kucna-sredstva-umesto-odmascivaca"
+      ]
+    }
+  ],
+  "scales": {
+    "maskiranje": {
+      "title": "Traka",
+      "question": "Koju traku koristite?",
+      "note": "Otpornost na toplotu prema tehničkom listu trake",
+      "ticks": [
+        80,
+        90,
+        100,
+        110,
+        120,
+        155
+      ],
+      "unit": "toplota, °C",
+      "footer": "Traka se bira tako da njena otpornost bude iznad najviše temperature objekta u ciklusu sušenja, za trajanje tog ciklusa. Kod IR lampe ivica bliža lampi greje se više.",
+      "items": [
+        {
+          "id": "top",
+          "name": "Carsystem Top Tape",
+          "text": "80 °C; sušenje u kabini do 80 °C.",
+          "bars": [
+            [
+              "krep",
+              80,
+              80,
+              "a"
+            ]
+          ],
+          "source": {
+            "doc": "glasurit-prirucnik",
+            "strana": 13
+          }
+        },
+        {
+          "id": "foam",
+          "name": "Carsystem Foam Tape i T-Soft",
+          "text": "do 80 °C; za T-Soft uz trajanje od 1 h.",
+          "bars": [
+            [
+              "penasta",
+              80,
+              80,
+              "a"
+            ]
+          ],
+          "source": {
+            "doc": "cs-foam-tape-t-soft-tds",
+            "strana": 1
+          }
+        },
+        {
+          "id": "slim",
+          "name": "Carsystem Slim Tape",
+          "text": "najviše 100 °C; izuzetno dobro prianja na plastične delove i gumene zaptivke.",
+          "bars": [
+            [
+              "tanka",
+              100,
+              100,
+              "a"
+            ]
+          ],
+          "source": {
+            "doc": "cs-slim-tape-tds",
+            "strana": 1
+          }
+        },
+        {
+          "id": "red",
+          "name": "Carsystem Red Tape",
+          "text": "radni opseg 0 °C do +110 °C; ciklus 90 °C (1 h) do 110 °C (30 min); čisto skidanje u roku od tri dana.",
+          "bars": [
+            [
+              "ciklus",
+              90,
+              110,
+              "a"
+            ]
+          ],
+          "source": {
+            "doc": "cs-red-tape-tds",
+            "strana": 1
+          }
+        },
+        {
+          "id": "green",
+          "name": "Carsystem Master Tape Green",
+          "text": "110 °C; sušenje u kabini do 110 °C.",
+          "bars": [
+            [
+              "krep",
+              110,
+              110,
+              "a"
+            ]
+          ],
+          "source": {
+            "doc": "cs-wr-lifting-premium-tds",
+            "strana": 1
+          }
+        },
+        {
+          "id": "master",
+          "name": "Carsystem Master Tape II",
+          "text": "120 °C; sušenje u kabini do 120 °C; i za mokro brušenje.",
+          "bars": [
+            [
+              "krep",
+              120,
+              120,
+              "a"
+            ]
+          ],
+          "source": {
+            "doc": "glasurit-prirucnik",
+            "strana": 293
+          }
+        },
+        {
+          "id": "fine",
+          "name": "Carsystem Fine Line Tape Blue",
+          "text": "do 155 °C; radni opseg 0 °C do +155 °C.",
+          "bars": [
+            [
+              "PVC",
+              155,
+              155,
+              "a"
+            ]
+          ],
+          "source": {
+            "doc": "cs-fine-line-tds",
+            "strana": 1
+          }
+        }
+      ]
+    }
+  },
+  "materials": [
+    {
+      "id": "sundjer",
+      "label": "Trake",
+      "hint": "Krep, penaste, za gumice",
+      "title": "Trake za maskiranje",
+      "lead": "Traka se bira prema temperaturi sušenja i podlozi na koju se lepi. Granice iz tehničkih listova trake iz istog programa jako se razlikuju.",
+      "rows": [
+        {
+          "k": "Krep",
+          "v": "Top Tape 80 °C, Master Tape Green 110 °C, Master Tape II 120 °C; Red Tape 90 °C (1 h) do 110 °C (30 min).",
+          "sources": [
+            {
+              "doc": "cs-katalog-2026",
+              "strana": 40
+            }
+          ]
+        },
+        {
+          "k": "Posebne",
+          "v": "Fine Line Tape Blue do 155 °C za liniju; Slim Tape za plastiku i gumene zaptivke; penaste trake za zazore.",
+          "sources": [
+            {
+              "doc": "cs-fine-line-tds",
+              "strana": 1
+            }
+          ]
+        },
+        {
+          "k": "Gumice",
+          "v": "WR-Lifting Tape: plastični deo ispod ivice gumice, pa ivica boje ostaje ispod nje."
+        }
+      ],
+      "products": [
+        "carsystem-master-tape-ii",
+        "carsystem-fine-line-tape-blue",
+        "carsystem-foam-tape",
+        "carsystem-wr-lifting-tape-premium"
+      ],
+      "guides": [
+        "trake-za-maskiranje-i-temperatura",
+        "maskiranje-gumica-i-lajsni"
+      ]
+    },
+    {
+      "id": "disk",
+      "label": "Folije i papir",
+      "hint": "Veliko i uz ivicu",
+      "title": "Folije i papir za maskiranje",
+      "lead": "Folija brzo pokriva veliku površinu i zbog statičkog naelektrisanja sama prianja uz vozilo. Papir se koristi oko zone popravke i uz ivice, gde je potrebna kruća, ravna ivica.",
+      "rows": [
+        {
+          "k": "Folija",
+          "v": "Masking film green 11 µm, do 110 °C; blue 13 µm, za vozila sa zaostalom vlagom; Easy Mask II, Auto Mask sa ugrađenom trakom.",
+          "sources": [
+            {
+              "doc": "cs-katalog-2026",
+              "strana": 43
+            }
+          ]
+        },
+        {
+          "k": "Papir",
+          "v": "Masking Paper Master II: kraft 40 g/m², otporan na vodu i rastvarače, barijera bez PFAS.",
+          "sources": [
+            {
+              "doc": "cs-paper-master-ii-tds",
+              "strana": 1
+            }
+          ]
+        },
+        {
+          "k": "Tečna",
+          "v": "Liquid Masking se nanosi pištoljem umesto folije."
+        }
+      ],
+      "products": [
+        "carsystem-masking-film-green",
+        "carsystem-masking-film-blue",
+        "carsystem-masking-paper-master-ii",
+        "carsystem-auto-mask"
+      ],
+      "guides": [
+        "papir-ili-folija-za-maskiranje"
+      ]
+    },
+    {
+      "id": "flis",
+      "label": "Čišćenje",
+      "hint": "Odmašćivači, krpe",
+      "title": "Odmašćivači i krpe za prašinu",
+      "lead": "Proizvođači dele odmašćivače po fazi rada, ne samo po vrsti rastvarača. Krpa za prašinu skuplja suvu prašinu i vlakna, ali ne odmašćuje.",
+      "rows": [
+        {
+          "k": "Carsystem",
+          "v": "Silicone Remover Water 2.0 (VOC ispod 200 g/l) i Mild, oba sa antistatičkim dejstvom.",
+          "sources": [
+            {
+              "doc": "rm-pk2p10-tds",
+              "strana": 1
+            }
+          ]
+        },
+        {
+          "k": "Krpe",
+          "v": "Staub Stop za sve vrste boja; Staub Stop Water za vodene boje."
+        }
+      ],
+      "products": [
+        "rm-pk-2p10-multi-clean-r",
+        "rm-pk-2p20-pre-clean-r",
+        "carsystem-silicone-remover-water-2-0",
+        "carsystem-staub-stop"
+      ],
+      "guides": [
+        "odmascivac-za-vodene-i-rastvaracke-sisteme",
+        "krpa-za-prasinu-pre-lakiranja"
+      ]
+    },
+    {
+      "id": "traka",
+      "label": "Zaštita",
+      "hint": "Vozilo i lakirer",
+      "title": "Zaštita vozila i lakirera",
+      "lead": "Navlake i kapice štite delove vozila koje folija ne pokriva. Lična oprema se bira prema odeljku 8 bezbednosnog lista proizvoda.",
+      "rows": [
+        {
+          "k": "Vozilo",
+          "v": "Wheel Cover za felne i gume, All In One Covers za enterijer, Tec Line Stick za senzore i bravice."
+        },
+        {
+          "k": "Lakirer",
+          "v": "Rukavice, naočare, antistatička odeća i zaštita disanja prema bezbednosnom listu; oprema dolazi posle tehničkih mera."
+        }
+      ],
+      "products": [
+        "carsystem-wheel-cover",
+        "carsystem-all-in-one-covers",
+        "carsystem-paint-overall-blue",
+        "carfit-professional-nitrile-gloves"
+      ],
+      "guides": [
+        "zastita-od-preprasivanja",
+        "licna-zastitna-oprema-autolakirera"
+      ]
+    }
+  ],
+  "problems": [
+    {
+      "title": "Traka ostavlja lepak ili kidanu ivicu",
+      "symptom": "Posle sušenja traka se ne skida čisto ili ivica boje nije ravna.",
+      "causes": [
+        "Traka slabija od temperature ciklusa sušenja",
+        "Traka ostala na vozilu duže nego što proizvođač dozvoljava",
+        "Traka zalepljena na prašnjavu ili vlažnu površinu"
+      ],
+      "check": "Uporedite ciklus sušenja i vreme do skidanja sa tehničkim listom trake.",
+      "guides": [
+        "skidanje-trake-posle-lakiranja",
+        "trake-za-maskiranje-i-temperatura"
+      ]
+    },
+    {
+      "title": "Magla boje na susednim delovima",
+      "symptom": "Na delovima koji se nisu lakirali vidi se fina hrapava magla boje.",
+      "causes": [
+        "Pokriveni su samo susedni delovi, a ne celo vozilo",
+        "Ivica folije nije zalepljena",
+        "Zazori nisu zatvoreni pre folije"
+      ],
+      "check": "Folija preko celog vozila, zalepljena ivica oko otvora i zatvoreni zazori.",
+      "guides": [
+        "zastita-od-preprasivanja"
+      ]
+    },
+    {
+      "title": "Oštra ivica boje na otvoru vrata",
+      "symptom": "Kad se vrata ili hauba otvore, vidi se oštra linija nove boje.",
+      "causes": [
+        "Ravna krep traka umesto penaste u zazoru",
+        "Penasta traka postavljena na samu spoljnu ivicu"
+      ],
+      "check": "Penasta traka u zazoru, malo uvučeno od spoljne ivice dela.",
+      "guides": [
+        "mekana-ivica-pri-maskiranju"
+      ]
+    },
+    {
+      "title": "Prašina na plastičnom delu",
+      "symptom": "Na plastici ima više uključaka prašine nego na metalnim delovima.",
+      "causes": [
+        "Plastika naelektrisana trenjem ili skidanjem folije",
+        "Poslednje čišćenje bez antistatičkog sredstva",
+        "Brisanje suvom krpom snažnim potezima"
+      ],
+      "check": "Poslednje čišćenje sredstvom za koje proizvođač navodi antistatičko dejstvo.",
+      "guides": [
+        "staticki-elektricitet-na-plastici"
+      ]
+    }
+  ]
+}

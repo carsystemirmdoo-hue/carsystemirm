@@ -32,7 +32,7 @@ const supportLinks = [
   { href: "/prodavnice", label: "Prodavnice" },
   { href: "/kontakt?tema=tehnicka-podrska", label: "Tehnička podrška" },
   { href: "/kontakt", label: "Kontakt" },
-  { href: "/kontakt?tema=b2b", label: "B2B saradnja" },
+  { href: "/b2b-saradnja", label: "B2B saradnja" },
 ];
 
 export function Footer() {

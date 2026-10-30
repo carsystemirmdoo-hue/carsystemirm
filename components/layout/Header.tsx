@@ -138,7 +138,10 @@ export function Header() {
   const brandActive =
     pathname === "/brendovi" || pathname.startsWith("/brendovi/");
   const systemActive =
-    pathname === "/program" || pathname.startsWith("/program/");
+    pathname === "/program" ||
+    pathname.startsWith("/program/") ||
+    pathname === "/dokumentacija" ||
+    pathname === "/b2b-saradnja";
   const storeActive =
     pathname === "/prodavnice" || pathname.startsWith("/prodavnice/");
   const katalozActive =

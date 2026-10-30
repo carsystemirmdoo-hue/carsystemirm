@@ -22,6 +22,8 @@ const staticRoutes = [
   "/program",
   "/prodavnice",
   "/kontakt",
+  "/dokumentacija",
+  "/b2b-saradnja",
 ];
 
 /*

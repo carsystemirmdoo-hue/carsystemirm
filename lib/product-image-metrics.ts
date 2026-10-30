@@ -43,6 +43,8 @@ export type ProductImageMetrics = {
   tone: "very-dark" | "dark" | "mid" | "light" | "very-light";
   boxSource: "alpha" | "opaque-border" | "canvas";
   palette: { hex: string; share: number }[];
+  /** Gruba paleta (3 bita po kanalu): veće površine jedne boje, za pravilo roletne kataloga. */
+  coarse?: { hex: string; share: number }[];
   /** Flat studio backdrop of an opaque photo (hex); absent when the backdrop is a gradient. */
   backdrop?: string;
   /**

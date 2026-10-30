@@ -32,6 +32,7 @@ import { publicSkuOf } from "@/lib/catalog/public-code";
 import { canonicalVariantKey } from "@/lib/catalog/variant-key";
 import {
   getAllCarsystemProducts,
+  getCarsystemBrandBySlug,
   type CarsystemProduct,
   type ProductPublicStatus,
   type ProductStockStatus,
@@ -54,6 +55,10 @@ import { baslacSystemFamilies } from "@/lib/baslac-catalog-products";
 import { baslacAssetSlot, baslacPublicBases, type BaslacSystemId } from "@/lib/baslac-systems";
 import { getRmFamilyConfig, rmFamilyPackshots, rmFamilyVolumes } from "@/lib/rm-family-bases";
 import { packSlug } from "@/components/product/variantPacks.mjs";
+import { catalogRollerColor } from "@/lib/catalogRollerColor.mjs";
+import { getBrandCardColor } from "@/lib/brand-card-colors";
+// Podatak, ne `@/lib/product-image-metrics` (server-only): listing koriste i skripte i testovi van Next-a.
+import imageMetricsManifest from "@/data/product-image-metrics.generated.json";
 
 export type CatalogListingKind = "family" | "product" | "variant";
 
@@ -111,6 +116,11 @@ export type CatalogListingEntity = {
   categorySlugs: string[];
   /** Everything the shared visual surface renders, pre-resolved. */
   presentation: ProductVisualPresentation;
+  /**
+   * Boja roletne kada se ne sme uzeti nijansa proizvoda (abrazivi, trake): boja brenda ili
+   * kontrastna neutralna — `lib/catalogRollerColor.mjs`. Bez vrednosti važi opšte pravilo kartice.
+   */
+  rollerColor?: string;
   /** Code shown as the card's first line in the catalog's B-system layout. */
   productCode: string;
   /**
@@ -470,6 +480,22 @@ export { expandVariant } from "@/lib/catalog-variant-expand";
 
 let cached: CatalogListingData | undefined;
 
+function withRollerColor(entity: CatalogListingEntity): CatalogListingEntity {
+  const brand = getCarsystemBrandBySlug(entity.brandSlug);
+  const src = entity.presentation.image?.src;
+  const metrics = src
+    ? ((imageMetricsManifest as unknown as { images: unknown }).images as Record<string, { coarse?: { hex: string; share: number }[]; luminance?: number }>)[src]
+    : undefined;
+  const rollerColor = catalogRollerColor({
+    categorySlugs: entity.categorySlugs,
+    brandColor: brand ? getBrandCardColor(brand) : null,
+    shade: entity.presentation.shade,
+    coarse: metrics?.coarse,
+    luminance: metrics?.luminance,
+  });
+  return rollerColor ? { ...entity, rollerColor } : entity;
+}
+
 export function getCatalogListingData(): CatalogListingData {
   if (cached) return cached;
 
@@ -507,7 +533,7 @@ export function getCatalogListingData(): CatalogListingData {
     pushEntity(familyEntity(family), family.representative);
   }
 
-  cached = { canonical, anchors, variants };
+  cached = { canonical: canonical.map(withRollerColor), anchors, variants };
   return cached;
 }
 

@@ -81,7 +81,7 @@ export default function DokumentacijaPage() {
               Dokumenti proizvođača za proizvode iz našeg kataloga. Pre rada proverite da je list za tačno Vaš proizvod i da je verzija
               važeća.
             </p>
-            <ul className={styles.counters}>
+            <ul className={styles.counters} style={{ "--counter-cols": typeCounts.length <= 6 ? typeCounts.length : Math.ceil(typeCounts.length / 2) } as React.CSSProperties}>
               {typeCounts.map((entry) => (
                 <li className={styles.counter} key={entry.type}>
                   <span className={styles.counterValue}>{entry.count}</span>

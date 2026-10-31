@@ -15,6 +15,9 @@ Ovo je urednička provera prema dokumentu proizvođača, uz pomoć AI-ja. Nije s
 
 Kolona „verzija iz“: `PDF` = verzija pročitana iz samog fajla na kome je strana nađena; `vodič` = verzija iz vodiča (za dokumente sa sajta proizvođača tada nije isključeno da se preuzeti fajl razlikuje).
 
+
+SATA uputstva (jet X, SATAjet X 5500): SATA menja adrese PDF fajlova, pa izvor vodi na stranicu proizvoda kod SATA, gde je aktuelan PDF. Strane su strane PDF-a (engleski deo višejezičnog uputstva); svaka vrednost je vizuelno proverena na renderovanoj originalnoj strani (2026-10-31).
+
 | Id | Dokument | Verzija | Verzija iz | Adresa |
 |---|---|---|---|---|
 | `baslac-20-22-tds` | baslac, Technical Information 20-22 2K Primerfiller | 06/2023 | vodič | /documents/products/baslac/20-22.pdf |
@@ -25,10 +28,12 @@ Kolona „verzija iz“: `PDF` = verzija pročitana iz samog fajla na kome je st
 | `baslac-40-100-tds` | baslac, Technical Information 40-100 High Speed 2K Clear VOC | 06/2026 | PDF | /documents/products/baslac/40-100.pdf |
 | `baslac-45-line-tds` | baslac, Technical Information 45 Line, 45- Basecoat | 03/2026 | PDF | /documents/products/baslac/45_Line.pdf |
 | `baslac-blend-51k` | baslac, Technical Information Mazda Rhodium White Met, Color 51K for Basecoat — Blend in repair process on the adjacent panel | 03/2025 | vodič | /documents/products/baslac/Mazda51K_chart_blend_in_process_1.pdf |
+| `baslac-pistolji` | baslac, Technical Information Recommended spray guns (Sata, Iwata, Devilbiss, Walcom) | 01/2026 | vodič | /documents/products/baslac/Spray_guns.pdf |
 | `carfit-etch-primer-tds` | C.A.R.FIT, Technical Data Sheet 1K Etch Primer Spray |  | vodič | https://carfitrepair.com/wp-content/uploads/2023/05/car-fit-1k-etch-primer-spray-technical-data-sheet.pdf |
 | `carfit-finishing-tds` | C.A.R.FIT, Technical Data Sheet BLACK LABEL Finishing Compound | 01.12.2020 | vodič | https://carfitrepair.com/wp-content/uploads/2023/05/car-fit-finishing-compound-technical-data-sheet.pdf |
 | `carfit-zinc-spray-tds` | C.A.R.FIT, Technical Data Sheet Zinc Spray |  | vodič | https://carfitrepair.com/wp-content/uploads/2023/05/car-fit-zinc-spray-technical-data-sheet.pdf |
 | `carsystem-2k-epoxy-fill-primer-tds` | Carsystem, Technical Data Sheet 2K Epoxy Fill Primer, 2K Spot-repair epoxy primer V03 | V03, 03/2024 | vodič | https://www.carsystem.org/fileadmin/products/datasheets/tds-2k-epoxy-grundierfueller-v03.pdf |
+| `carsystem-matt-tds` | Carsystem, Technical Data Sheet 2K Clear VOC Matt / Silkmatt | V01 07/2021 | PDF | https://www.carsystem.org/fileadmin/products/datasheets/tds-2k-clear-silkmatt-v01.pdf |
 | `carsystem-multi-green-tds` | Carsystem, Technical Data Sheet Multi Green, Polyester multifunctional putty V08 | V08, 11/2024 | vodič | /documents/products/carsystem/carsystem-git-multi-green-tds.pdf |
 | `carsystem-silicone-remover-water-tds` | Carsystem, Technical Data Sheet Silicone Remover Water 2.0, Silicone remover – water-based V02 | V02, 09/2025 | vodič | https://www.carsystem.org/fileadmin/products/datasheets/tds-silicone-remover-water-2.0-v02.pdf |
 | `carsystem-speed-plus-tds` | Carsystem, Technical Data Sheet 2K Clear VOC Speed Plus | V06, 01/2025 | vodič | https://www.carsystem.org/fileadmin/products/datasheets/tds-2k-clear-voc-speed-plus-v06.pdf |
@@ -55,6 +60,7 @@ Kolona „verzija iz“: `PDF` = verzija pročitana iz samog fajla na kome je st
 | `cs-vario-plus-tds` | Carsystem, Technical Data Sheet 2K Filler Vario Plus, 2K acrylic filler | V 01, 06.02.2015 | vodič | https://www.carsystem.org/fileadmin/products/datasheets/tds-2k-filler-vario-plus.pdf |
 | `cs-wr-lifting-premium-tds` | Carsystem, Technical Data Sheet WR-Lifting Tape Premium, masking tape with plastic edge – perforated | V03, 10/2025 | vodič | https://www.carsystem.org/fileadmin/products/datasheets/tds-wr-lifting-tape-premium-v03.pdf |
 | `norbin-n15-020-tds` | Norbin, Technical Information N15-020 NORBIN Clear | 01/2022 | PDF | https://www.norbin-paint.com/files/TDS/NORBIN_TDS_N15-020_Clear_2022.pdf |
+| `norbin-n15-v20-tds` | Norbin, Technical Information N15-V20 NORBIN Clear VOC | 01/2022 | PDF | https://www.norbin-paint.com/files/TDS/NORBIN_TDS_N15-V20_Clear_VOC_2022.pdf |
 | `rm-agilis-tds` | R-M, Technical Information AGILIS, Waterborne basecoat | 10/2026 | PDF | https://techinfo.rmpaint.com/unicorn/en/AGILIS-Waterborne%20basecoat.pdf |
 | `rm-b2p93-tds` | R-M, Technical Information UV Bodyfill-R B 2P93 UV body filler | 07/2026 | PDF | /documents/products/rm/b-2p93-uv-bodyfill-r/rm-b-2p93-uv-bodyfill-r-technical-data-sheet.pdf |
 | `rm-c2a40-tds` | R-M, Technical Information C 2A40 AirTOP, Clear coat, air drying | 07/2026 | PDF | /documents/products/rm/c-2a40-airtop/rm-c-2a40-airtop-technical-data-sheet.pdf |
@@ -69,3 +75,6 @@ Kolona „verzija iz“: `PDF` = verzija pročitana iz samog fajla na kome je st
 | `rm-pk1p10-tds` | R-M, Technical Information SILICONE Remov-R, PK 1P10 eSense solventborne cleaning agent | 10/2026 | PDF | https://techinfo.rmpaint.com/unicorn/en/PK%201P10-eSense%20solventborne%20cleaning%20agent.pdf |
 | `rm-pk2p10-tds` | R-M, Technical Information MULTI Clean-R, PK 2P10 eSense waterborne multi cleaning agent | 10/2026 | PDF | https://techinfo.rmpaint.com/unicorn/en/PK%202P10-eSense%20waterborne%20multi%20cleaning%20agent.pdf |
 | `rm-pk2p20-tds` | R-M, Technical Information PRE Clean-R, PK 2P20 eSense waterborne cleaning agent, base-/topcoat | 10/2026 | PDF | https://techinfo.rmpaint.com/unicorn/en/PK%202P20-eSense%20waterborne%20cleaning%20agent%20base-_topcoat.pdf |
+| `rm-t2a55-tds` | R-M, Technical Information T 2A55 UNO HD Series mixing clear | 10/2026 | PDF | https://techinfo.rmpaint.com/unicorn/en/T%202A55-UNO%20HD%20Series%20mixing%20clear.pdf |
+| `sata-jetx-uputstvo` | SATA, Operating manual jet X (višejezično, engleski deo), PDF na stranici proizvoda | 3266-240619-2 | PDF | https://www.sata.com/en/jet-x/CF1931336 |
+| `sata-x5500-uputstvo` | SATA, Operating Manual SATAjet X 5500 RP/HVLP (DIGITAL) (višejezično, engleski deo), PDF na stranici proizvoda | izdanje 10.06.2020 | PDF | https://www.sata.com/en/satajet-x-5500-clear-coat-edition/CF1931331 |

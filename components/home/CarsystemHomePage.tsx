@@ -775,7 +775,7 @@ export function CarsystemHomePage() {
             <a className={`${styles.secondaryOnDark} cs-cta`} data-cta-on="dark" href="/katalog" data-cursor="button">
               Katalog proizvoda
             </a>
-            <a className={`${styles.secondaryOnDark} cs-cta`} data-cta-on="dark" href="/kontakt?tema=b2b" data-cursor="button">
+            <a className={`${styles.secondaryOnDark} cs-cta`} data-cta-on="dark" href="/b2b-saradnja" data-cursor="button">
               Upit za saradnju
             </a>
           </div>

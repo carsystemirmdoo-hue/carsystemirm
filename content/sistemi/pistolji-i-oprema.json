@@ -12,11 +12,13 @@
         "options": [
           {
             "id": "punilac",
-            "label": "Prajmer ili punilac"
+            "label": "Prajmer ili punilac",
+            "note": "Punioci traže veću diznu; vidi korak „Dizna prema materijalu“."
           },
           {
             "id": "baza",
-            "label": "Vodena bazna boja"
+            "label": "Vodena bazna boja",
+            "note": "Vodena bazna boja traži pištolj predviđen za vodene materijale; vidi korak „Vodena baza: pištolj predviđen za vodu“."
           },
           {
             "id": "lak",
@@ -40,7 +42,7 @@
           "id": "tehnologija",
           "title": "HVLP ili RP",
           "what": "Izaberite tehnologiju koju list predviđa i koju Vaš kompresor može da napaja.",
-          "detail": "SATA HVLP opisuje kao niži pritisak i posebno visok prenos materijala, a RP kao nešto viši pritisak i najveću brzinu rada.",
+          "detail": "SATA HVLP opisuje kao niži pritisak i posebno visok prenos materijala, a RP kao nešto viši pritisak i najveću brzinu rada. Za jet X na 2,0 bara uputstvo navodi potrošnju vazduha 325 Nl/min za RP i 430 Nl/min za HVLP.",
           "material": "Pištolj u izvedbi HVLP ili RP",
           "products": [
             "sata-jet-x",
@@ -48,6 +50,12 @@
           ],
           "guides": [
             "vrste-pistolja-za-lakiranje"
+          ],
+          "sources": [
+            {
+              "doc": "sata-jetx-uputstvo",
+              "strana": 102
+            }
           ]
         },
         {
@@ -137,7 +145,8 @@
         "options": [
           {
             "id": "hvlp",
-            "label": "HVLP"
+            "label": "HVLP",
+            "note": "Kod HVLP pištolja list navodi i pritisak u vazdušnoj kapi; vidi korak „Ulazni pritisak“."
           },
           {
             "id": "rp",
@@ -147,6 +156,18 @@
         ]
       },
       "steps": [
+        {
+          "id": "vazduh",
+          "title": "Vazduh, crevo i spojnice",
+          "what": "Proverite da vazduh dolazi čist i da je crevo unutrašnjeg prečnika najmanje 9 mm, antistatičko, otporno na rastvarače i neoštećeno.",
+          "material": "Filter vazduha, crevo, spojnice",
+          "sources": [
+            {
+              "doc": "sata-x5500-uputstvo",
+              "strana": 115
+            }
+          ]
+        },
         {
           "id": "cedjenje",
           "title": "Procedite materijal u čašu",
@@ -194,7 +215,7 @@
           "material": "Merač pritiska na pištolju",
           "pod": {
             "hvlp": {
-              "detail": "Kod HVLP list navodi i pritisak u vazdušnoj kapi: R-M za C 2A40 0,7 bara, baslac za 45 Line 2 bara ulazni i 0,7 bara u kapi.",
+              "detail": "Kod HVLP list navodi i pritisak u vazdušnoj kapi: R-M za C 2A40 0,7 bara, baslac za 45 Line 2 bara ulazni i 0,7 bara u kapi. Do 2,0 bara ulaznog pritiska jet X radi kao HVLP, iznad toga kao compliant.",
               "sources": [
                 {
                   "doc": "rm-c2a40-tds",
@@ -203,6 +224,10 @@
                 {
                   "doc": "baslac-45-line-tds",
                   "strana": 1
+                },
+                {
+                  "doc": "sata-jetx-uputstvo",
+                  "strana": 102
                 }
               ]
             }
@@ -239,8 +264,9 @@
           "id": "rad",
           "title": "Tokom lakiranja",
           "what": "Okidač tokom rada povlačite do kraja i držite rastojanje iz uputstva pištolja.",
-          "detail": "Tako to traži uputstvo za SATAjet X 5500; rastojanje je u skali iznad.",
-          "material": "Pištolj podešen prema listu"
+          "detail": "Preporučeno rastojanje zavisi od pištolja i tehnologije; vrednosti iz uputstava su ispod.",
+          "material": "Pištolj podešen prema listu",
+          "scale": "podesavanje"
         }
       ],
       "products": [
@@ -276,7 +302,8 @@
           },
           {
             "id": "vodeni",
-            "label": "Vodeni materijal"
+            "label": "Vodeni materijal",
+            "note": "Za vodeni materijal prilagođeno je ispiranje; vidi korak „Isperite kanale za materijal“."
           }
         ]
       },
@@ -299,7 +326,13 @@
           "material": "Sredstvo za čišćenje prema tehničkom listu boje",
           "pod": {
             "vodeni": {
-              "detail": "Uputstvo za jet X traži neutralna sredstva za čišćenje, pH 6–8. Vodeno sredstvo koje predugo ostane u pištolju može da izazove koroziju."
+              "detail": "Uputstvo za jet X traži neutralna sredstva za čišćenje, pH 6–8, i zabranjuje potapanje pištolja.",
+              "sources": [
+                {
+                  "doc": "sata-jetx-uputstvo",
+                  "strana": 94
+                }
+              ]
             }
           },
           "guides": [
@@ -441,6 +474,13 @@
           ],
           "guides": [
             "pistolj-pljuje-ili-prekida"
+          ],
+          "detail": "Za SATAjet X 5500 uputstvo navodi pritezanje dizne za materijal rukom, 11 Nm.",
+          "sources": [
+            {
+              "doc": "sata-x5500-uputstvo",
+              "strana": 115
+            }
           ]
         },
         {
@@ -658,6 +698,92 @@
           }
         }
       ]
+    },
+    "podesavanje": {
+      "title": "Pištolj",
+      "question": "Kojim pištoljem radite?",
+      "note": "Preporučeno rastojanje od površine, iz uputstva pištolja",
+      "ticks": [
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21
+      ],
+      "unit": "rastojanje, cm",
+      "footer": "Rastojanje se razlikuje po tehnologiji i od modela do modela. Za drugi pištolj vrednost se čita iz njegovog uputstva.",
+      "items": [
+        {
+          "id": "x5500rp",
+          "name": "SATAjet X 5500, RP",
+          "pods": [
+            "rp"
+          ],
+          "bars": [
+            [
+              "RP",
+              17,
+              21,
+              "a"
+            ]
+          ],
+          "text": "17–21 cm; potrošnja vazduha 290 Nl/min na 2,0 bara.",
+          "sources": [
+            {
+              "doc": "sata-x5500-uputstvo",
+              "strana": 110
+            }
+          ]
+        },
+        {
+          "id": "x5500hvlp",
+          "name": "SATAjet X 5500, HVLP",
+          "pods": [
+            "hvlp"
+          ],
+          "bars": [
+            [
+              "HVLP",
+              10,
+              15,
+              "a"
+            ]
+          ],
+          "text": "10–15 cm; potrošnja vazduha 430 Nl/min na 2,0 bara.",
+          "sources": [
+            {
+              "doc": "sata-x5500-uputstvo",
+              "strana": 110
+            }
+          ]
+        },
+        {
+          "id": "jetx",
+          "name": "SATA jet X (RP i HVLP)",
+          "bars": [
+            [
+              "oba",
+              15,
+              19,
+              "a"
+            ]
+          ],
+          "text": "15–19 cm, uputstvo ne deli preporuku po tehnologiji; ulazni pritisak 0,5–2,4 bara; na 2,0 bara 325 Nl/min (RP) i 430 Nl/min (HVLP).",
+          "sources": [
+            {
+              "doc": "sata-jetx-uputstvo",
+              "strana": 102
+            }
+          ]
+        }
+      ]
     }
   },
   "materials": [
@@ -673,8 +799,24 @@
           "v": "Prema stranici proizvoda pogodan za vodene i rastvaračke sisteme;"
         },
         {
+          "k": "X 5500",
+          "v": "HVLP i RP; rastojanje 10–15 cm (HVLP) ili 17–21 cm (RP) prema uputstvu.",
+          "sources": [
+            {
+              "doc": "sata-x5500-uputstvo",
+              "strana": 110
+            }
+          ]
+        },
+        {
           "k": "100 B",
-          "v": "baslac ga navodi za punioce 20-24, 20-34 i 20-94, sa diznom 1,6 (RP) ili 1,7–1,8 (HVLP)."
+          "v": "baslac ga u tabeli preporučenih pištolja navodi sa diznom 1,6 (RP) ili 1,7–1,8 (HVLP).",
+          "sources": [
+            {
+              "doc": "baslac-pistolji",
+              "strana": 1
+            }
+          ]
         }
       ],
       "products": [
@@ -714,8 +856,18 @@
       "label": "Vazduh",
       "hint": "Crevo, spojnice, filteri",
       "title": "Vazduh za lakiranje",
-      "lead": "Pištolj raspršuje sve što je u vazduhu zajedno sa bojom.",
+      "lead": "Pištolj raspršuje sve što je u vazduhu zajedno sa bojom. SATA kao uslove navodi čist komprimovani vazduh, dovoljnu količinu vazduha i crevo unutrašnjeg prečnika najmanje 9 mm.",
       "rows": [
+        {
+          "k": "Crevo",
+          "v": "Antistatičko, otporno na rastvarače i trajno otporno na najmanje 10 bara.",
+          "sources": [
+            {
+              "doc": "sata-x5500-uputstvo",
+              "strana": 115
+            }
+          ]
+        },
         {
           "k": "Filteri",
           "v": "SATA kao posledice loše pripremljenog vazduha navodi uključke prašine, kondenzat i kratere od silikona."
@@ -733,6 +885,12 @@
       "guides": [
         "kompresor-i-vazduh-za-lakiranje",
         "crevo-i-spojnice-za-pistolj"
+      ],
+      "sources": [
+        {
+          "doc": "sata-x5500-uputstvo",
+          "strana": 115
+        }
       ]
     },
     {

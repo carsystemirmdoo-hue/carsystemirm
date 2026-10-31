@@ -2,6 +2,7 @@ import "server-only";
 
 import { getAllCarsystemProducts, getCarsystemBrandBySlug } from "@/lib/carsystem-data";
 import { getPublicDocuments, type BrandDocument } from "@/lib/documents";
+import sataCatalog from "@/data/sata-catalog-products.generated.json";
 
 /**
  * Biblioteka „Katalog i tehnički listovi“ (2026-10-30).
@@ -30,6 +31,11 @@ export type LibraryItem = {
   href: string;
   /** Fajl je na sajtu proizvođača, ne na našem sajtu. */
   external: boolean;
+  /**
+   * Veza vodi na stranicu proizvoda kod proizvođača, a ne direktno na fajl: SATA menja adrese
+   * fajlova (`/media/…?ts=`), pa sačuvana adresa posle nekog vremena vraća 404 (2026-10-31: 66/66).
+   */
+  viaProductPage?: boolean;
   brands: { slug: string; name: string }[];
   /** Prvih nekoliko proizvoda uz dokument. */
   products: { name: string; href: string }[];
@@ -63,6 +69,24 @@ function brandDocumentType(document: BrandDocument): LibraryDocType {
 
 const PRODUCTS_SHOWN = 4;
 
+/** Promenljive adrese fajlova kod SATA; vode se na stabilnu stranicu proizvoda. */
+const ROTATING_FILE_URL = /^https:\/\/www\.sata\.com\/media\//;
+
+function sataProductPages(): Map<string, string> {
+  const pages = new Map<string, string>();
+  const visit = (value: unknown) => {
+    if (Array.isArray(value)) return value.forEach(visit);
+    if (!value || typeof value !== "object") return;
+    const record = value as Record<string, unknown>;
+    if (typeof record.slug === "string" && typeof record.sourceUrl === "string" && record.sourceUrl.startsWith("https://www.sata.com/")) {
+      pages.set(record.slug, record.sourceUrl);
+    }
+    Object.values(record).forEach(visit);
+  };
+  visit(sataCatalog);
+  return pages;
+}
+
 /** Reči za pretragu bez ponavljanja (varijante istog proizvoda dele većinu reči). */
 function searchText(parts: string[]): string {
   return [...new Set(parts.join(" ").toLowerCase().split(/\s+/).filter(Boolean))].join(" ");
@@ -74,6 +98,7 @@ export function getDocumentLibrary(): LibraryData {
   const byHref = new Map<string, LibraryItem & { productNames: string[] }>();
   const products = getAllCarsystemProducts();
   let productsWithoutDocument = 0;
+  const productPages = sataProductPages();
 
   for (const product of products) {
     const available = (product.documents ?? []).filter((document) => document.status === "available" && document.href);
@@ -83,12 +108,14 @@ export function getDocumentLibrary(): LibraryData {
       const href = document.href as string;
       let item = byHref.get(href);
       if (!item) {
+        const productPage = ROTATING_FILE_URL.test(href) ? productPages.get(product.slug) : undefined;
         item = {
           id: href,
           type: classify(document.title, href),
           title: document.title,
-          href,
+          href: productPage ?? href,
           external: !href.startsWith("/"),
+          ...(productPage ? { viaProductPage: true } : {}),
           brands: [],
           products: [],
           productCount: 0,

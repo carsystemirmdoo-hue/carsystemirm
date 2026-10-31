@@ -51,8 +51,9 @@
     align-items: start;
   }
 
+  /* Svi brojači u jednom redu (broj kolona = broj vrsta dokumenata, zadaje strana). */
   .counters.counters {
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    grid-template-columns: repeat(var(--counter-cols, 6), minmax(0, 1fr));
   }
 
   .segments.segments {

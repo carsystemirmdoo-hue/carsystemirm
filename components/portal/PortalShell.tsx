@@ -126,6 +126,16 @@ export function PortalShell({
   dataSource = { status: "warn", label: "nije povezan" },
 }: PortalShellProps) {
   const pathname = usePathname();
+  const activeHref = useMemo(() => {
+    let best: string | null = null;
+    for (const group of navGroups) {
+      for (const item of group.items) {
+        const hit = item.href === "/portal" ? pathname === item.href : pathname === item.href || pathname.startsWith(`${item.href}/`);
+        if (hit && (!best || item.href.length > best.length)) best = item.href;
+      }
+    }
+    return best;
+  }, [navGroups, pathname]);
   const crumbLabels = useCrumbLabels();
   // Isti nazivi kao u navigaciji: „Nalozi kupaca", ne „nalozi".
   const navLabels = useMemo(
@@ -265,11 +275,8 @@ export function PortalShell({
                 {group.label}
               </div>
               {group.items.map((item) => {
-                const active =
-                  item.href === "/portal"
-                    ? pathname === item.href
-                    : pathname === item.href ||
-                      pathname.startsWith(`${item.href}/`);
+                // Samo najuža stavka koja odgovara putanji je aktivna (npr. /portal/cene/kupci ne pali i /portal/cene).
+                const active = item.href === activeHref;
                 return (
                   <Link
                     href={item.href}

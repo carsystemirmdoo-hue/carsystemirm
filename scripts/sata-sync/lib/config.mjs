@@ -65,6 +65,7 @@ export const PATHS = {
   localizationInput: data("localization-input.generated.json"),
   plan: data("plan.generated.json"),
   identityRegistry: data("identity-registry.json"),
+  documentRegistry: data("documents.generated.json"),
   imageAvailability: data("reports", "image-availability.generated.json"),
   validation: data("reports", "validation.generated.json"),
   reconciliation: data("reports", "reconciliation.generated.json"),

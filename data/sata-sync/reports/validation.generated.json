@@ -8,6 +8,11 @@
     "declaration": 37,
     "brochure": 1
   },
+  "uniqueDocuments": 66,
+  "documentsByStatus": {
+    "DIRECT_PDF": 65,
+    "MANUFACTURER_PAGE": 1
+  },
   "familiesWithDocuments": 46,
   "taxonomy": {
     "pribor": 13,

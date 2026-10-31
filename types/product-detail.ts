@@ -91,6 +91,8 @@ export type ProductDetailDocument = Reviewable<{
   version?: string;
   publishedAt?: string;
   note?: string;
+  /** `href` je stranica proizvoda kod proizvođača, a ne sam fajl (vidi `lib/sata-catalog-products.ts`). */
+  viaProductPage?: boolean;
 }>;
 
 export type ProductRelationship = Reviewable<{

@@ -227,3 +227,48 @@ test("[source-contract] strana izvodi navigaciju iz kanonskih sataSections", asy
     );
   }
 });
+
+/* ==========================================================================
+ * Dokumenti: jedan izvor (`documents` dataseta) za PDP i biblioteku
+ * ========================================================================== */
+
+const sataDataset = JSON.parse(await readFile(new URL("../data/sata-catalog-products.generated.json", import.meta.url), "utf8")) as {
+  documents: Record<string, { status: string; href?: string }>;
+};
+
+test("SATA dokument je ili provereni direktni PDF ili jasno označena stranica proizvođača", () => {
+  let direct = 0;
+  let pages = 0;
+  for (const product of getCarsystemProductsByBrandSlug(SATA_BRAND_SLUG)) {
+    const detail = product.detail?.documents?.content ?? [];
+    assert.equal(detail.length, product.documents.length, product.slug);
+    product.documents.forEach((document, index) => {
+      const key = document.documentKey?.replace(/^sata:/, "");
+      const source = key ? sataDataset.documents[key] : undefined;
+      assert.ok(source, `${product.slug}: ${document.title} nema dokument u datasetu`);
+      // PDP i biblioteka čitaju ISTU vezu.
+      assert.equal(detail[index].href, document.href, product.slug);
+      assert.equal(Boolean(detail[index].viaProductPage), Boolean(document.viaProductPage), product.slug);
+      if (source.status === "DIRECT_PDF") {
+        direct += 1;
+        assert.equal(document.href, source.href);
+        assert.match(document.href ?? "", /^https:\/\/www\.sata\.com\/media\/.+\.PDF\?ts=\d+$/i);
+        assert.equal(document.viaProductPage, undefined);
+      } else {
+        pages += 1;
+        assert.equal(document.viaProductPage, true);
+        assert.match(document.href ?? "", /^https:\/\/www\.sata\.com\/en\/.+\/CF\d+$/, `${product.slug}: stranica proizvođača nije fajl`);
+        assert.notEqual(document.kind, "PDF");
+      }
+    });
+  }
+  assert.ok(direct > 0 && direct + pages > 0);
+});
+
+test("isti SATA fajl više proizvoda nosi isti documentKey (jedna stavka biblioteke)", () => {
+  const keys = (slug: string) =>
+    getCarsystemProductBySlug(slug)?.documents.map((document) => document.documentKey).sort();
+  // SATA za sve jet X izdanja objavljuje isto uputstvo i istu izjavu o usaglašenosti.
+  assert.deepEqual(keys("sata-jet-x-basecoat-edition"), keys("sata-jet-x"));
+  assert.equal(new Set(keys("sata-jet-x")).size, 2);
+});

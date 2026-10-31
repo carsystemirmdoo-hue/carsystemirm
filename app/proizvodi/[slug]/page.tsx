@@ -85,9 +85,10 @@ export default async function ProductPage({ params }: ProductPageProps) {
     return true;
   });
 
-  // Only documents that are actually available and linked on the page.
+  // Only documents that are actually available and linked on the page. A link to the
+  // manufacturer's product page (SATA) is not the PDF itself, so it is not a DigitalDocument.
   const availableDocuments = product.documents
-    .filter((document) => document.status === "available" && document.href)
+    .filter((document) => document.status === "available" && document.href && !document.viaProductPage)
     .map((document) => ({
       title: document.title,
       href: document.href!,

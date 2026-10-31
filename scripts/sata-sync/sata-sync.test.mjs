@@ -18,6 +18,7 @@ import { scanForMonetaryData } from "./lib/price-gate.mjs";
 import { parseConfigurator } from "./lib/configurator.mjs";
 import { europeVariants, partitionStandalone, PHASE_2_BUCKETS, splitFamilies } from "./lib/scope.mjs";
 import { createTranslator } from "./lib/terms.mjs";
+import { documentKeyOf } from "./lib/documents.mjs";
 
 const source = readJson(PATHS.source);
 const dataset = readJson(PATHS.siteDataset);
@@ -113,17 +114,38 @@ test("rights gate: dataset nema nijednu SATA sliku ni cenu; odobrenih runtime sl
   assert.doesNotMatch(readFileSync(PATHS.rawArticles, "utf8"), /"(price|realPrice|item_startPrice)"/);
 });
 
-test("dokumenti: zvanična adresa doslovno (sa ?ts=), brošura samo na prihvatljivom jeziku, bez TDS/SDS", () => {
-  const documents = entries.flatMap((entry) => entry.documents);
-  assert.ok(documents.length > 0);
-  for (const document of documents) {
-    assert.match(document.href, /^https:\/\/www\.sata\.com\/media\/.+\?ts=\d+$/);
+test("dokumenti: reference odvojene od jedinstvenih dokumenata; direktna adresa samo posle provere PDF-a", () => {
+  const references = entries.flatMap((entry) => entry.documents);
+  const documents = dataset.documents;
+  assert.equal(references.length, 82);
+  assert.equal(Object.keys(documents).length, 66);
+  assert.equal(dataset.meta.uniqueDocuments, 66);
+  // Referenca nosi SAMO ključ; adresa, jezik i provera su jednom, u dokumentu.
+  for (const reference of references) {
+    assert.deepEqual(Object.keys(reference), ["document"]);
+    assert.ok(documents[reference.document], reference.document);
+  }
+  const registry = readJson(PATHS.documentRegistry);
+  for (const [key, document] of Object.entries(documents)) {
     assert.ok(["manual", "declaration", "brochure"].includes(document.kind));
     if (document.kind === "brochure") assert.ok(["en", "multilingual"].includes(document.language));
+    if (document.status === "DIRECT_PDF") {
+      assert.match(document.href, /^https:\/\/www\.sata\.com\/media\/.+\?ts=\d+$/);
+      const checked = registry.documents[key];
+      assert.equal(checked.href, document.href);
+      assert.equal(checked.verified.contentType, "application/pdf");
+      assert.ok(checked.verified.pages > 0 && checked.verified.textChars >= 200, key);
+      assert.ok(checked.verified.kindConfirmed, key);
+      assert.ok(Object.values(checked.verified.modelEvidence).every(Boolean), key);
+    } else {
+      assert.equal(document.status, "MANUFACTURER_PAGE");
+      assert.equal(document.href, undefined, `${key}: stranica proizvođača ne sme nositi adresu fajla`);
+    }
   }
+  assert.equal(dataset.meta.documentsDirectPdf + dataset.meta.documentsManufacturerPage, 66);
   const mismatches = plan.items.flatMap((item) => item.documentMismatches).filter((entry) => entry.reason === "SOURCE_DOCUMENT_LANGUAGE_MISMATCH");
   assert.equal(mismatches.length, 7);
-  for (const mismatch of mismatches) assert.ok(!documents.some((document) => document.href.includes(encodeURIComponent(mismatch.file))));
+  for (const mismatch of mismatches) assert.ok(!Object.keys(documents).includes(documentKeyOf(mismatch.file)));
 });
 
 test("postojeći satajet-x-5500 se dopunjuje: slug ostaje, interna oznaka nije broj artikla", () => {

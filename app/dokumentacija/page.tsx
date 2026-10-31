@@ -51,7 +51,10 @@ export default function DokumentacijaPage() {
     }
   }
   const brandCounts = [...brandMap.values()].sort((first, second) => second.count - first.count);
-  const external = library.items.filter((item) => item.external).length;
+  // Veza na stranicu proizvođača nije dokument (fajl) i broji se odvojeno.
+  const files = library.items.filter((item) => !item.viaProductPage);
+  const external = files.filter((item) => item.external).length;
+  const manufacturerPages = library.items.length - files.length;
 
   return (
     <>
@@ -90,7 +93,8 @@ export default function DokumentacijaPage() {
               ))}
             </ul>
             <p className={styles.formNote}>
-              Ukupno {library.items.length} dokumenata; {external} se otvara na sajtu proizvođača. Dokumenti stoje uz{" "}
+              Ukupno {files.length} dokumenata; {external} se otvara na sajtu proizvođača
+              {manufacturerPages ? `, a uz još ${manufacturerPages} vodi veza „Dokumentacija na sajtu proizvođača“ (bez direktnog PDF-a)` : ""}. Dokumenti stoje uz{" "}
               {library.productCount - library.productsWithoutDocument} od {library.productCount} proizvoda u katalogu. Katalozi brendova su
               i na stranici <Link className={styles.textLink} href="/katalozi">Katalozi i dokumentacija</Link>.
             </p>

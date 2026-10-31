@@ -2,7 +2,6 @@ import "server-only";
 
 import { getAllCarsystemProducts, getCarsystemBrandBySlug } from "@/lib/carsystem-data";
 import { getPublicDocuments, type BrandDocument } from "@/lib/documents";
-import sataCatalog from "@/data/sata-catalog-products.generated.json";
 
 /**
  * Biblioteka „Katalog i tehnički listovi“ (2026-10-30).
@@ -12,7 +11,7 @@ import sataCatalog from "@/data/sata-catalog-products.generated.json";
  * bez obzira na to uz koliko proizvoda stoji; veze ka proizvodima su posebno polje.
  */
 
-export type LibraryDocType = "tds" | "sds" | "informacije" | "uputstvo" | "izjava" | "katalog" | "ostalo";
+export type LibraryDocType = "tds" | "sds" | "informacije" | "uputstvo" | "izjava" | "katalog" | "ostalo" | "stranica";
 
 export const LIBRARY_TYPE_LABELS: Record<LibraryDocType, string> = {
   tds: "Tehnički list",
@@ -22,6 +21,8 @@ export const LIBRARY_TYPE_LABELS: Record<LibraryDocType, string> = {
   izjava: "Izjava ili sertifikat",
   katalog: "Katalog ili brošura",
   ostalo: "Drugi dokument",
+  // Nije fajl: proizvođač nije ponudio proverljiv PDF, pa veza vodi na stranicu proizvoda kod njega.
+  stranica: "Dokumentacija na sajtu proizvođača",
 };
 
 export type LibraryItem = {
@@ -32,8 +33,8 @@ export type LibraryItem = {
   /** Fajl je na sajtu proizvođača, ne na našem sajtu. */
   external: boolean;
   /**
-   * Veza vodi na stranicu proizvoda kod proizvođača, a ne direktno na fajl: SATA menja adrese
-   * fajlova (`/media/…?ts=`), pa sačuvana adresa posle nekog vremena vraća 404 (2026-10-31: 66/66).
+   * Veza vodi na stranicu proizvoda kod proizvođača, a ne na fajl (vrsta `stranica`): sync nije
+   * potvrdio direktan PDF (vidi `lib/sata-catalog-products.ts`). Ne broji se kao dokument.
    */
   viaProductPage?: boolean;
   brands: { slug: string; name: string }[];
@@ -69,24 +70,6 @@ function brandDocumentType(document: BrandDocument): LibraryDocType {
 
 const PRODUCTS_SHOWN = 4;
 
-/** Promenljive adrese fajlova kod SATA; vode se na stabilnu stranicu proizvoda. */
-const ROTATING_FILE_URL = /^https:\/\/www\.sata\.com\/media\//;
-
-function sataProductPages(): Map<string, string> {
-  const pages = new Map<string, string>();
-  const visit = (value: unknown) => {
-    if (Array.isArray(value)) return value.forEach(visit);
-    if (!value || typeof value !== "object") return;
-    const record = value as Record<string, unknown>;
-    if (typeof record.slug === "string" && typeof record.sourceUrl === "string" && record.sourceUrl.startsWith("https://www.sata.com/")) {
-      pages.set(record.slug, record.sourceUrl);
-    }
-    Object.values(record).forEach(visit);
-  };
-  visit(sataCatalog);
-  return pages;
-}
-
 /** Reči za pretragu bez ponavljanja (varijante istog proizvoda dele većinu reči). */
 function searchText(parts: string[]): string {
   return [...new Set(parts.join(" ").toLowerCase().split(/\s+/).filter(Boolean))].join(" ");
@@ -98,7 +81,6 @@ export function getDocumentLibrary(): LibraryData {
   const byHref = new Map<string, LibraryItem & { productNames: string[] }>();
   const products = getAllCarsystemProducts();
   let productsWithoutDocument = 0;
-  const productPages = sataProductPages();
 
   for (const product of products) {
     const available = (product.documents ?? []).filter((document) => document.status === "available" && document.href);
@@ -106,23 +88,24 @@ export function getDocumentLibrary(): LibraryData {
     const brand = getCarsystemBrandBySlug(product.brandSlug);
     for (const document of available) {
       const href = document.href as string;
-      let item = byHref.get(href);
+      // Kada `href` vodi na stranicu proizvoda (SATA), isti fajl više proizvoda spaja `documentKey`.
+      const key = document.documentKey ?? href;
+      let item = byHref.get(key);
       if (!item) {
-        const productPage = ROTATING_FILE_URL.test(href) ? productPages.get(product.slug) : undefined;
         item = {
-          id: href,
-          type: classify(document.title, href),
+          id: key,
+          type: document.viaProductPage ? "stranica" : classify(document.title, document.documentKey ?? href),
           title: document.title,
-          href: productPage ?? href,
+          href,
           external: !href.startsWith("/"),
-          ...(productPage ? { viaProductPage: true } : {}),
+          ...(document.viaProductPage ? { viaProductPage: true } : {}),
           brands: [],
           products: [],
           productCount: 0,
           search: "",
           productNames: [],
         };
-        byHref.set(href, item);
+        byHref.set(key, item);
       }
       if (brand && !item.brands.some((entry) => entry.slug === brand.slug)) item.brands.push({ slug: brand.slug, name: brand.name });
       item.productCount += 1;

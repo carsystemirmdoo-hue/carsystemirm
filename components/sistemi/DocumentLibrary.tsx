@@ -182,7 +182,7 @@ export function DocumentLibrary({
             <div className={styles.docLinks}>
               <a href={item.href} rel="noopener noreferrer" target="_blank">
                 {item.viaProductPage
-                  ? "Dokument je na stranici proizvoda kod proizvođača"
+                  ? "Dokumentacija na sajtu proizvođača"
                   : item.external
                     ? "Otvorite dokument na sajtu proizvođača"
                     : "Otvorite dokument (PDF)"}

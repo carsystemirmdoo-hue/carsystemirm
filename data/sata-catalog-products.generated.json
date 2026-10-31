@@ -12,6 +12,9 @@
     "enrichedExisting": 1,
     "articleNumbers": 655,
     "documents": 82,
+    "uniqueDocuments": 66,
+    "documentsDirectPdf": 65,
+    "documentsManufacturerPage": 1,
     "images": {
       "OFFICIAL_IMAGE_AVAILABLE_NOT_APPROVED_FOR_RUNTIME": 61,
       "OFFICIAL_IMAGE_NOT_PUBLISHED": 5,
@@ -154,16 +157,10 @@
       "sourceAxisTerms": [],
       "documents": [
         {
-          "kind": "manual",
-          "title": "Uputstvo za upotrebu",
-          "href": "https://www.sata.com/media/f8/bf/63/1790259018/BETRIEBSANLEITUNG-SATA-ADAM-2.PDF.PDF?ts=1790259018",
-          "language": null
+          "document": "BETRIEBSANLEITUNG-SATA-ADAM-2"
         },
         {
-          "kind": "declaration",
-          "title": "Izjava o usaglašenosti",
-          "href": "https://www.sata.com/media/3c/dc/3b/1790259018/KONFORMIT_TSERKL_RUNG-SATA-ADAM-2.PDF.PDF?ts=1790259018",
-          "language": null
+          "document": "KONFORMIT_TSERKL_RUNG-SATA-ADAM-2"
         }
       ],
       "imageStatus": "OFFICIAL_IMAGE_AVAILABLE_NOT_APPROVED_FOR_RUNTIME",
@@ -215,10 +212,7 @@
       "sourceAxisTerms": [],
       "documents": [
         {
-          "kind": "manual",
-          "title": "Uputstvo za upotrebu",
-          "href": "https://www.sata.com/media/29/2d/b7/1790259017/MULTILINGUAL-SATA-OPERATING-MANUAL-ADAM-X-PRO-ADAM-X-3220-240904.PDF.PDF?ts=1790259017",
-          "language": "multilingual"
+          "document": "MULTILINGUAL-SATA-OPERATING-MANUAL-ADAM-X-PRO-ADAM-X-3220-240904"
         }
       ],
       "imageStatus": "OFFICIAL_IMAGE_AVAILABLE_NOT_APPROVED_FOR_RUNTIME",
@@ -270,10 +264,7 @@
       "sourceAxisTerms": [],
       "documents": [
         {
-          "kind": "manual",
-          "title": "Uputstvo za upotrebu",
-          "href": "https://www.sata.com/media/29/2d/b7/1790259017/MULTILINGUAL-SATA-OPERATING-MANUAL-ADAM-X-PRO-ADAM-X-3220-240904.PDF.PDF?ts=1790259017",
-          "language": "multilingual"
+          "document": "MULTILINGUAL-SATA-OPERATING-MANUAL-ADAM-X-PRO-ADAM-X-3220-240904"
         }
       ],
       "imageStatus": "OFFICIAL_IMAGE_AVAILABLE_NOT_APPROVED_FOR_RUNTIME",
@@ -356,16 +347,10 @@
       "sourceAxisTerms": [],
       "documents": [
         {
-          "kind": "manual",
-          "title": "Uputstvo za upotrebu",
-          "href": "https://www.sata.com/media/c9/f3/d4/1790259015/BAL-SATA-AIRSTAR-C.PDF.PDF?ts=1790259015",
-          "language": null
+          "document": "BAL-SATA-AIRSTAR-C"
         },
         {
-          "kind": "declaration",
-          "title": "Izjava o usaglašenosti",
-          "href": "https://www.sata.com/media/d3/af/5d/1790259015/MULTILINGUAL---SATA-AIR-STAR-C-N---EG-KONFORMITTSERKLRUNG--EC-DECLARATION-OF-CONFORMITY_UID_6835B5C09786D.PDF.PDF?ts=1790259015",
-          "language": "multilingual"
+          "document": "MULTILINGUAL---SATA-AIR-STAR-C-N---EG-KONFORMITTSERKLRUNG--EC-DECLARATION-OF-CONFORMITY_UID_6835B5C09786D"
         }
       ],
       "imageStatus": "OFFICIAL_IMAGE_AVAILABLE_NOT_APPROVED_FOR_RUNTIME",
@@ -417,16 +402,10 @@
       "sourceAxisTerms": [],
       "documents": [
         {
-          "kind": "manual",
-          "title": "Uputstvo za upotrebu",
-          "href": "https://www.sata.com/media/8e/d8/79/1790259016/BETRIEBSANLEITUNG-SATA-AIR-STAR-F.PDF.PDF?ts=1790259016",
-          "language": null
+          "document": "BETRIEBSANLEITUNG-SATA-AIR-STAR-F"
         },
         {
-          "kind": "declaration",
-          "title": "Izjava o usaglašenosti",
-          "href": "https://www.sata.com/media/b5/f1/e6/1790259016/KONFORMIT_TSERKL_RUNG-SATA-AIR-STAR-F.PDF.PDF?ts=1790259016",
-          "language": null
+          "document": "KONFORMIT_TSERKL_RUNG-SATA-AIR-STAR-F"
         }
       ],
       "imageStatus": "OFFICIAL_IMAGE_NOT_PUBLISHED",
@@ -478,16 +457,10 @@
       "sourceAxisTerms": [],
       "documents": [
         {
-          "kind": "manual",
-          "title": "Uputstvo za upotrebu",
-          "href": "https://www.sata.com/media/e3/3e/ff/1790259015/MULTILINGUAL-SATA-OPERATING-MANUAL-AIR-STAR-F-2-4372-241112-1.PDF.PDF?ts=1790259015",
-          "language": "multilingual"
+          "document": "MULTILINGUAL-SATA-OPERATING-MANUAL-AIR-STAR-F-2-4372-241112-1"
         },
         {
-          "kind": "declaration",
-          "title": "Izjava o usaglašenosti",
-          "href": "https://www.sata.com/media/30/9b/77/1790259016/MULTILINGUAL-SATA-DECLARATION-OF-CONFORMITY-AIR-STAR-F-2-4379-240913-2.PDF.PDF?ts=1790259016",
-          "language": "multilingual"
+          "document": "MULTILINGUAL-SATA-DECLARATION-OF-CONFORMITY-AIR-STAR-F-2-4379-240913-2"
         }
       ],
       "imageStatus": "OFFICIAL_IMAGE_AVAILABLE_NOT_APPROVED_FOR_RUNTIME",
@@ -564,16 +537,10 @@
       "sourceAxisTerms": [],
       "documents": [
         {
-          "kind": "manual",
-          "title": "Uputstvo za upotrebu",
-          "href": "https://www.sata.com/media/55/d5/93/1790259015/BETRIEBSANLEITUNG-SATA-AIR-VISION-5000.PDF.PDF?ts=1790259015",
-          "language": null
+          "document": "BETRIEBSANLEITUNG-SATA-AIR-VISION-5000"
         },
         {
-          "kind": "declaration",
-          "title": "Izjava o usaglašenosti",
-          "href": "https://www.sata.com/media/01/5d/0b/1790259015/MULTILINGUAL-DECLARATION-OF-CONFORMITY-SATA-AIR-VISION-5000-N_PDF.PDF.PDF?ts=1790259015",
-          "language": "multilingual"
+          "document": "MULTILINGUAL-DECLARATION-OF-CONFORMITY-SATA-AIR-VISION-5000-N_PDF"
         }
       ],
       "imageStatus": "OFFICIAL_IMAGE_AVAILABLE_NOT_APPROVED_FOR_RUNTIME",
@@ -637,16 +604,10 @@
       "sourceAxisTerms": [],
       "documents": [
         {
-          "kind": "manual",
-          "title": "Uputstvo za upotrebu",
-          "href": "https://www.sata.com/media/4b/g0/c5/1790259016/BETRIEBSANLEITUNG-SATA-CLEAN-RCS.PDF.PDF?ts=1790259016",
-          "language": null
+          "document": "BETRIEBSANLEITUNG-SATA-CLEAN-RCS"
         },
         {
-          "kind": "declaration",
-          "title": "Izjava o usaglašenosti",
-          "href": "https://www.sata.com/media/0c/59/fb/1790259016/KONFORMIT_TSERKL_RUNG-SATA-CLEAN-RCS.PDF.PDF?ts=1790259016",
-          "language": null
+          "document": "KONFORMIT_TSERKL_RUNG-SATA-CLEAN-RCS"
         }
       ],
       "imageStatus": "OFFICIAL_IMAGE_AVAILABLE_NOT_APPROVED_FOR_RUNTIME",
@@ -719,16 +680,10 @@
       "sourceAxisTerms": [],
       "documents": [
         {
-          "kind": "manual",
-          "title": "Uputstvo za upotrebu",
-          "href": "https://www.sata.com/media/84/06/70/1790259017/BAL-SATA-DRY-JET-2.PDF.PDF?ts=1790259017",
-          "language": null
+          "document": "BAL-SATA-DRY-JET-2"
         },
         {
-          "kind": "declaration",
-          "title": "Izjava o usaglašenosti",
-          "href": "https://www.sata.com/media/97/fd/a3/1790259017/KONFORMIT_TSERKL_RUNG-SATA-DRY-JET-2.PDF.PDF?ts=1790259017",
-          "language": null
+          "document": "KONFORMIT_TSERKL_RUNG-SATA-DRY-JET-2"
         }
       ],
       "imageStatus": "OFFICIAL_IMAGE_AVAILABLE_NOT_APPROVED_FOR_RUNTIME",
@@ -786,10 +741,7 @@
       "sourceAxisTerms": [],
       "documents": [
         {
-          "kind": "manual",
-          "title": "Uputstvo za upotrebu",
-          "href": "https://www.sata.com/media/84/06/70/1790259017/BAL-SATA-DRY-JET-2.PDF.PDF?ts=1790259017",
-          "language": null
+          "document": "BAL-SATA-DRY-JET-2"
         }
       ],
       "imageStatus": "OFFICIAL_IMAGE_AVAILABLE_NOT_APPROVED_FOR_RUNTIME",
@@ -968,16 +920,10 @@
       ],
       "documents": [
         {
-          "kind": "manual",
-          "title": "Uputstvo za upotrebu",
-          "href": "https://www.sata.com/media/a7/6f/88/1790259016/BETRIEBSANLEITUNG-SATA-FILTER-500.PDF.PDF?ts=1790259016",
-          "language": null
+          "document": "BETRIEBSANLEITUNG-SATA-FILTER-500"
         },
         {
-          "kind": "declaration",
-          "title": "Izjava o usaglašenosti",
-          "href": "https://www.sata.com/media/31/75/78/1790259016/KONFORMIT_TSERKL_RUNG-SATA-FILTER-500.PDF.PDF?ts=1790259016",
-          "language": null
+          "document": "KONFORMIT_TSERKL_RUNG-SATA-FILTER-500"
         }
       ],
       "imageStatus": "OFFICIAL_IMAGE_AVAILABLE_NOT_APPROVED_FOR_RUNTIME",
@@ -1089,16 +1035,10 @@
       ],
       "documents": [
         {
-          "kind": "manual",
-          "title": "Uputstvo za upotrebu",
-          "href": "https://www.sata.com/media/05/74/e8/1790259016/BAL-SATA-FILTER-100-PREP.PDF.PDF?ts=1790259016",
-          "language": null
+          "document": "BAL-SATA-FILTER-100-PREP"
         },
         {
-          "kind": "declaration",
-          "title": "Izjava o usaglašenosti",
-          "href": "https://www.sata.com/media/69/02/e3/1790259016/EG-KONFORMITATSERKLARUNG-SATA-FILTER-100-PREP.PDF.PDF?ts=1790259016",
-          "language": null
+          "document": "EG-KONFORMITATSERKLARUNG-SATA-FILTER-100-PREP"
         }
       ],
       "imageStatus": "OFFICIAL_IMAGE_AVAILABLE_NOT_APPROVED_FOR_RUNTIME",
@@ -1252,16 +1192,10 @@
       ],
       "documents": [
         {
-          "kind": "manual",
-          "title": "Uputstvo za upotrebu",
-          "href": "https://www.sata.com/media/4d/e2/e1/1790259016/BETRIEBSANLEITUNG-SATA-FILTER-200.PDF.PDF?ts=1790259016",
-          "language": null
+          "document": "BETRIEBSANLEITUNG-SATA-FILTER-200"
         },
         {
-          "kind": "declaration",
-          "title": "Izjava o usaglašenosti",
-          "href": "https://www.sata.com/media/2c/0f/8a/1790259016/KONFORMIT_TSERKL_RUNG-SATA-FILTER-200.PDF.PDF?ts=1790259016",
-          "language": null
+          "document": "KONFORMIT_TSERKL_RUNG-SATA-FILTER-200"
         }
       ],
       "imageStatus": "OFFICIAL_IMAGE_AVAILABLE_NOT_APPROVED_FOR_RUNTIME",
@@ -1499,16 +1433,10 @@
       ],
       "documents": [
         {
-          "kind": "manual",
-          "title": "Uputstvo za upotrebu",
-          "href": "https://www.sata.com/media/8f/94/24/1790259016/BAL-SATA-FILTER-400.PDF.PDF?ts=1790259016",
-          "language": null
+          "document": "BAL-SATA-FILTER-400"
         },
         {
-          "kind": "declaration",
-          "title": "Izjava o usaglašenosti",
-          "href": "https://www.sata.com/media/41/da/af/1790259016/KONFORMIT_TSERKL_RUNG-SATA-FILTER-400.PDF.PDF?ts=1790259016",
-          "language": null
+          "document": "KONFORMIT_TSERKL_RUNG-SATA-FILTER-400"
         }
       ],
       "imageStatus": "OFFICIAL_IMAGE_AVAILABLE_NOT_APPROVED_FOR_RUNTIME",
@@ -1575,16 +1503,10 @@
       "sourceAxisTerms": [],
       "documents": [
         {
-          "kind": "manual",
-          "title": "Uputstvo za upotrebu",
-          "href": "https://www.sata.com/media/6f/4b/5a/1790259017/BAL-SATA-HKU.PDF.PDF?ts=1790259017",
-          "language": null
+          "document": "BAL-SATA-HKU"
         },
         {
-          "kind": "declaration",
-          "title": "Izjava o usaglašenosti",
-          "href": "https://www.sata.com/media/91/6e/7d/1790259017/EG-KONFORMITATSERKLARUNG-SATA-HKU-FASSPUMPENANLAGE.PDF.PDF?ts=1790259017",
-          "language": null
+          "document": "EG-KONFORMITATSERKLARUNG-SATA-HKU-FASSPUMPENANLAGE"
         }
       ],
       "imageStatus": "OFFICIAL_IMAGE_AVAILABLE_NOT_APPROVED_FOR_RUNTIME",
@@ -1660,16 +1582,10 @@
       "sourceAxisTerms": [],
       "documents": [
         {
-          "kind": "manual",
-          "title": "Uputstvo za upotrebu",
-          "href": "https://www.sata.com/media/65/0e/e5/1790259017/MULTILINGUAL-SATA-OPERATING-MANUAL-HRS-4144-231115-1.PDF.PDF?ts=1790259017",
-          "language": "multilingual"
+          "document": "MULTILINGUAL-SATA-OPERATING-MANUAL-HRS-4144-231115-1"
         },
         {
-          "kind": "declaration",
-          "title": "Izjava o usaglašenosti",
-          "href": "https://www.sata.com/media/be/64/3e/1790259017/MULTILINGUAL-SATA-DECLARATION-OF-CONFORMITY-SATA-HRS.PDF.PDF?ts=1790259017",
-          "language": "multilingual"
+          "document": "MULTILINGUAL-SATA-DECLARATION-OF-CONFORMITY-SATA-HRS"
         }
       ],
       "imageStatus": "OFFICIAL_IMAGE_AVAILABLE_NOT_APPROVED_FOR_RUNTIME",
@@ -1739,16 +1655,10 @@
       "sourceAxisTerms": [],
       "documents": [
         {
-          "kind": "manual",
-          "title": "Uputstvo za upotrebu",
-          "href": "https://www.sata.com/media/65/0e/e5/1790259017/MULTILINGUAL-SATA-OPERATING-MANUAL-HRS-4144-231115-1.PDF.PDF?ts=1790259017",
-          "language": "multilingual"
+          "document": "MULTILINGUAL-SATA-OPERATING-MANUAL-HRS-4144-231115-1"
         },
         {
-          "kind": "declaration",
-          "title": "Izjava o usaglašenosti",
-          "href": "https://www.sata.com/media/be/64/3e/1790259017/MULTILINGUAL-SATA-DECLARATION-OF-CONFORMITY-SATA-HRS.PDF.PDF?ts=1790259017",
-          "language": "multilingual"
+          "document": "MULTILINGUAL-SATA-DECLARATION-OF-CONFORMITY-SATA-HRS"
         }
       ],
       "imageStatus": "OFFICIAL_IMAGE_AVAILABLE_NOT_APPROVED_FOR_RUNTIME",
@@ -2227,10 +2137,7 @@
       ],
       "documents": [
         {
-          "kind": "declaration",
-          "title": "Izjava o usaglašenosti",
-          "href": "https://www.sata.com/media/c6/e0/6c/1790259013/MULTILINGUAL-SATA-DECLARATION-OF-CONFORMITY-JET-K.PDF.PDF?ts=1790259013",
-          "language": "multilingual"
+          "document": "MULTILINGUAL-SATA-DECLARATION-OF-CONFORMITY-JET-K"
         }
       ],
       "imageStatus": "OFFICIAL_IMAGE_AVAILABLE_NOT_APPROVED_FOR_RUNTIME",
@@ -3061,16 +2968,10 @@
       "sourceAxisTerms": [],
       "documents": [
         {
-          "kind": "manual",
-          "title": "Uputstvo za upotrebu",
-          "href": "https://www.sata.com/media/d2/3c/04/1790259009/MULTILINGUAL-SATA-OPERATING-MANUAL-JET-X-3266-240619-2.PDF.PDF?ts=1790259009",
-          "language": "multilingual"
+          "document": "MULTILINGUAL-SATA-OPERATING-MANUAL-JET-X-3266-240619-2"
         },
         {
-          "kind": "declaration",
-          "title": "Izjava o usaglašenosti",
-          "href": "https://www.sata.com/media/f3/8a/06/1790259009/MULTILINGUAL-SATA-DECLARATION-OF-CONFORMITY-JET-X-4390-240925-3.PDF.PDF?ts=1790259009",
-          "language": "multilingual"
+          "document": "MULTILINGUAL-SATA-DECLARATION-OF-CONFORMITY-JET-X-4390-240925-3"
         }
       ],
       "imageStatus": "OFFICIAL_IMAGE_AVAILABLE_NOT_APPROVED_FOR_RUNTIME",
@@ -3319,16 +3220,10 @@
       "sourceAxisTerms": [],
       "documents": [
         {
-          "kind": "manual",
-          "title": "Uputstvo za upotrebu",
-          "href": "https://www.sata.com/media/d2/3c/04/1790259009/MULTILINGUAL-SATA-OPERATING-MANUAL-JET-X-3266-240619-2.PDF.PDF?ts=1790259009",
-          "language": "multilingual"
+          "document": "MULTILINGUAL-SATA-OPERATING-MANUAL-JET-X-3266-240619-2"
         },
         {
-          "kind": "declaration",
-          "title": "Izjava o usaglašenosti",
-          "href": "https://www.sata.com/media/f3/8a/06/1790259009/MULTILINGUAL-SATA-DECLARATION-OF-CONFORMITY-JET-X-4390-240925-3.PDF.PDF?ts=1790259009",
-          "language": "multilingual"
+          "document": "MULTILINGUAL-SATA-DECLARATION-OF-CONFORMITY-JET-X-4390-240925-3"
         }
       ],
       "imageStatus": "OFFICIAL_IMAGE_AVAILABLE_NOT_APPROVED_FOR_RUNTIME",
@@ -3577,16 +3472,10 @@
       "sourceAxisTerms": [],
       "documents": [
         {
-          "kind": "manual",
-          "title": "Uputstvo za upotrebu",
-          "href": "https://www.sata.com/media/d2/3c/04/1790259009/MULTILINGUAL-SATA-OPERATING-MANUAL-JET-X-3266-240619-2.PDF.PDF?ts=1790259009",
-          "language": "multilingual"
+          "document": "MULTILINGUAL-SATA-OPERATING-MANUAL-JET-X-3266-240619-2"
         },
         {
-          "kind": "declaration",
-          "title": "Izjava o usaglašenosti",
-          "href": "https://www.sata.com/media/f3/8a/06/1790259009/MULTILINGUAL-SATA-DECLARATION-OF-CONFORMITY-JET-X-4390-240925-3.PDF.PDF?ts=1790259009",
-          "language": "multilingual"
+          "document": "MULTILINGUAL-SATA-DECLARATION-OF-CONFORMITY-JET-X-4390-240925-3"
         }
       ],
       "imageStatus": "OFFICIAL_IMAGE_AVAILABLE_NOT_APPROVED_FOR_RUNTIME",
@@ -3706,16 +3595,10 @@
       "sourceAxisTerms": [],
       "documents": [
         {
-          "kind": "manual",
-          "title": "Uputstvo za upotrebu",
-          "href": "https://www.sata.com/media/d2/3c/04/1790259009/MULTILINGUAL-SATA-OPERATING-MANUAL-JET-X-3266-240619-2.PDF.PDF?ts=1790259009",
-          "language": "multilingual"
+          "document": "MULTILINGUAL-SATA-OPERATING-MANUAL-JET-X-3266-240619-2"
         },
         {
-          "kind": "declaration",
-          "title": "Izjava o usaglašenosti",
-          "href": "https://www.sata.com/media/f3/8a/06/1790259009/MULTILINGUAL-SATA-DECLARATION-OF-CONFORMITY-JET-X-4390-240925-3.PDF.PDF?ts=1790259009",
-          "language": "multilingual"
+          "document": "MULTILINGUAL-SATA-DECLARATION-OF-CONFORMITY-JET-X-4390-240925-3"
         }
       ],
       "imageStatus": "OFFICIAL_IMAGE_AVAILABLE_NOT_APPROVED_FOR_RUNTIME",
@@ -4623,10 +4506,7 @@
       "sourceAxisTerms": [],
       "documents": [
         {
-          "kind": "manual",
-          "title": "Uputstvo za upotrebu",
-          "href": "https://www.sata.com/media/82/84/db/1790259018/BAL-SATA-MINI-SET-2.PDF.PDF?ts=1790259018",
-          "language": null
+          "document": "BAL-SATA-MINI-SET-2"
         }
       ],
       "imageStatus": "OFFICIAL_IMAGE_AVAILABLE_NOT_APPROVED_FOR_RUNTIME",
@@ -4683,16 +4563,10 @@
       "sourceAxisTerms": [],
       "documents": [
         {
-          "kind": "manual",
-          "title": "Uputstvo za upotrebu",
-          "href": "https://www.sata.com/media/68/8f/25/1790259016/BAL-SATA-MULTI-CLEAN-2.PDF.PDF?ts=1790259016",
-          "language": null
+          "document": "BAL-SATA-MULTI-CLEAN-2"
         },
         {
-          "kind": "declaration",
-          "title": "Izjava o usaglašenosti",
-          "href": "https://www.sata.com/media/26/a9/0e/1790259016/MULTILINGUAL-SATA-DECLARATION-OF-CONFORMITY-SATA-MULTI-CLEAN-2-3652-240321-1.PDF.PDF?ts=1790259016",
-          "language": "multilingual"
+          "document": "MULTILINGUAL-SATA-DECLARATION-OF-CONFORMITY-SATA-MULTI-CLEAN-2-3652-240321-1"
         }
       ],
       "imageStatus": "OFFICIAL_IMAGE_AVAILABLE_NOT_APPROVED_FOR_RUNTIME",
@@ -5354,10 +5228,7 @@
       ],
       "documents": [
         {
-          "kind": "manual",
-          "title": "Uputstvo za upotrebu",
-          "href": "https://www.sata.com/media/83/b4/96/1790259014/BETRIEBSANLEITUNG-SATA-RPS.PDF.PDF?ts=1790259014",
-          "language": null
+          "document": "BETRIEBSANLEITUNG-SATA-RPS"
         }
       ],
       "imageStatus": "OFFICIAL_IMAGE_AVAILABLE_NOT_APPROVED_FOR_RUNTIME",
@@ -5901,16 +5772,10 @@
       "sourceAxisTerms": [],
       "documents": [
         {
-          "kind": "manual",
-          "title": "Uputstvo za upotrebu",
-          "href": "https://www.sata.com/media/87/f1/61/1790259017/BETRIEBSANLEITUNG-SATA-TRUESUN.PDF.PDF?ts=1790259017",
-          "language": null
+          "document": "BETRIEBSANLEITUNG-SATA-TRUESUN"
         },
         {
-          "kind": "declaration",
-          "title": "Izjava o usaglašenosti",
-          "href": "https://www.sata.com/media/22/58/f8/1790259017/KONFORMIT_TSERKL_RUNG-SATA-TRUESUN.PDF.PDF?ts=1790259017",
-          "language": null
+          "document": "KONFORMIT_TSERKL_RUNG-SATA-TRUESUN"
         }
       ],
       "imageStatus": "OFFICIAL_IMAGE_AVAILABLE_NOT_APPROVED_FOR_RUNTIME",
@@ -6041,10 +5906,7 @@
       "sourceAxisTerms": [],
       "documents": [
         {
-          "kind": "manual",
-          "title": "Uputstvo za upotrebu",
-          "href": "https://www.sata.com/media/8b/e6/c9/1790259017/BAL-SATA-VARIO-TOP-SPRAY.PDF.PDF?ts=1790259017",
-          "language": null
+          "document": "BAL-SATA-VARIO-TOP-SPRAY"
         }
       ],
       "imageStatus": "OFFICIAL_IMAGE_AVAILABLE_NOT_APPROVED_FOR_RUNTIME",
@@ -6127,22 +5989,13 @@
       "sourceAxisTerms": [],
       "documents": [
         {
-          "kind": "manual",
-          "title": "Uputstvo za upotrebu",
-          "href": "https://www.sata.com/media/93/71/ee/1790259015/BETRIEBSANLEITUNG_MANUAL_-_SATA_VISION_2000.PDF.PDF?ts=1790259015",
-          "language": null
+          "document": "BETRIEBSANLEITUNG_MANUAL_-_SATA_VISION_2000"
         },
         {
-          "kind": "declaration",
-          "title": "Izjava o usaglašenosti",
-          "href": "https://www.sata.com/media/30/05/78/1790259015/MULTILINGUAL-DECLARATION-OF-CONFORMITY-SATA-VISION-2000-3407-230327-1.PDF.PDF?ts=1790259015",
-          "language": "multilingual"
+          "document": "MULTILINGUAL-DECLARATION-OF-CONFORMITY-SATA-VISION-2000-3407-230327-1"
         },
         {
-          "kind": "brochure",
-          "title": "Brošura",
-          "href": "https://www.sata.com/media/df/f5/9f/1776086105/EN_-_LEAFLET-_SATA_VISION_2000.PDF.PDF?ts=1776086105",
-          "language": "en"
+          "document": "EN_-_LEAFLET-_SATA_VISION_2000"
         }
       ],
       "imageStatus": "OFFICIAL_IMAGE_AVAILABLE_NOT_APPROVED_FOR_RUNTIME",
@@ -6233,10 +6086,7 @@
       ],
       "documents": [
         {
-          "kind": "manual",
-          "title": "Uputstvo za upotrebu",
-          "href": "https://www.sata.com/media/4a/e0/aa/1790259013/BETRIEBSANLEITUNG_MANUAL_-_SATAGRAPH_4.PDF.PDF?ts=1790259013",
-          "language": null
+          "document": "BETRIEBSANLEITUNG_MANUAL_-_SATAGRAPH_4"
         }
       ],
       "imageStatus": "OFFICIAL_IMAGE_AVAILABLE_NOT_APPROVED_FOR_RUNTIME",
@@ -6697,16 +6547,10 @@
       ],
       "documents": [
         {
-          "kind": "manual",
-          "title": "Uputstvo za upotrebu",
-          "href": "https://www.sata.com/media/07/ca/cf/1790259012/BETRIEBSANLEITUNG-SATAJET-100-B.PDF.PDF?ts=1790259012",
-          "language": null
+          "document": "BETRIEBSANLEITUNG-SATAJET-100-B"
         },
         {
-          "kind": "declaration",
-          "title": "Izjava o usaglašenosti",
-          "href": "https://www.sata.com/media/e3/28/cd/1790259012/EG-KONFORMITATSERKLARUNG-SATAJET-100-B.PDF.PDF?ts=1790259012",
-          "language": null
+          "document": "EG-KONFORMITATSERKLARUNG-SATAJET-100-B"
         }
       ],
       "imageStatus": "OFFICIAL_IMAGE_AVAILABLE_NOT_APPROVED_FOR_RUNTIME",
@@ -7425,16 +7269,10 @@
       ],
       "documents": [
         {
-          "kind": "manual",
-          "title": "Uputstvo za upotrebu",
-          "href": "https://www.sata.com/media/c4/00/16/1790259011/BAL-SATAJET-1000-B.PDF.PDF?ts=1790259011",
-          "language": null
+          "document": "BAL-SATAJET-1000-B"
         },
         {
-          "kind": "declaration",
-          "title": "Izjava o usaglašenosti",
-          "href": "https://www.sata.com/media/14/98/c0/1790259011/KONFORMIT_TSERKL_RUNG-SATAJET-1000-B.PDF.PDF?ts=1790259011",
-          "language": null
+          "document": "KONFORMIT_TSERKL_RUNG-SATAJET-1000-B"
         }
       ],
       "imageStatus": "OFFICIAL_IMAGE_AVAILABLE_NOT_APPROVED_FOR_RUNTIME",
@@ -7581,16 +7419,10 @@
       "sourceAxisTerms": [],
       "documents": [
         {
-          "kind": "manual",
-          "title": "Uputstvo za upotrebu",
-          "href": "https://www.sata.com/media/c4/00/16/1790259011/BAL-SATAJET-1000-B.PDF.PDF?ts=1790259011",
-          "language": null
+          "document": "BAL-SATAJET-1000-B"
         },
         {
-          "kind": "declaration",
-          "title": "Izjava o usaglašenosti",
-          "href": "https://www.sata.com/media/14/98/c0/1790259011/KONFORMIT_TSERKL_RUNG-SATAJET-1000-B.PDF.PDF?ts=1790259011",
-          "language": null
+          "document": "KONFORMIT_TSERKL_RUNG-SATAJET-1000-B"
         }
       ],
       "imageStatus": "OFFICIAL_IMAGE_AVAILABLE_NOT_APPROVED_FOR_RUNTIME",
@@ -7693,16 +7525,10 @@
       "sourceAxisTerms": [],
       "documents": [
         {
-          "kind": "manual",
-          "title": "Uputstvo za upotrebu",
-          "href": "https://www.sata.com/media/bd/b5/b6/1790259013/BAL-SATAJET-1000-K-H.PDF.PDF?ts=1790259013",
-          "language": null
+          "document": "BAL-SATAJET-1000-K-H"
         },
         {
-          "kind": "declaration",
-          "title": "Izjava o usaglašenosti",
-          "href": "https://www.sata.com/media/62/d0/5f/1790259013/KONFORMIT_TSERKL_RUNG-SATAJET-1000-K-H.PDF.PDF?ts=1790259013",
-          "language": null
+          "document": "KONFORMIT_TSERKL_RUNG-SATAJET-1000-K-H"
         }
       ],
       "imageStatus": "OFFICIAL_IMAGE_AVAILABLE_NOT_APPROVED_FOR_RUNTIME",
@@ -8127,16 +7953,10 @@
       ],
       "documents": [
         {
-          "kind": "manual",
-          "title": "Uputstvo za upotrebu",
-          "href": "https://www.sata.com/media/bd/b5/b6/1790259013/BAL-SATAJET-1000-K-H.PDF.PDF?ts=1790259013",
-          "language": null
+          "document": "BAL-SATAJET-1000-K-H"
         },
         {
-          "kind": "declaration",
-          "title": "Izjava o usaglašenosti",
-          "href": "https://www.sata.com/media/62/d0/5f/1790259013/KONFORMIT_TSERKL_RUNG-SATAJET-1000-K-H.PDF.PDF?ts=1790259013",
-          "language": null
+          "document": "KONFORMIT_TSERKL_RUNG-SATAJET-1000-K-H"
         }
       ],
       "imageStatus": "OFFICIAL_IMAGE_AVAILABLE_NOT_APPROVED_FOR_RUNTIME",
@@ -8320,16 +8140,10 @@
       "sourceAxisTerms": [],
       "documents": [
         {
-          "kind": "manual",
-          "title": "Uputstvo za upotrebu",
-          "href": "https://www.sata.com/media/ac/17/69/1790259011/BETRIEBSANLEITUNG-SATAJET-1500-B.PDF.PDF?ts=1790259011",
-          "language": null
+          "document": "BETRIEBSANLEITUNG-SATAJET-1500-B"
         },
         {
-          "kind": "declaration",
-          "title": "Izjava o usaglašenosti",
-          "href": "https://www.sata.com/media/9c/61/36/1790259011/KONFORMIT_TSERKL_RUNG-SATAJET-1500-B.PDF.PDF?ts=1790259011",
-          "language": null
+          "document": "KONFORMIT_TSERKL_RUNG-SATAJET-1500-B"
         }
       ],
       "imageStatus": "OFFICIAL_IMAGE_NOT_PUBLISHED",
@@ -8515,10 +8329,7 @@
       ],
       "documents": [
         {
-          "kind": "manual",
-          "title": "Uputstvo za upotrebu",
-          "href": "https://www.sata.com/media/fb/ae/05/1790259012/BAL-SATAJET-20-B.PDF.PDF?ts=1790259012",
-          "language": null
+          "document": "BAL-SATAJET-20-B"
         }
       ],
       "imageStatus": "OFFICIAL_IMAGE_AVAILABLE_NOT_APPROVED_FOR_RUNTIME",
@@ -8809,16 +8620,10 @@
       "sourceAxisTerms": [],
       "documents": [
         {
-          "kind": "manual",
-          "title": "Uputstvo za upotrebu",
-          "href": "https://www.sata.com/media/54/ba/aa/1790259013/BAL-SATAJET-3000-K.PDF.PDF?ts=1790259013",
-          "language": null
+          "document": "BAL-SATAJET-3000-K"
         },
         {
-          "kind": "declaration",
-          "title": "Izjava o usaglašenosti",
-          "href": "https://www.sata.com/media/50/fd/16/1790259013/KONFORMIT_TSERKL_RUNG-SATAJET-3000-K.PDF.PDF?ts=1790259013",
-          "language": null
+          "document": "KONFORMIT_TSERKL_RUNG-SATAJET-3000-K"
         }
       ],
       "imageStatus": "OFFICIAL_IMAGE_AVAILABLE_NOT_APPROVED_FOR_RUNTIME",
@@ -8885,16 +8690,10 @@
       "sourceAxisTerms": [],
       "documents": [
         {
-          "kind": "manual",
-          "title": "Uputstvo za upotrebu",
-          "href": "https://www.sata.com/media/49/57/38/1790259012/BAL-SATAJET-3000-K-SPRAY-MIX.PDF.PDF?ts=1790259012",
-          "language": null
+          "document": "BAL-SATAJET-3000-K-SPRAY-MIX"
         },
         {
-          "kind": "declaration",
-          "title": "Izjava o usaglašenosti",
-          "href": "https://www.sata.com/media/91/7b/ed/1790259013/EG-KONFORMITATSERKLARUNG-SATAJET-3000-K-SPRAY-MIX.PDF.PDF?ts=1790259013",
-          "language": null
+          "document": "EG-KONFORMITATSERKLARUNG-SATAJET-3000-K-SPRAY-MIX"
         }
       ],
       "imageStatus": "OFFICIAL_IMAGE_AVAILABLE_NOT_APPROVED_FOR_RUNTIME",
@@ -9173,16 +8972,10 @@
       "sourceAxisTerms": [],
       "documents": [
         {
-          "kind": "manual",
-          "title": "Uputstvo za upotrebu",
-          "href": "https://www.sata.com/media/f8/bc/bd/1790259011/BAL-SATAJET-5000-B.PDF.PDF?ts=1790259011",
-          "language": null
+          "document": "BAL-SATAJET-5000-B"
         },
         {
-          "kind": "declaration",
-          "title": "Izjava o usaglašenosti",
-          "href": "https://www.sata.com/media/ba/3a/ae/1790259011/EG-KONFORMITATSERKLARUNG-SATAJET-5000-B.PDF.PDF?ts=1790259011",
-          "language": null
+          "document": "EG-KONFORMITATSERKLARUNG-SATAJET-5000-B"
         }
       ],
       "imageStatus": "OFFICIAL_IMAGE_AVAILABLE_NOT_APPROVED_FOR_RUNTIME",
@@ -9284,10 +9077,7 @@
       "sourceAxisTerms": [],
       "documents": [
         {
-          "kind": "manual",
-          "title": "Uputstvo za upotrebu",
-          "href": "https://www.sata.com/media/7e/3a/0b/1790259013/BAL-SATAJET-H.PDF.PDF?ts=1790259013",
-          "language": null
+          "document": "BAL-SATAJET-H"
         }
       ],
       "imageStatus": "OFFICIAL_IMAGE_AVAILABLE_NOT_APPROVED_FOR_RUNTIME",
@@ -9364,16 +9154,10 @@
       "sourceAxisTerms": [],
       "documents": [
         {
-          "kind": "manual",
-          "title": "Uputstvo za upotrebu",
-          "href": "https://www.sata.com/media/71/16/32/1790259012/BAL_-_SATAJET_K_1800_SPRAY_MIX.PDF.PDF?ts=1790259012",
-          "language": null
+          "document": "BAL_-_SATAJET_K_1800_SPRAY_MIX"
         },
         {
-          "kind": "declaration",
-          "title": "Izjava o usaglašenosti",
-          "href": "https://www.sata.com/media/ba/9a/3c/1790259012/EG-KONFORMITATSERKLARUNG-SATAJET-K-1800-SPRAY-MIX.PDF.PDF?ts=1790259012",
-          "language": null
+          "document": "EG-KONFORMITATSERKLARUNG-SATAJET-K-1800-SPRAY-MIX"
         }
       ],
       "imageStatus": "OFFICIAL_IMAGE_AVAILABLE_NOT_APPROVED_FOR_RUNTIME",
@@ -9463,16 +9247,10 @@
       ],
       "documents": [
         {
-          "kind": "manual",
-          "title": "Uputstvo za upotrebu",
-          "href": "https://www.sata.com/media/e1/ba/aa/1790259010/BETRIEBSANLEITUNG-SATAJET-X-5500.PDF.PDF?ts=1790259010",
-          "language": null
+          "document": "BETRIEBSANLEITUNG-SATAJET-X-5500"
         },
         {
-          "kind": "declaration",
-          "title": "Izjava o usaglašenosti",
-          "href": "https://www.sata.com/media/ef/ac/c6/1790259010/KONFORMIT_TSERKL_RUNG-SATAJET-X-5500.PDF.PDF?ts=1790259010",
-          "language": null
+          "document": "KONFORMIT_TSERKL_RUNG-SATAJET-X-5500"
         }
       ],
       "imageStatus": "OFFICIAL_IMAGE_AVAILABLE_NOT_APPROVED_FOR_RUNTIME",
@@ -9671,16 +9449,10 @@
       "sourceAxisTerms": [],
       "documents": [
         {
-          "kind": "manual",
-          "title": "Uputstvo za upotrebu",
-          "href": "https://www.sata.com/media/eb/0c/d0/1790259010/BETRIEBSANLEITUNG-SATAJET-X5500-PHASER.PDF.PDF?ts=1790259010",
-          "language": null
+          "document": "BETRIEBSANLEITUNG-SATAJET-X5500-PHASER"
         },
         {
-          "kind": "declaration",
-          "title": "Izjava o usaglašenosti",
-          "href": "https://www.sata.com/media/6e/a2/2d/1790259010/EG-KONFORMITATSERKLARUNG-SATAJET-X-5500-PHASER.PDF.PDF?ts=1790259010",
-          "language": null
+          "document": "EG-KONFORMITATSERKLARUNG-SATAJET-X-5500-PHASER"
         }
       ],
       "imageStatus": "OFFICIAL_IMAGE_AVAILABLE_NOT_APPROVED_FOR_RUNTIME",
@@ -9858,10 +9630,7 @@
       "sourceAxisTerms": [],
       "documents": [
         {
-          "kind": "declaration",
-          "title": "Izjava o usaglašenosti",
-          "href": "https://www.sata.com/media/27/df/94/1790259013/KONFORMIT_TSERKL_RUNG-SATAMINIJET-1000.PDF.PDF?ts=1790259013",
-          "language": null
+          "document": "KONFORMIT_TSERKL_RUNG-SATAMINIJET-1000"
         }
       ],
       "imageStatus": "OFFICIAL_IMAGE_AVAILABLE_NOT_APPROVED_FOR_RUNTIME",
@@ -10311,16 +10080,10 @@
       ],
       "documents": [
         {
-          "kind": "manual",
-          "title": "Uputstvo za upotrebu",
-          "href": "https://www.sata.com/media/75/3e/88/1790259012/BETRIEBSANLEITUNG-SATAMINIJET-4400-B.PDF.PDF?ts=1790259012",
-          "language": null
+          "document": "BETRIEBSANLEITUNG-SATAMINIJET-4400-B"
         },
         {
-          "kind": "declaration",
-          "title": "Izjava o usaglašenosti",
-          "href": "https://www.sata.com/media/ae/07/5d/1790259012/KONFORMIT_TSERKL_RUNG-SATAMINIJET-4400-B.PDF.PDF?ts=1790259012",
-          "language": null
+          "document": "KONFORMIT_TSERKL_RUNG-SATAMINIJET-4400-B"
         }
       ],
       "imageStatus": "OFFICIAL_IMAGE_AVAILABLE_NOT_APPROVED_FOR_RUNTIME",
@@ -10892,20 +10655,673 @@
       ],
       "documents": [
         {
-          "kind": "manual",
-          "title": "Uputstvo za upotrebu",
-          "href": "https://www.sata.com/media/e1/ba/aa/1790259010/BETRIEBSANLEITUNG-SATAJET-X-5500.PDF.PDF?ts=1790259010",
-          "language": null
+          "document": "BETRIEBSANLEITUNG-SATAJET-X-5500"
         },
         {
-          "kind": "declaration",
-          "title": "Izjava o usaglašenosti",
-          "href": "https://www.sata.com/media/ef/ac/c6/1790259010/KONFORMIT_TSERKL_RUNG-SATAJET-X-5500.PDF.PDF?ts=1790259010",
-          "language": null
+          "document": "KONFORMIT_TSERKL_RUNG-SATAJET-X-5500"
         }
       ],
       "imageStatus": "OFFICIAL_IMAGE_AVAILABLE_NOT_APPROVED_FOR_RUNTIME",
       "sourceHash": "3b726745112c9da7"
+    }
+  },
+  "documents": {
+    "BAL_-_SATAJET_K_1800_SPRAY_MIX": {
+      "kind": "manual",
+      "title": "Uputstvo za upotrebu",
+      "language": "multilingual",
+      "status": "DIRECT_PDF",
+      "href": "https://www.sata.com/media/61/01/4c/1793362236/BAL_-_SATAJET_K_1800_SPRAY_MIX.PDF.PDF?ts=1793362236",
+      "verified": "2026-10-31",
+      "pages": 534,
+      "bytes": 9328192
+    },
+    "BAL-SATA-AIRSTAR-C": {
+      "kind": "manual",
+      "title": "Uputstvo za upotrebu",
+      "language": "multilingual",
+      "status": "DIRECT_PDF",
+      "href": "https://www.sata.com/media/7e/2d/2d/1793362239/BAL-SATA-AIRSTAR-C.PDF.PDF?ts=1793362239",
+      "verified": "2026-10-31",
+      "pages": 410,
+      "bytes": 9305934
+    },
+    "BAL-SATA-DRY-JET-2": {
+      "kind": "manual",
+      "title": "Uputstvo za upotrebu",
+      "language": "multilingual",
+      "status": "DIRECT_PDF",
+      "href": "https://www.sata.com/media/b6/b9/fd/1793362241/BAL-SATA-DRY-JET-2.PDF.PDF?ts=1793362241",
+      "verified": "2026-10-31",
+      "pages": 252,
+      "bytes": 1964165
+    },
+    "BAL-SATA-FILTER-100-PREP": {
+      "kind": "manual",
+      "title": "Uputstvo za upotrebu",
+      "language": "multilingual",
+      "status": "DIRECT_PDF",
+      "href": "https://www.sata.com/media/e6/d7/a6/1793362240/BAL-SATA-FILTER-100-PREP.PDF.PDF?ts=1793362240",
+      "verified": "2026-10-31",
+      "pages": 272,
+      "bytes": 2395776
+    },
+    "BAL-SATA-FILTER-400": {
+      "kind": "manual",
+      "title": "Uputstvo za upotrebu",
+      "language": "multilingual",
+      "status": "DIRECT_PDF",
+      "href": "https://www.sata.com/media/e0/bf/9a/1793362239/BAL-SATA-FILTER-400.PDF.PDF?ts=1793362239",
+      "verified": "2026-10-31",
+      "pages": 314,
+      "bytes": 2559520
+    },
+    "BAL-SATA-HKU": {
+      "kind": "manual",
+      "title": "Uputstvo za upotrebu",
+      "language": "multilingual",
+      "status": "DIRECT_PDF",
+      "href": "https://www.sata.com/media/f7/36/a8/1793362240/BAL-SATA-HKU.PDF.PDF?ts=1793362240",
+      "verified": "2026-10-31",
+      "pages": 27,
+      "bytes": 1286824
+    },
+    "BAL-SATA-MINI-SET-2": {
+      "kind": "manual",
+      "title": "Uputstvo za upotrebu",
+      "language": "multilingual",
+      "status": "DIRECT_PDF",
+      "href": "https://www.sata.com/media/82/ed/e8/1793362241/BAL-SATA-MINI-SET-2.PDF.PDF?ts=1793362241",
+      "verified": "2026-10-31",
+      "pages": 12,
+      "bytes": 488421
+    },
+    "BAL-SATA-MULTI-CLEAN-2": {
+      "kind": "manual",
+      "title": "Uputstvo za upotrebu",
+      "language": "multilingual",
+      "status": "DIRECT_PDF",
+      "href": "https://www.sata.com/media/53/89/e8/1793362240/BAL-SATA-MULTI-CLEAN-2.PDF.PDF?ts=1793362240",
+      "verified": "2026-10-31",
+      "pages": 332,
+      "bytes": 3505196
+    },
+    "BAL-SATA-VARIO-TOP-SPRAY": {
+      "kind": "manual",
+      "title": "Uputstvo za upotrebu",
+      "language": "multilingual",
+      "status": "DIRECT_PDF",
+      "href": "https://www.sata.com/media/37/cb/c1/1791809360/BAL-SATA-VARIO-TOP-SPRAY.PDF.PDF?ts=1791809360",
+      "verified": "2026-10-31",
+      "pages": 52,
+      "bytes": 3523195
+    },
+    "BAL-SATAJET-1000-B": {
+      "kind": "manual",
+      "title": "Uputstvo za upotrebu",
+      "language": "multilingual",
+      "status": "DIRECT_PDF",
+      "href": "https://www.sata.com/media/8d/95/61/1793362235/BAL-SATAJET-1000-B.PDF.PDF?ts=1793362235",
+      "verified": "2026-10-31",
+      "pages": 496,
+      "bytes": 6474410
+    },
+    "BAL-SATAJET-1000-K-H": {
+      "kind": "manual",
+      "title": "Uputstvo za upotrebu",
+      "language": "multilingual",
+      "status": "DIRECT_PDF",
+      "href": "https://www.sata.com/media/d4/44/4a/1793362236/BAL-SATAJET-1000-K-H.PDF.PDF?ts=1793362236",
+      "verified": "2026-10-31",
+      "pages": 560,
+      "bytes": 7810820
+    },
+    "BAL-SATAJET-20-B": {
+      "kind": "manual",
+      "title": "Uputstvo za upotrebu",
+      "language": "multilingual",
+      "status": "DIRECT_PDF",
+      "href": "https://www.sata.com/media/ae/0b/9b/1793362235/BAL-SATAJET-20-B.PDF.PDF?ts=1793362235",
+      "verified": "2026-10-31",
+      "pages": 12,
+      "bytes": 754261
+    },
+    "BAL-SATAJET-3000-K": {
+      "kind": "manual",
+      "title": "Uputstvo za upotrebu",
+      "language": "multilingual",
+      "status": "DIRECT_PDF",
+      "href": "https://www.sata.com/media/0d/a2/e0/1793362236/BAL-SATAJET-3000-K.PDF.PDF?ts=1793362236",
+      "verified": "2026-10-31",
+      "pages": 486,
+      "bytes": 5197021
+    },
+    "BAL-SATAJET-3000-K-SPRAY-MIX": {
+      "kind": "manual",
+      "title": "Uputstvo za upotrebu",
+      "language": "multilingual",
+      "status": "DIRECT_PDF",
+      "href": "https://www.sata.com/media/5e/38/8a/1793362236/BAL-SATAJET-3000-K-SPRAY-MIX.PDF.PDF?ts=1793362236",
+      "verified": "2026-10-31",
+      "pages": 562,
+      "bytes": 11609200
+    },
+    "BAL-SATAJET-5000-B": {
+      "kind": "manual",
+      "title": "Uputstvo za upotrebu",
+      "language": "multilingual",
+      "status": "DIRECT_PDF",
+      "href": "https://www.sata.com/media/d2/a6/e4/1793362234/BAL-SATAJET-5000-B.PDF.PDF?ts=1793362234",
+      "verified": "2026-10-31",
+      "pages": 420,
+      "bytes": 6150757
+    },
+    "BAL-SATAJET-H": {
+      "kind": "manual",
+      "title": "Uputstvo za upotrebu",
+      "language": "multilingual",
+      "status": "DIRECT_PDF",
+      "href": "https://www.sata.com/media/e8/65/5b/1793362237/BAL-SATAJET-H.PDF.PDF?ts=1793362237",
+      "verified": "2026-10-31",
+      "pages": 10,
+      "bytes": 813857
+    },
+    "BETRIEBSANLEITUNG_MANUAL_-_SATA_VISION_2000": {
+      "kind": "manual",
+      "title": "Uputstvo za upotrebu",
+      "language": "multilingual",
+      "status": "DIRECT_PDF",
+      "href": "https://www.sata.com/media/10/60/64/1793362239/BETRIEBSANLEITUNG_MANUAL_-_SATA_VISION_2000.PDF.PDF?ts=1793362239",
+      "verified": "2026-10-31",
+      "pages": 522,
+      "bytes": 10288034
+    },
+    "BETRIEBSANLEITUNG_MANUAL_-_SATAGRAPH_4": {
+      "kind": "manual",
+      "title": "Uputstvo za upotrebu",
+      "language": "multilingual",
+      "status": "DIRECT_PDF",
+      "href": "https://www.sata.com/media/8a/a8/f4/1793362237/BETRIEBSANLEITUNG_MANUAL_-_SATAGRAPH_4.PDF.PDF?ts=1793362237",
+      "verified": "2026-10-31",
+      "pages": 66,
+      "bytes": 605120
+    },
+    "BETRIEBSANLEITUNG-SATA-ADAM-2": {
+      "kind": "manual",
+      "title": "Uputstvo za upotrebu",
+      "language": "multilingual",
+      "status": "DIRECT_PDF",
+      "href": "https://www.sata.com/media/79/00/67/1793362241/BETRIEBSANLEITUNG-SATA-ADAM-2.PDF.PDF?ts=1793362241",
+      "verified": "2026-10-31",
+      "pages": 268,
+      "bytes": 7374513
+    },
+    "BETRIEBSANLEITUNG-SATA-AIR-STAR-F": {
+      "kind": "manual",
+      "title": "Uputstvo za upotrebu",
+      "language": "multilingual",
+      "status": "DIRECT_PDF",
+      "href": "https://www.sata.com/media/1f/dc/18/1793362239/BETRIEBSANLEITUNG-SATA-AIR-STAR-F.PDF.PDF?ts=1793362239",
+      "verified": "2026-10-31",
+      "pages": 308,
+      "bytes": 7085860
+    },
+    "BETRIEBSANLEITUNG-SATA-AIR-VISION-5000": {
+      "kind": "manual",
+      "title": "Uputstvo za upotrebu",
+      "language": "multilingual",
+      "status": "DIRECT_PDF",
+      "href": "https://www.sata.com/media/cd/e3/b7/1793362238/BETRIEBSANLEITUNG-SATA-AIR-VISION-5000.PDF.PDF?ts=1793362238",
+      "verified": "2026-10-31",
+      "pages": 404,
+      "bytes": 7739278
+    },
+    "BETRIEBSANLEITUNG-SATA-CLEAN-RCS": {
+      "kind": "manual",
+      "title": "Uputstvo za upotrebu",
+      "language": "multilingual",
+      "status": "DIRECT_PDF",
+      "href": "https://www.sata.com/media/b8/1f/02/1793362240/BETRIEBSANLEITUNG-SATA-CLEAN-RCS.PDF.PDF?ts=1793362240",
+      "verified": "2026-10-31",
+      "pages": 392,
+      "bytes": 9437698
+    },
+    "BETRIEBSANLEITUNG-SATA-FILTER-200": {
+      "kind": "manual",
+      "title": "Uputstvo za upotrebu",
+      "language": "multilingual",
+      "status": "DIRECT_PDF",
+      "href": "https://www.sata.com/media/49/8d/f8/1793362239/BETRIEBSANLEITUNG-SATA-FILTER-200.PDF.PDF?ts=1793362239",
+      "verified": "2026-10-31",
+      "pages": 86,
+      "bytes": 2512320
+    },
+    "BETRIEBSANLEITUNG-SATA-FILTER-500": {
+      "kind": "manual",
+      "title": "Uputstvo za upotrebu",
+      "language": "multilingual",
+      "status": "DIRECT_PDF",
+      "href": "https://www.sata.com/media/db/ea/76/1793362239/BETRIEBSANLEITUNG-SATA-FILTER-500.PDF.PDF?ts=1793362239",
+      "verified": "2026-10-31",
+      "pages": 318,
+      "bytes": 5666191
+    },
+    "BETRIEBSANLEITUNG-SATA-RPS": {
+      "kind": "manual",
+      "title": "Uputstvo za upotrebu",
+      "language": "multilingual",
+      "status": "DIRECT_PDF",
+      "href": "https://www.sata.com/media/de/7d/bb/1793362238/BETRIEBSANLEITUNG-SATA-RPS.PDF.PDF?ts=1793362238",
+      "verified": "2026-10-31",
+      "pages": 2,
+      "bytes": 1399267
+    },
+    "BETRIEBSANLEITUNG-SATA-TRUESUN": {
+      "kind": "manual",
+      "title": "Uputstvo za upotrebu",
+      "language": "multilingual",
+      "status": "DIRECT_PDF",
+      "href": "https://www.sata.com/media/13/6b/6e/1793362240/BETRIEBSANLEITUNG-SATA-TRUESUN.PDF.PDF?ts=1793362240",
+      "verified": "2026-10-31",
+      "pages": 254,
+      "bytes": 9805014
+    },
+    "BETRIEBSANLEITUNG-SATAJET-100-B": {
+      "kind": "manual",
+      "title": "Uputstvo za upotrebu",
+      "language": "multilingual",
+      "status": "DIRECT_PDF",
+      "href": "https://www.sata.com/media/17/51/5b/1793362235/BETRIEBSANLEITUNG-SATAJET-100-B.PDF.PDF?ts=1793362235",
+      "verified": "2026-10-31",
+      "pages": 552,
+      "bytes": 10699625
+    },
+    "BETRIEBSANLEITUNG-SATAJET-1500-B": {
+      "kind": "manual",
+      "title": "Uputstvo za upotrebu",
+      "language": "multilingual",
+      "status": "DIRECT_PDF",
+      "href": "https://www.sata.com/media/99/42/b3/1793362234/BETRIEBSANLEITUNG-SATAJET-1500-B.PDF.PDF?ts=1793362234",
+      "verified": "2026-10-31",
+      "pages": 532,
+      "bytes": 11569228
+    },
+    "BETRIEBSANLEITUNG-SATAJET-X-5500": {
+      "kind": "manual",
+      "title": "Uputstvo za upotrebu",
+      "language": "multilingual",
+      "status": "DIRECT_PDF",
+      "href": "https://www.sata.com/media/44/43/ef/1793362234/BETRIEBSANLEITUNG-SATAJET-X-5500.PDF.PDF?ts=1793362234",
+      "verified": "2026-10-31",
+      "pages": 476,
+      "bytes": 10267661
+    },
+    "BETRIEBSANLEITUNG-SATAJET-X5500-PHASER": {
+      "kind": "manual",
+      "title": "Uputstvo za upotrebu",
+      "language": "multilingual",
+      "status": "DIRECT_PDF",
+      "href": "https://www.sata.com/media/e9/5a/31/1793362233/BETRIEBSANLEITUNG-SATAJET-X5500-PHASER.PDF.PDF?ts=1793362233",
+      "verified": "2026-10-31",
+      "pages": 418,
+      "bytes": 8254874
+    },
+    "BETRIEBSANLEITUNG-SATAMINIJET-4400-B": {
+      "kind": "manual",
+      "title": "Uputstvo za upotrebu",
+      "language": "multilingual",
+      "status": "DIRECT_PDF",
+      "href": "https://www.sata.com/media/66/85/5e/1793362235/BETRIEBSANLEITUNG-SATAMINIJET-4400-B.PDF.PDF?ts=1793362235",
+      "verified": "2026-10-31",
+      "pages": 420,
+      "bytes": 9866023
+    },
+    "EG-KONFORMITATSERKLARUNG-SATA-FILTER-100-PREP": {
+      "kind": "declaration",
+      "title": "Izjava o usaglašenosti",
+      "language": "multilingual",
+      "status": "DIRECT_PDF",
+      "href": "https://www.sata.com/media/89/ba/34/1793362240/EG-KONFORMITATSERKLARUNG-SATA-FILTER-100-PREP.PDF.PDF?ts=1793362240",
+      "verified": "2026-10-31",
+      "pages": 54,
+      "bytes": 778192
+    },
+    "EG-KONFORMITATSERKLARUNG-SATA-HKU-FASSPUMPENANLAGE": {
+      "kind": "declaration",
+      "title": "Izjava o usaglašenosti",
+      "language": "multilingual",
+      "status": "DIRECT_PDF",
+      "href": "https://www.sata.com/media/72/b6/1a/1793362240/EG-KONFORMITATSERKLARUNG-SATA-HKU-FASSPUMPENANLAGE.PDF.PDF?ts=1793362240",
+      "verified": "2026-10-31",
+      "pages": 12,
+      "bytes": 430268
+    },
+    "EG-KONFORMITATSERKLARUNG-SATAJET-100-B": {
+      "kind": "declaration",
+      "title": "Izjava o usaglašenosti",
+      "language": "multilingual",
+      "status": "DIRECT_PDF",
+      "href": "https://www.sata.com/media/48/d8/60/1793362235/EG-KONFORMITATSERKLARUNG-SATAJET-100-B.PDF.PDF?ts=1793362235",
+      "verified": "2026-10-31",
+      "pages": 54,
+      "bytes": 776266
+    },
+    "EG-KONFORMITATSERKLARUNG-SATAJET-3000-K-SPRAY-MIX": {
+      "kind": "declaration",
+      "title": "Izjava o usaglašenosti",
+      "language": "multilingual",
+      "status": "DIRECT_PDF",
+      "href": "https://www.sata.com/media/b6/8b/cc/1793362236/EG-KONFORMITATSERKLARUNG-SATAJET-3000-K-SPRAY-MIX.PDF.PDF?ts=1793362236",
+      "verified": "2026-10-31",
+      "pages": 54,
+      "bytes": 825610
+    },
+    "EG-KONFORMITATSERKLARUNG-SATAJET-5000-B": {
+      "kind": "declaration",
+      "title": "Izjava o usaglašenosti",
+      "language": "multilingual",
+      "status": "DIRECT_PDF",
+      "href": "https://www.sata.com/media/4f/a4/8b/1793362234/EG-KONFORMITATSERKLARUNG-SATAJET-5000-B.PDF.PDF?ts=1793362234",
+      "verified": "2026-10-31",
+      "pages": 54,
+      "bytes": 796666
+    },
+    "EG-KONFORMITATSERKLARUNG-SATAJET-K-1800-SPRAY-MIX": {
+      "kind": "declaration",
+      "title": "Izjava o usaglašenosti",
+      "language": "multilingual",
+      "status": "DIRECT_PDF",
+      "href": "https://www.sata.com/media/37/a2/48/1793362236/EG-KONFORMITATSERKLARUNG-SATAJET-K-1800-SPRAY-MIX.PDF.PDF?ts=1793362236",
+      "verified": "2026-10-31",
+      "pages": 54,
+      "bytes": 862295
+    },
+    "EG-KONFORMITATSERKLARUNG-SATAJET-X-5500-PHASER": {
+      "kind": "declaration",
+      "title": "Izjava o usaglašenosti",
+      "language": "multilingual",
+      "status": "DIRECT_PDF",
+      "href": "https://www.sata.com/media/e8/fb/3a/1793362233/EG-KONFORMITATSERKLARUNG-SATAJET-X-5500-PHASER.PDF.PDF?ts=1793362233",
+      "verified": "2026-10-31",
+      "pages": 54,
+      "bytes": 798530
+    },
+    "EN_-_LEAFLET-_SATA_VISION_2000": {
+      "kind": "brochure",
+      "title": "Brošura",
+      "language": "en",
+      "status": "MANUFACTURER_PAGE",
+      "reason": "NOT_LISTED_ON_PRODUCT_PAGE"
+    },
+    "KONFORMIT_TSERKL_RUNG-SATA-ADAM-2": {
+      "kind": "declaration",
+      "title": "Izjava o usaglašenosti",
+      "language": "multilingual",
+      "status": "DIRECT_PDF",
+      "href": "https://www.sata.com/media/fa/cd/b3/1793362241/KONFORMIT_TSERKL_RUNG-SATA-ADAM-2.PDF.PDF?ts=1793362241",
+      "verified": "2026-10-31",
+      "pages": 54,
+      "bytes": 4200823
+    },
+    "KONFORMIT_TSERKL_RUNG-SATA-AIR-STAR-F": {
+      "kind": "declaration",
+      "title": "Izjava o usaglašenosti",
+      "language": "multilingual",
+      "status": "DIRECT_PDF",
+      "href": "https://www.sata.com/media/64/7c/10/1793362239/KONFORMIT_TSERKL_RUNG-SATA-AIR-STAR-F.PDF.PDF?ts=1793362239",
+      "verified": "2026-10-31",
+      "pages": 54,
+      "bytes": 781411
+    },
+    "KONFORMIT_TSERKL_RUNG-SATA-CLEAN-RCS": {
+      "kind": "declaration",
+      "title": "Izjava o usaglašenosti",
+      "language": "multilingual",
+      "status": "DIRECT_PDF",
+      "href": "https://www.sata.com/media/4b/fe/8a/1793362240/KONFORMIT_TSERKL_RUNG-SATA-CLEAN-RCS.PDF.PDF?ts=1793362240",
+      "verified": "2026-10-31",
+      "pages": 54,
+      "bytes": 4298494
+    },
+    "KONFORMIT_TSERKL_RUNG-SATA-DRY-JET-2": {
+      "kind": "declaration",
+      "title": "Izjava o usaglašenosti",
+      "language": "multilingual",
+      "status": "DIRECT_PDF",
+      "href": "https://www.sata.com/media/ec/f3/61/1793362241/KONFORMIT_TSERKL_RUNG-SATA-DRY-JET-2.PDF.PDF?ts=1793362241",
+      "verified": "2026-10-31",
+      "pages": 54,
+      "bytes": 3381899
+    },
+    "KONFORMIT_TSERKL_RUNG-SATA-FILTER-200": {
+      "kind": "declaration",
+      "title": "Izjava o usaglašenosti",
+      "language": "multilingual",
+      "status": "DIRECT_PDF",
+      "href": "https://www.sata.com/media/19/67/c3/1793362239/KONFORMIT_TSERKL_RUNG-SATA-FILTER-200.PDF.PDF?ts=1793362239",
+      "verified": "2026-10-31",
+      "pages": 54,
+      "bytes": 709404
+    },
+    "KONFORMIT_TSERKL_RUNG-SATA-FILTER-400": {
+      "kind": "declaration",
+      "title": "Izjava o usaglašenosti",
+      "language": "multilingual",
+      "status": "DIRECT_PDF",
+      "href": "https://www.sata.com/media/fa/20/a4/1793362239/KONFORMIT_TSERKL_RUNG-SATA-FILTER-400.PDF.PDF?ts=1793362239",
+      "verified": "2026-10-31",
+      "pages": 54,
+      "bytes": 3629496
+    },
+    "KONFORMIT_TSERKL_RUNG-SATA-FILTER-500": {
+      "kind": "declaration",
+      "title": "Izjava o usaglašenosti",
+      "language": "multilingual",
+      "status": "DIRECT_PDF",
+      "href": "https://www.sata.com/media/32/a0/b6/1793362239/KONFORMIT_TSERKL_RUNG-SATA-FILTER-500.PDF.PDF?ts=1793362239",
+      "verified": "2026-10-31",
+      "pages": 54,
+      "bytes": 3613788
+    },
+    "KONFORMIT_TSERKL_RUNG-SATA-TRUESUN": {
+      "kind": "declaration",
+      "title": "Izjava o usaglašenosti",
+      "language": "multilingual",
+      "status": "DIRECT_PDF",
+      "href": "https://www.sata.com/media/6f/68/6b/1793362240/KONFORMIT_TSERKL_RUNG-SATA-TRUESUN.PDF.PDF?ts=1793362240",
+      "verified": "2026-10-31",
+      "pages": 54,
+      "bytes": 3426852
+    },
+    "KONFORMIT_TSERKL_RUNG-SATAJET-1000-B": {
+      "kind": "declaration",
+      "title": "Izjava o usaglašenosti",
+      "language": "multilingual",
+      "status": "DIRECT_PDF",
+      "href": "https://www.sata.com/media/41/4c/14/1793362235/KONFORMIT_TSERKL_RUNG-SATAJET-1000-B.PDF.PDF?ts=1793362235",
+      "verified": "2026-10-31",
+      "pages": 54,
+      "bytes": 4072139
+    },
+    "KONFORMIT_TSERKL_RUNG-SATAJET-1000-K-H": {
+      "kind": "declaration",
+      "title": "Izjava o usaglašenosti",
+      "language": "multilingual",
+      "status": "DIRECT_PDF",
+      "href": "https://www.sata.com/media/2a/92/95/1793362236/KONFORMIT_TSERKL_RUNG-SATAJET-1000-K-H.PDF.PDF?ts=1793362236",
+      "verified": "2026-10-31",
+      "pages": 54,
+      "bytes": 4134167
+    },
+    "KONFORMIT_TSERKL_RUNG-SATAJET-1500-B": {
+      "kind": "declaration",
+      "title": "Izjava o usaglašenosti",
+      "language": "multilingual",
+      "status": "DIRECT_PDF",
+      "href": "https://www.sata.com/media/29/7d/33/1793362234/KONFORMIT_TSERKL_RUNG-SATAJET-1500-B.PDF.PDF?ts=1793362234",
+      "verified": "2026-10-31",
+      "pages": 54,
+      "bytes": 3501751
+    },
+    "KONFORMIT_TSERKL_RUNG-SATAJET-3000-K": {
+      "kind": "declaration",
+      "title": "Izjava o usaglašenosti",
+      "language": "multilingual",
+      "status": "DIRECT_PDF",
+      "href": "https://www.sata.com/media/86/c5/44/1793362236/KONFORMIT_TSERKL_RUNG-SATAJET-3000-K.PDF.PDF?ts=1793362236",
+      "verified": "2026-10-31",
+      "pages": 54,
+      "bytes": 3665580
+    },
+    "KONFORMIT_TSERKL_RUNG-SATAJET-X-5500": {
+      "kind": "declaration",
+      "title": "Izjava o usaglašenosti",
+      "language": "multilingual",
+      "status": "DIRECT_PDF",
+      "href": "https://www.sata.com/media/09/ca/f4/1793362234/KONFORMIT_TSERKL_RUNG-SATAJET-X-5500.PDF.PDF?ts=1793362234",
+      "verified": "2026-10-31",
+      "pages": 54,
+      "bytes": 4346520
+    },
+    "KONFORMIT_TSERKL_RUNG-SATAMINIJET-1000": {
+      "kind": "declaration",
+      "title": "Izjava o usaglašenosti",
+      "language": "multilingual",
+      "status": "DIRECT_PDF",
+      "href": "https://www.sata.com/media/4b/30/d6/1793362237/KONFORMIT_TSERKL_RUNG-SATAMINIJET-1000.PDF.PDF?ts=1793362237",
+      "verified": "2026-10-31",
+      "pages": 54,
+      "bytes": 3540196
+    },
+    "KONFORMIT_TSERKL_RUNG-SATAMINIJET-4400-B": {
+      "kind": "declaration",
+      "title": "Izjava o usaglašenosti",
+      "language": "multilingual",
+      "status": "DIRECT_PDF",
+      "href": "https://www.sata.com/media/1e/fa/91/1793362236/KONFORMIT_TSERKL_RUNG-SATAMINIJET-4400-B.PDF.PDF?ts=1793362236",
+      "verified": "2026-10-31",
+      "pages": 54,
+      "bytes": 3858809
+    },
+    "MULTILINGUAL---SATA-AIR-STAR-C-N---EG-KONFORMITTSERKLRUNG--EC-DECLARATION-OF-CONFORMITY_UID_6835B5C09786D": {
+      "kind": "declaration",
+      "title": "Izjava o usaglašenosti",
+      "language": "multilingual",
+      "status": "DIRECT_PDF",
+      "href": "https://www.sata.com/media/95/7f/96/1793362239/MULTILINGUAL---SATA-AIR-STAR-C-N---EG-KONFORMITTSERKLRUNG--EC-DECLARATION-OF-CONFORMITY_UID_6835B5C09786D.PDF.PDF?ts=1793362239",
+      "verified": "2026-10-31",
+      "pages": 54,
+      "bytes": 5496899
+    },
+    "MULTILINGUAL-DECLARATION-OF-CONFORMITY-SATA-AIR-VISION-5000-N_PDF": {
+      "kind": "declaration",
+      "title": "Izjava o usaglašenosti",
+      "language": "multilingual",
+      "status": "DIRECT_PDF",
+      "href": "https://www.sata.com/media/ca/6b/6e/1793362238/MULTILINGUAL-DECLARATION-OF-CONFORMITY-SATA-AIR-VISION-5000-N_PDF.PDF.PDF?ts=1793362238",
+      "verified": "2026-10-31",
+      "pages": 54,
+      "bytes": 1649747
+    },
+    "MULTILINGUAL-DECLARATION-OF-CONFORMITY-SATA-VISION-2000-3407-230327-1": {
+      "kind": "declaration",
+      "title": "Izjava o usaglašenosti",
+      "language": "multilingual",
+      "status": "DIRECT_PDF",
+      "href": "https://www.sata.com/media/dd/3a/dd/1793362239/MULTILINGUAL-DECLARATION-OF-CONFORMITY-SATA-VISION-2000-3407-230327-1.PDF.PDF?ts=1793362239",
+      "verified": "2026-10-31",
+      "pages": 54,
+      "bytes": 5617086
+    },
+    "MULTILINGUAL-SATA-DECLARATION-OF-CONFORMITY-AIR-STAR-F-2-4379-240913-2": {
+      "kind": "declaration",
+      "title": "Izjava o usaglašenosti",
+      "language": "multilingual",
+      "status": "DIRECT_PDF",
+      "href": "https://www.sata.com/media/32/34/79/1793362239/MULTILINGUAL-SATA-DECLARATION-OF-CONFORMITY-AIR-STAR-F-2-4379-240913-2.PDF.PDF?ts=1793362239",
+      "verified": "2026-10-31",
+      "pages": 54,
+      "bytes": 857611
+    },
+    "MULTILINGUAL-SATA-DECLARATION-OF-CONFORMITY-JET-K": {
+      "kind": "declaration",
+      "title": "Izjava o usaglašenosti",
+      "language": "multilingual",
+      "status": "DIRECT_PDF",
+      "href": "https://www.sata.com/media/fd/07/52/1793362237/MULTILINGUAL-SATA-DECLARATION-OF-CONFORMITY-JET-K.PDF.PDF?ts=1793362237",
+      "verified": "2026-10-31",
+      "pages": 54,
+      "bytes": 4817644
+    },
+    "MULTILINGUAL-SATA-DECLARATION-OF-CONFORMITY-JET-X-4390-240925-3": {
+      "kind": "declaration",
+      "title": "Izjava o usaglašenosti",
+      "language": "multilingual",
+      "status": "DIRECT_PDF",
+      "href": "https://www.sata.com/media/1b/a3/2b/1793362233/MULTILINGUAL-SATA-DECLARATION-OF-CONFORMITY-JET-X-4390-240925-3.PDF.PDF?ts=1793362233",
+      "verified": "2026-10-31",
+      "pages": 54,
+      "bytes": 4629861
+    },
+    "MULTILINGUAL-SATA-DECLARATION-OF-CONFORMITY-SATA-HRS": {
+      "kind": "declaration",
+      "title": "Izjava o usaglašenosti",
+      "language": "multilingual",
+      "status": "DIRECT_PDF",
+      "href": "https://www.sata.com/media/3e/1e/70/1793362240/MULTILINGUAL-SATA-DECLARATION-OF-CONFORMITY-SATA-HRS.PDF.PDF?ts=1793362240",
+      "verified": "2026-10-31",
+      "pages": 54,
+      "bytes": 3991451
+    },
+    "MULTILINGUAL-SATA-DECLARATION-OF-CONFORMITY-SATA-MULTI-CLEAN-2-3652-240321-1": {
+      "kind": "declaration",
+      "title": "Izjava o usaglašenosti",
+      "language": "multilingual",
+      "status": "DIRECT_PDF",
+      "href": "https://www.sata.com/media/e4/g0/11/1793362240/MULTILINGUAL-SATA-DECLARATION-OF-CONFORMITY-SATA-MULTI-CLEAN-2-3652-240321-1.PDF.PDF?ts=1793362240",
+      "verified": "2026-10-31",
+      "pages": 54,
+      "bytes": 916934
+    },
+    "MULTILINGUAL-SATA-OPERATING-MANUAL-ADAM-X-PRO-ADAM-X-3220-240904": {
+      "kind": "manual",
+      "title": "Uputstvo za upotrebu",
+      "language": "multilingual",
+      "status": "DIRECT_PDF",
+      "href": "https://www.sata.com/media/2f/3a/ec/1793362241/MULTILINGUAL-SATA-OPERATING-MANUAL-ADAM-X-PRO-ADAM-X-3220-240904.PDF.PDF?ts=1793362241",
+      "verified": "2026-10-31",
+      "pages": 490,
+      "bytes": 18512277
+    },
+    "MULTILINGUAL-SATA-OPERATING-MANUAL-AIR-STAR-F-2-4372-241112-1": {
+      "kind": "manual",
+      "title": "Uputstvo za upotrebu",
+      "language": "multilingual",
+      "status": "DIRECT_PDF",
+      "href": "https://www.sata.com/media/34/82/7e/1793362239/MULTILINGUAL-SATA-OPERATING-MANUAL-AIR-STAR-F-2-4372-241112-1.PDF.PDF?ts=1793362239",
+      "verified": "2026-10-31",
+      "pages": 706,
+      "bytes": 4392646
+    },
+    "MULTILINGUAL-SATA-OPERATING-MANUAL-HRS-4144-231115-1": {
+      "kind": "manual",
+      "title": "Uputstvo za upotrebu",
+      "language": "multilingual",
+      "status": "DIRECT_PDF",
+      "href": "https://www.sata.com/media/77/8a/ce/1793362240/MULTILINGUAL-SATA-OPERATING-MANUAL-HRS-4144-231115-1.PDF.PDF?ts=1793362240",
+      "verified": "2026-10-31",
+      "pages": 616,
+      "bytes": 5022082
+    },
+    "MULTILINGUAL-SATA-OPERATING-MANUAL-JET-X-3266-240619-2": {
+      "kind": "manual",
+      "title": "Uputstvo za upotrebu",
+      "language": "multilingual",
+      "status": "DIRECT_PDF",
+      "href": "https://www.sata.com/media/2d/dc/44/1793362233/MULTILINGUAL-SATA-OPERATING-MANUAL-JET-X-3266-240619-2.PDF.PDF?ts=1793362233",
+      "verified": "2026-10-31",
+      "pages": 638,
+      "bytes": 43507933
     }
   },
   "phase2": {

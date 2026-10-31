@@ -31,12 +31,21 @@ import type {
  * Cene i zalihe se ne uvoze — „Na upit”.
  */
 
+/**
+ * Jedinstven SATA dokument (`documents` dataseta, ključ = ime fajla bez heša i `?ts=`).
+ * `DIRECT_PDF`: adresa fajla proverena GET zahtevom pri sync-u (čitljiv PDF tačnog modela,
+ * vrste i jezika). `MANUFACTURER_PAGE`: fajl nije potvrđen, pa sajt vodi na stranicu porodice.
+ */
 type SyncDocument = {
   kind: "manual" | "declaration" | "brochure";
   title: string;
-  href: string;
   language: string | null;
+  status: "DIRECT_PDF" | "MANUFACTURER_PAGE";
+  href?: string;
 };
+
+/** Porodica samo upućuje na dokument; isti fajl više porodica je jedan zapis. */
+type SyncDocumentReference = { document: string };
 
 type SyncVariant = {
   articleNumber: string;
@@ -70,7 +79,7 @@ type SyncEntry = {
   variants: SyncVariant[];
   /** Opciono: plan učitava runtime iz PRETHODNOG dataseta, koji ovo polje još nema. */
   sourceAxisTerms?: string[];
-  documents: SyncDocument[];
+  documents: SyncDocumentReference[];
   imageStatus: string;
   sourceHash: string;
 };
@@ -118,6 +127,7 @@ const phase2Entries = phase2Data?.products ?? [];
 const phase2Links = phase2Data?.links ?? {};
 const phase2BySlug = new Map(phase2Entries.map((entry) => [entry.slug, entry]));
 const enrichments = catalogData.enrichments as Record<string, SyncEntry>;
+const documentsByKey = catalogData.documents as Record<string, SyncDocument>;
 
 export const sataCatalogMeta = catalogData.meta;
 
@@ -153,14 +163,38 @@ function variantSection(entry: SyncEntry): ProductVariantSection {
   };
 }
 
+/**
+ * Veza dokumenta za JEDNU porodicu — jedini izvor i za stranicu proizvoda i za biblioteku
+ * `/dokumentacija`. SATA menja adrese fajlova (`/media/<heš>/<ts>/…?ts=`), pa sync pri svakom
+ * pokretanju osvežava adresu i proverava fajl (`npm run sata:sync:documents`). Kada direktan
+ * PDF nije potvrđen, veza vodi na stalnu stranicu porodice kod SATA i tako je i označena.
+ */
+export const SATA_MANUFACTURER_PAGE_TITLE = "Dokumentacija na sajtu proizvođača";
+
+function resolvedDocuments(entry: SyncEntry) {
+  return entry.documents.map((reference) => {
+    const document = documentsByKey[reference.document];
+    if (!document) throw new Error(`SATA dataset: ${entry.slug} upućuje na nepostojeći dokument ${reference.document}`);
+    const direct = document.status === "DIRECT_PDF" && Boolean(document.href);
+    return {
+      key: reference.document,
+      document,
+      href: direct ? (document.href as string) : entry.sourceUrl,
+      viaProductPage: !direct,
+      language: document.language ? LANGUAGE_LABEL[document.language] : undefined,
+    };
+  });
+}
+
 function detailDocuments(entry: SyncEntry): ProductDetailDocument[] {
-  return entry.documents.map((document, index) => ({
+  return resolvedDocuments(entry).map(({ document, href, viaProductPage, language }, index) => ({
     id: `${entry.slug}-${document.kind}-${index}`,
     title: document.title,
     kind: document.kind === "manual" ? ("instructions" as const) : document.kind === "brochure" ? ("flyer" as const) : ("other" as const),
     availability: "available" as const,
-    href: document.href,
-    language: document.language ? LANGUAGE_LABEL[document.language] : undefined,
+    href,
+    ...(viaProductPage ? { viaProductPage } : {}),
+    language,
     reviewStatus: "confirmed" as const,
   }));
 }
@@ -370,12 +404,14 @@ function searchTermsOf(entry: SyncEntry) {
 }
 
 function documentsOf(entry: SyncEntry) {
-  return entry.documents.map((document) => ({
+  return resolvedDocuments(entry).map(({ key, document, href, viaProductPage, language }) => ({
     title: document.title,
-    kind: "PDF",
-    href: document.href,
+    kind: viaProductPage ? "Stranica proizvođača" : "PDF",
+    href,
     status: "available" as const,
-    note: document.language ? LANGUAGE_LABEL[document.language] : undefined,
+    note: language,
+    documentKey: `sata:${key}`,
+    ...(viaProductPage ? { viaProductPage } : {}),
   }));
 }
 

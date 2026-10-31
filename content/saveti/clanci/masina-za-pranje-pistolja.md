@@ -33,13 +33,13 @@ povezani:
 izvori:
   - id: sata-multi-clean-2-uputstvo
     naziv: "SATA, Operating Instructions SATA multi clean 2 (višejezično; engleski deo str. 77–88)"
-    url: https://www.sata.com/media/68/8f/25/1790259016/BAL-SATA-MULTI-CLEAN-2.PDF.PDF?ts=1790259016
+    url: https://www.sata.com/media/53/89/e8/1793362240/BAL-SATA-MULTI-CLEAN-2.PDF.PDF?ts=1793362240
     verzija: "3649-220713-2"
     pristupljeno: 2026-10-08
     tip: uputstvo-proizvodjaca
   - id: sata-clean-rcs-uputstvo
     naziv: "SATA, Operating Instructions SATA clean RCS (višejezično; engleski deo od str. 93)"
-    url: https://www.sata.com/media/4b/g0/c5/1790259016/BETRIEBSANLEITUNG-SATA-CLEAN-RCS.PDF.PDF?ts=1790259016
+    url: https://www.sata.com/media/b8/1f/02/1793362240/BETRIEBSANLEITUNG-SATA-CLEAN-RCS.PDF.PDF?ts=1793362240
     verzija: "3444-250407-1"
     pristupljeno: 2026-10-08
     tip: uputstvo-proizvodjaca

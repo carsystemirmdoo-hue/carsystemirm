@@ -12,10 +12,12 @@ Generiše `npm run saveti:build`. Ne menjati ručno.
 | Odobreno za objavu (imenovana osoba) | 0 |
 | Od toga novosti | 9 |
 
-## Greške (0)
+## Greške (1)
 
-Nema.
+- content/saveti/clanci/meki-medjusloj-na-brusilici.md: proizvod „carfit-soft-interface-pads-micro“ ne postoji ili nije kanonski (konsolidovana varijanta?)
 
-## Upozorenja (0)
+## Upozorenja (3)
 
-Nema.
+- content/saveti/clanci/izbor-dizne.md: izvor „sata-tabela-rm“: SATA fajl nije u registru dokumenata (Hersteller_R-M_metrisch_en.pdf)
+- content/saveti/clanci/masina-za-pranje-pistolja.md: izvor „sata-prospekt-ciscenje“: SATA fajl nije u registru dokumenata (DE_PROSPEKT_SATA_MULTI_CLEAN_2.PDF.PDF)
+- content/saveti/clanci/planiranje-posla-u-radionici.md: izvor „sata-prospekt-ciscenje“: SATA fajl nije u registru dokumenata (DE_PROSPEKT_SATA_MULTI_CLEAN_2.PDF.PDF)

@@ -77,7 +77,7 @@ izvori:
     tip: tehnicki-list
   - id: sata-x5500-uputstvo
     naziv: "SATA, Operating Manual SATAjet X 5500 RP/HVLP (DIGITAL) (višejezično, engleski deo str. 109–125; pogl. 4, 7 i 14)"
-    url: https://www.sata.com/media/e1/ba/aa/1790259010/BETRIEBSANLEITUNG-SATAJET-X-5500.PDF.PDF?ts=1790259010
+    url: https://www.sata.com/media/44/43/ef/1793362234/BETRIEBSANLEITUNG-SATAJET-X-5500.PDF.PDF?ts=1793362234
     verzija: "3240-200610-1"
     pristupljeno: 2026-10-08
     tip: uputstvo-proizvodjaca

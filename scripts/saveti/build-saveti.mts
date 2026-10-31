@@ -37,6 +37,7 @@ import {
 } from "../../lib/carsystem-data";
 import { getAllProductFamilies, getConsolidatedVariantSlugs } from "../../lib/product-families";
 import { seoCategoryLandings } from "../../lib/seo/category-landings";
+import { documentKeyOf, fileOf } from "../sata-sync/lib/documents.mjs";
 
 // Ulaz su YAML frontmatter i generisani JSON neproverenog oblika; svako polje se proverava eksplicitno.
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -55,6 +56,19 @@ const CHECK = process.argv.includes("--check");
 const ID_PATTERN = /^SV-\d{4}$/;
 const SLUG_PATTERN = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
 const DATE_PATTERN = /^\d{4}-\d{2}-\d{2}$/;
+
+/*
+ * SATA menja adrese fajlova (`/media/<heš>/…?ts=`), pa stara adresa vraća 404. Izvor koji pokazuje na
+ * SATA fajl dobija adresu iz zajedničkog registra dokumenata (`npm run sata:sync:documents`), po imenu
+ * fajla; adresa u članku je samo ključ. SATA fajl van registra se ne prepisuje, ali se prijavljuje.
+ */
+type SataRegistryEntry = { key: string; status: string; href?: string };
+const SATA_DOCUMENTS = new Map(
+  Object.values(JSON.parse(readFileSync(path.join(ROOT, "data/sata-sync/documents.generated.json"), "utf8")).documents as Record<string, SataRegistryEntry>)
+    .filter((entry) => entry.status === "DIRECT_PDF" && entry.href)
+    .map((entry) => [entry.key, entry.href as string]),
+);
+const SATA_MEDIA = /^https:\/\/www\.sata\.com\/media\//;
 const SOURCE_TYPES = new Set([
   "tehnicki-list",
   "bezbednosni-list",
@@ -230,6 +244,11 @@ for (const name of files) {
     if (!source.naziv) err(file, `izvor „${source.id}“ nema naziv`);
     if (!source.url && !source.dokument) err(file, `izvor „${source.id}“ nema url ni dokument`);
     if (source.url && !/^https:\/\//.test(source.url)) err(file, `izvor „${source.id}“: url mora biti https`);
+    if (source.url && SATA_MEDIA.test(source.url)) {
+      const current = SATA_DOCUMENTS.get(documentKeyOf(fileOf(source.url)));
+      if (current) source.url = current;
+      else warn(file, `izvor „${source.id}“: SATA fajl nije u registru dokumenata (${fileOf(source.url)})`);
+    }
     if (source.dokument) {
       const local = path.join(ROOT, "public", source.dokument);
       if (!source.dokument.startsWith("/documents/") || !existsSync(local)) {
@@ -388,7 +407,14 @@ for (const name of files) {
     istorijska: front.istorijska ?? null,
     body: body.trim(),
   };
-  const otisak = createHash("sha256").update(canonicalJson(rendered)).digest("hex").slice(0, 20);
+  // Odobrenje važi za tekst, ne za trenutnu adresu SATA fajla: u otisku SATA izvor nosi ključ dokumenta.
+  const fingerprinted = {
+    ...rendered,
+    izvori: izvori.map((source) =>
+      source.url && SATA_MEDIA.test(source.url) ? { ...source, url: `sata-dokument:${documentKeyOf(fileOf(source.url))}` } : source,
+    ),
+  };
+  const otisak = createHash("sha256").update(canonicalJson(fingerprinted)).digest("hex").slice(0, 20);
 
   if (odobrenje) {
     if (!odobrenje.odobrio || !odobrenje.datum || !odobrenje.otisak) {

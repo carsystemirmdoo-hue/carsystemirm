@@ -19,13 +19,13 @@ export type SistemiPageCopy = {
 
 export const SISTEMI_PAGE_COPY: Record<string, SistemiPageCopy> = {
   "boje-i-lakovi": {
-    lead: "Bazna boja, utapanje i završni lak iz istog sistema. Izaberite posao i dobićete redosled koraka; vrednosti za materijal uvek daje tehnički list proizvoda.",
+    lead: "Bazna boja, utapanje i završni lak iz istog sistema. Vrednosti za materijal daje tehnički list proizvoda.",
     jobsTitle: "Šta radite?",
     materialsTitle: "Materijali i alati",
     materialsLead: "Šta se koristi u kom delu posla i šta proveriti u listu.",
   },
   "priprema-i-abrazivi": {
-    lead: "Priprema podloge pre punioca, bazne boje i laka. Izaberite posao i podlogu; granulacije i vreme sušenja dolaze iz tehničkog lista materijala.",
+    lead: "Priprema podloge pre punioca, bazne boje i laka. Granulacije i vreme sušenja dolaze iz tehničkog lista materijala.",
     jobsTitle: "Šta radite?",
     materialsTitle: "Izbor abraziva",
     materialsLead: "Diskovi, blokovi, flis i paste za matiranje: kada se koristi koji.",

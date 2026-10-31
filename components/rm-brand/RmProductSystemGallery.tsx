@@ -83,8 +83,8 @@ export function RmProductSystemGallery({
           </h2>
         </div>
         <p>
-          Izaberite liniju ili seriju da vidite centralni proizvod, pomoćne
-          procesne grupe i njihovo mesto u kompletnom toku.
+          Centralni proizvod svake linije, pomoćne procesne grupe i njihovo
+          mesto u kompletnom toku.
         </p>
       </div>
 

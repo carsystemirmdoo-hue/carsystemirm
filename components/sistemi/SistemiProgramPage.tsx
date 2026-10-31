@@ -125,8 +125,7 @@ function PaintSystemsSection({ products }: { products: CarsystemProduct[] }) {
           Sistemi boja i lakova u katalogu
         </h2>
         <p className={styles.sectionLead}>
-          Sistemi čiji su proizvodi u našem katalogu. Namena je prepisana iz tehničkog lista proizvođača; detalje za rad daje list
-          konkretnog proizvoda.
+          Namena prema tehničkom listu proizvođača; detalje za rad daje list konkretnog proizvoda.
         </p>
       </div>
       <ul className={styles.systems}>

@@ -228,7 +228,7 @@
       "title": "Priprema postojećeg premaza za naredni sloj",
       "lead": "Zdrav stari lak se ne skida do lima: opere se, odmasti, matira i ponovo odmasti, pa postaje podloga za punilac, baznu boju ili lak. Granulaciju daje tehnički list materijala koji ide preko.",
       "choice": {
-        "question": null,
+        "question": "Šta se lakira",
         "options": [
           {
             "id": "ceo",
@@ -383,9 +383,9 @@
       "label": "Uklanjanje starog premaza",
       "desc": "Skidanje boje do podloge ili do zdravog sloja",
       "title": "Uklanjanje starog premaza",
-      "lead": "Premaz se skida samo tamo gde više nije dobra podloga. Način skidanja i priprema posle njega zavise od podloge ispod — izaberite je iznad, koraci se menjaju.",
+      "lead": "Premaz se skida samo tamo gde više nije dobra podloga. Način skidanja i priprema posle njega zavise od podloge ispod.",
       "choice": {
-        "question": null,
+        "question": "Podloga",
         "options": [
           {
             "id": "celik",

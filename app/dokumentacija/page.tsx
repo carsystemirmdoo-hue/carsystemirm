@@ -19,24 +19,6 @@ export const metadata: Metadata = pageMetadata({
   imageAlt: "Katalog i tehnički listovi",
 });
 
-const GUIDE: { type: LibraryDocType; question: string; answer: string }[] = [
-  {
-    type: "tds",
-    question: "Kako se materijal meša, nanosi i suši?",
-    answer: "Tehnički list: odnos mešanja, dizna i pritisak, broj slojeva, vreme odzračivanja i sušenja.",
-  },
-  {
-    type: "sds",
-    question: "Koje su opasnosti i koja zaštitna oprema treba?",
-    answer: "Bezbednosni list: opasnosti, rukovanje, skladištenje i lična zaštitna oprema.",
-  },
-  {
-    type: "uputstvo",
-    question: "Kako se koristi i održava alat ili uređaj?",
-    answer: "Uputstvo proizvođača: sklapanje, rad, čišćenje i rezervni delovi.",
-  },
-];
-
 export default function DokumentacijaPage() {
   const library = getDocumentLibrary();
   const typeCounts = (Object.keys(LIBRARY_TYPE_LABELS) as LibraryDocType[])
@@ -92,23 +74,6 @@ export default function DokumentacijaPage() {
               Katalozi brendova su i na stranici <Link className={styles.textLink} href="/katalozi">Katalozi i dokumentacija</Link>.
             </p>
           </header>
-
-          <section aria-labelledby="vodic-naslov" className={styles.section}>
-            <div className={styles.sectionHeader}>
-              <p className={styles.sectionKicker}>Pomoć</p>
-              <h2 className={styles.sectionTitle} id="vodic-naslov">
-                Koji dokument mi treba?
-              </h2>
-            </div>
-            <ul className={styles.systems}>
-              {GUIDE.map((entry) => (
-                <li className={styles.system} key={entry.type}>
-                  <h3 className={styles.systemName}>{entry.question}</h3>
-                  <p className={styles.systemPurpose}>{entry.answer}</p>
-                </li>
-              ))}
-            </ul>
-          </section>
 
           <section aria-labelledby="dokumenti-naslov" className={styles.section} id="dokumenti">
             <div className={styles.sectionHeader}>

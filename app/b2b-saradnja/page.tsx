@@ -50,7 +50,7 @@ export default function B2BSaradnjaPage() {
               postojeći kupci se prijavljuju u portal.
             </p>
             <div className={styles.actions}>
-              <a className={`${styles.primaryButton} cs-cta`} data-cta-fill="red" href="#forma">
+              <a className={`${styles.primaryButton} cs-cta`} data-cta-fill="red" href="#ko-ste">
                 <span>Predložite saradnju</span>
               </a>
               <Link className={`${styles.secondaryButton} cs-cta`} data-cta-on="theme" href="/prijava">

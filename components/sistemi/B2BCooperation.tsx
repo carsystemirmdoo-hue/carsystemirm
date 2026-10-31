@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { InquiryForm } from "./InquiryForm";
 import styles from "./Sistemi.styles";
 
@@ -34,14 +34,31 @@ const SEGMENTS = [
 ] as const;
 
 export function B2BCooperation({ email, emailHref }: { email: string; emailHref: string }) {
-  const [segmentId, setSegmentId] = useState<(typeof SEGMENTS)[number]["id"]>("radionica");
-  const segment = SEGMENTS.find((item) => item.id === segmentId) ?? SEGMENTS[0];
+  const [segmentId, setSegmentId] = useState<(typeof SEGMENTS)[number]["id"] | null>(null);
+  const segment = SEGMENTS.find((item) => item.id === segmentId);
+  const formRef = useRef<HTMLElement>(null);
+  const [prepared, setPrepared] = useState(false);
+
+  function choose(id: (typeof SEGMENTS)[number]["id"]) {
+    const first = segmentId === null;
+    setSegmentId(id);
+    setPrepared(false);
+    if (!first) return;
+    window.requestAnimationFrame(() => {
+      const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      formRef.current?.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "start" });
+    });
+  }
 
   return (
     <>
       <section aria-labelledby="ko-ste-naslov" className={styles.section} id="ko-ste">
+        <ol aria-label="Koraci" className={styles.stepper}>
+          <li data-state={segment ? "done" : "current"}>Vrsta firme</li>
+          <li data-state={prepared ? "done" : segment ? "current" : undefined}>Podaci</li>
+          <li data-state={prepared ? "current" : undefined}>Slanje iz Vašeg programa za e-poštu</li>
+        </ol>
         <div className={styles.sectionHeader}>
-          <p className={styles.sectionKicker}>Vrsta firme</p>
           <h2 className={styles.sectionTitle} id="ko-ste-naslov">
             Ko ste?
           </h2>
@@ -50,66 +67,62 @@ export function B2BCooperation({ email, emailHref }: { email: string; emailHref:
           <legend className={styles.visuallyHidden}>Vrsta firme</legend>
           {SEGMENTS.map((item) => (
             <label className={styles.segment} key={item.id}>
-              <input checked={segmentId === item.id} name="vrsta-firme" onChange={() => setSegmentId(item.id)} type="radio" value={item.id} />
+              <input checked={segmentId === item.id} name="vrsta-firme" onChange={() => choose(item.id)} type="radio" value={item.id} />
               <span className={styles.segmentLabel}>{item.label}</span>
               <span className={styles.segmentDesc}>{item.desc}</span>
             </label>
           ))}
         </fieldset>
-        <div className={`${styles.panel} ${styles.tabPanel}`}>
-          <div className={styles.columns}>
-            <div>
-              <h3 className={styles.columnTitle}>Šta da pripremite</h3>
-              <ul className={styles.bullets}>
-                {segment.prepare.map((line) => (
-                  <li key={line}>{line}</li>
-                ))}
-              </ul>
-            </div>
-            <div>
-              <h3 className={styles.columnTitle}>Prvi korak</h3>
-              <p className={styles.stepWhat}>Pošaljite predlog sa ovim podacima kroz formular ispod. Uslove saradnje dogovarate sa timom.</p>
-            </div>
-            <div>
-              <h3 className={styles.columnTitle}>Program</h3>
-              <p className={styles.stepWhat}>
-                Boje i lakovi, priprema i abrazivi, pištolji i oprema, poliranje i potrošni materijal: proizvodi su u{" "}
-                <a className={styles.textLink} href="/katalog">
-                  katalogu
-                </a>
-                , a dokumenti proizvođača u{" "}
-                <a className={styles.textLink} href="/dokumentacija">
-                  biblioteci
-                </a>
-                .
-              </p>
-            </div>
-          </div>
-        </div>
       </section>
 
-      <section aria-labelledby="forma-naslov" className={styles.section} id="forma">
-        <div className={`${styles.panel} ${styles.formPanel}`}>
-          <div className={styles.sectionHeader}>
-            <p className={styles.sectionKicker}>Predlog saradnje</p>
-            <h2 className={styles.sectionTitle} id="forma-naslov">
-              Recite nam nešto o firmi
-            </h2>
+      {segment ? (
+        <section aria-labelledby="forma-naslov" className={styles.section} id="forma" ref={formRef}>
+          <div className={`${styles.panel} ${styles.formPanel}`}>
+            <div className={styles.sectionHeader}>
+              <p className={styles.sectionKicker}>{segment.label}</p>
+              <h2 className={styles.sectionTitle} id="forma-naslov">
+                Recite nam nešto o firmi
+              </h2>
+              <div>
+                <h3 className={styles.columnTitle}>Pripremite</h3>
+                <ul className={styles.bullets}>
+                  {segment.prepare.map((line) => (
+                    <li key={line}>{line}</li>
+                  ))}
+                </ul>
+              </div>
+              <p className={styles.formNote}>Uslove saradnje dogovarate sa timom.</p>
+            </div>
+            <InquiryForm
+              companyRequired
+              context={[["Vrsta firme", segment.label]]}
+              email={email}
+              emailHref={emailHref}
+              extraField={segment.field}
+              key={segment.id}
+              messageLabel="Predlog ili pitanje"
+              messagePlaceholder="Šta predlažete i šta Vam je potrebno"
+              onPrepared={() => setPrepared(true)}
+              submitLabel="Pripremite predlog"
+              topic="B2B saradnja"
+            />
           </div>
-          <InquiryForm
-            companyRequired
-            context={[["Vrsta firme", segment.label]]}
-            email={email}
-            emailHref={emailHref}
-            extraField={segment.field}
-            key={segment.id}
-            messageLabel="Predlog ili pitanje"
-            messagePlaceholder="Šta predlažete i šta Vam je potrebno"
-            submitLabel="Pripremite predlog"
-            topic="B2B saradnja"
-          />
-        </div>
-      </section>
+        </section>
+      ) : (
+        <section aria-label="Predlog saradnje" className={styles.section} id="forma" ref={formRef}>
+          <p className={styles.formNote}>
+            Proizvodi su u{" "}
+            <a className={styles.textLink} href="/katalog">
+              katalogu
+            </a>
+            , a dokumenti proizvođača u{" "}
+            <a className={styles.textLink} href="/dokumentacija">
+              biblioteci
+            </a>
+            .
+          </p>
+        </section>
+      )}
     </>
   );
 }

@@ -69,6 +69,7 @@ export function SistemiProgramPage({
           materialsTitle={copy?.materialsTitle ?? "Materijali"}
           problems={content.problems}
           programName={program.name}
+          programSlug={program.slug}
           references={references}
           scales={content.scales}
         />

@@ -14,7 +14,7 @@ const ROOT = path.resolve(import.meta.dirname, "../..");
 const DIR = path.join(ROOT, "content/sistemi");
 const izvori = JSON.parse(readFileSync(path.join(DIR, "izvori.json"), "utf8")) as Record<string, { naziv: string; url?: string; dokument?: string }>;
 const pages = readdirSync(DIR)
-  .filter((name) => name.endsWith(".json") && !["izvori.json", "slike-bez-potvrde-prava.json"].includes(name))
+  .filter((name) => name.endsWith(".json") && !["izvori.json", "slike-bez-potvrde-prava.json", "vazno.json"].includes(name))
   .map((name) => ({ name, data: JSON.parse(readFileSync(path.join(DIR, name), "utf8")) }));
 
 function walk(value: unknown, visit: (record: Record<string, unknown>) => void) {

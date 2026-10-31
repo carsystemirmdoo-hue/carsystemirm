@@ -72,3 +72,82 @@
     grid-template-columns: minmax(0, 1fr) auto;
   }
 }
+
+/* Vodič kroz posao: kartice u redu, pregled posla uz korake od 1100 px. */
+@media (min-width: 901px) {
+  .jobCards.jobCards {
+    grid-template-columns: repeat(var(--job-cols-md, 2), minmax(0, 1fr));
+  }
+
+  .questionOptions.questionOptions {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  }
+}
+
+@media (min-width: 1100px) {
+  .guide.guide {
+    grid-template-columns: minmax(0, 1fr) 300px;
+    align-items: start;
+  }
+
+  .guide.guide[data-waiting] {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .guideMain.guideMain {
+    grid-column: 1;
+    grid-row: 1;
+  }
+
+  .gAsideProductsBlock.gAsideProductsBlock,
+  .gAsideBody.gAsideBody {
+    display: grid;
+  }
+
+  .gOverviewToggle.gOverviewToggle {
+    display: none;
+  }
+
+  .guideAside.guideAside {
+    grid-column: 2;
+    grid-row: 1;
+    position: sticky;
+    top: 96px;
+    max-height: calc(100vh - 120px);
+    overflow: auto;
+  }
+}
+
+/* Biblioteka: pretraga i brend u redu, vrste u četiri kolone, dokument u jednom redu tabele. */
+@media (min-width: 901px) {
+  .libSearchRow.libSearchRow {
+    grid-template-columns: minmax(0, 2fr) minmax(220px, 1fr);
+  }
+
+  .libGroups.libGroups {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .libGroups.libGroups > legend {
+    grid-column: 1 / -1;
+  }
+
+  .docItem.docItem {
+    grid-template-columns: 170px minmax(0, 1fr) 150px auto;
+    align-items: start;
+    gap: 16px;
+    padding: 12px 16px;
+  }
+}
+
+@media (min-width: 901px) {
+  .hubGrid.hubGrid {
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  }
+}
+
+@media (min-width: 1200px) {
+  .jobCards.jobCards {
+    grid-template-columns: repeat(var(--job-cols, 4), minmax(0, 1fr));
+  }
+}

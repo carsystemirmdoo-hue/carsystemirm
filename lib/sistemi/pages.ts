@@ -1,11 +1,18 @@
 import { SYSTEM_GROUPS } from "@/components/layout/navigation-data";
 import type { SourceRef } from "@/lib/sistemi/types";
 
+export const SISTEMI_HUB_HREF = "/sistemi-i-programi";
+
 /** Sedam stavki menija „Sistemi i programi“, istim redom kao u zaglavlju. */
-export function getSistemiNavLinks(): { href: string; title: string }[] {
+export function getSistemiPageLinks(): { href: string; title: string }[] {
   return SYSTEM_GROUPS.flatMap((group) => group.links)
     .filter((link) => !link.href.startsWith("/kontakt"))
     .map((link) => ({ href: link.href, title: link.title }));
+}
+
+/** Podmeni: pregled celine i sedam stranica. */
+export function getSistemiNavLinks(): { href: string; title: string }[] {
+  return [{ href: SISTEMI_HUB_HREF, title: "Pregled" }, ...getSistemiPageLinks()];
 }
 
 export type SistemiPageCopy = {

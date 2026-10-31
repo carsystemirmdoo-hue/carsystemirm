@@ -19,7 +19,7 @@
     "test:authz": "node --test lib/authz/*.test.mjs app/portal/dozvole/actions.test.mjs app/portal/kupci/veze/actions.test.mjs app/portal/kupci/kontakti/actions.test.mjs app/portal/kupci/nalozi/actions.test.mjs",
     "test:sidebar": "node --test components/portal/*.test.mjs lib/portal/notificationKindLabels.test.mjs",
     "test:audit": "node --test lib/audit/*.test.mjs",
-    "test:sistemi": "tsx --test --tsconfig db/integration/tsconfig.test.json lib/sistemi/content.test.mts",
+    "test:sistemi": "tsx --test --tsconfig db/integration/tsconfig.test.json lib/sistemi/content.test.mts lib/sistemi/guide.test.mts",
     "test:technical-facts": "node --test lib/technical-facts-display.test.mjs",
     "test:legacy-css": "node --test lib/ui/responsiveStyles.test.mjs && node --test scripts/postcss/legacy-browser-fallbacks.test.mjs",
     "test:catalog": "node --test components/catalog/catalogInfiniteScroll.test.mjs components/catalog/catalogCardReveal.test.mjs lib/catalogRollerColor.test.mjs lib/productTaxonomy.test.mjs lib/productPaintRule.test.mjs lib/productNamedColors.test.mjs",

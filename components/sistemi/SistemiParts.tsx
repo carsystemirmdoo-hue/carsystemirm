@@ -139,10 +139,13 @@ export function ScaleView({
   scale,
   choice,
   sources,
+  showFooter = true,
 }: {
   scale: SistemiScale;
   choice?: string;
   sources: Record<string, ResolvedSource>;
+  /** Napomena ispod skale; vodič je prikazuje vidljivo uz korak, pa je ovde ne ponavlja. */
+  showFooter?: boolean;
 }) {
   const items = scale.items.filter((item) => !choice || !item.pods || item.pods.includes(choice));
   if (items.length === 0) return null;
@@ -182,7 +185,7 @@ export function ScaleView({
           ))}
         </span>
       ) : null}
-      {scale.footer ? <p className={styles.scaleFooter}>{scale.footer}</p> : null}
+      {showFooter && scale.footer ? <p className={styles.scaleFooter}>{scale.footer}</p> : null}
     </figure>
   );
 }

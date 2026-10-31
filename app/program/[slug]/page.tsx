@@ -2,6 +2,7 @@ import { countCatalogCardsForProgramSlugs } from "@/lib/catalog-listing";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { ProgramPage } from "@/components/program/ProgramPage";
+import { SistemiProgramPage } from "@/components/sistemi/SistemiProgramPage";
 import {
   getAllCarsystemBrands,
   getAllPublicProgramGroups,
@@ -17,6 +18,7 @@ import type { BrandReference } from "@/lib/carsystem-data";
 import type { RefinishPhase } from "@/lib/carsystem-data";
 import { breadcrumbJsonLd, jsonLd, programJsonLd } from "@/lib/seo";
 import { buildProgramMetadata } from "@/lib/seo/metadata-builders";
+import { getSistemiContent } from "@/lib/sistemi/content";
 
 type ProgramRouteProps = {
   params: Promise<{ slug: string }>;
@@ -68,6 +70,7 @@ export default async function ProgramRoute({ params }: ProgramRouteProps) {
     (first, second) =>
       orderedBrandSlugs.indexOf(first.brandSlug) - orderedBrandSlugs.indexOf(second.brandSlug),
   );
+  const content = getSistemiContent(program.slug);
   const phases = program.phaseSlugs
     .map((phaseSlug) => getRefinishPhaseBySlug(phaseSlug))
     .filter((phase): phase is RefinishPhase => Boolean(phase));
@@ -88,16 +91,26 @@ export default async function ProgramRoute({ params }: ProgramRouteProps) {
         type="application/ld+json"
         dangerouslySetInnerHTML={jsonLd(programJsonLd(program))}
       />
-      <ProgramPage
-        brandBySlug={new Map(getAllCarsystemBrands().map((brand) => [brand.slug, brand]))}
-        brands={brands}
-        phaseBySlug={new Map(refinishPhases.map((phase) => [phase.slug, phase]))}
-        phases={phases}
-        products={orderedProducts.map(toProductListingProduct)}
-        program={program}
-        catalogCardCount={countCatalogCardsForProgramSlugs(program.internalProgramSlugs)}
-        programBySlug={new Map(programGroups.map((item) => [item.slug, item]))}
-      />
+      {content ? (
+        <SistemiProgramPage
+          brands={brands}
+          catalogCardCount={countCatalogCardsForProgramSlugs(program.internalProgramSlugs)}
+          content={content}
+          program={program}
+          programProducts={programProducts}
+        />
+      ) : (
+        <ProgramPage
+          brandBySlug={new Map(getAllCarsystemBrands().map((brand) => [brand.slug, brand]))}
+          brands={brands}
+          phaseBySlug={new Map(refinishPhases.map((phase) => [phase.slug, phase]))}
+          phases={phases}
+          products={orderedProducts.map(toProductListingProduct)}
+          program={program}
+          catalogCardCount={countCatalogCardsForProgramSlugs(program.internalProgramSlugs)}
+          programBySlug={new Map(programGroups.map((item) => [item.slug, item]))}
+        />
+      )}
     </>
   );
 }

@@ -243,13 +243,13 @@ export const SYSTEM_GROUPS: NavigationGroup[] = [
     links: [
       // „Tehnička podrška“ je u meniju „Podrška“ i u podnožju (odluka vlasnika 2026-10-15).
       {
-        href: "/katalog",
+        href: "/dokumentacija",
         title: "Katalog i tehnički listovi",
-        description: "Pronađite proizvod i dostupna dokumenta na njegovoj stranici.",
+        description: "Tehnički i bezbednosni listovi, uputstva i katalozi proizvođača.",
         icon: "documents",
       },
       {
-        href: "/kontakt?tema=b2b",
+        href: "/b2b-saradnja",
         title: "B2B saradnja",
         description: "Razgovarajte sa timom o profesionalnoj saradnji.",
         icon: "contact",

@@ -1,0 +1,855 @@
+{
+  "program": "poliranje",
+  "jobs": [
+    {
+      "id": "novi",
+      "label": "Poliranje novog laka",
+      "desc": "Trunje, curenje i kora posle lakiranja",
+      "title": "Poliranje novog laka posle lakiranja",
+      "lead": "Novi lak se polira tek kada prođe vreme iz njegovog tehničkog lista. Redosled je po pravilu isti: brušenjem se skida ono što pasta ne može, zatim abrazivna pasta, provera i, gde treba, završna pasta.",
+      "choice": {
+        "question": "Šta uklanjate",
+        "options": [
+          {
+            "id": "trunje",
+            "label": "Pojedinačno trunje"
+          },
+          {
+            "id": "kora",
+            "label": "Narandžina kora ili više grešaka"
+          }
+        ]
+      },
+      "steps": [
+        {
+          "id": "vreme",
+          "title": "Sačekajte vreme za poliranje",
+          "what": "Polirajte tek kada prođe vreme iz tehničkog lista laka i kada se deo ohladi posle sušenja u kabini.",
+          "detail": "Vreme zavisi od laka i temperature: za Carsystem CC.26 ECO-X list navodi 3–4 h na 20 °C ili 15 min na 60 °C, a za Carbo Clear Plus sušen na 60 °C čekanje do 1 h da se lak ohladi.",
+          "material": "Tehnički list bezbojnog laka",
+          "sources": [
+            {
+              "doc": "cs-cc26-tds",
+              "strana": 2
+            },
+            {
+              "doc": "cs-carbo-clear-tds",
+              "strana": 3
+            }
+          ],
+          "guides": [
+            "poliranje-posle-lakiranja-osnove"
+          ]
+        },
+        {
+          "id": "pregled",
+          "title": "Pregledajte pod jakim svetlom",
+          "what": "Očistite površinu i pod jakim, ravnomernim svetlom odredite šta treba ukloniti: trunje, narandžinu koru, curenje ili samo blage tragove.",
+          "detail": "Od toga zavisi da li brusite samo mesto greške ili celu zonu.",
+          "material": "Jako svetlo, mikrofiber krpa",
+          "products": [
+            "carsystem-microfiber-x300-duo"
+          ],
+          "guides": [
+            "prasina-i-trunje-u-laku",
+            "narandzina-kora"
+          ]
+        },
+        {
+          "id": "brusenje",
+          "title": "Izravnajte trunje lokalno",
+          "what": "Vrh čestice izravnajte malim filmskim listićem na tvrdom bloku, kratko i sa malo pritiska, samo na mestu greške.",
+          "detail": "Cilj je skinuti samo deo koji viri, a ne stanjiti lak oko njega. Laka nema mnogo: za CC.26 ECO-X list navodi 50–60 µm suvog sloja.",
+          "material": "Filmski listić ili rozetni disk na tvrdom bloku",
+          "pod": {
+            "kora": {
+              "title": "Mokro izbrusite zonu",
+              "what": "Navlažite abraziv i površinu i brusite ravnomerno, mašinom sa mekom podloškom ili ručno na bloku. Ivice i rebra ostavite za kraj.",
+              "detail": "Pasta ne ravna narandžinu koru; ravna je brušenje. Za mokro brušenje laka Carsystem nudi Jupiter Soft H₂O u P2500, P3000 i P4000, uz vodu za brušenje SW20.",
+              "material": "Filmski disk za mokro brušenje, voda za brušenje",
+              "products": [
+                "carsystem-proflex-jupiter-soft-h2o-152-mm",
+                "carsystem-sanding-water-sw20"
+              ],
+              "sources": [
+                {
+                  "doc": "cs-jupiter-h2o-tds",
+                  "strana": 1
+                }
+              ]
+            }
+          },
+          "products": [
+            "carsystem-proflex-mercury",
+            "carsystem-proflex-mercury-sanding-block",
+            "carsystem-proflex-pluto"
+          ],
+          "sources": [
+            {
+              "doc": "cs-cc26-tds",
+              "strana": 2
+            }
+          ],
+          "guides": [
+            "uklanjanje-trunja-iz-laka"
+          ]
+        },
+        {
+          "id": "finiji",
+          "title": "Završite finijom granulacijom",
+          "what": "Prelazite na finiju granulaciju dok trag ne bude onaj koji pasta uklanja. Brušeno mesto treba da bude ujednačeno mat, bez sjajnih tačaka.",
+          "detail": "Što je završni trag finiji, posao paste je kraći. Za UV Clear Carsystem navodi završno brušenje P2000, pa P3000, u dva koraka.",
+          "material": "Finija granulacija istog abraziva",
+          "sources": [
+            {
+              "doc": "cs-uv-clear-tds",
+              "strana": 1
+            }
+          ],
+          "guides": [
+            "mokro-brusenje-laka-pre-poliranja"
+          ]
+        },
+        {
+          "id": "abrazivna",
+          "title": "Abrazivna pasta",
+          "what": "Izaberite pastu čiji tehnički list odgovara poslednjem tragu brušenja i radite sunđerom i u opsegu brzine iz tog lista.",
+          "detail": "Svaka pasta ima svoj trag, sunđer i brzinu. Brzina se zato čita za svaku pastu posebno.",
+          "material": "Abrazivna pasta i tvrđi sunđer koji list preporučuje",
+          "scale": true,
+          "products": [
+            "carsystem-polish-c-10-strong",
+            "carsystem-finish-quadra-pad-c-10",
+            "carsystem-compound-x1500-hc",
+            "carsystem-polishing-pad-x1500"
+          ],
+          "guides": [
+            "abrazivna-i-zavrsna-pasta",
+            "sunderi-za-poliranje-izbor",
+            "carsystem-x-serija-za-poliranje"
+          ]
+        },
+        {
+          "id": "provera",
+          "title": "Proverite površinu",
+          "what": "Uklonite ostatke paste kontrolnom penom i pogledajte pod svetlom iz više uglova.",
+          "detail": "Ostaci paste mogu da prikriju tragove. C-99 prema proizvođaču uklanja masne i voštane ostatke i čini preostale tragove vidljivim.",
+          "material": "Kontrolna pena, mikrofiber krpa",
+          "products": [
+            "carsystem-finish-control-foam-c-99"
+          ],
+          "guides": [
+            "hologrami-posle-poliranja"
+          ]
+        },
+        {
+          "id": "zavrsna",
+          "title": "Završna pasta protiv holograma",
+          "what": "Fine tragove i holograme uklonite finom pastom i mekšim sunđerom. Na tamnim bojama to je redovan korak; na svetlim procenite pod svetlom.",
+          "detail": "Carsystem u katalogu navodi C-30 kao naredni korak posle abrazivnih pasta na tamnim bojama. Na svetlim lakovima X1500 prema proizvođaču omogućava poliranje u jednom koraku.",
+          "material": "Završna pasta i mekši sunđer",
+          "products": [
+            "carsystem-polish-c-30-finish",
+            "carsystem-finish-sandwich-pad-c-30",
+            "carsystem-polish-x8000-ah",
+            "carsystem-polishing-pad-x8000"
+          ],
+          "guides": [
+            "hologrami-posle-poliranja"
+          ]
+        }
+      ],
+      "products": [
+        "carsystem-microfiber-x300-duo",
+        "carsystem-proflex-mercury",
+        "carsystem-proflex-mercury-sanding-block",
+        "carsystem-proflex-jupiter-soft-h2o-152-mm",
+        "carsystem-sanding-water-sw20",
+        "carsystem-polish-c-10-strong",
+        "carsystem-finish-quadra-pad-c-10",
+        "carsystem-compound-x1500-hc",
+        "carsystem-finish-control-foam-c-99",
+        "carsystem-polish-c-30-finish",
+        "carsystem-finish-sandwich-pad-c-30",
+        "carsystem-polish-x8000-ah"
+      ],
+      "guides": [
+        "poliranje-posle-lakiranja-osnove",
+        "uklanjanje-trunja-iz-laka",
+        "mokro-brusenje-laka-pre-poliranja",
+        "abrazivna-i-zavrsna-pasta",
+        "sunderi-za-poliranje-izbor",
+        "hologrami-posle-poliranja",
+        "carsystem-x-serija-za-poliranje"
+      ]
+    },
+    {
+      "id": "stari",
+      "label": "Vraćanje sjaja starom laku",
+      "desc": "Izbledeo lak i tragovi upotrebe",
+      "title": "Vraćanje sjaja starom laku",
+      "lead": "Sjaj izbledelog laka može da se vrati poliranjem ako je oštećen samo tanak površinski sloj i ako laka ima dovoljno. Poliranje ne pomaže kada lak puca, ljušti se, duboko kreči ili je probijen.",
+      "choice": {
+        "question": "Boja laka",
+        "options": [
+          {
+            "id": "svetla",
+            "label": "Svetla boja"
+          },
+          {
+            "id": "tamna",
+            "label": "Tamna boja"
+          }
+        ]
+      },
+      "steps": [
+        {
+          "id": "pranje",
+          "title": "Operite i očistite deo",
+          "what": "Operite i osušite deo. Ako je površina posle pranja hrapava pod prstima, prvo ide glina za lak.",
+          "detail": "Prljavština i film sa površine izgledaju kao izbledeo lak. Za Refinish 1 Carsystem traži površinu bez prašine i ostataka paste.",
+          "material": "Sredstvo za pranje, glina za lak po potrebi",
+          "products": [
+            "carsystem-finish-clay"
+          ],
+          "guides": [
+            "glina-za-lak-pre-poliranja"
+          ]
+        },
+        {
+          "id": "pojava",
+          "title": "Prepoznajte šta vidite",
+          "what": "Beličast prah na prstu obično ukazuje na kredanje, a žuta nijansa na svetlim bojama je druga pojava.",
+          "detail": "Kada lak puca, ljušti se, duboko kreči ili je probijen, poliranje ne pomaže i deo se ponovo laki.",
+          "material": "Pregled pod svetlom",
+          "guides": [
+            "kredanje-starog-laka"
+          ]
+        },
+        {
+          "id": "proba",
+          "title": "Probna površina",
+          "what": "Ispolirajte prvo mali deo, na primer kvadrat na haubi, i pogledajte rezultat pod jakim svetlom.",
+          "detail": "Tako vidite da li sjaj uopšte može da se vrati i koliko je koraka potrebno.",
+          "material": "Pasta i sunđer koje planirate",
+          "guides": [
+            "vracanje-sjaja-izbledelom-laku"
+          ]
+        },
+        {
+          "id": "abrazivna",
+          "title": "Abrazivna pasta za stari lak",
+          "what": "Izaberite pastu koja je u tehničkom listu namenjena starom laku i radite u opsegu brzine iz lista. Smanjite pritisak čim površina prestane da bude mutna.",
+          "detail": "Za Refinish 1 Carsystem navodi mek i star lak, jako istrošene i oksidisane površine, 1500–2400 o/min, veoma mek sunđer Finish Foam White i tanjir Finish Back Pad.",
+          "material": "Pasta za star lak, mek sunđer, tanjir",
+          "scale": true,
+          "products": [
+            "carsystem-refinish-1",
+            "carsystem-finish-foam-white-ah",
+            "carsystem-finish-back-pad"
+          ],
+          "sources": [
+            {
+              "doc": "cs-refinish1-tds",
+              "strana": 2
+            }
+          ],
+          "guides": [
+            "abrazivna-i-zavrsna-pasta"
+          ]
+        },
+        {
+          "id": "provera",
+          "title": "Proverite površinu",
+          "what": "Uklonite ostatke paste kontrolnom penom i pogledajte pod svetlom.",
+          "detail": "Ostaci paste mogu da sakriju preostalo zamućenje.",
+          "material": "Kontrolna pena, mikrofiber krpa",
+          "products": [
+            "carsystem-finish-control-foam-c-99"
+          ],
+          "guides": [
+            "hologrami-posle-poliranja"
+          ]
+        },
+        {
+          "id": "zavrsna",
+          "title": "Završna pasta",
+          "what": "Na svetloj boji procenite pod svetlom da li je završni korak potreban.",
+          "detail": "Završni korak protiv holograma Carsystem vezuje posebno za tamne boje.",
+          "material": "Završna pasta i sunđer koji list preporučuje",
+          "pod": {
+            "tamna": {
+              "what": "Na tamnoj boji uklonite holograme iz prvog koraka završnom pastom.",
+              "detail": "C.A.R.FIT BLACK LABEL Finishing Compound namenjuje korišćenom laku: lakim ogrebotinama, tragovima upotrebe i hologramima na tamnim bojama, uz srednje tvrd sunđer.",
+              "products": [
+                "carfit-finishing-compound",
+                "carsystem-polish-c-30-finish",
+                "carsystem-finish-sandwich-pad-c-30"
+              ]
+            }
+          },
+          "products": [
+            "carsystem-polish-c-30-finish",
+            "carsystem-finish-sandwich-pad-c-30"
+          ],
+          "guides": [
+            "hologrami-posle-poliranja"
+          ]
+        },
+        {
+          "id": "zastita",
+          "title": "Zaštitite lak",
+          "what": "Nanesite vosak na suvu površinu bez prašine i obrišite ostatak mikrofiber krpom.",
+          "detail": "Za C-Wax C-80 Carsystem navodi nanošenje posle obrade abrazivnom ili polir pastom, na površinu hladniju od 30 °C, i brisanje posle 3–5 minuta.",
+          "material": "Zaštitni vosak, mikrofiber krpa",
+          "products": [
+            "carsystem-c-wax-c-80",
+            "carsystem-microfiber-x300-duo"
+          ],
+          "sources": [
+            {
+              "doc": "cs-c-wax-c80-tds",
+              "strana": 2
+            }
+          ],
+          "guides": [
+            "vracanje-sjaja-izbledelom-laku"
+          ]
+        }
+      ],
+      "products": [
+        "carsystem-finish-clay",
+        "carsystem-refinish-1",
+        "carsystem-finish-foam-white-ah",
+        "carsystem-finish-back-pad",
+        "carsystem-finish-control-foam-c-99",
+        "carsystem-polish-c-30-finish",
+        "carfit-finishing-compound",
+        "carsystem-c-wax-c-80"
+      ],
+      "guides": [
+        "vracanje-sjaja-izbledelom-laku",
+        "glina-za-lak-pre-poliranja",
+        "kredanje-starog-laka",
+        "abrazivna-i-zavrsna-pasta",
+        "hologrami-posle-poliranja"
+      ]
+    },
+    {
+      "id": "holo",
+      "label": "Hologrami i kružni tragovi",
+      "desc": "Završni korak posle abrazivne paste",
+      "title": "Uklanjanje holograma i kružnih tragova",
+      "lead": "Hologrami su fini kružni tragovi koje ostavljaju pasta, sunđer i pokret mašine. Uklanjaju se završnim korakom: finom pastom protiv holograma i mekim sunđerom.",
+      "steps": [
+        {
+          "id": "ciscenje",
+          "title": "Očistite i pregledajte",
+          "what": "Uklonite ostatke paste kontrolnom penom i gledajte pod jakim svetlom iz više uglova.",
+          "detail": "Ostaci paste prikrivaju tragove, pa se hologrami nekad pojave tek posle pranja ili brisanja.",
+          "material": "Kontrolna pena, mikrofiber krpa",
+          "products": [
+            "carsystem-finish-control-foam-c-99"
+          ]
+        },
+        {
+          "id": "uzrok",
+          "title": "Proverite uzrok",
+          "what": "Ravne linije znače trag brušenja koji nije uklonjen. Kružni tragovi znače izostavljen ili prekratak završni korak, pretvrd ili prljav sunđer ili prebrzo vođenu rotacionu mašinu.",
+          "detail": "Svaki uzrok traži drugu popravku, pa se proverava pre nego što se nastavi poliranje.",
+          "material": "Pregled pod svetlom",
+          "guides": [
+            "hologrami-posle-poliranja"
+          ]
+        },
+        {
+          "id": "zavrsna",
+          "title": "Završna pasta i meki sunđer",
+          "what": "Radite završnom pastom protiv holograma i mekim sunđerom koji preporučuje proizvođač paste, na celoj površini.",
+          "detail": "C-30 finish Carsystem namenjuje uklanjanju najfinijih ogrebotina, kružnih tragova i holograma na tamnim bojama, kao poslednji korak, uz Finish Sandwich Pad C-30.",
+          "material": "Završna pasta i mek sunđer",
+          "scale": true,
+          "products": [
+            "carsystem-polish-c-30-finish",
+            "carsystem-finish-sandwich-pad-c-30",
+            "carsystem-polish-x8000-ah",
+            "carsystem-polishing-pad-x8000"
+          ],
+          "guides": [
+            "abrazivna-i-zavrsna-pasta"
+          ]
+        },
+        {
+          "id": "sundjer",
+          "title": "Čist sunđer za završni korak",
+          "what": "Za završni korak koristite čist sunđer, ne onaj od abrazivnog koraka.",
+          "detail": "Prljav ili zasićen sunđer je jedan od mogućih uzroka holograma. Za sunđere X serije Carsystem navodi čišćenje izduvavanjem komprimovanim vazduhom, bez vode i sapuna.",
+          "material": "Poseban sunđer za završnu pastu",
+          "products": [
+            "carsystem-polishing-pad-x8000"
+          ],
+          "guides": [
+            "ciscenje-i-vek-sundjera"
+          ]
+        },
+        {
+          "id": "masina",
+          "title": "Vodite mašinu mirno",
+          "what": "Ekscentarska mašina radi blaže. Rotacionu vodite stalno u pokretu, sa umerenim pritiskom i bez zadržavanja na jednom mestu.",
+          "detail": "RUPES navodi da rotacioni pokret pri nepravilnoj upotrebi može da izazove kružne tragove i pregrevanje.",
+          "material": "Ekscentarska ili rotaciona polirka",
+          "products": [
+            "carsystem-rupes-polishing-machine-lhr15",
+            "carsystem-rupes-polishing-machine-lh19e"
+          ],
+          "guides": [
+            "rotaciona-ili-ekscentarska-polir-masina"
+          ]
+        },
+        {
+          "id": "kraj",
+          "title": "Ponovite proveru",
+          "what": "Ponovo uklonite ostatke paste i pogledajte deo iz više uglova.",
+          "detail": "Tek posle brisanja se vidi da li su hologrami zaista uklonjeni.",
+          "material": "Kontrolna pena, mikrofiber krpa",
+          "products": [
+            "carsystem-finish-control-foam-c-99",
+            "carsystem-microfiber-x300-duo"
+          ],
+          "guides": [
+            "hologrami-posle-poliranja"
+          ]
+        }
+      ],
+      "products": [
+        "carsystem-finish-control-foam-c-99",
+        "carsystem-polish-c-30-finish",
+        "carsystem-finish-sandwich-pad-c-30",
+        "carsystem-polish-x8000-ah",
+        "carsystem-polishing-pad-x8000",
+        "carsystem-rupes-polishing-machine-lhr15",
+        "carsystem-rupes-polishing-machine-lh19e",
+        "carsystem-microfiber-x300-duo"
+      ],
+      "guides": [
+        "hologrami-posle-poliranja",
+        "abrazivna-i-zavrsna-pasta",
+        "sunderi-za-poliranje-izbor",
+        "rotaciona-ili-ekscentarska-polir-masina",
+        "ciscenje-i-vek-sundjera"
+      ]
+    },
+    {
+      "id": "mat",
+      "label": "Mat i satenski lak",
+      "desc": "Šta se sme, a šta ne",
+      "title": "Mat i satenski lak",
+      "lead": "Mat i satenski bezbojni lak se ne poliraju: poliranje podiže sjaj i ostavlja sjajnu mrlju koja se ne može vratiti u mat. Mat površina se čisti nežno, a greška se popravlja ponovnim lakiranjem dela.",
+      "steps": [
+        {
+          "id": "provera",
+          "title": "Proverite da li je lak mat ili satenski",
+          "what": "Ako je lak mat ili satenski, ne polirajte ga, ni lokalno.",
+          "detail": "Carsystem za svoj mat i svilenkasto mat lak navodi da se ne može polirati. Mesto bi postalo sjajnije od okoline.",
+          "material": "Tehnički list laka",
+          "guides": [
+            "poliranje-mat-laka"
+          ]
+        },
+        {
+          "id": "trunje",
+          "title": "Ne uklanjajte trunje poliranjem",
+          "what": "Trunje i tragovi u mat laku se ne uklanjaju brušenjem i poliranjem kao kod sjajnog laka.",
+          "detail": "R-M za C 2A93 i baslac za 40-620 navode da se prašina iz mat laka ne može ukloniti poliranjem, jer se menja stepen sjaja.",
+          "material": "Bez abraziva",
+          "guides": [
+            "poliranje-mat-laka"
+          ]
+        },
+        {
+          "id": "popravka",
+          "title": "Grešku popravlja novo lakiranje dela",
+          "what": "Oštećenje koje traži popravku rešava se lakiranjem celog dela.",
+          "detail": "baslac za 40-620 navodi da utapanje nije moguće jer debljina sloja u zoni prelaza menja sjaj, pa je lakiranje celog dela obavezno.",
+          "material": "Mat lak iz istog sistema",
+          "guides": [
+            "mat-i-polumat-lak"
+          ]
+        }
+      ],
+      "guides": [
+        "poliranje-mat-laka",
+        "mat-i-polumat-lak"
+      ]
+    }
+  ],
+  "scales": {
+    "novi": {
+      "title": "Pasta",
+      "question": "Kojom pastom nastavljate posle brušenja?",
+      "note": "Trag brušenja koji pasta uklanja, prema tehničkom listu",
+      "ticks": [
+        1000,
+        1200,
+        1500,
+        2000,
+        2500,
+        3000
+      ],
+      "footer": "Početna pasta mora da radi od poslednjeg traga brušenja. Završna pasta nije predviđena za grub trag: za C-30 list navodi trag P2500.",
+      "items": [
+        {
+          "id": "c10",
+          "name": "Carsystem Polish C-10 strong",
+          "text": "abrazivna pasta za svež lak; trag P1500; sunđer Finish Quadra Pad C-10. Izbegava se rad na direktnom suncu.",
+          "bars": [
+            [
+              "trag",
+              1500,
+              1500,
+              "a"
+            ]
+          ],
+          "source": {
+            "doc": "cs-c10-tds",
+            "strana": 1
+          }
+        },
+        {
+          "id": "c05",
+          "name": "Carsystem Polish C-05 cut",
+          "text": "ekstra gruba abrazivna; trag P1200–P1500; sunđer Polish Foam Green; 1500–2000 o/min rotaciono, 2000–10 000 o/min ekscentarski.",
+          "bars": [
+            [
+              "trag",
+              1200,
+              1500,
+              "a"
+            ]
+          ],
+          "source": {
+            "doc": "cs-c05-tds",
+            "strana": 1
+          }
+        },
+        {
+          "id": "c30",
+          "name": "Carsystem Polish C-30 finish (završna)",
+          "text": "završna, protiv holograma; trag P2500; Finish Sandwich Pad C-30.",
+          "bars": [
+            [
+              "trag",
+              2500,
+              2500,
+              "b"
+            ]
+          ],
+          "source": {
+            "doc": "cs-c30-tds",
+            "strana": 1
+          }
+        }
+      ]
+    },
+    "stari": {
+      "title": "Pasta",
+      "question": "Koja pasta je namenjena starom laku?",
+      "note": "Za koji lak je pasta i koji trag uklanja, prema tehničkom listu",
+      "ticks": [
+        1000,
+        1200,
+        1500,
+        2000,
+        2500,
+        3000
+      ],
+      "footer": "Nisu sve paste predviđene za isti lak. Pastu za svež lak ne prenosite na star i obrnuto bez provere u tehničkom listu.",
+      "items": [
+        {
+          "id": "refinish1",
+          "name": "Carsystem Refinish 1",
+          "text": "mek i star lak, jako istrošene i oksidisane površine; uklanja trag granulacije 1000 i finiji; 1500–2400 o/min, veoma mek sunđer Finish Foam White i tanjir Finish Back Pad.",
+          "bars": [
+            [
+              "od 1000",
+              1000,
+              1000,
+              "a"
+            ]
+          ],
+          "source": {
+            "doc": "cs-refinish1-tds",
+            "strana": 2
+          }
+        },
+        {
+          "id": "step1",
+          "name": "Carsystem Polish Coarse Step 1",
+          "text": "svež i korišćen lak; trag P1500–P2000.",
+          "bars": [
+            [
+              "trag",
+              1500,
+              2000,
+              "a"
+            ]
+          ],
+          "source": {
+            "doc": "cs-step1-tds",
+            "strana": 1
+          }
+        },
+        {
+          "id": "cff",
+          "name": "C.A.R.FIT BLACK LABEL Finishing Compound",
+          "text": "korišćen lak da, svež lak ne; lake ogrebotine, tragovi upotrebe i hologrami na tamnim bojama; trag P3000; srednje tvrd sunđer, ne veoma mek.",
+          "bars": [
+            [
+              "trag",
+              3000,
+              3000,
+              "b"
+            ]
+          ],
+          "source": {
+            "doc": "carfit-finishing-tds",
+            "strana": 1
+          }
+        }
+      ]
+    },
+    "holo": {
+      "title": "Završna pasta",
+      "question": "Kojom završnom pastom radite?",
+      "note": "Trag koji završna pasta uklanja, prema tehničkom listu",
+      "ticks": [
+        1000,
+        1200,
+        1500,
+        2000,
+        2500,
+        3000
+      ],
+      "footer": "Završna pasta uklanja fine tragove i holograme. Ako se vide ravne linije, a ne kružni tragovi, problem je u brušenju, ne u završnom koraku.",
+      "items": [
+        {
+          "id": "c30",
+          "name": "Carsystem Polish C-30 finish",
+          "text": "završna, protiv holograma; trag P2500; Finish Sandwich Pad C-30; lake do srednje ogrebotine bez holograma u jednom koraku.",
+          "bars": [
+            [
+              "trag",
+              2500,
+              2500,
+              "a"
+            ]
+          ],
+          "source": {
+            "doc": "cs-c30-tds",
+            "strana": 1
+          }
+        },
+        {
+          "id": "cff",
+          "name": "C.A.R.FIT BLACK LABEL Finishing Compound",
+          "text": "korišćen lak, hologrami na tamnim bojama; trag P3000; srednje tvrd sunđer.",
+          "bars": [
+            [
+              "trag",
+              3000,
+              3000,
+              "a"
+            ]
+          ],
+          "source": {
+            "doc": "carfit-finishing-tds",
+            "strana": 1
+          }
+        }
+      ]
+    }
+  },
+  "materials": [
+    {
+      "id": "sundjer",
+      "label": "Paste",
+      "hint": "Abrazivna, pa završna",
+      "title": "Abrazivna i završna pasta",
+      "lead": "Abrazivna pasta ima jače abrazivno dejstvo i uklanja tragove brušenja i ogrebotine. Završna ima sitnije zrno i uklanja fine tragove i holograme. Kombinuju se redom, od jače ka finijoj.",
+      "rows": [
+        {
+          "k": "Izbor",
+          "v": "Najkorisniji podatak je trag brušenja koji pasta uklanja; tehnički list ga navodi za svaku pastu."
+        },
+        {
+          "k": "Brzina",
+          "v": "Nije ista za sve paste: C-05 cut 1500–2000 o/min rotaciono, C-07 cut 700–1700 o/min. Čita se iz lista paste.",
+          "sources": [
+            {
+              "doc": "cs-c05-tds",
+              "strana": 1
+            },
+            {
+              "doc": "cs-c07-tds",
+              "strana": 1
+            }
+          ]
+        },
+        {
+          "k": "Befar",
+          "v": "Katalog Befar ne navodi trag brušenja ni brzinu za svoje paste; te podatke treba tražiti od proizvođača."
+        }
+      ],
+      "products": [
+        "carsystem-polish-c-10-strong",
+        "carsystem-polish-c-30-finish",
+        "carsystem-compound-x1500-hc",
+        "befar-cream-compound"
+      ],
+      "guides": [
+        "abrazivna-i-zavrsna-pasta"
+      ]
+    },
+    {
+      "id": "disk",
+      "label": "Sunđeri",
+      "hint": "Tvrđi uz abrazivnu, mekši uz završnu",
+      "title": "Sunđeri za poliranje",
+      "lead": "Sunđer se bira prema pasti i fazi rada: tvrđi uz abrazivnu pastu, mekši uz završnu. Prečnik se bira prema tanjiru mašine, tako da sunđer bude malo veći od tanjira.",
+      "rows": [
+        {
+          "k": "Tvrdoća",
+          "v": "Carsystem: Quadra Pad C-10 tvrd, uz abrazivne paste; Sandwich Pad C-30 srednji, uz fine i antihologram paste; Finish Foam White i Black AH meki."
+        },
+        {
+          "k": "Boja",
+          "v": "Boja ne govori tvrdoću; svaki proizvođač ima svoj ključ. U Befar osnovnoj liniji narandžasti je najtvrđi, a crni najmekši."
+        },
+        {
+          "k": "Oblik",
+          "v": "Urezi daju veći skid i manje zagrevanje; vafl površina hladi; uvučen čičak štiti ivice."
+        }
+      ],
+      "products": [
+        "carsystem-finish-quadra-pad-c-10",
+        "carsystem-finish-sandwich-pad-c-30",
+        "carsystem-finish-foam-white-ah",
+        "befar-velcro-polishing-pad"
+      ],
+      "guides": [
+        "sunderi-za-poliranje-izbor",
+        "ciscenje-i-vek-sundjera"
+      ]
+    },
+    {
+      "id": "flis",
+      "label": "Krzno",
+      "hint": "Uz abrazivne paste",
+      "title": "Krzno za poliranje",
+      "lead": "Krzno (vuna) se koristi uz abrazivne paste. Carsystem Lamb Wool Pad Gold S namenjuje abrazivnim pastama, a tehnički list paste Step 1 coarse među sunđerima navodi i vunene.",
+      "rows": [
+        {
+          "k": "Kada",
+          "v": "Abrazivni korak, uz pastu čiji list navodi vuneni sunđer."
+        },
+        {
+          "k": "Posle",
+          "v": "Završni korak se radi sunđerom koji preporučuje završna pasta."
+        }
+      ],
+      "products": [
+        "carsystem-lamb-wool-pad-gold-s",
+        "befar-velcro-woolpad"
+      ],
+      "guides": [
+        "sunderi-za-poliranje-izbor"
+      ]
+    },
+    {
+      "id": "traka",
+      "label": "Mašine",
+      "hint": "Rotaciona ili ekscentarska",
+      "title": "Rotaciona ili ekscentarska mašina",
+      "lead": "Rotaciona mašina brzo skida, ali jako greje i lako ostavlja tragove. Ekscentarska vodi tanjir po maloj orbiti dok se on slobodno okreće, pa je rad blaži i sigurniji.",
+      "rows": [
+        {
+          "k": "Rotaciona",
+          "v": "RUPES navodi da rotacioni pokret traži dosta vremena da se nauči i da pri nepravilnoj upotrebi može da izazove pregrevanje, probijanje laka i holograme."
+        },
+        {
+          "k": "Ekscentar.",
+          "v": "RUPES slučajni orbitalni pokret opisuje kao najbolji kompromis između učinka i kvaliteta površine."
+        },
+        {
+          "k": "Ivice",
+          "v": "Na ivice ide manji sunđer ili manja mašina, na primer akumulatorska HLR75STB."
+        }
+      ],
+      "products": [
+        "carsystem-rupes-polishing-machine-lhr15",
+        "carsystem-rupes-polishing-machine-lh19e",
+        "carsystem-rupes-mini-polishing-machine-hlr75stb"
+      ],
+      "guides": [
+        "rotaciona-ili-ekscentarska-polir-masina",
+        "poliranje-ivica-bez-probijanja"
+      ]
+    }
+  ],
+  "problems": [
+    {
+      "title": "Hologrami posle poliranja",
+      "symptom": "Fini kružni tragovi, najbolje vidljivi na tamnim bojama pod jakim svetlom.",
+      "causes": [
+        "Završni korak izostavljen ili prekratak",
+        "Rotaciona mašina vođena prebrzo, sa velikim pritiskom ili zadržavanjem",
+        "Pretvrd, prljav ili zasićen sunđer za završnu pastu",
+        "Ostaci paste koji prikrivaju tragove do pranja"
+      ],
+      "check": "Ravne linije znače trag brušenja; kružni tragovi znače završni korak, sunđer ili vođenje mašine.",
+      "guides": [
+        "hologrami-posle-poliranja"
+      ]
+    },
+    {
+      "title": "Pasta se lepi ili „gori“",
+      "symptom": "Pasta se razmazuje, brzo se suši u prah ili je lak vreo pod sunđerom.",
+      "causes": [
+        "Previše ili premalo paste",
+        "Zagrejan deo ili rad na suncu",
+        "Previsoka brzina ili jak pritisak",
+        "Zasićen sunđer ili pogrešan par paste i sunđera"
+      ],
+      "check": "Uporedite brzinu mašine sa opsegom iz tehničkog lista paste i proverite rukom temperaturu dela.",
+      "guides": [
+        "pasta-gori-ili-se-lepi"
+      ]
+    },
+    {
+      "title": "Probijena ivica ili rebro",
+      "symptom": "Na ivici, pregibu ili ispupčenju kroz lak se vidi bazna boja.",
+      "causes": [
+        "Sunđer naleže samo na greben, pa se toplota i skidanje koncentrišu",
+        "Ivica polirana svakim prolazom sa ravnog dela",
+        "Rotaciona mašina, kojoj je brzina najveća na obodu sunđera"
+      ],
+      "check": "Ivice polirajte poslednje, kraće i sa manje pritiska; oštre ivice pre rada zaštitite trakom.",
+      "guides": [
+        "poliranje-ivica-bez-probijanja"
+      ]
+    },
+    {
+      "title": "Lak posle nekoliko dana izgubio sjaj",
+      "symptom": "Lak je posle poliranja bio sjajan, a posle nekoliko dana je mutan.",
+      "causes": [
+        "Prerano poliranje",
+        "Predebeo sloj ili pogrešna mešavina učvršćivača i razređivača",
+        "Slaba cirkulacija vazduha ili prekinuto sušenje u kabini"
+      ],
+      "check": "Uporedite vreme od sušenja do poliranja sa tehničkim listom laka.",
+      "guides": [
+        "gubitak-sjaja-posle-nekoliko-dana"
+      ]
+    }
+  ]
+}

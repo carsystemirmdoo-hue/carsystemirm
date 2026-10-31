@@ -1,0 +1,1066 @@
+{
+  "program": "priprema-i-abrazivi",
+  "jobs": [
+    {
+      "id": "punilac",
+      "label": "Obrada punioca",
+      "desc": "Brušenje punioca pre nanošenja bazne boje",
+      "title": "Obrada punioca pre nanošenja bazne boje",
+      "lead": "Punilac se pre bazne boje brusi finije od kita. Završnu granulaciju uvek daje tehnički list punioca koji koristite.",
+      "steps": [
+        {
+          "id": "suv",
+          "title": "Proverite da je punilac suv",
+          "what": "Vreme sušenja pre brušenja pročitajte u tehničkom listu punioca, za temperaturu na kojoj radite.",
+          "detail": "Punilac koji se još suši može kasnije da se slegne u tragovima brušenja, pa se tragovi vide kroz baznu boju.",
+          "material": "Tehnički list punioca koji koristite",
+          "guides": [
+            "brusenje-punioca-pre-baze"
+          ]
+        },
+        {
+          "id": "kontrola",
+          "title": "Nanesite kontrolni sprej ili prah",
+          "what": "Tanak sloj kontrolnog sredstva preko cele zone koju brusite.",
+          "detail": "Kontrolno sredstvo čini nepravilnosti i strukturu vidljivim. Posle prolaza abrazivom ostaje samo tamo gde površina još nije obrađena.",
+          "material": "Kontrolni sprej ili kontrolni prah",
+          "products": [
+            "carsystem-control-spray"
+          ],
+          "guides": [
+            "kontrolni-prah-pri-brusenju"
+          ]
+        },
+        {
+          "id": "ravnanje",
+          "title": "Prvo izravnajte, pa fino brusite",
+          "what": "Ako punilac ima talas ili tragove kita, prvo ga izravnajte blokom ili brusilicom, grubljim krajem raspona iz tehničkog lista.",
+          "detail": "Fina granulacija i mekana podloga prate oblik i ne ravnaju talas. Ravnanje radi tvrđi alat.",
+          "material": "Ručni blok sa brusnom trakom ili ekscentarska brusilica sa diskom",
+          "products": [
+            "carsystem-sanding-block-198-2-0",
+            "carsystem-sanding-strips-f-23-ceramic"
+          ],
+          "guides": [
+            "rucno-brusenje-blokovi",
+            "brusenje-kita-blokom"
+          ]
+        },
+        {
+          "id": "zavrsno",
+          "title": "Završni prolaz mekšim abrazivom",
+          "what": "Pređite na završnu granulaciju iz tehničkog lista punioca. Koristite disk sa sunđerastim naličjem ili meki međusloj. Ivice i uglove koje disk ne prati matirajte flisom.",
+          "detail": "Mekša podloga ujednačava trag, a finiji kraj raspona ostavlja plići trag ispod bazne boje. Na ivicama se sloj najlakše probije.",
+          "material": "Disk sa sunđerastim naličjem ili meki međusloj; sivi flis za ivice",
+          "scale": true,
+          "products": [
+            "carsystem-sanding-disc-f-19-soft",
+            "carsystem-soft-interface-pad",
+            "carsystem-sanding-fleece-v-19-pad-115-x-230-mm"
+          ],
+          "guides": [
+            "meki-medjusloj-na-brusilici",
+            "brusenje-ivica-i-uglova"
+          ]
+        },
+        {
+          "id": "kontrola2",
+          "title": "Ponovite kontrolu",
+          "what": "Ponovo nanesite kontrolno sredstvo i pregledajte zonu pod bočnim svetlom.",
+          "detail": "Ako tragovi prethodne granulacije još postoje, vratite se na tu fazu. Finija granulacija ih neće ukloniti.",
+          "material": "Kontrolni sprej ili prah, bočno svetlo",
+          "products": [
+            "carsystem-control-spray"
+          ],
+          "guides": [
+            "granulacije-brusnog-papira"
+          ]
+        },
+        {
+          "id": "probijanje",
+          "title": "Ne probijajte punilac",
+          "what": "Pratite mesta na kojima se kroz punilac pojavljuje goli lim ili kit.",
+          "detail": "Na tim mestima je punilac pretanak. Tu se po pravilu nanosi novi sloj, prema sistemu proizvođača.",
+          "material": "Bez dodatnog materijala; po potrebi novi sloj punioca",
+          "guides": [
+            "brusenje-ivica-i-uglova"
+          ]
+        }
+      ],
+      "products": [
+        "carsystem-2k-filler-vario-plus",
+        "carsystem-control-spray",
+        "carsystem-sanding-block-198-2-0",
+        "carsystem-sanding-strips-f-23-ceramic",
+        "carsystem-sanding-disc-f-19-soft",
+        "carsystem-soft-interface-pad",
+        "carsystem-sanding-fleece-v-19-pad-115-x-230-mm"
+      ],
+      "guides": [
+        "brusenje-punioca-pre-baze",
+        "granulacije-brusnog-papira",
+        "kontrolni-prah-pri-brusenju",
+        "meki-medjusloj-na-brusilici",
+        "rucno-brusenje-blokovi",
+        "brusenje-ivica-i-uglova",
+        "suvo-ili-mokro-brusenje",
+        "odmascivanje-pre-lakiranja"
+      ]
+    },
+    {
+      "id": "kit",
+      "label": "Obrada kita",
+      "desc": "Izravnavanje i brušenje posle gitovanja",
+      "title": "Obrada kita pre nanošenja punioca",
+      "lead": "Kit se prvo ravna ručnim blokom grubljom granulacijom, a tek onda fino brusi brusilicom, dok se okolna stara boja obrađuje najfinije. Redosled granulacija daje tehnički list kita.",
+      "steps": [
+        {
+          "id": "suv",
+          "title": "Sačekajte vreme sušenja kita",
+          "what": "Brusite tek posle vremena sušenja iz tehničkog lista kita, za temperaturu na kojoj radite.",
+          "detail": "Proizvođač daje vreme do brušenja za svaki kit; za Multi Green Carsystem navodi da se brusi tek posle tog vremena.",
+          "material": "Tehnički list kita koji koristite",
+          "guides": [
+            "brusenje-kita-blokom"
+          ]
+        },
+        {
+          "id": "kontrola",
+          "title": "Nanesite kontrolni prah ili sprej",
+          "what": "Preko kita i ivice prelaza na staru boju.",
+          "detail": "Pokazuje šta je iznad ravni, a šta je udubljenje. baslac ga u postupku za kit na metalu uvodi pre završne obrade.",
+          "material": "Kontrolni sprej ili kontrolni prah",
+          "products": [
+            "carsystem-control-spray"
+          ],
+          "guides": [
+            "kontrolni-prah-pri-brusenju"
+          ]
+        },
+        {
+          "id": "blok",
+          "title": "Grubo ravnanje blokom",
+          "what": "Brusite unakrsno, u dva pravca pod uglom, preko cele popravke, tako da blok uvek naleže i na okolnu površinu. Granulaciju uzmite iz tehničkog lista kita.",
+          "detail": "Krut blok skida samo ono što je više od ravni. Brusilica sa mekom podlogom prati talas umesto da ga ukloni.",
+          "material": "Tvrd ručni blok sa brusnom trakom; za duže površine duži blok",
+          "scale": true,
+          "products": [
+            "carsystem-sanding-block-198-2-0",
+            "carsystem-sanding-strips-f-23-ceramic"
+          ],
+          "guides": [
+            "rucno-brusenje-blokovi",
+            "granulacije-brusnog-papira"
+          ]
+        },
+        {
+          "id": "ravnost",
+          "title": "Proverite ravnost",
+          "what": "Ponovite kontrolni prah. Tamna mesta u sredini popravke proverite dugim blokom.",
+          "detail": "Ako je mesto zaista niže, tu se dodaje kit. Brušenjem okoline udubljenje se samo širi.",
+          "material": "Kontrolni prah, dug blok, bočno svetlo",
+          "products": [
+            "carsystem-control-spray"
+          ],
+          "guides": [
+            "brusenje-kita-blokom"
+          ]
+        },
+        {
+          "id": "brusilica",
+          "title": "Fino brušenje brusilicom",
+          "what": "Kada je oblik dobar, ekscentarskom brusilicom uklonite tragove grube granulacije, uz kontrolni sloj.",
+          "detail": "Brusilica sređuje trag, a ne oblik. R-M za UV Bodyfill-R B 2P93 navodi ekscentarsko suvo brušenje P80/P150, pa P240/P320 uz kontrolni sloj.",
+          "material": "Ekscentarska brusilica sa odsisom i brusnim diskom",
+          "products": [
+            "carsystem-sanding-disc-p-25-ceramic"
+          ],
+          "sources": [
+            {
+              "doc": "rm-b2p93-tds",
+              "strana": 1
+            }
+          ],
+          "guides": [
+            "granulacije-brusnog-papira",
+            "mrezasti-abrazivi-ili-papir-sa-rupama"
+          ]
+        },
+        {
+          "id": "prelaz",
+          "title": "Prelaz na staru boju",
+          "what": "Okolnu površinu brusite najfinije u nizu, da prelaz bude postepen. Ivice i uglove matirajte crvenim flisom.",
+          "detail": "Postepen prelaz se ne vidi kroz punilac, a punilac na njemu dobro prianja. Carsystem crveni flis V.19 namenjuje podlozi za punilac.",
+          "material": "Finiji disk na brusilici; crveni flis za ivice",
+          "products": [
+            "carsystem-sanding-disc-p-25-ceramic",
+            "carsystem-sanding-fleece-v-19-pad-115-x-230-mm"
+          ],
+          "guides": [
+            "fleke-iznad-kita",
+            "brusenje-ivica-i-uglova"
+          ]
+        }
+      ],
+      "products": [
+        "carsystem-multi-black-rapid",
+        "baslac-12-20-bodyfiller-universal",
+        "carsystem-control-spray",
+        "carsystem-sanding-block-198-2-0",
+        "carsystem-sanding-strips-f-23-ceramic",
+        "carsystem-sanding-disc-p-25-ceramic",
+        "carsystem-sanding-fleece-v-19-pad-115-x-230-mm"
+      ],
+      "guides": [
+        "brusenje-kita-blokom",
+        "granulacije-brusnog-papira",
+        "kontrolni-prah-pri-brusenju",
+        "rucno-brusenje-blokovi",
+        "fleke-iznad-kita",
+        "brusenje-ivica-i-uglova",
+        "odmascivanje-pre-lakiranja"
+      ]
+    },
+    {
+      "id": "postojeci",
+      "label": "Priprema postojećeg premaza",
+      "desc": "Matiranje laka za naredni sloj ili prelaz",
+      "title": "Priprema postojećeg premaza za naredni sloj",
+      "lead": "Zdrav stari lak se ne skida do lima: opere se, odmasti, matira i ponovo odmasti, pa postaje podloga za punilac, baznu boju ili lak. Granulaciju daje tehnički list materijala koji ide preko.",
+      "choice": {
+        "question": null,
+        "options": [
+          {
+            "id": "ceo",
+            "label": "Ceo deo se lakira",
+            "note": "Matira se cela površina dela, granulacijom iz lista materijala koji ide preko."
+          },
+          {
+            "id": "prelaz",
+            "label": "Zona utapanja (prelaz)",
+            "note": "Zona prelaza se matira znatno finije od mesta popravke."
+          }
+        ]
+      },
+      "steps": [
+        {
+          "id": "zdrav",
+          "title": "Proverite da li je stari lak zdrav",
+          "what": "Lak treba da se drži za podlogu, bez ljuštenja, pukotina i mehurića od rđe, i da ne omekšava pod rastvaračem.",
+          "detail": "Zdrav lak se matira i ostaje kao podloga. Lak koji ne prolazi proveru skida se do zdravog sloja ili do metala.",
+          "material": "Vizuelna provera i test razređivačem"
+        },
+        {
+          "id": "pranje",
+          "title": "Operite i odmastite",
+          "what": "Operite deo vodom i sredstvom za pranje, isperite i osušite, pa odmastite sredstvom koje je navedeno za stari lak.",
+          "detail": "Odmašćuje se pre brušenja, da se masnoća ne utrlja u površinu. Carsystem Silicone Remover Mild navodi stare i fabričke lakove među podlogama.",
+          "material": "Odmašćivač za stari lak, čista krpa",
+          "products": [
+            "carsystem-silicone-remover-mild"
+          ],
+          "guides": [
+            "odmascivanje-pre-lakiranja"
+          ]
+        },
+        {
+          "id": "matiranje",
+          "title": "Matirajte površinu",
+          "what": "Cela površina koja dobija novi sloj mora da izgubi sjaj, bez sjajnih mesta. Granulaciju daje tehnički list materijala koji ide preko starog laka.",
+          "detail": "Brušenje ovde ne skida lak, nego daje novom sloju površinu za koju se mehanički veže.",
+          "material": "Ekscentarska brusilica sa diskom, po potrebi meki međusloj",
+          "pod": {
+            "prelaz": {
+              "what": "Zonu u koju se utapa matirajte vrlo fino: stari lak se samo matira, bez dubokih tragova. Mesto punioca brusi se grublje, prema njegovom listu.",
+              "detail": "Bazna boja i lak su u zoni prelaza tanki, pa se dubok trag tu vidi.",
+              "material": "Vrlo fin disk na brusilici, uz meki međusloj",
+              "products": [
+                "carsystem-sanding-disc-f-19-finish-77-mm",
+                "carsystem-soft-interface-pad"
+              ]
+            }
+          },
+          "scale": true,
+          "products": [
+            "carsystem-sanding-disc-p-25-ceramic",
+            "carsystem-soft-interface-pad"
+          ],
+          "guides": [
+            "priprema-starog-laka",
+            "granulacije-brusnog-papira"
+          ]
+        },
+        {
+          "id": "ivice",
+          "title": "Ivice, uglovi i teško dostupna mesta",
+          "what": "Gde disk ne prati oblik, matirajte flisom ili sunđerom: crveni flis V.19 ako sledi punilac, sivi ako sledi boja.",
+          "detail": "Carsystem crveni flis V.19 namenjuje podlozi za punilac, a sivi nanošenju boje.",
+          "material": "Flis ili sunđer za matiranje",
+          "pod": {
+            "prelaz": {
+              "what": "Ivice i uglove u zoni utapanja matirajte sivim ili zlatnim flisom, ne crvenim.",
+              "detail": "Za Tec Line Mattflex Pad Carsystem navodi sivu i zlatnu oznaku pre nanošenja boje, posebno za zone utapanja; crvena je namenjena podlozi za punilac."
+            }
+          },
+          "products": [
+            "carsystem-sanding-fleece-v-19-pad-115-x-230-mm",
+            "carsystem-tec-line-mattflex-pad"
+          ],
+          "guides": [
+            "sunderi-za-matiranje",
+            "brusenje-ivica-i-uglova"
+          ]
+        },
+        {
+          "id": "pasta",
+          "title": "Matiranje pastom, gde treba",
+          "what": "Na teško dostupnim mestima i u zoni utapanja pasta ili gel na sunđeru istovremeno matira i čisti. Površina ne sme da se osuši, a posle matiranja deo se temeljno ispira vodom.",
+          "detail": "Carsystem za Prep & Scuff navodi matiranje oko brava i lajsni i da gel zamenjuje početno odmašćivanje; za Matting Mousse da pomaže da se izbegnu ogrebotine koje se vide kroz bezbojni lak.",
+          "material": "Gel ili pasta za matiranje, sunđer, voda",
+          "only": [
+            "ceo",
+            "prelaz"
+          ],
+          "products": [
+            "carsystem-prep-scuff",
+            "carsystem-tec-line-matt-matting-mousse"
+          ],
+          "guides": [
+            "priprema-zone-utapanja"
+          ]
+        },
+        {
+          "id": "odmas2",
+          "title": "Ponovo odmastite",
+          "what": "Posle matiranja ponovo odmastite i obrišite do suva. Ako ste koristili pastu, ostatke prvo isperite vodom.",
+          "detail": "Redosled odmastiti – brusiti – ponovo odmastiti za stare slojeve C.A.R.FIT navodi izričito; baslac posle brušenja navodi čišćenje i brisanje do suva.",
+          "material": "Odmašćivač, čista krpa",
+          "products": [
+            "carsystem-silicone-remover-mild"
+          ],
+          "guides": [
+            "odmascivanje-pre-lakiranja"
+          ]
+        },
+        {
+          "id": "nanosenje",
+          "title": "Nanesite materijal predviđen za stari lak",
+          "what": "Proverite da tehnički list materijala navodi stari lak kao podlogu. Mesta probijena do metala pripremite kao goli lim.",
+          "detail": "R-M P 2P63 MULTI Purpos-R, na primer, navodi stari lak među podlogama; u baslac tabeli podloga kit 12-20 i punioci 20-24, 20-34, 20-94 i 20-35/95 označeni su kao pogodni.",
+          "material": "Punilac, prajmer, bazna boja ili lak koji list dozvoljava na starom laku",
+          "sources": [
+            {
+              "doc": "rm-p2p63-tds",
+              "strana": 1
+            }
+          ],
+          "guides": [
+            "priprema-golog-lima",
+            "priprema-starog-laka"
+          ]
+        }
+      ],
+      "products": [
+        "carsystem-silicone-remover-mild",
+        "carsystem-sanding-disc-p-25-ceramic",
+        "carsystem-soft-interface-pad",
+        "carsystem-sanding-disc-f-19-finish-77-mm",
+        "carsystem-sanding-fleece-v-19-pad-115-x-230-mm",
+        "carsystem-tec-line-mattflex-pad",
+        "carsystem-prep-scuff",
+        "carsystem-tec-line-matt-matting-mousse"
+      ],
+      "guides": [
+        "priprema-starog-laka",
+        "priprema-zone-utapanja",
+        "sunderi-za-matiranje",
+        "odmascivanje-pre-lakiranja",
+        "priprema-plastike-pre-lakiranja"
+      ]
+    },
+    {
+      "id": "uklanjanje",
+      "label": "Uklanjanje starog premaza",
+      "desc": "Skidanje boje do podloge ili do zdravog sloja",
+      "title": "Uklanjanje starog premaza",
+      "lead": "Premaz se skida samo tamo gde više nije dobra podloga. Način skidanja i priprema posle njega zavise od podloge ispod — izaberite je iznad, koraci se menjaju.",
+      "choice": {
+        "question": null,
+        "options": [
+          {
+            "id": "celik",
+            "label": "Čelični lim",
+            "note": "Goli čelični lim posle skidanja štiti se prajmerom što pre."
+          },
+          {
+            "id": "alu",
+            "label": "Aluminijum",
+            "note": "Za aluminijum važe posebna pravila: poseban komplet abraziva i prajmer koji navodi aluminijum."
+          },
+          {
+            "id": "plastika",
+            "label": "Plastika",
+            "note": "Na plastici se postupak menja: čišćenje sredstvom za plastiku, matiranje sunđerom i prajmer za plastiku."
+          }
+        ]
+      },
+      "steps": [
+        {
+          "id": "treba",
+          "title": "Proverite da li premaz treba skidati",
+          "what": "Skida se premaz koji se ljušti, puca, ima rđu ispod sebe ili ne podnosi rastvarače. Zdrav lak se ne skida, nego matira.",
+          "detail": "Zdrav stari lak je dobra podloga za novi sloj; svaki skinut sloj treba ponovo izgraditi.",
+          "material": "Vizuelna provera i test razređivačem",
+          "guides": [
+            "priprema-starog-laka"
+          ]
+        },
+        {
+          "id": "disk",
+          "title": "Skinite premaz diskom ili brušenjem",
+          "what": "Radite kratkim prelazima, bez zadržavanja na jednom mestu. Disk za skidanje koristite najviše do broja obrtaja koji proizvođač navodi.",
+          "detail": "Dugo zadržavanje zagreva lim i boju.",
+          "material": "Disk za skidanje boje ili grub papirni disk na brusilici",
+          "only": [
+            "celik",
+            "alu"
+          ],
+          "products": [
+            "carsystem-stripping-disc",
+            "carsystem-sanding-disc-p-25-ceramic"
+          ]
+        },
+        {
+          "id": "rdja",
+          "title": "Uklonite rđu do zdravog metala",
+          "what": "Rđa se uklanja potpuno, do zdravog metala.",
+          "detail": "Carsystem za 1K Epoxy Primer traži da se rđa sa metalne podloge potpuno ukloni; C.A.R.FIT za Zinc Spray mesta sa korozijom brusi P80–P240.",
+          "material": "Disk za skidanje ili grub brusni disk",
+          "only": [
+            "celik"
+          ],
+          "products": [
+            "carsystem-stripping-disc"
+          ],
+          "sources": [
+            {
+              "doc": "carfit-zinc-spray-tds",
+              "strana": 1
+            }
+          ],
+          "guides": [
+            "uklanjanje-rdje-sa-karoserije"
+          ]
+        },
+        {
+          "id": "priprema",
+          "title": "Pripremite podlogu za prajmer",
+          "what": "Odmastite, izbrusite granulacijom iz tehničkog lista prajmera, pa ponovo odmastite. Posle toga lim ne dirajte golom rukom.",
+          "detail": "Granulaciju ne određuje lim, nego prajmer ili sistem koji ide preko njega.",
+          "material": "Odmašćivač za metal; disk granulacije iz lista prajmera",
+          "only": [
+            "celik",
+            "alu"
+          ],
+          "pod": {
+            "alu": {
+              "what": "Koristite abrazive i alat koji nisu korišćeni na čeliku. Odmastite, izbrusite ili matirajte, pa ponovo odmastite.",
+              "detail": "Čelična prašina i opiljci utisnuti u aluminijum mogu da izazovu galvansku koroziju; zato se za aluminijum drži poseban komplet abraziva.",
+              "material": "Poseban, obeležen komplet abraziva; čistač golih metala"
+            }
+          },
+          "scale": true,
+          "products": [
+            "rm-pk-1a05-metalprep",
+            "carsystem-sanding-disc-p-25-ceramic"
+          ],
+          "guides": [
+            "priprema-golog-lima"
+          ]
+        },
+        {
+          "id": "prajmer",
+          "title": "Prajmer odmah posle pripreme",
+          "what": "Nanesite prajmer namenjen golom metalu čim odmašćivač potpuno ispari.",
+          "detail": "Goli lim ne treba da stoji nezaštićen duže nego što je neophodno, jer na njemu brzo nastaje površinska rđa.",
+          "material": "Prajmer za goli metal",
+          "only": [
+            "celik",
+            "alu"
+          ],
+          "pod": {
+            "alu": {
+              "what": "Nanesite materijal koji tehnički list izričito navodi za aluminijum.",
+              "detail": "U primerima iz programa to je reaktivni ili epoksidni prajmer ili prajmer-punilac za direktno nanošenje na metal.",
+              "material": "Prajmer koji navodi aluminijum kao podlogu"
+            }
+          },
+          "products": [
+            "carsystem-2k-epoxy-fill-primer",
+            "carfit-2k-epoxy-primer-1-1"
+          ],
+          "guides": [
+            "priprema-golog-lima"
+          ]
+        },
+        {
+          "id": "pl-ciscenje",
+          "title": "Očistite deo sredstvom za plastiku",
+          "what": "Ceo deo očistite sredstvom za plastiku: jednom čistom krpom nanesite, drugom obrišite, pre nego što se osuši.",
+          "detail": "Na delovima ostaju sredstva za odvajanje iz kalupa i nečistoća. R-M PLASTIC Clean-R je namenjen isključivo plastičnim delovima i uklanjanju tih sredstava.",
+          "material": "Sredstvo za čišćenje plastike, dve čiste krpe",
+          "only": [
+            "plastika"
+          ],
+          "products": [
+            "rm-pk-2p40-plastic-clean-r"
+          ],
+          "guides": [
+            "priprema-plastike-pre-lakiranja"
+          ]
+        },
+        {
+          "id": "pl-grejanje",
+          "title": "Zagrejte deo, ako sistem to traži",
+          "what": "Neke plastike se pre lakiranja zagrevaju, pa ponovo čiste.",
+          "detail": "Za ostale plastike to nije obavezan korak.",
+          "material": "Komora ili grejač prema uputstvu sistema",
+          "only": [
+            "plastika"
+          ],
+          "guides": [
+            "priprema-plastike-pre-lakiranja"
+          ]
+        },
+        {
+          "id": "pl-brusenje",
+          "title": "Brusite oštećenja i matirajte ceo deo",
+          "what": "Oštećena mesta brusite, a ceo deo matirajte sunđerom za matiranje.",
+          "material": "Disk za oštećena mesta; sunđer za matiranje",
+          "only": [
+            "plastika"
+          ],
+          "products": [
+            "carsystem-classicline-soft-pad",
+            "carsystem-tec-line-mattflex-pad"
+          ],
+          "guides": [
+            "sunderi-za-matiranje"
+          ]
+        },
+        {
+          "id": "pl-ciscenje2",
+          "title": "Ponovo očistite",
+          "what": "Posle brušenja deo ponovo očistite sredstvom za plastiku.",
+          "detail": "R-M uz PLASTIC Prim-R traži čišćenje, matiranje sunđerom i ponovno čišćenje.",
+          "material": "Sredstvo za čišćenje plastike",
+          "only": [
+            "plastika"
+          ],
+          "products": [
+            "rm-pk-2p40-plastic-clean-r"
+          ],
+          "guides": [
+            "odmascivanje-pre-lakiranja"
+          ]
+        },
+        {
+          "id": "pl-prajmer",
+          "title": "Prajmer za plastiku pre punioca",
+          "what": "Nanesite prajmer za plastiku koji odgovara vrsti plastike.",
+          "detail": "Da se lak kasnije ne bi ljuštio, ispod njega ne smeju da ostanu nečistoće, a prajmer mora da odgovara vrsti plastike.",
+          "material": "Prajmer za plastiku (promotor prianjanja)",
+          "only": [
+            "plastika"
+          ],
+          "guides": [
+            "priprema-plastike-pre-lakiranja"
+          ]
+        }
+      ],
+      "products": [
+        "carsystem-stripping-disc",
+        "carsystem-sanding-disc-p-25-ceramic",
+        "rm-pk-1a05-metalprep",
+        "carsystem-2k-epoxy-fill-primer",
+        "carfit-2k-epoxy-primer-1-1"
+      ],
+      "guides": [
+        "priprema-golog-lima",
+        "priprema-aluminijuma",
+        "pocinkovani-lim-priprema",
+        "priprema-plastike-pre-lakiranja",
+        "uklanjanje-rdje-sa-karoserije",
+        "priprema-starog-laka"
+      ]
+    }
+  ],
+  "scales": {
+    "punilac": {
+      "title": "Punilac",
+      "question": "Koji punilac koristite?",
+      "note": "Završna granulacija prema tehničkom listu",
+      "ticks": [
+        240,
+        320,
+        400,
+        500,
+        600,
+        800,
+        1000,
+        1200
+      ],
+      "footer": "Rasponi se preklapaju, ali nisu isti. Granulaciju jednog punioca ne prenosite na drugi; kada list daje raspon, finiji kraj daje plići trag.",
+      "items": [
+        {
+          "id": "rm2a41",
+          "name": "R-M P 2A41 PerformFILLER White",
+          "text": "suvo, ekscentar P400–P500. Mokro brušenje list ne navodi.",
+          "bars": [
+            [
+              "suvo, ekscentar",
+              400,
+              500,
+              "a"
+            ]
+          ],
+          "source": {
+            "doc": "rm-p2a41-tds",
+            "strana": 2
+          }
+        },
+        {
+          "id": "rm2p51",
+          "name": "R-M P 2P51 SANDING Fill-R+ White",
+          "text": "suvo, ekscentar P400–P600. Mokro brušenje list ne navodi.",
+          "bars": [
+            [
+              "suvo, ekscentar",
+              400,
+              600,
+              "a"
+            ]
+          ],
+          "source": {
+            "doc": "rm-p2p51-tds",
+            "strana": 2
+          }
+        },
+        {
+          "id": "rm2e23",
+          "name": "R-M P 2E23 Primer filler, grey",
+          "text": "suvo, ekscentar P400–P500. R-M uz ovaj punilac savetuje kontrolni prah.",
+          "bars": [
+            [
+              "suvo, ekscentar",
+              400,
+              500,
+              "a"
+            ]
+          ],
+          "source": {
+            "doc": "rm-p2e23-tds",
+            "strana": 2
+          }
+        },
+        {
+          "id": "bas2022",
+          "name": "baslac 20-22 2K Primerfiller",
+          "text": "suvo, ekscentar P400/P500; mokro, ručno P800.",
+          "bars": [
+            [
+              "suvo, ekscentar",
+              400,
+              500,
+              "a"
+            ],
+            [
+              "mokro, ručno",
+              800,
+              800,
+              "b"
+            ]
+          ],
+          "source": {
+            "doc": "baslac-20-22-tds",
+            "strana": 2
+          }
+        },
+        {
+          "id": "csvario",
+          "name": "Carsystem 2K Filler Vario Plus",
+          "text": "suvo P320–P600; mokro P800–P1200.",
+          "bars": [
+            [
+              "suvo",
+              320,
+              600,
+              "a"
+            ],
+            [
+              "mokro",
+              800,
+              1200,
+              "b"
+            ]
+          ],
+          "source": {
+            "doc": "cs-vario-plus-tds",
+            "strana": 2
+          }
+        }
+      ]
+    },
+    "kit": {
+      "title": "Kit",
+      "question": "Koji kit koristite?",
+      "note": "Redosled granulacija prema tehničkom listu kita, suvo",
+      "ticks": [
+        80,
+        120,
+        150,
+        180,
+        240,
+        320
+      ],
+      "footer": "Proizvođači daju redosled u koracima, a ne samo jednu granulaciju. Na sledeću prelazite tek kada su tragovi prethodne uklonjeni.",
+      "items": [
+        {
+          "id": "mg",
+          "name": "Carsystem Multi Green (kit za popunjavanje)",
+          "text": "prvo brušenje P80–P240; ponovno brušenje P120–P240.",
+          "bars": [
+            [
+              "prvo",
+              80,
+              240,
+              "a"
+            ],
+            [
+              "ponovno",
+              120,
+              240,
+              "b"
+            ]
+          ],
+          "source": {
+            "doc": "carsystem-multi-green-tds",
+            "strana": 1
+          }
+        },
+        {
+          "id": "mbr",
+          "name": "Carsystem Multi Black Rapid",
+          "text": "suvo P120–P180, zatim P240–P320.",
+          "bars": [
+            [
+              "prvo",
+              120,
+              180,
+              "a"
+            ],
+            [
+              "zatim",
+              240,
+              320,
+              "b"
+            ]
+          ],
+          "source": {
+            "doc": "cs-multi-black-rapid-tds",
+            "strana": 2
+          }
+        },
+        {
+          "id": "rm2p93",
+          "name": "R-M UV Bodyfill-R B 2P93",
+          "text": "ekscentar, suvo P80/P150, zatim P240/P320, uz kontrolni sloj.",
+          "bars": [
+            [
+              "ekscentar, prvo",
+              80,
+              150,
+              "a"
+            ],
+            [
+              "ekscentar, zatim",
+              240,
+              320,
+              "b"
+            ]
+          ],
+          "source": {
+            "doc": "rm-b2p93-tds",
+            "strana": 1
+          }
+        }
+      ]
+    },
+    "postojeci": {
+      "title": "Preko starog laka",
+      "question": "Šta nanosite preko starog laka?",
+      "note": "Matiranje prema tehničkom listu materijala koji ide preko",
+      "ticks": [
+        180,
+        220,
+        280,
+        320,
+        400,
+        500,
+        600,
+        1000,
+        2000
+      ],
+      "footer": "Granulacija zavisi od materijala koji ide preko. Kada preko starog laka ide samo bazna boja ili lak, matira se znatno finije.",
+      "items": [
+        {
+          "id": "cfetch",
+          "name": "C.A.R.FIT 1K Etch Primer Spray",
+          "text": "P220–P320 suvo ili P400 mokro.",
+          "bars": [
+            [
+              "suvo",
+              220,
+              320,
+              "a"
+            ],
+            [
+              "mokro",
+              400,
+              400,
+              "b"
+            ]
+          ],
+          "source": {
+            "doc": "carfit-etch-primer-tds",
+            "strana": 1
+          }
+        }
+      ]
+    },
+    "uklanjanje": {
+      "title": "Prajmer",
+      "question": "Koji prajmer ide na goli metal?",
+      "note": "Brušenje golog metala prema izvoru",
+      "ticks": [
+        80,
+        120,
+        150,
+        180,
+        220,
+        240,
+        280,
+        320
+      ],
+      "footer": "Granulaciju ne određuje sam lim, nego prajmer ili sistem koji ide preko njega. Vrednost jednog sistema ne prenosite na drugi.",
+      "items": [
+        {
+          "id": "csef",
+          "name": "Carsystem 2K Epoxy Fill Primer",
+          "text": "predbrušenje P180–P280, završno P320; čišćenje pre i posle brušenja.",
+          "bars": [
+            [
+              "predbrušenje",
+              180,
+              280,
+              "a"
+            ],
+            [
+              "završno",
+              320,
+              320,
+              "b"
+            ]
+          ],
+          "pods": [
+            "celik"
+          ],
+          "source": {
+            "doc": "carsystem-2k-epoxy-fill-primer-tds",
+            "strana": 1
+          }
+        },
+        {
+          "id": "zinc",
+          "name": "C.A.R.FIT Zinc Spray, mesta sa korozijom",
+          "text": "stari sloj se uklanja, a mesta sa korozijom bruse se P80–P240.",
+          "bars": [
+            [
+              "korozija",
+              80,
+              240,
+              "a"
+            ]
+          ],
+          "pods": [
+            "celik"
+          ],
+          "source": {
+            "doc": "carfit-zinc-spray-tds",
+            "strana": 1
+          }
+        }
+      ]
+    }
+  },
+  "materials": [
+    {
+      "id": "disk",
+      "label": "Diskovi",
+      "hint": "Ekscentarska brusilica, veće površine",
+      "title": "Brusni diskovi",
+      "lead": "Za mašinsko brušenje ekscentarskom brusilicom. Pokrivaju sve faze, od grubog skidanja do finog brušenja punioca.",
+      "rows": [
+        {
+          "k": "Kada",
+          "v": "Ravne i blago zakrivljene površine, sve faze rada."
+        },
+        {
+          "k": "Vrste",
+          "v": "Papirni, filmski i diskovi sa sunđerastim naličjem za završni prolaz."
+        },
+        {
+          "k": "Alat",
+          "v": "Ekscentarska brusilica, podloga i po potrebi meki međusloj. Raspored rupa diska usklađuje se sa podlogom i odsisom."
+        }
+      ],
+      "products": [
+        "carsystem-sanding-disc-p-25-ceramic",
+        "carsystem-sanding-disc-f-19-soft",
+        "carsystem-soft-interface-pad"
+      ],
+      "guides": [
+        "mrezasti-abrazivi-ili-papir-sa-rupama",
+        "keramicki-abrazivi"
+      ]
+    },
+    {
+      "id": "traka",
+      "label": "Trake",
+      "hint": "Ručni blok, ravnanje",
+      "title": "Brusne trake",
+      "lead": "Za ručno brušenje blokom. Tvrd blok ravna kit i punilac na ravnim i blago zakrivljenim površinama.",
+      "rows": [
+        {
+          "k": "Kada",
+          "v": "Ravnanje kita i punioca, duže ravne površine."
+        },
+        {
+          "k": "Vrste",
+          "v": "Papirne i filmske trake u rolni, perforirane za odsis."
+        },
+        {
+          "k": "Alat",
+          "v": "Ručni blok odgovarajuće dužine; blok sa odsisom prašine."
+        }
+      ],
+      "products": [
+        "carsystem-sanding-strips-f-23-ceramic",
+        "carsystem-sanding-block-198-2-0"
+      ],
+      "guides": [
+        "rucno-brusenje-blokovi"
+      ]
+    },
+    {
+      "id": "sundjer",
+      "label": "Sunđeri",
+      "hint": "Zakrivljenja, profili",
+      "title": "Sunđerasti abrazivi",
+      "lead": "Brusno zrno na sunđerastoj podlozi. Prati oblik, pa služi za zakrivljenja, profile i teško dostupna mesta. Ne ravna.",
+      "rows": [
+        {
+          "k": "Kada",
+          "v": "Zakrivljenja i teško dostupna mesta pre punioca ili boje."
+        },
+        {
+          "k": "Oznake",
+          "v": "Kod Carsystem sunđera finoća je povezana sa P-granulacijom, pa se uklapa u redosled brušenja."
+        },
+        {
+          "k": "Primer",
+          "v": "Classicline Soft Pad: srednji i fini pre punioca, super fini i ultra fini pre boje."
+        }
+      ],
+      "products": [
+        "carsystem-classicline-soft-pad",
+        "carsystem-soft-roll"
+      ],
+      "guides": [
+        "sunderi-za-matiranje"
+      ]
+    },
+    {
+      "id": "flis",
+      "label": "Flis (netkani)",
+      "hint": "Matiranje uglova i ivica",
+      "title": "Netkani abrazivi (flis)",
+      "lead": "Netkano vlakno sa brusnim zrnom. Uvlači se u neravnine i služi za matiranje uglova, zaobljenja i oštrih ivica, samostalno ili uz pastu.",
+      "rows": [
+        {
+          "k": "Kada",
+          "v": "Matiranje uglova, ivica i zaobljenja; zona utapanja uz pastu za matiranje."
+        },
+        {
+          "k": "Oznake",
+          "v": "Boja je oznaka proizvođača, ne zajednički standard. Porede se samo kod istog proizvođača."
+        },
+        {
+          "k": "Primer",
+          "v": "Carsystem V.19: crveni (veoma fino) pre punioca, sivi (ultra fino) pre boje."
+        }
+      ],
+      "products": [
+        "carsystem-sanding-fleece-v-19-pad-115-x-230-mm",
+        "carsystem-tec-line-mattflex-pad",
+        "carsystem-prep-scuff"
+      ],
+      "guides": [
+        "sunderi-za-matiranje",
+        "priprema-zone-utapanja"
+      ]
+    }
+  ],
+  "problems": [
+    {
+      "title": "Tragovi brušenja vidljivi kroz bazu",
+      "symptom": "Kružni ili ravni tragovi se pojavljuju posle bazne boje ili laka.",
+      "causes": [
+        "Pregruba završna granulacija u odnosu na tehnički list",
+        "Preskočena granulacija: ostali su tragovi ranijeg koraka",
+        "Punilac brušen pre nego što se osušio",
+        "Duboki tragovi kita ispod punioca"
+      ],
+      "check": "Kontrolni sprej pre bazne boje pokazuje tragove dok se još mogu ukloniti.",
+      "guides": [
+        "brusenje-punioca-pre-baze"
+      ]
+    },
+    {
+      "title": "Neujednačena obrada i talasi",
+      "symptom": "Pod bočnim svetlom površina nije ravna; vidi se talas ili udubljenje oko popravke.",
+      "causes": [
+        "Ravnanje mekim sunđerom ili flisom umesto blokom",
+        "Brušenje samo mašinom sa mekom podloškom",
+        "Okolina brušena fino pre nego što je kit izravnat"
+      ],
+      "check": "Dug blok preko popravke: ako se klati na sredini, popravka je viša; ako na ivicama, okolina je niža.",
+      "guides": [
+        "brusenje-kita-blokom",
+        "rucno-brusenje-blokovi"
+      ]
+    },
+    {
+      "title": "Probijene ivice i uglovi",
+      "symptom": "Na ivici se kroz punilac vidi kit ili goli lim.",
+      "causes": [
+        "Ravan disk pod punim pritiskom na ivici",
+        "Grub abraziv na mestu gde je sloj najtanji"
+      ],
+      "check": "Ivice obrađujte sa manje pritiska, finijim i savitljivijim abrazivom ili mekim međuslojem.",
+      "guides": [
+        "brusenje-ivica-i-uglova"
+      ]
+    }
+  ]
+}

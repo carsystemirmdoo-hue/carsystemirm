@@ -20,12 +20,15 @@ import path from "node:path";
 
 import { readJson, writeJson } from "../carsystem-sync/lib/http.mjs";
 import { BRAND, PATHS, PHASE2_SCOPE_NAME, REPO_ROOT, SCOPE_NAME } from "./lib/config.mjs";
+import { documentKeyOf } from "./lib/documents.mjs";
 
 const checkOnly = process.argv.includes("--check");
 const plan = readJson(PATHS.plan);
 const registry = readJson(PATHS.identityRegistry, { products: {} });
 if (!plan) throw new Error("Nedostaje plan — `npm run sata:sync:plan`.");
 if (Object.values(plan.summary.planErrors).some((list) => list.length)) throw new Error(`Plan ima greške: ${JSON.stringify(plan.summary.planErrors).slice(0, 600)}`);
+// Registar jedinstvenih dokumenata (`refresh-documents.mjs`). Bez njega nijedan fajl nije proveren.
+const documentRegistry = readJson(PATHS.documentRegistry, { documents: {} });
 
 const plural = (count, one, few, many) => {
   const mod10 = count % 10;
@@ -62,7 +65,8 @@ function entryOf(item) {
     variants: item.variants.map((row) => ({ articleNumber: row.articleNumber, config: row.config, officialName: row.officialName, values: row.values })),
     // Sirove zvanične vrednosti osa (EN/DE) koje su na kartici prevedene — da original ostane pretraživ.
     sourceAxisTerms: item.sourceAxisTerms,
-    documents: item.documents.map(({ kind, title, href, language }) => ({ kind, title, href, language })),
+    // Samo reference; sam dokument (adresa, provera, jezik) je jednom u `documents` dataseta.
+    documents: item.documents.map(({ file }) => ({ document: documentKeyOf(file) })),
     // Stanje slike je ČINJENICA o izvoru, ne adresa: nijedna SATA slika ne ulazi u runtime.
     imageStatus: item.imageStatus,
     sourceHash: item.sourceHash,
@@ -92,6 +96,27 @@ const products = imports.map(entryOf);
 const enrichments = Object.fromEntries(enrich.map((item) => [item.slug, entryOf(item)]));
 const all = [...products, ...Object.values(enrichments)];
 
+/*
+ * Jedinstveni dokumenti. DIRECT_PDF nosi adresu fajla proverenu GET zahtevom (čitljiv PDF tačnog
+ * modela, vrste i jezika); sve ostalo je MANUFACTURER_PAGE i sajt vodi na stranicu porodice.
+ * Dokument plana koji registar nema (nije proveren) je MANUFACTURER_PAGE — nikad neproverena adresa.
+ */
+const planDocuments = new Map(plan.items.flatMap((item) => item.documents.map((document) => [documentKeyOf(document.file), document])));
+const documents = Object.fromEntries(
+  [...planDocuments].sort(([a], [b]) => a.localeCompare(b)).map(([key, document]) => {
+    const checked = documentRegistry.documents?.[key];
+    const direct = checked?.status === "DIRECT_PDF" && checked.href;
+    return [key, {
+      kind: document.kind,
+      title: document.title,
+      language: checked?.language ?? document.language,
+      status: direct ? "DIRECT_PDF" : "MANUFACTURER_PAGE",
+      ...(direct ? { href: checked.href, verified: checked.verified.date, pages: checked.verified.pages, bytes: checked.verified.bytes } : { reason: checked?.reason ?? "NOT_VERIFIED" }),
+    }];
+  }),
+);
+const documentValues = Object.values(documents);
+
 const dataset = {
   meta: {
     generator: "scripts/sata-sync/apply.mjs",
@@ -106,6 +131,9 @@ const dataset = {
     enrichedExisting: Object.keys(enrichments).length,
     articleNumbers: all.reduce((sum, entry) => sum + entry.variants.length, 0),
     documents: all.reduce((sum, entry) => sum + entry.documents.length, 0),
+    uniqueDocuments: documentValues.length,
+    documentsDirectPdf: documentValues.filter((document) => document.status === "DIRECT_PDF").length,
+    documentsManufacturerPage: documentValues.filter((document) => document.status === "MANUFACTURER_PAGE").length,
     images: {
       OFFICIAL_IMAGE_AVAILABLE_NOT_APPROVED_FOR_RUNTIME: all.filter((entry) => entry.imageStatus === "OFFICIAL_IMAGE_AVAILABLE_NOT_APPROVED_FOR_RUNTIME").length,
       OFFICIAL_IMAGE_NOT_PUBLISHED: all.filter((entry) => entry.imageStatus === "OFFICIAL_IMAGE_NOT_PUBLISHED").length,
@@ -116,6 +144,7 @@ const dataset = {
   },
   products,
   enrichments,
+  documents,
   phase2: {
     meta: {
       scope: PHASE2_SCOPE_NAME,
@@ -151,7 +180,7 @@ console.log(JSON.stringify({
   imported: products.length,
   enrichedExisting: Object.keys(enrichments).length,
   articleNumbers: dataset.meta.articleNumbers,
-  documents: dataset.meta.documents,
+  documents: { references: dataset.meta.documents, unique: dataset.meta.uniqueDocuments, directPdf: dataset.meta.documentsDirectPdf, manufacturerPage: dataset.meta.documentsManufacturerPage },
   images: dataset.meta.images,
   phase2: { ...plan2.summary.measured, linkedPhase1Families: Object.keys(plan2.links).length },
   filesChanged,

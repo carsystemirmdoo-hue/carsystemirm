@@ -11,7 +11,7 @@ import { getPublicDocuments, type BrandDocument } from "@/lib/documents";
  * bez obzira na to uz koliko proizvoda stoji; veze ka proizvodima su posebno polje.
  */
 
-export type LibraryDocType = "tds" | "sds" | "informacije" | "uputstvo" | "izjava" | "katalog" | "ostalo";
+export type LibraryDocType = "tds" | "sds" | "informacije" | "uputstvo" | "izjava" | "katalog" | "ostalo" | "stranica";
 
 export const LIBRARY_TYPE_LABELS: Record<LibraryDocType, string> = {
   tds: "Tehnički list",
@@ -21,6 +21,8 @@ export const LIBRARY_TYPE_LABELS: Record<LibraryDocType, string> = {
   izjava: "Izjava ili sertifikat",
   katalog: "Katalog ili brošura",
   ostalo: "Drugi dokument",
+  // Nije fajl: proizvođač nije ponudio proverljiv PDF, pa veza vodi na stranicu proizvoda kod njega.
+  stranica: "Dokumentacija na sajtu proizvođača",
 };
 
 export type LibraryItem = {
@@ -31,8 +33,8 @@ export type LibraryItem = {
   /** Fajl je na sajtu proizvođača, ne na našem sajtu. */
   external: boolean;
   /**
-   * Veza vodi na stranicu proizvoda kod proizvođača, a ne direktno na fajl: SATA menja adrese
-   * fajlova (`/media/…?ts=`), pa sačuvana adresa posle nekog vremena vraća 404 (2026-10-31: 66/66).
+   * Veza vodi na stranicu proizvoda kod proizvođača, a ne na fajl (vrsta `stranica`): sync nije
+   * potvrdio direktan PDF (vidi `lib/sata-catalog-products.ts`). Ne broji se kao dokument.
    */
   viaProductPage?: boolean;
   brands: { slug: string; name: string }[];
@@ -92,7 +94,7 @@ export function getDocumentLibrary(): LibraryData {
       if (!item) {
         item = {
           id: key,
-          type: classify(document.title, document.documentKey ?? href),
+          type: document.viaProductPage ? "stranica" : classify(document.title, document.documentKey ?? href),
           title: document.title,
           href,
           external: !href.startsWith("/"),

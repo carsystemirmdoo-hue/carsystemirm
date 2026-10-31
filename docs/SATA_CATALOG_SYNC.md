@@ -110,13 +110,26 @@ na IT/DE/FR se ne prikazuje i beleži se kao `SOURCE_DOCUMENT_LANGUAGE_MISMATCH`
 model — takvi redovi se ne izmišljaju. Spare-parts dokumentacija ostaje interna.
 
 **Adrese fajlova se menjaju.** SATA objavljuje fajl pod `/media/<heš>/<ts>/<FAJL>.PDF.PDF?ts=<ts>`, a
-heš i `ts` se menjaju pri objavljivanju njihovog sajta (2026-10-31: svih 66 adresa iz sync-a 2026-09-20
-→ 404; ista stranica proizvoda je nudila nove). Zato sajt ne vodi na fajl: adapter
-(`lib/sata-catalog-products.ts`, `SATA_ROTATING_FILE_URL`) daje vezu na stalnu stranicu porodice
-(`sourceUrl`, `/en/<naziv>/CF<id>`) sa `viaProductPage`, a ime fajla bez heša i `ts` je `documentKey`
-(isti fajl više porodica = jedna stavka biblioteke `/dokumentacija`). Dataset i dalje čuva doslovnu
-adresu iz sync-a kao dokaz izvora. `npm run sata:sync:check-links` (mreža) proverava da svaka stranica
-porodice sa dokumentom odgovara 200 i da je svaki dokument i dalje ponuđen na njoj (po imenu fajla).
+heš i `ts` se menjaju pri objavljivanju njihovog sajta (2026-10-31: svih 66 adresa iz sync-a 2026-09-20 →
+404). Zato:
+
+- **Reference su odvojene od dokumenata.** Porodica u datasetu nosi samo `{ document: <ključ> }`; ključ je
+  ime fajla bez heša, `?ts=` i `.PDF` nastavaka. Jedinstveni dokument je jednom u `documents` dataseta
+  (2026-10-31: 82 reference → 66 dokumenata).
+- **`npm run sata:sync:documents`** (`refresh-documents.mjs`, mreža) za svaki jedinstveni dokument traži
+  aktuelnu adresu ISTOG fajla na zvaničnim stranicama porodica koje ga navode, preuzima ga GET zahtevom i
+  proverava: 200 + `application/pdf` + telo `%PDF-`, PDF se otvara (unpdf) i ima čitljiv tekst, tekst
+  imenuje model porodice, potvrđuje vrstu (uputstvo/izjava) i jezik. Rezultat i dokaz (sha256, strane,
+  znakovi, dokaz modela) su u `data/sata-sync/documents.generated.json`; `apply` iz njega piše dataset.
+- **`DIRECT_PDF`** vodi direktno na proveren fajl („Otvorite PDF“). **`MANUFACTURER_PAGE`** (fajl nije
+  na stranici ili nije prošao proveru) vodi na stranicu porodice (`sourceUrl`) sa oznakom „Dokumentacija na
+  sajtu proizvođača“ — nikad kao PDF; biblioteka `/dokumentacija` ga broji odvojeno (vrsta `stranica`).
+- Isti zapis čitaju stranica proizvoda i biblioteka (`lib/sata-catalog-products.ts`); nema ručnih zamena.
+- Adrese ponovo zastare posle sledeće objave kod SATA: pre svake objave sajta pokrenuti
+  `npm run sata:sync:documents && npm run sata:sync:apply && npm run sata:sync:validate`.
+
+2026-10-31: 65 `DIRECT_PDF`, 1 `MANUFACTURER_PAGE` (`EN_-_LEAFLET-_SATA_VISION_2000` — SATA ga je skinuo sa
+stranice; Vision 2000 nije u javnom katalogu). Svi potvrđeni dokumenti su višejezični.
 
 ## Sadržaj na srpskom
 

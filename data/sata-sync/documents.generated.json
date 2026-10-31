@@ -1,0 +1,2436 @@
+{
+  "meta": {
+    "generator": "scripts/sata-sync/refresh-documents.mjs",
+    "note": "Jedinstveni SATA dokumenti. Ključ = ime fajla bez heša i ?ts= (SATA menja adrese fajlova). DIRECT_PDF = adresa proverena GET zahtevom kao čitljiv PDF tačnog modela, vrste i jezika; MANUFACTURER_PAGE = sajt vodi na stranicu porodice kod SATA.",
+    "references": 82,
+    "documents": 66,
+    "DIRECT_PDF": 65,
+    "MANUFACTURER_PAGE": 1
+  },
+  "documents": {
+    "BAL_-_SATAJET_K_1800_SPRAY_MIX": {
+      "key": "BAL_-_SATAJET_K_1800_SPRAY_MIX",
+      "kind": "manual",
+      "title": "Uputstvo za upotrebu",
+      "file": "BAL_-_SATAJET_K_1800_SPRAY_MIX.PDF.PDF",
+      "families": [
+        "CF1931315"
+      ],
+      "status": "DIRECT_PDF",
+      "href": "https://www.sata.com/media/61/01/4c/1793362236/BAL_-_SATAJET_K_1800_SPRAY_MIX.PDF.PDF?ts=1793362236",
+      "language": "multilingual",
+      "languagesDetected": [
+        "cs",
+        "ru",
+        "nl",
+        "en",
+        "it",
+        "es",
+        "pl",
+        "fr",
+        "de"
+      ],
+      "listedOn": "CF1931315",
+      "verified": {
+        "date": "2026-10-31",
+        "httpStatus": 200,
+        "contentType": "application/pdf",
+        "bytes": 9328192,
+        "sha256": "349abbb10989e0fd5488fd193b45646345946e38d3f64bd83e6f3d06c25bc7d6",
+        "pages": 534,
+        "textChars": 633126,
+        "modelEvidence": {
+          "CF1931315": "SATAjet K 1800 spray mix"
+        },
+        "kindConfirmed": true
+      }
+    },
+    "BAL-SATA-AIRSTAR-C": {
+      "key": "BAL-SATA-AIRSTAR-C",
+      "kind": "manual",
+      "title": "Uputstvo za upotrebu",
+      "file": "BAL-SATA-AIRSTAR-C.PDF.PDF",
+      "families": [
+        "CF1931124"
+      ],
+      "status": "DIRECT_PDF",
+      "href": "https://www.sata.com/media/7e/2d/2d/1793362239/BAL-SATA-AIRSTAR-C.PDF.PDF?ts=1793362239",
+      "language": "multilingual",
+      "languagesDetected": [
+        "cs",
+        "nl",
+        "ru",
+        "en",
+        "it",
+        "de",
+        "fr",
+        "es",
+        "pl"
+      ],
+      "listedOn": "CF1931124",
+      "verified": {
+        "date": "2026-10-31",
+        "httpStatus": 200,
+        "contentType": "application/pdf",
+        "bytes": 9305934,
+        "sha256": "1197d37e63865d9aa3205a4daaa1ac141f0d88de5bde5ce60cd727bad786a91e",
+        "pages": 410,
+        "textChars": 494776,
+        "modelEvidence": {
+          "CF1931124": "SATA air star C"
+        },
+        "kindConfirmed": true
+      }
+    },
+    "BAL-SATA-DRY-JET-2": {
+      "key": "BAL-SATA-DRY-JET-2",
+      "kind": "manual",
+      "title": "Uputstvo za upotrebu",
+      "file": "BAL-SATA-DRY-JET-2.PDF.PDF",
+      "families": [
+        "CF1931308",
+        "CF1931359"
+      ],
+      "status": "DIRECT_PDF",
+      "href": "https://www.sata.com/media/b6/b9/fd/1793362241/BAL-SATA-DRY-JET-2.PDF.PDF?ts=1793362241",
+      "language": "multilingual",
+      "languagesDetected": [
+        "cs",
+        "ru",
+        "nl",
+        "en",
+        "it",
+        "de",
+        "pl",
+        "fr",
+        "es"
+      ],
+      "listedOn": "CF1931308",
+      "verified": {
+        "date": "2026-10-31",
+        "httpStatus": 200,
+        "contentType": "application/pdf",
+        "bytes": 1964165,
+        "sha256": "3fe6dc0021e44e6fcbbd0ae114c54ea78bb58dd02e2e72ddb3b59d8930b212d0",
+        "pages": 252,
+        "textChars": 279305,
+        "modelEvidence": {
+          "CF1931308": "SATA dry jet",
+          "CF1931359": "SATA dry jet 2"
+        },
+        "kindConfirmed": true
+      }
+    },
+    "BAL-SATA-FILTER-100-PREP": {
+      "key": "BAL-SATA-FILTER-100-PREP",
+      "kind": "manual",
+      "title": "Uputstvo za upotrebu",
+      "file": "BAL-SATA-FILTER-100-PREP.PDF.PDF",
+      "families": [
+        "CF1931127"
+      ],
+      "status": "DIRECT_PDF",
+      "href": "https://www.sata.com/media/e6/d7/a6/1793362240/BAL-SATA-FILTER-100-PREP.PDF.PDF?ts=1793362240",
+      "language": "multilingual",
+      "languagesDetected": [
+        "cs",
+        "ru",
+        "nl",
+        "it",
+        "en",
+        "pl",
+        "de",
+        "es",
+        "fr"
+      ],
+      "listedOn": "CF1931127",
+      "verified": {
+        "date": "2026-10-31",
+        "httpStatus": 200,
+        "contentType": "application/pdf",
+        "bytes": 2395776,
+        "sha256": "3445fcbc1390d1e30bb0684d64221aec52a4d3d54e50ed910990265e0d85b233",
+        "pages": 272,
+        "textChars": 283077,
+        "modelEvidence": {
+          "CF1931127": "SATA filter 100"
+        },
+        "kindConfirmed": true
+      }
+    },
+    "BAL-SATA-FILTER-400": {
+      "key": "BAL-SATA-FILTER-400",
+      "kind": "manual",
+      "title": "Uputstvo za upotrebu",
+      "file": "BAL-SATA-FILTER-400.PDF.PDF",
+      "families": [
+        "CF1931129"
+      ],
+      "status": "DIRECT_PDF",
+      "href": "https://www.sata.com/media/e0/bf/9a/1793362239/BAL-SATA-FILTER-400.PDF.PDF?ts=1793362239",
+      "language": "multilingual",
+      "languagesDetected": [
+        "cs",
+        "ru",
+        "it",
+        "nl",
+        "en",
+        "es",
+        "pl",
+        "de",
+        "fr"
+      ],
+      "listedOn": "CF1931129",
+      "verified": {
+        "date": "2026-10-31",
+        "httpStatus": 200,
+        "contentType": "application/pdf",
+        "bytes": 2559520,
+        "sha256": "cd2d7b9fa1493efe2d429d2c7c03af5d08bc8c5d0293aa9cb1d48d5140959f87",
+        "pages": 314,
+        "textChars": 290335,
+        "modelEvidence": {
+          "CF1931129": "SATA filter 400"
+        },
+        "kindConfirmed": true
+      }
+    },
+    "BAL-SATA-HKU": {
+      "key": "BAL-SATA-HKU",
+      "kind": "manual",
+      "title": "Uputstvo za upotrebu",
+      "file": "BAL-SATA-HKU.PDF.PDF",
+      "families": [
+        "CF1931211"
+      ],
+      "status": "DIRECT_PDF",
+      "href": "https://www.sata.com/media/f7/36/a8/1793362240/BAL-SATA-HKU.PDF.PDF?ts=1793362240",
+      "language": "multilingual",
+      "languagesDetected": [
+        "en",
+        "fr",
+        "de",
+        "ru"
+      ],
+      "listedOn": "CF1931211",
+      "verified": {
+        "date": "2026-10-31",
+        "httpStatus": 200,
+        "contentType": "application/pdf",
+        "bytes": 1286824,
+        "sha256": "01b0ec627b46b7666e4b0ebd26dd1639ac34f3b41ecac91e49341ea14f471c35",
+        "pages": 27,
+        "textChars": 95846,
+        "modelEvidence": {
+          "CF1931211": "SATA HKU"
+        },
+        "kindConfirmed": true
+      }
+    },
+    "BAL-SATA-MINI-SET-2": {
+      "key": "BAL-SATA-MINI-SET-2",
+      "kind": "manual",
+      "title": "Uputstvo za upotrebu",
+      "file": "BAL-SATA-MINI-SET-2.PDF.PDF",
+      "families": [
+        "CF1931220"
+      ],
+      "status": "DIRECT_PDF",
+      "href": "https://www.sata.com/media/82/ed/e8/1793362241/BAL-SATA-MINI-SET-2.PDF.PDF?ts=1793362241",
+      "language": "multilingual",
+      "languagesDetected": [
+        "en",
+        "ru",
+        "de",
+        "fr",
+        "cs"
+      ],
+      "listedOn": "CF1931220",
+      "verified": {
+        "date": "2026-10-31",
+        "httpStatus": 200,
+        "contentType": "application/pdf",
+        "bytes": 488421,
+        "sha256": "2b5c6c029ea0670d8753c746b488df75d4de0106b34fd4ff077249617b6dab4f",
+        "pages": 12,
+        "textChars": 49259,
+        "modelEvidence": {
+          "CF1931220": "SATA mini Set 2"
+        },
+        "kindConfirmed": true
+      }
+    },
+    "BAL-SATA-MULTI-CLEAN-2": {
+      "key": "BAL-SATA-MULTI-CLEAN-2",
+      "kind": "manual",
+      "title": "Uputstvo za upotrebu",
+      "file": "BAL-SATA-MULTI-CLEAN-2.PDF.PDF",
+      "families": [
+        "CF1931313"
+      ],
+      "status": "DIRECT_PDF",
+      "href": "https://www.sata.com/media/53/89/e8/1793362240/BAL-SATA-MULTI-CLEAN-2.PDF.PDF?ts=1793362240",
+      "language": "multilingual",
+      "languagesDetected": [
+        "cs",
+        "nl",
+        "ru",
+        "en",
+        "de",
+        "it",
+        "es",
+        "fr",
+        "pl"
+      ],
+      "listedOn": "CF1931313",
+      "verified": {
+        "date": "2026-10-31",
+        "httpStatus": 200,
+        "contentType": "application/pdf",
+        "bytes": 3505196,
+        "sha256": "bf1217976a0aeebeb14ee64152656783325313a5097bcc305426b9c1440c1c72",
+        "pages": 332,
+        "textChars": 363376,
+        "modelEvidence": {
+          "CF1931313": "SATA multi clean 2"
+        },
+        "kindConfirmed": true
+      }
+    },
+    "BAL-SATA-VARIO-TOP-SPRAY": {
+      "key": "BAL-SATA-VARIO-TOP-SPRAY",
+      "kind": "manual",
+      "title": "Uputstvo za upotrebu",
+      "file": "BAL-SATA-VARIO-TOP-SPRAY.PDF.PDF",
+      "families": [
+        "CF1931215"
+      ],
+      "status": "DIRECT_PDF",
+      "href": "https://www.sata.com/media/37/cb/c1/1791809360/BAL-SATA-VARIO-TOP-SPRAY.PDF.PDF?ts=1791809360",
+      "language": "multilingual",
+      "languagesDetected": [
+        "en",
+        "ru",
+        "cs",
+        "fr",
+        "de"
+      ],
+      "listedOn": "CF1931215",
+      "verified": {
+        "date": "2026-10-31",
+        "httpStatus": 200,
+        "contentType": "application/pdf",
+        "bytes": 3523195,
+        "sha256": "fbb52ffabbef8a287f174890ee542d3aab06b6028fb8dc53f4b56a2d5136ac0c",
+        "pages": 52,
+        "textChars": 135345,
+        "modelEvidence": {
+          "CF1931215": "SATA vario top spray"
+        },
+        "kindConfirmed": true
+      }
+    },
+    "BAL-SATAJET-1000-B": {
+      "key": "BAL-SATAJET-1000-B",
+      "kind": "manual",
+      "title": "Uputstvo za upotrebu",
+      "file": "BAL-SATAJET-1000-B.PDF.PDF",
+      "families": [
+        "CF1931080",
+        "CF1931319"
+      ],
+      "status": "DIRECT_PDF",
+      "href": "https://www.sata.com/media/8d/95/61/1793362235/BAL-SATAJET-1000-B.PDF.PDF?ts=1793362235",
+      "language": "multilingual",
+      "languagesDetected": [
+        "cs",
+        "ru",
+        "it",
+        "en",
+        "nl",
+        "pl",
+        "es",
+        "de",
+        "fr"
+      ],
+      "listedOn": "CF1931080",
+      "verified": {
+        "date": "2026-10-31",
+        "httpStatus": 200,
+        "contentType": "application/pdf",
+        "bytes": 6474410,
+        "sha256": "fcb179890de6fb84bab9465d6c4a3dd5f60da7f75fdd591b1ac219a02e558f45",
+        "pages": 496,
+        "textChars": 553883,
+        "modelEvidence": {
+          "CF1931080": "SATAjet 1000 B",
+          "CF1931319": "SATAjet 1000 B"
+        },
+        "kindConfirmed": true
+      }
+    },
+    "BAL-SATAJET-1000-K-H": {
+      "key": "BAL-SATAJET-1000-K-H",
+      "kind": "manual",
+      "title": "Uputstvo za upotrebu",
+      "file": "BAL-SATAJET-1000-K-H.PDF.PDF",
+      "families": [
+        "CF1931090",
+        "CF1931098"
+      ],
+      "status": "DIRECT_PDF",
+      "href": "https://www.sata.com/media/d4/44/4a/1793362236/BAL-SATAJET-1000-K-H.PDF.PDF?ts=1793362236",
+      "language": "multilingual",
+      "languagesDetected": [
+        "cs",
+        "ru",
+        "en",
+        "it",
+        "nl",
+        "pl",
+        "es",
+        "de",
+        "fr"
+      ],
+      "listedOn": "CF1931090",
+      "verified": {
+        "date": "2026-10-31",
+        "httpStatus": 200,
+        "contentType": "application/pdf",
+        "bytes": 7810820,
+        "sha256": "54e3d62ff5e087bb24908e5ece4b7661f668d360dc198a160065906244caec18",
+        "pages": 560,
+        "textChars": 615227,
+        "modelEvidence": {
+          "CF1931090": "SATAjet 1000 H",
+          "CF1931098": "SATAjet 1000 K"
+        },
+        "kindConfirmed": true
+      }
+    },
+    "BAL-SATAJET-20-B": {
+      "key": "BAL-SATAJET-20-B",
+      "kind": "manual",
+      "title": "Uputstvo za upotrebu",
+      "file": "BAL-SATAJET-20-B.PDF.PDF",
+      "families": [
+        "CF1931083"
+      ],
+      "status": "DIRECT_PDF",
+      "href": "https://www.sata.com/media/ae/0b/9b/1793362235/BAL-SATAJET-20-B.PDF.PDF?ts=1793362235",
+      "language": "multilingual",
+      "languagesDetected": [
+        "en",
+        "de",
+        "ru",
+        "fr",
+        "nl",
+        "cs"
+      ],
+      "listedOn": "CF1931083",
+      "verified": {
+        "date": "2026-10-31",
+        "httpStatus": 200,
+        "contentType": "application/pdf",
+        "bytes": 754261,
+        "sha256": "f393ac3c24cdb996a5f2d1b9f11af288efe2373d3170826afdf1baebb834213b",
+        "pages": 12,
+        "textChars": 48138,
+        "modelEvidence": {
+          "CF1931083": "SATAjet 20 B"
+        },
+        "kindConfirmed": true
+      }
+    },
+    "BAL-SATAJET-3000-K": {
+      "key": "BAL-SATAJET-3000-K",
+      "kind": "manual",
+      "title": "Uputstvo za upotrebu",
+      "file": "BAL-SATAJET-3000-K.PDF.PDF",
+      "families": [
+        "CF1931096"
+      ],
+      "status": "DIRECT_PDF",
+      "href": "https://www.sata.com/media/0d/a2/e0/1793362236/BAL-SATAJET-3000-K.PDF.PDF?ts=1793362236",
+      "language": "multilingual",
+      "languagesDetected": [
+        "cs",
+        "ru",
+        "it",
+        "nl",
+        "en",
+        "pl",
+        "de",
+        "es",
+        "fr"
+      ],
+      "listedOn": "CF1931096",
+      "verified": {
+        "date": "2026-10-31",
+        "httpStatus": 200,
+        "contentType": "application/pdf",
+        "bytes": 5197021,
+        "sha256": "5048fba8a164d0622574e2b9d49dbdae4e208c3c1529c69ec290b2dbfcee3bca",
+        "pages": 486,
+        "textChars": 594850,
+        "modelEvidence": {
+          "CF1931096": "SATAjet 3000 K"
+        },
+        "kindConfirmed": true
+      }
+    },
+    "BAL-SATAJET-3000-K-SPRAY-MIX": {
+      "key": "BAL-SATAJET-3000-K-SPRAY-MIX",
+      "kind": "manual",
+      "title": "Uputstvo za upotrebu",
+      "file": "BAL-SATAJET-3000-K-SPRAY-MIX.PDF.PDF",
+      "families": [
+        "CF1931095"
+      ],
+      "status": "DIRECT_PDF",
+      "href": "https://www.sata.com/media/5e/38/8a/1793362236/BAL-SATAJET-3000-K-SPRAY-MIX.PDF.PDF?ts=1793362236",
+      "language": "multilingual",
+      "languagesDetected": [
+        "cs",
+        "ru",
+        "nl",
+        "it",
+        "en",
+        "pl",
+        "es",
+        "de",
+        "fr"
+      ],
+      "listedOn": "CF1931095",
+      "verified": {
+        "date": "2026-10-31",
+        "httpStatus": 200,
+        "contentType": "application/pdf",
+        "bytes": 11609200,
+        "sha256": "53a92ca654a5534127dcb589684056e8f7aeacc3cdfc85efbc58827c84789481",
+        "pages": 562,
+        "textChars": 653096,
+        "modelEvidence": {
+          "CF1931095": "SATAjet 3000 K spray mix"
+        },
+        "kindConfirmed": true
+      }
+    },
+    "BAL-SATAJET-5000-B": {
+      "key": "BAL-SATAJET-5000-B",
+      "kind": "manual",
+      "title": "Uputstvo za upotrebu",
+      "file": "BAL-SATAJET-5000-B.PDF.PDF",
+      "families": [
+        "CF1931074"
+      ],
+      "status": "DIRECT_PDF",
+      "href": "https://www.sata.com/media/d2/a6/e4/1793362234/BAL-SATAJET-5000-B.PDF.PDF?ts=1793362234",
+      "language": "multilingual",
+      "languagesDetected": [
+        "cs",
+        "ru",
+        "en",
+        "it",
+        "nl",
+        "pl",
+        "es",
+        "de",
+        "fr"
+      ],
+      "listedOn": "CF1931074",
+      "verified": {
+        "date": "2026-10-31",
+        "httpStatus": 200,
+        "contentType": "application/pdf",
+        "bytes": 6150757,
+        "sha256": "d7e1fde3c535dd84b99d726305bba50437f3163353042b7cacb9ade85825859a",
+        "pages": 420,
+        "textChars": 460270,
+        "modelEvidence": {
+          "CF1931074": "SATAjet 5000 B"
+        },
+        "kindConfirmed": true
+      }
+    },
+    "BAL-SATAJET-H": {
+      "key": "BAL-SATAJET-H",
+      "kind": "manual",
+      "title": "Uputstvo za upotrebu",
+      "file": "BAL-SATAJET-H.PDF.PDF",
+      "families": [
+        "CF1931091"
+      ],
+      "status": "DIRECT_PDF",
+      "href": "https://www.sata.com/media/e8/65/5b/1793362237/BAL-SATAJET-H.PDF.PDF?ts=1793362237",
+      "language": "multilingual",
+      "languagesDetected": [
+        "en",
+        "de",
+        "cs"
+      ],
+      "listedOn": "CF1931091",
+      "verified": {
+        "date": "2026-10-31",
+        "httpStatus": 200,
+        "contentType": "application/pdf",
+        "bytes": 813857,
+        "sha256": "3feb50b79caae63ad154a9542757bda609623751b86826adef38f2eefa3047d9",
+        "pages": 10,
+        "textChars": 25766,
+        "modelEvidence": {
+          "CF1931091": "SATAjet H"
+        },
+        "kindConfirmed": true
+      }
+    },
+    "BETRIEBSANLEITUNG_MANUAL_-_SATA_VISION_2000": {
+      "key": "BETRIEBSANLEITUNG_MANUAL_-_SATA_VISION_2000",
+      "kind": "manual",
+      "title": "Uputstvo za upotrebu",
+      "file": "BETRIEBSANLEITUNG_MANUAL_-_SATA_VISION_2000.PDF.PDF",
+      "families": [
+        "CF1931122"
+      ],
+      "status": "DIRECT_PDF",
+      "href": "https://www.sata.com/media/10/60/64/1793362239/BETRIEBSANLEITUNG_MANUAL_-_SATA_VISION_2000.PDF.PDF?ts=1793362239",
+      "language": "multilingual",
+      "languagesDetected": [
+        "cs",
+        "ru",
+        "nl",
+        "en",
+        "it",
+        "es",
+        "de",
+        "fr",
+        "pl"
+      ],
+      "listedOn": "CF1931122",
+      "verified": {
+        "date": "2026-10-31",
+        "httpStatus": 200,
+        "contentType": "application/pdf",
+        "bytes": 10288034,
+        "sha256": "f876633b6f2f39ebdfb3d39a39c716822d71ef62d60ef287c4b0e77481b0e3cf",
+        "pages": 522,
+        "textChars": 650295,
+        "modelEvidence": {
+          "CF1931122": "SATA vision 2000"
+        },
+        "kindConfirmed": true
+      }
+    },
+    "BETRIEBSANLEITUNG_MANUAL_-_SATAGRAPH_4": {
+      "key": "BETRIEBSANLEITUNG_MANUAL_-_SATAGRAPH_4",
+      "kind": "manual",
+      "title": "Uputstvo za upotrebu",
+      "file": "BETRIEBSANLEITUNG_MANUAL_-_SATAGRAPH_4.PDF.PDF",
+      "families": [
+        "CF1931100"
+      ],
+      "status": "DIRECT_PDF",
+      "href": "https://www.sata.com/media/8a/a8/f4/1793362237/BETRIEBSANLEITUNG_MANUAL_-_SATAGRAPH_4.PDF.PDF?ts=1793362237",
+      "language": "multilingual",
+      "languagesDetected": [
+        "en",
+        "de",
+        "fr",
+        "es",
+        "nl",
+        "cs",
+        "it"
+      ],
+      "listedOn": "CF1931100",
+      "verified": {
+        "date": "2026-10-31",
+        "httpStatus": 200,
+        "contentType": "application/pdf",
+        "bytes": 605120,
+        "sha256": "f15482f4d130a1792924ba32e11c73eddf82298a189d601470e68ce5b09f1dcb",
+        "pages": 66,
+        "textChars": 52625,
+        "modelEvidence": {
+          "CF1931100": "SATAgraph 4"
+        },
+        "kindConfirmed": true
+      }
+    },
+    "BETRIEBSANLEITUNG-SATA-ADAM-2": {
+      "key": "BETRIEBSANLEITUNG-SATA-ADAM-2",
+      "kind": "manual",
+      "title": "Uputstvo za upotrebu",
+      "file": "BETRIEBSANLEITUNG-SATA-ADAM-2.PDF.PDF",
+      "families": [
+        "CF1931342"
+      ],
+      "status": "DIRECT_PDF",
+      "href": "https://www.sata.com/media/79/00/67/1793362241/BETRIEBSANLEITUNG-SATA-ADAM-2.PDF.PDF?ts=1793362241",
+      "language": "multilingual",
+      "languagesDetected": [
+        "cs",
+        "ru",
+        "pl",
+        "nl",
+        "en",
+        "it",
+        "de",
+        "fr",
+        "es"
+      ],
+      "listedOn": "CF1931342",
+      "verified": {
+        "date": "2026-10-31",
+        "httpStatus": 200,
+        "contentType": "application/pdf",
+        "bytes": 7374513,
+        "sha256": "5e8abf3de688c8c324274a19ead591fd9ad1c2b11e1792d24e0a26ccc68ffe78",
+        "pages": 268,
+        "textChars": 287877,
+        "modelEvidence": {
+          "CF1931342": "SATA adam 2"
+        },
+        "kindConfirmed": true
+      }
+    },
+    "BETRIEBSANLEITUNG-SATA-AIR-STAR-F": {
+      "key": "BETRIEBSANLEITUNG-SATA-AIR-STAR-F",
+      "kind": "manual",
+      "title": "Uputstvo za upotrebu",
+      "file": "BETRIEBSANLEITUNG-SATA-AIR-STAR-F.PDF.PDF",
+      "families": [
+        "CF1931125"
+      ],
+      "status": "DIRECT_PDF",
+      "href": "https://www.sata.com/media/1f/dc/18/1793362239/BETRIEBSANLEITUNG-SATA-AIR-STAR-F.PDF.PDF?ts=1793362239",
+      "language": "multilingual",
+      "languagesDetected": [
+        "cs",
+        "nl",
+        "ru",
+        "en",
+        "it",
+        "pl",
+        "fr",
+        "es",
+        "de"
+      ],
+      "listedOn": "CF1931125",
+      "verified": {
+        "date": "2026-10-31",
+        "httpStatus": 200,
+        "contentType": "application/pdf",
+        "bytes": 7085860,
+        "sha256": "50862b48f47fe8f9d7b7021a99d1a77180497d3cc2d6ebe3fcefcc9a90eb654d",
+        "pages": 308,
+        "textChars": 365385,
+        "modelEvidence": {
+          "CF1931125": "SATA air star F"
+        },
+        "kindConfirmed": true
+      }
+    },
+    "BETRIEBSANLEITUNG-SATA-AIR-VISION-5000": {
+      "key": "BETRIEBSANLEITUNG-SATA-AIR-VISION-5000",
+      "kind": "manual",
+      "title": "Uputstvo za upotrebu",
+      "file": "BETRIEBSANLEITUNG-SATA-AIR-VISION-5000.PDF.PDF",
+      "families": [
+        "CF1931121"
+      ],
+      "status": "DIRECT_PDF",
+      "href": "https://www.sata.com/media/cd/e3/b7/1793362238/BETRIEBSANLEITUNG-SATA-AIR-VISION-5000.PDF.PDF?ts=1793362238",
+      "language": "multilingual",
+      "languagesDetected": [
+        "cs",
+        "nl",
+        "ru",
+        "en",
+        "it",
+        "de",
+        "es",
+        "pl",
+        "fr"
+      ],
+      "listedOn": "CF1931121",
+      "verified": {
+        "date": "2026-10-31",
+        "httpStatus": 200,
+        "contentType": "application/pdf",
+        "bytes": 7739278,
+        "sha256": "0c3ff41b95160b5d59b540b5c640872742b025d3fc6efa4d3a4554cdaca8d03a",
+        "pages": 404,
+        "textChars": 530345,
+        "modelEvidence": {
+          "CF1931121": "SATA air vision 5000"
+        },
+        "kindConfirmed": true
+      }
+    },
+    "BETRIEBSANLEITUNG-SATA-CLEAN-RCS": {
+      "key": "BETRIEBSANLEITUNG-SATA-CLEAN-RCS",
+      "kind": "manual",
+      "title": "Uputstvo za upotrebu",
+      "file": "BETRIEBSANLEITUNG-SATA-CLEAN-RCS.PDF.PDF",
+      "families": [
+        "CF1931355"
+      ],
+      "status": "DIRECT_PDF",
+      "href": "https://www.sata.com/media/b8/1f/02/1793362240/BETRIEBSANLEITUNG-SATA-CLEAN-RCS.PDF.PDF?ts=1793362240",
+      "language": "multilingual",
+      "languagesDetected": [
+        "cs",
+        "en",
+        "ru",
+        "nl",
+        "it",
+        "es",
+        "pl",
+        "fr",
+        "de"
+      ],
+      "listedOn": "CF1931355",
+      "verified": {
+        "date": "2026-10-31",
+        "httpStatus": 200,
+        "contentType": "application/pdf",
+        "bytes": 9437698,
+        "sha256": "6e9c3179837e3a934aa31ac16e4017720d3b5275f6dc9aa7e8b047420da6deb9",
+        "pages": 392,
+        "textChars": 445400,
+        "modelEvidence": {
+          "CF1931355": "SATA clean RCS"
+        },
+        "kindConfirmed": true
+      }
+    },
+    "BETRIEBSANLEITUNG-SATA-FILTER-200": {
+      "key": "BETRIEBSANLEITUNG-SATA-FILTER-200",
+      "kind": "manual",
+      "title": "Uputstvo za upotrebu",
+      "file": "BETRIEBSANLEITUNG-SATA-FILTER-200.PDF.PDF",
+      "families": [
+        "CF1931128"
+      ],
+      "status": "DIRECT_PDF",
+      "href": "https://www.sata.com/media/49/8d/f8/1793362239/BETRIEBSANLEITUNG-SATA-FILTER-200.PDF.PDF?ts=1793362239",
+      "language": "multilingual",
+      "languagesDetected": [
+        "it",
+        "en",
+        "ru",
+        "de",
+        "cs",
+        "es",
+        "fr",
+        "nl",
+        "pl"
+      ],
+      "listedOn": "CF1931128",
+      "verified": {
+        "date": "2026-10-31",
+        "httpStatus": 200,
+        "contentType": "application/pdf",
+        "bytes": 2512320,
+        "sha256": "81894e199873b7d5652cc8c0c87754ebfeee9ce0d19b4a45246dcdbd9494a00d",
+        "pages": 86,
+        "textChars": 77180,
+        "modelEvidence": {
+          "CF1931128": "SATA filter 200"
+        },
+        "kindConfirmed": true
+      }
+    },
+    "BETRIEBSANLEITUNG-SATA-FILTER-500": {
+      "key": "BETRIEBSANLEITUNG-SATA-FILTER-500",
+      "kind": "manual",
+      "title": "Uputstvo za upotrebu",
+      "file": "BETRIEBSANLEITUNG-SATA-FILTER-500.PDF.PDF",
+      "families": [
+        "CF1931293"
+      ],
+      "status": "DIRECT_PDF",
+      "href": "https://www.sata.com/media/db/ea/76/1793362239/BETRIEBSANLEITUNG-SATA-FILTER-500.PDF.PDF?ts=1793362239",
+      "language": "multilingual",
+      "languagesDetected": [
+        "cs",
+        "ru",
+        "it",
+        "nl",
+        "en",
+        "es",
+        "pl",
+        "fr",
+        "de"
+      ],
+      "listedOn": "CF1931293",
+      "verified": {
+        "date": "2026-10-31",
+        "httpStatus": 200,
+        "contentType": "application/pdf",
+        "bytes": 5666191,
+        "sha256": "ac78b353e20829c2a7945336e710c851f92f7eb66e87dd7e4a18132810db6536",
+        "pages": 318,
+        "textChars": 326288,
+        "modelEvidence": {
+          "CF1931293": "SATA filter 500"
+        },
+        "kindConfirmed": true
+      }
+    },
+    "BETRIEBSANLEITUNG-SATA-RPS": {
+      "key": "BETRIEBSANLEITUNG-SATA-RPS",
+      "kind": "manual",
+      "title": "Uputstvo za upotrebu",
+      "file": "BETRIEBSANLEITUNG-SATA-RPS.PDF.PDF",
+      "families": [
+        "CF1931348"
+      ],
+      "status": "DIRECT_PDF",
+      "href": "https://www.sata.com/media/de/7d/bb/1793362238/BETRIEBSANLEITUNG-SATA-RPS.PDF.PDF?ts=1793362238",
+      "language": "multilingual",
+      "languagesDetected": [
+        "it",
+        "fr",
+        "es",
+        "en",
+        "de",
+        "ru"
+      ],
+      "listedOn": "CF1931348",
+      "verified": {
+        "date": "2026-10-31",
+        "httpStatus": 200,
+        "contentType": "application/pdf",
+        "bytes": 1399267,
+        "sha256": "4ef2c3d8440671d8c4c65c76683fc21b26a23890007c1bfbfca8a65833757e28",
+        "pages": 2,
+        "textChars": 5707,
+        "modelEvidence": {
+          "CF1931348": "SATA RPS"
+        },
+        "kindConfirmed": true
+      }
+    },
+    "BETRIEBSANLEITUNG-SATA-TRUESUN": {
+      "key": "BETRIEBSANLEITUNG-SATA-TRUESUN",
+      "kind": "manual",
+      "title": "Uputstvo za upotrebu",
+      "file": "BETRIEBSANLEITUNG-SATA-TRUESUN.PDF.PDF",
+      "families": [
+        "CF1931309"
+      ],
+      "status": "DIRECT_PDF",
+      "href": "https://www.sata.com/media/13/6b/6e/1793362240/BETRIEBSANLEITUNG-SATA-TRUESUN.PDF.PDF?ts=1793362240",
+      "language": "multilingual",
+      "languagesDetected": [
+        "cs",
+        "ru",
+        "en",
+        "nl",
+        "it",
+        "de",
+        "fr",
+        "pl",
+        "es"
+      ],
+      "listedOn": "CF1931309",
+      "verified": {
+        "date": "2026-10-31",
+        "httpStatus": 200,
+        "contentType": "application/pdf",
+        "bytes": 9805014,
+        "sha256": "a933a60b72d43403a2ca0793e4910f62b1e658d584bd2c41958f9d4798c71c11",
+        "pages": 254,
+        "textChars": 276042,
+        "modelEvidence": {
+          "CF1931309": "SATA trueSun"
+        },
+        "kindConfirmed": true
+      }
+    },
+    "BETRIEBSANLEITUNG-SATAJET-100-B": {
+      "key": "BETRIEBSANLEITUNG-SATAJET-100-B",
+      "kind": "manual",
+      "title": "Uputstvo za upotrebu",
+      "file": "BETRIEBSANLEITUNG-SATAJET-100-B.PDF.PDF",
+      "families": [
+        "CF1931082"
+      ],
+      "status": "DIRECT_PDF",
+      "href": "https://www.sata.com/media/17/51/5b/1793362235/BETRIEBSANLEITUNG-SATAJET-100-B.PDF.PDF?ts=1793362235",
+      "language": "multilingual",
+      "languagesDetected": [
+        "cs",
+        "ru",
+        "en",
+        "it",
+        "nl",
+        "pl",
+        "de",
+        "es",
+        "fr"
+      ],
+      "listedOn": "CF1931082",
+      "verified": {
+        "date": "2026-10-31",
+        "httpStatus": 200,
+        "contentType": "application/pdf",
+        "bytes": 10699625,
+        "sha256": "120fd4b58cf8df73fb5f9e531c66be0167896f63bb7505c55207adb9de4d9f99",
+        "pages": 552,
+        "textChars": 620248,
+        "modelEvidence": {
+          "CF1931082": "SATAjet 100 B"
+        },
+        "kindConfirmed": true
+      }
+    },
+    "BETRIEBSANLEITUNG-SATAJET-1500-B": {
+      "key": "BETRIEBSANLEITUNG-SATAJET-1500-B",
+      "kind": "manual",
+      "title": "Uputstvo za upotrebu",
+      "file": "BETRIEBSANLEITUNG-SATAJET-1500-B.PDF.PDF",
+      "families": [
+        "CF1931079"
+      ],
+      "status": "DIRECT_PDF",
+      "href": "https://www.sata.com/media/99/42/b3/1793362234/BETRIEBSANLEITUNG-SATAJET-1500-B.PDF.PDF?ts=1793362234",
+      "language": "multilingual",
+      "languagesDetected": [
+        "cs",
+        "ru",
+        "en",
+        "nl",
+        "it",
+        "pl",
+        "de",
+        "es",
+        "fr"
+      ],
+      "listedOn": "CF1931079",
+      "verified": {
+        "date": "2026-10-31",
+        "httpStatus": 200,
+        "contentType": "application/pdf",
+        "bytes": 11569228,
+        "sha256": "51702453a552b71211369eabee2b69c8e524bbd4e01f2f8c66759e32e3622c22",
+        "pages": 532,
+        "textChars": 630246,
+        "modelEvidence": {
+          "CF1931079": "SATAjet 1500 B"
+        },
+        "kindConfirmed": true
+      }
+    },
+    "BETRIEBSANLEITUNG-SATAJET-X-5500": {
+      "key": "BETRIEBSANLEITUNG-SATAJET-X-5500",
+      "kind": "manual",
+      "title": "Uputstvo za upotrebu",
+      "file": "BETRIEBSANLEITUNG-SATAJET-X-5500.PDF.PDF",
+      "families": [
+        "CF1931072",
+        "CF1931331"
+      ],
+      "status": "DIRECT_PDF",
+      "href": "https://www.sata.com/media/44/43/ef/1793362234/BETRIEBSANLEITUNG-SATAJET-X-5500.PDF.PDF?ts=1793362234",
+      "language": "multilingual",
+      "languagesDetected": [
+        "cs",
+        "ru",
+        "en",
+        "it",
+        "pl",
+        "nl",
+        "es",
+        "de",
+        "fr"
+      ],
+      "listedOn": "CF1931072",
+      "verified": {
+        "date": "2026-10-31",
+        "httpStatus": 200,
+        "contentType": "application/pdf",
+        "bytes": 10267661,
+        "sha256": "8aa3c905c3c5140342568764cd6657f419daad70814c3e89babc5e39a0be06ed",
+        "pages": 476,
+        "textChars": 510505,
+        "modelEvidence": {
+          "CF1931072": "SATAjet X 5500",
+          "CF1931331": "SATAjet X 5500"
+        },
+        "kindConfirmed": true
+      }
+    },
+    "BETRIEBSANLEITUNG-SATAJET-X5500-PHASER": {
+      "key": "BETRIEBSANLEITUNG-SATAJET-X5500-PHASER",
+      "kind": "manual",
+      "title": "Uputstvo za upotrebu",
+      "file": "BETRIEBSANLEITUNG-SATAJET-X5500-PHASER.PDF.PDF",
+      "families": [
+        "CF1931282"
+      ],
+      "status": "DIRECT_PDF",
+      "href": "https://www.sata.com/media/e9/5a/31/1793362233/BETRIEBSANLEITUNG-SATAJET-X5500-PHASER.PDF.PDF?ts=1793362233",
+      "language": "multilingual",
+      "languagesDetected": [
+        "cs",
+        "ru",
+        "en",
+        "it",
+        "nl",
+        "pl",
+        "es",
+        "de",
+        "fr"
+      ],
+      "listedOn": "CF1931282",
+      "verified": {
+        "date": "2026-10-31",
+        "httpStatus": 200,
+        "contentType": "application/pdf",
+        "bytes": 8254874,
+        "sha256": "e38c2deaadcd892c162f08650cc22be41aee93034f83ed09c1b2da0a60c44227",
+        "pages": 418,
+        "textChars": 440688,
+        "modelEvidence": {
+          "CF1931282": "SATAjet X 5500 PHASER"
+        },
+        "kindConfirmed": true
+      }
+    },
+    "BETRIEBSANLEITUNG-SATAMINIJET-4400-B": {
+      "key": "BETRIEBSANLEITUNG-SATAMINIJET-4400-B",
+      "kind": "manual",
+      "title": "Uputstvo za upotrebu",
+      "file": "BETRIEBSANLEITUNG-SATAMINIJET-4400-B.PDF.PDF",
+      "families": [
+        "CF1931085"
+      ],
+      "status": "DIRECT_PDF",
+      "href": "https://www.sata.com/media/66/85/5e/1793362235/BETRIEBSANLEITUNG-SATAMINIJET-4400-B.PDF.PDF?ts=1793362235",
+      "language": "multilingual",
+      "languagesDetected": [
+        "cs",
+        "ru",
+        "it",
+        "nl",
+        "en",
+        "pl",
+        "es",
+        "de",
+        "fr"
+      ],
+      "listedOn": "CF1931085",
+      "verified": {
+        "date": "2026-10-31",
+        "httpStatus": 200,
+        "contentType": "application/pdf",
+        "bytes": 9866023,
+        "sha256": "85aee6624745e906471c3dba783ee2e826ab26a1641b007c965e88ddccdbc73f",
+        "pages": 420,
+        "textChars": 448750,
+        "modelEvidence": {
+          "CF1931085": "SATAminijet 4400 B"
+        },
+        "kindConfirmed": true
+      }
+    },
+    "EG-KONFORMITATSERKLARUNG-SATA-FILTER-100-PREP": {
+      "key": "EG-KONFORMITATSERKLARUNG-SATA-FILTER-100-PREP",
+      "kind": "declaration",
+      "title": "Izjava o usaglašenosti",
+      "file": "EG-KONFORMITATSERKLARUNG-SATA-FILTER-100-PREP.PDF.PDF",
+      "families": [
+        "CF1931127"
+      ],
+      "status": "DIRECT_PDF",
+      "href": "https://www.sata.com/media/89/ba/34/1793362240/EG-KONFORMITATSERKLARUNG-SATA-FILTER-100-PREP.PDF.PDF?ts=1793362240",
+      "language": "multilingual",
+      "languagesDetected": [
+        "nl",
+        "cs",
+        "ru",
+        "en",
+        "pl",
+        "it",
+        "es",
+        "fr",
+        "de"
+      ],
+      "listedOn": "CF1931127",
+      "verified": {
+        "date": "2026-10-31",
+        "httpStatus": 200,
+        "contentType": "application/pdf",
+        "bytes": 778192,
+        "sha256": "a60d7ded24e1a26b793d2a907bde3392861cebe6a67033b6521f08d28980087e",
+        "pages": 54,
+        "textChars": 43900,
+        "modelEvidence": {
+          "CF1931127": "SATA filter 100"
+        },
+        "kindConfirmed": true
+      }
+    },
+    "EG-KONFORMITATSERKLARUNG-SATA-HKU-FASSPUMPENANLAGE": {
+      "key": "EG-KONFORMITATSERKLARUNG-SATA-HKU-FASSPUMPENANLAGE",
+      "kind": "declaration",
+      "title": "Izjava o usaglašenosti",
+      "file": "EG-KONFORMITATSERKLARUNG-SATA-HKU-FASSPUMPENANLAGE.PDF.PDF",
+      "families": [
+        "CF1931211"
+      ],
+      "status": "DIRECT_PDF",
+      "href": "https://www.sata.com/media/72/b6/1a/1793362240/EG-KONFORMITATSERKLARUNG-SATA-HKU-FASSPUMPENANLAGE.PDF.PDF?ts=1793362240",
+      "language": "multilingual",
+      "languagesDetected": [
+        "en",
+        "fr",
+        "ru",
+        "de",
+        "it",
+        "nl",
+        "pl",
+        "cs"
+      ],
+      "listedOn": "CF1931211",
+      "verified": {
+        "date": "2026-10-31",
+        "httpStatus": 200,
+        "contentType": "application/pdf",
+        "bytes": 430268,
+        "sha256": "23548dfd9774f9bf514a3b4f545a4ff2897810b5df8727c24019208e4321eabb",
+        "pages": 12,
+        "textChars": 6727,
+        "modelEvidence": {
+          "CF1931211": "SATA HKU"
+        },
+        "kindConfirmed": true
+      }
+    },
+    "EG-KONFORMITATSERKLARUNG-SATAJET-100-B": {
+      "key": "EG-KONFORMITATSERKLARUNG-SATAJET-100-B",
+      "kind": "declaration",
+      "title": "Izjava o usaglašenosti",
+      "file": "EG-KONFORMITATSERKLARUNG-SATAJET-100-B.PDF.PDF",
+      "families": [
+        "CF1931082"
+      ],
+      "status": "DIRECT_PDF",
+      "href": "https://www.sata.com/media/48/d8/60/1793362235/EG-KONFORMITATSERKLARUNG-SATAJET-100-B.PDF.PDF?ts=1793362235",
+      "language": "multilingual",
+      "languagesDetected": [
+        "nl",
+        "cs",
+        "ru",
+        "pl",
+        "en",
+        "it",
+        "es",
+        "fr",
+        "de"
+      ],
+      "listedOn": "CF1931082",
+      "verified": {
+        "date": "2026-10-31",
+        "httpStatus": 200,
+        "contentType": "application/pdf",
+        "bytes": 776266,
+        "sha256": "0cfe8d25b0c3f4bb6a97e6017b00f22c619bc30731dfeae77d60330f57fd03e8",
+        "pages": 54,
+        "textChars": 45742,
+        "modelEvidence": {
+          "CF1931082": "SATAjet 100 B"
+        },
+        "kindConfirmed": true
+      }
+    },
+    "EG-KONFORMITATSERKLARUNG-SATAJET-3000-K-SPRAY-MIX": {
+      "key": "EG-KONFORMITATSERKLARUNG-SATAJET-3000-K-SPRAY-MIX",
+      "kind": "declaration",
+      "title": "Izjava o usaglašenosti",
+      "file": "EG-KONFORMITATSERKLARUNG-SATAJET-3000-K-SPRAY-MIX.PDF.PDF",
+      "families": [
+        "CF1931095"
+      ],
+      "status": "DIRECT_PDF",
+      "href": "https://www.sata.com/media/b6/8b/cc/1793362236/EG-KONFORMITATSERKLARUNG-SATAJET-3000-K-SPRAY-MIX.PDF.PDF?ts=1793362236",
+      "language": "multilingual",
+      "languagesDetected": [
+        "nl",
+        "cs",
+        "ru",
+        "en",
+        "pl",
+        "it",
+        "es",
+        "fr",
+        "de"
+      ],
+      "listedOn": "CF1931095",
+      "verified": {
+        "date": "2026-10-31",
+        "httpStatus": 200,
+        "contentType": "application/pdf",
+        "bytes": 825610,
+        "sha256": "fbaa4365d47fcf9e032a7ab37bc6d2d43e7eb824451917f57457fc053c2afa59",
+        "pages": 54,
+        "textChars": 41370,
+        "modelEvidence": {
+          "CF1931095": "SATAjet 3000 K spray mix"
+        },
+        "kindConfirmed": true
+      }
+    },
+    "EG-KONFORMITATSERKLARUNG-SATAJET-5000-B": {
+      "key": "EG-KONFORMITATSERKLARUNG-SATAJET-5000-B",
+      "kind": "declaration",
+      "title": "Izjava o usaglašenosti",
+      "file": "EG-KONFORMITATSERKLARUNG-SATAJET-5000-B.PDF.PDF",
+      "families": [
+        "CF1931074"
+      ],
+      "status": "DIRECT_PDF",
+      "href": "https://www.sata.com/media/4f/a4/8b/1793362234/EG-KONFORMITATSERKLARUNG-SATAJET-5000-B.PDF.PDF?ts=1793362234",
+      "language": "multilingual",
+      "languagesDetected": [
+        "nl",
+        "cs",
+        "ru",
+        "en",
+        "pl",
+        "it",
+        "es",
+        "fr",
+        "de"
+      ],
+      "listedOn": "CF1931074",
+      "verified": {
+        "date": "2026-10-31",
+        "httpStatus": 200,
+        "contentType": "application/pdf",
+        "bytes": 796666,
+        "sha256": "a33b10f7fcba3759c126459c266b7f56d954250585297e73c348a0977504ca7a",
+        "pages": 54,
+        "textChars": 42658,
+        "modelEvidence": {
+          "CF1931074": "SATAjet 5000 B"
+        },
+        "kindConfirmed": true
+      }
+    },
+    "EG-KONFORMITATSERKLARUNG-SATAJET-K-1800-SPRAY-MIX": {
+      "key": "EG-KONFORMITATSERKLARUNG-SATAJET-K-1800-SPRAY-MIX",
+      "kind": "declaration",
+      "title": "Izjava o usaglašenosti",
+      "file": "EG-KONFORMITATSERKLARUNG-SATAJET-K-1800-SPRAY-MIX.PDF.PDF",
+      "families": [
+        "CF1931315"
+      ],
+      "status": "DIRECT_PDF",
+      "href": "https://www.sata.com/media/37/a2/48/1793362236/EG-KONFORMITATSERKLARUNG-SATAJET-K-1800-SPRAY-MIX.PDF.PDF?ts=1793362236",
+      "language": "multilingual",
+      "languagesDetected": [
+        "nl",
+        "cs",
+        "ru",
+        "en",
+        "pl",
+        "it",
+        "es",
+        "fr",
+        "de"
+      ],
+      "listedOn": "CF1931315",
+      "verified": {
+        "date": "2026-10-31",
+        "httpStatus": 200,
+        "contentType": "application/pdf",
+        "bytes": 862295,
+        "sha256": "2665fd5991775f78fb04e6636ee79765ff00d1feb80b2989ff0362edd97725cd",
+        "pages": 54,
+        "textChars": 41300,
+        "modelEvidence": {
+          "CF1931315": "SATAjet K 1800 spray mix"
+        },
+        "kindConfirmed": true
+      }
+    },
+    "EG-KONFORMITATSERKLARUNG-SATAJET-X-5500-PHASER": {
+      "key": "EG-KONFORMITATSERKLARUNG-SATAJET-X-5500-PHASER",
+      "kind": "declaration",
+      "title": "Izjava o usaglašenosti",
+      "file": "EG-KONFORMITATSERKLARUNG-SATAJET-X-5500-PHASER.PDF.PDF",
+      "families": [
+        "CF1931282"
+      ],
+      "status": "DIRECT_PDF",
+      "href": "https://www.sata.com/media/e8/fb/3a/1793362233/EG-KONFORMITATSERKLARUNG-SATAJET-X-5500-PHASER.PDF.PDF?ts=1793362233",
+      "language": "multilingual",
+      "languagesDetected": [
+        "nl",
+        "cs",
+        "ru",
+        "it",
+        "en",
+        "pl",
+        "es",
+        "fr",
+        "de"
+      ],
+      "listedOn": "CF1931282",
+      "verified": {
+        "date": "2026-10-31",
+        "httpStatus": 200,
+        "contentType": "application/pdf",
+        "bytes": 798530,
+        "sha256": "0856751a2b6fe96c1995e1d20bc1ec4e98c7c689c622252f8071e4d9bdbc20c6",
+        "pages": 54,
+        "textChars": 43357,
+        "modelEvidence": {
+          "CF1931282": "SATAjet X 5500 PHASER"
+        },
+        "kindConfirmed": true
+      }
+    },
+    "EN_-_LEAFLET-_SATA_VISION_2000": {
+      "key": "EN_-_LEAFLET-_SATA_VISION_2000",
+      "kind": "brochure",
+      "title": "Brošura",
+      "file": "EN_-_LEAFLET-_SATA_VISION_2000.PDF.PDF",
+      "families": [
+        "CF1931122"
+      ],
+      "status": "MANUFACTURER_PAGE",
+      "reason": "NOT_LISTED_ON_PRODUCT_PAGE",
+      "language": "en",
+      "pageStatuses": {
+        "CF1931122": 200
+      }
+    },
+    "KONFORMIT_TSERKL_RUNG-SATA-ADAM-2": {
+      "key": "KONFORMIT_TSERKL_RUNG-SATA-ADAM-2",
+      "kind": "declaration",
+      "title": "Izjava o usaglašenosti",
+      "file": "KONFORMIT_TSERKL_RUNG-SATA-ADAM-2.PDF.PDF",
+      "families": [
+        "CF1931342"
+      ],
+      "status": "DIRECT_PDF",
+      "href": "https://www.sata.com/media/fa/cd/b3/1793362241/KONFORMIT_TSERKL_RUNG-SATA-ADAM-2.PDF.PDF?ts=1793362241",
+      "language": "multilingual",
+      "languagesDetected": [
+        "nl",
+        "cs",
+        "ru",
+        "en",
+        "pl",
+        "it",
+        "es",
+        "fr",
+        "de"
+      ],
+      "listedOn": "CF1931342",
+      "verified": {
+        "date": "2026-10-31",
+        "httpStatus": 200,
+        "contentType": "application/pdf",
+        "bytes": 4200823,
+        "sha256": "14b2aa0e23fefe4a7246862fc6dedb5297c58808c499ed4b9cd3464c92714867",
+        "pages": 54,
+        "textChars": 47822,
+        "modelEvidence": {
+          "CF1931342": "SATA adam 2"
+        },
+        "kindConfirmed": true
+      }
+    },
+    "KONFORMIT_TSERKL_RUNG-SATA-AIR-STAR-F": {
+      "key": "KONFORMIT_TSERKL_RUNG-SATA-AIR-STAR-F",
+      "kind": "declaration",
+      "title": "Izjava o usaglašenosti",
+      "file": "KONFORMIT_TSERKL_RUNG-SATA-AIR-STAR-F.PDF.PDF",
+      "families": [
+        "CF1931125"
+      ],
+      "status": "DIRECT_PDF",
+      "href": "https://www.sata.com/media/64/7c/10/1793362239/KONFORMIT_TSERKL_RUNG-SATA-AIR-STAR-F.PDF.PDF?ts=1793362239",
+      "language": "multilingual",
+      "languagesDetected": [
+        "nl",
+        "de",
+        "it",
+        "cs",
+        "ru",
+        "en",
+        "pl",
+        "es",
+        "fr"
+      ],
+      "listedOn": "CF1931125",
+      "verified": {
+        "date": "2026-10-31",
+        "httpStatus": 200,
+        "contentType": "application/pdf",
+        "bytes": 781411,
+        "sha256": "f22fb037997b5ff534cb0286024a652f25298e6551b30f48608d1818b9ec6909",
+        "pages": 54,
+        "textChars": 33539,
+        "modelEvidence": {
+          "CF1931125": "SATA air star F"
+        },
+        "kindConfirmed": true
+      }
+    },
+    "KONFORMIT_TSERKL_RUNG-SATA-CLEAN-RCS": {
+      "key": "KONFORMIT_TSERKL_RUNG-SATA-CLEAN-RCS",
+      "kind": "declaration",
+      "title": "Izjava o usaglašenosti",
+      "file": "KONFORMIT_TSERKL_RUNG-SATA-CLEAN-RCS.PDF.PDF",
+      "families": [
+        "CF1931355"
+      ],
+      "status": "DIRECT_PDF",
+      "href": "https://www.sata.com/media/4b/fe/8a/1793362240/KONFORMIT_TSERKL_RUNG-SATA-CLEAN-RCS.PDF.PDF?ts=1793362240",
+      "language": "multilingual",
+      "languagesDetected": [
+        "nl",
+        "en",
+        "cs",
+        "ru",
+        "pl",
+        "it",
+        "es",
+        "fr",
+        "de"
+      ],
+      "listedOn": "CF1931355",
+      "verified": {
+        "date": "2026-10-31",
+        "httpStatus": 200,
+        "contentType": "application/pdf",
+        "bytes": 4298494,
+        "sha256": "a0dae9cd70b66ade9f410a700da316351d642d39459b05c7acabfbc1065c17e6",
+        "pages": 54,
+        "textChars": 38156,
+        "modelEvidence": {
+          "CF1931355": "SATA clean RCS"
+        },
+        "kindConfirmed": true
+      }
+    },
+    "KONFORMIT_TSERKL_RUNG-SATA-DRY-JET-2": {
+      "key": "KONFORMIT_TSERKL_RUNG-SATA-DRY-JET-2",
+      "kind": "declaration",
+      "title": "Izjava o usaglašenosti",
+      "file": "KONFORMIT_TSERKL_RUNG-SATA-DRY-JET-2.PDF.PDF",
+      "families": [
+        "CF1931359"
+      ],
+      "status": "DIRECT_PDF",
+      "href": "https://www.sata.com/media/ec/f3/61/1793362241/KONFORMIT_TSERKL_RUNG-SATA-DRY-JET-2.PDF.PDF?ts=1793362241",
+      "language": "multilingual",
+      "languagesDetected": [
+        "cs",
+        "ru",
+        "pl",
+        "en",
+        "it",
+        "nl",
+        "es",
+        "fr",
+        "de"
+      ],
+      "listedOn": "CF1931359",
+      "verified": {
+        "date": "2026-10-31",
+        "httpStatus": 200,
+        "contentType": "application/pdf",
+        "bytes": 3381899,
+        "sha256": "7e4e3e282b9a82dd3108b3646d53092675fd7ea2a31686d148edaf60b954095f",
+        "pages": 54,
+        "textChars": 21080,
+        "modelEvidence": {
+          "CF1931359": "SATA dry jet 2"
+        },
+        "kindConfirmed": true
+      }
+    },
+    "KONFORMIT_TSERKL_RUNG-SATA-FILTER-200": {
+      "key": "KONFORMIT_TSERKL_RUNG-SATA-FILTER-200",
+      "kind": "declaration",
+      "title": "Izjava o usaglašenosti",
+      "file": "KONFORMIT_TSERKL_RUNG-SATA-FILTER-200.PDF.PDF",
+      "families": [
+        "CF1931128"
+      ],
+      "status": "DIRECT_PDF",
+      "href": "https://www.sata.com/media/19/67/c3/1793362239/KONFORMIT_TSERKL_RUNG-SATA-FILTER-200.PDF.PDF?ts=1793362239",
+      "language": "multilingual",
+      "languagesDetected": [
+        "nl",
+        "cs",
+        "ru",
+        "en",
+        "pl",
+        "it",
+        "es",
+        "fr",
+        "de"
+      ],
+      "listedOn": "CF1931128",
+      "verified": {
+        "date": "2026-10-31",
+        "httpStatus": 200,
+        "contentType": "application/pdf",
+        "bytes": 709404,
+        "sha256": "62cd49e7154b406bdc8e8f55db9b49f69861b1c55596201d4087afdca308b53e",
+        "pages": 54,
+        "textChars": 42232,
+        "modelEvidence": {
+          "CF1931128": "SATA filter 200"
+        },
+        "kindConfirmed": true
+      }
+    },
+    "KONFORMIT_TSERKL_RUNG-SATA-FILTER-400": {
+      "key": "KONFORMIT_TSERKL_RUNG-SATA-FILTER-400",
+      "kind": "declaration",
+      "title": "Izjava o usaglašenosti",
+      "file": "KONFORMIT_TSERKL_RUNG-SATA-FILTER-400.PDF.PDF",
+      "families": [
+        "CF1931129"
+      ],
+      "status": "DIRECT_PDF",
+      "href": "https://www.sata.com/media/fa/20/a4/1793362239/KONFORMIT_TSERKL_RUNG-SATA-FILTER-400.PDF.PDF?ts=1793362239",
+      "language": "multilingual",
+      "languagesDetected": [
+        "nl",
+        "cs",
+        "ru",
+        "en",
+        "pl",
+        "it",
+        "es",
+        "fr",
+        "de"
+      ],
+      "listedOn": "CF1931129",
+      "verified": {
+        "date": "2026-10-31",
+        "httpStatus": 200,
+        "contentType": "application/pdf",
+        "bytes": 3629496,
+        "sha256": "bbf733a1e17b32b1e554c591122b06036c3619f3e44a427ad1e71a6d8e9d2e69",
+        "pages": 54,
+        "textChars": 42226,
+        "modelEvidence": {
+          "CF1931129": "SATA filter 400"
+        },
+        "kindConfirmed": true
+      }
+    },
+    "KONFORMIT_TSERKL_RUNG-SATA-FILTER-500": {
+      "key": "KONFORMIT_TSERKL_RUNG-SATA-FILTER-500",
+      "kind": "declaration",
+      "title": "Izjava o usaglašenosti",
+      "file": "KONFORMIT_TSERKL_RUNG-SATA-FILTER-500.PDF.PDF",
+      "families": [
+        "CF1931293"
+      ],
+      "status": "DIRECT_PDF",
+      "href": "https://www.sata.com/media/32/a0/b6/1793362239/KONFORMIT_TSERKL_RUNG-SATA-FILTER-500.PDF.PDF?ts=1793362239",
+      "language": "multilingual",
+      "languagesDetected": [
+        "nl",
+        "cs",
+        "ru",
+        "en",
+        "pl",
+        "it",
+        "es",
+        "fr",
+        "de"
+      ],
+      "listedOn": "CF1931293",
+      "verified": {
+        "date": "2026-10-31",
+        "httpStatus": 200,
+        "contentType": "application/pdf",
+        "bytes": 3613788,
+        "sha256": "f25b774e50876ec0bf85dd9a476698e48d9f08faeda18d3a761d8e318026688e",
+        "pages": 54,
+        "textChars": 41529,
+        "modelEvidence": {
+          "CF1931293": "SATA filter 500"
+        },
+        "kindConfirmed": true
+      }
+    },
+    "KONFORMIT_TSERKL_RUNG-SATA-TRUESUN": {
+      "key": "KONFORMIT_TSERKL_RUNG-SATA-TRUESUN",
+      "kind": "declaration",
+      "title": "Izjava o usaglašenosti",
+      "file": "KONFORMIT_TSERKL_RUNG-SATA-TRUESUN.PDF.PDF",
+      "families": [
+        "CF1931309"
+      ],
+      "status": "DIRECT_PDF",
+      "href": "https://www.sata.com/media/6f/68/6b/1793362240/KONFORMIT_TSERKL_RUNG-SATA-TRUESUN.PDF.PDF?ts=1793362240",
+      "language": "multilingual",
+      "languagesDetected": [
+        "nl",
+        "ru",
+        "cs",
+        "en",
+        "it",
+        "es",
+        "pl",
+        "fr",
+        "de"
+      ],
+      "listedOn": "CF1931309",
+      "verified": {
+        "date": "2026-10-31",
+        "httpStatus": 200,
+        "contentType": "application/pdf",
+        "bytes": 3426852,
+        "sha256": "4951cfc52de6d81f1e6a61255802878647753bca992be6320d834893621e9548",
+        "pages": 54,
+        "textChars": 29113,
+        "modelEvidence": {
+          "CF1931309": "SATA trueSun"
+        },
+        "kindConfirmed": true
+      }
+    },
+    "KONFORMIT_TSERKL_RUNG-SATAJET-1000-B": {
+      "key": "KONFORMIT_TSERKL_RUNG-SATAJET-1000-B",
+      "kind": "declaration",
+      "title": "Izjava o usaglašenosti",
+      "file": "KONFORMIT_TSERKL_RUNG-SATAJET-1000-B.PDF.PDF",
+      "families": [
+        "CF1931080",
+        "CF1931319"
+      ],
+      "status": "DIRECT_PDF",
+      "href": "https://www.sata.com/media/41/4c/14/1793362235/KONFORMIT_TSERKL_RUNG-SATAJET-1000-B.PDF.PDF?ts=1793362235",
+      "language": "multilingual",
+      "languagesDetected": [
+        "nl",
+        "cs",
+        "ru",
+        "en",
+        "it",
+        "pl",
+        "es",
+        "fr",
+        "de"
+      ],
+      "listedOn": "CF1931080",
+      "verified": {
+        "date": "2026-10-31",
+        "httpStatus": 200,
+        "contentType": "application/pdf",
+        "bytes": 4072139,
+        "sha256": "276125fb3b7d6553b0d64f41fbfc48ffdb87c41a4bcdf20d0318f93229694f0a",
+        "pages": 54,
+        "textChars": 40523,
+        "modelEvidence": {
+          "CF1931080": "SATAjet 1000 B",
+          "CF1931319": "SATAjet 1000 B"
+        },
+        "kindConfirmed": true
+      }
+    },
+    "KONFORMIT_TSERKL_RUNG-SATAJET-1000-K-H": {
+      "key": "KONFORMIT_TSERKL_RUNG-SATAJET-1000-K-H",
+      "kind": "declaration",
+      "title": "Izjava o usaglašenosti",
+      "file": "KONFORMIT_TSERKL_RUNG-SATAJET-1000-K-H.PDF.PDF",
+      "families": [
+        "CF1931090",
+        "CF1931098"
+      ],
+      "status": "DIRECT_PDF",
+      "href": "https://www.sata.com/media/2a/92/95/1793362236/KONFORMIT_TSERKL_RUNG-SATAJET-1000-K-H.PDF.PDF?ts=1793362236",
+      "language": "multilingual",
+      "languagesDetected": [
+        "nl",
+        "cs",
+        "ru",
+        "en",
+        "pl",
+        "it",
+        "es",
+        "fr",
+        "de"
+      ],
+      "listedOn": "CF1931090",
+      "verified": {
+        "date": "2026-10-31",
+        "httpStatus": 200,
+        "contentType": "application/pdf",
+        "bytes": 4134167,
+        "sha256": "6248e2df586e2e8f0c4f534cef8123c0ac0618c78ccd2f34334aad6bcf0c14b7",
+        "pages": 54,
+        "textChars": 45725,
+        "modelEvidence": {
+          "CF1931090": "SATAjet 1000 H",
+          "CF1931098": "SATAjet 1000 K"
+        },
+        "kindConfirmed": true
+      }
+    },
+    "KONFORMIT_TSERKL_RUNG-SATAJET-1500-B": {
+      "key": "KONFORMIT_TSERKL_RUNG-SATAJET-1500-B",
+      "kind": "declaration",
+      "title": "Izjava o usaglašenosti",
+      "file": "KONFORMIT_TSERKL_RUNG-SATAJET-1500-B.PDF.PDF",
+      "families": [
+        "CF1931079"
+      ],
+      "status": "DIRECT_PDF",
+      "href": "https://www.sata.com/media/29/7d/33/1793362234/KONFORMIT_TSERKL_RUNG-SATAJET-1500-B.PDF.PDF?ts=1793362234",
+      "language": "multilingual",
+      "languagesDetected": [
+        "nl",
+        "cs",
+        "ru",
+        "pl",
+        "en",
+        "it",
+        "es",
+        "de",
+        "fr"
+      ],
+      "listedOn": "CF1931079",
+      "verified": {
+        "date": "2026-10-31",
+        "httpStatus": 200,
+        "contentType": "application/pdf",
+        "bytes": 3501751,
+        "sha256": "50abd2c0e713da3c662e6be3b53f5016d3be5f7cd3905e0ef751da6209c084ad",
+        "pages": 54,
+        "textChars": 25431,
+        "modelEvidence": {
+          "CF1931079": "SATAjet 1500 B"
+        },
+        "kindConfirmed": true
+      }
+    },
+    "KONFORMIT_TSERKL_RUNG-SATAJET-3000-K": {
+      "key": "KONFORMIT_TSERKL_RUNG-SATAJET-3000-K",
+      "kind": "declaration",
+      "title": "Izjava o usaglašenosti",
+      "file": "KONFORMIT_TSERKL_RUNG-SATAJET-3000-K.PDF.PDF",
+      "families": [
+        "CF1931096"
+      ],
+      "status": "DIRECT_PDF",
+      "href": "https://www.sata.com/media/86/c5/44/1793362236/KONFORMIT_TSERKL_RUNG-SATAJET-3000-K.PDF.PDF?ts=1793362236",
+      "language": "multilingual",
+      "languagesDetected": [
+        "cs",
+        "nl",
+        "ru",
+        "en",
+        "pl",
+        "it",
+        "de",
+        "fr",
+        "es"
+      ],
+      "listedOn": "CF1931096",
+      "verified": {
+        "date": "2026-10-31",
+        "httpStatus": 200,
+        "contentType": "application/pdf",
+        "bytes": 3665580,
+        "sha256": "a74c18c4fe6e7db899d7cffd8d9116688940c3e30e5c9c684a73373940a451e8",
+        "pages": 54,
+        "textChars": 27584,
+        "modelEvidence": {
+          "CF1931096": "SATAjet 3000 K"
+        },
+        "kindConfirmed": true
+      }
+    },
+    "KONFORMIT_TSERKL_RUNG-SATAJET-X-5500": {
+      "key": "KONFORMIT_TSERKL_RUNG-SATAJET-X-5500",
+      "kind": "declaration",
+      "title": "Izjava o usaglašenosti",
+      "file": "KONFORMIT_TSERKL_RUNG-SATAJET-X-5500.PDF.PDF",
+      "families": [
+        "CF1931072",
+        "CF1931331"
+      ],
+      "status": "DIRECT_PDF",
+      "href": "https://www.sata.com/media/09/ca/f4/1793362234/KONFORMIT_TSERKL_RUNG-SATAJET-X-5500.PDF.PDF?ts=1793362234",
+      "language": "multilingual",
+      "languagesDetected": [
+        "nl",
+        "cs",
+        "ru",
+        "en",
+        "pl",
+        "it",
+        "es",
+        "fr",
+        "de"
+      ],
+      "listedOn": "CF1931072",
+      "verified": {
+        "date": "2026-10-31",
+        "httpStatus": 200,
+        "contentType": "application/pdf",
+        "bytes": 4346520,
+        "sha256": "0f461caecfcbb868f777eb96dbef19c2c7a67afc2944ad2c9a36b72b9ecd6e08",
+        "pages": 54,
+        "textChars": 48827,
+        "modelEvidence": {
+          "CF1931072": "SATAjet X 5500",
+          "CF1931331": "SATAjet X 5500"
+        },
+        "kindConfirmed": true
+      }
+    },
+    "KONFORMIT_TSERKL_RUNG-SATAMINIJET-1000": {
+      "key": "KONFORMIT_TSERKL_RUNG-SATAMINIJET-1000",
+      "kind": "declaration",
+      "title": "Izjava o usaglašenosti",
+      "file": "KONFORMIT_TSERKL_RUNG-SATAMINIJET-1000.PDF.PDF",
+      "families": [
+        "CF1931099"
+      ],
+      "status": "DIRECT_PDF",
+      "href": "https://www.sata.com/media/4b/30/d6/1793362237/KONFORMIT_TSERKL_RUNG-SATAMINIJET-1000.PDF.PDF?ts=1793362237",
+      "language": "multilingual",
+      "languagesDetected": [
+        "nl",
+        "cs",
+        "ru",
+        "en",
+        "pl",
+        "it",
+        "es",
+        "fr",
+        "de"
+      ],
+      "listedOn": "CF1931099",
+      "verified": {
+        "date": "2026-10-31",
+        "httpStatus": 200,
+        "contentType": "application/pdf",
+        "bytes": 3540196,
+        "sha256": "20c03ee06f5449a6ad6e2521f69ee1ce816dee4efa0394ffedf45fb65ea0fc67",
+        "pages": 54,
+        "textChars": 43316,
+        "modelEvidence": {
+          "CF1931099": "SATAminijet 1000 K"
+        },
+        "kindConfirmed": true
+      }
+    },
+    "KONFORMIT_TSERKL_RUNG-SATAMINIJET-4400-B": {
+      "key": "KONFORMIT_TSERKL_RUNG-SATAMINIJET-4400-B",
+      "kind": "declaration",
+      "title": "Izjava o usaglašenosti",
+      "file": "KONFORMIT_TSERKL_RUNG-SATAMINIJET-4400-B.PDF.PDF",
+      "families": [
+        "CF1931085"
+      ],
+      "status": "DIRECT_PDF",
+      "href": "https://www.sata.com/media/1e/fa/91/1793362236/KONFORMIT_TSERKL_RUNG-SATAMINIJET-4400-B.PDF.PDF?ts=1793362236",
+      "language": "multilingual",
+      "languagesDetected": [
+        "nl",
+        "cs",
+        "ru",
+        "en",
+        "pl",
+        "it",
+        "fr",
+        "es",
+        "de"
+      ],
+      "listedOn": "CF1931085",
+      "verified": {
+        "date": "2026-10-31",
+        "httpStatus": 200,
+        "contentType": "application/pdf",
+        "bytes": 3858809,
+        "sha256": "5fee61f8bba7b20bd2edefab8d0666a9899c12066cb4c79004ff41ef21de93c2",
+        "pages": 54,
+        "textChars": 40059,
+        "modelEvidence": {
+          "CF1931085": "SATAminijet 4400 B"
+        },
+        "kindConfirmed": true
+      }
+    },
+    "MULTILINGUAL---SATA-AIR-STAR-C-N---EG-KONFORMITTSERKLRUNG--EC-DECLARATION-OF-CONFORMITY_UID_6835B5C09786D": {
+      "key": "MULTILINGUAL---SATA-AIR-STAR-C-N---EG-KONFORMITTSERKLRUNG--EC-DECLARATION-OF-CONFORMITY_UID_6835B5C09786D",
+      "kind": "declaration",
+      "title": "Izjava o usaglašenosti",
+      "file": "MULTILINGUAL---SATA-AIR-STAR-C-N---EG-KONFORMITTSERKLRUNG--EC-DECLARATION-OF-CONFORMITY_UID_6835B5C09786D.PDF.PDF",
+      "families": [
+        "CF1931124"
+      ],
+      "status": "DIRECT_PDF",
+      "href": "https://www.sata.com/media/95/7f/96/1793362239/MULTILINGUAL---SATA-AIR-STAR-C-N---EG-KONFORMITTSERKLRUNG--EC-DECLARATION-OF-CONFORMITY_UID_6835B5C09786D.PDF.PDF?ts=1793362239",
+      "language": "multilingual",
+      "languagesDetected": [
+        "en",
+        "cs",
+        "nl",
+        "ru",
+        "it",
+        "de",
+        "fr",
+        "es",
+        "pl"
+      ],
+      "listedOn": "CF1931124",
+      "verified": {
+        "date": "2026-10-31",
+        "httpStatus": 200,
+        "contentType": "application/pdf",
+        "bytes": 5496899,
+        "sha256": "5d50a516547e450bf677ba6586c4c888450640811987e38ab6a3159e121f163f",
+        "pages": 54,
+        "textChars": 30881,
+        "modelEvidence": {
+          "CF1931124": "SATA air star C"
+        },
+        "kindConfirmed": true
+      }
+    },
+    "MULTILINGUAL-DECLARATION-OF-CONFORMITY-SATA-AIR-VISION-5000-N_PDF": {
+      "key": "MULTILINGUAL-DECLARATION-OF-CONFORMITY-SATA-AIR-VISION-5000-N_PDF",
+      "kind": "declaration",
+      "title": "Izjava o usaglašenosti",
+      "file": "MULTILINGUAL-DECLARATION-OF-CONFORMITY-SATA-AIR-VISION-5000-N_PDF.PDF.PDF",
+      "families": [
+        "CF1931121"
+      ],
+      "status": "DIRECT_PDF",
+      "href": "https://www.sata.com/media/ca/6b/6e/1793362238/MULTILINGUAL-DECLARATION-OF-CONFORMITY-SATA-AIR-VISION-5000-N_PDF.PDF.PDF?ts=1793362238",
+      "language": "multilingual",
+      "languagesDetected": [
+        "cs",
+        "en",
+        "de",
+        "fr",
+        "it",
+        "es",
+        "nl",
+        "pl",
+        "ru"
+      ],
+      "listedOn": "CF1931121",
+      "verified": {
+        "date": "2026-10-31",
+        "httpStatus": 200,
+        "contentType": "application/pdf",
+        "bytes": 1649747,
+        "sha256": "a5f411299e600ac42f84bf95d66e68f87a8692ba9c5661868faeecfdce616385",
+        "pages": 54,
+        "textChars": 2711,
+        "modelEvidence": {
+          "CF1931121": "SATA air vision 5000"
+        },
+        "kindConfirmed": true
+      }
+    },
+    "MULTILINGUAL-DECLARATION-OF-CONFORMITY-SATA-VISION-2000-3407-230327-1": {
+      "key": "MULTILINGUAL-DECLARATION-OF-CONFORMITY-SATA-VISION-2000-3407-230327-1",
+      "kind": "declaration",
+      "title": "Izjava o usaglašenosti",
+      "file": "MULTILINGUAL-DECLARATION-OF-CONFORMITY-SATA-VISION-2000-3407-230327-1.PDF.PDF",
+      "families": [
+        "CF1931122"
+      ],
+      "status": "DIRECT_PDF",
+      "href": "https://www.sata.com/media/dd/3a/dd/1793362239/MULTILINGUAL-DECLARATION-OF-CONFORMITY-SATA-VISION-2000-3407-230327-1.PDF.PDF?ts=1793362239",
+      "language": "multilingual",
+      "languagesDetected": [
+        "cs",
+        "en",
+        "nl",
+        "ru",
+        "it",
+        "de",
+        "es",
+        "pl",
+        "fr"
+      ],
+      "listedOn": "CF1931122",
+      "verified": {
+        "date": "2026-10-31",
+        "httpStatus": 200,
+        "contentType": "application/pdf",
+        "bytes": 5617086,
+        "sha256": "41f3500c759a1dc83d1b7544cdacb4f3c3be42a90048e499afe945ea682e9413",
+        "pages": 54,
+        "textChars": 31308,
+        "modelEvidence": {
+          "CF1931122": "SATA vision 2000"
+        },
+        "kindConfirmed": true
+      }
+    },
+    "MULTILINGUAL-SATA-DECLARATION-OF-CONFORMITY-AIR-STAR-F-2-4379-240913-2": {
+      "key": "MULTILINGUAL-SATA-DECLARATION-OF-CONFORMITY-AIR-STAR-F-2-4379-240913-2",
+      "kind": "declaration",
+      "title": "Izjava o usaglašenosti",
+      "file": "MULTILINGUAL-SATA-DECLARATION-OF-CONFORMITY-AIR-STAR-F-2-4379-240913-2.PDF.PDF",
+      "families": [
+        "CF1931339"
+      ],
+      "status": "DIRECT_PDF",
+      "href": "https://www.sata.com/media/32/34/79/1793362239/MULTILINGUAL-SATA-DECLARATION-OF-CONFORMITY-AIR-STAR-F-2-4379-240913-2.PDF.PDF?ts=1793362239",
+      "language": "multilingual",
+      "languagesDetected": [
+        "nl",
+        "cs",
+        "de",
+        "en",
+        "it",
+        "ru",
+        "es",
+        "pl",
+        "fr"
+      ],
+      "listedOn": "CF1931339",
+      "verified": {
+        "date": "2026-10-31",
+        "httpStatus": 200,
+        "contentType": "application/pdf",
+        "bytes": 857611,
+        "sha256": "9c910f1d19fd7e17fb4be94b4c744b9bce406c442bf0a7c5d90a69ef27f517ae",
+        "pages": 54,
+        "textChars": 45567,
+        "modelEvidence": {
+          "CF1931339": "air star F 2.0"
+        },
+        "kindConfirmed": true
+      }
+    },
+    "MULTILINGUAL-SATA-DECLARATION-OF-CONFORMITY-JET-K": {
+      "key": "MULTILINGUAL-SATA-DECLARATION-OF-CONFORMITY-JET-K",
+      "kind": "declaration",
+      "title": "Izjava o usaglašenosti",
+      "file": "MULTILINGUAL-SATA-DECLARATION-OF-CONFORMITY-JET-K.PDF.PDF",
+      "families": [
+        "CF1931356"
+      ],
+      "status": "DIRECT_PDF",
+      "href": "https://www.sata.com/media/fd/07/52/1793362237/MULTILINGUAL-SATA-DECLARATION-OF-CONFORMITY-JET-K.PDF.PDF?ts=1793362237",
+      "language": "multilingual",
+      "languagesDetected": [
+        "cs",
+        "nl",
+        "en",
+        "it",
+        "pl",
+        "ru",
+        "fr",
+        "de",
+        "es"
+      ],
+      "listedOn": "CF1931356",
+      "verified": {
+        "date": "2026-10-31",
+        "httpStatus": 200,
+        "contentType": "application/pdf",
+        "bytes": 4817644,
+        "sha256": "3b09bbc4e33a209e0e3a2965c31fff89e868c9dca2b248d36e92ff81a8ed4d5d",
+        "pages": 54,
+        "textChars": 18649,
+        "modelEvidence": {
+          "CF1931356": "jet K"
+        },
+        "kindConfirmed": true
+      }
+    },
+    "MULTILINGUAL-SATA-DECLARATION-OF-CONFORMITY-JET-X-4390-240925-3": {
+      "key": "MULTILINGUAL-SATA-DECLARATION-OF-CONFORMITY-JET-X-4390-240925-3",
+      "kind": "declaration",
+      "title": "Izjava o usaglašenosti",
+      "file": "MULTILINGUAL-SATA-DECLARATION-OF-CONFORMITY-JET-X-4390-240925-3.PDF.PDF",
+      "families": [
+        "CF1931336",
+        "CF1931392",
+        "CF1931393",
+        "CF1931394"
+      ],
+      "status": "DIRECT_PDF",
+      "href": "https://www.sata.com/media/1b/a3/2b/1793362233/MULTILINGUAL-SATA-DECLARATION-OF-CONFORMITY-JET-X-4390-240925-3.PDF.PDF?ts=1793362233",
+      "language": "multilingual",
+      "languagesDetected": [
+        "cs",
+        "nl",
+        "it",
+        "en",
+        "pl",
+        "ru",
+        "fr",
+        "es",
+        "de"
+      ],
+      "listedOn": "CF1931336",
+      "verified": {
+        "date": "2026-10-31",
+        "httpStatus": 200,
+        "contentType": "application/pdf",
+        "bytes": 4629861,
+        "sha256": "b5abcde30e4410fa3e9883c52d707cfa73068ecc7402cb25650e0a6c99e00e97",
+        "pages": 54,
+        "textChars": 17522,
+        "modelEvidence": {
+          "CF1931336": "jet X",
+          "CF1931392": "jet X",
+          "CF1931393": "jet X",
+          "CF1931394": "jet X"
+        },
+        "kindConfirmed": true
+      }
+    },
+    "MULTILINGUAL-SATA-DECLARATION-OF-CONFORMITY-SATA-HRS": {
+      "key": "MULTILINGUAL-SATA-DECLARATION-OF-CONFORMITY-SATA-HRS",
+      "kind": "declaration",
+      "title": "Izjava o usaglašenosti",
+      "file": "MULTILINGUAL-SATA-DECLARATION-OF-CONFORMITY-SATA-HRS.PDF.PDF",
+      "families": [
+        "CF1931300",
+        "CF1931301"
+      ],
+      "status": "DIRECT_PDF",
+      "href": "https://www.sata.com/media/3e/1e/70/1793362240/MULTILINGUAL-SATA-DECLARATION-OF-CONFORMITY-SATA-HRS.PDF.PDF?ts=1793362240",
+      "language": "multilingual",
+      "languagesDetected": [
+        "nl",
+        "cs",
+        "ru",
+        "en",
+        "pl",
+        "it",
+        "es",
+        "fr",
+        "de"
+      ],
+      "listedOn": "CF1931300",
+      "verified": {
+        "date": "2026-10-31",
+        "httpStatus": 200,
+        "contentType": "application/pdf",
+        "bytes": 3991451,
+        "sha256": "82639364dcf12859b18e967409b0f1bdfdd3bcad6ad5852efcd9f54b62345698",
+        "pages": 54,
+        "textChars": 43015,
+        "modelEvidence": {
+          "CF1931300": "SATA HRS-E",
+          "CF1931301": "SATA HRS"
+        },
+        "kindConfirmed": true
+      }
+    },
+    "MULTILINGUAL-SATA-DECLARATION-OF-CONFORMITY-SATA-MULTI-CLEAN-2-3652-240321-1": {
+      "key": "MULTILINGUAL-SATA-DECLARATION-OF-CONFORMITY-SATA-MULTI-CLEAN-2-3652-240321-1",
+      "kind": "declaration",
+      "title": "Izjava o usaglašenosti",
+      "file": "MULTILINGUAL-SATA-DECLARATION-OF-CONFORMITY-SATA-MULTI-CLEAN-2-3652-240321-1.PDF.PDF",
+      "families": [
+        "CF1931313"
+      ],
+      "status": "DIRECT_PDF",
+      "href": "https://www.sata.com/media/e4/g0/11/1793362240/MULTILINGUAL-SATA-DECLARATION-OF-CONFORMITY-SATA-MULTI-CLEAN-2-3652-240321-1.PDF.PDF?ts=1793362240",
+      "language": "multilingual",
+      "languagesDetected": [
+        "nl",
+        "cs",
+        "ru",
+        "pl",
+        "en",
+        "it",
+        "es",
+        "fr",
+        "de"
+      ],
+      "listedOn": "CF1931313",
+      "verified": {
+        "date": "2026-10-31",
+        "httpStatus": 200,
+        "contentType": "application/pdf",
+        "bytes": 916934,
+        "sha256": "29020f496c8070f7d4ed2ead029f01b029a00610798911421d942ec69eedd374",
+        "pages": 54,
+        "textChars": 25186,
+        "modelEvidence": {
+          "CF1931313": "SATA multi clean 2"
+        },
+        "kindConfirmed": true
+      }
+    },
+    "MULTILINGUAL-SATA-OPERATING-MANUAL-ADAM-X-PRO-ADAM-X-3220-240904": {
+      "key": "MULTILINGUAL-SATA-OPERATING-MANUAL-ADAM-X-PRO-ADAM-X-3220-240904",
+      "kind": "manual",
+      "title": "Uputstvo za upotrebu",
+      "file": "MULTILINGUAL-SATA-OPERATING-MANUAL-ADAM-X-PRO-ADAM-X-3220-240904.PDF.PDF",
+      "families": [
+        "CF1931340",
+        "CF1931341"
+      ],
+      "status": "DIRECT_PDF",
+      "href": "https://www.sata.com/media/2f/3a/ec/1793362241/MULTILINGUAL-SATA-OPERATING-MANUAL-ADAM-X-PRO-ADAM-X-3220-240904.PDF.PDF?ts=1793362241",
+      "language": "multilingual",
+      "languagesDetected": [
+        "cs",
+        "nl",
+        "en",
+        "ru",
+        "pl",
+        "it",
+        "de",
+        "es",
+        "fr"
+      ],
+      "listedOn": "CF1931340",
+      "verified": {
+        "date": "2026-10-31",
+        "httpStatus": 200,
+        "contentType": "application/pdf",
+        "bytes": 18512277,
+        "sha256": "17ac9438b55fbcf9a25852fbe49758d6d0cdbfb2956d9ec0770ff7727c543f7a",
+        "pages": 490,
+        "textChars": 278259,
+        "modelEvidence": {
+          "CF1931340": "adam X pro",
+          "CF1931341": "adam X"
+        },
+        "kindConfirmed": true
+      }
+    },
+    "MULTILINGUAL-SATA-OPERATING-MANUAL-AIR-STAR-F-2-4372-241112-1": {
+      "key": "MULTILINGUAL-SATA-OPERATING-MANUAL-AIR-STAR-F-2-4372-241112-1",
+      "kind": "manual",
+      "title": "Uputstvo za upotrebu",
+      "file": "MULTILINGUAL-SATA-OPERATING-MANUAL-AIR-STAR-F-2-4372-241112-1.PDF.PDF",
+      "families": [
+        "CF1931339"
+      ],
+      "status": "DIRECT_PDF",
+      "href": "https://www.sata.com/media/34/82/7e/1793362239/MULTILINGUAL-SATA-OPERATING-MANUAL-AIR-STAR-F-2-4372-241112-1.PDF.PDF?ts=1793362239",
+      "language": "multilingual",
+      "languagesDetected": [
+        "cs",
+        "nl",
+        "ru",
+        "en",
+        "it",
+        "pl",
+        "de",
+        "fr",
+        "es"
+      ],
+      "listedOn": "CF1931339",
+      "verified": {
+        "date": "2026-10-31",
+        "httpStatus": 200,
+        "contentType": "application/pdf",
+        "bytes": 4392646,
+        "sha256": "e899279300cf4682ebd3855802b1b72af87cee7c032f4fded0f6ea32c1320e60",
+        "pages": 706,
+        "textChars": 639574,
+        "modelEvidence": {
+          "CF1931339": "air star F 2.0"
+        },
+        "kindConfirmed": true
+      }
+    },
+    "MULTILINGUAL-SATA-OPERATING-MANUAL-HRS-4144-231115-1": {
+      "key": "MULTILINGUAL-SATA-OPERATING-MANUAL-HRS-4144-231115-1",
+      "kind": "manual",
+      "title": "Uputstvo za upotrebu",
+      "file": "MULTILINGUAL-SATA-OPERATING-MANUAL-HRS-4144-231115-1.PDF.PDF",
+      "families": [
+        "CF1931300",
+        "CF1931301"
+      ],
+      "status": "DIRECT_PDF",
+      "href": "https://www.sata.com/media/77/8a/ce/1793362240/MULTILINGUAL-SATA-OPERATING-MANUAL-HRS-4144-231115-1.PDF.PDF?ts=1793362240",
+      "language": "multilingual",
+      "languagesDetected": [
+        "cs",
+        "en",
+        "it",
+        "ru",
+        "nl",
+        "es",
+        "pl",
+        "de",
+        "fr"
+      ],
+      "listedOn": "CF1931300",
+      "verified": {
+        "date": "2026-10-31",
+        "httpStatus": 200,
+        "contentType": "application/pdf",
+        "bytes": 5022082,
+        "sha256": "967b3938975a598907409af6c8c0203745a2d810fb70f7d327d539e446ac6af2",
+        "pages": 616,
+        "textChars": 667990,
+        "modelEvidence": {
+          "CF1931300": "SATA HRS-E",
+          "CF1931301": "SATA HRS"
+        },
+        "kindConfirmed": true
+      }
+    },
+    "MULTILINGUAL-SATA-OPERATING-MANUAL-JET-X-3266-240619-2": {
+      "key": "MULTILINGUAL-SATA-OPERATING-MANUAL-JET-X-3266-240619-2",
+      "kind": "manual",
+      "title": "Uputstvo za upotrebu",
+      "file": "MULTILINGUAL-SATA-OPERATING-MANUAL-JET-X-3266-240619-2.PDF.PDF",
+      "families": [
+        "CF1931336",
+        "CF1931392",
+        "CF1931393",
+        "CF1931394"
+      ],
+      "status": "DIRECT_PDF",
+      "href": "https://www.sata.com/media/2d/dc/44/1793362233/MULTILINGUAL-SATA-OPERATING-MANUAL-JET-X-3266-240619-2.PDF.PDF?ts=1793362233",
+      "language": "multilingual",
+      "languagesDetected": [
+        "cs",
+        "ru",
+        "en",
+        "nl",
+        "it",
+        "fr",
+        "pl",
+        "de",
+        "es"
+      ],
+      "listedOn": "CF1931336",
+      "verified": {
+        "date": "2026-10-31",
+        "httpStatus": 200,
+        "contentType": "application/pdf",
+        "bytes": 43507933,
+        "sha256": "8b7cd0371d23eaae39f0098290ae5941ed87764dc320ec71180c99f860efcb0e",
+        "pages": 638,
+        "textChars": 370285,
+        "modelEvidence": {
+          "CF1931336": "jet X",
+          "CF1931392": "jet X",
+          "CF1931393": "jet X",
+          "CF1931394": "jet X"
+        },
+        "kindConfirmed": true
+      }
+    }
+  }
+}

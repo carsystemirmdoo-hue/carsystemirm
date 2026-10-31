@@ -201,7 +201,7 @@ export function ProductInformationAccordion({
                   </span>
                   {document.availability === "available" && document.href ? (
                     <a href={document.href} target="_blank" rel="noopener noreferrer">
-                      {document.viaProductPage ? "Na stranici proizvođača" : "Otvorite PDF"}
+                      {document.viaProductPage ? "Dokumentacija na sajtu proizvođača" : "Otvorite PDF"}
                       <ArrowIcon />
                     </a>
                   ) : (

@@ -27,6 +27,7 @@ export function InquiryForm({
   messageLabel = "Pitanje ili poruka",
   messagePlaceholder,
   submitLabel = "Pripremite upit",
+  onPrepared,
 }: {
   topic: string;
   context: InquiryLine[];
@@ -37,6 +38,8 @@ export function InquiryForm({
   messageLabel?: string;
   messagePlaceholder?: string;
   submitLabel?: string;
+  /** Poruka je otvorena u programu za e-poštu (nije poslata). */
+  onPrepared?: () => void;
 }) {
   const id = useId();
   const [name, setName] = useState("");
@@ -85,6 +88,7 @@ export function InquiryForm({
       try {
         window.location.href = inquiryMailto(emailHref, topic, body);
         setStatus("prepared");
+        onPrepared?.();
       } catch {
         setStatus("failed");
       }

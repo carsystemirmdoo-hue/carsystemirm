@@ -106,3 +106,38 @@
     grid-template-columns: minmax(0, 1fr);
   }
 }
+
+/* Vodič kroz posao do 900 px: kartice u dve kolone, pregled posla iznad koraka. */
+@media (max-width: 900px) {
+  .jobCards.jobCards {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .jobCard.jobCard {
+    grid-template-columns: 52px minmax(0, 1fr);
+    gap: 10px;
+    padding: 10px;
+  }
+
+  .jobCardMedia.jobCardMedia {
+    width: 52px;
+    height: 52px;
+  }
+
+  .jobCardDesc.jobCardDesc {
+    display: none;
+  }
+}
+
+@media (max-width: 560px) {
+  .jobCards.jobCards {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+/* Biblioteka do 900 px: vrste u dve kolone. */
+@media (max-width: 900px) {
+  .libGroups.libGroups {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}

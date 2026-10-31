@@ -1168,3 +1168,645 @@
     scroll-behavior: auto !important;
   }
 }
+
+/* ---------- vodič kroz posao (2026-10-31) ---------- */
+
+.jobCards {
+  display: grid;
+  gap: 10px;
+  margin: 0 0 18px;
+  padding: 0;
+  list-style: none;
+}
+
+.jobCard {
+  display: grid;
+  width: 100%;
+  height: 100%;
+  grid-template-columns: 72px minmax(0, 1fr);
+  align-items: center;
+  gap: 14px;
+  border: 1px solid var(--ds-c-line);
+  border-radius: var(--ds-overlay-radius);
+  background: var(--ds-c-surface);
+  padding: 12px 14px;
+  color: var(--ds-c-text);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  transition: border-color 160ms ease, box-shadow 160ms ease;
+}
+
+.jobCard:hover {
+  border-color: var(--ds-c-line-strong);
+}
+
+.jobCard[aria-pressed="true"] {
+  border-color: var(--ds-c-accent);
+  box-shadow: inset 0 0 0 1px var(--ds-c-accent);
+}
+
+.jobCardMedia {
+  display: grid;
+  width: 72px;
+  height: 72px;
+  place-items: center;
+  overflow: hidden;
+  border-radius: calc(var(--ds-overlay-radius) - 2px);
+  background: var(--ds-c-surface-2);
+  color: var(--ds-c-text-3);
+}
+
+.jobCardMedia img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  padding: 6px;
+}
+
+.jobCardText {
+  display: grid;
+  gap: 3px;
+}
+
+.jobCardLabel {
+  font-family: var(--font-display), var(--font-geist-sans), system-ui, sans-serif;
+  font-size: var(--ds-font-card-title);
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+.jobCardDesc {
+  color: var(--ds-c-text-2);
+  font-size: var(--ds-font-small);
+  line-height: 1.4;
+}
+
+.jobCardMeta {
+  color: var(--ds-c-text-3);
+  font-family: var(--font-technical), var(--font-geist-mono), monospace;
+  font-size: var(--ds-font-label);
+  letter-spacing: var(--ds-tracking-label);
+  text-transform: uppercase;
+}
+
+.guide {
+  display: grid;
+  gap: 18px;
+  scroll-margin-top: 96px;
+}
+
+.guideMain {
+  display: grid;
+  min-width: 0;
+  align-content: start;
+  gap: 16px;
+  border: 1px solid var(--ds-c-line);
+  border-radius: var(--ds-overlay-radius);
+  background: var(--ds-c-surface);
+  padding: clamp(16px, 2.4vw, 28px);
+}
+
+.guideHead {
+  display: grid;
+  gap: 8px;
+}
+
+.gLead {
+  max-width: var(--ds-w-measure);
+  margin: 0;
+  color: var(--ds-c-text-2);
+  line-height: 1.55;
+}
+
+.question {
+  display: grid;
+  gap: 10px;
+  margin: 0;
+  border: 0;
+  border-top: 1px solid var(--ds-c-line);
+  padding: 14px 0 0;
+}
+
+.questionLegend {
+  float: left;
+  width: 100%;
+  margin-bottom: 10px;
+  padding: 0;
+  font-weight: 700;
+}
+
+.question[data-waiting] .questionLegend {
+  font-family: var(--font-display), var(--font-geist-sans), system-ui, sans-serif;
+  font-size: var(--ds-font-card-title);
+}
+
+.questionOptions {
+  display: grid;
+  clear: both;
+  gap: 8px;
+}
+
+.questionOption {
+  position: relative;
+  display: grid;
+  gap: 2px;
+  border: 1px solid var(--ds-c-line);
+  border-radius: var(--ds-ctl-radius);
+  background: var(--ds-c-bg);
+  padding: 10px 12px 10px 38px;
+  cursor: pointer;
+}
+
+.questionOption:hover {
+  border-color: var(--ds-c-line-strong);
+}
+
+.questionOption input {
+  position: absolute;
+  top: 13px;
+  left: 12px;
+  margin: 0;
+  accent-color: var(--ds-c-accent);
+}
+
+.questionOption:has(input:checked) {
+  border-color: var(--ds-c-accent);
+  box-shadow: inset 0 0 0 1px var(--ds-c-accent);
+}
+
+.questionOption:has(input:focus-visible) {
+  outline: 2px solid var(--ds-c-focus);
+  outline-offset: 2px;
+}
+
+.questionLabel {
+  font-weight: 600;
+}
+
+.questionHint {
+  color: var(--ds-c-text-2);
+  font-size: var(--ds-font-small);
+  line-height: 1.4;
+}
+
+.gToolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  border-top: 1px solid var(--ds-c-line);
+  padding-top: 12px;
+  color: var(--ds-c-text-3);
+  font-family: var(--font-technical), var(--font-geist-mono), monospace;
+  font-size: var(--ds-font-label);
+  letter-spacing: var(--ds-tracking-label);
+  text-transform: uppercase;
+}
+
+.gToolbarButton,
+.gDetailsToggle {
+  display: inline-flex;
+  min-height: 36px;
+  align-items: center;
+  gap: 6px;
+  border: 0;
+  background: none;
+  padding: 0;
+  color: var(--ds-c-text);
+  font: inherit;
+  font-family: var(--font-body), var(--font-geist-sans), system-ui, sans-serif;
+  font-size: var(--ds-font-small);
+  font-weight: 600;
+  letter-spacing: 0;
+  text-transform: none;
+  cursor: pointer;
+}
+
+.gToolbarButton {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.gDetailsToggle::before {
+  content: "+";
+  display: inline-block;
+  width: 1em;
+  font-family: var(--font-technical), monospace;
+}
+
+.gDetailsToggle[aria-expanded="true"]::before {
+  content: "−";
+}
+
+.gSteps {
+  display: grid;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.gStep {
+  display: grid;
+  grid-template-columns: 34px minmax(0, 1fr);
+  gap: 12px;
+  border-top: 1px solid var(--ds-c-line);
+  padding: 14px 0;
+  scroll-margin-top: 96px;
+}
+
+.gStep:first-child {
+  border-top: 0;
+  padding-top: 4px;
+}
+
+.gStep:target .gStepTitle {
+  color: var(--ds-c-accent);
+}
+
+.gStepNumber {
+  display: grid;
+  width: 30px;
+  height: 30px;
+  place-items: center;
+  border: 1px solid var(--ds-c-line-strong);
+  border-radius: 50%;
+  font-family: var(--font-technical), var(--font-geist-mono), monospace;
+  font-size: var(--ds-font-small);
+  font-weight: 600;
+}
+
+.gStepBody {
+  display: grid;
+  min-width: 0;
+  gap: 6px;
+}
+
+.gStepTitle {
+  margin: 4px 0 0;
+  font-size: var(--ds-font-body, 1rem);
+  font-weight: 700;
+  line-height: 1.35;
+}
+
+.gStepWhat {
+  max-width: var(--ds-w-measure);
+  margin: 0;
+  line-height: 1.55;
+}
+
+.gCondition {
+  max-width: var(--ds-w-measure);
+  margin: 2px 0;
+  border-left: 3px solid var(--ds-c-accent);
+  background: var(--ds-c-surface-2);
+  padding: 8px 12px;
+  font-size: var(--ds-font-small);
+  line-height: 1.5;
+}
+
+.gStepMaterial {
+  margin: 0;
+  color: var(--ds-c-text-2);
+  font-size: var(--ds-font-small);
+}
+
+.gStepMaterial span {
+  margin-right: 6px;
+  color: var(--ds-c-text-3);
+  font-family: var(--font-technical), var(--font-geist-mono), monospace;
+  font-size: var(--ds-font-label);
+  letter-spacing: var(--ds-tracking-label);
+  text-transform: uppercase;
+}
+
+.productChips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 2px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.productChip {
+  display: inline-flex;
+  min-height: 40px;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid var(--ds-c-line);
+  border-radius: var(--ds-ctl-radius);
+  background: var(--ds-c-bg);
+  padding: 3px 10px 3px 4px;
+  font-size: var(--ds-font-small);
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.productChip:hover {
+  border-color: var(--ds-c-line-strong);
+}
+
+.productChipMedia {
+  display: grid;
+  width: 32px;
+  height: 32px;
+  flex: none;
+  place-items: center;
+  overflow: hidden;
+  border-radius: 3px;
+  background: var(--ds-c-surface-2);
+  color: var(--ds-c-text-3);
+}
+
+.productChipMedia img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.productChipMedia .productPlaceholder {
+  width: 18px;
+  height: 18px;
+}
+
+.gDetails {
+  display: grid;
+  gap: 10px;
+  border-left: 1px solid var(--ds-c-line);
+  padding: 2px 0 4px 14px;
+  color: var(--ds-c-text-2);
+  font-size: var(--ds-font-small);
+  line-height: 1.6;
+}
+
+.gDetails[hidden] {
+  display: none;
+}
+
+.gDetails p {
+  max-width: var(--ds-w-measure);
+  margin: 0;
+}
+
+.gExtra {
+  display: grid;
+  gap: 10px;
+  border-top: 1px solid var(--ds-c-line);
+  padding-top: 14px;
+}
+
+.guideAside {
+  display: grid;
+  order: -1;
+  align-content: start;
+  gap: 16px;
+  border: 1px solid var(--ds-c-line);
+  border-radius: var(--ds-overlay-radius);
+  background: var(--ds-c-surface-2);
+  padding: 18px;
+  font-size: var(--ds-font-small);
+}
+
+.gAsideBlock {
+  display: grid;
+  gap: 8px;
+}
+
+.gAsideTitle {
+  margin: 0;
+  color: var(--ds-c-text-3);
+  font-family: var(--font-technical), var(--font-geist-mono), monospace;
+  font-size: var(--ds-font-label);
+  font-weight: 500;
+  letter-spacing: var(--ds-tracking-label);
+  text-transform: uppercase;
+}
+
+.gOverview {
+  display: grid;
+  gap: 4px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  counter-reset: korak;
+  line-height: 1.4;
+}
+
+.gOverview li {
+  display: grid;
+  grid-template-columns: 1.6em minmax(0, 1fr);
+  counter-increment: korak;
+}
+
+.gOverview li::before {
+  content: counter(korak) ".";
+  color: var(--ds-c-text-3);
+  font-family: var(--font-technical), var(--font-geist-mono), monospace;
+}
+
+.gOverview a {
+  text-decoration: none;
+}
+
+.gOverview a:hover {
+  text-decoration: underline;
+}
+
+.gMaterials,
+.gAsideProducts {
+  display: grid;
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  line-height: 1.4;
+}
+
+.gAsideProducts a {
+  font-weight: 500;
+}
+
+.gMaterialSteps {
+  display: block;
+  color: var(--ds-c-text-3);
+  font-size: 0.85em;
+}
+
+.gAsideLink {
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* Spisak proizvoda u pregledu samo uz bočni raspored; uže su proizvodi uz korake. */
+.gAsideProductsBlock {
+  display: none;
+}
+
+/* ---------- koraci B2B toka ---------- */
+
+.stepper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 18px;
+  margin: 0 0 14px;
+  padding: 0;
+  list-style: none;
+  counter-reset: b2b;
+  color: var(--ds-c-text-3);
+  font-size: var(--ds-font-small);
+}
+
+.stepper li {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  counter-increment: b2b;
+}
+
+.stepper li::before {
+  content: counter(b2b);
+  display: inline-grid;
+  width: 24px;
+  height: 24px;
+  place-items: center;
+  border: 1px solid var(--ds-c-line-strong);
+  border-radius: 50%;
+  font-family: var(--font-technical), var(--font-geist-mono), monospace;
+  font-size: 0.8em;
+}
+
+.stepper li[data-state="current"] {
+  color: var(--ds-c-text);
+  font-weight: 600;
+}
+
+.stepper li[data-state="current"]::before {
+  border-color: var(--ds-c-accent);
+  background: var(--ds-c-accent);
+  color: #fff;
+}
+
+.stepper li[data-state="done"] {
+  color: var(--ds-c-text-2);
+}
+
+.stepper li[data-state="done"]::before {
+  content: "✓";
+  border-color: var(--ds-c-text-2);
+}
+
+/* ---------- biblioteka: pretraga, vrste i redovi (2026-10-31) ---------- */
+
+.libSearchRow {
+  display: grid;
+  gap: 12px;
+}
+
+.libSearchRow .searchField {
+  max-width: none;
+}
+
+.searchField select {
+  min-height: var(--ds-ctl-h-field);
+  border: 1px solid var(--ds-c-field);
+  border-radius: var(--ds-ctl-radius);
+  background: var(--ds-c-surface);
+  padding: 10px 12px;
+  color: var(--ds-c-text);
+  font: inherit;
+  font-size: 1rem;
+  font-weight: 400;
+}
+
+.libGroups {
+  display: grid;
+  gap: 8px;
+  margin: 0;
+  border: 0;
+  padding: 0;
+}
+
+.libGroup {
+  display: grid;
+  gap: 2px;
+  border: 1px solid var(--ds-c-line);
+  border-radius: var(--ds-overlay-radius);
+  background: var(--ds-c-surface);
+  padding: 10px 14px;
+  color: var(--ds-c-text);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.libGroup:hover:not(:disabled) {
+  border-color: var(--ds-c-line-strong);
+}
+
+.libGroup[aria-pressed="true"] {
+  border-color: var(--ds-c-accent);
+  box-shadow: inset 0 0 0 1px var(--ds-c-accent);
+}
+
+.libGroup:disabled {
+  opacity: 0.6;
+  cursor: progress;
+}
+
+.libGroupLabel {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+  font-weight: 700;
+}
+
+.libGroupHint {
+  color: var(--ds-c-text-2);
+  font-size: var(--ds-font-small);
+}
+
+.libStatusRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.docMain {
+  display: grid;
+  min-width: 0;
+  gap: 4px;
+}
+
+.docBrand {
+  color: var(--ds-c-text-2);
+  font-size: var(--ds-font-small);
+}
+
+.docOpen {
+  font-size: var(--ds-font-small);
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  white-space: nowrap;
+}
+
+.docType {
+  justify-self: start;
+  align-self: start;
+}
+
+.docType[data-type="tds"] {
+  border-color: var(--ds-c-text);
+  color: var(--ds-c-text);
+}
+
+.docType[data-type="sds"] {
+  border-color: var(--ds-c-accent);
+  color: var(--ds-c-accent);
+}

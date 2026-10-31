@@ -88,10 +88,15 @@ const accountedCards = new Set();
 const accountedRecords = new Set();
 function push(identity) { identities.push({ variantKey: "", variant: "", pack: "", articleNumbers: [], members: 1, notes: [], ...identity }); }
 
+const processedFamilies = new Set();
 for (const card of runtime.listing.canonical) {
   accountedCards.add(card.id);
   if (card.id.startsWith("family:")) {
-    const family = runtime.families.find((entry) => `family:${entry.slug}` === card.id);
+    // Serija podeljena po zapremini (2026-10-21) daje kartice `family:<slug>@<pakovanje>`; identitet je porodica.
+    const familySlug = card.id.slice("family:".length).split("@")[0];
+    if (processedFamilies.has(familySlug)) continue;
+    processedFamilies.add(familySlug);
+    const family = runtime.families.find((entry) => entry.slug === familySlug);
     const shared = family.variants.filter((record) => record.visualIdentity?.packshotKind === "family");
     const own = family.variants.filter((record) => record.visualIdentity?.packshotKind !== "family");
     for (const record of family.variants) accountedRecords.add(record.slug);
@@ -115,7 +120,10 @@ for (const card of runtime.listing.canonical) {
      */
     continue;
   }
-  const record = runtime.products.find((product) => product.slug === card.id);
+  // Kartica zapremine istog zapisa (`<slug>@<pakovanje>`) je isti identitet slike.
+  const recordSlug = card.id.split("@")[0];
+  if (accountedRecords.has(recordSlug)) continue;
+  const record = runtime.products.find((product) => product.slug === recordSlug);
   accountedRecords.add(record.slug);
   const group = sharedGroupOf.get(record.slug);
   /*
@@ -177,23 +185,27 @@ function classify(identity) {
 
   const supplied = suppliedByPath.get(src);
   if (supplied) {
-    const origin = { SUPPLIER_BRAND_PORTAL: "supplier-portal", DISTRIBUTOR_HOSTED_MANUFACTURER_RENDER: "distributor-render" }[supplied.sourceBasis] ?? "owner-supplied";
-    const official = supplied.sourceBasis === "SUPPLIER_BRAND_PORTAL" ? `zvanični portal dobavljača (asset ${supplied.sourceDetail?.assetId ?? "?"})` : supplied.sourceBasis === "DISTRIBUTOR_HOSTED_MANUFACTURER_RENDER" ? `render proizvođača sa sajta distributera (${supplied.sourceDetail?.originalUrl ?? "?"})` : "N/A (slika vlasnika)";
+    const origin = { SUPPLIER_BRAND_PORTAL: "supplier-portal", DISTRIBUTOR_HOSTED_MANUFACTURER_RENDER: "distributor-render", MANUFACTURER_WEBSITE_IMAGE: "manufacturer-website" }[supplied.sourceBasis] ?? "owner-supplied";
+    const official = supplied.sourceBasis === "SUPPLIER_BRAND_PORTAL" ? `zvanični portal dobavljača (asset ${supplied.sourceDetail?.assetId ?? "?"})` : supplied.sourceBasis === "DISTRIBUTOR_HOSTED_MANUFACTURER_RENDER" ? `render proizvođača sa sajta distributera (${supplied.sourceDetail?.originalUrl ?? "?"})` : supplied.sourceBasis === "MANUFACTURER_WEBSITE_IMAGE" ? `zvanična slika artikla ${supplied.sourceDetail?.articleNumber ?? "?"} sa sajta proizvođača (${supplied.sourceDetail?.page ?? "?"})` : "N/A (slika vlasnika)";
     return { ...out, provenance: `${origin}:${supplied.batch ?? suppliedBatch} (obrada: ${supplied.processing ?? "UNDECLARED"})`, official, rights: supplied.rightsBasis ?? "OWNER_CONFIRMATION_REQUIRED", classification: "OWNER_SUPPLIED_IMAGE", action: "NONE", priority: "" };
   }
 
-  /* SATA — rights gate: nijedna slika ne ulazi u runtime; dostupnost je samo činjenica o izvoru. */
+  /*
+   * SATA — pravo upotrebe fotografija potvrdio je vlasnik 2026-10-31. Slike tačnih artikala su uvezene
+   * kroz registar (grana iznad); ovde ostaju zapisi za koje SATA ne objavljuje sliku TOG artikla
+   * (nema slike ili je prikazana slika srodnog artikla).
+   */
   if (brand === "sata") {
     const p1 = sataPhase1.get(record.slug), p2 = sataPhase2.get(record.slug);
     const articleNumbers = p2 ? p2.variants.map((row) => row.articleNumber) : [];
     const withImage = p2 ? articleNumbers.filter((number) => (sataRaw.get(number)?.galleryImages ?? 0) > 0) : [];
     const available = p1 ? p1.status === "OFFICIAL_IMAGE_AVAILABLE_NOT_APPROVED_FOR_RUNTIME" : withImage.length > 0;
     out.syncStatus = p1?.status ?? p2?.imageStatus ?? "";
-    out.provenance = "site-placeholder (SATA rights gate: APPROVED_RUNTIME_IMAGES = 0)";
+    out.provenance = "site-placeholder (SATA: zvanična slika tačnog artikla nije uvezena)";
     out.official = available ? (p2 && withImage.length < articleNumbers.length ? `YES_PARTIAL (${withImage.length}/${articleNumbers.length} artikala)` : "YES") : "NO";
     out.officialUrl = available ? (p1 ? p1.sourceImages?.[0]?.url ?? p1.sourcePage : sataRaw.get(withImage[0])?.firstImage ?? "") : "";
-    out.rights = "RIGHTS_NOT_CONFIRMED";
-    if (available) return { ...out, classification: "OFFICIAL_IMAGE_RIGHTS_REVIEW", action: "RIGHTS_DECISION", priority: p1 ? "P2" : "P3" };
+    out.rights = "OWNER_CONFIRMED";
+    if (available) return { ...out, classification: "OFFICIAL_IMAGE_NOT_PUBLISHED", action: p1 ? "USER_SUPPLY" : "KEEP_PLACEHOLDER", priority: p1 ? "P2" : "P4", notes: ["SATA prikazuje sliku srodnog artikla ili slika nije uvezena; slika tačnog artikla nije potvrđena"] };
     // Proizvođač ne objavljuje sliku: porodica faze 1 je pravi proizvod → vlasnik; sitan pribor faze 2 → placeholder je prihvatljiv.
     return p1 ? { ...out, classification: "OFFICIAL_IMAGE_NOT_PUBLISHED", action: "USER_SUPPLY", priority: "P2" } : { ...out, classification: "PLACEHOLDER_ACCEPTED", action: "KEEP_PLACEHOLDER", priority: "P4", notes: ["pribor faze 2 bez zvanične slike; placeholder je prihvatljiv dok vlasnik ne odluči drugačije"] };
   }
@@ -327,13 +339,13 @@ const brands = Object.keys(cardsByBrand).sort();
 const summary = {
   cards: { byBrand: cardsByBrand, total: runtime.listing.canonical.length, activeBrands: data.brands.length, futureBrands: data.futureBrands.length },
   identities: { total: rows.length, byScope: count(rows, (row) => row.image_scope), byClassification: count(rows, (row) => row.classification), byAction: count(rows, (row) => row.action_required), byBrand: Object.fromEntries(brands.map((brand) => [brand, { identities: rows.filter((row) => row.brand === brand).length, ...count(rows.filter((row) => row.brand === brand), (row) => row.classification) }])) },
-  placeholders: { recordsOnPlaceholderByBrand: recordsOnPlaceholder, recordsOnPlaceholder: Object.values(recordsOnPlaceholder).reduce((a, b) => a + b, 0), placeholderIdentities: rows.filter((row) => row.current_image_status === "PLACEHOLDER").length, placeholderIdentitiesByBrand: count(rows.filter((row) => row.current_image_status === "PLACEHOLDER"), (row) => row.brand), cardsWhoseFaceIsPlaceholder: runtime.listing.canonical.filter((card) => { const face = card.id.startsWith("family:") ? runtime.families.find((family) => `family:${family.slug}` === card.id).representative : runtime.products.find((product) => product.slug === card.id); return isPlaceholder(face?.productImage?.src); }).length, cardsWhoseFaceIsPlaceholderByBrand: count(runtime.listing.canonical.filter((card) => { const face = card.id.startsWith("family:") ? runtime.families.find((family) => `family:${family.slug}` === card.id).representative : runtime.products.find((product) => product.slug === card.id); return isPlaceholder(face?.productImage?.src); }), (card) => card.brandSlug) },
+  placeholders: { recordsOnPlaceholderByBrand: recordsOnPlaceholder, recordsOnPlaceholder: Object.values(recordsOnPlaceholder).reduce((a, b) => a + b, 0), placeholderIdentities: rows.filter((row) => row.current_image_status === "PLACEHOLDER").length, placeholderIdentitiesByBrand: count(rows.filter((row) => row.current_image_status === "PLACEHOLDER"), (row) => row.brand), cardsWhoseFaceIsPlaceholder: runtime.listing.canonical.filter((card) => { const face = card.id.startsWith("family:") ? runtime.families.find((family) => `family:${family.slug}` === card.id.split("@")[0]).representative : runtime.products.find((product) => product.slug === card.id.split("@")[0]); return isPlaceholder(face?.productImage?.src); }).length, cardsWhoseFaceIsPlaceholderByBrand: count(runtime.listing.canonical.filter((card) => { const face = card.id.startsWith("family:") ? runtime.families.find((family) => `family:${family.slug}` === card.id.split("@")[0]).representative : runtime.products.find((product) => product.slug === card.id.split("@")[0]); return isPlaceholder(face?.productImage?.src); }), (card) => card.brandSlug) },
   outputs: { inventory: rows.length, missing: missing.length, userSupply: supply.length, rightsReview: rights.length, qualityQueue: quality.length },
   missingByBrand: count(missing, (row) => row.brand), userSupplyByBrand: count(supply, (row) => row.brand), rightsByBrand: count(rights, (row) => row.brand), qualityByBrand: count(quality, (row) => row.brand), qualityByNeed: count(quality, (row) => row.evidence_flags),
   satisfactory: rows.filter((row) => ["APPROVED_RUNTIME_IMAGE", "OWNER_SUPPLIED_IMAGE", "LOCAL_LEGITIMATE_IMAGE", "IMAGE_QUALITY_REVIEW_ONLY"].includes(row.classification)).length,
   runtimeImagePresentButRightsReview: rows.filter((row) => row.classification === "OFFICIAL_IMAGE_RIGHTS_REVIEW" && row.current_image_status === "RUNTIME_IMAGE").length,
   gate: {
-    cardsAccounted: `${accountedCards.size}/${runtime.listing.canonical.length}`, cardsWithoutIdentity: runtime.listing.canonical.filter((card) => !rows.some((row) => row.card_id === card.id) && !groupedCardIds.has(card.id)).length,
+    cardsAccounted: `${accountedCards.size}/${runtime.listing.canonical.length}`, cardsWithoutIdentity: runtime.listing.canonical.filter((card) => !rows.some((row) => row.card_id.split("@")[0] === card.id.split("@")[0]) && !groupedCardIds.has(card.id)).length,
     recordsAccounted: `${accountedRecords.size}/${runtime.products.length}`, recordsNotAccounted: runtime.products.filter((product) => !accountedRecords.has(product.slug)).map((product) => product.slug),
     duplicateImageId: dup(rows.map((row) => row.image_id)), duplicateSuggestedFilename: dup(missing.map((row) => row.suggested_filename)), duplicateTargetPath: dup(missing.map((row) => row.target_path)),
     brokenReferences: rows.filter((row) => row.classification === "BROKEN_IMAGE_REFERENCE").map((row) => row.image_id), wrongSibling: rows.filter((row) => row.classification === "WRONG_SIBLING_IMAGE").map((row) => row.image_id), needsManualReview: rows.filter((row) => row.classification === "NEEDS_MANUAL_REVIEW").map((row) => row.image_id),

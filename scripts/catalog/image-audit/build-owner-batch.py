@@ -41,7 +41,8 @@ zapis šta je od batch-a postalo, umesto da red nestane bez traga kad se zahtev 
 """
 supplied = {entry["imageId"] for entry in json.load(open(os.path.join(REPO, "data/catalog/image-supply/supplied-images.json"), encoding="utf-8"))["images"]}
 groups = json.load(open(os.path.join(REPO, "data/catalog/image-supply/shared-image-groups.json"), encoding="utf-8"))["groups"]
-deferred = {f'{g["brand"]}__group-{g["id"]}' for g in groups if g.get("imageSupply", {}).get("status") == "DEFERRED_OWNER_IMAGE_SUPPLY"}
+# Grupa rešena kasnije (npr. GHD 2026-10-06, slika po članu) zadržava ishod batch-a iz prethodne odluke.
+deferred = {f'{g["brand"]}__group-{g["id"]}' for g in groups if "DEFERRED_OWNER_IMAGE_SUPPLY" in (g.get("imageSupply", {}).get("status"), g.get("imageSupply", {}).get("previousDecision", {}).get("status"))}
 status_of = lambda image_id: "SUPPLIED" if image_id in supplied else "DEFERRED" if image_id in deferred else "OPEN"
 
 errors = []

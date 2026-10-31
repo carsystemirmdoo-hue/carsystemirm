@@ -2820,7 +2820,11 @@ const removedSlugs = new Set(removedFromCustomerCatalog.records.map((record) => 
  *                    Tako 69 tonera deli jedan fajl umesto da se prave 69 kopija iste slike.
  */
 /** Vrednosti porekla definisane u `provenanceModel` registra (proverava `catalog:image-supply:check`). */
-export type SuppliedImageSourceBasis = "OWNER_SUPPLIED" | "SUPPLIER_BRAND_PORTAL" | "DISTRIBUTOR_HOSTED_MANUFACTURER_RENDER";
+export type SuppliedImageSourceBasis =
+  | "OWNER_SUPPLIED"
+  | "SUPPLIER_BRAND_PORTAL"
+  | "DISTRIBUTOR_HOSTED_MANUFACTURER_RENDER"
+  | "MANUFACTURER_WEBSITE_IMAGE";
 
 type SuppliedImageEntry = {
   imageId: string;

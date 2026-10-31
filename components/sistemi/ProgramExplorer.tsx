@@ -15,6 +15,7 @@ import styles from "./Sistemi.styles";
 type References = GuideReferences;
 
 export function ProgramExplorer({
+  programSlug,
   programName,
   jobs,
   scales,
@@ -27,6 +28,7 @@ export function ProgramExplorer({
   email,
   emailHref,
 }: {
+  programSlug: string;
   programName: string;
   jobs: SistemiJob[];
   scales: Record<string, SistemiScale>;
@@ -94,6 +96,7 @@ export function ProgramExplorer({
         jobs={jobs}
         onChoice={(value) => jobId && setChoices((current) => ({ ...current, [jobId]: value }))}
         onJob={setJobId}
+        program={programSlug}
         references={references}
         scales={scales}
         title={jobsTitle}

@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import { readFileSync, readdirSync } from "node:fs";
 import path from "node:path";
 import { test } from "node:test";
-import { materialSummary, needsChoice, splitDetail, stepsFor } from "@/lib/sistemi/guide";
+import { IMPORTANT_SENTENCES, importantKey, materialSummary, needsChoice, splitDetail, splitSentences, stepsFor } from "@/lib/sistemi/guide";
 import type { SistemiContent } from "@/lib/sistemi/types";
 
 /*
@@ -12,7 +12,7 @@ import type { SistemiContent } from "@/lib/sistemi/types";
  */
 const DIR = path.resolve(import.meta.dirname, "../../content/sistemi");
 const pages = readdirSync(DIR)
-  .filter((name) => name.endsWith(".json") && !["izvori.json", "slike-bez-potvrde-prava.json"].includes(name))
+  .filter((name) => name.endsWith(".json") && !["izvori.json", "slike-bez-potvrde-prava.json", "vazno.json"].includes(name))
   .map((name) => ({ name, data: JSON.parse(readFileSync(path.join(DIR, name), "utf8")) as SistemiContent }));
 
 const details = pages.flatMap(({ data }) =>
@@ -61,4 +61,32 @@ test("pregled materijala prati korake bez ponavljanja", () => {
   const summary = materialSummary(steps);
   assert.equal(new Set(summary.map((item) => item.text)).size, summary.length);
   for (const item of summary) for (const number of item.steps) assert.equal(steps[number - 1].material?.trim(), item.text);
+});
+
+test("spisak važnih rečenica: svaka postoji doslovno u objašnjenju svog koraka", () => {
+  const byKey = new Map<string, string>();
+  for (const { name, data } of pages) {
+    const program = name.replace(".json", "");
+    for (const job of data.jobs)
+      for (const step of job.steps) {
+        if (step.detail) byKey.set(importantKey(program, job.id, step.id), step.detail);
+        for (const [pod, variant] of Object.entries(step.pod ?? {})) if (variant.detail) byKey.set(importantKey(program, job.id, step.id, pod), variant.detail);
+      }
+  }
+  for (const [key, sentences] of Object.entries(IMPORTANT_SENTENCES)) {
+    const detail = byKey.get(key);
+    assert.ok(detail, `nepoznat korak: ${key}`);
+    for (const sentence of sentences) assert.ok(splitSentences(detail).includes(sentence), `${key}: „${sentence}“`);
+  }
+});
+
+test("svako pitanje ima oznaku, svaki odgovor naziv, svaki posao naziv kartice", () => {
+  for (const { name, data } of pages) {
+    for (const job of data.jobs) {
+      assert.ok((job.label ?? job.title).trim(), `${name} ${job.id}: kartica bez naziva`);
+      if (!job.choice) continue;
+      assert.ok(job.choice.question?.trim(), `${name} ${job.id}: pitanje bez oznake`);
+      for (const option of job.choice.options) assert.ok(option.label.trim(), `${name} ${job.id}/${option.id}`);
+    }
+  }
 });

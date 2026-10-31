@@ -1,0 +1,117 @@
+{
+  "boje-i-lakovi/baza/slojevi/troslojna": [
+    "Za neke posebne nijanse baslac upućuje da se u bazi proveri da li je za prvi korak potrebna posebna boja podloge."
+  ],
+  "boje-i-lakovi/lak/slojevi/mat": [
+    "Kod mat lakova razlika u debljini sloja menja stepen sjaja, pa se svaki deo lakira istim postupkom."
+  ],
+  "boje-i-lakovi/nijansa/razlika": [
+    "Utapanje ne ispravlja pogrešnu recepturu: ono sakriva malu razliku, posebno kod metalika."
+  ],
+  "boje-i-lakovi/nijansa/sifra": [
+    "Šifra je polazna tačka, a ne garancija: ista šifra može da ima više varijanti."
+  ],
+  "boje-i-lakovi/nijansa/uredjaj": [
+    "Skraćuje traženje između standarda i varijanti, ali ne zna kako ćete boju naneti i ne zamenjuje probni lim."
+  ],
+  "boje-i-lakovi/nijansa/varijanta": [
+    "Prava varijanta se bira poređenjem sa vozilom, ne po šifri."
+  ],
+  "pistolji-i-oprema/ciscenje/odvoji": [
+    "Tako to traže uputstva SATA pištolja; otpad od boja i razređivača se predaje propisno."
+  ],
+  "pistolji-i-oprema/ciscenje/potapanje": [
+    "SATA kao prihvatljive navodi pažljivo ručno pranje ili automatsku mašinu sa uređajem za produvavanje vazdušnih kanala."
+  ],
+  "pistolji-i-oprema/ciscenje/potrosni": [
+    "Crevo u svakodnevnoj upotrebi SATA preporučuje menjati najmanje jednom godišnje."
+  ],
+  "pistolji-i-oprema/ciscenje/rastavljanje": [
+    "SATA navodi da odvrtanje dizne dok je igla unutra haba iglu i diznu."
+  ],
+  "pistolji-i-oprema/ciscenje/sklapanje": [
+    "Kod jet X podmazuju se igla, opruga igle i navoj zavrtnja za količinu materijala, mašću visokih performansi bez silikona."
+  ],
+  "pistolji-i-oprema/izbor/dizna": [
+    "Protok se ne popravlja pritvaranjem regulatora, nego izborom dizne."
+  ],
+  "pistolji-i-oprema/izbor/odvojeni": [
+    "SATA preporučuje odvojene pištolje za rastvaračke i vodene boje, da bi se izbegle greške u laku."
+  ],
+  "pistolji-i-oprema/problem/p-set": [
+    "SATA zapušen ili oštećen set navodi uz mehuriće u čaši; set se menja kao celina."
+  ],
+  "poliranje/holo/kraj": [
+    "Tek posle brisanja se vidi da li su hologrami zaista uklonjeni."
+  ],
+  "poliranje/holo/sundjer": [
+    "Za sunđere X serije Carsystem navodi čišćenje izduvavanjem komprimovanim vazduhom, bez vode i sapuna."
+  ],
+  "poliranje/novi/brusenje": [
+    "Laka nema mnogo: za CC.26 ECO-X list navodi 50–60 µm suvog sloja."
+  ],
+  "poliranje/novi/brusenje/kora": [
+    "Pasta ne ravna narandžinu koru; ravna je brušenje."
+  ],
+  "poliranje/stari/pranje": [
+    "Za Refinish 1 Carsystem traži površinu bez prašine i ostataka paste."
+  ],
+  "potrosni-materijal/ciscenje/izbor": [
+    "R-M PK 1P10 (rastvarački, VOC 840 g/l) namenjuje prvom koraku pre kita i punioca, ali ne na podlogama osetljivim na rastvarače; PK 2P10 (vodeni, 186 g/l) prvom koraku, pre i posle brušenja."
+  ],
+  "potrosni-materijal/ciscenje/krpa": [
+    "Krpa skuplja suvu prašinu i vlakna, ali ne odmašćuje."
+  ],
+  "potrosni-materijal/ciscenje/kucna": [
+    "Za njih nema podataka šta uklanjaju i na kojim podlogama smeju; nitro razređivač je jak rastvarač i može da omekša osetljive podloge."
+  ],
+  "potrosni-materijal/maskiranje/gumice": [
+    "Pre toga proverite da li proizvođač vozila preporučuje demontažu dela."
+  ],
+  "potrosni-materijal/maskiranje/skidanje": [
+    "Master Tape II se čisto skida kada vozilo izađe iz kabine; za traku na Auto Mask foliji list navodi čisto skidanje do dva dana, za Red Tape do tri dana.",
+    "Kapica Tec Line Stick skida se dok je boja još tečna."
+  ],
+  "potrosni-materijal/maskiranje/traka": [
+    "Kada list ne navodi trajanje, a ciklus je dug ili se ponavlja, pitajte proizvođača."
+  ],
+  "potrosni-materijal/zastita/folija": [
+    "Za Easy Mask II Carsystem preporučuje da se folija malo podigne i talasastim pokretom uvuče vazduh ispod nje."
+  ],
+  "potrosni-materijal/zastita/senzori": [
+    "Carsystem za Tec Line Stick navodi zaštitu pri brušenju, lakiranju i poliranju; kapica se skida dok je boja još tečna."
+  ],
+  "priprema-i-abrazivi/kit/ravnost": [
+    "Brušenjem okoline udubljenje se samo širi."
+  ],
+  "priprema-i-abrazivi/kit/suv": [
+    "Proizvođač daje vreme do brušenja za svaki kit; za Multi Green Carsystem navodi da se brusi tek posle tog vremena."
+  ],
+  "priprema-i-abrazivi/postojeci/pranje": [
+    "Odmašćuje se pre brušenja, da se masnoća ne utrlja u površinu."
+  ],
+  "priprema-i-abrazivi/postojeci/zdrav": [
+    "Lak koji ne prolazi proveru skida se do zdravog sloja ili do metala."
+  ],
+  "priprema-i-abrazivi/punilac/kontrola2": [
+    "Ako tragovi prethodne granulacije još postoje, vratite se na tu fazu."
+  ],
+  "priprema-i-abrazivi/punilac/probijanje": [
+    "Tu se po pravilu nanosi novi sloj, prema sistemu proizvođača."
+  ],
+  "priprema-i-abrazivi/punilac/zavrsno": [
+    "Na ivicama se sloj najlakše probije."
+  ],
+  "priprema-i-abrazivi/uklanjanje/disk": [
+    "Dugo zadržavanje zagreva lim i boju."
+  ],
+  "priprema-i-abrazivi/uklanjanje/pl-ciscenje2": [
+    "R-M uz PLASTIC Prim-R traži čišćenje, matiranje sunđerom i ponovno čišćenje."
+  ],
+  "priprema-i-abrazivi/uklanjanje/pl-grejanje": [
+    "Za ostale plastike to nije obavezan korak."
+  ],
+  "priprema-i-abrazivi/uklanjanje/prajmer": [
+    "Goli lim ne treba da stoji nezaštićen duže nego što je neophodno, jer na njemu brzo nastaje površinska rđa."
+  ]
+}

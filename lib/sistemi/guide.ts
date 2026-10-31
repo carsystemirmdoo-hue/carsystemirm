@@ -5,6 +5,7 @@
  * → koraci sa detaljima na otvaranje. Tekst se ne prepisuje: vrednosti i uslovi ostaju
  * doslovno iz content/sistemi/*.json; ovde se samo bira šta je odmah vidljivo.
  */
+import VAZNO from "@/content/sistemi/vazno.json";
 import type { ResolvedProduct, SistemiJob, SistemiStep } from "./types";
 
 /** Korak za izabranu varijantu (podlogu, vrstu): izmene iz `pod` zamenjuju opšti tekst. */
@@ -36,7 +37,38 @@ export function needsChoice(job: SistemiJob, choice: string | undefined): boolea
  * Rečenica sa uslovom primene ostaje vidljiva: temperatura, vreme, „obavezno“, „ne sme“, „mora“.
  * Ostatak objašnjenja („zašto“) otvara se po potrebi. Rečenice se ne menjaju, samo se razdvajaju.
  */
-const CONDITION = /°C|\b\d+(?:[,.]\d+)?\s*(?:–\s*\d+(?:[,.]\d+)?\s*)?(?:min|h|s)\b|\btemperatur|\bobavezn|\bne sme|\bmora\b|\bmoraju\b|\bne smeju\b/i;
+const CONDITION = new RegExp(
+  [
+    "°C",
+    "\\b\\d+(?:[,.]\\d+)?\\s*(?:–\\s*\\d+(?:[,.]\\d+)?\\s*)?(?:min|h|s|Nm)\\b",
+    "\\btemperatur",
+    "\\bobavezn",
+    "\\bne sme",
+    "\\bmora(?:ju)?\\b",
+    "\\bne smeju\\b",
+    "\\bizričito",
+    "\\bpropisuje",
+    "\\bzabranjuje",
+    "\\bupozorava",
+    "\\brizik",
+    "\\bkoroz",
+    "\\bpregrev",
+    "\\bošteti",
+    "\\bne može",
+    "\\bne mogu\\b",
+    "\\bne nanosi",
+    "\\bisključivo",
+    "\\bne pomaže",
+    "\\bnije moguće",
+  ].join("|"),
+  "i",
+);
+
+/*
+ * Rečenice koje su uslov ili upozorenje, a pravilo iznad ih ne prepoznaje (pregledano ručno,
+ * 2026-10-31). Ključ: `<program>/<posao>/<korak>[/<izbor>]`; vrednost: doslovne rečenice iz objašnjenja.
+ */
+export const IMPORTANT_SENTENCES = VAZNO as Record<string, string[]>;
 
 export function splitSentences(text: string): string[] {
   return text
@@ -45,12 +77,18 @@ export function splitSentences(text: string): string[] {
     .filter(Boolean);
 }
 
-export function splitDetail(detail: string | undefined): { conditions: string[]; why: string } {
+export function splitDetail(detail: string | undefined, important: string[] = []): { conditions: string[]; why: string } {
   if (!detail) return { conditions: [], why: "" };
   const sentences = splitSentences(detail);
-  const conditions = sentences.filter((sentence) => CONDITION.test(sentence));
-  const why = sentences.filter((sentence) => !CONDITION.test(sentence)).join(" ");
+  const isCondition = (sentence: string) => CONDITION.test(sentence) || important.includes(sentence);
+  const conditions = sentences.filter(isCondition);
+  const why = sentences.filter((sentence) => !isCondition(sentence)).join(" ");
   return { conditions, why };
+}
+
+/** Ključ koraka za spisak važnih rečenica. */
+export function importantKey(program: string, job: string, step: string, choice?: string): string {
+  return [program, job, step, choice].filter(Boolean).join("/");
 }
 
 /** Materijal po koracima, bez ponavljanja, redom pojavljivanja (broj koraka uz svaki). */

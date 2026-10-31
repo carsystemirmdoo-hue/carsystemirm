@@ -3,6 +3,8 @@
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import {
+  IMPORTANT_SENTENCES,
+  importantKey,
   jobImage,
   jobProducts,
   materialSummary,
@@ -63,6 +65,7 @@ function ProductChips({ slugs, products }: { slugs?: string[]; products: Record<
 }
 
 function StepRow({
+  important,
   anchor,
   number,
   step,
@@ -72,6 +75,7 @@ function StepRow({
   onToggle,
   references,
 }: {
+  important: string[];
   anchor: string;
   number: number;
   step: SistemiStep;
@@ -81,7 +85,10 @@ function StepRow({
   onToggle: () => void;
   references: GuideReferences;
 }) {
-  const { conditions, why } = splitDetail(step.detail);
+  const split = splitDetail(step.detail, important);
+  const why = split.why;
+  // Napomena ispod skale je pravilo izbora (npr. „otpornost iznad najviše temperature…“): vidljiva je uz korak.
+  const conditions = [...split.conditions, ...(scale?.footer ? [scale.footer] : [])];
   const hasSources = Boolean(step.sources?.some((ref) => references.sources[sourceKey(ref)]));
   const hasDocs = Boolean(step.products?.some((slug) => references.products[slug]?.document));
   const parts = [why ? "Zašto" : "", scale ? "vrednosti" : "", hasSources ? "izvor" : "", hasDocs ? "listovi" : ""].filter(Boolean);
@@ -115,7 +122,7 @@ function StepRow({
             </button>
             <div className={styles.gDetails} hidden={!open} id={bodyId}>
               {why ? <p>{why}</p> : null}
-              {scale ? <ScaleView choice={choice} scale={scale} sources={references.sources} /> : null}
+              {scale ? <ScaleView choice={choice} scale={scale} showFooter={false} sources={references.sources} /> : null}
               {hasDocs ? <ProductCards products={references.products} slugs={step.products} /> : null}
               <SourceList refs={step.sources} sources={references.sources} />
             </div>
@@ -133,6 +140,7 @@ function StepRow({
  * Izbor je u adresi (`?posao=…&izbor=…`), pa se može podeliti i vratiti.
  */
 export function ProgramGuide({
+  program,
   jobs,
   scales,
   references,
@@ -142,6 +150,7 @@ export function ProgramGuide({
   onJob,
   onChoice,
 }: {
+  program: string;
   jobs: SistemiJob[];
   scales: Record<string, SistemiScale>;
   references: GuideReferences;
@@ -287,6 +296,10 @@ export function ProgramGuide({
                     return (
                       <StepRow
                         anchor={anchor}
+                        important={[
+                          ...(IMPORTANT_SENTENCES[importantKey(program, job.id, step.id)] ?? []),
+                          ...(choice ? (IMPORTANT_SENTENCES[importantKey(program, job.id, step.id, choice)] ?? []) : []),
+                        ]}
                         choice={choice}
                         key={step.id}
                         number={index + 1}

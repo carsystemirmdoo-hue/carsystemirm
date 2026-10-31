@@ -216,18 +216,18 @@ export const baslacLine35Bases: BaslacBase[] = [
   /*
    * Dopuna 2026-10-21: artikli iz našeg šifarnika (aktivni, na stanju) koje sajt nije
    * prikazivao, a zvanični izvor potvrđuje ŠIFRU. Naziv nijanse se ne izmišlja: gde ga izvor
-   * ne objavljuje, kartica kaže „Naziv nije objavljen“, a kvadratić je neutralan.
+   * ne objavljuje, naziv ostaje prazan (prikazuje se samo šifra), a kvadratić je neutralan.
    */
   base("line-35", "35-M00", "Basecoat (mešna komponenta sistema)", 3.5, "technical", "#c9ccd1", {
     rangeStatus: "IN_OUR_RANGE",
     statusSource: "baslac.com: „35-M00 35- Basecoat“, aktuelna mešna komponenta (TDS techinfo.baslac.com/en/35-M00.pdf)",
   }),
-  base("line-35", "35-M05", "Basecoat (naziv nije objavljen)", 3.5, "unknown", "#c9ccd1", {
+  base("line-35", "35-M05", "Basecoat", 3.5, "unknown", "#c9ccd1", {
     rangeStatus: "IN_OUR_RANGE",
     supplierArticle: "53232870",
     statusSource: "Surventis Brand Portal (baslac), packshot 12152 „Baslac_3_5L_35-M05_53232870“; etiketa: „35-M05 Basecoat“",
   }),
-  base("line-35", "35-M351", "Naziv nije objavljen", 1, "unknown", "#c9ccd1", {
+  base("line-35", "35-M351", "", 1, "unknown", "#c9ccd1", {
     rangeStatus: "IN_OUR_RANGE",
     statusSource: "baslac Tinting Chart basecoat 35 (AD6270BE, 03/2021, Surventis 23796): „M351“",
   }),
@@ -255,7 +255,7 @@ export const baslacLine30Bases: BaslacBase[] = [
   }),
   base("line-30", "30-S411", "Purple", 1, "solid", "#3D3575"),
   base("line-30", "30-S420", "Red", 1, "solid", "#b81f28"),
-  base("line-30", "30-S510", "Nepotvrđena oznaka", 1, "solid", "#4a5b7a", {
+  base("line-30", "30-S510", "", 1, "solid", "#4a5b7a", {
     rangeStatus: "IN_OUR_RANGE",
     catalogSlug: "baslac-30-s510-s-serija",
     productionStatus: "UNVERIFIED",
@@ -412,31 +412,31 @@ export const baslacLine45Bases: BaslacBase[] = [
     statusSource: "baslac.de (KLW) katalog, strana 2/2, 2026-08-22 — 49-W serija koncentrata",
   }),
   // Dopuna 2026-10-21: 49-W koncentrati iz našeg šifarnika (aktivni, na stanju); šifra potvrđena, naziv nije objavljen.
-  base("line-45", "49-W455", "Naziv nije objavljen", 0.1, "unknown", "#c9ccd1", {
+  base("line-45", "49-W455", "", 0.1, "unknown", "#c9ccd1", {
     rangeStatus: "IN_OUR_RANGE",
     statusSource: "baslac Tinting Chart (AD6270BE, 03/2021, Surventis 23796): „49-W455“",
   }),
-  base("line-45", "49-W460", "Naziv nije objavljen", 0.1, "unknown", "#c9ccd1", {
+  base("line-45", "49-W460", "", 0.1, "unknown", "#c9ccd1", {
     rangeStatus: "IN_OUR_RANGE",
     statusSource: "baslac Tinting Chart (AD6270BE, 03/2021, Surventis 23796): „49-W460“",
   }),
-  base("line-45", "49-W463", "Naziv nije objavljen", 0.1, "unknown", "#c9ccd1", {
+  base("line-45", "49-W463", "", 0.1, "unknown", "#c9ccd1", {
     rangeStatus: "IN_OUR_RANGE",
     statusSource: "Surventis Brand Portal (baslac): packshot „baslac 0,1L 49-W463 …“ i Tinting Chart 03/2021",
   }),
-  base("line-45", "49-W466", "Naziv nije objavljen", 0.1, "unknown", "#c9ccd1", {
+  base("line-45", "49-W466", "", 0.1, "unknown", "#c9ccd1", {
     rangeStatus: "IN_OUR_RANGE",
     statusSource: "Surventis Brand Portal (baslac): packshot „baslac 0,1L 49-W466 …“",
   }),
-  base("line-45", "49-W553", "Naziv nije objavljen", 0.1, "unknown", "#c9ccd1", {
+  base("line-45", "49-W553", "", 0.1, "unknown", "#c9ccd1", {
     rangeStatus: "IN_OUR_RANGE",
     statusSource: "baslac Tinting Chart (AD6270BE, 03/2021, Surventis 23796): „49-W553“",
   }),
-  base("line-45", "49-W554", "Naziv nije objavljen", 0.1, "unknown", "#c9ccd1", {
+  base("line-45", "49-W554", "", 0.1, "unknown", "#c9ccd1", {
     rangeStatus: "IN_OUR_RANGE",
     statusSource: "baslac Tinting Chart (AD6270BE, 03/2021, Surventis 23796): „49-W554“",
   }),
-  base("line-45", "49-W580", "Naziv nije objavljen", 0.1, "unknown", "#c9ccd1", {
+  base("line-45", "49-W580", "", 0.1, "unknown", "#c9ccd1", {
     rangeStatus: "IN_OUR_RANGE",
     statusSource: "baslac Tinting Chart (AD6270BE, 03/2021, Surventis 23796): „49-W580“",
   }),

@@ -40,7 +40,7 @@ export function toFamilyBase(base: BaslacBase): FamilyBase {
     swatchPattern: base.finish === "unknown" ? "neutral" : base.finish,
     queryValue: baslacVariantQueryValue(base),
     buySlug: baslacBaseSlug(base),
-    buyName: `${base.code} · ${base.name}`,
+    buyName: base.name ? `${base.code} · ${base.name}` : base.code,
     searchTerms: baslacSearchAliases(base),
   };
 }

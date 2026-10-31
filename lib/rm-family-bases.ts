@@ -59,7 +59,7 @@ export const RM_FAMILY_CONFIGS: RmFamilyConfig[] = [
     system: null,
     familyName: "R-M paste za mešanje",
     seriesName: "R-M paste za mešanje",
-    systemName: "R-M paste — linija nije potvrđena",
+    systemName: "R-M paste za mešanje",
     eyebrow: "R-M paste iz naše ponude",
     intro:
       "Paste koje vodimo, po oznaci sa etikete i potvrđenom pakovanju. Zvanični izvori proizvođača ne potvrđuju liniju ni naziv za ove oznake, pa ih ne pripisujemo sistemu; za izbor se obratite kancelariji.",

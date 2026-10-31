@@ -96,7 +96,7 @@ function selectionLinks(slug: string, label: string): RmSystemLink[] {
   const config = getRmFamilyConfig(slug);
   const volumes = config ? rmFamilyVolumes(config) : [];
   if (!config?.system || volumes.length === 0) {
-    return [{ slug, href: `/proizvodi/${slug}`, label, note: "linija nije potvrđena · izbor po oznaci sa etikete", selection: true, group: "selection" }];
+    return [{ slug, href: `/proizvodi/${slug}`, label, note: "izbor po oznaci sa etikete", selection: true, group: "selection" }];
   }
   return volumes.map((volume, index) => ({
     // Prva kartica nosi slug zbog pripadnosti bloku; sve vode na istu porodicu sa izabranom zapreminom.

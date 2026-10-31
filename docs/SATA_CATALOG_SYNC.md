@@ -109,6 +109,15 @@ Zvanična adresa se čuva **doslovno, sa `?ts=` tokenom**. Sedam brošura koje E
 na IT/DE/FR se ne prikazuje i beleži se kao `SOURCE_DOCUMENT_LANGUAGE_MISMATCH`. SATA nema TDS/SDS
 model — takvi redovi se ne izmišljaju. Spare-parts dokumentacija ostaje interna.
 
+**Adrese fajlova se menjaju.** SATA objavljuje fajl pod `/media/<heš>/<ts>/<FAJL>.PDF.PDF?ts=<ts>`, a
+heš i `ts` se menjaju pri objavljivanju njihovog sajta (2026-10-31: svih 66 adresa iz sync-a 2026-09-20
+→ 404; ista stranica proizvoda je nudila nove). Zato sajt ne vodi na fajl: adapter
+(`lib/sata-catalog-products.ts`, `SATA_ROTATING_FILE_URL`) daje vezu na stalnu stranicu porodice
+(`sourceUrl`, `/en/<naziv>/CF<id>`) sa `viaProductPage`, a ime fajla bez heša i `ts` je `documentKey`
+(isti fajl više porodica = jedna stavka biblioteke `/dokumentacija`). Dataset i dalje čuva doslovnu
+adresu iz sync-a kao dokaz izvora. `npm run sata:sync:check-links` (mreža) proverava da svaka stranica
+porodice sa dokumentom odgovara 200 i da je svaki dokument i dalje ponuđen na njoj (po imenu fajla).
+
 ## Sadržaj na srpskom
 
 - `localization/families.sr.json` — tip proizvoda, kratak opis i namena po porodici; prepričava

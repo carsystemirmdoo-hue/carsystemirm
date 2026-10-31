@@ -227,3 +227,35 @@ test("[source-contract] strana izvodi navigaciju iz kanonskih sataSections", asy
     );
   }
 });
+
+/* ==========================================================================
+ * Dokumenti: SATA adrese fajlova se menjaju, sajt vodi na stranicu proizvoda
+ * ========================================================================== */
+
+test("nijedan SATA dokument ne vodi na promenljivu adresu fajla (sata.com/media)", async () => {
+  const { SATA_ROTATING_FILE_URL } = await import("@/lib/sata-catalog-products");
+  const products = getCarsystemProductsByBrandSlug(SATA_BRAND_SLUG);
+  let documents = 0;
+  for (const product of products) {
+    const links = [
+      ...product.documents.map((document) => ({ ...document, layer: "documents" })),
+      ...(product.detail?.documents?.content ?? []).map((document) => ({ ...document, layer: "detail" })),
+    ];
+    for (const document of links) {
+      if (!document.href) continue;
+      documents += 1;
+      assert.ok(!SATA_ROTATING_FILE_URL.test(document.href), `${product.slug} (${document.layer}): ${document.href}`);
+      assert.match(document.href, /^https:\/\/www\.sata\.com\/en\/.+\/CF\d+$/, `${product.slug}: ${document.href}`);
+      assert.equal(document.viaProductPage, true, `${product.slug}: ${document.title}`);
+    }
+  }
+  assert.ok(documents > 0, "SATA proizvodi nemaju dokumente — test ne proverava ništa");
+});
+
+test("isti SATA fajl više proizvoda nosi isti documentKey (jedna stavka biblioteke)", () => {
+  const keys = (slug: string) =>
+    getCarsystemProductBySlug(slug)?.documents.map((document) => document.documentKey).sort();
+  // SATA za sve jet X izdanja objavljuje isto uputstvo i istu izjavu o usaglašenosti.
+  assert.deepEqual(keys("sata-jet-x-basecoat-edition"), keys("sata-jet-x"));
+  assert.equal(new Set(keys("sata-jet-x")).size, 2);
+});

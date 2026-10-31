@@ -153,16 +153,35 @@ function variantSection(entry: SyncEntry): ProductVariantSection {
   };
 }
 
+/**
+ * SATA adrese fajlova nisu stalne: `/media/<heš>/<ts>/<FAJL>.PDF.PDF?ts=<ts>` se menja pri
+ * svakom objavljivanju njihovog sajta (2026-10-31: svih 66 sačuvanih adresa → 404, posle
+ * ~5 nedelja). Stranica proizvoda (`sourceUrl`, `/en/<naziv>/CF<id>`) je stalna i nudi
+ * aktuelan fajl, pa sajt vodi tamo. Dataset i dalje beleži adresu fajla iz poslednjeg
+ * sync-a (dokaz izvora); ime fajla bez heša i `ts` ostaje isto i služi kao identitet.
+ */
+export const SATA_ROTATING_FILE_URL = /^https:\/\/www\.sata\.com\/media\//;
+
+function stableDocumentLink(entry: SyncEntry, document: SyncDocument) {
+  if (!SATA_ROTATING_FILE_URL.test(document.href)) return { href: document.href };
+  const fileName = new URL(document.href).pathname.split("/").pop() ?? document.href;
+  return { href: entry.sourceUrl, viaProductPage: true as const, documentKey: `sata:${fileName}` };
+}
+
 function detailDocuments(entry: SyncEntry): ProductDetailDocument[] {
-  return entry.documents.map((document, index) => ({
-    id: `${entry.slug}-${document.kind}-${index}`,
-    title: document.title,
-    kind: document.kind === "manual" ? ("instructions" as const) : document.kind === "brochure" ? ("flyer" as const) : ("other" as const),
-    availability: "available" as const,
-    href: document.href,
-    language: document.language ? LANGUAGE_LABEL[document.language] : undefined,
-    reviewStatus: "confirmed" as const,
-  }));
+  return entry.documents.map((document, index) => {
+    const { href, viaProductPage } = stableDocumentLink(entry, document);
+    return {
+      id: `${entry.slug}-${document.kind}-${index}`,
+      title: document.title,
+      kind: document.kind === "manual" ? ("instructions" as const) : document.kind === "brochure" ? ("flyer" as const) : ("other" as const),
+      availability: "available" as const,
+      href,
+      ...(viaProductPage ? { viaProductPage } : {}),
+      language: document.language ? LANGUAGE_LABEL[document.language] : undefined,
+      reviewStatus: "confirmed" as const,
+    };
+  });
 }
 
 function summarizeVariants(entry: SyncEntry) {
@@ -373,7 +392,7 @@ function documentsOf(entry: SyncEntry) {
   return entry.documents.map((document) => ({
     title: document.title,
     kind: "PDF",
-    href: document.href,
+    ...stableDocumentLink(entry, document),
     status: "available" as const,
     note: document.language ? LANGUAGE_LABEL[document.language] : undefined,
   }));

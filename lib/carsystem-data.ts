@@ -156,6 +156,10 @@ export type ProductDocument = {
   href?: string;
   status: "available" | "placeholder" | "disabled";
   note?: string;
+  /** `href` je stranica proizvoda kod proizvođača, a ne sam fajl (vidi `lib/sata-catalog-products.ts`). */
+  viaProductPage?: boolean;
+  /** Stalni identitet fajla kada `href` nije adresa fajla — isti dokument više proizvoda je jedna stavka biblioteke. */
+  documentKey?: string;
 };
 
 export type ProductPublicStatus =

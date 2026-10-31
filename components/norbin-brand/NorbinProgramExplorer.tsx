@@ -74,7 +74,7 @@ export function NorbinProgramExplorer({ items }: { items: NorbinProgramItem[] })
           {!selected.image ? (
             <div className={styles.previewNoImage}>
               <strong>{selected.code}</strong>
-              <span>Fotografija još nije odobrena za prikaz.</span>
+              <span>Fotografija nije dostupna.</span>
             </div>
           ) : null}
         </div>

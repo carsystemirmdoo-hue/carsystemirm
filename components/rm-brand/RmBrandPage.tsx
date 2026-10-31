@@ -291,10 +291,6 @@ function RmAgilisFeature({
       </div>
 
       <div className={styles.agilisActions}>
-        <p>
-          Prikazujemo samo potvrđene fotografije iz kataloga; ostale komponente
-          dobijaju fotografiju kada bude odobrena.
-        </p>
         <div>
           <Link
             className={`${styles.rmOutlineButton} cs-cta`}

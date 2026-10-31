@@ -321,10 +321,6 @@ function OurProgramSection({ products }: { products: CarsystemProduct[] }) {
         <h2 className={styles.sectionTitle} id="norbin-our-title">
           Šta zaista možete poručiti kod nas.
         </h2>
-        <p className={styles.sectionLead}>
-          Pređite mišem, tasterom Tab ili dodirom preko reda — desno je
-          pregled proizvoda sa šifrom, pakovanjem i vezom.
-        </p>
 
         <NorbinProgramExplorer items={items} />
       </div>

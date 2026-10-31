@@ -480,12 +480,12 @@ export function StoreLocator({ stores }: { stores: PartnerStore[] }) {
               <strong>
                 {hasPublicStores
                   ? "Nema lokacija za izabranu pretragu."
-                  : "Nema potvrđenih javnih lokacija."}
+                  : "Lokacije trenutno nisu dostupne."}
               </strong>
               <p>
                 {hasPublicStores
                   ? "Proverite unos ili resetujte filter vrste lokacije."
-                  : "Neodobreni kandidati su zadržani samo u internom review fajlu."}
+                  : "Za najbliže prodajno mesto kontaktirajte nas."}
               </p>
               <button
                 className={styles.secondaryButton}

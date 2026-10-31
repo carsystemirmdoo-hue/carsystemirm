@@ -44,8 +44,8 @@ export function RmFamilyPdp({
             swatchNote={RM_SWATCH_NOTE}
             stageNote={
               config.system
-                ? `Jedna generička limenka po sistemu i pakovanju (Surventis Brand Portal). Baze se razlikuju šifrom i nijansom, ne limenkom.`
-                : "Zvanična fotografija ambalaže nije dostupna: linija ovih pasta nije potvrđena, pa se ne prikazuje limenka drugog sistema."
+                ? `Jedna generička limenka po sistemu i pakovanju. Baze se razlikuju šifrom i nijansom, ne limenkom.`
+                : "Zvanična fotografija ambalaže nije dostupna."
             }
           >
             <ProductSystemNavigation slug={product.slug} />

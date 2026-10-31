@@ -95,7 +95,6 @@ export function B2BCooperation({ email, emailHref }: { email: string; emailHref:
             <h2 className={styles.sectionTitle} id="forma-naslov">
               Recite nam nešto o firmi
             </h2>
-            <p className={styles.sectionLead}>Upit stiže timu sa izabranom vrstom firme.</p>
           </div>
           <InquiryForm
             companyRequired

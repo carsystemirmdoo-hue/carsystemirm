@@ -918,10 +918,9 @@ function StorePreview({
         <span className={styles.availableDot} />
         <div>
           <header>
-            <strong>Nema objavljenih lokacija</strong>
-            <small>U pripremi</small>
+            <strong>Prodajna mesta</strong>
           </header>
-          <p>Potvrđene prodajne lokacije biće prikazane tek kada podaci budu uneti.</p>
+          <p>Za najbliže prodajno mesto kontaktirajte nas.</p>
         </div>
       </article>
     );

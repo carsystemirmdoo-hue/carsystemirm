@@ -26,6 +26,15 @@ const bySlug = new Map(sata.map((product) => [product.slug, product]));
  * Sync opseg je NETAKNUT — zapisi i dalje postoje u datasetu i planu, pa se ovde meri sync,
  * a odsustvo iz runtime-a se proverava kao namerno, a ne kao gubitak.
  */
+/*
+ * Slike ne dolaze iz sync-a: dataset ostaje bez adresa slika. Od 2026-10-31 (potvrda vlasnika o pravu
+ * upotrebe SATA fotografija) kartica sme da nosi samo sliku iz registra za TAČAN slug, OWNER_CONFIRMED.
+ */
+const suppliedSata = new Map(
+  readJson(new URL("../../data/catalog/image-supply/supplied-images.json", import.meta.url))
+    .images.filter((entry) => entry.brand === "sata" && entry.scope === "CARD" && entry.rightsBasis === "OWNER_CONFIRMED")
+    .map((entry) => [entry.slug, entry.path]),
+);
 const removedFromCatalogue = new Set(
   readJson(new URL("../../data/catalog/removed-from-customer-catalog.json", import.meta.url)).records
     .filter((record) => record.brand === "sata")
@@ -170,7 +179,7 @@ test("rights gate i anti-invention: placeholder, 0 dokumenata, bez cene; brojevi
   assert.doesNotMatch(JSON.stringify(dataset.phase2), /sata\.com\/media|\.webp|\.jpe?g|\.png/i, "nijedna adresa slike u datasetu");
   for (const card of visibleCards) {
     const product = bySlug.get(card.slug);
-    assert.equal(product.productImage.src, "/images/products/placeholder-product.svg");
+    assert.equal(product.productImage.src, suppliedSata.get(card.slug) ?? "/images/products/placeholder-product.svg", card.slug);
     assert.equal(product.documents.length, 0);
     assert.equal(product.publicStatus, "Na upit");
     assert.doesNotMatch(JSON.stringify([product.name, product.shortDescription, product.specifications, product.detail.variants?.content.rows.map((row) => row.values)]), /\bprice\b|\bcena\b|€|\bEUR\b/i, card.slug);

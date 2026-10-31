@@ -72,17 +72,26 @@ Većina proizvoda nema zvaničnu sliku na baslac.com. Linije tonera (Basecoat 45
 | P2 | baslac 50-530 Ambient Clear Hardener slow | 50-530 | Na upit | 1 | `baslac__baslac-50-530-ambient-clear-hardener-slow.webp` |
 | P2 | baslac 80-30 Additive Plast | 80-30 | Na upit | 1 | `baslac__baslac-80-30-additive-plast.webp` |
 
-## R-M — 17 fotografija
+## R-M — 24 fotografija
 
 R-M (rmpaint.com) za ove proizvode ne objavljuje packshot. Svaka kartica je poseban proizvod sa svojom oznakom (npr. „A 2010”) → jedna fotografija po kartici. Izuzetak su dve grupe istog naziva (GHD THINNER i GHD HARDENER) gde se razlikuje samo oznaka brzine: za njih je dovoljna jedna reprezentativna slika grupe. Katalog pakovanje vodi kao „na upit”; fotografisati pakovanje koje je stvarno na lageru.
 
-### PACKSHOT PROIZVODA (17)
+### PACKSHOT KARTICE (1)
+
+| Prioritet | Proizvod | Šifra | Pakovanje / varijanta | Pokriva | Naziv fajla |
+|---|---|---|---|---|---|
+| P2 | R-M paste za mešanje | SC 403 BC 111 BC 190 BC 196 BC 301 BC 404 BC 408 BC 475 BC 512 BC 601 BC 616 BC 617 BC 740 BC 816 BC 881 BC 1182 BC 1245 BC 1265 BC 7610 CB 48V | — | 20 | `rm__rm-paste-za-mesanje.webp` |
+
+### PACKSHOT PROIZVODA (23)
 
 | Prioritet | Proizvod | Šifra | Pakovanje / varijanta | Pokriva | Naziv fajla |
 |---|---|---|---|---|---|
 | P2 | R-M AGILIS X-TREME | AGILIS X-TREME | Na upit | 1 | `rm__rm-agilis-x-treme.webp` |
+| P2 | R-M BASIC CLEAR | — | 1 L | 1 | `rm__rm-c-1150-basic-clear.webp` |
+| P2 | R-M STARTOP HS | — | 1 L | 1 | `rm__rm-c-1450-startop-hs.webp` |
 | P2 | R-M WHEEL CLEAR COAT | C 2RM2 | Na upit | 1 | `rm__rm-c-2rm2-wheel-clear-coat.webp` |
 | P2 | R-M DIAMONT bezbojni lak | — | 1 L | 1 | `rm__rm-diamont-bezbojni-lak.webp` |
+| P2 | R-M BASIC HARDENER | — | 0,5 L | 1 | `rm__rm-h-1150-basic-hardener.webp` |
 | P2 | R-M FillCURE Plus | H 2A80 | Na upit | 1 | `rm__rm-h-2a80-fillcure-plus.webp` |
 | P2 | R-M FillCURE Plus slow | H 2A81 | Na upit | 1 | `rm__rm-h-2a81-fillcure-plus-slow.webp` |
 | P2 | R-M FILLER Harden-R Plus | H 2P80 | Na upit | 1 | `rm__rm-h-2p80-filler-harden-r-plus.webp` |
@@ -90,13 +99,16 @@ R-M (rmpaint.com) za ove proizvode ne objavljuje packshot. Svaka kartica je pose
 | P2 | R-M WHEEL CLEAR COAT, HARDENER | H 2RM2 | Na upit | 1 | `rm__rm-h-2rm2-wheel-clear-coat-hardener.webp` |
 | P2 | R-M GHD PROTECT FILLER HARDENER | H 340 | Na upit | 1 | `rm__rm-h-340-ghd-protect-filler-hardener.webp` |
 | P2 | R-M GHD SLOW ACTIVATOR | H 5430 | Na upit | 1 | `rm__rm-h-5430-ghd-slow-activator.webp` |
+| P2 | R-M H 9000 HARDENER | — | 1 L | 1 | `rm__rm-h-9000-hardener-medium.webp` |
 | P2 | R-M Gleam Silver ONYX HD | HB 10S | Na upit | 1 | `rm__rm-hb-10s-gleam-silver-onyx-hd.webp` |
 | P2 | R-M ONYX BLENDER PLUS | A 2525 | Na upit | 1 | `rm__rm-onyx-blender-plus.webp` |
 | P2 | R-M ONYX HD TROPICAL | ONYX HD TROPICAL | Na upit | 1 | `rm__rm-onyx-hd-tropical.webp` |
 | P2 | R-M SpeedFILLER White | P 2A81 | Na upit | 1 | `rm__rm-p-2a81-speedfiller-white.webp` |
 | P2 | R-M SpeedFILLER Black | P 2A85 | Na upit | 1 | `rm__rm-p-2a85-speedfiller-black.webp` |
 | P2 | R-M GHD PROTECT PRIMER FILLER | P 5540 | Na upit | 1 | `rm__rm-p-5540-ghd-protect-primer-filler.webp` |
-| P2 | R-M AGILIS MIX | RA 040 | Na upit | 1 | `rm__rm-ra-040-agilis-mix.webp` |
+| P2 | R-M AGILIS MIX RA 040 | RA 040 | Na upit | 1 | `rm__rm-ra-040-agilis-mix.webp` |
+| P2 | R-M SC 850 THINNER | — | 1 L | 1 | `rm__rm-sc-850-thinner-medium.webp` |
+| P2 | R-M SPECIAL MAT 09 | — | 1 L | 1 | `rm__rm-sm-09-special-mat-09.webp` |
 
 ## Norbin — 4 fotografija
 
@@ -111,15 +123,45 @@ Norbin izvor nema slike ni stranice proizvoda. Jedna fotografija po proizvodu; p
 | P2 | Norbin N75-022 Hardener Slow | N75-022 | 2,5 L | 1 | `norbin__norbin-n75-022-hardener-slow.webp` |
 | P2 | Norbin N95-060 Silicone cleaner | N95-060 | 5 L | 1 | `norbin__norbin-n95-060-silicone-cleaner.webp` |
 
-## SATA — 1 fotografija
+## BEFAR — 1 fotografija
+
+Kartice već imaju packshot; nedostaje samo 1 redova određene boje/dimenzije. Ovo je najniži prioritet (P3): PDP do tada prikazuje sliku kartice.
+
+### SLIKA REDA (boja/dimenzija) (1)
+
+| Prioritet | Proizvod | Šifra | Pakovanje / varijanta | Pokriva | Naziv fajla |
+|---|---|---|---|---|---|
+| P3 | Befar Velcro Polishing Pad | 04405 | Plava · 150 × 25 mm | 1 | `befar__befar-velcro-polishing-pad__04405.webp` |
+
+## SATA — 5 fotografija
 
 Samo porodice za koje SATA sliku uopšte NE objavljuje. SATA proizvodi za koje zvanična slika postoji NISU u ovom spisku — oni čekaju odluku o pravima (rights review) i ne treba ih fotografisati sada.
+
+### PACKSHOT KARTICE (4)
+
+| Prioritet | Proizvod | Šifra | Pakovanje / varijanta | Pokriva | Naziv fajla |
+|---|---|---|---|---|---|
+| P2 | SATA Kofer za pištolj za lakiranje | 1172 153288 1222851 1223445 1230078 1231365 1231381 1231886 | — | 8 | `sata__sata-lackierpistolenkoffer.webp` |
+| P2 | SATA Mikrometar vazduha | 9860 27771 48934 | — | 3 | `sata__sata-luftmikrometer.webp` |
+| P2 | SATA mini Set 2 | 21733 56408 57232 83444 120840 | — | 5 | `sata__sata-mini-set-2.webp` |
+| P2 | SATA vario top spray | 56010 61507 61515 62745 72678 72694 81406 81661 90662 95109 138941 138958 | — | 12 | `sata__sata-vario-top-spray.webp` |
 
 ### PACKSHOT PROIZVODA (1)
 
 | Prioritet | Proizvod | Šifra | Pakovanje / varijanta | Pokriva | Naziv fajla |
 |---|---|---|---|---|---|
 | P2 | SATA Release agent spray system | 187740 | Art. 187740 | 1 | `sata__sata-release-agent-spray-system.webp` |
+
+## C.A.R.FIT — 2 fotografija
+
+Jedan ručno unet proizvod bez slike.
+
+### PACKSHOT KARTICE (2)
+
+| Prioritet | Proizvod | Šifra | Pakovanje / varijanta | Pokriva | Naziv fajla |
+|---|---|---|---|---|---|
+| P2 | Car Fit Nitrile Gloves 6 MIL | 3-260-0350 3-260-0450 3-260-0550 3-260-0650 | — | 4 | `carfit__carfit-nitrile-gloves-6-mil.webp` |
+| P2 | Car Fit Premium Soft Plus Putty | 2-253-1800 2-253-4700 | — | 2 | `carfit__carfit-premium-soft-plus-putty.webp` |
 
 ## Predaja
 

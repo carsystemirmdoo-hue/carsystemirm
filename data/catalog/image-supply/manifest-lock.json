@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "status": "APPROVED_FOR_OWNER_IMAGE_SUPPLY",
   "createdFromMainSha": "2e6792130460ee53fd83bf5e073d256ce44efd01",
-  "catalogIdentityFingerprint": "2ea429479193e598a4ac2d7aeea8ff51789f711daf4456dc201ff6cd343de2d8",
+  "catalogIdentityFingerprint": "ce125fd783ca4af328ce6b8af63140124849967635bfec6796928d72fe7debe3",
   "activeBrands": [
     "baslac",
     "befar",
@@ -12,54 +12,58 @@
     "norbin",
     "rm",
     "rupes",
-    "sata"
+    "sata",
+    "yachtcare"
   ],
-  "totalCards": 1167,
+  "totalCards": 1174,
   "cardsByBrand": {
-    "baslac": 57,
-    "befar": 64,
-    "carfit": 120,
-    "carsystem": 426,
+    "baslac": 63,
+    "befar": 63,
+    "carfit": 121,
+    "carsystem": 418,
     "cosmos-lac": 84,
     "norbin": 13,
-    "rm": 223,
+    "rm": 231,
     "rupes": 25,
-    "sata": 155
+    "sata": 155,
+    "yachtcare": 1
   },
   "totalImageIdentities": 1806,
-  "missingCount": 189,
-  "userSupplyCount": 26,
-  "rightsReviewCount": 176,
+  "missingCount": 67,
+  "userSupplyCount": 41,
+  "rightsReviewCount": 36,
   "userSupplyByBrand": {
     "baslac": 4,
+    "befar": 1,
+    "carfit": 2,
     "norbin": 4,
-    "rm": 17,
-    "sata": 1
+    "rm": 24,
+    "sata": 5,
+    "yachtcare": 1
   },
   "missingByAction": {
     "IMPORT_OFFICIAL_IF_APPROVED": 11,
-    "KEEP_PLACEHOLDER": 12,
-    "RIGHTS_DECISION": 140,
-    "USER_SUPPLY": 26
+    "KEEP_PLACEHOLDER": 15,
+    "USER_SUPPLY": 41
   },
   "manifests": {
     "MISSING_PRODUCT_IMAGES.csv": {
-      "sha256": "e2ad260d41f88dce37d201db1198b46471016e6ed508faa1f88f537c9316068b",
-      "rows": 189
+      "sha256": "e6729ed1370b3630632093b0012795293c0d70f3bb43ece1184cff2da8a71ce5",
+      "rows": 67
     },
     "USER_IMAGE_SUPPLY_QUEUE.csv": {
-      "sha256": "845434f3d1841cc36694a942b23d9abe646a414dd2d198f3e08e932d650292e1",
-      "rows": 26
+      "sha256": "663ac59a826483eaa1195469efe05c2a603530db42d79484edcd91935c7906c0",
+      "rows": 41
     },
     "IMAGE_RIGHTS_REVIEW.csv": {
-      "sha256": "529e2101a3b624dcc0b865660c0e7f39c5cff726b71c995508c5a3e03b694ab7",
-      "rows": 176
+      "sha256": "62bed6ede1fcb58e8ce2f0873d9f47928cf9c164c24f9970d72a3537be3174a4",
+      "rows": 36
     }
   },
   "imageIdentityInventory": {
     "tracked": false,
-    "sha256": "af6639fd65386b1c3d814fa3aa3ff0f864f307879ce2a04ea696cf1e2a033e20",
-    "imageIdentityFingerprint": "98e838a0de981c0d5f194c3795e013a11f27ab789cff7ded4cf6fdecae55468d",
+    "sha256": "c5c867f1a626a536f27adf13844d61a4fdbf41f2b3ed1a26367d75c51e299cb5",
+    "imageIdentityFingerprint": "70a6ad60a941b920b0a44eb880947977955361a6870e77a3f9e9ca154fd658ef",
     "brokenReferences": 0,
     "wrongSibling": 0,
     "rows": 1806
@@ -78,7 +82,7 @@
     "OWNER_SUPPLY_BATCH_01_CANDIDATES.csv": "zapis ishoda batch-a (status SUPPLIED/DEFERRED/OPEN + owner_has_product); namerno van SHA lock-a, proverava se strukturno"
   },
   "metadata": {
-    "generatedOn": "2026-10-06",
+    "generatedOn": "2026-10-31",
     "approvedAt": null,
     "approvedBy": null,
     "previousLockMetadata": {

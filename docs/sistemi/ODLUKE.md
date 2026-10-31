@@ -28,7 +28,7 @@ Načelo: tvrdnja u starom tekstu sajta, vodiču ili kodu nije dokaz njene tehni�
 | A6 | Vodiči u doradi i veze ka vodičima | Raspored objave vodiča je isključen (`content/saveti/raspored.json`, `aktivan: false`), pa javno nema nijednog vodiča. Stranice prikazuju vezu samo ka objavljenom vodiču (`getPublicSavetBySlug`). Vodiči sa statusom „ispravke-potrebne“ nisu povezani ni kada budu objavljeni. | sve stručne stranice |
 | A7 | Verzije R-M tehničkih listova | Vodiči navode 07/2026; dokumenti preuzeti 2026-10-30 su 10/2026 (AGILIS, ONYX HD, DIAMONT, PK 1P10, PK 2P10, PK 2P20). Strane su nađene u verziji 10/2026 i ona je navedena. | Boje, Potrošni |
 | A8 | Naziv „Potrošni materijal“ | Ostaje u navigaciji; „Maskiranje, čišćenje i zaštita“ je podnaslov stranice. | Potrošni |
-| A9 | Slike sa otvorenim pravom prikaza | Stranice sistema ne prikazuju sliku čije je pravo na čekanju u `IMAGE_RIGHTS_REVIEW.csv` (RUPES 25, SATA 140, Cosmos Lac 11); umesto nje je neutralno polje. Spisak: `content/sistemi/slike-bez-potvrde-prava.json`, usklađenost proverava `npm run test:sistemi`. | sve stručne stranice |
+| A9 | Slike sa otvorenim pravom prikaza | Stranice sistema ne prikazuju sliku čije je pravo na čekanju u `IMAGE_RIGHTS_REVIEW.csv` (RUPES 25, Cosmos Lac 11; SATA uklonjena sa spiska 2026-10-31, vidi E2); umesto nje je neutralno polje. Spisak: `content/sistemi/slike-bez-potvrde-prava.json`, usklađenost proverava `npm run test:sistemi`. | sve stručne stranice |
 | A10 | Opis /katalozi sa rečju „zastupamo“ | U trenutnom kodu te reči više nema. | /katalozi |
 | A11 | Biblioteka: uzorak od 44 dokumenta | Biblioteka koristi sve dostupne dokumente proizvoda i brendova (879) iz istog izvora kao stranice proizvoda; brojači, filteri i rezultati računaju nad istim spiskom. | /dokumentacija |
 
@@ -69,7 +69,7 @@ Načelo: tvrdnja u starom tekstu sajta, vodiču ili kodu nije dokaz njene tehni�
 | # | Odluka | Stanje |
 |---|---|---|
 | E1 | RUPES packshotovi (`RUPES_IMAGE_RIGHTS_REVIEW`) | Na stranicama sistema neutralno polje; na stranicama proizvoda ostaje kao do sada |
-| E2 | SATA slike (`RIGHTS_NOT_CONFIRMED`) | Neutralno polje |
+| E2 | SATA slike | 2026-10-31 vlasnik je u ime firme potvrdio pravo upotrebe SATA fotografija proizvoda (samo SATA, interna evidencija, `docs/SATA_CATALOG_SYNC.md`). Prikazuje se zvanična slika tačnog artikla (133 kartice); 7 kartica sa slikom srodnog modela i 13 bez slike ostaju na neutralnom polju |
 | E3 | CSY-0507 ProFlex Mercury i CSY-0606 Sanding Disc F.19 Finish 77 mm: u odluci 29.10. „odluka sadržaja bez kandidata“ | Prikazuju se kao na stranici proizvoda (objavljene slike); čeka potvrdu vlasnika |
 | E4 | 16 slika bez ID-a u kontroli slika (logotipi, naslovne strane, `rm-onyx-hd.webp`) | Stranice sistema ih ne koriste osim slika proizvoda iz kataloga |
 

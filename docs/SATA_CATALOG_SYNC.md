@@ -9,7 +9,7 @@
 | Porodice u opsegu | 66 (65 uvezenih + 1 dopunjena: `satajet-x-5500`) |
 | Brojevi artikala u opsegu | 655 (redovi tabele konfiguracija) |
 | Pokrivenost | A = B = 66 · C = D = 655 · nedostaje 0 · duplikata 0 |
-| Slike u runtime-u | 0 — rights gate (vidi niže) |
+| Slike u runtime-u | iz registra slika, ne iz sync-a (vidi „Slike“ niže; potvrda vlasnika 2026-10-31) |
 
 ## Model
 
@@ -74,7 +74,19 @@ Podaci o rezervnim delovima i kompletima mlaznica se **ne bacaju**: ostaju u
 
 ## Slike — rights gate
 
-Pravo korišćenja SATA fotografija **nije potvrđeno**. Zato:
+**2026-10-31 — potvrda vlasnika.** Vlasnik je u ime firme potvrdio da firma ima dozvolu da koristi SATA
+fotografije proizvoda na sajtu. Potvrda važi **samo za SATA** (ne za RUPES ni druge brendove) i je interna
+evidencija: ne prenosi se u javni tekst kao tvrdnja o statusu firme. Posledica:
+
+- uvezeno je 133 zvanične slike TAČNOG artikla (fajl nosi broj artikla kartice), bajt-identične izvoru, bez
+  obrade: `public/products/sata/catalog/sata__<slug>.webp`, registar
+  `data/catalog/image-supply/supplied-images.json` (`sourceBasis: MANUFACTURER_WEBSITE_IMAGE`,
+  `rightsBasis: OWNER_CONFIRMED`, `sourceDetail` = broj artikla, stranica, izvorna adresa);
+- 7 kartica čija je jedina slika slika srodnog modela i 13 kartica bez zvanične slike ostaju na placeholderu;
+- sync se NE menja: dataset i dalje ne sadrži adrese slika (pravila niže važe za sync), slika se vezuje
+  isključivo kroz registar.
+
+Pravila do 2026-10-31 (i dalje važe za sam sync):
 
 - nijedna SATA slika se ne preuzima, ne hostuje i ne hotlinkuje;
 - dataset sajta ne sadrži nijednu adresu slike (validacija i test to obaraju);
@@ -201,7 +213,7 @@ kartica dobija zvanični naziv (`OFFICIAL_NAME_FALLBACK`). Atributi reda se prev
 **Taksonomija** koristi postojeće kategorije: podrazumevano `pribor` (pravilo faze 1 za „Accessories”), odela i
 pribor za zaštitu disanja → `zastita`, čišćenje pištolja → `radionica`; `63974` nasleđuje kategoriju svoje porodice.
 
-**Slike i dokumenti.** `APPROVED_RUNTIME_IMAGES = 0`: sve kartice su na placeholderu, a dostupnost zvanične slike
+**Slike i dokumenti.** `APPROVED_RUNTIME_IMAGES = 0` u sync-u; od 2026-10-31 kartice dobijaju sliku tačnog artikla iz registra (vidi „Slike — rights gate“), a dostupnost zvanične slike
 (206/238) je samo činjenica u planu. SATA za ove artikle ne objavljuje dokumente — nijedan se ne prikazuje.
 
 ### Zamke

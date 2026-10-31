@@ -34,9 +34,12 @@ const SATAJET = "satajet-x-5500";
  * 1. JSON-LD: placeholder se ne objavljuje kao Product.image
  * ========================================================================== */
 
+// Satajet X 5500 od 2026-10-31 nosi zvaničnu sliku; ovaj artikl ostaje na placeholderu (nema zvanične slike).
+const SATA_PLACEHOLDER = "sata-vario-top-spray";
+
 test("SATA proizvod sa placeholder vizuelom nema Product.image", () => {
-  const product = getCarsystemProductBySlug(SATAJET);
-  assert.ok(product, `${SATAJET} ne postoji u katalogu`);
+  const product = getCarsystemProductBySlug(SATA_PLACEHOLDER);
+  assert.ok(product, `${SATA_PLACEHOLDER} ne postoji u katalogu`);
 
   /*
    * Predus1ov: zapis STVARNO nosi sistemski placeholder. Bez ovoga bi test
@@ -45,7 +48,7 @@ test("SATA proizvod sa placeholder vizuelom nema Product.image", () => {
   assert.match(
     product.productImage?.src ?? "",
     /placeholder-product/,
-    "preduslov: satajet vise ne koristi sistemski placeholder",
+    "preduslov: artikl vise ne koristi sistemski placeholder",
   );
 
   const ld = productJsonLd(product, "SATA", "Oprema");
@@ -63,7 +66,7 @@ test("SATA proizvod sa placeholder vizuelom nema Product.image", () => {
   // Ostalo mora ostati — filter ne sme da oduzme nista drugo.
   assert.equal(ld["@type"], "Product");
   assert.equal(ld.name, product.name);
-  assert.equal(ld.url, absoluteUrl(`/proizvodi/${SATAJET}`));
+  assert.equal(ld.url, absoluteUrl(`/proizvodi/${SATA_PLACEHOLDER}`));
   assert.equal(ld.brand?.name, "SATA");
 });
 

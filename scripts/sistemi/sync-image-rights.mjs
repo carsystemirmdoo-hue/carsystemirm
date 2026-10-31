@@ -43,7 +43,7 @@ export function pendingImageIds(csvText) {
   if (idIndex < 0 || statusIndex < 0) throw new Error("IMAGE_RIGHTS_REVIEW.csv: nema kolone image_id ili rights_status");
   return lines
     .map((line) => splitCsvLine(line))
-    .filter((cells) => cells[idIndex] && cells[statusIndex] && !cells[statusIndex].startsWith("CONFIRMED"))
+    .filter((cells) => cells[idIndex] && cells[statusIndex] && !/^(?:OWNER_)?CONFIRMED\b/.test(cells[statusIndex]))
     .map((cells) => cells[idIndex])
     .sort();
 }

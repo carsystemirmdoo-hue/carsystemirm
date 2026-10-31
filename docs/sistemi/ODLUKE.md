@@ -76,3 +76,17 @@ Načelo: tvrdnja u starom tekstu sajta, vodiču ili kodu nije dokaz njene tehni�
 ## F. Druga provera vrednosti (2026-10-31)
 
 Uzorak je pokazao da podudaranje broja na strani nije dovoljno (vrednost je bila vezana za stranu drugog proizvoda). Zato je svaka zadržana vrednost ponovo proverena u dokumentu proizvoda koji rečenica imenuje, sa ručnim pregledom konteksta; 33 stavke su dodatno izostavljene ili prepravljene (npr. pritisci za 35 Line koji stoje samo u posebnom uputstvu za utapanje, „9 mm“ crevo bez imenovanog proizvoda, odnos AGILIS 2:1 koji nije u listu, DIAMONT 100 : 50–60 umesto 100:60). Spisak: `IZOSTAVLJENO.md`, odeljak „Druga provera“.
+
+## G. Razrešeno 2026-10-31 (druga runda)
+
+| Stavka | Rešenje |
+|---|---|
+| C1 SATA vrednosti | Uputstva SATA jet X (3266-240619-2) i SATAjet X 5500 (izdanje 10.06.2020) preuzeta sa stranica proizvoda; ranije nisu bila preuzeta jer im adresa nema nastavak „.pdf“. Vraćeno uz vizuelnu proveru na strani: potrošnja vazduha, rastojanje, opseg pritiska i granica HVLP/compliant (jet X str. 102; X 5500 str. 110), crevo 9 mm, antistatičko, otporno na rastvarače i na 10 bara i pritezanje dizne 11 Nm (X 5500 str. 115), pH 6–8 i zabrana potapanja (jet X str. 94). I dalje izostavljeno: DIN EN 1953, zamena creva jednom godišnje, fabrička postavka lepeze, vrednosti čašica RPS/CPS. |
+| C2 napomene uz izbor | 15 napomena prepisano tako da imenuju korak kako se prikazuje za taj izbor; 3 napomene pripadale su izostavljenim izborima. Test proverava da imenovani korak postoji. |
+| C3 namena sistema | UNO HD (T 2A55, 10/2026, str. 1), Basecoat 35 (35 Line, str. 1, provereno na slici strane), N15-V20 (01/2022, str. 1). |
+| D6 dugme na početnoj | Vodi na `/b2b-saradnja`; izgled nepromenjen (odobrenje vlasnika 2026-10-31). |
+| Yachtcare na B2B | Blok „Brendovi u ponudi“ koristi isti spisak kao meni (bez Yachtcare); katalog i podnožje nepromenjeni. |
+| Biblioteka: SATA dokumenti | Svih 66 SATA adresa fajlova u podacima kataloga vraća 404 (SATA menja adrese). U biblioteci 47 SATA dokumenata vodi na stranicu proizvoda kod SATA (66/66 stranica 200). Stranice proizvoda na sajtu i dalje imaju stare adrese — poseban posao (osvežavanje SATA podataka). |
+| Brojači u biblioteci | Svi u jednom redu na računaru; 3 × 2 do 900 px; 2 × 3 do 560 px; poslednja usamljena kartica zauzima ceo red. |
+| Vrednosti bez jedinice | Proširena provera obuhvata i brojeve bez jedinice; izostavljeno „više od 3.000 kartica“ i baslac 65-10 „grupa 40-, 2–3 sloja“; dodat izvor za mat 5–10 / 25–30 i 100 BF diznu (bez nepotvrđenog spiska punilaca). |
+| Poređenje početne 31.10. | Dokumentovano poređenje (`~/Carsystem/zakljucane-stranice/pocetna/poredjenje-2026-10-31`), nije odobrena referenca dok ga vlasnik ne pregleda. |

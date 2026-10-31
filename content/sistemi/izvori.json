@@ -55,6 +55,13 @@
     "verzijaIzvor": "vodič",
     "procitano": "2026-10-30"
   },
+  "baslac-pistolji": {
+    "naziv": "baslac, Technical Information Recommended spray guns (Sata, Iwata, Devilbiss, Walcom)",
+    "verzija": "01/2026",
+    "dokument": "/documents/products/baslac/Spray_guns.pdf",
+    "verzijaIzvor": "vodič",
+    "procitano": "2026-10-31"
+  },
   "carfit-etch-primer-tds": {
     "naziv": "C.A.R.FIT, Technical Data Sheet 1K Etch Primer Spray",
     "url": "https://carfitrepair.com/wp-content/uploads/2023/05/car-fit-1k-etch-primer-spray-technical-data-sheet.pdf",
@@ -80,6 +87,12 @@
     "url": "https://www.carsystem.org/fileadmin/products/datasheets/tds-2k-epoxy-grundierfueller-v03.pdf",
     "verzijaIzvor": "vodič",
     "procitano": "2026-10-30"
+  },
+  "carsystem-matt-tds": {
+    "naziv": "Carsystem, Technical Data Sheet 2K Clear VOC Matt / Silkmatt",
+    "verzija": "V01 07/2021",
+    "url": "https://www.carsystem.org/fileadmin/products/datasheets/tds-2k-clear-silkmatt-v01.pdf",
+    "procitano": "2026-10-31"
   },
   "carsystem-multi-green-tds": {
     "naziv": "Carsystem, Technical Data Sheet Multi Green, Polyester multifunctional putty V08",
@@ -262,6 +275,12 @@
     "url": "https://www.norbin-paint.com/files/TDS/NORBIN_TDS_N15-020_Clear_2022.pdf",
     "procitano": "2026-10-30"
   },
+  "norbin-n15-v20-tds": {
+    "naziv": "Norbin, Technical Information N15-V20 NORBIN Clear VOC",
+    "verzija": "01/2022",
+    "url": "https://www.norbin-paint.com/files/TDS/NORBIN_TDS_N15-V20_Clear_VOC_2022.pdf",
+    "procitano": "2026-10-31"
+  },
   "rm-agilis-tds": {
     "naziv": "R-M, Technical Information AGILIS, Waterborne basecoat",
     "verzija": "10/2026",
@@ -345,5 +364,23 @@
     "verzija": "10/2026",
     "url": "https://techinfo.rmpaint.com/unicorn/en/PK%202P20-eSense%20waterborne%20cleaning%20agent%20base-_topcoat.pdf",
     "procitano": "2026-10-30"
+  },
+  "rm-t2a55-tds": {
+    "naziv": "R-M, Technical Information T 2A55 UNO HD Series mixing clear",
+    "verzija": "10/2026",
+    "url": "https://techinfo.rmpaint.com/unicorn/en/T%202A55-UNO%20HD%20Series%20mixing%20clear.pdf",
+    "procitano": "2026-10-31"
+  },
+  "sata-jetx-uputstvo": {
+    "naziv": "SATA, Operating manual jet X (višejezično, engleski deo), PDF na stranici proizvoda",
+    "verzija": "3266-240619-2",
+    "url": "https://www.sata.com/en/jet-x/CF1931336",
+    "procitano": "2026-10-31"
+  },
+  "sata-x5500-uputstvo": {
+    "naziv": "SATA, Operating Manual SATAjet X 5500 RP/HVLP (DIGITAL) (višejezično, engleski deo), PDF na stranici proizvoda",
+    "verzija": "izdanje 10.06.2020",
+    "url": "https://www.sata.com/en/satajet-x-5500-clear-coat-edition/CF1931331",
+    "procitano": "2026-10-31"
   }
 }

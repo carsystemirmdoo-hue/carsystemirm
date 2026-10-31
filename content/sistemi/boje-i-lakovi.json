@@ -17,7 +17,8 @@
           },
           {
             "id": "izbledelo",
-            "label": "Izbledelo"
+            "label": "Izbledelo",
+            "note": "Na izbledelom vozilu mesto poređenja se prvo ispolira; vidi korak „Ispolirajte mesto i uporedite“."
           }
         ]
       },
@@ -36,7 +37,7 @@
           "id": "receptura",
           "title": "Receptura iz baze proizvođača boje",
           "what": "Po šifri se u bazi proizvođača boje pronalazi standardna receptura i njene varijante.",
-          "detail": "R-M navodi alate Color Explorer, Colormaster i Refinity; baslac bazu Formula Finder i kartu nijansi Effective Color Finder sa više od 3.000 kartica.",
+          "detail": "R-M navodi alate Color Explorer, Colormaster i Refinity; baslac bazu Formula Finder i kartu nijansi Effective Color Finder.",
           "material": "Baza recepata proizvođača boje",
           "guides": [
             "utvrdjivanje-nijanse"
@@ -207,7 +208,21 @@
           "pod": {
             "metalik": {
               "what": "Nanesite slojeve do pokrivanja, pa još jedan tanji sloj za ujednačavanje efekta.",
-              "detail": "ONYX HD: 1 ili 2 sloja + 1 za efekat; baslac 35 i 45 Line: 2 do pokrivanja + ½ za efekat. Metalni listići odbijaju svetlo različito iz svakog ugla, pa nanošenje menja izgled."
+              "detail": "ONYX HD: 1 ili 2 sloja + 1 za efekat; baslac 35 i 45 Line: 2 do pokrivanja + ½ za efekat. Metalni listići odbijaju svetlo različito iz svakog ugla, pa nanošenje menja izgled.",
+              "sources": [
+                {
+                  "doc": "rm-onyx-hd-tds",
+                  "strana": 2
+                },
+                {
+                  "doc": "baslac-35-line-tds",
+                  "strana": 1
+                },
+                {
+                  "doc": "baslac-45-line-tds",
+                  "strana": 1
+                }
+              ]
             },
             "troslojna": {
               "title": "Prvi korak: pokrivna bazna boja",
@@ -217,6 +232,16 @@
           },
           "guides": [
             "koliko-slojeva-bazne-boje"
+          ],
+          "sources": [
+            {
+              "doc": "rm-onyx-hd-tds",
+              "strana": 2
+            },
+            {
+              "doc": "rm-diamont-tds",
+              "strana": 2
+            }
           ]
         },
         {
@@ -312,7 +337,8 @@
           },
           {
             "id": "lak",
-            "label": "Samo bezbojni lak"
+            "label": "Samo bezbojni lak",
+            "note": "Bazna boja se ne utapa, pa koraci sa baznom bojom nisu prikazani."
           }
         ]
       },
@@ -388,7 +414,7 @@
           "id": "razredjivac",
           "title": "Razređivač za utapanje posle laka",
           "what": "Na rub nove površine nanesite razređivač za utapanje, koji rastvara i izravnava zonu preprašivanja.",
-          "detail": "baslac svoj 65-10 namenjuje lakovima grupe 40- i navodi 2–3 sloja na zoni prelaza. Kada se tačno nanosi, navodi list konkretnog proizvoda.",
+          "detail": "Kada se tačno nanosi, navodi list konkretnog proizvoda.",
           "material": "Razređivač za utapanje iz sistema laka",
           "products": [
             "carsystem-spotblender"
@@ -511,6 +537,12 @@
               "products": [
                 "baslac-40-620-2k-clear-mat-voc",
                 "carsystem-2k-clear-voc-matt"
+              ],
+              "sources": [
+                {
+                  "doc": "carsystem-matt-tds",
+                  "strana": 1
+                }
               ]
             },
             "direktni": {
@@ -804,7 +836,7 @@
         },
         {
           "k": "Nijansa",
-          "v": "Baza Formula Finder, karta Effective Color Finder sa više od 3.000 kartica i uređaj e-finder star."
+          "v": "Baza Formula Finder, karta Effective Color Finder i uređaj e-finder star."
         }
       ],
       "products": [

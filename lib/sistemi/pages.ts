@@ -102,6 +102,10 @@ export const PAINT_SYSTEMS: PaintSystem[] = [
     brand: "R-M",
     href: "/proizvodi/rm-uno-hd",
     match: { brandSlug: "rm", namePattern: /UNO HD/i },
+    purpose: {
+      text: "Završna boja serije UNO HD za visok sjaj; T 2A55 je vezivo za mešanje serije.",
+      source: { doc: "rm-t2a55-tds", strana: 1 },
+    },
   },
   {
     name: "Basecoat 45",
@@ -118,7 +122,10 @@ export const PAINT_SYSTEMS: PaintSystem[] = [
     brand: "baslac",
     href: "/proizvodi/grupa/baslac-line-35",
     match: { familySlug: "baslac-line-35" },
-    documentSource: "baslac-35-line-tds",
+    purpose: {
+      text: "Bazna boja za jednobojne, metalik i biserne nijanse.",
+      source: { doc: "baslac-35-line-tds", strana: 1 },
+    },
   },
   {
     name: "Topcoat 30",
@@ -155,5 +162,9 @@ export const PAINT_SYSTEMS: PaintSystem[] = [
     brand: "Norbin",
     href: "/proizvodi/norbin-n15-v20-clear-voc",
     match: { brandSlug: "norbin", namePattern: /N15-V20/ },
+    purpose: {
+      text: "2K VOC bezbojni lak za sve bazne boje.",
+      source: { doc: "norbin-n15-v20-tds", strana: 1 },
+    },
   },
 ];

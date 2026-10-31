@@ -17,11 +17,13 @@
           },
           {
             "id": "otvori",
-            "label": "Otvori i mekana ivica"
+            "label": "Otvori i mekana ivica",
+            "note": "Penasta traka u zazoru daje mekanu ivicu; vidi korak „Mekana ivica na otvoru“."
           },
           {
             "id": "gumice",
-            "label": "Gumice, lajsne, staklo"
+            "label": "Gumice, lajsne, staklo",
+            "note": "Za gumice i plastiku koriste se traka za podizanje gumica i tanka traka; vidi korak „Gumice, lajsne i svetla“."
           }
         ]
       },
@@ -202,7 +204,8 @@
           },
           {
             "id": "vlaga",
-            "label": "Vozilo nije potpuno suvo"
+            "label": "Vozilo nije potpuno suvo",
+            "note": "Vozilo sa zaostalom vlagom traži odgovarajuću foliju; vidi korak „Vozilo nije potpuno suvo“."
           }
         ]
       },
@@ -218,8 +221,7 @@
               "title": "Vozilo nije potpuno suvo",
               "what": "Ako posle pranja na vozilu ostaje vlaga, koristite foliju namenjenu vozilima sa zaostalom vlagom.",
               "products": [
-                "carsystem-masking-film-blue",
-                "carsystem-masking-film-green"
+                "carsystem-masking-film-blue"
               ]
             }
           },
@@ -329,11 +331,13 @@
           },
           {
             "id": "baza",
-            "label": "Pre bazne boje i laka"
+            "label": "Pre bazne boje i laka",
+            "note": "Pred baznu boju i lak koriste se odmašćivač za poslednju fazu i krpa za prašinu; vidi korak „Odmašćivač pred baznu boju i lak“."
           },
           {
             "id": "plastika",
-            "label": "Plastični deo"
+            "label": "Plastični deo",
+            "note": "Plastični deo traži antistatički odmašćivač; vidi korak „Antistatički odmašćivač za plastiku“."
           }
         ]
       },

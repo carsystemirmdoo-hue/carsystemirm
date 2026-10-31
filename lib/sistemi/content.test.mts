@@ -65,6 +65,23 @@ test("sadržaj nema oznake za potvrdu ni interne napomene", () => {
   }
 });
 
+test("napomena uz izbor imenuje korak koji se za taj izbor zaista prikazuje", () => {
+  for (const page of pages) {
+    for (const job of page.data.jobs as { id: string; choice?: { options: { id: string; note?: string }[] }; steps: { title: string; only?: string[]; pod?: Record<string, { title?: string }> }[] }[]) {
+      for (const option of job.choice?.options ?? []) {
+        if (!option.note) continue;
+        assert.doesNotMatch(option.note, /\bkora(?:k|ci|ka|ku)\s+\d/, `${page.name}: ${job.id}.${option.id} upućuje na broj koraka`);
+        const shown = job.steps
+          .filter((step) => !step.only || step.only.includes(option.id))
+          .map((step) => step.pod?.[option.id]?.title ?? step.title);
+        for (const match of option.note.matchAll(/korak „([^“]+)“/g)) {
+          assert.ok(shown.includes(match[1]), `${page.name}: ${job.id}.${option.id} upućuje na korak „${match[1]}“ koji se ne prikazuje`);
+        }
+      }
+    }
+  }
+});
+
 test("spisak slika bez potvrđenog prava je usklađen sa IMAGE_RIGHTS_REVIEW.csv", () => {
   execFileSync(process.execPath, [path.join(ROOT, "scripts/sistemi/sync-image-rights.mjs"), "--check"], { stdio: "pipe" });
 });

@@ -12,11 +12,13 @@
         "options": [
           {
             "id": "trunje",
-            "label": "Pojedinačno trunje"
+            "label": "Pojedinačno trunje",
+            "note": "Trunje se uklanja lokalno, malim listićem na tvrdom bloku."
           },
           {
             "id": "kora",
-            "label": "Narandžina kora ili više grešaka"
+            "label": "Narandžina kora ili više grešaka",
+            "note": "Kod narandžine kore cela zona se mokro brusi pre paste; vidi korak „Mokro izbrusite zonu“."
           }
         ]
       },
@@ -194,11 +196,13 @@
         "options": [
           {
             "id": "svetla",
-            "label": "Svetla boja"
+            "label": "Svetla boja",
+            "note": "Na svetloj boji rezultat završne paste proverava se pod jakim svetlom."
           },
           {
             "id": "tamna",
-            "label": "Tamna boja"
+            "label": "Tamna boja",
+            "note": "Na tamnoj boji hologrami se jače vide; vidi korak „Završna pasta“."
           }
         ]
       },
@@ -577,10 +581,16 @@
               "a"
             ]
           ],
-          "source": {
-            "doc": "cs-refinish1-tds",
-            "strana": 2
-          }
+          "sources": [
+            {
+              "doc": "cs-refinish1-tds",
+              "strana": 1
+            },
+            {
+              "doc": "cs-refinish1-tds",
+              "strana": 2
+            }
+          ]
         },
         {
           "id": "step1",

@@ -5,10 +5,10 @@ import { SeoBreadcrumbs } from "@/components/seo/SeoBreadcrumbs";
 import { B2BCooperation } from "@/components/sistemi/B2BCooperation";
 import { SistemiSubnav } from "@/components/sistemi/SistemiSubnav";
 import styles from "@/components/sistemi/Sistemi.styles";
-import { getListedCarsystemBrands } from "@/lib/carsystem-data";
 import { companyContact } from "@/lib/company-contact";
 import { breadcrumbJsonLd, jsonLd, pageMetadata } from "@/lib/seo";
 import { getSistemiNavLinks } from "@/lib/sistemi/pages";
+import { BRAND_LINKS } from "@/components/layout/navigation-data";
 
 export const metadata: Metadata = pageMetadata({
   title: "B2B saradnja",
@@ -18,7 +18,8 @@ export const metadata: Metadata = pageMetadata({
 });
 
 export default function B2BSaradnjaPage() {
-  const brands = getListedCarsystemBrands();
+  // Isti brendovi kao u meniju „Brendovi“ (Yachtcare nije u meniju, odluka vlasnika 2026-10-17 i 2026-10-31).
+  const brands = BRAND_LINKS.map((link) => ({ slug: link.href.replace("/brendovi/", ""), name: link.title, href: link.href }));
 
   return (
     <>
@@ -75,7 +76,7 @@ export default function B2BSaradnjaPage() {
             <ul className={styles.chips}>
               {brands.map((brand) => (
                 <li key={brand.slug}>
-                  <Link className={styles.chip} href={`/brendovi/${brand.slug}`}>
+                  <Link className={styles.chip} href={brand.href}>
                     {brand.name}
                   </Link>
                 </li>

@@ -73,12 +73,31 @@
     padding: 16px;
   }
 
+  .problem.problem summary {
+    padding: 12px 14px;
+  }
+
+  /* Tri kolone do 900 px, dve do 560 px; poslednja kartica sama u redu zauzima ceo red. */
+  .counters.counters {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .counters.counters > li:last-child:nth-child(3n + 1) {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 560px) {
   .counters.counters {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  .problem.problem summary {
-    padding: 12px 14px;
+  .counters.counters > li:last-child:nth-child(3n + 1) {
+    grid-column: auto;
+  }
+
+  .counters.counters > li:last-child:nth-child(odd) {
+    grid-column: 1 / -1;
   }
 }
 

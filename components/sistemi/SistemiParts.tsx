@@ -171,7 +171,7 @@ export function ScaleView({
               </span>
             ) : null}
             {item.text ? <p className={styles.scaleText}>{item.text}</p> : null}
-            <SourceList refs={[item.source]} sources={sources} />
+            <SourceList refs={item.sources ?? (item.source ? [item.source] : [])} sources={sources} />
           </li>
         ))}
       </ul>

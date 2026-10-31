@@ -72,7 +72,9 @@ export type SistemiScaleItem = {
   text?: string;
   bars?: ScaleBar[];
   pods?: string[];
-  source: SourceRef;
+  /** Jedan izvor ili više (npr. odnos mešanja na str. 1, sušenje na str. 2). */
+  source?: SourceRef;
+  sources?: SourceRef[];
 };
 
 export type SistemiScale = {

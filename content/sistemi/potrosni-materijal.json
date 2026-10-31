@@ -40,19 +40,13 @@
           "id": "traka",
           "title": "Izaberite traku prema sušenju",
           "what": "Otpornost trake na toplotu iz tehničkog lista treba da bude iznad najviše temperature objekta u ciklusu sušenja, za trajanje tog ciklusa.",
-          "detail": "Trake iz istog programa se jako razlikuju: od 80 °C do 155 °C. Kada list ne navodi trajanje, a ciklus je dug ili se ponavlja, pitajte proizvođača.",
+          "detail": "Kada list ne navodi trajanje, a ciklus je dug ili se ponavlja, pitajte proizvođača.",
           "material": "Traka čija granica pokriva ciklus sušenja",
           "scale": true,
           "products": [
             "carsystem-master-tape-ii",
             "carsystem-master-tape-green",
             "carsystem-top-tape"
-          ],
-          "sources": [
-            {
-              "doc": "cs-katalog-2026",
-              "strana": 41
-            }
           ],
           "guides": [
             "trake-za-maskiranje-i-temperatura"
@@ -68,17 +62,11 @@
             "otvori": {
               "title": "Mekana ivica na otvoru",
               "what": "Penastu traku postavite u zazor, malo uvučeno od spoljne ivice dela, pa vrata ili haubu pažljivo zatvorite bez gnječenja trake.",
-              "detail": "Magla boje postepeno bledi na penastom delu umesto da se zaustavi na oštroj liniji. Carsystem za Foam Tape i T-Soft navodi da sprečavaju tvrde ivice boje kod otvora; obe trake do 80 °C.",
+              "detail": "Magla boje postepeno bledi na penastom delu umesto da se zaustavi na oštroj liniji. Carsystem za Foam Tape i T-Soft navodi da sprečavaju tvrde ivice boje kod otvora;",
               "products": [
                 "carsystem-foam-tape",
                 "carsystem-foam-tape-t-soft",
                 "carfit-blending-tape"
-              ],
-              "sources": [
-                {
-                  "doc": "cs-foam-tape-tds",
-                  "strana": 1
-                }
               ]
             }
           },
@@ -229,16 +217,9 @@
             "vlaga": {
               "title": "Vozilo nije potpuno suvo",
               "what": "Ako posle pranja na vozilu ostaje vlaga, koristite foliju namenjenu vozilima sa zaostalom vlagom.",
-              "detail": "Carsystem Masking Film blue (13 µm, do 110 °C) namenjen je vozilima sa zaostalom vlagom i sprečava mrlje; zelena folija (11 µm) nije pogodna za zaostalu vlagu.",
               "products": [
                 "carsystem-masking-film-blue",
                 "carsystem-masking-film-green"
-              ],
-              "sources": [
-                {
-                  "doc": "cs-katalog-2026",
-                  "strana": 43
-                }
               ]
             }
           },
@@ -504,24 +485,7 @@
             ]
           ],
           "source": {
-            "doc": "glasurit-prirucnik",
-            "strana": 13
-          }
-        },
-        {
-          "id": "foam",
-          "name": "Carsystem Foam Tape i T-Soft",
-          "text": "do 80 °C; za T-Soft uz trajanje od 1 h.",
-          "bars": [
-            [
-              "penasta",
-              80,
-              80,
-              "a"
-            ]
-          ],
-          "source": {
-            "doc": "cs-foam-tape-t-soft-tds",
+            "doc": "cs-top-tape-tds",
             "strana": 1
           }
         },
@@ -545,7 +509,7 @@
         {
           "id": "red",
           "name": "Carsystem Red Tape",
-          "text": "radni opseg 0 °C do +110 °C; ciklus 90 °C (1 h) do 110 °C (30 min); čisto skidanje u roku od tri dana.",
+          "text": "do 110 °C; ciklus 90 °C (1 h) do 110 °C (30 min); čisto skidanje u roku od tri dana.",
           "bars": [
             [
               "ciklus",
@@ -572,7 +536,7 @@
             ]
           ],
           "source": {
-            "doc": "cs-wr-lifting-premium-tds",
+            "doc": "cs-master-tape-green-tds",
             "strana": 1
           }
         },
@@ -589,8 +553,8 @@
             ]
           ],
           "source": {
-            "doc": "glasurit-prirucnik",
-            "strana": 293
+            "doc": "cs-master-tape-ii-tds",
+            "strana": 1
           }
         },
         {
@@ -626,8 +590,20 @@
           "v": "Top Tape 80 °C, Master Tape Green 110 °C, Master Tape II 120 °C; Red Tape 90 °C (1 h) do 110 °C (30 min).",
           "sources": [
             {
-              "doc": "cs-katalog-2026",
-              "strana": 40
+              "doc": "cs-master-tape-green-tds",
+              "strana": 1
+            },
+            {
+              "doc": "cs-master-tape-ii-tds",
+              "strana": 1
+            },
+            {
+              "doc": "cs-top-tape-tds",
+              "strana": 1
+            },
+            {
+              "doc": "cs-red-tape-tds",
+              "strana": 1
             }
           ]
         },
@@ -666,13 +642,7 @@
       "rows": [
         {
           "k": "Folija",
-          "v": "Masking film green 11 µm, do 110 °C; blue 13 µm, za vozila sa zaostalom vlagom; Easy Mask II, Auto Mask sa ugrađenom trakom.",
-          "sources": [
-            {
-              "doc": "cs-katalog-2026",
-              "strana": 43
-            }
-          ]
+          "v": "Easy Mask II, Auto Mask sa ugrađenom trakom."
         },
         {
           "k": "Papir",
@@ -711,7 +681,7 @@
           "v": "Silicone Remover Water 2.0 (VOC ispod 200 g/l) i Mild, oba sa antistatičkim dejstvom.",
           "sources": [
             {
-              "doc": "rm-pk2p10-tds",
+              "doc": "carsystem-silicone-remover-water-tds",
               "strana": 1
             }
           ]

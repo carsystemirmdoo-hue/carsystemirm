@@ -111,3 +111,43 @@ Pravilo za vrednosti: granulacija (P…) ili broj sa jedinicom (°C, bar, mm, µ
 | `ciscenje.izbor.plastika.napomena` | Antistatički odmašćivač i bez trljanja suvom krpom: koraci 2 i 5 su prilagođeni. | napomena upućuje na brojeve koraka koji se posle izostavljanja menjaju |
 | `zastitaRada` | Lična zaštita pri radu | Lična zaštita pri radu: bezbednosna uputstva; 5 vodiča ove teme čeka ispravke i stručnu potvrdu (izocijanati, maska za 2K, rukavice, ventilacija, samozapaljenje krpa). |
 | `materijal.flis.R-M` | PK 1P10 rastvarački za prvi korak (840 g/l); PK 2P10 vodeni za prvi korak (186 g/l); PK 2P20 vodeni pre baze i laka (198 g/l). | vrednosti nisu nađene na jednoj strani dokumenta iz izvora: 186 g/l, 198 g/l, 840 g/l, P10, P20 |
+
+## Druga provera (2026-10-31): kontekst vrednosti
+
+Posle pregleda konteksta: vrednost se prihvata samo iz dokumenta proizvoda koji rečenica (ili red skale/tabele) imenuje; podudaranje broja na strani drugog dokumenta nije dovoljno. Odnosi mešanja su provereni posebno. Ove stavke su dodatno izostavljene ili prepravljene:
+
+| Stranica | Mesto | Izostavljeno | Razlog |
+|---|---|---|---|
+| Boje i lakovi | `utapanje.pokrivanje.detail` | baslac za 35 Line navodi prvi sloj pištoljem HVLP ili RP 1.3 sa 2,0 bara, odzračivanje, uklanjanje preprašivanja sa susednog dela, pa drugi sloj. | vrednost 2,0 bara nije u dokumentu imenovanog proizvoda (baslac-35-line-tds) |
+| Boje i lakovi | `utapanje.tanjenje.detail` | baslac za 35 Line navodi pritisak snižen na 0,8 do najviše 1,5 bara, pa odzračivanje. | vrednost 1,5 bara nije u dokumentu imenovanog proizvoda (baslac-35-line-tds) |
+| Boje i lakovi | `skala.baza.agilis` | 2:1 po zapremini sa RA 050 ili RA 050X, prema recepturi. Jedan pun i jedan završni sloj, mokro na mokro; lak kada je površina potpuno mat. | stavka skale bez vrednosti u tekstu |
+| Boje i lakovi | `skala.baza.diamont` | 100:60; BC 020 na 15–25 °C, BC 030 iznad 25 °C; DIN 4: 14–15 s na 20 °C. Jednobojne 2 sloja, metalik i biserne 2 + 1 za efekat; 5 min na 20 °C, pa lak mokro na mokro. | vrednost 15-25 °c nije u dokumentu imenovanog proizvoda (rm-diamont-tds, rm-a1510-tds) |
+| Boje i lakovi | `skala.lak.b30cv` | HS jednoslojna boja za velike površine, usklađena sa VOC propisima; 2 sloja, moguće i airless i airmix nanošenje. | stavka skale bez vrednosti u tekstu |
+| Boje i lakovi | `skala.lak.ghd` | 100:25:25, 1,5 sloj bez odzračivanja; nanosi se na R-M CV prajmer-punioce i punioce, za velike površine. | stavka skale bez vrednosti u tekstu |
+| Pištolji i oprema | `podesavanje.vazduh.what` | Proverite da vazduh dolazi čist i da je crevo unutrašnjeg prečnika najmanje 9 mm, antistatičko, otporno na rastvarače i neoštećeno. | rečenica ne imenuje proizvod sa dokumentom |
+| Pištolji i oprema | `podesavanje.vazduh` | Vazduh, crevo i spojnice | korak bez potvrđenog uputstva |
+| Pištolji i oprema | `podesavanje.pritisak.hvlp.detail` | Do 2,0 bara ulaznog pritiska jet X radi kao HVLP, iznad toga svrstava se u compliant. | rečenica ne imenuje proizvod sa dokumentom |
+| Pištolji i oprema | `skala.izbor.agilis` | compliant 1,3–1,4 mm, ulazni pritisak 2 bara; HVLP list ne navodi. | vrednost 1,3-1,4 mm nije u dokumentu imenovanog proizvoda (rm-a2530-tds, rm-a2560-tds, rm-a2530x-tds, rm-ra050-tds, rm-agilis-tds) |
+| Pištolji i oprema | `materijal.sundjer.jet X.v` | dizne od 1,1 do 1,4 mm. | rečenica ne imenuje proizvod sa dokumentom |
+| Poliranje | `skala.novi.step1` | abrazivna; trag P1500–P2000; vuneni sunđeri, Finish Quadra Pad C-10 ili Finish Pad C20. | vrednost p1500-p2000 nije u dokumentu imenovanog proizvoda (cs-c10-tds) |
+| Poliranje | `skala.novi.step2` | završna, protiv holograma; trag P3000; vuneni sunđeri, Finish Sandwich Pad C-30 ili Finish Waffle Pad black. | vrednost p3000 nije u dokumentu imenovanog proizvoda (cs-c30-tds) |
+| Poliranje | `skala.holo.step2` | završna, protiv holograma; trag P3000; Finish Sandwich Pad C-30 ili Finish Waffle Pad black. | vrednost p3000 nije u dokumentu imenovanog proizvoda (cs-c30-tds) |
+| Potrošni materijal | `maskiranje.traka.detail` | Trake iz istog programa se jako razlikuju: od 80 °C do 155 °C. | rečenica ne imenuje proizvod sa dokumentom |
+| Potrošni materijal | `maskiranje.zazori.otvori.detail` | obe trake do 80 °C. | rečenica ne imenuje proizvod sa dokumentom |
+| Potrošni materijal | `zastita.pranje.vlaga.detail` | Carsystem Masking Film blue (13 µm, do 110 °C) namenjen je vozilima sa zaostalom vlagom i sprečava mrlje; | vrednost 13 µm nije u dokumentu imenovanog proizvoda (cs-liquid-masking-tds, cs-easy-mask-ii-tds, cs-film-yellow-tds, cs-auto-mask-tds, cs-film-green-tds, cs-film-blue-tds) |
+| Potrošni materijal | `zastita.pranje.vlaga.detail` | zelena folija (11 µm) nije pogodna za zaostalu vlagu. | rečenica ne imenuje proizvod sa dokumentom |
+| Potrošni materijal | `skala.maskiranje.foam` | do 80 °C; za T-Soft uz trajanje od 1 h. | vrednost 1 h nije u dokumentu imenovanog proizvoda (cs-foam-tape-tds) |
+| Potrošni materijal | `materijal.disk.Folija.v` | Masking film green 11 µm, do 110 °C; | vrednost 11 µm nije u dokumentu imenovanog proizvoda (cs-liquid-masking-tds, cs-easy-mask-ii-tds, cs-film-yellow-tds, cs-auto-mask-tds, cs-film-green-tds, cs-film-blue-tds) |
+| Potrošni materijal | `materijal.disk.Folija.v` | blue 13 µm, za vozila sa zaostalom vlagom; | rečenica ne imenuje proizvod sa dokumentom |
+| Priprema i abrazivi | `kit.prelaz.detail` | U baslac primeru okolina se brusi sa P320; | rečenica ne imenuje proizvod sa dokumentom |
+| Priprema i abrazivi | `postojeci.matiranje.prelaz.detail` | baslac u postupku utapanja okolnu staru boju brusi sa P1000/P2000. | rečenica ne imenuje proizvod sa dokumentom |
+| Priprema i abrazivi | `uklanjanje.pl-grejanje.detail` | baslac za PU penu i poliamid (PA) navodi 60 minuta na 60 °C, da se uklone sredstvo za odvajanje i vlaga. | rečenica ne imenuje proizvod sa dokumentom |
+| Priprema i abrazivi | `uklanjanje.pl-brusenje.detail` | baslac u uputstvu za plastiku daje granulacije P80–P600 za oštećena mesta, a ceo deo matira sunđerom. | rečenica ne imenuje proizvod sa dokumentom |
+| Priprema i abrazivi | `skala.kit.b1220` | blok P150/P240, zatim brusilica P240; okolna površina P320. | vrednost p320 nije u dokumentu imenovanog proizvoda (baslac-12-20-tds) |
+| Priprema i abrazivi | `skala.postojeci.blend` | okolna stara boja P1000/P2000; mesto punioca P500/P600 uz meki međusloj. | rečenica ne imenuje proizvod sa dokumentom |
+| Priprema i abrazivi | `skala.uklanjanje.bas` | čišćenje sredstvom 70-10, brušenje P80/P150, ponovno čišćenje. | vrednost p150 nije u dokumentu imenovanog proizvoda (baslac-70-10-tds) |
+| Boje i lakovi | `lak.mesanje.mat` | R-M za C 2P91 i C 2A93 i baslac za 40-620 navode da se lak ne drži na mešalici | tvrdnja nije nađena u tehničkom listu C 2P91 (10/2026 tekst) (ručna provera) |
+| Boje i lakovi | `materijal (R-M)` | AGILIS: 2:1 sa RA 050 | odnos mešanja nije nađen u tehničkom listu AGILIS (ručna provera) |
+| Boje i lakovi | `materijal (R-M)` | DIAMONT: 100:60, razređivač BC 020 ili BC 030 | list navodi 100 : 50–60 sa UR40/UR50; tekst je prepravljen prema listu (ručna provera) |
+| Pištolji i oprema | `podesavanje.cedjenje` | baslac za 45 Line navodi ceđenje | ceđenje nije nađeno u listu 45 Line; ostaje samo R-M C 2P62 (ručna provera) |
+| Potrošni materijal | `skala.maskiranje.red` | radni opseg 0 °C do +110 °C | list navodi samo „do 110 °C“; deo „0 °C“ izostavljen (ručna provera) |

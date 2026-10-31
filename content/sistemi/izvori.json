@@ -35,24 +35,16 @@
     "verzijaIzvor": "vodič",
     "procitano": "2026-10-30"
   },
-  "baslac-40-450-tds": {
-    "naziv": "baslac, Technical Information 40-450 HS Universal Clear VOC",
-    "verzija": "12/2025",
-    "dokument": "/documents/products/baslac/40-450.pdf",
-    "verzijaIzvor": "vodič",
-    "procitano": "2026-10-30"
+  "baslac-40-100-tds": {
+    "naziv": "baslac, Technical Information 40-100 High Speed 2K Clear VOC",
+    "verzija": "06/2026",
+    "dokument": "/documents/products/baslac/40-100.pdf",
+    "procitano": "2026-10-31"
   },
   "baslac-45-line-tds": {
     "naziv": "baslac, Technical Information 45 Line, 45- Basecoat",
     "verzija": "03/2026",
     "dokument": "/documents/products/baslac/45_Line.pdf",
-    "procitano": "2026-10-30"
-  },
-  "baslac-51k-standard": {
-    "naziv": "baslac, Technical Information Mazda Rhodium White Met, Color 51K for Basecoat (standardni postupak)",
-    "verzija": "03/2025",
-    "dokument": "/documents/products/baslac/Mazda51K_chart_standard_process.pdf",
-    "verzijaIzvor": "vodič",
     "procitano": "2026-10-30"
   },
   "baslac-blend-51k": {
@@ -63,46 +55,24 @@
     "verzijaIzvor": "vodič",
     "procitano": "2026-10-30"
   },
-  "baslac-cleaners-chart": {
-    "naziv": "baslac, Technical Information Chart 2: Pre-treatment of substrates and old paintwork",
-    "verzija": "05/2024",
-    "url": "https://techinfo.baslac.com/en/Cleaners.pdf",
-    "dokument": "/documents/products/baslac/Cleaners.pdf",
-    "verzijaIzvor": "vodič",
-    "procitano": "2026-10-30"
-  },
-  "baslac-plastic-system": {
-    "naziv": "baslac, Technical Information Plastic Repair System VOC (Painting of plastic parts)",
-    "verzija": "10/2024",
-    "url": "https://techinfo.baslac.com/en/Plastic_Repair_System_VOC.pdf",
-    "dokument": "/documents/products/baslac/Plastic_Repair_System_VOC.pdf",
-    "verzijaIzvor": "vodič",
-    "procitano": "2026-10-30"
-  },
-  "carfit-1k-plastic-primer-tds": {
-    "naziv": "C.A.R.FIT, Technical Data Sheet 1K Plastic Primer Spray",
-    "url": "https://carfitrepair.com/wp-content/uploads/2023/05/car-fit-1k-plastic-primer-spray-technical-data-sheet.pdf",
-    "verzijaIzvor": "vodič",
-    "procitano": "2026-10-30"
-  },
-  "carfit-2k-epoxy-tds": {
-    "naziv": "C.A.R.FIT, Technical Data Sheet 2K Epoxy Primer 1:1",
-    "url": "https://carfitrepair.com/wp-content/uploads/2023/05/car-fit-2k-epoxy-primer-11-technical-data-sheet.pdf",
-    "verzijaIzvor": "vodič",
-    "procitano": "2026-10-30"
-  },
   "carfit-etch-primer-tds": {
     "naziv": "C.A.R.FIT, Technical Data Sheet 1K Etch Primer Spray",
     "url": "https://carfitrepair.com/wp-content/uploads/2023/05/car-fit-1k-etch-primer-spray-technical-data-sheet.pdf",
     "verzijaIzvor": "vodič",
     "procitano": "2026-10-30"
   },
-  "carfit-katalog": {
-    "naziv": "C.A.R.FIT, katalog 2026, Disposable Paint Strainer (str. 41 PDF-a)",
-    "verzija": "2026",
-    "url": "https://carfitrepair.com/wp-content/uploads/2025/09/CARFIT-FINAL-2026.pdf",
+  "carfit-finishing-tds": {
+    "naziv": "C.A.R.FIT, Technical Data Sheet BLACK LABEL Finishing Compound",
+    "verzija": "01.12.2020",
+    "url": "https://carfitrepair.com/wp-content/uploads/2023/05/car-fit-finishing-compound-technical-data-sheet.pdf",
     "verzijaIzvor": "vodič",
-    "procitano": "2026-10-30"
+    "procitano": "2026-10-31"
+  },
+  "carfit-zinc-spray-tds": {
+    "naziv": "C.A.R.FIT, Technical Data Sheet Zinc Spray",
+    "url": "https://carfitrepair.com/wp-content/uploads/2023/05/car-fit-zinc-spray-technical-data-sheet.pdf",
+    "verzijaIzvor": "vodič",
+    "procitano": "2026-10-31"
   },
   "carsystem-2k-epoxy-fill-primer-tds": {
     "naziv": "Carsystem, Technical Data Sheet 2K Epoxy Fill Primer, 2K Spot-repair epoxy primer V03",
@@ -118,12 +88,26 @@
     "verzijaIzvor": "vodič",
     "procitano": "2026-10-30"
   },
+  "carsystem-silicone-remover-water-tds": {
+    "naziv": "Carsystem, Technical Data Sheet Silicone Remover Water 2.0, Silicone remover – water-based V02",
+    "verzija": "V02, 09/2025",
+    "url": "https://www.carsystem.org/fileadmin/products/datasheets/tds-silicone-remover-water-2.0-v02.pdf",
+    "verzijaIzvor": "vodič",
+    "procitano": "2026-10-31"
+  },
   "carsystem-speed-plus-tds": {
     "naziv": "Carsystem, Technical Data Sheet 2K Clear VOC Speed Plus",
     "verzija": "V06, 01/2025",
     "url": "https://www.carsystem.org/fileadmin/products/datasheets/tds-2k-clear-voc-speed-plus-v06.pdf",
     "verzijaIzvor": "vodič",
     "procitano": "2026-10-30"
+  },
+  "carsystem-xpress-five-tds": {
+    "naziv": "Carsystem, Technical Data Sheet CC.21 X-press FIVE",
+    "verzija": "V02, 01/2025",
+    "url": "https://www.carsystem.org/fileadmin/products/datasheets/tds-cc.21-x-press-five-v02.pdf",
+    "verzijaIzvor": "vodič",
+    "procitano": "2026-10-31"
   },
   "cs-c-wax-c80-tds": {
     "naziv": "Carsystem, Technical Data Sheet C-Wax C-80, high gloss finish sealer",
@@ -145,6 +129,13 @@
     "url": "https://www.carsystem.org/fileadmin/products/datasheets/tds-polish-c-07-cut.pdf",
     "verzijaIzvor": "vodič",
     "procitano": "2026-10-30"
+  },
+  "cs-c10-tds": {
+    "naziv": "Carsystem, Technical Datasheet CS Polish C-10 strong",
+    "verzija": "V01, 09/2014",
+    "url": "https://www.carsystem.org/fileadmin/products/datasheets/tds-polish-c-10-strong.pdf",
+    "verzijaIzvor": "vodič",
+    "procitano": "2026-10-31"
   },
   "cs-c30-tds": {
     "naziv": "Carsystem, Technical Datasheet CS Polish C-30 finish",
@@ -174,20 +165,6 @@
     "verzijaIzvor": "vodič",
     "procitano": "2026-10-30"
   },
-  "cs-foam-tape-t-soft-tds": {
-    "naziv": "Carsystem, Technical Data Sheet CS Foam Tape T-Soft",
-    "verzija": "V01, 05/2021",
-    "url": "https://www.carsystem.org/fileadmin/products/datasheets/tds-foam-tape-t-soft.pdf",
-    "verzijaIzvor": "vodič",
-    "procitano": "2026-10-30"
-  },
-  "cs-foam-tape-tds": {
-    "naziv": "Carsystem, Technical Data Sheet Foam Tape, foam sealing tape",
-    "verzija": "v.01, 03/2021",
-    "url": "https://www.carsystem.org/fileadmin/products/datasheets/tds-foam-tape.pdf",
-    "verzijaIzvor": "vodič",
-    "procitano": "2026-10-30"
-  },
   "cs-jupiter-h2o-tds": {
     "naziv": "Carsystem, Technical Data Sheet CS ProFlex Jupiter Soft H2O, 152 mm i 77 mm",
     "verzija": "V02, 07/2020",
@@ -195,19 +172,19 @@
     "verzijaIzvor": "vodič",
     "procitano": "2026-10-30"
   },
-  "cs-katalog": {
-    "naziv": "Carsystem, Product catalogue 2026/27 (EN), str. 126–131 (Finish)",
-    "verzija": "2026/27, englesko izdanje",
-    "url": "https://www.carsystem.org/fileadmin/CS-Kataloge-2026/Carsystem-product-catalogue-HQ-2026-27-EN.pdf",
+  "cs-master-tape-green-tds": {
+    "naziv": "Carsystem, Technical Data Sheet Master Tape Green, masking tape",
+    "verzija": "v.01, 03/2021",
+    "url": "https://www.carsystem.org/fileadmin/products/datasheets/tds-master-tape-green.pdf",
     "verzijaIzvor": "vodič",
-    "procitano": "2026-10-30"
+    "procitano": "2026-10-31"
   },
-  "cs-katalog-2026": {
-    "naziv": "Carsystem, Product catalogue 2026/27 (EN), poglavlja Abrasives & Accessories i Masking",
-    "verzija": "2026/27",
-    "url": "https://www.carsystem.org/fileadmin/CS-Kataloge-2026/Carsystem-product-catalogue-HQ-2026-27-EN.pdf",
+  "cs-master-tape-ii-tds": {
+    "naziv": "Carsystem, Technical Data Sheet Master Tape II, masking tape",
+    "verzija": "v.02, 03/2021",
+    "url": "https://www.carsystem.org/fileadmin/products/datasheets/tds-master-tape-II.pdf",
     "verzijaIzvor": "vodič",
-    "procitano": "2026-10-30"
+    "procitano": "2026-10-31"
   },
   "cs-multi-black-rapid-tds": {
     "naziv": "Carsystem, Technical Data Sheet Multi Black Rapid, Multifunctional polyester putty",
@@ -251,12 +228,12 @@
     "verzijaIzvor": "vodič",
     "procitano": "2026-10-30"
   },
-  "cs-step2-tds": {
-    "naziv": "Carsystem, Technical Data Sheet CS Polish Step 2 fine",
-    "verzija": "V01, 06/2019",
-    "url": "https://www.carsystem.org/fileadmin/products/datasheets/tds-polish-step-2-fine.pdf",
+  "cs-top-tape-tds": {
+    "naziv": "Carsystem, Technical Data Sheet Top Tape, masking tape",
+    "verzija": "v.02, 03/2021",
+    "url": "https://www.carsystem.org/fileadmin/products/datasheets/tds-top-tape.pdf",
     "verzijaIzvor": "vodič",
-    "procitano": "2026-10-30"
+    "procitano": "2026-10-31"
   },
   "cs-uv-clear-tds": {
     "naziv": "Carsystem, Technical Data Sheet CS UV Clear",
@@ -272,24 +249,10 @@
     "verzijaIzvor": "vodič",
     "procitano": "2026-10-30"
   },
-  "cs-wow-plus-tds": {
-    "naziv": "Carsystem, Technical Data Sheet 2K Filler Wet on Wet Plus",
-    "verzija": "V01, 03/2017",
-    "url": "https://www.carsystem.org/fileadmin/products/datasheets/tds-2k-fueller-wet-on-wet-plus.pdf",
-    "verzijaIzvor": "vodič",
-    "procitano": "2026-10-30"
-  },
   "cs-wr-lifting-premium-tds": {
     "naziv": "Carsystem, Technical Data Sheet WR-Lifting Tape Premium, masking tape with plastic edge – perforated",
     "verzija": "V03, 10/2025",
     "url": "https://www.carsystem.org/fileadmin/products/datasheets/tds-wr-lifting-tape-premium-v03.pdf",
-    "verzijaIzvor": "vodič",
-    "procitano": "2026-10-30"
-  },
-  "glasurit-prirucnik": {
-    "naziv": "Glasurit (BASF), Technical Information AD3233G, tehnički priručnik za Severnu Ameriku, rev. 4/12/18 — brend koji nije u našem programu; kopija koju objavljuje Skills/Compétences Canada",
-    "verzija": "rev. 4/12/18",
-    "url": "https://www.skillscompetencescanada.com/wp-content/uploads/2018/05/SCNC18-36-AD3233G-Glasurit-Manual_EN.17May18.pdf",
     "verzijaIzvor": "vodič",
     "procitano": "2026-10-30"
   },

@@ -36,6 +36,7 @@ test("svaki izvor postoji i ima stranu", () => {
   for (const page of pages) {
     walk(page.data, (record) => {
       const refs = [...((record.sources as { doc: string; strana: number }[]) ?? []), ...(record.source ? [record.source as { doc: string; strana: number }] : [])];
+      if (Array.isArray(record.bars)) assert.ok(refs.length > 0, `${page.name}: stavka skale ${String(record.id)} bez izvora`);
       for (const ref of refs) {
         assert.ok(izvori[ref.doc], `${page.name}: nepoznat izvor ${ref.doc}`);
         assert.ok(Number.isInteger(ref.strana) && ref.strana > 0, `${page.name}: ${ref.doc} bez strane`);

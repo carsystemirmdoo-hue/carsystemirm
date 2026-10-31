@@ -12,7 +12,7 @@ Sedam stranica menija „Sistemi i programi“ prenete su iz prototipa (paket `s
 | Katalog i tehnički listovi | `/dokumentacija` |
 | B2B saradnja | `/b2b-saradnja` |
 
-68 pitanja iz paketa grupisano je u odluke ispod. Pitanja koja su tražila istu potvrdu spojena su u jednu stavku; uz svaku je navedeno gde se sadržaj koristi. Pojedinačna izostavljena mesta (83) su u `IZOSTAVLJENO.md`, izvori vrednosti u `IZVORI.md`.
+68 pitanja iz paketa grupisano je u odluke ispod. Pitanja koja su tražila istu potvrdu spojena su u jednu stavku; uz svaku je navedeno gde se sadržaj koristi. Pojedinačna izostavljena mesta (83 u prvoj i još 33 u drugoj proveri konteksta, 2026-10-31) su u `IZOSTAVLJENO.md`, izvori vrednosti u `IZVORI.md`.
 
 Načelo: tvrdnja u starom tekstu sajta, vodiču ili kodu nije dokaz njene tehničke ili poslovne tačnosti. Urednička provera uz pomoć AI-ja nije stručna potvrda. Što nije potvrđeno, nije objavljeno; oznake „za potvrdu“ ne postoje na javnim stranicama.
 
@@ -72,3 +72,7 @@ Načelo: tvrdnja u starom tekstu sajta, vodiču ili kodu nije dokaz njene tehni�
 | E2 | SATA slike (`RIGHTS_NOT_CONFIRMED`) | Neutralno polje |
 | E3 | CSY-0507 ProFlex Mercury i CSY-0606 Sanding Disc F.19 Finish 77 mm: u odluci 29.10. „odluka sadržaja bez kandidata“ | Prikazuju se kao na stranici proizvoda (objavljene slike); čeka potvrdu vlasnika |
 | E4 | 16 slika bez ID-a u kontroli slika (logotipi, naslovne strane, `rm-onyx-hd.webp`) | Stranice sistema ih ne koriste osim slika proizvoda iz kataloga |
+
+## F. Druga provera vrednosti (2026-10-31)
+
+Uzorak je pokazao da podudaranje broja na strani nije dovoljno (vrednost je bila vezana za stranu drugog proizvoda). Zato je svaka zadržana vrednost ponovo proverena u dokumentu proizvoda koji rečenica imenuje, sa ručnim pregledom konteksta; 33 stavke su dodatno izostavljene ili prepravljene (npr. pritisci za 35 Line koji stoje samo u posebnom uputstvu za utapanje, „9 mm“ crevo bez imenovanog proizvoda, odnos AGILIS 2:1 koji nije u listu, DIAMONT 100 : 50–60 umesto 100:60). Spisak: `IZOSTAVLJENO.md`, odeljak „Druga provera“.

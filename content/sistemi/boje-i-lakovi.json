@@ -160,7 +160,7 @@
           "material": "Tehnički listovi baze i laka",
           "sources": [
             {
-              "doc": "rm-diamont-tds",
+              "doc": "rm-c2a40-tds",
               "strana": 1
             }
           ],
@@ -233,8 +233,8 @@
           ],
           "sources": [
             {
-              "doc": "baslac-51k-standard",
-              "strana": 1
+              "doc": "baslac-blend-51k",
+              "strana": 2
             }
           ],
           "guides": [
@@ -245,11 +245,19 @@
           "id": "odzracivanje",
           "title": "Odzračite pre sledećeg sloja i pre laka",
           "what": "Između slojeva čekajte dok sloj ne postane mat, a pre laka onoliko koliko navodi list baze.",
-          "detail": "Vreme se razlikuje po sistemu: ONYX HD do mat izgleda i 15 min na 20 °C pre laka; DIAMONT 5 min, pa lak mokro na mokro; 45 Line oko 5 min posle svakog sloja.",
+          "detail": "Vreme se razlikuje po sistemu: ONYX HD do mat izgleda, sušenje 15 min na 20 °C; DIAMONT 5 min, pa lak mokro na mokro; 45 Line oko 5 min posle svakog sloja.",
           "material": "Sat, temperatura objekta",
           "sources": [
             {
+              "doc": "rm-onyx-hd-tds",
+              "strana": 2
+            },
+            {
               "doc": "rm-diamont-tds",
+              "strana": 2
+            },
+            {
+              "doc": "baslac-45-line-tds",
               "strana": 1
             }
           ],
@@ -330,16 +338,9 @@
           "id": "pokrivanje",
           "title": "Pokrijte popravljeni deo",
           "what": "Popravljeni deo pokrijte punim slojevima bazne boje.",
-          "detail": "baslac za 35 Line navodi prvi sloj pištoljem HVLP ili RP 1.3 sa 2,0 bara, odzračivanje, uklanjanje preprašivanja sa susednog dela, pa drugi sloj.",
           "material": "Bazna boja, pištolj, krpa za prašinu",
           "only": [
             "baza"
-          ],
-          "sources": [
-            {
-              "doc": "baslac-blend-51k",
-              "strana": 1
-            }
           ],
           "guides": [
             "utapanje-metalika"
@@ -349,16 +350,9 @@
           "id": "tanjenje",
           "title": "Utopite u susedni deo",
           "what": "Sniženim pritiskom tanjite baznu boju preko dela susednog dela, dok prelaz ne postane nevidljiv.",
-          "detail": "baslac za 35 Line navodi pritisak snižen na 0,8 do najviše 1,5 bara, pa odzračivanje.",
           "material": "Pištolj sa podesivim pritiskom",
           "only": [
             "baza"
-          ],
-          "sources": [
-            {
-              "doc": "baslac-blend-51k",
-              "strana": 1
-            }
           ],
           "guides": [
             "utapanje-metalika"
@@ -497,7 +491,15 @@
               ],
               "sources": [
                 {
+                  "doc": "baslac-40-100-tds",
+                  "strana": 1
+                },
+                {
                   "doc": "carsystem-speed-plus-tds",
+                  "strana": 2
+                },
+                {
+                  "doc": "carsystem-xpress-five-tds",
                   "strana": 2
                 }
               ]
@@ -534,7 +536,7 @@
           "pod": {
             "mat": {
               "what": "Mat lak mešajte ručno i pripremite samo količinu za isti dan.",
-              "detail": "R-M za C 2P91 i C 2A93 i baslac za 40-620 navode da se lak ne drži na mešalici; za aditiv 80-20 baslac upozorava da se stepen sjaja smeše može promeniti ako stoji.",
+              "detail": "za aditiv 80-20 baslac upozorava da se stepen sjaja smeše može promeniti ako stoji.",
               "sources": [
                 {
                   "doc": "rm-c2p91-tds",
@@ -580,8 +582,12 @@
           },
           "sources": [
             {
-              "doc": "cs-katalog",
-              "strana": 48
+              "doc": "cs-cc26-tds",
+              "strana": 2
+            },
+            {
+              "doc": "carsystem-speed-plus-tds",
+              "strana": 1
             }
           ],
           "guides": [
@@ -624,7 +630,7 @@
         {
           "id": "onyx",
           "name": "R-M ONYX HD (vodena)",
-          "text": "100:60 sa HB 032 po zapremini; kod belih boja visokog viskoziteta do 100:80. Jednobojne 2–3 sloja; metalik i biserne 1 ili 2 + 1 za efekat. Odzračivanje do mat izgleda posle svakog sloja; pre laka 15 min na 20 °C.",
+          "text": "100:60 sa HB 032 po zapremini; kod belih boja visokog viskoziteta do 100:80. Jednobojne 2–3 sloja; metalik i biserne 1 ili 2 + 1 za efekat. Odzračivanje do mat izgleda posle svakog sloja; sušenje 15 min na 20 °C.",
           "bars": [
             [
               "razređivač",
@@ -639,44 +645,16 @@
               "b"
             ]
           ],
-          "source": {
-            "doc": "carsystem-multi-green-tds",
-            "strana": 1
-          }
-        },
-        {
-          "id": "agilis",
-          "name": "R-M AGILIS (vodena)",
-          "text": "2:1 po zapremini sa RA 050 ili RA 050X, prema recepturi. Jedan pun i jedan završni sloj, mokro na mokro; lak kada je površina potpuno mat.",
-          "bars": [
-            [
-              "razređivač",
-              50,
-              50,
-              "a"
-            ]
-          ],
-          "source": {
-            "doc": "cs-c05-tds",
-            "strana": 1
-          }
-        },
-        {
-          "id": "diamont",
-          "name": "R-M DIAMONT (rastvaračka)",
-          "text": "100:60; BC 020 na 15–25 °C, BC 030 iznad 25 °C; DIN 4: 14–15 s na 20 °C. Jednobojne 2 sloja, metalik i biserne 2 + 1 za efekat; 5 min na 20 °C, pa lak mokro na mokro.",
-          "bars": [
-            [
-              "razređivač",
-              60,
-              60,
-              "a"
-            ]
-          ],
-          "source": {
-            "doc": "carfit-1k-plastic-primer-tds",
-            "strana": 1
-          }
+          "sources": [
+            {
+              "doc": "rm-onyx-hd-tds",
+              "strana": 1
+            },
+            {
+              "doc": "rm-onyx-hd-tds",
+              "strana": 2
+            }
+          ]
         },
         {
           "id": "b35",
@@ -691,8 +669,8 @@
             ]
           ],
           "source": {
-            "doc": "rm-p2e23-tds",
-            "strana": 2
+            "doc": "baslac-35-line-tds",
+            "strana": 1
           }
         },
         {
@@ -708,7 +686,7 @@
             ]
           ],
           "source": {
-            "doc": "carsystem-multi-green-tds",
+            "doc": "baslac-45-line-tds",
             "strana": 1
           }
         }
@@ -746,47 +724,7 @@
             "direktni"
           ],
           "source": {
-            "doc": "cs-wow-plus-tds",
-            "strana": 2
-          }
-        },
-        {
-          "id": "b30cv",
-          "name": "baslac 30 Line CV (direktni sjaj)",
-          "text": "HS jednoslojna boja za velike površine, usklađena sa VOC propisima; 2 sloja, moguće i airless i airmix nanošenje.",
-          "bars": [
-            [
-              "2 sloja",
-              50,
-              70,
-              "a"
-            ]
-          ],
-          "pods": [
-            "direktni"
-          ],
-          "source": {
-            "doc": "cs-c05-tds",
-            "strana": 1
-          }
-        },
-        {
-          "id": "ghd",
-          "name": "R-M GHD TOPCOAT (direktni sjaj)",
-          "text": "100:25:25, 1,5 sloj bez odzračivanja; nanosi se na R-M CV prajmer-punioce i punioce, za velike površine.",
-          "bars": [
-            [
-              "1,5 sloj",
-              40,
-              60,
-              "a"
-            ]
-          ],
-          "pods": [
-            "direktni"
-          ],
-          "source": {
-            "doc": "cs-c05-tds",
+            "doc": "baslac-30-line-tds",
             "strana": 1
           }
         }
@@ -803,11 +741,27 @@
       "rows": [
         {
           "k": "Vodene",
-          "v": "ONYX HD: 100:60 sa HB 032. AGILIS: 2:1 sa RA 050, pun i završni sloj mokro na mokro."
+          "v": "ONYX HD: 100:60 sa HB 032. AGILIS: jedan pun i jedan završni sloj.",
+          "sources": [
+            {
+              "doc": "rm-onyx-hd-tds",
+              "strana": 1
+            },
+            {
+              "doc": "rm-agilis-tds",
+              "strana": 2
+            }
+          ]
         },
         {
           "k": "Rastvaračka",
-          "v": "DIAMONT: 100:60, razređivač prema temperaturi (BC 020 ili BC 030)."
+          "v": "DIAMONT: 100 delova i 50–60 delova razređivača UR40 ili UR50 po zapremini; na višim temperaturama R-M preporučuje BC 030.",
+          "sources": [
+            {
+              "doc": "rm-diamont-tds",
+              "strana": 1
+            }
+          ]
         },
         {
           "k": "Nijansa",
@@ -832,7 +786,17 @@
       "rows": [
         {
           "k": "Bazne",
-          "v": "35 Line: 2:1 sa 60-10…60-40. 45 Line: 100:70 sa 45-R45. Obe: 2 sloja do pokrivanja + ½ za efekat."
+          "v": "35 Line: 2:1 sa 60-10…60-40. 45 Line: 100:70 sa 45-R45. Obe: 2 sloja do pokrivanja + ½ za efekat.",
+          "sources": [
+            {
+              "doc": "baslac-35-line-tds",
+              "strana": 1
+            },
+            {
+              "doc": "baslac-45-line-tds",
+              "strana": 1
+            }
+          ]
         },
         {
           "k": "Direktni sjaj",

@@ -190,17 +190,11 @@
           "id": "prelaz",
           "title": "Prelaz na staru boju",
           "what": "Okolnu površinu brusite najfinije u nizu, da prelaz bude postepen. Ivice i uglove matirajte crvenim flisom.",
-          "detail": "Postepen prelaz se ne vidi kroz punilac, a punilac na njemu dobro prianja. U baslac primeru okolina se brusi sa P320; Carsystem crveni flis V.19 namenjuje podlozi za punilac.",
+          "detail": "Postepen prelaz se ne vidi kroz punilac, a punilac na njemu dobro prianja. Carsystem crveni flis V.19 namenjuje podlozi za punilac.",
           "material": "Finiji disk na brusilici; crveni flis za ivice",
           "products": [
             "carsystem-sanding-disc-p-25-ceramic",
             "carsystem-sanding-fleece-v-19-pad-115-x-230-mm"
-          ],
-          "sources": [
-            {
-              "doc": "rm-b2p93-tds",
-              "strana": 1
-            }
           ],
           "guides": [
             "fleke-iznad-kita",
@@ -278,17 +272,11 @@
           "pod": {
             "prelaz": {
               "what": "Zonu u koju se utapa matirajte vrlo fino: stari lak se samo matira, bez dubokih tragova. Mesto punioca brusi se grublje, prema njegovom listu.",
-              "detail": "Bazna boja i lak su u zoni prelaza tanki, pa se dubok trag tu vidi. baslac u postupku utapanja okolnu staru boju brusi sa P1000/P2000.",
+              "detail": "Bazna boja i lak su u zoni prelaza tanki, pa se dubok trag tu vidi.",
               "material": "Vrlo fin disk na brusilici, uz meki međusloj",
               "products": [
                 "carsystem-sanding-disc-f-19-finish-77-mm",
                 "carsystem-soft-interface-pad"
-              ],
-              "sources": [
-                {
-                  "doc": "baslac-blend-51k",
-                  "strana": 1
-                }
               ]
             }
           },
@@ -456,7 +444,7 @@
           ],
           "sources": [
             {
-              "doc": "carfit-etch-primer-tds",
+              "doc": "carfit-zinc-spray-tds",
               "strana": 1
             }
           ],
@@ -535,16 +523,10 @@
           "id": "pl-grejanje",
           "title": "Zagrejte deo, ako sistem to traži",
           "what": "Neke plastike se pre lakiranja zagrevaju, pa ponovo čiste.",
-          "detail": "baslac za PU penu i poliamid (PA) navodi 60 minuta na 60 °C, da se uklone sredstvo za odvajanje i vlaga. Za ostale plastike to nije obavezan korak.",
+          "detail": "Za ostale plastike to nije obavezan korak.",
           "material": "Komora ili grejač prema uputstvu sistema",
           "only": [
             "plastika"
-          ],
-          "sources": [
-            {
-              "doc": "carfit-2k-epoxy-tds",
-              "strana": 1
-            }
           ],
           "guides": [
             "priprema-plastike-pre-lakiranja"
@@ -554,7 +536,6 @@
           "id": "pl-brusenje",
           "title": "Brusite oštećenja i matirajte ceo deo",
           "what": "Oštećena mesta brusite, a ceo deo matirajte sunđerom za matiranje.",
-          "detail": "baslac u uputstvu za plastiku daje granulacije P80–P600 za oštećena mesta, a ceo deo matira sunđerom.",
           "material": "Disk za oštećena mesta; sunđer za matiranje",
           "only": [
             "plastika"
@@ -562,12 +543,6 @@
           "products": [
             "carsystem-classicline-soft-pad",
             "carsystem-tec-line-mattflex-pad"
-          ],
-          "sources": [
-            {
-              "doc": "baslac-cleaners-chart",
-              "strana": 1
-            }
           ],
           "guides": [
             "sunderi-za-matiranje"
@@ -797,35 +772,6 @@
           }
         },
         {
-          "id": "b1220",
-          "name": "baslac 12-20 na metalu",
-          "text": "blok P150/P240, zatim brusilica P240; okolna površina P320.",
-          "bars": [
-            [
-              "blok",
-              150,
-              240,
-              "a"
-            ],
-            [
-              "brusilica",
-              240,
-              240,
-              "a"
-            ],
-            [
-              "okolina",
-              320,
-              320,
-              "b"
-            ]
-          ],
-          "source": {
-            "doc": "baslac-plastic-system",
-            "strana": 2
-          }
-        },
-        {
           "id": "rm2p93",
           "name": "R-M UV Bodyfill-R B 2P93",
           "text": "ekscentar, suvo P80/P150, zatim P240/P320, uz kontrolni sloj.",
@@ -889,29 +835,6 @@
             "doc": "carfit-etch-primer-tds",
             "strana": 1
           }
-        },
-        {
-          "id": "blend",
-          "name": "Bazna boja u zoni utapanja (baslac)",
-          "text": "okolna stara boja P1000/P2000; mesto punioca P500/P600 uz meki međusloj.",
-          "bars": [
-            [
-              "okolni lak",
-              1000,
-              2000,
-              "a"
-            ],
-            [
-              "mesto punioca",
-              500,
-              600,
-              "b"
-            ]
-          ],
-          "source": {
-            "doc": "baslac-blend-51k",
-            "strana": 1
-          }
         }
       ]
     },
@@ -931,27 +854,6 @@
       ],
       "footer": "Granulaciju ne određuje sam lim, nego prajmer ili sistem koji ide preko njega. Vrednost jednog sistema ne prenosite na drugi.",
       "items": [
-        {
-          "id": "bas",
-          "name": "baslac, goli čelik i aluminijum",
-          "text": "čišćenje sredstvom 70-10, brušenje P80/P150, ponovno čišćenje.",
-          "bars": [
-            [
-              "brušenje",
-              80,
-              150,
-              "a"
-            ]
-          ],
-          "pods": [
-            "celik",
-            "alu"
-          ],
-          "source": {
-            "doc": "carsystem-multi-green-tds",
-            "strana": 1
-          }
-        },
         {
           "id": "csef",
           "name": "Carsystem 2K Epoxy Fill Primer",
@@ -994,7 +896,7 @@
             "celik"
           ],
           "source": {
-            "doc": "carsystem-multi-green-tds",
+            "doc": "carfit-zinc-spray-tds",
             "strana": 1
           }
         }

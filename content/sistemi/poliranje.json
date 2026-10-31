@@ -511,7 +511,7 @@
             ]
           ],
           "source": {
-            "doc": "cs-c05-tds",
+            "doc": "cs-c10-tds",
             "strana": 1
           }
         },
@@ -533,23 +533,6 @@
           }
         },
         {
-          "id": "step1",
-          "name": "Carsystem Polish Coarse Step 1",
-          "text": "abrazivna; trag P1500–P2000; vuneni sunđeri, Finish Quadra Pad C-10 ili Finish Pad C20.",
-          "bars": [
-            [
-              "trag",
-              1500,
-              2000,
-              "a"
-            ]
-          ],
-          "source": {
-            "doc": "cs-step1-tds",
-            "strana": 1
-          }
-        },
-        {
           "id": "c30",
           "name": "Carsystem Polish C-30 finish (završna)",
           "text": "završna, protiv holograma; trag P2500; Finish Sandwich Pad C-30.",
@@ -563,23 +546,6 @@
           ],
           "source": {
             "doc": "cs-c30-tds",
-            "strana": 1
-          }
-        },
-        {
-          "id": "step2",
-          "name": "Carsystem Polish Fine Step 2 (završna)",
-          "text": "završna, protiv holograma; trag P3000; vuneni sunđeri, Finish Sandwich Pad C-30 ili Finish Waffle Pad black.",
-          "bars": [
-            [
-              "trag",
-              3000,
-              3000,
-              "b"
-            ]
-          ],
-          "source": {
-            "doc": "cs-step2-tds",
             "strana": 1
           }
         }
@@ -646,7 +612,7 @@
             ]
           ],
           "source": {
-            "doc": "cs-step2-tds",
+            "doc": "carfit-finishing-tds",
             "strana": 1
           }
         }
@@ -684,23 +650,6 @@
           }
         },
         {
-          "id": "step2",
-          "name": "Carsystem Polish Fine Step 2",
-          "text": "završna, protiv holograma; trag P3000; Finish Sandwich Pad C-30 ili Finish Waffle Pad black.",
-          "bars": [
-            [
-              "trag",
-              3000,
-              3000,
-              "a"
-            ]
-          ],
-          "source": {
-            "doc": "cs-step2-tds",
-            "strana": 1
-          }
-        },
-        {
           "id": "cff",
           "name": "C.A.R.FIT BLACK LABEL Finishing Compound",
           "text": "korišćen lak, hologrami na tamnim bojama; trag P3000; srednje tvrd sunđer.",
@@ -713,7 +662,7 @@
             ]
           ],
           "source": {
-            "doc": "cs-step2-tds",
+            "doc": "carfit-finishing-tds",
             "strana": 1
           }
         }

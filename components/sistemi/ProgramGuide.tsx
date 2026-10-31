@@ -231,7 +231,7 @@ export function ProgramGuide({
       </ul>
 
       {job ? (
-        <div className={styles.guide} data-waiting={waiting ? "" : undefined} ref={resultRef}>
+        <div className={styles.guide} data-waiting={waiting ? "" : undefined} id="poslovi-rezultat" ref={resultRef}>
           <div className={styles.guideMain}>
             <div className={styles.guideHead}>
               <h3 className={styles.jobTitle}>{job.title}</h3>

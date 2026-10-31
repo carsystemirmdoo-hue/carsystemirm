@@ -170,7 +170,12 @@ export function DocumentLibrary({
           })}
           type="button"
         >
-          <span className={styles.libGroupLabel}>Svi dokumenti</span>
+          <span className={styles.libGroupLabel}>
+            Svi dokumenti
+            <span className={styles.chipCount}>
+              {ready ? [...counts.byGroup.values()].reduce((sum, value) => sum + value, 0) : typeCounts.reduce((sum, entry) => sum + entry.count, 0)}
+            </span>
+          </span>
           <span className={styles.libGroupHint}>Sve vrste</span>
         </button>
         {GROUPS.map((entry) => (

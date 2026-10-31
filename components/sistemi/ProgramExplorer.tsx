@@ -53,6 +53,8 @@ export function ProgramExplorer({
     setJobId(job.id);
     const choice = params.get("izbor");
     if (choice && job.choice?.options.some((option) => option.id === choice)) setChoices({ [job.id]: choice });
+    // Veza sa izabranim poslom (npr. sa pregleda celine) otvara rezultat, ne samo kartice.
+    window.setTimeout(() => document.getElementById("poslovi-rezultat")?.scrollIntoView({ block: "start" }), 60);
   }, [jobs]);
 
   // Izbor u adresu, bez novog unosa u istoriju (povratak ostaje na prethodnoj stranici).

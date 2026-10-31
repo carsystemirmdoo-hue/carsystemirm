@@ -1810,3 +1810,60 @@
   border-color: var(--ds-c-accent);
   color: var(--ds-c-accent);
 }
+
+/* ---------- pregled celine (2026-10-31) ---------- */
+
+.hubGrid {
+  display: grid;
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.hubCard {
+  display: grid;
+  align-content: start;
+  gap: 8px;
+  border: 1px solid var(--ds-c-line);
+  border-radius: var(--ds-overlay-radius);
+  background: var(--ds-c-surface);
+  padding: 20px;
+}
+
+.hubTitle {
+  margin: 0;
+  font-family: var(--font-display), var(--font-geist-sans), system-ui, sans-serif;
+  font-size: var(--ds-font-h3);
+  font-weight: 700;
+}
+
+.hubTitle a {
+  text-decoration: none;
+}
+
+.hubTitle a:hover {
+  text-decoration: underline;
+}
+
+.hubText {
+  margin: 0;
+  color: var(--ds-c-text-2);
+  font-size: var(--ds-font-small);
+  line-height: 1.5;
+}
+
+.hubLinks {
+  display: grid;
+  gap: 4px;
+  margin: 4px 0 0;
+  padding: 0;
+  list-style: none;
+  font-size: var(--ds-font-small);
+}
+
+.hubLinks a {
+  font-weight: 500;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}

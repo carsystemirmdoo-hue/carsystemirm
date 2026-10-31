@@ -383,7 +383,7 @@
       "label": "Uklanjanje starog premaza",
       "desc": "Skidanje boje do podloge ili do zdravog sloja",
       "title": "Uklanjanje starog premaza",
-      "lead": "Premaz se skida samo tamo gde više nije dobra podloga. Način skidanja i priprema posle njega zavise od podloge ispod — izaberite je iznad, koraci se menjaju.",
+      "lead": "Premaz se skida samo tamo gde više nije dobra podloga. Način skidanja i priprema posle njega zavise od podloge ispod.",
       "choice": {
         "question": "Podloga",
         "options": [

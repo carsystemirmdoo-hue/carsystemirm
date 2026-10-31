@@ -155,6 +155,7 @@ export function ProgramGuide({
   const resultRef = useRef<HTMLDivElement>(null);
   const [open, setOpen] = useState<Set<string>>(new Set());
   const [scrollOnSelect, setScrollOnSelect] = useState(false);
+  const [overviewOpen, setOverviewOpen] = useState(false);
 
   useEffect(() => {
     setOpen(new Set());
@@ -202,7 +203,10 @@ export function ProgramGuide({
         </h2>
       </div>
 
-      <ul className={styles.jobCards}>
+      <ul
+        className={styles.jobCards}
+        style={{ "--job-cols": jobs.length, "--job-cols-md": jobs.length <= 3 ? jobs.length : 2 } as React.CSSProperties}
+      >
         {jobs.map((item, index) => {
           const image = cardImages[index];
           const count = stepsFor(item, item.choice?.options[0]?.id).length;
@@ -315,6 +319,17 @@ export function ProgramGuide({
 
           {waiting ? null : (
             <aside aria-label="Pregled posla" className={styles.guideAside}>
+              <button
+                aria-controls="pregled-posla"
+                aria-expanded={overviewOpen}
+                className={styles.gOverviewToggle}
+                onClick={() => setOverviewOpen((current) => !current)}
+                type="button"
+              >
+                Pregled: {stepsLabel(steps.length)}
+                {materials.length ? `, materijal (${materials.length})` : ""}
+              </button>
+              <div className={styles.gAsideBody} data-open={overviewOpen ? "" : undefined} id="pregled-posla">
               <div className={styles.gAsideBlock}>
                 <h4 className={styles.gAsideTitle}>Postupak</h4>
                 <ol className={styles.gOverview}>
@@ -360,6 +375,7 @@ export function ProgramGuide({
               <a className={styles.gAsideLink} href="#pitanje">
                 Pitanje o ovom poslu
               </a>
+              </div>
             </aside>
           )}
         </div>

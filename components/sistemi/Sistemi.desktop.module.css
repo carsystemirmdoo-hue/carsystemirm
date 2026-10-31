@@ -76,7 +76,7 @@
 /* Vodič kroz posao: kartice u redu, pregled posla uz korake od 1100 px. */
 @media (min-width: 901px) {
   .jobCards.jobCards {
-    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    grid-template-columns: repeat(var(--job-cols-md, 2), minmax(0, 1fr));
   }
 
   .questionOptions.questionOptions {
@@ -99,8 +99,13 @@
     grid-row: 1;
   }
 
-  .gAsideProductsBlock.gAsideProductsBlock {
+  .gAsideProductsBlock.gAsideProductsBlock,
+  .gAsideBody.gAsideBody {
     display: grid;
+  }
+
+  .gOverviewToggle.gOverviewToggle {
+    display: none;
   }
 
   .guideAside.guideAside {
@@ -138,5 +143,11 @@
 @media (min-width: 901px) {
   .hubGrid.hubGrid {
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  }
+}
+
+@media (min-width: 1200px) {
+  .jobCards.jobCards {
+    grid-template-columns: repeat(var(--job-cols, 4), minmax(0, 1fr));
   }
 }

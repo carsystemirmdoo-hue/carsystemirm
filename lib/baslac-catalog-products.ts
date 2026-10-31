@@ -150,7 +150,8 @@ function toCatalogProduct(
 ): CarsystemProduct {
   const packshot = packshotFor(base);
   const finishLabel = baslacFinishLabels[base.finish];
-  const fullName = `Baslac ${base.code} ${base.name}`;
+  // Bez objavljenog naziva prikazuje se samo šifra (naziv se ne izmišlja).
+  const fullName = base.name ? `Baslac ${base.code} ${base.name}` : `Baslac ${base.code}`;
   const volume = volumeLabel(base.volumeL);
 
   return {
@@ -159,7 +160,7 @@ function toCatalogProduct(
     brandSlug: "baslac",
     programSlug: family.programSlug,
     phaseSlug: family.phaseSlug,
-    shortDescription: `${family.line} komponenta ${base.code} — ${base.name}, ${finishLabel.toLowerCase()}, pakovanje ${volume}.`,
+    shortDescription: `${family.line} komponenta ${base.code}${base.name ? ` — ${base.name}` : ""}, ${finishLabel.toLowerCase()}, pakovanje ${volume}.`,
     longDescription: `${fullName} je komponenta sistema ${family.line}. ${family.intro} Odnos mešanja, izbor učvršćivača i razređivača i uslovi nanošenja potvrđuju se prema važećem tehničkom listu. Dostupnost i pakovanje potvrđujemo kroz upit.`,
     sku: base.code,
     externalSku: base.supplierArticle,
@@ -209,7 +210,7 @@ function toCatalogProduct(
       baseProductSlug: family.baseProductSlug,
       variantId: base.code,
       line: family.line,
-      officialName: `${base.code} ${base.name}`,
+      officialName: base.name ? `${base.code} ${base.name}` : base.code,
       displayNameSr: fullName,
       cosmosCode: null,
       ralCode: null,

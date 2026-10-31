@@ -662,7 +662,6 @@ function BaslacSystemsAndProducts({
           <h2 id="baslac-catalog-title">Baslac sistemi i proizvodi</h2>
         </div>
         <p>
-          Izaberite sistem boja, pripremni materijal ili završni proizvod.
           Unutar svake porodice dostupne su odgovarajuće varijante, pakovanja i
           tehnička dokumentacija.
         </p>

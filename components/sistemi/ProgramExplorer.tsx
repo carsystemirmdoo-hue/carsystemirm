@@ -190,9 +190,6 @@ export function ProgramExplorer({
           <h2 className={styles.sectionTitle} id="poslovi-naslov">
             {jobsTitle}
           </h2>
-          <p className={styles.sectionLead}>
-            Osnovni koraci su odmah vidljivi. Objašnjenje, vrednosti i izvor iz dokumenta proizvođača otvaraju se uz svaki korak.
-          </p>
         </div>
         <div
           aria-label="Izbor posla"
@@ -326,7 +323,7 @@ export function ProgramExplorer({
               Pitanje o ovom poslu
             </h2>
             <p className={styles.sectionLead}>
-              Upit stiže timu sa izabranim poslom i izborom. Navedite materijal i šifru proizvoda ako ih znate.
+              Navedite materijal i šifru proizvoda ako ih znate.
             </p>
           </div>
           <InquiryForm

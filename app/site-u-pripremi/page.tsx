@@ -46,7 +46,7 @@ function accessMessage(status: string, passwordState: ReturnType<typeof getSiteA
   if (passwordState === "missing") {
     return {
       tone: "danger",
-      text: "Pristupna lozinka nije podešena. Dodajte SITE_ACCESS_PASSWORD na Vercel-u.",
+      text: "Pristup trenutno nije omogućen.",
     };
   }
 
@@ -72,7 +72,7 @@ function accessMessage(status: string, passwordState: ReturnType<typeof getSiteA
     };
   }
 
-  return { tone: "muted", text: "Unesite interni pristupni kod za pregled pravog sajta." };
+  return { tone: "muted", text: "Unesite pristupni kod." };
 }
 
 export default async function SiteInPreparationPage({
@@ -126,8 +126,8 @@ export default async function SiteInPreparationPage({
           </span>
 
           <div className="brand-meta" aria-hidden="true">
-            <span>Studio One showcase</span>
-            <span className="brand-meta-index">Access locked</span>
+            <span>Sajt u pripremi</span>
+            <span className="brand-meta-index">Pristup zaključan</span>
           </div>
           {/* Kupci i zaposleni ulaze i dok je sajt u pripremi (zajednički ekran prijave). */}
           <Link href="/prijava" className="coming-soon-login">

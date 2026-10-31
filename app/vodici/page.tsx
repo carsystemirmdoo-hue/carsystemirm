@@ -79,9 +79,8 @@ export default function SavetiIndexPage() {
           {!published.length ? (
             <section className={styles.section}>
               <p className={styles.intro}>
-                Prvi tekstovi su u pripremi. Objavljujemo ih tek kada prođu tehničku i jezičku proveru i
-                kada ih odobri naš tim. Do tada nas za konkretno pitanje o proizvodu ili postupku možete
-                kontaktirati direktno.
+                Prvi tekstovi uskoro. Za konkretno pitanje o proizvodu ili postupku kontaktirajte tehničku
+                podršku.
               </p>
               <div className={styles.ctaRow}>
                 <Link className={styles.ctaPrimary} href="/kontakt?tema=tehnicka-podrska">

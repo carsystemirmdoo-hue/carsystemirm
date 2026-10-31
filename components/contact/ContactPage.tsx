@@ -35,8 +35,7 @@ export function ContactPage({
             </h1>
             <p className={`${styles.subtitle} ${styles.subtitleReveal}`}>
               Tim usmerava upite ka proizvodu, tehničkoj podršci, prodajnim
-              mestima ili poslovnoj saradnji — izaberite razlog i dobićete pravi
-              kontekst odmah ispod.
+              mestima ili poslovnoj saradnji.
             </p>
           </div>
         </section>

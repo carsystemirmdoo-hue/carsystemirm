@@ -126,7 +126,7 @@ export function CarsystemUseCases({
             <p className={styles.useCaseSequenceNote}>
               {activeUseCase.confirmedSystem
                 ? "Kombinaciju preporučuje proizvođač (za tamne boje); pakovanje i postupak potvrđuju se prema tehničkom listu."
-                : "Po jedan proizvod za svaki korak, izabran po nameni — nije potvrđen sistem proizvođača; postupak se potvrđuje prema tehničkom listu."}
+                : "Primer kombinacije po nameni; postupak proverite u tehničkom listu svakog proizvoda."}
             </p>
           </div>
 

@@ -56,7 +56,7 @@ izvori:
     tip: tehnicki-list
   - id: sata-truesun-bal
     naziv: "SATA, Operating Instructions SATA trueSun"
-    url: https://www.sata.com/media/87/f1/61/1790259017/BETRIEBSANLEITUNG-SATA-TRUESUN.PDF.PDF?ts=1790259017
+    url: https://www.sata.com/media/13/6b/6e/1793362240/BETRIEBSANLEITUNG-SATA-TRUESUN.PDF.PDF?ts=1793362240
     datumIzvora: 2025-11-27
     pristupljeno: 2026-10-08
     tip: uputstvo-proizvodjaca

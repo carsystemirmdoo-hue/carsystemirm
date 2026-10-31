@@ -48,7 +48,7 @@ izvori:
     tip: edukacija-proizvodjaca
   - id: sata-jetx-uputstvo
     naziv: "SATA, Operating manual jet X DIGITAL pro, DIGITAL, DIGITAL ready, BASIC (višejezično, engleski deo str. 91–109)"
-    url: https://www.sata.com/media/d2/3c/04/1790259009/MULTILINGUAL-SATA-OPERATING-MANUAL-JET-X-3266-240619-2.PDF.PDF?ts=1790259009
+    url: https://www.sata.com/media/2d/dc/44/1793362233/MULTILINGUAL-SATA-OPERATING-MANUAL-JET-X-3266-240619-2.PDF.PDF?ts=1793362233
     verzija: "3266-240619-2"
     pristupljeno: 2026-10-08
     tip: uputstvo-proizvodjaca

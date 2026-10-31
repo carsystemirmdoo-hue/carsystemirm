@@ -62,7 +62,7 @@ izvori:
     tip: uputstvo-proizvodjaca
   - id: sata-dry-jet-2-bal
     naziv: "SATA, Operating instructions SATA dry jet 2"
-    url: https://www.sata.com/media/84/06/70/1790259017/BAL-SATA-DRY-JET-2.PDF.PDF?ts=1790259017
+    url: https://www.sata.com/media/b6/b9/fd/1793362241/BAL-SATA-DRY-JET-2.PDF.PDF?ts=1793362241
     verzija: "3456-201106-1"
     napomena: "Oznaka dokumenta na poslednjoj strani; datum izmene PDF fajla 2022-03-07."
     pristupljeno: 2026-10-08

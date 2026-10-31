@@ -75,7 +75,7 @@ izvori:
     tip: sajt-proizvodjaca
   - id: sata-multi-clean-2-uputstvo
     naziv: "SATA, Operating Instructions SATA multi clean 2 (višejezično; engleski deo str. 77–88)"
-    url: https://www.sata.com/media/68/8f/25/1790259016/BAL-SATA-MULTI-CLEAN-2.PDF.PDF?ts=1790259016
+    url: https://www.sata.com/media/53/89/e8/1793362240/BAL-SATA-MULTI-CLEAN-2.PDF.PDF?ts=1793362240
     verzija: "3649-220713-2"
     pristupljeno: 2026-10-08
     tip: uputstvo-proizvodjaca

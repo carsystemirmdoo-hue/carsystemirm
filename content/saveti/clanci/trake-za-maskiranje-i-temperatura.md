@@ -1,7 +1,7 @@
 ---
 id: SV-0146
 slug: trake-za-maskiranje-i-temperatura
-naslov: Trake za maskiranje i temperatura sušenja
+naslov: "Kako izabrati traku za maskiranje: temperatura sušenja i podloga"
 metaNaslov: "Traka za maskiranje: izbor po temperaturi sušenja"
 opis: "Kako se traka za maskiranje bira prema temperaturi i trajanju sušenja i prema podlozi, uz vrednosti iz tehničkih listova traka Carsystem i C.A.R.FIT."
 kategorija: maskiranje
@@ -89,7 +89,7 @@ status:
   pisanje: napisano
   tehnickaProvera: provereno
   jezickaProvera: provereno
-napomenaProvere: "urednička provera (AI-asistirana) 2026-10-08: otvoreni TDS Top Tape, Slim Tape, Master Tape Green, Master Tape II, Red Tape V01, Fine Line Tape Blue V03, Auto Mask i C.A.R.FIT Waterproof Masking Tape; sve temperature se poklapaju; dopunjeno: Master Tape Green je takođe za vodene i rastvaračke boje."
+napomenaProvere: "dorada 2026-11-01 (Saveti i podrška): naslov usklađen sa temom „izbor trake za maskiranje“ (adresa ista); uslovi izdvojeni u okvir na vrhu (bez novih tvrdnji); vrednosti ponovo upoređene sa PDF-ovima Carsystem sa carsystem.org (Top Tape 80 °C, Slim Tape 100 °C, Master Tape II 120 °C, Red Tape 90 °C/1 h – 110 °C/30 min i 3 dana, Fine Line Tape Blue 155 °C, +15 do +30 °C i 24 h, Auto Mask 60 min/60 °C i 30 min/110 °C). Ranije: urednička provera (AI-asistirana) 2026-10-08: otvoreni TDS Top Tape, Slim Tape, Master Tape Green, Master Tape II, Red Tape V01, Fine Line Tape Blue V03, Auto Mask i C.A.R.FIT Waterproof Masking Tape; sve temperature se poklapaju; dopunjeno: Master Tape Green je takođe za vodene i rastvaračke boje."
 strucnaPotvrda:
   potrebna: false
   status: nije-potrebno
@@ -97,6 +97,10 @@ poslednjaProvera: 2026-10-08
 ponovniPregled: 2027-04-08
 ---
 Traka za maskiranje bira se tako da njena otpornost na toplotu iz tehničkog lista bude iznad najviše temperature objekta u ciklusu sušenja, i to za trajanje tog ciklusa. Zatim se proverava da li proizvođač navodi da traka prianja na podlogu na koju je lepite (lak, gumu, staklo, plastiku). Trake iz istog programa se jako razlikuju: tehnički list Carsystem Top Tape navodi 80 °C[^cs-top-tape-tds], Master Tape II 120 °C[^cs-master-tape-ii-tds], a Fine Line Tape Blue radni opseg od 0 °C do +155 °C[^cs-fine-line-tds].
+
+> [!upozorenje] Granica važi za temperaturu dela, ne vazduha. Kod IR sušenja površina, a naročito ivica bliža lampi, može biti toplija od vazduha u kabini.
+>
+> Temperatura i trajanje sušenja idu zajedno. Kada tehnički list ne navodi trajanje, a ciklus je dug ili se ponavlja, pitajte proizvođača pre sušenja.
 
 ## Vrednosti iz tehničkih listova
 

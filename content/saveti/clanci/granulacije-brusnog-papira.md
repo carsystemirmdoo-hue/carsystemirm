@@ -1,9 +1,9 @@
 ---
 id: SV-0067
 slug: granulacije-brusnog-papira
-naslov: "Granulacije brusnog papira: kako se biraju po fazi rada"
-metaNaslov: "Granulacije brusnog papira po fazi rada"
-opis: "Šta znači oznaka P, koje granulacije tehnički listovi navode za kit, punilac, stari lak i zonu utapanja i zašto se granulacije ne preskaču."
+naslov: "Kako izabrati abraziv za posao: granulacija po fazi rada"
+metaNaslov: "Kako izabrati abraziv: granulacija po fazi rada"
+opis: "Kako se bira abraziv za kit, punilac i zonu utapanja: šta znači oznaka P, koje granulacije navode tehnički listovi i zašto se granulacije ne preskaču."
 kategorija: brusenje-i-abrazivi
 podtema: granulacije
 tip: osnovni-vodic
@@ -122,14 +122,18 @@ status:
   pisanje: napisano
   tehnickaProvera: provereno
   jezickaProvera: provereno
-napomenaProvere: "urednička provera (AI-asistirana) 2026-10-08: otvoreni svi izvori (Multi Green V08, Multi Black Rapid V01, 2K Filler Vario Plus V 01, P 2A41 07/2026, 20-22 06/2023, baslac Putty application metal, Mazda 51K blend 03/2025, katalozi Carsystem 2026/27 i C.A.R.FIT 2026, FEPA, ISO 6344-2/-3); granulacije se poklapaju; ispravljeno: uvodni pasus više ne uopštava vrednosti jednog proizvoda na sve kitove i punioce, raspon ProFlex Jupiter Soft H₂O dopunjen (P2500–P4000)."
+napomenaProvere: "dorada 2026-11-01 (Saveti i podrška): naslov usklađen sa temom „izbor abraziva za posao“ (adresa ista); uslovi izdvojeni u okvir na vrhu (bez novih tvrdnji); granulacije ponovo upoređene sa PDF-om Multi Green V08 (P80–P240), Multi Black Rapid V01 (P120–P180, P240–P320) i 2K Filler Vario Plus (P320–P600, P800–P1200). Ranije: urednička provera (AI-asistirana) 2026-10-08: otvoreni svi izvori (Multi Green V08, Multi Black Rapid V01, 2K Filler Vario Plus V 01, P 2A41 07/2026, 20-22 06/2023, baslac Putty application metal, Mazda 51K blend 03/2025, katalozi Carsystem 2026/27 i C.A.R.FIT 2026, FEPA, ISO 6344-2/-3); granulacije se poklapaju; ispravljeno: uvodni pasus više ne uopštava vrednosti jednog proizvoda na sve kitove i punioce, raspon ProFlex Jupiter Soft H₂O dopunjen (P2500–P4000)."
 strucnaPotvrda:
   potrebna: false
   status: nije-potrebno
 poslednjaProvera: 2026-10-08
 ponovniPregled: 2027-04-08
 ---
-Granulacija se ne bira napamet, nego prema materijalu koji brusite i fazi rada, a vrednost daje tehnički list tog materijala. Primeri iz našeg programa: za kit Carsystem Multi Green tehnički list navodi prvo brušenje granulacijama od P80 do P240[^cs-multi-green-tds], za punilac Carsystem 2K Filler Vario Plus od P320 do P600 na suvo[^cs-vario-plus-tds], a baslac postupak utapanja za stari lak oko popravke P1000/P2000[^baslac-blend-51k]. Što je broj posle slova P veći, zrno je sitnije i trag brušenja finiji.
+Abraziv se bira prema materijalu koji brusite i fazi rada, a granulaciju daje tehnički list tog materijala, ne disk. Primeri iz našeg programa: za kit Carsystem Multi Green tehnički list navodi prvo brušenje granulacijama od P80 do P240[^cs-multi-green-tds], za punilac Carsystem 2K Filler Vario Plus od P320 do P600 na suvo[^cs-vario-plus-tds], a baslac postupak utapanja za stari lak oko popravke P1000/P2000[^baslac-blend-51k]. Što je broj posle slova P veći, zrno je sitnije i trag brušenja finiji.
+
+> [!upozorenje] Raspon granulacija sa jednog proizvoda ne prenosite na drugi: svaki kit i punilac ima svoj, u svom tehničkom listu.
+>
+> Na sledeću, finiju granulaciju prelazite tek kada su uklonjeni tragovi prethodne. Kit traži grubo izbrušenu podlogu, pa previše fino brušenje ispod kita slabi prianjanje.
 
 ## Šta znači oznaka P
 
@@ -137,9 +141,11 @@ Slovo P ispred broja pokazuje da je granulacija abraziva na podlozi (papir, film
 
 Za praksu je dovoljno znati dve stvari. Prvo, isti broj sa slovom P kod različitih proizvođača označava istu klasu granulacije, pa se diskovi mogu porediti po oznaci. Drugo, broj bez slova P ne mora da znači isto. Kod sunđerastih abraziva Carsystem, na primer, piše „Grit 3000“ i „Grit 6000 +“, bez slova P[^cs-katalog-2026]. Takvu oznaku poredite samo unutar istog proizvođača.
 
-## Koje granulacije postoje u programu
+## Koji abrazivi postoje u programu
 
 Raspon granulacija pokazuje za šta je abraziv namenjen. U katalogu Carsystem disk F.19 od 150 mm postoji od P80 do P800, keramički F.23 od P80 do P800, papirni P.25 Ceramic od P40 do P600, a F.19 Finish od P1000 do P2000 za utapanje, matiranje i uklanjanje grešaka[^cs-katalog-2026]. ProFlex Jupiter Soft H₂O postoji od P2500 do P4000 i namenjen je mokrom završnom brušenju pre poliranja[^cs-katalog-2026]. U katalogu C.A.R.FIT papirni Gold Paper Disc postoji od P40 do P500, a filmski Red Film Disc od P60 do P2000[^carfit-katalog-2026].
+
+Kada birate između papira, filma i mrežastog abraziva, ili između običnog i keramičkog zrna, pogledajte vodiče [Mrežasti abrazivi ili papir sa rupama](/vodici/mrezasti-abrazivi-ili-papir-sa-rupama) i [Keramički abrazivi](/vodici/keramicki-abrazivi).
 
 ## Granulacija po fazi rada
 

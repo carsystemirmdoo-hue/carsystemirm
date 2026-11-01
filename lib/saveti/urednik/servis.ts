@@ -25,6 +25,7 @@ import {
   slugIzNaslova,
   stanjeClanka,
   terminIzUnosa,
+  razlogNeprihvatljivogPotpisnika,
 } from "@/lib/saveti/urednik/stanje.mjs";
 
 /**
@@ -632,6 +633,8 @@ export async function zabeleziStrucnuPotvrdu(
   const uloga = unos.uloga.trim();
   const obuhvat = unos.obuhvat.trim();
   if (!strucnjak) throw new SavetiError("strucna-potvrda", "Unesite ime stručnjaka koji je potvrdio tekst.");
+  const neprihvatljiv = razlogNeprihvatljivogPotpisnika(strucnjak);
+  if (neprihvatljiv) throw new SavetiError("strucna-potvrda", neprihvatljiv);
   if (!uloga) throw new SavetiError("strucna-potvrda", "Unesite stručnost ili funkciju stručnjaka.");
   if (!obuhvat) throw new SavetiError("strucna-potvrda", "Upišite šta je stručnjak potvrdio.");
   if (!/^\d{4}-\d{2}-\d{2}$/.test(unos.datum)) throw new SavetiError("strucna-potvrda", "Unesite datum potvrde.");

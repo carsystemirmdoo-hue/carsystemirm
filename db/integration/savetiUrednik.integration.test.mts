@@ -195,6 +195,7 @@ test("stručna potvrda: zaseban uslov pre odobrenja, vezan za tačnu verziju; za
   await s.posaljiNaPregled(u, cetvrti);
   await assert.rejects(s.odobri(u, cetvrti, 1), /stručnu potvrdu/);
   await assert.rejects(s.zabeleziStrucnuPotvrdu(u, cetvrti, { verzijaBroj: 1, strucnjak: "", uloga: "x", datum: "2026-10-30", obuhvat: "x" }), /ime stručnjaka/);
+  await assert.rejects(s.zabeleziStrucnuPotvrdu(u, cetvrti, { verzijaBroj: 1, strucnjak: "Tehnička podrška", uloga: "x", datum: "2026-10-30", obuhvat: "x" }), /imenovana osoba/);
   await s.zabeleziStrucnuPotvrdu(u, cetvrti, { verzijaBroj: 1, strucnjak: "Sintetički Stručnjak", uloga: "lice za BZR", datum: "2026-10-30", obuhvat: "Ceo tekst." });
   await s.odobri(u, cetvrti, 1);
   // Izmena teksta poništava i odobrenje i stručnu potvrdu.

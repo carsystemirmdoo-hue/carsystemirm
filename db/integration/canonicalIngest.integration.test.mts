@@ -466,11 +466,6 @@ test("nijedna API ruta ne postoji van izričito dozvoljenog spiska", async (t) =
      */
     "saveti/objava/route.ts",
     /*
-     * „Saveti i vodiči“: javno stanje biblioteke za meni — samo broj objavljenih članaka
-     * (bez naslova, nacrta i termina). Ne prima parametre, ne čita sesiju, ništa ne upisuje.
-     */
-    "saveti/stanje/route.ts",
-    /*
      * Automatsko osvežavanje zahteva: vraćaju samo otisak (md5 oznaka verzija),
      * ne podatke. Kupac — samo sopstvena firma iz sesije; kancelarija — opseg
      * korisnika i sposobnost view:zahtevi. Ništa ne pišu, nikad se ne keširaju.

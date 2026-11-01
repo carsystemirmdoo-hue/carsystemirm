@@ -31,7 +31,7 @@ ovoga **nije uključeno** dok vlasnik ne odobri svaki korak ispod.
 Najjednostavniji pouzdan način, bez zakazanog posla i bez novog servisa:
 
 1. **Javni upit sam proverava termin.** `lib/saveti/index.ts` prikazuje zakazanu, odobrenu verziju čim termin prođe, tako što ga poredi sa trenutkom generisanja strane.
-2. **Strane se obnavljaju na 60 sekundi** (ISR): `/vodici`, članci, teme, feed, stranice programa i `/api/saveti/stanje` za meni. Članak je javan najkasnije oko minut posle termina. Lokalna proba: 5 s posle termina.
+2. **Strane se obnavljaju na 60 sekundi** (ISR): `/vodici`, članci, teme, feed, stranice programa i `/vodici/stanje.json` za meni. Članak je javan najkasnije oko minut posle termina. Lokalna proba: 5 s posle termina.
 3. **Radnje u panelu osvežavaju strane odmah**: objava odmah, objava izmena i povlačenje.
 4. **Objava se naknadno upisuje** (javna verzija, događaj, revizija) pri svakom otvaranju panela i pre svake radnje nad člankom.
    - Ruta `/api/saveti/objava` radi isto, ali nije uslov objave i zakazani posao (cron) nije uključen.

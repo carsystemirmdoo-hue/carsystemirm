@@ -44,7 +44,7 @@ const poruka = (error: unknown) => (error instanceof SavetiError ? error.message
 
 /** Javne strane koje prikazuju članke ili veze ka njima (biblioteka, stranice programa, meni). */
 function osveziJavno(slug?: string) {
-  for (const path of ["/vodici", "/vodici/novosti", "/vodici/feed", "/sitemap.xml", "/api/saveti/stanje"]) revalidatePath(path);
+  for (const path of ["/vodici", "/vodici/novosti", "/vodici/feed", "/sitemap.xml", "/vodici/stanje.json"]) revalidatePath(path);
   if (slug) revalidatePath(`/vodici/${slug}`);
   revalidatePath("/vodici/kategorije/[slug]", "page");
   revalidatePath("/program/[slug]", "page");

@@ -35,7 +35,7 @@ export async function GET(request: Request) {
   }
   const izvestaj = await uskladiDospeleObjave(new Date());
   if (izvestaj.objavljeno.length) {
-    for (const path of ["/vodici", "/vodici/novosti", "/vodici/feed", "/sitemap.xml", "/api/saveti/stanje"]) revalidatePath(path);
+    for (const path of ["/vodici", "/vodici/novosti", "/vodici/feed", "/sitemap.xml", "/vodici/stanje.json"]) revalidatePath(path);
     revalidatePath("/vodici/[slug]", "page");
     revalidatePath("/vodici/kategorije/[slug]", "page");
     revalidatePath("/program/[slug]", "page");

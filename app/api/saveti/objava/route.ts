@@ -1,31 +1,20 @@
 import { timingSafeEqual } from "node:crypto";
 import { revalidatePath } from "next/cache";
-import { getSavetiRaspored, getSavetiSlotReport, savetiNow } from "@/lib/saveti";
-import { daysBetween, formatZonedIso, zonedCalendarDate } from "@/lib/saveti/vreme.mjs";
+import { uskladiDospeleObjave } from "@/lib/saveti/urednik/servis";
 
 /**
- * Zakazani posao rubrike „Saveti i vodiči“ (Vercel Cron, vidi vercel.json).
+ * Usklađivanje objava rubrike „Saveti i vodiči“ (NIJE uslov objave).
  *
- * Posao NE objavljuje i NE menja nijedan podatak. Objava je čista funkcija
- * stanja u repozitorijumu i vremena (lib/saveti/objava.mjs), pa se članak
- * pojavljuje i bez ovog posla — najkasnije kada istekne ISR period strane.
- * Posao samo:
- *   1. ciljano osvežava keš rubrike u terminu (spisak, novosti, kategorije,
- *      feed, sitemap i stranu članka, uključujući eventualno keširan 404);
- *   2. evidentira u logu šta je u terminima poslednja 4 dana objavljeno,
- *      preskočeno ili čeka, i zašto.
+ * Zakazan članak je javan od svog termina bez ovog poziva: javni upit poredi termin sa trenutkom
+ * generisanja strane, a strane se obnavljaju na 60 s (lib/saveti/index.ts). Ruta samo upisuje
+ * objave za termine koji su prošli (javna verzija, događaj, revizija) i odmah osvežava strane.
+ * Isto usklađivanje radi i panel pri svakom otvaranju i radnji, pa zakazani posao nije potreban;
+ * ako se ikad uključi (Vercel Cron, posebna odluka), poziv je bezbedan za ponavljanje.
  *
- * Ponovljeno ili zakasnelo pokretanje je bezbedno: isti ulaz daje isti
- * izveštaj, a osvežavanje keša je idempotentno. Vercel ne ponavlja neuspeo
- * poziv; zato prozor obuhvata i prethodne termine.
- *
- * Zaštita: `Authorization: Bearer <CRON_SECRET>`. Bez podešene tajne ruta
- * odbija svaki poziv (fail closed).
+ * Zaštita: `Authorization: Bearer <CRON_SECRET>`. Bez podešene tajne ruta odbija svaki poziv.
  */
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
-
-const WINDOW_DAYS = 4;
 
 function authorized(request: Request) {
   const secret = process.env.CRON_SECRET;
@@ -44,46 +33,13 @@ export async function GET(request: Request) {
   if (!auth.ok) {
     return Response.json({ ok: false, razlog: auth.razlog }, { status: auth.status, headers: { "Cache-Control": "no-store" } });
   }
-
-  const now = savetiNow();
-  const { podesavanja: config, termini } = getSavetiRaspored();
-  const full = new URL(request.url).searchParams.get("pregled") === "sve";
-
-  // Termini od (danas − WINDOW_DAYS) do danas, po lokalnom kalendaru.
-  const today = zonedCalendarDate(now, config.vremenskaZona);
-  const elapsed = daysBetween(config.pocetniDatum, today);
-  const toIndex = Math.floor(elapsed / config.razmakDana);
-  const fromIndex = Math.max(0, Math.ceil((elapsed - WINDOW_DAYS) / config.razmakDana));
-  const lastPlanned = Math.max(-1, ...termini.map((slot) => slot.redniBroj));
-  const report = full
-    ? getSavetiSlotReport(now, 0, Math.max(lastPlanned, toIndex))
-    : toIndex >= 0
-      ? getSavetiSlotReport(now, fromIndex, toIndex).filter((row) => Date.parse(row.trenutak) <= now.getTime())
-      : [];
-
-  // Osvežavanje keša: spiskovi uvek, članci iz prozora pojedinačno.
-  const paths = new Set(["/vodici", "/vodici/novosti", "/vodici/feed", "/sitemap.xml"]);
-  for (const row of report) {
-    if (row.slug && (row.stanje === "objavljen" || row.stanje === "povucen")) paths.add(`/vodici/${row.slug}`);
+  const izvestaj = await uskladiDospeleObjave(new Date());
+  if (izvestaj.objavljeno.length) {
+    for (const path of ["/vodici", "/vodici/novosti", "/vodici/feed", "/sitemap.xml", "/api/saveti/stanje"]) revalidatePath(path);
+    revalidatePath("/vodici/[slug]", "page");
+    revalidatePath("/vodici/kategorije/[slug]", "page");
+    revalidatePath("/program/[slug]", "page");
+    console.info(`[saveti] upisane objave: ${izvestaj.objavljeno.join(", ")}`);
   }
-  for (const path of paths) revalidatePath(path);
-  revalidatePath("/vodici/kategorije/[slug]", "page");
-
-  const summary = {
-    ok: true,
-    vreme: formatZonedIso(now, config.vremenskaZona),
-    rasporedAktivan: config.aktivan,
-    pauzaOd: config.pauzaOd,
-    termini: report.map((row) => ({
-      redniBroj: row.redniBroj,
-      datum: row.datum,
-      clanak: row.clanak,
-      stanje: row.stanje,
-      razlog: row.razlog,
-    })),
-    osvezeno: [...paths],
-  };
-  // Jedan red po pokretanju — čitljiv u Vercel logovima, bez tajni i ličnih podataka.
-  console.info(`[saveti:objava] ${JSON.stringify({ ...summary, osvezeno: summary.osvezeno.length })}`);
-  return Response.json(summary, { headers: { "Cache-Control": "no-store" } });
+  return Response.json({ ok: true, ...izvestaj }, { headers: { "Cache-Control": "no-store" } });
 }

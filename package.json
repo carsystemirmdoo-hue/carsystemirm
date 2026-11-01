@@ -295,7 +295,7 @@
     "connector:smoke:package": "npm run connector:build && node connector/scripts/package-smoke.mjs",
     "connector:smoke:verify": "node connector/scripts/verify-smoke-package.mjs",
     "connector:e2e": "npm run connector:build && tsx --test --test-concurrency=1 --tsconfig db/integration/tsconfig.test.json db/integration/connectorEndToEnd.integration.test.mts",
-    "test:saveti": "node --test lib/saveti/*.test.mjs",
+    "test:saveti": "node --test lib/saveti/*.test.mjs lib/saveti/urednik/*.test.mjs",
     "saveti:build": "tsx --tsconfig tsconfig.json scripts/saveti/build-saveti.mts",
     "saveti:check": "tsx --tsconfig tsconfig.json scripts/saveti/build-saveti.mts --check",
     "saveti:plan": "tsx --tsconfig tsconfig.json scripts/saveti/plan-saveti.mts",

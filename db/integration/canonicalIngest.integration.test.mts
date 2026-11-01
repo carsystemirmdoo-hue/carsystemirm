@@ -459,12 +459,17 @@ test("nijedna API ruta ne postoji van izričito dozvoljenog spiska", async (t) =
      */
     "kupac/sesija/route.ts",
     /*
-     * „Saveti i vodiči“: zakazano osvežavanje keša rubrike (docs/saveti/README.md).
-     * Bez `CRON_SECRET` (najmanje 16 znakova) odbija svaki poziv (503), sa pogrešnom
-     * tajnom 401; ne čita bazu ni sesiju, ništa ne upisuje — samo revalidatePath i
-     * izveštaj o terminima iz repozitorijuma. Cron u vercel.json još nije uključen.
+     * „Saveti i vodiči“: usklađivanje objava (docs/saveti/UREDNIK_PRODUKCIJA.md). Bez
+     * `CRON_SECRET` (najmanje 16 znakova) odbija svaki poziv (503), sa pogrešnom tajnom 401.
+     * Sa tajnom upisuje objave za termine koji su već prošli (isto što panel radi pri svakoj
+     * radnji) i osvežava keš. Nije uslov objave; cron u vercel.json nije uključen.
      */
     "saveti/objava/route.ts",
+    /*
+     * „Saveti i vodiči“: javno stanje biblioteke za meni — samo broj objavljenih članaka
+     * (bez naslova, nacrta i termina). Ne prima parametre, ne čita sesiju, ništa ne upisuje.
+     */
+    "saveti/stanje/route.ts",
     /*
      * Automatsko osvežavanje zahteva: vraćaju samo otisak (md5 oznaka verzija),
      * ne podatke. Kupac — samo sopstvena firma iz sesije; kancelarija — opseg

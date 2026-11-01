@@ -12,7 +12,8 @@ import {
   getCarsystemProductBySlug,
   type CarsystemProduct,
 } from "@/lib/carsystem-data";
-import { getPublicSavetBySlug } from "@/lib/saveti";
+import { PROGRAM_LINKS } from "@/components/layout/navigation-data";
+import { getPublicSaveti, type SavetiClanak } from "@/lib/saveti";
 import { sourceKey } from "@/lib/sistemi/keys";
 import type {
   ResolvedGuide,
@@ -88,14 +89,17 @@ export function resolveProduct(slug: string): ResolvedProduct | null {
 }
 
 /** Vodič se povezuje samo kada je javno objavljen; neobjavljen vodič se ne pominje. */
-export function resolveGuide(slug: string): ResolvedGuide | null {
-  const savet = getPublicSavetBySlug(slug);
+export function resolveGuide(slug: string, published: Map<string, SavetiClanak>): ResolvedGuide | null {
+  const savet = published.get(slug);
   if (!savet) return null;
   return { slug, title: savet.naslov, href: `/vodici/${slug}` };
 }
 
-/** Svi proizvodi, izvori i vodiči na koje sadržaj upućuje, razrešeni jednom. */
-export function collectReferences(content: SistemiContent) {
+/**
+ * Svi proizvodi, izvori i vodiči na koje sadržaj upućuje, razrešeni jednom. Vodiči se čitaju iz
+ * baze (samo objavljeni u trenutku generisanja strane; strana programa se obnavlja na 60 s).
+ */
+export async function collectReferences(content: SistemiContent) {
   const productSlugs = new Set<string>();
   const sourceRefs = new Map<string, SourceRef>();
   const guideSlugs = new Set<string>();
@@ -133,10 +137,43 @@ export function collectReferences(content: SistemiContent) {
     const source = resolveSource(ref);
     if (source) sources[key] = source;
   }
+  const published = new Map((guideSlugs.size ? await getPublicSaveti() : []).map((savet) => [savet.slug, savet]));
   const guides: Record<string, ResolvedGuide> = {};
   for (const slug of guideSlugs) {
-    const guide = resolveGuide(slug);
+    const guide = resolveGuide(slug, published);
     if (guide) guides[slug] = guide;
   }
   return { products, sources, guides };
+}
+
+export type ProgramVeza = { href: string; program: string; odeljak: string; naslov: string };
+
+/**
+ * Mesta na stranicama programa koja upućuju na vodič (posao, materijal ili česta greška).
+ * Članak tako vodi nazad na isti posao bez ponavljanja sadržaja programa; veza ide na odeljak
+ * stranice (#poslovi, #materijali, #greske), jer se kartice biraju na samoj stranici.
+ */
+export function programiZaVodic(guideSlug: string): ProgramVeza[] {
+  const out: ProgramVeza[] = [];
+  const seen = new Set<string>();
+  const add = (programSlug: string, anchor: string, odeljak: string, naslov: string) => {
+    const key = `${programSlug}|${anchor}|${naslov}`;
+    if (seen.has(key)) return;
+    seen.add(key);
+    const href = `/program/${programSlug}`;
+    const program = PROGRAM_LINKS.find((link) => link.href === href)?.title ?? programSlug;
+    out.push({ href: `${href}#${anchor}`, program, odeljak, naslov });
+  };
+  for (const [programSlug, content] of Object.entries(CONTENT)) {
+    for (const job of content.jobs) {
+      if (job.guides?.includes(guideSlug) || job.steps.some((step) => step.guides?.includes(guideSlug))) add(programSlug, "poslovi", "Postupak", job.title);
+    }
+    for (const material of content.materials) {
+      if (material.guides?.includes(guideSlug)) add(programSlug, "materijali", "Izbor materijala", material.title ?? material.label);
+    }
+    for (const problem of content.problems) {
+      if (problem.guides?.includes(guideSlug)) add(programSlug, "greske", "Česta greška", problem.title);
+    }
+  }
+  return out;
 }

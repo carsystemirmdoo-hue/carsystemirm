@@ -17,6 +17,7 @@
 
 import { drizzle } from "drizzle-orm/postgres-js";
 import { migrate } from "drizzle-orm/postgres-js/migrator";
+import { proveriRedosled } from "../../db/migrationOrder.mjs";
 import postgres from "postgres";
 import {
   BUSINESS_TABLES,
@@ -70,6 +71,7 @@ try {
     }
   }
 
+  await proveriRedosled(sql, "./db/migrations");
   await migrate(drizzle(sql), { migrationsFolder: "./db/migrations" });
   console.log("Migracije su primenjene.");
 

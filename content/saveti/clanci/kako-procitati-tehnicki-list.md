@@ -60,14 +60,18 @@ status:
   pisanje: napisano
   tehnickaProvera: provereno
   jezickaProvera: provereno
-napomenaProvere: "urednička provera (AI-asistirana) 2026-10-08: otvoreni R-M C 2A40 (07/2026), baslac 40-100 (06/2026) i Carsystem Multi Green V08 11/2024; 5 % A 2210, MIXINGBASE W, 1:1 + 20 %, 25 min, 2 sloja, 3 min, 40–50 µm, 3 h / 25 min / 15 min sa 50-420 i P80–P240 odgovaraju izvorima. Ispravljeno: nazivi odeljaka Multi Green lista usklađeni sa dokumentom (nema zasebnog odeljka Storage), P80–P240 označeno kao prvo brušenje, napomena o senzorima citirana i za R-M, „ne po suštini“ i tvrdnja o jeziku listova ublažene."
+napomenaProvere: "dorada 2026-11-01 (Saveti i podrška): uvod skraćen u kratak odgovor; uslovi i upozorenja iz teksta izdvojeni u okvir na vrhu (bez novih tvrdnji); vrednosti ponovo upoređene sa PDF-om R-M C 2A40 07/2026, baslac 40-100 06/2026 i Carsystem Multi Green V08 (5 % A 2210, 1:1 + 20 %, 25 min, 3 min, 40–50 µm, 3 h / 25 min, P80–P240). Ranije: urednička provera (AI-asistirana) 2026-10-08: otvoreni R-M C 2A40 (07/2026), baslac 40-100 (06/2026) i Carsystem Multi Green V08 11/2024; 5 % A 2210, MIXINGBASE W, 1:1 + 20 %, 25 min, 2 sloja, 3 min, 40–50 µm, 3 h / 25 min / 15 min sa 50-420 i P80–P240 odgovaraju izvorima. Ispravljeno: nazivi odeljaka Multi Green lista usklađeni sa dokumentom (nema zasebnog odeljka Storage), P80–P240 označeno kao prvo brušenje, napomena o senzorima citirana i za R-M, „ne po suštini“ i tvrdnja o jeziku listova ublažene."
 strucnaPotvrda:
   potrebna: false
   status: nije-potrebno
 poslednjaProvera: 2026-10-08
 ponovniPregled: 2027-04-08
 ---
-Tehnički list (TDS, engl. *technical data sheet*) je dokument proizvođača koji opisuje za šta je proizvod namenjen i kako se priprema, nanosi i suši. Pre rada se čita redom kojim teče posao: namena i podloge, napomene, mešanje, nanošenje, sušenje i dalja obrada. Pre svega toga proverite da li je list za tačno Vaš proizvod i koja je verzija. Vrednosti važe samo za taj proizvod i navedene uslove i ne prenose se na drugi materijal.
+Tehnički list (TDS, engl. *technical data sheet*) je dokument proizvođača koji opisuje za šta je proizvod namenjen i kako se priprema, nanosi i suši. Prvo proverite da je list za tačno Vaš proizvod i koja je verzija, a zatim ga čitajte redom kojim teče posao: namena i podloge, napomene, mešanje, nanošenje, sušenje i dalja obrada.
+
+> [!upozorenje] Vrednosti iz tehničkog lista važe samo za taj proizvod, navedenu verziju dokumenta i navedene uslove (temperaturu, učvršćivač). Ne prenose se na sličan proizvod.
+>
+> Ako neki podatak u listu ne postoji, to ne znači da ograničenje ne postoji: pitajte prodavca ili proizvođača. Za zaštitu, skladištenje i otpad čita se bezbednosni list, a kod popravki vozila važe i uputstva proizvođača vozila.
 
 ## Šta se nalazi u tehničkom listu
 

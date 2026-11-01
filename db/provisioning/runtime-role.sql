@@ -98,6 +98,14 @@ BEGIN
   END IF;
 END $$;
 
+--    Saveti i vodiči (0058): verzije, događaji, objave i slike se samo dodaju (štiti ih i okidač);
+--    članak i zakazivanje se menjaju, ali ne brišu (povlačenje i otkazivanje su oznake).
+REVOKE UPDATE, DELETE, TRUNCATE ON saveti_verzije, saveti_dogadjaji, saveti_objave, saveti_slike FROM :runtime_role;
+GRANT SELECT, INSERT ON saveti_verzije, saveti_dogadjaji, saveti_objave, saveti_slike TO :runtime_role;
+REVOKE DELETE, TRUNCATE ON saveti_clanci, saveti_zakazivanja, saveti_adrese FROM :runtime_role;
+GRANT SELECT, INSERT, UPDATE ON saveti_clanci, saveti_zakazivanja TO :runtime_role;
+GRANT SELECT, INSERT ON saveti_adrese TO :runtime_role;
+
 --    Poslovni status kupca (0042): odluke se samo dodaju; važi poslednja.
 REVOKE UPDATE, DELETE, TRUNCATE ON customer_commercial_status_decisions FROM :runtime_role;
 GRANT SELECT, INSERT ON customer_commercial_status_decisions TO :runtime_role;

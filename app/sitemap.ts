@@ -33,7 +33,7 @@ const staticRoutes = [
  */
 export const revalidate = 3600;
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const brandRoutes = getListedCarsystemBrands().map((brand) => `/brendovi/${brand.slug}`);
   const programRoutes = getAllPublicProgramGroups().map((program) => `/program/${program.slug}`);
   const products = getAllCarsystemProducts();
@@ -56,7 +56,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   // Saveti i vodiči: samo javni članci (kapija objave u ovom trenutku), sa
   // stvarnim datumom poslednje izmene. Indeks rubrike, novosti i kategorije
   // ulaze tek kada imaju sadržaj — prazan spisak nije strana za indeks.
-  const saveti = getPublicSaveti();
+  const saveti = await getPublicSaveti();
   const savetiEntries: MetadataRoute.Sitemap = saveti.map((clanak) => ({
     url: absoluteUrl(`/vodici/${clanak.slug}`),
     lastModified: clanak.datumIzmene,

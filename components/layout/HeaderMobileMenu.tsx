@@ -9,7 +9,7 @@ import {
   BRAND_LINKS,
   type HeaderMenuKey,
   PRODUCT_CATEGORIES,
-  SYSTEM_GROUPS,
+  type SupportMenuGroup,
 } from "@/components/layout/navigation-data";
 import styles from "./HeaderMobileMenu.module.css";
 
@@ -34,7 +34,9 @@ export type HeaderMobileMenuProps = {
   onNavigate: () => void;
   onSearch: () => void;
   pathname: string;
-  active: Record<"product" | "brand" | "system" | "store" | "katalozi" | "saveti" | "support", boolean>;
+  active: Record<"product" | "brand" | "system" | "store", boolean>;
+  /** Grupe menija „Saveti i podrška“ (bez „Saveti i vodiči“ dok nema objavljenog članka). */
+  supportGroups: SupportMenuGroup[];
 };
 
 export function HeaderMobileMenu({
@@ -49,6 +51,7 @@ export function HeaderMobileMenu({
   onSearch,
   pathname,
   active,
+  supportGroups,
 }: HeaderMobileMenuProps) {
   return (
     <div className={styles.mobileLayer}>
@@ -150,25 +153,34 @@ export function HeaderMobileMenu({
             <li>
               <MobileAccordion
                 id={sectionIds.sistemi}
-                label="Sistemi i programi"
+                label="Saveti i podrška"
                 active={active.system}
                 open={openSection === "sistemi"}
                 onToggle={() => onToggleSection("sistemi")}
               >
-                <MobileMenuLink
-                  href="/program"
-                  label="Svi programi"
-                  active={pathname === "/program"}
-                  onNavigate={onNavigate}
-                />
-                {SYSTEM_GROUPS.flatMap((group) => group.links).map((link) => (
-                  <MobileMenuLink
-                    key={`${link.href}-${link.title}`}
-                    href={link.href}
-                    label={link.title}
-                    active={isMenuLinkActive(link.href, pathname)}
-                    onNavigate={onNavigate}
-                  />
+                {supportGroups.map((group) => (
+                  <li key={group.key} className={styles.mobileSubgroup}>
+                    <p className={styles.mobileSubgroupLabel}>{group.title}</p>
+                    <ul>
+                      {group.key === "materijali" ? (
+                        <MobileMenuLink
+                          href="/program"
+                          label="Svi programi"
+                          active={pathname === "/program"}
+                          onNavigate={onNavigate}
+                        />
+                      ) : null}
+                      {group.links.map((link) => (
+                        <MobileMenuLink
+                          key={`${group.key}-${link.href}`}
+                          href={link.href}
+                          label={link.title}
+                          active={isMenuLinkActive(link.href, pathname)}
+                          onNavigate={onNavigate}
+                        />
+                      ))}
+                    </ul>
+                  </li>
                 ))}
               </MobileAccordion>
             </li>
@@ -176,27 +188,6 @@ export function HeaderMobileMenu({
               href="/prodavnice"
               label="Prodavnice"
               active={active.store}
-              primary
-              onNavigate={onNavigate}
-            />
-            <MobileMenuLink
-              href="/katalozi"
-              label="Katalozi"
-              active={active.katalozi}
-              primary
-              onNavigate={onNavigate}
-            />
-            <MobileMenuLink
-              href="/vodici"
-              label="Saveti i vodiči"
-              active={active.saveti}
-              primary
-              onNavigate={onNavigate}
-            />
-            <MobileMenuLink
-              href="/kontakt?tema=tehnicka-podrska"
-              label="Podrška"
-              active={active.support}
               primary
               onNavigate={onNavigate}
             />

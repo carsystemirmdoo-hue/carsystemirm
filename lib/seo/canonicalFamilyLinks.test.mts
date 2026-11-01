@@ -81,10 +81,11 @@ test("svaka varijanta svake variant-pdp porodice (i buduće) linkuje kanonsko od
   assert.ok(checked > 700, `proveravano ${checked}`);
 });
 
-test("sitemap sadrži samo kanonske entitete", () => {
-  const mod = sitemapModule as unknown as { default: (() => { url: string }[]) | { default: () => { url: string }[] } };
+test("sitemap sadrži samo kanonske entitete", async () => {
+  type Sitemap = () => Promise<{ url: string }[]> | { url: string }[];
+  const mod = sitemapModule as unknown as { default: Sitemap | { default: Sitemap } };
   const sitemap = typeof mod.default === "function" ? mod.default : mod.default.default;
-  const urls = sitemap().map((entry) => new URL(entry.url).pathname);
+  const urls = (await sitemap()).map((entry) => new URL(entry.url).pathname);
   const redirecting = new Set(
     getAllCarsystemProducts().filter((item) => variantRedirectTarget(item)).map((item) => `/proizvodi/${item.slug}`),
   );

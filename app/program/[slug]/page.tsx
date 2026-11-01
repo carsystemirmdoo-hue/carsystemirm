@@ -24,6 +24,9 @@ type ProgramRouteProps = {
   params: Promise<{ slug: string }>;
 };
 
+// Veze ka vodičima se prikazuju samo za objavljene članke (baza), pa se strana obnavlja na 60 s.
+export const revalidate = 60;
+
 export function generateStaticParams() {
   return getAllPublicProgramGroups().map((program) => ({ slug: program.slug }));
 }

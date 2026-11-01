@@ -3,9 +3,8 @@ import Link from "next/link";
 import { Footer } from "@/components/layout/Footer";
 import { SavetiNewsItem } from "@/components/saveti/SavetiCards";
 import { SavetiExplorer } from "@/components/saveti/SavetiExplorer";
-import { SavetiNacrtTraka } from "@/components/saveti/SavetiNacrtTraka";
 import styles from "@/components/saveti/Saveti.styles";
-import { getPublicKategorije, getPublicNovosti, getPublicSaveti, savetiNacrtPregled, toSazetak } from "@/lib/saveti";
+import { getPublicKategorije, getPublicNovosti, getPublicSaveti, toSazetak } from "@/lib/saveti";
 import { breadcrumbJsonLd, collectionPageJsonLd, jsonLd, pageMetadata } from "@/lib/seo";
 
 /**
@@ -18,25 +17,25 @@ import { breadcrumbJsonLd, collectionPageJsonLd, jsonLd, pageMetadata } from "@/
  *
  * Dok nema nijednog objavljenog teksta, strana je `noindex` i nije u sitemapu.
  */
-export const revalidate = 3600;
+export const revalidate = 60; // = SAVETI_REVALIDATE_SECONDS (Next traži doslovnu vrednost)
 
 const TITLE = "Saveti i vodiči za auto lakiranje";
 const DESCRIPTION =
   "Stručni vodiči o pripremi površine, materijalima, opremi, sušenju i greškama pri lakiranju, uz proverene novosti proizvođača iz našeg programa.";
 
 export async function generateMetadata(): Promise<Metadata> {
-  const published = getPublicSaveti();
+  const published = await getPublicSaveti();
   return pageMetadata({
     title: TITLE,
     description: DESCRIPTION,
     path: "/vodici",
-    index: published.length > 0 && !savetiNacrtPregled(),
+    index: published.length > 0,
     imageAlt: "Carsystem i R-M saveti i vodiči",
   });
 }
 
-export default function SavetiIndexPage() {
-  const published = getPublicSaveti();
+export default async function SavetiIndexPage() {
+  const published = await getPublicSaveti();
   const news = getPublicNovosti(published).slice(0, 3).map(toSazetak);
   const guides = published.filter((clanak) => clanak.tip !== "novost");
   const categories = getPublicKategorije(guides);
@@ -64,7 +63,6 @@ export default function SavetiIndexPage() {
         </>
       ) : null}
       <main className={styles.page}>
-        <SavetiNacrtTraka />
         <div className={styles.container}>
           <header className={styles.hero}>
             <p className={styles.eyebrow}>Stručna biblioteka</p>

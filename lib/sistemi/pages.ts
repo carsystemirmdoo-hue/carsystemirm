@@ -1,11 +1,16 @@
-import { SYSTEM_GROUPS } from "@/components/layout/navigation-data";
+import { PROGRAM_LINKS } from "@/components/layout/navigation-data";
 import type { SourceRef } from "@/lib/sistemi/types";
 
-/** Sedam stavki menija „Sistemi i programi“, istim redom kao u zaglavlju. */
+/**
+ * Podmeni sedam stranica (pet programa, tehnički listovi, B2B). Isti redosled i nazivi kao pre
+ * objedinjavanja menija u „Saveti i podrška“ (2026-11-01).
+ */
 export function getSistemiNavLinks(): { href: string; title: string }[] {
-  return SYSTEM_GROUPS.flatMap((group) => group.links)
-    .filter((link) => !link.href.startsWith("/kontakt"))
-    .map((link) => ({ href: link.href, title: link.title }));
+  return [
+    ...PROGRAM_LINKS.map((link) => ({ href: link.href, title: link.title })),
+    { href: "/dokumentacija", title: "Katalog i tehnički listovi" },
+    { href: "/b2b-saradnja", title: "B2B saradnja" },
+  ];
 }
 
 export type SistemiPageCopy = {

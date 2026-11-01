@@ -1172,11 +1172,16 @@
   gap: 1.1rem;
 }
 
-.systemGroup {
+.systemGroup,
+.systemColumn {
   min-width: 0;
 }
 
-.systemGroup + .systemGroup {
+/* Desna kolona menija „Saveti i podrška“: vodiči, dokumentacija i podrška jedno ispod drugog. */
+.systemColumn + .systemColumn {
+  display: grid;
+  align-content: start;
+  gap: 0.75rem;
   border-left: 1px solid var(--header-border);
   padding-left: 1.1rem;
 }
@@ -1197,8 +1202,28 @@
   gap: 0.35rem;
 }
 
-.systemGroup:last-child ul {
-  grid-template-columns: 1fr;
+.systemColumn + .systemColumn .systemGroup ul {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.systemColumn + .systemColumn .systemGroup h3 {
+  min-height: 0;
+  margin-bottom: 0.3rem;
+}
+
+/* Desna kolona: samo naziv stavke (opis ostaje u nazivu linka za čitače ekrana), da meni ostane nizak. */
+.systemColumn + .systemColumn .systemLink {
+  min-height: 3.35rem;
+  padding-block: 0.5rem;
+}
+
+.systemColumn + .systemColumn .menuLinkCopy > span {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
 }
 
 .systemLink {

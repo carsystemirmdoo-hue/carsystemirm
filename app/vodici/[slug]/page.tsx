@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { notFound, permanentRedirect } from "next/navigation";
+import { ProveraJavnogClanka } from "@/components/saveti/ProveraJavnogClanka";
 import { SavetiClanakPrikaz } from "@/components/saveti/SavetiClanakPrikaz";
 import { getPublicSaveti, getPublicSavetBySlug } from "@/lib/saveti";
 import { getSavetiKategorija } from "@/lib/saveti/kategorije.mjs";
@@ -12,6 +13,7 @@ import { absoluteUrl, pageMetadata } from "@/lib/seo";
  * - `dynamicParams = true`: članak objavljen POSLE builda dobija stranu pri prvom zahtevu.
  * - Objava, „Objavite izmene“ i povlačenje osvežavaju keš strane odmah (revalidatePath);
  *   `revalidate` je rezerva.
+ * - Povučen članak se ne prikazuje ni iz keša navigacije u pregledaču (ProveraJavnogClanka).
  * - Ranija adresa (posle izričite promene) trajno preusmerava na trenutnu.
  */
 export const revalidate = 60; // = SAVETI_REVALIDATE_SECONDS (Next traži doslovnu vrednost)
@@ -52,5 +54,10 @@ export default async function SavetRoute({ params }: RouteProps) {
   const { clanak, preusmerenje } = await getPublicSavetBySlug(slug);
   if (preusmerenje) permanentRedirect(`/vodici/${preusmerenje}`);
   if (!clanak) notFound();
-  return <SavetiClanakPrikaz clanak={clanak} published={await getPublicSaveti()} />;
+  return (
+    <>
+      <ProveraJavnogClanka route={`/vodici/${clanak.slug}`} />
+      <SavetiClanakPrikaz clanak={clanak} published={await getPublicSaveti()} />
+    </>
+  );
 }

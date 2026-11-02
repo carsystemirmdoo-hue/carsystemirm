@@ -67,15 +67,41 @@ Pojmovi:
   - Pregledač koji je sliku već učitao čuva je najviše 60 s, a zatim je proverava (`max-age=60, must-revalidate` i ETag).
   - Ranije je bio dozvoljen keš od jednog dana; to je ispravljeno.
 - **Meni** u otvorenoj kartici ponovo čita `/vodici/stanje.json` pri prelasku na drugu stranu ili povratku na karticu, kada je stanje starije od 60 s. Ranije se čitalo samo pri punom učitavanju strane.
-- **Prelazak unutar sajta** (klik bez ponovnog učitavanja) može prikazati stranu koju je Next.js unapred učitao najviše 5 minuta ranije. To je podrazumevano ponašanje Next.js-a (`staleTimes.static` = 300 s) i nije izmereno posebno. Puno učitavanje i direktna adresa nemaju to kašnjenje.
+- **Prelazak unutar sajta** (klik bez ponovnog učitavanja, nazad/napred) koristi strane koje je Next.js već učitao u pregledaču. Za povlačenje je to izmereno posebno (odeljak ispod) i ispravljeno samo za stranu članka. Za zakazanu objavu, biblioteka ili program učitani pre termina mogu ostati bez veze na novi članak dok se strana ne učita ponovo; to nije mereno do kraja.
 - **`sitemap.xml`** se obnavlja na sat vremena, kao do sada za ceo sajt. Radnje u panelu ga osvežavaju odmah, a utiče samo na pretraživače.
 - **Vercel** koristi isti model (obnova u pozadini, `revalidatePath` briše keš za sve regione). Na Vercel-u nije mereno, jer Preview ove grane nema tabele 0058.
+
+### Povlačenje kod posetioca koji je članak već otvorio (izmereno 2. 11. 2026)
+
+Dve sesije: posetilac otvori biblioteku i program, klikne na članak (sa slikom) i vrati se; urednik zatim povuče članak. Skripta: `alati/povlacenje.mjs`, zapisi u `povlacenje/`.
+
+**Server prestaje da služi odmah** (prvi zahtev posle povlačenja): direktna adresa članka HTTP 404, slika HTTP 404 (`no-store`), osvežavanje strane daje 404, biblioteka i program učitani sa servera više nemaju vezu.
+
+**U pregledaču, pre ispravke:** klik na već učitanu vezu (iz biblioteke ili programa), nazad i napred prikazivali su povučen članak bez ijednog zahteva serveru, tokom celog merenja (330 s). Slika iz keša pregledača bila je vidljiva do 60 s, a zatim je server vraćao 404.
+
+**Ispravka (samo strana članka, keš ostatka sajta nepromenjen):** strana članka pri svakom prikazu pita server za svoju adresu (jedan `HEAD` zahtev, ide kroz keš strane). Ako je odgovor 404, strana se učita sa servera i prikazuje „Stranica nije pronađena“. Komponenta: `components/saveti/ProveraJavnogClanka.tsx`.
+
+**Posle ispravke:**
+
+| Korak u sesiji posetioca | Prikaz |
+|---|---|
+| klik na već učitanu vezu (biblioteka, program) | povučen tekst je kratko vidljiv dok stigne odgovor provere (lokalno oko 60 ms), zatim 404 |
+| nazad, pa napred | 404 |
+| osvežavanje | 404 |
+| biblioteka i program posle toga | učitani sa servera, bez veze na članak |
+| slika: običan zahtev iz pregledača do 60 s posle učitavanja | može doći iz keša pregledača (HTTP 200); uz proveru sa serverom 404 |
+
+Šta se ne obećava:
+
+- Sadržaj koji je posetilac već preuzeo (otvorena strana, slika u kešu pregledača, sačuvana kopija) ne može se obrisati sa njegovog uređaja.
+- Na Vercel-u trajanje kratkog prikaza zavisi od mreže posetioca i nije mereno.
+- Bez mreže provera ne uspeva, pa strana ostaje kakva je bila.
 
 ## Koraci za Production (svaki uz posebno odobrenje)
 
 1. **Kopija baze** (rezervna kopija preko GitHub Actions) i provera vraćanja, kao kod ranijih migracija.
 2. **Migracija 0058** nalogom vlasnika baze (vidi „Redosled migracija“ ispod):
-   1. `npm run db:migrate:check` sa `MIGRATION_DATABASE_URL`. Provera samo čita (transakcija READ ONLY) i ispisuje šta će biti primenjeno. Očekuje se tačno `0058_saveti_urednik`, ili `0057_…, 0058_…` redom ako je PR #25 spojen pre ove grane. Bilo koja greška znači stop.
+   1. `npm run db:migrate:check` sa `MIGRATION_DATABASE_URL`. Provera samo čita (transakcija READ ONLY) i ispisuje šta će biti primenjeno. Pre toga se ponovo proveri tadašnje stanje main-a, PR-a #25 i baze (vidi „Redosled migracija“). Očekuje se samo migracija ove grane, pod brojem koji tada važi, posle svih migracija koje su na main-u. Bilo koja greška znači stop.
    2. `npm run db:migrate`. Pravi 7 novih tabela i ne menja postojeće podatke.
    3. Prava aplikacionog naloga iz `db/provisioning/runtime-role.sql`, blok „Saveti i vodiči (0058)“.
    4. Ponovo `npm run db:migrate:check`: „nema neprimenjenih migracija“.
@@ -99,6 +125,8 @@ Stanje 1. 11. 2026:
 - **Ova grana (PR #52):** nosi `0058_saveti_urednik` (vreme 1793455200000).
 
 Drizzle primenjuje samo migracije čije je vreme u dnevniku veće od vremena poslednje primenjene. Migracija spojena kasnije, a sa ranijim vremenom, bila bi **tiho preskočena**. To je potvrđeno na privremenoj bazi: posle 0058, drizzle bez greške preskače 0057 i njene tabele ne nastaju.
+
+Ovo je stanje na dan pisanja. **Broj 0058 nije trajno rezervisan:** pre svake produkcione primene ponovo se proveravaju tadašnji main (poslednja migracija u dnevniku), PR #25 i druge otvorene grane sa migracijama, kao i baza (`npm run db:migrate:check`). Ako je u međuvremenu main dobio migraciju sa istim ili većim brojem, ova grana preimenuje svoju neprimenjenu migraciju po istom pravilu.
 
 **Pravilo:** broj i vreme migracije prate redosled spajanja u main. Već primenjena migracija i njen unos u dnevniku se nikad ne menjaju.
 

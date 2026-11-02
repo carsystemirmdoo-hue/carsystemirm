@@ -2471,11 +2471,11 @@
     {
       "src": "/products/carfit/catalog/carfit-zinc-spray.webp",
       "originalSha256": "40fe4693c0c13e9acf9ba6810113522d81475606c4050cd8de3bcff18c8cf10b",
-      "replacementSha256": "36759018c68f9f08a88e90e0d5cce866ef05b03bac6bd7654c8caed3819b7498",
+      "replacementSha256": "33fa49fb31a176188ac53634aa043da48a74fa4dd043de8047a52632031b2e0d",
       "width": 1000,
       "height": 1000,
-      "basis": "K1",
-      "approvedOn": "2026-10-27"
+      "basis": "maska 2026-11-02 — iz originala proizvođača, završne slike potvrdio vlasnik 2026-11-02",
+      "approvedOn": "2026-11-02"
     },
     {
       "src": "/products/carsystem/catalog/carsystem-2k-clear-voc-speed-plus-2.webp",
@@ -3205,6 +3205,114 @@
       "height": 1003,
       "basis": "K1 — „prethodna verzija iz poređenja“, izbor vlasnika 29.10.",
       "approvedOn": "2026-10-29"
+    },
+    {
+      "src": "/products/carfit/catalog/carfit-2k-ms-clearcoat-industrial-use.webp",
+      "originalSha256": "4d73be50e7c5716b21ceb42ec6932bb0ff4636d139e09a1e0ded069ae299a21e",
+      "replacementSha256": "cfa1937fe9caab84d9d07efb933a76db978c9b51dee728df0f86d6b5363f1780",
+      "width": 1000,
+      "height": 1000,
+      "basis": "maska 2026-11-02 — iz originala proizvođača, završne slike potvrdio vlasnik 2026-11-02",
+      "approvedOn": "2026-11-02"
+    },
+    {
+      "src": "/products/carfit/catalog/carfit-2k-ultra-hs-clearcoat.webp",
+      "originalSha256": "96cee9906303833adafc2e0f6ca5835fa6981b917ef617752c5377f6db7a2d34",
+      "replacementSha256": "2ef8f6163e1fdbf30198bd32170b453a0afb5fd5baa6e8b327f9c23769788da2",
+      "width": 1000,
+      "height": 1000,
+      "basis": "maska 2026-11-02 — iz originala proizvođača, završne slike potvrdio vlasnik 2026-11-02",
+      "approvedOn": "2026-11-02"
+    },
+    {
+      "src": "/products/carfit/catalog/carfit-multi-soft-putty.webp",
+      "originalSha256": "715241002e14ca65367efd1327660c0658d490c6b8ac6c71b5cd21d702c37144",
+      "replacementSha256": "bbdd8d263262c5bfeda20c9b1dc57647f0c698a2a2d4fb1390cea0dc4fc801bc",
+      "width": 1000,
+      "height": 1000,
+      "basis": "maska 2026-11-02 — iz originala proizvođača, završne slike potvrdio vlasnik 2026-11-02",
+      "approvedOn": "2026-11-02"
+    },
+    {
+      "src": "/products/carfit/catalog/carfit-silicone-remover-strawberry.webp",
+      "originalSha256": "2c514b6bee386c0dcd4fd0810f9735f83ec046ebee63887e0d66b5b7fdb01016",
+      "replacementSha256": "018cc407841c2dff458d9b1438bf12fdc8fe1610e5c27c3a4662d0e695921161",
+      "width": 1000,
+      "height": 1000,
+      "basis": "maska 2026-11-02 — iz originala proizvođača, završne slike potvrdio vlasnik 2026-11-02",
+      "approvedOn": "2026-11-02"
+    },
+    {
+      "src": "/products/carfit/catalog/carfit-spray-putty.webp",
+      "originalSha256": "ffd55045434490e5b7a12e7df11e1901b949a592359ad939f9514f8134ab4e08",
+      "replacementSha256": "f7f11dc095b878eba1f7cf85b7c38a95f6420e0d5dc1b75b3f0562925f19379e",
+      "width": 1000,
+      "height": 1000,
+      "basis": "maska 2026-11-02 — iz originala proizvođača, završne slike potvrdio vlasnik 2026-11-02",
+      "approvedOn": "2026-11-02"
+    },
+    {
+      "src": "/products/carfit/catalog/carfit-universal-polishing-compound.webp",
+      "originalSha256": "100c710f4e0e30eef4f0fe592bd6dc89d4e13195fddee2921185761566cebde8",
+      "replacementSha256": "fa26588a88388e0d56c7c00f95c8fd3c0b7ce4a7ceefaadcab6c5272a3142676",
+      "width": 1000,
+      "height": 1000,
+      "basis": "maska 2026-11-02 — iz originala proizvođača, završne slike potvrdio vlasnik 2026-11-02 — rame i vrat su procena prema zvaničnoj maski iz kataloga C.A.R.FIT 2026 (original nema vidljiv obris)",
+      "approvedOn": "2026-11-02"
+    },
+    {
+      "src": "/products/carfit/catalog/carfit-cover-tape-up-to-100c.webp",
+      "originalSha256": "d1495b42801fb4157990349a56e6e0d1ea27b6f51ac5142ca5b507b7e331a644",
+      "replacementSha256": "005d95b5728916f74b673c2ece5eec785d920eb9916f3dc09cb52d8f051e647d",
+      "width": 1000,
+      "height": 1000,
+      "basis": "maska 2026-11-02 — iz originala proizvođača, završne slike potvrdio vlasnik 2026-11-02",
+      "approvedOn": "2026-11-02"
+    },
+    {
+      "src": "/products/carfit/catalog/carfit-cover-tape-up-to-80c.webp",
+      "originalSha256": "f9484c11a15f13ffdd3796edc4747bd6e18dfeb8ad4b4adff83893e3de80763d",
+      "replacementSha256": "5bf9721f7f736abd50a74de4b2b2ff273c351c636daf0f56dde7d47f79d90406",
+      "width": 1000,
+      "height": 1000,
+      "basis": "maska 2026-11-02 — iz originala proizvođača, završne slike potvrdio vlasnik 2026-11-02 — varijanta A (otvori + ispravljena gornja rola + zaglađen rub); zamenjuje odluku 29.10. „original sa pozadinom“ po potvrdi vlasnika 2026-11-02",
+      "approvedOn": "2026-11-02"
+    },
+    {
+      "src": "/products/carfit/catalog/carfit-cover-tape-water-resistant-up-to-120c.webp",
+      "originalSha256": "84bbb1e7af8ec9494f3c71ab664e8c7b92faec95d9a0206e0199eb0ecedeccc2",
+      "replacementSha256": "ca1451a35cd3ee3f2247adefe886c10839212d228fb0d516c0bd33986aa6e788",
+      "width": 1000,
+      "height": 1000,
+      "basis": "maska 2026-11-02 — iz originala proizvođača, završne slike potvrdio vlasnik 2026-11-02",
+      "approvedOn": "2026-11-02"
+    },
+    {
+      "src": "/products/carfit/catalog/carfit-fine-line-tape.webp",
+      "originalSha256": "fb8f50959ab6d24ab263d0d4ebe9af4a33104f84b1a9dfaac4807a6793a1f1aa",
+      "replacementSha256": "63f3c9d719c1eeef9f0d6081a02a82ab208b59ad642ff354844dabd0f7c65efd",
+      "width": 1000,
+      "height": 1000,
+      "basis": "maska 2026-11-02 — iz originala proizvođača, završne slike potvrdio vlasnik 2026-11-02",
+      "approvedOn": "2026-11-02"
+    },
+    {
+      "src": "/products/carfit/catalog/carfit-lifting-tape.webp",
+      "originalSha256": "2a3ccd572a535f734ec897de24a13899cb16343f552b777a9bb161327beb5943",
+      "replacementSha256": "b5b057db55928d82117b0761e98c6c437ff30d45d25ed3988bc3421d6624d009",
+      "width": 1175,
+      "height": 1200,
+      "basis": "maska 2026-11-02 — iz originala proizvođača, završne slike potvrdio vlasnik 2026-11-02",
+      "approvedOn": "2026-11-02"
+    },
+    {
+      "src": "/products/carfit/catalog/carfit-purple-ceramic-film.webp",
+      "originalSha256": "9e70651c7ebef7d711c12d4d214ed086efb238c6b2e8f82220f0e4122f29aaec",
+      "replacementSha256": "9b1a7630dce96495f6d4f090b3174d3111cef5007d0ae52f9ff88d55edef4e55",
+      "width": 1000,
+      "height": 1000,
+      "basis": "maska 2026-11-02 — iz originala proizvođača, završne slike potvrdio vlasnik 2026-11-02",
+      "approvedOn": "2026-11-02"
     }
   ]
 }

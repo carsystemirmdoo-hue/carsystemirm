@@ -129,6 +129,12 @@
   min-width: 0;
 }
 
+/* Polazno mesto (2026-11-03): isti birač kao na početnoj, sva naselja Srbije. */
+.placeBox {
+  flex: 1 1 300px;
+  min-width: 0;
+}
+
 .searchInput {
   width: 100%;
   min-height: var(--ds-ctl-h-field);
@@ -588,6 +594,52 @@
   font-size: var(--ds-font-legal);
   font-style: normal;
   overflow-wrap: anywhere;
+}
+
+/* Udaljenost od izabranog mesta: broj je jasan, oznaka „vazdušnom linijom“ uvek uz njega. */
+.resultDistance {
+  color: var(--ds-c-text);
+  font-size: var(--ds-font-small);
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+}
+
+.resultDistance small {
+  color: var(--ds-c-text-2);
+  font-size: var(--ds-font-legal);
+  font-weight: 400;
+}
+
+.resultNavLink {
+  display: inline-flex;
+  min-height: 44px;
+  align-items: center;
+  margin: -8px 18px 4px;
+  color: var(--ds-c-text);
+  font-size: var(--ds-font-small);
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.resultNavLink:focus-visible {
+  outline: 2px solid var(--ds-c-focus);
+  outline-offset: 2px;
+}
+
+.resultGroupLabel {
+  margin: 8px 0 0;
+  color: var(--ds-c-text-2);
+  font-family: var(--font-technical), monospace;
+  font-size: var(--ds-font-label);
+  letter-spacing: var(--ds-tracking-label);
+  text-transform: uppercase;
+}
+
+.distanceNote {
+  flex-basis: 100%;
+  color: var(--ds-c-text-3);
+  font-size: var(--ds-font-legal);
 }
 
 .resultActions {

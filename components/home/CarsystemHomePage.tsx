@@ -14,7 +14,7 @@ import { useProductSearchDialog } from "@/components/search/ProductSearchProvide
 import { PRODUCT_CATEGORIES } from "@/components/layout/navigation-data";
 import { Button } from "@/components/ui/Button";
 import { SplitContactCta } from "@/components/ui/SplitContactCta";
-import { SearchableCombobox } from "@/components/ui/SearchableCombobox";
+import { type ComboboxOption, SearchableCombobox } from "@/components/ui/SearchableCombobox";
 import { CounterUp } from "@/components/ui/CounterUp";
 import { CompanyLocationMap } from "@/components/map/CompanyLocationMap";
 import { PartnerMap } from "@/components/stores/PartnerMap";
@@ -24,6 +24,7 @@ import { HomeCampaignCarousel } from "./HomeCampaignCarousel";
 import { HomeSectionRail } from "./HomeSectionRail";
 import { companyContact, toTelHref } from "@/lib/company-contact";
 import { type GeoPoint } from "@/lib/nearest-store";
+import { type ChosenPlace, useSettlementIndex } from "@/lib/places/useSettlementIndex";
 import {
   getPartnerCityLabel,
   getPartnerCityKey,
@@ -35,6 +36,7 @@ import {
 import {
   distanceKindLabel,
   formatDistanceKm,
+  navigationHref,
   rankStoresByDistance,
   type RankedStore,
 } from "@/lib/store-distance";
@@ -51,28 +53,47 @@ const cityOptions = [
   ...cityEntries.map((entry) => ({ label: entry.city, value: entry.key })),
 ];
 const homeVisibleStoreIds = new Set(publicPartnerStores.map((store) => store.id));
+/*
+ * Bez unosa birač nudi gradove sa partnerima; unos pretražuje sva naselja Srbije
+ * (latinica, ćirilica, bez kvačica), sa opštinom uz istoimena mesta.
+ */
+const PLACE_SEARCH_PLACEHOLDER = "Upišite mesto (npr. Čačak, Чачак)";
+const PLACE_SEARCH_EMPTY = "Nema mesta koje odgovara unosu. Proverite naziv.";
+const PLACE_SEARCH_LOADING = "Učitavamo spisak mesta…";
 /** Widget u heroju nudi samo gradove; „Svi gradovi” ostaje u odeljku mreže. */
 const locatorCityOptions = cityOptions.filter((option) => option.value !== "");
 /*
- * Izbor grada se pamti samo u ovom pregledaču (pogodnost, ne podatak). Bez izbora i bez
+ * Izbor mesta se pamti samo u ovom pregledaču (pogodnost, ne podatak). Bez izbora i bez
  * sačuvanog izbora widget počinje sa „Izaberite grad”, bez unapred prikazane lokacije.
+ * Ranije se pamtio samo ključ grada (`cs-izabran-grad-prodavnica`); taj izbor se briše,
+ * jer izbor mesta sada ne filtrira listu nego određuje polaznu tačku.
  */
-const CITY_CHOICE_KEY = "cs-izabran-grad-prodavnica";
+const PLACE_CHOICE_KEY = "cs-izabrano-mesto";
+const LEGACY_CITY_CHOICE_KEY = "cs-izabran-grad-prodavnica";
 
-function readSavedCity() {
+function readSavedPlace(): ChosenPlace | null {
   try {
-    const key = window.localStorage.getItem(CITY_CHOICE_KEY);
-    return key && cityEntries.some((entry) => entry.key === key) ? key : null;
+    window.localStorage.removeItem(LEGACY_CITY_CHOICE_KEY);
+    const raw = window.localStorage.getItem(PLACE_CHOICE_KEY);
+    if (!raw) return null;
+    const saved = JSON.parse(raw) as Partial<ChosenPlace>;
+    return typeof saved.value === "string" &&
+      typeof saved.ref === "string" &&
+      typeof saved.label === "string" &&
+      Number.isFinite(saved.point?.lat) &&
+      Number.isFinite(saved.point?.lng)
+      ? (saved as ChosenPlace)
+      : null;
   } catch {
     return null;
   }
 }
 
-function saveCity(key: string) {
+function savePlace(place: ChosenPlace | null) {
   try {
-    // „Svi gradovi” (prazan ključ) briše sačuvani grad, pa se pri sledećoj poseti ne vraća stari izbor.
-    if (key) window.localStorage.setItem(CITY_CHOICE_KEY, key);
-    else window.localStorage.removeItem(CITY_CHOICE_KEY);
+    // „Svi gradovi” briše sačuvani izbor, pa se pri sledećoj poseti ne vraća stari izbor.
+    if (place) window.localStorage.setItem(PLACE_CHOICE_KEY, JSON.stringify(place));
+    else window.localStorage.removeItem(PLACE_CHOICE_KEY);
   } catch {
     /* bez skladišta izbor važi samo do napuštanja strane */
   }
@@ -156,42 +177,34 @@ export function CarsystemHomePage() {
       : "Potvrđene javne lokacije još nisu unete u lokator.",
   );
   const [showMobileLocator, setShowMobileLocator] = useState(false);
-  // „Sve lokacije — po udaljenosti“: postoji tek kada korisnik pokrene geolokaciju.
-  // Lokacija se ne šalje nikome; udaljenost se računa u pregledaču.
+  // „Sve lokacije — po udaljenosti“: postoji kada korisnik izabere mesto ili pokrene
+  // geolokaciju. Lokacija se ne šalje nikome; udaljenost se računa u pregledaču.
   const [origin, setOrigin] = useState<GeoPoint | null>(null);
+  // Izabrano mesto (bilo koje naselje Srbije ili grad sa partnerom); null za geolokaciju.
+  const [place, setPlace] = useState<ChosenPlace | null>(null);
+  const places = useSettlementIndex();
   const [locating, setLocating] = useState(false);
   const [paintDiagnostics, setPaintDiagnostics] = useState({
     debug: false,
     washDisabled: false,
   });
 
-  const selectedStores = useMemo(
-    () =>
-      selectedCity
-        ? publicPartnerStores.filter(
-            (store) => getPartnerCityKey(store) === selectedCity,
-          )
-        : publicPartnerStores,
-    [selectedCity],
-  );
-  // Lista u odeljku mreže: isti javni skup kao mapa i broj; po udaljenosti kada je
-  // lokacija poznata, inače izvorni redosled. Grad je zaseban filter.
+  // Lista u odeljku mreže: isti javni skup kao mapa i broj; po udaljenosti od izabranog
+  // mesta ili lokacije korisnika, inače izvorni redosled. Izbor mesta ne sužava listu.
   const rankedStores = useMemo<RankedStore[]>(
     () =>
       origin
-        ? rankStoresByDistance(selectedStores, origin)
-        : selectedStores.map((store) => ({ store, distanceKm: null, kind: "air" as const })),
-    [origin, selectedStores],
+        ? rankStoresByDistance(publicPartnerStores, origin)
+        : publicPartnerStores.map((store) => ({ store, distanceKm: null, kind: "air" as const })),
+    [origin],
   );
   const distanceById = useMemo(
     () => new Map(rankedStores.map((item) => [item.store.id, item.distanceKm])),
     [rankedStores],
   );
   const selectedStore = useMemo(
-    () =>
-      selectedStores.find((store) => store.id === selectedMapStoreId) ??
-      (cityChosen && selectedCity ? selectedStores[0] : undefined),
-    [cityChosen, selectedCity, selectedMapStoreId, selectedStores],
+    () => publicPartnerStores.find((store) => store.id === selectedMapStoreId),
+    [selectedMapStoreId],
   );
 
   useEffect(() => {
@@ -247,35 +260,72 @@ export function CarsystemHomePage() {
   }, []);
 
   useEffect(() => {
-    const saved = readSavedCity();
+    const saved = readSavedPlace();
     if (!saved) return;
-    const savedStores = publicPartnerStores.filter((store) => getPartnerCityKey(store) === saved);
-    const savedCity = cityEntries.find((entry) => entry.key === saved)?.city ?? saved;
-    setSelectedCity(saved);
-    setSelectedMapStoreId(savedStores[0]?.id ?? "");
-    setCityChosen(true);
-    setLocatorStatus(`Prikazan je Vaš ranije izabran grad: ${savedCity}.`);
+    applyPlace(saved, `Prikazano je Vaše ranije izabrano mesto: ${saved.label}.`);
+    // Sačuvan izbor se primenjuje samo pri prvom prikazu.
   }, []);
 
-  function handleCityChange(cityKey: string) {
+  /**
+   * Izabrano mesto postaje polazna tačka: sve javne lokacije ostaju u listi, poređane
+   * od najbliže vazdušnom linijom; istaknuta je najbliža prodavnica.
+   */
+  function applyPlace(chosen: ChosenPlace, intro?: string) {
+    const ranked = rankStoresByDistance(publicPartnerStores, chosen.point);
+    const nearestPurchase =
+      ranked.find((item) => item.distanceKm !== null && hasLocationCategory(item.store, "kupovina")) ??
+      ranked.find((item) => item.distanceKm !== null);
+
+    setPlace(chosen);
+    setOrigin(chosen.point);
+    setSelectedCity(chosen.value);
     setCityChosen(true);
-    saveCity(cityKey);
-    if (!cityKey) {
+    setSelectedMapStoreId(nearestPurchase?.store.id ?? "");
+    setLocatorStatus(
+      `${intro ? `${intro} ` : ""}${
+        nearestPurchase && nearestPurchase.distanceKm !== null
+          ? `Sve lokacije (${publicPartnerStores.length}) su poređane od mesta ${chosen.label}, približno ${distanceKindLabel(
+              "air",
+            )}. Najbliža prodavnica: ${nearestPurchase.store.name}, ${getPartnerCityLabel(
+              nearestPurchase.store,
+            )} — oko ${formatDistanceKm(nearestPurchase.distanceKm)}.`
+          : "Lokacije trenutno nemaju koordinate za poređenje."
+      }`,
+    );
+  }
+
+  async function handleCityChange(value: string) {
+    setCityChosen(true);
+    if (!value) {
+      savePlace(null);
+      setPlace(null);
+      setOrigin(null);
       setSelectedCity("");
       setSelectedMapStoreId("");
       setLocatorStatus(`Prikazano je svih ${publicPartnerStores.length} lokacija u mreži.`);
       return;
     }
 
-    const cityEntry = cityEntries.find((entry) => entry.key === cityKey);
-    const cityStores = publicPartnerStores.filter(
-      (store) => getPartnerCityKey(store) === cityKey,
+    // Grad iz liste partnera ili bilo koje naselje iz pretrage (`mesto:<RZS broj>`).
+    const cityEntry = cityEntries.find((entry) => entry.key === value);
+    const cityStore = publicPartnerStores.find((store) => getPartnerCityKey(store) === value);
+    setSelectedCity(value);
+    setLocatorStatus("Tražimo izabrano mesto…");
+    const chosen = await places.resolve(
+      value,
+      cityEntry?.city,
+      cityStore?.latitude !== undefined && cityStore.longitude !== undefined
+        ? { lat: cityStore.latitude, lng: cityStore.longitude }
+        : null,
     );
-    setSelectedCity(cityKey);
-    setSelectedMapStoreId(cityStores[0]?.id ?? "");
-    setLocatorStatus(
-      `Prikazano ${cityStores.length} ${cityStores.length === 1 ? "lokacija" : "lokacije"} za grad ${cityEntry?.city ?? cityKey}.`,
-    );
+    if (!chosen) {
+      setLocatorStatus(
+        "Spisak mesta trenutno nije dostupan. Koristite svoju lokaciju ili otvorite lokator prodavnica.",
+      );
+      return;
+    }
+    savePlace(chosen);
+    applyPlace(chosen);
   }
 
   // Izbor kartice ili markera samo ističe lokaciju; ne filtrira listu na jedan grad.
@@ -298,13 +348,7 @@ export function CarsystemHomePage() {
   }
 
   function showAllLocations() {
-    setSelectedCity("");
-    setCityChosen(Boolean(origin));
-    setLocatorStatus(
-      origin
-        ? `Prikazane su sve lokacije (${publicPartnerStores.length}), od najbliže.`
-        : `Prikazano je svih ${publicPartnerStores.length} lokacija u mreži.`,
-    );
+    void handleCityChange("");
   }
 
   function handleLocationRequest() {
@@ -336,6 +380,7 @@ export function CarsystemHomePage() {
           ranked.find((item) => item.distanceKm !== null);
 
         setOrigin(point);
+        setPlace(null);
         setSelectedCity("");
         setCityChosen(true);
         setSelectedMapStoreId(nearestPurchase?.store.id ?? "");
@@ -382,6 +427,9 @@ export function CarsystemHomePage() {
             locating={locating}
             selectedStore={selectedStore}
             selectedCity={cityChosen ? selectedCity : ""}
+            placeLabel={place?.label}
+            placeSearch={places.searchOptions}
+            onPlaceSearchOpen={places.load}
             locatorStatus={locatorStatus}
             onCityChange={handleCityChange}
             onLocationRequest={handleLocationRequest}
@@ -516,14 +564,18 @@ export function CarsystemHomePage() {
             <SearchableCombobox
               ariaLabel="Grad ili region"
               disabled={cityEntries.length === 0}
-              emptyMessage="Nema gradova koji odgovaraju pretrazi."
+              emptyMessage={PLACE_SEARCH_EMPTY}
               id="city-select"
+              loadingMessage={PLACE_SEARCH_LOADING}
               onChange={handleCityChange}
+              onOpen={places.load}
               options={cityOptions}
               placeholder="Izaberite grad"
-              searchPlaceholder="Pretražite grad"
+              searchOptions={places.searchOptions}
+              searchPlaceholder={PLACE_SEARCH_PLACEHOLDER}
               sheetTitle="Izaberite grad"
               value={cityChosen ? selectedCity : NO_CITY_CHOICE}
+              valueLabel={place?.label}
             />
             <button
               type="button"
@@ -540,10 +592,8 @@ export function CarsystemHomePage() {
             <p className={styles.locatorStatus}>{locatorStatus}</p>
             <StorePreviewList
               byDistance={Boolean(origin)}
-              cityKey={cityChosen ? selectedCity : ""}
-              cityLabel={
-                selectedCity ? (cityEntries.find((entry) => entry.key === selectedCity)?.city ?? "") : ""
-              }
+              origin={origin}
+              place={place}
               onSelect={handleMapStoreSelect}
               onShowAll={showAllLocations}
               rankedStores={rankedStores}
@@ -568,6 +618,7 @@ export function CarsystemHomePage() {
                 onReady={() => setNetworkMapFailed(false)}
                 onSelect={handleMapStoreSelect}
                 origin={origin}
+                originLabel={place?.label}
                 selectedId={selectedMapStoreId}
                 selectedZoom={10}
                 stores={publicPartnerStores}
@@ -794,6 +845,9 @@ function LocatorCard({
   showAllByDistance,
   selectedStore,
   selectedCity,
+  placeLabel,
+  placeSearch,
+  onPlaceSearchOpen,
   locatorStatus,
   onCityChange,
   onLocationRequest,
@@ -803,6 +857,9 @@ function LocatorCard({
   showAllByDistance: boolean;
   selectedStore?: PartnerStore;
   selectedCity: string;
+  placeLabel?: string;
+  placeSearch: (query: string) => ComboboxOption[] | null;
+  onPlaceSearchOpen: () => void;
   locatorStatus: string;
   onCityChange: (city: string) => void;
   onLocationRequest: () => void;
@@ -877,13 +934,17 @@ function LocatorCard({
         <SearchableCombobox
           ariaLabel="Izaberite grad"
           disabled={cityEntries.length === 0}
-          emptyMessage="Nema gradova koji odgovaraju pretrazi."
+          emptyMessage={PLACE_SEARCH_EMPTY}
+          loadingMessage={PLACE_SEARCH_LOADING}
           onChange={onCityChange}
+          onOpen={onPlaceSearchOpen}
           options={locatorCityOptions}
           placeholder="Izaberite grad"
-          searchPlaceholder="Pretražite grad"
+          searchOptions={placeSearch}
+          searchPlaceholder={PLACE_SEARCH_PLACEHOLDER}
           sheetTitle="Izaberite grad"
           value={selectedCity}
+          valueLabel={placeLabel}
         />
         {/* Bez izbora nema unapred prikazane lokacije; prazan pregled samo kada mreža nema lokacija. */}
         {selectedStore || cityEntries.length === 0 ? (
@@ -948,19 +1009,19 @@ function StorePreview({
 
 function StorePreviewList({
   byDistance,
-  cityKey,
-  cityLabel,
   onSelect,
   onShowAll,
+  origin,
+  place,
   rankedStores,
   selectedId,
   totalCount,
 }: {
   byDistance: boolean;
-  cityKey: string;
-  cityLabel: string;
   onSelect: (storeId: string) => void;
   onShowAll: () => void;
+  origin: GeoPoint | null;
+  place: ChosenPlace | null;
   rankedStores: RankedStore[];
   selectedId: string;
   totalCount: number;
@@ -969,11 +1030,11 @@ function StorePreviewList({
   return (
     <StorePreviewListBody
       byDistance={byDistance}
-      cityKey={cityKey}
-      cityLabel={cityLabel}
-      key={`${cityKey}-${byDistance}`}
+      key={`${place?.ref ?? ""}-${byDistance}`}
       onSelect={onSelect}
       onShowAll={onShowAll}
+      origin={origin}
+      place={place}
       rankedStores={rankedStores}
       selectedId={selectedId}
       totalCount={totalCount}
@@ -987,19 +1048,19 @@ const PHONE_MORE_STEP = 10;
 
 function StorePreviewListBody({
   byDistance,
-  cityKey,
-  cityLabel,
   onSelect,
   onShowAll,
+  origin,
+  place,
   rankedStores,
   selectedId,
   totalCount,
 }: {
   byDistance: boolean;
-  cityKey: string;
-  cityLabel: string;
   onSelect: (storeId: string) => void;
   onShowAll: () => void;
+  origin: GeoPoint | null;
+  place: ChosenPlace | null;
   rankedStores: RankedStore[];
   selectedId: string;
   totalCount: number;
@@ -1007,18 +1068,18 @@ function StorePreviewListBody({
   const [phoneLimit, setPhoneLimit] = useState(PHONE_FIRST_STORES);
   const phoneRemaining = rankedStores.length - phoneLimit;
 
-  // Broj uz vezu = broj lokacija na odredištu: /prodavnice?grad=<ključ> filtrira istim
-  // ključem grada (getPartnerCityKey), a /prodavnice bez grada prikazuje sve javne lokacije.
-  const moreHref = cityKey ? `/prodavnice?grad=${encodeURIComponent(cityKey)}` : "/prodavnice";
+  // Lokator prodavnica prikazuje iste lokacije; sa izabranim mestom (`?mesto=<RZS broj>`)
+  // poređane od istog mesta.
+  const moreHref = place ? `/prodavnice?mesto=${encodeURIComponent(place.ref)}` : "/prodavnice";
 
   return (
     <>
       <div className={styles.storeListHeader}>
         <span>
           {byDistance ? "Po udaljenosti" : "Lokacije"} · prikazano {rankedStores.length} od {totalCount}
-          {cityLabel ? ` · ${cityLabel}` : ""}
+          {place ? ` · od mesta ${place.label}` : ""}
         </span>
-        {cityLabel ? (
+        {place ? (
           <button className={styles.storeListReset} onClick={onShowAll} type="button">
             Sve lokacije
           </button>
@@ -1062,23 +1123,37 @@ function StorePreviewListBody({
                   {distanceKm !== null ? (
                     <span className={styles.storeDistance}>
                       ≈ {formatDistanceKm(distanceKm)} <small>{distanceKindLabel(kind)}</small>
+                      {store.coordinateStatus === "approximate" ? <small> · približna lokacija</small> : null}
                     </span>
                   ) : byDistance ? (
                     <span className={styles.storeDistance}>
-                      <small>udaljenost nije dostupna</small>
+                      <small>bez tačne pozicije — udaljenost nije dostupna</small>
                     </span>
                   ) : null}
                 </span>
               </button>
-              {store.phone ? (
-                <a
-                  aria-label={`Pozovite ${store.name}: ${store.phone}`}
-                  className={styles.storePreviewPhone}
-                  href={phoneHref(store.phone)}
-                >
-                  {store.phone}
-                </a>
-              ) : null}
+              <span className={styles.storePreviewLinks}>
+                {store.phone ? (
+                  <a
+                    aria-label={`Pozovite ${store.name}: ${store.phone}`}
+                    className={styles.storePreviewPhone}
+                    href={phoneHref(store.phone)}
+                  >
+                    {store.phone}
+                  </a>
+                ) : null}
+                {navigationHref(store, origin) ? (
+                  <a
+                    aria-label={`Navigacija do lokacije ${store.name} (OpenStreetMap)`}
+                    className={styles.storePreviewPhone}
+                    href={navigationHref(store, origin) ?? undefined}
+                    rel="noreferrer"
+                    target="_blank"
+                  >
+                    Navigacija →
+                  </a>
+                ) : null}
+              </span>
             </article>
           );
         })}
@@ -1093,7 +1168,7 @@ function StorePreviewListBody({
         </button>
       ) : null}
       <a className={styles.storePreviewMore} href={moreHref}>
-        {cityKey ? `Sve lokacije u gradu (${rankedStores.length})` : `Lokator prodavnica (${totalCount})`}
+        {`Lokator prodavnica (${totalCount})`}
         <span aria-hidden="true">→</span>
       </a>
     </>

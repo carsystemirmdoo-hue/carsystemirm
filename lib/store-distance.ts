@@ -32,8 +32,34 @@ export function rankStoresByDistance(stores: PartnerStore[], origin: GeoPoint): 
       if (left.distanceKm === null && right.distanceKm === null) return 0;
       if (left.distanceKm === null) return 1;
       if (right.distanceKm === null) return -1;
-      return left.distanceKm - right.distanceKm;
+      // Jednake udaljenosti (ista zgrada, isti centar mesta): stabilan redosled po nazivu.
+      return left.distanceKm - right.distanceKm || left.store.name.localeCompare(right.store.name, "sr-Latn");
     });
+}
+
+/**
+ * Lista za prikaz posle izbora mesta: lokacije sa koordinatama od najbliže, pa
+ * posebna grupa lokacija bez koordinata — one nemaju udaljenost i ne smeju da
+ * izgledaju kao da su rangirane.
+ */
+export function splitRankedStores(ranked: RankedStore[]) {
+  return {
+    withDistance: ranked.filter((item) => item.distanceKm !== null),
+    withoutDistance: ranked.filter((item) => item.distanceKm === null),
+  };
+}
+
+/**
+ * Veza za navigaciju u OpenStreetMap-u (besplatno, bez ključa). Sa poznatom
+ * polaznom tačkom otvara uputstva za vožnju; bez nje samo lokaciju. Lokacija bez
+ * koordinata nema vezu.
+ */
+export function navigationHref(store: PartnerStore, origin?: GeoPoint | null) {
+  if (!hasPartnerCoordinates(store)) return null;
+  if (origin) {
+    return `https://www.openstreetmap.org/directions?engine=fossgis_osrm_car&route=${origin.lat.toFixed(5)}%2C${origin.lng.toFixed(5)}%3B${store.latitude}%2C${store.longitude}`;
+  }
+  return `https://www.openstreetmap.org/?mlat=${store.latitude}&mlon=${store.longitude}#map=15/${store.latitude}/${store.longitude}`;
 }
 
 export function formatDistanceKm(distanceKm: number) {

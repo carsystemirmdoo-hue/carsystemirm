@@ -45,6 +45,18 @@ type SearchableComboboxProps = {
   searchable?: boolean;
   sheetTitle?: string;
   value: string;
+  /**
+   * Pretraga van liste `options` (npr. svih ~4.700 naselja): za neprazan upit
+   * prikazuje vraćene opcije umesto filtrirane liste. `null` znači da se
+   * podaci još učitavaju. Bez upita lista ostaje `options`.
+   */
+  searchOptions?: (query: string) => ComboboxOption[] | null;
+  /** Poruka dok `searchOptions` vraća null. */
+  loadingMessage?: string;
+  /** Poziva se pri svakom otvaranju (npr. da počne učitavanje podataka za pretragu). */
+  onOpen?: () => void;
+  /** Oznaka izabrane vrednosti koja nije u `options` (izabrana iz `searchOptions`). */
+  valueLabel?: string;
 };
 
 const MOBILE_QUERY = "(max-width: 720px)";
@@ -76,6 +88,10 @@ export function SearchableCombobox({
   searchable = true,
   sheetTitle = ariaLabel,
   value,
+  searchOptions,
+  loadingMessage = "Učitavanje…",
+  onOpen,
+  valueLabel,
 }: SearchableComboboxProps) {
   const generatedId = useId().replaceAll(":", "");
   const triggerId = id ?? `combobox-${generatedId}`;
@@ -104,21 +120,42 @@ export function SearchableCombobox({
     [options, value],
   );
 
+  const externalOptions = useMemo(
+    () => (searchOptions && normalizeSearchValue(query) ? searchOptions(query) : undefined),
+    [query, searchOptions],
+  );
+  const isLoadingExternal = externalOptions === null;
+
   const filteredOptions = useMemo(() => {
     const normalizedQuery = normalizeSearchValue(query);
     if (!normalizedQuery) return options;
+    if (externalOptions !== undefined) return externalOptions ?? [];
 
     return options.filter((option) =>
       normalizeSearchValue([option.label, ...(option.keywords ?? [])].join(" ")).includes(
         normalizedQuery,
       ),
     );
-  }, [options, query]);
+  }, [externalOptions, options, query]);
+
+  // Id opcije: indeks u `options` (stabilan dok se kuca); opcije iz pretrage
+  // van liste dobijaju id po mestu u rezultatu.
+  const optionIndexByValue = useMemo(
+    () => new Map(options.map((option, index) => [option.value, index])),
+    [options],
+  );
+  const optionDomId = useCallback(
+    (option: ComboboxOption, index: number) => {
+      const originalIndex = optionIndexByValue.get(option.value);
+      return originalIndex === undefined
+        ? `${listboxId}-search-${index}`
+        : `${listboxId}-option-${originalIndex}`;
+    },
+    [listboxId, optionIndexByValue],
+  );
 
   const activeOption = filteredOptions[activeIndex];
-  const activeOptionId = activeOption
-    ? `${listboxId}-option-${options.findIndex((option) => option.value === activeOption.value)}`
-    : undefined;
+  const activeOptionId = activeOption ? optionDomId(activeOption, activeIndex) : undefined;
 
   const updatePanelPosition = useCallback(() => {
     const trigger = triggerRef.current;
@@ -172,8 +209,9 @@ export function SearchableCombobox({
       lastPointerRef.current = null;
       activeFromPointerRef.current = false;
       setOpen(true);
+      onOpen?.();
     },
-    [disabled, options, value],
+    [disabled, onOpen, options, value],
   );
 
   useEffect(() => {
@@ -401,8 +439,8 @@ export function SearchableCombobox({
         role="combobox"
         type="button"
       >
-        <span className={selectedOption ? styles.triggerValue : styles.triggerPlaceholder}>
-          {selectedOption?.label ?? placeholder}
+        <span className={selectedOption || valueLabel ? styles.triggerValue : styles.triggerPlaceholder}>
+          {selectedOption?.label ?? valueLabel ?? placeholder}
         </span>
         <svg aria-hidden="true" className={styles.chevron} viewBox="0 0 20 20">
           <path d="m5 7.5 5 5 5-5" />
@@ -468,9 +506,11 @@ export function SearchableCombobox({
                       value={query}
                     />
                     <span aria-live="polite" className={styles.srOnly} id={statusId}>
-                      {filteredOptions.length === 1
-                        ? "1 rezultat"
-                        : `${filteredOptions.length} rezultata`}
+                      {isLoadingExternal
+                        ? loadingMessage
+                        : filteredOptions.length === 1
+                          ? "1 rezultat"
+                          : `${filteredOptions.length} rezultata`}
                     </span>
                   </div>
                 ) : null}
@@ -487,9 +527,6 @@ export function SearchableCombobox({
                 >
                   {filteredOptions.length > 0 ? (
                     filteredOptions.map((option, index) => {
-                      const originalIndex = options.findIndex(
-                        (candidate) => candidate.value === option.value,
-                      );
                       const isSelected = option.value === value;
                       return (
                         <button
@@ -497,7 +534,7 @@ export function SearchableCombobox({
                           className={styles.option}
                           data-active={index === activeIndex || undefined}
                           disabled={option.disabled}
-                          id={`${listboxId}-option-${originalIndex}`}
+                          id={optionDomId(option, index)}
                           key={option.value}
                           onClick={() => selectOption(option)}
                           onMouseDown={(event) => event.preventDefault()}
@@ -521,7 +558,9 @@ export function SearchableCombobox({
                       );
                     })
                   ) : (
-                    <p className={styles.emptyState}>{emptyMessage}</p>
+                    <p className={styles.emptyState}>
+                      {isLoadingExternal ? loadingMessage : emptyMessage}
+                    </p>
                   )}
                 </div>
               </div>

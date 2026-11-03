@@ -694,8 +694,20 @@
   padding: 11px;
 }
 
-.storePreviewItem[data-active] .storePreviewPhone {
+.storePreviewItem[data-active] .storePreviewLinks {
   margin: 0 11px 10px 34px;
+}
+
+/* Telefon i navigacija u istom redu ispod adrese (2026-11-03). */
+.storePreviewLinks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 18px;
+  margin: -11px 12px 0 35px;
+}
+
+.storePreviewLinks .storePreviewPhone {
+  margin: 0;
 }
 
 .storePreviewSelect {

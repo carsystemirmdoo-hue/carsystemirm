@@ -1,4 +1,8 @@
-export type HeaderMenuKey = "proizvodi" | "brendovi" | "sistemi" | "podrska";
+/**
+ * Ključ „sistemi“ je padajući meni „Saveti i podrška“ (2026-11-01: objedinjeni „Sistemi i
+ * programi“, „Saveti i vodiči“, „Katalozi“ i „Podrška“). Naziv ključa je ostao radi stanja i stilova.
+ */
+export type HeaderMenuKey = "proizvodi" | "brendovi" | "sistemi";
 
 export type HeaderIconName =
   | "prepare"
@@ -207,57 +211,67 @@ export const BRAND_LINKS: NavigationLink[] = [
 // Stranica /brendovi/yachtcare i proizvodi ostaju. RUPES nije zaseban brend u meniju —
 // prikazan je u okviru Carsystem ponude (/brendovi/carsystem#rupes).
 
-export const SYSTEM_GROUPS: NavigationGroup[] = [
+/** Pet stranica programa (/program/*) — „Materijali i postupci“. */
+export const PROGRAM_LINKS: NavigationLink[] = [
   {
-    title: "Sistemi bojenja i refinish programi",
-    links: [
-      {
-        href: "/program/boje-i-lakovi",
-        title: "Boje i lakovi",
-        description: "Bazni sloj, nijansiranje i završni lakovi.",
-      },
-      {
-        href: "/program/priprema-i-abrazivi",
-        title: "Priprema i abrazivi",
-        description: "Gitovi, prajmeri, punila i brušenje.",
-      },
-      {
-        href: "/program/pistolji-i-oprema",
-        title: "Pištolji i oprema",
-        description: "Kontrolisano nanošenje i radionička oprema.",
-      },
-      {
-        href: "/program/poliranje",
-        title: "Poliranje",
-        description: "Korekcija, završna obrada i sjaj.",
-      },
-      {
-        href: "/program/potrosni-materijal",
-        title: "Potrošni materijal",
-        description: "Maskiranje, zaštita i dnevni radni tok.",
-      },
-    ],
+    href: "/program/boje-i-lakovi",
+    title: "Boje i lakovi",
+    description: "Bazni sloj, nijansiranje i završni lakovi.",
   },
   {
-    title: "Digitalna, edukativna i tehnička podrška",
-    links: [
-      // „Tehnička podrška“ je u meniju „Podrška“ i u podnožju (odluka vlasnika 2026-10-15).
-      {
-        href: "/dokumentacija",
-        title: "Katalog i tehnički listovi",
-        description: "Tehnički i bezbednosni listovi, uputstva i katalozi proizvođača.",
-        icon: "documents",
-      },
-      {
-        href: "/b2b-saradnja",
-        title: "B2B saradnja",
-        description: "Razgovarajte sa timom o profesionalnoj saradnji.",
-        icon: "contact",
-      },
-    ],
+    href: "/program/priprema-i-abrazivi",
+    title: "Priprema i abrazivi",
+    description: "Gitovi, prajmeri, punila i brušenje.",
+  },
+  {
+    href: "/program/pistolji-i-oprema",
+    title: "Pištolji i oprema",
+    description: "Kontrolisano nanošenje i radionička oprema.",
+  },
+  {
+    href: "/program/poliranje",
+    title: "Poliranje",
+    description: "Korekcija, završna obrada i sjaj.",
+  },
+  {
+    href: "/program/potrosni-materijal",
+    title: "Potrošni materijal",
+    description: "Maskiranje, zaštita i dnevni radni tok.",
   },
 ];
 
+/** Biblioteka vodiča — u meniju samo kada postoji bar jedan objavljen članak. */
+export const SAVETI_LINKS: NavigationLink[] = [
+  {
+    href: "/vodici",
+    title: "Saveti i vodiči",
+    description: "Objašnjenja i postupci za pripremu, materijale i opremu.",
+    icon: "catalog",
+  },
+  {
+    href: "/vodici?tip=problemi",
+    title: "Problemi i rešenja",
+    description: "Uzroci grešaka u radu i šta proveriti.",
+    icon: "support",
+  },
+];
+
+export const DOCUMENTATION_LINKS: NavigationLink[] = [
+  {
+    href: "/dokumentacija",
+    title: "Tehnički i bezbednosni listovi",
+    description: "Listovi i uputstva za proizvode iz kataloga, sa pretragom.",
+    icon: "documents",
+  },
+  {
+    href: "/katalozi",
+    title: "Katalozi proizvođača",
+    description: "Katalozi i brošure brendova iz naše ponude.",
+    icon: "documents",
+  },
+];
+
+/** Tehnička podrška; B2B saradnja stoji uz Kontakt (odluka vlasnika 2026-11-01). */
 export const SUPPORT_LINKS: NavigationLink[] = [
   {
     href: "/kontakt?tema=tehnicka-podrska",
@@ -266,15 +280,34 @@ export const SUPPORT_LINKS: NavigationLink[] = [
     icon: "support",
   },
   {
-    href: "/katalog",
-    title: "Katalog i dokumentacija",
-    description: "Tehnički listovi uz odgovarajuće proizvode.",
-    icon: "documents",
-  },
-  {
     href: "/kontakt",
     title: "Kontakt",
     description: "Adresa, e-pošta i obrazac za upit.",
     icon: "contact",
   },
+  {
+    href: "/b2b-saradnja",
+    title: "B2B saradnja",
+    description: "Razgovarajte sa timom o profesionalnoj saradnji.",
+    icon: "contact",
+  },
 ];
+
+export type SupportMenuGroup = NavigationGroup & {
+  key: "materijali" | "saveti" | "dokumentacija" | "podrska";
+};
+
+/** Grupe menija „Saveti i podrška“. Grupa „saveti“ se prikazuje samo uz objavljen sadržaj. */
+export const SUPPORT_MENU_GROUPS: SupportMenuGroup[] = [
+  { key: "materijali", title: "Materijali i postupci", links: PROGRAM_LINKS },
+  { key: "saveti", title: "Saveti i vodiči", links: SAVETI_LINKS },
+  { key: "dokumentacija", title: "Dokumentacija", links: DOCUMENTATION_LINKS },
+  { key: "podrska", title: "Tehnička podrška", links: SUPPORT_LINKS },
+];
+
+/** „Problemi i rešenja“ tek uz objavljen tekst te vrste, da veza ne vodi na prazan spisak. */
+export function visibleSupportGroups(saveti: { biblioteka: boolean; problemi: boolean }) {
+  return SUPPORT_MENU_GROUPS.filter((group) => group.key !== "saveti" || saveti.biblioteka).map((group) =>
+    group.key === "saveti" && !saveti.problemi ? { ...group, links: group.links.filter((link) => !link.href.includes("tip=problemi")) } : group,
+  );
+}

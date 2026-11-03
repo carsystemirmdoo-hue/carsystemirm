@@ -3272,11 +3272,11 @@
     {
       "src": "/products/carfit/catalog/carfit-cover-tape-up-to-80c.webp",
       "originalSha256": "f9484c11a15f13ffdd3796edc4747bd6e18dfeb8ad4b4adff83893e3de80763d",
-      "replacementSha256": "5bf9721f7f736abd50a74de4b2b2ff273c351c636daf0f56dde7d47f79d90406",
+      "replacementSha256": "c7661838b863c90a1e1bdf3861ca18654e5c33804e43896953d808f2ad4c3388",
       "width": 1000,
       "height": 1000,
-      "basis": "maska 2026-11-02 — iz originala proizvođača, završne slike potvrdio vlasnik 2026-11-02 — varijanta A (otvori + ispravljena gornja rola + zaglađen rub); zamenjuje odluku 29.10. „original sa pozadinom“ po potvrdi vlasnika 2026-11-02",
-      "approvedOn": "2026-11-02"
+      "basis": "maska 2026-11-03 (dopuna) — iz originala proizvođača, završne slike potvrdio vlasnik 2026-11-03 — nadogradnja varijante A (obris rola 2–4 po konturnoj liniji originala, očišćeni dodiri traka); zamenjuje odluku 29.10. „original sa pozadinom“",
+      "approvedOn": "2026-11-03"
     },
     {
       "src": "/products/carfit/catalog/carfit-cover-tape-water-resistant-up-to-120c.webp",
@@ -3313,6 +3313,69 @@
       "height": 1000,
       "basis": "maska 2026-11-02 — iz originala proizvođača, završne slike potvrdio vlasnik 2026-11-02",
       "approvedOn": "2026-11-02"
+    },
+    {
+      "src": "/products/carfit/catalog/carfit-2k-clearcoat-spray.webp",
+      "originalSha256": "ed89c91966ae6f26e6ca0fc104f2703aac479f57bca3a0276f47547fde292cb5",
+      "replacementSha256": "a78d38b635ccd71ba731c64ec16edafd1c7305eedb1c118c2d7b1e01d9cde048",
+      "width": 1000,
+      "height": 1000,
+      "basis": "maska 2026-11-03 (dopuna) — iz originala proizvođača, završne slike potvrdio vlasnik 2026-11-03",
+      "approvedOn": "2026-11-03"
+    },
+    {
+      "src": "/products/carfit/catalog/carfit-disposable-floor-mats.webp",
+      "originalSha256": "b72aed445574dc6a64e890c04c75e7a86c41384c096286237a0ef8a2e7fe67e0",
+      "replacementSha256": "d050624742c6ed10d074959ec4420e2e1efc5e64dc3d6f41b2dafb4a9f5ae840",
+      "width": 1000,
+      "height": 1000,
+      "basis": "maska 2026-11-03 (dopuna) — iz originala proizvođača, završne slike potvrdio vlasnik 2026-11-03",
+      "approvedOn": "2026-11-03"
+    },
+    {
+      "src": "/products/carfit/catalog/carfit-ozone-generators.webp",
+      "originalSha256": "826b7f36a3486b2fec5468db695e5ca431b2cd3bbecbfcd612cb06dea26aba4f",
+      "replacementSha256": "463d71daf3f7ff1d2e0b02c9d28e45db605b477db8d3b6b659a5ed9b60b61299",
+      "width": 1000,
+      "height": 1000,
+      "basis": "maska 2026-11-03 (dopuna) — iz originala proizvođača, završne slike potvrdio vlasnik 2026-11-03",
+      "approvedOn": "2026-11-03"
+    },
+    {
+      "src": "/products/carfit/catalog/carfit-ozone-generators-2.webp",
+      "originalSha256": "38d17bdeed163c19e14e960100dc574e893d4293fbe1164f2c150df2dcb74d1f",
+      "replacementSha256": "dced546032e78fae31bb0bd4cda329dabe0821ab46a2c59663799e90f2bb0f0c",
+      "width": 1000,
+      "height": 1000,
+      "basis": "maska 2026-11-03 (dopuna) — iz originala proizvođača, završne slike potvrdio vlasnik 2026-11-03",
+      "approvedOn": "2026-11-03"
+    },
+    {
+      "src": "/products/carfit/catalog/carfit-paint-remover-spray.webp",
+      "originalSha256": "9870b9ecfa54dbb2c524814ea331f5c63d22cbab4089230452d38f39b9ff493a",
+      "replacementSha256": "ac73b5791dd1854a6beadcd817ba9affa3430ab40ff12e63a463df58adb51562",
+      "width": 1000,
+      "height": 1000,
+      "basis": "maska 2026-11-03 (dopuna) — iz originala proizvođača, završne slike potvrdio vlasnik 2026-11-03",
+      "approvedOn": "2026-11-03"
+    },
+    {
+      "src": "/products/carfit/catalog/carfit-plastic-stapler-kit.webp",
+      "originalSha256": "cd713fa79bc9d6c67c78d5393470b08f9ff7ce295c768858e9598493d3a16381",
+      "replacementSha256": "e4afe90f885321d7c0df899d95e3f9d680722766533f3611ac2460c5094f924f",
+      "width": 1000,
+      "height": 1000,
+      "basis": "maska 2026-11-03 (dopuna) — iz originala proizvođača, završne slike potvrdio vlasnik 2026-11-03",
+      "approvedOn": "2026-11-03"
+    },
+    {
+      "src": "/products/carfit/catalog/carfit-rubbing-compound.webp",
+      "originalSha256": "3edf4aad0ef5a92cf39956a28063b806cbe37e1afd11384392fd6122af3ebdef",
+      "replacementSha256": "80501ae111abcd36c82600f2939e0c43bc3c67c87de5012bcc55aae82507769f",
+      "width": 1000,
+      "height": 1000,
+      "basis": "maska 2026-11-03 (dopuna) — iz originala proizvođača, završne slike potvrdio vlasnik 2026-11-03",
+      "approvedOn": "2026-11-03"
     }
   ]
 }

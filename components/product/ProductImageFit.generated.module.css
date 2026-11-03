@@ -22897,6 +22897,15 @@
   --product-content-offset-y: 0.037;
 }
 
+.fit[data-product-fit="/remastered/products/carfit/catalog/carfit-2k-clearcoat-spray.webp"] {
+  --product-canvas-aspect: 1;
+  --product-content-aspect: 0.3112;
+  --product-content-fill-x: 0.295;
+  --product-content-fill-y: 0.948;
+  --product-content-offset-x: 0.364;
+  --product-content-offset-y: 0.03;
+}
+
 .fit[data-product-fit="/remastered/products/carfit/catalog/carfit-2k-epoxy-primer-1-1.webp"] {
   --product-canvas-aspect: 1;
   --product-content-aspect: 0.8497;
@@ -23048,6 +23057,15 @@
   --product-content-fill-y: 0.652;
   --product-content-offset-x: 0.025;
   --product-content-offset-y: 0.188;
+}
+
+.fit[data-product-fit="/remastered/products/carfit/catalog/carfit-disposable-floor-mats.webp"] {
+  --product-canvas-aspect: 1;
+  --product-content-aspect: 1.1513;
+  --product-content-fill-x: 0.898;
+  --product-content-fill-y: 0.78;
+  --product-content-offset-x: 0.042;
+  --product-content-offset-y: 0.122;
 }
 
 .fit[data-product-fit="/remastered/products/carfit/catalog/carfit-disposable-seat-covers.webp"] {
@@ -23203,6 +23221,33 @@
   --product-content-offset-y: 0.19;
 }
 
+.fit[data-product-fit="/remastered/products/carfit/catalog/carfit-ozone-generators-2.webp"] {
+  --product-canvas-aspect: 1;
+  --product-content-aspect: 0.9322;
+  --product-content-fill-x: 0.853;
+  --product-content-fill-y: 0.915;
+  --product-content-offset-x: 0.074;
+  --product-content-offset-y: 0.065;
+}
+
+.fit[data-product-fit="/remastered/products/carfit/catalog/carfit-ozone-generators.webp"] {
+  --product-canvas-aspect: 1;
+  --product-content-aspect: 0.993;
+  --product-content-fill-x: 0.854;
+  --product-content-fill-y: 0.86;
+  --product-content-offset-x: 0.072;
+  --product-content-offset-y: 0.073;
+}
+
+.fit[data-product-fit="/remastered/products/carfit/catalog/carfit-paint-remover-spray.webp"] {
+  --product-canvas-aspect: 1;
+  --product-content-aspect: 0.3223;
+  --product-content-fill-x: 0.302;
+  --product-content-fill-y: 0.937;
+  --product-content-offset-x: 0.349;
+  --product-content-offset-y: 0.032;
+}
+
 .fit[data-product-fit="/remastered/products/carfit/catalog/carfit-parking-sensor-masking-disc.webp"] {
   --product-canvas-aspect: 1;
   --product-content-aspect: 0.6111;
@@ -23246,6 +23291,15 @@
   --product-content-fill-y: 0.895;
   --product-content-offset-x: 0.264;
   --product-content-offset-y: 0.054;
+}
+
+.fit[data-product-fit="/remastered/products/carfit/catalog/carfit-plastic-stapler-kit.webp"] {
+  --product-canvas-aspect: 1;
+  --product-content-aspect: 0.8937;
+  --product-content-fill-x: 0.824;
+  --product-content-fill-y: 0.922;
+  --product-content-offset-x: 0.091;
+  --product-content-offset-y: 0.042;
 }
 
 .fit[data-product-fit="/remastered/products/carfit/catalog/carfit-polyethylene-car-cover.webp"] {
@@ -23309,6 +23363,15 @@
   --product-content-fill-y: 0.593;
   --product-content-offset-x: 0.021;
   --product-content-offset-y: 0.238;
+}
+
+.fit[data-product-fit="/remastered/products/carfit/catalog/carfit-rubbing-compound.webp"] {
+  --product-canvas-aspect: 1;
+  --product-content-aspect: 0.3269;
+  --product-content-fill-x: 0.307;
+  --product-content-fill-y: 0.939;
+  --product-content-offset-x: 0.345;
+  --product-content-offset-y: 0.036;
 }
 
 .fit[data-product-fit="/remastered/products/carfit/catalog/carfit-sanding-control-kit-and-sanding-powder.webp"] {

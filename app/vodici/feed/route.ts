@@ -8,7 +8,7 @@ import { absoluteUrl, siteConfig } from "@/lib/seo";
  * režima održavanja, a feed mora da poštuje ista pravila kao strane rubrike.
  * Sadrži samo članke koje kapija u trenutku generisanja smatra javnim.
  */
-export const revalidate = 3600;
+export const revalidate = 60; // = SAVETI_REVALIDATE_SECONDS (Next traži doslovnu vrednost)
 
 function escapeXml(value: string) {
   return value
@@ -19,8 +19,8 @@ function escapeXml(value: string) {
     .replace(/'/g, "&apos;");
 }
 
-export function GET() {
-  const items = getPublicSaveti().slice(0, 50);
+export async function GET() {
+  const items = (await getPublicSaveti()).slice(0, 50);
   const channelUrl = absoluteUrl("/vodici");
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">

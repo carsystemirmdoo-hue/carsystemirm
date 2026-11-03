@@ -338,6 +338,22 @@
   font-weight: 600;
 }
 
+/* Podgrupe menija „Saveti i podrška“ (materijali, vodiči, dokumentacija, podrška). */
+.mobileSubgroup + .mobileSubgroup {
+  margin-top: 0.45rem;
+}
+
+.mobileSubgroupLabel {
+  margin: 0.55rem 0 0.15rem;
+  color: var(--header-red-text);
+  font-family: var(--font-technical), var(--font-body), monospace;
+  font-size: var(--ds-font-label);
+  font-weight: 500;
+  letter-spacing: var(--ds-tracking-label);
+  line-height: 1.2;
+  text-transform: uppercase;
+}
+
 .mobileLink {
   border-bottom: 1px solid var(--header-border);
 }

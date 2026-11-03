@@ -2,6 +2,12 @@
 
 Stručna biblioteka i novosti na `/vodici`. Nije forum: nema komentara, korisničkih objava ni profila. Firma objavljuje proverene tekstove, a posetioci ih čitaju.
 
+> **Od migracije 0058 (grana `feat/saveti-i-podrska-2026-11-01`)** izvor istine za javni deo je baza:
+> tekstovi se uređuju, odobravaju i zakazuju u panelu (`/portal/clanci`), a članak je javan od termina
+> koji izabere vlasnik. Fajlovi u `content/saveti/clanci` ostaju izvor za pisanje i početni uvoz
+> (`scripts/saveti/uvezi-u-bazu.mjs`). Odeljci ispod o `raspored.json`, kapiji iz fajlova i dnevnom
+> zakazanom poslu opisuju raniji model; važeći postupak je u [UREDNIK_PRODUKCIJA.md](UREDNIK_PRODUKCIJA.md).
+
 ## Delovi
 
 | Šta | Gde |

@@ -153,8 +153,8 @@ test("stara adresa trajno preusmerava na novu, bez lanca i bez petlje", async ()
   assert.deepEqual(chains.map((rule) => `${rule.source} → ${rule.destination}`), [], "lanac preusmerenja");
 });
 
-test("sitemap sadrži novu, a ne staru adresu", () => {
-  const urls = sitemap().map((entry) => new URL(entry.url).pathname);
+test("sitemap sadrži novu, a ne staru adresu", async () => {
+  const urls = (await sitemap()).map((entry) => new URL(entry.url).pathname);
   assert.ok(urls.includes(NEW));
   assert.ok(!urls.some((url) => url.includes("clearcoar")));
 });

@@ -3,31 +3,30 @@ import Link from "next/link";
 import { Footer } from "@/components/layout/Footer";
 import { SeoBreadcrumbs } from "@/components/seo/SeoBreadcrumbs";
 import { SavetiNewsItem } from "@/components/saveti/SavetiCards";
-import { SavetiNacrtTraka } from "@/components/saveti/SavetiNacrtTraka";
 import styles from "@/components/saveti/Saveti.styles";
-import { getPublicNovosti, getPublicSaveti, savetiNacrtPregled, toSazetak } from "@/lib/saveti";
+import { getPublicNovosti, getPublicSaveti, toSazetak } from "@/lib/saveti";
 import { breadcrumbJsonLd, collectionPageJsonLd, jsonLd, pageMetadata } from "@/lib/seo";
 
 /** Novosti proizvođača — ista kapija i isti ISR kao ostatak rubrike. */
-export const revalidate = 3600;
+export const revalidate = 60; // = SAVETI_REVALIDATE_SECONDS (Next traži doslovnu vrednost)
 
 const TITLE = "Novosti proizvođača";
 const DESCRIPTION =
   "Proverene novosti proizvođača iz našeg programa, sa datumom događaja, tržištem na koje se odnose i napomenom o dostupnosti u Srbiji.";
 
 export async function generateMetadata(): Promise<Metadata> {
-  const news = getPublicSaveti().filter((clanak) => clanak.tip === "novost");
+  const news = (await getPublicSaveti()).filter((clanak) => clanak.tip === "novost");
   return pageMetadata({
     title: TITLE,
     description: DESCRIPTION,
     path: "/vodici/novosti",
-    index: news.length > 0 && !savetiNacrtPregled(),
+    index: news.length > 0,
     imageAlt: "Novosti proizvođača — Carsystem i R-M",
   });
 }
 
-export default function NovostiPage() {
-  const news = getPublicNovosti(getPublicSaveti()).map(toSazetak);
+export default async function NovostiPage() {
+  const news = getPublicNovosti(await getPublicSaveti()).map(toSazetak);
   const breadcrumbs = [
     { name: "Početna", path: "/" },
     { name: "Saveti i vodiči", path: "/vodici" },
@@ -53,7 +52,6 @@ export default function NovostiPage() {
         </>
       ) : null}
       <main className={styles.pageWithCrumbs}>
-        <SavetiNacrtTraka />
         <SeoBreadcrumbs items={breadcrumbs} />
         <div className={styles.container}>
           <header className={styles.hero}>

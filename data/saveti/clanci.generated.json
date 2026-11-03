@@ -43839,9 +43839,9 @@
   {
    "id": "SV-0067",
    "slug": "granulacije-brusnog-papira",
-   "naslov": "Granulacije brusnog papira: kako se biraju po fazi rada",
-   "metaNaslov": "Granulacije brusnog papira po fazi rada",
-   "opis": "Šta znači oznaka P, koje granulacije tehnički listovi navode za kit, punilac, stari lak i zonu utapanja i zašto se granulacije ne preskaču.",
+   "naslov": "Kako izabrati abraziv za posao: granulacija po fazi rada",
+   "metaNaslov": "Kako izabrati abraziv: granulacija po fazi rada",
+   "opis": "Kako se bira abraziv za kit, punilac i zonu utapanja: šta znači oznaka P, koje granulacije navode tehnički listovi i zašto se granulacije ne preskaču.",
    "kategorija": "brusenje-i-abrazivi",
    "podtema": "granulacije",
    "tip": "osnovni-vodic",
@@ -44009,15 +44009,15 @@
    "povucen": null,
    "revizije": [],
    "imaTekst": true,
-   "reci": 868,
-   "otisak": "b6cf9eb74387cfb9df3d",
+   "reci": 935,
+   "otisak": "de3058c61e87ab2e3b85",
    "blocks": [
     {
      "t": "p",
      "c": [
       {
        "t": "text",
-       "v": "Granulacija se ne bira napamet, nego prema materijalu koji brusite i fazi rada, a vrednost daje tehnički list tog materijala. Primeri iz našeg programa: za kit Carsystem Multi Green tehnički list navodi prvo brušenje granulacijama od P80 do P240"
+       "v": "Abraziv se bira prema materijalu koji brusite i fazi rada, a granulaciju daje tehnički list tog materijala, ne disk. Primeri iz našeg programa: za kit Carsystem Multi Green tehnički list navodi prvo brušenje granulacijama od P80 do P240"
       },
       {
        "t": "cite",
@@ -44043,6 +44043,24 @@
        "t": "text",
        "v": ". Što je broj posle slova P veći, zrno je sitnije i trag brušenja finiji."
       }
+     ]
+    },
+    {
+     "t": "callout",
+     "kind": "upozorenje",
+     "c": [
+      [
+       {
+        "t": "text",
+        "v": "Raspon granulacija sa jednog proizvoda ne prenosite na drugi: svaki kit i punilac ima svoj, u svom tehničkom listu."
+       }
+      ],
+      [
+       {
+        "t": "text",
+        "v": "Na sledeću, finiju granulaciju prelazite tek kada su uklonjeni tragovi prethodne. Kit traži grubo izbrušenu podlogu, pa previše fino brušenje ispod kita slabi prianjanje."
+       }
+      ]
      ]
     },
     {
@@ -44109,11 +44127,11 @@
     {
      "t": "h",
      "level": 2,
-     "id": "koje-granulacije-postoje-u-programu",
+     "id": "koji-abrazivi-postoje-u-programu",
      "c": [
       {
        "t": "text",
-       "v": "Koje granulacije postoje u programu"
+       "v": "Koji abrazivi postoje u programu"
       }
      ]
     },
@@ -44143,6 +44161,43 @@
       {
        "t": "cite",
        "id": "carfit-katalog-2026"
+      },
+      {
+       "t": "text",
+       "v": "."
+      }
+     ]
+    },
+    {
+     "t": "p",
+     "c": [
+      {
+       "t": "text",
+       "v": "Kada birate između papira, filma i mrežastog abraziva, ili između običnog i keramičkog zrna, pogledajte vodiče "
+      },
+      {
+       "t": "link",
+       "href": "/vodici/mrezasti-abrazivi-ili-papir-sa-rupama",
+       "c": [
+        {
+         "t": "text",
+         "v": "Mrežasti abrazivi ili papir sa rupama"
+        }
+       ]
+      },
+      {
+       "t": "text",
+       "v": " i "
+      },
+      {
+       "t": "link",
+       "href": "/vodici/keramicki-abrazivi",
+       "c": [
+        {
+         "t": "text",
+         "v": "Keramički abrazivi"
+        }
+       ]
       },
       {
        "t": "text",
@@ -98899,7 +98954,7 @@
   {
    "id": "SV-0146",
    "slug": "trake-za-maskiranje-i-temperatura",
-   "naslov": "Trake za maskiranje i temperatura sušenja",
+   "naslov": "Kako izabrati traku za maskiranje: temperatura sušenja i podloga",
    "metaNaslov": "Traka za maskiranje: izbor po temperaturi sušenja",
    "opis": "Kako se traka za maskiranje bira prema temperaturi i trajanju sušenja i prema podlozi, uz vrednosti iz tehničkih listova traka Carsystem i C.A.R.FIT.",
    "kategorija": "maskiranje",
@@ -99027,8 +99082,8 @@
    "povucen": null,
    "revizije": [],
    "imaTekst": true,
-   "reci": 734,
-   "otisak": "754a820e3e563f107d56",
+   "reci": 780,
+   "otisak": "0bfaf290469657f78075",
    "blocks": [
     {
      "t": "p",
@@ -99061,6 +99116,24 @@
        "t": "text",
        "v": "."
       }
+     ]
+    },
+    {
+     "t": "callout",
+     "kind": "upozorenje",
+     "c": [
+      [
+       {
+        "t": "text",
+        "v": "Granica važi za temperaturu dela, ne vazduha. Kod IR sušenja površina, a naročito ivica bliža lampi, može biti toplija od vazduha u kabini."
+       }
+      ],
+      [
+       {
+        "t": "text",
+        "v": "Temperatura i trajanje sušenja idu zajedno. Kada tehnički list ne navodi trajanje, a ciklus je dug ili se ponavlja, pitajte proizvođača pre sušenja."
+       }
+      ]
      ]
     },
     {
@@ -137003,8 +137076,8 @@
    "povucen": null,
    "revizije": [],
    "imaTekst": true,
-   "reci": 816,
-   "otisak": "39268ce93325b918f282",
+   "reci": 856,
+   "otisak": "4ae19ad9dfb3e8ed7326",
    "blocks": [
     {
      "t": "p",
@@ -137024,8 +137097,26 @@
       },
       {
        "t": "text",
-       "v": ") je dokument proizvođača koji opisuje za šta je proizvod namenjen i kako se priprema, nanosi i suši. Pre rada se čita redom kojim teče posao: namena i podloge, napomene, mešanje, nanošenje, sušenje i dalja obrada. Pre svega toga proverite da li je list za tačno Vaš proizvod i koja je verzija. Vrednosti važe samo za taj proizvod i navedene uslove i ne prenose se na drugi materijal."
+       "v": ") je dokument proizvođača koji opisuje za šta je proizvod namenjen i kako se priprema, nanosi i suši. Prvo proverite da je list za tačno Vaš proizvod i koja je verzija, a zatim ga čitajte redom kojim teče posao: namena i podloge, napomene, mešanje, nanošenje, sušenje i dalja obrada."
       }
+     ]
+    },
+    {
+     "t": "callout",
+     "kind": "upozorenje",
+     "c": [
+      [
+       {
+        "t": "text",
+        "v": "Vrednosti iz tehničkog lista važe samo za taj proizvod, navedenu verziju dokumenta i navedene uslove (temperaturu, učvršćivač). Ne prenose se na sličan proizvod."
+       }
+      ],
+      [
+       {
+        "t": "text",
+        "v": "Ako neki podatak u listu ne postoji, to ne znači da ograničenje ne postoji: pitajte prodavca ili proizvođača. Za zaštitu, skladištenje i otpad čita se bezbednosni list, a kod popravki vozila važe i uputstva proizvođača vozila."
+       }
+      ]
      ]
     },
     {

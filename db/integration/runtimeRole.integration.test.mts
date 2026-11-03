@@ -25,9 +25,10 @@ const guard = (t: { skip: (m?: string) => void }) => {
   return false;
 };
 
-const APPEND_ONLY = ["audit_log", "customer_contact_consents", "sync_command_events", "sync_device_cycles", "article_base_prices", "price_list_import_rows", "article_programme_decisions", "customer_commercial_status_decisions", "article_offer_decisions", "stock_import_lines"];
+const APPEND_ONLY = ["audit_log", "customer_contact_consents", "sync_command_events", "sync_device_cycles", "article_base_prices", "price_list_import_rows", "article_programme_decisions", "customer_commercial_status_decisions", "article_offer_decisions", "stock_import_lines", "saveti_verzije", "saveti_dogadjaji", "saveti_objave", "saveti_slike"];
 /** Ograničena izmena (opoziv 0028, prelaz stanja storna 0033, odluka o cenovniku 0038): UPDATE ostaje, DELETE ne. */
-const REVOCATION_ONLY = ["customer_contact_verifications", "invoice_reversals", "price_list_imports", "customer_payment_options", "stock_imports", "internal_equipment", "article_sales_names", "article_sellout", "article_required_pairs"];
+// 0058: članak (povlačenje), zakazivanje (otkazivanje) i ranije adrese se menjaju ili dodaju, ali ne brišu.
+const REVOCATION_ONLY = ["customer_contact_verifications", "invoice_reversals", "price_list_imports", "customer_payment_options", "stock_imports", "internal_equipment", "article_sales_names", "article_sellout", "article_required_pairs", "saveti_clanci", "saveti_zakazivanja", "saveti_adrese"];
 /** Samo čitanje (0036): evidenciju kopija upisuje posebna uloga, nikad aplikacija. */
 const READ_ONLY = ["backup_runs"];
 

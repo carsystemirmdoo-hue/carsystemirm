@@ -13,7 +13,7 @@ import { SourceList } from "./SistemiParts";
 import { SistemiSubnav } from "./SistemiSubnav";
 import styles from "./Sistemi.styles";
 
-export function SistemiProgramPage({
+export async function SistemiProgramPage({
   program,
   content,
   brands,
@@ -27,7 +27,7 @@ export function SistemiProgramPage({
   catalogCardCount: number;
 }) {
   const copy = SISTEMI_PAGE_COPY[program.slug];
-  const references = collectReferences(content);
+  const references = await collectReferences(content);
   const href = `/program/${program.slug}`;
 
   return (

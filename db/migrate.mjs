@@ -8,6 +8,10 @@
 import { drizzle } from "drizzle-orm/postgres-js";
 import { migrate } from "drizzle-orm/postgres-js/migrator";
 import postgres from "postgres";
+import { proveriRedosled } from "./migrationOrder.mjs";
+
+// `--provera`: samo čita stanje (transakcija READ ONLY) i ispisuje šta bi bilo primenjeno.
+const samoProvera = process.argv.includes("--provera");
 
 /*
  * Migracije idu nalogom koji sme DDL; aplikacija ne sme.
@@ -51,8 +55,20 @@ console.log(
 const client = postgres(connectionString, { max: 1 });
 
 try {
-  await migrate(drizzle(client), { migrationsFolder: "./db/migrations" });
-  console.log("Migracije su primenjene.");
+  if (samoProvera) {
+    const stanje = await client.begin("READ ONLY", (sql) => proveriRedosled(sql, "./db/migrations"));
+    console.log(
+      stanje.naCekanju.length
+        ? `Provera: biće primenjene redom: ${stanje.naCekanju.join(", ")}`
+        : "Provera: nema neprimenjenih migracija.",
+    );
+  } else {
+    // Pre primene: nijedna migracija ne sme biti preskočena (vidi migrationOrder.mjs).
+    const stanje = await proveriRedosled(client, "./db/migrations");
+    console.log(`Na čekanju: ${stanje.naCekanju.join(", ") || "ništa"}`);
+    await migrate(drizzle(client), { migrationsFolder: "./db/migrations" });
+    console.log("Migracije su primenjene.");
+  }
 } catch (error) {
   console.error("Migracije nisu uspele:", error);
   process.exitCode = 1;

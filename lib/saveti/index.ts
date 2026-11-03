@@ -1,24 +1,24 @@
 import "server-only";
 
 /**
- * Serverski pristup rubrici „Saveti i vodiči“.
+ * Serverski pristup rubrici „Saveti i vodiči“ (javni deo).
  *
- * Generisani skup sadrži SVE zapise — i buduće, neodobrene i nenapisane.
- * Zato se ovaj modul nikada ne uvozi u klijentsku komponentu (`server-only`),
- * a strane klijentu prosleđuju samo sažetke JAVNIH članaka. Šta je javno
- * odlučuje kapija (`objava.mjs`) za trenutak generisanja strane.
+ * Od migracije 0058 izvor istine je baza (urednik u poslovnom panelu). Javna je verzija koju
+ * određuje `javnaVerzijaU` (lib/saveti/urednik/stanje.mjs): odobrena verzija čiji je termin
+ * prošao, inače objavljena i nepovučena verzija. Termin se poredi sa trenutkom generisanja
+ * strane, pa objava ne čeka zakazani posao; strane se obnavljaju najkasnije na
+ * SAVETI_REVALIDATE_SECONDS. Fajlovi u content/saveti su samo izvor za početni uvoz
+ * (scripts/saveti/uvezi-u-bazu.mjs).
+ *
+ * Kada baza nije dostupna (npr. build bez baze), rubrika je prazna — ništa se ne prikazuje
+ * nasumično i nijedan neodobren tekst ne može da procuri.
  */
 
-import generated from "@/data/saveti/clanci.generated.json";
-import raspored from "@/content/saveti/raspored.json";
-import {
-  articlePublicationState,
-  effectiveModifiedAt,
-  JAVNO_STANJE,
-  slotReport,
-  slotsByArticle,
-} from "@/lib/saveti/objava.mjs";
-import { instantFrom } from "@/lib/saveti/vreme.mjs";
+import { and, eq, inArray, isNull, lte } from "drizzle-orm";
+import { getDb } from "@/db/client";
+import { savetiAdrese, savetiClanci, savetiSlike, savetiVerzije, savetiZakazivanja } from "@/db/schema";
+import { javnaVerzijaU } from "@/lib/saveti/urednik/stanje.mjs";
+import { parseArticleMarkdown, wordCount } from "@/lib/saveti/markdown.mjs";
 import { getSavetiKategorija, SAVETI_KATEGORIJE } from "@/lib/saveti/kategorije.mjs";
 
 export type SavetiInline =
@@ -85,7 +85,11 @@ export type SavetiZapis = {
   blocks: SavetiBlock[];
 };
 
+export type SavetiSlika = { id: string; alt: string; sirina: number; visina: number };
+
 export type SavetiClanak = SavetiZapis & {
+  /** Naslovna slika (iz panela); bez nje strana koristi podrazumevanu sliku sajta. */
+  slika: SavetiSlika | null;
   /** Trenutak termina (ISO, UTC). */
   datumObjave: string;
   /** Poslednja stvarna izmena posle objave, inače isto što i datumObjave. */
@@ -98,93 +102,142 @@ export type SavetiSazetak = Pick<
   "id" | "slug" | "naslov" | "opis" | "kategorija" | "tip" | "datumObjave" | "datumIzmene" | "datumDogadjaja" | "istorijska"
 > & { kategorijaNaziv: string };
 
-type Raspored = {
-  podesavanja: {
-    aktivan: boolean;
-    pocetakPretpostavljen?: boolean;
-    pocetniDatum: string;
-    vremeObjave: string;
-    vremenskaZona: string;
-    razmakDana: number;
-    pauzaOd: string | null;
+
+/**
+ * Koliko dugo generisana strana rubrike važi pre ponovnog generisanja: zakazan članak postaje
+ * vidljiv najkasnije ovoliko posle termina (radnje u panelu osvežavaju strane odmah).
+ */
+export const SAVETI_REVALIDATE_SECONDS = 60;
+
+type ClanakRed = typeof savetiClanci.$inferSelect;
+type VerzijaRed = typeof savetiVerzije.$inferSelect;
+
+const str = (v: unknown) => (typeof v === "string" ? v : "");
+const strOrNull = (v: unknown) => (typeof v === "string" && v ? v : null);
+const arr = (v: unknown) => (Array.isArray(v) ? v.filter((x): x is string => typeof x === "string") : []);
+
+/** Verzija iz baze → oblik koji koriste strane rubrike (isti za javni prikaz i pregled u panelu). */
+export function verzijaUClanak(
+  clanak: Pick<ClanakRed, "id" | "slug" | "tip" | "kategorija" | "prviPutObjavljeno" | "javnoOd">,
+  verzija: VerzijaRed,
+  slika: SavetiSlika | null,
+  sada = new Date(),
+): SavetiClanak {
+  const p = (verzija.podaci ?? {}) as Record<string, unknown>;
+  const { blocks } = parseArticleMarkdown(verzija.telo, clanak.slug) as { blocks: SavetiBlock[] };
+  const objavljeno = (clanak.prviPutObjavljeno ?? clanak.javnoOd ?? sada).toISOString();
+  const izmena = (clanak.javnoOd ?? clanak.prviPutObjavljeno ?? sada).toISOString();
+  return {
+    id: clanak.id,
+    slug: clanak.slug,
+    naslov: verzija.naslov,
+    metaNaslov: verzija.metaNaslov || verzija.naslov,
+    opis: verzija.opis,
+    kategorija: clanak.kategorija,
+    podtema: str(p.podtema),
+    tip: clanak.tip as SavetiTip,
+    publika: arr(p.publika),
+    glavnoPitanje: str(p.glavnoPitanje),
+    dodatnaPitanja: arr(p.dodatnaPitanja),
+    brendovi: arr(p.brendovi),
+    proizvodi: arr(p.proizvodi),
+    povezani: arr(p.povezani),
+    izvori: (Array.isArray(verzija.izvori) ? verzija.izvori : []) as SavetiIzvor[],
+    datumDogadjaja: strOrNull(p.datumDogadjaja),
+    datumObjaveIzvora: strOrNull(p.datumObjaveIzvora),
+    trziste: strOrNull(p.trziste),
+    dostupnostUSrbiji: (strOrNull(p.dostupnostUSrbiji) as SavetiZapis["dostupnostUSrbiji"]) ?? null,
+    istorijska: typeof p.istorijska === "boolean" ? p.istorijska : null,
+    prioritet: typeof p.prioritet === "number" ? p.prioritet : 0,
+    status: {},
+    strucnaPotvrda: { potrebna: false },
+    poslednjaProvera: strOrNull(p.poslednjaProvera),
+    ponovniPregled: null,
+    proveraVaziDo: strOrNull(p.proveraVaziDo),
+    odobrenje: null,
+    povucen: null,
+    revizije: [],
+    imaTekst: true,
+    reci: wordCount(blocks),
+    otisak: verzija.otisak,
+    blocks,
+    datumObjave: objavljeno,
+    datumIzmene: izmena > objavljeno ? izmena : objavljeno,
+    slika,
   };
-  termini: { redniBroj: number; datum: string; clanak: string | null; preskocen?: { clanak?: string; razlog: string } }[];
-};
-
-const zapisi = (generated as unknown as { clanci: SavetiZapis[] }).clanci;
-const schedule = raspored as unknown as Raspored;
-const slotIndex = slotsByArticle(schedule);
-
-/** Koliko dugo generisana strana rubrike važi pre ponovnog generisanja. */
-export const SAVETI_REVALIDATE_SECONDS = 3600;
-
-/**
- * Trenutak „sada“ za kapiju. `SAVETI_SAT` pomera sat SAMO van Vercela
- * (lokalni build i testovi); na Vercel deploymentu se zanemaruje, pa
- * promenljiva okruženja ne može da otkrije budući članak.
- */
-export function savetiNow(): Date {
-  const override = process.env.SAVETI_SAT;
-  if (override && !process.env.VERCEL) return instantFrom(override);
-  return new Date();
 }
 
-export function getSavetiRaspored() {
-  return schedule;
+async function slikeZa(ids: (string | null)[]) {
+  const list = [...new Set(ids.filter((x): x is string => Boolean(x)))];
+  if (!list.length) return new Map<string, { sirina: number; visina: number }>();
+  const rows = await getDb()
+    .select({ id: savetiSlike.id, sirina: savetiSlike.sirina, visina: savetiSlike.visina })
+    .from(savetiSlike)
+    .where(inArray(savetiSlike.id, list));
+  return new Map(rows.map((r) => [r.id, r]));
 }
 
-export function getAllSavetiZapisi(): SavetiZapis[] {
-  return zapisi;
+function bazaDostupna() {
+  return Boolean(process.env.DATABASE_URL);
 }
 
-function toPublic(zapis: SavetiZapis, publishedAt: Date): SavetiClanak {
-  const datumObjave = publishedAt.toISOString();
-  return { ...zapis, datumObjave, datumIzmene: effectiveModifiedAt(zapis, datumObjave) };
-}
-
-/**
- * Lokalni pregled nacrta za vlasnika (`SAVETI_NACRT_PREGLED=1`, npr. dev server).
- * Prikazuje tehnički i jezički proverene, a još NEODOBRENE tekstove sa oznakom
- * „Nacrt“ i bez indeksiranja. Kao i `SAVETI_SAT`, na Vercel deploymentu se
- * zanemaruje, pa promenljiva okruženja ne može da objavi neodobren tekst.
- */
-export function savetiNacrtPregled(): boolean {
-  return process.env.SAVETI_NACRT_PREGLED === "1" && !process.env.VERCEL;
-}
-
-function isNacrtZaPregled(zapis: SavetiZapis): boolean {
-  return (
-    zapis.imaTekst &&
-    !zapis.povucen &&
-    zapis.status.tehnickaProvera === "provereno" &&
-    zapis.status.jezickaProvera === "provereno"
-  );
-}
-
-function nacrtDatum(zapis: SavetiZapis): Date {
-  return new Date(`${zapis.poslednjaProvera ?? "2026-10-08"}T09:00:00+02:00`);
-}
-
-export function getPublicSaveti(now = savetiNow()): SavetiClanak[] {
-  if (savetiNacrtPregled()) {
-    return zapisi
-      .filter(isNacrtZaPregled)
-      .map((zapis) => toPublic(zapis, nacrtDatum(zapis)))
-      .sort((a, b) => a.id.localeCompare(b.id));
+export async function getPublicSaveti(sada = new Date()): Promise<SavetiClanak[]> {
+  if (!bazaDostupna()) return [];
+  try {
+    const db = getDb();
+    const dospeli = await db
+      .select({ id: savetiZakazivanja.id, clanakId: savetiZakazivanja.clanakId, verzijaId: savetiZakazivanja.verzijaId, termin: savetiZakazivanja.termin, izvrseno: savetiZakazivanja.izvrseno })
+      .from(savetiZakazivanja)
+      .where(and(isNull(savetiZakazivanja.otkazano), isNull(savetiZakazivanja.izvrseno), lte(savetiZakazivanja.termin, sada)));
+    const poClanku = new Map(dospeli.map((z) => [z.clanakId, z]));
+    const clanci = await db.select().from(savetiClanci);
+    const javni = clanci
+      .map((clanak) => {
+        const z = poClanku.get(clanak.id) ?? null;
+        const verzijaId = javnaVerzijaU(clanak, z, sada) as string | null;
+        if (!verzijaId) return null;
+        // Termin koji je prošao, a usklađivanje ga još nije upisalo: datum objave je termin.
+        const objava = z && z.verzijaId === verzijaId ? { ...clanak, javnoOd: z.termin, prviPutObjavljeno: clanak.prviPutObjavljeno ?? z.termin } : clanak;
+        return { clanak: objava, verzijaId };
+      })
+      .filter((x): x is { clanak: ClanakRed; verzijaId: string } => x !== null);
+    if (!javni.length) return [];
+    const verzije = await db.select().from(savetiVerzije).where(inArray(savetiVerzije.id, javni.map((j) => j.verzijaId)));
+    const poId = new Map(verzije.map((v) => [v.id, v]));
+    const slike = await slikeZa(verzije.map((v) => v.slikaId));
+    return javni
+      .map(({ clanak, verzijaId }) => {
+        const verzija = poId.get(verzijaId);
+        if (!verzija) return null;
+        const s = verzija.slikaId ? slike.get(verzija.slikaId) : undefined;
+        return verzijaUClanak(clanak, verzija, s && verzija.slikaId ? { id: verzija.slikaId, alt: verzija.slikaAlt, ...s } : null, sada);
+      })
+      .filter((x): x is SavetiClanak => x !== null)
+      .sort((a, b) => b.datumObjave.localeCompare(a.datumObjave));
+  } catch (error) {
+    // Tabele još ne postoje (baza pre 0058) ili baza nije dostupna: rubrika je prazna.
+    console.error("[saveti] javni članci nisu učitani", (error as Error)?.message?.slice(0, 160));
+    return [];
   }
-  return zapisi
-    .map((zapis) => ({ zapis, state: articlePublicationState(zapis, schedule, now, slotIndex) }))
-    .filter(({ state }) => state.stanje === JAVNO_STANJE)
-    .map(({ zapis, state }) => toPublic(zapis, state.objavljeno as Date))
-    .sort((a, b) => b.datumObjave.localeCompare(a.datumObjave));
 }
 
-export function getPublicSavetBySlug(slug: string, now = savetiNow()): SavetiClanak | undefined {
-  const zapis = zapisi.find((item) => item.slug === slug);
-  if (!zapis) return undefined;
-  if (savetiNacrtPregled()) return isNacrtZaPregled(zapis) ? toPublic(zapis, nacrtDatum(zapis)) : undefined;
-  const state = articlePublicationState(zapis, schedule, now, slotIndex);
-  return state.stanje === JAVNO_STANJE ? toPublic(zapis, state.objavljeno as Date) : undefined;
+/** Javni članak po adresi; ranija adresa vraća `preusmerenje` na trenutnu. */
+export async function getPublicSavetBySlug(slug: string): Promise<{ clanak?: SavetiClanak; preusmerenje?: string }> {
+  const all = await getPublicSaveti();
+  const clanak = all.find((item) => item.slug === slug);
+  if (clanak) return { clanak };
+  if (!bazaDostupna()) return {};
+  try {
+    const [alias] = await getDb()
+      .select({ slug: savetiClanci.slug })
+      .from(savetiAdrese)
+      .innerJoin(savetiClanci, eq(savetiClanci.id, savetiAdrese.clanakId))
+      .where(eq(savetiAdrese.slug, slug));
+    if (alias && all.some((item) => item.slug === alias.slug)) return { preusmerenje: alias.slug };
+  } catch {
+    // bez baze nema preusmerenja
+  }
+  return {};
 }
 
 export function toSazetak(clanak: SavetiClanak): SavetiSazetak {
@@ -220,10 +273,10 @@ export function getPublicNovosti(publicArticles: SavetiClanak[]) {
 
 /** Kategorije sa brojem javnih članaka (samo neprazne). */
 export function getPublicKategorije(publicArticles: SavetiClanak[]) {
-  return SAVETI_KATEGORIJE.map((kategorija) => ({
+  return SAVETI_KATEGORIJE.map((kategorija: { slug: string; naziv: string }) => ({
     ...kategorija,
     broj: publicArticles.filter((clanak) => clanak.kategorija === kategorija.slug).length,
-  })).filter((kategorija) => kategorija.broj > 0);
+  })).filter((kategorija: { broj: number }) => kategorija.broj > 0);
 }
 
 /** Kategorija dobija indeksabilnu stranu tek sa ovoliko javnih članaka. */
@@ -231,7 +284,7 @@ export const MIN_CLANAKA_ZA_INDEKS_KATEGORIJE = 3;
 
 /**
  * Povezani javni članci: prvo urednički izabrani (`povezani`), zatim iz iste
- * podteme/kategorije. Budući članak se nikada ne prikazuje ni ne linkuje.
+ * kategorije. Neobjavljen članak se nikada ne prikazuje ni ne linkuje.
  */
 export function getRelatedSaveti(clanak: SavetiClanak, publicArticles: SavetiClanak[], limit = 4) {
   const byId = new Map(publicArticles.map((item) => [item.id, item]));
@@ -248,9 +301,4 @@ export function getRelatedSaveti(clanak: SavetiClanak, publicArticles: SavetiCla
 /** Skup javnih slugova — za odluku da li interni link sme da bude link. */
 export function publicSlugSet(publicArticles: SavetiClanak[]) {
   return new Set(publicArticles.map((clanak) => clanak.slug));
-}
-
-/** Izveštaj o terminima oko trenutka — za zakazani posao. */
-export function getSavetiSlotReport(now: Date, fromIndex: number, toIndex: number) {
-  return slotReport(zapisi, schedule, now, { fromIndex, toIndex });
 }

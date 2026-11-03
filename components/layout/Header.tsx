@@ -29,18 +29,17 @@ import {
   type HeaderMenuKey,
   type NavigationLink,
   PRODUCT_CATEGORIES,
-  SUPPORT_LINKS,
-  SYSTEM_GROUPS,
+  visibleSupportGroups,
 } from "@/components/layout/navigation-data";
 import styles from "./Header.styles";
 import { ArrowIcon, BrandMenuLink, SearchIcon, isMenuLinkActive } from "./HeaderParts";
 import { HeaderMobileMenu } from "./HeaderMobileMenu";
+import { useSavetiDostupni } from "./useSavetiDostupni";
 
 const DESKTOP_MENU_KEYS: HeaderMenuKey[] = [
   "proizvodi",
   "brendovi",
   "sistemi",
-  "podrska",
 ];
 
 type TriggerRefs = Record<HeaderMenuKey, HTMLButtonElement | null>;
@@ -78,7 +77,6 @@ export function Header() {
   const productPanelId = useId();
   const brandPanelId = useId();
   const systemPanelId = useId();
-  const supportPanelId = useId();
   const mobilePanelId = useId();
   const mobileProductId = useId();
   const mobileBrandId = useId();
@@ -118,7 +116,6 @@ export function Header() {
     proizvodi: null,
     brendovi: null,
     sistemi: null,
-    podrska: null,
   });
   const [openMenu, setOpenMenu] = useState<HeaderMenuKey | null>(null);
   const [desktopMenuState, setDesktopMenuState] =
@@ -141,14 +138,15 @@ export function Header() {
     pathname === "/program" ||
     pathname.startsWith("/program/") ||
     pathname === "/dokumentacija" ||
-    pathname === "/b2b-saradnja";
+    pathname === "/b2b-saradnja" ||
+    pathname === "/katalozi" ||
+    pathname.startsWith("/katalozi/") ||
+    pathname === "/vodici" ||
+    pathname.startsWith("/vodici/");
   const storeActive =
     pathname === "/prodavnice" || pathname.startsWith("/prodavnice/");
-  const katalozActive =
-    pathname === "/katalozi" || pathname.startsWith("/katalozi/");
-  const savetiActive =
-    pathname === "/vodici" || pathname.startsWith("/vodici/");
-  const supportActive = pathname === "/kontakt";
+  const savetiDostupni = useSavetiDostupni();
+  const supportGroups = visibleSupportGroups(savetiDostupni);
 
   const revealHeader = useCallback((animate: boolean) => {
     if (entranceStartedRef.current) return;
@@ -947,7 +945,7 @@ export function Header() {
 
             <HeaderDisclosure
               menuKey="sistemi"
-              label="Sistemi i programi"
+              label="Saveti i podrška"
               panelId={systemPanelId}
               active={systemActive}
               open={
@@ -964,10 +962,10 @@ export function Header() {
             >
               <MegaMenuFrame
                 id={systemPanelId}
-                label="Sistemi i programi"
-                eyebrow="Strukturiran izbor"
-                title="Programi, proces i stručna podrška"
-                description="Javno dostupne programske celine i stvarni putevi ka podršci."
+                label="Saveti i podrška"
+                eyebrow="Saveti i podrška"
+                title="Materijali, postupci i stručna podrška"
+                description="Postupci po programima, dokumentacija proizvoda i put do tehničke podrške."
                 state={desktopMenuState}
                 layerRef={desktopLayerRef}
                 panelRef={desktopPanelRef}
@@ -977,25 +975,30 @@ export function Header() {
                 onHoverLeave={handleDesktopPanelLeave}
               >
                 <div className={styles.systemGrid}>
-                  {SYSTEM_GROUPS.map((group, groupIndex) => (
-                    <section
-                      className={styles.systemGroup}
-                      key={group.title}
-                      aria-labelledby={`${systemPanelId}-group-${groupIndex}`}
-                    >
-                      <h3 id={`${systemPanelId}-group-${groupIndex}`}>{group.title}</h3>
-                      <ul>
-                        {group.links.map((link) => (
-                          <li key={`${group.title}-${link.href}-${link.title}`}>
-                            <SystemMenuLink
-                              link={link}
-                              active={isMenuLinkActive(link.href, pathname)}
-                              onNavigate={() => closeDesktopMenu(false)}
-                            />
-                          </li>
-                        ))}
-                      </ul>
-                    </section>
+                  {[supportGroups.slice(0, 1), supportGroups.slice(1)].map((column, columnIndex) => (
+                    <div className={styles.systemColumn} key={columnIndex}>
+                      {column.map((group) => (
+                        <section
+                          className={styles.systemGroup}
+                          key={group.key}
+                          data-group={group.key}
+                          aria-labelledby={`${systemPanelId}-group-${group.key}`}
+                        >
+                          <h3 id={`${systemPanelId}-group-${group.key}`}>{group.title}</h3>
+                          <ul>
+                            {group.links.map((link) => (
+                              <li key={`${group.key}-${link.href}-${link.title}`}>
+                                <SystemMenuLink
+                                  link={link}
+                                  active={isMenuLinkActive(link.href, pathname)}
+                                  onNavigate={() => closeDesktopMenu(false)}
+                                />
+                              </li>
+                            ))}
+                          </ul>
+                        </section>
+                      ))}
+                    </div>
                   ))}
                 </div>
                 <div className={styles.panelFooter}>
@@ -1019,61 +1022,6 @@ export function Header() {
               </Link>
             </li>
 
-            <li className={styles.navItem}>
-              <Link
-                href="/katalozi"
-                className={styles.navLink}
-                aria-current={katalozActive ? "page" : undefined}
-                data-active={katalozActive || undefined}
-                onClick={() => closeDesktopMenu(false)}
-              >
-                Katalozi
-              </Link>
-            </li>
-
-            <li className={styles.navItem}>
-              <Link
-                href="/vodici"
-                className={styles.navLink}
-                aria-current={savetiActive ? "page" : undefined}
-                data-active={savetiActive || undefined}
-                onClick={() => closeDesktopMenu(false)}
-              >
-                Saveti i vodiči
-              </Link>
-            </li>
-
-            <HeaderDisclosure
-              menuKey="podrska"
-              label="Podrška"
-              panelId={supportPanelId}
-              active={supportActive}
-              open={
-                openMenu === "podrska" &&
-                desktopMenuState !== "closed" &&
-                desktopMenuState !== "closing"
-              }
-              renderPanel={openMenu === "podrska"}
-              setTriggerRef={setTriggerRef}
-              onKeyDown={handleTriggerKeyDown}
-              onToggle={toggleDesktopMenu}
-              onHoverEnter={handleDesktopHoverEnter}
-              onHoverLeave={handleDesktopHoverLeave}
-              compact
-            >
-              <SupportMenu
-                id={supportPanelId}
-                state={desktopMenuState}
-                layerRef={desktopLayerRef}
-                panelRef={desktopPanelRef}
-                pathname={pathname}
-                onTransitionEnd={handleDesktopMenuTransitionEnd}
-                onClose={() => closeDesktopMenu(true)}
-                onNavigate={() => closeDesktopMenu(false)}
-                onHoverEnter={keepDesktopHoverOpen}
-                onHoverLeave={handleDesktopPanelLeave}
-              />
-            </HeaderDisclosure>
           </ul>
         </nav>
 
@@ -1142,10 +1090,8 @@ export function Header() {
             brand: brandActive,
             system: systemActive,
             store: storeActive,
-            katalozi: katalozActive,
-            saveti: savetiActive,
-            support: supportActive,
           }}
+          supportGroups={supportGroups}
         />,
         document.body,
       )}
@@ -1304,87 +1250,6 @@ function MegaMenuFrame({
         <div className={styles.panelContent} data-menu-content="true">
           {children}
         </div>
-      </div>
-    </div>
-  );
-}
-
-function SupportMenu({
-  id,
-  state,
-  layerRef,
-  panelRef,
-  pathname,
-  onTransitionEnd,
-  onClose,
-  onNavigate,
-  onHoverEnter,
-  onHoverLeave,
-}: {
-  id: string;
-  state: DesktopMenuState;
-  layerRef: React.RefObject<HTMLDivElement>;
-  panelRef: React.RefObject<HTMLDivElement>;
-  pathname: string;
-  onTransitionEnd: (event: ReactTransitionEvent<HTMLDivElement>) => void;
-  onClose: () => void;
-  onNavigate: () => void;
-  onHoverEnter: () => void;
-  onHoverLeave: (event: ReactPointerEvent<HTMLDivElement>) => void;
-}) {
-  return (
-    <div
-      ref={layerRef}
-      className={styles.megaLayer}
-      data-state={state}
-      onTransitionEnd={onTransitionEnd}
-    >
-      <button
-        type="button"
-        className={styles.megaBackdrop}
-        aria-label="Zatvorite meni podrške"
-        tabIndex={-1}
-        onClick={onClose}
-      />
-      <span
-        className={styles.menuSequenceSentinel}
-        data-menu-sequence-end="true"
-        aria-hidden="true"
-      />
-      <div
-        ref={panelRef}
-        id={id}
-        className={styles.supportPanel}
-        data-support-surface="true"
-        aria-labelledby={`${id}-trigger`}
-        onPointerEnter={onHoverEnter}
-        onPointerLeave={onHoverLeave}
-      >
-        <div className={styles.supportHeading}>
-          <div>
-            <p>Stručni tim</p>
-            <h2>Kako možemo da pomognemo?</h2>
-          </div>
-          <button
-            type="button"
-            className={styles.panelClose}
-            aria-label="Zatvorite meni podrške"
-            onClick={onClose}
-          >
-            <CloseIcon />
-          </button>
-        </div>
-        <ul className={styles.supportLinks}>
-          {SUPPORT_LINKS.map((link) => (
-            <li key={`${link.href}-${link.title}`}>
-              <SystemMenuLink
-                link={link}
-                active={isMenuLinkActive(link.href, pathname)}
-                onNavigate={onNavigate}
-              />
-            </li>
-          ))}
-        </ul>
       </div>
     </div>
   );

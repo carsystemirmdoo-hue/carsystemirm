@@ -101,3 +101,6 @@ public/products/*/pending-rights/
 
 # Lokalni kandidati za pregled (bez potvrđenih prava) — nikad u repo.
 /public/_lokalno/
+
+# Sirovi odgovori Overpass-a za spisak naselja (scripts/places/build-settlements.mts)
+/.cache/

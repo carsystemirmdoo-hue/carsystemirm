@@ -2,8 +2,18 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import { PartnerMap } from "@/components/stores/PartnerMap";
+import { getCityDisplayEntries } from "@/components/stores/store-locator-display";
+import { SearchableCombobox } from "@/components/ui/SearchableCombobox";
 import { toTelHref } from "@/lib/company-contact";
-import { findNearestPartnerStore } from "@/lib/nearest-store";
+import { findNearestPartnerStore, type GeoPoint } from "@/lib/nearest-store";
+import { PLACE_VALUE_PREFIX, type ChosenPlace, useSettlementIndex } from "@/lib/places/useSettlementIndex";
+import {
+  distanceKindLabel,
+  formatDistanceKm,
+  navigationHref,
+  rankStoresByDistance,
+  splitRankedStores,
+} from "@/lib/store-distance";
 import {
   getLocationCategoryLabel,
   getLocationCategoryOptions,
@@ -32,11 +42,6 @@ function normalize(value: string) {
 
 function telHref(phone: string) {
   return toTelHref(phone) ?? undefined;
-}
-
-function routeHref(store: PartnerStore) {
-  if (!hasPartnerCoordinates(store)) return null;
-  return `https://www.openstreetmap.org/?mlat=${store.latitude}&mlon=${store.longitude}#map=15/${store.latitude}/${store.longitude}`;
 }
 
 function locationNotice(store: PartnerStore) {
@@ -91,11 +96,80 @@ export function StoreLocator({ stores }: { stores: PartnerStore[] }) {
   // Tačan filter po gradu iz `?grad=<ključ>` (veza „Sve lokacije (N)” sa početne): isti ključ
   // grada kao na početnoj, pa broj na vezi odgovara broju lokacija ovde.
   const [cityFilter, setCityFilter] = useState("");
+  // Polazna tačka: izabrano mesto (bilo koje naselje Srbije) ili lokacija korisnika.
+  // Ne filtrira listu — sve lokacije ostaju, poređane od najbliže.
+  const [place, setPlace] = useState<ChosenPlace | null>(null);
+  const [origin, setOrigin] = useState<GeoPoint | null>(null);
+  const [originLabel, setOriginLabel] = useState("");
+  const places = useSettlementIndex();
+  const { resolve: resolvePlace } = places;
+  const cityOptions = useMemo(
+    () => getCityDisplayEntries(stores).map((entry) => ({ label: entry.city, value: entry.key })),
+    [stores],
+  );
 
   useEffect(() => {
-    const key = new URLSearchParams(window.location.search).get("grad");
+    const params = new URLSearchParams(window.location.search);
+    const key = params.get("grad");
     if (key && stores.some((store) => getPartnerCityKey(store) === key)) setCityFilter(key);
+    // `?mesto=<RZS broj>` (veza sa početne ili podeljena adresa): lista od tog mesta.
+    const ref = params.get("mesto");
+    if (ref && /^\d+$/.test(ref)) {
+      void resolvePlace(`${PLACE_VALUE_PREFIX}${ref}`).then((chosen) => {
+        if (chosen) applyPlace(chosen, false);
+      });
+    }
+    // Adresa se čita samo pri prvom prikazu.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [stores]);
+
+  function setPlaceInUrl(ref: string | null) {
+    const url = new URL(window.location.href);
+    if (ref) url.searchParams.set("mesto", ref);
+    else url.searchParams.delete("mesto");
+    window.history.replaceState(null, "", `${url.pathname}${url.search}${url.hash}`);
+  }
+
+  function applyPlace(chosen: ChosenPlace, updateUrl = true) {
+    setPlace(chosen);
+    setOrigin(chosen.point);
+    setOriginLabel(chosen.label);
+    setSelectedId("");
+    if (updateUrl) setPlaceInUrl(chosen.ref);
+    const ranked = rankStoresByDistance(stores, chosen.point);
+    const nearest = ranked.find((item) => item.distanceKm !== null);
+    setLocatorStatus(
+      nearest && nearest.distanceKm !== null
+        ? `Lokacije su poređane od mesta ${chosen.label}, približno ${distanceKindLabel("air")}. Najbliža: ${nearest.store.name}, ${nearest.store.city} — oko ${formatDistanceKm(nearest.distanceKm)}.`
+        : `Za mesto ${chosen.label} nije moguće izračunati udaljenost: lokacije nemaju koordinate.`,
+    );
+    railRef.current?.scrollTo({ top: 0 });
+  }
+
+  async function handlePlaceChange(value: string) {
+    const cityStore = stores.find((store) => getPartnerCityKey(store) === value);
+    setLocatorStatus("Tražimo izabrano mesto…");
+    const chosen = await resolvePlace(
+      value,
+      cityStore ? getPartnerCityLabel(cityStore) : undefined,
+      cityStore && hasPartnerCoordinates(cityStore)
+        ? { lat: cityStore.latitude, lng: cityStore.longitude }
+        : null,
+    );
+    if (!chosen) {
+      setLocatorStatus("Spisak mesta trenutno nije dostupan. Koristite svoju lokaciju ili pretragu po nazivu.");
+      return;
+    }
+    applyPlace(chosen);
+  }
+
+  function clearPlace() {
+    setPlace(null);
+    setOrigin(null);
+    setOriginLabel("");
+    setPlaceInUrl(null);
+    setLocatorStatus("");
+  }
 
   const cityFilterLabel = useMemo(() => {
     const store = cityFilter ? stores.find((item) => getPartnerCityKey(item) === cityFilter) : undefined;
@@ -131,6 +205,19 @@ export function StoreLocator({ stores }: { stores: PartnerStore[] }) {
       );
     });
   }, [cityFilter, query, stores, typeFilter]);
+
+  // Sa polaznom tačkom: od najbliže, a lokacije bez koordinata kao posebna grupa na kraju.
+  const rankedList = useMemo(
+    () =>
+      origin
+        ? rankStoresByDistance(filteredStores, origin)
+        : filteredStores.map((store) => ({ store, distanceKm: null, kind: "air" as const })),
+    [filteredStores, origin],
+  );
+  const { withDistance, withoutDistance } = useMemo(
+    () => (origin ? splitRankedStores(rankedList) : { withDistance: rankedList, withoutDistance: [] }),
+    [origin, rankedList],
+  );
 
   const visibleIds = useMemo(
     () => new Set(filteredStores.map((store) => store.id)),
@@ -203,10 +290,14 @@ export function StoreLocator({ stores }: { stores: PartnerStore[] }) {
         setQuery("");
         setTypeFilter("");
         clearCityFilter();
+        setPlace(null);
+        setPlaceInUrl(null);
+        setOrigin(origin);
+        setOriginLabel("Vaša lokacija");
         setSelectedId(nearest.store.id);
         scrollResultIntoView(nearest.store.id);
         setLocatorStatus(
-          `Najbliža dostupna lokacija: ${nearest.store.name}, ${nearest.store.city} — oko ${Math.max(1, Math.round(nearest.distanceKm))} km.`,
+          `Najbliža dostupna lokacija: ${nearest.store.name}, ${nearest.store.city} — oko ${formatDistanceKm(nearest.distanceKm)} ${distanceKindLabel("air")}. Ostale lokacije su poređane od najbliže.`,
         );
       },
       () => {
@@ -229,6 +320,115 @@ export function StoreLocator({ stores }: { stores: PartnerStore[] }) {
 
   const showMap = mappableStores.length > 0 && !mapFailed;
 
+  function renderStore(store: PartnerStore, distanceKm: number | null) {
+    const isSelected = store.id === selectedId;
+
+    return (
+      <article
+        id={store.id}
+        className={`${styles.resultItem} ${
+          isSelected ? styles.resultItemSelected : ""
+        } cs-interactive-surface`}
+        data-category={getPrimaryLocationCategory(store)}
+        data-motion-surface
+        key={store.id}
+        onBlur={(event) => {
+          if (!event.currentTarget.contains(event.relatedTarget)) {
+            setHoveredId((current) => (current === store.id ? "" : current));
+          }
+        }}
+        onFocus={() => setHoveredId(store.id)}
+        onMouseEnter={() => setHoveredId(store.id)}
+        onMouseLeave={() =>
+          setHoveredId((current) => (current === store.id ? "" : current))
+        }
+        ref={(node) => {
+          if (node) {
+            resultRefs.current.set(store.id, node);
+          } else {
+            resultRefs.current.delete(store.id);
+          }
+        }}
+      >
+        <button
+          aria-pressed={isSelected}
+          className={styles.resultButton}
+          onClick={() => handleSelectFromList(store.id)}
+          type="button"
+        >
+          <span className={styles.resultCategory} data-category={getPrimaryLocationCategory(store)}>
+            <i aria-hidden="true" className={styles.categoryMark} data-category={getPrimaryLocationCategory(store)} />
+            {getLocationCategoryLabel(getPrimaryLocationCategory(store))}
+          </span>
+          <span className={styles.resultKicker}>
+            <span>
+              {getPartnerLocationTypeLabel(store)} · {store.city}
+            </span>
+            <i aria-hidden="true" />
+          </span>
+          <strong>{store.name}</strong>
+          <span className={styles.resultAddress}>{store.address}</span>
+          {/* Telefon je vidljiv u svakoj kartici, ne tek posle izbora prodavnice. */}
+          {store.phone ? (
+            <span className={styles.resultAddress}>Tel. {store.phone}</span>
+          ) : null}
+          {locationNotice(store) ? (
+            <span className={styles.resultNote}>{locationNotice(store)}</span>
+          ) : null}
+          {distanceKm !== null ? (
+            <span className={styles.resultDistance}>
+              ≈ {formatDistanceKm(distanceKm)}{" "}
+              <small>
+                {distanceKindLabel("air")} od: {originLabel}
+              </small>
+            </span>
+          ) : null}
+        </button>
+
+        {/* Navigacija je vidljiva u svakoj kartici posle izbora mesta, ne tek posle izbora lokacije. */}
+        {origin && !isSelected && navigationHref(store, origin) ? (
+          <a
+            className={styles.resultNavLink}
+            href={navigationHref(store, origin) ?? undefined}
+            rel="noreferrer"
+            target="_blank"
+          >
+            Navigacija →
+          </a>
+        ) : null}
+
+        {isSelected ? (
+          <div className={styles.resultActions}>
+            {store.phone ? (
+              <a
+                className={`${styles.primaryButton} cs-magnetic-cta cs-theme-wipe-card`}
+                data-cursor="button"
+                data-motion-surface
+                data-motion="theme-wipe"
+                href={telHref(store.phone)}
+              >
+                <span>Pozovite</span>
+              </a>
+            ) : null}
+            {navigationHref(store, origin) ? (
+              <a
+                className={styles.secondaryButton}
+                href={navigationHref(store, origin) ?? undefined}
+                rel="noreferrer"
+                target="_blank"
+              >
+                Navigacija →
+              </a>
+            ) : null}
+            <a className={styles.ghostAction} href={`/kontakt?tema=prodavnica&prodavnica=${store.id}`}>
+              Pošaljite upit
+            </a>
+          </div>
+        ) : null}
+      </article>
+    );
+  }
+
   return (
     <main className={styles.main}>
       <section className={styles.hero} aria-labelledby="stores-title">
@@ -246,6 +446,24 @@ export function StoreLocator({ stores }: { stores: PartnerStore[] }) {
       </section>
 
       <section className={`${styles.controls} ${styles.controlsReveal}`} aria-label="Pretraga i filteri">
+        <div className={styles.placeBox}>
+          <SearchableCombobox
+            ariaLabel="Vaše mesto"
+            disabled={!hasPublicStores}
+            emptyMessage="Nema mesta koje odgovara unosu. Proverite naziv."
+            id="store-place"
+            loadingMessage="Učitavamo spisak mesta…"
+            onChange={(value) => void handlePlaceChange(value)}
+            onOpen={places.load}
+            options={cityOptions}
+            placeholder="Vaše mesto — od najbliže lokacije"
+            searchOptions={places.searchOptions}
+            searchPlaceholder="Upišite mesto (npr. Čačak, Чачак)"
+            sheetTitle="Izaberite mesto"
+            value={place?.value ?? ""}
+            valueLabel={place?.label}
+          />
+        </div>
         <div className={styles.searchBox}>
           <label className="sr-only" htmlFor="store-search">
             Pretraga lokacija
@@ -254,7 +472,7 @@ export function StoreLocator({ stores }: { stores: PartnerStore[] }) {
             className={styles.searchInput}
             id="store-search"
             onChange={(event) => setQuery(event.target.value)}
-            placeholder="Pretražite grad, naziv ili adresu..."
+            placeholder="Filtrirajte po nazivu, gradu ili adresi..."
             ref={searchRef}
             type="search"
             value={query}
@@ -305,6 +523,17 @@ export function StoreLocator({ stores }: { stores: PartnerStore[] }) {
           </button>
         ) : null}
 
+        {place ? (
+          <button
+            aria-label={`Uklonite polazno mesto: ${place.label}`}
+            className={`${styles.typeChip} ${styles.typeChipActive}`}
+            onClick={clearPlace}
+            type="button"
+          >
+            Od mesta: {place.label} <span aria-hidden="true">×</span>
+          </button>
+        ) : null}
+
         <button className={styles.locateButton} onClick={handleLocationRequest} type="button">
           Koristite svoju lokaciju
         </button>
@@ -313,6 +542,12 @@ export function StoreLocator({ stores }: { stores: PartnerStore[] }) {
       <div className={styles.resultsMeta}>
         <span>{resultCountLabel}</span>
         <span aria-live="polite">{locatorStatus}</span>
+        {origin ? (
+          <span className={styles.distanceNote}>
+            Udaljenost je približna: vazdušnom linijom od centra mesta, ne kilometraža vožnje.
+            Spisak mesta: © OpenStreetMap saradnici (ODbL).
+          </span>
+        ) : null}
       </div>
 
       <section className={styles.locatorShell} aria-label="Mapa i rezultati">
@@ -324,6 +559,8 @@ export function StoreLocator({ stores }: { stores: PartnerStore[] }) {
                 onError={() => setMapFailed(true)}
                 onReady={() => setMapFailed(false)}
                 onSelect={handleSelectFromMap}
+                origin={origin}
+                originLabel={originLabel || undefined}
                 selectedId={selectedId}
                 stores={stores}
                 visibleIds={visibleIds}
@@ -355,14 +592,14 @@ export function StoreLocator({ stores }: { stores: PartnerStore[] }) {
                         Pozovite
                       </a>
                     ) : null}
-                    {routeHref(selectedStore) ? (
+                    {navigationHref(selectedStore, origin) ? (
                       <a
                         className={styles.summaryRoute}
-                        href={routeHref(selectedStore) ?? undefined}
+                        href={navigationHref(selectedStore, origin) ?? undefined}
                         rel="noreferrer"
                         target="_blank"
                       >
-                        Ruta →
+                        Navigacija →
                       </a>
                     ) : null}
                   </div>
@@ -386,95 +623,16 @@ export function StoreLocator({ stores }: { stores: PartnerStore[] }) {
         </div>
 
         <div className={styles.resultsRail} ref={railRef}>
-          {filteredStores.length > 0 ? (
-            filteredStores.map((store) => {
-              const isSelected = store.id === selectedId;
-
-              return (
-                <article
-                  id={store.id}
-                  className={`${styles.resultItem} ${
-                    isSelected ? styles.resultItemSelected : ""
-                  } cs-interactive-surface`}
-                  data-category={getPrimaryLocationCategory(store)}
-                  data-motion-surface
-                  key={store.id}
-                  onBlur={(event) => {
-                    if (!event.currentTarget.contains(event.relatedTarget)) {
-                      setHoveredId((current) => (current === store.id ? "" : current));
-                    }
-                  }}
-                  onFocus={() => setHoveredId(store.id)}
-                  onMouseEnter={() => setHoveredId(store.id)}
-                  onMouseLeave={() =>
-                    setHoveredId((current) => (current === store.id ? "" : current))
-                  }
-                  ref={(node) => {
-                    if (node) {
-                      resultRefs.current.set(store.id, node);
-                    } else {
-                      resultRefs.current.delete(store.id);
-                    }
-                  }}
-                >
-                  <button
-                    aria-pressed={isSelected}
-                    className={styles.resultButton}
-                    onClick={() => handleSelectFromList(store.id)}
-                    type="button"
-                  >
-                    <span className={styles.resultCategory} data-category={getPrimaryLocationCategory(store)}>
-                      <i aria-hidden="true" className={styles.categoryMark} data-category={getPrimaryLocationCategory(store)} />
-                      {getLocationCategoryLabel(getPrimaryLocationCategory(store))}
-                    </span>
-                    <span className={styles.resultKicker}>
-                      <span>
-                        {getPartnerLocationTypeLabel(store)} · {store.city}
-                      </span>
-                      <i aria-hidden="true" />
-                    </span>
-                    <strong>{store.name}</strong>
-                    <span className={styles.resultAddress}>{store.address}</span>
-                    {/* Telefon je vidljiv u svakoj kartici, ne tek posle izbora prodavnice. */}
-                    {store.phone ? (
-                      <span className={styles.resultAddress}>Tel. {store.phone}</span>
-                    ) : null}
-                    {locationNotice(store) ? (
-                      <span className={styles.resultNote}>{locationNotice(store)}</span>
-                    ) : null}
-                  </button>
-
-                  {isSelected ? (
-                    <div className={styles.resultActions}>
-                      {store.phone ? (
-                        <a
-                          className={`${styles.primaryButton} cs-magnetic-cta cs-theme-wipe-card`}
-                          data-cursor="button"
-                          data-motion-surface
-                          data-motion="theme-wipe"
-                          href={telHref(store.phone)}
-                        >
-                          <span>Pozovite</span>
-                        </a>
-                      ) : null}
-                      {routeHref(store) ? (
-                        <a
-                          className={styles.secondaryButton}
-                          href={routeHref(store) ?? undefined}
-                          rel="noreferrer"
-                          target="_blank"
-                        >
-                          Ruta →
-                        </a>
-                      ) : null}
-                      <a className={styles.ghostAction} href={`/kontakt?tema=prodavnica&prodavnica=${store.id}`}>
-                        Pošaljite upit
-                      </a>
-                    </div>
-                  ) : null}
-                </article>
-              );
-            })
+          {rankedList.length > 0 ? (
+            <>
+              {withDistance.map((item) => renderStore(item.store, item.distanceKm))}
+              {origin && withoutDistance.length > 0 ? (
+                <p className={styles.resultGroupLabel}>
+                  Bez tačne pozicije na mapi — udaljenost nije izračunata
+                </p>
+              ) : null}
+              {withoutDistance.map((item) => renderStore(item.store, null))}
+            </>
           ) : (
             <div className={styles.emptyState}>
               <strong>

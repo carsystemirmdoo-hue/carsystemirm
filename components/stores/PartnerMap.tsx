@@ -62,6 +62,7 @@ export function PartnerMap({
   onReady,
   onSelect,
   origin = null,
+  originLabel = "Vaša lokacija",
   selectedId,
   selectedZoom = SELECTED_ZOOM,
   stores,
@@ -76,6 +77,8 @@ export function PartnerMap({
   onSelect: (storeId: string) => void;
   /** Korisnikova lokacija posle „Koristite svoju lokaciju“: marker „Vi“ i kadar sa najbližima. */
   origin?: { lat: number; lng: number } | null;
+  /** Naziv polazne tačke (izabrano mesto ili „Vaša lokacija“). */
+  originLabel?: string;
   selectedId: string;
   /** Zum pri izboru lokacije; na početnoj je pregledan, da ostale lokacije ostanu vidljive. */
   selectedZoom?: number;
@@ -494,7 +497,7 @@ export function PartnerMap({
     const element = document.createElement("span");
     element.className = mapStyles.mapMarkerOrigin;
     element.setAttribute("aria-hidden", "true");
-    element.title = "Vaša lokacija";
+    element.title = originLabel;
     const marker = new (maplibre().Marker)({ element }).setLngLat([origin.lng, origin.lat]).addTo(map);
 
     // Kadar: korisnik + pet najbližih lokacija, da se vidi okolina, ne samo jedna tačka.
@@ -519,7 +522,7 @@ export function PartnerMap({
     return () => {
       marker.remove();
     };
-  }, [origin, prefersReducedMotion, status, storesWithCoords]);
+  }, [origin, originLabel, prefersReducedMotion, status, storesWithCoords]);
 
   return (
     <div className={`${mapStyles.mapCanvasShell} ${className}`}>

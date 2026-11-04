@@ -453,7 +453,7 @@ export function FreshnessLine({ profile }: { profile: CustomerProfile }) {
   return (
     <div className="cs-freshness" data-tone={tone}>
       <span>
-        Podaci do <strong>{srDate(profile.today)}</strong> · poslednji uvoz {fmtTime(profile.lastIngestedAt)}
+        Stanje na dan <strong>{srDate(profile.today)}</strong> · poslednji uvoz {fmtTime(profile.lastIngestedAt)}
       </span>
       <span>
         Obračun preporuka:{" "}

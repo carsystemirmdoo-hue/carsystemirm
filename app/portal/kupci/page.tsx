@@ -11,7 +11,7 @@ import {
   loadScopedCustomers,
 } from "@/lib/sales/queries";
 import { matchesStatusFilter, parseCustomerStatusFilter } from "@/lib/customers/customerStatus.mjs";
-import { filterCustomerList, parseCustomerListFilter } from "@/lib/customers/customerListFilter.mjs";
+import { filterCustomerList, parseCustomerListFilter, sortCustomersByName } from "@/lib/customers/customerListFilter.mjs";
 import { listAssigneesByCustomer, listSalesReps } from "@/lib/partners/assignment-service";
 
 
@@ -37,11 +37,11 @@ export default async function CustomersPage({
     listAssigneesByCustomer(allScoped.map((c) => c.id)),
     scoped ? Promise.resolve([]) : listSalesReps(),
   ]);
-  const customers = filterCustomerList(
+  const customers = sortCustomersByName(filterCustomerList(
     allScoped.filter((c) => matchesStatusFilter(c.active, statusFilter)),
     listFilter,
     assignees,
-  );
+  ));
   const filtered = Boolean(listFilter.q || listFilter.rep);
   const neaktivnih = allScoped.filter((c) => !c.active).length;
 

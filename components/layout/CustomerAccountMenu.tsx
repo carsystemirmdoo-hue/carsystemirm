@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { CustomerCartLink } from "@/components/cart/CustomerCartLink";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useId, useRef, useState } from "react";
 import { customerSignOutAction } from "@/app/prijava/kupac/actions";
@@ -121,11 +122,13 @@ export function CustomerAccountMenu({ variant = "desktop", onNavigate }: { varia
           <small>Prijavljeni ste</small>
           {state.company}
         </span>
-        {links.map((l) => (
-          <Link key={l.href} href={l.href} className={styles.mobileLink} onClick={onNavigate}>
+        {links.map((l) => {
+          const NavLink = l.href === "/kupac/korpa" ? CustomerCartLink : Link;
+          return (
+          <NavLink key={l.href} href={l.href} className={styles.mobileLink} onClick={onNavigate}>
             {l.label}
-          </Link>
-        ))}
+          </NavLink>
+        ); })}
         <form action={customerSignOutAction}>
           <input type="hidden" name="returnTo" value={here(pathname)} />
           <button type="submit" className={styles.mobileLink}>Odjavite se</button>
@@ -136,10 +139,10 @@ export function CustomerAccountMenu({ variant = "desktop", onNavigate }: { varia
 
   return (
     <div className={styles.root} ref={rootRef} data-account="signed-in">
-      <Link href="/kupac/korpa" className={styles.cart} aria-label={state.cartCount ? `Korpa, ${state.cartCount} stavki` : "Korpa"}>
+      <CustomerCartLink href="/kupac/korpa" className={styles.cart} aria-label={state.cartCount ? `Korpa, ${state.cartCount} stavki` : "Korpa"}>
         <CartIcon />
         {state.cartCount ? <span className={styles.cartCount}>{state.cartCount}</span> : null}
-      </Link>
+      </CustomerCartLink>
       <button
         type="button"
         className={styles.trigger}
@@ -159,11 +162,13 @@ export function CustomerAccountMenu({ variant = "desktop", onNavigate }: { varia
             {state.name}
             <small>{state.company}</small>
           </p>
-          {links.map((l) => (
-            <Link key={l.href} href={l.href} role="menuitem" onClick={() => setOpen(false)}>
+          {links.map((l) => {
+          const NavLink = l.href === "/kupac/korpa" ? CustomerCartLink : Link;
+          return (
+            <NavLink key={l.href} href={l.href} role="menuitem" onClick={() => setOpen(false)}>
               {l.label}
-            </Link>
-          ))}
+            </NavLink>
+          ); })}
           <form action={customerSignOutAction}>
             <input type="hidden" name="returnTo" value={here(pathname)} />
             <button type="submit" role="menuitem">Odjavite se</button>

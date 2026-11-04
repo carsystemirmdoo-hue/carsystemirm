@@ -1,0 +1,44 @@
+.checkout, .main { display: grid; grid-template-columns: minmax(0, 1fr); gap: 20px; }
+.summary { min-width: 0; }
+.summary > section { display: grid; gap: 12px; }
+.overview { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; padding: 20px 0; margin: 0; border-block: 1px solid var(--p-line); }
+.overview dt { color: var(--p-muted); font-size: 13px; }
+.overview dd { margin: 6px 0 0; font-size: 22px; font-weight: 650; font-variant-numeric: tabular-nums; }
+.overview > p { grid-column: 1 / -1; font-size: 13px; color: var(--p-muted); margin: 0; }
+.table { table-layout: fixed; }
+.table th, .table td { overflow-wrap: anywhere; }
+.table th:first-child { width: 8%; }
+.table th:nth-child(2) { width: 22%; }
+.table th:nth-child(3), .table th:nth-child(6) { width: 15%; }
+.table th:nth-child(5), .table th:last-child { width: 7%; }
+.table :global(th), .table :global(td.pn-r), .table :global(.pn-num), .table :global(.pn-c-code), .table :global(.pn-sub.pn-num) { white-space: normal; }
+.table :global(.pn-c-name) { min-width: 0; }
+@media (max-width: 760px) { .table { table-layout: auto; } .overview { gap: 12px; } .overview dd { font-size: 16px; } }
+@media (max-width: 380px) { .overview { grid-template-columns: 1fr 1fr; } .overview > div:last-of-type { grid-column: 1 / -1; } }
+/* Uži desktop i tablet: svaka stavka zadržava sve iznose bez bočnog skrola. */
+.checkout .table thead th, .checkout .table :global(.pn-th-sub) { white-space: normal; }
+@media (max-width: 1100px) {
+  .checkout .table, .checkout .table tbody, .checkout .table tr { display: block; width: 100%; }
+  .checkout .table thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+  .checkout .table tr { padding: 16px; border-bottom: 1px solid var(--p-line); }
+  .checkout .table tbody tr:last-child { border-bottom: 0; }
+  .checkout .table td { width: 100%; border: 0; padding: 4px 0; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); column-gap: 12px; justify-items: end; text-align: right; }
+  .checkout .table td > * { grid-column: 2; }
+  .checkout .table td::before { content: attr(data-label); grid-column: 1; grid-row: 1 / span 6; justify-self: start; color: var(--p-muted); font-size: 13px; text-align: left; white-space: normal; }
+  .checkout .table td:not([data-label])::before { content: none; }
+  .checkout .table :global(td.pn-c-name), .checkout .table :global(td.pn-c-code) { display: block; text-align: left; }
+  .checkout .table :global(td.pn-c-name) { padding-bottom: 12px; }
+  .checkout .table :global(td.pn-c-name .pn-sub) { text-align: left; }
+  .checkout .table :global(td.pn-c-code) { color: var(--p-muted); font-size: 12px; }
+  .checkout .table :global(td.pn-c-total) { border-top: 1px solid var(--p-line); margin-top: 8px; padding-top: 10px; }
+  .checkout .table :global(td.pn-c-actions) { display: flex; justify-content: flex-end; }
+}
+@media (min-width: 720px) and (max-width: 1100px) {
+  .checkout .table tbody { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .checkout .table tr:nth-child(odd) { border-right: 1px solid var(--p-line); }
+}
+@media (max-width: 600px) {
+  .overview { grid-template-columns: 1fr 1fr; }
+  .overview > div:last-of-type { grid-column: 1 / -1; }
+  .overview > div:last-of-type dd { font-size: 22px; }
+}

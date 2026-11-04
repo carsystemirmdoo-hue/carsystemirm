@@ -164,9 +164,9 @@ export function HeaderMobileMenu({
                     <ul>
                       {group.key === "materijali" ? (
                         <MobileMenuLink
-                          href="/program"
-                          label="Svi programi"
-                          active={pathname === "/program"}
+                          href="/katalog"
+                          label="Svi proizvodi"
+                          active={pathname === "/katalog"}
                           onNavigate={onNavigate}
                         />
                       ) : null}

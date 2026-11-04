@@ -559,7 +559,7 @@ export function Header() {
     if (desktopMenuStateRef.current === "opening") {
       const mainSurfaceFinished =
         target.dataset.menuSurface === "true" &&
-        event.propertyName.includes("clip-path");
+        event.propertyName === "opacity";
       const mainSequenceFinished =
         target.dataset.menuOpenSequenceEnd === "true" &&
         event.propertyName === "transform";
@@ -1002,8 +1002,8 @@ export function Header() {
                   ))}
                 </div>
                 <div className={styles.panelFooter}>
-                  <Link href="/program" onClick={() => closeDesktopMenu(false)}>
-                    Pogledajte sve programe
+                  <Link href="/katalog" onClick={() => closeDesktopMenu(false)}>
+                    Pogledajte proizvode
                     <ArrowIcon />
                   </Link>
                 </div>

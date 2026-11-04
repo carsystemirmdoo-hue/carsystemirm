@@ -43,9 +43,12 @@ export default async function CustomerAccountLayout({ children }: { children: Re
           </div>
           <div className="pn-inline">
             {siteOpen ? (
+              <>
+              <Link href="/" className="pn-btn" data-size="sm">Početna</Link>
               <Link href="/katalog" className="pn-btn" data-size="sm">
                 Nazad na katalog
               </Link>
+              </>
             ) : null}
             <form action={customerSignOutAction}>
               <button type="submit" className="pn-btn" data-size="sm">

@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { CustomerCartLink } from "@/components/cart/CustomerCartLink";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 
@@ -55,8 +56,9 @@ export function AccountTabs({ ordering, awaiting = 0 }: { ordering: boolean; awa
       <div className="pn-tabs-scroll" ref={scroller}>
         {TABS.filter((t) => ordering || !("ordering" in t)).map((t) => {
           const active = t.exact ? pathname === t.href : pathname === t.href || pathname.startsWith(`${t.href}/`);
+          const NavLink = t.href === "/kupac/korpa" ? CustomerCartLink : Link;
           return (
-            <Link key={t.href} href={t.href} aria-current={active ? "page" : undefined}>
+            <NavLink key={t.href} href={t.href} aria-current={active ? "page" : undefined}>
               {t.label}
               {"awaiting" in t && awaiting > 0 ? (
                 <>
@@ -66,7 +68,7 @@ export function AccountTabs({ ordering, awaiting = 0 }: { ordering: boolean; awa
                   <span className="pn-sr">, čeka Vas: {awaiting}</span>
                 </>
               ) : null}
-            </Link>
+            </NavLink>
           );
         })}
       </div>

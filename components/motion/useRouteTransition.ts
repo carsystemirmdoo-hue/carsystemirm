@@ -410,7 +410,7 @@ export function useRouteTransition() {
 
       const target = event.target instanceof Element ? event.target : null;
       const anchor = target?.closest<HTMLAnchorElement>("a[href]");
-      if (!anchor) return;
+      if (!anchor || anchor.hasAttribute("data-route-transition-skip")) return;
       if (anchor.target && anchor.target !== "_self") return;
       if (anchor.hasAttribute("download")) return;
 

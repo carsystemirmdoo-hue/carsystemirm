@@ -568,7 +568,7 @@
   height: 2px;
   background: var(--header-red);
   transform: scaleX(0);
-  transition: transform 170ms var(--header-ease) 200ms;
+  transition: transform 160ms var(--header-ease);
 }
 
 .menuRailLeft {
@@ -593,7 +593,7 @@
   background: var(--header-red);
   opacity: 0;
   transform: translate(-50%, -50%);
-  transition: opacity 80ms ease 300ms;
+  transition: opacity 80ms ease;
 }
 
 .menuSequenceSentinel,
@@ -605,18 +605,18 @@
 }
 
 .menuSequenceSentinel {
-  transition: transform 400ms linear;
+  transition: transform 180ms linear;
 }
 
 .menuOpenSequenceSentinel {
-  transition: transform 650ms linear;
+  transition: transform 180ms linear;
 }
 
 .megaLayer[data-state="opening"] .menuRailLeft,
 .megaLayer[data-state="opening"] .menuRailRight {
   transform: scaleX(1);
-  transition-duration: 290ms;
-  transition-delay: 40ms;
+  transition-duration: 160ms;
+  transition-delay: 0ms;
 }
 
 .megaLayer[data-state="opening"] .menuAnchorDot {
@@ -666,11 +666,12 @@
   border-radius: 0 0 var(--ds-overlay-radius) var(--ds-overlay-radius);
   background: var(--header-panel);
   box-shadow: var(--header-shadow);
-  clip-path: inset(0 0 100% 0);
+  opacity: 0;
+  transform: translateY(-6px);
   padding: 1.25rem 1.35rem 1rem;
   pointer-events: auto;
   transform-origin: top center;
-  transition: clip-path 280ms var(--header-ease) 90ms;
+  transition: opacity 160ms var(--header-ease), transform 180ms var(--header-ease);
 }
 
 :global(html[data-rm-atmosphere="refinity"])
@@ -690,13 +691,15 @@
 }
 
 .megaLayer[data-state="opening"] .megaPanel {
-  clip-path: inset(0 0 0 0);
-  transition-duration: 460ms;
-  transition-delay: 190ms;
+  opacity: 1;
+  transform: translateY(0);
+  transition-duration: 180ms;
+  transition-delay: 0ms;
 }
 
 .megaLayer[data-state="open"] .megaPanel {
-  clip-path: inset(0 0 0 0);
+  opacity: 1;
+  transform: translateY(0);
   transition-delay: 0ms;
 }
 
@@ -733,17 +736,17 @@
 }
 
 .megaLayer[data-state="opening"] .panelHeading {
-  transition-duration: 260ms;
-  transition-delay: 290ms;
+  transition-duration: 160ms;
+  transition-delay: 0ms;
 }
 
 .megaLayer[data-state="opening"] .panelContent > * {
-  transition-duration: 260ms;
-  transition-delay: 310ms;
+  transition-duration: 160ms;
+  transition-delay: 0ms;
 }
 
 .megaLayer[data-state="opening"] .panelContent > :last-child {
-  transition-delay: 330ms;
+  transition-delay: 0ms;
 }
 
 .megaLayer[data-state="open"] .panelHeading,

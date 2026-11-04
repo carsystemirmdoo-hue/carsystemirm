@@ -201,8 +201,8 @@ export function PaintTakeoverHomeSection({
             susreću u jednom potezu.
           </p>
           {/* Tema okvira tokom bloka = izgled bloka, pa „theme“ daje tačan kontrast. */}
-          <Link className={`${styles.primaryCta} cs-cta`} data-cta-on="theme" href="/program">
-            Istražite sisteme
+          <Link className={`${styles.primaryCta} cs-cta`} data-cta-on="theme" href="/katalog">
+            Pogledajte proizvode
             <span aria-hidden="true">→</span>
           </Link>
         </div>

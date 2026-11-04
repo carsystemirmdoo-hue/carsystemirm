@@ -177,8 +177,8 @@ export function PaintTakeoverFinal({
               Sistem završne obrade u kome se priprema, preciznost i karakter
               susreću u jednom potezu.
             </p>
-            <Link className={styles.primaryCta} href="/program">
-              ISTRAŽITE SISTEME
+            <Link className={styles.primaryCta} href="/katalog">
+              POGLEDAJTE PROIZVODE
               <span aria-hidden="true">↗</span>
             </Link>
           </div>

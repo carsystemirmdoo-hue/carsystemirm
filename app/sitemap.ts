@@ -19,7 +19,6 @@ const staticRoutes = [
   "/katalog",
   "/katalozi",
   "/brendovi",
-  "/program",
   "/prodavnice",
   "/kontakt",
   "/dokumentacija",

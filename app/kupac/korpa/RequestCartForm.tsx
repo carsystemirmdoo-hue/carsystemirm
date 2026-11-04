@@ -7,6 +7,7 @@ import { countOf, STAVKA } from "@/lib/ordering/plural.mjs";
 import { amount, money, percent, quantity as fmtQty } from "@/lib/ordering/panelFormat.mjs";
 import { ScrollTable } from "@/components/ordering/ScrollTable";
 import { confirmPasswordAction, setRequestPacksAction, submitRequestAction } from "./actions";
+import styles from "./Checkout.module.css";
 import { isSinglePiece } from "@/lib/ordering/packRule.mjs";
 
 export type RequestCartView = {
@@ -193,8 +194,15 @@ export function RequestCartForm({ view }: { view: RequestCartView }) {
         </div>
       ) : null}
 
-      <div className="pn-split">
-        <div className="pn" style={{ alignContent: "start" }}>
+      <dl className={styles.overview} aria-label="Zbir korpe">
+        <div><dt>Bez PDV-a</dt><dd>{allOnRequest ? "Na upit" : money(view.totals.net)}</dd></div>
+        <div><dt>PDV</dt><dd>{allOnRequest ? "Na upit" : money(view.totals.vat)}</dd></div>
+        <div><dt>{view.onRequest ? "Poznati iznos sa PDV-om" : "Ukupno sa PDV-om"}</dt><dd>{allOnRequest ? "Na upit" : money(view.totals.gross)}</dd></div>
+        {view.onRequest ? <p>Stavke na upit nisu uračunate. Kancelarija potvrđuje njihov iznos.</p> : null}
+      </dl>
+
+      <div className={styles.checkout}>
+        <div className={styles.main}>
           {view.options.length > 1 ? (
             <section className="pn-card" aria-labelledby="korpa-opcija">
               <h2 id="korpa-opcija" className="pn-h2">
@@ -248,7 +256,7 @@ export function RequestCartForm({ view }: { view: RequestCartView }) {
               <span className="pn-small pn-muted">Cene za: {selectedLabel} · bez PDV-a, po pakovanju i po jedinici mere</span>
             </div>
             <ScrollTable label="Stavke korpe">
-              <table className="pn-table pn-table-cards">
+              <table className={`pn-table pn-table-cards ${styles.table}`}>
                 <thead>
                   <tr>
                     <th scope="col">Šifra</th>
@@ -256,6 +264,8 @@ export function RequestCartForm({ view }: { view: RequestCartView }) {
                     <th scope="col" className="pn-r">
                       Pakovanja <span className="pn-th-sub">obračun u JM</span>
                     </th>
+                    <th scope="col" className="pn-r">Osnovna cena<span className="pn-th-sub">po JM, bez PDV-a</span></th>
+                    <th scope="col" className="pn-r">Rabat</th>
                     <th scope="col" className="pn-r">
                       Cena kupca <span className="pn-th-sub">pakovanje · JM, bez PDV-a</span>
                     </th>
@@ -273,7 +283,6 @@ export function RequestCartForm({ view }: { view: RequestCartView }) {
                 <tbody>
                   {view.lines.map((l) => {
                     const p = l.prices.find((x) => x.key === selectedKey);
-                    const others = l.prices.filter((x) => x.key !== selectedKey);
                     const problem = l.problem || l.quantityProblem;
                     return (
                       <tr key={l.articleId} data-tone={problem ? "warning" : undefined}>
@@ -327,6 +336,8 @@ export function RequestCartForm({ view }: { view: RequestCartView }) {
                           ) : null}
                           {l.quantityProblem ? <span className="pn-error" style={{ justifyContent: "flex-end" }}>{l.quantityProblem}</span> : null}
                         </td>
+                        <td className="pn-r pn-num" data-label="Osnovna cena / JM">{p?.status === "cena" ? amount(p.listPrice) : "Na upit"}</td>
+                        <td className="pn-r pn-num" data-label="Rabat">{p?.status === "cena" ? percent(p.discountPercent ?? 0) : "—"}</td>
                         <td className="pn-r" data-label="Cena kupca / JM">
                           {p?.status === "cena" ? (
                             <>
@@ -338,8 +349,6 @@ export function RequestCartForm({ view }: { view: RequestCartView }) {
                               <span className={p.packNet !== null && !isSinglePiece(l.pack, l.unit) ? "pn-sub pn-num" : "pn-num"}>
                                 {amount(p.netPrice)} <span className="pn-muted">/ {l.unit}</span>
                               </span>
-                              {p.listPrice !== null ? <span className="pn-sub pn-num">osnovna {amount(p.listPrice)}</span> : null}
-                              <span className="pn-sub pn-num">rabat {percent(p.discountPercent ?? 0)}</span>
                             </>
                           ) : (
                             <>
@@ -347,11 +356,6 @@ export function RequestCartForm({ view }: { view: RequestCartView }) {
                               <span className="pn-sub">cenu potvrđuje kancelarija</span>
                             </>
                           )}
-                          {others.map((o) => (
-                            <span key={o.key} className="pn-sub pn-num" style={{ marginTop: 4 }}>
-                              {o.label}: {o.status === "cena" ? (o.packNet !== null && l.pack && !isSinglePiece(l.pack, l.unit) ? `${amount(o.packNet)} / ${l.pack.label}` : `${amount(o.netPrice)} / ${l.unit}`) : "na upit"}
-                            </span>
-                          ))}
                         </td>
                         <td className="pn-r pn-num" data-label="Iznos bez PDV-a">
                           {l.amounts ? amount(l.amounts.net) : <span className="pn-muted">—</span>}
@@ -391,7 +395,7 @@ export function RequestCartForm({ view }: { view: RequestCartView }) {
             </ScrollTable>
           </section>
 
-          <section className="pn-card pn-form-width" aria-labelledby="korpa-podaci">
+          <section className="pn-card" aria-labelledby="korpa-podaci">
             <h2 id="korpa-podaci" className="pn-h2">
               Napomena i isporuka
             </h2>
@@ -418,7 +422,7 @@ export function RequestCartForm({ view }: { view: RequestCartView }) {
           </section>
         </div>
 
-        <aside className="pn-side pn-side-sticky" aria-label="Zbir i slanje">
+        <aside className={styles.summary} aria-label="Zbir i slanje">
           <section className="pn-card">
             <h2 className="pn-h2">{view.onRequest && !allOnRequest ? "Zbir poznatih cena" : "Zbir"}</h2>
             <p className="pn-small pn-muted">{selectedLabel}</p>

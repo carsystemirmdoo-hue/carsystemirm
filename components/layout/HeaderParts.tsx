@@ -25,6 +25,7 @@ export function BrandMenuLink({
   return (
     <Link
       href={brand.href}
+      prefetch={false}
       className={styles.brandLink}
       data-hdr="brand-link"
       aria-current={active ? "page" : undefined}
@@ -46,6 +47,7 @@ export function BrandMenuLink({
               height={height}
               className={styles.brandLogo}
               data-logo-tone="color"
+              loading="eager"
               style={{ height, width: "auto" }}
             />
             <Image
@@ -55,6 +57,7 @@ export function BrandMenuLink({
               height={monoHeight}
               className={styles.brandLogo}
               data-logo-tone="mono"
+              loading="eager"
               style={{ height: monoHeight, width: "auto" }}
             />
           </>

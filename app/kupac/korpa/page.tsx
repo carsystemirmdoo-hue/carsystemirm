@@ -59,15 +59,16 @@ export default async function CustomerCartPage({ searchParams }: { searchParams:
       <div className="pn">
         <header className="pn-head">
           <div>
-            <h1 className="pn-title">Korpa</h1>
+            <h1 className="pn-title">Pregled i slanje</h1>
             <p className="pn-lead">
               {view.lines.length ? `${countOf(view.lines.length, STAVKA)} · ` : ""}
               Cene su iz cenovnika i Vaših odobrenih uslova, bez PDV-a. Korpa pripada firmi i vide je svi nalozi firme.
             </p>
           </div>
-          <Link href="/kupac/naruci" className="pn-btn" data-size="sm">
-            ← Nastavite izbor robe
-          </Link>
+          <nav className="pn-inline" aria-label="Nastavite kupovinu">
+            {siteOpen ? <Link href="/" className="pn-btn" data-size="sm">Početna</Link> : null}
+            <Link href={siteOpen ? "/katalog" : "/kupac/naruci"} className="pn-btn" data-size="sm">← Dodajte proizvode</Link>
+          </nav>
         </header>
         {view.lines.length ? (
           <RequestCartForm view={view} />

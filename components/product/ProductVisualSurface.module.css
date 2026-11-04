@@ -703,8 +703,8 @@
  */
 .objectWrap {
   --product-optical-y: 49%;
-  --product-envelope-w: 84cqw;
-  --product-envelope-h: 84cqh;
+  --product-envelope-w: 70cqw;
+  --product-envelope-h: 74cqh;
   --product-fit-w: min(
     var(--product-envelope-w),
     calc(min(var(--product-envelope-h), var(--product-envelope-h-cap, 100cqh)) * var(--product-content-aspect))
@@ -774,31 +774,28 @@
  * Size-class envelope (lib/product-scale.ts): a spray must not read like a
  * canister, nor a canister like a spray.
  *
- * The percentages are higher than the previous ladder (66 / 76 / 84 / 92 with
- * px ceilings) because they changed meaning: they used to bound the image FILE,
- * whose product-to-canvas ratio varies from 20% to 100% across this catalogue,
- * and they now bound the product's own silhouette. The px ceilings are gone for
- * the same reason — they existed to stop a heavily padded file from ballooning,
- * which the content box now handles directly.
+ * The envelope bounds the product silhouette, not the source image canvas.
+ * Keep comfortable margins even for large cans; the V6 contact shadow below
+ * uses the same envelope so it stays grounded after resizing.
  */
 .surface[data-product-visual-real-image="true"][data-product-size-class="S"] .objectWrap {
-  --product-envelope-w: 58cqw;
-  --product-envelope-h: 72cqh;
+  --product-envelope-w: 54cqw;
+  --product-envelope-h: 64cqh;
 }
 
 .surface[data-product-visual-real-image="true"][data-product-size-class="M"] .objectWrap {
-  --product-envelope-w: 66cqw;
-  --product-envelope-h: 78cqh;
+  --product-envelope-w: 60cqw;
+  --product-envelope-h: 69cqh;
 }
 
 .surface[data-product-visual-real-image="true"][data-product-size-class="L"] .objectWrap {
-  --product-envelope-w: 74cqw;
-  --product-envelope-h: 84cqh;
+  --product-envelope-w: 66cqw;
+  --product-envelope-h: 74cqh;
 }
 
 .surface[data-product-visual-real-image="true"][data-product-size-class="XL"] .objectWrap {
-  --product-envelope-w: 82cqw;
-  --product-envelope-h: 90cqh;
+  --product-envelope-w: 72cqw;
+  --product-envelope-h: 78cqh;
 }
 
 .quantityBadge {
@@ -900,8 +897,8 @@
    * Sadržaj boxa je u V6 sam subjekt, pa je `--product-fit-w` širina PROIZVODA,
    * a njegovo dno je na 49% + visina/2, gde god proizvod završio.
    */
-  --product-envelope-w: 84cqw;
-  --product-envelope-h: 84cqh;
+  --product-envelope-w: 70cqw;
+  --product-envelope-h: 74cqh;
   --product-fit-w: min(
     var(--product-envelope-w),
     calc(var(--product-envelope-h) * var(--product-content-aspect))
@@ -921,23 +918,23 @@
 }
 
 .surface[data-product-shadow-model="v6"][data-product-size-class="S"] .contactShadow {
-  --product-envelope-w: 58cqw;
-  --product-envelope-h: 72cqh;
+  --product-envelope-w: 54cqw;
+  --product-envelope-h: 64cqh;
 }
 
 .surface[data-product-shadow-model="v6"][data-product-size-class="M"] .contactShadow {
-  --product-envelope-w: 66cqw;
-  --product-envelope-h: 78cqh;
+  --product-envelope-w: 60cqw;
+  --product-envelope-h: 69cqh;
 }
 
 .surface[data-product-shadow-model="v6"][data-product-size-class="L"] .contactShadow {
-  --product-envelope-w: 74cqw;
-  --product-envelope-h: 84cqh;
+  --product-envelope-w: 66cqw;
+  --product-envelope-h: 74cqh;
 }
 
 .surface[data-product-shadow-model="v6"][data-product-size-class="XL"] .contactShadow {
-  --product-envelope-w: 82cqw;
-  --product-envelope-h: 90cqh;
+  --product-envelope-w: 72cqw;
+  --product-envelope-h: 78cqh;
 }
 
 .surface[data-product-shadow-model="v6"][data-product-official-shadow="thin"] .contactShadow,

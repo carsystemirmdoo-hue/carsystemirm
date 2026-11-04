@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { CustomerCartLink } from "@/components/cart/CustomerCartLink";
 import { useEffect, useMemo, useState, useTransition } from "react";
 import { addCatalogItemAction } from "@/app/kupac/naruci/actions";
 import { PICKED_EVENT } from "@/components/ordering/CompanionPanel";
@@ -222,7 +223,7 @@ function BuyForm({ data, offers, slug, variantKey }: { data: OffersPayload; offe
       ) : null}
       {msg ? (
         <p className={styles.msg} data-ok={msg.ok ? "true" : "false"} role="status">
-          {msg.text} {msg.ok ? <Link href="/kupac/korpa">Otvorite korpu →</Link> : null}
+          {msg.text} {msg.ok ? <CustomerCartLink href="/kupac/korpa">Otvorite korpu →</CustomerCartLink> : null}
         </p>
       ) : null}
       <p className={styles.fine}>

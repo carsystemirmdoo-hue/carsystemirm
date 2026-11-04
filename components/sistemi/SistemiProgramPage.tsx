@@ -36,7 +36,7 @@ export function SistemiProgramPage({
         <SeoBreadcrumbs
           items={[
             { name: "Početna", path: "/" },
-            { name: "Programi", path: "/program" },
+            { name: "Katalog", path: "/katalog" },
             { name: program.name, path: href },
           ]}
         />

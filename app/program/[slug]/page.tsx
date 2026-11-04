@@ -82,7 +82,7 @@ export default async function ProgramRoute({ params }: ProgramRouteProps) {
         dangerouslySetInnerHTML={jsonLd(
           breadcrumbJsonLd([
             { name: "Početna", path: "/" },
-            { name: "Programi", path: "/program" },
+            { name: "Katalog", path: "/katalog" },
             { name: program.name, path: `/program/${program.slug}` },
           ]),
         )}

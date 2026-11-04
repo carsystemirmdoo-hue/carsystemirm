@@ -161,28 +161,28 @@
  * have to do the whole job themselves.
  */
 .stickyStage[data-product-size-class="S"] {
-  --product-envelope-w: 58cqw;
-  --product-envelope-h: 74cqh;
+  --product-envelope-w: 54cqw;
+  --product-envelope-h: 64cqh;
   /* Sprej srazmeran ambalaži (2026-10-20): isti odnos traga i proizvoda za sve
      veličine, trag viri oko ambalaže umesto da je nadvisi ili nestane iza nje. */
   --product-stage-spray-size: 0.8;
 }
 
 .stickyStage[data-product-size-class="M"] {
-  --product-envelope-w: 66cqw;
-  --product-envelope-h: 80cqh;
+  --product-envelope-w: 60cqw;
+  --product-envelope-h: 69cqh;
   --product-stage-spray-size: 0.9;
 }
 
 .stickyStage[data-product-size-class="L"] {
-  --product-envelope-w: 74cqw;
-  --product-envelope-h: 86cqh;
+  --product-envelope-w: 66cqw;
+  --product-envelope-h: 74cqh;
   --product-stage-spray-size: 1;
 }
 
 .stickyStage[data-product-size-class="XL"] {
-  --product-envelope-w: 82cqw;
-  --product-envelope-h: 92cqh;
+  --product-envelope-w: 72cqw;
+  --product-envelope-h: 78cqh;
   --product-stage-spray-size: 1.08;
 }
 
@@ -227,7 +227,7 @@
  * modest fixed box and stays clear of the brand mark in the top-left corner.
  */
 .stickyStage[data-product-has-image="false"] .heroProductObject {
-  width: min(74cqw, 320px);
+  width: min(66cqw, 320px);
   aspect-ratio: auto;
   height: auto;
   max-height: 62cqh;
@@ -434,8 +434,8 @@
  */
 .heroProductObject {
   --product-fit-w: min(
-    var(--product-envelope-w, 74cqw),
-    calc(var(--product-envelope-h, 86cqh) * var(--product-content-aspect))
+    var(--product-envelope-w, 66cqw),
+    calc(var(--product-envelope-h, 74cqh) * var(--product-content-aspect))
   );
   position: absolute;
   z-index: var(--layer-product);
@@ -533,7 +533,7 @@
    */
   top: 50%;
   left: 50%;
-  width: min(92cqw, calc(92cqh * var(--product-canvas-aspect)));
+  width: min(92cqw, calc(78cqh * var(--product-canvas-aspect)));
   aspect-ratio: var(--product-canvas-aspect);
   overflow: hidden;
   border-radius: var(--ds-radius, 2px);

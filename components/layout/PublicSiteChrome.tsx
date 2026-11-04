@@ -4,6 +4,7 @@ import type { ReactNode } from "react";
 import { usePathname } from "next/navigation";
 import { AccountOnlyHeader } from "@/components/layout/AccountOnlyHeader";
 import { Header } from "@/components/layout/Header";
+import { CustomerCartDrawer } from "@/components/cart/CustomerCartDrawer";
 import { ProductSearchProvider } from "@/components/search/ProductSearchProvider";
 
 export function PublicSiteChrome({ children, publicSiteOpen = true }: { children: ReactNode; publicSiteOpen?: boolean }) {
@@ -21,6 +22,7 @@ export function PublicSiteChrome({ children, publicSiteOpen = true }: { children
     return (
       <>
         <AccountOnlyHeader />
+        <CustomerCartDrawer publicSiteOpen={false} />
         {children}
       </>
     );
@@ -34,6 +36,7 @@ export function PublicSiteChrome({ children, publicSiteOpen = true }: { children
   return (
     <ProductSearchProvider>
       <Header />
+      <CustomerCartDrawer publicSiteOpen={publicSiteOpen} />
       {children}
     </ProductSearchProvider>
   );

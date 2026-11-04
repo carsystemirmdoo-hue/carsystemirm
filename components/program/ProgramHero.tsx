@@ -24,7 +24,7 @@ export function ProgramHero({
             </span>
           </li>
           <li>
-            <Link href="/program">Programi</Link>
+            <Link href="/katalog">Katalog</Link>
             <span className={styles.breadcrumbSeparator} aria-hidden="true">
               /
             </span>

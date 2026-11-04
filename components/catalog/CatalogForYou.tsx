@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useCallback, useEffect, useRef, useState, useTransition } from "react";
+import { useEffect, useState, useTransition } from "react";
 import { addRequestItemAction } from "@/app/kupac/naruci/actions";
 import { ensureCustomerSession, hasCustomerMarker } from "@/components/customer-buy/customerSession";
 import type { ForYou, ForYouCard } from "@/lib/customers/for-you";
@@ -20,11 +20,18 @@ declare global {
 
 /**
  * „Za Vas“ na vrhu kataloga — samo za prijavljenog kupca (iz sesije; komponenta ne šalje nijedan
- * podatak). Dve grupe: „Najčešće kupujete“ i „Vreme je za dopunu“ (samo uz dovoljno podataka).
+ * podatak). Jedna kratka lista (2026-11-04, umesto dva karusela velikih kartica): prvo stavke za
+ * dopunu, zatim one koje kupac najčešće kupuje, bez ponavljanja; prvih pet redova, ostalo na
+ * „Prikažite sve“. Katalog ispod je već poređan po istoj istoriji (`cs-licno`).
  * Bez istorije: jedna kratka poruka. Anonimni posetilac ne pravi zahtev i ne vidi ništa.
  */
+const VISIBLE_ROWS = 5;
+
+type ForYouRow = { card: ForYouCard; kind: "dopuna" | "najcesce" };
+
 export function CatalogForYou() {
   const [data, setData] = useState<(ForYou & { signedIn: true }) | null>(null);
+  const [expanded, setExpanded] = useState(false);
   useEffect(() => {
     if (!hasCustomerMarker()) return;
     let alive = true;
@@ -45,8 +52,7 @@ export function CatalogForYou() {
   }, []);
 
   if (!data) return null;
-  const has = data.frequent.length > 0;
-  if (!has) {
+  if (!data.frequent.length) {
     return (
       <p className={styles.quiet}>
         Kada budu potvrđene Vaše prve kupovine, ovde ćete videti proizvode koje najčešće kupujete.{" "}
@@ -54,14 +60,29 @@ export function CatalogForYou() {
       </p>
     );
   }
-  const cards = [...data.refill, ...data.frequent];
-  // Ista napomena o raspoloživosti na svakoj kartici → jednom, u zaglavlju.
-  const sharedStock = cards.length > 0 && cards.every((c) => c.stock?.state === "zastareo") ? cards[0].stock!.text : null;
+  const seen = new Set<string>();
+  const rows: ForYouRow[] = [];
+  for (const [list, kind] of [[data.refill, "dopuna"], [data.frequent, "najcesce"]] as const) {
+    for (const card of list) {
+      if (seen.has(card.articleId)) continue;
+      seen.add(card.articleId);
+      rows.push({ card, kind });
+    }
+  }
+  const shown = expanded ? rows : rows.slice(0, VISIBLE_ROWS);
+  // Ista napomena o raspoloživosti u svakom redu → jednom, u zaglavlju.
+  const sharedStock = rows.every((r) => r.card.stock?.state === "zastareo") ? rows[0].card.stock!.text : null;
   return (
     <section className={styles.root} aria-labelledby="licno-naslov">
       <header className={styles.head}>
         <h2 id="licno-naslov">Za Vas</h2>
+        <span className={styles.headSub}>Prema Vašim kupovinama</span>
         {data.demo ? <span className={styles.demo}>{data.demoLabel ?? "Demo podaci"}</span> : null}
+        {!data.demo ? (
+          <Link href="/kupac/fakture" className={styles.headLink}>
+            Fakture →
+          </Link>
+        ) : null}
         {data.demo || sharedStock ? (
           <p className={styles.headNote}>
             {data.demo ? "Istorija kupovina je sintetička; cene su iz demo rabata i iste su kao u korpi." : null}
@@ -69,74 +90,18 @@ export function CatalogForYou() {
             {sharedStock}
           </p>
         ) : null}
-        {!data.demo ? (
-          <Link href="/kupac/fakture" className={styles.headLink}>
-            Fakture →
-          </Link>
-        ) : null}
       </header>
-      {data.refill.length ? (
-        <Rail id="licno-dopuna" title="Vreme je za dopunu" note="Prema ritmu Vaših ranijih kupovina" cards={data.refill} hideStock={Boolean(sharedStock)} />
-      ) : null}
-      <Rail id="licno-najcesce" title="Najčešće kupujete" cards={data.frequent} hideStock={Boolean(sharedStock)} />
-    </section>
-  );
-}
-
-/**
- * Ručni karusel: strelice + prevlačenje (izvorni horizontalni skrol sa „snap“), bez automatskog
- * pomeranja. Strelice pomeraju za vidljivu širinu; na krajevima su onemogućene.
- */
-function Rail({ id, title, note, cards, hideStock }: { id: string; title: string; note?: string; cards: ForYouCard[]; hideStock: boolean }) {
-  const track = useRef<HTMLUListElement>(null);
-  const [edges, setEdges] = useState({ start: true, end: true });
-  const update = useCallback(() => {
-    const el = track.current;
-    if (!el) return;
-    setEdges({ start: el.scrollLeft <= 2, end: el.scrollLeft + el.clientWidth >= el.scrollWidth - 2 });
-  }, []);
-  useEffect(() => {
-    const el = track.current;
-    if (!el) return;
-    update();
-    el.addEventListener("scroll", update, { passive: true });
-    const ro = new ResizeObserver(update);
-    ro.observe(el);
-    return () => {
-      el.removeEventListener("scroll", update);
-      ro.disconnect();
-    };
-  }, [update]);
-  const move = (dir: 1 | -1) => {
-    const el = track.current;
-    if (!el) return;
-    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    el.scrollBy({ left: dir * Math.max(el.clientWidth * 0.9, 200), behavior: reduce ? "auto" : "smooth" });
-  };
-  return (
-    <div className={styles.group}>
-      <div className={styles.groupHead}>
-        <h3 className={styles.groupTitle} id={`${id}-naslov`}>
-          {title}
-          {note ? <small>{note}</small> : null}
-        </h3>
-        {edges.start && edges.end ? null : (
-          <div className={styles.railNav}>
-            <button type="button" onClick={() => move(-1)} disabled={edges.start} aria-controls={id} aria-label={`Prethodni proizvodi: ${title}`}>
-              <span aria-hidden="true">←</span>
-            </button>
-            <button type="button" onClick={() => move(1)} disabled={edges.end} aria-controls={id} aria-label={`Sledeći proizvodi: ${title}`}>
-              <span aria-hidden="true">→</span>
-            </button>
-          </div>
-        )}
-      </div>
-      <ul className={styles.list} id={id} ref={track} aria-labelledby={`${id}-naslov`}>
-        {cards.map((c) => (
-          <Card key={`${id}-${c.articleId}`} card={c} hideStock={hideStock} />
+      <ul className={styles.rows} id="licno-lista">
+        {shown.map((row) => (
+          <Row key={row.card.articleId} row={row} hideStock={Boolean(sharedStock)} />
         ))}
       </ul>
-    </div>
+      {rows.length > VISIBLE_ROWS ? (
+        <button type="button" className={styles.more} aria-expanded={expanded} aria-controls="licno-lista" onClick={() => setExpanded((v) => !v)}>
+          {expanded ? "Prikažite manje ↑" : `Prikažite sve (${rows.length}) ↓`}
+        </button>
+      ) : null}
+    </section>
   );
 }
 
@@ -153,42 +118,45 @@ function priceView(card: ForYouCard) {
   );
 }
 
-function Card({ card, hideStock }: { card: ForYouCard; hideStock: boolean }) {
+function Row({ row, hideStock }: { row: ForYouRow; hideStock: boolean }) {
+  const { card, kind } = row;
   const view = priceView(card);
   const packText = card.packLabel && card.packLabel !== "1 kom" ? card.packLabel : null;
+  const meta = [card.variantLabel, view ? null : packText].filter(Boolean).join(" · ");
   return (
-    <li className={styles.card}>
-      <Link href={card.href} className={styles.media} tabIndex={-1} aria-hidden="true">
+    <li className={styles.row} data-kind={kind}>
+      <Link href={card.href} className={styles.thumb} tabIndex={-1} aria-hidden="true">
         {card.image ? (
           // eslint-disable-next-line @next/next/no-img-element
           <img src={card.image.src} alt="" loading="lazy" decoding="async" />
         ) : (
-          <span className={styles.noImage}>Bez slike</span>
+          <span className={styles.noImage}>—</span>
         )}
       </Link>
-      <div className={styles.body}>
-        <h4 className={styles.name}>
+      <div className={styles.info}>
+        <p className={styles.kind}>{kind === "dopuna" ? "Vreme je za dopunu" : "Najčešće kupujete"}</p>
+        <h3 className={styles.name}>
           <Link href={card.href}>{card.name}</Link>
-        </h4>
-        <p className={styles.meta}>{[card.variantLabel, view ? null : packText].filter(Boolean).join(" · ") || "\u00a0"}</p>
-        {card.reason ? <p className={styles.reason}>{card.reason}</p> : null}
-        <div className={styles.price}>
-          {view ? (
-            <>
-              <strong>{view.amounts}</strong>
-              <span>{view.detail}</span>
-            </>
-          ) : (
-            <span>Cena na upit</span>
-          )}
-        </div>
+        </h3>
+        {meta || card.reason ? <p className={styles.meta}>{[meta, card.reason].filter(Boolean).join(" · ")}</p> : null}
+        {card.orderable && card.suggestionNote ? <p className={styles.note}>{card.suggestionNote}</p> : null}
         {card.stock && !hideStock ? (
           <p className={styles.stock} data-state={card.stock.state}>
             {card.stock.text}
           </p>
         ) : null}
-        {card.orderable ? <AddToCart card={card} /> : null}
       </div>
+      <div className={styles.price}>
+        {view ? (
+          <>
+            <strong>{view.amounts}</strong>
+            <span>{view.detail}</span>
+          </>
+        ) : (
+          <span>Cena na upit</span>
+        )}
+      </div>
+      {card.orderable ? <AddToCart card={card} /> : <span className={styles.orderPlaceholder} aria-hidden="true" />}
     </li>
   );
 }
@@ -205,14 +173,13 @@ function AddToCart({ card }: { card: ForYouCard }) {
     });
   return (
     <div className={styles.order}>
-      {card.suggestionNote ? <p className={styles.note}>{card.suggestionNote}</p> : null}
       <div className={styles.orderRow}>
         <label>
           <span className={styles.srOnly}>Broj pakovanja, {card.name}</span>
           <input type="number" inputMode="numeric" min={1} step={1} value={packs} placeholder="broj" onChange={(e) => setPacks(e.target.value)} disabled={pending} />
         </label>
-        <button type="button" onClick={add} disabled={pending} aria-busy={pending || undefined}>
-          {pending ? "Dodajem…" : "Dodajte u korpu"}
+        <button type="button" onClick={add} disabled={pending} aria-busy={pending || undefined} aria-label={`Dodajte u korpu: ${card.name}`}>
+          {pending ? "Dodajem…" : "Dodajte"}
         </button>
       </div>
       {msg ? (

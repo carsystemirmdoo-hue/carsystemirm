@@ -49,121 +49,48 @@
   font-size: 0.8125rem;
 }
 
-.group {
-  display: grid;
-  gap: 10px;
-}
-
-.groupTitle {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: baseline;
-  gap: 4px 10px;
-  margin: 0;
-  color: var(--ds-c-text, var(--catalog-ink));
-  font-size: 1rem;
-  font-weight: 700;
-}
-
-.groupTitle small {
+.headSub {
   color: var(--ds-c-text-2, var(--catalog-muted));
   font-size: 0.8125rem;
-  font-weight: 400;
 }
 
-.groupHead {
-  display: flex;
-  align-items: end;
-  justify-content: space-between;
-  gap: 12px;
-}
-
-.railNav {
-  display: flex;
-  flex: none;
-  gap: 6px;
-}
-
-.railNav button {
+/* Kratka lista (2026-11-04): jedan red po proizvodu, bez karusela i velikih kartica. */
+.rows {
   display: grid;
-  width: 40px;
-  height: 40px;
-  place-items: center;
-  border: 1px solid var(--ds-c-line-strong, var(--catalog-border));
-  border-radius: var(--ds-ctl-radius, 2px);
-  background: var(--ds-c-surface, transparent);
-  color: var(--ds-c-text, var(--catalog-ink));
-  font: inherit;
-  font-size: 1rem;
-  cursor: pointer;
-}
-
-.railNav button:hover:not(:disabled) {
-  border-color: var(--ds-c-text, var(--catalog-ink));
-}
-
-.railNav button:disabled {
-  opacity: 0.35;
-  cursor: default;
-}
-
-.railNav button:focus-visible {
-  outline: 2px solid var(--ds-c-focus);
-  outline-offset: 2px;
-}
-
-/* Ručni karusel: izvorni horizontalni skrol (prevlačenje prstom, točkić, Shift+točkić), „snap“ po kartici. */
-.list {
-  --rail-card: clamp(204px, 22%, 248px);
-  display: grid;
-  grid-auto-columns: var(--rail-card);
-  grid-auto-flow: column;
-  gap: 12px;
   margin: 0;
-  padding: 0 0 6px;
+  padding: 0;
   list-style: none;
-  overflow-x: auto;
-  overscroll-behavior-x: contain;
-  scroll-snap-type: x mandatory;
-  scroll-padding-inline: 0;
-  scrollbar-width: thin;
+  border-top: 1px solid var(--ds-c-line, var(--catalog-border));
 }
 
-.list > li {
-  scroll-snap-align: start;
-}
-
-.card {
+.row {
   display: grid;
-  grid-template-rows: auto 1fr;
-  min-width: 0;
-  height: 100%;
+  grid-template-columns: 56px minmax(0, 1fr) minmax(150px, auto) 220px;
+  align-items: center;
+  gap: 16px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--ds-c-line, var(--catalog-border));
+}
+
+.thumb {
+  position: relative;
+  display: grid;
+  width: 56px;
+  height: 56px;
+  place-items: center;
   border: 1px solid var(--ds-c-line, var(--catalog-border));
   border-radius: var(--ds-ctl-radius, 2px);
-  background: var(--ds-c-surface, var(--catalog-panel));
-}
-
-.media {
-  display: grid;
-  place-items: center;
-  height: 148px;
-  border-bottom: 1px solid var(--ds-c-line, var(--catalog-border));
   background: var(--ds-c-surface-2, transparent);
   overflow: hidden;
 }
 
-/* Ista zona za svaku sliku: ceo proizvod, bez sečenja i razvlačenja, nezavisno od izvornog fajla. */
-.media {
-  position: relative;
-}
-
-.media img {
+.thumb img {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
   object-fit: contain;
-  padding: 12px;
+  padding: 5px;
 }
 
 .noImage {
@@ -171,23 +98,33 @@
   font-size: 0.8125rem;
 }
 
-.body {
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-  padding: 10px 12px 12px;
+.info {
+  display: grid;
+  gap: 2px;
+  min-width: 0;
+}
+
+.kind {
+  margin: 0;
+  color: var(--ds-c-text-2, var(--catalog-muted));
+  font-family: var(--font-technical), monospace;
+  font-size: 0.6875rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.row[data-kind="dopuna"] .kind {
+  color: var(--ds-c-accent-text, var(--catalog-red-bright));
 }
 
 .name {
-  display: -webkit-box;
-  min-height: calc(2 * 1.3em);
   margin: 0;
   overflow: hidden;
   font-size: 0.9375rem;
   font-weight: 650;
   line-height: 1.3;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 2;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .name a {
@@ -202,23 +139,19 @@
 }
 
 .meta,
-.reason,
 .note {
   margin: 0;
+  overflow: hidden;
   color: var(--ds-c-text-2, var(--catalog-muted));
   font-size: 0.8125rem;
   line-height: 1.4;
-}
-
-.meta {
-  overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 
-.reason {
-  color: var(--ds-c-text, var(--catalog-ink));
+.note {
   font-size: 0.75rem;
+  white-space: normal;
 }
 
 .price {
@@ -226,7 +159,8 @@
   gap: 2px;
   color: var(--ds-c-text, var(--catalog-ink));
   font-size: 0.875rem;
-  line-height: 1.4;
+  line-height: 1.35;
+  text-align: right;
 }
 
 .price strong {
@@ -242,7 +176,7 @@
 
 .stock {
   margin: 0;
-  font-size: 0.8125rem;
+  font-size: 0.75rem;
   font-weight: 600;
 }
 
@@ -258,42 +192,73 @@
 
 .order {
   display: grid;
-  gap: 6px;
-  margin-top: auto;
-  padding-top: 4px;
+  gap: 4px;
 }
 
 .orderRow {
   display: grid;
-  grid-template-columns: 58px 1fr;
+  grid-template-columns: 64px 1fr;
   gap: 6px;
 }
 
 .orderRow input {
   width: 100%;
-  min-height: 40px;
+  min-height: 38px;
   border: 1px solid var(--ds-c-field, var(--catalog-border));
   border-radius: var(--ds-ctl-radius, 2px);
   background: var(--ds-c-surface, transparent);
   color: var(--ds-c-text, inherit);
   font: inherit;
+  font-size: 0.875rem;
   padding: 0 8px;
 }
 
+/* Sekundarno dugme: lista ne sme da bude zid crvenih dugmadi. */
 .orderRow button {
-  min-height: 40px;
-  border: 1px solid transparent;
+  min-height: 38px;
+  border: 1px solid var(--ds-c-text, var(--catalog-ink));
   border-radius: var(--ds-ctl-radius, 2px);
-  background: var(--ds-c-accent, var(--catalog-red));
-  color: var(--ds-c-on-accent, #fff);
+  background: transparent;
+  color: var(--ds-c-text, var(--catalog-ink));
   font: inherit;
   font-size: 0.875rem;
-  font-weight: 600;
+  font-weight: 650;
   cursor: pointer;
+  transition: background-color 160ms ease, color 160ms ease;
+}
+
+.orderRow button:hover:not(:disabled),
+.orderRow button:focus-visible {
+  background: var(--ds-c-text, var(--catalog-ink));
+  color: var(--ds-c-surface, #fff);
+}
+
+.orderRow button:focus-visible,
+.more:focus-visible {
+  outline: 2px solid var(--ds-c-focus);
+  outline-offset: 2px;
 }
 
 .orderRow button:disabled {
   opacity: 0.6;
+}
+
+.orderPlaceholder {
+  display: block;
+}
+
+.more {
+  justify-self: center;
+  min-height: 40px;
+  border: 0;
+  background: transparent;
+  color: var(--ds-c-text, var(--catalog-ink));
+  font: inherit;
+  font-size: 0.875rem;
+  font-weight: 650;
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
 }
 
 .msg {
@@ -320,12 +285,26 @@
   white-space: nowrap;
 }
 
-@media (max-width: 520px) {
-  .list {
-    --rail-card: 76%;
+@media (max-width: 900px) {
+  .row {
+    grid-template-columns: 56px minmax(0, 1fr) auto;
+    grid-template-areas: "thumb info price" "thumb order order";
+    row-gap: 10px;
   }
+  .thumb { grid-area: thumb; align-self: start; }
+  .info { grid-area: info; }
+  .price { grid-area: price; align-self: start; }
+  .order, .orderPlaceholder { grid-area: order; }
+}
 
-  .media {
-    height: 128px;
+@media (max-width: 520px) {
+  .row {
+    grid-template-columns: 48px minmax(0, 1fr);
+    grid-template-areas: "thumb info" "thumb price" "order order";
+    column-gap: 12px;
+    row-gap: 6px;
   }
+  .thumb { width: 48px; height: 48px; }
+  .name, .meta { white-space: normal; }
+  .price { text-align: left; }
 }

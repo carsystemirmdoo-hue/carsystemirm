@@ -2854,11 +2854,11 @@
 .productImageSlotMedia > img {
   object-fit: contain;
   object-position: 50% 100%;
-  padding: 10% 10% 9%;
+  padding: 16% 16% 10%;
 }
 
 .productImageSlotMedia[data-has-quantity-badge="true"] > img {
-  padding-bottom: calc(9% + 2rem);
+  padding-bottom: calc(10% + 2rem);
 }
 
 /*
@@ -2867,10 +2867,12 @@
  * ~39 % širine platna), pa bi `contain` nad platnom ostavio limenke sitnim, a
  * kanistere krupnim. Okvir sadržaja dobija najveću veličinu koja staje u
  * zajedničku oblast, a platno se pomera tako da okvir pada tačno na njega.
+ * Oblast je 2026-11-04 sužena (62 × 73 % kartice umesto 72 × 79 %) da
+ * ambalaža ne bude prevelika u odnosu na karticu.
  */
 .productImageFitArea {
   position: absolute;
-  inset: 12% 14% 9%;
+  inset: 17% 19% 10%;
   display: flex;
   align-items: flex-end;
   justify-content: center;
@@ -2878,7 +2880,7 @@
 }
 
 .productImageSlotMedia[data-has-quantity-badge="true"] .productImageFitArea {
-  bottom: calc(9% + 2rem);
+  bottom: calc(10% + 2rem);
 }
 
 .productImageFitBox {

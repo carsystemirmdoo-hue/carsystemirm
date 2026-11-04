@@ -194,7 +194,15 @@ export async function listPriceRequests(viewer: PortalUser): Promise<PriceReques
   return listRequests(scopeWhere(await resolveLedgerScope(viewer)));
 }
 
-export type PriceRequestChange = { ok: true; changed: boolean } | { ok: false; message: string };
+/** Broj zahteva koji još traže odgovor (novi i preuzeti), u istom opsegu kao radna lista. */
+export async function countOpenPriceRequests(viewer: PortalUser): Promise<number> {
+  const [row] = [...(await getDb().execute<{ n: number }>(sql`
+    SELECT count(*)::int AS n FROM customer_price_requests r
+     WHERE r.status IN ('open', 'in_progress') AND ${scopeWhere(await resolveLedgerScope(viewer))}`))];
+  return Number(row?.n ?? 0);
+}
+
+export type PriceRequestChange ={ ok: true; changed: boolean } | { ok: false; message: string };
 
 const ALLOWED: Record<string, string[]> = {
   in_progress: ["open"],

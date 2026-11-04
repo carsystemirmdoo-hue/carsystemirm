@@ -9988,6 +9988,15 @@ html:has(.portal-customer-area) { scroll-padding-top: 104px; }
   border-color: var(--ds-c-warn);
   background: var(--ds-c-warn-bg);
 }
+/* „Čeka obradu“: istaknuta je samo kartica na kojoj nešto čeka korak. */
+.portal-work-queue .portal-metric[data-tone="warning"] {
+  border-color: var(--ds-c-warn);
+  background: var(--ds-c-warn-bg);
+}
+.portal-work-queue .portal-metric[data-tone="danger"] {
+  border-color: var(--ds-c-err);
+  background: var(--ds-c-err-bg);
+}
 .portal-table th,
 .portal-table thead th {
   font-size: 13px;

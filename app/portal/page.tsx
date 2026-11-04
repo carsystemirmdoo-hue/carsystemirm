@@ -17,6 +17,7 @@ import { requireUser } from "@/lib/authz/session";
 import { BackupStatusPanel } from "@/features/portal/BackupStatusPanel";
 import { loadBackupStatus } from "@/lib/backup/status-service";
 import { dmy, dmyTime } from "@/lib/ordering/panelFormat.mjs";
+import { loadWorkQueue } from "@/lib/portal/work-queue";
 
 
 export const metadata = { title: "Početna" };
@@ -44,6 +45,7 @@ export default async function PortalHomePage() {
   const demo = state.dataset.kind === "demo";
   // Upozorenje o kopijama vide oni koji prate sinhronizaciju (vlasnik, kancelarija).
   const backups = can(user, "sync:monitor") ? await loadBackupStatus() : undefined;
+  const work = await loadWorkQueue(user);
 
   return (
     <>
@@ -56,6 +58,24 @@ export default async function PortalHomePage() {
             : `Prijavljeni ste kao ${ROLE_LABELS[user.role]}. Brojke ispod se odnose na sve kupce.`
         }
       />
+
+      {work.length > 0 ? (
+        <section className="portal-panel" aria-labelledby="ceka-obradu">
+          <div className="portal-section-header">
+            <div>
+              <h2 id="ceka-obradu">Čeka obradu</h2>
+              <p>Posao koji traži Vaš korak. Klik otvara listu sa istim brojem.</p>
+            </div>
+          </div>
+          <div className="portal-metrics portal-work-queue">
+            {work.map((item) => (
+              <Link key={item.key} className="portal-metric-link" href={item.href}>
+                <Metric label={item.label} value={item.value} context={item.context} tone={item.tone} />
+              </Link>
+            ))}
+          </div>
+        </section>
+      ) : null}
 
       {backups !== undefined ? <BackupStatusPanel items={backups} compact /> : null}
 

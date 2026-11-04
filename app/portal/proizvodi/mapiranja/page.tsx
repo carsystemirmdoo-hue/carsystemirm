@@ -3,6 +3,7 @@ import type { ProductMappingStatus } from "@/db/schema/commercial";
 import { can } from "@/lib/authz/permissions.mjs";
 import { requireCapability } from "@/lib/authz/session";
 import {
+  ARTICLE_MAPPING_LIST_LIMIT,
   countArticleMappingsByStatus,
   listArticleMappings,
 } from "@/lib/commercial/mapping-service";
@@ -56,6 +57,7 @@ export default async function ArticleMappingsPage({
   }));
 
   const total = STATUSES.reduce((sum, status) => sum + counts[status], 0);
+  const selectedStatus = parseStatus(params.status);
 
   return (
     <>
@@ -116,6 +118,21 @@ export default async function ArticleMappingsPage({
               kataloška proizvoda sa istom šifrom daju konflikt, ne izbor.
             </p>
           </section>
+
+          {rows.length >= ARTICLE_MAPPING_LIST_LIMIT ? (
+            <p className="portal-login-hint" role="status">
+              Prikazano je prvih {ARTICLE_MAPPING_LIST_LIMIT} artikala po šifri (ukupno u izabranom stanju:{" "}
+              {selectedStatus ? counts[selectedStatus] : total}
+              ). Ostale nađite pretragom po šifri ili nazivu, ili suzite stanje.
+            </p>
+          ) : null}
+
+          {!canManage && counts.unmapped + counts.conflict > 0 ? (
+            <p className="portal-login-hint">
+              Vezu sa katalogom pravi i potvrđuje Vlasnik ili ko ima paket „Mapiranja kupaca i artikala“; sa
+              ovog naloga se veza ne menja. Za artikal koji kupac traži, javite mu šifru iz BizniSofta.
+            </p>
+          ) : null}
 
           <MappingReview rows={reviewRows} canManage={canManage} />
         </>

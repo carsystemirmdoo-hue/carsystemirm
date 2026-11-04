@@ -8,6 +8,7 @@ import {
 import { NoInvoicesYet, SalesFilters } from "@/features/portal/SalesFilters";
 import { seesAllCustomers } from "@/lib/authz/permissions.mjs";
 import { requireCapability } from "@/lib/authz/session";
+import { listSalesReps } from "@/lib/partners/assignment-service";
 import {
   hasImportedInvoices,
   loadProductGroups,
@@ -55,6 +56,8 @@ export default async function SalesPage({
       loadSalespeople(),
       loadProductGroups(),
     ]);
+  // Filter po dodeli ima smisla samo ko vidi sve kupce.
+  const reps = seesAllCustomers(user) ? await listSalesReps() : [];
 
   return (
     <>
@@ -70,7 +73,7 @@ export default async function SalesPage({
 
       <SalesFilters
         action="/portal/prodaja"
-        options={{ customers, salespeople, productGroups }}
+        options={{ customers, salespeople, reps, productGroups }}
         applied={params}
         exportView="kupci"
         salespersonOnInvoices={

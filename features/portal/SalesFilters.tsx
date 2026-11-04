@@ -4,6 +4,8 @@ import { PhaseNotice } from "@/components/portal/PhaseNotice";
 export interface FilterOptions {
   customers: { id: string; name: string }[];
   salespeople: { id: string; name: string }[];
+  /** Komercijalisti za filter po dodeli; prazno = filter se ne prikazuje (npr. komercijalista vidi samo svoje). */
+  reps?: { id: string; name: string }[];
   productGroups: string[];
 }
 
@@ -12,6 +14,7 @@ export interface AppliedFilter {
   to?: string;
   kupac?: string;
   komercijalista?: string;
+  zaduzen?: string;
   grupa?: string;
   prikaz?: string;
 }
@@ -51,7 +54,9 @@ export function SalesFilters({
   if (applied.kupac) exportParams.set("customerId", applied.kupac);
   if (applied.komercijalista)
     exportParams.set("salespersonId", applied.komercijalista);
+  if (applied.zaduzen) exportParams.set("assignedTo", applied.zaduzen);
   if (applied.grupa) exportParams.set("productGroup", applied.grupa);
+  const reps = options.reps ?? [];
 
   return (
     <section className="portal-panel">
@@ -73,6 +78,23 @@ export function SalesFilters({
             ))}
           </select>
         </label>
+        {reps.length > 0 ? (
+          <label>
+            <span>Zadužen komercijalista</span>
+            <select name="zaduzen" defaultValue={applied.zaduzen ?? ""} aria-describedby="filter-zaduzen-napomena">
+              <option value="">svi</option>
+              {reps.map((person) => (
+                <option key={person.id} value={person.id}>
+                  {person.name}
+                </option>
+              ))}
+              <option value="bez">bez komercijaliste</option>
+            </select>
+            <small id="filter-zaduzen-napomena">
+              Po današnjoj dodeli kupca: ceo promet tih kupaca, i iz perioda pre dodele.
+            </small>
+          </label>
+        ) : null}
         <label>
           <span>Komercijalista</span>
           <select

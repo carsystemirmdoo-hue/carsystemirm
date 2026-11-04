@@ -121,6 +121,14 @@ export async function GET(request: Request) {
   }
 }
 
+/** Naziv prve kolone zbirnog izveštaja (nominativ, ne „po kupcu“). */
+const GROUP_COLUMN: Record<string, string> = {
+  kupci: "Kupac",
+  komercijalisti: "Komercijalista",
+  artikli: "Artikal",
+  grupe: "Grupa proizvoda",
+};
+
 const TITLES: Record<string, string> = {
   stavke: "Stavke faktura",
   kupci: "Promet po kupcu",
@@ -174,7 +182,7 @@ function buildReport(
   // Zbirovi po grupi i UKUPNO dolaze iz baze, nad celim filtriranim skupom.
   return {
     columns: [
-      TITLES[view].replace("Promet po ", ""),
+      GROUP_COLUMN[view],
       "Bruto",
       "Povrati",
       "Korekcije",

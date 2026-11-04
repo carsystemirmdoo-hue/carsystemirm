@@ -3,6 +3,7 @@ import { can } from "@/lib/authz/permissions.mjs";
 import type { PortalUser } from "@/lib/authz/user-repository";
 import { countOrderRequestsByState } from "@/lib/ordering/ordering-service";
 import { countOpenPriceRequests } from "@/lib/ordering/price-request-service";
+import { countExternalIdentifiersByStatus } from "@/lib/commercial/identity-service";
 import { countSourceDocuments } from "@/lib/pdf/ingest";
 import { pregledUredjaja } from "@/lib/sync/commands/service";
 import { opisStanja, stanjeUredjaja } from "@/lib/sync/device/cycle-status.mjs";
@@ -35,9 +36,10 @@ function countItem(key: string, label: string, n: number, context: string, href:
  */
 export async function loadWorkQueue(user: PortalUser): Promise<WorkItem[]> {
   const reviewsOrders = can(user, "customer_orders:review");
-  const [orders, priceRequests, documents, devices] = await Promise.all([
+  const [orders, priceRequests, identities, documents, devices] = await Promise.all([
     can(user, "view:zahtevi") ? countOrderRequestsByState(user) : null,
     can(user, "view:zahtevi") && can(user, "price_requests:handle") ? countOpenPriceRequests(user) : null,
+    can(user, "view:mapiranja") ? countExternalIdentifiersByStatus() : null,
     can(user, "view:importi") ? countSourceDocuments() : null,
     can(user, "sync:monitor") ? pregledUredjaja() : null,
   ]);
@@ -54,6 +56,13 @@ export async function loadWorkQueue(user: PortalUser): Promise<WorkItem[]> {
 
   if (priceRequests !== null) {
     items.push(countItem("uslovi", "Upiti za cenu i uslove", priceRequests, "čekaju odgovor kupcu", "/portal/zahtevi/uslovi"));
+  }
+
+  if (identities) {
+    const waiting = identities.unmapped + identities.conflict;
+    const who = can(user, "mappings:manage") ? "povežite ih sa kupcem" : "razrešava Vlasnik — javite mu šifru";
+    const href = identities.conflict === 0 && identities.unmapped > 0 ? "/portal/kupci/mapiranja?status=unmapped" : "/portal/kupci/mapiranja";
+    items.push(countItem("sifre", "Šifre partnera bez veze", waiting, waiting ? who : "sve šifre su povezane", href));
   }
 
   if (documents) {

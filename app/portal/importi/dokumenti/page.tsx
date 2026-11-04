@@ -3,7 +3,7 @@ import { Metric, PageHeader } from "@/components/portal/PortalPrimitives";
 import { SourceDocumentReview } from "@/features/portal/SourceDocumentReview";
 import { requireCapability } from "@/lib/authz/session";
 import { can } from "@/lib/authz/permissions.mjs";
-import { countSourceDocuments, listSourceDocuments } from "@/lib/pdf/ingest";
+import { SOURCE_DOCUMENT_LIST_LIMIT, countSourceDocuments, listSourceDocuments } from "@/lib/pdf/ingest";
 import {
   resolveLedgerScope,
   unlinkedCorrectiveDocuments,
@@ -40,6 +40,10 @@ export default async function SourceDocumentsPage({
 
   const counts = await countSourceDocuments();
   const rows = await listSourceDocuments(queryFor(active));
+  // Svaki dokument ima tačno jedno stanje provere, pa je zbir tih brojača ukupan broj.
+  const totalDocuments = Object.entries(counts)
+    .filter(([key]) => key.startsWith("validation:"))
+    .reduce((sum, [, n]) => sum + n, 0);
 
   /*
    * Red korektivnih dokumenata bez dokazane veze.
@@ -105,6 +109,14 @@ export default async function SourceDocumentsPage({
           </button>
         </form>
       </section>
+
+      {rows.length >= SOURCE_DOCUMENT_LIST_LIMIT ? (
+        <p className="portal-login-hint" role="status">
+          Prikazano je {SOURCE_DOCUMENT_LIST_LIMIT} najnovijih dokumenata (ukupno u bazi:{" "}
+          {BROJ.format(totalDocuments)}
+          ). Za dokumente koji traže korak izaberite prikaz iznad — Karantin, Sudari, Čeka pregled ili Čeka mapiranje.
+        </p>
+      ) : null}
 
       <SourceDocumentReview
         canManage={can(user, "documents:resolve")}

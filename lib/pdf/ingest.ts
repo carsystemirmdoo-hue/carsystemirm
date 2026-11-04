@@ -1076,6 +1076,9 @@ export type SourceDocumentView = {
   reversed: boolean;
 };
 
+/** Najviše redova liste izvornih dokumenata; ekran kaže kada je lista odsečena. */
+export const SOURCE_DOCUMENT_LIST_LIMIT = 200;
+
 export async function listSourceDocuments(filter?: {
   validationStatus?: string;
   revisionStatus?: string;
@@ -1121,7 +1124,7 @@ export async function listSourceDocuments(filter?: {
     .from(sourceDocuments)
     .where(conditions.length > 0 ? and(...conditions) : undefined)
     .orderBy(desc(sourceDocuments.createdAt))
-    .limit(filter?.limit ?? 200);
+    .limit(filter?.limit ?? SOURCE_DOCUMENT_LIST_LIMIT);
   return rows;
 }
 

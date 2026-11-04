@@ -32,7 +32,7 @@ import {
   visibleSupportGroups,
 } from "@/components/layout/navigation-data";
 import styles from "./Header.styles";
-import { ArrowIcon, BrandMenuLink, SearchIcon, isMenuLinkActive } from "./HeaderParts";
+import { ArrowIcon, BrandMenuLink, SearchIcon, isMenuLinkActive, warmBrandMenuLogos } from "./HeaderParts";
 import { HeaderMobileMenu } from "./HeaderMobileMenu";
 import { useSavetiDostupni } from "./useSavetiDostupni";
 
@@ -197,6 +197,17 @@ export function Header() {
 
   useEffect(() => {
     setMobileLayerMounted(true);
+  }, []);
+
+  useEffect(() => {
+    const warm = () => warmBrandMenuLogos(BRAND_LINKS);
+    // Safari nema requestIdleCallback.
+    if (typeof window.requestIdleCallback === "function") {
+      const handle = window.requestIdleCallback(warm, { timeout: 2500 });
+      return () => window.cancelIdleCallback(handle);
+    }
+    const timer = setTimeout(warm, 1200);
+    return () => clearTimeout(timer);
   }, []);
 
   useEffect(() => {
@@ -634,6 +645,7 @@ export function Header() {
   }
 
   function toggleDesktopMenu(menu: HeaderMenuKey) {
+    if (menu === "brendovi") warmBrandMenuLogos(BRAND_LINKS);
     clearDesktopHoverOpenTimer();
     clearDesktopHoverCloseTimer();
     if (
@@ -652,6 +664,7 @@ export function Header() {
   }
 
   function handleDesktopHoverEnter(menu: HeaderMenuKey) {
+    if (menu === "brendovi") warmBrandMenuLogos(BRAND_LINKS);
     if (!canUseDesktopHover()) return;
     clearDesktopHoverCloseTimer();
 
@@ -782,6 +795,7 @@ export function Header() {
   }
 
   function toggleMobileSection(section: HeaderMenuKey) {
+    if (section === "brendovi") warmBrandMenuLogos(BRAND_LINKS);
     setMobileSection((current) => (current === section ? null : section));
   }
 

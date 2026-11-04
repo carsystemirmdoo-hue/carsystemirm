@@ -5,6 +5,30 @@ import styles from "./Header.styles";
 import { isPathActive } from "./headerPaths";
 
 /*
+ * Panel brendova se renderuje tek pri otvaranju, pa je pregledač tek tada
+ * počinjao da preuzima logotipe (~150 KB SVG-a) i meni se otvarao prazan.
+ * Logotipi se zato preuzimaju unapred: kad je stranica mirna ili čim miš
+ * ili fokus dođe na „Brendovi". Reference ostaju u modulu da bi slike ostale
+ * u memorijskom kešu dokumenta.
+ */
+const warmedLogos: HTMLImageElement[] = [];
+
+export function warmBrandMenuLogos(brands: readonly NavigationLink[]) {
+  if (warmedLogos.length || typeof window === "undefined") return;
+  const sources = new Set<string>();
+  for (const brand of brands) {
+    if (brand.logo) sources.add(brand.logo);
+    if (brand.menuGallery?.monoSrc) sources.add(brand.menuGallery.monoSrc);
+  }
+  for (const src of sources) {
+    const image = new window.Image();
+    image.decoding = "async";
+    image.src = src;
+    warmedLogos.push(image);
+  }
+}
+
+/*
  * Delovi headera koje dele desktop meni (Header.tsx) i mobilni meni
  * (HeaderMobileMenu.tsx). `data-hdr` atributi su sidra za stilove mobilnog
  * menija, čije klase pripadaju drugom CSS modulu (2026-10-22).

@@ -23,6 +23,12 @@ const HOLD_DURATION = 80;
 const REVEAL_DURATION = 320;
 const VISUAL_EVENT_GRACE = 80;
 const ROUTE_FALLBACK_DURATION = 5_500;
+/**
+ * Najduže dodatno čekanje na slike prvog ekrana nove strane dok je zavesa
+ * spuštena (2026-11-04). Brze slike se tako pojave zajedno sa stranom umesto
+ * da „dolaze" posle nje; spora slika ne zadržava prelaz duže od ovoga.
+ */
+const VIEWPORT_IMAGE_BUDGET = 400;
 
 type TransitionKind =
   | "boot"
@@ -102,16 +108,45 @@ async function waitForImage(image: HTMLImageElement) {
   }
 }
 
+function pendingViewportImages() {
+  const viewportHeight = window.innerHeight;
+  const viewportWidth = window.innerWidth;
+  return Array.from(document.querySelectorAll<HTMLImageElement>("main img")).filter((image) => {
+    if (image.complete || image.dataset.routeCritical === "true") return false;
+    // Sledeći slajdovi karusela stoje ispod vidljivog, sa opacity 0 — nisu na ekranu.
+    if (image.checkVisibility?.({ opacityProperty: true, visibilityProperty: true }) === false) {
+      return false;
+    }
+    const rect = image.getBoundingClientRect();
+    return (
+      rect.width > 0 &&
+      rect.height > 0 &&
+      rect.bottom > 0 &&
+      rect.right > 0 &&
+      rect.top < viewportHeight &&
+      rect.left < viewportWidth
+    );
+  });
+}
+
 async function waitForCriticalRouteAssets() {
   const criticalImages = Array.from(
     document.querySelectorAll<HTMLImageElement>('img[data-route-critical="true"]'),
   );
+  const viewportImages = pendingViewportImages();
+  const viewportImagesReady = viewportImages.length
+    ? Promise.race([
+        Promise.all(viewportImages.map((image) => waitForImage(image))).then(() => undefined),
+        new Promise<void>((resolve) => window.setTimeout(resolve, VIEWPORT_IMAGE_BUDGET)),
+      ])
+    : Promise.resolve();
   const fontsReady =
     "fonts" in document ? document.fonts.ready.then(() => undefined) : Promise.resolve();
   // Početna označava prvi slajd kampanje kao `data-route-critical`; ranija posebna čekanja
   // na hero-*.png (1,7 MB, više nije prva slika početne) su uklonjena.
   await Promise.all([
     fontsReady,
+    viewportImagesReady,
     ...criticalImages.map((image) => waitForImage(image)),
   ]);
 }

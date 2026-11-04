@@ -111,6 +111,21 @@ const nextConfig: NextConfig = {
        * i ista politika. Listovi ponavljaju sadržaj PDP-a i ne treba da se
        * takmiče s njim u rezultatima; `follow` čuva prenos linkova.
        */
+      /*
+       * Logotipi brendova (meni, stranice brendova) su na svakoj stranici.
+       * Podrazumevano `max-age=0` je tražio proveru na serveru pri svakom
+       * učitavanju; sat vremena keša i dan osvežavanja u pozadini skraćuju
+       * prikaz menija, a nov logotip se i dalje pojavljuje najkasnije za sat.
+       */
+      {
+        source: "/brands/:path*",
+        headers: [
+          {
+            key: "Cache-Control",
+            value: "public, max-age=3600, stale-while-revalidate=86400",
+          },
+        ],
+      },
       {
         source: "/documents/products/:path*",
         headers: [

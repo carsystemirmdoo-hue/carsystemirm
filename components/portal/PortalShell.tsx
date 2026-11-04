@@ -5,6 +5,7 @@ import { fallbackRecordLabel, useCrumbLabels } from "@/components/portal/Breadcr
 import { CartButton } from "@/components/cart/CartButton";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { NAV_GROUPS } from "@/lib/authz/permissions.mjs";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { PortalIcon, type PortalIconName } from "./PortalIcon";
 import {
@@ -43,6 +44,11 @@ interface PortalShellProps {
   /** Kratko stanje izvora za dno navigacije (demo, dokumenti do datuma, nepovezan). */
   dataSource?: { status: "ok" | "warn"; label: string };
 }
+
+/** Svi ekrani iz menija, za sve uloge — da bi se znalo koji segment putanje je zaključan ekran. */
+const ALL_NAV_HREFS: ReadonlySet<string> = new Set(
+  (NAV_GROUPS as readonly { items: readonly { href: string }[] }[]).flatMap((group) => group.items.map((item) => item.href)),
+);
 
 const CRUMB_LABELS: Record<string, string> = {
   portal: "Poslovni sistem",
@@ -141,6 +147,10 @@ export function PortalShell({
     const segments = pathname.split("/").filter(Boolean);
     return segments.map((segment, index) => ({
       href: `/${segments.slice(0, index + 1).join("/")}`,
+      // Ekran iz menija koji OVOM korisniku nije dodeljen (npr. „Zalihe“ za
+      // kancelariju na „Uvozu lagera“) ostaje u putanji kao tekst — veza bi
+      // vodila na 403. Ostali segmenti (zapisi, podstrane) ostaju veze.
+      linkable: navLabels.has(`/${segments.slice(0, index + 1).join("/")}`) || !ALL_NAV_HREFS.has(`/${segments.slice(0, index + 1).join("/")}`),
       // Nepoznat segment je najčešće ID zapisa; prikazuje se onakav kakav jeste.
       label:
         navLabels.get(`/${segments.slice(0, index + 1).join("/")}`) ??
@@ -325,6 +335,8 @@ export function PortalShell({
                   {index ? <PortalIcon name="chevron" /> : null}
                   {index === crumbs.length - 1 ? (
                     <strong>{crumb.label}</strong>
+                  ) : !crumb.linkable ? (
+                    <span>{crumb.label}</span>
                   ) : (
                     <Link href={crumb.href}>{crumb.label}</Link>
                   )}

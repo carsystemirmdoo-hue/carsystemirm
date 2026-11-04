@@ -77,6 +77,9 @@ export default async function RebatesFromInvoicesPage() {
   const user = await requireCapability("view:rabati", "/portal/cene/rabati-iz-faktura");
   const [{ items, lineCount, missingGroupLines }, dataset] = await Promise.all([loadRebateEvidence(user), loadDatasetInfo()]);
   const canPropose = can(user, "prices:propose");
+  // Dok BizniSoft grupe nisu uvezene, svaka stavka je „bez grupe“ i ova strana
+  // nema šta da predloži — pregled rabata je tada po kupcu i po porodici.
+  const noGroupsYet = lineCount > 0 && missingGroupLines === lineCount;
   return (
     <>
       <PageHeader
@@ -95,9 +98,42 @@ export default async function RebatesFromInvoicesPage() {
           </span>
         </div>
       </section>
+      {noGroupsYet ? (
+        <section className="portal-panel" data-accent="warning">
+          <h2>Grupe artikala iz BizniSofta još nisu uvezene</h2>
+          <p>
+            Rabat po grupi zato još ne može da se izvede, pa je svaki kupac ispod „bez grupe“. Rabati sa
+            faktura se do tada pregledaju po kupcu i po porodici artikala:
+          </p>
+          <p>
+            <Link className="portal-button" data-variant="primary" href="/portal/cene/rabati-iz-faktura/kupci">
+              Pregled rabata po kupcu
+            </Link>{" "}
+            <Link className="portal-button" href="/portal/cene/rabati-iz-faktura/predlozi">
+              Pokrivenost i grupni predlozi
+            </Link>
+          </p>
+        </section>
+      ) : null}
       {SECTIONS.map((sec) => {
         const list = items.filter((i) => i.status === sec.status);
         if (list.length === 0) return null;
+        if (noGroupsYet && sec.status === "missing_group") {
+          return (
+            <details key={sec.status} className="portal-panel cs-sugg-more">
+              <summary>
+                {sec.title} · {list.length} kupaca — dokazi po kupcu bez grupe
+              </summary>
+              <div className="portal-panel-body">
+                <ol className="rb-list">
+                  {list.map((i) => (
+                    <Item key={`${i.customerId}|${i.productGroup}`} item={i} canPropose={canPropose} />
+                  ))}
+                </ol>
+              </div>
+            </details>
+          );
+        }
         return (
           <section key={sec.status} className="portal-panel">
             <div className="portal-section-header">

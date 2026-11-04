@@ -11,7 +11,8 @@
   .pdp.pdp { grid-template-columns: minmax(0, 22rem) minmax(0, 1fr); }
   .stageColumn.stageColumn { position: sticky; top: 6rem; }
   .stage.stage { min-height: 26rem; }
-  .stage.stage img { max-height: 24rem; }
+  /* Ambalaža ~60 % okvira (2026-11-04); širina ograničava i široke limenke od 0,5 L. */
+  .stage.stage img { max-height: 17rem; max-width: min(100%, 15rem); }
   .filters.filters { grid-template-columns: minmax(0, 2fr) minmax(0, 1fr); }
   .grid.grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
 }

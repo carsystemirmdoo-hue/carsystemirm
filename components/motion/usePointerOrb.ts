@@ -114,9 +114,12 @@ function getCursorState(target: EventTarget | null): {
 export function usePointerOrb({
   dotRef,
   haloRef,
+  host,
 }: {
   dotRef: RefObject<HTMLDivElement>;
   haloRef: RefObject<HTMLDivElement>;
+  /** Kontejner u koji se orb renderuje; efekat se pokreće kad orb postoji. */
+  host?: Element | null;
 }) {
   useEffect(() => {
     const currentHalo = haloRef.current;
@@ -146,5 +149,5 @@ export function usePointerOrb({
     });
 
     return () => runtime.destroy();
-  }, [dotRef, haloRef]);
+  }, [dotRef, haloRef, host]);
 }

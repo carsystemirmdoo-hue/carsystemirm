@@ -93,6 +93,12 @@ export default async function PartnerRegistryPage({
       {!registry.latestImport ? (
         <section className="portal-panel">
           <p>Registar još nije uvezen.</p>
+          {canLink ? null : (
+            <p>
+              Registar nosi e-poštu i telefone sa BizniSoft kartica, pa uvoz uključuje i radi Vlasnik.
+              Do tada se kupci i šifre partnera vode kroz „Kupci“ i „Šifre partnera“.
+            </p>
+          )}
         </section>
       ) : (
         <section className="portal-panel">

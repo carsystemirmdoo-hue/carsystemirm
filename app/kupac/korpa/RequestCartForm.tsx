@@ -194,13 +194,6 @@ export function RequestCartForm({ view }: { view: RequestCartView }) {
         </div>
       ) : null}
 
-      <dl className={styles.overview} aria-label="Zbir korpe">
-        <div><dt>Bez PDV-a</dt><dd>{allOnRequest ? "Na upit" : money(view.totals.net)}</dd></div>
-        <div><dt>PDV</dt><dd>{allOnRequest ? "Na upit" : money(view.totals.vat)}</dd></div>
-        <div><dt>{view.onRequest ? "Poznati iznos sa PDV-om" : "Ukupno sa PDV-om"}</dt><dd>{allOnRequest ? "Na upit" : money(view.totals.gross)}</dd></div>
-        {view.onRequest ? <p>Stavke na upit nisu uračunate. Kancelarija potvrđuje njihov iznos.</p> : null}
-      </dl>
-
       <div className={styles.checkout}>
         <div className={styles.main}>
           {view.options.length > 1 ? (
@@ -243,7 +236,15 @@ export function RequestCartForm({ view }: { view: RequestCartView }) {
           ) : (
             <p className="pn-note">
               <span>
-                Plaćanje: <strong>{selectedLabel}</strong>. Izbor opcije nije dokaz uplate.
+                Plaćanje: <strong>{selectedLabel}</strong> ·{" "}
+                {allOnRequest ? (
+                  <strong>iznos još nije utvrđen</strong>
+                ) : (
+                  <>
+                    <strong className="pn-num">{money(view.totals.gross)}</strong> sa PDV-om{view.onRequest ? `, nije konačno: ${countOf(view.onRequest, STAVKA)} na upit` : ""}
+                  </>
+                )}
+                . Izbor opcije nije dokaz uplate.
               </span>
             </p>
           )}
@@ -422,28 +423,9 @@ export function RequestCartForm({ view }: { view: RequestCartView }) {
           </section>
         </div>
 
-        <aside className={styles.summary} aria-label="Zbir i slanje">
+        <aside className={styles.summary} aria-label="Slanje zahteva">
           <section className="pn-card">
-            <h2 className="pn-h2">{view.onRequest && !allOnRequest ? "Zbir poznatih cena" : "Zbir"}</h2>
-            <p className="pn-small pn-muted">{selectedLabel}</p>
-            {allOnRequest ? (
-              <>
-                <p className="pn-unknown">Iznos još nije utvrđen</p>
-                <p className="pn-totals-note">Sve stavke su na upit ({countOf(view.onRequest, STAVKA)}). Kancelarija Vam javlja cenu; nijedna stavka nije besplatna.</p>
-              </>
-            ) : (
-              <>
-                <dl className="pn-totals">
-                  <dt>Iznos bez PDV-a</dt>
-                  <dd>{money(view.totals.net)}</dd>
-                  <dt>PDV</dt>
-                  <dd>{money(view.totals.vat)}</dd>
-                  <dt className="pn-grand">{view.onRequest ? "Zbir sa PDV-om — nije konačan" : "Ukupno sa PDV-om"}</dt>
-                  <dd className="pn-grand">{money(view.totals.gross)}</dd>
-                </dl>
-                {view.onRequest ? <p className="pn-totals-note">Nije konačan iznos zahteva: {countOf(view.onRequest, STAVKA)} na upit nije uračunato. Cenu tih stavki potvrđuje kancelarija.</p> : null}
-              </>
-            )}
+            <h2 className="pn-h2">Slanje zahteva</h2>
             {needPassword ? (
               <div className="pn-fields" style={{ borderTop: "1px solid var(--p-line)", paddingTop: 12 }}>
                 <div className="pn-field">

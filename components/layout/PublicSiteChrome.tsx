@@ -17,16 +17,22 @@ export function PublicSiteChrome({ children, publicSiteOpen = true }: { children
 
   if (usesCustomChrome) return <>{children}</>;
 
-  // Sajt u pripremi: prijava i nalog kupca bez javnog menija (on bi vodio na „sajt u pripremi“).
-  if (!publicSiteOpen && (pathname.startsWith("/kupac") || pathname.startsWith("/prijava"))) {
+  // Sajt u pripremi: prijava bez javnog menija (on bi vodio na „sajt u pripremi“).
+  if (!publicSiteOpen && pathname.startsWith("/prijava")) {
     return (
       <>
         <AccountOnlyHeader />
-        <CustomerCartDrawer publicSiteOpen={false} />
         {children}
       </>
     );
   }
+
+  /*
+   * Nalog kupca uvek dobija javni meni: prijavljenom kupcu je sajt otvoren i dok
+   * je „u pripremi“ (odluka vlasnika 15. 10. 2026, `siteOpenForCustomer`), pa iz
+   * naloga ide na bilo koju stranu sajta, a korpa firme ostaje na serveru.
+   */
+  const siteOpenHere = publicSiteOpen || pathname.startsWith("/kupac");
 
   /*
    * Provider obuhvata i Header i sadržaj stranice, jer obe strane otvaraju
@@ -36,7 +42,7 @@ export function PublicSiteChrome({ children, publicSiteOpen = true }: { children
   return (
     <ProductSearchProvider>
       <Header />
-      <CustomerCartDrawer publicSiteOpen={publicSiteOpen} />
+      <CustomerCartDrawer publicSiteOpen={siteOpenHere} />
       {children}
     </ProductSearchProvider>
   );

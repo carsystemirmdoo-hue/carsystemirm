@@ -7,6 +7,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { NAV_GROUPS } from "@/lib/authz/permissions.mjs";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { NotificationBell } from "./NotificationBell";
 import { PortalIcon, type PortalIconName } from "./PortalIcon";
 import {
   sidebarCookieValue,
@@ -350,13 +351,7 @@ export function PortalShell({
                 Do tada se polje ne prikazuje (sistem A, 2026-10-14): nedovršen
                 element u traci je izgledao kao kvar. Stil `.portal-search-trigger`
                 ostaje u portal.css za trenutak kada pretraga proradi. */}
-            <Link
-              href="/portal/obavestenja"
-              className="portal-icon-button"
-              aria-label="Obaveštenja"
-            >
-              <PortalIcon name="bell" />
-            </Link>
+            <NotificationBell />
 
             {showCart ? <CartButton /> : null}
             <div className="portal-profile">

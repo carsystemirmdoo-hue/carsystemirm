@@ -590,6 +590,23 @@ body:has(.portal-login-root) {
   background: var(--p-surface-subtle);
   border-color: var(--p-line);
 }
+/* Broj nepročitanih na zvoncu (NotificationBell). */
+.portal-bell-count {
+  position: absolute;
+  top: 2px;
+  right: 1px;
+  min-width: 16px;
+  height: 16px;
+  padding: 0 4px;
+  border-radius: 8px;
+  background: var(--p-red);
+  color: #fff;
+  font-size: 10px;
+  font-weight: 700;
+  line-height: 16px;
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+}
 .portal-root :is(a, button, input, select, textarea, summary):focus-visible,
 .portal-login-root :is(a, button, input, select, textarea, summary):focus-visible {
   outline: 3px solid var(--pn-focus, #2c5da8);

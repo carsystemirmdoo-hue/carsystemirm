@@ -32,14 +32,15 @@ const BROJ = new Intl.NumberFormat("sr-Latn-RS");
 export default async function SourceDocumentsPage({
   searchParams,
 }: {
-  searchParams: Promise<{ filter?: string }>;
+  searchParams: Promise<{ filter?: string; q?: string }>;
 }) {
   const user = await requireCapability("view:importi", "/portal/importi/dokumenti");
-  const { filter } = await searchParams;
+  const { filter, q: rawQ } = await searchParams;
+  const q = (rawQ ?? "").trim().slice(0, 80);
   const active = FILTERS.some((f) => f.key === filter) ? filter! : "svi";
 
   const counts = await countSourceDocuments();
-  const rows = await listSourceDocuments(queryFor(active));
+  const rows = await listSourceDocuments({ ...queryFor(active), search: q || undefined });
   // Svaki dokument ima tačno jedno stanje provere, pa je zbir tih brojača ukupan broj.
   const totalDocuments = Object.entries(counts)
     .filter(([key]) => key.startsWith("validation:"))
@@ -104,13 +105,18 @@ export default async function SourceDocumentsPage({
               ))}
             </select>
           </label>
+          <label className="portal-field">
+            <span>Broj računa, šifra partnera ili kupac</span>
+            <input type="search" name="q" defaultValue={q} maxLength={80} placeholder="npr. 26-RN021001169" />
+          </label>
           <button type="submit" className="portal-button" data-variant="secondary">
             Primenite
           </button>
         </form>
+        {q ? <p>Pronađeno: {BROJ.format(rows.length)}{rows.length >= SOURCE_DOCUMENT_LIST_LIMIT ? "+ (suzite pretragu)" : ""}.</p> : null}
       </section>
 
-      {rows.length >= SOURCE_DOCUMENT_LIST_LIMIT ? (
+      {!q && rows.length >= SOURCE_DOCUMENT_LIST_LIMIT ? (
         <p className="portal-login-hint" role="status">
           Prikazano je {SOURCE_DOCUMENT_LIST_LIMIT} najnovijih dokumenata (ukupno u bazi:{" "}
           {BROJ.format(totalDocuments)}
@@ -120,6 +126,7 @@ export default async function SourceDocumentsPage({
 
       <SourceDocumentReview
         canManage={can(user, "documents:resolve")}
+        canOpenInvoice={can(user, "view:prodaja")}
         rows={rows.map((row) => ({
           id: row.id,
           fileHash: row.fileHash,
@@ -134,6 +141,9 @@ export default async function SourceDocumentsPage({
           conflictReason: row.conflictReason,
           manualReview: row.manualReview,
           posted: row.invoiceId !== null,
+          invoiceId: row.invoiceId,
+          businessDocumentNumber: row.businessDocumentNumber,
+          customerName: row.customerName,
           stornoStatus: row.stornoStatus,
           reversed: row.reversed,
         }))}

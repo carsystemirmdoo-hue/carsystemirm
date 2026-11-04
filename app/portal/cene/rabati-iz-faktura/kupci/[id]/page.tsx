@@ -414,7 +414,7 @@ export default async function RebateReviewCustomerPage({
             ) : null}
           </section>
 
-          {status || can(user, "prices:approve") ? (
+          {status || can(user, "prices:oversee") ? (
             <section className="portal-panel" data-accent={status ? "warning" : undefined}>
               <div className="portal-section-header">
                 <div>
@@ -426,7 +426,7 @@ export default async function RebateReviewCustomerPage({
                   </p>
                 </div>
               </div>
-              {can(user, "prices:approve") ? (
+              {can(user, "prices:oversee") ? (
                 <div className="portal-panel-body">
                   <CommercialStatusForm customerId={customer.id} current={(status?.status ?? "redovan") as CommercialStatus} />
                 </div>

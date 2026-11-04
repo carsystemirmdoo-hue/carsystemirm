@@ -76,7 +76,7 @@ test("opcije: predlog samo za svog kupca, kancelarija ne predlaže, odobrava vla
   await assert.rejects(async () => proposePaymentOption(await user("tamara"), { customerId, optionCode: "avans", effectiveFrom: TODAY, reason: "kancelarija" }), /pravo/);
   const a = await proposePaymentOption(await user("rep"), { customerId, optionCode: "avans", effectiveFrom: TODAY, reason: "dogovor: avans" });
   await assert.rejects(async () => proposePaymentOption(await user("rep"), { customerId, optionCode: "avans", effectiveFrom: TODAY, reason: "ponovo" }), /čeka odluku/);
-  await assert.rejects(async () => decidePaymentOption(await user("rep"), { id: a.id, to: "odobreno", reason: null }), /vlasnik/);
+  await assert.rejects(async () => decidePaymentOption(await user("rep"), { id: a.id, to: "odobreno", reason: null }), /pravo da odobravate/);
   assert.deepEqual(await approvedPaymentOptions(customerId, TODAY), [], "predlog ne važi pre odobrenja");
   await decidePaymentOption(await user("owner"), { id: a.id, to: "odobreno", reason: null });
   const b = await proposePaymentOption(await user("rep"), { customerId, optionCode: "odlozeno_30", effectiveFrom: TODAY, reason: "standard 30 dana" });
@@ -119,5 +119,5 @@ test("pravila artikla jednaka grupnom se zatvaraju (istorija ostaje); drugačiji
   assert.deepEqual(r.review.map((x) => x.percent), [41], "dogovor 41 % ostaje i ide na pregled");
   const [{ t: to }] = await db.sql<{ t: string }[]>`SELECT effective_to::text AS t FROM price_rules WHERE article_id = ${art.B2} AND customer_id = ${customerId}`;
   assert.equal(to, yesterday);
-  await assert.rejects(async () => closeRedundantArticleRules(await user("rep"), { customerId, brand: "BASLAC", percent: 38, closeAfter: yesterday, reason: "bez prava" }), /vlasnik/);
+  await assert.rejects(async () => closeRedundantArticleRules(await user("rep"), { customerId, brand: "BASLAC", percent: 38, closeAfter: yesterday, reason: "bez prava" }), /pravo da zatvarate/);
 });

@@ -25,7 +25,7 @@ export async function assertPreparedForPortal(customerId: string) {
 
 /** Odluka vlasnika o posebnom statusu (samo dodavanje, sa tragom). Ista odluka ne pravi nov zapis. */
 export async function setCommercialStatus(actor: PortalUser, input: { customerId: string; status: CommercialStatus; reason: string }) {
-  if (!can(actor, "prices:approve")) throw new Error("Poseban status kupca određuje samo vlasnik.");
+  if (!can(actor, "prices:oversee")) throw new Error("Poseban status kupca određuje samo vlasnik.");
   if (!(input.status in COMMERCIAL_STATUSES)) throw new Error("Nepoznat status.");
   const reason = input.reason.trim();
   if (reason.length < 5 || reason.length > 500) throw new Error("Obrazloženje: 5–500 znakova.");

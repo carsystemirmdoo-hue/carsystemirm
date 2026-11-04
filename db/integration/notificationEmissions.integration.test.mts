@@ -298,7 +298,8 @@ test("sudar dva aktivna pravila emituje kriticno obavestenje, jednom", async (t)
     SELECT severity, required_capability FROM notifications
     WHERE kind = 'price_rule_conflict'`;
   assert.equal(notice.severity, "critical");
-  assert.equal(notice.required_capability, "prices:approve");
+  // Vlasniku (2026-11-04): paket odobravanja sme da ima i komercijalista.
+  assert.equal(notice.required_capability, "prices:oversee");
 });
 
 /* -------------------------------------------------------------------------

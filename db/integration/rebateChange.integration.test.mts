@@ -120,7 +120,7 @@ test("dozvole: svoj kupac, analitika za sve, kancelarija ne predlaže, direktno 
   const p = await previewRebateChange(await user("miroslav"), input);
   assert.equal(p.rows[0].action, "novo");
   await assert.rejects(async () => submitRebateChange(await user("tamara"), { ...input, reason: "pokušaj kancelarije", expected: [{ articleId: art.A, replacesRuleId: null }] }), /pravo/);
-  await assert.rejects(async () => submitRebateChange(await user("miroslav"), { ...input, reason: "direktno bez prava gazde", approveNow: true, expected: [{ articleId: art.A, replacesRuleId: null }] }), /vlasnik/);
+  await assert.rejects(async () => submitRebateChange(await user("miroslav"), { ...input, reason: "direktno bez prava gazde", approveNow: true, expected: [{ articleId: art.A, replacesRuleId: null }] }), /pravo da direktno odobrite/);
 });
 
 test("zamena: predlog ne menja cenu; posle odobrenja staro pravilo se zatvara, bez sukoba; ponovljeno slanje se odbija", async (t) => {

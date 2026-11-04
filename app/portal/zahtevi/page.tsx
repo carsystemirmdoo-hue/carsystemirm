@@ -46,7 +46,7 @@ export default async function OrderRequestsPage({ searchParams }: { searchParams
   ]);
   const allCustomers = process.env.CUSTOMER_ORDERING === "cenovnik";
   const canReview = can(user, "customer_orders:review");
-  const isOwner = can(user, "customer_accounts:manage") && can(user, "prices:approve");
+  const isOwner = can(user, "customer_accounts:manage") && can(user, "prices:oversee");
   const trials = isOwner ? await trialOverview() : [];
   // Lista prikazuje najnovijih 200 u izabranom stanju; brojač je nad celim skupom.
   const shownAll = list.length >= counts[filter.key];

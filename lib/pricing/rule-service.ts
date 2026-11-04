@@ -18,6 +18,12 @@ import { canAccessCustomer } from "@/lib/authz/scope.mjs";
 import { loadAssignedCustomerIds, type PortalUser } from "@/lib/authz/user-repository";
 import { notify } from "@/lib/notifications/notification-service";
 import { ACTIVE_RULE_STATUSES } from "@/lib/pricing/evaluation-service";
+import {
+  assertDecisionScope,
+  notifyOwnerOfDecision,
+  OWNER_CAPABILITY,
+  PriceDecisionScopeError,
+} from "@/lib/pricing/owner-oversight";
 import type { PricingScope } from "@/lib/pricing/pricing-scope";
 import {
   precedenceLabelFor,
@@ -199,8 +205,8 @@ export async function proposePriceRule(
       {
         kind: "price_rule_proposed",
         severity: "info",
-        // Vidi ga onaj ko odlučuje, ne onaj ko predlaže.
-        requiredCapability: "prices:approve",
+        // Vlasniku: komercijalista koji sme da odobrava vidi predloge na svojoj strani odobravanja.
+        requiredCapability: OWNER_CAPABILITY,
         title: "Nov predlog promene cene",
         body: `${actor.name} predlaže ${precedenceLabelFor(level)} (${scopeKey}). Razlog: ${reason}`,
         entityType: "Pravilo cene",
@@ -247,6 +253,16 @@ export async function transitionPriceRule(
     .limit(1);
 
   if (!rule) throw new WorkflowError("Pravilo cene ne postoji.", "not_found");
+
+  /*
+   * Odobravanje sme i komercijalista (2026-11-04), ali samo za svoje kupce.
+   * Provera je ovde, na jedinom ulazu za prelaze, da je ne zaobiđe ni paket
+   * ni direktno odobrenje promene.
+   */
+  await assertDecisionScope(actor, [rule]).catch((error: unknown) => {
+    if (error instanceof PriceDecisionScopeError) throw new WorkflowError(error.message, "out_of_scope");
+    throw error;
+  });
 
   const capabilities = resolveCapabilities(actor.role, actor.permissions);
   /*
@@ -339,6 +355,22 @@ export async function transitionPriceRule(
     if (notification) {
       await notify({ ...notification, correlationId }, tx);
     }
+    // Odluka koju nije doneo vlasnik ide i vlasniku. Serije šalju jedno obaveštenje za ceo paket.
+    if (options.notify !== false && (input.to === "approved_pending_biznisoft" || input.to === "rejected")) {
+      await notifyOwnerOfDecision(
+        actor,
+        {
+          kind: input.to === "rejected" ? "price_rule_rejected" : "price_rule_approved",
+          customerId: rule.customerId,
+          what: describeRule(rule),
+          entityType: "Pravilo cene",
+          entityId: rule.id,
+          actionHref: "/portal/cene/istorija",
+          correlationId,
+        },
+        tx,
+      );
+    }
 
     /*
      * Konflikt se prijavljuje iz MUTACIJE, ne iz otvaranja ekrana.
@@ -419,7 +451,7 @@ async function notifyRuleConflict(
     {
       kind: "price_rule_conflict",
       severity: "critical",
-      requiredCapability: "prices:approve",
+      requiredCapability: OWNER_CAPABILITY,
       title: "Dva aktivna pravila iste klase za isti opseg",
       body:
         `Klasa ${rule.precedenceLevel} (${precedenceLabelFor(rule.precedenceLevel)}) ` +
@@ -434,6 +466,12 @@ async function notifyRuleConflict(
     },
     tx,
   );
+}
+
+/** Kratak opis pravila za obaveštenje vlasniku. */
+export function describeRule(rule: Pick<PriceRuleRow, "precedenceLevel" | "discountPercent" | "effectiveFrom">): string {
+  const percent = rule.discountPercent == null ? "" : `, rabat ${Number(rule.discountPercent).toLocaleString("sr-RS")} %`;
+  return `${precedenceLabelFor(rule.precedenceLevel)}${percent}, važi od ${rule.effectiveFrom}`;
 }
 
 /** Obaveštenje koje prati dati prelaz, ili `null` kada ga ne treba slati. */
@@ -485,7 +523,7 @@ function notificationForTransition(
          * Gazdi, jer je on odobrio i mora znati da je kancelarija unela.
          * Poruka izričito kaže da fakturska potvrda i dalje ne postoji.
          */
-        requiredCapability: "prices:approve" as const,
+        requiredCapability: OWNER_CAPABILITY,
         title: "Kancelarija evidentirala unos u BizniSoft",
         body: `${label} — evidentirao ${actor.name}. NIJE potvrđeno fakturom; potvrdu daje tek usaglašavanje.`,
         entityType: "Pravilo cene",
@@ -502,7 +540,7 @@ function notificationForTransition(
          * BizniSoft — je jedino stanje u kome sistem i knjigovodstvo tvrde
          * različite stvari, a niko to ne vidi dok kupac ne dobije fakturu.
          */
-        requiredCapability: "prices:approve",
+        requiredCapability: OWNER_CAPABILITY,
         title: "Odobrena cena nije potvrđena u BizniSoftu",
         body: `${label} — ${reason ?? "usaglašavanje nije uspelo"}.`,
         entityType: "Pravilo cene",
@@ -514,7 +552,7 @@ function notificationForTransition(
       return {
         kind: "price_rule_revoked" as const,
         severity: "warning" as const,
-        requiredCapability: "prices:approve",
+        requiredCapability: OWNER_CAPABILITY,
         title: "Pravilo cene je opozvano",
         body: `${label} — opozvao ${actor.name}. Razlog: ${reason ?? "nije naveden"}`,
         entityType: "Pravilo cene",

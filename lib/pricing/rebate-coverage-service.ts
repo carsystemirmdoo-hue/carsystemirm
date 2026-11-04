@@ -10,6 +10,8 @@ import { allowsAutomaticRebates, isPreparedForPortal, statusReason } from "@/lib
 import { commercialStatuses } from "@/lib/customers/commercial-status-service";
 import { outOfProgrammeArticles } from "@/lib/pricing/article-programme-service";
 import { classifyCustomer, COVERAGE_RULES, segmentPair } from "@/lib/pricing/rebateCoverage.mjs";
+import { assertDecisionScope, notifyOwnerOfDecision } from "@/lib/pricing/owner-oversight";
+import { resolvePricingScope } from "@/lib/pricing/pricing-scope";
 import { proposePriceRule, transitionPriceRule } from "@/lib/pricing/rule-service";
 
 const APPROVED = ["approved_pending_biznisoft", "office_recorded", "confirmed"];
@@ -201,6 +203,17 @@ export async function approveRebateGroup(
     }
     created.push(rule.id);
   }
+  if (approve) {
+    await notifyOwnerOfDecision(actor, {
+      kind: "price_rule_approved",
+      customerId: input.customerId,
+      what: `Rabati iz istorije, grupa „${input.groupKey}“: ${created.length} pravila od ${input.asOf}`,
+      entityType: "Serija pravila cene",
+      entityId: batchId,
+      actionHref: "/portal/cene/istorija",
+      correlationId: batchId,
+    });
+  }
   await recordAudit({
     actor: { id: actor.id, name: actor.name, role: actor.role },
     action: AUDIT_ACTIONS.rebateGroupApproved,
@@ -215,9 +228,17 @@ export async function approveRebateGroup(
   return { ok: true as const, batchId, count: created.length, approved: approve };
 }
 
-/** Paket na čekanju (predlozi jedne serije) — za odluku gazde jednim potezom. */
+/**
+ * Paket na čekanju (predlozi jedne serije) — za odluku jednim potezom.
+ * Ko ne vidi sve kupce dobija samo pakete svojih kupaca.
+ */
 export async function pendingBatches(viewer: PortalUser) {
   if (!can(viewer, "prices:approve")) return [];
+  const scope = await resolvePricingScope(viewer);
+  if (!scope.seesAll && !scope.customerIds?.length) return [];
+  const inScope = scope.seesAll
+    ? sql`TRUE`
+    : sql`r.customer_scope = 'customer' AND r.customer_id IN (${sql.join(scope.customerIds!.map((id) => sql`${id}::uuid`), sql`, `)})`;
   const rows = await getDb().execute<{ batch: string; customer: string; n: number; min: string; max: string; replaces: number; proposer: string; at: string }>(sql`
     SELECT r.source_batch AS batch, coalesce(c.name, '—') AS customer, count(*)::int AS n,
            min(r.discount_percent)::text AS min, max(r.discount_percent)::text AS max,
@@ -225,20 +246,37 @@ export async function pendingBatches(viewer: PortalUser) {
       FROM price_rules r
       LEFT JOIN customers c ON c.id = r.customer_id
       LEFT JOIN users u ON u.id = r.proposed_by
-     WHERE r.status = 'pending_approval' AND r.source_batch IS NOT NULL
+     WHERE r.status = 'pending_approval' AND r.source_batch IS NOT NULL AND ${inScope}
      GROUP BY r.source_batch, c.name, u.name
      ORDER BY max(r.proposed_at) DESC`);
   return [...rows];
 }
 
-/** Odluka gazde za ceo paket na čekanju: svako pravilo kroz postojeći prelaz (zamena, trag, sukobi). */
+/**
+ * Odluka za ceo paket na čekanju: svako pravilo kroz postojeći prelaz (zamena,
+ * trag, sukobi). Opseg se proverava za CEO paket pre prvog upisa, da paket sa
+ * jednim tuđim kupcem ne ostane napola odobren.
+ */
 export async function decidePendingBatch(actor: PortalUser, input: { batchId: string; to: "approved_pending_biznisoft" | "rejected"; reason: string | null }) {
-  if (!can(actor, "prices:approve")) throw new Error("Paket odobrava samo vlasnik.");
+  if (!can(actor, "prices:approve")) throw new Error("Nemate pravo da odobravate pakete.");
   if (input.to === "rejected" && !(input.reason ?? "").trim()) throw new Error("Odbijanje traži razlog.");
-  const ids = await getDb().execute<{ id: string }>(sql`
-    SELECT id FROM price_rules WHERE source_batch = ${input.batchId} AND status = 'pending_approval' ORDER BY created_at`);
+  const ids = await getDb().execute<{ id: string; customer_scope: string; customer_id: string | null }>(sql`
+    SELECT id, customer_scope::text AS customer_scope, customer_id::text AS customer_id
+      FROM price_rules WHERE source_batch = ${input.batchId} AND status = 'pending_approval' ORDER BY created_at`);
+  await assertDecisionScope(actor, ids.map((r) => ({ customerScope: r.customer_scope, customerId: r.customer_id })));
   for (const r of ids) {
     await transitionPriceRule({ ruleId: r.id, to: input.to, reason: input.reason ?? `Odluka za paket ${input.batchId}` }, actor, { correlationId: input.batchId, notify: false });
+  }
+  if (ids.length) {
+    await notifyOwnerOfDecision(actor, {
+      kind: input.to === "rejected" ? "price_rule_rejected" : "price_rule_approved",
+      customerId: ids[0].customer_id,
+      what: `Paket ${input.batchId}: ${ids.length} pravila${input.to === "rejected" && input.reason ? `, razlog: ${input.reason}` : ""}`,
+      entityType: "Serija pravila cene",
+      entityId: input.batchId,
+      actionHref: "/portal/cene/istorija",
+      correlationId: input.batchId,
+    });
   }
   return { count: ids.length };
 }

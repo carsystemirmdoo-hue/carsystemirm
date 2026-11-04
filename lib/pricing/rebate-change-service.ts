@@ -11,6 +11,7 @@ import { approvedPaymentOptions } from "@/lib/pricing/payment-option-service";
 import { isOptionCode, optionLabel } from "@/lib/pricing/paymentOptions.mjs";
 import { scopeKeyFor } from "@/lib/pricing/precedence.mjs";
 import { classifyCustomer, familyCandidates } from "@/lib/pricing/rebateCoverage.mjs";
+import { notifyOwnerOfDecision } from "@/lib/pricing/owner-oversight";
 import { proposePriceRule, transitionPriceRule } from "@/lib/pricing/rule-service";
 import { belgradeDate } from "@/lib/recommendations/customerRhythm.mjs";
 
@@ -307,7 +308,7 @@ export async function submitRebateChange(
   input: ChangeInput & { reason: string; expected: { articleId: string; replacesRuleId: string | null }[]; approveNow?: boolean; expectedScopeRuleId?: string | null },
 ) {
   if (!can(viewer, "prices:propose")) throw new RebateChangeError("Nemate pravo da predlažete promenu rabata.");
-  if (input.approveNow && !can(viewer, "prices:approve")) throw new RebateChangeError("Direktno odobrava samo vlasnik.");
+  if (input.approveNow && !can(viewer, "prices:approve")) throw new RebateChangeError("Nemate pravo da direktno odobrite promenu.");
   const reason = input.reason.trim();
   if (reason.length < 10 || reason.length > 800) throw new RebateChangeError("Obrazloženje: 10–800 znakova.");
   const preview = await previewRebateChange(viewer, input);
@@ -367,6 +368,17 @@ export async function submitRebateChange(
     reason,
     correlationId: batchId,
   });
+  if (input.approveNow) {
+    await notifyOwnerOfDecision(viewer, {
+      kind: "price_rule_approved",
+      customerId: input.customerId,
+      what: `Promena rabata na ${input.newPercent} % od ${input.effectiveFrom} (${origin}, ${created.length} pravila). Obrazloženje: ${reason}`,
+      entityType: "Serija pravila cene",
+      entityId: batchId,
+      actionHref: "/portal/cene/istorija",
+      correlationId: batchId,
+    });
+  }
   return { batchId, count: created.length, approved: Boolean(input.approveNow) };
 }
 
@@ -404,6 +416,15 @@ async function submitScopeChange(
   );
   if (input.approveNow) {
     await transitionPriceRule({ ruleId: rule.id, to: "approved_pending_biznisoft", reason: `Direktno odobrenje promene ${batchId}` }, viewer, { correlationId: batchId, notify: false });
+    await notifyOwnerOfDecision(viewer, {
+      kind: "price_rule_approved",
+      customerId: input.customerId,
+      what: `Promena rabata na ${input.newPercent} % od ${input.effectiveFrom} (${label}). Obrazloženje: ${reason}`,
+      entityType: "Serija pravila cene",
+      entityId: batchId,
+      actionHref: "/portal/cene/istorija",
+      correlationId: batchId,
+    });
   }
   return { batchId, count: 1, approved: Boolean(input.approveNow) };
 }
@@ -416,7 +437,9 @@ async function submitScopeChange(
  * Istorija ostaje (effective_to + trag). Samo vlasnik.
  */
 export async function closeRedundantArticleRules(actor: PortalUser, input: { customerId: string; brand: string; percent: number; closeAfter: string; reason: string }) {
-  if (!can(actor, "prices:approve")) throw new RebateChangeError("Samo vlasnik.");
+  if (!can(actor, "prices:approve")) throw new RebateChangeError("Nemate pravo da zatvarate pravila.");
+  const assigned = await loadAssignedCustomerIds(actor.id);
+  if (!canAccessCustomer(actor, assigned, input.customerId)) throw new RebateChangeError("Kupac nije u Vašem opsegu.");
   const db = getDb();
   const rows = await db.execute<{ id: string; p: string; code: string; f: string }>(sql`
     SELECT r.id, r.discount_percent::text AS p, a.code, r.effective_from::text AS f

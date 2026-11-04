@@ -58,21 +58,25 @@ before(async () => {
 
 after(async () => {
   if (!reason && db) {
-    await db.sql`TRUNCATE article_base_prices, price_list_import_rows, price_list_imports`;
+    await db.sql`TRUNCATE article_new_defaults, supplier_article_codes, article_base_prices, price_list_import_rows, price_list_imports`;
     await db.sql`DELETE FROM articles WHERE code LIKE ${`9${run}%`}`;
     await cleanupQa(db);
   }
   await closeTestDatabase();
 });
 
-test("samo gazda: kancelarija ne može ni da otpremi, ni da primeni, ni da menja cenu", async (t) => {
+test("uvoz: gazda i kancelarija (0057); ručnu izmenu osnovne cene i dalje samo gazda; ostali ne uvoze", async (t) => {
   if (guard(t)) return;
   const svc = await import("@/lib/pricing/price-list-service");
   const rep = report([{ code: code(1), name: "PROBNI PRAJMER 1L", vp: 100000 }]);
-  await assert.rejects(svc.recordPriceListReport(asUser(office), { fileName: "c.pdf", report: rep }), (e: { code?: string }) => e.code === "forbidden");
   await assert.rejects(svc.setBasePrice(asUser(office), { articleCode: code(1), price: "10", validFrom: "2026-10-10", reason: "proba prava" }), (e: { code?: string }) => e.code === "forbidden");
-  const [{ n }] = await db.sql<{ n: number }[]>`SELECT count(*)::int AS n FROM price_list_imports`;
-  assert.equal(n, 0);
+  for (const role of ["komercijalista", "magacioner"] as const) {
+    await assert.rejects(svc.recordPriceListReport({ ...asUser(office), role: role as never }, { fileName: "c.pdf", report: rep }), (e: { code?: string }) => e.code === "forbidden", role);
+  }
+  const r = await svc.recordPriceListReport(asUser(office), { fileName: "c.pdf", report: rep });
+  assert.equal(r.duplicate, false, "kancelarija (Tamara) otprema cenovnik");
+  await svc.discardPriceList(asUser(office), { importId: r.importId, note: "proba prava kancelarije" });
+  await db.sql`TRUNCATE article_new_defaults, supplier_article_codes, article_base_prices, price_list_import_rows, price_list_imports`;
 });
 
 test("otpremanje → pregled → primena; isti fajl bez duplikata; nejasno samo uz potvrdu", async (t) => {

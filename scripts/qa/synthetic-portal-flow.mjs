@@ -13,6 +13,9 @@ const { chromium } = await import(ROOT + "/node_modules/playwright-core/index.mj
 const OTPAuth = await import(ROOT + "/node_modules/otpauth/dist/otpauth.esm.js");
 const postgres = (await import(ROOT + "/node_modules/postgres/src/index.js")).default;
 const creds = JSON.parse(readFileSync(process.env.SYNTH_CREDS_FILE ?? process.env.HOME + "/.carsystem-secrets/revizija-sinteticki.json", "utf8"));
+// Ključevi servera (kod sajta) su u paru sa nalozima: `X.json` → `X.env` iz istog seeda; `SYNTH_ENV_FILE` ima prednost.
+const synthEnvPath = () =>
+  process.env.SYNTH_ENV_FILE ?? (process.env.SYNTH_CREDS_FILE ? process.env.SYNTH_CREDS_FILE.replace(/\.json$/, ".env") : process.env.HOME + "/.carsystem-secrets/revizija-sinteticki.env");
 const OUT = process.argv[2]; mkdirSync(OUT, { recursive: true });
 const STEP = process.argv[3] ?? "sve";
 // Podrazumevano kao ranije; SYNTH_BASE_URL / SYNTH_DB_URL za zasebnu bazu i server (paralelna proba).
@@ -446,7 +449,10 @@ try {
   if (STEP === "sve" || STEP === "upit") {
     // B3 (upit): kupac sa kodom sajta (katalog je iza održavanja, kao na Production-u) traži cenu
     // sa strane proizvoda; kancelarija dobija obaveštenje, preuzima i odgovara; kupac vidi odgovor.
-    const envText = readFileSync(process.env.SYNTH_ENV_FILE ?? process.env.HOME + "/.carsystem-secrets/revizija-sinteticki.env", "utf8");
+    // Ključevi servera su u paru sa nalozima: `X.json` → `X.env` (isti seed); `SYNTH_ENV_FILE` ima prednost.
+    const envPath =
+      synthEnvPath();
+    const envText = readFileSync(envPath, "utf8");
     const code = envText.match(/^SITE_ACCESS_PASSWORD=(.*)$/m)[1];
     const kctx = await b.newContext(desk);
     const k = await kctx.newPage();
@@ -499,7 +505,10 @@ try {
     // Dok. 61 (K6): kupovina preko javnog sajta. Pokreće se ZASEBNO, na sveže
     // napravljenoj bazi (ostali koraci broje zahteve). Katalog je iza održavanja
     // kao na Production-u — svaki prozor prvo unosi kod sajta (kao pilot kupac).
-    const envText = readFileSync(process.env.SYNTH_ENV_FILE ?? process.env.HOME + "/.carsystem-secrets/revizija-sinteticki.env", "utf8");
+    // Ključevi servera su u paru sa nalozima: `X.json` → `X.env` (isti seed); `SYNTH_ENV_FILE` ima prednost.
+    const envPath =
+      synthEnvPath();
+    const envText = readFileSync(envPath, "utf8");
     const code = envText.match(/^SITE_ACCESS_PASSWORD=(.*)$/m)[1];
     const D = creds.ids.D;
     const FILLER = "/proizvodi/carsystem-2k-filler-air-plus?varijanta=152.580";
@@ -796,7 +805,10 @@ try {
     // snimka, sintetički rabat firme A (20 % / avans 25 %). Pre koraka: reset, seed-control-links.mts,
     // apply-confirmed-links.mts --upis. Plan veza čita iz CONTROL_LINKS (privatni JSON).
     const plan = JSON.parse(readFileSync(process.env.CONTROL_LINKS, "utf8")).veze;
-    const envText = readFileSync(process.env.SYNTH_ENV_FILE ?? process.env.HOME + "/.carsystem-secrets/revizija-sinteticki.env", "utf8");
+    // Ključevi servera su u paru sa nalozima: `X.json` → `X.env` (isti seed); `SYNTH_ENV_FILE` ima prednost.
+    const envPath =
+      synthEnvPath();
+    const envText = readFileSync(envPath, "utf8");
     const code = envText.match(/^SITE_ACCESS_PASSWORD=(.*)$/m)[1];
     const ctx = await b.newContext(desk);
     await ctx.request.post(`${B}/site-u-pripremi/access`, { form: { accessCode: code }, maxRedirects: 0 });
@@ -878,7 +890,7 @@ try {
     // { parovi: [{ artikal, pribor }] }; prva dva para se proveravaju: jedan kroz „Izbor robe”, jedan kroz katalog
     // (ako posuda ima karticu). Server mora imati ORDERING_COMPANION_STOCK=unknown-ok (izvor zaliha ne postoji).
     const pairs = JSON.parse(readFileSync(process.env.PRIBOR_PAROVI, "utf8")).parovi;
-    const code = readFileSync(process.env.SYNTH_ENV_FILE ?? process.env.HOME + "/.carsystem-secrets/revizija-sinteticki.env", "utf8").match(/^SITE_ACCESS_PASSWORD=(.*)$/m)[1];
+    const code = readFileSync(synthEnvPath(), "utf8").match(/^SITE_ACCESS_PASSWORD=(.*)$/m)[1];
     const ctx = await b.newContext(desk);
     await ctx.request.post(`${B}/site-u-pripremi/access`, { form: { accessCode: code }, maxRedirects: 0 });
     const k = await ctx.newPage();
@@ -925,7 +937,7 @@ try {
     // Proverava: sve opcije iz tehničkog lista, nijedna unapred izabrana, predlog količine samo gde je dozvoljen,
     // u korpi samo osnovni artikal do klika; zatim zahtev i štampa sa herterima. Server: ORDERING_COMPANION_STOCK=unknown-ok.
     const cases = JSON.parse(readFileSync(process.env.HERTER_PROBA, "utf8"));
-    const code = readFileSync(process.env.SYNTH_ENV_FILE ?? process.env.HOME + "/.carsystem-secrets/revizija-sinteticki.env", "utf8").match(/^SITE_ACCESS_PASSWORD=(.*)$/m)[1];
+    const code = readFileSync(synthEnvPath(), "utf8").match(/^SITE_ACCESS_PASSWORD=(.*)$/m)[1];
     const ctx = await b.newContext(desk);
     await ctx.request.post(`${B}/site-u-pripremi/access`, { form: { accessCode: code }, maxRedirects: 0 });
     const k = await ctx.newPage();
@@ -1000,7 +1012,7 @@ try {
     // upitKartica: slug bez ponude, preusmerenja: [[sa, na]], bezVarijante: [[slug, red]], redovi: [[slug, [oznake]]],
     // tekst: [[slug, mora, ne_sme]] }.
     const t0 = JSON.parse(readFileSync(process.env.ODLUKE_PROBA, "utf8"));
-    const code = readFileSync(process.env.SYNTH_ENV_FILE ?? process.env.HOME + "/.carsystem-secrets/revizija-sinteticki.env", "utf8").match(/^SITE_ACCESS_PASSWORD=(.*)$/m)[1];
+    const code = readFileSync(synthEnvPath(), "utf8").match(/^SITE_ACCESS_PASSWORD=(.*)$/m)[1];
     const ctx = await b.newContext(desk);
     await ctx.request.post(`${B}/site-u-pripremi/access`, { form: { accessCode: code }, maxRedirects: 0 });
     const k = await ctx.newPage();
@@ -1057,7 +1069,7 @@ try {
     // oznaka, cena pakovanja = osnovna × 0,75 × pakovanje (sintetički rabat firme A, avans 25 %).
     // Plan čita iz CONTROL_LINKS; pre koraka: seed-control-links + apply-confirmed-links --upis.
     const plan = JSON.parse(readFileSync(process.env.CONTROL_LINKS, "utf8")).veze;
-    const code = readFileSync(process.env.SYNTH_ENV_FILE ?? process.env.HOME + "/.carsystem-secrets/revizija-sinteticki.env", "utf8").match(/^SITE_ACCESS_PASSWORD=(.*)$/m)[1];
+    const code = readFileSync(synthEnvPath(), "utf8").match(/^SITE_ACCESS_PASSWORD=(.*)$/m)[1];
     const ctx = await b.newContext(desk);
     await ctx.request.post(`${B}/site-u-pripremi/access`, { form: { accessCode: code }, maxRedirects: 0 });
     const k = await ctx.newPage(); await customer(k);
@@ -1086,7 +1098,7 @@ try {
   if (STEP === "cediljke") {
     // Kancelarijska izmena količine za artikal čije pakovanje je deo KOM (paket 125 cediljki = 0,5 KOM):
     // korak je 0,5 KOM — 1,5 prolazi (3 paketa), 1,3 se odbija. Pre koraka: seed-control-links + apply sa 146958.
-    const code = readFileSync(process.env.SYNTH_ENV_FILE ?? process.env.HOME + "/.carsystem-secrets/revizija-sinteticki.env", "utf8").match(/^SITE_ACCESS_PASSWORD=(.*)$/m)[1];
+    const code = readFileSync(synthEnvPath(), "utf8").match(/^SITE_ACCESS_PASSWORD=(.*)$/m)[1];
     const ctx = await b.newContext(desk);
     await ctx.request.post(`${B}/site-u-pripremi/access`, { form: { accessCode: code }, maxRedirects: 0 });
     const k = await ctx.newPage(); await customer(k);
@@ -1134,7 +1146,10 @@ try {
   }
   if (STEP === "b9") {
     // Kod za otključavanje sajta: tačan radi; posle 20 pogrešnih i tačan je odbijen dok traje blokada.
-    const envText = readFileSync(process.env.SYNTH_ENV_FILE ?? process.env.HOME + "/.carsystem-secrets/revizija-sinteticki.env", "utf8");
+    // Ključevi servera su u paru sa nalozima: `X.json` → `X.env` (isti seed); `SYNTH_ENV_FILE` ima prednost.
+    const envPath =
+      synthEnvPath();
+    const envText = readFileSync(envPath, "utf8");
     const code = envText.match(/^SITE_ACCESS_PASSWORD=(.*)$/m)[1];
     const post = async (value) => {
       const r = await fetch(`${B}/site-u-pripremi/access`, { method: "POST", body: new URLSearchParams({ accessCode: value }), redirect: "manual" });

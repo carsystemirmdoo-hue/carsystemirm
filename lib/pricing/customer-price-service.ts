@@ -8,6 +8,7 @@ import { packPrice } from "@/lib/pricing/packPrice.mjs";
 import { ACTIVE_RULE_STATUSES } from "@/lib/pricing/evaluation-service";
 import { effectiveBasePriceCents } from "@/lib/pricing/price-list-service";
 import { evaluatePricing } from "@/lib/pricing/precedence.mjs";
+import { withNewArticleDefault } from "@/lib/pricing/rebateSheet.mjs";
 
 /**
  * Stvarna cena kupca na dan: osnovna cena (`article_base_prices`) + odobreno
@@ -35,12 +36,13 @@ export async function customerPrices(customerId: string, articleIds: string[], o
       SELECT id, customer_scope::text AS "customerScope", product_scope::text AS "productScope", value_kind::text AS "valueKind",
              customer_id AS "customerId", customer_group_id AS "customerGroupId", article_id AS "articleId", product_group AS "productGroup", brand,
              discount_percent::text AS "discountPercent", net_price::text AS "netPrice", effective_from::text AS "effectiveFrom",
-             effective_to::text AS "effectiveTo", status::text AS status, payment_condition AS "paymentCondition"
+             effective_to::text AS "effectiveTo", status::text AS status, payment_condition AS "paymentCondition", rule_kind AS "ruleKind"
         FROM price_rules WHERE status::text IN (${statuses})
          AND (customer_scope::text <> 'customer' OR customer_id = ${customerId}::uuid)`),
     db.execute<{ group_id: string }>(sql`SELECT group_id FROM customer_group_members WHERE customer_id = ${customerId}::uuid`),
-    db.execute<{ id: string; name: string; unit: string | null; product_group: string | null; brand: string | null; mapped: boolean; fractional: boolean; out: boolean }>(sql`
+    db.execute<{ id: string; name: string; unit: string | null; product_group: string | null; brand: string | null; mapped: boolean; fractional: boolean; out: boolean; new_default: string | null }>(sql`
       SELECT a.id, a.name, a.unit, a.product_group, a.brand,
+             (SELECT d.discount_percent::text FROM article_new_defaults d WHERE d.article_id = a.id) AS new_default,
              EXISTS (SELECT 1 FROM articles_out_of_programme o WHERE o.article_id = a.id) AS out,
              EXISTS (SELECT 1 FROM article_catalog_mappings m WHERE m.article_id = a.id AND m.status = 'mapped') AS mapped,
              EXISTS (SELECT 1 FROM invoice_lines l WHERE l.article_id = a.id AND l.quantity <> trunc(l.quantity)) AS fractional
@@ -63,7 +65,11 @@ export async function customerPrices(customerId: string, articleIds: string[], o
       out.set(a.id, { status: "van_ponude", reason: "van_programa", message: "Artikal nije u aktuelnoj ponudi.", unit: a.unit, pack: null });
       continue;
     }
-    const decision = evaluatePricing(rules, { customerId, customerGroupIds: groups, articleId: a.id, productGroup: a.product_group, brand: a.brand, onDate, paymentCondition: paymentOption });
+    // Nov artikal iz uvoza (0057): podrazumevani rabat dok ne postoji pravilo za sam artikal.
+    const decision = withNewArticleDefault(
+      evaluatePricing(rules, { customerId, customerGroupIds: groups, articleId: a.id, productGroup: a.product_group, brand: a.brand, onDate, paymentCondition: paymentOption }),
+      a.new_default === null ? null : Number(a.new_default),
+    );
     const price = resolveCustomerPrice(decision, base.get(a.id) ?? null);
     // Cena po JM iz BizniSofta; cena PAKOVANJA samo uz dokaz (veza, količina pakovanja).
     const pack =

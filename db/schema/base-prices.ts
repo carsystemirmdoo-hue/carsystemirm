@@ -39,6 +39,16 @@ export const priceListImports = pgTable(
     validFrom: date("valid_from"),
     decisionNote: text("decision_note"),
     appliedCount: integer("applied_count"),
+    /** 0057: „biznisoft_pdf“ ili „tabela“ (CSV/XLSX); jedinica cene u fajlu i izbor kolona. */
+    sourceFormat: text("source_format").notNull().default("biznisoft_pdf"),
+    priceUnit: text("price_unit"),
+    columnMap: jsonb("column_map"),
+    /** 0057: odluke o novim i izričito povezanim artiklima pri primeni. */
+    decisions: jsonb("decisions"),
+    /** 0057: šifra u fajlu je naša interna („interna“) ili dobavljačeva („dobavljac“, uz ključ i naziv dobavljača). */
+    codeKind: text("code_kind").notNull().default("interna"),
+    supplierKey: text("supplier_key"),
+    supplierName: text("supplier_name"),
   },
   (t) => [unique("price_list_imports_sha_key").on(t.fileSha256), index("price_list_imports_status_idx").on(t.status, t.uploadedAt)],
 );
@@ -54,6 +64,10 @@ export const priceListImportRows = pgTable(
     vatPercent: numeric("vat_percent", { precision: 5, scale: 2 }).notNull(),
     vpPrice: numeric("vp_price", { precision: 14, scale: 2 }).notNull(),
     page: integer("page").notNull(),
+    /** 0057: cena iz fajla pre preračuna (po pakovanju), JM i pakovanje iz fajla. */
+    rawPrice: numeric("raw_price", { precision: 14, scale: 2 }),
+    fileUnit: text("file_unit"),
+    filePack: text("file_pack"),
   },
   (t) => [primaryKey({ name: "price_list_import_rows_pk", columns: [t.importId, t.lineNo] })],
 );

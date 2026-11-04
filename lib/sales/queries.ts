@@ -23,6 +23,8 @@ export interface SalesFilter {
   to?: string | null;
   customerId?: string | null;
   salespersonId?: string | null;
+  /** Dodela kupca: ID komercijaliste ili `"bez"` (kupci bez dodele). */
+  assignedTo?: string | null;
   articleId?: string | null;
   productGroup?: string | null;
   /** Samo negativne stavke (povrati, korekcije, nerazvrstano) — za listu na ekranu Povrati. */
@@ -122,6 +124,10 @@ function filterConditions(scope: string[] | null, filter: SalesFilter): SQL[] {
   if (filter.customerId) conditions.push(eq(invoices.customerId, filter.customerId));
   if (filter.salespersonId)
     conditions.push(eq(invoices.salespersonId, filter.salespersonId));
+  if (filter.assignedTo === "bez")
+    conditions.push(sql`NOT EXISTS (SELECT 1 FROM customer_assignments ca WHERE ca.customer_id = ${invoices.customerId})`);
+  else if (filter.assignedTo)
+    conditions.push(sql`EXISTS (SELECT 1 FROM customer_assignments ca WHERE ca.customer_id = ${invoices.customerId} AND ca.user_id = ${filter.assignedTo}::uuid)`);
   if (filter.articleId) conditions.push(eq(invoiceLines.articleId, filter.articleId));
   if (filter.productGroup)
     conditions.push(eq(articles.productGroup, filter.productGroup));

@@ -8,6 +8,8 @@ import {
 } from "@/features/portal/SalesAnalytics";
 import { NoInvoicesYet, SalesFilters } from "@/features/portal/SalesFilters";
 import { requireCapability } from "@/lib/authz/session";
+import { listSalesReps } from "@/lib/partners/assignment-service";
+import { seesAllCustomers } from "@/lib/authz/permissions.mjs";
 import {
   hasImportedInvoices,
   loadProductGroups,
@@ -92,6 +94,8 @@ export default async function AnalyticsPage({
       loadSalespeople(),
       loadProductGroups(),
     ]);
+  // Filter po dodeli ima smisla samo ko vidi sve kupce.
+  const reps = seesAllCustomers(user) ? await listSalesReps() : [];
 
   return (
     <>
@@ -103,7 +107,7 @@ export default async function AnalyticsPage({
 
       <SalesFilters
         action="/portal/analitika"
-        options={{ customers, salespeople, productGroups }}
+        options={{ customers, salespeople, reps, productGroups }}
         applied={applied}
         views={VIEWS}
         exportView={view}

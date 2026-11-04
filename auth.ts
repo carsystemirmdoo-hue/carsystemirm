@@ -185,7 +185,28 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
         }
 
         /*
-         * 2. Odluka o lozinci — tačno jedna provera, i za nepostojeći nalog.
+         * 2. Pokušaj se broji PRE provere lozinke (2026-11-04). Ranije se brojao
+         *    tek posle neuspeha, pa su istovremeni zahtevi svi prošli kroz
+         *    proveru pre nego što bi ijedan upisao brojač. Sada svaki zahtev prvo
+         *    dobije svoj redni broj, a lozinku proverava samo njih najviše
+         *    `limit` u prozoru; uspešna prijava briše brojač naloga (korak 5).
+         */
+        const limit = await registerAttempt({
+          scope: "password",
+          accountIdentifier: identifier,
+          clientIp,
+        });
+        if (!limit.allowed) {
+          // Trag jednom po blokadi, kao ranije: bez provere lozinke, samo poznat nalog.
+          if (limit.justBlocked) {
+            const blockedUser = await findUserByEmail(identifier);
+            if (blockedUser) await recordPasswordFailure(blockedUser, "rate_limited", true);
+          }
+          return null;
+        }
+
+        /*
+         * 3. Odluka o lozinci — tačno jedna provera, i za nepostojeći nalog.
          *    Vidi `lib/auth/credentials-login.mjs`.
          */
         const decision = await resolveCredentialsLogin({
@@ -198,15 +219,10 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
 
         const { outcome, reason, user } = decision;
 
-        // 3. Neuspeh lozinke se broji, bez obzira na to da li nalog postoji.
+        // Neuspeh je već izbrojan u koraku 2, bez obzira na to da li nalog postoji.
         if (outcome === "denied") {
-          const limit = await registerAttempt({
-            scope: "password",
-            accountIdentifier: identifier,
-            clientIp,
-          });
           if (!user) return null;
-          await recordPasswordFailure(user, reason, limit.allowed === false);
+          await recordPasswordFailure(user, reason, false);
           return null;
         }
 
@@ -397,6 +413,22 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
           return null;
         }
 
+        // Pokušaj se broji PRE provere lozinke — isti razlog kao kod interne prijave.
+        const limit = await registerAttempt({
+          scope: "password",
+          accountIdentifier: identifier,
+          clientIp,
+        });
+        if (!limit.allowed) {
+          if (limit.justBlocked) {
+            const blockedAccount = await loadCustomerAccountForLogin(identifier);
+            if (blockedAccount?.id) {
+              await recordCustomerLoginFailure({ accountId: blockedAccount.id, email: blockedAccount.email, reason: "bad_password", rateLimited: true });
+            }
+          }
+          return null;
+        }
+
         /*
          * Jedna provera lozinke i za nepostojeći nalog — isti razlog i isti
          * modul kao interna prijava. Bez toga bi vreme odgovora odalo koje
@@ -417,11 +449,6 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
         });
 
         if (decision.outcome === "denied") {
-          const limit = await registerAttempt({
-            scope: "password",
-            accountIdentifier: identifier,
-            clientIp,
-          });
           /*
            * Neuspeh se BELEŽI i BROJI — postflight audit F-4 i F-5.
            *
@@ -435,7 +462,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
               accountId: decision.user.id,
               email: decision.user.email,
               reason: decision.reason as "bad_password" | "inactive" | "locked",
-              rateLimited: limit.allowed === false,
+              rateLimited: false,
             });
           }
           return null;

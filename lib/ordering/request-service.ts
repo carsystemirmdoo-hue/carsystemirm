@@ -463,7 +463,7 @@ export async function addRequestItem(session: CustomerSession, input: { articleI
   const customerId = session.customerId;
   if (!customerId) throw new Error("Upit kupca bez customer_id se ne sme izvršiti.");
   if (!(await orderingEnabledFor(customerId))) return { ok: false, message: "Poručivanje preko sajta još nije uključeno." };
-  if (!/^[0-9a-f-]{36}$/.test(input.articleId)) return { ok: false, message: "Neispravan artikal." };
+  if (!/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/.test(input.articleId)) return { ok: false, message: "Neispravan artikal." };
   const db = getDb();
   const [a] = [...(await db.execute<{ out: boolean; ok: boolean }>(sql`
     SELECT (EXISTS (SELECT 1 FROM articles_out_of_programme o WHERE o.article_id = a.id) OR EXISTS (SELECT 1 FROM internal_equipment e WHERE e.code_key = regexp_replace(a.code, '^0+(?=[0-9])', ''))) AS out,
@@ -611,7 +611,7 @@ export async function submitOrderRequest(
   if (!customerId) throw new Error("Upit kupca bez customer_id se ne sme izvršiti.");
   if (session.assurance === "remembered") return { status: "reauth", message: "Radi sigurnosti, pre slanja ponovo unesite lozinku." };
   const key = String(input.idempotencyKey ?? "");
-  if (!/^[0-9a-f-]{36}$/i.test(key)) return { status: "blocked", message: "Neispravan zahtev.", blockers: [] };
+  if (!/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(key)) return { status: "blocked", message: "Neispravan zahtev.", blockers: [] };
   const db = getDb();
   const earlier = await existingByKey(db, key);
   if (earlier) return earlier.customer_id === customerId ? { status: "existing", orderId: earlier.id, requestNumber: earlier.request_number } : { status: "blocked", message: "Neispravan zahtev.", blockers: [] };
@@ -758,7 +758,7 @@ export async function proposeOrderRevision(viewer: PortalUser, orderId: string, 
 /** Zahtev iz opsega kancelarije koji sme da dobije izmenjen predlog (bez upisa). */
 async function revisableOrder(viewer: PortalUser, orderId: string) {
   if (!can(viewer, "customer_orders:review")) throw new Error("Nemate pravo da menjate zahteve.");
-  if (!/^[0-9a-f-]{36}$/i.test(orderId)) throw new Error("Zahtev ne postoji.");
+  if (!/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(orderId)) throw new Error("Zahtev ne postoji.");
   const scope = await resolveLedgerScope(viewer);
   const [o] = [...(await getDb().execute<{ id: string; customer_id: string; payment_option: string | null }>(sql`
     SELECT id, customer_id, payment_option FROM customer_orders WHERE id = ${orderId}::uuid AND pricing_source = 'cenovnik'`))];

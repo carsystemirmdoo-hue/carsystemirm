@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import { PageHeader } from "@/components/portal/PortalPrimitives";
 import { signOutAction } from "@/app/portal/actions";
 import { requireEnrollmentUser } from "@/lib/authz/session";
-import { readEnrollmentContext } from "./actions";
+import { hasOpenEnrollmentGrant } from "@/lib/auth/enrollment-grant";
+import { readMfaStatus } from "@/lib/auth/mfa-service";
 import { MfaEnrollment } from "./MfaEnrollment";
 
 export const metadata: Metadata = {
@@ -32,7 +33,12 @@ export const revalidate = 0;
  */
 export default async function MfaPage() {
   const user = await requireEnrollmentUser();
-  const { status, grantOpen } = await readEnrollmentContext(user.id);
+  /*
+   * Čita se ovde, u serverskoj komponenti, sa korisnikom IZ SESIJE. Ranije je
+   * bilo izvezeno iz `actions.ts` ("use server") kao server action koja prima
+   * bilo koji `userId` — pozivljivo spolja bez kapije (2026-11-04).
+   */
+  const [status, grantOpen] = await Promise.all([readMfaStatus(user.id), hasOpenEnrollmentGrant(user.id)]);
 
   return (
     <>

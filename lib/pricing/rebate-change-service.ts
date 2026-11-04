@@ -73,7 +73,7 @@ function originOf(sourceBatch: string | null): string {
 }
 
 async function assertCustomer(viewer: PortalUser, customerId: string) {
-  if (!/^[0-9a-f-]{36}$/.test(customerId)) throw new RebateChangeError("Neispravan kupac.");
+  if (!/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/.test(customerId)) throw new RebateChangeError("Neispravan kupac.");
   const assigned = await loadAssignedCustomerIds(viewer.id);
   if (!canAccessCustomer(viewer, assigned, customerId)) throw new RebateChangeError("Kupac nije u Vašem opsegu.");
 }

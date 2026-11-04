@@ -265,11 +265,11 @@ export default async function SavetRoute({ params }: RouteProps) {
                 <ol className={styles.sources}>
                   {clanak.izvori.map((source) => (
                     <li key={source.id} id={`izvor-${source.id}`}>
-                      {source.url ? (
+                      {source.url && /^https:\/\//.test(source.url) ? (
                         <a href={source.url} rel="noopener noreferrer" target="_blank">
                           {sourceLine(source)}
                         </a>
-                      ) : source.dokument ? (
+                      ) : source.dokument && /^\/(?!\/)/.test(source.dokument) ? (
                         <a href={source.dokument}>{sourceLine(source)}</a>
                       ) : (
                         sourceLine(source)

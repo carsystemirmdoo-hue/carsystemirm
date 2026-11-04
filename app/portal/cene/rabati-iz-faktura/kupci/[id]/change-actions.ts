@@ -12,7 +12,7 @@ import { isOptionCode } from "@/lib/pricing/paymentOptions.mjs";
  * same proveravaju dozvolu i opseg kupca; ulaz iz pregledača se ne veruje —
  * servis ponovo računa pregled i odbija ako se stanje promenilo.
  */
-const UUID = /^[0-9a-f-]{36}$/;
+const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/;
 
 function clean(input: ChangeInput): ChangeInput {
   return {

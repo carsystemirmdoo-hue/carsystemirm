@@ -442,7 +442,7 @@ export async function setCartQuantity(session: CustomerSession, input: { article
   const customerId = session.customerId;
   if (!customerId) throw new Error("Upit kupca bez customer_id se ne sme izvršiti.");
   const db = getDb();
-  if (!/^[0-9a-f-]{36}$/i.test(String(input.articleId))) return { ok: false, message: "Stavka nije u korpi." };
+  if (!/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(String(input.articleId))) return { ok: false, message: "Stavka nije u korpi." };
   if (String(input.quantity ?? "").trim() === "" || Number(input.quantity) === 0) {
     const lid = await lidEditProblem(db, customerId, input.articleId, null);
     if (lid) return { ok: false, message: lid };
@@ -537,7 +537,7 @@ export async function submitCartRequest(
     return { status: "reauth", message: "Radi sigurnosti, pre slanja ponovo unesite lozinku." };
   }
   const key = String(input.idempotencyKey ?? "");
-  if (!/^[0-9a-f-]{36}$/i.test(key)) return { status: "blocked", message: "Neispravan zahtev.", blockers: [] };
+  if (!/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(key)) return { status: "blocked", message: "Neispravan zahtev.", blockers: [] };
   const note = input.note ? String(input.note).trim().slice(0, 1000) || null : null;
   const db = getDb();
 
@@ -849,7 +849,7 @@ export async function countCustomerOrdersAwaiting(customerId: string): Promise<n
 /** Jedan zahtev kupca. Tuđi ID daje `null` — isto kao nepostojeći. */
 export async function loadCustomerOrder(customerId: string, orderId: string): Promise<OrderDetail | null> {
   if (!customerId) throw new Error("Upit kupca bez customer_id se ne sme izvršiti.");
-  if (!/^[0-9a-f-]{36}$/i.test(orderId)) return null;
+  if (!/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(orderId)) return null;
   return loadOrder(sql`o.id = ${orderId}::uuid AND o.customer_id = ${customerId}`);
 }
 
@@ -995,7 +995,7 @@ async function transition(
 export async function cancelCustomerOrder(session: CustomerSession, orderId: string, expectedVersion?: string | null): Promise<TransitionResult> {
   const customerId = session.customerId;
   if (!customerId) throw new Error("Upit kupca bez customer_id se ne sme izvršiti.");
-  if (!/^[0-9a-f-]{36}$/i.test(orderId)) return { ok: false, message: "Zahtev ne postoji." };
+  if (!/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(orderId)) return { ok: false, message: "Zahtev ne postoji." };
   return transition(
     sql`o.id = ${orderId}::uuid AND o.customer_id = ${customerId}`,
     "cancelled",
@@ -1018,7 +1018,7 @@ export async function cancelCustomerOrder(session: CustomerSession, orderId: str
 export async function returnOrderToCart(session: CustomerSession, orderId: string, expectedVersion?: string | null): Promise<TransitionResult> {
   const customerId = session.customerId;
   if (!customerId) throw new Error("Upit kupca bez customer_id se ne sme izvršiti.");
-  if (!/^[0-9a-f-]{36}$/i.test(orderId)) return { ok: false, message: "Zahtev ne postoji." };
+  if (!/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(orderId)) return { ok: false, message: "Zahtev ne postoji." };
   const db = getDb();
   return db.transaction(async (tx) => {
     const [o] = [
@@ -1099,13 +1099,13 @@ export async function countOrderRequestsByState(viewer: PortalUser, query?: stri
 }
 
 export async function loadOrderRequest(viewer: PortalUser, orderId: string): Promise<OrderDetail | null> {
-  if (!/^[0-9a-f-]{36}$/i.test(orderId)) return null;
+  if (!/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(orderId)) return null;
   const scope = await resolveLedgerScope(viewer);
   return loadOrder(sql`o.id = ${orderId}::uuid AND ${scopeWhere(scope)}`);
 }
 
 export async function officeTransition(viewer: PortalUser, orderId: string, to: string, reason: string | null, expectedVersion?: string | null): Promise<TransitionResult> {
-  if (!/^[0-9a-f-]{36}$/i.test(orderId)) return { ok: false, message: "Zahtev ne postoji." };
+  if (!/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(orderId)) return { ok: false, message: "Zahtev ne postoji." };
   const scope = await resolveLedgerScope(viewer);
   return transition(sql`o.id = ${orderId}::uuid AND ${scopeWhere(scope)}`, to, { kind: "office", user: viewer }, reason, expectedVersion);
 }
@@ -1117,7 +1117,7 @@ export async function officeTransition(viewer: PortalUser, orderId: string, to: 
 export async function recordBiznisoftEntry(viewer: PortalUser, orderId: string, documentNumber: string, expectedVersion?: string | null): Promise<TransitionResult> {
   const doc = String(documentNumber ?? "").trim().slice(0, 60);
   if (doc.length < 2) return { ok: false, message: "Upišite broj dokumenta iz BizniSofta." };
-  if (!/^[0-9a-f-]{36}$/i.test(orderId)) return { ok: false, message: "Zahtev ne postoji." };
+  if (!/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(orderId)) return { ok: false, message: "Zahtev ne postoji." };
   const scope = await resolveLedgerScope(viewer);
   const db = getDb();
   return db.transaction(async (tx) => {

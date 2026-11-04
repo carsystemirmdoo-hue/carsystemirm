@@ -62,7 +62,7 @@ export async function recordBiznisoftAction(orderId: string, documentNumber: str
 /** Izmenjen predlog (0044): kancelarija menja robu/količine; cene po važećim odobrenim uslovima; kupac potvrđuje. */
 export async function proposeRevisionAction(orderId: string, lines: { code: string; quantity: string }[], reason: string, version?: string | null) {
   const user = await requireCapability("customer_orders:review", `/portal/zahtevi/${orderId}`);
-  if (!/^[0-9a-f-]{36}$/.test(orderId) || !Array.isArray(lines) || lines.length > 500) return { ok: false, message: "Neispravan zahtev." };
+  if (!/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/.test(orderId) || !Array.isArray(lines) || lines.length > 500) return { ok: false, message: "Neispravan zahtev." };
   const codes = [...new Set(lines.map((l) => String(l.code).trim()).filter(Boolean))];
   const found = codes.length ? await getDb().execute<{ id: string; code: string }>(sql`SELECT id, code FROM articles WHERE code IN (${sql.join(codes.map((c) => sql`${c}`), sql`, `)})`) : [];
   const byCode = new Map([...found].map((a) => [a.code, a.id]));
@@ -92,7 +92,7 @@ export async function searchRevisionArticlesAction(orderId: string, query: strin
 /** Pregled cena izmenjenog predloga pre slanja kupcu. */
 export async function previewRevisionAction(orderId: string, lines: { code: string; quantity: string }[]) {
   const user = await requireCapability("customer_orders:review", `/portal/zahtevi/${orderId}`);
-  if (!/^[0-9a-f-]{36}$/.test(orderId) || !Array.isArray(lines) || lines.length > 500) return { ok: false as const, message: "Neispravan zahtev." };
+  if (!/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/.test(orderId) || !Array.isArray(lines) || lines.length > 500) return { ok: false as const, message: "Neispravan zahtev." };
   const codes = [...new Set(lines.map((l) => String(l.code).trim()).filter(Boolean))];
   const found = codes.length ? await getDb().execute<{ id: string; code: string }>(sql`SELECT id, code FROM articles WHERE code IN (${sql.join(codes.map((c) => sql`${c}`), sql`, `)})`) : [];
   const byCode = new Map([...found].map((a) => [a.code, a.id]));

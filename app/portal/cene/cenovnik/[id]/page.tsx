@@ -30,7 +30,7 @@ export default async function PriceListReviewPage({ params, searchParams }: { pa
   const user = await requireCapability("pricelist:manage", "/portal/cene/cenovnik");
   const { id } = await params;
   const { datum, isti } = await searchParams;
-  if (!/^[0-9a-f-]{36}$/.test(id)) notFound();
+  if (!/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/.test(id)) notFound();
   const review = await loadPriceListReview(user, id, datum);
   if (!review) notFound();
   const imp = review.import;

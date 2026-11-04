@@ -28,7 +28,7 @@ export async function approveRebateGroupAction(
   expected: { articleId: string; percent: number }[],
 ): Promise<{ ok: boolean; message: string }> {
   const user = await requireCapability("prices:propose", PATH);
-  const uuid = /^[0-9a-f-]{36}$/;
+  const uuid = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/;
   if (!uuid.test(customerId) || !Array.isArray(expected) || expected.length > 2000 || expected.some((e) => !uuid.test(e.articleId) || typeof e.percent !== "number")) {
     return { ok: false, message: "Neispravan zahtev." };
   }
@@ -57,7 +57,7 @@ export async function approveRebateGroupsAction(
   selections: { groupKey: string; expected: { articleId: string; percent: number }[] }[],
 ): Promise<{ ok: boolean; message: string }> {
   const user = await requireCapability("prices:propose", PATH);
-  const uuid = /^[0-9a-f-]{36}$/;
+  const uuid = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/;
   if (!uuid.test(customerId) || !Array.isArray(selections) || !selections.length || selections.length > 200) return { ok: false, message: "Izaberite bar jednu grupu." };
   const asOf = belgradeDate(new Date());
   const batchId = `rabati-v2-${asOf}-${crypto.randomUUID().slice(0, 8)}`;

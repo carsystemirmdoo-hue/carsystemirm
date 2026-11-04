@@ -3,7 +3,6 @@ import { and, eq, isNull, lt, lte, or, sql } from "drizzle-orm";
 import { getDb } from "@/db/client";
 import { authRateLimits } from "@/db/schema";
 import {
-  evaluateRateLimit,
   policyFor,
   type RateLimitDimension,
   type RateLimitScope,
@@ -31,6 +30,8 @@ export type RateLimitDecision = {
   retryAfterSeconds: number;
   /** Koja dimenzija je odbila zahtev — samo za audit, nikad za korisnika. */
   blockedBy: RateLimitDimension | null;
+  /** Ovaj pokušaj je upravo pokrenuo blokadu (audit jednom po blokadi). */
+  justBlocked?: boolean;
 };
 
 const ALLOWED: RateLimitDecision = {
@@ -102,7 +103,8 @@ export function __resetRateLimitLogStateForTests(): void {
 /**
  * Beleži pokušaj i kaže da li sme da se nastavi.
  *
- * Poziva se PRE provere tajne. Dva nezavisna brojača — po nalogu i po adresi —
+ * Poziva se PRE provere tajne (prijava: posle `isBucketBlocked`, a odluka iz
+ * `bumpBucket` važi i za istovremene pokušaje). Dva nezavisna brojača — po nalogu i po adresi —
  * jer nijedan sam ne pokriva oba oblika napada: brojač po nalogu ne zaustavlja
  * probanje jedne lozinke na hiljadu naloga, a brojač po adresi ne zaustavlja
  * botnet uperen u jedan nalog.
@@ -156,18 +158,7 @@ export async function registerAttempt(input: {
   for (const { dimension, value } of dimensions) {
     const policy = policyFor(input.scope, dimension);
     const subjectKey = rateLimitSubjectKey(dimension, value, configuration);
-    const current = await readBucket(input.scope, dimension, subjectKey);
-    const outcome = evaluateRateLimit(current, policy, now);
-
-    await writeBucket({
-      scope: input.scope,
-      dimension,
-      subjectKey,
-      attempts: outcome.nextAttempts,
-      resetWindow: outcome.resetWindow,
-      blockUntil: outcome.blockUntil,
-      now,
-    });
+    const outcome = await bumpBucket({ scope: input.scope, dimension, subjectKey, policy, now });
 
     // Svi brojači se uvek uvećavaju, i kad je odluka već pala — inače bi
     // napadač trošio samo jedan bucket i drugi bi ostao prazan.
@@ -176,6 +167,7 @@ export async function registerAttempt(input: {
         allowed: false,
         retryAfterSeconds: outcome.retryAfterSeconds,
         blockedBy: dimension,
+        justBlocked: outcome.justBlocked,
       };
     }
   }
@@ -207,23 +199,29 @@ async function readBucket(
 }
 
 /**
- * Atomski upis brojača.
+ * Atomski upis brojača I odluka iz istog upisa (2026-11-04).
  *
- * Uvećanje se radi u SQL-u (`attempts + 1`), ne u aplikaciji. Da se vrednost
- * računala u JavaScriptu, dva paralelna pokušaja bi oba pročitala istu staru
- * vrednost i oba upisala isti rezultat — napadač bi tako dobio dvostruko više
- * pokušaja nego što politika dozvoljava.
+ * Ranije se odluka računala iz vrednosti pročitane PRE upisa: uvećanje je bilo
+ * atomsko, ali je 300 istovremenih pokušaja pročitalo isti stari broj, svih 300
+ * je propušteno do scrypt-a, a blokada je važila tek od sledećeg talasa. Sada
+ * jedan `INSERT … ON CONFLICT DO UPDATE … RETURNING` uvećava brojač (ili ga
+ * vraća na 1 kad je prozor istekao, ili ga ne dira tokom blokade) i vraća novu
+ * vrednost; svaki paralelni pokušaj dobija svoj redni broj, pa prolazi najviše
+ * `limit` njih u prozoru.
  */
-async function writeBucket(input: {
+async function bumpBucket(input: {
   scope: string;
   dimension: string;
   subjectKey: string;
-  attempts: number;
-  resetWindow: boolean;
-  blockUntil: Date | null;
+  policy: { limit: number; windowMs: number; blockMs: number };
   now: Date;
-}) {
-  await getDb()
+}): Promise<{ allowed: boolean; retryAfterSeconds: number; justBlocked: boolean }> {
+  // Vreme ide kao ISO tekst sa izričitim tipom — ne kao `Date` kroz sirov šablon.
+  const nowText = input.now.toISOString();
+  const windowFromText = new Date(input.now.getTime() - input.policy.windowMs).toISOString();
+  const blocked = sql`(${authRateLimits.blockedUntil} IS NOT NULL AND ${authRateLimits.blockedUntil} > ${nowText}::timestamptz)`;
+  const expired = sql`(${authRateLimits.windowStartedAt} <= ${windowFromText}::timestamptz)`;
+  const [row] = await getDb()
     .insert(authRateLimits)
     .values({
       scope: input.scope,
@@ -231,26 +229,43 @@ async function writeBucket(input: {
       subjectKey: input.subjectKey,
       attempts: 1,
       windowStartedAt: input.now,
-      blockedUntil: input.blockUntil,
+      blockedUntil: null,
       updatedAt: input.now,
     })
     .onConflictDoUpdate({
-      target: [
-        authRateLimits.scope,
-        authRateLimits.dimension,
-        authRateLimits.subjectKey,
-      ],
+      target: [authRateLimits.scope, authRateLimits.dimension, authRateLimits.subjectKey],
       set: {
-        attempts: input.resetWindow
-          ? sql`1`
-          : sql`${authRateLimits.attempts} + 1`,
-        windowStartedAt: input.resetWindow
-          ? input.now
-          : authRateLimits.windowStartedAt,
-        blockedUntil: input.blockUntil ?? authRateLimits.blockedUntil,
+        attempts: sql`CASE WHEN ${blocked} THEN ${authRateLimits.attempts} WHEN ${expired} THEN 1 ELSE ${authRateLimits.attempts} + 1 END`,
+        windowStartedAt: sql`CASE WHEN ${blocked} THEN ${authRateLimits.windowStartedAt} WHEN ${expired} THEN ${nowText}::timestamptz ELSE ${authRateLimits.windowStartedAt} END`,
         updatedAt: input.now,
       },
-    });
+    })
+    .returning({ attempts: authRateLimits.attempts, blockedUntil: authRateLimits.blockedUntil });
+
+  // Blokada još traje: ništa se ne broji dalje, da napadač ne produžava blokadu.
+  if (row.blockedUntil && row.blockedUntil.getTime() > input.now.getTime()) {
+    return {
+      allowed: false,
+      retryAfterSeconds: Math.max(1, Math.ceil((row.blockedUntil.getTime() - input.now.getTime()) / 1000)),
+      justBlocked: false,
+    };
+  }
+  if (row.attempts <= input.policy.limit) return { allowed: true, retryAfterSeconds: 0, justBlocked: false };
+
+  // Prag je pređen ovim pokušajem: blokada počinje sada (ne pomera postojeću).
+  const started = await getDb()
+    .update(authRateLimits)
+    .set({ blockedUntil: new Date(input.now.getTime() + input.policy.blockMs), updatedAt: input.now })
+    .where(
+      and(
+        eq(authRateLimits.scope, input.scope),
+        eq(authRateLimits.dimension, input.dimension),
+        eq(authRateLimits.subjectKey, input.subjectKey),
+        or(isNull(authRateLimits.blockedUntil), lte(authRateLimits.blockedUntil, input.now)),
+      ),
+    )
+    .returning({ subjectKey: authRateLimits.subjectKey });
+  return { allowed: false, retryAfterSeconds: Math.ceil(input.policy.blockMs / 1000), justBlocked: started.length > 0 };
 }
 
 /**

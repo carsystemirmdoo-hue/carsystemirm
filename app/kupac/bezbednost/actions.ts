@@ -36,7 +36,7 @@ export async function logoutAllDevicesAction() {
 /** Zaboravlja JEDAN zapamćeni uređaj (cela porodica tokena), samo sopstvenog naloga. */
 export async function forgetDeviceAction(tokenId: string) {
   const session = await requireCustomerSession("/kupac/bezbednost");
-  if (!/^[0-9a-f-]{36}$/i.test(tokenId)) return;
+  if (!/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(tokenId)) return;
   await getDb().execute(sql`
     UPDATE customer_remember_tokens SET revoked_at = now(), revoked_reason = 'logout', grant_hash = NULL
      WHERE revoked_at IS NULL AND account_id = ${session.accountId}

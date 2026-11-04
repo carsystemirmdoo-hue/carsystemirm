@@ -176,7 +176,7 @@ function filterIz(params: {
      * UUID oblik se proverava ovde. Neispravna vrednost bi u upitu bila greška
      * tipa, a greška tipa u `WHERE` daje 500 umesto praznog rezultata.
      */
-    salespersonUserId: /^[0-9a-f-]{36}$/i.test(params.komercijalista ?? "")
+    salespersonUserId: /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(params.komercijalista ?? "")
       ? params.komercijalista
       : undefined,
     customerStatus: parseCustomerStatusFilter(params.kupci),

@@ -21,7 +21,7 @@ async function staffScope(viewer: PortalUser): Promise<SQL> {
 
 /** Ceo lanac verzija zahteva (original + predlozi): menja se kad se promeni bilo koja verzija. */
 async function chainStamp(orderId: string, scope: SQL): Promise<string | null> {
-  if (!/^[0-9a-f-]{36}$/i.test(orderId)) return null;
+  if (!/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(orderId)) return null;
   const [r] = [...(await getDb().execute<{ s: string | null }>(sql`
     WITH RECURSIVE start AS (SELECT o.id FROM customer_orders o WHERE o.id = ${orderId}::uuid AND ${scope}),
     up(id, parent) AS (

@@ -5,10 +5,7 @@ import { getDb } from "@/db/client";
 import { users } from "@/db/schema";
 import { AUDIT_ACTIONS, recordAudit } from "@/lib/audit/record";
 import { verifyPassword } from "@/lib/auth/password.mjs";
-import {
-  consumeEnrollmentGrant,
-  hasOpenEnrollmentGrant,
-} from "@/lib/auth/enrollment-grant";
+import { consumeEnrollmentGrant } from "@/lib/auth/enrollment-grant";
 import {
   beginMfaEnrollment,
   confirmMfaEnrollment,
@@ -217,13 +214,4 @@ export async function regenerateRecoveryAction(
   });
 
   return { error: null, setup: null, recoveryCodes: codes, done: false };
-}
-
-/** Da li ekran uopšte treba da traži dozvolu. */
-export async function readEnrollmentContext(userId: string) {
-  const [status, grantOpen] = await Promise.all([
-    readMfaStatus(userId),
-    hasOpenEnrollmentGrant(userId),
-  ]);
-  return { status, grantOpen };
 }

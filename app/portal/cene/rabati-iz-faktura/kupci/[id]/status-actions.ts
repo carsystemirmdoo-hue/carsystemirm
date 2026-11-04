@@ -7,7 +7,7 @@ import { setCommercialStatus, type CommercialStatus } from "@/lib/customers/comm
 /** Poseban poslovni status kupca — samo vlasnik; provera i u servisu. */
 export async function setCommercialStatusAction(customerId: string, status: CommercialStatus, reason: string) {
   const user = await requireCapability("prices:approve", `/portal/cene/rabati-iz-faktura/kupci/${customerId}`);
-  if (!/^[0-9a-f-]{36}$/.test(customerId)) return { ok: false, message: "Neispravan kupac." };
+  if (!/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/.test(customerId)) return { ok: false, message: "Neispravan kupac." };
   try {
     const r = await setCommercialStatus(user, { customerId, status, reason: String(reason ?? "") });
     revalidatePath(`/portal/cene/rabati-iz-faktura/kupci/${customerId}`);

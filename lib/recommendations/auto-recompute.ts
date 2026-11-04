@@ -189,7 +189,7 @@ export function scheduleRecomputeProcessing() {
 
 /** Ponovo pokreće NEUSPELI zahtev (kancelarija/gazda sa `recommendations:recompute`). */
 export async function retryRecomputeRequest(requestId: string, actor: PortalUser): Promise<{ ok: boolean; message: string }> {
-  if (!/^[0-9a-f-]{36}$/i.test(requestId)) return { ok: false, message: "Zahtev ne postoji." };
+  if (!/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(requestId)) return { ok: false, message: "Zahtev ne postoji." };
   const db = getDb();
   const moved = await db.transaction(async (tx) => {
     const [pending] = [...(await tx.execute<{ id: string }>(sql`SELECT id FROM recommendation_recompute_requests WHERE status = 'pending' LIMIT 1`))];

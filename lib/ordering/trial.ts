@@ -13,7 +13,7 @@ import { getDb } from "@/db/client";
 export async function trialCustomerIds(q: Pick<ReturnType<typeof getDb>, "execute"> = getDb()): Promise<string[]> {
   const [row] = [...(await q.execute<{ value: { customerIds?: unknown } }>(sql`SELECT value FROM system_settings WHERE key = 'ordering.trial'`))];
   const ids = row?.value?.customerIds;
-  return Array.isArray(ids) ? ids.filter((x): x is string => typeof x === "string" && /^[0-9a-f-]{36}$/.test(x)) : [];
+  return Array.isArray(ids) ? ids.filter((x): x is string => typeof x === "string" && /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/.test(x)) : [];
 }
 
 export async function isTrialCustomer(customerId: string, q: Pick<ReturnType<typeof getDb>, "execute"> = getDb()): Promise<boolean> {

@@ -52,7 +52,7 @@ export async function createPriceRequest(
   const customerId = session.customerId;
   if (!customerId) throw new Error("Upit kupca bez customer_id se ne sme izvršiti.");
   const key = String(input.idempotencyKey ?? "");
-  if (!/^[0-9a-f-]{36}$/i.test(key)) return { ok: false, message: "Neispravan zahtev." };
+  if (!/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(key)) return { ok: false, message: "Neispravan zahtev." };
   const kind = input.kind === "special_terms" || input.kind === "procurement" ? input.kind : "no_price";
 
   const product = getCarsystemProductBySlug(String(input.slug ?? "").slice(0, 200));
@@ -209,7 +209,7 @@ export async function changePriceRequest(
   to: "in_progress" | "answered" | "closed",
   answer?: string | null,
 ): Promise<PriceRequestChange> {
-  if (!/^[0-9a-f-]{36}$/i.test(id)) return { ok: false, message: "Zahtev ne postoji." };
+  if (!/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(id)) return { ok: false, message: "Zahtev ne postoji." };
   const text = answer ? String(answer).trim().slice(0, 2000) : "";
   if (to === "answered" && text.length < 5) return { ok: false, message: "Odgovor kupcu je obavezan (najmanje 5 znakova)." };
   const scope = await resolveLedgerScope(viewer);

@@ -274,7 +274,7 @@ export type StockLineView = {
 };
 
 export async function loadStockImport(id: string) {
-  if (!/^[0-9a-f-]{36}$/i.test(id)) return null;
+  if (!/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(id)) return null;
   const db = getDb();
   const [imp] = await db
     .select({ imp: stockImports, uploader: users.name })

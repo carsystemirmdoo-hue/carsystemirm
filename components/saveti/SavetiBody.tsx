@@ -54,6 +54,9 @@ function renderInline(nodes: SavetiInline[], context: RenderContext, keyPrefix: 
             </a>
           );
         }
+        // Samo putanje ovog sajta („/…", ne „//…"); sve ostalo (javascript:, data:,
+        // tuđe adrese bez https) ostaje tekst — i kad sadržaj ne prođe build proveru.
+        if (!/^\/(?!\/)/.test(node.href)) return <span key={key}>{children}</span>;
         const article = /^\/vodici\/([a-z0-9-]+)(?:#.*)?$/.exec(node.href);
         if (article && article[1] !== "novosti" && !context.publicSlugs.has(article[1])) {
           // Članak još nije objavljen: tekst ostaje, adresa se ne otkriva.

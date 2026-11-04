@@ -489,6 +489,12 @@ test("nijedna API ruta ne postoji van izričito dozvoljenog spiska", async (t) =
      * isključivo iz sesije, bez parametara, samo čitanje, no-store; bez lagera.
      */
     "kupac/ponude/route.ts",
+    /*
+     * Bočni panel korpe (2026-11-04): prikaz korpe firme iz ISTOG obračuna kao strana
+     * /kupac/korpa. Kupac isključivo iz sesije, bez parametara, samo čitanje,
+     * no-store + Vary: Cookie; bez sesije 401.
+     */
+    "kupac/korpa/route.ts",
   ];
 
   const rute: string[] = [];

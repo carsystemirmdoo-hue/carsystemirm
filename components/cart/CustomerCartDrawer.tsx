@@ -19,26 +19,35 @@ export function CustomerCartDrawer({ publicSiteOpen }: { publicSiteOpen: boolean
   const dialog = useRef<HTMLDialogElement>(null);
   const request = useRef<AbortController | null>(null);
   const close = useCallback(() => setOpen(false), []);
-  const load = useCallback(async () => {
+  /**
+   * `background` osvežava prikazanu korpu bez praznjenja i bez stanja učitavanja
+   * (povratak na karticu ili aplikaciju). Prikaz ostaje dok ne stigne nov odgovor;
+   * istekla sesija ipak uklanja cene iz prikaza.
+   */
+  const load = useCallback(async ({ background = false }: { background?: boolean } = {}) => {
     request.current?.abort();
     const controller = new AbortController();
     request.current = controller;
-    setLoading(true);
-    setError("");
+    if (!background) {
+      setLoading(true);
+      setError("");
+    }
     try {
       const response = await fetch("/api/kupac/korpa", { cache: "no-store", credentials: "same-origin", signal: controller.signal });
+      if (response.status === 401) setCart(null);
       if (!response.ok) throw new Error(response.status === 401 ? "Sesija je istekla. Prijavite se ponovo za pregled korpe." : "Korpa trenutno nije dostupna. Pokušajte ponovo.");
       const body: CustomerCartPreview = await response.json();
       if (controller.signal.aborted) return;
       setCart(body);
+      setError("");
       window.dispatchEvent(new CustomEvent("cs-korpa", { detail: { count: body.lines.length } }));
     } catch (cause) {
       if (!controller.signal.aborted) {
-        setCart(null);
+        if (!background) setCart(null);
         setError(cause instanceof Error ? cause.message : "Proverite vezu i pokušajte ponovo.");
       }
     } finally {
-      if (!controller.signal.aborted) setLoading(false);
+      if (!controller.signal.aborted && !background) setLoading(false);
     }
   }, []);
 
@@ -55,7 +64,8 @@ export function CustomerCartDrawer({ publicSiteOpen }: { publicSiteOpen: boolean
     dialog.current?.showModal();
     document.body.style.overflow = "hidden";
     void load();
-    const refresh = () => { setCart(null); void load(); };
+    // Povratak na karticu ili aplikaciju: tiho osvežavanje, bez treptaja praznog panela.
+    const refresh = () => { if (document.visibilityState === "visible") void load({ background: true }); };
     window.addEventListener("focus", refresh);
     return () => {
       request.current?.abort();
@@ -125,7 +135,7 @@ export function CustomerCartDrawer({ publicSiteOpen }: { publicSiteOpen: boolean
           {cart && cart.lines.length > 0 ? <>
             <div className={styles.total}><span>{cart.incomplete ? "Zbir poznatih cena" : "Ukupno sa PDV-om"}</span><strong>{cart.lines.every((line) => line.total === null) ? "Na upit" : money(cart.totals.gross)}</strong></div>
             {cart.incomplete ? <p className={styles.note}>Stavke bez potvrđenog iznosa nisu uračunate u zbir.</p> : null}
-            <Link href="/kupac/korpa" className={styles.primary} onClick={close}>Pregled i slanje →</Link>
+            <Link href="/kupac/korpa" className={`${styles.primary} cs-cta`} data-cta-on="theme" onClick={close}>Pregled i slanje →</Link>
             <p className={styles.note}>U sledećem koraku izmenite količine, izaberite plaćanje i dopunite podatke za isporuku.</p>
           </> : null}
           <button type="button" className={styles.continue} onClick={close}>← Nastavite kupovinu</button>

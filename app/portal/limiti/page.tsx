@@ -19,10 +19,10 @@ export default async function Page() {
         title="Ekran čeka izvor podataka"
         summary="Limit je savetodavan i ne blokira prodaju. Predlog se računa iz proverenih podataka o prometu; kašnjenje i procenat plaćanja se ne koriste dok ne postoji izvor uplata. Konačan limit odobrava Vlasnik."
         requires={[
-          "Uvoz faktura iz BizniSoft izvoza — bez njega nema nijednog prodajnog podatka.",
+          "Proveren izvor uplata i datuma dospeća — isti koji čekaju Dugovanja. Fakture se već uvoze, ali ne nose plaćanje.",
           "Odluka Vlasnika je uvek poslednji korak — nijedan algoritam ne menja odobreni limit sam.",
         ]}
-        availability="Dostupno nakon povezivanja BizniSoft izvoza i statusa plaćanja"
+        availability="Dostupno nakon povezivanja statusa plaćanja"
       />
     </>
   );

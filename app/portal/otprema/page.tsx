@@ -24,7 +24,6 @@ export default async function Page() {
         requires={[
           "BEX pristupni podaci (BEX_CLIENT_ID, BEX_API_KEY) i uključen prekidač FEATURE_BEX.",
           "Potvrda da li BEX nudi test okruženje; ako ne nudi, koristi se jasno označen razvojni adapter.",
-          "Uvoz faktura iz BizniSoft izvoza — bez njega nema nijednog prodajnog podatka.",
         ]}
         availability="Dostupno nakon povezivanja BEX naloga za otpremu"
       />

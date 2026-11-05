@@ -12,6 +12,7 @@ import {
   PRODUCT_MAPPING_TONES,
 } from "@/lib/portal/status-labels";
 import { loadArticleOrderability } from "@/lib/ordering/ordering-service";
+import { getAllCarsystemProducts } from "@/lib/carsystem-data";
 import { MappingReview } from "./MappingReview";
 
 export const dynamic = "force-dynamic";
@@ -40,6 +41,8 @@ export default async function ArticleMappingsPage({
     "/portal/proizvodi/mapiranja",
   );
   const canManage = can(user, "mappings:manage");
+  // Predlog po šifri traži internu šifru na kataloškom proizvodu; danas je nema nijedan (kopija 8. 10.: 0 od 1.920).
+  const canProposeByCode = getAllCarsystemProducts().some((product) => Boolean(product.internalCode));
   const params = await searchParams;
 
   const [rows, counts] = await Promise.all([
@@ -114,8 +117,9 @@ export default async function ArticleMappingsPage({
               </button>
             </form>
             <p className="portal-login-hint">
-              {"„Predložite po šifri"} traži tačno poklapanje interne šifre. Dva
-              kataloška proizvoda sa istom šifrom daju konflikt, ne izbor.
+              {canProposeByCode
+                ? "„Predložite po šifri“ traži tačno poklapanje interne šifre. Dva kataloška proizvoda sa istom šifrom daju konflikt, ne izbor."
+                : "Katalog još ne nosi interne šifre BizniSofta, pa predlog po šifri nije moguć. Vezu potvrdite kroz „Odlučite“: upišite slug kataloškog proizvoda i „Proverite“ — vide se naziv, slika i varijante pre čuvanja."}
             </p>
           </section>
 
@@ -134,7 +138,7 @@ export default async function ArticleMappingsPage({
             </p>
           ) : null}
 
-          <MappingReview rows={reviewRows} canManage={canManage} />
+          <MappingReview rows={reviewRows} canManage={canManage} canProposeByCode={canProposeByCode} />
         </>
       )}
     </>

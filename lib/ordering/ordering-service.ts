@@ -1198,8 +1198,13 @@ export function catalogTargetProblem(slug: string | null, variantId: string | nu
 }
 
 /**
- * Poručivost po artiklu, nezavisno od kupca: veza, varijanta i stavka aktivnog
- * cenovnika. Za kolonu „Za poručivanje" na ekranu mapiranja.
+ * Poručivost po artiklu, nezavisno od kupca: veza, varijanta, važeća osnovna
+ * cena i potvrđeno pakovanje. Za kolonu „Za poručivanje" na ekranu mapiranja.
+ *
+ * Cena je OSNOVNA cena iz Cenovnika (`article_base_prices`), isti izvor kao
+ * kupovina na sajtu (`request-service`). Ranije je kolona čitala stari demo
+ * cenovnik (`price_lists`), pa je svaki artikal pisao „nije u važećem
+ * cenovniku" i kada ga kupci mogu da poruče.
  */
 export async function loadArticleOrderability(articleIds: string[]) {
   const out = new Map<string, { orderable: boolean; reason: string | null; catalogName: string | null; variantLabel: string | null }>();
@@ -1211,15 +1216,29 @@ export async function loadArticleOrderability(articleIds: string[]) {
     mode.priceList,
     sql`a.id IN (${sql.join(articleIds.map((id) => sql`${id}::uuid`), sql`, `)})`,
   );
+  const today = belgradeDate(new Date());
+  const sales = new Map(
+    [
+      ...(await db.execute<{ id: string; has_price: boolean; has_pack: boolean }>(sql`
+        SELECT a.id,
+               EXISTS (SELECT 1 FROM article_base_prices b WHERE b.article_id = a.id AND b.valid_from <= ${today}::date) AS has_price,
+               EXISTS (SELECT 1 FROM article_pack_sizes p WHERE p.article_id = a.id) AS has_pack
+          FROM articles a
+         WHERE a.id IN (${sql.join(articleIds.map((id) => sql`${id}::uuid`), sql`, `)})`)),
+    ].map((r) => [r.id, r]),
+  );
   for (const r of rows) {
     const facts = catalogFacts(r.slug, r.variant);
-    const problem = orderabilityProblem({
-      mapping: r.mapping_status ? { status: r.mapping_status, catalogProductSlug: r.slug, catalogVariantId: r.variant } : null,
-      productExists: facts.productExists,
-      rowVariantKeys: facts.rowVariantKeys,
-      priceItem: r.list_price === null ? null : {},
-      outOfProgramme: r.out_of_programme,
-    });
+    const sale = sales.get(r.article_id);
+    const problem =
+      orderabilityProblem({
+        mapping: r.mapping_status ? { status: r.mapping_status, catalogProductSlug: r.slug, catalogVariantId: r.variant } : null,
+        productExists: facts.productExists,
+        rowVariantKeys: facts.rowVariantKeys,
+        priceItem: sale?.has_price ? {} : null,
+        outOfProgramme: r.out_of_programme,
+      }) ??
+      (sale?.has_pack ? null : { code: "no_pack", message: "Prodajno pakovanje nije potvrđeno — kupac vidi cenu, ali poručuje samo upitom." });
     out.set(r.article_id, {
       orderable: !problem,
       reason: problem?.message ?? null,

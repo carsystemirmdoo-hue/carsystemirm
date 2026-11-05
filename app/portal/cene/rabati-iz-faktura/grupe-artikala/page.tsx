@@ -16,7 +16,7 @@ export const dynamic = "force-dynamic";
 export default async function ArticleGroupsPage() {
   const user = await requireCapability("view:rabati", "/portal/cene/rabati-iz-faktura/grupe-artikala");
   const groups = await brandProposals();
-  const canConfirm = can(user, "prices:approve");
+  const canConfirm = can(user, "prices:oversee");
   return (
     <>
       <CrumbLabel segment="grupe-artikala" label="Grupe artikala" />

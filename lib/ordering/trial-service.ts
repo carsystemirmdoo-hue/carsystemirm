@@ -24,7 +24,7 @@ export async function trialOverview() {
  * lozinku. Ništa se ne šalje e-poštom (poziv ostaje u redu za ručnu predaju).
  */
 export async function createTrialAccount(actor: PortalUser, input: { customerId: string; email: string; name: string }) {
-  if (!can(actor, "customer_accounts:manage") || !can(actor, "prices:approve")) throw new Error("Probni nalog pravi samo vlasnik.");
+  if (!can(actor, "customer_accounts:manage") || !can(actor, "prices:oversee")) throw new Error("Probni nalog pravi samo vlasnik.");
   if (!(await trialCustomerIds()).includes(input.customerId)) throw new Error("Probni nalog je moguć samo za izdvojenog test kupca.");
   const email = input.email.trim().toLowerCase();
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) throw new Error("Neispravna e-pošta.");

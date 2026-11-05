@@ -5,6 +5,7 @@ import { AUDIT_ACTIONS, recordAudit } from "@/lib/audit/record";
 import { can } from "@/lib/authz/permissions.mjs";
 import { canAccessCustomer } from "@/lib/authz/scope.mjs";
 import { loadAssignedCustomerIds, type PortalUser } from "@/lib/authz/user-repository";
+import { notifyOwnerOfDecision } from "@/lib/pricing/owner-oversight";
 import { isOptionCode, optionLabel, sortOptions } from "@/lib/pricing/paymentOptions.mjs";
 
 export class PaymentOptionError extends Error {}
@@ -92,14 +93,18 @@ export async function proposePaymentOption(viewer: PortalUser, input: { customer
   });
 }
 
-/** Odluka vlasnika: odobrenje, odbijanje ili opoziv (opoziv zatvara važenje, red ostaje). */
+/**
+ * Odluka: odobrenje, odbijanje ili opoziv (opoziv zatvara važenje, red ostaje).
+ * Komercijalista sa paketom odobravanja odlučuje samo za svoje kupce; vlasnik dobija obaveštenje.
+ */
 export async function decidePaymentOption(viewer: PortalUser, input: { id: string; to: "odobreno" | "odbijeno" | "opozvano"; reason: string | null; effectiveTo?: string | null }) {
-  if (!can(viewer, "prices:approve")) throw new PaymentOptionError("Opcije plaćanja odobrava samo vlasnik.");
+  if (!can(viewer, "prices:approve")) throw new PaymentOptionError("Nemate pravo da odobravate opcije plaćanja.");
   const db = getDb();
   return db.transaction(async (tx) => {
     const [cur] = [...(await tx.execute<{ status: string; option_code: string; customer_id: string; effective_from: string }>(sql`
       SELECT status, option_code, customer_id, effective_from::text FROM customer_payment_options WHERE id = ${input.id}::uuid FOR UPDATE`))];
     if (!cur) throw new PaymentOptionError("Opcija ne postoji.");
+    await assertScope(viewer, cur.customer_id);
     const allowed = (cur.status === "predlog" && (input.to === "odobreno" || input.to === "odbijeno")) || (cur.status === "odobreno" && input.to === "opozvano");
     if (!allowed) throw new PaymentOptionError(`Prelaz ${cur.status} → ${input.to} nije dozvoljen.`);
     if ((input.to === "odbijeno" || input.to === "opozvano") && !(input.reason ?? "").trim()) throw new PaymentOptionError("Razlog je obavezan.");
@@ -123,6 +128,18 @@ export async function decidePaymentOption(viewer: PortalUser, input: { id: strin
         before: { status: cur.status },
         after: { status: input.to, vaziDo: closeOn },
         reason: input.reason?.trim() || `Odluka: ${input.to}`,
+      },
+      tx,
+    );
+    await notifyOwnerOfDecision(
+      viewer,
+      {
+        kind: input.to === "odobreno" ? "price_rule_approved" : input.to === "odbijeno" ? "price_rule_rejected" : "price_rule_revoked",
+        customerId: cur.customer_id,
+        what: `Opcija plaćanja „${optionLabel(cur.option_code)}“ od ${cur.effective_from}${input.reason?.trim() ? `, razlog: ${input.reason.trim()}` : ""}`,
+        entityType: "Opcija plaćanja",
+        entityId: input.id,
+        actionHref: `/portal/cene/rabati-iz-faktura/kupci/${cur.customer_id}`,
       },
       tx,
     );

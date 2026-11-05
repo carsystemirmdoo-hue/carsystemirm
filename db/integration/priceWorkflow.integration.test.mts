@@ -138,8 +138,8 @@ test("komercijalista predlaze za dodeljenog kupca i to stvara audit i obavestenj
     SELECT required_capability, kind FROM notifications WHERE entity_id = ${created.id}`;
   assert.equal(notifications.length, 1);
   assert.equal(notifications[0].kind, "price_rule_proposed");
-  // Obaveštenje ide onome ko odlučuje, ne onome ko je predložio.
-  assert.equal(notifications[0].required_capability, "prices:approve");
+  // Obaveštenje ide vlasniku, ne onome ko je predložio (2026-11-04).
+  assert.equal(notifications[0].required_capability, "prices:oversee");
 });
 
 test("komercijalista ne moze predloziti za nedodeljenog kupca", async (t) => {

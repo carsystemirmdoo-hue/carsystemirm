@@ -34,7 +34,7 @@ export async function brandProposals() {
 
 /** Potvrda grupe: upisuje brend artiklima iz predloga koji ga još nemaju (ne gazi drugačije upisan brend). */
 export async function confirmBrand(actor: PortalUser, input: { brand: string; reason: string }) {
-  if (!can(actor, "prices:approve")) throw new Error("Grupe artikala potvrđuje samo vlasnik.");
+  if (!can(actor, "prices:oversee")) throw new Error("Grupe artikala potvrđuje samo vlasnik.");
   const reason = input.reason.trim();
   if (reason.length < 5) throw new Error("Obrazloženje: najmanje 5 znakova.");
   const g = (await brandProposals()).find((x) => x.brand === input.brand);

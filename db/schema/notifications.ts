@@ -8,6 +8,7 @@ import {
   timestamp,
   uuid,
 } from "drizzle-orm/pg-core";
+import { customers } from "./permissions";
 import { users } from "./users";
 
 /**
@@ -104,11 +105,19 @@ export const notifications = pgTable(
       onDelete: "restrict",
     }),
     resolutionNote: text("resolution_note"),
+    /**
+     * Kupac na koga se obaveštenje odnosi (0059), ili `null` za obaveštenje bez
+     * kupca. Kada je zadat, vidi ga samo ko pored sposobnosti ima tog kupca u
+     * opsegu — komercijalista svoje, kancelarija i vlasnik sve. Tako
+     * komercijalista dobija upit svog kupca bez uvida u tuđe.
+     */
+    customerId: uuid("customer_id").references(() => customers.id, { onDelete: "cascade" }),
   },
   (table) => [
     index("notifications_status_idx").on(table.status, table.createdAt),
     index("notifications_capability_idx").on(table.requiredCapability),
     index("notifications_entity_idx").on(table.entityType, table.entityId),
+    index("notifications_customer_idx").on(table.customerId),
   ],
 );
 

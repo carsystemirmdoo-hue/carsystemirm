@@ -111,8 +111,8 @@ export async function createPriceRequest(
           ${product.slug}, ${variantId}, ${product.name}, ${variantLabel}, ${articleId}::uuid, ${quantity}, ${note})
         RETURNING id`)),
     ];
-    // Kancelarija saznaje za upit i kada lista nije otvorena (B3); neuspeh ne obara upit.
-    await notifyPriceRequestSubmitted({ requestId: row.id, requestNumber, customerName: session.customerName, productName: variantLabel ? `${product.name} — ${variantLabel}` : product.name });
+    // Kancelarija i komercijalista kupca saznaju za upit i kada lista nije otvorena (B3, 0059); neuspeh ne obara upit.
+    await notifyPriceRequestSubmitted({ requestId: row.id, customerId, kind, requestNumber, customerName: session.customerName, productName: variantLabel ? `${product.name} — ${variantLabel}` : product.name });
     return { ok: true, id: row.id, requestNumber, existing: false };
   } catch (error) {
     const e = error as { code?: string; cause?: { code?: string } };

@@ -8,7 +8,7 @@ import {
   type NotificationSeverity,
   type NotificationStatus,
 } from "@/db/schema";
-import { resolveCapabilities } from "@/lib/authz/permissions.mjs";
+import { resolveCapabilities, seesAllCustomers } from "@/lib/authz/permissions.mjs";
 import type { PortalUser } from "@/lib/authz/user-repository";
 
 type Transaction = Parameters<Parameters<Database["transaction"]>[0]>[0];
@@ -24,6 +24,11 @@ export type NotificationInput = {
   actionHref?: string | null;
   context?: Record<string, unknown> | null;
   correlationId?: string | null;
+  /**
+   * Kupac na koga se odnosi (0059). Zadat → vidi ga samo ko tog kupca ima u
+   * opsegu, pa sme da ga dobije i komercijalista (samo za svoje kupce).
+   */
+  customerId?: string | null;
   /**
    * Ključ istovetnosti.
    *
@@ -111,6 +116,7 @@ export async function notify(
     context: input.context ?? null,
     correlationId: input.correlationId ?? null,
     dedupeKey: input.dedupeKey ?? null,
+    customerId: input.customerId ?? null,
   };
 
   if (!input.dedupeKey) {
@@ -140,6 +146,23 @@ export async function notify(
 }
 
 /**
+ * Opseg kupca za obaveštenja (0059).
+ *
+ * Red bez kupca vidi svako sa sposobnošću; red sa kupcem samo ko vidi sve
+ * kupce ili ima dodelu tog kupca. Kolona se piše PUNIM imenom
+ * (`notifications.customer_id`): drizzle bi `${notifications.customerId}` u
+ * upitu nad jednom tabelom napisao kao `"customer_id"`, a to bi se u podupitu
+ * vezalo za `ca.customer_id` i uslov bi uvek prolazio.
+ */
+export function customerScopeCondition(user: Pick<PortalUser, "id" | "role" | "permissions">) {
+  if (seesAllCustomers(user)) return sql`true`;
+  return sql`(notifications.customer_id IS NULL OR EXISTS (
+    SELECT 1 FROM customer_assignments ca
+     WHERE ca.customer_id = notifications.customer_id AND ca.user_id = ${user.id}
+  ))`;
+}
+
+/**
  * Obaveštenja koja dati korisnik sme da vidi.
  *
  * Filtriranje ide u `WHERE`, po sposobnostima razrešenim iz baze. Povlačenje
@@ -154,7 +177,7 @@ export async function listNotificationsFor(
   if (capabilities.length === 0) return [];
 
   const db = getDb();
-  const conditions = [inArray(notifications.requiredCapability, capabilities)];
+  const conditions = [inArray(notifications.requiredCapability, capabilities), customerScopeCondition(user)];
   if (filter?.status) conditions.push(eq(notifications.status, filter.status));
 
   return db
@@ -177,6 +200,7 @@ export async function countUnreadFor(user: PortalUser): Promise<number> {
     .where(
       and(
         inArray(notifications.requiredCapability, capabilities),
+        customerScopeCondition(user),
         eq(notifications.status, "unread"),
       ),
     );
@@ -206,6 +230,7 @@ export async function markNotificationRead(
         eq(notifications.id, id),
         eq(notifications.status, "unread"),
         inArray(notifications.requiredCapability, capabilities),
+        customerScopeCondition(user),
       ),
     )
     .returning({ id: notifications.id });
@@ -241,6 +266,7 @@ export async function resolveNotification(
       and(
         eq(notifications.id, id),
         inArray(notifications.requiredCapability, capabilities),
+        customerScopeCondition(user),
       ),
     )
     .returning({ id: notifications.id });

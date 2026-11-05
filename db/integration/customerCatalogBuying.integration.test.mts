@@ -257,6 +257,13 @@ test("radna lista: kancelarija sve, komercijalista samo svoje; odgovor je obavez
   const seen = await req.listCustomerPriceRequests(firm.a.customerId);
   assert.equal(seen[0].status, "answered");
   assert.match(seen[0].answer!, /1\.290/);
+  // Zatvaranje: odgovoren upit bez teksta; neodgovoren samo uz objašnjenje koje kupac vidi.
+  assert.deepEqual(await req.changePriceRequest(rep, aReq.id, "closed"), { ok: true, changed: true });
+  assert.equal((await req.changePriceRequest(office, bReq.id, "closed")).ok, false, "neodgovoren upit se ne zatvara bez reči kupcu");
+  assert.deepEqual(await req.changePriceRequest(office, bReq.id, "closed", "Artikal više nije u ponudi."), { ok: true, changed: true });
+  const bSeen = await req.listCustomerPriceRequests(firm.b.customerId);
+  assert.equal(bSeen[0].status, "closed");
+  assert.match(bSeen[0].answer!, /više nije u ponudi/);
   // Odgovor ne menja cenu: traka i dalje nije poručiva.
   assert.equal((await svc.addToCart(session("a"), { articleCode: code("TAPE"), quantity: "1" })).ok, false);
 });

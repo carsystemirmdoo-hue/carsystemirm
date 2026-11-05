@@ -224,19 +224,28 @@ export async function changePriceRequest(
   const db = getDb();
   return db.transaction(async (tx) => {
     const [r] = [
-      ...(await tx.execute<{ id: string; status: string; request_number: string }>(sql`
-        SELECT r.id, r.status::text AS status, r.request_number FROM customer_price_requests r
+      ...(await tx.execute<{ id: string; status: string; request_number: string; answer: string | null }>(sql`
+        SELECT r.id, r.status::text AS status, r.request_number, r.answer FROM customer_price_requests r
          WHERE r.id = ${id}::uuid AND ${scopeWhere(scope)} FOR UPDATE`)),
     ];
     if (!r) return { ok: false as const, message: "Zahtev ne postoji." };
     if (r.status === to) return { ok: true as const, changed: false };
     if (!ALLOWED[to]?.includes(r.status)) return { ok: false as const, message: "Ovaj korak nije dozvoljen u trenutnom stanju." };
+    /*
+     * Zatvaranje bez ijednog odgovora: kupac je u „Upitima" video samo
+     * „Zatvoren", bez reči zašto. Zato se tada traži kratko objašnjenje, koje
+     * kupac vidi kao odgovor. Već odgovoren upit se zatvara bez teksta.
+     */
+    const closesUnanswered = to === "closed" && !(r.answer ?? "").trim();
+    if (closesUnanswered && text.length < 5) {
+      return { ok: false as const, message: "Upit nije odgovoren: napišite kupcu kratko zašto se zatvara (najmanje 5 znakova)." };
+    }
     await tx.execute(sql`
       UPDATE customer_price_requests SET
         status = ${to}::price_request_status,
         handled_by = ${viewer.id},
         taken_at = COALESCE(taken_at, now()),
-        answer = CASE WHEN ${to} = 'answered' THEN ${text} ELSE answer END,
+        answer = CASE WHEN ${to} = 'answered' OR ${closesUnanswered} THEN ${text} ELSE answer END,
         answered_at = CASE WHEN ${to} = 'answered' THEN now() ELSE answered_at END,
         closed_at = CASE WHEN ${to} = 'closed' THEN now() ELSE closed_at END,
         updated_at = now()

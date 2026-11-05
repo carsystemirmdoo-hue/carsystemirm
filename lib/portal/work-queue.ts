@@ -50,12 +50,19 @@ export async function loadWorkQueue(user: PortalUser): Promise<WorkItem[]> {
     items.push(countItem("novi", "Novi zahtevi kupaca", orders.novi, "čekaju prijem u obradu", "/portal/zahtevi?stanje=novi"));
     items.push(countItem("obrada", "Zahtevi u obradi", orders.obrada, "čekaju potvrdu ili izmenu", "/portal/zahtevi?stanje=obrada", "neutral"));
     items.push(countItem("biznisoft", "Potvrđeno, bez BizniSoft broja", orders.biznisoft, "uneti u BizniSoft i upisati broj", "/portal/zahtevi?stanje=biznisoft"));
-  } else if (orders) {
-    items.push(countItem("otvoreni", "Otvoreni zahtevi kupaca", orders.otvoreni, "još traže nečiji korak", "/portal/zahtevi", "neutral"));
   }
 
   if (priceRequests !== null) {
     items.push(countItem("uslovi", "Upiti za cenu i uslove", priceRequests, "čekaju odgovor kupcu", "/portal/zahtevi/uslovi"));
+  }
+
+  /*
+   * Ko zahteve samo čita (komercijalista): broj ide POSLE upita, koji su
+   * njegov posao, i kaže čiji je korak — ranije je stajao prvi sa „još traže
+   * nečiji korak", ispod naslova „Posao koji traži Vaš korak".
+   */
+  if (orders && !reviewsOrders) {
+    items.push(countItem("otvoreni", "Otvoreni zahtevi kupaca", orders.otvoreni, "korak je na kancelariji — za pregled", "/portal/zahtevi", "neutral"));
   }
 
   if (identities) {

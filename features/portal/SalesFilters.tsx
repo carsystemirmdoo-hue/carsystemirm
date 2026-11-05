@@ -197,7 +197,7 @@ export function NoInvoicesYet({ screen }: { screen: string }) {
       title={`${screen} čeka prvi uvoz faktura`}
       summary="Baza je spremna i ekran radi, ali još nije uvezena nijedna faktura. Uvezite fajl na ekranu Importi da bi se brojke popunile."
       requires={[
-        "Izvoz iz BiznisSoft-a u CSV formatu (tačka-zarez ili zarez kao razdvajač).",
+        "Izvoz iz BizniSoft-a u CSV formatu (tačka-zarez ili zarez kao razdvajač).",
         "Kolone: pib, kupac, broj_dokumenta, datum, vrsta_dokumenta, sifra_artikla, kolicina, cena, iznos_stavke.",
         "Dozvola za uvoz — ekran Importi.",
       ]}

@@ -41,11 +41,11 @@ export default async function AdminPage() {
         title="Ostala konfiguracija stiže sa integracijama"
         summary="Podešavanja konektora za fakture, BEX naloga i uvoza zaliha se otvaraju kada te integracije budu povezane. Do tada se ne prikazuju prazna polja koja ništa ne čuvaju."
         requires={[
-          "Putanja i pristup folderu sa BiznisSoft izvozom.",
+          "Putanja i pristup folderu sa BizniSoft izvozom.",
           "BEX pristupni podaci i odluka o test okruženju.",
           "Izvor stanja zaliha.",
         ]}
-        availability="Dostupno nakon povezivanja BiznisSoft izvoza, BEX naloga i izvora zaliha"
+        availability="Dostupno nakon povezivanja BizniSoft izvoza, BEX naloga i izvora zaliha"
       />
     </>
   );

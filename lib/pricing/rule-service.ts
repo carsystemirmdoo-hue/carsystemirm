@@ -624,11 +624,14 @@ export const ARTICLE_OPTION_LIMIT = 5000;
  */
 export async function countPriceRules(
   scope: PricingScope,
-  filter?: { statuses?: PriceRuleStatus[]; customerId?: string },
+  filter?: { statuses?: PriceRuleStatus[]; customerId?: string; biznisoftEntryRequired?: boolean },
 ): Promise<number> {
   const conditions = [];
   if (filter?.statuses?.length) conditions.push(inArray(priceRules.status, filter.statuses));
   if (filter?.customerId) conditions.push(eq(priceRules.customerId, filter.customerId));
+  if (filter?.biznisoftEntryRequired !== undefined) {
+    conditions.push(eq(priceRules.biznisoftEntryRequired, filter.biznisoftEntryRequired));
+  }
   const scopeCondition = priceRuleScopeCondition(scope);
   if (scopeCondition) conditions.push(scopeCondition);
   const [row] = await getDb()
@@ -643,6 +646,8 @@ export async function listPriceRules(
   filter?: {
     statuses?: PriceRuleStatus[];
     customerId?: string;
+    /** `false` = pravila koja važe samo u portalu (serija iz istorije faktura). */
+    biznisoftEntryRequired?: boolean;
     limit?: number;
   },
 ): Promise<PriceRuleView[]> {
@@ -653,6 +658,9 @@ export async function listPriceRules(
   }
   if (filter?.customerId) {
     conditions.push(eq(priceRules.customerId, filter.customerId));
+  }
+  if (filter?.biznisoftEntryRequired !== undefined) {
+    conditions.push(eq(priceRules.biznisoftEntryRequired, filter.biznisoftEntryRequired));
   }
 
   const scopeCondition = priceRuleScopeCondition(scope);

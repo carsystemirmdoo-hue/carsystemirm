@@ -248,6 +248,11 @@ export async function loadSalesSummary(
  * Zbirovi po kupcu, komercijalisti, artiklu ili grupi — nad celim skupom.
  * Redosled: neto opadajuće (kao `summarizeBy`), pa naziv.
  */
+/** Imena komercijalista kojima je kupac fakture dodeljen, abecedno. */
+const DODELA_KUPCA = sql`(SELECT string_agg(u.name, ', ' ORDER BY u.name)
+   FROM customer_assignments ca JOIN users u ON u.id = ca.user_id
+  WHERE ca.customer_id = customers.id)`;
+
 export async function loadSalesBreakdown(
   user: PortalUser,
   filter: SalesFilter,
@@ -266,9 +271,16 @@ export async function loadSalesBreakdown(
       label: sql<string>`${customers.name}`,
       customerId: sql<string | null>`${customers.id}::text`,
     },
+    /*
+     * Komercijalista sa fakture, a kada ga faktura nema (uvoz iz BizniSofta ga
+     * danas ne nosi) — komercijalisti kojima je kupac DODELJEN. Kupac sa dva
+     * komercijaliste ide u jednu grupu („A, B"), pa se promet ne broji dvaput i
+     * zbir ostaje promet firme. Bez ovoga je sve stajalo pod „Bez komercijaliste".
+     * Pune kolone (`customers.id`): u podupitu bi kratko ime vezalo `ca`.
+     */
     komercijalisti: {
-      key: sql<string>`coalesce(${salespeople.id}::text, '—')`,
-      label: sql<string>`coalesce(${salespeople.name}, 'Bez komercijaliste')`,
+      key: sql<string>`coalesce(${salespeople.name}, ${DODELA_KUPCA}, 'Bez dodele')`,
+      label: sql<string>`coalesce(${salespeople.name}, ${DODELA_KUPCA}, 'Bez dodele')`,
       customerId: sql<string | null>`NULL::text`,
     },
     artikli: {

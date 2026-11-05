@@ -134,7 +134,13 @@ export default async function AnalyticsPage({
         <div className="portal-section-header">
           <div>
             <h2>{VIEWS.find((item) => item.key === view)?.label}</h2>
-            <p>Kliknite na kupca da otvorite njegove fakture.</p>
+            <p>
+              {view === "kupci"
+                ? "Kliknite na kupca da otvorite njegove fakture."
+                : view === "komercijalisti"
+                  ? "Po komercijalisti sa fakture, a kada ga faktura nema — po današnjoj dodeli kupca. Kupac sa dva komercijaliste je u zajedničkoj grupi."
+                  : "Zbirovi nad celim izabranim periodom."}
+            </p>
           </div>
         </div>
         <SalesBreakdown

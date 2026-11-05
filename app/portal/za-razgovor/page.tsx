@@ -211,8 +211,8 @@ export default async function TalkListPage({
         title="Za razgovor"
         description={
           all
-            ? "Kupci poređani po tome kome vredi posvetiti pažnju. Razlog i predlog potiču iz ritma kupovine tog kupca; osnov je na kartici kupca. Artikli po kupcu su iz redosleda R1 (eksperiment)."
-            : "Vaši dodeljeni kupci, poređani po tome kome vredi posvetiti pažnju. Razlog i predlog potiču iz ritma kupovine tog kupca. Artikli po kupcu su iz redosleda R1 (eksperiment)."
+            ? "Kupci poređani po tome kome vredi posvetiti pažnju. Razlog i predlog potiču iz ritma kupovine tog kupca; osnov je na kartici kupca. Redosled artikala po kupcu je u probnoj fazi."
+            : "Vaši dodeljeni kupci, poređani po tome kome vredi posvetiti pažnju. Razlog i predlog potiču iz ritma kupovine tog kupca. Redosled artikala po kupcu je u probnoj fazi."
         }
       />
 
@@ -220,7 +220,7 @@ export default async function TalkListPage({
         <div className="zr-status">
           <div>
             <span>
-              Podaci do <strong>{srDate(data.today)}</strong> · poslednji uvoz {fmtTime(lastIngest)}
+              Danas <strong>{srDate(data.today)}</strong> · poslednji uvoz {fmtTime(lastIngest)}
             </span>
             <span>
               Obračun preporuka:{" "}

@@ -146,7 +146,7 @@ export default async function PortalHomePage() {
               <h2>Za razgovor</h2>
               <p>
                 {state.recommendations.asOfDate
-                  ? `Obračun preporuka na dan ${formatDate(state.recommendations.asOfDate)} Svaki signal se meri prema ritmu tog kupca i artikla.`
+                  ? `Obračun preporuka na dan ${formatDate(state.recommendations.asOfDate)}. Svaki signal se meri prema ritmu tog kupca i artikla.`
                   : "Preporuke još nisu obračunate."}
               </p>
             </div>

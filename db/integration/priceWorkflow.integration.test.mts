@@ -580,3 +580,14 @@ test("zatvoreno obavestenje bez napomene se ne moze upisati ni direktno", async 
     /notifications_resolved_ck/,
   );
 });
+
+test("obaveštenje o predlogu imenuje kupca i artikal, ne interne ID-jeve", async (t) => {
+  if (guard(t)) return;
+  const created = await freshProposal();
+  const [row] = await db.sql<{ body: string }[]>`
+    SELECT body FROM notifications WHERE kind = 'price_rule_proposed' AND entity_id = ${created.id}`;
+  assert.ok(row, "nema obaveštenja o predlogu");
+  assert.doesNotMatch(row.body, /customer:|article:|[0-9a-f]{8}-[0-9a-f]{4}-/i);
+  assert.match(row.body, / · /);
+  assert.match(row.body, /od \d{2}\/\d{2}\/\d{4}/);
+});

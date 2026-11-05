@@ -122,7 +122,9 @@ test("poruke za ručnu predaju poštuju opseg (B10)", async (t) => {
   const { listPendingOutbox } = await import("@/lib/customers/invitation-service");
   const [accA] = await db.sql<{ id: string }[]>`SELECT id FROM customer_users WHERE email = ${`qa1bverify-${run}-a@qa-1b.invalid`}`;
   const [accB] = await db.sql<{ id: string }[]>`SELECT id FROM customer_users WHERE email = ${`qa1bverify-${run}-b@qa-1b.invalid`}`;
-  await db.sql`INSERT INTO customer_message_outbox (customer_user_id, kind) VALUES (${accA.id}, 'invitation'), (${accB.id}, 'invitation')`;
+  // Nalozi su aktivni: aktivan nalog realno dobija kod za novu lozinku, ne poziv
+  // (poziv za aktiviran nalog se ne nudi za predaju).
+  await db.sql`INSERT INTO customer_message_outbox (customer_user_id, kind) VALUES (${accA.id}, 'password_reset'), (${accB.id}, 'password_reset')`;
   const mine = (await listPendingOutbox(viewer(rep, ["kupacki_nalozi"]))).filter((m) => [accA.id, accB.id].includes(m.accountId));
   assert.deepEqual(mine.map((m) => m.accountId), [accA.id]);
   assert.deepEqual(await listPendingOutbox(viewer(idleRep, ["kupacki_nalozi"])), []);

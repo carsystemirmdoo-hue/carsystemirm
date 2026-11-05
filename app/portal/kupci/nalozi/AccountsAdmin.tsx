@@ -145,9 +145,7 @@ export function AccountsAdmin({
         <section className="portal-panel" data-accent="warning">
           <h2>Link za aktivaciju — prikazuje se samo sada</h2>
           <p>{inviteState.ok}</p>
-          <p>
-            <code>{inviteState.link}</code>
-          </p>
+          <InviteLink path={inviteState.link} />
           <p className="portal-login-hint">
             U bazi stoji samo otisak tokena. Kada zatvorite ovaj ekran, link se
             ne može ponovo prikazati — izdaje se nov poziv.
@@ -495,5 +493,35 @@ export function AccountsAdmin({
         ) : null}
       </section>
     </>
+  );
+}
+
+/**
+ * Pun link za predaju kupcu.
+ *
+ * Akcija vraća putanju; domen dodaje ekran na kome je vlasnik (Production,
+ * Preview ili lokalno), pa link uvek vodi na isti sistem koji ga je izdao.
+ * Ranije je prikazana samo putanja, koju kupac ne može da otvori.
+ */
+function InviteLink({ path }: { path: string }) {
+  const [copied, setCopied] = useState(false);
+  const full = typeof window === "undefined" ? path : `${window.location.origin}${path}`;
+  return (
+    <p>
+      <code>{full}</code>{" "}
+      <PortalButton
+        type="button"
+        onClick={async () => {
+          try {
+            await navigator.clipboard.writeText(full);
+            setCopied(true);
+          } catch {
+            // Bez dozvole za ostavu link ostaje vidljiv za ručno kopiranje.
+          }
+        }}
+      >
+        {copied ? "Kopirano" : "Kopirajte link"}
+      </PortalButton>
+    </p>
   );
 }

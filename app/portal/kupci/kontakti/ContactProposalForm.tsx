@@ -58,8 +58,8 @@ export function ContactProposalForm({ applyEnabled }: { applyEnabled: boolean })
               <span>Pregledao/la sam proveru; primena upisuje predloge kontakata bez lozinke i bez poziva.</span>
             </label>
             <p className="portal-login-hint">
-              Primena traži prijavu sa drugim faktorom u poslednjih 10 minuta. Ako je prošlo više, odjavite se i
-              prijavite ponovo.
+              Primena traži kod iz aplikacije unet u poslednjih 10 minuta. Ako je prošlo više, sistem će ga zatražiti i
+              vratiti Vas na ovaj ekran.
             </p>
             <PortalButton type="submit" name="mode" value="primena" variant="primary" disabled={pending}>
               Upišite potvrđene

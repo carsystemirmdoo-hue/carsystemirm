@@ -581,6 +581,30 @@ export type PriceRuleView = PriceRuleRow & {
  * Obavezan parametar je namerno: podrazumevana vrednost „bez ograničenja" je
  * tačno greška koja se ne primeti pri dodavanju novog pozivaoca.
  */
+/** Izbornik artikala u obrascima cene: ceo šifarnik (~3000 proizvoda u planu). */
+export const ARTICLE_OPTION_LIMIT = 5000;
+
+/**
+ * Koliko pravila ima u opsegu, pod istim filterom kao `listPriceRules`.
+ * Lista je ograničena; bez ovog broja ekran je tvrdio „Ukupno pravila: 500"
+ * dok ih je bilo 2.948.
+ */
+export async function countPriceRules(
+  scope: PricingScope,
+  filter?: { statuses?: PriceRuleStatus[]; customerId?: string },
+): Promise<number> {
+  const conditions = [];
+  if (filter?.statuses?.length) conditions.push(inArray(priceRules.status, filter.statuses));
+  if (filter?.customerId) conditions.push(eq(priceRules.customerId, filter.customerId));
+  const scopeCondition = priceRuleScopeCondition(scope);
+  if (scopeCondition) conditions.push(scopeCondition);
+  const [row] = await getDb()
+    .select({ n: sql<number>`count(*)::int` })
+    .from(priceRules)
+    .where(conditions.length > 0 ? and(...conditions) : undefined);
+  return row?.n ?? 0;
+}
+
 export async function listPriceRules(
   scope: PricingScope,
   filter?: {

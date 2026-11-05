@@ -131,6 +131,13 @@ function datum(iso: string | null): string {
  */
 const PO_GRUPI = 100;
 
+/** Stanje prolaza onako kako ga čita čovek, ne vrednost iz baze. */
+const PROLAZ_STATUS: Record<string, string> = {
+  running: "u toku",
+  succeeded: "uspešan",
+  failed: "neuspeo",
+};
+
 function dana(n: number): string {
   const a = Math.abs(n);
   return a % 10 === 1 && a % 100 !== 11 ? `${a} dan` : `${a} dana`;
@@ -578,17 +585,17 @@ export default async function RecommendationsPage({
                             : "info"
                       }
                     >
-                      {p.status}
+                      {PROLAZ_STATUS[p.status] ?? p.status}
                     </Badge>
                     {p.failureCode ? <small>{p.failureCode}</small> : null}
                   </td>
-                  <td>{p.inputLinesAccepted}</td>
-                  <td>{p.inputLinesExcluded}</td>
+                  <td>{quantity(p.inputLinesAccepted)}</td>
+                  <td>{quantity(p.inputLinesExcluded)}</td>
                   <td>
-                    {p.pairCount}
-                    <small>sa ritmom: {p.repeatPairCount}</small>
+                    {quantity(p.pairCount)}
+                    <small>sa ritmom: {quantity(p.repeatPairCount)}</small>
                   </td>
-                  <td>{p.resultCount}</td>
+                  <td>{quantity(p.resultCount)}</td>
                 </tr>
               ))}
               {prolazi.length === 0 ? (

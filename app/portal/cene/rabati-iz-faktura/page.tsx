@@ -122,7 +122,7 @@ export default async function RebatesFromInvoicesPage() {
           return (
             <details key={sec.status} className="portal-panel cs-sugg-more">
               <summary>
-                {sec.title} · {list.length} kupaca — dokazi po kupcu bez grupe
+                {sec.title} · {countOf(list.length, ["kupac", "kupca", "kupaca"])} — dokazi po kupcu bez grupe
               </summary>
               <div className="portal-panel-body">
                 <ol className="rb-list">

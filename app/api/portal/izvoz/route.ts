@@ -31,7 +31,7 @@ export const runtime = "nodejs";
 
 const querySchema = z.object({
   format: z.enum(["csv", "xlsx", "pdf"]),
-  view: z.enum(["stavke", "kupci", "komercijalisti", "artikli", "grupe"]),
+  view: z.enum(["stavke", "kupci", "komercijalisti", "artikli", "grupe", "dani", "meseci", "godine"]),
   // Stvaran kalendarski dan; `2026-02-31` je 400, ne 500 (B7).
   from: z.string().refine((v) => isoDateOrNull(v) !== null).optional(),
   to: z.string().refine((v) => isoDateOrNull(v) !== null).optional(),
@@ -131,6 +131,9 @@ const GROUP_COLUMN: Record<string, string> = {
   komercijalisti: "Komercijalista",
   artikli: "Artikal",
   grupe: "Grupa proizvoda",
+  dani: "Dan",
+  meseci: "Mesec",
+  godine: "Godina",
 };
 
 const TITLES: Record<string, string> = {
@@ -139,6 +142,9 @@ const TITLES: Record<string, string> = {
   komercijalisti: "Promet po komercijalisti",
   artikli: "Promet po artiklu",
   grupe: "Promet po grupi proizvoda",
+  dani: "Promet po danu",
+  meseci: "Promet po mesecu",
+  godine: "Promet po godini",
 };
 
 /** Ime zaduženog komercijaliste za zaglavlje izvoza (ID ništa ne govori čitaocu). */

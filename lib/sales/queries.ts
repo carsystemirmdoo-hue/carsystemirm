@@ -160,7 +160,11 @@ export interface SalesBreakdownRow extends SalesSummary {
   customerId: string | null;
 }
 
-export type SalesBreakdownView = "kupci" | "komercijalisti" | "artikli" | "grupe";
+export type SalesBreakdownView = "kupci" | "komercijalisti" | "artikli" | "grupe" | TimeView;
+
+/** Prikazi kroz vreme (datum izdavanja fakture); ređaju se hronološki, ne po iznosu. */
+export type TimeView = "dani" | "meseci" | "godine";
+export const TIME_VIEWS: readonly TimeView[] = ["dani", "meseci", "godine"];
 
 const listaVrsta = (vrste: readonly string[]) =>
   sql.join(vrste.map((v) => sql`${v}`), sql`, `);
@@ -293,6 +297,22 @@ export async function loadSalesBreakdown(
       label: sql<string>`coalesce(${articles.productGroup}, 'Bez grupe')`,
       customerId: sql<string | null>`NULL::text`,
     },
+    // Ključ je ISO (sortira se hronološki), oznaka u obliku ostatka portala.
+    dani: {
+      key: sql<string>`to_char(${invoices.issuedOn}, 'YYYY-MM-DD')`,
+      label: sql<string>`to_char(${invoices.issuedOn}, 'DD/MM/YYYY')`,
+      customerId: sql<string | null>`NULL::text`,
+    },
+    meseci: {
+      key: sql<string>`to_char(${invoices.issuedOn}, 'YYYY-MM')`,
+      label: sql<string>`to_char(${invoices.issuedOn}, 'MM/YYYY')`,
+      customerId: sql<string | null>`NULL::text`,
+    },
+    godine: {
+      key: sql<string>`to_char(${invoices.issuedOn}, 'YYYY')`,
+      label: sql<string>`to_char(${invoices.issuedOn}, 'YYYY')`,
+      customerId: sql<string | null>`NULL::text`,
+    },
   };
   const k = kljuc[view];
 
@@ -305,7 +325,11 @@ export async function loadSalesBreakdown(
     .leftJoin(articles, eq(articles.id, invoiceLines.articleId))
     .where(and(...conditions))
     .groupBy(sql`1, 2, 3`)
-    .orderBy(sql`round(coalesce(sum(${invoiceLines.lineAmount}), 0), 2) DESC`, sql`2`);
+    .orderBy(
+      ...((TIME_VIEWS as readonly string[]).includes(view)
+        ? [sql`1 DESC`]
+        : [sql`round(coalesce(sum(${invoiceLines.lineAmount}), 0), 2) DESC`, sql`2`]),
+    );
 
   return rows.map((row) => ({
     key: String(row.key),

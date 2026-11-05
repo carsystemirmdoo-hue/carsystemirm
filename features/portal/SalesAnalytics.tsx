@@ -268,7 +268,7 @@ export function SalesBreakdown({
                 <td className="portal-table-number">
                   <strong>{money(row.net)}</strong>
                 </td>
-                <td className="portal-table-number">{row.invoiceCount}</td>
+                <td className="portal-table-number">{MONEY.format(row.invoiceCount)}</td>
               </tr>
             );
           })}
@@ -292,7 +292,7 @@ export function SalesBreakdown({
               <td className="portal-table-number">
                 <strong>{money(totals.net)}</strong>
               </td>
-              <td className="portal-table-number">{totals.invoiceCount}</td>
+              <td className="portal-table-number">{MONEY.format(totals.invoiceCount)}</td>
             </tr>
           )}
         </tbody>

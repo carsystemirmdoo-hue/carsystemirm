@@ -47,6 +47,12 @@ interface PortalShellProps {
 }
 
 /** Svi ekrani iz menija, za sve uloge — da bi se znalo koji segment putanje je zaključan ekran. */
+/**
+ * Segmenti putanje bez sopstvene strane: veza bi vodila na 404 (a Next je
+ * unapred učitava, pa svaka strana ispod pravi grešku u konzoli).
+ */
+const CRUMBS_WITHOUT_PAGE: ReadonlySet<string> = new Set(["/portal/bezbednost", "/portal/prodaja/faktura"]);
+
 const ALL_NAV_HREFS: ReadonlySet<string> = new Set(
   (NAV_GROUPS as readonly { items: readonly { href: string }[] }[]).flatMap((group) => group.items.map((item) => item.href)),
 );
@@ -151,7 +157,10 @@ export function PortalShell({
       // Ekran iz menija koji OVOM korisniku nije dodeljen (npr. „Zalihe“ za
       // kancelariju na „Uvozu lagera“) ostaje u putanji kao tekst — veza bi
       // vodila na 403. Ostali segmenti (zapisi, podstrane) ostaju veze.
-      linkable: navLabels.has(`/${segments.slice(0, index + 1).join("/")}`) || !ALL_NAV_HREFS.has(`/${segments.slice(0, index + 1).join("/")}`),
+      linkable:
+        !CRUMBS_WITHOUT_PAGE.has(`/${segments.slice(0, index + 1).join("/")}`) &&
+        (navLabels.has(`/${segments.slice(0, index + 1).join("/")}`) ||
+          !ALL_NAV_HREFS.has(`/${segments.slice(0, index + 1).join("/")}`)),
       // Nepoznat segment je najčešće ID zapisa; prikazuje se onakav kakav jeste.
       label:
         navLabels.get(`/${segments.slice(0, index + 1).join("/")}`) ??

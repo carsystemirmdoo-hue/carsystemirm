@@ -26,11 +26,14 @@ export function MfaEnrollment({
   accountEmail,
   mfaEnabled,
   needsGrant,
+  grantMissing = false,
   onSignOut,
 }: {
   accountEmail: string;
   mfaEnabled: boolean;
   needsGrant: boolean;
+  /** Prvo vezivanje, a vlasnik još nije izdao (ili je dozvola istekla). */
+  grantMissing?: boolean;
   onSignOut: () => Promise<void>;
 }) {
   const [start, startForm, starting] = useActionState(
@@ -164,6 +167,14 @@ export function MfaEnrollment({
           ? "Vezivanje nove aplikacije poništava prethodnu. Stari kodovi prestaju da važe."
           : "Posle uključivanja, prijava traži i kod iz aplikacije pored lozinke."}
       </p>
+
+      {grantMissing ? (
+        <p className="portal-mfa-note" role="status">
+          Za ovaj nalog trenutno nema važeće dozvole za vezivanje. Zatražite je od
+          vlasnika — izdaje je u „Nalozi zaposlenih“ i važi 30 minuta. Kada je dobijete,
+          osvežite ovu stranu.
+        </p>
+      ) : null}
 
       <form action={startForm} onSubmit={reveal}>
         <label htmlFor={passwordId}>Trenutna lozinka</label>
@@ -339,18 +350,21 @@ function RecoveryCodes({
 
       <label className="portal-recovery-confirm">
         <input type="checkbox" checked={saved} onChange={onSaved} />
-        <span>Sačuvao sam rezervne kodove</span>
+        <span>Rezervni kodovi su sačuvani</span>
       </label>
 
-      {saved ? (
+      {saved && afterActivation ? (
         <form action={onSignOut}>
-          <p>
-            {afterActivation
-              ? "Drugi faktor je aktiviran. Prijavite se ponovo — sada uz kod iz aplikacije."
-              : "Prijavite se ponovo da nastavite rad."}
-          </p>
+          <p>Drugi faktor je aktiviran. Prijavite se ponovo — sada uz kod iz aplikacije.</p>
           <PortalButton type="submit">Odjava i ponovna prijava</PortalButton>
         </form>
+      ) : saved ? (
+        // Nov set kodova ne opoziva sesiju; odjava bi bila suvišna. Puno ponovno
+        // učitavanje (ne <Link>) briše kodove iz stanja komponente.
+        <p>
+          Prethodni set više ne važi.{" "}
+          <a href="/portal/bezbednost/mfa">Završite</a>
+        </p>
       ) : (
         <p className="portal-mfa-note">
           Potvrdite da ste ih sačuvali da biste nastavili.

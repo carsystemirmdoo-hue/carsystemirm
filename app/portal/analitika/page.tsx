@@ -87,7 +87,7 @@ export default async function AnalyticsPage({
         ? loadSalesSummary(user, { ...filter, ...previousWindow })
         : null,
       loadScopedCustomers(user),
-      loadSalespeople(),
+      seesAllCustomers(user) ? loadSalespeople() : Promise.resolve([]),
       loadProductGroups(),
     ]);
   // Filter po dodeli ima smisla samo ko vidi sve kupce.

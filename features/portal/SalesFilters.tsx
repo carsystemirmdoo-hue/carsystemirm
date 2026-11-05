@@ -1,5 +1,6 @@
 import { DateRangeField } from "@/components/portal/DateRangeField";
 import { PhaseNotice } from "@/components/portal/PhaseNotice";
+import { sortCustomersByName } from "@/lib/customers/customerListFilter.mjs";
 
 export interface FilterOptions {
   customers: { id: string; name: string }[];
@@ -71,7 +72,8 @@ export function SalesFilters({
           <span>Kupac</span>
           <select name="kupac" defaultValue={applied.kupac ?? ""}>
             <option value="">svi kupci</option>
-            {options.customers.map((customer) => (
+            {/* Isti redosled kao lista kupaca (bez vodećih navodnika). */}
+            {sortCustomersByName(options.customers).map((customer) => (
               <option key={customer.id} value={customer.id}>
                 {customer.name}
               </option>
@@ -95,6 +97,12 @@ export function SalesFilters({
             </small>
           </label>
         ) : null}
+        {/*
+          * Polje koje ne može da vrati ništa se ne prikazuje: fakture iz uvoza
+          * ne nose komercijalistu, a filter po DODELI je „Zadužen komercijalista".
+          * Komercijalista (samo svoji kupci) dobija prazan spisak.
+          */}
+        {nemaKomercijaliste && !applied.komercijalista ? null : (
         <label>
           <span>Komercijalista</span>
           <select
@@ -119,6 +127,7 @@ export function SalesFilters({
             </small>
           ) : null}
         </label>
+        )}
         <label>
           <span>Grupa proizvoda</span>
           <select

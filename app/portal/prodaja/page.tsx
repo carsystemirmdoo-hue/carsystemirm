@@ -53,7 +53,7 @@ export default async function SalesPage({
       loadSalesBreakdown(user, filter, "kupci"),
       loadSalesLines(user, filter, SALES_LINES_DISPLAY),
       loadScopedCustomers(user),
-      loadSalespeople(),
+      seesAllCustomers(user) ? loadSalespeople() : Promise.resolve([]),
       loadProductGroups(),
     ]);
   // Filter po dodeli ima smisla samo ko vidi sve kupce.

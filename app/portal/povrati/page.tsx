@@ -63,7 +63,7 @@ export default async function ReturnsPage({
       loadSalesBreakdown(user, filter, "kupci"),
       loadSalesLines(user, { ...filter, onlyNegative: true }, SALES_LINES_DISPLAY),
       loadScopedCustomers(user),
-      loadSalespeople(),
+      seesAllCustomers(user) ? loadSalespeople() : Promise.resolve([]),
       loadProductGroups(),
     ]);
   // Filter po dodeli ima smisla samo ko vidi sve kupce.

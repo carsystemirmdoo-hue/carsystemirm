@@ -111,8 +111,8 @@ export async function createPriceRequest(
           ${product.slug}, ${variantId}, ${product.name}, ${variantLabel}, ${articleId}::uuid, ${quantity}, ${note})
         RETURNING id`)),
     ];
-    // Kancelarija saznaje za upit i kada lista nije otvorena (B3); neuspeh ne obara upit.
-    await notifyPriceRequestSubmitted({ requestId: row.id, requestNumber, customerName: session.customerName, productName: variantLabel ? `${product.name} — ${variantLabel}` : product.name });
+    // Kancelarija i komercijalista kupca saznaju za upit i kada lista nije otvorena (B3, 0059); neuspeh ne obara upit.
+    await notifyPriceRequestSubmitted({ requestId: row.id, customerId, kind, requestNumber, customerName: session.customerName, productName: variantLabel ? `${product.name} — ${variantLabel}` : product.name });
     return { ok: true, id: row.id, requestNumber, existing: false };
   } catch (error) {
     const e = error as { code?: string; cause?: { code?: string } };
@@ -194,7 +194,15 @@ export async function listPriceRequests(viewer: PortalUser): Promise<PriceReques
   return listRequests(scopeWhere(await resolveLedgerScope(viewer)));
 }
 
-export type PriceRequestChange = { ok: true; changed: boolean } | { ok: false; message: string };
+/** Broj zahteva koji još traže odgovor (novi i preuzeti), u istom opsegu kao radna lista. */
+export async function countOpenPriceRequests(viewer: PortalUser): Promise<number> {
+  const [row] = [...(await getDb().execute<{ n: number }>(sql`
+    SELECT count(*)::int AS n FROM customer_price_requests r
+     WHERE r.status IN ('open', 'in_progress') AND ${scopeWhere(await resolveLedgerScope(viewer))}`))];
+  return Number(row?.n ?? 0);
+}
+
+export type PriceRequestChange ={ ok: true; changed: boolean } | { ok: false; message: string };
 
 const ALLOWED: Record<string, string[]> = {
   in_progress: ["open"],
@@ -216,19 +224,28 @@ export async function changePriceRequest(
   const db = getDb();
   return db.transaction(async (tx) => {
     const [r] = [
-      ...(await tx.execute<{ id: string; status: string; request_number: string }>(sql`
-        SELECT r.id, r.status::text AS status, r.request_number FROM customer_price_requests r
+      ...(await tx.execute<{ id: string; status: string; request_number: string; answer: string | null }>(sql`
+        SELECT r.id, r.status::text AS status, r.request_number, r.answer FROM customer_price_requests r
          WHERE r.id = ${id}::uuid AND ${scopeWhere(scope)} FOR UPDATE`)),
     ];
     if (!r) return { ok: false as const, message: "Zahtev ne postoji." };
     if (r.status === to) return { ok: true as const, changed: false };
     if (!ALLOWED[to]?.includes(r.status)) return { ok: false as const, message: "Ovaj korak nije dozvoljen u trenutnom stanju." };
+    /*
+     * Zatvaranje bez ijednog odgovora: kupac je u „Upitima" video samo
+     * „Zatvoren", bez reči zašto. Zato se tada traži kratko objašnjenje, koje
+     * kupac vidi kao odgovor. Već odgovoren upit se zatvara bez teksta.
+     */
+    const closesUnanswered = to === "closed" && !(r.answer ?? "").trim();
+    if (closesUnanswered && text.length < 5) {
+      return { ok: false as const, message: "Upit nije odgovoren: napišite kupcu kratko zašto se zatvara (najmanje 5 znakova)." };
+    }
     await tx.execute(sql`
       UPDATE customer_price_requests SET
         status = ${to}::price_request_status,
         handled_by = ${viewer.id},
         taken_at = COALESCE(taken_at, now()),
-        answer = CASE WHEN ${to} = 'answered' THEN ${text} ELSE answer END,
+        answer = CASE WHEN ${to} = 'answered' OR ${closesUnanswered} THEN ${text} ELSE answer END,
         answered_at = CASE WHEN ${to} = 'answered' THEN now() ELSE answered_at END,
         closed_at = CASE WHEN ${to} = 'closed' THEN now() ELSE closed_at END,
         updated_at = now()

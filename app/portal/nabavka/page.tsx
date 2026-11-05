@@ -22,10 +22,9 @@ export default async function Page() {
         title="Ekran čeka izvor podataka"
         summary="Preporuka se računa iz neto potrošnje podeljene brojem dana kada je artikal bio dostupan — dani bez zalihe se ne računaju kao dani bez tražnje. Bez stanja i istorije dostupnosti prikazuje se „Nedovoljno podataka za pouzdanu preporuku“."
         requires={[
-          "Izvor stanja zaliha — fakture ga ne sadrže, potreban je poseban uvoz.",
-          "Uvoz faktura iz BiznisSoft izvoza — bez njega nema nijednog prodajnog podatka.",
+          "Istorija dana bez zalihe — stanje se već uvozi (Uvoz lagera), ali samo kao trenutni snimak, pa se ne zna koliko dana artikla nije bilo.",
         ]}
-        availability="Dostupno nakon uvoza podataka o zalihama"
+        availability="Dostupno kada se prikupi istorija stanja zaliha"
       />
     </>
   );

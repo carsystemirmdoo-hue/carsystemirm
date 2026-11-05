@@ -4,7 +4,8 @@ import { getDb } from "@/db/client";
 import { articles, customerGroups } from "@/db/schema";
 import { can } from "@/lib/authz/permissions.mjs";
 import { requireCapability } from "@/lib/authz/session";
-import { listPriceRules } from "@/lib/pricing/rule-service";
+import { ARTICLE_OPTION_LIMIT, countPriceRules, listPriceRules } from "@/lib/pricing/rule-service";
+import { quantity } from "@/lib/ordering/panelFormat.mjs";
 import {
   listScopedCustomers,
   resolvePricingScope,
@@ -29,7 +30,7 @@ export default async function PriceRulesPage() {
    */
   const scope = await resolvePricingScope(user);
 
-  const [scopedCustomers, groups, articleRows, rules] = await Promise.all([
+  const [scopedCustomers, groups, articleRows, rules, totalRules] = await Promise.all([
     listScopedCustomers(user),
     db
       .select({ id: customerGroups.id, name: customerGroups.name })
@@ -45,8 +46,10 @@ export default async function PriceRulesPage() {
       })
       .from(articles)
       .orderBy(asc(articles.code))
-      .limit(1000),
+      // Ceo šifarnik: sa 1000 su artikli iza 1000. šifre (kopija: 1.459) bili nedostupni.
+      .limit(ARTICLE_OPTION_LIMIT),
     listPriceRules(scope, { limit: 200 }),
+    countPriceRules(scope),
   ]);
 
   const productGroups = [
@@ -102,7 +105,15 @@ export default async function PriceRulesPage() {
         />
       ) : null}
 
-      <RuleTable rows={rules} title={`Pravila (${rules.length})`} />
+      <RuleTable
+        rows={rules}
+        title={`Pravila (${quantity(totalRules)})`}
+        description={
+          rules.length < totalRules
+            ? `Prikazano najnovijih ${quantity(rules.length)}. Sva pravila, sa filterom po kupcu, su u Istoriji pravila.`
+            : undefined
+        }
+      />
     </>
   );
 }

@@ -3,9 +3,9 @@ import { PhaseNotice } from "@/components/portal/PhaseNotice";
 import { PageHeader } from "@/components/portal/PortalPrimitives";
 import { getDb } from "@/db/client";
 import { systemSettings } from "@/db/schema";
+import { can } from "@/lib/authz/permissions.mjs";
 import { requireCapability } from "@/lib/authz/session";
 import { ThresholdSettings } from "@/features/portal/ThresholdSettings";
-
 
 export const metadata = { title: "Administracija" };
 
@@ -15,7 +15,8 @@ const DEFAULTS = { t70: 70, t90: 90, t100: 100, tDelay: 15 };
 
 export default async function AdminPage() {
   const user = await requireCapability("view:admin", "/portal/admin");
-  const canManage = user.permissions.includes("pragovi");
+  // Po sposobnosti, kao i radnja (`settings:manage`): vlasniku je daje uloga, bez paketa „pragovi".
+  const canManage = can(user, "settings:manage");
 
   const rows = await getDb()
     .select({ value: systemSettings.value })
@@ -39,13 +40,12 @@ export default async function AdminPage() {
       <PhaseNotice
         icon="settings"
         title="Ostala konfiguracija stiže sa integracijama"
-        summary="Podešavanja konektora za fakture, BEX naloga i uvoza zaliha se otvaraju kada te integracije budu povezane. Do tada se ne prikazuju prazna polja koja ništa ne čuvaju."
+        summary="Podešavanja BEX naloga se otvaraju kada BEX bude povezan. Do tada se ne prikazuju prazna polja koja ništa ne čuvaju."
         requires={[
-          "Putanja i pristup folderu sa BiznisSoft izvozom.",
           "BEX pristupni podaci i odluka o test okruženju.",
-          "Izvor stanja zaliha.",
+          "Konektor za fakture se podešava na samom uređaju (Windows paket), a prati u Sinhronizaciji; lager se uvozi kroz Uvoz lagera.",
         ]}
-        availability="Dostupno nakon povezivanja BiznisSoft izvoza, BEX naloga i izvora zaliha"
+        availability="Dostupno nakon povezivanja BEX naloga"
       />
     </>
   );

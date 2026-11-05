@@ -1,9 +1,12 @@
 import { DateRangeField } from "@/components/portal/DateRangeField";
 import { PhaseNotice } from "@/components/portal/PhaseNotice";
+import { sortCustomersByName } from "@/lib/customers/customerListFilter.mjs";
 
 export interface FilterOptions {
   customers: { id: string; name: string }[];
   salespeople: { id: string; name: string }[];
+  /** Komercijalisti za filter po dodeli; prazno = filter se ne prikazuje (npr. komercijalista vidi samo svoje). */
+  reps?: { id: string; name: string }[];
   productGroups: string[];
 }
 
@@ -12,6 +15,7 @@ export interface AppliedFilter {
   to?: string;
   kupac?: string;
   komercijalista?: string;
+  zaduzen?: string;
   grupa?: string;
   prikaz?: string;
 }
@@ -51,7 +55,9 @@ export function SalesFilters({
   if (applied.kupac) exportParams.set("customerId", applied.kupac);
   if (applied.komercijalista)
     exportParams.set("salespersonId", applied.komercijalista);
+  if (applied.zaduzen) exportParams.set("assignedTo", applied.zaduzen);
   if (applied.grupa) exportParams.set("productGroup", applied.grupa);
+  const reps = options.reps ?? [];
 
   return (
     <section className="portal-panel">
@@ -66,13 +72,37 @@ export function SalesFilters({
           <span>Kupac</span>
           <select name="kupac" defaultValue={applied.kupac ?? ""}>
             <option value="">svi kupci</option>
-            {options.customers.map((customer) => (
+            {/* Isti redosled kao lista kupaca (bez vodećih navodnika). */}
+            {sortCustomersByName(options.customers).map((customer) => (
               <option key={customer.id} value={customer.id}>
                 {customer.name}
               </option>
             ))}
           </select>
         </label>
+        {reps.length > 0 ? (
+          <label>
+            <span>Zadužen komercijalista</span>
+            <select name="zaduzen" defaultValue={applied.zaduzen ?? ""} aria-describedby="filter-zaduzen-napomena">
+              <option value="">svi</option>
+              {reps.map((person) => (
+                <option key={person.id} value={person.id}>
+                  {person.name}
+                </option>
+              ))}
+              <option value="bez">bez komercijaliste</option>
+            </select>
+            <small id="filter-zaduzen-napomena">
+              Po današnjoj dodeli kupca: ceo promet tih kupaca, i iz perioda pre dodele.
+            </small>
+          </label>
+        ) : null}
+        {/*
+          * Polje koje ne može da vrati ništa se ne prikazuje: fakture iz uvoza
+          * ne nose komercijalistu, a filter po DODELI je „Zadužen komercijalista".
+          * Komercijalista (samo svoji kupci) dobija prazan spisak.
+          */}
+        {nemaKomercijaliste && !applied.komercijalista ? null : (
         <label>
           <span>Komercijalista</span>
           <select
@@ -97,6 +127,7 @@ export function SalesFilters({
             </small>
           ) : null}
         </label>
+        )}
         <label>
           <span>Grupa proizvoda</span>
           <select
@@ -166,7 +197,7 @@ export function NoInvoicesYet({ screen }: { screen: string }) {
       title={`${screen} čeka prvi uvoz faktura`}
       summary="Baza je spremna i ekran radi, ali još nije uvezena nijedna faktura. Uvezite fajl na ekranu Importi da bi se brojke popunile."
       requires={[
-        "Izvoz iz BiznisSoft-a u CSV formatu (tačka-zarez ili zarez kao razdvajač).",
+        "Izvoz iz BizniSoft-a u CSV formatu (tačka-zarez ili zarez kao razdvajač).",
         "Kolone: pib, kupac, broj_dokumenta, datum, vrsta_dokumenta, sifra_artikla, kolicina, cena, iznos_stavke.",
         "Dozvola za uvoz — ekran Importi.",
       ]}

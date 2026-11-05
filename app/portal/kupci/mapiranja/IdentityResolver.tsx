@@ -1,6 +1,6 @@
 "use client";
 
-import { useActionState, useState } from "react";
+import { useActionState, useEffect, useState } from "react";
 import { Badge, Field, PortalButton } from "@/components/portal/PortalPrimitives";
 import {
   resolveIdentityAction,
@@ -48,10 +48,31 @@ export function IdentityResolver({
 }) {
   const [state, formAction, pending] = useActionState(resolveIdentityAction, INITIAL);
   const [openId, setOpenId] = useState<string | null>(null);
+  const [mode, setMode] = useState("mapped");
+  /*
+   * Polja se drže u stanju: React posle slanja prazni nekontrolisan obrazac,
+   * pa bi posle greške (npr. pogrešan PIB) i razlog morao da se kuca ponovo.
+   */
+  const [draft, setDraft] = useState({ pib: "", name: "", city: "", reason: "", customerId: "" });
+  // Posle uspeha obrazac se zatvara; poruka ostaje iznad tabele.
+  useEffect(() => {
+    if (state.ok) setOpenId(null);
+  }, [state]);
+  const set = (key: keyof typeof draft) => (e: { target: { value: string } }) =>
+    setDraft((d) => ({ ...d, [key]: e.target.value }));
+  const openRow = rows.find((row) => row.id === openId) ?? null;
+  // Nov kupac samo za šifru bez kupca (nov partner iz BizniSofta).
+  const canCreate = openRow !== null && !openRow.customerId && (openRow.status === "unmapped" || openRow.status === "conflict");
 
   if (rows.length === 0) {
+    // Poruka o uspehu ostaje i kada je razrešena poslednja šifra u filteru.
     return (
       <section className="portal-panel">
+        {state.ok ? (
+          <p className="portal-login-hint" role="status">
+            {state.ok}
+          </p>
+        ) : null}
         <p>Za izabrani filter nema nijedne šifre partnera.</p>
       </section>
     );
@@ -123,7 +144,11 @@ export function IdentityResolver({
                   <td>
                     <PortalButton
                       variant="ghost"
-                      onClick={() => setOpenId(openId === row.id ? null : row.id)}
+                      onClick={() => {
+                        setOpenId(openId === row.id ? null : row.id);
+                        setMode("mapped");
+                        setDraft({ pib: "", name: row.sourceName ?? "", city: "", reason: "", customerId: "" });
+                      }}
                     >
                       {openId === row.id ? "Zatvorite" : "Razrešite"}
                     </PortalButton>
@@ -139,27 +164,47 @@ export function IdentityResolver({
         <form action={formAction} className="portal-form">
           <input type="hidden" name="id" value={openId} />
           <Field label="Stanje" required>
-            <select name="status" defaultValue="mapped" required>
+            <select name="status" value={mode} onChange={(e) => setMode(e.target.value)} required>
               <option value="mapped">Povežite sa kupcem</option>
+              {canCreate ? <option value="create">Otvorite novog kupca i povežite</option> : null}
               <option value="unmapped">Ostavite nepovezano</option>
               <option value="disabled">Isključite šifru</option>
             </select>
           </Field>
-          <Field
-            label="Kupac"
-            hint="Obavezno kada se šifra povezuje. Bira se sa spiska — naziv se ne kuca."
-          >
-            <select name="customerId" defaultValue="">
-              <option value="">— bez kupca —</option>
-              {customers.map((customer) => (
-                <option key={customer.id} value={customer.id}>
-                  {customer.name} · PIB {customer.pib}
-                </option>
-              ))}
-            </select>
-          </Field>
+          {mode === "create" && canCreate ? (
+            <>
+              <p className="portal-login-hint">
+                Za novog partnera iz BizniSofta koga u portalu još nema. PIB i naziv prepišite sa
+                kartice partnera u BizniSoftu — sistem ih ne pogađa. Ako kupac sa tim PIB-om već
+                postoji, povežite šifru sa njim.
+              </p>
+              <Field label="PIB" required hint="Domaći PIB, 9 cifara; proverava se kontrolna cifra.">
+                <input type="text" name="pib" inputMode="numeric" pattern="[0-9]{9}" maxLength={9} required value={draft.pib} onChange={set("pib")} />
+              </Field>
+              <Field label="Naziv kupca" required>
+                <input type="text" name="name" value={draft.name} onChange={set("name")} minLength={2} maxLength={200} required />
+              </Field>
+              <Field label="Mesto">
+                <input type="text" name="city" maxLength={120} value={draft.city} onChange={set("city")} />
+              </Field>
+            </>
+          ) : (
+            <Field
+              label="Kupac"
+              hint="Obavezno kada se šifra povezuje. Bira se sa spiska — naziv se ne kuca."
+            >
+              <select name="customerId" value={draft.customerId} onChange={set("customerId")}>
+                <option value="">— bez kupca —</option>
+                {customers.map((customer) => (
+                  <option key={customer.id} value={customer.id}>
+                    {customer.name} · PIB {customer.pib}
+                  </option>
+                ))}
+              </select>
+            </Field>
+          )}
           <Field label="Razlog" required hint="Upisuje se u trag revizije.">
-            <input type="text" name="reason" minLength={3} maxLength={500} required />
+            <input type="text" name="reason" minLength={3} maxLength={500} required value={draft.reason} onChange={set("reason")} />
           </Field>
           <PortalButton type="submit" disabled={pending}>
             {pending ? "Čuvanje…" : "Sačuvajte razrešenje"}

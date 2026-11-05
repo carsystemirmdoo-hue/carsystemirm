@@ -505,3 +505,19 @@ test("audit prijave ne nosi lozinku ni token", async (t) => {
     assert.ok(!/lozinka-\d/.test(row.payload), "lozinka je u auditu");
   }
 });
+
+test("za predaju stoji samo najnoviji poziv, i nestaje kada kupac aktivira nalog", async (t) => {
+  if (guard(t)) return;
+  const { issueInvitation, activateWithInvitation, listPendingOutbox } = await import(
+    "@/lib/customers/invitation-service"
+  );
+  const id = await verifiedContact();
+  await issueInvitation({ accountId: id, reason: "QA poziv 1" }, actor());
+  const drugi = await issueInvitation({ accountId: id, reason: "QA poziv 2" }, actor());
+  const viewer = { id: actor().id, role: "gazda" as const, permissions: [] as string[] };
+  const mine = async () => (await listPendingOutbox(viewer)).filter((r) => r.accountId === id);
+
+  assert.equal((await mine()).length, 1, "zamenjen poziv (mrtav link) i dalje čeka predaju");
+  assert.equal((await activateWithInvitation({ token: drugi.token, password: "lozinka-123456" })).ok, true);
+  assert.equal((await mine()).length, 0, "aktiviran nalog i dalje ima poziv za predaju");
+});

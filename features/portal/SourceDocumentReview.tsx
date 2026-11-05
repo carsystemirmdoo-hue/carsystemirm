@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useActionState, useState } from "react";
 import {
   closeReviewAction,
@@ -33,6 +34,10 @@ export type DocumentRow = {
   conflictReason: string | null;
   manualReview: string;
   posted: boolean;
+  /** Proknjižena faktura (za vezu na detalj); `null` dok dokument nije proknjižen. */
+  invoiceId: string | null;
+  businessDocumentNumber: string | null;
+  customerName: string | null;
   /** Storno: `waiting_original` | `applied` | `review`; `null` za ostale dokumente. */
   stornoStatus?: string | null;
   /** Original isključen iz prometa primenjenim stornom. */
@@ -42,9 +47,11 @@ export type DocumentRow = {
 /**
  * Pregled uvezenih izvornih dokumenata.
  *
- * Prikazuje se otisak, ne ime fajla i ne sadržaj dokumenta. Ime fajla ume da
- * nosi naziv kupca i broj računa, a ovaj ekran gleda i neko ko taj podatak ne
- * sme da vidi — pa se ni ne prenosi na klijent.
+ * Ime fajla se ne prikazuje (ume da nosi putanju i proizvoljan tekst sa
+ * računara). Broj računa i kupac se prikazuju (odluka vlasnika 2026-11-04):
+ * ekran otvaraju samo uloge koje ionako vide sve kupce i sve fakture
+ * (`view:importi` — Vlasnik, kancelarija, paket „analitika“ uz
+ * `customers:view_all`), a bez broja kancelarija ne može da nađe dokument.
  */
 const STORNO_STATUS_LABELS: Record<string, string> = {
   waiting_original: "čeka original",
@@ -55,9 +62,12 @@ const STORNO_STATUS_LABELS: Record<string, string> = {
 export function SourceDocumentReview({
   rows,
   canManage,
+  canOpenInvoice = false,
 }: {
   rows: DocumentRow[];
   canManage: boolean;
+  /** `view:prodaja`: broj vodi na detalj fakture. */
+  canOpenInvoice?: boolean;
 }) {
   const [revisionState, revisionAction, revisionPending] = useActionState(
     resolveRevisionAction,
@@ -98,7 +108,7 @@ export function SourceDocumentReview({
         <table className="portal-table">
           <thead>
             <tr>
-              <th scope="col">Otisak</th>
+              <th scope="col">Dokument</th>
               <th scope="col">Izdavalac / partner</th>
               <th scope="col">Datum</th>
               <th scope="col">Strana</th>
@@ -114,10 +124,24 @@ export function SourceDocumentReview({
             {rows.map((row) => (
               <tr key={row.id} data-active={openId === row.id}>
                 <th scope="row">
-                  <code>{row.fileHash.slice(0, 12)}…</code>
+                  {row.businessDocumentNumber ? (
+                    canOpenInvoice && row.invoiceId ? (
+                      <Link href={`/portal/prodaja/faktura/${row.invoiceId}`}>{row.businessDocumentNumber}</Link>
+                    ) : (
+                      <span>{row.businessDocumentNumber}</span>
+                    )
+                  ) : (
+                    <span>bez broja</span>
+                  )}
+                  <small>
+                    <code>{row.fileHash.slice(0, 12)}…</code>
+                  </small>
                 </th>
                 <td>
-                  {row.issuerCode} / {row.externalPartnerCode ?? "—"}
+                  {row.customerName ?? <span>šifra nije povezana</span>}
+                  <small>
+                    {row.issuerCode} / {row.externalPartnerCode ?? "—"}
+                  </small>
                 </td>
                 <td className="portal-nowrap">{row.documentDate ? dmy(row.documentDate.slice(0, 10)) : "—"}</td>
                 <td className="portal-table-number">{row.pageCount}</td>

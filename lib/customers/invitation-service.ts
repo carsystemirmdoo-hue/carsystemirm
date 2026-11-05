@@ -572,9 +572,23 @@ export async function listPendingOutbox(viewer: Pick<PortalUser, "id" | "role" |
     )
     .innerJoin(customers, eq(customers.id, customerUsers.customerId))
     .where(
-      scope === null
-        ? eq(customerMessageOutbox.status, "pending")
-        : and(eq(customerMessageOutbox.status, "pending"), inArray(customerUsers.customerId, scope)),
+      and(
+        eq(customerMessageOutbox.status, "pending"),
+        scope === null ? undefined : inArray(customerUsers.customerId, scope),
+        /*
+         * Samo NAJNOVIJI poziv istog naloga: novi poziv poništava stari token,
+         * pa bi stari red bio mrtav link koji neko može da preda kupcu. Poziv
+         * za nalog koji je kupac već aktivirao više nema šta da se preda.
+         * Pune kolone — u podupitu bi kratko ime vezalo `o2`.
+         */
+        sql`NOT EXISTS (
+          SELECT 1 FROM customer_message_outbox o2
+           WHERE o2.customer_user_id = customer_message_outbox.customer_user_id
+             AND o2.kind = customer_message_outbox.kind
+             AND o2.id > customer_message_outbox.id
+        )`,
+        sql`NOT (customer_message_outbox.kind = 'invitation' AND customer_users.status = 'active')`,
+      ),
     )
     .orderBy(desc(customerMessageOutbox.createdAt))
     .limit(200);

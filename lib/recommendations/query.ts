@@ -65,6 +65,12 @@ export type RecommendationFilter = {
    */
   customerStatus?: "aktivni" | "neaktivni" | "svi";
   limit?: number;
+  /**
+   * `kasnjenje` (podrazumevano): najveće kašnjenje prvo — „koga da zovem prvog".
+   * `skorije`: najskorija kupovina prvo — za privremene i uspavane, gde bi
+   * kašnjenje na vrh izbacilo kupovine od pre više godina.
+   */
+  order?: "kasnjenje" | "skorije";
 };
 
 function uOpsegu(scope: LedgerScope): SQL {
@@ -170,6 +176,7 @@ export async function recommendationRows(
       JOIN customers c ON c.id = r.customer_id
      WHERE ${uslovi(scope, filter)}
      ORDER BY
+       ${filter.order === "skorije" ? sql`r.last_purchase_on DESC,` : sql``}
        /*
         * Redosled odgovara pitanju „koga da zovem prvog".
         *

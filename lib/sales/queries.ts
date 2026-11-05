@@ -23,6 +23,8 @@ export interface SalesFilter {
   to?: string | null;
   customerId?: string | null;
   salespersonId?: string | null;
+  /** Dodela kupca: ID komercijaliste ili `"bez"` (kupci bez dodele). */
+  assignedTo?: string | null;
   articleId?: string | null;
   productGroup?: string | null;
   /** Samo negativne stavke (povrati, korekcije, nerazvrstano) — za listu na ekranu Povrati. */
@@ -122,6 +124,10 @@ function filterConditions(scope: string[] | null, filter: SalesFilter): SQL[] {
   if (filter.customerId) conditions.push(eq(invoices.customerId, filter.customerId));
   if (filter.salespersonId)
     conditions.push(eq(invoices.salespersonId, filter.salespersonId));
+  if (filter.assignedTo === "bez")
+    conditions.push(sql`NOT EXISTS (SELECT 1 FROM customer_assignments ca WHERE ca.customer_id = ${invoices.customerId})`);
+  else if (filter.assignedTo)
+    conditions.push(sql`EXISTS (SELECT 1 FROM customer_assignments ca WHERE ca.customer_id = ${invoices.customerId} AND ca.user_id = ${filter.assignedTo}::uuid)`);
   if (filter.articleId) conditions.push(eq(invoiceLines.articleId, filter.articleId));
   if (filter.productGroup)
     conditions.push(eq(articles.productGroup, filter.productGroup));
@@ -154,7 +160,11 @@ export interface SalesBreakdownRow extends SalesSummary {
   customerId: string | null;
 }
 
-export type SalesBreakdownView = "kupci" | "komercijalisti" | "artikli" | "grupe";
+export type SalesBreakdownView = "kupci" | "komercijalisti" | "artikli" | "grupe" | TimeView;
+
+/** Prikazi kroz vreme (datum izdavanja fakture); ređaju se hronološki, ne po iznosu. */
+export type TimeView = "dani" | "meseci" | "godine";
+export const TIME_VIEWS: readonly TimeView[] = ["dani", "meseci", "godine"];
 
 const listaVrsta = (vrste: readonly string[]) =>
   sql.join(vrste.map((v) => sql`${v}`), sql`, `);
@@ -242,6 +252,11 @@ export async function loadSalesSummary(
  * Zbirovi po kupcu, komercijalisti, artiklu ili grupi — nad celim skupom.
  * Redosled: neto opadajuće (kao `summarizeBy`), pa naziv.
  */
+/** Imena komercijalista kojima je kupac fakture dodeljen, abecedno. */
+const DODELA_KUPCA = sql`(SELECT string_agg(u.name, ', ' ORDER BY u.name)
+   FROM customer_assignments ca JOIN users u ON u.id = ca.user_id
+  WHERE ca.customer_id = customers.id)`;
+
 export async function loadSalesBreakdown(
   user: PortalUser,
   filter: SalesFilter,
@@ -260,9 +275,16 @@ export async function loadSalesBreakdown(
       label: sql<string>`${customers.name}`,
       customerId: sql<string | null>`${customers.id}::text`,
     },
+    /*
+     * Komercijalista sa fakture, a kada ga faktura nema (uvoz iz BizniSofta ga
+     * danas ne nosi) — komercijalisti kojima je kupac DODELJEN. Kupac sa dva
+     * komercijaliste ide u jednu grupu („A, B"), pa se promet ne broji dvaput i
+     * zbir ostaje promet firme. Bez ovoga je sve stajalo pod „Bez komercijaliste".
+     * Pune kolone (`customers.id`): u podupitu bi kratko ime vezalo `ca`.
+     */
     komercijalisti: {
-      key: sql<string>`coalesce(${salespeople.id}::text, '—')`,
-      label: sql<string>`coalesce(${salespeople.name}, 'Bez komercijaliste')`,
+      key: sql<string>`coalesce(${salespeople.name}, ${DODELA_KUPCA}, 'Bez dodele')`,
+      label: sql<string>`coalesce(${salespeople.name}, ${DODELA_KUPCA}, 'Bez dodele')`,
       customerId: sql<string | null>`NULL::text`,
     },
     artikli: {
@@ -273,6 +295,22 @@ export async function loadSalesBreakdown(
     grupe: {
       key: sql<string>`coalesce(${articles.productGroup}, 'Bez grupe')`,
       label: sql<string>`coalesce(${articles.productGroup}, 'Bez grupe')`,
+      customerId: sql<string | null>`NULL::text`,
+    },
+    // Ključ je ISO (sortira se hronološki), oznaka u obliku ostatka portala.
+    dani: {
+      key: sql<string>`to_char(${invoices.issuedOn}, 'YYYY-MM-DD')`,
+      label: sql<string>`to_char(${invoices.issuedOn}, 'DD/MM/YYYY')`,
+      customerId: sql<string | null>`NULL::text`,
+    },
+    meseci: {
+      key: sql<string>`to_char(${invoices.issuedOn}, 'YYYY-MM')`,
+      label: sql<string>`to_char(${invoices.issuedOn}, 'MM/YYYY')`,
+      customerId: sql<string | null>`NULL::text`,
+    },
+    godine: {
+      key: sql<string>`to_char(${invoices.issuedOn}, 'YYYY')`,
+      label: sql<string>`to_char(${invoices.issuedOn}, 'YYYY')`,
       customerId: sql<string | null>`NULL::text`,
     },
   };
@@ -287,7 +325,11 @@ export async function loadSalesBreakdown(
     .leftJoin(articles, eq(articles.id, invoiceLines.articleId))
     .where(and(...conditions))
     .groupBy(sql`1, 2, 3`)
-    .orderBy(sql`round(coalesce(sum(${invoiceLines.lineAmount}), 0), 2) DESC`, sql`2`);
+    .orderBy(
+      ...((TIME_VIEWS as readonly string[]).includes(view)
+        ? [sql`1 DESC`]
+        : [sql`round(coalesce(sum(${invoiceLines.lineAmount}), 0), 2) DESC`, sql`2`]),
+    );
 
   return rows.map((row) => ({
     key: String(row.key),

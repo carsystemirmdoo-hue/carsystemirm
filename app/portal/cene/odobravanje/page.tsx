@@ -2,11 +2,12 @@ import { percent, quantity } from "@/lib/ordering/panelFormat.mjs";
 import { PageHeader } from "@/components/portal/PortalPrimitives";
 import { can } from "@/lib/authz/permissions.mjs";
 import { requireCapability } from "@/lib/authz/session";
-import { listPriceRules } from "@/lib/pricing/rule-service";
+import { countPriceRules, listPriceRules } from "@/lib/pricing/rule-service";
 import { resolvePricingScope } from "@/lib/pricing/pricing-scope";
 import { pendingBatches } from "@/lib/pricing/rebate-coverage-service";
 import { RuleTable } from "../RuleTable";
 import { BatchDecision } from "./BatchDecision";
+import type { PriceRuleStatus } from "@/db/schema";
 
 export const dynamic = "force-dynamic";
 
@@ -33,12 +34,32 @@ export default async function PriceApprovalPage() {
   const canDecide = can(user, "prices:approve") || can(user, "prices:apply");
   const scope = await resolvePricingScope(user);
 
-  const [waiting, approved, recorded, failed] = await Promise.all([
+  /*
+   * „Odobreno" se deli na dve grupe. Pravila koja traže upis u BizniSoft su
+   * posao kancelarije; pravila koja važe SAMO u portalu (serija iz istorije
+   * faktura, `biznisoft_entry_required = false`) nikad se ne upisuju. Ranije su
+   * bila zajedno pod „čeka upis", i to samo prvih 200 od 2.948 (kopija 8. 10.),
+   * pa se pravo čekanje upisa nije videlo.
+   */
+  const approvedStatus = { statuses: ["approved_pending_biznisoft"] as PriceRuleStatus[] };
+  const [waiting, approved, portalOnly, recorded, failed, counts] = await Promise.all([
     listPriceRules(scope, { statuses: ["pending_approval"] }),
-    listPriceRules(scope, { statuses: ["approved_pending_biznisoft"] }),
+    listPriceRules(scope, { ...approvedStatus, biznisoftEntryRequired: true }),
+    listPriceRules(scope, { ...approvedStatus, biznisoftEntryRequired: false, limit: 100 }),
     listPriceRules(scope, { statuses: ["office_recorded"] }),
     listPriceRules(scope, { statuses: ["reconciliation_failed"] }),
+    Promise.all([
+      countPriceRules(scope, { statuses: ["pending_approval"] }),
+      countPriceRules(scope, { ...approvedStatus, biznisoftEntryRequired: true }),
+      countPriceRules(scope, { ...approvedStatus, biznisoftEntryRequired: false }),
+      countPriceRules(scope, { statuses: ["office_recorded"] }),
+      countPriceRules(scope, { statuses: ["reconciliation_failed"] }),
+    ]),
   ]);
+  const [nWaiting, nApproved, nPortalOnly, nRecorded, nFailed] = counts;
+  /** „(N)" ili „(prikazano X od N)" kada je lista skraćena. */
+  const broj = (shown: number, total: number) =>
+    shown < total ? `prikazano ${quantity(shown)} od ${quantity(total)}` : quantity(total);
   const batches = await pendingBatches(user);
 
   return (
@@ -84,29 +105,47 @@ export default async function PriceApprovalPage() {
         </section>
       ) : null}
 
-      <RuleTable rows={waiting} showActions={canDecide} title={`Čeka odobrenje (${waiting.length})`} />
+      <RuleTable rows={waiting} showActions={canDecide} title={`Čeka odobrenje (${broj(waiting.length, nWaiting)})`} />
 
       <RuleTable
         rows={approved}
         showActions={canDecide}
         accent="warning"
-        title={`Odobreno — čeka upis u BizniSoft (${approved.length})`}
+        title={`Odobreno — čeka upis u BizniSoft (${broj(approved.length, nApproved)})`}
         description="Ova pravila već učestvuju u odlučivanju o ceni, ali NISU potvrđena kao fakturisani uslov. Dok upis ne bude evidentiran, cena nije garantovana."
       />
+
+      {nPortalOnly > 0 ? (
+        <details className="portal-panel cs-sugg-more">
+          <summary>
+            Odobreno — važi samo u portalu ({quantity(nPortalOnly)}) · ne upisuje se u BizniSoft
+          </summary>
+          <RuleTable
+            rows={portalOnly}
+            showActions={canDecide}
+            description={
+              (portalOnly.length < nPortalOnly
+                ? `Prikazano najnovijih ${quantity(portalOnly.length)} od ${quantity(nPortalOnly)}; sva pravila sa filterom po kupcu su u Istoriji pravila. `
+                : "") +
+              "Pravila iz serija (npr. rabati iz istorije faktura) koja važe za cenu u portalu, a nisu nalog za unos u BizniSoft."
+            }
+          />
+        </details>
+      ) : null}
 
       <RuleTable
         rows={recorded}
         showActions={canDecide}
-        title={`Evidentiran unos — čeka usaglašavanje sa fakturom (${recorded.length})`}
+        title={`Evidentiran unos — čeka usaglašavanje sa fakturom (${broj(recorded.length, nRecorded)})`}
         description="Kancelarija je evidentirala unos u BizniSoft. To je tvrdnja čoveka, ne dokaz — potvrdu daje tek usaglašavanje sa fakturom."
       />
 
-      {failed.length > 0 ? (
+      {nFailed > 0 ? (
         <RuleTable
           rows={failed}
           showActions={canDecide}
           accent="danger"
-          title={`Usaglašavanje nije uspelo (${failed.length})`}
+          title={`Usaglašavanje nije uspelo (${broj(failed.length, nFailed)})`}
           description="Odobreno u portalu, a upis u BizniSoft nije potvrđen. Ovo je jedino stanje u kome portal i knjigovodstvo tvrde različite stvari."
         />
       ) : null}

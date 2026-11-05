@@ -9,6 +9,7 @@ import {
 } from "@/db/schema";
 import { AUDIT_ACTIONS, recordAudit } from "@/lib/audit/record";
 import { notify } from "@/lib/notifications/notification-service";
+import { classifyPib } from "@/lib/partners/pib.mjs";
 import {
   decideIdentityWrite,
   ExternalIdentityError,
@@ -286,6 +287,133 @@ export async function resolveExternalIdentifier(
       },
       tx,
     );
+  });
+}
+
+/**
+ * Novi partner iz BizniSofta → nov kupac u portalu, i šifra povezana sa njim.
+ *
+ * Dok je registar partnera isključen (`FEATURE_PARTNER_REGISTRY`), šifra
+ * novog partnera nije imala s kim da se poveže: „Razrešite" nudi samo
+ * postojeće kupce, pa bi prva faktura novog kupca zauvek čekala. Vlasnik
+ * ovde prepisuje PIB i naziv sa kartice partnera; sistem ne pogađa ništa.
+ *
+ * Pravila:
+ *  - šifra mora biti bez kupca (nepovezana ili u konfliktu);
+ *  - PIB mora biti ispravan domaći (kontrolna cifra) — PIB je jedinstven ključ
+ *    kupca, pa se kupac sa istim PIB-om ne pravi drugi put: tada se šifra
+ *    povezuje sa postojećim („Povežite sa kupcem");
+ *  - kupac, veza i trag nastaju u JEDNOJ transakciji;
+ *  - PIB ne ulazi u trag (vidi `auditEntry.mjs`).
+ */
+export async function openCustomerForIdentifier(
+  input: { id: string; pib: string; name: string; city?: string | null; reason: string },
+  actor: IdentityActor,
+): Promise<{ customerId: string }> {
+  const reason = input.reason.trim();
+  if (reason.length < 3) {
+    throw new ExternalIdentityError("Razrešenje traži razlog (najmanje 3 znaka).", "missing_reason");
+  }
+  const name = input.name.trim().replace(/\s+/g, " ");
+  if (name.length < 2 || name.length > 200) {
+    throw new ExternalIdentityError("Unesite naziv kupca (2–200 znakova).", "bad_name");
+  }
+  const pib = classifyPib(input.pib);
+  if (pib.status !== "valid" || !pib.value) {
+    throw new ExternalIdentityError(
+      pib.status === "invalid_checksum"
+        ? "PIB nije ispravan (kontrolna cifra se ne slaže). Prepišite ga sa kartice partnera."
+        : "Unesite domaći PIB od 9 cifara.",
+      "bad_pib",
+    );
+  }
+  const pibValue: string = pib.value;
+  const city = input.city?.trim() ? input.city.trim().slice(0, 120) : null;
+
+  const db = getDb();
+  return db.transaction(async (tx) => {
+    const [row] = await tx
+      .select({
+        id: customerExternalIdentifiers.id,
+        status: customerExternalIdentifiers.status,
+        customerId: customerExternalIdentifiers.customerId,
+        sourceSystem: customerExternalIdentifiers.sourceSystem,
+        issuerCode: customerExternalIdentifiers.issuerCode,
+        externalPartnerCode: customerExternalIdentifiers.externalPartnerCode,
+      })
+      .from(customerExternalIdentifiers)
+      .where(eq(customerExternalIdentifiers.id, input.id))
+      .for("update")
+      .limit(1);
+    if (!row) throw new ExternalIdentityError("Šifra partnera ne postoji.", "not_found");
+    if (row.customerId || (row.status !== "unmapped" && row.status !== "conflict")) {
+      throw new ExternalIdentityError(
+        "Šifra je već povezana ili isključena — nov kupac se otvara samo za nepovezanu šifru.",
+        "not_open",
+      );
+    }
+
+    const [existing] = await tx
+      .select({ name: customers.name })
+      .from(customers)
+      .where(eq(customers.pib, pibValue))
+      .limit(1);
+    if (existing) {
+      throw new ExternalIdentityError(
+        `Kupac sa ovim PIB-om već postoji („${existing.name}"). Izaberite „Povežite sa kupcem".`,
+        "pib_exists",
+      );
+    }
+
+    const [created] = await tx
+      .insert(customers)
+      .values({ pib: pibValue, name, city })
+      .returning({ id: customers.id });
+
+    await tx
+      .update(customerExternalIdentifiers)
+      .set({
+        customerId: created.id,
+        status: "mapped",
+        note: reason,
+        conflictReason: null,
+        verifiedBy: actor.id,
+        verifiedAt: sql`now()`,
+        updatedAt: sql`now()`,
+      })
+      .where(eq(customerExternalIdentifiers.id, row.id));
+
+    const correlationId = randomUUID();
+    const label = `${row.sourceSystem}/${row.issuerCode}/${row.externalPartnerCode}`;
+    await recordAudit(
+      {
+        actor,
+        action: AUDIT_ACTIONS.customerOpenedFromIdentifier,
+        entityType: "Kupac",
+        entityId: created.id,
+        entityLabel: `${name} · ${label}`,
+        before: null,
+        after: { naziv: name, grad: city, sifra: label },
+        reason,
+        correlationId,
+      },
+      tx,
+    );
+    await recordAudit(
+      {
+        actor,
+        action: AUDIT_ACTIONS.externalIdentifierResolved,
+        entityType: "Šifra partnera",
+        entityId: row.id,
+        entityLabel: label,
+        before: { status: row.status, customerId: null },
+        after: { status: "mapped", customerId: created.id },
+        reason,
+        correlationId,
+      },
+      tx,
+    );
+    return { customerId: created.id };
   });
 }
 

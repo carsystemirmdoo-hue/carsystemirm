@@ -338,23 +338,25 @@ test("office_recorded ucestvuje u ceni, ali preview ga NE prijavljuje kao potvrd
   assert.equal(preview.officeRecorded, true);
 });
 
-test("komercijalista ne moze ni odobriti ni potvrditi", async (t) => {
+test("komercijalista odobrava svom kupcu, ali ne potvrđuje upis u BizniSoft", async (t) => {
   if (guard(t)) return;
   const { transitionPriceRule } = await import("@/lib/pricing/rule-service");
   const created = await freshProposal();
+  // Od 2026-11-09 uloga komercijaliste odobrava (i sopstveni predlog) za SVOG kupca.
+  await transitionPriceRule({ ruleId: created.id, to: "approved_pending_biznisoft" }, asPortalUser(fixture.rep, []));
 
   await assert.rejects(
     () =>
       transitionPriceRule(
-        { ruleId: created.id, to: "approved_pending_biznisoft" },
-        asPortalUser(fixture.rep, ["cene_predlog"]),
+        { ruleId: created.id, to: "office_recorded", officeRecordNote: "upisano u BizniSoft" },
+        asPortalUser(fixture.rep, []),
       ),
-    /prices:approve/,
+    /prices:apply/,
   );
 
   const [rule] = await db.sql<{ status: string }[]>`
     SELECT status FROM price_rules WHERE id = ${created.id}`;
-  assert.equal(rule.status, "pending_approval", "stanje se promenilo uprkos odbijanju");
+  assert.equal(rule.status, "approved_pending_biznisoft", "evidenciju upisa i dalje radi samo kancelarija");
 });
 
 test("odbijanje trazi razlog i belezi ga", async (t) => {

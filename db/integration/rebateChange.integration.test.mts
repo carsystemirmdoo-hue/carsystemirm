@@ -112,7 +112,7 @@ after(async () => {
 
 const user = async (k: string) => (await (await import("@/lib/authz/user-repository")).loadPortalUser(ids[k]))!;
 
-test("dozvole: svoj kupac, analitika za sve, kancelarija ne predlaže, direktno odobrava samo gazda", async (t) => {
+test("dozvole: svoj kupac, analitika samo za pregled, kancelarija ne predlaže", async (t) => {
   if (guard(t)) return;
   const { previewRebateChange, submitRebateChange } = await import("@/lib/pricing/rebate-change-service");
   const input = { customerId: otherCustomerId, mode: "artikli" as const, articleIds: [art.A], newPercent: 41, effectiveFrom: plus(TODAY, 1) };
@@ -120,7 +120,9 @@ test("dozvole: svoj kupac, analitika za sve, kancelarija ne predlaže, direktno 
   const p = await previewRebateChange(await user("miroslav"), input);
   assert.equal(p.rows[0].action, "novo");
   await assert.rejects(async () => submitRebateChange(await user("tamara"), { ...input, reason: "pokušaj kancelarije", expected: [{ articleId: art.A, replacesRuleId: null }] }), /pravo/);
-  await assert.rejects(async () => submitRebateChange(await user("miroslav"), { ...input, reason: "direktno bez prava gazde", approveNow: true, expected: [{ articleId: art.A, replacesRuleId: null }] }), /pravo da direktno odobrite/);
+  // Analitika otvara PREGLED svih kupaca, ne i promenu rabata tuđem kupcu (2026-11-09).
+  await assert.rejects(async () => submitRebateChange(await user("miroslav"), { ...input, reason: "tuđi kupac preko analitike", approveNow: true, expected: [{ articleId: art.A, replacesRuleId: null }] }), /opsegu/);
+  await assert.rejects(async () => submitRebateChange(await user("miroslav"), { ...input, reason: "tuđi kupac preko analitike", expected: [{ articleId: art.A, replacesRuleId: null }] }), /opsegu/);
 });
 
 test("zamena: predlog ne menja cenu; posle odobrenja staro pravilo se zatvara, bez sukoba; ponovljeno slanje se odbija", async (t) => {

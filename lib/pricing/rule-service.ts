@@ -14,7 +14,7 @@ import {
 } from "@/db/schema";
 import { AUDIT_ACTIONS, recordAudit } from "@/lib/audit/record";
 import { resolveCapabilities } from "@/lib/authz/permissions.mjs";
-import { canAccessCustomer } from "@/lib/authz/scope.mjs";
+import { canDecidePricesFor, decidesPricesForAllCustomers } from "@/lib/authz/scope.mjs";
 import { loadAssignedCustomerIds, type PortalUser } from "@/lib/authz/user-repository";
 import { notify } from "@/lib/notifications/notification-service";
 import { ACTIVE_RULE_STATUSES } from "@/lib/pricing/evaluation-service";
@@ -581,7 +581,7 @@ async function assertScopeAllowed(
 ) {
   if (draft.customerScope === "customer") {
     const assigned = await loadAssignedCustomerIds(actor.id);
-    if (!canAccessCustomer(actor, assigned, draft.customerId!)) {
+    if (!canDecidePricesFor(actor, assigned, draft.customerId!)) {
       throw new WorkflowError(
         "Kupac nije u Vašem opsegu — predlog nije moguć.",
         "out_of_scope",
@@ -590,7 +590,7 @@ async function assertScopeAllowed(
     return;
   }
 
-  if (!capabilities.has("customers:view_all")) {
+  if (!capabilities.has("customers:view_all") || !decidesPricesForAllCustomers(actor)) {
     throw new WorkflowError(
       "Pravilo za grupu kupaca ili za sve kupce sme da predloži samo onaj ko vidi sve kupce.",
       "out_of_scope",

@@ -140,6 +140,23 @@ export async function notify(
 }
 
 /**
+ * Sposobnosti po kojima korisnik VIDI obaveštenja.
+ *
+ * Obaveštenja o odlukama o cenama (`prices:propose|approve|audit`) nisu vezana
+ * za kupca: nose naziv kupca i opseg pravila. Od 2026-11-09 te sposobnosti ima
+ * SVAKI komercijalista (rabati svojih kupaca), pa bi ih po sposobnosti video i
+ * o tuđim kupcima. Komercijalista ih zato ne vidi; svoje odluke vidi na
+ * stranama kupca, a vlasnik ih dobija u dnevnom zbiru (`prices:oversee`).
+ */
+export const PRICE_DECISION_NOTIFICATION_CAPABILITIES = Object.freeze(["prices:propose", "prices:approve", "prices:audit"]);
+
+export function notificationCapabilitiesFor(user: Pick<PortalUser, "role" | "permissions">): string[] {
+  const all = [...resolveCapabilities(user.role, user.permissions)];
+  if (user.role !== "komercijalista") return all;
+  return all.filter((c) => !PRICE_DECISION_NOTIFICATION_CAPABILITIES.includes(c));
+}
+
+/**
  * Obaveštenja koja dati korisnik sme da vidi.
  *
  * Filtriranje ide u `WHERE`, po sposobnostima razrešenim iz baze. Povlačenje
@@ -150,7 +167,7 @@ export async function listNotificationsFor(
   user: PortalUser,
   filter?: { status?: NotificationStatus; limit?: number },
 ): Promise<NotificationRow[]> {
-  const capabilities = [...resolveCapabilities(user.role, user.permissions)];
+  const capabilities = notificationCapabilitiesFor(user);
   if (capabilities.length === 0) return [];
 
   const db = getDb();
@@ -167,7 +184,7 @@ export async function listNotificationsFor(
 
 /** Broj nepročitanih koja korisnik sme da vidi. */
 export async function countUnreadFor(user: PortalUser): Promise<number> {
-  const capabilities = [...resolveCapabilities(user.role, user.permissions)];
+  const capabilities = notificationCapabilitiesFor(user);
   if (capabilities.length === 0) return 0;
 
   const db = getDb();
@@ -194,7 +211,7 @@ export async function markNotificationRead(
   user: PortalUser,
   id: number,
 ): Promise<boolean> {
-  const capabilities = [...resolveCapabilities(user.role, user.permissions)];
+  const capabilities = notificationCapabilitiesFor(user);
   if (capabilities.length === 0) return false;
 
   const db = getDb();
@@ -225,7 +242,7 @@ export async function resolveNotification(
       "missing_note",
     );
   }
-  const capabilities = [...resolveCapabilities(user.role, user.permissions)];
+  const capabilities = notificationCapabilitiesFor(user);
   if (capabilities.length === 0) return false;
 
   const db = getDb();

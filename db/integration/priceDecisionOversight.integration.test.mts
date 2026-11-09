@@ -17,6 +17,10 @@ import {
  * Komercijalista sa paketom odobravanja odlučuje o pravilima SVOJIH kupaca,
  * nikad tuđih, a vlasnik dobija obaveštenje o svakoj takvoj odluci. To
  * obaveštenje ne vidi niko drugi ko odobrava.
+ *
+ * Od 2026-11-09: pravo ima SVAKI komercijalista (uloga, bez paketa), i
+ * vlasnik dobija JEDAN dnevni zbir koji se dopunjuje, ne obaveštenje po
+ * odluci. Pojedinosti su na /portal/cene/promene (`loadOwnerChanges`).
  */
 const reason = skipReason();
 const guard = (t: { skip: (m?: string) => void }) => (reason ? (t.skip(reason), true) : false);
@@ -44,7 +48,8 @@ function asPortalUser(account: { id: string; name: string; role: string }, permi
   };
 }
 
-const APPROVER = ["cene_predlog", "cene_odobravanje"];
+// Bez paketa: od 2026-11-09 uloga komercijaliste sama daje predlog i odobrenje.
+const APPROVER: string[] = [];
 
 before(async () => {
   if (reason) return;
@@ -113,26 +118,41 @@ async function propose(actor: ReturnType<typeof asPortalUser>, customerId: strin
 }
 
 const ownerNotices = () =>
-  db.sql<{ title: string; body: string; entity_id: string }[]>`
-    SELECT title, body, entity_id FROM notifications WHERE required_capability = 'prices:oversee' ORDER BY id`;
+  db.sql<{ id: number; title: string; body: string; entity_id: string; status: string; dedupe_key: string | null }[]>`
+    SELECT id, title, body, entity_id, status::text, dedupe_key FROM notifications
+     WHERE required_capability = 'prices:oversee' AND dedupe_key LIKE 'promene-cena:%' ORDER BY id`;
 
 test("komercijalista odobrava rabat svom kupcu, a vlasnik dobija obaveštenje koje samo on vidi", async (t) => {
   if (guard(t)) return;
   const { transitionPriceRule } = await import("@/lib/pricing/rule-service");
   const { listNotificationsFor } = await import("@/lib/notifications/notification-service");
+  // Zbir istog dana koji su ostavili drugi test fajlovi u deljenoj bazi.
+  await db.sql`DELETE FROM notifications WHERE dedupe_key LIKE 'promene-cena:%'`;
   const rule = await propose(fx.rep, fx.mineId, fx.articleIds[0], 12.5);
   await transitionPriceRule({ ruleId: rule.id, to: "approved_pending_biznisoft", reason: null }, fx.rep);
 
   const [row] = await db.sql<{ status: string }[]>`SELECT status::text FROM price_rules WHERE id = ${rule.id}`;
   assert.equal(row.status, "approved_pending_biznisoft");
 
-  const notices = (await ownerNotices()).filter((n) => n.entity_id === rule.id);
-  assert.equal(notices.length, 1, "vlasnik dobija tačno jedno obaveštenje");
-  assert.match(notices[0].title, /QA Nadzor Moj/);
+  const notices = await ownerNotices();
+  assert.equal(notices.length, 1, "vlasnik dobija tačno jedan dnevni zbir");
+  assert.match(notices[0].title, /Promene cena i rabata .*: 1 odluka/);
+  assert.match(notices[0].title, new RegExp(fx.rep.name));
+  assert.match(notices[0].body, /QA Nadzor Moj/);
   assert.match(notices[0].body, /12,5 %/);
 
+  // Druga odluka istog dana dopunjuje ISTI zbir i vraća ga u nepročitano.
+  await db.sql`UPDATE notifications SET status = 'read' WHERE id = ${notices[0].id}`;
+  const second = await propose(fx.rep, fx.mineId, fx.articleIds[1], 9);
+  await transitionPriceRule({ ruleId: second.id, to: "approved_pending_biznisoft", reason: null }, fx.rep);
+  const merged = await ownerNotices();
+  assert.equal(merged.length, 1, "i dalje jedan zbir");
+  assert.equal(merged[0].status, "unread");
+  assert.match(merged[0].title, /2 odluke/);
+  assert.match(merged[0].body.split("\n")[0], /9 %/, "najnovija odluka je prva");
+
   const ownerList = await listNotificationsFor(fx.owner);
-  assert.ok(ownerList.some((n) => n.entityId === rule.id), "vlasnik vidi obaveštenje");
+  assert.ok(ownerList.some((n) => Number(n.id) === Number(merged[0].id)), "vlasnik vidi zbir");
   for (const viewer of [fx.rep, fx.otherRep]) {
     const list = await listNotificationsFor(viewer);
     assert.ok(!list.some((n) => n.requiredCapability === "prices:oversee"), "komercijalista ne vidi obaveštenja vlasnika");
@@ -166,12 +186,72 @@ test("paketi: komercijalista vidi i odlučuje samo pakete svojih kupaca", async 
   assert.ok(ownerSees.includes(mineBatch) && ownerSees.includes(theirsBatch), "vlasnik vidi sve");
 
   await assert.rejects(decidePendingBatch(fx.rep, { batchId: theirsBatch, to: "approved_pending_biznisoft", reason: null }), /opsegu/);
-  const before = (await ownerNotices()).length;
+  const before = await ownerNotices();
   const r = await decidePendingBatch(fx.rep, { batchId: mineBatch, to: "approved_pending_biznisoft", reason: null });
   assert.equal(r.count, 1);
   const after = await ownerNotices();
-  assert.equal(after.length, before + 1, "jedno obaveštenje za ceo paket");
-  assert.equal(after.at(-1)!.entity_id, mineBatch);
+  assert.equal(after.length, Math.max(before.length, 1), "paket ulazi u isti dnevni zbir, ne pravi novo obaveštenje");
+  const count = (title: string) => Number(/: (\d+) odluk/.exec(title)?.[1] ?? 0);
+  assert.equal(count(after.at(-1)!.title), count(before.at(-1)?.title ?? "") + 1, "ceo paket je jedna odluka u zbiru");
+});
+
+test("pregled promena: ko, kome, stari → novi rabat; samo vlasnik", async (t) => {
+  if (guard(t)) return;
+  const { proposePriceRule, transitionPriceRule } = await import("@/lib/pricing/rule-service");
+  const { loadOwnerChanges } = await import("@/lib/pricing/owner-changes-service");
+  const base = await propose(fx.owner, fx.mineId, fx.articleIds[3], 20);
+  await transitionPriceRule({ ruleId: base.id, to: "approved_pending_biznisoft", reason: null }, fx.owner);
+  const change = await proposePriceRule(
+    {
+      customerScope: "customer",
+      customerId: fx.mineId,
+      productScope: "article",
+      articleId: fx.articleIds[3],
+      valueKind: "discount_percent",
+      discountPercent: 25,
+      effectiveFrom: "2026-11-06",
+      reason: "QA povećanje",
+      biznisoftEntryRequired: false,
+      replacesRuleId: base.id,
+    },
+    fx.rep,
+    { notify: false },
+  );
+  await transitionPriceRule({ ruleId: change.id, to: "approved_pending_biznisoft", reason: null }, fx.rep);
+
+  const { belgradeDate } = await import("@/lib/recommendations/customerRhythm.mjs");
+  const today = belgradeDate(new Date());
+  const r = await loadOwnerChanges(fx.owner, { od: today, do: today, ko: fx.rep.id, ukljuciVlasnika: false });
+  const block = r.blocks.find((b) => b.items.some((i) => i.id === change.id));
+  assert.ok(block, "promena komercijaliste je u pregledu");
+  assert.equal(block!.decidedByName, fx.rep.name);
+  assert.equal(block!.customerName, "QA Nadzor Moj");
+  assert.equal(block!.change, "20\u00a0% → 25\u00a0%");
+  assert.ok(!r.blocks.some((b) => b.decidedById === fx.owner.id), "vlasnikove odluke se podrazumevano ne prikazuju");
+  await assert.rejects(loadOwnerChanges(fx.rep, { od: today, do: today, ko: null, ukljuciVlasnika: true }), /samo vlasnik/);
+});
+
+test("komercijalista sa pregledom svih kupaca (analitika) i dalje ne menja tuđe rabate", async (t) => {
+  if (guard(t)) return;
+  const analyst = { ...fx.rep, permissions: ["analitika"] };
+  await assert.rejects(propose(analyst, fx.theirsId, fx.articleIds[0], 30), /nije u Vašem opsegu/);
+  const { transitionPriceRule } = await import("@/lib/pricing/rule-service");
+  const rule = await propose(fx.owner, fx.theirsId, fx.articleIds[2], 31);
+  await assert.rejects(
+    transitionPriceRule({ ruleId: rule.id, to: "approved_pending_biznisoft", reason: null }, analyst),
+    /nije u Vašem opsegu/,
+  );
+  await assert.rejects(
+    propose(analyst, fx.mineId, fx.articleIds[0], 30).then(async () => {
+      const { proposePriceRule } = await import("@/lib/pricing/rule-service");
+      return proposePriceRule(
+        { customerScope: "all", productScope: "brand", brand: "R-M", valueKind: "discount_percent", discountPercent: 5, effectiveFrom: "2026-11-06", reason: "QA svi kupci", biznisoftEntryRequired: false },
+        analyst,
+        { notify: false },
+      );
+    }),
+    /samo onaj ko vidi sve kupce/,
+  );
 });
 
 test("vlasnikova sopstvena odluka ne pravi obaveštenje vlasniku", async (t) => {

@@ -4,7 +4,7 @@ import { sql } from "drizzle-orm";
 import { getDb } from "@/db/client";
 import { AUDIT_ACTIONS, recordAudit } from "@/lib/audit/record";
 import { can } from "@/lib/authz/permissions.mjs";
-import { canAccessCustomer } from "@/lib/authz/scope.mjs";
+import { canAccessCustomer, canDecidePricesFor } from "@/lib/authz/scope.mjs";
 import { allowsAutomaticRebates } from "@/lib/customers/commercial-status.mjs";
 import { loadAssignedCustomerIds, type PortalUser } from "@/lib/authz/user-repository";
 import { approvedPaymentOptions } from "@/lib/pricing/payment-option-service";
@@ -437,9 +437,10 @@ async function submitScopeChange(
  * Istorija ostaje (effective_to + trag). Samo vlasnik.
  */
 export async function closeRedundantArticleRules(actor: PortalUser, input: { customerId: string; brand: string; percent: number; closeAfter: string; reason: string }) {
-  if (!can(actor, "prices:approve")) throw new RebateChangeError("Nemate pravo da zatvarate pravila.");
+  // Samo vlasnik (od 2026-11-09 `prices:approve` ima i svaki komercijalista).
+  if (!can(actor, "prices:oversee")) throw new RebateChangeError("Nemate pravo da zatvarate pravila.");
   const assigned = await loadAssignedCustomerIds(actor.id);
-  if (!canAccessCustomer(actor, assigned, input.customerId)) throw new RebateChangeError("Kupac nije u Vašem opsegu.");
+  if (!canDecidePricesFor(actor, assigned, input.customerId)) throw new RebateChangeError("Kupac nije u Vašem opsegu.");
   const db = getDb();
   const rows = await db.execute<{ id: string; p: string; code: string; f: string }>(sql`
     SELECT r.id, r.discount_percent::text AS p, a.code, r.effective_from::text AS f

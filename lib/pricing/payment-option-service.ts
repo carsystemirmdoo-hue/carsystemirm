@@ -3,7 +3,7 @@ import { sql } from "drizzle-orm";
 import { getDb } from "@/db/client";
 import { AUDIT_ACTIONS, recordAudit } from "@/lib/audit/record";
 import { can } from "@/lib/authz/permissions.mjs";
-import { canAccessCustomer } from "@/lib/authz/scope.mjs";
+import { canDecidePricesFor } from "@/lib/authz/scope.mjs";
 import { loadAssignedCustomerIds, type PortalUser } from "@/lib/authz/user-repository";
 import { notifyOwnerOfDecision } from "@/lib/pricing/owner-oversight";
 import { isOptionCode, optionLabel, sortOptions } from "@/lib/pricing/paymentOptions.mjs";
@@ -53,7 +53,7 @@ export async function listPaymentOptions(customerId: string): Promise<PaymentOpt
 
 async function assertScope(viewer: PortalUser, customerId: string) {
   const assigned = await loadAssignedCustomerIds(viewer.id);
-  if (!canAccessCustomer(viewer, assigned, customerId)) throw new PaymentOptionError("Kupac nije u Vašem opsegu.");
+  if (!canDecidePricesFor(viewer, assigned, customerId)) throw new PaymentOptionError("Kupac nije u Vašem opsegu.");
 }
 
 /** Predlog opcije (komercijalista sa `prices:propose`, samo za kupce u opsegu). Ne važi dok vlasnik ne odobri. */

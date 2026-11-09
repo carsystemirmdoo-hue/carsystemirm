@@ -362,7 +362,8 @@ test("ruta odobravanja trazi uzu sposobnost od view:cene", async (t) => {
     ROUTE_CAPABILITY["/portal/cene/odobravanje"],
     "view:cene_odobravanje",
   );
-  const predlagac = resolveCapabilities("komercijalista", ["cene_predlog"]);
+  // Samo paket predlaganja (na ulozi bez cena); komercijalista od 2026-11-09 sam odobrava.
+  const predlagac = resolveCapabilities("magacioner", ["cene_predlog"]);
   assert.equal(predlagac.has("view:cene"), true);
   assert.equal(
     predlagac.has("view:cene_odobravanje"),

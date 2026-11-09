@@ -76,9 +76,10 @@ test("opcije: predlog samo za svog kupca, kancelarija ne predlaže, odobrava vla
   await assert.rejects(async () => proposePaymentOption(await user("tamara"), { customerId, optionCode: "avans", effectiveFrom: TODAY, reason: "kancelarija" }), /pravo/);
   const a = await proposePaymentOption(await user("rep"), { customerId, optionCode: "avans", effectiveFrom: TODAY, reason: "dogovor: avans" });
   await assert.rejects(async () => proposePaymentOption(await user("rep"), { customerId, optionCode: "avans", effectiveFrom: TODAY, reason: "ponovo" }), /čeka odluku/);
-  await assert.rejects(async () => decidePaymentOption(await user("rep"), { id: a.id, to: "odobreno", reason: null }), /pravo da odobravate/);
   assert.deepEqual(await approvedPaymentOptions(customerId, TODAY), [], "predlog ne važi pre odobrenja");
-  await decidePaymentOption(await user("owner"), { id: a.id, to: "odobreno", reason: null });
+  // Od 2026-11-09 komercijalista odobrava uslove SVOG kupca (vlasnik dobija dnevni zbir); tuđem ne.
+  await assert.rejects(async () => decidePaymentOption(await user("other"), { id: a.id, to: "odobreno", reason: null }), /opsegu|pravo/);
+  await decidePaymentOption(await user("rep"), { id: a.id, to: "odobreno", reason: null });
   const b = await proposePaymentOption(await user("rep"), { customerId, optionCode: "odlozeno_30", effectiveFrom: TODAY, reason: "standard 30 dana" });
   await decidePaymentOption(await user("owner"), { id: b.id, to: "odobreno", reason: null });
   assert.deepEqual(await approvedPaymentOptions(customerId, TODAY), ["odlozeno_30", "avans"]);

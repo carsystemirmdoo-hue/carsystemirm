@@ -4,6 +4,8 @@ import { forbidden, notFound } from "next/navigation";
 import { DOCUMENT_KIND_LABELS, srDate } from "@/components/customer/account-format";
 import { PageHeader } from "@/components/portal/PortalPrimitives";
 import { can } from "@/lib/authz/permissions.mjs";
+import { canDecidePricesFor } from "@/lib/authz/scope.mjs";
+import { loadAssignedCustomerIds } from "@/lib/authz/user-repository";
 import { requireCapability } from "@/lib/authz/session";
 import { belgradeDate } from "@/lib/recommendations/customerRhythm.mjs";
 import { evaluateRebateArticles } from "@/lib/pricing/rebate-application-service";
@@ -85,7 +87,10 @@ export default async function RebateReviewCustomerPage({
   const sp = await searchParams;
   const kind = sp.izuzetak;
   const today = belgradeDate(new Date());
-  const canPropose = can(user, "prices:propose");
+  // Odluke samo za svoje kupce: komercijalista sa pregledom svih kupaca ovde samo čita.
+  const ownCustomer = canDecidePricesFor(user, await loadAssignedCustomerIds(user.id), customer.id);
+  const canPropose = can(user, "prices:propose") && ownCustomer;
+  const canApprove = can(user, "prices:approve") && ownCustomer;
   const articles = await evaluateRebateArticles(user, today, customer.id);
   const articleCounts: Counts = {};
   for (const a of articles) articleCounts[a.result.outcome] = (articleCounts[a.result.outcome] ?? 0) + 1;
@@ -442,7 +447,7 @@ export default async function RebateReviewCustomerPage({
               </div>
             </div>
             <div className="portal-panel-body">
-              <PaymentOptionsPanel customerId={customer.id} rows={optionRows} canPropose={canPropose} canApprove={can(user, "prices:approve")} today={today} />
+              <PaymentOptionsPanel customerId={customer.id} rows={optionRows} canPropose={canPropose} canApprove={canApprove} today={today} />
             </div>
           </section>
 
@@ -510,7 +515,7 @@ export default async function RebateReviewCustomerPage({
                   families={families}
                   brands={brands}
                   options={approvedOptions.map((c) => ({ code: c, label: optionLabel(c) }))}
-                  canApprove={can(user, "prices:approve")}
+                  canApprove={canApprove}
                 />
               </div>
             </section>

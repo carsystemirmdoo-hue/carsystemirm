@@ -59,10 +59,14 @@ export const metadata: Metadata = {
   },
   description: siteConfig.defaultDescription,
   applicationName: siteConfig.applicationName,
+  // Carsystem delfin na crvenom (2026-11-09); ranije je ovde bio Vercelov podrazumevani trougao.
   icons: {
-    icon: "/favicon.ico",
+    icon: [
+      { url: "/favicon.ico", sizes: "48x48" },
+      { url: "/icon.svg", type: "image/svg+xml" },
+    ],
     shortcut: "/favicon.ico",
-    apple: "/favicon.ico",
+    apple: { url: "/apple-touch-icon.png", sizes: "180x180" },
   },
   robots: {
     index: siteConfig.indexingEnabled,

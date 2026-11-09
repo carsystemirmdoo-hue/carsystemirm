@@ -93,6 +93,8 @@ const CRUMB_LABELS: Record<string, string> = {
   predlozi: "Grupni predlozi",
   "za-pregled": "Za ručni pregled",
   "za-razgovor": "Za razgovor",
+  tabela: "Tabela rabata",
+  promene: "Promene komercijalista",
   komercijalisti: "Komercijalisti",
   podesavanja: "Podešavanja",
   odobrenja: "Odobrenja",

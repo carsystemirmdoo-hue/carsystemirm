@@ -156,8 +156,19 @@ export async function previewRebateChange(viewer: PortalUser, input: ChangeInput
   } else {
     ids = [...new Set(input.articleIds ?? [])];
     if (!ids.length) throw new RebateChangeError("Izaberite bar jedan artikal.");
+    /*
+     * Tabela rabata (2026-11-09) menja i artikle koje kupac još NE uzima: oni
+     * nisu na njegovim fakturama, ali moraju postojati i biti u ponudi.
+     */
     const unknown = ids.filter((id) => !data.articles.has(id));
-    if (unknown.length) throw new RebateChangeError("Neki izabrani artikli nisu na fakturama ovog kupca.");
+    if (unknown.length) {
+      const found = await getDb().execute<{ id: string; code: string; name: string }>(sql`
+        SELECT a.id, a.code, a.name FROM articles a
+         WHERE a.id IN (${sql.join(unknown.map((id) => sql`${id}::uuid`), sql`, `)})
+           AND NOT EXISTS (SELECT 1 FROM articles_out_of_programme o WHERE o.article_id = a.id)`);
+      for (const a of found) data.articles.set(a.id, { id: a.id, code: a.code, name: a.name });
+      if (unknown.some((id) => !data.articles.has(id))) throw new RebateChangeError("Neki izabrani artikli ne postoje ili nisu u ponudi.");
+    }
   }
   const include = new Set(input.includeExceptions ?? []);
   const rows: ChangeRow[] = ids.map((articleId) => {

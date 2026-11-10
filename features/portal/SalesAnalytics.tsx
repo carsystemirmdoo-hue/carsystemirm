@@ -47,45 +47,78 @@ const GROUP_LABELS: Record<GroupView, string> = {
  * Pokazatelji perioda. Svi brojevi dolaze iz agregata nad CELIM filtriranim
  * skupom u bazi (`loadSalesSummary`), ne iz liste stavki prikazane na ekranu.
  */
+/** Da li u skupu postoje povrati, korekcije ili nerazvrstane minus stavke. */
+export function hasAdjustments(t: SalesSummary) {
+  return t.returnValue !== 0 || t.correctionValue !== 0 || t.unknownNegativeValue !== 0;
+}
+
+/** Odobren rabat: iznos i prosečan procenat (0–100) na VP vrednost. */
+function rebateOf(t: Pick<SalesSummary, "listValue" | "gross">) {
+  const amount = Math.max(0, t.listValue - t.gross);
+  return { amount, share: t.listValue > 0 ? Math.round((amount / t.listValue) * 1000) / 10 : null };
+}
+
 export function SalesTotals({
   totals,
   previous,
   byCustomer,
+  alwaysShowAdjustments = false,
 }: {
   totals: SalesSummary;
   previous?: SalesSummary | null;
   /** Zbirovi po kupcu (ceo skup) — za koncentraciju top 10. */
   byCustomer: readonly SalesBreakdownRow[];
+  /** Povrati i korekcije i kada su nula (strana „Povrati“). */
+  alwaysShowAdjustments?: boolean;
 }) {
   const invoiceCount = totals.invoiceCount;
   const change = previous ? deltaPercent(totals.net, previous.net) : null;
   const udeo = concentration(byCustomer);
+  const rabat = rebateOf(totals);
+  // Bez povrata i korekcija „bruto“ (pozitivne stavke) je isto što i neto — ne prikazuje se dva puta.
+  const adjustments = alwaysShowAdjustments || hasAdjustments(totals);
 
   const cards = [
     {
-      label: "Bruto promet",
-      value: moneyRsd(totals.gross),
-      context: "zbir pozitivnih stavki",
+      label: "Promet po VP ceni",
+      value: moneyRsd(totals.listValue),
+      context: "pre rabata (količina × VP cena)",
       tone: "neutral",
     },
     {
-      label: "Povrati robe",
-      value: moneyRsd(totals.returnValue),
-      context: `${MONEY2.format(totals.returnedQuantity)} jedinica vraćeno`,
-      tone: "danger",
+      label: "Odobren rabat",
+      value: moneyRsd(rabat.amount),
+      context: rabat.share === null ? "—" : `prosečno ${percent(rabat.share)} na VP vrednost`,
+      tone: "info",
     },
-    {
-      label: "Korekcije",
-      value: moneyRsd(totals.correctionValue),
-      context: "storno, odobrenja, korekcije cene",
-      tone: "warning",
-    },
+    ...(adjustments
+      ? [
+          {
+            label: "Prodato posle rabata",
+            value: moneyRsd(totals.gross),
+            context: "zbir pozitivnih stavki",
+            tone: "neutral",
+          },
+          {
+            label: "Povrati robe",
+            value: moneyRsd(totals.returnValue),
+            context: `${MONEY2.format(totals.returnedQuantity)} jedinica vraćeno`,
+            tone: "danger",
+          },
+          {
+            label: "Korekcije",
+            value: moneyRsd(totals.correctionValue),
+            context: "storno, odobrenja, korekcije cene",
+            tone: "warning",
+          },
+        ]
+      : []),
     {
       label: "Neto promet",
       value: moneyRsd(totals.net),
       context:
         change === null
-          ? "nema uporednog perioda"
+          ? "posle rabata, bez PDV-a"
           : `${change > 0 ? "+" : ""}${percent(change)} u odnosu na prethodni period`,
       tone: "success",
     },
@@ -157,6 +190,17 @@ export function SalesBreakdown({
   drillDownBase?: string;
 }) {
   const grouped = rows;
+  const adj = hasAdjustments(totals);
+  const cols = adj ? 9 : 5;
+  const rebateCell = (t: Pick<SalesSummary, "listValue" | "gross">) => {
+    const r = rebateOf(t);
+    return (
+      <>
+        {money(r.amount)}
+        {r.share !== null ? <small className="portal-table-sub"> {percent(r.share)}</small> : null}
+      </>
+    );
+  };
 
   return (
     <div className="portal-table-wrap">
@@ -164,10 +208,16 @@ export function SalesBreakdown({
         <thead>
           <tr>
             <th scope="col">{GROUP_LABELS[view]}</th>
-            <th scope="col">Bruto</th>
-            <th scope="col">Povrati</th>
-            <th scope="col">Korekcije</th>
-            <th scope="col">Nerazvrstano</th>
+            <th scope="col">VP vrednost</th>
+            <th scope="col">Rabat</th>
+            {adj ? (
+              <>
+                <th scope="col">Prodato</th>
+                <th scope="col">Povrati</th>
+                <th scope="col">Korekcije</th>
+                <th scope="col">Nerazvrstano</th>
+              </>
+            ) : null}
             <th scope="col">Neto</th>
             <th scope="col">Faktura</th>
           </tr>
@@ -187,16 +237,18 @@ export function SalesBreakdown({
                     row.label
                   )}
                 </th>
-                <td className="portal-table-number">{money(row.gross)}</td>
-                <td className="portal-table-number">{money(row.returnValue)}</td>
-                <td className="portal-table-number">
-                  {money(row.correctionValue)}
-                </td>
-                <td className="portal-table-number">
-                  {row.unknownNegativeValue === 0
-                    ? "—"
-                    : money(row.unknownNegativeValue)}
-                </td>
+                <td className="portal-table-number">{money(row.listValue)}</td>
+                <td className="portal-table-number">{rebateCell(row)}</td>
+                {adj ? (
+                  <>
+                    <td className="portal-table-number">{money(row.gross)}</td>
+                    <td className="portal-table-number">{money(row.returnValue)}</td>
+                    <td className="portal-table-number">{money(row.correctionValue)}</td>
+                    <td className="portal-table-number">
+                      {row.unknownNegativeValue === 0 ? "—" : money(row.unknownNegativeValue)}
+                    </td>
+                  </>
+                ) : null}
                 <td className="portal-table-number">
                   <strong>{money(row.net)}</strong>
                 </td>
@@ -206,19 +258,21 @@ export function SalesBreakdown({
           })}
           {grouped.length === 0 ? (
             <tr>
-              <td colSpan={7}>Nema podataka za izabrane filtere.</td>
+              <td colSpan={cols}>Nema podataka za izabrane filtere.</td>
             </tr>
           ) : (
             <tr>
               <th scope="row">UKUPNO</th>
-              <td className="portal-table-number">{money(totals.gross)}</td>
-              <td className="portal-table-number">{money(totals.returnValue)}</td>
-              <td className="portal-table-number">
-                {money(totals.correctionValue)}
-              </td>
-              <td className="portal-table-number">
-                {money(totals.unknownNegativeValue)}
-              </td>
+              <td className="portal-table-number">{money(totals.listValue)}</td>
+              <td className="portal-table-number">{rebateCell(totals)}</td>
+              {adj ? (
+                <>
+                  <td className="portal-table-number">{money(totals.gross)}</td>
+                  <td className="portal-table-number">{money(totals.returnValue)}</td>
+                  <td className="portal-table-number">{money(totals.correctionValue)}</td>
+                  <td className="portal-table-number">{money(totals.unknownNegativeValue)}</td>
+                </>
+              ) : null}
               <td className="portal-table-number">
                 <strong>{money(totals.net)}</strong>
               </td>

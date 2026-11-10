@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { srDateTime } from "@/components/customer/account-format";
-import { PageHeader } from "@/components/portal/PortalPrimitives";
 import { can } from "@/lib/authz/permissions.mjs";
 import { requireCapability } from "@/lib/authz/session";
 import {
@@ -9,6 +8,7 @@ import {
   PRICE_REQUEST_STATUS_LABELS,
 } from "@/lib/ordering/price-request-service";
 import { PriceRequestActions } from "./PriceRequestActions";
+import { ZahteviTabs } from "../ZahteviTabs";
 
 export const dynamic = "force-dynamic";
 
@@ -28,17 +28,13 @@ export default async function PriceRequestsPage() {
 
   return (
     <>
-      <PageHeader
-        eyebrow="Prodaja"
-        title="Cena i uslovi — zahtevi kupaca"
-        description="Kupac je tražio cenu za proizvod bez cene ili posebne uslove. Odgovorite mu ovde; dogovoren uslov unesite u BizniSoft, a u korpi važi tek kada stigne sa izvozom cenovnika."
-      />
-      <nav className="kk-subnav" aria-label="Zahtevi kupaca">
-        <Link href="/portal/zahtevi">Porudžbine</Link>
-        <Link href="/portal/zahtevi/uslovi" aria-current="page">
-          Cena i uslovi ({open.length})
-        </Link>
-      </nav>
+      <div className="pn">
+        <ZahteviTabs
+          current="uslovi"
+          lead="Kupac je tražio cenu za proizvod bez cene ili posebne uslove. Odgovorite mu ovde; dogovoren uslov unesite u BizniSoft, a u korpi važi tek kada stigne sa izvozom cenovnika."
+          openPriceRequests={open.length}
+        />
+      </div>
       {[
         { key: "open", title: "Otvoreni", list: open },
         { key: "done", title: "Odgovoreni i zatvoreni", list: done },

@@ -93,7 +93,7 @@ export default async function ReturnsPage({
             <h2>Bruto, povrati i neto</h2>
           </div>
         </div>
-        <SalesTotals totals={summary} byCustomer={byCustomer} />
+        <SalesTotals totals={summary} byCustomer={byCustomer} alwaysShowAdjustments />
       </section>
 
       <section className="portal-panel">

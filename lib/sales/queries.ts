@@ -132,6 +132,12 @@ function filterConditions(scope: string[] | null, filter: SalesFilter): SQL[] {
 /** Zbirovi u istom obliku kao `summarize()` iz `totals.mjs`, plus brojači. */
 export interface SalesSummary {
   gross: number;
+  /**
+   * Vrednost prodatog po VP ceni PRE rabata (količina × jedinična cena, samo pozitivne
+   * stavke). Odobren rabat = listValue − gross. Na svim uvezenim stavkama važi
+   * iznos = količina × cena × (1 − rabat), pa je ovo isti račun kao na fakturi.
+   */
+  listValue: number;
   returnValue: number;
   returnedQuantity: number;
   correctionValue: number;
@@ -175,6 +181,7 @@ function agregatPolja() {
   const nerazvrstano = sql`(${iznos} < 0 AND NOT ${povrat} AND NOT ${korekcija})`;
   return {
     gross: sql<string>`round(coalesce(sum(${iznos}) FILTER (WHERE ${iznos} >= 0), 0), 2)`,
+    listValue: sql<string>`round(coalesce(sum(${invoiceLines.quantity} * ${invoiceLines.unitPrice}) FILTER (WHERE ${iznos} >= 0), 0), 2)`,
     returnValue: sql<string>`round(coalesce(sum(${iznos}) FILTER (WHERE ${povrat}), 0), 2)`,
     returnedQuantity: sql<string>`round(coalesce(sum(${invoiceLines.quantity}) FILTER (WHERE ${povrat}), 0), 3)`,
     correctionValue: sql<string>`round(coalesce(sum(${iznos}) FILTER (WHERE ${korekcija}), 0), 2)`,
@@ -193,6 +200,7 @@ function agregatPolja() {
 function uBrojeve<T extends Record<string, unknown>>(row: T): SalesSummary {
   return {
     gross: Number(row.gross),
+    listValue: Number(row.listValue),
     returnValue: Number(row.returnValue),
     returnedQuantity: Number(row.returnedQuantity),
     correctionValue: Number(row.correctionValue),
@@ -209,7 +217,7 @@ function uBrojeve<T extends Record<string, unknown>>(row: T): SalesSummary {
 }
 
 const PRAZAN_ZBIR: SalesSummary = {
-  gross: 0, returnValue: 0, returnedQuantity: 0, correctionValue: 0,
+  gross: 0, listValue: 0, returnValue: 0, returnedQuantity: 0, correctionValue: 0,
   unknownNegativeValue: 0, unknownNegativeCount: 0, net: 0, invoiceCount: 0,
   lineCount: 0, negativeLineCount: 0, linesWithSalesperson: 0,
   firstIssuedOn: null, lastIssuedOn: null,

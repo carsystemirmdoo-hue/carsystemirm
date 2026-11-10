@@ -1,6 +1,8 @@
 import Link from "next/link";
 import { srDate } from "@/components/customer/account-format";
 import { PageHeader } from "@/components/portal/PortalPrimitives";
+import { ClickableRows } from "@/components/portal/ClickableRows";
+import { PortalSelect } from "@/components/portal/PortalSelect";
 import { seesAllCustomers } from "@/lib/authz/permissions.mjs";
 import { requireCapability } from "@/lib/authz/session";
 import { loadRebateReviewList, type RebateReviewRow } from "@/lib/pricing/rebate-review-service";
@@ -78,10 +80,14 @@ export default async function RebateReviewListPage({
           </span>
         }
         actions={
-          <>
-            <Link className="rr-link" href="/portal/cene/rabati-iz-faktura/za-pregled">Za ručni pregled →</Link>
-            <Link className="rr-link" href="/portal/cene/rabati-iz-faktura">Rabati po grupama →</Link>
-          </>
+          // Analitički pregledi (po grupama, ručni pregled) su za vlasnika i kancelariju;
+          // komercijalista radi po kupcu (odluka 2026-11-10).
+          seesAllCustomers(user) ? (
+            <>
+              <Link className="rr-link" href="/portal/cene/rabati-iz-faktura/za-pregled">Za ručni pregled →</Link>
+              <Link className="rr-link" href="/portal/cene/rabati-iz-faktura">Rabati po grupama →</Link>
+            </>
+          ) : null
         }
       />
 
@@ -93,46 +99,38 @@ export default async function RebateReviewListPage({
           </label>
           <label>
             <span>Stanje</span>
-            <select name="stanje" defaultValue={stanje}>
-              <option value="sva">Sva stanja</option>
-              {Object.entries(STATUS_LABELS)
-                .filter(([k]) => k !== "bez_faktura")
-                .map(([k, label]) => (
-                  <option key={k} value={k}>
-                    {label} ({counts[k] ?? 0})
-                  </option>
-                ))}
-            </select>
+            <PortalSelect
+              name="stanje"
+              ariaLabel="Stanje"
+              defaultValue={stanje}
+              options={[
+                { value: "sva", label: "Sva stanja" },
+                ...Object.entries(STATUS_LABELS)
+                  .filter(([k]) => k !== "bez_faktura")
+                  .map(([k, label]) => ({ value: k, label: `${label} (${counts[k] ?? 0})` })),
+              ]}
+            />
           </label>
           <label>
             <span>Izuzeci</span>
-            <select name="izuzetak" defaultValue={izuzetak}>
-              {EXCEPTION_FILTERS.map((f) => (
-                <option key={f.key} value={f.key}>
-                  {f.label}
-                </option>
-              ))}
-            </select>
+            <PortalSelect name="izuzetak" ariaLabel="Izuzeci" defaultValue={izuzetak} options={EXCEPTION_FILTERS.map((f) => ({ value: f.key, label: f.label }))} />
           </label>
           {reps.length > 1 ? (
             <label>
               <span>Komercijalista (trenutno)</span>
-              <select name="komercijalista" defaultValue={komercijalista}>
-                <option value="">Svi</option>
-                {reps.map((r) => (
-                  <option key={r} value={r}>
-                    {r}
-                  </option>
-                ))}
-                <option value="-">Bez dodele</option>
-              </select>
+              <PortalSelect
+                name="komercijalista"
+                ariaLabel="Komercijalista"
+                defaultValue={komercijalista}
+                options={[{ value: "", label: "Svi" }, ...reps.map((r) => ({ value: r, label: r })), { value: "-", label: "Bez dodele" }]}
+              />
             </label>
           ) : null}
           <button type="submit" className="portal-button" data-variant="primary">Prikažite</button>
         </form>
 
-        <div className="portal-table-wrap">
-          <table className="portal-table rr-table">
+        <ClickableRows className="portal-table-wrap">
+          <table className="portal-table rr-table rr-table--rows">
             <thead>
               <tr>
                 <th scope="col">Kupac</th>
@@ -147,7 +145,8 @@ export default async function RebateReviewListPage({
               {filtered.map((r) => (
                 <tr key={r.customerId}>
                   <th scope="row">
-                    <Link href={`/portal/cene/rabati-iz-faktura/kupci/${r.customerId}`}>{r.customerName}</Link>
+                    {/* Ceo red je klikabilan: `rr-row-link` se razvlači preko reda (CSS), tekst i dalje čita čitač ekrana. */}
+                    <Link className="rr-row-link" href={`/portal/cene/rabati-iz-faktura/kupci/${r.customerId}`}>{r.customerName}</Link>
                     <small>{r.salespeople.length ? r.salespeople.join(", ") : "bez dodele"}</small>
                   </th>
                   <td>
@@ -207,7 +206,7 @@ export default async function RebateReviewListPage({
               ) : null}
             </tbody>
           </table>
-        </div>
+        </ClickableRows>
         <p className="portal-data-note">
           Prikazano {filtered.length} od {rows.length}. „Najčešći rabat“ je vrednost na najviše stavki; broj faktura je
           broj računa na kojima se ta vrednost pojavljuje. Grupe su zaključene iz naziva artikla i važe kao predlog dok ne

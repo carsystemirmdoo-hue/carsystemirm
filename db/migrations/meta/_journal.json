@@ -419,6 +419,13 @@
       "idx": 59,
       "version": "7",
       "when": 1793887200000,
+      "tag": "0062_receivable_sheets",
+      "breakpoints": true
+    },
+    {
+      "idx": 60,
+      "version": "7",
+      "when": 1793973600000,
       "tag": "0059_notification_customer_scope",
       "breakpoints": true
     }

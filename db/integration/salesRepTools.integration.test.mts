@@ -36,11 +36,12 @@ before(async () => {
   custB = b.id;
   await db.sql`INSERT INTO customer_assignments (customer_id, user_id) VALUES (${custA}, ${ids.milan})`;
   await db.sql`INSERT INTO articles (code, name, unit) VALUES (${CODE}, 'QA KLAR 1L', 'KOM')`;
+  await db.sql`UPDATE users SET name = 'Milan QA' WHERE id = ${ids.milan}`;
 });
 
 after(async () => {
   if (!reason && db) {
-    await db.sql`TRUNCATE receivable_lines, receivable_snapshots, customer_call_notes, customer_sales_contacts`;
+    await db.sql`TRUNCATE receivable_sheet_customers, receivable_customer_links, receivable_lines, receivable_snapshots, customer_call_notes, customer_sales_contacts`;
     await db.sql`TRUNCATE customer_orders CASCADE`;
     await db.sql`DELETE FROM customer_assignments WHERE customer_id IN (${custA}, ${custB})`;
     await db.sql`DELETE FROM customers WHERE id IN (${custA}, ${custB})`;
@@ -83,12 +84,19 @@ test("dugovanja: snimak po promeni sadržaja, povezivanje po PIB-u i nazivu, ops
   assert.equal(a.maxDaysOverdue, 40);
   assert.ok(all.some((d) => d.customerId === custB), "naziv bez „d.o.o.“ i velika slova se povezuju");
   const unmatched = await svc.unmatchedDebtLines();
-  assert.deepEqual(unmatched.map((u) => u.label), ["Nepoznat kupac"]);
+  assert.deepEqual(unmatched.map((u) => u.label), ["Nepoznat kupac", "Plaćen kupac"], "prvo sa dugom, pa i kupci bez duga iz spiska");
+
+  // Ručna veza: „Nepoznat kupac“ → kupac B; važi odmah, bez novog čitanja.
+  await svc.linkSheetLabel(owner, { key: unmatched[0].key, customerId: custB });
+  const b = (await svc.debtsByCustomer(owner, "2026-11-10")).find((d) => d.customerId === custB)!;
+  assert.equal(b.total, 6000);
+  assert.deepEqual((await svc.unmatchedDebtLines()).map((u) => u.label), ["Plaćen kupac"]);
 
   const mine = await svc.debtsByCustomer(await user("milan"), "2026-11-10");
   assert.deepEqual(mine.map((d) => d.customerId), [custA], "komercijalista vidi samo svoje kupce");
 
   await assert.rejects(db.sql`DELETE FROM receivable_lines`, /samo dodaju/);
+  await assert.rejects(db.sql`DELETE FROM receivable_sheet_customers`, /samo dodaje/);
   await assert.rejects(db.sql`UPDATE receivable_snapshots SET row_count = 0`, /vreme provere/);
 });
 
@@ -131,4 +139,18 @@ test("zahtev u ime kupca: poslat, pripremio komercijalista, isti ključ ne pravi
   assert.equal(same.orderId, r.orderId);
   await assert.rejects(svc.submitRepOrder(milan, custB, { idempotencyKey: randomUUID(), lines: [{ articleId: art.id, quantity: 1 }], paymentOption: null }), /opsegu/);
   await assert.rejects(svc.submitRepOrder(milan, custA, { idempotencyKey: randomUUID(), lines: [{ articleId: art.id, quantity: 1.5 }], paymentOption: null }), svc.RepOrderError);
+});
+
+test("tabela komercijaliste: predlog dodele kada kupac nije dodeljen tom komercijalisti", async (t) => {
+  if (guard(t)) return;
+  const svc = await import("@/lib/sales-tools/receivables-service");
+  const owner = await user("owner");
+  // Tabela „Milan“ (naziv fajla) sadrži kupca B, koji u portalu nije Milanov.
+  await svc.importReceivablesFile(owner, "Milan.csv", csv([
+    ["naziv kupca", "faktura", "datum", "valuta", "iznos"],
+    [`QA Drugi ${RUN}, BEOGRAD`, "Fak.9/2026", "01.10.2026", "31.10.2026", "1.000,00 din"],
+    [`QA Lakirnica ${RUN} d.o.o., NOVI SAD`],
+  ]));
+  const s = await svc.sheetAssignmentSuggestions();
+  assert.deepEqual(s.map((x) => [x.customerId, x.repId]), [[custB, ids.milan]], "A je već Milanov, B se predlaže");
 });

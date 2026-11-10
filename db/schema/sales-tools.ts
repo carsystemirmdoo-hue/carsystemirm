@@ -87,9 +87,44 @@ export const receivableLines = pgTable(
     paid: numeric("paid", { precision: 16, scale: 2 }),
     remaining: numeric("remaining", { precision: 16, scale: 2 }).notNull(),
     note: text("note"),
+    /** 0062: naziv tabele (komercijalista) i normalizovan naziv kupca. */
+    sourceLabel: text("source_label"),
+    labelKey: text("label_key"),
   },
   (table) => [
     primaryKey({ columns: [table.snapshotId, table.rowNumber] }),
     index("receivable_lines_customer_idx").on(table.snapshotId, table.customerId),
+  ],
+);
+
+/** 0062: ručna veza „naziv kupca iz tabele → kupac“; ima prednost nad automatskim poklapanjem. */
+export const receivableCustomerLinks = pgTable("receivable_customer_links", {
+  labelKey: text("label_key").primaryKey(),
+  customerId: uuid("customer_id")
+    .notNull()
+    .references(() => customers.id, { onDelete: "restrict" }),
+  labelExample: text("label_example").notNull(),
+  createdBy: uuid("created_by")
+    .notNull()
+    .references(() => users.id, { onDelete: "restrict" }),
+  createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+});
+
+/** 0062: svi kupci iz tabela (i oni bez duga), po tabeli/komercijalisti. */
+export const receivableSheetCustomers = pgTable(
+  "receivable_sheet_customers",
+  {
+    snapshotId: uuid("snapshot_id")
+      .notNull()
+      .references(() => receivableSnapshots.id, { onDelete: "restrict" }),
+    rowNumber: integer("row_number").notNull(),
+    sourceLabel: text("source_label").notNull(),
+    customerLabel: text("customer_label").notNull(),
+    labelKey: text("label_key").notNull(),
+    customerId: uuid("customer_id").references(() => customers.id, { onDelete: "restrict" }),
+  },
+  (table) => [
+    primaryKey({ columns: [table.snapshotId, table.rowNumber] }),
+    index("receivable_sheet_customers_label_idx").on(table.snapshotId, table.labelKey),
   ],
 );

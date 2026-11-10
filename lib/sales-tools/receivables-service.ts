@@ -6,8 +6,9 @@ import type { PortalUser } from "@/lib/authz/user-repository";
 import { readXlsxCells, XlsxReadError } from "@/lib/import/xlsx/readXlsx.mjs";
 import { resolveLedgerScope } from "@/lib/ledger/effective-sales";
 import { belgradeDate } from "@/lib/recommendations/customerRhythm.mjs";
-import { readSheetValues, SheetReadError, sheetConfig } from "@/lib/sales-tools/googleSheets.mjs";
-import { daysOverdue, nameKey, parseReceivables, type ReceivableLine } from "@/lib/sales-tools/receivablesParse.mjs";
+import { readSheets, SheetReadError, sheetConfig } from "@/lib/sales-tools/googleSheets.mjs";
+import { matchCustomer, repForSheet } from "@/lib/sales-tools/customerMatch.mjs";
+import { daysOverdue, nameKey, parseReceivables } from "@/lib/sales-tools/receivablesParse.mjs";
 import { CsvReadError, readCsvGrid } from "@/lib/stock/csvGrid.mjs";
 
 /**
@@ -46,16 +47,25 @@ export async function latestSnapshot(): Promise<Snapshot | null> {
 
 type Exec = Pick<ReturnType<typeof getDb>, "execute">;
 
-/** Povezivanje redova sa kupcima (u transakciji upisa — prima izvršioca). */
-async function matchCustomers(db: Exec, lines: ReceivableLine[]) {
-  const customers = [...(await db.execute<{ id: string; pib: string; name: string }>(sql`SELECT id, pib, name FROM customers`))];
-  const byPib = new Map(customers.map((c) => [c.pib, c.id]));
-  const byName = new Map<string, string | null>();
-  for (const c of customers) {
-    const k = nameKey(c.name);
-    byName.set(k, byName.has(k) ? null : c.id); // dvosmislen naziv → bez povezivanja
-  }
-  const codes = [...new Set(lines.map((l) => l.partnerCode).filter((c): c is string => Boolean(c)))];
+/** Jedna pročitana tabela: naziv („Milan“ = tabela tog komercijaliste) i ćelije. */
+export type SheetGrid = { label: string; grid: unknown[][] };
+
+/** Broj reda u snimku: redni broj tabele × 100000 + red (tabele se ne sudaraju). */
+const ROW_SPAN = 100_000;
+
+/**
+ * Povezivanje naziva sa kupcima (u transakciji upisa — prima izvršioca):
+ * PIB → šifra partnera → naziv (prvo među kupcima komercijaliste čija je tabela).
+ * Ručne veze (`receivable_customer_links`) se NE upisuju ovde — imaju prednost pri čitanju.
+ */
+async function customerMatcher(db: Exec, codes: string[]) {
+  const [customers, reps, assignments] = await Promise.all([
+    db.execute<{ id: string; pib: string; name: string; city: string | null }>(sql`SELECT id, pib, name, city FROM customers`),
+    db.execute<{ id: string; name: string }>(sql`SELECT id, name FROM users WHERE role = 'komercijalista' AND active`),
+    db.execute<{ user_id: string; customer_id: string }>(sql`SELECT user_id, customer_id FROM customer_assignments`),
+  ]);
+  const list = [...customers];
+  const byPib = new Map(list.map((c) => [c.pib, c.id]));
   const codePib = new Map<string, string>();
   if (codes.length) {
     for (const r of await db.execute<{ code: string; pib: string | null }>(sql`
@@ -63,18 +73,33 @@ async function matchCustomers(db: Exec, lines: ReceivableLine[]) {
       if (r.pib) codePib.set(r.code, r.pib);
     }
   }
-  return lines.map((l) => {
-    const viaPib = l.pib ? byPib.get(l.pib) : undefined;
-    const viaCode = l.partnerCode && codePib.has(l.partnerCode) ? byPib.get(codePib.get(l.partnerCode)!) : undefined;
-    const viaName = byName.get(nameKey(l.customerLabel)) ?? undefined;
-    return { line: l, customerId: viaPib ?? viaCode ?? viaName ?? null };
-  });
+  const byRep = new Map<string, Set<string>>();
+  for (const a of assignments) {
+    const set = byRep.get(a.user_id) ?? new Set<string>();
+    set.add(a.customer_id);
+    byRep.set(a.user_id, set);
+  }
+  const repList = [...reps];
+  const cache = new Map<string, string | null>();
+  return (sheetLabel: string, l: { customerLabel: string; pib?: string | null; partnerCode?: string | null }) => {
+    if (l.pib && byPib.has(l.pib)) return byPib.get(l.pib)!;
+    if (l.partnerCode && codePib.has(l.partnerCode) && byPib.has(codePib.get(l.partnerCode)!)) return byPib.get(codePib.get(l.partnerCode)!)!;
+    const key = `${sheetLabel}|${l.customerLabel}`;
+    if (!cache.has(key)) {
+      const rep = repForSheet(sheetLabel, repList);
+      cache.set(key, matchCustomer(l.customerLabel, list, rep ? byRep.get(rep.id) ?? new Set() : new Set()));
+    }
+    return cache.get(key) ?? null;
+  };
 }
 
-async function store(source: "google_sheet" | "upload", sourceRef: string, grid: unknown[][], actorId: string | null) {
-  const parsed = parseReceivables(grid);
-  if (!parsed.ok) throw new ReceivablesError(parsed.error ?? "Tabela nije pročitana.");
-  const sha = createHash("sha256").update(JSON.stringify(grid)).digest("hex");
+async function store(source: "google_sheet" | "upload", sourceRef: string, sheets: SheetGrid[], actorId: string | null) {
+  const parsed = sheets.map((sh) => ({ ...sh, result: parseReceivables(sh.grid) }));
+  const bad = parsed.find((p) => !p.result.ok);
+  if (bad) throw new ReceivablesError(`Tabela „${bad.label}“: ${bad.result.error ?? "nije pročitana."}`);
+  const sha = createHash("sha256").update(JSON.stringify(sheets)).digest("hex");
+  const lineCount = parsed.reduce((s, p) => s + p.result.lines.length, 0);
+  const warnCount = parsed.reduce((s, p) => s + p.result.warnings.length, 0);
   const db = getDb();
   return db.transaction(async (tx) => {
     // Dva istovremena čitanja (dva komercijalista otvore ekran) ne prave dva snimka.
@@ -83,46 +108,62 @@ async function store(source: "google_sheet" | "upload", sourceRef: string, grid:
       SELECT id, content_sha256 AS sha FROM receivable_snapshots ORDER BY created_at DESC, id DESC LIMIT 1`))];
     if (last && last.sha === sha) {
       await tx.execute(sql`UPDATE receivable_snapshots SET checked_at = now() WHERE id = ${last.id}::uuid`);
-      return { snapshotId: last.id, changed: false, lines: parsed.lines.length, warnings: parsed.warnings.length };
+      return { snapshotId: last.id, changed: false, lines: lineCount, warnings: warnCount };
     }
-    const matched = await matchCustomers(tx, parsed.lines);
-    const total = parsed.lines.reduce((s, l) => s + l.remaining, 0);
-    const warnings = parsed.warnings.slice(0, 200);
+    const codes = [...new Set(parsed.flatMap((p) => p.result.lines.map((l) => l.partnerCode)).filter((c): c is string => Boolean(c)))];
+    const match = await customerMatcher(tx, codes);
+    const lines = parsed.flatMap((p, i) =>
+      p.result.lines.map((l) => ({ l, row: i * ROW_SPAN + l.row, label: p.label, customerId: match(p.label, l) })),
+    );
+    const roster = parsed.flatMap((p, i) =>
+      p.result.customers.map((c) => ({ row: i * ROW_SPAN + c.row, label: p.label, customerLabel: c.label, customerId: match(p.label, { customerLabel: c.label }) })),
+    );
+    const total = lines.reduce((s, x) => s + x.l.remaining, 0);
+    const warnings = parsed.flatMap((p) => p.result.warnings.map((w) => ({ row: w.row, text: sheets.length > 1 ? `${p.label}: ${w.text}` : w.text }))).slice(0, 200);
     const [snap] = [...(await tx.execute<{ id: string }>(sql`
       INSERT INTO receivable_snapshots (source, source_ref, content_sha256, row_count, matched_count, total_remaining, warnings, created_by)
-      VALUES (${source}, ${sourceRef.slice(0, 200)}, ${sha}, ${parsed.lines.length}, ${matched.filter((m) => m.customerId).length},
+      VALUES (${source}, ${sourceRef.slice(0, 200)}, ${sha}, ${lines.length}, ${lines.filter((x) => x.customerId).length},
               ${total.toFixed(2)}, ${JSON.stringify(warnings)}::jsonb, ${actorId}::uuid)
       RETURNING id`))];
-    for (let i = 0; i < matched.length; i += 200) {
-      const chunk = matched.slice(i, i + 200);
+    for (let i = 0; i < lines.length; i += 200) {
       await tx.execute(sql`
-        INSERT INTO receivable_lines (snapshot_id, row_number, customer_id, customer_label, pib, partner_code, invoice_number, issued_on, due_on, amount, paid, remaining, note)
+        INSERT INTO receivable_lines (snapshot_id, row_number, customer_id, customer_label, pib, partner_code, invoice_number, issued_on, due_on, amount, paid, remaining, note, source_label, label_key)
         VALUES ${sql.join(
-          chunk.map(
-            ({ line: l, customerId }) =>
-              sql`(${snap.id}::uuid, ${l.row}, ${customerId}::uuid, ${l.customerLabel.slice(0, 200)}, ${l.pib}, ${l.partnerCode}, ${l.invoiceNumber},
+          lines.slice(i, i + 200).map(
+            ({ l, row, label, customerId }) =>
+              sql`(${snap.id}::uuid, ${row}, ${customerId}::uuid, ${l.customerLabel.slice(0, 200)}, ${l.pib}, ${l.partnerCode}, ${l.invoiceNumber},
                    ${l.issuedOn}::date, ${l.dueOn}::date, ${l.amount === null ? null : l.amount.toFixed(2)}, ${l.paid === null ? null : l.paid.toFixed(2)},
-                   ${l.remaining.toFixed(2)}, ${l.note})`,
+                   ${l.remaining.toFixed(2)}, ${l.note}, ${label}, ${nameKey(l.customerLabel, { keepPlace: true }).slice(0, 200)})`,
           ),
           sql`, `,
         )}`);
     }
-    return { snapshotId: snap.id, changed: true, lines: parsed.lines.length, warnings: parsed.warnings.length };
+    for (let i = 0; i < roster.length; i += 300) {
+      await tx.execute(sql`
+        INSERT INTO receivable_sheet_customers (snapshot_id, row_number, source_label, customer_label, label_key, customer_id)
+        VALUES ${sql.join(
+          roster.slice(i, i + 300).map(
+            (r) => sql`(${snap.id}::uuid, ${r.row}, ${r.label}, ${r.customerLabel.slice(0, 200)}, ${nameKey(r.customerLabel, { keepPlace: true }).slice(0, 200)}, ${r.customerId}::uuid)`,
+          ),
+          sql`, `,
+        )}`);
+    }
+    return { snapshotId: snap.id, changed: true, lines: lineCount, warnings: warnCount };
   });
 }
 
-/** Čitanje Google tabele (dugme „Osveži“ ili automatski posle AUTO_REFRESH_MINUTES). */
+/** Čitanje Google tabela (dugme „Osveži“ ili automatski posle AUTO_REFRESH_MINUTES). */
 export async function refreshFromGoogle(actorId: string | null) {
   const cfg = sheetConfig();
   if (!cfg) throw new ReceivablesError("Google tabela još nije povezana.");
-  let grid: (string | number | null)[][];
+  let sheets: SheetGrid[];
   try {
-    grid = await readSheetValues(cfg);
+    sheets = (await readSheets(cfg)).map((s) => ({ label: s.title, grid: s.values }));
   } catch (error) {
     if (error instanceof SheetReadError) throw new ReceivablesError(error.message);
     throw new ReceivablesError("Google tabela trenutno nije dostupna. Prikazano je poslednje sačuvano stanje.");
   }
-  return store("google_sheet", `google:${cfg.id.slice(0, 6)}…`, grid, actorId);
+  return store("google_sheet", `google: ${sheets.map((s) => s.label).join(", ")}`, sheets, actorId);
 }
 
 /**
@@ -160,7 +201,9 @@ export async function importReceivablesFile(actor: Pick<PortalUser, "id">, fileN
     if (error instanceof XlsxReadError || error instanceof CsvReadError) throw new ReceivablesError("Fajl nije čitljiv (očekuje se XLSX ili CSV).");
     throw error;
   }
-  return store("upload", fileName.slice(0, 120) || "fajl", grid, actor.id);
+  // Naziv fajla („Milan.xlsx“) je naziv tabele = komercijalista.
+  const label = fileName.replace(/\.[a-z0-9]+$/i, "").trim().slice(0, 80) || "fajl";
+  return store("upload", fileName.slice(0, 120) || "fajl", [{ label, grid }], actor.id);
 }
 
 export type CustomerDebt = {
@@ -174,20 +217,24 @@ export type CustomerDebt = {
   oldestIssuedOn: string | null;
 };
 
+/** Kupac reda: ručna veza (0062) ima prednost nad automatskim poklapanjem. */
+const EFFECTIVE = sql`coalesce(k.customer_id, l.customer_id)`;
+const LINKS = sql`LEFT JOIN receivable_customer_links k ON k.label_key = l.label_key`;
+
 /** Zbir po kupcu u opsegu korisnika (poslednji snimak). */
 export async function debtsByCustomer(viewer: PortalUser, today = belgradeDate(new Date())): Promise<CustomerDebt[]> {
   const last = await latestSnapshot();
   if (!last) return [];
   const scope = await resolveLedgerScope(viewer);
   if (scope.customerIds !== null && scope.customerIds.length === 0) return [];
-  const inScope = scope.customerIds === null ? sql`true` : sql`l.customer_id IN (${sql.join(scope.customerIds.map((id) => sql`${id}::uuid`), sql`, `)})`;
+  const inScope = scope.customerIds === null ? sql`true` : sql`${EFFECTIVE} IN (${sql.join(scope.customerIds.map((id) => sql`${id}::uuid`), sql`, `)})`;
   const rows = await getDb().execute<{ id: string; name: string; n: number; total: string; od_total: string; od_n: number; max_od: number | null; oldest: string | null }>(sql`
     SELECT c.id, c.name, count(*)::int AS n, sum(l.remaining)::text AS total,
            coalesce(sum(l.remaining) FILTER (WHERE l.due_on < ${today}::date), 0)::text AS od_total,
            count(*) FILTER (WHERE l.due_on < ${today}::date)::int AS od_n,
            max(${today}::date - l.due_on) FILTER (WHERE l.due_on < ${today}::date) AS max_od,
            min(l.issued_on)::text AS oldest
-      FROM receivable_lines l JOIN customers c ON c.id = l.customer_id
+      FROM receivable_lines l ${LINKS} JOIN customers c ON c.id = ${EFFECTIVE}
      WHERE l.snapshot_id = ${last.id}::uuid AND ${inScope}
      GROUP BY c.id, c.name`);
   return [...rows].map((r) => ({
@@ -220,19 +267,102 @@ export async function customerDebtLines(customerId: string, today = belgradeDate
   const last = await latestSnapshot();
   if (!last) return { snapshot: null, lines: [] as DebtLine[] };
   const rows = await getDb().execute<{ inv: string | null; issued: string | null; due: string | null; amount: string | null; paid: string | null; rem: string; note: string | null }>(sql`
-    SELECT invoice_number AS inv, issued_on::text AS issued, due_on::text AS due, amount::text, paid::text, remaining::text AS rem, note
-      FROM receivable_lines WHERE snapshot_id = ${last.id}::uuid AND customer_id = ${customerId}::uuid
-     ORDER BY due_on NULLS LAST, issued_on NULLS LAST, row_number`);
+    SELECT l.invoice_number AS inv, l.issued_on::text AS issued, l.due_on::text AS due, l.amount::text, l.paid::text, l.remaining::text AS rem, l.note
+      FROM receivable_lines l ${LINKS}
+     WHERE l.snapshot_id = ${last.id}::uuid AND ${EFFECTIVE} = ${customerId}::uuid
+     ORDER BY l.due_on NULLS LAST, l.issued_on NULLS LAST, l.row_number`);
   return { snapshot: last, lines: [...rows].map((r) => toLine(r, today)) };
 }
 
-/** Redovi koje nije bilo moguće povezati sa kupcem (vlasnik i kancelarija). */
+/**
+ * Nazivi iz tabela koje portal nije povezao sa kupcem (vlasnik i kancelarija): i kupci bez duga
+ * (iz spiska), da se povežu jednom. Prvo oni sa dugom.
+ */
 export async function unmatchedDebtLines() {
   const last = await latestSnapshot();
   if (!last) return [];
-  const rows = await getDb().execute<{ label: string; pib: string | null; code: string | null; n: number; total: string }>(sql`
-    SELECT customer_label AS label, pib, partner_code AS code, count(*)::int AS n, sum(remaining)::text AS total
-      FROM receivable_lines WHERE snapshot_id = ${last.id}::uuid AND customer_id IS NULL
-     GROUP BY customer_label, pib, partner_code ORDER BY sum(remaining) DESC`);
-  return [...rows].map((r) => ({ label: r.label, pib: r.pib, code: r.code, invoices: r.n, total: Number(r.total) }));
+  const rows = await getDb().execute<{ key: string; label: string; sheet: string | null; n: number; total: string | null }>(sql`
+    WITH names AS (
+      SELECT l.label_key AS key, min(l.customer_label) AS label, min(l.source_label) AS sheet, count(*)::int AS n, sum(l.remaining) AS total
+        FROM receivable_lines l ${LINKS}
+       WHERE l.snapshot_id = ${last.id}::uuid AND ${EFFECTIVE} IS NULL AND l.label_key IS NOT NULL
+       GROUP BY l.label_key
+      UNION ALL
+      SELECT r.label_key, min(r.customer_label), min(r.source_label), 0, NULL
+        FROM receivable_sheet_customers r LEFT JOIN receivable_customer_links k ON k.label_key = r.label_key
+       WHERE r.snapshot_id = ${last.id}::uuid AND coalesce(k.customer_id, r.customer_id) IS NULL
+       GROUP BY r.label_key
+    )
+    SELECT key, min(label) AS label, min(sheet) AS sheet, max(n)::int AS n, max(total)::text AS total
+      FROM names GROUP BY key ORDER BY max(coalesce(total, 0)) DESC, min(label)`);
+  return [...rows].map((r) => ({ key: r.key, label: r.label, sheet: r.sheet, invoices: r.n, total: Number(r.total ?? 0) }));
+}
+
+/** Kupci za ručno povezivanje (padajući spisak). */
+export async function customersForLinking() {
+  const rows = await getDb().execute<{ id: string; name: string; city: string | null }>(sql`SELECT id, name, city FROM customers WHERE active ORDER BY name`);
+  return [...rows];
+}
+
+/** Ručna veza „naziv iz tabele → kupac“ (vlasnik i kancelarija). Ponovna veza istog naziva menja kupca. */
+export async function linkSheetLabel(actor: Pick<PortalUser, "id">, input: { key: string; customerId: string }) {
+  const key = String(input.key ?? "").trim().slice(0, 200);
+  if (!key) throw new ReceivablesError("Nedostaje naziv iz tabele.");
+  const db = getDb();
+  const [c] = [...(await db.execute<{ id: string }>(sql`SELECT id FROM customers WHERE id = ${input.customerId}::uuid`))];
+  if (!c) throw new ReceivablesError("Kupac ne postoji.");
+  const last = await latestSnapshot();
+  const [example] = last
+    ? [...(await db.execute<{ label: string }>(sql`
+        SELECT customer_label AS label FROM receivable_sheet_customers WHERE snapshot_id = ${last.id}::uuid AND label_key = ${key}
+        UNION ALL SELECT customer_label FROM receivable_lines WHERE snapshot_id = ${last.id}::uuid AND label_key = ${key} LIMIT 1`))]
+    : [];
+  await db.execute(sql`
+    INSERT INTO receivable_customer_links (label_key, customer_id, label_example, created_by)
+    VALUES (${key}, ${c.id}::uuid, ${example?.label ?? key}, ${actor.id}::uuid)
+    ON CONFLICT (label_key) DO UPDATE SET customer_id = EXCLUDED.customer_id, created_by = EXCLUDED.created_by, created_at = now()`);
+}
+
+export type SheetAssignment = {
+  customerId: string;
+  customerName: string;
+  sheet: string;
+  repId: string;
+  repName: string;
+  current: { id: string; name: string }[];
+};
+
+/**
+ * „Čiji je kupac“: kupac je u tabeli komercijaliste X, a u portalu nije dodeljen X-u.
+ * Samo predlog — dodelu potvrđuje vlasnik (`assignments:manage`).
+ */
+export async function sheetAssignmentSuggestions(): Promise<SheetAssignment[]> {
+  const last = await latestSnapshot();
+  if (!last) return [];
+  const db = getDb();
+  const [roster, reps, assigned] = await Promise.all([
+    db.execute<{ cid: string; name: string; sheet: string }>(sql`
+      SELECT DISTINCT coalesce(k.customer_id, r.customer_id) AS cid, c.name, r.source_label AS sheet
+        FROM receivable_sheet_customers r
+        LEFT JOIN receivable_customer_links k ON k.label_key = r.label_key
+        JOIN customers c ON c.id = coalesce(k.customer_id, r.customer_id)
+       WHERE r.snapshot_id = ${last.id}::uuid`),
+    db.execute<{ id: string; name: string }>(sql`SELECT id, name FROM users WHERE role = 'komercijalista' AND active`),
+    db.execute<{ cid: string; uid: string; name: string }>(sql`
+      SELECT a.customer_id AS cid, u.id AS uid, u.name FROM customer_assignments a JOIN users u ON u.id = a.user_id`),
+  ]);
+  const repList = [...reps];
+  const byCustomer = new Map<string, { id: string; name: string }[]>();
+  for (const a of assigned) byCustomer.set(a.cid, [...(byCustomer.get(a.cid) ?? []), { id: a.uid, name: a.name }]);
+  const out: SheetAssignment[] = [];
+  const seen = new Set<string>();
+  for (const r of roster) {
+    const rep = repForSheet(r.sheet, repList);
+    if (!rep) continue;
+    const current = byCustomer.get(r.cid) ?? [];
+    if (current.some((c) => c.id === rep.id) || seen.has(`${r.cid}|${rep.id}`)) continue;
+    seen.add(`${r.cid}|${rep.id}`);
+    out.push({ customerId: r.cid, customerName: r.name, sheet: r.sheet, repId: rep.id, repName: rep.name, current });
+  }
+  return out.sort((a, b) => a.repName.localeCompare(b.repName, "sr-Latn") || a.customerName.localeCompare(b.customerName, "sr-Latn"));
 }

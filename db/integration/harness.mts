@@ -295,6 +295,8 @@ const RESETTABLE_TABLES = [
   /* Alati komercijaliste (0061): beleške i stanje dugovanja odbijaju DELETE okidačem. */
   "customer_call_notes",
   "customer_sales_contacts",
+  "receivable_customer_links",
+  "receivable_sheet_customers",
   "receivable_lines",
   "receivable_snapshots",
   /*

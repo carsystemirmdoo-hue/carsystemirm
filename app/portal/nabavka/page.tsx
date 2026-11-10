@@ -1,31 +1,32 @@
-import { PhaseNotice } from "@/components/portal/PhaseNotice";
 import { PageHeader } from "@/components/portal/PortalPrimitives";
+import { can } from "@/lib/authz/permissions.mjs";
 import { requireCapability } from "@/lib/authz/session";
-
+import { COVER_CHOICES, HISTORY_DAYS, loadProcurement } from "@/lib/procurement/procurement-service";
+import { ProcurementTable } from "./ProcurementTable";
 
 export const metadata = { title: "Nabavka" };
 
 export const dynamic = "force-dynamic";
 
-export default async function Page() {
-  await requireCapability("view:nabavka", "/portal/nabavka");
+/**
+ * Nabavka (2026-11-10): predlog količina po brendu iz prodaje i važećeg lagera, kolona
+ * „Poručujem“ za konačnu odluku i fajl porudžbine dobavljaču (samo šifra, naziv, količina, JM).
+ */
+export default async function Page({ searchParams }: { searchParams: Promise<Record<string, string | string[] | undefined>> }) {
+  const user = await requireCapability("view:nabavka", "/portal/nabavka");
+  const sp = await searchParams;
+  const raw = Number(typeof sp.dana === "string" ? sp.dana : "");
+  const coverDays = (COVER_CHOICES as readonly number[]).includes(raw) ? raw : 60;
+  const data = await loadProcurement({ coverDays });
 
   return (
     <>
       <PageHeader
         eyebrow="Logistika"
         title="Nabavka"
-        description="Izbor grupe ili brenda, pa predlog količina za period od 30 do 180 dana."
+        description="Izaberite brend, proverite predlog i u koloni „Poručujem“ upišite koliko poručujete. Fajl za dobavljača sadrži samo šifru, naziv i količinu."
       />
-      <PhaseNotice
-        icon="products"
-        title="Ekran čeka izvor podataka"
-        summary="Preporuka se računa iz neto potrošnje podeljene brojem dana kada je artikal bio dostupan — dani bez zalihe se ne računaju kao dani bez tražnje. Bez stanja i istorije dostupnosti prikazuje se „Nedovoljno podataka za pouzdanu preporuku“."
-        requires={[
-          "Istorija dana bez zalihe — stanje se već uvozi (Uvoz lagera), ali samo kao trenutni snimak, pa se ne zna koliko dana artikla nije bilo.",
-        ]}
-        availability="Dostupno kada se prikupi istorija stanja zaliha"
-      />
+      <ProcurementTable data={data} historyDays={HISTORY_DAYS} coverChoices={[...COVER_CHOICES]} canExport={can(user, "procurement:prepare")} />
     </>
   );
 }

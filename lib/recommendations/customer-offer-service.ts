@@ -112,7 +112,7 @@ export async function loadCustomerOffer(viewer: PortalUser, customerId: string, 
   const lidCode = new Map(lidRows.map((l) => [l.id, l.code]));
   const [{ prices }, stock] = await Promise.all([
     customerPrices(customerId, [...new Set([...ids, ...lidIds])], today, null),
-    customerStockFor(ids, now).catch(() => ({ state: "iskljuceno" as const })),
+    customerStockFor(ids, now, { internal: true }).catch(() => ({ state: "iskljuceno" as const })),
   ]);
   const stockOf = (id: string | null): CustomerStockLine | null => {
     if (!id || stock.state === "iskljuceno") return null;

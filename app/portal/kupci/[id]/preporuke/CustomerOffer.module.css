@@ -295,6 +295,7 @@
 .stock { display: inline-block; font-size: 12px; font-weight: 600; padding: 2px 8px; border-radius: 999px; white-space: nowrap; background: var(--p-surface-subtle); color: var(--p-muted); }
 .stock[data-s="ima"] { background: var(--p-green-soft); color: var(--p-green); }
 .stock[data-s="nema"] { background: var(--p-red-soft); color: var(--p-red-dark); }
+.stale { color: var(--p-amber, #9a6700); }
 
 /* Zahtev u ime kupca */
 .orderDialog { width: min(720px, calc(100vw - 24px)); max-height: calc(100dvh - 24px); }

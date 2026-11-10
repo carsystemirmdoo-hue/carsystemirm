@@ -7,6 +7,7 @@ import { DISMISS_REASONS } from "@/lib/recommendations/customerOffer.mjs";
 import { STATUS_LABELS } from "@/lib/recommendations/policy.mjs";
 import { nextSort, sortRows } from "@/lib/ui/sortRows.mjs";
 import { SortHeader } from "@/components/portal/SortHeader";
+import { staleNote, stockRank, stockShort, workdaysSince } from "@/lib/stock/stockAge.mjs";
 import { dismissArticleAction, restoreArticleAction } from "./actions";
 import { RepOrderDialog } from "./RepOrderDialog";
 import styles from "./CustomerOffer.module.css";
@@ -32,7 +33,7 @@ const dmy = (d: string | null) => (d ? `${d.slice(8, 10)}.${d.slice(5, 7)}.${d.s
 const qty = (n: number) => n.toLocaleString("sr-Latn-RS", { maximumFractionDigits: 3 });
 /** Redosled statusa kada se ređa po koloni „Status“: najhitnije prvo. */
 const STATUS_RANK: Record<string, number> = { overdue: 0, due: 1, due_soon: 2, not_yet: 3, provisional: 4, dormant: 5, insufficient_history: 6 };
-type SortKey = "artikal" | "status" | "poslednja" | "ritam" | "trebalo" | "cenaRanije" | "cenaDanas";
+type SortKey = "artikal" | "status" | "poslednja" | "ritam" | "trebalo" | "cenaRanije" | "cenaDanas" | "lager";
 /** Vrednost za ređanje i prirodan prvi smer (npr. „Poslednja kupovina“ od najstarije = najduže nije uzimao). */
 const SORT: Record<SortKey, { value: (r: OfferRow) => string | number | null; first: "asc" | "desc" }> = {
   artikal: { value: (r) => r.articleName, first: "asc" },
@@ -42,6 +43,7 @@ const SORT: Record<SortKey, { value: (r: OfferRow) => string | number | null; fi
   trebalo: { value: (r) => r.rec.daysUntilExpected, first: "asc" },
   cenaRanije: { value: (r) => (r.last ? r.last.unitPrice * (1 - r.last.discountPercent / 100) : null), first: "desc" },
   cenaDanas: { value: (r) => r.today?.netCents ?? null, first: "desc" },
+  lager: { value: (r) => stockRank(r.stock?.state), first: "asc" },
 };
 const label = (s: string) => (STATUS_LABELS as Record<string, string>)[s] ?? s;
 
@@ -79,6 +81,7 @@ export function CustomerOffer({
   const dialog = useRef<HTMLDialogElement>(null);
   const [ordering, setOrdering] = useState(false);
   const showStock = rows.some((r) => r.stock);
+  const stale = stockDate ? staleNote(workdaysSince(stockDate, today)) : null;
 
   const live = useMemo(() => rows.filter((r) => !r.dismissal), [rows]);
   const gone = useMemo(() => rows.filter((r) => r.dismissal), [rows]);
@@ -199,7 +202,7 @@ export function CustomerOffer({
                 {head("trebalo", "Trebalo je")}
                 {head("cenaRanije", "Poslednji put", "right")}
                 {head("cenaDanas", "Danas", "right")}
-                {showStock ? <th>Lager</th> : null}
+                {showStock ? head("lager", "Lager") : null}
                 <th aria-label="Radnje" />
               </tr>
             </thead>
@@ -252,7 +255,10 @@ export function CustomerOffer({
                         </span>
                       </td>
                       {showStock ? (
-                        <td data-label="Lager">{r.stock ? <span className={styles.stock} data-s={r.stock.state}>{r.stock.text}</span> : "—"}</td>
+                        <td className={styles.nowrap} data-label="Lager" title={r.stock ? `${r.stock.text}${stockDate ? ` (stanje ${dmy(stockDate)})` : ""}` : undefined}>
+                          {r.stock ? <span className={styles.stock} data-s={r.stock.state}>{stockShort(r.stock.state)}</span> : "—"}
+                          {r.stock && stale ? <span className={`${styles.sub} ${styles.stale}`}>{stale}</span> : null}
+                        </td>
                       ) : null}
                       <td className={styles.cAct}>{canEdit ? <button type="button" className={styles.link} onClick={() => askRemove(r)}>Ne uzima više</button> : null}</td>
                     </tr>
@@ -265,6 +271,13 @@ export function CustomerOffer({
                               <h3>Kupovine</h3>
                               {timeline(r)}
                               <p className={styles.why}>{r.rec.explanation}</p>
+                              {r.stock ? (
+                                <p className={styles.why} style={{ marginTop: 8 }}>
+                                  <b>Lager:</b> {r.stock.text}
+                                  {stockDate ? ` — stanje od ${dmy(stockDate)}` : ""}
+                                  {stale ? ` (${stale})` : ""}.
+                                </p>
+                              ) : null}
                               {r.lid ? <p className={styles.why} style={{ marginTop: 8 }}><b>Obavezan par:</b> u ponudu ide i {r.lid.code} {r.lid.name} u istoj količini.</p> : null}
                             </div>
                             <div>
@@ -296,7 +309,7 @@ export function CustomerOffer({
         </div>
         <p className={styles.legend}>
           „Poslednji put“ = VP cena, rabat i neto sa poslednje fakture. „Danas“ = neto i rabat koje bi kupac sada dobio po važećim uslovima.
-          {showStock && stockDate ? ` „Lager“ = stanje magacina na dan ${dmy(stockDate)}, isto što vidi kupac.` : ""} Klik na red otvara detalje.
+          {showStock && stockDate ? ` „Lager“ = stanje magacina na dan ${dmy(stockDate)}${stale ? ` (${stale})` : ""}; broj komada je u detaljima reda.` : ""} Klik na red otvara detalje.
         </p>
         <div className={styles.foot}>
           <span>

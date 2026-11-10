@@ -10668,3 +10668,20 @@ html:has(.portal-customer-area) { scroll-padding-top: 104px; }
 .portal-table-sub { display: block; color: var(--p-muted); font-size: 12px; font-weight: 400; }
 /* Diskretna oznaka u listi rabata komercijaliste (2026-11-10): analiza faktura bez posebnog panela. */
 .rr-mark { display: inline-block; width: 7px; height: 7px; margin-left: 8px; border-radius: 50%; background: var(--p-faint); vertical-align: 2px; cursor: help; }
+
+/* Preporuke — lista kupaca sa brojem preporuka (2026-11-10): krupno i jasno. */
+.pk-table th[scope="row"] a { font-size: 15px; }
+.pk-table td, .pk-table th { padding-top: 14px; padding-bottom: 14px; vertical-align: middle; }
+.pk-num { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.pk-count { display: inline-block; min-width: 38px; padding: 3px 10px; border-radius: 999px; background: var(--p-red); color: #fff; font-weight: 700; text-align: center; }
+.pk-late { color: var(--p-red-dark); font-weight: 700; }
+.pk-open { text-align: right; white-space: nowrap; font-weight: 600; color: var(--p-ink); }
+.pk-empty { margin: 0; padding: 18px 16px; color: var(--p-muted); }
+/* Za razgovor — tabela (2026-11-10). */
+.zt-table td, .zt-table th { vertical-align: middle; padding-top: 12px; padding-bottom: 12px; }
+.zt-table th[scope="row"] a { font-size: 15px; }
+.zt-table small { display: block; margin-top: 2px; color: var(--p-muted); font-size: 12px; font-weight: 400; }
+.zt-what { max-width: 420px; }
+.zt-muted { color: var(--p-muted); font-size: 13px; }
+.zt-date { white-space: nowrap; }
+.pk-table thead th.pk-num { text-align: right; }

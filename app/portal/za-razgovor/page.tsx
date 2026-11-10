@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { ClickableRows } from "@/components/portal/ClickableRows";
 import { Badge, PageHeader } from "@/components/portal/PortalPrimitives";
 import { can, seesAllCustomers } from "@/lib/authz/permissions.mjs";
 import { requireCapability } from "@/lib/authz/session";
@@ -10,7 +11,6 @@ import { parseCustomerStatusFilter } from "@/lib/customers/customerStatus.mjs";
 import { loadCustomerProfiles, type CustomerProfile } from "@/lib/recommendations/customer-profile";
 import { srDate } from "@/lib/recommendations/customerSummary.mjs";
 import { isRecommendationsEnabled } from "@/lib/recommendations/gate";
-import { loadCrossSell, type CrossSell } from "@/lib/recommendations/cross-sell";
 import { listPriceRequests } from "@/lib/ordering/price-request-service";
 import { loadRecomputeStatus } from "@/lib/recommendations/auto-recompute";
 import { AutoRecomputeStatus } from "@/components/portal/AutoRecomputeStatus";
@@ -33,7 +33,6 @@ type Item = {
   reps: string[];
   active: boolean;
   profile: CustomerProfile;
-  crossSell: CrossSell | null;
 };
 
 function dana(n: number) {
@@ -63,89 +62,41 @@ function fmtTime(at: Date | null) {
   return dmyTime(at);
 }
 
-function CustomerItem({ item, showReps }: { item: Item; showReps: boolean }) {
+/** Jedan red tabele „Za razgovor“: ceo red vodi na preporuke kupca (2026-11-10). */
+function TalkRow({ item, showReps }: { item: Item; showReps: boolean }) {
   const s = item.profile.summary;
+  const names = s.mention.slice(0, 3).map((m) => m.name);
+  const more = s.suggestionCounts.main - names.length;
   return (
-    <li className="zr-item">
-      <div className="zr-head">
-        <Link href={`/portal/kupci/${item.id}`} className="zr-name">
-          {item.name}
-        </Link>
-        {item.active ? (
-          <Badge tone={s.status.tone as Tone}>{s.status.label}</Badge>
+    <tr>
+      <th scope="row">
+        <Link className="rr-row-link" href={`/portal/kupci/${item.id}/preporuke`}>{item.name}</Link>
+        <small>
+          {[item.city, showReps ? (item.reps.length ? item.reps.join(", ") : "bez komercijaliste") : null].filter(Boolean).join(" · ")}
+        </small>
+      </th>
+      <td>
+        <Badge tone={s.status.tone as Tone}>{s.status.label}</Badge>
+      </td>
+      <td className="zt-what">
+        {names.length ? (
+          <>
+            {names.join(", ")}
+            {more > 0 ? <small>i još {more}</small> : null}
+          </>
         ) : (
-          <Badge tone="neutral">Neaktivan kupac</Badge>
+          <span className="zt-muted">{s.change}</span>
         )}
-      </div>
-      <div className="zr-meta">
-        <span>
-          Poslednja kupovina: <strong>{s.lastPurchaseOn ? srDate(s.lastPurchaseOn) : "—"}</strong>
-          {s.daysSinceLastPurchase !== null ? ` · pre ${dana(s.daysSinceLastPurchase)}` : ""}
-        </span>
-        {item.city ? <span>{item.city}</span> : null}
-        {showReps ? <span>Komercijalista: {item.reps.length ? item.reps.join(", ") : "nije dodeljen"}</span> : null}
-      </div>
-      {item.active ? (
-      <div className="zr-body">
-        <div>
-          <h3>Zašto</h3>
-          <p>{s.change}</p>
-          {s.mention.length ? (
-            <ul className="zr-articles">
-              {/* Najviše tri; ostatak rangirane liste je na kartici kupca. */}
-              {s.mention.slice(0, 3).map((m) => (
-                <li key={m.articleCode} data-tone={m.tone}>
-                  <strong>{m.name}</strong> — {m.reason}
-                </li>
-              ))}
-              {s.suggestionCounts.main > 3 ? (
-                <li className="zr-more">
-                  <Link href={`/portal/kupci/${item.id}`}>
-                    još {s.suggestionCounts.main - 3} na kartici kupca
-                  </Link>
-                </li>
-              ) : null}
-            </ul>
-          ) : null}
-        </div>
-        {(() => {
-          // Samo jak ili kataloški predlog; slab signal ostaje na kartici kupca.
-          const top = item.crossSell?.suggestions.find((x) => x.peer?.strength === "strong" || x.catalog);
-          if (!top) return null;
-          const name = top.identity?.catalog?.name ?? top.identity?.bizName ?? top.articleCode;
-          return (
-            <div className="zr-xs">
-              <h3>Za proširenje</h3>
-              <p>
-                <strong>{name}</strong> —{" "}
-                {top.catalog
-                  ? `kompatibilno sa „${top.catalog.viaName}” koji kupac uzima`
-                  : `${top.peer!.support} od ${top.peer!.peers} sličnih firmi to uzima`}
-                .
-              </p>
-            </div>
-          );
-        })()}
-        <div className="zr-next">
-          <h3>Predlog za razgovor</h3>
-          <p>{s.nextStep}</p>
-          <Link href={`/portal/kupci/${item.id}/preporuke`} className="zr-open">
-            Preporuke i ponuda →
-          </Link>
-          <Link href={`/portal/kupci/${item.id}`} className="zr-open">
-            Kartica kupca →
-          </Link>
-        </div>
-      </div>
-      ) : (
-        <p className="zr-inactive">Kupac je označen kao neaktivan — bez predloga; istorija i osnov su na kartici kupca.</p>
-      )}
-    </li>
+      </td>
+      <td className="zt-date">
+        {s.lastPurchaseOn ? srDate(s.lastPurchaseOn) : "—"}
+        {s.daysSinceLastPurchase !== null ? <small>pre {dana(s.daysSinceLastPurchase)}</small> : null}
+      </td>
+      <td className="pk-open">Otvori →</td>
+    </tr>
   );
 }
 
-/** Koliko kupaca po grupi se prikazuje odmah; ostali su u otvorivom delu. */
-const ZR_ODMAH = 10;
 
 export default async function TalkListPage({
   searchParams,
@@ -173,8 +124,7 @@ export default async function TalkListPage({
   ]);
 
   // Opseg je već sužen iznad (`resolveLedgerScope`); predlozi i upiti se računaju samo za te kupce.
-  const [crossSell, priceRequests, autoRecompute] = await Promise.all([
-    loadCrossSell([...customerRows].map((c) => c.id)),
+  const [priceRequests, autoRecompute] = await Promise.all([
     listPriceRequests(user),
     loadRecomputeStatus(),
   ]);
@@ -187,7 +137,6 @@ export default async function TalkListPage({
       reps: c.reps ?? [],
       active: c.active,
       profile: data.profiles.get(c.id) ?? null,
-      crossSell: crossSell.get(c.id) ?? null,
     }))
     .filter((x): x is Item => x.profile !== null);
   // Kupci bez ijednog dokumenta nemaju profil iz podataka; prikazuju se u sklopljenoj grupi.
@@ -210,13 +159,9 @@ export default async function TalkListPage({
   return (
     <>
       <PageHeader
-        eyebrow="Prodaja"
+        eyebrow="Moji kupci"
         title="Za razgovor"
-        description={
-          all
-            ? "Kupci poređani po tome kome vredi posvetiti pažnju. Razlog i predlog potiču iz ritma kupovine tog kupca; osnov je na kartici kupca. Redosled artikala po kupcu je u probnoj fazi."
-            : "Vaši dodeljeni kupci, poređani po tome kome vredi posvetiti pažnju. Razlog i predlog potiču iz ritma kupovine tog kupca. Redosled artikala po kupcu je u probnoj fazi."
-        }
+        description="Kupci koje vredi pozvati, najhitniji gore. Kliknite na kupca da vidite šta da mu ponudite."
       />
 
       <section className="portal-panel">
@@ -289,49 +234,47 @@ export default async function TalkListPage({
         </section>
       ) : null}
 
-      {[
-        { key: "attention", title: "Traže pažnju", hint: "Artikal van uobičajenog ritma, ili kupac koji je prestao da kupuje.", list: attention },
-        { key: "stale", title: "Obračun zastareo — proveriti posle preračuna", hint: "Stigle su nove kupovine koje obračun još nije video.", list: stale },
-        { key: "due", title: "Uskoro uobičajena porudžbina", hint: "Približava se uobičajeni termin.", list: due },
-        { key: "inactive", title: "Neaktivni kupci", hint: "Označeni kao neaktivni: bez predloga, istorija ostaje na kartici.", list: neaktivni },
-      ]
-        .filter((g) => g.list.length)
-        .map((g) => (
-          <section key={g.key} className="portal-panel">
-            <div className="portal-section-header">
-              <div>
-                <h2>
-                  {g.title} · {g.list.length}
-                </h2>
-                <p>{g.hint}</p>
-              </div>
-            </div>
-            {/* Prvih nekoliko kupaca odmah, ostatak na jedan klik — redosled
-                se ne menja (lista od 75 kupaca pravila je stranu od ~16.000 px). */}
-            <ol className="zr-list">
-              {g.list.slice(0, ZR_ODMAH).map((item) => (
-                <CustomerItem key={item.id} item={item} showReps={all} />
-              ))}
-            </ol>
-            {g.list.length > ZR_ODMAH ? (
-              <details className="zr-rest">
-                <summary>
-                  Prikažite ostalih {g.list.length - ZR_ODMAH} ({g.title.toLowerCase()})
-                </summary>
-                <ol className="zr-list" start={ZR_ODMAH + 1}>
-                  {g.list.slice(ZR_ODMAH).map((item) => (
-                    <CustomerItem key={item.id} item={item} showReps={all} />
-                  ))}
-                </ol>
-              </details>
-            ) : null}
-          </section>
-        ))}
+      {attention.length || due.length || stale.length ? (
+        <section className="portal-panel">
+          <ClickableRows className="portal-table-wrap">
+            <table className="portal-table rr-table rr-table--rows zt-table">
+              <thead>
+                <tr>
+                  <th scope="col">Kupac</th>
+                  <th scope="col">Stanje</th>
+                  <th scope="col">Šta pomenuti</th>
+                  <th scope="col">Poslednja kupovina</th>
+                  <th scope="col" aria-label="Otvori" />
+                </tr>
+              </thead>
+              <tbody>
+                {[...attention, ...due, ...stale].map((item) => (
+                  <TalkRow key={item.id} item={item} showReps={all} />
+                ))}
+              </tbody>
+            </table>
+          </ClickableRows>
+        </section>
+      ) : null}
+
+      {neaktivni.length ? (
+        <details className="portal-panel zr-quiet">
+          <summary>Neaktivni kupci · {neaktivni.length}</summary>
+          <ul className="zr-quiet-list">
+            {neaktivni.map((i) => (
+              <li key={i.id}>
+                <Link href={`/portal/kupci/${i.id}`}>{i.name}</Link>
+                <Badge tone="neutral">Neaktivan kupac</Badge>
+              </li>
+            ))}
+          </ul>
+        </details>
+      ) : null}
 
       {quiet.length || withoutData.length ? (
         <details className="portal-panel zr-quiet">
           <summary>
-            Bez potrebe za posebnim kontaktom, nije obračunato ili premalo istorije · {quiet.length + withoutData.length}
+            Ostali kupci (bez hitnog razloga za poziv) · {quiet.length + withoutData.length}
           </summary>
           <ul className="zr-quiet-list">
             {quiet.map((i) => (

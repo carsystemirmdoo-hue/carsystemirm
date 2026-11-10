@@ -2458,7 +2458,8 @@ try {
 
   /* ------------------------------------------------------------------ */
   await tok("21. preporuke: vlasnik ih vidi uz ogradu, komercijalista bez dodela dobija prazno", async () => {
-    const RUTA = "/portal/preporuke";
+    // Detaljan prikaz po artiklima (od 2026-11-10 podrazumevana je lista kupaca).
+    const RUTA = "/portal/preporuke?prikaz=artikli";
 
     /* --- 21a. Vlasnik: ekran radi, ograda stoji, gate je prijavljen. -- */
     const s = await svezaSesija();
@@ -2624,7 +2625,8 @@ try {
      * (GET forma filtera) skrol bio zaključan dok rezervni tajmer od 6 s ne
      * bi skinuo stanje. Meri se odmah posle učitavanja — pre tog tajmera.
      */
-    const RUTA = "/portal/preporuke";
+    // Detaljan prikaz po artiklima (od 2026-11-10 podrazumevana je lista kupaca).
+    const RUTA = "/portal/preporuke?prikaz=artikli";
     const nalazi: string[] = [];
     for (const [ime, viewport] of [
       ["desktop", { width: 1280, height: 900 }],

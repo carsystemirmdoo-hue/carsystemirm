@@ -31,10 +31,11 @@ export default async function CustomerOfferPage({ params }: { params: Promise<{ 
       <PageHeader
         eyebrow="Preporuke kupca"
         title={data.customer.name}
-        description="Artikli koje kupac kupuje u ritmu: kada je poslednji put uzeo, kada je trebalo ponovo, po kojoj ceni i rabatu. Označite artikle i napravite ponudu u Excelu."
+        description="Označite artikle i napravite ponudu u Excelu. Ako kupac nešto više ne uzima, kliknite „Ne uzima više“."
         meta={data.asOfDate ? <span>Obračun na dan {data.asOfDate.split("-").reverse().join(".")}.</span> : <span>Preporuke još nisu izračunate.</span>}
         actions={
           <>
+            <Link className="rr-link" href="/portal/preporuke">← Preporuke</Link>
             {can(user, "view:rabati") ? <Link className="rr-link" href={`/portal/cene/rabati-iz-faktura/kupci/${id}/tabela`}>Tabela rabata</Link> : null}
             <Link className="rr-link" href={`/portal/kupci/${id}`}>Kartica kupca</Link>
           </>

@@ -14,6 +14,8 @@ import { AssignmentPanel } from "./AssignmentPanel";
 import { loadArticleIdentities } from "@/lib/ordering/ordering-service";
 import { loadCrossSell } from "@/lib/recommendations/cross-sell";
 import { CustomerStatusPanel } from "./CustomerStatusPanel";
+import { CustomerDesk } from "@/components/portal/CustomerDesk";
+import { loadCustomerDesk } from "@/lib/sales-tools/customer-desk-service";
 import { CustomerArticles, CustomerCrossSell, CustomerMethod, CustomerSuggestions, CustomerSummary } from "./CustomerCard";
 
 export const dynamic = "force-dynamic";
@@ -62,6 +64,9 @@ export default async function CustomerDetailPage({
     showSignals ? loadCrossSell([customer.id]).then((m) => m.get(customer.id) ?? null) : Promise.resolve(null),
   ]);
 
+  // Traka kupca (poziv, dugovanje, razgovor): ko radi preporuke, radi i sa ovim (opseg proveren iznad).
+  const desk = can(user, "view:preporuke") ? await loadCustomerDesk(user, customer.id) : null;
+
   const identities = profile
     ? Object.fromEntries(await loadArticleIdentities(profile.articles.map((a) => a.articleCode)))
     : {};
@@ -74,6 +79,7 @@ export default async function CustomerDetailPage({
         title={customer.name}
         description={`PIB ${customer.pib}${customer.city ? ` · ${customer.city}` : ""}${customer.active ? "" : " · neaktivan kupac"}`}
       />
+      {desk ? <CustomerDesk customerId={customer.id} desk={desk} showDebt={can(user, "view:dugovanja")} /> : null}
       {!customer.active ? (
         <p className="portal-readiness-note" role="status">
           Kupac je označen kao neaktivan. Istorija i veze su dostupne; predlozi za razgovor i proširenje se ne
@@ -115,14 +121,11 @@ export default async function CustomerDetailPage({
         canManage={canManageAssignments}
       />
       {profile ? <CustomerMethod profile={profile} /> : null}
-      {/*
-       * Naplata se ne prikazuje: fakture ne nose ni dospeće ni uplatu. Ranija
-       * velika poruka „profil čeka uvezene fakture" stajala je i ispod stvarnih
-       * dokumenata; ovde ostaje samo tačna rečenica o onome što zaista fali.
-       */}
-      <p className="portal-footnote">
-        Naplata i dugovanja se ne prikazuju: izvor uplata i datuma dospeća nije povezan.
-      </p>
+      {can(user, "view:dugovanja") && !desk ? (
+        <p className="portal-footnote">
+          <Link href={`/portal/dugovanja/${customer.id}`}>Dugovanje ovog kupca →</Link>
+        </p>
+      ) : null}
     </>
   );
 }

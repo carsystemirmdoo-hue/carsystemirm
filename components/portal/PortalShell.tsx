@@ -320,7 +320,6 @@ export function PortalShell({
             </span>
             <strong>{dataSource.label}</strong>
           </div>
-          <small>Uplate nisu dostupne iz faktura</small>
         </div>
       </aside>
 

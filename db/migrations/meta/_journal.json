@@ -412,6 +412,13 @@
       "idx": 58,
       "version": "7",
       "when": 1793800800000,
+      "tag": "0061_sales_rep_tools",
+      "breakpoints": true
+    },
+    {
+      "idx": 59,
+      "version": "7",
+      "when": 1793887200000,
       "tag": "0059_notification_customer_scope",
       "breakpoints": true
     }

@@ -292,6 +292,11 @@ const RESETTABLE_TABLES = [
   "customer_contact_verifications",
   /* „Ne uzima više“ (0060): DELETE odbija okidač; `restrict` ka kupcima, artiklima i korisnicima. */
   "customer_article_dismissals",
+  /* Alati komercijaliste (0061): beleške i stanje dugovanja odbijaju DELETE okidačem. */
+  "customer_call_notes",
+  "customer_sales_contacts",
+  "receivable_lines",
+  "receivable_snapshots",
   /*
    * Poručivanje (0029). `customer_orders` ima `restrict` ka kupcima i
    * artiklima, pa mora u istu `TRUNCATE` naredbu.

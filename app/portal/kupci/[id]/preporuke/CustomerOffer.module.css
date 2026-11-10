@@ -290,3 +290,87 @@
   .metrics { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .det { grid-template-columns: 1fr; }
 }
+
+/* Lager (2026-11-10): isto što vidi kupac. */
+.stock { display: inline-block; font-size: 12px; font-weight: 600; padding: 2px 8px; border-radius: 999px; white-space: nowrap; background: var(--p-surface-subtle); color: var(--p-muted); }
+.stock[data-s="ima"] { background: var(--p-green-soft); color: var(--p-green); }
+.stock[data-s="nema"] { background: var(--p-red-soft); color: var(--p-red-dark); }
+
+/* Zahtev u ime kupca */
+.orderDialog { width: min(720px, calc(100vw - 24px)); max-height: calc(100dvh - 24px); }
+.orderLines { display: grid; gap: 0; border: 1px solid var(--p-line); border-radius: 8px; max-height: 46vh; overflow-y: auto; }
+.orderLine { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 10px 12px; border-bottom: 1px solid var(--p-line); }
+.orderLine:last-child { border-bottom: 0; }
+.orderName { display: grid; gap: 2px; min-width: 0; }
+.lineProblem { font-size: 12.5px; color: var(--p-amber); font-weight: 600; }
+.stepper { display: flex; align-items: center; gap: 4px; flex: none; }
+.stepper button {
+  width: 40px;
+  height: 40px;
+  border: 1px solid var(--p-line-strong);
+  border-radius: 8px;
+  background: var(--p-surface);
+  color: var(--p-ink);
+  font-size: 20px;
+  line-height: 1;
+  cursor: pointer;
+}
+.stepper input {
+  width: 72px;
+  height: 40px;
+  text-align: center;
+  font: inherit;
+  font-size: 16px;
+  font-weight: 700;
+  border: 1px solid var(--p-line-strong);
+  border-radius: 8px;
+  background: var(--p-surface);
+  color: var(--p-ink);
+}
+.unit { min-width: 30px; font-size: 12.5px; color: var(--p-muted); }
+.input { font: inherit; font-weight: 400; min-height: 40px; padding: 8px 10px; border: 1px solid var(--p-line-strong); border-radius: 6px; background: var(--p-surface); color: var(--p-ink); }
+.total { color: var(--p-ink) !important; font-size: 15px; }
+.total b { font-variant-numeric: tabular-nums; }
+.sentText { color: var(--p-ink) !important; font-size: 15px; line-height: 1.5; }
+
+/* Telefon (2026-11-10): tabela postaje kartice — naziv preko cele širine, podaci u dve kolone. */
+@media (max-width: 640px) {
+  .toolbar { gap: 8px; }
+  .search { flex: 1 1 100%; }
+  .table { min-width: 0; }
+  .table thead { display: none; }
+  .table tbody tr.row {
+    position: relative;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 10px 14px;
+    padding: 14px 14px 12px;
+    border-bottom: 1px solid var(--p-line);
+  }
+  .table tbody tr.row td { padding: 0; border: 0; white-space: normal; text-align: left; }
+  .table tbody tr.row td[data-label]::before {
+    content: attr(data-label);
+    display: block;
+    margin-bottom: 2px;
+    font-size: 10.5px;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--p-muted);
+  }
+  .table tbody tr.row .cCheck { position: absolute; top: 12px; right: 12px; }
+  .table tbody tr.row .cCheck input { width: 24px; height: 24px; }
+  .table tbody tr.row .cName { grid-column: 1 / -1; padding-right: 40px; font-size: 15px; }
+  .table tbody tr.row .cAct { grid-column: 1 / -1; }
+  .table tbody tr.row .num .sub { margin-left: 0 !important; }
+  .detail { display: block; }
+  .detail td:first-child { display: none; }
+  .detail td { display: block; }
+  .foot { padding: 8px 10px; gap: 6px; }
+  .foot > span:first-child { font-size: 12.5px; }
+  .foot > span:last-child { width: 100%; flex-wrap: nowrap !important; }
+  .foot > span:last-child > * { flex: 1 1 0; justify-content: center; min-height: 46px; padding: 0 8px; font-size: 13px; }
+  .foot .clear { display: none; }
+  .orderLine { flex-wrap: wrap; }
+  .stepper { margin-left: auto; }
+}

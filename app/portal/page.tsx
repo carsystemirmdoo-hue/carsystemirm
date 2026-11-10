@@ -18,6 +18,8 @@ import { BackupStatusPanel } from "@/features/portal/BackupStatusPanel";
 import { loadBackupStatus } from "@/lib/backup/status-service";
 import { dmy, dmyTime } from "@/lib/ordering/panelFormat.mjs";
 import { loadWorkQueue } from "@/lib/portal/work-queue";
+import { dueFollowUps } from "@/lib/sales-tools/customer-desk-service";
+import { autoRefreshReceivables, debtsByCustomer, latestSnapshot } from "@/lib/sales-tools/receivables-service";
 
 
 export const metadata = { title: "Početna" };
@@ -46,39 +48,15 @@ export default async function PortalHomePage() {
   // Upozorenje o kopijama vide oni koji prate sinhronizaciju (vlasnik, kancelarija).
   const backups = can(user, "sync:monitor") ? await loadBackupStatus() : undefined;
   const work = await loadWorkQueue(user);
+  const followUps = showSignals ? await dueFollowUps(user) : [];
+  const seesDebt = can(user, "view:dugovanja");
+  if (seesDebt) await autoRefreshReceivables();
+  const [debtSnap, debts] = seesDebt ? await Promise.all([latestSnapshot(), debtsByCustomer(user)]) : [null, []];
+  const debtTotal = debts.reduce((s, d) => s + d.total, 0);
+  const debtOverdue = debts.reduce((s, d) => s + d.overdueTotal, 0);
 
-  return (
-    <>
-      <PageHeader
-        eyebrow="Pregled"
-        title={`Dobar dan, ${user.name.split(" ")[0]}`}
-        description={
-          scoped
-            ? `Prijavljeni ste kao ${ROLE_LABELS[user.role]}. Brojke ispod se odnose samo na Vaše dodeljene kupce.`
-            : `Prijavljeni ste kao ${ROLE_LABELS[user.role]}. Brojke ispod se odnose na sve kupce.`
-        }
-      />
-
-      {work.length > 0 ? (
-        <section className="portal-panel" aria-labelledby="ceka-obradu">
-          <div className="portal-section-header">
-            <div>
-              <h2 id="ceka-obradu">Čeka obradu</h2>
-              <p>Posao koji traži Vaš korak. Klik otvara listu sa istim brojem.</p>
-            </div>
-          </div>
-          <div className="portal-metrics portal-work-queue">
-            {work.map((item) => (
-              <Link key={item.key} className="portal-metric-link" href={item.href}>
-                <Metric label={item.label} value={item.value} context={item.context} tone={item.tone} />
-              </Link>
-            ))}
-          </div>
-        </section>
-      ) : null}
-
-      {backups !== undefined ? <BackupStatusPanel items={backups} compact /> : null}
-
+  // Komercijalista: prvo posao (podsetnici, dugovanja, preporuke), stanje podataka na kraju.
+  const dataPanel = (
       <section className="portal-panel">
         <div className="portal-section-header">
           <div>
@@ -133,11 +111,96 @@ export default async function PortalHomePage() {
                 : "U sistemu još nema potvrđenih prodajnih dokumenata. Prve brojke se pojavljuju posle uvoza BizniSoft faktura (ručno ili preko konektora)."}
             </p>
           )}
-          <p className="portal-footnote">
-            Naplata i dugovanja se ne prikazuju: izvor uplata i datuma dospeća nije povezan.
-          </p>
+          {seesDebt && !debtSnap ? (
+            <p className="portal-footnote">Dugovanja se ne prikazuju dok kancelarija ne poveže svoju tabelu neplaćenih faktura.</p>
+          ) : null}
         </div>
       </section>
+  );
+
+  return (
+    <>
+      <PageHeader
+        eyebrow="Pregled"
+        title={`Dobar dan, ${user.name.split(" ")[0]}`}
+        description={
+          scoped
+            ? `Prijavljeni ste kao ${ROLE_LABELS[user.role]}. Brojke ispod se odnose samo na Vaše dodeljene kupce.`
+            : `Prijavljeni ste kao ${ROLE_LABELS[user.role]}. Brojke ispod se odnose na sve kupce.`
+        }
+      />
+
+      {work.length > 0 ? (
+        <section className="portal-panel" aria-labelledby="ceka-obradu">
+          <div className="portal-section-header">
+            <div>
+              <h2 id="ceka-obradu">Čeka obradu</h2>
+              <p>Posao koji traži Vaš korak. Klik otvara listu sa istim brojem.</p>
+            </div>
+          </div>
+          <div className="portal-metrics portal-work-queue">
+            {work.map((item) => (
+              <Link key={item.key} className="portal-metric-link" href={item.href}>
+                <Metric label={item.label} value={item.value} context={item.context} tone={item.tone} />
+              </Link>
+            ))}
+          </div>
+        </section>
+      ) : null}
+
+      {backups !== undefined ? <BackupStatusPanel items={backups} compact /> : null}
+
+      {showSignals ? (
+        <section className="portal-panel">
+          <div className="portal-section-header">
+            <div>
+              <h2>Javite se danas</h2>
+              <p>
+                {followUps.length
+                  ? "Kupci kojima ste obećali da se javite. Klik na kupca otvara telefon i preporuke."
+                  : "Nema podsetnika za danas. Podsetnik dodajete posle razgovora („Zabeleži razgovor“ kod kupca)."}
+              </p>
+            </div>
+            <Link className="portal-section-link" href="/portal/preporuke">Preporuke →</Link>
+          </div>
+          {followUps.length ? (
+            <ul className="fu-list">
+              {followUps.map((f) => (
+                <li key={f.noteId}>
+                  <Link href={`/portal/kupci/${f.customerId}/preporuke`}>{f.customerName}</Link>
+                  <span className="fu-what">
+                    {f.outcomeLabel}
+                    {f.body ? ` — ${f.body}` : ""}
+                  </span>
+                  <span className="fu-when" data-late={f.late ? "" : undefined}>{f.late ? `kasni (od ${dmy(f.followUpOn)})` : "danas"}</span>
+                </li>
+              ))}
+            </ul>
+          ) : null}
+        </section>
+      ) : null}
+
+      {seesDebt && debtSnap ? (
+        <section className="portal-panel">
+          <div className="portal-section-header">
+            <div>
+              <h2>Dugovanja</h2>
+              <p>{scoped ? "Otvorene fakture Vaših kupaca" : "Otvorene fakture svih kupaca"}, iz tabele kancelarije.</p>
+            </div>
+            <Link className="portal-section-link" href="/portal/dugovanja">Dugovanja →</Link>
+          </div>
+          <div className="portal-metrics">
+            <Link className="portal-metric-link" href="/portal/dugovanja?red=dospelo&smer=desc">
+              <Metric label="Dospelo" value={`${formatCount(Math.round(debtOverdue))} RSD`} context="prošla valuta" tone={debtOverdue > 0 ? "danger" : "success"} />
+            </Link>
+            <Link className="portal-metric-link" href="/portal/dugovanja?red=ukupno&smer=desc">
+              <Metric label="Ukupno duguju" value={`${formatCount(Math.round(debtTotal))} RSD`} context={`${formatCount(debts.length)} kupaca`} />
+            </Link>
+          </div>
+        </section>
+      ) : null}
+
+      {scoped ? null : dataPanel}
 
       {showSignals && hasDocs ? (
         <section className="portal-panel">
@@ -181,6 +244,8 @@ export default async function PortalHomePage() {
           ) : null}
         </section>
       ) : null}
+
+      {scoped ? dataPanel : null}
 
       {accounts ? (
         <section className="portal-panel">

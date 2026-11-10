@@ -8,6 +8,7 @@ import { STATUS_LABELS } from "@/lib/recommendations/policy.mjs";
 import { nextSort, sortRows } from "@/lib/ui/sortRows.mjs";
 import { SortHeader } from "@/components/portal/SortHeader";
 import { dismissArticleAction, restoreArticleAction } from "./actions";
+import { RepOrderDialog } from "./RepOrderDialog";
 import styles from "./CustomerOffer.module.css";
 
 /**
@@ -44,7 +45,23 @@ const SORT: Record<SortKey, { value: (r: OfferRow) => string | number | null; fi
 };
 const label = (s: string) => (STATUS_LABELS as Record<string, string>)[s] ?? s;
 
-export function CustomerOffer({ customerId, rows, today, canEdit }: { customerId: string; rows: OfferRow[]; today: string; canEdit: boolean }) {
+export function CustomerOffer({
+  customerId,
+  rows,
+  today,
+  canEdit,
+  canOrder = false,
+  phone = null,
+  stockDate = null,
+}: {
+  customerId: string;
+  rows: OfferRow[];
+  today: string;
+  canEdit: boolean;
+  canOrder?: boolean;
+  phone?: string | null;
+  stockDate?: string | null;
+}) {
   const router = useRouter();
   const [q, setQ] = useState("");
   const [view, setView] = useState<"ponuda" | "svi">("ponuda");
@@ -60,6 +77,8 @@ export function CustomerOffer({ customerId, rows, today, canEdit }: { customerId
   // Podrazumevano: najveće kašnjenje prvo (kao i do sada).
   const [sort, setSort] = useState<{ key: SortKey; dir: "asc" | "desc" }>({ key: "trebalo", dir: "asc" });
   const dialog = useRef<HTMLDialogElement>(null);
+  const [ordering, setOrdering] = useState(false);
+  const showStock = rows.some((r) => r.stock);
 
   const live = useMemo(() => rows.filter((r) => !r.dismissal), [rows]);
   const gone = useMemo(() => rows.filter((r) => r.dismissal), [rows]);
@@ -180,6 +199,7 @@ export function CustomerOffer({ customerId, rows, today, canEdit }: { customerId
                 {head("trebalo", "Trebalo je")}
                 {head("cenaRanije", "Poslednji put", "right")}
                 {head("cenaDanas", "Danas", "right")}
+                {showStock ? <th>Lager</th> : null}
                 <th aria-label="Radnje" />
               </tr>
             </thead>
@@ -197,10 +217,10 @@ export function CustomerOffer({ customerId, rows, today, canEdit }: { customerId
                       }}
                       aria-expanded={isOpen}
                     >
-                      <td>
+                      <td className={styles.cCheck}>
                         <input type="checkbox" checked={sel.has(r.articleCode)} onChange={() => setSel(toggle(sel, r.articleCode))} aria-label={`Izaberite ${r.articleName}`} />
                       </td>
-                      <td>
+                      <td className={styles.cName}>
                         <span className={styles.name}>{r.articleName}</span>
                         <span className={styles.sub}>
                           <span className={styles.code}>{r.articleCode}</span>
@@ -208,35 +228,38 @@ export function CustomerOffer({ customerId, rows, today, canEdit }: { customerId
                           {r.lid ? " · uz poklopac" : ""}
                         </span>
                       </td>
-                      <td><span className={styles.pill} data-s={r.rec.status}>{label(r.rec.status)}</span></td>
-                      <td className={styles.nowrap}>
+                      <td data-label="Status"><span className={styles.pill} data-s={r.rec.status}>{label(r.rec.status)}</span></td>
+                      <td className={styles.nowrap} data-label="Poslednja kupovina">
                         {dmy(r.rec.lastPurchaseOn)}
                         <span className={styles.sub}>{r.last ? `${qty(r.last.quantity)} ${r.unit ?? ""} · ` : ""}pre {r.rec.daysSinceLastPurchase} d</span>
                       </td>
-                      <td className={styles.nowrap}>
+                      <td className={styles.nowrap} data-label="Ritam">
                         {r.rec.medianIntervalDays ? `na ${r.rec.medianIntervalDays} d` : "—"}
                         <span className={styles.sub}>{r.rec.eventCount} kupovina</span>
                       </td>
-                      <td className={styles.nowrap}>
+                      <td className={styles.nowrap} data-label="Trebalo je">
                         {dmy(r.rec.expectedNextOn)}
                         <span className={styles.sub}>{deviation(r.rec.daysUntilExpected)}</span>
                       </td>
-                      <td className={styles.num}>
+                      <td className={styles.num} data-label="Poslednji put">
                         {r.last ? money(r.last.unitPrice * (1 - r.last.discountPercent / 100)) : "—"}
                         <span className={styles.sub}>{r.last ? `VP ${money(r.last.unitPrice)} − ${pct(r.last.discountPercent)}` : ""}</span>
                       </td>
-                      <td className={styles.num}>
+                      <td className={styles.num} data-label="Danas">
                         {r.today ? cents(r.today.netCents) : "na upit"}
                         <span className={`${styles.sub} ${changed ? styles.up : ""}`} style={r.today ? undefined : { whiteSpace: "normal", maxWidth: 180, marginLeft: "auto" }}>
                           {r.today ? (changed && r.last ? `rabat ${pct(r.last.discountPercent)} → ${pct(r.today.discountPercent)}` : `rabat ${pct(r.today.discountPercent)}`) : r.todayNote ?? ""}
                         </span>
                       </td>
-                      <td>{canEdit ? <button type="button" className={styles.link} onClick={() => askRemove(r)}>Ne uzima više</button> : null}</td>
+                      {showStock ? (
+                        <td data-label="Lager">{r.stock ? <span className={styles.stock} data-s={r.stock.state}>{r.stock.text}</span> : "—"}</td>
+                      ) : null}
+                      <td className={styles.cAct}>{canEdit ? <button type="button" className={styles.link} onClick={() => askRemove(r)}>Ne uzima više</button> : null}</td>
                     </tr>
                     {isOpen ? (
                       <tr className={styles.detail}>
                         <td />
-                        <td colSpan={8}>
+                        <td colSpan={showStock ? 9 : 8}>
                           <div className={styles.det}>
                             <div>
                               <h3>Kupovine</h3>
@@ -267,19 +290,25 @@ export function CustomerOffer({ customerId, rows, today, canEdit }: { customerId
                   </Fragment>
                 );
               })}
-              {visible.length === 0 ? <tr><td colSpan={9} className={styles.empty}>Nema artikala za ovaj izbor.</td></tr> : null}
+              {visible.length === 0 ? <tr><td colSpan={showStock ? 10 : 9} className={styles.empty}>Nema artikala za ovaj izbor.</td></tr> : null}
             </tbody>
           </table>
         </div>
         <p className={styles.legend}>
-          „Poslednji put“ = VP cena, rabat i neto sa poslednje fakture. „Danas“ = neto i rabat koje bi kupac sada dobio po važećim uslovima. Klik na red otvara detalje.
+          „Poslednji put“ = VP cena, rabat i neto sa poslednje fakture. „Danas“ = neto i rabat koje bi kupac sada dobio po važećim uslovima.
+          {showStock && stockDate ? ` „Lager“ = stanje magacina na dan ${dmy(stockDate)}, isto što vidi kupac.` : ""} Klik na red otvara detalje.
         </p>
         <div className={styles.foot}>
           <span>
             Označeno: <b>{chosen.length}</b> · vrednost po poslednjim količinama i današnjim cenama <b>{cents(sum)}</b> RSD bez PDV-a
           </span>
           <span style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
-            <button type="button" className={styles.button} onClick={() => setSel(new Set())} disabled={!chosen.length}>Poništi izbor</button>
+            <button type="button" className={`${styles.button} ${styles.clear}`} onClick={() => setSel(new Set())} disabled={!chosen.length}>Poništi izbor</button>
+            {canOrder ? (
+              <button type="button" className={`${styles.button} ${styles.dark}`} onClick={() => setOrdering(true)} disabled={!chosen.some((r) => r.articleId)}>
+                Pošalji zahtev za kupca
+              </button>
+            ) : null}
             {chosen.length ? (
               <a className={`${styles.button} ${styles.primary}`} href={exportHref} style={{ display: "inline-flex", alignItems: "center", textDecoration: "none" }}>
                 Napravi ponudu (Excel)
@@ -318,6 +347,17 @@ export function CustomerOffer({ customerId, rows, today, canEdit }: { customerId
           </table>
         </div>
       </section>
+
+      {ordering ? (
+        <RepOrderDialog
+          customerId={customerId}
+          phone={phone}
+          onClose={() => { setOrdering(false); router.refresh(); }}
+          items={chosen
+            .filter((r) => r.articleId)
+            .map((r) => ({ articleId: r.articleId!, code: r.articleCode, name: r.articleName, unit: r.unit, quantity: r.last?.quantity ?? 1, lid: r.lid }))}
+        />
+      ) : null}
 
       <dialog ref={dialog} className={styles.dialog} aria-labelledby="ne-uzima-naslov" onClose={() => setRemoving(null)}>
         <form className={styles.dlg} onSubmit={(e) => { e.preventDefault(); confirmRemove(); }}>

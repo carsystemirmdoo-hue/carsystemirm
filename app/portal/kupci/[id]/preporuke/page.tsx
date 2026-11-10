@@ -4,6 +4,9 @@ import { PageHeader } from "@/components/portal/PortalPrimitives";
 import { can } from "@/lib/authz/permissions.mjs";
 import { requireCapability } from "@/lib/authz/session";
 import { CustomerOfferError, loadCustomerOffer } from "@/lib/recommendations/customer-offer-service";
+import { CustomerDesk } from "@/components/portal/CustomerDesk";
+import { CustomerDeskError, loadCustomerDesk } from "@/lib/sales-tools/customer-desk-service";
+import { autoRefreshReceivables } from "@/lib/sales-tools/receivables-service";
 import { CustomerOffer } from "./CustomerOffer";
 
 export const dynamic = "force-dynamic";
@@ -15,11 +18,14 @@ export default async function CustomerOfferPage({ params }: { params: Promise<{ 
   const { id } = await params;
   if (!UUID.test(id)) notFound();
   const user = await requireCapability("view:preporuke", `/portal/kupci/${id}/preporuke`);
+  const showDebt = can(user, "view:dugovanja");
+  const refreshProblem = showDebt ? await autoRefreshReceivables() : null;
   let data: Awaited<ReturnType<typeof loadCustomerOffer>>;
+  let desk: Awaited<ReturnType<typeof loadCustomerDesk>>;
   try {
-    data = await loadCustomerOffer(user, id);
+    [data, desk] = await Promise.all([loadCustomerOffer(user, id), loadCustomerDesk(user, id)]);
   } catch (error) {
-    if (error instanceof CustomerOfferError) {
+    if (error instanceof CustomerOfferError || error instanceof CustomerDeskError) {
       if (error.message.includes("opsegu")) forbidden();
       notFound();
     }
@@ -31,7 +37,7 @@ export default async function CustomerOfferPage({ params }: { params: Promise<{ 
       <PageHeader
         eyebrow="Preporuke kupca"
         title={data.customer.name}
-        description="Označite artikle i napravite ponudu u Excelu. Ako kupac nešto više ne uzima, kliknite „Ne uzima više“."
+        description="Pozovite kupca, označite artikle i napravite ponudu u Excelu ili pošaljite zahtev za njega. Posle razgovora kliknite „Zabeleži razgovor“."
         meta={data.asOfDate ? <span>Obračun na dan {data.asOfDate.split("-").reverse().join(".")}.</span> : <span>Preporuke još nisu izračunate.</span>}
         actions={
           <>
@@ -41,7 +47,17 @@ export default async function CustomerOfferPage({ params }: { params: Promise<{ 
           </>
         }
       />
-      <CustomerOffer customerId={id} rows={data.rows} today={data.today} canEdit />
+      {refreshProblem ? <p className="portal-footnote" role="status">Dugovanja: {refreshProblem}</p> : null}
+      <CustomerDesk customerId={id} desk={desk} showDebt={showDebt} />
+      <CustomerOffer
+        customerId={id}
+        rows={data.rows}
+        today={data.today}
+        canEdit
+        canOrder={can(user, "customer_orders:prepare")}
+        phone={desk.phones[0]?.number ?? null}
+        stockDate={data.stockDate}
+      />
     </>
   );
 }

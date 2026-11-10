@@ -1,0 +1,203 @@
+/* Traka kupca (2026-11-10): poziv, dugovanje, razgovor. Velika dugmad, čitljivo i na telefonu. */
+
+.desk {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1.3fr);
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.box {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+  padding: 14px 16px;
+  border: 1px solid var(--p-line);
+  border-radius: 8px;
+  background: var(--p-surface);
+}
+
+.lbl {
+  font-size: 11.5px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--p-muted);
+}
+
+.who { font-weight: 600; }
+.muted { color: var(--p-muted); font-size: 14px; }
+.small { font-size: 12.5px; color: var(--p-muted); line-height: 1.45; }
+.ok { color: var(--p-green); font-weight: 600; font-size: 15px; }
+.late { color: var(--p-red-dark); font-weight: 600; white-space: nowrap; }
+.strong { font-weight: 700; }
+
+.calls { display: flex; flex-wrap: wrap; gap: 8px; }
+
+.call {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 0 16px;
+  border-radius: 8px;
+  background: var(--p-green);
+  color: #fff;
+  font-size: 16px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  text-decoration: none;
+}
+.call:hover { filter: brightness(1.08); }
+.call:focus-visible { outline: 3px solid var(--p-ink); outline-offset: 2px; }
+
+.box .debt {
+  display: grid;
+  gap: 2px;
+  justify-items: start;
+  padding: 8px 12px;
+  border: 1px solid var(--p-line-strong);
+  border-radius: 8px;
+  background: var(--p-surface);
+  color: var(--p-ink);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+.debt strong { font-size: 20px; font-variant-numeric: tabular-nums; }
+.debt span { font-size: 13px; color: var(--p-muted); }
+.box .debtLate { border-color: var(--p-red); background: var(--p-red-soft); }
+.debtLate strong, .debtLate span { color: var(--p-red-dark); }
+
+.follow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 8px 10px;
+  border-radius: 6px;
+  background: var(--p-blue-soft);
+  color: var(--p-blue);
+  font-size: 14px;
+}
+.followDue { background: var(--p-amber-soft); color: var(--p-amber); }
+
+.row { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; margin-top: 4px; }
+
+.big,
+.btn,
+.smallBtn {
+  font: inherit;
+  border-radius: 8px;
+  border: 1px solid var(--p-line-strong);
+  background: var(--p-surface);
+  color: var(--p-ink);
+  cursor: pointer;
+}
+.row .big {
+  min-height: 44px;
+  padding: 0 18px;
+  font-size: 15px;
+  font-weight: 700;
+  background: var(--p-graphite);
+  border-color: var(--p-graphite);
+  color: #fff;
+}
+.btn { min-height: 40px; padding: 0 16px; font-weight: 600; }
+.smallBtn { min-height: 32px; padding: 0 12px; font-size: 13px; font-weight: 600; }
+.btn:disabled, .big:disabled, .smallBtn:disabled { opacity: 0.45; cursor: not-allowed; }
+.btn.dark { background: var(--p-graphite); border-color: var(--p-graphite); color: #fff; }
+
+.box .link,
+.row .link {
+  align-self: flex-start;
+  padding: 2px 0;
+  border: 0;
+  background: none;
+  color: var(--p-muted);
+  font: inherit;
+  font-size: 13px;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
+}
+
+.history {
+  margin: -4px 0 16px;
+  padding: 10px 16px;
+  border: 1px solid var(--p-line);
+  border-radius: 8px;
+  background: var(--p-surface);
+}
+.history ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 8px; font-size: 14px; }
+.when { display: inline-block; min-width: 92px; color: var(--p-muted); font-variant-numeric: tabular-nums; }
+
+.msg { margin: 0 0 12px; padding: 10px 12px; border-radius: 6px; font-size: 14px; background: var(--p-green-soft); color: var(--p-green); }
+.err { background: var(--p-amber-soft); color: var(--p-amber); }
+
+.dialog {
+  margin: auto;
+  border: 1px solid var(--p-line-strong);
+  border-radius: 10px;
+  padding: 0;
+  width: min(560px, calc(100vw - 24px));
+  max-height: calc(100dvh - 24px);
+  background: var(--p-surface);
+  color: var(--p-ink);
+  box-shadow: 0 24px 64px rgba(14, 20, 28, 0.25);
+}
+.wide { width: min(860px, calc(100vw - 24px)); }
+.dialog::backdrop { background: rgba(14, 20, 28, 0.45); }
+.dlg { display: grid; gap: 14px; padding: 20px; }
+.dlg h2 { margin: 0; font-size: 18px; }
+.dlg p { margin: 0; color: var(--p-muted); }
+
+.choices { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 8px; }
+.choices button {
+  min-height: 44px;
+  padding: 6px 10px;
+  border: 1px solid var(--p-line-strong);
+  border-radius: 8px;
+  background: var(--p-surface);
+  color: var(--p-ink);
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+.choices button.on { background: var(--p-graphite); border-color: var(--p-graphite); color: #fff; }
+
+.field { display: grid; gap: 6px; font-size: 14px; font-weight: 600; }
+.field input,
+.field textarea {
+  font: inherit;
+  font-weight: 400;
+  min-height: 42px;
+  padding: 8px 10px;
+  border: 1px solid var(--p-line-strong);
+  border-radius: 6px;
+  background: var(--p-surface);
+  color: var(--p-ink);
+}
+.actions { display: flex; justify-content: flex-end; gap: 8px; flex-wrap: wrap; }
+
+.scroll { overflow-x: auto; }
+.table { width: 100%; border-collapse: collapse; font-size: 14px; }
+.table th, .table td { padding: 8px 10px; border-bottom: 1px solid var(--p-line); text-align: left; }
+.table th { font-size: 11.5px; letter-spacing: 0.05em; text-transform: uppercase; color: var(--p-muted); white-space: nowrap; }
+.table tfoot td { font-weight: 700; border-bottom: 0; }
+.num { text-align: right !important; font-variant-numeric: tabular-nums; white-space: nowrap; }
+
+@media (max-width: 960px) {
+  .desk { grid-template-columns: 1fr 1fr; }
+  .talk { grid-column: 1 / -1; }
+}
+
+@media (max-width: 640px) {
+  .desk { grid-template-columns: 1fr; }
+  .call { flex: 1 1 100%; justify-content: center; min-height: 52px; font-size: 18px; }
+  .row .big { flex: 1 1 100%; min-height: 52px; }
+  .choices { grid-template-columns: 1fr 1fr; }
+  .dlg { padding: 16px; }
+}

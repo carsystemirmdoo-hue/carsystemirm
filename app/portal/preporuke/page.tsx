@@ -9,6 +9,8 @@ import {
 } from "@/components/portal/PortalPrimitives";
 import { PortalSelect } from "@/components/portal/PortalSelect";
 import { KupciPregled } from "./KupciPregled";
+import { lastContactByCustomer } from "@/lib/sales-tools/customer-desk-service";
+import { autoRefreshReceivables, debtsByCustomer } from "@/lib/sales-tools/receivables-service";
 import { RecomputeRecommendations } from "@/features/portal/RecomputeRecommendations";
 import { can, seesAllCustomers } from "@/lib/authz/permissions.mjs";
 import { requireCapability } from "@/lib/authz/session";
@@ -232,10 +234,20 @@ export default async function RecommendationsPage({
 
   // Podrazumevano: lista kupaca sa brojem preporuka (2026-11-10). Detaljno po artiklima: `?prikaz=artikli`.
   if (params.prikaz !== "artikli") {
-    const [run, counts] = await Promise.all([activeRun(), recommendationCountsByCustomer(scope, { customerStatus: "aktivni" })]);
+    const showDebt = can(user, "view:dugovanja");
+    if (showDebt) await autoRefreshReceivables();
+    const [run, counts, debts] = await Promise.all([
+      activeRun(),
+      recommendationCountsByCustomer(scope, { customerStatus: "aktivni" }),
+      showDebt ? debtsByCustomer(user) : Promise.resolve([]),
+    ]);
+    const contacts = await lastContactByCustomer(counts.map((c) => c.customerId));
     return (
       <KupciPregled
         rows={counts}
+        debts={showDebt ? new Map(debts.map((d) => [d.customerId, { total: d.total, overdue: d.overdueTotal }])) : null}
+        contacts={contacts}
+        today={belgradeDate(new Date())}
         q={(params.q ?? "").slice(0, 80)}
         hasRun={run !== null}
         asOfDate={run?.asOfDate ?? null}

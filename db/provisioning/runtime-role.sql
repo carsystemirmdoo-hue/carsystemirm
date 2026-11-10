@@ -92,6 +92,12 @@ REVOKE DELETE, TRUNCATE ON article_sellout FROM :runtime_role;
 REVOKE DELETE, TRUNCATE ON article_required_pairs FROM :runtime_role;
 -- 0060: oznaka „ne uzima više“ se ne briše; vraćanje je jednokratni UPDATE revoked_at (sužava okidač).
 REVOKE DELETE, TRUNCATE ON customer_article_dismissals FROM :runtime_role;
+-- 0061: beleška razgovora se ne briše (jednokratno „urađeno“ za podsetnik sužava okidač);
+--       stanje dugovanja: stavke se samo dodaju, snimak menja samo vreme provere.
+REVOKE DELETE, TRUNCATE ON customer_call_notes FROM :runtime_role;
+REVOKE DELETE, TRUNCATE ON receivable_snapshots FROM :runtime_role;
+REVOKE UPDATE, DELETE, TRUNCATE ON receivable_lines FROM :runtime_role;
+GRANT SELECT, INSERT ON receivable_lines TO :runtime_role;
 -- 0051: čišćenje starijih stavki lagera SAMO kroz ograničen postupak (bez opšteg DELETE).
 DO $$
 BEGIN

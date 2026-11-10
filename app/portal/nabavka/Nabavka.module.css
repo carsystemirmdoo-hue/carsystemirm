@@ -6,6 +6,12 @@
 .field select, .field input { font: inherit; font-size: 14px; height: 40px; border: 1px solid var(--p-line-strong); border-radius: 7px; padding: 0 10px; background: var(--p-surface); color: var(--p-ink); }
 .grow { flex: 1 1 240px; }
 .grow input { width: 100%; }
+.period { display: flex; flex-wrap: wrap; gap: 10px 12px; align-items: flex-end; padding: 12px 16px 14px; border-bottom: 1px solid var(--p-line); }
+.presets { display: inline-flex; flex-wrap: wrap; gap: 6px; align-items: center; min-height: 40px; }
+.chip { font: inherit; font-size: 12.5px; height: 30px; padding: 0 11px; border: 1px solid var(--p-line-strong); border-radius: 999px; background: var(--p-surface); color: var(--p-ink); cursor: pointer; }
+.chip:disabled { opacity: 0.5; cursor: progress; }
+/* Dve klase: `.portal-root button { color: inherit }`. */
+.chip.chipOn { background: var(--p-ink); border-color: var(--p-ink); color: var(--p-surface); }
 .check { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; color: var(--p-ink); height: 40px; }
 .info { padding: 10px 16px; font-size: 13px; color: var(--p-muted); border-bottom: 1px solid var(--p-line); line-height: 1.5; }
 .info b { color: var(--p-ink); }
@@ -45,6 +51,8 @@
 
 @media (max-width: 760px) {
   .toolbar { padding: 12px; }
+  .period { padding: 10px 12px 12px; }
+  .period .field { flex: 1 1 140px; }
   /* Telefon: red tabele postaje kartica — naziv, pa brojevi u dve kolone, pa „Poručujem“. */
   .table { min-width: 0; }
   .table thead { display: none; }

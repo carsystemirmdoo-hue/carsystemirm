@@ -18,10 +18,10 @@ import styles from "./Nabavka.module.css";
 const DRAFT_KEY = "carsystem:nabavka:porucujem:v1";
 const ALL = "__sve__";
 
-type SortKey = "artikal" | "prodato30" | "prodato" | "lager" | "predlog" | "porucujem";
+type SortKey = "artikal" | "period" | "prodato" | "lager" | "predlog" | "porucujem";
 const SORT: Record<SortKey, { value: (r: ProcurementRow, q: Record<string, string>) => string | number | null; first: "asc" | "desc" }> = {
   artikal: { value: (r) => r.name, first: "asc" },
-  prodato30: { value: (r) => r.sold30, first: "desc" },
+  period: { value: (r) => r.soldPeriod, first: "desc" },
   prodato: { value: (r) => r.sold180, first: "desc" },
   lager: { value: (r) => r.stock, first: "asc" },
   predlog: { value: (r) => r.suggested, first: "desc" },
@@ -30,6 +30,28 @@ const SORT: Record<SortKey, { value: (r: ProcurementRow, q: Record<string, strin
 
 const fmt = (n: number) => n.toLocaleString("sr-Latn-RS", { maximumFractionDigits: 3 });
 const dmy = (d: string | null) => (d ? `${d.slice(8, 10)}.${d.slice(5, 7)}.${d.slice(0, 4)}.` : "—");
+const dm = (d: string) => `${d.slice(8, 10)}.${d.slice(5, 7)}.`;
+/** Naziv perioda za zaglavlje: tekuća godina kratko („01.10.–10.11.“), inače sa godinom („01.01.–31.12.2025.“). */
+const periodLabel = (p: { from: string; to: string }, today: string) => {
+  if (p.from === p.to) return dmy(p.from);
+  const y = p.from.slice(0, 4);
+  if (y !== p.to.slice(0, 4)) return `${dmy(p.from)}–${dmy(p.to)}`;
+  return y === today.slice(0, 4) ? `${dm(p.from)}–${dm(p.to)}` : `${dm(p.from)}–${dmy(p.to)}`;
+};
+const iso = (d: Date) => `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
+/** Brzi izbor perioda, računat od „danas“ sa servera (beogradski datum). */
+function presets(today: string) {
+  const [y, m, d] = today.split("-").map(Number);
+  const back = (days: number) => iso(new Date(y, m - 1, d - days));
+  return [
+    { label: "30 dana", from: back(29), to: today },
+    { label: "90 dana", from: back(89), to: today },
+    { label: "Ovaj mesec", from: iso(new Date(y, m - 1, 1)), to: today },
+    { label: "Prošli mesec", from: iso(new Date(y, m - 2, 1)), to: iso(new Date(y, m - 1, 0)) },
+    { label: "Ova godina", from: `${y}-01-01`, to: today },
+    { label: "Prošla godina", from: `${y - 1}-01-01`, to: `${y - 1}-12-31` },
+  ];
+}
 /** Srpska množina: 1 stavka, 2–4 stavke, 5+ stavki (11–14 stavki). */
 const plural = (n: number, one: string, few: string, many: string) => {
   const d = n % 10;
@@ -68,6 +90,21 @@ export function ProcurementTable({
   const [msg, setMsg] = useState<{ ok: boolean; text: string } | null>(null);
   const [pending, start] = useTransition();
   const [navigating, startNav] = useTransition();
+  const [from, setFrom] = useState(data.period.from);
+  const [to, setTo] = useState(data.period.to);
+  useEffect(() => {
+    setFrom(data.period.from);
+    setTo(data.period.to);
+  }, [data.period.from, data.period.to]);
+  const go = (next: { dana?: number; od?: string; do?: string }) => {
+    const p = new URLSearchParams({
+      dana: String(next.dana ?? data.coverDays),
+      od: next.od ?? data.period.from,
+      do: next.do ?? data.period.to,
+    });
+    startNav(() => router.push(`/portal/nabavka?${p.toString()}`, { scroll: false }));
+  };
+  const periodDirty = from !== data.period.from || to !== data.period.to;
 
   useEffect(() => {
     setDraft(readDraft());
@@ -88,7 +125,7 @@ export function ProcurementTable({
     const t = q.trim().toLocaleLowerCase("sr-Latn");
     const list = inBrand.filter((r) => {
       if (t && !`${r.name} ${r.code}`.toLocaleLowerCase("sr-Latn").includes(t)) return false;
-      if (onlyActive && !t && !(r.sold180 > 0 || r.suggested > 0 || r.isNew || (draft[r.code] ?? "").trim())) return false;
+      if (onlyActive && !t && !(r.sold180 > 0 || r.soldPeriod > 0 || r.suggested > 0 || r.isNew || (draft[r.code] ?? "").trim())) return false;
       return true;
     });
     return sortRows(list, (r: ProcurementRow) => SORT[sort.key].value(r, draft), sort.dir) as ProcurementRow[];
@@ -172,7 +209,7 @@ export function ProcurementTable({
           <select
             value={data.coverDays}
             disabled={navigating}
-            onChange={(e) => startNav(() => router.push(`/portal/nabavka?dana=${e.target.value}`, { scroll: false }))}
+            onChange={(e) => go({ dana: Number(e.target.value) })}
           >
             {coverChoices.map((d) => (
               <option key={d} value={d}>{d} dana</option>
@@ -189,13 +226,44 @@ export function ProcurementTable({
         </label>
       </div>
 
+      <form
+        className={styles.period}
+        aria-label="Prodato u periodu"
+        onSubmit={(e) => {
+          e.preventDefault();
+          if (from && to) go({ od: from, do: to });
+        }}
+      >
+        <label className={styles.field}>
+          <span>Prodato od</span>
+          <input type="date" value={from} max={data.today} onChange={(e) => setFrom(e.target.value)} required />
+        </label>
+        <label className={styles.field}>
+          <span>do</span>
+          <input type="date" value={to} max={data.today} onChange={(e) => setTo(e.target.value)} required />
+        </label>
+        <button type="submit" className={`${styles.button} ${periodDirty ? styles.primary : ""}`} disabled={navigating || !from || !to}>
+          {navigating ? "Učitavam…" : "Prikaži"}
+        </button>
+        <span className={styles.presets}>
+          {presets(data.today).map((p) => {
+            const on = p.from === data.period.from && p.to === data.period.to;
+            return (
+              <button key={p.label} type="button" className={`${styles.chip} ${on ? styles.chipOn : ""}`} aria-pressed={on} disabled={navigating} onClick={() => go({ od: p.from, do: p.to })}>
+                {p.label}
+              </button>
+            );
+          })}
+        </span>
+      </form>
+
       <p className={styles.info}>
         <b>Predlog</b> = prosečna prodaja u poslednjih {historyDays} dana × {data.coverDays} dana − lager, zaokruženo naviše na celo pakovanje. To je samo pomoć —
         u fajl ide samo ono što upišete u „Poručujem“.{" "}
         {data.stockDate ? (
           <>
             Lager: stanje od <b>{dmy(data.stockDate)}</b>
-            {stale ? <span className={styles.stale}> ({stale})</span> : null}.
+            {stale ? <><span className={styles.stale}> ({stale})</span>.</> : null}
           </>
         ) : (
           <span className={styles.stale}>Lager još nije uvezen — predlog ne oduzima stanje magacina.</span>
@@ -208,7 +276,7 @@ export function ProcurementTable({
           <thead>
             <tr>
               {head("artikal", "Artikal")}
-              {head("prodato30", "Prodato 30 d", "right")}
+              {head("period", `Prodato ${periodLabel(data.period, data.today)}`, "right")}
               {head("prodato", `Prodato ${historyDays} d`, "right")}
               {head("lager", "Lager", "right")}
               {head("predlog", "Predlog", "right")}
@@ -231,7 +299,10 @@ export function ProcurementTable({
                       {r.isNew ? " · nema je u šifarniku portala" : r.lastSaleOn ? ` · poslednja prodaja ${dmy(r.lastSaleOn)}` : " · bez prodaje 12 meseci"}
                     </span>
                   </td>
-                  <td className={styles.num} data-label="Prodato 30 d">{r.sold30 ? `${fmt(r.sold30)} ${unit}` : <span className={styles.zero}>0</span>}</td>
+                  <td className={styles.num} data-label={`Prodato ${periodLabel(data.period, data.today)}`}>
+                    {r.soldPeriod ? `${fmt(r.soldPeriod)} ${unit}` : <span className={styles.zero}>0</span>}
+                    {r.customersPeriod ? <span className={styles.sub}>{r.customersPeriod} {r.customersPeriod === 1 ? "kupac" : "kupaca"}</span> : null}
+                  </td>
                   <td className={styles.num} data-label={`Prodato ${historyDays} d`}>
                     {r.sold180 ? `${fmt(r.sold180)} ${unit}` : <span className={styles.zero}>0</span>}
                     {r.customers180 ? <span className={styles.sub}>{r.customers180} {r.customers180 === 1 ? "kupac" : "kupaca"}</span> : null}

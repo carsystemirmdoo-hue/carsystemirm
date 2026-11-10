@@ -17,7 +17,8 @@ export default async function Page({ searchParams }: { searchParams: Promise<Rec
   const sp = await searchParams;
   const raw = Number(typeof sp.dana === "string" ? sp.dana : "");
   const coverDays = (COVER_CHOICES as readonly number[]).includes(raw) ? raw : 60;
-  const data = await loadProcurement({ coverDays });
+  const one = (k: string) => (typeof sp[k] === "string" ? (sp[k] as string) : undefined);
+  const data = await loadProcurement({ coverDays, from: one("od"), to: one("do") });
 
   return (
     <>

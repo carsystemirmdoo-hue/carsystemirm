@@ -493,7 +493,7 @@ export type CustomerStock =
  *   (izostavljena šifra, sudar, nepotvrđeno pakovanje, razlika JM, negativno ili prazno stanje)
  *   je „Raspoloživost na upit“. Izostavljena šifra nije nula.
  */
-export async function customerStockFor(articleIds: string[], now = new Date()): Promise<CustomerStock> {
+export async function customerStockFor(articleIds: string[], now = new Date(), opts: { internal?: boolean } = {}): Promise<CustomerStock> {
   if (!articleIds.length || process.env.STOCK_CUSTOMER_DISPLAY === "0") return { state: "iskljuceno" };
   const db = getDb();
   const [policyRow] = await db.select({ value: systemSettings.value }).from(systemSettings).where(eq(systemSettings.key, STOCK_DISPLAY_SETTING)).limit(1);
@@ -505,8 +505,11 @@ export async function customerStockFor(articleIds: string[], now = new Date()): 
     snapshot: snapshot?.stockDate ? { stockDate: snapshot.stockDate } : null,
     now,
   });
-  if (!decision.show) return decision.reason === "zastareo_snimak" && snapshot?.stockDate ? { state: "zastareo", stockDate: snapshot.stockDate } : { state: "iskljuceno" };
+  // Interni prikaz (komercijalista): star snimak se i dalje prikazuje, uz napomenu o starosti u ekranu.
+  const staleButInternal = !decision.show && decision.reason === "zastareo_snimak" && opts.internal === true;
+  if (!decision.show && !staleButInternal) return decision.reason === "zastareo_snimak" && snapshot?.stockDate ? { state: "zastareo", stockDate: snapshot.stockDate } : { state: "iskljuceno" };
   if (!snapshot?.stockDate) return { state: "iskljuceno" };
+  const validUntil = decision.show ? decision.validUntil : now;
   const arts = await db.select({ id: articles.id, code: articles.code, unit: articles.unit }).from(articles).where(inArray(articles.id, articleIds));
   const ctx = await linkContext(db);
   const keys = [...new Set(arts.map((a) => codeKey(a.code)).filter((k): k is string => k !== null))];
@@ -539,5 +542,44 @@ export async function customerStockFor(articleIds: string[], now = new Date()): 
       }),
     );
   }
-  return { state: "svez", stockDate: snapshot.stockDate, validUntil: decision.validUntil, byArticle };
+  return { state: "svez", stockDate: snapshot.stockDate, validUntil, byArticle };
+}
+
+export type InternalStock = {
+  snapshot: { id: string; stockDate: string | null } | null;
+  /** Izvorna količina u JM artikla; null = sudar šifara, razlika JM ili prazna količina. */
+  byArticle: Map<string, number | null>;
+  /** Šifre iz važećeg snimka kojih nema u šifarniku portala (nova roba), bez opreme na revers. */
+  unlinked: { code: string; name: string; quantity: number | null }[];
+};
+
+/**
+ * Lager za interni ekran Nabavka (2026-11-10): sirove količine iz važećeg snimka, bez praga
+ * starosti i bez kupčevog pravila celih pakovanja. Datum snimka ekran prikazuje uz napomenu.
+ */
+export async function internalStockQuantities(): Promise<InternalStock> {
+  const snapshot = await currentStockSnapshot();
+  if (!snapshot) return { snapshot: null, byArticle: new Map(), unlinked: [] };
+  const db = getDb();
+  const [rows, ctx, [head], equipment] = await Promise.all([
+    db.select().from(stockImportLines).where(eq(stockImportLines.importId, snapshot.id)),
+    linkContext(db),
+    db.select({ summary: stockImports.summary }).from(stockImports).where(eq(stockImports.id, snapshot.id)),
+    db.select({ k: internalEquipment.codeKey }).from(internalEquipment),
+  ]);
+  const jmBad = jmMismatchCodes(head?.summary ?? null);
+  const eq0 = new Set(equipment.map((e) => e.k));
+  const byArticle = new Map<string, number | null>();
+  const unlinked: InternalStock["unlinked"] = [];
+  for (const l of rows) {
+    const link = linkLine({ sourceCode: l.sourceCode, codeKey: l.codeKey }, ctx.index, ctx.packs);
+    const quantity = l.quantity === null ? null : Number(l.quantity);
+    if (link.link === "povezan" && link.articleId) {
+      // Dva reda izvoza za isti artikal („91“ i „091“) → nejasno, bez broja.
+      byArticle.set(link.articleId, byArticle.has(link.articleId) || jmBad.has(l.sourceCode) ? null : quantity);
+    } else if (link.link === "nepovezan" && !(l.codeKey !== null && eq0.has(l.codeKey))) {
+      unlinked.push({ code: l.sourceCode, name: l.name, quantity });
+    }
+  }
+  return { snapshot: { id: snapshot.id, stockDate: snapshot.stockDate }, byArticle, unlinked };
 }

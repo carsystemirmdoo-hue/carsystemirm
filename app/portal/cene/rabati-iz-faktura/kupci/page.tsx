@@ -63,14 +63,26 @@ export default async function RebateReviewListPage({
       matchesException(r, izuzetak) &&
       (!komercijalista || (komercijalista === "-" ? r.salespeople.length === 0 : r.salespeople.includes(komercijalista))),
   );
+  /*
+   * Komercijalista (bez celog opsega) vidi jednostavnu listu: klik na kupca vodi pravo u tabelu
+   * rabata, a analiza faktura (stanje, izuzeci) je samo diskretna oznaka (2026-11-10).
+   * Vlasnik i kancelarija zadržavaju pun pregled.
+   */
+  const simple = !seesAllCustomers(user);
+  const target = (customerId: string) =>
+    simple ? `/portal/cene/rabati-iz-faktura/kupci/${customerId}/tabela` : `/portal/cene/rabati-iz-faktura/kupci/${customerId}`;
   const counts = Object.fromEntries(Object.keys(STATUS_LABELS).map((k) => [k, rows.filter((r) => r.status === k).length]));
 
   return (
     <>
       <PageHeader
         eyebrow="Finansije · Rabati iz faktura"
-        title="Pregled rabata po kupcu"
-        description="Šta je zabeleženo na fakturama, po kupcu. Ovo je istorija, ne cenovnik: predlog uslova i odobreno pravilo prikazani su odvojeno na stranici kupca."
+        title={simple ? "Rabati kupaca" : "Pregled rabata po kupcu"}
+        description={
+          simple
+            ? "Kliknite na kupca da otvorite tabelu rabata: svi artikli u ponudi, i oni koje kupac još ne uzima, sa rabatom i neto cenom."
+            : "Šta je zabeleženo na fakturama, po kupcu. Ovo je istorija, ne cenovnik: predlog uslova i odobreno pravilo prikazani su odvojeno na stranici kupca."
+        }
         meta={
           <span>
             {seesAllCustomers(user)
@@ -97,6 +109,8 @@ export default async function RebateReviewListPage({
             <span>Kupac</span>
             <input type="search" name="q" defaultValue={q} placeholder="Naziv kupca" autoComplete="off" />
           </label>
+          {simple ? null : (
+          <>
           <label>
             <span>Stanje</span>
             <PortalSelect
@@ -115,7 +129,9 @@ export default async function RebateReviewListPage({
             <span>Izuzeci</span>
             <PortalSelect name="izuzetak" ariaLabel="Izuzeci" defaultValue={izuzetak} options={EXCEPTION_FILTERS.map((f) => ({ value: f.key, label: f.label }))} />
           </label>
-          {reps.length > 1 ? (
+          </>
+          )}
+          {!simple && reps.length > 1 ? (
             <label>
               <span>Komercijalista (trenutno)</span>
               <PortalSelect
@@ -130,6 +146,44 @@ export default async function RebateReviewListPage({
         </form>
 
         <ClickableRows className="portal-table-wrap">
+{simple ? (
+          <table className="portal-table rr-table rr-table--rows">
+            <thead>
+              <tr>
+                <th scope="col">Kupac</th>
+                <th scope="col">Najčešći rabat</th>
+                <th scope="col">Poslednja faktura</th>
+                <th scope="col">Rabati po artiklu u portalu</th>
+              </tr>
+            </thead>
+            <tbody>
+              {filtered.map((r) => {
+                const check = r.status === "nedosledan";
+                return (
+                  <tr key={r.customerId}>
+                    <th scope="row">
+                      <Link className="rr-row-link" href={target(r.customerId)}>{r.customerName}</Link>
+                      {check ? (
+                        <span className="rr-mark" title="Rabati na fakturama ovog kupca nisu bili ujednačeni." aria-label="rabati na fakturama nisu bili ujednačeni" />
+                      ) : null}
+                    </th>
+                    <td>{r.mode ? <strong>{pct(r.mode.percent)}</strong> : "—"}</td>
+                    <td>{r.last ? srDate(r.last.issuedOn) : "—"}</td>
+                    <td>
+                      {r.rules.approved ? `${r.rules.approved} odobreno` : "—"}
+                      {r.rules.pending ? <small>{r.rules.pending} na čekanju</small> : null}
+                    </td>
+                  </tr>
+                );
+              })}
+              {filtered.length === 0 ? (
+                <tr>
+                  <td colSpan={4}>Nema kupaca za ovu pretragu.</td>
+                </tr>
+              ) : null}
+            </tbody>
+          </table>
+          ) : (
           <table className="portal-table rr-table rr-table--rows">
             <thead>
               <tr>
@@ -146,7 +200,7 @@ export default async function RebateReviewListPage({
                 <tr key={r.customerId}>
                   <th scope="row">
                     {/* Ceo red je klikabilan: `rr-row-link` se razvlači preko reda (CSS), tekst i dalje čita čitač ekrana. */}
-                    <Link className="rr-row-link" href={`/portal/cene/rabati-iz-faktura/kupci/${r.customerId}`}>{r.customerName}</Link>
+                    <Link className="rr-row-link" href={target(r.customerId)}>{r.customerName}</Link>
                     <small>{r.salespeople.length ? r.salespeople.join(", ") : "bez dodele"}</small>
                   </th>
                   <td>
@@ -206,12 +260,20 @@ export default async function RebateReviewListPage({
               ) : null}
             </tbody>
           </table>
+          )}
         </ClickableRows>
-        <p className="portal-data-note">
-          Prikazano {filtered.length} od {rows.length}. „Najčešći rabat“ je vrednost na najviše stavki; broj faktura je
-          broj računa na kojima se ta vrednost pojavljuje. Grupe su zaključene iz naziva artikla i važe kao predlog dok ne
-          stigne šifarnik iz BizniSofta.
-        </p>
+        {simple ? (
+          <p className="portal-data-note">
+            Prikazano {filtered.length} od {rows.length}. „Najčešći rabat“ je rabat na najviše stavki faktura. Siva tačka uz
+            ime znači da rabati na fakturama tog kupca nisu bili ujednačeni.
+          </p>
+        ) : (
+          <p className="portal-data-note">
+            Prikazano {filtered.length} od {rows.length}. „Najčešći rabat“ je vrednost na najviše stavki; broj faktura je
+            broj računa na kojima se ta vrednost pojavljuje. Grupe su zaključene iz naziva artikla i važe kao predlog dok ne
+            stigne šifarnik iz BizniSofta.
+          </p>
+        )}
       </section>
     </>
   );

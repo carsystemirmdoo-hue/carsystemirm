@@ -36,7 +36,8 @@ export function RebateTable({
   canApprove: boolean;
 }) {
   const router = useRouter();
-  const [filter, setFilter] = useState<Filter>(rows.some((r) => r.buysNow) ? "uzima" : "svi");
+  // Podrazumevano SVI artikli u ponudi — i oni koje kupac još ne uzima, da bi im se rabat pripremio unapred (2026-11-10).
+  const [filter, setFilter] = useState<Filter>("svi");
   const [brandFilter, setBrandFilter] = useState("svi");
   const [view, setView] = useState<View>("stablo");
   const [q, setQ] = useState("");

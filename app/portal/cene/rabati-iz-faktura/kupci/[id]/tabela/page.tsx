@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { forbidden, notFound } from "next/navigation";
 import { PageHeader } from "@/components/portal/PortalPrimitives";
+import { seesAllCustomers } from "@/lib/authz/permissions.mjs";
 import { requireCapability } from "@/lib/authz/session";
 import { optionLabel } from "@/lib/pricing/paymentOptions.mjs";
 import { PricingScopeError } from "@/lib/pricing/pricing-scope";
@@ -46,7 +47,12 @@ export default async function RebateTablePage({ params }: { params: Promise<{ id
         }
         actions={
           <>
-            <Link className="rr-link" href={`/portal/cene/rabati-iz-faktura/kupci/${id}`}>← Rabati iz faktura</Link>
+            {seesAllCustomers(user) ? (
+              <Link className="rr-link" href={`/portal/cene/rabati-iz-faktura/kupci/${id}`}>← Rabati iz faktura</Link>
+            ) : (
+              <Link className="rr-link" href="/portal/cene/rabati-iz-faktura/kupci">← Rabati kupaca</Link>
+            )}
+            <Link className="rr-link" href={`/portal/kupci/${id}/preporuke`}>Preporuke i ponuda</Link>
             <Link className="rr-link" href={`/portal/kupci/${id}`}>Kartica kupca</Link>
           </>
         }

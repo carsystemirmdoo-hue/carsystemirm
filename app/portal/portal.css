@@ -10640,3 +10640,5 @@ html:has(.portal-customer-area) { scroll-padding-top: 104px; }
   background-size: 14px 14px;
 }
 .portal-table-sub { display: block; color: var(--p-muted); font-size: 12px; font-weight: 400; }
+/* Diskretna oznaka u listi rabata komercijaliste (2026-11-10): analiza faktura bez posebnog panela. */
+.rr-mark { display: inline-block; width: 7px; height: 7px; margin-left: 8px; border-radius: 50%; background: var(--p-faint); vertical-align: 2px; cursor: help; }

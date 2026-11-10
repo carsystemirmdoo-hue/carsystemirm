@@ -123,7 +123,7 @@ export default async function PortalHomePage() {
         <section className="portal-panel">
           <div className="portal-section-header">
             <div>
-              <h2>Za razgovor</h2>
+              <h2>Preporuke</h2>
               <p>
                 {state.recommendations.asOfDate
                   ? `Obračun preporuka na dan ${formatDate(state.recommendations.asOfDate)} Svaki signal se meri prema ritmu tog kupca i artikla.`
@@ -133,15 +133,15 @@ export default async function PortalHomePage() {
           </div>
           {state.recommendations.asOfDate ? (
             <div className="portal-metrics">
-              <Link className="portal-metric-link" href="/portal/za-razgovor">
+              <Link className="portal-metric-link" href="/portal/preporuke">
                 <Metric
-                  label="Kupci za razgovor"
+                  label="Kupci za poziv"
                   value={formatCount(state.recommendations.customersNeedingAttention)}
                   context="imaju artikal van ritma"
                   tone={state.recommendations.customersNeedingAttention ? "warning" : "success"}
                 />
               </Link>
-              <Link className="portal-metric-link" href="/portal/preporuke?status=overdue">
+              <Link className="portal-metric-link" href="/portal/preporuke?red=kasni&smer=desc">
                 <Metric
                   label="Artikli koji kasne"
                   value={formatCount(state.recommendations.articlesOverdue)}
@@ -149,7 +149,7 @@ export default async function PortalHomePage() {
                   tone={state.recommendations.articlesOverdue ? "warning" : "neutral"}
                 />
               </Link>
-              <Link className="portal-metric-link" href="/portal/preporuke?status=dormant">
+              <Link className="portal-metric-link" href="/portal/preporuke?prikaz=artikli&status=dormant">
                 <Metric
                   label="Duže ne uzimaju"
                   value={formatCount(state.recommendations.articlesDormant)}

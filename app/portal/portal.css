@@ -10659,3 +10659,12 @@ html:has(.portal-customer-area) { scroll-padding-top: 104px; }
 .zt-muted { color: var(--p-muted); font-size: 13px; }
 .zt-date { white-space: nowrap; }
 .pk-table thead th.pk-num { text-align: right; }
+
+/* Naslov kolone koji menja redosled (2026-11-10): ceo naslov je dugme, strelica jasno vidljiva. */
+.sort-head { display: inline-flex; align-items: center; gap: 6px; padding: 4px 0; border: 0; background: none; color: inherit; font: inherit; font-weight: inherit; letter-spacing: inherit; text-transform: inherit; text-decoration: none; cursor: pointer; white-space: nowrap; }
+.sort-head[data-align="right"] { flex-direction: row-reverse; }
+.sort-head:hover { color: var(--p-ink); }
+.sort-head:hover .sort-arrow { opacity: 1; }
+.sort-arrow { display: inline-flex; align-items: center; justify-content: center; min-width: 18px; height: 18px; font-size: 11px; opacity: 0.45; }
+.sort-arrow[data-active] { opacity: 1; color: var(--p-red); font-size: 12px; }
+.sort-head:focus-visible { outline: 2px solid var(--pn-focus, #2c5da8); outline-offset: 2px; }

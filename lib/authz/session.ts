@@ -4,7 +4,7 @@ import { auth } from "@/auth";
 import { loginUrlFor, reauthUrlFor } from "@/lib/authz/redirects.mjs";
 import { canAccessCustomer } from "@/lib/authz/scope.mjs";
 import { isInternalSubject } from "@/lib/authz/customer-scope.mjs";
-import { isWithinStaffWorkday } from "@/lib/auth/session-lifetime.mjs";
+import { isWithinStaffSession } from "@/lib/auth/session-lifetime.mjs";
 import { isSessionRevoked } from "@/lib/auth/revoked-sessions";
 import {
   can,
@@ -89,8 +89,8 @@ export async function loadAuthenticatedSession(): Promise<AuthenticatedSession |
    */
   if (!isInternalSubject(session.user)) return null;
 
-  // Radna sesija (8 h ili do ponoći, Beograd; aktivnost ne produžava) i opoziv odjavom (B8) — pre svega ostalog.
-  if (!isWithinStaffWorkday(session.user.loginAt)) return null;
+  // Sesija zaposlenog (30 dana od prijave; aktivnost ne produžava) i opoziv odjavom (B8) — pre svega ostalog.
+  if (!isWithinStaffSession(session.user.loginAt)) return null;
   if (await isSessionRevoked(session.user.sid)) return null;
 
   const user = await loadPortalUser(userId);
@@ -189,8 +189,8 @@ export async function requireFullPortalUser(callbackPath?: string): Promise<Port
 /**
  * Osetljiva radnja traži SVEŽU potvrdu drugog faktora.
  *
- * Sesija traje osam sati; brisanje naloga ili promena tuđe lozinke ne smeju
- * proći na osnovu potvrde od jutros.
+ * Sesija zaposlenog traje do 30 dana; brisanje naloga ili promena tuđe lozinke
+ * ne smeju proći na osnovu potvrde sa prijave.
  */
 export async function requireRecentMfa(): Promise<PortalUser> {
   const session = await loadAuthenticatedSession();
@@ -219,7 +219,7 @@ export async function requireRecentMfaOrReauth(returnPath: string): Promise<Port
 
 /**
  * Rutinski tok lagera (uvoz, potvrda, odbacivanje — politika vlasnika 16. 10. 2026): dovoljan je
- * drugi faktor dat pri prijavi u OVOJ radnoj sesiji (najviše 8 h, najkasnije do ponoći). Sesija
+ * drugi faktor dat pri prijavi u OVOJ sesiji (do 30 dana na uređaju, odluka 10. 11. 2026). Sesija
  * bez drugog faktora ide na potvrdu identiteta sa povratkom na `returnPath`; istekla sesija na
  * prijavu sa istim povratkom. Osetljive administratorske radnje i dalje koriste
  * `requireRecentMfa` / `requireRecentMfaOrReauth` (10 minuta).

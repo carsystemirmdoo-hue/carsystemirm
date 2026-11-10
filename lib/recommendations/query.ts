@@ -64,6 +64,7 @@ export type RecommendationFilter = {
    * nama) se izostavljaju iz liste i brojača; vide se izborom `neaktivni`/`svi`.
    */
   customerStatus?: "aktivni" | "neaktivni" | "svi";
+  /** Najviše redova PO STATUSU (podrazumevano `RECOMMENDATION_ROWS_PER_STATUS`). */
   limit?: number;
 };
 
@@ -135,6 +136,9 @@ function uslovi(scope: LedgerScope, filter: RecommendationFilter): SQL {
  * kozmetika — bez njih bi dva učitavanja iste strane mogla da vrate iste redove
  * u drugom redosledu.
  */
+/** Najviše redova po statusu na ekranu; brojači uvek broje sve. */
+export const RECOMMENDATION_ROWS_PER_STATUS = 200;
+
 export async function recommendationRows(
   scope: LedgerScope,
   filter: RecommendationFilter = {},
@@ -153,22 +157,38 @@ export async function recommendationRows(
     confidence_components: Record<string, unknown>; explanation: string;
     algorithm_version: string; as_of_date: string;
   }>(sql`
-    SELECT r.id, r.customer_id, c.name AS customer_name,
-           r.article_code, r.article_name,
-           r.first_purchase_on::text AS first_purchase_on,
-           r.last_purchase_on::text  AS last_purchase_on,
-           r.event_count, r.median_interval_days, r.dispersion_days,
-           r.stability::text AS stability,
-           r.expected_next_on::text AS expected_next_on,
-           r.tolerance_days,
-           r.window_from_on::text AS window_from_on,
-           r.window_to_on::text   AS window_to_on,
-           r.days_until_expected, r.days_since_last_purchase,
-           r.status, r.confidence, r.reasons, r.confidence_components,
-           r.explanation, r.algorithm_version, r.as_of_date::text AS as_of_date
-      FROM active_recommendations r
-      JOIN customers c ON c.id = r.customer_id
-     WHERE ${uslovi(scope, filter)}
+    SELECT * FROM (
+      SELECT r.id, r.customer_id, c.name AS customer_name,
+             r.article_code, r.article_name,
+             r.first_purchase_on::text AS first_purchase_on,
+             r.last_purchase_on::text  AS last_purchase_on,
+             r.event_count, r.median_interval_days, r.dispersion_days,
+             r.stability::text AS stability,
+             r.expected_next_on::text AS expected_next_on,
+             r.tolerance_days,
+             r.window_from_on::text AS window_from_on,
+             r.window_to_on::text   AS window_to_on,
+             r.days_until_expected, r.days_since_last_purchase,
+             r.status, r.confidence, r.reasons, r.confidence_components,
+             r.explanation, r.algorithm_version, r.as_of_date::text AS as_of_date,
+             /*
+              * Ograničenje PO STATUSU, ne ukupno (ispravka 2026-11-10). Uspavani parovi
+              * imaju najveće „kašnjenje“, pa je zajednički LIMIT 300 bio potrošen na njih
+              * i na privremene procene — „Kasni“ i „Uskoro“ su ostajale prazne iako ih
+              * brojači broje stotinama.
+              */
+             row_number() OVER (
+               PARTITION BY r.status
+               ORDER BY r.days_until_expected ASC NULLS LAST,
+                        CASE r.confidence WHEN 'high' THEN 0 WHEN 'medium' THEN 1 ELSE 2 END,
+                        c.name, r.article_code
+             ) AS rb,
+             CASE r.confidence WHEN 'high' THEN 0 WHEN 'medium' THEN 1 ELSE 2 END AS conf_rank
+        FROM active_recommendations r
+        JOIN customers c ON c.id = r.customer_id
+       WHERE ${uslovi(scope, filter)}
+    ) x
+     WHERE x.rb <= ${filter.limit ?? RECOMMENDATION_ROWS_PER_STATUS}
      ORDER BY
        /*
         * Redosled odgovara pitanju „koga da zovem prvog".
@@ -178,10 +198,9 @@ export async function recommendationRows(
         * procene na dnu umesto na vrhu, gde ih Postgres podrazumevano stavlja
         * kod rastućeg redosleda.
         */
-       r.days_until_expected ASC NULLS LAST,
-       CASE r.confidence WHEN 'high' THEN 0 WHEN 'medium' THEN 1 ELSE 2 END,
-       c.name, r.article_code
-     LIMIT ${filter.limit ?? 300}
+       x.days_until_expected ASC NULLS LAST,
+       x.conf_rank,
+       x.customer_name, x.article_code
   `);
 
   return redovi.map((r) => ({

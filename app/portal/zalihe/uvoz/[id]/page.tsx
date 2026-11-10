@@ -83,7 +83,7 @@ export default async function StockImportReviewPage({ params, searchParams }: { 
   const { id } = await params;
   await requireCapability("imports:write", `/portal/zalihe/uvoz/${id}`);
   const { isti, ishod, ponovo, identitet } = await searchParams;
-  // Potvrda i odbacivanje prihvataju drugi faktor iz ove radne sesije (8 h / ponoć); ovde se samo unapred kaže.
+  // Potvrda i odbacivanje prihvataju drugi faktor iz ove sesije (do 30 dana); ovde se samo unapred kaže.
   const session = await loadAuthenticatedSession();
   const mfaFresh = Boolean(session && isSecondFactorSatisfied(session.assurance));
   const policy = await stockDisplayPolicy();
@@ -187,7 +187,7 @@ export default async function StockImportReviewPage({ params, searchParams }: { 
             {!mfaFresh ? (
               <div className="lg-reauth" role="note">
                 <p>
-                  <strong>Pre odluke potvrdite identitet.</strong> Ova prijava nije potvrđena kodom iz aplikacije. Potvrda i odbacivanje traže prijavu lozinkom i kodom (važi za celu radnu sesiju, do 8 sati, najkasnije do ponoći). Posle toga vraćate se na ovaj uvoz; ništa nije izmenjeno.
+                  <strong>Pre odluke potvrdite identitet.</strong> Ova prijava nije potvrđena kodom iz aplikacije. Potvrda i odbacivanje traže prijavu lozinkom i kodom (važi za celu sesiju na ovom uređaju, do 30 dana). Posle toga vraćate se na ovaj uvoz; ništa nije izmenjeno.
                 </p>
                 <PortalLinkButton href={reauthUrlFor(`/portal/zalihe/uvoz/${h.id}?identitet=potvrdjen`)} variant="secondary">Potvrdite identitet</PortalLinkButton>
               </div>

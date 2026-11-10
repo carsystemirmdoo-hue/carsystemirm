@@ -12,7 +12,7 @@ import { confirmStockImport, discardStockImport, StockImportError, uploadStockRe
  * Lager — serverske akcije (dok. 65). Svaka SAMA proverava `imports:write` (vlasnik i
  * kancelarija); skriveno dugme nije ovlašćenje. Otpremanje samo čita fajl i upisuje ga
  * za pregled. Potvrda i odbacivanje traže drugi faktor iz ove radne sesije (prijava
- * lozinkom i kodom, važi do 8 h / ponoći); bez njega ili posle isteka sesije korisnik ide
+ * lozinkom i kodom, važi do 30 dana na uređaju); bez njega ili posle isteka sesije korisnik ide
  * na prijavu, odnosno potvrdu identiteta, i vraća se na isti uvoz.
  * Ponovljen klik posle odluke ne menja ništa: prikazuje se već zapisani ishod.
  */

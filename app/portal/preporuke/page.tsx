@@ -205,11 +205,13 @@ export default async function RecommendationsPage({
   const scope = await resolveLedgerScope(user);
   const opsegDostupan = scope.customerIds === null || scope.customerIds.length > 0;
 
-  const [run, prolazi, redovi, brojaci, komercijalisti] = await Promise.all([
+  const [run, prolazi, redovi, brojaci, brojaciFiltera, komercijalisti] = await Promise.all([
     activeRun(),
     recentRuns(5),
     recommendationRows(scope, filter),
     recommendationStatusCounts(scope, { customerStatus: filter.customerStatus }),
+    // Isti filteri kao lista: broj u naslovu grupe je PRAVI broj, ne broj učitanih redova.
+    recommendationStatusCounts(scope, filter),
     salespeopleInScope(scope),
   ]);
 
@@ -419,11 +421,15 @@ export default async function RecommendationsPage({
       ) : (
         GRUPE.map((g) => {
           const stavke = poGrupi.get(g.kljuc) ?? [];
+          const ukupno = Math.max(stavke.length, g.statusi.reduce((s, k) => s + (brojaciFiltera[k] ?? 0), 0));
+          const skraceno = stavke.length < ukupno
+            ? ` Prikazano prvih ${stavke.length} od ${ukupno} (najhitnije prvo); suzite pretragom ili filterom.`
+            : "";
           return (
             <section className="portal-panel" key={g.kljuc} data-accent={g.tone}>
               <SectionHeader
-                title={`${g.naslov} (${stavke.length})`}
-                description={`${g.opis} Broj u naslovu prati filtere iznad.`}
+                title={`${g.naslov} (${ukupno})`}
+                description={`${g.opis} Broj u naslovu prati filtere iznad.${skraceno}`}
               />
               {stavke.length === 0 ? (
                 <p>

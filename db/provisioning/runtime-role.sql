@@ -98,6 +98,9 @@ REVOKE DELETE, TRUNCATE ON customer_call_notes FROM :runtime_role;
 REVOKE DELETE, TRUNCATE ON receivable_snapshots FROM :runtime_role;
 REVOKE UPDATE, DELETE, TRUNCATE ON receivable_lines FROM :runtime_role;
 GRANT SELECT, INSERT ON receivable_lines TO :runtime_role;
+-- 0062: spisak kupaca iz tabela se samo dodaje (ručne veze naziva se mogu ispraviti i ukloniti).
+REVOKE UPDATE, DELETE, TRUNCATE ON receivable_sheet_customers FROM :runtime_role;
+GRANT SELECT, INSERT ON receivable_sheet_customers TO :runtime_role;
 -- 0051: čišćenje starijih stavki lagera SAMO kroz ograničen postupak (bez opšteg DELETE).
 DO $$
 BEGIN

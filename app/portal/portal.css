@@ -10680,7 +10680,8 @@ html:has(.portal-customer-area) { scroll-padding-top: 104px; }
 .dg-tools { display: flex; flex-wrap: wrap; align-items: flex-end; gap: 10px 14px; padding: 14px 16px; }
 .dg-btn { min-height: 38px; padding: 0 16px; border: 1px solid var(--p-ink); border-radius: 6px; background: var(--p-ink); color: var(--p-surface); font: inherit; font-size: 13px; font-weight: 700; cursor: pointer; }
 .dg-btn:disabled { opacity: 0.5; cursor: progress; }
-.portal-root .dg-btn--light { background: var(--p-surface); color: var(--p-ink); }
+.portal-root .dg-btn { color: var(--p-surface); }
+.portal-root .dg-btn.dg-btn--light { background: var(--p-surface); color: var(--p-ink); }
 .dg-upload { display: flex; flex-wrap: wrap; align-items: flex-end; gap: 8px; }
 .dg-upload label { display: grid; gap: 4px; font-size: 12px; color: var(--p-muted); font-weight: 600; }
 .dg-upload input[type="file"] { font-size: 13px; color: var(--p-ink); }
@@ -10693,6 +10694,12 @@ html:has(.portal-customer-area) { scroll-padding-top: 104px; }
 .dg-setup .dg-tools { padding: 8px 0 0; }
 .dg-warn { margin: 12px 0 0; padding-left: 18px; font-size: 13px; color: var(--p-muted); line-height: 1.6; }
 .dg-lines td, .dg-lines th { vertical-align: middle; }
+.dg-h { margin: 0 0 6px; font-size: 16px; }
+.dg-link td, .dg-link th { vertical-align: middle; }
+.dg-pick { width: 100%; min-width: 220px; height: 38px; padding: 0 10px; border: 1px solid var(--p-line-strong); border-radius: 6px; background: var(--p-surface); color: var(--p-ink); font: inherit; font-size: 14px; }
+.dg-inline { display: block; margin-top: 4px; font-size: 12.5px; color: var(--p-green); }
+.dg-inline--err { color: var(--p-amber); }
+.dg-actions { display: inline-flex; gap: 6px; flex-wrap: wrap; }
 
 /* Početna: podsetnici „javiti se“ (2026-11-10). */
 .fu-list { margin: 0; padding: 0; list-style: none; }

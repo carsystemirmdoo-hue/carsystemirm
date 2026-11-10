@@ -9,11 +9,14 @@ import {
   autoRefreshReceivables,
   debtsByCustomer,
   latestSnapshot,
+  customersForLinking,
   receivablesSourceConfigured,
+  sheetAssignmentSuggestions,
   unmatchedDebtLines,
   type CustomerDebt,
 } from "@/lib/sales-tools/receivables-service";
 import { DebtTools } from "./DebtTools";
+import { SheetMatching } from "./SheetMatching";
 
 export const metadata = { title: "Dugovanja" };
 
@@ -45,7 +48,7 @@ export default async function Page({ searchParams }: { searchParams: Promise<Rec
   const refreshProblem = await autoRefreshReceivables();
   const [snap, rows] = await Promise.all([latestSnapshot(), debtsByCustomer(user)]);
   const all = seesAllCustomers(user);
-  const unmatched = all && snap ? await unmatchedDebtLines() : [];
+  const [unmatched, suggestions, linkable] = all && snap ? await Promise.all([unmatchedDebtLines(), sheetAssignmentSuggestions(), customersForLinking()]) : [[], [], []];
   const canUpload = can(user, "imports:write");
 
   const q = one("q").trim();
@@ -155,36 +158,18 @@ export default async function Page({ searchParams }: { searchParams: Promise<Rec
             </ClickableRows>
           </section>
 
-          {all && (unmatched.length || snap.warnings.length) ? (
+          {all ? <SheetMatching unmatched={unmatched} customers={linkable} suggestions={suggestions} canAssign={can(user, "assignments:manage")} /> : null}
+          {all && snap.warnings.length ? (
             <section className="portal-panel">
-              <div className="portal-section-header">
-                <div>
-                  <h2>Za proveru u tabeli</h2>
-                  <p>Redovi koje portal nije povezao sa kupcem (ne vide ih komercijalisti). Najsigurnije je dodati PIB kupca u tabelu.</p>
-                </div>
-              </div>
               <div className="portal-panel-body">
-                {unmatched.length ? (
-                  <div className="portal-table-wrap">
-                    <table className="portal-table">
-                      <thead><tr><th>Naziv u tabeli</th><th>PIB</th><th>Šifra</th><th className="pk-num">Fakture</th><th className="pk-num">Iznos</th></tr></thead>
-                      <tbody>
-                        {unmatched.map((u, i) => (
-                          <tr key={i}><td>{u.label}</td><td>{u.pib ?? "—"}</td><td>{u.code ?? "—"}</td><td className="pk-num">{u.invoices}</td><td className="pk-num">{whole(u.total)}</td></tr>
-                        ))}
-                      </tbody>
-                    </table>
-                  </div>
-                ) : null}
-                {snap.warnings.length ? (
-                  <ul className="dg-warn">
-                    {snap.warnings.slice(0, 30).map((w, i) => <li key={i}>Red {w.row}: {w.text}</li>)}
-                  </ul>
-                ) : null}
+                <h2 className="dg-h">Redovi za proveru u tabelama</h2>
+                <ul className="dg-warn">
+                  {snap.warnings.slice(0, 30).map((w, i) => <li key={i}>Red {w.row}: {w.text}</li>)}
+                </ul>
               </div>
             </section>
           ) : null}
-          <p className="portal-footnote">Snimak od {dmy(snap.createdAt.slice(0, 10))}: {snap.rowCount} otvorenih faktura, povezano sa kupcem {snap.matchedCount}.</p>
+          <p className="portal-footnote">Snimak od {dmy(snap.createdAt.slice(0, 10))} ({snap.sourceRef}): {snap.rowCount} otvorenih faktura.</p>
         </>
       )}
     </>

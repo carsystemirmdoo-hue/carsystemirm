@@ -106,6 +106,8 @@ const CRUMB_LABELS: Record<string, string> = {
   predlozi: "Grupni predlozi",
   "za-pregled": "Za ručni pregled",
   "za-razgovor": "Za razgovor",
+  tabela: "Tabela rabata",
+  promene: "Promene komercijalista",
   komercijalisti: "Komercijalisti",
   podesavanja: "Podešavanja",
   odobrenja: "Odobrenja",
@@ -114,12 +116,8 @@ const CRUMB_LABELS: Record<string, string> = {
 
 function CompanyMark() {
   return (
+    // Bez znaka sa trakama (odluka vlasnika 2026-11-09): samo naziv.
     <span className="portal-company-mark" aria-label="Carsystem i R-M">
-      <span className="portal-company-symbol" aria-hidden="true">
-        <i />
-        <i />
-        <i />
-      </span>
       <span>
         <strong>Carsystem</strong>
         <small>Poslovni sistem</small>

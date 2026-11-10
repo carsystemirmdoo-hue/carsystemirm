@@ -48,8 +48,12 @@ export const authConfig = {
   },
   session: {
     strategy: "jwt",
-    // Osmočasovna smena; posle toga je potrebna ponovna prijava.
-    maxAge: 60 * 60 * 8,
+    /*
+     * Rok kolačića = najduži rok sesije (zaposleni, 30 dana — odluka 10. 11. 2026).
+     * Stvarni rok proveravaju kapije: zaposleni `isWithinStaffSession` (30 dana od
+     * prijave), kupac `isWithinAbsoluteLifetime` (8 h, pa „Zapamti me“).
+     */
+    maxAge: 60 * 60 * 24 * 30,
   },
   providers: [],
   callbacks: {
@@ -86,7 +90,7 @@ export const authConfig = {
        * Uz identitet se nosi i verzija sesije iz trenutka prijave.
        *
        * To NIJE ovlašćenje i ne daje nikakav pristup — služi samo da se token
-       * može opozvati. Bez nje ukraden JWT važi punih osam sati i odjava ga ne
+       * može opozvati. Bez nje ukraden JWT važi do isteka roka i odjava ga ne
        * poništava, jer Auth.js ne vodi evidenciju izdatih tokena.
        */
       if (user && "sessionVersion" in user) {

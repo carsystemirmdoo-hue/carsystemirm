@@ -115,6 +115,18 @@ test("predlozi: redovi i brojači podrazumevano bez neaktivnih; filter ih prikaz
   assert.equal(zbir(await recommendationStatusCounts(scope(), {})), podrazumevano.length);
 });
 
+test("predlozi: ograničenje važi po statusu — nijedna grupa ne ostaje prazna zbog drugih (2026-11-10)", async (t) => {
+  if (guard(t)) return;
+  const { recommendationRows, recommendationStatusCounts } = await import("@/lib/recommendations/query");
+  const brojaci = await recommendationStatusCounts(scope(), { customerStatus: "svi" });
+  assert.ok(Object.keys(brojaci).length >= 1);
+  const jedan = await recommendationRows(scope(), { customerStatus: "svi", limit: 1 });
+  const poStatusu = new Map<string, number>();
+  for (const r of jedan) poStatusu.set(r.status, (poStatusu.get(r.status) ?? 0) + 1);
+  assert.deepEqual([...poStatusu.keys()].sort(), Object.keys(brojaci).sort(), "svaki status sa redovima dobija svoje mesto");
+  assert.ok([...poStatusu.values()].every((n) => n === 1));
+});
+
 test("kartica neaktivnog kupca zadržava istoriju i statuse artikala", async (t) => {
   if (guard(t)) return;
   const { loadCustomerProfile } = await import("@/lib/recommendations/customer-profile");

@@ -142,6 +142,7 @@ export default async function RebateReviewCustomerPage({
           <>
             <Link className="rr-link" href="/portal/cene/rabati-iz-faktura/kupci">← Svi kupci</Link>
             <Link className="rr-link" href={`/portal/kupci/${customer.id}`}>Kartica kupca</Link>
+            <Link className="portal-button" data-variant="primary" href={`/portal/cene/rabati-iz-faktura/kupci/${customer.id}/tabela`}>Tabela rabata</Link>
           </>
         }
       />

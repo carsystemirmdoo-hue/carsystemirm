@@ -83,7 +83,7 @@ export function LoginStart({
         {audience === "kupac" ? (
           <p>Nalog za kupce otvara kancelarija za Vašu firmu; nalog vidi samo podatke Vaše firme.</p>
         ) : (
-          <p>Naloge zaposlenih otvara vlasnik. Radna sesija traje do 8 sati, najduže do ponoći.</p>
+          <p>Naloge zaposlenih otvara vlasnik. Prijava na ovom uređaju važi 30 dana; na tuđem računaru se odjavite.</p>
         )}
       </div>
     </main>

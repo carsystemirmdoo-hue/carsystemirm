@@ -5,6 +5,8 @@ import { Fragment, useMemo, useRef, useState, useTransition } from "react";
 import type { OfferRow } from "@/lib/recommendations/customer-offer-service";
 import { DISMISS_REASONS } from "@/lib/recommendations/customerOffer.mjs";
 import { STATUS_LABELS } from "@/lib/recommendations/policy.mjs";
+import { nextSort, sortRows } from "@/lib/ui/sortRows.mjs";
+import { SortHeader } from "@/components/portal/SortHeader";
 import { dismissArticleAction, restoreArticleAction } from "./actions";
 import styles from "./CustomerOffer.module.css";
 
@@ -27,6 +29,19 @@ const cents = (c: number) => money(c / 100);
 const pct = (p: number | null) => (p === null ? "—" : `${String(Math.round(p * 1000) / 1000).replace(".", ",")} %`);
 const dmy = (d: string | null) => (d ? `${d.slice(8, 10)}.${d.slice(5, 7)}.${d.slice(0, 4)}.` : "—");
 const qty = (n: number) => n.toLocaleString("sr-Latn-RS", { maximumFractionDigits: 3 });
+/** Redosled statusa kada se ređa po koloni „Status“: najhitnije prvo. */
+const STATUS_RANK: Record<string, number> = { overdue: 0, due: 1, due_soon: 2, not_yet: 3, provisional: 4, dormant: 5, insufficient_history: 6 };
+type SortKey = "artikal" | "status" | "poslednja" | "ritam" | "trebalo" | "cenaRanije" | "cenaDanas";
+/** Vrednost za ređanje i prirodan prvi smer (npr. „Poslednja kupovina“ od najstarije = najduže nije uzimao). */
+const SORT: Record<SortKey, { value: (r: OfferRow) => string | number | null; first: "asc" | "desc" }> = {
+  artikal: { value: (r) => r.articleName, first: "asc" },
+  status: { value: (r) => STATUS_RANK[r.rec.status] ?? 9, first: "asc" },
+  poslednja: { value: (r) => r.rec.lastPurchaseOn, first: "asc" },
+  ritam: { value: (r) => r.rec.medianIntervalDays, first: "asc" },
+  trebalo: { value: (r) => r.rec.daysUntilExpected, first: "asc" },
+  cenaRanije: { value: (r) => (r.last ? r.last.unitPrice * (1 - r.last.discountPercent / 100) : null), first: "desc" },
+  cenaDanas: { value: (r) => r.today?.netCents ?? null, first: "desc" },
+};
 const label = (s: string) => (STATUS_LABELS as Record<string, string>)[s] ?? s;
 
 export function CustomerOffer({ customerId, rows, today, canEdit }: { customerId: string; rows: OfferRow[]; today: string; canEdit: boolean }) {
@@ -42,16 +57,28 @@ export function CustomerOffer({ customerId, rows, today, canEdit }: { customerId
   const [note, setNote] = useState("");
   const [msg, setMsg] = useState<{ ok: boolean; text: string } | null>(null);
   const [pending, start] = useTransition();
+  // Podrazumevano: najveće kašnjenje prvo (kao i do sada).
+  const [sort, setSort] = useState<{ key: SortKey; dir: "asc" | "desc" }>({ key: "trebalo", dir: "asc" });
   const dialog = useRef<HTMLDialogElement>(null);
 
   const live = useMemo(() => rows.filter((r) => !r.dismissal), [rows]);
   const gone = useMemo(() => rows.filter((r) => r.dismissal), [rows]);
   const visible = useMemo(() => {
     const t = q.trim().toLocaleLowerCase("sr-Latn");
-    return live
+    const filtered = live
       .filter((r) => (tile ? r.rec.status === tile : view === "svi" || OFFER.has(r.rec.status)))
       .filter((r) => !t || `${r.articleName} ${r.articleCode} ${r.brand ?? ""}`.toLocaleLowerCase("sr-Latn").includes(t));
-  }, [live, q, tile, view]);
+    return sortRows(filtered, SORT[sort.key].value, sort.dir);
+  }, [live, q, tile, view, sort]);
+  const head = (key: SortKey, text: string, align: "left" | "right" = "left") => (
+    <SortHeader
+      label={text}
+      active={sort.key === key}
+      dir={sort.dir}
+      align={align}
+      onClick={() => setSort((cur) => nextSort(cur, key, SORT[key].first) as { key: SortKey; dir: "asc" | "desc" })}
+    />
+  );
   const chosen = live.filter((r) => sel.has(r.articleCode));
   const sum = chosen.reduce((s, r) => s + (r.today && r.last ? r.today.netCents * r.last.quantity : 0), 0);
 
@@ -146,13 +173,13 @@ export function CustomerOffer({ customerId, rows, today, canEdit }: { customerId
             <thead>
               <tr>
                 <th className={styles.check} aria-label="Izbor" />
-                <th>Artikal</th>
-                <th>Status</th>
-                <th>Poslednja kupovina</th>
-                <th>Ritam</th>
-                <th>Trebalo je</th>
-                <th className={styles.num}>Poslednji put</th>
-                <th className={styles.num}>Danas</th>
+                {head("artikal", "Artikal")}
+                {head("status", "Status")}
+                {head("poslednja", "Poslednja kupovina")}
+                {head("ritam", "Ritam")}
+                {head("trebalo", "Trebalo je")}
+                {head("cenaRanije", "Poslednji put", "right")}
+                {head("cenaDanas", "Danas", "right")}
                 <th aria-label="Radnje" />
               </tr>
             </thead>

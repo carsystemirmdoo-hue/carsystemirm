@@ -215,6 +215,8 @@ export default async function RecommendationsPage({
     komercijalista?: string;
     kupci?: string;
     prikaz?: string;
+    red?: string;
+    smer?: string;
   }>;
 }) {
   const user = await requireCapability("view:preporuke", "/portal/preporuke");
@@ -238,6 +240,8 @@ export default async function RecommendationsPage({
         hasRun={run !== null}
         asOfDate={run?.asOfDate ?? null}
         showDetailLink={viditSve}
+        red={params.red}
+        smer={params.smer}
       />
     );
   }

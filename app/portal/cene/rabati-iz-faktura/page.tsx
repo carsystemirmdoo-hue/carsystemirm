@@ -1,9 +1,10 @@
+import { redirect } from "next/navigation";
 import { pct } from "./format";
 import { quantity } from "@/lib/ordering/panelFormat.mjs";
 import Link from "next/link";
 import { DOCUMENT_KIND_LABELS, srDate } from "@/components/customer/account-format";
 import { PageHeader } from "@/components/portal/PortalPrimitives";
-import { can } from "@/lib/authz/permissions.mjs";
+import { can, seesAllCustomers } from "@/lib/authz/permissions.mjs";
 import { requireCapability } from "@/lib/authz/session";
 import { loadDatasetInfo } from "@/lib/data-state/dataset";
 import { loadRebateEvidence, type RebateEvidenceItem } from "@/lib/pricing/rebate-evidence-service";
@@ -75,6 +76,8 @@ function Item({ item, canPropose }: { item: RebateEvidenceItem; canPropose: bool
 
 export default async function RebatesFromInvoicesPage() {
   const user = await requireCapability("view:rabati", "/portal/cene/rabati-iz-faktura");
+  // Komercijalista radi po kupcu; pregled po grupama je analitika za vlasnika i kancelariju (2026-11-10).
+  if (!seesAllCustomers(user)) redirect("/portal/cene/rabati-iz-faktura/kupci");
   const [{ items, lineCount, missingGroupLines }, dataset] = await Promise.all([loadRebateEvidence(user), loadDatasetInfo()]);
   const canPropose = can(user, "prices:propose");
   // Dok BizniSoft grupe nisu uvezene, svaka stavka je „bez grupe“ i ova strana

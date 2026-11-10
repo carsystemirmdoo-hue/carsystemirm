@@ -14,6 +14,7 @@ import {
   uuid,
 } from "drizzle-orm/pg-core";
 import { customers } from "./permissions";
+import { articles } from "./sales";
 import { users } from "./users";
 
 /**
@@ -180,3 +181,33 @@ export const recommendationResults = pgTable(
 );
 
 export type RecommendationResultRow = typeof recommendationResults.$inferSelect;
+
+/**
+ * 0060: „Ne uzima više“ — kupac više ne kupuje artikal (razlog beleži komercijalista ili vlasnik).
+ * Dok `revoked_at` nije upisan, artikal se izostavlja iz preporuka. Zapis se ne briše.
+ */
+export const customerArticleDismissals = pgTable(
+  "customer_article_dismissals",
+  {
+    id: uuid("id").primaryKey().defaultRandom(),
+    customerId: uuid("customer_id")
+      .notNull()
+      .references(() => customers.id, { onDelete: "restrict" }),
+    articleCode: text("article_code").notNull(),
+    articleId: uuid("article_id").references(() => articles.id, { onDelete: "restrict" }),
+    reason: text("reason").notNull(),
+    replacementArticleId: uuid("replacement_article_id").references(() => articles.id, { onDelete: "restrict" }),
+    note: text("note"),
+    createdBy: uuid("created_by")
+      .notNull()
+      .references(() => users.id, { onDelete: "restrict" }),
+    createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+    revokedAt: timestamp("revoked_at", { withTimezone: true }),
+    revokedBy: uuid("revoked_by").references(() => users.id, { onDelete: "restrict" }),
+  },
+  (table) => [
+    uniqueIndex("customer_article_dismissals_active_idx")
+      .on(table.customerId, table.articleCode)
+      .where(sql`${table.revokedAt} IS NULL`),
+  ],
+);

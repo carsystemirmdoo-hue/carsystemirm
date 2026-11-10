@@ -1,6 +1,8 @@
 import Link from "next/link";
 import { srDate } from "@/components/customer/account-format";
 import { PageHeader } from "@/components/portal/PortalPrimitives";
+import { ClickableRows } from "@/components/portal/ClickableRows";
+import { PortalSelect } from "@/components/portal/PortalSelect";
 import { seesAllCustomers } from "@/lib/authz/permissions.mjs";
 import { requireCapability } from "@/lib/authz/session";
 import { loadRebateReviewList, type RebateReviewRow } from "@/lib/pricing/rebate-review-service";
@@ -61,14 +63,26 @@ export default async function RebateReviewListPage({
       matchesException(r, izuzetak) &&
       (!komercijalista || (komercijalista === "-" ? r.salespeople.length === 0 : r.salespeople.includes(komercijalista))),
   );
+  /*
+   * Komercijalista (bez celog opsega) vidi jednostavnu listu: klik na kupca vodi pravo u tabelu
+   * rabata, a analiza faktura (stanje, izuzeci) je samo diskretna oznaka (2026-11-10).
+   * Vlasnik i kancelarija zadržavaju pun pregled.
+   */
+  const simple = !seesAllCustomers(user);
+  const target = (customerId: string) =>
+    simple ? `/portal/cene/rabati-iz-faktura/kupci/${customerId}/tabela` : `/portal/cene/rabati-iz-faktura/kupci/${customerId}`;
   const counts = Object.fromEntries(Object.keys(STATUS_LABELS).map((k) => [k, rows.filter((r) => r.status === k).length]));
 
   return (
     <>
       <PageHeader
         eyebrow="Finansije · Rabati iz faktura"
-        title="Pregled rabata po kupcu"
-        description="Šta je zabeleženo na fakturama, po kupcu. Ovo je istorija, ne cenovnik: predlog uslova i odobreno pravilo prikazani su odvojeno na stranici kupca."
+        title={simple ? "Rabati kupaca" : "Pregled rabata po kupcu"}
+        description={
+          simple
+            ? "Kliknite na kupca da otvorite tabelu rabata: svi artikli u ponudi, i oni koje kupac još ne uzima, sa rabatom i neto cenom."
+            : "Šta je zabeleženo na fakturama, po kupcu. Ovo je istorija, ne cenovnik: predlog uslova i odobreno pravilo prikazani su odvojeno na stranici kupca."
+        }
         meta={
           <span>
             {seesAllCustomers(user)
@@ -78,10 +92,14 @@ export default async function RebateReviewListPage({
           </span>
         }
         actions={
-          <>
-            <Link className="rr-link" href="/portal/cene/rabati-iz-faktura/za-pregled">Za ručni pregled →</Link>
-            <Link className="rr-link" href="/portal/cene/rabati-iz-faktura">Rabati po grupama →</Link>
-          </>
+          // Analitički pregledi (po grupama, ručni pregled) su za vlasnika i kancelariju;
+          // komercijalista radi po kupcu (odluka 2026-11-10).
+          seesAllCustomers(user) ? (
+            <>
+              <Link className="rr-link" href="/portal/cene/rabati-iz-faktura/za-pregled">Za ručni pregled →</Link>
+              <Link className="rr-link" href="/portal/cene/rabati-iz-faktura">Rabati po grupama →</Link>
+            </>
+          ) : null
         }
       />
 
@@ -91,48 +109,82 @@ export default async function RebateReviewListPage({
             <span>Kupac</span>
             <input type="search" name="q" defaultValue={q} placeholder="Naziv kupca" autoComplete="off" />
           </label>
+          {simple ? null : (
+          <>
           <label>
             <span>Stanje</span>
-            <select name="stanje" defaultValue={stanje}>
-              <option value="sva">Sva stanja</option>
-              {Object.entries(STATUS_LABELS)
-                .filter(([k]) => k !== "bez_faktura")
-                .map(([k, label]) => (
-                  <option key={k} value={k}>
-                    {label} ({counts[k] ?? 0})
-                  </option>
-                ))}
-            </select>
+            <PortalSelect
+              name="stanje"
+              ariaLabel="Stanje"
+              defaultValue={stanje}
+              options={[
+                { value: "sva", label: "Sva stanja" },
+                ...Object.entries(STATUS_LABELS)
+                  .filter(([k]) => k !== "bez_faktura")
+                  .map(([k, label]) => ({ value: k, label: `${label} (${counts[k] ?? 0})` })),
+              ]}
+            />
           </label>
           <label>
             <span>Izuzeci</span>
-            <select name="izuzetak" defaultValue={izuzetak}>
-              {EXCEPTION_FILTERS.map((f) => (
-                <option key={f.key} value={f.key}>
-                  {f.label}
-                </option>
-              ))}
-            </select>
+            <PortalSelect name="izuzetak" ariaLabel="Izuzeci" defaultValue={izuzetak} options={EXCEPTION_FILTERS.map((f) => ({ value: f.key, label: f.label }))} />
           </label>
-          {reps.length > 1 ? (
+          </>
+          )}
+          {!simple && reps.length > 1 ? (
             <label>
               <span>Komercijalista (trenutno)</span>
-              <select name="komercijalista" defaultValue={komercijalista}>
-                <option value="">Svi</option>
-                {reps.map((r) => (
-                  <option key={r} value={r}>
-                    {r}
-                  </option>
-                ))}
-                <option value="-">Bez dodele</option>
-              </select>
+              <PortalSelect
+                name="komercijalista"
+                ariaLabel="Komercijalista"
+                defaultValue={komercijalista}
+                options={[{ value: "", label: "Svi" }, ...reps.map((r) => ({ value: r, label: r })), { value: "-", label: "Bez dodele" }]}
+              />
             </label>
           ) : null}
           <button type="submit" className="portal-button" data-variant="primary">Prikažite</button>
         </form>
 
-        <div className="portal-table-wrap">
-          <table className="portal-table rr-table">
+        <ClickableRows className="portal-table-wrap">
+{simple ? (
+          <table className="portal-table rr-table rr-table--rows">
+            <thead>
+              <tr>
+                <th scope="col">Kupac</th>
+                <th scope="col">Najčešći rabat</th>
+                <th scope="col">Poslednja faktura</th>
+                <th scope="col">Rabati po artiklu u portalu</th>
+              </tr>
+            </thead>
+            <tbody>
+              {filtered.map((r) => {
+                const check = r.status === "nedosledan";
+                return (
+                  <tr key={r.customerId}>
+                    <th scope="row">
+                      <Link className="rr-row-link" href={target(r.customerId)}>{r.customerName}</Link>
+                      {check ? (
+                        <span className="rr-mark" title="Rabati na fakturama ovog kupca nisu bili ujednačeni." aria-label="rabati na fakturama nisu bili ujednačeni" />
+                      ) : null}
+                    </th>
+                    <td>{r.mode ? <strong>{pct(r.mode.percent)}</strong> : "—"}</td>
+                    <td>{r.last ? srDate(r.last.issuedOn) : "—"}</td>
+                    <td>
+                      {r.rules.approved ? `${r.rules.approved} odobreno` : "—"}
+                      {r.rules.pending ? <small>{r.rules.pending} na čekanju</small> : null}
+                    </td>
+                  </tr>
+                );
+              })}
+              {filtered.length === 0 ? (
+                <tr>
+                  <td colSpan={4}>Nema kupaca za ovu pretragu.</td>
+                </tr>
+              ) : null}
+            </tbody>
+          </table>
+          ) : (
+          <table className="portal-table rr-table rr-table--rows">
             <thead>
               <tr>
                 <th scope="col">Kupac</th>
@@ -147,7 +199,8 @@ export default async function RebateReviewListPage({
               {filtered.map((r) => (
                 <tr key={r.customerId}>
                   <th scope="row">
-                    <Link href={`/portal/cene/rabati-iz-faktura/kupci/${r.customerId}`}>{r.customerName}</Link>
+                    {/* Ceo red je klikabilan: `rr-row-link` se razvlači preko reda (CSS), tekst i dalje čita čitač ekrana. */}
+                    <Link className="rr-row-link" href={target(r.customerId)}>{r.customerName}</Link>
                     <small>{r.salespeople.length ? r.salespeople.join(", ") : "bez dodele"}</small>
                   </th>
                   <td>
@@ -207,12 +260,20 @@ export default async function RebateReviewListPage({
               ) : null}
             </tbody>
           </table>
-        </div>
-        <p className="portal-data-note">
-          Prikazano {filtered.length} od {rows.length}. „Najčešći rabat“ je vrednost na najviše stavki; broj faktura je
-          broj računa na kojima se ta vrednost pojavljuje. Grupe su zaključene iz naziva artikla i važe kao predlog dok ne
-          stigne šifarnik iz BizniSofta.
-        </p>
+          )}
+        </ClickableRows>
+        {simple ? (
+          <p className="portal-data-note">
+            Prikazano {filtered.length} od {rows.length}. „Najčešći rabat“ je rabat na najviše stavki faktura. Siva tačka uz
+            ime znači da rabati na fakturama tog kupca nisu bili ujednačeni.
+          </p>
+        ) : (
+          <p className="portal-data-note">
+            Prikazano {filtered.length} od {rows.length}. „Najčešći rabat“ je vrednost na najviše stavki; broj faktura je
+            broj računa na kojima se ta vrednost pojavljuje. Grupe su zaključene iz naziva artikla i važe kao predlog dok ne
+            stigne šifarnik iz BizniSofta.
+          </p>
+        )}
       </section>
     </>
   );

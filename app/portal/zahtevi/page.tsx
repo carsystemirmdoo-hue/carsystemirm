@@ -12,6 +12,8 @@ import { staffOrderStamp } from "@/lib/ordering/live-stamp";
 import { dmyTime, money } from "@/lib/ordering/panelFormat.mjs";
 import { orderStage } from "@/lib/ordering/statusView.mjs";
 import { TrialPanel } from "./TrialPanel";
+import { ZahteviTabs } from "./ZahteviTabs";
+import { listPriceRequests } from "@/lib/ordering/price-request-service";
 
 
 export const metadata = { title: "Zahtevi kupaca" };
@@ -37,13 +39,15 @@ export default async function OrderRequestsPage({ searchParams }: { searchParams
   // Podrazumevano samo važeća verzija svakog zahteva; stare verzije su u istoriji detalja.
   const allVersions = sp.verzije === "sve";
   const filter = FILTERS.find((f) => f.key === sp.stanje) ?? FILTERS[0];
-  const [list, counts, mode, trialIds, stamp] = await Promise.all([
+  const [list, counts, mode, trialIds, stamp, priceRequests] = await Promise.all([
     listOrderRequests(user, null, q, { allVersions, state: filter.key }),
     countOrderRequestsByState(user, q, { allVersions }),
     loadOrderingMode(),
     trialCustomerIds(),
     staffOrderStamp(user, null),
+    listPriceRequests(user),
   ]);
+  const openPriceRequests = priceRequests.filter((r) => r.status === "open" || r.status === "in_progress").length;
   const allCustomers = process.env.CUSTOMER_ORDERING === "cenovnik";
   const canReview = can(user, "customer_orders:review");
   const isOwner = can(user, "customer_accounts:manage") && can(user, "prices:oversee");
@@ -60,26 +64,16 @@ export default async function OrderRequestsPage({ searchParams }: { searchParams
 
   return (
     <div className="pn">
-      <header className="pn-head">
-        <div>
-          <h1 className="pn-title">Zahtevi kupaca</h1>
-          <p className="pn-lead">
-            {canReview
-              ? "Zahtev postaje porudžbina tek Vašom potvrdom. Potvrđenu porudžbinu u pilotu ručno unosite u BizniSoft i ovde upisujete broj dokumenta."
-              : "Zahtevi Vaših kupaca, samo za pregled. Prijem i potvrdu radi kancelarija."}
-          </p>
-        </div>
-        <span className="pn-small pn-muted">Osvežava se automatski na 15 sekundi.</span>
-      </header>
-
-      <nav className="pn-tabs" aria-label="Zahtevi kupaca">
-        <div className="pn-tabs-scroll">
-          <Link href="/portal/zahtevi" aria-current="page">
-            Zahtevi za porudžbinu
-          </Link>
-          <Link href="/portal/zahtevi/uslovi">Cena i uslovi</Link>
-        </div>
-      </nav>
+      <ZahteviTabs
+        current="porudzbine"
+        lead={
+          canReview
+            ? "Zahtev postaje porudžbina tek Vašom potvrdom. Potvrđenu porudžbinu u pilotu ručno unosite u BizniSoft i ovde upisujete broj dokumenta."
+            : "Zahtevi Vaših kupaca, samo za pregled. Prijem i potvrdu radi kancelarija."
+        }
+        aside="Osvežava se automatski na 15 sekundi."
+        openPriceRequests={openPriceRequests}
+      />
 
       {allCustomers ? (
         <p className="pn-note" data-tone="info">

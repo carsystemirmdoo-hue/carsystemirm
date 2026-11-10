@@ -64,9 +64,12 @@ export async function loadCustomerProfiles(scope: LedgerScope, now: Date = new D
              max(article_name) AS article_name,
              array_agg(DISTINCT issued_on::text ORDER BY issued_on::text) AS dates,
              count(DISTINCT invoice_id)::int AS docs
-        FROM recommendation_input_lines
+        FROM recommendation_input_lines ril
        WHERE ${inScope(sql`customer_id`, scope)}
          AND issued_on <= ${today}::date
+         -- „Ne uzima više“ (0060): artikal ne ulazi u listu artikala ni u predloge za razgovor.
+         AND NOT EXISTS (SELECT 1 FROM customer_article_dismissals d
+                          WHERE d.customer_id = ril.customer_id AND d.article_code = ril.article_code AND d.revoked_at IS NULL)
        GROUP BY customer_id, article_code`),
     run ? recommendationRows(scope, { limit: 20000, customerStatus: "svi" }) : Promise.resolve([] as RecommendationRow[]),
   ]);

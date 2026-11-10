@@ -32,6 +32,8 @@ export type RebateTableRow = TableRow & {
   netCents: number | null;
   priceNote: string | null;
   ownFrom: string | null;
+  /** Poklopac obaveznog para: šifre posuda uz koje ide (za prikaz). */
+  pairCodes: string[];
   purchaseDays: number;
   lastPurchaseOn: string | null;
   buysNow: boolean;
@@ -41,7 +43,7 @@ export async function loadRebateTable(viewer: PortalUser, customerId: string, no
   await assertPricingCustomerAccess(viewer, customerId);
   const today = belgradeDate(now);
   const db = getDb();
-  const [customerRows, articleRows, purchases, rules, options] = await Promise.all([
+  const [customerRows, articleRows, purchases, rules, options, pairRows] = await Promise.all([
     db.execute<{ name: string }>(sql`SELECT name FROM customers WHERE id = ${customerId}::uuid`),
     // U ponudi: ima važeću osnovnu cenu i nije van programa.
     db.execute<{ id: string; code: string; name: string; brand: string | null; unit: string | null }>(sql`
@@ -64,6 +66,9 @@ export async function loadRebateTable(viewer: PortalUser, customerId: string, no
          AND status::text IN (${sql.join([...ACTIVE, ...PENDING].map((s) => sql`${s}`), sql`, `)})
          AND (effective_to IS NULL OR effective_to >= ${today}::date)`),
     approvedPaymentOptions(customerId, today),
+    // Obavezni parovi posuda → poklopac (0056): poklopac nema svoj rabat, ide uz posudu.
+    db.execute<{ article_id: string; companion_article_id: string }>(sql`
+      SELECT article_id, companion_article_id FROM article_required_pairs WHERE revoked_at IS NULL`),
   ]);
   const customer = [...customerRows][0];
   if (!customer) throw new RebateChangeError("Kupac ne postoji.");
@@ -75,8 +80,19 @@ export async function loadRebateTable(viewer: PortalUser, customerId: string, no
   for (const r of rules) rulesBy.set(r.article_id, [...(rulesBy.get(r.article_id) ?? []), { id: r.id, p: Number(r.p), status: r.status, f: r.f }]);
   const yearAgo = new Date(Date.parse(`${today}T00:00:00Z`) - 365 * 86400000).toISOString().slice(0, 10);
 
+  const lidOf = new Map<string, string[]>();
+  for (const p of pairRows) lidOf.set(p.companion_article_id, [...(lidOf.get(p.companion_article_id) ?? []), p.article_id]);
+  const articleById = new Map([...articleRows].map((a) => [a.id, a]));
+
   const rows: RebateTableRow[] = [...articleRows].map((a) => {
-    const keys = groupKeysFor({ name: a.name, brand: a.brand });
+    // Poklopac stoji u brendu i grupi svoje posude, da se ne bi menjao odvojeno.
+    // Ako poklopac zatvara više posuda (stara i nova šifra), grupa je uvek ona sa najvećom
+    // šifrom (nova šifra) — redosled iz baze ne sme da pomera poklopac iz grupe u grupu.
+    const pairOf = (lidOf.get(a.id) ?? [])
+      .filter((id) => articleById.has(id))
+      .sort((x, y) => articleById.get(y)!.code.localeCompare(articleById.get(x)!.code));
+    const container = pairOf.length ? articleById.get(pairOf[0])! : a;
+    const keys = groupKeysFor({ name: container.name, brand: container.brand });
     const price = prices.get(a.id);
     const list = rulesBy.get(a.id) ?? [];
     const active = list.filter((r) => ACTIVE.includes(r.status) && r.f <= today);
@@ -106,6 +122,8 @@ export async function loadRebateTable(viewer: PortalUser, customerId: string, no
       source: own && priced ? "artikal" : priced ? "sire" : null,
       ownRuleId: own?.id ?? null,
       ownFrom: own?.f ?? null,
+      pairOf,
+      pairCodes: pairOf.map((id) => articleById.get(id)!.code),
       blocked,
       purchaseDays: p?.days ?? 0,
       lastPurchaseOn: p?.last ?? null,

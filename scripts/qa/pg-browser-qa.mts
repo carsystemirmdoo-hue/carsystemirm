@@ -2639,13 +2639,15 @@ try {
           throw new Error(await dokazi(s.page, `${ime}: prijava pred filter odbijena`, nalozi.owner.id));
         }
         await s.page.goto(`${BASE}${RUTA}`, { waitUntil: "domcontentloaded" });
-        const status = s.page.locator('form.portal-filters select[name="status"]');
+        // Padajući meni portala (PortalSelect, 2026-11-10): dugme + lista, vrednost u skrivenom polju.
+        const status = s.page.locator('form.portal-filters button[aria-label="Status"]');
         await status.waitFor();
         // Otvaranje, Escape i klik van ne smeju ostaviti zaključan skrol.
-        await status.focus();
+        await status.click();
         await s.page.keyboard.press("Escape");
         await s.page.locator("h1").first().click();
-        await status.selectOption("overdue");
+        await status.click();
+        await s.page.locator('form.portal-filters [role="option"][data-value="overdue"]').click();
         const t0 = Date.now();
         await Promise.all([
           s.page.waitForURL(/status=overdue/, { waitUntil: "domcontentloaded" }),
@@ -2687,7 +2689,8 @@ try {
           pomeraj = `skrol ${y}px`;
         }
         // Ponovna promena filtera.
-        await s.page.locator('form.portal-filters select[name="status"]').selectOption("");
+        await status.click();
+        await s.page.locator('form.portal-filters [role="option"][data-value=""]').click();
         await Promise.all([
           s.page.waitForURL((u) => !u.search.includes("status=overdue"), { waitUntil: "domcontentloaded" }),
           s.page.locator('form.portal-filters button[type="submit"]').click(),

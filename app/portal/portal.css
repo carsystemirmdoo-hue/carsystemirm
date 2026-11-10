@@ -10642,3 +10642,29 @@ html:has(.portal-customer-area) { scroll-padding-top: 104px; }
 /* Šifre su tekst: bez prelamanja i bez formatiranja broja */
 .lg-code { font-family: var(--p-mono, ui-monospace, SFMono-Regular, Menlo, monospace); font-size: 12.5px; white-space: nowrap; font-variant-numeric: normal; }
 .lg-code-cell .lg-sub { display: block; }
+
+/* 2026-11-10: padajući meni portala u filterima i klikabilan red (rabati po kupcu). */
+.rr-filters label > div { min-width: 200px; }
+.rr-filters label > div button { min-height: 36px; height: 36px; padding: 0 14px 0 12px; border: 1px solid var(--p-line-strong); background: var(--p-surface-raised); color: var(--p-ink); font-size: 14px; font-weight: 400; }
+.rr-table--rows tbody tr:hover td,
+.rr-table--rows tbody tr:hover th { background: var(--p-surface-subtle); cursor: pointer; }
+.rr-table--rows tbody tr:focus-within th,
+.rr-table--rows tbody tr:focus-within td { background: var(--p-surface-subtle); }
+.rr-table--rows .rr-row-link:focus-visible { outline: none; }
+
+/*
+ * Obični padajući meniji portala (2026-11-10): strelica je bila zalepljena za ivicu.
+ * Sopstvena strelica 12 px od ivice; tekst se ne podvlači pod nju.
+ */
+.portal-root select:not([multiple]):not([size]) {
+  appearance: none;
+  -webkit-appearance: none;
+  padding-right: 34px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M4 6l4 4 4-4' fill='none' stroke='%237a828c' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  background-size: 14px 14px;
+}
+.portal-table-sub { display: block; color: var(--p-muted); font-size: 12px; font-weight: 400; }
+/* Diskretna oznaka u listi rabata komercijaliste (2026-11-10): analiza faktura bez posebnog panela. */
+.rr-mark { display: inline-block; width: 7px; height: 7px; margin-left: 8px; border-radius: 50%; background: var(--p-faint); vertical-align: 2px; cursor: help; }

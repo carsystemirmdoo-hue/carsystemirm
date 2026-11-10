@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { dmy, quantity } from "@/lib/ordering/panelFormat.mjs";
 import {
   Badge,
@@ -6,6 +7,7 @@ import {
   SectionHeader,
   type Tone,
 } from "@/components/portal/PortalPrimitives";
+import { PortalSelect } from "@/components/portal/PortalSelect";
 import { RecomputeRecommendations } from "@/features/portal/RecomputeRecommendations";
 import { can, seesAllCustomers } from "@/lib/authz/permissions.mjs";
 import { requireCapability } from "@/lib/authz/session";
@@ -383,47 +385,49 @@ export default async function RecommendationsPage({
           </label>
           <label className="portal-field">
             <span>Status</span>
-            <select name="status" defaultValue={params.status ?? ""}>
-              <option value="">svi statusi</option>
-              {(Object.keys(STATUS_LABELS) as RecommendationStatus[])
-                .filter((s) => s !== "insufficient_history")
-                .map((s) => (
-                  <option key={s} value={s}>
-                    {STATUS_LABELS[s]}
-                  </option>
-                ))}
-            </select>
+            <PortalSelect
+              name="status"
+              ariaLabel="Status"
+              defaultValue={params.status ?? ""}
+              options={[
+                { value: "", label: "svi statusi" },
+                ...(Object.keys(STATUS_LABELS) as RecommendationStatus[])
+                  .filter((s) => s !== "insufficient_history")
+                  .map((s) => ({ value: s, label: STATUS_LABELS[s] })),
+              ]}
+            />
           </label>
           <label className="portal-field">
             <span>Pouzdanost</span>
-            <select name="pouzdanost" defaultValue={params.pouzdanost ?? ""}>
-              <option value="">sve</option>
-              {CONFIDENCE_LEVELS.map((c) => (
-                <option key={c} value={c}>
-                  {CONFIDENCE_LABELS[c]}
-                </option>
-              ))}
-            </select>
+            <PortalSelect
+              name="pouzdanost"
+              ariaLabel="Pouzdanost"
+              defaultValue={params.pouzdanost ?? ""}
+              options={[{ value: "", label: "sve" }, ...CONFIDENCE_LEVELS.map((c) => ({ value: c, label: CONFIDENCE_LABELS[c] }))]}
+            />
           </label>
           <label className="portal-field">
             <span>Kupci</span>
-            <select name="kupci" defaultValue={filter.customerStatus ?? "aktivni"}>
-              <option value="aktivni">aktivni</option>
-              <option value="neaktivni">neaktivni</option>
-              <option value="svi">svi</option>
-            </select>
+            <PortalSelect
+              name="kupci"
+              ariaLabel="Kupci"
+              defaultValue={filter.customerStatus ?? "aktivni"}
+              options={[
+                { value: "aktivni", label: "aktivni" },
+                { value: "neaktivni", label: "neaktivni" },
+                { value: "svi", label: "svi" },
+              ]}
+            />
           </label>
           {viditSve && komercijalisti.length > 0 ? (
             <label className="portal-field">
               <span>Komercijalista</span>
-              <select name="komercijalista" defaultValue={params.komercijalista ?? ""}>
-                <option value="">svi</option>
-                {komercijalisti.map((k) => (
-                  <option key={k.id} value={k.id}>
-                    {k.name}
-                  </option>
-                ))}
-              </select>
+              <PortalSelect
+                name="komercijalista"
+                ariaLabel="Komercijalista"
+                defaultValue={params.komercijalista ?? ""}
+                options={[{ value: "", label: "svi" }, ...komercijalisti.map((k) => ({ value: k.id, label: k.name }))]}
+              />
             </label>
           ) : null}
           <button type="submit" className="portal-button" data-variant="secondary">
@@ -491,7 +495,7 @@ export default async function RecommendationsPage({
                     <tbody>
                       {stavke.map((r) => (
                         <tr key={r.id}>
-                          <th scope="row">{r.customerName}</th>
+                          <th scope="row"><Link href={`/portal/kupci/${r.customerId}/preporuke`}>{r.customerName}</Link></th>
                           <td>
                             {/* Šifra je identitet; naziv je samo pomoć čoveku. */}
                             <b>{r.articleCode}</b>

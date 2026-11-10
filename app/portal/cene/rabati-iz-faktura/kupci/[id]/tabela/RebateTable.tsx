@@ -36,7 +36,8 @@ export function RebateTable({
   canApprove: boolean;
 }) {
   const router = useRouter();
-  const [filter, setFilter] = useState<Filter>(rows.some((r) => r.buysNow) ? "uzima" : "svi");
+  // Podrazumevano SVI artikli u ponudi — i oni koje kupac još ne uzima, da bi im se rabat pripremio unapred (2026-11-10).
+  const [filter, setFilter] = useState<Filter>("svi");
   const [brandFilter, setBrandFilter] = useState("svi");
   const [view, setView] = useState<View>("stablo");
   const [q, setQ] = useState("");
@@ -246,10 +247,12 @@ export function RebateTable({
     const newNet = it ? (it.netCents ?? (r.baseCents !== null ? netCentsFor(r.baseCents, it.percent) : null)) : null;
     const netKey = `n:${r.articleId}`;
     const netDerived = edits.edits.nets[r.articleId] !== undefined ? rebateForNet(r.baseCents, edits.edits.nets[r.articleId]) : null;
+    // Poklopac obaveznog para (0056): rabat ide uz posudu, ne bira se posebno.
+    const lid = r.pairCodes.length > 0;
     return (
       <tr key={r.articleId} className={`${styles.art} ${sel.has(r.articleId) ? styles.sel : ""} ${r.buysNow ? "" : styles.off}`}>
         <td>
-          <input type="checkbox" checked={sel.has(r.articleId)} onChange={(e) => select([r.articleId], e.target.checked)} disabled={!canPropose} aria-label={`Izaberite ${r.name}`} />
+          <input type="checkbox" checked={sel.has(r.articleId)} onChange={(e) => select([r.articleId], e.target.checked)} disabled={!canPropose || lid} aria-label={`Izaberite ${r.name}`} />
         </td>
         <td className={indent ? styles.nameArt : undefined}>
           {r.name}
@@ -269,8 +272,9 @@ export function RebateTable({
           </span>
           {keptBy.has(r.articleId) ? <span className={styles.keep}>poseban dogovor ostaje</span> : null}
           {r.blocked ? <span className={styles.warn}>{r.blocked}</span> : null}
+          {lid ? <span className={styles.note}>ide uz posudu {r.pairCodes.join(", ")} — isti rabat</span> : null}
         </td>
-        <td>{pctInput(`a:${r.articleId}`, r.currentPercent === null ? "" : String(r.currentPercent).replace(".", ","), `Nov rabat za ${r.name}`)}</td>
+        <td>{lid ? <span className={styles.sub}>kao posuda</span> : pctInput(`a:${r.articleId}`, r.currentPercent === null ? "" : String(r.currentPercent).replace(".", ","), `Nov rabat za ${r.name}`)}</td>
         <td className={styles.num}>
           <span className={styles.pct}>
             <input
@@ -280,7 +284,7 @@ export function RebateTable({
               value={inputs[netKey] ?? ""}
               placeholder={rsd(newNet ?? r.netCents)}
               onChange={(e) => setInput(netKey, e.target.value)}
-              disabled={!canPropose || r.baseCents === null}
+              disabled={!canPropose || r.baseCents === null || lid}
               aria-label={`Nova neto cena za ${r.name}`}
             />
           </span>

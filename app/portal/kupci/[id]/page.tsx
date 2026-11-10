@@ -83,8 +83,9 @@ export default async function CustomerDetailPage({
       {profile ? (
         <CustomerSummary profile={profile} assignees={assignees.map((a) => a.name)} inactive={!customer.active} showNextStep={showSignals} />
       ) : null}
-      {can(user, "view:prodaja") || can(user, "view:zahtevi") || can(user, "view:rabati") ? (
+      {can(user, "view:prodaja") || can(user, "view:zahtevi") || can(user, "view:rabati") || can(user, "view:preporuke") ? (
         <nav className="portal-panel cs-links" aria-label="Dokumenti kupca">
+          {can(user, "view:preporuke") ? <Link href={`/portal/kupci/${customer.id}/preporuke`}>Preporuke i ponuda za ovog kupca →</Link> : null}
           {can(user, "view:rabati") ? <Link href={`/portal/cene/rabati-iz-faktura/kupci/${customer.id}/tabela`}>Rabati i cene ovog kupca →</Link> : null}
           {can(user, "view:prodaja") ? <Link href={`/portal/prodaja?kupac=${customer.id}`}>Prodaja i fakture ovog kupca →</Link> : null}
           {can(user, "view:zahtevi") ? (

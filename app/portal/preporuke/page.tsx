@@ -8,6 +8,7 @@ import {
   type Tone,
 } from "@/components/portal/PortalPrimitives";
 import { PortalSelect } from "@/components/portal/PortalSelect";
+import { KupciPregled } from "./KupciPregled";
 import { RecomputeRecommendations } from "@/features/portal/RecomputeRecommendations";
 import { can, seesAllCustomers } from "@/lib/authz/permissions.mjs";
 import { requireCapability } from "@/lib/authz/session";
@@ -21,6 +22,7 @@ import {
   STATUS_LABELS,
 } from "@/lib/recommendations/policy.mjs";
 import {
+  recommendationCountsByCustomer,
   recommendationRows,
   recommendationStatusCounts,
   salespeopleInScope,
@@ -194,6 +196,7 @@ export default async function RecommendationsPage({
     pouzdanost?: string;
     komercijalista?: string;
     kupci?: string;
+    prikaz?: string;
   }>;
 }) {
   const user = await requireCapability("view:preporuke", "/portal/preporuke");
@@ -206,6 +209,20 @@ export default async function RecommendationsPage({
 
   const scope = await resolveLedgerScope(user);
   const opsegDostupan = scope.customerIds === null || scope.customerIds.length > 0;
+
+  // Podrazumevano: lista kupaca sa brojem preporuka (2026-11-10). Detaljno po artiklima: `?prikaz=artikli`.
+  if (params.prikaz !== "artikli") {
+    const [run, counts] = await Promise.all([activeRun(), recommendationCountsByCustomer(scope, { customerStatus: "aktivni" })]);
+    return (
+      <KupciPregled
+        rows={counts}
+        q={(params.q ?? "").slice(0, 80)}
+        hasRun={run !== null}
+        asOfDate={run?.asOfDate ?? null}
+        showDetailLink={viditSve}
+      />
+    );
+  }
 
   const [run, prolazi, redovi, brojaci, brojaciFiltera, komercijalisti] = await Promise.all([
     activeRun(),
@@ -349,6 +366,7 @@ export default async function RecommendationsPage({
           description="Pretraga gleda naziv kupca, šifru i naziv artikla. Opseg se ne menja filterima."
         />
         <form method="get" className="portal-filters">
+          <input type="hidden" name="prikaz" value="artikli" />
           <label className="portal-field">
             <span>Pretraga</span>
             <input

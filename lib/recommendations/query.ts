@@ -291,3 +291,51 @@ export async function salespeopleInScope(
   `);
   return redovi.map((r) => ({ id: r.id, name: r.name }));
 }
+
+export type RecommendationCustomerCount = {
+  customerId: string;
+  customerName: string;
+  overdue: number;
+  due: number;
+  dueSoon: number;
+  /** Za ponudu = kasni + treba sada + uskoro (bez „Ne uzima više“). */
+  total: number;
+  /** Najveće kašnjenje u danima (pozitivno), za redosled. */
+  maxLateDays: number;
+};
+
+/**
+ * Broj preporuka po kupcu (2026-11-10): lista „Preporuke“ za komercijalistu.
+ *
+ * Isti uslovi kao lista i brojači (`uslovi`), pa artikal označen „Ne uzima više“
+ * odmah smanjuje broj. Vraća samo kupce sa bar jednom preporukom za ponudu.
+ */
+export async function recommendationCountsByCustomer(
+  scope: LedgerScope,
+  filter: RecommendationFilter = {},
+): Promise<RecommendationCustomerCount[]> {
+  const db = getDb();
+  const redovi = await db.execute<{
+    customer_id: string; customer_name: string; overdue: number; due: number; due_soon: number; max_late: number | null;
+  }>(sql`
+    SELECT r.customer_id, c.name AS customer_name,
+           (count(*) FILTER (WHERE r.status = 'overdue'))::int AS overdue,
+           (count(*) FILTER (WHERE r.status = 'due'))::int AS due,
+           (count(*) FILTER (WHERE r.status = 'due_soon'))::int AS due_soon,
+           max(-r.days_until_expected) FILTER (WHERE r.status IN ('overdue', 'due'))::int AS max_late
+      FROM active_recommendations r
+      JOIN customers c ON c.id = r.customer_id
+     WHERE ${uslovi(scope, { ...filter, status: ["overdue", "due", "due_soon"] })}
+     GROUP BY r.customer_id, c.name
+     ORDER BY count(*) DESC, c.name
+  `);
+  return [...redovi].map((r) => ({
+    customerId: r.customer_id,
+    customerName: r.customer_name,
+    overdue: r.overdue,
+    due: r.due,
+    dueSoon: r.due_soon,
+    total: r.overdue + r.due + r.due_soon,
+    maxLateDays: Math.max(0, r.max_late ?? 0),
+  }));
+}

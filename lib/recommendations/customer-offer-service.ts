@@ -5,6 +5,7 @@ import type { PortalUser } from "@/lib/authz/user-repository";
 import { resolveLedgerScope } from "@/lib/ledger/effective-sales";
 import { loadRequiredPairs } from "@/lib/ordering/required-pairs";
 import { customerPrices } from "@/lib/pricing/customer-price-service";
+import { customerStockFor, type CustomerStockLine } from "@/lib/stock/stock-import-service";
 import { belgradeDate } from "@/lib/recommendations/customerRhythm.mjs";
 import { dismissReasonLabel, parseDismissal } from "@/lib/recommendations/customerOffer.mjs";
 import { recommendationRows, type RecommendationRow } from "@/lib/recommendations/query";
@@ -51,7 +52,9 @@ export type OfferRow = {
   today: Price;
   todayNote: string | null;
   /** Poklopac obaveznog para koji ide uz ovu posudu (0056). */
-  lid: { code: string; name: string } | null;
+  lid: { id: string; code: string; name: string } | null;
+  /** Lager kako ga vidi kupac (isto pravilo i prag svežine); null = prikaz lagera isključen. */
+  stock: CustomerStockLine | null;
   dismissal: {
     id: string;
     reason: string;
@@ -107,7 +110,15 @@ export async function loadCustomerOffer(viewer: PortalUser, customerId: string, 
     ? [...(await db.execute<{ id: string; code: string }>(sql`SELECT id, code FROM articles WHERE id IN (${sql.join(lidIds.map((i) => sql`${i}::uuid`), sql`, `)})`))]
     : [];
   const lidCode = new Map(lidRows.map((l) => [l.id, l.code]));
-  const { prices } = await customerPrices(customerId, [...new Set([...ids, ...lidIds])], today, null);
+  const [{ prices }, stock] = await Promise.all([
+    customerPrices(customerId, [...new Set([...ids, ...lidIds])], today, null),
+    customerStockFor(ids, now).catch(() => ({ state: "iskljuceno" as const })),
+  ]);
+  const stockOf = (id: string | null): CustomerStockLine | null => {
+    if (!id || stock.state === "iskljuceno") return null;
+    if (stock.state === "zastareo") return { state: "upit", text: "Stanje treba proveriti" };
+    return stock.byArticle.get(id) ?? { state: "upit", text: "Raspoloživost na upit" };
+  };
   const priceOf = (id: string | null): { price: Price; note: string | null } => {
     const p = id ? prices.get(id) : undefined;
     if (!p) return { price: null, note: "artikal nije u šifarniku" };
@@ -151,7 +162,8 @@ export async function loadCustomerOffer(viewer: PortalUser, customerId: string, 
       history: h,
       today: price,
       todayNote: note,
-      lid: pair ? { code: lidCode.get(pair.companionId) ?? "", name: pair.companionName } : null,
+      lid: pair ? { id: pair.companionId, code: lidCode.get(pair.companionId) ?? "", name: pair.companionName } : null,
+      stock: stockOf(a?.id ?? null),
       dismissal: d
         ? { id: d.id, reason: d.reason, reasonLabel: dismissReasonLabel(d.reason), replacement: d.repl, note: d.note, by: d.by, at: d.at }
         : null,
@@ -162,6 +174,7 @@ export async function loadCustomerOffer(viewer: PortalUser, customerId: string, 
     customer: { id: customerId, name: customer.name },
     today,
     asOfDate: recs[0]?.asOfDate ?? null,
+    stockDate: stock.state === "iskljuceno" ? null : stock.stockDate,
     rows,
     /** Za ponudu: poklopci po šifri posude, sa cenom kupca. */
     lids: pairs.map((p) => {

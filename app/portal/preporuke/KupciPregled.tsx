@@ -23,8 +23,17 @@ const KOLONE = {
 } as const;
 type Kolona = keyof typeof KOLONE;
 
+type Debt = { total: number; overdue: number };
+type Contact = { lastOn: string; outcomeLabel: string; followUpOn: string | null };
+
+const whole = (n: number) => n.toLocaleString("sr-Latn-RS", { maximumFractionDigits: 0 });
+const dm = (d: string) => `${d.slice(8, 10)}.${d.slice(5, 7)}.`;
+
 export function KupciPregled({
   rows,
+  debts = null,
+  contacts = new Map(),
+  today = "",
   q,
   red,
   smer,
@@ -33,6 +42,10 @@ export function KupciPregled({
   showDetailLink,
 }: {
   rows: RecommendationCustomerCount[];
+  /** null = korisnik ne vidi dugovanja; inače dug po kupcu iz tabele kancelarije. */
+  debts?: Map<string, Debt> | null;
+  contacts?: Map<string, Contact>;
+  today?: string;
   q: string;
   hasRun: boolean;
   asOfDate: string | null;
@@ -95,6 +108,8 @@ export function KupciPregled({
                   {head("kasni", "Kasni", true)}
                   {head("sada", "Treba sada", true)}
                   {head("uskoro", "Uskoro", true)}
+                  {debts ? <th scope="col" className="pk-num">Duguje</th> : null}
+                  <th scope="col">Razgovor</th>
                   <th scope="col" aria-label="Otvori" />
                 </tr>
               </thead>
@@ -104,16 +119,43 @@ export function KupciPregled({
                     <th scope="row">
                       <Link className="rr-row-link" href={`/portal/kupci/${r.customerId}/preporuke`}>{r.customerName}</Link>
                     </th>
-                    <td className="pk-num"><span className="pk-count">{r.total}</span></td>
-                    <td className="pk-num">{r.overdue ? <span className="pk-late">{r.overdue}</span> : "—"}</td>
-                    <td className="pk-num">{r.due || "—"}</td>
-                    <td className="pk-num">{r.dueSoon || "—"}</td>
+                    <td className="pk-num" data-label="Za ponudu"><span className="pk-count">{r.total}</span></td>
+                    <td className="pk-num" data-label="Kasni">{r.overdue ? <span className="pk-late">{r.overdue}</span> : "—"}</td>
+                    <td className="pk-num" data-label="Treba sada">{r.due || "—"}</td>
+                    <td className="pk-num" data-label="Uskoro">{r.dueSoon || "—"}</td>
+                    {debts ? (
+                      <td className="pk-num" data-label="Duguje">
+                        {(() => {
+                          const d = debts.get(r.customerId);
+                          if (!d) return "—";
+                          return d.overdue > 0 ? <span className="pk-late">{whole(d.total)}</span> : whole(d.total);
+                        })()}
+                      </td>
+                    ) : null}
+                    <td data-label="Razgovor">
+                      {(() => {
+                        const c = contacts.get(r.customerId);
+                        if (!c) return <span className="zt-muted">—</span>;
+                        return (
+                          <>
+                            {c.followUpOn ? (
+                              <span className="pk-follow" data-late={c.followUpOn < today ? "" : undefined}>
+                                Javiti se {c.followUpOn <= today ? (c.followUpOn === today ? "danas" : `(${dm(c.followUpOn)})`) : dm(c.followUpOn)}
+                              </span>
+                            ) : (
+                              <span>{c.outcomeLabel}</span>
+                            )}
+                            <span className="pk-sub">poslednji {dm(c.lastOn)}</span>
+                          </>
+                        );
+                      })()}
+                    </td>
                     <td className="pk-open">Otvori →</td>
                   </tr>
                 ))}
                 {shown.length === 0 ? (
                   <tr>
-                    <td colSpan={6}>{t ? "Nema kupca sa tim imenom među preporukama." : "Nijedan kupac trenutno nema preporuku."}</td>
+                    <td colSpan={debts ? 8 : 7}>{t ? "Nema kupca sa tim imenom među preporukama." : "Nijedan kupac trenutno nema preporuku."}</td>
                   </tr>
                 ) : null}
               </tbody>

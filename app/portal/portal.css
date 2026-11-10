@@ -10668,3 +10668,60 @@ html:has(.portal-customer-area) { scroll-padding-top: 104px; }
 .sort-arrow { display: inline-flex; align-items: center; justify-content: center; min-width: 18px; height: 18px; font-size: 11px; opacity: 0.45; }
 .sort-arrow[data-active] { opacity: 1; color: var(--p-red); font-size: 12px; }
 .sort-head:focus-visible { outline: 2px solid var(--pn-focus, #2c5da8); outline-offset: 2px; }
+
+/* Dugovanja (2026-11-10). */
+.dg-metrics { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin-bottom: 16px; }
+.dg-metric { display: grid; gap: 4px; padding: 14px 16px; border: 1px solid var(--p-line); border-radius: 8px; background: var(--p-surface); }
+.dg-metric span { font-size: 12px; color: var(--p-muted); font-weight: 600; }
+.dg-metric strong { font-size: 22px; font-variant-numeric: tabular-nums; }
+.dg-metric--late strong { color: var(--p-red-dark); }
+.dg-bar { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 8px 16px; border-bottom: 1px solid var(--p-line); }
+.dg-bar .rr-filters { border-bottom: 0; }
+.dg-tools { display: flex; flex-wrap: wrap; align-items: flex-end; gap: 10px 14px; padding: 14px 16px; }
+.dg-btn { min-height: 38px; padding: 0 16px; border: 1px solid var(--p-ink); border-radius: 6px; background: var(--p-ink); color: var(--p-surface); font: inherit; font-size: 13px; font-weight: 700; cursor: pointer; }
+.dg-btn:disabled { opacity: 0.5; cursor: progress; }
+.portal-root .dg-btn--light { background: var(--p-surface); color: var(--p-ink); }
+.dg-upload { display: flex; flex-wrap: wrap; align-items: flex-end; gap: 8px; }
+.dg-upload label { display: grid; gap: 4px; font-size: 12px; color: var(--p-muted); font-weight: 600; }
+.dg-upload input[type="file"] { font-size: 13px; color: var(--p-ink); }
+.dg-msg { flex-basis: 100%; margin: 0 0 12px; padding: 10px 12px; border-radius: 6px; font-size: 14px; background: var(--p-green-soft); color: var(--p-green); }
+.dg-msg--err { background: var(--p-amber-soft); color: var(--p-amber); }
+.dg-tools .dg-msg { margin: 0; }
+.dg-setup h2 { margin: 0 0 8px; font-size: 17px; }
+.dg-setup ol { margin: 8px 0 12px; padding-left: 22px; line-height: 1.6; list-style: decimal; }
+.portal-table thead th.pk-num { text-align: right; }
+.dg-setup .dg-tools { padding: 8px 0 0; }
+.dg-warn { margin: 12px 0 0; padding-left: 18px; font-size: 13px; color: var(--p-muted); line-height: 1.6; }
+.dg-lines td, .dg-lines th { vertical-align: middle; }
+
+/* Početna: podsetnici „javiti se“ (2026-11-10). */
+.fu-list { margin: 0; padding: 0; list-style: none; }
+.fu-list li { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 6px 16px; padding: 12px 16px; border-top: 1px solid var(--p-line); }
+.fu-list li:first-child { border-top: 0; }
+.fu-list a { font-size: 15px; font-weight: 700; color: var(--p-ink); }
+.fu-when { font-size: 13px; font-weight: 700; color: var(--p-amber); white-space: nowrap; }
+.fu-when[data-late] { color: var(--p-red-dark); }
+.fu-what { flex: 1 1 260px; color: var(--p-muted); font-size: 13.5px; }
+.pk-sub { display: block; margin-top: 2px; font-size: 12px; font-weight: 400; color: var(--p-muted); white-space: nowrap; }
+.pk-follow { font-weight: 700; color: var(--p-amber); }
+.pk-follow[data-late] { color: var(--p-red-dark); }
+
+/* Telefon (2026-11-10): tabele sa listom kupaca i faktura postaju kartice. */
+@media (max-width: 640px) {
+  .dg-metrics { grid-template-columns: 1fr; }
+  .dg-metric strong { font-size: 20px; }
+  .rr-filters input { min-width: 0; width: 100%; }
+  .rr-filters label { flex: 1 1 100%; }
+  .pk-table, .dg-lines { min-width: 0 !important; }
+  .pk-table thead, .dg-lines thead { display: none; }
+  .pk-table tbody tr, .dg-lines tbody tr { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 8px 14px; padding: 14px 16px; border-bottom: 1px solid var(--p-line); }
+  .pk-table tbody tr > *, .dg-lines tbody tr > * { position: static !important; padding: 0 !important; border: 0 !important; box-shadow: none !important; background: transparent !important; text-align: left !important; white-space: normal; }
+  .pk-table tbody tr > *::after { display: none; }
+  .pk-table tbody th[scope="row"] { grid-column: 1 / -1; }
+  .pk-table tbody th[scope="row"] a { font-size: 17px; }
+  .dg-lines tbody td[data-label="Faktura"] { grid-column: 1 / -1; font-weight: 700; font-size: 15px; }
+  .pk-table td[data-label]::before, .dg-lines td[data-label]::before { content: attr(data-label); display: block; margin-bottom: 2px; font-size: 10.5px; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; color: var(--p-muted); }
+  .dg-lines tbody td[data-label="Faktura"]::before { display: none; }
+  .pk-table td.pk-open { display: none; }
+  .pk-table td[colspan], .dg-lines td[colspan] { grid-column: 1 / -1; }
+}

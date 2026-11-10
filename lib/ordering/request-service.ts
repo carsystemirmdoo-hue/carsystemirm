@@ -818,6 +818,114 @@ export async function previewOrderRevision(viewer: PortalUser, orderId: string, 
   };
 }
 
+/* ---------------------------------------------------------------------------
+ * Zahtev u ime kupca (komercijalista, 2026-11-10)
+ * ------------------------------------------------------------------------ */
+
+/**
+ * Komercijalista šalje zahtev za kupca sa kojim se dogovorio (telefonom ili na terenu).
+ * Isti obračun i ista pravila kao izmenjen predlog kancelarije (količina u JM, obavezni parovi,
+ * odobrena opcija plaćanja); zahtev odmah ide kancelariji kao „poslat“, a u istoriji stoji ko ga
+ * je pripremio. Kupac ga vidi među svojim zahtevima.
+ */
+export class RepOrderError extends Error {}
+
+export async function previewRepOrder(viewer: PortalUser, customerId: string, items: { articleId: string; quantity: number }[], option: string | null) {
+  await assertRepOrderScope(viewer, customerId);
+  const today = belgradeDate(new Date());
+  const priced = await priceLines(getDb(), customerId, items.filter((i) => i.quantity > 0).map((i) => ({ ...i, packs: null })), option, today, "office");
+  const lines = priced.lines.map((l) => ({
+    articleId: l.articleId,
+    code: l.articleCode,
+    name: l.salesName ?? l.articleName,
+    unit: l.unit,
+    quantity: l.quantity,
+    problem: l.problem ?? l.quantityProblem,
+    netPrice: l.selected?.status === "cena" ? l.selected.netPrice : null,
+    discountPercent: l.selected?.status === "cena" ? l.selected.discountPercent : null,
+    net: l.amounts?.net ?? null,
+    gross: l.amounts?.gross ?? null,
+    onRequest: l.selected?.status === "na_upit",
+  }));
+  return {
+    options: priced.options.map((o) => ({ code: o.code, label: o.label })),
+    selected: priced.selected,
+    lines,
+    pairProblems: await requiredPairBlockers(getDb(), priced.lines.map((l) => ({ articleId: l.articleId, quantity: l.quantity }))),
+    net: Math.round(lines.reduce((s, l) => s + (l.net ?? 0), 0) * 100) / 100,
+    gross: Math.round(lines.reduce((s, l) => s + (l.gross ?? 0), 0) * 100) / 100,
+  };
+}
+
+async function assertRepOrderScope(viewer: PortalUser, customerId: string) {
+  if (!can(viewer, "customer_orders:prepare")) throw new RepOrderError("Nemate pravo da šaljete zahtev u ime kupca.");
+  if (!isUuid(customerId)) throw new RepOrderError("Kupac ne postoji.");
+  const scope = await resolveLedgerScope(viewer);
+  if (scope.customerIds !== null && !scope.customerIds.includes(customerId)) throw new RepOrderError("Kupac nije u Vašem opsegu.");
+}
+
+export async function submitRepOrder(
+  viewer: PortalUser,
+  customerId: string,
+  input: { idempotencyKey: string; lines: { articleId: string; quantity: number }[]; paymentOption: string | null; note?: string | null; contactPhone?: string | null; deliveryAddress?: string | null },
+) {
+  await assertRepOrderScope(viewer, customerId);
+  const key = String(input.idempotencyKey ?? "");
+  if (!isUuid(key)) throw new RepOrderError("Neispravan zahtev.");
+  const items = input.lines.filter((l) => l.quantity > 0);
+  if (!items.length) throw new RepOrderError("Zahtev mora imati bar jednu stavku.");
+  if (items.length > 200) throw new RepOrderError("Najviše 200 stavki u jednom zahtevu.");
+  const db = getDb();
+  const earlier = await existingByKey(db, key);
+  if (earlier) {
+    if (earlier.customer_id !== customerId) throw new RepOrderError("Neispravan zahtev.");
+    return { orderId: earlier.id, requestNumber: earlier.request_number, existing: true };
+  }
+  let created: Parameters<typeof notifyOrderSubmitted>[0] | null = null;
+  const result = await db.transaction(async (tx) => {
+    const [c] = [...(await tx.execute<{ name: string }>(sql`SELECT name FROM customers WHERE id = ${customerId}::uuid FOR UPDATE`))];
+    if (!c) throw new RepOrderError("Kupac ne postoji.");
+    const again = await existingByKey(tx, key);
+    if (again) return { orderId: again.id, requestNumber: again.request_number, existing: true };
+    const [st] = [...(await tx.execute<{ status: string }>(sql`SELECT status FROM customer_commercial_status WHERE customer_id = ${customerId}::uuid`))];
+    if (st && !isPreparedForPortal(st.status)) throw new RepOrderError("Za ovog kupca zahtev preko portala nije dostupan (poseban status). Javite se kancelariji.");
+    const today = belgradeDate(new Date());
+    const approved = await approvedPaymentOptions(customerId, today, tx);
+    const opt = input.paymentOption ?? null;
+    if (approved.length ? !approved.includes(opt ?? "") : opt !== null) throw new RepOrderError("Izabrana opcija plaćanja nije odobrena ovom kupcu.");
+    const priced = await priceLines(tx, customerId, items.map((i) => ({ ...i, packs: null })), opt, today, "office");
+    const bad = priced.lines.filter((l) => l.problem || l.quantityProblem);
+    if (bad.length) throw new RepOrderError(bad.map((l) => `${l.articleCode}: ${l.problem ?? l.quantityProblem}`).join("; "));
+    const pairs = await requiredPairBlockers(tx, priced.lines.map((l) => ({ articleId: l.articleId, quantity: l.quantity })));
+    if (pairs.length) throw new RepOrderError(pairs.join("; "));
+    const valid = priced.lines.filter((l) => l.amounts);
+    const totals = orderTotals(valid.map((l) => ({ quantity: l.quantity, netPrice: (l.selected as { netPrice: number }).netPrice, vatPercent: (l.selected as { vatPercent: number }).vatPercent, listPrice: (l.selected as { listPrice: number }).listPrice, discountPercent: (l.selected as { discountPercent: number }).discountPercent })));
+    const onRequest = priced.lines.filter((l) => l.selected?.status === "na_upit").length;
+    const year = Number(today.slice(0, 4));
+    const [{ n }] = [...(await tx.execute<{ n: string }>(sql`SELECT nextval('customer_order_request_seq')::text AS n`))];
+    const requestNumber = formatRequestNumber(year, Number(n));
+    const why = `Poslao komercijalista ${viewer.name} po dogovoru sa kupcem`;
+    const [order] = [...(await tx.execute<{ id: string }>(sql`
+      INSERT INTO customer_orders (customer_id, submitted_by, prepared_by, request_number, status, idempotency_key, pricing_source, currency,
+                                   net_total, vat_total, gross_total, customer_note, payment_option, payment_option_label,
+                                   delivery_address, contact_phone, on_request_lines)
+      VALUES (${customerId}::uuid, NULL, ${viewer.id}::uuid, ${requestNumber}, 'submitted', ${key}, 'cenovnik', 'RSD',
+              ${totals.net}, ${totals.vat}, ${totals.gross}, ${clip(input.note, 1000)}, ${opt}, ${opt ? optionLabel(opt) : null},
+              ${clip(input.deliveryAddress, 300)}, ${clip(input.contactPhone, 40)}, ${onRequest})
+      RETURNING id`))];
+    await insertLines(tx, order.id, priced.lines);
+    await statusEvent(tx, order.id, null, "submitted", { staff: viewer }, why);
+    await recordAudit(
+      { actor: { id: viewer.id, name: viewer.name, role: viewer.role }, action: AUDIT_ACTIONS.orderPreparedForCustomer, entityType: "Zahtev za porudžbinu", entityId: order.id, entityLabel: requestNumber, before: null, after: { kupac: c.name, stavki: priced.lines.length }, reason: why },
+      tx,
+    );
+    created = { orderId: order.id, requestNumber, customerName: c.name, lineCount: priced.lines.length, onRequest, revision: false };
+    return { orderId: order.id, requestNumber, existing: false };
+  });
+  if (created) await notifyOrderSubmitted(created);
+  return result;
+}
+
 /** Kupac potvrđuje (postaje poslat zahtev; original „vraćen na ispravku“) ili odbija izmenjen predlog. */
 export async function answerOrderRevision(session: CustomerSession, orderId: string, accept: boolean, expectedVersion?: string | null) {
   const customerId = session.customerId;

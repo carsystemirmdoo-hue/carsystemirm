@@ -407,6 +407,13 @@
       "when": 1793714400000,
       "tag": "0060_customer_article_dismissals",
       "breakpoints": true
+    },
+    {
+      "idx": 58,
+      "version": "7",
+      "when": 1793800800000,
+      "tag": "0061_sales_rep_tools",
+      "breakpoints": true
     }
   ]
 }

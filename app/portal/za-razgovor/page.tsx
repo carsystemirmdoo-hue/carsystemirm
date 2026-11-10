@@ -129,8 +129,11 @@ function CustomerItem({ item, showReps }: { item: Item; showReps: boolean }) {
         <div className="zr-next">
           <h3>Predlog za razgovor</h3>
           <p>{s.nextStep}</p>
+          <Link href={`/portal/kupci/${item.id}/preporuke`} className="zr-open">
+            Preporuke i ponuda →
+          </Link>
           <Link href={`/portal/kupci/${item.id}`} className="zr-open">
-            Otvorite karticu i osnov →
+            Kartica kupca →
           </Link>
         </div>
       </div>

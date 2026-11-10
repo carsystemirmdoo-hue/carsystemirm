@@ -400,6 +400,13 @@
       "when": 1793282400000,
       "tag": "0056_article_required_pairs",
       "breakpoints": true
+    },
+    {
+      "idx": 57,
+      "version": "7",
+      "when": 1793714400000,
+      "tag": "0060_customer_article_dismissals",
+      "breakpoints": true
     }
   ]
 }

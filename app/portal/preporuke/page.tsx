@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { quantity } from "@/lib/ordering/panelFormat.mjs";
 import {
   Badge,
@@ -465,7 +466,7 @@ export default async function RecommendationsPage({
                     <tbody>
                       {stavke.map((r) => (
                         <tr key={r.id}>
-                          <th scope="row">{r.customerName}</th>
+                          <th scope="row"><Link href={`/portal/kupci/${r.customerId}/preporuke`}>{r.customerName}</Link></th>
                           <td>
                             {/* Šifra je identitet; naziv je samo pomoć čoveku. */}
                             <b>{r.articleCode}</b>

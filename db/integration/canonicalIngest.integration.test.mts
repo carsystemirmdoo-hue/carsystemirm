@@ -441,6 +441,11 @@ test("nijedna API ruta ne postoji van izričito dozvoljenog spiska", async (t) =
   const DOZVOLJENE = [
     "auth/[...nextauth]/route.ts",
     "portal/izvoz/route.ts",
+    /*
+     * Ponuda kupcu u Excelu (2026-11-10): samo čita, `view:preporuke` + opseg kupca,
+     * šifre iz adrese samo biraju među preporukama kupca; izvoz se beleži u audit.
+     */
+    "portal/kupci/[id]/ponuda/route.ts",
     "portal/podesavanja/navigacija/route.ts",
     // P2: prijem sa uređaja, iza feature gate-a koji je podrazumevano isključen.
     "sync/heartbeat/route.ts",

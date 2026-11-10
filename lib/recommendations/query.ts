@@ -64,6 +64,12 @@ export type RecommendationFilter = {
    * nama) se izostavljaju iz liste i brojača; vide se izborom `neaktivni`/`svi`.
    */
   customerStatus?: "aktivni" | "neaktivni" | "svi";
+  /**
+   * Uključi i artikle označene „Ne uzima više“ (0060). Podrazumevano NE: takav artikal
+   * nestaje iz Preporuka, „Za razgovor“, kartice kupca i brojača. Samo tabela preporuka
+   * kupca ga traži, da bi ga prikazala u delu „Ne kupuje više“.
+   */
+  includeDismissed?: boolean;
   /** Najviše redova PO STATUSU (podrazumevano `RECOMMENDATION_ROWS_PER_STATUS`). */
   limit?: number;
 };
@@ -80,6 +86,12 @@ function uOpsegu(scope: LedgerScope): SQL {
 
 function uslovi(scope: LedgerScope, filter: RecommendationFilter): SQL {
   const lista: SQL[] = [uOpsegu(scope)];
+  if (!filter.includeDismissed) {
+    lista.push(sql`NOT EXISTS (
+      SELECT 1 FROM customer_article_dismissals d
+       WHERE d.customer_id = r.customer_id AND d.article_code = r.article_code AND d.revoked_at IS NULL
+    )`);
+  }
   const statusKupca = filter.customerStatus ?? "aktivni";
   if (statusKupca === "aktivni") lista.push(sql`c.active`);
   else if (statusKupca === "neaktivni") lista.push(sql`NOT c.active`);

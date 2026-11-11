@@ -14,7 +14,7 @@ export type Tone = "neutral" | "success" | "warning" | "danger" | "info" | "acce
 export const PRICE_RULE_STATUS_LABELS: Record<string, string> = {
   draft: "Nacrt",
   pending_approval: "Čeka odobrenje",
-  approved_pending_biznisoft: "Odobreno — čeka upis u BizniSoft",
+  approved_pending_biznisoft: "Odobreno — važi",
   office_recorded: "Kancelarija evidentirala primenu — nije potvrđeno fakturom",
   confirmed: "Potvrđeno fakturom",
   rejected: "Odbijeno",
@@ -26,9 +26,8 @@ export const PRICE_RULE_STATUS_LABELS: Record<string, string> = {
 export const PRICE_RULE_STATUS_TONES: Record<string, Tone> = {
   draft: "neutral",
   pending_approval: "info",
-  // Namerno `warning`, ne `success`: odobreno nije primenjeno, i boja to mora
-  // reći pre nego što neko pročita tekst.
-  approved_pending_biznisoft: "warning",
+  // 2026-11-11 (vlasnik): nema API-ja ka BizniSoftu, pa ni koraka „upis“ — odobreno pravilo važi.
+  approved_pending_biznisoft: "success",
   /*
    * `warning`, ne `success`. Evidencija kancelarije je tvrdnja čoveka; boja ne
    * sme sugerisati dokaz koji ne postoji.

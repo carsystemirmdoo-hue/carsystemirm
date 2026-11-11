@@ -68,7 +68,8 @@ export default async function RebateReviewListPage({
    * rabata, a analiza faktura (stanje, izuzeci) je samo diskretna oznaka (2026-11-10).
    * Vlasnik i kancelarija zadržavaju pun pregled.
    */
-  const simple = !seesAllCustomers(user);
+  // 2026-11-11 (vlasnik): i vlasnik vidi samo jednostavnu listu → tabela rabata kupca; analiza faktura je sklonjena.
+  const simple = true;
   const target = (customerId: string) =>
     simple ? `/portal/cene/rabati-iz-faktura/kupci/${customerId}/tabela` : `/portal/cene/rabati-iz-faktura/kupci/${customerId}`;
   const counts = Object.fromEntries(Object.keys(STATUS_LABELS).map((k) => [k, rows.filter((r) => r.status === k).length]));
@@ -90,16 +91,6 @@ export default async function RebateReviewListPage({
               : `Vaši dodeljeni kupci sa fakturama (${rows.length}). Kupac koji Vam nije dodeljen ne otvara se ni preko direktne adrese.`}{" "}
             {lineCount.toLocaleString("sr-Latn-RS")} potvrđenih stavki.
           </span>
-        }
-        actions={
-          // Analitički pregledi (po grupama, ručni pregled) su za vlasnika i kancelariju;
-          // komercijalista radi po kupcu (odluka 2026-11-10).
-          seesAllCustomers(user) ? (
-            <>
-              <Link className="rr-link" href="/portal/cene/rabati-iz-faktura/za-pregled">Za ručni pregled →</Link>
-              <Link className="rr-link" href="/portal/cene/rabati-iz-faktura">Rabati po grupama →</Link>
-            </>
-          ) : null
         }
       />
 

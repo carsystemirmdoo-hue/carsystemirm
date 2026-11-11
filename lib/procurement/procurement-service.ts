@@ -27,6 +27,9 @@ export type ProcurementRow = {
   sold180: number;
   sold365: number;
   customers180: number;
+  /** Prodaja u izabranom periodu od–do (neto količina) i broj kupaca u tom periodu. */
+  soldPeriod: number;
+  customersPeriod: number;
   lastSaleOn: string | null;
   trend: "raste" | "pada" | "novo" | null;
   stock: number | null;
@@ -40,6 +43,7 @@ export type ProcurementRow = {
 export type ProcurementData = {
   today: string;
   coverDays: number;
+  period: { from: string; to: string };
   stockDate: string | null;
   brands: { name: string; count: number }[];
   rows: ProcurementRow[];
@@ -47,11 +51,34 @@ export type ProcurementData = {
 
 const num = (v: string | number | null) => (v === null ? 0 : Number(v));
 
-export async function loadProcurement(opts: { coverDays: number; now?: Date }): Promise<ProcurementData> {
+const ISO = /^\d{4}-\d{2}-\d{2}$/;
+const shift = (iso: string, days: number) => {
+  const d = new Date(`${iso}T12:00:00Z`);
+  d.setUTCDate(d.getUTCDate() + days);
+  return d.toISOString().slice(0, 10);
+};
+const validIso = (v: string | undefined) => (v && ISO.test(v) && !Number.isNaN(Date.parse(`${v}T12:00:00Z`)) && new Date(`${v}T12:00:00Z`).toISOString().slice(0, 10) === v ? v : null);
+
+/**
+ * Period „Prodato od–do“ iz adrese: neispravan ili prazan → poslednjih 30 dana; obrnut redosled
+ * se okreće; „do“ ne ide posle danas.
+ */
+export function resolvePeriod(from: string | undefined, to: string | undefined, today: string) {
+  let f = validIso(from);
+  let t = validIso(to);
+  if (!t || t > today) t = today;
+  if (!f) f = shift(t, -29);
+  if (f > today) f = today;
+  if (f > t) [f, t] = [t, f];
+  return { from: f, to: t };
+}
+
+export async function loadProcurement(opts: { coverDays: number; from?: string; to?: string; now?: Date }): Promise<ProcurementData> {
   const today = belgradeDate(opts.now ?? new Date());
+  const period = resolvePeriod(opts.from, opts.to, today);
   const db = getDb();
   const signed = sql`CASE WHEN il.line_amount < 0 THEN -abs(il.quantity) ELSE abs(il.quantity) END`;
-  const [sales, packs, stock] = await Promise.all([
+  const [sales, packs, stock, inPeriod] = await Promise.all([
     db.execute<{
       id: string; code: string; name: string; unit: string | null; brand: string | null;
       s30: string; s90: string; p90: string; s180: string; s365: string; c180: number; last: string | null;
@@ -74,7 +101,20 @@ export async function loadProcurement(opts: { coverDays: number; now?: Date }): 
     db.execute<{ article_id: string; pack_quantity: string; unit: string; label: string }>(sql`
       SELECT article_id, pack_quantity::text, unit, label FROM article_pack_sizes`),
     internalStockQuantities(),
+    // Period može biti i stariji od godinu dana — zato poseban upit, ne FILTER nad glavnim.
+    db.execute<{ id: string; code: string; name: string; unit: string | null; brand: string | null; qty: string; customers: number }>(sql`
+      SELECT a.id, a.code, a.name, a.unit, a.brand,
+             coalesce(sum(${signed}), 0)::text AS qty,
+             (count(DISTINCT i.customer_id) FILTER (WHERE il.line_amount >= 0))::int AS customers
+        FROM invoice_lines il
+        JOIN invoices i ON i.id = il.invoice_id
+        JOIN articles a ON a.id = il.article_id
+       WHERE i.issued_on >= ${period.from}::date AND i.issued_on <= ${period.to}::date
+         AND i.document_kind::text IN ('faktura', 'povrat_robe', 'storno')
+         AND NOT EXISTS (SELECT 1 FROM articles_out_of_programme o WHERE o.article_id = a.id)
+       GROUP BY a.id`),
   ]);
+  const periodOf = new Map([...inPeriod].map((p) => [p.id, { qty: Number(p.qty), customers: p.customers }]));
   const packOf = new Map([...packs].map((p) => [p.article_id, { quantity: Number(p.pack_quantity), unit: p.unit, label: p.label }]));
 
   const rows: ProcurementRow[] = [];
@@ -95,6 +135,8 @@ export async function loadProcurement(opts: { coverDays: number; now?: Date }): 
       sold180: s.s180,
       sold365: s.s365,
       customers180: s.c180,
+      soldPeriod: periodOf.get(a.id)?.qty ?? 0,
+      customersPeriod: periodOf.get(a.id)?.customers ?? 0,
       lastSaleOn: s.last,
       trend: trendOf(s.s90, s.p90) as ProcurementRow["trend"],
       stock: st,
@@ -107,6 +149,10 @@ export async function loadProcurement(opts: { coverDays: number; now?: Date }): 
   };
   for (const r of sales) {
     build(r, { s30: num(r.s30), s90: num(r.s90), p90: num(r.p90), s180: num(r.s180), s365: num(r.s365), c180: r.c180, last: r.last });
+  }
+  // Prodato samo u izabranom periodu starijem od godinu dana (u glavnom upitu ga nema).
+  for (const p of inPeriod) {
+    if (!seen.has(p.id)) build(p, { s30: 0, s90: 0, p90: 0, s180: 0, s365: 0, c180: 0, last: null });
   }
 
   // Artikli na lageru koji se godinu dana nisu prodavali: vidljivi (predlog 0), da vlasnik zna šta leži.
@@ -131,6 +177,8 @@ export async function loadProcurement(opts: { coverDays: number; now?: Date }): 
       sold180: 0,
       sold365: 0,
       customers180: 0,
+      soldPeriod: 0,
+      customersPeriod: 0,
       lastSaleOn: null,
       trend: null,
       stock: u.quantity,
@@ -144,7 +192,7 @@ export async function loadProcurement(opts: { coverDays: number; now?: Date }): 
   const counts = new Map<string, number>();
   for (const r of rows) counts.set(r.brand, (counts.get(r.brand) ?? 0) + 1);
   const brands = [...counts].map(([name, count]) => ({ name, count })).sort((a, b) => (a.name === "Ostalo" ? 1 : b.name === "Ostalo" ? -1 : b.count - a.count));
-  return { today, coverDays: opts.coverDays, stockDate: stock.snapshot?.stockDate ?? null, brands, rows };
+  return { today, coverDays: opts.coverDays, period, stockDate: stock.snapshot?.stockDate ?? null, brands, rows };
 }
 
 /**

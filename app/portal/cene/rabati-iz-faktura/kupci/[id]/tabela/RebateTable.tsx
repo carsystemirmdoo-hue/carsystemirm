@@ -336,7 +336,8 @@ export function RebateTable({
         </div>
 
         <div className={styles.tablewrap}>
-          <table className={styles.table}>
+          {/* Stablo brend › grupa › artikal se ne ređa (pomešale bi se grupe); „Samo artikli“ da. */}
+          <table className={styles.table} data-sort={view === "stablo" ? "off" : undefined}>
             <thead>
               <tr>
                 <th className={styles.check} aria-label="Izbor" />

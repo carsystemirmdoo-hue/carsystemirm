@@ -6,7 +6,8 @@ import {
   SalesTotals,
 } from "@/features/portal/SalesAnalytics";
 import { NoInvoicesYet, SalesFilters } from "@/features/portal/SalesFilters";
-import { seesAllCustomers } from "@/lib/authz/permissions.mjs";
+import { can, seesAllCustomers } from "@/lib/authz/permissions.mjs";
+import { debtsByCustomer, latestSnapshot } from "@/lib/sales-tools/receivables-service";
 import { requireCapability } from "@/lib/authz/session";
 import { listSalesReps } from "@/lib/partners/assignment-service";
 import {
@@ -59,6 +60,22 @@ export default async function SalesPage({
   // Filter po dodeli ima smisla samo ko vidi sve kupce.
   const reps = seesAllCustomers(user) ? await listSalesReps() : [];
 
+  // Dugovanja danas (tabela kancelarije) — isti opseg kupaca kao ekran Dugovanja.
+  let debts: { total: number; overdue: number; customers: number; checkedAt: string } | null | undefined;
+  if (can(user, "view:dugovanja")) {
+    const snap = await latestSnapshot();
+    if (!snap) debts = null;
+    else {
+      const rows = (await debtsByCustomer(user)).filter((r) => !filter.customerId || r.customerId === filter.customerId);
+      debts = {
+        total: rows.reduce((a, r) => a + r.total, 0),
+        overdue: rows.reduce((a, r) => a + r.overdueTotal, 0),
+        customers: rows.length,
+        checkedAt: snap.checkedAt,
+      };
+    }
+  }
+
   return (
     <>
       <PageHeader
@@ -87,7 +104,7 @@ export default async function SalesPage({
             <h2>Ukupno u periodu</h2>
           </div>
         </div>
-        <SalesTotals totals={summary} byCustomer={byCustomer} />
+        <SalesTotals totals={summary} byCustomer={byCustomer} debts={debts} />
       </section>
 
       <section className="portal-panel">

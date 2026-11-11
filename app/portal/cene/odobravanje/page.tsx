@@ -67,7 +67,7 @@ export default async function PriceApprovalPage() {
       <PageHeader
         eyebrow="Finansije"
         title="Odobravanje cena"
-        description="Odobrenje nije potvrda. Pravilo postaje potvrđeno tek kada kancelarija evidentira da je uslov upisan u BizniSoft."
+        description="Predlozi rabata koji čekaju Vašu odluku. Odobreno pravilo odmah važi u portalu."
       />
 
       {batches.length ? (
@@ -107,38 +107,23 @@ export default async function PriceApprovalPage() {
 
       <RuleTable rows={waiting} showActions={canDecide} title={`Čeka odobrenje (${broj(waiting.length, nWaiting)})`} />
 
-      <RuleTable
-        rows={approved}
-        showActions={canDecide}
-        accent="warning"
-        title={`Odobreno — čeka upis u BizniSoft (${broj(approved.length, nApproved)})`}
-        description="Ova pravila već učestvuju u odlučivanju o ceni, ali NISU potvrđena kao fakturisani uslov. Dok upis ne bude evidentiran, cena nije garantovana."
-      />
-
-      {nPortalOnly > 0 ? (
-        <details className="portal-panel cs-sugg-more">
-          <summary>
-            Odobreno — važi samo u portalu ({quantity(nPortalOnly)}) · ne upisuje se u BizniSoft
-          </summary>
-          <RuleTable
-            rows={portalOnly}
-            showActions={canDecide}
-            description={
-              (portalOnly.length < nPortalOnly
-                ? `Prikazano najnovijih ${quantity(portalOnly.length)} od ${quantity(nPortalOnly)}; sva pravila sa filterom po kupcu su u Istoriji pravila. `
-                : "") +
-              "Pravila iz serija (npr. rabati iz istorije faktura) koja važe za cenu u portalu, a nisu nalog za unos u BizniSoft."
-            }
-          />
-        </details>
-      ) : null}
-
-      <RuleTable
-        rows={recorded}
-        showActions={canDecide}
-        title={`Evidentiran unos — čeka usaglašavanje sa fakturom (${broj(recorded.length, nRecorded)})`}
-        description="Kancelarija je evidentirala unos u BizniSoft. To je tvrdnja čoveka, ne dokaz — potvrdu daje tek usaglašavanje sa fakturom."
-      />
+      {/* 2026-11-11 (vlasnik): bez API-ja ka BizniSoftu nema koraka „čeka upis“ — odobreno važi. */}
+      <details className="rr-approved-list">
+        <summary className="portal-panel">
+          <b>Odobreno — važi ({broj(approved.length + portalOnly.length + recorded.length, nApproved + nPortalOnly + nRecorded)})</b>
+          <span>Pravila koja već važe. Kliknite da otvorite listu; opoziv je u redu pravila.</span>
+        </summary>
+        <RuleTable
+          rows={[...approved, ...recorded, ...portalOnly]}
+          showActions={canDecide}
+          title={`Odobreno — važi (${broj(approved.length + portalOnly.length + recorded.length, nApproved + nPortalOnly + nRecorded)})`}
+          description={
+            portalOnly.length < nPortalOnly
+              ? `Od pravila iz serija (npr. rabati iz istorije faktura) prikazano je najnovijih ${quantity(portalOnly.length)} od ${quantity(nPortalOnly)}; sva pravila sa filterom po kupcu su u Istoriji pravila.`
+              : undefined
+          }
+        />
+      </details>
 
       {nFailed > 0 ? (
         <RuleTable
@@ -146,7 +131,7 @@ export default async function PriceApprovalPage() {
           showActions={canDecide}
           accent="danger"
           title={`Usaglašavanje nije uspelo (${broj(failed.length, nFailed)})`}
-          description="Odobreno u portalu, a upis u BizniSoft nije potvrđen. Ovo je jedino stanje u kome portal i knjigovodstvo tvrde različite stvari."
+          description="Uslov na fakturi se razlikuje od odobrenog u portalu."
         />
       ) : null}
     </>

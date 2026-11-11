@@ -3,7 +3,8 @@ import { PageHeader } from "@/components/portal/PortalPrimitives";
 import { UnavailableValue } from "@/components/portal/PhaseNotice";
 import { money } from "@/features/portal/SalesAnalytics";
 import { NoInvoicesYet } from "@/features/portal/SalesFilters";
-import { seesAllCustomers } from "@/lib/authz/permissions.mjs";
+import { can, seesAllCustomers } from "@/lib/authz/permissions.mjs";
+import { debtsByCustomer, latestSnapshot } from "@/lib/sales-tools/receivables-service";
 import { requireCapability } from "@/lib/authz/session";
 import {
   hasImportedInvoices,
@@ -36,10 +37,15 @@ export default async function CustomersPage({
   const listFilter = parseCustomerListFilter(params);
   if (scoped) listFilter.rep = "";
   const allScoped = await loadScopedCustomers(user);
-  const [assignees, reps] = await Promise.all([
+  const seesDebts = can(user, "view:dugovanja");
+  const [assignees, reps, debtRows, debtSnap] = await Promise.all([
     listAssigneesByCustomer(allScoped.map((c) => c.id)),
     scoped ? Promise.resolve([]) : listSalesReps(),
+    seesDebts ? debtsByCustomer(user) : Promise.resolve([]),
+    seesDebts ? latestSnapshot() : Promise.resolve(null),
   ]);
+  // Dugovanje danas iz tabele kancelarije (2026-11-11); kupac kog nema u tabeli nema otvorenih faktura.
+  const debtOf = new Map(debtRows.map((d) => [d.customerId, d]));
   const customers = sortCustomersByName(filterCustomerList(
     allScoped.filter((c) => matchesStatusFilter(c.active, statusFilter)),
     listFilter,
@@ -104,7 +110,8 @@ export default async function CustomersPage({
             <p>
               {filtered ? `Prikazano ${customers.length} od ${allScoped.length}. ` : ""}Iznosi su zbir svih uvezenih faktura
               {state.firstIssuedOn ? ` od ${dmy(state.firstIssuedOn)} do ${dmy(state.lastIssuedOn)}` : ""} — za
-              period otvorite Prodaju. Dugovanje i naplata nisu deo ovog izvora podataka.
+              period otvorite Prodaju.{" "}
+              {debtSnap ? `Dugovanje je današnje stanje iz tabele kancelarije (provereno ${debtSnap.checkedAt.slice(8, 10)}.${debtSnap.checkedAt.slice(5, 7)}.).` : ""}
             </p>
           </div>
         </div>
@@ -149,11 +156,16 @@ export default async function CustomersPage({
                     <td className="portal-table-number">
                       {totals?.invoiceCount ?? 0}
                     </td>
-                    <td>
-                      <UnavailableValue
-                        compact
-                        note="Fakture ne sadrže podatke o plaćanju."
-                      />
+                    <td className="portal-table-number">
+                      {!debtSnap ? (
+                        <UnavailableValue compact note="Tabela dugovanja još nije učitana." />
+                      ) : debtOf.get(customer.id) ? (
+                        <Link href={`/portal/dugovanja/${customer.id}`} className={debtOf.get(customer.id)!.overdueTotal > 0 ? "pk-late" : undefined}>
+                          {money(debtOf.get(customer.id)!.total)}
+                        </Link>
+                      ) : (
+                        "—"
+                      )}
                     </td>
                   </tr>
                 );

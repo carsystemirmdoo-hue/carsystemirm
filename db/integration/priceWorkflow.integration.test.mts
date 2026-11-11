@@ -208,12 +208,13 @@ test("odobreno pravilo je approved_pending_biznisoft, NE confirmed", async (t) =
   assert.equal(rule.status, "approved_pending_biznisoft");
   assert.equal(rule.confirmed_at, null, "odobrenje je popunilo potvrdu");
 
-  // Obaveštenje o odobrenju ide kancelariji, koja upisuje u BizniSoft.
+  // Obaveštenje o odobrenju ide kancelariji. Od 2026-11-11 (vlasnik) odobreno
+  // pravilo važi u portalu; unos u BizniSoft je samo za uslov koji treba i na fakturi.
   const [notice] = await db.sql<{ required_capability: string; body: string }[]>`
     SELECT required_capability, body FROM notifications
     WHERE entity_id = ${created.id} AND kind = 'price_rule_approved'`;
   assert.equal(notice.required_capability, "prices:apply");
-  assert.match(notice.body, /NIJE potvrđen/);
+  assert.match(notice.body, /Važi u portalu/);
 });
 
 test("kancelarija evidentira unos — stanje je office_recorded, NE confirmed", async (t) => {

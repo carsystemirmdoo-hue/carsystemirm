@@ -46,6 +46,9 @@ export default async function OrderRequestPage({ params }: { params: Promise<{ i
             <Link href={`/portal/zahtevi/${order.id}/stampa`} className="pn-btn" data-size="sm">
               Štampa A4
             </Link>
+            <Link href={`/portal/zahtevi/${order.id}/mail`} className="pn-btn" data-size="sm">
+              Pregled maila
+            </Link>
           </>
         }
         actions={

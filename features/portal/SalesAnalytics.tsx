@@ -66,6 +66,7 @@ export function SalesTotals({
   previous,
   byCustomer,
   alwaysShowAdjustments = false,
+  debts,
 }: {
   totals: SalesSummary;
   previous?: SalesSummary | null;
@@ -73,6 +74,11 @@ export function SalesTotals({
   byCustomer: readonly SalesBreakdownRow[];
   /** Povrati i korekcije i kada su nula (strana „Povrati“). */
   alwaysShowAdjustments?: boolean;
+  /**
+   * Trenutna dugovanja iz tabele kancelarije (2026-11-11). Nisu vezana za period —
+   * to je stanje danas. `undefined` = kartica se ne prikazuje (korisnik ne vidi dugovanja).
+   */
+  debts?: { total: number; overdue: number; customers: number; checkedAt: string } | null;
 }) {
   const invoiceCount = totals.invoiceCount;
   const change = previous ? deltaPercent(totals.net, previous.net) : null;
@@ -155,15 +161,25 @@ export function SalesTotals({
             <small className="portal-metric-context">{card.context}</small>
           </div>
         ))}
-        <div className="portal-metric" data-tone="warning">
-          <span className="portal-metric-label">Naplata i dugovanja</span>
-          <strong className="portal-metric-value">
-            <UnavailableValue note="Fakture ne sadrže podatke o plaćanju." />
-          </strong>
-          <small className="portal-metric-context">
-            Potreban je odvojen, proveren izvor uplata.
-          </small>
-        </div>
+        {debts === undefined ? null : debts === null ? (
+          <div className="portal-metric" data-tone="warning">
+            <span className="portal-metric-label">Dugovanja danas</span>
+            <strong className="portal-metric-value">
+              <UnavailableValue note="Tabela dugovanja još nije učitana." />
+            </strong>
+            <small className="portal-metric-context">
+              <Link href="/portal/dugovanja">Otvorite Dugovanja</Link>
+            </small>
+          </div>
+        ) : (
+          <Link href="/portal/dugovanja" className="portal-metric" data-tone={debts.overdue > 0 ? "danger" : "success"}>
+            <span className="portal-metric-label">Dugovanja danas</span>
+            <strong className="portal-metric-value">{moneyRsd(debts.total)}</strong>
+            <small className="portal-metric-context">
+              dospelo {moneyRsd(debts.overdue)} · {debts.customers} kupaca · tabela kancelarije, provereno {debts.checkedAt.slice(8, 10)}.{debts.checkedAt.slice(5, 7)}. u {debts.checkedAt.slice(11, 16)}
+            </small>
+          </Link>
+        )}
       </div>
 
       {totals.unknownNegativeCount > 0 ? (

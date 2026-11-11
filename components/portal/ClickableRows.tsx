@@ -2,6 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import type { MouseEvent, ReactNode } from "react";
+import { portalNavStart } from "./PortalNavProgress";
 
 /**
  * Ceo red tabele vodi na vezu iz reda (`a.rr-row-link`) — 2026-11-10.
@@ -20,7 +21,10 @@ export function ClickableRows({ children, className }: { children: ReactNode; cl
     const link = target.closest("tr")?.querySelector<HTMLAnchorElement>("a.rr-row-link");
     if (!link) return;
     if (e.metaKey || e.ctrlKey || e.button === 1) window.open(link.href, "_blank", "noopener");
-    else router.push(link.getAttribute("href") ?? link.href);
+    else {
+      portalNavStart();
+      router.push(link.getAttribute("href") ?? link.href);
+    }
   };
   return (
     // Klik na red je dodatak mišu; ista veza je u redu dostupna tastaturom (jsx-a11y ovde ne prijavljuje).

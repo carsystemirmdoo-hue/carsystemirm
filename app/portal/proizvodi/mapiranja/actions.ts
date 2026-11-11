@@ -122,3 +122,59 @@ export async function describeCatalogTargetAction(slug: string): Promise<Catalog
   await requireCapability("mappings:manage", "/portal/proizvodi/mapiranja");
   return describeCatalogTarget(String(slug ?? "").slice(0, 200));
 }
+
+const confirmSchema = z.array(
+  z.object({
+    articleId: z.string().uuid(),
+    slug: z.string().trim().min(1).max(200),
+    variant: z.string().trim().max(200).nullable(),
+  }),
+).min(1).max(300);
+
+/**
+ * Potvrda predloga po nazivu (jedan ili „Potvrdi sve sigurne“), 2026-11-11.
+ * Server za svaki artikal ponovo računa predlog i prihvata samo jednog od ponuđenih kandidata;
+ * upis ide kroz `decideMapping` (audit, obaveštenje) kao i ručna potvrda.
+ */
+export async function confirmNameProposalsAction(items: { articleId: string; slug: string; variant: string | null }[]): Promise<MappingActionState> {
+  const actor = await requireCapability("mappings:manage", "/portal/proizvodi/mapiranja");
+  const parsed = confirmSchema.safeParse(items);
+  if (!parsed.success) return { error: "Neispravan izbor.", ok: null };
+  const { proposalFor } = await import("@/lib/catalog/name-proposals");
+  let done = 0;
+  const skipped: string[] = [];
+  for (const it of parsed.data) {
+    const p = await proposalFor(it.articleId);
+    const cand = p?.ranked.find((c) => c.slug === it.slug && (c.variant ?? null) === (it.variant ?? null));
+    if (!p || !cand) {
+      skipped.push(p?.article.code ?? it.articleId.slice(0, 8));
+      continue;
+    }
+    const problem = catalogTargetProblem(cand.slug, cand.variant);
+    if (problem) {
+      skipped.push(p.article.code);
+      continue;
+    }
+    try {
+      await decideMapping(
+        {
+          articleId: it.articleId,
+          status: "mapped",
+          catalogProductSlug: cand.slug,
+          catalogVariantId: cand.variant,
+          note: `Potvrđen predlog po nazivu (${p.confidence}, ocena ${cand.score}): ${cand.label}`.slice(0, 500),
+        },
+        { id: actor.id, name: actor.name, role: actor.role },
+      );
+      done++;
+    } catch (error) {
+      if (error instanceof ProductMappingError) skipped.push(p.article.code);
+      else throw error;
+    }
+  }
+  revalidatePath("/portal/proizvodi/mapiranja");
+  return {
+    error: done === 0 && skipped.length ? `Nijedna veza nije potvrđena (${skipped.slice(0, 10).join(", ")}).` : null,
+    ok: done ? `Potvrđeno veza: ${done}.${skipped.length ? ` Preskočeno ${skipped.length} (predlog se promenio ili proizvod ne postoji): ${skipped.slice(0, 10).join(", ")}.` : ""}` : null,
+  };
+}

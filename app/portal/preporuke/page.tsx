@@ -217,7 +217,7 @@ export default async function RecommendationsPage({
   // Podrazumevano: lista kupaca sa brojem preporuka (2026-11-10). Detaljno po artiklima: `?prikaz=artikli`.
   if (params.prikaz !== "artikli") {
     const showDebt = can(user, "view:dugovanja");
-    if (showDebt) await autoRefreshReceivables();
+    if (showDebt) await autoRefreshReceivables(user.id);
     const [run, counts, debts] = await Promise.all([
       activeRun(),
       recommendationCountsByCustomer(scope, { customerStatus: "aktivni" }),

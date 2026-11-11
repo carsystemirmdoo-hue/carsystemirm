@@ -1,5 +1,5 @@
 import { sql } from "drizzle-orm";
-import { date, index, integer, jsonb, numeric, pgTable, primaryKey, text, timestamp, uuid } from "drizzle-orm/pg-core";
+import { boolean, date, index, integer, jsonb, numeric, pgTable, primaryKey, text, timestamp, uuid } from "drizzle-orm/pg-core";
 import { customers } from "./permissions";
 import { users } from "./users";
 
@@ -128,3 +128,18 @@ export const receivableSheetCustomers = pgTable(
     index("receivable_sheet_customers_label_idx").on(table.snapshotId, table.labelKey),
   ],
 );
+
+/** 0063: kreditni limit kupca koji je upisao vlasnik ili komercijalista (procenat ILI iznos). */
+export const customerCreditLimits = pgTable("customer_credit_limits", {
+  customerId: uuid("customer_id")
+    .primaryKey()
+    .references(() => customers.id, { onDelete: "restrict" }),
+  percent: numeric("percent", { precision: 6, scale: 2 }),
+  amount: numeric("amount", { precision: 14, scale: 2 }),
+  blockOrders: boolean("block_orders").notNull().default(false),
+  note: text("note").notNull(),
+  setBy: uuid("set_by")
+    .notNull()
+    .references(() => users.id, { onDelete: "restrict" }),
+  setAt: timestamp("set_at", { withTimezone: true }).notNull().defaultNow(),
+});

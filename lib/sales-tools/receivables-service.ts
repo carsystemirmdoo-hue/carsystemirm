@@ -93,7 +93,26 @@ async function customerMatcher(db: Exec, codes: string[]) {
   };
 }
 
-async function store(source: "google_sheet" | "upload", sourceRef: string, sheets: SheetGrid[], actorId: string | null) {
+/**
+ * Snimak + kreditna upozorenja (0063): posle promene sadržaja tabele proveravaju se limiti.
+ * `triggeredBy` je korisnik čije je otvaranje ekrana ili dugme pokrenulo čitanje — upisuje se
+ * kao onaj ko je zatvorio upozorenje koje više ne važi.
+ */
+async function store(source: "google_sheet" | "upload", sourceRef: string, sheets: SheetGrid[], actorId: string | null, triggeredBy: string | null = actorId) {
+  const result = await storeSnapshot(source, sourceRef, sheets, actorId);
+  if (result.changed) {
+    try {
+      const { evaluateCreditWarnings } = await import("@/lib/credit/credit-service");
+      await evaluateCreditWarnings(triggeredBy);
+    } catch (error) {
+      // Upozorenja ne smeju oboriti čitanje tabele; greška se vidi u logu.
+      console.error("kreditna upozorenja:", error);
+    }
+  }
+  return result;
+}
+
+async function storeSnapshot(source: "google_sheet" | "upload", sourceRef: string, sheets: SheetGrid[], actorId: string | null) {
   const parsed = sheets.map((sh) => ({ ...sh, result: parseReceivables(sh.grid) }));
   const bad = parsed.find((p) => !p.result.ok);
   if (bad) throw new ReceivablesError(`Tabela „${bad.label}“: ${bad.result.error ?? "nije pročitana."}`);
@@ -153,7 +172,7 @@ async function store(source: "google_sheet" | "upload", sourceRef: string, sheet
 }
 
 /** Čitanje Google tabela (dugme „Osveži“ ili automatski posle AUTO_REFRESH_MINUTES). */
-export async function refreshFromGoogle(actorId: string | null) {
+export async function refreshFromGoogle(actorId: string | null, triggeredBy: string | null = actorId) {
   const cfg = sheetConfig();
   if (!cfg) throw new ReceivablesError("Google tabela još nije povezana.");
   let sheets: SheetGrid[];
@@ -163,19 +182,19 @@ export async function refreshFromGoogle(actorId: string | null) {
     if (error instanceof SheetReadError) throw new ReceivablesError(error.message);
     throw new ReceivablesError("Google tabela trenutno nije dostupna. Prikazano je poslednje sačuvano stanje.");
   }
-  return store("google_sheet", `google: ${sheets.map((s) => s.label).join(", ")}`, sheets, actorId);
+  return store("google_sheet", `google: ${sheets.map((s) => s.label).join(", ")}`, sheets, actorId, triggeredBy);
 }
 
 /**
  * Pre prikaza: ako je povezana Google tabela i stanje je starije od AUTO_REFRESH_MINUTES,
  * pročita je. Nikad ne baca — vraća poruku koju ekran prikaže uz staro stanje.
  */
-export async function autoRefreshReceivables(): Promise<string | null> {
+export async function autoRefreshReceivables(triggeredBy: string | null = null): Promise<string | null> {
   if (!receivablesSourceConfigured()) return null;
   const last = await latestSnapshot();
   if (last && last.source === "google_sheet" && Date.now() - Date.parse(last.checkedAt) < AUTO_REFRESH_MINUTES * 60_000) return null;
   try {
-    await refreshFromGoogle(null);
+    await refreshFromGoogle(null, triggeredBy);
     return null;
   } catch (error) {
     return error instanceof ReceivablesError ? error.message : "Google tabela trenutno nije dostupna. Prikazano je poslednje sačuvano stanje.";
@@ -223,9 +242,19 @@ const LINKS = sql`LEFT JOIN receivable_customer_links k ON k.label_key = l.label
 
 /** Zbir po kupcu u opsegu korisnika (poslednji snimak). */
 export async function debtsByCustomer(viewer: PortalUser, today = belgradeDate(new Date())): Promise<CustomerDebt[]> {
+  const scope = await resolveLedgerScope(viewer);
+  return debtsInScope(scope.customerIds, today);
+}
+
+/** Svi kupci, bez opsega korisnika — samo za sistemske provere (kreditna upozorenja, 0063). */
+export async function debtsForAllCustomers(today = belgradeDate(new Date())): Promise<CustomerDebt[]> {
+  return debtsInScope(null, today);
+}
+
+async function debtsInScope(customerIds: string[] | null, today: string): Promise<CustomerDebt[]> {
   const last = await latestSnapshot();
   if (!last) return [];
-  const scope = await resolveLedgerScope(viewer);
+  const scope = { customerIds };
   if (scope.customerIds !== null && scope.customerIds.length === 0) return [];
   const inScope = scope.customerIds === null ? sql`true` : sql`${EFFECTIVE} IN (${sql.join(scope.customerIds.map((id) => sql`${id}::uuid`), sql`, `)})`;
   const rows = await getDb().execute<{ id: string; name: string; n: number; total: string; od_total: string; od_n: number; max_od: number | null; oldest: string | null }>(sql`

@@ -17,6 +17,8 @@ import {
   loadScopedCustomers,
 } from "@/lib/sales/queries";
 import { UNKNOWN_NEGATIVE_LABEL } from "@/lib/sales/totals.mjs";
+import { loadMinusDocuments } from "@/lib/sales/minus-documents";
+import Link from "next/link";
 
 
 export const metadata = { title: "Povrati i minus fakture" };
@@ -59,7 +61,7 @@ export default async function ReturnsPage({
 
   // Zbirovi nad CELIM filtriranim skupom u bazi. Negativne stavke se čitaju
   // posebnim upitom (samo iznos < 0), pa ih granica liste ne može sakriti.
-  const [summary, byCustomer, negatives, customers, salespeople, productGroups] =
+  const [summary, byCustomer, negatives, customers, salespeople, productGroups, minusDocs] =
     await Promise.all([
       loadSalesSummary(user, filter),
       loadSalesBreakdown(user, filter, "kupci"),
@@ -67,7 +69,15 @@ export default async function ReturnsPage({
       loadScopedCustomers(user),
       loadSalespeople(),
       loadProductGroups(),
+      loadMinusDocuments(user, { from: filter.from, to: filter.to, customerId: filter.customerId }),
     ]);
+  const storna = minusDocs.filter((d) => d.kind === "storno");
+  const odobrenja = minusDocs.filter((d) => d.kind === "knjizno_odobrenje");
+  const REVERSAL: Record<string, string> = {
+    applied: "primenjeno — original van prometa",
+    waiting_original: "čeka originalnu fakturu",
+    review: "na ručnom pregledu — original ostaje u prometu",
+  };
 
   return (
     <>
@@ -94,6 +104,58 @@ export default async function ReturnsPage({
           </div>
         </div>
         <SalesTotals totals={summary} byCustomer={byCustomer} alwaysShowAdjustments />
+      </section>
+
+      <section className="portal-panel">
+        <div className="portal-section-header">
+          <div>
+            <h2>Storna i knjižna odobrenja ({minusDocs.length})</h2>
+            <p>
+              Storno ({storna.length}): kada je primenjeno, originalna faktura ne ulazi u promet. Knjižno odobrenje ({odobrenja.length}):
+              umanjenje za kupca; prikazano je ovde, a u promet po artiklima ne ulazi.
+              {odobrenja.length ? ` Zbir odobrenja: ${money(odobrenja.reduce((a, d) => a + d.gross, 0))} RSD sa PDV-om.` : ""}
+            </p>
+          </div>
+        </div>
+        <div className="portal-table-wrap">
+          <table className="portal-table">
+            <thead>
+              <tr>
+                <th scope="col">Dokument</th>
+                <th scope="col">Datum</th>
+                <th scope="col">Kupac</th>
+                <th scope="col">Vrsta</th>
+                <th scope="col">Iznos sa PDV</th>
+                <th scope="col">Veza / stanje</th>
+              </tr>
+            </thead>
+            <tbody>
+              {minusDocs.map((d) => (
+                <tr key={d.id}>
+                  <th scope="row">{d.number ?? "—"}</th>
+                  <td className="portal-nowrap">{d.date ? dmy(d.date) : "—"}</td>
+                  <td>
+                    {d.customerId ? <Link href={`/portal/kupci/${d.customerId}`}>{d.customerName}</Link> : <span className="portal-unavailable">šifra {d.partnerCode ?? "—"} nije povezana</span>}
+                  </td>
+                  <td>{d.kind === "storno" ? "storno" : "knjižno odobrenje"}</td>
+                  <td className="portal-table-number">{money(d.gross)}</td>
+                  <td>
+                    {d.kind === "storno"
+                      ? d.reversal
+                        ? `poništava ${d.reversal.originalNumber} · ${REVERSAL[d.reversal.status] ?? d.reversal.status}`
+                        : "bez navedenog originala — ručni pregled"
+                      : `${d.lineCount} ${d.lineCount === 1 ? "stavka" : "stavke"}`}
+                  </td>
+                </tr>
+              ))}
+              {minusDocs.length === 0 ? (
+                <tr>
+                  <td colSpan={6}>Nema storna ni knjižnih odobrenja u izabranom periodu. Uvoze se kao PDF na strani Importi.</td>
+                </tr>
+              ) : null}
+            </tbody>
+          </table>
+        </div>
       </section>
 
       <section className="portal-panel">

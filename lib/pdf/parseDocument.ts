@@ -284,6 +284,24 @@ export async function parseBiznisoftPdf(bytes: Uint8Array): Promise<ParsedDocume
   const totals = validateTotals(lines, header.printedGrossTotal.value);
 
   /*
+   * Knjižno odobrenje (2026-11-11): prepoznaje se i čita (kupac, broj, iznos), ali se NE
+   * knjiži kao faktura — knjiženje bi ga upisalo kao prodaju. Ostaje izvorni dokument koji
+   * ekran „Povrati i minus fakture“ prikazuje uz kupca i iznos.
+   */
+  if (kind.kind === "knjizno_odobrenje") {
+    return {
+      ...base,
+      lines,
+      totals,
+      documentKind: "knjizno_odobrenje",
+      validationStatus: "unsupported_requires_sample",
+      validationDetail: totals.ok
+        ? "Knjižno odobrenje: prepoznato i pročitano; prikazuje se u povratima, ne ulazi u promet kao faktura."
+        : "Knjižno odobrenje: prepoznato, ali zbir stavki ne odgovara odštampanom iznosu.",
+    };
+  }
+
+  /*
    * Negativna količina ili iznos znače povrat, odobrenje ili storno, i kada
    * naslov glasi kao faktura. Za te vrste ne postoji potvrđen uzorak (veza sa
    * originalom, efekat na promet), pa dokument ide čoveku — nikad u promet kao

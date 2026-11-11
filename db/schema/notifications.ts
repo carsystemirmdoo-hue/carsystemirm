@@ -31,6 +31,8 @@ export const notificationKind = pgEnum("notification_kind", [
   "customer_order_submitted",
   /** Kupac je poslao upit za cenu/uslove (0046). */
   "customer_price_request_submitted",
+  /** Dug kupca preko kreditnog limita ili faktura koja kasni (0063). */
+  "credit_warning",
 ]);
 
 export const notificationSeverity = pgEnum("notification_severity", [
@@ -94,6 +96,8 @@ export const notifications = pgTable(
      * je nov događaj i sme da napravi nov red; vidi migraciju 0015.
      */
     dedupeKey: text("dedupe_key"),
+    /** 0063: kupac na koga se obaveštenje odnosi; komercijalista vidi samo svoje kupce. */
+    customerId: uuid("customer_id"),
     createdAt: timestamp("created_at", { withTimezone: true })
       .notNull()
       .defaultNow(),

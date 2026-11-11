@@ -1,4 +1,5 @@
 import "server-only";
+import { resolveLedgerScope } from "@/lib/ledger/effective-sales";
 import { and, count, desc, eq, inArray, sql } from "drizzle-orm";
 import { getDb, type Database } from "@/db/client";
 import {
@@ -33,6 +34,8 @@ export type NotificationInput = {
    * čita — to je nacin na koji obavestenja umiru u praksi.
    */
   dedupeKey?: string | null;
+  /** 0063: kupac na koga se odnosi; komercijalista ga vidi samo ako mu je kupac dodeljen. */
+  customerId?: string | null;
 };
 
 /**
@@ -111,6 +114,7 @@ export async function notify(
     context: input.context ?? null,
     correlationId: input.correlationId ?? null,
     dedupeKey: input.dedupeKey ?? null,
+    customerId: input.customerId ?? null,
   };
 
   if (!input.dedupeKey) {
@@ -150,6 +154,18 @@ export async function notify(
  */
 export const PRICE_DECISION_NOTIFICATION_CAPABILITIES = Object.freeze(["prices:propose", "prices:approve", "prices:audit"]);
 
+/**
+ * Obaveštenje vezano za kupca (0063) vidi komercijalista samo ako je kupac u njegovom opsegu;
+ * obaveštenja bez kupca i svi ostali korisnici — kao i do sada.
+ */
+async function customerScopeCondition(user: PortalUser) {
+  if (user.role !== "komercijalista") return sql`true`;
+  const scope = await resolveLedgerScope(user);
+  if (scope.customerIds === null) return sql`true`;
+  if (!scope.customerIds.length) return sql`${notifications.customerId} IS NULL`;
+  return sql`(${notifications.customerId} IS NULL OR ${notifications.customerId} IN (${sql.join(scope.customerIds.map((id) => sql`${id}::uuid`), sql`, `)}))`;
+}
+
 export function notificationCapabilitiesFor(user: Pick<PortalUser, "role" | "permissions">): string[] {
   const all = [...resolveCapabilities(user.role, user.permissions)];
   if (user.role !== "komercijalista") return all;
@@ -171,7 +187,7 @@ export async function listNotificationsFor(
   if (capabilities.length === 0) return [];
 
   const db = getDb();
-  const conditions = [inArray(notifications.requiredCapability, capabilities)];
+  const conditions = [inArray(notifications.requiredCapability, capabilities), await customerScopeCondition(user)];
   if (filter?.status) conditions.push(eq(notifications.status, filter.status));
 
   return db
@@ -195,6 +211,7 @@ export async function countUnreadFor(user: PortalUser): Promise<number> {
       and(
         inArray(notifications.requiredCapability, capabilities),
         eq(notifications.status, "unread"),
+        await customerScopeCondition(user),
       ),
     );
   return rows[0]?.total ?? 0;

@@ -46,7 +46,7 @@ export default async function PriceApprovalPage() {
       <PageHeader
         eyebrow="Finansije"
         title="Odobravanje cena"
-        description="Odobrenje nije potvrda. Pravilo postaje potvrđeno tek kada kancelarija evidentira da je uslov upisan u BizniSoft."
+        description="Predlozi rabata koji čekaju Vašu odluku. Odobreno pravilo odmah važi u portalu."
       />
 
       {batches.length ? (
@@ -86,20 +86,14 @@ export default async function PriceApprovalPage() {
 
       <RuleTable rows={waiting} showActions={canDecide} title={`Čeka odobrenje (${waiting.length})`} />
 
-      <RuleTable
-        rows={approved}
-        showActions={canDecide}
-        accent="warning"
-        title={`Odobreno — čeka upis u BizniSoft (${approved.length})`}
-        description="Ova pravila već učestvuju u odlučivanju o ceni, ali NISU potvrđena kao fakturisani uslov. Dok upis ne bude evidentiran, cena nije garantovana."
-      />
-
-      <RuleTable
-        rows={recorded}
-        showActions={canDecide}
-        title={`Evidentiran unos — čeka usaglašavanje sa fakturom (${recorded.length})`}
-        description="Kancelarija je evidentirala unos u BizniSoft. To je tvrdnja čoveka, ne dokaz — potvrdu daje tek usaglašavanje sa fakturom."
-      />
+      {/* 2026-11-11 (vlasnik): bez API-ja ka BizniSoftu nema koraka „čeka upis“ — odobreno važi. */}
+      <details className="rr-approved-list">
+        <summary className="portal-panel">
+          <b>Odobreno — važi ({approved.length + recorded.length})</b>
+          <span>Pravila koja već važe. Kliknite da otvorite listu; opoziv je u redu pravila.</span>
+        </summary>
+        <RuleTable rows={[...approved, ...recorded]} showActions={canDecide} title={`Odobreno — važi (${approved.length + recorded.length})`} />
+      </details>
 
       {failed.length > 0 ? (
         <RuleTable
@@ -107,7 +101,7 @@ export default async function PriceApprovalPage() {
           showActions={canDecide}
           accent="danger"
           title={`Usaglašavanje nije uspelo (${failed.length})`}
-          description="Odobreno u portalu, a upis u BizniSoft nije potvrđen. Ovo je jedino stanje u kome portal i knjigovodstvo tvrde različite stvari."
+          description="Uslov na fakturi se razlikuje od odobrenog u portalu."
         />
       ) : null}
     </>

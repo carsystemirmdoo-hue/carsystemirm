@@ -496,8 +496,8 @@ function notificationForTransition(
          * i izvršio je šum, i uči ljude da preskaču listu.
          */
         requiredCapability: "prices:apply",
-        title: "Odobrena promena cene čeka upis u BizniSoft",
-        body: `${actor.name} je odobrio ${label}. Uslov još NIJE potvrđen kao upisan u BizniSoft.`,
+        title: "Odobrena promena cene",
+        body: `${actor.name} je odobrio ${label}. Važi u portalu; ako treba da važi i na fakturi, unesite je u BizniSoft.`,
         entityType: "Pravilo cene",
         entityId: rule.id,
         actionHref: "/portal/cene/odobravanje",

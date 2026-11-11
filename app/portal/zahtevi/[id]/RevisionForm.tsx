@@ -126,7 +126,7 @@ export function RevisionForm({
       </div>
       <div style={{ paddingTop: 12 }}>
         <ScrollTable label="Stavke izmenjenog predloga">
-          <table className="pn-table pn-table-cards pn-table-sticky" style={{ minWidth: 980 }}>
+          <table className="pn-table pn-table-cards pn-table-sticky" style={{ minWidth: 980 }} data-sort="off">
             <thead>
               <tr>
                 <th scope="col" style={{ width: 96 }}>Šifra</th>

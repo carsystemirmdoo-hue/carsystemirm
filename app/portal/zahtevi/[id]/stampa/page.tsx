@@ -7,6 +7,7 @@ import { countOf, STAVKA } from "@/lib/ordering/plural.mjs";
 import { ORDER_STATUS_LABELS } from "@/lib/ordering/orderRules.mjs";
 import { amount, dmyTime, percent, quantity } from "@/lib/ordering/panelFormat.mjs";
 import { companyContact } from "@/lib/company-contact";
+import { AutoPrint } from "./AutoPrint";
 import { PrintButton } from "./PrintButton";
 import "./stampa.css";
 import { isSinglePiece } from "@/lib/ordering/packRule.mjs";
@@ -21,8 +22,9 @@ export const dynamic = "force-dynamic";
  * strani; broj dokumenta, verzija i „Strana X od Y“ su u margini svake strane
  * (Chrome/Edge štampa, i PDF iz njih). Stara verzija je označena i na svakoj strani.
  */
-export default async function OrderPrintPage({ params }: { params: Promise<{ id: string }> }) {
+export default async function OrderPrintPage({ params, searchParams }: { params: Promise<{ id: string }>; searchParams: Promise<Record<string, string | string[] | undefined>> }) {
   const { id } = await params;
+  const autoPrint = (await searchParams).stampaj === "1";
   const user = await requireCapability("view:zahtevi", `/portal/zahtevi/${encodeURIComponent(id)}/stampa`);
   const o = await loadOrderRequest(user, id);
   if (!o) notFound();
@@ -76,6 +78,7 @@ export default async function OrderPrintPage({ params }: { params: Promise<{ id:
           </div>
         ) : null}
       </div>
+      <AutoPrint enabled={autoPrint} />
       <style>{pageCss}</style>
       <article className="zp-doc" aria-label={title} data-old={old ? "true" : undefined}>
         {old ? (
@@ -140,7 +143,7 @@ export default async function OrderPrintPage({ params }: { params: Promise<{ id:
         </section>
 
         {priced.length ? (
-          <table className="zp-table">
+          <table className="zp-table" data-sort="off">
             <colgroup>
               <col className="c-rb" />
               <col className="c-sifra" />
@@ -222,7 +225,7 @@ export default async function OrderPrintPage({ params }: { params: Promise<{ id:
         {onRequest.length ? (
           <>
             <h2 className="zp-h">Stavke na upit — cena nije utvrđena{priced.length ? "" : " (sve stavke)"}</h2>
-            <table className="zp-table zp-onrequest">
+            <table className="zp-table zp-onrequest" data-sort="off">
               <colgroup>
                 <col className="c-rb" />
                 <col className="c-sifra" />

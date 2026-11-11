@@ -199,12 +199,7 @@ export default async function PricesOverviewPage({
                 <Badge tone={PRICE_RULE_STATUS_TONES[preview.winner.status] ?? "neutral"}>
                   {PRICE_RULE_STATUS_LABELS[preview.winner.status]}
                 </Badge>{" "}
-                {preview.confirmed ? null : (
-                  <strong>
-                    Odobreno, ali NIJE potvrđeno kao upisano u BizniSoft — nije
-                    garantovana fakturisana cena.
-                  </strong>
-                )}
+
               </p>
             ) : null}
             {preview.considered.length > 0 ? (

@@ -2,6 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import { useEffect, useMemo, useState, useTransition } from "react";
+import { portalNavStart } from "@/components/portal/PortalNavProgress";
 import { SortHeader } from "@/components/portal/SortHeader";
 import type { ProcurementData, ProcurementRow } from "@/lib/procurement/procurement-service";
 import { parseOrderQuantity } from "@/lib/procurement/suggest.mjs";
@@ -102,6 +103,7 @@ export function ProcurementTable({
       od: next.od ?? data.period.from,
       do: next.do ?? data.period.to,
     });
+    portalNavStart();
     startNav(() => router.push(`/portal/nabavka?${p.toString()}`, { scroll: false }));
   };
   const periodDirty = from !== data.period.from || to !== data.period.to;

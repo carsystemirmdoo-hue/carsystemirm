@@ -173,14 +173,7 @@ export function RuleTable({
                     * Razlika odobreno/potvrđeno se ispisuje uz svako pravilo,
                     * ne samo bojom. Boja se izgubi u štampi i u izvozu.
                     */}
-                  {row.biznisoftEntryRequired === false ? (
-                    <small className="rr-portal-only">
-                      Važi samo u portalu — nije nalog za unos u BizniSoft.
-                      {row.sourceBatch ? ` Serija ${row.sourceBatch}.` : ""}
-                    </small>
-                  ) : row.status === "approved_pending_biznisoft" ? (
-                    <small>Još nije uneto u BizniSoft.</small>
-                  ) : null}
+                  {row.sourceBatch ? <small>Serija {row.sourceBatch}.</small> : null}
                   {row.status === "office_recorded" ? (
                     <small>
                       Tvrdnja kancelarije, ne dokaz sa fakture.

@@ -1219,13 +1219,16 @@ body:has(.portal-login-root) {
 /* Duga tabela se pomera unutar okvira, a zaglavlje kolona ostaje vidljivo
    (sticky `th` je vezan za ovaj okvir). Bez granice visine su liste od 150–500
    redova pravile strane od 30.000–48.000 px. */
+/* 2026-11-11: tabela više NIJE poseban prozor sa sopstvenim vertikalnim skrolom.
+   Točkić miša preko tabele je „hvatao“ skrol (max-height + overscroll contain), pa se
+   strana zaustavljala ili se tabela pomerala umesto strane. Sada se tabela pomera samo
+   vodoravno kada je šira od ekrana; vertikalno se uvek pomera cela strana. */
 .portal-table-wrap {
   width: 100%;
-  max-height: min(72vh, 760px);
-  overflow: auto;
+  overflow-x: auto;
+  overflow-y: hidden;
   border-radius: 0 0 2px 2px;
   scrollbar-width: thin;
-  overscroll-behavior: contain;
 }
 .portal-table {
   width: 100%;
@@ -10732,3 +10735,83 @@ html:has(.portal-customer-area) { scroll-padding-top: 104px; }
   .pk-table td.pk-open { display: none; }
   .pk-table td[colspan], .dg-lines td[colspan] { grid-column: 1 / -1; }
 }
+
+/* Učitavanje (2026-11-11): traka na vrhu + natpis dok se nova strana sprema. */
+.portal-navload {
+  position: fixed;
+  inset: 0 0 auto 0;
+  z-index: 1000;
+  height: 3px;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+.portal-navload[data-busy="true"] { opacity: 1; }
+.portal-navload-bar {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  background: rgba(215, 25, 32, 0.18);
+}
+.portal-navload-bar::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 40%;
+  background: var(--p-red, #d71920);
+  animation: portal-navload-run 1.1s ease-in-out infinite;
+}
+@keyframes portal-navload-run {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(260%); }
+}
+.portal-navload-note {
+  position: fixed;
+  top: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 7px 14px;
+  border-radius: 999px;
+  background: var(--p-ink, #111);
+  color: var(--p-surface, #fff);
+  font-size: 13px;
+  font-weight: 600;
+  white-space: nowrap;
+  box-shadow: 0 6px 20px rgb(0 0 0 / 0.18);
+}
+.portal-navload:not([data-busy="true"]) .portal-navload-note { display: none; }
+@media (prefers-reduced-motion: reduce) {
+  .portal-navload-bar::before { animation: none; width: 100%; }
+}
+@media (max-width: 760px) {
+  .portal-navload-note { white-space: normal; text-align: center; max-width: calc(100vw - 32px); }
+}
+
+/* Ređanje svake tabele (AutoSortTables): naslov kolone je klikabilan, strelica desno. */
+th[data-auto-sort] { cursor: pointer; user-select: none; }
+th[data-auto-sort]:hover { color: var(--p-ink); }
+th[data-auto-sort]:focus-visible { outline: 2px solid var(--p-red); outline-offset: -2px; }
+.auto-sort-arrow { margin-left: 6px; font-size: 0.85em; opacity: 0.45; }
+.auto-sort-arrow[data-active] { opacity: 1; color: var(--p-red); }
+table[data-sort="off"] .auto-sort-arrow { display: none; }
+table[data-sort="off"] th[data-auto-sort] { cursor: default; }
+
+a.portal-metric { color: inherit; text-decoration: none; }
+a.portal-metric:hover { border-color: var(--p-line-strong); }
+
+/* Odobravanje: odobrena pravila su sklopljena lista (2026-11-11). */
+.rr-approved-list > summary { display: flex; flex-wrap: wrap; gap: 4px 14px; align-items: baseline; padding: 16px 20px; cursor: pointer; list-style: none; }
+.rr-approved-list > summary::-webkit-details-marker { display: none; }
+.rr-approved-list > summary::before { content: "▸"; color: var(--p-muted); }
+.rr-approved-list[open] > summary::before { content: "▾"; }
+.rr-approved-list > summary b { font-size: 17px; }
+.rr-approved-list > summary span { color: var(--p-muted); font-size: 13px; }
+
+/* Pregled maila porudžbine (2026-11-11). */
+.mail-meta dl { display: grid; gap: 8px; margin: 0; padding: 16px 20px; }
+.mail-meta dl > div { display: grid; grid-template-columns: 90px 1fr; gap: 12px; }
+.mail-meta dt { color: var(--p-muted); font-size: 13px; }
+.mail-meta dd { margin: 0; display: flex; flex-direction: column; gap: 4px; }
+.mail-to small { color: var(--p-muted); }
+.mail-to em { color: var(--p-amber, #9a6700); font-style: normal; font-weight: 600; }
+.mail-frame { width: 100%; height: 900px; border: 1px solid var(--p-line); border-radius: 8px; background: #f3f4f6; margin-top: 16px; }

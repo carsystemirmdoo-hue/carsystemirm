@@ -5,7 +5,9 @@ import { fallbackRecordLabel, useCrumbLabels } from "@/components/portal/Breadcr
 import { CartButton } from "@/components/cart/CartButton";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { Suspense, useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { AutoSortTables } from "./AutoSortTables";
+import { PortalNavProgress } from "./PortalNavProgress";
 import { PortalIcon, type PortalIconName } from "./PortalIcon";
 import {
   sidebarCookieValue,
@@ -366,6 +368,10 @@ export function PortalShell({
         </header>
 
         {dataNotice}
+        <Suspense fallback={null}>
+          <PortalNavProgress />
+          <AutoSortTables />
+        </Suspense>
         <main className="portal-main">{children}</main>
       </div>
     </div>

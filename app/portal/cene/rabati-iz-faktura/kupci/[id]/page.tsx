@@ -303,7 +303,7 @@ export default async function RebateReviewCustomerPage({
                 <div>
                   <span className="rr-step">3 · Odobreno</span>
                   <h2>Pravila koja važe u portalu</h2>
-                  <p>Jedino ovo je odluka firme. „Samo portal“ znači: nije nalog za unos u BizniSoft.</p>
+                  <p>Jedino ovo je odluka firme.</p>
                 </div>
               </div>
               <div className="portal-panel-body">

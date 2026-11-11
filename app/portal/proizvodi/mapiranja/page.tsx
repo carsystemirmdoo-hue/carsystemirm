@@ -14,6 +14,8 @@ import {
 import { loadArticleOrderability } from "@/lib/ordering/ordering-service";
 import { getAllCarsystemProducts } from "@/lib/carsystem-data";
 import { MappingReview } from "./MappingReview";
+import { NameProposals } from "./NameProposals";
+import { loadNameProposals } from "@/lib/catalog/name-proposals";
 
 export const dynamic = "force-dynamic";
 
@@ -34,7 +36,7 @@ function parseStatus(raw: string | undefined): ProductMappingStatus | undefined 
 export default async function ArticleMappingsPage({
   searchParams,
 }: {
-  searchParams: Promise<{ status?: string; q?: string }>;
+  searchParams: Promise<{ status?: string; q?: string; predlozi?: string }>;
 }) {
   const user = await requireCapability(
     "view:mapiranja",
@@ -45,9 +47,11 @@ export default async function ArticleMappingsPage({
   const canProposeByCode = getAllCarsystemProducts().some((product) => Boolean(product.internalCode));
   const params = await searchParams;
 
-  const [rows, counts] = await Promise.all([
+  const includeInactive = params.predlozi === "svi";
+  const [rows, counts, proposals] = await Promise.all([
     listArticleMappings({ status: parseStatus(params.status), search: params.q }),
     countArticleMappingsByStatus(),
+    canManage ? loadNameProposals({ includeInactive }) : Promise.resolve([]),
   ]);
 
   const orderability = await loadArticleOrderability(rows.map((r) => r.articleId));
@@ -67,7 +71,7 @@ export default async function ArticleMappingsPage({
       <PageHeader
         eyebrow="Logistika"
         title="Povezivanje artikala"
-        description="Veza BizniSoft artikla (interna šifra) i tačne kataloške varijante pravi se po TAČNOJ šifri, nikad po nazivu. Prodajno pakovanje i JM potvrđuju se posebno. Samo POTVRĐENA veza na tačan proizvod i varijantu, uz stavku aktivnog cenovnika, čini artikal poručivim. Predlog nikad nije poručiv."
+        description="Veza BizniSoft artikla i tačne kataloške varijante. Predlog (po šifri ili po nazivu) nije veza — artikal se povezuje tek Vašom potvrdom. Prodajno pakovanje i JM potvrđuju se posebno. Samo POTVRĐENA veza, uz stavku aktivnog cenovnika, čini artikal poručivim."
         meta={
           <>
             {STATUSES.map((status) => (
@@ -119,7 +123,7 @@ export default async function ArticleMappingsPage({
             <p className="portal-login-hint">
               {canProposeByCode
                 ? "„Predložite po šifri“ traži tačno poklapanje interne šifre. Dva kataloška proizvoda sa istom šifrom daju konflikt, ne izbor."
-                : "Katalog još ne nosi interne šifre BizniSofta, pa predlog po šifri nije moguć. Vezu potvrdite kroz „Odlučite“: upišite slug kataloškog proizvoda i „Proverite“ — vide se naziv, slika i varijante pre čuvanja."}
+                : "Katalog još ne nosi interne šifre BizniSofta, pa predlog po šifri nije moguć. Koristite predloge po nazivu ispod; za ostale vezu potvrdite kroz „Odlučite“: upišite slug kataloškog proizvoda i „Proverite“ — vide se naziv, slika i varijante pre čuvanja."}
             </p>
           </section>
 
@@ -138,6 +142,7 @@ export default async function ArticleMappingsPage({
             </p>
           ) : null}
 
+          {canManage ? <NameProposals proposals={proposals} includeInactive={includeInactive} /> : null}
           <MappingReview rows={reviewRows} canManage={canManage} canProposeByCode={canProposeByCode} />
         </>
       )}

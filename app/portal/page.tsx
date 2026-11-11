@@ -50,7 +50,7 @@ export default async function PortalHomePage() {
   const work = await loadWorkQueue(user);
   const followUps = showSignals ? await dueFollowUps(user) : [];
   const seesDebt = can(user, "view:dugovanja");
-  if (seesDebt) await autoRefreshReceivables();
+  if (seesDebt) await autoRefreshReceivables(user.id);
   const [debtSnap, debts] = seesDebt ? await Promise.all([latestSnapshot(), debtsByCustomer(user)]) : [null, []];
   const debtTotal = debts.reduce((s, d) => s + d.total, 0);
   const debtOverdue = debts.reduce((s, d) => s + d.overdueTotal, 0);

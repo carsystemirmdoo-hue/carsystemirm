@@ -12,7 +12,7 @@ import { countOf, STAVKA } from "@/lib/ordering/plural.mjs";
  * Vidljivost zahteva za porudžbinu: `customer_orders:review` (kancelarija,
  * vlasnik) — komercijalista ih samo čita, korak nije njegov.
  *
- * Upit za cenu: `price_requests:handle` uz `customerId` (0059). Na upit
+ * Upit za cenu: `price_requests:handle` uz `customerId` (0063). Na upit
  * odgovara i komercijalista, a red vezan za kupca vidi samo ko tog kupca ima
  * u opsegu — komercijalista svoje, kancelarija i vlasnik sve.
  * Telo nosi samo broj, naziv firme i brojeve — bez kontakta kupca.

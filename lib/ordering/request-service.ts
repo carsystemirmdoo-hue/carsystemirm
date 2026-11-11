@@ -1,4 +1,5 @@
 import "server-only";
+import { creditBlockFor } from "@/lib/credit/credit-service";
 import { createHash, randomUUID } from "node:crypto";
 import { sql } from "drizzle-orm";
 import { getDb, type Database } from "@/db/client";
@@ -615,6 +616,9 @@ export async function submitOrderRequest(
   const db = getDb();
   const earlier = await existingByKey(db, key);
   if (earlier) return earlier.customer_id === customerId ? { status: "existing", orderId: earlier.id, requestNumber: earlier.request_number } : { status: "blocked", message: "Neispravan zahtev.", blockers: [] };
+  // Kreditna blokada (0063): samo kada je kupcu uključena I dug je preko limita.
+  const creditBlock = await creditBlockFor(customerId);
+  if (creditBlock) return { status: "blocked", message: creditBlock, blockers: [] };
   let created: Parameters<typeof notifyOrderSubmitted>[0] | null = null;
   try {
     const result = await db.transaction(async (tx) => {

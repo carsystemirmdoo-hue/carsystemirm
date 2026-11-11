@@ -19,7 +19,7 @@ export default async function CustomerOfferPage({ params }: { params: Promise<{ 
   if (!UUID.test(id)) notFound();
   const user = await requireCapability("view:preporuke", `/portal/kupci/${id}/preporuke`);
   const showDebt = can(user, "view:dugovanja");
-  const refreshProblem = showDebt ? await autoRefreshReceivables() : null;
+  const refreshProblem = showDebt ? await autoRefreshReceivables(user.id) : null;
   let data: Awaited<ReturnType<typeof loadCustomerOffer>>;
   let desk: Awaited<ReturnType<typeof loadCustomerDesk>>;
   try {

@@ -282,7 +282,7 @@
     "test:readiness": "node --test lib/readiness/*.test.mjs",
     "test:recommendations": "node --test lib/recommendations/*.test.mjs",
     "test:legacy-redirects": "node --test lib/seo/legacyRedirect.test.mjs",
-    "test:sales-tools": "node --test lib/sales-tools/*.test.mjs",
+    "test:sales-tools": "node --test lib/sales-tools/*.test.mjs lib/credit/*.test.mjs",
     "test:recommendations:perf": "tsx --test --test-concurrency=1 --test-timeout=600000 --tsconfig db/integration/tsconfig.test.json db/integration/recommendationPerformance.perf.test.mts",
     "test:smoke-docs": "node --test connector/test/smoke-docs.test.mjs",
     "test:smoke-runtime": "node --test connector/test/runtime-contract.test.mjs",

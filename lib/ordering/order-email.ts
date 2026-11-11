@@ -11,8 +11,11 @@ import type { OrderDetail } from "@/lib/ordering/ordering-service";
  * „Odštampaj porudžbinu“ koje otvara samo list porudžbine (A4) i odmah pokreće štampu —
  * ne štampa se ceo mail.
  *
- * Kancelarija: `ORDER_OFFICE_EMAILS` (adrese zarezom) na serveru.
+ * Kancelarija (Tamara): carsystemirmdoo@gmail.com (odluka vlasnika 2026-11-11); `ORDER_OFFICE_EMAILS`
+ * (adrese zarezom) na serveru ga može zameniti.
  */
+
+export const OFFICE_EMAIL = "carsystemirmdoo@gmail.com";
 
 export type OrderEmailRecipient = { name: string; email: string | null; role: "komercijalista" | "kancelarija" };
 
@@ -20,13 +23,13 @@ export async function orderEmailRecipients(customerId: string): Promise<OrderEma
   const reps = await getDb().execute<{ name: string; email: string | null }>(sql`
     SELECT u.name, u.email FROM customer_assignments ca JOIN users u ON u.id = ca.user_id
      WHERE ca.customer_id = ${customerId}::uuid ORDER BY u.name`);
-  const office = (process.env.ORDER_OFFICE_EMAILS ?? "")
+  const office = (process.env.ORDER_OFFICE_EMAILS || OFFICE_EMAIL)
     .split(",")
     .map((s) => s.trim())
     .filter(Boolean);
   return [
     ...[...reps].map((r) => ({ name: r.name, email: r.email, role: "komercijalista" as const })),
-    ...(office.length ? office.map((e) => ({ name: "Kancelarija", email: e, role: "kancelarija" as const })) : [{ name: "Kancelarija (Tamara)", email: null, role: "kancelarija" as const }]),
+    ...(office.length ? office.map((e) => ({ name: "Kancelarija (Tamara)", email: e, role: "kancelarija" as const })) : [{ name: "Kancelarija (Tamara)", email: null, role: "kancelarija" as const }]),
   ];
 }
 

@@ -448,7 +448,7 @@ test("nijedna API ruta ne postoji van izričito dozvoljenog spiska", async (t) =
     "portal/kupci/[id]/ponuda/route.ts",
     /*
      * Broj nepročitanih na zvoncu (2026-11-04): samo GET, `view:obavestenja`,
-     * broji kroz isti opseg kao lista obaveštenja (0059); vraća samo broj.
+     * broji kroz isti opseg kao lista obaveštenja (0063); vraća samo broj.
      */
     "portal/obavestenja/broj/route.ts",
     "portal/podesavanja/navigacija/route.ts",

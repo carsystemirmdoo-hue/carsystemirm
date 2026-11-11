@@ -25,7 +25,7 @@ export type NotificationInput = {
   context?: Record<string, unknown> | null;
   correlationId?: string | null;
   /**
-   * Kupac na koga se odnosi (0059). Zadat → vidi ga samo ko tog kupca ima u
+   * Kupac na koga se odnosi (0063). Zadat → vidi ga samo ko tog kupca ima u
    * opsegu, pa sme da ga dobije i komercijalista (samo za svoje kupce).
    */
   customerId?: string | null;
@@ -163,7 +163,7 @@ export function notificationCapabilitiesFor(user: Pick<PortalUser, "role" | "per
 }
 
 /**
- * Opseg kupca za obaveštenja (0059).
+ * Opseg kupca za obaveštenja (0063).
  *
  * Red bez kupca vidi svako sa sposobnošću; red sa kupcem samo ko vidi sve
  * kupce ili ima dodelu tog kupca. Kolona se piše PUNIM imenom

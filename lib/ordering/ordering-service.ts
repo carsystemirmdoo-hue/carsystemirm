@@ -1,4 +1,5 @@
 import "server-only";
+import { creditBlockFor } from "@/lib/credit/credit-service";
 import { createHash } from "node:crypto";
 import { sql, type SQL } from "drizzle-orm";
 import { lidEditProblem, RequiredPairError, requiredPairBlockers, syncRequiredPairs } from "@/lib/ordering/required-pairs";
@@ -540,6 +541,9 @@ export async function submitCartRequest(
   if (!/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(key)) return { status: "blocked", message: "Neispravan zahtev.", blockers: [] };
   const note = input.note ? String(input.note).trim().slice(0, 1000) || null : null;
   const db = getDb();
+  // Kreditna blokada (0063): samo kada je kupcu uključena I dug je preko limita.
+  const creditBlock = await creditBlockFor(customerId);
+  if (creditBlock) return { status: "blocked", message: creditBlock, blockers: [] };
 
   const reuse = async () => {
     const found = await existingByKey(db, key);

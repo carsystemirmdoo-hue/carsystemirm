@@ -45,7 +45,7 @@ export default async function Page({ searchParams }: { searchParams: Promise<Rec
   const sp = await searchParams;
   const one = (k: string) => (typeof sp[k] === "string" ? (sp[k] as string) : "");
   const configured = receivablesSourceConfigured();
-  const refreshProblem = await autoRefreshReceivables();
+  const refreshProblem = await autoRefreshReceivables(user.id);
   const [snap, rows] = await Promise.all([latestSnapshot(), debtsByCustomer(user)]);
   const all = seesAllCustomers(user);
   const [unmatched, suggestions, linkable] = all && snap ? await Promise.all([unmatchedDebtLines(), sheetAssignmentSuggestions(), customersForLinking()]) : [[], [], []];

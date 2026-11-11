@@ -12,11 +12,11 @@ import {
 } from "./harness.mts";
 
 /**
- * Obaveštenje vezano za kupca (0059).
+ * Obaveštenje vezano za kupca (0063).
  *
  * Komercijalista dobija upit SVOG kupca, a ne vidi upit tuđeg — ni u listi, ni
  * u broju na zvoncu, ni pogađanjem ID-a. Kancelarija i vlasnik vide sve.
- * Obaveštenje bez kupca ponaša se kao pre 0059.
+ * Obaveštenje bez kupca ponaša se kao pre 0063.
  */
 
 const reason = skipReason();

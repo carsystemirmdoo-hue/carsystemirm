@@ -1,3 +1,4 @@
+import { sql } from "drizzle-orm";
 import {
   bigserial,
   index,
@@ -32,6 +33,8 @@ export const notificationKind = pgEnum("notification_kind", [
   "customer_order_submitted",
   /** Kupac je poslao upit za cenu/uslove (0046). */
   "customer_price_request_submitted",
+  /** Dug kupca preko kreditnog limita ili faktura koja kasni (0063). */
+  "credit_warning",
 ]);
 
 export const notificationSeverity = pgEnum("notification_severity", [
@@ -106,7 +109,7 @@ export const notifications = pgTable(
     }),
     resolutionNote: text("resolution_note"),
     /**
-     * Kupac na koga se obaveštenje odnosi (0059), ili `null` za obaveštenje bez
+     * Kupac na koga se obaveštenje odnosi (0063), ili `null` za obaveštenje bez
      * kupca. Kada je zadat, vidi ga samo ko pored sposobnosti ima tog kupca u
      * opsegu — komercijalista svoje, kancelarija i vlasnik sve. Tako
      * komercijalista dobija upit svog kupca bez uvida u tuđe.
@@ -117,7 +120,7 @@ export const notifications = pgTable(
     index("notifications_status_idx").on(table.status, table.createdAt),
     index("notifications_capability_idx").on(table.requiredCapability),
     index("notifications_entity_idx").on(table.entityType, table.entityId),
-    index("notifications_customer_idx").on(table.customerId),
+    index("notifications_customer_idx").on(table.customerId).where(sql`customer_id IS NOT NULL`),
   ],
 );
 

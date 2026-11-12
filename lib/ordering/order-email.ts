@@ -118,7 +118,9 @@ export function buildOrderEmail(o: OrderDetail, baseUrl: string) {
  *   SMTP_USER       — nalog sa kog se šalje (npr. carsystemirmdoo@gmail.com)
  *   SMTP_PASSWORD   — lozinka za aplikacije (16 slova; razmaci se zanemaruju)
  *   ORDER_EMAILS=1  — automatsko slanje posle svake nove porudžbine (bez nje samo ručno dugme)
- * Opciono: SMTP_HOST (smtp.gmail.com), SMTP_PORT (465), MAIL_FROM_NAME, PUBLIC_BASE_URL.
+ * Opciono: SMTP_HOST (smtp.gmail.com), SMTP_PORT (465), MAIL_FROM_NAME, PUBLIC_BASE_URL,
+ * MAIL_REPLY_TO (podrazumevano kancelarija). Šalje se može i sa posebnog naloga samo za slanje
+ * (npr. carsystem.portal@gmail.com): odgovor na mejl ipak ide kancelariji.
  */
 export function mailConfig() {
   const user = (process.env.SMTP_USER ?? "").trim();
@@ -131,6 +133,7 @@ export function mailConfig() {
     host: (process.env.SMTP_HOST ?? "smtp.gmail.com").trim(),
     port: Number(process.env.SMTP_PORT ?? 465) || 465,
     fromName: (process.env.MAIL_FROM_NAME ?? "Carsystem portal").replace(/[\r\n]/g, " ").slice(0, 60),
+    replyTo: (process.env.MAIL_REPLY_TO ?? OFFICE_EMAIL).trim(),
   };
 }
 
@@ -163,7 +166,7 @@ export async function sendOrderEmail(
   try {
     await sendMail(
       { host: cfg.host, port: cfg.port, secure: cfg.port === 465, user: cfg.user, pass: cfg.pass },
-      { from: cfg.user, fromName: cfg.fromName, to, subject: mail.subject, html: mail.html, text: mail.text },
+      { from: cfg.user, fromName: cfg.fromName, replyTo: isAddress(cfg.replyTo) && cfg.replyTo !== cfg.user ? cfg.replyTo : undefined, to, subject: mail.subject, html: mail.html, text: mail.text },
     );
     await recordAudit({
       actor,

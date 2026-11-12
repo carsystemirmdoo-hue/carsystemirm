@@ -27,7 +27,7 @@ export default async function Page({ searchParams }: { searchParams: Promise<Rec
         title="Nabavka"
         description="Izaberite brend, proverite predlog i u koloni „Poručujem“ upišite koliko poručujete. Fajl za dobavljača sadrži samo šifru, naziv i količinu."
       />
-      <ProcurementTable data={data} historyDays={HISTORY_DAYS} coverChoices={[...COVER_CHOICES]} canExport={can(user, "procurement:prepare")} />
+      <ProcurementTable data={data} historyDays={HISTORY_DAYS} coverChoices={[...COVER_CHOICES]} canExport={can(user, "procurement:prepare")} canRecord={can(user, "procurement:order_create")} />
     </>
   );
 }

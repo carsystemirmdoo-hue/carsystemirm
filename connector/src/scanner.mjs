@@ -102,6 +102,14 @@ const jePdfIme = (ime) => /\.pdf$/i.test(ime);
 export const OZNAKA_FAKTURE = /(?:^|[ ._-])(?:faktura|fak)(?=$|[ ._0-9-])/i;
 
 /**
+ * Oznaka knjižnog odobrenja u imenu (0.3.14). Kancelarija ih čuva kao `k.o <kupac> <datum>`
+ * ili `knjizno odobrenje …`, bez oznake `fak`. Ista pravila razdvajača kao gore; `ko` bez tačke
+ * se NE prihvata (obična reč). Sadržaj i dalje odlučuje: fajl koji nije „Dokument o smanjenju“
+ * ide u nepodržano.
+ */
+export const OZNAKA_ODOBRENJA = /(?:^|[ ._-])(?:k\.o|knji[zž]no odobrenje|knjizno|odobrenje)(?=$|[ ._0-9-])/i;
+
+/**
  * Da li je ime fajla kandidat za fakturu. Gleda SAMO ime — nikad sadržaj.
  *
  * Proverava se nad imenom bez završnog `.pdf`; tačka je ionako razdvajač, pa
@@ -110,7 +118,8 @@ export const OZNAKA_FAKTURE = /(?:^|[ ._-])(?:faktura|fak)(?=$|[ ._0-9-])/i;
 export function jeFakturaPoNazivu(ime) {
   const s = String(ime ?? "");
   if (!jePdfIme(s)) return false;
-  return OZNAKA_FAKTURE.test(s.slice(0, -".pdf".length));
+  const bezEkstenzije = s.slice(0, -".pdf".length);
+  return OZNAKA_FAKTURE.test(bezEkstenzije) || OZNAKA_ODOBRENJA.test(bezEkstenzije);
 }
 
 /** Oznaka korena u zbiru po folderima; podfolder nosi svoje ime, nikad putanju. */

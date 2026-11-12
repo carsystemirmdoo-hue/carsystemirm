@@ -60,6 +60,12 @@ const FIXTURES = {
     items: [{ ...ART(1), kol: -ART(1).kol }],
     napomena: "Ovim dokumentom se stornira dokument broj 99-RN900000001 od 01.01.2026 godine.",
   }),
+  // Knjižno odobrenje („Dokument o smanjenju“, oblik iz stvarnih dokumenata 2025): jedna
+  // stavka-usluga, odštampani iznosi POZITIVNI — knjiženje ih upisuje kao umanjenje prometa.
+  "knjizno-odobrenje.pdf": document({
+    broj: "99-OK900000011", partner: "09001", datum: "11.01.2026", naslov: "Dokument o smanjenju",
+    items: [{ sifra: "900109", naziv: "KNJIZNO ODOBRENJE", jm: "KOM", kol: 1, cena: 1000, rabat: 0, pdv: 20 }],
+  }),
   // Negativne količine (povrat pod naslovom fakture) — nikad u promet.
   "negativne-stavke.pdf": document({
     broj: "99-RN900000009", partner: "09009", datum: "09.01.2026",

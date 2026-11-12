@@ -69,7 +69,7 @@ const CRUMB_LABELS: Record<string, string> = {
   limiti: "Kreditni limiti",
   zalihe: "Zalihe",
   nabavka: "Nabavka",
-  porudzbine: "Porudžbine",
+  porudzbine: "Roba u dolasku",
   otprema: "Otprema",
   adresnice: "Adresnice",
   bex: "BEX",

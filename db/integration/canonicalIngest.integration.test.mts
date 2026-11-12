@@ -458,6 +458,11 @@ test("nijedna API ruta ne postoji van izričito dozvoljenog spiska", async (t) =
     // Potpisana potvrda rezervne kopije sa uređaja (0037).
     "sync/backup/route.ts",
     /*
+     * Storno i knjižno odobrenje kao PDF sa uređaja (konektor 0.3.14): isti
+     * `withAuthenticatedDevice` i gate; server sam čita PDF, faktura ovim putem ne prolazi.
+     */
+    "sync/document/route.ts",
+    /*
      * P4: ručne komande, iza DRUGOG gate-a koji je takođe podrazumevano
      * isključen. Idu kroz isti `withAuthenticatedDevice` kao prijem.
      */

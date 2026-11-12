@@ -36,6 +36,7 @@ const MODULI = [
   "lib/sync/contract/fromParsedDocument.mjs",
   "lib/sync/contract/schemaValidator.mjs",
   "lib/sync/contract/validate.mjs",
+  "lib/sync/contract/deviceDocument.mjs",
   "contracts/invoice-ingest/v1/schema.json",
 ];
 

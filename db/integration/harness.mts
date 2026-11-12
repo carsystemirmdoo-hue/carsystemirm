@@ -298,6 +298,10 @@ const RESETTABLE_TABLES = [
   "receivable_customer_links",
   "receivable_sheet_customers",
   "receivable_lines",
+  /* Roba u dolasku (0064): stavke pre porudžbina; zapamćene šifre `restrict` ka artiklima. */
+  "supplier_order_lines",
+  "supplier_orders",
+  "supplier_article_codes",
   "receivable_snapshots",
   /*
    * Poručivanje (0029). `customer_orders` ima `restrict` ka kupcima i

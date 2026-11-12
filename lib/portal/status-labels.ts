@@ -107,6 +107,7 @@ export const NOTIFICATION_KIND_LABELS: Record<string, string> = {
   customer_account_status_changed: "Promena kupčevog naloga",
   customer_order_submitted: "Zahtev kupca",
   customer_price_request_submitted: "Upit za cenu",
+  credit_warning: "Kreditni limit kupca",
 };
 
 /** Opis opsega pravila, čitljiv bez poznavanja modela. */

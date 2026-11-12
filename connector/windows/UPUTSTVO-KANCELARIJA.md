@@ -83,9 +83,10 @@ isti poziv sa `-SamoUkloni`.
 Prikazuje poslednji ciklus, sledeći termin, šta čeka slanje ili pregled,
 rezultat zakazanog zadatka i **upozorenja**:
 
-- **Storna za ručni upload** i **stariji računi izvezeni naknadno** (datum
-  pre početka slanja, fajl nastao kasnije — npr. račun koji je nedostajao):
-  ne šalju se sami. Spisak fajlova: komanda `… rucno` iz upozorenja.
+- **Stariji računi izvezeni naknadno** (datum pre početka slanja, fajl nastao
+  kasnije — npr. račun koji je nedostajao): ne šalju se sami. Od 0.3.14 storna
+  i knjižna odobrenja se šalju sama (odeljak 3e); za ručni upload ostaju samo
+  oni veći od 360 KB. Spisak fajlova: komanda `… rucno` iz upozorenja.
   Proveriti u portalu i po potrebi otpremiti na **Uvoz** (`/portal/importi`),
   izdavalac `CSRM`. Portal sam povezuje potpuno storno sa originalom ili ga
   stavlja na pregled.
@@ -196,6 +197,25 @@ Posle ažuriranja na 0.3.13 (odeljak 1), u administratorskom PowerShell-u istog 
 
 Povratak na vidljiv prozor: isti `task.ps1` sa `-Prikaz Prozor`. Ako antivirus prijavi
 `wscript.exe`/`pokreni-skriveno.js`, ne dodavati izuzetak — vratiti `-Prikaz Prozor` i javiti.
+
+## 3e. Storna i knjižna odobrenja se šalju sama (od 0.3.14)
+
+Do 0.3.13 konektor je storna i knjižna odobrenja samo beležio, a kancelarija ih je
+otpremala ručno na **Uvoz**. Od 0.3.14 ih šalje sam, kao PDF, a portal ih čita istim
+čitačem kao ručni upload:
+
+- **storno**: ne ulazi u promet; potpun storno sa odštampanom vezom („stornira
+  dokument broj …“) isključuje originalnu fakturu, ostalo ide na pregled;
+- **knjižno odobrenje** („Dokument o smanjenju“): umanjuje promet kupca kada je
+  pročitano bez greške i kupac je povezan; inače čeka pregled.
+
+Knjižno odobrenje se prepoznaje i po imenu fajla `k.o …` / `knjizno odobrenje …`
+(ne samo `fak …`). Datum početka slanja (`posaljiOdDatuma`) i dalje važi: arhiva se
+ne šalje. Pri prvom ciklusu posle ažuriranja konektor jednom ponovo pročita storna
+koja je ranije ostavio za ručni upload; ako su već otpremljena ručno, portal ih
+prepoznaje kao isti fajl i ništa ne duplira.
+
+Ažuriranje: odeljak 1 sa paketom 0.3.14. Zadatak se ne registruje ponovo.
 
 ## 4. Povratak na prethodnu verziju — kao Administrator
 

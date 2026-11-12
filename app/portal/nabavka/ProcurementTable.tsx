@@ -8,7 +8,7 @@ import type { ProcurementData, ProcurementRow } from "@/lib/procurement/procurem
 import { parseOrderQuantity } from "@/lib/procurement/suggest.mjs";
 import { staleNote, workdaysSince } from "@/lib/stock/stockAge.mjs";
 import { nextSort, sortRows } from "@/lib/ui/sortRows.mjs";
-import { orderFileAction } from "./actions";
+import { orderFileAction, recordIncomingAction } from "./actions";
 import styles from "./Nabavka.module.css";
 
 /**
@@ -75,11 +75,13 @@ export function ProcurementTable({
   historyDays,
   coverChoices,
   canExport,
+  canRecord = false,
 }: {
   data: ProcurementData;
   historyDays: number;
   coverChoices: number[];
   canExport: boolean;
+  canRecord?: boolean;
 }) {
   const router = useRouter();
   const [brand, setBrand] = useState(data.brands[0]?.name ?? ALL);
@@ -89,6 +91,7 @@ export function ProcurementTable({
   const [draft, setDraft] = useState<Record<string, string>>({});
   const [loaded, setLoaded] = useState(false);
   const [msg, setMsg] = useState<{ ok: boolean; text: string } | null>(null);
+  const [downloaded, setDownloaded] = useState(false);
   const [pending, start] = useTransition();
   const [navigating, startNav] = useTransition();
   const [from, setFrom] = useState(data.period.from);
@@ -192,6 +195,17 @@ export function ProcurementTable({
       a.remove();
       setTimeout(() => URL.revokeObjectURL(url), 2000);
       setMsg({ ok: true, text: `Preuzet fajl ${r.fileName} (${r.count} ${plural(r.count, "stavka", "stavke", "stavki")})${r.skipped ? `; ${r.skipped} šifara nije pronađeno i nisu u fajlu` : ""}.` });
+      setDownloaded(true);
+    });
+
+  const recordIncoming = () =>
+    start(async () => {
+      const r = await recordIncomingAction({ label, lines: entered.map((x) => ({ code: x.r.code, quantity: x.v })) });
+      setMsg({ ok: r.ok, text: r.text });
+      if (r.ok) {
+        setDownloaded(false);
+        router.refresh();
+      }
     });
 
   return (
@@ -309,7 +323,14 @@ export function ProcurementTable({
                     {r.sold180 ? `${fmt(r.sold180)} ${unit}` : <span className={styles.zero}>0</span>}
                     {r.customers180 ? <span className={styles.sub}>{r.customers180} {r.customers180 === 1 ? "kupac" : "kupaca"}</span> : null}
                   </td>
-                  <td className={styles.num} data-label="Lager">{r.stock === null ? <span className={styles.zero} title="Šifra nije u izvozu lagera ili je količina nejasna">—</span> : `${fmt(r.stock)} ${unit}`}</td>
+                  <td className={styles.num} data-label="Lager">
+                    {r.stock === null ? <span className={styles.zero} title="Šifra nije u izvozu lagera ili je količina nejasna">—</span> : `${fmt(r.stock)} ${unit}`}
+                    {r.incoming ? (
+                      <span className={styles.sub} title="Poručeno, još nije stiglo (Roba u dolasku). Predlog ga već oduzima.">
+                        + {fmt(r.incoming.quantity)} u dolasku{r.incoming.nearest ? ` (do ${dmy(r.incoming.nearest)})` : ""}
+                      </span>
+                    ) : null}
+                  </td>
                   <td className={styles.num} data-label="Predlog">
                     {r.suggested > 0 ? <span className={styles.suggest}>{fmt(r.suggested)} {unit}</span> : <span className={styles.zero}>—</span>}
                     {r.suggested > 0 && r.packs !== null && r.pack ? <span className={styles.sub}>{r.packs} × {r.pack.label}</span> : null}
@@ -348,6 +369,11 @@ export function ProcurementTable({
           {canExport ? (
             <button type="button" className={`${styles.button} ${styles.primary}`} onClick={download} disabled={pending || !entered.length || invalid > 0}>
               {pending ? "Pravim fajl…" : "Preuzmi porudžbinu (Excel)"}
+            </button>
+          ) : null}
+          {canRecord && downloaded && entered.length ? (
+            <button type="button" className={styles.button} onClick={recordIncoming} disabled={pending} title="Upisuje ove stavke u Robu u dolasku sa uobičajenim rokom dobavljača.">
+              Upiši u Robu u dolasku
             </button>
           ) : null}
         </span>

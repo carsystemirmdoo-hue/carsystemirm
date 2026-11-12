@@ -94,6 +94,18 @@ test("storno sa vezom na original: prepoznat, potpun, ali ne ulazi u promet", as
   assert.equal(compareStornoToOriginal(view(storno), view(original)).kind, "full");
 });
 
+test("knjižno odobrenje (Dokument o smanjenju): čisto pročitano je valid, iznosi ostaju pozitivni", async () => {
+  const doc = await parse("knjizno-odobrenje.pdf");
+  assert.equal(doc.documentKind, "knjizno_odobrenje");
+  assert.equal(doc.validationStatus, "valid");
+  assert.equal(doc.header.documentNumber.value, "99-OK900000011");
+  assert.equal(doc.header.partnerCode.value, "09001");
+  assert.equal(doc.header.documentDate.value, "2026-01-11");
+  assert.equal(doc.totals.ok, true);
+  // Predznak dodaje knjiženje, ne čitač.
+  assert.ok(doc.lines.every((l) => (l.grossAmount ?? 0) > 0));
+});
+
 test("negativne stavke (povrat pod naslovom fakture) nikad ne postaju faktura", async () => {
   const doc = await parse("negativne-stavke.pdf");
   assert.equal(doc.validationStatus, "unsupported_requires_sample");

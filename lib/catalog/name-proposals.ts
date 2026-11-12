@@ -69,7 +69,7 @@ export async function loadNameProposals(opts: { includeInactive: boolean }): Pro
   const rows = await getDb().execute<{ id: string; code: string; name: string; unit: string | null; sold: string | null }>(sql`
     SELECT a.id, a.code, a.name, a.unit,
            (SELECT sum(abs(il.quantity)) FROM invoice_lines il JOIN invoices i ON i.id = il.invoice_id
-             WHERE il.article_id = a.id AND i.issued_on > current_date - 365)::text AS sold
+             WHERE il.article_id = a.id AND i.document_kind = 'faktura' AND i.issued_on > current_date - 365)::text AS sold
       FROM articles a
      WHERE NOT EXISTS (SELECT 1 FROM article_catalog_mappings m WHERE m.article_id = a.id AND m.status = 'mapped')
        AND NOT EXISTS (SELECT 1 FROM articles_out_of_programme o WHERE o.article_id = a.id)`);

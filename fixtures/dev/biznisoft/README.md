@@ -34,6 +34,7 @@ računom, pa fixture nikada ne laže o sopstvenom zbiru.
 | `nastavak-tabele.pdf` | tabela se nastavlja na strani 2, ali numeracija počinje ispočetka — nije jedna tabela; mora završiti u `unsupported_requires_sample` |
 | `nastavak-tabele-neprekidno.pdf` | numeracija se nastavlja na strani 2, zbir obuhvata obe strane — **dokazan** oblik (stvarne višestranične fakture); `valid` |
 | `storno.pdf` | potpun storno fakture `jedna-stavka.pdf`, sa vezom u napomeni — prepoznat kao `storno`, i dalje `unsupported_requires_sample` |
+| `knjizno-odobrenje.pdf` | „Dokument o smanjenju“ (oblik stvarnih knjižnih odobrenja 2025): jedna stavka-usluga, pozitivni iznosi — `valid`, knjiži se kao umanjenje prometa |
 | `negativne-stavke.pdf` | negativna količina pod naslovom fakture (povrat) — mora završiti u `unsupported_requires_sample`, nikad u promet |
 | `neispravan-bez-zaglavlja.pdf` | neupotrebljiv ulaz |
 

@@ -28,18 +28,20 @@ const X = {
 const dec = (n, d = 2) =>
   n.toLocaleString("de-DE", { minimumFractionDigits: d, maximumFractionDigits: d });
 
-function header(y0, { broj, partner, datum }) {
+function header(y0, { broj, partner, datum, naslov = "Racun-otpremnica" }) {
+  // Knjižno odobrenje („Dokument o smanjenju“) nosi „Datum izdavanja:“ bez „računa“.
+  const odobrenje = naslov === "Dokument o smanjenju";
   return [
     { x: 472, y: y0, text: "SINTETICKI IZDAVALAC DOO" },
     { x: 499, y: y0 - 37, text: "PIB: 100000001" },
-    { x: 178, y: y0 - 60, text: `Racun-otpremnica br. ${broj}` },
+    { x: 178, y: y0 - 60, text: `${naslov} br. ${broj}` },
     { x: 297, y: y0 - 127, text: "SINTETICKI KUPAC DOO" },
     { x: 297, y: y0 - 155, text: "11000 Grad, Ulica 1" },
     { x: 297, y: y0 - 166, text: "PIB: 100000002   Mat.br.: 20000002" },
     { x: 478, y: y0 - 116, text: "Sifra partnera:" },
     { x: 542, y: y0 - 116, text: partner },
-    { x: 34, y: y0 - 127, text: `Datum izdavanja racuna: ${datum}` },
-    { x: 34, y: y0 - 150, text: `Datum prometa dobara: ${datum}` },
+    { x: 34, y: y0 - 127, text: odobrenje ? `Datum izdavanja: ${datum}.` : `Datum izdavanja racuna: ${datum}` },
+    { x: 34, y: y0 - 150, text: odobrenje ? `Datum smanjenja: ${datum}.` : `Datum prometa dobara: ${datum}` },
   ];
 }
 
@@ -99,8 +101,8 @@ const CONTINUATION_ITEM = {
 };
 
 export function document({ broj, partner, datum, items, pages = 1, totalOverride = null,
-                    continuationOnPage2 = false, napomena = null }) {
-  const cells = [...header(803, { broj, partner, datum }), ...tableHead(574)];
+                    continuationOnPage2 = false, napomena = null, naslov = undefined }) {
+  const cells = [...header(803, { broj, partner, datum, naslov }), ...tableHead(574)];
   let y = 558, neto = 0, pdvUk = 0;
   items.forEach((it, i) => {
     const r = line(y, i + 1, it);
@@ -126,7 +128,7 @@ export function document({ broj, partner, datum, items, pages = 1, totalOverride
 
   const out = [cells];
   if (pages === 2) {
-    const p2 = [...header(803, { broj, partner, datum })];
+    const p2 = [...header(803, { broj, partner, datum, naslov })];
     if (continuation) {
       p2.push(...tableHead(574));
       p2.push(...continuation.cells);

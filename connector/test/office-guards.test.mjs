@@ -6,7 +6,7 @@ import test from "node:test";
 import { fileURLToPath } from "node:url";
 
 /**
- * Kancelarijske zaštite (docs/b2b/49): storno ne nestaje među nepodržanima,
+ * Kancelarijske zaštite (docs/b2b/49): storno ne nestaje među nepodržanima (od 0.3.14 se šalje sam),
  * istorija pre `posaljiOdDatuma` se ne šalje, a folder nove godine se vidi.
  */
 const FIXTURES = fileURLToPath(new URL("../../fixtures/dev/biznisoft/", import.meta.url));
@@ -27,14 +27,15 @@ async function okruzenje(posaljiOdDatuma = null) {
   return { dir, izvor, st, konfiguracija, ciklus, zatvori: async () => { st.zatvori(); await rm(dir, { recursive: true, force: true }); } };
 }
 
-test("storno se beleži sa posebnim razlogom i vidi u spisku za ručni upload", async () => {
+test("storno (0.3.14) ide u red za slanje kao PDF, ne u spisak za ručni upload", async () => {
   const o = await okruzenje();
   try {
     await cp(join(FIXTURES, "storno.pdf"), join(o.izvor, "Fak.storno-1.pdf"));
     await o.ciklus();
-    const lista = o.st.stornaZaRucniUpload();
-    assert.equal(lista.length, 1, "storno nije u spisku za ručni upload");
-    assert.match(lista[0].putanja, /Fak\.storno-1\.pdf$/);
+    assert.equal(o.st.stornaZaRucniUpload().length, 0, "storno je ostao za ručni upload");
+    const red = o.st.zaSlanje({ limit: 50, lokalniDatum: "2099-01-01" });
+    assert.equal(red.length, 1, "storno nije u redu za slanje");
+    assert.equal(JSON.parse(Buffer.from(red[0].telo).toString("utf8")).kind, "storno");
   } finally {
     await o.zatvori();
   }

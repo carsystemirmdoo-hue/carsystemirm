@@ -20,3 +20,4 @@ export * from "./backup";
 export * from "./base-prices";
 export * from "./stock";
 export * from "./sales-tools";
+export * from "./procurement";

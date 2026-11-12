@@ -3,14 +3,15 @@ import { headers } from "next/headers";
 import { notFound } from "next/navigation";
 import { CrumbLabel } from "@/components/portal/Breadcrumbs";
 import { requireCapability } from "@/lib/authz/session";
-import { buildOrderEmail, orderEmailRecipients } from "@/lib/ordering/order-email";
+import { buildOrderEmail, mailConfig, orderEmailRecipients } from "@/lib/ordering/order-email";
 import { loadOrderRequest } from "@/lib/ordering/ordering-service";
+import { SendMailButton } from "./SendMailButton";
 
 export const dynamic = "force-dynamic";
 
 /**
  * Pregled maila o porudžbini (2026-11-11). Ovako bi izgledao mail koji dobijaju
- * komercijalista kupca i kancelarija. Slanje još nije uključeno.
+ * komercijalista kupca i kancelarija; dugme šalje isti mejl odmah (proba, ponovno slanje).
  */
 export default async function OrderEmailPreview({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
@@ -21,6 +22,7 @@ export default async function OrderEmailPreview({ params }: { params: Promise<{ 
   const base = `${h.get("x-forwarded-proto") ?? "https"}://${h.get("host") ?? "carsystemirm.com"}`;
   const mail = buildOrderEmail(o, base);
   const to = await orderEmailRecipients(o.customerId);
+  const cfg = mailConfig();
 
   return (
     <>
@@ -33,7 +35,14 @@ export default async function OrderEmailPreview({ params }: { params: Promise<{ 
         <div className="pn-head">
           <div>
             <h1 className="pn-title">Pregled maila · {o.orderNumber ?? o.requestNumber}</h1>
-            <p className="pn-lead">Ovako izgleda mail koji dobijaju komercijalista kupca i kancelarija kada kupac pošalje porudžbinu. Slanje još nije uključeno.</p>
+            <p className="pn-lead">
+              Ovako izgleda mail koji dobijaju komercijalista kupca i kancelarija kada kupac pošalje porudžbinu.{" "}
+              {!cfg.configured
+                ? "Slanje još nije podešeno na serveru (Gmail nalog i lozinka za aplikacije)."
+                : cfg.automatic
+                  ? "Šalje se automatski posle svake nove porudžbine."
+                  : "Automatsko slanje je isključeno; dugme šalje ovaj mejl odmah."}
+            </p>
           </div>
         </div>
         <section className="portal-panel mail-meta">
@@ -54,6 +63,7 @@ export default async function OrderEmailPreview({ params }: { params: Promise<{ 
             </div>
           </dl>
         </section>
+        <SendMailButton orderId={o.id} disabled={!cfg.configured} />
         <iframe className="mail-frame" title="Pregled maila" srcDoc={mail.html} sandbox="allow-popups allow-popups-to-escape-sandbox" />
       </div>
     </>

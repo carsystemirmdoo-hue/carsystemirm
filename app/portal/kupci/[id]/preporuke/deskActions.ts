@@ -1,5 +1,7 @@
 "use server";
 
+import { after } from "next/server";
+import { sendOrderEmailIfEnabled } from "@/lib/ordering/order-email";
 import { revalidatePath } from "next/cache";
 import { requireCapability } from "@/lib/authz/session";
 import { addCallNote, completeFollowUp, CustomerDeskError, saveCustomerContact } from "@/lib/sales-tools/customer-desk-service";
@@ -84,6 +86,7 @@ export async function submitRepOrderAction(input: { customerId: string; idempote
       note: input.note ? String(input.note) : null,
       contactPhone: input.contactPhone ? String(input.contactPhone) : null,
     });
+    if (!res.existing) after(() => sendOrderEmailIfEnabled(res.orderId));
     revalidate(customerId);
     revalidatePath("/portal/zahtevi");
     return { ok: true as const, orderId: res.orderId, requestNumber: res.requestNumber };

@@ -1102,6 +1102,15 @@ export async function countOrderRequestsByState(viewer: PortalUser, query?: stri
   return Object.fromEntries(keys.map((k) => [k, Number(row?.[k] ?? 0)])) as Record<OrderStateKey, number>;
 }
 
+/**
+ * Porudžbina za mejl kancelariji (2026-11-12): server sam šalje mejl posle slanja porudžbine, pa nema
+ * prijavljenog zaposlenog čiji bi se opseg primenio. Poziva se SAMO iz `sendOrderEmail`.
+ */
+export async function loadOrderForMail(orderId: string): Promise<OrderDetail | null> {
+  if (!/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(orderId)) return null;
+  return loadOrder(sql`o.id = ${orderId}::uuid`);
+}
+
 export async function loadOrderRequest(viewer: PortalUser, orderId: string): Promise<OrderDetail | null> {
   if (!/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(orderId)) return null;
   const scope = await resolveLedgerScope(viewer);

@@ -1,11 +1,13 @@
 import "server-only";
 import { sql } from "drizzle-orm";
 import { getDb } from "@/db/client";
+import { AUDIT_ACTIONS, recordAudit } from "@/lib/audit/record";
+import { isAddress, sendMail, SmtpError } from "@/lib/mail/smtp.mjs";
 import { amount, dmyTime, quantity } from "@/lib/ordering/panelFormat.mjs";
-import type { OrderDetail } from "@/lib/ordering/ordering-service";
+import { loadOrderForMail, type OrderDetail } from "@/lib/ordering/ordering-service";
 
 /**
- * Mail o novoj porudžbini (2026-11-11, nacrt za pregled — slanje još NIJE uključeno).
+ * Mail o novoj porudžbini (2026-11-11 pregled; 2026-11-12 slanje preko firminog Gmail naloga).
  *
  * Ide komercijalisti kupca i kancelariji (Tamara). U mailu je kratak pregled i dugme
  * „Odštampaj porudžbinu“ koje otvara samo list porudžbine (A4) i odmah pokreće štampu —
@@ -104,4 +106,94 @@ export function buildOrderEmail(o: OrderDetail, baseUrl: string) {
   ].join("\n");
 
   return { subject, html, text, printUrl };
+}
+
+/* =========================================================================
+ * Slanje (2026-11-12)
+ * ====================================================================== */
+
+/**
+ * Gmail firme (carsystemirmdoo@gmail.com) sa LOZINKOM ZA APLIKACIJE — besplatno, bez servisa
+ * treće strane. Promenljive na serveru (Vercel, Production):
+ *   SMTP_USER       — nalog sa kog se šalje (npr. carsystemirmdoo@gmail.com)
+ *   SMTP_PASSWORD   — lozinka za aplikacije (16 slova; razmaci se zanemaruju)
+ *   ORDER_EMAILS=1  — automatsko slanje posle svake nove porudžbine (bez nje samo ručno dugme)
+ * Opciono: SMTP_HOST (smtp.gmail.com), SMTP_PORT (465), MAIL_FROM_NAME, PUBLIC_BASE_URL.
+ */
+export function mailConfig() {
+  const user = (process.env.SMTP_USER ?? "").trim();
+  const pass = (process.env.SMTP_PASSWORD ?? "").replace(/\s+/g, "");
+  return {
+    configured: Boolean(user && pass && isAddress(user)),
+    automatic: process.env.ORDER_EMAILS === "1",
+    user,
+    pass,
+    host: (process.env.SMTP_HOST ?? "smtp.gmail.com").trim(),
+    port: Number(process.env.SMTP_PORT ?? 465) || 465,
+    fromName: (process.env.MAIL_FROM_NAME ?? "Carsystem portal").replace(/[\r\n]/g, " ").slice(0, 60),
+  };
+}
+
+export function publicBaseUrl() {
+  return (process.env.PUBLIC_BASE_URL || process.env.AUTH_URL || "https://carsystemirm.com").replace(/\/$/, "");
+}
+
+export type OrderEmailResult = { ok: boolean; sent: number; text: string };
+
+const SYSTEM_ACTOR = { kind: "system" as const, name: "Portal", role: "sistem" };
+
+/**
+ * Šalje mejl o porudžbini komercijalisti kupca i kancelariji. Nikad ne baca grešku: ishod se vraća
+ * i beleži u Aktivnosti (bez adresa, lozinke i sadržaja porudžbine).
+ */
+export async function sendOrderEmail(
+  orderId: string,
+  opts: { actor?: { id: string; name: string; role: string } | null; reason: "automatski" | "rucno" },
+): Promise<OrderEmailResult> {
+  const cfg = mailConfig();
+  if (!cfg.configured) return { ok: false, sent: 0, text: "Slanje mejla nije podešeno (SMTP_USER i SMTP_PASSWORD na serveru)." };
+  const o = await loadOrderForMail(orderId);
+  if (!o) return { ok: false, sent: 0, text: "Porudžbina ne postoji." };
+  const recipients = await orderEmailRecipients(o.customerId);
+  const to = [...new Set(recipients.map((r) => (r.email ?? "").trim().toLowerCase()).filter(isAddress))];
+  const actor = opts.actor ? { id: opts.actor.id, name: opts.actor.name, role: opts.actor.role } : SYSTEM_ACTOR;
+  const label = o.orderNumber ?? o.requestNumber;
+  if (!to.length) return { ok: false, sent: 0, text: "Nema nijedne adrese primaoca." };
+  const mail = buildOrderEmail(o, publicBaseUrl());
+  try {
+    await sendMail(
+      { host: cfg.host, port: cfg.port, secure: cfg.port === 465, user: cfg.user, pass: cfg.pass },
+      { from: cfg.user, fromName: cfg.fromName, to, subject: mail.subject, html: mail.html, text: mail.text },
+    );
+    await recordAudit({
+      actor,
+      action: AUDIT_ACTIONS.orderEmailSent,
+      entityType: "Zahtev za porudžbinu",
+      entityId: o.id,
+      entityLabel: label,
+      after: { primalaca: to.length, nacin: opts.reason },
+      reason: null,
+    }).catch(() => undefined);
+    return { ok: true, sent: to.length, text: `Mejl je poslat (${to.length} ${to.length === 1 ? "primalac" : "primaoca"}).` };
+  } catch (error) {
+    const code = error instanceof SmtpError ? error.code : "nepoznato";
+    await recordAudit({
+      actor,
+      action: AUDIT_ACTIONS.orderEmailFailed,
+      entityType: "Zahtev za porudžbinu",
+      entityId: o.id,
+      entityLabel: label,
+      after: { kod: code, nacin: opts.reason },
+      reason: null,
+    }).catch(() => undefined);
+    const why = code === "auth" ? "Gmail je odbio prijavu — proverite lozinku za aplikacije." : code === "rcpt" ? "Gmail je odbio adresu primaoca." : "Veza sa Gmail-om nije uspela.";
+    return { ok: false, sent: 0, text: `Mejl nije poslat. ${why}` };
+  }
+}
+
+/** Posle nove porudžbine: automatski, samo kada je uključeno (ORDER_EMAILS=1) i podešeno. */
+export async function sendOrderEmailIfEnabled(orderId: string) {
+  const cfg = mailConfig();
+  if (!cfg.automatic || !cfg.configured) return;
+  await sendOrderEmail(orderId, { reason: "automatski" }).catch(() => undefined);
 }

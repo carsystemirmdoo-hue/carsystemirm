@@ -10808,6 +10808,7 @@ a.portal-metric:hover { border-color: var(--p-line-strong); }
 .rr-approved-list > summary span { color: var(--p-muted); font-size: 13px; }
 
 /* Pregled maila porudžbine (2026-11-11). */
+.mail-send { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; margin: 0 0 14px; }
 .mail-meta dl { display: grid; gap: 8px; margin: 0; padding: 16px 20px; }
 .mail-meta dl > div { display: grid; grid-template-columns: 90px 1fr; gap: 12px; }
 .mail-meta dt { color: var(--p-muted); font-size: 13px; }

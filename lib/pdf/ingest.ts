@@ -365,7 +365,7 @@ export async function ingestParsedDocument(
         .where(
           and(
             eq(sourceDocuments.issuerCode, input.issuerCode),
-            eq(sourceDocuments.businessDocumentType, "faktura"),
+            eq(sourceDocuments.businessDocumentType, postedKindOf(parsed.documentKind)),
             eq(sourceDocuments.businessDocumentNumber, docNumber),
             ne(sourceDocuments.revisionStatus, "superseded"),
           ),
@@ -386,7 +386,7 @@ export async function ingestParsedDocument(
         pageCount: parsed.pageCount,
         lineCount: parsed.lines.length,
         issuerCode: input.issuerCode,
-        businessDocumentType: parsed.documentKind as "faktura" | "nepoznato",
+        businessDocumentType: parsed.documentKind as "faktura" | "knjizno_odobrenje" | "nepoznato",
         businessDocumentNumber: docNumber,
         externalPartnerCode: code,
         documentDate: parsed.header.documentDate.value,
@@ -569,6 +569,7 @@ export async function ingestParsedDocument(
        */
       const postojeca = await existingInvoiceFor(tx, {
         issuerCode: input.issuerCode,
+        kind: postedKindOf(parsed.documentKind),
         number: docNumber!,
         year: Number((parsed.header.documentDate.value ?? "0000").slice(0, 4)),
       });
@@ -646,7 +647,7 @@ export async function ingestParsedDocument(
         .where(
           and(
             eq(invoices.companyId, input.issuerCode),
-            eq(invoices.documentKind, "faktura"),
+            eq(invoices.documentKind, postedKindOf(parsed.documentKind)),
             eq(invoices.number, docNumber),
             eq(invoices.year, Number((parsed.header.documentDate.value ?? "0000").slice(0, 4))),
           ),
@@ -678,7 +679,7 @@ type Tx = Parameters<Parameters<ReturnType<typeof getDb>["transaction"]>[0]>[0];
  */
 async function existingInvoiceFor(
   tx: Tx,
-  key: { issuerCode: string; number: string; year: number },
+  key: { issuerCode: string; kind: PostedKind; number: string; year: number },
 ): Promise<string | null> {
   const rows = await tx
     .select({ id: invoices.id })
@@ -686,7 +687,7 @@ async function existingInvoiceFor(
     .where(
       and(
         eq(invoices.companyId, key.issuerCode),
-        eq(invoices.documentKind, "faktura"),
+        eq(invoices.documentKind, key.kind),
         eq(invoices.number, key.number),
         eq(invoices.year, key.year),
       ),
@@ -763,8 +764,11 @@ async function postSourceDocument(
    * isti poslovni dokument. Ograničenje `invoices_identity_key` to sprečava i
    * u bazi; ovde postoji da poruka bude razumljiva.
    */
+  const kind = postedKindOf(doc.businessDocumentType);
+  const sign = signOf(kind);
   const zauzeta = await existingInvoiceFor(tx, {
     issuerCode: doc.issuerCode,
+    kind,
     number: doc.businessDocumentNumber,
     year: Number(doc.documentDate.slice(0, 4)),
   });
@@ -785,16 +789,16 @@ async function postSourceDocument(
     throw new IngestError("Dokument bez stavki se ne knjiži.", "no_lines");
   }
 
-  const net = lines.reduce((sum, l) => sum + netOf(l), 0);
-  const tax = lines.reduce((sum, l) => sum + Number(l.taxAmount ?? 0), 0);
-  const gross = lines.reduce((sum, l) => sum + Number(l.grossAmount ?? 0), 0);
+  const net = sign * lines.reduce((sum, l) => sum + netOf(l), 0);
+  const tax = sign * lines.reduce((sum, l) => sum + Number(l.taxAmount ?? 0), 0);
+  const gross = sign * lines.reduce((sum, l) => sum + Number(l.grossAmount ?? 0), 0);
 
   const [invoice] = await tx
     .insert(invoices)
     .values({
       companyId: doc.issuerCode,
-      documentKind: "faktura",
-      sourceDocumentType: "Račun-otpremnica",
+      documentKind: kind,
+      sourceDocumentType: kind === "knjizno_odobrenje" ? "Dokument o smanjenju" : "Račun-otpremnica",
       number: doc.businessDocumentNumber,
       year: Number(doc.documentDate.slice(0, 4)),
       issuedOn: doc.documentDate,
@@ -834,11 +838,11 @@ async function postSourceDocument(
       articleId: await ensureArticle(tx, line),
       articleCode: line.articleCode ?? "",
       description: line.description,
-      quantity: String(line.quantity ?? 0),
+      quantity: String(sign * Number(line.quantity ?? 0)),
       unitPrice: String(line.unitPrice ?? 0),
       discountPercent: String(line.discountPercent ?? 0),
       taxPercent: String(line.taxPercent ?? 0),
-      lineAmount: String(round2(netOf(line))),
+      lineAmount: String(round2(sign * netOf(line))),
     });
   }
 
@@ -864,8 +868,10 @@ async function postSourceDocument(
     tx,
   );
 
-  // Storno koje je stiglo pre originala sada se ocenjuje (docs/b2b/48).
-  await settleWaitingReversals(tx, { issuerCode: doc.issuerCode, number: doc.businessDocumentNumber }, actor);
+  // Storno koje je stiglo pre originala sada se ocenjuje (docs/b2b/48). Storno poništava samo fakturu.
+  if (kind === "faktura") {
+    await settleWaitingReversals(tx, { issuerCode: doc.issuerCode, number: doc.businessDocumentNumber }, actor);
+  }
 
   return invoice.id;
 }
@@ -909,6 +915,27 @@ async function ensureArticle(
  */
 function netOf(line: { grossAmount: string | null; taxAmount: string | null }): number {
   return Number(line.grossAmount ?? 0) - Number(line.taxAmount ?? 0);
+}
+
+/**
+ * Vrsta pod kojom se izvorni dokument knjiži (2026-11-12).
+ *
+ * Do sada je postojala samo faktura. Knjižno odobrenje je drugi dokument koji se knjiži: isti
+ * put, ista pravila (original, bez pregleda, mapiran kupac), ali sopstvena vrsta i predznak.
+ * Sve ostalo (storno, nepoznato) se ionako ne knjiži — `validationStatus` nije `valid`.
+ */
+type PostedKind = "faktura" | "knjizno_odobrenje";
+function postedKindOf(kind: string | null | undefined): PostedKind {
+  return kind === "knjizno_odobrenje" ? "knjizno_odobrenje" : "faktura";
+}
+
+/**
+ * Knjižno odobrenje SMANJUJE promet: odštampani iznosi su pozitivni, u `invoices` ulaze sa
+ * minusom (iznos i količina), kao i svaki drugi negativni dokument — `summarize` ga po vrsti
+ * svrstava u korekcije vrednosti, ne u prodaju ni u povrat robe.
+ */
+function signOf(kind: PostedKind): 1 | -1 {
+  return kind === "knjizno_odobrenje" ? -1 : 1;
 }
 
 /**
@@ -1300,6 +1327,7 @@ async function loadDocument(tx: Tx, id: string) {
       fileHash: sourceDocuments.fileHash,
       issuerCode: sourceDocuments.issuerCode,
       businessDocumentNumber: sourceDocuments.businessDocumentNumber,
+      businessDocumentType: sourceDocuments.businessDocumentType,
       externalPartnerCode: sourceDocuments.externalPartnerCode,
       validationStatus: sourceDocuments.validationStatus,
       invoiceId: sourceDocuments.invoiceId,
@@ -1342,6 +1370,7 @@ async function retargetInvoice(
   actor: IngestActor,
 ): Promise<void> {
   const doc = await loadDocument(tx, sourceDocumentId);
+  const sign = signOf(postedKindOf(doc.businessDocumentType));
   const lines = await tx
     .select()
     .from(sourceDocumentLines)
@@ -1359,20 +1388,20 @@ async function retargetInvoice(
       articleId: await ensureArticle(tx, line),
       articleCode: line.articleCode ?? "",
       description: line.description,
-      quantity: String(line.quantity ?? 0),
+      quantity: String(sign * Number(line.quantity ?? 0)),
       unitPrice: String(line.unitPrice ?? 0),
       discountPercent: String(line.discountPercent ?? 0),
       taxPercent: String(line.taxPercent ?? 0),
-      lineAmount: String(round2(netOf(line))),
+      lineAmount: String(round2(sign * netOf(line))),
     });
   }
 
   await tx
     .update(invoices)
     .set({
-      netAmount: String(round2(lines.reduce((sum, l) => sum + netOf(l), 0))),
-      taxAmount: String(round2(lines.reduce((sum, l) => sum + Number(l.taxAmount ?? 0), 0))),
-      totalAmount: String(round2(lines.reduce((sum, l) => sum + Number(l.grossAmount ?? 0), 0))),
+      netAmount: String(round2(sign * lines.reduce((sum, l) => sum + netOf(l), 0))),
+      taxAmount: String(round2(sign * lines.reduce((sum, l) => sum + Number(l.taxAmount ?? 0), 0))),
+      totalAmount: String(round2(sign * lines.reduce((sum, l) => sum + Number(l.grossAmount ?? 0), 0))),
 
       /*
        * Poreklo i valuta prelaze ZAJEDNO sa iznosima.

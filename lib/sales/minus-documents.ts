@@ -23,6 +23,8 @@ export type MinusDocument = {
   partnerCode: string | null;
   gross: number;
   lineCount: number;
+  /** Knjižno odobrenje proknjiženo kao umanjenje prometa (0.3.14 / 2026-11-12). */
+  posted: boolean;
   /** Storno: stanje veze sa originalom; `null` za odobrenje ili storno bez veze. */
   reversal: { status: "applied" | "waiting_original" | "review"; originalNumber: string } | null;
 };
@@ -36,13 +38,14 @@ export async function loadMinusDocuments(user: PortalUser, filter: { from: strin
   const rows = await getDb().execute<{
     id: string; kind: "storno" | "knjizno_odobrenje"; number: string | null; date: string | null;
     customer_id: string | null; customer_name: string | null; partner_code: string | null;
-    gross: string | null; lines: number; r_status: "applied" | "waiting_original" | "review" | null; r_original: string | null;
+    gross: string | null; lines: number; posted: boolean; r_status: "applied" | "waiting_original" | "review" | null; r_original: string | null;
   }>(sql`
     SELECT sd.id, sd.business_document_type::text AS kind, sd.business_document_number AS number,
            sd.document_date::text AS date, c.id AS customer_id, c.name AS customer_name,
            sd.external_partner_code AS partner_code,
            (SELECT sum(nullif(l.gross_amount, '')::numeric) FROM source_document_lines l WHERE l.source_document_id = sd.id)::text AS gross,
            (SELECT count(*)::int FROM source_document_lines l WHERE l.source_document_id = sd.id) AS lines,
+           (sd.invoice_id IS NOT NULL) AS posted,
            r.status::text AS r_status, r.original_number AS r_original
       FROM source_documents sd
       LEFT JOIN customer_external_identifiers x
@@ -69,6 +72,7 @@ export async function loadMinusDocuments(user: PortalUser, filter: { from: strin
     // Knjižno odobrenje se štampa sa pozitivnim iznosom; za kupca je to umanjenje.
     gross: r.kind === "knjizno_odobrenje" ? -Math.abs(Number(r.gross ?? 0)) : Number(r.gross ?? 0),
     lineCount: r.lines,
+    posted: Boolean(r.posted),
     reversal: r.r_status && r.r_original ? { status: r.r_status, originalNumber: r.r_original } : null,
   }));
 }

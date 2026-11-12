@@ -112,7 +112,8 @@ export default async function ReturnsPage({
             <h2>Storna i knjižna odobrenja ({minusDocs.length})</h2>
             <p>
               Storno ({storna.length}): kada je primenjeno, originalna faktura ne ulazi u promet. Knjižno odobrenje ({odobrenja.length}):
-              umanjenje za kupca; prikazano je ovde, a u promet po artiklima ne ulazi.
+              kada je pročitano bez greške i kupac je povezan, umanjuje promet kupca (kao korekcija vrednosti, ne po artiklima).
+              Oba stižu sama sa kancelarijskog računara; ručno otpremanje na Importima i dalje radi.
               {odobrenja.length ? ` Zbir odobrenja: ${money(odobrenja.reduce((a, d) => a + d.gross, 0))} RSD sa PDV-om.` : ""}
             </p>
           </div>
@@ -144,13 +145,15 @@ export default async function ReturnsPage({
                       ? d.reversal
                         ? `poništava ${d.reversal.originalNumber} · ${REVERSAL[d.reversal.status] ?? d.reversal.status}`
                         : "bez navedenog originala — ručni pregled"
-                      : `${d.lineCount} ${d.lineCount === 1 ? "stavka" : "stavke"}`}
+                      : d.posted
+                        ? "umanjuje promet kupca"
+                        : "čeka pregled — ne umanjuje promet"}
                   </td>
                 </tr>
               ))}
               {minusDocs.length === 0 ? (
                 <tr>
-                  <td colSpan={6}>Nema storna ni knjižnih odobrenja u izabranom periodu. Uvoze se kao PDF na strani Importi.</td>
+                  <td colSpan={6}>Nema storna ni knjižnih odobrenja u izabranom periodu. Stižu sa kancelarijskog računara ili kao PDF na strani Importi.</td>
                 </tr>
               ) : null}
             </tbody>

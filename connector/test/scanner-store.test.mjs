@@ -136,6 +136,13 @@ const POSLEDICE_PRAVILA = [
   // Windows kopija zadržava razmak iza oznake
   ["FAKTURA 123 - Copy.pdf", true],
   ["FAKTURA 123 (2).pdf", true],
+  // 0.3.14: knjižno odobrenje kako ga kancelarija imenuje
+  ["k.o ac pejić 27.11.25.pdf", true],
+  ["k.o po osnovu vraćene neprodate robe tani 023 ilijevski 27.11.25.pdf", true],
+  ["Knjizno odobrenje 5.pdf", true],
+  ["ko 5.pdf", false],
+  ["kokpit.pdf", false],
+  ["ulaz robe vosschemie 28.7.25  (vpk18).pdf", false],
 ];
 
 test("naziv: svi prihvaćeni primeri iz poslovnog pravila", () => {

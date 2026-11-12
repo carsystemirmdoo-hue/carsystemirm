@@ -119,6 +119,12 @@ const ODBIJEN_SADRZAJ = new Set([
   "line_arithmetic_mismatch",
   "totals_mismatch",
   "semantic_hash_mismatch",
+  // 0.3.14: storno / knjižno odobrenje kao PDF.
+  "document_contract_invalid",
+  "document_kind_mismatch",
+  "document_too_large",
+  "document_invalid",
+  "document_hash_mismatch",
 ]);
 
 /**

@@ -475,6 +475,22 @@ function napraviApi(db, putanja) {
       });
     },
 
+    /**
+     * Briše NEPODRŽANE redove sa datim razlozima, da ih sledeći popis ponovo pročita (0.3.14).
+     * Dira samo stanje `nepodrzano`: ništa poslato, potvrđeno ni u redu za slanje se ne briše.
+     * Vraća broj obrisanih redova.
+     */
+    zaboraviNepodrzano(razlozi) {
+      if (!Array.isArray(razlozi) || razlozi.length === 0) return 0;
+      return uTransakciji(() => {
+        const mesta = razlozi.map(() => "?").join(",");
+        const rez = db
+          .prepare(`DELETE FROM stavke WHERE stanje = ? AND razlog IN (${mesta})`)
+          .run(STANJA.NEPODRZANO, ...razlozi);
+        return Number(rez.changes);
+      });
+    },
+
     /** Stavka koja se lokalno ne može poslati (nečitljiva, nepodržana). */
     dodajNepodrzano({ sourceHash, putanja: p, velicina, razlog }) {
       const t = sada();

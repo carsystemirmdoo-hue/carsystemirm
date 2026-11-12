@@ -1,5 +1,8 @@
 import { canonicalFromParsedDocument } from "../../lib/sync/contract/fromParsedDocument.mjs";
 import { validateCanonicalInvoice } from "../../lib/sync/contract/validate.mjs";
+import {
+  buildDeviceDocumentBody, DEVICE_DOCUMENT_KINDS, DEVICE_DOCUMENT_PATH, isDeviceDocumentBody, MAX_DEVICE_PDF_BYTES,
+} from "../../lib/sync/contract/deviceDocument.mjs";
 import { parseBiznisoftPdf } from "../../lib/pdf/parseDocument.js";
 import { posaljiPotpisano } from "./client.mjs";
 import { odlukaZaOdgovor, STANJA, ZAUSTAVLJA_CIKLUS } from "./outcomes.mjs";
@@ -9,8 +12,22 @@ import {
 import { sledeciPokusajPosleNeuspeha } from "./schedule.mjs";
 import { cekanjeZa, PODRAZUMEVANA_POLITIKA, vrstaPrivremenog } from "./retry.mjs";
 
-/** Razlog za storno koje operater otprema ručno na /portal/importi. */
+/**
+ * Razlog za storno koje operater otprema ručno na /portal/importi. Od 0.3.14 se storno šalje
+ * sam (`/api/sync/document`); razlog ostaje samo za stare redove i za PDF veći od granice.
+ */
 export const RAZLOG_STORNO = "storno_rucni_upload";
+/** Storno ili knjižno odobrenje veće od granice tela zahteva — otprema se ručno. */
+export const RAZLOG_PDF_PREVELIK = "pdf_prevelik_rucni_upload";
+
+/**
+ * Jednokratno pri prelasku na 0.3.14: redovi koje je starija verzija ostavila po strani
+ * (storno za ručni upload, nepodržano knjižno odobrenje) brišu se iz lokalnog reda, pa ih
+ * sledeći popis ponovo čita i šalje novim putem. `posaljiOdDatuma` i dalje važi — arhiva se
+ * ne šalje. Ako je kancelarija isti fajl već otpremila ručno, server vraća `duplicate_file`.
+ */
+const META_PONOVO_PDF = "ponovo_procenjeno_pdf_dokumenti_0314";
+const RAZLOZI_ZA_PONOVNU_PROCENU = [RAZLOG_STORNO, "parser:unsupported_requires_sample"];
 /** Dokument izdat pre `posaljiOdDatuma`: poznat, nikad poslat. */
 export const RAZLOG_PRE_POCETKA = "pre_pocetka_slanja";
 /**
@@ -35,8 +52,9 @@ const spavaj = (ms) => new Promise((r) => setTimeout(r, ms));
  * ijedan bajt pošalje; da je obrnuto, pad posle uspešnog slanja a pre upisa
  * ostavio bi dokument koji je server knjižio a konektor ne zna za njega.
  *
- * PDF i sirovi izdvojeni tekst ostaju na računaru. Kroz mrežu ide isključivo
- * canonical payload — isti oblik koji već postoji od P1.
+ * Za fakturu PDF i sirovi izdvojeni tekst ostaju na računaru; kroz mrežu ide
+ * canonical payload. Storno i knjižno odobrenje (0.3.14) putuju kao PDF — isti
+ * fajl koji je kancelarija do tada ručno otpremala na /portal/importi.
  */
 
 /**
@@ -108,6 +126,11 @@ export async function skenirajURed({
   citac = { zaOtisak: procitajZaOtisak, stabilno: procitajStabilno },
 }) {
   const { koren } = await proveriIzvor(konfiguracija.izvorniFolder);
+  if (!store.citajMetu(META_PONOVO_PDF)) {
+    const vraceno = store.zaboraviNepodrzano(RAZLOZI_ZA_PONOVNU_PROCENU);
+    store.postaviMetu(META_PONOVO_PDF, new Date().toISOString());
+    if (vraceno > 0) await log?.zapisi("info", "ponovna_procena", { vraceno });
+  }
   const { kandidati, preskoceno, folderi } = await nadjiKandidate(koren, granice);
 
   /*
@@ -281,6 +304,33 @@ export async function skenirajURed({
       continue;
     }
 
+    /*
+     * Storno i knjižno odobrenje (0.3.14): šalje se SAM PDF, server ga čita istim čitačem kao
+     * ručni upload i odlučuje (storno → veza sa originalom; odobrenje → umanjenje prometa ili
+     * pregled). Canonical ugovor za ove vrste ne postoji, pa ovde ne prolaze kroz njega.
+     */
+    if (DEVICE_DOCUMENT_KINDS.includes(parsed.documentKind)) {
+      if (citanje.bajtovi.byteLength > MAX_DEVICE_PDF_BYTES) {
+        store.dodajNepodrzano({
+          sourceHash: citanje.sourceHash,
+          putanja: k.putanja,
+          velicina: citanje.velicina,
+          razlog: RAZLOG_PDF_PREVELIK,
+        });
+        ubroji(k, "nepodrzano");
+        continue;
+      }
+      store.dodajSpremno({
+        sourceHash: citanje.sourceHash,
+        putanja: k.putanja,
+        velicina: citanje.velicina,
+        telo: buildDeviceDocumentBody({ kind: parsed.documentKind, bytes: citanje.bajtovi }),
+        semanticHash: null,
+      });
+      ubroji(k, "novo");
+      continue;
+    }
+
     if (parsed.validationStatus !== "valid") {
       /*
        * Nepodržan oblik ostaje nepodržan i sa konektorom.
@@ -440,7 +490,8 @@ export async function posaljiIzReda(ulaz) {
     const odgovor = await posaljiPotpisano({
       origin: konfiguracija.serverOrigin,
       zastitaPristupa: konfiguracija.vercelZastita ?? null,
-      path: "/api/sync/ingest",
+      // Storno / knjižno odobrenje kao PDF ide na svoj ulaz; faktura kao canonical JSON.
+      path: isDeviceDocumentBody(stavka.telo) ? DEVICE_DOCUMENT_PATH : "/api/sync/ingest",
       bodyBytes: new Uint8Array(stavka.telo),
       deviceCode: konfiguracija.deviceCode,
       keyId: konfiguracija.keyId,

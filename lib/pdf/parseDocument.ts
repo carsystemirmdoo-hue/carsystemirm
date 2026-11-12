@@ -284,20 +284,29 @@ export async function parseBiznisoftPdf(bytes: Uint8Array): Promise<ParsedDocume
   const totals = validateTotals(lines, header.printedGrossTotal.value);
 
   /*
-   * Knjižno odobrenje (2026-11-11): prepoznaje se i čita (kupac, broj, iznos), ali se NE
-   * knjiži kao faktura — knjiženje bi ga upisalo kao prodaju. Ostaje izvorni dokument koji
-   * ekran „Povrati i minus fakture“ prikazuje uz kupca i iznos.
+   * Knjižno odobrenje („Dokument o smanjenju“, 2026-11-12, odluka vlasnika): kada je pročitano
+   * čisto (aritmetika stavki, zbir, broj, kupac, datum), važi kao dokument koji SMANJUJE promet
+   * kupca. Knjiži se kao vrsta `knjizno_odobrenje` sa negativnim iznosima (`postSourceDocument`),
+   * nikad kao prodaja: preporuke i nabavka čitaju samo `faktura`. Odštampani iznosi su
+   * pozitivni; predznak dodaje knjiženje, ne čitač.
    */
   if (kind.kind === "knjizno_odobrenje") {
+    const missing = (["documentNumber", "partnerCode", "documentDate"] as const).filter((k) => header[k].status !== "ok");
+    const positive = lines.every((l) => (l.grossAmount ?? 0) >= 0 && (l.quantity ?? 0) >= 0);
+    const clean = totals.ok && broken.length === 0 && missing.length === 0 && positive;
     return {
       ...base,
       lines,
       totals,
       documentKind: "knjizno_odobrenje",
-      validationStatus: "unsupported_requires_sample",
-      validationDetail: totals.ok
-        ? "Knjižno odobrenje: prepoznato i pročitano; prikazuje se u povratima, ne ulazi u promet kao faktura."
-        : "Knjižno odobrenje: prepoznato, ali zbir stavki ne odgovara odštampanom iznosu.",
+      validationStatus: clean ? "valid" : "unsupported_requires_sample",
+      validationDetail: clean
+        ? null
+        : !totals.ok || broken.length > 0
+          ? "Knjižno odobrenje: prepoznato, ali zbir stavki ne odgovara odštampanom iznosu."
+          : missing.length > 0
+            ? `Knjižno odobrenje: nedostaju polja zaglavlja: ${missing.join(", ")}.`
+            : "Knjižno odobrenje sa negativnim stavkama: za taj oblik ne postoji potvrđen uzorak.",
     };
   }
 

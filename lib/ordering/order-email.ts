@@ -136,25 +136,23 @@ export function buildOrderEmail(o: OrderDetail, baseUrl: string, variants: Email
   const chosen = vs.find((v) => v.chosen) ?? null;
   const pct = (p: number | null) => (p === null ? "neto dogovor" : `rabat ${String(p).replace(".", ",")} %`);
   const priceBlock = (l: OrderDetail["lines"][number]) => {
-    const rowsHtml: string[] = [];
-    if (l.listPrice !== null && l.listPrice !== undefined) {
-      rowsHtml.push(`<tr><td style="padding:1px 10px 1px 0;white-space:nowrap;color:#6b6b74;">Cenovnik</td><td style="padding:1px 0;text-align:right;white-space:nowrap;">${amount(l.listPrice)} / ${esc(l.unit)}</td></tr>`);
-    }
+    const row = (label: string, value: string, strong: boolean) =>
+      `<div style="padding:2px 0;${strong ? "color:#111;font-weight:700;" : "color:#55555e;"}"><span style="${strong ? "" : "color:#6b6b74;"}">${label}</span> — ${value}</div>`;
+    const out: string[] = [];
+    if (l.listPrice !== null && l.listPrice !== undefined) out.push(row("Cenovnik", `${amount(l.listPrice)} / ${esc(l.unit)}`, false));
     for (const v of vs) {
       const x = v.lines.get(l.lineNumber);
       const label = `${esc(v.short)}${v.chosen ? ' <span style="color:#b3141b;">✓</span>' : ""}`;
-      rowsHtml.push(
+      out.push(
         x
-          ? `<tr><td style="padding:1px 10px 1px 0;white-space:nowrap;${v.chosen ? "color:#111;font-weight:700;" : "color:#6b6b74;"}">${label}</td><td style="padding:1px 0;text-align:right;white-space:nowrap;${v.chosen ? "color:#111;font-weight:700;" : ""}"><span style="color:#b3141b;">${pct(x.discountPercent)}</span> · ${amount(x.netUnit)} / ${esc(l.unit)}</td></tr>`
-          : `<tr><td style="padding:1px 10px 1px 0;white-space:nowrap;color:#6b6b74;">${label}</td><td style="padding:1px 0;text-align:right;color:#8a5a00;">na upit</td></tr>`,
+          ? row(label, `<span style="color:#b3141b;">${pct(x.discountPercent)}</span> · ${amount(x.netUnit)} / ${esc(l.unit)}`, v.chosen)
+          : row(label, '<span style="color:#8a5a00;">na upit</span>', v.chosen),
       );
     }
     if (!vs.length && l.priceStatus === "cena") {
-      rowsHtml.push(`<tr><td style="padding:1px 10px 1px 0;white-space:nowrap;color:#111;font-weight:700;">Rabat</td><td style="padding:1px 0;text-align:right;"><span style="color:#b3141b;">${pct(l.discountPercent)}</span> · ${amount(l.netPrice)} / ${esc(l.unit)}</td></tr>`);
+      out.push(row("Rabat", `<span style="color:#b3141b;">${pct(l.discountPercent)}</span> · ${amount(l.netPrice)} / ${esc(l.unit)}`, true));
     }
-    return rowsHtml.length
-      ? `<table role="presentation" cellpadding="0" cellspacing="0" style="margin-top:8px;font-size:12px;background:#f6f6f8;border-radius:6px;padding:6px 10px;">${rowsHtml.join("")}</table>`
-      : "";
+    return out.length ? `<div style="margin-top:8px;font-size:12px;line-height:1.45;background:#f6f6f8;border-radius:6px;padding:6px 10px;">${out.join("")}</div>` : "";
   };
   const net = priced.reduce((a, l) => a + (l.lineNet ?? 0), 0);
   const gross = Number(o.grossTotal ?? 0);
@@ -164,17 +162,18 @@ export function buildOrderEmail(o: OrderDetail, baseUrl: string, variants: Email
   const font = "font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;";
   const td = "padding:12px 0;border-bottom:1px solid #ececef;vertical-align:top;font-size:14px;line-height:1.35;";
   const rows = o.lines
-    .map(
-      (l) => `<tr>
-        <td style="${td}">
+    .map((l) => {
+      const block = priceBlock(l);
+      const top = block ? td.replace("border-bottom:1px solid #ececef;", "border-bottom:0;padding-bottom:0;") : td;
+      return `<tr>
+        <td style="${top}">
           <div style="font-weight:600;color:#111;">${esc(l.articleName)}</div>
           <div style="margin-top:3px;font-size:12px;color:#6b6b74;"><span style="font-family:Menlo,Consolas,monospace;">${esc(l.articleCode)}</span>${l.packCount !== null && l.packLabel ? ` · ${l.packCount} × ${esc(l.packLabel)}` : ""}</div>
-          ${priceBlock(l)}
         </td>
-        <td style="${td}text-align:right;white-space:nowrap;padding-left:12px;">${quantity(l.quantity)} ${esc(l.unit)}</td>
-        <td style="${td}text-align:right;white-space:nowrap;padding-left:12px;${l.priceStatus === "cena" ? "" : "color:#8a5a00;"}">${l.priceStatus === "cena" ? amount(l.lineNet) : "na upit"}</td>
-      </tr>`,
-    )
+        <td style="${top}text-align:right;white-space:nowrap;padding-left:12px;">${quantity(l.quantity)} ${esc(l.unit)}</td>
+        <td style="${top}text-align:right;white-space:nowrap;padding-left:12px;${l.priceStatus === "cena" ? "" : "color:#8a5a00;"}">${l.priceStatus === "cena" ? amount(l.lineNet) : "na upit"}</td>
+      </tr>${block ? `<tr><td colspan="3" style="padding:0 0 12px;border-bottom:1px solid #ececef;">${block}</td></tr>` : ""}`;
+    })
     .join("");
 
   const meta = (k: string, v: string) =>

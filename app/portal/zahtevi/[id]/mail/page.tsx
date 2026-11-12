@@ -3,7 +3,7 @@ import { headers } from "next/headers";
 import { notFound } from "next/navigation";
 import { CrumbLabel } from "@/components/portal/Breadcrumbs";
 import { requireCapability } from "@/lib/authz/session";
-import { buildOrderEmail, mailConfig, orderEmailRecipients } from "@/lib/ordering/order-email";
+import { buildOrderEmail, mailConfig, orderEmailRecipients, orderEmailVariants } from "@/lib/ordering/order-email";
 import { loadOrderRequest } from "@/lib/ordering/ordering-service";
 import { SendMailButton } from "./SendMailButton";
 
@@ -20,7 +20,7 @@ export default async function OrderEmailPreview({ params }: { params: Promise<{ 
   if (!o) notFound();
   const h = await headers();
   const base = `${h.get("x-forwarded-proto") ?? "https"}://${h.get("host") ?? "carsystemirm.com"}`;
-  const mail = buildOrderEmail(o, base);
+  const mail = buildOrderEmail(o, base, await orderEmailVariants(o).catch(() => []));
   const to = await orderEmailRecipients(o.customerId);
   const cfg = mailConfig();
 

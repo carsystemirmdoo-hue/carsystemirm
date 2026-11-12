@@ -5,6 +5,10 @@ import { AUDIT_ACTIONS, recordAudit } from "@/lib/audit/record";
 import { isAddress, sendMail, SmtpError } from "@/lib/mail/smtp.mjs";
 import { amount, dmyTime, quantity } from "@/lib/ordering/panelFormat.mjs";
 import { loadOrderForMail, type OrderDetail } from "@/lib/ordering/ordering-service";
+import { lineAmounts } from "@/lib/ordering/orderRules.mjs";
+import { customerPricesByOption } from "@/lib/pricing/customer-price-service";
+import { optionLabel, sortOptions } from "@/lib/pricing/paymentOptions.mjs";
+import { belgradeDate } from "@/lib/recommendations/customerRhythm.mjs";
 
 /**
  * Mail o novoj porudžbini (2026-11-11 pregled; 2026-11-12 slanje preko firminog Gmail naloga).
@@ -38,7 +42,87 @@ export async function orderEmailRecipients(customerId: string): Promise<OrderEma
 const esc = (s: string | null | undefined) =>
   String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]!);
 
-export function buildOrderEmail(o: OrderDetail, baseUrl: string) {
+/**
+ * Cene po opciji plaćanja (vlasnik, 2026-11-12): u mejlu mora da piše rabat po artiklu, i to za OBE
+ * opcije kupca — avans (jači rabat) i odloženo plaćanje (slabiji), da kancelarija vidi obe cene.
+ * Izabrana opcija se čita iz sačuvanih stavki zahteva; ostale odobrene opcije računaju se po
+ * važećim pravilima kupca na dan slanja (ista služba cena kao korpa).
+ */
+export type EmailVariant = {
+  code: string | null;
+  label: string;
+  short: string;
+  chosen: boolean;
+  lines: Map<number, { discountPercent: number | null; netUnit: number; net: number } | null>;
+  totals: { net: number; vat: number; gross: number };
+  onRequest: number;
+};
+
+const shortLabel = (code: string | null) => {
+  if (code === "avans") return "Avans";
+  const m = String(code ?? "").match(/^odlozeno_(\d+)$/);
+  return m ? `Odloženo ${Number(m[1])} d` : "Cena";
+};
+
+export async function orderEmailVariants(o: OrderDetail, onDate = belgradeDate(new Date())): Promise<EmailVariant[]> {
+  const chosenCode = o.paymentOption ?? null;
+  const fromOrder: EmailVariant = { code: chosenCode, label: chosenCode ? optionLabel(chosenCode) : "Cena iz zahteva", short: shortLabel(chosenCode), chosen: true, lines: new Map(), totals: { net: 0, vat: 0, gross: 0 }, onRequest: 0 };
+  for (const l of o.lines) {
+    if (l.priceStatus !== "cena" || l.netPrice === null) {
+      fromOrder.lines.set(l.lineNumber, null);
+      fromOrder.onRequest += 1;
+      continue;
+    }
+    const a = lineAmounts({ quantity: l.quantity, listPrice: l.listPrice, discountPercent: l.discountPercent ?? 0, netPrice: l.netPrice, vatPercent: l.vatPercent ?? 20 });
+    fromOrder.lines.set(l.lineNumber, { discountPercent: l.discountPercent, netUnit: l.netPrice, net: l.lineNet ?? a.net });
+    fromOrder.totals.net += l.lineNet ?? a.net;
+    fromOrder.totals.vat += l.lineVat ?? a.vat;
+  }
+  fromOrder.totals.net = Math.round(fromOrder.totals.net * 100) / 100;
+  fromOrder.totals.vat = Math.round(fromOrder.totals.vat * 100) / 100;
+  fromOrder.totals.gross = Math.round((fromOrder.totals.net + fromOrder.totals.vat) * 100) / 100;
+
+  // Ostale odobrene opcije kupca (npr. izabrao je odloženo — prikaži i avans).
+  let others: EmailVariant[] = [];
+  try {
+    const ids = [...new Set(o.lines.map((l) => l.articleId))];
+    const byOption = await customerPricesByOption(o.customerId, ids, onDate);
+    others = byOption.options
+      .filter((opt) => opt.code !== chosenCode && opt.code !== null)
+      .map((opt) => {
+        const v: EmailVariant = { code: opt.code, label: opt.label, short: shortLabel(opt.code), chosen: false, lines: new Map(), totals: { net: 0, vat: 0, gross: 0 }, onRequest: 0 };
+        for (const l of o.lines) {
+          const p = opt.prices.get(l.articleId);
+          if (!p || p.status !== "cena" || !("netCents" in p) || typeof p.netCents !== "number") {
+            v.lines.set(l.lineNumber, null);
+            v.onRequest += 1;
+            continue;
+          }
+          const netUnit = p.netCents / 100;
+          const base = p.baseCents ? p.baseCents / 100 : null;
+          const a = lineAmounts(
+            base !== null && p.discountPercent !== null
+              ? { quantity: l.quantity, listPrice: base, discountPercent: p.discountPercent, netPrice: netUnit, vatPercent: l.vatPercent ?? 20 }
+              : { quantity: l.quantity, netPrice: netUnit, vatPercent: l.vatPercent ?? 20 },
+          );
+          v.lines.set(l.lineNumber, { discountPercent: p.discountPercent, netUnit, net: a.net });
+          v.totals.net += a.net;
+          v.totals.vat += a.vat;
+        }
+        v.totals.net = Math.round(v.totals.net * 100) / 100;
+        v.totals.vat = Math.round(v.totals.vat * 100) / 100;
+        v.totals.gross = Math.round((v.totals.net + v.totals.vat) * 100) / 100;
+        return v;
+      });
+  } catch {
+    others = []; // cena druge opcije je dodatak; mejl ide i bez nje
+  }
+  const order = sortOptions([...others.map((v) => v.code as string), ...(chosenCode ? [chosenCode] : [])]);
+  const all = [fromOrder, ...others];
+  return chosenCode ? order.map((c) => all.find((v) => v.code === c)!).filter(Boolean) : all;
+}
+
+export function buildOrderEmail(o: OrderDetail, baseUrl: string, variants: EmailVariant[] = []) {
   const base = baseUrl.replace(/\/$/, "");
   const doc = o.orderNumber ?? o.requestNumber;
   const printUrl = `${base}/portal/zahtevi/${o.id}/stampa?stampaj=1`;
@@ -48,6 +132,30 @@ export function buildOrderEmail(o: OrderDetail, baseUrl: string) {
   const subject = `Nova porudžbina ${doc} — ${o.customerName}`;
   // U mejlu datum po našem („12.11.2026. u 14:20“), ne „12/11/2026“.
   const when = dmyTime(o.submittedAt).replace(/^(\d{2})\/(\d{2})\/(\d{4}) /, "$1.$2.$3. u ");
+  const vs = variants.length ? variants : [];
+  const chosen = vs.find((v) => v.chosen) ?? null;
+  const pct = (p: number | null) => (p === null ? "neto dogovor" : `rabat ${String(p).replace(".", ",")} %`);
+  const priceBlock = (l: OrderDetail["lines"][number]) => {
+    const rowsHtml: string[] = [];
+    if (l.listPrice !== null && l.listPrice !== undefined) {
+      rowsHtml.push(`<tr><td style="padding:1px 10px 1px 0;white-space:nowrap;color:#6b6b74;">Cenovnik</td><td style="padding:1px 0;text-align:right;white-space:nowrap;">${amount(l.listPrice)} / ${esc(l.unit)}</td></tr>`);
+    }
+    for (const v of vs) {
+      const x = v.lines.get(l.lineNumber);
+      const label = `${esc(v.short)}${v.chosen ? ' <span style="color:#b3141b;">✓</span>' : ""}`;
+      rowsHtml.push(
+        x
+          ? `<tr><td style="padding:1px 10px 1px 0;white-space:nowrap;${v.chosen ? "color:#111;font-weight:700;" : "color:#6b6b74;"}">${label}</td><td style="padding:1px 0;text-align:right;white-space:nowrap;${v.chosen ? "color:#111;font-weight:700;" : ""}"><span style="color:#b3141b;">${pct(x.discountPercent)}</span> · ${amount(x.netUnit)} / ${esc(l.unit)}</td></tr>`
+          : `<tr><td style="padding:1px 10px 1px 0;white-space:nowrap;color:#6b6b74;">${label}</td><td style="padding:1px 0;text-align:right;color:#8a5a00;">na upit</td></tr>`,
+      );
+    }
+    if (!vs.length && l.priceStatus === "cena") {
+      rowsHtml.push(`<tr><td style="padding:1px 10px 1px 0;white-space:nowrap;color:#111;font-weight:700;">Rabat</td><td style="padding:1px 0;text-align:right;"><span style="color:#b3141b;">${pct(l.discountPercent)}</span> · ${amount(l.netPrice)} / ${esc(l.unit)}</td></tr>`);
+    }
+    return rowsHtml.length
+      ? `<table role="presentation" cellpadding="0" cellspacing="0" style="margin-top:8px;font-size:12px;background:#f6f6f8;border-radius:6px;padding:6px 10px;">${rowsHtml.join("")}</table>`
+      : "";
+  };
   const net = priced.reduce((a, l) => a + (l.lineNet ?? 0), 0);
   const gross = Number(o.grossTotal ?? 0);
   const vat = Math.max(0, gross - net);
@@ -61,6 +169,7 @@ export function buildOrderEmail(o: OrderDetail, baseUrl: string) {
         <td style="${td}">
           <div style="font-weight:600;color:#111;">${esc(l.articleName)}</div>
           <div style="margin-top:3px;font-size:12px;color:#6b6b74;"><span style="font-family:Menlo,Consolas,monospace;">${esc(l.articleCode)}</span>${l.packCount !== null && l.packLabel ? ` · ${l.packCount} × ${esc(l.packLabel)}` : ""}</div>
+          ${priceBlock(l)}
         </td>
         <td style="${td}text-align:right;white-space:nowrap;padding-left:12px;">${quantity(l.quantity)} ${esc(l.unit)}</td>
         <td style="${td}text-align:right;white-space:nowrap;padding-left:12px;${l.priceStatus === "cena" ? "" : "color:#8a5a00;"}">${l.priceStatus === "cena" ? amount(l.lineNet) : "na upit"}</td>
@@ -88,7 +197,7 @@ export function buildOrderEmail(o: OrderDetail, baseUrl: string) {
   <tr><td style="padding:28px 28px 8px;">
     <div style="display:inline-block;background:#fdecec;color:#b3141b;font-size:12px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;border-radius:999px;padding:5px 12px;">Nova porudžbina · ${esc(doc)}</div>
     <h1 style="margin:14px 0 4px;font-size:24px;line-height:1.2;font-weight:800;color:#111;">${esc(o.customerName)}</h1>
-    <p style="margin:0 0 18px;font-size:14px;color:#6b6b74;">${esc(items(o.lines.length))}${priced.length ? ` · <b style="color:#111;">${amount(gross)} RSD</b> sa PDV-om` : ""}</p>
+    <p style="margin:0 0 18px;font-size:14px;color:#6b6b74;">${esc(items(o.lines.length))}${priced.length ? ` · <b style="color:#111;">${amount(gross)} RSD</b> sa PDV-om` : ""}${chosen && chosen.code ? ` · ${esc(chosen.label.toLowerCase())}` : ""}</p>
     <table role="presentation" cellpadding="0" cellspacing="0" style="margin:0 0 22px;">
       ${meta("Poslato", `${esc(when)} · ${esc(o.submittedByName)}`)}
       ${meta("Plaćanje", esc(o.paymentOptionLabel ?? "po dogovoru"))}
@@ -113,6 +222,7 @@ export function buildOrderEmail(o: OrderDetail, baseUrl: string) {
         ${priced.length ? `${sum("Osnovica", `${amount(net)} RSD`)}${sum("PDV", `${amount(vat)} RSD`)}${sum("Ukupno", `${amount(gross)} RSD`, true)}` : sum("Iznos", "na upit", true)}
       </table>
       ${onRequest.length ? `<div style="margin-top:6px;font-size:12px;color:#8a5a00;">${esc(items(onRequest.length))} na upit — nije uračunato.</div>` : ""}
+      ${vs.filter((v) => !v.chosen).map((v) => `<div style="margin-top:10px;padding-top:8px;border-top:1px solid #e3e3e8;font-size:13px;color:#6b6b74;">Uz ${esc(v.label.toLowerCase())}: <b style="color:#111;white-space:nowrap;">${amount(v.totals.gross)} RSD</b> sa PDV-om${v.onRequest ? ` <span style="color:#8a5a00;">(${esc(items(v.onRequest))} na upit)</span>` : ""}</div>`).join("")}
     </td></tr></table>
   </td></tr>
   <tr><td style="padding:18px 28px 26px;">
@@ -128,7 +238,14 @@ export function buildOrderEmail(o: OrderDetail, baseUrl: string) {
     `Poslato: ${when} (${o.submittedByName})`,
     `Plaćanje: ${o.paymentOptionLabel ?? "po dogovoru"}`,
     "",
-    ...o.lines.map((l) => `${l.articleCode}  ${l.articleName}  ${quantity(l.quantity)} ${l.unit}${l.priceStatus === "cena" ? `  ${amount(l.lineNet)}` : "  na upit"}`),
+    ...o.lines.map((l) => {
+      const parts = vs.map((v) => {
+        const x = v.lines.get(l.lineNumber);
+        return `${v.short}${v.chosen ? "*" : ""}: ${x ? `${x.discountPercent === null ? "neto" : `rabat ${x.discountPercent}%`} ${amount(x.netUnit)}` : "na upit"}`;
+      });
+      return `${l.articleCode}  ${l.articleName}  ${quantity(l.quantity)} ${l.unit}${l.priceStatus === "cena" ? `  ${amount(l.lineNet)}` : "  na upit"}${l.listPrice !== null ? `  (cenovnik ${amount(l.listPrice)}${parts.length ? `; ${parts.join("; ")}` : l.discountPercent !== null ? `; rabat ${l.discountPercent}%` : ""})` : ""}`;
+    }),
+    ...vs.filter((v) => !v.chosen).map((v) => `Uz ${v.label.toLowerCase()}: ${amount(v.totals.gross)} RSD sa PDV-om`),
     "",
     priced.length ? `Ukupno sa PDV-om: ${amount(o.grossTotal)} RSD` : "Iznos još nije utvrđen.",
     "",
@@ -193,7 +310,7 @@ export async function sendOrderEmail(
   const actor = opts.actor ? { id: opts.actor.id, name: opts.actor.name, role: opts.actor.role } : SYSTEM_ACTOR;
   const label = o.orderNumber ?? o.requestNumber;
   if (!to.length) return { ok: false, sent: 0, text: "Nema nijedne adrese primaoca." };
-  const mail = buildOrderEmail(o, publicBaseUrl());
+  const mail = buildOrderEmail(o, publicBaseUrl(), await orderEmailVariants(o).catch(() => []));
   try {
     await sendMail(
       { host: cfg.host, port: cfg.port, secure: cfg.port === 465, user: cfg.user, pass: cfg.pass },

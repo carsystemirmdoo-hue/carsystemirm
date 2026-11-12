@@ -6,6 +6,7 @@ import { can } from "@/lib/authz/permissions.mjs";
 import { requireCapability, requireSessionMfaOrReauth } from "@/lib/authz/session";
 import { formatMegabytes } from "@/lib/import/upload-limits.mjs";
 import { MAX_STOCK_FILE_BYTES } from "@/lib/stock/readStockFile.mjs";
+import { settleArrivals } from "@/lib/procurement/incoming-service";
 import { confirmStockImport, discardStockImport, StockImportError, uploadStockReport } from "@/lib/stock/stock-import-service";
 
 /*
@@ -72,8 +73,11 @@ export async function confirmStockAction(_prev: StockImportActionState, formData
     if (m) return { error: m, ok: null };
     throw error;
   }
+  // Roba u dolasku (0064): nov lager odmah zatvara stavke čije je stanje poraslo. Ne sme da obori potvrdu.
+  await settleArrivals().catch(() => undefined);
   revalidatePath(PATH);
   revalidatePath("/portal/zalihe");
+  revalidatePath("/portal/porudzbine");
   // Posle odluke forma više ne postoji na strani; ishod nosi adresa.
   redirect(`${PATH}/${importId}?ishod=potvrdjeno`);
 }

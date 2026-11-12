@@ -3,6 +3,7 @@ import { sql } from "drizzle-orm";
 import { getDb } from "@/db/client";
 import { belgradeDate } from "@/lib/recommendations/customerRhythm.mjs";
 import { internalStockQuantities } from "@/lib/stock/stock-import-service";
+import { incomingByArticle } from "./incoming-service";
 import { brandOf, suggestQuantity, trendOf } from "./suggest.mjs";
 
 /**
@@ -38,6 +39,8 @@ export type ProcurementRow = {
   packs: number | null;
   /** Nova šifra iz lagera — nema je u šifarniku portala ni u fakturama. */
   isNew: boolean;
+  /** Roba u dolasku (0064): poručeno a još nije stiglo; predlog ga već oduzima. */
+  incoming: { quantity: number; nearest: string | null } | null;
 };
 
 export type ProcurementData = {
@@ -78,7 +81,7 @@ export async function loadProcurement(opts: { coverDays: number; from?: string; 
   const period = resolvePeriod(opts.from, opts.to, today);
   const db = getDb();
   const signed = sql`CASE WHEN il.line_amount < 0 THEN -abs(il.quantity) ELSE abs(il.quantity) END`;
-  const [sales, packs, stock, inPeriod] = await Promise.all([
+  const [sales, packs, stock, inPeriod, incoming] = await Promise.all([
     db.execute<{
       id: string; code: string; name: string; unit: string | null; brand: string | null;
       s30: string; s90: string; p90: string; s180: string; s365: string; c180: number; last: string | null;
@@ -113,6 +116,7 @@ export async function loadProcurement(opts: { coverDays: number; from?: string; 
          AND i.document_kind::text IN ('faktura', 'povrat_robe', 'storno')
          AND NOT EXISTS (SELECT 1 FROM articles_out_of_programme o WHERE o.article_id = a.id)
        GROUP BY a.id`),
+    incomingByArticle().catch(() => new Map<string, { quantity: number; nearest: string | null }>()),
   ]);
   const periodOf = new Map([...inPeriod].map((p) => [p.id, { qty: Number(p.qty), customers: p.customers }]));
   const packOf = new Map([...packs].map((p) => [p.article_id, { quantity: Number(p.pack_quantity), unit: p.unit, label: p.label }]));
@@ -123,7 +127,10 @@ export async function loadProcurement(opts: { coverDays: number; from?: string; 
     const pack = packOf.get(a.id) ?? null;
     // Šifra koje nema u izvozu nije nula (pravilo lagera) — lager je tada nepoznat.
     const st = stock.byArticle.get(a.id) ?? null;
-    const sg = suggestQuantity({ sold: s.s180, windowDays: HISTORY_DAYS, coverDays: opts.coverDays, stock: st, unit: a.unit, pack });
+    // Već poručeno (u dolasku) se ne poručuje ponovo: oduzima se kao da je na lageru.
+    const inc = incoming.get(a.id) ?? null;
+    const covered = inc && inc.quantity > 0 ? (st ?? 0) + inc.quantity : st;
+    const sg = suggestQuantity({ sold: s.s180, windowDays: HISTORY_DAYS, coverDays: opts.coverDays, stock: covered, unit: a.unit, pack });
     rows.push({
       key: a.id,
       articleId: a.id,
@@ -144,6 +151,7 @@ export async function loadProcurement(opts: { coverDays: number; from?: string; 
       suggested: sg.suggested,
       packs: sg.packs,
       isNew: false,
+      incoming: inc && inc.quantity > 0 ? inc : null,
     });
     seen.add(a.id);
   };
@@ -186,6 +194,7 @@ export async function loadProcurement(opts: { coverDays: number; from?: string; 
       suggested: 0,
       packs: null,
       isNew: true,
+      incoming: null,
     });
   }
 

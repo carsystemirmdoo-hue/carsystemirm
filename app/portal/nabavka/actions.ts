@@ -4,6 +4,8 @@ import { z } from "zod";
 import { AUDIT_ACTIONS, recordAudit } from "@/lib/audit/record";
 import { requireCapability } from "@/lib/authz/session";
 import { buildXlsx } from "@/lib/export/xlsxFile.mjs";
+import { createSupplierOrder, IncomingError } from "@/lib/procurement/incoming-service";
+import { leadFor, stavki, SUPPLIERS } from "@/lib/procurement/incoming.mjs";
 import { resolveOrderLines } from "@/lib/procurement/procurement-service";
 import { orderFileName } from "@/lib/procurement/suggest.mjs";
 import { belgradeDate } from "@/lib/recommendations/customerRhythm.mjs";
@@ -54,4 +56,35 @@ export async function orderFileAction(input: unknown): Promise<OrderFileResult> 
   });
   const fileName = `${orderFileName(parsed.data.label, today)}.xlsx`;
   return { ok: true, fileName, base64: body.toString("base64"), count: lines.length, skipped: missing };
+}
+
+/**
+ * Roba u dolasku (0064): ista porudžbina koja je upravo preuzeta kao fajl upisuje se kao porudžbina
+ * dobavljaču, sa uobičajenim rokom tog brenda. Šifre su naše, pa je svaka stavka odmah povezana.
+ */
+export async function recordIncomingAction(input: unknown): Promise<{ ok: boolean; text: string }> {
+  const user = await requireCapability("procurement:order_create", "/portal/nabavka");
+  const parsed = schema.safeParse(input);
+  if (!parsed.success) return { ok: false, text: "Upišite bar jednu količinu veću od nule." };
+  const lines = await resolveOrderLines(parsed.data.lines);
+  const linked = lines.filter((l) => l.articleId);
+  if (!linked.length) return { ok: false, text: "Nijedna šifra nije u šifarniku portala." };
+  const supplier = SUPPLIERS.includes(parsed.data.label) ? parsed.data.label : "Ostalo";
+  const lead = leadFor(supplier);
+  try {
+    const r = await createSupplierOrder(user, {
+      supplier,
+      reference: null,
+      orderedOn: belgradeDate(new Date()),
+      leadMin: lead.min,
+      leadMax: lead.max,
+      source: "nabavka",
+      fileName: null,
+      note: supplier === "Ostalo" ? `Nabavka: ${parsed.data.label}` : null,
+      lines: linked.map((l) => ({ supplierCode: null, supplierName: l.name, quantity: l.quantity, unit: l.unit || null, articleId: l.articleId, remember: false })),
+    });
+    return { ok: true, text: `Upisano u Robu u dolasku: ${stavki(r.lines)}${lines.length > linked.length ? ` (${lines.length - linked.length} novih šifara bez veze nije upisano)` : ""}.` };
+  } catch (error) {
+    return { ok: false, text: error instanceof IncomingError ? error.message : "Upis u Robu u dolasku nije uspeo." };
+  }
 }

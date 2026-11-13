@@ -17,6 +17,7 @@
  * posebno odobrenje vlasnika.
  */
 import { readFileSync } from "node:fs";
+import { basename } from "node:path";
 import { sql } from "drizzle-orm";
 
 const [planPath, ...rest] = process.argv.slice(2);
@@ -42,7 +43,7 @@ if (write && /neon\.tech|neon\.build/.test(url) && !rest.includes("--production-
 if (!write) process.env.DATABASE_POOL_MAX = "1";
 
 const { getDb } = await import("@/db/client");
-const { decideMapping } = await import("@/lib/commercial/mapping-service");
+const { decideMapping, notifyMappingBatch } = await import("@/lib/commercial/mapping-service");
 const { catalogOfferFacts } = await import("@/lib/ordering/ordering-service");
 const { orderPack } = await import("@/lib/ordering/packRule.mjs");
 const { AUDIT_ACTIONS, recordAudit } = await import("@/lib/audit/record");
@@ -152,22 +153,27 @@ if (revokeReason) {
     const v = r._v as Link;
     if (!r._id) continue;
     if (r._already && v.slug !== null) {
-      await decideMapping({ articleId: r._id as string, status: "revoked", note: `${revokeReason.trim()} — ${v.sifra}` }, actor);
+      await decideMapping({ articleId: r._id as string, status: "revoked", note: `${revokeReason.trim()} — ${v.sifra}` }, actor, { notify: false });
       n += 1;
     }
     if (has && v.pakovanje !== null) await db.execute(sql`DELETE FROM article_pack_sizes WHERE article_id = ${r._id as string}::uuid`);
   }
+  // Jedno zbirno obaveštenje za ceo plan (2026-11-13).
+  await notifyMappingBatch({ mapped: 0, revoked: n, source: `Plan veza ${basename(planPath)} (${actor.name})` });
   console.log(`Povučeno veza: ${n}.`);
   process.exit(0);
 }
 if (write) {
+  let mappedNow = 0;
   for (const r of ready) {
     const v = r._v as Link;
     if (!r._already && v.slug !== null) {
       await decideMapping(
         { articleId: r._id as string, status: "mapped", catalogProductSlug: v.slug, catalogVariantId: v.varijanta, note: `${v.izvor ?? plan.izvor ?? "Potvrda vlasnika"} — ${v.sifra}` },
         actor,
+        { notify: false },
       );
+      mappedNow += 1;
     }
     if (v.pakovanje !== null) {
       // Pakovanje i njegov audit u istoj transakciji; već upisano pakovanje se ne dira (ponovljeno pokretanje).
@@ -194,6 +200,8 @@ if (write) {
       });
     }
   }
+  // Jedno zbirno obaveštenje za ceo plan (2026-11-13).
+  await notifyMappingBatch({ mapped: mappedNow, revoked: 0, source: `Plan veza ${basename(planPath)} (${actor.name})` });
   console.log(`Upisano: ${ready.length}.`);
 }
 process.exit(0);

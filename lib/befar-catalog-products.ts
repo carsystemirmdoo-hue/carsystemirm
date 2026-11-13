@@ -328,7 +328,7 @@ const m14 = (code: string, colour: string, colourSr: string, swatch: string, siz
   const label = `${colourSr[0].toLocaleUpperCase("sr-Latn")}${colourSr.slice(1)} · ${dim}`;
   return {
     code, label, searchLabel: `${label} · M14`, colour, colourSr, swatch, size, holes: null, hardnessStars: stars, applyWith, boxQuantity: 24,
-    image: `/products/befar/catalog/befar-compounding-foam-m14-${img}.webp`, onWebsite: false, inCatalogue: true, cataloguePage: 4,
+    image: `/products/befar/catalog/befar-compounding-foam-m14-izrez-${img}.webp`, onWebsite: false, inCatalogue: true, cataloguePage: 4,
   };
 };
 
@@ -360,7 +360,7 @@ const OWNER_PROMOTED_ENTRIES: CatalogProductEntry[] = [
       m14("02404", "Yellow", "žuta", "#E3BD1F", "150x50mm", 3, "tečna ili krem polir pasta", "zuta"),
       m14("02405", "Blue", "plava", "#2E6CB4", "150x50mm", 2, "tečna ili krem polir pasta", "plava"),
     ],
-    image: { src: "/products/befar/catalog/befar-compounding-foam-m14.webp", width: 751, height: 397, hasAlpha: false },
+    image: { src: "/products/befar/catalog/befar-compounding-foam-m14-izrez.webp", width: 651, height: 385, hasAlpha: true },
     sharedGroupImages: false,
     missingOfficialAsset: false,
     gallery: [],

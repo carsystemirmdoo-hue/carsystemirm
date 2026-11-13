@@ -6170,236 +6170,225 @@
         }
       ]
     },
-    "/products/befar/catalog/befar-compounding-foam-m14-bela.webp": {
-      "w": 789,
-      "h": 337,
+    "/products/befar/catalog/befar-compounding-foam-m14-izrez-bela.webp": {
+      "w": 554,
+      "h": 486,
       "box": [
-        0,
-        0,
-        789,
-        337
+        13,
+        12,
+        528,
+        461
       ],
-      "fx": 1.0,
-      "fy": 1.0,
-      "ox": 0.0,
-      "oy": 0.0,
-      "aspect": 2.3412,
-      "luminance": 0.389,
+      "fx": 0.9531,
+      "fy": 0.9486,
+      "ox": 0.0235,
+      "oy": 0.0247,
+      "aspect": 1.1453,
+      "luminance": 0.3374,
       "tone": "mid",
-      "boxSource": "opaque-border",
-      "palette": [
-        {
-          "hex": "#ffffff",
-          "share": 0.09
-        }
-      ],
+      "boxSource": "alpha",
+      "palette": [],
       "coarse": [
         {
-          "hex": "#aaadcd",
-          "share": 0.1666
-        },
-        {
-          "hex": "#fafbfe",
-          "share": 0.1223
-        },
-        {
-          "hex": "#c7c8d4",
-          "share": 0.0839
+          "hex": "#ebecf8",
+          "share": 0.1757
         },
         {
           "hex": "#ce4b55",
-          "share": 0.0557
-        }
-      ]
-    },
-    "/products/befar/catalog/befar-compounding-foam-m14-crna.webp": {
-      "w": 789,
-      "h": 337,
-      "box": [
-        0,
-        0,
-        789,
-        337
-      ],
-      "fx": 1.0,
-      "fy": 1.0,
-      "ox": 0.0,
-      "oy": 0.0,
-      "aspect": 2.3412,
-      "luminance": 0.5682,
-      "tone": "mid",
-      "boxSource": "canvas",
-      "palette": [],
-      "coarse": [
-        {
-          "hex": "#d4d6e9",
-          "share": 0.2798
+          "share": 0.161
         },
         {
-          "hex": "#ebedf7",
-          "share": 0.1551
-        },
-        {
-          "hex": "#a9acce",
-          "share": 0.087
-        },
-        {
-          "hex": "#2d2d32",
-          "share": 0.0658
-        }
-      ]
-    },
-    "/products/befar/catalog/befar-compounding-foam-m14-narandzasta.webp": {
-      "w": 789,
-      "h": 337,
-      "box": [
-        0,
-        0,
-        789,
-        337
-      ],
-      "fx": 1.0,
-      "fy": 1.0,
-      "ox": 0.0,
-      "oy": 0.0,
-      "aspect": 2.3412,
-      "luminance": 0.3418,
-      "tone": "mid",
-      "boxSource": "opaque-border",
-      "palette": [
-        {
-          "hex": "#ffffff",
-          "share": 0.0889
-        }
-      ],
-      "coarse": [
-        {
-          "hex": "#a9aaca",
-          "share": 0.1421
-        },
-        {
-          "hex": "#fdfdfe",
-          "share": 0.1024
-        },
-        {
-          "hex": "#d34d55",
-          "share": 0.0562
-        }
-      ]
-    },
-    "/products/befar/catalog/befar-compounding-foam-m14-plava.webp": {
-      "w": 789,
-      "h": 337,
-      "box": [
-        0,
-        0,
-        789,
-        337
-      ],
-      "fx": 1.0,
-      "fy": 1.0,
-      "ox": 0.0,
-      "oy": 0.0,
-      "aspect": 2.3412,
-      "luminance": 0.5875,
-      "tone": "mid",
-      "boxSource": "canvas",
-      "palette": [
-        {
-          "hex": "#ffffff",
-          "share": 0.0968
-        }
-      ],
-      "coarse": [
-        {
-          "hex": "#d2d7e5",
-          "share": 0.2468
-        },
-        {
-          "hex": "#cdcfd8",
+          "hex": "#c7c8d2",
           "share": 0.1336
         },
         {
-          "hex": "#fdfefe",
-          "share": 0.1018
-        },
-        {
-          "hex": "#9399b5",
-          "share": 0.0732
+          "hex": "#d1556b",
+          "share": 0.1157
         }
       ]
     },
-    "/products/befar/catalog/befar-compounding-foam-m14-zuta.webp": {
-      "w": 789,
-      "h": 337,
+    "/products/befar/catalog/befar-compounding-foam-m14-izrez-crna.webp": {
+      "w": 568,
+      "h": 486,
       "box": [
-        0,
-        0,
-        789,
-        337
+        12,
+        12,
+        544,
+        468
       ],
-      "fx": 1.0,
-      "fy": 1.0,
-      "ox": 0.0,
-      "oy": 0.0,
-      "aspect": 2.3412,
-      "luminance": 0.6416,
-      "tone": "light",
-      "boxSource": "canvas",
+      "fx": 0.9577,
+      "fy": 0.963,
+      "ox": 0.0211,
+      "oy": 0.0247,
+      "aspect": 1.1624,
+      "luminance": 0.0675,
+      "tone": "very-dark",
+      "boxSource": "alpha",
       "palette": [],
       "coarse": [
         {
-          "hex": "#eaebf3",
-          "share": 0.1872
+          "hex": "#2d2d32",
+          "share": 0.321
         },
         {
-          "hex": "#d8d9e9",
-          "share": 0.1764
+          "hex": "#d34c58",
+          "share": 0.1001
         },
         {
-          "hex": "#a9abca",
-          "share": 0.0754
+          "hex": "#d65669",
+          "share": 0.0769
         },
         {
-          "hex": "#dde1ec",
-          "share": 0.0628
+          "hex": "#151417",
+          "share": 0.0505
         }
       ]
     },
-    "/products/befar/catalog/befar-compounding-foam-m14.webp": {
-      "w": 751,
-      "h": 397,
+    "/products/befar/catalog/befar-compounding-foam-m14-izrez-narandzasta.webp": {
+      "w": 568,
+      "h": 488,
       "box": [
-        0,
-        0,
-        694,
-        397
+        12,
+        12,
+        543,
+        470
       ],
-      "fx": 0.9241,
-      "fy": 1.0,
-      "ox": 0.0,
-      "oy": 0.0,
-      "aspect": 1.7481,
-      "luminance": 0.3139,
+      "fx": 0.956,
+      "fy": 0.9631,
+      "ox": 0.0211,
+      "oy": 0.0246,
+      "aspect": 1.1553,
+      "luminance": 0.2666,
+      "tone": "dark",
+      "boxSource": "alpha",
+      "palette": [],
+      "coarse": [
+        {
+          "hex": "#d34d55",
+          "share": 0.1609
+        },
+        {
+          "hex": "#f1988d",
+          "share": 0.1307
+        },
+        {
+          "hex": "#d18778",
+          "share": 0.099
+        },
+        {
+          "hex": "#d4566a",
+          "share": 0.0909
+        }
+      ]
+    },
+    "/products/befar/catalog/befar-compounding-foam-m14-izrez-plava.webp": {
+      "w": 580,
+      "h": 476,
+      "box": [
+        11,
+        12,
+        557,
+        461
+      ],
+      "fx": 0.9603,
+      "fy": 0.9685,
+      "ox": 0.019,
+      "oy": 0.0252,
+      "aspect": 1.2082,
+      "luminance": 0.1706,
+      "tone": "dark",
+      "boxSource": "alpha",
+      "palette": [],
+      "coarse": [
+        {
+          "hex": "#7094ce",
+          "share": 0.1578
+        },
+        {
+          "hex": "#4e76b9",
+          "share": 0.153
+        },
+        {
+          "hex": "#b3454e",
+          "share": 0.0987
+        },
+        {
+          "hex": "#ad3738",
+          "share": 0.0909
+        }
+      ]
+    },
+    "/products/befar/catalog/befar-compounding-foam-m14-izrez-zuta.webp": {
+      "w": 570,
+      "h": 496,
+      "box": [
+        12,
+        12,
+        547,
+        473
+      ],
+      "fx": 0.9596,
+      "fy": 0.9536,
+      "ox": 0.0211,
+      "oy": 0.0242,
+      "aspect": 1.1564,
+      "luminance": 0.3371,
       "tone": "mid",
-      "boxSource": "opaque-border",
+      "boxSource": "alpha",
+      "palette": [],
+      "coarse": [
+        {
+          "hex": "#cbb40d",
+          "share": 0.1528
+        },
+        {
+          "hex": "#cf4c54",
+          "share": 0.1389
+        },
+        {
+          "hex": "#ead612",
+          "share": 0.1343
+        },
+        {
+          "hex": "#d1546a",
+          "share": 0.0806
+        }
+      ]
+    },
+    "/products/befar/catalog/befar-compounding-foam-m14-izrez.webp": {
+      "w": 651,
+      "h": 385,
+      "box": [
+        7,
+        7,
+        637,
+        372
+      ],
+      "fx": 0.9785,
+      "fy": 0.9662,
+      "ox": 0.0108,
+      "oy": 0.0182,
+      "aspect": 1.7124,
+      "luminance": 0.2793,
+      "tone": "dark",
+      "boxSource": "alpha",
       "palette": [],
       "coarse": [
         {
           "hex": "#d3282c",
-          "share": 0.2208
+          "share": 0.2394
         },
         {
           "hex": "#eb7a67",
-          "share": 0.091
+          "share": 0.1029
+        },
+        {
+          "hex": "#cfcdca",
+          "share": 0.0975
         },
         {
           "hex": "#f08873",
-          "share": 0.0814
-        },
-        {
-          "hex": "#ceaeae",
-          "share": 0.0678
+          "share": 0.0909
         }
       ]
     },

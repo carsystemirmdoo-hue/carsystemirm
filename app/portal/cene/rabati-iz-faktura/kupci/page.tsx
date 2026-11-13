@@ -1,4 +1,7 @@
 import Link from "next/link";
+import { DateRangeField } from "@/components/portal/DateRangeField";
+import { readPortalPeriod } from "@/lib/portal/period";
+import { isAllTime, periodLabel } from "@/lib/portal/periodMemory.mjs";
 import { srDate } from "@/components/customer/account-format";
 import { PageHeader } from "@/components/portal/PortalPrimitives";
 import { ClickableRows } from "@/components/portal/ClickableRows";
@@ -45,7 +48,7 @@ const fold = (s: string) => s.toLocaleLowerCase("sr-Latn").normalize("NFD").repl
 export default async function RebateReviewListPage({
   searchParams,
 }: {
-  searchParams: Promise<{ q?: string; stanje?: string; izuzetak?: string; komercijalista?: string }>;
+  searchParams: Promise<{ q?: string; stanje?: string; izuzetak?: string; komercijalista?: string; from?: string; to?: string }>;
 }) {
   const user = await requireCapability("view:rabati", "/portal/cene/rabati-iz-faktura/kupci");
   const params = await searchParams;
@@ -54,7 +57,9 @@ export default async function RebateReviewListPage({
   const izuzetak = EXCEPTION_FILTERS.some((f) => f.key === params.izuzetak) ? (params.izuzetak as string) : "sve";
   const komercijalista = (params.komercijalista ?? "").slice(0, 120);
 
-  const { rows, lineCount } = await loadRebateReviewList(user);
+  // Period iz adrese ili zapamćen sa drugog ekrana portala (2026-11-13).
+  const period = await readPortalPeriod(params);
+  const { rows, lineCount } = await loadRebateReviewList(user, period);
   const reps = [...new Set(rows.flatMap((r) => r.salespeople))].sort((a, b) => a.localeCompare(b, "sr-Latn"));
   const filtered = rows.filter(
     (r) =>
@@ -87,15 +92,16 @@ export default async function RebateReviewListPage({
         meta={
           <span>
             {seesAllCustomers(user)
-              ? `Svi kupci sa fakturama (${rows.length}).`
+              ? `Svi kupci sa fakturama${isAllTime(period) ? "" : " u periodu"} (${rows.length}).`
               : `Vaši dodeljeni kupci sa fakturama (${rows.length}). Kupac koji Vam nije dodeljen ne otvara se ni preko direktne adrese.`}{" "}
-            {lineCount.toLocaleString("sr-Latn-RS")} potvrđenih stavki.
+            {lineCount.toLocaleString("sr-Latn-RS")} potvrđenih stavki{isAllTime(period) ? "" : ` u periodu ${periodLabel(period).replace(/\.$/, "")}`}.
           </span>
         }
       />
 
       <section className="portal-panel">
         <form method="get" className="rr-filters" role="search" aria-label="Pretraga kupaca">
+          <DateRangeField nameOd="from" nameDo="to" defaultOd={period.from} defaultDo={period.to} zapamti />
           <label>
             <span>Kupac</span>
             <input type="search" name="q" defaultValue={q} placeholder="Naziv kupca" autoComplete="off" />

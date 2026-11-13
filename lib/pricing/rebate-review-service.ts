@@ -74,11 +74,17 @@ async function assignedReps(where: SQL) {
   return m;
 }
 
-export async function loadRebateReviewList(viewer: PortalUser) {
+export async function loadRebateReviewList(
+  viewer: PortalUser,
+  /** Izabrani period (2026-11-13): samo stavke iz faktura u periodu. „Nedavna“ promena i dalje znači poslednjih 180 dana. */
+  period: { from: string | null; to: string | null } = { from: null, to: null },
+) {
   const inScope = await scopeFor(viewer);
   const db = getDb();
   const [lines, customers, reps, rules] = await Promise.all([
-    linesQuery(inScope(sql`ril.customer_id`)),
+    linesQuery(
+      sql`${inScope(sql`ril.customer_id`)} ${period.from ? sql`AND ril.issued_on >= ${period.from}::date` : sql``} ${period.to ? sql`AND ril.issued_on <= ${period.to}::date` : sql``}`,
+    ),
     db.execute<{ id: string; name: string }>(sql`SELECT id, name FROM customers WHERE ${inScope(sql`id`)}`),
     assignedReps(inScope(sql`ca.customer_id`)),
     db.execute<{ customer_id: string; approved: number; pending: number }>(sql`

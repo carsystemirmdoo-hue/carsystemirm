@@ -39,7 +39,17 @@ export type RebateTableRow = TableRow & {
   buysNow: boolean;
 };
 
-export async function loadRebateTable(viewer: PortalUser, customerId: string, now: Date = new Date()) {
+function periodCondition(period: { from: string | null; to: string | null }) {
+  return sql`true ${period.from ? sql`AND ril.issued_on >= ${period.from}::date` : sql``} ${period.to ? sql`AND ril.issued_on <= ${period.to}::date` : sql``}`;
+}
+
+export async function loadRebateTable(
+  viewer: PortalUser,
+  customerId: string,
+  now: Date = new Date(),
+  /** Izabrani period (2026-11-13): „Uzima“ = kupio u periodu. Bez perioda važi stari rok: poslednjih 365 dana. Samo prikaz. */
+  period: { from: string | null; to: string | null } = { from: null, to: null },
+) {
   await assertPricingCustomerAccess(viewer, customerId);
   const today = belgradeDate(now);
   const db = getDb();
@@ -52,8 +62,10 @@ export async function loadRebateTable(viewer: PortalUser, customerId: string, no
        WHERE EXISTS (SELECT 1 FROM article_base_prices b WHERE b.article_id = a.id AND b.valid_from <= ${today}::date)
          AND NOT EXISTS (SELECT 1 FROM articles_out_of_programme o WHERE o.article_id = a.id)
        ORDER BY a.name`),
-    db.execute<{ article_id: string; days: number; last: string }>(sql`
-      SELECT il.article_id, count(DISTINCT ril.issued_on)::int AS days, max(ril.issued_on)::text AS last
+    db.execute<{ article_id: string; days: number; last: string; period_days: number; period_last: string | null }>(sql`
+      SELECT il.article_id, count(DISTINCT ril.issued_on)::int AS days, max(ril.issued_on)::text AS last,
+             count(DISTINCT ril.issued_on) FILTER (WHERE ${periodCondition(period)})::int AS period_days,
+             (max(ril.issued_on) FILTER (WHERE ${periodCondition(period)}))::text AS period_last
         FROM recommendation_input_lines ril JOIN invoice_lines il ON il.id = ril.invoice_line_id
        WHERE ril.customer_id = ${customerId}::uuid AND ril.issued_on <= ${today}::date AND il.article_id IS NOT NULL
        GROUP BY il.article_id`),
@@ -78,6 +90,7 @@ export async function loadRebateTable(viewer: PortalUser, customerId: string, no
   const bought = new Map([...purchases].map((p) => [p.article_id, p]));
   const rulesBy = new Map<string, { id: string; p: number; status: string; f: string }[]>();
   for (const r of rules) rulesBy.set(r.article_id, [...(rulesBy.get(r.article_id) ?? []), { id: r.id, p: Number(r.p), status: r.status, f: r.f }]);
+  const withPeriod = Boolean(period.from || period.to);
   const yearAgo = new Date(Date.parse(`${today}T00:00:00Z`) - 365 * 86400000).toISOString().slice(0, 10);
 
   const lidOf = new Map<string, string[]>();
@@ -125,9 +138,9 @@ export async function loadRebateTable(viewer: PortalUser, customerId: string, no
       pairOf,
       pairCodes: pairOf.map((id) => articleById.get(id)!.code),
       blocked,
-      purchaseDays: p?.days ?? 0,
+      purchaseDays: (withPeriod ? p?.period_days : p?.days) ?? 0,
       lastPurchaseOn: p?.last ?? null,
-      buysNow: Boolean(p && p.last >= yearAgo),
+      buysNow: withPeriod ? Boolean(p && p.period_days > 0) : Boolean(p && p.last >= yearAgo),
     };
   });
   // Osnovna cena za artikle „na upit“ (bez rabata) — da bi se neto cena mogla upisati.

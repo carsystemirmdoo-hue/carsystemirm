@@ -1,4 +1,5 @@
 import { Badge } from "@/components/portal/PortalPrimitives";
+import { anyInPeriod, isAllTime, periodLabel } from "@/lib/portal/periodMemory.mjs";
 import type { ArticleIdentity } from "@/lib/ordering/ordering-service";
 import type { CrossSell } from "@/lib/recommendations/cross-sell";
 import type { CustomerArticle, CustomerProfile } from "@/lib/recommendations/customer-profile";
@@ -369,24 +370,36 @@ export function CustomerSuggestions({
 export function CustomerArticles({
   profile,
   identities = {},
+  period = { from: null, to: null },
 }: {
   profile: CustomerProfile;
   identities?: Record<string, ArticleIdentity>;
+  /** Izabrani period (2026-11-13): prikazuju se samo artikli kupljeni u periodu; status i termin ostaju iz cele istorije. */
+  period?: { from: string | null; to: string | null };
 }) {
   if (profile.articles.length === 0) return null;
+  const all = isAllTime(period);
+  const groups = profile.groups
+    .map((g) => ({ ...g, items: all ? g.items : g.items.filter((a) => anyInPeriod((a as CustomerArticle).purchaseDates, period)) }))
+    .filter((g) => g.items.length > 0);
+  const shown = groups.reduce((n, g) => n + g.items.length, 0);
   return (
     <section className="portal-panel" id="artikli">
       <div className="portal-section-header">
         <div>
-          <h2>Artikli ({profile.articles.length})</h2>
+          <h2>
+            Artikli ({all ? profile.articles.length : `${shown} od ${profile.articles.length}`}){all ? "" : ` · kupljeni ${periodLabel(period)}`}
+          </h2>
           <p>
             Svaki artikal je naveden jednom, u grupi koja najviše govori o njemu. Kliknite na red za
             osnov: sve datume kupovine i kako je termin izračunat.
+            {all ? "" : " Status i uobičajeni termin računaju se iz cele istorije kupca, nezavisno od izabranog perioda."}
           </p>
         </div>
       </div>
       <div className="portal-panel-body cs-groups">
-        {profile.groups.map((g) => {
+        {groups.length === 0 ? <p>Kupac u izabranom periodu nije kupovao.</p> : null}
+        {groups.map((g) => {
           const rows = g.items.map((a) => (
             <ArticleRow key={a.articleCode} a={a as CustomerArticle} asOfDate={profile.asOfDate} identity={identities[a.articleCode]} />
           ));

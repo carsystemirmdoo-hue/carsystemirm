@@ -28,12 +28,15 @@ export function RebateTable({
   today,
   canPropose,
   canApprove,
+  buysLabel = "Uzima (12 meseci)",
 }: {
   customerId: string;
   rows: RebateTableRow[];
   today: string;
   canPropose: boolean;
   canApprove: boolean;
+  /** Natpis kartice „Uzima“ — sa izabranim periodom „Uzima (u periodu)“ (2026-11-13). */
+  buysLabel?: string;
 }) {
   const router = useRouter();
   // Podrazumevano SVI artikli u ponudi — i oni koje kupac još ne uzima, da bi im se rabat pripremio unapred (2026-11-10).
@@ -305,7 +308,7 @@ export function RebateTable({
     <>
       <section className={styles.metrics} aria-label="Sažetak">
         <div><span>Artikala u ponudi</span><strong>{rows.length}</strong></div>
-        <div><span>Uzima (12 meseci)</span><strong>{buysTotal}</strong></div>
+        <div><span>{buysLabel}</span><strong>{buysTotal}</strong></div>
         <div><span>Ne uzima</span><strong>{rows.length - buysTotal}</strong></div>
         <div><span>Rabat po artiklu</span><strong>{rows.filter((r) => r.source === "artikal").length}</strong></div>
         <div className={styles.red}><span>Artikala za promenu</span><strong>{plan.items.length}</strong></div>

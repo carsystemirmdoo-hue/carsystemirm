@@ -1,4 +1,7 @@
 import Link from "next/link";
+import { DateRangeField } from "@/components/portal/DateRangeField";
+import { readPortalPeriod } from "@/lib/portal/period";
+import { anyInPeriod, isAllTime, periodLabel } from "@/lib/portal/periodMemory.mjs";
 import { ClickableRows } from "@/components/portal/ClickableRows";
 import { Badge, PageHeader } from "@/components/portal/PortalPrimitives";
 import { can, seesAllCustomers } from "@/lib/authz/permissions.mjs";
@@ -101,11 +104,12 @@ function TalkRow({ item, showReps }: { item: Item; showReps: boolean }) {
 export default async function TalkListPage({
   searchParams,
 }: {
-  searchParams: Promise<{ komercijalista?: string; kupci?: string }>;
+  searchParams: Promise<{ komercijalista?: string; kupci?: string; from?: string; to?: string }>;
 }) {
   const user = await requireCapability("view:preporuke", "/portal/za-razgovor");
   const params = await searchParams;
   const all = seesAllCustomers(user);
+  const period = await readPortalPeriod(params);
 
   /*
    * Opseg se razrešava na serveru. Filter po komercijalisti SUŽAVA opseg, i
@@ -138,7 +142,9 @@ export default async function TalkListPage({
       active: c.active,
       profile: data.profiles.get(c.id) ?? null,
     }))
-    .filter((x): x is Item => x.profile !== null);
+    .filter((x): x is Item => x.profile !== null)
+    // Izabrani period (2026-11-13): samo kupci koji su kupovali u periodu. Stanje i savet ostaju iz cele istorije.
+    .filter((x) => isAllTime(period) || x.profile.articles.some((a) => anyInPeriod(a.purchaseDates, period)));
   // Kupci bez ijednog dokumenta nemaju profil iz podataka; prikazuju se u sklopljenoj grupi.
   const withoutData = [...customerRows].filter((c) => !data.profiles.has(c.id));
 
@@ -191,6 +197,11 @@ export default async function TalkListPage({
                 Neaktivni kupci ({inactiveInScope}) se ne prikazuju — izaberite „Neaktivni kupci“ za pregled.
               </span>
             ) : null}
+            {isAllTime(period) ? null : (
+              <span>
+                Prikazani su samo kupci koji su kupovali u periodu {periodLabel(period).replace(/\.$/, "")}. Stanje i šta pomenuti računaju se iz cele istorije.
+              </span>
+            )}
             {stale.length ? (
               <span className="zr-warn">
                 Za {stale.length} {stale.length === 1 ? "kupca" : "kupaca"} su posle obračuna stigli novi dokumenti — njihov savet se ne prikazuje dok se obračun ne ponovi.
@@ -209,6 +220,7 @@ export default async function TalkListPage({
                   ))}
                 </select>
               ) : null}
+              <DateRangeField nameOd="from" nameDo="to" defaultOd={period.from} defaultDo={period.to} zapamti />
               <select name="kupci" defaultValue={statusKupaca} aria-label="Kupci po statusu">
                 <option value="aktivni">Aktivni kupci</option>
                 <option value="neaktivni">Neaktivni kupci</option>

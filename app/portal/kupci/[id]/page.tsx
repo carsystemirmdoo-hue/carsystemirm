@@ -119,7 +119,7 @@ export default async function CustomerDetailPage({
       {showSignals && profile && customer.active ? (
         <CustomerSuggestions profile={profile} identities={identities} order={order} />
       ) : null}
-      {profile ? <CustomerArticles profile={profile} identities={identities} /> : null}
+      {profile ? <CustomerArticles profile={profile} identities={identities} period={period} /> : null}
       {showSignals && profile && crossSell && customer.active ? (
         <CustomerCrossSell
           crossSell={crossSell}

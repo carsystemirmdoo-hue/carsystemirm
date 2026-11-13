@@ -652,6 +652,30 @@ export const brands: CarsystemBrand[] = [
       contactCtaLabel: "Kontaktirajte nas",
     },
   }),
+  defineCarsystemBrand({
+    slug: "autofit",
+    name: "Auto Fit",
+    /*
+     * Odluka vlasnika 2026-11-13: „Auto Fit“ je brend naše firme (BizniSoft oznaka „AF“) — git, akrilni
+     * razređivač, zaštitni papir, industrijski ubrus i blanko posude. Ovo NIJE ranije uklonjeni placeholder
+     * „A.U.T.O. Fit“ (2026-09-21, bez identiteta): identitet je sada potvrdio vlasnik. Bez `logo`: odobren
+     * logo fajl ne postoji, pa se brend prikazuje tekstom. Bez tvrdnji o proizvođaču i poreklu.
+     */
+    description: "Auto Fit proizvodi iz naše ponude — git, akrilni razređivač, zaštitni papir, industrijski ubrus i blanko posude.",
+    overview: "Auto Fit je radionički potrošni program iz naše ponude: git, akrilni razređivač, zaštitni papir, industrijski ubrus i blanko posude sa poklopcima.",
+    programSlugs: ["priprema-povrsine", "potrosni-materijal"],
+    catalogOrder: 11,
+    presentation: {
+      // Neutralna paleta sajta: boja brenda nije zadata.
+      accentColor: "#20242C",
+      accentContrastColor: "#F7F8FA",
+      accentOnDarkColor: "#F7F8FA",
+      accentOnDarkContrastColor: "#20242C",
+      heroKicker: "Auto Fit iz naše ponude",
+      productsCtaLabel: "Pogledajte Auto Fit proizvode",
+      contactCtaLabel: "Kontaktirajte nas",
+    },
+  }),
 ];
 
 /*
@@ -660,7 +684,7 @@ export const brands: CarsystemBrand[] = [
  *
  * „A.U.T.O. Fit” je uklonjen 2026-09-21: audit nije našao ni proizvođača, ni zvanični izvor, ni
  * proizvod, a brend se ne pojavljuje ni na prethodnom sajtu klijenta. „Rupes” je istog dana postao
- * aktivan brend (`brands`).
+ * aktivan brend (`brands`). 2026-11-13 vlasnik je potvrdio „Auto Fit“ kao brend firme — aktivan je u `brands`.
  */
 export const futureBrands: FutureBrand[] = [];
 
@@ -2659,6 +2683,108 @@ const productRecords: CarsystemProduct[] = [
       { label: "Vreme obrade na 20 °C", value: "oko 30 min" },
       { label: "Temperaturni opseg", value: "−50 °C do +180 °C" },
       { label: "Obrada posle", value: "oko 2 h na 20 °C (sloj 10 mm)" },
+    ],
+    relatedProductSlugs: [],
+  }),
+  // Auto Fit (odluka vlasnika 2026-11-13): brend firme. Podaci su samo naš naziv i prodajno pakovanje
+  // iz BizniSofta; tehnički i bezbednosni list se dostavljaju na upit. `sku` = naša šifra.
+  createProduct({
+    slug: "autofit-git-forster-fill-1-8-kg",
+    taxonomyCategory: "kitovi",
+    name: "Auto Fit git Forster Fill 1,8 kg",
+    brandSlug: "autofit",
+    programSlug: "priprema-povrsine",
+    phaseSlug: "priprema",
+    shortDescription: "Auto Fit git Forster Fill za popunjavanje i ravnanje pre brušenja, u pakovanju 1,8 kg.",
+    longDescription:
+      "Auto Fit Forster Fill je git za popunjavanje i ravnanje površine pre brušenja i podloge. Prodaje se u pakovanju 1,8 kg. Tehnički i bezbednosni list dostavljamo na upit.",
+    sku: "148184",
+    packages: [{ label: "1,8 kg" }],
+    purpose: "Popunjavanje i ravnanje pre brušenja",
+    badges: ["Git", "Priprema", "1,8 kg"],
+    specifications: [
+      { label: "Tip", value: "Git" },
+      { label: "Pakovanje", value: "1,8 kg" },
+    ],
+    relatedProductSlugs: ["autofit-akrilni-razredjivac"],
+  }),
+  createProduct({
+    slug: "autofit-akrilni-razredjivac",
+    taxonomyCategory: "ciscenje",
+    name: "Auto Fit akrilni razređivač",
+    brandSlug: "autofit",
+    programSlug: "potrosni-materijal",
+    phaseSlug: "priprema",
+    shortDescription: "Auto Fit akrilni razređivač u pakovanju od 1 L, a veće pakovanje je 4 ili 5 L, zavisno od isporuke.",
+    longDescription:
+      "Auto Fit akrilni razređivač za radionički rad. Prodaje se u pakovanju od 1 L; veće pakovanje je 4 L ili 5 L, zavisno od isporuke. Namenu, tehnički i bezbednosni list potvrđujemo na upit.",
+    sku: "110002",
+    packages: [{ label: "1 L" }, { label: "4 L ili 5 L", detail: "zavisno od isporuke" }],
+    purpose: "Razređivanje i radionički rad",
+    badges: ["Razređivač", "1 L", "4–5 L"],
+    specifications: [
+      { label: "Tip", value: "Akrilni razređivač" },
+      { label: "Pakovanje", value: "1 L; 4 L ili 5 L zavisno od isporuke" },
+    ],
+    relatedProductSlugs: ["autofit-git-forster-fill-1-8-kg"],
+  }),
+  createProduct({
+    slug: "autofit-zastitni-papir-premium-60-cm-150-m",
+    taxonomyCategory: "maskiranje",
+    name: "Auto Fit zaštitni papir Premium 60 cm × 150 m",
+    brandSlug: "autofit",
+    programSlug: "potrosni-materijal",
+    phaseSlug: "priprema",
+    shortDescription: "Auto Fit zaštitni papir Premium za maskiranje pri lakiranju, rolna 60 cm × 150 m.",
+    longDescription:
+      "Auto Fit zaštitni papir Premium služi za maskiranje delova vozila pri pripremi i lakiranju. Isporučuje se u rolni širine 60 cm i dužine 150 m.",
+    sku: "051060",
+    packages: [{ label: "rolna 60 cm × 150 m" }],
+    purpose: "Maskiranje pri pripremi i lakiranju",
+    badges: ["Maskiranje", "60 cm × 150 m"],
+    specifications: [
+      { label: "Tip", value: "Zaštitni papir za maskiranje" },
+      { label: "Dimenzija", value: "60 cm × 150 m" },
+    ],
+    relatedProductSlugs: [],
+  }),
+  createProduct({
+    slug: "autofit-industrijski-ubrus",
+    taxonomyCategory: "ciscenje",
+    name: "Auto Fit industrijski ubrus",
+    brandSlug: "autofit",
+    programSlug: "potrosni-materijal",
+    phaseSlug: "priprema",
+    shortDescription: "Auto Fit industrijski ubrus za radionicu, rolna od 800 listića.",
+    longDescription:
+      "Auto Fit industrijski ubrus za brisanje i čišćenje u radionici. Isporučuje se u rolni od 800 listića.",
+    sku: "000007",
+    packages: [{ label: "rolna 800 listića" }],
+    purpose: "Brisanje i čišćenje u radionici",
+    badges: ["Čišćenje", "800 listića"],
+    specifications: [
+      { label: "Tip", value: "Industrijski ubrus" },
+      { label: "Pakovanje", value: "rolna, 800 listića" },
+    ],
+    relatedProductSlugs: [],
+  }),
+  createProduct({
+    slug: "autofit-blanko-posude-sa-poklopcima",
+    taxonomyCategory: "pribor",
+    name: "Auto Fit blanko posude sa poklopcima",
+    brandSlug: "autofit",
+    programSlug: "potrosni-materijal",
+    phaseSlug: "priprema",
+    shortDescription: "Prazne posude za boju sa poklopcima, u pet veličina od 400 ml do 5,7 L.",
+    longDescription:
+      "Auto Fit blanko posude su prazne posude za boju, za pretakanje i čuvanje mešane boje. Poklopac se poručuje posebno, u istoj veličini kao posuda. Veličine: 400 ml, 800 ml, 1,2 L, 2,4 L i 5,7 L.",
+    sku: "700041",
+    packages: [{ label: "400 ml" }, { label: "800 ml" }, { label: "1,2 L" }, { label: "2,4 L" }, { label: "5,7 L" }],
+    purpose: "Pretakanje i čuvanje mešane boje",
+    badges: ["Posude", "Poklopci", "400 ml – 5,7 L"],
+    specifications: [
+      { label: "Tip", value: "Prazna posuda za boju, poklopac posebno" },
+      { label: "Veličine", value: "400 ml, 800 ml, 1,2 L, 2,4 L, 5,7 L" },
     ],
     relatedProductSlugs: [],
   }),

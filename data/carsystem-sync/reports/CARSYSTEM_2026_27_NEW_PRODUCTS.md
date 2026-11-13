@@ -60,4 +60,4 @@ Izvor oznake „NEW”: bedž u katalogu 2026/27 (pozicijski uz tabelu artikala)
 
 ## Prvi put u našem katalogu
 
-Od 465 zvaničnih proizvoda, pre synca smo imali 6 ručnih zapisa. Svi proizvodi sa statusom „uvozi se” u `SYNC_DRY_RUN.md` su novi za naš sajt, bez obzira na oznaku proizvođača.
+Od 465 zvaničnih proizvoda, pre synca smo imali 8 ručnih zapisa. Svi proizvodi sa statusom „uvozi se” u `SYNC_DRY_RUN.md` su novi za naš sajt, bez obzira na oznaku proizvođača.

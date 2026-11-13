@@ -1810,6 +1810,54 @@ const productRecords: CarsystemProduct[] = [
       "rm-body-filler-white-b-2e11",
     ],
   }),
+  // Odluka vlasnika 2026-11-13: artikli koje prodajemo, a nema ih u Carsystem katalogu 2026/27 ni na
+  // carsystem.org. Podaci su samo naš naziv i prodajno pakovanje; `sku` = naša šifra u Carsystem zapisu
+  // (vlasnik: „šifra prepisana ista kao kod Carsystema“). Šifra proizvođača nije proverena.
+  createProduct({
+    slug: "carsystem-git-multi-fill-finish",
+    name: "Carsystem Git Multi Fill & Finish 4,8 kg",
+    brandSlug: "carsystem",
+    programSlug: "priprema-povrsine",
+    phaseSlug: "priprema",
+    taxonomyCategory: "kitovi",
+    shortDescription: "Carsystem git iz Multi programa za popunjavanje i završno ravnanje, u radioničkom pakovanju 4,8 kg.",
+    longDescription:
+      "Carsystem Git Multi Fill & Finish je git za popunjavanje i završno ravnanje pre brušenja i podloge. Prodaje se u radioničkom pakovanju 4,8 kg. Tehnički i bezbednosni list dostavljamo na upit.",
+    sku: "147.161",
+    packages: [{ label: "4,8 kg" }],
+    purpose: "Popunjavanje i završno ravnanje pre brušenja",
+    badges: ["Git", "Priprema", "4,8 kg"],
+    specifications: [
+      { label: "Tip", value: "Git" },
+      { label: "Pakovanje", value: "4,8 kg" },
+    ],
+    relatedProductSlugs: ["carsystem-git-multi-green"],
+  }),
+  createProduct({
+    slug: "carsystem-navlake-za-sedista-rolna",
+    name: "Carsystem navlake za sedišta u rolni",
+    brandSlug: "carsystem",
+    programSlug: "potrosni-materijal",
+    phaseSlug: "priprema",
+    taxonomyCategory: "maskiranje",
+    shortDescription: "Jednokratne navlake za zaštitu sedišta vozila tokom rada u radionici, u rolni.",
+    longDescription:
+      "Jednokratne navlake za sedišta štite presvlake vozila od prašine, boje i prljavštine dok je vozilo u radionici. Isporučuju se u rolni. Dimenzije i broj komada u rolni potvrđujemo na upit.",
+    sku: "142.940",
+    packages: [{ label: "rolna" }],
+    purpose: "Zaštita sedišta vozila tokom popravke",
+    badges: ["Zaštita", "Rolna"],
+    // Ilustracija (vlasnik 2026-11-13): fotografija jednokratne navlake bez oznake brenda; Carsystem fotografija ne postoji.
+    productImage: productAsset(
+      "/products/carfit/catalog/carfit-disposable-seat-covers.webp",
+      "Jednokratna navlaka za sedište — ilustracija",
+    ),
+    specifications: [
+      { label: "Tip", value: "Jednokratna navlaka za sedište" },
+      { label: "Pakovanje", value: "Rolna" },
+    ],
+    relatedProductSlugs: ["carfit-disposable-seat-covers"],
+  }),
   createProduct({
     slug: "carsystem-git-elastic-weiss",
     name: "Carsystem Git Elastic Weiss",

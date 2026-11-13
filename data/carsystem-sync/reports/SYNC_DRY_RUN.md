@@ -14,7 +14,7 @@ Generisano komandom `npm run carsystem:sync:plan`. Ovaj korak ne menja katalog.
 | catalogueSha256 | ac4f63d9b65109f15de5f5cb3f3caed672741ddd97a76eea78bbacf35d643961 |
 | SOURCE PRODUCTS | 465 |
 | SOURCE VARIANTS | 1089 |
-| EXISTING PRODUCTS | 6 |
+| EXISTING PRODUCTS | 8 |
 | EXISTING VARIANTS | 9 |
 | EXACT MATCHES | 1 |
 | HIGH CONFIDENCE MATCHES | 4 |
@@ -23,7 +23,7 @@ Generisano komandom `npm run carsystem:sync:plan`. Ovaj korak ne menja katalog.
 | MISSING VARIANTS | 0 |
 | variantsSuppliedByEnrichment | 22 |
 | AMBIGUOUS | 0 |
-| LEGACY PRODUCTS | 0 |
+| LEGACY PRODUCTS | 2 |
 | SOURCE CONFLICTS | 10 |
 | MISSING IMAGES | 3 |
 | MISSING IMPORTANT DATA | 1 |
@@ -41,6 +41,8 @@ Generisano komandom `npm run carsystem:sync:plan`. Ovaj korak ne menja katalog.
 | Naš slug | Klasifikacija | Zvanični proizvod | Dokaz | Dopuna |
 | --- | --- | --- | --- | --- |
 | `carsystem-git-multi-green` | HIGH_CONFIDENCE_MATCH<br>VARIANT_MISSING<br>EXISTING_DATA_INCOMPLETE | Multi Green — Multifuncional polyester putty | identical-official-tds | +3 varijanti; sku je interni placeholder (CS-GIT-MULTI-GREEN); manufacturerCode nije upisan |
+| `carsystem-git-multi-fill-finish` | LEGACY_NOT_IN_CATALOGUE<br>LEGACY_NOT_IN_2026_27 | — | article-number, none | — |
+| `carsystem-navlake-za-sedista-rolna` | LEGACY_NOT_IN_CATALOGUE<br>LEGACY_NOT_IN_2026_27 | — | article-number, none | — |
 | `carsystem-git-elastic-weiss` | HIGH_CONFIDENCE_MATCH<br>VARIANT_MISSING<br>EXISTING_DATA_INCOMPLETE | Elastic white — Polyester - fine putty | identical-official-packshot | +3 varijanti; sku je interni placeholder (CS-GIT-ELASTIC-WEISS); manufacturerCode nije upisan |
 | `carsystem-f19-brusni-diskovi` | HIGH_CONFIDENCE_MATCH<br>VARIANT_MISSING<br>EXISTING_DATA_INCOMPLETE | Sanding Disc F.19 — Film abrasive - 150 mm - 25 holes | series-article-range | +12 varijanti; sku je interni placeholder (CS-F19-DISC); manufacturerCode nije upisan |
 | `carsystem-f23-brusni-diskovi` | EXACT_MATCH<br>EXISTING_DATA_INCOMPLETE | Sanding Disc F.23 Ceramic — Film abrasive - 150 mm - 25 holes | article-number | +0 varijanti; manufacturerCode nije upisan |

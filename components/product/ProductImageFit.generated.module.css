@@ -4304,6 +4304,15 @@
   --product-content-offset-y: 0.1232;
 }
 
+.fit[data-product-fit="/products/carsystem/carsystem-git-multi-fill-finish-4-8-kg.webp"] {
+  --product-canvas-aspect: 0.6376;
+  --product-content-aspect: 0.6172;
+  --product-content-fill-x: 0.9123;
+  --product-content-fill-y: 0.9424;
+  --product-content-offset-x: 0.0438;
+  --product-content-offset-y: 0.0279;
+}
+
 .fit[data-product-fit="/products/carsystem/carsystem-git-multi-green.jpg"] {
   --product-canvas-aspect: 1;
   --product-content-aspect: 1.4596;
@@ -4324,15 +4333,6 @@
   --product-content-fill-y: 0.66;
   --product-content-offset-x: 0.0217;
   --product-content-offset-y: 0.1783;
-}
-
-.fit[data-product-fit="/products/carsystem/carsystem-multi-fill-finish-4-8-kg.webp"] {
-  --product-canvas-aspect: 0.6097;
-  --product-content-aspect: 0.5857;
-  --product-content-fill-x: 0.9051;
-  --product-content-fill-y: 0.9421;
-  --product-content-offset-x: 0.0486;
-  --product-content-offset-y: 0.0283;
 }
 
 .fit[data-product-fit="/products/carsystem/carsystem-navlake-za-sedista-rolna.webp"] {
@@ -25047,14 +25047,6 @@
   --product-content-fill-y: 0.734;
   --product-content-offset-x: 0.1242;
   --product-content-offset-y: 0.1256;
-}
-
-.fit[data-product-fit="/products/carsystem/carsystem-multi-fill-finish-4-8-kg.webp"][data-product-fit-model="v6"] {
-  --product-content-aspect: 0.5831;
-  --product-content-fill-x: 0.8985;
-  --product-content-fill-y: 0.9394;
-  --product-content-offset-x: 0.0508;
-  --product-content-offset-y: 0.031;
 }
 
 .fit[data-product-fit="/products/carsystem/catalog/carsystem-1k-easy-primer.webp"][data-product-fit-model="v6"] {

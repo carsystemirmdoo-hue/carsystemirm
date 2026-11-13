@@ -305,6 +305,26 @@ const OWNER_CONFIRMED_VARIANTS: Record<string, { after: string; variant: Catalog
       },
     },
   ],
+  // Odluka vlasnika 2026-11-13: beli Plus 150 × 25 (BizniSoft 054401; katalog str. 17: WHITE 54401, 66 kom.)
+  // i narandžasti Plus 80 × 25 (044808; katalog str. 9 „PLUS VELCRO COMPOUNDING FOAM“: ORANGE 44808, 200 kom.).
+  "befar-plus-velcro-polishing-pad": [
+    {
+      after: "54402",
+      variant: {
+        code: "54401", label: "Bela · 150 × 25 mm", searchLabel: "Bela · 150 × 25 mm", colour: "White", colourSr: "bela",
+        swatch: "#E6E3DD", size: "150x25mm", holes: null, hardnessStars: null, applyWith: null, boxQuantity: 66, image: null,
+        onWebsite: false, inCatalogue: true, cataloguePage: 17,
+      },
+    },
+    {
+      after: "56407",
+      variant: {
+        code: "44808", label: "Narandžasta · 80 × 25 mm", searchLabel: "Narandžasta · 80 × 25 mm", colour: "Orange", colourSr: "narandžasta",
+        swatch: "#DF7A27", size: "80x25mm", holes: null, hardnessStars: null, applyWith: null, boxQuantity: 200, image: null,
+        onWebsite: false, inCatalogue: true, cataloguePage: 9,
+      },
+    },
+  ],
   // Odluka vlasnika 2026-11-13: međupodloška postoji meka (093007/093015/093062) i tvrda (093107/093115/093162).
   // Katalog str. 24: SOFT 93007/93015/93062 i HARD 93107/93115/93162, „BACKING PAD 150 mm“.
   "befar-backing-pad": [
@@ -327,7 +347,23 @@ function backingPad(code: string, hardness: "Meka", holes: string, holesSr: stri
   };
 }
 
+/** Tekst kartice koji mora da prati vlasnikom dodate varijante (inače zvanični tekst nabraja manje dimenzija i boja). */
+const OWNER_CONTENT: Record<string, (content: CatalogProductEntry["content"]) => CatalogProductEntry["content"]> = {
+  "befar-plus-velcro-polishing-pad": (c) => ({
+    ...c,
+    subtype: "sunđer za poliranje · čičak · 3 dimenzije · 5 boja",
+    shortDescription:
+      "Sunđer za poliranje sa čičkom iz linije Befar Plus, u dimenzijama 80 × 25 mm, 150 × 25 mm i 180 × 35 mm, u pet boja.",
+    longDescription: c.longDescription.replace("u dimenzijama 150 × 25 mm i 180 × 35 mm", "u dimenzijama 80 × 25 mm, 150 × 25 mm i 180 × 35 mm"),
+    facts: c.facts.map((f) =>
+      f.label === "Dimenzije" ? { ...f, value: "80 × 25 mm, 150 × 25 mm, 180 × 35 mm" } : f.label === "Boje" ? { ...f, value: "bela, narandžasta, plava, krem, bordo" } : f,
+    ),
+  }),
+};
+
 function withOwnerConfirmedVariants(entry: CatalogProductEntry): CatalogProductEntry {
+  const patch = OWNER_CONTENT[entry.slug];
+  if (patch) entry = { ...entry, content: patch(entry.content) };
   const extra = OWNER_CONFIRMED_VARIANTS[entry.slug];
   if (!extra) return entry;
   const relabel = OWNER_RELABELS[entry.slug] ?? {};
@@ -507,6 +543,56 @@ const OWNER_PROMOTED_ENTRIES: CatalogProductEntry[] = [
         { label: "Linija", value: "Leo" },
         { label: "Dimenzije", value: "70 × 100 × 30 mm" },
         { label: "Fabričko pakovanje", value: "230 kom. u kutiji" },
+      ],
+      applications: [],
+      benefits: [],
+      advice: null,
+      setContents: [],
+    },
+    shade: null,
+  },
+  // Odluka vlasnika 2026-11-13: zaštita podloške (BizniSoft 093262) je poseban proizvod, ne međupodloška.
+  // Katalog str. 24 „PAD PROTECTOR 150 mm“: 93207 (7 rupa), 93215 (15 rupa), 93262 (62 rupe), 300 kom. u kutiji.
+  {
+    slug: "befar-pad-protector",
+    name: "Befar zaštita podloške 150 mm",
+    sourceKey: "catalogue-p24-pad-protector",
+    sourceUrls: [befarCatalogMeta.catalogueUrl],
+    officialName: "Pad Protector",
+    officialNameTr: null,
+    line: "Befar",
+    kind: "family",
+    isSet: false,
+    qualifiers: [],
+    officialCategories: ["Sanding Pad Group"],
+    classification: "CATALOGUE_ONLY_OWNER_PROMOTED",
+    taxonomy: { category: "pribor", programSlug: "abrazivi", phaseSlug: "priprema", visualType: "neutral" },
+    cataloguePages: [24],
+    leadCode: "93262",
+    relatedLegacySlugs: [],
+    variantColumn: { key: "size", label: "Broj rupa" },
+    variants: (
+      [["93207", "7 Holes", "7 rupa"], ["93215", "15 Holes", "15 rupa"], ["93262", "62 Holes", "62 rupe"]] as const
+    ).map(([code, holes, holesSr]) => ({
+      code, label: `150 mm · ${holesSr}`, searchLabel: `150 mm · ${holesSr} · zaštita podloške`, colour: null, colourSr: null, swatch: null,
+      size: "150mm", holes, hardnessStars: null, applyWith: null, boxQuantity: 300, image: null, onWebsite: false, inCatalogue: true, cataloguePage: 24,
+    })),
+    image: null,
+    sharedGroupImages: false,
+    missingOfficialAsset: true,
+    gallery: [],
+    content: {
+      productType: "Zaštita podloške",
+      subtype: "zaštita podloške · 150 mm · 7, 15 ili 62 rupe",
+      shortDescription: "Befar zaštita podloške (Pad Protector), prečnika 150 mm, u izvedbama sa 7, 15 i 62 rupe.",
+      longDescription:
+        "Pad Protector je Befar zaštita podloške brusilice iz grupe podloški za brušenje. Prečnik je 150 mm, u izvedbama sa 7, 15 ili 62 rupe; u kutiji je 300 komada. Postavljanje i kompatibilnost sa podloškom potvrđujemo na upit.",
+      purpose: "Zaštita podloške brusilice",
+      facts: [
+        { label: "Linija", value: "Befar" },
+        { label: "Dimenzije", value: "150 mm" },
+        { label: "Broj rupa", value: "7, 15, 62" },
+        { label: "Fabričko pakovanje", value: "300 kom. u kutiji" },
       ],
       applications: [],
       benefits: [],

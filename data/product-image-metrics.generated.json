@@ -18534,6 +18534,53 @@
       ],
       "officialShadow": "strong"
     },
+    "/products/carsystem/carsystem-git-multi-fill-finish-4-8-kg.webp": {
+      "w": 730,
+      "h": 1145,
+      "box": [
+        32,
+        32,
+        666,
+        1079
+      ],
+      "fx": 0.9123,
+      "fy": 0.9424,
+      "ox": 0.0438,
+      "oy": 0.0279,
+      "aspect": 0.6172,
+      "luminance": 0.1384,
+      "tone": "dark",
+      "boxSource": "alpha",
+      "palette": [
+        {
+          "hex": "#dbdadd",
+          "share": 0.0631
+        }
+      ],
+      "coarse": [
+        {
+          "hex": "#ca0d10",
+          "share": 0.4463
+        },
+        {
+          "hex": "#d6d6d8",
+          "share": 0.1228
+        }
+      ],
+      "fitModelVersion": 1,
+      "subjectBox": [
+        32,
+        32,
+        666,
+        1079
+      ],
+      "subjectAspect": 0.6172,
+      "subjectCenter": [
+        0.5,
+        0.4991
+      ],
+      "officialShadow": "none"
+    },
     "/products/carsystem/carsystem-git-multi-green.jpg": {
       "w": 600,
       "h": 600,
@@ -18621,61 +18668,6 @@
         0.5083
       ],
       "officialShadow": "none"
-    },
-    "/products/carsystem/carsystem-multi-fill-finish-4-8-kg.webp": {
-      "w": 453,
-      "h": 743,
-      "box": [
-        22,
-        21,
-        410,
-        700
-      ],
-      "fx": 0.9051,
-      "fy": 0.9421,
-      "ox": 0.0486,
-      "oy": 0.0283,
-      "aspect": 0.5857,
-      "luminance": 0.0406,
-      "tone": "very-dark",
-      "boxSource": "alpha",
-      "palette": [
-        {
-          "hex": "#5d120c",
-          "share": 0.0979
-        },
-        {
-          "hex": "#540a02",
-          "share": 0.0693
-        }
-      ],
-      "coarse": [
-        {
-          "hex": "#570f08",
-          "share": 0.3369
-        },
-        {
-          "hex": "#716d6c",
-          "share": 0.1634
-        },
-        {
-          "hex": "#661711",
-          "share": 0.1082
-        }
-      ],
-      "fitModelVersion": 1,
-      "subjectBox": [
-        23,
-        23,
-        407,
-        698
-      ],
-      "subjectAspect": 0.5831,
-      "subjectCenter": [
-        0.5,
-        0.5007
-      ],
-      "officialShadow": "thin"
     },
     "/products/carsystem/carsystem-navlake-za-sedista-rolna.webp": {
       "w": 1200,

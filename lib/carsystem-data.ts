@@ -1827,9 +1827,9 @@ const productRecords: CarsystemProduct[] = [
     packages: [{ label: "4,8 kg" }],
     purpose: "Popunjavanje i završno ravnanje pre brušenja",
     badges: ["Git", "Priprema", "4,8 kg"],
-    // Fotografija vlasnika 2026-11-13 (na etiketi Art.-Nr. 147.161, 4,7 kg + 100 g).
+    // Slika vlasnika 2026-11-13 (limenka 4,7 kg + tuba učvršćivača; šifra 147.161 sa fotografije etikete).
     productImage: productAsset(
-      "/products/carsystem/carsystem-multi-fill-finish-4-8-kg.webp",
+      "/products/carsystem/carsystem-git-multi-fill-finish-4-8-kg.webp",
       "Carsystem Multi Fill & Finish, limenka 4,7 kg sa učvršćivačem",
     ),
     specifications: [
@@ -1859,6 +1859,27 @@ const productRecords: CarsystemProduct[] = [
       { label: "Prečnik", value: "133 mm" },
     ],
     relatedProductSlugs: ["carsystem-lamb-wool-pad-gold-s", "carsystem-lamb-wool-pad-white-s-edge"],
+  }),
+  // Odluka vlasnika 2026-11-13: papirno zaštitno odelo je posebna kartica, sve veličine na jednoj
+  // (BizniSoft 155618 L, 155619 XL, 155620 XXL). Nema ga u Carsystem katalogu 2026/27 ni na sajtu.
+  createProduct({
+    slug: "carsystem-zastitno-odelo-papirno",
+    name: "Carsystem papirno zaštitno odelo",
+    brandSlug: "carsystem",
+    programSlug: "potrosni-materijal",
+    phaseSlug: "priprema",
+    shortDescription: "Papirno zaštitno odelo za pripremu i lakiranje, u veličinama L, XL i XXL.",
+    longDescription:
+      "Carsystem papirno zaštitno odelo štiti radnika i odeću tokom pripreme i lakiranja. Dostupno je u veličinama L, XL i XXL. Materijal i broj komada u pakovanju potvrđujemo na upit.",
+    sku: "155.618",
+    packages: [{ label: "L" }, { label: "XL" }, { label: "XXL" }],
+    purpose: "Zaštita radnika tokom pripreme i lakiranja",
+    badges: ["Zaštita", "Papirno", "L / XL / XXL"],
+    specifications: [
+      { label: "Tip", value: "Papirno zaštitno odelo" },
+      { label: "Veličine", value: "L (155.618), XL (155.619), XXL (155.620)" },
+    ],
+    relatedProductSlugs: ["carsystem-zastitno-odelo"],
   }),
   createProduct({
     slug: "carsystem-navlake-za-sedista-rolna",

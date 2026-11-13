@@ -17,6 +17,7 @@ import { CustomerStatusPanel } from "./CustomerStatusPanel";
 import { CustomerDesk } from "@/components/portal/CustomerDesk";
 import { loadCustomerDesk } from "@/lib/sales-tools/customer-desk-service";
 import { CustomerPeriod } from "./CustomerPeriod";
+import { KupacTrazioForm } from "@/app/portal/nabavka/Trazeno";
 import { readPortalPeriod } from "@/lib/portal/period";
 import { loadCustomerPeriodArticles } from "@/lib/sales/customer-period-service";
 import { CustomerArticles, CustomerCrossSell, CustomerMethod, CustomerSuggestions, CustomerSummary } from "./CustomerCard";
@@ -87,6 +88,14 @@ export default async function CustomerDetailPage({
         description={`PIB ${customer.pib}${customer.city ? ` · ${customer.city}` : ""}${customer.active ? "" : " · neaktivan kupac"}`}
       />
       {desk ? <CustomerDesk customerId={customer.id} desk={desk} showDebt={can(user, "view:dugovanja")} /> : null}
+      {can(user, "view:preporuke") || can(user, "view:zahtevi") ? (
+        <section className="portal-panel" aria-label="Kupac tražio artikal kog nema na stanju">
+          <div className="portal-panel-body">
+            <p className="portal-footnote">Kupac je tražio artikal kog nema na stanju? Zabeležite — vidi se na Nabavci.</p>
+            <KupacTrazioForm customerId={customer.id} />
+          </div>
+        </section>
+      ) : null}
       {!customer.active ? (
         <p className="portal-readiness-note" role="status">
           Kupac je označen kao neaktivan. Istorija i veze su dostupne; predlozi za razgovor i proširenje se ne
@@ -119,7 +128,7 @@ export default async function CustomerDetailPage({
       {showSignals && profile && customer.active ? (
         <CustomerSuggestions profile={profile} identities={identities} order={order} />
       ) : null}
-      {profile ? <CustomerArticles profile={profile} identities={identities} /> : null}
+      {profile ? <CustomerArticles profile={profile} identities={identities} period={period} /> : null}
       {showSignals && profile && crossSell && customer.active ? (
         <CustomerCrossSell
           crossSell={crossSell}

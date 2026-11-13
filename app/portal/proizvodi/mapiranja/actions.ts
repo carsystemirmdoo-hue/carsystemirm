@@ -5,6 +5,7 @@ import { z } from "zod";
 import { requireCapability } from "@/lib/authz/session";
 import {
   decideMapping,
+  notifyMappingBatch,
   proposeMappingForArticle,
 } from "@/lib/commercial/mapping-service";
 import { ProductMappingError } from "@/lib/commercial/productMapping.mjs";
@@ -168,6 +169,7 @@ export async function confirmNameProposalsAction(items: { articleId: string; slu
           note: `Potvrđen predlog po nazivu (${p.confidence}, ocena ${cand.score}): ${cand.label}`.slice(0, 500),
         },
         { id: actor.id, name: actor.name, role: actor.role },
+        { notify: false },
       );
       done++;
     } catch (error) {
@@ -175,6 +177,8 @@ export async function confirmNameProposalsAction(items: { articleId: string; slu
       else throw error;
     }
   }
+  // Jedno zbirno obaveštenje umesto po jednog za svaku vezu (2026-11-13).
+  await notifyMappingBatch({ mapped: done, revoked: 0, source: `Potvrđeni predlozi po nazivu (${actor.name})` });
   revalidatePath("/portal/proizvodi/mapiranja");
   return {
     error: done === 0 && skipped.length ? `Nijedna veza nije potvrđena (${skipped.slice(0, 10).join(", ")}).` : null,

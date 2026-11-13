@@ -133,6 +133,12 @@ export async function decideMapping(
     note: string;
   },
   actor: MappingActor,
+  /**
+   * `notify: false` za masovne upise (dugme „Potvrdi sve sigurne“, planovi veza): umesto po jednog
+   * obaveštenja za svaki artikal pozivalac posle petlje šalje jedno zbirno (`notifyMappingBatch`).
+   * Audit zapis po artiklu ostaje uvek. Odluka vlasnika 2026-11-13.
+   */
+  options: { notify?: boolean } = {},
 ): Promise<void> {
   const live = await loadLiveMapping(input.articleId);
   const from = live?.status ?? "unmapped";
@@ -228,7 +234,7 @@ export async function decideMapping(
      */
     const bilo = from === "mapped";
     const jeste = input.status === "mapped";
-    if (bilo !== jeste) {
+    if (bilo !== jeste && options.notify !== false) {
       await notify(
         {
           kind: "mapping_customer_facing_changed",
@@ -253,6 +259,27 @@ export async function decideMapping(
         tx,
       );
     }
+  });
+}
+
+/**
+ * Jedno zbirno obaveštenje za masovni upis veza (umesto N pojedinačnih). Ne šalje ništa za 0.
+ * Pojedinosti (koji artikal, ko, zašto) su u dnevniku aktivnosti, po artiklu.
+ */
+export async function notifyMappingBatch(input: { mapped: number; revoked: number; source: string }) {
+  const { mapped, revoked, source } = input;
+  if (mapped + revoked === 0) return;
+  const parts = [mapped ? `povezano ${mapped}` : "", revoked ? `povučeno ${revoked}` : ""].filter(Boolean).join(", ");
+  await notify({
+    kind: "mapping_customer_facing_changed",
+    severity: "info",
+    requiredCapability: "mappings:manage",
+    title: `Veze artikala sa katalogom: ${parts}`,
+    body: `${source}: ${parts}. Povezani artikli od sada prikazuju sliku i stranicu proizvoda; pojedinosti po artiklu su u dnevniku aktivnosti.`,
+    entityType: "Mapiranje artikla",
+    entityId: null,
+    actionHref: "/portal/proizvodi/mapiranja",
+    context: { povezano: mapped, povuceno: revoked },
   });
 }
 

@@ -106,7 +106,7 @@ function summarize(lines: { sourceCode: string; codeKey: string | null; quantity
 }
 
 /* =========================================================================
- * Pravilo čuvanja (0051): detaljne stavke samo za dva poslednja potvrđena snimka
+ * Pravilo čuvanja (0051, 0065): detaljne stavke samo za četiri poslednja potvrđena snimka
  * ====================================================================== */
 
 type TxLike = Pick<ReturnType<typeof getDb>, "execute">;
@@ -246,7 +246,7 @@ export async function uploadStockReport(actor: Actor, input: { fileName: string;
       },
       tx,
     );
-    // Rok od 7 dana za nepotvrđena/odbačena; dva poslednja potvrđena snimka se ne diraju.
+    // Rok od 7 dana za nepotvrđena/odbačena; četiri poslednja potvrđena snimka se ne diraju.
     await applyRetention(tx);
     return { importId: created.id, duplicate: false, status, recheckOf };
   });
@@ -396,7 +396,10 @@ export async function confirmStockImport(actor: Actor, input: { importId: string
         SELECT ${r.article_id}::uuid, false, ${`Rasprodato: potvrđen lager ${imp.stock_date} pokazuje stanje 0 (prodaja do isteka zalihe)`}, ${`rasprodaja-${input.importId.slice(0, 8)}`}, ${actor.id}::uuid
          WHERE NOT EXISTS (SELECT 1 FROM articles_out_of_programme o WHERE o.article_id = ${r.article_id}::uuid)`);
     }
-    // Atomski sa potvrdom: ostaju stavke ovog i prethodnog potvrđenog snimka.
+    // Kratka istorija lagera (0065): samo promene količine po šifri; snimak koji nije noviji od
+    // poslednjeg upisanog datuma ne menja istoriju (ponovljen ili zakasneo uvoz).
+    const history = imp.stock_date ? await recordStockHistory(tx, input.importId, imp.stock_date) : { closed: 0, opened: 0, skipped: true };
+    // Atomski sa potvrdom: ostaju stavke 4 poslednja potvrđena snimka (0065).
     const retention = await applyRetention(tx);
     await recordAudit(
       {
@@ -405,13 +408,43 @@ export async function confirmStockImport(actor: Actor, input: { importId: string
         entityType: ENTITY,
         entityId: input.importId,
         entityLabel: `${imp.file_name.slice(0, 120)} — stanje ${imp.stock_date}`,
-        after: { stockDate: imp.stock_date, lines: imp.line_count, previousStockDate: currentDate, retention, rasprodato: soldOut.map((r) => r.code) },
+        after: { stockDate: imp.stock_date, lines: imp.line_count, previousStockDate: currentDate, retention, history, rasprodato: soldOut.map((r) => r.code) },
         reason: note,
       },
       tx,
     );
     return { stockDate: imp.stock_date, retention };
   });
+}
+
+/**
+ * Istorija lagera (0065): zatvara otvoren raspon šifre čija se količina promenila ili koje više nema
+ * u snimku, i otvara nov raspon od datuma snimka. Dva reda iste šifre („91“ i „091“) → manja količina.
+ */
+async function recordStockHistory(tx: TxLike, importId: string, stockDate: string) {
+  // Pre migracije 0065 tabele nema: potvrda lagera ne sme da padne zbog istorije.
+  const [has] = [...(await tx.execute<{ ok: boolean }>(sql`SELECT to_regclass('public.stock_level_history') IS NOT NULL AS ok`))];
+  if (!has?.ok) return { closed: 0, opened: 0, skipped: true };
+  const [latest] = [...(await tx.execute<{ d: string | null }>(sql`SELECT max(from_date)::text AS d FROM stock_level_history`))];
+  if (latest?.d && stockDate <= latest.d) return { closed: 0, opened: 0, skipped: true };
+  const closed = [...(await tx.execute<{ id: number }>(sql`
+    UPDATE stock_level_history h
+       SET to_date = ${stockDate}::date - 1
+     WHERE h.to_date IS NULL
+       AND NOT EXISTS (
+         SELECT 1 FROM (SELECT code_key, min(quantity) AS q FROM stock_import_lines
+                         WHERE import_id = ${importId}::uuid AND code_key IS NOT NULL GROUP BY code_key) l
+          WHERE l.code_key = h.code_key AND l.q IS NOT DISTINCT FROM h.quantity)
+    RETURNING h.id`))].length;
+  const opened = [...(await tx.execute<{ id: number }>(sql`
+    INSERT INTO stock_level_history (code_key, from_date, quantity, import_id)
+    SELECT l.code_key, ${stockDate}::date, min(l.quantity), ${importId}::uuid
+      FROM stock_import_lines l
+     WHERE l.import_id = ${importId}::uuid AND l.code_key IS NOT NULL
+       AND NOT EXISTS (SELECT 1 FROM stock_level_history h WHERE h.code_key = l.code_key AND h.to_date IS NULL)
+     GROUP BY l.code_key
+    RETURNING id`))].length;
+  return { closed, opened, skipped: false };
 }
 
 export async function discardStockImport(actor: Actor, input: { importId: string; note: string }) {

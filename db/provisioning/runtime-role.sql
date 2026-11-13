@@ -101,6 +101,10 @@ GRANT SELECT, INSERT ON receivable_lines TO :runtime_role;
 -- 0062: spisak kupaca iz tabela se samo dodaje (ručne veze naziva se mogu ispraviti i ukloniti).
 REVOKE UPDATE, DELETE, TRUNCATE ON receivable_sheet_customers FROM :runtime_role;
 GRANT SELECT, INSERT ON receivable_sheet_customers TO :runtime_role;
+-- 0065: istorija lagera i „traženo — nema na stanju“ se ne brišu iz aplikacije (istoriju čisti
+--       samo postupak čuvanja posle godinu dana; zahtev se jednokratno označava kao rešen).
+REVOKE DELETE, TRUNCATE ON stock_level_history FROM :runtime_role;
+REVOKE DELETE, TRUNCATE ON stock_requests FROM :runtime_role;
 -- 0051: čišćenje starijih stavki lagera SAMO kroz ograničen postupak (bez opšteg DELETE).
 DO $$
 BEGIN

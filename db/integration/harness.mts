@@ -308,6 +308,8 @@ const RESETTABLE_TABLES = [
    * artiklima, pa mora u istu `TRUNCATE` naredbu.
    */
   "customer_remember_tokens",
+  /* Traženo — nema na stanju (0065): `restrict` ka porudžbinama, kupcima i artiklima. */
+  "stock_requests",
   "customer_price_requests",
   "customer_order_events",
   "customer_order_lines",

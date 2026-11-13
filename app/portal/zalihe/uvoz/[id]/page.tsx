@@ -209,8 +209,8 @@ export default async function StockImportReviewPage({ params, searchParams }: { 
         <section className="lg-outcome" data-tone="neutral">
           <strong>Detaljne stavke su uklonjene po pravilu čuvanja</strong>
           <span>
-            {h.linesPurgedReason === "starija_od_dva_potvrdjena"
-              ? "Čuvaju se samo poslednja dva potvrđena lagera."
+            {h.linesPurgedReason === "starija_od_dva_potvrdjena" || h.linesPurgedReason === "starija_od_cetiri_potvrdjena"
+              ? "Detaljne stavke se čuvaju samo za poslednja četiri potvrđena lagera; promene stanja ostaju u istoriji lagera godinu dana."
               : "Nepotvrđena i odbačena otpremanja čuvaju stavke 7 dana."}{" "}
             Sačuvani su datum stanja, ko je uvezao i potvrdio, ishod, broj stavki i otisak fajla ({dmyTime(h.linesPurgedAt)}).
           </span>

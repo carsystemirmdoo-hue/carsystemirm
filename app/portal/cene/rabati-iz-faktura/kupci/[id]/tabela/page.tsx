@@ -8,6 +8,9 @@ import { PricingScopeError } from "@/lib/pricing/pricing-scope";
 import { RebateChangeError } from "@/lib/pricing/rebate-change-service";
 import { loadRebateTable } from "@/lib/pricing/rebate-table-service";
 import { RebateTable } from "./RebateTable";
+import { DateRangeField } from "@/components/portal/DateRangeField";
+import { readPortalPeriod } from "@/lib/portal/period";
+import { isAllTime, periodLabel } from "@/lib/portal/periodMemory.mjs";
 
 export const dynamic = "force-dynamic";
 // Čuvanje većeg broja artikala (svaki je jedno pravilo sa tragom) traje.
@@ -19,13 +22,20 @@ const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
  * Tabela rabata kupca (2026-11-09): svi artikli u ponudi — koje uzima i koje
  * ne — i izmena po brendu, grupi, artiklu, izboru ili neto ceni.
  */
-export default async function RebateTablePage({ params }: { params: Promise<{ id: string }> }) {
+export default async function RebateTablePage({
+  params,
+  searchParams,
+}: {
+  params: Promise<{ id: string }>;
+  searchParams: Promise<{ from?: string; to?: string }>;
+}) {
   const { id } = await params;
+  const period = await readPortalPeriod(await searchParams);
   if (!UUID.test(id)) notFound();
   const user = await requireCapability("view:rabati", `/portal/cene/rabati-iz-faktura/kupci/${id}/tabela`);
   let data: Awaited<ReturnType<typeof loadRebateTable>>;
   try {
-    data = await loadRebateTable(user, id);
+    data = await loadRebateTable(user, id, new Date(), period);
   } catch (error) {
     if (error instanceof PricingScopeError) forbidden();
     if (error instanceof RebateChangeError) notFound();
@@ -57,7 +67,20 @@ export default async function RebateTablePage({ params }: { params: Promise<{ id
           </>
         }
       />
-      <RebateTable customerId={id} rows={data.rows} today={data.today} canPropose={data.canPropose} canApprove={data.canApprove} />
+      <section className="portal-panel">
+        <form method="get" className="portal-inline-form">
+          <DateRangeField nameOd="from" nameDo="to" defaultOd={period.from} defaultDo={period.to} zapamti />
+          <button type="submit" className="portal-button" data-variant="primary">
+            Prikažite
+          </button>
+        </form>
+        <p className="portal-footnote">
+          {isAllTime(period)
+            ? "„Uzima“ znači da je kupac artikal kupio u poslednjih 365 dana. Izaberite period da biste videli šta je uzimao u tom periodu."
+            : `„Uzima“ znači da je kupac artikal kupio u periodu ${periodLabel(period).replace(/\.$/, "")}; broj uz „Uzima“ je broj dana kupovine u periodu. Rabati i cene se ne menjaju izborom perioda.`}
+        </p>
+      </section>
+      <RebateTable key={`${period.from ?? ""}|${period.to ?? ""}`} buysLabel={isAllTime(period) ? "Uzima (12 meseci)" : "Uzima (u periodu)"} customerId={id} rows={data.rows} today={data.today} canPropose={data.canPropose} canApprove={data.canApprove} />
     </>
   );
 }

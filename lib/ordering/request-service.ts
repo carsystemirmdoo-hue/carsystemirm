@@ -1,4 +1,5 @@
 import "server-only";
+import { recordOrderStockRequests } from "@/lib/stock/stock-requests";
 import { creditBlockFor } from "@/lib/credit/credit-service";
 import { createHash, randomUUID } from "node:crypto";
 import { sql } from "drizzle-orm";
@@ -656,6 +657,8 @@ export async function submitOrderRequest(
                              VALUES (${correcting}::uuid, 'replaced', ${session.accountId}, ${session.name}, ${`Ispravka poslata kao ${requestNumber}`})`);
       }
       await insertLines(tx, order.id, quote.lines);
+      // 0065: stavke čijeg artikla nema na potvrđenom lageru → „traženo — nema na stanju“.
+      await recordOrderStockRequests(tx, order.id);
       await tx.execute(sql`INSERT INTO customer_order_events (order_id, from_status, to_status, kind, actor_customer_user_id, actor_name)
                            VALUES (${order.id}, NULL, 'submitted', 'submitted', ${session.accountId}, ${session.name})`);
       await tx.execute(sql`DELETE FROM customer_cart_items WHERE customer_id = ${customerId}`);
@@ -918,6 +921,7 @@ export async function submitRepOrder(
               ${clip(input.deliveryAddress, 300)}, ${clip(input.contactPhone, 40)}, ${onRequest})
       RETURNING id`))];
     await insertLines(tx, order.id, priced.lines);
+    await recordOrderStockRequests(tx, order.id);
     await statusEvent(tx, order.id, null, "submitted", { staff: viewer }, why);
     await recordAudit(
       { actor: { id: viewer.id, name: viewer.name, role: viewer.role }, action: AUDIT_ACTIONS.orderPreparedForCustomer, entityType: "Zahtev za porudžbinu", entityId: order.id, entityLabel: requestNumber, before: null, after: { kupac: c.name, stavki: priced.lines.length }, reason: why },

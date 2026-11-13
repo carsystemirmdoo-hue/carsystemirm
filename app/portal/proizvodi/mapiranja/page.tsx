@@ -1,4 +1,6 @@
 import { Badge, PageHeader } from "@/components/portal/PortalPrimitives";
+import { loadNewCodes } from "@/lib/catalog/new-codes";
+import { NewCodes } from "./NewCodes";
 import type { ProductMappingStatus } from "@/db/schema/commercial";
 import { can } from "@/lib/authz/permissions.mjs";
 import { requireCapability } from "@/lib/authz/session";
@@ -31,6 +33,9 @@ function parseStatus(raw: string | undefined): ProductMappingStatus | undefined 
     : undefined;
 }
 
+/** „Nove šifre“: koliko dana unazad (2026-11-13). */
+const NEW_CODE_DAYS = 60;
+
 export default async function ArticleMappingsPage({
   searchParams,
 }: {
@@ -44,10 +49,11 @@ export default async function ArticleMappingsPage({
   const params = await searchParams;
 
   const includeInactive = params.predlozi === "svi";
-  const [rows, counts, proposals] = await Promise.all([
+  const [rows, counts, proposals, newCodes] = await Promise.all([
     listArticleMappings({ status: parseStatus(params.status), search: params.q }),
     countArticleMappingsByStatus(),
     canManage ? loadNameProposals({ includeInactive }) : Promise.resolve([]),
+    loadNewCodes(NEW_CODE_DAYS),
   ]);
 
   const orderability = await loadArticleOrderability(rows.map((r) => r.articleId));
@@ -121,6 +127,7 @@ export default async function ArticleMappingsPage({
             </p>
           </section>
 
+          <NewCodes rows={newCodes} days={NEW_CODE_DAYS} />
           {canManage ? <NameProposals proposals={proposals} includeInactive={includeInactive} /> : null}
           <MappingReview rows={reviewRows} canManage={canManage} />
         </>

@@ -36,7 +36,7 @@ const ids: Record<string, string> = {};
 async function resetStock() {
   await db.sql`ALTER TABLE stock_import_lines DISABLE TRIGGER USER`;
   await db.sql`ALTER TABLE stock_imports DISABLE TRIGGER USER`;
-  await db.sql`TRUNCATE stock_import_lines, stock_imports, article_sellout`;
+  await db.sql`TRUNCATE stock_level_history, stock_import_lines, stock_imports, article_sellout`;
   await db.sql`ALTER TABLE stock_import_lines ENABLE TRIGGER USER`;
   await db.sql`ALTER TABLE stock_imports ENABLE TRIGGER USER`;
 }

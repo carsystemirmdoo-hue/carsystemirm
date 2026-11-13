@@ -422,6 +422,9 @@ export async function confirmStockImport(actor: Actor, input: { importId: string
  * u snimku, i otvara nov raspon od datuma snimka. Dva reda iste šifre („91“ i „091“) → manja količina.
  */
 async function recordStockHistory(tx: TxLike, importId: string, stockDate: string) {
+  // Pre migracije 0065 tabele nema: potvrda lagera ne sme da padne zbog istorije.
+  const [has] = [...(await tx.execute<{ ok: boolean }>(sql`SELECT to_regclass('public.stock_level_history') IS NOT NULL AS ok`))];
+  if (!has?.ok) return { closed: 0, opened: 0, skipped: true };
   const [latest] = [...(await tx.execute<{ d: string | null }>(sql`SELECT max(from_date)::text AS d FROM stock_level_history`))];
   if (latest?.d && stockDate <= latest.d) return { closed: 0, opened: 0, skipped: true };
   const closed = [...(await tx.execute<{ id: number }>(sql`

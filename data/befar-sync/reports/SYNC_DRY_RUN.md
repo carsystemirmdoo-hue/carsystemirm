@@ -16,11 +16,11 @@ Generisano komandom `npm run befar:sync:plan`. Ovaj korak ne menja katalog.
 | CURRENT_ACTIVE_BEFAR_CODES | 185 |
 | CATALOGUE_FAMILIES | 41 |
 | CATALOGUE_CODES | 249 |
-| LOCAL_PRODUCTS_BEFORE | 8 |
-| LOCAL_CODES_BEFORE | 0 |
+| LOCAL_PRODUCTS_BEFORE | 9 |
+| LOCAL_CODES_BEFORE | 1 |
 | MATCHED | 0 |
 | PROBABLE | 8 |
-| LEGACY_LOCAL_ONLY | 0 |
+| LEGACY_LOCAL_ONLY | 1 |
 | WEBSITE_AND_CATALOGUE | 50 |
 | WEBSITE_ONLY | 6 |
 | CATALOGUE_ONLY | 99 |
@@ -42,6 +42,7 @@ Generisano komandom `npm run befar:sync:plan`. Ovaj korak ne menja katalog.
 
 | Naš zapis | Klasifikacija | Zvanični kandidati | Dokaz |
 | --- | --- | --- | --- |
+| `befar-leo-mikrofiber-sunder-cicak-160` | LEGACY_LOCAL_ONLY | — | šifre 088180 nisu na aktuelnom sajtu |
 | `befar-sundjer-narandzasti-25x150` | PROBABLE_MATCH | Befar Plus Velcro Polishing Pad (54402); Velcro Polishing Pad (04402); Waffle Velcro Polishing Pad (04502) | boja (orange) + dimenzija (25x150 mm) odgovaraju 3 zvaničnih šifara u 3 porodica (54402, 04402, 04502) — bez zvanične šifre se ne može znati koja je naša |
 | `befar-sundjer-narandzasti-50x150` | PROBABLE_MATCH | Befar Plus With Applicator Compounding Pad (52402); Leo Plus Advance Velcro Compounding Pad (55402ADV); Leo Plus Advance with Applicator Compounding Pad (52402ADV) | boja (orange) + dimenzija (50x150 mm) odgovaraju 3 zvaničnih šifara u 3 porodica (52402, 55402ADV, 52402ADV) — bez zvanične šifre se ne može znati koja je naša |
 | `befar-sundjer-crni-25x150` | PROBABLE_MATCH | Velcro Polishing Pad (04403); Waffle Velcro Polishing Pad (04503) | boja (black) + dimenzija (25x150 mm) odgovaraju 2 zvaničnih šifara u 2 porodica (04403, 04503) — bez zvanične šifre se ne može znati koja je naša |

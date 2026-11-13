@@ -9,11 +9,11 @@
     "CURRENT_ACTIVE_BEFAR_CODES": 185,
     "CATALOGUE_FAMILIES": 41,
     "CATALOGUE_CODES": 249,
-    "LOCAL_PRODUCTS_BEFORE": 8,
-    "LOCAL_CODES_BEFORE": 0,
+    "LOCAL_PRODUCTS_BEFORE": 9,
+    "LOCAL_CODES_BEFORE": 1,
     "MATCHED": 0,
     "PROBABLE": 8,
-    "LEGACY_LOCAL_ONLY": 0,
+    "LEGACY_LOCAL_ONLY": 1,
     "WEBSITE_AND_CATALOGUE": 50,
     "WEBSITE_ONLY": 6,
     "CATALOGUE_ONLY": 99,
@@ -34,6 +34,16 @@
     }
   },
   "localMatches": [
+    {
+      "localSlug": "befar-leo-mikrofiber-sunder-cicak-160",
+      "classification": "LEGACY_LOCAL_ONLY",
+      "sourceKey": null,
+      "candidates": [],
+      "evidence": [
+        "šifre 088180 nisu na aktuelnom sajtu"
+      ],
+      "autoApply": false
+    },
     {
       "localSlug": "befar-sundjer-narandzasti-25x150",
       "classification": "PROBABLE_MATCH",

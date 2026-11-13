@@ -517,7 +517,28 @@ const OWNER_ADDED_VARIANTS: Record<string, { after: string; variant: CatalogVari
       },
     },
   ],
+  // 2026-11-13 (sedmi krug): artikli koje firma i dalje poručuje (odluka vlasnika), a nema ih u tabeli kartice.
+  // BizniSoft 151913 „CS HERTER 2K HS/SR SPORI 2,5L“ — uz standardni 151.910 i brzi 151.911.
+  "carsystem-2k-clear-voc-hs-sr": [
+    { after: "151.911", variant: ownerRow("151.913", "Spori učvršćivač / 2,5 L") },
+  ],
+  // BizniSoft 126047 „CS POLYESTER REPARATUR SET 250G“ — manje pakovanje seta 126.054 (800 g).
+  "carsystem-polyester-repair-set": [
+    { after: "126.054", variant: ownerRow("126.047", "Set / 250 g") },
+  ],
+  // BizniSoft 124631 „CS UČVRŠĆIVAČ ZA GIT 30 GR“ i 127038 „CS UČVRŠĆIVAČ ZA GIT PLAVI“ — učvršćivač za git uz 132.413.
+  "carsystem-bpo-hardener": [
+    { after: "132.413", variant: ownerRow("124.631", "30 g") },
+    { after: "124.631", variant: ownerRow("127.038", "Plava") },
+  ],
 };
+
+function ownerRow(articleNumber: string, label: string): CatalogVariant {
+  return {
+    articleNumber, label, manufacturerNote: null, officialSpecification: null,
+    salesPack: null, packagingUnit: null, inCatalogue: false, onWebsite: false, hasSds: false,
+  };
+}
 
 function withOwnerAddedVariants(entry: CatalogProductEntry): CatalogProductEntry {
   const extra = OWNER_ADDED_VARIANTS[entry.slug];

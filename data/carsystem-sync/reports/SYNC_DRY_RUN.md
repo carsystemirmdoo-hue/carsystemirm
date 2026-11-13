@@ -14,7 +14,7 @@ Generisano komandom `npm run carsystem:sync:plan`. Ovaj korak ne menja katalog.
 | catalogueSha256 | ac4f63d9b65109f15de5f5cb3f3caed672741ddd97a76eea78bbacf35d643961 |
 | SOURCE PRODUCTS | 465 |
 | SOURCE VARIANTS | 1089 |
-| EXISTING PRODUCTS | 18 |
+| EXISTING PRODUCTS | 28 |
 | EXISTING VARIANTS | 9 |
 | EXACT MATCHES | 1 |
 | HIGH CONFIDENCE MATCHES | 4 |
@@ -23,7 +23,7 @@ Generisano komandom `npm run carsystem:sync:plan`. Ovaj korak ne menja katalog.
 | MISSING VARIANTS | 0 |
 | variantsSuppliedByEnrichment | 22 |
 | AMBIGUOUS | 0 |
-| LEGACY PRODUCTS | 12 |
+| LEGACY PRODUCTS | 22 |
 | SOURCE CONFLICTS | 10 |
 | MISSING IMAGES | 3 |
 | MISSING IMPORTANT DATA | 1 |
@@ -52,6 +52,16 @@ Generisano komandom `npm run carsystem:sync:plan`. Ovaj korak ne menja katalog.
 | `carsystem-podloske-m14-za-polir-sundjere` | LEGACY_NOT_IN_CATALOGUE<br>LEGACY_NOT_IN_2026_27 | — | article-number, none | — |
 | `carsystem-traka-za-felne` | LEGACY_NOT_IN_CATALOGUE<br>LEGACY_NOT_IN_2026_27 | — | article-number, none | — |
 | `carsystem-satajet-x-5500-rp-30-years-ltd` | LEGACY_NOT_IN_CATALOGUE<br>LEGACY_NOT_IN_2026_27 | — | article-number, none | — |
+| `carsystem-patosnice-jednokratne` | LEGACY_NOT_IN_CATALOGUE<br>LEGACY_NOT_IN_2026_27 | — | article-number, none | — |
+| `carsystem-brusni-blok-meki-125x70` | LEGACY_NOT_IN_CATALOGUE<br>LEGACY_NOT_IN_2026_27 | — | article-number, none | — |
+| `carsystem-podloska-crna-75-mm` | LEGACY_NOT_IN_CATALOGUE<br>LEGACY_NOT_IN_2026_27 | — | article-number, none | — |
+| `carsystem-pneumatska-slajferica` | LEGACY_NOT_IN_CATALOGUE<br>LEGACY_NOT_IN_2026_27 | — | article-number, none | — |
+| `carsystem-mixing-stick-alu` | LEGACY_NOT_IN_CATALOGUE<br>LEGACY_NOT_IN_2026_27 | — | article-number, none | — |
+| `carsystem-nosac-za-raspe` | LEGACY_NOT_IN_CATALOGUE<br>LEGACY_NOT_IN_2026_27 | — | article-number, none | — |
+| `carsystem-tecni-metal-125-g` | LEGACY_NOT_IN_CATALOGUE<br>LEGACY_NOT_IN_2026_27 | — | article-number, none | — |
+| `carsystem-traka-g95-vodootporna` | LEGACY_NOT_IN_CATALOGUE<br>LEGACY_NOT_IN_2026_27 | — | article-number, none | — |
+| `carsystem-asap-nitril-rukavice` | LEGACY_NOT_IN_CATALOGUE<br>LEGACY_NOT_IN_2026_27 | — | article-number, none | — |
+| `carsystem-raspa-za-smirglu-198` | LEGACY_NOT_IN_CATALOGUE<br>LEGACY_NOT_IN_2026_27 | — | article-number, none | — |
 | `carsystem-navlake-za-sedista-rolna` | LEGACY_NOT_IN_CATALOGUE<br>LEGACY_NOT_IN_2026_27 | — | article-number, none | — |
 | `carsystem-git-elastic-weiss` | HIGH_CONFIDENCE_MATCH<br>VARIANT_MISSING<br>EXISTING_DATA_INCOMPLETE | Elastic white — Polyester - fine putty | identical-official-packshot | +3 varijanti; sku je interni placeholder (CS-GIT-ELASTIC-WEISS); manufacturerCode nije upisan |
 | `carsystem-f19-brusni-diskovi` | HIGH_CONFIDENCE_MATCH<br>VARIANT_MISSING<br>EXISTING_DATA_INCOMPLETE | Sanding Disc F.19 — Film abrasive - 150 mm - 25 holes | series-article-range | +12 varijanti; sku je interni placeholder (CS-F19-DISC); manufacturerCode nije upisan |

@@ -228,26 +228,6 @@
       "removedWithParent": "sata-air-star-c"
     },
     {
-      "slug": "carsystem-star-mask",
-      "brand": "carsystem",
-      "name": "Carsystem Star Mask",
-      "status": "BUSINESS_OUT_OF_PROGRAMME",
-      "source": "CARSYSTEM_SYNC",
-      "reason": "Firma više ne radi respiratorne maske ni filtere ni od jednog brenda.",
-      "evidence": "Zvanični opis: „Polumaska sa zamenjivim filterima i predfilterima”; taksonomija `zastita`, oznaka „Zaštitna maska”.",
-      "redirect": "/brendovi/carsystem"
-    },
-    {
-      "slug": "carsystem-star-mask-pre-p2-r",
-      "brand": "carsystem",
-      "name": "Carsystem Star Mask Pre P2 R",
-      "status": "BUSINESS_OUT_OF_PROGRAMME",
-      "source": "CARSYSTEM_SYNC",
-      "reason": "Firma više ne radi respiratorne maske ni filtere ni od jednog brenda.",
-      "evidence": "Predfilteri klase zaštite P2 za filterske uloške maske Star Mask.",
-      "redirect": "/brendovi/carsystem"
-    },
-    {
       "slug": "carsystem-star-mask-disc",
       "brand": "carsystem",
       "name": "Carsystem Star Mask Disc",
@@ -378,17 +358,6 @@
       "evidence": "Zvanični naziv: „…for SATA filter series 500”; svrha „Pribor za SATA filter 500 series”.",
       "redirect": "/brendovi/sata",
       "removedWithParent": "sata-filter-500-series"
-    },
-    {
-      "slug": "carsystem-dispenser-for-paint-strainers",
-      "brand": "carsystem",
-      "name": "Carsystem Dispenser for paint strainers",
-      "status": "BUSINESS_OUT_OF_PROGRAMME",
-      "source": "CARSYSTEM_SYNC",
-      "reason": "Pribor koji bez filtera/sita koje firma više ne prodaje nema customer-facing funkciju.",
-      "evidence": "Dispenzer sa prostorom za 150 cediljki za boju; svrha „Odlaganje cediljki za boju”.",
-      "redirect": "/brendovi/carsystem",
-      "removedWithParent": "carsystem-paint-strainer"
     },
     {
       "slug": "sata-strainer-holder",
@@ -686,6 +655,43 @@
         "evidence": "Ceđenje boje i materijala na bazi organskih rastvarača.",
         "redirect": "/brendovi/carfit",
         "restoreNote": "Vlasnik 2026-10-12 (PREGLED list D): 785019 CF cediljke 190 µ 250/1 — ceo paket 250 = 1 KOM; vratiti karticu i omogućiti poručivanje. Polovina paketa NIJE odobrena."
+      },
+      {
+        "slug": "carsystem-star-mask",
+        "brand": "carsystem",
+        "name": "Carsystem Star Mask",
+        "status": "BUSINESS_OUT_OF_PROGRAMME",
+        "source": "CARSYSTEM_SYNC",
+        "reason": "Firma više ne radi respiratorne maske ni filtere ni od jednog brenda.",
+        "evidence": "Zvanični opis: „Polumaska sa zamenjivim filterima i predfilterima”; taksonomija `zastita`, oznaka „Zaštitna maska”.",
+        "redirect": "/brendovi/carsystem",
+        "restoredOn": "2026-11-13",
+        "restoreNote": "Vlasnik 2026-11-13 (sedmi krug): BizniSoft 141145 CS zaštitna maska Star A2P2 L — firma je i dalje poručuje."
+      },
+      {
+        "slug": "carsystem-star-mask-pre-p2-r",
+        "brand": "carsystem",
+        "name": "Carsystem Star Mask Pre P2 R",
+        "status": "BUSINESS_OUT_OF_PROGRAMME",
+        "source": "CARSYSTEM_SYNC",
+        "reason": "Firma više ne radi respiratorne maske ni filtere ni od jednog brenda.",
+        "evidence": "Predfilteri klase zaštite P2 za filterske uloške maske Star Mask.",
+        "redirect": "/brendovi/carsystem",
+        "restoredOn": "2026-11-13",
+        "restoreNote": "Vlasnik 2026-11-13 (sedmi krug): BizniSoft 141154 CS predfilter za masku P2SL 10/1 — firma ga i dalje poručuje."
+      },
+      {
+        "slug": "carsystem-dispenser-for-paint-strainers",
+        "brand": "carsystem",
+        "name": "Carsystem Dispenser for paint strainers",
+        "status": "BUSINESS_OUT_OF_PROGRAMME",
+        "source": "CARSYSTEM_SYNC",
+        "reason": "Pribor koji bez filtera/sita koje firma više ne prodaje nema customer-facing funkciju.",
+        "evidence": "Dispenzer sa prostorom za 150 cediljki za boju; svrha „Odlaganje cediljki za boju”.",
+        "redirect": "/brendovi/carsystem",
+        "removedWithParent": "carsystem-paint-strainer",
+        "restoredOn": "2026-11-13",
+        "restoreNote": "Vlasnik 2026-11-13 (sedmi krug): BizniSoft 146960 CS držač za cediljke (ista šifra 146.960) — treba kartica; cediljke su vraćene 2026-10-12."
       }
     ]
   }

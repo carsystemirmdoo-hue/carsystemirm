@@ -45,7 +45,7 @@ export const colourKey = (value) => {
  * Kartice iz zvaničnog kataloga objavljene na odluku vlasnika (`OWNER_PROMOTED_ENTRIES` u
  * lib/befar-catalog-products.ts). Nose kataloške šifre i nisu ručni zapisi, pa se ne uparuju.
  */
-const OWNER_PROMOTED_SLUGS = new Set(["befar-compounding-foam-m14", "befar-velcro-compounding-foam-150x50", "befar-leo-magic-sponge", "befar-pad-protector"]);
+const OWNER_PROMOTED_SLUGS = new Set(["befar-compounding-foam-m14", "befar-velcro-compounding-foam-150x50", "befar-leo-magic-sponge", "befar-pad-protector", "befar-hand-pad"]);
 
 /** @param {Set<string>} syncSlugs slugovi koje je uvezao sync */
 export function loadLocalProducts(syncSlugs) {

@@ -610,6 +610,55 @@ const OWNER_PROMOTED_ENTRIES: CatalogProductEntry[] = [
     },
     shade: null,
   },
+  // Odluka vlasnika 2026-11-13: Befar ručni sunđer meki/tvrdi (BizniSoft 095001/095002). Katalog str. 29
+  // „HAND PAD SOFT / HAND PAD HARD“: 95001 SOFT, 95002 HARD, „no holes“; slika je isečak fotografije sa te strane.
+  {
+    slug: "befar-hand-pad",
+    name: "Befar ručni sunđer meki i tvrdi",
+    sourceKey: "catalogue-p29-hand-pad-soft-hard",
+    sourceUrls: [befarCatalogMeta.catalogueUrl],
+    officialName: "Hand Pad Soft / Hand Pad Hard",
+    officialNameTr: null,
+    line: "Befar",
+    kind: "family",
+    isSet: false,
+    qualifiers: [],
+    officialCategories: ["Sanding Block"],
+    classification: "CATALOGUE_ONLY_OWNER_PROMOTED",
+    taxonomy: { category: "abrazivi", programSlug: "abrazivi", phaseSlug: "priprema", visualType: "neutral" },
+    cataloguePages: [29],
+    leadCode: "95001",
+    relatedLegacySlugs: [],
+    variantColumn: { key: "size", label: "Tvrdoća" },
+    variants: (
+      [["95001", "Soft", "Meki"], ["95002", "Hard", "Tvrdi"]] as const
+    ).map(([code, hardness, hardnessSr]) => ({
+      code, label: `${hardnessSr} · bez rupa`, searchLabel: `${hardnessSr} · ručni sunđer · bez rupa`, colour: null, colourSr: null, swatch: null,
+      size: hardness, holes: "No holes", hardnessStars: null, applyWith: null, boxQuantity: null, image: null, onWebsite: false, inCatalogue: true, cataloguePage: 29,
+    })),
+    image: { src: "/products/befar/catalog/befar-rucni-sunder-meki-tvrdi.webp", width: 1305, height: 696, hasAlpha: false },
+    sharedGroupImages: false,
+    missingOfficialAsset: false,
+    gallery: [],
+    content: {
+      productType: "Ručni sunđer",
+      subtype: "ručni sunđer · meki ili tvrdi · bez rupa",
+      shortDescription: "Befar ručni sunđer u mekoj i tvrdoj izvedbi, bez rupa.",
+      longDescription:
+        "Befar Hand Pad je ručni sunđer iz Befar programa, u mekoj (Soft) i tvrdoj (Hard) izvedbi, bez rupa. Namenu i preporučeni abraziv potvrđujemo na upit.",
+      purpose: "Ručni rad pri pripremi površine",
+      facts: [
+        { label: "Linija", value: "Befar" },
+        { label: "Izvedbe", value: "Meki (95001), tvrdi (95002)" },
+        { label: "Rupe", value: "Bez rupa" },
+      ],
+      applications: [],
+      benefits: [],
+      advice: null,
+      setContents: [],
+    },
+    shade: null,
+  },
 ];
 
 export function getBefarCatalogProducts(): CarsystemProduct[] {

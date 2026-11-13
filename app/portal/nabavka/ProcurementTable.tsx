@@ -284,7 +284,7 @@ export function ProcurementTable({
         ) : (
           <span className={styles.stale}>Lager još nije uvezen — predlog ne oduzima stanje magacina.</span>
         )}{" "}
-        Dani kada artikla nije bilo na stanju još se ne izuzimaju iz proseka.
+        Dani kada je potvrđen lager pokazivao 0 ne računaju se u prosek prodaje (istorija lagera od 13. 11. 2026.).
       </p>
 
       <div className={styles.tablewrap}>
@@ -309,6 +309,11 @@ export function ProcurementTable({
                   <td className={styles.article}>
                     <span className={styles.name}>{r.name}</span>
                     {r.isNew ? <span className={styles.tag} data-t="novo">nova šifra</span> : r.trend ? <span className={styles.tag} data-t={r.trend}>{TREND[r.trend]}</span> : null}
+                    {r.requested ? (
+                      <span className={styles.tag} data-t="trazeno" title="Kupci su tražili artikal kog nije bilo na stanju (poslednjih 90 dana, nerešeno)">
+                        traženo {r.requested.count}×{r.requested.quantity ? ` · ${fmt(r.requested.quantity)} ${unit}` : ""}
+                      </span>
+                    ) : null}
                     <span className={styles.sub}>
                       <span className={styles.code}>{r.code}</span>
                       {brand === ALL ? ` · ${r.brand}` : ""}
@@ -325,6 +330,11 @@ export function ProcurementTable({
                   </td>
                   <td className={styles.num} data-label="Lager">
                     {r.stock === null ? <span className={styles.zero} title="Šifra nije u izvozu lagera ili je količina nejasna">—</span> : `${fmt(r.stock)} ${unit}`}
+                    {r.outDays > 0 ? (
+                      <span className={styles.sub} title="Dani u poslednjih 180 kada je potvrđen lager pokazivao 0 — ne računaju se u prosek prodaje">
+                        bez robe {r.outDays} d
+                      </span>
+                    ) : null}
                     {r.incoming ? (
                       <span className={styles.sub} title="Poručeno, još nije stiglo (Roba u dolasku). Predlog ga već oduzima.">
                         + {fmt(r.incoming.quantity)} u dolasku{r.incoming.nearest ? ` (do ${dmy(r.incoming.nearest)})` : ""}

@@ -67,7 +67,7 @@ export default async function StockImportPage() {
       <section className="portal-panel">
         <SectionHeader
           title="Istorija uvoza"
-          description="Svako otpremanje ostaje zabeleženo: ko, kada i sa kojim ishodom. Detaljne stavke čuvaju se samo za poslednja dva potvrđena lagera; nepotvrđene i odbačene posle 7 dana."
+          description="Svako otpremanje ostaje zabeleženo: ko, kada i sa kojim ishodom. Detaljne stavke čuvaju se za poslednja četiri potvrđena lagera, a promene stanja po artiklu godinu dana; nepotvrđene i odbačene posle 7 dana."
         />
         {imports.length === 0 ? (
           <p className="lg-empty portal-panel-body">Još nijedan lager nije otpremljen.</p>

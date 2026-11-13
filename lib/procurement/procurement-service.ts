@@ -4,7 +4,7 @@ import { getDb } from "@/db/client";
 import { belgradeDate } from "@/lib/recommendations/customerRhythm.mjs";
 import { internalStockQuantities } from "@/lib/stock/stock-import-service";
 import { incomingByArticle } from "./incoming-service";
-import { brandOf, suggestQuantity, trendOf } from "./suggest.mjs";
+import { brandOf, daysWithoutStock, suggestQuantity, trendOf } from "./suggest.mjs";
 
 /**
  * Nabavka (2026-11-10): prodaja po artiklu iz faktura + važeći lager → predlog količine.
@@ -41,6 +41,10 @@ export type ProcurementRow = {
   isNew: boolean;
   /** Roba u dolasku (0064): poručeno a još nije stiglo; predlog ga već oduzima. */
   incoming: { quantity: number; nearest: string | null } | null;
+  /** 0065: dani u poslednjih 180 kada je potvrđen lager pokazivao 0 (izuzeti iz proseka). */
+  outDays: number;
+  /** 0065: otvoreno „traženo — nema na stanju“ u poslednjih 90 dana. */
+  requested: { count: number; quantity: number } | null;
 };
 
 export type ProcurementData = {
@@ -118,6 +122,22 @@ export async function loadProcurement(opts: { coverDays: number; from?: string; 
        GROUP BY a.id`),
     incomingByArticle().catch(() => new Map<string, { quantity: number; nearest: string | null }>()),
   ]);
+  // 0065: istorija lagera i „traženo“. Pre migracije tabela nema — tada bez izuzimanja i bez kolone.
+  const historyFrom = shift(today, -(HISTORY_DAYS - 1));
+  const [outRanges, requests] = await Promise.all([
+    db.execute<{ id: string; f: string; t: string | null; q: string | null }>(sql`
+      SELECT a.id, h.from_date::text AS f, h.to_date::text AS t, h.quantity::text AS q
+        FROM stock_level_history h
+        JOIN articles a ON h.code_key = regexp_replace(a.code, '^0+(?=[0-9])', '')
+       WHERE h.quantity <= 0 AND coalesce(h.to_date, ${today}::date) >= ${historyFrom}::date`).then((r) => [...r]).catch(() => []),
+    db.execute<{ article_id: string; n: number; q: string | null }>(sql`
+      SELECT article_id, count(*)::int AS n, sum(quantity)::text AS q FROM stock_requests
+       WHERE resolved_at IS NULL AND created_at > now() - interval '90 days'
+       GROUP BY article_id`).then((r) => [...r]).catch(() => []),
+  ]);
+  const outOf = new Map<string, { from: string; to: string | null; quantity: number | null }[]>();
+  for (const r of outRanges) outOf.set(r.id, [...(outOf.get(r.id) ?? []), { from: r.f, to: r.t, quantity: r.q === null ? null : Number(r.q) }]);
+  const requestedOf = new Map(requests.map((r) => [r.article_id, { count: r.n, quantity: r.q === null ? 0 : Number(r.q) }]));
   const periodOf = new Map([...inPeriod].map((p) => [p.id, { qty: Number(p.qty), customers: p.customers }]));
   const packOf = new Map([...packs].map((p) => [p.article_id, { quantity: Number(p.pack_quantity), unit: p.unit, label: p.label }]));
 
@@ -130,7 +150,8 @@ export async function loadProcurement(opts: { coverDays: number; from?: string; 
     // Već poručeno (u dolasku) se ne poručuje ponovo: oduzima se kao da je na lageru.
     const inc = incoming.get(a.id) ?? null;
     const covered = inc && inc.quantity > 0 ? (st ?? 0) + inc.quantity : st;
-    const sg = suggestQuantity({ sold: s.s180, windowDays: HISTORY_DAYS, coverDays: opts.coverDays, stock: covered, unit: a.unit, pack });
+    const outDays = daysWithoutStock(outOf.get(a.id) ?? [], historyFrom, today);
+    const sg = suggestQuantity({ sold: s.s180, windowDays: HISTORY_DAYS, coverDays: opts.coverDays, stock: covered, unit: a.unit, pack, outDays });
     rows.push({
       key: a.id,
       articleId: a.id,
@@ -152,6 +173,8 @@ export async function loadProcurement(opts: { coverDays: number; from?: string; 
       packs: sg.packs,
       isNew: false,
       incoming: inc && inc.quantity > 0 ? inc : null,
+      outDays,
+      requested: requestedOf.get(a.id) ?? null,
     });
     seen.add(a.id);
   };
@@ -164,7 +187,8 @@ export async function loadProcurement(opts: { coverDays: number; from?: string; 
   }
 
   // Artikli na lageru koji se godinu dana nisu prodavali: vidljivi (predlog 0), da vlasnik zna šta leži.
-  const idle = [...stock.byArticle.keys()].filter((id) => !seen.has(id));
+  // Traženo, a niti se prodavalo niti je na lageru — i to mora da se vidi na Nabavci (0065).
+  const idle = [...new Set([...stock.byArticle.keys(), ...requestedOf.keys()])].filter((id) => !seen.has(id));
   if (idle.length) {
     const arts = await db.execute<{ id: string; code: string; name: string; unit: string | null; brand: string | null }>(sql`
       SELECT a.id, a.code, a.name, a.unit, a.brand FROM articles a
@@ -195,6 +219,8 @@ export async function loadProcurement(opts: { coverDays: number; from?: string; 
       packs: null,
       isNew: true,
       incoming: null,
+      outDays: 0,
+      requested: null,
     });
   }
 

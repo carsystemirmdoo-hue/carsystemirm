@@ -31,6 +31,7 @@
 .tag[data-t="raste"] { background: var(--p-green-soft); color: var(--p-green); }
 .tag[data-t="pada"] { background: var(--p-amber-soft); color: var(--p-amber); }
 .tag[data-t="novo"] { background: var(--p-blue-soft); color: var(--p-blue); }
+.tag[data-t="trazeno"] { background: var(--p-red-soft, var(--p-amber-soft)); color: var(--p-red, var(--p-amber)); }
 .zero { color: var(--p-faint); }
 .suggest { font-weight: 600; }
 .qty { width: 92px; font: inherit; font-size: 14px; text-align: right; height: 34px; border: 1px solid var(--p-line-strong); border-radius: 6px; padding: 0 8px; background: var(--p-surface); color: var(--p-ink); font-variant-numeric: tabular-nums; }

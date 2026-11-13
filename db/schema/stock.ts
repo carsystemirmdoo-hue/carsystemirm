@@ -103,3 +103,31 @@ export const articleSellout = pgTable("article_sellout", {
   endedAt: timestamp("ended_at", { withTimezone: true }),
   endedImportId: uuid("ended_import_id"),
 });
+
+/** 0065: kratka istorija lagera — samo promene količine po šifri izvoza (raspon od–do). */
+export const stockLevelHistory = pgTable("stock_level_history", {
+  id: integer("id").primaryKey(),
+  codeKey: text("code_key").notNull(),
+  fromDate: date("from_date").notNull(),
+  toDate: date("to_date"),
+  quantity: numeric("quantity", { precision: 14, scale: 3 }),
+  importId: uuid("import_id").notNull(),
+});
+
+/** 0065: „traženo — nema na stanju“ (automatski iz porudžbine ili ručno „Kupac tražio“). */
+export const stockRequests = pgTable("stock_requests", {
+  id: uuid("id").primaryKey().defaultRandom(),
+  articleId: uuid("article_id").notNull(),
+  customerId: uuid("customer_id"),
+  quantity: numeric("quantity", { precision: 14, scale: 3 }),
+  source: text("source").notNull(),
+  orderId: uuid("order_id"),
+  stockQuantity: numeric("stock_quantity", { precision: 14, scale: 3 }),
+  stockDate: date("stock_date"),
+  note: text("note"),
+  requestedBy: uuid("requested_by").references(() => users.id, { onDelete: "restrict" }),
+  createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+  resolvedAt: timestamp("resolved_at", { withTimezone: true }),
+  resolvedBy: uuid("resolved_by").references(() => users.id, { onDelete: "restrict" }),
+  resolution: text("resolution"),
+});

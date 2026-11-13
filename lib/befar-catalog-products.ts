@@ -294,6 +294,18 @@ function createCatalogProduct(entry: CatalogProductEntry): CarsystemProduct {
  * potvrdio etiketom. Podaci su samo iz kataloga; tvrdoća i slika se ne izmišljaju.
  */
 const OWNER_CONFIRMED_VARIANTS: Record<string, { after: string; variant: CatalogVariant }[]> = {
+  // Odluka vlasnika 2026-11-13 (sedmi krug): Befar Plus mikrofiber krpa (BizniSoft 001407) — katalog str. 28
+  // „PLUS MIKROFIBER CLOTHES“: 01407, 40 × 60 cm, 20 kom. u kutiji.
+  "befar-microfiber-cloths": [
+    {
+      after: "01405",
+      variant: {
+        code: "01407", label: "Plus · 40 × 60 cm", searchLabel: "Plus · 40 × 60 cm · mikrofiber krpa", colour: null, colourSr: null,
+        swatch: null, size: "40x60cm", holes: null, hardnessStars: null, applyWith: null, boxQuantity: 20, image: null,
+        onWebsite: false, inCatalogue: true, cataloguePage: 28,
+      },
+    },
+  ],
   // Etiketa 2026-10-13: običan plavi Befar sunđer 04405 (katalog 2024, str. 6: BLUE 04405 150 x 25 mm, 66 kom.).
   "befar-velcro-polishing-pad": [
     {

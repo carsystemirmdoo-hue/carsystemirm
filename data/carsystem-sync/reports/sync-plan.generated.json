@@ -4,7 +4,7 @@
     "catalogueSha256": "ac4f63d9b65109f15de5f5cb3f3caed672741ddd97a76eea78bbacf35d643961",
     "SOURCE PRODUCTS": 465,
     "SOURCE VARIANTS": 1089,
-    "EXISTING PRODUCTS": 28,
+    "EXISTING PRODUCTS": 30,
     "EXISTING VARIANTS": 9,
     "EXACT MATCHES": 1,
     "HIGH CONFIDENCE MATCHES": 4,
@@ -13,7 +13,7 @@
     "MISSING VARIANTS": 0,
     "variantsSuppliedByEnrichment": 22,
     "AMBIGUOUS": 0,
-    "LEGACY PRODUCTS": 22,
+    "LEGACY PRODUCTS": 24,
     "SOURCE CONFLICTS": 10,
     "MISSING IMAGES": 3,
     "MISSING IMPORTANT DATA": 1,
@@ -618,6 +618,44 @@
           ],
           "owners": []
         },
+        {
+          "level": "none",
+          "note": "Nijedan zvanični proizvod ne deli šifru, sliku, tačan naziv ni kôd serije."
+        }
+      ],
+      "flags": [
+        "LEGACY_NOT_IN_CATALOGUE",
+        "LEGACY_NOT_IN_2026_27"
+      ],
+      "enrichment": null
+    },
+    {
+      "localSlug": "carsystem-gerson-farbarska-maska",
+      "localName": "Gerson farbarska maska",
+      "classification": "LEGACY_NOT_IN_CATALOGUE",
+      "autoApply": false,
+      "sourceKeys": [],
+      "candidates": [],
+      "evidence": [
+        {
+          "level": "none",
+          "note": "Nijedan zvanični proizvod ne deli šifru, sliku, tačan naziv ni kôd serije."
+        }
+      ],
+      "flags": [
+        "LEGACY_NOT_IN_CATALOGUE",
+        "LEGACY_NOT_IN_2026_27"
+      ],
+      "enrichment": null
+    },
+    {
+      "localSlug": "carsystem-plafonski-filter-fa-560g",
+      "localName": "Plafonski filter FA-560G fini",
+      "classification": "LEGACY_NOT_IN_CATALOGUE",
+      "autoApply": false,
+      "sourceKeys": [],
+      "candidates": [],
+      "evidence": [
         {
           "level": "none",
           "note": "Nijedan zvanični proizvod ne deli šifru, sliku, tačan naziv ni kôd serije."

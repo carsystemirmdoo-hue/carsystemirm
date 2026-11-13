@@ -567,7 +567,7 @@
     }
   ],
   "keptExplicitly": {
-    "_comment": "Provereno i namerno NIJE uklonjeno. Respiratorne maske nisu masking proizvodi, a zadržani pribor iz `filterAdjacentKept` ima primarnu funkciju držanja pištolja — pištolji ostaju u programu, pa pribor ostaje sa njima.",
+    "_comment": "Provereno i namerno NIJE uklonjeno. Respiratorne maske nisu masking proizvodi, a zadržani pribor iz `filterAdjacentKept` ima primarnu funkciju držanja pištolja — pištolji ostaju u programu, pa pribor ostaje sa njima. respiratorOwnerOrdered: ručne kartice respiratornih artikala koje vlasnik izričito i dalje poručuje (2026-11-13).",
     "protectiveClothing": [
       "sata-suit-basic",
       "sata-suit-race",
@@ -599,6 +599,9 @@
     "filterAdjacentKept": [
       "sata-spray-gun-holder-with-strainer-holder",
       "sata-insert"
+    ],
+    "respiratorOwnerOrdered": [
+      "carsystem-gerson-farbarska-maska"
     ]
   },
   "restoredOnOwnerDecision": {

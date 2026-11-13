@@ -3,6 +3,7 @@ import { readFileSync } from "node:fs";
 import path from "node:path";
 import { sql } from "drizzle-orm";
 import { getDb } from "@/db/client";
+import { AUDIT_ACTIONS } from "@/lib/audit/auditEntry.mjs";
 import { getAllCarsystemProducts, getProductVariantSelector } from "@/lib/carsystem-data";
 import { brandKey, buildIndex, confidenceOf, markSharedTargets, measureLabel, rankTargets } from "./nameMatch.mjs";
 
@@ -75,7 +76,7 @@ async function loadOwnerNotes(): Promise<Map<string, { text: string; by: string;
   const rows = await getDb().execute<{ id: string; text: string | null; by: string; at: string }>(sql`
     SELECT DISTINCT ON (entity_id) entity_id AS id, value_after->>'text' AS text, actor_label AS by, created_at::text AS at
       FROM audit_log
-     WHERE action = 'articleOwnerDescription' AND entity_type = 'article'
+     WHERE action = ${AUDIT_ACTIONS.articleOwnerDescription} AND entity_type = 'Artikal'
      ORDER BY entity_id, created_at DESC`);
   const out = new Map<string, { text: string; by: string; at: string }>();
   for (const r of rows) if (r.text) out.set(r.id, { text: r.text, by: r.by, at: r.at });

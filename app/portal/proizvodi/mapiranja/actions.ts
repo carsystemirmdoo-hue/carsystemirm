@@ -9,7 +9,7 @@ import {
 } from "@/lib/commercial/mapping-service";
 import { ProductMappingError } from "@/lib/commercial/productMapping.mjs";
 import { getAllCarsystemProducts } from "@/lib/carsystem-data";
-import { recordAudit } from "@/lib/audit/record";
+import { AUDIT_ACTIONS, recordAudit } from "@/lib/audit/record";
 import { getDb } from "@/db/client";
 import { sql } from "drizzle-orm";
 import {
@@ -194,8 +194,8 @@ export async function saveArticleNoteAction(input: { articleId: string; text: st
   if (!a) return { error: "Artikal nije pronađen.", ok: null };
   await recordAudit({
     actor: { id: actor.id, name: actor.name, role: actor.role },
-    action: "articleOwnerDescription",
-    entityType: "article",
+    action: AUDIT_ACTIONS.articleOwnerDescription,
+    entityType: "Artikal",
     entityId: p.data.articleId,
     entityLabel: `${a.code} ${a.name}`.slice(0, 200),
     after: { text: p.data.text },

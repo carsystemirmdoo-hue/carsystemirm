@@ -305,12 +305,33 @@ const OWNER_CONFIRMED_VARIANTS: Record<string, { after: string; variant: Catalog
       },
     },
   ],
+  // Odluka vlasnika 2026-11-13: međupodloška postoji meka (093007/093015/093062) i tvrda (093107/093115/093162).
+  // Katalog str. 24: SOFT 93007/93015/93062 i HARD 93107/93115/93162, „BACKING PAD 150 mm“.
+  "befar-backing-pad": [
+    { after: "93162", variant: backingPad("93007", "Meka", "7 Holes", "7 rupa") },
+    { after: "93007", variant: backingPad("93015", "Meka", "15 Holes", "15 rupa") },
+    { after: "93015", variant: backingPad("93062", "Meka", "62 Holes", "62 rupe") },
+  ],
 };
+
+/** Tvrde izvedbe sa sajta dobijaju oznaku tvrdoće čim kartica ima i meke (katalog str. 24: HARD). */
+const OWNER_RELABELS: Record<string, Record<string, string>> = {
+  "befar-backing-pad": { "93107": "Tvrda · 150 mm · 7 rupa", "93115": "Tvrda · 150 mm · 15 rupa", "93162": "Tvrda · 150 mm · 62 rupe" },
+};
+
+function backingPad(code: string, hardness: "Meka", holes: string, holesSr: string): CatalogVariant {
+  const label = `${hardness} · 150 mm · ${holesSr}`;
+  return {
+    code, label, searchLabel: label, colour: null, colourSr: null, swatch: null, size: "150mm", holes, hardnessStars: null,
+    applyWith: null, boxQuantity: null, image: null, onWebsite: false, inCatalogue: true, cataloguePage: 24,
+  };
+}
 
 function withOwnerConfirmedVariants(entry: CatalogProductEntry): CatalogProductEntry {
   const extra = OWNER_CONFIRMED_VARIANTS[entry.slug];
   if (!extra) return entry;
-  const variants = [...entry.variants];
+  const relabel = OWNER_RELABELS[entry.slug] ?? {};
+  const variants = entry.variants.map((v) => (relabel[v.code] ? { ...v, label: relabel[v.code], searchLabel: relabel[v.code] } : v));
   for (const { after, variant } of extra) {
     if (variants.some((v) => v.code === variant.code)) continue;
     const at = variants.findIndex((v) => v.code === after);
@@ -323,14 +344,28 @@ function withOwnerConfirmedVariants(entry: CatalogProductEntry): CatalogProductE
  * Proizvodi samo iz zvaničnog kataloga (nisu na aktuelnom befar.com.tr), objavljeni na odluku vlasnika.
  * Sync ih drži kao `CATALOGUE_ONLY_NOT_ON_CURRENT_WEBSITE`; podaci su prepisani sa strane kataloga, bez dopune.
  */
-const m14 = (code: string, colour: string, colourSr: string, swatch: string, size: "150x50mm" | "150x45mm", stars: number, applyWith: string, img: string): CatalogVariant => {
+type FoamColour = [code: string, colour: string, colourSr: string, swatch: string, size: "150x50mm" | "150x45mm", stars: number, applyWith: string, img: string];
+
+/** Pet boja iz kataloga (str. 4 i 5, ista legenda tvrdoće); `prefix` = početak šifre (024 M14, 034 čičak). */
+const foamColours = (prefix: string): FoamColour[] => [
+  [`${prefix}01`, "White", "bela", "#E6E3DD", "150x50mm", 3, "tečna ili krem polir pasta", "bela"],
+  [`${prefix}02`, "Orange", "narandžasta", "#DF7A27", "150x50mm", 5, "tečna ili krem polir pasta", "narandzasta"],
+  [`${prefix}03`, "Black", "crna", "#1B1E22", "150x45mm", 1, "polir ili zaštita laka", "crna"],
+  [`${prefix}04`, "Yellow", "žuta", "#E3BD1F", "150x50mm", 3, "tečna ili krem polir pasta", "zuta"],
+  [`${prefix}05`, "Blue", "plava", "#2E6CB4", "150x50mm", 2, "tečna ili krem polir pasta", "plava"],
+];
+
+const foamVariant = ([code, colour, colourSr, swatch, size, stars, applyWith, img]: FoamColour, o: { mount: string; box: number; page: number; imageBase: string }): CatalogVariant => {
   const dim = size === "150x50mm" ? "150 × 50 mm" : "150 × 45 mm";
   const label = `${colourSr[0].toLocaleUpperCase("sr-Latn")}${colourSr.slice(1)} · ${dim}`;
   return {
-    code, label, searchLabel: `${label} · M14`, colour, colourSr, swatch, size, holes: null, hardnessStars: stars, applyWith, boxQuantity: 24,
-    image: `/products/befar/catalog/befar-compounding-foam-m14-izrez-${img}.webp`, onWebsite: false, inCatalogue: true, cataloguePage: 4,
+    code, label, searchLabel: `${label} · ${o.mount}`, colour, colourSr, swatch, size, holes: null, hardnessStars: stars, applyWith, boxQuantity: o.box,
+    image: `/products/befar/catalog/${o.imageBase}-${img}.webp`, onWebsite: false, inCatalogue: true, cataloguePage: o.page,
   };
 };
+
+const m14 = (c: FoamColour) => foamVariant(c, { mount: "M14", box: 24, page: 4, imageBase: "befar-m14-sunder-za-poliranje" });
+const velcroFoam = (c: FoamColour) => foamVariant(c, { mount: "čičak", box: 36, page: 5, imageBase: "befar-cicak-sunder-150x50" });
 
 const OWNER_PROMOTED_ENTRIES: CatalogProductEntry[] = [
   // Odluka vlasnika 2026-11-13: sunđeri na M14 nosaču (BizniSoft 002401–002405) dobijaju svoju karticu.
@@ -353,14 +388,8 @@ const OWNER_PROMOTED_ENTRIES: CatalogProductEntry[] = [
     leadCode: "02401",
     relatedLegacySlugs: [],
     variantColumn: { key: "color", label: "Boja i dimenzija" },
-    variants: [
-      m14("02401", "White", "bela", "#E6E3DD", "150x50mm", 3, "tečna ili krem polir pasta", "bela"),
-      m14("02402", "Orange", "narandžasta", "#DF7A27", "150x50mm", 5, "tečna ili krem polir pasta", "narandzasta"),
-      m14("02403", "Black", "crna", "#1B1E22", "150x45mm", 1, "polir ili zaštita laka", "crna"),
-      m14("02404", "Yellow", "žuta", "#E3BD1F", "150x50mm", 3, "tečna ili krem polir pasta", "zuta"),
-      m14("02405", "Blue", "plava", "#2E6CB4", "150x50mm", 2, "tečna ili krem polir pasta", "plava"),
-    ],
-    image: { src: "/products/befar/catalog/befar-compounding-foam-m14-izrez.webp", width: 651, height: 385, hasAlpha: true },
+    variants: foamColours("024").map(m14),
+    image: { src: "/products/befar/catalog/befar-m14-sunder-za-poliranje.webp", width: 1200, height: 745, hasAlpha: true },
     sharedGroupImages: false,
     missingOfficialAsset: false,
     gallery: [],
@@ -382,6 +411,104 @@ const OWNER_PROMOTED_ENTRIES: CatalogProductEntry[] = [
         { label: "Fabričko pakovanje", value: "24 kom. u kutiji" },
       ],
       applications: ["Korekcija laka tečnom ili krem polir pastom", "Završno poliranje i zaštita laka (crna)"],
+      benefits: [],
+      advice: null,
+      setContents: [],
+    },
+    shade: null,
+  },
+  // Odluka vlasnika 2026-11-13: čičak sunđeri 150 × 50 mm (BizniSoft 003401–003405) dobijaju karticu sa šiframa.
+  // Izvor: BEFAR Product Catalog, str. 5 „VELCRO COMPOUNDING FOAM“; slike su isečci iz kataloga.
+  {
+    slug: "befar-velcro-compounding-foam-150x50",
+    name: "Befar čičak sunđer za poliranje 150 × 50 mm",
+    sourceKey: "catalogue-p5-velcro-compounding-foam",
+    sourceUrls: [befarCatalogMeta.catalogueUrl],
+    officialName: "Velcro Compounding Foam",
+    officialNameTr: null,
+    line: "Befar",
+    kind: "family",
+    isSet: false,
+    qualifiers: ["150 × 50"],
+    officialCategories: ["Velcro Compounding Foam"],
+    classification: "CATALOGUE_ONLY_OWNER_PROMOTED",
+    taxonomy: { category: "poliranje", programSlug: "poliranje", phaseSlug: "poliranje", visualType: "foam" },
+    cataloguePages: [5],
+    leadCode: "03401",
+    relatedLegacySlugs: [],
+    variantColumn: { key: "color", label: "Boja i dimenzija" },
+    variants: foamColours("034").map(velcroFoam),
+    image: { src: "/products/befar/catalog/befar-cicak-sunder-150x50.webp", width: 340, height: 300, hasAlpha: true },
+    sharedGroupImages: false,
+    missingOfficialAsset: false,
+    gallery: [],
+    content: {
+      productType: "Čičak sunđer za poliranje",
+      subtype: "sunđer za poliranje · čičak · 150 × 50 mm · 5 boja",
+      shortDescription: "Befar sunđer za poliranje sa čičak poleđinom, prečnika 150 mm i visine 50 mm, u 5 boja.",
+      longDescription:
+        "Sunđer za poliranje sa čičak poleđinom (Befar „Velcro Compounding Foam“). Kači se na čičak podlošku polirke. Dimenzija je 150 × 50 mm (crna 150 × 45 mm). Boja označava tvrdoću prema legendi proizvođača: narandžasta 5/5, bela 3/5, žuta 3/5, plava 2/5, crna 1/5. Za belu, narandžastu, žutu i plavu katalog preporučuje tečnu ili krem polir pastu, a za crnu polir ili zaštitu laka.",
+      purpose: "Mašinsko poliranje lakiranih površina, polirka sa čičak podloškom",
+      facts: [
+        { label: "Linija", value: "Befar" },
+        { label: "Prihvat", value: "Čičak" },
+        { label: "Dimenzije", value: "150 × 50 mm (crna 150 × 45 mm)" },
+        { label: "Boje", value: "bela, narandžasta, crna, žuta, plava" },
+        { label: "Tvrdoća po boji", value: "narandžasta 5/5, bela 3/5, žuta 3/5, plava 2/5, crna 1/5" },
+        { label: "Preporučeno sredstvo", value: "bela, narandžasta, žuta i plava: tečna ili krem polir pasta; crna: polir ili zaštita laka" },
+        { label: "Fabričko pakovanje", value: "36 kom. u kutiji" },
+      ],
+      applications: ["Korekcija laka tečnom ili krem polir pastom", "Završno poliranje i zaštita laka (crna)"],
+      benefits: [],
+      advice: null,
+      setContents: [],
+    },
+    shade: null,
+  },
+  // Odluka vlasnika 2026-11-13: Leo magični sunđer (BizniSoft 081011). Katalog str. 41 „LEO PLUS MAGIC SPONGE“,
+  // 81011L, 70 × 100 × 30 mm, 230 kom. u kutiji; slika je isečak kutije iz kataloga („Magic Sponge Hand Applicator“).
+  {
+    slug: "befar-leo-magic-sponge",
+    name: "Befar Leo magični sunđer",
+    sourceKey: "catalogue-p41-leo-plus-magic-sponge",
+    sourceUrls: [befarCatalogMeta.catalogueUrl],
+    officialName: "Leo Plus Magic Sponge",
+    officialNameTr: null,
+    line: "Leo",
+    kind: "family",
+    isSet: false,
+    qualifiers: [],
+    officialCategories: ["Leo"],
+    classification: "CATALOGUE_ONLY_OWNER_PROMOTED",
+    taxonomy: { category: "pribor", programSlug: "poliranje", phaseSlug: "poliranje", visualType: "neutral" },
+    cataloguePages: [41],
+    leadCode: "81011L",
+    relatedLegacySlugs: [],
+    variantColumn: { key: "size", label: "Dimenzija" },
+    variants: [
+      {
+        code: "81011L", label: "70 × 100 × 30 mm", searchLabel: "70 × 100 × 30 mm · magični sunđer", colour: null, colourSr: null, swatch: null,
+        size: "70x100x30mm", holes: null, hardnessStars: null, applyWith: null, boxQuantity: 230,
+        image: null, onWebsite: false, inCatalogue: true, cataloguePage: 41,
+      },
+    ],
+    image: { src: "/products/befar/catalog/befar-leo-magicni-sunder.webp", width: 684, height: 514, hasAlpha: true },
+    sharedGroupImages: false,
+    missingOfficialAsset: false,
+    gallery: [],
+    content: {
+      productType: "Magični sunđer, ručni aplikator",
+      subtype: "magični sunđer · ručni aplikator · 70 × 100 × 30 mm",
+      shortDescription: "Leo magični sunđer iz Befar programa, ručni aplikator dimenzija 70 × 100 × 30 mm.",
+      longDescription:
+        "Leo Plus Magic Sponge je magični sunđer iz Befar Leo programa, na kutiji označen kao ručni aplikator (Magic Sponge Hand Applicator). Dimenzije su 70 × 100 × 30 mm. Način upotrebe i preporučena sredstva potvrđujemo na upit.",
+      purpose: "Ručni rad u nezi i detailingu vozila",
+      facts: [
+        { label: "Linija", value: "Leo" },
+        { label: "Dimenzije", value: "70 × 100 × 30 mm" },
+        { label: "Fabričko pakovanje", value: "230 kom. u kutiji" },
+      ],
+      applications: [],
       benefits: [],
       advice: null,
       setContents: [],

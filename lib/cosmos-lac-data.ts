@@ -39,7 +39,7 @@ type CosmosLacGeneratedRecord = {
   foregroundTone: "light" | "dark";
   colorSource: ProductColorSource;
   colorConfidence: ProductColorConfidence;
-  verificationStatus: "verified-official-source";
+  verificationStatus: "verified-official-source" | "OWNER_CONFIRMED";
   sourceReference: string;
   visualTreatment: "paint" | "clearcoat" | "matte";
   shortDescription: string;
@@ -100,7 +100,55 @@ const syncOf = (record: CosmosLacGeneratedRecord): CosmosSyncEntry | undefined =
  */
 const withoutDoubledRal = (text: string) => text.replace(/\bRAL RAL\b/g, "RAL");
 
-const records = [...(generatedRecords as CosmosLacGeneratedRecord[]), ...syncProducts]
+/*
+ * Odluka vlasnika 2026-11-13: „032 je sa konverterom, a 030 bez konvertera — svaki ima svoju karticu, a sa
+ * jedne se brzo prelazi na drugu“. Prefilled 032 nije na cosmoslac.com ni u Brand Kit-u, pa nosi samo naš
+ * naziv (BizniSoft 020032) i pakovanje.
+ */
+const ownerConfirmedRecords: CosmosLacGeneratedRecord[] = [
+  {
+    id: "cl-automotive-032-400-ml-prefilled-032-konverter",
+    slug: "cosmos-lac-automotive-032-400-ml-prefilled-032-konverter",
+    // Sopstvena kartica (ne ista porodica): birač bi obe izvedbe nazvao „400 ml“; prelaz 030 ↔ 032 nose povezani proizvodi.
+    baseProductSlug: "cosmos-lac-automotive-prefilled-032-konverter",
+    variantId: "automotive-032-400-ml-prefilled-032-konverter",
+    brand: "Cosmos Lac",
+    brandSlug: "cosmos-lac",
+    line: "Automotive",
+    officialName: "Cosmos Lac Prefilled Spray 032 sa konverterom",
+    displayNameSr: "Cosmos Lac Prefilled Spray 032 sa konverterom",
+    cosmosCode: "032",
+    ralCode: null,
+    colorName: null,
+    finish: null,
+    volume: "400 ml",
+    programSlug: "aerosoli",
+    primaryCategory: "boja",
+    technicalCategory: "automotive-paint",
+    useCase: "Sprej za punjenje bojom, izvedba sa konverterom (030 je izvedba bez konvertera).",
+    image: "/images/products/placeholder-product.svg",
+    imageAlt: "Cosmos Lac Prefilled Spray 032 sa konverterom",
+    visualMode: "neutral",
+    backgroundColor: "#E7EAEE",
+    foregroundTone: "dark",
+    colorSource: "manual-estimate",
+    colorConfidence: "provisional",
+    verificationStatus: "OWNER_CONFIRMED",
+    sourceReference: "Odluka vlasnika 2026-11-13 (BizniSoft 020032 „COS.SPREJ PREFIL 032 KONVERTER 400ML“); nije na cosmoslac.com.",
+    visualTreatment: "paint",
+    shortDescription: "Cosmos Lac Prefilled 032, izvedba sa konverterom, 400 ml. Izvedba bez konvertera je Prefilled 030.",
+    seoTitle: "Cosmos Lac Prefilled Spray 032 sa konverterom | Carsystem i R-M",
+    seoDescription: "Cosmos Lac Prefilled 032 sa konverterom, 400 ml. Pošaljite upit Carsystem i R-M timu.",
+  },
+];
+
+/** Brz prelaz između izvedbi istog proizvoda koje nisu varijante jedne porodice (vlasnik 2026-11-13). */
+const OWNER_SIBLINGS: Record<string, string[]> = {
+  "cosmos-lac-automotive-030-400-ml-prefilled-030-1k": ["cosmos-lac-automotive-032-400-ml-prefilled-032-konverter"],
+  "cosmos-lac-automotive-032-400-ml-prefilled-032-konverter": ["cosmos-lac-automotive-030-400-ml-prefilled-030-1k"],
+};
+
+const records = [...(generatedRecords as CosmosLacGeneratedRecord[]), ...syncProducts, ...ownerConfirmedRecords]
   .filter((record) => syncOf(record)?.status !== "REMOVED_FROM_CUSTOMER_CATALOG")
   .map((record) => ({
     ...record,
@@ -302,9 +350,12 @@ function toCarsystemProduct(record: CosmosLacGeneratedRecord): CarsystemProduct 
     programSlug: record.programSlug,
     phaseSlug: record.primaryCategory,
     shortDescription: record.shortDescription,
-    longDescription: `${record.officialName} je verifikovana varijanta iz zvaničnog Cosmos Lac programa${
-      identity ? ` (${identity})` : ""
-    }. ${useCase} Dostupnost i izbor proizvoda potvrđuju se kroz upit.`,
+    longDescription:
+      record.verificationStatus === "OWNER_CONFIRMED"
+        ? `${record.officialName}. ${useCase} Tehnički list i dostupnost potvrđujemo na upit.`
+        : `${record.officialName} je verifikovana varijanta iz zvaničnog Cosmos Lac programa${
+            identity ? ` (${identity})` : ""
+          }. ${useCase} Dostupnost i izbor proizvoda potvrđuju se kroz upit.`,
     sku: record.id.toUpperCase(),
     packages: packageOptions(customerPackageOf(record)),
     ...(verifiedSizeOf(record) ? { size: verifiedSizeOf(record) } : {}),
@@ -338,7 +389,7 @@ function toCarsystemProduct(record: CosmosLacGeneratedRecord): CarsystemProduct 
             note: "Dokumentaciju i odgovarajuću varijantu potvrđuje tehnička podrška.",
           },
         ],
-    relatedProductSlugs: [],
+    relatedProductSlugs: OWNER_SIBLINGS[record.slug] ?? [],
     family,
     catalogStrategy: family.catalogStrategy,
     variantId: record.variantId,

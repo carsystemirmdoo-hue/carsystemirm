@@ -50,6 +50,8 @@ test("B = A i D = C u stvarnom runtime-u; aktuelno van opsega nije uvezeno", () 
   const representedProducts = new Set();
   const representedPages = new Set();
   for (const product of records) {
+    // Izvedba koju je vlasnik potvrdio, a cosmoslac.com je ne objavljuje (Prefilled 032, 2026-11-13).
+    if (product.catalogMetadata?.verificationStatus === "OWNER_CONFIRMED") continue;
     const sync = syncOf(product.slug);
     assert.ok(sync, `zapis bez sync identiteta: ${product.slug}`);
     if (sync.officialUrl) { representedPages.add(sync.officialUrl); representedProducts.add(sync.officialProduct); }
@@ -64,7 +66,7 @@ test("B = A i D = C u stvarnom runtime-u; aktuelno van opsega nije uvezeno", () 
 
 test("kartice: svaka podeljena kartica daje tačan broj naslednika (+14); uklonjena serija ne daje nijednu", () => {
   assert.equal(cards.filter((card) => /molotow/.test(card.id)).length, 0);
-  assert.equal(cards.length - baseline.cards, 14 + 4 - 2, "neto: +14 od podele, +4 nova zvanična proizvoda, −2 kartice uklonjene serije");
+  assert.equal(cards.length - baseline.cards, 14 + 4 - 2 + 1, "neto: +14 od podele, +4 nova zvanična proizvoda, −2 kartice uklonjene serije, +1 Prefilled 032 (odluka vlasnika 2026-11-13)");
   const expected = { "cosmos-lac-lubricants-oil": 6, "cosmos-lac-lubricants-grease": 4, "cosmos-lac-putties-filler": 3, "cosmos-lac-varnishes-varnish": 2, "cosmos-lac-w-wood-care-varnish": 2, "cosmos-lac-wheel-rim-wheel-rim": 2, "cosmos-lac-zinc-zinc": 2 };
   let gain = 0;
   for (const [base, count] of Object.entries(expected)) {

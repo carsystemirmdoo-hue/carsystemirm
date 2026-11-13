@@ -1822,16 +1822,43 @@ const productRecords: CarsystemProduct[] = [
     taxonomyCategory: "kitovi",
     shortDescription: "Carsystem git iz Multi programa za popunjavanje i završno ravnanje, u radioničkom pakovanju 4,8 kg.",
     longDescription:
-      "Carsystem Git Multi Fill & Finish je git za popunjavanje i završno ravnanje pre brušenja i podloge. Prodaje se u radioničkom pakovanju 4,8 kg. Tehnički i bezbednosni list dostavljamo na upit.",
+      "Carsystem Git Multi Fill & Finish je poliesterski git za popunjavanje i završno ravnanje pre brušenja i podloge. Prodaje se u radioničkom pakovanju 4,8 kg: limenka 4,7 kg gita i tuba učvršćivača od 100 g. Tehnički i bezbednosni list dostavljamo na upit.",
     sku: "147.161",
     packages: [{ label: "4,8 kg" }],
     purpose: "Popunjavanje i završno ravnanje pre brušenja",
     badges: ["Git", "Priprema", "4,8 kg"],
+    // Fotografija vlasnika 2026-11-13 (na etiketi Art.-Nr. 147.161, 4,7 kg + 100 g).
+    productImage: productAsset(
+      "/products/carsystem/carsystem-multi-fill-finish-4-8-kg.webp",
+      "Carsystem Multi Fill & Finish, limenka 4,7 kg sa učvršćivačem",
+    ),
     specifications: [
-      { label: "Tip", value: "Git" },
-      { label: "Pakovanje", value: "4,8 kg" },
+      { label: "Tip", value: "Poliesterski git" },
+      { label: "Pakovanje", value: "4,8 kg (4,7 kg git + 100 g učvršćivač)" },
     ],
     relatedProductSlugs: ["carsystem-git-multi-green"],
+  }),
+  // Odluka vlasnika 2026-11-13: BizniSoft 156292 „CS VUNENI DISK ZA POLIRANJE“ je disk od 133 mm, poseban
+  // proizvod (nije Gold S 150 mm ni White S Edge 130 mm). Nema ga u Carsystem katalogu 2026/27 ni na sajtu.
+  createProduct({
+    slug: "carsystem-vuneni-disk-za-poliranje-133",
+    name: "Carsystem vuneni disk za poliranje 133 mm",
+    brandSlug: "carsystem",
+    programSlug: "poliranje",
+    phaseSlug: "poliranje",
+    taxonomyCategory: "poliranje",
+    shortDescription: "Carsystem vuneni disk za mašinsko poliranje, prečnika 133 mm.",
+    longDescription:
+      "Carsystem vuneni disk za mašinsko poliranje laka, prečnika 133 mm. Način pričvršćivanja, visinu i preporučenu pastu potvrđujemo na upit.",
+    sku: "156.292",
+    packages: [{ label: "1 kom." }],
+    purpose: "Mašinsko poliranje laka",
+    badges: ["Vuneni disk", "Poliranje", "133 mm"],
+    specifications: [
+      { label: "Tip", value: "Vuneni disk za poliranje" },
+      { label: "Prečnik", value: "133 mm" },
+    ],
+    relatedProductSlugs: ["carsystem-lamb-wool-pad-gold-s", "carsystem-lamb-wool-pad-white-s-edge"],
   }),
   createProduct({
     slug: "carsystem-navlake-za-sedista-rolna",
@@ -1847,10 +1874,10 @@ const productRecords: CarsystemProduct[] = [
     packages: [{ label: "rolna" }],
     purpose: "Zaštita sedišta vozila tokom popravke",
     badges: ["Zaštita", "Rolna"],
-    // Ilustracija (vlasnik 2026-11-13): fotografija jednokratne navlake bez oznake brenda; Carsystem fotografija ne postoji.
+    // Fotografija vlasnika 2026-11-13 (Carsystem rolna navlaka).
     productImage: productAsset(
-      "/products/carfit/catalog/carfit-disposable-seat-covers.webp",
-      "Jednokratna navlaka za sedište — ilustracija",
+      "/products/carsystem/carsystem-navlake-za-sedista-rolna.webp",
+      "Carsystem navlake za sedišta u rolni",
     ),
     specifications: [
       { label: "Tip", value: "Jednokratna navlaka za sedište" },
@@ -3225,6 +3252,8 @@ function getReviewedDetailVariantSelector(
 const SELECTABLE_VARIANT_STATUSES = new Set([
   "verified-official-source",
   "ACTIVE_CONFIRMED",
+  // Varijanta koju je vlasnik potvrdio, a zvanični izvor je ne objavljuje (Cosmos Prefilled 032, 2026-11-13).
+  "OWNER_CONFIRMED",
 ]);
 
 /**

@@ -14,6 +14,9 @@ import {
 import { matchesStatusFilter, parseCustomerStatusFilter } from "@/lib/customers/customerStatus.mjs";
 import { filterCustomerList, parseCustomerListFilter } from "@/lib/customers/customerListFilter.mjs";
 import { listAssigneesByCustomer, listSalesReps } from "@/lib/partners/assignment-service";
+import { DateRangeField } from "@/components/portal/DateRangeField";
+import { readPortalPeriod } from "@/lib/portal/period";
+import { periodLabel } from "@/lib/portal/periodMemory.mjs";
 
 
 export const metadata = { title: "Kupci" };
@@ -23,7 +26,7 @@ export const dynamic = "force-dynamic";
 export default async function CustomersPage({
   searchParams,
 }: {
-  searchParams: Promise<{ status?: string; q?: string; komercijalista?: string }>;
+  searchParams: Promise<{ status?: string; q?: string; komercijalista?: string; from?: string; to?: string }>;
 }) {
   const user = await requireCapability("view:kupci", "/portal/kupci");
   const scoped = !seesAllCustomers(user);
@@ -32,6 +35,8 @@ export default async function CustomersPage({
   const statusFilter = parseCustomerStatusFilter(params.status, "svi");
   // Pretraga i komercijalista po DODELI (B5); filter po komercijalisti ima smisla samo ko vidi sve kupce.
   const listFilter = parseCustomerListFilter(params);
+  // Period prometa: iz adrese ili zapamćen sa drugog ekrana (Prodaja, Analitika, kartica kupca).
+  const period = await readPortalPeriod(params);
   if (scoped) listFilter.rep = "";
   const allScoped = await loadScopedCustomers(user);
   const seesDebts = can(user, "view:dugovanja");
@@ -60,9 +65,9 @@ export default async function CustomersPage({
     );
   }
 
-  // Promet po kupcu nad CELOM istorijom, u bazi — bez granice broja stavki.
+  // Promet po kupcu za izabrani period (bez perioda: cela istorija), u bazi — bez granice broja stavki.
   const byCustomer = new Map(
-    (await loadSalesBreakdown(user, {}, "kupci")).map((row) => [row.key, row]),
+    (await loadSalesBreakdown(user, { from: period.from, to: period.to }, "kupci")).map((row) => [row.key, row]),
   );
 
   return (
@@ -80,8 +85,9 @@ export default async function CustomersPage({
       <section className="portal-panel">
         <div className="portal-section-header">
           <div>
-            <h2>Promet po kupcu</h2>
+            <h2>Promet po kupcu · {periodLabel(period)}</h2>
             <form method="get" className="portal-inline-form">
+              <DateRangeField nameOd="from" nameDo="to" defaultOd={period.from} defaultDo={period.to} zapamti />
               <input type="search" name="q" defaultValue={listFilter.q} placeholder="Naziv, PIB ili grad" aria-label="Pretraga kupaca" maxLength={80} />
               {scoped ? null : (
                 <select name="komercijalista" defaultValue={listFilter.rep} aria-label="Komercijalista">
@@ -102,7 +108,7 @@ export default async function CustomersPage({
               <button type="submit" className="portal-button" data-variant="primary">Prikažite</button>
             </form>
             <p>
-              {filtered ? `Prikazano ${customers.length} od ${allScoped.length}. ` : ""}Iznosi su iz uvezenih faktura.{" "}
+              {filtered ? `Prikazano ${customers.length} od ${allScoped.length}. ` : ""}Iznosi su iz uvezenih faktura, period: {periodLabel(period).replace(/\.$/, "")}.{" "}
               {debtSnap ? `Dugovanje je današnje stanje iz tabele kancelarije (provereno ${debtSnap.checkedAt.slice(8, 10)}.${debtSnap.checkedAt.slice(5, 7)}.).` : ""}
             </p>
           </div>

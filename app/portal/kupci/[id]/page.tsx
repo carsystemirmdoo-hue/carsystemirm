@@ -16,6 +16,9 @@ import { loadCrossSell } from "@/lib/recommendations/cross-sell";
 import { CustomerStatusPanel } from "./CustomerStatusPanel";
 import { CustomerDesk } from "@/components/portal/CustomerDesk";
 import { loadCustomerDesk } from "@/lib/sales-tools/customer-desk-service";
+import { CustomerPeriod } from "./CustomerPeriod";
+import { readPortalPeriod } from "@/lib/portal/period";
+import { loadCustomerPeriodArticles } from "@/lib/sales/customer-period-service";
 import { CustomerArticles, CustomerCrossSell, CustomerMethod, CustomerSuggestions, CustomerSummary } from "./CustomerCard";
 
 export const dynamic = "force-dynamic";
@@ -25,11 +28,12 @@ export default async function CustomerDetailPage({
   searchParams,
 }: {
   params: Promise<{ id: string }>;
-  searchParams: Promise<{ redosled?: string }>;
+  searchParams: Promise<{ redosled?: string; from?: string; to?: string; sve?: string }>;
 }) {
   const { id } = await params;
   // Poređenje sa dosadašnjim redosledom; sve ostalo (osim „dosadasnji") je R1.
-  const order = (await searchParams).redosled === "dosadasnji" ? "dosadasnji" : "r1";
+  const sp = await searchParams;
+  const order = sp.redosled === "dosadasnji" ? "dosadasnji" : "r1";
   const user = await requireCapability("view:kupci", `/portal/kupci/${id}`);
 
   // Ne-UUID iz adrese je 404, ne greška baze (B7).
@@ -56,12 +60,15 @@ export default async function CustomerDetailPage({
    * razgovor i proširenje i dalje traže `view:preporuke`.
    */
   const showHistory = showSignals || can(user, "view:prodaja");
-  const [assignees, reps, profile, crossSell] = await Promise.all([
+  // Period (od–do) za „Najviše kupovano“ i „Prestao da uzima“: iz adrese ili zapamćen sa drugog ekrana.
+  const period = await readPortalPeriod(sp);
+  const [assignees, reps, profile, crossSell, periodData] = await Promise.all([
     listCustomerAssignees(customer.id),
     canManageAssignments ? listSalesReps() : Promise.resolve([]),
     showHistory ? loadCustomerProfile(customer.id) : Promise.resolve(null),
     // Opseg je već proveren iznad (`requireCustomerAccess`); predlog je deo iste kartice.
     showSignals ? loadCrossSell([customer.id]).then((m) => m.get(customer.id) ?? null) : Promise.resolve(null),
+    showHistory ? loadCustomerPeriodArticles(customer.id, period) : Promise.resolve(null),
   ]);
 
   // Traka kupca (poziv, dugovanje, razgovor): ko radi preporuke, radi i sa ovim (opseg proveren iznad).
@@ -98,6 +105,16 @@ export default async function CustomerDetailPage({
             <Link href={`/portal/zahtevi?stanje=svi&q=${encodeURIComponent(customer.name)}`}>Zahtevi ovog kupca →</Link>
           ) : null}
         </nav>
+      ) : null}
+      {periodData ? (
+        <CustomerPeriod
+          customerId={customer.id}
+          period={period}
+          articles={periodData.articles}
+          stopped={periodData.stopped}
+          showAmounts={can(user, "view:prodaja")}
+          showAll={sp.sve === "1"}
+        />
       ) : null}
       {showSignals && profile && customer.active ? (
         <CustomerSuggestions profile={profile} identities={identities} order={order} />

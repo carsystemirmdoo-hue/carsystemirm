@@ -18,6 +18,7 @@ import {
   loadScopedCustomers,
 } from "@/lib/sales/queries";
 import { normalizeSalesFilter } from "@/lib/sales/filterInput.mjs";
+import { readPortalPeriod } from "@/lib/portal/period";
 
 
 export const metadata = { title: "Analitika" };
@@ -68,11 +69,14 @@ export default async function AnalyticsPage({
   }
 
   // Neispravan datum ili ID iz adrese ne sme da obori stranu (B7).
-  const filter = normalizeSalesFilter(params);
+  // Period iz adrese ili zapamćen sa drugog ekrana portala (Kupci, kartica kupca, Prodaja, Analitika).
+  const period = await readPortalPeriod(params);
+  const applied = { ...params, from: period.from ?? "", to: period.to ?? "" };
+  const filter = normalizeSalesFilter(applied);
   const view = (VIEWS.find((item) => item.key === params.prikaz)?.key ??
     "kupci") as GroupView;
 
-  const previousWindow = previousRange(params.from, params.to);
+  const previousWindow = previousRange(filter.from ?? undefined, filter.to ?? undefined);
 
   // Zbirovi nad CELIM filtriranim skupom u bazi; lista stavki je samo prikaz.
   const [summary, rows, byCustomer, lines, previous, customers, salespeople, productGroups] =
@@ -100,7 +104,7 @@ export default async function AnalyticsPage({
       <SalesFilters
         action="/portal/analitika"
         options={{ customers, salespeople, productGroups }}
-        applied={params}
+        applied={applied}
         views={VIEWS}
         exportView={view}
         salespersonOnInvoices={

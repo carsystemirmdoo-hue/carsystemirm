@@ -1,4 +1,5 @@
 import { dmy } from "@/lib/ordering/panelFormat.mjs";
+import { readPortalPeriod } from "@/lib/portal/period";
 import { PageHeader } from "@/components/portal/PortalPrimitives";
 import {
   money,
@@ -41,6 +42,8 @@ export default async function ReturnsPage({
 }) {
   const user = await requireCapability("view:povrati", "/portal/povrati");
   const params = await searchParams;
+  // Period iz adrese ili zapamćen sa drugog ekrana portala.
+  const period = await readPortalPeriod(params);
 
   if (!(await hasImportedInvoices())) {
     return (
@@ -52,8 +55,8 @@ export default async function ReturnsPage({
   }
 
   const filter = {
-    from: params.from || null,
-    to: params.to || null,
+    from: period.from,
+    to: period.to,
     customerId: params.kupac || null,
     salespersonId: params.komercijalista || null,
     productGroup: params.grupa || null,
@@ -90,7 +93,7 @@ export default async function ReturnsPage({
       <SalesFilters
         action="/portal/povrati"
         options={{ customers, salespeople, productGroups }}
-        applied={params}
+        applied={{ ...params, from: period.from ?? "", to: period.to ?? "" }}
         exportView="stavke"
         salespersonOnInvoices={
           summary.lineCount === 0 || summary.linesWithSalesperson > 0

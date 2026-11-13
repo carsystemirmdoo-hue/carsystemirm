@@ -61,6 +61,7 @@ export function SalesFilters({
           nameDo="to"
           defaultOd={applied.from}
           defaultDo={applied.to}
+          zapamti
         />
         <label>
           <span>Kupac</span>

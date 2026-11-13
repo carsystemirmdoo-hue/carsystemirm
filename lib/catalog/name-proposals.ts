@@ -3,8 +3,9 @@ import { readFileSync } from "node:fs";
 import path from "node:path";
 import { sql } from "drizzle-orm";
 import { getDb } from "@/db/client";
+import { AUDIT_ACTIONS } from "@/lib/audit/auditEntry.mjs";
 import { getAllCarsystemProducts, getProductVariantSelector } from "@/lib/carsystem-data";
-import { brandKey, buildIndex, confidenceOf, rankTargets } from "./nameMatch.mjs";
+import { brandKey, buildIndex, confidenceOf, markSharedTargets, measureLabel, rankTargets } from "./nameMatch.mjs";
 
 /**
  * Predlozi veza po nazivu za ekran „Povezivanje artikala“ (2026-11-11, odluka vlasnika).
@@ -61,8 +62,26 @@ export type NameProposal = {
   brand: string | null;
   sold12m: number;
   confidence: "sigurno" | "verovatno" | "nejasno" | "nema" | "bez brenda";
-  candidates: { slug: string; variant: string | null; label: string; score: number }[];
+  candidates: { slug: string; variant: string | null; label: string; score: number; doubts: string[] }[];
+  /** Mera iz BizniSoft naziva („0,5 L“, „150 mm · P240“) — pakovanje nosi sam artikal. */
+  pack: string;
+  /** Isti predlog (ista mera i boja) dobio je još neki artikal — ne mogu oba biti tačna. */
+  shared?: boolean;
+  /** Poslednji opis vlasnika („koji je to artikal“), iz traga revizije. */
+  ownerNote: { text: string; by: string; at: string } | null;
 };
+
+/** Poslednji opis po artiklu. Opis se čuva kao red u tragu revizije (bez nove tabele, sa istorijom). */
+async function loadOwnerNotes(): Promise<Map<string, { text: string; by: string; at: string }>> {
+  const rows = await getDb().execute<{ id: string; text: string | null; by: string; at: string }>(sql`
+    SELECT DISTINCT ON (entity_id) entity_id AS id, value_after->>'text' AS text, actor_label AS by, created_at::text AS at
+      FROM audit_log
+     WHERE action = ${AUDIT_ACTIONS.articleOwnerDescription} AND entity_type = 'Artikal'
+     ORDER BY entity_id, created_at DESC`);
+  const out = new Map<string, { text: string; by: string; at: string }>();
+  for (const r of rows) if (r.text) out.set(r.id, { text: r.text, by: r.by, at: r.at });
+  return out;
+}
 
 /** Artikli bez potvrđene veze (bez onih van programa), sa predlogom po nazivu. */
 export async function loadNameProposals(opts: { includeInactive: boolean }): Promise<NameProposal[]> {
@@ -74,6 +93,7 @@ export async function loadNameProposals(opts: { includeInactive: boolean }): Pro
      WHERE NOT EXISTS (SELECT 1 FROM article_catalog_mappings m WHERE m.article_id = a.id AND m.status = 'mapped')
        AND NOT EXISTS (SELECT 1 FROM articles_out_of_programme o WHERE o.article_id = a.id)`);
   const idx = index();
+  const notes = await loadOwnerNotes();
   const out: NameProposal[] = [];
   for (const r of rows) {
     const sold = Number(r.sold ?? 0);
@@ -87,10 +107,12 @@ export async function loadNameProposals(opts: { includeInactive: boolean }): Pro
       brand,
       sold12m: sold,
       confidence: !brand ? "bez brenda" : (confidenceOf(ranked) as NameProposal["confidence"]),
-      candidates: ranked.map((c) => ({ slug: c.slug, variant: c.variant, label: c.label, score: c.score })),
+      candidates: ranked.map((c) => ({ slug: c.slug, variant: c.variant, label: c.label, score: c.score, doubts: c.doubts ?? [] })),
+      pack: measureLabel(r.name),
+      ownerNote: notes.get(r.id) ?? null,
     });
   }
-  return out;
+  return markSharedTargets(out);
 }
 
 /** Server ponovo računa predlog: potvrditi se sme samo jedan od ponuđenih kandidata. */

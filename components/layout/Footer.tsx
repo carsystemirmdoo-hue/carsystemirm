@@ -26,6 +26,7 @@ const brandLinks = [
   { href: "/brendovi/cosmos-lac", label: "Cosmos Lac" },
   { href: "/brendovi/befar", label: "Befar" },
   { href: "/brendovi/yachtcare", label: "Yachtcare" },
+  { href: "/brendovi/autofit", label: "Auto Fit" },
 ];
 
 const supportLinks = [

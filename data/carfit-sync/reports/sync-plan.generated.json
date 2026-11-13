@@ -9,13 +9,13 @@
     "CURRENT_ACTIVE_ARTICLE_NUMBERS": 357,
     "CATALOGUE_PRODUCTS": 82,
     "CATALOGUE_ARTICLE_NUMBERS": 294,
-    "LOCAL_PRODUCTS_BEFORE": 3,
+    "LOCAL_PRODUCTS_BEFORE": 5,
     "LOCAL_ARTICLE_NUMBERS_BEFORE": 6,
     "EXACT_MATCH": 0,
     "HIGH_CONFIDENCE_MATCH": 1,
     "PROBABLE_MATCH": 0,
     "LEGACY_NOT_ON_CURRENT_WEBSITE": 2,
-    "LOCAL_ONLY_UNKNOWN": 0,
+    "LOCAL_ONLY_UNKNOWN": 2,
     "WEBSITE_AND_CATALOGUE": 88,
     "WEBSITE_ONLY": 35,
     "CATALOGUE_ONLY": 20,
@@ -38,6 +38,26 @@
     }
   },
   "localMatches": [
+    {
+      "localSlug": "carfit-scr-adapteri",
+      "classification": "LOCAL_ONLY_UNKNOWN",
+      "sourceKey": null,
+      "officialName": null,
+      "evidence": [
+        "nema zvanične šifre, slika nije zvanična, naziv ne odgovara nijednoj zvaničnoj stranici"
+      ],
+      "autoApply": false
+    },
+    {
+      "localSlug": "carfit-skoc-brajt-sivi-152x230",
+      "classification": "LOCAL_ONLY_UNKNOWN",
+      "sourceKey": null,
+      "officialName": null,
+      "evidence": [
+        "nema zvanične šifre, slika nije zvanična, naziv ne odgovara nijednoj zvaničnoj stranici"
+      ],
+      "autoApply": false
+    },
     {
       "localSlug": "carfit-maskirna-folija-4x5m",
       "classification": "HIGH_CONFIDENCE_MATCH",

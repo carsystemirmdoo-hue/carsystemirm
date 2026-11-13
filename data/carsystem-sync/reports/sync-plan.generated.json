@@ -4,7 +4,7 @@
     "catalogueSha256": "ac4f63d9b65109f15de5f5cb3f3caed672741ddd97a76eea78bbacf35d643961",
     "SOURCE PRODUCTS": 465,
     "SOURCE VARIANTS": 1089,
-    "EXISTING PRODUCTS": 6,
+    "EXISTING PRODUCTS": 30,
     "EXISTING VARIANTS": 9,
     "EXACT MATCHES": 1,
     "HIGH CONFIDENCE MATCHES": 4,
@@ -13,7 +13,7 @@
     "MISSING VARIANTS": 0,
     "variantsSuppliedByEnrichment": 22,
     "AMBIGUOUS": 0,
-    "LEGACY PRODUCTS": 0,
+    "LEGACY PRODUCTS": 24,
     "SOURCE CONFLICTS": 10,
     "MISSING IMAGES": 3,
     "MISSING IMPORTANT DATA": 1,
@@ -82,6 +82,616 @@
         "useOfficialImage": true,
         "currentImageSrc": "/products/carsystem/carsystem-git-multi-green.webp"
       }
+    },
+    {
+      "localSlug": "carsystem-git-multi-fill-finish",
+      "localName": "Carsystem Git Multi Fill & Finish 4,8 kg",
+      "classification": "LEGACY_NOT_IN_CATALOGUE",
+      "autoApply": false,
+      "sourceKeys": [],
+      "candidates": [],
+      "evidence": [
+        {
+          "level": "article-number",
+          "articleNumbers": [
+            "147.161"
+          ],
+          "owners": []
+        },
+        {
+          "level": "none",
+          "note": "Nijedan zvanični proizvod ne deli šifru, sliku, tačan naziv ni kôd serije."
+        }
+      ],
+      "flags": [
+        "LEGACY_NOT_IN_CATALOGUE",
+        "LEGACY_NOT_IN_2026_27"
+      ],
+      "enrichment": null
+    },
+    {
+      "localSlug": "carsystem-vuneni-disk-za-poliranje-133",
+      "localName": "Carsystem vuneni disk za poliranje 133 mm",
+      "classification": "LEGACY_NOT_IN_CATALOGUE",
+      "autoApply": false,
+      "sourceKeys": [],
+      "candidates": [],
+      "evidence": [
+        {
+          "level": "article-number",
+          "articleNumbers": [
+            "156.292"
+          ],
+          "owners": []
+        },
+        {
+          "level": "none",
+          "note": "Nijedan zvanični proizvod ne deli šifru, sliku, tačan naziv ni kôd serije."
+        }
+      ],
+      "flags": [
+        "LEGACY_NOT_IN_CATALOGUE",
+        "LEGACY_NOT_IN_2026_27"
+      ],
+      "enrichment": null
+    },
+    {
+      "localSlug": "carsystem-zastitno-odelo-papirno",
+      "localName": "Carsystem papirno zaštitno odelo",
+      "classification": "LEGACY_NOT_IN_CATALOGUE",
+      "autoApply": false,
+      "sourceKeys": [],
+      "candidates": [],
+      "evidence": [
+        {
+          "level": "article-number",
+          "articleNumbers": [
+            "155.618"
+          ],
+          "owners": []
+        },
+        {
+          "level": "none",
+          "note": "Nijedan zvanični proizvod ne deli šifru, sliku, tačan naziv ni kôd serije."
+        }
+      ],
+      "flags": [
+        "LEGACY_NOT_IN_CATALOGUE",
+        "LEGACY_NOT_IN_2026_27"
+      ],
+      "enrichment": null
+    },
+    {
+      "localSlug": "carsystem-podloska-za-neptun-list",
+      "localName": "Carsystem podloška za Neptun list",
+      "classification": "LEGACY_NOT_IN_CATALOGUE",
+      "autoApply": false,
+      "sourceKeys": [],
+      "candidates": [],
+      "evidence": [
+        {
+          "level": "article-number",
+          "articleNumbers": [
+            "154.174"
+          ],
+          "owners": []
+        },
+        {
+          "level": "none",
+          "note": "Nijedan zvanični proizvod ne deli šifru, sliku, tačan naziv ni kôd serije."
+        }
+      ],
+      "flags": [
+        "LEGACY_NOT_IN_CATALOGUE",
+        "LEGACY_NOT_IN_2026_27"
+      ],
+      "enrichment": null
+    },
+    {
+      "localSlug": "carsystem-silikonsko-cistilo-vodeno-5-l",
+      "localName": "Carsystem silikonsko čistilo vodeno 5 L",
+      "classification": "LEGACY_NOT_IN_CATALOGUE",
+      "autoApply": false,
+      "sourceKeys": [],
+      "candidates": [],
+      "evidence": [
+        {
+          "level": "article-number",
+          "articleNumbers": [
+            "146.705"
+          ],
+          "owners": []
+        },
+        {
+          "level": "none",
+          "note": "Nijedan zvanični proizvod ne deli šifru, sliku, tačan naziv ni kôd serije."
+        }
+      ],
+      "flags": [
+        "LEGACY_NOT_IN_CATALOGUE",
+        "LEGACY_NOT_IN_2026_27"
+      ],
+      "enrichment": null
+    },
+    {
+      "localSlug": "carsystem-polir-pasta-energetic-strong",
+      "localName": "Carsystem polir pasta Energetic Strong",
+      "classification": "LEGACY_NOT_IN_CATALOGUE",
+      "autoApply": false,
+      "sourceKeys": [],
+      "candidates": [],
+      "evidence": [
+        {
+          "level": "article-number",
+          "articleNumbers": [
+            "152.044"
+          ],
+          "owners": []
+        },
+        {
+          "level": "none",
+          "note": "Nijedan zvanični proizvod ne deli šifru, sliku, tačan naziv ni kôd serije."
+        }
+      ],
+      "flags": [
+        "LEGACY_NOT_IN_CATALOGUE",
+        "LEGACY_NOT_IN_2026_27"
+      ],
+      "enrichment": null
+    },
+    {
+      "localSlug": "carsystem-polir-pasta-superior-shine-finish",
+      "localName": "Carsystem polir pasta Superior Shine Finish",
+      "classification": "LEGACY_NOT_IN_CATALOGUE",
+      "autoApply": false,
+      "sourceKeys": [],
+      "candidates": [],
+      "evidence": [
+        {
+          "level": "article-number",
+          "articleNumbers": [
+            "152.045"
+          ],
+          "owners": []
+        },
+        {
+          "level": "none",
+          "note": "Nijedan zvanični proizvod ne deli šifru, sliku, tačan naziv ni kôd serije."
+        }
+      ],
+      "flags": [
+        "LEGACY_NOT_IN_CATALOGUE",
+        "LEGACY_NOT_IN_2026_27"
+      ],
+      "enrichment": null
+    },
+    {
+      "localSlug": "carsystem-polish-finish-all-in-one-1-l",
+      "localName": "Carsystem Polish Finish All in One 1 L",
+      "classification": "LEGACY_NOT_IN_CATALOGUE",
+      "autoApply": false,
+      "sourceKeys": [],
+      "candidates": [],
+      "evidence": [
+        {
+          "level": "article-number",
+          "articleNumbers": [
+            "139.196"
+          ],
+          "owners": []
+        },
+        {
+          "level": "none",
+          "note": "Nijedan zvanični proizvod ne deli šifru, sliku, tačan naziv ni kôd serije."
+        }
+      ],
+      "flags": [
+        "LEGACY_NOT_IN_CATALOGUE",
+        "LEGACY_NOT_IN_2026_27"
+      ],
+      "enrichment": null
+    },
+    {
+      "localSlug": "carsystem-podloske-m14-za-polir-sundjere",
+      "localName": "Carsystem podloške M14 za polir sunđere",
+      "classification": "LEGACY_NOT_IN_CATALOGUE",
+      "autoApply": false,
+      "sourceKeys": [],
+      "candidates": [],
+      "evidence": [
+        {
+          "level": "article-number",
+          "articleNumbers": [
+            "139.207"
+          ],
+          "owners": []
+        },
+        {
+          "level": "none",
+          "note": "Nijedan zvanični proizvod ne deli šifru, sliku, tačan naziv ni kôd serije."
+        }
+      ],
+      "flags": [
+        "LEGACY_NOT_IN_CATALOGUE",
+        "LEGACY_NOT_IN_2026_27"
+      ],
+      "enrichment": null
+    },
+    {
+      "localSlug": "carsystem-traka-za-felne",
+      "localName": "Carsystem traka za felne",
+      "classification": "LEGACY_NOT_IN_CATALOGUE",
+      "autoApply": false,
+      "sourceKeys": [],
+      "candidates": [],
+      "evidence": [
+        {
+          "level": "article-number",
+          "articleNumbers": [
+            "156.988"
+          ],
+          "owners": []
+        },
+        {
+          "level": "none",
+          "note": "Nijedan zvanični proizvod ne deli šifru, sliku, tačan naziv ni kôd serije."
+        }
+      ],
+      "flags": [
+        "LEGACY_NOT_IN_CATALOGUE",
+        "LEGACY_NOT_IN_2026_27"
+      ],
+      "enrichment": null
+    },
+    {
+      "localSlug": "carsystem-satajet-x-5500-rp-30-years-ltd",
+      "localName": "SATAjet X 5500 RP Carsystem 30 Years Ltd.",
+      "classification": "LEGACY_NOT_IN_CATALOGUE",
+      "autoApply": false,
+      "sourceKeys": [],
+      "candidates": [],
+      "evidence": [
+        {
+          "level": "article-number",
+          "articleNumbers": [
+            "159.860"
+          ],
+          "owners": []
+        },
+        {
+          "level": "none",
+          "note": "Nijedan zvanični proizvod ne deli šifru, sliku, tačan naziv ni kôd serije."
+        }
+      ],
+      "flags": [
+        "LEGACY_NOT_IN_CATALOGUE",
+        "LEGACY_NOT_IN_2026_27"
+      ],
+      "enrichment": null
+    },
+    {
+      "localSlug": "carsystem-patosnice-jednokratne",
+      "localName": "Carsystem jednokratne patosnice",
+      "classification": "LEGACY_NOT_IN_CATALOGUE",
+      "autoApply": false,
+      "sourceKeys": [],
+      "candidates": [],
+      "evidence": [
+        {
+          "level": "article-number",
+          "articleNumbers": [
+            "142.941"
+          ],
+          "owners": []
+        },
+        {
+          "level": "none",
+          "note": "Nijedan zvanični proizvod ne deli šifru, sliku, tačan naziv ni kôd serije."
+        }
+      ],
+      "flags": [
+        "LEGACY_NOT_IN_CATALOGUE",
+        "LEGACY_NOT_IN_2026_27"
+      ],
+      "enrichment": null
+    },
+    {
+      "localSlug": "carsystem-brusni-blok-meki-125x70",
+      "localName": "Carsystem brusni blok meki 125 × 70 mm",
+      "classification": "LEGACY_NOT_IN_CATALOGUE",
+      "autoApply": false,
+      "sourceKeys": [],
+      "candidates": [],
+      "evidence": [
+        {
+          "level": "article-number",
+          "articleNumbers": [
+            "137.432"
+          ],
+          "owners": []
+        },
+        {
+          "level": "none",
+          "note": "Nijedan zvanični proizvod ne deli šifru, sliku, tačan naziv ni kôd serije."
+        }
+      ],
+      "flags": [
+        "LEGACY_NOT_IN_CATALOGUE",
+        "LEGACY_NOT_IN_2026_27"
+      ],
+      "enrichment": null
+    },
+    {
+      "localSlug": "carsystem-podloska-crna-75-mm",
+      "localName": "Carsystem podloška crna 75 mm",
+      "classification": "LEGACY_NOT_IN_CATALOGUE",
+      "autoApply": false,
+      "sourceKeys": [],
+      "candidates": [],
+      "evidence": [
+        {
+          "level": "article-number",
+          "articleNumbers": [
+            "133.147"
+          ],
+          "owners": []
+        },
+        {
+          "level": "none",
+          "note": "Nijedan zvanični proizvod ne deli šifru, sliku, tačan naziv ni kôd serije."
+        }
+      ],
+      "flags": [
+        "LEGACY_NOT_IN_CATALOGUE",
+        "LEGACY_NOT_IN_2026_27"
+      ],
+      "enrichment": null
+    },
+    {
+      "localSlug": "carsystem-pneumatska-slajferica",
+      "localName": "Carsystem pneumatska šlajferica",
+      "classification": "LEGACY_NOT_IN_CATALOGUE",
+      "autoApply": false,
+      "sourceKeys": [],
+      "candidates": [],
+      "evidence": [
+        {
+          "level": "article-number",
+          "articleNumbers": [
+            "141.293"
+          ],
+          "owners": []
+        },
+        {
+          "level": "none",
+          "note": "Nijedan zvanični proizvod ne deli šifru, sliku, tačan naziv ni kôd serije."
+        }
+      ],
+      "flags": [
+        "LEGACY_NOT_IN_CATALOGUE",
+        "LEGACY_NOT_IN_2026_27"
+      ],
+      "enrichment": null
+    },
+    {
+      "localSlug": "carsystem-mixing-stick-alu",
+      "localName": "Carsystem Mixing Stick Alu 2:1 / 4:1",
+      "classification": "LEGACY_NOT_IN_CATALOGUE",
+      "autoApply": false,
+      "sourceKeys": [],
+      "candidates": [],
+      "evidence": [
+        {
+          "level": "article-number",
+          "articleNumbers": [
+            "146.695"
+          ],
+          "owners": []
+        },
+        {
+          "level": "none",
+          "note": "Nijedan zvanični proizvod ne deli šifru, sliku, tačan naziv ni kôd serije."
+        }
+      ],
+      "flags": [
+        "LEGACY_NOT_IN_CATALOGUE",
+        "LEGACY_NOT_IN_2026_27"
+      ],
+      "enrichment": null
+    },
+    {
+      "localSlug": "carsystem-nosac-za-raspe",
+      "localName": "Carsystem nosač za rašpe",
+      "classification": "LEGACY_NOT_IN_CATALOGUE",
+      "autoApply": false,
+      "sourceKeys": [],
+      "candidates": [],
+      "evidence": [
+        {
+          "level": "article-number",
+          "articleNumbers": [
+            "150.468"
+          ],
+          "owners": []
+        },
+        {
+          "level": "none",
+          "note": "Nijedan zvanični proizvod ne deli šifru, sliku, tačan naziv ni kôd serije."
+        }
+      ],
+      "flags": [
+        "LEGACY_NOT_IN_CATALOGUE",
+        "LEGACY_NOT_IN_2026_27"
+      ],
+      "enrichment": null
+    },
+    {
+      "localSlug": "carsystem-tecni-metal-125-g",
+      "localName": "Carsystem tečni metal 125 g",
+      "classification": "LEGACY_NOT_IN_CATALOGUE",
+      "autoApply": false,
+      "sourceKeys": [],
+      "candidates": [],
+      "evidence": [
+        {
+          "level": "article-number",
+          "articleNumbers": [
+            "150.501"
+          ],
+          "owners": []
+        },
+        {
+          "level": "none",
+          "note": "Nijedan zvanični proizvod ne deli šifru, sliku, tačan naziv ni kôd serije."
+        }
+      ],
+      "flags": [
+        "LEGACY_NOT_IN_CATALOGUE",
+        "LEGACY_NOT_IN_2026_27"
+      ],
+      "enrichment": null
+    },
+    {
+      "localSlug": "carsystem-traka-g95-vodootporna",
+      "localName": "Carsystem traka G95 vodootporna 25 mm × 50 m",
+      "classification": "LEGACY_NOT_IN_CATALOGUE",
+      "autoApply": false,
+      "sourceKeys": [],
+      "candidates": [],
+      "evidence": [
+        {
+          "level": "article-number",
+          "articleNumbers": [
+            "154.590"
+          ],
+          "owners": []
+        },
+        {
+          "level": "none",
+          "note": "Nijedan zvanični proizvod ne deli šifru, sliku, tačan naziv ni kôd serije."
+        }
+      ],
+      "flags": [
+        "LEGACY_NOT_IN_CATALOGUE",
+        "LEGACY_NOT_IN_2026_27"
+      ],
+      "enrichment": null
+    },
+    {
+      "localSlug": "carsystem-asap-nitril-rukavice",
+      "localName": "Carsystem ASAP nitril rukavice",
+      "classification": "LEGACY_NOT_IN_CATALOGUE",
+      "autoApply": false,
+      "sourceKeys": [],
+      "candidates": [],
+      "evidence": [
+        {
+          "level": "article-number",
+          "articleNumbers": [
+            "157.385"
+          ],
+          "owners": []
+        },
+        {
+          "level": "none",
+          "note": "Nijedan zvanični proizvod ne deli šifru, sliku, tačan naziv ni kôd serije."
+        }
+      ],
+      "flags": [
+        "LEGACY_NOT_IN_CATALOGUE",
+        "LEGACY_NOT_IN_2026_27"
+      ],
+      "enrichment": null
+    },
+    {
+      "localSlug": "carsystem-raspa-za-smirglu-198",
+      "localName": "Carsystem rašpa za šmirglu 198",
+      "classification": "LEGACY_NOT_IN_CATALOGUE",
+      "autoApply": false,
+      "sourceKeys": [],
+      "candidates": [],
+      "evidence": [
+        {
+          "level": "article-number",
+          "articleNumbers": [
+            "141.962"
+          ],
+          "owners": []
+        },
+        {
+          "level": "none",
+          "note": "Nijedan zvanični proizvod ne deli šifru, sliku, tačan naziv ni kôd serije."
+        }
+      ],
+      "flags": [
+        "LEGACY_NOT_IN_CATALOGUE",
+        "LEGACY_NOT_IN_2026_27"
+      ],
+      "enrichment": null
+    },
+    {
+      "localSlug": "carsystem-gerson-farbarska-maska",
+      "localName": "Gerson farbarska maska",
+      "classification": "LEGACY_NOT_IN_CATALOGUE",
+      "autoApply": false,
+      "sourceKeys": [],
+      "candidates": [],
+      "evidence": [
+        {
+          "level": "none",
+          "note": "Nijedan zvanični proizvod ne deli šifru, sliku, tačan naziv ni kôd serije."
+        }
+      ],
+      "flags": [
+        "LEGACY_NOT_IN_CATALOGUE",
+        "LEGACY_NOT_IN_2026_27"
+      ],
+      "enrichment": null
+    },
+    {
+      "localSlug": "carsystem-plafonski-filter-fa-560g",
+      "localName": "Plafonski filter FA-560G fini",
+      "classification": "LEGACY_NOT_IN_CATALOGUE",
+      "autoApply": false,
+      "sourceKeys": [],
+      "candidates": [],
+      "evidence": [
+        {
+          "level": "none",
+          "note": "Nijedan zvanični proizvod ne deli šifru, sliku, tačan naziv ni kôd serije."
+        }
+      ],
+      "flags": [
+        "LEGACY_NOT_IN_CATALOGUE",
+        "LEGACY_NOT_IN_2026_27"
+      ],
+      "enrichment": null
+    },
+    {
+      "localSlug": "carsystem-navlake-za-sedista-rolna",
+      "localName": "Carsystem navlake za sedišta u rolni",
+      "classification": "LEGACY_NOT_IN_CATALOGUE",
+      "autoApply": false,
+      "sourceKeys": [],
+      "candidates": [],
+      "evidence": [
+        {
+          "level": "article-number",
+          "articleNumbers": [
+            "142.940"
+          ],
+          "owners": []
+        },
+        {
+          "level": "none",
+          "note": "Nijedan zvanični proizvod ne deli šifru, sliku, tačan naziv ni kôd serije."
+        }
+      ],
+      "flags": [
+        "LEGACY_NOT_IN_CATALOGUE",
+        "LEGACY_NOT_IN_2026_27"
+      ],
+      "enrichment": null
     },
     {
       "localSlug": "carsystem-git-elastic-weiss",

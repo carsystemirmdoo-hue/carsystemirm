@@ -14,7 +14,7 @@ Generisano komandom `npm run carsystem:sync:plan`. Ovaj korak ne menja katalog.
 | catalogueSha256 | ac4f63d9b65109f15de5f5cb3f3caed672741ddd97a76eea78bbacf35d643961 |
 | SOURCE PRODUCTS | 465 |
 | SOURCE VARIANTS | 1089 |
-| EXISTING PRODUCTS | 6 |
+| EXISTING PRODUCTS | 30 |
 | EXISTING VARIANTS | 9 |
 | EXACT MATCHES | 1 |
 | HIGH CONFIDENCE MATCHES | 4 |
@@ -23,7 +23,7 @@ Generisano komandom `npm run carsystem:sync:plan`. Ovaj korak ne menja katalog.
 | MISSING VARIANTS | 0 |
 | variantsSuppliedByEnrichment | 22 |
 | AMBIGUOUS | 0 |
-| LEGACY PRODUCTS | 0 |
+| LEGACY PRODUCTS | 24 |
 | SOURCE CONFLICTS | 10 |
 | MISSING IMAGES | 3 |
 | MISSING IMPORTANT DATA | 1 |
@@ -41,6 +41,30 @@ Generisano komandom `npm run carsystem:sync:plan`. Ovaj korak ne menja katalog.
 | Naš slug | Klasifikacija | Zvanični proizvod | Dokaz | Dopuna |
 | --- | --- | --- | --- | --- |
 | `carsystem-git-multi-green` | HIGH_CONFIDENCE_MATCH<br>VARIANT_MISSING<br>EXISTING_DATA_INCOMPLETE | Multi Green — Multifuncional polyester putty | identical-official-tds | +3 varijanti; sku je interni placeholder (CS-GIT-MULTI-GREEN); manufacturerCode nije upisan |
+| `carsystem-git-multi-fill-finish` | LEGACY_NOT_IN_CATALOGUE<br>LEGACY_NOT_IN_2026_27 | — | article-number, none | — |
+| `carsystem-vuneni-disk-za-poliranje-133` | LEGACY_NOT_IN_CATALOGUE<br>LEGACY_NOT_IN_2026_27 | — | article-number, none | — |
+| `carsystem-zastitno-odelo-papirno` | LEGACY_NOT_IN_CATALOGUE<br>LEGACY_NOT_IN_2026_27 | — | article-number, none | — |
+| `carsystem-podloska-za-neptun-list` | LEGACY_NOT_IN_CATALOGUE<br>LEGACY_NOT_IN_2026_27 | — | article-number, none | — |
+| `carsystem-silikonsko-cistilo-vodeno-5-l` | LEGACY_NOT_IN_CATALOGUE<br>LEGACY_NOT_IN_2026_27 | — | article-number, none | — |
+| `carsystem-polir-pasta-energetic-strong` | LEGACY_NOT_IN_CATALOGUE<br>LEGACY_NOT_IN_2026_27 | — | article-number, none | — |
+| `carsystem-polir-pasta-superior-shine-finish` | LEGACY_NOT_IN_CATALOGUE<br>LEGACY_NOT_IN_2026_27 | — | article-number, none | — |
+| `carsystem-polish-finish-all-in-one-1-l` | LEGACY_NOT_IN_CATALOGUE<br>LEGACY_NOT_IN_2026_27 | — | article-number, none | — |
+| `carsystem-podloske-m14-za-polir-sundjere` | LEGACY_NOT_IN_CATALOGUE<br>LEGACY_NOT_IN_2026_27 | — | article-number, none | — |
+| `carsystem-traka-za-felne` | LEGACY_NOT_IN_CATALOGUE<br>LEGACY_NOT_IN_2026_27 | — | article-number, none | — |
+| `carsystem-satajet-x-5500-rp-30-years-ltd` | LEGACY_NOT_IN_CATALOGUE<br>LEGACY_NOT_IN_2026_27 | — | article-number, none | — |
+| `carsystem-patosnice-jednokratne` | LEGACY_NOT_IN_CATALOGUE<br>LEGACY_NOT_IN_2026_27 | — | article-number, none | — |
+| `carsystem-brusni-blok-meki-125x70` | LEGACY_NOT_IN_CATALOGUE<br>LEGACY_NOT_IN_2026_27 | — | article-number, none | — |
+| `carsystem-podloska-crna-75-mm` | LEGACY_NOT_IN_CATALOGUE<br>LEGACY_NOT_IN_2026_27 | — | article-number, none | — |
+| `carsystem-pneumatska-slajferica` | LEGACY_NOT_IN_CATALOGUE<br>LEGACY_NOT_IN_2026_27 | — | article-number, none | — |
+| `carsystem-mixing-stick-alu` | LEGACY_NOT_IN_CATALOGUE<br>LEGACY_NOT_IN_2026_27 | — | article-number, none | — |
+| `carsystem-nosac-za-raspe` | LEGACY_NOT_IN_CATALOGUE<br>LEGACY_NOT_IN_2026_27 | — | article-number, none | — |
+| `carsystem-tecni-metal-125-g` | LEGACY_NOT_IN_CATALOGUE<br>LEGACY_NOT_IN_2026_27 | — | article-number, none | — |
+| `carsystem-traka-g95-vodootporna` | LEGACY_NOT_IN_CATALOGUE<br>LEGACY_NOT_IN_2026_27 | — | article-number, none | — |
+| `carsystem-asap-nitril-rukavice` | LEGACY_NOT_IN_CATALOGUE<br>LEGACY_NOT_IN_2026_27 | — | article-number, none | — |
+| `carsystem-raspa-za-smirglu-198` | LEGACY_NOT_IN_CATALOGUE<br>LEGACY_NOT_IN_2026_27 | — | article-number, none | — |
+| `carsystem-gerson-farbarska-maska` | LEGACY_NOT_IN_CATALOGUE<br>LEGACY_NOT_IN_2026_27 | — | none | — |
+| `carsystem-plafonski-filter-fa-560g` | LEGACY_NOT_IN_CATALOGUE<br>LEGACY_NOT_IN_2026_27 | — | none | — |
+| `carsystem-navlake-za-sedista-rolna` | LEGACY_NOT_IN_CATALOGUE<br>LEGACY_NOT_IN_2026_27 | — | article-number, none | — |
 | `carsystem-git-elastic-weiss` | HIGH_CONFIDENCE_MATCH<br>VARIANT_MISSING<br>EXISTING_DATA_INCOMPLETE | Elastic white — Polyester - fine putty | identical-official-packshot | +3 varijanti; sku je interni placeholder (CS-GIT-ELASTIC-WEISS); manufacturerCode nije upisan |
 | `carsystem-f19-brusni-diskovi` | HIGH_CONFIDENCE_MATCH<br>VARIANT_MISSING<br>EXISTING_DATA_INCOMPLETE | Sanding Disc F.19 — Film abrasive - 150 mm - 25 holes | series-article-range | +12 varijanti; sku je interni placeholder (CS-F19-DISC); manufacturerCode nije upisan |
 | `carsystem-f23-brusni-diskovi` | EXACT_MATCH<br>EXISTING_DATA_INCOMPLETE | Sanding Disc F.23 Ceramic — Film abrasive - 150 mm - 25 holes | article-number | +0 varijanti; manufacturerCode nije upisan |

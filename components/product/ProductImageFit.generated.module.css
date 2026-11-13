@@ -1473,6 +1473,60 @@
   --product-image-dark-frame: 0 0 0 1px oklch(0.94 0.008 255 / 0.12);
 }
 
+.fit[data-product-fit="/products/befar/catalog/befar-cicak-sunder-150x50-bela.webp"] {
+  --product-canvas-aspect: 1.137;
+  --product-content-aspect: 1.1493;
+  --product-content-fill-x: 0.9277;
+  --product-content-fill-y: 0.9178;
+  --product-content-offset-x: 0.0361;
+  --product-content-offset-y: 0.0445;
+}
+
+.fit[data-product-fit="/products/befar/catalog/befar-cicak-sunder-150x50-crna.webp"] {
+  --product-canvas-aspect: 1.1773;
+  --product-content-aspect: 1.1938;
+  --product-content-fill-x: 0.9277;
+  --product-content-fill-y: 0.9149;
+  --product-content-offset-x: 0.0361;
+  --product-content-offset-y: 0.0461;
+}
+
+.fit[data-product-fit="/products/befar/catalog/befar-cicak-sunder-150x50-narandzasta.webp"] {
+  --product-canvas-aspect: 1.1333;
+  --product-content-aspect: 1.1444;
+  --product-content-fill-x: 0.9324;
+  --product-content-fill-y: 0.9233;
+  --product-content-offset-x: 0.0353;
+  --product-content-offset-y: 0.04;
+}
+
+.fit[data-product-fit="/products/befar/catalog/befar-cicak-sunder-150x50-plava.webp"] {
+  --product-canvas-aspect: 1.1888;
+  --product-content-aspect: 1.197;
+  --product-content-fill-x: 0.9294;
+  --product-content-fill-y: 0.9231;
+  --product-content-offset-x: 0.0353;
+  --product-content-offset-y: 0.0385;
+}
+
+.fit[data-product-fit="/products/befar/catalog/befar-cicak-sunder-150x50-zuta.webp"] {
+  --product-canvas-aspect: 1.1391;
+  --product-content-aspect: 1.1398;
+  --product-content-fill-x: 0.9244;
+  --product-content-fill-y: 0.9238;
+  --product-content-offset-x: 0.0407;
+  --product-content-offset-y: 0.0397;
+}
+
+.fit[data-product-fit="/products/befar/catalog/befar-cicak-sunder-150x50.webp"] {
+  --product-canvas-aspect: 1.1333;
+  --product-content-aspect: 1.1444;
+  --product-content-fill-x: 0.9324;
+  --product-content-fill-y: 0.9233;
+  --product-content-offset-x: 0.0353;
+  --product-content-offset-y: 0.04;
+}
+
 .fit[data-product-fit="/products/befar/catalog/befar-cream-compound-2.webp"] {
   --product-canvas-aspect: 1.5;
   --product-content-aspect: 1.2;
@@ -1797,6 +1851,15 @@
   --product-image-dark-frame: 0 0 0 1px oklch(0.94 0.008 255 / 0.12);
 }
 
+.fit[data-product-fit="/products/befar/catalog/befar-leo-magicni-sunder.webp"] {
+  --product-canvas-aspect: 1.3307;
+  --product-content-aspect: 1.3677;
+  --product-content-fill-x: 0.9298;
+  --product-content-fill-y: 0.9047;
+  --product-content-offset-x: 0.0351;
+  --product-content-offset-y: 0.0506;
+}
+
 .fit[data-product-fit="/products/befar/catalog/befar-leo-mini-detailing-cleaning-set.webp"] {
   --product-canvas-aspect: 1.0345;
   --product-content-aspect: 1.0802;
@@ -2023,6 +2086,60 @@
   --product-image-dark-filter: none;
   --product-image-dark-contact: 0;
   --product-image-dark-frame: 0 0 0 1px oklch(0.94 0.008 255 / 0.12);
+}
+
+.fit[data-product-fit="/products/befar/catalog/befar-m14-sunder-za-poliranje-bela.webp"] {
+  --product-canvas-aspect: 1.6173;
+  --product-content-aspect: 1.678;
+  --product-content-fill-x: 0.9425;
+  --product-content-fill-y: 0.9084;
+  --product-content-offset-x: 0.0283;
+  --product-content-offset-y: 0.0458;
+}
+
+.fit[data-product-fit="/products/befar/catalog/befar-m14-sunder-za-poliranje-crna.webp"] {
+  --product-canvas-aspect: 1.5748;
+  --product-content-aspect: 1.6326;
+  --product-content-fill-x: 0.9442;
+  --product-content-fill-y: 0.9108;
+  --product-content-offset-x: 0.0275;
+  --product-content-offset-y: 0.0446;
+}
+
+.fit[data-product-fit="/products/befar/catalog/befar-m14-sunder-za-poliranje-narandzasta.webp"] {
+  --product-canvas-aspect: 1.6107;
+  --product-content-aspect: 1.6721;
+  --product-content-fill-x: 0.9433;
+  --product-content-fill-y: 0.9087;
+  --product-content-offset-x: 0.0283;
+  --product-content-offset-y: 0.0456;
+}
+
+.fit[data-product-fit="/products/befar/catalog/befar-m14-sunder-za-poliranje-plava.webp"] {
+  --product-canvas-aspect: 1.5504;
+  --product-content-aspect: 1.6034;
+  --product-content-fill-x: 0.9433;
+  --product-content-fill-y: 0.9121;
+  --product-content-offset-x: 0.0283;
+  --product-content-offset-y: 0.0439;
+}
+
+.fit[data-product-fit="/products/befar/catalog/befar-m14-sunder-za-poliranje-zuta.webp"] {
+  --product-canvas-aspect: 1.6194;
+  --product-content-aspect: 1.6795;
+  --product-content-fill-x: 0.9433;
+  --product-content-fill-y: 0.9096;
+  --product-content-offset-x: 0.0283;
+  --product-content-offset-y: 0.0459;
+}
+
+.fit[data-product-fit="/products/befar/catalog/befar-m14-sunder-za-poliranje.webp"] {
+  --product-canvas-aspect: 1.6107;
+  --product-content-aspect: 1.6721;
+  --product-content-fill-x: 0.9433;
+  --product-content-fill-y: 0.9087;
+  --product-content-offset-x: 0.0283;
+  --product-content-offset-y: 0.0456;
 }
 
 .fit[data-product-fit="/products/befar/catalog/befar-medium-hard-velcro-backing-pad-2.webp"] {
@@ -4187,6 +4304,15 @@
   --product-content-offset-y: 0.1232;
 }
 
+.fit[data-product-fit="/products/carsystem/carsystem-git-multi-fill-finish-4-8-kg.webp"] {
+  --product-canvas-aspect: 0.6376;
+  --product-content-aspect: 0.6172;
+  --product-content-fill-x: 0.9123;
+  --product-content-fill-y: 0.9424;
+  --product-content-offset-x: 0.0438;
+  --product-content-offset-y: 0.0279;
+}
+
 .fit[data-product-fit="/products/carsystem/carsystem-git-multi-green.jpg"] {
   --product-canvas-aspect: 1;
   --product-content-aspect: 1.4596;
@@ -4207,6 +4333,15 @@
   --product-content-fill-y: 0.66;
   --product-content-offset-x: 0.0217;
   --product-content-offset-y: 0.1783;
+}
+
+.fit[data-product-fit="/products/carsystem/carsystem-navlake-za-sedista-rolna.webp"] {
+  --product-canvas-aspect: 2.4845;
+  --product-content-aspect: 2.7212;
+  --product-content-fill-x: 0.9433;
+  --product-content-fill-y: 0.8613;
+  --product-content-offset-x: 0.0292;
+  --product-content-offset-y: 0.0704;
 }
 
 .fit[data-product-fit="/products/carsystem/carsystem-p19-brusni-diskovi-detail.jpg"] {

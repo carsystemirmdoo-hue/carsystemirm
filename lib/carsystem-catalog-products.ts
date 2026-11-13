@@ -1,6 +1,7 @@
 import { abrasiveBackingTerms } from "@/lib/search/abrasive-backing.mjs";
 import catalogData from "@/data/carsystem-catalog-products.generated.json";
 import removedVariantsData from "@/data/catalog/removed-variants.json";
+import { withPolishPasteSiblings } from "@/lib/carsystem-polish-pastes";
 import type {
   CarsystemProduct,
   ProductDocument,
@@ -501,8 +502,61 @@ const MANUAL_RECORD_CATEGORY: Record<string, string> = {
   "carsystem-finish-serija": "Finish",
 };
 
+/**
+ * Šifre koje vodimo, a carsystem.org i katalog 2026/27 ih ne navode (odluka vlasnika). Dodaju se kao red
+ * postojeće kartice; podaci su samo naša šifra i mera iz naziva u BizniSoftu.
+ */
+const OWNER_ADDED_VARIANTS: Record<string, { after: string; variant: CatalogVariant }[]> = {
+  // 2026-11-13: BizniSoft 125725 „CS OBOSTRANO LEPLJIVA TRAKA 25MM X10M“ — ista serija kao 125.712/713/720.
+  "carsystem-mount-tape": [
+    {
+      after: "125.720",
+      variant: {
+        articleNumber: "125.725", label: "25 mm x 10 m", manufacturerNote: null, officialSpecification: null,
+        salesPack: null, packagingUnit: null, inCatalogue: false, onWebsite: false, hasSds: false,
+      },
+    },
+  ],
+  // 2026-11-13 (sedmi krug): artikli koje firma i dalje poručuje (odluka vlasnika), a nema ih u tabeli kartice.
+  // BizniSoft 151913 „CS HERTER 2K HS/SR SPORI 2,5L“ — uz standardni 151.910 i brzi 151.911.
+  "carsystem-2k-clear-voc-hs-sr": [
+    { after: "151.911", variant: ownerRow("151.913", "Spori učvršćivač / 2,5 L") },
+  ],
+  // BizniSoft 126047 „CS POLYESTER REPARATUR SET 250G“ — manje pakovanje seta 126.054 (800 g).
+  "carsystem-polyester-repair-set": [
+    { after: "126.054", variant: ownerRow("126.047", "Set / 250 g") },
+  ],
+  // BizniSoft 124631 „CS UČVRŠĆIVAČ ZA GIT 30 GR“ i 127038 „CS UČVRŠĆIVAČ ZA GIT PLAVI“ — učvršćivač za git uz 132.413.
+  "carsystem-bpo-hardener": [
+    { after: "132.413", variant: ownerRow("124.631", "30 g") },
+    { after: "124.631", variant: ownerRow("127.038", "Plava") },
+  ],
+};
+
+function ownerRow(articleNumber: string, label: string): CatalogVariant {
+  return {
+    articleNumber, label, manufacturerNote: null, officialSpecification: null,
+    salesPack: null, packagingUnit: null, inCatalogue: false, onWebsite: false, hasSds: false,
+  };
+}
+
+function withOwnerAddedVariants(entry: CatalogProductEntry): CatalogProductEntry {
+  const extra = OWNER_ADDED_VARIANTS[entry.slug];
+  if (!extra) return entry;
+  const variants = [...entry.variants];
+  for (const { after, variant } of extra) {
+    if (variants.some((v) => v.articleNumber === variant.articleNumber)) continue;
+    const at = variants.findIndex((v) => v.articleNumber === after);
+    variants.splice(at < 0 ? variants.length : at + 1, 0, variant);
+  }
+  return { ...entry, variants };
+}
+
 export function getCarsystemCatalogProducts(): CarsystemProduct[] {
-  return entries.map((entry) => createCatalogProduct(withoutRemovedVariants(entry), knownSlugs));
+  return entries.map((entry) => {
+    const product = createCatalogProduct(withOwnerAddedVariants(withoutRemovedVariants(entry)), knownSlugs);
+    return { ...product, relatedProductSlugs: withPolishPasteSiblings(product.slug, product.relatedProductSlugs) };
+  });
 }
 
 /**

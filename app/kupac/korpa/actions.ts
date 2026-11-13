@@ -1,5 +1,7 @@
 "use server";
 
+import { after } from "next/server";
+import { sendOrderEmailIfEnabled } from "@/lib/ordering/order-email";
 import { AuthError } from "next-auth";
 import { revalidatePath } from "next/cache";
 import { signIn } from "@/auth";
@@ -49,6 +51,8 @@ export async function removeFromCartAction(articleId: string): Promise<CartChang
 export async function submitCartAction(input: { idempotencyKey: string; fingerprint: string; note: string }): Promise<SubmitResult> {
   const session = await requireCustomerSession("/kupac/korpa");
   const result = await submitCartRequest(session, input);
+  // Mejl komercijalisti i kancelariji posle odgovora kupcu; ponovljeno slanje istog zahteva ne šalje ponovo.
+  if (result.status === "created") after(() => sendOrderEmailIfEnabled(result.orderId));
   revalidatePath("/kupac/korpa");
   revalidatePath("/kupac/porudzbine");
   return result;
@@ -109,6 +113,7 @@ export async function submitRequestAction(input: {
 }): Promise<RequestSubmitResult> {
   const session = await requireCustomerSession("/kupac/korpa");
   const r = await submitOrderRequest(session, input);
+  if (r.status === "created") after(() => sendOrderEmailIfEnabled(r.orderId));
   // Korpa se ne osvežava ovde: kupac odmah prelazi na stranu zahteva (inače bi prazna korpa sakrila potvrdu).
   revalidatePath("/kupac/porudzbine");
   return r;

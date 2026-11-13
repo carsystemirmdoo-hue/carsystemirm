@@ -20,6 +20,7 @@ import {
   loadScopedCustomers,
 } from "@/lib/sales/queries";
 import { normalizeSalesFilter } from "@/lib/sales/filterInput.mjs";
+import { readPortalPeriod } from "@/lib/portal/period";
 
 
 export const metadata = { title: "Prodaja" };
@@ -45,7 +46,10 @@ export default async function SalesPage({
   }
 
   // Neispravan datum ili ID iz adrese ne sme da obori stranu (B7).
-  const filter = normalizeSalesFilter(params);
+  // Period iz adrese ili zapamćen sa drugog ekrana portala (Kupci, kartica kupca, Prodaja, Analitika).
+  const period = await readPortalPeriod(params);
+  const applied = { ...params, from: period.from ?? "", to: period.to ?? "" };
+  const filter = normalizeSalesFilter(applied);
 
   // Zbirovi nad CELIM filtriranim skupom u bazi; lista stavki je samo prikaz.
   const [summary, byCustomer, lines, customers, salespeople, productGroups] =
@@ -91,7 +95,7 @@ export default async function SalesPage({
       <SalesFilters
         action="/portal/prodaja"
         options={{ customers, salespeople, reps, productGroups }}
-        applied={params}
+        applied={applied}
         exportView="kupci"
         salespersonOnInvoices={
           summary.lineCount === 0 || summary.linesWithSalesperson > 0

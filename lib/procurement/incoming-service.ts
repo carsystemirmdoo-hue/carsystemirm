@@ -244,6 +244,9 @@ async function closeIfDone(tx: Tx, orderId: string, actorId: string | null) {
 
 export async function changeLine(actor: Actor, input: { lineId: string; action: "stiglo" | "otkazano" | "vrati" | "povezi"; articleId?: string | null }) {
   const db = getDb();
+  // Lager se čita PRE transakcije: sa jednom vezom u bazenu (Production) poziv preko getDb() unutar
+  // transakcije čekao bi vezu koju drži sama transakcija.
+  const stock = input.action === "povezi" ? await internalStockQuantities() : null;
   return db.transaction(async (tx) => {
     const [l] = [...(await tx.execute<{ id: string; order_id: string; status: string; supplier: string; supplier_code: string | null; quantity: string }>(sql`
       SELECT l.id, l.order_id, l.status, o.supplier, l.supplier_code, l.quantity::text
@@ -251,7 +254,7 @@ export async function changeLine(actor: Actor, input: { lineId: string; action: 
     if (!l) throw new IncomingError("Stavka ne postoji.");
     if (input.action === "povezi") {
       if (!input.articleId) throw new IncomingError("Izaberite artikal.");
-      const stock = await internalStockQuantities();
+      if (!stock) throw new IncomingError("Lager nije učitan.");
       const base = stock.byArticle.get(input.articleId) ?? 0;
       await tx.execute(sql`
         UPDATE supplier_order_lines SET article_id = ${input.articleId}::uuid, baseline_stock = ${base}, last_seen_stock = ${base},

@@ -41,12 +41,18 @@ export const colourKey = (value) => {
   return direct ?? COLOUR_FROM_SR.find(([pattern]) => pattern.test(text))?.[1] ?? null;
 };
 
+/**
+ * Kartice iz zvaničnog kataloga objavljene na odluku vlasnika (`OWNER_PROMOTED_ENTRIES` u
+ * lib/befar-catalog-products.ts). Nose kataloške šifre i nisu ručni zapisi, pa se ne uparuju.
+ */
+const OWNER_PROMOTED_SLUGS = new Set(["befar-compounding-foam-m14", "befar-velcro-compounding-foam-150x50", "befar-leo-magic-sponge", "befar-pad-protector", "befar-hand-pad"]);
+
 /** @param {Set<string>} syncSlugs slugovi koje je uvezao sync */
 export function loadLocalProducts(syncSlugs) {
   const { products } = loadCatalogRuntime();
   const all = products.filter((product) => product.brandSlug === BRAND.slug);
   const local = all
-    .filter((product) => !syncSlugs.has(product.slug))
+    .filter((product) => !syncSlugs.has(product.slug) && !OWNER_PROMOTED_SLUGS.has(product.slug))
     .map((product) => {
       const rows = product.detail?.variants?.content?.rows ?? [];
       const literal = (code) => handWrittenSource.includes(`"${code}"`);

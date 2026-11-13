@@ -1,4 +1,5 @@
 import { dmy } from "@/lib/ordering/panelFormat.mjs";
+import { readPortalPeriod } from "@/lib/portal/period";
 import { PageHeader } from "@/components/portal/PortalPrimitives";
 import {
   money,
@@ -44,6 +45,8 @@ export default async function ReturnsPage({
 }) {
   const user = await requireCapability("view:povrati", "/portal/povrati");
   const params = await searchParams;
+  // Period iz adrese ili zapamćen sa drugog ekrana portala.
+  const period = await readPortalPeriod(params);
 
   if (!(await hasImportedInvoices())) {
     return (
@@ -54,8 +57,9 @@ export default async function ReturnsPage({
     );
   }
 
-  // Neispravan datum ili ID iz adrese ne sme da obori stranu (isto kao Prodaja).
-  const filter = normalizeSalesFilter(params);
+  // Neispravan datum ili ID iz adrese ne sme da obori stranu (isto kao Prodaja); period je zapamćen između ekrana.
+  const applied = { ...params, from: period.from ?? "", to: period.to ?? "" };
+  const filter = normalizeSalesFilter(applied);
 
   // Zbirovi nad CELIM filtriranim skupom u bazi. Negativne stavke se čitaju
   // posebnim upitom (samo iznos < 0), pa ih granica liste ne može sakriti.
@@ -90,7 +94,7 @@ export default async function ReturnsPage({
       <SalesFilters
         action="/portal/povrati"
         options={{ customers, salespeople, reps, productGroups }}
-        applied={params}
+        applied={applied}
         exportView="stavke"
         salespersonOnInvoices={
           summary.lineCount === 0 || summary.linesWithSalesperson > 0

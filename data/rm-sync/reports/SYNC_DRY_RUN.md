@@ -8,7 +8,7 @@
 | SYSTEMS | 9 |
 | STANDALONE_COMPONENTS | 89 |
 | SYSTEM_COMPONENTS_WITHOUT_CARDS | 14 |
-| LEGACY_LOCAL_ONLY | 10 (rm-diamont-bezbojni-lak, rm-stop-multi-1-5-kg, rm-paste-za-mesanje, rm-sc-paste, rm-sc-850-thinner-medium, rm-h-9000-hardener-medium, rm-c-1450-startop-hs, rm-sm-09-special-mat-09, rm-c-1150-basic-clear, rm-h-1150-basic-hardener) |
+| LEGACY_LOCAL_ONLY | 22 (rm-diamont-bezbojni-lak, rm-stop-multi-1-5-kg, rm-paste-za-mesanje, rm-sc-paste, rm-sc-820-thinner-fast, rm-fr-500-razredjivac, rm-d-80-herter, rm-h-420-herter, rm-d-701-0-5-l, rm-profiller-sivi, rm-directfiller-grey, rm-stop-quick-1-5-kg, rm-basic-stop-1-5-kg, rm-stop-herter-40-g, rm-basic-stop-herter-50-g, rm-pk-1000-odmascivac, rm-sc-850-thinner-medium, rm-h-9000-hardener-medium, rm-c-1450-startop-hs, rm-sm-09-special-mat-09, rm-c-1150-basic-clear, rm-h-1150-basic-hardener) |
 | DOCUMENTATION_GAPS | 2 (HB 015, HB 032) |
 | WEBSITE_ORPHANS | 1 (822-promotor-de-adherencia) |
 | NEW_PRODUCTS_TO_IMPORT | 159 |

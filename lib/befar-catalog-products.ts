@@ -294,6 +294,18 @@ function createCatalogProduct(entry: CatalogProductEntry): CarsystemProduct {
  * potvrdio etiketom. Podaci su samo iz kataloga; tvrdoća i slika se ne izmišljaju.
  */
 const OWNER_CONFIRMED_VARIANTS: Record<string, { after: string; variant: CatalogVariant }[]> = {
+  // Odluka vlasnika 2026-11-13: crni elips (BizniSoft 020103) ostaje dok ima robe na lageru. Šifra iz iste serije
+  // 20101–20105 (katalog str. 14), ali je katalog ne navodi; tvrdoća i preporučena pasta se ne prenose.
+  "befar-ellipse-corrugated-polishing-compounding-pad": [
+    {
+      after: "20102",
+      variant: {
+        code: "20103", label: "Crna", searchLabel: "Crna · 180 × 35 mm", colour: "Black", colourSr: "crna",
+        swatch: "#1B1E22", size: "180x35mm", holes: null, hardnessStars: null, applyWith: null, boxQuantity: null, image: null,
+        onWebsite: false, inCatalogue: false, cataloguePage: null,
+      },
+    },
+  ],
   // Odluka vlasnika 2026-11-13 (sedmi krug): Befar Plus mikrofiber krpa (BizniSoft 001407) — katalog str. 28
   // „PLUS MIKROFIBER CLOTHES“: 01407, 40 × 60 cm, 20 kom. u kutiji.
   "befar-microfiber-cloths": [

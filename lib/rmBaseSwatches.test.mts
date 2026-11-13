@@ -8,12 +8,12 @@ const cards = (mixingBases as { cards: Record<string, { code: string }[]> }).car
 const codesFor = (slug: string) => cards[slug].map((row) => row.code);
 const covered = (slug: string) => codesFor(slug).filter((code) => rmBaseSwatch(slug, code).swatch);
 
-test("pokrivenost uzoraka: DIAMONT 34/35, CRYSTAL BASE 19/21, paste 0/20", () => {
+test("pokrivenost uzoraka: DIAMONT 34/35, CRYSTAL BASE 20/22, paste 0/20", () => {
   assert.equal(covered("rm-diamont-bazna-boja").length, 34);
   assert.equal(codesFor("rm-diamont-bazna-boja").length, 35);
   // 2026-11-13: +CB 73L i CB 75K (zvanična tabela) i +CB 76V, SCB 55L (samo oznaka, bez uzorka).
-  assert.equal(covered("rm-diamont-crystal-base").length, 19);
-  assert.equal(codesFor("rm-diamont-crystal-base").length, 21);
+  assert.equal(covered("rm-diamont-crystal-base").length, 20);
+  assert.equal(codesFor("rm-diamont-crystal-base").length, 22);
   assert.equal(covered("rm-paste-za-mesanje").length, 0);
 });
 

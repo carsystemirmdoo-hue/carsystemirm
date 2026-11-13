@@ -402,6 +402,16 @@
         "sourceNote": "„Diamont Tinting Base Characteristics“ (BASF US, maj 2020), str. 2–5; rmpaint.com/gb Basecoat Lines, sekcija „R-M Crystal bases“: „CRYSTAL BASE ... packaged in "
       },
       {
+        "code": "CB 35L",
+        "name": "Ultra Violet",
+        "packs": [
+          "bočica 125 ml"
+        ],
+        "status": "potvrđeno izvorom",
+        "source": "https://refinish.basf.us/wp-content/uploads/2020/10/2020_Diamont_ENG.pdf",
+        "sourceNote": "„Diamont Tinting Base Characteristics“ (BASF US, maj 2020), str. 2–5; rmpaint.com/gb Basecoat Lines, sekcija „R-M Crystal bases“: „CRYSTAL BASE ... packaged in "
+      },
+      {
         "code": "CB 38K",
         "name": "Blackberry Pearl",
         "packs": [

@@ -156,7 +156,7 @@ test("5. CRYSTAL BASE je tačno jedna kartica sa potvrđenim bazama (odluka vlas
   assert.deepEqual(crystal.map((product) => product.slug), ["rm-diamont-crystal-base"]);
   const rows = crystal[0].detail?.variants?.content.rows.map((row) => row.id) ?? [];
   // 2026-11-13 (vlasnik): +CB 73L, CB 75K, CB 76V i SCB 55L (bočica 125 ml).
-  assert.equal(rows.length, 21);
+  assert.equal(rows.length, 22);
   assert.ok(rows.every((id) => /^S?CB \d+[A-Z]$/.test(id)), rows.join(", "));
   // Odluka vlasnika 2026-10-13: CRYSTAL BASE ima karticu i povezan je sa R-M stranicom brenda.
   assert.deepEqual(colorSystemProducts("crystal-base").map((product) => product.slug), ["rm-diamont-crystal-base"]);

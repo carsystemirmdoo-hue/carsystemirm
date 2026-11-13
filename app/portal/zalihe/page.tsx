@@ -6,7 +6,7 @@ import { requireCapability } from "@/lib/authz/session";
 import { dmy, dmyTime, quantity } from "@/lib/ordering/panelFormat.mjs";
 import { StockDisplayToggle } from "@/features/portal/StockDisplayToggle";
 import { customerDisplayDecision } from "@/lib/stock/displayPolicy.mjs";
-import { currentStockSnapshot, stockDisplayPolicy } from "@/lib/stock/stock-import-service";
+import { currentStockSnapshot, stockDisplayPolicy, stockHistorySummary } from "@/lib/stock/stock-import-service";
 
 
 export const metadata = { title: "Zalihe" };
@@ -17,7 +17,7 @@ const day = (iso: string | null) => (iso ? dmy(new Date(`${iso}T12:00:00Z`)) : "
 
 export default async function Page() {
   const user = await requireCapability("view:zalihe", "/portal/zalihe");
-  const [current, policy] = await Promise.all([currentStockSnapshot(), stockDisplayPolicy()]);
+  const [current, policy, history] = await Promise.all([currentStockSnapshot(), stockDisplayPolicy(), stockHistorySummary()]);
   const canImport = can(user, "imports:write");
   const envOff = process.env.STOCK_CUSTOMER_DISPLAY === "0";
   const canToggle = can(user, "settings:manage");
@@ -77,14 +77,38 @@ export default async function Page() {
         </div>
       </section>
 
+      <section className="portal-panel">
+        <SectionHeader
+          title="Istorija lagera"
+          description="Od 13. 11. 2026. svaki potvrđen uvoz beleži promene stanja po artiklu (koliko je bilo, od kog do kog dana); čuva se godinu dana. Nabavka iz nje izuzima dane kada artikla nije bilo, pa rasprodat artikal ne dobija niži predlog. Detaljne stavke uvoza čuvaju se za 4 poslednja potvrđena lagera."
+        />
+        <div className="portal-panel-body">
+          {!history ? (
+            <p className="portal-empty">Istorija lagera još nije uključena na ovoj bazi.</p>
+          ) : !history.since ? (
+            <p className="portal-empty">Istorija počinje sa prvim sledećim potvrđenim uvozom lagera.</p>
+          ) : (
+            <dl className="pl-facts">
+              <div><dt>Vodi se od</dt><dd>{day(history.since)}</dd></div>
+              <div><dt>Praćenih šifara</dt><dd>{quantity(history.codes)}</dd></div>
+              <div><dt>Trenutno na nuli</dt><dd>{quantity(history.zeroNow)}</dd></div>
+              <div><dt>Promena stanja (7 dana)</dt><dd>{quantity(history.changed7)}</dd></div>
+            </dl>
+          )}
+          {history ? (
+            <p className="portal-footnote">
+              Traženo — nema na stanju: <strong>{quantity(history.requests)}</strong> otvorenih (90 dana).{" "}
+              {can(user, "view:nabavka") ? <Link href="/portal/nabavka#trazeno">Pogledajte na Nabavci →</Link> : null}
+            </p>
+          ) : null}
+        </div>
+      </section>
+
       <PhaseNotice
         icon="package"
         title="Šta još ne postoji"
-        summary="Istorija dana bez zalihe i automatsko preuzimanje izvoza preko Windows konektora dolaze u sledećoj fazi."
-        requires={[
-          "Automatsko preuzimanje izvoza sa kancelarijskog računara preko konektora (sledeća faza).",
-          "Istorija dana bez zalihe — bez nje preporuka nabavke ostaje označena kao nepouzdana.",
-        ]}
+        summary="Automatsko preuzimanje izvoza lagera preko Windows konektora dolazi u sledećoj fazi; do tada kancelarija otprema izvoz ručno svakog jutra."
+        requires={["Automatsko preuzimanje izvoza sa kancelarijskog računara preko konektora (sledeća faza)."]}
         availability="Sledeća faza"
       />
     </>

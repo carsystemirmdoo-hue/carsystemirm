@@ -616,3 +616,18 @@ export async function internalStockQuantities(): Promise<InternalStock> {
   }
   return { snapshot: { id: snapshot.id, stockDate: snapshot.stockDate }, byArticle, unlinked };
 }
+
+/** Pregled istorije lagera za ekran Zalihe (0065). Pre migracije vraća `null`. */
+export async function stockHistorySummary() {
+  const db = getDb();
+  const [has] = [...(await db.execute<{ ok: boolean }>(sql`SELECT to_regclass('public.stock_level_history') IS NOT NULL AND to_regclass('public.stock_requests') IS NOT NULL AS ok`))];
+  if (!has?.ok) return null;
+  const [r] = [...(await db.execute<{ since: string | null; codes: number; zero_now: number; changed7: number; requests: number }>(sql`
+    SELECT (SELECT min(from_date)::text FROM stock_level_history) AS since,
+           (SELECT count(DISTINCT code_key)::int FROM stock_level_history) AS codes,
+           (SELECT count(*)::int FROM stock_level_history WHERE to_date IS NULL AND quantity <= 0) AS zero_now,
+           (SELECT count(*)::int FROM stock_level_history WHERE from_date > current_date - 7
+              AND EXISTS (SELECT 1 FROM stock_level_history p WHERE p.code_key = stock_level_history.code_key AND p.to_date IS NOT NULL)) AS changed7,
+           (SELECT count(*)::int FROM stock_requests WHERE resolved_at IS NULL AND created_at > now() - interval '90 days') AS requests`))];
+  return { since: r?.since ?? null, codes: r?.codes ?? 0, zeroNow: r?.zero_now ?? 0, changed7: r?.changed7 ?? 0, requests: r?.requests ?? 0 };
+}

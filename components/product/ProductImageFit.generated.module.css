@@ -1473,6 +1473,78 @@
   --product-image-dark-frame: 0 0 0 1px oklch(0.94 0.008 255 / 0.12);
 }
 
+.fit[data-product-fit="/products/befar/catalog/befar-compounding-foam-m14-bela.webp"] {
+  --product-canvas-aspect: 2.3412;
+  --product-content-aspect: 2.3412;
+  --product-content-fill-x: 1;
+  --product-content-fill-y: 1;
+  --product-content-offset-x: 0;
+  --product-content-offset-y: 0;
+  --product-image-dark-filter: none;
+  --product-image-dark-contact: 0;
+  --product-image-dark-frame: 0 0 0 1px oklch(0.94 0.008 255 / 0.12);
+}
+
+.fit[data-product-fit="/products/befar/catalog/befar-compounding-foam-m14-crna.webp"] {
+  --product-canvas-aspect: 2.3412;
+  --product-content-aspect: 2.3412;
+  --product-content-fill-x: 1;
+  --product-content-fill-y: 1;
+  --product-content-offset-x: 0;
+  --product-content-offset-y: 0;
+  --product-image-dark-filter: none;
+  --product-image-dark-contact: 0;
+  --product-image-dark-frame: 0 0 0 1px oklch(0.94 0.008 255 / 0.12);
+}
+
+.fit[data-product-fit="/products/befar/catalog/befar-compounding-foam-m14-narandzasta.webp"] {
+  --product-canvas-aspect: 2.3412;
+  --product-content-aspect: 2.3412;
+  --product-content-fill-x: 1;
+  --product-content-fill-y: 1;
+  --product-content-offset-x: 0;
+  --product-content-offset-y: 0;
+  --product-image-dark-filter: none;
+  --product-image-dark-contact: 0;
+  --product-image-dark-frame: 0 0 0 1px oklch(0.94 0.008 255 / 0.12);
+}
+
+.fit[data-product-fit="/products/befar/catalog/befar-compounding-foam-m14-plava.webp"] {
+  --product-canvas-aspect: 2.3412;
+  --product-content-aspect: 2.3412;
+  --product-content-fill-x: 1;
+  --product-content-fill-y: 1;
+  --product-content-offset-x: 0;
+  --product-content-offset-y: 0;
+  --product-image-dark-filter: none;
+  --product-image-dark-contact: 0;
+  --product-image-dark-frame: 0 0 0 1px oklch(0.94 0.008 255 / 0.12);
+}
+
+.fit[data-product-fit="/products/befar/catalog/befar-compounding-foam-m14-zuta.webp"] {
+  --product-canvas-aspect: 2.3412;
+  --product-content-aspect: 2.3412;
+  --product-content-fill-x: 1;
+  --product-content-fill-y: 1;
+  --product-content-offset-x: 0;
+  --product-content-offset-y: 0;
+  --product-image-dark-filter: none;
+  --product-image-dark-contact: 0;
+  --product-image-dark-frame: 0 0 0 1px oklch(0.94 0.008 255 / 0.12);
+}
+
+.fit[data-product-fit="/products/befar/catalog/befar-compounding-foam-m14.webp"] {
+  --product-canvas-aspect: 1.8917;
+  --product-content-aspect: 1.7481;
+  --product-content-fill-x: 0.9241;
+  --product-content-fill-y: 1;
+  --product-content-offset-x: 0;
+  --product-content-offset-y: 0;
+  --product-image-dark-filter: none;
+  --product-image-dark-contact: 0;
+  --product-image-dark-frame: 0 0 0 1px oklch(0.94 0.008 255 / 0.12);
+}
+
 .fit[data-product-fit="/products/befar/catalog/befar-cream-compound-2.webp"] {
   --product-canvas-aspect: 1.5;
   --product-content-aspect: 1.2;

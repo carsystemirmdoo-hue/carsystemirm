@@ -319,6 +319,77 @@ function withOwnerConfirmedVariants(entry: CatalogProductEntry): CatalogProductE
   return { ...entry, variants };
 }
 
+/**
+ * Proizvodi samo iz zvaničnog kataloga (nisu na aktuelnom befar.com.tr), objavljeni na odluku vlasnika.
+ * Sync ih drži kao `CATALOGUE_ONLY_NOT_ON_CURRENT_WEBSITE`; podaci su prepisani sa strane kataloga, bez dopune.
+ */
+const m14 = (code: string, colour: string, colourSr: string, swatch: string, size: "150x50mm" | "150x45mm", stars: number, applyWith: string, img: string): CatalogVariant => {
+  const dim = size === "150x50mm" ? "150 × 50 mm" : "150 × 45 mm";
+  const label = `${colourSr[0].toLocaleUpperCase("sr-Latn")}${colourSr.slice(1)} · ${dim}`;
+  return {
+    code, label, searchLabel: `${label} · M14`, colour, colourSr, swatch, size, holes: null, hardnessStars: stars, applyWith, boxQuantity: 24,
+    image: `/products/befar/catalog/befar-compounding-foam-m14-${img}.webp`, onWebsite: false, inCatalogue: true, cataloguePage: 4,
+  };
+};
+
+const OWNER_PROMOTED_ENTRIES: CatalogProductEntry[] = [
+  // Odluka vlasnika 2026-11-13: sunđeri na M14 nosaču (BizniSoft 002401–002405) dobijaju svoju karticu.
+  // Izvor: BEFAR Product Catalog, str. 4 „COMPOUNDING FOAM“ (kutija: „Aplikatörlü Polisaj Süngeri“).
+  {
+    slug: "befar-compounding-foam-m14",
+    name: "Befar sunđer za poliranje M14",
+    sourceKey: "catalogue-p4-compounding-foam",
+    sourceUrls: [befarCatalogMeta.catalogueUrl],
+    officialName: "Compounding Foam",
+    officialNameTr: "Aplikatörlü Polisaj Süngeri",
+    line: "Befar",
+    kind: "family",
+    isSet: false,
+    qualifiers: ["M14"],
+    officialCategories: ["Compounding Foam"],
+    classification: "CATALOGUE_ONLY_OWNER_PROMOTED",
+    taxonomy: { category: "poliranje", programSlug: "poliranje", phaseSlug: "poliranje", visualType: "foam" },
+    cataloguePages: [4],
+    leadCode: "02401",
+    relatedLegacySlugs: [],
+    variantColumn: { key: "color", label: "Boja i dimenzija" },
+    variants: [
+      m14("02401", "White", "bela", "#E6E3DD", "150x50mm", 3, "tečna ili krem polir pasta", "bela"),
+      m14("02402", "Orange", "narandžasta", "#DF7A27", "150x50mm", 5, "tečna ili krem polir pasta", "narandzasta"),
+      m14("02403", "Black", "crna", "#1B1E22", "150x45mm", 1, "polir ili zaštita laka", "crna"),
+      m14("02404", "Yellow", "žuta", "#E3BD1F", "150x50mm", 3, "tečna ili krem polir pasta", "zuta"),
+      m14("02405", "Blue", "plava", "#2E6CB4", "150x50mm", 2, "tečna ili krem polir pasta", "plava"),
+    ],
+    image: { src: "/products/befar/catalog/befar-compounding-foam-m14.webp", width: 751, height: 397, hasAlpha: false },
+    sharedGroupImages: false,
+    missingOfficialAsset: false,
+    gallery: [],
+    content: {
+      productType: "Sunđer za poliranje na M14 nosaču",
+      subtype: "sunđer za poliranje · M14 nosač sa navojem · 150 × 50 mm · 5 boja",
+      shortDescription:
+        "Befar sunđer za poliranje na plastičnom nosaču sa navojem M14, za direktnu montažu na polirku. Prečnik 150 mm, u 5 boja.",
+      longDescription:
+        "Sunđer za poliranje sa krutim nosačem i navojem M14 (Befar „Compounding Foam“, na kutiji „Aplikatörlü Polisaj Süngeri“). Montira se direktno na vreteno polirke, bez čičak podloge. Dimenzija je 150 × 50 mm (crna 150 × 45 mm). Boja označava tvrdoću prema legendi proizvođača: narandžasta 5/5, bela 3/5, žuta 3/5, plava 2/5, crna 1/5. Za belu, narandžastu, žutu i plavu katalog preporučuje tečnu ili krem polir pastu, a za crnu polir ili zaštitu laka.",
+      purpose: "Mašinsko poliranje lakiranih površina, polirka sa vretenom M14",
+      facts: [
+        { label: "Linija", value: "Befar" },
+        { label: "Prihvat", value: "Nosač sa navojem M14" },
+        { label: "Dimenzije", value: "150 × 50 mm (crna 150 × 45 mm)" },
+        { label: "Boje", value: "bela, narandžasta, crna, žuta, plava" },
+        { label: "Tvrdoća po boji", value: "narandžasta 5/5, bela 3/5, žuta 3/5, plava 2/5, crna 1/5" },
+        { label: "Preporučeno sredstvo", value: "bela, narandžasta, žuta i plava: tečna ili krem polir pasta; crna: polir ili zaštita laka" },
+        { label: "Fabričko pakovanje", value: "24 kom. u kutiji" },
+      ],
+      applications: ["Korekcija laka tečnom ili krem polir pastom", "Završno poliranje i zaštita laka (crna)"],
+      benefits: [],
+      advice: null,
+      setContents: [],
+    },
+    shade: null,
+  },
+];
+
 export function getBefarCatalogProducts(): CarsystemProduct[] {
-  return entries.map((entry) => createCatalogProduct(withOwnerConfirmedVariants(entry)));
+  return [...entries, ...OWNER_PROMOTED_ENTRIES].map((entry) => createCatalogProduct(withOwnerConfirmedVariants(entry)));
 }

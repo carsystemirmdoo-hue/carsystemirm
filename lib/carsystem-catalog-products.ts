@@ -501,8 +501,37 @@ const MANUAL_RECORD_CATEGORY: Record<string, string> = {
   "carsystem-finish-serija": "Finish",
 };
 
+/**
+ * Šifre koje vodimo, a carsystem.org i katalog 2026/27 ih ne navode (odluka vlasnika). Dodaju se kao red
+ * postojeće kartice; podaci su samo naša šifra i mera iz naziva u BizniSoftu.
+ */
+const OWNER_ADDED_VARIANTS: Record<string, { after: string; variant: CatalogVariant }[]> = {
+  // 2026-11-13: BizniSoft 125725 „CS OBOSTRANO LEPLJIVA TRAKA 25MM X10M“ — ista serija kao 125.712/713/720.
+  "carsystem-mount-tape": [
+    {
+      after: "125.720",
+      variant: {
+        articleNumber: "125.725", label: "25 mm x 10 m", manufacturerNote: null, officialSpecification: null,
+        salesPack: null, packagingUnit: null, inCatalogue: false, onWebsite: false, hasSds: false,
+      },
+    },
+  ],
+};
+
+function withOwnerAddedVariants(entry: CatalogProductEntry): CatalogProductEntry {
+  const extra = OWNER_ADDED_VARIANTS[entry.slug];
+  if (!extra) return entry;
+  const variants = [...entry.variants];
+  for (const { after, variant } of extra) {
+    if (variants.some((v) => v.articleNumber === variant.articleNumber)) continue;
+    const at = variants.findIndex((v) => v.articleNumber === after);
+    variants.splice(at < 0 ? variants.length : at + 1, 0, variant);
+  }
+  return { ...entry, variants };
+}
+
 export function getCarsystemCatalogProducts(): CarsystemProduct[] {
-  return entries.map((entry) => createCatalogProduct(withoutRemovedVariants(entry), knownSlugs));
+  return entries.map((entry) => createCatalogProduct(withOwnerAddedVariants(withoutRemovedVariants(entry)), knownSlugs));
 }
 
 /**

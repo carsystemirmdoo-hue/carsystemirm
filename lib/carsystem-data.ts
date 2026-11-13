@@ -1905,6 +1905,50 @@ const productRecords: CarsystemProduct[] = [
     ],
     relatedProductSlugs: ["carsystem-zastitno-odelo"],
   }),
+  // Odluka vlasnika 2026-11-13: podloška za Neptun list (154.174 obična, 154.175 meka) — šifre se ne slažu sa
+  // ProFlex Neptune Pad MaxGrip (158.097), pa je posebna kartica.
+  createProduct({
+    slug: "carsystem-podloska-za-neptun-list",
+    name: "Carsystem podloška za Neptun list",
+    brandSlug: "carsystem",
+    programSlug: "abrazivi",
+    phaseSlug: "priprema",
+    taxonomyCategory: "abrazivi",
+    shortDescription: "Ručna podloška za Carsystem ProFlex Neptun brusne listove, u običnoj i mekoj izvedbi.",
+    longDescription:
+      "Carsystem podloška za ručno brušenje ProFlex Neptun listovima. Vodimo običnu (154.174) i meku (154.175) izvedbu. Dimenzije potvrđujemo na upit.",
+    sku: "154.174",
+    packages: [{ label: "obična", detail: "154.174" }, { label: "meka", detail: "154.175" }],
+    purpose: "Ručno brušenje Neptun listovima",
+    badges: ["Podloška", "Neptun", "Obična / meka"],
+    specifications: [
+      { label: "Tip", value: "Ručna podloška za Neptun brusne listove" },
+      { label: "Izvedbe", value: "obična (154.174), meka (154.175)" },
+    ],
+    relatedProductSlugs: ["carsystem-proflex-neptune", "carsystem-proflex-neptune-soft", "carsystem-proflex-neptune-pad-maxgrip"],
+  }),
+  // Odluka vlasnika 2026-11-13: stari vodeni odstranjivač silikona (146.705) ostaje dok ga ima na lageru;
+  // nova izvedba je Silicone Remover Water 2.0 (160.321).
+  createProduct({
+    slug: "carsystem-silikonsko-cistilo-vodeno-5-l",
+    name: "Carsystem silikonsko čistilo vodeno 5 L",
+    brandSlug: "carsystem",
+    programSlug: "priprema-povrsine",
+    phaseSlug: "priprema",
+    taxonomyCategory: "ciscenje",
+    shortDescription: "Carsystem odstranjivač silikona na vodenoj bazi, pakovanje 5 L — prethodna izvedba, dok traju zalihe.",
+    longDescription:
+      "Carsystem silikonsko čistilo na vodenoj bazi u pakovanju 5 L. Ovo je prethodna izvedba koju prodajemo dok traju zalihe; nova izvedba je Carsystem Silicone Remover Water 2.0.",
+    sku: "146.705",
+    packages: [{ label: "5 L" }],
+    purpose: "Odmašćivanje i uklanjanje silikona pre lakiranja",
+    badges: ["Čišćenje", "Vodena baza", "5 L"],
+    specifications: [
+      { label: "Tip", value: "Odstranjivač silikona na vodenoj bazi" },
+      { label: "Pakovanje", value: "5 L" },
+    ],
+    relatedProductSlugs: ["carsystem-silicone-remover-water-2-0"],
+  }),
   createProduct({
     slug: "carsystem-navlake-za-sedista-rolna",
     name: "Carsystem navlake za sedišta u rolni",
@@ -2787,6 +2831,35 @@ const productRecords: CarsystemProduct[] = [
       { label: "Veličine", value: "400 ml, 800 ml, 1,2 L, 2,4 L, 5,7 L" },
     ],
     relatedProductSlugs: [],
+  }),
+  // Odluka vlasnika 2026-11-13: „jedna SC kartica sa svim SC pastama“. Podaci su samo naše šifre i nazivi
+  // iz BizniSofta (SC broj i boja); sistem nijansiranja i pakovanje potvrđujemo na upit.
+  createProduct({
+    slug: "rm-sc-paste",
+    name: "R-M SC paste",
+    brandSlug: "rm",
+    programSlug: "boje-i-lakovi",
+    phaseSlug: "boja",
+    taxonomyCategory: "boje",
+    shortDescription: "R-M paste iz SC serije koje vodimo: crne, plave, zelene, žute, narandžaste, braon, crvene i bela.",
+    longDescription:
+      "R-M SC paste iz naše ponude, na jednoj kartici. Pastu birate po SC broju. Formulu nijanse, pakovanje i dostupnost potvrđujemo na upit.",
+    sku: "600090",
+    packages: [{ label: "po SC broju" }],
+    purpose: "Nijansiranje",
+    badges: ["Paste", "SC serija"],
+    specifications: [
+      { label: "Crne", value: "SC 015, SC 20, SC 25, SC 29, SC 804" },
+      { label: "Plave", value: "SC 44, SC 46, SC 49" },
+      { label: "Zelena", value: "SC 59" },
+      { label: "Žute", value: "SC 61, SC 62, SC 67, SC 69" },
+      { label: "Narandžasta", value: "SC 74" },
+      { label: "Braon", value: "SC 77" },
+      { label: "Crvene", value: "SC 79, SC 82, SC 86" },
+      { label: "Bela", value: "SC 90" },
+      { label: "Ostale", value: "SC 31" },
+    ],
+    relatedProductSlugs: ["rm-paste-za-mesanje"],
   }),
   // R-M proizvodi koje prodajemo, a nemaju stranicu na info.rmpaint.com (odluka vlasnika 2026-10-13: zasebne
   // kartice). Podaci su samo iz zvaničnih tehničkih listova na techinfo.rmpaint.com; pakovanje je naše prodajno.

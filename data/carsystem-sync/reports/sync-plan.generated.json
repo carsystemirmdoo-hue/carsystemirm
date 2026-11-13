@@ -4,7 +4,7 @@
     "catalogueSha256": "ac4f63d9b65109f15de5f5cb3f3caed672741ddd97a76eea78bbacf35d643961",
     "SOURCE PRODUCTS": 465,
     "SOURCE VARIANTS": 1089,
-    "EXISTING PRODUCTS": 10,
+    "EXISTING PRODUCTS": 12,
     "EXISTING VARIANTS": 9,
     "EXACT MATCHES": 1,
     "HIGH CONFIDENCE MATCHES": 4,
@@ -13,7 +13,7 @@
     "MISSING VARIANTS": 0,
     "variantsSuppliedByEnrichment": 22,
     "AMBIGUOUS": 0,
-    "LEGACY PRODUCTS": 4,
+    "LEGACY PRODUCTS": 6,
     "SOURCE CONFLICTS": 10,
     "MISSING IMAGES": 3,
     "MISSING IMPORTANT DATA": 1,
@@ -147,6 +147,58 @@
           "level": "article-number",
           "articleNumbers": [
             "155.618"
+          ],
+          "owners": []
+        },
+        {
+          "level": "none",
+          "note": "Nijedan zvanični proizvod ne deli šifru, sliku, tačan naziv ni kôd serije."
+        }
+      ],
+      "flags": [
+        "LEGACY_NOT_IN_CATALOGUE",
+        "LEGACY_NOT_IN_2026_27"
+      ],
+      "enrichment": null
+    },
+    {
+      "localSlug": "carsystem-podloska-za-neptun-list",
+      "localName": "Carsystem podloška za Neptun list",
+      "classification": "LEGACY_NOT_IN_CATALOGUE",
+      "autoApply": false,
+      "sourceKeys": [],
+      "candidates": [],
+      "evidence": [
+        {
+          "level": "article-number",
+          "articleNumbers": [
+            "154.174"
+          ],
+          "owners": []
+        },
+        {
+          "level": "none",
+          "note": "Nijedan zvanični proizvod ne deli šifru, sliku, tačan naziv ni kôd serije."
+        }
+      ],
+      "flags": [
+        "LEGACY_NOT_IN_CATALOGUE",
+        "LEGACY_NOT_IN_2026_27"
+      ],
+      "enrichment": null
+    },
+    {
+      "localSlug": "carsystem-silikonsko-cistilo-vodeno-5-l",
+      "localName": "Carsystem silikonsko čistilo vodeno 5 L",
+      "classification": "LEGACY_NOT_IN_CATALOGUE",
+      "autoApply": false,
+      "sourceKeys": [],
+      "candidates": [],
+      "evidence": [
+        {
+          "level": "article-number",
+          "articleNumbers": [
+            "146.705"
           ],
           "owners": []
         },

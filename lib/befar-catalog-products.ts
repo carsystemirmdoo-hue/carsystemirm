@@ -324,6 +324,15 @@ const OWNER_CONFIRMED_VARIANTS: Record<string, { after: string; variant: Catalog
         onWebsite: false, inCatalogue: true, cataloguePage: 9,
       },
     },
+    // 2026-11-13: beli Plus 80 × 25 (BizniSoft 044809; katalog str. 9: WHITE 44809, 200 kom.).
+    {
+      after: "44808",
+      variant: {
+        code: "44809", label: "Bela · 80 × 25 mm", searchLabel: "Bela · 80 × 25 mm", colour: "White", colourSr: "bela",
+        swatch: "#E6E3DD", size: "80x25mm", holes: null, hardnessStars: null, applyWith: null, boxQuantity: 200, image: null,
+        onWebsite: false, inCatalogue: true, cataloguePage: 9,
+      },
+    },
   ],
   // Odluka vlasnika 2026-11-13: međupodloška postoji meka (093007/093015/093062) i tvrda (093107/093115/093162).
   // Katalog str. 24: SOFT 93007/93015/93062 i HARD 93107/93115/93162, „BACKING PAD 150 mm“.

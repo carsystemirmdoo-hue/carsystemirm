@@ -2012,6 +2012,83 @@ const productRecords: CarsystemProduct[] = [
     ],
     relatedProductSlugs: withPolishPasteSiblings("carsystem-polish-finish-all-in-one-1-l"),
   }),
+  // Odluka vlasnika 2026-11-13: podloške M14 na koje se lepi polir sunđer („idu na alat, na njih se lepi
+  // sunđer“). Nema ih u katalogu 2026/27 (tamo su Finish Back Pad 128 mm i M-14 123 mm).
+  createProduct({
+    slug: "carsystem-podloske-m14-za-polir-sundjere",
+    name: "Carsystem podloške M14 za polir sunđere",
+    brandSlug: "carsystem",
+    programSlug: "poliranje",
+    phaseSlug: "poliranje",
+    taxonomyCategory: "poliranje",
+    shortDescription: "Podloške sa navojem M14 koje se montiraju na polirku; na njih se lepi polir sunđer.",
+    longDescription:
+      "Carsystem podloške sa navojem M14 montiraju se na polirku, a polir sunđer se lepi na njih. Vodimo crvenu 73 mm (139.207) i belu i plavu 150 × 50 mm (133.148, 134.288).",
+    sku: "139.207",
+    packages: [
+      { label: "crvena 73 mm", detail: "139.207" },
+      { label: "bela 150 × 50 mm", detail: "133.148" },
+      { label: "plava 150 × 50 mm", detail: "134.288" },
+    ],
+    purpose: "Nosač polir sunđera na polirki",
+    badges: ["Podloška", "M14", "Poliranje"],
+    specifications: [
+      { label: "Prihvat", value: "Navoj M14" },
+      { label: "Izvedbe", value: "crvena 73 mm; bela i plava 150 × 50 mm" },
+    ],
+    relatedProductSlugs: ["carsystem-finish-back-pad", "carsystem-finish-back-pad-m-14"],
+  }),
+  // Odluka vlasnika 2026-11-13: trake za felne 17, 18 i 19 inča, 50 kom. (156.988–156.990). Nije isto što i
+  // Carsystem Wheel Cover (navlaka 17" i 20–21", 4 kom.).
+  createProduct({
+    slug: "carsystem-traka-za-felne",
+    name: "Carsystem traka za felne",
+    brandSlug: "carsystem",
+    programSlug: "potrosni-materijal",
+    phaseSlug: "priprema",
+    taxonomyCategory: "maskiranje",
+    shortDescription: "Carsystem traka za maskiranje felni, za 17, 18 i 19 inča, pakovanje 50 kom.",
+    longDescription:
+      "Carsystem traka za felne služi za maskiranje točkova pri pripremi i lakiranju. Vodimo veličine za felne od 17, 18 i 19 inča, u pakovanju od 50 komada.",
+    sku: "156.988",
+    packages: [
+      { label: "17 inča", detail: "156.988 · 50 kom." },
+      { label: "18 inča", detail: "156.989 · 50 kom." },
+      { label: "19 inča", detail: "156.990 · 50 kom." },
+    ],
+    purpose: "Maskiranje felni",
+    badges: ["Maskiranje", "17 / 18 / 19 inča"],
+    specifications: [
+      { label: "Veličine", value: "17, 18 i 19 inča" },
+      { label: "Pakovanje", value: "50 kom." },
+    ],
+    relatedProductSlugs: ["carsystem-wheel-cover"],
+  }),
+  // Odluka vlasnika 2026-11-13: SATAjet X 5500 RP iz Carsystem ograničene serije „30 Years Ltd.“ (159.860
+  // dizna 1,2, 159.861 dizna 1,3). Podaci su samo naš naziv i dizna; bez tvrdnji o seriji van naziva.
+  createProduct({
+    slug: "carsystem-satajet-x-5500-rp-30-years-ltd",
+    name: "SATAjet X 5500 RP Carsystem 30 Years Ltd.",
+    brandSlug: "carsystem",
+    programSlug: "oprema",
+    phaseSlug: "boja",
+    taxonomyCategory: "oprema",
+    shortDescription: "Pištolj SATAjet X 5500 RP u Carsystem ograničenoj seriji „30 Years Ltd.“, dizne 1,2 i 1,3.",
+    longDescription:
+      "SATAjet X 5500 RP iz Carsystem ograničene serije „30 Years Ltd.“. Vodimo izvedbe sa diznom 1,2 (159.860) i 1,3 (159.861). Dostupnost potvrđujemo na upit.",
+    sku: "159.860",
+    packages: [
+      { label: "RP 1,2", detail: "159.860" },
+      { label: "RP 1,3", detail: "159.861" },
+    ],
+    purpose: "Nanošenje boje i laka",
+    badges: ["Pištolj", "SATAjet X 5500", "30 Years Ltd."],
+    specifications: [
+      { label: "Pištolj", value: "SATAjet X 5500 RP" },
+      { label: "Dizne", value: "1,2 i 1,3" },
+    ],
+    relatedProductSlugs: ["satajet-x-5500-clear-coat-edition", "satajet-x-5500-phaser"],
+  }),
   createProduct({
     slug: "carsystem-navlake-za-sedista-rolna",
     name: "Carsystem navlake za sedišta u rolni",
@@ -2884,13 +2961,13 @@ const productRecords: CarsystemProduct[] = [
     phaseSlug: "priprema",
     shortDescription: "Prazne posude za boju sa poklopcima, u pet veličina od 400 ml do 5,7 L.",
     longDescription:
-      "Auto Fit blanko posude su prazne posude za boju, za pretakanje i čuvanje mešane boje. Poklopac se poručuje posebno, u istoj veličini kao posuda. Veličine: 400 ml, 800 ml, 1,2 L, 2,4 L i 5,7 L.",
+      "Auto Fit blanko posude su prazne posude za boju, za pretakanje i čuvanje mešane boje. Vodimo posude sa posebnim poklopcem u istoj veličini i PVC posude sa poklopcem u kompletu. Veličine: 400 ml, 800 ml, 1,2 L, 2,4 L i 5,7 L.",
     sku: "700041",
     packages: [{ label: "400 ml" }, { label: "800 ml" }, { label: "1,2 L" }, { label: "2,4 L" }, { label: "5,7 L" }],
     purpose: "Pretakanje i čuvanje mešane boje",
     badges: ["Posude", "Poklopci", "400 ml – 5,7 L"],
     specifications: [
-      { label: "Tip", value: "Prazna posuda za boju, poklopac posebno" },
+      { label: "Tip", value: "Prazna posuda za boju; poklopac posebno ili PVC posuda sa poklopcem" },
       { label: "Veličine", value: "400 ml, 800 ml, 1,2 L, 2,4 L, 5,7 L" },
     ],
     relatedProductSlugs: [],

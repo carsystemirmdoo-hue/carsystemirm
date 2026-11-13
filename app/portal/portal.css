@@ -10870,3 +10870,10 @@ a.dg-metric { color: inherit; text-decoration: none; }
 .np-cands label small { display: inline; }
 .np-ok { margin: 0 20px 10px; color: #1e6b34; font-weight: 600; font-size: 13px; }
 .np-err { margin: 0 20px 10px; color: #a3121b; font-weight: 600; font-size: 13px; }
+.np-table small.np-doubt { color: #8a4b00; font-weight: 600; }
+.np-pack { white-space: nowrap; font-weight: 600; font-variant-numeric: tabular-nums; }
+.np-note { display: grid; gap: 4px; min-width: 220px; }
+.np-note textarea { font: inherit; font-size: 13px; width: 100%; min-height: 44px; padding: 6px 8px; border: 1px solid var(--p-line-strong); border-radius: 7px; background: var(--p-surface); color: var(--p-ink); resize: vertical; }
+.np-note-row { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+.np-table small.np-ok-inline { display: inline; color: #1e6b34; font-weight: 600; }
+.np-table small.np-err-inline { display: inline; color: #a3121b; font-weight: 600; }

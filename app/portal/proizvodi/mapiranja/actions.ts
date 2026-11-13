@@ -9,6 +9,9 @@ import {
 } from "@/lib/commercial/mapping-service";
 import { ProductMappingError } from "@/lib/commercial/productMapping.mjs";
 import { getAllCarsystemProducts } from "@/lib/carsystem-data";
+import { recordAudit } from "@/lib/audit/record";
+import { getDb } from "@/db/client";
+import { sql } from "drizzle-orm";
 import {
   catalogTargetProblem,
   describeCatalogTarget,
@@ -177,4 +180,27 @@ export async function confirmNameProposalsAction(items: { articleId: string; slu
     error: done === 0 && skipped.length ? `Nijedna veza nije potvrđena (${skipped.slice(0, 10).join(", ")}).` : null,
     ok: done ? `Potvrđeno veza: ${done}.${skipped.length ? ` Preskočeno ${skipped.length} (predlog se promenio ili proizvod ne postoji): ${skipped.slice(0, 10).join(", ")}.` : ""}` : null,
   };
+}
+
+/**
+ * Opis vlasnika za artikal koji predlog ne prepoznaje („crni sunđer 150×45 na M14 adapteru“), 2026-11-13.
+ * Ništa ne povezuje — samo beleži opis (trag revizije), da ga pregled pročita i predloži tačnu karticu.
+ */
+export async function saveArticleNoteAction(input: { articleId: string; text: string }): Promise<MappingActionState> {
+  const actor = await requireCapability("mappings:manage", "/portal/proizvodi/mapiranja");
+  const p = z.object({ articleId: z.string().uuid(), text: z.string().trim().max(500) }).safeParse(input);
+  if (!p.success) return { error: "Opis je predugačak (najviše 500 znakova).", ok: null };
+  const [a] = [...(await getDb().execute<{ code: string; name: string }>(sql`SELECT code, name FROM articles WHERE id = ${p.data.articleId}::uuid`))];
+  if (!a) return { error: "Artikal nije pronađen.", ok: null };
+  await recordAudit({
+    actor: { id: actor.id, name: actor.name, role: actor.role },
+    action: "articleOwnerDescription",
+    entityType: "article",
+    entityId: p.data.articleId,
+    entityLabel: `${a.code} ${a.name}`.slice(0, 200),
+    after: { text: p.data.text },
+    reason: p.data.text ? "Opis artikla za povezivanje" : "Opis obrisan",
+  });
+  revalidatePath("/portal/proizvodi/mapiranja");
+  return { error: null, ok: p.data.text ? "Opis je sačuvan." : "Opis je obrisan." };
 }

@@ -81,3 +81,58 @@
   .zp-table thead { display: table-header-group; }
   .zp-table tr { break-inside: avoid; }
 }
+
+/* ---- Raspored kao na fakturi iz BizniSofta (vlasnik 2026-11-13) ---- */
+.zp-doc { font-size: 9pt; }
+.zp-top { display: flex; justify-content: flex-end; margin-bottom: 2mm; }
+.zp-firmblock { display: flex; flex-direction: column; align-items: flex-end; font-size: 8.5pt; line-height: 1.35; }
+.zp-firmblock strong { font-size: 10.5pt; }
+.zp-titlerow { display: grid; grid-template-columns: 1fr auto 1fr; align-items: baseline; border-bottom: 0.8pt solid #000; padding-bottom: 1mm; margin-bottom: 2.5mm; font-size: 8.5pt; }
+.zp-titlerow h1 { font-size: 13pt; text-align: center; white-space: nowrap; }
+.zp-meta { display: grid; grid-template-columns: 1fr 1fr; gap: 6mm; margin-bottom: 4mm; break-inside: avoid; }
+.zp-meta dl { display: grid; grid-template-columns: auto 1fr; gap: 0.5mm 2mm; font-size: 8.5pt; align-content: start; }
+.zp-meta dl div { display: contents; }
+.zp-meta dt::after { content: ":"; }
+.zp-meta dd { overflow-wrap: anywhere; }
+.zp-partner { display: flex; flex-direction: column; gap: 1mm; }
+.zp-partner-code { text-align: right; font-size: 8.5pt; }
+.zp-partner-box { border: 0.8pt solid #000; padding: 2.5mm 3mm; min-height: 20mm; display: flex; flex-direction: column; gap: 0.8mm; }
+.zp-partner-box strong { font-size: 11pt; text-transform: uppercase; }
+
+.zp-table.zp-inv, .zp-table.zp-onrequest { font-size: 8.5pt; }
+.zp-table.zp-inv th, .zp-table.zp-inv td, .zp-table.zp-onrequest th, .zp-table.zp-onrequest td { border: 0; padding: 0.7mm 1mm; }
+.zp-table.zp-inv thead th, .zp-table.zp-onrequest thead th { background: none; border-top: 0.8pt solid #000; border-bottom: 0.8pt solid #000; font-size: 8pt; }
+.zp-table.zp-inv tbody tr:last-child td, .zp-table.zp-onrequest tbody tr:last-child td { border-bottom: 0.8pt solid #000; }
+.zp-inv .c-rb { width: 7mm; }
+.zp-inv .c-sifra { width: 14mm; }
+.zp-inv .c-jm { width: 10mm; }
+.zp-inv .c-kol { width: 15mm; }
+.zp-inv .c-osn { width: 19mm; }
+.zp-inv .c-rabat { width: 12mm; }
+.zp-inv .c-pdv { width: 9mm; }
+.zp-inv .c-ipdv { width: 18mm; }
+.zp-inv .c-iznos { width: 21mm; }
+.zp-sumline { text-align: right; font-size: 9.5pt; margin: 0 0 3mm !important; }
+.zp-sumline strong { margin-left: 4mm; }
+.zp-table.zp-vat { font-size: 8.5pt; width: 100%; }
+.zp-table.zp-vat th, .zp-table.zp-vat td { border: 0; border-bottom: 0.6pt solid #000; padding: 0.6mm 1mm; background: none; }
+.zp-sums { display: grid; grid-template-columns: auto 1fr; align-items: center; gap: 8mm; margin: 3mm 0 2mm; break-inside: avoid; }
+.zp-sumbox { display: grid; grid-template-columns: auto auto; gap: 0.6mm 4mm; border: 0.8pt solid #000; padding: 2mm 3mm; font-size: 9pt; }
+.zp-sumbox div { display: contents; }
+.zp-sumbox dt { text-align: right; }
+.zp-sumbox dd { text-align: right; font-variant-numeric: tabular-nums; }
+.zp-grandline { text-align: right; font-size: 13pt; font-weight: 700; }
+.zp-small { font-size: 8pt; color: #333; }
+.zp-pay { font-size: 9pt; margin-bottom: 2mm !important; }
+.zp-notebox { border: 0.8pt solid #000; min-height: 16mm; padding: 2mm 3mm; font-size: 9pt; break-inside: avoid; }
+.zp-notebox p { margin: 0 0 1mm; overflow-wrap: anywhere; }
+.zp-sign { display: grid; grid-template-columns: 1fr auto 1fr; align-items: end; gap: 12mm; margin-top: 14mm; font-size: 8.5pt; font-style: italic; text-align: center; break-inside: avoid; }
+.zp-sign > div { display: flex; flex-direction: column; gap: 1mm; }
+.zp-line { display: block; border-top: 0.6pt solid #000; }
+.zp-mp { font-style: normal; font-weight: 700; padding-bottom: 6mm; }
+.zp-foot { border-top: 0; font-size: 7.5pt; }
+@media (max-width: 720px) {
+  .zp-meta, .zp-sums { display: block; }
+  .zp-titlerow { display: block; }
+  .zp-titlerow h1 { white-space: normal; text-align: left; }
+}

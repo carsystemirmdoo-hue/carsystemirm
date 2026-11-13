@@ -38,14 +38,10 @@ export default async function AdminPage() {
 
       <PhaseNotice
         icon="settings"
-        title="Ostala konfiguracija stiže sa integracijama"
-        summary="Podešavanja konektora za fakture, BEX naloga i uvoza zaliha se otvaraju kada te integracije budu povezane. Do tada se ne prikazuju prazna polja koja ništa ne čuvaju."
-        requires={[
-          "Putanja i pristup folderu sa BiznisSoft izvozom.",
-          "BEX pristupni podaci i odluka o test okruženju.",
-          "Izvor stanja zaliha.",
-        ]}
-        availability="Dostupno nakon povezivanja BiznisSoft izvoza, BEX naloga i izvora zaliha"
+        title="Podešavanja drugih delova sistema"
+        summary="Fakture stižu preko konektora sa kancelarijskog računara (ekran Importi → Sinhronizacija), a lager se uvozi na ekranu Uvoz lagera. Ovde ostaje samo ono što još nije povezano."
+        requires={["BEX pristupni podaci i odluka o test okruženju (otprema i adresnice)."]}
+        availability="Dostupno nakon povezivanja BEX naloga"
       />
     </>
   );

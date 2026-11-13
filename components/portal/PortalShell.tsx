@@ -14,6 +14,9 @@ import {
   SIDEBAR_PREFERENCE_KEY,
 } from "./sidebarState.mjs";
 
+/** Delovi putanje bez sopstvene stranice: tekst, ne link (inače pregledač unapred traži 404). */
+const CRUMB_WITHOUT_PAGE = new Set(["/portal/bezbednost", "/portal/prodaja/faktura"]);
+
 export interface ShellNavItem {
   href: string;
   label: string;
@@ -39,6 +42,8 @@ interface PortalShellProps {
   onSignOut: () => Promise<void>;
   /** Korpa se prikazuje samo kada portal commerce kapija to dozvoli. */
   showCart?: boolean;
+  /** Zvonce samo uz pravo na ekran Obaveštenja (magacioner ga nema → bez 403). */
+  showNotifications?: boolean;
   children: React.ReactNode;
   /** Traka iznad sadržaja (npr. oznaka demo podataka); ništa ne prekriva. */
   dataNotice?: React.ReactNode;
@@ -122,6 +127,7 @@ export function PortalShell({
   onSignOut,
   children,
   showCart = false,
+  showNotifications = true,
   dataNotice = null,
   dataSource = { status: "warn", label: "nije povezan" },
 }: PortalShellProps) {
@@ -324,6 +330,8 @@ export function PortalShell({
                   {index ? <PortalIcon name="chevron" /> : null}
                   {index === crumbs.length - 1 ? (
                     <strong>{crumb.label}</strong>
+                  ) : CRUMB_WITHOUT_PAGE.has(crumb.href) ? (
+                    <span>{crumb.label}</span>
                   ) : (
                     <Link href={crumb.href}>{crumb.label}</Link>
                   )}
@@ -337,13 +345,15 @@ export function PortalShell({
                 Do tada se polje ne prikazuje (sistem A, 2026-10-14): nedovršen
                 element u traci je izgledao kao kvar. Stil `.portal-search-trigger`
                 ostaje u portal.css za trenutak kada pretraga proradi. */}
-            <Link
-              href="/portal/obavestenja"
-              className="portal-icon-button"
-              aria-label="Obaveštenja"
-            >
-              <PortalIcon name="bell" />
-            </Link>
+            {showNotifications ? (
+              <Link
+                href="/portal/obavestenja"
+                className="portal-icon-button"
+                aria-label="Obaveštenja"
+              >
+                <PortalIcon name="bell" />
+              </Link>
+            ) : null}
 
             {showCart ? <CartButton /> : null}
             <div className="portal-profile">

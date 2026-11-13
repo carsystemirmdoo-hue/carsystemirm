@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { PhaseNotice } from "@/components/portal/PhaseNotice";
 import { Badge, PageHeader, SectionHeader } from "@/components/portal/PortalPrimitives";
 import { can } from "@/lib/authz/permissions.mjs";
 import { requireCapability } from "@/lib/authz/session";
@@ -80,7 +79,7 @@ export default async function Page() {
       <section className="portal-panel">
         <SectionHeader
           title="Istorija lagera"
-          description="Od 13. 11. 2026. svaki potvrđen uvoz beleži promene stanja po artiklu (koliko je bilo, od kog do kog dana); čuva se godinu dana. Nabavka iz nje izuzima dane kada artikla nije bilo, pa rasprodat artikal ne dobija niži predlog. Detaljne stavke uvoza čuvaju se za 4 poslednja potvrđena lagera."
+          description="Od 13. 11. 2026. svaki potvrđen jutarnji uvoz lagera beleži promene stanja po artiklu (koliko je bilo, od kog do kog dana); čuva se godinu dana. Nabavka iz nje izuzima dane kada artikla nije bilo, pa rasprodat artikal ne dobija niži predlog. Detaljne stavke uvoza čuvaju se za 4 poslednja potvrđena lagera."
         />
         <div className="portal-panel-body">
           {!history ? (
@@ -104,13 +103,6 @@ export default async function Page() {
         </div>
       </section>
 
-      <PhaseNotice
-        icon="package"
-        title="Šta još ne postoji"
-        summary="Automatsko preuzimanje izvoza lagera preko Windows konektora dolazi u sledećoj fazi; do tada kancelarija otprema izvoz ručno svakog jutra."
-        requires={["Automatsko preuzimanje izvoza sa kancelarijskog računara preko konektora (sledeća faza)."]}
-        availability="Sledeća faza"
-      />
     </>
   );
 }

@@ -4,7 +4,7 @@
     "catalogueSha256": "ac4f63d9b65109f15de5f5cb3f3caed672741ddd97a76eea78bbacf35d643961",
     "SOURCE PRODUCTS": 465,
     "SOURCE VARIANTS": 1089,
-    "EXISTING PRODUCTS": 12,
+    "EXISTING PRODUCTS": 15,
     "EXISTING VARIANTS": 9,
     "EXACT MATCHES": 1,
     "HIGH CONFIDENCE MATCHES": 4,
@@ -13,7 +13,7 @@
     "MISSING VARIANTS": 0,
     "variantsSuppliedByEnrichment": 22,
     "AMBIGUOUS": 0,
-    "LEGACY PRODUCTS": 6,
+    "LEGACY PRODUCTS": 9,
     "SOURCE CONFLICTS": 10,
     "MISSING IMAGES": 3,
     "MISSING IMPORTANT DATA": 1,
@@ -199,6 +199,84 @@
           "level": "article-number",
           "articleNumbers": [
             "146.705"
+          ],
+          "owners": []
+        },
+        {
+          "level": "none",
+          "note": "Nijedan zvanični proizvod ne deli šifru, sliku, tačan naziv ni kôd serije."
+        }
+      ],
+      "flags": [
+        "LEGACY_NOT_IN_CATALOGUE",
+        "LEGACY_NOT_IN_2026_27"
+      ],
+      "enrichment": null
+    },
+    {
+      "localSlug": "carsystem-polir-pasta-energetic-strong",
+      "localName": "Carsystem polir pasta Energetic Strong",
+      "classification": "LEGACY_NOT_IN_CATALOGUE",
+      "autoApply": false,
+      "sourceKeys": [],
+      "candidates": [],
+      "evidence": [
+        {
+          "level": "article-number",
+          "articleNumbers": [
+            "152.044"
+          ],
+          "owners": []
+        },
+        {
+          "level": "none",
+          "note": "Nijedan zvanični proizvod ne deli šifru, sliku, tačan naziv ni kôd serije."
+        }
+      ],
+      "flags": [
+        "LEGACY_NOT_IN_CATALOGUE",
+        "LEGACY_NOT_IN_2026_27"
+      ],
+      "enrichment": null
+    },
+    {
+      "localSlug": "carsystem-polir-pasta-superior-shine-finish",
+      "localName": "Carsystem polir pasta Superior Shine Finish",
+      "classification": "LEGACY_NOT_IN_CATALOGUE",
+      "autoApply": false,
+      "sourceKeys": [],
+      "candidates": [],
+      "evidence": [
+        {
+          "level": "article-number",
+          "articleNumbers": [
+            "152.045"
+          ],
+          "owners": []
+        },
+        {
+          "level": "none",
+          "note": "Nijedan zvanični proizvod ne deli šifru, sliku, tačan naziv ni kôd serije."
+        }
+      ],
+      "flags": [
+        "LEGACY_NOT_IN_CATALOGUE",
+        "LEGACY_NOT_IN_2026_27"
+      ],
+      "enrichment": null
+    },
+    {
+      "localSlug": "carsystem-polish-finish-all-in-one-1-l",
+      "localName": "Carsystem Polish Finish All in One 1 L",
+      "classification": "LEGACY_NOT_IN_CATALOGUE",
+      "autoApply": false,
+      "sourceKeys": [],
+      "candidates": [],
+      "evidence": [
+        {
+          "level": "article-number",
+          "articleNumbers": [
+            "139.196"
           ],
           "owners": []
         },

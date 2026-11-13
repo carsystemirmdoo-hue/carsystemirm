@@ -452,6 +452,16 @@
         "sourceNote": "„Diamont Tinting Base Characteristics“ (BASF US, maj 2020), str. 2–5; rmpaint.com/gb Basecoat Lines, sekcija „R-M Crystal bases“: „CRYSTAL BASE ... packaged in "
       },
       {
+        "code": "SCB 55L",
+        "name": null,
+        "packs": [
+          "bočica 125 ml"
+        ],
+        "status": "OWNER_CONFIRMED_LABEL",
+        "source": "etiketa (potvrda vlasnika 2026-11-13)",
+        "sourceNote": "Oznaka i pakovanje potvrđeni prema etiketi (BizniSoft „0.125“); u zvaničnoj tabeli „Diamont Tinting Base Characteristics“ nema ove šifre, pa se naziv ne navodi."
+      },
+      {
         "code": "CB 56L",
         "name": "Moss Green Pearl",
         "packs": [
@@ -522,6 +532,16 @@
         "sourceNote": "„Diamont Tinting Base Characteristics“ (BASF US, maj 2020), str. 2–5; rmpaint.com/gb Basecoat Lines, sekcija „R-M Crystal bases“: „CRYSTAL BASE ... packaged in "
       },
       {
+        "code": "CB 73L",
+        "name": "Crystal Copper",
+        "packs": [
+          "bočica 125 ml"
+        ],
+        "status": "potvrđeno izvorom",
+        "source": "https://refinish.basf.us/wp-content/uploads/2020/10/2020_Diamont_ENG.pdf",
+        "sourceNote": "„Diamont Tinting Base Characteristics“ (BASF US, maj 2020), str. 2–5; rmpaint.com/gb Basecoat Lines, sekcija „R-M Crystal bases“: „CRYSTAL BASE ... packaged in "
+      },
+      {
         "code": "CB 74L",
         "name": "Bright Copper Pearl",
         "packs": [
@@ -530,6 +550,26 @@
         "status": "potvrđeno izvorom",
         "source": "https://refinish.basf.us/wp-content/uploads/2020/10/2020_Diamont_ENG.pdf",
         "sourceNote": "„Diamont Tinting Base Characteristics“ (BASF US, maj 2020), str. 2–5; rmpaint.com/gb Basecoat Lines, sekcija „R-M Crystal bases“: „CRYSTAL BASE ... packaged in "
+      },
+      {
+        "code": "CB 75K",
+        "name": "Orange Pearl",
+        "packs": [
+          "bočica 125 ml"
+        ],
+        "status": "potvrđeno izvorom",
+        "source": "https://refinish.basf.us/wp-content/uploads/2020/10/2020_Diamont_ENG.pdf",
+        "sourceNote": "„Diamont Tinting Base Characteristics“ (BASF US, maj 2020), str. 2–5; rmpaint.com/gb Basecoat Lines, sekcija „R-M Crystal bases“: „CRYSTAL BASE ... packaged in "
+      },
+      {
+        "code": "CB 76V",
+        "name": null,
+        "packs": [
+          "bočica 125 ml"
+        ],
+        "status": "OWNER_CONFIRMED_LABEL",
+        "source": "etiketa (potvrda vlasnika 2026-11-13)",
+        "sourceNote": "Oznaka i pakovanje potvrđeni prema etiketi (BizniSoft „0.125“); u zvaničnoj tabeli „Diamont Tinting Base Characteristics“ nema ove šifre, pa se naziv ne navodi."
       },
       {
         "code": "CB 85L",

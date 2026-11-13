@@ -1,4 +1,5 @@
 import { withSerbianMeasureDisplay } from "@/lib/serbian-measure-display";
+import { withPolishPasteSiblings } from "@/lib/carsystem-polish-pastes";
 import { RM_CRYSTAL_BASE_SLUG, RM_PASTE_SLUG, withRmMixingBases } from "@/lib/rm-mixing-bases";
 import { abrasiveBackingTerms } from "@/lib/search/abrasive-backing.mjs";
 import { publicSkuOf } from "@/lib/catalog/public-code";
@@ -1949,6 +1950,68 @@ const productRecords: CarsystemProduct[] = [
     ],
     relatedProductSlugs: ["carsystem-silicone-remover-water-2-0"],
   }),
+  // Odluka vlasnika 2026-11-13: Carsystem polir paste koje vodimo, a nema ih u katalogu 2026/27 — svaka svoja
+  // kartica, uz brz prelaz na ostale paste. Podaci su samo naš naziv i pakovanje; opis paste na upit.
+  createProduct({
+    slug: "carsystem-polir-pasta-energetic-strong",
+    name: "Carsystem polir pasta Energetic Strong",
+    brandSlug: "carsystem",
+    programSlug: "poliranje",
+    phaseSlug: "poliranje",
+    taxonomyCategory: "poliranje",
+    shortDescription: "Carsystem polir pasta Energetic Strong iz naše ponude.",
+    longDescription:
+      "Carsystem polir pasta Energetic Strong. Namenu, stepen abrazivnosti, pakovanje i tehnički list potvrđujemo na upit.",
+    sku: "152.044",
+    packages: [{ label: "pakovanje na upit" }],
+    purpose: "Poliranje laka",
+    badges: ["Polir pasta", "Energetic Strong"],
+    specifications: [
+      { label: "Tip", value: "Polir pasta" },
+      { label: "Pakovanje", value: "pakovanje na upit" },
+    ],
+    relatedProductSlugs: withPolishPasteSiblings("carsystem-polir-pasta-energetic-strong"),
+  }),
+  createProduct({
+    slug: "carsystem-polir-pasta-superior-shine-finish",
+    name: "Carsystem polir pasta Superior Shine Finish",
+    brandSlug: "carsystem",
+    programSlug: "poliranje",
+    phaseSlug: "poliranje",
+    taxonomyCategory: "poliranje",
+    shortDescription: "Carsystem polir pasta Superior Shine Finish iz naše ponude.",
+    longDescription:
+      "Carsystem polir pasta Superior Shine Finish. Namenu, pakovanje i tehnički list potvrđujemo na upit.",
+    sku: "152.045",
+    packages: [{ label: "pakovanje na upit" }],
+    purpose: "Završno poliranje laka",
+    badges: ["Polir pasta", "Superior Shine Finish"],
+    specifications: [
+      { label: "Tip", value: "Polir pasta" },
+      { label: "Pakovanje", value: "pakovanje na upit" },
+    ],
+    relatedProductSlugs: withPolishPasteSiblings("carsystem-polir-pasta-superior-shine-finish"),
+  }),
+  createProduct({
+    slug: "carsystem-polish-finish-all-in-one-1-l",
+    name: "Carsystem Polish Finish All in One 1 L",
+    brandSlug: "carsystem",
+    programSlug: "poliranje",
+    phaseSlug: "poliranje",
+    taxonomyCategory: "poliranje",
+    shortDescription: "Carsystem polir pasta Finish All in One, pakovanje 1 L.",
+    longDescription:
+      "Carsystem Polish Finish All in One u pakovanju 1 L. Namenu i tehnički list potvrđujemo na upit.",
+    sku: "139.196",
+    packages: [{ label: "1 L" }],
+    purpose: "Poliranje laka",
+    badges: ["Polir pasta", "All in One"],
+    specifications: [
+      { label: "Tip", value: "Polir pasta" },
+      { label: "Pakovanje", value: "1 L" },
+    ],
+    relatedProductSlugs: withPolishPasteSiblings("carsystem-polish-finish-all-in-one-1-l"),
+  }),
   createProduct({
     slug: "carsystem-navlake-za-sedista-rolna",
     name: "Carsystem navlake za sedišta u rolni",
@@ -2848,6 +2911,7 @@ const productRecords: CarsystemProduct[] = [
     packages: [{ label: "po SC broju" }],
     purpose: "Nijansiranje",
     badges: ["Paste", "SC serija"],
+    rmMetadata: { system: null, series: null, category: "basecoat", technology: null, finish: null },
     specifications: [
       { label: "Crne", value: "SC 015, SC 20, SC 25, SC 29, SC 804" },
       { label: "Plave", value: "SC 44, SC 46, SC 49" },

@@ -1,6 +1,7 @@
 import { abrasiveBackingTerms } from "@/lib/search/abrasive-backing.mjs";
 import catalogData from "@/data/carsystem-catalog-products.generated.json";
 import removedVariantsData from "@/data/catalog/removed-variants.json";
+import { withPolishPasteSiblings } from "@/lib/carsystem-polish-pastes";
 import type {
   CarsystemProduct,
   ProductDocument,
@@ -531,7 +532,10 @@ function withOwnerAddedVariants(entry: CatalogProductEntry): CatalogProductEntry
 }
 
 export function getCarsystemCatalogProducts(): CarsystemProduct[] {
-  return entries.map((entry) => createCatalogProduct(withOwnerAddedVariants(withoutRemovedVariants(entry)), knownSlugs));
+  return entries.map((entry) => {
+    const product = createCatalogProduct(withOwnerAddedVariants(withoutRemovedVariants(entry)), knownSlugs);
+    return { ...product, relatedProductSlugs: withPolishPasteSiblings(product.slug, product.relatedProductSlugs) };
+  });
 }
 
 /**

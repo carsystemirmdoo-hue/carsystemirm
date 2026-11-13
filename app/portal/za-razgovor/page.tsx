@@ -308,8 +308,8 @@ export default async function TalkListPage({
       ) : null}
 
       <p className="portal-footnote">
-        Interna lista. Kupac je nikad ne vidi. Predlog ne sadrži cenu, rabat ni uslove plaćanja; naplata i
-        zalihe se ne prikazuju jer izvor nije povezan.
+        Interna lista. Kupac je nikad ne vidi. Predlog ne sadrži cenu, rabat ni uslove plaćanja; dugovanje kupca
+        i lager artikala vidite na kartici kupca i na njegovim preporukama.
       </p>
     </>
   );

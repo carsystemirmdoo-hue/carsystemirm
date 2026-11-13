@@ -1,3 +1,4 @@
+import { can } from "@/lib/authz/permissions.mjs";
 import type { Metadata } from "next";
 import { cookies } from "next/headers";
 import { PortalShell } from "@/components/portal/PortalShell";
@@ -93,6 +94,7 @@ export default async function PortalLayout({
         initialCollapsed={collapsed}
         onSignOut={signOutAction}
         showCart={commerce.allowed}
+        showNotifications={can(user, "view:obavestenja")}
         dataNotice={<DataStrip dataset={dataset} />}
         dataSource={dataSource}
       >

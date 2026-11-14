@@ -7,6 +7,7 @@ import {
   proposeContactAction,
   recordOfflineConsentAction,
   revokeAccessAction,
+  sendInvitationEmailAction,
   setAccountStatusAction,
   verifyContactAction,
   type AccountActionState,
@@ -69,6 +70,7 @@ export function AccountsAdmin({
     issueInvitationAction,
     { error: null, ok: null, link: null as string | null },
   );
+  const [mailState, mailAction, mailing] = useActionState(sendInvitationEmailAction, INITIAL);
   const [statusState, statusAction, changing] = useActionState(
     setAccountStatusAction,
     INITIAL,
@@ -157,6 +159,15 @@ export function AccountsAdmin({
 
       <section className="portal-panel">
         <h2>Nalozi kupaca ({accounts.length})</h2>
+        {mailState.ok ? <p role="status" className="portal-login-hint">{mailState.ok}</p> : null}
+        {mailState.error ? (
+          <div className="portal-login-error" role="alert">
+            <span>
+              <strong>Pozivnica nije poslata</strong>
+              <small>{mailState.error}</small>
+            </span>
+          </div>
+        ) : null}
         {inviteState.error ? (
           <div className="portal-login-error" role="alert">
             <span>
@@ -284,6 +295,29 @@ export function AccountsAdmin({
                               : "Izdajte nov poziv"}
                           </PortalButton>
                         </form>
+                        {account.status !== "active" ? (
+                          <form
+                            action={mailAction}
+                            style={{ display: "inline" }}
+                            onSubmit={(e) => {
+                              if (!window.confirm(`Poslati pozivnicu na ${account.email}? Link važi 7 dana.`)) e.preventDefault();
+                            }}
+                          >
+                            <input type="hidden" name="accountId" value={account.id} />
+                            <PortalButton
+                              type="submit"
+                              variant="ghost"
+                              disabled={mailing || !account.gate?.allowed}
+                              title={
+                                account.gate?.allowed
+                                  ? "Pozivnica ide kupcu mejlom; link se ne prikazuje ovde."
+                                  : "Pozivnica se šalje tek kada su firma i osoba potvrđene."
+                              }
+                            >
+                              {mailing ? "Šaljem…" : "Pošaljite pozivnicu mejlom"}
+                            </PortalButton>
+                          </form>
+                        ) : null}
                         {(account.status === "requested" || account.status === "approved") &&
                         !account.gate?.verification ? (
                           <PortalButton

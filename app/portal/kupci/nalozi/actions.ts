@@ -19,6 +19,7 @@ import {
   markOutboxHandedOver,
 } from "@/lib/customers/invitation-service";
 import { requireCustomerAccess } from "@/lib/authz/session";
+import { sendInvitationEmail } from "@/lib/customers/invitation-email";
 import {
   revokeCustomerAccess,
   verifyCustomerContact,
@@ -147,6 +148,39 @@ export async function issueInvitationAction(
   } catch (error) {
     if (error instanceof CustomerAccountError) {
       return { error: error.message, ok: null, link: null };
+    }
+    throw error;
+  }
+}
+
+/**
+ * Pozivnica mejlom (2026-11-14): ista kapija i opseg kao ručni poziv, rok 7 dana, link ide samo
+ * kupcu u mejlu (ne prikazuje se ovde).
+ */
+export async function sendInvitationEmailAction(
+  _previous: AccountActionState,
+  formData: FormData,
+): Promise<AccountActionState> {
+  const actor = await requireCapability(
+    "customer_accounts:manage",
+    "/portal/kupci/nalozi",
+  );
+  const parsed = z.string().uuid().safeParse(formData.get("accountId"));
+  if (!parsed.success) return { error: NOT_FOUND, ok: null };
+  if (!(await inScope(actor, await customerIdOfAccount(parsed.data)))) {
+    return { error: NOT_FOUND, ok: null };
+  }
+  try {
+    const result = await sendInvitationEmail(parsed.data, {
+      id: actor.id,
+      name: actor.name,
+      role: actor.role,
+    });
+    revalidatePath("/portal/kupci/nalozi");
+    return result.ok ? { error: null, ok: result.text } : { error: result.text, ok: null };
+  } catch (error) {
+    if (error instanceof CustomerAccountError) {
+      return { error: error.message, ok: null };
     }
     throw error;
   }

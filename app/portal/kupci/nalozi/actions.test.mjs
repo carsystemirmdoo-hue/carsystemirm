@@ -22,6 +22,7 @@ const telo = (ime) => {
 
 const SERVIS = {
   issueInvitationAction: "issueInvitation(",
+  sendInvitationEmailAction: "sendInvitationEmail(",
   markHandedOverAction: "markOutboxHandedOver(",
   setAccountStatusAction: "setCustomerAccountStatus(",
   recordOfflineConsentAction: "recordOfflineConsentDecision(",

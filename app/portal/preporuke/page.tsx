@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { quantity } from "@/lib/ordering/panelFormat.mjs";
+import { dmy, quantity } from "@/lib/ordering/panelFormat.mjs";
 import {
   Badge,
   Metric,
@@ -62,6 +62,8 @@ const GRUPE: {
   kljuc: string;
   naslov: string;
   statusi: RecommendationStatus[];
+  /** Podrazumevano najveće kašnjenje prvo. */
+  redosled?: "skorije";
   tone: Tone;
   opis: string;
 }[] = [
@@ -90,6 +92,7 @@ const GRUPE: {
     kljuc: "provisional",
     naslov: "Privremene procene",
     statusi: ["provisional"],
+    redosled: "skorije",
     tone: "neutral",
     opis:
       "Samo dve potvrđene kupovine — jedan razmak nije ritam. Prikazuje se " +
@@ -99,6 +102,7 @@ const GRUPE: {
     kljuc: "ostalo",
     naslov: "Još nije vreme i uspavani",
     statusi: ["not_yet", "dormant"],
+    redosled: "skorije",
     tone: "info",
     opis: "Nema šta da se radi danas; stoji radi pregleda.",
   },
@@ -120,11 +124,25 @@ const CONFIDENCE_TONE: Record<RecommendationConfidence, Tone> = {
   low: "neutral",
 };
 
+/** Isti oblik datuma kao na ostatku portala (dd/mm/gggg). */
 function datum(iso: string | null): string {
-  if (!iso) return "—";
-  const [g, m, d] = iso.split("-");
-  return `${d}.${m}.${g}.`;
+  return dmy(iso);
 }
+
+/**
+ * Najviše redova po grupi. Svaka grupa ima SVOJ upit: jedan zajednički upit sa
+ * ograničenjem, poređan po kašnjenju, punio je svih 300 mesta uspavanim i
+ * privremenim parovima starim po više godina, pa su „Treba kontaktirati sada",
+ * „Kasni" i „Uskoro" ostajali prazni (kopija 8. 10.: 0 prikazano od 427/437/218).
+ */
+const PO_GRUPI = 100;
+
+/** Stanje prolaza onako kako ga čita čovek, ne vrednost iz baze. */
+const PROLAZ_STATUS: Record<string, string> = {
+  running: "u toku",
+  succeeded: "uspešan",
+  failed: "neuspeo",
+};
 
 function dana(n: number): string {
   const a = Math.abs(n);
@@ -240,22 +258,29 @@ export default async function RecommendationsPage({
     );
   }
 
-  const [run, prolazi, redovi, brojaci, brojaciFiltera, komercijalisti] = await Promise.all([
+  // Statusi grupe presečeni sa filterom statusa; prazan presek = grupa se ne učitava.
+  const statusiGrupe = (g: (typeof GRUPE)[number]) =>
+    filter.status ? g.statusi.filter((st) => filter.status!.includes(st)) : g.statusi;
+
+  const [run, prolazi, grupniRedovi, brojaci, filtrirano, komercijalisti] = await Promise.all([
     activeRun(),
     recentRuns(5),
-    recommendationRows(scope, filter),
+    Promise.all(
+      GRUPE.map((g) => {
+        const statusi = statusiGrupe(g);
+        return statusi.length === 0
+          ? Promise.resolve<RecommendationRow[]>([])
+          : recommendationRows(scope, { ...filter, status: statusi, limit: PO_GRUPI, order: g.redosled });
+      }),
+    ),
     recommendationStatusCounts(scope, { customerStatus: filter.customerStatus }),
-    // Isti filteri kao lista: broj u naslovu grupe je PRAVI broj, ne broj učitanih redova.
+    // Broj u naslovu grupe: isti filteri kao lista, ali prebrojano u bazi.
     recommendationStatusCounts(scope, filter),
     salespeopleInScope(scope),
   ]);
 
   const poGrupi = new Map<string, RecommendationRow[]>();
-  for (const g of GRUPE) poGrupi.set(g.kljuc, []);
-  for (const r of redovi) {
-    const g = GRUPE.find((x) => x.statusi.includes(r.status));
-    if (g) poGrupi.get(g.kljuc)!.push(r);
-  }
+  GRUPE.forEach((g, i) => poGrupi.set(g.kljuc, grupniRedovi[i] ?? []));
 
   const zbir = (statusi: RecommendationStatus[]) =>
     statusi.reduce((s, k) => s + (brojaci[k] ?? 0), 0);
@@ -459,15 +484,19 @@ export default async function RecommendationsPage({
       ) : (
         GRUPE.map((g) => {
           const stavke = poGrupi.get(g.kljuc) ?? [];
-          const ukupno = Math.max(stavke.length, g.statusi.reduce((s, k) => s + (brojaciFiltera[k] ?? 0), 0));
-          const skraceno = stavke.length < ukupno
-            ? ` Prikazano prvih ${stavke.length} od ${ukupno} (najhitnije prvo); suzite pretragom ili filterom.`
-            : "";
+          const ukupno = statusiGrupe(g).reduce((n, st) => n + (filtrirano[st] ?? 0), 0);
           return (
             <section className="portal-panel" key={g.kljuc} data-accent={g.tone}>
               <SectionHeader
-                title={`${g.naslov} (${ukupno})`}
-                description={`${g.opis} Broj u naslovu prati filtere iznad.${skraceno}`}
+                title={`${g.naslov} (${quantity(ukupno)})`}
+                description={
+                  `${g.opis} Broj u naslovu prati filtere iznad.` +
+                  (stavke.length < ukupno
+                    ? ` Prikazano prvih ${quantity(stavke.length)} od ${quantity(ukupno)}` +
+                      (g.redosled === "skorije" ? ", od najskorije kupovine" : ", od najvećeg kašnjenja") +
+                      " — pretraga ili filter sužavaju listu."
+                    : "")
+                }
               />
               {stavke.length === 0 ? (
                 <p>
@@ -594,17 +623,17 @@ export default async function RecommendationsPage({
                             : "info"
                       }
                     >
-                      {p.status}
+                      {PROLAZ_STATUS[p.status] ?? p.status}
                     </Badge>
                     {p.failureCode ? <small>{p.failureCode}</small> : null}
                   </td>
-                  <td>{p.inputLinesAccepted}</td>
-                  <td>{p.inputLinesExcluded}</td>
+                  <td>{quantity(p.inputLinesAccepted)}</td>
+                  <td>{quantity(p.inputLinesExcluded)}</td>
                   <td>
-                    {p.pairCount}
-                    <small>sa ritmom: {p.repeatPairCount}</small>
+                    {quantity(p.pairCount)}
+                    <small>sa ritmom: {quantity(p.repeatPairCount)}</small>
                   </td>
-                  <td>{p.resultCount}</td>
+                  <td>{quantity(p.resultCount)}</td>
                 </tr>
               ))}
               {prolazi.length === 0 ? (

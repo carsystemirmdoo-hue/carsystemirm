@@ -3,6 +3,7 @@ import { DateField } from "@/components/portal/DateField";
 import Link from "next/link";
 import { asc } from "drizzle-orm";
 import { Badge, PageHeader } from "@/components/portal/PortalPrimitives";
+import { ARTICLE_OPTION_LIMIT } from "@/lib/pricing/rule-service";
 import { getDb } from "@/db/client";
 import { articles } from "@/db/schema";
 import { requireCapability } from "@/lib/authz/session";
@@ -60,7 +61,8 @@ export default async function PricesOverviewPage({
       .select({ id: articles.id, code: articles.code, name: articles.name })
       .from(articles)
       .orderBy(asc(articles.code))
-      .limit(1000),
+      // Ceo šifarnik: sa 1000 su artikli iza 1000. šifre (kopija: 1.459) bili nedostupni.
+      .limit(ARTICLE_OPTION_LIMIT),
     listRuleConflicts(scope),
   ]);
 

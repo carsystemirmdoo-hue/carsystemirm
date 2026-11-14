@@ -9,11 +9,21 @@ import { countOf, STAVKA } from "@/lib/ordering/plural.mjs";
  * ne sme da obori zahtev koji je kupac već poslao. `dedupeKey` čuva od dvostrukog
  * zapisa pri ponovljenom slanju istim ključem.
  *
- * Vidljivost: `customer_orders:review` (kancelarija, vlasnik). Komercijalista
- * NE — obaveštenje se vidi po sposobnosti, ne po kupcu, pa bi video tuđe kupce.
+ * Vidljivost zahteva za porudžbinu: `customer_orders:review` (kancelarija,
+ * vlasnik) — komercijalista ih samo čita, korak nije njegov.
+ *
+ * Upit za cenu: `price_requests:handle` uz `customerId` (0063). Na upit
+ * odgovara i komercijalista, a red vezan za kupca vidi samo ko tog kupca ima
+ * u opsegu — komercijalista svoje, kancelarija i vlasnik sve.
  * Telo nosi samo broj, naziv firme i brojeve — bez kontakta kupca.
  */
 const CAPABILITY = "customer_orders:review";
+const PRICE_REQUEST_CAPABILITY = "price_requests:handle";
+const PRICE_REQUEST_TITLE = {
+  no_price: "Nov upit za cenu",
+  special_terms: "Nov zahtev za posebne uslove",
+  procurement: "Nov upit za nabavku",
+} as const;
 
 async function safely(run: () => Promise<void>) {
   try {
@@ -47,13 +57,21 @@ export async function notifyOrderSubmitted(input: {
   );
 }
 
-export async function notifyPriceRequestSubmitted(input: { requestId: string; requestNumber: string; customerName: string; productName: string }) {
+export async function notifyPriceRequestSubmitted(input: {
+  requestId: string;
+  customerId: string;
+  kind: "no_price" | "special_terms" | "procurement";
+  requestNumber: string;
+  customerName: string;
+  productName: string;
+}) {
   await safely(() =>
     notify({
       kind: "customer_price_request_submitted",
       severity: "info",
-      requiredCapability: CAPABILITY,
-      title: `Nov upit za cenu ${input.requestNumber}`,
+      requiredCapability: PRICE_REQUEST_CAPABILITY,
+      customerId: input.customerId,
+      title: `${PRICE_REQUEST_TITLE[input.kind]} ${input.requestNumber}`,
       body: `${input.customerName}: ${input.productName}. Upit čeka odgovor.`,
       entityType: "Upit za cenu",
       entityId: input.requestId,

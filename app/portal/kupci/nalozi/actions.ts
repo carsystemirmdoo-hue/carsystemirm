@@ -2,6 +2,7 @@
 
 import { revalidatePath } from "next/cache";
 import { z } from "zod";
+import { can } from "@/lib/authz/permissions.mjs";
 import { requireCapability, type PortalUser } from "@/lib/authz/session";
 import {
   CustomerAccountError,
@@ -95,9 +96,13 @@ export async function proposeContactAction(
   }
 
   revalidatePath("/portal/kupci/nalozi");
+  // Ko sme da izda poziv dobija sledeći korak; ostali — ko ga izdaje.
+  const canIssue = can(actor, "customer_accounts:manage");
   return {
     error: null,
-    ok: "Kontakt je predložen. Nalog još nema pristup — poziv izdaje kancelarija.",
+    ok: canIssue
+      ? "Kontakt je predložen. Sledeći korak: „Potvrdite osobu“, pa „Odobrite i pozovite“."
+      : "Kontakt je predložen. Nalog još nema pristup — osobu potvrđuje i poziv izdaje vlasnik.",
   };
 }
 

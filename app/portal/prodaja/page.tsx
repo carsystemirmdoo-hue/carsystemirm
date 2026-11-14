@@ -9,6 +9,7 @@ import { NoInvoicesYet, SalesFilters } from "@/features/portal/SalesFilters";
 import { can, seesAllCustomers } from "@/lib/authz/permissions.mjs";
 import { debtsByCustomer, latestSnapshot } from "@/lib/sales-tools/receivables-service";
 import { requireCapability } from "@/lib/authz/session";
+import { listSalesReps } from "@/lib/partners/assignment-service";
 import {
   hasImportedInvoices,
   loadProductGroups,
@@ -57,9 +58,11 @@ export default async function SalesPage({
       loadSalesBreakdown(user, filter, "kupci"),
       loadSalesLines(user, filter, SALES_LINES_DISPLAY),
       loadScopedCustomers(user),
-      loadSalespeople(),
+      seesAllCustomers(user) ? loadSalespeople() : Promise.resolve([]),
       loadProductGroups(),
     ]);
+  // Filter po dodeli ima smisla samo ko vidi sve kupce.
+  const reps = seesAllCustomers(user) ? await listSalesReps() : [];
 
   // Dugovanja danas (tabela kancelarije) — isti opseg kupaca kao ekran Dugovanja.
   let debts: { total: number; overdue: number; customers: number; checkedAt: string } | null | undefined;
@@ -91,7 +94,7 @@ export default async function SalesPage({
 
       <SalesFilters
         action="/portal/prodaja"
-        options={{ customers, salespeople, productGroups }}
+        options={{ customers, salespeople, reps, productGroups }}
         applied={applied}
         exportView="kupci"
         salespersonOnInvoices={

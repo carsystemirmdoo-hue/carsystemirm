@@ -295,7 +295,7 @@ Ista tehnička osnova kao T4, ali kroz **funkcije**, ne identifikatore: brza por
 **Prevencija**
 - Pri uvozu — vrednost je uvek tekst 🟢 po konstrukciji
 - ✅ **Pri izvozu (Faza 1A):** `lib/export/spreadsheet-safety.mjs:guardSpreadsheetValue` prefiksuje apostrofom svaku vrednost koja posle preskočene beline počinje sa `=`, `+`, `-`, `@`, ili koja počinje tabom/CR/LF. Primenjeno **pre** serijalizacije u obe tabelarne putanje 🟢
-- ✅ SpreadsheetML dodatno nikad ne emituje `ss:Formula` — strukturna garancija uz sadržajnu 🟢
+- ✅ XLSX (Office Open XML, `lib/export/xlsx.mjs`) dodatno nikad ne emituje element formule `<f>` — strukturna garancija uz sadržajnu 🟢
 - ✅ Brojevi ostaju brojevi; samo nepouzdan **tekst** dobija zaštitu 🟢
 
 **Detekcija** — provera pri uvozu označava sumnjivu vrednost kao `upozorenje` (`import_rows` postoji) 🟢.

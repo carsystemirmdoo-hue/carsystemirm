@@ -31,7 +31,7 @@ export function moneyRsd(value: number | null) {
   return value === null ? "—" : `${MONEY.format(value)}\u00a0RSD`;
 }
 
-export type GroupView = "kupci" | "komercijalisti" | "artikli" | "grupe";
+export type GroupView = "kupci" | "komercijalisti" | "artikli" | "grupe" | "dani" | "meseci" | "godine";
 
 /** Najviše stavki u listi na ekranu; zbirovi se računaju nad svim stavkama. */
 export const SALES_LINES_DISPLAY = 500;
@@ -41,6 +41,9 @@ const GROUP_LABELS: Record<GroupView, string> = {
   komercijalisti: "Komercijalista",
   artikli: "Artikal",
   grupe: "Grupa proizvoda",
+  dani: "Dan",
+  meseci: "Mesec",
+  godine: "Godina",
 };
 
 /**
@@ -268,7 +271,7 @@ export function SalesBreakdown({
                 <td className="portal-table-number">
                   <strong>{money(row.net)}</strong>
                 </td>
-                <td className="portal-table-number">{row.invoiceCount}</td>
+                <td className="portal-table-number">{MONEY.format(row.invoiceCount)}</td>
               </tr>
             );
           })}
@@ -292,7 +295,7 @@ export function SalesBreakdown({
               <td className="portal-table-number">
                 <strong>{money(totals.net)}</strong>
               </td>
-              <td className="portal-table-number">{totals.invoiceCount}</td>
+              <td className="portal-table-number">{MONEY.format(totals.invoiceCount)}</td>
             </tr>
           )}
         </tbody>

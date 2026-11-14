@@ -13,6 +13,7 @@ import {
   type PriceRuleStatus,
 } from "@/db/schema";
 import { AUDIT_ACTIONS, recordAudit } from "@/lib/audit/record";
+import { dmy, quantity } from "@/lib/ordering/panelFormat.mjs";
 import { resolveCapabilities } from "@/lib/authz/permissions.mjs";
 import { canDecidePricesFor, decidesPricesForAllCustomers } from "@/lib/authz/scope.mjs";
 import { loadAssignedCustomerIds, type PortalUser } from "@/lib/authz/user-repository";
@@ -208,7 +209,10 @@ export async function proposePriceRule(
         // Vlasniku: komercijalista koji sme da odobrava vidi predloge na svojoj strani odobravanja.
         requiredCapability: OWNER_CAPABILITY,
         title: "Nov predlog promene cene",
-        body: `${actor.name} predlaže ${precedenceLabelFor(level)} (${scopeKey}). Razlog: ${reason}`,
+        body:
+          `${actor.name} predlaže ${precedenceLabelFor(level)}: ${await describeRuleScope(tx, draft)} — ` +
+          `${draft.valueKind === "net_price" ? `neto ${quantity(Number(draft.netPrice))} RSD` : `rabat ${quantity(Number(draft.discountPercent))} %`}, ` +
+          `od ${dmy(draft.effectiveFrom)}. Razlog: ${reason}`,
         entityType: "Pravilo cene",
         entityId: created.id,
         actionHref: "/portal/cene/odobravanje",
@@ -619,11 +623,69 @@ export type PriceRuleView = PriceRuleRow & {
  * Obavezan parametar je namerno: podrazumevana vrednost „bez ograničenja" je
  * tačno greška koja se ne primeti pri dodavanju novog pozivaoca.
  */
+/**
+ * Opseg pravila onako kako ga čovek čita: kupac/grupa i artikal/grupa/brend.
+ * Obaveštenje je ranije nosilo `scopeKey` (`customer:<uuid>|article:<uuid>`),
+ * pa vlasnik iz njega nije mogao da zna o kom kupcu i artiklu je reč.
+ */
+async function describeRuleScope(
+  tx: Parameters<Parameters<Database["transaction"]>[0]>[0],
+  draft: { customerId?: string | null; customerGroupId?: string | null; articleId?: string | null; productGroup?: string | null; brand?: string | null },
+): Promise<string> {
+  const [customer] = draft.customerId
+    ? await tx.select({ name: customers.name }).from(customers).where(eq(customers.id, draft.customerId)).limit(1)
+    : [];
+  const [group] = draft.customerGroupId
+    ? await tx.select({ name: customerGroups.name }).from(customerGroups).where(eq(customerGroups.id, draft.customerGroupId)).limit(1)
+    : [];
+  const [article] = draft.articleId
+    ? await tx.select({ code: articles.code, name: articles.name }).from(articles).where(eq(articles.id, draft.articleId)).limit(1)
+    : [];
+  const who = customer ? customer.name : group ? `grupa ${group.name}` : "svi kupci";
+  const what = article
+    ? `${article.code} ${article.name}`
+    : draft.productGroup
+      ? `grupa proizvoda ${draft.productGroup}`
+      : draft.brand
+        ? `proizvođač ${draft.brand}`
+        : "svi proizvodi";
+  return `${who} · ${what}`;
+}
+
+/** Izbornik artikala u obrascima cene: ceo šifarnik (~3000 proizvoda u planu). */
+export const ARTICLE_OPTION_LIMIT = 5000;
+
+/**
+ * Koliko pravila ima u opsegu, pod istim filterom kao `listPriceRules`.
+ * Lista je ograničena; bez ovog broja ekran je tvrdio „Ukupno pravila: 500"
+ * dok ih je bilo 2.948.
+ */
+export async function countPriceRules(
+  scope: PricingScope,
+  filter?: { statuses?: PriceRuleStatus[]; customerId?: string; biznisoftEntryRequired?: boolean },
+): Promise<number> {
+  const conditions = [];
+  if (filter?.statuses?.length) conditions.push(inArray(priceRules.status, filter.statuses));
+  if (filter?.customerId) conditions.push(eq(priceRules.customerId, filter.customerId));
+  if (filter?.biznisoftEntryRequired !== undefined) {
+    conditions.push(eq(priceRules.biznisoftEntryRequired, filter.biznisoftEntryRequired));
+  }
+  const scopeCondition = priceRuleScopeCondition(scope);
+  if (scopeCondition) conditions.push(scopeCondition);
+  const [row] = await getDb()
+    .select({ n: sql<number>`count(*)::int` })
+    .from(priceRules)
+    .where(conditions.length > 0 ? and(...conditions) : undefined);
+  return row?.n ?? 0;
+}
+
 export async function listPriceRules(
   scope: PricingScope,
   filter?: {
     statuses?: PriceRuleStatus[];
     customerId?: string;
+    /** `false` = pravila koja važe samo u portalu (serija iz istorije faktura). */
+    biznisoftEntryRequired?: boolean;
     limit?: number;
   },
 ): Promise<PriceRuleView[]> {
@@ -634,6 +696,9 @@ export async function listPriceRules(
   }
   if (filter?.customerId) {
     conditions.push(eq(priceRules.customerId, filter.customerId));
+  }
+  if (filter?.biznisoftEntryRequired !== undefined) {
+    conditions.push(eq(priceRules.biznisoftEntryRequired, filter.biznisoftEntryRequired));
   }
 
   const scopeCondition = priceRuleScopeCondition(scope);

@@ -208,12 +208,13 @@ test("odobreno pravilo je approved_pending_biznisoft, NE confirmed", async (t) =
   assert.equal(rule.status, "approved_pending_biznisoft");
   assert.equal(rule.confirmed_at, null, "odobrenje je popunilo potvrdu");
 
-  // Obaveštenje o odobrenju ide kancelariji, koja upisuje u BizniSoft.
+  // Obaveštenje o odobrenju ide kancelariji. Od 2026-11-11 (vlasnik) odobreno
+  // pravilo važi u portalu; unos u BizniSoft je samo za uslov koji treba i na fakturi.
   const [notice] = await db.sql<{ required_capability: string; body: string }[]>`
     SELECT required_capability, body FROM notifications
     WHERE entity_id = ${created.id} AND kind = 'price_rule_approved'`;
   assert.equal(notice.required_capability, "prices:apply");
-  assert.match(notice.body, /NIJE potvrđen/);
+  assert.match(notice.body, /Važi u portalu/);
 });
 
 test("kancelarija evidentira unos — stanje je office_recorded, NE confirmed", async (t) => {
@@ -581,4 +582,15 @@ test("zatvoreno obavestenje bez napomene se ne moze upisati ni direktno", async 
       VALUES ('price_rule_proposed', 'prices:approve', 't', 'b', 'Pravilo cene', 'resolved')`,
     /notifications_resolved_ck/,
   );
+});
+
+test("obaveštenje o predlogu imenuje kupca i artikal, ne interne ID-jeve", async (t) => {
+  if (guard(t)) return;
+  const created = await freshProposal();
+  const [row] = await db.sql<{ body: string }[]>`
+    SELECT body FROM notifications WHERE kind = 'price_rule_proposed' AND entity_id = ${created.id}`;
+  assert.ok(row, "nema obaveštenja o predlogu");
+  assert.doesNotMatch(row.body, /customer:|article:|[0-9a-f]{8}-[0-9a-f]{4}-/i);
+  assert.match(row.body, / · /);
+  assert.match(row.body, /od \d{2}\/\d{2}\/\d{4}/);
 });

@@ -1,3 +1,4 @@
+import { sql } from "drizzle-orm";
 import {
   bigserial,
   index,
@@ -8,6 +9,7 @@ import {
   timestamp,
   uuid,
 } from "drizzle-orm/pg-core";
+import { customers } from "./permissions";
 import { users } from "./users";
 
 /**
@@ -96,8 +98,6 @@ export const notifications = pgTable(
      * je nov događaj i sme da napravi nov red; vidi migraciju 0015.
      */
     dedupeKey: text("dedupe_key"),
-    /** 0063: kupac na koga se obaveštenje odnosi; komercijalista vidi samo svoje kupce. */
-    customerId: uuid("customer_id"),
     createdAt: timestamp("created_at", { withTimezone: true })
       .notNull()
       .defaultNow(),
@@ -108,11 +108,19 @@ export const notifications = pgTable(
       onDelete: "restrict",
     }),
     resolutionNote: text("resolution_note"),
+    /**
+     * Kupac na koga se obaveštenje odnosi (0063), ili `null` za obaveštenje bez
+     * kupca. Kada je zadat, vidi ga samo ko pored sposobnosti ima tog kupca u
+     * opsegu — komercijalista svoje, kancelarija i vlasnik sve. Tako
+     * komercijalista dobija upit svog kupca bez uvida u tuđe.
+     */
+    customerId: uuid("customer_id").references(() => customers.id, { onDelete: "cascade" }),
   },
   (table) => [
     index("notifications_status_idx").on(table.status, table.createdAt),
     index("notifications_capability_idx").on(table.requiredCapability),
     index("notifications_entity_idx").on(table.entityType, table.entityId),
+    index("notifications_customer_idx").on(table.customerId).where(sql`customer_id IS NOT NULL`),
   ],
 );
 

@@ -5,6 +5,7 @@ import type { ProductMappingStatus } from "@/db/schema/commercial";
 import { can } from "@/lib/authz/permissions.mjs";
 import { requireCapability } from "@/lib/authz/session";
 import {
+  ARTICLE_MAPPING_LIST_LIMIT,
   countArticleMappingsByStatus,
   listArticleMappings,
 } from "@/lib/commercial/mapping-service";
@@ -13,6 +14,7 @@ import {
   PRODUCT_MAPPING_TONES,
 } from "@/lib/portal/status-labels";
 import { loadArticleOrderability } from "@/lib/ordering/ordering-service";
+import { getAllCarsystemProducts } from "@/lib/carsystem-data";
 import { MappingReview } from "./MappingReview";
 import { NameProposals } from "./NameProposals";
 import { loadNameProposals } from "@/lib/catalog/name-proposals";
@@ -46,6 +48,8 @@ export default async function ArticleMappingsPage({
     "/portal/proizvodi/mapiranja",
   );
   const canManage = can(user, "mappings:manage");
+  // Predlog po šifri traži internu šifru na kataloškom proizvodu; danas je nema nijedan (kopija 8. 10.: 0 od 1.920).
+  const canProposeByCode = getAllCarsystemProducts().some((product) => Boolean(product.internalCode));
   const params = await searchParams;
 
   const includeInactive = params.predlozi === "svi";
@@ -66,6 +70,7 @@ export default async function ArticleMappingsPage({
   }));
 
   const total = STATUSES.reduce((sum, status) => sum + counts[status], 0);
+  const selectedStatus = parseStatus(params.status);
 
   return (
     <>
@@ -122,14 +127,30 @@ export default async function ArticleMappingsPage({
               </button>
             </form>
             <p className="portal-login-hint">
-              {"„Predložite po šifri"} traži tačno poklapanje interne šifre. Dva
-              kataloška proizvoda sa istom šifrom daju konflikt, ne izbor.
+              {canProposeByCode
+                ? "„Predložite po šifri“ traži tačno poklapanje interne šifre. Dva kataloška proizvoda sa istom šifrom daju konflikt, ne izbor."
+                : "Katalog još ne nosi interne šifre BizniSofta, pa predlog po šifri nije moguć. Koristite predloge po nazivu ispod; za ostale vezu potvrdite kroz „Odlučite“: upišite slug kataloškog proizvoda i „Proverite“ — vide se naziv, slika i varijante pre čuvanja."}
             </p>
           </section>
 
+          {rows.length >= ARTICLE_MAPPING_LIST_LIMIT ? (
+            <p className="portal-login-hint" role="status">
+              Prikazano je prvih {ARTICLE_MAPPING_LIST_LIMIT} artikala po šifri (ukupno u izabranom stanju:{" "}
+              {selectedStatus ? counts[selectedStatus] : total}
+              ). Ostale nađite pretragom po šifri ili nazivu, ili suzite stanje.
+            </p>
+          ) : null}
+
+          {!canManage && counts.unmapped + counts.conflict > 0 ? (
+            <p className="portal-login-hint">
+              Vezu sa katalogom pravi i potvrđuje Vlasnik ili ko ima paket „Mapiranja kupaca i artikala“; sa
+              ovog naloga se veza ne menja. Za artikal koji kupac traži, javite mu šifru iz BizniSofta.
+            </p>
+          ) : null}
+
           <NewCodes rows={newCodes} days={NEW_CODE_DAYS} />
           {canManage ? <NameProposals proposals={proposals} includeInactive={includeInactive} /> : null}
-          <MappingReview rows={reviewRows} canManage={canManage} />
+          <MappingReview rows={reviewRows} canManage={canManage} canProposeByCode={canProposeByCode} />
         </>
       )}
     </>

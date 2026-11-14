@@ -8,6 +8,9 @@ import {
 } from "@/features/portal/SalesAnalytics";
 import { NoInvoicesYet, SalesFilters } from "@/features/portal/SalesFilters";
 import { requireCapability } from "@/lib/authz/session";
+import { normalizeSalesFilter } from "@/lib/sales/filterInput.mjs";
+import { listSalesReps } from "@/lib/partners/assignment-service";
+import { seesAllCustomers } from "@/lib/authz/permissions.mjs";
 import {
   hasImportedInvoices,
   loadProductGroups,
@@ -54,13 +57,9 @@ export default async function ReturnsPage({
     );
   }
 
-  const filter = {
-    from: period.from,
-    to: period.to,
-    customerId: params.kupac || null,
-    salespersonId: params.komercijalista || null,
-    productGroup: params.grupa || null,
-  };
+  // Neispravan datum ili ID iz adrese ne sme da obori stranu (isto kao Prodaja); period je zapamćen između ekrana.
+  const applied = { ...params, from: period.from ?? "", to: period.to ?? "" };
+  const filter = normalizeSalesFilter(applied);
 
   // Zbirovi nad CELIM filtriranim skupom u bazi. Negativne stavke se čitaju
   // posebnim upitom (samo iznos < 0), pa ih granica liste ne može sakriti.
@@ -70,10 +69,12 @@ export default async function ReturnsPage({
       loadSalesBreakdown(user, filter, "kupci"),
       loadSalesLines(user, { ...filter, onlyNegative: true }, SALES_LINES_DISPLAY),
       loadScopedCustomers(user),
-      loadSalespeople(),
+      seesAllCustomers(user) ? loadSalespeople() : Promise.resolve([]),
       loadProductGroups(),
       loadMinusDocuments(user, { from: filter.from, to: filter.to, customerId: filter.customerId }),
     ]);
+  // Filter po dodeli ima smisla samo ko vidi sve kupce.
+  const reps = seesAllCustomers(user) ? await listSalesReps() : [];
   const storna = minusDocs.filter((d) => d.kind === "storno");
   const odobrenja = minusDocs.filter((d) => d.kind === "knjizno_odobrenje");
   const REVERSAL: Record<string, string> = {
@@ -92,8 +93,8 @@ export default async function ReturnsPage({
 
       <SalesFilters
         action="/portal/povrati"
-        options={{ customers, salespeople, productGroups }}
-        applied={{ ...params, from: period.from ?? "", to: period.to ?? "" }}
+        options={{ customers, salespeople, reps, productGroups }}
+        applied={applied}
         exportView="stavke"
         salespersonOnInvoices={
           summary.lineCount === 0 || summary.linesWithSalesperson > 0

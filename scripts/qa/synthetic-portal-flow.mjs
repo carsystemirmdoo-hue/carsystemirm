@@ -143,13 +143,14 @@ try {
     // Korpa
     await korpa(k, "Avansno plaćanje");
     const zbirAv = await txt(k.locator("main"));
-    check("kupac: zbir avans = 3.560,00 (4×650 + 2×480)", zbirAv.includes("3.560,00"), (zbirAv.match(/Osnovica[^A-Z]{0,40}/) ?? [""])[0]);
+    // Korpa (54c88dfd) više nema zbir bez PDV-a; iznos sa PDV-om stoji na kartici opcije.
+    check("kupac: zbir avans = 4.272,00 sa PDV-om (3.560,00 = 4×650 + 2×480)", zbirAv.includes("4.272,00"), (zbirAv.match(/Avansno plaćanje[^A-Z]{0,40}/) ?? [""])[0]);
     await k.screenshot({ path: `${OUT}/k3-korpa-avans.png`, fullPage: true });
     await korpa(k, "Odloženo");
     const zbirOd = await txt(k.locator("main"));
-    check("kupac: zbir odloženo = 3.760,00 (4×700 + 2×480)", zbirOd.includes("3.760,00"), (zbirOd.match(/Osnovica[^A-Z]{0,40}/) ?? [""])[0]);
+    check("kupac: zbir odloženo = 4.512,00 sa PDV-om (3.760,00 = 4×700 + 2×480)", zbirOd.includes("4.512,00"), (zbirOd.match(/Odloženo plaćanje[^A-Z]{0,60}/) ?? [""])[0]);
     await k.reload({ waitUntil: WAIT });
-    check("kupac: osvežavanje korpe čuva stavke i opciju", (await k.locator("table.pn-table tbody tr").count()) === 3 && (await txt(k.locator("main"))).includes("3.760,00"));
+    check("kupac: osvežavanje korpe čuva stavke i opciju", (await k.locator("table.pn-table tbody tr").count()) === 3 && (await txt(k.locator("main"))).includes("4.512,00"));
     // Promena rabata posle prikaza → nova potvrda
     await korpa(k, "Avansno plaćanje");
     await sqlc`UPDATE price_rules SET discount_percent = 36 WHERE customer_id = ${A} AND brand = 'SINTLAK' AND payment_condition = 'avans'`;

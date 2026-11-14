@@ -81,7 +81,7 @@ export function PriceListApplyForm({ importId, reportDate, defaultDate, unclear,
         <input type="checkbox" name="potvrda" value="da" required disabled={pending} />
         <span>Promene su pregledane. Iznosi su u dinarima (RSD), bez PDV-a. Primena upisuje {toApply} osnovnih cena (plus označene nejasne); rabati kupaca i fakture se ne menjaju.</span>
       </label>
-      <small className="pl-mfa">Upis traži prijavu sa drugim faktorom u poslednjih 10 minuta. Ako je prošlo više, odjavite se i prijavite ponovo.</small>
+      <small className="pl-mfa">Upis traži kod iz aplikacije unet u poslednjih 10 minuta. Ako je prošlo više, sistem će ga zatražiti i vratiti Vas na ovaj ekran.</small>
       <button type="submit" className="portal-button" data-variant="primary" disabled={pending}>{pending ? "Primenjujem…" : "Primenite cenovnik"}</button>
       <Status state={state} />
     </form>
@@ -97,7 +97,7 @@ export function PriceListDiscardForm({ importId }: { importId: string }) {
         <span>Razlog odbacivanja</span>
         <input type="text" name="razlog" required minLength={5} maxLength={500} disabled={pending} />
       </label>
-      <small className="pl-mfa">Upis traži prijavu sa drugim faktorom u poslednjih 10 minuta. Ako je prošlo više, odjavite se i prijavite ponovo.</small>
+      <small className="pl-mfa">Upis traži kod iz aplikacije unet u poslednjih 10 minuta. Ako je prošlo više, sistem će ga zatražiti i vratiti Vas na ovaj ekran.</small>
       <button type="submit" className="portal-button" data-variant="secondary" disabled={pending}>Odbacite cenovnik</button>
       <Status state={state} />
     </form>
@@ -118,7 +118,7 @@ export function BasePriceForm({ defaultCode = "", defaultDate }: { defaultCode?:
         <input type="checkbox" name="potvrda" value="da" required disabled={pending} />
         <span>Menjam osnovnu cenu. Rabati kupaca i izdate fakture ostaju kakvi jesu.</span>
       </label>
-      <small className="pl-mfa">Upis traži prijavu sa drugim faktorom u poslednjih 10 minuta. Ako je prošlo više, odjavite se i prijavite ponovo.</small>
+      <small className="pl-mfa">Upis traži kod iz aplikacije unet u poslednjih 10 minuta. Ako je prošlo više, sistem će ga zatražiti i vratiti Vas na ovaj ekran.</small>
       <button type="submit" className="portal-button" data-variant="primary" disabled={pending}>{pending ? "Upisujem…" : "Upišite osnovnu cenu"}</button>
       <Status state={state} />
     </form>

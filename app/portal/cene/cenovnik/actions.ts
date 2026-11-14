@@ -4,7 +4,7 @@ import { dmy } from "@/lib/ordering/panelFormat.mjs";
 import { revalidatePath } from "next/cache";
 import { forbidden, redirect } from "next/navigation";
 import { can } from "@/lib/authz/permissions.mjs";
-import { requireCapability, requireRecentMfa } from "@/lib/authz/session";
+import { requireCapability, requireRecentMfaOrReauth } from "@/lib/authz/session";
 import { MAX_UPLOAD_FILE_BYTES, formatMegabytes } from "@/lib/import/upload-limits.mjs";
 import { applyPriceList, discardPriceList, PriceListError, setBasePrice, uploadPriceList } from "@/lib/pricing/price-list-service";
 
@@ -47,9 +47,20 @@ export async function uploadPriceListAction(_prev: PriceListActionState, formDat
   redirect(`${PATH}/${importId}${duplicate ? "?isti=1" : ""}`);
 }
 
+/*
+ * Istekla potvrda drugog faktora (10 min) vodi na ponovnu potvrdu sa povratkom
+ * na isti cenovnik — ranije je `requireRecentMfa` završavao ekranom „Nemate
+ * dozvolu", isto kao lager pre 15. 10. Prag ostaje 10 minuta: primena menja
+ * osnovne cene.
+ */
+function returnPath(importId: string): string {
+  return /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(importId) ? `${PATH}/${importId}` : PATH;
+}
+
 export async function applyPriceListAction(_prev: PriceListActionState, formData: FormData): Promise<PriceListActionState> {
-  const actor = sameOwner(await requireCapability("pricelist:manage", PATH), await requireRecentMfa());
   const importId = String(formData.get("importId") ?? "");
+  const back = returnPath(importId);
+  const actor = sameOwner(await requireCapability("pricelist:manage", back), await requireRecentMfaOrReauth(back));
   if (formData.get("potvrda") !== "da") return { error: "Potvrdite da ste pregledali promene i da primena menja osnovne cene.", ok: null };
   try {
     const r = await applyPriceList(actor, {
@@ -69,8 +80,9 @@ export async function applyPriceListAction(_prev: PriceListActionState, formData
 }
 
 export async function discardPriceListAction(_prev: PriceListActionState, formData: FormData): Promise<PriceListActionState> {
-  const actor = sameOwner(await requireCapability("pricelist:manage", PATH), await requireRecentMfa());
   const importId = String(formData.get("importId") ?? "");
+  const back = returnPath(importId);
+  const actor = sameOwner(await requireCapability("pricelist:manage", back), await requireRecentMfaOrReauth(back));
   try {
     await discardPriceList(actor, { importId, note: String(formData.get("razlog") ?? "") });
     revalidatePath(PATH);
@@ -84,7 +96,7 @@ export async function discardPriceListAction(_prev: PriceListActionState, formDa
 }
 
 export async function setBasePriceAction(_prev: PriceListActionState, formData: FormData): Promise<PriceListActionState> {
-  const actor = sameOwner(await requireCapability("pricelist:manage", PATH), await requireRecentMfa());
+  const actor = sameOwner(await requireCapability("pricelist:manage", PATH), await requireRecentMfaOrReauth(PATH));
   if (formData.get("potvrda") !== "da") return { error: "Potvrdite izmenu osnovne cene.", ok: null };
   try {
     const r = await setBasePrice(actor, {

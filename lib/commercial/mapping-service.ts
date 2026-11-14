@@ -311,6 +311,9 @@ async function loadLiveMapping(articleId: string) {
  * na listi, kao `unmapped`. Nemapiran artikal je poslovno stvaran i vidi ga i
  * kancelarija i gazda i komercijalista — ono što nema je kataloški identitet.
  */
+/** Najviše redova liste povezivanja; ekran kaže kada je lista odsečena. */
+export const ARTICLE_MAPPING_LIST_LIMIT = 500;
+
 export async function listArticleMappings(filter?: {
   status?: ProductMappingStatus;
   search?: string;
@@ -358,7 +361,7 @@ export async function listArticleMappings(filter?: {
     )
     .where(conditions.length > 0 ? and(...conditions) : undefined)
     .orderBy(asc(articles.code))
-    .limit(500);
+    .limit(ARTICLE_MAPPING_LIST_LIMIT);
 
   return rows.map((row) => ({
     ...row,

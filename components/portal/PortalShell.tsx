@@ -5,8 +5,10 @@ import { fallbackRecordLabel, useCrumbLabels } from "@/components/portal/Breadcr
 import { CartButton } from "@/components/cart/CartButton";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { NAV_GROUPS } from "@/lib/authz/permissions.mjs";
 import { Suspense, useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { AutoSortTables } from "./AutoSortTables";
+import { NotificationBell } from "./NotificationBell";
 import { PortalNavProgress } from "./PortalNavProgress";
 import { PortalIcon, type PortalIconName } from "./PortalIcon";
 import {
@@ -15,7 +17,6 @@ import {
 } from "./sidebarState.mjs";
 
 /** Delovi putanje bez sopstvene stranice: tekst, ne link (inače pregledač unapred traži 404). */
-const CRUMB_WITHOUT_PAGE = new Set(["/portal/bezbednost", "/portal/prodaja/faktura"]);
 
 export interface ShellNavItem {
   href: string;
@@ -50,6 +51,17 @@ interface PortalShellProps {
   /** Kratko stanje izvora za dno navigacije (demo, dokumenti do datuma, nepovezan). */
   dataSource?: { status: "ok" | "warn"; label: string };
 }
+
+/** Svi ekrani iz menija, za sve uloge — da bi se znalo koji segment putanje je zaključan ekran. */
+/**
+ * Segmenti putanje bez sopstvene strane: veza bi vodila na 404 (a Next je
+ * unapred učitava, pa svaka strana ispod pravi grešku u konzoli).
+ */
+const CRUMBS_WITHOUT_PAGE: ReadonlySet<string> = new Set(["/portal/bezbednost", "/portal/prodaja/faktura"]);
+
+const ALL_NAV_HREFS: ReadonlySet<string> = new Set(
+  (NAV_GROUPS as readonly { items: readonly { href: string }[] }[]).flatMap((group) => group.items.map((item) => item.href)),
+);
 
 const CRUMB_LABELS: Record<string, string> = {
   portal: "Poslovni sistem",
@@ -147,6 +159,13 @@ export function PortalShell({
     const segments = pathname.split("/").filter(Boolean);
     return segments.map((segment, index) => ({
       href: `/${segments.slice(0, index + 1).join("/")}`,
+      // Ekran iz menija koji OVOM korisniku nije dodeljen (npr. „Zalihe“ za
+      // kancelariju na „Uvozu lagera“) ostaje u putanji kao tekst — veza bi
+      // vodila na 403. Ostali segmenti (zapisi, podstrane) ostaju veze.
+      linkable:
+        !CRUMBS_WITHOUT_PAGE.has(`/${segments.slice(0, index + 1).join("/")}`) &&
+        (navLabels.has(`/${segments.slice(0, index + 1).join("/")}`) ||
+          !ALL_NAV_HREFS.has(`/${segments.slice(0, index + 1).join("/")}`)),
       // Nepoznat segment je najčešće ID zapisa; prikazuje se onakav kakav jeste.
       label:
         navLabels.get(`/${segments.slice(0, index + 1).join("/")}`) ??
@@ -330,7 +349,7 @@ export function PortalShell({
                   {index ? <PortalIcon name="chevron" /> : null}
                   {index === crumbs.length - 1 ? (
                     <strong>{crumb.label}</strong>
-                  ) : CRUMB_WITHOUT_PAGE.has(crumb.href) ? (
+                  ) : !crumb.linkable ? (
                     <span>{crumb.label}</span>
                   ) : (
                     <Link href={crumb.href}>{crumb.label}</Link>
@@ -345,15 +364,7 @@ export function PortalShell({
                 Do tada se polje ne prikazuje (sistem A, 2026-10-14): nedovršen
                 element u traci je izgledao kao kvar. Stil `.portal-search-trigger`
                 ostaje u portal.css za trenutak kada pretraga proradi. */}
-            {showNotifications ? (
-              <Link
-                href="/portal/obavestenja"
-                className="portal-icon-button"
-                aria-label="Obaveštenja"
-              >
-                <PortalIcon name="bell" />
-              </Link>
-            ) : null}
+            {showNotifications ? <NotificationBell /> : null}
 
             {showCart ? <CartButton /> : null}
             <div className="portal-profile">

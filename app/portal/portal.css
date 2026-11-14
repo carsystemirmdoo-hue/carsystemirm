@@ -590,6 +590,23 @@ body:has(.portal-login-root) {
   background: var(--p-surface-subtle);
   border-color: var(--p-line);
 }
+/* Broj nepročitanih na zvoncu (NotificationBell). */
+.portal-bell-count {
+  position: absolute;
+  top: 2px;
+  right: 1px;
+  min-width: 16px;
+  height: 16px;
+  padding: 0 4px;
+  border-radius: 8px;
+  background: var(--p-red);
+  color: #fff;
+  font-size: 10px;
+  font-weight: 700;
+  line-height: 16px;
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+}
 .portal-root :is(a, button, input, select, textarea, summary):focus-visible,
 .portal-login-root :is(a, button, input, select, textarea, summary):focus-visible {
   outline: 3px solid var(--pn-focus, #2c5da8);
@@ -9990,6 +10007,15 @@ html:has(.portal-customer-area) { scroll-padding-top: 104px; }
 .portal-panel[data-accent="warning"] {
   border-color: var(--ds-c-warn);
   background: var(--ds-c-warn-bg);
+}
+/* „Čeka obradu“: istaknuta je samo kartica na kojoj nešto čeka korak. */
+.portal-work-queue .portal-metric[data-tone="warning"] {
+  border-color: var(--ds-c-warn);
+  background: var(--ds-c-warn-bg);
+}
+.portal-work-queue .portal-metric[data-tone="danger"] {
+  border-color: var(--ds-c-err);
+  background: var(--ds-c-err-bg);
 }
 .portal-table th,
 .portal-table thead th {

@@ -8,6 +8,8 @@ import {
 } from "@/features/portal/SalesAnalytics";
 import { NoInvoicesYet, SalesFilters } from "@/features/portal/SalesFilters";
 import { requireCapability } from "@/lib/authz/session";
+import { listSalesReps } from "@/lib/partners/assignment-service";
+import { seesAllCustomers } from "@/lib/authz/permissions.mjs";
 import {
   hasImportedInvoices,
   loadProductGroups,
@@ -30,7 +32,19 @@ const VIEWS: { key: GroupView; label: string }[] = [
   { key: "komercijalisti", label: "Po komercijalisti" },
   { key: "artikli", label: "Po artiklu" },
   { key: "grupe", label: "Po grupi proizvoda" },
+  { key: "meseci", label: "Po mesecu" },
+  { key: "godine", label: "Po godini" },
+  { key: "dani", label: "Po danu" },
 ];
+
+/** Najduži period za prikaz po danu; duži bi dao tabelu od ~1.500 redova. */
+const DANI_MAX = 92;
+
+function periodDays(from?: string | null, to?: string | null): number | null {
+  if (!from || !to) return null;
+  const span = (Date.parse(to) - Date.parse(from)) / 86400000;
+  return Number.isFinite(span) && span >= 0 ? span + 1 : null;
+}
 
 /** Prethodni period iste dužine — osnova za poređenje. */
 function previousRange(from?: string, to?: string) {
@@ -77,21 +91,25 @@ export default async function AnalyticsPage({
     "kupci") as GroupView;
 
   const previousWindow = previousRange(filter.from ?? undefined, filter.to ?? undefined);
+  const span = periodDays(filter.from, filter.to);
+  const daysBlocked = view === "dani" && (span === null || span > DANI_MAX);
 
   // Zbirovi nad CELIM filtriranim skupom u bazi; lista stavki je samo prikaz.
   const [summary, rows, byCustomer, lines, previous, customers, salespeople, productGroups] =
     await Promise.all([
       loadSalesSummary(user, filter),
-      loadSalesBreakdown(user, filter, view),
+      daysBlocked ? Promise.resolve([]) : loadSalesBreakdown(user, filter, view),
       view === "kupci" ? null : loadSalesBreakdown(user, filter, "kupci"),
       loadSalesLines(user, filter, SALES_LINES_DISPLAY),
       previousWindow
         ? loadSalesSummary(user, { ...filter, ...previousWindow })
         : null,
       loadScopedCustomers(user),
-      loadSalespeople(),
+      seesAllCustomers(user) ? loadSalespeople() : Promise.resolve([]),
       loadProductGroups(),
     ]);
+  // Filter po dodeli ima smisla samo ko vidi sve kupce.
+  const reps = seesAllCustomers(user) ? await listSalesReps() : [];
 
   return (
     <>
@@ -103,7 +121,7 @@ export default async function AnalyticsPage({
 
       <SalesFilters
         action="/portal/analitika"
-        options={{ customers, salespeople, productGroups }}
+        options={{ customers, salespeople, reps, productGroups }}
         applied={applied}
         views={VIEWS}
         exportView={view}
@@ -134,15 +152,27 @@ export default async function AnalyticsPage({
         <div className="portal-section-header">
           <div>
             <h2>{VIEWS.find((item) => item.key === view)?.label}</h2>
-            <p>Kliknite na kupca da otvorite njegove fakture.</p>
+            <p>
+              {view === "kupci"
+                ? "Kliknite na kupca da otvorite njegove fakture."
+                : view === "komercijalisti"
+                  ? "Po komercijalisti sa fakture, a kada ga faktura nema — po današnjoj dodeli kupca. Kupac sa dva komercijaliste je u zajedničkoj grupi."
+                  : daysBlocked
+                    ? `Prikaz po danu traži period od najviše ${DANI_MAX} dana — zadajte Od i Do iznad (npr. „Ovaj mesec"). Izvoz radi i za duži period.`
+                    : view === "dani" || view === "meseci" || view === "godine"
+                      ? "Po datumu izdavanja fakture, od najnovijeg. Dani i meseci bez prometa se ne prikazuju."
+                      : "Zbirovi nad celim izabranim periodom."}
+            </p>
           </div>
         </div>
-        <SalesBreakdown
-          rows={rows}
-          totals={summary}
-          view={view}
-          drillDownBase="/portal/prodaja"
-        />
+        {daysBlocked ? null : (
+          <SalesBreakdown
+            rows={rows}
+            totals={summary}
+            view={view}
+            drillDownBase="/portal/prodaja"
+          />
+        )}
       </section>
 
       <section className="portal-panel">

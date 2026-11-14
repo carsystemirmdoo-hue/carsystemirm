@@ -1,5 +1,4 @@
 import "server-only";
-import { resolveLedgerScope } from "@/lib/ledger/effective-sales";
 import { and, count, desc, eq, inArray, sql } from "drizzle-orm";
 import { getDb, type Database } from "@/db/client";
 import {
@@ -9,7 +8,7 @@ import {
   type NotificationSeverity,
   type NotificationStatus,
 } from "@/db/schema";
-import { resolveCapabilities } from "@/lib/authz/permissions.mjs";
+import { resolveCapabilities, seesAllCustomers } from "@/lib/authz/permissions.mjs";
 import type { PortalUser } from "@/lib/authz/user-repository";
 
 type Transaction = Parameters<Parameters<Database["transaction"]>[0]>[0];
@@ -26,6 +25,11 @@ export type NotificationInput = {
   context?: Record<string, unknown> | null;
   correlationId?: string | null;
   /**
+   * Kupac na koga se odnosi (0063). Zadat → vidi ga samo ko tog kupca ima u
+   * opsegu, pa sme da ga dobije i komercijalista (samo za svoje kupce).
+   */
+  customerId?: string | null;
+  /**
    * Ključ istovetnosti.
    *
    * Kada je zadat, ponovno slanje istog uslova dok je prethodno obaveštenje
@@ -34,8 +38,6 @@ export type NotificationInput = {
    * čita — to je nacin na koji obavestenja umiru u praksi.
    */
   dedupeKey?: string | null;
-  /** 0063: kupac na koga se odnosi; komercijalista ga vidi samo ako mu je kupac dodeljen. */
-  customerId?: string | null;
 };
 
 /**
@@ -154,22 +156,27 @@ export async function notify(
  */
 export const PRICE_DECISION_NOTIFICATION_CAPABILITIES = Object.freeze(["prices:propose", "prices:approve", "prices:audit"]);
 
-/**
- * Obaveštenje vezano za kupca (0063) vidi komercijalista samo ako je kupac u njegovom opsegu;
- * obaveštenja bez kupca i svi ostali korisnici — kao i do sada.
- */
-async function customerScopeCondition(user: PortalUser) {
-  if (user.role !== "komercijalista") return sql`true`;
-  const scope = await resolveLedgerScope(user);
-  if (scope.customerIds === null) return sql`true`;
-  if (!scope.customerIds.length) return sql`${notifications.customerId} IS NULL`;
-  return sql`(${notifications.customerId} IS NULL OR ${notifications.customerId} IN (${sql.join(scope.customerIds.map((id) => sql`${id}::uuid`), sql`, `)}))`;
-}
-
 export function notificationCapabilitiesFor(user: Pick<PortalUser, "role" | "permissions">): string[] {
   const all = [...resolveCapabilities(user.role, user.permissions)];
   if (user.role !== "komercijalista") return all;
   return all.filter((c) => !PRICE_DECISION_NOTIFICATION_CAPABILITIES.includes(c));
+}
+
+/**
+ * Opseg kupca za obaveštenja (0063).
+ *
+ * Red bez kupca vidi svako sa sposobnošću; red sa kupcem samo ko vidi sve
+ * kupce ili ima dodelu tog kupca. Kolona se piše PUNIM imenom
+ * (`notifications.customer_id`): drizzle bi `${notifications.customerId}` u
+ * upitu nad jednom tabelom napisao kao `"customer_id"`, a to bi se u podupitu
+ * vezalo za `ca.customer_id` i uslov bi uvek prolazio.
+ */
+export function customerScopeCondition(user: Pick<PortalUser, "id" | "role" | "permissions">) {
+  if (seesAllCustomers(user)) return sql`true`;
+  return sql`(notifications.customer_id IS NULL OR EXISTS (
+    SELECT 1 FROM customer_assignments ca
+     WHERE ca.customer_id = notifications.customer_id AND ca.user_id = ${user.id}
+  ))`;
 }
 
 /**
@@ -187,7 +194,7 @@ export async function listNotificationsFor(
   if (capabilities.length === 0) return [];
 
   const db = getDb();
-  const conditions = [inArray(notifications.requiredCapability, capabilities), await customerScopeCondition(user)];
+  const conditions = [inArray(notifications.requiredCapability, capabilities), customerScopeCondition(user)];
   if (filter?.status) conditions.push(eq(notifications.status, filter.status));
 
   return db
@@ -210,8 +217,8 @@ export async function countUnreadFor(user: PortalUser): Promise<number> {
     .where(
       and(
         inArray(notifications.requiredCapability, capabilities),
+        customerScopeCondition(user),
         eq(notifications.status, "unread"),
-        await customerScopeCondition(user),
       ),
     );
   return rows[0]?.total ?? 0;
@@ -240,6 +247,7 @@ export async function markNotificationRead(
         eq(notifications.id, id),
         eq(notifications.status, "unread"),
         inArray(notifications.requiredCapability, capabilities),
+        customerScopeCondition(user),
       ),
     )
     .returning({ id: notifications.id });
@@ -275,6 +283,7 @@ export async function resolveNotification(
       and(
         eq(notifications.id, id),
         inArray(notifications.requiredCapability, capabilities),
+        customerScopeCondition(user),
       ),
     )
     .returning({ id: notifications.id });

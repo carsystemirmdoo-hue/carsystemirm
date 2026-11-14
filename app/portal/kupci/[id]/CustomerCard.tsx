@@ -14,6 +14,7 @@ import {
   suggestionTone,
 } from "@/lib/recommendations/suggestionRanking.mjs";
 import { dmyTime } from "@/lib/ordering/panelFormat.mjs";
+import { srPlural } from "@/lib/sr-plural";
 
 type Tone = "success" | "warning" | "danger" | "neutral";
 
@@ -237,7 +238,7 @@ function SuggestionCard({
         <div>
           <dt>Osnova</dt>
           <dd>
-            {a.eventCount} kupovina od {srDate(a.firstPurchaseOn)}
+            {a.eventCount} {srPlural(a.eventCount, "kupovina", "kupovine", "kupovina")} od {srDate(a.firstPurchaseOn)}
             {a.medianIntervalDays !== null ? (
               <small>uobičajen razmak {roughInterval(a.medianIntervalDays)}</small>
             ) : null}
@@ -313,12 +314,12 @@ export function CustomerSuggestions({
         </div>
         <div className="cs-sugg-order">
           <span className="cs-sugg-exp">
-            {legacy ? "Dosadašnji redosled" : "Redosled R1 · eksperiment"}
+            {legacy ? "Dosadašnji redosled" : "Novi redosled · proba"}
           </span>
           <a
             href={`/portal/kupci/${encodeURIComponent(profile.customerId)}${legacy ? "" : "?redosled=dosadasnji"}#predlozi`}
           >
-            {legacy ? "Vratite R1" : "Uporedite sa dosadašnjim"}
+            {legacy ? "Vratite novi redosled" : "Uporedite sa dosadašnjim"}
           </a>
         </div>
       </div>
@@ -466,7 +467,7 @@ export function FreshnessLine({ profile }: { profile: CustomerProfile }) {
   return (
     <div className="cs-freshness" data-tone={tone}>
       <span>
-        Podaci do <strong>{srDate(profile.today)}</strong> · poslednji uvoz {fmtTime(profile.lastIngestedAt)}
+        Stanje na dan <strong>{srDate(profile.today)}</strong> · poslednji uvoz {fmtTime(profile.lastIngestedAt)}
       </span>
       <span>
         Obračun preporuka:{" "}

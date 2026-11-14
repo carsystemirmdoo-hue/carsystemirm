@@ -37,9 +37,12 @@ type Target = Awaited<ReturnType<typeof describeCatalogTargetAction>>;
 export function MappingReview({
   rows,
   canManage,
+  canProposeByCode = true,
 }: {
   rows: MappingRow[];
   canManage: boolean;
+  /** `false` dok nijedan kataloški proizvod nema internu šifru — predlog po šifri tada ne može da uspe. */
+  canProposeByCode?: boolean;
 }) {
   const [proposeState, proposeAction, proposing] = useActionState(
     proposeMappingAction,
@@ -147,12 +150,14 @@ export function MappingReview({
                 {canManage ? (
                   <td>
                     <div className="portal-cell-actions">
-                      <form action={proposeAction}>
-                        <input type="hidden" name="articleId" value={row.articleId} />
-                        <PortalButton type="submit" variant="ghost" disabled={proposing}>
-                          Predložite po šifri
-                        </PortalButton>
-                      </form>
+                      {canProposeByCode ? (
+                        <form action={proposeAction}>
+                          <input type="hidden" name="articleId" value={row.articleId} />
+                          <PortalButton type="submit" variant="ghost" disabled={proposing}>
+                            Predložite po šifri
+                          </PortalButton>
+                        </form>
+                      ) : null}
                       <PortalButton
                         variant="ghost"
                         onClick={() =>

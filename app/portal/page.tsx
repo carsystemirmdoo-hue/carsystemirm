@@ -17,6 +17,7 @@ import { requireUser } from "@/lib/authz/session";
 import { BackupStatusPanel } from "@/features/portal/BackupStatusPanel";
 import { loadBackupStatus } from "@/lib/backup/status-service";
 import { dmy, dmyTime } from "@/lib/ordering/panelFormat.mjs";
+import { loadWorkQueue } from "@/lib/portal/work-queue";
 import { dueFollowUps } from "@/lib/sales-tools/customer-desk-service";
 import { autoRefreshReceivables, debtsByCustomer, latestSnapshot } from "@/lib/sales-tools/receivables-service";
 
@@ -46,6 +47,7 @@ export default async function PortalHomePage() {
   const demo = state.dataset.kind === "demo";
   // Upozorenje o kopijama vide oni koji prate sinhronizaciju (vlasnik, kancelarija).
   const backups = can(user, "sync:monitor") ? await loadBackupStatus() : undefined;
+  const work = await loadWorkQueue(user);
   const followUps = showSignals ? await dueFollowUps(user) : [];
   const seesDebt = can(user, "view:dugovanja");
   if (seesDebt) await autoRefreshReceivables(user.id);
@@ -128,6 +130,24 @@ export default async function PortalHomePage() {
         }
       />
 
+      {work.length > 0 ? (
+        <section className="portal-panel" aria-labelledby="ceka-obradu">
+          <div className="portal-section-header">
+            <div>
+              <h2 id="ceka-obradu">Čeka obradu</h2>
+              <p>Posao koji traži Vaš korak. Klik otvara listu sa istim brojem.</p>
+            </div>
+          </div>
+          <div className="portal-metrics portal-work-queue">
+            {work.map((item) => (
+              <Link key={item.key} className="portal-metric-link" href={item.href}>
+                <Metric label={item.label} value={item.value} context={item.context} tone={item.tone} />
+              </Link>
+            ))}
+          </div>
+        </section>
+      ) : null}
+
       {backups !== undefined ? <BackupStatusPanel items={backups} compact /> : null}
 
       {showSignals ? (
@@ -189,7 +209,7 @@ export default async function PortalHomePage() {
               <h2>Preporuke</h2>
               <p>
                 {state.recommendations.asOfDate
-                  ? `Obračun preporuka na dan ${formatDate(state.recommendations.asOfDate)} Svaki signal se meri prema ritmu tog kupca i artikla.`
+                  ? `Obračun preporuka na dan ${formatDate(state.recommendations.asOfDate)}. Svaki signal se meri prema ritmu tog kupca i artikla.`
                   : "Preporuke još nisu obračunate."}
               </p>
             </div>

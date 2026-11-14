@@ -12,8 +12,11 @@ import {
   loadScopedCustomers,
 } from "@/lib/sales/queries";
 import { matchesStatusFilter, parseCustomerStatusFilter } from "@/lib/customers/customerStatus.mjs";
-import { filterCustomerList, parseCustomerListFilter } from "@/lib/customers/customerListFilter.mjs";
+import { filterCustomerList, parseCustomerListFilter, sortCustomersByName } from "@/lib/customers/customerListFilter.mjs";
 import { listAssigneesByCustomer, listSalesReps } from "@/lib/partners/assignment-service";
+import { loadDataState } from "@/lib/data-state/data-state";
+import { resolveLedgerScope } from "@/lib/ledger/effective-sales";
+import { dmy } from "@/lib/ordering/panelFormat.mjs";
 import { DateRangeField } from "@/components/portal/DateRangeField";
 import { readPortalPeriod } from "@/lib/portal/period";
 import { periodLabel } from "@/lib/portal/periodMemory.mjs";
@@ -48,11 +51,11 @@ export default async function CustomersPage({
   ]);
   // Dugovanje danas iz tabele kancelarije (2026-11-11); kupac kog nema u tabeli nema otvorenih faktura.
   const debtOf = new Map(debtRows.map((d) => [d.customerId, d]));
-  const customers = filterCustomerList(
+  const customers = sortCustomersByName(filterCustomerList(
     allScoped.filter((c) => matchesStatusFilter(c.active, statusFilter)),
     listFilter,
     assignees,
-  );
+  ));
   const filtered = Boolean(listFilter.q || listFilter.rep);
   const neaktivnih = allScoped.filter((c) => !c.active).length;
 
@@ -66,9 +69,12 @@ export default async function CustomersPage({
   }
 
   // Promet po kupcu za izabrani period (bez perioda: cela istorija), u bazi — bez granice broja stavki.
-  const byCustomer = new Map(
-    (await loadSalesBreakdown(user, { from: period.from, to: period.to }, "kupci")).map((row) => [row.key, row]),
-  );
+  const [breakdown, state] = await Promise.all([
+    loadSalesBreakdown(user, { from: period.from, to: period.to }, "kupci"),
+    // Za „Sve vreme“ prikazuje se stvaran raspon faktura, da se zbir od 2021. ne čita kao godišnji promet.
+    resolveLedgerScope(user).then(loadDataState),
+  ]);
+  const byCustomer = new Map(breakdown.map((row) => [row.key, row]));
 
   return (
     <>
@@ -108,7 +114,11 @@ export default async function CustomersPage({
               <button type="submit" className="portal-button" data-variant="primary">Prikažite</button>
             </form>
             <p>
-              {filtered ? `Prikazano ${customers.length} od ${allScoped.length}. ` : ""}Iznosi su iz uvezenih faktura, period: {periodLabel(period).replace(/\.$/, "")}.{" "}
+              {filtered ? `Prikazano ${customers.length} od ${allScoped.length}. ` : ""}Iznosi su iz uvezenih faktura, period:{" "}
+              {!period.from && !period.to && state.firstIssuedOn
+                ? `od ${dmy(state.firstIssuedOn)} do ${dmy(state.lastIssuedOn)} (sve vreme)`
+                : periodLabel(period).replace(/\.$/, "")}
+              .{" "}
               {debtSnap ? `Dugovanje je današnje stanje iz tabele kancelarije (provereno ${debtSnap.checkedAt.slice(8, 10)}.${debtSnap.checkedAt.slice(5, 7)}.).` : ""}
             </p>
           </div>

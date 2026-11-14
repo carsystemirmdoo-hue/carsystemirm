@@ -114,6 +114,8 @@ export default async function DataReadinessPage({
     mapiranjeArtikala: artikliPokrivenost,
     korektivnihDokumenata: korekcije.dokumenata,
     korektivnihBezVeze: korekcije.bezDokazaneVeze,
+    stornoSaVezom: korekcije.stornoSaVezom,
+    stornoBezVeze: korekcije.stornoBezVeze,
     opsegDostupan,
   });
 
@@ -369,8 +371,9 @@ export default async function DataReadinessPage({
         <SectionHeader
           title="Korektivni dokumenti"
           description={
-            "Povrat, storno, knjižno odobrenje i korekcije se vide u prometu, ali NE umanjuju " +
-            "neto dok se veza sa originalom ne dokaže."
+            "Storno se primenjuje tek kada se nađe original i sadržaj se u potpunosti slaže — " +
+            "tada original izlazi iz prometa. Povrat, knjižno odobrenje i korekcije se vide u " +
+            "prometu, ali NE umanjuju neto dok se veza sa originalom ne dokaže."
           }
         />
         <div className="portal-table-wrap">
@@ -383,7 +386,21 @@ export default async function DataReadinessPage({
             </thead>
             <tbody>
               <tr>
-                <th scope="row">Poznatih korektivnih dokumenata</th>
+                <th scope="row">
+                  Storno sa dokazanom vezom sa originalom
+                  <small>original je izbačen iz prometa</small>
+                </th>
+                <td className="portal-table-number">{quantity(korekcije.stornoSaVezom)}</td>
+              </tr>
+              <tr>
+                <th scope="row">Storno koji čeka original ili pregled</th>
+                <td className="portal-table-number">{quantity(korekcije.stornoBezVeze)}</td>
+              </tr>
+              <tr>
+                <th scope="row">
+                  Ostalih korektivnih dokumenata
+                  <small>povrat, knjižno odobrenje, korekcije</small>
+                </th>
                 <td className="portal-table-number">{korekcije.dokumenata}</td>
               </tr>
               <tr>

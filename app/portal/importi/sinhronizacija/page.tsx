@@ -1,4 +1,5 @@
 import { desc } from "drizzle-orm";
+import Link from "next/link";
 import { Badge, Metric, PageHeader, SectionHeader } from "@/components/portal/PortalPrimitives";
 import { getDb } from "@/db/client";
 import { importRuns } from "@/db/schema";
@@ -11,7 +12,8 @@ import { BackupStatusPanel } from "@/features/portal/BackupStatusPanel";
 import { DeviceAdmin } from "@/features/portal/DeviceAdmin";
 import { loadBackupStatus } from "@/lib/backup/status-service";
 import { TriggerSync } from "@/features/portal/TriggerSync";
-import { dmyTime, quantity } from "@/lib/ordering/panelFormat.mjs";
+import { dmy, dmyTime, quantity } from "@/lib/ordering/panelFormat.mjs";
+import { DELIVERY_DAYS_LIMIT, dokumentiSaUredjajaPoDanu } from "@/lib/sync/device/delivery-summary";
 
 export const dynamic = "force-dynamic";
 
@@ -85,6 +87,18 @@ const STATUS_UVOZA: Record<string, string> = {
   preskoceno_duplikat: "preskočeno (već uvezeno)",
 };
 
+/**
+ * Ručni uvoz traje sekunde. Zapis koji je posle sat vremena i dalje „u toku“
+ * nije zatvoren (prekinut zahtev ili zapis od pre revizije 2026-10-11) — ne
+ * prikazuje se kao posao koji još radi.
+ */
+const PREKINUT_POSLE_MS = 60 * 60 * 1000;
+function statusUvoza(status: string, startedAt: Date | string | null): string {
+  if (status === "u_toku" && startedAt && Date.now() - new Date(startedAt).getTime() > PREKINUT_POSLE_MS) {
+    return "prekinut — nije zatvoren";
+  }
+  return STATUS_UVOZA[status] ?? status;
+}
 
 /** Razlozi koje šalje konektor (kodovi ostaju u bazi; ovde je samo prikaz). */
 const RAZLOG: Record<string, string> = {
@@ -129,6 +143,7 @@ export default async function SyncOperationsPage() {
     .limit(5);
 
   const aktivnih = uredjaji.filter((u) => u.status === "active").length;
+  const predaje = await dokumentiSaUredjajaPoDanu();
 
   return (
     <>
@@ -363,8 +378,56 @@ export default async function SyncOperationsPage() {
       {/* ---------------------------------------------------------------- */}
       <section className="portal-panel">
         <SectionHeader
-          title="Poslednji uvozi"
-          description="Merodavan zapis o knjiženju. Brojevi komande su izveštaj uređaja; ovo je ono što je stvarno ušlo."
+          title="Dokumenti sa uređaja po danu prijema"
+          description={
+            "Merodavan zapis o tome šta je stvarno stiglo i ušlo, iz izvornih dokumenata — ne izveštaj uređaja. " +
+            `Prikazano je poslednjih ${DELIVERY_DAYS_LIMIT} dana u kojima je nešto stiglo.`
+          }
+        />
+        <div className="portal-table-wrap">
+          <table className="portal-table">
+            <thead>
+              <tr>
+                <th scope="col">Dan prijema</th>
+                <th scope="col">Stiglo</th>
+                <th scope="col">Proknjiženo</th>
+                <th scope="col">Čeka povezivanje kupca</th>
+                <th scope="col">Na pregledu</th>
+                <th scope="col">Poslednje primljeno</th>
+              </tr>
+            </thead>
+            <tbody>
+              {predaje.map((d) => (
+                <tr key={d.dan}>
+                  <th scope="row">{dmy(d.dan)}</th>
+                  <td className="portal-table-number">{quantity(d.stiglo)}</td>
+                  <td className="portal-table-number">{quantity(d.proknjizeno)}</td>
+                  <td className="portal-table-number">{quantity(d.cekaKupca)}</td>
+                  <td className="portal-table-number">{quantity(d.naPregledu)}</td>
+                  <td>{bg(d.poslednjePrimljeno)}</td>
+                </tr>
+              ))}
+              {predaje.length === 0 ? (
+                <tr>
+                  <td colSpan={6}>Nijedan uređaj još nije predao dokument.</td>
+                </tr>
+              ) : null}
+            </tbody>
+          </table>
+        </div>
+        {can(user, "view:importi") ? (
+          <p className="portal-readiness-note">
+            Dokumenti koji čekaju kupca ili pregled su na strani{" "}
+            <Link href="/portal/importi/dokumenti">Izvorni dokumenti</Link>.
+          </p>
+        ) : null}
+      </section>
+
+      {/* ---------------------------------------------------------------- */}
+      <section className="portal-panel">
+        <SectionHeader
+          title="Ručni uvozi"
+          description="PDF fajlovi uvezeni kroz Importi. Uređaj ovde ne upisuje prolaze — njegovi dokumenti su u tabeli iznad."
         />
         <div className="portal-table-wrap">
           <table className="portal-table">
@@ -383,7 +446,7 @@ export default async function SyncOperationsPage() {
                   <th scope="row">
                     {dmyTime(r.startedAt)}
                   </th>
-                  <td>{STATUS_UVOZA[r.status] ?? r.status}</td>
+                  <td>{statusUvoza(r.status, r.startedAt)}</td>
                   <td className="portal-table-number">{r.rowsRead}</td>
                   <td className="portal-table-number">{r.invoicesCreated}</td>
                   <td className="portal-table-number">{r.invoicesUpdated}</td>
@@ -391,7 +454,7 @@ export default async function SyncOperationsPage() {
               ))}
               {prolazi.length === 0 ? (
                 <tr>
-                  <td colSpan={5}>Još nije zabeležen nijedan uvoz.</td>
+                  <td colSpan={5}>Još nije zabeležen nijedan ručni uvoz.</td>
                 </tr>
               ) : null}
             </tbody>

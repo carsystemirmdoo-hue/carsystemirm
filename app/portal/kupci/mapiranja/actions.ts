@@ -5,6 +5,7 @@ import { revalidatePath } from "next/cache";
 import { z } from "zod";
 import {
   ExternalIdentityError,
+  openCustomerForIdentifier,
   resolveExternalIdentifier,
 } from "@/lib/commercial/identity-service";
 import { requireCapability } from "@/lib/authz/session";
@@ -23,6 +24,14 @@ const schema = z.object({
   reason: z.string().trim().min(3).max(500),
 });
 
+const createSchema = z.object({
+  id: z.string().uuid(),
+  pib: z.string().trim().min(1).max(20),
+  name: z.string().trim().min(2).max(200),
+  city: z.string().trim().max(120),
+  reason: z.string().trim().min(3).max(500),
+});
+
 /**
  * Ručno razrešenje šifre partnera.
  *
@@ -34,6 +43,36 @@ export async function resolveIdentityAction(
   formData: FormData,
 ): Promise<IdentityActionState> {
   const actor = await requireCapability("mappings:manage", "/portal/kupci/mapiranja");
+
+  // „Otvorite novog kupca": kupac + veza u jednoj transakciji, pa isto knjiženje kao kod povezivanja.
+  if (formData.get("status") === "create") {
+    const created = createSchema.safeParse({
+      id: formData.get("id"),
+      pib: formData.get("pib") ?? "",
+      name: formData.get("name") ?? "",
+      city: formData.get("city") ?? "",
+      reason: formData.get("reason") ?? "",
+    });
+    if (!created.success) {
+      return { error: "Unesite PIB, naziv kupca i razlog (najmanje 3 znaka).", ok: null };
+    }
+    try {
+      await openCustomerForIdentifier(created.data, { id: actor.id, name: actor.name, role: actor.role });
+    } catch (error) {
+      if (error instanceof ExternalIdentityError) return { error: error.message, ok: null };
+      throw error;
+    }
+    const posted = await postWaiting(created.data.id, actor);
+    revalidatePath("/portal/kupci/mapiranja");
+    revalidatePath("/portal/importi/dokumenti");
+    revalidatePath("/portal/kupci");
+    return {
+      error: null,
+      ok:
+        `Otvoren je kupac „${created.data.name.trim()}" i šifra je povezana.` +
+        (posted > 0 ? ` Proknjiženo dokumenata: ${posted}.` : ""),
+    };
+  }
 
   const rawCustomer = formData.get("customerId");
   const parsed = schema.safeParse({
@@ -72,23 +111,7 @@ export async function resolveIdentityAction(
    * odlučuje ništa novo: čita sačuvane stavke i primenjuje odluku koja je
    * upravo doneta.
    */
-  let posted = 0;
-  if (parsed.data.status === "mapped") {
-    const identity = await identityKeyOf(parsed.data.id);
-    if (identity) {
-      const outcome = await postAwaitingMapping(identity, {
-        id: actor.id,
-        name: actor.name,
-        role: actor.role,
-      });
-      posted = outcome.posted.length;
-      // Dokumenti koji su čekali mapiranje sada su promet → automatski obračun.
-      if (posted > 0) {
-        await requestRecomputeAfterIngest("customer_mapping", posted).catch(() => undefined);
-        scheduleRecomputeProcessing();
-      }
-    }
-  }
+  const posted = parsed.data.status === "mapped" ? await postWaiting(parsed.data.id, actor) : 0;
 
   revalidatePath("/portal/kupci/mapiranja");
   revalidatePath("/portal/importi/dokumenti");
@@ -99,6 +122,20 @@ export async function resolveIdentityAction(
         ? `Šifra partnera je razrešena. Proknjiženo dokumenata: ${posted}.`
         : "Šifra partnera je razrešena.",
   };
+}
+
+/** Knjiži dokumente koji su čekali ovu šifru; vraća koliko ih je proknjiženo. */
+async function postWaiting(id: string, actor: { id: string; name: string; role: string }): Promise<number> {
+  const identity = await identityKeyOf(id);
+  if (!identity) return 0;
+  const outcome = await postAwaitingMapping(identity, { id: actor.id, name: actor.name, role: actor.role });
+  const posted = outcome.posted.length;
+  // Dokumenti koji su čekali mapiranje sada su promet → automatski obračun.
+  if (posted > 0) {
+    await requestRecomputeAfterIngest("customer_mapping", posted).catch(() => undefined);
+    scheduleRecomputeProcessing();
+  }
+  return posted;
 }
 
 /** Ključ (izdavalac, šifra) za razrešenu šifru; `null` ako reda nema. */

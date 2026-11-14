@@ -446,6 +446,11 @@ test("nijedna API ruta ne postoji van izričito dozvoljenog spiska", async (t) =
      * šifre iz adrese samo biraju među preporukama kupca; izvoz se beleži u audit.
      */
     "portal/kupci/[id]/ponuda/route.ts",
+    /*
+     * Broj nepročitanih na zvoncu (2026-11-04): samo GET, `view:obavestenja`,
+     * broji kroz isti opseg kao lista obaveštenja (0063); vraća samo broj.
+     */
+    "portal/obavestenja/broj/route.ts",
     "portal/podesavanja/navigacija/route.ts",
     // P2: prijem sa uređaja, iza feature gate-a koji je podrazumevano isključen.
     "sync/heartbeat/route.ts",

@@ -4255,3 +4255,104 @@
     display: none;
   }
 }
+
+/* ---------- Telefon (2026-11-14, pregled vlasnika) ----------
+   Samo uske širine; desktop ostaje kakav je zaključan.
+   1) traka brendova: link „Svih N brendova“ + širi prelaz na ivicama,
+   2) plutajuće dugme prodavnica: mala pilula desno umesto trake preko cele širine,
+   3) podrška: metrike u dve kolone, usluge sa vazduhom između crvene crte i linije. */
+.trustAllBrands {
+  display: none;
+}
+
+@media (max-width: 74.9375rem) {
+  .trustAllBrands {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--ds-c-text-2) !important;
+    font-family: var(--font-technical), monospace;
+    font-size: var(--ds-font-label);
+    font-weight: 500;
+    letter-spacing: var(--ds-tracking-label);
+    text-decoration: none;
+    text-transform: uppercase;
+  }
+
+  .trustAllBrands:hover,
+  .trustAllBrands:focus-visible {
+    color: var(--ds-c-text) !important;
+  }
+}
+
+@media (max-width: 860px) and (prefers-reduced-motion: no-preference) {
+  .marquee .marqueeViewport {
+    -webkit-mask-image: linear-gradient(90deg, transparent, #000 14%, #000 86%, transparent);
+    mask-image: linear-gradient(90deg, transparent, #000 14%, #000 86%, transparent);
+  }
+}
+
+@media (max-width: 860px) {
+  .home {
+    padding-bottom: 64px;
+  }
+
+  .mobileLocator.mobileLocatorVisible {
+    left: auto;
+    right: 12px;
+    bottom: max(12px, env(safe-area-inset-bottom));
+    min-height: 44px;
+    gap: 8px;
+    padding: 8px 16px 8px 12px;
+    border-radius: 999px;
+  }
+
+  .mobileLocator.mobileLocatorVisible small {
+    display: none;
+  }
+
+  .mobileLocator.mobileLocatorVisible strong {
+    font-size: 0.875rem;
+  }
+}
+
+@media (max-width: 620px) {
+  .supportMetricStrip {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0;
+    padding: 0;
+  }
+
+  .supportMetricStrip span,
+  .supportMetricStrip span:nth-child(2n) {
+    padding: 14px 12px;
+    border-right: 0;
+  }
+
+  .supportMetricStrip span:nth-child(odd) {
+    padding-left: 0;
+    border-right: 1px solid var(--support-line);
+  }
+
+  .supportMetricStrip span:nth-child(n + 3) {
+    border-bottom: 0;
+  }
+
+  .supportMetricStrip span:nth-child(-n + 2) {
+    border-bottom: 1px solid var(--support-line);
+  }
+
+  .supportServiceGrid {
+    margin-top: 24px;
+  }
+
+  .supportServiceGrid article,
+  .supportServiceGrid article:first-child {
+    gap: 8px;
+    padding: 22px 0;
+  }
+
+  .supportServiceGrid article:first-child {
+    padding-top: 0;
+  }
+}

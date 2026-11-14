@@ -440,6 +440,10 @@ export function CarsystemHomePage() {
       <section className={styles.trustStrip} aria-label="Programski brendovi">
         <div className={styles.trustInner}>
           <BrandMarquee brandKeys={trustBrandKeys} links={trustBrandLinks} />
+          {/* Samo telefon (2026-11-14): u uskoj traci vide se 2–3 znaka, pa jasno piše da ima još. */}
+          <Link className={styles.trustAllBrands} href="/brendovi" prefetch={false}>
+            Svih {trustBrandKeys.length} brendova u ponudi <span aria-hidden="true">→</span>
+          </Link>
         </div>
       </section>
 
@@ -798,7 +802,7 @@ export function CarsystemHomePage() {
         aria-labelledby="final-cta-title"
       >
         <Image
-          src="/images/home/hero-dark.png"
+          src="/images/home/hero-dark.webp"
           alt=""
           fill
           sizes="100vw"

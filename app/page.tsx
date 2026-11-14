@@ -8,7 +8,7 @@ export const metadata: Metadata = pageMetadata({
   description:
     "Profesionalni auto lakovi, boje, materijali i oprema za autolakirnice, uz tehničku podršku i partnersku mrežu u Srbiji.",
   path: "/",
-  image: "/images/home/hero-dark.png",
+  image: "/images/og/carsystem-i-rm.jpg",
   imageAlt: "Carsystem i R-M profesionalni refinish program",
 });
 

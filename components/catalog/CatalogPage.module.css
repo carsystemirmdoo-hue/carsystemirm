@@ -1743,3 +1743,21 @@
 .productBody {
   min-width: 0;
 }
+
+/* Telefon (2026-11-14): faze u jednom redu koji se prevlači — ranije je „Poliranje“ padalo u drugi red. */
+@media (max-width: 720px) {
+  .phaseTabs {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+  .phaseTabs::-webkit-scrollbar {
+    display: none;
+  }
+  .phaseTab {
+    flex: 0 0 auto;
+    white-space: nowrap;
+  }
+}

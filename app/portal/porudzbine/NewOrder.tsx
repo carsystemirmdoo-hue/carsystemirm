@@ -2,6 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState, useTransition } from "react";
+import { DateField } from "@/components/portal/DateField";
 import type { ProposedLine } from "@/lib/procurement/incoming-service";
 import { leadFor, leadLabel, stavki, SUPPLIERS } from "@/lib/procurement/incoming.mjs";
 import { createOrderAction, previewOrderAction, searchArticlesAction } from "./actions";
@@ -235,10 +236,9 @@ export function NewOrder({ today }: { today: string }) {
             ))}
           </select>
         </label>
-        <label className={styles.field}>
-          Poručeno
-          <input type="date" value={orderedOn} max={today} onChange={(e) => setOrderedOn(e.target.value)} />
-        </label>
+        <div className={styles.field} style={{ minWidth: 220 }}>
+          <DateField name="poruceno" label="Poručeno" value={orderedOn} onChange={(iso) => setOrderedOn(iso)} />
+        </div>
         <label className={`${styles.field} ${styles.small}`}>
           Stiže za (od)
           <input type="number" min={0} max={365} value={leadMin} onChange={(e) => setLeadMin(e.target.value)} />

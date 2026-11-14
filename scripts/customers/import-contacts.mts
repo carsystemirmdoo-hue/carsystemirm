@@ -55,6 +55,8 @@ for (const r of plan.kontakti) {
   if (existing.has(r.kupac_id)) { skipped.push({ sifra: r.sifra, naziv: r.naziv, razlog: "već ima kontakt na kartici (ne gazi se)" }); continue; }
   // Više telefona u jednom polju: prvi je glavni, drugi je „drugi telefon“.
   const phones = String(r.telefon ?? "").split(/[,;/]+/).map((s) => s.trim()).filter(Boolean);
+  // Excel ume da zapiše nevidljiv tabulator kao „_x0009_“ ispred adrese (viđeno 14. 11. 2026.).
+  r.email = r.email ? r.email.replace(/_x[0-9A-Fa-f]{4}_/g, "").trim() || null : null;
   const parsed = parseContact({ contactName: r.kontakt, phone: phones[0] ?? null, phoneAlt: phones[1] ?? null, email: r.email, note: r.napomena });
   if (!parsed.ok) {
     // Neispravan telefon ne sme da obori i ispravnu e-poštu: pokušaj bez telefona.

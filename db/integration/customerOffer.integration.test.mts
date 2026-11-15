@@ -101,6 +101,32 @@ test("tabela kupca: poslednja faktura (cena, rabat, količina) i istorija", asyn
   assert.equal(k1.dismissal, null);
 });
 
+test("period „kupovao u periodu“ (2026-11-15): sužava artikle, ritam ostaje iz cele istorije", async (t) => {
+  if (guard(t)) return;
+  const { loadCustomerOffer } = await import("@/lib/recommendations/customer-offer-service");
+  const { recommendationCountsByCustomer, recommendationRows } = await import("@/lib/recommendations/query");
+  const now = new Date("2026-09-29T10:00:00+02:00");
+  const milan = await user("milan");
+  const sve = await loadCustomerOffer(milan, customerId, now);
+  // Poslednja kupovina je 27. 7. 2026: u periodu jul ima oba artikla, sa istim statusom kao bez perioda.
+  const jul = await loadCustomerOffer(milan, customerId, now, { from: "2026-07-01", to: "2026-07-31" });
+  assert.deepEqual(jul.rows.map((r) => r.articleCode).sort(), [K1, K2].sort());
+  assert.deepEqual(
+    jul.rows.map((r) => [r.articleCode, r.rec.status, r.rec.eventCount]).sort(),
+    sve.rows.map((r) => [r.articleCode, r.rec.status, r.rec.eventCount]).sort(),
+    "status i broj kupovina računaju se iz cele istorije",
+  );
+  // Posle poslednje kupovine nema ničega; granica je uključena („od“ = dan kupovine).
+  assert.equal((await loadCustomerOffer(milan, customerId, now, { from: "2026-08-01", to: null })).rows.length, 0);
+  assert.equal((await loadCustomerOffer(milan, customerId, now, { from: "2026-07-27", to: "2026-07-27" })).rows.length, 2);
+  // Isti filter na listi: neispravan datum se ignoriše, ne pravi grešku u upitu.
+  const scope = { customerIds: [customerId] };
+  assert.equal((await recommendationRows(scope, { customerStatus: "svi", boughtFrom: "2026-08-01" })).length, 0);
+  assert.equal((await recommendationRows(scope, { customerStatus: "svi", boughtFrom: "' OR 1=1" })).length, 2);
+  const counts = await recommendationCountsByCustomer(scope, { customerStatus: "svi", boughtFrom: "2026-08-01" });
+  assert.equal(counts.length, 0, "lista kupaca broji samo artikle iz perioda");
+});
+
 test("„Ne uzima više“: skida artikal iz Preporuka i sa kartice, tabela ga prikazuje odvojeno; vraćanje jednom", async (t) => {
   if (guard(t)) return;
   const svc = await import("@/lib/recommendations/customer-offer-service");

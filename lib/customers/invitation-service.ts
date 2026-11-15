@@ -55,6 +55,8 @@ export class InvitationBlockedError extends CustomerAccountError {
 
 /** Poziv se šalje i čeka čoveka; reset se traži i koristi odmah. */
 const INVITATION_TTL_MS = 48 * 60 * 60_000;
+/** Poziv poslat mejlom (2026-11-14, odluka vlasnika): kupac ga ne mora otvoriti istog dana. */
+export const EMAILED_INVITATION_TTL_MS = 7 * 24 * 60 * 60_000;
 const RESET_TTL_MS = 60 * 60_000;
 
 export const TOKEN_TTL_MS: Record<CustomerTokenPurpose, number> = {
@@ -83,9 +85,11 @@ async function issueToken(input: {
   purpose: CustomerTokenPurpose;
   issuedBy: string | null;
   now?: Date;
+  /** Duži rok za poziv poslat mejlom (7 dana); podrazumevano TOKEN_TTL_MS. */
+  ttlMs?: number;
 }): Promise<{ token: string; expiresAt: Date }> {
   const now = input.now ?? new Date();
-  const expiresAt = new Date(now.getTime() + TOKEN_TTL_MS[input.purpose]);
+  const expiresAt = new Date(now.getTime() + (input.ttlMs ?? TOKEN_TTL_MS[input.purpose]));
   const token = generateRecoveryCode();
   const keyVersion = activeKeyVersion(env());
 
@@ -170,7 +174,7 @@ async function consumeToken(input: {
  * poslati, ali token ne sadrži.
  */
 export async function issueInvitation(
-  input: { accountId: string; reason: string },
+  input: { accountId: string; reason: string; ttlMs?: number },
   actor: AccountActor,
 ): Promise<{ token: string; expiresAt: Date }> {
   const reason = input.reason.trim();
@@ -217,6 +221,7 @@ export async function issueInvitation(
     customerUserId: account.id,
     purpose: "invitation",
     issuedBy: actor.id,
+    ttlMs: input.ttlMs,
   });
 
   const correlationId = randomUUID();

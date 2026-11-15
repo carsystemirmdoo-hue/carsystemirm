@@ -2,6 +2,8 @@ import Link from "next/link";
 import { ClickableRows } from "@/components/portal/ClickableRows";
 import { PageHeader } from "@/components/portal/PortalPrimitives";
 import { SortHeader } from "@/components/portal/SortHeader";
+import { DateRangeField } from "@/components/portal/DateRangeField";
+import { isAllTime, periodLabel } from "@/lib/portal/periodMemory.mjs";
 import { sortRows } from "@/lib/ui/sortRows.mjs";
 import type { RecommendationCustomerCount } from "@/lib/recommendations/query";
 
@@ -40,6 +42,7 @@ export function KupciPregled({
   hasRun,
   asOfDate,
   showDetailLink,
+  period = { from: null, to: null },
 }: {
   rows: RecommendationCustomerCount[];
   /** null = korisnik ne vidi dugovanja; inače dug po kupcu iz tabele kancelarije. */
@@ -52,12 +55,17 @@ export function KupciPregled({
   showDetailLink: boolean;
   red?: string;
   smer?: string;
+  /** Period „kupovao u periodu" (2026-11-15); prazan = sve vreme. */
+  period?: { from: string | null; to: string | null };
 }) {
   const key: Kolona = red && red in KOLONE ? (red as Kolona) : "ponuda";
   const dir: "asc" | "desc" = smer === "asc" || smer === "desc" ? smer : KOLONE[key].first;
   const href = (k: Kolona) => {
     const p = new URLSearchParams();
     if (q) p.set("q", q);
+    // Period se nosi i kroz ređanje, inače bi klik na kolonu vratio na zapamćen period.
+    p.set("from", period.from ?? "");
+    p.set("to", period.to ?? "");
     p.set("red", k);
     p.set("smer", k === key ? (dir === "asc" ? "desc" : "asc") : KOLONE[k].first);
     return `/portal/preporuke?${p.toString()}`;
@@ -87,6 +95,7 @@ export function KupciPregled({
 
       <section className="portal-panel">
         <form method="get" className="rr-filters" role="search" aria-label="Pretraga kupaca">
+          <DateRangeField nameOd="from" nameDo="to" defaultOd={period.from} defaultDo={period.to} zapamti />
           <label>
             <span>Kupac</span>
             <input type="search" name="q" defaultValue={q} placeholder="Upišite ime kupca" autoComplete="off" />
@@ -95,6 +104,11 @@ export function KupciPregled({
           <input type="hidden" name="smer" value={dir} />
           <button type="submit">Traži</button>
         </form>
+        {isAllTime(period) ? null : (
+          <p className="pk-period" role="status">
+            Broje se samo artikli koje je kupac kupovao u periodu {periodLabel(period)} Da li kasni, računa se iz cele istorije.
+          </p>
+        )}
 
         {!hasRun ? (
           <p className="pk-empty">Preporuke još nisu izračunate.</p>
@@ -155,7 +169,7 @@ export function KupciPregled({
                 ))}
                 {shown.length === 0 ? (
                   <tr>
-                    <td colSpan={debts ? 8 : 7}>{t ? "Nema kupca sa tim imenom među preporukama." : "Nijedan kupac trenutno nema preporuku."}</td>
+                    <td colSpan={debts ? 8 : 7}>{t ? "Nema kupca sa tim imenom među preporukama." : isAllTime(period) ? "Nijedan kupac trenutno nema preporuku." : "Nijedan kupac nema preporuku za artikle kupovane u ovom periodu."}</td>
                   </tr>
                 ) : null}
               </tbody>

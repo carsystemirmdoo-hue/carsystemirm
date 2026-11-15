@@ -144,7 +144,7 @@ function FooterColumn({
       <h2 className="font-[family-name:var(--font-technical)] text-[length:var(--ds-font-label)] font-medium uppercase leading-[1.3] tracking-[var(--ds-tracking-label)] text-[var(--ds-c-text-2)]">
         {title}
       </h2>
-      <ul className="mt-4 flex flex-col gap-2.5">
+      <ul className="mt-4 grid grid-cols-2 gap-x-4 gap-y-2.5 sm:flex sm:flex-col sm:gap-2.5">
         {links.map((link) => (
           <li key={`${link.href}-${link.label}`}>
             <Link

@@ -2,6 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import { useEffect, useMemo, useState, useTransition } from "react";
+import { DateField } from "@/components/portal/DateField";
 import { portalNavStart } from "@/components/portal/PortalNavProgress";
 import { SortHeader } from "@/components/portal/SortHeader";
 import type { ProcurementData, ProcurementRow } from "@/lib/procurement/procurement-service";
@@ -250,14 +251,13 @@ export function ProcurementTable({
           if (from && to) go({ od: from, do: to });
         }}
       >
-        <label className={styles.field}>
-          <span>Prodato od</span>
-          <input type="date" value={from} max={data.today} onChange={(e) => setFrom(e.target.value)} required />
-        </label>
-        <label className={styles.field}>
-          <span>do</span>
-          <input type="date" value={to} max={data.today} onChange={(e) => setTo(e.target.value)} required />
-        </label>
+        {/* Isto polje dd/mm/gggg kao na ostatku portala (ugrađeno polje pregledača je na telefonu pokazivalo mm/dd). */}
+        <div className={styles.dateField}>
+          <DateField name="od" label="Prodato od" value={from} onChange={(iso) => setFrom(iso)} required />
+        </div>
+        <div className={styles.dateField}>
+          <DateField name="do" label="do" value={to} onChange={(iso) => setTo(iso)} required />
+        </div>
         <button type="submit" className={`${styles.button} ${periodDirty ? styles.primary : ""}`} disabled={navigating || !from || !to}>
           {navigating ? "Učitavam…" : "Prikaži"}
         </button>

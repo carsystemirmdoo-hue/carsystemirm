@@ -78,7 +78,17 @@ export type RecommendationFilter = {
    * kašnjenje na vrh izbacilo kupovine od pre više godina.
    */
   order?: "kasnjenje" | "skorije";
+  /**
+   * Period „kupovao u periodu" (2026-11-15, zahtev vlasnika): samo parovi kupac × artikal sa bar
+   * jednom potvrđenom kupovinom između ovih datuma (ISO, obe granice uključene; prazna = bez granice).
+   * Status i ritam se i dalje računaju iz cele istorije — period samo bira KOJE artikle gledamo,
+   * pa „kraći period + Kasni" pokazuje šta je kupac nedavno uzimao, a prestao.
+   */
+  boughtFrom?: string | null;
+  boughtTo?: string | null;
 };
+
+const ISO_DAN = /^\d{4}-\d{2}-\d{2}$/;
 
 function uOpsegu(scope: LedgerScope): SQL {
   if (scope.customerIds === null) return sql`true`;
@@ -127,6 +137,16 @@ function uslovi(scope: LedgerScope, filter: RecommendationFilter): SQL {
       SELECT 1 FROM customer_assignments ca
        WHERE ca.customer_id = r.customer_id
          AND ca.user_id = ${filter.salespersonUserId}
+    )`);
+  }
+  const od = filter.boughtFrom && ISO_DAN.test(filter.boughtFrom) ? filter.boughtFrom : null;
+  const doD = filter.boughtTo && ISO_DAN.test(filter.boughtTo) ? filter.boughtTo : null;
+  if (od || doD) {
+    lista.push(sql`EXISTS (
+      SELECT 1 FROM recommendation_input_lines ril
+       WHERE ril.customer_id = r.customer_id AND ril.article_code = r.article_code
+         ${od ? sql`AND ril.issued_on >= ${od}::date` : sql``}
+         ${doD ? sql`AND ril.issued_on <= ${doD}::date` : sql``}
     )`);
   }
   if (filter.q && filter.q.trim() !== "") {

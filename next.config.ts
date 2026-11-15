@@ -73,7 +73,12 @@ const nextConfig: NextConfig = {
     authInterrupts: true,
   },
   images: {
-    formats: ["image/avif", "image/webp"],
+    /*
+     * 2026-11-14: Vercel obrada slika (/_next/image) je na besplatnom planu vraćala 402 posle
+     * mesečnog limita — nove slike se nisu prikazivale na celom sajtu. Slike u public/ su već
+     * pripremljene WebP/PNG u pravoj veličini (q90), pa ih šaljemo direktno sa CDN-a, bez obrade.
+     */
+    unoptimized: true,
   },
   async headers() {
     return [

@@ -80,6 +80,32 @@
   display: inline;
 }
 
+/* Raster poteza (telefon/tablet, vidi komponentu): na računaru ostaje SVG. */
+.strokesRasterOnDark,
+.strokesRasterOnLight {
+  display: none;
+}
+
+@media (hover: none) and (pointer: coarse) {
+  .strokesOnDark,
+  .strokesOnLight,
+  :global(html[data-theme-preference="dark"]) .strokesOnLight {
+    display: none;
+  }
+
+  .strokesRasterOnDark {
+    display: inline;
+  }
+
+  :global(html[data-theme-preference="dark"]) .strokesRasterOnDark {
+    display: none;
+  }
+
+  :global(html[data-theme-preference="dark"]) .strokesRasterOnLight {
+    display: inline;
+  }
+}
+
 /*
  * Diskretno kretanje kada je kompozicija otkrivena (2026-10-18). Ranije je
  * jedino kretanje bilo otkrivanje poteza vezano za skrol, pa je posle toga

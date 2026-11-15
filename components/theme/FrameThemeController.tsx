@@ -31,6 +31,7 @@ export function FrameThemeController() {
   useLayoutEffect(() => {
     let frameId: number | null = null;
     let active: HTMLElement | null = null;
+    const mobileQuery = window.matchMedia("(max-width: 720px)");
 
     function sync() {
       frameId = null;
@@ -39,9 +40,24 @@ export function FrameThemeController() {
       const hold = height * HOLD_RATIO;
       const zones = Array.from(document.querySelectorAll<HTMLElement>("[data-frame-theme]"));
 
+      /*
+       * `data-frame-cover="mobile"` (2026-11-15, „Boja nije sloj“ na početnoj): na telefonu
+       * tema okvira se menja samo dok sekcija POKRIVA ceo ekran (gornja ivica ispod headera,
+       * donja na dnu ekrana). Ranije je sredina ekrana ±18 % bacala ceo sajt u tamnu temu
+       * i dok su se susedne sekcije još videle — izgledalo je kao da sajt menja boju.
+       */
+      const coverMode = mobileQuery.matches;
+      const headerHeight = document.querySelector<HTMLElement>("header")?.offsetHeight ?? 0;
+      const covers = (zone: HTMLElement, rect: DOMRect) =>
+        rect.top <= headerHeight + 1 && rect.bottom >= height - 1;
+      const inside = (zone: HTMLElement, rect: DOMRect, margin: number) => {
+        if (rect.height <= 0) return false;
+        if (coverMode && zone.dataset.frameCover === "mobile") return covers(zone, rect);
+        return rect.top <= probe + margin && rect.bottom >= probe - margin;
+      };
+
       if (active && zones.includes(active)) {
-        const rect = active.getBoundingClientRect();
-        if (rect.top <= probe + hold && rect.bottom >= probe - hold && rect.height > 0) {
+        if (inside(active, active.getBoundingClientRect(), hold)) {
           apply(active);
           return;
         }
@@ -50,7 +66,7 @@ export function FrameThemeController() {
       active =
         zones
           .map((zone) => ({ zone, rect: zone.getBoundingClientRect() }))
-          .filter(({ rect }) => rect.height > 0 && rect.top <= probe && rect.bottom > probe)
+          .filter(({ zone, rect }) => inside(zone, rect, 0) && rect.bottom > probe)
           .sort((a, b) => a.rect.height - b.rect.height)[0]?.zone ?? null;
       apply(active);
     }

@@ -97,6 +97,8 @@ export function PaintTakeoverHomeSection({
       className={styles.section}
       // Suprotna tema od izbora korisnika: okvir sajta (header, meniji) je prati.
       data-frame-theme="inverse"
+      // Na telefonu samo dok sekcija pokriva ceo ekran (FrameThemeController).
+      data-frame-cover="mobile"
       data-paint-debug-layout={debugEnabled ? "true" : undefined}
       data-wash-disabled={washDisabled ? "true" : undefined}
       aria-labelledby="paint-takeover-home-title"
@@ -176,6 +178,24 @@ export function PaintTakeoverHomeSection({
               <image
                 className={styles.strokesOnLight}
                 href="/art/paint-takeover/paint-takeover-hero-strokes-light.svg"
+                width="1920"
+                height="1080"
+                preserveAspectRatio="xMidYMid slice"
+              />
+              {/* Telefon/tablet (2026-11-15): ista slika kao gotov raster. SVG ima filtere
+                  (šum, zamućenje) koje iOS pod maskom koja se menja na svaki skrol crta
+                  iznova u punoj rezoluciji — Safari je zbog memorije rušio stranicu.
+                  scripts/build-paint-takeover-raster.mjs */}
+              <image
+                className={styles.strokesRasterOnDark}
+                href="/art/paint-takeover/paint-takeover-hero-strokes-final-raster.webp"
+                width="1920"
+                height="1080"
+                preserveAspectRatio="xMidYMid slice"
+              />
+              <image
+                className={styles.strokesRasterOnLight}
+                href="/art/paint-takeover/paint-takeover-hero-strokes-light-raster.webp"
                 width="1920"
                 height="1080"
                 preserveAspectRatio="xMidYMid slice"

@@ -8977,9 +8977,9 @@ section.portal-metrics {
 .rr-link:hover { border-color: var(--p-ink); }
 .rr-filters { display: flex; flex-wrap: wrap; gap: 10px 14px; align-items: flex-end; padding: 14px 16px; border-bottom: 1px solid var(--p-line); }
 .rr-filters label { display: grid; gap: 4px; font-size: 12px; color: var(--p-muted); font-weight: 600; }
-.rr-filters input, .rr-filters select { height: 36px; min-width: 180px; padding: 0 10px; border: 1px solid var(--p-line); border-radius: 2px; background: var(--p-surface); color: var(--p-ink); font-size: 14px; }
-.rr-filters input { min-width: 240px; }
-.rr-filters button { height: 36px; padding: 0 16px; border: 1px solid var(--p-ink); border-radius: 2px; background: var(--p-ink); color: var(--p-surface); font-size: 13px; font-weight: 700; cursor: pointer; }
+.rr-filters input:not(.pd-range input), .rr-filters select { height: 36px; min-width: 180px; padding: 0 10px; border: 1px solid var(--p-line); border-radius: 2px; background: var(--p-surface); color: var(--p-ink); font-size: 14px; }
+.rr-filters input:not(.pd-range input) { min-width: 240px; }
+.rr-filters button:not(.pd-range button) { height: 36px; padding: 0 16px; border: 1px solid var(--p-ink); border-radius: 2px; background: var(--p-ink); color: var(--p-surface); font-size: 13px; font-weight: 700; cursor: pointer; }
 .rr-table th small, .rr-table td small, .rr-block td small, .rr-block th small { display: block; margin-top: 2px; color: var(--p-muted); font-size: 12px; font-weight: 400; }
 .rr-table th a { color: var(--p-ink); font-weight: 600; }
 .rr-exc { display: flex; flex-wrap: wrap; gap: 4px; }
@@ -9008,7 +9008,8 @@ section.portal-metrics {
 @media (max-width: 860px) { .rr-three { grid-template-columns: 1fr; } }
 @media (max-width: 560px) {
   .rr-filters { padding: 12px 14px; }
-  .rr-filters label, .rr-filters input, .rr-filters select, .rr-filters button { width: 100%; min-width: 0; }
+  .rr-filters label, .rr-filters input:not(.pd-range input), .rr-filters select, .rr-filters button:not(.pd-range button) { width: 100%; min-width: 0; }
+  .rr-filters .pd-range { flex: 1 1 100%; }
 }
 .rr-link-sm { min-height: 30px; padding: 0 10px; font-size: 12px; white-space: nowrap; }
 .rr-count { margin: 0 0 10px; font-size: 14px; color: var(--p-ink); }
@@ -10720,7 +10721,7 @@ html:has(.portal-customer-area) { scroll-padding-top: 104px; }
 @media (max-width: 640px) {
   .dg-metrics { grid-template-columns: 1fr; }
   .dg-metric strong { font-size: 20px; }
-  .rr-filters input { min-width: 0; width: 100%; }
+  .rr-filters input:not(.pd-range input) { min-width: 0; width: 100%; }
   .rr-filters label { flex: 1 1 100%; }
   .pk-table, .dg-lines { min-width: 0 !important; }
   .pk-table thead, .dg-lines thead { display: none; }

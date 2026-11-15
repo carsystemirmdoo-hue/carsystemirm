@@ -66,14 +66,26 @@ export type OfferRow = {
   } | null;
 };
 
-export async function loadCustomerOffer(viewer: PortalUser, customerId: string, now: Date = new Date()) {
+export async function loadCustomerOffer(
+  viewer: PortalUser,
+  customerId: string,
+  now: Date = new Date(),
+  /** „Kupovao u periodu" (2026-11-15): samo artikli kupljeni bar jednom u periodu; ritam iz cele istorije. */
+  period: { from: string | null; to: string | null } = { from: null, to: null },
+) {
   await assertCustomerInScope(viewer, customerId);
   const db = getDb();
   const today = belgradeDate(now);
   const [customer] = [...(await db.execute<{ name: string }>(sql`SELECT name FROM customers WHERE id = ${customerId}::uuid`))];
   if (!customer) throw new CustomerOfferError("Kupac ne postoji.");
 
-  const recs = await recommendationRows({ customerIds: [customerId] }, { customerStatus: "svi", includeDismissed: true, limit: 5000 });
+  const recs = await recommendationRows({ customerIds: [customerId] }, {
+    customerStatus: "svi",
+    includeDismissed: true,
+    limit: 5000,
+    boughtFrom: period.from,
+    boughtTo: period.to,
+  });
   const codes = [...new Set(recs.map((r) => r.articleCode))];
   const codeList = codes.length ? sql.join(codes.map((c) => sql`${c}`), sql`, `) : sql`NULL`;
 

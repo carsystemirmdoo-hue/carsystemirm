@@ -8,6 +8,9 @@ import {
   type Tone,
 } from "@/components/portal/PortalPrimitives";
 import { PortalSelect } from "@/components/portal/PortalSelect";
+import { DateRangeField } from "@/components/portal/DateRangeField";
+import { readPortalPeriod } from "@/lib/portal/period";
+import { isAllTime, periodLabel } from "@/lib/portal/periodMemory.mjs";
 import { KupciPregled } from "./KupciPregled";
 import { lastContactByCustomer } from "@/lib/sales-tools/customer-desk-service";
 import { autoRefreshReceivables, debtsByCustomer } from "@/lib/sales-tools/receivables-service";
@@ -201,11 +204,15 @@ export default async function RecommendationsPage({
     prikaz?: string;
     red?: string;
     smer?: string;
+    from?: string;
+    to?: string;
   }>;
 }) {
   const user = await requireCapability("view:preporuke", "/portal/preporuke");
   const params = await searchParams;
-  const filter = filterIz(params);
+  // Period „kupovao u periodu" (2026-11-15): isti zapamćen period kao Kupci, Prodaja i Za razgovor.
+  const period = await readPortalPeriod(params);
+  const filter = { ...filterIz(params), boughtFrom: period.from, boughtTo: period.to };
 
   const ukljuceno = isRecommendationsEnabled();
   const smeRecompute = can(user, "recommendations:recompute");
@@ -220,7 +227,7 @@ export default async function RecommendationsPage({
     if (showDebt) await autoRefreshReceivables(user.id);
     const [run, counts, debts] = await Promise.all([
       activeRun(),
-      recommendationCountsByCustomer(scope, { customerStatus: "aktivni" }),
+      recommendationCountsByCustomer(scope, { customerStatus: "aktivni", boughtFrom: period.from, boughtTo: period.to }),
       showDebt ? debtsByCustomer(user) : Promise.resolve([]),
     ]);
     const contacts = await lastContactByCustomer(counts.map((c) => c.customerId));
@@ -236,6 +243,7 @@ export default async function RecommendationsPage({
         showDetailLink={viditSve}
         red={params.red}
         smer={params.smer}
+        period={period}
       />
     );
   }
@@ -439,10 +447,16 @@ export default async function RecommendationsPage({
               />
             </label>
           ) : null}
+          <DateRangeField nameOd="from" nameDo="to" defaultOd={period.from} defaultDo={period.to} zapamti />
           <button type="submit" className="portal-button" data-variant="secondary">
             Primenite
           </button>
         </form>
+        {isAllTime(period) ? null : (
+          <p className="portal-footnote" role="status">
+            Prikazani su samo artikli koje je kupac kupovao u periodu {periodLabel(period)} Status i ritam se računaju iz cele istorije.
+          </p>
+        )}
       </section>
 
       {/* ------------------------------------------------------------------ */}

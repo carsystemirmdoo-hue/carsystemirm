@@ -8,6 +8,7 @@ import { customerPrices } from "@/lib/pricing/customer-price-service";
 import { incomingByArticle } from "@/lib/procurement/incoming-service";
 import { belgradeDate } from "@/lib/recommendations/customerRhythm.mjs";
 import { internalStockQuantities } from "@/lib/stock/stock-import-service";
+import { isThreeM } from "@/lib/stock/lagerSearch.mjs";
 
 /**
  * Lager lista (2026-11-16): brz pregled artikla za komercijalistu — šifra, naziv, stanje,
@@ -16,7 +17,7 @@ import { internalStockQuantities } from "@/lib/stock/stock-import-service";
  * Stanje je izvorna količina iz važećeg (poslednjeg potvrđenog) snimka lagera, u JM artikla —
  * isti broj koji vidi Nabavka, bez kupčevog praga starosti. Datum snimka ekran prikazuje uz
  * napomenu o starosti. Artikal je na listi ako je u važećem snimku ili ima osnovnu cenu;
- * artikli van programa (3M, sia…) se ne prikazuju. Šifre iz snimka kojih još nema u šifarniku
+ * artikli van programa (sia…) se ne prikazuju, a 3M ni kada ga ima na lageru (`isThreeM`). Šifre iz snimka kojih još nema u šifarniku
  * portala (nova roba) idu na listu sa nazivom iz izvoza.
  */
 
@@ -63,6 +64,8 @@ export async function loadLagerList(now = new Date()): Promise<LagerList> {
   for (const a of arts) {
     const inSnapshot = stock.byArticle.has(a.id);
     if (!inSnapshot && a.price === null) continue;
+    // 3M nije u programu — ne prikazuje se ni kada ga ima na lageru (odluka vlasnika 2026-11-16).
+    if (isThreeM(a)) continue;
     rows.push({
       key: a.id,
       code: a.code,
@@ -80,6 +83,7 @@ export async function loadLagerList(now = new Date()): Promise<LagerList> {
     });
   }
   for (const u of stock.unlinked) {
+    if (isThreeM(u)) continue;
     rows.push({
       key: `novo:${u.code}`,
       code: u.code,

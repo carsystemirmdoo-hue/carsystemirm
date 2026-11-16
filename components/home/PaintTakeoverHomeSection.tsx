@@ -182,26 +182,13 @@ export function PaintTakeoverHomeSection({
                 height="1080"
                 preserveAspectRatio="xMidYMid slice"
               />
-              {/* Telefon/tablet (2026-11-15): ista slika kao gotov raster. SVG ima filtere
-                  (šum, zamućenje) koje iOS pod maskom koja se menja na svaki skrol crta
-                  iznova u punoj rezoluciji — Safari je zbog memorije rušio stranicu.
-                  scripts/build-paint-takeover-raster.mjs */}
-              <image
-                className={styles.strokesRasterOnDark}
-                href="/art/paint-takeover/paint-takeover-hero-strokes-final-raster.webp"
-                width="1920"
-                height="1080"
-                preserveAspectRatio="xMidYMid slice"
-              />
-              <image
-                className={styles.strokesRasterOnLight}
-                href="/art/paint-takeover/paint-takeover-hero-strokes-light-raster.webp"
-                width="1920"
-                height="1080"
-                preserveAspectRatio="xMidYMid slice"
-              />
             </g>
           </svg>
+          {/* Telefon/tablet (2026-11-16): linije su obična slika (gotov raster, bez SVG-a,
+              filtera i maske) koja se otkriva samo providnošću i pomerajem —
+              --linework-reveal iz usePaintTakeoverMotion. Računar crta SVG iznad.
+              Slika: scripts/build-paint-takeover-raster.mjs */}
+          <div className={styles.mobileStrokes} />
         </div>
         <div className={styles.contentContrast} aria-hidden="true" />
         <div

@@ -6866,7 +6866,8 @@ section.portal-metrics {
   background: var(--p-surface);
   font-size: 13px;
 }
-.portal-inline-form button:not(.portal-button) {
+/* Birač perioda (.pd-range) ima svoj izgled, isti na svim ekranima (2026-11-16). */
+.portal-inline-form button:not(.portal-button):not(.pd-range button) {
   padding: 5px 9px;
   color: var(--p-ink);
   border: 1px solid var(--p-line);

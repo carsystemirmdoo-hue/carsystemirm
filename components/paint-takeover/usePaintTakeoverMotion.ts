@@ -273,6 +273,12 @@ export function usePaintTakeoverMotion({
         );
 
         const lineworkProgress = scene.lineworkProgress;
+        // Telefon/tablet (2026-11-16): linije su obična slika — jedna providnost/pomeraj
+        // umesto SVG maske koja se crta iznova na svaki skrol. Računar ovo ne čita.
+        section.style.setProperty(
+          "--linework-reveal",
+          (1 - (1 - mapProgress(lineworkProgress, 0, 0.8)) ** 2).toFixed(4),
+        );
         let activeLines = 0;
         for (let index = 0; index < lineElements.length; index += 1) {
           const line = lineElements[index];

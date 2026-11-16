@@ -53,7 +53,8 @@ export async function recordOrderStockRequests(tx: Exec, orderId: string): Promi
   return rows.length;
 }
 
-const CAN_RECORD = (user: PortalUser) => can(user, "view:preporuke") || can(user, "view:zahtevi") || can(user, "view:nabavka");
+const CAN_RECORD = (user: PortalUser) =>
+  can(user, "view:preporuke") || can(user, "view:zahtevi") || can(user, "view:nabavka") || can(user, "view:lager_lista");
 
 /** Ručno: „Kupac tražio“. `customerId` je opcion (telefonski upit bez kupca u bazi). */
 export async function recordManualStockRequest(
@@ -144,7 +145,7 @@ export type StockRequestRow = {
 };
 
 /** Otvoreni zapisi (poslednjih 90 dana), najnoviji prvi. */
-export async function listOpenStockRequests(limit = 300): Promise<StockRequestRow[]> {
+export async function listOpenStockRequests(limit = 300, opts: { requestedBy?: string } = {}): Promise<StockRequestRow[]> {
   const db = getDb();
   if (!(await hasTable(db))) return [];
   const rows = await db.execute<{
@@ -159,6 +160,7 @@ export async function listOpenStockRequests(limit = 300): Promise<StockRequestRo
       LEFT JOIN customer_orders o ON o.id = r.order_id
       LEFT JOIN users u ON u.id = r.requested_by
      WHERE r.resolved_at IS NULL AND r.created_at > now() - interval '90 days'
+       ${opts.requestedBy ? sql`AND r.requested_by = ${opts.requestedBy}::uuid` : sql``}
      ORDER BY r.created_at DESC
      LIMIT ${limit}`);
   return [...rows].map((r) => ({

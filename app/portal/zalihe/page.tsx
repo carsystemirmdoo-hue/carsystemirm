@@ -6,6 +6,8 @@ import { dmy, dmyTime, quantity } from "@/lib/ordering/panelFormat.mjs";
 import { StockDisplayToggle } from "@/features/portal/StockDisplayToggle";
 import { customerDisplayDecision } from "@/lib/stock/displayPolicy.mjs";
 import { currentStockSnapshot, stockDisplayPolicy, stockHistorySummary } from "@/lib/stock/stock-import-service";
+import { listOpenStockRequests } from "@/lib/stock/stock-requests";
+import { TrazenoList } from "../nabavka/Trazeno";
 
 
 export const metadata = { title: "Zalihe" };
@@ -16,7 +18,7 @@ const day = (iso: string | null) => (iso ? dmy(new Date(`${iso}T12:00:00Z`)) : "
 
 export default async function Page() {
   const user = await requireCapability("view:zalihe", "/portal/zalihe");
-  const [current, policy, history] = await Promise.all([currentStockSnapshot(), stockDisplayPolicy(), stockHistorySummary()]);
+  const [current, policy, history, requests] = await Promise.all([currentStockSnapshot(), stockDisplayPolicy(), stockHistorySummary(), listOpenStockRequests()]);
   const canImport = can(user, "imports:write");
   const envOff = process.env.STOCK_CUSTOMER_DISPLAY === "0";
   const canToggle = can(user, "settings:manage");
@@ -74,6 +76,14 @@ export default async function Page() {
           </dl>
           {canToggle && !envOff ? <StockDisplayToggle enabled={policy.enabled} /> : null}
         </div>
+      </section>
+
+      <section className="portal-panel" id="trazeno">
+        <SectionHeader
+          title={`Traženo — nema na stanju (${requests.length})`}
+          description="Šta su kupci tražili, a nije bilo na stanju: ručni upisi komercijalista sa Lager liste (dugme „Traženo“) i stavke porudžbina kupaca kada je potvrđen lager pokazivao 0. Otvoreni zapisi iz poslednjih 90 dana, najnoviji prvi. Kad poručite ili roba stigne, označite redove kao rešene."
+        />
+        <TrazenoList rows={requests} canResolve={can(user, "view:nabavka")} />
       </section>
 
       <section className="portal-panel">

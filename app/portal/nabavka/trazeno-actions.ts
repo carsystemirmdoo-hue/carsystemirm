@@ -54,6 +54,7 @@ export async function resolveStockRequestsAction(_prev: TrazenoState, form: Form
   try {
     const r = await resolveStockRequests(user, { ids, resolution });
     revalidatePath("/portal/nabavka");
+    revalidatePath("/portal/zalihe");
     return { ok: `Rešeno: ${r.resolved}.`, error: null };
   } catch (e) {
     if (e instanceof StockRequestError) return { ok: null, error: e.message };

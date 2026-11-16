@@ -9,6 +9,7 @@ import { searchHaystack, searchLager } from "@/lib/stock/lagerSearch.mjs";
 import { staleNote, workdaysSince } from "@/lib/stock/stockAge.mjs";
 import { nextSort, sortRows } from "@/lib/ui/sortRows.mjs";
 import styles from "./LagerLista.module.css";
+import { TrazenoDialog } from "./TrazenoDialog";
 
 /**
  * Lager lista (2026-11-16): pretraga radi u pregledaču, na svaki taster, bez odlaska na server.
@@ -82,6 +83,8 @@ export function LagerTable({
     ],
     [customers],
   );
+  const [trazeno, setTrazeno] = useState<LagerRow | null>(null);
+  const [notice, setNotice] = useState<string | null>(null);
   const [q, setQ] = useState("");
   const [brand, setBrand] = useState(ALL);
   const [onlyStock, setOnlyStock] = useState(false);
@@ -212,12 +215,13 @@ export function LagerTable({
               {head("cena", "VP cena", "right")}
               {forCustomer ? head("kupac", "Cena za kupca", "right") : null}
               <th scope="col" style={{ textAlign: "right" }}>U dolasku</th>
+              <th scope="col" aria-label="Traženo" />
             </tr>
           </thead>
           <tbody>
             {found.length === 0 ? (
               <tr>
-                <td colSpan={forCustomer ? 7 : 6} className={styles.empty}>Nijedan artikal ne odgovara pretrazi.</td>
+                <td colSpan={forCustomer ? 8 : 7} className={styles.empty}>Nijedan artikal ne odgovara pretrazi.</td>
               </tr>
             ) : (
               found.slice(0, SHOWN).map((r) => {
@@ -256,6 +260,13 @@ export function LagerTable({
                         "—"
                       )}
                     </td>
+                    <td className={styles.askCell}>
+                      {r.newCode ? null : (
+                        <button type="button" className={styles.ask} onClick={() => setTrazeno(r)} title="Kupac je tražio ovaj artikal, a nema ga na stanju">
+                          Traženo
+                        </button>
+                      )}
+                    </td>
                   </tr>
                 );
               })
@@ -263,6 +274,24 @@ export function LagerTable({
           </tbody>
         </table>
       </div>
+      {notice ? (
+        <p className={styles.notice} role="status">
+          {notice}
+        </p>
+      ) : null}
+      {trazeno ? (
+        <TrazenoDialog
+          row={trazeno}
+          customers={customers}
+          defaultCustomerId={forCustomer?.customer.id ?? null}
+          onClose={() => setTrazeno(null)}
+          onDone={(text) => {
+            setTrazeno(null);
+            setNotice(text);
+            router.refresh();
+          }}
+        />
+      ) : null}
       <p className={styles.more} aria-live="polite">
         {found.length > SHOWN
           ? `Prikazano ${SHOWN} od ${found.length} artikala — suzite pretragu.`

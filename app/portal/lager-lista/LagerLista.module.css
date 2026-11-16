@@ -7,6 +7,10 @@
 .field input:focus, .field select:focus { outline: 2px solid var(--p-red); outline-offset: 1px; }
 .grow { flex: 1 1 320px; }
 .grow input { width: 100%; }
+.customer { flex: 1 1 280px; max-width: 420px; }
+.customerCell { background: var(--p-surface-subtle); }
+.customerPrice { font-weight: 700; color: var(--p-ink); }
+.muted { color: var(--p-muted); }
 .check { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; color: var(--p-ink); height: 44px; }
 .info { margin: 0; padding: 10px 16px; font-size: 13px; color: var(--p-muted); border-bottom: 1px solid var(--p-line); line-height: 1.5; }
 .info b { color: var(--p-ink); }
@@ -35,7 +39,7 @@
 
 @media (max-width: 760px) {
   .toolbar { padding: 12px; }
-  .field, .grow { flex: 1 1 100%; }
+  .field, .grow, .customer { flex: 1 1 100%; max-width: none; }
   .field select { width: 100%; }
   /* Telefon: red tabele postaje kartica — naziv i šifra, pa brojevi u dve kolone. */
   .table { min-width: 0; }

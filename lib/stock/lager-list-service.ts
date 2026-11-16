@@ -1,6 +1,10 @@
 import "server-only";
 import { sql } from "drizzle-orm";
 import { getDb } from "@/db/client";
+import { can, seesAllCustomers } from "@/lib/authz/permissions.mjs";
+import { canAccessCustomer } from "@/lib/authz/scope.mjs";
+import { loadAssignedCustomerIds, type PortalUser } from "@/lib/authz/user-repository";
+import { customerPrices } from "@/lib/pricing/customer-price-service";
 import { incomingByArticle } from "@/lib/procurement/incoming-service";
 import { belgradeDate } from "@/lib/recommendations/customerRhythm.mjs";
 import { internalStockQuantities } from "@/lib/stock/stock-import-service";
@@ -94,4 +98,58 @@ export async function loadLagerList(now = new Date()): Promise<LagerList> {
   }
   rows.sort((x, y) => x.name.localeCompare(y.name, "sr-Latn", { sensitivity: "base", numeric: true }));
   return { today, stockDate: stock.snapshot?.stockDate ?? null, rows };
+}
+
+/* =========================================================================
+ * Cena za kupca (2026-11-16): komercijalista bira kupca i vidi njegovu cenu
+ * ====================================================================== */
+
+export type LagerCustomer = { id: string; name: string; city: string | null; pib: string };
+
+/** Kupci koje korisnik sme da vidi: komercijalista samo svoje (dodele), ostali sve aktivne. */
+export async function lagerCustomers(viewer: PortalUser): Promise<LagerCustomer[]> {
+  if (!can(viewer, "view:kupci")) return [];
+  const all = seesAllCustomers(viewer);
+  const ids = all ? [] : await loadAssignedCustomerIds(viewer.id);
+  if (!all && !ids.length) return [];
+  const rows = await getDb().execute<LagerCustomer>(sql`
+    SELECT c.id, c.name, c.city, c.pib FROM customers c
+     WHERE c.active ${all ? sql`` : sql`AND c.id IN (${sql.join(ids.map((id) => sql`${id}::uuid`), sql`, `)})`}
+     ORDER BY c.name`);
+  return [...rows];
+}
+
+/** Šta tabela prikazuje u koloni „Cena za kupca“. */
+export type LagerCustomerPrice =
+  | { status: "cena"; netCents: number; discountPercent: number | null; fixed: boolean }
+  | { status: "na_upit"; message: string }
+  | { status: "van_ponude" };
+
+/**
+ * Cena izabranog kupca po artiklu, po osnovnom uslovu plaćanja — isto računanje kao kupčeva
+ * cena na sajtu (`customerPrices`). Kupac van opsega korisnika daje `null` (kao da nije izabran).
+ */
+export async function lagerCustomerPrices(
+  viewer: PortalUser,
+  customerId: string,
+  articleIds: string[],
+  now = new Date(),
+): Promise<{ customer: LagerCustomer; prices: Record<string, LagerCustomerPrice> } | null> {
+  if (!/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(customerId)) return null;
+  if (!can(viewer, "view:kupci")) return null;
+  const assigned = seesAllCustomers(viewer) ? [] : await loadAssignedCustomerIds(viewer.id);
+  if (!canAccessCustomer(viewer, assigned, customerId)) return null;
+  const [customer] = [...(await getDb().execute<LagerCustomer>(sql`SELECT id, name, city, pib FROM customers WHERE id = ${customerId}::uuid`))];
+  if (!customer) return null;
+  const { prices } = await customerPrices(customerId, articleIds, belgradeDate(now));
+  const out: Record<string, LagerCustomerPrice> = {};
+  for (const [id, p] of prices) {
+    out[id] =
+      p.status === "cena"
+        ? { status: "cena", netCents: p.netCents, discountPercent: p.discountPercent, fixed: p.discountPercent === null }
+        : p.status === "na_upit"
+          ? { status: "na_upit", message: p.message }
+          : { status: "van_ponude" };
+  }
+  return { customer, prices: out };
 }

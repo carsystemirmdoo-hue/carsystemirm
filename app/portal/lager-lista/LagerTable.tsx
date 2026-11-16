@@ -1,8 +1,10 @@
 "use client";
 
-import { useDeferredValue, useEffect, useMemo, useRef, useState } from "react";
+import { usePathname, useRouter } from "next/navigation";
+import { useDeferredValue, useEffect, useMemo, useRef, useState, useTransition } from "react";
 import { SortHeader } from "@/components/portal/SortHeader";
-import type { LagerList, LagerRow } from "@/lib/stock/lager-list-service";
+import { SearchableCombobox } from "@/components/ui/SearchableCombobox";
+import type { LagerCustomer, LagerCustomerPrice, LagerList, LagerRow } from "@/lib/stock/lager-list-service";
 import { searchHaystack, searchLager } from "@/lib/stock/lagerSearch.mjs";
 import { staleNote, workdaysSince } from "@/lib/stock/stockAge.mjs";
 import { nextSort, sortRows } from "@/lib/ui/sortRows.mjs";
@@ -17,13 +19,16 @@ const ALL = "__sve__";
 const SHOWN = 200;
 
 type Row = LagerRow & { hay: string };
-type SortKey = "artikal" | "sifra" | "stanje" | "cena";
-const SORT: Record<SortKey, { value: (r: Row) => string | number | null; first: "asc" | "desc" }> = {
+type SortKey = "artikal" | "sifra" | "stanje" | "cena" | "kupac";
+type Prices = Record<string, LagerCustomerPrice>;
+const SORT: Record<SortKey, { value: (r: Row, p: Prices) => string | number | null; first: "asc" | "desc" }> = {
   artikal: { value: (r) => r.name, first: "asc" },
   sifra: { value: (r) => r.code, first: "asc" },
   stanje: { value: (r) => r.stock, first: "desc" },
   cena: { value: (r) => r.price, first: "asc" },
+  kupac: { value: (r, p) => (p[r.key]?.status === "cena" ? (p[r.key] as { netCents: number }).netCents : null), first: "asc" },
 };
+const NO_PRICES: Prices = {};
 
 const qty = (n: number) => n.toLocaleString("sr-Latn-RS", { maximumFractionDigits: 3 });
 const money = (n: number) => n.toLocaleString("sr-Latn-RS", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
@@ -42,7 +47,41 @@ function packsNote(r: LagerRow): string | null {
   return `${n} × ${r.packLabel ?? qty(r.packQuantity)}`;
 }
 
-export function LagerTable({ data }: { data: LagerList }) {
+/** Ćelija „Cena za kupca“: neto cena bez PDV-a i rabat, ili zašto cene nema. */
+function CustomerPriceCell({ p }: { p: LagerCustomerPrice | undefined }) {
+  if (!p) return <>—</>;
+  if (p.status === "van_ponude") return <span className={styles.muted}>van ponude</span>;
+  if (p.status === "na_upit") return <span className={styles.muted} title={p.message}>na upit</span>;
+  return (
+    <>
+      <span className={styles.customerPrice}>{money(p.netCents / 100)}</span>
+      <span className={styles.sub}>{p.fixed ? "dogovorena cena" : p.discountPercent ? `rabat ${qty(p.discountPercent)} %` : "bez rabata"}</span>
+    </>
+  );
+}
+
+export function LagerTable({
+  data,
+  customers,
+  forCustomer,
+}: {
+  data: LagerList;
+  customers: LagerCustomer[];
+  forCustomer: { customer: LagerCustomer; prices: Prices } | null;
+}) {
+  const router = useRouter();
+  const pathname = usePathname();
+  const [loadingCustomer, startCustomer] = useTransition();
+  const prices = forCustomer?.prices ?? NO_PRICES;
+  const chooseCustomer = (id: string) =>
+    startCustomer(() => router.replace(id ? `${pathname}?kupac=${encodeURIComponent(id)}` : pathname, { scroll: false }));
+  const customerOptions = useMemo(
+    () => [
+      { value: "", label: "Bez kupca — samo VP cena" },
+      ...customers.map((c) => ({ value: c.id, label: c.city ? `${c.name} — ${c.city}` : c.name, keywords: [c.pib] })),
+    ],
+    [customers],
+  );
   const [q, setQ] = useState("");
   const [brand, setBrand] = useState(ALL);
   const [onlyStock, setOnlyStock] = useState(false);
@@ -73,19 +112,22 @@ export function LagerTable({ data }: { data: LagerList }) {
     return [...m.entries()].sort((a, b) => a[0].localeCompare(b[0], "sr-Latn", { sensitivity: "base" }));
   }, [rows]);
 
+  // Kupac je skinut (ili nije dozvoljen) dok je tabela bila poređana po njegovoj ceni.
+  const sortKey: SortKey = sort.key === "kupac" && !forCustomer ? "artikal" : sort.key;
   const found = useMemo(() => {
     const base = rows.filter((r) => (brand === ALL || r.brand === brand) && (!onlyStock || (r.stock !== null && r.stock > 0)));
     const hits = searchLager(base, deferredQ) as Row[];
     // Uz upit, red sa tačnom šifrom ostaje na vrhu dok korisnik ne izabere kolonu.
-    return deferredQ.trim() && sort.key === "artikal" && sort.dir === "asc" ? hits : (sortRows(hits, SORT[sort.key].value, sort.dir) as Row[]);
-  }, [rows, brand, onlyStock, deferredQ, sort]);
+    return deferredQ.trim() && sortKey === "artikal" && sort.dir === "asc" ? hits : (sortRows(hits, (r: Row) => SORT[sortKey].value(r, prices), sort.dir) as Row[]);
+  }, [rows, brand, onlyStock, deferredQ, sortKey, sort.dir, prices]);
+
 
   const stale = data.stockDate ? staleNote(workdaysSince(data.stockDate, data.today)) : null;
 
   const head = (key: SortKey, label: string, align: "left" | "right" = "left") => (
     <SortHeader
       label={label}
-      active={sort.key === key}
+      active={sortKey === key}
       dir={sort.dir}
       align={align}
       onClick={() => setSort((cur) => nextSort(cur, key, SORT[key].first) as { key: SortKey; dir: "asc" | "desc" })}
@@ -122,6 +164,22 @@ export function LagerTable({ data }: { data: LagerList }) {
           <input type="checkbox" checked={onlyStock} onChange={(e) => setOnlyStock(e.target.checked)} />
           Samo na stanju
         </label>
+        {customers.length ? (
+          <div className={`${styles.field} ${styles.customer}`}>
+            <span>Cena za kupca{loadingCustomer ? " — učitavam…" : ""}</span>
+            <SearchableCombobox
+              ariaLabel="Kupac za koga se prikazuje cena"
+              value={forCustomer?.customer.id ?? ""}
+              options={customerOptions}
+              onChange={chooseCustomer}
+              placeholder="Izaberite kupca"
+              searchPlaceholder="Naziv, mesto ili PIB kupca"
+              emptyMessage="Nijedan kupac ne odgovara pretrazi."
+              sheetTitle="Cena za kupca"
+              disabled={loadingCustomer}
+            />
+          </div>
+        ) : null}
       </div>
 
       <p className={styles.info}>
@@ -133,7 +191,14 @@ export function LagerTable({ data }: { data: LagerList }) {
         ) : (
           <span className={styles.stale}>Lager još nije uvezen — stanje nije poznato.</span>
         )}{" "}
-        Cena je osnovna VP cena bez PDV-a, bez rabata kupca.
+        VP cena je osnovna cena bez PDV-a, bez rabata kupca.
+        {forCustomer ? (
+          <>
+            {" "}
+            <b>Cena za kupca {forCustomer.customer.name}</b> je njegova neto cena bez PDV-a (VP cena − njegov rabat), po osnovnom uslovu plaćanja — ista koju
+            kupac vidi kada je prijavljen.
+          </>
+        ) : null}
       </p>
 
       <div className={styles.tablewrap}>
@@ -145,13 +210,14 @@ export function LagerTable({ data }: { data: LagerList }) {
               {head("stanje", "Stanje", "right")}
               <th scope="col">Pakovanje</th>
               {head("cena", "VP cena", "right")}
+              {forCustomer ? head("kupac", "Cena za kupca", "right") : null}
               <th scope="col" style={{ textAlign: "right" }}>U dolasku</th>
             </tr>
           </thead>
           <tbody>
             {found.length === 0 ? (
               <tr>
-                <td colSpan={6} className={styles.empty}>Nijedan artikal ne odgovara pretrazi.</td>
+                <td colSpan={forCustomer ? 7 : 6} className={styles.empty}>Nijedan artikal ne odgovara pretrazi.</td>
               </tr>
             ) : (
               found.slice(0, SHOWN).map((r) => {
@@ -174,6 +240,11 @@ export function LagerTable({ data }: { data: LagerList }) {
                     </td>
                     <td data-label="Pakovanje">{r.packLabel ?? "—"}</td>
                     <td data-label="VP cena" className={styles.num}>{r.price === null ? "—" : money(r.price)}</td>
+                    {forCustomer ? (
+                      <td data-label="Cena za kupca" className={`${styles.num} ${styles.customerCell}`}>
+                        <CustomerPriceCell p={prices[r.key]} />
+                      </td>
+                    ) : null}
                     <td data-label="U dolasku" className={styles.num}>
                       {r.incoming ? (
                         <>

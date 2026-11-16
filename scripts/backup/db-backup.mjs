@@ -27,6 +27,7 @@ import { pathToFileURL } from "node:url";
 import { installAbortHandlers, isAborting, killOnAbort, onAbort } from "../../lib/backup/abort.mjs";
 import { LABEL_RE, publicShaLineOk, publicStatusProblems } from "../../lib/backup/publicStatus.mjs";
 import { makeLogger, redact } from "../../lib/backup/redact.mjs";
+import { neonRestoreFilter } from "../../lib/backup/neonColumnOptions.mjs";
 
 const SECRET_ENVS = ["SOURCE_DATABASE_URL", "RESTORE_ADMIN_URL", "BACKUP_STATUS_URL"];
 const log = makeLogger(undefined, () => SECRET_ENVS.map((k) => process.env[k]).filter(Boolean));
@@ -154,7 +155,8 @@ async function verify(o) {
     }
     const target = new URL(admin);
     target.pathname = `/${dbName}`;
-    await run(bin("pg_restore"), ["--no-owner", "--exit-on-error", `--dbname=${dbName}`, o.dump], { env: pgEnv(target.toString()) });
+    const { removed } = await restoreWithoutNeonOptions(o.dump, pgEnv(target.toString()));
+    if (removed) log(`Preskočeno ${removed} Neon-ovih opcija kolona (pg_attver) — van Neona nemaju značenje.`);
     const rs = postgres(target.toString(), { max: 1, onnotice: () => {} });
     try {
       const restored = await rs.begin("ISOLATION LEVEL REPEATABLE READ READ ONLY", (tx) => buildManifest(queryFn(tx)));
@@ -180,6 +182,79 @@ async function verify(o) {
   log(report.ok ? `VRAĆANJE PROVERENO: ${report.restored.tables} tabela, ${report.restored.rows} redova, ${Math.round(report.durationMs / 1000)} s` : `VRAĆANJE NIJE PROŠLO: ${[...report.diffs, ...report.sequenceProblems].join("; ")}`);
   if (!report.ok) process.exitCode = 1;
   return report;
+}
+
+/**
+ * Vraćanje: `pg_restore --file=-` → izbacivanje Neon-ovih opcija kolona → `psql`
+ * (ON_ERROR_STOP: kao ranije `--exit-on-error`, svaka druga greška prekida vraćanje).
+ * Vidi lib/backup/neonColumnOptions.mjs.
+ */
+function restoreWithoutNeonOptions(dumpPath, env) {
+  return new Promise((ok, fail) => {
+    const filter = neonRestoreFilter();
+    const src = spawn(bin("pg_restore"), ["--no-owner", "--file=-", dumpPath], { stdio: ["ignore", "pipe", "pipe"] });
+    const dst = spawn(bin("psql"), ["-X", "-q", "-v", "ON_ERROR_STOP=1"], { env: { ...process.env, ...env }, stdio: ["pipe", "ignore", "pipe"] });
+    const offs = [killOnAbort(src), killOnAbort(dst)];
+    let srcErr = "";
+    let dstErr = "";
+    let srcCode = null;
+    let dstCode = null;
+    let settled = false;
+    const finish = (err) => {
+      if (settled) return;
+      settled = true;
+      offs.forEach((off) => off());
+      if (err) {
+        src.kill();
+        dst.kill();
+        fail(err);
+      } else ok({ removed: filter.state.removed });
+    };
+    const check = () => {
+      if (srcCode === null || dstCode === null) return;
+      // psql prvi: kad on padne, pg_restore se gasi, pa bi njegova greška sakrila pravi uzrok.
+      if (dstCode !== 0) return finish(new Error(`psql (vraćanje) je završio sa ${dstCode}: ${redact(dstErr.trim().slice(-800))}`));
+      if (srcCode !== 0) return finish(new Error(`pg_restore je završio sa ${srcCode}: ${redact(srcErr.trim().slice(-800))}`));
+      finish(null);
+    };
+    src.stderr.on("data", (d) => (srcErr += d));
+    dst.stderr.on("data", (d) => (dstErr += d));
+    src.on("error", finish);
+    dst.on("error", finish);
+    // psql može da prekine ranije (greška) — pisanje u njegov ulaz tada ne sme da obori proces.
+    dst.stdin.on("error", () => {});
+    let rest = "";
+    src.stdout.setEncoding("utf8");
+    src.stdout.on("data", (chunk) => {
+      const lines = (rest + chunk).split("\n");
+      rest = lines.pop() ?? "";
+      const out = [];
+      for (const l of lines) {
+        const r = filter(l);
+        if (r !== null) out.push(r);
+      }
+      if (out.length && !dst.stdin.write(out.join("\n") + "\n")) {
+        src.stdout.pause();
+        dst.stdin.once("drain", () => src.stdout.resume());
+      }
+    });
+    src.stdout.on("end", () => {
+      if (rest) {
+        const r = filter(rest);
+        if (r !== null) dst.stdin.write(r + "\n");
+      }
+      dst.stdin.end();
+    });
+    src.on("close", (c) => {
+      srcCode = c ?? 1;
+      check();
+    });
+    dst.on("close", (c) => {
+      dstCode = c ?? 1;
+      if (dstCode !== 0 && srcCode === null) src.kill();
+      check();
+    });
+  });
 }
 
 const quoteLit = (s) => `'${String(s).replace(/'/g, "''")}'`;

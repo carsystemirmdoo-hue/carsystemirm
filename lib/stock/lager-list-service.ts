@@ -6,6 +6,7 @@ import { canAccessCustomer } from "@/lib/authz/scope.mjs";
 import { loadAssignedCustomerIds, type PortalUser } from "@/lib/authz/user-repository";
 import { customerPrices } from "@/lib/pricing/customer-price-service";
 import { incomingByArticle } from "@/lib/procurement/incoming-service";
+import { brandOf } from "@/lib/procurement/suggest.mjs";
 import { belgradeDate } from "@/lib/recommendations/customerRhythm.mjs";
 import { internalStockQuantities } from "@/lib/stock/stock-import-service";
 import { isThreeM } from "@/lib/stock/lagerSearch.mjs";
@@ -70,7 +71,7 @@ export async function loadLagerList(now = new Date()): Promise<LagerList> {
       key: a.id,
       code: a.code,
       name: a.name,
-      brand: a.brand,
+      brand: brandOf(a.name, a.brand),
       group: a.grp,
       unit: a.unit,
       stock: inSnapshot ? (stock.byArticle.get(a.id) ?? null) : null,
@@ -88,7 +89,7 @@ export async function loadLagerList(now = new Date()): Promise<LagerList> {
       key: `novo:${u.code}`,
       code: u.code,
       name: u.name,
-      brand: null,
+      brand: brandOf(u.name),
       group: null,
       unit: null,
       stock: u.quantity,

@@ -112,7 +112,8 @@ export function LagerTable({
   const brands = useMemo(() => {
     const m = new Map<string, number>();
     for (const r of rows) if (r.brand) m.set(r.brand, (m.get(r.brand) ?? 0) + 1);
-    return [...m.entries()].sort((a, b) => a[0].localeCompare(b[0], "sr-Latn", { sensitivity: "base" }));
+    // „Ostalo“ (naziv bez prepoznatog brenda) ide na kraj spiska.
+    return [...m.entries()].sort((a, b) => Number(a[0] === "Ostalo") - Number(b[0] === "Ostalo") || a[0].localeCompare(b[0], "sr-Latn", { sensitivity: "base" }));
   }, [rows]);
 
   // Kupac je skinut (ili nije dozvoljen) dok je tabela bila poređana po njegovoj ceni.

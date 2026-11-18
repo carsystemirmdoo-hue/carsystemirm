@@ -80,6 +80,37 @@
   display: inline;
 }
 
+/* Telefon/tablet: linije kao obična slika (vidi komponentu); računar ostaje na SVG-u. */
+.mobileStrokes {
+  display: none;
+}
+
+@media (hover: none) and (pointer: coarse) {
+  /* .section ispred: kasnije pravilo `.heroArtwork > svg { display: block }` ne sme da ga vrati. */
+  .section .heroArtwork > svg {
+    display: none;
+  }
+
+  .mobileStrokes {
+    display: block;
+    position: absolute;
+    inset: 0;
+    background-image: url("/art/paint-takeover/paint-takeover-hero-strokes-final-raster.webp");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    opacity: var(--linework-reveal, 1);
+    transform: translate3d(calc((1 - var(--linework-reveal, 1)) * -7%), 0, 0)
+      scale(calc(1.08 - var(--linework-reveal, 1) * 0.08));
+    transform-origin: 30% 55%;
+    will-change: opacity, transform;
+  }
+
+  :global(html[data-theme-preference="dark"]) .mobileStrokes {
+    background-image: url("/art/paint-takeover/paint-takeover-hero-strokes-light-raster.webp");
+  }
+}
+
 /*
  * Diskretno kretanje kada je kompozicija otkrivena (2026-10-18). Ranije je
  * jedino kretanje bilo otkrivanje poteza vezano za skrol, pa je posle toga

@@ -13,6 +13,7 @@ import { loadAssignedCustomerIds } from "@/lib/authz/user-repository";
 import type { PortalUser } from "@/lib/authz/session";
 import { effectiveInvoiceCondition } from "@/lib/ledger/effective-invoice";
 import { SALES_LINES_LIMIT } from "@/lib/sales/limits";
+import { brandPrefixesForPostgres } from "@/lib/procurement/suggest.mjs";
 import {
   PHYSICAL_RETURN_KINDS,
   VALUE_CORRECTION_KINDS,
@@ -27,6 +28,8 @@ export interface SalesFilter {
   assignedTo?: string | null;
   articleId?: string | null;
   productGroup?: string | null;
+  /** Brend artikla (isto pravilo kao Lager lista i Nabavka: `brandOf`). */
+  brand?: string | null;
   /** Samo negativne stavke (povrati, korekcije, nerazvrstano) — za listu na ekranu Povrati. */
   onlyNegative?: boolean;
 }
@@ -116,6 +119,23 @@ export async function loadSalesLines(
  * Uslovi filtera i opsega — ISTI za stavke i za agregate, da zbir na ekranu
  * uvek odgovara skupu iz kog su izvučeni redovi.
  */
+/*
+ * Brend stavke u SQL-u — isto pravilo kao `brandOf` (lib/procurement/suggest.mjs):
+ * upisan brend artikla ide kroz iste prefikse („BASLAC“ = „Baslac“), inače prefiks
+ * naziva (artikal iz šifarnika, a za nepovezanu stavku opis sa fakture), inače „Ostalo“.
+ * Prevod regeksa: `brandPrefixesForPostgres`.
+ */
+const brandText = (e: SQL) => sql`upper(replace(btrim(${e}), '.', ' '))`;
+function brandPrefixCase(e: SQL) {
+  const whens = brandPrefixesForPostgres().map(([re, b]) => sql`WHEN ${brandText(e)} ~ ${re} THEN ${b}`);
+  return sql`(CASE ${sql.join(whens, sql` `)} ELSE NULL END)`;
+}
+export const BRAND_SQL = sql<string>`coalesce(
+  CASE WHEN nullif(btrim(${articles.brand}), '') IS NOT NULL
+       THEN coalesce(${brandPrefixCase(sql`${articles.brand}`)}, btrim(${articles.brand})) END,
+  ${brandPrefixCase(sql`coalesce(${articles.name}, ${invoiceLines.description}, '')`)},
+  'Ostalo')`;
+
 function filterConditions(scope: string[] | null, filter: SalesFilter): SQL[] {
   const conditions: SQL[] = [];
   if (scope !== null) conditions.push(inArray(invoices.customerId, scope));
@@ -131,6 +151,7 @@ function filterConditions(scope: string[] | null, filter: SalesFilter): SQL[] {
   if (filter.articleId) conditions.push(eq(invoiceLines.articleId, filter.articleId));
   if (filter.productGroup)
     conditions.push(eq(articles.productGroup, filter.productGroup));
+  if (filter.brand) conditions.push(sql`${BRAND_SQL} = ${filter.brand}`);
   if (filter.onlyNegative) conditions.push(lt(invoiceLines.lineAmount, "0"));
   return conditions;
 }
@@ -166,7 +187,7 @@ export interface SalesBreakdownRow extends SalesSummary {
   customerId: string | null;
 }
 
-export type SalesBreakdownView = "kupci" | "komercijalisti" | "artikli" | "grupe" | TimeView;
+export type SalesBreakdownView = "kupci" | "komercijalisti" | "brendovi" | "artikli" | "grupe" | TimeView;
 
 /** Prikazi kroz vreme (datum izdavanja fakture); ređaju se hronološki, ne po iznosu. */
 export type TimeView = "dani" | "meseci" | "godine";
@@ -293,6 +314,11 @@ export async function loadSalesBreakdown(
     komercijalisti: {
       key: sql<string>`coalesce(${salespeople.name}, ${DODELA_KUPCA}, 'Bez dodele')`,
       label: sql<string>`coalesce(${salespeople.name}, ${DODELA_KUPCA}, 'Bez dodele')`,
+      customerId: sql<string | null>`NULL::text`,
+    },
+    brendovi: {
+      key: BRAND_SQL,
+      label: BRAND_SQL,
       customerId: sql<string | null>`NULL::text`,
     },
     artikli: {

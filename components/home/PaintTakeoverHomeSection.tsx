@@ -97,6 +97,8 @@ export function PaintTakeoverHomeSection({
       className={styles.section}
       // Suprotna tema od izbora korisnika: okvir sajta (header, meniji) je prati.
       data-frame-theme="inverse"
+      // Na telefonu samo dok sekcija pokriva ceo ekran (FrameThemeController).
+      data-frame-cover="mobile"
       data-paint-debug-layout={debugEnabled ? "true" : undefined}
       data-wash-disabled={washDisabled ? "true" : undefined}
       aria-labelledby="paint-takeover-home-title"
@@ -182,6 +184,11 @@ export function PaintTakeoverHomeSection({
               />
             </g>
           </svg>
+          {/* Telefon/tablet (2026-11-16): linije su obična slika (gotov raster, bez SVG-a,
+              filtera i maske) koja se otkriva samo providnošću i pomerajem —
+              --linework-reveal iz usePaintTakeoverMotion. Računar crta SVG iznad.
+              Slika: scripts/build-paint-takeover-raster.mjs */}
+          <div className={styles.mobileStrokes} />
         </div>
         <div className={styles.contentContrast} aria-hidden="true" />
         <div

@@ -21,7 +21,12 @@ import {
 } from "@/lib/sales/queries";
 import { normalizeSalesFilter } from "@/lib/sales/filterInput.mjs";
 import { readPortalPeriod } from "@/lib/portal/period";
+import { BRAND_PREFIXES } from "@/lib/procurement/suggest.mjs";
 
+/** Brendovi za filter: isti spisak kao Lager lista i Nabavka, „Ostalo“ na kraju. */
+const BRANDS = [...new Set(BRAND_PREFIXES.map(([, b]) => b))]
+  .sort((a, b) => a.localeCompare(b, "sr"))
+  .concat("Ostalo");
 
 export const metadata = { title: "Analitika" };
 
@@ -30,6 +35,7 @@ export const dynamic = "force-dynamic";
 const VIEWS: { key: GroupView; label: string }[] = [
   { key: "kupci", label: "Po kupcu" },
   { key: "komercijalisti", label: "Po komercijalisti" },
+  { key: "brendovi", label: "Po brendu" },
   { key: "artikli", label: "Po artiklu" },
   { key: "grupe", label: "Po grupi proizvoda" },
   { key: "meseci", label: "Po mesecu" },
@@ -121,7 +127,13 @@ export default async function AnalyticsPage({
 
       <SalesFilters
         action="/portal/analitika"
-        options={{ customers, salespeople, reps, productGroups }}
+        options={{
+          customers,
+          salespeople,
+          reps,
+          productGroups,
+          brands: BRANDS,
+        }}
         applied={applied}
         views={VIEWS}
         exportView={view}
@@ -154,14 +166,16 @@ export default async function AnalyticsPage({
             <h2>{VIEWS.find((item) => item.key === view)?.label}</h2>
             <p>
               {view === "kupci"
-                ? "Kliknite na kupca da otvorite njegove fakture."
-                : view === "komercijalisti"
-                  ? "Po komercijalisti sa fakture, a kada ga faktura nema — po današnjoj dodeli kupca. Kupac sa dva komercijaliste je u zajedničkoj grupi."
-                  : daysBlocked
-                    ? `Prikaz po danu traži period od najviše ${DANI_MAX} dana — zadajte Od i Do iznad (npr. „Ovaj mesec"). Izvoz radi i za duži period.`
-                    : view === "dani" || view === "meseci" || view === "godine"
-                      ? "Po datumu izdavanja fakture, od najnovijeg. Dani i meseci bez prometa se ne prikazuju."
-                      : "Zbirovi nad celim izabranim periodom."}
+                ? "Naziv kupca otvara njegove fakture, a „artikli →“ šta je kupovao."
+                : view === "brendovi"
+                  ? "„artikli →“ otvara artikle tog brenda. Rabat je prosečan, na VP vrednost prodatog."
+                  : view === "komercijalisti"
+                    ? "Po komercijalisti sa fakture, a kada ga faktura nema — po današnjoj dodeli kupca. Kupac sa dva komercijaliste je u zajedničkoj grupi."
+                    : daysBlocked
+                      ? `Prikaz po danu traži period od najviše ${DANI_MAX} dana — zadajte Od i Do iznad (npr. „Ovaj mesec"). Izvoz radi i za duži period.`
+                      : view === "dani" || view === "meseci" || view === "godine"
+                        ? "Po datumu izdavanja fakture, od najnovijeg. Dani i meseci bez prometa se ne prikazuju."
+                        : "Zbirovi nad celim izabranim periodom."}
             </p>
           </div>
         </div>
@@ -171,6 +185,22 @@ export default async function AnalyticsPage({
             totals={summary}
             view={view}
             drillDownBase="/portal/prodaja"
+            rowHref={(row) => {
+              // Isti filteri, samo prikaz po artiklu za izabranog kupca ili brend.
+              const next = new URLSearchParams(
+                Object.entries(params).filter(
+                  (e): e is [string, string] =>
+                    typeof e[1] === "string" && e[1] !== "",
+                ),
+              );
+              next.set("prikaz", "artikli");
+              if (view === "kupci" && row.customerId)
+                next.set("kupac", row.customerId);
+              else if (view === "brendovi") next.set("brend", row.key);
+              else return null;
+              return `/portal/analitika?${next.toString()}`;
+            }}
+            rowHrefLabel="artikli →"
           />
         )}
       </section>

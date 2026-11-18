@@ -31,7 +31,7 @@ export const runtime = "nodejs";
 
 const querySchema = z.object({
   format: z.enum(["csv", "xlsx", "pdf"]),
-  view: z.enum(["stavke", "kupci", "komercijalisti", "artikli", "grupe", "dani", "meseci", "godine"]),
+  view: z.enum(["stavke", "kupci", "komercijalisti", "brendovi", "artikli", "grupe", "dani", "meseci", "godine"]),
   // Stvaran kalendarski dan; `2026-02-31` je 400, ne 500 (B7).
   from: z.string().refine((v) => isoDateOrNull(v) !== null).optional(),
   to: z.string().refine((v) => isoDateOrNull(v) !== null).optional(),
@@ -39,6 +39,7 @@ const querySchema = z.object({
   salespersonId: z.string().uuid().optional(),
   assignedTo: z.union([z.literal("bez"), z.string().uuid()]).optional(),
   productGroup: z.string().optional(),
+  brand: z.string().max(60).optional(),
 });
 
 /**
@@ -84,6 +85,7 @@ export async function GET(request: Request) {
         { label: "Komercijalista", value: filter.salespersonId ?? "svi" },
         { label: "Zadužen komercijalista", value: await assignedLabel(filter.assignedTo) },
         { label: "Grupa proizvoda", value: filter.productGroup ?? "sve" },
+        { label: "Brend", value: filter.brand ?? "svi" },
       ],
       note: [
         "Podaci o plaćanju nisu dostupni iz trenutnog izvora i nisu deo ovog izveštaja.",
@@ -129,6 +131,7 @@ export async function GET(request: Request) {
 const GROUP_COLUMN: Record<string, string> = {
   kupci: "Kupac",
   komercijalisti: "Komercijalista",
+  brendovi: "Brend",
   artikli: "Artikal",
   grupe: "Grupa proizvoda",
   dani: "Dan",
@@ -140,6 +143,7 @@ const TITLES: Record<string, string> = {
   stavke: "Stavke faktura",
   kupci: "Promet po kupcu",
   komercijalisti: "Promet po komercijalisti",
+  brendovi: "Promet po brendu",
   artikli: "Promet po artiklu",
   grupe: "Promet po grupi proizvoda",
   dani: "Promet po danu",
@@ -159,6 +163,12 @@ function describeScope(role: string, permissions: string[]) {
   if (permissions.includes("analitika")) return "cela firma (paket analitika)";
   if (role === "kancelarija") return "cela firma";
   return "samo dodeljeni kupci";
+}
+
+/** Odobren rabat: iznos i prosečan procenat na VP vrednost (isto kao na ekranu). */
+function rabat(t: Pick<SalesSummary, "listValue" | "gross">): [number, number | string] {
+  const amount = Math.round(Math.max(0, t.listValue - t.gross) * 100) / 100;
+  return [amount, t.listValue > 0 ? Math.round((amount / t.listValue) * 1000) / 10 : "—"];
 }
 
 function buildReport(
@@ -200,6 +210,9 @@ function buildReport(
   return {
     columns: [
       GROUP_COLUMN[view],
+      "VP vrednost",
+      "Rabat",
+      "Rabat %",
       "Bruto",
       "Povrati",
       "Korekcije",
@@ -210,6 +223,8 @@ function buildReport(
     rows: [
       ...breakdown.map((row) => [
         row.label,
+        row.listValue,
+        ...rabat(row),
         row.gross,
         row.returnValue,
         row.correctionValue,
@@ -219,6 +234,8 @@ function buildReport(
       ]),
       [
         "UKUPNO",
+        total.listValue,
+        ...rabat(total),
         total.gross,
         total.returnValue,
         total.correctionValue,

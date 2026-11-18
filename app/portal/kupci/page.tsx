@@ -131,9 +131,7 @@ export default async function CustomersPage({
                 <th scope="col">PIB</th>
                 <th scope="col">Grad</th>
                 <th scope="col">Komercijalista</th>
-                <th scope="col">Bruto</th>
-                <th scope="col">Povrati</th>
-                <th scope="col">Neto</th>
+                <th scope="col" title="Fakturisano umanjeno za povrate, storna i knjižna odobrenja">Promet</th>
                 <th scope="col">Faktura</th>
                 <th scope="col">Dugovanje</th>
               </tr>
@@ -152,14 +150,16 @@ export default async function CustomersPage({
                     <td>{customer.pib}</td>
                     <td>{customer.city ?? "—"}</td>
                     <td>{(assignees.get(customer.id) ?? []).map((a) => a.name).join(", ") || "—"}</td>
-                    <td className="portal-table-number">
-                      {money(totals?.gross ?? 0)}
-                    </td>
-                    <td className="portal-table-number">
-                      {money(totals?.returnValue ?? 0)}
-                    </td>
-                    <td className="portal-table-number">
+                    {/* Jedna kolona (odluka vlasnika 2026-11-16): neto promet. Umanjenje se vidi samo kada ga ima. */}
+                    <td className="portal-table-number" data-sort-value={String(totals?.net ?? 0).replace(".", ",")}>
                       <strong>{money(totals?.net ?? 0)}</strong>
+                      {totals && Math.round(totals.gross - totals.net) !== 0 ? (
+                        <small title="Povrati, storna i knjižna odobrenja u periodu">
+                          {" "}
+                          <br />
+                          umanjeno {money(totals.gross - totals.net)}
+                        </small>
+                      ) : null}
                     </td>
                     <td className="portal-table-number">
                       {totals?.invoiceCount ?? 0}
@@ -180,7 +180,7 @@ export default async function CustomersPage({
               })}
               {customers.length === 0 ? (
                 <tr>
-                  <td colSpan={9}>
+                  <td colSpan={7}>
                     {filtered && allScoped.length > 0
                       ? "Nijedan kupac ne odgovara pretrazi i izabranom komercijalisti."
                       : statusFilter !== "svi" && allScoped.length > 0

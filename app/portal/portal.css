@@ -10879,3 +10879,23 @@ a.dg-metric { color: inherit; text-decoration: none; }
 .np-note-row { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
 .np-table small.np-ok-inline { display: inline; color: #1e6b34; font-weight: 600; }
 .np-table small.np-err-inline { display: inline; color: #a3121b; font-weight: 600; }
+
+/* VP cenovnik — priprema (2026-11-18). */
+.vp-waiting,
+.vp-facts {
+  margin: 0;
+  padding: 4px 16px 16px 34px;
+  font-size: 13px;
+  display: grid;
+  gap: 0.35rem;
+  line-height: 1.45;
+}
+.portal-panel > .portal-export-links {
+  padding-inline: 16px;
+}
+.vp-stage-forms {
+  display: grid;
+  gap: 1.25rem;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 22rem), 1fr));
+  align-items: start;
+}

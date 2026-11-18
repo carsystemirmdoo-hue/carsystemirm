@@ -115,3 +115,55 @@ export const customerCommercialStatusDecisions = pgTable(
   },
   (t) => [index("customer_commercial_status_latest_idx").on(t.customerId, t.decidedAt, t.id)],
 );
+
+/*
+ * Priprema novog VP cenovnika (0066): menadžer prodaje → kancelarija → vlasnik.
+ * Primena ide kroz obično otpremanje (`priceListImports`) kada kancelarija pošalje vlasniku.
+ */
+export const priceListDrafts = pgTable(
+  "price_list_drafts",
+  {
+    id: uuid("id").primaryKey().defaultRandom(),
+    title: text("title").notNull(),
+    /** „priprema“ (procenti/cene na ekranu) ili „excel“ (otpremljen fajl). */
+    origin: text("origin").notNull().default("priprema"),
+    /** priprema → kancelarija → vlasnik; „odbaceno“ kada je priprema napuštena. */
+    stage: text("stage").notNull().default("priprema"),
+    proposedValidFrom: date("proposed_valid_from"),
+    /** Unos sa ekrana: procenti po brendu/grupi/artiklu i tačne cene (u parama). */
+    edits: jsonb("edits").notNull().default({}),
+    rounding: text("rounding").notNull().default("para"),
+    preparedNote: text("prepared_note"),
+    createdBy: uuid("created_by").notNull().references(() => users.id, { onDelete: "restrict" }),
+    createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+    updatedAt: timestamp("updated_at", { withTimezone: true }).notNull().defaultNow(),
+    sentToOfficeBy: uuid("sent_to_office_by").references(() => users.id, { onDelete: "restrict" }),
+    sentToOfficeAt: timestamp("sent_to_office_at", { withTimezone: true }),
+    officeCheckedBy: uuid("office_checked_by").references(() => users.id, { onDelete: "restrict" }),
+    officeCheckedAt: timestamp("office_checked_at", { withTimezone: true }),
+    officeNote: text("office_note"),
+    returnedBy: uuid("returned_by").references(() => users.id, { onDelete: "restrict" }),
+    returnedAt: timestamp("returned_at", { withTimezone: true }),
+    returnedNote: text("returned_note"),
+    importId: uuid("import_id").references(() => priceListImports.id, { onDelete: "restrict" }),
+    rowCount: integer("row_count").notNull().default(0),
+    changedCount: integer("changed_count").notNull().default(0),
+  },
+  (t) => [index("price_list_drafts_stage_idx").on(t.stage, t.updatedAt)],
+);
+
+export const priceListDraftRows = pgTable(
+  "price_list_draft_rows",
+  {
+    draftId: uuid("draft_id").notNull().references(() => priceListDrafts.id, { onDelete: "cascade" }),
+    articleId: uuid("article_id").notNull().references(() => articles.id, { onDelete: "restrict" }),
+    code: text("code").notNull(),
+    name: text("name").notNull(),
+    brand: text("brand").notNull(),
+    groupKey: text("group_key").notNull(),
+    vatPercent: numeric("vat_percent", { precision: 5, scale: 2 }).notNull(),
+    oldVpPrice: numeric("old_vp_price", { precision: 14, scale: 2 }),
+    newVpPrice: numeric("new_vp_price", { precision: 14, scale: 2 }).notNull(),
+  },
+  (t) => [primaryKey({ name: "price_list_draft_rows_pk", columns: [t.draftId, t.articleId] })],
+);

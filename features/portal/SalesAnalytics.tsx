@@ -31,7 +31,7 @@ export function moneyRsd(value: number | null) {
   return value === null ? "—" : `${MONEY.format(value)}\u00a0RSD`;
 }
 
-export type GroupView = "kupci" | "komercijalisti" | "artikli" | "grupe";
+export type GroupView = "kupci" | "komercijalisti" | "brendovi" | "artikli" | "grupe";
 
 /** Najviše stavki u listi na ekranu; zbirovi se računaju nad svim stavkama. */
 export const SALES_LINES_DISPLAY = 500;
@@ -39,6 +39,7 @@ export const SALES_LINES_DISPLAY = 500;
 const GROUP_LABELS: Record<GroupView, string> = {
   kupci: "Kupac",
   komercijalisti: "Komercijalista",
+  brendovi: "Brend",
   artikli: "Artikal",
   grupe: "Grupa proizvoda",
 };
@@ -197,6 +198,8 @@ export function SalesBreakdown({
   totals,
   view,
   drillDownBase,
+  rowHref,
+  rowHrefLabel,
 }: {
   /** Zbirovi po grupi nad celim skupom (`loadSalesBreakdown`). */
   rows: readonly SalesBreakdownRow[];
@@ -204,6 +207,9 @@ export function SalesBreakdown({
   view: GroupView;
   /** Osnova za drill-down; kada je zadata, red vodi na fakture. */
   drillDownBase?: string;
+  /** Kupac → njegovi artikli, brend → artikli brenda (Analitika). */
+  rowHref?: (row: SalesBreakdownRow) => string | null;
+  rowHrefLabel?: string;
 }) {
   const grouped = rows;
   const adj = hasAdjustments(totals);
@@ -252,6 +258,14 @@ export function SalesBreakdown({
                   ) : (
                     row.label
                   )}
+                  {rowHref && rowHref(row) ? (
+                    <>
+                      {" "}
+                      <Link className="portal-table-sub" href={rowHref(row)!}>
+                        {rowHrefLabel ?? "artikli"}
+                      </Link>
+                    </>
+                  ) : null}
                 </th>
                 <td className="portal-table-number">{money(row.listValue)}</td>
                 <td className="portal-table-number">{rebateCell(row)}</td>

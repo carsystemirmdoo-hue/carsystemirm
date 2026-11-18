@@ -7,6 +7,8 @@ export interface FilterOptions {
   /** Komercijalisti za filter po dodeli; prazno = filter se ne prikazuje (npr. komercijalista vidi samo svoje). */
   reps?: { id: string; name: string }[];
   productGroups: string[];
+  /** Brendovi za filter (Analitika); prazno = filter se ne prikazuje. */
+  brands?: string[];
 }
 
 export interface AppliedFilter {
@@ -16,6 +18,7 @@ export interface AppliedFilter {
   komercijalista?: string;
   zaduzen?: string;
   grupa?: string;
+  brend?: string;
   prikaz?: string;
 }
 
@@ -56,6 +59,7 @@ export function SalesFilters({
     exportParams.set("salespersonId", applied.komercijalista);
   if (applied.zaduzen) exportParams.set("assignedTo", applied.zaduzen);
   if (applied.grupa) exportParams.set("productGroup", applied.grupa);
+  if (applied.brend) exportParams.set("brand", applied.brend);
   const reps = options.reps ?? [];
 
   return (
@@ -120,6 +124,19 @@ export function SalesFilters({
             </small>
           ) : null}
         </label>
+        {options.brands && options.brands.length > 0 ? (
+          <label>
+            <span>Brend</span>
+            <select name="brend" defaultValue={applied.brend ?? ""}>
+              <option value="">svi brendovi</option>
+              {options.brands.map((b) => (
+                <option key={b} value={b}>
+                  {b}
+                </option>
+              ))}
+            </select>
+          </label>
+        ) : null}
         <label>
           <span>Grupa proizvoda</span>
           <select

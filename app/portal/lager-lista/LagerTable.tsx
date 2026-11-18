@@ -168,6 +168,19 @@ export function LagerTable({
           <input type="checkbox" checked={onlyStock} onChange={(e) => setOnlyStock(e.target.checked)} />
           Samo na stanju
         </label>
+        <a
+          className="portal-button"
+          href={`/api/portal/lager-lista/izvoz?${new URLSearchParams({
+            ...(deferredQ.trim() ? { q: deferredQ.trim() } : {}),
+            ...(brand !== ALL ? { brend: brand } : {}),
+            ...(onlyStock ? { stanje: "1" } : {}),
+            ...(forCustomer ? { kupac: forCustomer.customer.id } : {}),
+          }).toString()}`}
+          title="Svi redovi koji odgovaraju pretrazi i filterima, ne samo prvih 200"
+          download
+        >
+          Excel
+        </a>
         {customers.length ? (
           <div className={`${styles.field} ${styles.customer}`}>
             <span>Cena za kupca{loadingCustomer ? " — učitavam…" : ""}</span>

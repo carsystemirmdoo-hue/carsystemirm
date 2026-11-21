@@ -14,6 +14,13 @@ import type { CSSProperties, Ref } from "react";
 import styles from "./CatalogPage.styles";
 import { variantCountLabel } from "@/lib/sr-plural";
 
+/*
+ * Širina slike u /katalog mreži (CatalogPage.desktop/mobile.module.css): ≥1880 četiri kolone,
+ * ≥1200 tri, 901–1199 dve uz bočni filter, do 900 dve. Ranije „92vw“ do 768 px tražilo je
+ * sliku od 1080 px za karticu od ~190 px na telefonu (DPR 3); izmereno 2026-11-03.
+ */
+const CATALOG_GRID_IMAGE_SIZES = "(min-width: 1880px) 18vw, (min-width: 1200px) 27vw, (min-width: 901px) 40vw, 52vw";
+
 export function CatalogProductCard({
   brand,
   className,
@@ -131,7 +138,7 @@ export function CatalogProductCard({
         className={styles.catalogProductVisual}
         presentation={presentation}
         product={product}
-        sizes="(min-width: 1180px) 27vw, (min-width: 768px) 42vw, 92vw"
+        sizes={catalogSystem ? CATALOG_GRID_IMAGE_SIZES : "(min-width: 1180px) 27vw, (min-width: 768px) 42vw, 92vw"}
       />
 
       <span className={styles.productBody}>

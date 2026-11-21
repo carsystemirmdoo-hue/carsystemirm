@@ -49016,8 +49016,7 @@
     "carsystem-interface-pad",
     "carsystem-soft-interface-pad",
     "carsystem-proflex-interface-pad-150-mm-15-holes",
-    "carsystem-excenter-back-pad-t-19",
-    "carfit-soft-interface-pads-micro"
+    "carsystem-excenter-back-pad-t-19"
    ],
    "povezani": [
     "SV-0073",
@@ -49104,7 +49103,7 @@
    "revizije": [],
    "imaTekst": true,
    "reci": 618,
-   "otisak": "4f46d7116d1348fdd3f9",
+   "otisak": "6272b9da867f5a71fc94",
    "blocks": [
     {
      "t": "p",

@@ -29,7 +29,6 @@ proizvodi:
   - carsystem-soft-interface-pad
   - carsystem-proflex-interface-pad-150-mm-15-holes
   - carsystem-excenter-back-pad-t-19
-  - carfit-soft-interface-pads-micro
 povezani:
   - SV-0073
   - SV-0071

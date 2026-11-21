@@ -12,9 +12,9 @@ Generiše `npm run saveti:build`. Ne menjati ručno.
 | Odobreno za objavu (imenovana osoba) | 0 |
 | Od toga novosti | 9 |
 
-## Greške (1)
+## Greške (0)
 
-- content/saveti/clanci/meki-medjusloj-na-brusilici.md: proizvod „carfit-soft-interface-pads-micro“ ne postoji ili nije kanonski (konsolidovana varijanta?)
+Nema.
 
 ## Upozorenja (3)
 

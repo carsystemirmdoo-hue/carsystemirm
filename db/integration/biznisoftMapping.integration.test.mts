@@ -282,3 +282,56 @@ test("trag revizije o knjizenju ne sadrzi naziv kupca ni ceo broj dokumenta", as
     assert.ok(!row.entity_label.includes("QA Kupac"), "naziv kupca je u tragu");
   }
 });
+
+test("nov partner: „Otvorite kupca“ pravi kupca, povezuje šifru i knjiži dokument; PIB se proverava i ne ulazi u trag", async (t) => {
+  if (guard(t)) return;
+  await clean();
+  const { ingestBiznisoftPdf, postAwaitingMapping } = await import("@/lib/pdf/ingest");
+  const { openCustomerForIdentifier, ExternalIdentityError } = await import("@/lib/commercial/identity-service");
+  const { pibCheckDigit } = await import("@/lib/partners/pib.mjs");
+
+  const first = await ingestBiznisoftPdf(
+    { bytes: await bytesOf("vise-stavki.pdf"), fileName: "a.pdf", issuerCode: ISSUER },
+    actor,
+  );
+  assert.equal(first.result, "awaiting_customer_mapping");
+  const id = await identifierId("09002");
+  assert.ok(id);
+
+  // Ispravan PIB iz nasumičnih osam cifara (prva ne sme biti nula).
+  const first8 = `9${String(Math.floor(Math.random() * 1e7)).padStart(7, "0")}`;
+  const pib = `${first8}${pibCheckDigit(first8)}`;
+  const badPib = `${first8}${(pibCheckDigit(first8) + 1) % 10}`;
+  const input = { id: id!, pib, name: "QA Novi Partner DOO", city: "Inđija", reason: "QA: nov partner sa kartice" };
+
+  await assert.rejects(
+    () => openCustomerForIdentifier({ ...input, pib: badPib }, actor),
+    (e: unknown) => e instanceof ExternalIdentityError && e.code === "bad_pib",
+  );
+  try {
+    const { customerId } = await openCustomerForIdentifier(input, actor);
+    const [ident] = await db.sql<{ status: string; customer_id: string }[]>`
+      SELECT status, customer_id FROM customer_external_identifiers WHERE id = ${id}`;
+    assert.deepEqual(ident, { status: "mapped", customer_id: customerId });
+
+    const out = await postAwaitingMapping({ issuerCode: ISSUER, externalPartnerCode: "09002" }, actor);
+    assert.equal(out.posted.length, 1);
+    const [inv] = await db.sql<{ customer_id: string }[]>`SELECT customer_id FROM invoices`;
+    assert.equal(inv.customer_id, customerId);
+
+    // Drugi put ista šifra više nije otvorena; isti PIB se ne pravi dvaput.
+    await assert.rejects(() => openCustomerForIdentifier(input, actor), (e: unknown) => e instanceof ExternalIdentityError);
+
+    const trag = await db.sql<{ payload: string }[]>`
+      SELECT row_to_json(a)::text AS payload FROM audit_log a WHERE entity_id IN (${customerId}, ${id})`;
+    assert.ok(trag.length >= 2, "nema traga otvaranja kupca");
+    for (const r of trag) assert.ok(!r.payload.includes(pib), "PIB je ušao u trag revizije");
+  } finally {
+    await db.sql`DELETE FROM source_document_lines`;
+    await db.sql`DELETE FROM source_documents`;
+    await db.sql`DELETE FROM invoice_lines`;
+    await db.sql`DELETE FROM invoices`;
+    await db.sql`DELETE FROM customer_external_identifiers`;
+    await db.sql`DELETE FROM customers WHERE pib = ${pib}`;
+  }
+});

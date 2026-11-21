@@ -53,6 +53,7 @@ export default async function PartnerCodesPage({
   ]);
 
   const total = STATUSES.reduce((sum, status) => sum + counts[status], 0);
+  const waiting = counts.unmapped + counts.conflict;
 
   return (
     <>
@@ -112,6 +113,16 @@ export default async function PartnerCodesPage({
               ulazi u automatsko povezivanje — ono ide isključivo po tačnoj šifri.
             </p>
           </section>
+
+          {!canManage && waiting > 0 ? (
+            <section className="portal-panel" data-accent="warning">
+              <h2>Čeka razrešenje: {waiting}</h2>
+              <p>
+                Nepovezanu šifru i konflikt razrešava Vlasnik ili ko ima paket „Mapiranja kupaca i
+                artikala“. Javite mu šifru partnera i naziv iz izvora; sa ovog naloga se veza ne menja.
+              </p>
+            </section>
+          ) : null}
 
           <IdentityResolver
             rows={rows}

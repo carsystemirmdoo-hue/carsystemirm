@@ -1,7 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { useActionState, useState } from "react";
+import { useActionState, useEffect, useState } from "react";
+import { NOTIFICATIONS_CHANGED } from "@/components/portal/NotificationBell";
 import { Badge, Field, PortalButton } from "@/components/portal/PortalPrimitives";
 import {
   markReadAction,
@@ -44,14 +45,20 @@ export function NotificationList({
   const error = resolveState.error ?? readState.error;
   const ok = resolveState.ok ?? readState.ok;
 
+  // Zvonce u gornjoj traci osvežava broj odmah, ne tek za minut.
+  useEffect(() => {
+    if (ok) window.dispatchEvent(new Event(NOTIFICATIONS_CHANGED));
+  }, [ok, readState, resolveState]);
+
   if (items.length === 0) {
     return (
       <section className="portal-panel">
         <h2>Nema obaveštenja</h2>
         <p>
-          Obaveštenja nastaju iz stvarnih događaja — predloga cene, odobrenja,
-          konflikta pravila i neuspelog usaglašavanja sa BizniSoftom. Prazna
-          lista znači da se nijedan od njih nije desio.
+          Obaveštenja nastaju iz stvarnih događaja — novog zahteva ili upita
+          kupca, predloga i odobrenja cene, konflikta pravila i neuspelog
+          usaglašavanja sa BizniSoftom — i vidi ih samo ko sme da postupi po
+          njima. Prazna lista znači da se za Vas nijedan nije desio.
         </p>
       </section>
     );

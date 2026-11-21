@@ -18,7 +18,8 @@ const cli = (await readFile(`${ROOT}scripts/ops/customer-link.mts`, "utf8")).rep
 test("svaki poziv traži mappings:manage; primena i svež drugi faktor istog korisnika", () => {
   assert.match(kod, /requireCapability\("mappings:manage"/);
   const primena = kod.slice(kod.indexOf('if (mode === "primena") {'));
-  assert.match(primena, /requireRecentMfa\(\)/);
+  // Svež drugi faktor (10 min), uz ponovnu potvrdu umesto „Nemate dozvolu".
+  assert.match(primena, /requireRecentMfaOrReauth\(PATH\)/);
   assert.match(primena, /fresh\.id !== actor\.id/);
   assert.match(primena, /isPartnerRegistryUploadEnabled\(\)/);
   assert.match(primena, /formData\.get\("potvrda"\) !== "da"/);

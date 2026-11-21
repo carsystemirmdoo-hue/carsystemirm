@@ -16,7 +16,7 @@ export function ImportUpload() {
         <div>
           <h2>Ručni uvoz izvoza faktura</h2>
           <p>
-            CSV iz BiznisSoft-a. Isti fajl se prepoznaje po otisku sadržaja i ne
+            CSV iz BizniSoft-a. Isti fajl se prepoznaje po otisku sadržaja i ne
             uvozi se dvaput.
           </p>
         </div>

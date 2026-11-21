@@ -3,7 +3,7 @@
 import { revalidatePath } from "next/cache";
 import { forbidden } from "next/navigation";
 import { can } from "@/lib/authz/permissions.mjs";
-import { requireCapability, requireRecentMfa } from "@/lib/authz/session";
+import { requireCapability, requireRecentMfaOrReauth } from "@/lib/authz/session";
 import { applyConfirmedLinks } from "@/lib/commercial/customerLinkApply";
 import { LinkReviewError, readReview, registerFromRows } from "@/lib/commercial/linkReviewFiles.mjs";
 import { XlsxReadError, readXlsx } from "@/lib/import/xlsx/readXlsx.mjs";
@@ -40,7 +40,8 @@ export async function linkReviewAction(_previous: LinkActionState, formData: For
   const mode = formData.get("mode") === "primena" ? "primena" : "provera";
   let actor = await requireCapability("mappings:manage", PATH);
   if (mode === "primena") {
-    const fresh = await requireRecentMfa();
+    // Istekla potvrda → ponovna potvrda identiteta i povratak ovde, ne „Nemate dozvolu".
+    const fresh = await requireRecentMfaOrReauth(PATH);
     if (fresh.id !== actor.id || !can(fresh, "mappings:manage")) forbidden();
     actor = fresh;
     if (!isPartnerRegistryUploadEnabled()) {

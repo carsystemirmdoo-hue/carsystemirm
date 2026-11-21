@@ -26,7 +26,7 @@ export function PriceRequestActions({ id, status }: { id: string; status: string
       ) : null}
       {status === "open" || status === "in_progress" ? (
         <label className="kk-reason">
-          <span>Odgovor kupcu (vidi ga u „Upiti”)</span>
+          <span>Odgovor kupcu (vidi ga u „Upiti”) — obavezan i kada upit zatvarate bez odgovora</span>
           <textarea value={answer} onChange={(e) => setAnswer(e.target.value)} rows={2} maxLength={2000} disabled={pending} />
           <span className="kk-step-actions">
             <button type="button" className="portal-button" data-variant="primary" disabled={pending} onClick={() => run(() => answerPriceRequestAction(id, answer))}>
@@ -36,7 +36,7 @@ export function PriceRequestActions({ id, status }: { id: string; status: string
         </label>
       ) : null}
       <span className="kk-step-actions">
-        <button type="button" className="portal-button" data-variant="ghost" disabled={pending} onClick={() => run(() => closePriceRequestAction(id))}>
+        <button type="button" className="portal-button" data-variant="ghost" disabled={pending} onClick={() => run(() => closePriceRequestAction(id, answer))}>
           Zatvorite
         </button>
       </span>

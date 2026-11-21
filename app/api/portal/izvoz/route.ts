@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { listSalesReps } from "@/lib/partners/assignment-service";
 import { AUDIT_ACTIONS, recordAudit } from "@/lib/audit/record";
 import {
   apiAuthResponse,
@@ -30,16 +31,15 @@ export const runtime = "nodejs";
 
 const querySchema = z.object({
   format: z.enum(["csv", "xlsx", "pdf"]),
-  view: z.enum(["stavke", "kupci", "komercijalisti", "brendovi", "artikli", "grupe"]),
+  view: z.enum(["stavke", "kupci", "komercijalisti", "brendovi", "artikli", "grupe", "dani", "meseci", "godine"]),
   // Stvaran kalendarski dan; `2026-02-31` je 400, ne 500 (B7).
   from: z.string().refine((v) => isoDateOrNull(v) !== null).optional(),
   to: z.string().refine((v) => isoDateOrNull(v) !== null).optional(),
   customerId: z.string().uuid().optional(),
   salespersonId: z.string().uuid().optional(),
+  assignedTo: z.union([z.literal("bez"), z.string().uuid()]).optional(),
   productGroup: z.string().optional(),
   brand: z.string().max(60).optional(),
-  // Zadužen komercijalista (dodela kupca): ID ili „bez“ — isto kao filter na ekranu.
-  assignedTo: z.union([z.string().uuid(), z.literal("bez")]).optional(),
 });
 
 /**
@@ -83,7 +83,7 @@ export async function GET(request: Request) {
         { label: "Obim", value: describeScope(user.role, user.permissions) },
         { label: "Kupac", value: filter.customerId ?? "svi" },
         { label: "Komercijalista", value: filter.salespersonId ?? "svi" },
-        { label: "Zadužen komercijalista", value: filter.assignedTo ?? "svi" },
+        { label: "Zadužen komercijalista", value: await assignedLabel(filter.assignedTo) },
         { label: "Grupa proizvoda", value: filter.productGroup ?? "sve" },
         { label: "Brend", value: filter.brand ?? "svi" },
       ],
@@ -112,7 +112,8 @@ export async function GET(request: Request) {
     });
 
     const fileName = `carsystem-${view}-${new Date().toISOString().slice(0, 10)}.${serializer.extension}`;
-    return new Response(body, {
+    // XLSX je binarni ZIP (Uint8Array), CSV i PDF su tekst.
+    return new Response(typeof body === "string" ? body : new Uint8Array(body), {
       headers: {
         "Content-Type": serializer.mime,
         "Content-Disposition": `attachment; filename="${fileName}"`,
@@ -126,6 +127,18 @@ export async function GET(request: Request) {
   }
 }
 
+/** Naziv prve kolone zbirnog izveštaja (nominativ, ne „po kupcu“). */
+const GROUP_COLUMN: Record<string, string> = {
+  kupci: "Kupac",
+  komercijalisti: "Komercijalista",
+  brendovi: "Brend",
+  artikli: "Artikal",
+  grupe: "Grupa proizvoda",
+  dani: "Dan",
+  meseci: "Mesec",
+  godine: "Godina",
+};
+
 const TITLES: Record<string, string> = {
   stavke: "Stavke faktura",
   kupci: "Promet po kupcu",
@@ -133,7 +146,17 @@ const TITLES: Record<string, string> = {
   brendovi: "Promet po brendu",
   artikli: "Promet po artiklu",
   grupe: "Promet po grupi proizvoda",
+  dani: "Promet po danu",
+  meseci: "Promet po mesecu",
+  godine: "Promet po godini",
 };
+
+/** Ime zaduženog komercijaliste za zaglavlje izvoza (ID ništa ne govori čitaocu). */
+async function assignedLabel(assignedTo: string | undefined) {
+  if (!assignedTo) return "svi";
+  if (assignedTo === "bez") return "bez komercijaliste";
+  return (await listSalesReps()).find((r) => r.id === assignedTo)?.name ?? assignedTo;
+}
 
 function describeScope(role: string, permissions: string[]) {
   if (role === "gazda") return "cela firma";
@@ -186,7 +209,7 @@ function buildReport(
   // Zbirovi po grupi i UKUPNO dolaze iz baze, nad celim filtriranim skupom.
   return {
     columns: [
-      TITLES[view].replace("Promet po ", ""),
+      GROUP_COLUMN[view],
       "VP vrednost",
       "Rabat",
       "Rabat %",

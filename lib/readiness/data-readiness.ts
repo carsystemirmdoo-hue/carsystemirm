@@ -304,6 +304,8 @@ export type ProblemiDokumenata = {
   sudar: number;
   rucniPregled: number;
   bezPodrskeZaFormat: number;
+  /** Storno čiji original još nije uvezen ili čeka ručni pregled poređenja. */
+  stornoCeka: number;
   ukupnoRazlicitih: number;
   /**
    * Da li brojevi uopšte pokrivaju nepripisive dokumente.
@@ -354,21 +356,40 @@ export async function problemiDokumenata(
                             AND sd.revision_status = 'original'`;
   const sudar = sql`sd.revision_status = 'conflict'`;
   const rucni = sql`sd.manual_review = 'pending'`;
-  const bezPodrske = sql`sd.validation_status = 'unsupported_requires_sample'`;
+  /*
+   * Storno se ne knjiži kao faktura nego kao veza u `invoice_reversals`.
+   * Kada je veza primenjena (original pronađen, sadržaj se slaže, original
+   * izbačen iz prometa), dokument je razrešen i ne čeka ništa — iako mu je
+   * oblik i dalje `unsupported_requires_sample`.
+   */
+  const stornoPrimenjen = sql`EXISTS (
+          SELECT 1 FROM invoice_reversals r
+           WHERE r.storno_source_document_id = sd.id
+             AND r.status = 'applied'
+        )`;
+  const bezPodrske = sql`sd.validation_status = 'unsupported_requires_sample' AND NOT ${stornoPrimenjen}`;
+  const stornoCeka = sql`EXISTS (
+          SELECT 1 FROM invoice_reversals r
+           WHERE r.storno_source_document_id = sd.id
+             AND r.status <> 'applied'
+        )`;
 
   const [red] = await db.execute<{
     ceka_mapiranje: number;
     sudar: number;
     rucni_pregled: number;
     bez_podrske: number;
+    storno_ceka: number;
     ukupno_razlicitih: number;
   }>(sql`
     SELECT count(*) FILTER (WHERE ${cekaMapiranje})::int AS ceka_mapiranje,
            count(*) FILTER (WHERE ${sudar})::int         AS sudar,
            count(*) FILTER (WHERE ${rucni})::int         AS rucni_pregled,
            count(*) FILTER (WHERE ${bezPodrske})::int    AS bez_podrske,
+           count(*) FILTER (WHERE ${stornoCeka})::int    AS storno_ceka,
            count(*) FILTER (
              WHERE (${cekaMapiranje}) OR (${sudar}) OR (${rucni}) OR (${bezPodrske})
+                OR (${stornoCeka})
            )::int AS ukupno_razlicitih
       FROM source_documents sd
      WHERE ${pripada}
@@ -379,6 +400,7 @@ export async function problemiDokumenata(
     sudar: red?.sudar ?? 0,
     rucniPregled: red?.rucni_pregled ?? 0,
     bezPodrskeZaFormat: red?.bez_podrske ?? 0,
+    stornoCeka: red?.storno_ceka ?? 0,
     ukupnoRazlicitih: red?.ukupno_razlicitih ?? 0,
     obuhvataNepripisive: globalno,
   };
@@ -396,6 +418,10 @@ export type Korektivni = {
   bezDokazaneVeze: number;
   /** Dokumenti kojima izvor uopšte ne daje vrstu. */
   nerazvrstanihDokumenata: number;
+  /** Storno sa dokazanom vezom: original pronađen, sadržaj se slaže, original van prometa. */
+  stornoSaVezom: number;
+  /** Storno koji čeka original ili ručni pregled poređenja. */
+  stornoBezVeze: number;
 };
 
 /**
@@ -443,10 +469,40 @@ export async function korektivni(
      WHERE ${uslov}
   `);
 
+  /*
+   * Storno ne ulazi u `effective_sales_ledger` kao red — on IZBACUJE original.
+   * Zato se broji iz `invoice_reversals`, sa datumom storno dokumenta.
+   * Opseg ide preko kupca originala; storno koji original još nije našao
+   * nema kupca i vidi ga samo onaj ko vidi sve kupce.
+   */
+  const stornoUslov = sql.join(
+    [
+      scope.customerIds === null
+        ? sql`true`
+        : sql`EXISTS (
+            SELECT 1 FROM invoices i
+             WHERE i.id = r.original_invoice_id
+               AND ${uOpsegu(scope, sql`i.customer_id`)}
+          )`,
+      ...(period.od ? [sql`sd.document_date >= ${period.od}`] : []),
+      ...(period.do ? [sql`sd.document_date <= ${period.do}`] : []),
+    ],
+    sql` AND `,
+  );
+  const [storno] = await db.execute<{ sa_vezom: number; bez_veze: number }>(sql`
+    SELECT count(*) FILTER (WHERE r.status = 'applied')::int  AS sa_vezom,
+           count(*) FILTER (WHERE r.status <> 'applied')::int AS bez_veze
+      FROM invoice_reversals r
+      JOIN source_documents sd ON sd.id = r.storno_source_document_id
+     WHERE ${stornoUslov}
+  `);
+
   return {
     dokumenata: red?.dokumenata ?? 0,
     stavki: red?.stavki ?? 0,
     bezDokazaneVeze: red?.bez_veze ?? 0,
     nerazvrstanihDokumenata: red?.nerazvrstanih ?? 0,
+    stornoSaVezom: storno?.sa_vezom ?? 0,
+    stornoBezVeze: storno?.bez_veze ?? 0,
   };
 }

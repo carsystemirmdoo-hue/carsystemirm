@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { signOutAction } from "@/app/portal/actions";
+import Link from "next/link";
 import { PageHeader } from "@/components/portal/PortalPrimitives";
+import { readMfaStatus } from "@/lib/auth/mfa-service";
 import { requireFullPortalUser } from "@/lib/authz/session";
 import { PasswordChange } from "./PasswordChange";
 
@@ -24,7 +26,13 @@ export const revalidate = 0;
  * da unese svež kod, pa bi jedini ishod bio obrazac koji uvek pada.
  */
 export default async function PasswordPage() {
-  await requireFullPortalUser("/portal/bezbednost/lozinka");
+  const user = await requireFullPortalUser("/portal/bezbednost/lozinka");
+  /*
+   * Promena traži kod iz aplikacije. U režimu `enroll`/`off` nalog bez drugog
+   * faktora ima pun pristup, pa bi dobio obrazac koji uvek pada sa „Podaci
+   * nisu ispravni“ (pravi nalog kancelarije na kopiji od 8. 10.).
+   */
+  const { enabled: mfaEnabled } = await readMfaStatus(user.id);
 
   return (
     <>
@@ -34,7 +42,21 @@ export default async function PasswordPage() {
         description="Promena sopstvene lozinke uz potvrdu kodom iz aplikacije."
       />
       <div className="portal-narrow">
-        <PasswordChange onSignOut={signOutAction} />
+        {mfaEnabled ? (
+          <PasswordChange onSignOut={signOutAction} />
+        ) : (
+          <section className="portal-panel">
+            <h2>Prvo uključite drugi faktor</h2>
+            <p>
+              Promena lozinke se potvrđuje kodom iz aplikacije za jednokratne kodove, a na
+              ovom nalogu drugi faktor još nije uključen.
+            </p>
+            <p>
+              <Link href="/portal/bezbednost/mfa">Uključite drugi faktor</Link> — za to je
+              potrebna dozvola koju izdaje vlasnik.
+            </p>
+          </section>
+        )}
       </div>
     </>
   );

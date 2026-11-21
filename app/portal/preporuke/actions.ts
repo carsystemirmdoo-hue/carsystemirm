@@ -6,6 +6,7 @@ import { resolveClientIp } from "@/lib/auth/rate-limit-policy.mjs";
 import { registerAttempt } from "@/lib/auth/rate-limit-service";
 import { requireCapability } from "@/lib/authz/session";
 import { resolveLedgerScope } from "@/lib/ledger/effective-sales";
+import { dmy, quantity } from "@/lib/ordering/panelFormat.mjs";
 import { parseAsOfDate } from "@/lib/recommendations/asOfDate.mjs";
 import { belgradeDate } from "@/lib/recommendations/customerRhythm.mjs";
 import { isRecommendationsEnabled } from "@/lib/recommendations/gate";
@@ -87,8 +88,8 @@ export async function recomputeAction(
     return {
       error: null,
       ok:
-        `Preračunato na dan ${rezime.asOfDate}. ` +
-        `Parova: ${rezime.pairCount}, preporuka sa procenom: ${rezime.resultCount}.`,
+        `Preračunato na dan ${dmy(rezime.asOfDate)}. ` +
+        `Parova: ${quantity(rezime.pairCount)}, preporuka sa procenom: ${quantity(rezime.resultCount)}.`,
     };
   } catch (error) {
     if (error instanceof RecomputeError) return { error: error.message, ok: null };

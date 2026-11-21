@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useActionState, useState } from "react";
 import { importPdfAction, type PdfImportState } from "@/app/portal/importi/pdf-actions";
 import {
@@ -105,6 +106,7 @@ export function PdfImportUpload() {
               <tr>
                 <th scope="col">Ishod</th>
                 <th scope="col">Dokumenata</th>
+                <th scope="col">Sledeći korak</th>
               </tr>
             </thead>
             <tbody>
@@ -112,6 +114,7 @@ export function PdfImportUpload() {
                 <tr key={row.label}>
                   <th scope="row">{row.label}</th>
                   <td className="portal-table-number">{row.count}</td>
+                  <td>{row.next ? <Link href={row.next.href}>{row.next.label} →</Link> : "—"}</td>
                 </tr>
               ))}
             </tbody>

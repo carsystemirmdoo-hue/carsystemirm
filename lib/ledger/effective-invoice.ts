@@ -1,5 +1,4 @@
 import { sql, type SQL } from "drizzle-orm";
-import { invoices } from "@/db/schema";
 
 /**
  * Faktura sme u promet: isti uslov kao `WHERE` u pogledu
@@ -19,7 +18,7 @@ import { invoices } from "@/db/schema";
 export function effectiveInvoiceCondition(): SQL {
   return sql`NOT EXISTS (
     SELECT 1 FROM source_documents sd
-     WHERE sd.invoice_id = ${invoices.id}
+     WHERE sd.invoice_id = invoices.id
        AND NOT (sd.revision_status = 'original' AND sd.manual_review <> 'pending')
   ) AND ${notReversedCondition()}`;
 }
@@ -32,7 +31,9 @@ export function effectiveInvoiceCondition(): SQL {
  * Dokument ostaje vidljiv u istoriji — ovo ga samo izostavlja iz brojanja.
  */
 export function notReversedCondition(alias?: string): SQL {
-  const id = alias ? sql.raw(`${alias}.id`) : sql`${invoices.id}`;
+  // Puno ime, ne `${invoices.id}`: Drizzle u upitu nad jednom tabelom piše samo
+  // "id", a unutar podupita to je r.id — uslov bi tiho postao uvek tačan.
+  const id = sql.raw(`${alias ?? "invoices"}.id`);
   return sql`NOT EXISTS (
     SELECT 1 FROM invoice_reversals r WHERE r.original_invoice_id = ${id} AND r.status = 'applied'
   )`;

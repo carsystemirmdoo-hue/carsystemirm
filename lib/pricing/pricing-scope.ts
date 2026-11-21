@@ -4,6 +4,7 @@ import { getDb } from "@/db/client";
 import { customerGroupMembers, customers } from "@/db/schema";
 import { customerIdScopeFor } from "@/lib/authz/customer-scope.mjs";
 import { seesAllCustomers } from "@/lib/authz/permissions.mjs";
+import { sortCustomersByName } from "@/lib/customers/customerListFilter.mjs";
 import { loadAssignedCustomerIds, type PortalUser } from "@/lib/authz/user-repository";
 
 /**
@@ -80,20 +81,31 @@ export async function listScopedCustomers(
   const scope = await resolvePricingScope(user);
   const db = getDb();
 
+  /*
+   * Abecedno (bez vodećih navodnika), kao lista kupaca. Ranije bez redosleda,
+   * pa je izbornik u „Provera konkretne cene" i obrascu pravila bio izmešan.
+   */
   if (scope.seesAll) {
-    return db
-      .select({ id: customers.id, name: customers.name, pib: customers.pib })
-      .from(customers)
-      .limit(1000);
+    return sortCustomersByName(
+      await db
+        .select({ id: customers.id, name: customers.name, pib: customers.pib })
+        .from(customers)
+        .limit(SCOPED_CUSTOMER_LIMIT),
+    );
   }
   if (!scope.customerIds || scope.customerIds.length === 0) return [];
 
-  return db
-    .select({ id: customers.id, name: customers.name, pib: customers.pib })
-    .from(customers)
-    .where(inArray(customers.id, scope.customerIds))
-    .limit(1000);
+  return sortCustomersByName(
+    await db
+      .select({ id: customers.id, name: customers.name, pib: customers.pib })
+      .from(customers)
+      .where(inArray(customers.id, scope.customerIds))
+      .limit(SCOPED_CUSTOMER_LIMIT),
+  );
 }
+
+/** Gornja granica izbornika kupaca (firma danas ima nekoliko stotina). */
+export const SCOPED_CUSTOMER_LIMIT = 5000;
 
 export class PricingScopeError extends Error {
   constructor(message: string) {

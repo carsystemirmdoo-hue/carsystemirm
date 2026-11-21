@@ -45,10 +45,13 @@ const GENERIC = "Podaci nisu ispravni. Proverite lozinku i kod iz aplikacije.";
  */
 const schema = z
   .object({
-    current: z.string().min(1).max(200),
-    next: z.string().min(12).max(200),
-    confirm: z.string().min(1).max(200),
-    token: z.string().trim().min(6).max(8),
+    current: z.string().min(1, "Unesite trenutnu lozinku.").max(200, "Lozinka je predugačka."),
+    next: z
+      .string()
+      .min(12, "Nova lozinka mora imati najmanje 12 znakova.")
+      .max(200, "Nova lozinka može imati najviše 200 znakova."),
+    confirm: z.string().min(1, "Potvrdite novu lozinku.").max(200, "Potvrda je predugačka."),
+    token: z.string().trim().min(6, "Unesite šestocifreni kod iz aplikacije.").max(8, "Kod iz aplikacije ima šest cifara."),
   })
   .refine((value) => value.next === value.confirm, {
     message: "Potvrda se ne poklapa.",
@@ -72,9 +75,8 @@ export async function changeOwnPasswordAction(
   if (!parsed.success) {
     return {
       ...EMPTY_PASSWORD_CHANGE,
-      error:
-        parsed.error.issues[0]?.message ??
-        "Nova lozinka mora imati najmanje 12 znakova.",
+      // Poruke su zadate u šemi; bez njih bi Zod vratio englesku.
+      error: parsed.error.issues[0]?.message ?? "Proverite unete podatke.",
     };
   }
 

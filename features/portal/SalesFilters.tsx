@@ -1,5 +1,6 @@
 import { DateRangeField } from "@/components/portal/DateRangeField";
 import { PhaseNotice } from "@/components/portal/PhaseNotice";
+import { sortCustomersByName } from "@/lib/customers/customerListFilter.mjs";
 
 export interface FilterOptions {
   customers: { id: string; name: string }[];
@@ -76,7 +77,8 @@ export function SalesFilters({
           <span>Kupac</span>
           <select name="kupac" defaultValue={applied.kupac ?? ""}>
             <option value="">svi kupci</option>
-            {options.customers.map((customer) => (
+            {/* Isti redosled kao lista kupaca (bez vodećih navodnika). */}
+            {sortCustomersByName(options.customers).map((customer) => (
               <option key={customer.id} value={customer.id}>
                 {customer.name}
               </option>
@@ -100,6 +102,12 @@ export function SalesFilters({
             </small>
           </label>
         ) : null}
+        {/*
+          * Polje koje ne može da vrati ništa se ne prikazuje: fakture iz uvoza
+          * ne nose komercijalistu, a filter po DODELI je „Zadužen komercijalista".
+          * Komercijalista (samo svoji kupci) dobija prazan spisak.
+          */}
+        {nemaKomercijaliste && !applied.komercijalista ? null : (
         <label>
           <span>Komercijalista</span>
           <select
@@ -124,6 +132,7 @@ export function SalesFilters({
             </small>
           ) : null}
         </label>
+        )}
         {options.brands && options.brands.length > 0 ? (
           <label>
             <span>Brend</span>
@@ -206,7 +215,7 @@ export function NoInvoicesYet({ screen }: { screen: string }) {
       title={`${screen} čeka prvi uvoz faktura`}
       summary="Baza je spremna i ekran radi, ali još nije uvezena nijedna faktura. Uvezite fajl na ekranu Importi da bi se brojke popunile."
       requires={[
-        "Izvoz iz BiznisSoft-a u CSV formatu (tačka-zarez ili zarez kao razdvajač).",
+        "Izvoz iz BizniSoft-a u CSV formatu (tačka-zarez ili zarez kao razdvajač).",
         "Kolone: pib, kupac, broj_dokumenta, datum, vrsta_dokumenta, sifra_artikla, kolicina, cena, iznos_stavke.",
         "Dozvola za uvoz — ekran Importi.",
       ]}

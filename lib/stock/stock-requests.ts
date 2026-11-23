@@ -179,3 +179,66 @@ export async function listOpenStockRequests(limit = 300, opts: { requestedBy?: s
     requestedBy: r.requested_by,
   }));
 }
+
+export type CustomerStockRequestRow = StockRequestRow & {
+  customerId: string | null;
+  /** Stanje na važećem potvrđenom lageru sada (null = šifre nema u izvozu). */
+  stockNow: number | null;
+};
+
+/**
+ * Podsetnik „traženo — nema na stanju“ PO KUPCIMA (2026-11-23, odluka vlasnika): komercijalista vidi
+ * otvorene zapise svojih kupaca (iz porudžbina i ručne), plus svoje ručne upise bez kupca. Vlasnik i
+ * kancelarija (vide sve kupce) vide sve. Uz svaki zapis ide i današnji lager, da se vidi šta je stiglo.
+ *
+ * @param scope ID-jevi kupaca korisnika, ili null = svi kupci
+ */
+export async function listOpenStockRequestsForCustomers(
+  scope: string[] | null,
+  opts: { userId: string; customerId?: string; limit?: number },
+): Promise<CustomerStockRequestRow[]> {
+  const db = getDb();
+  if (!(await hasTable(db))) return [];
+  if (scope !== null && scope.length === 0 && opts.customerId) return [];
+  const inScope =
+    scope === null
+      ? sql`TRUE`
+      : scope.length
+        ? sql`(r.customer_id IN (${sql.join(scope.map((id) => sql`${id}::uuid`), sql`, `)}) OR (r.customer_id IS NULL AND r.requested_by = ${opts.userId}::uuid))`
+        : sql`(r.customer_id IS NULL AND r.requested_by = ${opts.userId}::uuid)`;
+  const rows = await db.execute<{
+    id: string; created_at: string; source: "porudzbina" | "rucno"; article_id: string; code: string; name: string; unit: string | null;
+    quantity: string | null; customer_id: string | null; customer_name: string | null; order_number: string | null; stock_quantity: string | null;
+    stock_now: string | null; note: string | null; requested_by: string | null;
+  }>(sql`
+    SELECT r.id, r.created_at::text, r.source, r.article_id, a.code, a.name, a.unit, r.quantity::text, r.customer_id, c.name AS customer_name,
+           coalesce(o.order_number, o.request_number) AS order_number, r.stock_quantity::text, ${CURRENT_STOCK}::text AS stock_now,
+           r.note, u.name AS requested_by
+      FROM stock_requests r
+      JOIN articles a ON a.id = r.article_id
+      LEFT JOIN customers c ON c.id = r.customer_id
+      LEFT JOIN customer_orders o ON o.id = r.order_id
+      LEFT JOIN users u ON u.id = r.requested_by
+     WHERE r.resolved_at IS NULL AND r.created_at > now() - interval '90 days'
+       AND ${inScope}
+       ${opts.customerId ? sql`AND r.customer_id = ${opts.customerId}::uuid` : sql``}
+     ORDER BY c.name NULLS LAST, r.created_at DESC
+     LIMIT ${opts.limit ?? 1000}`);
+  return [...rows].map((r) => ({
+    id: r.id,
+    createdAt: r.created_at,
+    source: r.source,
+    articleId: r.article_id,
+    code: r.code,
+    name: r.name,
+    unit: r.unit,
+    quantity: r.quantity === null ? null : Number(r.quantity),
+    customerId: r.customer_id,
+    customerName: r.customer_name,
+    orderNumber: r.order_number,
+    stockQuantity: r.stock_quantity === null ? null : Number(r.stock_quantity),
+    stockNow: r.stock_now === null ? null : Number(r.stock_now),
+    note: r.note,
+    requestedBy: r.requested_by,
+  }));
+}

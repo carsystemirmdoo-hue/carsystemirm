@@ -138,6 +138,14 @@ export function PortalShell({
     () => new Map(navGroups.flatMap((group) => group.items.map((item) => [item.href, item.label] as const))),
     [navGroups],
   );
+  const activeHref = useMemo(() => {
+    let best: string | null = null;
+    for (const href of navLabels.keys()) {
+      const hit = href === "/portal" ? pathname === href : pathname === href || pathname.startsWith(`${href}/`);
+      if (hit && (!best || href.length > best.length)) best = href;
+    }
+    return best;
+  }, [navLabels, pathname]);
   const [collapsed, setCollapsed] = useState(initialCollapsed);
   const [mobileOpen, setMobileOpen] = useState(false);
   const sidebarRef = useRef<HTMLElement>(null);
@@ -271,11 +279,8 @@ export function PortalShell({
                 {group.label}
               </div>
               {group.items.map((item) => {
-                const active =
-                  item.href === "/portal"
-                    ? pathname === item.href
-                    : pathname === item.href ||
-                      pathname.startsWith(`${item.href}/`);
+                // Ističe se samo najduža stavka koja odgovara adresi („Kupci“ se gasi na „Traženo po kupcima“).
+                const active = item.href === activeHref;
                 return (
                   <Link
                     href={item.href}

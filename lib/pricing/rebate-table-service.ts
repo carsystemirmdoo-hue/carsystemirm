@@ -41,9 +41,6 @@ export type RebateTableRow = TableRow & {
   purchaseDays: number;
   lastPurchaseOn: string | null;
   buysNow: boolean;
-  /** Rabat i neto cena DRUGE opcije (avans ↔ odloženo), za prikaz jedno pored drugog. */
-  otherPercent: number | null;
-  otherNetCents: number | null;
 };
 
 function periodCondition(period: { from: string | null; to: string | null }) {
@@ -101,12 +98,8 @@ export async function loadRebateTable(
   if (condition !== null && condition !== AVANS) throw new RebateChangeError(`Nepoznat uslov plaćanja: ${optionLabel(condition)}.`);
   // Avans se prikazuje kod svakog kupca (2026-11-23); menja se tek kada je avans odobren ovom kupcu.
   const avansApproved = options.includes(AVANS);
-  const other: string | null = condition === null ? AVANS : null;
   const ids = [...articleRows].map((a) => a.id);
-  const [{ prices }, otherPrices] = await Promise.all([
-    customerPrices(customerId, ids, today, condition),
-    customerPrices(customerId, ids, today, other).then((r) => r.prices),
-  ]);
+  const { prices } = await customerPrices(customerId, ids, today, condition);
   const bought = new Map([...purchases].map((p) => [p.article_id, p]));
   const rulesBy = new Map<string, { id: string; p: number; status: string; f: string }[]>();
   for (const r of rules) rulesBy.set(r.article_id, [...(rulesBy.get(r.article_id) ?? []), { id: r.id, p: Number(r.p), status: r.status, f: r.f }]);
@@ -141,8 +134,6 @@ export async function loadRebateTable(
           : null;
     const p = bought.get(a.id);
     const priced = price && price.status === "cena" ? price : null;
-    const op = otherPrices?.get(a.id);
-    const otherPriced = op && op.status === "cena" ? op : null;
     return {
       articleId: a.id,
       code: a.code,
@@ -163,8 +154,6 @@ export async function loadRebateTable(
       purchaseDays: (withPeriod ? p?.period_days : p?.days) ?? 0,
       lastPurchaseOn: p?.last ?? null,
       buysNow: withPeriod ? Boolean(p && p.period_days > 0) : Boolean(p && p.last >= yearAgo),
-      otherPercent: otherPriced && otherPriced.discountPercent !== null ? otherPriced.discountPercent : null,
-      otherNetCents: otherPriced?.netCents ?? null,
     };
   });
   // Osnovna cena za artikle „na upit“ (bez rabata) — da bi se neto cena mogla upisati.
@@ -187,8 +176,6 @@ export async function loadRebateTable(
     rows,
     paymentOptions: options,
     condition,
-    /** Kolona pored: šta se poredi (null = nema druge opcije). */
-    otherLabel: other === AVANS ? (avansApproved ? "Avans" : "Avans (nije odobren)") : "Odloženo (osnovni)",
     avansApproved,
     hasDeferred: options.some((o) => o.startsWith("odlozeno_")),
     // Avansni rabat se ne može upisati pre odobrenog avansa (isto pravilo kao u servisu promene).

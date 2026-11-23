@@ -22,6 +22,32 @@ const plus = (iso: string, days: number) => new Date(Date.parse(`${iso}T12:00:00
 /** Ključ polja: b:BREND, g:GRUPA, a:<id> (rabat) ili n:<id> (neto cena). */
 type Inputs = Record<string, string>;
 
+/** Unos polja → izmene u obliku koji proverava server (b:/g:/a: rabat, n: neto cena). */
+function parseInputs(inputs: Inputs, includeOwn: boolean) {
+  const e = { brands: {} as Record<string, number>, groups: {} as Record<string, number>, articles: {} as Record<string, number>, nets: {} as Record<string, number>, includeOwn };
+  const bad = new Set<string>();
+  for (const [k, v] of Object.entries(inputs)) {
+    if (!v.trim()) continue;
+    const kind = k.slice(0, 1);
+    const id = k.slice(2);
+    if (kind === "n") {
+      const n = parseAmount(v);
+      if (n === null) bad.add(k);
+      else e.nets[id] = Math.round(n * 100);
+      continue;
+    }
+    const p = parsePercent(v);
+    if (p === null) {
+      bad.add(k);
+      continue;
+    }
+    if (kind === "b") e.brands[id] = p;
+    else if (kind === "g") e.groups[id] = p;
+    else e.articles[id] = p;
+  }
+  return { edits: e, bad };
+}
+
 export function RebateTable({
   customerId,
   rows,
@@ -29,8 +55,9 @@ export function RebateTable({
   canPropose,
   canApprove,
   buysLabel = "Uzima (12 meseci)",
-  condition = null,
-  otherLabel = null,
+  avansRows = null,
+  avansCanPropose = false,
+  avansCanApprove = false,
 }: {
   customerId: string;
   rows: RebateTableRow[];
@@ -39,10 +66,10 @@ export function RebateTable({
   canApprove: boolean;
   /** Natpis kartice „Uzima“ — sa izabranim periodom „Uzima (u periodu)“ (2026-11-13). */
   buysLabel?: string;
-  /** null = osnovni rabat (odloženo), „avans“ = avansni rabat (2026-11-23). */
-  condition?: string | null;
-  /** Naziv kolone sa rabatom druge opcije; null = kolone nema. */
-  otherLabel?: string | null;
+  /** Isti artikli za AVANSNO plaćanje (2026-11-23): odloženo i avans u jednoj tabeli, jedno pored drugog. */
+  avansRows?: RebateTableRow[] | null;
+  avansCanPropose?: boolean;
+  avansCanApprove?: boolean;
 }) {
   const router = useRouter();
   // Podrazumevano SVI artikli u ponudi — i oni koje kupac još ne uzima, da bi im se rabat pripremio unapred (2026-11-10).
@@ -53,8 +80,10 @@ export function RebateTable({
   // Otvoreno: brendovi i grupe koje kupac uzima.
   const [open, setOpen] = useState<Set<string>>(() => new Set(rows.filter((r) => r.buysNow).flatMap((r) => [r.brand, `g|${r.group}`])));
   const [inputs, setInputs] = useState<Inputs>({});
+  const [inputsA, setInputsA] = useState<Inputs>({});
   const [sel, setSel] = useState<Set<string>>(() => new Set());
   const [bulk, setBulk] = useState("");
+  const [bulkA, setBulkA] = useState("");
   const [includeOwn, setIncludeOwn] = useState(false);
   const [from, setFrom] = useState(plus(today, 1));
   const [fromOk, setFromOk] = useState(true);
@@ -67,31 +96,21 @@ export function RebateTable({
   const brands = useMemo(() => [...new Set(rows.map((r) => r.brand))].sort((a, b) => a.localeCompare(b, "sr")), [rows]);
 
   // Unos → izmene (isti oblik koji proverava server).
-  const edits = useMemo(() => {
-    const e = { brands: {} as Record<string, number>, groups: {} as Record<string, number>, articles: {} as Record<string, number>, nets: {} as Record<string, number>, includeOwn };
-    const bad = new Set<string>();
-    for (const [k, v] of Object.entries(inputs)) {
-      if (!v.trim()) continue;
-      const kind = k.slice(0, 1);
-      const id = k.slice(2);
-      if (kind === "n") {
-        const n = parseAmount(v);
-        if (n === null) bad.add(k);
-        else e.nets[id] = Math.round(n * 100);
-        continue;
-      }
-      const p = parsePercent(v);
-      if (p === null) {
-        bad.add(k);
-        continue;
-      }
-      if (kind === "b") e.brands[id] = p;
-      else if (kind === "g") e.groups[id] = p;
-      else e.articles[id] = p;
+  const edits = useMemo(() => parseInputs(inputs, includeOwn), [inputs, includeOwn]);
+  const editsA = useMemo(() => parseInputs(inputsA, includeOwn), [inputsA, includeOwn]);
+  const aRows = useMemo(() => avansRows ?? [], [avansRows]);
+  const aBy = useMemo(() => new Map(aRows.map((r) => [r.articleId, r])), [aRows]);
+  const planA = useMemo(() => planChanges(aRows, editsA.edits), [aRows, editsA]);
+  const itemA = useMemo(() => new Map(planA.items.map((i) => [i.articleId, i])), [planA]);
+  const allInA = useMemo(() => {
+    const brand = new Map<string, RebateTableRow[]>();
+    const group = new Map<string, RebateTableRow[]>();
+    for (const r of aRows) {
+      brand.set(r.brand, [...(brand.get(r.brand) ?? []), r]);
+      group.set(r.group, [...(group.get(r.group) ?? []), r]);
     }
-    return { edits: e, bad };
-  }, [inputs, includeOwn]);
-
+    return { brand, group };
+  }, [aRows]);
   const plan = useMemo(() => planChanges(rows, edits.edits), [rows, edits]);
   const itemBy = useMemo(() => new Map(plan.items.map((i) => [i.articleId, i])), [plan]);
   const keptBy = useMemo(() => new Set(plan.kept.map((k) => k.articleId)), [plan]);
@@ -141,9 +160,9 @@ export function RebateTable({
     else n.add(key);
     return n;
   });
-  const setInput = (key: string, value: string) => {
+  const setInput = (key: string, value: string, avans = false) => {
     setResult(null);
-    setInputs((s) => {
+    (avans ? setInputsA : setInputs)((s) => {
       const n = { ...s, [key]: value };
       // Rabat i neto cena istog artikla isključuju jedno drugo.
       if (value.trim() && key.startsWith("a:")) delete n[`n:${key.slice(2)}`];
@@ -162,17 +181,21 @@ export function RebateTable({
   });
   const applyBulk = () => {
     const p = parsePercent(bulk);
-    if (p === null) return;
-    setInputs((s) => {
+    const pa = parsePercent(bulkA);
+    if (p === null && pa === null) return;
+    const put = (v: number) => (s: Inputs) => {
       const n = { ...s };
       for (const id of sel) {
-        n[`a:${id}`] = String(p).replace(".", ",");
+        n[`a:${id}`] = String(v).replace(".", ",");
         delete n[`n:${id}`];
       }
       return n;
-    });
+    };
+    if (p !== null) setInputs(put(p));
+    if (pa !== null && avansCanPropose) setInputsA(put(pa));
     setSel(new Set());
     setBulk("");
+    setBulkA("");
   };
 
   // Spisak promena: po izmeni, sa brojem artikala koji se stvarno menjaju.
@@ -211,43 +234,105 @@ export function RebateTable({
         detail: !d.ok ? d.error : d.exact ? (skippedBy.get(id) ?? "menja se 1 artikal") : `tačno ${rsd(edits.edits.nets[id])} rabat ne daje; važiće najbliža ${rsd(d.netCents)}`,
       });
     }
+    const countA = (origin: string) => planA.items.filter((i) => i.origin === origin).length;
+    for (const [b, p] of Object.entries(editsA.edits.brands)) {
+      list.push({ key: `A|b:${b}`, scope: `Avans · brend ${b}`, kind: "svi artikli brenda", change: `${pct(dominantPercent(allInA.brand.get(b) ?? []))} → ${pct(p)}`, detail: `menja se ${countOf(countA(`brend ${b}`), ARTIKAL)}` });
+    }
+    for (const [g, p] of Object.entries(editsA.edits.groups)) {
+      list.push({ key: `A|g:${g}`, scope: `Avans · ${g}`, kind: "grupa", change: `${pct(dominantPercent(allInA.group.get(g) ?? []))} → ${pct(p)}`, detail: `menja se ${countOf(countA(`grupa ${g}`), ARTIKAL)}` });
+    }
+    for (const id of Object.keys(editsA.edits.articles)) {
+      const r = aBy.get(id);
+      if (!r) continue;
+      list.push({ key: `A|a:${id}`, scope: `Avans · ${r.name}`, kind: `artikal · ${r.code}`, change: `${pct(r.currentPercent)} → ${pct(editsA.edits.articles[id])}`, detail: itemA.get(id) ? "menja se 1 artikal" : (planA.skipped.find((x) => x.articleId === id)?.reason ?? "bez promene") });
+    }
     return list;
-  }, [edits, plan, allIn, byId, itemBy, skippedBy]);
+  }, [edits, plan, allIn, byId, itemBy, skippedBy, editsA, planA, allInA, aBy, itemA]);
 
   const save = (approveNow: boolean) => {
-    const expected: Record<string, string | null> = {};
-    for (const it of plan.items) expected[it.articleId] = it.replacesRuleId;
+    const exp = (items: { articleId: string; replacesRuleId: string | null }[]) => Object.fromEntries(items.map((it) => [it.articleId, it.replacesRuleId]));
     start(async () => {
-      const r = await applyRebateTableAction({ customerId, edits: edits.edits, effectiveFrom: from, reason, approveNow, expected, paymentCondition: condition });
-      if (r.ok) {
+      const done: string[] = [];
+      // Prvo odloženo (osnovni), pa avans — svaki svojim tokom; greška jednog ne briše uspeh drugog.
+      if (plan.items.length) {
+        const r = await applyRebateTableAction({ customerId, edits: edits.edits, effectiveFrom: from, reason, approveNow, expected: exp(plan.items), paymentCondition: null });
+        if (!r.ok) return setResult({ ok: false, text: `Odloženo: ${r.error}` });
         setInputs({});
-        setSel(new Set());
-        setReason("");
-        setResult({ ok: true, text: r.message });
-        router.refresh();
-      } else setResult({ ok: false, text: r.error });
+        done.push(`Odloženo — ${r.message}`);
+      }
+      if (planA.items.length) {
+        const r = await applyRebateTableAction({ customerId, edits: editsA.edits, effectiveFrom: from, reason, approveNow: approveNow && avansCanApprove, expected: exp(planA.items), paymentCondition: "avans" });
+        if (!r.ok) {
+          setResult({ ok: false, text: `${done.length ? `${done.join(" ")} ` : ""}Avans: ${r.error}` });
+          if (done.length) router.refresh();
+          return;
+        }
+        setInputsA({});
+        done.push(r.message);
+      }
+      setSel(new Set());
+      setReason("");
+      setResult({ ok: true, text: done.join(" ") });
+      router.refresh();
     });
   };
 
   const buysTotal = rows.filter((r) => r.buysNow).length;
   const reasonOk = reason.trim().length >= 10;
-  const blockedSave = pending || !plan.items.length || edits.bad.size > 0 || !fromOk || !reasonOk || plan.tooMany;
+  const blockedSave = pending || !(plan.items.length + planA.items.length) || edits.bad.size + editsA.bad.size > 0 || !fromOk || !reasonOk || plan.tooMany || planA.tooMany;
 
-  const pctInput = (key: string, placeholder: string, label: string) => (
-    <span className={styles.pct}>
-      <input
-        type="text"
-        inputMode="decimal"
-        className={edits.bad.has(key) ? styles.bad : inputs[key] ? styles.dirty : undefined}
-        value={inputs[key] ?? ""}
-        placeholder={placeholder}
-        onChange={(e) => setInput(key, e.target.value)}
-        disabled={!canPropose}
-        aria-label={label}
-      />
-      %
-    </span>
-  );
+  const pctInput = (key: string, placeholder: string, label: string, avans = false) => {
+    const src = avans ? inputsA : inputs;
+    const bad = (avans ? editsA : edits).bad;
+    return (
+      <span className={styles.pct}>
+        <input
+          type="text"
+          inputMode="decimal"
+          className={bad.has(key) ? styles.bad : src[key] ? styles.dirty : undefined}
+          value={src[key] ?? ""}
+          placeholder={placeholder}
+          onChange={(e) => setInput(key, e.target.value, avans)}
+          disabled={avans ? !avansCanPropose : !canPropose}
+          aria-label={label}
+        />
+        %
+      </span>
+    );
+  };
+  const ph = (p: number | null) => (p === null ? "" : String(p).replace(".", ","));
+  const avansWide = (list: RebateTableRow[], key: string, label: string) =>
+    avansRows ? (
+      <>
+        <td className={styles.other}>{(() => { const d = dominantPercent(list); return d === null ? "na upit" : `najčešće ${pct(d)}`; })()}</td>
+        <td className={styles.other}>{pctInput(key, ph(dominantPercent(list)), label, true)}</td>
+        <td className={styles.other} />
+      </>
+    ) : null;
+
+  const avansCells = (base: RebateTableRow, lid: boolean) => {
+    const a = aBy.get(base.articleId);
+    if (!a) return (<><td className={styles.other}>—</td><td className={styles.other} /><td className={styles.other} /></>);
+    const it = itemA.get(a.articleId);
+    const changed = it && !samePercent(it.percent, a.currentPercent);
+    const newNet = it && a.baseCents !== null ? netCentsFor(a.baseCents, it.percent) : null;
+    return (
+      <>
+        <td className={styles.other}>
+          {changed ? `${pct(a.currentPercent)} → ${pct(it!.percent)}` : pct(a.currentPercent)}
+          <span className={changed ? styles.srcNew : a.source === "artikal" ? styles.srcOwn : styles.src}>
+            {changed ? "nova" : a.source === "artikal" ? "avans · artikal" : a.source === "sire" ? "kao odloženo" : "nije određen"}
+          </span>
+          {a.blocked ? <span className={styles.warn}>{a.blocked}</span> : null}
+        </td>
+        <td className={styles.other}>{lid ? <span className={styles.sub}>kao posuda</span> : pctInput(`a:${a.articleId}`, ph(a.currentPercent), `Nov avansni rabat za ${a.name}`, true)}</td>
+        <td className={`${styles.num} ${styles.other}`}>
+          {rsd(newNet ?? a.netCents)}
+          {changed && a.netCents !== null ? <span className={styles.sub}>bilo {rsd(a.netCents)}</span> : null}
+        </td>
+      </>
+    );
+  };
 
   const artRow = (r: RebateTableRow, indent: boolean) => {
     const it = itemBy.get(r.articleId);
@@ -283,12 +368,6 @@ export function RebateTable({
           {r.blocked ? <span className={styles.warn}>{r.blocked}</span> : null}
           {lid ? <span className={styles.note}>ide uz posudu {r.pairCodes.join(", ")} — isti rabat</span> : null}
         </td>
-        {otherLabel ? (
-          <td className={styles.other}>
-            {pct(r.otherPercent)}
-            <span className={styles.sub}>{rsd(r.otherNetCents)}</span>
-          </td>
-        ) : null}
         <td>{lid ? <span className={styles.sub}>kao posuda</span> : pctInput(`a:${r.articleId}`, r.currentPercent === null ? "" : String(r.currentPercent).replace(".", ","), `Nov rabat za ${r.name}`)}</td>
         <td className={styles.num}>
           <span className={styles.pct}>
@@ -310,15 +389,13 @@ export function RebateTable({
             </span>
           ) : null}
         </td>
+        {avansRows ? avansCells(r, lid) : null}
       </tr>
     );
   };
 
   const flat = view === "ravno" ? visible.slice(0, shown) : [];
-  const otherDom = (list: RebateTableRow[]) => {
-    const d = dominantPercent(list.map((r) => ({ ...r, currentPercent: r.otherPercent })));
-    return d === null ? "na upit" : `najčešće ${pct(d)}`;
-  };
+
 
   return (
     <>
@@ -327,7 +404,7 @@ export function RebateTable({
         <div><span>{buysLabel}</span><strong>{buysTotal}</strong></div>
         <div><span>Ne uzima</span><strong>{rows.length - buysTotal}</strong></div>
         <div><span>Rabat po artiklu</span><strong>{rows.filter((r) => r.source === "artikal").length}</strong></div>
-        <div className={styles.red}><span>Artikala za promenu</span><strong>{plan.items.length}</strong></div>
+        <div className={styles.red}><span>Artikala za promenu</span><strong>{plan.items.length + planA.items.length}</strong></div>
       </section>
 
       <section className={styles.panel}>
@@ -363,10 +440,16 @@ export function RebateTable({
                 <th>Brend / grupa / artikal</th>
                 <th>Kupovina</th>
                 <th className={styles.num}>VP cena</th>
-                <th>{condition === "avans" ? "Važeći rabat — avans" : otherLabel ? "Važeći rabat — odloženo" : "Važeći rabat"}</th>
-                {otherLabel ? <th className={styles.other}>{otherLabel}</th> : null}
-                <th>{condition === "avans" ? "Nov rabat — avans" : otherLabel ? "Nov rabat — odloženo" : "Nov rabat"}</th>
-                <th className={styles.num}>Neto cena (bez PDV-a)</th>
+                <th>{avansRows ? "Odloženo · važeći" : "Važeći rabat"}</th>
+                <th>{avansRows ? "Odloženo · nov" : "Nov rabat"}</th>
+                <th className={styles.num}>{avansRows ? "Odloženo · neto" : "Neto cena (bez PDV-a)"}</th>
+                {avansRows ? (
+                  <>
+                    <th className={styles.other}>Avans · važeći</th>
+                    <th className={styles.other}>Avans · nov</th>
+                    <th className={`${styles.num} ${styles.other}`}>Avans · neto</th>
+                  </>
+                ) : null}
               </tr>
             </thead>
             <tbody>
@@ -388,9 +471,9 @@ export function RebateTable({
                           <td>uzima {all.filter((r) => r.buysNow).length} od {all.length}</td>
                           <td />
                           <td>{dom === null ? "na upit" : `najčešće ${pct(dom)}`}</td>
-                          {otherLabel ? <td className={styles.other}>{otherDom(all)}</td> : null}
                           <td>{pctInput(bKey, dom === null ? "" : String(dom).replace(".", ","), `Nov rabat za ceo brend ${brand}`)}</td>
                           <td className={styles.num}><span className={styles.sub}>za ceo brend</span></td>
+                          {avansWide(allInA.brand.get(brand) ?? [], bKey, `Nov avansni rabat za ceo brend ${brand}`)}
                         </tr>
                         {isOpen(brand)
                           ? groups.map(({ group, list }) => {
@@ -411,9 +494,9 @@ export function RebateTable({
                                     <td>uzima {gAll.filter((r) => r.buysNow).length} od {gAll.length}</td>
                                     <td />
                                     <td>{gDom === null ? "na upit" : `najčešće ${pct(gDom)}`}</td>
-                                    {otherLabel ? <td className={styles.other}>{otherDom(gAll)}</td> : null}
                                     <td>{pctInput(gKey, gDom === null ? "" : String(gDom).replace(".", ","), `Nov rabat za grupu ${group}`)}</td>
                                     <td className={styles.num}><span className={styles.sub}>za celu grupu</span></td>
+                                    {avansWide(allInA.group.get(group) ?? [], gKey, `Nov avansni rabat za grupu ${group}`)}
                                   </tr>
                                   {gOpen ? list.map((r) => artRow(r, true)) : null}
                                 </Fragment>
@@ -425,7 +508,7 @@ export function RebateTable({
                   })
                 : flat.map((r) => artRow(r, false))}
               {visible.length === 0 ? (
-                <tr><td colSpan={otherLabel ? 8 : 7} className={styles.empty}>Nema artikala za ovaj filter.</td></tr>
+                <tr><td colSpan={avansRows ? 10 : 7} className={styles.empty}>Nema artikala za ovaj filter.</td></tr>
               ) : null}
             </tbody>
           </table>
@@ -449,10 +532,16 @@ export function RebateTable({
         <div className={styles.bulk} role="region" aria-label="Grupna izmena">
           <b>Izabrano: {countOf(sel.size, ARTIKAL)}</b>
           <label>
-            Postavite rabat
+            {avansRows ? "Odloženo" : "Postavite rabat"}
             <input type="text" inputMode="decimal" value={bulk} onChange={(e) => setBulk(e.target.value)} aria-label="Rabat za izabrane artikle" /> %
           </label>
-          <button type="button" className="portal-button" data-variant="primary" disabled={parsePercent(bulk) === null} onClick={applyBulk}>Primenite na izabrane</button>
+          {avansRows && avansCanPropose ? (
+            <label>
+              Avans
+              <input type="text" inputMode="decimal" value={bulkA} onChange={(e) => setBulkA(e.target.value)} aria-label="Avansni rabat za izabrane artikle" /> %
+            </label>
+          ) : null}
+          <button type="button" className="portal-button" data-variant="primary" disabled={parsePercent(bulk) === null && parsePercent(bulkA) === null} onClick={applyBulk}>Primenite na izabrane</button>
           <button type="button" className={styles.ghost} onClick={() => setSel(new Set())}>Poništite izbor</button>
         </div>
       ) : null}
@@ -469,7 +558,7 @@ export function RebateTable({
             <div><b>{c.scope}</b><span className={styles.sub}>{c.kind}</span></div>
             <div className={styles.arrow}>{c.change}</div>
             <div className={styles.sub}>{c.detail}</div>
-            <button type="button" className={styles.x} onClick={() => setInput(c.key, "")}>Uklonite</button>
+            <button type="button" className={styles.x} onClick={() => (c.key.startsWith("A|") ? setInput(c.key.slice(2), "", true) : setInput(c.key, ""))}>Uklonite</button>
           </div>
         ))}
         {plan.kept.length ? (

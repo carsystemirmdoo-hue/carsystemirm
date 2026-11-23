@@ -29,6 +29,8 @@ export function RebateTable({
   canPropose,
   canApprove,
   buysLabel = "Uzima (12 meseci)",
+  condition = null,
+  otherLabel = null,
 }: {
   customerId: string;
   rows: RebateTableRow[];
@@ -37,6 +39,10 @@ export function RebateTable({
   canApprove: boolean;
   /** Natpis kartice „Uzima“ — sa izabranim periodom „Uzima (u periodu)“ (2026-11-13). */
   buysLabel?: string;
+  /** null = osnovni rabat (odloženo), „avans“ = avansni rabat (2026-11-23). */
+  condition?: string | null;
+  /** Naziv kolone sa rabatom druge opcije; null = kolone nema. */
+  otherLabel?: string | null;
 }) {
   const router = useRouter();
   // Podrazumevano SVI artikli u ponudi — i oni koje kupac još ne uzima, da bi im se rabat pripremio unapred (2026-11-10).
@@ -212,7 +218,7 @@ export function RebateTable({
     const expected: Record<string, string | null> = {};
     for (const it of plan.items) expected[it.articleId] = it.replacesRuleId;
     start(async () => {
-      const r = await applyRebateTableAction({ customerId, edits: edits.edits, effectiveFrom: from, reason, approveNow, expected });
+      const r = await applyRebateTableAction({ customerId, edits: edits.edits, effectiveFrom: from, reason, approveNow, expected, paymentCondition: condition });
       if (r.ok) {
         setInputs({});
         setSel(new Set());
@@ -277,6 +283,12 @@ export function RebateTable({
           {r.blocked ? <span className={styles.warn}>{r.blocked}</span> : null}
           {lid ? <span className={styles.note}>ide uz posudu {r.pairCodes.join(", ")} — isti rabat</span> : null}
         </td>
+        {otherLabel ? (
+          <td className={styles.other}>
+            {pct(r.otherPercent)}
+            <span className={styles.sub}>{rsd(r.otherNetCents)}</span>
+          </td>
+        ) : null}
         <td>{lid ? <span className={styles.sub}>kao posuda</span> : pctInput(`a:${r.articleId}`, r.currentPercent === null ? "" : String(r.currentPercent).replace(".", ","), `Nov rabat za ${r.name}`)}</td>
         <td className={styles.num}>
           <span className={styles.pct}>
@@ -303,6 +315,10 @@ export function RebateTable({
   };
 
   const flat = view === "ravno" ? visible.slice(0, shown) : [];
+  const otherDom = (list: RebateTableRow[]) => {
+    const d = dominantPercent(list.map((r) => ({ ...r, currentPercent: r.otherPercent })));
+    return d === null ? "na upit" : `najčešće ${pct(d)}`;
+  };
 
   return (
     <>
@@ -347,8 +363,9 @@ export function RebateTable({
                 <th>Brend / grupa / artikal</th>
                 <th>Kupovina</th>
                 <th className={styles.num}>VP cena</th>
-                <th>Važeći rabat</th>
-                <th>Nov rabat</th>
+                <th>{condition === "avans" ? "Važeći rabat — avans" : otherLabel ? "Važeći rabat — odloženo" : "Važeći rabat"}</th>
+                {otherLabel ? <th className={styles.other}>{otherLabel}</th> : null}
+                <th>{condition === "avans" ? "Nov rabat — avans" : otherLabel ? "Nov rabat — odloženo" : "Nov rabat"}</th>
                 <th className={styles.num}>Neto cena (bez PDV-a)</th>
               </tr>
             </thead>
@@ -371,6 +388,7 @@ export function RebateTable({
                           <td>uzima {all.filter((r) => r.buysNow).length} od {all.length}</td>
                           <td />
                           <td>{dom === null ? "na upit" : `najčešće ${pct(dom)}`}</td>
+                          {otherLabel ? <td className={styles.other}>{otherDom(all)}</td> : null}
                           <td>{pctInput(bKey, dom === null ? "" : String(dom).replace(".", ","), `Nov rabat za ceo brend ${brand}`)}</td>
                           <td className={styles.num}><span className={styles.sub}>za ceo brend</span></td>
                         </tr>
@@ -393,6 +411,7 @@ export function RebateTable({
                                     <td>uzima {gAll.filter((r) => r.buysNow).length} od {gAll.length}</td>
                                     <td />
                                     <td>{gDom === null ? "na upit" : `najčešće ${pct(gDom)}`}</td>
+                                    {otherLabel ? <td className={styles.other}>{otherDom(gAll)}</td> : null}
                                     <td>{pctInput(gKey, gDom === null ? "" : String(gDom).replace(".", ","), `Nov rabat za grupu ${group}`)}</td>
                                     <td className={styles.num}><span className={styles.sub}>za celu grupu</span></td>
                                   </tr>
@@ -406,7 +425,7 @@ export function RebateTable({
                   })
                 : flat.map((r) => artRow(r, false))}
               {visible.length === 0 ? (
-                <tr><td colSpan={7} className={styles.empty}>Nema artikala za ovaj filter.</td></tr>
+                <tr><td colSpan={otherLabel ? 8 : 7} className={styles.empty}>Nema artikala za ovaj filter.</td></tr>
               ) : null}
             </tbody>
           </table>

@@ -39,6 +39,8 @@ export async function applyRebateTableAction(input: {
   reason: string;
   approveNow: boolean;
   expected: Record<string, string | null>;
+  /** null = osnovni rabat (odloženo), „avans“ = rabat uz avans. */
+  paymentCondition?: string | null;
 }) {
   const customerId = String(input.customerId);
   if (!UUID.test(customerId)) return { ok: false as const, error: "Neispravan kupac." };
@@ -62,6 +64,7 @@ export async function applyRebateTableAction(input: {
       reason: String(input.reason ?? ""),
       approveNow: Boolean(input.approveNow),
       expected,
+      paymentCondition: input.paymentCondition === "avans" ? "avans" : null,
     });
     revalidatePath(`/portal/cene/rabati-iz-faktura/kupci/${customerId}/tabela`);
     revalidatePath(`/portal/cene/rabati-iz-faktura/kupci/${customerId}`);
@@ -69,8 +72,8 @@ export async function applyRebateTableAction(input: {
     return {
       ok: true as const,
       message: r.approved
-        ? `Odobreno: ${n}. Vlasnik promenu vidi u dnevnom zbiru i na „Promene komercijalista“.`
-        : `Poslato na odobrenje: ${n}. Rabat se ne menja dok predlog ne bude odobren.`,
+        ? `${input.paymentCondition === "avans" ? "Avans — o" : "O"}dobreno: ${n}. Vlasnik promenu vidi u dnevnom zbiru i na „Promene komercijalista“.`
+        : `${input.paymentCondition === "avans" ? "Avans — p" : "P"}oslato na odobrenje: ${n}. Rabat se ne menja dok predlog ne bude odobren.`,
     };
   } catch (error) {
     if (error instanceof RebateChangeError || error instanceof WorkflowError || error instanceof PricingRuleError || error instanceof PricingScopeError) {

@@ -6,6 +6,7 @@ import { canDecidePricesFor } from "@/lib/authz/scope.mjs";
 import { loadAssignedCustomerIds, type PortalUser } from "@/lib/authz/user-repository";
 import { customerPrices } from "@/lib/pricing/customer-price-service";
 import { approvedPaymentOptions } from "@/lib/pricing/payment-option-service";
+import { optionLabel } from "@/lib/pricing/paymentOptions.mjs";
 import { assertPricingCustomerAccess } from "@/lib/pricing/pricing-scope";
 import { previewRebateChange, RebateChangeError, submitRebateChange } from "@/lib/pricing/rebate-change-service";
 import { groupKeysFor, MAX_ITEMS_PER_SAVE, planChanges, type TableRow } from "@/lib/pricing/rebateTable.mjs";
@@ -22,6 +23,9 @@ import { belgradeDate } from "@/lib/recommendations/customerRhythm.mjs";
  * (pregled, zamena starog pravila, odobrenje, dnevni zbir vlasniku).
  */
 
+/** Opcija plaćanja koja ima svoj rabat u tabeli; sve ostale (odloženo) idu na osnovni rabat. */
+export const AVANS = "avans";
+
 const ACTIVE = ["approved_pending_biznisoft", "office_recorded", "confirmed"];
 const PENDING = ["draft", "pending_approval"];
 
@@ -37,6 +41,9 @@ export type RebateTableRow = TableRow & {
   purchaseDays: number;
   lastPurchaseOn: string | null;
   buysNow: boolean;
+  /** Rabat i neto cena DRUGE opcije (avans ↔ odloženo), za prikaz jedno pored drugog. */
+  otherPercent: number | null;
+  otherNetCents: number | null;
 };
 
 function periodCondition(period: { from: string | null; to: string | null }) {
@@ -49,6 +56,12 @@ export async function loadRebateTable(
   now: Date = new Date(),
   /** Izabrani period (2026-11-13): „Uzima“ = kupio u periodu. Bez perioda važi stari rok: poslednjih 365 dana. Samo prikaz. */
   period: { from: string | null; to: string | null } = { from: null, to: null },
+  /**
+   * Uslov plaćanja koji se menja (2026-11-23, odluka vlasnika): null = osnovni rabat (odloženo
+   * plaćanje i svaka opcija bez svog rabata), „avans“ = rabat uz avansno plaćanje. Druga opcija se
+   * prikazuje u koloni pored.
+   */
+  condition: string | null = null,
 ) {
   await assertPricingCustomerAccess(viewer, customerId);
   const today = belgradeDate(now);
@@ -69,12 +82,12 @@ export async function loadRebateTable(
         FROM recommendation_input_lines ril JOIN invoice_lines il ON il.id = ril.invoice_line_id
        WHERE ril.customer_id = ${customerId}::uuid AND ril.issued_on <= ${today}::date AND il.article_id IS NOT NULL
        GROUP BY il.article_id`),
-    // Pravila ARTIKLA ovog kupca (osnovni uslov, bez opcije plaćanja) — isti kriterijum kao „Promena rabata“.
+    // Pravila ARTIKLA ovog kupca za izabrani uslov plaćanja — isti kriterijum kao „Promena rabata“.
     db.execute<{ id: string; article_id: string; p: string; status: string; f: string }>(sql`
       SELECT id, article_id, discount_percent::text AS p, status::text AS status, effective_from::text AS f
         FROM price_rules
        WHERE customer_scope = 'customer' AND customer_id = ${customerId}::uuid AND product_scope = 'article'
-         AND value_kind = 'discount_percent' AND payment_condition IS NULL
+         AND value_kind = 'discount_percent' AND payment_condition IS NOT DISTINCT FROM ${condition}
          AND status::text IN (${sql.join([...ACTIVE, ...PENDING].map((s) => sql`${s}`), sql`, `)})
          AND (effective_to IS NULL OR effective_to >= ${today}::date)`),
     approvedPaymentOptions(customerId, today),
@@ -85,8 +98,16 @@ export async function loadRebateTable(
   const customer = [...customerRows][0];
   if (!customer) throw new RebateChangeError("Kupac ne postoji.");
 
+  if (condition !== null && !options.includes(condition)) {
+    throw new RebateChangeError(`${optionLabel(condition)} nije odobreno ovom kupcu — prvo odobrite opciju plaćanja na stranici kupca.`);
+  }
+  // Druga strana poređenja: na kartici avansa osnovni rabat, na osnovnoj avans (ako je odobren).
+  const other: string | null | undefined = condition === null ? (options.includes(AVANS) ? AVANS : undefined) : null;
   const ids = [...articleRows].map((a) => a.id);
-  const { prices } = await customerPrices(customerId, ids, today, null);
+  const [{ prices }, otherPrices] = await Promise.all([
+    customerPrices(customerId, ids, today, condition),
+    other === undefined ? Promise.resolve(null) : customerPrices(customerId, ids, today, other).then((r) => r.prices),
+  ]);
   const bought = new Map([...purchases].map((p) => [p.article_id, p]));
   const rulesBy = new Map<string, { id: string; p: number; status: string; f: string }[]>();
   for (const r of rules) rulesBy.set(r.article_id, [...(rulesBy.get(r.article_id) ?? []), { id: r.id, p: Number(r.p), status: r.status, f: r.f }]);
@@ -121,6 +142,8 @@ export async function loadRebateTable(
           : null;
     const p = bought.get(a.id);
     const priced = price && price.status === "cena" ? price : null;
+    const op = otherPrices?.get(a.id);
+    const otherPriced = op && op.status === "cena" ? op : null;
     return {
       articleId: a.id,
       code: a.code,
@@ -141,6 +164,8 @@ export async function loadRebateTable(
       purchaseDays: (withPeriod ? p?.period_days : p?.days) ?? 0,
       lastPurchaseOn: p?.last ?? null,
       buysNow: withPeriod ? Boolean(p && p.period_days > 0) : Boolean(p && p.last >= yearAgo),
+      otherPercent: otherPriced && otherPriced.discountPercent !== null ? otherPriced.discountPercent : null,
+      otherNetCents: otherPriced?.netCents ?? null,
     };
   });
   // Osnovna cena za artikle „na upit“ (bez rabata) — da bi se neto cena mogla upisati.
@@ -162,6 +187,9 @@ export async function loadRebateTable(
     today,
     rows,
     paymentOptions: options,
+    condition,
+    /** Kolona pored: šta se poredi (null = nema druge opcije). */
+    otherLabel: other === undefined ? null : other === AVANS ? "Avans" : "Odloženo (osnovni)",
     canPropose: can(viewer, "prices:propose") && own,
     canApprove: can(viewer, "prices:approve") && own,
   };
@@ -182,9 +210,10 @@ export type RebateTableEdits = {
  */
 export async function applyRebateTable(
   viewer: PortalUser,
-  input: { customerId: string; edits: RebateTableEdits; effectiveFrom: string; reason: string; approveNow: boolean; expected: Record<string, string | null> },
+  input: { customerId: string; edits: RebateTableEdits; effectiveFrom: string; reason: string; approveNow: boolean; expected: Record<string, string | null>; paymentCondition?: string | null },
 ) {
-  const table = await loadRebateTable(viewer, input.customerId);
+  const condition = input.paymentCondition ?? null;
+  const table = await loadRebateTable(viewer, input.customerId, new Date(), undefined, condition);
   if (!table.canPropose) throw new RebateChangeError("Rabate ovog kupca ne možete da menjate.");
   if (input.approveNow && !table.canApprove) throw new RebateChangeError("Nemate pravo da direktno odobrite promenu.");
   const reason = input.reason.trim();
@@ -215,7 +244,7 @@ export async function applyRebateTable(
     batches.set(k, b);
   }
   for (const b of batches.values()) {
-    const preview = await previewRebateChange(viewer, { customerId: input.customerId, mode: "artikli", articleIds: b.ids, newPercent: b.percent, effectiveFrom: input.effectiveFrom });
+    const preview = await previewRebateChange(viewer, { customerId: input.customerId, mode: "artikli", articleIds: b.ids, newPercent: b.percent, effectiveFrom: input.effectiveFrom, paymentCondition: condition });
     const bad = preview.rows.find((r) => !r.included);
     if (bad) throw new RebateChangeError(`${bad.articleCode} ${bad.articleName}: ${bad.note ?? "ne može se promeniti"}. Ništa nije sačuvano.`);
   }
@@ -233,6 +262,7 @@ export async function applyRebateTable(
       effectiveFrom: input.effectiveFrom,
       reason: `${reason}${netNote}`.slice(0, 800),
       approveNow: input.approveNow,
+      paymentCondition: condition,
       expected: b.ids.map((id) => ({ articleId: id, replacesRuleId: input.expected[id] ?? null })),
     });
     count += r.count;

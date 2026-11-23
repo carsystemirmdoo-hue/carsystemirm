@@ -98,15 +98,14 @@ export async function loadRebateTable(
   const customer = [...customerRows][0];
   if (!customer) throw new RebateChangeError("Kupac ne postoji.");
 
-  if (condition !== null && !options.includes(condition)) {
-    throw new RebateChangeError(`${optionLabel(condition)} nije odobreno ovom kupcu — prvo odobrite opciju plaćanja na stranici kupca.`);
-  }
-  // Druga strana poređenja: na kartici avansa osnovni rabat, na osnovnoj avans (ako je odobren).
-  const other: string | null | undefined = condition === null ? (options.includes(AVANS) ? AVANS : undefined) : null;
+  if (condition !== null && condition !== AVANS) throw new RebateChangeError(`Nepoznat uslov plaćanja: ${optionLabel(condition)}.`);
+  // Avans se prikazuje kod svakog kupca (2026-11-23); menja se tek kada je avans odobren ovom kupcu.
+  const avansApproved = options.includes(AVANS);
+  const other: string | null = condition === null ? AVANS : null;
   const ids = [...articleRows].map((a) => a.id);
   const [{ prices }, otherPrices] = await Promise.all([
     customerPrices(customerId, ids, today, condition),
-    other === undefined ? Promise.resolve(null) : customerPrices(customerId, ids, today, other).then((r) => r.prices),
+    customerPrices(customerId, ids, today, other).then((r) => r.prices),
   ]);
   const bought = new Map([...purchases].map((p) => [p.article_id, p]));
   const rulesBy = new Map<string, { id: string; p: number; status: string; f: string }[]>();
@@ -189,9 +188,13 @@ export async function loadRebateTable(
     paymentOptions: options,
     condition,
     /** Kolona pored: šta se poredi (null = nema druge opcije). */
-    otherLabel: other === undefined ? null : other === AVANS ? "Avans" : "Odloženo (osnovni)",
-    canPropose: can(viewer, "prices:propose") && own,
-    canApprove: can(viewer, "prices:approve") && own,
+    otherLabel: other === AVANS ? (avansApproved ? "Avans" : "Avans (nije odobren)") : "Odloženo (osnovni)",
+    avansApproved,
+    hasDeferred: options.some((o) => o.startsWith("odlozeno_")),
+    // Avansni rabat se ne može upisati pre odobrenog avansa (isto pravilo kao u servisu promene).
+    canPropose: can(viewer, "prices:propose") && own && (condition === null || avansApproved),
+    canApprove: can(viewer, "prices:approve") && own && (condition === null || avansApproved),
+    canEnableAvans: can(viewer, "prices:approve") && own,
   };
 }
 

@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { forbidden, notFound, redirect } from "next/navigation";
+import { forbidden, notFound } from "next/navigation";
 import { PageHeader } from "@/components/portal/PortalPrimitives";
 import { seesAllCustomers } from "@/lib/authz/permissions.mjs";
 import { requireCapability } from "@/lib/authz/session";
@@ -8,6 +8,7 @@ import { PricingScopeError } from "@/lib/pricing/pricing-scope";
 import { RebateChangeError } from "@/lib/pricing/rebate-change-service";
 import { AVANS, loadRebateTable } from "@/lib/pricing/rebate-table-service";
 import { RebateTable } from "./RebateTable";
+import { EnableAvans } from "./EnableAvans";
 import { DateRangeField } from "@/components/portal/DateRangeField";
 import { readPortalPeriod } from "@/lib/portal/period";
 import { isAllTime, periodLabel } from "@/lib/portal/periodMemory.mjs";
@@ -40,13 +41,11 @@ export default async function RebateTablePage({
     data = await loadRebateTable(user, id, new Date(), period, wantAvans ? AVANS : null);
   } catch (error) {
     if (error instanceof PricingScopeError) forbidden();
-    // Avans nije (više) odobren ovom kupcu: nazad na osnovni rabat.
-    if (error instanceof RebateChangeError && wantAvans) redirect(`/portal/cene/rabati-iz-faktura/kupci/${id}/tabela`);
     if (error instanceof RebateChangeError) notFound();
     throw error;
   }
 
-  const hasAvans = data.paymentOptions.includes(AVANS);
+  const hasAvans = data.avansApproved;
   const tabHref = (c: string | null) => {
     const q = new URLSearchParams();
     if (period.from) q.set("from", period.from);
@@ -84,19 +83,26 @@ export default async function RebateTablePage({
           <Link href={tabHref(null)} data-active={!wantAvans} aria-current={!wantAvans ? "page" : undefined}>
             Odloženo plaćanje (osnovni rabat)
           </Link>
-          {hasAvans ? (
-            <Link href={tabHref(AVANS)} data-active={wantAvans} aria-current={wantAvans ? "page" : undefined}>
-              Avansno plaćanje
-            </Link>
-          ) : null}
+          <Link href={tabHref(AVANS)} data-active={wantAvans} aria-current={wantAvans ? "page" : undefined}>
+            Avansno plaćanje{hasAvans ? "" : " (nije odobreno)"}
+          </Link>
         </nav>
         <p className="portal-footnote">
           {wantAvans
             ? "Menjate rabat uz AVANSNO plaćanje. Artikal bez svog avansnog rabata ima osnovni rabat; kolona „Odloženo (osnovni)“ ga prikazuje pored."
             : hasAvans
               ? "Menjate osnovni rabat: važi za odloženo plaćanje i za avans kod artikala bez posebnog avansnog rabata. Kolona „Avans“ pokazuje avansni rabat pored."
-              : <>Kupcu nije odobreno avansno plaćanje, pa postoji samo osnovni rabat. Avans odobravate na <Link href={`/portal/cene/rabati-iz-faktura/kupci/${id}#opcije-placanja`}>stranici rabata kupca</Link> (Opcije plaćanja); tada se ovde pojavljuje kartica „Avansno plaćanje“.</>}
+              : "Menjate osnovni rabat (odloženo plaćanje). Kupcu avans još nije odobren — kolona „Avans“ zato pokazuje isti rabat. Avansni rabat upisujete na kartici „Avansno plaćanje“."}
         </p>
+        {wantAvans && !hasAvans ? (
+          data.canEnableAvans ? (
+            <EnableAvans customerId={id} needsDeferred={!data.hasDeferred} />
+          ) : (
+            <p className="portal-readiness-note" role="status">
+              Kupcu avans nije odobren. Predložite „Avansno plaćanje“ na <Link href={`/portal/cene/rabati-iz-faktura/kupci/${id}#opcije-placanja`}>stranici rabata kupca</Link>; posle odobrenja ovde upisujete avansni rabat.
+            </p>
+          )
+        ) : null}
         <form method="get" className="portal-inline-form">
           {wantAvans ? <input type="hidden" name="uslov" value={AVANS} /> : null}
           <DateRangeField nameOd="from" nameDo="to" defaultOd={period.from} defaultDo={period.to} zapamti />

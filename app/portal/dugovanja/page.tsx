@@ -12,15 +12,20 @@ import {
   customersForLinking,
   receivablesSourceConfigured,
   sheetAssignmentSuggestions,
+  recentPayments,
   unmatchedDebtLines,
   type CustomerDebt,
 } from "@/lib/sales-tools/receivables-service";
 import { DebtTools } from "./DebtTools";
+import { RecentPayments } from "./RecentPayments";
 import { SheetMatching } from "./SheetMatching";
 
 export const metadata = { title: "Dugovanja" };
 
 export const dynamic = "force-dynamic";
+
+/** „Uplaćeno u poslednjih N dana“ (odluka vlasnika 2026-11-24: 5 dana). */
+const PAID_DAYS = 5;
 
 const whole = (n: number) => n.toLocaleString("sr-Latn-RS", { maximumFractionDigits: 0 });
 const dmy = (d: string | null) => (d ? `${d.slice(8, 10)}.${d.slice(5, 7)}.${d.slice(0, 4)}.` : "—");
@@ -46,7 +51,7 @@ export default async function Page({ searchParams }: { searchParams: Promise<Rec
   const one = (k: string) => (typeof sp[k] === "string" ? (sp[k] as string) : "");
   const configured = receivablesSourceConfigured();
   const refreshProblem = await autoRefreshReceivables(user.id);
-  const [snap, rows] = await Promise.all([latestSnapshot(), debtsByCustomer(user)]);
+  const [snap, rows, recent] = await Promise.all([latestSnapshot(), debtsByCustomer(user), recentPayments(user, PAID_DAYS)]);
   const all = seesAllCustomers(user);
   const [unmatched, suggestions, linkable] = all && snap ? await Promise.all([unmatchedDebtLines(), sheetAssignmentSuggestions(), customersForLinking()]) : [[], [], []];
   const canUpload = can(user, "imports:write");
@@ -111,6 +116,8 @@ export default async function Page({ searchParams }: { searchParams: Promise<Rec
             <div className="dg-metric dg-metric--late"><span>Dospelo (prošla valuta)</span><strong>{whole(overdue)} RSD</strong></div>
             <div className="dg-metric"><span>Kupaca sa dugom</span><strong>{rows.length}</strong></div>
           </div>
+
+          <RecentPayments payments={recent.payments} since={recent.since} days={PAID_DAYS} />
 
           <section className="portal-panel">
             <div className="dg-bar">

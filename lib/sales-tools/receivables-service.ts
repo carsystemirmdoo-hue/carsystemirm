@@ -9,6 +9,7 @@ import { belgradeDate } from "@/lib/recommendations/customerRhythm.mjs";
 import { readSheets, SheetReadError, sheetConfig } from "@/lib/sales-tools/googleSheets.mjs";
 import { matchCustomer, repForSheet } from "@/lib/sales-tools/customerMatch.mjs";
 import { daysOverdue, nameKey, parseReceivables } from "@/lib/sales-tools/receivablesParse.mjs";
+import { paymentsByCustomer } from "@/lib/sales-tools/recentPayments.mjs";
 import { CsvReadError, readCsvGrid } from "@/lib/stock/csvGrid.mjs";
 
 /**
@@ -394,4 +395,82 @@ export async function sheetAssignmentSuggestions(): Promise<SheetAssignment[]> {
     out.push({ customerId: r.cid, customerName: r.name, sheet: r.sheet, repId: rep.id, repName: rep.name, current });
   }
   return out.sort((a, b) => a.repName.localeCompare(b.repName, "sr-Latn") || a.customerName.localeCompare(b.customerName, "sr-Latn"));
+}
+
+export type RecentPayment = {
+  customerId: string;
+  customerName: string;
+  paidTotal: number;
+  paid: { invoiceNumber: string | null; issuedOn: string | null; before: number; after: number; paid: number; full: boolean; seenOn: string | null }[];
+  remainingTotal: number;
+  overdueTotal: number;
+  open: DebtLine[];
+};
+
+/**
+ * Uplaćeno u poslednjih `days` dana (2026-11-24): poređenje snimka tabele dugovanja sa početka
+ * perioda i poslednjeg (`paymentsByCustomer`). Za svakog kupca koji je platio ide i šta mu je
+ * ostalo da plati (otvorene fakture iz poslednjeg snimka). Komercijalista vidi samo svoje kupce.
+ */
+export async function recentPayments(viewer: PortalUser, days = 5, now = new Date()): Promise<{ since: string | null; payments: RecentPayment[] }> {
+  const last = await latestSnapshot();
+  if (!last) return { since: null, payments: [] };
+  const scope = await resolveLedgerScope(viewer);
+  if (scope.customerIds !== null && scope.customerIds.length === 0) return { since: null, payments: [] };
+  const db = getDb();
+  const cutoff = new Date(now.getTime() - days * 86400000).toISOString();
+  const snaps = [
+    ...(await db.execute<{ id: string; created_at: string }>(sql`
+      SELECT id, created_at::text FROM receivable_snapshots
+       WHERE created_at > (SELECT coalesce(max(created_at), '-infinity') FROM receivable_snapshots WHERE created_at <= ${cutoff}::timestamptz)
+          OR created_at = (SELECT max(created_at) FROM receivable_snapshots WHERE created_at <= ${cutoff}::timestamptz)
+       ORDER BY created_at, id`)),
+  ];
+  // Bez snimka pre početka perioda polazi se od prvog snimka (prvih dana posle povezivanja tabele).
+  if (snaps.length < 2) return { since: snaps[0]?.created_at ?? null, payments: [] };
+  const inScope = scope.customerIds === null ? sql`true` : sql`${EFFECTIVE} IN (${sql.join(scope.customerIds.map((id) => sql`${id}::uuid`), sql`, `)})`;
+  const rows = await db.execute<{ snapshot_id: string; customer_id: string; source_label: string | null; inv: string | null; issued: string | null; due: string | null; amount: string | null; rem: string }>(sql`
+    SELECT l.snapshot_id, ${EFFECTIVE} AS customer_id, l.source_label, l.invoice_number AS inv, l.issued_on::text AS issued, l.due_on::text AS due, l.amount::text, l.remaining::text AS rem
+      FROM receivable_lines l ${LINKS}
+     WHERE l.snapshot_id IN (${sql.join(snaps.map((s) => sql`${s.id}::uuid`), sql`, `)}) AND ${EFFECTIVE} IS NOT NULL AND ${inScope}`);
+  const bySnap = new Map<string, Parameters<typeof paymentsByCustomer>[0]["before"]>();
+  for (const r of rows) {
+    const list = bySnap.get(r.snapshot_id) ?? [];
+    list.push({ customerId: r.customer_id, sourceLabel: r.source_label, invoiceNumber: r.inv, issuedOn: r.issued, dueOn: r.due, amount: r.amount === null ? null : Number(r.amount), remaining: Number(r.rem) });
+    bySnap.set(r.snapshot_id, list);
+  }
+  // Oznake tabela iz POSLEDNJEG snimka za ceo snimak (ne samo opseg), da „tabela nedostaje“ ne bi bila lažna.
+  const labels = [...(await db.execute<{ source_label: string | null }>(sql`SELECT DISTINCT source_label FROM receivable_lines WHERE snapshot_id = ${last.id}::uuid`))]
+    .map((r) => r.source_label)
+    .filter((x): x is string => Boolean(x));
+  const after = [...(bySnap.get(last.id) ?? []), ...labels.map((sourceLabel) => ({ customerId: "", sourceLabel, invoiceNumber: null, issuedOn: null, amount: null, remaining: 0 }))];
+  const found = paymentsByCustomer({
+    before: bySnap.get(snaps[0].id) ?? [],
+    after,
+    between: snaps.slice(1).map((s) => ({ createdAt: s.created_at, lines: bySnap.get(s.id) ?? [] })),
+  });
+  if (!found.size) return { since: snaps[0].created_at, payments: [] };
+  const ids = [...found.keys()];
+  const names = new Map(
+    [...(await db.execute<{ id: string; name: string }>(sql`SELECT id, name FROM customers WHERE id IN (${sql.join(ids.map((id) => sql`${id}::uuid`), sql`, `)})`))].map((r) => [r.id, r.name]),
+  );
+  const today = belgradeDate(now);
+  const payments: RecentPayment[] = ids.map((id) => {
+    const f = found.get(id)!;
+    const open = (bySnap.get(last.id) ?? [])
+      .filter((l) => l.customerId === id)
+      .map((l) => ({ invoiceNumber: l.invoiceNumber, issuedOn: l.issuedOn, dueOn: l.dueOn ?? null, amount: l.amount, paid: null, remaining: l.remaining, daysOverdue: daysOverdue(l.dueOn ?? null, today), note: null }))
+      .sort((a, b) => String(a.dueOn ?? "9").localeCompare(String(b.dueOn ?? "9")));
+    return {
+      customerId: id,
+      customerName: names.get(id) ?? "—",
+      paidTotal: f.paidTotal,
+      paid: f.invoices,
+      remainingTotal: open.reduce((s, l) => s + l.remaining, 0),
+      overdueTotal: open.filter((l) => (l.daysOverdue ?? 0) > 0).reduce((s, l) => s + l.remaining, 0),
+      open,
+    };
+  });
+  payments.sort((a, b) => String(b.paid[0]?.seenOn ?? "").localeCompare(String(a.paid[0]?.seenOn ?? "")) || b.paidTotal - a.paidTotal);
+  return { since: snaps[0].created_at, payments };
 }

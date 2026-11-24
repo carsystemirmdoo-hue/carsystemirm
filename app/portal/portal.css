@@ -10932,3 +10932,23 @@ a.dg-metric { color: inherit; text-decoration: none; }
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 22rem), 1fr));
   align-items: start;
 }
+
+/* Uplaćeno u poslednjih 5 dana (2026-11-24) */
+.portal-panel > .up-list { margin: 0 16px 16px; display: grid; gap: 8px; }
+.portal-panel > .portal-empty { margin-bottom: 16px; }
+.up-item { border: 1px solid var(--portal-border, #e3e5e8); border-radius: 8px; background: var(--portal-surface, #fff); }
+.up-item > summary { display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 1fr) minmax(0, 1.4fr) auto; gap: 12px; align-items: center; padding: 12px 14px; cursor: pointer; list-style: none; }
+.up-item > summary::-webkit-details-marker { display: none; }
+.up-item > summary::before { content: "▸"; position: absolute; margin-left: -10px; }
+.up-item[open] > summary { border-bottom: 1px solid var(--portal-border, #e3e5e8); }
+.up-name { font-weight: 600; }
+.up-paid b { color: #137333; }
+.up-rest--zero { color: #137333; }
+.up-when { font-size: 13px; opacity: 0.75; }
+.up-body { padding: 12px 14px 4px; }
+.up-body h3 { font-size: 14px; margin: 4px 0 8px; }
+.up-body .portal-table-wrap { margin-bottom: 12px; }
+@media (max-width: 720px) {
+  .up-item > summary { grid-template-columns: 1fr auto; }
+  .up-rest { grid-column: 1 / -1; }
+}

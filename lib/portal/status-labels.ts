@@ -109,6 +109,7 @@ export const NOTIFICATION_KIND_LABELS: Record<string, string> = {
   customer_price_request_submitted: "Upit za cenu",
   credit_warning: "Kreditni limit kupca",
   price_list_stage: "VP cenovnik — priprema",
+  invoice_storno: "Storno fakture",
 };
 
 /** Opis opsega pravila, čitljiv bez poznavanja modela. */

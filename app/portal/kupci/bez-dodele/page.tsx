@@ -1,4 +1,7 @@
 import Link from "next/link";
+import { can } from "@/lib/authz/permissions.mjs";
+import { listSalesReps } from "@/lib/partners/assignment-service";
+import { QuickAssign } from "./QuickAssign";
 import { srDate } from "@/components/customer/account-format";
 import { PageHeader } from "@/components/portal/PortalPrimitives";
 import { requireCapability } from "@/lib/authz/session";
@@ -21,13 +24,15 @@ type Row = Awaited<ReturnType<typeof loadUnassignedCustomers>>[number];
 
 const fold = (s: string) => s.toLocaleLowerCase("sr-Latn").normalize("NFD").replace(/\p{Diacritic}/gu, "").replace(/đ/g, "dj");
 
-/** Kupci bez dodeljenog komercijaliste — samo pregled; dodela se ovde ne menja. */
+/** Kupci bez dodeljenog komercijaliste; vlasnik ih dodeljuje iz padajućeg menija (2026-11-24). */
 export default async function UnassignedCustomersPage({
   searchParams,
 }: {
   searchParams: Promise<{ q?: string; sort?: string }>;
 }) {
-  await requireCapability("view:bez_dodele", "/portal/kupci/bez-dodele");
+  const user = await requireCapability("view:bez_dodele", "/portal/kupci/bez-dodele");
+  const canAssign = can(user, "assignments:manage");
+  const reps = canAssign ? (await listSalesReps()).map((r) => ({ id: r.id, name: r.name })) : [];
   const sp = await searchParams;
   const q = (sp.q ?? "").trim().slice(0, 80);
   const sort = sp.sort && sp.sort in SORTS ? (sp.sort as keyof typeof SORTS) : "promet12";
@@ -44,7 +49,7 @@ export default async function UnassignedCustomersPage({
       <PageHeader
         eyebrow="Prodaja · Kupci"
         title="Bez dodeljenog komercijaliste"
-        description="Kupci sa fakturama kojima trenutno nije dodeljen komercijalista. Pregled za odluku o zaduženju; dodela se ovde ne menja, a istorijske fakture ostaju kakve jesu."
+        description={canAssign ? "Kupci sa fakturama kojima nije dodeljen komercijalista. Izaberite komercijalistu u koloni „Dodela“ — važi odmah, pa idete na sledećeg kupca." : "Kupci sa fakturama kojima trenutno nije dodeljen komercijalista."}
         meta={
           <span>
             {all.length} kupaca · {active12} sa kupovinom u poslednjih 12 meseci · ukupno 12 meseci{" "}
@@ -75,6 +80,7 @@ export default async function UnassignedCustomersPage({
             <thead>
               <tr>
                 <th scope="col">Kupac</th>
+                {canAssign ? <th scope="col">Dodela</th> : null}
                 <th scope="col">Poslednja kupovina</th>
                 <th scope="col">Promet 12 m.</th>
                 <th scope="col">Promet {year}.</th>
@@ -89,6 +95,11 @@ export default async function UnassignedCustomersPage({
                   <th scope="row">
                     <Link href={`/portal/kupci/${r.id}`}>{r.name}</Link>
                   </th>
+                  {canAssign ? (
+                    <td>
+                      <QuickAssign customerId={r.id} reps={reps} />
+                    </td>
+                  ) : null}
                   <td className="portal-table-nowrap">
                     {srDate(r.lastOn)}
                     <small>
@@ -111,7 +122,7 @@ export default async function UnassignedCustomersPage({
               ))}
               {rows.length === 0 ? (
                 <tr>
-                  <td colSpan={showRep ? 7 : 6}>Nema kupaca za pretragu.</td>
+                  <td colSpan={(showRep ? 7 : 6) + (canAssign ? 1 : 0)}>Nema kupaca za pretragu.</td>
                 </tr>
               ) : null}
             </tbody>

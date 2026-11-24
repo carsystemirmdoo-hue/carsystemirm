@@ -449,6 +449,13 @@
       "when": 1794232800000,
       "tag": "0066_vp_cenovnik_priprema",
       "breakpoints": true
+    },
+    {
+      "idx": 64,
+      "version": "7",
+      "when": 1794319200000,
+      "tag": "0067_storno_notification",
+      "breakpoints": true
     }
   ]
 }

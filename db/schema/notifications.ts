@@ -35,6 +35,8 @@ export const notificationKind = pgEnum("notification_kind", [
   "credit_warning",
   /** Priprema VP cenovnika čeka sledeći korak: kancelariju, vlasnika ili ispravku (0066). */
   "price_list_stage",
+  /** Storno fakture je stigao sa konektora i povezan sa originalom (0067). */
+  "invoice_storno",
 ]);
 
 export const notificationSeverity = pgEnum("notification_severity", [

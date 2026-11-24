@@ -1,7 +1,8 @@
 import "server-only";
 import { and, eq, ne, sql } from "drizzle-orm";
 import type { getDb } from "@/db/client";
-import { invoiceReversals, invoices, sourceDocumentLines, sourceDocuments } from "@/db/schema";
+import { customers, invoiceReversals, invoices, sourceDocumentLines, sourceDocuments } from "@/db/schema";
+import { notify } from "@/lib/notifications/notification-service";
 import { AUDIT_ACTIONS, recordAudit } from "@/lib/audit/record";
 import { compareStornoToOriginal } from "@/lib/pdf/storno.mjs";
 import type { IngestActor } from "@/lib/pdf/ingest";
@@ -224,5 +225,42 @@ async function evaluateReversal(tx: Tx, reversalId: string, actor: IngestActor):
     },
     tx,
   );
+  await notifyStorno(tx, { reversalId, applied, stornoLabel: label, originalNumber: r.originalNumber, invoiceId: invoice.id, gross: Number(invoice.gross) });
   return { reversalId, status: applied ? "applied" : "review", reasons };
+}
+
+/**
+ * Obaveštenje o stornu (0067, zahtev vlasnika 2026-11-24). U istoj transakciji kao veza sa
+ * originalom; pre migracije 0067 vrednosti enuma nema i ništa se ne šalje (storno ne sme da padne).
+ */
+async function notifyStorno(
+  tx: Tx,
+  input: { reversalId: string; applied: boolean; stornoLabel: string; originalNumber: string; invoiceId: string; gross: number },
+) {
+  const [ok] = await tx.execute<{ ok: boolean }>(sql`SELECT EXISTS (SELECT 1 FROM pg_enum e JOIN pg_type t ON t.oid = e.enumtypid WHERE t.typname = 'notification_kind' AND e.enumlabel = 'invoice_storno') AS ok`);
+  if (!ok?.ok) return;
+  const [c] = await tx
+    .select({ id: invoices.customerId, name: customers.name })
+    .from(invoices)
+    .innerJoin(customers, eq(customers.id, invoices.customerId))
+    .where(eq(invoices.id, input.invoiceId))
+    .limit(1);
+  const amount = input.gross.toLocaleString("sr-Latn-RS", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  await notify(
+    {
+      kind: "invoice_storno",
+      severity: input.applied ? "info" : "warning",
+      requiredCapability: "view:povrati",
+      title: `${input.applied ? "Stornirana faktura" : "Storno za proveru"}: ${input.originalNumber}${c ? ` — ${c.name}` : ""}`,
+      body: input.applied
+        ? `Faktura ${input.originalNumber} (${amount} RSD) je stornirana u celosti (${input.stornoLabel}) i više ne ulazi u promet.`
+        : `Storno ${input.stornoLabel} za fakturu ${input.originalNumber} nije potpun ili se ne poklapa sa originalom — faktura ostaje u prometu dok se ne proveri.`,
+      entityType: "Storno",
+      entityId: input.reversalId,
+      actionHref: "/portal/povrati",
+      customerId: c?.id ?? null,
+      dedupeKey: `invoice_storno:${input.reversalId}:${input.applied ? "applied" : "review"}`,
+    },
+    tx as never,
+  );
 }

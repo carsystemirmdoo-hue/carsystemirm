@@ -1,5 +1,7 @@
 import { eq } from "drizzle-orm";
-import { PhaseNotice } from "@/components/portal/PhaseNotice";
+import { can } from "@/lib/authz/permissions.mjs";
+import { listRepsWithCustomerCount } from "@/lib/partners/assignment-service";
+import { RepTransfer } from "./RepTransfer";
 import { PageHeader } from "@/components/portal/PortalPrimitives";
 import { getDb } from "@/db/client";
 import { systemSettings } from "@/db/schema";
@@ -36,13 +38,12 @@ export default async function AdminPage() {
 
       <ThresholdSettings thresholds={thresholds} canManage={canManage} />
 
-      <PhaseNotice
-        icon="settings"
-        title="Podešavanja drugih delova sistema"
-        summary="Fakture stižu preko konektora sa kancelarijskog računara (ekran Importi → Sinhronizacija), a lager se uvozi na ekranu Uvoz lagera. Ovde ostaje samo ono što još nije povezano."
-        requires={["BEX pristupni podaci i odluka o test okruženju (otprema i adresnice)."]}
-        availability="Dostupno nakon povezivanja BEX naloga"
-      />
+      {can(user, "assignments:manage") ? <RepTransfer reps={await listRepsWithCustomerCount()} /> : null}
+
+      <p className="portal-footnote">
+        Otprema, adresnice i BEX čekaju BEX nalog (pristupni podaci i test okruženje) i zato nisu u meniju. Fakture stižu preko
+        konektora (Importi → Sinhronizacija), a lager na ekranu Uvoz lagera.
+      </p>
     </>
   );
 }

@@ -91,7 +91,8 @@ export async function loadSalesLines(
       customerId: invoices.customerId,
       customerName: customers.name,
       salespersonId: invoices.salespersonId,
-      salespersonName: salespeople.name,
+      // Fakture sa konektora ne nose komercijalistu — tada važi dodela kupca (isto kao u Analitici).
+      salespersonName: sql<string | null>`coalesce(${salespeople.name}, ${DODELA_KUPCA})`,
       articleId: invoiceLines.articleId,
       articleCode: invoiceLines.articleCode,
       articleName: articles.name,
@@ -431,7 +432,8 @@ export async function loadInvoiceDetail(user: PortalUser, invoiceId: string) {
       customerId: invoices.customerId,
       customerName: customers.name,
       customerPib: customers.pib,
-      salespersonName: salespeople.name,
+      // Fakture sa konektora ne nose komercijalistu — tada važi dodela kupca (isto kao u Analitici).
+      salespersonName: sql<string | null>`coalesce(${salespeople.name}, ${DODELA_KUPCA})`,
       netAmount: invoices.netAmount,
       totalAmount: invoices.totalAmount,
     })

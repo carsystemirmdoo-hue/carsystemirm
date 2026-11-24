@@ -91,6 +91,12 @@ export default async function ReturnsPage({
         description="Negativni dokumenti se čuvaju kako ih izvor daje. Vrsta se preuzima iz dokumenta — ništa se ne pretpostavlja."
       />
 
+      <p className="portal-readiness-note" role="note">
+        <b>Važi u potpunosti od 1. 1. 2027.</b> Stornirane fakture i knjižna odobrenja konektor šalje automatski od 18. 11. 2026, pa je
+        spisak 100 % tačan za dokumente iz 2027. i kasnije. Za 2026. i ranije godine storna su delom uneta ručno i spisak može biti
+        nepotpun. Za svako novo storno stiže obaveštenje.
+      </p>
+
       <SalesFilters
         action="/portal/povrati"
         options={{ customers, salespeople, reps, productGroups }}

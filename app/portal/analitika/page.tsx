@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { PageHeader } from "@/components/portal/PortalPrimitives";
 import {
   SALES_LINES_DISPLAY,
@@ -31,6 +32,15 @@ const BRANDS = [...new Set(BRAND_PREFIXES.map(([, b]) => b))]
 export const metadata = { title: "Analitika" };
 
 export const dynamic = "force-dynamic";
+
+/** Kartice iznad filtera: najčešći pogledi menadžera prodaje, bez traženja polja „Prikaz“. */
+const TABS: { key: GroupView; label: string }[] = [
+  { key: "brendovi", label: "Izlaznost po brendovima" },
+  { key: "kupci", label: "Izlaznost po kupcima" },
+  { key: "artikli", label: "Po artiklima" },
+  { key: "komercijalisti", label: "Po komercijalistima" },
+  { key: "grupe", label: "Po grupama proizvoda" },
+];
 
 const VIEWS: { key: GroupView; label: string }[] = [
   { key: "kupci", label: "Po kupcu" },
@@ -124,6 +134,28 @@ export default async function AnalyticsPage({
         title="Analitika"
         description="Bruto, povrati, korekcije i neto promet nad uvezenim fakturama. Pokazatelji naplate nisu deo ovog izvora podataka."
       />
+
+      <nav className="portal-tabs sales-view-tabs" aria-label="Izlaznost">
+        {TABS.map((tab) => {
+          const next = new URLSearchParams(
+            Object.entries(params).filter(
+              (e): e is [string, string] =>
+                typeof e[1] === "string" && e[1] !== "" && e[0] !== "kupac" && e[0] !== "brend",
+            ),
+          );
+          next.set("prikaz", tab.key);
+          return (
+            <Link
+              key={tab.key}
+              href={`/portal/analitika?${next.toString()}`}
+              data-active={view === tab.key ? "true" : undefined}
+              aria-current={view === tab.key ? "page" : undefined}
+            >
+              {tab.label}
+            </Link>
+          );
+        })}
+      </nav>
 
       <SalesFilters
         action="/portal/analitika"

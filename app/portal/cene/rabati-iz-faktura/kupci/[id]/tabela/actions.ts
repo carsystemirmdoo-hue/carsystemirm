@@ -8,6 +8,8 @@ import { applyRebateTable, type RebateTableEdits } from "@/lib/pricing/rebate-ta
 import { ARTIKAL, countOf } from "@/lib/ordering/plural.mjs";
 import { parsePercent } from "@/lib/pricing/rebateTable.mjs";
 import { PricingRuleError, WorkflowError } from "@/lib/pricing/rule-service";
+import { approvedPaymentOptions, decidePaymentOption, PaymentOptionError, proposePaymentOption } from "@/lib/pricing/payment-option-service";
+import { optionLabel } from "@/lib/pricing/paymentOptions.mjs";
 
 const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/;
 
@@ -39,6 +41,8 @@ export async function applyRebateTableAction(input: {
   reason: string;
   approveNow: boolean;
   expected: Record<string, string | null>;
+  /** null = osnovni rabat (odloženo), „avans“ = rabat uz avans. */
+  paymentCondition?: string | null;
 }) {
   const customerId = String(input.customerId);
   if (!UUID.test(customerId)) return { ok: false as const, error: "Neispravan kupac." };
@@ -62,6 +66,7 @@ export async function applyRebateTableAction(input: {
       reason: String(input.reason ?? ""),
       approveNow: Boolean(input.approveNow),
       expected,
+      paymentCondition: input.paymentCondition === "avans" ? "avans" : null,
     });
     revalidatePath(`/portal/cene/rabati-iz-faktura/kupci/${customerId}/tabela`);
     revalidatePath(`/portal/cene/rabati-iz-faktura/kupci/${customerId}`);
@@ -69,13 +74,46 @@ export async function applyRebateTableAction(input: {
     return {
       ok: true as const,
       message: r.approved
-        ? `Odobreno: ${n}. Vlasnik promenu vidi u dnevnom zbiru i na „Promene komercijalista“.`
-        : `Poslato na odobrenje: ${n}. Rabat se ne menja dok predlog ne bude odobren.`,
+        ? `${input.paymentCondition === "avans" ? "Avans — o" : "O"}dobreno: ${n}. Vlasnik promenu vidi u dnevnom zbiru i na „Promene komercijalista“.`
+        : `${input.paymentCondition === "avans" ? "Avans — p" : "P"}oslato na odobrenje: ${n}. Rabat se ne menja dok predlog ne bude odobren.`,
     };
   } catch (error) {
     if (error instanceof RebateChangeError || error instanceof WorkflowError || error instanceof PricingRuleError || error instanceof PricingScopeError) {
       return { ok: false as const, error: error.message };
     }
+    throw error;
+  }
+}
+
+/**
+ * Odobrava avans kupcu direktno iz tabele rabata (2026-11-23). Kupac sa samo avansom ne bi
+ * mogao da izabere odloženo plaćanje, pa se — ako kupac nema nijedno odobreno odloženo plaćanje —
+ * odobrava i odloženo sa izabranim rokom. Isti servis i trag kao „Opcije plaćanja“ na stranici kupca.
+ */
+export async function enableAvansAction(input: { customerId: string; deferredDays: number | null }) {
+  const customerId = String(input.customerId);
+  if (!UUID.test(customerId)) return { ok: false as const, error: "Neispravan kupac." };
+  const user = await requireCapability("prices:approve", `/portal/cene/rabati-iz-faktura/kupci/${customerId}/tabela`);
+  const today = new Intl.DateTimeFormat("en-CA", { timeZone: "Europe/Belgrade" }).format(new Date());
+  const days = input.deferredDays === null ? null : Number(input.deferredDays);
+  if (days !== null && !(Number.isInteger(days) && days >= 1 && days <= 365)) return { ok: false as const, error: "Rok odloženog plaćanja: 1–365 dana." };
+  try {
+    const approved = await approvedPaymentOptions(customerId, today);
+    const todo: string[] = [];
+    if (!approved.some((c) => c.startsWith("odlozeno_"))) {
+      if (days === null) return { ok: false as const, error: "Izaberite rok odloženog plaćanja — kupac ga još nema." };
+      todo.push(`odlozeno_${days}`);
+    }
+    if (!approved.includes("avans")) todo.push("avans");
+    for (const optionCode of todo) {
+      const { id } = await proposePaymentOption(user, { customerId, optionCode, effectiveFrom: today, reason: "Odobreno iz tabele rabata (avans i odloženo jedno pored drugog)." });
+      await decidePaymentOption(user, { id, to: "odobreno", reason: null });
+    }
+    revalidatePath(`/portal/cene/rabati-iz-faktura/kupci/${customerId}/tabela`);
+    revalidatePath(`/portal/cene/rabati-iz-faktura/kupci/${customerId}`);
+    return { ok: true as const, message: todo.length ? `Odobreno: ${todo.map((c) => optionLabel(c)).join(" i ")}.` : "Avans je već odobren." };
+  } catch (error) {
+    if (error instanceof PaymentOptionError) return { ok: false as const, error: error.message };
     throw error;
   }
 }

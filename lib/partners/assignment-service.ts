@@ -314,3 +314,57 @@ export async function listSalespersonCodes() {
     .leftJoin(users, eq(users.id, salespeople.userId))
     .orderBy(asc(salespeople.sourceCode));
 }
+
+/**
+ * Predaja kupaca (2026-11-24, zahtev vlasnika): kada komercijalista ode, svi njegovi kupci
+ * prelaze na drugog jednim potezom. Svaki kupac dobija dodelu novom (ako je već nema) i gubi
+ * dodelu starom; jedan audit zapis po predaji sa brojem kupaca.
+ */
+export async function transferCustomers(
+  input: { fromUserId: string; toUserId: string; reason: string },
+  actor: AssignmentActor,
+): Promise<{ moved: number }> {
+  const reason = input.reason.trim();
+  if (reason.length < 3) throw new AssignmentError("Predaja traži razlog.", "missing_reason");
+  if (input.fromUserId === input.toUserId) throw new AssignmentError("Izaberite dva različita komercijalisti.", "same_user");
+  const to = await requireSalesRep(input.toUserId);
+  const db = getDb();
+  return db.transaction(async (tx) => {
+    const [from] = [...(await tx.execute<{ id: string; name: string }>(sql`SELECT id, name FROM users WHERE id = ${input.fromUserId}::uuid`))];
+    if (!from) throw new AssignmentError("Komercijalista ne postoji.", "unknown_user");
+    const ids = [...(await tx.execute<{ customer_id: string }>(sql`SELECT customer_id FROM customer_assignments WHERE user_id = ${from.id}::uuid`))].map((r) => r.customer_id);
+    if (!ids.length) return { moved: 0 };
+    await tx.execute(sql`
+      INSERT INTO customer_assignments (user_id, customer_id, assigned_by, basis)
+      SELECT ${to.id}::uuid, ca.customer_id, ${actor.id}::uuid, 'manual'
+        FROM customer_assignments ca WHERE ca.user_id = ${from.id}::uuid
+      ON CONFLICT DO NOTHING`);
+    await tx.execute(sql`DELETE FROM customer_assignments WHERE user_id = ${from.id}::uuid`);
+    await recordAudit(
+      {
+        actor,
+        action: AUDIT_ACTIONS.customerAssignmentGranted,
+        entityType: "Predaja kupaca",
+        entityId: to.id,
+        entityLabel: `${from.name} → ${to.name}`,
+        before: { userId: from.id, kupaca: ids.length },
+        after: { userId: to.id, kupaca: ids.length, osnov: "predaja" },
+        reason,
+        correlationId: randomUUID(),
+      },
+      tx,
+    );
+    return { moved: ids.length };
+  });
+}
+
+/** Komercijalisti (i neaktivni) sa brojem kupaca — za predaju. */
+export async function listRepsWithCustomerCount() {
+  const rows = await getDb().execute<{ id: string; name: string; active: boolean; n: number }>(sql`
+    SELECT u.id, u.name, u.active, count(ca.customer_id)::int AS n
+      FROM users u LEFT JOIN customer_assignments ca ON ca.user_id = u.id
+     WHERE u.role = 'komercijalista'
+     GROUP BY u.id, u.name, u.active
+     ORDER BY u.active DESC, u.name`);
+  return [...rows];
+}

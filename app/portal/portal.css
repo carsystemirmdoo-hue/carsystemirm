@@ -10905,3 +10905,109 @@ a.dg-metric { color: inherit; text-decoration: none; }
 .np-note-row { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
 .np-table small.np-ok-inline { display: inline; color: #1e6b34; font-weight: 600; }
 .np-table small.np-err-inline { display: inline; color: #a3121b; font-weight: 600; }
+
+/* VP cenovnik — priprema (2026-11-18). */
+.portal-panel > .vp-facts {
+  margin-bottom: 16px;
+  padding: 0;
+  list-style: none;
+  font-size: 13px;
+  display: grid;
+  gap: 0.35rem;
+  line-height: 1.45;
+}
+/* Panel već daje marginu 16px gore i sa strane; ovde samo donji razmak do tabele. */
+.portal-panel > .portal-export-links {
+  max-width: none;
+  margin-bottom: 16px;
+}
+.portal-panel > .vp-waiting {
+  list-style: none;
+  padding: 0;
+  margin-bottom: 16px;
+  font-size: 14px;
+}
+.vp-waiting a {
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+/* Analitika: izlaznost po kupcima / brendovima / artiklima — kartice iznad filtera. */
+.sales-view-tabs {
+  margin-bottom: 12px;
+}
+.sales-view-tabs a {
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+}
+.portal-panel > .vp-stage-forms {
+  margin-bottom: 16px;
+}
+.vp-stage-forms > .portal-settings-form {
+  padding: 0;
+  grid-template-columns: minmax(0, 1fr);
+  max-width: 34rem;
+}
+.vp-stage-forms > .portal-settings-form > button {
+  justify-self: start;
+}
+.vp-stage-forms {
+  display: grid;
+  gap: 1.25rem;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 22rem), 1fr));
+  align-items: start;
+}
+
+/* Uplaćeno u poslednjih 5 dana (2026-11-24) */
+.portal-panel > .up-list { margin: 0 16px 16px; display: grid; gap: 8px; }
+.portal-panel > .portal-empty { margin-bottom: 16px; }
+.up-item { border: 1px solid var(--portal-border, #e3e5e8); border-radius: 8px; background: var(--portal-surface, #fff); }
+.up-item > summary { display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 1fr) minmax(0, 1.4fr) auto; gap: 12px; align-items: center; padding: 12px 14px; cursor: pointer; list-style: none; }
+.up-item > summary::-webkit-details-marker { display: none; }
+.up-item > summary::before { content: "▸"; position: absolute; margin-left: -10px; }
+.up-item[open] > summary { border-bottom: 1px solid var(--portal-border, #e3e5e8); }
+.up-name { font-weight: 600; }
+.up-paid b { color: #137333; }
+.up-rest--zero { color: #137333; }
+.up-when { font-size: 13px; opacity: 0.75; }
+.up-body { padding: 12px 14px 4px; }
+.up-body h3 { font-size: 14px; margin: 4px 0 8px; }
+.up-body .portal-table-wrap { margin-bottom: 12px; }
+@media (max-width: 720px) {
+  .up-item > summary { grid-template-columns: 1fr auto; }
+  .up-rest { grid-column: 1 / -1; }
+}
+
+/* Brza dodela komercijaliste (2026-11-24) */
+.qa-cell { display: inline-flex; flex-direction: column; gap: 4px; }
+.qa-cell select { min-width: 12rem; padding: 6px 8px; }
+.qa-done { color: #137333; font-weight: 600; white-space: nowrap; }
+.portal-panel > .rt-form { margin: 0 16px 16px; align-items: end; }
+.rt-form label { display: grid; gap: 4px; font-size: 13px; }
+.rt-form select { min-width: 14rem; padding: 6px 8px; }
+.rt-reason input { min-width: 18rem; }
+.portal-panel > .portal-permission-ok, .portal-panel > .portal-login-error { margin: 0 16px 16px; }
+
+/* Obaveštenja: čekiranje i grupno zatvaranje (2026-11-24) */
+.nt-panel { padding-bottom: 8px; }
+.nt-bar { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; padding: 12px 16px; border-bottom: 1px solid var(--portal-border, #e3e5e8); position: sticky; top: 0; background: var(--portal-surface, #fff); z-index: 2; }
+.nt-all { display: inline-flex; align-items: center; gap: 8px; font-weight: 600; }
+.nt-count { opacity: 0.7; margin-right: auto; }
+.nt-note { min-width: 14rem; padding: 7px 10px; }
+.nt-msg { margin: 10px 16px 0; }
+.nt-list { list-style: none; margin: 0; padding: 0; }
+.nt-item { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: 14px; align-items: start; padding: 14px 16px; border-bottom: 1px solid var(--portal-border, #e3e5e8); }
+.nt-item[data-status="resolved"] { opacity: 0.6; }
+.nt-item > input { margin-top: 4px; width: 18px; height: 18px; }
+.nt-head { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+.nt-main p { margin: 6px 0 4px; }
+.nt-main small { opacity: 0.7; }
+.nt-dot { width: 8px; height: 8px; border-radius: 50%; background: #c8102e; display: inline-block; }
+.nt-actions { display: grid; grid-auto-flow: column; gap: 8px; align-items: center; }
+.nt-actions .portal-button { min-width: 7.5rem; justify-content: center; }
+@media (max-width: 760px) {
+  .nt-item { grid-template-columns: auto minmax(0, 1fr); }
+  .nt-actions { grid-column: 2; grid-auto-flow: row; justify-items: start; }
+}
+.nt-note { border: 1px solid var(--portal-border-strong, #c9ccd1); border-radius: 6px; background: var(--portal-surface, #fff); }

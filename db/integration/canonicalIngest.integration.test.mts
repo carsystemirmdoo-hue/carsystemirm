@@ -492,6 +492,8 @@ test("nijedna API ruta ne postoji van izričito dozvoljenog spiska", async (t) =
      */
     "kupac/zahtevi/stanje/route.ts",
     "portal/zahtevi/stanje/route.ts",
+    /** Izvoz VP cenovnika / pripreme (0066): samo GET, `view:vp_cenovnik`. */
+    "portal/vp-cenovnik/izvoz/route.ts",
     /*
      * F6: „Poručite ponovo" u katalogu. Kupac isključivo iz SOPSTVENE sesije,
      * ruta ne prima parametre, samo čita, bez cena, i nikad se ne kešira.

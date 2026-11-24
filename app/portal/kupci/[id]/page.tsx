@@ -18,6 +18,8 @@ import { CustomerDesk } from "@/components/portal/CustomerDesk";
 import { loadCustomerDesk } from "@/lib/sales-tools/customer-desk-service";
 import { CustomerPeriod } from "./CustomerPeriod";
 import { KupacTrazioForm } from "@/app/portal/nabavka/Trazeno";
+import { TrazenoTable } from "@/app/portal/kupci/trazeno/TrazenoPoKupcima";
+import { listOpenStockRequestsForCustomers } from "@/lib/stock/stock-requests";
 import { readPortalPeriod } from "@/lib/portal/period";
 import { loadCustomerPeriodArticles } from "@/lib/sales/customer-period-service";
 import { CustomerArticles, CustomerCrossSell, CustomerMethod, CustomerSuggestions, CustomerSummary } from "./CustomerCard";
@@ -74,6 +76,11 @@ export default async function CustomerDetailPage({
 
   // Traka kupca (poziv, dugovanje, razgovor): ko radi preporuke, radi i sa ovim (opseg proveren iznad).
   const desk = can(user, "view:preporuke") ? await loadCustomerDesk(user, customer.id) : null;
+  // Pristup kupcu je već proveren (requireCustomerAccess), pa se zapisi filtriraju samo po kupcu.
+  const requested =
+    can(user, "view:preporuke") || can(user, "view:zahtevi")
+      ? await listOpenStockRequestsForCustomers(null, { userId: user.id, customerId: customer.id, limit: 100 })
+      : [];
 
   const identities = profile
     ? Object.fromEntries(await loadArticleIdentities(profile.articles.map((a) => a.articleCode)))
@@ -91,7 +98,13 @@ export default async function CustomerDetailPage({
       {can(user, "view:preporuke") || can(user, "view:zahtevi") ? (
         <section className="portal-panel" aria-label="Kupac tražio artikal kog nema na stanju">
           <div className="portal-panel-body">
-            <p className="portal-footnote">Kupac je tražio artikal kog nema na stanju? Zabeležite — vidi se na Nabavci.</p>
+            {requested.length ? (
+              <>
+                <h2>Tražio, a nije bilo na stanju ({requested.length})</h2>
+                <TrazenoTable rows={requested} />
+              </>
+            ) : null}
+            <p className="portal-footnote">Kupac je tražio artikal kog nema na stanju? Zabeležite — vidi se na Nabavci i u „Traženo po kupcima“.</p>
             <KupacTrazioForm customerId={customer.id} />
           </div>
         </section>

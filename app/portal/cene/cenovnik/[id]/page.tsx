@@ -5,6 +5,7 @@ import { PriceListApplyForm, PriceListDiscardForm, type UnclearRow } from "@/fea
 import { requireCapability } from "@/lib/authz/session";
 import { rowsToApply } from "@/lib/pricing/priceListMatch.mjs";
 import { loadPriceListReview, trialPriceCalculation } from "@/lib/pricing/price-list-service";
+import { draftForImport } from "@/lib/pricing/vp-draft-service";
 import { dmy, dmyTime, percent, quantity } from "@/lib/ordering/panelFormat.mjs";
 
 export const dynamic = "force-dynamic";
@@ -34,7 +35,7 @@ export default async function PriceListReviewPage({ params, searchParams }: { pa
   const review = await loadPriceListReview(user, id, datum);
   if (!review) notFound();
   const imp = review.import;
-  const trial = await trialPriceCalculation(user, id, review.onDate, 8);
+  const [trial, draft] = await Promise.all([trialPriceCalculation(user, id, review.onDate, 8), draftForImport(id)]);
   const s = review.summary;
   const changes = review.rows
     .filter((r) => r.status === "povezano" && r.change !== "ista")
@@ -58,12 +59,24 @@ export default async function PriceListReviewPage({ params, searchParams }: { pa
         description="Pregled pre primene. Ništa od ovoga još nije osnovna cena — upisuje se tek posle Vaše potvrde."
         meta={<span><Link href="/portal/cene/cenovnik">← Svi cenovnici</Link> · otpremio {DT.format(imp.uploadedAt)}</span>}
       />
+      {draft ? (
+        <section className="portal-panel">
+          <SectionHeader title="Iz pripreme VP cenovnika" description="Ovaj cenovnik nije PDF iz BizniSofta: pripremio ga je menadžer prodaje, a proverila kancelarija. Sadrži samo promenjene cene." />
+          <dl className="pl-facts">
+            <div><dt>Priprema</dt><dd><Link href={`/portal/vp-cenovnik/${draft.id}`}>{draft.title}</Link></dd></div>
+            <div><dt>Pripremio</dt><dd>{draft.created_by_name}{draft.prepared_note ? ` — ${draft.prepared_note}` : ""}</dd></div>
+            <div><dt>Proverila</dt><dd>{draft.office_checked_name ?? "—"}{draft.office_note ? ` — ${draft.office_note}` : ""}</dd></div>
+            <div><dt>Predlog važenja</dt><dd>{day(draft.proposed_valid_from)}</dd></div>
+          </dl>
+        </section>
+      ) : null}
       {isti ? (
         <p className="portal-permission-ok" role="status">
           Isti fajl je već otpremljen {DT.format(imp.uploadedAt)} — nov unos nije napravljen. Prikazano je postojeće otpremanje.
         </p>
       ) : null}
 
+      {draft ? null : (
       <section className="portal-panel">
         <SectionHeader title="Šta PDF sadrži" description="Pročitano iz samog dokumenta; ništa se ne pretpostavlja iz naziva fajla." />
         <dl className="pl-facts">
@@ -79,6 +92,7 @@ export default async function PriceListReviewPage({ params, searchParams }: { pa
           <div><dt>Ne čuva se</dt><dd>nabavna cena, količina na stanju, vrednosti i % RuC</dd></div>
         </dl>
       </section>
+      )}
 
       <section className="portal-metrics">
         <Metric label="Povezano" value={quantity(s.povezano)} tone="success" context={`nove ${s.nova} · promena ${s.promena} · iste ${s.ista}`} />
@@ -176,7 +190,7 @@ export default async function PriceListReviewPage({ params, searchParams }: { pa
               title="Primena"
               description={review.canApply ? "Upisuje osnovne cene od izabranog datuma. Ista cena se ne upisuje ponovo; nepovezane, duplikati i nejasne bez potvrde se preskaču." : "Kontrole čitanja nisu prošle — ovaj cenovnik se ne može primeniti. Odbacite ga i otpremite ispravan PDF."}
             />
-            {review.canApply ? <PriceListApplyForm importId={imp.id} reportDate={imp.reportDate} defaultDate={today < imp.reportDate ? imp.reportDate : today} unclear={unclear} toApply={willApply} /> : null}
+            {review.canApply ? <PriceListApplyForm importId={imp.id} reportDate={imp.reportDate} defaultDate={draft?.proposed_valid_from && draft.proposed_valid_from >= imp.reportDate ? draft.proposed_valid_from : today < imp.reportDate ? imp.reportDate : today} unclear={unclear} toApply={willApply} /> : null}
           </section>
           <section className="portal-panel">
             <SectionHeader title="Odbacivanje" description="Cenovnik ostaje u istoriji kao odbačen; osnovne cene se ne menjaju." />

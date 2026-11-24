@@ -6,8 +6,9 @@ import { requireCapability } from "@/lib/authz/session";
 import { optionLabel } from "@/lib/pricing/paymentOptions.mjs";
 import { PricingScopeError } from "@/lib/pricing/pricing-scope";
 import { RebateChangeError } from "@/lib/pricing/rebate-change-service";
-import { loadRebateTable } from "@/lib/pricing/rebate-table-service";
+import { AVANS, loadRebateTable } from "@/lib/pricing/rebate-table-service";
 import { RebateTable } from "./RebateTable";
+import { EnableAvans } from "./EnableAvans";
 import { DateRangeField } from "@/components/portal/DateRangeField";
 import { readPortalPeriod } from "@/lib/portal/period";
 import { isAllTime, periodLabel } from "@/lib/portal/periodMemory.mjs";
@@ -30,18 +31,25 @@ export default async function RebateTablePage({
   searchParams: Promise<{ from?: string; to?: string }>;
 }) {
   const { id } = await params;
-  const period = await readPortalPeriod(await searchParams);
+  const sp = await searchParams;
+  const period = await readPortalPeriod(sp);
   if (!UUID.test(id)) notFound();
   const user = await requireCapability("view:rabati", `/portal/cene/rabati-iz-faktura/kupci/${id}/tabela`);
   let data: Awaited<ReturnType<typeof loadRebateTable>>;
+  let avans: Awaited<ReturnType<typeof loadRebateTable>>;
   try {
-    data = await loadRebateTable(user, id, new Date(), period);
+    // Odloženo (osnovni rabat) i avans u jednoj tabeli, jedno pored drugog (2026-11-23).
+    [data, avans] = await Promise.all([
+      loadRebateTable(user, id, new Date(), period, null),
+      loadRebateTable(user, id, new Date(), period, AVANS),
+    ]);
   } catch (error) {
     if (error instanceof PricingScopeError) forbidden();
     if (error instanceof RebateChangeError) notFound();
     throw error;
   }
 
+  const hasAvans = data.avansApproved;
   return (
     <>
       <PageHeader
@@ -50,9 +58,7 @@ export default async function RebateTablePage({
         description="Svi artikli u ponudi: koje kupac uzima i koje ne, važeći rabat i neto cena. Rabat menjate za ceo brend, grupu, jedan artikal ili izabrane artikle; neto cenu po artiklu."
         meta={
           data.paymentOptions.length ? (
-            <span>
-              Prikazan je osnovni uslov. Odobrene opcije plaćanja ({data.paymentOptions.map((c) => optionLabel(c)).join(", ")}) menjate na stranici kupca.
-            </span>
+            <span>Odobrene opcije plaćanja: {data.paymentOptions.map((c) => optionLabel(c)).join(", ")}.</span>
           ) : undefined
         }
         actions={
@@ -68,6 +74,19 @@ export default async function RebateTablePage({
         }
       />
       <section className="portal-panel">
+        <p className="portal-footnote">
+          Odloženo i avans su jedno pored drugog. Osnovni rabat važi za odloženo plaćanje i za avans kod artikala bez posebnog avansnog
+          rabata („kao odloženo“). Upišite rabat u kolonu „Odloženo · nov“, „Avans · nov“ ili obe, pa sačuvajte jednom.
+        </p>
+        {!hasAvans ? (
+          data.canEnableAvans ? (
+            <EnableAvans customerId={id} needsDeferred={!data.hasDeferred} />
+          ) : (
+            <p className="portal-readiness-note" role="status">
+              Kupcu avans nije odobren, pa su avansne kolone zaključane. Predložite „Avansno plaćanje“ na <Link href={`/portal/cene/rabati-iz-faktura/kupci/${id}#opcije-placanja`}>stranici rabata kupca</Link>.
+            </p>
+          )
+        ) : null}
         <form method="get" className="portal-inline-form">
           <DateRangeField nameOd="from" nameDo="to" defaultOd={period.from} defaultDo={period.to} zapamti />
           <button type="submit" className="portal-button" data-variant="primary">
@@ -80,7 +99,7 @@ export default async function RebateTablePage({
             : `„Uzima“ znači da je kupac artikal kupio u periodu ${periodLabel(period).replace(/\.$/, "")}; broj uz „Uzima“ je broj dana kupovine u periodu. Rabati i cene se ne menjaju izborom perioda.`}
         </p>
       </section>
-      <RebateTable key={`${period.from ?? ""}|${period.to ?? ""}`} buysLabel={isAllTime(period) ? "Uzima (12 meseci)" : "Uzima (u periodu)"} customerId={id} rows={data.rows} today={data.today} canPropose={data.canPropose} canApprove={data.canApprove} />
+      <RebateTable key={`${period.from ?? ""}|${period.to ?? ""}|${hasAvans}`} avansRows={avans.rows} avansCanPropose={avans.canPropose} avansCanApprove={avans.canApprove} buysLabel={isAllTime(period) ? "Uzima (12 meseci)" : "Uzima (u periodu)"} customerId={id} rows={data.rows} today={data.today} canPropose={data.canPropose} canApprove={data.canApprove} />
     </>
   );
 }

@@ -7,6 +7,7 @@ import { can } from "@/lib/authz/permissions.mjs";
 import { requireCapability, requireRecentMfaOrReauth } from "@/lib/authz/session";
 import { MAX_UPLOAD_FILE_BYTES, formatMegabytes } from "@/lib/import/upload-limits.mjs";
 import { applyPriceList, discardPriceList, PriceListError, setBasePrice, uploadPriceList } from "@/lib/pricing/price-list-service";
+import { afterOwnerDecision } from "@/lib/pricing/vp-draft-service";
 
 /*
  * Cenovnik — serverske akcije. Svaka SAMA proverava `pricelist:manage` (samo
@@ -22,6 +23,18 @@ export type PriceListActionState = { error: string | null; ok: string | null };
 function sameOwner<T extends Parameters<typeof can>[0] & { id: string }>(actor: { id: string }, fresh: T): T {
   if (fresh.id !== actor.id || !can(fresh, "pricelist:manage")) forbidden();
   return fresh;
+}
+
+/**
+ * Cenovnik iz pripreme VP cenovnika (0066): posle odluke obavesti pripremu. Odluka je već
+ * upisana; neuspelo obaveštenje ne sme da je prikaže kao neuspelu.
+ */
+async function notifyDraftSafely(actor: Parameters<typeof afterOwnerDecision>[0], importId: string, decision: Parameters<typeof afterOwnerDecision>[2]) {
+  try {
+    await afterOwnerDecision(actor, importId, decision);
+  } catch (error) {
+    console.error("[cenovnik] obaveštenje pripremi nije upisano", (error as Error)?.name);
+  }
 }
 
 const message = (error: unknown) => (error instanceof PriceListError ? error.message : null);
@@ -69,8 +82,10 @@ export async function applyPriceListAction(_prev: PriceListActionState, formData
       confirmedUnclearCodes: formData.getAll("nejasno").map(String).filter((c) => /^[0-9A-Za-z./_-]{1,32}$/.test(c)),
       note: String(formData.get("napomena") ?? ""),
     });
+    await notifyDraftSafely(actor, importId, { applied: true, validFrom: String(formData.get("vaziOd") ?? "") });
     revalidatePath(PATH);
     revalidatePath(`${PATH}/${importId}`);
+    revalidatePath("/portal/vp-cenovnik");
     return { error: null, ok: `Primenjeno: ${r.applied} osnovnih cena.` };
   } catch (error) {
     const m = message(error);
@@ -85,7 +100,9 @@ export async function discardPriceListAction(_prev: PriceListActionState, formDa
   const actor = sameOwner(await requireCapability("pricelist:manage", back), await requireRecentMfaOrReauth(back));
   try {
     await discardPriceList(actor, { importId, note: String(formData.get("razlog") ?? "") });
+    await notifyDraftSafely(actor, importId, { applied: false, note: String(formData.get("razlog") ?? "") });
     revalidatePath(PATH);
+    revalidatePath("/portal/vp-cenovnik");
     revalidatePath(`${PATH}/${importId}`);
     return { error: null, ok: "Cenovnik je odbačen; osnovne cene nisu menjane." };
   } catch (error) {

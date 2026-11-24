@@ -70,11 +70,11 @@ export default async function InvoiceDetailPage({
             </dd>
           </div>
           <div>
-            <dt>Neto iznos</dt>
+            <dt>Neto (bez PDV-a)</dt>
             <dd>{money(invoice.netAmount)}</dd>
           </div>
           <div>
-            <dt>Ukupno</dt>
+            <dt>Ukupno sa PDV-om</dt>
             <dd>{money(invoice.totalAmount)}</dd>
           </div>
         </dl>

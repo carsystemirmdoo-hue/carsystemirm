@@ -112,6 +112,8 @@ export default async function Page({ searchParams }: { searchParams: Promise<Rec
             <div className="dg-metric"><span>Kupaca sa dugom</span><strong>{rows.length}</strong></div>
           </div>
 
+          <p className="portal-footnote">Ko je uplatio u poslednjih 5 dana i šta mu je ostalo: <Link href="/portal/placanja">Plaćanja →</Link></p>
+
           <section className="portal-panel">
             <div className="dg-bar">
               <form method="get" className="rr-filters" role="search" aria-label="Pretraga kupaca">

@@ -2,11 +2,12 @@ import { percent, quantity } from "@/lib/ordering/panelFormat.mjs";
 import { PageHeader } from "@/components/portal/PortalPrimitives";
 import { can } from "@/lib/authz/permissions.mjs";
 import { requireCapability } from "@/lib/authz/session";
-import { listPriceRules } from "@/lib/pricing/rule-service";
+import { countPriceRules, listPriceRules } from "@/lib/pricing/rule-service";
 import { resolvePricingScope } from "@/lib/pricing/pricing-scope";
 import { pendingBatches } from "@/lib/pricing/rebate-coverage-service";
 import { RuleTable } from "../RuleTable";
 import { BatchDecision } from "./BatchDecision";
+import type { PriceRuleStatus } from "@/db/schema";
 
 export const dynamic = "force-dynamic";
 
@@ -33,12 +34,32 @@ export default async function PriceApprovalPage() {
   const canDecide = can(user, "prices:approve") || can(user, "prices:apply");
   const scope = await resolvePricingScope(user);
 
-  const [waiting, approved, recorded, failed] = await Promise.all([
+  /*
+   * „Odobreno" se deli na dve grupe. Pravila koja traže upis u BizniSoft su
+   * posao kancelarije; pravila koja važe SAMO u portalu (serija iz istorije
+   * faktura, `biznisoft_entry_required = false`) nikad se ne upisuju. Ranije su
+   * bila zajedno pod „čeka upis", i to samo prvih 200 od 2.948 (kopija 8. 10.),
+   * pa se pravo čekanje upisa nije videlo.
+   */
+  const approvedStatus = { statuses: ["approved_pending_biznisoft"] as PriceRuleStatus[] };
+  const [waiting, approved, portalOnly, recorded, failed, counts] = await Promise.all([
     listPriceRules(scope, { statuses: ["pending_approval"] }),
-    listPriceRules(scope, { statuses: ["approved_pending_biznisoft"] }),
+    listPriceRules(scope, { ...approvedStatus, biznisoftEntryRequired: true }),
+    listPriceRules(scope, { ...approvedStatus, biznisoftEntryRequired: false, limit: 100 }),
     listPriceRules(scope, { statuses: ["office_recorded"] }),
     listPriceRules(scope, { statuses: ["reconciliation_failed"] }),
+    Promise.all([
+      countPriceRules(scope, { statuses: ["pending_approval"] }),
+      countPriceRules(scope, { ...approvedStatus, biznisoftEntryRequired: true }),
+      countPriceRules(scope, { ...approvedStatus, biznisoftEntryRequired: false }),
+      countPriceRules(scope, { statuses: ["office_recorded"] }),
+      countPriceRules(scope, { statuses: ["reconciliation_failed"] }),
+    ]),
   ]);
+  const [nWaiting, nApproved, nPortalOnly, nRecorded, nFailed] = counts;
+  /** „(N)" ili „(prikazano X od N)" kada je lista skraćena. */
+  const broj = (shown: number, total: number) =>
+    shown < total ? `prikazano ${quantity(shown)} od ${quantity(total)}` : quantity(total);
   const batches = await pendingBatches(user);
 
   return (
@@ -84,23 +105,32 @@ export default async function PriceApprovalPage() {
         </section>
       ) : null}
 
-      <RuleTable rows={waiting} showActions={canDecide} title={`Čeka odobrenje (${waiting.length})`} />
+      <RuleTable rows={waiting} showActions={canDecide} title={`Čeka odobrenje (${broj(waiting.length, nWaiting)})`} />
 
       {/* 2026-11-11 (vlasnik): bez API-ja ka BizniSoftu nema koraka „čeka upis“ — odobreno važi. */}
       <details className="rr-approved-list">
         <summary className="portal-panel">
-          <b>Odobreno — važi ({approved.length + recorded.length})</b>
+          <b>Odobreno — važi ({broj(approved.length + portalOnly.length + recorded.length, nApproved + nPortalOnly + nRecorded)})</b>
           <span>Pravila koja već važe. Kliknite da otvorite listu; opoziv je u redu pravila.</span>
         </summary>
-        <RuleTable rows={[...approved, ...recorded]} showActions={canDecide} title={`Odobreno — važi (${approved.length + recorded.length})`} />
+        <RuleTable
+          rows={[...approved, ...recorded, ...portalOnly]}
+          showActions={canDecide}
+          title={`Odobreno — važi (${broj(approved.length + portalOnly.length + recorded.length, nApproved + nPortalOnly + nRecorded)})`}
+          description={
+            portalOnly.length < nPortalOnly
+              ? `Od pravila iz serija (npr. rabati iz istorije faktura) prikazano je najnovijih ${quantity(portalOnly.length)} od ${quantity(nPortalOnly)}; sva pravila sa filterom po kupcu su u Istoriji pravila.`
+              : undefined
+          }
+        />
       </details>
 
-      {failed.length > 0 ? (
+      {nFailed > 0 ? (
         <RuleTable
           rows={failed}
           showActions={canDecide}
           accent="danger"
-          title={`Usaglašavanje nije uspelo (${failed.length})`}
+          title={`Usaglašavanje nije uspelo (${broj(failed.length, nFailed)})`}
           description="Uslov na fakturi se razlikuje od odobrenog u portalu."
         />
       ) : null}

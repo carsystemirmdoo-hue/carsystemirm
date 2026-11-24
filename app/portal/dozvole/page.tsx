@@ -2,9 +2,9 @@ import { asc, eq } from "drizzle-orm";
 import { PageHeader } from "@/components/portal/PortalPrimitives";
 import { getDb } from "@/db/client";
 import { userPermissions, users } from "@/db/schema";
+import { can } from "@/lib/authz/permissions.mjs";
 import { requireCapability } from "@/lib/authz/session";
 import { PermissionMatrix } from "@/features/portal/PermissionMatrix";
-
 
 export const metadata = { title: "Korisnici i dozvole" };
 
@@ -12,7 +12,12 @@ export const dynamic = "force-dynamic";
 
 export default async function PermissionsPage() {
   const actor = await requireCapability("view:dozvole", "/portal/dozvole");
-  const canManage = actor.permissions.includes("korisnici");
+  /*
+   * Po sposobnosti, isto kao radnje na serveru (`users:manage`). Ranije se
+   * gledao samo paket „korisnici", pa vlasnik — kome uloga daje to pravo —
+   * nije video nijedno dugme ako paket nije imao.
+   */
+  const canManage = can(actor, "users:manage");
 
   const db = getDb();
   const rows = await db

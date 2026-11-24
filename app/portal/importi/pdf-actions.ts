@@ -14,7 +14,7 @@ export type PdfImportState = {
   error: string | null;
   ok: string | null;
   /** Zbir po ishodima. Bez naziva fajlova i bez ijednog podatka o kupcu. */
-  summary: { label: string; count: number }[];
+  summary: { label: string; count: number; next?: { href: string; label: string } }[];
 };
 
 /**
@@ -123,6 +123,7 @@ export async function importPdfAction(
   const summary = [...tally.entries()].map(([key, count]) => ({
     label: OUTCOME_LABELS[key] ?? key,
     count,
+    ...(OUTCOME_NEXT[key] ? { next: OUTCOME_NEXT[key] } : {}),
   }));
 
   return {
@@ -131,6 +132,16 @@ export async function importPdfAction(
     summary,
   };
 }
+
+/** Gde se nastavlja posao za ishod koji traži čoveka. Proknjiženo i preskočeno nemaju sledeći korak. */
+const OUTCOME_NEXT: Record<string, { href: string; label: string }> = {
+  awaiting_customer_mapping: { href: "/portal/kupci/mapiranja?status=unmapped", label: "Šifre partnera" },
+  business_key_conflict: { href: "/portal/importi/dokumenti?filter=sudar", label: "Izvorni dokumenti" },
+  already_imported_other_source: { href: "/portal/importi/dokumenti?filter=pregled", label: "Izvorni dokumenti" },
+  quarantined: { href: "/portal/importi/dokumenti", label: "Izvorni dokumenti" },
+  storno_waiting_original: { href: "/portal/importi/dokumenti", label: "Izvorni dokumenti" },
+  storno_review: { href: "/portal/importi/dokumenti?filter=pregled", label: "Izvorni dokumenti" },
+};
 
 const OUTCOME_LABELS: Record<string, string> = {
   ingested: "proknjiženo",

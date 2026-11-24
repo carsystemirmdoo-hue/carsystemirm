@@ -20,9 +20,10 @@ export async function answerPriceRequestAction(id: string, answer: string): Prom
   return r;
 }
 
-export async function closePriceRequestAction(id: string): Promise<PriceRequestChange> {
+export async function closePriceRequestAction(id: string, note?: string): Promise<PriceRequestChange> {
   const user = await requireCapability("price_requests:handle", "/portal/zahtevi/uslovi");
-  const r = await changePriceRequest(user, id, "closed");
+  // Bez odgovora se zatvara samo uz objašnjenje kupcu (servis to proverava).
+  const r = await changePriceRequest(user, id, "closed", note);
   revalidatePath("/portal/zahtevi/uslovi");
   return r;
 }

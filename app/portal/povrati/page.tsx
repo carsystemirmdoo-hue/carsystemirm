@@ -57,8 +57,9 @@ export default async function ReturnsPage({
     );
   }
 
-  // Neispravan datum ili ID iz adrese ne sme da obori stranu (isto kao Prodaja).
-  const filter = normalizeSalesFilter({ ...params, from: period.from ?? undefined, to: period.to ?? undefined });
+  // Neispravan datum ili ID iz adrese ne sme da obori stranu (isto kao Prodaja); period je zapamćen između ekrana.
+  const applied = { ...params, from: period.from ?? "", to: period.to ?? "" };
+  const filter = normalizeSalesFilter(applied);
 
   // Zbirovi nad CELIM filtriranim skupom u bazi. Negativne stavke se čitaju
   // posebnim upitom (samo iznos < 0), pa ih granica liste ne može sakriti.
@@ -68,10 +69,12 @@ export default async function ReturnsPage({
       loadSalesBreakdown(user, filter, "kupci"),
       loadSalesLines(user, { ...filter, onlyNegative: true }, SALES_LINES_DISPLAY),
       loadScopedCustomers(user),
-      loadSalespeople(),
+      seesAllCustomers(user) ? loadSalespeople() : Promise.resolve([]),
       loadProductGroups(),
       loadMinusDocuments(user, { from: filter.from, to: filter.to, customerId: filter.customerId }),
     ]);
+  // Filter po dodeli ima smisla samo ko vidi sve kupce.
+  const reps = seesAllCustomers(user) ? await listSalesReps() : [];
   const storna = minusDocs.filter((d) => d.kind === "storno");
   const odobrenja = minusDocs.filter((d) => d.kind === "knjizno_odobrenje");
   const REVERSAL: Record<string, string> = {
@@ -79,8 +82,6 @@ export default async function ReturnsPage({
     waiting_original: "čeka originalnu fakturu",
     review: "na ručnom pregledu — original ostaje u prometu",
   };
-  // Filter po dodeli ima smisla samo ko vidi sve kupce.
-  const reps = seesAllCustomers(user) ? await listSalesReps() : [];
 
   return (
     <>
@@ -99,7 +100,7 @@ export default async function ReturnsPage({
       <SalesFilters
         action="/portal/povrati"
         options={{ customers, salespeople, reps, productGroups }}
-        applied={{ ...params, from: period.from ?? "", to: period.to ?? "" }}
+        applied={applied}
         exportView="stavke"
         salespersonOnInvoices={
           summary.lineCount === 0 || summary.linesWithSalesperson > 0

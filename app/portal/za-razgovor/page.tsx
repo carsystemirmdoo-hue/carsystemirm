@@ -174,7 +174,7 @@ export default async function TalkListPage({
         <div className="zr-status">
           <div>
             <span>
-              Podaci do <strong>{srDate(data.today)}</strong> · poslednji uvoz {fmtTime(lastIngest)}
+              Danas <strong>{srDate(data.today)}</strong> · poslednji uvoz {fmtTime(lastIngest)}
             </span>
             <span>
               Obračun preporuka:{" "}

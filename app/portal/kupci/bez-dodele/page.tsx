@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { compareCustomerNames } from "@/lib/customers/customerListFilter.mjs";
 import { can } from "@/lib/authz/permissions.mjs";
 import { listSalesReps } from "@/lib/partners/assignment-service";
 import { QuickAssign } from "./QuickAssign";
@@ -15,10 +16,10 @@ export const dynamic = "force-dynamic";
 
 const MONEY = new Intl.NumberFormat("sr-Latn-RS", { maximumFractionDigits: 0 });
 const SORTS = {
-  promet12: { label: "Promet 12 meseci", by: (a: Row, b: Row) => b.net12m - a.net12m },
-  poslednja: { label: "Poslednja kupovina", by: (a: Row, b: Row) => b.lastOn.localeCompare(a.lastOn) },
-  ukupno: { label: "Promet ukupno", by: (a: Row, b: Row) => b.netTotal - a.netTotal },
-  naziv: { label: "Naziv", by: (a: Row, b: Row) => a.name.localeCompare(b.name, "sr-Latn") },
+  promet12: { label: "Promet 12 meseci", by: (a: Row, b: Row) => b.net12m - a.net12m || compareCustomerNames(a.name, b.name) },
+  poslednja: { label: "Poslednja kupovina", by: (a: Row, b: Row) => b.lastOn.localeCompare(a.lastOn) || compareCustomerNames(a.name, b.name) },
+  ukupno: { label: "Promet ukupno", by: (a: Row, b: Row) => b.netTotal - a.netTotal || compareCustomerNames(a.name, b.name) },
+  naziv: { label: "Naziv", by: (a: Row, b: Row) => compareCustomerNames(a.name, b.name) },
 } as const;
 type Row = Awaited<ReturnType<typeof loadUnassignedCustomers>>[number];
 
@@ -75,6 +76,7 @@ export default async function UnassignedCustomersPage({
           </label>
           <button type="submit" className="portal-button" data-variant="primary">Prikažite</button>
         </form>
+        {q ? <p>Prikazano {rows.length} od {all.length}.</p> : null}
         <div className="portal-table-wrap">
           <table className="portal-table rr-table">
             <thead>

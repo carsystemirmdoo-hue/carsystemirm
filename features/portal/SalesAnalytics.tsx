@@ -31,7 +31,7 @@ export function moneyRsd(value: number | null) {
   return value === null ? "—" : `${MONEY.format(value)}\u00a0RSD`;
 }
 
-export type GroupView = "kupci" | "komercijalisti" | "brendovi" | "artikli" | "grupe";
+export type GroupView = "kupci" | "komercijalisti" | "brendovi" | "artikli" | "grupe" | "dani" | "meseci" | "godine";
 
 /** Najviše stavki u listi na ekranu; zbirovi se računaju nad svim stavkama. */
 export const SALES_LINES_DISPLAY = 500;
@@ -42,6 +42,9 @@ const GROUP_LABELS: Record<GroupView, string> = {
   brendovi: "Brend",
   artikli: "Artikal",
   grupe: "Grupa proizvoda",
+  dani: "Dan",
+  meseci: "Mesec",
+  godine: "Godina",
 };
 
 /**

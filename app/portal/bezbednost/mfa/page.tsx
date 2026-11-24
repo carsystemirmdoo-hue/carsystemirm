@@ -57,7 +57,10 @@ export default async function MfaPage() {
           mfaEnabled={status.enabled}
           // Dozvola se traži samo za prvo vezivanje. Ko već ima faktor dokazao je
           // identitet time što je prošao prijavu.
-          needsGrant={!status.enabled && !grantOpen ? true : !status.enabled}
+          needsGrant={!status.enabled}
+          // Bez otvorene dozvole obrazac ne može da uspe; korisnik treba da zna
+          // da prvo traži dozvolu, a ne da pogađa šta je pogrešno uneo.
+          grantMissing={!status.enabled && !grantOpen}
           onSignOut={signOutAction}
         />
       </div>

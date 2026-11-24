@@ -446,6 +446,16 @@ test("nijedna API ruta ne postoji van izričito dozvoljenog spiska", async (t) =
      * šifre iz adrese samo biraju među preporukama kupca; izvoz se beleži u audit.
      */
     "portal/kupci/[id]/ponuda/route.ts",
+    /*
+     * Broj nepročitanih na zvoncu (2026-11-04): samo GET, `view:obavestenja`,
+     * broji kroz isti opseg kao lista obaveštenja (0063); vraća samo broj.
+     */
+    /**
+     * Izvoz Lager liste (2026-11-18): samo GET, `view:lager_lista`; isti servis i
+     * filteri kao ekran, cena kupca kroz isti opseg kao na ekranu.
+     */
+    "portal/lager-lista/izvoz/route.ts",
+    "portal/obavestenja/broj/route.ts",
     "portal/podesavanja/navigacija/route.ts",
     // P2: prijem sa uređaja, iza feature gate-a koji je podrazumevano isključen.
     "sync/heartbeat/route.ts",
@@ -482,6 +492,8 @@ test("nijedna API ruta ne postoji van izričito dozvoljenog spiska", async (t) =
      */
     "kupac/zahtevi/stanje/route.ts",
     "portal/zahtevi/stanje/route.ts",
+    /** Izvoz VP cenovnika / pripreme (0066): samo GET, `view:vp_cenovnik`. */
+    "portal/vp-cenovnik/izvoz/route.ts",
     /*
      * F6: „Poručite ponovo" u katalogu. Kupac isključivo iz SOPSTVENE sesije,
      * ruta ne prima parametre, samo čita, bez cena, i nikad se ne kešira.

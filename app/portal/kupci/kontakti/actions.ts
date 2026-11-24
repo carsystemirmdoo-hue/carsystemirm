@@ -3,7 +3,7 @@
 import { revalidatePath } from "next/cache";
 import { forbidden } from "next/navigation";
 import { can } from "@/lib/authz/permissions.mjs";
-import { requireCapability, requireRecentMfa } from "@/lib/authz/session";
+import { requireCapability, requireRecentMfaOrReauth } from "@/lib/authz/session";
 import { applyContactProposals } from "@/lib/customers/contact-bulk-service";
 import { CONTACT_OUTCOMES, ContactProposalError, readContactProposals } from "@/lib/customers/contactProposalFiles.mjs";
 import { LinkReviewError } from "@/lib/commercial/linkReviewFiles.mjs";
@@ -30,7 +30,8 @@ export async function contactProposalAction(_previous: ContactActionState, formD
   const mode = formData.get("mode") === "primena" ? "primena" : "provera";
   let actor = await requireCapability("customer_accounts:manage", PATH);
   if (mode === "primena") {
-    const fresh = await requireRecentMfa();
+    // Istekla potvrda → ponovna potvrda identiteta i povratak ovde, ne „Nemate dozvolu".
+    const fresh = await requireRecentMfaOrReauth(PATH);
     if (fresh.id !== actor.id || !can(fresh, "customer_accounts:manage")) forbidden();
     actor = fresh;
     if (!isPartnerRegistryUploadEnabled()) return empty("Primena je isključena u ovom okruženju (FEATURE_PARTNER_REGISTRY).");

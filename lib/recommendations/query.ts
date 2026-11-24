@@ -73,6 +73,12 @@ export type RecommendationFilter = {
   /** Najviše redova PO STATUSU (podrazumevano `RECOMMENDATION_ROWS_PER_STATUS`). */
   limit?: number;
   /**
+   * `kasnjenje` (podrazumevano): najveće kašnjenje prvo — „koga da zovem prvog".
+   * `skorije`: najskorija kupovina prvo — za privremene i uspavane, gde bi
+   * kašnjenje na vrh izbacilo kupovine od pre više godina.
+   */
+  order?: "kasnjenje" | "skorije";
+  /**
    * Period „kupovao u periodu" (2026-11-15, zahtev vlasnika): samo parovi kupac × artikal sa bar
    * jednom potvrđenom kupovinom između ovih datuma (ISO, obe granice uključene; prazna = bez granice).
    * Status i ritam se i dalje računaju iz cele istorije — period samo bira KOJE artikle gledamo,
@@ -211,7 +217,8 @@ export async function recommendationRows(
               */
              row_number() OVER (
                PARTITION BY r.status
-               ORDER BY r.days_until_expected ASC NULLS LAST,
+               ORDER BY ${filter.order === "skorije" ? sql`r.last_purchase_on DESC,` : sql``}
+                        r.days_until_expected ASC NULLS LAST,
                         CASE r.confidence WHEN 'high' THEN 0 WHEN 'medium' THEN 1 ELSE 2 END,
                         c.name, r.article_code
              ) AS rb,
@@ -222,6 +229,7 @@ export async function recommendationRows(
     ) x
      WHERE x.rb <= ${filter.limit ?? RECOMMENDATION_ROWS_PER_STATUS}
      ORDER BY
+       ${filter.order === "skorije" ? sql`x.last_purchase_on DESC,` : sql``}
        /*
         * Redosled odgovara pitanju „koga da zovem prvog".
         *

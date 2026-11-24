@@ -8,10 +8,22 @@ import {
   type AdminActionState,
 } from "@/app/portal/dozvole/actions";
 import {
+  packageCapabilities,
   PERMISSION_PACKAGES,
+  resolveCapabilities,
   ROLE_LABELS,
   ROLES,
 } from "@/lib/authz/permissions.mjs";
+
+/**
+ * Da li uloga sama već daje sva prava paketa. Tada „nema" pored vlasnika
+ * pogrešno kaže da mu pravo nedostaje — prikazuje se „uloga".
+ */
+function coveredByRole(role: string, packageKey: string): boolean {
+  const base = resolveCapabilities(role as Parameters<typeof resolveCapabilities>[0], []);
+  const grants = packageCapabilities(packageKey);
+  return grants.length > 0 && grants.every((capability) => base.has(capability));
+}
 import { ESCALATION_PACKAGES } from "@/lib/authz/owner-guard-policy.mjs";
 
 const INITIAL: AdminActionState = { error: null, ok: null };
@@ -288,6 +300,15 @@ export function PermissionMatrix({
                   // Sebi se paket ne dodeljuje; server odbija isto.
                   const selfGrant = user.id === actorId && !granted;
                   const needsToken = ESCALATION_PACKAGES.includes(item.key);
+                  if (!granted && coveredByRole(user.role, item.key)) {
+                    return (
+                      <td key={item.key} data-granted="role">
+                        <span className="portal-permission-toggle" data-on="true" title="Uloga već daje ova prava; paket nije potreban.">
+                          uloga
+                        </span>
+                      </td>
+                    );
+                  }
                   return (
                     <td key={item.key} data-granted={granted}>
                       {canManage ? (

@@ -1096,6 +1096,10 @@ export type SourceDocumentView = {
   conflictReason: string | null;
   manualReview: string;
   invoiceId: string | null;
+  /** Broj računa iz dokumenta (BizniSoft), npr. „26-RN021001455“. */
+  businessDocumentNumber: string | null;
+  /** Kupac: sa proknjižene fakture, inače preko povezane šifre partnera; `null` dok šifra nije povezana. */
+  customerName: string | null;
   createdAt: Date;
   /** Storno: stanje veze sa originalom (docs/b2b/48); `null` za ostale. */
   stornoStatus: string | null;
@@ -1103,15 +1107,35 @@ export type SourceDocumentView = {
   reversed: boolean;
 };
 
+/** Najviše redova liste izvornih dokumenata; ekran kaže kada je lista odsečena. */
+export const SOURCE_DOCUMENT_LIST_LIMIT = 200;
+
 export async function listSourceDocuments(filter?: {
   validationStatus?: string;
   revisionStatus?: string;
   manualReview?: string;
   onlyUnposted?: boolean;
+  /** Broj računa (deo), tačna šifra partnera ili deo naziva kupca. */
+  search?: string;
   limit?: number;
 }): Promise<SourceDocumentView[]> {
   const db = getDb();
   const conditions = [];
+  // Kolone spoljnog upita su NAMERNO pune („source_documents.…“): Drizzle u upitu
+  // nad jednom tabelom piše `${kolona}` bez imena tabele, pa bi u podupitu
+  // `x.issuer_code = issuer_code` poredio x sam sa sobom i vratio tuđeg kupca.
+  const customerName = sql<string | null>`coalesce(
+    (SELECT c.name FROM invoices i JOIN customers c ON c.id = i.customer_id WHERE i.id = source_documents.invoice_id),
+    (SELECT c.name FROM customer_external_identifiers x JOIN customers c ON c.id = x.customer_id
+      WHERE x.status = 'mapped' AND x.source_system = 'biznisoft' AND x.issuer_code = source_documents.issuer_code
+        AND x.external_partner_code = source_documents.external_partner_code LIMIT 1))`;
+  const q = (filter?.search ?? "").trim().slice(0, 80);
+  if (q) {
+    const like = `%${q.replace(/[\\%_]/g, (m) => `\\${m}`)}%`;
+    conditions.push(sql`(${sourceDocuments.businessDocumentNumber} ILIKE ${like}
+      OR ${sourceDocuments.externalPartnerCode} = ${q}
+      OR ${customerName} ILIKE ${like})`);
+  }
   if (filter?.validationStatus) {
     conditions.push(eq(sourceDocuments.validationStatus, filter.validationStatus as "valid"));
   }
@@ -1139,16 +1163,18 @@ export async function listSourceDocuments(filter?: {
       conflictReason: sourceDocuments.conflictReason,
       manualReview: sourceDocuments.manualReview,
       invoiceId: sourceDocuments.invoiceId,
+      businessDocumentNumber: sourceDocuments.businessDocumentNumber,
+      customerName,
       createdAt: sourceDocuments.createdAt,
       /** Za storno: stanje veze sa originalom (docs/b2b/48); `null` za ostale. */
-      stornoStatus: sql<string | null>`(SELECT r.status::text FROM invoice_reversals r WHERE r.storno_source_document_id = ${sourceDocuments.id})`,
+      stornoStatus: sql<string | null>`(SELECT r.status::text FROM invoice_reversals r WHERE r.storno_source_document_id = source_documents.id)`,
       /** Original koji je primenjenim stornom isključen iz prometa. */
-      reversed: sql<boolean>`EXISTS (SELECT 1 FROM invoice_reversals r WHERE r.original_source_document_id = ${sourceDocuments.id} AND r.status = 'applied')`,
+      reversed: sql<boolean>`EXISTS (SELECT 1 FROM invoice_reversals r WHERE r.original_source_document_id = source_documents.id AND r.status = 'applied')`,
     })
     .from(sourceDocuments)
     .where(conditions.length > 0 ? and(...conditions) : undefined)
     .orderBy(desc(sourceDocuments.createdAt))
-    .limit(filter?.limit ?? 200);
+    .limit(filter?.limit ?? SOURCE_DOCUMENT_LIST_LIMIT);
   return rows;
 }
 

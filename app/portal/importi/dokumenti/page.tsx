@@ -3,7 +3,7 @@ import { Metric, PageHeader } from "@/components/portal/PortalPrimitives";
 import { SourceDocumentReview } from "@/features/portal/SourceDocumentReview";
 import { requireCapability } from "@/lib/authz/session";
 import { can } from "@/lib/authz/permissions.mjs";
-import { countSourceDocuments, listSourceDocuments } from "@/lib/pdf/ingest";
+import { SOURCE_DOCUMENT_LIST_LIMIT, countSourceDocuments, listSourceDocuments } from "@/lib/pdf/ingest";
 import {
   resolveLedgerScope,
   unlinkedCorrectiveDocuments,
@@ -32,14 +32,19 @@ const BROJ = new Intl.NumberFormat("sr-Latn-RS");
 export default async function SourceDocumentsPage({
   searchParams,
 }: {
-  searchParams: Promise<{ filter?: string }>;
+  searchParams: Promise<{ filter?: string; q?: string }>;
 }) {
   const user = await requireCapability("view:importi", "/portal/importi/dokumenti");
-  const { filter } = await searchParams;
+  const { filter, q: rawQ } = await searchParams;
+  const q = (rawQ ?? "").trim().slice(0, 80);
   const active = FILTERS.some((f) => f.key === filter) ? filter! : "svi";
 
   const counts = await countSourceDocuments();
-  const rows = await listSourceDocuments(queryFor(active));
+  const rows = await listSourceDocuments({ ...queryFor(active), search: q || undefined });
+  // Svaki dokument ima tačno jedno stanje provere, pa je zbir tih brojača ukupan broj.
+  const totalDocuments = Object.entries(counts)
+    .filter(([key]) => key.startsWith("validation:"))
+    .reduce((sum, [, n]) => sum + n, 0);
 
   /*
    * Red korektivnih dokumenata bez dokazane veze.
@@ -100,14 +105,28 @@ export default async function SourceDocumentsPage({
               ))}
             </select>
           </label>
+          <label className="portal-field">
+            <span>Broj računa, šifra partnera ili kupac</span>
+            <input type="search" name="q" defaultValue={q} maxLength={80} placeholder="npr. 26-RN021001169" />
+          </label>
           <button type="submit" className="portal-button" data-variant="secondary">
             Primenite
           </button>
         </form>
+        {q ? <p>Pronađeno: {BROJ.format(rows.length)}{rows.length >= SOURCE_DOCUMENT_LIST_LIMIT ? "+ (suzite pretragu)" : ""}.</p> : null}
       </section>
+
+      {!q && rows.length >= SOURCE_DOCUMENT_LIST_LIMIT ? (
+        <p className="portal-login-hint" role="status">
+          Prikazano je {SOURCE_DOCUMENT_LIST_LIMIT} najnovijih dokumenata (ukupno u bazi:{" "}
+          {BROJ.format(totalDocuments)}
+          ). Za dokumente koji traže korak izaberite prikaz iznad — Karantin, Sudari, Čeka pregled ili Čeka mapiranje.
+        </p>
+      ) : null}
 
       <SourceDocumentReview
         canManage={can(user, "documents:resolve")}
+        canOpenInvoice={can(user, "view:prodaja")}
         rows={rows.map((row) => ({
           id: row.id,
           fileHash: row.fileHash,
@@ -122,6 +141,9 @@ export default async function SourceDocumentsPage({
           conflictReason: row.conflictReason,
           manualReview: row.manualReview,
           posted: row.invoiceId !== null,
+          invoiceId: row.invoiceId,
+          businessDocumentNumber: row.businessDocumentNumber,
+          customerName: row.customerName,
           stornoStatus: row.stornoStatus,
           reversed: row.reversed,
         }))}

@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState, useTransition } from "react";
+import { NOTIFICATIONS_CHANGED } from "@/components/portal/NotificationBell";
 import { Badge } from "@/components/portal/PortalPrimitives";
 import { bulkNotificationAction, type NotificationActionState } from "@/app/portal/obavestenja/actions";
 import { NOTIFICATION_KIND_LABELS, NOTIFICATION_SEVERITY_TONES } from "@/lib/portal/status-labels";
@@ -53,7 +54,11 @@ export function NotificationList({ items, canResolve }: { items: NotificationIte
     start(async () => {
       const r = await bulkNotificationAction({ ids, mode, note });
       setState(r);
-      if (!r.error) setSel(new Set());
+      if (!r.error) {
+        setSel(new Set());
+        // Zvonce u gornjoj traci osvežava broj odmah, ne tek za minut.
+        window.dispatchEvent(new Event(NOTIFICATIONS_CHANGED));
+      }
       router.refresh();
     });
   const allOn = open.length > 0 && open.every((i) => sel.has(i.id));

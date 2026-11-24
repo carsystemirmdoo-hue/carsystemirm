@@ -81,7 +81,8 @@ export async function GET(request: Request, { params }: { params: Promise<{ id: 
     });
 
     const fileName = `Ponuda-${fileSlug(data.customer.name)}-${data.today}.${serializer.extension}`;
-    return new Response(body, {
+    // XLSX je binarni ZIP (Uint8Array), CSV i PDF su tekst.
+    return new Response(typeof body === "string" ? body : new Uint8Array(body), {
       headers: {
         "Content-Type": serializer.mime,
         "Content-Disposition": `attachment; filename="${fileName}"`,

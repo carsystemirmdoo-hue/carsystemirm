@@ -32,7 +32,7 @@ export const seoSiteConfig = {
   titleSuffix: "Carsystem i R-M",
   defaultDescription:
     "Profesionalni auto lakovi, boje, materijali i oprema za autolakirnice, uz tehničku podršku i partnersku mrežu u Srbiji.",
-  defaultOgImage: "/images/home/hero-dark.png",
+  defaultOgImage: "/images/og/carsystem-i-rm.jpg",
   logo: "/carsystem-logo-outline.svg",
   indexingEnabled: !indexingExplicitlyDisabled && !isPreviewDeployment,
   deploymentEnvironment: vercelEnvironment ?? "local",

@@ -201,6 +201,7 @@ function ProductCategoryContent({
             height="92"
             className={styles.icon}
             decoding="async"
+            loading="lazy"
             draggable="false"
             style={
               {

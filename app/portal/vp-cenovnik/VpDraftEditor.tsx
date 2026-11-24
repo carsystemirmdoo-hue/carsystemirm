@@ -1,7 +1,7 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { Fragment, useMemo, useState, useTransition } from "react";
+import { Fragment, useEffect, useMemo, useRef, useState, useTransition } from "react";
 import { DateField } from "@/components/portal/DateField";
 import { ARTIKAL, GRUPA, countOf } from "@/lib/ordering/plural.mjs";
 import type { VpBaseRow } from "@/lib/pricing/vp-draft-service";
@@ -36,12 +36,18 @@ export function VpDraftEditor({
   rows,
   today,
   initial,
+  autosave = false,
 }: {
   rows: VpBaseRow[];
   today: string;
   initial: { id: string | null; title: string; proposedValidFrom: string | null; note: string; edits: Edits; rounding: string };
+  /** Jedna strana VP cenovnika (2026-11-24): izmene se čuvaju same, Excel ih već sadrži. */
+  autosave?: boolean;
 }) {
   const router = useRouter();
+  const [draftId, setDraftId] = useState<string | null>(initial.id);
+  const [savedAt, setSavedAt] = useState<string | null>(null);
+  const [autoError, setAutoError] = useState<string | null>(null);
   const [inputs, setInputs] = useState<Record<string, string>>(() => toInputs(initial.edits));
   const [title, setTitle] = useState(initial.title);
   const [validFrom, setValidFrom] = useState(initial.proposedValidFrom ?? "");
@@ -196,24 +202,56 @@ export function VpDraftEditor({
 
   const save = (sendToOffice: boolean) => {
     start(async () => {
-      const r = await saveVpDraftAction({ id: initial.id, title, proposedValidFrom: validFrom || null, note, edits, rounding, sendToOffice });
+      const r = await saveVpDraftAction({ id: draftId, title: title.trim().length >= 3 || !autosave ? title : fallbackTitle, proposedValidFrom: validFrom || null, note, edits, rounding, sendToOffice });
       if (r.ok) {
         setResult({ ok: true, text: r.message });
-        if (r.id !== initial.id || sendToOffice) router.push(`/portal/vp-cenovnik/${r.id}${sendToOffice ? "?korak=kancelarija" : ""}`);
+        setDraftId(r.id);
+        lastSaved.current = saveKey;
+        if (sendToOffice || (!autosave && r.id !== initial.id)) router.push(`/portal/vp-cenovnik/${r.id}${sendToOffice ? "?korak=kancelarija" : ""}`);
         else router.refresh();
       } else setResult({ ok: false, text: r.error });
     });
   };
 
+  // Automatsko čuvanje: 1,2 s posle poslednje izmene, samo ispravan unos; prvi upis pravi pripremu.
+  const fallbackTitle = `Radna priprema ${today.slice(8, 10)}.${today.slice(5, 7)}.${today.slice(0, 4)}.`;
+  const saveKey = JSON.stringify([edits, rounding, title, validFrom, note]);
+  const lastSaved = useRef(saveKey);
+  useEffect(() => {
+    if (!autosave || saveKey === lastSaved.current || bad.size > 0) return;
+    if (!draftId && plan.items.length === 0) return;
+    const t = setTimeout(async () => {
+      const r = await saveVpDraftAction({ id: draftId, title: title.trim().length >= 3 ? title : fallbackTitle, proposedValidFrom: validFrom || null, note, edits, rounding });
+      if (r.ok) {
+        lastSaved.current = saveKey;
+        setDraftId(r.id);
+        setAutoError(null);
+        setSavedAt(new Date().toLocaleTimeString("sr-Latn-RS", { hour: "2-digit", minute: "2-digit" }));
+      } else setAutoError(r.error);
+    }, 1200);
+    return () => clearTimeout(t);
+  }, [autosave, saveKey, bad.size, draftId, plan.items.length, title, fallbackTitle, validFrom, note, edits, rounding]);
+  const excelHref = draftId ? `/api/portal/vp-cenovnik/izvoz?vrsta=priprema&id=${draftId}&sve=1` : "/api/portal/vp-cenovnik/izvoz?vrsta=vazeci";
+
   const brandEdits = Object.entries(edits.brands);
   const groupEdits = Object.entries(edits.groups);
-  const titleOk = title.trim().length >= 3;
+  const titleOk = autosave || title.trim().length >= 3;
   const blocked = pending || bad.size > 0 || !titleOk || plan.items.length === 0;
   const flat = !filtering ? [] : visible.slice(0, shown);
   const useTree = !needle;
 
   return (
     <>
+      {autosave ? (
+        <div className="vp-topbar">
+          <span className="vp-saved" role="status">
+            {autoError ? <span className="portal-error">Nije sačuvano: {autoError}</span> : savedAt ? `Izmene su sačuvane u ${savedAt}.` : draftId ? "Izmene se čuvaju same." : "Upišite promenu — čuva se sama."}
+          </span>
+          <a className="portal-button" data-variant="primary" href={excelHref} download>
+            Ceo cenovnik (Excel)
+          </a>
+        </div>
+      ) : null}
       <section className={styles.metrics} aria-label="Sažetak">
         <div><span>Artikala sa VP cenom</span><strong>{rows.filter((r) => r.oldCents !== null).length}</strong></div>
         <div><span>Brendova</span><strong>{brands.length}</strong></div>
@@ -352,7 +390,7 @@ export function VpDraftEditor({
             Napomena (neobavezno)
             <input type="text" value={note} onChange={(e) => setNote(e.target.value)} maxLength={1000} placeholder="npr. novi cenovnik dobavljača od 1.12." />
           </label>
-          <button type="button" className="portal-button" data-variant="secondary" disabled={blocked} onClick={() => save(false)}>Sačuvajte pripremu</button>
+          {autosave ? null : <button type="button" className="portal-button" data-variant="secondary" disabled={blocked} onClick={() => save(false)}>Sačuvajte pripremu</button>}
           <button type="button" className="portal-button" data-variant="primary" disabled={blocked} onClick={() => save(true)}>
             {pending ? "Čuva se…" : "Sačuvajte i pošaljite kancelariji"}
           </button>

@@ -3,7 +3,9 @@ import { Badge, PageHeader, SectionHeader } from "@/components/portal/PortalPrim
 import { can } from "@/lib/authz/permissions.mjs";
 import { requireCapability } from "@/lib/authz/session";
 import { dmy, dmyTime } from "@/lib/ordering/panelFormat.mjs";
-import { listVpDrafts, loadCurrentVp } from "@/lib/pricing/vp-draft-service";
+import { listVpDrafts, loadCurrentVp, loadVpDraft } from "@/lib/pricing/vp-draft-service";
+import { belgradeDate } from "@/lib/recommendations/customerRhythm.mjs";
+import { VpDraftEditor } from "./VpDraftEditor";
 import { stageOf } from "./stage";
 import { VpExcelUploadForm } from "./VpForms";
 
@@ -24,14 +26,58 @@ export default async function VpCenovnikPage() {
   const brandList = [...brands].sort((a, b) => Number(a[0] === "Ostalo") - Number(b[0] === "Ostalo") || a[0].localeCompare(b[0], "sr"));
   const waiting = drafts.filter((d) => (canOffice && d.stage === "kancelarija") || (canPrepare && d.stage === "priprema"));
 
+  /*
+   * Jedna strana (odluka vlasnika 2026-11-24): ko priprema cene vidi odmah tabelu sa procentima;
+   * izmene se čuvaju same u radnu pripremu, a „Ceo cenovnik (Excel)“ ih već sadrži.
+   * Pripreme, otpremanje Excela i spisak po brendu su ispod, sklopljeni.
+   */
+  if (canPrepare) {
+    const today = belgradeDate(new Date());
+    const open = drafts.find((d) => d.stage === "priprema") ?? null;
+    const [rows, draft] = await Promise.all([loadCurrentVp(today), open ? loadVpDraft(user, open.id) : Promise.resolve(null)]);
+    const d = draft?.draft ?? null;
+    return (
+      <>
+        <PageHeader
+          eyebrow="Finansije"
+          title="VP cenovnik"
+          description="Upišite promenu u procentima za ceo brend, grupu ili artikal, ili tačnu novu cenu. Izmene se čuvaju same; „Ceo cenovnik (Excel)“ već sadrži nove cene pored starih. Kada je gotovo — „Pošaljite kancelariji“."
+          meta={<span>{base.length} artikala sa cenom{d ? ` · radna priprema: ${d.title}` : ""}</span>}
+        />
+        <VpDraftEditor
+          key={d?.id ?? "nova"}
+          rows={rows}
+          today={today}
+          autosave
+          initial={
+            d
+              ? { id: d.id, title: d.title, proposedValidFrom: d.proposed_valid_from, note: d.prepared_note ?? "", edits: { brands: {}, groups: {}, articles: {}, prices: {}, ...(d.edits as object) } as never, rounding: d.rounding }
+              : { id: null, title: "", proposedValidFrom: null, note: "", edits: { brands: {}, groups: {}, articles: {}, prices: {} }, rounding: "para" }
+          }
+        />
+        <details className="portal-panel vp-more">
+          <summary>Ostalo: pripreme ({drafts.length}), Excel po brendu i otpremanje Excela</summary>
+          {renderOverview()}
+        </details>
+      </>
+    );
+  }
+
   return (
     <>
       <PageHeader
         eyebrow="Finansije"
         title="VP cenovnik"
-        description="Važeći VP cenovnik po brendu i priprema novog: menadžer prodaje upisuje promene (procenat ili cena), kancelarija proverava staru pored nove cene i unosi u BizniSoft, vlasnik potvrđuje datum važenja."
+        description="Važeći VP cenovnik po brendu i pripreme: menadžer prodaje upisuje promene, kancelarija proverava staru pored nove cene i unosi u BizniSoft, vlasnik potvrđuje datum važenja."
         meta={<span>{base.length} artikala sa cenom</span>}
       />
+      {renderOverview()}
+    </>
+  );
+
+  function renderOverview() {
+    return (
+    <>
 
       {waiting.length ? (
         <section className="portal-panel">
@@ -51,7 +97,7 @@ export default async function VpCenovnikPage() {
         <p className="portal-export-links">
           <a className="portal-button" data-variant="primary" href="/api/portal/vp-cenovnik/izvoz?vrsta=vazeci" download>Ceo cenovnik (Excel)</a>
           {canPrepare ? (
-            <Link className="portal-button" href="/portal/vp-cenovnik/nova">Nova priprema na ekranu (procenti)</Link>
+            <Link className="portal-button" href="/portal/vp-cenovnik/nova">Nova odvojena priprema</Link>
           ) : null}
         </p>
         <div className="portal-table-wrap">
@@ -107,5 +153,6 @@ export default async function VpCenovnikPage() {
         )}
       </section>
     </>
-  );
+    );
+  }
 }

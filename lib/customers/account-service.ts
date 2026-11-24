@@ -482,3 +482,58 @@ export async function countSignableAccounts(customerId: string): Promise<number>
     );
   return rows.filter((row) => canCustomerSignIn(row.status)).length;
 }
+
+/**
+ * Priprema naloga za SVE kupce koji imaju e-poštu u kontaktima (2026-11-24, odluka vlasnika).
+ * Svaki nalog nastaje kao `requested` — bez lozinke, bez prava prijave, BEZ slanja mejla — istim
+ * putem kao pojedinačni predlog (`proposeCustomerContact`). Preskaču se: neaktivni kupci, kupci
+ * van pripreme za portal, kupci koji već imaju nalog i e-adrese koje su već na nekom nalogu
+ * (ista adresa kod dva kupca → samo prvi).
+ */
+export async function prepareAllCustomerAccounts(actor: AccountActor) {
+  const rows = await getDb().execute<{ customer_id: string; name: string; email: string; contact_name: string | null }>(sql`
+    SELECT c.id AS customer_id, c.name, lower(btrim(k.email)) AS email, k.contact_name
+      FROM customer_sales_contacts k
+      JOIN customers c ON c.id = k.customer_id
+     WHERE c.active AND k.email IS NOT NULL AND btrim(k.email) LIKE '%_@_%._%'
+       AND NOT EXISTS (SELECT 1 FROM customer_users u WHERE u.customer_id = c.id)
+     ORDER BY c.name`);
+  let created = 0;
+  const skipped: { customer: string; reason: string }[] = [];
+  const seen = new Set<string>();
+  for (const r of rows) {
+    if (seen.has(r.email)) {
+      skipped.push({ customer: r.name, reason: `ista e-adresa kao kod drugog kupca (${r.email})` });
+      continue;
+    }
+    seen.add(r.email);
+    try {
+      await proposeCustomerContact(
+        { customerId: r.customer_id, email: r.email, name: (r.contact_name?.trim() || r.name).slice(0, 200), reason: "Priprema naloga za sve kupce sa e-poštom (bez slanja mejla)." },
+        actor,
+      );
+      created += 1;
+    } catch (error) {
+      if (error instanceof CustomerAccountError) skipped.push({ customer: r.name, reason: error.message });
+      else throw error;
+    }
+  }
+  const [{ without }] = [
+    ...(await getDb().execute<{ without: number }>(sql`
+      SELECT count(*)::int AS without FROM customers c
+       WHERE c.active AND NOT EXISTS (SELECT 1 FROM customer_users u WHERE u.customer_id = c.id)`)),
+  ];
+  return { created, skipped, withoutAccount: without };
+}
+
+/** Koliko aktivnih kupaca nema nalog i koliko od njih ima e-poštu (za dugme pripreme). */
+export async function accountPreparationCounts() {
+  const [r] = [
+    ...(await getDb().execute<{ without: number; with_email: number }>(sql`
+      SELECT count(*)::int AS without,
+             count(*) FILTER (WHERE EXISTS (SELECT 1 FROM customer_sales_contacts k WHERE k.customer_id = c.id AND k.email IS NOT NULL AND btrim(k.email) LIKE '%_@_%._%'))::int AS with_email
+        FROM customers c
+       WHERE c.active AND NOT EXISTS (SELECT 1 FROM customer_users u WHERE u.customer_id = c.id)`)),
+  ];
+  return { withoutAccount: r?.without ?? 0, withEmail: r?.with_email ?? 0 };
+}

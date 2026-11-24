@@ -1,7 +1,9 @@
 import { PageHeader } from "@/components/portal/PortalPrimitives";
 import { can } from "@/lib/authz/permissions.mjs";
 import { requireCapability } from "@/lib/authz/session";
-import { listCustomerAccounts } from "@/lib/customers/account-service";
+import { accountPreparationCounts, listCustomerAccounts } from "@/lib/customers/account-service";
+import { seesAllCustomers } from "@/lib/authz/permissions.mjs";
+import { PrepareAll } from "./PrepareAll";
 import { listScopedCustomers } from "@/lib/pricing/pricing-scope";
 import { listAccountGates } from "@/lib/customers/verification-service";
 import { AccountsAdmin } from "./AccountsAdmin";
@@ -32,14 +34,16 @@ export default async function CustomerAccountsPage() {
   const gates = canManage ? await listAccountGates(accounts.map((a) => a.id)) : new Map();
   // Poruke za ručnu predaju (B10): samo ko upravlja nalozima, u istom opsegu.
   const outbox = canManage ? await listPendingOutbox(user) : [];
+  const prep = canManage && seesAllCustomers(user) ? await accountPreparationCounts() : null;
 
   return (
     <>
       <PageHeader
         eyebrow="Prodaja"
         title="Nalozi kupaca"
-        description="Kupčev nalog je odvojen identitet, ne peta interna uloga. Nalog nosi oznaku svog kupca i ne postoji put kojim bi se ta oznaka uzela odnekud drugde."
+        description="Nalozi kupaca za prijavu na portal. Tok: nalog → potvrda ovlašćene osobe → pozivnica mejlom → kupac sam postavlja lozinku."
       />
+      {prep ? <PrepareAll withoutAccount={prep.withoutAccount} withEmail={prep.withEmail} /> : null}
       {canManage ? (
         <OutboxPanel
           items={outbox.map((m) => ({
